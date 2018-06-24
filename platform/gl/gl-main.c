@@ -2205,6 +2205,7 @@ int main(int argc, char **argv)
 
 
 #ifndef __APPLE__
+
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
 
