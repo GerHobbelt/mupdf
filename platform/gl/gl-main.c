@@ -199,7 +199,7 @@ static float layout_em = DEFAULT_LAYOUT_EM;
 static char *layout_css = NULL;
 static int layout_use_doc_css = 1;
 
-static const char *title = "FlexBV MuPDF/GL";
+static const char *title = "PLD MuPDF/GL";
 static int search_not_found = 0;
 static char last_search_string[256] = "";
 static fz_document *doc = NULL;
@@ -2205,16 +2205,13 @@ int main(int argc, char **argv)
 
 
 #ifndef __APPLE__
-
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
 
 	glutInitErrorFunc(on_error);
 	glutInitWarningFunc(on_warning);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-	//glutInitWindowSize(page_tex.w, page_tex.h);
 	glutInitWindowSize(windowx, windowy);
-	//	fprintf(stderr,"%s:%d: glut init done\r\n", FL);
 	window = glutCreateWindow(title);
 #ifdef __WIN32__
 	//	hwnd = FindWindow( "GLUT", title );
