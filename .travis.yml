@@ -9,16 +9,16 @@ matrix:
   include:
   - os: linux
     compiler: gcc
-    env: DEPLOY=yes DEPLOY_DEB=yes
-  - os: linux
-    compiler: gcc
-    env: DEPLOY=yes DEPLOY_RPM=yes
+    env: DEPLOY=yes
+#  - os: linux
+#    compiler: gcc
+#    env: DEPLOY=yes DEPLOY_RPM=yes
   - os: osx
     compiler: clang
     env: DEPLOY=yes
-  - os: linux
-    compiler: gcc
-    env: CROSS=mingw64 DEPLOY=yes
+#  - os: linux
+#    compiler: gcc
+#    env: CROSS=mingw64 DEPLOY=yes
 dist: trusty
 sudo: required
 #addons:
@@ -33,8 +33,8 @@ install: |-
     sudo apt-get -qy install libxi-dev libxrandr-dev freeglut3  # freeglut probably pulls libxi-dev in
   elif [ "$TRAVIS_OS_NAME" == "osx" ]
   then
-    brew update
-    brew install sdl2
+#    brew update
+#    brew install sdl2
   fi
 script: |-
   if [ "$CXX" == "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
@@ -49,15 +49,15 @@ before_deploy: |-
   if [ "$TRAVIS_OS_NAME" == "osx" ]
   then
     export DEPLOY_FILES=build/release/mupdf-gl
-  elif [ "$CROSS" == "mingw64" ]
+#  elif [ "$CROSS" == "mingw64" ]
+#  then
+#    export DEPLOY_FILES=build/release/mupdf-gl.exe
+  elif [ "$TRAVIS_OS_NAME" == "linux" ]
   then
-    export DEPLOY_FILES=build/release/mupdf-gl.exe
-  elif [ "$DEPLOY_DEB" == "yes" ]
-  then
-    export DEPLOY_FILES=$(ls mupdf-*.deb)
-  elif [ "$DEPLOY_RPM" == "yes" ]
-  then
-    export DEPLOY_FILES=$(ls mupdf-*.rpm)
+    export DEPLOY_FILES=build/release/mupdf-gl
+#  elif [ "$DEPLOY_RPM" == "yes" ]
+#  then
+#    export DEPLOY_FILES=$(ls mupdf-*.rpm)
   fi
 deploy:
   provider: releases
