@@ -30,7 +30,7 @@ sudo: required
 install: |-
   if [ "$TRAVIS_OS_NAME" == "linux" ]
   then
-    sudo apt-get -qy install libxi-dev freeglut3  # freeglut probably pulls libxi-dev in
+    sudo apt-get -qy install libxi-dev libxrandr-dev freeglut3  # freeglut probably pulls libxi-dev in
   elif [ "$TRAVIS_OS_NAME" == "osx" ]
   then
     brew update
