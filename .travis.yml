@@ -1,10 +1,10 @@
-language: C
+language: c
 git:
   depth: 9999999
 os:
 - linux
-#compiler:
-#- clang
+compiler:
+- clang
 matrix:
   include:
   - os: linux
@@ -16,29 +16,28 @@ matrix:
   - os: osx
     compiler: clang
     env: DEPLOY=yes
-#  - os: linux
-#    compiler: gcc
-#    env: CROSS=mingw64 DEPLOY=yes
+  - os: linux
+    compiler: gcc
+    env: CROSS=mingw64 DEPLOY=yes
 dist: trusty
 sudo: required
-addons:
-  apt:
-   sources:
-   - ubuntu-toolchain-r-test
-   packages:
-   - gcc-6
+#addons:
+#  apt:
+#    sources:
+#    - ubuntu-toolchain-r-test
+#    packages:
+#    - gcc-6
 install: |-
   if [ "$TRAVIS_OS_NAME" == "linux" ]
   then
-      sudo apt-get -qy install libxi-dev freeglut3  # freeglut probably pulls libxi-dev in
-#     sudo apt-get -qy install freeglut3 # Manual installation of the last 2 shouldn't be required, but it is now…
+    sudo apt-get -qy install libxi-dev freeglut3  # freeglut probably pulls libxi-dev in
   elif [ "$TRAVIS_OS_NAME" == "osx" ]
   then
-#   brew update
-#   brew install sdl2
+    brew update
+    brew install sdl2
   fi
 script: |-
-  if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
+  if [ "$CXX" == "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
   ./build.sh || exit 1
   if [ "$DEPLOY_DEB" == "yes" ] || [ "$DEPLOY_RPM" == "yes" ]
   then
@@ -50,10 +49,9 @@ before_deploy: |-
   if [ "$TRAVIS_OS_NAME" == "osx" ]
   then
     export DEPLOY_FILES=build/release/mupdf-gl
-#$(ls mupdf-*.dmg)
-#  elif [ "$CROSS" == "mingw64" ]
-#  then
-#   export DEPLOY_FILES=bin/mupdf-gl.exe
+  elif [ "$CROSS" == "mingw64" ]
+  then
+    export DEPLOY_FILES=build/release/mupdf-gl.exe
   elif [ "$DEPLOY_DEB" == "yes" ]
   then
     export DEPLOY_FILES=$(ls mupdf-*.deb)
