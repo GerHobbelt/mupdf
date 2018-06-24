@@ -2204,7 +2204,9 @@ int main(int argc, char **argv)
 	search_input.end = search_input.p;
 
 
+#ifndef __APPLE__
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+#endif
 
 	glutInitErrorFunc(on_error);
 	glutInitWarningFunc(on_warning);
