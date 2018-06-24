@@ -21,15 +21,16 @@ matrix:
 #    env: CROSS=mingw64 DEPLOY=yes
 dist: trusty
 sudo: required
-#addons:
-#  apt:
-#   sources:
-#   - ubuntu-toolchain-r-test
-#   packages:
-#   - gcc-6
+addons:
+  apt:
+   sources:
+   - ubuntu-toolchain-r-test
+   packages:
+   - gcc-6
 install: |-
   if [ "$TRAVIS_OS_NAME" == "linux" ]
   then
+      sudo apt-get -qy install libxi-dev freeglut3  # freeglut probably pulls libxi-dev in
 #     sudo apt-get -qy install freeglut3 # Manual installation of the last 2 shouldn't be required, but it is now…
   elif [ "$TRAVIS_OS_NAME" == "osx" ]
   then
