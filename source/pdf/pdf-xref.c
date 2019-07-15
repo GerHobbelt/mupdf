@@ -2221,7 +2221,7 @@ object_updated:
 
 	x = pdf_get_xref_entry(ctx, doc, num);
 
-	if (x->obj != NULL)
+	if (x->obj != NULL && !doc->reading_unencrypted_and_uncached)
 		return x;
 
 	if (x->type == 'f')
@@ -2274,7 +2274,7 @@ object_updated:
 			goto object_updated;
 		}
 
-		if (doc->crypt)
+		if (doc->crypt && !doc->reading_unencrypted_and_uncached)
 			pdf_crypt_obj(ctx, doc->crypt, x->obj, x->num, x->gen);
 	}
 	else if (x->type == 'o')

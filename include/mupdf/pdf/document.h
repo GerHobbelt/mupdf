@@ -325,6 +325,9 @@ struct pdf_document
 
 	int repair_attempted;
 
+	/* Flag to be set while loading signature details */
+	int reading_unencrypted_and_uncached;
+
 	/* State indicating which file parsing method we are using */
 	int file_reading_linearly;
 	int64_t file_length;
