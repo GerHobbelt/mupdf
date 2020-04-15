@@ -1,6 +1,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include "annot-imp.h"
+
 static fz_outline *
 pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 {

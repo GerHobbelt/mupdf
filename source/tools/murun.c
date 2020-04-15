@@ -5776,7 +5776,8 @@ static void ffi_PDFAnnotation_process(js_State *J)
 	pdf_processor *proc = new_js_processor(ctx, J);
 	fz_try(ctx)
 	{
-		pdf_process_annot(ctx, proc, annot->page->doc, annot->page, annot, NULL);
+		pdf_page *page = pdf_annot_page(ctx, annot);
+		pdf_process_annot(ctx, proc, page->doc, page, annot, NULL);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)
@@ -5791,7 +5792,7 @@ static void ffi_PDFWidget_getFieldType(js_State *J)
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	int type;
 	fz_try(ctx)
-		type = pdf_field_type(ctx, widget->obj);
+		type = pdf_field_type(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	switch (type)
@@ -5813,7 +5814,7 @@ static void ffi_PDFWidget_getFieldFlags(js_State *J)
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	int flags;
 	fz_try(ctx)
-		flags = pdf_field_flags(ctx, widget->obj);
+		flags = pdf_field_flags(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushnumber(J, flags);
@@ -5848,7 +5849,7 @@ static void ffi_PDFWidget_getValue(js_State *J)
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	const char *value;
 	fz_try(ctx)
-		value = pdf_field_value(ctx, widget->obj);
+		value = pdf_field_value(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushstring(J, value);
@@ -5908,13 +5909,13 @@ static void ffi_PDFWidget_getOptions(js_State *J)
 	const char *opt;
 	int i, n;
 	fz_try(ctx)
-		n = pdf_choice_field_option_count(ctx, widget->obj);
+		n = pdf_choice_field_option_count(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	js_newarray(J);
 	for (i = 0; i < n; ++i) {
 		fz_try(ctx)
-			opt = pdf_choice_field_option(ctx, widget->obj, export, i);
+			opt = pdf_choice_field_option(ctx, pdf_annot_obj(ctx, widget), export, i);
 		fz_catch(ctx)
 			rethrow(J);
 		js_pushstring(J, opt);
