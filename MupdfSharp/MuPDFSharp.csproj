@@ -78,6 +78,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -94,11 +97,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\platform\win32\x64\Release\MuPDFLib.dll" Condition="'$(Platform)' == 'x64'">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
@@ -113,7 +111,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /F $(ProjectDir)..\platform\win32\$(ConfigurationName)\*.dll $(TargetDir)
+    <PostBuildEvent>xcopy /Y /F $(ProjectDir)..\platform\win32\$(ConfigurationName)-64\*.dll $(TargetDir)
 
 </PostBuildEvent>
   </PropertyGroup>
