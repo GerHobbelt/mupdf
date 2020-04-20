@@ -63,7 +63,7 @@ ensure_one_more_file(void)
 	}
 }
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 
 #include <strsafe.h>
 #include <shlobj.h>

@@ -16,7 +16,7 @@
 #undef DEBUG_BLOCK_FETCHING
 
 #ifdef DEBUG_BLOCK_FETCHING
-#ifdef _WIN32
+#if defined(_WIN32)
 #include <varargs.h>
 static void
 output(const char *fmt, ...)

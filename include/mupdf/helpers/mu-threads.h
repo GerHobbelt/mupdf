@@ -23,7 +23,7 @@
 */
 
 #if !defined(DISABLE_MUTHREADS)
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 #define MU_THREAD_IMPL_TYPE 1
 #elif defined(HAVE_PTHREAD)
 #define MU_THREAD_IMPL_TYPE 2

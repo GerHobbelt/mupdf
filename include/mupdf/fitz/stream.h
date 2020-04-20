@@ -33,7 +33,7 @@ typedef struct fz_stream fz_stream;
 */
 fz_stream *fz_open_file(fz_context *ctx, const char *filename);
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 /*
 	Open the named file and wrap it in a stream.
 
@@ -43,7 +43,7 @@ fz_stream *fz_open_file(fz_context *ctx, const char *filename);
 	to _wfopen().
 */
 fz_stream *fz_open_file_w(fz_context *ctx, const wchar_t *filename);
-#endif /* _WIN32 */
+#endif /* _WIN32 || _WIN64 */
 
 /*
 	Open a block of memory as a stream.
