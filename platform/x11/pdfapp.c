@@ -180,7 +180,7 @@ char *pdfapp_version(pdfapp_t *app)
 {
 	return
 		"MuPDF " FZ_VERSION "\n"
-		"Copyright 2006-2017 Artifex Software, Inc.\n";
+		"Copyright 2006-2020 Artifex Software, Inc.\n";
 }
 
 char *pdfapp_usage(pdfapp_t *app)
@@ -204,7 +204,7 @@ char *pdfapp_usage(pdfapp_t *app)
 		"f\t\t-- fullscreen\n"
 		"r\t\t-- reload file\n"
 		". pgdn space\t-- next page\n"
-		", pgup b\t-- previous page\n"
+		", pgup b\t\t-- previous page\n"
 		"m\t\t-- mark page for snap back\n"
 		"t\t\t-- pop back to latest mark\n"
 		"1m\t\t-- mark page in register 1\n"
