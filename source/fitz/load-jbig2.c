@@ -307,7 +307,7 @@ jbig2_read_image(fz_context *ctx, struct info *jbig2, const unsigned char *buf, 
 
 	fz_try(ctx)
 	{
-		jctx = jbig2_ctx_new((Jbig2Allocator *) &allocator, 0, NULL, error_callback, ctx);
+		jctx = jbig2_ctx_new((Jbig2Allocator *) &allocator, 0, NULL, (Jbig2ErrorCallback)error_callback, ctx);
 		if (jctx == NULL)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create jbig2 context");
 		if (jbig2_data_in(jctx, buf, len) < 0)

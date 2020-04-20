@@ -390,7 +390,7 @@ fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf)
 	globals->alloc.alloc.free = fz_jbig2_free;
 	globals->alloc.alloc.realloc = fz_jbig2_realloc;
 
-	jctx = jbig2_ctx_new((Jbig2Allocator *) &globals->alloc, JBIG2_OPTIONS_EMBEDDED, NULL, error_callback, ctx);
+	jctx = jbig2_ctx_new((Jbig2Allocator *) &globals->alloc, JBIG2_OPTIONS_EMBEDDED, NULL, (Jbig2ErrorCallback)error_callback, ctx);
 	if (!jctx)
 	{
 		fz_free(ctx, globals);
@@ -428,7 +428,7 @@ fz_open_jbig2d(fz_context *ctx, fz_stream *chain, fz_jbig2_globals *globals)
 	state->alloc.alloc.free = fz_jbig2_free;
 	state->alloc.alloc.realloc = fz_jbig2_realloc;
 
-	state->ctx = jbig2_ctx_new((Jbig2Allocator *) &state->alloc, JBIG2_OPTIONS_EMBEDDED, globals ? globals->gctx : NULL, error_callback, ctx);
+	state->ctx = jbig2_ctx_new((Jbig2Allocator *) &state->alloc, JBIG2_OPTIONS_EMBEDDED, globals ? globals->gctx : NULL, (Jbig2ErrorCallback)error_callback, ctx);
 	if (state->ctx == NULL)
 	{
 		fz_drop_jbig2_globals(ctx, state->gctx);
