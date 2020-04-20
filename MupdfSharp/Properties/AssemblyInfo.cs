@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("MupdfSharp")]
-[assembly: AssemblyCopyright ("Copyright ©wmjordan 2017")]
+[assembly: AssemblyCopyright("Copyright ©wmjordan 2020")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 
