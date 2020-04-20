@@ -66,7 +66,7 @@ int winquery(pdfapp_t *app, const char *query)
 	return QUERY_NO;
 }
 
-int wingetcertpath(char *buf, int len)
+int wingetcertpath(pdfapp_t* app, char *buf, int len)
 {
 	return 0;
 }
@@ -116,11 +116,11 @@ int wingetsavepath(pdfapp_t *app, char *buf, int len)
 	return 0;
 }
 
-void winreplacefile(char *source, char *target)
+void winreplacefile(pdfapp_t* app, char *source, char *target)
 {
 }
 
-void wincopyfile(char *source, char *target)
+void wincopyfile(pdfapp_t* app, char *source, char *target)
 {
 }
 
