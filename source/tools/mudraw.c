@@ -669,7 +669,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				out = fz_stdout(ctx);
 			else
 			{
-				fz_snprintf(buf, sizeof(buf), output, pagenum);
+				fz_format_output_path(ctx, buf, sizeof buf, output, pagenum);
 				out = fz_new_output_with_path(ctx, buf, 0);
 			}
 
@@ -987,7 +987,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_empty_store(ctx);
 
 	if (showmemory)
-		fz_dump_glyph_cache_stats(ctx);
+		fz_dump_glyph_cache_stats(ctx, fz_stderr(ctx));
 
 	fz_flush_warnings(ctx);
 
@@ -1131,7 +1131,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_close_output(ctx, out);
 			fz_drop_output(ctx, out);
 		}
-		fz_snprintf(text_buffer, sizeof(text_buffer), output, pagenum);
+		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
 		out = fz_new_output_with_path(ctx, text_buffer, 0);
 	}
 
@@ -1208,7 +1208,7 @@ parse_colorspace(const char *name)
 {
 	int i;
 
-	for (i = 0; i < nelem(cs_name_table); i++)
+	for (i = 0; i < (int)nelem(cs_name_table); i++)
 	{
 		if (!strcmp(name, cs_name_table[i].name))
 			return cs_name_table[i].colorspace;
@@ -1656,7 +1656,7 @@ int mudraw_main(int argc, char **argv)
 		{
 			int i;
 
-			for (i = 0; i < nelem(suffix_table); i++)
+			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
 				if (!strcmp(format, suffix_table[i].suffix+1))
 				{
@@ -1669,7 +1669,7 @@ int mudraw_main(int argc, char **argv)
 					break;
 				}
 			}
-			if (i == nelem(suffix_table))
+			if (i == (int)nelem(suffix_table))
 			{
 				fprintf(stderr, "Unknown output format '%s'\n", format);
 				exit(1);
@@ -1680,7 +1680,7 @@ int mudraw_main(int argc, char **argv)
 			char *suffix = output;
 			int i;
 
-			for (i = 0; i < nelem(suffix_table); i++)
+			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
 				char *s = strstr(suffix, suffix_table[i].suffix);
 
@@ -1715,18 +1715,18 @@ int mudraw_main(int argc, char **argv)
 		{
 			int i, j;
 
-			for (i = 0; i < nelem(format_cs_table); i++)
+			for (i = 0; i < (int)nelem(format_cs_table); i++)
 			{
 				if (format_cs_table[i].format == output_format)
 				{
 					if (out_cs == CS_UNSET)
 						out_cs = format_cs_table[i].default_cs;
-					for (j = 0; j < nelem(format_cs_table[i].permitted_cs); j++)
+					for (j = 0; j < (int)nelem(format_cs_table[i].permitted_cs); j++)
 					{
 						if (format_cs_table[i].permitted_cs[j] == out_cs)
 							break;
 					}
-					if (j == nelem(format_cs_table[i].permitted_cs))
+					if (j == (int)nelem(format_cs_table[i].permitted_cs))
 					{
 						fprintf(stderr, "Unsupported colorspace for this format\n");
 						exit(1);
@@ -1787,11 +1787,11 @@ int mudraw_main(int argc, char **argv)
 
 			/* Check to make sure this icc profile is ok with the output format */
 			okay = 0;
-			for (i = 0; i < nelem(format_cs_table); i++)
+			for (i = 0; i < (int)nelem(format_cs_table); i++)
 			{
 				if (format_cs_table[i].format == output_format)
 				{
-					for (j = 0; j < nelem(format_cs_table[i].permitted_cs); j++)
+					for (j = 0; j < (int)nelem(format_cs_table[i].permitted_cs); j++)
 					{
 						switch (format_cs_table[i].permitted_cs[j])
 						{
