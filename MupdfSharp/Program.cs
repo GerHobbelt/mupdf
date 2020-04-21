@@ -109,6 +109,7 @@ namespace MupdfSharp
 			Cmyk,
 			Gray
 		}
+
 		static class NativeMethods
 		{
 			const uint FZ_STORE_DEFAULT = 256 << 20;
