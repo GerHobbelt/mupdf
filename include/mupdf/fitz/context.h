@@ -561,6 +561,7 @@ struct fz_context
 #if FZ_ENABLE_ICC
 	int icc_enabled;
 #endif
+	int do_not_draw;
 
 	/* TODO: should these be unshared? */
 	fz_document_handler_context *handler;

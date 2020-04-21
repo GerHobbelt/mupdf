@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <string.h>
+#include <time.h>
 
 #define STACK_SIZE 96
 
@@ -1507,6 +1508,11 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 
 	color_params = fz_default_color_params;
 
+	clock_t start_time = clock();
+	int prev_progress = 0;
+	int do_not_draw = 0;
+	int dnd_modulus = list->len / 100000000;		// just a tweak: when things take to long to render, we render only about 1000 parts of the page...
+
 	node = list->list;
 	node_end = &list->list[list->len];
 	for (; node != node_end ; node = next_node)
@@ -1522,6 +1528,26 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 			if (cookie->abort)
 				break;
 			cookie->progress = progress;
+			if (prev_progress + 0 <= progress && !do_not_draw)
+			{
+				// it's time to check our progress and see if we're a long-running task or not by now:
+				clock_t time = clock();
+				float ms = (float)(time - start_time) / CLOCKS_PER_SEC;
+				if (ms >= 0.0)
+				{
+					//clipped++;  <-- hacking that one causes error reports  :'-(
+					do_not_draw = 1;
+
+					ctx->do_not_draw = do_not_draw;
+				}
+				prev_progress = progress;
+			}
+			else if (do_not_draw)
+			{
+				//if (!clipped)
+				//  clipped++;
+				do_not_draw++;
+			}
 			progress += n.size;
 		}
 
@@ -1632,6 +1658,11 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 			fz_drop_stroke_state(ctx, stroke);
 			stroke = fz_keep_stroke_state(ctx, *(fz_stroke_state **)node);
 			node += SIZE_IN_NODES(sizeof(fz_stroke_state *));
+
+			if (do_not_draw)
+			{
+				//stroke->blendmode &= ~FZ_BLEND_KNOCKOUT;
+			}
 		}
 		if (n.path)
 		{
@@ -1703,11 +1734,13 @@ visible:
 			{
 			case FZ_CMD_FILL_PATH:
 				fz_unpack_color_params(&color_params, n.flags);
-				fz_fill_path(ctx, dev, path, n.flags & 1, trans_ctm, colorspace, color, alpha, color_params);
+				if (!dnd_modulus || do_not_draw % dnd_modulus == 0)
+					fz_fill_path(ctx, dev, path, n.flags & 1, trans_ctm, colorspace, color, alpha, color_params);
 				break;
 			case FZ_CMD_STROKE_PATH:
 				fz_unpack_color_params(&color_params, n.flags);
-				fz_stroke_path(ctx, dev, path, stroke, trans_ctm, colorspace, color, alpha, color_params);
+				if (!dnd_modulus || do_not_draw % dnd_modulus == 0)
+					fz_stroke_path(ctx, dev, path, stroke, trans_ctm, colorspace, color, alpha, color_params);
 				break;
 			case FZ_CMD_CLIP_PATH:
 				fz_clip_path(ctx, dev, path, n.flags, trans_ctm, trans_rect);

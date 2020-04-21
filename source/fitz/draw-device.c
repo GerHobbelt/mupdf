@@ -196,9 +196,6 @@ fz_knockout_begin(fz_context *ctx, fz_draw_device *dev)
 	fz_draw_state *state = &dev->stack[dev->top];
 	int isolated = state->blendmode & FZ_BLEND_ISOLATED;
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) == 0)
-		return state;
-
 	state = push_stack(ctx, dev, "knockout");
 
 	bbox = fz_pixmap_bbox(ctx, state->dest);
@@ -275,6 +272,7 @@ static void fz_knockout_end(fz_context *ctx, fz_draw_device *dev)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "unexpected knockout end");
 
 	state = pop_stack(ctx, dev, "knockout");
+
 	if ((state[0].blendmode & FZ_BLEND_KNOCKOUT) == 0)
 		return;
 
@@ -626,7 +624,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	if (fz_flatten_fill_path(ctx, rast, path, ctm, flatness, &bbox, &bbox))
 		return;
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
@@ -649,7 +647,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 		fz_convert_rasterizer(ctx, rast, even_odd, state->group_alpha, colorbv, 0);
 	}
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -689,7 +687,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	if (fz_flatten_stroke_path(ctx, rast, path, stroke, ctm, flatness, linewidth, &bbox, &bbox))
 		return;
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
@@ -731,7 +729,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	printf("\n");
 #endif
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -988,7 +986,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	if (colorspace == NULL && model != NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "color destination requires source color");
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
@@ -1052,7 +1050,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 		}
 	}
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -1079,7 +1077,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 	if (colorspace_in)
 		colorspace = fz_default_colorspace(ctx, dev->default_cs, colorspace_in);
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
@@ -1130,7 +1128,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 		}
 	}
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -1415,7 +1413,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 	if (fz_is_empty_irect(bbox))
 		return;
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		state = fz_knockout_begin(ctx, dev);
 
 	fz_var(dest);
@@ -1550,7 +1548,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 			}
 		}
 
-		if (state->blendmode & FZ_BLEND_KNOCKOUT)
+		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 			fz_knockout_end(ctx, dev);
 	}
 	fz_catch(ctx)
@@ -1744,7 +1742,7 @@ fz_draw_fill_image(fz_context *ctx, fz_device *devp, fz_image *image, fz_matrix 
 	{
 		int conversion_required = (src_cs != model || state->dest->seps);
 
-		if (state->blendmode & FZ_BLEND_KNOCKOUT)
+		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 			state = fz_knockout_begin(ctx, dev);
 
 		switch (fz_colorspace_type(ctx, src_cs))
@@ -1801,7 +1799,7 @@ fz_draw_fill_image(fz_context *ctx, fz_device *devp, fz_image *image, fz_matrix 
 
 		fz_paint_image(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, local_ctm, alpha * 255, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, eop);
 
-		if (state->blendmode & FZ_BLEND_KNOCKOUT)
+		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 			fz_knockout_end(ctx, dev);
 	}
 	fz_always(ctx)
@@ -1884,7 +1882,7 @@ fz_draw_fill_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 
 	fz_try(ctx)
 	{
-		if (state->blendmode & FZ_BLEND_KNOCKOUT)
+		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 			state = fz_knockout_begin(ctx, dev);
 
 		if (!(devp->hints & FZ_DONT_INTERPOLATE_IMAGES) && ctx->tuning->image_scale(ctx->tuning->image_scale_arg, dx, dy, pixmap->w, pixmap->h))
@@ -1910,7 +1908,7 @@ fz_draw_fill_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 
 		fz_paint_image_with_color(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, local_ctm, colorbv, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, eop);
 
-		if (state->blendmode & FZ_BLEND_KNOCKOUT)
+		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 			fz_knockout_end(ctx, dev);
 	}
 	fz_always(ctx)
@@ -2253,7 +2251,7 @@ fz_draw_begin_group(fz_context *ctx, fz_device *devp, fz_rect area, fz_colorspac
 	if (cs != NULL)
 		model = fz_default_colorspace(ctx, dev->default_cs, cs);
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_begin(ctx, dev);
 
 	state = push_stack(ctx, dev, "group");
@@ -2409,7 +2407,7 @@ fz_draw_end_group(fz_context *ctx, fz_device *devp)
 	fz_drop_pixmap(ctx, state[1].dest);
 	state[1].dest = NULL;
 
-	if (state[0].blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state[0].blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -2552,7 +2550,7 @@ fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view,
 	/* area, view, xstep, ystep are in pattern space */
 	/* ctm maps from pattern space to device space */
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_begin(ctx, dev);
 
 	state = push_stack(ctx, dev, "tile");
@@ -2832,7 +2830,7 @@ fz_draw_end_tile(fz_context *ctx, fz_device *devp)
 	printf("\n");
 #endif
 
-	if (state->blendmode & FZ_BLEND_KNOCKOUT)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !ctx->do_not_draw)
 		fz_knockout_end(ctx, dev);
 }
 
