@@ -538,7 +538,7 @@ resolve_color(fz_context *ctx,
 			colorbv[i] = 0;
 		}
 	}
-	colorbv[i] = alpha * 255;
+	colorbv[i] = alpha * 255 + 0.5f;
 
 	/* op && !devn => overprinting in cmyk or devicegray. */
 	if (op && !devn)
@@ -646,7 +646,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 		if (!rast->fns.reusable)
 			fz_flatten_fill_path(ctx, rast, path, ctm, flatness, &bbox, NULL);
 
-		colorbv[0] = alpha * 255;
+		colorbv[0] = alpha * 255 + 0.5f;
 		fz_convert_rasterizer(ctx, rast, even_odd, state->group_alpha, colorbv, 0);
 	}
 
@@ -718,7 +718,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 		if (!rast->fns.reusable)
 			(void)fz_flatten_stroke_path(ctx, rast, path, stroke, ctm, flatness, linewidth, &bbox, NULL);
 
-		colorbv[0] = 255 * alpha;
+		colorbv[0] = alpha * 255 + 0.5f;
 		fz_convert_rasterizer(ctx, rast, 0, state->group_alpha, colorbv, 0);
 	}
 
@@ -994,7 +994,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
 	shapebv = 255;
-	shapebva = 255 * alpha;
+	shapebva = alpha * 255 + 0.5f;
 
 	for (span = text->head; span; span = span->next)
 	{
@@ -1033,7 +1033,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 					fz_matrix mat;
 					mat.a = pixmap->w; mat.b = mat.c = 0; mat.d = pixmap->h;
 					mat.e = x + pixmap->x; mat.f = y + pixmap->y;
-					fz_paint_image(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, mat, alpha * 255, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, eop);
+					fz_paint_image(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, mat, alpha * 255 + 0.5f, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, eop);
 				}
 				fz_drop_glyph(ctx, glyph);
 			}
@@ -1066,7 +1066,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 	fz_draw_state *state = &dev->stack[dev->top];
 	unsigned char colorbv[FZ_MAX_COLORS + 1];
 	unsigned char solid = 255;
-	unsigned char alpha_byte = alpha * 255;
+	unsigned char alpha_byte = alpha * 255 + 0.5f;
 	fz_text_span *span;
 	int i;
 	fz_colorspace *colorspace = NULL;
@@ -1400,7 +1400,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 	fz_irect bbox, scissor;
 	fz_pixmap *dest, *shape, *group_alpha;
 	unsigned char colorbv[FZ_MAX_COLORS + 1];
-	unsigned char alpha_byte = 255 * alpha;
+	unsigned char alpha_byte = 255 * alpha + 0.5f;
 	fz_draw_state *state = &dev->stack[dev->top];
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
@@ -1532,7 +1532,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 		if (alpha < 1)
 		{
 			/* FIXME: eop */
-			fz_paint_pixmap(state->dest, dest, alpha * 255);
+			fz_paint_pixmap(state->dest, dest, alpha * 255 + 0.5f);
 			fz_drop_pixmap(ctx, dest);
 			dest = NULL;
 
@@ -1545,7 +1545,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 
 			if (group_alpha)
 			{
-				fz_paint_pixmap(state->group_alpha, group_alpha, alpha * 255);
+				fz_paint_pixmap(state->group_alpha, group_alpha, alpha * 255 + 0.5f);
 				fz_drop_pixmap(ctx, group_alpha);
 				group_alpha = NULL;
 			}
@@ -1800,7 +1800,7 @@ fz_draw_fill_image(fz_context *ctx, fz_device *devp, fz_image *image, fz_matrix 
 				pixmap = convert_pixmap_for_painting(ctx, pixmap, model, src_cs, state->dest, color_params, dev, &eop);
 		}
 
-		fz_paint_image(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, local_ctm, alpha * 255, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, eop);
+		fz_paint_image(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, local_ctm, alpha * 255 + 0.5f, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, eop);
 
 		if (state->blendmode & FZ_BLEND_KNOCKOUT)
 			fz_knockout_end(ctx, dev);
@@ -2151,7 +2151,7 @@ fz_draw_begin_mask(fz_context *ctx, fz_device *devp, fz_rect area, int luminosit
 		if (!colorspace)
 			colorspace = fz_device_gray(ctx);
 		fz_convert_color(ctx, colorspace, colorfv, fz_device_gray(ctx), &bc, NULL, color_params);
-		fz_clear_pixmap_with_value(ctx, dest, bc * 255);
+		fz_clear_pixmap_with_value(ctx, dest, bc * 255 + 0.5f);
 		if (shape)
 			fz_clear_pixmap_with_value(ctx, shape, 255);
 		if (group_alpha)
@@ -2360,9 +2360,9 @@ fz_draw_end_group(fz_context *ctx, fz_device *devp)
 	}
 
 	if ((blendmode == 0) && (state[0].shape == state[1].shape) && (state[0].group_alpha == state[1].group_alpha))
-		fz_paint_pixmap(state[0].dest, state[1].dest, alpha * 255);
+		fz_paint_pixmap(state[0].dest, state[1].dest, alpha * 255 + 0.5f);
 	else
-		fz_blend_pixmap(ctx, state[0].dest, state[1].dest, alpha * 255, blendmode, isolated, state[1].group_alpha);
+		fz_blend_pixmap(ctx, state[0].dest, state[1].dest, alpha * 255 + 0.5f, blendmode, isolated, state[1].group_alpha);
 
 	if (state[0].shape != state[1].shape)
 	{
@@ -2371,9 +2371,9 @@ fz_draw_end_group(fz_context *ctx, fz_device *devp)
 		if (state[0].shape)
 		{
 			if (state[1].shape)
-				fz_paint_pixmap(state[0].shape, state[1].shape, alpha * 255);
+				fz_paint_pixmap(state[0].shape, state[1].shape, alpha * 255 + 0.5f);
 			else
-				fz_paint_pixmap_alpha(state[0].shape, state[1].dest, alpha * 255);
+				fz_paint_pixmap_alpha(state[0].shape, state[1].dest, alpha * 255 + 0.5f);
 		}
 	}
 	assert(state[0].group_alpha == NULL || state[0].group_alpha != state[1].group_alpha);
@@ -2384,9 +2384,9 @@ fz_draw_end_group(fz_context *ctx, fz_device *devp)
 		 * applied twice. CATX5233 page 7 uses a non-isolated group, and goes wrong
 		 * if alpha isn't applied here. */
 		if (state[1].group_alpha)
-			fz_paint_pixmap(state[0].group_alpha, state[1].group_alpha, isolated ? 255 : alpha * 255);
+			fz_paint_pixmap(state[0].group_alpha, state[1].group_alpha, isolated ? 255 : alpha * 255 + 0.5f);
 		else
-			fz_paint_pixmap_alpha(state[0].group_alpha, state[1].dest, isolated ? 255 : alpha * 255);
+			fz_paint_pixmap_alpha(state[0].group_alpha, state[1].dest, isolated ? 255 : alpha * 255 + 0.5f);
 	}
 
 	assert(state[0].dest != state[1].dest);
