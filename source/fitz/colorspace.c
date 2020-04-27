@@ -1127,13 +1127,13 @@ fz_convert_slow_pixmap_samples(fz_context *ctx, fz_pixmap *src, fz_pixmap *dst, 
 				if (da)
 				{
 					for (k = 0; k < dstn; k++)
-						*d++ = fz_mul255(dstv[k] * 255, alpha);
+						*d++ = fz_mul255(dstv[k] * 255 + 0.5f, alpha);
 					*d++ = alpha;
 				}
 				else
 				{
 					for (k = 0; k < dstn; k++)
-						*d++ = dstv[k] * 255;
+						*d++ = dstv[k] * 255 + 0.5f;
 				}
 			}
 			d += d_line_inc;
@@ -1172,13 +1172,13 @@ fz_convert_slow_pixmap_samples(fz_context *ctx, fz_pixmap *src, fz_pixmap *dst, 
 				if (da)
 				{
 					for (k = 0; k < dstn; k++)
-						*d++ = fz_mul255(dstv[k] * 255, alpha);
+						*d++ = fz_mul255(dstv[k] * 255 + 0.5f, alpha);
 					*d++ = alpha;
 				}
 				else
 				{
 					for (k = 0; k < dstn; k++)
-						*d++ = dstv[k] * 255;
+						*d++ = dstv[k] * 255 + 0.5f;
 				}
 			}
 			d += d_line_inc;
@@ -1199,7 +1199,7 @@ fz_convert_slow_pixmap_samples(fz_context *ctx, fz_pixmap *src, fz_pixmap *dst, 
 			srcv[0] = i / 255.0f;
 			cc.convert(ctx, &cc, srcv, dstv);
 			for (k = 0; k < dstn; k++)
-				lookup[i * dstn + k] = dstv[k] * 255;
+				lookup[i * dstn + k] = dstv[k] * 255 + 0.5f;
 		}
 		fz_drop_color_converter(ctx, &cc);
 
@@ -1289,13 +1289,13 @@ fz_convert_slow_pixmap_samples(fz_context *ctx, fz_pixmap *src, fz_pixmap *dst, 
 							if (da)
 							{
 								for (k = 0; k < dstn; k++)
-									d[k] = fz_mul255(dstv[k] * 255, alpha);
+									d[k] = fz_mul255(dstv[k] * 255 + 0.5f, alpha);
 								d[k] = alpha;
 							}
 							else
 							{
 								for (k = 0; k < dstn; k++)
-									d[k] = dstv[k] * 255;
+									d[k] = dstv[k] * 255 + 0.5f;
 							}
 
 							fz_hash_insert(ctx, lookup, s, d);
