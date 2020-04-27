@@ -523,7 +523,7 @@ resolve_color(fz_context *ctx,
 	{
 		fz_convert_separation_colors(ctx, colorspace, color, dest->seps, dest->colorspace, colorfv, color_params);
 		for (i = 0; i < n; i++)
-			colorbv[i] = colorfv[i] * 255;
+			colorbv[i] = colorfv[i] * 255 + 0.5f;
 		op = set_op_from_spaces(ctx, op, dest, colorspace, effective_opm);
 	}
 	else
@@ -531,7 +531,7 @@ resolve_color(fz_context *ctx,
 		int c = n - dest->s;
 		fz_convert_color(ctx, colorspace, color, dest->colorspace, colorfv, NULL, color_params);
 		for (i = 0; i < c; i++)
-			colorbv[i] = colorfv[i] * 255;
+			colorbv[i] = colorfv[i] * 255 + 0.5f;
 		for (; i < n; i++)
 		{
 			colorfv[i] = 0;
