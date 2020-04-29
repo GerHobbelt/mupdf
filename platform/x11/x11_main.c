@@ -885,7 +885,7 @@ int main(int argc, char **argv)
 
 	pdfapp_init(ctx, &gapp);
 
-	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:e:")) != -1)
 	{
 		switch (c)
 		{
@@ -904,6 +904,7 @@ int main(int argc, char **argv)
 		case 'U': gapp.layout_css = fz_optarg; break;
 		case 'X': gapp.layout_use_doc_css = 0; break;
 		case 'b': kbps = fz_atoi(fz_optarg); break;
+		case 'e': gapp.maxpercentage = fz_clampi(fz_atof(fz_optarg), 0, 100); break;
 		default: usage(argv[0]);
 		}
 	}

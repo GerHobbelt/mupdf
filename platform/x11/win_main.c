@@ -654,6 +654,7 @@ static void winopen()
 	SystemParametersInfo(SPI_GETWORKAREA, 0, &r, 0);
 	gapp.scrw = r.right - r.left;
 	gapp.scrh = r.bottom - r.top;
+	gapp.maxpercentage = 90;
 
 	/* Create cursors */
 	arrowcurs = LoadCursor(NULL, IDC_ARROW);

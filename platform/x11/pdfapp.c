@@ -217,6 +217,7 @@ void pdfapp_init(fz_context *ctx, pdfapp_t *app)
 	memset(app, 0, sizeof(pdfapp_t));
 	app->scrw = 640;
 	app->scrh = 480;
+	app->maxpercentage = 90;
 	app->resolution = 72;
 	app->ctx = ctx;
 
@@ -1083,10 +1084,10 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 				app->panx = 0;
 			if (app->winh == h)
 				app->pany = 0;
-			if (w > app->scrw * 90 / 100)
-				w = app->scrw * 90 / 100;
-			if (h > app->scrh * 90 / 100)
-				h = app->scrh * 90 / 100;
+			if (w > app->scrw * app->maxpercentage / 100)
+				w = app->scrw * app->maxpercentage / 100;
+			if (h > app->scrh * app->maxpercentage / 100)
+				h = app->scrh * app->maxpercentage / 100;
 			if (w != app->winw || h != app->winh)
 				winresize(app, w, h);
 		}

@@ -114,6 +114,7 @@ struct pdfapp_s
 	/* window system sizes */
 	int winw, winh;
 	int scrw, scrh;
+	int maxpercentage;
 	int shrinkwrap;
 	int fullscreen;
 
