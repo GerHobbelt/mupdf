@@ -2078,9 +2078,16 @@ void do_main(void)
 void run_main_loop(void)
 {
 	if (currentinvert)
+	{
 		glClearColor(0, 0, 0, 1);
+		ui.color = ui_dark_theme;
+	}
 	else
+	{
 		glClearColor(0.3f, 0.3f, 0.3f, 1);
+		ui.color = ui_light_theme;
+	}
+
 	ui_begin();
 	fz_try(ctx)
 	{
