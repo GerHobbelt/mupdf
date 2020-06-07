@@ -374,7 +374,6 @@ struct pdf_document
 	fz_font **type3_fonts;
 
 	struct {
-		fz_hash_table *images;
 		fz_hash_table *fonts;
 	} resources;
 
@@ -514,10 +513,6 @@ void pdf_delete_page(fz_context *ctx, pdf_document *doc, int number);
 	will be taken to be the end of the document.
 */
 void pdf_delete_page_range(fz_context *ctx, pdf_document *doc, int start, int end);
-
-void pdf_finish_edit(fz_context *ctx, pdf_document *doc);
-
-int pdf_recognize(fz_context *doc, const char *magic);
 
 fz_text_language pdf_document_language(fz_context *ctx, pdf_document *doc);
 void pdf_set_document_language(fz_context *ctx, pdf_document *doc, fz_text_language lang);

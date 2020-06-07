@@ -500,10 +500,11 @@ resolve_color(fz_context *ctx,
 	if (color_params.op == 0 || !fz_colorspace_is_subtractive(ctx, dest->colorspace))
 		op = NULL;
 
-	/* Device Gray is additive, but seems to still be counted for overprint
-	 * (see Ghent_V3.0/030_Gray_K_black_OP_x1a.pdf 030.pdf). */
 	else if (devgray)
 	{
+		/* Device Gray is additive, but seems to still be
+		 * counted for overprint (see
+		 * Ghent_V3.0/030_Gray_K_black_OP_x1a.pdf 030.pdf). */
 	}
 
 	/* If we are in a CMYK space (i.e. not a devn one, given we know we are subtractive at this point),
@@ -2913,7 +2914,7 @@ fz_draw_drop_device(fz_context *ctx, fz_device *devp)
 	fz_drop_rasterizer(ctx, rast);
 }
 
-fz_device *
+static fz_device *
 new_draw_device(fz_context *ctx, fz_matrix transform, fz_pixmap *dest, const fz_aa_context *aa, const fz_irect *clip, fz_colorspace *proof_cs)
 {
 	fz_draw_device *dev = fz_new_derived_device(ctx, fz_draw_device);

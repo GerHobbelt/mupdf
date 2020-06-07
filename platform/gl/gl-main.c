@@ -180,7 +180,7 @@ static int oldtint = 0, currenttint = 0;
 static int oldinvert = 0, currentinvert = 0;
 static int oldicc = 1, currenticc = 1;
 static int oldaa = 8, currentaa = 8;
-static int oldseparations = 0, currentseparations = 0;
+static int oldseparations = 1, currentseparations = 1;
 static fz_location oldpage = {0,0}, currentpage = {0,0};
 static float oldzoom = DEFRES, currentzoom = DEFRES;
 static float oldrotate = 0, currentrotate = 0;
@@ -214,7 +214,10 @@ static char *get_history_filename(void)
 	static int once = 0;
 	if (!once)
 	{
-		char *home = getenv("HOME");
+		char *home;
+		home = getenv("XDG_CACHE_HOME");
+		if (!home)
+			home = getenv("HOME");
 		if (!home)
 			home = getenv("USERPROFILE");
 		if (!home)
@@ -652,13 +655,21 @@ void trace_action(const char *fmt, ...)
 		fz_write_vprintf(ctx, trace_file, fmt, args);
 		fz_flush_output(ctx, trace_file);
 		va_end(args);
+		va_start(args, fmt);
+		fz_write_vprintf(ctx, fz_stdout(ctx), fmt, args);
+		fz_flush_output(ctx, fz_stdout(ctx));
+		va_end(args);
 	}
 }
 
 void trace_page_update(void)
 {
-	static int trace_idx = 1;
 	trace_action("page.update();\n");
+}
+
+void trace_save_snapshot(void)
+{
+	static int trace_idx = 1;
 	trace_action("page.toPixmap(Identity, DeviceRGB).saveAsPNG(\"trace-%03d.png\");\n", trace_idx++);
 }
 
@@ -748,20 +759,14 @@ void load_page(void)
 				s++;
 				int signd = pdf_widget_is_signed(ctx, w);
 				trace_action("widget = page.getWidgets()[%d];\n", i);
+				trace_action("print('Signature %d on page %d is signed:', widget.isSigned(), 'expected:', %d);\n",
+					s, fz_page_number_from_location(ctx, doc, currentpage), signd);
 				if (signd)
 				{
 					int valid = pdf_validate_signature(ctx, w);
-					trace_action("if (!widget.isSigned()) { print(\"Expected signature %d (chapter %d, page %d) to be signed!\\n\"); }\n",
-						s, currentpage.chapter, currentpage.page);
-					trace_action(
-						"tmp = page.getWidgets()[%d].validateSignature();\n"
-						"if (tmp != %d) { print(\"Signature %d (chapter %d, page %d) was invalidated \" + tmp + \" updates ago - expected %d\\n\"); }\n",
-						i, valid, s, currentpage.chapter, currentpage.page, valid);
-				}
-				else
-				{
-					trace_action("if (widget.isSigned()) { print(\"Expected signature %d (chapter %d, page %d) to be unsigned!\\n\"); }\n",
-						s, currentpage.chapter, currentpage.page);
+					trace_action("tmp = page.getWidgets()[%d].validateSignature();\n", i);
+					trace_action("print('Signature %d on page %d validation:', tmp, 'expected:', %d);\n",
+						s, fz_page_number_from_location(ctx, doc, currentpage), valid);
 				}
 			}
 	}
@@ -776,14 +781,14 @@ void load_page(void)
 
 	if (currentseparations)
 	{
-		seps = fz_page_separations(ctx, &page->super);
+		seps = fz_page_separations(ctx, fzpage);
 		if (seps)
 		{
 			int i, n = fz_count_separations(ctx, seps);
 			for (i = 0; i < n; i++)
 				fz_set_separation_behavior(ctx, seps, i, FZ_SEPARATION_COMPOSITE);
 		}
-		else if (fz_page_uses_overprint(ctx, &page->super))
+		else if (fz_page_uses_overprint(ctx, fzpage))
 			seps = fz_new_separations(ctx, 0);
 		else if (fz_document_output_intent(ctx, doc))
 			seps = fz_new_separations(ctx, 0);
@@ -1350,11 +1355,8 @@ static void load_document(void)
 			if (vsns > 1)
 			{
 				int valid = pdf_validate_change_history(ctx, pdf);
-				trace_action(
-					"tmp = doc.validateChangeHistory();\n"
-					"if (tmp != %d) {\n"
-					"  print(\"Mismatch in change history validation. I expected %d and got \" + tmp + \"\\n\");\n"
-					"}\n", valid, valid);
+				trace_action("tmp = doc.validateChangeHistory();\n");
+				trace_action("print('History validation:', tmp, 'expected:', %d);\n", valid);
 			}
 		}
 		if (anchor)
@@ -1502,6 +1504,9 @@ static void do_app(void)
 
 	if (ui.down || ui.middle || ui.right || ui.key)
 		showinfo = 0;
+
+	if (trace_file && ui.key == KEY_CTL_P)
+		trace_save_snapshot();
 
 	if (!ui.focus && ui.key && ui.plain)
 	{
@@ -1662,7 +1667,7 @@ typedef struct
 } sigs_list;
 
 static void
-process_sigs(fz_context *ctx, pdf_obj *field, void *arg, pdf_obj **ft)
+process_sigs(fz_context *ctx_, pdf_obj *field, void *arg, pdf_obj **ft)
 {
 	sigs_list *sigs = (sigs_list *)arg;
 
@@ -1996,6 +2001,8 @@ void do_main(void)
 				search_page.chapter, search_page.page,
 				search_needle,
 				search_hit_quads, nelem(search_hit_quads));
+			trace_action("hits = doc.loadPage(%d).search(%q);\n", fz_page_number_from_location(ctx, doc, search_page), search_needle);
+			trace_action("print('Search page %d:', repr(%q), hits.length, repr(hits));\n", fz_page_number_from_location(ctx, doc, search_page), search_needle);
 			if (search_hit_count)
 			{
 				float search_hit_x = search_hit_quads[0].ul.x;
@@ -2091,9 +2098,9 @@ static void usage(const char *argv0)
 	exit(1);
 }
 
-static int document_filter(const char *filename)
+static int document_filter(const char *fname)
 {
-	return !!fz_recognize_document(ctx, filename);
+	return !!fz_recognize_document(ctx, fname);
 }
 
 static void do_open_document_dialog(void)
@@ -2197,7 +2204,7 @@ int main(int argc, char **argv)
 			trace_file = fz_stdout(ctx);
 		else
 			trace_file = fz_new_output_with_path(ctx, trace_file_name, 0);
-		trace_action("var doc, page, annot, widget, tmp;\n");
+		trace_action("var doc, page, annot, widget, hits, tmp;\n");
 	}
 
 	if (layout_css)
