@@ -933,7 +933,14 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_always(ctx)
 		{
 			if (output_format != OUT_PCLM)
+			{
 				fz_drop_band_writer(ctx, bander);
+				/* bander must be set to NULL to avoid use-after-frees. A use-after-free
+				 * would occur when a valid page was followed by a page with invalid
+				 * pixmap dimensions, causing bander -- a static -- to point to previously
+				 * freed memory instead of a new band_writer. */
+				bander = NULL;
+			}
 			fz_drop_bitmap(ctx, bit);
 			bit = NULL;
 			if (num_workers > 0)
@@ -1775,7 +1782,7 @@ int mudraw_main(int argc, char **argv)
 						fprintf(stderr, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.\n", suffix_table[i].suffix+1);
 						spots = SPOTS_OVERPRINT_SIM;
 					}
-					i = 0;
+					i = -1;
 				}
 			}
 		}
