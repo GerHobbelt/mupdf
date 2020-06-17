@@ -1,84 +1,35 @@
 #include "mupdf/fitz.h"
 
-#include "z-imp.h"
+#include <zlib.h> /* for compressBound() and compress() */
 
-#include <limits.h>
-
-void fz_deflate(fz_context *ctx, unsigned char *dest, size_t *destLen, const unsigned char *source, size_t sourceLen, fz_deflate_level level)
+fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 {
-	z_stream stream;
-	int err;
-	size_t left;
+	unsigned char *input_p = input->data;
+	uLong input_n = (uLong) input->len;
+	unsigned char *output_p;
+	uLongf output_n;
+	int result;
 
-	left = *destLen;
-	*destLen = 0;
+	/* check possible size_t / uLong precision mismatch */
+	if (input->len != (size_t)input_n)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "buffer is too large to deflate");
 
-	stream.zalloc = fz_zlib_alloc;
-	stream.zfree = fz_zlib_free;
-	stream.opaque = ctx;
-
-	err = deflateInit(&stream, (int)level);
-	if (err != Z_OK)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "zlib compression failed: %d", err);
-
-	stream.next_out = dest;
-	stream.avail_out = 0;
-	stream.next_in = (z_const Bytef *)source;
-	stream.avail_in = 0;
-
-	do {
-		if (stream.avail_out == 0) {
-			stream.avail_out = left > UINT_MAX ? UINT_MAX : (uInt)left;
-			left -= stream.avail_out;
-		}
-		if (stream.avail_in == 0) {
-			stream.avail_in = sourceLen > UINT_MAX ? UINT_MAX : (uInt)sourceLen;
-			sourceLen -= stream.avail_in;
-		}
-		err = deflate(&stream, sourceLen ? Z_NO_FLUSH : Z_FINISH);
-	} while (err == Z_OK);
-
-	/* We might have problems if the compressed length > uLong sized. Tough, for now. */
-	*destLen = stream.total_out;
-	deflateEnd(&stream);
-	if (err != Z_STREAM_END)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Zlib failure: %d", err);
-}
-
-unsigned char *fz_new_deflated_data(fz_context *ctx, size_t *compressed_length, const unsigned char *source, size_t source_length, fz_deflate_level level)
-{
-	size_t bound = fz_deflate_bound(ctx, source_length);
-	unsigned char *cdata = Memento_label(fz_malloc(ctx, bound), "deflated_data");
-	*compressed_length = 0;
+	output_n = compressBound(input_n);
+	output_p = Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
+	result = compress(output_p, &output_n, input_p, input_n);
+	if (result != Z_OK)
+	{
+		fz_free(ctx, output_p);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error when deflating data");
+	}
 
 	fz_try(ctx)
-		fz_deflate(ctx, cdata, &bound, source, source_length, level);
+		fz_realloc(ctx, output_p, output_n);
 	fz_catch(ctx)
 	{
-		fz_free(ctx, cdata);
+		fz_free(ctx, output_p);
 		fz_rethrow(ctx);
 	}
 
-	*compressed_length = bound;
-	return cdata;
-}
-
-unsigned char *fz_new_deflated_data_from_buffer(fz_context *ctx, size_t *compressed_length, fz_buffer *buffer, fz_deflate_level level)
-{
-	unsigned char *data;
-	size_t size = fz_buffer_storage(ctx, buffer, &data);
-
-	if (size == 0 || data == NULL)
-	{
-		*compressed_length = 0;
-		return NULL;
-	}
-
-	return fz_new_deflated_data(ctx, compressed_length, data, size, level);
-}
-
-size_t fz_deflate_bound(fz_context *ctx, size_t size)
-{
-	/* Copied from zlib to account for size_t vs uLong */
-	return size + (size >> 12) + (size >> 14) + (size >> 25) + 13;
+	return fz_new_buffer_from_data(ctx, output_p, output_n);
 }

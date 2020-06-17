@@ -1,5 +1,7 @@
 #include "mupdf/fitz.h"
 
+#include <zlib.h>
+
 #include <string.h>
 #include <limits.h>
 
@@ -123,7 +125,7 @@ pclm_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	fz_free(ctx, writer->compbuf);
 	writer->compbuf = NULL;
 	writer->stripbuf = Memento_label(fz_malloc(ctx, (size_t)w * sh * n), "pclm_stripbuf");
-	writer->complen = fz_deflate_bound(ctx, (size_t)w * sh * n);
+	writer->complen = compressBound((size_t)w * sh * n);
 	writer->compbuf = Memento_label(fz_malloc(ctx, writer->complen), "pclm_compbuf");
 
 	/* Send the file header on the first page */
@@ -189,12 +191,15 @@ flush_strip(fz_context *ctx, pclm_band_writer *writer, int fill)
 	int w = writer->super.w;
 	int n = writer->super.n;
 	size_t len = (size_t)w*n*fill;
+	int result;
 
 	/* Buffer is full, compress it and write it. */
 	if (writer->options.compress)
 	{
-		size_t destLen = writer->complen;
-		fz_deflate(ctx, writer->compbuf, &destLen, data, len, FZ_DEFLATE_DEFAULT);
+		uLong destLen = writer->complen;
+		result = compress(writer->compbuf, &destLen, data, len);
+		if (result != Z_OK)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error when compressing strip");
 		len = destLen;
 		data = writer->compbuf;
 	}
