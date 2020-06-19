@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 '''
-Intended to behaves exactly like mutool, but uses the mupdf python => C++ =>
+Intended to behave exactly like mutool, but uses the mupdf python => C++ =>
 mupdf.so wrappers.
 
 The code is intended to be similar to the mutool C code, to simplify
