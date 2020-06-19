@@ -464,6 +464,8 @@ EXPORTS
 	fz_load_pnm_subimage
 	fz_load_jbig2_subimage_count
 	fz_load_jbig2_subimage
+	fz_load_bmp_subimage_count
+	fz_load_bmp_subimage
 	fz_new_link
 	fz_keep_link
 	fz_drop_link
@@ -622,7 +624,6 @@ EXPORTS
 	fz_debug_store
 	fz_defer_reap_start
 	fz_defer_reap_end
-;	fz_log_dump_store
 	fz_file_exists
 	fz_open_file
 	fz_open_file_w
@@ -851,6 +852,8 @@ EXPORTS
 	pdf_create_annot_raw
 	pdf_create_annot
 	pdf_delete_annot
+	pdf_set_annot_popup
+	pdf_annot_popup
 	pdf_annot_has_ink_list
 	pdf_annot_has_quad_points
 	pdf_annot_has_vertices
@@ -911,9 +914,10 @@ EXPORTS
 	pdf_set_annot_contents
 	pdf_annot_author
 	pdf_set_annot_author
-	;pdf_format_date
 	pdf_annot_modification_date
 	pdf_set_annot_modification_date
+	pdf_annot_creation_date
+	pdf_set_annot_creation_date
 	pdf_parse_default_appearance
 	pdf_print_default_appearance
 	pdf_annot_default_appearance
@@ -1106,6 +1110,7 @@ EXPORTS
 	pdf_new_dict
 	pdf_new_rect
 	pdf_new_matrix
+	pdf_new_date
 	pdf_copy_array
 	pdf_copy_dict
 	pdf_deep_copy_obj
@@ -1187,6 +1192,7 @@ EXPORTS
 	pdf_dict_put_text_string
 	pdf_dict_put_rect
 	pdf_dict_put_matrix
+	pdf_dict_put_date
 	pdf_dict_put_array
 	pdf_dict_put_dict
 	pdf_dict_puts_dict
@@ -1198,6 +1204,7 @@ EXPORTS
 	pdf_dict_get_text_string
 	pdf_dict_get_rect
 	pdf_dict_get_matrix
+	pdf_dict_get_date
 	pdf_array_push_bool
 	pdf_array_push_int
 	pdf_array_push_real
@@ -1229,6 +1236,7 @@ EXPORTS
 	pdf_to_quad
 	pdf_to_rect
 	pdf_to_matrix
+	pdf_to_date
 	pdf_get_indirect_document
 	pdf_get_bound_document
 	pdf_set_int
@@ -1283,8 +1291,6 @@ EXPORTS
 	pdf_empty_store
 	pdf_find_font_resource
 	pdf_insert_font_resource
-	;pdf_find_image_resource
-	;pdf_insert_image_resource
 	pdf_drop_resource_tables
 	pdf_eval_function
 	pdf_keep_function
