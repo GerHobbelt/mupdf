@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 '''
 Intended to behave exactly like mutool, but uses the mupdf python => C++ =>

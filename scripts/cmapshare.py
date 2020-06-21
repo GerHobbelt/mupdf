@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # Find and extract common CMap subsets.
 # Taken flattened CMaps as input, using only the 'cidchar' sections.

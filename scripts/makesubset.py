@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # Convert MES-2 (or WGL4) character set to list of glyphs for font subsetting.
 # Also add small-caps glyph names for small letters and ligatures.

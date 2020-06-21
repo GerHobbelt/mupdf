@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 '''
 Support for generating C++ and python wrappers for the mupdf API.
@@ -303,7 +303,7 @@ class ClangInfo:
         clang.cindex.Config.set_library_file(). This appears to be necessary
         even when clang is installed as a standard package.
         '''
-        for version in 7, 6,:
+        for version in 10, 9, 8, 7, 6,:
             ok = self._try_init_clang( version)
             if ok:
                 break

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # Parse a Uni* CMap file and flatten it.
 #

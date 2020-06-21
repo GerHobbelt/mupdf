@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # Convert unicode mapping table to C arrays mapping glyph names and unicode values.
 #
