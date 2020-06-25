@@ -766,9 +766,9 @@ def make_out_callable( out):
         Otherwise we assume <out> is python stream or similar, and do: out.write(text)
     '''
     class Ret:
-        def write( text):
+        def write( self, text):
             pass
-        def flush():
+        def flush( self):
             pass
     ret = Ret()
     if out is None:
@@ -799,11 +799,14 @@ def system_raw(
             The command to run.
         out:
             Where output is sent.
-            If None, output is lost.
-            If -1, output is sent to stdout and stderr.
-            Otherwise if an integer, we do: os.write( out, text)
-            Otherwise if callable, we do: out( text)
-            Otherwise we assume <out> is python stream or similar, and do: out.write(text)
+            If None, child process inherits this process's stdout and stderr.
+            If subprocess.DEVNULL, child process's output is lost.
+            Otherwise we repeatedly read child process's output via a pipe and
+            write to <out>:
+                If <out> is an integer, we do: os.write( out, text)
+                Otherwise if <out> is callable, we do: out( text)
+                Otherwise we assume <out> is python stream or similar, and do:
+                out.write(text)
         shell:
             Whether to run command inside a shell (see subprocess.Popen).
         encoding:
@@ -825,12 +828,11 @@ def system_raw(
         subprocess's <returncode>, i.e. -N means killed by signal N, otherwise
         the exit value (e.g. 12 if command terminated with exit(12)).
     '''
-    if out == -1:
-        stdin = 0
-        stdout = 1
-        stderr = 2
+    stdin = None
+    if out in (None, subprocess.DEVNULL):
+        stdout = out
+        stderr = out
     else:
-        stdin = None
         stdout = subprocess.PIPE
         stderr = subprocess.STDOUT
     child = subprocess.Popen(
@@ -847,9 +849,8 @@ def system_raw(
     if encoding:
         child_out = codecs.getreader( encoding)( child_out, errors)
 
-    out = make_out_callable( out)
-
     if stdout == subprocess.PIPE:
+        out = make_out_callable( out)
         if buffer_len == -1:
             for line in child_out:
                 out.write( line)
@@ -885,7 +886,7 @@ def system(
         command,
         verbose=None,
         raise_errors=True,
-        out=None,
+        out=sys.stdout,
         prefix=None,
         rusage=False,
         shell=True,
@@ -914,14 +915,17 @@ def system(
             If true, we raise an exception if the command fails, otherwise we
             return the failing error code or zero.
         out:
-            Python stream, fd, callable or Stream instance to which output is
-            sent.
-
-            If <out> is 'return', we buffer the output and return (e,
-            <output>). Note that if raise_errors is true, we only return if <e>
-            is zero.
-
-            If -1, output is sent to stdout and stderr.
+            Where output is sent.
+            If None, child process inherits this process's stdout and stderr.
+            If subprocess.DEVNULL, child process's output is lost.
+            Otherwise we repeatedly read child process's output via a pipe and
+            write to <out>:
+                If <out> is 'return' we store the output and include it in our
+                return value or exception.
+                Otherwise if <out> is an integer, we do: os.write( out, text)
+                Otherwise if <out> is callable, we do: out( text)
+                Otherwise we assume <out> is python stream or similar, and do:
+                out.write(text)
         prefix:
             If not None, should be prefix string or callable used to prefix
             all output. [This is for convenience to avoid the need to do
@@ -966,18 +970,21 @@ def system(
             errors = 'replace'
 
     out_original = out
-    if out is None:
-        out = sys.stdout
-    elif out == 'return':
+    if out == 'return':
         # Store the output ourselves so we can return it.
         out = io.StringIO()
 
+    out_raw = out in (None, subprocess.DEVNULL)
     if prefix:
+        if out_raw:
+            raise Exception( 'No out stream available for prefix')
         out = StreamPrefix( out, prefix)
 
     if verbose:
         if callable( verbose) or getattr( verbose, 'write', None):
             pass
+        elif out_raw:
+            raise Exception( 'No out stream available for verbose')
         else:
             verbose = out
         verbose = make_out_callable( verbose)
@@ -1243,7 +1250,7 @@ def build(
     if isinstance( infiles, str):
         infiles = (infiles,)
     if isinstance( outfiles, str):
-        infiles = (outfiles,)
+        outfiles = (outfiles,)
 
     if not out:
         out_frame_record = inspect.stack()[1]
@@ -1300,6 +1307,8 @@ def link_l_flags( sos):
     if isinstance( sos, str):
         sos = [sos]
     for so in sos:
+        if not so:
+            continue
         dir_ = os.path.dirname( so)
         name = os.path.basename( so)
         assert name.startswith( 'lib')
