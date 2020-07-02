@@ -396,6 +396,8 @@ static fz_image *load_html_image(fz_context *ctx, fz_archive *zip, const char *b
 			buf = fz_new_buffer_from_base64(ctx, src+23, 0);
 		else if (!strncmp(src, "data:image/png;base64,", 22))
 			buf = fz_new_buffer_from_base64(ctx, src+22, 0);
+		else if (!strncmp(src, "data:image/gif;base64,", 22))
+			buf = fz_new_buffer_from_base64(ctx, src+22, 0);
 		else
 		{
 			fz_strlcpy(path, base_uri, sizeof path);
@@ -1272,8 +1274,10 @@ fix_nexts(fz_html_box *box)
 	}
 }
 
-fz_html *
-fz_parse_html(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css)
+static fz_html *
+fz_parse_html_imp(fz_context *ctx,
+	fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css,
+	int try_xml, int try_html5)
 {
 	fz_xml_doc *xml;
 	fz_xml *root, *node;
@@ -1294,7 +1298,28 @@ fz_parse_html(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const cha
 	g.last_brk_cls = UCDN_LINEBREAK_CLASS_OP;
 	g.styles = NULL;
 
-	xml = fz_parse_xml(ctx, buf, 1, 1);
+	if (try_xml && try_html5)
+	{
+		fz_try(ctx)
+			xml = fz_parse_xml(ctx, buf, 1);
+		fz_catch(ctx)
+		{
+			if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
+			{
+				fz_warn(ctx, "syntax error in XHTML; retrying using HTML5 parser");
+				xml = fz_parse_xml_from_html5(ctx, buf);
+			}
+			else
+				fz_rethrow(ctx);
+		}
+	}
+	else if (try_xml)
+		xml = fz_parse_xml(ctx, buf, 1);
+	else if (try_html5)
+		xml = fz_parse_xml_from_html5(ctx, buf);
+	else
+		return NULL; /* should never happen! */
+
 	root = fz_xml_root(xml);
 
 	fz_try(ctx)
@@ -1402,6 +1427,27 @@ fz_parse_html(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const cha
 	}
 
 	return html;
+}
+
+fz_html *
+fz_parse_fb2(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css)
+{
+	/* parse only as XML */
+	return fz_parse_html_imp(ctx, set, zip, base_uri, buf, user_css, 1, 0);
+}
+
+fz_html *
+fz_parse_html5(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css)
+{
+	/* parse only as HTML5 */
+	return fz_parse_html_imp(ctx, set, zip, base_uri, buf, user_css, 0, 1);
+}
+
+fz_html *
+fz_parse_xhtml(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css)
+{
+	/* try as XML first, fall back to HTML5 */
+	return fz_parse_html_imp(ctx, set, zip, base_uri, buf, user_css, 1, 1);
 }
 
 static void indent(int level)
@@ -1583,6 +1629,7 @@ fz_format_html_key(fz_context *ctx, char *s, size_t n, void *key_)
 
 static const fz_store_type fz_html_store_type =
 {
+	"fz_html",
 	fz_make_hash_html_key,
 	fz_keep_html_key,
 	fz_drop_html_key,
