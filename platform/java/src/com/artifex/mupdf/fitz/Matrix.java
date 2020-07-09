@@ -99,6 +99,27 @@ public class Matrix
 		return this;
 	}
 
+	public Matrix invert() {
+		float det = a * d - b * c;
+		if (det > -Math.ulp(0) && det < Math.ulp(0))
+			return this;
+
+		float srca = a;
+		float srcb = b;
+		float srcc = c;
+		float srcd = d;
+		float srce = e;
+		float srcf = f;
+		float rdet = 1 / det;
+		this.a = srcd * rdet;
+		this.b = -srcb * rdet;
+		this.c = -srcc * rdet;
+		this.d = srca * rdet;
+		this.e = -srce * this.a - srcf * this.c;
+		this.f = -srce * this.b - srcf * this.d;
+		return this;
+	}
+
 	public Matrix rotate(float degrees) {
 		while (degrees < 0)
 			degrees += 360;
