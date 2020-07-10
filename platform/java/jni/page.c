@@ -197,6 +197,7 @@ FUN(Page_getLinks)(JNIEnv *env, jobject self)
 	link = links;
 	for (i = 0; link && i < link_count; i++)
 	{
+		jobject jquads = NULL;
 		jobject jbounds = NULL;
 		jobject jlink = NULL;
 		jobject juri = NULL;
@@ -215,7 +216,14 @@ FUN(Page_getLinks)(JNIEnv *env, jobject self)
 			return NULL;
 		}
 
-		jlink = (*env)->NewObject(env, cls_Link, mid_Link_init, jbounds, juri);
+		jquads = to_QuadArray_safe(ctx, env, link->quads, link->count);
+		if (!jquads || (*env)->ExceptionCheck(env))
+		{
+			fz_drop_link(ctx, links);
+			return NULL;
+		}
+
+		jlink = (*env)->NewObject(env, cls_Link, mid_Link_init, jbounds, jquads, juri);
 		if (!jlink || (*env)->ExceptionCheck(env))
 		{
 			fz_drop_link(ctx, links);
@@ -223,6 +231,7 @@ FUN(Page_getLinks)(JNIEnv *env, jobject self)
 		}
 		(*env)->DeleteLocalRef(env, juri);
 		(*env)->DeleteLocalRef(env, jbounds);
+		(*env)->DeleteLocalRef(env, jquads);
 
 		(*env)->SetObjectArrayElement(env, jlinks, i, jlink);
 		if ((*env)->ExceptionCheck(env))

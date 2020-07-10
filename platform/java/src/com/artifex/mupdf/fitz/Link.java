@@ -3,10 +3,12 @@ package com.artifex.mupdf.fitz;
 public class Link
 {
 	public Rect bounds;
+	public Quad[] quads;
 	public String uri;
 
-	public Link(Rect bounds, String uri) {
+	public Link(Rect bounds, Quad[] quads, String uri) {
 		this.bounds = bounds;
+		this.quads = quads;
 		this.uri = uri;
 	}
 
@@ -27,6 +29,6 @@ public class Link
 	}
 
 	public String toString() {
-		return "Link(bounds="+bounds+",uri="+uri+")";
+		return "Link(bounds="+bounds+",quads="+quads+",uri="+uri+")";
 	}
 }

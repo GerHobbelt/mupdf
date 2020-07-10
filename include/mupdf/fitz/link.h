@@ -15,8 +15,12 @@
 	A link is reference counted. Dropping a reference to a link is
 	done by calling fz_drop_link.
 
-	rect: The hot zone. The area that can be clicked in
-	untransformed coordinates.
+	rect: Bounding box for all the hot zones.
+
+	count: Number of hot zones below.
+
+	quads: The hot zone. The area that can be clicked in untransformed
+	coordinates. Contains count number of (possibly rotated) hot zones.
 
 	uri: Link destinations come in two forms: internal and external.
 	Internal links refer to other pages in the same document.
@@ -29,6 +33,8 @@ typedef struct fz_link
 	int refs;
 	struct fz_link *next;
 	fz_rect rect;
+	int count;
+	fz_quad *quads;
 	char *uri;
 } fz_link;
 
@@ -40,7 +46,7 @@ typedef struct fz_link
 
 	Internal function.
 */
-fz_link *fz_new_link(fz_context *ctx, fz_rect bbox, const char *uri);
+fz_link *fz_new_link(fz_context *ctx, fz_rect bbox, int count, fz_quad *quads, const char *uri);
 
 /**
 	Increment the reference count for a link. The same pointer is

@@ -1788,6 +1788,7 @@ void pdfapp_onmouse(pdfapp_t *app, int x, int y, int btn, int modifiers, int sta
 	fz_matrix ctm;
 	fz_point p;
 	int processed = 0;
+	int i;
 
 	if (app->image)
 		irect = fz_pixmap_bbox(app->ctx, app->image);
@@ -1801,9 +1802,11 @@ void pdfapp_onmouse(pdfapp_t *app, int x, int y, int btn, int modifiers, int sta
 
 	for (link = app->page_links; link; link = link->next)
 	{
-		if (p.x >= link->rect.x0 && p.x <= link->rect.x1)
-			if (p.y >= link->rect.y0 && p.y <= link->rect.y1)
+		for (i = 0; i < link->count; i++)
+			if (fz_is_point_inside_quad(p, link->quads[i]))
 				break;
+		if (i < link->count)
+			break;
 	}
 
 	if (link)

@@ -199,6 +199,24 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			g2d.scale(imageScale, imageScale);
 			g2d.drawImage(image, 0, 0, null);
 
+			for (Link link : links) {
+				if (link == activeLink)
+					g2d.setColor(new Color(0, 0, 1, 0.4f));
+				else if (link == hotLink)
+					g2d.setColor(new Color(0, 0, 1, 0.2f));
+				else if (!currentLinks)
+					continue;
+				else
+					g2d.setColor(new Color(0, 0, 1, 0.1f));
+
+				for (Quad quad : link.quads) {
+					Quad hit = quad.transformed(pageCTM);
+					int[] xpoints = { (int)hit.ul_x, (int)hit.ur_x, (int)hit.lr_x, (int)hit.ll_x };
+					int[] ypoints = { (int)hit.ul_y, (int)hit.ur_y, (int)hit.lr_y, (int)hit.ll_y };
+					g2d.fillPolygon(xpoints, ypoints, 4);
+				}
+			}
+
 			if (currentPage.equals(searchHitPage) && searchHits != null) {
 				g2d.setColor(new Color(1, 0, 0, 0.4f));
 				for (int i = 0; i < searchHits.length; ++i) {
@@ -575,6 +593,159 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			else
 				pan(0, pageCanvas != null ? pageCanvas.getHeight() / +10 : +10);
 		}
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		if (selectionStart != null) {
+			selectionStart = null;
+			selectionEnd = null;
+			selection = new Quad[0];
+			pageCanvas.repaint();
+		}
+
+		if (links.length == 0)
+			return;
+
+		com.artifex.mupdf.fitz.Point p = new com.artifex.mupdf.fitz.Point(e.getX(), e.getY());
+		p = p.transform(invPageCTM);
+
+		for (Link link : links) {
+			for (Quad quad : link.quads) {
+				if (quad.contains(p)) {
+					jumpToLink(link);
+					return;
+				}
+			}
+		}
+
+	}
+
+	public void mousePressed(MouseEvent e) {
+		if ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
+			com.artifex.mupdf.fitz.Point p = new com.artifex.mupdf.fitz.Point(e.getX(), e.getY());
+			p = p.transform(invPageCTM);
+			for (Link link : links) {
+				for (Quad quad : link.quads) {
+					if (quad.contains(p)) {
+						activeLink = link;
+						pageCanvas.repaint();
+					}
+				}
+			}
+		} else if ((e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
+			com.artifex.mupdf.fitz.Point p = new com.artifex.mupdf.fitz.Point(e.getX(), e.getY());
+			p = p.transform(invPageCTM);
+			selectionStart = p;
+			selectionEnd = null;
+			selection = new Quad[0];
+		}
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			activeLink = null;
+			updatePageCanvas();
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+			String text = pageText.copy(selectionStart, selectionEnd);
+
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			StringSelection copiedText = new StringSelection(text);
+			toolkit.getSystemClipboard().setContents(copiedText, null);
+			toolkit.getSystemSelection().setContents(copiedText, null);
+		}
+	}
+
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	public void mouseExited(MouseEvent e) {
+	}
+
+	protected boolean sameSelection(Quad[] newSelection) {
+		if (newSelection == null && selection == null)
+			return true;
+		if (newSelection != null && selection == null)
+			return false;
+		if (newSelection == null && selection != null)
+			return false;
+
+
+		if (newSelection.length != selection.length)
+			return false;
+
+		for (int i = 0; i < newSelection.length; i++)
+			if (!newSelection[i].equals(selection[i]))
+				return false;
+
+		return true;
+	}
+
+	public void mouseDragged(MouseEvent e) {
+		int mods = e.getModifiersEx();
+		int btn3 = MouseEvent.BUTTON3_DOWN_MASK;
+		int ctrlshift = MouseEvent.CTRL_DOWN_MASK | MouseEvent.SHIFT_DOWN_MASK;
+		int ctrl = MouseEvent.CTRL_DOWN_MASK;
+		int shift = MouseEvent.SHIFT_DOWN_MASK;
+
+		if ((mods & btn3) == btn3) {
+			com.artifex.mupdf.fitz.Point p = new com.artifex.mupdf.fitz.Point(e.getX(), e.getY());
+			p = p.transform(invPageCTM);
+
+			if (p.equals(selectionEnd))
+				return;
+
+			selectionEnd = p;
+
+			if ((mods & ctrlshift) == ctrlshift)
+				pageText.snapSelection(selectionStart, selectionEnd, StructuredText.SELECT_LINES);
+			else if ((mods & ctrl) == ctrl)
+				pageText.snapSelection(selectionStart, selectionEnd, StructuredText.SELECT_WORDS);
+
+			Quad[] newSelection;
+			if ((mods & shift) == shift)
+			{
+				float minx = Math.min(selectionStart.x, selectionEnd.x);
+				float miny = Math.min(selectionStart.y, selectionEnd.y);
+				float maxx = Math.max(selectionStart.x, selectionEnd.x);
+				float maxy = Math.max(selectionStart.y, selectionEnd.y);
+
+				newSelection = new Quad[1];
+				newSelection[0] = new Quad(minx, miny, maxx, miny, minx, maxy, maxx, maxy);
+			} else {
+				newSelection = pageText.highlight(selectionStart, selectionEnd);
+			}
+
+			if (sameSelection(newSelection))
+				return;
+
+			selection = newSelection;
+			pageCanvas.repaint();
+		}
+	}
+
+	public void mouseMoved(MouseEvent e) {
+		if (links.length == 0) {
+			setCursor(Cursor.DEFAULT_CURSOR);
+			return;
+		}
+
+		com.artifex.mupdf.fitz.Point p = new com.artifex.mupdf.fitz.Point(e.getX(), e.getY());
+		p = p.transform(invPageCTM);
+
+		for (Link link : links) {
+			for (Quad quad : link.quads) {
+				if (quad.contains(p)) {
+					hotLink = link;
+					setCursor(Cursor.HAND_CURSOR);
+					pageCanvas.repaint();
+					return;
+				}
+			}
+		}
+
+		hotLink = null;
+		setCursor(Cursor.DEFAULT_CURSOR);
+		pageCanvas.repaint();
 	}
 
 	protected void selectOutlineItem(int pagenum) {

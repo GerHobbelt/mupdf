@@ -777,6 +777,13 @@ int fz_is_point_inside_irect(int x, int y, fz_irect r);
 int fz_is_quad_inside_quad(fz_quad needle, fz_quad haystack);
 
 /**
+	Inclusion test for quad in rect.
+
+	This may break down if quads are not 'well formed'.
+*/
+int fz_is_quad_inside_rect(fz_quad needle, fz_rect haystack);
+
+/**
 	Intersection test for quads.
 
 	This may break down if quads are not 'well formed'.

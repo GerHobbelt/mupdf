@@ -755,7 +755,7 @@ static int find_fids(JNIEnv *env)
 	mid_Image_init = get_method(&err, env, "<init>", "(J)V");
 
 	cls_Link = get_class(&err, env, PKG"Link");
-	mid_Link_init = get_method(&err, env, "<init>", "(L"PKG"Rect;Ljava/lang/String;)V");
+	mid_Link_init = get_method(&err, env, "<init>", "(L"PKG"Rect;[L"PKG"Quad;Ljava/lang/String;)V");
 
 	cls_Location = get_class(&err, env, PKG"Location");
 	mid_Location_init = get_method(&err, env, "<init>", "(IIFF)V");

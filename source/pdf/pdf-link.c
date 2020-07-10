@@ -405,6 +405,12 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_obj *dict, int pagenum, fz
 	fz_rect bbox;
 	char *uri;
 	fz_link *link = NULL;
+	int count = 0;
+	fz_quad *quads = NULL;
+	int i;
+
+	fz_var(uri);
+	fz_var(quads);
 
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Subtype));
 	if (!pdf_name_eq(ctx, obj, PDF_NAME(Link)))
@@ -417,25 +423,48 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_obj *dict, int pagenum, fz
 	bbox = pdf_to_rect(ctx, obj);
 	bbox = fz_transform_rect(bbox, page_ctm);
 
-	obj = pdf_dict_get(ctx, dict, PDF_NAME(Dest));
-	if (obj)
-		uri = pdf_parse_link_dest(ctx, doc, obj);
-	else
-	{
-		action = pdf_dict_get(ctx, dict, PDF_NAME(A));
-		/* fall back to additional action button's down/up action */
-		if (!action)
-			action = pdf_dict_geta(ctx, pdf_dict_get(ctx, dict, PDF_NAME(AA)), PDF_NAME(U), PDF_NAME(D));
-		uri = pdf_parse_link_action(ctx, doc, action, pagenum);
-	}
-
-	if (!uri)
-		return NULL;
-
 	fz_try(ctx)
-		link = fz_new_link(ctx, bbox, uri);
+	{
+		obj = pdf_dict_get(ctx, dict, PDF_NAME(QuadPoints));
+		if (obj)
+		{
+			count = pdf_array_len(ctx, obj) / 8;
+
+			quads = fz_malloc(ctx, count * sizeof(fz_quad));
+			for (i = 0; i < count; i++)
+			{
+				quads[i] = pdf_to_quad(ctx, obj, i);
+				fz_transform_quad(quads[i], page_ctm);
+				if (!fz_is_quad_inside_rect(quads[i], bbox))
+				{
+					fz_free(ctx, quads);
+					quads = NULL;
+					count = 0;
+					break;
+				}
+			}
+		}
+
+		obj = pdf_dict_get(ctx, dict, PDF_NAME(Dest));
+		if (obj)
+			uri = pdf_parse_link_dest(ctx, doc, obj);
+		else
+		{
+			action = pdf_dict_get(ctx, dict, PDF_NAME(A));
+			/* fall back to additional action button's down/up action */
+			if (!action)
+				action = pdf_dict_geta(ctx, pdf_dict_get(ctx, dict, PDF_NAME(AA)), PDF_NAME(U), PDF_NAME(D));
+			uri = pdf_parse_link_action(ctx, doc, action, pagenum);
+		}
+
+		if (uri)
+			link = fz_new_link(ctx, bbox, count, quads, uri);
+	}
 	fz_always(ctx)
+	{
 		fz_free(ctx, uri);
+		fz_free(ctx, quads);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 

@@ -2828,6 +2828,13 @@ static void ffi_Page_getLinks(js_State *J)
 		ffi_pushrect(J, link->rect);
 		js_setproperty(J, -2, "bounds");
 
+		js_newarray(J);
+		for (i = 0; i < link->count; ++i) {
+			ffi_pushquad(J, link->quads[i]);
+			js_setindex(J, -2, i);
+		}
+		js_setproperty(J, -2, "quads");
+
 		js_pushstring(J, link->uri);
 		js_setproperty(J, -2, "uri");
 
