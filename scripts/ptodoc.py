@@ -393,7 +393,7 @@ def test(mupdf_shared_dir, so_build):
         jlib.build(
                 extract_text_c,
                 extract_text_exe,
-                f'cc -g -o {extract_text_exe} {extract_text_c} -I include -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function build/shared-debug/libmupdf.so -lm',
+                f'cc -g -o {extract_text_exe} {extract_text_c} -pthread -I include -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function build/shared-debug/libmupdf.so -lm',
                 )
         print('')
 
