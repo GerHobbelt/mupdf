@@ -975,10 +975,6 @@ def system(
         out = io.StringIO()
 
     out_raw = out in (None, subprocess.DEVNULL)
-    if prefix:
-        if out_raw:
-            raise Exception( 'No out stream available for prefix')
-        out = StreamPrefix( out, prefix)
 
     if verbose:
         if callable( verbose) or getattr( verbose, 'write', None):
@@ -991,6 +987,11 @@ def system(
 
     if verbose:
         print( 'running: %s' % command, file=verbose)
+
+    if prefix:
+        if out_raw:
+            raise Exception( 'No out stream available for prefix')
+        out = StreamPrefix( out, prefix)
 
     if rusage:
         command2 = ''
