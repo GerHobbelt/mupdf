@@ -1254,7 +1254,7 @@ def build(
 
     if not out:
         out_frame_record = inspect.stack()[1]
-        out = lambda text: log( text, caller=out_frame_record)
+        out = lambda text: log( text, caller=out_frame_record, nv=False)
 
     command_filename = f'{outfiles[0]}.cmd'
 
