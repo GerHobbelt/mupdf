@@ -962,6 +962,15 @@ typedef struct
     float   adv;
 } span_item_t;
 
+void span_item_init(span_item_t* item)
+{
+    item->x = 0;
+    item->y = 0;
+    item->gid = 0;
+    item->ucs = 0;
+    item->adv = 0;
+}
+
 typedef struct span_t
 {
     fz_matrix   ctm;
@@ -975,14 +984,16 @@ typedef struct span_t
     span_item_t*    items;
 } span_t;
 
+/* Appends new span_item_t containing <c> with all other fields zeroed. */
 static void span_append_c(span_t* span, int c)
 {
     span_item_t* items = realloc(span->items, sizeof(*items) * (span->items_num + 1));
     assert(items);
     span->items = items;
-    bzero(&span->items[span->items_num], sizeof(span_item_t));
-    span->items[span->items_num].ucs = c;
+    span_item_t* item = &span->items[span->items_num];
     span->items_num += 1;
+    span_item_init(item);
+    item->ucs = c;
 }
 
 static double spans_adv(span_t* a_span, span_item_t* a, span_item_t* b)
@@ -1431,7 +1442,7 @@ On entry:
     line_t.
 
 On exit:
-    On sucess, returns zero with *o_paras points to array of *o_paras_num
+    On sucess, returns zero, *o_paras points to array of *o_paras_num
     para_t*'s, each pointing to a para_t. In the array, para_t's with same
     angle are sorted.
 
@@ -1443,10 +1454,10 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
     int ret = -1;
     para_t** paras = NULL;
 
+    /* Start off with a para_t for each line_t. */
     int paras_num = lines_num;
     paras = malloc(sizeof(*paras) * paras_num);
     if (!paras) goto end;
-
     int a;
     /* Ensure we can clean up after error. */
     for (a=0; a<paras_num; ++a) {
@@ -1589,6 +1600,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
             if (paras[a])   free(paras[a]->lines);
             free(paras[a]);
         }
+        free(paras);
     }
     return ret;
 }
@@ -1649,18 +1661,21 @@ static void page_free(page_t* page)
         free(para);
     }
     free(page->paras);
-
-    free(page);
 }
 
-static int page_span_append(page_t* page, span_t* span)
+static span_t* page_span_append(page_t* page)
 {
+    span_t* span = malloc(sizeof(*span));
+    if (!span) return NULL;
     span_t** s = realloc(page->spans, sizeof(*s) * (page->spans_num + 1));
-    if (!s) return -1;
+    if (!s) {
+        free(span);
+        return NULL;
+    }
     page->spans = s;
     page->spans[page->spans_num] = span;
     page->spans_num += 1;
-    return 0;
+    return span;
 }
 
 typedef struct {
@@ -1693,6 +1708,7 @@ void document_free(document_t* document)
     for (p=0; p<document->pages_num; ++p) {
         page_t* page = document->pages[p];
         page_free(page);
+        free(page);
     }
     free(document->pages);
 }
@@ -1762,10 +1778,8 @@ static int spans_to_docx_content(const char* path, char** content)
             //printf("tag.name=%s\n", tag.name);
             assert(!strcmp(tag.name, "span"));
 
-            span_t* span = malloc(sizeof(*span));
+            span_t* span = page_span_append(page);
             if (!span) goto end;
-            span->items = NULL;
-            if (page_span_append(page, span)) goto end;
 
             s_read_matrix(tag_attributes_find(&tag, "ctm"), &span->ctm);
             s_read_matrix(tag_attributes_find(&tag, "trm"), &span->trm);
@@ -1860,13 +1874,12 @@ static int spans_to_docx_content(const char* path, char** content)
                         }
                         fprintf(stderr, "\n");
                     }
-                    span_t* span2 = malloc(sizeof(*span));
+                    span_t* span2 = page_span_append(page);
                     if (!span2) goto end;
-                    span2->items = NULL;
-                    page_span_append(page, span2);
                     *span2 = *span;
                     span2->items_num = span->items_num - i;
                     span2->items = malloc(sizeof(span_item_t) * span2->items_num);
+                    if (!span2->items) goto end;
                     span2->items[0] = *span_item;
                     pos.x = span_item->x;
                     pos.y = span_item->y;
