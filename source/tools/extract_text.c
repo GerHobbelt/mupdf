@@ -267,20 +267,27 @@ static FILE* pparse_init(const char* path)
     return in;
 }
 
-/* Returns 0 with *out containing next tag. Or non-zero if error or EOF. */
+/* Returns 0 with *out containing next tag; or -1 with errno set if error; or
++1 if EOF. */
 static int pparse_next(FILE* in, tag_t* out)
 {
+    int ret = -1;
+
     tag_init(out);
     char c;
 
-    if (!in)    return 1;
+    assert(in);
 
     /* Read tag name. */
-    for(;;) {
+    int i = 0;
+    for( i=0;; ++i) {
         c = getc(in);
-        if (c == EOF) return 1;
+        if (c == EOF) {
+            if (i == 0 && feof(in)) ret = +1;   /* legimate EOF. */
+            goto end;
+        }
         if (c == '>' || c == ' ')  break;
-        str_catc(&out->name, c);
+        if (str_catc(&out->name, c)) goto end;
     }
     if (c == ' ') {
 
@@ -291,8 +298,9 @@ static int pparse_next(FILE* in, tag_t* out)
             char* attribute_name = NULL;
             for(;;) {
                 c = getc(in);
+                if (c == EOF) goto end;
                 if (c == '=' || c == '>' || c == ' ') break;
-                str_catc(&attribute_name, c);
+                if (str_catc(&attribute_name, c)) goto end;
             }
             if (c == '>') break;
 
@@ -314,6 +322,7 @@ static int pparse_next(FILE* in, tag_t* out)
                     else if (c == '\\') {
                         // Escape next character.
                         c = getc(in);
+                        if (c == EOF) goto end;
                     }
                     str_catc(&attribute_value, c);
                 }
@@ -342,7 +351,7 @@ static int pparse_next(FILE* in, tag_t* out)
     for(;;) {
         c = getc(in);
         if (c == '<' || feof(in)) break;
-        str_catc(&out->text, c);
+        if (str_catc(&out->text, c)) goto end;
     }
 
     if (0) {
@@ -354,7 +363,14 @@ static int pparse_next(FILE* in, tag_t* out)
         putc('\n', stderr);
     }
 
-    return 0;
+    ret = 0;
+
+    end:
+
+    if (ret) {
+        tag_free(out);
+    }
+    return ret;
 }
 
 static int s_read_matrix(const char* text, fz_matrix* matrix)
@@ -1428,9 +1444,12 @@ On entry:
     line_t.
 
 On exit:
-    *o_paras points to array of *o_paras_num para_t*'s, each pointing to a
-    para_t. In the array, para_t's with same angle are sorted.
+    On sucess, returns zero with *o_paras points to array of *o_paras_num
+    para_t*'s, each pointing to a para_t. In the array, para_t's with same
+    angle are sorted.
 
+    On failure, returns -1 with errno set. *o_paras and *o_paras_num are
+    undefined.
 */
 static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_paras_num)
 {
@@ -1442,6 +1461,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
     if (!paras) goto end;
 
     int a;
+    /* Ensure we can clean up after error. */
     for (a=0; a<paras_num; ++a) {
         paras[a] = NULL;
     }
@@ -1600,7 +1620,7 @@ typedef struct
 static int page_span_append(page_t* page, span_t* span)
 {
     span_t** s = realloc(page->spans, sizeof(*s) * (page->spans_num + 1));
-    assert(s);
+    if (!s) return -1;
     page->spans = s;
     page->spans[page->spans_num] = span;
     page->spans_num += 1;
@@ -1611,15 +1631,22 @@ static int page_span_append(page_t* page, span_t* span)
 *content points to zero-terminated content, allocated by realloc(). */
 static int spans_to_docx_content(const char* path, char** content)
 {
+    int ret = -1;
+
     *content = NULL;
-    FILE* in = pparse_init(path);
-    assert(in);
+    FILE* in = NULL;
+    page_t**    pages = NULL;
+    int         pages_num = 0;
+
+    in = pparse_init(path);
+    if (!in) {
+        fprintf(stderr, "Failed to open: %s\n", path);
+        goto end;
+    }
+
     int e;
     tag_t   tag;
     tag_init(&tag);
-
-    page_t**    pages = NULL;
-    int         pages_num = 0;
 
     /* Data read from <path> is expected to be XML looking like:
 
@@ -1936,8 +1963,44 @@ static int spans_to_docx_content(const char* path, char** content)
             docx_paragraph_finish(content);
         }
     }
+    ret = 0;
 
-    return 0;
+    end:
+
+    if (in) fclose(in);
+
+    if (ret) {
+        int page_i;
+        for (page_i=0; page_i<pages_num; ++page_i) {
+            page_t* page = pages[page_i];
+            if (page) {
+                int para_i;
+                for (para_i=0; para_i<page->paras_num; ++para_i) {
+                    para_t* para = page->paras[para_i];
+                    if (para) {
+                        int l;
+                        for (l=0; l<para->lines_num; ++l) {
+                            line_t* line = para->lines[l];
+                            if (line) {
+                                int s;
+                                for (s=0; s<line->spans_num; ++s) {
+                                    span_t* span = line->spans[s];
+                                    free(span->items);
+                                }
+                                free(line->spans);
+                            }
+                            free(line);
+                        }
+                    }
+                    free(para);
+                }
+            }
+            free(page);
+        }
+        free(pages);
+    }
+
+    return ret;
 }
 
 
