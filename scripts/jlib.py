@@ -772,6 +772,10 @@ def make_out_callable( out):
         def flush( self):
             pass
     ret = Ret()
+    if out == log:
+        # A hack to avoid expanding '{...}' in text, if caller
+        # does: jlib.system(..., out=jlib.log, ...).
+        out = lambda text: log(text, nv=False)
     if out is None:
         ret.write = lambda text: None
     elif isinstance( out, int):
