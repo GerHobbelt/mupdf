@@ -867,9 +867,11 @@ static int create_docx(const char* content, const char* path_out, const char* pa
     }
 
     if (0) fprintf(stderr, "Unzipping template document '%s' to tempdir: %s\n", path_template, path_tempdir);
-    if (systemf("unzip -q -d %s %s", path_tempdir, path_template)) {
+    e = systemf("unzip -q -d %s %s", path_tempdir, path_template);
+    if (e) {
         fprintf(stderr, "%s:%i: Failed to unzip %s into %s\n",
                 __FILE__, __LINE__, path_template, path_tempdir);
+        if (e > 0) errno = EIO;
         goto end;
     }
 
@@ -884,7 +886,7 @@ static int create_docx(const char* content, const char* path_out, const char* pa
     }
     original = read_all(f);
     if (!original) goto end;
-    if (fclose(f) < 0) goto end;
+    if (fclose(f)) goto end;
     f = NULL;
 
     const char* original_marker = "<w:body>";
@@ -985,15 +987,16 @@ typedef struct span_t
 } span_t;
 
 /* Appends new span_item_t containing <c> with all other fields zeroed. */
-static void span_append_c(span_t* span, int c)
+static int span_append_c(span_t* span, int c)
 {
     span_item_t* items = realloc(span->items, sizeof(*items) * (span->items_num + 1));
-    assert(items);
+    if (!items) return -1;
     span->items = items;
     span_item_t* item = &span->items[span->items_num];
     span->items_num += 1;
     span_item_init(item);
     item->ucs = c;
+    return 0;
 }
 
 static double spans_adv(span_t* a_span, span_item_t* a, span_item_t* b)
@@ -1048,16 +1051,6 @@ static double span_angle(span_t* span)
     }
 }
 
-double span_adv_total(span_t* span)
-{
-    double dx = span_item_last(span)->x - span_item_first(span)->x;
-    double dy = span_item_last(span)->y - span_item_first(span)->y;
-    /* We add on the advance of the last item; this avoids us returning zero if
-    there's only one item. */
-    double adv = span_item_last(span)->adv * fz_matrix_expansion(span->trm);
-    return sqrt(dx*dx + dy*dy) + adv;
-}
-
 /* List of spans that are aligned on same line. */
 typedef struct
 {
@@ -1099,24 +1092,6 @@ static double line_angle(line_t* line)
     return span_angle(line->spans[0]);
 }
 
-/* Returns 1 if lines have same wmode and are at the same angle, else 0. */
-static int lines_are_compatible(line_t* a, line_t* b, double angle_a)
-{
-    if (a == b) return 0;
-    if (!a->spans || !b->spans) return 0;
-    if (line_span_first(a)->wmode != line_span_first(b)->wmode)   return 0;
-    if (memcmp(
-            &line_span_first(a)->ctm,
-            &line_span_first(b)->ctm,
-            sizeof(fz_matrix)
-            )) {
-        return 0;
-    }
-    double angle_b = span_angle(line_span_first(b));
-    if (angle_b != angle_a) return 0;
-    return 1;
-}
-
 /* A list of lines that are aligned and adjacent to each other so as to form a
 paragraph. */
 typedef struct
@@ -1137,6 +1112,36 @@ line_t* para_line_last(const para_t* para)
 {
     assert(para->lines_num);
     return para->lines[ para->lines_num-1];
+}
+
+
+/* Returns total width of span. */
+double span_adv_total(span_t* span)
+{
+    double dx = span_item_last(span)->x - span_item_first(span)->x;
+    double dy = span_item_last(span)->y - span_item_first(span)->y;
+    /* We add on the advance of the last item; this avoids us returning zero if
+    there's only one item. */
+    double adv = span_item_last(span)->adv * fz_matrix_expansion(span->trm);
+    return sqrt(dx*dx + dy*dy) + adv;
+}
+
+/* Returns 1 if lines have same wmode and are at the same angle, else 0. */
+static int lines_are_compatible(line_t* a, line_t* b, double angle_a)
+{
+    if (a == b) return 0;
+    if (!a->spans || !b->spans) return 0;
+    if (line_span_first(a)->wmode != line_span_first(b)->wmode)   return 0;
+    if (memcmp(
+            &line_span_first(a)->ctm,
+            &line_span_first(b)->ctm,
+            sizeof(fz_matrix)
+            )) {
+        return 0;
+    }
+    double angle_b = span_angle(line_span_first(b));
+    if (angle_b != angle_a) return 0;
+    return 1;
 }
 
 /* Creates representation of span_t's that consists of a list of line_t's.
@@ -1539,7 +1544,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
                 }
                 else {
                     /* Insert space before joining adjacent lines. */
-                    span_append_c(line_span_last(line_a), ' ');
+                    if (span_append_c(line_span_last(line_a), ' ')) goto end;
                 }
 
                 int a_lines_num_new = para_a->lines_num + nearest_para->lines_num;
