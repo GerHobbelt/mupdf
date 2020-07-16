@@ -1106,6 +1106,28 @@ static int lines_are_compatible(line_t* a, line_t* b, double angle_a)
     return 1;
 }
 
+/* A list of lines that are aligned and adjacent to each other so as to form a
+paragraph. */
+typedef struct
+{
+    line_t**    lines;
+    int         lines_num;
+} para_t;
+
+/* Returns first line in paragraph. */
+line_t* para_line_first(const para_t* para)
+{
+    assert(para->lines_num);
+    return para->lines[0];
+}
+
+/* Returns last line in paragraph. */
+line_t* para_line_last(const para_t* para)
+{
+    assert(para->lines_num);
+    return para->lines[ para->lines_num-1];
+}
+
 /* Creates representation of span_t's that consists of a list of line_t's.
 
 We only join spans that are at the same angle and are aligned.
@@ -1314,28 +1336,6 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
     return ret;
 }
 
-
-/* A list of lines that are aligned and adjacent to each other so as to form a
-paragraph. */
-typedef struct
-{
-    line_t**    lines;
-    int         lines_num;
-} para_t;
-
-/* Returns first line in paragraph. */
-line_t* para_line_first(const para_t* para)
-{
-    assert(para->lines_num);
-    return para->lines[0];
-}
-
-/* Returns last line in paragraph. */
-line_t* para_line_last(const para_t* para)
-{
-    assert(para->lines_num);
-    return para->lines[ para->lines_num-1];
-}
 
 /* Returns max font size of all span_t's in a line_t. */
 double line_font_size_max(line_t* line)
@@ -1609,6 +1609,16 @@ typedef struct
     int         paras_num;
 } page_t;
 
+static void page_init(page_t* page)
+{
+    page->spans = NULL;
+    page->spans_num = 0;
+    page->lines = NULL;
+    page->lines_num = 0;
+    page->paras = NULL;
+    page->paras_num = 0;
+}
+
 static void page_free(page_t* page)
 {
     if (!page) return;
@@ -1653,6 +1663,40 @@ static int page_span_append(page_t* page, span_t* span)
     return 0;
 }
 
+typedef struct {
+    page_t**    pages;
+    int         pages_num;
+} document_t;
+
+void document_init(document_t* document)
+{
+    document->pages = NULL;
+    document->pages_num = 0;
+}
+
+page_t* document_page_append(document_t* document)
+{
+    page_t** pages = realloc(document->pages, sizeof(page_t*) * (document->pages_num + 1));
+    if (!pages) return NULL;
+    document->pages = pages;
+    page_t* page = malloc(sizeof(page_t));
+    if (!page) return NULL;
+    page_init(page);
+    document->pages[document->pages_num] = page;
+    document->pages_num += 1;
+    return page;
+}
+
+void document_free(document_t* document)
+{
+    int p;
+    for (p=0; p<document->pages_num; ++p) {
+        page_t* page = document->pages[p];
+        page_free(page);
+    }
+    free(document->pages);
+}
+
 /* Reads from intermediate data and converts into docx content. On return
 *content points to zero-terminated content, allocated by realloc(). */
 static int spans_to_docx_content(const char* path, char** content)
@@ -1661,8 +1705,8 @@ static int spans_to_docx_content(const char* path, char** content)
 
     *content = NULL;
     FILE* in = NULL;
-    page_t**    pages = NULL;
-    int         pages_num = 0;
+    document_t  document;
+    document_init(&document);
 
     in = pparse_init(path);
     if (!in) {
@@ -1704,18 +1748,9 @@ static int spans_to_docx_content(const char* path, char** content)
         if (e) break;
 
         assert(!strcmp(tag.name, "page"));
-        if (0) fprintf(stderr, "loading spans for page %i...\n", pages_num);
-        page_t** p = realloc(pages, sizeof(*p) * (pages_num + 1));
-        if (!p) goto end;
-        pages = p;
-        pages[pages_num] = malloc(sizeof(page_t));
-        if (!pages[pages_num]) goto end;
-        page_t* page = pages[pages_num];
-        pages_num += 1;
-        page->spans = NULL;
-        page->spans_num = 0;
-        page->lines = NULL;
-        page->lines_num = 0;
+        if (0) fprintf(stderr, "loading spans for page %i...\n", document.pages_num);
+        page_t* page = document_page_append(&document);
+        if (!page) goto end;
 
         for(;;) {
             tag_reset(&tag);
@@ -1852,7 +1887,7 @@ static int spans_to_docx_content(const char* path, char** content)
             assert(!strcmp(tag.name, "/span"));
         }
 
-        if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", pages_num, page->spans_num);
+        if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document.pages_num, page->spans_num);
     }
     fclose(in);
     in = NULL;
@@ -1861,9 +1896,9 @@ static int spans_to_docx_content(const char* path, char** content)
     list of spans that are at the same angle and on the same line. A paragraph
     is a list of lines that are at the same angle and close together. */
     int p;
-    for (p=0; p<pages_num; ++p) {
+    for (p=0; p<document.pages_num; ++p) {
         if (0) fprintf(stderr, "==[page %i]:\n", p);
-        page_t* page = pages[p];
+        page_t* page = document.pages[p];
 
         if (make_lines(page->spans, page->spans_num, &page->lines, &page->lines_num)) goto end;
 
@@ -1872,8 +1907,8 @@ static int spans_to_docx_content(const char* path, char** content)
 
     /* Write paragraphs into <content>. */
     *content = NULL;
-    for (p=0; p<pages_num; ++p) {
-        page_t* page = pages[p];
+    for (p=0; p<document.pages_num; ++p) {
+        page_t* page = document.pages[p];
 
         const char* font_name = NULL;
         float       font_size = 0;
@@ -1999,14 +2034,7 @@ static int spans_to_docx_content(const char* path, char** content)
     if (in) fclose(in);
 
     /* Free everything. */
-    {
-        int page_i;
-        for (page_i=0; page_i<pages_num; ++page_i) {
-            page_t* page = pages[page_i];
-            page_free(page);
-        }
-        free(pages);
-    }
+    document_free(&document);
 
     return ret;
 }
