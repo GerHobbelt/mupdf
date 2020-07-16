@@ -414,8 +414,8 @@ def test(mupdf_shared_dir, so_build):
             f'{mupdf_root}/../Python2.pdf',
             ):
         in_pdf_rel = os.path.relpath(in_pdf)
-        with jlib.LogPrefixScope(f'{in_pdf_rel}: '):
-            for use_stext in 0, 1:
+        for use_stext in 0, 1:
+            with jlib.LogPrefixScope(f'{in_pdf_rel} use_stext={use_stext}: '):
                 extract(
                         extract_text_exe,
                         mupdf_shared_dir,
