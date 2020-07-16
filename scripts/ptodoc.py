@@ -386,11 +386,12 @@ def extract(extract_text_exe, mupdf_shared_dir, path_template, path_in, use_stex
 
 def test(mupdf_shared_dir, so_build):
 
-    with jlib.LogPrefixScope('building mupdf.so: '):
-        # Build mupdf.so and python wrapper.
-        #
-        command = f'./scripts/mupdfwrap.py -d build/shared-debug -b {so_build}'
-        jlib.system( command, out=log, verbose=1, prefix='    ')
+    if so_build:
+        with jlib.LogPrefixScope('building mupdf.so: '):
+            # Build mupdf.so and python wrapper.
+            #
+            command = f'./scripts/mupdfwrap.py -d build/shared-debug -b {so_build}'
+            jlib.system( command, out=log, verbose=1, prefix='    ')
         
     
     with jlib.LogPrefixScope('building extract_text.exe: '):
