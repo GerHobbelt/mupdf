@@ -986,7 +986,7 @@ typedef struct span_t
     int         chars_num;
 } span_t;
 
-/* Appends new char_t containing <c> with all other fields zeroed. */
+/* Appends new char_t with .ucs=c and all other fields zeroed. */
 static int span_append_c(span_t* span, int c)
 {
     char_t* items = realloc(span->chars, sizeof(*items) * (span->chars_num + 1));
@@ -997,16 +997,6 @@ static int span_append_c(span_t* span, int c)
     char_init(item);
     item->ucs = c;
     return 0;
-}
-
-static double spans_adv(span_t* a_span, char_t* a, char_t* b)
-{
-    double delta_x = b->x - a->x;
-    double delta_y = b->y - a->y;
-    double s = sqrt( delta_x*delta_x + delta_y*delta_y);
-    double a_size = a->adv * fz_matrix_expansion(a_span->trm);
-    s -= a_size;
-    return s;
 }
 
 static char_t* span_item_first(span_t* span)
@@ -1125,6 +1115,17 @@ double span_adv_total(span_t* span)
     there's only one item. */
     double adv = span_item_last(span)->adv * fz_matrix_expansion(span->trm);
     return sqrt(dx*dx + dy*dy) + adv;
+}
+
+/* Returns distance between end of <a> and beginning of <b>. */
+static double spans_adv(span_t* a_span, char_t* a, char_t* b)
+{
+    double delta_x = b->x - a->x;
+    double delta_y = b->y - a->y;
+    double s = sqrt( delta_x*delta_x + delta_y*delta_y);
+    double a_size = a->adv * fz_matrix_expansion(a_span->trm);
+    s -= a_size;
+    return s;
 }
 
 /* Returns 1 if lines have same wmode and are at the same angle, else 0. */
