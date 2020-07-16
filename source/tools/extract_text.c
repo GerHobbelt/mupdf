@@ -985,19 +985,6 @@ static void span_append_c(span_t* span, int c)
     span->items_num += 1;
 }
 
-static span_t** g_spans = NULL;
-static int      g_spans_num = 0;
-
-static int spans_append(span_t* span)
-{
-    span_t** spans = realloc(g_spans, sizeof(*spans) * (g_spans_num+1));
-    if (!spans) return 1;
-    g_spans = spans;
-    g_spans[g_spans_num] = span;
-    g_spans_num += 1;
-    return 0;
-}
-
 static double spans_adv(span_t* a_span, span_item_t* a, span_item_t* b)
 {
     double delta_x = b->x - a->x;
