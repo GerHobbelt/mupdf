@@ -783,7 +783,19 @@ page_to_docx_content(fz_context* ctx, fz_stext_page *page, char** content)
 
 
 
-
+static int systemf(const char* format, ...)
+{
+    char* command;
+    va_list va;
+    va_start(va, format);
+    int e = vasprintf(&command, format, va);
+    va_end(va);
+    if (e < 0) return e;
+    fprintf(stderr, "running: %s\n", command);
+    e = system(command);
+    free(command);
+    return e;
+}
 
 /*
 Creates a .docx file based on a template, by inserting <content> into
@@ -792,130 +804,128 @@ word/document.xml.
 content:
     E.g. from process().
 path_out:
-    Name of .docx file to create.
+    Name of .docx file to create. Must not contain single-quote character.
 path_template:
     Name of .docx file to use as a template.
 preserve_dir:
     If true, we don't delete the temporary directory <path_out>.dir containing
     unzipped .docx content.
+
+Returns 0 on success or -1 with errno set.
+
+We use the 'zip' and 'unzip' commands.
 */
 static int create_docx(const char* content, const char* path_out, const char* path_template, int preserve_dir)
 {
-    const char* error_text = NULL;
-    if (!path_out)  error_text = "output .docx path not specified";
-    else if (!path_template)    error_text = ".docx template path not specified";
-    if (error_text) {
-        fprintf(stderr, "%s:%i: error: %s\n", __FILE__, __LINE__, error_text);
-        return 1;
-    }
+    assert(content);
+    assert(path_out);
+    assert(path_template);
+
+    /* This gets set to zero only if everything succeeds. */
+    int ret = -1;
     
-    int e;
     char*   path_tempdir = NULL;
-    if (!path_out) {
-        fprintf(stderr, ".docx output file not specified.\n");
-        return 1;
+    char*   word_document_xml = NULL;
+    char*   original = NULL;
+    FILE*   f = NULL;
+
+    int e;
+
+    if (strchr(path_out, '\'')) {
+        fprintf(stderr, "path_out contains single-quote character: %s\n", path_out);
+        errno = EINVAL;
+        goto end;
     }
-    str_cat(&path_tempdir, path_out);
-    str_cat(&path_tempdir, ".dir");
+
+    if (asprintf(&path_tempdir, "%s.dir", path_out) < 0) goto end;
+    if (systemf("rm -r '%s' 2>/dev/null", path_tempdir) < 0) goto end;
     
-    char*   command = NULL;
-    str_cat(&command, "rm -r ");
-    str_cat(&command, path_tempdir);
-    str_cat(&command, " 2>/dev/null");
-    (void) system(command);
-    
-    e = mkdir(path_tempdir, 0777);
-    if (e) {
-        fprintf(stderr, "%s:%i: error: could not create tempdir: %s\n",
+    if (mkdir(path_tempdir, 0777)) {
+        fprintf(stderr, "%s:%i: Failed to create directory: %s\n",
                 __FILE__, __LINE__, path_tempdir);
-        return 1;
+        goto end;
     }
-    
+
     if (0) fprintf(stderr, "Unzipping template document '%s' to tempdir: %s\n", path_template, path_tempdir);
-    command[0] = 0;
-    str_cat(&command, "unzip -q -d ");
-    str_cat(&command, path_tempdir);
-    str_cat(&command, " ");
-    if (!path_template) {
-        fprintf(stderr, "%s:%i: error: path_template is NULL.\n", __FILE__, __LINE__);
-        return 1;
-    }
-    str_cat(&command, path_template);
-    e = system(command);
-    if (e) {
-        fprintf(stderr, "%s:%i: error: command failed: %s\n", __FILE__, __LINE__, command);
-        return 1;
+    if (systemf("unzip -q -d %s %s", path_tempdir, path_template)) {
+        fprintf(stderr, "%s:%i: Failed to unzip %s into %s\n",
+                __FILE__, __LINE__, path_template, path_tempdir);
+        goto end;
     }
     
-    char* word_document_xml = NULL;
-    str_cat(&word_document_xml, path_tempdir);
-    str_cat(&word_document_xml, "/word/document.xml");
+    if (asprintf(&word_document_xml, "%s/word/document.xml", path_tempdir) < 0) goto end;
     
     if (0) fprintf(stderr, "Reading tempdir's word/document.xml object\n");
-    FILE* in = fopen(word_document_xml, "r");
-    if (!in) {
-        fprintf(stderr, "%s:%i: error: could not open docx object: %s\n",
+    f = fopen(word_document_xml, "r");
+    if (!f) {
+        fprintf(stderr, "%s:%i: Failed to open docx object: %s\n",
                 __FILE__, __LINE__, word_document_xml);
-        return 1;
+        goto end;
     }
-    char* original = read_all(in);
-    fclose(in);
+    original = read_all(f);
+    if (!original) goto end;
+    if (fclose(f) < 0) goto end;
+    f = NULL;
     
     const char* original_marker = "<w:body>";
     const char* original_pos = strstr(original, original_marker);
-    if (!original_marker) {
-        fprintf(stderr, "%s:%i: error: could not find '%s' in docx object: %s.\n",
+    if (!original_pos) {
+        fprintf(stderr, "%s:%i: error: could not find '%s' in docx object: %s\n",
                 __FILE__, __LINE__, original_marker, word_document_xml);
-        return 1;
+        errno = ESRCH;
+        goto end;
     }
-    assert(original_pos);
     original_pos += strlen(original_marker);
     
     if (0) fprintf(stderr, "Writing tempdir's word/document.xml file\n");
-    FILE* out = fopen(word_document_xml, "w");
-    if (!out) {
-        fprintf(stderr, "%s:%i: error: could not open .docx for writing: %s",
+    f = fopen(word_document_xml, "w");
+    if (!f) {
+        fprintf(stderr, "%s:%i: error: Failed to open .docx for writing: %s",
                 __FILE__, __LINE__, word_document_xml);
-        return 1;
+        goto end;
     }
-    ssize_t n;
-    n = fwrite(original, original_pos - original, 1 /*nmemb*/, out);
-    assert(n == 1);
-    n = fwrite(content, strlen(content), 1 /*nmemb*/, out);
-    assert(n == 1);
-    n = fwrite(original_pos, strlen(original_pos), 1 /*nmemb*/, out);
-    assert(n == 1);
-    fclose(out);
-    
-    const char* path_out_leaf = strrchr(path_out, '/');
-    if (!path_out_leaf) path_out_leaf = path_out;
-    command[0] = 0;
-    str_cat(&command, "cd ");
-    str_cat(&command, path_tempdir);
-    str_cat(&command, " && zip -q -r ../");
-    str_cat(&command, path_out_leaf);
-    str_cat(&command, " .");
+    if (0
+            || fwrite(original, original_pos - original, 1 /*nmemb*/, f) < 0
+            || fwrite(content, strlen(content), 1 /*nmemb*/, f) < 0
+            || fwrite(original_pos, strlen(original_pos), 1 /*nmemb*/, f) < 0
+            || fclose(f) < 0
+            ) {
+        fprintf(stderr, "%s:%i: error: Failed to write to: %s",
+                __FILE__, __LINE__, word_document_xml);
+        goto end;
+    }
+    f = NULL;
     
     if (0) fprintf(stderr, "Zipping tempdir to create create %s\n", path_out);
-    //std::cerr << "command: " << command << "\n";
-    e = system(command);
+    const char* path_out_leaf = strrchr(path_out, '/');
+    if (!path_out_leaf) path_out_leaf = path_out;
+    e = systemf("cd %s && zip -q -r ../%s .", path_tempdir, path_out_leaf);
     if (e) {
-        fprintf(stderr, "%s:%i: error: zip command failed to create .docx output file: %s",
-                __FILE__, __LINE__, command);
+        fprintf(stderr, "%s:%i: error: Zip command failed to convert '%s' directory into output file: %s",
+                __FILE__, __LINE__, path_tempdir, path_out);
+        if (e > 0) errno = EIO;
+        goto end;
     }
-    
+
     if (!preserve_dir) {
-        fprintf(stderr, "Deleting tempdir: %s\n", path_tempdir);
-        command[0] = 0;
-        str_cat(&command, "rm -r '");
-        str_cat(&command, path_tempdir);
-        str_cat(&command, "'");
-        fprintf(stderr, "not running: %s\n", command);
-        if (0) e = system( command);
-        if (e)  return e;
+        e = systemf("rm -r '%s'", path_tempdir);
+        if (e) {
+            fprintf(stderr, "%s:%i: error: Failed to delete tempdir: %s",
+                    __FILE__, __LINE__, path_tempdir);
+            if (e > 0) errno = EIO;
+            goto end;
+        }
     }
+
+    ret = 0;
+
+    end:
+    if (path_tempdir)   free(path_tempdir);
+    if (word_document_xml)  free(word_document_xml);
+    if (original)   free(original);
+    if (f)  fclose(f);
     
-    return 0;
+    return ret;
 }
 
 
