@@ -1922,6 +1922,7 @@ int main(int argc, char** argv)
     const char* docx_out_path       = NULL;
     const char* input_path          = NULL;
     const char* docx_template_path  = NULL;
+    const char* content_path        = NULL;
     int preserve_dir = 0;
     int use_stext = 0;
     
@@ -1939,6 +1940,10 @@ int main(int argc, char** argv)
                     "    We also requires a template .docx file\n"
                     "\n"
                     "Args:\n"
+                    "    -c <path>\n"
+                    "        If specified, we write raw .docx content to <path>; this is the\n"
+                    "        text that we embed inside the template word/document.xml file\n"
+                    "        when generating the .docx.\n"
                     "    -i <input-path>\n"
                     "        Name of XML file containing low-level text spans.\n"
                     "    -o <docx-path>\n"
@@ -1950,6 +1955,9 @@ int main(int argc, char** argv)
                     "    -t <docx-template>\n"
                     "        Name of docx file to use as template.\n"
                     );
+        }
+        else if (!strcmp(arg, "-c")) {
+            content_path = argv[++i];
         }
         else if (!strcmp(arg, "-i")) {
             input_path = argv[++i];
@@ -2000,6 +2008,13 @@ int main(int argc, char** argv)
         spans_to_docx_content(input_path, &content);
     }
 
+    if (content_path) {
+        fprintf(stderr, "Writing content to: %s\n", content_path);
+        FILE* f = fopen(content_path, "w");
+        assert(f);
+        fwrite(content, strlen(content), 1 /*nmemb*/, f);
+        fclose(f);
+    }
     fprintf(stderr, "Creating .docx file: %s\n", docx_out_path);
     e = create_docx(content, docx_out_path, docx_template_path, preserve_dir);
 
