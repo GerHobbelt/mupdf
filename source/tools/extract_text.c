@@ -1680,10 +1680,10 @@ static int spans_to_docx_content(const char* path, char** content)
         assert(!strcmp(tag.name, "page"));
         if (0) fprintf(stderr, "loading spans for page %i...\n", pages_num);
         page_t** p = realloc(pages, sizeof(*p) * (pages_num + 1));
-        assert(p);
+        if (!p) goto end;
         pages = p;
         pages[pages_num] = malloc(sizeof(page_t));
-        assert(pages[pages_num]);
+        if (!pages[pages_num]) goto end;
         page_t* page = pages[pages_num];
         page->spans = NULL;
         page->spans_num = 0;
@@ -1700,8 +1700,9 @@ static int spans_to_docx_content(const char* path, char** content)
             assert(!strcmp(tag.name, "span"));
 
             span_t* span = malloc(sizeof(*span));
-            assert(span);
-            page_span_append(page, span);
+            if (!span) goto end;
+            span->items = NULL;
+            if (page_span_append(page, span)) goto end;
 
             s_read_matrix(tag_attributes_find(&tag, "ctm"), &span->ctm);
             s_read_matrix(tag_attributes_find(&tag, "trm"), &span->trm);
@@ -1715,6 +1716,7 @@ static int spans_to_docx_content(const char* path, char** content)
             span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
             span->items_num = atoi(tag_attributes_find(&tag, "len"));
             span->items = malloc(sizeof(span_item_t) * span->items_num);
+            if (!span->items) goto end;
 
             float font_size = fz_matrix_expansion(span->trm);
 
@@ -1796,7 +1798,8 @@ static int spans_to_docx_content(const char* path, char** content)
                         fprintf(stderr, "\n");
                     }
                     span_t* span2 = malloc(sizeof(*span));
-                    assert(span2);
+                    if (!span2) goto end;
+                    span2->items = NULL;
                     page_span_append(page, span2);
                     *span2 = *span;
                     span2->items_num = span->items_num - i;
@@ -1817,14 +1820,14 @@ static int spans_to_docx_content(const char* path, char** content)
             }
 
             tag_reset(&tag);
-            e = pparse_next(in, &tag);
-            assert(!e);
+            if (pparse_next(in, &tag)) goto end;
             assert(!strcmp(tag.name, "/span"));
         }
 
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", pages_num, page->spans_num);
     }
     fclose(in);
+    in = NULL;
 
     /* Now for each page we join spans into lines and paragraphs. A line is a
     list of spans that are at the same angle and on the same line. A paragraph
@@ -1836,9 +1839,9 @@ static int spans_to_docx_content(const char* path, char** content)
 
         line_t**    lines;
         int         lines_num;
-        make_lines(page->spans, page->spans_num, &lines, &lines_num);
+        if (make_lines(page->spans, page->spans_num, &lines, &lines_num)) goto end;
 
-        make_paras(lines, lines_num, &page->paras, &page->paras_num);
+        if (make_paras(lines, lines_num, &page->paras, &page->paras_num)) goto end;
     }
 
     /* Write paragraphs into <content>. */
@@ -1969,7 +1972,8 @@ static int spans_to_docx_content(const char* path, char** content)
 
     if (in) fclose(in);
 
-    if (ret) {
+    /* Free everything. */
+    {
         int page_i;
         for (page_i=0; page_i<pages_num; ++page_i) {
             page_t* page = pages[page_i];
@@ -2116,7 +2120,11 @@ int main(int argc, char** argv)
         page_to_docx_content(ctx, dev->page, &content);
     }
     else {
-        spans_to_docx_content(input_path, &content);
+        errno = 0;
+        if (spans_to_docx_content(input_path, &content)) {
+            fprintf(stderr, "Failed to create docx content errno=%i: %s\n", errno, strerror(errno));
+            return 1;
+        }
     }
 
     if (content_path) {
