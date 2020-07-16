@@ -40,7 +40,8 @@ import xml.etree.ElementTree
 import jlib
 log = jlib.log
 
-jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
+if 0:
+    jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
 
 mupdf_root = os.path.abspath( f'{__file__}/../../')
 sys.path.append( os.path.abspath( f'{mupdf_root}/../python-docx/build/lib/'))
@@ -348,44 +349,51 @@ def extract(extract_text_exe, mupdf_shared_dir, path_template, path_in, use_stex
     Extracts text, and compares .docx's word/document.xml if reference file
     exists.
     '''
-    print(f'Doing text extraction with {path_in}, use_stext={use_stext}')
+    log(f'Doing text extraction with {path_in}, use_stext={use_stext}')
     path_out = f'{path_in}-stext.docx' if use_stext else f'{path_in}.docx'
+    path_content = f'{path_out}.content.xml'
     path_intermediate = f'{path_in}.intermediate.xml'
 
     # Run mutool.py to get intermediate xml.
     command = f'LD_LIBRARY_PATH={mupdf_shared_dir} PYTHONPATH={mupdf_shared_dir} scripts/mutool.py draw -F raw -o {path_intermediate} {path_in}'
-    jlib.system( command, verbose=1, prefix='    ')
+    jlib.system( command, out=log, verbose=1, prefix='    ')
 
     command = (
                 f'./{extract_text_exe}'
                 f' -i {path_intermediate}'
                 f' -t {path_template}'
                 f' -p 1'    # preserve .docx temporary directory.
+                f' -c {path_content}'
                 f' -s {use_stext}'
                 f' -o {path_out}'
                 )
-    jlib.system( command, verbose=1, prefix='    ')
+    jlib.system( command, out=log, verbose=1, prefix='    ')
 
-    path_ref = f'{path_out}.ref'
-    content = f'{path_out}.dir/word/document.xml'
-    if os.path.exists(path_ref):
-        jlib.system(f'diff -u {path_ref} {content}', verbose=1, prefix='    ')
+    path_content = f'{path_out}.content.xml'
+    path_content_ref = f'{path_out}.content.ref.xml'
+    if os.path.exists(path_content_ref):
+        jlib.system(f'diff -u {path_content_ref} {path_content}', out=log, verbose=1, prefix='    ')
     else:
-        print(f'*** No reference document {path_ref} to compare with generated {content}')
-    print('')
+        log(f'*** No reference content {path_content_ref} to compare with generated {path_content}')
+
+    path_document_xml = f'{path_out}.dir/word/document.xml'
+    path_document_xml_ref = f'{path_out}.word.document.ref.xml'
+    if os.path.exists(path_document_xml_ref):
+        jlib.system(f'diff -u {path_document_xml_ref} {path_document_xml}', out=log, verbose=1, prefix='    ')
+    else:
+        log(f'*** No reference document {path_document_xml_ref} to compare with generated {path_document_xml}')
 
 
 def test(mupdf_shared_dir, so_build):
 
-    if 1:
+    with jlib.LogPrefixScope('building mupdf.so: '):
         # Build mupdf.so and python wrapper.
         #
         command = f'./scripts/mupdfwrap.py -d build/shared-debug -b {so_build}'
-        jlib.system( command, verbose=1, prefix='    ')
-        print('')
+        jlib.system( command, out=log, verbose=1, prefix='    ')
         
     
-    if 1:
+    with jlib.LogPrefixScope('building extract_text.exe: '):
         # Build extract_text.exe.
         #
         extract_text_c = 'source/tools/extract_text.c'
@@ -394,27 +402,28 @@ def test(mupdf_shared_dir, so_build):
                 extract_text_c,
                 extract_text_exe,
                 f'cc -g -o {extract_text_exe} {extract_text_c} -pthread -I include -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function build/shared-debug/libmupdf.so -lm',
+                out=log,
                 )
-        print('')
 
     # Extract text from various input files.
     #
-    path_reference = 'Untitled.docx'
-    assert os.path.isfile(path_reference), '*** We require an empty .docx document template called %s' % path_reference
+    path_template = '../Untitled1.docx'
+    assert os.path.isfile(path_template), '*** We require an empty .docx document template called %s' % path_template
     for in_pdf in (
             f'{mupdf_root}/../ghostpdl/zlib/zlib.3.pdf',
-            f'../Python2.pdf',
+            f'{mupdf_root}/../Python2.pdf',
             ):
-        
-        for use_stext in 0, 1:
-            extract(
-                    extract_text_exe,
-                    mupdf_shared_dir,
-                    'Untitled.docx',
-                    in_pdf,
-                    use_stext=use_stext,
-                    )
-        
+        in_pdf_rel = os.path.relpath(in_pdf)
+        with jlib.LogPrefixScope(f'{in_pdf_rel}: '):
+            for use_stext in 0, 1:
+                extract(
+                        extract_text_exe,
+                        mupdf_shared_dir,
+                        path_template,
+                        in_pdf_rel,
+                        use_stext=use_stext,
+                        )
+
     log( 'finished')
 
 
