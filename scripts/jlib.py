@@ -160,9 +160,9 @@ class LogPrefixScope:
     Can be used to insert scoped prefix to log output.
     '''
     def __init__( self, prefix):
-        g_log_prefixe_scopes.items.append( prefix)
+        self.prefix = prefix
     def __enter__( self):
-        pass
+        g_log_prefixe_scopes.items.append( self.prefix)
     def __exit__( self, exc_type, exc_value, traceback):
         global g_log_prefix
         g_log_prefixe_scopes.items.pop()
@@ -216,6 +216,7 @@ def log_text( text=None, caller=1, nv=True):
     if isinstance( caller, int):
         caller += 1
     prefix = ''
+    prefix += g_log_prefixe_scopes()
     for p in g_log_prefixes:
         if callable( p):
             if isinstance( p, LogPrefixFileLine):
@@ -984,14 +985,12 @@ def system(
         else:
             verbose = out
         verbose = make_out_callable( verbose)
-
-    if verbose:
-        print( 'running: %s' % command, file=verbose)
+        verbose.write('running: %s\n' % command)
 
     if prefix:
         if out_raw:
             raise Exception( 'No out stream available for prefix')
-        out = StreamPrefix( out, prefix)
+        out = StreamPrefix( make_out_callable( out), prefix)
 
     if rusage:
         command2 = ''
@@ -1014,7 +1013,7 @@ def system(
         e = system_raw( command, out, shell, encoding, errors, buffer_len=buffer_len)
 
         if verbose:
-            print( '[returned e=%s]' % e, file=verbose)
+            verbose.write('[returned e=%s]\n' % e)
 
         if raise_errors:
             if e:
