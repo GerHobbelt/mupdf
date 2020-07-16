@@ -1613,9 +1613,48 @@ typedef struct
     span_t**    spans;
     int         spans_num;
 
+    /*  lines->... eventually points to items in .spans. */
+    line_t**    lines;
+    int         lines_num;
+
+    /*  pras->... eventually points to items in .lines. */
     para_t**    paras;
     int         paras_num;
 } page_t;
+
+static void page_free(page_t* page)
+{
+    if (!page) return;
+
+    int s;
+    for (s=0; s<page->spans_num; ++s) {
+        span_t* span = page->spans[s];
+        if (span) {
+            free(span->items);
+        }
+        free(span);
+    }
+    free(page->spans);
+
+    int l;
+    for (l=0; l<page->lines_num; ++l) {
+        line_t* line = page->lines[l];
+        free(line->spans);
+        /* We don't free line->spans->items[] because already freed via
+        page->spans. */
+    }
+    free(page->lines);
+
+    int p;
+    for (p=0; p<page->paras_num; ++p) {
+        para_t* para = page->paras[p];
+        if (para) free(para->lines);
+        free(para);
+    }
+    free(page->paras);
+
+    free(page);
+}
 
 static int page_span_append(page_t* page, span_t* span)
 {
@@ -1685,9 +1724,11 @@ static int spans_to_docx_content(const char* path, char** content)
         pages[pages_num] = malloc(sizeof(page_t));
         if (!pages[pages_num]) goto end;
         page_t* page = pages[pages_num];
+        pages_num += 1;
         page->spans = NULL;
         page->spans_num = 0;
-        pages_num += 1;
+        page->lines = NULL;
+        page->lines_num = 0;
 
         for(;;) {
             tag_reset(&tag);
@@ -1837,11 +1878,9 @@ static int spans_to_docx_content(const char* path, char** content)
         if (0) fprintf(stderr, "==[page %i]:\n", p);
         page_t* page = pages[p];
 
-        line_t**    lines;
-        int         lines_num;
-        if (make_lines(page->spans, page->spans_num, &lines, &lines_num)) goto end;
+        if (make_lines(page->spans, page->spans_num, &page->lines, &page->lines_num)) goto end;
 
-        if (make_paras(lines, lines_num, &page->paras, &page->paras_num)) goto end;
+        if (make_paras(page->lines, page->lines_num, &page->paras, &page->paras_num)) goto end;
     }
 
     /* Write paragraphs into <content>. */
@@ -1977,29 +2016,7 @@ static int spans_to_docx_content(const char* path, char** content)
         int page_i;
         for (page_i=0; page_i<pages_num; ++page_i) {
             page_t* page = pages[page_i];
-            if (page) {
-                int para_i;
-                for (para_i=0; para_i<page->paras_num; ++para_i) {
-                    para_t* para = page->paras[para_i];
-                    if (para) {
-                        int l;
-                        for (l=0; l<para->lines_num; ++l) {
-                            line_t* line = para->lines[l];
-                            if (line) {
-                                int s;
-                                for (s=0; s<line->spans_num; ++s) {
-                                    span_t* span = line->spans[s];
-                                    free(span->items);
-                                }
-                                free(line->spans);
-                            }
-                            free(line);
-                        }
-                    }
-                    free(para);
-                }
-            }
-            free(page);
+            page_free(page);
         }
         free(pages);
     }
