@@ -962,9 +962,9 @@ typedef struct
     int     gid;
     int     ucs;
     float   adv;
-} span_item_t;
+} char_t;
 
-void span_item_init(span_item_t* item)
+void char_init(char_t* item)
 {
     item->x = 0;
     item->y = 0;
@@ -982,24 +982,24 @@ typedef struct span_t
     int         font_bold;
     int         font_italic;
     int         wmode;
-    int             items_num;
-    span_item_t*    items;
+    char_t*     chars;
+    int         chars_num;
 } span_t;
 
-/* Appends new span_item_t containing <c> with all other fields zeroed. */
+/* Appends new char_t containing <c> with all other fields zeroed. */
 static int span_append_c(span_t* span, int c)
 {
-    span_item_t* items = realloc(span->items, sizeof(*items) * (span->items_num + 1));
+    char_t* items = realloc(span->chars, sizeof(*items) * (span->chars_num + 1));
     if (!items) return -1;
-    span->items = items;
-    span_item_t* item = &span->items[span->items_num];
-    span->items_num += 1;
-    span_item_init(item);
+    span->chars = items;
+    char_t* item = &span->chars[span->chars_num];
+    span->chars_num += 1;
+    char_init(item);
     item->ucs = c;
     return 0;
 }
 
-static double spans_adv(span_t* a_span, span_item_t* a, span_item_t* b)
+static double spans_adv(span_t* a_span, char_t* a, char_t* b)
 {
     double delta_x = b->x - a->x;
     double delta_y = b->y - a->y;
@@ -1009,16 +1009,16 @@ static double spans_adv(span_t* a_span, span_item_t* a, span_item_t* b)
     return s;
 }
 
-static span_item_t* span_item_first(span_t* span)
+static char_t* span_item_first(span_t* span)
 {
-    assert(span->items_num);
-    return &span->items[0];
+    assert(span->chars_num);
+    return &span->chars[0];
 }
 
-static span_item_t* span_item_last(span_t* span)
+static char_t* span_item_last(span_t* span)
 {
-    assert(span->items_num);
-    return &span->items[span->items_num-1];
+    assert(span->chars_num);
+    return &span->chars[span->chars_num-1];
 }
 
 static void span_dump(span_t* span, FILE* out)
@@ -1030,26 +1030,12 @@ static void span_dump(span_t* span, FILE* out)
             span_item_last(span)->y
             );
     int i;
-    for(i=0; i<span->items_num; ++i) {
-        fprintf(out, "%c", span->items[i].ucs);
+    for(i=0; i<span->chars_num; ++i) {
+        fprintf(out, "%c", span->chars[i].ucs);
     }
     fprintf(out, "'");
 }
 
-
-static double span_angle(span_t* span)
-{
-    /* Not sure whether this is right. Inclined text seems to be done by
-    setting the ctm matrix, so not really sure what trm matrix does. This code
-    assumes that it also inclines text, but maybe it only rotates individual
-    glyphs? */
-    if (span->wmode == 0) {
-        return atan2(span->trm.b, span->trm.a);
-    }
-    else {
-        return atan2(span->trm.d, span->trm.c);
-    }
-}
 
 /* List of spans that are aligned on same line. */
 typedef struct
@@ -1071,25 +1057,17 @@ span_t* line_span_first(line_t* line)
 }
 
 /* Returns first span_item in a line. */
-static span_item_t* line_item_first(line_t* line)
+static char_t* line_item_first(line_t* line)
 {
     span_t* span = line_span_first(line);
     return span_item_first(span);
 }
 
 /* Returns last span_item in a line. */
-static span_item_t* line_item_last(line_t* line)
+static char_t* line_item_last(line_t* line)
 {
     span_t* span = line_span_last(line);
     return span_item_last(span);
-}
-
-/* Returns angle of <line>. */
-static double line_angle(line_t* line)
-{
-    /* All spans in a line must have same angle, so just use the first span. */
-    assert(line->spans_num > 0);
-    return span_angle(line->spans[0]);
 }
 
 /* A list of lines that are aligned and adjacent to each other so as to form a
@@ -1114,6 +1092,29 @@ line_t* para_line_last(const para_t* para)
     return para->lines[ para->lines_num-1];
 }
 
+
+
+static double span_angle(span_t* span)
+{
+    /* Not sure whether this is right. Inclined text seems to be done by
+    setting the ctm matrix, so not really sure what trm matrix does. This code
+    assumes that it also inclines text, but maybe it only rotates individual
+    glyphs? */
+    if (span->wmode == 0) {
+        return atan2(span->trm.b, span->trm.a);
+    }
+    else {
+        return atan2(span->trm.d, span->trm.c);
+    }
+}
+
+/* Returns angle of <line>. */
+static double line_angle(line_t* line)
+{
+    /* All spans in a line must have same angle, so just use the first span. */
+    assert(line->spans_num > 0);
+    return span_angle(line->spans[0]);
+}
 
 /* Returns total width of span. */
 double span_adv_total(span_t* span)
@@ -1253,18 +1254,18 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
                 double average_adv = (
                         (span_adv_total(span_a) + span_adv_total(span_b))
                         /
-                        (span_a->items_num + span_b->items_num)
+                        (span_a->chars_num + span_b->chars_num)
                         );
 
                 int insert_space = (nearest_adv > 0.25 * average_adv);
                 if (insert_space) {
                     /* Append space to span_a before concatenation. */
                     if (0) fprintf(stderr, "(inserted space)\n");
-                    span_item_t* p = realloc(span_a->items, (span_a->items_num + 1) * sizeof(span_item_t));
+                    char_t* p = realloc(span_a->chars, (span_a->chars_num + 1) * sizeof(char_t));
                     if (!p) goto end;
-                    span_a->items = p;
-                    span_item_t* item = &span_a->items[span_a->items_num];
-                    span_a->items_num += 1;
+                    span_a->chars = p;
+                    char_t* item = &span_a->chars[span_a->chars_num];
+                    span_a->chars_num += 1;
                     bzero(item, sizeof(*item));
                     item->ucs = ' ';
                     item->adv = nearest_adv;
@@ -1540,7 +1541,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
                 span_t* a_span = line_span_last(line_a);
                 if (span_item_last(a_span)->ucs == '-') {
                     /* remove trailing '-' at end of prev line. */
-                    a_span->items_num -= 1;
+                    a_span->chars_num -= 1;
                 }
                 else {
                     /* Insert space before joining adjacent lines. */
@@ -1644,7 +1645,7 @@ static void page_free(page_t* page)
     for (s=0; s<page->spans_num; ++s) {
         span_t* span = page->spans[s];
         if (span) {
-            free(span->items);
+            free(span->chars);
         }
         free(span);
     }
@@ -1654,7 +1655,7 @@ static void page_free(page_t* page)
     for (l=0; l<page->lines_num; ++l) {
         line_t* line = page->lines[l];
         free(line->spans);
-        /* We don't free line->spans->items[] because already freed via
+        /* We don't free line->spans->chars[] because already freed via
         page->spans. */
     }
     free(page->lines);
@@ -1796,9 +1797,9 @@ static int spans_to_docx_content(const char* path, char** content)
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
             span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
             span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
-            span->items_num = atoi(tag_attributes_find(&tag, "len"));
-            span->items = malloc(sizeof(span_item_t) * span->items_num);
-            if (!span->items) goto end;
+            span->chars_num = atoi(tag_attributes_find(&tag, "len"));
+            span->chars = malloc(sizeof(char_t) * span->chars_num);
+            if (!span->chars) goto end;
 
             float font_size = fz_matrix_expansion(span->trm);
 
@@ -1816,12 +1817,12 @@ static int spans_to_docx_content(const char* path, char** content)
             fz_point pos = {span->trm.e, span->trm.f};
 
             int i;
-            for (i=0; i<span->items_num; ++i) {
+            for (i=0; i<span->chars_num; ++i) {
                 tag_reset(&tag);
                 e = pparse_next(in, &tag);
                 assert(!e);
                 assert(!strcmp(tag.name, "span_item"));
-                span_item_t*    span_item = &span->items[i];
+                char_t*    span_item = &span->chars[i];
                 span_item->x    = atof(tag_attributes_find(&tag, "x"));
                 span_item->y    = atof(tag_attributes_find(&tag, "y"));
                 span_item->gid  = atoi(tag_attributes_find(&tag, "gid"));
@@ -1845,7 +1846,7 @@ static int spans_to_docx_content(const char* path, char** content)
 
                 if (1
                         && i
-                        && span->items[i-1].ucs == ' '
+                        && span->chars[i-1].ucs == ' '
                         && err_x < -span_item[-1].adv / 2
                         && err_x > -span_item[-1].adv
                         ) {
@@ -1854,9 +1855,9 @@ static int spans_to_docx_content(const char* path, char** content)
                     sometimes seem to appear in the middle of words for some
                     reason. */
                     if (0) fprintf(stderr, "removing space\n");
-                    span->items[i-1] = span->items[i];
+                    span->chars[i-1] = span->chars[i];
                     i -= 1;
-                    span->items_num -= 1;
+                    span->chars_num -= 1;
                 }
                 else if (fabs(err_x) > 0.01 || fabs(err_y) > 0.01) {
                     /* This character doesn't seem to be a continuation of
@@ -1871,10 +1872,10 @@ static int spans_to_docx_content(const char* path, char** content)
                         int j;
                         for (j=i<10; j<i+10; ++j) {
                             if (j < 0) continue;
-                            if (j >= span->items_num) break;
+                            if (j >= span->chars_num) break;
                             fprintf(stderr, "%c%c",
                                     (j==i) ? '_' : ' ',
-                                    span->items[j].ucs
+                                    span->chars[j].ucs
                                     );
                         }
                         fprintf(stderr, "\n");
@@ -1882,16 +1883,16 @@ static int spans_to_docx_content(const char* path, char** content)
                     span_t* span2 = page_span_append(page);
                     if (!span2) goto end;
                     *span2 = *span;
-                    span2->items_num = span->items_num - i;
-                    span2->items = malloc(sizeof(span_item_t) * span2->items_num);
-                    if (!span2->items) goto end;
-                    span2->items[0] = *span_item;
+                    span2->chars_num = span->chars_num - i;
+                    span2->chars = malloc(sizeof(char_t) * span2->chars_num);
+                    if (!span2->chars) goto end;
+                    span2->chars[0] = *span_item;
                     pos.x = span_item->x;
                     pos.y = span_item->y;
 
-                    span_item = &span2->items[0];
+                    span_item = &span2->chars[0];
 
-                    span->items_num = i;
+                    span->chars_num = i;
                     span = span2;
                     i = 0;
                 }
@@ -1986,8 +1987,8 @@ static int spans_to_docx_content(const char* path, char** content)
                     }
 
                     int si;
-                    for (si=0; si<span->items_num; ++si) {
-                        span_item_t* span_item = &span->items[si];
+                    for (si=0; si<span->chars_num; ++si) {
+                        char_t* span_item = &span->chars[si];
                         if (0) fprintf(stderr, "%c", span_item->ucs);
                         if (0) fprintf(stderr, "[span_item] %c (%f, %f)\n",
                                 span_item->ucs,
