@@ -361,7 +361,7 @@ def extract(extract_text_exe, mupdf_shared_dir, path_template, path_in, use_stex
     command = (
                 f' LD_LIBRARY_PATH=/home/jules/artifex/libbacktrace/.libs'
                 f' MEMENTO_HIDE_MULTIPLE_REALLOCS=1'
-                f' valgrind'
+                f' valgrind --leak-check=full'
                 f' ./{extract_text_exe}'
                 f' -i {path_intermediate}'
                 f' -t {path_template}'
