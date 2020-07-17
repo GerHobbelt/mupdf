@@ -38,7 +38,7 @@ set.
 /* We do lots of string appending, currently by simply realloc-ing each time.
 */
 
-#if 1
+#if 0
 #define strlen(s) local_strlen(s)
 size_t strlen(const char *s)
 {
@@ -454,6 +454,7 @@ static fz_stext_device* spans_to_stext_device(fz_context* ctx, const char* path)
     tag_init(&tag);
 
     for(;;) {
+        tag_reset(&tag);
         e = pparse_next(in, &tag);
         if (e) break;
 
@@ -1731,7 +1732,19 @@ static void page_free(page_t* page)
     for (s=0; s<page->spans_num; ++s) {
         span_t* span = page->spans[s];
         if (span) {
+
+            if (1) {
+                int s2;
+                for (s2=s+1; s2<page->spans_num; ++s2) {
+                    span_t* span2 = page->spans[s2];
+                    if (span2 && span2->font_name == span->font_name) {
+                        fprintf(stderr, "font_name suplicate. s=%i s2=%i\n", s, s2);
+                    }
+                }
+            }
+
             free(span->chars);
+            free(span->font_name);
         }
         free(span);
     }
@@ -1972,6 +1985,7 @@ static int spans_to_docx_content(const char* path, char** content)
                     span_t* span2 = page_span_append(page);
                     if (!span2) goto end;
                     *span2 = *span;
+                    span2->font_name = strdup(spans->font_name);
                     span2->chars_num = span->chars_num - i;
                     span2->chars = malloc(sizeof(char_t) * span2->chars_num);
                     if (!span2->chars) goto end;
@@ -2171,15 +2185,6 @@ static void unlock(void *user, int lock)
 
 int main(int argc, char** argv)
 {
-    if (0) {
-        void* p = NULL;
-        p = realloc(p, 1);
-        p = realloc(p, 10);
-        p = realloc(p, 100);
-        p = realloc(p, 1000);
-        p = realloc(p, 10000);
-        return 0;
-    }
     const char* docx_out_path       = NULL;
     const char* input_path          = NULL;
     const char* docx_template_path  = NULL;
