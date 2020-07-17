@@ -414,10 +414,25 @@ static int s_read_matrix(const char* text, fz_matrix* matrix)
 fz_stext_device, which is returned.
 
 (Wec use code directly #included from ../fitz/stext-device.c above). */
-static fz_stext_device* spans_to_stext_device(fz_context* ctx, const char* path)
+
+typedef struct
 {
-    fz_stext_page* page = fz_new_stext_page(ctx, fz_infinite_rect);
-    fz_stext_device* dev = (void*) fz_new_stext_device(ctx, page, NULL /*options*/);
+    fz_stext_page* page;
+    fz_stext_device* dev;
+} stext_dev_and_page;
+
+/* Caller should clean up with:
+    stext_dev_and_page dev_page = spans_to_stext_device(ctx, ...);
+    ...
+    fz_close_device(ctx, &dev_page.dev->super);
+    fz_drop_device(ctx, &dev_page.dev->super);
+    fz_drop_stext_page(ctx, dev_page.page);
+*/
+static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* path)
+{
+    stext_dev_and_page  dev_page;
+    dev_page.page = fz_new_stext_page(ctx, fz_infinite_rect);
+    dev_page.dev = (void*) fz_new_stext_device(ctx, dev_page.page, NULL /*options*/);
 
     FILE* in = pparse_init(path);
     if (!in) {
@@ -516,13 +531,18 @@ static fz_stext_device* spans_to_stext_device(fz_context* ctx, const char* path)
                 static fz_buffer*   t3procs[256];
                 font->t3procs = t3procs;
 
-                fz_add_stext_char(ctx, dev, font, ucs, gid, trm2, adv, wmode);
+                fz_add_stext_char(ctx, dev_page.dev, font, ucs, gid, trm2, adv, wmode);
+
+                /* As of 2020-07-17, fz_add_stext_char() doesn't keep <font>
+                so we leak font here. We could keep track of fonts, but prob
+                better to fix stext to keep/drop and simply drop <font> here.
+                */
             }
         }
     }
-
     fclose(in);
-    return dev;
+
+    return dev_page;
 }
 
 /* Like fprintf() but returns quietly if <out> is NULL. */
@@ -2230,12 +2250,15 @@ int main(int argc, char** argv)
         }
         fz_context* ctx = fz_new_context(NULL /*alloc*/, &m_locks, FZ_STORE_DEFAULT);
 
-        fz_stext_device* dev = spans_to_stext_device(ctx, input_path);
+        stext_dev_and_page dev_page = spans_to_stext_device(ctx, input_path);
 
-        page_to_docx_content(ctx, dev->page, &content);
+        page_to_docx_content(ctx, dev_page.page, &content);
 
-        fz_close_device(ctx, &dev->super);
-        fz_drop_device(ctx, &dev->super);
+        fz_close_device(ctx, &dev_page.dev->super);
+        fz_drop_device(ctx, &dev_page.dev->super);
+        fz_drop_stext_page(ctx, dev_page.page);
+
+        fz_drop_context(ctx);
     }
     else {
         errno = 0;
