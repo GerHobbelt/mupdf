@@ -359,7 +359,10 @@ def extract(extract_text_exe, mupdf_shared_dir, path_template, path_in, use_stex
     jlib.system( command, out=log, verbose=1, prefix='    ')
 
     command = (
-                f'./{extract_text_exe}'
+                f' LD_LIBRARY_PATH=/home/jules/artifex/libbacktrace/.libs'
+                f' MEMENTO_HIDE_MULTIPLE_REALLOCS=1'
+                f' valgrind'
+                f' ./{extract_text_exe}'
                 f' -i {path_intermediate}'
                 f' -t {path_template}'
                 f' -p 1'    # preserve .docx temporary directory.
@@ -398,11 +401,47 @@ def test(mupdf_shared_dir, so_build):
         # Build extract_text.exe.
         #
         extract_text_c = 'source/tools/extract_text.c'
+        extract_text_cc = 'source/tools/extract_text.c.c'
         extract_text_exe = 'extract_text.c.exe'
+
+        memento_c = 'source/fitz/memento.c'
+        memento_cc = 'source/fitz/memento.cc'
+        if 0:
+            jlib.build(
+                    extract_text_c,
+                    extract_text_cc,
+                    f'cc -E -dD -g -o {memento_cc} -DMEMENTO {memento_c} -pthread -I include -I /usr/local/include -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function build/shared-debug/libmupdf.so -Wl,--export-dynamic -L /usr/local/lib -lm -lexecinfo',
+                    out=log,
+                    )
+
+            jlib.build(
+                    extract_text_c,
+                    extract_text_cc,
+                    f'cc -E -dD -g -o {extract_text_cc} -DMEMENTO {extract_text_c} -pthread -I include -I /usr/local/include -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function build/shared-debug/libmupdf.so -Wl,--export-dynamic -L /usr/local/lib -lm -lexecinfo',
+                    out=log,
+                    )
+
+        command = (
+                f'cc -g'
+                f' -o {extract_text_exe}'
+                #f' -DMEMENTO'
+                f' {extract_text_c}'
+                f' source/fitz/memento.c'
+                f' -pthread'
+                f' -I include'
+                f' -I /usr/local/include'
+                f' -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function'
+                f' build/shared-debug/libmupdf.so'
+                f' -lm'
+                )
+        if os.uname()[0] == 'OpenBSD':
+            command += ' -Wl,--export-dynamic -L /usr/local/lib -lexecinfo'
+        else:
+            command += ' -DHAVE_LIBDL -ldl'
         jlib.build(
                 extract_text_c,
                 extract_text_exe,
-                f'cc -g -o {extract_text_exe} {extract_text_c} -pthread -I include -W -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function build/shared-debug/libmupdf.so -lm',
+                command,
                 out=log,
                 )
 
