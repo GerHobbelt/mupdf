@@ -92,6 +92,12 @@ int atexit(void (*)(void));
 
 #ifndef MEMENTO_CPP_EXTRAS_ONLY
 
+#ifdef __OpenBSD__
+/* libbacktrace not available. */
+#define MEMENTO_STACKTRACE_METHOD 0
+#define MEMENTO_BACKTRACE_MAX 1
+#endif
+
 #ifdef MEMENTO_ANDROID
 #include <android/log.h>
 
