@@ -2233,6 +2233,9 @@ int main(int argc, char** argv)
         fz_stext_device* dev = spans_to_stext_device(ctx, input_path);
 
         page_to_docx_content(ctx, dev->page, &content);
+
+        fz_close_device(ctx, &dev->super);
+        fz_drop_device(ctx, &dev->super);
     }
     else {
         errno = 0;
