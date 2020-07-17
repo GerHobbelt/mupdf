@@ -38,31 +38,6 @@ set.
 /* We do lots of string appending, currently by simply realloc-ing each time.
 */
 
-#if 0
-#define strlen(s) local_strlen(s)
-size_t strlen(const char *s)
-{
-    size_t ret = 0;
-    for(;;) {
-        if (*s == 0) return ret;
-        s += 1;
-        ret += 1;
-    }
-}
-#define memcpy(dst, src, len) local_memcpy(dst, src, len)
-void* local_memcpy(void *dst, const void *src, size_t len)
-{
-    void* dst0 = dst;
-    for(;;) {
-        if (!len) return dst0;
-        *(char*) dst = *(char*) src;
-        dst += 1;
-        src += 1;
-        len -= 1;
-    }
-}
-
-#endif
 
 /* Appends a char to a string. Returns 0, or -1 with errno set if realloc()
 failed. */
@@ -1054,7 +1029,7 @@ typedef struct span_t
 {
     fz_matrix   ctm;
     fz_matrix   trm;
-    const char* font_name;
+    char*       font_name;
     // font size is fz_matrix_expansion(trm).
     int         font_bold;
     int         font_italic;
@@ -1732,17 +1707,6 @@ static void page_free(page_t* page)
     for (s=0; s<page->spans_num; ++s) {
         span_t* span = page->spans[s];
         if (span) {
-
-            if (1) {
-                int s2;
-                for (s2=s+1; s2<page->spans_num; ++s2) {
-                    span_t* span2 = page->spans[s2];
-                    if (span2 && span2->font_name == span->font_name) {
-                        fprintf(stderr, "font_name suplicate. s=%i s2=%i\n", s, s2);
-                    }
-                }
-            }
-
             free(span->chars);
             free(span->font_name);
         }
@@ -1985,7 +1949,7 @@ static int spans_to_docx_content(const char* path, char** content)
                     span_t* span2 = page_span_append(page);
                     if (!span2) goto end;
                     *span2 = *span;
-                    span2->font_name = strdup(spans->font_name);
+                    span2->font_name = strdup(span->font_name);
                     span2->chars_num = span->chars_num - i;
                     span2->chars = malloc(sizeof(char_t) * span2->chars_num);
                     if (!span2->chars) goto end;
