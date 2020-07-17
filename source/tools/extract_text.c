@@ -12,6 +12,8 @@ Unless otherwise stated, all functions return 0 on success or -1 with errno
 set.
 */
 
+#include "../../include/mupdf/memento.h"
+
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
 
@@ -33,9 +35,34 @@ set.
 /* Crudely #include the stext-device.c code. */
 #include "../fitz/stext-device.c"
 
-
 /* We do lots of string appending, currently by simply realloc-ing each time.
 */
+
+#if 1
+#define strlen(s) local_strlen(s)
+size_t strlen(const char *s)
+{
+    size_t ret = 0;
+    for(;;) {
+        if (*s == 0) return ret;
+        s += 1;
+        ret += 1;
+    }
+}
+#define memcpy(dst, src, len) local_memcpy(dst, src, len)
+void* local_memcpy(void *dst, const void *src, size_t len)
+{
+    void* dst0 = dst;
+    for(;;) {
+        if (!len) return dst0;
+        *(char*) dst = *(char*) src;
+        dst += 1;
+        src += 1;
+        len -= 1;
+    }
+}
+
+#endif
 
 /* Appends a char to a string. Returns 0, or -1 with errno set if realloc()
 failed. */
@@ -111,15 +138,27 @@ static void tag_show(tag_t* tag, FILE* out)
     }
 }
 
-static char* tag_attributes_find(tag_t* tag, const char* name)
+/* If <mv> is true, we set tag's .value to NULL so it won't be freed by
+tag_reset(). */
+static char* tag_attributes_find2(tag_t* tag, const char* name, int mv)
 {
     for (int i=0; i<tag->attributes_num; ++i) {
         if (!strcmp(tag->attributes[i].name, name)) {
-            return tag->attributes[i].value;
+            char* ret = tag->attributes[i].value;
+            if (mv) {
+                tag->attributes[i].value = NULL;
+            }
+            return ret;
         }
     }
     return NULL;
 }
+
+static char* tag_attributes_find(tag_t* tag, const char* name)
+{
+    return tag_attributes_find2(tag, name, 0 /*mv*/);
+}
+
 
 static int tag_attributes_find_int(tag_t* tag, const char* name, int default_)
 {
@@ -166,6 +205,12 @@ static void tag_init(tag_t* tag)
 static void tag_free(tag_t* tag)
 {
     free(tag->name);
+    int i;
+    for (i=0; i<tag->attributes_num; ++i) {
+        attribute_t* attribute = &tag->attributes[i];
+        free(attribute->name);
+        free(attribute->value);
+    }
     free(tag->attributes);
     free(tag->text);
 }
@@ -801,14 +846,45 @@ page_to_docx_content(fz_context* ctx, fz_stext_page *page, char** content)
     return 0;
 }
 
+static int local_vasprintf(char** out, const char* format, va_list va0)
+{
+    va_list va;
 
+    /* Find required length. */
+    va_copy(va, va0);
+    int len = vsnprintf(NULL, 0, format, va);
+    va_end(va);
+    assert(len >= 0);
+    len += 1; /* For terminating 0. */
+
+    /* Repeat call of vnsprintf() with required buffer. */
+    char* buffer = malloc(len);
+    if (!buffer) {
+        return -1;
+    }
+    va_copy(va, va0);
+    int len2 = vsnprintf(buffer, len, format, va);
+    va_end(va);
+    assert(len2 + 1 == len);
+    *out = buffer;
+    return len2;
+}
+
+static int local_asprintf(char** out, const char* format, ...)
+{
+    va_list va;
+    va_start(va, format);
+    int ret = local_vasprintf(out, format, va);
+    va_end(va);
+    return ret;
+}
 
 static int systemf(const char* format, ...)
 {
     char* command;
     va_list va;
     va_start(va, format);
-    int e = vasprintf(&command, format, va);
+    int e = local_vasprintf(&command, format, va);
     va_end(va);
     if (e < 0) return e;
     fprintf(stderr, "running: %s\n", command);
@@ -857,7 +933,7 @@ static int create_docx(const char* content, const char* path_out, const char* pa
         goto end;
     }
 
-    if (asprintf(&path_tempdir, "%s.dir", path_out) < 0) goto end;
+    if (local_asprintf(&path_tempdir, "%s.dir", path_out) < 0) goto end;
     if (systemf("rm -r '%s' 2>/dev/null", path_tempdir) < 0) goto end;
 
     if (mkdir(path_tempdir, 0777)) {
@@ -875,7 +951,7 @@ static int create_docx(const char* content, const char* path_out, const char* pa
         goto end;
     }
 
-    if (asprintf(&word_document_xml, "%s/word/document.xml", path_tempdir) < 0) goto end;
+    if (local_asprintf(&word_document_xml, "%s/word/document.xml", path_tempdir) < 0) goto end;
 
     if (0) fprintf(stderr, "Reading tempdir's word/document.xml object\n");
     f = fopen(word_document_xml, "r");
@@ -907,9 +983,9 @@ static int create_docx(const char* content, const char* path_out, const char* pa
         goto end;
     }
     if (0
-            || fwrite(original, original_pos - original, 1 /*nmemb*/, f) < 0
-            || fwrite(content, strlen(content), 1 /*nmemb*/, f) < 0
-            || fwrite(original_pos, strlen(original_pos), 1 /*nmemb*/, f) < 0
+            || fwrite(original, original_pos - original, 1 /*nmemb*/, f) == 0
+            || fwrite(content, strlen(content), 1 /*nmemb*/, f) == 0
+            || fwrite(original_pos, strlen(original_pos), 1 /*nmemb*/, f) == 0
             || fclose(f) < 0
             ) {
         fprintf(stderr, "%s:%i: error: Failed to write to: %s",
@@ -1195,10 +1271,13 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
     for (a=0; a<lines_num; ++a) {
 
         line_t* line_a = lines[a];
-        if (!line_a->spans) {
-            /* This line is empty - already been appended to a different line. */
+        if (!line_a) {
             continue;
         }
+        //if (!line_a->spans) {
+        //    /* This line is empty - already been appended to a different line. */
+        //    continue;
+        //}
 
         line_t* nearest_line = NULL;
         int nearest_line_b = -1;
@@ -1211,6 +1290,8 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
         for (b=0; b<lines_num; ++b) {
 
             line_t* line_b = lines[b];
+            if (!line_b) continue;
+
             if (!lines_are_compatible(line_a, line_b, angle_a)) {
                 continue;
             }
@@ -1310,8 +1391,10 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
 
             /* Ensure that we ignore nearest_line from now on. */
             free(nearest_line->spans);
-            nearest_line->spans = NULL;
-            nearest_line->spans_num = 0;
+            free(nearest_line);
+            //nearest_line->spans = NULL;
+            //nearest_line->spans_num = 0;
+            lines[nearest_line_b] = NULL;
 
             num_joins += 1;
 
@@ -1329,7 +1412,7 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
     int from;
     int to;
     for (from=0, to=0; from<lines_num; ++from) {
-        if (lines[from]->spans) {
+        if (lines[from]) {
             lines[to] = lines[from];
             to += 1;
         }
@@ -1484,7 +1567,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
     for (a=0; a<paras_num; ++a) {
 
         para_t* para_a = paras[a];
-        if (!para_a->lines) {
+        if (!para_a) {
             /* This para is empty - already been appended to a different para. */
             continue;
         }
@@ -1501,7 +1584,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
         int b;
         for (b=0; b<paras_num; ++b) {
             para_t* para_b = paras[b];
-            if (!para_b->lines) {
+            if (!para_b) {
                 /* This para is empty - already been appended to a different
                 para. */
                 continue;
@@ -1561,8 +1644,10 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
 
                 /* Ensure that we skip nearest_para in future. */
                 free(nearest_para->lines);
-                nearest_para->lines = NULL;
-                nearest_para->lines_num = 0;
+                free(nearest_para);
+                paras[nearest_para_b] = NULL;
+                //nearest_para->lines = NULL;
+                //nearest_para->lines_num = 0;
 
                 num_joins += 1;
                 if (0) fprintf(stderr, "have joined para a=%i to snearest_para_b=%i\n", a, nearest_para_b);
@@ -1581,7 +1666,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
     int from;
     int to;
     for (from=0, to=0; from<paras_num; ++from) {
-        if (paras[from]->lines) {
+        if (paras[from]) {
             paras[to] = paras[from];
             to += 1;
         }
@@ -1656,6 +1741,7 @@ static void page_free(page_t* page)
     for (l=0; l<page->lines_num; ++l) {
         line_t* line = page->lines[l];
         free(line->spans);
+        free(line);
         /* We don't free line->spans->chars[] because already freed via
         page->spans. */
     }
@@ -1767,6 +1853,7 @@ static int spans_to_docx_content(const char* path, char** content)
         We split spans in two where there seem to be large gaps.
     */
     for(;;) {
+        tag_reset(&tag);
         e = pparse_next(in, &tag);
         if (e) break;
 
@@ -1790,9 +1877,10 @@ static int spans_to_docx_content(const char* path, char** content)
 
             s_read_matrix(tag_attributes_find(&tag, "ctm"), &span->ctm);
             s_read_matrix(tag_attributes_find(&tag, "trm"), &span->trm);
-            span->font_name = tag_attributes_find(&tag, "font_name");
-            const char* f = strchr(span->font_name, '+');
-            if (f)  span->font_name = f + 1;
+            char* f = tag_attributes_find(&tag, "font_name");
+            char* ff = strchr(f, '+');
+            if (ff)  f = ff + 1;
+            span->font_name = strdup(f);
             //span->font_bold = tag_attributes_find_int(&tag, "is_bold", 0);
             //span->font_italic = tag_attributes_find_int(&tag, "is_italic", 0);
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
@@ -2081,11 +2169,17 @@ static void unlock(void *user, int lock)
 }
 
 
-
-
-
 int main(int argc, char** argv)
 {
+    if (0) {
+        void* p = NULL;
+        p = realloc(p, 1);
+        p = realloc(p, 10);
+        p = realloc(p, 100);
+        p = realloc(p, 1000);
+        p = realloc(p, 10000);
+        return 0;
+    }
     const char* docx_out_path       = NULL;
     const char* input_path          = NULL;
     const char* docx_template_path  = NULL;
@@ -2189,5 +2283,9 @@ int main(int argc, char** argv)
     fprintf(stderr, "Creating .docx file: %s\n", docx_out_path);
     e = create_docx(content, docx_out_path, docx_template_path, preserve_dir);
 
+    free(content);
+
+    fprintf(stderr, "Finished, e=%i\n", e);
+    Memento_listBlocks();
     return e;
 }
