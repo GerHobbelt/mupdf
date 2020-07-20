@@ -48,6 +48,7 @@ int atexit(void (*)(void));
 #include <unistd.h>
 #endif
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
@@ -195,7 +196,7 @@ windows_fprintf(FILE *file, const char *fmt, ...)
 #endif
 #endif
 
-#if defined(__linux__)
+#if defined(__linux__) || defined(__OpenBSD__)
 #define MEMENTO_HAS_FORK
 #elif defined(__APPLE__) && defined(__MACH__)
 #define MEMENTO_HAS_FORK
@@ -2606,6 +2607,7 @@ void *Memento_realloc(void *blk, size_t newsize)
         MEMENTO_LOCK();
         ret = do_malloc(newsize, Memento_EventType_realloc);
         MEMENTO_UNLOCK();
+        if (!ret) errno = ENOMEM;
         return ret;
     }
     if (newsize == 0) {
@@ -2618,6 +2620,7 @@ void *Memento_realloc(void *blk, size_t newsize)
     MEMENTO_LOCK();
     ret = do_realloc(blk, newsize, Memento_EventType_realloc);
     MEMENTO_UNLOCK();
+    if (!ret) errno = ENOMEM;
     return ret;
 }
 
