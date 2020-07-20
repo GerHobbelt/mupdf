@@ -1,8 +1,7 @@
 #! /usr/bin/env python3
 
 '''
-Takes XML output from 'mutool.py draw -F stext', and transforms into a .docx
-file.
+Builds and tests source/tools/extract_text.c.
 
 Args:
 
@@ -361,7 +360,7 @@ def extract(extract_text_exe, mupdf_shared_dir, path_template, path_in, use_stex
     command = (
                 f' LD_LIBRARY_PATH=/home/jules/artifex/libbacktrace/.libs'
                 f' MEMENTO_HIDE_MULTIPLE_REALLOCS=1'
-                f' valgrind --leak-check=full'
+                f' valgrind --leak-check=full' if os.uname()[0] == 'Linux' else ''
                 f' ./{extract_text_exe}'
                 f' -i {path_intermediate}'
                 f' -t {path_template}'
