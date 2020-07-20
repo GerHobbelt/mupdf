@@ -35,6 +35,16 @@ set.
 /* Crudely #include the stext-device.c code. */
 #include "../fitz/stext-device.c"
 
+
+static char* local_strdup(const char* text)
+{
+    size_t l = strlen(text) + 1;
+    char* ret = malloc(l);
+    if (!ret) return NULL;
+    memcpy(ret, text, l);
+    return ret;
+}
+
 /* We do lots of string appending, currently by simply realloc-ing each time.
 */
 
@@ -114,7 +124,7 @@ static void tag_show(tag_t* tag, FILE* out)
 }
 
 /* If <mv> is true, we set tag's .value to NULL so it won't be freed by
-tag_reset(). */
+tag_free(). */
 static char* tag_attributes_find2(tag_t* tag, const char* name, int mv)
 {
     for (int i=0; i<tag->attributes_num; ++i) {
@@ -159,7 +169,7 @@ static int tag_attributes_append(tag_t* tag, char* name, char* value)
             tag->attributes,
             (tag->attributes_num+1) * sizeof(attribute_t)
             );
-    if (!a) return +1;
+    if (!a) return -1;
     tag->attributes = a;
     tag->attributes[tag->attributes_num].name = name;
     tag->attributes[tag->attributes_num].value = value;
@@ -188,11 +198,6 @@ static void tag_free(tag_t* tag)
     }
     free(tag->attributes);
     free(tag->text);
-}
-
-static void tag_reset(tag_t* tag)
-{
-    tag_free(tag);
     tag_init(tag);
 }
 
@@ -293,6 +298,9 @@ static int pparse_next(FILE* in, tag_t* out)
 {
     int ret = -1;
 
+    char*   attribute_name = NULL;
+    char*   attribute_value = NULL;
+
     tag_init(out);
     char c;
 
@@ -315,7 +323,6 @@ static int pparse_next(FILE* in, tag_t* out)
         for(;;) {
 
             /* Read attribute name. */
-            char* attribute_name = NULL;
             for(;;) {
                 c = getc(in);
                 if (c == EOF) goto end;
@@ -324,7 +331,6 @@ static int pparse_next(FILE* in, tag_t* out)
             }
             if (c == '>') break;
 
-            char* attribute_value = NULL;
             if (c == '=') {
                 /* Read attribute value. */
                 int quote_single = 0;
@@ -344,7 +350,7 @@ static int pparse_next(FILE* in, tag_t* out)
                         c = getc(in);
                         if (c == EOF) goto end;
                     }
-                    str_catc(&attribute_value, c);
+                    if (str_catc(&attribute_value, c)) goto end;
                 }
 
                 /* Remove any enclosing quotes. */
@@ -361,7 +367,9 @@ static int pparse_next(FILE* in, tag_t* out)
                 }
             }
 
-            tag_attributes_append(out, attribute_name, attribute_value);
+            if (tag_attributes_append(out, attribute_name, attribute_value)) goto end;
+            attribute_name = NULL;
+            attribute_value = NULL;
             if (c == '/') c = getc(in);
             if (c == '>') break;
         }
@@ -387,6 +395,8 @@ static int pparse_next(FILE* in, tag_t* out)
 
     end:
 
+    free(attribute_name);
+    free(attribute_value);
     if (ret) {
         tag_free(out);
     }
@@ -444,7 +454,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
     tag_init(&tag);
 
     for(;;) {
-        tag_reset(&tag);
+        tag_free(&tag);
         e = pparse_next(in, &tag);
         if (e) break;
 
@@ -453,7 +463,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
         assert(!strcmp(tag.name, "page"));
 
         for(;;) {
-            tag_reset(&tag);
+            tag_free(&tag);
             e = pparse_next(in, &tag);
             assert(!e);
             if (!strcmp(tag.name, "/page")) {
@@ -470,7 +480,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             if (f)  font_name = f + 1;
             int is_bold = tag_attributes_find_int(&tag, "is_bold", 0);
             int is_italic = tag_attributes_find_int(&tag, "is_italic", 0);
-            char* font_name2 = strdup(font_name);
+            char* font_name2 = local_strdup(font_name);
             //if (is_bold) str_cat(&font_name2, "-Bold");
             //if (is_italic) str_cat(&font_name2, "-Oblique");
 
@@ -507,7 +517,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             #endif
 
             for(;;) {
-                tag_reset(&tag);
+                tag_free(&tag);
                 e = pparse_next(in, &tag);
                 assert(!e);
                 //printf("tag.name=%s\n", tag.name);
@@ -1757,6 +1767,8 @@ static span_t* page_span_append(page_t* page)
 {
     span_t* span = malloc(sizeof(*span));
     if (!span) return NULL;
+    span->font_name = NULL;
+    span->chars = NULL;
     span_t** s = realloc(page->spans, sizeof(*s) * (page->spans_num + 1));
     if (!s) {
         free(span);
@@ -1781,11 +1793,20 @@ void document_init(document_t* document)
 
 page_t* document_page_append(document_t* document)
 {
-    page_t** pages = realloc(document->pages, sizeof(page_t*) * (document->pages_num + 1));
-    if (!pages) return NULL;
-    document->pages = pages;
     page_t* page = malloc(sizeof(page_t));
     if (!page) return NULL;
+    page->spans = NULL;
+    page->spans_num = 0;
+    page->lines = NULL;
+    page->lines_num = 0;
+    page->paras = NULL;
+    page->paras_num = 0;
+    page_t** pages = realloc(document->pages, sizeof(page_t*) * (document->pages_num + 1));
+    if (!pages) {
+        free(page);
+        return NULL;
+    }
+    document->pages = pages;
     page_init(page);
     document->pages[document->pages_num] = page;
     document->pages_num += 1;
@@ -1850,9 +1871,9 @@ static int spans_to_docx_content(const char* path, char** content)
         We split spans in two where there seem to be large gaps.
     */
     for(;;) {
-        tag_reset(&tag);
+        tag_free(&tag);
         e = pparse_next(in, &tag);
-        if (e) break;
+        if (e) goto end;
 
         assert(!strcmp(tag.name, "page"));
         if (0) fprintf(stderr, "loading spans for page %i...\n", document.pages_num);
@@ -1860,14 +1881,18 @@ static int spans_to_docx_content(const char* path, char** content)
         if (!page) goto end;
 
         for(;;) {
-            tag_reset(&tag);
+            tag_free(&tag);
             e = pparse_next(in, &tag);
-            assert(!e);
+            if (e) goto end;
             if (!strcmp(tag.name, "/page")) {
                 break;
             }
             //printf("tag.name=%s\n", tag.name);
-            assert(!strcmp(tag.name, "span"));
+            if (strcmp(tag.name, "span")) {
+                fprintf(stderr, "Expected <span> but tag.name='%s'\n", tag.name);
+                errno = ESRCH;
+                goto end;
+            }
 
             span_t* span = page_span_append(page);
             if (!span) goto end;
@@ -1877,7 +1902,8 @@ static int spans_to_docx_content(const char* path, char** content)
             char* f = tag_attributes_find(&tag, "font_name");
             char* ff = strchr(f, '+');
             if (ff)  f = ff + 1;
-            span->font_name = strdup(f);
+            span->font_name = local_strdup(f);
+            if (!span->font_name) goto end;
             //span->font_bold = tag_attributes_find_int(&tag, "is_bold", 0);
             //span->font_italic = tag_attributes_find_int(&tag, "is_italic", 0);
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
@@ -1904,10 +1930,13 @@ static int spans_to_docx_content(const char* path, char** content)
 
             int i;
             for (i=0; i<span->chars_num; ++i) {
-                tag_reset(&tag);
-                e = pparse_next(in, &tag);
-                assert(!e);
-                assert(!strcmp(tag.name, "span_item"));
+                tag_free(&tag);
+                if (pparse_next(in, &tag)) goto end;
+                if (strcmp(tag.name, "span_item")) {
+                    errno = ESRCH;
+                    fprintf(stderr, "Expected <span_item> but tag.name='%s'\n", tag.name);
+                    goto end;
+                }
                 char_t*    span_item = &span->chars[i];
                 span_item->x    = atof(tag_attributes_find(&tag, "x"));
                 span_item->y    = atof(tag_attributes_find(&tag, "y"));
@@ -1969,7 +1998,8 @@ static int spans_to_docx_content(const char* path, char** content)
                     span_t* span2 = page_span_append(page);
                     if (!span2) goto end;
                     *span2 = *span;
-                    span2->font_name = strdup(span->font_name);
+                    span2->font_name = local_strdup(span->font_name);
+                    if (!span2->font_name) goto end;
                     span2->chars_num = span->chars_num - i;
                     span2->chars = malloc(sizeof(char_t) * span2->chars_num);
                     if (!span2->chars) goto end;
@@ -1988,9 +2018,13 @@ static int spans_to_docx_content(const char* path, char** content)
                 pos.y += span_item->adv * dir.y;
             }
 
-            tag_reset(&tag);
+            tag_free(&tag);
             if (pparse_next(in, &tag)) goto end;
-            assert(!strcmp(tag.name, "/span"));
+            if (strcmp(tag.name, "/span")) {
+                errno = ESRCH;
+                fprintf(stderr, "Expected </span> but tag.name='%s'\n", tag.name);
+                goto end;
+            }
         }
 
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document.pages_num, page->spans_num);
@@ -2024,7 +2058,7 @@ static int spans_to_docx_content(const char* path, char** content)
         for (p=0; p<page->paras_num; ++p) {
             para_t* para = page->paras[p];
             if (0) fprintf(stderr, "\n[para] ");
-            docx_paragraph_start(content);
+            if (docx_paragraph_start(content)) goto end;
 
             int l;
             for (l=0; l<para->lines_num; ++l) {
@@ -2053,7 +2087,7 @@ static int spans_to_docx_content(const char* path, char** content)
                             || span->font_italic != font_italic
                             ) {
                         if (font_name) {
-                            docx_run_finish(content);
+                            if (docx_run_finish(content)) goto end;
                             if (0) fprintf(stderr, " [font %s:%lf:%c%c] ",
                                     span->font_name,
                                     fz_matrix_expansion(span->trm),
@@ -2070,7 +2104,7 @@ static int spans_to_docx_content(const char* path, char** content)
                         font_bold = span->font_bold;
                         font_italic = span->font_italic;
                         font_size = fz_matrix_expansion(span->trm);
-                        docx_run_start(content, font_name, font_size, font_bold, font_italic);
+                        if (docx_run_start(content, font_name, font_size, font_bold, font_italic)) goto end;
                     }
 
                     int si;
@@ -2094,49 +2128,49 @@ static int spans_to_docx_content(const char* path, char** content)
 
                         /* Expand ligatures. */
                         else if (c == 0xFB00) {
-                            docx_char_append_string(content, "ff");
+                            if (docx_char_append_string(content, "ff")) goto end;
                         }
                         else if (c == 0xFB01) {
-                            docx_char_append_string(content, "fi");
+                            if (docx_char_append_string(content, "fi")) goto end;
                         }
                         else if (c == 0xFB02) {
-                            docx_char_append_string(content, "fl");
+                            if (docx_char_append_string(content, "fl")) goto end;
                         }
                         else if (c == 0xFB03) {
-                            docx_char_append_string(content, "ffi");
+                            if (docx_char_append_string(content, "ffi")) goto end;
                         }
                         else if (c == 0xFB04) {
-                            docx_char_append_string(content, "ffl");
+                            if (docx_char_append_string(content, "ffl")) goto end;
                         }
 
                         /* Output ASCII verbatim. */
                         else if (c >= 32 && c <= 127) {
-                            docx_char_append_char(content, c);
+                            if (docx_char_append_char(content, c)) goto end;
                         }
 
                         /* Escape all other characters. */
                         else {
                             char    buffer[32];
                             snprintf(buffer, sizeof(buffer), "&#x%x;", c);
-                            docx_char_append_string(content, buffer);
+                            if (docx_char_append_string(content, buffer)) goto end;
                         }
                     }
                     /* Remove any trailing '-' at end of line. */
-                    docx_char_truncate_if(content, '-');
+                    if (docx_char_truncate_if(content, '-')) goto end;
                 }
             }
             if (0) fprintf(stderr, "\n");
             if (font_name) {
-                docx_run_finish(content);
+                if (docx_run_finish(content)) goto end;
                 font_name = NULL;
             }
-            docx_paragraph_finish(content);
+            if (docx_paragraph_finish(content)) goto end;
         }
     }
     ret = 0;
 
     end:
-
+    tag_free(&tag);
     if (in) fclose(in);
 
     /* Free everything. */
