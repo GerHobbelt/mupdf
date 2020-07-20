@@ -794,6 +794,7 @@ def system_raw(
         encoding='latin_1',
         errors='strict',
         buffer_len=-1,
+        executable=None,
         ):
     '''
     Runs command, writing output to <out> which can be an int fd, a python
@@ -847,6 +848,7 @@ def system_raw(
             stdout=stdout,
             stderr=stderr,
             close_fds=True,
+            executable=executable,
             #encoding=encoding - only python-3.6+.
             )
 
@@ -898,6 +900,7 @@ def system(
         encoding=None,
         errors='replace',
         buffer_len=-1,
+        executable=None,
         ):
     '''
     Runs a command like os.system() or subprocess.*, but with more flexibility.
@@ -1001,7 +1004,15 @@ def system(
         command2 += '/usr/bin/time -o ubt-out -f "D=%D E=%D F=%F I=%I K=%K M=%M O=%O P=%P R=%r S=%S U=%U W=%W X=%X Z=%Z c=%c e=%e k=%k p=%p r=%r s=%s t=%t w=%w x=%x C=%C"'
         command2 += ' '
         command2 += command
-        e = system_raw( command2, out, shell, encoding, errors, buffer_len=buffer_len)
+        e = system_raw(
+                command2,
+                out,
+                shell,
+                encoding,
+                errors,
+                buffer_len=buffer_len,
+                executable=executable,
+                )
         with open('ubt-out') as f:
             rusage_text = f.read()
         #print 'have read rusage output: %r' % rusage_text
@@ -1014,7 +1025,15 @@ def system(
             rusage_text = rusage_text[ nl+1:]
         return rusage_text
     else:
-        e = system_raw( command, out, shell, encoding, errors, buffer_len=buffer_len)
+        e = system_raw(
+                command,
+                out,
+                shell,
+                encoding,
+                errors,
+                buffer_len=buffer_len,
+                executable=executable,
+                )
 
         if verbose:
             verbose.write('[returned e=%s]\n' % e)
@@ -1214,6 +1233,7 @@ def build(
         out=None,
         all_reasons=False,
         verbose=True,
+        executable=None,
         ):
     '''
     Ensures that <outfiles> are up to date using enhanced makefile-like
@@ -1299,7 +1319,7 @@ def build(
     with open( command_filename, 'w') as f:
         pass
 
-    system( command, out=out, verbose=verbose)
+    system( command, out=out, verbose=verbose, executable=executable)
 
     with open( command_filename, 'w') as f:
         f.write( command)
