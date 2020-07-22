@@ -1992,7 +1992,6 @@ static int read_spans1(const char* path, document_t *document)
             if (!strcmp(tag.name, "/page")) {
                 break;
             }
-            //printf("tag.name=%s\n", tag.name);
             if (strcmp(tag.name, "span")) {
                 fprintf(stderr, "Expected <span> but tag.name='%s'\n", tag.name);
                 errno = ESRCH;
@@ -2023,7 +2022,6 @@ static int read_spans1(const char* path, document_t *document)
                     fprintf(stderr, "Expected <span_item> but tag.name='%s'\n", tag.name);
                     goto end;
                 }
-                span = page->spans[page->spans_num-1];
                 if (span_append_c(span, 0 /*c*/)) goto end;
                 char_t* span_item = &span->chars[ span->chars_num-1];
                 span_item->x    = atof(tag_attributes_find(&tag, "x"));
@@ -2033,11 +2031,117 @@ static int read_spans1(const char* path, document_t *document)
                 span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
 
                 if (page_span_end_clean(page)) goto end;
+                span = page->spans[page->spans_num-1];
             }
-
             tag_free(&tag);
         }
+        if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
+    }
+    
+    ret = 0;
+    
+    end:
+    tag_free(&tag);
+    if (in) {
+        fclose(in);
+        in = NULL;
+    }
+    
+    if (ret) {
+        fprintf(stderr, "read_spans1() returning error\n");
+        document_free(document);
+    }
+    
+    return ret;
+}
 
+
+/* Reads from mupdf's trace-device into document_t. */
+static int read_spans_trace(const char* path, document_t* document)
+{
+    int ret = -1;
+    FILE* in = NULL;
+
+    document_init(document);
+
+    in = pparse_init(path);
+    if (!in) {
+        fprintf(stderr, "Failed to open: %s\n", path);
+        goto end;
+    }
+    tag_t   tag;
+    tag_init(&tag);
+
+    int e = pparse_next(in, &tag);
+    if (strcmp(tag.name, "document")) {
+        fprintf(stderr, "expected '<document...>' but tag.name='%s'\n", tag.name);
+        errno = ESRCH;
+        goto end;
+    }
+    
+    for(;;) {
+        int e = pparse_next(in, &tag);
+        if (e == 1) break; /* EOF. */
+        if (e) goto end;
+        if (strcmp(tag.name, "page")) {
+            fprintf(stderr, "Expected <page> but tag.name='%s'\n", tag.name);
+            errno = ESRCH;
+            goto end;
+        }
+        page_t* page = document_page_append(document);
+        if (!page) goto end;
+
+        for(;;) {
+            if (pparse_next(in, &tag)) goto end;
+            if (!strcmp(tag.name, "/page")) {
+                break;
+            }
+            if (strcmp(tag.name, "fill_text")) continue;
+            
+            span_t* span = page_span_append(page);
+            if (!span) goto end;
+            s_read_matrix(tag_attributes_find(&tag, "transform"), &span->ctm);
+            
+            if (pparse_next(in, &tag)) goto end;
+            if (strcmp(tag.name, "span")) {
+                fprintf(stderr, "Expected <span...> after <fill_text>, but tag.name='%s'\n", tag.name);
+                errno = ESRCH;
+                goto end;
+            }
+            
+            s_read_matrix(tag_attributes_find(&tag, "trm"), &span->trm);
+            char* f = tag_attributes_find(&tag, "font");
+            char* ff = strchr(f, '+');
+            if (ff)  f = ff + 1;
+            span->font_name = local_strdup(f);
+            if (!span->font_name) goto end;
+            span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
+            span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
+            span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
+
+            for(;;) {
+                if (pparse_next(in, &tag)) goto end;
+                if (!strcmp(tag.name, "/span")) {
+                    break;
+                }
+                if (strcmp(tag.name, "g")) {
+                    errno = ESRCH;
+                    fprintf(stderr, "Expected <g> but tag.name='%s'\n", tag.name);
+                    goto end;
+                }
+                if (span_append_c(span, 0 /*c*/)) goto end;
+                char_t* span_item = &span->chars[ span->chars_num-1];
+                span_item->x    = atof(tag_attributes_find(&tag, "x"));
+                span_item->y    = atof(tag_attributes_find(&tag, "y"));
+                span_item->gid  = 0;
+                span_item->ucs  = atoi(tag_attributes_find(&tag, "glyph"));
+                span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
+
+                if (page_span_end_clean(page)) goto end;
+                span = page->spans[page->spans_num-1];
+            }
+            tag_free(&tag);
+        }
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
     }
     
