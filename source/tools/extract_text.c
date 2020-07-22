@@ -1828,8 +1828,10 @@ void document_free(document_t* document)
     document->pages_num = 0;
 }
 
-
-static int span_end_clean( page_t* page)
+/* Looks at last two char_t's in last span_t of <page>, and either leaves
+unchanged, or removes space in last-but-one position, or moves last char_t into
+a new span_t. */
+static int page_span_end_clean( page_t* page)
 {
     int ret = -1;
     assert(page->spans_num);
@@ -2007,22 +2009,6 @@ static int read_spans1(const char* path, document_t *document)
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
             span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
             span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
-            int len = atoi(tag_attributes_find(&tag, "len"));
-
-            float font_size = fz_matrix_expansion(span->trm);
-
-            fz_point dir;
-            if (span->wmode) {
-                dir.x = 0;
-                dir.y = 1;
-            }
-            else {
-                dir.x = 1;
-                dir.y = 0;
-            }
-            dir = fz_transform_vector(dir, span->trm);
-
-            fz_point pos = {span->trm.e, span->trm.f};
 
             for(;;) {
                 tag_free(&tag);
@@ -2044,12 +2030,7 @@ static int read_spans1(const char* path, document_t *document)
                 span_item->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
                 span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
 
-                if (span->chars_num == 1) {
-                    pos.x = span_item->x;
-                    pos.y = span_item->y;
-                }
-
-                if (span_end_clean(page)) goto end;
+                if (page_span_end_clean(page)) goto end;
             }
 
             tag_free(&tag);
