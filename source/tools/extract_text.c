@@ -292,11 +292,13 @@ static FILE* pparse_init(const char* path)
     return in;
 }
 
-/* Returns 0 with *out containing next tag; or -1 with errno set if error; or
-+1 if EOF. */
+/* Returns 0 with *out containing next tag; or -1 with errno set if error;
+or +1 if EOF. *out is initially passed to tag_free(), so *out must have been
+initialised, e.g. by by tag_init(). */
 static int pparse_next(FILE* in, tag_t* out)
 {
     int ret = -1;
+    tag_free(out);
 
     char*   attribute_name = NULL;
     char*   attribute_value = NULL;
@@ -454,7 +456,6 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
     tag_init(&tag);
 
     for(;;) {
-        tag_free(&tag);
         e = pparse_next(in, &tag);
         if (e) break;
 
@@ -463,7 +464,6 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
         assert(!strcmp(tag.name, "page"));
 
         for(;;) {
-            tag_free(&tag);
             e = pparse_next(in, &tag);
             assert(!e);
             if (!strcmp(tag.name, "/page")) {
@@ -517,7 +517,6 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             #endif
 
             for(;;) {
-                tag_free(&tag);
                 e = pparse_next(in, &tag);
                 assert(!e);
                 //printf("tag.name=%s\n", tag.name);
@@ -1972,18 +1971,19 @@ static int read_spans1(const char* path, document_t *document)
         We split spans in two where there seem to be large gaps.
     */
     for(;;) {
-        tag_free(&tag);
         e = pparse_next(in, &tag);
         if (e == 1) break; /* EOF. */
         if (e) goto end;
-
-        assert(!strcmp(tag.name, "page"));
+        if (strcmp(tag.name, "page")) {
+            fprintf(stderr, "Expected <page> but tag.name='%s'\n", tag.name);
+            errno = ESRCH;
+            goto end;
+        }
         if (0) fprintf(stderr, "loading spans for page %i...\n", document->pages_num);
         page_t* page = document_page_append(document);
         if (!page) goto end;
 
         for(;;) {
-            tag_free(&tag);
             e = pparse_next(in, &tag);
             if (e) goto end;
             if (!strcmp(tag.name, "/page")) {
@@ -2011,7 +2011,6 @@ static int read_spans1(const char* path, document_t *document)
             span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
 
             for(;;) {
-                tag_free(&tag);
                 if (pparse_next(in, &tag)) goto end;
                 if (!strcmp(tag.name, "/span")) {
                     break;
