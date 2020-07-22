@@ -36,6 +36,7 @@ set.
 #include "../fitz/stext-device.c"
 
 
+/* Use this in preference to strdup() so that Memento works. */
 static char* local_strdup(const char* text)
 {
     size_t l = strlen(text) + 1;
@@ -45,9 +46,9 @@ static char* local_strdup(const char* text)
     return ret;
 }
 
+
 /* We do lots of string appending, currently by simply realloc-ing each time.
 */
-
 
 /* Appends a char to a string. Returns 0, or -1 with errno set if realloc()
 failed. */
@@ -95,6 +96,12 @@ static char* read_all(FILE* in)
             ret[len] = 0;
             return ret;
         }
+        if (ferror(in)) {
+            /* It's weird that fread() and ferror() don't set errno. */
+            errno = EIO;
+            free(ret);
+            return NULL;
+        }
     }
 }
 
@@ -123,28 +130,19 @@ static void tag_show(tag_t* tag, FILE* out)
     }
 }
 
-/* If <mv> is true, we set tag's .value to NULL so it won't be freed by
-tag_free(). */
-static char* tag_attributes_find2(tag_t* tag, const char* name, int mv)
+static char* tag_attributes_find(tag_t* tag, const char* name)
 {
     for (int i=0; i<tag->attributes_num; ++i) {
         if (!strcmp(tag->attributes[i].name, name)) {
             char* ret = tag->attributes[i].value;
-            if (mv) {
-                tag->attributes[i].value = NULL;
-            }
             return ret;
         }
     }
     return NULL;
 }
 
-static char* tag_attributes_find(tag_t* tag, const char* name)
-{
-    return tag_attributes_find2(tag, name, 0 /*mv*/);
-}
-
-
+/* Returns int value of specified attribute, or <default_> if it is not found.
+We use atoi() and don't check for non-numeric attribute value. */
 static int tag_attributes_find_int(tag_t* tag, const char* name, int default_)
 {
     const char* value = tag_attributes_find(tag, name);
@@ -152,15 +150,17 @@ static int tag_attributes_find_int(tag_t* tag, const char* name, int default_)
     return atoi(value);
 }
 
-static float tag_attributes_find_float(tag_t* tag, const char* name)
+/* Finds float value of specified attribute, returning error if not found. We
+use atof() and don't check for non-numeric attribute value. */
+static int tag_attributes_find_float(tag_t* tag, const char* name, float* o_out)
 {
     const char* value = tag_attributes_find(tag, name);
     if (!value) {
-        fprintf(stderr, "cannot find attribute '%s'", name);
-        tag_show(tag, stderr);
-        assert(0);
+        errno = ESRCH;
+        return -1;
     }
-    return atof(value);
+    *o_out = atof(value);
+    return 0;
 }
 
 static int tag_attributes_append(tag_t* tag, char* name, char* value)
@@ -529,7 +529,8 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
                 float y     = atof(tag_attributes_find(&tag, "y"));
                 int gid     = atoi(tag_attributes_find(&tag, "gid"));
                 int ucs     = atoi(tag_attributes_find(&tag, "ucs"));
-                float adv   = tag_attributes_find_float(&tag, "adv");
+                float adv;
+                if (tag_attributes_find_float(&tag, "adv", &adv)) assert(0);
 
                 fz_matrix trm2 = trm;
                 trm2.e = x;
@@ -1822,18 +1823,17 @@ void document_free(document_t* document)
         free(page);
     }
     free(document->pages);
+    document->pages = NULL;
+    document->pages_num = 0;
 }
 
-/* Reads from intermediate data and converts into docx content. On return
-*content points to zero-terminated content, allocated by realloc(). */
-static int spans_to_docx_content(const char* path, char** content)
+/* Reads from intermediate data. */
+static int read_spans1(const char* path, document_t *document)
 {
     int ret = -1;
 
-    *content = NULL;
     FILE* in = NULL;
-    document_t  document;
-    document_init(&document);
+    document_init(document);
 
     in = pparse_init(path);
     if (!in) {
@@ -1873,11 +1873,12 @@ static int spans_to_docx_content(const char* path, char** content)
     for(;;) {
         tag_free(&tag);
         e = pparse_next(in, &tag);
+        if (e == 1) break; /* EOF. */
         if (e) goto end;
 
         assert(!strcmp(tag.name, "page"));
-        if (0) fprintf(stderr, "loading spans for page %i...\n", document.pages_num);
-        page_t* page = document_page_append(&document);
+        if (0) fprintf(stderr, "loading spans for page %i...\n", document->pages_num);
+        page_t* page = document_page_append(document);
         if (!page) goto end;
 
         for(;;) {
@@ -2027,10 +2028,38 @@ static int spans_to_docx_content(const char* path, char** content)
             }
         }
 
-        if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document.pages_num, page->spans_num);
+        if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
     }
-    fclose(in);
-    in = NULL;
+    
+    ret = 0;
+    
+    end:
+    tag_free(&tag);
+    if (in) {
+        fclose(in);
+        in = NULL;
+    }
+    
+    if (ret) {
+        fprintf(stderr, "read_spans1() returning error\n");
+        document_free(document);
+    }
+    
+    return ret;
+}
+
+
+/* Reads from intermediate data and converts into docx content. On return
+*content points to zero-terminated content, allocated by realloc(). */
+static int spans_to_docx_content(const char* path, char** content)
+{
+    int ret = -1;
+
+    *content = NULL;
+    document_t  document;
+    document_init(&document);
+    
+    if (read_spans1(path, &document)) goto end;
 
     /* Now for each page we join spans into lines and paragraphs. A line is a
     list of spans that are at the same angle and on the same line. A paragraph
@@ -2170,8 +2199,6 @@ static int spans_to_docx_content(const char* path, char** content)
     ret = 0;
 
     end:
-    tag_free(&tag);
-    if (in) fclose(in);
 
     /* Free everything. */
     document_free(&document);
