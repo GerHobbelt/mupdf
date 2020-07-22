@@ -1875,7 +1875,7 @@ static int span_end_clean( page_t* page)
         character. We discard previous space character - these
         sometimes seem to appear in the middle of words for some
         reason. */
-        if (1) fprintf(stderr, "removing space\n");
+        if (0) fprintf(stderr, "removing space\n");
         span->chars[span->chars_num-2] = span->chars[span->chars_num-1];
         span->chars_num -= 1;
         return 0;
@@ -1885,7 +1885,7 @@ static int span_end_clean( page_t* page)
         previous characters, so split into two spans. This often
         splits text incorrectly, but this is corrected later when
         we join spans into lines. */
-        if (1) {
+        if (0) {
             fprintf(stderr, "Splitting into new span. err=(%f, %f) pos=(%f, %f): ",
                     err_x, err_y,
                     x, y
@@ -2042,7 +2042,6 @@ static int read_spans1(const char* path, document_t *document)
                     fprintf(stderr, "Expected <span_item> but tag.name='%s'\n", tag.name);
                     goto end;
                 }
-                //char_t*    span_item = &span->chars[i];
                 if (span_append_c(span, 0 /*c*/)) goto end;
                 char_t* span_item = &span->chars[ span->chars_num-1];
                 span_item->x    = atof(tag_attributes_find(&tag, "x"));
@@ -2059,20 +2058,10 @@ static int read_spans1(const char* path, document_t *document)
                 if (span_end_clean(page)) goto end;
 
                 span = page->spans[page->spans_num-1];
-                span_item = &span->chars[span->chars_num-1];
-                pos.x = span_item->x;
-                pos.y = span_item->y;
-                pos.x += span_item->adv * dir.x;
-                pos.y += span_item->adv * dir.y;
+                //span_item = &span->chars[span->chars_num-1];
             }
 
             tag_free(&tag);
-            /*if (pparse_next(in, &tag)) goto end;
-            if (strcmp(tag.name, "/span")) {
-                errno = ESRCH;
-                fprintf(stderr, "Expected </span> but tag.name='%s'\n", tag.name);
-                goto end;
-            }*/
         }
 
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
