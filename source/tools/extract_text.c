@@ -313,7 +313,13 @@ static int pparse_next(FILE* in, tag_t* out)
     for( i=0;; ++i) {
         c = getc(in);
         if (c == EOF) {
-            if (i == 0 && feof(in)) ret = +1;   /* legimate EOF. */
+            if (i == 0 && feof(in)) {
+                /* Legitimate EOF. We provide a reasonable errno value if
+                caller isn't expecting EOF and doesn't test explicitly for +1.
+                */
+                ret = +1;
+                errno = ESRCH;
+            }
             goto end;
         }
         if (c == '>' || c == ' ')  break;
@@ -1940,8 +1946,6 @@ static int read_spans1(const char* path, document_t *document)
         fprintf(stderr, "Failed to open: %s\n", path);
         goto end;
     }
-
-    int e;
     tag_t   tag;
     tag_init(&tag);
 
@@ -1971,7 +1975,7 @@ static int read_spans1(const char* path, document_t *document)
         We split spans in two where there seem to be large gaps.
     */
     for(;;) {
-        e = pparse_next(in, &tag);
+        int e = pparse_next(in, &tag);
         if (e == 1) break; /* EOF. */
         if (e) goto end;
         if (strcmp(tag.name, "page")) {
@@ -1984,8 +1988,7 @@ static int read_spans1(const char* path, document_t *document)
         if (!page) goto end;
 
         for(;;) {
-            e = pparse_next(in, &tag);
-            if (e) goto end;
+            if (pparse_next(in, &tag)) goto end;
             if (!strcmp(tag.name, "/page")) {
                 break;
             }
