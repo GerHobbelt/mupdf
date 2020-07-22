@@ -1827,6 +1827,7 @@ void document_free(document_t* document)
     document->pages_num = 0;
 }
 
+/*
 static int read_spans_add_start(page_t* page,
         fz_matrix* ctm,
         fz_matrix* trm,
@@ -1860,6 +1861,88 @@ static int read_spans_add_start(page_t* page,
     }
     return ret;
 }
+*/
+
+#if 0
+static char_t* span_end_clean( span_t* span, float x, float y, float font_size)
+{
+    assert(span->chars_num);
+    char_t* span_item = &span->chars[ span->chars_num - 1];
+    if (span->chars_num == 0) {
+        return span_item;
+    }
+    
+    float err_x = (span_item->x - x) / font_size;
+    float err_y = (span_item->y - y) / font_size;
+    if (0) fprintf(stderr, "ucs=%c pos=(%f, %f) span_item=(%f, %f) err=(%f, %f) adv=%f\n",
+            span_item->ucs,
+            x, y,
+            span_item->x, span_item->y,
+            err_x, err_y,
+            span_item->adv
+            );
+
+    if (1
+            && span->chars_num
+            && span->chars[i-1].ucs == ' '
+            && err_x < -span_item[-1].adv / 2
+            && err_x > -span_item[-1].adv
+            ) {
+        /* This character overlaps with previous space
+        character. We discard previous space character - these
+        sometimes seem to appear in the middle of words for some
+        reason. */
+        if (1) fprintf(stderr, "removing space\n");
+        span->chars[i-1] = span->chars[i];
+        span->chars_num -= 1;
+        i -= 1;
+        len -= 1;
+        return span_item - 1;
+    }
+    else if (fabs(err_x) > 0.01 || fabs(err_y) > 0.01) {
+        /* This character doesn't seem to be a continuation of
+        previous characters, so split into two spans. This often
+        splits text incorrectly, but this is corrected later when
+        we join spans into lines. */
+        if (0) {
+            fprintf(stderr, "Splitting into new span. err=(%f, %f) pos=(%f, %f): ",
+                    err_x, err_y,
+                    pos.x, pos.y
+                    );
+            if (0) {
+                int j;
+                for (j=i<10; j<i+10; ++j) {
+                    if (j < 0) continue;
+                    if (j >= span->chars_num) break;
+                    fprintf(stderr, "%c%c",
+                            (j==i) ? '_' : ' ',
+                            span->chars[j].ucs
+                            );
+                }
+            }
+            fprintf(stderr, "\n");
+        }
+        span_t* span2 = page_span_append(page);
+        if (!span2) goto end;
+        *span2 = *span;
+        span2->font_name = local_strdup(span->font_name);
+        if (!span2->font_name) goto end;
+        span2->chars_num = 1;
+        span2->chars = malloc(sizeof(char_t) * span2->chars_num);
+        if (!span2->chars) goto end;
+        span2->chars[0] = *span_item;
+        pos.x = span_item->x;
+        pos.y = span_item->y;
+
+        span_item = &span2->chars[0];
+
+        span->chars_num -= 1;
+        span = span2;
+        len -= i;
+        i = 0;
+    }
+}
+#endif
 
 /* Reads from intermediate data into document_t. */
 static int read_spans1(const char* path, document_t *document)
@@ -1965,10 +2048,14 @@ static int read_spans1(const char* path, document_t *document)
 
             fz_point pos = {span->trm.e, span->trm.f};
 
-            int i;
-            for (i=0; i<len; ++i) {
+            //int i;
+            //for (i=0; i<len; ++i) {
+            for(;;) {
                 tag_free(&tag);
                 if (pparse_next(in, &tag)) goto end;
+                if (!strcmp(tag.name, "/span")) {
+                    break;
+                }
                 if (strcmp(tag.name, "span_item")) {
                     errno = ESRCH;
                     fprintf(stderr, "Expected <span_item> but tag.name='%s'\n", tag.name);
@@ -1983,7 +2070,7 @@ static int read_spans1(const char* path, document_t *document)
                 span_item->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
                 span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
 
-                if (i == 0) {
+                if (span->chars_num == 1) {
                     pos.x = span_item->x;
                     pos.y = span_item->y;
                 }
@@ -2002,20 +2089,20 @@ static int read_spans1(const char* path, document_t *document)
                         );
 
                 if (1
-                        && i
-                        && span->chars[i-1].ucs == ' '
-                        && err_x < -span_item[-1].adv / 2
-                        && err_x > -span_item[-1].adv
+                        && span->chars_num >= 2
+                        && span->chars[span->chars_num-2].ucs == ' '
+                        && err_x < -span->chars[span->chars_num-2].adv / 2
+                        && err_x > -span->chars[span->chars_num-2].adv
                         ) {
                     /* This character overlaps with previous space
                     character. We discard previous space character - these
                     sometimes seem to appear in the middle of words for some
                     reason. */
                     if (1) fprintf(stderr, "removing space\n");
-                    span->chars[i-1] = span->chars[i];
+                    span->chars[span->chars_num-2] = span->chars[span->chars_num-1];
                     span->chars_num -= 1;
-                    i -= 1;
-                    len -= 1;
+                    //i -= 1;
+                    //len -= 1;
                 }
                 else if (fabs(err_x) > 0.01 || fabs(err_y) > 0.01) {
                     /* This character doesn't seem to be a continuation of
@@ -2027,9 +2114,10 @@ static int read_spans1(const char* path, document_t *document)
                                 err_x, err_y,
                                 pos.x, pos.y
                                 );
+                        #if 0
                         if (0) {
                             int j;
-                            for (j=i<10; j<i+10; ++j) {
+                            for (j=span->chars_num - 10; j<span->chars_num; ++j) {
                                 if (j < 0) continue;
                                 if (j >= span->chars_num) break;
                                 fprintf(stderr, "%c%c",
@@ -2038,6 +2126,7 @@ static int read_spans1(const char* path, document_t *document)
                                         );
                             }
                         }
+                        #endif
                         fprintf(stderr, "\n");
                     }
                     span_t* span2 = page_span_append(page);
@@ -2056,8 +2145,8 @@ static int read_spans1(const char* path, document_t *document)
 
                     span->chars_num -= 1;
                     span = span2;
-                    len -= i;
-                    i = 0;
+                    //len -= i;
+                    //i = 0;
                 }
                 #endif
 
@@ -2066,12 +2155,12 @@ static int read_spans1(const char* path, document_t *document)
             }
 
             tag_free(&tag);
-            if (pparse_next(in, &tag)) goto end;
+            /*if (pparse_next(in, &tag)) goto end;
             if (strcmp(tag.name, "/span")) {
                 errno = ESRCH;
                 fprintf(stderr, "Expected </span> but tag.name='%s'\n", tag.name);
                 goto end;
-            }
+            }*/
         }
 
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
