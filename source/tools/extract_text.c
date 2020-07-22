@@ -1864,9 +1864,11 @@ static int read_spans_add_start(page_t* page,
 */
 
 #if 1
-static int span_end_clean( page_t* page, span_t* span, float x, float y, float font_size)
+static int span_end_clean( page_t* page, float x, float y, float font_size)
 {
     int ret = -1;
+    assert(page->spans_num);
+    span_t* span = page->spans[page->spans_num-1];
     assert(span->chars_num);
     char_t* span_item = &span->chars[ span->chars_num - 1];
     if (span->chars_num == 1) {
@@ -1896,7 +1898,7 @@ static int span_end_clean( page_t* page, span_t* span, float x, float y, float f
         if (1) fprintf(stderr, "removing space\n");
         span->chars[span->chars_num-2] = span->chars[span->chars_num-1];
         span->chars_num -= 1;
-        return span_item - 1;
+        return 0;
     }
     else if (fabs(err_x) > 0.01 || fabs(err_y) > 0.01) {
         /* This character doesn't seem to be a continuation of
@@ -2078,7 +2080,7 @@ static int read_spans1(const char* path, document_t *document)
                 }
 
                 #if 0
-                span_end_clean(span, pos.x, pos.y, font_size);
+                span_end_clean(page, span, pos.x, pos.y, font_size);
                 #else
                 float err_x = (span_item->x - pos.x) / font_size;
                 float err_y = (span_item->y - pos.y) / font_size;
