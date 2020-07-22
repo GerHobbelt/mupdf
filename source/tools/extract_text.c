@@ -1905,7 +1905,7 @@ static int span_end_clean( page_t* page, float x, float y, float font_size)
         previous characters, so split into two spans. This often
         splits text incorrectly, but this is corrected later when
         we join spans into lines. */
-        if (0) {
+        if (1) {
             fprintf(stderr, "Splitting into new span. err=(%f, %f) pos=(%f, %f): ",
                     err_x, err_y,
                     x, y
@@ -2079,8 +2079,8 @@ static int read_spans1(const char* path, document_t *document)
                     pos.y = span_item->y;
                 }
 
-                #if 0
-                span_end_clean(page, span, pos.x, pos.y, font_size);
+                #if 1
+                if (span_end_clean(page, pos.x, pos.y, font_size)) goto end;
                 #else
                 float err_x = (span_item->x - pos.x) / font_size;
                 float err_y = (span_item->y - pos.y) / font_size;
@@ -2154,6 +2154,8 @@ static int read_spans1(const char* path, document_t *document)
                 }
                 #endif
 
+                span = page->spans[page->spans_num-1];
+                span_item = &span->chars[span->chars_num-1];
                 pos.x = span_item->x;
                 pos.y = span_item->y;
                 pos.x += span_item->adv * dir.x;
