@@ -1827,44 +1827,8 @@ void document_free(document_t* document)
     document->pages_num = 0;
 }
 
-/*
-static int read_spans_add_start(page_t* page,
-        fz_matrix* ctm,
-        fz_matrix* trm,
-        const char* font_name,
-        int         font_bold,
-        int         font_italic,
-        int         wmode
-        )
-{
-    int ret = -1;
-    
-    span_t* span = page_span_append(page);
-    if (span) goto end;
-    span->ctm = *ctm;
-    span->trm = *trm;
-    span->font_name = local_strdup(font_name);
-    if (!span->font_name) goto end;
-    span->font_bold = font_bold;
-    span->font_italic = font_italic;
-    span->wmode = wmode;
-    
-    ret = 0;
-    
-    end:
-    if (ret) {
-        if (span) {
-            free(span->font_name);
-            free(span);
-            page->spans_num -= 1;
-        }
-    }
-    return ret;
-}
-*/
 
-#if 1
-static int span_end_clean( page_t* page, float x, float y, float font_size)
+static int span_end_clean( page_t* page)
 {
     int ret = -1;
     assert(page->spans_num);
@@ -1874,6 +1838,22 @@ static int span_end_clean( page_t* page, float x, float y, float font_size)
     if (span->chars_num == 1) {
         return 0;
     }
+    
+    float font_size = fz_matrix_expansion(span->trm);
+
+    fz_point dir;
+    if (span->wmode) {
+        dir.x = 0;
+        dir.y = 1;
+    }
+    else {
+        dir.x = 1;
+        dir.y = 0;
+    }
+    dir = fz_transform_vector(dir, span->trm);
+
+    float x = span_item[-1].x + span_item[-1].adv * dir.x;
+    float y = span_item[-1].y + span_item[-1].adv * dir.y;
     
     float err_x = (span_item->x - x) / font_size;
     float err_y = (span_item->y - y) / font_size;
@@ -1934,8 +1914,6 @@ static int span_end_clean( page_t* page, float x, float y, float font_size)
         span2->chars = malloc(sizeof(char_t) * span2->chars_num);
         if (!span2->chars) goto end;
         span2->chars[0] = *span_item;
-        //pos.x = span_item->x;
-        //pos.y = span_item->y;
 
         span_item = &span2->chars[0];
 
@@ -1946,7 +1924,6 @@ static int span_end_clean( page_t* page, float x, float y, float font_size)
     end:
     return ret;
 }
-#endif
 
 /* Reads from intermediate data into document_t. */
 static int read_spans1(const char* path, document_t *document)
@@ -2079,80 +2056,7 @@ static int read_spans1(const char* path, document_t *document)
                     pos.y = span_item->y;
                 }
 
-                #if 1
-                if (span_end_clean(page, pos.x, pos.y, font_size)) goto end;
-                #else
-                float err_x = (span_item->x - pos.x) / font_size;
-                float err_y = (span_item->y - pos.y) / font_size;
-                if (0) fprintf(stderr, "ucs=%c pos=(%f, %f) span_item=(%f, %f) err=(%f, %f) adv=%f\n",
-                        span_item->ucs,
-                        pos.x, pos.y,
-                        span_item->x, span_item->y,
-                        err_x, err_y,
-                        span_item->adv
-                        );
-
-                if (1
-                        && span->chars_num >= 2
-                        && span->chars[span->chars_num-2].ucs == ' '
-                        && err_x < -span->chars[span->chars_num-2].adv / 2
-                        && err_x > -span->chars[span->chars_num-2].adv
-                        ) {
-                    /* This character overlaps with previous space
-                    character. We discard previous space character - these
-                    sometimes seem to appear in the middle of words for some
-                    reason. */
-                    if (1) fprintf(stderr, "removing space\n");
-                    span->chars[span->chars_num-2] = span->chars[span->chars_num-1];
-                    span->chars_num -= 1;
-                    //i -= 1;
-                    //len -= 1;
-                }
-                else if (fabs(err_x) > 0.01 || fabs(err_y) > 0.01) {
-                    /* This character doesn't seem to be a continuation of
-                    previous characters, so split into two spans. This often
-                    splits text incorrectly, but this is corrected later when
-                    we join spans into lines. */
-                    if (0) {
-                        fprintf(stderr, "Splitting into new span. err=(%f, %f) pos=(%f, %f): ",
-                                err_x, err_y,
-                                pos.x, pos.y
-                                );
-                        #if 0
-                        if (0) {
-                            int j;
-                            for (j=span->chars_num - 10; j<span->chars_num; ++j) {
-                                if (j < 0) continue;
-                                if (j >= span->chars_num) break;
-                                fprintf(stderr, "%c%c",
-                                        (j==i) ? '_' : ' ',
-                                        span->chars[j].ucs
-                                        );
-                            }
-                        }
-                        #endif
-                        fprintf(stderr, "\n");
-                    }
-                    span_t* span2 = page_span_append(page);
-                    if (!span2) goto end;
-                    *span2 = *span;
-                    span2->font_name = local_strdup(span->font_name);
-                    if (!span2->font_name) goto end;
-                    span2->chars_num = 1;
-                    span2->chars = malloc(sizeof(char_t) * span2->chars_num);
-                    if (!span2->chars) goto end;
-                    span2->chars[0] = *span_item;
-                    pos.x = span_item->x;
-                    pos.y = span_item->y;
-
-                    span_item = &span2->chars[0];
-
-                    span->chars_num -= 1;
-                    span = span2;
-                    //len -= i;
-                    //i = 0;
-                }
-                #endif
+                if (span_end_clean(page)) goto end;
 
                 span = page->spans[page->spans_num-1];
                 span_item = &span->chars[span->chars_num-1];
