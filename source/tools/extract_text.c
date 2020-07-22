@@ -2049,35 +2049,17 @@ static int read_spans1(const char* path, document_t *document)
 }
 
 
-/* Reads from intermediate data and converts into docx content. On return
+/* Writes paragraphs from document_t into docx content. On return
 *content points to zero-terminated content, allocated by realloc(). */
-static int spans_to_docx_content(const char* path, char** content)
+static int paras_to_content(document_t* document, char** content)
 {
     int ret = -1;
 
-    *content = NULL;
-    document_t  document;
-    document_init(&document);
-    
-    if (read_spans1(path, &document)) goto end;
-
-    /* Now for each page we join spans into lines and paragraphs. A line is a
-    list of spans that are at the same angle and on the same line. A paragraph
-    is a list of lines that are at the same angle and close together. */
-    int p;
-    for (p=0; p<document.pages_num; ++p) {
-        if (0) fprintf(stderr, "==[page %i]:\n", p);
-        page_t* page = document.pages[p];
-
-        if (make_lines(page->spans, page->spans_num, &page->lines, &page->lines_num)) goto end;
-
-        if (make_paras(page->lines, page->lines_num, &page->paras, &page->paras_num)) goto end;
-    }
-
     /* Write paragraphs into <content>. */
     *content = NULL;
-    for (p=0; p<document.pages_num; ++p) {
-        page_t* page = document.pages[p];
+    int p;
+    for (p=0; p<document->pages_num; ++p) {
+        page_t* page = document->pages[p];
 
         const char* font_name = NULL;
         float       font_size = 0;
@@ -2201,13 +2183,47 @@ static int spans_to_docx_content(const char* path, char** content)
     end:
 
     /* Free everything. */
-    document_free(&document);
+    document_free(document);
 
     return ret;
 }
 
+/* Reads from intermediate data and converts into docx content. On return
+*content points to zero-terminated content, allocated by realloc(). */
+static int spans_to_docx_content(const char* path, char** content)
+{
+    int ret = -1;
 
+    *content = NULL;
+    document_t  document;
+    document_init(&document);
+    
+    if (read_spans1(path, &document)) goto end;
 
+    /* Now for each page we join spans into lines and paragraphs. A line is a
+    list of spans that are at the same angle and on the same line. A paragraph
+    is a list of lines that are at the same angle and close together. */
+    int p;
+    for (p=0; p<document.pages_num; ++p) {
+        if (0) fprintf(stderr, "==[page %i]:\n", p);
+        page_t* page = document.pages[p];
+
+        if (make_lines(page->spans, page->spans_num, &page->lines, &page->lines_num)) goto end;
+
+        if (make_paras(page->lines, page->lines_num, &page->paras, &page->paras_num)) goto end;
+    }
+    
+    if (paras_to_content(&document, content)) goto end;
+
+    ret = 0;
+
+    end:
+
+    /* Free everything. */
+    document_free(&document);
+
+    return ret;
+}
 
 
 
