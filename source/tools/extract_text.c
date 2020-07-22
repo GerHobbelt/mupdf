@@ -1827,7 +1827,41 @@ void document_free(document_t* document)
     document->pages_num = 0;
 }
 
-/* Reads from intermediate data. */
+static int read_spans_add_start(page_t* page,
+        fz_matrix* ctm,
+        fz_matrix* trm,
+        const char* font_name,
+        int         font_bold,
+        int         font_italic,
+        int         wmode
+        )
+{
+    int ret = -1;
+    
+    span_t* span = page_span_append(page);
+    if (span) goto end;
+    span->ctm = *ctm;
+    span->trm = *trm;
+    span->font_name = local_strdup(font_name);
+    if (!span->font_name) goto end;
+    span->font_bold = font_bold;
+    span->font_italic = font_italic;
+    span->wmode = wmode;
+    
+    ret = 0;
+    
+    end:
+    if (ret) {
+        if (span) {
+            free(span->font_name);
+            free(span);
+            page->spans_num -= 1;
+        }
+    }
+    return ret;
+}
+
+/* Reads from intermediate data into document_t. */
 static int read_spans1(const char* path, document_t *document)
 {
     int ret = -1;
@@ -1910,9 +1944,11 @@ static int read_spans1(const char* path, document_t *document)
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
             span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
             span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
-            span->chars_num = atoi(tag_attributes_find(&tag, "len"));
-            span->chars = malloc(sizeof(char_t) * span->chars_num);
-            if (!span->chars) goto end;
+            int len = atoi(tag_attributes_find(&tag, "len"));
+            span->chars_num = 0;//atoi(tag_attributes_find(&tag, "len"));
+            span->chars = NULL;
+            /*span->chars = malloc(sizeof(char_t) * span->chars_num);
+            if (!span->chars) goto end;*/
 
             float font_size = fz_matrix_expansion(span->trm);
 
@@ -1930,7 +1966,7 @@ static int read_spans1(const char* path, document_t *document)
             fz_point pos = {span->trm.e, span->trm.f};
 
             int i;
-            for (i=0; i<span->chars_num; ++i) {
+            for (i=0; i<len; ++i) {
                 tag_free(&tag);
                 if (pparse_next(in, &tag)) goto end;
                 if (strcmp(tag.name, "span_item")) {
@@ -1938,7 +1974,9 @@ static int read_spans1(const char* path, document_t *document)
                     fprintf(stderr, "Expected <span_item> but tag.name='%s'\n", tag.name);
                     goto end;
                 }
-                char_t*    span_item = &span->chars[i];
+                //char_t*    span_item = &span->chars[i];
+                if (span_append_c(span, 0 /*c*/)) goto end;
+                char_t* span_item = &span->chars[ span->chars_num-1];
                 span_item->x    = atof(tag_attributes_find(&tag, "x"));
                 span_item->y    = atof(tag_attributes_find(&tag, "y"));
                 span_item->gid  = atoi(tag_attributes_find(&tag, "gid"));
@@ -1950,6 +1988,9 @@ static int read_spans1(const char* path, document_t *document)
                     pos.y = span_item->y;
                 }
 
+                #if 0
+                span_end_clean(span, pos.x, pos.y, font_size);
+                #else
                 float err_x = (span_item->x - pos.x) / font_size;
                 float err_y = (span_item->y - pos.y) / font_size;
                 if (0) fprintf(stderr, "ucs=%c pos=(%f, %f) span_item=(%f, %f) err=(%f, %f) adv=%f\n",
@@ -1970,10 +2011,11 @@ static int read_spans1(const char* path, document_t *document)
                     character. We discard previous space character - these
                     sometimes seem to appear in the middle of words for some
                     reason. */
-                    if (0) fprintf(stderr, "removing space\n");
+                    if (1) fprintf(stderr, "removing space\n");
                     span->chars[i-1] = span->chars[i];
-                    i -= 1;
                     span->chars_num -= 1;
+                    i -= 1;
+                    len -= 1;
                 }
                 else if (fabs(err_x) > 0.01 || fabs(err_y) > 0.01) {
                     /* This character doesn't seem to be a continuation of
@@ -1985,14 +2027,16 @@ static int read_spans1(const char* path, document_t *document)
                                 err_x, err_y,
                                 pos.x, pos.y
                                 );
-                        int j;
-                        for (j=i<10; j<i+10; ++j) {
-                            if (j < 0) continue;
-                            if (j >= span->chars_num) break;
-                            fprintf(stderr, "%c%c",
-                                    (j==i) ? '_' : ' ',
-                                    span->chars[j].ucs
-                                    );
+                        if (0) {
+                            int j;
+                            for (j=i<10; j<i+10; ++j) {
+                                if (j < 0) continue;
+                                if (j >= span->chars_num) break;
+                                fprintf(stderr, "%c%c",
+                                        (j==i) ? '_' : ' ',
+                                        span->chars[j].ucs
+                                        );
+                            }
                         }
                         fprintf(stderr, "\n");
                     }
@@ -2001,7 +2045,7 @@ static int read_spans1(const char* path, document_t *document)
                     *span2 = *span;
                     span2->font_name = local_strdup(span->font_name);
                     if (!span2->font_name) goto end;
-                    span2->chars_num = span->chars_num - i;
+                    span2->chars_num = 1;
                     span2->chars = malloc(sizeof(char_t) * span2->chars_num);
                     if (!span2->chars) goto end;
                     span2->chars[0] = *span_item;
@@ -2010,10 +2054,12 @@ static int read_spans1(const char* path, document_t *document)
 
                     span_item = &span2->chars[0];
 
-                    span->chars_num = i;
+                    span->chars_num -= 1;
                     span = span2;
+                    len -= i;
                     i = 0;
                 }
+                #endif
 
                 pos.x += span_item->adv * dir.x;
                 pos.y += span_item->adv * dir.y;
