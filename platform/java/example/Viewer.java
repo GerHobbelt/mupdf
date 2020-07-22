@@ -85,17 +85,25 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		18, 24, 36, 54, 72, 96, 120, 144, 180, 216, 288
 	};
 
-	protected static BufferedImage imageFromPixmap(Pixmap pixmap) {
+	protected static class MyBufferedImage extends BufferedImage {
+		int xOffset, yOffset;
+		public MyBufferedImage(int w, int h, int type) {
+			super(w, h, type);
+		}
+	}
+
+	protected static MyBufferedImage imageFromPixmap(Pixmap pixmap) {
 		int w = pixmap.getWidth();
 		int h = pixmap.getHeight();
-		BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
+		MyBufferedImage image = new MyBufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
 		image.setRGB(0, 0, w, h, pixmap.getPixels(), 0, w);
+		image.xOffset = pixmap.getX();
+		image.yOffset = pixmap.getY();
 		return image;
 	}
 
-	protected static BufferedImage imageFromPage(Page page, Matrix ctm, boolean invert, boolean icc, int aa, boolean tint, int tintBlack, int tintWhite, int rotate) {
-		Matrix trm = new Matrix(ctm).rotate(rotate);
-		Rect bbox = page.getBounds().transform(trm);
+	protected static MyBufferedImage imageFromPage(Page page, Matrix ctm, boolean invert, boolean icc, int aa, boolean tint, int tintBlack, int tintWhite) {
+		Rect bbox = page.getBounds().transform(ctm);
 		Pixmap pixmap = new Pixmap(ColorSpace.DeviceBGR, bbox, true);
 		pixmap.clear(255);
 
@@ -106,7 +114,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		Context.setAntiAliasLevel(aa);
 
 		DrawDevice dev = new DrawDevice(pixmap);
-		page.run(dev, trm, null);
+		page.run(dev, ctm, null);
 		dev.close();
 		dev.destroy();
 
@@ -119,7 +127,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			pixmap.tint(tintBlack, tintWhite);
 		}
 
-		BufferedImage image = imageFromPixmap(pixmap);
+		MyBufferedImage image = imageFromPixmap(pixmap);
 		pixmap.destroy();
 		return image;
 	}
@@ -175,9 +183,9 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 
 	protected class ImageCanvas extends Canvas
 	{
-		protected BufferedImage image;
+		protected MyBufferedImage image;
 
-		public void setImage(BufferedImage image_) {
+		public void setImage(MyBufferedImage image_) {
 			image = image_;
 			repaint();
 		}
@@ -192,6 +200,8 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		public void paint(Graphics g) {
 			float imageScale = 1 / pixelScale;
 			final Graphics2D g2d = (Graphics2D)g.create(0, 0, image.getWidth(), image.getHeight());
+			int xoff = image.xOffset;
+			int yoff = image.yOffset;
 			g2d.scale(imageScale, imageScale);
 			g2d.drawImage(image, 0, 0, null);
 
@@ -199,7 +209,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 				g2d.setColor(new Color(1, 0, 0, 0.4f));
 				for (int i = 0; i < searchHits.length; ++i) {
 					Rect hit = new Rect(searchHits[i]).transform(pageCTM);
-					g2d.fillRect((int)hit.x0, (int)hit.y0, (int)(hit.x1-hit.x0), (int)(hit.y1-hit.y0));
+					g2d.fillRect((int)hit.x0-xoff, (int)hit.y0-yoff, (int)(hit.x1-hit.x0), (int)(hit.y1-hit.y0));
 				}
 			}
 
@@ -207,7 +217,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 				g2d.setColor(new Color(0, 0, 1, 0.1f));
 				for (int i = 0; i < links.length; ++i) {
 					Rect hit = new Rect(links[i].bounds).transform(pageCTM);
-					g2d.fillRect((int)hit.x0, (int)hit.y0, (int)(hit.x1-hit.x0), (int)(hit.y1-hit.y0));
+					g2d.fillRect((int)hit.x0-xoff, (int)hit.y0-yoff, (int)(hit.x1-hit.x0), (int)(hit.y1-hit.y0));
 				}
 			}
 
@@ -560,7 +570,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		int pageNumber = doc.pageNumberFromLocation(currentPage);
 		pageField.setText(String.valueOf(pageNumber + 1));
 
-		pageCTM = new Matrix().scale(zoomList[zoomLevel] / 72.0f * pixelScale);
+		pageCTM = new Matrix().scale(zoomList[zoomLevel] / 72.0f * pixelScale).rotate(currentRotate);
 		if (doc != null) {
 			Page page = doc.loadPage(pageNumber);
 
@@ -572,7 +582,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 				links = null;
 
 
-			BufferedImage image = imageFromPage(page, pageCTM, currentInvert, currentICC, currentAA, currentTint, tintBlack, tintWhite, currentRotate);
+			MyBufferedImage image = imageFromPage(page, pageCTM, currentInvert, currentICC, currentAA, currentTint, tintBlack, tintWhite);
 			pageCanvas.setImage(image);
 
 			selectOutlineItem(pageNumber);
