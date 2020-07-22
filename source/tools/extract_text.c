@@ -1770,6 +1770,7 @@ static span_t* page_span_append(page_t* page)
     if (!span) return NULL;
     span->font_name = NULL;
     span->chars = NULL;
+    span->chars_num = 0;
     span_t** s = realloc(page->spans, sizeof(*s) * (page->spans_num + 1));
     if (!s) {
         free(span);
@@ -2003,16 +2004,10 @@ static int read_spans1(const char* path, document_t *document)
             if (ff)  f = ff + 1;
             span->font_name = local_strdup(f);
             if (!span->font_name) goto end;
-            //span->font_bold = tag_attributes_find_int(&tag, "is_bold", 0);
-            //span->font_italic = tag_attributes_find_int(&tag, "is_italic", 0);
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
             span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
             span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
             int len = atoi(tag_attributes_find(&tag, "len"));
-            span->chars_num = 0;//atoi(tag_attributes_find(&tag, "len"));
-            span->chars = NULL;
-            /*span->chars = malloc(sizeof(char_t) * span->chars_num);
-            if (!span->chars) goto end;*/
 
             float font_size = fz_matrix_expansion(span->trm);
 
@@ -2029,8 +2024,6 @@ static int read_spans1(const char* path, document_t *document)
 
             fz_point pos = {span->trm.e, span->trm.f};
 
-            //int i;
-            //for (i=0; i<len; ++i) {
             for(;;) {
                 tag_free(&tag);
                 if (pparse_next(in, &tag)) goto end;
@@ -2042,6 +2035,7 @@ static int read_spans1(const char* path, document_t *document)
                     fprintf(stderr, "Expected <span_item> but tag.name='%s'\n", tag.name);
                     goto end;
                 }
+                span = page->spans[page->spans_num-1];
                 if (span_append_c(span, 0 /*c*/)) goto end;
                 char_t* span_item = &span->chars[ span->chars_num-1];
                 span_item->x    = atof(tag_attributes_find(&tag, "x"));
@@ -2056,9 +2050,6 @@ static int read_spans1(const char* path, document_t *document)
                 }
 
                 if (span_end_clean(page)) goto end;
-
-                span = page->spans[page->spans_num-1];
-                //span_item = &span->chars[span->chars_num-1];
             }
 
             tag_free(&tag);
