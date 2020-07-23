@@ -597,8 +597,7 @@ static int safe_fprintf(FILE* out, const char* format, ...)
 
 /* Detailed XML dump of the entire structured text data */
 
-void
-page_to_xml(fz_context* ctx, fz_stext_page *page, int id, FILE* out_xml)
+static void page_to_xml(fz_context* ctx, fz_stext_page *page, int id, FILE* out_xml)
 {
     fz_stext_block *block;
     fz_stext_line *line;
@@ -764,8 +763,7 @@ static int docx_char_truncate_if(char** content, char c)
 /* Creates docx content from fz_stext_page, applying some heuristics to clean
 up the output, and makes *content point to zero-terminated text allocated by
 realloc(). */
-int
-page_to_docx_content(fz_context* ctx, fz_stext_page *page, char** content)
+static int page_to_docx_content(fz_context* ctx, fz_stext_page *page, char** content)
 {
     *content = NULL;
 
@@ -946,7 +944,7 @@ Returns 0 on success or -1 with errno set.
 
 We use the 'zip' and 'unzip' commands.
 */
-static int create_docx(const char* content, const char* path_out, const char* path_template, int preserve_dir)
+static int docx_create(const char* content, const char* path_out, const char* path_template, int preserve_dir)
 {
     assert(content);
     assert(path_out);
@@ -1075,7 +1073,7 @@ typedef struct
     float   adv;
 } char_t;
 
-void char_init(char_t* item)
+static void char_init(char_t* item)
 {
     item->x = 0;
     item->y = 0;
@@ -1146,13 +1144,13 @@ typedef struct
 } line_t;
 
 /* Returns first span in a line. */
-span_t* line_span_last(line_t* line)
+static span_t* line_span_last(line_t* line)
 {
     return line->spans[line->spans_num - 1];
 }
 
 /* Returns list span in a line. */
-span_t* line_span_first(line_t* line)
+static span_t* line_span_first(line_t* line)
 {
     return line->spans[0];
 }
@@ -1180,14 +1178,14 @@ typedef struct
 } para_t;
 
 /* Returns first line in paragraph. */
-line_t* para_line_first(const para_t* para)
+static line_t* para_line_first(const para_t* para)
 {
     assert(para->lines_num);
     return para->lines[0];
 }
 
 /* Returns last line in paragraph. */
-line_t* para_line_last(const para_t* para)
+static line_t* para_line_last(const para_t* para)
 {
     assert(para->lines_num);
     return para->lines[ para->lines_num-1];
@@ -1474,7 +1472,7 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
 
 
 /* Returns max font size of all span_t's in a line_t. */
-double line_font_size_max(line_t* line)
+static double line_font_size_max(line_t* line)
 {
     double  size_max = 0;
     int i;
@@ -1816,14 +1814,14 @@ typedef struct {
     int         pages_num;
 } document_t;
 
-void document_init(document_t* document)
+static void document_init(document_t* document)
 {
     document->pages = NULL;
     document->pages_num = 0;
 }
 
 /* Appends new page_t to a document_t; returns NULL with errno set on error. */
-page_t* document_page_append(document_t* document)
+static page_t* document_page_append(document_t* document)
 {
     page_t* page = malloc(sizeof(page_t));
     if (!page) return NULL;
@@ -1845,7 +1843,7 @@ page_t* document_page_append(document_t* document)
     return page;
 }
 
-void document_free(document_t* document)
+static void document_free(document_t* document)
 {
     int p;
     for (p=0; p<document->pages_num; ++p) {
@@ -2377,8 +2375,8 @@ static int document_to_docx_content(document_t* document, char** content)
 
 /* Things to allow creation of a fz_context*. */
 
-pthread_mutex_t     m_mutexes[FZ_LOCK_MAX];
-fz_locks_context    m_locks;
+static pthread_mutex_t     m_mutexes[FZ_LOCK_MAX];
+static fz_locks_context    m_locks;
 
 static void lock(void *user, int lock)
 {
@@ -2532,7 +2530,7 @@ int main(int argc, char** argv)
         fclose(f);
     }
     fprintf(stderr, "Creating .docx file: %s\n", docx_out_path);
-    e = create_docx(content, docx_out_path, docx_template_path, preserve_dir);
+    e = docx_create(content, docx_out_path, docx_template_path, preserve_dir);
 
     end:
     
