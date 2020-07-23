@@ -440,7 +440,7 @@ static int pparse_next(FILE* in, xml_tag_t* out)
     }
 
     ret = 0;
-    
+
     if (0) {
         fprintf(stderr, "returning tag:\n");
         xml_tag_show(out, stderr);
@@ -595,7 +595,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
                     break;
                 }
                 assert(!strcmp(tag.name, "span_item"));
-                
+
                 float x;
                 float y;
                 int gid;
@@ -1913,7 +1913,7 @@ static int page_span_end_clean( page_t* page)
     if (span->chars_num == 1) {
         return 0;
     }
-    
+
     float font_size = fz_matrix_expansion(span->trm);
 
     fz_point dir;
@@ -1929,7 +1929,7 @@ static int page_span_end_clean( page_t* page)
 
     float x = char_[-1].x + char_[-1].adv * dir.x;
     float y = char_[-1].y + char_[-1].adv * dir.y;
-    
+
     float err_x = (char_->x - x) / font_size;
     float err_y = (char_->y - y) / font_size;
     if (0) fprintf(stderr, "ucs=%c pos=(%f, %f) char_=(%f, %f) err=(%f, %f) adv=%f\n",
@@ -2104,21 +2104,21 @@ static int read_spans_raw(const char* path, document_t *document)
         }
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
     }
-    
+
     ret = 0;
-    
+
     end:
     xml_tag_free(&tag);
     if (in) {
         fclose(in);
         in = NULL;
     }
-    
+
     if (ret) {
         fprintf(stderr, "read_spans1() returning error\n");
         document_free(document);
     }
-    
+
     return ret;
 }
 
@@ -2145,7 +2145,7 @@ static int read_spans_trace(const char* path, document_t* document)
         errno = ESRCH;
         goto end;
     }
-    
+
     for(;;) {
         int e = pparse_next(in, &tag);
         if (e == 1) break; /* EOF. */
@@ -2169,7 +2169,7 @@ static int read_spans_trace(const char* path, document_t* document)
             if (strcmp(tag.name, "fill_text")) continue;
             fz_matrix   ctm;
             s_read_matrix(xml_tag_attributes_find(&tag, "transform"), &ctm);
-            
+
             for(;;) {
                 if (pparse_next(in, &tag)) goto end;
                 if (!strcmp(tag.name, "/fill_text")) {
@@ -2221,21 +2221,21 @@ static int read_spans_trace(const char* path, document_t* document)
         }
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
     }
-    
+
     ret = 0;
-    
+
     end:
     xml_tag_free(&tag);
     if (in) {
         fclose(in);
         in = NULL;
     }
-    
+
     if (ret) {
         fprintf(stderr, "read_spans1() returning error\n");
         document_free(document);
     }
-    
+
     return ret;
 }
 
@@ -2383,7 +2383,7 @@ static int paras_to_content(document_t* document, string_t* content)
 static int document_to_docx_content(document_t* document, string_t* content)
 {
     int ret = -1;
-    
+
     /* Now for each page we join spans into lines and paragraphs. A line is a
     list of spans that are at the same angle and on the same line. A paragraph
     is a list of lines that are at the same angle and close together. */
@@ -2396,7 +2396,7 @@ static int document_to_docx_content(document_t* document, string_t* content)
 
         if (make_paras(page->lines, page->lines_num, &page->paras, &page->paras_num)) goto end;
     }
-    
+
     if (paras_to_content(document, content)) goto end;
 
     ret = 0;
@@ -2573,11 +2573,11 @@ int main(int argc, char** argv)
     e = docx_create(&content, docx_out_path, docx_template_path, preserve_dir);
 
     end:
-    
+
     string_free(&content);
     document_free(&document);
 
     fprintf(stderr, "Finished, e=%i\n", e);
-    
+
     return e;
 }
