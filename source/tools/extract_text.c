@@ -179,15 +179,6 @@ static char* xml_tag_attributes_find(xml_tag_t* tag, const char* name)
     return NULL;
 }
 
-/* Returns int value of specified attribute, or <default_> if it is not found.
-We use atoi() and don't check for non-numeric attribute value. */
-static int xml_tag_attributes_find_int(xml_tag_t* tag, const char* name, int default_)
-{
-    const char* value = xml_tag_attributes_find(tag, name);
-    if (!value) return default_;
-    return atoi(value);
-}
-
 /* Finds float value of specified attribute, returning error if not found. We
 use atof() and don't check for non-numeric attribute value. */
 static int xml_tag_attributes_find_float(xml_tag_t* tag, const char* name, float* o_out)
@@ -198,6 +189,17 @@ static int xml_tag_attributes_find_float(xml_tag_t* tag, const char* name, float
         return -1;
     }
     *o_out = atof(value);
+    return 0;
+}
+
+static int xml_tag_attributes_find_int(xml_tag_t* tag, const char* name, int* o_out)
+{
+    const char* value = xml_tag_attributes_find(tag, name);
+    if (!value) {
+        errno = ESRCH;
+        return -1;
+    }
+    *o_out = atoi(value);
     return 0;
 }
 
@@ -544,8 +546,10 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             const char* font_name = xml_tag_attributes_find(&tag, "font_name");
             const char* f = strchr(font_name, '+');
             if (f)  font_name = f + 1;
-            int is_bold = xml_tag_attributes_find_int(&tag, "is_bold", 0);
-            int is_italic = xml_tag_attributes_find_int(&tag, "is_italic", 0);
+            int is_bold;
+            int is_italic;
+            xml_tag_attributes_find_int(&tag, "is_bold", &is_bold);
+            xml_tag_attributes_find_int(&tag, "is_italic", &is_italic);
             char* font_name2 = local_strdup(font_name);
             //if (is_bold) str_cat(&font_name2, "-Bold");
             //if (is_italic) str_cat(&font_name2, "-Oblique");
@@ -556,7 +560,8 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             snprintf(font->name, sizeof(font->name), "%s", font_name2);
             free(font_name2);
 
-            int wmode = atoi(xml_tag_attributes_find(&tag, "wmode"));
+            int wmode;
+            xml_tag_attributes_find_int(&tag, "wmode", &wmode);
 
             #if 0
             if (0) fprintf(stderr, "%s:%i: trm={%f %f %f %f %f %f} ctm={%f %f %f %f %f %f} trm2={%f %f %f %f %f %f}\n",
@@ -590,12 +595,17 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
                     break;
                 }
                 assert(!strcmp(tag.name, "span_item"));
-                float x     = atof(xml_tag_attributes_find(&tag, "x"));
-                float y     = atof(xml_tag_attributes_find(&tag, "y"));
-                int gid     = atoi(xml_tag_attributes_find(&tag, "gid"));
-                int ucs     = atoi(xml_tag_attributes_find(&tag, "ucs"));
+                
+                float x;
+                float y;
+                int gid;
+                int ucs;
                 float adv;
-                if (xml_tag_attributes_find_float(&tag, "adv", &adv)) assert(0);
+                xml_tag_attributes_find_float(&tag, "x", &x);
+                xml_tag_attributes_find_float(&tag, "y", &y);
+                xml_tag_attributes_find_float(&tag, "adv", &adv);
+                xml_tag_attributes_find_int(&tag, "gid", &gid);
+                xml_tag_attributes_find_int(&tag, "ucs", &ucs);
 
                 fz_matrix trm2 = trm;
                 trm2.e = x;
@@ -2067,7 +2077,7 @@ static int read_spans_raw(const char* path, document_t *document)
             if (!span->font_name) goto end;
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
             span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
-            span->wmode = atoi(xml_tag_attributes_find(&tag, "wmode"));
+            if (xml_tag_attributes_find_int(&tag, "wmode", &span->wmode)) goto end;
 
             for(;;) {
                 if (pparse_next(in, &tag)) goto end;
@@ -2081,11 +2091,11 @@ static int read_spans_raw(const char* path, document_t *document)
                 }
                 if (span_append_c(span, 0 /*c*/)) goto end;
                 char_t* char_ = &span->chars[ span->chars_num-1];
-                char_->x    = atof(xml_tag_attributes_find(&tag, "x"));
-                char_->y    = atof(xml_tag_attributes_find(&tag, "y"));
-                char_->gid  = atoi(xml_tag_attributes_find(&tag, "gid"));
-                char_->ucs  = atoi(xml_tag_attributes_find(&tag, "ucs"));
-                char_->adv  = atof(xml_tag_attributes_find(&tag, "adv"));
+                if (xml_tag_attributes_find_float(&tag, "x", &char_->x)) goto end;
+                if (xml_tag_attributes_find_float(&tag, "y", &char_->y)) goto end;
+                if (xml_tag_attributes_find_float(&tag, "adv", &char_->adv)) goto end;
+                if (xml_tag_attributes_find_int(&tag, "gid", &char_->gid)) goto end;
+                if (xml_tag_attributes_find_int(&tag, "ucs", &char_->ucs)) goto end;
 
                 if (page_span_end_clean(page)) goto end;
                 span = page->spans[page->spans_num-1];
@@ -2184,7 +2194,7 @@ static int read_spans_trace(const char* path, document_t* document)
                 if (!span->font_name) goto end;
                 span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
                 span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
-                span->wmode = atoi(xml_tag_attributes_find(&tag, "wmode"));
+                if (xml_tag_attributes_find_int(&tag, "wmode", &span->wmode)) goto end;
 
                 for(;;) {
                     if (pparse_next(in, &tag)) goto end;
@@ -2201,8 +2211,8 @@ static int read_spans_trace(const char* path, document_t* document)
                     char_->x    = atof(xml_tag_attributes_find(&tag, "x"));
                     char_->y    = atof(xml_tag_attributes_find(&tag, "y"));
                     char_->gid  = 0;
-                    char_->ucs  = atoi(xml_tag_attributes_find(&tag, "ucs"));
-                    char_->adv  = atof(xml_tag_attributes_find(&tag, "adv"));
+                    if (xml_tag_attributes_find_int(&tag, "ucs", &char_->ucs)) goto end;
+                    if (xml_tag_attributes_find_float(&tag, "adv", &char_->adv)) goto end;
 
                     if (page_span_end_clean(page)) goto end;
                     span = page->spans[page->spans_num-1];
