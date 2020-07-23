@@ -1792,6 +1792,7 @@ static void page_free(page_t* page)
     free(page->paras);
 }
 
+/* Appends new span_ to a page_t; returns NULL with errno set on error. */
 static span_t* page_span_append(page_t* page)
 {
     span_t* span = malloc(sizeof(*span));
@@ -1821,6 +1822,7 @@ void document_init(document_t* document)
     document->pages_num = 0;
 }
 
+/* Appends new page_t to a document_t; returns NULL with errno set on error. */
 page_t* document_page_append(document_t* document)
 {
     page_t* page = malloc(sizeof(page_t));
@@ -1856,7 +1858,10 @@ void document_free(document_t* document)
     document->pages_num = 0;
 }
 
-/* Looks at last two char_t's in last span_t of <page>, and either leaves
+/* Does preliminary processing of the end of the last spen in a page; intended
+to be called as we load span information.
+
+Looks at last two char_t's in last span_t of <page>, and either leaves
 unchanged, or removes space in last-but-one position, or moves last char_t into
 a new span_t. */
 static int page_span_end_clean( page_t* page)
@@ -1956,8 +1961,8 @@ static int page_span_end_clean( page_t* page)
     return ret;
 }
 
-/* Reads from intermediate data into document_t. */
-static int read_spans1(const char* path, document_t *document)
+/* Reads from 'raw' device output into document_t. */
+static int read_spans_raw(const char* path, document_t *document)
 {
     int ret = -1;
 
@@ -2392,8 +2397,8 @@ int main(int argc, char** argv)
     const char* input_path          = NULL;
     const char* docx_template_path  = NULL;
     const char* content_path        = NULL;
-    int preserve_dir = 0;
-    const char* method = NULL;
+    int         preserve_dir        = 0;
+    const char* method              = NULL;
 
     for (int i=1; i<argc; ++i) {
         const char* arg = argv[i];
@@ -2504,7 +2509,7 @@ int main(int argc, char** argv)
         }
     }
     else if (!strcmp(method, "raw")) {
-        if (read_spans1(input_path, &document)) {
+        if (read_spans_raw(input_path, &document)) {
             fprintf(stderr, "Failed to read 'raw' output from: %s\n", input_path);
             goto end;
         }
