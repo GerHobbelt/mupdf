@@ -76,6 +76,38 @@ static int str_cat(char** p, const char* s)
     return 0;
 }
 
+typedef struct
+{
+    char*   chars;
+    int     chars_num;
+} string_t;
+
+void string_init(string_t* str)
+{
+    str->chars = NULL;
+    str->chars_num = 0; /* Excludes terminating 0. */
+}
+
+static int string_catl(string_t* string, const char* s, int s_len)
+{
+    char* chars = realloc(string->chars, string->chars_num + s_len + 1);
+    if (!chars)    return -1;
+    memcpy(chars + string->chars_num, s, s_len+1);
+    string->chars = chars;
+    string->chars_num += s_len;
+    return 0;
+}
+
+static int string_catc(string_t* string, char c)
+{
+    return string_catl(string, &c, 1);
+}
+
+static int string_cat(string_t* string, const char* s)
+{
+    return string_catl(string, s, strlen(s));
+}
+
 /* Reads bytes until EOF and returns zero-terminated string in memory allocated
 with realloc(). If error, we return NULL with errno set. */
 static char* read_all(FILE* in)
