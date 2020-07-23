@@ -130,6 +130,7 @@ static void tag_show(tag_t* tag, FILE* out)
     }
 }
 
+/* Returns pointer to value of specified attribute, or NULL if not found. */
 static char* tag_attributes_find(tag_t* tag, const char* name)
 {
     for (int i=0; i<tag->attributes_num; ++i) {
@@ -2392,8 +2393,7 @@ int main(int argc, char** argv)
     const char* docx_template_path  = NULL;
     const char* content_path        = NULL;
     int preserve_dir = 0;
-    int use_stext = 0;
-    int format_trace = 0;
+    const char* device = NULL;
 
     for (int i=1; i<argc; ++i) {
         const char* arg = argv[i];
@@ -2413,22 +2413,26 @@ int main(int argc, char** argv)
                     "        If specified, we write raw .docx content to <path>; this is the\n"
                     "        text that we embed inside the template word/document.xml file\n"
                     "        when generating the .docx.\n"
+                    "    -d <device>\n"
+                    "        How to extract information from pdf document:\n"
+                    "            raw: use raw device.\n"
+                    "            trace: use trace device.\n"
+                    "            stext: use stext device.\n"
                     "    -i <input-path>\n"
                     "        Name of XML file containing low-level text spans.\n"
                     "    -o <docx-path>\n"
                     "        Output .docx file.\n"
                     "    -p 0|1\n"
                     "        If 1, we preserve uncompressed <docx-path>.lib/ directory.\n"
-                    "    -r 0|1\n"
-                    "        Intermediate file is trace format.\n"
-                    "    -s 0|1\n"
-                    "        Use stext to do most of the extraction, instead of local routines.\n"
                     "    -t <docx-template>\n"
                     "        Name of docx file to use as template.\n"
                     );
         }
         else if (!strcmp(arg, "-c")) {
             content_path = argv[++i];
+        }
+        else if (!strcmp(arg, "-d")) {
+            device = argv[++i];
         }
         else if (!strcmp(arg, "-i")) {
             input_path = argv[++i];
@@ -2438,12 +2442,6 @@ int main(int argc, char** argv)
         }
         else if (!strcmp(arg, "-p")) {
             preserve_dir = atoi(argv[++i]);
-        }
-        else if (!strcmp(arg, "-r")) {
-            format_trace = atoi(argv[++i]);
-        }
-        else if (!strcmp(arg, "-s")) {
-            use_stext = atoi(argv[++i]);
         }
         else if (!strcmp(arg, "-t")) {
             docx_template_path = argv[++i];
@@ -2462,8 +2460,15 @@ int main(int argc, char** argv)
 
     int e = -1;
     char* content = NULL;
+    document_t  document;
+    document_init(&document);
 
-    if (use_stext) {
+    if (!device) {
+        fprintf(stderr, "Must specify -d <device>\n");
+        errno = ESRCH;
+        goto end;
+    }
+    else if (!strcmp(device, "stext")) {
         fprintf(stderr, "Using stext to do main extraction\n");
         m_locks.user = NULL;
         m_locks.lock = lock;
@@ -2484,24 +2489,31 @@ int main(int argc, char** argv)
 
         fz_drop_context(ctx);
     }
-    else {
-        errno = 0;
+    else if (!strcmp(device, "trace")) {
         document_t  document;
         document_init(&document);
-        if (format_trace) {
-            if (read_spans_trace(input_path, &document)) {
-                fprintf(stderr, "read_spans_trace() failed\n");
-                goto end;
-            }
+        if (read_spans_trace(input_path, &document)) {
+            fprintf(stderr, "read_spans_trace() failed\n");
+            goto end;
         }
-        else {
-            if (read_spans1(input_path, &document)) goto end;
+        if (document_to_docx_content(&document, &content)) {
+            fprintf(stderr, "Failed to create docx content errno=%i: %s\n", errno, strerror(errno));
+            goto end;
         }
-        
+    }
+    else if (!strcmp(device, "raw")) {
+        document_t  document;
+        document_init(&document);
+        if (read_spans1(input_path, &document)) goto end;
         if (document_to_docx_content(&document, &content)) {
             fprintf(stderr, "Failed to create docx content errno=%i: %s\n", errno, strerror(errno));
             return 1;
         }
+    }
+    else {
+        fprintf(stderr, "Unrecognised device '%s'\n", device);
+        errno = ESRCH;
+        goto end;
     }
 
     if (content_path) {
@@ -2517,6 +2529,7 @@ int main(int argc, char** argv)
     end:
     
     free(content);
+    document_free(&document);
 
     fprintf(stderr, "Finished, e=%i\n", e);
     Memento_listBlocks();
