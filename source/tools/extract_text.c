@@ -76,16 +76,23 @@ static int str_cat(char** p, const char* s)
     return 0;
 }
 
+/* std::string in C. */
 typedef struct
 {
     char*   chars;
     int     chars_num;
 } string_t;
 
-void string_init(string_t* str)
+void string_init(string_t* string)
 {
-    str->chars = NULL;
-    str->chars_num = 0; /* Excludes terminating 0. */
+    string->chars = NULL;
+    string->chars_num = 0; /* Excludes terminating 0. */
+}
+
+void string_free(string_t* string)
+{
+    free(string->chars);
+    string_init(string);
 }
 
 static int string_catl(string_t* string, const char* s, int s_len)
@@ -723,70 +730,68 @@ static void page_to_xml(fz_context* ctx, fz_stext_page *page, int id, FILE* out_
 in a sensible order - e.g. don't call docx_paragraph_start() twice without
 intervening call to docx_paragraph_finish(). */
 
-static int docx_paragraph_start(char** content)
+static int docx_paragraph_start(string_t* content)
 {
-    return str_cat(content, "\n\n<w:p>");
+    return string_cat(content, "\n\n<w:p>");
 }
 
-static int docx_paragraph_finish(char** content)
+static int docx_paragraph_finish(string_t* content)
 {
-    return str_cat(content, "\n</w:p>");
+    return string_cat(content, "\n</w:p>");
 }
 
 /* Starts a new run. Caller must ensure that docx_run_finish() was called to
 terminate any previous run. */
-static int docx_run_start(char** content, const char* font_name, double font_size,
+static int docx_run_start(string_t* content, const char* font_name, double font_size,
         int bold, int italic)
 {
     int e = 0;
-    if (!e) e = str_cat(content, "\n<w:r><w:rPr><w:rFonts w:ascii=\"");
-    if (!e) e = str_cat(content, font_name);
-    if (!e) e = str_cat(content, "\" w:hAnsi=\"");
-    if (!e) e = str_cat(content, font_name);
-    if (!e) e = str_cat(content, "\"/>");
-    if (!e && bold) e = str_cat(content, "<w:b/>");
-    if (!e && italic) e = str_cat(content, "<w:i/>");
+    if (!e) e = string_cat(content, "\n<w:r><w:rPr><w:rFonts w:ascii=\"");
+    if (!e) e = string_cat(content, font_name);
+    if (!e) e = string_cat(content, "\" w:hAnsi=\"");
+    if (!e) e = string_cat(content, font_name);
+    if (!e) e = string_cat(content, "\"/>");
+    if (!e && bold) e = string_cat(content, "<w:b/>");
+    if (!e && italic) e = string_cat(content, "<w:i/>");
     if (!e) {
         char    font_size_text[32];
         snprintf(font_size_text, sizeof(font_size_text), "%.1f", font_size * 2);
-        e = str_cat(content, font_size_text);
+        e = string_cat(content, font_size_text);
     }
-    if (!e) e = str_cat(content, "\"/></w:rPr><w:t xml:space=\"preserve\">");
+    if (!e) e = string_cat(content, "\"/></w:rPr><w:t xml:space=\"preserve\">");
     assert(!e);
     return e;
 
 }
-static int docx_run_finish(char** content)
+static int docx_run_finish(string_t* content)
 {
-    return str_cat(content, "</w:t></w:r>");
+    return string_cat(content, "</w:t></w:r>");
 }
 
-static int docx_char_append_string(char** content, char* text)
+static int docx_char_append_string(string_t* content, char* text)
 {
-    return str_cat(content, text);
+    return string_cat(content, text);
 }
 
-static int docx_char_append_char(char** content, char c)
+static int docx_char_append_char(string_t* content, char c)
 {
-    return str_catc(content, c);
+    return string_catc(content, c);
 }
 
 /* Removes last <len> chars. */
-static int docx_char_truncate(char** content, int len)
+static int docx_char_truncate(string_t* content, int len)
 {
-    int content_len = strlen(*content);
-    assert(len <= content_len);
-    (*content)[content_len - len] = 0;
+    assert(len <= content->chars_num);
+    content->chars_num -= len;
+    content->chars[content->chars_num] = 0;
     return 0;
 }
 
 /* Removes last char if it is <c>. */
-static int docx_char_truncate_if(char** content, char c)
+static int docx_char_truncate_if(string_t* content, char c)
 {
-    if (!*content) return 0;
-    int l = strlen(*content);
-    if (l && (*content)[l-1] == c) {
-        (*content)[l-1] = 0;
+    if (content->chars_num && content->chars[content->chars_num-1] == c) {
+        docx_char_truncate(content, 1);
     }
     return 0;
 }
@@ -795,10 +800,8 @@ static int docx_char_truncate_if(char** content, char c)
 /* Creates docx content from fz_stext_page, applying some heuristics to clean
 up the output, and makes *content point to zero-terminated text allocated by
 realloc(). */
-static int page_to_docx_content(fz_context* ctx, fz_stext_page *page, char** content)
+static int page_to_docx_content(fz_context* ctx, fz_stext_page *page, string_t* content)
 {
-    *content = NULL;
-
     fz_stext_block* block;
     for (block = page->first_block; block; block = block->next)
     {
@@ -847,10 +850,9 @@ static int page_to_docx_content(fz_context* ctx, fz_stext_page *page, char** con
                         them slightly overlapping, so we use a small correction
                         to avoid spurious removal of legitimate spaces. */
                         if (ch_prev->quad.ur.x - 0.001 > ch->quad.ul.x) {
-                            size_t l = strlen(*content);
-                            const char* tail = *content;
-                            if (l > 20) {
-                                tail = (*content) + l - 20;
+                            const char* tail = content->chars;
+                            if (content->chars_num > 20) {
+                                tail = content->chars + content->chars_num - 20;
                             }
                             if (0) fprintf(stderr, "removing space:\n"
                                     "    ch_prev->quad=(ul=(%f, %f) ur=(%f, %f) ll==(%f, %f) lr==(%f, %f)\n"
@@ -976,9 +978,8 @@ Returns 0 on success or -1 with errno set.
 
 We use the 'zip' and 'unzip' commands.
 */
-static int docx_create(const char* content, const char* path_out, const char* path_template, int preserve_dir)
+static int docx_create(string_t* content, const char* path_out, const char* path_template, int preserve_dir)
 {
-    assert(content);
     assert(path_out);
     assert(path_template);
 
@@ -1049,7 +1050,7 @@ static int docx_create(const char* content, const char* path_out, const char* pa
     }
     if (0
             || fwrite(original, original_pos - original, 1 /*nmemb*/, f) == 0
-            || fwrite(content, strlen(content), 1 /*nmemb*/, f) == 0
+            || fwrite(content->chars, content->chars_num, 1 /*nmemb*/, f) == 0
             || fwrite(original_pos, strlen(original_pos), 1 /*nmemb*/, f) == 0
             || fclose(f) < 0
             ) {
@@ -2233,12 +2234,11 @@ static int read_spans_trace(const char* path, document_t* document)
 
 /* Writes paragraphs from document_t into docx content. On return
 *content points to zero-terminated content, allocated by realloc(). */
-static int paras_to_content(document_t* document, char** content)
+static int paras_to_content(document_t* document, string_t* content)
 {
     int ret = -1;
 
     /* Write paragraphs into <content>. */
-    *content = NULL;
     int p;
     for (p=0; p<document->pages_num; ++p) {
         page_t* page = document->pages[p];
@@ -2372,10 +2372,9 @@ static int paras_to_content(document_t* document, char** content)
 
 /* Reads from intermediate data and converts into docx content. On return
 *content points to zero-terminated content, allocated by realloc(). */
-static int document_to_docx_content(document_t* document, char** content)
+static int document_to_docx_content(document_t* document, string_t* content)
 {
     int ret = -1;
-    *content = NULL;
     
     /* Now for each page we join spans into lines and paragraphs. A line is a
     list of spans that are at the same angle and on the same line. A paragraph
@@ -2498,7 +2497,8 @@ int main(int argc, char** argv)
     assert(docx_template_path);
 
     int e = -1;
-    char* content = NULL;
+    string_t content;
+    string_init(&content);
     document_t  document;
     document_init(&document);
 
@@ -2558,15 +2558,15 @@ int main(int argc, char** argv)
         fprintf(stderr, "Writing content to: %s\n", content_path);
         FILE* f = fopen(content_path, "w");
         assert(f);
-        fwrite(content, strlen(content), 1 /*nmemb*/, f);
+        fwrite(content.chars, content.chars_num, 1 /*nmemb*/, f);
         fclose(f);
     }
     fprintf(stderr, "Creating .docx file: %s\n", docx_out_path);
-    e = docx_create(content, docx_out_path, docx_template_path, preserve_dir);
+    e = docx_create(&content, docx_out_path, docx_template_path, preserve_dir);
 
     end:
     
-    free(content);
+    string_free(&content);
     document_free(&document);
 
     fprintf(stderr, "Finished, e=%i\n", e);
