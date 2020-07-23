@@ -1110,13 +1110,13 @@ static int span_append_c(span_t* span, int c)
     return 0;
 }
 
-static char_t* span_item_first(span_t* span)
+static char_t* span_char_first(span_t* span)
 {
     assert(span->chars_num);
     return &span->chars[0];
 }
 
-static char_t* span_item_last(span_t* span)
+static char_t* span_char_last(span_t* span)
 {
     assert(span->chars_num);
     return &span->chars[span->chars_num-1];
@@ -1125,10 +1125,10 @@ static char_t* span_item_last(span_t* span)
 static void span_dump(span_t* span, FILE* out)
 {
     fprintf(out, "(%f,%f)..(%f,%f) '",
-            span_item_first(span)->x,
-            span_item_first(span)->y,
-            span_item_last(span)->x,
-            span_item_last(span)->y
+            span_char_first(span)->x,
+            span_char_first(span)->y,
+            span_char_last(span)->x,
+            span_char_last(span)->y
             );
     int i;
     for(i=0; i<span->chars_num; ++i) {
@@ -1157,18 +1157,18 @@ span_t* line_span_first(line_t* line)
     return line->spans[0];
 }
 
-/* Returns first span_item in a line. */
+/* Returns first char_t in a line. */
 static char_t* line_item_first(line_t* line)
 {
     span_t* span = line_span_first(line);
-    return span_item_first(span);
+    return span_char_first(span);
 }
 
-/* Returns last span_item in a line. */
+/* Returns last char_t in a line. */
 static char_t* line_item_last(line_t* line)
 {
     span_t* span = line_span_last(line);
-    return span_item_last(span);
+    return span_char_last(span);
 }
 
 /* A list of lines that are aligned and adjacent to each other so as to form a
@@ -1220,11 +1220,11 @@ static double line_angle(line_t* line)
 /* Returns total width of span. */
 double span_adv_total(span_t* span)
 {
-    double dx = span_item_last(span)->x - span_item_first(span)->x;
-    double dy = span_item_last(span)->y - span_item_first(span)->y;
+    double dx = span_char_last(span)->x - span_char_first(span)->x;
+    double dy = span_char_last(span)->y - span_char_first(span)->y;
     /* We add on the advance of the last item; this avoids us returning zero if
     there's only one item. */
-    double adv = span_item_last(span)->adv * fz_matrix_expansion(span->trm);
+    double adv = span_char_last(span)->adv * fz_matrix_expansion(span->trm);
     return sqrt(dx*dx + dy*dy) + adv;
 }
 
@@ -1336,15 +1336,15 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
             (as opposed to being at the same angle but in different lines). */
             span_t* span_b = line_span_first(line_b);
             double angle_a_b = atan2(
-                    span_item_first(span_b)->y - span_item_last(span_a)->y,
-                    span_item_first(span_b)->x - span_item_last(span_a)->x
+                    span_char_first(span_b)->y - span_char_last(span_a)->y,
+                    span_char_first(span_b)->x - span_char_last(span_a)->x
                     );
             /* Might want to relax this when we test on non-horizontal lines.
             */
             const double    angle_tolerance_deg = 1;
             if (fabs(angle_a_b - angle_a) * 180/3.14 <= angle_tolerance_deg) {
                 /* Find distance between end of line_a and beginning of line_b. */
-                double adv = spans_adv(span_a, span_item_last(span_a), span_item_first(span_b));
+                double adv = spans_adv(span_a, span_char_last(span_a), span_char_first(span_b));
                 if (!nearest_line || adv < nearest_adv) {
                     nearest_line = line_b;
                     nearest_adv = adv;
@@ -1361,8 +1361,8 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
             span_t* span_b = line_span_first(nearest_line);
 
             if (1
-                    && span_item_last(span_a)->ucs != ' '
-                    && span_item_first(span_b)->ucs != ' '
+                    && span_char_last(span_a)->ucs != ' '
+                    && span_char_first(span_b)->ucs != ' '
                     ) {
                 /* Find average advance of the two adjacent spans in the two
                 lines we are considering joining, so that we can decide whether
@@ -1394,9 +1394,9 @@ static int make_lines(span_t** spans, int spans_num, line_t*** o_lines, int* o_l
                             "joining line insert_space=%i a=%i (y=%f) to line nearest_line_b=%i (y=%f). nearest_adv=%lf average_adv=%lf\n",
                             insert_space,
                             a,
-                            span_item_last(span_a)->y,
+                            span_char_last(span_a)->y,
                             nearest_line_b,
-                            span_item_first(span_b)->y,
+                            span_char_first(span_b)->y,
                             nearest_adv,
                             average_adv
                             );
@@ -1658,7 +1658,7 @@ static int make_paras(line_t** lines, int lines_num, para_t*** o_paras, int* o_p
             if (nearest_para_distance < 1.5 * line_b_size) {
                 /* Join these two para_t's. */
                 span_t* a_span = line_span_last(line_a);
-                if (span_item_last(a_span)->ucs == '-') {
+                if (span_char_last(a_span)->ucs == '-') {
                     /* remove trailing '-' at end of prev line. */
                     a_span->chars_num -= 1;
                 }
@@ -1870,7 +1870,7 @@ static int page_span_end_clean( page_t* page)
     assert(page->spans_num);
     span_t* span = page->spans[page->spans_num-1];
     assert(span->chars_num);
-    char_t* span_item = &span->chars[ span->chars_num - 1];
+    char_t* char_ = &span->chars[span->chars_num - 1];
     if (span->chars_num == 1) {
         return 0;
     }
@@ -1888,17 +1888,17 @@ static int page_span_end_clean( page_t* page)
     }
     dir = fz_transform_vector(dir, span->trm);
 
-    float x = span_item[-1].x + span_item[-1].adv * dir.x;
-    float y = span_item[-1].y + span_item[-1].adv * dir.y;
+    float x = char_[-1].x + char_[-1].adv * dir.x;
+    float y = char_[-1].y + char_[-1].adv * dir.y;
     
-    float err_x = (span_item->x - x) / font_size;
-    float err_y = (span_item->y - y) / font_size;
-    if (0) fprintf(stderr, "ucs=%c pos=(%f, %f) span_item=(%f, %f) err=(%f, %f) adv=%f\n",
-            span_item->ucs,
+    float err_x = (char_->x - x) / font_size;
+    float err_y = (char_->y - y) / font_size;
+    if (0) fprintf(stderr, "ucs=%c pos=(%f, %f) char_=(%f, %f) err=(%f, %f) adv=%f\n",
+            char_->ucs,
             x, y,
-            span_item->x, span_item->y,
+            char_->x, char_->y,
             err_x, err_y,
-            span_item->adv
+            char_->adv
             );
 
     if (1
@@ -1949,9 +1949,9 @@ static int page_span_end_clean( page_t* page)
         span2->chars_num = 1;
         span2->chars = malloc(sizeof(char_t) * span2->chars_num);
         if (!span2->chars) goto end;
-        span2->chars[0] = *span_item;
+        span2->chars[0] = *char_;
 
-        span_item = &span2->chars[0];
+        char_ = &span2->chars[0];
 
         span->chars_num -= 1;
         return 0;
@@ -2051,12 +2051,12 @@ static int read_spans_raw(const char* path, document_t *document)
                     goto end;
                 }
                 if (span_append_c(span, 0 /*c*/)) goto end;
-                char_t* span_item = &span->chars[ span->chars_num-1];
-                span_item->x    = atof(tag_attributes_find(&tag, "x"));
-                span_item->y    = atof(tag_attributes_find(&tag, "y"));
-                span_item->gid  = atoi(tag_attributes_find(&tag, "gid"));
-                span_item->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
-                span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
+                char_t* char_ = &span->chars[ span->chars_num-1];
+                char_->x    = atof(tag_attributes_find(&tag, "x"));
+                char_->y    = atof(tag_attributes_find(&tag, "y"));
+                char_->gid  = atoi(tag_attributes_find(&tag, "gid"));
+                char_->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
+                char_->adv  = atof(tag_attributes_find(&tag, "adv"));
 
                 if (page_span_end_clean(page)) goto end;
                 span = page->spans[page->spans_num-1];
@@ -2168,12 +2168,12 @@ static int read_spans_trace(const char* path, document_t* document)
                         goto end;
                     }
                     if (span_append_c(span, 0 /*c*/)) goto end;
-                    char_t* span_item = &span->chars[ span->chars_num-1];
-                    span_item->x    = atof(tag_attributes_find(&tag, "x"));
-                    span_item->y    = atof(tag_attributes_find(&tag, "y"));
-                    span_item->gid  = 0;
-                    span_item->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
-                    span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
+                    char_t* char_ = &span->chars[ span->chars_num-1];
+                    char_->x    = atof(tag_attributes_find(&tag, "x"));
+                    char_->y    = atof(tag_attributes_find(&tag, "y"));
+                    char_->gid  = 0;
+                    char_->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
+                    char_->adv  = atof(tag_attributes_find(&tag, "adv"));
 
                     if (page_span_end_clean(page)) goto end;
                     span = page->spans[page->spans_num-1];
@@ -2272,14 +2272,14 @@ static int paras_to_content(document_t* document, char** content)
 
                     int si;
                     for (si=0; si<span->chars_num; ++si) {
-                        char_t* span_item = &span->chars[si];
-                        if (0) fprintf(stderr, "%c", span_item->ucs);
-                        if (0) fprintf(stderr, "[span_item] %c (%f, %f)\n",
-                                span_item->ucs,
-                                span_item->x,
-                                span_item->y
+                        char_t* char_ = &span->chars[si];
+                        if (0) fprintf(stderr, "%c", char_->ucs);
+                        if (0) fprintf(stderr, "[char_] %c (%f, %f)\n",
+                                char_->ucs,
+                                char_->x,
+                                char_->y
                                 );
-                        int c = span_item->ucs;
+                        int c = char_->ucs;
                         if (0) {}
 
                         /* Escape XML special characters. */
