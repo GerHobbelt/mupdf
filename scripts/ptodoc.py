@@ -505,8 +505,6 @@ def test(mupdf_shared_dir, so_build, valgrind, squeeze, failat):
             ):
         in_pdf_rel = os.path.relpath(in_pdf)
         for device in 'raw', 'stext', 'trace':
-            if device == 'stext':
-                continue
             with jlib.LogPrefixScope(f'{in_pdf_rel} device={device}: '):
                 extract(
                         extract_text_exe,
