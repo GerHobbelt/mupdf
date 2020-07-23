@@ -2494,10 +2494,8 @@ int main(int argc, char** argv)
         fz_drop_context(ctx);
     }
     else if (!strcmp(method, "trace")) {
-        document_t  document;
-        document_init(&document);
         if (read_spans_trace(input_path, &document)) {
-            fprintf(stderr, "read_spans_trace() failed\n");
+            fprintf(stderr, "Failed to read 'trace' output from: %s\n", input_path);
             goto end;
         }
         if (document_to_docx_content(&document, &content)) {
@@ -2506,9 +2504,10 @@ int main(int argc, char** argv)
         }
     }
     else if (!strcmp(method, "raw")) {
-        document_t  document;
-        document_init(&document);
-        if (read_spans1(input_path, &document)) goto end;
+        if (read_spans1(input_path, &document)) {
+            fprintf(stderr, "Failed to read 'raw' output from: %s\n", input_path);
+            goto end;
+        }
         if (document_to_docx_content(&document, &content)) {
             fprintf(stderr, "Failed to create docx content errno=%i: %s\n", errno, strerror(errno));
             return 1;
@@ -2536,6 +2535,6 @@ int main(int argc, char** argv)
     document_free(&document);
 
     fprintf(stderr, "Finished, e=%i\n", e);
-    Memento_listBlocks();
+    
     return e;
 }
