@@ -366,31 +366,35 @@ def extract(
         mupdf_shared_dir,
         path_template,
         path_in,
-        use_stext,
         valgrind,
         squeeze,
         failat,
-        format_trace,
+        device,
         ):
     '''
     Extracts text, and compares .docx's word/document.xml if reference file
     exists.
     '''
-    log(f'Doing text extraction with {path_in}, use_stext={use_stext}')
-    path_out = f'{path_in}-stext.docx' if use_stext else f'{path_in}.docx'
+    log(f'Doing text extraction with {path_in}, device={device}')
+    path_out = f'{path_in}-{device}.docx'
     path_content = f'{path_out}.content.xml'
     path_intermediate = f'{path_in}.intermediate.xml'
 
     executable = None
-    if format_trace:
-        assert not use_stext
+    command = None
+    if device == 'trace':
         command = f'build/debug/mutool draw -F trace -o {path_intermediate} {path_in}'
-        jlib.system( command, out=log, verbose=1, prefix='    ')
-    else:
+        #jlib.system( command, out=log, verbose=1, prefix='    ')
+    elif device == 'raw' or device == 'stext':
+        command = f'build/debug/mutool draw -F raw -o {path_intermediate} {path_in}'
         # Run mutool.py to get intermediate xml.
-        command = ''
-        command += f'LD_LIBRARY_PATH={mupdf_shared_dir} PYTHONPATH={mupdf_shared_dir}'
-        command += f' scripts/mutool.py draw -F raw -o {path_intermediate} {path_in}'
+        #command = ''
+        #command += f'LD_LIBRARY_PATH={mupdf_shared_dir} PYTHONPATH={mupdf_shared_dir}'
+        #command += f' scripts/mutool.py draw -F raw -o {path_intermediate} {path_in}'
+    else:
+        assert 0
+        
+    if command:
         jlib.system( command, out=log, verbose=1, prefix='    ')
 
     command = ''
@@ -410,8 +414,7 @@ def extract(
                 f' -t {path_template}'
                 f' -p 1'    # preserve .docx temporary directory.
                 f' -c {path_content}'
-                f' -r {format_trace}'
-                f' -s {use_stext}'
+                f' -d {device}'
                 f' -o {path_out}'
                 )
     if squeeze:
@@ -434,7 +437,7 @@ def extract(
         log(f'*** No reference document {path_document_xml_ref} to compare with generated {path_document_xml}')
 
 
-def test(mupdf_shared_dir, so_build, valgrind, squeeze, failat, format_trace):
+def test(mupdf_shared_dir, so_build, valgrind, squeeze, failat):
 
     if so_build:
         with jlib.LogPrefixScope('building mupdf.so: '):
@@ -501,19 +504,19 @@ def test(mupdf_shared_dir, so_build, valgrind, squeeze, failat, format_trace):
             f'{mupdf_root}/../Python2.pdf',
             ):
         in_pdf_rel = os.path.relpath(in_pdf)
-        stexts = (0,) if format_trace else (0, 1)
-        for use_stext in stexts:
-            with jlib.LogPrefixScope(f'{in_pdf_rel} use_stext={use_stext}: '):
+        for device in 'raw', 'stext', 'trace':
+            if device == 'stext':
+                continue
+            with jlib.LogPrefixScope(f'{in_pdf_rel} device={device}: '):
                 extract(
                         extract_text_exe,
                         mupdf_shared_dir,
                         path_template,
                         in_pdf_rel,
-                        use_stext=use_stext,
                         valgrind=valgrind,
                         squeeze=squeeze,
                         failat=failat,
-                        format_trace=format_trace,
+                        device=device,
                         )
 
     log( 'finished')
@@ -526,7 +529,6 @@ if __name__ == '__main__':
     valgrind = None
     squeeze = None
     failat = None
-    format_trace = 0
     
     while 1:
         try:
@@ -541,8 +543,6 @@ if __name__ == '__main__':
             failat = next(args)
         elif arg in ('-h', '--help'):
             print(__doc__)
-        elif arg == '-r':
-            format_trace = int(next(args))
         elif arg == '--valgrind':
             valgrind = int(next(args))
         elif arg == '--squeeze':
@@ -550,7 +550,7 @@ if __name__ == '__main__':
         else:
             assert 0, 'unrecognised arg: %r' % arg
     try:
-        test(mupdf_shared_dir, so_build, valgrind, squeeze, failat, format_trace)
+        test(mupdf_shared_dir, so_build, valgrind, squeeze, failat)
     except Exception:
         print( jlib.exception_info())
         sys.exit(1)
