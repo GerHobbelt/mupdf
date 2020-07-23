@@ -369,23 +369,23 @@ def extract(
         valgrind,
         squeeze,
         failat,
-        device,
+        method,
         ):
     '''
     Extracts text, and compares .docx's word/document.xml if reference file
     exists.
     '''
-    log(f'Doing text extraction with {path_in}, device={device}')
-    path_out = f'{path_in}-{device}.docx'
+    log(f'Doing text extraction with {path_in}, method={method}')
+    path_out = f'{path_in}-{method}.docx'
     path_content = f'{path_out}.content.xml'
     path_intermediate = f'{path_in}.intermediate.xml'
 
     executable = None
     command = None
-    if device == 'trace':
+    if method == 'trace':
         command = f'build/debug/mutool draw -F trace -o {path_intermediate} {path_in}'
         #jlib.system( command, out=log, verbose=1, prefix='    ')
-    elif device == 'raw' or device == 'stext':
+    elif method == 'raw' or method == 'stext':
         command = f'build/debug/mutool draw -F raw -o {path_intermediate} {path_in}'
         # Run mutool.py to get intermediate xml.
         #command = ''
@@ -414,7 +414,7 @@ def extract(
                 f' -t {path_template}'
                 f' -p 1'    # preserve .docx temporary directory.
                 f' -c {path_content}'
-                f' -d {device}'
+                f' -m {method}'
                 f' -o {path_out}'
                 )
     if squeeze:
@@ -504,8 +504,8 @@ def test(mupdf_shared_dir, so_build, valgrind, squeeze, failat):
             f'{mupdf_root}/../Python2.pdf',
             ):
         in_pdf_rel = os.path.relpath(in_pdf)
-        for device in 'raw', 'stext', 'trace':
-            with jlib.LogPrefixScope(f'{in_pdf_rel} device={device}: '):
+        for method in 'raw', 'stext', 'trace':
+            with jlib.LogPrefixScope(f'{in_pdf_rel} method={method}: '):
                 extract(
                         extract_text_exe,
                         mupdf_shared_dir,
@@ -514,7 +514,7 @@ def test(mupdf_shared_dir, so_build, valgrind, squeeze, failat):
                         valgrind=valgrind,
                         squeeze=squeeze,
                         failat=failat,
-                        device=device,
+                        method=method,
                         )
 
     log( 'finished')
