@@ -2393,7 +2393,7 @@ int main(int argc, char** argv)
     const char* docx_template_path  = NULL;
     const char* content_path        = NULL;
     int preserve_dir = 0;
-    const char* device = NULL;
+    const char* method = NULL;
 
     for (int i=1; i<argc; ++i) {
         const char* arg = argv[i];
@@ -2403,8 +2403,8 @@ int main(int argc, char** argv)
                     "\n"
                     "Input:\n"
                     "\n"
-                    "    We require either a file containing XML output from mutool -F stext, or a .pdf"
-                    "    file on which we run mutool -F stext|raw|trace ourselves."
+                    "    We require a file containing XML output from: mutool draw -F <device>\n"
+                    "    - where <device> is 'raw' or 'trace'.\n"
                     "\n"
                     "    We also requires a template .docx file\n"
                     "\n"
@@ -2413,11 +2413,15 @@ int main(int argc, char** argv)
                     "        If specified, we write raw .docx content to <path>; this is the\n"
                     "        text that we embed inside the template word/document.xml file\n"
                     "        when generating the .docx.\n"
-                    "    -d <device>\n"
+                    "    -m <method>\n"
                     "        How to extract information from pdf document:\n"
-                    "            raw: use raw device.\n"
-                    "            trace: use trace device.\n"
-                    "            stext: use stext device.\n"
+                    "            raw\n"
+                    "                <input-path> is from 'raw' device; use native conversion.\n"
+                    "            trace\n"
+                    "                <input-path> is from 'trace' device; use native conversion.\n"
+                    "            stext\n"
+                    "                <input-path> is from 'raw' device; use in-built stext\n"
+                    "                conversion.\n"
                     "    -i <input-path>\n"
                     "        Name of XML file containing low-level text spans.\n"
                     "    -o <docx-path>\n"
@@ -2431,8 +2435,8 @@ int main(int argc, char** argv)
         else if (!strcmp(arg, "-c")) {
             content_path = argv[++i];
         }
-        else if (!strcmp(arg, "-d")) {
-            device = argv[++i];
+        else if (!strcmp(arg, "-m")) {
+            method = argv[++i];
         }
         else if (!strcmp(arg, "-i")) {
             input_path = argv[++i];
@@ -2463,12 +2467,12 @@ int main(int argc, char** argv)
     document_t  document;
     document_init(&document);
 
-    if (!device) {
-        fprintf(stderr, "Must specify -d <device>\n");
+    if (!method) {
+        fprintf(stderr, "Must specify -m <method>\n");
         errno = ESRCH;
         goto end;
     }
-    else if (!strcmp(device, "stext")) {
+    else if (!strcmp(method, "stext")) {
         fprintf(stderr, "Using stext to do main extraction\n");
         m_locks.user = NULL;
         m_locks.lock = lock;
@@ -2489,7 +2493,7 @@ int main(int argc, char** argv)
 
         fz_drop_context(ctx);
     }
-    else if (!strcmp(device, "trace")) {
+    else if (!strcmp(method, "trace")) {
         document_t  document;
         document_init(&document);
         if (read_spans_trace(input_path, &document)) {
@@ -2501,7 +2505,7 @@ int main(int argc, char** argv)
             goto end;
         }
     }
-    else if (!strcmp(device, "raw")) {
+    else if (!strcmp(method, "raw")) {
         document_t  document;
         document_init(&document);
         if (read_spans1(input_path, &document)) goto end;
@@ -2511,7 +2515,7 @@ int main(int argc, char** argv)
         }
     }
     else {
-        fprintf(stderr, "Unrecognised device '%s'\n", device);
+        fprintf(stderr, "Unrecognised method '%s'\n", method);
         errno = ESRCH;
         goto end;
     }
