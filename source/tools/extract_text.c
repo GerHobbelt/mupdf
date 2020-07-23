@@ -400,6 +400,11 @@ static int pparse_next(FILE* in, tag_t* out)
     }
 
     ret = 0;
+    
+    if (0) {
+        fprintf(stderr, "returning tag:\n");
+        tag_show(out, stderr);
+    }
 
     end:
 
@@ -423,6 +428,23 @@ static int s_read_matrix(const char* text, fz_matrix* matrix)
             &matrix->f
             );
     assert(n == 6);
+    return 0;
+}
+
+/* Like s_read_matrix() but only expects four values, and sets .e and .g to
+zero. */
+static int s_read_matrix4(const char* text, fz_matrix* matrix)
+{
+    int n = sscanf(text,
+            "%f %f %f %f",
+            &matrix->a,
+            &matrix->b,
+            &matrix->c,
+            &matrix->d
+            );
+    assert(n == 4);
+    matrix->e = 0;
+    matrix->f = 0;
     return 0;
 }
 
@@ -2083,6 +2105,9 @@ static int read_spans_trace(const char* path, document_t* document)
         int e = pparse_next(in, &tag);
         if (e == 1) break; /* EOF. */
         if (e) goto end;
+        if (!strcmp(tag.name, "/document")) {
+            break;
+        }
         if (strcmp(tag.name, "page")) {
             fprintf(stderr, "Expected <page> but tag.name='%s'\n", tag.name);
             errno = ESRCH;
@@ -2097,50 +2122,57 @@ static int read_spans_trace(const char* path, document_t* document)
                 break;
             }
             if (strcmp(tag.name, "fill_text")) continue;
+            fz_matrix   ctm;
+            s_read_matrix(tag_attributes_find(&tag, "transform"), &ctm);
             
-            span_t* span = page_span_append(page);
-            if (!span) goto end;
-            s_read_matrix(tag_attributes_find(&tag, "transform"), &span->ctm);
-            
-            if (pparse_next(in, &tag)) goto end;
-            if (strcmp(tag.name, "span")) {
-                fprintf(stderr, "Expected <span...> after <fill_text>, but tag.name='%s'\n", tag.name);
-                errno = ESRCH;
-                goto end;
-            }
-            
-            s_read_matrix(tag_attributes_find(&tag, "trm"), &span->trm);
-            char* f = tag_attributes_find(&tag, "font");
-            char* ff = strchr(f, '+');
-            if (ff)  f = ff + 1;
-            span->font_name = local_strdup(f);
-            if (!span->font_name) goto end;
-            span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
-            span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
-            span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
-
             for(;;) {
                 if (pparse_next(in, &tag)) goto end;
-                if (!strcmp(tag.name, "/span")) {
+                if (!strcmp(tag.name, "/fill_text")) {
                     break;
                 }
-                if (strcmp(tag.name, "g")) {
+                if (strcmp(tag.name, "span")) {
+                    fprintf(stderr, "Expected <span...> after <fill_text>, but tag.name='%s'\n", tag.name);
                     errno = ESRCH;
-                    fprintf(stderr, "Expected <g> but tag.name='%s'\n", tag.name);
                     goto end;
                 }
-                if (span_append_c(span, 0 /*c*/)) goto end;
-                char_t* span_item = &span->chars[ span->chars_num-1];
-                span_item->x    = atof(tag_attributes_find(&tag, "x"));
-                span_item->y    = atof(tag_attributes_find(&tag, "y"));
-                span_item->gid  = 0;
-                span_item->ucs  = atoi(tag_attributes_find(&tag, "glyph"));
-                span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
+                span_t* span = page_span_append(page);
+                if (!span) goto end;
+                span->ctm = ctm;
+                /* trace-device appears to only write first four members of
+                fz_text_span::trm, on the assumption that .e and .f are zero,
+                so we use s_read_matrix4() here. */
+                s_read_matrix4(tag_attributes_find(&tag, "trm"), &span->trm);
+                char* f = tag_attributes_find(&tag, "font");
+                char* ff = strchr(f, '+');
+                if (ff)  f = ff + 1;
+                span->font_name = local_strdup(f);
+                if (!span->font_name) goto end;
+                span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
+                span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
+                span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
 
-                if (page_span_end_clean(page)) goto end;
-                span = page->spans[page->spans_num-1];
+                for(;;) {
+                    if (pparse_next(in, &tag)) goto end;
+                    if (!strcmp(tag.name, "/span")) {
+                        break;
+                    }
+                    if (strcmp(tag.name, "g")) {
+                        errno = ESRCH;
+                        fprintf(stderr, "Expected <g> but tag.name='%s'\n", tag.name);
+                        goto end;
+                    }
+                    if (span_append_c(span, 0 /*c*/)) goto end;
+                    char_t* span_item = &span->chars[ span->chars_num-1];
+                    span_item->x    = atof(tag_attributes_find(&tag, "x"));
+                    span_item->y    = atof(tag_attributes_find(&tag, "y"));
+                    span_item->gid  = 0;
+                    span_item->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
+                    span_item->adv  = atof(tag_attributes_find(&tag, "adv"));
+
+                    if (page_span_end_clean(page)) goto end;
+                    span = page->spans[page->spans_num-1];
+                }
             }
-            tag_free(&tag);
         }
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
     }
@@ -2304,37 +2336,32 @@ static int paras_to_content(document_t* document, char** content)
 
 /* Reads from intermediate data and converts into docx content. On return
 *content points to zero-terminated content, allocated by realloc(). */
-static int spans_to_docx_content(const char* path, char** content)
+static int document_to_docx_content(document_t* document, char** content)
 {
     int ret = -1;
-
     *content = NULL;
-    document_t  document;
-    document_init(&document);
     
-    if (read_spans1(path, &document)) goto end;
-
     /* Now for each page we join spans into lines and paragraphs. A line is a
     list of spans that are at the same angle and on the same line. A paragraph
     is a list of lines that are at the same angle and close together. */
     int p;
-    for (p=0; p<document.pages_num; ++p) {
+    for (p=0; p<document->pages_num; ++p) {
         if (0) fprintf(stderr, "==[page %i]:\n", p);
-        page_t* page = document.pages[p];
+        page_t* page = document->pages[p];
 
         if (make_lines(page->spans, page->spans_num, &page->lines, &page->lines_num)) goto end;
 
         if (make_paras(page->lines, page->lines_num, &page->paras, &page->paras_num)) goto end;
     }
     
-    if (paras_to_content(&document, content)) goto end;
+    if (paras_to_content(document, content)) goto end;
 
     ret = 0;
 
     end:
 
     /* Free everything. */
-    document_free(&document);
+    document_free(document);
 
     return ret;
 }
@@ -2366,6 +2393,7 @@ int main(int argc, char** argv)
     const char* content_path        = NULL;
     int preserve_dir = 0;
     int use_stext = 0;
+    int format_trace = 0;
 
     for (int i=1; i<argc; ++i) {
         const char* arg = argv[i];
@@ -2376,7 +2404,7 @@ int main(int argc, char** argv)
                     "Input:\n"
                     "\n"
                     "    We require either a file containing XML output from mutool -F stext, or a .pdf"
-                    "    file on which we run mutool.py -F stext ourselves."
+                    "    file on which we run mutool -F stext|raw|trace ourselves."
                     "\n"
                     "    We also requires a template .docx file\n"
                     "\n"
@@ -2391,6 +2419,8 @@ int main(int argc, char** argv)
                     "        Output .docx file.\n"
                     "    -p 0|1\n"
                     "        If 1, we preserve uncompressed <docx-path>.lib/ directory.\n"
+                    "    -r 0|1\n"
+                    "        Intermediate file is trace format.\n"
                     "    -s 0|1\n"
                     "        Use stext to do most of the extraction, instead of local routines.\n"
                     "    -t <docx-template>\n"
@@ -2408,6 +2438,9 @@ int main(int argc, char** argv)
         }
         else if (!strcmp(arg, "-p")) {
             preserve_dir = atoi(argv[++i]);
+        }
+        else if (!strcmp(arg, "-r")) {
+            format_trace = atoi(argv[++i]);
         }
         else if (!strcmp(arg, "-s")) {
             use_stext = atoi(argv[++i]);
@@ -2427,8 +2460,8 @@ int main(int argc, char** argv)
     assert(docx_out_path);
     assert(docx_template_path);
 
-    int e;
-    char* content;
+    int e = -1;
+    char* content = NULL;
 
     if (use_stext) {
         fprintf(stderr, "Using stext to do main extraction\n");
@@ -2453,7 +2486,19 @@ int main(int argc, char** argv)
     }
     else {
         errno = 0;
-        if (spans_to_docx_content(input_path, &content)) {
+        document_t  document;
+        document_init(&document);
+        if (format_trace) {
+            if (read_spans_trace(input_path, &document)) {
+                fprintf(stderr, "read_spans_trace() failed\n");
+                goto end;
+            }
+        }
+        else {
+            if (read_spans1(input_path, &document)) goto end;
+        }
+        
+        if (document_to_docx_content(&document, &content)) {
             fprintf(stderr, "Failed to create docx content errno=%i: %s\n", errno, strerror(errno));
             return 1;
         }
@@ -2469,6 +2514,8 @@ int main(int argc, char** argv)
     fprintf(stderr, "Creating .docx file: %s\n", docx_out_path);
     e = create_docx(content, docx_out_path, docx_template_path, preserve_dir);
 
+    end:
+    
     free(content);
 
     fprintf(stderr, "Finished, e=%i\n", e);
