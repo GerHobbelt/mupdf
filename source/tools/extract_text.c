@@ -47,10 +47,8 @@ static char* local_strdup(const char* text)
 }
 
 
-/* We do lots of string appending, currently by simply realloc-ing each time.
-*/
-
-/* Appends a char to a string. Returns 0, or -1 with errno set if realloc()
+/* Appends a char to a zero-terminated string which is assumed to have been
+allocated with malloc/realloc. Returns 0, or -1 with errno set if realloc()
 failed. */
 static int str_catc(char** p, char c)
 {
@@ -79,14 +77,14 @@ static int str_cat(char** p, const char* s)
 /* std::string in C. */
 typedef struct
 {
-    char*   chars;
-    int     chars_num;
+    char*   chars;  /* NULL or zero-terminated. */
+    int     chars_num; /* Length of string pointed to by .chars. */
 } string_t;
 
 void string_init(string_t* string)
 {
     string->chars = NULL;
-    string->chars_num = 0; /* Excludes terminating 0. */
+    string->chars_num = 0;
 }
 
 void string_free(string_t* string)
@@ -150,17 +148,17 @@ static char* read_all(FILE* in)
 typedef struct {
     char*   name;
     char*   value;
-} attribute_t;
+} xml_attribute_t;
 
 /* Represents a single <...> XML tag plus trailing text. */
 typedef struct {
-    char*   name;
-    attribute_t*    attributes;
-    int             attributes_num;
-    char*   text;
-} tag_t;
+    char*               name;
+    xml_attribute_t*    attributes;
+    int                 attributes_num;
+    string_t            text;
+} xml_tag_t;
 
-static void tag_show(tag_t* tag, FILE* out)
+static void xml_tag_show(xml_tag_t* tag, FILE* out)
 {
     fprintf(out, "tag name=%s attributes_num=%i\n", tag->name, tag->attributes_num);
     int i;
@@ -170,7 +168,7 @@ static void tag_show(tag_t* tag, FILE* out)
 }
 
 /* Returns pointer to value of specified attribute, or NULL if not found. */
-static char* tag_attributes_find(tag_t* tag, const char* name)
+static char* xml_tag_attributes_find(xml_tag_t* tag, const char* name)
 {
     for (int i=0; i<tag->attributes_num; ++i) {
         if (!strcmp(tag->attributes[i].name, name)) {
@@ -183,18 +181,18 @@ static char* tag_attributes_find(tag_t* tag, const char* name)
 
 /* Returns int value of specified attribute, or <default_> if it is not found.
 We use atoi() and don't check for non-numeric attribute value. */
-static int tag_attributes_find_int(tag_t* tag, const char* name, int default_)
+static int xml_tag_attributes_find_int(xml_tag_t* tag, const char* name, int default_)
 {
-    const char* value = tag_attributes_find(tag, name);
+    const char* value = xml_tag_attributes_find(tag, name);
     if (!value) return default_;
     return atoi(value);
 }
 
 /* Finds float value of specified attribute, returning error if not found. We
 use atof() and don't check for non-numeric attribute value. */
-static int tag_attributes_find_float(tag_t* tag, const char* name, float* o_out)
+static int xml_tag_attributes_find_float(xml_tag_t* tag, const char* name, float* o_out)
 {
-    const char* value = tag_attributes_find(tag, name);
+    const char* value = xml_tag_attributes_find(tag, name);
     if (!value) {
         errno = ESRCH;
         return -1;
@@ -203,11 +201,11 @@ static int tag_attributes_find_float(tag_t* tag, const char* name, float* o_out)
     return 0;
 }
 
-static int tag_attributes_append(tag_t* tag, char* name, char* value)
+static int xml_tag_attributes_append(xml_tag_t* tag, char* name, char* value)
 {
-    attribute_t* a = realloc(
+    xml_attribute_t* a = realloc(
             tag->attributes,
-            (tag->attributes_num+1) * sizeof(attribute_t)
+            (tag->attributes_num+1) * sizeof(xml_attribute_t)
             );
     if (!a) return -1;
     tag->attributes = a;
@@ -219,26 +217,26 @@ static int tag_attributes_append(tag_t* tag, char* name, char* value)
 
 /* Sets all fields to NULL, so will cause memory leaks if fields have not been
 freed. */
-static void tag_init(tag_t* tag)
+static void xml_tag_init(xml_tag_t* tag)
 {
     tag->name = NULL;
     tag->attributes = NULL;
     tag->attributes_num = 0;
-    tag->text = NULL;
+    string_init(&tag->text);
 }
 
-static void tag_free(tag_t* tag)
+static void xml_tag_free(xml_tag_t* tag)
 {
     free(tag->name);
     int i;
     for (i=0; i<tag->attributes_num; ++i) {
-        attribute_t* attribute = &tag->attributes[i];
+        xml_attribute_t* attribute = &tag->attributes[i];
         free(attribute->name);
         free(attribute->value);
     }
     free(tag->attributes);
-    free(tag->text);
-    tag_init(tag);
+    string_free(&tag->text);
+    xml_tag_init(tag);
 }
 
 /* Like strcmp() but also handles NULL. */
@@ -251,8 +249,8 @@ static int strcmp_null(const char* a, const char* b)
 }
 
 /* Compares tag name, then attributes; returns -1, 0 or +1. Does not compare
-tag_t::text members. */
-static int compare_tags(const tag_t* lhs, const tag_t* rhs)
+xml_tag_t::text members. */
+static int compare_tags(const xml_tag_t* lhs, const xml_tag_t* rhs)
 {
     int d;
     d = strcmp_null(lhs->name, rhs->name);
@@ -261,8 +259,8 @@ static int compare_tags(const tag_t* lhs, const tag_t* rhs)
         if (i >= lhs->attributes_num || i >= rhs->attributes_num) {
             break;
         }
-        const attribute_t* lhs_attribute = &lhs->attributes[i];
-        const attribute_t* rhs_attribute = &rhs->attributes[i];
+        const xml_attribute_t* lhs_attribute = &lhs->attributes[i];
+        const xml_attribute_t* rhs_attribute = &rhs->attributes[i];
         d = strcmp_null(lhs_attribute->name, rhs_attribute->name);
         if (d)  return d;
         d = strcmp_null(lhs_attribute->value, rhs_attribute->value);
@@ -332,18 +330,18 @@ static FILE* pparse_init(const char* path)
     return in;
 }
 
-/* Returns 0 with *out containing next tag; or -1 with errno set if error;
-or +1 if EOF. *out is initially passed to tag_free(), so *out must have been
-initialised, e.g. by by tag_init(). */
-static int pparse_next(FILE* in, tag_t* out)
+/* Returns 0 with *out containing next tag; or -1 with errno set if error; or
++1 if EOF. *out is initially passed to xml_tag_free(), so *out must have been
+initialised, e.g. by by xml_tag_init(). */
+static int pparse_next(FILE* in, xml_tag_t* out)
 {
     int ret = -1;
-    tag_free(out);
+    xml_tag_free(out);
 
     char*   attribute_name = NULL;
     char*   attribute_value = NULL;
 
-    tag_init(out);
+    xml_tag_init(out);
     char c;
 
     assert(in);
@@ -415,7 +413,7 @@ static int pparse_next(FILE* in, tag_t* out)
                 }
             }
 
-            if (tag_attributes_append(out, attribute_name, attribute_value)) goto end;
+            if (xml_tag_attributes_append(out, attribute_name, attribute_value)) goto end;
             attribute_name = NULL;
             attribute_value = NULL;
             if (c == '/') c = getc(in);
@@ -427,12 +425,12 @@ static int pparse_next(FILE* in, tag_t* out)
     for(;;) {
         c = getc(in);
         if (c == '<' || feof(in)) break;
-        if (str_catc(&out->text, c)) goto end;
+        if (string_catc(&out->text, c)) goto end;
     }
 
     if (0) {
         fprintf(stderr, "text: ");
-        for (const char* c = out->text; *c; ++c) {
+        for (const char* c = out->text.chars; *c; ++c) {
             if (*c == '\n') fputs("\\n", stderr);
             else putc(*c, stderr);
         }
@@ -443,7 +441,7 @@ static int pparse_next(FILE* in, tag_t* out)
     
     if (0) {
         fprintf(stderr, "returning tag:\n");
-        tag_show(out, stderr);
+        xml_tag_show(out, stderr);
     }
 
     end:
@@ -451,7 +449,7 @@ static int pparse_next(FILE* in, tag_t* out)
     free(attribute_name);
     free(attribute_value);
     if (ret) {
-        tag_free(out);
+        xml_tag_free(out);
     }
     return ret;
 }
@@ -519,9 +517,9 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
         fprintf(stderr, "Failed to open path='%s', errno=%i\n", path, errno);
     }
     assert(in);
-    int     e;
-    tag_t   tag;
-    tag_init(&tag);
+    int         e;
+    xml_tag_t   tag;
+    xml_tag_init(&tag);
 
     for(;;) {
         e = pparse_next(in, &tag);
@@ -541,13 +539,13 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             assert(!strcmp(tag.name, "span"));
             fz_matrix   ctm;
             fz_matrix   trm;
-            s_read_matrix(tag_attributes_find(&tag, "ctm"), &ctm);
-            s_read_matrix(tag_attributes_find(&tag, "trm"), &trm);
-            const char* font_name = tag_attributes_find(&tag, "font_name");
+            s_read_matrix(xml_tag_attributes_find(&tag, "ctm"), &ctm);
+            s_read_matrix(xml_tag_attributes_find(&tag, "trm"), &trm);
+            const char* font_name = xml_tag_attributes_find(&tag, "font_name");
             const char* f = strchr(font_name, '+');
             if (f)  font_name = f + 1;
-            int is_bold = tag_attributes_find_int(&tag, "is_bold", 0);
-            int is_italic = tag_attributes_find_int(&tag, "is_italic", 0);
+            int is_bold = xml_tag_attributes_find_int(&tag, "is_bold", 0);
+            int is_italic = xml_tag_attributes_find_int(&tag, "is_italic", 0);
             char* font_name2 = local_strdup(font_name);
             //if (is_bold) str_cat(&font_name2, "-Bold");
             //if (is_italic) str_cat(&font_name2, "-Oblique");
@@ -558,7 +556,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
             snprintf(font->name, sizeof(font->name), "%s", font_name2);
             free(font_name2);
 
-            int wmode = atoi(tag_attributes_find(&tag, "wmode"));
+            int wmode = atoi(xml_tag_attributes_find(&tag, "wmode"));
 
             #if 0
             if (0) fprintf(stderr, "%s:%i: trm={%f %f %f %f %f %f} ctm={%f %f %f %f %f %f} trm2={%f %f %f %f %f %f}\n",
@@ -592,12 +590,12 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
                     break;
                 }
                 assert(!strcmp(tag.name, "span_item"));
-                float x     = atof(tag_attributes_find(&tag, "x"));
-                float y     = atof(tag_attributes_find(&tag, "y"));
-                int gid     = atoi(tag_attributes_find(&tag, "gid"));
-                int ucs     = atoi(tag_attributes_find(&tag, "ucs"));
+                float x     = atof(xml_tag_attributes_find(&tag, "x"));
+                float y     = atof(xml_tag_attributes_find(&tag, "y"));
+                int gid     = atoi(xml_tag_attributes_find(&tag, "gid"));
+                int ucs     = atoi(xml_tag_attributes_find(&tag, "ucs"));
                 float adv;
-                if (tag_attributes_find_float(&tag, "adv", &adv)) assert(0);
+                if (xml_tag_attributes_find_float(&tag, "adv", &adv)) assert(0);
 
                 fz_matrix trm2 = trm;
                 trm2.e = x;
@@ -2005,8 +2003,8 @@ static int read_spans_raw(const char* path, document_t *document)
         fprintf(stderr, "Failed to open: %s\n", path);
         goto end;
     }
-    tag_t   tag;
-    tag_init(&tag);
+    xml_tag_t   tag;
+    xml_tag_init(&tag);
 
     /* Data read from <path> is expected to be XML looking like:
 
@@ -2060,16 +2058,16 @@ static int read_spans_raw(const char* path, document_t *document)
             span_t* span = page_span_append(page);
             if (!span) goto end;
 
-            s_read_matrix(tag_attributes_find(&tag, "ctm"), &span->ctm);
-            s_read_matrix(tag_attributes_find(&tag, "trm"), &span->trm);
-            char* f = tag_attributes_find(&tag, "font_name");
+            s_read_matrix(xml_tag_attributes_find(&tag, "ctm"), &span->ctm);
+            s_read_matrix(xml_tag_attributes_find(&tag, "trm"), &span->trm);
+            char* f = xml_tag_attributes_find(&tag, "font_name");
             char* ff = strchr(f, '+');
             if (ff)  f = ff + 1;
             span->font_name = local_strdup(f);
             if (!span->font_name) goto end;
             span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
             span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
-            span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
+            span->wmode = atoi(xml_tag_attributes_find(&tag, "wmode"));
 
             for(;;) {
                 if (pparse_next(in, &tag)) goto end;
@@ -2083,16 +2081,16 @@ static int read_spans_raw(const char* path, document_t *document)
                 }
                 if (span_append_c(span, 0 /*c*/)) goto end;
                 char_t* char_ = &span->chars[ span->chars_num-1];
-                char_->x    = atof(tag_attributes_find(&tag, "x"));
-                char_->y    = atof(tag_attributes_find(&tag, "y"));
-                char_->gid  = atoi(tag_attributes_find(&tag, "gid"));
-                char_->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
-                char_->adv  = atof(tag_attributes_find(&tag, "adv"));
+                char_->x    = atof(xml_tag_attributes_find(&tag, "x"));
+                char_->y    = atof(xml_tag_attributes_find(&tag, "y"));
+                char_->gid  = atoi(xml_tag_attributes_find(&tag, "gid"));
+                char_->ucs  = atoi(xml_tag_attributes_find(&tag, "ucs"));
+                char_->adv  = atof(xml_tag_attributes_find(&tag, "adv"));
 
                 if (page_span_end_clean(page)) goto end;
                 span = page->spans[page->spans_num-1];
             }
-            tag_free(&tag);
+            xml_tag_free(&tag);
         }
         if (0) fprintf(stderr, "page=%i page->num_spans=%i\n", document->pages_num, page->spans_num);
     }
@@ -2100,7 +2098,7 @@ static int read_spans_raw(const char* path, document_t *document)
     ret = 0;
     
     end:
-    tag_free(&tag);
+    xml_tag_free(&tag);
     if (in) {
         fclose(in);
         in = NULL;
@@ -2128,8 +2126,8 @@ static int read_spans_trace(const char* path, document_t* document)
         fprintf(stderr, "Failed to open: %s\n", path);
         goto end;
     }
-    tag_t   tag;
-    tag_init(&tag);
+    xml_tag_t   tag;
+    xml_tag_init(&tag);
 
     int e = pparse_next(in, &tag);
     if (strcmp(tag.name, "document")) {
@@ -2160,7 +2158,7 @@ static int read_spans_trace(const char* path, document_t* document)
             }
             if (strcmp(tag.name, "fill_text")) continue;
             fz_matrix   ctm;
-            s_read_matrix(tag_attributes_find(&tag, "transform"), &ctm);
+            s_read_matrix(xml_tag_attributes_find(&tag, "transform"), &ctm);
             
             for(;;) {
                 if (pparse_next(in, &tag)) goto end;
@@ -2178,15 +2176,15 @@ static int read_spans_trace(const char* path, document_t* document)
                 /* trace-device appears to only write first four members of
                 fz_text_span::trm, on the assumption that .e and .f are zero,
                 so we use s_read_matrix4() here. */
-                s_read_matrix4(tag_attributes_find(&tag, "trm"), &span->trm);
-                char* f = tag_attributes_find(&tag, "font");
+                s_read_matrix4(xml_tag_attributes_find(&tag, "trm"), &span->trm);
+                char* f = xml_tag_attributes_find(&tag, "font");
                 char* ff = strchr(f, '+');
                 if (ff)  f = ff + 1;
                 span->font_name = local_strdup(f);
                 if (!span->font_name) goto end;
                 span->font_bold = strstr(span->font_name, "-Bold") ? 1 : 0;
                 span->font_italic = strstr(span->font_name, "-Oblique") ? 1 : 0;
-                span->wmode = atoi(tag_attributes_find(&tag, "wmode"));
+                span->wmode = atoi(xml_tag_attributes_find(&tag, "wmode"));
 
                 for(;;) {
                     if (pparse_next(in, &tag)) goto end;
@@ -2200,11 +2198,11 @@ static int read_spans_trace(const char* path, document_t* document)
                     }
                     if (span_append_c(span, 0 /*c*/)) goto end;
                     char_t* char_ = &span->chars[ span->chars_num-1];
-                    char_->x    = atof(tag_attributes_find(&tag, "x"));
-                    char_->y    = atof(tag_attributes_find(&tag, "y"));
+                    char_->x    = atof(xml_tag_attributes_find(&tag, "x"));
+                    char_->y    = atof(xml_tag_attributes_find(&tag, "y"));
                     char_->gid  = 0;
-                    char_->ucs  = atoi(tag_attributes_find(&tag, "ucs"));
-                    char_->adv  = atof(tag_attributes_find(&tag, "adv"));
+                    char_->ucs  = atoi(xml_tag_attributes_find(&tag, "ucs"));
+                    char_->adv  = atof(xml_tag_attributes_find(&tag, "adv"));
 
                     if (page_span_end_clean(page)) goto end;
                     span = page->spans[page->spans_num-1];
@@ -2217,7 +2215,7 @@ static int read_spans_trace(const char* path, document_t* document)
     ret = 0;
     
     end:
-    tag_free(&tag);
+    xml_tag_free(&tag);
     if (in) {
         fclose(in);
         in = NULL;
