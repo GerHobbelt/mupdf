@@ -150,4 +150,6 @@ public class PDFDocument extends Document
 	public native void beginOperation(String operation);
 	public native void beginImplicitOperation();
 	public native void endOperation();
+
+	public native boolean isRedacted();
 }

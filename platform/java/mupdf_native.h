@@ -2464,6 +2464,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_beginImplicitOper
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_endOperation
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    isRedacted
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_isRedacted
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
