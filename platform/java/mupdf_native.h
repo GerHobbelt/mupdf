@@ -2472,6 +2472,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_endOperation
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_isRedacted
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    countSignatures
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_countSignatures
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

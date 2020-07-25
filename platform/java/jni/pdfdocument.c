@@ -1242,3 +1242,20 @@ FUN(PDFDocument_isRedacted)(JNIEnv *env, jobject self)
 	if (!ctx || !pdf) return JNI_FALSE;
 	return pdf->redacted ? JNI_TRUE : JNI_FALSE;
 }
+
+JNIEXPORT jint JNICALL
+FUN(PDFDocument_countSignatures)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_document *pdf = from_PDFDocument_safe(env, self);
+	jint val = -1;
+
+	if (!ctx || !pdf) return -1;
+
+	fz_try(ctx)
+		val = pdf_count_signatures(ctx, pdf);
+	fz_catch(ctx)
+		return jni_rethrow(env, ctx), -1;
+
+	return val;
+}

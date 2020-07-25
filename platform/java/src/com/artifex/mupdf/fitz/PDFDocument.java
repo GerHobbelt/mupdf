@@ -152,4 +152,5 @@ public class PDFDocument extends Document
 	public native void endOperation();
 
 	public native boolean isRedacted();
+	public native int countSignatures();
 }
