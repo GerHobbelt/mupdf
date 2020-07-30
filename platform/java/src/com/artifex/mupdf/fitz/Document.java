@@ -10,6 +10,12 @@ public class Document
 	public static final String META_ENCRYPTION = "encryption";
 	public static final String META_INFO_AUTHOR = "info:Author";
 	public static final String META_INFO_TITLE = "info:Title";
+	public static final String META_INFO_CREATOR = "info:Creator";
+	public static final String META_INFO_PRODUCER = "info:Producer";
+	public static final String META_INFO_SUBJECT = "info:Subject";
+	public static final String META_INFO_KEYWORDS = "info:Keywords";
+	public static final String META_INFO_CREATION_DATE = "info:CreationDate";
+	public static final String META_INFO_MODIFICATION_DATE = "info:ModDate";
 
 	protected long pointer;
 
