@@ -133,7 +133,7 @@ fz_raw_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_matrix ctm
 			if (span->items[i].gid >= 0) {
 				adv = fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode);
 			}
-			s_xml_starttag_begin(ctx, dev->out, "span_item");
+			s_xml_starttag_begin(ctx, dev->out, "char");
 			s_write_attribute_float(ctx, dev->out, "x", item->x);
 			s_write_attribute_float(ctx, dev->out, "y", item->y);
 			s_write_attribute_int(ctx, dev->out, "gid", item->gid);
