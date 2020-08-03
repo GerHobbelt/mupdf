@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <limits.h>
+#include <math.h>
 
 #ifndef PATH_MAX
 #define PATH_MAX 4096
@@ -665,6 +666,10 @@ void do_annotate_panel(void)
 				trace_action("annot.setLineEndingStyles(%q, %q);\n", line_ending_styles[s], line_ending_styles[e]);
 				pdf_set_annot_line_ending_styles(ctx, selected_annot, s, e);
 			}
+
+			fz_point a, b;
+			pdf_annot_line(ctx, selected_annot, &a, &b);
+			ui_label("Line Length: %f", sqrtf((a.x-b.x) * (a.x-b.x) + (a.y-b.y) * (a.y-b.y)));
 		}
 
 		if (pdf_annot_has_icon_name(ctx, selected_annot))
