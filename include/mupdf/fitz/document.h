@@ -717,6 +717,10 @@ int fz_lookup_metadata(fz_context *ctx, fz_document *doc, const char *key, char 
 #define FZ_META_INFO_TITLE "info:Title"
 #define FZ_META_INFO_CREATOR "info:Creator"
 #define FZ_META_INFO_PRODUCER "info:Producer"
+#define FZ_META_INFO_SUBJECT "info:Subject"
+#define FZ_META_INFO_KEYWORDS "info:Keywords"
+#define FZ_META_INFO_CREATION_DATE "info:CreationDate"
+#define FZ_META_INFO_MODIFICATION_DATE "info:ModDate"
 
 /**
 	Find the output intent colorspace if the document has defined
