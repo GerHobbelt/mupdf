@@ -92,6 +92,10 @@ typedef struct fz_stext_block fz_stext_block;
 
 	FZ_STEXT_DEHYPHENATE: If this option is set, hyphens at the
 	end of a line will be removed and the lines will be merged.
+
+	FZ_STEXT_PRESERVE_SPANS: If this option is set, spans on the same line
+	will not be merged. Each line will thus be a span of text with the same
+	font, colour, and size.
 */
 enum
 {
@@ -100,6 +104,7 @@ enum
 	FZ_STEXT_PRESERVE_IMAGES = 4,
 	FZ_STEXT_INHIBIT_SPACES = 8,
 	FZ_STEXT_DEHYPHENATE = 16,
+	FZ_STEXT_PRESERVE_SPANS = 32,
 };
 
 /**

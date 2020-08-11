@@ -737,6 +737,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 						output_format == OUT_OCR_HTML ||
 						output_format == OUT_OCR_XHTML
 						) ? FZ_STEXT_PRESERVE_IMAGES : 0;
+			if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+				stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 			text = fz_new_stext_page(ctx, mediabox);
 			dev = fz_new_stext_device(ctx, text, &stext_options);
 			if (lowmemory)
