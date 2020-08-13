@@ -65,10 +65,9 @@ enum
 	SCREEN_FURNITURE_H = 40,
 };
 
-static void open_browser(const char *uri)
+static void open_browser(const char* uri)
 {
 	char buf[PATH_MAX];
-	pid_t pid;
 
 	/* Relative file:// URI, make it absolute! */
 	if (!strncmp(uri, "file://", 7) && uri[7] != '/')
@@ -77,39 +76,42 @@ static void open_browser(const char *uri)
 		char buf_cwd[PATH_MAX];
 		fz_dirname(buf_base, filename, sizeof buf_base);
 		getcwd(buf_cwd, sizeof buf_cwd);
-		fz_snprintf(buf, sizeof buf, "file://%s/%s/%s", buf_cwd, buf_base, uri+7);
-		fz_cleanname(buf+7);
+		fz_snprintf(buf, sizeof buf, "file://%s/%s/%s", buf_cwd, buf_base, uri + 7);
+		fz_cleanname(buf + 7);
 		uri = buf;
 	}
 
 #ifdef _WIN32
 	ShellExecuteA(NULL, "open", uri, 0, 0, SW_SHOWNORMAL);
 #else
-	const char *browser = getenv("BROWSER");
-	if (!browser)
 	{
-#ifdef __APPLE__
-		browser = "open";
-#else
-		browser = "xdg-open";
-#endif
-	}
-	/* Fork once to start a child process that we wait on. This
-	 * child process forks again and immediately exits. The
-	 * grandchild process continues in the background. The purpose
-	 * of this strange two-step is to avoid zombie processes. See
-	 * bug 695701 for an explanation. */
-	pid = fork();
-	if (pid == 0)
-	{
-		if (fork() == 0)
+		pid_t pid;
+		const char* browser = getenv("BROWSER");
+		if (!browser)
 		{
-			execlp(browser, browser, uri, (char*)0);
-			fprintf(stderr, "cannot exec '%s'\n", browser);
+#ifdef __APPLE__
+			browser = "open";
+#else
+			browser = "xdg-open";
+#endif
 		}
-		_exit(0);
-	}
-	waitpid(pid, NULL, 0);
+		/* Fork once to start a child process that we wait on. This
+		 * child process forks again and immediately exits. The
+		 * grandchild process continues in the background. The purpose
+		 * of this strange two-step is to avoid zombie processes. See
+		 * bug 695701 for an explanation. */
+		pid = fork();
+		if (pid == 0)
+		{
+			if (fork() == 0)
+			{
+				execlp(browser, browser, uri, (char*)0);
+				fprintf(stderr, "cannot exec '%s'\n", browser);
+			}
+			_exit(0);
+		}
+		waitpid(pid, NULL, 0);
+}
 #endif
 }
 
