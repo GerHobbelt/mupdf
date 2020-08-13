@@ -857,6 +857,20 @@ pdf_drop_widgets(fz_context *ctx, pdf_widget *widget)
 	}
 }
 
+pdf_widget *
+pdf_create_signature_widget(fz_context* ctx, pdf_page* page)
+{
+	fz_rect rect = { 12, 12, 12+100, 12+50 };
+	pdf_annot *annot = pdf_create_annot_raw(ctx, page, PDF_ANNOT_WIDGET);
+	pdf_set_annot_rect(ctx, annot, rect);
+	pdf_obj *obj = annot->obj;
+	pdf_obj* form_fields = pdf_dict_getp(ctx, pdf_trailer(ctx, page->doc), "Root/AcroForm/Fields");
+	pdf_dict_put(ctx, obj, PDF_NAME(FT), PDF_NAME(Sig));
+	pdf_dict_put_int(ctx, obj, PDF_NAME(F), PDF_ANNOT_IS_PRINT);
+	pdf_array_push(ctx, form_fields, obj);
+	return (pdf_widget*)annot;
+}
+
 fz_rect
 pdf_bound_widget(fz_context *ctx, pdf_widget *widget)
 {
