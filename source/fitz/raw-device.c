@@ -33,7 +33,7 @@ static int s_write_attribute_int(fz_context *ctx, fz_output *out, const char* id
 
 static int s_write_attribute_float(fz_context *ctx, fz_output *out, const char* id, float value)
 {
-	fz_write_printf(ctx, out, " %s=\"%g\"", id, value);
+	fz_write_printf(ctx, out, " %s=\"%f\"", id, value);
 	return 0;
 }
 
