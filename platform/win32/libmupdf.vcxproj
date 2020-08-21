@@ -357,6 +357,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugTesseract|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugTesseract|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
@@ -377,6 +380,23 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BrowseInformation>true</BrowseInformation>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugTesseract|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\openjpeg/src/lib/openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;_DEBUG;OPJ_STATIC;HAVE_LCMS2MT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>
+      </MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -427,6 +447,24 @@
       <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;OPJ_STATIC;HAVE_LCMS2MT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugTesseract|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;OPJ_STATIC;HAVE_LCMS2MT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -447,6 +485,25 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTesseract|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;NDEBUG;OPJ_STATIC;HAVE_LCMS2MT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>
+      </MinimalRebuild>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <ProjectReference>
