@@ -105,6 +105,10 @@ Args:
         (specifically definition of NDEBUG is important because it must match
         what was used when libmupdf.so was built).
 
+        Examples:
+            -d build/shared-debug
+            -d build/shared-release
+
     --doc <languages>
         Generates documentation for the different APIs.
 
@@ -4402,6 +4406,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
             #include "mupdf/functions.h"
             #include "mupdf/internal.h"
 
+            #include <assert.h>
 
             '''))
 
