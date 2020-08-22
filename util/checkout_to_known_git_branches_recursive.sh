@@ -95,15 +95,18 @@ pushd $(dirname $0)                                                            2
 #
 
 git_repo_checkout_branch "../thirdparty/curl" e438f3f36b68eb66cc6f53da779afb06988b1d6d mupdf
-git_repo_checkout_branch "../thirdparty/freeglut" 21f059e4b1489d3fab3f94a65ebebc0f80886237 master
-git_repo_checkout_branch "../thirdparty/freetype" 791a92746fd86d9d88367a128607497192cfe0eb mupdf
-git_repo_checkout_branch "../thirdparty/harfbuzz" c43c10eba9ba395097c9c4cf47400056c3c0b090 harfbuzz
-git_repo_checkout_branch "../thirdparty/jbig2dec" 28d7e993bae56174776f59eb00c6a4bbaa1235e4 master
-git_repo_checkout_branch "../thirdparty/lcms2" f601ea3be6384db5397c530fb59ac3ed10a9bc58 mupdf
-git_repo_checkout_branch "../thirdparty/libjpeg" 9a532f2d544f218c8a237ebb56d09e24161c196c master
-git_repo_checkout_branch "../thirdparty/mujs" ae526960aa8b4fa75797147e81012bac789610e0 mupdf
-git_repo_checkout_branch "../thirdparty/openjpeg" e763e243bbadf43e97d7e3875f4c8a300fbac269 master
-git_repo_checkout_branch "../thirdparty/zlib" dea93d29387877a582fb57139378af312acd5400 master
+git_repo_checkout_branch "../thirdparty/freeglut" ee78761fee8bfe084e65ba6233994756a6d1ac99 master
+git_repo_checkout_branch "../thirdparty/freetype" 778dc3d37b518a6ecd5dfaaced46c48b4a8b4414 master
+git_repo_checkout_branch "../thirdparty/gumbo-parser" dd001d9eecaa8ab8773d25dea559cfc7dce53e8e 
+git_repo_checkout_branch "../thirdparty/harfbuzz" 812c0114f65f0f4b97c45d1ca10986f4d2a24165 mupdf
+git_repo_checkout_branch "../thirdparty/jbig2dec" 547f6f7175fcb84cd76141435cb46e59b77d4253 master
+git_repo_checkout_branch "../thirdparty/lcms2" 40cf05c1875ba6af3fec2b4ff0353f7a26140ea6 master
+git_repo_checkout_branch "../thirdparty/leptonica" f74f7a63d076272f51f90041840794350b6d27b3 master
+git_repo_checkout_branch "../thirdparty/libjpeg" 2cb9121a49129a75c86762a50a5ce981cdb33e59 master
+git_repo_checkout_branch "../thirdparty/mujs" a6d4858c809d43bb517d572423f06e1a6052b042 mupdf
+git_repo_checkout_branch "../thirdparty/openjpeg" af68b4775b4676712b6cd7773711e23733ff2188 bleeding_edge
+git_repo_checkout_branch "../thirdparty/tesseract" d33edbc4b19b794a1f979551f89f083d398abe19 master
+git_repo_checkout_branch "../thirdparty/zlib" c8d407e68bf40d4322c4fc25850ba9629c7a5761 master
 
 # --- all done ---
 
