@@ -285,27 +285,33 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(Configuration)\leptonica\</IntDir>
+    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
+    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Memento|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(Configuration)\leptonica\</IntDir>
+    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
+    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(Configuration)\leptonica\</IntDir>
+    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
+    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(Platform)\$(Configuration)\leptonica\</IntDir>
+    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
+    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Memento|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(Platform)\$(Configuration)\leptonica\</IntDir>
+    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
+    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(Platform)\$(Configuration)\leptonica\</IntDir>
+    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
+    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -316,11 +322,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4018</DisableSpecificWarnings>
+      <MinimalRebuild>true</MinimalRebuild>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -337,7 +345,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -384,7 +392,9 @@
       <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MinimalRebuild>true</MinimalRebuild>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>

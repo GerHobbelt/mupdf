@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#define TEST_PDF_FILEPATH  "1905.07689.pdf"
+
 static HANDLE loaded;
 
 /* Forward definition */
@@ -53,7 +55,7 @@ test_async(MuOfficeLib *mu)
 	MuOfficeRender *render;
 
 	err = MuOfficeLib_loadDocument(mu,
-					"../MyTests/pdf_reference17.pdf",
+					TEST_PDF_FILEPATH,
 					load_progress,
 					load_error,
 					(void *)1234, /* Arbitrary */
@@ -117,7 +119,7 @@ test_async(MuOfficeLib *mu)
 	MuOfficeRender_destroy(render);
 
 	/* Output the bitmap */
-	save_png(&bitmap, "out.png");
+	save_png(&bitmap, "out_mu_office_async.png");
 	free(bitmap.memptr);
 
 	MuOfficePage_destroy(page);
@@ -145,7 +147,7 @@ test_sync(MuOfficeLib *mu)
 	loaded = CreateSemaphore(NULL, 0, 1, NULL);
 
 	err = MuOfficeLib_loadDocument(mu,
-					"../MyTests/pdf_reference17.pdf",
+					TEST_PDF_FILEPATH,
 					NULL,
 					NULL,
 					NULL,
@@ -210,7 +212,7 @@ test_sync(MuOfficeLib *mu)
 	MuOfficeRender_destroy(render);
 
 	/* Output the bitmap */
-	save_png(&bitmap, "out1.png");
+	save_png(&bitmap, "out_mu_office_sync1.png");
 	free(bitmap.memptr);
 
 	MuOfficePage_destroy(page);
