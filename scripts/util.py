@@ -186,7 +186,7 @@ def file_remove_try_hard(path):
         except:
             # try to sleep to make the time for the file not be used anymore
             time.sleep(1)
-            print "exception: n  %s, n  %s, n  %s n  when trying to remove file %s" % (sys.exc_info()[0], sys.exc_info()[1], sys.exc_info()[2], path)
+            print("exception: n  {0}, n  {1}, n  {2} n  when trying to remove file {3}".format(sys.exc_info()[0], sys.exc_info()[1], sys.exc_info()[2], path))
         removeRetryCount += 1
 
 
@@ -296,30 +296,10 @@ class Serializable(object):
         return super(Serializable, self).__getattribute__(k)
 
 
-import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
 
 
 def sendmail(sender, senderpwd, to, subject, body):
-    # print("sendmail is disabled"); return
-    mail = MIMEMultipart()
-    mail['From'] = sender
-    toHdr = to
-    if isinstance(toHdr, list):
-        toHdr = ", ".join(toHdr)
-    mail['To'] = toHdr
-    mail['Subject'] = subject
-    mail.attach(MIMEText(body))
-    msg = mail.as_string()
-    # print(msg)
-    mailServer = smtplib.SMTP("smtp.mandrillapp.com", 587)
-    mailServer.ehlo()
-    mailServer.starttls()
-    mailServer.ehlo()
-    mailServer.login(sender, senderpwd)
-    mailServer.sendmail(sender, to, msg)
-    mailServer.close()
+    print("sendmail is disabled"); return
 
 
 # Some operations, like uploading to s3, require knowing s3 credential
@@ -382,7 +362,7 @@ def load_config():
     except:
         # it's ok if doesn't exist, we just won't have the config data
         exctype, excval = sys.exc_info()[:2]
-        print "exception '%s' ('%s') when loading config.py" % (exctype, excval)
+        print("exception '{0}' ('{1}') when loading config.py".format(exctype, excval))
 
     g_config = c
     return g_config

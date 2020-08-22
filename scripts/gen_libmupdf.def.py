@@ -56,7 +56,7 @@ def main():
 	mupdf_exports = generateExports("include/mupdf/pdf", form_exports + sign_exports + ["pdf_drop_designated_name", "pdf_print_xref", "pdf_recognize", "pdf_resolve_obj", "pdf_open_compressed_stream", "pdf_finish_edit"])
 
 	list = LIBMUPDF_DEF % locals()
-	open("platform/win32/libmupdf.def", "wb").write(list.replace("\n", "\r\n"))
+	open("platform/win32/libmupdf.def", "w").write(list.replace("\n", "\r\n"))
 
 if __name__ == "__main__":
 	main()
