@@ -45,7 +45,6 @@ fz_trace_text_span(fz_context *ctx, fz_output *out, fz_text_span *span, int dept
 	for (i = 0; i < span->len; i++)
 	{
 		int ucs = span->items[i].ucs;
-		char name[32];
 		float adv = 0;
 		if (span->items[i].gid >= 0) {
 			adv = fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode);
