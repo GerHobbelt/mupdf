@@ -212,7 +212,7 @@ test_sync(MuOfficeLib *mu)
 	MuOfficeRender_destroy(render);
 
 	/* Output the bitmap */
-	int rv = save_png(&bitmap, "out_mu_office_sync1.png");
+	int rv = save_png(&bitmap, "out_mu_office_sync.png");
 	free(bitmap.memptr);
 
 	MuOfficePage_destroy(page);
