@@ -212,6 +212,18 @@ void fz_free_argv(int argc, char **argv);
 #define FZ_PRINTFLIKE(F,V)
 #endif
 #endif
+/* https://stackoverflow.com/questions/2354784/attribute-formatprintf-1-2-for-msvc/6849629#6849629 */
+#undef FZ_FORMAT_STRING
+#if _MSC_VER >= 1400
+# include <sal.h>
+# if _MSC_VER > 1400
+#  define FZ_FORMAT_STRING(p) _Printf_format_string_ p
+# else
+#  define FZ_FORMAT_STRING(p) __format_string p
+# endif
+#else
+# define FZ_FORMAT_STRING(p) p
+#endif /* _MSC_VER */
 
 /* ARM assembly specific defines */
 

@@ -91,37 +91,37 @@ fz_document_writer *fz_new_document_writer_of_size(fz_context *ctx, size_t size,
 
 fz_document_writer *fz_new_png_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.png", 0, fz_save_pixmap_as_png);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.png", FZ_DW_COLORSPACE_NIL, fz_save_pixmap_as_png);
 }
 
 fz_document_writer *fz_new_pam_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pam", 0, fz_save_pixmap_as_pam);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pam", FZ_DW_COLORSPACE_NIL, fz_save_pixmap_as_pam);
 }
 
 fz_document_writer *fz_new_pnm_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pnm", 0, fz_save_pixmap_as_pnm);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pnm", FZ_DW_COLORSPACE_NIL, fz_save_pixmap_as_pnm);
 }
 
 fz_document_writer *fz_new_pgm_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pgm", 1, fz_save_pixmap_as_pnm);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pgm", FZ_DW_COLORSPACE_GREY, fz_save_pixmap_as_pnm);
 }
 
 fz_document_writer *fz_new_ppm_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.ppm", 3, fz_save_pixmap_as_pnm);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.ppm", FZ_DW_COLORSPACE_RGB, fz_save_pixmap_as_pnm);
 }
 
 fz_document_writer *fz_new_pbm_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pbm", 1, fz_save_pixmap_as_pbm);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pbm", FZ_DW_COLORSPACE_GREY, fz_save_pixmap_as_pbm);
 }
 
 fz_document_writer *fz_new_pkm_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
-	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pkm", 4, fz_save_pixmap_as_pkm);
+	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pkm", FZ_DW_COLORSPACE_CMYK, fz_save_pixmap_as_pkm);
 }
 
 fz_document_writer *

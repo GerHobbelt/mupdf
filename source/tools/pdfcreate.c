@@ -26,7 +26,6 @@ static void usage(void)
 		"\t%%%%Image Name Filename\n\n"
 		);
 	fputs(fz_pdf_write_options_usage, stderr);
-	return EXIT_FAILURE;
 }
 
 static fz_context *ctx = NULL;

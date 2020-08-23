@@ -30,6 +30,9 @@ int main(int argc, char **argv)
 
 	fprintf(stderr, "usage: mutool <command> [options]\n");
 
+	char p[256];
+	fz_format_output_path(NULL, p, sizeof(p), "out-%04d.png", 42);
+
 	return 1;
 }
 

@@ -35,11 +35,11 @@ typedef struct
 #define fz_always(ctx) while (0); if (fz_do_always(ctx)) do
 #define fz_catch(ctx) while (0); if (fz_do_catch(ctx))
 
-FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *, va_list ap);
-FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, const char *, ...) FZ_PRINTFLIKE(3,4);
+FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *fmt, va_list ap);
+FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(3,4);
 FZ_NORETURN void fz_rethrow(fz_context *ctx);
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap);
-void fz_warn(fz_context *ctx, const char *fmt, ...) FZ_PRINTFLIKE(2,3);
+void fz_warn(fz_context *ctx, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2,3);
 const char *fz_caught_message(fz_context *ctx);
 int fz_caught(fz_context *ctx);
 void fz_rethrow_if(fz_context *ctx, int errcode);

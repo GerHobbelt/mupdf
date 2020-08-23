@@ -163,9 +163,9 @@ fz_new_pixmap_writer(fz_context *ctx, const char *path, const char *options,
 		wri->save = save;
 		switch (n)
 		{
-		case 1: wri->options.colorspace = fz_device_gray(ctx); break;
-		case 3: wri->options.colorspace = fz_device_rgb(ctx); break;
-		case 4: wri->options.colorspace = fz_device_cmyk(ctx); break;
+		case FZ_DW_COLORSPACE_GREY: wri->options.colorspace = fz_device_gray(ctx); break;
+		case FZ_DW_COLORSPACE_RGB: wri->options.colorspace = fz_device_rgb(ctx); break;
+		case FZ_DW_COLORSPACE_CMYK: wri->options.colorspace = fz_device_cmyk(ctx); break;
 		}
 	}
 	fz_catch(ctx)

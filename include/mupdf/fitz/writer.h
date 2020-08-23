@@ -162,6 +162,12 @@ void fz_close_document_writer(fz_context *ctx, fz_document_writer *wri);
 */
 void fz_drop_document_writer(fz_context *ctx, fz_document_writer *wri);
 
+/** values for fz_new_pixmap_writer() argument `n`: */
+#define FZ_DW_COLORSPACE_NIL  0
+#define FZ_DW_COLORSPACE_GREY 1
+#define FZ_DW_COLORSPACE_RGB  3
+#define FZ_DW_COLORSPACE_CMYK 4
+
 fz_document_writer *fz_new_pixmap_writer(fz_context *ctx, const char *path, const char *options, const char *default_path, int n,
 	void (*save)(fz_context *ctx, fz_pixmap *pix, const char *filename));
 

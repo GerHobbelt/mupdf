@@ -153,9 +153,15 @@ void pdfapp_warn(pdfapp_t *app, const char *fmt, ...)
 	winwarn(app, buf);
 }
 
-void pdfapp_error(pdfapp_t *app, char *msg)
+void pdfapp_error(pdfapp_t *app, const char *fmt, ...)
 {
-	winerror(app, msg);
+	char buf[1024];
+	va_list ap;
+	va_start(ap, fmt);
+	fz_vsnprintf(buf, sizeof(buf), fmt, ap);
+	va_end(ap);
+	buf[sizeof(buf) - 1] = 0;
+	winerror(app, buf);
 }
 
 char *pdfapp_version(pdfapp_t *app)
