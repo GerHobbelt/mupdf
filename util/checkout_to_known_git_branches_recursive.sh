@@ -97,15 +97,17 @@ pushd $(dirname $0)                                                            2
 git_repo_checkout_branch "../thirdparty/curl" e438f3f36b68eb66cc6f53da779afb06988b1d6d mupdf
 git_repo_checkout_branch "../thirdparty/freeglut" ee78761fee8bfe084e65ba6233994756a6d1ac99 master
 git_repo_checkout_branch "../thirdparty/freetype" 778dc3d37b518a6ecd5dfaaced46c48b4a8b4414 master
-git_repo_checkout_branch "../thirdparty/gumbo-parser" dd001d9eecaa8ab8773d25dea559cfc7dce53e8e 
-git_repo_checkout_branch "../thirdparty/harfbuzz" 812c0114f65f0f4b97c45d1ca10986f4d2a24165 mupdf
+git_repo_checkout_branch "../thirdparty/gumbo-parser" 3702df8d70c55b6a8b2f645f92a06c3c5339206e 
+git_repo_checkout_branch "../thirdparty/gumbo-parser/testdata" e633ddfeb0180f71238763576b1f5fdd26a7038f 
+git_repo_checkout_branch "../thirdparty/gumbo-parser/third_party/gtest" 1cb04aa3e99c736bbd1eb90ebda3d6117355aacc 
+git_repo_checkout_branch "../thirdparty/harfbuzz" 690dc90153cf0a37251efc0e03fb755feecb80b2 master
 git_repo_checkout_branch "../thirdparty/jbig2dec" 547f6f7175fcb84cd76141435cb46e59b77d4253 master
 git_repo_checkout_branch "../thirdparty/lcms2" 40cf05c1875ba6af3fec2b4ff0353f7a26140ea6 master
-git_repo_checkout_branch "../thirdparty/leptonica" f74f7a63d076272f51f90041840794350b6d27b3 master
+git_repo_checkout_branch "../thirdparty/leptonica" 295f80c96d59679765889d567c1ca52646dd4995 master
 git_repo_checkout_branch "../thirdparty/libjpeg" 2cb9121a49129a75c86762a50a5ce981cdb33e59 master
 git_repo_checkout_branch "../thirdparty/mujs" a6d4858c809d43bb517d572423f06e1a6052b042 mupdf
 git_repo_checkout_branch "../thirdparty/openjpeg" af68b4775b4676712b6cd7773711e23733ff2188 bleeding_edge
-git_repo_checkout_branch "../thirdparty/tesseract" d33edbc4b19b794a1f979551f89f083d398abe19 master
+git_repo_checkout_branch "../thirdparty/tesseract" 83c7bdaf7605de22aabe1de36f56f0d8c342f6c9 master
 git_repo_checkout_branch "../thirdparty/zlib" c8d407e68bf40d4322c4fc25850ba9629c7a5761 master
 
 # --- all done ---
