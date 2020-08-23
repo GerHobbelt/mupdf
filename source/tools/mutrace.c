@@ -20,7 +20,6 @@ static void usage(void)
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
-	exit(1);
 }
 
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
@@ -90,12 +89,13 @@ int mutrace_main(int argc, char **argv)
 	fz_document *doc = NULL;
 	char *password = "";
 	int i, c, count;
+	int errored = 0;
 
 	while ((c = fz_getopt(argc, argv, "p:W:H:S:U:Xd")) != -1)
 	{
 		switch (c)
 		{
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		case 'p': password = fz_optarg; break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;
@@ -109,7 +109,10 @@ int mutrace_main(int argc, char **argv)
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
@@ -161,10 +164,10 @@ int mutrace_main(int argc, char **argv)
 	{
 		fprintf(stderr, "cannot run document: %s\n", fz_caught_message(ctx));
 		fz_drop_document(ctx, doc);
-		fz_drop_context(ctx);
-		return EXIT_FAILURE;
+		errored = 1;
 	}
 
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return EXIT_SUCCESS;
+	return errored;
 }

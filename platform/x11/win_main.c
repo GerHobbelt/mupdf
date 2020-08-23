@@ -1259,7 +1259,6 @@ static void usage(const char *argv0)
 		"\t-U -\tuser style sheet for EPUB layout\n"
 		"\t-X\tdisable document styles for EPUB layout\n";
 	MessageBoxA(NULL, msg, "MuPDF: Usage", MB_OK);
-	exit(1);
 }
 
 int WINAPI
@@ -1280,11 +1279,13 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	if (!ctx)
 	{
 		MessageBoxA(NULL, "Cannot initialize MuPDF context.", "MuPDF: Error", MB_OK);
-		exit(1);
+		return EXIT_FAILURE;
 	}
 	pdfapp_init(ctx, &gapp);
 
 	argv = fz_argv_from_wargv(argc, wargv);
+	if (!argv)
+		return EXIT_FAILURE;
 
 	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:")) != -1)
 	{
@@ -1305,7 +1306,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 		case 'b': kbps = fz_atoi(fz_optarg); break;
 		case 'U': gapp.layout_css = fz_optarg; break;
 		case 'X': gapp.layout_use_doc_css = 0; break;
-		default: usage(argv[0]);
+		default: usage(argv[0]);	 return EXIT_FAILURE;
 		}
 	}
 
@@ -1347,5 +1348,5 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
 	do_close(&gapp);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

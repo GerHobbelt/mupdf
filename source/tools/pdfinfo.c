@@ -173,7 +173,6 @@ infousage(void)
 		"\t-X\tlist form and postscript xobjects\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
-	exit(1);
 }
 
 static void
@@ -921,7 +920,10 @@ showinfo(fz_context *ctx, globals *glo, char *filename, int show, const char *pa
 	fz_output *out = glo->out;
 
 	if (!glo->doc)
+	{
 		infousage();
+		fz_throw(ctx, FZ_ERROR_GENERIC, "no document specified");
+	}
 
 	allpages = !strcmp(pagelist, "1-N");
 
@@ -1024,25 +1026,32 @@ int pdfinfo_main(int argc, char **argv)
 		case 'p': password = fz_optarg; break;
 		default:
 			infousage();
-			break;
+			return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		infousage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
-	ret = 0;
+	ret = EXIT_SUCCESS;
 	fz_try(ctx)
 		pdfinfo_info(ctx, fz_stdout(ctx), filename, password, show, &argv[fz_optind], argc-fz_optind);
 	fz_catch(ctx)
-		ret = 1;
+	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		ret = EXIT_FAILURE;
+	}
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return ret;
 }

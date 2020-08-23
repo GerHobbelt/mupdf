@@ -149,6 +149,8 @@ int main(int argc, char **argv)
 int wmain(int argc, wchar_t *wargv[])
 {
 	char **argv = fz_argv_from_wargv(argc, wargv);
+	if (!argv)
+		return EXIT_FAILURE;
 	int ret = main(argc, argv);
 	fz_free_argv(argc, argv);
 	return ret;

@@ -30,7 +30,6 @@ static void usage(void)
 		"\t-P -\tcertificate password\n"
 		"\t-o -\toutput file name\n"
 		   );
-	exit(1);
 }
 
 static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signature)
@@ -225,12 +224,15 @@ int pdfsign_main(int argc, char **argv)
 		case 'P': certificatepassword = fz_optarg; break;
 		case 's': list = 0; sign = 1; certificatefile = fz_optarg; break;
 		case 'v': list = 0; verify = 1; break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (argc - fz_optind < 1)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	infile = argv[fz_optind++];
 
@@ -244,7 +246,7 @@ int pdfsign_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialize context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	fz_var(page);

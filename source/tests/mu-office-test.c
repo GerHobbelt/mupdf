@@ -13,7 +13,7 @@
 static HANDLE loaded;
 
 /* Forward definition */
-static void save_png(const MuOfficeBitmap *bitmap, const char *filename);
+static int save_png(const MuOfficeBitmap *bitmap, const char *filename);
 
 static void
 load_progress(void *cookie, int pages_loaded, int complete)
@@ -119,7 +119,7 @@ test_async(MuOfficeLib *mu)
 	MuOfficeRender_destroy(render);
 
 	/* Output the bitmap */
-	save_png(&bitmap, "out_mu_office_async.png");
+	int rv = save_png(&bitmap, "out_mu_office_async.png");
 	free(bitmap.memptr);
 
 	MuOfficePage_destroy(page);
@@ -129,7 +129,7 @@ test_async(MuOfficeLib *mu)
 	CloseHandle(loaded);
 	loaded = NULL;
 
-	return EXIT_SUCCESS;
+	return rv;
 }
 
 static int
@@ -212,14 +212,14 @@ test_sync(MuOfficeLib *mu)
 	MuOfficeRender_destroy(render);
 
 	/* Output the bitmap */
-	save_png(&bitmap, "out_mu_office_sync1.png");
+	int rv = save_png(&bitmap, "out_mu_office_sync1.png");
 	free(bitmap.memptr);
 
 	MuOfficePage_destroy(page);
 
 	MuOfficeDoc_destroy(doc);
 
-	return EXIT_SUCCESS;
+	return rv;
 }
 
 int main(int argc, char **argv)
@@ -257,16 +257,17 @@ int main(int argc, char **argv)
 
 #include "mupdf/fitz.h"
 
-static void
+static int
 save_png(const MuOfficeBitmap *bitmap, const char *filename)
 {
 	fz_context *ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 	fz_pixmap *pix;
+	int errored = 0;
 
 	if (ctx == NULL)
 	{
 		fprintf(stderr, "save_png failed!\n");
-		exit(EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	pix = fz_new_pixmap_with_data(ctx, fz_device_rgb(ctx), bitmap->width, bitmap->height, NULL, 1, bitmap->lineSkip, bitmap->memptr);
@@ -281,10 +282,12 @@ save_png(const MuOfficeBitmap *bitmap, const char *filename)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "save_png failed!\n");
-		fz_drop_context(ctx);
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "save_png failed! %s\n", fz_caught_message(ctx));
+		errored = 1;
 	}
 
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
+
+	return errored;
 }

@@ -17,7 +17,6 @@ infousage(void)
 		"\t-p -\tpassword for decryption\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
-	exit(1);
 }
 
 static int
@@ -39,6 +38,7 @@ showbox(fz_context *ctx, fz_output *out, pdf_obj *page, char *text, pdf_obj *nam
 	}
 	fz_catch(ctx)
 	{
+		fz_warn(ctx, "box error: %s\n", fz_caught_message(ctx));
 		failed = 1;
 	}
 
@@ -61,6 +61,7 @@ shownum(fz_context *ctx, fz_output *out, pdf_obj *page, char *text, pdf_obj *nam
 	}
 	fz_catch(ctx)
 	{
+		fz_warn(ctx, "num error: %s\n", fz_caught_message(ctx));
 		failed = 1;
 	}
 
@@ -110,7 +111,10 @@ showpages(fz_context *ctx, pdf_document *doc, fz_output *out, const char *pageli
 	int ret = 0;
 
 	if (!doc)
+	{
 		infousage();
+		fz_throw(ctx, FZ_ERROR_GENERIC, "no pdf document specified");
+	}
 
 	pagecount = pdf_count_pages(ctx, doc);
 	while ((pagelist = fz_parse_page_range(ctx, pagelist, &spage, &epage, pagecount)))
@@ -185,25 +189,32 @@ int pdfpages_main(int argc, char **argv)
 		case 'p': password = fz_optarg; break;
 		default:
 			infousage();
-			break;
+			return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		infousage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	ret = 0;
 	fz_try(ctx)
 		ret = pdfpages_pages(ctx, fz_stdout(ctx), filename, password, &argv[fz_optind], argc-fz_optind);
 	fz_catch(ctx)
+	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
 		ret = 1;
+	}
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return ret;
 }

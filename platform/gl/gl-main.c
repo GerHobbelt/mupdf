@@ -259,7 +259,9 @@ static void read_history_file_as_json(js_State *J)
 			json = fz_string_from_buffer(ctx, buf);
 		}
 		fz_catch(ctx)
-			;
+		{
+			// Ignore error?
+		}
 	}
 
 	js_getglobal(J, "JSON");
@@ -452,7 +454,7 @@ static void save_history(void)
 	fz_always(ctx)
 		fz_drop_output(ctx, out);
 	fz_catch(ctx)
-		fz_warn(ctx, "Can't write history file.");
+		fz_warn(ctx, "Can't write history file. %s", fz_caught_message(ctx));
 
 	js_freestate(J);
 }
@@ -2110,7 +2112,6 @@ static void usage(const char *argv0)
 	fprintf(stderr, "\t-A -\tset anti-aliasing level (0-8,9,10)\n");
 	fprintf(stderr, "\t-B -\tset black tint color (default: 303030)\n");
 	fprintf(stderr, "\t-C -\tset white tint color (default: FFFFF0)\n");
-	exit(1);
 }
 
 static int document_filter(const char *fname)
@@ -2193,7 +2194,7 @@ int main(int argc, char **argv)
 	{
 		switch (c)
 		{
-		default: usage(argv[0]); break;
+		default: usage(argv[0]); return EXIT_FAILURE;
 		case 'p': password = fz_optarg; break;
 		case 'r': currentzoom = fz_atof(fz_optarg); break;
 		case 'I': currentinvert = !currentinvert; break;
@@ -2316,6 +2317,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int argc;
 	LPWSTR *wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
 	char **argv = fz_argv_from_wargv(argc, wargv);
+	if (!argv)
+		return EXIT_FAILURE;
 	int ret = main_utf8(argc, argv);
 	fz_free_argv(argc, argv);
 	return ret;

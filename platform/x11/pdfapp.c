@@ -467,7 +467,7 @@ void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps
 	fz_catch(ctx)
 	{
 		if (!reload || make_fake_doc(app))
-			pdfapp_error(app, "cannot open document");
+			pdfapp_error(app, "cannot open document. %s", fz_caught_message(ctx));
 	}
 
 	idoc = pdf_specifics(app->ctx, app->doc);
@@ -480,7 +480,7 @@ void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps
 		}
 		fz_catch(ctx)
 		{
-			pdfapp_error(app, "cannot load javascript embedded in document");
+			pdfapp_error(app, "cannot load javascript embedded in document. %s", fz_caught_message(ctx));
 		}
 	}
 
@@ -541,14 +541,14 @@ void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps
 				if (fz_caught(ctx) == FZ_ERROR_TRYLATER)
 					app->outline_deferred = PDFAPP_OUTLINE_DEFERRED;
 				else
-					pdfapp_warn(app, "Failed to load outline.");
+					pdfapp_warn(app, "Failed to load outline. %s", fz_caught_message(ctx));
 			}
 			break;
 		}
 	}
 	fz_catch(ctx)
 	{
-		pdfapp_error(app, "cannot open document");
+		pdfapp_error(app, "cannot open document. %s", fz_caught_message(ctx));
 	}
 
 	if (app->pageno < 1)
@@ -792,7 +792,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 			app->incomplete = 1;
 		else
-			pdfapp_warn(app, "Failed to load page.");
+			pdfapp_warn(app, "Failed to load page. %s", fz_caught_message(app->ctx));
 		return;
 	}
 
@@ -833,7 +833,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 			if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 				app->incomplete = 1;
 			else
-				pdfapp_warn(app, "Failed to load page.");
+				pdfapp_warn(app, "Failed to load page. %s", fz_caught_message(app->ctx));
 			errored = 1;
 		}
 	}
@@ -873,7 +873,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 			app->incomplete = 1;
 		else
-			pdfapp_warn(app, "Failed to load page.");
+			pdfapp_warn(app, "Failed to load page. %s", fz_caught_message(app->ctx));
 		errored = 1;
 	}
 

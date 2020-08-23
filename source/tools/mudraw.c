@@ -437,7 +437,6 @@ static void usage(void)
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
-	exit(1);
 }
 
 static int gettime(void)
@@ -1768,7 +1767,7 @@ int mudraw_main(int argc, char **argv)
 	{
 		switch (c)
 		{
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 
 		case 'q': quiet = 1; break;
 
@@ -1855,19 +1854,22 @@ int mudraw_main(int argc, char **argv)
 		case 'y': layer_config = fz_optarg; break;
 		case 'a': useaccel = 0; break;
 
-		case 'v': fprintf(stderr, "mudraw version %s\n", FZ_VERSION); return 1;
+		case 'v': fprintf(stderr, "mudraw version %s\n", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	if (num_workers > 0)
 	{
 		if (uselist == 0)
 		{
 			fprintf(stderr, "cannot use multiple threads without using display list\n");
-			exit(1);
+			return EXIT_FAILURE;
 		}
 
 		if (band_height == 0)
@@ -1881,7 +1883,7 @@ int mudraw_main(int argc, char **argv)
 		if (uselist == 0)
 		{
 			fprintf(stderr, "cannot bgprint without using display list\n");
-			exit(1);
+			return EXIT_FAILURE;
 		}
 	}
 
@@ -1890,7 +1892,7 @@ int mudraw_main(int argc, char **argv)
 	if (locks == NULL)
 	{
 		fprintf(stderr, "mutex initialisation failed\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 #endif
 
@@ -1904,7 +1906,7 @@ int mudraw_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	fz_try(ctx)
@@ -1935,7 +1937,7 @@ int mudraw_main(int argc, char **argv)
 			if (fail)
 			{
 				fprintf(stderr, "bgprint startup failed\n");
-				exit(1);
+				return EXIT_FAILURE;
 			}
 		}
 
@@ -1955,7 +1957,7 @@ int mudraw_main(int argc, char **argv)
 			if (fail)
 			{
 				fprintf(stderr, "worker startup failed\n");
-				exit(1);
+				return EXIT_FAILURE;
 			}
 		}
 #endif /* DISABLE_MUTHREADS */
@@ -1973,7 +1975,7 @@ int mudraw_main(int argc, char **argv)
 		if (band_height < 0)
 		{
 			fprintf(stderr, "Bandheight must be > 0\n");
-			exit(1);
+			return EXIT_FAILURE;
 		}
 
 		output_format = OUT_PNG;
@@ -1997,7 +1999,7 @@ int mudraw_main(int argc, char **argv)
 			if (i == (int)nelem(suffix_table))
 			{
 				fprintf(stderr, "Unknown output format '%s'\n", format);
-				exit(1);
+				return EXIT_FAILURE;
 			}
 		}
 		else if (output)
@@ -2039,12 +2041,12 @@ int mudraw_main(int argc, char **argv)
 				output_format != OUT_OCR_PDF)
 			{
 				fprintf(stderr, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs\n");
-				exit(1);
+				return EXIT_FAILURE;
 			}
 			if (showmd5)
 			{
 				fprintf(stderr, "Banded operation not compatible with MD5\n");
-				exit(1);
+				return EXIT_FAILURE;
 			}
 		}
 
@@ -2065,7 +2067,7 @@ int mudraw_main(int argc, char **argv)
 					if (j == (int)nelem(format_cs_table[i].permitted_cs))
 					{
 						fprintf(stderr, "Unsupported colorspace for this format\n");
-						exit(1);
+						return EXIT_FAILURE;
 					}
 				}
 			}
@@ -2100,19 +2102,18 @@ int mudraw_main(int argc, char **argv)
 				fz_catch(ctx)
 				{
 					fprintf(stderr, "Invalid ICC destination color space\n");
-					exit(1);
+					return EXIT_FAILURE;
 				}
 				if (colorspace == NULL)
 				{
 					fprintf(stderr, "Invalid ICC destination color space\n");
-					exit(1);
+					return EXIT_FAILURE;
 				}
 				alpha = 0;
 				break;
 			default:
 				fprintf(stderr, "Unknown colorspace!\n");
-				exit(1);
-				break;
+				return EXIT_FAILURE;
 		}
 
 		if (out_cs != CS_ICC)
@@ -2155,7 +2156,7 @@ int mudraw_main(int argc, char **argv)
 			if (!okay)
 			{
 				fprintf(stderr, "ICC profile uses a colorspace that cannot be used for this format\n");
-				exit(1);
+				return EXIT_FAILURE;
 			}
 		}
 
@@ -2431,12 +2432,14 @@ int mudraw_main(int argc, char **argv)
 	}
 	fz_catch(ctx)
 	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
 		if (!errored) {
 			fprintf(stderr, "Rendering failed\n");
 			errored = 1;
 		}
 	}
 
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 
 #ifndef DISABLE_MUTHREADS

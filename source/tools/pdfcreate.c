@@ -26,7 +26,7 @@ static void usage(void)
 		"\t%%%%Image Name Filename\n\n"
 		);
 	fputs(fz_pdf_write_options_usage, stderr);
-	exit(1);
+	return EXIT_FAILURE;
 }
 
 static fz_context *ctx = NULL;
@@ -227,30 +227,40 @@ int pdfcreate_main(int argc, char **argv)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'O': flags = fz_optarg; break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
-	pdf_parse_write_options(ctx, &opts, flags);
+	fz_try(ctx)
+	{
+		pdf_parse_write_options(ctx, &opts, flags);
 
-	doc = pdf_create_document(ctx);
+		doc = pdf_create_document(ctx);
 
-	for (i = fz_optind; i < argc; ++i)
-		create_page(argv[i]);
+		for (i = fz_optind; i < argc; ++i)
+			create_page(argv[i]);
 
-	pdf_save_document(ctx, doc, output, &opts);
+		pdf_save_document(ctx, doc, output, &opts);
 
-	pdf_drop_document(ctx, doc);
+		pdf_drop_document(ctx, doc);
+	}
+	fz_catch(ctx)
+	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+	}
 
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);

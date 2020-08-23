@@ -172,8 +172,7 @@ void winopenuri(pdfapp_t *app, char *buf)
 {
 }
 
-static void
-usage(void)
+static void usage(void)
 {
 	fprintf(stderr, "mujstest: Scriptable tester for mupdf + js\n");
 	fprintf(stderr, "\nSyntax: mujstest -o <filename> [ -p <prefix> ] [-v] <scriptfile>\n");
@@ -188,7 +187,6 @@ usage(void)
 	fprintf(stderr, "\tRESIZE <w> <h>\tResize the screen to a given size\n");
 	fprintf(stderr, "\tCLICK <x> <y> <btn>\tClick at a given position\n");
 	fprintf(stderr, "\tTEXT <string>\tSet a value to be entered\n");
-	exit(1);
 }
 
 static char *
@@ -307,6 +305,7 @@ main(int argc, char *argv[])
 	fz_context *ctx;
 	FILE *script = NULL;
 	int c;
+	int errored = 0;
 
 	while ((c = fz_getopt(argc, argv, "o:p:v")) != -1)
 	{
@@ -315,12 +314,15 @@ main(int argc, char *argv[])
 		case 'o': output = fz_optarg; break;
 		case 'p': prefix = fz_optarg; break;
 		case 'v': verbosity ^= 1; break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 	if (!ctx)
@@ -425,13 +427,15 @@ main(int argc, char *argv[])
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: cannot execute '%s'\n", scriptname);
+		fprintf(stderr, "error: cannot execute '%s': %s\n", scriptname, fz_caught_message(ctx));
+		errored = 1;
 	}
 
 	if (file_open)
 		pdfapp_close(&gapp);
 
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 
-	return 0;
+	return errored;
 }

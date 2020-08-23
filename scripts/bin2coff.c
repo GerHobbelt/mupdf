@@ -272,13 +272,13 @@ main (int argc, char *argv[])
 		fprintf(stderr, "With your linker set properly, typical access from a C source is:\n\n");
 		fprintf(stderr, "    extern uint8_t  label[]     /* binary data         */\n");
 		fprintf(stderr, "    extern uint32_t label_size  /* size of binary data */\n\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	if (((uint8_t*)&endian_test)[0] == 0xBE) {
 		fprintf(stderr, "\nThis program is not compatible with Big Endian architectures.\n");
 		fprintf(stderr, "You are welcome to modify the sourcecode (GPLv3+) to make it so.\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	fd = fopen(argv[1], "rb");
@@ -422,5 +422,5 @@ main (int argc, char *argv[])
 err:
 	if (fd != NULL) fclose(fd);
 	free(buffer);
-	exit(r);
+	return r;
 }

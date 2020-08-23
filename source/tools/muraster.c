@@ -520,7 +520,6 @@ static void usage(void)
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
-	exit(1);
 }
 
 static int gettime(void)
@@ -1442,7 +1441,7 @@ int main(int argc, char **argv)
 	{
 		switch (c)
 		{
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 
 		case 'p': password = fz_optarg; break;
 
@@ -1506,12 +1505,15 @@ int main(int argc, char **argv)
 		height = y_resolution * PAPER_HEIGHT;
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	if (min_band_height <= 0)
 	{
 		fprintf(stderr, "Require a positive minimum band height\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 #ifndef DISABLE_MUTHREADS
@@ -1519,7 +1521,7 @@ int main(int argc, char **argv)
 	if (locks == NULL)
 	{
 		fprintf(stderr, "cannot initialise mutexes\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 #endif
 
@@ -1527,7 +1529,7 @@ int main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	fz_set_text_aa_level(ctx, alphabits_text);
@@ -1544,7 +1546,7 @@ int main(int argc, char **argv)
 		if (fail)
 		{
 			fprintf(stderr, "bgprint startup failed\n");
-			exit(1);
+			return EXIT_FAILURE;
 		}
 	}
 
@@ -1564,7 +1566,7 @@ int main(int argc, char **argv)
 		if (fail)
 		{
 			fprintf(stderr, "worker startup failed\n");
-			exit(1);
+			return EXIT_FAILURE;
 		}
 	}
 #endif /* DISABLE_MUTHREADS */
@@ -1596,7 +1598,7 @@ int main(int argc, char **argv)
 		if (i == (int)nelem(suffix_table))
 		{
 			fprintf(stderr, "Unknown output format '%s'\n", format);
-			exit(1);
+			return EXIT_FAILURE;
 		}
 	}
 	else if (output)
@@ -1692,6 +1694,7 @@ int main(int argc, char **argv)
 	fz_catch(ctx)
 	{
 		fz_drop_document(ctx, doc);
+		fz_warn(ctx, "error: %s\n", fz_caught_message(ctx));
 		fprintf(stderr, "error: cannot draw '%s'\n", filename);
 		errored = 1;
 	}
@@ -1737,6 +1740,7 @@ int main(int argc, char **argv)
 	fz_drop_output(ctx, out);
 	out = NULL;
 
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 #ifndef DISABLE_MUTHREADS
 	fin_muraster_locks();

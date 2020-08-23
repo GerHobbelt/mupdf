@@ -60,7 +60,6 @@ static void usage(void)
 	fputs(fz_pdf_write_options_usage, stderr);
 #endif
 	fputs(fz_svg_write_options_usage, stderr);
-	exit(1);
 }
 
 static void runpage(int number)
@@ -111,7 +110,7 @@ int muconvert_main(int argc, char **argv)
 	{
 		switch (c)
 		{
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 
 		case 'p': password = fz_optarg; break;
 		case 'A': alphabits = atoi(fz_optarg); break;
@@ -128,7 +127,10 @@ int muconvert_main(int argc, char **argv)
 	}
 
 	if (fz_optind == argc || (!format && !output))
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	/* Create a context to hold the exception stack and various caches. */
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
@@ -171,19 +173,32 @@ int muconvert_main(int argc, char **argv)
 
 	for (i = fz_optind; i < argc; ++i)
 	{
-		doc = fz_open_document(ctx, argv[i]);
-		if (fz_needs_password(ctx, doc))
-			if (!fz_authenticate_password(ctx, doc, password))
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", argv[i]);
-		fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
-		count = fz_count_pages(ctx, doc);
+		fz_try(ctx)
+		{
+			doc = fz_open_document(ctx, argv[i]);
+			if (fz_needs_password(ctx, doc))
+				if (!fz_authenticate_password(ctx, doc, password))
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", argv[i]);
+			fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
+			count = fz_count_pages(ctx, doc);
 
-		if (i+1 < argc && fz_is_page_range(ctx, argv[i+1]))
-			runrange(argv[++i]);
-		else
-			runrange("1-N");
+			if (i + 1 < argc && fz_is_page_range(ctx, argv[i + 1]))
+				runrange(argv[++i]);
+			else
+				runrange("1-N");
 
-		fz_drop_document(ctx, doc);
+			fz_drop_document(ctx, doc);
+		}
+		fz_catch(ctx)
+		{
+			fprintf(stderr, "cannot load document: %s\n", fz_caught_message(ctx));
+			fz_close_document_writer(ctx, out);
+			fz_drop_document_writer(ctx, out);
+			fz_drop_context(ctx);
+			// and delete incomplete/damaged output file:
+			unlink(output);
+			return EXIT_FAILURE;
+		}
 	}
 
 	fz_close_document_writer(ctx, out);

@@ -20,7 +20,6 @@ static void usage(void)
 		"\tpages\tcomma separated list of page numbers and ranges\n\n"
 		);
 	fputs(fz_pdf_write_options_usage, stderr);
-	exit(1);
 }
 
 static fz_context *ctx = NULL;
@@ -129,18 +128,21 @@ int pdfmerge_main(int argc, char **argv)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'O': flags = fz_optarg; break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
 		fprintf(stderr, "error: Cannot initialize MuPDF context.\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	pdf_parse_write_options(ctx, &opts, flags);
@@ -154,7 +156,7 @@ int pdfmerge_main(int argc, char **argv)
 		fprintf(stderr, "error: Cannot create destination document.\n");
 		fz_flush_warnings(ctx);
 		fz_drop_context(ctx);
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	/* Step through the source files */

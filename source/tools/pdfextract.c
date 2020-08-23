@@ -19,7 +19,6 @@ static void usage(void)
 	fprintf(stderr, "\t-p\tpassword\n");
 	fprintf(stderr, "\t-r\tconvert images to rgb\n");
 	fprintf(stderr, "\t-N\tdo not use ICC color conversions\n");
-	exit(1);
 }
 
 static int isimage(pdf_obj *obj)
@@ -238,6 +237,7 @@ int pdfextract_main(int argc, char **argv)
 	char *infile;
 	char *password = "";
 	int c, o;
+	int errored = 0;
 
 	while ((c = fz_getopt(argc, argv, "p:rN")) != -1)
 	{
@@ -246,12 +246,15 @@ int pdfextract_main(int argc, char **argv)
 		case 'p': password = fz_optarg; break;
 		case 'r': dorgb++; break;
 		case 'N': doicc^=1; break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	infile = argv[fz_optind++];
 
@@ -259,36 +262,44 @@ int pdfextract_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
-	if (doicc)
-		fz_enable_icc(ctx);
-	else
-		fz_disable_icc(ctx);
-
-	doc = pdf_open_document(ctx, infile);
-	if (pdf_needs_password(ctx, doc))
-		if (!pdf_authenticate_password(ctx, doc, password))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
-
-	if (fz_optind == argc)
+	fz_try(ctx)
 	{
-		int len = pdf_count_objects(ctx, doc);
-		for (o = 1; o < len; o++)
-			extractobject(o);
-	}
-	else
-	{
-		while (fz_optind < argc)
+		if (doicc)
+			fz_enable_icc(ctx);
+		else
+			fz_disable_icc(ctx);
+
+		doc = pdf_open_document(ctx, infile);
+		if (pdf_needs_password(ctx, doc))
+			if (!pdf_authenticate_password(ctx, doc, password))
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
+
+		if (fz_optind == argc)
 		{
-			extractobject(atoi(argv[fz_optind]));
-			fz_optind++;
+			int len = pdf_count_objects(ctx, doc);
+			for (o = 1; o < len; o++)
+				extractobject(o);
 		}
-	}
+		else
+		{
+			while (fz_optind < argc)
+			{
+				extractobject(atoi(argv[fz_optind]));
+				fz_optind++;
+			}
+		}
 
-	pdf_drop_document(ctx, doc);
+		pdf_drop_document(ctx, doc);
+	}
+	fz_catch(ctx)
+	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		errored = 1;
+	}
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return 0;
+	return errored;
 }

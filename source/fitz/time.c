@@ -130,6 +130,9 @@ fz_remove_utf8(const char *name)
 	return n;
 }
 
+/*
+Return NULL on (out of memory) error.
+*/
 char **
 fz_argv_from_wargv(int argc, wchar_t **wargv)
 {
@@ -140,7 +143,7 @@ fz_argv_from_wargv(int argc, wchar_t **wargv)
 	if (argv == NULL)
 	{
 		fprintf(stderr, "Out of memory while processing command line args!\n");
-		exit(1);
+		return NULL;
 	}
 
 	for (i = 0; i < argc; i++)
@@ -149,7 +152,7 @@ fz_argv_from_wargv(int argc, wchar_t **wargv)
 		if (argv[i] == NULL)
 		{
 			fprintf(stderr, "Out of memory while processing command line args!\n");
-			exit(1);
+			return NULL;
 		}
 	}
 

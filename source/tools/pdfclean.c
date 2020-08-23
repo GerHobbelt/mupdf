@@ -42,7 +42,6 @@ static void usage(void)
 		"\t-AA\trecreate appearance streams for annotations\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
-	exit(1);
 }
 
 static int encrypt_method_from_string(const char *name)
@@ -87,7 +86,7 @@ int pdfclean_main(int argc, char **argv)
 		case 'O': fz_strlcpy(opts.opwd_utf8, fz_optarg, sizeof opts.opwd_utf8); break;
 		case 'U': fz_strlcpy(opts.upwd_utf8, fz_optarg, sizeof opts.upwd_utf8); break;
 
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
@@ -95,7 +94,10 @@ int pdfclean_main(int argc, char **argv)
 		opts.do_pretty = 1;
 
 	if (argc - fz_optind < 1)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	infile = argv[fz_optind++];
 
@@ -109,7 +111,7 @@ int pdfclean_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	fz_try(ctx)
@@ -118,8 +120,10 @@ int pdfclean_main(int argc, char **argv)
 	}
 	fz_catch(ctx)
 	{
+		fz_warn(ctx, "error: %s\n", fz_caught_message(ctx));
 		errors++;
 	}
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 
 	return errors != 0;

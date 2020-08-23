@@ -19,7 +19,6 @@ static void usage(void)
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n");
-	exit(1);
 }
 
 static void
@@ -180,6 +179,7 @@ int pdfposter_main(int argc, char **argv)
 	char *outfile = "out.pdf";
 	char *password = "";
 	int c;
+	int errored = 0;
 	pdf_write_options opts = pdf_default_write_options;
 	pdf_document *doc;
 	fz_context *ctx;
@@ -191,12 +191,15 @@ int pdfposter_main(int argc, char **argv)
 		case 'p': password = fz_optarg; break;
 		case 'x': x_factor = atoi(fz_optarg); break;
 		case 'y': y_factor = atoi(fz_optarg); break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (argc - fz_optind < 1)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	infile = argv[fz_optind++];
 
@@ -210,19 +213,28 @@ int pdfposter_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
-	doc = pdf_open_document(ctx, infile);
-	if (pdf_needs_password(ctx, doc))
-		if (!pdf_authenticate_password(ctx, doc, password))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
+	fz_try(ctx)
+	{
+		doc = pdf_open_document(ctx, infile);
+		if (pdf_needs_password(ctx, doc))
+			if (!pdf_authenticate_password(ctx, doc, password))
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
 
-	decimatepages(ctx, doc);
+		decimatepages(ctx, doc);
 
-	pdf_save_document(ctx, doc, outfile, &opts);
+		pdf_save_document(ctx, doc, outfile, &opts);
 
-	pdf_drop_document(ctx, doc);
+		pdf_drop_document(ctx, doc);
+	}
+	fz_catch(ctx)
+	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		errored = 1;
+	}
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return 0;
+	return errored;
 }

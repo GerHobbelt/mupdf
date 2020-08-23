@@ -31,7 +31,6 @@ static void usage(void)
 		"\t\tpath elements separated by '.' or '/'. Path elements must be\n"
 		"\t\tarray index numbers, dictionary property names, or '*'.\n"
 	);
-	exit(1);
 }
 
 static void showtrailer(void)
@@ -565,7 +564,7 @@ int pdfshow_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	while ((c = fz_getopt(argc, argv, "p:o:beg")) != -1)
@@ -577,12 +576,15 @@ int pdfshow_main(int argc, char **argv)
 		case 'b': showbinary = 1; break;
 		case 'e': showdecode = 0; break;
 		case 'g': tight = 1; break;
-		default: usage(); break;
+		default: usage(); return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
+	{
 		usage();
+		return EXIT_FAILURE;
+	}
 
 	filename = argv[fz_optind++];
 
@@ -609,11 +611,13 @@ int pdfshow_main(int argc, char **argv)
 	}
 	fz_catch(ctx)
 	{
+		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
 		errored = 1;
 	}
 
 	fz_drop_output(ctx, out);
 	pdf_drop_document(ctx, doc);
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return errored;
 }
