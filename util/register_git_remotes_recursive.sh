@@ -144,13 +144,15 @@ register_remote .                                                             cc
 register_remote .                                                             cgie                                     git@github.com:cgie/mupdf.git                                                    $# $@
 register_remote .                                                             coypoop                                  git@github.com:coypoop/mupdf.git                                                 $# $@
 register_remote .                                                             cube-soft                                git@github.com:cube-soft/mupdf.git                                               $# $@
-register_remote .                                                             fedora-linux                             git+https://src.fedoraproject.org/rpms/mupdf.git                                 $# $@
+register_remote .                                                             derek-watson                             git@github.com:derek-watson/mupdf.git                                            $# $@
+register_remote .                                                             fedora-linux                             git://src.fedoraproject.org/rpms/mupdf.git                                       $# $@
 register_remote .                                                             grchen                                   git@github.com:grchen/Cocoa-mupdf.git                                            $# $@
 register_remote .                                                             insidenothing                            git@github.com:insidenothing/mupdf.git                                           $# $@
 register_remote .                                                             joaomacp                                 git@github.com:joaomacp/mupdf.git                                                $# $@
 register_remote .                                                             kartaris                                 git@github.com:kartaris/mupdf.git                                                $# $@
 register_remote .                                                             kazuyaujihara                            git@github.com:kazuyaujihara/mupdf.git                                           $# $@
 register_remote .                                                             kluete                                   git@github.com:kluete/mupdf.git                                                  $# $@
+register_remote .                                                             liushilong08                             git@github.com:liushilong08/mupdf.git                                            $# $@
 register_remote .                                                             michaelforney                            git@github.com:michaelforney/mupdf.git                                           $# $@
 register_remote .                                                             moronigranja                             git@github.com:moronigranja/mupdf.git                                            $# $@
 register_remote .                                                             n1tehawk                                 git@github.com:n1tehawk/mupdf.git                                                $# $@
@@ -168,6 +170,7 @@ register_remote .                                                             si
 register_remote .                                                             sl424                                    git@github.com:sl424/mupdf.git                                                   $# $@
 register_remote .                                                             softkannan                               git@github.com:softkannan/mupdf.git                                              $# $@
 register_remote .                                                             theshoals                                git@github.com:theshoals/mupdf.git                                               $# $@
+register_remote .                                                             twg                                      git@github.com:twg/mupdf.git                                                     $# $@
 register_remote .                                                             uniquehaojie0713                         git@github.com:uniquehaojie0713/mupdf.git                                        $# $@
 register_remote .                                                             vinpublic                                git@github.com:vinpublic/mupdf.git                                               $# $@
 register_remote .                                                             welat09                                  git@github.com:welat09/mupdf.git                                                 $# $@
@@ -175,6 +178,7 @@ register_remote .                                                             wm
 register_remote .                                                             wmjordan-MuPDFSharp                      git@github.com:wmjordan/mupdf.git                                                $# $@
 register_remote .                                                             xulongwu4                                git@github.com:xulongwu4/mupdf.git                                               $# $@
 register_remote .                                                             zhiyaluo                                 git@github.com:zhiyaluo/mupdf.git                                                $# $@
+register_remote .                                                             zl03jsj                                  git@github.com:zl03jsj/mupdf.git                                                 $# $@
 register_remote .                                                             zmughal                                  git@github.com:zmughal/mupdf.git                                                 $# $@
 register_remote thirdparty/curl                                               ArtifexCorp                              git://git.ghostscript.com/thirdparty-curl.git                                    $# $@
 register_remote thirdparty/curl                                               ArtifexSoftware                          git@github.com:ArtifexSoftware/thirdparty-curl.git                               $# $@
@@ -215,7 +219,6 @@ register_remote thirdparty/gumbo-parser                                       fu
 register_remote thirdparty/gumbo-parser                                       git-j                                    git@github.com:git-j/gumbo-parser.git                                            $# $@
 register_remote thirdparty/gumbo-parser                                       google                                   git@github.com:google/gumbo-parser.git                                           $# $@
 register_remote thirdparty/gumbo-parser                                       hml1006                                  git@github.com:hml1006/gumbo-parser.git                                          $# $@
-register_remote thirdparty/gumbo-parser                                       hunter-packages                          git@github.com:hunter-packages/gumbo-parser.git                                  $# $@
 register_remote thirdparty/gumbo-parser                                       inkymail                                 git@github.com:inkymail/gumbo-parser.git                                         $# $@
 register_remote thirdparty/gumbo-parser                                       isaachier                                git@github.com:isaachier/gumbo-parser.git                                        $# $@
 register_remote thirdparty/gumbo-parser                                       jdeng                                    git@github.com:jdeng/gumbo-parser.git                                            $# $@
