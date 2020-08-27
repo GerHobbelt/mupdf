@@ -416,7 +416,7 @@ main(int argc, char *argv[])
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 	pdfapp_init(ctx, &gapp);
 	gapp.scrw = 640;
