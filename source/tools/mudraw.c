@@ -41,6 +41,12 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 #include <fcntl.h>
 #endif
 
+#if !defined(HAVE_LEPTONICA) || !defined(HAVE_TESSERACT)
+#ifndef OCR_DISABLED
+#define OCR_DISABLED
+#endif
+#endif
+
 /* Enable for helpful threading debug */
 /* #define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0) */
 #define DEBUG_THREADS(A) do { } while (0)
