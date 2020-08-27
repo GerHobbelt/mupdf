@@ -256,7 +256,7 @@ enum {
 
 typedef struct
 {
-	char *suffix;
+	const char *suffix;
 	int format;
 	int cs;
 } suffix_t;
@@ -479,7 +479,9 @@ static struct {
 	const char *maxfilename;
 } timing;
 
-#define stringify(A) #A
+// https://stackoverflow.com/questions/2653214/stringification-of-a-macro-value
+#define stringify(A) __stringify(A)
+#define __stringify(A) #A
 
 static void usage(void)
 {
