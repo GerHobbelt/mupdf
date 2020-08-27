@@ -370,7 +370,7 @@ int ui_input(struct input *input, int width, int height)
 		state = UI_INPUT_NONE;
 
 	area = ui_pack(width, ui.lineheight * height + 6);
-	ui_draw_bevel_rect(area, UI_COLOR_TEXT_BG, 1);
+	ui_draw_bevel_rect(area, ui.color.text_bg, 1);
 	area = fz_expand_irect(area, -2);
 
 	if (height > 1)
@@ -418,51 +418,51 @@ int ui_input(struct input *input, int width, int height)
 			{
 				float px = ax + ui_measure_string_part(a, p);
 				float qx = px + ui_measure_string_part(p, q);
-				glColorHex(UI_COLOR_TEXT_SEL_BG);
+				glColorHex(ui.color.text_sel_bg);
 				glRectf(px, ay, qx+1, ay + ui.lineheight);
-				glColorHex(UI_COLOR_TEXT_FG);
+				glColorHex(ui.color.text_fg);
 				ui_draw_string_part(ax, ay, a, p);
-				glColorHex(UI_COLOR_TEXT_SEL_FG);
+				glColorHex(ui.color.text_sel_fg);
 				ui_draw_string_part(px, ay, p, q);
-				glColorHex(UI_COLOR_TEXT_FG);
+				glColorHex(ui.color.text_fg);
 				ui_draw_string_part(qx, ay, q, b);
 			}
 			else if (p < a && q >= a && q <= b)
 			{
 				float qx = ax + ui_measure_string_part(a, q);
-				glColorHex(UI_COLOR_TEXT_SEL_BG);
+				glColorHex(ui.color.text_sel_bg);
 				glRectf(ax, ay, qx+1, ay + ui.lineheight);
-				glColorHex(UI_COLOR_TEXT_SEL_FG);
+				glColorHex(ui.color.text_sel_fg);
 				ui_draw_string_part(ax, ay, a, q);
-				glColorHex(UI_COLOR_TEXT_FG);
+				glColorHex(ui.color.text_fg);
 				ui_draw_string_part(qx, ay, q, b);
 			}
 			else if (p >= a && p <= b && q > b)
 			{
 				float px = ax + ui_measure_string_part(a, p);
-				glColorHex(UI_COLOR_TEXT_SEL_BG);
+				glColorHex(ui.color.text_sel_bg);
 				glRectf(px, ay, bx, ay + ui.lineheight);
-				glColorHex(UI_COLOR_TEXT_FG);
+				glColorHex(ui.color.text_fg);
 				ui_draw_string_part(ax, ay, a, p);
-				glColorHex(UI_COLOR_TEXT_SEL_FG);
+				glColorHex(ui.color.text_sel_fg);
 				ui_draw_string_part(px, ay, p, b);
 			}
 			else if (p < a && q > b)
 			{
-				glColorHex(UI_COLOR_TEXT_SEL_BG);
+				glColorHex(ui.color.text_sel_bg);
 				glRectf(ax, ay, bx, ay + ui.lineheight);
-				glColorHex(UI_COLOR_TEXT_SEL_FG);
+				glColorHex(ui.color.text_sel_fg);
 				ui_draw_string_part(ax, ay, a, b);
 			}
 			else
 			{
-				glColorHex(UI_COLOR_TEXT_FG);
+				glColorHex(ui.color.text_fg);
 				ui_draw_string_part(ax, ay, a, b);
 			}
 		}
 		else
 		{
-			glColorHex(UI_COLOR_TEXT_FG);
+			glColorHex(ui.color.text_fg);
 			ui_draw_string_part(ax, ay, a, b);
 		}
 		ay += ui.lineheight;

@@ -337,8 +337,8 @@ fz_decode_tile(fz_context *ctx, fz_pixmap *pix, const float *decode)
 
 	for (k = 0; k < n; k++)
 	{
-		int min = decode[k * 2] * 255;
-		int max = decode[k * 2 + 1] * 255;
+		int min = decode[k * 2] * 255 + 0.5f;
+		int max = decode[k * 2 + 1] * 255 + 0.5f;
 		add[k] = min;
 		mul[k] = max - min;
 	}

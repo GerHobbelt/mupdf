@@ -147,7 +147,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 				{
 					use_colorkey = 1;
 					for (i = 0; i < n; i++)
-						colorkey[i] = pdf_array_get_real(ctx, obj, i) * 255;
+						colorkey[i] = pdf_array_get_real(ctx, obj, i) * 255 + 0.5f;
 				}
 			}
 		}

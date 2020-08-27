@@ -614,7 +614,7 @@ fz_fill_pixmap_with_color(fz_context *ctx, fz_pixmap *pix, fz_colorspace *colors
 	s = pix->s;
 	fz_convert_color(ctx, colorspace, color, pix->colorspace, colorfv, NULL, color_params);
 	for (i = 0; i < n; ++i)
-		colorbv[i] = colorfv[i] * 255;
+		colorbv[i] = colorfv[i] * 255 + 0.5f;
 
 	w = pix->w;
 	h = pix->h;
@@ -965,7 +965,7 @@ fz_gamma_pixmap(fz_context *ctx, fz_pixmap *pix, float gamma)
 	int k, x, y;
 
 	for (k = 0; k < 256; k++)
-		gamma_map[k] = pow(k / 255.0f, gamma) * 255;
+		gamma_map[k] = pow(k / 255.0f, gamma) * 255 + 0.5f;
 
 	for (y = 0; y < pix->h; y++)
 	{
@@ -1588,7 +1588,7 @@ fz_convert_separation_pixmap_to_base(fz_context *ctx, const fz_pixmap *src)
 							src_v[k] = *s++ / 255.0f;
 						a = *s++;
 						ss->u.separation.eval(ctx, ss->u.separation.tint, src_v, sn, base_v, bn);
-						*d++ = (base_v[0] / 100) * 255.0f;
+						*d++ = (base_v[0] / 100) * 255.0f + 0.5f;
 						*d++ = base_v[1] + 128;
 						*d++ = base_v[2] + 128;
 						*d++ = a;
@@ -1606,7 +1606,7 @@ fz_convert_separation_pixmap_to_base(fz_context *ctx, const fz_pixmap *src)
 						for (k = 0; k < sn; ++k)
 							src_v[k] = *s++ / 255.0f;
 						ss->u.separation.eval(ctx, ss->u.separation.tint, src_v, sn, base_v, bn);
-						*d++ = (base_v[0] / 100) * 255.0f;
+						*d++ = (base_v[0] / 100) * 255.0f + 0.5f;
 						*d++ = base_v[1] + 128;
 						*d++ = base_v[2] + 128;
 					}
@@ -1628,7 +1628,7 @@ fz_convert_separation_pixmap_to_base(fz_context *ctx, const fz_pixmap *src)
 						a = *s++;
 						ss->u.separation.eval(ctx, ss->u.separation.tint, src_v, sn, base_v, bn);
 						for (k = 0; k < bn; ++k)
-							*d++ = base_v[k] * 255.0f;
+							*d++ = base_v[k] * 255.0f + 0.5f;
 						*d++ = a;
 					}
 					s += s_line_inc;
@@ -1645,7 +1645,7 @@ fz_convert_separation_pixmap_to_base(fz_context *ctx, const fz_pixmap *src)
 							src_v[k] = *s++ / 255.0f;
 						ss->u.separation.eval(ctx, ss->u.separation.tint, src_v, sn, base_v, bn);
 						for (k = 0; k < bn; ++k)
-							*d++ = base_v[k] * 255.0f;
+							*d++ = base_v[k] * 255.0f + 0.5f;
 					}
 					s += s_line_inc;
 					d += d_line_inc;

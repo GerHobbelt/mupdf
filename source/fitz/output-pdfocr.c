@@ -1,5 +1,7 @@
 #include "mupdf/fitz.h"
 
+#include <zlib.h> /* for compressBound() and compress() */
+
 #include <string.h>
 #include <limits.h>
 
@@ -263,7 +265,7 @@ pdfocr_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	fz_drop_pixmap(ctx, writer->ocrbitmap);
 	writer->ocrbitmap = NULL;
 	writer->stripbuf = Memento_label(fz_malloc(ctx, (size_t)w * sh * n), "pdfocr_stripbuf");
-	writer->complen = fz_deflate_bound(ctx, (size_t)w * sh * n);
+	writer->complen = compressBound((size_t)w * sh * n);
 	writer->compbuf = Memento_label(fz_malloc(ctx, writer->complen), "pdfocr_compbuf");
 	/* Always round the width of ocrbitmap up to a multiple of 4. */
 	writer->ocrbitmap = fz_new_pixmap(ctx, NULL, (w+3)&~3, h, NULL, 0);
@@ -326,7 +328,7 @@ flush_strip(fz_context *ctx, pdfocr_band_writer *writer, int fill)
 	if (writer->options.compress)
 	{
 		size_t destLen = writer->complen;
-		fz_deflate(ctx, writer->compbuf, &destLen, data, len, FZ_DEFLATE_DEFAULT);
+		compress(writer->compbuf, &destLen, data, len);
 		len = destLen;
 		data = writer->compbuf;
 	}

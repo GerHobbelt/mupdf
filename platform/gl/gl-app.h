@@ -62,6 +62,22 @@ enum side { ALL, T, R, B, L };
 enum fill { NONE = 0, X = 1, Y = 2, BOTH = 3 };
 enum anchor { CENTER, N, NE, E, SE, S, SW, W, NW };
 
+struct ui_color_theme
+{
+	unsigned int
+		panel,
+		button,
+		scrollbar,
+		text_bg,
+		text_fg,
+		text_sel_bg,
+		text_sel_fg,
+		bevel_1,
+		bevel_2,
+		bevel_3,
+		bevel_4;
+};
+
 struct layout
 {
 	enum side side;
@@ -90,6 +106,8 @@ struct ui
 	int baseline;
 	int lineheight;
 	int gridsize;
+
+	struct ui_color_theme color;
 
 	struct layout *layout;
 	fz_irect *cavity;
@@ -212,20 +230,8 @@ void ui_show_error_dialog(const char *fmt, ...);
 
 /* Theming */
 
-enum
-{
-	UI_COLOR_PANEL = 0xc0c0c0,
-	UI_COLOR_BUTTON = 0xc0c0c0,
-	UI_COLOR_SCROLLBAR = 0xdfdfdf,
-	UI_COLOR_TEXT_BG = 0xffffff,
-	UI_COLOR_TEXT_FG = 0x000000,
-	UI_COLOR_TEXT_SEL_BG = 0x000080,
-	UI_COLOR_TEXT_SEL_FG = 0xffffff,
-	UI_COLOR_BEVEL_1 = 0x000000,
-	UI_COLOR_BEVEL_2 = 0x808080,
-	UI_COLOR_BEVEL_3 = 0xdfdfdf,
-	UI_COLOR_BEVEL_4 = 0xffffff,
-};
+extern struct ui_color_theme ui_light_theme;
+extern struct ui_color_theme ui_dark_theme;
 
 void glColorHex(unsigned int hex);
 void ui_draw_bevel(fz_irect area, int depressed);

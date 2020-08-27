@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-#include <zlib.h>
+#include <zlib.h> /* for crc32() */
 
 #if !defined (INT32_MAX)
 #define INT32_MAX 2147483647L
@@ -25,6 +25,8 @@ fz_write_zip_entry(fz_context *ctx, fz_zip_writer *zip, const char *name, fz_buf
 {
 	int offset = fz_tell_output(ctx, zip->output);
 	int sum;
+
+	/* TODO: respect 'compress' option */
 
 	sum = crc32(0, NULL, 0);
 	sum = crc32(sum, buf->data, (uInt)buf->len);

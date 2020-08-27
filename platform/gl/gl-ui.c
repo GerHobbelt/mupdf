@@ -13,6 +13,35 @@ void glutInitWarningFunc(void *fn) {}
 #define glutSetOption(X,Y)
 #endif
 
+/* Windows 95 colors */
+struct ui_color_theme ui_light_theme = {
+	/* panel */ 0xc0c0c0,
+	/* button */ 0xc0c0c0,
+	/* scrollbar */ 0xdfdfdf,
+	/* text_bg */ 0xffffff,
+	/* text_fg */ 0x000000,
+	/* text_sel_bg */ 0x000080,
+	/* text_sel_fg */ 0xffffff,
+	/* bevel_1 */ 0x000000,
+	/* bevel_2 */ 0x808080,
+	/* bevel_3 */ 0xdfdfdf,
+	/* bevel_4 */ 0xffffff,
+};
+
+struct ui_color_theme ui_dark_theme = {
+	/* panel */ 0x404040,
+	/* button */ 0x505050,
+	/* scrollbar */ 0x404040,
+	/* text_bg */ 0x303030,
+	/* text_fg */ 0xffffff,
+	/* text_sel_bg */ 0x404080,
+	/* text_sel_fg */ 0xffffff,
+	/* bevel_1 */ 0x202020,
+	/* bevel_2 */ 0x303030,
+	/* bevel_3 */ 0x606060,
+	/* bevel_4 */ 0x707070,
+};
+
 enum
 {
 	/* Default UI sizes */
@@ -176,17 +205,17 @@ void ui_draw_bevel_imp(fz_irect area, unsigned ot, unsigned it, unsigned ib, uns
 void ui_draw_bevel(fz_irect area, int depressed)
 {
 	if (depressed)
-		ui_draw_bevel_imp(area, UI_COLOR_BEVEL_2, UI_COLOR_BEVEL_1, UI_COLOR_BEVEL_3, UI_COLOR_BEVEL_4);
+		ui_draw_bevel_imp(area, ui.color.bevel_2, ui.color.bevel_1, ui.color.bevel_3, ui.color.bevel_4);
 	else
-		ui_draw_bevel_imp(area, UI_COLOR_BEVEL_4, UI_COLOR_BEVEL_3, UI_COLOR_BEVEL_2, UI_COLOR_BEVEL_1);
+		ui_draw_bevel_imp(area, ui.color.bevel_4, ui.color.bevel_3, ui.color.bevel_2, ui.color.bevel_1);
 }
 
 void ui_draw_ibevel(fz_irect area, int depressed)
 {
 	if (depressed)
-		ui_draw_bevel_imp(area, UI_COLOR_BEVEL_2, UI_COLOR_BEVEL_1, UI_COLOR_BEVEL_3, UI_COLOR_BEVEL_4);
+		ui_draw_bevel_imp(area, ui.color.bevel_2, ui.color.bevel_1, ui.color.bevel_3, ui.color.bevel_4);
 	else
-		ui_draw_bevel_imp(area, UI_COLOR_BEVEL_3, UI_COLOR_BEVEL_4, UI_COLOR_BEVEL_2, UI_COLOR_BEVEL_1);
+		ui_draw_bevel_imp(area, ui.color.bevel_3, ui.color.bevel_4, ui.color.bevel_2, ui.color.bevel_1);
 }
 
 void ui_draw_bevel_rect(fz_irect area, unsigned int fill, int depressed)
@@ -685,7 +714,7 @@ void ui_panel_begin(int w, int h, int padx, int pady, int opaque)
 	fz_irect area = ui_pack(w, h);
 	if (opaque)
 	{
-		glColorHex(UI_COLOR_PANEL);
+		glColorHex(ui.color.panel);
 		glRectf(area.x0, area.y0, area.x1, area.y1);
 	}
 	area.x0 += padx; area.y0 += padx;
@@ -709,7 +738,7 @@ void ui_dialog_begin(int w, int h)
 	x = (ui.window_w-w)/2;
 	y = (ui.window_h-h)/3;
 	area = fz_make_irect(x, y, x+w, y+h);
-	ui_draw_bevel_rect(area, UI_COLOR_PANEL, 0);
+	ui_draw_bevel_rect(area, ui.color.panel, 0);
 	area = fz_expand_irect(area, -14);
 	ui_pack_push(area);
 }
@@ -739,7 +768,7 @@ void ui_label(const char *fmt, ...)
 	avail = ui_available_width();
 	n = ui_break_lines(buf, lines, nelem(lines), avail, &used);
 	area = ui_pack(used, n * ui.lineheight);
-	glColorHex(UI_COLOR_TEXT_FG);
+	glColorHex(ui.color.text_fg);
 	ui_draw_lines(area.x0, area.y0, lines, n);
 }
 
@@ -758,8 +787,8 @@ int ui_button(const char *label)
 	}
 
 	pressed = (ui.hot == label && ui.active == label && ui.down);
-	ui_draw_bevel_rect(area, UI_COLOR_BUTTON, pressed);
-	glColorHex(UI_COLOR_TEXT_FG);
+	ui_draw_bevel_rect(area, ui.color.button, pressed);
+	glColorHex(ui.color.text_fg);
 	ui_draw_string(text_x + pressed, area.y0+3 + pressed, label);
 
 	return ui.hot == label && ui.active == label && !ui.down;
@@ -772,7 +801,7 @@ int ui_checkbox(const char *label, int *value)
 	fz_irect mark = { area.x0, area.y0 + ui.baseline-12, area.x0 + 13, area.y0 + ui.baseline+1 };
 	int pressed;
 
-	glColorHex(UI_COLOR_TEXT_FG);
+	glColorHex(ui.color.text_fg);
 	ui_draw_string(mark.x1 + 4, area.y0, label);
 
 	if (ui_mouse_inside(area))
@@ -786,13 +815,13 @@ int ui_checkbox(const char *label, int *value)
 		*value = !*value;
 
 	pressed = (ui.hot == label && ui.active == label && ui.down);
-	ui_draw_bevel_rect(mark, pressed ? UI_COLOR_PANEL : UI_COLOR_TEXT_BG, 1);
+	ui_draw_bevel_rect(mark, pressed ? ui.color.panel : ui.color.text_bg, 1);
 	if (*value)
 	{
 		float ax = mark.x0+2 + 1, ay = mark.y0+2 + 3;
 		float bx = mark.x0+2 + 4, by = mark.y0+2 + 5;
 		float cx = mark.x0+2 + 8, cy = mark.y0+2 + 1;
-		glColorHex(UI_COLOR_TEXT_FG);
+		glColorHex(ui.color.text_fg);
 		glBegin(GL_TRIANGLE_STRIP);
 		glVertex2f(ax, ay); glVertex2f(ax, ay+3);
 		glVertex2f(bx, by); glVertex2f(bx, by+3);
@@ -839,7 +868,7 @@ int ui_slider(int *value, int min, int max, int width)
 	thumb = fz_make_irect(area.x0+m + x-m, area.y0, area.x0+m + x+m, area.y1);
 
 	ui_draw_bevel(gutter, 1);
-	ui_draw_bevel_rect(thumb, UI_COLOR_BUTTON, 0);
+	ui_draw_bevel_rect(thumb, ui.color.button, 0);
 
 	return *value != start_value && ui.active == value && !ui.down;
 }
@@ -867,20 +896,20 @@ void ui_splitter(int *x, int min, int max, enum side side)
 
 	if (side == L)
 	{
-		glColorHex(UI_COLOR_BEVEL_4);
+		glColorHex(ui.color.bevel_4);
 		glRectf(area.x0+0, area.y0, area.x0+2, area.y1);
-		glColorHex(UI_COLOR_BEVEL_3);
+		glColorHex(ui.color.bevel_3);
 		glRectf(area.x0+2, area.y0, area.x0+3, area.y1);
-		glColorHex(UI_COLOR_PANEL);
+		glColorHex(ui.color.panel);
 		glRectf(area.x0+3, area.y0, area.x0+4, area.y1);
 	}
 	if (side == R)
 	{
-		glColorHex(UI_COLOR_PANEL);
+		glColorHex(ui.color.panel);
 		glRectf(area.x0, area.y0, area.x0+2, area.y1);
-		glColorHex(UI_COLOR_BEVEL_2);
+		glColorHex(ui.color.bevel_2);
 		glRectf(area.x0+2, area.y0, area.x0+3, area.y1);
-		glColorHex(UI_COLOR_BEVEL_1);
+		glColorHex(ui.color.bevel_1);
 		glRectf(area.x0+3, area.y0, area.x0+4, area.y1);
 	}
 }
@@ -899,7 +928,7 @@ void ui_scrollbar(int x0, int y0, int x1, int y1, int *value, int page_size, int
 	if (max <= 0)
 	{
 		*value = 0;
-		glColorHex(UI_COLOR_SCROLLBAR);
+		glColorHex(ui.color.scrollbar);
 		glRectf(x0, y0, x1, y1);
 		return;
 	}
@@ -941,9 +970,9 @@ void ui_scrollbar(int x0, int y0, int x1, int y1, int *value, int page_size, int
 
 	top = (float) *value * avail_h / max;
 
-	glColorHex(UI_COLOR_SCROLLBAR);
+	glColorHex(ui.color.scrollbar);
 	glRectf(x0, y0, x1, y1);
-	ui_draw_ibevel_rect(fz_make_irect(x0, y0+top, x1, y0+top+thumb_h), UI_COLOR_BUTTON, 0);
+	ui_draw_ibevel_rect(fz_make_irect(x0, y0+top, x1, y0+top+thumb_h), ui.color.button, 0);
 }
 
 void ui_tree_begin(struct list *list, int count, int req_w, int req_h, int is_tree)
@@ -982,7 +1011,7 @@ void ui_tree_begin(struct list *list, int count, int req_w, int req_h, int is_tr
 	if (list->scroll_y < 0)
 		list->scroll_y = 0;
 
-	ui_draw_bevel_rect(outer_area, UI_COLOR_TEXT_BG, 1);
+	ui_draw_bevel_rect(outer_area, ui.color.text_bg, 1);
 	if (max_scroll_y > 0)
 	{
 		ui_scrollbar(area.x1, area.y0, area.x1+16, area.y1,
@@ -1029,13 +1058,13 @@ int ui_tree_item(struct list *list, const void *id, const char *label, int selec
 
 		if (ui.active == id || selected)
 		{
-			glColorHex(UI_COLOR_TEXT_SEL_BG);
+			glColorHex(ui.color.text_sel_bg);
 			glRectf(area.x0, area.y0, area.x1, area.y1);
-			glColorHex(UI_COLOR_TEXT_SEL_FG);
+			glColorHex(ui.color.text_sel_fg);
 		}
 		else
 		{
-			glColorHex(UI_COLOR_TEXT_FG);
+			glColorHex(ui.color.text_fg);
 		}
 
 		ui_draw_string(area.x0 + x_item, area.y0, label);
@@ -1089,7 +1118,7 @@ void ui_label_with_scrollbar(char *text, int width, int height, int *scroll)
 
 	glScissor(area.x0, ui.window_h-area.y1, area.x1-area.x0-16, area.y1-area.y0);
 	glEnable(GL_SCISSOR_TEST);
-	glColorHex(UI_COLOR_TEXT_FG);
+	glColorHex(ui.color.text_fg);
 	ui_draw_lines(area.x0, area.y0 - *scroll, lines, n);
 	glDisable(GL_SCISSOR_TEST);
 }
@@ -1112,8 +1141,8 @@ int ui_popup(const void *id, const char *label, int is_button, int count)
 
 	if (is_button)
 	{
-		ui_draw_bevel_rect(area, UI_COLOR_BUTTON, pressed);
-		glColorHex(UI_COLOR_TEXT_FG);
+		ui_draw_bevel_rect(area, ui.color.button, pressed);
+		glColorHex(ui.color.text_fg);
 		ui_draw_string(area.x0 + 6+pressed, area.y0+3+pressed, label);
 		glBegin(GL_TRIANGLES);
 		glVertex2f(area.x1+pressed-8-10, area.y0+pressed+9);
@@ -1124,12 +1153,12 @@ int ui_popup(const void *id, const char *label, int is_button, int count)
 	else
 	{
 		fz_irect arrow = { area.x1-22, area.y0+2, area.x1-2, area.y1-2 };
-		ui_draw_bevel_rect(area, UI_COLOR_TEXT_BG, 1);
-		glColorHex(UI_COLOR_TEXT_FG);
+		ui_draw_bevel_rect(area, ui.color.text_bg, 1);
+		glColorHex(ui.color.text_fg);
 		ui_draw_string(area.x0 + 6, area.y0+3, label);
-		ui_draw_ibevel_rect(arrow, UI_COLOR_BUTTON, pressed);
+		ui_draw_ibevel_rect(arrow, ui.color.button, pressed);
 
-		glColorHex(UI_COLOR_TEXT_FG);
+		glColorHex(ui.color.text_fg);
 		glBegin(GL_TRIANGLES);
 		glVertex2f(area.x1+pressed-8-10, area.y0+pressed+9);
 		glVertex2f(area.x1+pressed-8, area.y0+pressed+9);
@@ -1157,9 +1186,9 @@ int ui_popup(const void *id, const char *label, int is_button, int count)
 			menu_area.y0 = menu_area.y1 - count * ui.lineheight;
 		}
 
-		glColorHex(UI_COLOR_TEXT_FG);
+		glColorHex(ui.color.text_fg);
 		glRectf(menu_area.x0-1, menu_area.y0-1, menu_area.x1+1, menu_area.y1+1);
-		glColorHex(UI_COLOR_TEXT_BG);
+		glColorHex(ui.color.text_bg);
 		glRectf(menu_area.x0, menu_area.y0, menu_area.x1, menu_area.y1);
 
 		ui_pack_push(menu_area);
@@ -1176,14 +1205,14 @@ int ui_popup_item(const char *title)
 	if (ui_mouse_inside(area))
 	{
 		ui.hot = title;
-		glColorHex(UI_COLOR_TEXT_SEL_BG);
+		glColorHex(ui.color.text_sel_bg);
 		glRectf(area.x0, area.y0, area.x1, area.y1);
-		glColorHex(UI_COLOR_TEXT_SEL_FG);
+		glColorHex(ui.color.text_sel_fg);
 		ui_draw_string(area.x0 + 4, area.y0, title);
 	}
 	else
 	{
-		glColorHex(UI_COLOR_TEXT_FG);
+		glColorHex(ui.color.text_fg);
 		ui_draw_string(area.x0 + 4, area.y0, title);
 	}
 

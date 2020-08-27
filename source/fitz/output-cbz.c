@@ -1,7 +1,5 @@
 #include "mupdf/fitz.h"
 
-#include <zlib.h>
-
 #include <limits.h>
 
 #ifndef PATH_MAX
