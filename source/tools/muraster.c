@@ -367,10 +367,10 @@ typedef struct worker_t {
 	mu_thread thread;
 } worker_t;
 
-static char *output = NULL;
+static const char *output = NULL;
 static fz_output *out = NULL;
 
-static char *format;
+static const char *format;
 static int output_format;
 static int output_cs;
 
@@ -384,7 +384,7 @@ static int fit = 0;
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
-static char *layout_css = NULL;
+static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
 
 static int showtime = 0;
@@ -399,7 +399,7 @@ static size_t max_band_memory;
 
 static int errored = 0;
 static fz_colorspace *colorspace;
-static char *filename;
+static const char *filename;
 static int num_workers = 0;
 static worker_t *workers;
 
@@ -465,7 +465,7 @@ static struct {
 	mu_semaphore start;
 	mu_semaphore stop;
 	int pagenum;
-	char *filename;
+	const char *filename;
 	render_details render;
 	int interptime;
 } bgprint;
@@ -475,8 +475,8 @@ static struct {
 	int min, max;
 	int mininterp, maxinterp;
 	int minpage, maxpage;
-	char *minfilename;
-	char *maxfilename;
+	const char *minfilename;
+	const char *maxfilename;
 } timing;
 
 #define stringify(A) #A
@@ -715,7 +715,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 }
 
 /* This functions tries to render a page, falling back repeatedly to try and make it work. */
-static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int start, int interptime, char *fname, int bg, int solo, render_details *render)
+static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int start, int interptime, const char *fname, int bg, int solo, render_details *render)
 {
 	int status;
 
@@ -1416,9 +1416,9 @@ read_rotation(const char *arg)
 	return i;
 }
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
-	char *password = "";
+	const char *password = "";
 	fz_document *doc = NULL;
 	int c;
 	fz_context *ctx;
@@ -1603,7 +1603,7 @@ int main(int argc, char **argv)
 	}
 	else if (output)
 	{
-		char *suffix = output;
+		const char *suffix = output;
 		int i;
 
 		for (i = 0; i < (int)nelem(suffix_table); i++)

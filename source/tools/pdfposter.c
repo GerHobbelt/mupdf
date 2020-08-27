@@ -173,11 +173,11 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 	pdf_dict_put_drop(ctx, pages, PDF_NAME(Kids), kids);
 }
 
-int pdfposter_main(int argc, char **argv)
+int pdfposter_main(int argc, const char **argv)
 {
-	char *infile;
-	char *outfile = "out.pdf";
-	char *password = "";
+	const char *infile;
+	const char *outfile = "out.pdf";
+	const char *password = "";
 	int c;
 	int errored = 0;
 	pdf_write_options opts = pdf_default_write_options;

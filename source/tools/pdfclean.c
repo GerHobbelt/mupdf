@@ -53,11 +53,11 @@ static int encrypt_method_from_string(const char *name)
 	return PDF_ENCRYPT_UNKNOWN;
 }
 
-int pdfclean_main(int argc, char **argv)
+int pdfclean_main(int argc, const char **argv)
 {
-	char *infile;
-	char *outfile = "out.pdf";
-	char *password = "";
+	const char *infile;
+	const char *outfile = "out.pdf";
+	const char *password = "";
 	int c;
 	pdf_write_options opts = pdf_default_write_options;
 	int errors = 0;

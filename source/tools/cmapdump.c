@@ -18,7 +18,7 @@ clean(char *p)
 }
 
 int
-cmapdump_main(int argc, char **argv)
+cmapdump_main(int argc, const char **argv)
 {
 	pdf_cmap *cmap;
 	fz_stream *fi;

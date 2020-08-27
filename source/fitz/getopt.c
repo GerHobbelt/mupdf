@@ -12,13 +12,13 @@
 #define optarg fz_optarg
 #define optind fz_optind
 
-char *optarg; /* Global argument pointer. */
+const char *optarg; /* Global argument pointer. */
 int optind = 0; /* Global argv index. */
 
-static char *scan = NULL; /* Private scan pointer. */
+static const char *scan = NULL; /* Private scan pointer. */
 
 int
-getopt(int argc, char *argv[], char *optstring)
+getopt(int argc, const char *argv[], const char *optstring)
 {
 	char c;
 	char *place;

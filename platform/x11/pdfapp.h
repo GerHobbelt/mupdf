@@ -30,7 +30,7 @@ extern void wintitle(pdfapp_t*, char *title);
 extern void winresize(pdfapp_t*, int w, int h);
 extern void winrepaint(pdfapp_t*);
 extern void winrepaintsearch(pdfapp_t*);
-extern char *winpassword(pdfapp_t*, char *filename);
+extern const char *winpassword(pdfapp_t*, const char *filename);
 extern char *wintextinput(pdfapp_t*, char *inittext, int retry);
 extern int winchoiceinput(pdfapp_t*, int nopts, const char *opts[], int *nvals, const char *vals[]);
 extern void winopenuri(pdfapp_t*, char *s);
@@ -56,14 +56,14 @@ struct pdfapp_s
 	/* current document params */
 	fz_document *doc;
 	char *docpath;
-	char *doctitle;
+	const char *doctitle;
 	fz_outline *outline;
 	int outline_deferred;
 
 	float layout_w;
 	float layout_h;
 	float layout_em;
-	char *layout_css;
+	const char *layout_css;
 	int layout_use_doc_css;
 
 	int pagecount;
@@ -156,8 +156,8 @@ struct pdfapp_s
 
 void pdfapp_init(fz_context *ctx, pdfapp_t *app);
 void pdfapp_setresolution(pdfapp_t *app, int res);
-void pdfapp_open(pdfapp_t *app, char *filename, int reload);
-void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps);
+void pdfapp_open(pdfapp_t *app, const char *filename, int reload);
+void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, int kbps);
 void pdfapp_close(pdfapp_t *app);
 int pdfapp_preclose(pdfapp_t *app);
 void pdfapp_reloadfile(pdfapp_t *app);

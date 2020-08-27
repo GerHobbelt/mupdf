@@ -222,7 +222,7 @@ test_sync(MuOfficeLib *mu)
 	return rv;
 }
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
 	MuOfficeLib *mu;
 	MuError err;

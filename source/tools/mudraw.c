@@ -63,7 +63,7 @@ enum { SPOTS_NONE, SPOTS_OVERPRINT_SIM, SPOTS_FULL };
 
 typedef struct
 {
-	char *suffix;
+	const char *suffix;
 	int format;
 	int spots;
 } suffix_t;
@@ -109,7 +109,7 @@ static const suffix_t suffix_table[] =
 
 typedef struct
 {
-	char *name;
+	const char *name;
 	int colorspace;
 } cs_name_t;
 
@@ -254,12 +254,12 @@ typedef struct worker_t {
 #endif
 } worker_t;
 
-static char *output = NULL;
+static const char *output = NULL;
 static fz_output *out = NULL;
 static int output_pagenum = 0;
 static int output_file_per_page = 0;
 
-static char *format = NULL;
+static const char *format = NULL;
 static int output_format = OUT_NONE;
 
 static float rotation = 0;
@@ -272,7 +272,7 @@ static int fit = 0;
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
-static char *layout_css = NULL;
+static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
 static float min_line_width = 0.0f;
 
@@ -311,7 +311,7 @@ static int spots = SPOTS_NONE;
 #endif
 static int alpha;
 static int useaccel = 1;
-static char *filename;
+static const char *filename;
 static int files = 0;
 static int num_workers = 0;
 static worker_t *workers;
@@ -333,7 +333,7 @@ static struct {
 #endif
 	int pagenum;
 	int error;
-	char *filename;
+	const char *filename;
 	fz_display_list *list;
 	fz_page *page;
 	int interptime;
@@ -345,12 +345,12 @@ static struct {
 	int min, max;
 	int mininterp, maxinterp;
 	int minpage, maxpage;
-	char *minfilename;
-	char *maxfilename;
+	const char *minfilename;
+	const char *maxfilename;
 	int layout;
 	int minlayout, maxlayout;
-	char *minlayoutfilename;
-	char *maxlayoutfilename;
+	const char *minlayoutfilename;
+	const char *maxlayoutfilename;
 } timing;
 
 static void usage(void)
@@ -453,7 +453,7 @@ static int gettime(void)
 	return (now.tv_sec - first.tv_sec) * 1000 + (now.tv_usec - first.tv_usec) / 1000;
 }
 
-static int has_percent_d(char *s)
+static int has_percent_d(const char *s)
 {
 	/* find '%[0-9]*d' */
 	while (*s)
@@ -568,7 +568,7 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 	}
 }
 
-static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, char *fname, int bg, fz_separations *seps)
+static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, const char *fname, int bg, fz_separations *seps)
 {
 	fz_rect mediabox;
 	fz_device *dev = NULL;
@@ -1746,12 +1746,12 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 }
 
 #ifdef MUDRAW_STANDALONE
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 #else
-int mudraw_main(int argc, char **argv)
+int mudraw_main(int argc, const char **argv)
 #endif
 {
-	char *password = "";
+	const char *password = "";
 	fz_document *doc = NULL;
 	int c;
 	fz_context *ctx;
@@ -2004,7 +2004,7 @@ int mudraw_main(int argc, char **argv)
 		}
 		else if (output)
 		{
-			char *suffix = output;
+			const char *suffix = output;
 			int i;
 
 			for (i = 0; i < (int)nelem(suffix_table); i++)

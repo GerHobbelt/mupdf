@@ -10,10 +10,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static char *infile = NULL;
-static char *outfile = NULL;
-static char *certificatefile = NULL;
-static char *certificatepassword = "";
+static const char *infile = NULL;
+static const char *outfile = NULL;
+static const char *certificatefile = NULL;
+static const char *certificatepassword = "";
 static int verify = 0;
 static int clear = 0;
 static int sign = 0;
@@ -206,11 +206,11 @@ static void process_acro_form(fz_context *ctx, pdf_document *doc)
 		process_field_hierarchy(ctx, doc, pdf_array_get(ctx, fields, i));
 }
 
-int pdfsign_main(int argc, char **argv)
+int pdfsign_main(int argc, const char **argv)
 {
 	fz_context *ctx;
 	pdf_document *doc;
-	char *password = "";
+	const char *password = "";
 	int c;
 	pdf_page *page = NULL;
 

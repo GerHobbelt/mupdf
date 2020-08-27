@@ -134,7 +134,7 @@ fz_remove_utf8(const char *name)
 Return NULL on (out of memory) error.
 */
 char **
-fz_argv_from_wargv(int argc, wchar_t **wargv)
+fz_argv_from_wargv(int argc, const wchar_t **wargv)
 {
 	char **argv;
 	int i;
@@ -160,12 +160,12 @@ fz_argv_from_wargv(int argc, wchar_t **wargv)
 }
 
 void
-fz_free_argv(int argc, char **argv)
+fz_free_argv(int argc, const char **argv)
 {
 	int i;
 	for (i = 0; i < argc; i++)
-		free(argv[i]);
-	free(argv);
+		free((void *)argv[i]);
+	free((void *)argv);
 }
 
 #else

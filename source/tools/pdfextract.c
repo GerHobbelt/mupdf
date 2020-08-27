@@ -232,10 +232,10 @@ static void extractobject(int num)
 		fz_warn(ctx, "ignoring object %d", num);
 }
 
-int pdfextract_main(int argc, char **argv)
+int pdfextract_main(int argc, const char **argv)
 {
-	char *infile;
-	char *password = "";
+	const char *infile;
+	const char *password = "";
 	int c, o;
 	int errored = 0;
 

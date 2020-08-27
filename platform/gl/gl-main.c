@@ -163,12 +163,12 @@ static const char *paper_size_name(int w, int h)
 #define MAXRES (zoom_list[nelem(zoom_list)-1])
 #define DEFRES 96
 
-static char *password = "";
-static char *anchor = NULL;
+static const char *password = "";
+static const char *anchor = NULL;
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
-static char *layout_css = NULL;
+static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
 static int enable_js = 1;
 static int tint_white = 0xFFFFF0;
@@ -2173,9 +2173,9 @@ static void signal_handler(int signal)
 #endif
 
 #ifdef _MSC_VER
-int main_utf8(int argc, char **argv)
+int main_utf8(int argc, const char **argv)
 #else
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 #endif
 {
 	const char *trace_file_name = NULL;
@@ -2316,7 +2316,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	int argc;
 	LPWSTR *wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
-	char **argv = fz_argv_from_wargv(argc, wargv);
+	const char **argv = fz_argv_from_wargv(argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
 	int ret = main_utf8(argc, argv);

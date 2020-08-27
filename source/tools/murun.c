@@ -5988,7 +5988,7 @@ static void ffi_new_PDFPKCS7Signer(js_State *J)
 
 #endif /* FZ_ENABLE_PDF */
 
-int murun_main(int argc, char **argv)
+int murun_main(int argc, const char **argv)
 {
 	fz_context *ctx;
 	js_State *J;

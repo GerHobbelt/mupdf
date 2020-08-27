@@ -473,7 +473,7 @@ void *fz_realloc(fz_context *ctx, void *p, size_t size);
 
 	Never throws exceptions.
 */
-void fz_free(fz_context *ctx, void *p);
+void fz_free(fz_context *ctx, const void *p);
 
 /**
 	fz_malloc equivalent that returns NULL rather than throwing

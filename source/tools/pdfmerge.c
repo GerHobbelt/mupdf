@@ -114,12 +114,12 @@ static void merge_range(const char *range)
 	}
 }
 
-int pdfmerge_main(int argc, char **argv)
+int pdfmerge_main(int argc, const char **argv)
 {
 	pdf_write_options opts = pdf_default_write_options;
-	char *output = "out.pdf";
-	char *flags = "";
-	char *input;
+	const char *output = "out.pdf";
+	const char *flags = "";
+	const char *input;
 	int c;
 
 	while ((c = fz_getopt(argc, argv, "o:O:")) != -1)

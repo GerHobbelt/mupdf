@@ -13,7 +13,7 @@ static int alphabits = 8;
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
-static char *layout_css = NULL;
+static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
 
 /* output options */
@@ -102,7 +102,7 @@ static void runrange(const char *range)
 	}
 }
 
-int muconvert_main(int argc, char **argv)
+int muconvert_main(int argc, const char **argv)
 {
 	int i, c;
 

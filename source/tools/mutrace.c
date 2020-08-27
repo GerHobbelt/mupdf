@@ -25,7 +25,7 @@ static void usage(void)
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
-static char *layout_css = NULL;
+static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
 
 static int use_display_list = 0;
@@ -83,11 +83,11 @@ static void runrange(fz_context *ctx, fz_document *doc, int count, const char *r
 	}
 }
 
-int mutrace_main(int argc, char **argv)
+int mutrace_main(int argc, const char **argv)
 {
 	fz_context *ctx;
 	fz_document *doc = NULL;
-	char *password = "";
+	const char *password = "";
 	int i, c, count;
 	int errored = 0;
 

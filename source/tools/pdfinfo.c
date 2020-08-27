@@ -676,7 +676,7 @@ gatherpageinfo(fz_context *ctx, globals *glo, int page, int show)
 }
 
 static void
-printinfo(fz_context *ctx, globals *glo, char *filename, int show, int page)
+printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int page)
 {
 	int i;
 	int j;
@@ -912,7 +912,7 @@ printinfo(fz_context *ctx, globals *glo, char *filename, int show, int page)
 }
 
 static void
-showinfo(fz_context *ctx, globals *glo, char *filename, int show, const char *pagelist)
+showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const char *pagelist)
 {
 	int page, spage, epage;
 	int allpages;
@@ -951,7 +951,7 @@ showinfo(fz_context *ctx, globals *glo, char *filename, int show, const char *pa
 }
 
 static void
-pdfinfo_info(fz_context *ctx, fz_output *out, char *filename, char *password, int show, char *argv[], int argc)
+pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *password, int show, const char *argv[], int argc)
 {
 	enum { NO_FILE_OPENED, NO_INFO_GATHERED, INFO_SHOWN } state;
 	int argidx = 0;
@@ -1004,10 +1004,10 @@ pdfinfo_info(fz_context *ctx, fz_output *out, char *filename, char *password, in
 		fz_rethrow(ctx);
 }
 
-int pdfinfo_main(int argc, char **argv)
+int pdfinfo_main(int argc, const char **argv)
 {
-	char *filename = "";
-	char *password = "";
+	const char *filename = "";
+	const char *password = "";
 	int show = ALL;
 	int c;
 	int ret;

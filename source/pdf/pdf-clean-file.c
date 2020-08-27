@@ -173,7 +173,7 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 	return nc;
 }
 
-static void retainpages(fz_context *ctx, globals *glo, int argc, char **argv)
+static void retainpages(fz_context *ctx, globals *glo, int argc, const char **argv)
 {
 	pdf_obj *oldroot, *root, *pages, *kids, *countobj, *olddests;
 	pdf_document *doc = glo->doc;
@@ -313,7 +313,7 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, char **argv)
 	pdf_drop_obj(ctx, root);
 }
 
-void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password, pdf_write_options *opts, int argc, char *argv[])
+void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, const char *password, pdf_write_options *opts, int argc, const char *argv[])
 {
 	globals glo = { 0 };
 

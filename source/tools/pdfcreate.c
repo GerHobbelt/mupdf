@@ -135,7 +135,7 @@ The input is a raw content stream, with commands embedded in comments:
 %%CJKFont Name Language WMode Style (Language=zh-Hant|zh-Hans|ja|ko, WMode=H|V, Style=serif|sans)
 %%Image Name Filename
 */
-static void create_page(char *input)
+static void create_page(const char *input)
 {
 	fz_rect mediabox = { 0, 0, 595, 842 };
 	int rotate = 0;
@@ -213,11 +213,11 @@ static void create_page(char *input)
 	pdf_drop_obj(ctx, resources);
 }
 
-int pdfcreate_main(int argc, char **argv)
+int pdfcreate_main(int argc, const char **argv)
 {
 	pdf_write_options opts = pdf_default_write_options;
-	char *output = "out.pdf";
-	char *flags = "compress";
+	const char *output = "out.pdf";
+	const char *flags = "compress";
 	int i, c;
 
 	while ((c = fz_getopt(argc, argv, "o:O:")) != -1)

@@ -38,7 +38,7 @@ static HCURSOR arrowcurs, handcurs, waitcurs, caretcurs;
 static LRESULT CALLBACK frameproc(HWND, UINT, WPARAM, LPARAM);
 static LRESULT CALLBACK viewproc(HWND, UINT, WPARAM, LPARAM);
 static int timer_pending = 0;
-static char *password = NULL;
+static const char *password = NULL;
 
 static int justcopied = 0;
 
@@ -450,14 +450,14 @@ dlogchoiceproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-char *winpassword(pdfapp_t *app, char *filename)
+const char *winpassword(pdfapp_t *app, const char *filename)
 {
 	char buf[1024], *s;
 	int code;
 
 	if (password)
 	{
-		char *p = password;
+		const char *p = password;
 		password = NULL;
 		return p;
 	}
@@ -1266,7 +1266,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 {
 	int argc;
 	LPWSTR *wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
-	char **argv;
+	const char **argv;
 	char argv0[256];
 	MSG msg;
 	int code;

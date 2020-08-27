@@ -148,8 +148,8 @@ wchar_t *fz_wchar_from_utf8(const char *s);
 void *fz_fopen_utf8(const char *name, const char *mode);
 int fz_remove_utf8(const char *name);
 
-char **fz_argv_from_wargv(int argc, wchar_t **wargv);
-void fz_free_argv(int argc, char **argv);
+char **fz_argv_from_wargv(int argc, const wchar_t **wargv);
+void fz_free_argv(int argc, const char **argv);
 
 #endif
 

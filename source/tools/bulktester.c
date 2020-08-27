@@ -12,7 +12,7 @@
 #define main main_utf8
 #endif
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
 	char *start, *end;
 	char buf[32];
@@ -30,16 +30,18 @@ int main(int argc, char **argv)
 
 	fprintf(stderr, "usage: mutool <command> [options]\n");
 
+#if 0   // test to see the reverse ordered number gen in this call work as expected.
 	char p[256];
 	fz_format_output_path(NULL, p, sizeof(p), "out-%04d.png", 42);
+#endif
 
 	return 1;
 }
 
 #ifdef _MSC_VER
-int wmain(int argc, wchar_t *wargv[])
+int wmain(int argc, const wchar_t *wargv[])
 {
-	char **argv = fz_argv_from_wargv(argc, wargv);
+	const char **argv = fz_argv_from_wargv(argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
 	int ret = main(argc, argv);

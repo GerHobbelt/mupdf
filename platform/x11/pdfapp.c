@@ -309,7 +309,7 @@ static void event_cb(fz_context *ctx, pdf_document *doc, pdf_doc_event *event, v
 	}
 }
 
-void pdfapp_open(pdfapp_t *app, char *filename, int reload)
+void pdfapp_open(pdfapp_t *app, const char *filename, int reload)
 {
 	pdfapp_open_progressive(app, filename, reload, 0);
 }
@@ -374,10 +374,10 @@ static int make_fake_doc(pdfapp_t *app)
 	return 0;
 }
 
-void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps)
+void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, int kbps)
 {
 	fz_context *ctx = app->ctx;
-	char *password = "";
+	const char *password = "";
 	pdf_document *idoc;
 
 	fz_try(ctx)

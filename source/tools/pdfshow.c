@@ -504,7 +504,7 @@ static void showpathpage(char *path)
 	}
 }
 
-static void showpathroot(char *path)
+static void showpathroot(const char *path)
 {
 	char buf[2000], *list = buf, *part;
 	fz_strlcpy(buf, path, sizeof buf);
@@ -532,7 +532,7 @@ static void showpathroot(char *path)
 		fz_write_string(ctx, out, "null\n");
 }
 
-static void show(char *sel)
+static void show(const char *sel)
 {
 	if (!strcmp(sel, "trailer"))
 		showtrailer();
@@ -552,11 +552,11 @@ static void show(char *sel)
 		showpathroot(sel);
 }
 
-int pdfshow_main(int argc, char **argv)
+int pdfshow_main(int argc, const char **argv)
 {
-	char *password = NULL; /* don't throw errors if encrypted */
-	char *filename = NULL;
-	char *output = NULL;
+	const char *password = NULL; /* don't throw errors if encrypted */
+	const char *filename = NULL;
+	const char *output = NULL;
 	int c;
 	int errored = 0;
 

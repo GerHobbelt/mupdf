@@ -129,7 +129,7 @@ showpages(fz_context *ctx, pdf_document *doc, fz_output *out, const char *pageli
 }
 
 static int
-pdfpages_pages(fz_context *ctx, fz_output *out, char *filename, char *password, char *argv[], int argc)
+pdfpages_pages(fz_context *ctx, fz_output *out, const char *filename, const char *password, const char *argv[], int argc)
 {
 	enum { NO_FILE_OPENED, NO_INFO_GATHERED, INFO_SHOWN } state;
 	int argidx = 0;
@@ -174,10 +174,10 @@ pdfpages_pages(fz_context *ctx, fz_output *out, char *filename, char *password, 
 	return ret;
 }
 
-int pdfpages_main(int argc, char **argv)
+int pdfpages_main(int argc, const char **argv)
 {
-	char *filename = "";
-	char *password = "";
+	const char *filename = "";
+	const char *password = "";
 	int c;
 	int ret;
 	fz_context *ctx;
