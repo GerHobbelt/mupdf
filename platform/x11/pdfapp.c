@@ -29,7 +29,7 @@
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #endif
 
-time_t
+static time_t
 stat_mtime(const char *path)
 {
 	struct stat info;

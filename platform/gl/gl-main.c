@@ -37,7 +37,7 @@ void glutLeaveMainLoop(void)
 }
 #endif
 
-time_t
+static time_t
 stat_mtime(const char *path)
 {
 	struct stat info;

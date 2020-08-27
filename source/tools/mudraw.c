@@ -173,7 +173,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_OCR_TRACE, CS_GRAY, { CS_GRAY } },
 };
 
-time_t
+static time_t
 stat_mtime(const char *path)
 {
 	struct stat info;
