@@ -36,7 +36,7 @@ OUT_PCLM    = 16
 OUT_TRACE   = 17
 OUT_BBOX    = 18
 OUT_SVG     = 19
-OUT_RAW     = 20
+OUT_XMLTEXT = 20
 
 CS_INVALID      = 0
 CS_UNSET        = 1
@@ -93,7 +93,7 @@ suffix_table = [
         suffix_t( ".stext", OUT_STEXT, 0 ),
 
         suffix_t( ".trace", OUT_TRACE, 0 ),
-        suffix_t( ".raw", OUT_RAW, 0 ),
+        suffix_t( ".raw", OUT_XMLTEXT, 0 ),
         suffix_t( ".bbox", OUT_BBOX, 0 ),
         ]
 
@@ -141,7 +141,7 @@ format_cs_table = [
         format_cs_table_t( OUT_PSD, CS_CMYK, [ CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA, CS_ICC ] ),
 
         format_cs_table_t( OUT_TRACE, CS_RGB, [ CS_RGB ] ),
-        format_cs_table_t( OUT_RAW, CS_RGB, [ CS_RGB ] ),
+        format_cs_table_t( OUT_XMLTEXT, CS_RGB, [ CS_RGB ] ),
         format_cs_table_t( OUT_BBOX, CS_RGB, [ CS_RGB ] ),
         format_cs_table_t( OUT_SVG, CS_RGB, [ CS_RGB ] ),
 
@@ -343,7 +343,7 @@ def has_percent_d(s):
 # Output file level (as opposed to page level) headers
 def file_level_headers():
 
-    if state.output_format in (OUT_STEXT, OUT_TRACE, OUT_RAW, OUT_BBOX):
+    if state.output_format in (OUT_STEXT, OUT_TRACE, OUT_XMLTEXT, OUT_BBOX):
         state.out.write_string( "<?xml version=\"1.0\"?>\n")
 
     if state.output_format == OUT_HTML:
@@ -435,7 +435,7 @@ def dodrawpage( page, list_, pagenum, cookie, start, interptime, filename, bg, s
         dev.close_device()
         dev = None
 
-    elif state.output_format == OUT_RAW:
+    elif state.output_format == OUT_XMLTEXT:
         state.out.write_string( "<page mediabox=\"%g %g %g %g\">\n" % (
                 mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1))
         dev = mupdf.Device.new_raw_device( state.out)
@@ -1090,7 +1090,7 @@ def draw( argv):
         state.quiet = 1 # automatically be quiet if printing to stdout
         if 0:
             # Windows specific code to make stdout binary.
-            if state.output_format not in( OUT_TEXT, OUT_STEXT, OUT_HTML, OUT_XHTML, OUT_TRACE, OUT_RAW):
+            if state.output_format not in( OUT_TEXT, OUT_STEXT, OUT_HTML, OUT_XHTML, OUT_TRACE, OUT_XMLTEXT):
                 setmode(fileno(stdout), O_BINARY)
         state.out = mupdf.Output( mupdf.Output.Fixed_STDOUT)
 

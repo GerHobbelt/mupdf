@@ -50,7 +50,7 @@ enum {
 	OUT_PNG, OUT_PNM, OUT_PGM, OUT_PPM, OUT_PAM,
 	OUT_PBM, OUT_PKM, OUT_PWG, OUT_PCL, OUT_PS, OUT_PSD,
 	OUT_TEXT, OUT_HTML, OUT_XHTML, OUT_STEXT, OUT_PCLM,
-	OUT_TRACE, OUT_BBOX, OUT_SVG, OUT_OCR_PDF, OUT_RAW,
+	OUT_TRACE, OUT_BBOX, OUT_SVG, OUT_OCR_PDF, OUT_XMLTEXT,
 	OUT_OCR_TEXT, OUT_OCR_HTML, OUT_OCR_XHTML, OUT_OCR_STEXT, OUT_OCR_TRACE,
 #if FZ_ENABLE_PDF
 	OUT_PDF,
@@ -103,7 +103,7 @@ static const suffix_t suffix_table[] =
 	{ ".stext", OUT_STEXT, 0 },
 
 	{ ".trace", OUT_TRACE, 0 },
-	{ ".raw", OUT_RAW, 0 },
+	{ ".xmltext", OUT_XMLTEXT, 0 },
 	{ ".bbox", OUT_BBOX, 0 },
 };
 
@@ -154,7 +154,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_PSD, CS_CMYK, { CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA, CS_ICC } },
 
 	{ OUT_TRACE, CS_RGB, { CS_RGB } },
-	{ OUT_RAW, CS_RGB, { CS_RGB } },
+	{ OUT_XMLTEXT, CS_RGB, { CS_RGB } },
 	{ OUT_BBOX, CS_RGB, { CS_RGB } },
 	{ OUT_SVG, CS_RGB, { CS_RGB } },
 	{ OUT_OCR_PDF, CS_RGB, { CS_RGB, CS_GRAY } },
@@ -473,7 +473,7 @@ static int has_percent_d(const char *s)
 static void
 file_level_headers(fz_context *ctx)
 {
-	if (output_format == OUT_STEXT || output_format == OUT_TRACE || output_format == OUT_BBOX || output_format == OUT_OCR_STEXT || output_format == OUT_RAW)
+	if (output_format == OUT_STEXT || output_format == OUT_TRACE || output_format == OUT_BBOX || output_format == OUT_OCR_STEXT || output_format == OUT_XMLTEXT)
 		fz_write_printf(ctx, out, "<?xml version=\"1.0\"?>\n");
 
 	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
@@ -630,13 +630,13 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	if (output_format == OUT_RAW)
+	if (output_format == OUT_XMLTEXT)
 	{
 		fz_try(ctx)
 		{
 			fz_write_printf(ctx, out, "<page mediabox=\"%g %g %g %g\">\n",
 					mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1);
-			dev = fz_new_raw_device(ctx, out);
+			dev = fz_new_xmltext_device(ctx, out);
 			if (list)
 				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, cookie);
 			else
@@ -1071,8 +1071,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				{
 					if (workers[i].running)
 					{
+#ifndef DISABLE_MUTHREADS
 						DEBUG_THREADS(("Waiting on worker %d to finish processing\n", i));
 						mu_wait_semaphore(&workers[i].stop);
+#endif
 						workers[i].running = 0;
 					}
 					else
@@ -2194,7 +2196,7 @@ int mudraw_main(int argc, const char **argv)
 					output_format != OUT_OCR_STEXT &&
 					output_format != OUT_OCR_HTML &&
 					output_format != OUT_OCR_XHTML &&
-					output_format != OUT_RAW)
+					output_format != OUT_XMLTEXT)
 					setmode(fileno(stdout), O_BINARY);
 #endif
 				out = fz_stdout(ctx);

@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int mutool_main(int argc, const char** argv);
+
 /*
 	A useful bit of bash script to call this is:
 	for f in ../ghostpcl/tests_private/pdf/forms/v1.3/ *.pdf ; do g=${f%.*} ; echo $g ; win32/debug/mujstest-v8.exe -o $g-%d.png -p ../ghostpcl/ $g.mjs > $g.log 2>&1 ; done
@@ -15,9 +17,9 @@
 
 static pdfapp_t gapp;
 static int file_open = 0;
-static char *scriptname;
-static char *output = "out-%04d.png";
-static char *prefix = NULL;
+static const char *scriptname;
+static const char *output = "out-%04d.png";
+static const char *prefix = NULL;
 static int shotcount = 0;
 static int verbosity = 0;
 
@@ -74,7 +76,7 @@ int wingetcertpath(pdfapp_t* app, char *buf, int len)
 static char pd_password[256] = "";
 static char td_textinput[LONGLINE] = "";
 
-char *winpassword(pdfapp_t *app, char *filename)
+const char *winpassword(pdfapp_t *app, const char *filename)
 {
 	if (pd_password[0] == 0)
 		return NULL;
@@ -187,6 +189,7 @@ static void usage(void)
 	fprintf(stderr, "\tRESIZE <w> <h>\tResize the screen to a given size\n");
 	fprintf(stderr, "\tCLICK <x> <y> <btn>\tClick at a given position\n");
 	fprintf(stderr, "\tTEXT <string>\tSet a value to be entered\n");
+	fprintf(stderr, "\tMUTOOL <arguments>\tRun any mutool command as specified\n");
 }
 
 static char *
@@ -297,6 +300,91 @@ static void unescape_string(char *d, const char *s)
 		*d++ = c;
 	}
 	*d = 0;
+}
+
+static void convert_string_to_argv(const char*** argv, int* argc, char* line)
+{
+	int count = 0;
+	size_t len = strlen(line);
+
+	// allocate supra worst-case number of start+end slots for line decoding
+	// PLUS enough space to store the (dequoted) argument strings themselves:
+	char** start = malloc(len * sizeof(start[0]) + len + 2);
+	*argv = start;
+	*argc = 0;
+
+	char* buf = (char*)&start[len];
+	strcpy(buf, line);
+	buf[len + 1] = 0;  // make sure there's a double NUL sentinel at the end.
+
+	char* s = buf;
+
+	while (*s)
+	{
+		// skip leading whitespace:
+		while (isspace(*(unsigned char*)s))
+			s++;
+
+		// if double-quote, assume quoted string: find next (unescaped) doublequote:
+		if (*s == '"')
+		{
+			char* p = s + 1;
+			char* e = strchr(p, *s);
+			const char* esc = strchr(p, '\\');
+
+			while (e)
+			{
+				// see if the doublequote we find is escaped:
+				// algo = skip all escaped chars until we hit or pass over the doublequote:
+				while (esc && esc < e - 1)
+				{
+					esc++; // skip escaped character
+					esc = strchr(esc + 1, '\\');
+				}
+				if (esc != e - 1)
+					break;
+				// doublequote is escaped: skip
+				e = strchr(e + 1, *s);
+			}
+
+			if (!e)
+			{
+				fprintf(stderr, "MUTOOL command error: unterminated string parameter: %s\n", s);
+				return;
+			}
+
+			// point at char past terminating quote:
+			e++;
+			if (!*e && !isspace(*(unsigned char*)e))
+			{
+				fprintf(stderr, "MUTOOL command error: whitespace or end of command expected after quoted string parameter: %s\n", s);
+				return;
+			}
+			*e = 0;
+
+			unescape_string(buf, s);
+			start[count++] = buf;
+			buf += strlen(buf) + 1;
+
+			s = e;
+		}
+		else
+		{
+			// assume regular arg: sentinel is first whitespace:
+			char* e = s;
+			while (!isspace(*(unsigned char*)e))
+				e++;
+			*e = 0;
+			strcpy(buf, s);
+			start[count++] = buf;
+			buf += strlen(buf) + 1;
+
+			s = e;
+		}
+		s++;
+	}
+
+	*argc = count;
 }
 
 int
@@ -414,6 +502,23 @@ main(int argc, char *argv[])
 				else if (match(&line, "TEXT"))
 				{
 					unescape_string(td_textinput, line);
+				}
+				else if (match(&line, "MUTOOL"))
+				{
+					const char** argv = NULL;
+					int argc = 0;
+					convert_string_to_argv(&argv, &argc, line);
+					int rv = mutool_main(argc, argv);
+					if (rv != EXIT_SUCCESS)
+					{
+						fprintf(stderr, "error executing MUTOOL command: %s\n", line);
+						errored = 1;
+					}
+					else if (verbosity)
+					{
+						fprintf(stderr, "OK: MUTOOL command: %s\n", line);
+					}
+					free((void *)argv);
 				}
 				else
 				{

@@ -307,7 +307,7 @@ fz_device *fz_new_trace_device(fz_context *ctx, fz_output *out);
 /**
 	Create a device to output raw information.
 */
-fz_device *fz_new_raw_device(fz_context *ctx, fz_output *out);
+fz_device *fz_new_xmltext_device(fz_context *ctx, fz_output *out);
 
 /**
 	Create a device to compute the bounding

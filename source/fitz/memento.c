@@ -1548,6 +1548,7 @@ void Memento_stats(void)
 static int showInfo(Memento_BlkHeader *b, void *arg)
 {
     Memento_BlkDetails *details;
+    const char* hide_multiple_reallocs = getenv("MEMENTO_HIDE_MULTIPLE_REALLOCS");
 
     fprintf(stderr, FMTP":(size="FMTZ",num=%d)",
             MEMBLK_TOBLK(b), (FMTZ_CAST)b->rawsize, b->sequence);
