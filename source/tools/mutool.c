@@ -11,27 +11,27 @@
 #define main main_utf8
 #endif
 
-int muconvert_main(int argc, char *argv[]);
-int mudraw_main(int argc, char *argv[]);
-int mutrace_main(int argc, char *argv[]);
-int murun_main(int argc, char *argv[]);
+int muconvert_main(int argc, const char *argv[]);
+int mudraw_main(int argc, const char *argv[]);
+int mutrace_main(int argc, const char *argv[]);
+int murun_main(int argc, const char *argv[]);
 
-int pdfclean_main(int argc, char *argv[]);
-int pdfextract_main(int argc, char *argv[]);
-int pdfinfo_main(int argc, char *argv[]);
-int pdfposter_main(int argc, char *argv[]);
-int pdfshow_main(int argc, char *argv[]);
-int pdfpages_main(int argc, char *argv[]);
-int pdfcreate_main(int argc, char *argv[]);
-int pdfmerge_main(int argc, char *argv[]);
-int pdfsign_main(int argc, char *argv[]);
+int pdfclean_main(int argc, const char *argv[]);
+int pdfextract_main(int argc, const char *argv[]);
+int pdfinfo_main(int argc, const char *argv[]);
+int pdfposter_main(int argc, const char *argv[]);
+int pdfshow_main(int argc, const char *argv[]);
+int pdfpages_main(int argc, const char *argv[]);
+int pdfcreate_main(int argc, const char *argv[]);
+int pdfmerge_main(int argc, const char *argv[]);
+int pdfsign_main(int argc, const char *argv[]);
 
-int cmapdump_main(int argc, char *argv[]);
+int cmapdump_main(int argc, const char *argv[]);
 
 static struct {
-	int (*func)(int argc, char *argv[]);
-	char *name;
-	char *desc;
+	int (*func)(int argc, const char *argv[]);
+	const char *name;
+	const char *desc;
 } tools[] = {
 #if FZ_ENABLE_PDF
 	{ pdfclean_main, "clean", "rewrite pdf file" },
@@ -70,12 +70,13 @@ namematch(const char *end, const char *start, const char *match)
 	return ((end-len >= start) && (strncmp(end-len, match, len) == 0));
 }
 
+
 #ifdef GPERF
 #include "gperftools/profiler.h"
 
-static int profiled_main(int argc, char **argv);
+static int profiled_main(int argc, const char **argv);
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
 	int ret;
 	ProfilerStart("mutool.prof");
@@ -84,12 +85,16 @@ int main(int argc, char **argv)
 	return ret;
 }
 
-static int profiled_main(int argc, char **argv)
+static int profiled_main(int argc, const char **argv)
 #else
-int main(int argc, char **argv)
+#ifndef MUTOOL_AS_MUJSTEST_CMD
+int main(int argc, const char **argv)
+#else
+int mutool_main(int argc, const char** argv)
+#endif
 #endif
 {
-	char *start, *end;
+	const char *start, *end;
 	char buf[32];
 	int i;
 
@@ -145,10 +150,12 @@ int main(int argc, char **argv)
 	return 1;
 }
 
+#ifndef MUTOOL_AS_MUJSTEST_CMD
+
 #ifdef _MSC_VER
-int wmain(int argc, wchar_t *wargv[])
+int wmain(int argc, const wchar_t *wargv[])
 {
-	char **argv = fz_argv_from_wargv(argc, wargv);
+	const char **argv = fz_argv_from_wargv(argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
 	int ret = main(argc, argv);
@@ -156,3 +163,6 @@ int wmain(int argc, wchar_t *wargv[])
 	return ret;
 }
 #endif
+
+#endif // MUTOOL_AS_MUJSTEST_CMD
+
