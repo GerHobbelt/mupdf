@@ -17,33 +17,46 @@ clean(char *p)
 	}
 }
 
+static void usage(void)
+{
+	fprintf(stderr, "usage: mutool cmapdump [lots of cmap files] > out.c\n");
+}
+
 int
 cmapdump_main(int argc, const char **argv)
 {
 	pdf_cmap *cmap;
 	fz_stream *fi;
 	char name[256];
-	int i, k;
+	int k, c;
 	fz_context *ctx;
 
-	if (argc < 2)
+	while ((c = fz_getopt(argc, argv, "h")) != -1)
 	{
-		fprintf(stderr, "usage: cmapdump > out.c [lots of cmap files]\n");
-		return 1;
+		switch (c)
+		{
+		default: usage(); return EXIT_FAILURE;
+		}
+	}
+	if (fz_optind == argc)
+	{
+		usage();
+		return EXIT_FAILURE;
 	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	printf("/* This is an automatically generated file. Do not edit. */\n");
 
-	for (i = 1; i < argc; i++)
+	while (fz_optind < argc)
 	{
-		fi = fz_open_file(ctx, argv[i]);
+		const char *filename = argv[fz_optind++];
+		fi = fz_open_file(ctx, filename);
 		cmap = pdf_load_cmap(ctx, fi);
 		fz_drop_stream(ctx, fi);
 
@@ -143,5 +156,5 @@ cmapdump_main(int argc, const char **argv)
 	}
 
 	fz_drop_context(ctx);
-	return 0;
+	return EXIT_SUCCESS;
 }

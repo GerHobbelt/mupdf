@@ -101,7 +101,7 @@ int mutool_main(int argc, const char** argv)
 	if (argc == 0)
 	{
 		fprintf(stderr, "No command name found!\n");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	/* Check argv[0] */
@@ -136,7 +136,7 @@ int mutool_main(int argc, const char** argv)
 		if (!strcmp(argv[1], "-v"))
 		{
 			fprintf(stderr, "mutool version %s\n", FZ_VERSION);
-			return 0;
+			return EXIT_SUCCESS;
 		}
 	}
 
@@ -147,7 +147,7 @@ int mutool_main(int argc, const char** argv)
 	for (i = 0; i < (int)nelem(tools); i++)
 		fprintf(stderr, "\t%s\t-- %s\n", tools[i].name, tools[i].desc);
 
-	return 1;
+	return EXIT_FAILURE;
 }
 
 #ifndef MUTOOL_AS_MUJSTEST_CMD

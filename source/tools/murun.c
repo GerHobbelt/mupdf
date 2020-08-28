@@ -5988,11 +5988,35 @@ static void ffi_new_PDFPKCS7Signer(js_State *J)
 
 #endif /* FZ_ENABLE_PDF */
 
+static void usage(void)
+{
+	fprintf(stderr, "usage:\n"
+		"mutool run -e                       -- run script from stdin\n"
+		"mutool run <file1> [<file2> ...]    -- load all script files file1, file2, etc. and then\n"
+		"                                       run script from file1\n"
+	);
+}
+
 int murun_main(int argc, const char **argv)
 {
 	fz_context *ctx;
 	js_State *J;
-	int i;
+	int c;
+	int from_stdin = 0;
+
+	while ((c = fz_getopt(argc, argv, "eh")) != -1)
+	{
+		switch (c)
+		{
+		default: usage(); return EXIT_FAILURE;
+		case 'e': from_stdin = 1; break;
+		}
+	}
+	if (!from_stdin && fz_optind == argc)
+	{
+		usage();
+		return EXIT_FAILURE;
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	fz_register_document_handlers(ctx);
@@ -6504,22 +6528,28 @@ int murun_main(int argc, const char **argv)
 			"a[4] * b[0] + a[5] * b[2] + b[4],"
 			"a[4] * b[1] + a[5] * b[3] + b[5]];}");
 
-	if (argc > 1) {
-		js_pushstring(J, argv[1]);
+	if (fz_optind < argc)
+	{
+		const char* filename = argv[fz_optind++];
+		int extra_fcounter = 0;
+		js_pushstring(J, filename);
 		js_setglobal(J, "scriptPath");
 		js_newarray(J);
-		for (i = 2; i < argc; ++i) {
-			js_pushstring(J, argv[i]);
-			js_setindex(J, -2, i - 2);
+		while (fz_optind < argc)
+		{
+			const char* extra_filename = argv[fz_optind++];
+			js_pushstring(J, extra_filename);
+			js_setindex(J, -2, extra_fcounter);
+			extra_fcounter++;
 		}
 		js_setglobal(J, "scriptArgs");
-		if (js_dofile(J, argv[1]))
+		if (js_dofile(J, filename))
 		{
 			js_freestate(J);
 			fz_drop_context(ctx);
-			return 1;
+			return EXIT_FAILURE;
 		}
-	} else {
+	} else if (from_stdin) {
 		char line[256];
 		fputs(PS1, stdout);
 		while (fgets(line, sizeof line, stdin)) {
@@ -6531,7 +6561,7 @@ int murun_main(int argc, const char **argv)
 
 	js_freestate(J);
 	fz_drop_context(ctx);
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 #endif
