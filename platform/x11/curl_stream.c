@@ -19,7 +19,7 @@
 #if defined(_WIN32)
 #include <varargs.h>
 static void
-output(const char *fmt, ...)
+output(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2)
 {
 	va_list args;
 	char text[256];

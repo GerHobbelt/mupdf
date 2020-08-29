@@ -22,12 +22,12 @@
 /**
 	Output a line to the log.
 */
-void fz_log(fz_context *ctx, const char *fmt, ...);
+void fz_log(fz_context *ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3);
 
 /**
 	Output a line to the log for a given module.
 */
-void fz_log_module(fz_context *ctx, const char *module, const char *fmt, ...);
+void fz_log_module(fz_context *ctx, const char *module, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(3, 4);
 
 /**
 	Internal function to actually do the opening of the logfile.

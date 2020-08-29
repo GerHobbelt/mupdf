@@ -197,7 +197,7 @@ void ui_panel_end(void);
 
 void ui_spacer(void);
 void ui_splitter(int *x, int min, int max, enum side side);
-void ui_label(const char *fmt, ...);
+void ui_label(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 void ui_label_with_scrollbar(char *text, int width, int height, int *scroll);
 int ui_button(const char *label);
 int ui_checkbox(const char *label, int *value);
@@ -225,8 +225,8 @@ int ui_open_file(char filename[], const char *label);
 void ui_init_save_file(const char *path, int (*filter)(const char *fn));
 int ui_save_file(char filename[], void (*extra_panel)(void), const char *label);
 
-void ui_show_warning_dialog(const char *fmt, ...);
-void ui_show_error_dialog(const char *fmt, ...);
+void ui_show_warning_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
+void ui_show_error_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 
 /* Theming */
 
@@ -267,7 +267,7 @@ void reload(void);
 void do_save_pdf_file(void);
 void do_save_signed_pdf_file(void);
 int do_sign(void);
-void trace_action(const char *fmt, ...);
+void trace_action(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 void trace_page_update(void);
 void trace_save_snapshot(void);
 

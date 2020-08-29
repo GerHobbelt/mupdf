@@ -108,7 +108,7 @@ static int log_fill = 0;
 static char log_buffer2[4096];
 
 static int
-android_fprintf(FILE *file, const char *fmt, ...)
+android_fprintf(FILE *file, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3)
 {
     va_list args;
     char *p, *q;
@@ -166,7 +166,7 @@ android_fprintf(FILE *file, const char *fmt, ...)
 #include <windows.h>
 
 static int
-windows_fprintf(FILE *file, const char *fmt, ...)
+windows_fprintf(FILE *file, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3)
 {
     va_list args;
     char text[4096];

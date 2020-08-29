@@ -140,7 +140,7 @@ fz_output *fz_stderr(fz_context *ctx);
 	Format and write data to an output stream.
 	See fz_format_string for formatting details.
 */
-void fz_write_printf(fz_context *ctx, fz_output *out, const char *fmt, ...);
+void fz_write_printf(fz_context *ctx, fz_output *out, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(3, 4);
 
 /**
 	va_list version of fz_write_printf.
@@ -278,7 +278,7 @@ size_t fz_vsnprintf(char *buffer, size_t space, const char *fmt, va_list args);
 /**
 	The non va_list equivalent of fz_vsnprintf.
 */
-size_t fz_snprintf(char *buffer, size_t space, const char *fmt, ...);
+size_t fz_snprintf(char *buffer, size_t space, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(3, 4);
 
 /**
 	Allocated sprintf.
@@ -286,7 +286,7 @@ size_t fz_snprintf(char *buffer, size_t space, const char *fmt, ...);
 	Returns a null terminated allocated block containing the
 	formatted version of the format string/args.
 */
-char *fz_asprintf(fz_context *ctx, const char *fmt, ...);
+char *fz_asprintf(fz_context *ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3);
 
 /**
 	Save the contents of a buffer to a file.
