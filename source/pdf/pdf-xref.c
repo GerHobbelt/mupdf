@@ -602,12 +602,19 @@ pdf_version(fz_context *ctx, pdf_document *doc)
 static void
 pdf_load_version(fz_context *ctx, pdf_document *doc)
 {
-	char buf[20];
+	char buf[32];
 
 	fz_seek(ctx, doc->file, 0, SEEK_SET);
 	fz_read_line(ctx, doc->file, buf, sizeof buf);
 	if (strlen(buf) < 5 || memcmp(buf, "%PDF-", 5) != 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot recognize version marker");
+	{
+		// is this PDF not a PDF but a HTML file? (probably a 404 page which got downloaded incorrectly)
+		int is_bad_download = !!(strstr(buf, "DOCTYPE") && strstr(buf, "html"));
+		if (is_bad_download)
+			fz_throw(ctx, FZ_ERROR_NOT_A_PDF, "cannot recognize version marker: expected '%%PDF-n.n', but reading '%s'. This is very probably a failed download, delivering a HTML page rather than the intended PDF.", buf);
+		else
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot recognize version marker: expected '%%PDF-n.n', but reading '%s'", buf);
+	}
 
 	doc->version = 10 * (fz_atof(buf+5) + 0.05f);
 	if (doc->version < 10 || doc->version > 17)
@@ -1425,7 +1432,8 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 	{
 		pdf_drop_xref_sections(ctx, doc);
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-		fz_warn(ctx, "trying to repair broken xref");
+		fz_rethrow_if(ctx, FZ_ERROR_NOT_A_PDF);
+		fz_warn(ctx, "trying to repair broken xref after encountering error: %s", fz_caught_message(ctx));
 		repaired = 1;
 	}
 
