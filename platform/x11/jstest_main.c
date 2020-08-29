@@ -1,4 +1,8 @@
+
+#include "timeval.h"
+
 #include "pdfapp.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <ctype.h>
@@ -15,6 +19,8 @@ int mutool_main(int argc, const char** argv);
 	in here, as it causes a warning about a possibly malformed comment.
 */
 
+#define LONGLINE 4096
+
 static pdfapp_t gapp;
 static int file_open = 0;
 static const char *scriptname;
@@ -23,9 +29,9 @@ static const char *prefix = NULL;
 static int shotcount = 0;
 static int verbosity = 0;
 
-#define LONGLINE 4096
-
 static char getline_buffer[LONGLINE];
+static char output_buffer[LONGLINE];
+static char prefix_buffer[LONGLINE];
 
 void winwarn(pdfapp_t *app, char *msg)
 {
@@ -204,9 +210,10 @@ my_getline(FILE *file)
 	{
 		c = fgetc(file);
 	}
-	while (isspace(c));
+	while (c > 0 && isspace(c));
 
-	if (c < 0)
+	// abort on EOF, error or when you encounter an illegal NUL byte in the script
+	if (c <= 0)
 		return NULL;
 
 	/* Read the line in */
@@ -220,6 +227,7 @@ my_getline(FILE *file)
 	/* If we ran out of space, skip the rest of the line */
 	if (space == 0)
 	{
+		fprintf(stderr, "getline: line too long.\n");
 		while (c >= 32)
 			c = fgetc(file);
 	}
@@ -302,7 +310,7 @@ static void unescape_string(char *d, const char *s)
 	*d = 0;
 }
 
-static void convert_string_to_argv(const char*** argv, int* argc, char* line)
+static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* argc, char* line)
 {
 	int count = 0;
 	size_t len = strlen(line);
@@ -322,7 +330,7 @@ static void convert_string_to_argv(const char*** argv, int* argc, char* line)
 	while (*s)
 	{
 		// skip leading whitespace:
-		while (isspace(*(unsigned char*)s))
+		while (*s && isspace(*(unsigned char*)s))
 			s++;
 
 		// if double-quote, assume quoted string: find next (unescaped) doublequote:
@@ -349,33 +357,33 @@ static void convert_string_to_argv(const char*** argv, int* argc, char* line)
 
 			if (!e)
 			{
-				fprintf(stderr, "MUTOOL command error: unterminated string parameter: %s\n", s);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "MUTOOL command error: unterminated string parameter: %s\n", s);
 				return;
 			}
 
-			// point at char past terminating quote:
-			e++;
-			if (!*e && !isspace(*(unsigned char*)e))
+			// point at terminating quote, check if it is followed by whitespace or EOL:
+			if (e[1] != 0 && !isspace((unsigned char)e[1]))
 			{
-				fprintf(stderr, "MUTOOL command error: whitespace or end of command expected after quoted string parameter: %s\n", s);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "MUTOOL command error: whitespace or end of command expected after quoted string parameter: %s\n", s);
 				return;
 			}
 			*e = 0;
 
-			unescape_string(buf, s);
+			unescape_string(buf, s + 1);
 			start[count++] = buf;
 			buf += strlen(buf) + 1;
 
-			s = e;
+			s = e + 1;
 		}
 		else
 		{
 			// assume regular arg: sentinel is first whitespace:
 			char* e = s;
-			while (!isspace(*(unsigned char*)e))
+			while (*e && !isspace(*(unsigned char*)e))
 				e++;
 			*e = 0;
-			strcpy(buf, s);
+			if (buf != s)
+				strcpy(buf, s);
 			start[count++] = buf;
 			buf += strlen(buf) + 1;
 
@@ -383,6 +391,9 @@ static void convert_string_to_argv(const char*** argv, int* argc, char* line)
 		}
 		s++;
 	}
+
+	// end argv[] with a sentinel NULL:
+	start[count] = NULL;
 
 	*argc = count;
 }
@@ -395,6 +406,7 @@ main(int argc, char *argv[])
 	int c;
 	int errored = 0;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:v")) != -1)
 	{
 		switch(c)
@@ -425,6 +437,8 @@ main(int argc, char *argv[])
 
 	fz_try(ctx)
 	{
+		struct curltime start_time = Curl_now();
+
 		while (fz_optind < argc)
 		{
 			scriptname = argv[fz_optind++];
@@ -432,20 +446,36 @@ main(int argc, char *argv[])
 			if (script == NULL)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 
-			do
+			for(;;)
 			{
 				char *line = my_getline(script);
+				const char* line_command = line;
+				struct curltime begin_time;
+				bool report_time = true;
+				int rv = 0;
+
 				if (line == NULL)
-					continue;
+				{
+					if (ferror(script))
+					{
+						fprintf(stderr, "script read error: %s (%s)\n", strerror(errno), scriptname);
+					}
+					break;
+				}
 				if (verbosity)
 					fprintf(stderr, "'%s'\n", line);
+
+				begin_time = Curl_now();
+
 				if (match(&line, "%"))
 				{
 					/* Comment */
+					report_time = false;
 				}
 				else if (match(&line, "PASSWORD"))
 				{
 					strcpy(pd_password, line);
+					report_time = false;
 				}
 				else if (match(&line, "OPEN"))
 				{
@@ -502,16 +532,35 @@ main(int argc, char *argv[])
 				else if (match(&line, "TEXT"))
 				{
 					unescape_string(td_textinput, line);
+					report_time = false;
+				}
+				else if (match(&line, "SET-PREFIX"))
+				{
+					unescape_string(prefix_buffer, line);
+					prefix = prefix_buffer;
+					report_time = false;
+				}
+				else if (match(&line, "SET-OUTPUT"))
+				{
+					unescape_string(output_buffer, line);
+					output = output_buffer;
+					report_time = false;
+				}
+				else if (match(&line, "CD"))
+				{
+					char path[LONGLINE];
+					unescape_string(path, line);
+					fz_chdir(ctx, path);
 				}
 				else if (match(&line, "MUTOOL"))
 				{
 					const char** argv = NULL;
 					int argc = 0;
-					convert_string_to_argv(&argv, &argc, line);
-					int rv = mutool_main(argc, argv);
+					convert_string_to_argv(ctx, &argv, &argc, line);
+					rv = mutool_main(argc, argv);
 					if (rv != EXIT_SUCCESS)
 					{
-						fprintf(stderr, "error executing MUTOOL command: %s\n", line);
+						fprintf(stderr, "ERR: error executing MUTOOL command: %s\n", line);
 						errored = 1;
 					}
 					else if (verbosity)
@@ -522,7 +571,15 @@ main(int argc, char *argv[])
 				}
 				else
 				{
-					fprintf(stderr, "Ignoring line without script statement.\n");
+					report_time = false;
+					if (verbosity)
+						fprintf(stderr, "Ignoring line without script statement.\n");
+				}
+
+				if (report_time)
+				{
+					struct curltime now = Curl_now();
+					fprintf(stderr, "T:%03dms D:%0.3lfs %s %s\n", (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 				}
 			}
 			while (!feof(script));

@@ -1837,7 +1837,7 @@ visible:
 				cookie->errors++;
 			if (fz_caught(ctx) == FZ_ERROR_ABORT)
 				break;
-			fz_warn(ctx, "Ignoring error during interpretation");
+			fz_warn(ctx, "Ignoring error during interpretation: %s", fz_caught_message(ctx));
 		}
 	}
 	fz_drop_colorspace(ctx, colorspace);

@@ -209,7 +209,11 @@ int fz_do_always(fz_context *ctx)
 int fz_do_catch(fz_context *ctx)
 {
 	ctx->error.errcode = ctx->error.top->code;
-	return (ctx->error.top--)->state > 1;
+	int rv = ((ctx->error.top--)->state > 1);
+	if (rv)
+		return rv;
+	else
+		return 0;
 }
 
 int fz_caught(fz_context *ctx)

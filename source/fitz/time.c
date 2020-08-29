@@ -7,36 +7,6 @@
 #include <time.h>
 #include <windows.h>
 
-#ifdef _MSC_VER
-#ifndef _WINRT
-
-#define DELTA_EPOCH_IN_MICROSECS 11644473600000000Ui64
-
-int gettimeofday(struct timeval *tv, struct timezone *tz)
-{
-	FILETIME ft;
-	unsigned __int64 tmpres = 0;
-
-	if (tv)
-	{
-		GetSystemTimeAsFileTime(&ft);
-
-		tmpres |= ft.dwHighDateTime;
-		tmpres <<= 32;
-		tmpres |= ft.dwLowDateTime;
-
-		tmpres /= 10; /*convert into microseconds*/
-		/*converting file time to unix epoch*/
-		tmpres -= DELTA_EPOCH_IN_MICROSECS;
-		tv->tv_sec = (long)(tmpres / 1000000UL);
-		tv->tv_usec = (long)(tmpres % 1000000UL);
-	}
-
-	return 0;
-}
-
-#endif /* !_WINRT */
-#endif /* _MSC_VER */
 
 char *
 fz_utf8_from_wchar(const wchar_t *s)

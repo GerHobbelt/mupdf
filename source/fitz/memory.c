@@ -5,10 +5,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "timeval.h"
+
 /* Enable FITZ_DEBUG_LOCKING_TIMES below if you want to check the times
  * for which locks are held too. */
 #ifdef FITZ_DEBUG_LOCKING
-#undef FITZ_DEBUG_LOCKING_TIMES
+#define FITZ_DEBUG_LOCKING_TIMES
 #endif
 
 /*
@@ -208,27 +210,22 @@ int fz_locks_debug[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX];
 #ifdef FITZ_DEBUG_LOCKING_TIMES
 
 int fz_debug_locking_inited = 0;
-int fz_lock_program_start;
+struct curltime fz_lock_program_start;
 int fz_lock_time[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
-int fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
+struct curltime fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
 
 /* We implement our own millisecond clock, as clock() cannot be trusted
  * when threads are involved. */
-static int ms_clock(void)
+static struct curltime ms_clock(void)
 {
-#ifdef _WIN32
-	return (int)GetTickCount();
-#else
-	struct timeval tp;
-	gettimeofday(&tp, NULL);
-	return (tp.tv_sec*1000) + (tp.tv_usec/1000);
-#endif
+	return Curl_now();
 }
 
 static void dump_lock_times(void)
 {
 	int i, j;
-	int prog_time = ms_clock() - fz_lock_program_start;
+	struct curltime now = Curl_now();
+	int prog_time = Curl_timediff(now, fz_lock_program_start);
 
 	for (j = 0; j < FZ_LOCK_MAX; j++)
 	{
@@ -361,7 +358,7 @@ void fz_lock_debug_unlock(fz_context *ctx, int lock)
 	}
 	fz_locks_debug[idx][lock] = 0;
 #ifdef FITZ_DEBUG_LOCKING_TIMES
-	fz_lock_time[idx][lock] += ms_clock() - fz_lock_taken[idx][lock];
+	fz_lock_time[idx][lock] += Curl_timediff(ms_clock(), fz_lock_taken[idx][lock]);
 #endif
 }
 

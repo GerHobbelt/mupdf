@@ -184,6 +184,10 @@ int pdfposter_main(int argc, const char **argv)
 	pdf_document *doc;
 	fz_context *ctx;
 
+	x_factor = 0;
+	y_factor = 0;
+
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "x:y:p:")) != -1)
 	{
 		switch (c)
@@ -195,7 +199,7 @@ int pdfposter_main(int argc, const char **argv)
 		}
 	}
 
-	if (argc - fz_optind < 1)
+	if (argc == fz_optind)
 	{
 		usage();
 		return EXIT_FAILURE;

@@ -63,6 +63,7 @@ int pdfclean_main(int argc, const char **argv)
 	int errors = 0;
 	fz_context *ctx;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "adfgilp:sczDAE:O:U:P:")) != -1)
 	{
 		switch (c)
@@ -93,7 +94,7 @@ int pdfclean_main(int argc, const char **argv)
 	if ((opts.do_ascii || opts.do_decompress) && !opts.do_compress)
 		opts.do_pretty = 1;
 
-	if (argc - fz_optind < 1)
+	if (argc == fz_optind)
 	{
 		usage();
 		return EXIT_FAILURE;

@@ -220,6 +220,10 @@ int pdfcreate_main(int argc, const char **argv)
 	const char *flags = "compress";
 	int i, c;
 
+	ctx = NULL;
+	doc = NULL;
+
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:O:")) != -1)
 	{
 		switch (c)

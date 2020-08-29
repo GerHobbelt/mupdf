@@ -4,6 +4,7 @@
 #endif
 
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #include <errno.h>
 #include <stdarg.h>
@@ -178,6 +179,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (!strcmp(filename, "/dev/null") || !fz_strcasecmp(filename, "nul:"))
 		return fz_new_output(ctx, 0, NULL, null_write, NULL, NULL);
 
+	fz_mkdir_for_file(ctx, filename);
 #ifdef _WIN32
 	/* Ensure we create a brand new file. We don't want to clobber our old file. */
 	if (!append)

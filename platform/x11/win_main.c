@@ -26,7 +26,7 @@
 
 #define MIN(x,y) ((x) < (y) ? (x) : (y))
 
-#define ID_ABOUT	0x1000
+#define ID_ABOUT		0x1000
 #define ID_DOCINFO	0x1001
 
 static HWND hwndframe = NULL;
@@ -1288,6 +1288,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	if (!argv)
 		return EXIT_FAILURE;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:")) != -1)
 	{
 		switch (c)

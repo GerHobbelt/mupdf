@@ -6,6 +6,7 @@
 #include <assert.h>
 
 #include "curl_stream.h"
+#include "timeval.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -23,7 +24,7 @@ typedef struct prog_state
 	int64_t length;
 	int64_t available; /* guarded by lock below */
 	int kbps;
-	int64_t start_time; /* in milliseconds since epoch */
+	struct curltime start_time; /* in microseconds since epoch */
 	unsigned char buffer[4096];
 	void (*on_data)(void*,int);
 	void *on_data_arg;
@@ -39,15 +40,9 @@ typedef struct prog_state
 #endif
 } prog_state;
 
-static int64_t get_current_time(void)
+static struct curltime get_current_time(void)
 {
-#ifdef _WIN32
-	return (int)GetTickCount();
-#else
-	struct timeval now;
-	gettimeofday(&now, NULL);
-	return (int64_t)now.tv_sec*1000 + now.tv_usec/1000;
-#endif
+	return Curl_now();
 }
 
 #ifdef _WIN32
@@ -168,7 +163,9 @@ static void fetcher_thread(prog_state *ps)
 		/* Simulate more data having arrived. */
 		if (ps->available < ps->length)
 		{
-			int64_t av = (get_current_time() - ps->start_time) * ps->kbps;
+			struct curltime now = Curl_now();
+			timediff_t delta_t = Curl_timediff(now, ps->start_time);
+			int64_t av = delta_t * ps->kbps;
 			if (av > ps->length)
 				av = ps->length;
 			ps->available = av;

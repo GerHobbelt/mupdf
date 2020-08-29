@@ -2428,7 +2428,11 @@ static void unlock(void *user, int lock)
 }
 
 
-int main(int argc, char** argv)
+#ifdef MUTEXTEXTRACT_STANDALONE
+int main(int argc, const char** argv)
+#else
+int mutextextract_main(int argc, const char** argv)
+#endif
 {
     const char* docx_out_path       = NULL;
     const char* input_path          = NULL;

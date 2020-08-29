@@ -15,7 +15,7 @@ static fz_output *out = NULL;
 static int showbinary = 0;
 static int showdecode = 1;
 static int tight = 0;
-static int showcolumn;
+static int showcolumn = 0;
 
 static void usage(void)
 {
@@ -560,13 +560,15 @@ int pdfshow_main(int argc, const char **argv)
 	int c;
 	int errored = 0;
 
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
-	if (!ctx)
-	{
-		fprintf(stderr, "cannot initialise context\n");
-		return EXIT_FAILURE;
-	}
+	doc = NULL;
+	ctx = NULL;
+	out = NULL;
+	showbinary = 0;
+	showdecode = 1;
+	tight = 0;
+	showcolumn = 0;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "p:o:beg")) != -1)
 	{
 		switch (c)
@@ -586,12 +588,23 @@ int pdfshow_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+	if (!ctx)
+	{
+		fprintf(stderr, "cannot initialise context\n");
+		return EXIT_FAILURE;
+	}
+
 	filename = argv[fz_optind++];
 
-	if (output)
-		out = fz_new_output_with_path(ctx, output, 0);
-	else
+	if (!output || *output == 0 || !strcmp(output, "-"))
 		out = fz_stdout(ctx);
+	else
+	{
+		char fbuf[4096];
+		fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+		out = fz_new_output_with_path(ctx, fbuf, 0);
+	}
 
 	fz_var(doc);
 	fz_try(ctx)

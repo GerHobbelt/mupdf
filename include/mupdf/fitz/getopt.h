@@ -17,4 +17,9 @@ extern int fz_optindw;
 extern const wchar_t *fz_optargw;
 #endif
 
+/**
+    Reset the fz_getopt() internals for when you want to use it on yet another argv/argc set.
+*/
+extern void fz_getopt_reset(void);
+
 #endif

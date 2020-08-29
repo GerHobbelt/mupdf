@@ -164,6 +164,7 @@ infousage(void)
 {
 	fprintf(stderr,
 		"usage: mutool info [options] file.pdf [pages]\n"
+		"\t-o -\toutput file path. Default: info will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
 		"\t-F\tlist fonts\n"
 		"\t-I\tlist images\n"
@@ -1008,12 +1009,15 @@ int pdfinfo_main(int argc, const char **argv)
 {
 	const char *filename = "";
 	const char *password = "";
+	const char* output = NULL;
 	int show = ALL;
 	int c;
 	int ret;
 	fz_context *ctx;
+	fz_output* out = NULL;
 
-	while ((c = fz_getopt(argc, argv, "FISPXMp:")) != -1)
+	fz_getopt_reset();
+	while ((c = fz_getopt(argc, argv, "FISPXMo:p:")) != -1)
 	{
 		switch (c)
 		{
@@ -1023,6 +1027,7 @@ int pdfinfo_main(int argc, const char **argv)
 		case 'P': if (show == ALL) show = PATTERNS; else show |= PATTERNS; break;
 		case 'X': if (show == ALL) show = XOBJS; else show |= XOBJS; break;
 		case 'M': if (show == ALL) show = DIMENSIONS; else show |= DIMENSIONS; break;
+		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		default:
 			infousage();
@@ -1045,12 +1050,27 @@ int pdfinfo_main(int argc, const char **argv)
 
 	ret = EXIT_SUCCESS;
 	fz_try(ctx)
-		pdfinfo_info(ctx, fz_stdout(ctx), filename, password, show, &argv[fz_optind], argc-fz_optind);
+	{
+		if (!output || *output == 0 || !strcmp(output, "-"))
+			out = fz_stdout(ctx);
+		else
+		{
+			char fbuf[4096];
+			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+			out = fz_new_output_with_path(ctx, fbuf, 0);
+		}
+
+		pdfinfo_info(ctx, out, filename, password, show, &argv[fz_optind], argc - fz_optind);
+
+		fz_flush_output(ctx, out);
+		fz_close_output(ctx, out);
+	}
 	fz_catch(ctx)
 	{
 		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
 	}
+	fz_drop_output(ctx, out);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return ret;

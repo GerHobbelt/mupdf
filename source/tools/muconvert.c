@@ -106,6 +106,26 @@ int muconvert_main(int argc, const char **argv)
 {
 	int i, c;
 
+	/* input options */
+	password = "";
+	alphabits = 8;
+	layout_w = FZ_DEFAULT_LAYOUT_W;
+	layout_h = FZ_DEFAULT_LAYOUT_H;
+	layout_em = FZ_DEFAULT_LAYOUT_EM;
+	layout_css = NULL;
+	layout_use_doc_css = 1;
+
+	/* output options */
+	output = NULL;
+	format = NULL;
+	options = "";
+
+	ctx = NULL;
+	doc = NULL;
+	out = NULL;
+	count = 0;
+
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "p:A:W:H:S:U:Xo:F:O:")) != -1)
 	{
 		switch (c)

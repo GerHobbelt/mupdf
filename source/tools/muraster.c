@@ -136,20 +136,14 @@
 	END OF CONFIGURATION SECTION
 */
 
+#include "timeval.h"
+
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/mu-threads.h"
 
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-#ifdef _MSC_VER
-struct timeval;
-struct timezone;
-int gettimeofday(struct timeval *tv, struct timezone *tz);
-#else
-#include <sys/time.h>
-#endif
 
 /*
 	After this point, we convert the #defines set (or not set)
@@ -524,18 +518,19 @@ static void usage(void)
 		);
 }
 
+static int gettime_once = 1;
+
 static int gettime(void)
 {
-	static struct timeval first;
-	static int once = 1;
-	struct timeval now;
-	if (once)
+	static struct curltime first;
+	struct curltime now;
+	if (gettime_once)
 	{
-		gettimeofday(&first, NULL);
-		once = 0;
+		first = Curl_now();
+		gettime_once = 0;
 	}
-	gettimeofday(&now, NULL);
-	return (now.tv_sec - first.tv_sec) * 1000 + (now.tv_usec - first.tv_usec) / 1000;
+	now = Curl_now();
+	return Curl_timediff(now, first);
 }
 
 static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_matrix ctm, fz_rect tbounds, fz_cookie *cookie, int band_start, fz_pixmap *pix, fz_bitmap **bit)
@@ -931,7 +926,7 @@ get_page_render_details(fz_context *ctx, fz_page *page, render_details *render)
 	}
 
 	render->ctm = fz_pre_scale(fz_rotate(rot), s_x, s_y);
-	render->tbounds = fz_transform_rect(render->bounds, render->ctm);;
+	render->tbounds = fz_transform_rect(render->bounds, render->ctm);
 	render->ibounds = fz_round_rect(render->tbounds);
 }
 
@@ -1418,7 +1413,11 @@ read_rotation(const char *arg)
 	return i;
 }
 
-int main(int argc, const char **argv)
+#ifdef MURASTER_STANDALONE
+int main(int argc, const char** argv)
+#else
+int muraster_main(int argc, const char *argv[])
+#endif
 {
 	const char *password = "";
 	fz_document *doc = NULL;
@@ -1430,6 +1429,36 @@ int main(int argc, const char **argv)
 
 	fz_var(doc);
 
+	output = NULL;
+	out = NULL;
+
+	rotation = -1;
+	width = 0;
+	height = 0;
+	fit = 0;
+
+	layout_w = FZ_DEFAULT_LAYOUT_W;
+	layout_h = FZ_DEFAULT_LAYOUT_H;
+	layout_em = FZ_DEFAULT_LAYOUT_EM;
+	layout_css = NULL;
+	layout_use_doc_css = 1;
+
+	showtime = 0;
+	showmemory = 0;
+
+	ignore_errors = 0;
+	alphabits_text = 8;
+	alphabits_graphics = 8;
+
+	errored = 0;
+
+	memset(&bgprint, 0, sizeof(bgprint));
+	memset(&timing, 0, sizeof(timing));
+
+	gettime_once = 1;
+
+	// ---
+
 	bgprint.active = 0;			/* set by -P */
 	min_band_height = MIN_BAND_HEIGHT;
 	max_band_memory = BAND_MEMORY;
@@ -1439,6 +1468,7 @@ int main(int argc, const char **argv)
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XvP")) != -1)
 	{
 		switch (c)
@@ -1635,12 +1665,14 @@ int main(int argc, const char **argv)
 		break;
 	}
 
-	if (output && (output[0] != '-' || output[1] != 0) && *output != 0)
-	{
-		out = fz_new_output_with_path(ctx, output, 0);
-	}
-	else
+	if (!output || *output == 0 || !strcmp(output, "-"))
 		out = fz_stdout(ctx);
+	else
+	{
+		char fbuf[4096];
+		fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+		out = fz_new_output_with_path(ctx, fbuf, 0);
+	}
 
 	timing.count = 0;
 	timing.total = 0;
@@ -1738,6 +1770,7 @@ int main(int argc, const char **argv)
 	}
 #endif /* DISABLE_MUTHREADS */
 
+	fz_flush_output(ctx, out);
 	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
 	out = NULL;

@@ -31,6 +31,7 @@ cmapdump_main(int argc, const char **argv)
 	int k, c;
 	fz_context *ctx;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "h")) != -1)
 	{
 		switch (c)

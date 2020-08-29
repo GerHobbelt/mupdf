@@ -214,6 +214,16 @@ int pdfsign_main(int argc, const char **argv)
 	int c;
 	pdf_page *page = NULL;
 
+	infile = NULL;
+	outfile = NULL;
+	certificatefile = NULL;
+	certificatepassword = "";
+	verify = 0;
+	clear = 0;
+	sign = 0;
+	list = 1;
+
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "co:p:s:vP:")) != -1)
 	{
 		switch (c)
@@ -228,7 +238,7 @@ int pdfsign_main(int argc, const char **argv)
 		}
 	}
 
-	if (argc - fz_optind < 1)
+	if (argc == fz_optind)
 	{
 		usage();
 		return EXIT_FAILURE;

@@ -6004,6 +6004,7 @@ int murun_main(int argc, const char **argv)
 	int c;
 	int from_stdin = 0;
 
+	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "eh")) != -1)
 	{
 		switch (c)

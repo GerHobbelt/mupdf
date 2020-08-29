@@ -8,14 +8,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define PATH_SIZE 4096
+
 static pdf_document *doc = NULL;
 static fz_context *ctx = NULL;
 static int dorgb = 0;
 static int doicc = 1;
+static const char *output_template_path = "";
+static int count = 0;
 
 static void usage(void)
 {
 	fprintf(stderr, "usage: mutool extract [options] file.pdf [object numbers]\n");
+	fprintf(stderr, "\t-o -\toutput files name template: generated filenames are appended\n");
 	fprintf(stderr, "\t-p\tpassword\n");
 	fprintf(stderr, "\t-r\tconvert images to rgb\n");
 	fprintf(stderr, "\t-N\tdo not use ICC color conversions\n");
@@ -35,7 +40,7 @@ static int isfontdesc(pdf_obj *obj)
 
 static void writepixmap(fz_pixmap *pix, char *file)
 {
-	char buf[1024];
+	char buf[PATH_SIZE];
 	fz_pixmap *rgb = NULL;
 
 	if (!pix)
@@ -49,13 +54,13 @@ static void writepixmap(fz_pixmap *pix, char *file)
 
 	if (!pix->colorspace || pix->colorspace->type == FZ_COLORSPACE_GRAY || pix->colorspace->type == FZ_COLORSPACE_RGB)
 	{
-		fz_snprintf(buf, sizeof(buf), "%s.png", file);
+		fz_snprintf(buf, sizeof(buf), "%s%s.png", output_template_path, file);
 		printf("extracting %s\n", buf);
 		fz_save_pixmap_as_png(ctx, pix, buf);
 	}
 	else
 	{
-		fz_snprintf(buf, sizeof(buf), "%s.pam", file);
+		fz_snprintf(buf, sizeof(buf), "%s%s.pam", output_template_path, file);
 		printf("extracting %s\n", buf);
 		fz_save_pixmap_as_pam(ctx, pix, buf);
 	}
@@ -66,10 +71,10 @@ static void writepixmap(fz_pixmap *pix, char *file)
 static void
 writejpeg(const unsigned char *data, size_t len, const char *file)
 {
-	char buf[1024];
+	char buf[PATH_SIZE];
 	fz_output *out;
 
-	fz_snprintf(buf, sizeof(buf), "%s.jpg", file);
+	fz_snprintf(buf, sizeof(buf), "%s%s.jpg", output_template_path, file);
 
 	out = fz_new_output_with_path(ctx, buf, 0);
 	fz_try(ctx)
@@ -88,7 +93,7 @@ static void saveimage(pdf_obj *ref)
 {
 	fz_image *image = NULL;
 	fz_pixmap *pix = NULL;
-	char buf[32];
+	char buf[40];
 	fz_compressed_buffer *cbuf;
 	int type;
 
@@ -99,7 +104,7 @@ static void saveimage(pdf_obj *ref)
 	{
 		image = pdf_load_image(ctx, doc, ref);
 		cbuf = fz_compressed_image_buffer(ctx, image);
-		fz_snprintf(buf, sizeof(buf), "image-%04d", pdf_to_num(ctx, ref));
+		fz_snprintf(buf, sizeof(buf), "image-%04d-%04d", pdf_to_num(ctx, ref), ++count);
 		type = cbuf == NULL ? FZ_IMAGE_UNKNOWN : cbuf->params.type;
 
 		if (image->use_colorkey)
@@ -138,7 +143,7 @@ static void saveimage(pdf_obj *ref)
 
 static void savefont(pdf_obj *dict)
 {
-	char namebuf[100];
+	char namebuf[PATH_SIZE];
 	fz_buffer *buf;
 	pdf_obj *stream = NULL;
 	pdf_obj *obj;
@@ -190,7 +195,7 @@ static void savefont(pdf_obj *dict)
 	len = fz_buffer_storage(ctx, buf, &data);
 	fz_try(ctx)
 	{
-		fz_snprintf(namebuf, sizeof(namebuf), "font-%04d.%s", pdf_to_num(ctx, dict), ext);
+		fz_snprintf(namebuf, sizeof(namebuf), "%sfont-%04d-%04d.%s", output_template_path, pdf_to_num(ctx, dict), ++count, ext);
 		printf("extracting %s\n", namebuf);
 		out = fz_new_output_with_path(ctx, namebuf, 0);
 		fz_try(ctx)
@@ -239,10 +244,18 @@ int pdfextract_main(int argc, const char **argv)
 	int c, o;
 	int errored = 0;
 
-	while ((c = fz_getopt(argc, argv, "p:rN")) != -1)
+	doc = NULL;
+	ctx = NULL;
+	dorgb = 0;
+	doicc = 1;
+	count = 0;
+
+	fz_getopt_reset();
+	while ((c = fz_getopt(argc, argv, "o:p:rN")) != -1)
 	{
 		switch (c)
 		{
+		case 'o': output_template_path = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		case 'r': dorgb++; break;
 		case 'N': doicc^=1; break;

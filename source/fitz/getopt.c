@@ -64,3 +64,11 @@ getopt(int argc, const char *argv[], const char *optstring)
 
 	return c;
 }
+
+void fz_getopt_reset(void)
+{
+	optind = 0;
+	optarg = NULL;
+
+	scan = NULL;
+}
