@@ -1,3 +1,5 @@
+#include "timeval.h"
+
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
@@ -672,8 +674,32 @@ static void removeduplicateobjs(fz_context *ctx, pdf_document *doc, pdf_write_st
 	int num, other, max_num;
 	int xref_len = pdf_xref_len(ctx, doc);
 
+	// Due to the two loops below, this code costs O(1/2 N^2) == O(0.5 * xref_len * xref_len),
+	// which in some pathological cases can run into the billions of tests.
+	//
+	// If such a pathological case is discovered, we limit the work to a 'reasonable' time slot.
+	//
+	// TODO: configure this timeslot
+	int limit_time = 0;
+	if (xref_len > 10000)
+	{
+		int64_t count = (int64_t)xref_len * (int64_t)xref_len / 2;
+		fprintf(stderr, "warning: deduplication cost pathological at O(%llu)?\n", count);
+		limit_time = 100000;
+	}
+	struct curltime start;
+	if (limit_time)
+	{
+		start = Curl_now();
+	}
+
 	for (num = 1; num < xref_len; num++)
 	{
+		if (limit_time == 1)
+		{
+			break;
+		}
+
 		/* Only compare an object to objects preceding it */
 		for (other = 1; other < num; other++)
 		{
@@ -682,6 +708,23 @@ static void removeduplicateobjs(fz_context *ctx, pdf_document *doc, pdf_write_st
 
 			if (num == other || !opts->use_list[num] || !opts->use_list[other])
 				continue;
+
+			if (limit_time)
+			{
+				limit_time--;
+				if (limit_time == 1)
+				{
+					timediff_t delta = Curl_timediff(Curl_now(), start);
+					if (delta >= 15000)
+					{
+						break;
+					}
+					else
+					{
+						limit_time = 100000;
+					}
+				}
+			}
 
 			/* TODO: resolve indirect references to see if we can omit them */
 
