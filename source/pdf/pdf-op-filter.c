@@ -580,7 +580,13 @@ walk_string(fz_context *ctx, int uni, int remove, editable_str *str)
 		char *s = &str->utf8[str->pos];
 		size_t len;
 		int n = fz_chartorune(&rune, s);
-		if (rune == uni)
+		if (rune == 0)
+		{
+			/* End of string. No point in tracking through any more. */
+			str->pos = -1;
+			break;
+		}
+		else if (rune == uni)
 		{
 			/* Match. Skip over that one. */
 			str->pos += n;
@@ -596,6 +602,9 @@ walk_string(fz_context *ctx, int uni, int remove, editable_str *str)
 			 * don't match it; that's forgivable as
 			 * PDF often misses out spaces. Remove this
 			 * if we are removing stuff. */
+
+			 /* Match. Skip over that one. */
+			str->pos += n;
 		}
 		else
 		{
