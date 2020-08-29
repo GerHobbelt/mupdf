@@ -1,8 +1,13 @@
 // Create a PDF containing thumbnails of pages rendered from another PDF.
 
+if (scriptArgs.length < 2) {
+	print("usage: mutool run create-thumbnail.js input.pdf output.pdf");
+	quit();
+}
+
 var pdf = new PDFDocument()
 
-var subdoc = new Document("pdfref17.pdf")
+var subdoc = new Document(scriptArgs[0]) // "pdfref17.pdf"
 
 var resources = { XObject: {} }
 
@@ -16,4 +21,4 @@ for (var i=0; i < 5; ++i) {
 var page = pdf.addPage([0,0,100+i*100,250], 0, resources, contents)
 pdf.insertPage(-1, page)
 
-pdf.save("out.pdf")
+pdf.save(scriptArgs[1]) // "out.pdf"

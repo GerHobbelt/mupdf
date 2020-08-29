@@ -1,5 +1,5 @@
 // Script to create a PDF from JPEG2000 images.
-// Each image be put on its own page.
+// Each image will be put on its own page.
 // This script can be used to create files to test JPEG2000 support in PDF viewers.
 
 var doc = new PDFDocument();
