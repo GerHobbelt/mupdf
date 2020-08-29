@@ -145,7 +145,7 @@ register_remote .                                                             cg
 register_remote .                                                             coypoop                                  git@github.com:coypoop/mupdf.git                                                 $# $@
 register_remote .                                                             cube-soft                                git@github.com:cube-soft/mupdf.git                                               $# $@
 register_remote .                                                             derek-watson                             git@github.com:derek-watson/mupdf.git                                            $# $@
-register_remote .                                                             fedora-linux                             git://src.fedoraproject.org/rpms/mupdf.git                                       $# $@
+register_remote .                                                             fedora-linux                             https://src.fedoraproject.org/rpms/mupdf.git                                     $# $@
 register_remote .                                                             grchen                                   git@github.com:grchen/Cocoa-mupdf.git                                            $# $@
 register_remote .                                                             insidenothing                            git@github.com:insidenothing/mupdf.git                                           $# $@
 register_remote .                                                             joaomacp                                 git@github.com:joaomacp/mupdf.git                                                $# $@
@@ -352,7 +352,12 @@ register_remote thirdparty/harfbuzz                                           za
 register_remote thirdparty/harfbuzz                                           zillemarco                               git@github.com:zillemarco/harfbuzz.git                                           $# $@
 register_remote thirdparty/jbig2dec                                           ArtifexCorp                              git://git.ghostscript.com/jbig2dec.git                                           $# $@
 register_remote thirdparty/jbig2dec                                           ArtifexSoftware                          git@github.com:ArtifexSoftware/jbig2dec.git                                      $# $@
+register_remote thirdparty/jbig2dec                                           GerHobbelt                               git@github.com:GerHobbelt/jbig2dec.git                                           $# $@
 register_remote thirdparty/jbig2dec                                           artifex-local                            ../../../../tmp/jbig2dec/                                                        $# $@
+register_remote thirdparty/jbig2dec                                           jwezorek                                 git@github.com:jwezorek/jbig2dec.git                                             $# $@
+register_remote thirdparty/jbig2dec                                           orangesnn                                git@github.com:orangesnn/jbig2dec.git                                            $# $@
+register_remote thirdparty/jbig2dec                                           paulhilbert                              git@github.com:paulhilbert/jbig2dec.git                                          $# $@
+register_remote thirdparty/jbig2dec                                           rillian                                  git@github.com:rillian/jbig2dec.git                                              $# $@
 register_remote thirdparty/lcms2                                              Artifex-user-robin                       http://git.ghostscript.com/user/robin/thirdparty-lcms2.git                       $# $@
 register_remote thirdparty/lcms2                                              ArtifexCorp                              git://git.ghostscript.com/thirdparty-lcms2.git                                   $# $@
 register_remote thirdparty/lcms2                                              ArtifexSoftware                          git@github.com:ArtifexSoftware/thirdparty-lcms2.git                              $# $@
