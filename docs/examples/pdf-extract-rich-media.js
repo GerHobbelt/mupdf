@@ -50,7 +50,7 @@ function mapRichMediaAssets(fn) {
 
 if (scriptArgs.length == 1) {
 	var idx = 1;
-	mapRichMediaAssets(function (name,fs) {
+	mapRichMediaAssets(function (name, fs) {
 		print(idx, name.asString());
 		print("\tFilename:", fileNameFromFS(fs));
 		if ("Desc" in fs)
@@ -61,7 +61,7 @@ if (scriptArgs.length == 1) {
 
 if (scriptArgs.length == 3) {
 	var idx = 1;
-	mapRichMediaAssets(function (name,fs) {
+	mapRichMediaAssets(function (name, fs) {
 		if (idx == scriptArgs[1]) {
 			print("Saving embedded file", idx, "as:", scriptArgs[2]);
 			fs.EF.F.readStream().save(scriptArgs[2]);
