@@ -94,23 +94,23 @@ pushd $(dirname $0)                                                            2
 # The registered repositories:
 #
 
-git_repo_checkout_branch "../thirdparty/curl" 4da75c7d7a744b19059f56f041785ed1403492e2 mupdf
+git_repo_checkout_branch "../thirdparty/curl" f527d6002dad50c57e9944ed75a85b7e5788f7da mupdf
 git_repo_checkout_branch "../thirdparty/freeglut" 59a29ed67725a3c15fc464747e01902ba44da3de master
 git_repo_checkout_branch "../thirdparty/freetype" 24df965835afb009f5eb5dc238ed4205b8992de6 mupdf
-git_repo_checkout_branch "../thirdparty/gumbo-parser" 3702df8d70c55b6a8b2f645f92a06c3c5339206e master
-git_repo_checkout_branch "../thirdparty/gumbo-parser/testdata" e633ddfeb0180f71238763576b1f5fdd26a7038f 
-git_repo_checkout_branch "../thirdparty/gumbo-parser/third_party/gtest" 1cb04aa3e99c736bbd1eb90ebda3d6117355aacc 
-git_repo_checkout_branch "../thirdparty/harfbuzz" 9e9f96e163ec6f15ef6b31e2688383995d82de4b master
+git_repo_checkout_branch "../thirdparty/gumbo-parser" e4fe0323a1490a23bb3c0065fb957ac88cf56bac master
+git_repo_checkout_branch "../thirdparty/gumbo-parser/testdata" 6ddcf58bea5a01e616911050c173622f84297211 master
+git_repo_checkout_branch "../thirdparty/gumbo-parser/third_party/gtest" b13bdb93206ade272b4d7ed1c197c937d7d52796 master
+git_repo_checkout_branch "../thirdparty/harfbuzz" f8e03ea3373fc01c2ee2ba9d71be38c7116708ab master
 git_repo_checkout_branch "../thirdparty/jbig2dec" 0f991866dde822b7bf289c930d903f926a726380 master
-git_repo_checkout_branch "../thirdparty/lcms2" 40cf05c1875ba6af3fec2b4ff0353f7a26140ea6 master
-git_repo_checkout_branch "../thirdparty/leptonica" dc102aa84222d2577ec06f63b330b69ca1be0468 master
+git_repo_checkout_branch "../thirdparty/lcms2" 40cf05c1875ba6af3fec2b4ff0353f7a26140ea6 mupdf
+git_repo_checkout_branch "../thirdparty/leptonica" f47f5ef9253d59fe740aef632a3c08d5ce0a7e63 master
 git_repo_checkout_branch "../thirdparty/libjpeg" 2cb9121a49129a75c86762a50a5ce981cdb33e59 master
 git_repo_checkout_branch "../thirdparty/mujs" 2704d8835b65b354b2411f560f9c90aa3842492a mupdf
 git_repo_checkout_branch "../thirdparty/openjpeg" af68b4775b4676712b6cd7773711e23733ff2188 bleeding_edge
 git_repo_checkout_branch "../thirdparty/tesseract" c94a108d17b85af3bcdbffcc63f490c347a13330 master
-git_repo_checkout_branch "../thirdparty/tesseract/abseil" b832dce8489ef7b6231384909fd9b68d5a5ff2b7 
-git_repo_checkout_branch "../thirdparty/tesseract/googletest" 703bd9caab50b139428cea1aaff9974ebee5742e 
-git_repo_checkout_branch "../thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb 
+git_repo_checkout_branch "../thirdparty/tesseract/abseil" 4d2ff381a3709ef9dd4cbc0237bae847c0bb1ccd master
+git_repo_checkout_branch "../thirdparty/tesseract/googletest" df6b75949b1efab7606ba60c0f0a0125ac95c5af master
+git_repo_checkout_branch "../thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb master
 git_repo_checkout_branch "../thirdparty/zlib" c8d407e68bf40d4322c4fc25850ba9629c7a5761 master
 
 # --- all done ---
