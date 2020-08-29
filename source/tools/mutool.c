@@ -13,6 +13,7 @@
 
 int muconvert_main(int argc, const char *argv[]);
 int mudraw_main(int argc, const char *argv[]);
+int muraster_main(int argc, const char *argv[]);
 int mutrace_main(int argc, const char *argv[]);
 int murun_main(int argc, const char *argv[]);
 
@@ -41,6 +42,7 @@ static struct {
 	{ pdfcreate_main, "create", "create pdf document" },
 #endif
 	{ mudraw_main, "draw", "convert document" },
+	{ muraster_main, "raster", "convert document to a raster file" },
 	{ mutrace_main, "trace", "trace device calls" },
 #if FZ_ENABLE_PDF
 	{ pdfextract_main, "extract", "extract font and image resources" },
@@ -117,11 +119,11 @@ int mutool_main(int argc, const char** argv)
 		{
 			strcpy(buf, "mupdf");
 			strcat(buf, tools[i].name);
-			if (namematch(end, start, buf) || namematch(end, start, buf+2))
+			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc, argv);
 			strcpy(buf, "mu");
 			strcat(buf, tools[i].name);
-			if (namematch(end, start, buf))
+			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc, argv);
 		}
 	}
