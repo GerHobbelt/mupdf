@@ -2,6 +2,8 @@
  * mudraw -- command line tool for drawing and converting documents
  */
 
+#include "timeval.h"
+
 #include "mupdf/fitz.h"
 
 #if FZ_ENABLE_PDF
@@ -17,13 +19,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
-#ifdef _MSC_VER
-struct timeval;
-struct timezone;
-int gettimeofday(struct timeval *tv, struct timezone *tz);
-#else
-#include <sys/time.h>
-#endif
+
 #ifdef _WIN32
 #include <windows.h>
 #include <direct.h> /* for getcwd */
@@ -179,10 +175,12 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_OCR_TRACE, CS_GRAY, { CS_GRAY } },
 };
 
+static fz_stext_options stext_options = { 0 };
+
 static time_t
 stat_mtime(const char *path)
 {
-	struct stat info;
+	struct_stat info;
 
 	if (stat(path, &info) < 0)
 		return 0;
@@ -403,6 +401,7 @@ static void usage(void)
 		"\t-U -\tfile name of user stylesheet for EPUB layout\n"
 		"\t-X\tdisable document styles for EPUB layout\n"
 		"\t-a\tdisable usage of accelerator file\n"
+		"\t-x -\ttext extract options: preserve-ligatures,preserve-whitespace,inhibit-spaces,dehyphenate\n"
 		"\n"
 		"\t-c -\tcolorspace (mono, gray, grayalpha, rgb, rgba, cmyk, cmykalpha, filename of ICC profile)\n"
 		"\t-e -\tproof icc profile (filename of ICC profile)\n"
@@ -445,18 +444,19 @@ static void usage(void)
 		);
 }
 
+static int gettime_once = 1;
+
 static int gettime(void)
 {
-	static struct timeval first;
-	static int once = 1;
-	struct timeval now;
-	if (once)
+	static struct curltime first;
+	struct curltime now;
+	if (gettime_once)
 	{
-		gettimeofday(&first, NULL);
-		once = 0;
+		first = Curl_now();
+		gettime_once = 0;
 	}
-	gettimeofday(&now, NULL);
-	return (now.tv_sec - first.tv_sec) * 1000 + (now.tv_usec - first.tv_usec) / 1000;
+	now = Curl_now();
+	return Curl_timediff(now, first);
 }
 
 static int has_percent_d(const char *s)
@@ -521,7 +521,7 @@ file_level_trailers(fz_context *ctx)
 
 	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 		fz_print_stext_trailer_as_html(ctx, out);
-	if (output_format == OUT_XHTML || output_format == OUT_OCR_HTML)
+	if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 		fz_print_stext_trailer_as_xhtml(ctx, out);
 
 	if (output_format == OUT_PS)
@@ -701,15 +701,17 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			fz_stext_options stext_options;
+			fz_stext_options page_stext_options;
+			page_stext_options.flags = stext_options.flags;
 
+			// override the preserve_images flag:
 			stext_options.flags = (output_format == OUT_HTML ||
 						output_format == OUT_XHTML ||
 						output_format == OUT_OCR_HTML ||
 						output_format == OUT_OCR_XHTML
 						) ? FZ_STEXT_PRESERVE_IMAGES : 0;
 			text = fz_new_stext_page(ctx, mediabox);
-			dev = fz_new_stext_device(ctx, text, &stext_options);
+			dev = fz_new_stext_device(ctx, text, &page_stext_options);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (output_format == OUT_OCR_TEXT ||
@@ -816,7 +818,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			if (!output || !strcmp(output, "-"))
+			if (!output || *output == 0 || !strcmp(output, "-"))
 				outs = fz_stdout(ctx);
 			else
 			{
@@ -1760,6 +1762,7 @@ int mudraw_main(int argc, const char **argv)
 #endif
 {
 	const char *password = "";
+	const char* txtdraw_options = "";
 	fz_document *doc = NULL;
 	int c;
 	fz_context *ctx;
@@ -1771,7 +1774,81 @@ int mudraw_main(int argc, const char **argv)
 
 	fz_var(doc);
 
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:")) != -1)
+	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
+	output = NULL;
+	out = NULL;
+	output_pagenum = 0;
+	output_file_per_page = 0;
+
+	format = NULL;
+	output_format = OUT_NONE;
+
+	rotation = 0;
+	resolution = 72;
+	res_specified = 0;
+	width = 0;
+	height = 0;
+	fit = 0;
+
+	layout_w = FZ_DEFAULT_LAYOUT_W;
+	layout_h = FZ_DEFAULT_LAYOUT_H;
+	layout_em = FZ_DEFAULT_LAYOUT_EM;
+	layout_css = NULL;
+	layout_use_doc_css = 1;
+	min_line_width = 0.0f;
+
+	showfeatures = 0;
+	showtime = 0;
+	showmemory = 0;
+	showmd5 = 0;
+
+#if FZ_ENABLE_PDF
+	pdfout = NULL;
+#endif
+
+	no_icc = 0;
+	ignore_errors = 0;
+	uselist = 1;
+	alphabits_text = 8;
+	alphabits_graphics = 8;
+
+	out_cs = CS_UNSET;
+	proof_filename = NULL;
+	proof_cs = NULL;
+	icc_filename = NULL;
+	gamma_value = 1;
+	invert = 0;
+	band_height = 0;
+	lowmemory = 0;
+
+	quiet = 0;
+	errored = 0;
+	colorspace = NULL;
+	oi = NULL;
+#if FZ_ENABLE_SPOT_RENDERING
+	spots = SPOTS_OVERPRINT_SIM;
+#else
+	spots = SPOTS_NONE;
+#endif
+	alpha = 0;
+	useaccel = 1;
+	filename = NULL;
+	files = 0;
+	num_workers = 0;
+	workers = NULL;
+	bander = NULL;
+
+	layer_config = NULL;
+
+	ocr_language = ocr_language_default;
+
+	memset(&bgprint, 0, sizeof(bgprint));
+	memset(&timing, 0, sizeof(timing));
+
+	gettime_once = 1;
+
+	fz_getopt_reset();
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:")) != -1)
 	{
 		switch (c)
 		{
@@ -1861,6 +1938,7 @@ int mudraw_main(int argc, const char **argv)
 #endif
 		case 'y': layer_config = fz_optarg; break;
 		case 'a': useaccel = 0; break;
+		case 'x': txtdraw_options = fz_optarg; break;
 
 		case 'v': fprintf(stderr, "mudraw version %s\n", FZ_VERSION); return EXIT_FAILURE;
 		}
@@ -1925,6 +2003,8 @@ int mudraw_main(int argc, const char **argv)
 			proof_cs = fz_new_icc_colorspace(ctx, FZ_COLORSPACE_NONE, 0, NULL, proof_buffer);
 			fz_drop_buffer(ctx, proof_buffer);
 		}
+
+		fz_parse_stext_options(ctx, &stext_options, txtdraw_options);
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
@@ -2028,7 +2108,12 @@ int mudraw_main(int argc, const char **argv)
 						fprintf(stderr, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.\n", suffix_table[i].suffix+1);
 						spots = SPOTS_OVERPRINT_SIM;
 					}
-					i = -1;
+					// match the tail (= file extension) with the output format;
+					// when there's still a tail left after this round, we need to look again:
+					if (*suffix)
+						i = -1;
+					else
+						break;
 				}
 			}
 		}
@@ -2347,7 +2432,7 @@ int mudraw_main(int argc, const char **argv)
 		{
 			bgprint_flush();
 			fz_drop_document(ctx, doc);
-			fprintf(stderr, "error: cannot draw '%s'\n", filename);
+			fprintf(stderr, "error: cannot draw '%s': %s\n", filename, fz_caught_message(ctx));
 			errored = 1;
 		}
 
