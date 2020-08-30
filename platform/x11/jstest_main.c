@@ -403,8 +403,14 @@ main(int argc, char *argv[])
 {
 	fz_context *ctx;
 	FILE *script = NULL;
+	FILE* logfile = NULL;
 	int c;
 	int errored = 0;
+	unsigned int linecounter = 0;
+	int rv = 0;
+	struct curltime start_time;
+	struct curltime begin_time;
+	const char* line_command = NULL;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:v")) != -1)
@@ -437,22 +443,29 @@ main(int argc, char *argv[])
 
 	fz_try(ctx)
 	{
-		struct curltime start_time = Curl_now();
+		start_time = Curl_now();
 
 		while (fz_optind < argc)
 		{
+			char logfilename[4096];
+
 			scriptname = argv[fz_optind++];
 			script = fopen(scriptname, "rb");
 			if (script == NULL)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 
+			fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
+			logfile = fopen(logfilename, "w");
+
 			for(;;)
 			{
-				char *line = my_getline(script);
-				const char* line_command = line;
-				struct curltime begin_time;
 				bool report_time = true;
-				int rv = 0;
+				char *line = my_getline(script);
+				line_command = line;
+				rv = 0;
+
+				linecounter++;
+				fflush(logfile);
 
 				if (line == NULL)
 				{
@@ -580,6 +593,8 @@ main(int argc, char *argv[])
 				{
 					struct curltime now = Curl_now();
 					fprintf(stderr, "T:%03dms D:%0.3lfs %s %s\n", (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+
+					fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs %s %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 				}
 			}
 			while (!feof(script));
@@ -590,7 +605,20 @@ main(int argc, char *argv[])
 	fz_catch(ctx)
 	{
 		fprintf(stderr, "error: cannot execute '%s': %s\n", scriptname, fz_caught_message(ctx));
+
+		if (logfile)
+		{
+			struct curltime now = Curl_now();
+
+			fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+		}
 		errored = 1;
+	}
+
+	if (logfile)
+	{
+		fclose(logfile);
+		logfile = NULL;
 	}
 
 	if (file_open)
