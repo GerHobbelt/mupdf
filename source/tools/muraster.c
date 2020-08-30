@@ -1279,6 +1279,7 @@ trace_malloc(void *arg, size_t size)
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
+	p[0].align = 0xEAD;
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -1295,7 +1296,14 @@ trace_free(void *arg, void *p_)
 	if (p == NULL)
 		return;
 	info->current -= p[-1].size;
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+	}
+#if 01
 	free(&p[-1]);
+#endif
 }
 
 static void *
