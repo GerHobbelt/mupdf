@@ -14,6 +14,8 @@
 #include "mupdf/helpers/mu-threads.h"
 #endif
 
+#include "../fitz/tessocr.h"
+
 #include <string.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -701,6 +703,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
+			// Even when OCR fails, we want to see what we got thus far as text,
+			// hence we should *postpone* bubbling up the OCR error, if one occurs.
 			fz_stext_options page_stext_options;
 			page_stext_options.flags = stext_options.flags;
 
@@ -2292,6 +2296,47 @@ int mudraw_main(int argc, const char **argv)
 #endif
 				out = fz_stdout(ctx);
 			}
+
+		// Check if the Tesseract engine can initialize properly when one of the OCR modes is requested.
+		// If it cannot init, report a warning accordingly and fall back to the non-OCR output format:
+		if (output_format == OUT_OCR_TRACE ||
+			output_format == OUT_OCR_TEXT ||
+			output_format == OUT_OCR_STEXT ||
+			output_format == OUT_OCR_HTML ||
+			output_format == OUT_OCR_XHTML ||
+			output_format == OUT_OCR_PDF)
+		{
+			void* tess_api = NULL;
+
+			fz_try(ctx)
+			{
+				tess_api = ocr_init(ctx, ocr_language);
+			}
+			fz_always(ctx)
+			{
+				ocr_fin(ctx, tess_api);
+			}
+			fz_catch(ctx)
+			{
+				fprintf(stderr, "warning: tesseract OCR engine could not be initialized. Falling back to the non-OCR-ed output format! %s\n", fz_caught_message(ctx));
+				switch (output_format)
+				{
+				case OUT_OCR_TRACE:
+					output_format = OUT_TRACE; break;
+				case OUT_OCR_TEXT:
+					output_format = OUT_TEXT; break;
+				case OUT_OCR_STEXT:
+					output_format = OUT_STEXT; break;
+				case OUT_OCR_HTML:
+					output_format = OUT_HTML; break;
+				case OUT_OCR_XHTML:
+					output_format = OUT_XHTML; break;
+				case OUT_OCR_PDF:
+					output_format = OUT_PDF; break;
+				}
+			}
+
+		}
 
 		filename = argv[fz_optind];
 
