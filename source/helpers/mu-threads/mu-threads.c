@@ -70,6 +70,7 @@ void mu_destroy_semaphore(mu_semaphore *sem)
 		return;
 	/* We can't sensibly handle this failing */
 	(void)CloseHandle(sem->handle);
+	sem->handle = NULL;
 }
 
 int mu_trigger_semaphore(mu_semaphore *sem)
@@ -113,7 +114,7 @@ void mu_destroy_thread(mu_thread *th)
 	/* We can't sensibly handle this failing */
 	(void)WaitForSingleObject(th->handle, INFINITE);
 	(void)CloseHandle(th->handle);
-	th->handle = NULL;
+	memset(th, 0, sizeof(*th));
 }
 
 int mu_create_mutex(mu_mutex *mutex)

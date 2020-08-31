@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
 #if defined(_MSC_VER)
 #include <crtdbg.h>
 #endif
@@ -401,49 +402,109 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 	*argc = count;
 }
 
-int __cdecl TestHook1(int nReportType, char* szMsg, int* pnRet)
+// return true when string s matches all specified parts *sequentially*, i.e. in order of appearance.
+//
+// parts are a list of strings, terminated by a NULL entry.
+static int strmatch(const char* s, const char* part, ...)
 {
-	int nRet = FALSE;
+	va_list argptr;
 
-	printf("CRT report hook 1.\n");
-	printf("CRT report type is \"");
-	switch (nReportType)
+	for (va_start(argptr, part); part; part = va_arg(argptr, const char *))
 	{
-	case _CRT_ASSERT:
+		const char* m = strstr(s, part);
+		if (!m)
+			return FALSE;
+		s = m + strlen(part);
+	}
+	va_end(argptr);
+	return TRUE;
+}
+
+static const char* strGiveNewline(const char* s)
+{
+	if (!s)
+		return "";
+	if (!*s)
+		return "\n";
+	s += strlen(s) - 1;
+	if (*s != '\n')
+		return "\n";
+	return "";
+}
+
+static char memTestMsgBuf[8192] = "";
+static int memTestReportType = -1;
+
+static int __cdecl TestMemHook(int nReportType, const char* szMsg, int* pnRet)
+{
+	static const char* RptTypes[] = { "Warning", "Error", "Assert", "???Unknown???" };
+	if (nReportType < 0 || nReportType > 2)
+		nReportType = 3;
+
+	// don't list memory dump statistics about 0 bytes in 0 blocks: that's noise for our purposes:
+	if (!strmatch(szMsg, "0 bytes in 0 ", " Blocks.", NULL)
+		&& !strmatch(szMsg, "Largest number used : 0 bytes.", NULL)
+		&& !strmatch(szMsg, "Total allocations: 0 bytes.", NULL)
+	)
 	{
-		printf("_CRT_ASSERT");
-		// nRet = TRUE;   // Always stop for this type of report
-		break;
+		if (*memTestMsgBuf && memTestReportType != nReportType)
+		{
+			fprintf(stderr, "**%s**: %s%s", RptTypes[memTestReportType], memTestMsgBuf, strGiveNewline(memTestMsgBuf));
+			memTestMsgBuf[0] = 0;
+		}
+		memTestReportType = nReportType;
+		strcat(memTestMsgBuf, szMsg);
+		// has last message bit appended an EOL as last char?
+		if (!*strGiveNewline(szMsg))
+		{
+			fprintf(stderr, "**%s**: %s", RptTypes[memTestReportType], memTestMsgBuf);
+			memTestMsgBuf[0] = 0;
+		}
 	}
 
-	case _CRT_WARN:
+	if (strmatch(szMsg, "HEAP CORRUPTION DETECTED", NULL))
 	{
-		printf("_CRT_WARN");
-		break;
+		szMsg = "blub";
 	}
-
-	case _CRT_ERROR:
-	{
-		printf("_CRT_ERROR");
-		break;
-	}
-
-	default:
-	{
-		printf("???Unknown???");
-		break;
-	}
-	}
-
-	printf("\".\nCRT report message is:\n\t");
-	printf(szMsg);
 
 	if (pnRet)
 		*pnRet = 0;
 
-	return   nRet;
+	return FALSE;
 }
 
+static int __cdecl TestMemDumpCB(
+	int      nAllocType,
+	void* pvData,
+	size_t   nSize,
+	int      nBlockUse,
+	long     lRequest,
+	const unsigned char* szFileName,
+	int      nLine
+)
+{
+	static const char* operation[] = { "", "allocating", "re-allocating", "freeing", "??unknown action??" };
+	static const char* blockType[] = { "Free", "Normal", "CRT", "Ignore", "Client", "??Unknown??" };
+
+	if (nBlockUse == _CRT_BLOCK)   // Ignore internal C runtime library allocations
+		return TRUE;
+
+	if (nAllocType <= 0 || nAllocType > 3)
+		nAllocType = 4;
+	if (nBlockUse < 0 || nBlockUse > 4)
+		nBlockUse = 5;
+
+	if (nBlockUse == 3 && nSize == 0 && nBlockUse == _NORMAL_BLOCK && lRequest == 0 && nLine == 0)
+		return TRUE;
+
+#if 0
+	fprintf(stderr, "MEM: %s %zu bytes '%s' block (A:%p) {#%ld} in %s @ %d\n",
+		operation[nAllocType], nSize,
+		blockType[nBlockUse], pvData, lRequest, szFileName, nLine);
+#endif
+
+	return TRUE;         // Allow the memory operation to proceed
+}
 
 int
 main(int argc, char *argv[])
@@ -459,16 +520,26 @@ main(int argc, char *argv[])
 	struct curltime begin_time;
 	const char* line_command = NULL;
 
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | /* _CRTDBG_CHECK_EVERY_16_DF */ _CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF /* | _CRTDBG_CHECK_CRT_DF */ );
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF
+		| _CRTDBG_CHECK_EVERY_1024_DF
+		//| _CRTDBG_CHECK_EVERY_16_DF
+		//| _CRTDBG_CHECK_ALWAYS_DF
+		| _CRTDBG_DELAY_FREE_MEM_DF
+		| _CRTDBG_LEAK_CHECK_DF
+	    | _CRTDBG_CHECK_CRT_DF
+	);
 
-	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+	// set all report modes to NIL as the custom report function will take care of all reporting instead!
+	_CrtSetReportMode(_CRT_ASSERT, 0); // _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
 	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+	_CrtSetReportMode(_CRT_WARN, 0); // _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
 	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
-	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+	_CrtSetReportMode(_CRT_ERROR, 0); // _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
 	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
 
-	_CrtSetReportHook2(_CRT_RPTHOOK_INSTALL, TestHook1);
+	_CrtSetReportHook2(_CRT_RPTHOOK_INSTALL, TestMemHook);
+
+	_CrtSetAllocHook(TestMemDumpCB);
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:v")) != -1)
@@ -499,6 +570,9 @@ main(int argc, char *argv[])
 	gapp.scrh = 480;
 	gapp.colorspace = fz_device_rgb(ctx);
 
+	_CrtMemState mem_start, mem_begin, mem_end;
+	_CrtMemCheckpoint(&mem_start);
+
 	fz_try(ctx)
 	{
 		start_time = Curl_now();
@@ -524,6 +598,8 @@ main(int argc, char *argv[])
 
 				linecounter++;
 				fflush(logfile);
+
+				_CrtMemCheckpoint(&mem_begin);
 
 				if (line == NULL)
 				{
@@ -654,6 +730,17 @@ main(int argc, char *argv[])
 
 					fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs %s %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 				}
+
+				_CrtMemCheckpoint(&mem_end);
+
+				_CrtCheckMemory();
+
+				// _CrtDumpMemoryLeaks();
+				_CrtMemState mem_diff = { 0 };
+				_CrtMemDifference(&mem_diff, &mem_begin, &mem_end);
+				_CrtMemDumpStatistics(&mem_diff);
+
+				_CrtDumpMemoryLeaks();
 			}
 			while (!feof(script));
 
@@ -671,6 +758,7 @@ main(int argc, char *argv[])
 			fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 		}
 		errored = 1;
+		_CrtCheckMemory();
 	}
 
 	if (logfile)
@@ -685,5 +773,69 @@ main(int argc, char *argv[])
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 
+	_CrtDumpMemoryLeaks();
+
 	return errored;
+}
+
+
+// override run-time library functions in debug mode: all code which is not properly
+// wrapped/processed ends up calling one or more of these and then we can stacktrace
+// them to find out where and what needs to be done to complete the heap check/validation
+// code patches:
+
+#undef _calloc_base
+__declspec(dllexport)
+void* __cdecl _calloc_base(size_t a, size_t b)
+{
+	printf("kaboom");
+	return NULL;
+}
+#undef calloc
+__declspec(dllexport)
+void* __cdecl calloc(size_t a, size_t b)
+{
+	printf("kaboom");
+	return NULL;
+}
+#undef free
+__declspec(dllexport)
+void  __cdecl free(void *p)
+{
+	printf("kaboom");
+}
+#undef malloc
+__declspec(dllexport)
+void * __cdecl malloc(size_t s)
+{
+	//printf("kaboom");
+	return _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__);
+}
+#undef realloc
+__declspec(dllexport)
+void * __cdecl realloc(void *p, size_t s)
+{
+	printf("kaboom");
+	return NULL;
+}
+#undef _strdup
+__declspec(dllexport)
+char * __cdecl _strdup(const char *s)
+{
+	printf("kaboom");
+	return NULL;
+}
+#undef strdup
+__declspec(dllexport)
+char * __cdecl strdup(const char *s)
+{
+	printf("kaboom");
+	return NULL;
+}
+#undef wcsdup
+__declspec(dllexport)
+wchar_t * __cdecl wcsdup(const wchar_t *s)
+{
+	printf("kaboom");
+	return NULL;
 }

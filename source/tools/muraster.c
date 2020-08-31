@@ -234,8 +234,11 @@
 #endif
 
 /* Enable for helpful threading debug */
-/* #define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0) */
+#if 01
+#define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0)
+#else
 #define DEBUG_THREADS(A) do { } while (0)
+#endif
 
 enum {
 	OUT_PGM,
@@ -1271,6 +1274,8 @@ typedef struct
 	size_t total;
 } trace_info;
 
+#define RIDGE_SIZE 100
+
 static void *
 trace_malloc(void *arg, size_t size)
 {
@@ -1278,7 +1283,7 @@ trace_malloc(void *arg, size_t size)
 	trace_header *p;
 	if (size == 0)
 		return NULL;
-	p = malloc(size + sizeof(trace_header));
+	p = malloc(size + 2 * RIDGE_SIZE + sizeof(trace_header));
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
@@ -1287,31 +1292,67 @@ trace_malloc(void *arg, size_t size)
 	info->total += size;
 	if (info->current > info->peak)
 		info->peak = info->current;
-	return (void *)&p[1];
+	char* pp = (char*)&p[1];
+	memset(pp, 0xEE, RIDGE_SIZE);
+	pp += RIDGE_SIZE;
+	memset(pp + size, 0xEE, RIDGE_SIZE);
+	return (void *)pp;
+}
+
+static const char* memvchr(const char* buf, char c, size_t len)
+{
+	for (size_t i = 0; i < len; i++)
+	{
+		if (buf[i] != c)
+			return buf + i;
+	}
+	return NULL;
 }
 
 static void
 trace_free(void *arg, void *p_)
 {
 	trace_info *info = (trace_info *) arg;
-	trace_header *p = (trace_header *)p_;
+	char* pp = (char*)p_;
+	trace_header *p;
 
-	if (p == NULL)
+	if (p_ == NULL)
 		return;
-	info->current -= p[-1].size;
+
+	pp -= RIDGE_SIZE;
+	p = (trace_header *)pp;
+	size_t size = p[-1].size;
+	int rotten = 0;
+	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
 		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
-	}
-	//_CrtCheckMemory();
-	if (_CrtIsValidHeapPointer(&p[-1]))
-	{
-		free(&p[-1]);
+		rotten = 1;
 	}
 	else
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[1]);
+		const char* bad = memvchr(pp, 0xEE, RIDGE_SIZE);
+		pp += RIDGE_SIZE;
+		const char* bad2 = memvchr(pp + size, 0xEE, RIDGE_SIZE);
+		if (bad || bad2)
+		{
+			fprintf(stderr, "corrupted ridge(s)! %p / %p for block %p (%zu)\n", bad, bad2, &p[-1], size);
+			rotten = 1;
+		}
+	}
+	if (!rotten && !_CrtIsValidHeapPointer(&p[-1]))
+	{
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		_CrtCheckMemory();
+	}
+	else
+	{
+		free(&p[-1]);
 	}
 }
 
@@ -1319,7 +1360,7 @@ static void *
 trace_realloc(void *arg, void *p_, size_t size)
 {
 	trace_info *info = (trace_info *) arg;
-	trace_header *p = (trace_header *)p_;
+	trace_header *p;
 	size_t oldsize;
 
 	if (size == 0)
@@ -1327,19 +1368,59 @@ trace_realloc(void *arg, void *p_, size_t size)
 		trace_free(arg, p_);
 		return NULL;
 	}
-	if (p == NULL)
+
+	if (p_ == NULL)
 		return trace_malloc(arg, size);
+
+	char* pp = (char*)p_;
+	pp -= RIDGE_SIZE;
+	p = (trace_header*)pp;
+	int rotten = 0;
 	oldsize = p[-1].size;
-	p = realloc(&p[-1], size + sizeof(trace_header));
-	if (p == NULL)
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+		rotten = 1;
+	}
+	else
+	{
+		const char* bad = memvchr(pp, 0xEE, RIDGE_SIZE);
+		pp += RIDGE_SIZE;
+		const char* bad2 = memvchr(pp + oldsize, 0xEE, RIDGE_SIZE);
+		if (bad || bad2)
+		{
+			fprintf(stderr, "corrupted ridge(s)! %p / %p for block %p (%zu)\n", bad, bad2, &p[-1], size);
+			rotten = 1;
+		}
+	}
+	if (!rotten && !_CrtIsValidHeapPointer(&p[-1]))
+	{
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		_CrtCheckMemory();
 		return NULL;
-	info->current += size - oldsize;
-	if (size > oldsize)
-		info->total += size - oldsize;
-	if (info->current > info->peak)
-		info->peak = info->current;
-	p[0].size = size;
-	return &p[1];
+	}
+	else
+	{
+		p = realloc(&p[-1], size + 2 * RIDGE_SIZE + sizeof(trace_header));
+		if (p == NULL)
+			return NULL;
+		info->current += size - oldsize;
+		if (size > oldsize)
+			info->total += size - oldsize;
+		if (info->current > info->peak)
+			info->peak = info->current;
+		p[0].size = size;
+		pp = (char*)&p[1];
+		//memset(pp, 0xEE, RIDGE_SIZE);
+		pp += RIDGE_SIZE;
+		memset(pp + size, 0xEE, RIDGE_SIZE);
+		return (void*)pp;
+	}
 }
 
 #ifndef DISABLE_MUTHREADS
@@ -1481,7 +1562,7 @@ int muraster_main(int argc, const char *argv[])
 	max_band_memory = BAND_MEMORY;
 	width = 0;
 	height = 0;
-	num_workers = NUM_RENDER_THREADS;
+	num_workers = 30; // NUM_RENDER_THREADS;
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
 
@@ -1585,6 +1666,12 @@ int muraster_main(int argc, const char *argv[])
 	fz_set_graphics_aa_level(ctx, alphabits_graphics);
 
 #ifndef DISABLE_MUTHREADS
+	// do not bgprint when there won't be any bg threads available, ever.
+	if (num_workers < 1)
+	{
+		bgprint.active = 0;
+	}
+
 	if (bgprint.active)
 	{
 		int fail = 0;
@@ -1595,6 +1682,7 @@ int muraster_main(int argc, const char *argv[])
 		if (fail)
 		{
 			fprintf(stderr, "bgprint startup failed\n");
+			fz_drop_context(bgprint.ctx);
 			return EXIT_FAILURE;
 		}
 	}
@@ -1615,6 +1703,14 @@ int muraster_main(int argc, const char *argv[])
 		if (fail)
 		{
 			fprintf(stderr, "worker startup failed\n");
+			for (i = 0; i < num_workers; i++)
+			{
+				mu_destroy_semaphore(&workers[i].start);
+				mu_destroy_semaphore(&workers[i].stop);
+				mu_destroy_thread(&workers[i].thread);
+				fz_drop_context(workers[i].ctx);
+			}
+			fz_free(ctx, workers);
 			return EXIT_FAILURE;
 		}
 	}
@@ -1804,8 +1900,6 @@ int muraster_main(int argc, const char *argv[])
 		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", info.total, info.peak, info.current);
 		fprintf(stderr, "%s\n", buf);
 	}
-
-	_CrtDumpMemoryLeaks();
 
 	return (errored != 0);
 }
