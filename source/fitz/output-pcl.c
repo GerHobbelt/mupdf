@@ -753,7 +753,7 @@ color_pcl_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *
 	if (n != 3)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "color PCL must be RGB");
 
-	writer->linebuf = Memento_label(fz_malloc(ctx, w * 3 * 2), "color_pcl_linebuf");
+	writer->linebuf = Memento_label(fz_malloc(ctx, w * 3 * 2, __FILE__, __LINE__), "color_pcl_linebuf");
 
 	guess_paper_size(&writer->options, w, h, xres, yres);
 
@@ -1160,9 +1160,9 @@ mono_pcl_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *c
 	max_mode_2_size = line_size + (line_size/127) + 1;
 	max_mode_3_size = line_size + (line_size/8) + 1;
 
-	writer->prev = fz_calloc(ctx, line_size, sizeof(unsigned char));
-	writer->mode2buf = fz_calloc(ctx, max_mode_2_size, sizeof(unsigned char));
-	writer->mode3buf = fz_calloc(ctx, max_mode_3_size, sizeof(unsigned char));
+	writer->prev = fz_calloc(ctx, line_size, sizeof(unsigned char), __FILE__, __LINE__);
+	writer->mode2buf = fz_calloc(ctx, max_mode_2_size, sizeof(unsigned char), __FILE__, __LINE__);
+	writer->mode3buf = fz_calloc(ctx, max_mode_3_size, sizeof(unsigned char), __FILE__, __LINE__);
 	writer->num_blank_lines = 0;
 	writer->top_of_page = 1;
 

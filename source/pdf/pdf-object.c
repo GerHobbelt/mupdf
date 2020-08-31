@@ -109,7 +109,7 @@ pdf_obj *
 pdf_new_int(fz_context *ctx, int64_t i)
 {
 	pdf_obj_num *obj;
-	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_num)), "pdf_obj(int)");
+	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_num), __FILE__, __LINE__), "pdf_obj(int)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_INT;
 	obj->super.flags = 0;
@@ -121,7 +121,7 @@ pdf_obj *
 pdf_new_real(fz_context *ctx, float f)
 {
 	pdf_obj_num *obj;
-	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_num)), "pdf_obj(real)");
+	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_num), __FILE__, __LINE__), "pdf_obj(real)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_REAL;
 	obj->super.flags = 0;
@@ -138,7 +138,7 @@ pdf_new_string(fz_context *ctx, const char *str, size_t len)
 	if ((size_t)l != len)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Overflow in pdf string");
 
-	obj = Memento_label(fz_malloc(ctx, offsetof(pdf_obj_string, buf) + len + 1), "pdf_obj(string)");
+	obj = Memento_label(fz_malloc(ctx, offsetof(pdf_obj_string, buf) + len + 1, __FILE__, __LINE__), "pdf_obj(string)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_STRING;
 	obj->super.flags = 0;
@@ -167,7 +167,7 @@ pdf_new_name(fz_context *ctx, const char *str)
 			return (pdf_obj*)(intptr_t)m;
 	}
 
-	obj = Memento_label(fz_malloc(ctx, offsetof(pdf_obj_name, n) + strlen(str) + 1), "pdf_obj(name)");
+	obj = Memento_label(fz_malloc(ctx, offsetof(pdf_obj_name, n) + strlen(str) + 1, __FILE__, __LINE__), "pdf_obj(name)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_NAME;
 	obj->super.flags = 0;
@@ -183,7 +183,7 @@ pdf_new_indirect(fz_context *ctx, pdf_document *doc, int num, int gen)
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid object number (%d)", num);
 	if (gen < 0 || gen > PDF_MAX_GEN_NUMBER)
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid generation number (%d)", gen);
-	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_ref)), "pdf_obj(indirect)");
+	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_ref), __FILE__, __LINE__), "pdf_obj(indirect)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_INDIRECT;
 	obj->super.flags = 0;
@@ -560,7 +560,7 @@ pdf_new_array(fz_context *ctx, pdf_document *doc, int initialcap)
 	pdf_obj_array *obj;
 	int i;
 
-	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_array)), "pdf_obj(array)");
+	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_array), __FILE__, __LINE__), "pdf_obj(array)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_ARRAY;
 	obj->super.flags = 0;
@@ -904,7 +904,7 @@ pdf_new_dict(fz_context *ctx, pdf_document *doc, int initialcap)
 	pdf_obj_dict *obj;
 	int i;
 
-	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_dict)), "pdf_obj(dict)");
+	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_dict), __FILE__, __LINE__), "pdf_obj(dict)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_DICT;
 	obj->super.flags = 0;
@@ -1837,12 +1837,12 @@ static inline void fmt_putc(fz_context *ctx, struct fmt *fmt, int c)
 		fmt->cap *= 2;
 		if (fmt->buf == fmt->ptr)
 		{
-			fmt->ptr = Memento_label(fz_malloc(ctx, fmt->cap), "fmt_ptr");
+			fmt->ptr = Memento_label(fz_malloc(ctx, fmt->cap, __FILE__, __LINE__), "fmt_ptr");
 			memcpy(fmt->ptr, fmt->buf, fmt->len);
 		}
 		else
 		{
-			fmt->ptr = fz_realloc(ctx, fmt->ptr, fmt->cap);
+			fmt->ptr = fz_realloc(ctx, fmt->ptr, fmt->cap, __FILE__, __LINE__);
 		}
 	}
 
@@ -2139,7 +2139,7 @@ pdf_sprint_encrypted_obj(fz_context *ctx, char *buf, size_t cap, size_t *len, pd
 	{
 		fmt.cap = 1024;
 		fmt.buf = NULL;
-		fmt.ptr = Memento_label(fz_malloc(ctx, fmt.cap), "fmt_buf");
+		fmt.ptr = Memento_label(fz_malloc(ctx, fmt.cap, __FILE__, __LINE__), "fmt_buf");
 	}
 	else
 	{

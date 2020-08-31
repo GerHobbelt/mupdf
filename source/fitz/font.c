@@ -316,7 +316,7 @@ struct ft_error
 static void *ft_alloc(FT_Memory memory, long size)
 {
 	fz_context *ctx = (fz_context *) memory->user;
-	return Memento_label(fz_malloc_no_throw(ctx, size), "ft_alloc");
+	return Memento_label(fz_malloc_no_throw(ctx, size, __FILE__, __LINE__), "ft_alloc");
 }
 
 static void ft_free(FT_Memory memory, void *block)
@@ -336,7 +336,7 @@ static void *ft_realloc(FT_Memory memory, long cur_size, long new_size, void *bl
 	}
 	if (block == NULL)
 		return ft_alloc(memory, new_size);
-	return fz_realloc_no_throw(ctx, block, new_size);
+	return fz_realloc_no_throw(ctx, block, new_size, __FILE__, __LINE__);
 }
 
 void fz_new_font_context(fz_context *ctx)
@@ -1361,10 +1361,10 @@ fz_new_type3_font(fz_context *ctx, const char *name, fz_matrix matrix)
 	font = fz_new_font(ctx, name, 1, 256);
 	fz_try(ctx)
 	{
-		font->t3procs = fz_calloc(ctx, 256, sizeof(fz_buffer*));
-		font->t3lists = fz_calloc(ctx, 256, sizeof(fz_display_list*));
-		font->t3widths = fz_calloc(ctx, 256, sizeof(float));
-		font->t3flags = fz_calloc(ctx, 256, sizeof(unsigned short));
+		font->t3procs = fz_calloc(ctx, 256, sizeof(fz_buffer*), __FILE__, __LINE__);
+		font->t3lists = fz_calloc(ctx, 256, sizeof(fz_display_list*), __FILE__, __LINE__);
+		font->t3widths = fz_calloc(ctx, 256, sizeof(float), __FILE__, __LINE__);
+		font->t3flags = fz_calloc(ctx, 256, sizeof(unsigned short), __FILE__, __LINE__);
 	}
 	fz_catch(ctx)
 	{

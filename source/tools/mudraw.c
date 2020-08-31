@@ -1460,7 +1460,7 @@ static void *hit_alloc_limit(trace_info *info, int is_malloc, size_t oldsize, si
 }
 
 static void *
-trace_malloc(void *arg, size_t size)
+trace_malloc(void *arg, size_t size, const char* __file, int __line)
 {
 	trace_info *info = (trace_info *) arg;
 	trace_header *p;
@@ -1472,7 +1472,7 @@ trace_malloc(void *arg, size_t size)
 		return hit_memory_limit(info, 1, 0, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 1, 0, size);
-	p = malloc(size + sizeof(trace_header));
+	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, __file, __line);
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
@@ -1497,7 +1497,7 @@ trace_free(void *arg, void *p_)
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size)
+trace_realloc(void *arg, void *p_, size_t size, const char* __file, int __line)
 {
 	trace_info *info = (trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
@@ -1509,7 +1509,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 		return NULL;
 	}
 	if (p == NULL)
-		return trace_malloc(arg, size);
+		return trace_malloc(arg, size, __FILE__, __LINE__);
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
 	oldsize = p[-1].size;
@@ -1517,7 +1517,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 		return hit_memory_limit(info, 0, oldsize, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 0, oldsize, size);
-	p = realloc(&p[-1], size + sizeof(trace_header));
+	p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, __file, __line);
 	if (p == NULL)
 		return NULL;
 	info->current += size - oldsize;
@@ -2025,7 +2025,7 @@ int mudraw_main(int argc, const char **argv)
 		if (bgprint.active)
 		{
 			int fail = 0;
-			bgprint.ctx = fz_clone_context(ctx);
+			bgprint.ctx = fz_clone_context(ctx, __FILE__, __LINE__);
 			fail |= mu_create_semaphore(&bgprint.start);
 			fail |= mu_create_semaphore(&bgprint.stop);
 			fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
@@ -2040,10 +2040,10 @@ int mudraw_main(int argc, const char **argv)
 		{
 			int i;
 			int fail = 0;
-			workers = fz_calloc(ctx, num_workers, sizeof(*workers));
+			workers = fz_calloc(ctx, num_workers, sizeof(*workers), __FILE__, __LINE__);
 			for (i = 0; i < num_workers; i++)
 			{
-				workers[i].ctx = fz_clone_context(ctx);
+				workers[i].ctx = fz_clone_context(ctx, __FILE__, __LINE__);
 				workers[i].num = i;
 				fail |= mu_create_semaphore(&workers[i].start);
 				fail |= mu_create_semaphore(&workers[i].stop);

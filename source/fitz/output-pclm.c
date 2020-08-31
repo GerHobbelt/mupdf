@@ -124,9 +124,9 @@ pclm_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	writer->stripbuf = NULL;
 	fz_free(ctx, writer->compbuf);
 	writer->compbuf = NULL;
-	writer->stripbuf = Memento_label(fz_malloc(ctx, (size_t)w * sh * n), "pclm_stripbuf");
+	writer->stripbuf = Memento_label(fz_malloc(ctx, (size_t)w * sh * n, __FILE__, __LINE__), "pclm_stripbuf");
 	writer->complen = compressBound((size_t)w * sh * n);
-	writer->compbuf = Memento_label(fz_malloc(ctx, writer->complen), "pclm_compbuf");
+	writer->compbuf = Memento_label(fz_malloc(ctx, writer->complen, __FILE__, __LINE__), "pclm_compbuf");
 
 	/* Send the file header on the first page */
 	if (writer->pages == 0)

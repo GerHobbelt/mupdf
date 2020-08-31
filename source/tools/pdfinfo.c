@@ -239,7 +239,7 @@ gatherdimensions(fz_context *ctx, globals *glo, int page, pdf_obj *pageref)
 	glo->dim[glo->dims - 1].page = page;
 	glo->dim[glo->dims - 1].pageref = pageref;
 	glo->dim[glo->dims - 1].u.dim.bbox = NULL;
-	glo->dim[glo->dims - 1].u.dim.bbox = fz_malloc(ctx, sizeof(fz_rect));
+	glo->dim[glo->dims - 1].u.dim.bbox = fz_malloc(ctx, sizeof(fz_rect), __FILE__, __LINE__);
 	memcpy(glo->dim[glo->dims - 1].u.dim.bbox, &bbox, sizeof (fz_rect));
 
 	return;
@@ -736,7 +736,7 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 				for (j = 0; j < n; j++)
 				{
 					pdf_obj *obj = pdf_array_get(ctx, glo->image[i].u.image.filter, j);
-					char *filter = fz_strdup(ctx, pdf_to_name(ctx, obj));
+					char *filter = fz_strdup(ctx, pdf_to_name(ctx, obj), __FILE__, __LINE__);
 
 					if (strstr(filter, "Decode"))
 						*(strstr(filter, "Decode")) = '\0';
@@ -750,7 +750,7 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 			else if (glo->image[i].u.image.filter)
 			{
 				pdf_obj *obj = glo->image[i].u.image.filter;
-				char *filter = fz_strdup(ctx, pdf_to_name(ctx, obj));
+				char *filter = fz_strdup(ctx, pdf_to_name(ctx, obj), __FILE__, __LINE__);
 
 				if (strstr(filter, "Decode"))
 					*(strstr(filter, "Decode")) = '\0';
@@ -763,7 +763,7 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 
 			if (glo->image[i].u.image.cs)
 			{
-				cs = fz_strdup(ctx, pdf_to_name(ctx, glo->image[i].u.image.cs));
+				cs = fz_strdup(ctx, pdf_to_name(ctx, glo->image[i].u.image.cs), __FILE__, __LINE__);
 
 				if (!strncmp(cs, "Device", 6))
 				{
@@ -782,7 +782,7 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 			}
 			if (glo->image[i].u.image.altcs)
 			{
-				altcs = fz_strdup(ctx, pdf_to_name(ctx, glo->image[i].u.image.altcs));
+				altcs = fz_strdup(ctx, pdf_to_name(ctx, glo->image[i].u.image.altcs), __FILE__, __LINE__);
 
 				if (!strncmp(altcs, "Device", 6))
 				{

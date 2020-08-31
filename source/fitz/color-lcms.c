@@ -69,13 +69,13 @@ static void fz_lcms_log_error(cmsContext id, cmsUInt32Number error_code, const c
 static void *fz_lcms_malloc(cmsContext id, unsigned int size)
 {
 	fz_context *ctx = cmsGetContextUserData(id);
-	return Memento_label(fz_malloc_no_throw(ctx, size), "lcms");
+	return Memento_label(fz_malloc_no_throw(ctx, size, __FILE__, __LINE__), "lcms");
 }
 
 static void *fz_lcms_realloc(cmsContext id, void *ptr, unsigned int size)
 {
 	fz_context *ctx = cmsGetContextUserData(id);
-	return Memento_label(fz_realloc_no_throw(ctx, ptr, size), "lcms");
+	return Memento_label(fz_realloc_no_throw(ctx, ptr, size, __FILE__, __LINE__), "lcms");
 }
 
 static void fz_lcms_free(cmsContext id, void *ptr)
@@ -383,7 +383,7 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, fz_pixmap *src, fz_p
 	outputpos = dst->samples;
 	if (sa)
 	{
-		buffer = fz_malloc(ctx, ss);
+		buffer = fz_malloc(ctx, ss, __FILE__, __LINE__);
 		for (; h > 0; h--)
 		{
 			fz_unmultiply_row(ctx, sn, sc, sw, buffer, inputpos);

@@ -28,7 +28,7 @@ FZ_NORETURN static void rethrow_as_fz(js_State *J)
 
 static void *alloc(void *actx, void *ptr, int n)
 {
-	return fz_realloc_no_throw(actx, ptr, n);
+	return fz_realloc_no_throw(actx, ptr, n, __FILE__, __LINE__);
 }
 
 static int eval_print(js_State *J, const char *source)
@@ -135,7 +135,7 @@ static void jsB_read(js_State *J)
 		js_error(J, "cannot seek in file: '%s'", filename);
 	}
 
-	s = fz_malloc(ctx, n + 1);
+	s = fz_malloc(ctx, n + 1, __FILE__, __LINE__);
 	if (!s) {
 		fclose(f);
 		js_error(J, "cannot allocate storage for file contents: '%s'", filename);
@@ -4348,7 +4348,7 @@ static void ffi_PDFDocument_newByteString(js_State *J)
 	n = js_getlength(J, 1);
 
 	fz_try(ctx)
-		buf = fz_malloc(ctx, n);
+		buf = fz_malloc(ctx, n, __FILE__, __LINE__);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -5502,8 +5502,8 @@ static void ffi_PDFAnnotation_setInkList(js_State *J)
 	}
 
 	fz_try(ctx) {
-		counts = fz_malloc(ctx, n * sizeof(int));
-		points = fz_malloc(ctx, nv * sizeof(fz_point));
+		counts = fz_malloc(ctx, n * sizeof(int), __FILE__, __LINE__);
+		points = fz_malloc(ctx, nv * sizeof(fz_point), __FILE__, __LINE__);
 	} fz_catch(ctx) {
 		fz_free(ctx, counts);
 		fz_free(ctx, points);

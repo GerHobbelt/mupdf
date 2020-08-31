@@ -95,7 +95,7 @@ pdf_graft_mapped_object(fz_context *ctx, pdf_graft_map *map, pdf_obj *obj)
 			{
 				map->src = pdf_keep_document(ctx, src);
 				map->len = pdf_xref_len(ctx, src);
-				map->dst_from_src = fz_calloc(ctx, map->len, sizeof(int));
+				map->dst_from_src = fz_calloc(ctx, map->len, sizeof(int), __FILE__, __LINE__);
 			}
 			fz_catch(ctx)
 			{

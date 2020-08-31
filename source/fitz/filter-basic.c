@@ -123,7 +123,7 @@ fz_open_range_filter(fz_context *ctx, fz_stream *chain, fz_range *ranges, int nr
 	{
 		if (nranges > 0)
 		{
-			state->ranges = fz_calloc(ctx, nranges, sizeof(*ranges));
+			state->ranges = fz_calloc(ctx, nranges, sizeof(*ranges), __FILE__, __LINE__);
 			memcpy(state->ranges, ranges, nranges * sizeof(*ranges));
 			state->nranges = nranges;
 			state->next_range = 1;
@@ -359,7 +359,7 @@ fz_open_concat(fz_context *ctx, int len, int pad)
 {
 	struct concat_filter *state;
 
-	state = fz_calloc(ctx, 1, sizeof(struct concat_filter) + (len-1)*sizeof(fz_stream *));
+	state = fz_calloc(ctx, 1, sizeof(struct concat_filter) + (len-1)*sizeof(fz_stream *), __FILE__, __LINE__);
 	state->max = len;
 	state->count = 0;
 	state->current = 0;

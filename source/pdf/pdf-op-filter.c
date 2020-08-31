@@ -1363,7 +1363,7 @@ pdf_filter_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_font_d
 	filter_flush(ctx, p, 0);
 	fz_free(ctx, p->font_name);
 	p->font_name = NULL;
-	p->font_name = name ? fz_strdup(ctx, name) : NULL;
+	p->font_name = name ? fz_strdup(ctx, name, __FILE__, __LINE__) : NULL;
 	pdf_drop_font(ctx, p->gstate->pending.text.font);
 	p->gstate->pending.text.font = pdf_keep_font(ctx, font);
 	p->gstate->pending.text.size = size;
@@ -1810,7 +1810,7 @@ pdf_filter_BMC(fz_context *ctx, pdf_processor *proc, const char *tag)
 	tag_record *bmc = fz_malloc_struct(ctx, tag_record);
 
 	fz_try(ctx)
-		bmc->tag = fz_strdup(ctx, tag);
+		bmc->tag = fz_strdup(ctx, tag, __FILE__, __LINE__);
 	fz_catch(ctx)
 	{
 		fz_free(ctx, bmc);
@@ -1834,7 +1834,7 @@ pdf_filter_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *r
 	fz_try(ctx)
 	{
 		bdc->bdc = 1;
-		bdc->tag = fz_strdup(ctx, tag);
+		bdc->tag = fz_strdup(ctx, tag, __FILE__, __LINE__);
 		bdc->raw = pdf_keep_obj(ctx, raw);
 		bdc->cooked = pdf_keep_obj(ctx, raw);
 	}

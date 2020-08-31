@@ -56,7 +56,7 @@ int fz_use_document_css(fz_context *ctx)
 void fz_set_user_css(fz_context *ctx, const char *user_css)
 {
 	fz_free(ctx, ctx->style->user_css);
-	ctx->style->user_css = user_css ? fz_strdup(ctx, user_css) : NULL;
+	ctx->style->user_css = user_css ? fz_strdup(ctx, user_css, __FILE__, __LINE__) : NULL;
 }
 
 const char *fz_user_css(fz_context *ctx)
@@ -171,7 +171,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	if (!locks)
 		locks = &fz_locks_default;
 
-	ctx = Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
+	ctx = Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context), __FILE__, __LINE__), "fz_context");
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot create context (phase 1)\n");
@@ -211,7 +211,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 }
 
 fz_context *
-fz_clone_context(fz_context *ctx)
+fz_clone_context(fz_context *ctx, const char* __file, int __line)
 {
 	fz_context *new_ctx;
 
@@ -220,7 +220,7 @@ fz_clone_context(fz_context *ctx)
 	if (ctx == NULL || (ctx->locks.lock == fz_locks_default.lock && ctx->locks.unlock == fz_locks_default.unlock))
 		return NULL;
 
-	new_ctx = ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context));
+	new_ctx = ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context), __file, __line);
 	if (!new_ctx)
 		return NULL;
 

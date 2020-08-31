@@ -524,12 +524,12 @@ ptrdiff_t pdf_lexbuf_grow(fz_context *ctx, pdf_lexbuf *lb)
 	size_t newsize = lb->size * 2;
 	if (lb->size == lb->base_size)
 	{
-		lb->scratch = Memento_label(fz_malloc(ctx, newsize), "pdf_lexbuf");
+		lb->scratch = Memento_label(fz_malloc(ctx, newsize, __FILE__, __LINE__), "pdf_lexbuf");
 		memcpy(lb->scratch, lb->buffer, lb->size);
 	}
 	else
 	{
-		lb->scratch = fz_realloc(ctx, lb->scratch, newsize);
+		lb->scratch = fz_realloc(ctx, lb->scratch, newsize, __FILE__, __LINE__);
 	}
 	lb->size = newsize;
 	return lb->scratch - old;

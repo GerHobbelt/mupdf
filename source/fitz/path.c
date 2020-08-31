@@ -1396,7 +1396,7 @@ fz_new_stroke_state_with_dash_len(fz_context *ctx, int len)
 	if (len < 0)
 		len = 0;
 
-	state = Memento_label(fz_malloc(ctx, sizeof(*state) + sizeof(state->dash_list[0]) * len), "fz_stroke_state");
+	state = Memento_label(fz_malloc(ctx, sizeof(*state) + sizeof(state->dash_list[0]) * len, __FILE__, __LINE__), "fz_stroke_state");
 	state->refs = 1;
 	state->start_cap = FZ_LINECAP_BUTT;
 	state->dash_cap = FZ_LINECAP_BUTT;
@@ -1449,7 +1449,7 @@ fz_unshare_stroke_state_with_dash_len(fz_context *ctx, fz_stroke_state *shared, 
 		return shared;
 
 	unsize = sizeof(*unshared) + sizeof(unshared->dash_list[0]) * len;
-	unshared = Memento_label(fz_malloc(ctx, unsize), "fz_stroke_state");
+	unshared = Memento_label(fz_malloc(ctx, unsize, __FILE__, __LINE__), "fz_stroke_state");
 	memcpy(unshared, shared, (shsize > unsize ? unsize : shsize));
 	unshared->refs = 1;
 
@@ -1472,7 +1472,7 @@ clone_block(fz_context *ctx, void *block, size_t len)
 	if (len == 0 || block == NULL)
 		return NULL;
 
-	target = fz_malloc(ctx, len);
+	target = fz_malloc(ctx, len, __FILE__, __LINE__);
 	memcpy(target, block, len);
 	return target;
 }

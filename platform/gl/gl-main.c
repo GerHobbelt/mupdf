@@ -1976,7 +1976,7 @@ static void do_canvas(void)
 			}
 			if (search_input.end > search_input.text)
 			{
-				search_needle = fz_strdup(ctx, search_input.text);
+				search_needle = fz_strdup(ctx, search_input.text, __FILE__, __LINE__);
 				search_active = 1;
 				search_page = currentpage;
 			}

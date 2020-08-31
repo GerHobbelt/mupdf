@@ -1262,8 +1262,10 @@ static void drawrange(fz_context *ctx, fz_document *doc, const char *range)
 typedef struct
 {
 	size_t size;
-#if defined(_M_IA64) || defined(_M_AMD64)
+	size_t seqnum;
+#if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
 	size_t align;
+	size_t align2;
 #endif
 } trace_header;
 
@@ -1274,20 +1276,30 @@ typedef struct
 	size_t total;
 } trace_info;
 
-#define RIDGE_SIZE 100
+// must be a multiple of 16 on x64
+#define RIDGE_SIZE 128
+
+static trace_header *trace_freed_list[100000];
+static int trace_freed_list_index = 0;
+static int trace_current_seqnum = 1;
 
 static void *
-trace_malloc(void *arg, size_t size)
+trace_malloc(void *arg, size_t size, const char *__file, int __line)
 {
 	trace_info *info = (trace_info *) arg;
 	trace_header *p;
 	if (size == 0)
 		return NULL;
-	p = malloc(size + 2 * RIDGE_SIZE + sizeof(trace_header));
+	p = _malloc_dbg(size + 2 * RIDGE_SIZE + sizeof(trace_header), _NORMAL_BLOCK, __file, __line);
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
 	p[0].align = 0xEAD;
+	p[0].seqnum = trace_current_seqnum++;
+	if (trace_current_seqnum - 1 == 1281 && size == 24)
+	{
+		fprintf(stderr, "ploing!\n");
+	}
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -1337,7 +1349,7 @@ trace_free(void *arg, void *p_)
 		const char* bad2 = memvchr(pp + size, 0xEE, RIDGE_SIZE);
 		if (bad || bad2)
 		{
-			fprintf(stderr, "corrupted ridge(s)! %p / %p for block %p (%zu)\n", bad, bad2, &p[-1], size);
+			fprintf(stderr, "corrupted ridge(s)! %p (off:%d) / %p (off:%d) for block %p (size: %zu) (seqnum: %d)\n", bad, (int)(bad - pp), bad2, (int)(bad2 - (char*)(pp + size)), &p[-1], size, (int)p[-1].seqnum);
 			rotten = 1;
 		}
 	}
@@ -1352,12 +1364,35 @@ trace_free(void *arg, void *p_)
 	}
 	else
 	{
+#if 0
 		free(&p[-1]);
+#else
+		trace_freed_list[trace_freed_list_index++] = &p[-1];
+		memset(p, 0xBB, size + 2 * RIDGE_SIZE);
+
+		static int cnt = 128;
+		if (--cnt)
+		{
+			return;
+		}
+		cnt = 128;
+
+		// scan the free list to observe any overwrites of empty memory:
+		for (int i = 0; i < trace_freed_list_index - 1; i++)
+		{
+			p = trace_freed_list[i];
+			const char* bad = memvchr((char*)(p + 1), 0xBB, p[0].size + 2 * RIDGE_SIZE);
+			if (bad)
+			{
+				fprintf(stderr, "corrupted heap record: overwrite of freed memory! %p @ offset %d (seqnum: %d / size: %zu)\n", p, (int)(bad - (char*)(p + 1)) - RIDGE_SIZE, (int)p[0].seqnum, p[0].size);
+			}
+		}
+#endif
 	}
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size)
+trace_realloc(void *arg, void *p_, size_t size, const char *__file, int __line)
 {
 	trace_info *info = (trace_info *) arg;
 	trace_header *p;
@@ -1370,7 +1405,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 
 	if (p_ == NULL)
-		return trace_malloc(arg, size);
+		return trace_malloc(arg, size, __file, __line);
 
 	char* pp = (char*)p_;
 	pp -= RIDGE_SIZE;
@@ -1562,7 +1597,7 @@ int muraster_main(int argc, const char *argv[])
 	max_band_memory = BAND_MEMORY;
 	width = 0;
 	height = 0;
-	num_workers = 30; // NUM_RENDER_THREADS;
+	num_workers = 1; // NUM_RENDER_THREADS;
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
 
@@ -1675,7 +1710,7 @@ int muraster_main(int argc, const char *argv[])
 	if (bgprint.active)
 	{
 		int fail = 0;
-		bgprint.ctx = fz_clone_context(ctx);
+		bgprint.ctx = fz_clone_context(ctx, __FILE__, __LINE__);
 		fail |= mu_create_semaphore(&bgprint.start);
 		fail |= mu_create_semaphore(&bgprint.stop);
 		fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
@@ -1691,10 +1726,10 @@ int muraster_main(int argc, const char *argv[])
 	{
 		int i;
 		int fail = 0;
-		workers = fz_calloc(ctx, num_workers, sizeof(*workers));
+		workers = fz_calloc(ctx, num_workers, sizeof(*workers), __FILE__, __LINE__);
 		for (i = 0; i < num_workers; i++)
 		{
-			workers[i].ctx = fz_clone_context(ctx);
+			workers[i].ctx = fz_clone_context(ctx, __FILE__, __LINE__);
 			workers[i].num = i;
 			fail |= mu_create_semaphore(&workers[i].start);
 			fail |= mu_create_semaphore(&workers[i].stop);

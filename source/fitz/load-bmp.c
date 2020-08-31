@@ -215,7 +215,7 @@ bmp_decompress_rle24(fz_context *ctx, struct info *info, const unsigned char *p,
 	stride = (width*3 + 3) / 4 * 4;
 
 	sp = p;
-	dp = decompressed = fz_calloc(ctx, height, stride);
+	dp = decompressed = fz_calloc(ctx, height, stride, __FILE__, __LINE__);
 	ep = dp + height * stride;
 	x = 0;
 	y = 0;
@@ -332,7 +332,7 @@ bmp_decompress_rle8(fz_context *ctx, struct info *info, const unsigned char *p, 
 	stride = (width + 3) / 4 * 4;
 
 	sp = p;
-	dp = decompressed = fz_calloc(ctx, height, stride);
+	dp = decompressed = fz_calloc(ctx, height, stride, __FILE__, __LINE__);
 	ep = dp + height * stride;
 	x = 0;
 	y = 0;
@@ -439,7 +439,7 @@ bmp_decompress_rle4(fz_context *ctx, struct info *info, const unsigned char *p, 
 	stride = ((width + 1) / 2 + 3) / 4 * 4;
 
 	sp = p;
-	dp = decompressed = fz_calloc(ctx, height, stride);
+	dp = decompressed = fz_calloc(ctx, height, stride, __FILE__, __LINE__);
 	ep = dp + height * stride;
 	x = 0;
 	y = 0;

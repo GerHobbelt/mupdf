@@ -28,7 +28,7 @@ fz_pool *fz_new_pool(fz_context *ctx)
 	pool = fz_malloc_struct(ctx, fz_pool);
 	fz_try(ctx)
 	{
-		node = Memento_label(fz_calloc(ctx, offsetof(fz_pool_node, mem) + POOL_SIZE, 1), "fz_pool_block");
+		node = Memento_label(fz_calloc(ctx, offsetof(fz_pool_node, mem) + POOL_SIZE, 1, __FILE__, __LINE__), "fz_pool_block");
 		pool->head = pool->tail = node;
 		pool->pos = node->mem;
 		pool->end = node->mem + POOL_SIZE;
@@ -47,7 +47,7 @@ static void *fz_pool_alloc_oversize(fz_context *ctx, fz_pool *pool, size_t size)
 	fz_pool_node *node;
 
 	/* link in memory at the head of the list */
-	node = Memento_label(fz_calloc(ctx, offsetof(fz_pool_node, mem) + size, 1), "fz_pool_oversize");
+	node = Memento_label(fz_calloc(ctx, offsetof(fz_pool_node, mem) + size, 1, __FILE__, __LINE__), "fz_pool_oversize");
 	node->next = pool->head;
 	pool->head = node;
 	pool->size += offsetof(fz_pool_node, mem) + size;
@@ -67,7 +67,7 @@ void *fz_pool_alloc(fz_context *ctx, fz_pool *pool, size_t size)
 
 	if (pool->pos + size > pool->end)
 	{
-		fz_pool_node *node = Memento_label(fz_calloc(ctx, offsetof(fz_pool_node, mem) + POOL_SIZE, 1), "fz_pool_block");
+		fz_pool_node *node = Memento_label(fz_calloc(ctx, offsetof(fz_pool_node, mem) + POOL_SIZE, 1, __FILE__, __LINE__), "fz_pool_block");
 		pool->tail = pool->tail->next = node;
 		pool->pos = node->mem;
 		pool->end = node->mem + POOL_SIZE;

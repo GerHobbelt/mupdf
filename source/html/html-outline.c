@@ -357,7 +357,7 @@ add_html_outline(fz_context *ctx, struct outline_parser *x, fz_html_box *box)
 	node = fz_new_outline(ctx);
 	fz_try(ctx)
 	{
-		node->title = Memento_label(fz_strdup(ctx, cat_html_text(ctx, x, box)), "outline_title");
+		node->title = Memento_label(fz_strdup(ctx, cat_html_text(ctx, x, box), __FILE__, __LINE__), "outline_title");
 		if (!box->id)
 		{
 			fz_snprintf(buf, sizeof buf, "'%d", x->id++);

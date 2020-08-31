@@ -13,7 +13,7 @@ xps_new_part(fz_context *ctx, xps_document *doc, char *name, fz_buffer *data)
 	part = fz_malloc_struct(ctx, xps_part);
 	fz_try(ctx)
 	{
-		part->name = fz_strdup(ctx, name);
+		part->name = fz_strdup(ctx, name, __FILE__, __LINE__);
 		part->data = data; /* take ownership of buffer */
 	}
 	fz_catch(ctx)
@@ -173,7 +173,7 @@ xps_open_document(fz_context *ctx, const char *filename)
 
 	if (strstr(filename, "/_rels/.rels") || strstr(filename, "\\_rels\\.rels"))
 	{
-		char *buf = fz_strdup(ctx, filename);
+		char *buf = fz_strdup(ctx, filename, __FILE__, __LINE__);
 		p = strstr(buf, "/_rels/.rels");
 		if (!p)
 			p = strstr(buf, "\\_rels\\.rels");

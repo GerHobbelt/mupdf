@@ -182,7 +182,7 @@ ensure_solid_xref(fz_context *ctx, pdf_document *doc, int num, int which)
 	new_sub = fz_malloc_struct(ctx, pdf_xref_subsec);
 	fz_try(ctx)
 	{
-		new_sub->table = fz_calloc(ctx, num, sizeof(pdf_xref_entry));
+		new_sub->table = fz_calloc(ctx, num, sizeof(pdf_xref_entry), __FILE__, __LINE__);
 		new_sub->start = 0;
 		new_sub->len = num;
 		new_sub->next = NULL;
@@ -332,7 +332,7 @@ static void ensure_incremental_xref(fz_context *ctx, pdf_document *doc)
 	{
 		pdf_xref *xref = &doc->xref_sections[0];
 		pdf_xref *pxref;
-		pdf_xref_entry *new_table = fz_calloc(ctx, xref->num_objects, sizeof(pdf_xref_entry));
+		pdf_xref_entry *new_table = fz_calloc(ctx, xref->num_objects, sizeof(pdf_xref_entry), __FILE__, __LINE__);
 		pdf_xref_subsec *sub = NULL;
 		pdf_obj *trailer = NULL;
 		int i;
@@ -513,7 +513,7 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 
 	fz_try(ctx)
 	{
-		xref_index = fz_calloc(ctx, n, sizeof(int));
+		xref_index = fz_calloc(ctx, n, sizeof(int), __FILE__, __LINE__);
 		xref = fz_malloc_struct(ctx, pdf_xref);
 		sub = fz_malloc_struct(ctx, pdf_xref_subsec);
 	}
@@ -821,7 +821,7 @@ pdf_xref_find_subsection(fz_context *ctx, pdf_document *doc, int start, int len)
 		sub = fz_malloc_struct(ctx, pdf_xref_subsec);
 		fz_try(ctx)
 		{
-			sub->table = fz_calloc(ctx, len, sizeof(pdf_xref_entry));
+			sub->table = fz_calloc(ctx, len, sizeof(pdf_xref_entry), __FILE__, __LINE__);
 			sub->start = start;
 			sub->len = len;
 			sub->next = xref->subsec;
@@ -1688,8 +1688,8 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 				|| first + count - 1 > PDF_MAX_OBJECT_NUMBER)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "object stream object numbers are out of range");
 
-		numbuf = fz_calloc(ctx, count, sizeof(*numbuf));
-		ofsbuf = fz_calloc(ctx, count, sizeof(*ofsbuf));
+		numbuf = fz_calloc(ctx, count, sizeof(*numbuf), __FILE__, __LINE__);
+		ofsbuf = fz_calloc(ctx, count, sizeof(*ofsbuf), __FILE__, __LINE__);
 
 		xref_len = pdf_xref_len(ctx, doc);
 
@@ -3217,7 +3217,7 @@ char_list_append(fz_context *ctx, char_list *list, const char *s)
 		list->list = fz_realloc_array(ctx, list->list, n, char *);
 		list->max = n;
 	}
-	list->list[list->len] = fz_strdup(ctx, s);
+	list->list[list->len] = fz_strdup(ctx, s, __FILE__, __LINE__);
 	list->len++;
 }
 
@@ -3507,7 +3507,7 @@ check_field(fz_context *ctx, pdf_document *doc, pdf_changes *changes, pdf_obj *o
 			n = strlen(name)+1;
 			if (*name_prefix)
 				n += 1 + strlen(name_prefix);
-			field_name = fz_malloc(ctx, n);
+			field_name = fz_malloc(ctx, n, __FILE__, __LINE__);
 			if (*name_prefix)
 			{
 				strcpy(field_name, name_prefix);
@@ -3930,7 +3930,7 @@ validate_locked_fields(fz_context *ctx, pdf_document *doc, int version, pdf_lock
 	int all_indirects = 1;
 
 	num_objs = doc->max_xref_len;
-	changes = Memento_label(fz_calloc(ctx, 1, sizeof(*changes) + sizeof(int)*(num_objs-1)), "pdf_changes");
+	changes = Memento_label(fz_calloc(ctx, 1, sizeof(*changes) + sizeof(int)*(num_objs-1), __FILE__, __LINE__), "pdf_changes");
 	changes->num_obj = num_objs;
 
 	fz_try(ctx)

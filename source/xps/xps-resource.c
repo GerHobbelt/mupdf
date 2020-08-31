@@ -135,7 +135,7 @@ xps_parse_resource_dictionary(fz_context *ctx, xps_document *doc, char *base_uri
 	if (head)
 	{
 		fz_try(ctx)
-			head->base_uri = fz_strdup(ctx, base_uri);
+			head->base_uri = fz_strdup(ctx, base_uri, __FILE__, __LINE__);
 		fz_catch(ctx)
 		{
 			fz_free(ctx, entry);

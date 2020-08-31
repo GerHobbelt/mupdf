@@ -173,8 +173,8 @@ static size_t on_curl_data(void *ptr, size_t size, size_t nmemb, void *state_)
 			 * and we'll run without progressive mode. */
 			size_t len = state->content_length;
 			state->map_length = (len+BLOCK_SIZE-1)>>BLOCK_SHIFT;
-			state->map = fz_malloc_no_throw(state->ctx, (state->map_length+7)>>3);
-			state->buffer = fz_malloc_no_throw(state->ctx, len);
+			state->map = fz_malloc_no_throw(state->ctx, (state->map_length+7)>>3, __FILE__, __LINE__);
+			state->buffer = fz_malloc_no_throw(state->ctx, len, __FILE__, __LINE__);
 			state->buffer_max = len;
 			if (state->map == NULL || state->buffer == NULL)
 			{
@@ -188,7 +188,7 @@ static size_t on_curl_data(void *ptr, size_t size, size_t nmemb, void *state_)
 		{
 			/* We know the length, and that we can use ByteRanges -
 			 * we can run as a progressive file. */
-			state->buffer = fz_malloc_no_throw(state->ctx, state->content_length);
+			state->buffer = fz_malloc_no_throw(state->ctx, state->content_length, __FILE__, __LINE__);
 			if (state->buffer == NULL)
 			{
 				unlock(state);

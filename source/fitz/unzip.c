@@ -140,7 +140,7 @@ static void read_zip_dir_imp(fz_context *ctx, fz_zip_archive *zip, int64_t start
 			(void) fz_read_uint32_le(ctx, file); /* ext file atts */
 			offset = fz_read_uint32_le(ctx, file);
 
-			name = Memento_label(fz_malloc(ctx, namesize + 1), "zip_name");
+			name = Memento_label(fz_malloc(ctx, namesize + 1, __FILE__, __LINE__), "zip_name");
 
 			n = fz_read(ctx, file, (unsigned char*)name, namesize);
 			if (n < (size_t)namesize)
@@ -330,7 +330,7 @@ static fz_buffer *read_zip_entry(fz_context *ctx, fz_archive *arch, const char *
 	{
 		fz_try(ctx)
 		{
-			cbuf = fz_malloc(ctx, ent->csize);
+			cbuf = fz_malloc(ctx, ent->csize, __FILE__, __LINE__);
 
 			fz_read(ctx, file, cbuf, ent->csize);
 

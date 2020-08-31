@@ -50,7 +50,7 @@ xps_add_fixed_document(fz_context *ctx, xps_document *doc, char *name)
 	fixdoc = fz_malloc_struct(ctx, xps_fixdoc);
 	fz_try(ctx)
 	{
-		fixdoc->name = fz_strdup(ctx, name);
+		fixdoc->name = fz_strdup(ctx, name, __FILE__, __LINE__);
 		fixdoc->outline = NULL;
 		fixdoc->next = NULL;
 	}
@@ -87,7 +87,7 @@ xps_add_fixed_page(fz_context *ctx, xps_document *doc, char *name, int width, in
 
 	fz_try(ctx)
 	{
-		page->name = fz_strdup(ctx, name);
+		page->name = fz_strdup(ctx, name, __FILE__, __LINE__);
 		page->number = doc->page_count++;
 		page->width = width;
 		page->height = height;
@@ -120,7 +120,7 @@ xps_add_link_target(fz_context *ctx, xps_document *doc, char *name)
 
 	fz_try(ctx)
 	{
-		target->name = fz_strdup(ctx, name);
+		target->name = fz_strdup(ctx, name, __FILE__, __LINE__);
 		target->page = page->number;
 		target->next = doc->target;
 	}
@@ -218,10 +218,10 @@ xps_parse_metadata_imp(fz_context *ctx, xps_document *doc, fz_xml *item, xps_fix
 				if (!strcmp(type, REL_START_PART) || !strcmp(type, REL_START_PART_OXPS))
 				{
 					fz_free(ctx, doc->start_part);
-					doc->start_part = fz_strdup(ctx, tgtbuf);
+					doc->start_part = fz_strdup(ctx, tgtbuf, __FILE__, __LINE__);
 				}
 				if ((!strcmp(type, REL_DOC_STRUCTURE) || !strcmp(type, REL_DOC_STRUCTURE_OXPS)) && fixdoc)
-					fixdoc->outline = fz_strdup(ctx, tgtbuf);
+					fixdoc->outline = fz_strdup(ctx, tgtbuf, __FILE__, __LINE__);
 				if (!fz_xml_att(item, "Id"))
 					fz_warn(ctx, "missing relationship id for %s", target);
 			}

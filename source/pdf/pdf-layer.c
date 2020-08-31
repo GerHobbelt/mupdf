@@ -185,7 +185,7 @@ load_ui(fz_context *ctx, pdf_ocg_descriptor *desc, pdf_obj *ocprops, pdf_obj *oc
 	if (desc->num_ui_entries == 0)
 		return;
 
-	desc->ui = Memento_label(fz_calloc(ctx, count, sizeof(pdf_ocg_ui)), "pdf_ocg_ui");
+	desc->ui = Memento_label(fz_calloc(ctx, count, sizeof(pdf_ocg_ui), __FILE__, __LINE__), "pdf_ocg_ui");
 	fz_try(ctx)
 	{
 		(void)populate_ui(ctx, desc, desc->ui, order, 0, rbgroups, locked);
@@ -721,7 +721,7 @@ pdf_read_ocg(fz_context *ctx, pdf_document *doc)
 	{
 		desc->num_configs = num_configs;
 		desc->len = len;
-		desc->ocgs = fz_calloc(ctx, len, sizeof(*desc->ocgs));
+		desc->ocgs = fz_calloc(ctx, len, sizeof(*desc->ocgs), __FILE__, __LINE__);
 		desc->intent = NULL;
 		for (i=0; i < len; i++)
 		{

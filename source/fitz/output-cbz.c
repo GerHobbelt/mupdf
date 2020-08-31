@@ -157,7 +157,7 @@ fz_new_pixmap_writer(fz_context *ctx, const char *path, const char *options,
 	fz_try(ctx)
 	{
 		fz_parse_draw_options(ctx, &wri->options, options);
-		wri->path = fz_strdup(ctx, path ? path : default_path);
+		wri->path = fz_strdup(ctx, path ? path : default_path, __FILE__, __LINE__);
 		wri->save = save;
 		switch (n)
 		{

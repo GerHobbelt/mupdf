@@ -233,7 +233,7 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, const char **ar
 	pdf_dict_put_drop(ctx, pages, PDF_NAME(Kids), kids);
 
 	pagecount = pdf_count_pages(ctx, doc);
-	page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums));
+	page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums), __FILE__, __LINE__);
 	for (i = 0; i < pagecount; i++)
 	{
 		pdf_obj *pageref = pdf_lookup_page_obj(ctx, doc, i);

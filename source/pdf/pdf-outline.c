@@ -24,7 +24,7 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 
 			obj = pdf_dict_get(ctx, dict, PDF_NAME(Title));
 			if (obj)
-				node->title = Memento_label(fz_strdup(ctx, pdf_to_text_string(ctx, obj)), "outline_title");
+				node->title = Memento_label(fz_strdup(ctx, pdf_to_text_string(ctx, obj), __FILE__, __LINE__), "outline_title");
 
 			if ((obj = pdf_dict_get(ctx, dict, PDF_NAME(Dest))) != NULL)
 				node->uri = Memento_label(pdf_parse_link_dest(ctx, doc, obj), "outline_uri");

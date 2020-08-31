@@ -65,7 +65,7 @@ void fz_add_separation(fz_context *ctx, fz_separations *sep, const char *name, f
 	if (n == FZ_MAX_SEPARATIONS)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "too many separations");
 
-	sep->name[n] = fz_strdup(ctx, name);
+	sep->name[n] = fz_strdup(ctx, name, __FILE__, __LINE__);
 	sep->cs[n] = fz_keep_colorspace(ctx, cs);
 	sep->cs_pos[n] = colorant;
 
@@ -83,7 +83,7 @@ void fz_add_separation_equivalents(fz_context *ctx, fz_separations *sep, uint32_
 	if (n == FZ_MAX_SEPARATIONS)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "too many separations");
 
-	sep->name[n] = fz_strdup(ctx, name);
+	sep->name[n] = fz_strdup(ctx, name, __FILE__, __LINE__);
 	sep->rgba[n] = rgba;
 	sep->cmyk[n] = cmyk;
 
@@ -213,7 +213,7 @@ fz_separations *fz_clone_separations_for_overprint(fz_context *ctx, fz_separatio
 			if (beh == FZ_SEPARATION_COMPOSITE)
 				beh = FZ_SEPARATION_SPOT;
 			fz_set_separation_behavior(ctx, clone, j, beh);
-			clone->name[j] = sep->name[i] ? fz_strdup(ctx, sep->name[i]) : NULL;
+			clone->name[j] = sep->name[i] ? fz_strdup(ctx, sep->name[i], __FILE__, __LINE__) : NULL;
 			clone->cs[j] = fz_keep_colorspace(ctx, sep->cs[i]);
 			clone->cs_pos[j] = sep->cs_pos[i];
 		}

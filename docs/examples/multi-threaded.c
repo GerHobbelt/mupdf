@@ -99,7 +99,7 @@ renderer(void *data)
 	// context, so here we create a new context based on it for
 	// use in this thread.
 
-	ctx = fz_clone_context(ctx);
+	ctx = fz_clone_context(ctx, __FILE__, __LINE__);
 
 	// Next we run the display list through the draw device which
 	// will render the request area of the page to the pixmap.

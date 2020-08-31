@@ -434,12 +434,22 @@ static const char* strGiveNewline(const char* s)
 
 static char memTestMsgBuf[8192] = "";
 static int memTestReportType = -1;
+static int memTestInMemLeakDump = 0;
 
 static int __cdecl TestMemHook(int nReportType, const char* szMsg, int* pnRet)
 {
 	static const char* RptTypes[] = { "Warning", "Error", "Assert", "???Unknown???" };
 	if (nReportType < 0 || nReportType > 2)
 		nReportType = 3;
+
+	if (strmatch(szMsg, "Dumping objects ->", NULL))
+	{
+		memTestInMemLeakDump = 2; // start dump...
+	}
+	else if (strmatch(szMsg, "Object dump complete.", NULL))
+	{
+		memTestInMemLeakDump = 0;
+	}
 
 	// don't list memory dump statistics about 0 bytes in 0 blocks: that's noise for our purposes:
 	if (!strmatch(szMsg, "0 bytes in 0 ", " Blocks.", NULL)
@@ -452,13 +462,28 @@ static int __cdecl TestMemHook(int nReportType, const char* szMsg, int* pnRet)
 			fprintf(stderr, "**%s**: %s%s", RptTypes[memTestReportType], memTestMsgBuf, strGiveNewline(memTestMsgBuf));
 			memTestMsgBuf[0] = 0;
 		}
-		memTestReportType = nReportType;
-		strcat(memTestMsgBuf, szMsg);
-		// has last message bit appended an EOL as last char?
-		if (!*strGiveNewline(szMsg))
+		if (memTestInMemLeakDump != 1)
 		{
-			fprintf(stderr, "**%s**: %s", RptTypes[memTestReportType], memTestMsgBuf);
-			memTestMsgBuf[0] = 0;
+			memTestReportType = nReportType;
+			strcat(memTestMsgBuf, szMsg);
+			// has last message bit appended an EOL as last char?
+			if (!*strGiveNewline(szMsg))
+			{
+				if (memTestInMemLeakDump == 2 && (
+					strmatch(memTestMsgBuf, "minkernel\\crts\\ucrt\\src\\appcrt\\stdio\\stream.cpp", " crt block at ", NULL) ||
+					strmatch(memTestMsgBuf, "minkernel\\crts\\ucrt\\src\\appcrt\\stdio\\_getbuf.cpp", " crt block at ", NULL) ||
+					strmatch(memTestMsgBuf, "minkernel\\crts\\ucrt\\src\\appcrt\\stdio\\_sftbuf.cpp", " crt block at ", NULL)
+					)
+				)
+				{
+					memTestInMemLeakDump = 1; // skip till end
+					strcpy(memTestMsgBuf, ">>> CRT app start allocations ignored <<<\n");
+				}
+
+				if (memTestInMemLeakDump != 1)
+					fprintf(stderr, "**%s**: %s", RptTypes[memTestReportType], memTestMsgBuf);
+				memTestMsgBuf[0] = 0;
+			}
 		}
 	}
 

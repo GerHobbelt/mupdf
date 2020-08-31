@@ -89,7 +89,7 @@ xps_insert_font(fz_context *ctx, xps_document *doc, char *name, fz_font *font)
 	fz_try(ctx)
 	{
 		cache->font = fz_keep_font(ctx, font);
-		cache->name = fz_strdup(ctx, name);
+		cache->name = fz_strdup(ctx, name, __FILE__, __LINE__);
 		cache->next = doc->font_table;
 	}
 	fz_catch(ctx)

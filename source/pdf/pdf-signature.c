@@ -32,7 +32,7 @@ void pdf_write_digest(fz_context *ctx, fz_output *out, pdf_obj *byte_range, size
 		int i;
 		size_t z;
 
-		brange = fz_calloc(ctx, brange_len, sizeof(*brange));
+		brange = fz_calloc(ctx, brange_len, sizeof(*brange), __FILE__, __LINE__);
 		for (i = 0; i < brange_len; i++)
 		{
 			brange[i].offset = pdf_array_get_int(ctx, byte_range, 2*i);
@@ -43,7 +43,7 @@ void pdf_write_digest(fz_context *ctx, fz_output *out, pdf_obj *byte_range, size
 		in = fz_open_range_filter(ctx, stm, brange, brange_len);
 
 		digest_len = (hexdigest_length - 2) / 2;
-		digest = fz_malloc(ctx, digest_len);
+		digest = fz_malloc(ctx, digest_len, __FILE__, __LINE__);
 		digest_len = signer->create_digest(ctx, signer, in, digest, digest_len);
 
 		fz_drop_stream(ctx, in);
@@ -105,7 +105,7 @@ check_field_locking(fz_context *ctx, pdf_obj *obj, void *data_, pdf_obj **ff)
 			n += 1;
 		if (data->prefix->name[0])
 			n += strlen(data->prefix->name);
-		prefix = fz_calloc(ctx, 1, sizeof(*prefix)+n);
+		prefix = fz_calloc(ctx, 1, sizeof(*prefix)+n, __FILE__, __LINE__);
 		prefix->prev = data->prefix;
 		if (data->prefix->name[0])
 			strcpy(prefix->name, data->prefix->name);
@@ -327,7 +327,7 @@ char *pdf_signature_format_designated_name(fz_context *ctx, pdf_pkcs7_designated
 		if (parts[i])
 			len += strlen(parts[i]);
 
-	s = fz_malloc(ctx, len);
+	s = fz_malloc(ctx, len, __FILE__, __LINE__);
 	s[0] = '\0';
 
 	for (i = 0; i < (int)nelem(parts); i++)

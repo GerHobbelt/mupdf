@@ -148,7 +148,7 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 		out->drop = drop;
 		if (bufsiz > 0)
 		{
-			out->bp = Memento_label(fz_malloc(ctx, bufsiz), "output_buf");
+			out->bp = Memento_label(fz_malloc(ctx, bufsiz, __FILE__, __LINE__), "output_buf");
 			out->wp = out->bp;
 			out->ep = out->bp + bufsiz;
 		}
@@ -573,7 +573,7 @@ fz_save_buffer(fz_context *ctx, fz_buffer *buf, const char *filename)
 
 fz_band_writer *fz_new_band_writer_of_size(fz_context *ctx, size_t size, fz_output *out)
 {
-	fz_band_writer *writer = fz_calloc(ctx, size, 1);
+	fz_band_writer *writer = fz_calloc(ctx, size, 1, __FILE__, __LINE__);
 	writer->out = out;
 	return writer;
 }

@@ -423,13 +423,13 @@ create_levels(fz_context *ctx,
 	const uint32_t *ptext;
 	size_t plen, remaining;
 
-	levels = Memento_label(fz_malloc(ctx, len * sizeof(*levels)), "bidi_levels");
+	levels = Memento_label(fz_malloc(ctx, len * sizeof(*levels), __FILE__, __LINE__), "bidi_levels");
 
 	fz_var(types);
 
 	fz_try(ctx)
 	{
-		types = fz_malloc(ctx, len * sizeof(fz_bidi_chartype));
+		types = fz_malloc(ctx, len * sizeof(fz_bidi_chartype), __FILE__, __LINE__);
 
 		classify_characters(text, types, len, flags);
 

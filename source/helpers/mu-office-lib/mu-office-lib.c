@@ -53,14 +53,14 @@ void *Pal_Mem_calloc(unsigned int num, size_t size)
 	return calloc(num, size);
 }
 
-void *Pal_Mem_malloc(size_t size)
+void *Pal_Mem_malloc(size_t size, const char* __file, int __line)
 {
-	return malloc(size);
+	return _malloc_dbg(size, _NORMAL_BLOCK, __file, __line);
 }
 
-void *Pal_Mem_realloc(void *ptr, size_t size)
+void *Pal_Mem_realloc(void *ptr, size_t size, const char* __file, int __line)
 {
-	return realloc(ptr, size);
+	return _realloc_dbg(ptr, size, _NORMAL_BLOCK, __file, __line);
 }
 
 void Pal_Mem_free(void *address)
@@ -73,14 +73,14 @@ void Pal_Mem_free(void *address)
 	All MuPDF's allocations are redirected through the
 	following functions.
 */
-static void *muoffice_malloc(void *arg, size_t size)
+static void *muoffice_malloc(void *arg, size_t size, const char* __file, int __line)
 {
-	return Pal_Mem_malloc(size);
+	return Pal_Mem_malloc(size, __file, __line);
 }
 
-static void *muoffice_realloc(void *arg, void *old, size_t size)
+static void *muoffice_realloc(void *arg, void *old, size_t size, const char* __file, int __line)
 {
-	return Pal_Mem_realloc(old, size);
+	return Pal_Mem_realloc(old, size, __file, __line);
 }
 
 static void muoffice_free(void *arg, void *ptr)
@@ -260,7 +260,7 @@ MuError MuOfficeLib_run(MuOfficeLib *mu, void (*fn)(fz_context *ctx, void *arg),
 	if (fn == NULL)
 		return err;
 
-	ctx = fz_clone_context(mu->ctx);
+	ctx = fz_clone_context(mu->ctx, __FILE__, __LINE__);
 	if (ctx == NULL)
 		return MuError_OOM;
 
@@ -345,7 +345,7 @@ static void load_worker(void *arg)
 {
 	MuOfficeDoc *doc = (MuOfficeDoc *)arg;
 	int numPages = 0;
-	fz_context *ctx = fz_clone_context(doc->ctx);
+	fz_context *ctx = fz_clone_context(doc->ctx, __FILE__, __LINE__);
 	int err = 0;
 
 	if (ctx == NULL)
@@ -450,11 +450,11 @@ MuError MuOfficeLib_loadDocument(	MuOfficeLib               *mu,
 
 	ctx = mu->ctx;
 	doc->mu       = mu;
-	doc->ctx      = fz_clone_context(ctx);
+	doc->ctx      = fz_clone_context(ctx, __FILE__, __LINE__);
 	doc->progress = progressFn;
 	doc->error    = errorFn;
 	doc->cookie   = cookie;
-	doc->path     = fz_strdup(ctx, path);
+	doc->path     = fz_strdup(ctx, path, __FILE__, __LINE__);
 	if (mu_create_semaphore(&doc->password_sem))
 		goto fail;
 
@@ -493,7 +493,7 @@ int MuOfficeDoc_providePassword(MuOfficeDoc *doc, const char *password)
 		password = "";
 
 	len = strlen(password);
-	doc->password = Pal_Mem_malloc(len+1);
+	doc->password = Pal_Mem_malloc(len+1, __FILE__, __LINE__);
 	strcpy(doc->password, password);
 	mu_trigger_semaphore(&doc->password_sem);
 
@@ -746,7 +746,7 @@ MuError MuOfficeDoc_run(MuOfficeDoc *doc, void (*fn)(fz_context *ctx, fz_documen
 
 	ensure_doc_loaded(doc);
 
-	ctx = fz_clone_context(doc->mu->ctx);
+	ctx = fz_clone_context(doc->mu->ctx, __FILE__, __LINE__);
 	if (ctx == NULL)
 		return MuError_OOM;
 
@@ -956,7 +956,7 @@ MuError MuOfficePage_run(MuOfficePage *page, void (*fn)(fz_context *ctx, fz_page
 	if (fn == NULL)
 		return err;
 
-	ctx = fz_clone_context(page->doc->mu->ctx);
+	ctx = fz_clone_context(page->doc->mu->ctx, __FILE__, __LINE__);
 	if (ctx == NULL)
 		return MuError_OOM;
 
@@ -978,7 +978,7 @@ static void render_worker(void *arg)
 {
 	MuOfficeRender *render = (MuOfficeRender *)arg;
 	MuOfficePage *page = render->page;
-	fz_context *ctx = fz_clone_context(page->doc->ctx);
+	fz_context *ctx = fz_clone_context(page->doc->ctx, __FILE__, __LINE__);
 	int err = 0;
 	fz_pixmap *pixmap = NULL;
 	fz_device *dev = NULL;

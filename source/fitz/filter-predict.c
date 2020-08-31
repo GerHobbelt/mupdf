@@ -261,9 +261,9 @@ fz_open_predict(fz_context *ctx, fz_stream *chain, int predictor, int columns, i
 		state->stride = (state->bpc * state->colors * state->columns + 7) / 8;
 		state->bpp = (state->bpc * state->colors + 7) / 8;
 
-		state->in = Memento_label(fz_malloc(ctx, state->stride + 1), "predict_in");
-		state->out = Memento_label(fz_malloc(ctx, state->stride), "predict_out");
-		state->ref = Memento_label(fz_malloc(ctx, state->stride), "predict_ref");
+		state->in = Memento_label(fz_malloc(ctx, state->stride + 1, __FILE__, __LINE__), "predict_in");
+		state->out = Memento_label(fz_malloc(ctx, state->stride, __FILE__, __LINE__), "predict_out");
+		state->ref = Memento_label(fz_malloc(ctx, state->stride, __FILE__, __LINE__), "predict_ref");
 		state->rp = state->out;
 		state->wp = state->out;
 

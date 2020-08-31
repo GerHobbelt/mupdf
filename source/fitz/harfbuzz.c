@@ -132,7 +132,7 @@ void *fz_hb_malloc(size_t size)
 
 	assert(ctx != NULL);
 
-	return Memento_label(fz_malloc_no_throw(ctx, size), "hb");
+	return Memento_label(fz_malloc_no_throw(ctx, size, __FILE__, __LINE__), "hb");
 }
 
 void *fz_hb_calloc(size_t n, size_t size)
@@ -141,7 +141,7 @@ void *fz_hb_calloc(size_t n, size_t size)
 
 	assert(ctx != NULL);
 
-	return Memento_label(fz_calloc_no_throw(ctx, n, size), "hb");
+	return Memento_label(fz_calloc_no_throw(ctx, n, size, __FILE__, __LINE__), "hb");
 }
 
 void *fz_hb_realloc(void *ptr, size_t size)
@@ -150,7 +150,7 @@ void *fz_hb_realloc(void *ptr, size_t size)
 
 	assert(ctx != NULL);
 
-	return Memento_label(fz_realloc_no_throw(ctx, ptr, size), "hb");
+	return Memento_label(fz_realloc_no_throw(ctx, ptr, size, __FILE__, __LINE__), "hb");
 }
 
 void fz_hb_free(void *ptr)

@@ -324,7 +324,7 @@ fz_new_colorspace(fz_context *ctx, enum fz_colorspace_type type, int flags, int 
 		cs->type = type;
 		cs->flags = flags;
 		cs->n = n;
-		cs->name = Memento_label(fz_strdup(ctx, name ? name : "UNKNOWN"), "cs_name");
+		cs->name = Memento_label(fz_strdup(ctx, name ? name : "UNKNOWN", __FILE__, __LINE__), "cs_name");
 	}
 	fz_catch(ctx)
 	{
@@ -496,7 +496,7 @@ void fz_colorspace_name_colorant(fz_context *ctx, fz_colorspace *cs, int i, cons
 
 	fz_free(ctx, cs->u.separation.colorant[i]);
 	cs->u.separation.colorant[i] = NULL;
-	cs->u.separation.colorant[i] = fz_strdup(ctx, name);
+	cs->u.separation.colorant[i] = fz_strdup(ctx, name, __FILE__, __LINE__);
 
 	if (!strcmp(name, "Cyan") || !strcmp(name, "Magenta") || !strcmp(name, "Yellow") || !strcmp(name, "Black"))
 		cs->flags |= FZ_COLORSPACE_HAS_CMYK;

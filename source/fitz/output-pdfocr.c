@@ -264,9 +264,9 @@ pdfocr_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	writer->compbuf = NULL;
 	fz_drop_pixmap(ctx, writer->ocrbitmap);
 	writer->ocrbitmap = NULL;
-	writer->stripbuf = Memento_label(fz_malloc(ctx, (size_t)w * sh * n), "pdfocr_stripbuf");
+	writer->stripbuf = Memento_label(fz_malloc(ctx, (size_t)w * sh * n, __FILE__, __LINE__), "pdfocr_stripbuf");
 	writer->complen = compressBound((size_t)w * sh * n);
-	writer->compbuf = Memento_label(fz_malloc(ctx, writer->complen), "pdfocr_compbuf");
+	writer->compbuf = Memento_label(fz_malloc(ctx, writer->complen, __FILE__, __LINE__), "pdfocr_compbuf");
 	/* Always round the width of ocrbitmap up to a multiple of 4. */
 	writer->ocrbitmap = fz_new_pixmap(ctx, NULL, (w+3)&~3, h, NULL, 0);
 	fz_set_pixmap_resolution(ctx, writer->ocrbitmap, xres, yres);

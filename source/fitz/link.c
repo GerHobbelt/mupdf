@@ -13,7 +13,7 @@ fz_new_link(fz_context *ctx, fz_rect bbox, void *doc, const char *uri)
 	link->uri = NULL;
 
 	fz_try(ctx)
-		link->uri = fz_strdup(ctx, uri);
+		link->uri = fz_strdup(ctx, uri, __FILE__, __LINE__);
 	fz_catch(ctx)
 	{
 		fz_drop_link(ctx, link);

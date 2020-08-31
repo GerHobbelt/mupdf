@@ -61,7 +61,7 @@ static fz_context *leptonica_mem;
 
 static void *my_leptonica_malloc(size_t size)
 {
-	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size), "leptonica_malloc");
+	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size, __FILE__, __LINE__), "leptonica_malloc");
 #ifdef DEBUG_ALLOCS
 	printf("%d MY_LEPTONICA_MALLOC(%p) %d -> %p\n", event++, leptonica_mem, (int)size, ret);
 	fflush(stdout);

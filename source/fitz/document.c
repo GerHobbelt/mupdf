@@ -258,7 +258,7 @@ int fz_document_supports_accelerator(fz_context *ctx, fz_document *doc)
 void *
 fz_new_document_of_size(fz_context *ctx, int size)
 {
-	fz_document *doc = fz_calloc(ctx, 1, size);
+	fz_document *doc = fz_calloc(ctx, 1, size, __FILE__, __LINE__);
 	doc->refs = 1;
 	return doc;
 }
@@ -632,7 +632,7 @@ fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform,
 fz_page *
 fz_new_page_of_size(fz_context *ctx, int size)
 {
-	fz_page *page = Memento_label(fz_calloc(ctx, 1, size), "fz_page");
+	fz_page *page = Memento_label(fz_calloc(ctx, 1, size, __FILE__, __LINE__), "fz_page");
 	page->refs = 1;
 	return page;
 }

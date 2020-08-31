@@ -399,7 +399,7 @@ flush_word(fz_context *ctx, fz_ocr_device *ocr)
 			ocr->words = fz_realloc_array(ctx, ocr->words, new_max, word_record *);
 			ocr->words_max = new_max;
 		}
-		word = (word_record *)Memento_label(fz_malloc(ctx, sizeof(word_record) + sizeof(int) * (ocr->char_len-1)), "word_record");
+		word = (word_record *)Memento_label(fz_malloc(ctx, sizeof(word_record) + sizeof(int) * (ocr->char_len-1), __FILE__, __LINE__), "word_record");
 		word->len = ocr->char_len;
 		word->bbox = ocr->word_bbox;
 		word->n = 0;
@@ -526,7 +526,7 @@ fz_clone_text_span(fz_context *ctx, const fz_text_span *span)
 	cspan = fz_malloc_struct(ctx, fz_text_span);
 	*cspan = *span;
 	cspan->cap = cspan->len;
-	cspan->items = fz_malloc_no_throw(ctx, sizeof(*cspan->items) * cspan->len);
+	cspan->items = fz_malloc_no_throw(ctx, sizeof(*cspan->items) * cspan->len, __FILE__, __LINE__);
 	if (cspan->items == NULL)
 	{
 		fz_free(ctx, cspan);
@@ -1154,7 +1154,7 @@ fz_new_ocr_device(fz_context *ctx, fz_device *target, fz_matrix ctm, fz_rect med
 			res.y = 1;
 		fz_set_pixmap_resolution(ctx, dev->pixmap, res.x, res.y);
 
-		dev->language = fz_strdup(ctx, language ? language : "eng");
+		dev->language = fz_strdup(ctx, language ? language : "eng", __FILE__, __LINE__);
 
 		dev->draw_dev = fz_new_draw_device(ctx, fz_identity, dev->pixmap);
 		if (with_list)

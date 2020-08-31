@@ -19,7 +19,7 @@ static fz_tree *fz_tree_new_node(fz_context *ctx, const char *key, void *value)
 	fz_tree *node = fz_malloc_struct(ctx, fz_tree);
 	fz_try(ctx)
 	{
-		node->key = fz_strdup(ctx, key);
+		node->key = fz_strdup(ctx, key, __FILE__, __LINE__);
 		node->value = value;
 		node->left = node->right = &tree_sentinel;
 		node->level = 1;

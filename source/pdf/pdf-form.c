@@ -718,7 +718,7 @@ static char *get_field_name(fz_context *ctx, pdf_obj *field, int spare)
 		}
 		else
 		{
-			res = Memento_label(fz_malloc(ctx, spare+1), "form_field_name");
+			res = Memento_label(fz_malloc(ctx, spare+1, __FILE__, __LINE__), "form_field_name");
 			res[0] = 0;
 		}
 
@@ -1192,7 +1192,7 @@ static void validate_byte_ranges(fz_context *ctx, pdf_document *doc, fz_range *u
 	fz_range *sorted;
 	int i;
 
-	sorted = fz_calloc(ctx, nranges, sizeof(*sorted));
+	sorted = fz_calloc(ctx, nranges, sizeof(*sorted), __FILE__, __LINE__);
 	memcpy(sorted, unsorted, nranges * sizeof(*sorted));
 	qsort(sorted, nranges, sizeof(*sorted), rangecmp);
 
@@ -1233,7 +1233,7 @@ fz_stream *pdf_signature_hash_bytes(fz_context *ctx, pdf_document *doc, pdf_obj 
 		byte_range_len = pdf_signature_byte_range(ctx, doc, signature, NULL);
 		if (byte_range_len)
 		{
-			byte_range = fz_calloc(ctx, byte_range_len, sizeof(*byte_range));
+			byte_range = fz_calloc(ctx, byte_range_len, sizeof(*byte_range), __FILE__, __LINE__);
 			pdf_signature_byte_range(ctx, doc, signature, byte_range);
 		}
 
@@ -1267,7 +1267,7 @@ int pdf_signature_incremental_change_since_signing(fz_context *ctx, pdf_document
 			fz_range *last_range;
 			int64_t end_of_range;
 
-			byte_range = fz_calloc(ctx, byte_range_len, sizeof(*byte_range));
+			byte_range = fz_calloc(ctx, byte_range_len, sizeof(*byte_range), __FILE__, __LINE__);
 			pdf_signature_byte_range(ctx, doc, signature, byte_range);
 
 			last_range = &byte_range[byte_range_len -1];
@@ -1333,7 +1333,7 @@ size_t pdf_signature_contents(fz_context *ctx, pdf_document *doc, pdf_obj *signa
 
 		if (contents)
 		{
-			copy = Memento_label(fz_malloc(ctx, len), "sig_contents");
+			copy = Memento_label(fz_malloc(ctx, len, __FILE__, __LINE__), "sig_contents");
 			memcpy(copy, s, len);
 		}
 	}
@@ -1379,12 +1379,12 @@ static int load_xfa(fz_context *ctx, pdf_document *doc)
 		return 0; /* No XFA */
 
 	len = (pdf_array_len(ctx, xfa)+1)>>1;
-	doc->xfa.entries = fz_calloc(ctx, len, sizeof(pdf_xfa_entry));
+	doc->xfa.entries = fz_calloc(ctx, len, sizeof(pdf_xfa_entry), __FILE__, __LINE__);
 	doc->xfa.count = len;
 
 	for(i = 0; i < len; i++)
 	{
-		doc->xfa.entries[i].key = fz_strdup(ctx, pdf_to_text_string(ctx, pdf_array_get(ctx, xfa, i*2)));
+		doc->xfa.entries[i].key = fz_strdup(ctx, pdf_to_text_string(ctx, pdf_array_get(ctx, xfa, i*2)), __FILE__, __LINE__);
 		doc->xfa.entries[i].value = pdf_parse_xml(ctx, pdf_array_get(ctx, xfa, i*2+1));
 	}
 
@@ -1603,7 +1603,7 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 		v = pdf_new_dict(ctx, doc, 4);
 		pdf_update_object(ctx, doc, vnum, v);
 
-		buf = fz_calloc(ctx, max_digest_size, 1);
+		buf = fz_calloc(ctx, max_digest_size, 1, __FILE__, __LINE__);
 
 		/* Ensure that the /Filter entry is the first entry in the
 		   dictionary after the digest contents since we look for
@@ -1910,7 +1910,7 @@ void pdf_field_event_calculate(fz_context *ctx, pdf_document *doc, pdf_obj *fiel
 		pdf_obj *action = pdf_dict_getp(ctx, field, "AA/C/JS");
 		if (action)
 		{
-			char *old_value = fz_strdup(ctx, pdf_field_value(ctx, field));
+			char *old_value = fz_strdup(ctx, pdf_field_value(ctx, field), __FILE__, __LINE__);
 			char *new_value = NULL;
 			fz_var(new_value);
 			fz_try(ctx)

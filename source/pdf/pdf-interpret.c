@@ -10,7 +10,7 @@
 void *
 pdf_new_processor(fz_context *ctx, int size)
 {
-	return Memento_label(fz_calloc(ctx, 1, size), "pdf_processor");
+	return Memento_label(fz_calloc(ctx, 1, size, __FILE__, __LINE__), "pdf_processor");
 }
 
 void

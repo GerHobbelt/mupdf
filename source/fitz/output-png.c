@@ -113,7 +113,7 @@ png_write_icc(fz_context *ctx, png_band_writer *writer, fz_colorspace *cs)
 
 		fz_try(ctx)
 		{
-			chunk = fz_calloc(ctx, size, 1);
+			chunk = fz_calloc(ctx, size, 1, __FILE__, __LINE__);
 			pos = chunk;
 			memcpy(chunk, name, strlen(name));
 			pos += strlen(name) + 2;
@@ -204,8 +204,8 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 		 * larger than compressBound outputted in one go, even if you
 		 * take all the data out each time. */
 		writer->csize = compressBound(writer->usize);
-		writer->udata = Memento_label(fz_malloc(ctx, writer->usize), "png_write_udata");
-		writer->cdata = Memento_label(fz_malloc(ctx, writer->csize), "png_write_cdata");
+		writer->udata = Memento_label(fz_malloc(ctx, writer->usize, __FILE__, __LINE__), "png_write_udata");
+		writer->cdata = Memento_label(fz_malloc(ctx, writer->csize, __FILE__, __LINE__), "png_write_cdata");
 		writer->stream.opaque = ctx;
 		writer->stream.zalloc = fz_zlib_alloc;
 		writer->stream.zfree = fz_zlib_free;
@@ -286,7 +286,7 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 			if (err == Z_OK)
 			{
 				/* more output space needed, try again */
-				writer->cdata = Memento_label(fz_realloc(ctx, writer->cdata, writer->csize << 2), "realloc png_write_cdata");
+				writer->cdata = Memento_label(fz_realloc(ctx, writer->cdata, writer->csize << 2, __FILE__, __LINE__), "realloc png_write_cdata");
 				writer->csize <<= 2;
 				continue;
 			}

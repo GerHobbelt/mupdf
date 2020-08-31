@@ -511,13 +511,13 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 			}
 		}
 
-		app->docpath = fz_strdup(ctx, filename);
+		app->docpath = fz_strdup(ctx, filename, __FILE__, __LINE__);
 		app->doctitle = filename;
 		if (strrchr(app->doctitle, '\\'))
 			app->doctitle = strrchr(app->doctitle, '\\') + 1;
 		if (strrchr(app->doctitle, '/'))
 			app->doctitle = strrchr(app->doctitle, '/') + 1;
-		app->doctitle = fz_strdup(ctx, app->doctitle);
+		app->doctitle = fz_strdup(ctx, app->doctitle, __FILE__, __LINE__);
 
 		fz_layout_document(app->ctx, app->doc, app->layout_w, app->layout_h, app->layout_em);
 

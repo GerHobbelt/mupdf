@@ -5,7 +5,7 @@
 fz_device *
 fz_new_device_of_size(fz_context *ctx, int size)
 {
-	fz_device *dev = Memento_label(fz_calloc(ctx, 1, size), "fz_device");
+	fz_device *dev = Memento_label(fz_calloc(ctx, 1, size, __FILE__, __LINE__), "fz_device");
 	dev->refs = 1;
 	return dev;
 }

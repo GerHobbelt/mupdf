@@ -20,8 +20,8 @@ typedef struct fz_context fz_context;
 typedef struct
 {
 	void *user;
-	void *(*malloc_)(void *, size_t);
-	void *(*realloc_)(void *, void *, size_t);
+	void *(*malloc_)(void *, size_t, const char* __file, int __line);
+	void *(*realloc_)(void *, void *, size_t, const char* __file, int __line);
 	void (*free_)(void *, void *);
 } fz_alloc_context;
 
@@ -183,7 +183,7 @@ enum {
 
 	May return NULL.
 */
-fz_context *fz_clone_context(fz_context *ctx);
+fz_context *fz_clone_context(fz_context *ctx, const char* __file, int __line);
 
 /**
 	Free a context and its global state.
@@ -423,7 +423,7 @@ void fz_disable_icc(fz_context *ctx);
 	Throws exception in the event of failure to allocate.
 */
 #define fz_malloc_struct(CTX, TYPE) \
-	((TYPE*)Memento_label(fz_calloc(CTX, 1, sizeof(TYPE)), #TYPE))
+	((TYPE*)Memento_label(fz_calloc(CTX, 1, sizeof(TYPE), __FILE__, __LINE__), #TYPE))
 
 /**
 	Allocate uninitialized memory for an array of structures, and
@@ -432,9 +432,9 @@ void fz_disable_icc(fz_context *ctx);
 	Throws exception in the event of failure to allocate.
 */
 #define fz_malloc_array(CTX, COUNT, TYPE) \
-	((TYPE*)Memento_label(fz_malloc(CTX, (COUNT) * sizeof(TYPE)), #TYPE "[]"))
+	((TYPE*)Memento_label(fz_malloc(CTX, (COUNT) * sizeof(TYPE), __FILE__, __LINE__), #TYPE "[]"))
 #define fz_realloc_array(CTX, OLD, COUNT, TYPE) \
-	((TYPE*)Memento_label(fz_realloc(CTX, OLD, (COUNT) * sizeof(TYPE)), #TYPE "[]"))
+	((TYPE*)Memento_label(fz_realloc(CTX, OLD, (COUNT) * sizeof(TYPE), __FILE__, __LINE__), #TYPE "[]"))
 
 /**
 	Allocate uninitialized memory of a given size.
@@ -444,7 +444,7 @@ void fz_disable_icc(fz_context *ctx);
 
 	Throws exception in the event of failure to allocate.
 */
-void *fz_malloc(fz_context *ctx, size_t size);
+void *fz_malloc(fz_context *ctx, size_t size, const char* __file, int __line);
 
 /**
 	Allocate array of memory of count entries of size bytes.
@@ -452,7 +452,7 @@ void *fz_malloc(fz_context *ctx, size_t size);
 
 	Throws exception in the event of failure to allocate.
 */
-void *fz_calloc(fz_context *ctx, size_t count, size_t size);
+void *fz_calloc(fz_context *ctx, size_t count, size_t size, const char* __file, int __line);
 
 /**
 	Reallocates a block of memory to given size. Existing contents
@@ -465,7 +465,7 @@ void *fz_calloc(fz_context *ctx, size_t count, size_t size);
 
 	Throws exception in the event of failure to allocate.
 */
-void *fz_realloc(fz_context *ctx, void *p, size_t size);
+void *fz_realloc(fz_context *ctx, void *p, size_t size, const char* __file, int __line);
 
 /**
 	Free a previously allocated block of memory.
@@ -480,24 +480,24 @@ void fz_free(fz_context *ctx, const void *p);
 	fz_malloc equivalent that returns NULL rather than throwing
 	exceptions.
 */
-void *fz_malloc_no_throw(fz_context *ctx, size_t size);
+void *fz_malloc_no_throw(fz_context *ctx, size_t size, const char* __file, int __line);
 
 /**
 	fz_calloc equivalent that returns NULL rather than throwing
 	exceptions.
 */
-void *fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size);
+void *fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size, const char* __file, int __line);
 
 /**
 	fz_realloc equivalent that returns NULL rather than throwing
 	exceptions.
 */
-void *fz_realloc_no_throw(fz_context *ctx, void *p, size_t size);
+void *fz_realloc_no_throw(fz_context *ctx, void *p, size_t size, const char* __file, int __line);
 
 /**
 	Portable strdup implementation, using fz allocators.
 */
-char *fz_strdup(fz_context *ctx, const char *s);
+char *fz_strdup(fz_context *ctx, const char *s, const char* __file, int __line);
 
 /**
 	Fill block with len bytes of pseudo-randomness.

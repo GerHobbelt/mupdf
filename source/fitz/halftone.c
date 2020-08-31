@@ -15,7 +15,7 @@ fz_new_halftone(fz_context *ctx, int comps)
 	fz_halftone *ht;
 	int i;
 
-	ht = Memento_label(fz_malloc(ctx, sizeof(fz_halftone) + (comps-1)*sizeof(fz_pixmap *)), "fz_halftone");
+	ht = Memento_label(fz_malloc(ctx, sizeof(fz_halftone) + (comps-1)*sizeof(fz_pixmap *), __FILE__, __LINE__), "fz_halftone");
 	ht->refs = 1;
 	ht->n = comps;
 	for (i = 0; i < comps; i++)
@@ -569,7 +569,7 @@ fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, fz_pixmap *pix, fz_ha
 
 	fz_try(ctx)
 	{
-		ht_line = fz_malloc(ctx, lcm * n);
+		ht_line = fz_malloc(ctx, lcm * n, __FILE__, __LINE__);
 		out = fz_new_bitmap(ctx, pix->w, pix->h, n, pix->xres, pix->yres);
 		o = out->samples;
 		p = pix->samples;

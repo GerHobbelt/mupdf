@@ -90,7 +90,7 @@ fz_new_svg_writer(fz_context *ctx, const char *path, const char *args)
 		if (fz_has_option(ctx, args, "no-reuse-images", &val))
 			if (fz_option_eq(val, "yes"))
 				wri->reuse_images = 0;
-		wri->path = fz_strdup(ctx, path ? path : "out-%04d.svg");
+		wri->path = fz_strdup(ctx, path ? path : "out-%04d.svg", __FILE__, __LINE__);
 	}
 	fz_catch(ctx)
 	{

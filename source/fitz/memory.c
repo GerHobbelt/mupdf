@@ -24,14 +24,14 @@
  */
 
 static void *
-do_scavenging_malloc(fz_context *ctx, size_t size)
+do_scavenging_malloc(fz_context *ctx, size_t size, const char *__file, int __line)
 {
 	void *p;
 	int phase = 0;
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
-		p = ctx->alloc.malloc_(ctx->alloc.user, size);
+		p = ctx->alloc.malloc_(ctx->alloc.user, size, __file, __line);
 		if (p != NULL)
 		{
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -44,14 +44,14 @@ do_scavenging_malloc(fz_context *ctx, size_t size)
 }
 
 static void *
-do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
+do_scavenging_realloc(fz_context *ctx, void *p, size_t size, const char* __file, int __line)
 {
 	void *q;
 	int phase = 0;
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
-		q = ctx->alloc.realloc_(ctx->alloc.user, p, size);
+		q = ctx->alloc.realloc_(ctx->alloc.user, p, size, __file, __line);
 		if (q != NULL)
 		{
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -64,34 +64,34 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
 }
 
 void *
-fz_malloc(fz_context *ctx, size_t size)
+fz_malloc(fz_context *ctx, size_t size, const char* __file, int __line)
 {
 	void *p;
 	if (size == 0)
 		return NULL;
-	p = do_scavenging_malloc(ctx, size);
+	p = do_scavenging_malloc(ctx, size, __file, __line);
 	if (!p)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "malloc of %zu bytes failed", size);
 	return p;
 }
 
 void *
-fz_malloc_no_throw(fz_context *ctx, size_t size)
+fz_malloc_no_throw(fz_context *ctx, size_t size, const char* __file, int __line)
 {
 	if (size == 0)
 		return NULL;
-	return do_scavenging_malloc(ctx, size);
+	return do_scavenging_malloc(ctx, size, __file, __line);
 }
 
 void *
-fz_calloc(fz_context *ctx, size_t count, size_t size)
+fz_calloc(fz_context *ctx, size_t count, size_t size, const char* __file, int __line)
 {
 	void *p;
 	if (count == 0 || size == 0)
 		return NULL;
 	if (count > SIZE_MAX / size)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "calloc (%zu x %zu bytes) failed (size_t overflow)", count, size);
-	p = do_scavenging_malloc(ctx, count * size);
+	p = do_scavenging_malloc(ctx, count * size, __file, __line);
 	if (!p)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "calloc (%zu x %zu bytes) failed", count, size);
 	memset(p, 0, count*size);
@@ -99,42 +99,42 @@ fz_calloc(fz_context *ctx, size_t count, size_t size)
 }
 
 void *
-fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size)
+fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size, const char* __file, int __line)
 {
 	void *p;
 	if (count == 0 || size == 0)
 		return NULL;
 	if (count > SIZE_MAX / size)
 		return NULL;
-	p = do_scavenging_malloc(ctx, count * size);
+	p = do_scavenging_malloc(ctx, count * size, __file, __line);
 	if (p)
 		memset(p, 0, count * size);
 	return p;
 }
 
 void *
-fz_realloc(fz_context *ctx, void *p, size_t size)
+fz_realloc(fz_context *ctx, void *p, size_t size, const char* __file, int __line)
 {
 	if (size == 0)
 	{
 		fz_free(ctx, p);
 		return NULL;
 	}
-	p = do_scavenging_realloc(ctx, p, size);
+	p = do_scavenging_realloc(ctx, p, size, __file, __line);
 	if (!p)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "realloc (%zu bytes) failed", size);
 	return p;
 }
 
 void *
-fz_realloc_no_throw(fz_context *ctx, void *p, size_t size)
+fz_realloc_no_throw(fz_context *ctx, void *p, size_t size, const char* __file, int __line)
 {
 	if (size == 0)
 	{
 		fz_free(ctx, p);
 		return NULL;
 	}
-	return do_scavenging_realloc(ctx, p, size);
+	return do_scavenging_realloc(ctx, p, size, __file, __line);
 }
 
 void
@@ -149,24 +149,24 @@ fz_free(fz_context *ctx, const void *p)
 }
 
 char *
-fz_strdup(fz_context *ctx, const char *s)
+fz_strdup(fz_context *ctx, const char *s, const char* __file, int __line)
 {
 	size_t len = strlen(s) + 1;
-	char *ns = fz_malloc(ctx, len);
+	char *ns = fz_malloc(ctx, len, __file, __line);
 	memcpy(ns, s, len);
 	return ns;
 }
 
 static void *
-fz_malloc_default(void *opaque, size_t size)
+fz_malloc_default(void *opaque, size_t size, const char* __file, int __line)
 {
-	return malloc(size);
+	return _malloc_dbg(size, _NORMAL_BLOCK, __file, __line);
 }
 
 static void *
-fz_realloc_default(void *opaque, void *old, size_t size)
+fz_realloc_default(void *opaque, void *old, size_t size, const char* __file, int __line)
 {
-	return realloc(old, size);
+	return _realloc_dbg(old, size, _NORMAL_BLOCK, __file, __line);
 }
 
 static void

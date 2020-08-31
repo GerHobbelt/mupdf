@@ -178,7 +178,7 @@ gif_read_gct(fz_context *ctx, struct info *info, const unsigned char *p, const u
 	if (end - p < info->gct_entries * 3)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "premature end in global color table in gif image");
 
-	info->gct = Memento_label(fz_malloc(ctx, info->gct_entries * 3), "gif_gct");
+	info->gct = Memento_label(fz_malloc(ctx, info->gct_entries * 3, __FILE__, __LINE__), "gif_gct");
 	memmove(info->gct, p, info->gct_entries * 3);
 
 	return p + info->gct_entries * 3;
@@ -209,7 +209,7 @@ gif_read_lct(fz_context *ctx, struct info *info, const unsigned char *p, const u
 	if (end - p < info->lct_entries * 3)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "premature end in local color table in gif image");
 
-	info->lct = Memento_label(fz_malloc(ctx, info->lct_entries * 3), "gif_lct");
+	info->lct = Memento_label(fz_malloc(ctx, info->lct_entries * 3, __FILE__, __LINE__), "gif_lct");
 	memmove(info->lct, p, info->lct_entries * 3);
 
 	return p + info->lct_entries * 3;
@@ -474,7 +474,7 @@ gif_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 
 	fz_try(ctx)
 	{
-		info->mask = fz_calloc(ctx, (size_t)info->width * info->height, 1);
+		info->mask = fz_calloc(ctx, (size_t)info->width * info->height, 1, __FILE__, __LINE__);
 
 		/* Read optional global color table */
 		if (info->has_gct)

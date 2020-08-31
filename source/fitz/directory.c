@@ -80,7 +80,7 @@ fz_open_directory(fz_context *ctx, const char *path)
 
 	fz_try(ctx)
 	{
-		dir->path = fz_strdup(ctx, path);
+		dir->path = fz_strdup(ctx, path, __FILE__, __LINE__);
 	}
 	fz_catch(ctx)
 	{

@@ -242,7 +242,7 @@ int fz_reset_rasterizer(fz_context *ctx, fz_rasterizer *rast, fz_irect clip)
 
 void *fz_new_rasterizer_of_size(fz_context *ctx, int size, const fz_rasterizer_fns *fns)
 {
-	fz_rasterizer *rast = fz_calloc(ctx, 1, size);
+	fz_rasterizer *rast = fz_calloc(ctx, 1, size, __FILE__, __LINE__);
 
 	rast->fns = *fns;
 	rast->clip.x0 = rast->clip.y0 = BBOX_MIN;

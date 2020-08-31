@@ -160,7 +160,7 @@ expand_lists(fz_context *ctx, pdf_write_state *opts, int num)
 static page_objects_list *
 page_objects_list_create(fz_context *ctx)
 {
-	page_objects_list *pol = fz_calloc(ctx, 1, sizeof(*pol));
+	page_objects_list *pol = fz_calloc(ctx, 1, sizeof(*pol), __FILE__, __LINE__);
 
 	pol->cap = 1;
 	pol->len = 0;
@@ -187,7 +187,7 @@ page_objects_list_ensure(fz_context *ctx, page_objects_list **pol, int newcap)
 	int oldcap = (*pol)->cap;
 	if (newcap <= oldcap)
 		return;
-	*pol = fz_realloc(ctx, *pol, sizeof(page_objects_list) + (newcap-1)*sizeof(page_objects *));
+	*pol = fz_realloc(ctx, *pol, sizeof(page_objects_list) + (newcap-1)*sizeof(page_objects *), __FILE__, __LINE__);
 	memset(&(*pol)->page[oldcap], 0, (newcap-oldcap)*sizeof(page_objects *));
 	(*pol)->cap = newcap;
 }
@@ -196,7 +196,7 @@ static page_objects *
 page_objects_create(fz_context *ctx)
 {
 	int initial_cap = 8;
-	page_objects *po = fz_calloc(ctx, 1, sizeof(*po) + (initial_cap-1) * sizeof(int));
+	page_objects *po = fz_calloc(ctx, 1, sizeof(*po) + (initial_cap-1) * sizeof(int), __FILE__, __LINE__);
 
 	po->cap = initial_cap;
 	po->len = 0;
@@ -216,7 +216,7 @@ page_objects_insert(fz_context *ctx, page_objects **ppo, int i)
 	/* page_objects insertion: extend the page_objects by 1, and put us on the end */
 	if (po->len == po->cap)
 	{
-		po = fz_realloc(ctx, po, sizeof(page_objects) + (po->cap*2 - 1)*sizeof(int));
+		po = fz_realloc(ctx, po, sizeof(page_objects) + (po->cap*2 - 1)*sizeof(int), __FILE__, __LINE__);
 		po->cap *= 2;
 		*ppo = po;
 	}
@@ -915,7 +915,7 @@ static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 	int *new_use_list;
 	int xref_len = pdf_xref_len(ctx, doc);
 
-	new_use_list = fz_calloc(ctx, pdf_xref_len(ctx, doc)+3, sizeof(int));
+	new_use_list = fz_calloc(ctx, pdf_xref_len(ctx, doc)+3, sizeof(int), __FILE__, __LINE__);
 
 	fz_var(newxref);
 	fz_try(ctx)
@@ -1505,8 +1505,8 @@ linearize(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 #endif
 
 	/* Allocate/init the structures used for renumbering the objects */
-	reorder = fz_calloc(ctx, n, sizeof(int));
-	rev_renumber_map = fz_calloc(ctx, n, sizeof(int));
+	reorder = fz_calloc(ctx, n, sizeof(int), __FILE__, __LINE__);
+	rev_renumber_map = fz_calloc(ctx, n, sizeof(int), __FILE__, __LINE__);
 	for (i = 0; i < n; i++)
 	{
 		reorder[i] = i;
@@ -1648,7 +1648,7 @@ static fz_buffer *hexbuf(fz_context *ctx, fz_buffer *input)
 	static const char hex[17] = "0123456789abcdef";
 	int x = 0;
 	size_t len = n * 2 + (n / 32) + 1;
-	unsigned char *data = Memento_label(fz_malloc(ctx, len), "hexbuf");
+	unsigned char *data = Memento_label(fz_malloc(ctx, len, __FILE__, __LINE__), "hexbuf");
 	unsigned char *p = data;
 	unsigned char *s = input->data;
 
@@ -2827,7 +2827,7 @@ static void complete_signatures(fz_context *ctx, pdf_document *doc, pdf_write_st
 
 				buf_size = buf_size * 2 + SIG_EXTRAS_SIZE;
 
-				buf = fz_calloc(ctx, buf_size, 1);
+				buf = fz_calloc(ctx, buf_size, 1, __FILE__, __LINE__);
 
 				stm = fz_stream_from_output(ctx, opts->out);
 				/* Locate the byte ranges and contents in the saved file */

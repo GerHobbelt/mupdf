@@ -356,7 +356,7 @@ epub_load_chapter(fz_context *ctx, epub_document *doc, const char *path, int i)
 	ch = fz_malloc_struct(ctx, epub_chapter);
 	fz_try(ctx)
 	{
-		ch->path = Memento_label(fz_strdup(ctx, path), "chapter_path");
+		ch->path = Memento_label(fz_strdup(ctx, path, __FILE__, __LINE__), "chapter_path");
 		ch->number = i;
 	}
 	fz_catch(ctx)
@@ -604,8 +604,8 @@ epub_parse_ncx_imp(fz_context *ctx, epub_document *doc, fz_xml *node, char *base
 			{
 				*tailp = outline = fz_new_outline(ctx);
 				tailp = &(*tailp)->next;
-				outline->title = Memento_label(fz_strdup(ctx, text), "outline_title");
-				outline->uri = Memento_label(fz_strdup(ctx, path), "outline_uri");
+				outline->title = Memento_label(fz_strdup(ctx, text, __FILE__, __LINE__), "outline_title");
+				outline->uri = Memento_label(fz_strdup(ctx, path, __FILE__, __LINE__), "outline_uri");
 				outline->page = -1;
 				outline->down = epub_parse_ncx_imp(ctx, doc, node, base_uri);
 				outline->is_open = 1;
@@ -654,7 +654,7 @@ find_metadata(fz_context *ctx, fz_xml *metadata, char *key)
 {
 	char *text = fz_xml_text(fz_xml_down(fz_xml_find_down(metadata, key)));
 	if (text)
-		return fz_strdup(ctx, text);
+		return fz_strdup(ctx, text, __FILE__, __LINE__);
 	return NULL;
 }
 

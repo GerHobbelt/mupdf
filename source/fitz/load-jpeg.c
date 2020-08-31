@@ -28,7 +28,7 @@ static void *
 fz_jpg_mem_alloc(j_common_ptr cinfo, size_t size)
 {
 	fz_context *ctx = JZ_CTX_FROM_CINFO(cinfo);
-	return fz_malloc_no_throw(ctx, size);
+	return fz_malloc_no_throw(ctx, size, __FILE__, __LINE__);
 }
 
 static void
@@ -374,7 +374,7 @@ fz_load_jpeg(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 
 		fz_clear_pixmap(ctx, image);
 
-		row[0] = fz_malloc(ctx, (size_t)cinfo.output_components * cinfo.output_width);
+		row[0] = fz_malloc(ctx, (size_t)cinfo.output_components * cinfo.output_width, __FILE__, __LINE__);
 		dp = image->samples;
 		stride = image->stride - image->w * image->n;
 		while (cinfo.output_scanline < cinfo.output_height)

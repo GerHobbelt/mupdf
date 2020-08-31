@@ -552,7 +552,7 @@ void *opj_malloc(size_t size)
 
 	assert(ctx != NULL);
 
-	return Memento_label(fz_malloc_no_throw(ctx, size), "opj_malloc");
+	return Memento_label(fz_malloc_no_throw(ctx, size, __FILE__, __LINE__), "opj_malloc");
 }
 
 void *opj_calloc(size_t n, size_t size)
@@ -561,7 +561,7 @@ void *opj_calloc(size_t n, size_t size)
 
 	assert(ctx != NULL);
 
-	return fz_calloc_no_throw(ctx, n, size);
+	return fz_calloc_no_throw(ctx, n, size, __FILE__, __LINE__);
 }
 
 void *opj_realloc(void *ptr, size_t size)
@@ -570,7 +570,7 @@ void *opj_realloc(void *ptr, size_t size)
 
 	assert(ctx != NULL);
 
-	return fz_realloc_no_throw(ctx, ptr, size);
+	return fz_realloc_no_throw(ctx, ptr, size, __FILE__, __LINE__);
 }
 
 void opj_free(void *ptr)

@@ -34,8 +34,8 @@ fz_add_html_font_face(fz_context *ctx, fz_html_font_set *set,
 {
 	fz_html_font_face *custom = fz_malloc_struct(ctx, fz_html_font_face);
 	custom->font = fz_keep_font(ctx, font);
-	custom->src = fz_strdup(ctx, src);
-	custom->family = fz_strdup(ctx, family);
+	custom->src = fz_strdup(ctx, src, __FILE__, __LINE__);
+	custom->family = fz_strdup(ctx, family, __FILE__, __LINE__);
 	custom->is_bold = is_bold;
 	custom->is_italic = is_italic;
 	custom->is_small_caps = is_small_caps;

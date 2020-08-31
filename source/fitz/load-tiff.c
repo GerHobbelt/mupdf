@@ -255,7 +255,7 @@ tiff_expand_colormap(fz_context *ctx, struct tiff *tiff)
 
 	stride = tiff->imagewidth * (tiff->samplesperpixel + 2) * 2;
 
-	samples = Memento_label(fz_malloc(ctx, (size_t)stride * tiff->imagelength), "tiff_samples");
+	samples = Memento_label(fz_malloc(ctx, (size_t)stride * tiff->imagelength, __FILE__, __LINE__), "tiff_samples");
 
 	for (y = 0; y < tiff->imagelength; y++)
 	{
@@ -315,7 +315,7 @@ tiff_decode_data(fz_context *ctx, struct tiff *tiff, const unsigned char *rp, un
 	/* the bits are in un-natural order */
 	if (tiff->fillorder == 2)
 	{
-		reversed = fz_malloc(ctx, rlen);
+		reversed = fz_malloc(ctx, rlen, __FILE__, __LINE__);
 		for (i = 0; i < rlen; i++)
 			reversed[i] = bitrev[rp[i]];
 		rp = reversed;
@@ -602,7 +602,7 @@ tiff_decode_tiles(fz_context *ctx, struct tiff *tiff)
 		else
 			wlen = tiff->tilestride * tiff->ycbcrsubsamp[1];
 
-		data = tiff->data = Memento_label(fz_malloc(ctx, wlen), "tiff_tile_jpg");
+		data = tiff->data = Memento_label(fz_malloc(ctx, wlen, __FILE__, __LINE__), "tiff_tile_jpg");
 
 		tile = 0;
 		for (x = 0; x < tiff->imagelength; x += tiff->tilelength)
@@ -628,7 +628,7 @@ tiff_decode_tiles(fz_context *ctx, struct tiff *tiff)
 	else
 	{
 		wlen = tiff->tilelength * tiff->tilestride;
-		data = tiff->data = Memento_label(fz_malloc(ctx, wlen), "tiff_tile");
+		data = tiff->data = Memento_label(fz_malloc(ctx, wlen, __FILE__, __LINE__), "tiff_tile");
 
 		tile = 0;
 		for (x = 0; x < tiff->imagelength; x += tiff->tilelength)
@@ -681,7 +681,7 @@ tiff_decode_strips(fz_context *ctx, struct tiff *tiff)
 			rowsperstrip = tiff->ycbcrsubsamp[1];
 
 		wlen = rowsperstrip * tiff->stride;
-		data = tiff->data = Memento_label(fz_malloc(ctx, wlen), "tiff_strip_jpg");
+		data = tiff->data = Memento_label(fz_malloc(ctx, wlen, __FILE__, __LINE__), "tiff_strip_jpg");
 
 		strip = 0;
 		for (y = 0; y < tiff->imagelength; y += rowsperstrip)
@@ -881,7 +881,7 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 	case ICCProfile:
 		if (tiff->profile)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one ICC profile tag allowed");
-		tiff->profile = Memento_label(fz_malloc(ctx, count), "tiff_profile");
+		tiff->profile = Memento_label(fz_malloc(ctx, count, __FILE__, __LINE__), "tiff_profile");
 		/* ICC profile data type is set to UNDEFINED.
 		 * TBYTE reading not correct in tiff_read_tag_value */
 		tiff_read_bytes(tiff->profile, tiff, value, count);
@@ -1296,7 +1296,7 @@ tiff_decode_samples(fz_context *ctx, struct tiff *tiff)
 
 	if (tiff->imagelength > UINT_MAX / tiff->stride)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "image too large");
-	tiff->samples = Memento_label(fz_malloc(ctx, (size_t)tiff->imagelength * tiff->stride), "tiff_samples");
+	tiff->samples = Memento_label(fz_malloc(ctx, (size_t)tiff->imagelength * tiff->stride, __FILE__, __LINE__), "tiff_samples");
 	memset(tiff->samples, 0x55, (size_t)tiff->imagelength * tiff->stride);
 
 	if (tiff->tilelength && tiff->tilewidth && tiff->tileoffsets && tiff->tilebytecounts)

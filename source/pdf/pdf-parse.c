@@ -285,7 +285,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 			}
 		}
 
-		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1), "utf8_from_utf16be");
+		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1, __FILE__, __LINE__), "utf8_from_utf16be");
 
 		i = 2;
 		while (i + 2 <= srclen)
@@ -317,7 +317,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 			}
 		}
 
-		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1), "utf8_from_utf16le");
+		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1, __FILE__, __LINE__), "utf8_from_utf16le");
 
 		i = 2;
 		while (i + 2 <= srclen)
@@ -349,7 +349,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 			}
 		}
 
-		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1), "utf8_from_utf8");
+		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1, __FILE__, __LINE__), "utf8_from_utf8");
 
 		i = 3;
 		while (i < srclen)
@@ -365,7 +365,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 	/* Detect UTF-8 strings that aren't marked with a BOM */
 	else if (is_valid_utf8(srcptr, srcptr + srclen))
 	{
-		dst = Memento_label(fz_malloc(ctx, srclen + 1), "utf8_from_guess");
+		dst = Memento_label(fz_malloc(ctx, srclen + 1, __FILE__, __LINE__), "utf8_from_guess");
 		memcpy(dst, srcptr, srclen);
 		dstptr = dst + srclen;
 	}
@@ -376,7 +376,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 		for (i = 0; i < srclen; i++)
 			dstlen += fz_runelen(fz_unicode_from_pdf_doc_encoding[srcptr[i]]);
 
-		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1), "utf8_from_pdfdocenc");
+		dstptr = dst = Memento_label(fz_malloc(ctx, dstlen + 1, __FILE__, __LINE__), "utf8_from_pdfdocenc");
 
 		for (i = 0; i < srclen; i++)
 		{
@@ -441,7 +441,7 @@ pdf_new_text_string_utf16be(fz_context *ctx, const char *s)
 		n += (c >= 0x10000) ? 2 : 1;
 	}
 
-	p = fz_malloc(ctx, n * 2 + 2);
+	p = fz_malloc(ctx, n * 2 + 2, __FILE__, __LINE__);
 	i = 0;
 	p[i++] = 254;
 	p[i++] = 255;

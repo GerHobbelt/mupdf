@@ -263,10 +263,10 @@ error_callback(void *data, const char *msg, Jbig2Severity severity, uint32_t seg
 #endif
 }
 
-static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
+static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size, const char *__file, int __line)
 {
 	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->ctx;
-	return fz_malloc_no_throw(ctx, size);
+	return fz_malloc_no_throw(ctx, size, __file, __line);
 }
 
 static void fz_jbig2_free(Jbig2Allocator *allocator, void *p)
@@ -275,7 +275,7 @@ static void fz_jbig2_free(Jbig2Allocator *allocator, void *p)
 	fz_free(ctx, p);
 }
 
-static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size)
+static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size, const char* __file, int __line)
 {
 	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->ctx;
 	if (size == 0)
@@ -284,8 +284,8 @@ static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size)
 		return NULL;
 	}
 	if (p == NULL)
-		return Memento_label(fz_malloc(ctx, size), "jbig2_realloc");
-	return Memento_label(fz_realloc_no_throw(ctx, p, size), "jbig2_realloc");
+		return Memento_label(fz_malloc(ctx, size, __file, __line), "jbig2_realloc");
+	return Memento_label(fz_realloc_no_throw(ctx, p, size, __file, __line), "jbig2_realloc");
 }
 
 static fz_pixmap *

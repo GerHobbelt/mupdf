@@ -423,7 +423,7 @@ unknown_compression:
 				int h = pixmap->h;
 				int w = pixmap->w;
 				unsigned char *s = pixmap->samples;
-				unsigned char *d = fz_calloc(ctx, h, stride);
+				unsigned char *d = fz_calloc(ctx, h, stride, __FILE__, __LINE__);
 				buffer = fz_new_buffer_from_data(ctx, d, (size_t)h * stride);
 
 				pdf_dict_put_int(ctx, imobj, PDF_NAME(BitsPerComponent), 1);
@@ -443,7 +443,7 @@ unknown_compression:
 				size_t size = (size_t)pixmap->w * n;
 				int h = pixmap->h;
 				unsigned char *s = pixmap->samples;
-				unsigned char *d = Memento_label(fz_malloc(ctx, size * h), "pdf_image_samples");
+				unsigned char *d = Memento_label(fz_malloc(ctx, size * h, __FILE__, __LINE__), "pdf_image_samples");
 				buffer = fz_new_buffer_from_data(ctx, d, size * h);
 
 				pdf_dict_put_int(ctx, imobj, PDF_NAME(BitsPerComponent), 8);

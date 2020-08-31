@@ -753,7 +753,7 @@ void pdf_drop_js(fz_context *ctx, pdf_js *js)
 
 static void *pdf_js_alloc(void *actx, void *ptr, int n)
 {
-	return fz_realloc_no_throw(actx, ptr, n);
+	return fz_realloc_no_throw(actx, ptr, n, __FILE__, __LINE__);
 }
 
 static pdf_js *pdf_new_js(fz_context *ctx, pdf_document *doc)
@@ -891,7 +891,7 @@ int pdf_js_event_result_keystroke(pdf_js *js, pdf_keystroke_event *evt)
 			if (rc)
 			{
 				js_getproperty(js->imp, -1, "change");
-				evt->newChange = fz_strdup(js->ctx, js_trystring(js->imp, -1, ""));
+				evt->newChange = fz_strdup(js->ctx, js_trystring(js->imp, -1, ""), __FILE__, __LINE__);
 				js_pop(js->imp, 1);
 				js_getproperty(js->imp, -1, "selStart");
 				evt->selStart = js_tryinteger(js->imp, -1, 0);
@@ -913,7 +913,7 @@ char *pdf_js_event_value(pdf_js *js)
 	{
 		js_getglobal(js->imp, "event");
 		js_getproperty(js->imp, -1, "value");
-		value = fz_strdup(js->ctx, js_trystring(js->imp, -1, "undefined"));
+		value = fz_strdup(js->ctx, js_trystring(js->imp, -1, "undefined"), __FILE__, __LINE__);
 		js_pop(js->imp, 2);
 	}
 	return value;

@@ -103,7 +103,7 @@ static void ensure_tar_entries(fz_context *ctx, fz_tar_archive *tar)
 
 		if (typeflag == TYPE_LONG_NAME)
 		{
-			longname = fz_malloc(ctx, size);
+			longname = fz_malloc(ctx, size, __FILE__, __LINE__);
 			n = fz_read(ctx, file, (unsigned char *) longname, size);
 			if (n < (size_t) size)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "premature end of data in tar long name entry name");
@@ -128,7 +128,7 @@ static void ensure_tar_entries(fz_context *ctx, fz_tar_archive *tar)
 			longname = NULL;
 		}
 		else
-			tar->entries[tar->count].name = fz_strdup(ctx, name);
+			tar->entries[tar->count].name = fz_strdup(ctx, name, __FILE__, __LINE__);
 
 		tar->count++;
 	}

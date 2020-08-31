@@ -2166,7 +2166,7 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 		proc->path = fz_new_path(ctx);
 
 		proc->gcap = 64;
-		proc->gstate = fz_calloc(ctx, proc->gcap, sizeof(pdf_gstate));
+		proc->gstate = fz_calloc(ctx, proc->gcap, sizeof(pdf_gstate), __FILE__, __LINE__);
 
 		proc->gtop = 0;
 		pdf_init_gstate(ctx, &proc->gstate[0], ctm);

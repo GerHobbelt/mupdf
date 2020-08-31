@@ -129,7 +129,7 @@ fz_open_thunder(fz_context *ctx, fz_stream *chain, int w)
 		state->pixel = 0;
 		state->lastpixel = 0;
 		state->len = w / 2;
-		state->buffer = Memento_label(fz_malloc(ctx, state->len), "thunder_buffer");
+		state->buffer = Memento_label(fz_malloc(ctx, state->len, __FILE__, __LINE__), "thunder_buffer");
 		state->chain = fz_keep_stream(ctx, chain);
 	}
 	fz_catch(ctx)

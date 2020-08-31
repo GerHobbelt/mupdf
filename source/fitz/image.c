@@ -374,7 +374,7 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image
 		stride = (w * image->n * image->bpc + 7) / 8;
 		if ((size_t)h > (size_t)(SIZE_MAX / stride))
 			fz_throw(ctx, FZ_ERROR_MEMORY, "image too large");
-		samples = Memento_label(fz_malloc(ctx, h * stride), "pixmap_samples");
+		samples = Memento_label(fz_malloc(ctx, h * stride, __FILE__, __LINE__), "pixmap_samples");
 
 		if (subarea)
 		{
@@ -869,7 +869,7 @@ fz_new_image_of_size(fz_context *ctx, int w, int h, int bpc, fz_colorspace *colo
 	assert(mask == NULL || mask->mask == NULL);
 	assert(size >= sizeof(fz_image));
 
-	image = Memento_label(fz_calloc(ctx, 1, size), "fz_image");
+	image = Memento_label(fz_calloc(ctx, 1, size, __FILE__, __LINE__), "fz_image");
 	FZ_INIT_KEY_STORABLE(image, 1, fz_drop_image_imp);
 	image->drop_image = drop;
 	image->get_pixmap = get_pixmap;

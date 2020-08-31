@@ -397,7 +397,7 @@ pdf_add_to_unicode(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, fz_font *f
 		FT_ULong ucs;
 		FT_UInt gid;
 
-		table = fz_calloc(ctx, face->num_glyphs, sizeof *table);
+		table = fz_calloc(ctx, face->num_glyphs, sizeof *table, __FILE__, __LINE__);
 		fz_lock(ctx, FZ_LOCK_FREETYPE);
 		ucs = FT_Get_First_Char(face, &gid);
 		while (gid > 0)

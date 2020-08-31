@@ -50,7 +50,7 @@ fz_archive *
 fz_new_archive_of_size(fz_context *ctx, fz_stream *file, int size)
 {
 	fz_archive *arch;
-	arch = Memento_label(fz_calloc(ctx, 1, size), "fz_archive");
+	arch = Memento_label(fz_calloc(ctx, 1, size, __FILE__, __LINE__), "fz_archive");
 	arch->file = fz_keep_stream(ctx, file);
 	return arch;
 }
