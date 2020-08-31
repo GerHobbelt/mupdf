@@ -8,6 +8,9 @@
 #include <windows.h>
 #include <commdlg.h>
 #include <shellapi.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 /* Include pdfapp.h *AFTER* the UNICODE defines */
 #include "pdfapp.h"

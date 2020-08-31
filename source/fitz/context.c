@@ -140,7 +140,7 @@ fz_drop_context(fz_context *ctx)
 	assert(ctx->error.top == ctx->error.stack);
 
 	/* Free the context itself */
-	ctx->alloc.free(ctx->alloc.user, ctx);
+	ctx->alloc.free_(ctx->alloc.user, ctx);
 }
 
 static void
@@ -171,7 +171,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	if (!locks)
 		locks = &fz_locks_default;
 
-	ctx = Memento_label(alloc->malloc(alloc->user, sizeof(fz_context)), "fz_context");
+	ctx = Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot create context (phase 1)\n");
@@ -220,7 +220,7 @@ fz_clone_context(fz_context *ctx)
 	if (ctx == NULL || (ctx->locks.lock == fz_locks_default.lock && ctx->locks.unlock == fz_locks_default.unlock))
 		return NULL;
 
-	new_ctx = ctx->alloc.malloc(ctx->alloc.user, sizeof(fz_context));
+	new_ctx = ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context));
 	if (!new_ctx)
 		return NULL;
 

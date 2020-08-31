@@ -20,9 +20,9 @@ typedef struct fz_context fz_context;
 typedef struct
 {
 	void *user;
-	void *(*malloc)(void *, size_t);
-	void *(*realloc)(void *, void *, size_t);
-	void (*free)(void *, void *);
+	void *(*malloc_)(void *, size_t);
+	void *(*realloc_)(void *, void *, size_t);
+	void (*free_)(void *, void *);
 } fz_alloc_context;
 
 /**

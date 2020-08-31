@@ -11,6 +11,10 @@ extern "C" {
 
 #include "tessocr.h"
 
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
+
 /* Non-overridden leptonica alloc functions. These should never
  * actually be used. */
 void *leptonica_malloc(size_t blocksize)

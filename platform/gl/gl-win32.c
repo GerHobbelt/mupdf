@@ -5,6 +5,9 @@
 #include <commdlg.h>
 #include <shellapi.h>
 #include <stdio.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 #define OPEN_KEY(parent, name, ptr) \
 	RegCreateKeyExA(parent, name, 0, 0, 0, KEY_WRITE, 0, ptr, 0)

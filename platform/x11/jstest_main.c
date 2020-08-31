@@ -8,6 +8,9 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 int mutool_main(int argc, const char** argv);
 
@@ -398,6 +401,50 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 	*argc = count;
 }
 
+int __cdecl TestHook1(int nReportType, char* szMsg, int* pnRet)
+{
+	int nRet = FALSE;
+
+	printf("CRT report hook 1.\n");
+	printf("CRT report type is \"");
+	switch (nReportType)
+	{
+	case _CRT_ASSERT:
+	{
+		printf("_CRT_ASSERT");
+		// nRet = TRUE;   // Always stop for this type of report
+		break;
+	}
+
+	case _CRT_WARN:
+	{
+		printf("_CRT_WARN");
+		break;
+	}
+
+	case _CRT_ERROR:
+	{
+		printf("_CRT_ERROR");
+		break;
+	}
+
+	default:
+	{
+		printf("???Unknown???");
+		break;
+	}
+	}
+
+	printf("\".\nCRT report message is:\n\t");
+	printf(szMsg);
+
+	if (pnRet)
+		*pnRet = 0;
+
+	return   nRet;
+}
+
+
 int
 main(int argc, char *argv[])
 {
@@ -411,6 +458,17 @@ main(int argc, char *argv[])
 	struct curltime start_time;
 	struct curltime begin_time;
 	const char* line_command = NULL;
+
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | /* _CRTDBG_CHECK_EVERY_16_DF */ _CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF /* | _CRTDBG_CHECK_CRT_DF */ );
+
+	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
+
+	_CrtSetReportHook2(_CRT_RPTHOOK_INSTALL, TestHook1);
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:v")) != -1)

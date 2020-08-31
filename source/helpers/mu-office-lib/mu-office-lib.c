@@ -14,6 +14,10 @@
 #include "mupdf/memento.h"
 
 #include <assert.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
+
 
 enum
 {
@@ -423,7 +427,7 @@ fail:
  *
  * Alternatively, in a synchronous context, MuOfficeDoc_getNumPages
  * can be called to wait for loading to complete and return the total
- * number of pages. In this mode of use, progressFn can be NULL. 
+ * number of pages. In this mode of use, progressFn can be NULL.
  */
 MuError MuOfficeLib_loadDocument(	MuOfficeLib               *mu,
 					const char                *path,

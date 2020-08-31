@@ -144,6 +144,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 /*
 	After this point, we convert the #defines set (or not set)
@@ -1301,9 +1304,15 @@ trace_free(void *arg, void *p_)
 		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 	}
-#if 01
-	free(&p[-1]);
-#endif
+	//_CrtCheckMemory();
+	if (_CrtIsValidHeapPointer(&p[-1]))
+	{
+		free(&p[-1]);
+	}
+	else
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[1]);
+	}
 }
 
 static void *
@@ -1795,6 +1804,8 @@ int muraster_main(int argc, const char *argv[])
 		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", info.total, info.peak, info.current);
 		fprintf(stderr, "%s\n", buf);
 	}
+
+	_CrtDumpMemoryLeaks();
 
 	return (errored != 0);
 }

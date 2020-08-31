@@ -6,6 +6,9 @@
 #include <errno.h>
 #include <time.h>
 #include <windows.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 
 char *

@@ -36,6 +36,9 @@ depending on your environment.
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 // A convenience function for dying abruptly on pthread errors.
 

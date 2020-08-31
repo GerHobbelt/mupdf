@@ -15,6 +15,9 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <direct.h> /* for getcwd */
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 #else
 #include <unistd.h> /* for getcwd */
 #endif
