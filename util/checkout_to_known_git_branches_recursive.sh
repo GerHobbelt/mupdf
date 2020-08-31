@@ -94,24 +94,24 @@ pushd $(dirname $0)                                                            2
 # The registered repositories:
 #
 
-git_repo_checkout_branch "../thirdparty/curl" f527d6002dad50c57e9944ed75a85b7e5788f7da mupdf
-git_repo_checkout_branch "../thirdparty/freeglut" 59a29ed67725a3c15fc464747e01902ba44da3de master
-git_repo_checkout_branch "../thirdparty/freetype" 24df965835afb009f5eb5dc238ed4205b8992de6 mupdf
-git_repo_checkout_branch "../thirdparty/gumbo-parser" e4fe0323a1490a23bb3c0065fb957ac88cf56bac master
-git_repo_checkout_branch "../thirdparty/gumbo-parser/testdata" 6ddcf58bea5a01e616911050c173622f84297211 master
-git_repo_checkout_branch "../thirdparty/gumbo-parser/third_party/gtest" b13bdb93206ade272b4d7ed1c197c937d7d52796 master
-git_repo_checkout_branch "../thirdparty/harfbuzz" f8e03ea3373fc01c2ee2ba9d71be38c7116708ab master
-git_repo_checkout_branch "../thirdparty/jbig2dec" 0f991866dde822b7bf289c930d903f926a726380 master
-git_repo_checkout_branch "../thirdparty/lcms2" 40cf05c1875ba6af3fec2b4ff0353f7a26140ea6 mupdf
-git_repo_checkout_branch "../thirdparty/leptonica" f47f5ef9253d59fe740aef632a3c08d5ce0a7e63 master
-git_repo_checkout_branch "../thirdparty/libjpeg" 2cb9121a49129a75c86762a50a5ce981cdb33e59 master
-git_repo_checkout_branch "../thirdparty/mujs" 2704d8835b65b354b2411f560f9c90aa3842492a mupdf
-git_repo_checkout_branch "../thirdparty/openjpeg" af68b4775b4676712b6cd7773711e23733ff2188 bleeding_edge
-git_repo_checkout_branch "../thirdparty/tesseract" c94a108d17b85af3bcdbffcc63f490c347a13330 master
-git_repo_checkout_branch "../thirdparty/tesseract/abseil" 4d2ff381a3709ef9dd4cbc0237bae847c0bb1ccd master
-git_repo_checkout_branch "../thirdparty/tesseract/googletest" df6b75949b1efab7606ba60c0f0a0125ac95c5af master
-git_repo_checkout_branch "../thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb master
-git_repo_checkout_branch "../thirdparty/zlib" c8d407e68bf40d4322c4fc25850ba9629c7a5761 master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/curl" f527d6002dad50c57e9944ed75a85b7e5788f7da mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/freeglut" 7a020dfcaec9c02df4b5c1b8c76ca2149601d709 heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/freetype" 24df965835afb009f5eb5dc238ed4205b8992de6 mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/gumbo-parser" 66653fcc8671fbf5a5062a69302d18f2554d6f8d heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/gumbo-parser/testdata" 6ddcf58bea5a01e616911050c173622f84297211 master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/gumbo-parser/third_party/gtest" b13bdb93206ade272b4d7ed1c197c937d7d52796 master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/harfbuzz" c4e3af320f11b86814d149126e7a3ebbfe5efe12 heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/jbig2dec" 1268112485771909fca028442bdc54b7424d1bad heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/lcms2" 9bdfd398d2031ebe50bd87db912a92c1136c5c88 heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/leptonica" 707e4d4c23654215f5f25f54d9c0a24f59e89873 heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/libjpeg" 2727a4365ae480ecda656e8372f4c782c8dcc2df heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/mujs" 2704d8835b65b354b2411f560f9c90aa3842492a mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/openjpeg" 8b8de53dc38642cc3f57596db2672e9f3a40f357 heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract" beaaa634e96618316c94b7a61cca127859f8dcc3 heap-corruption-in-muraster
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract/abseil" 4d2ff381a3709ef9dd4cbc0237bae847c0bb1ccd master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract/googletest" df6b75949b1efab7606ba60c0f0a0125ac95c5af master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/zlib" 41b5852eba5825bd41900df01ffc8431c56eae31 heap-corruption-in-muraster
 
 # --- all done ---
 
