@@ -296,9 +296,9 @@ jbig2_read_image(fz_context *ctx, struct info *jbig2, const unsigned char *buf, 
 	struct fz_jbig2_allocator allocator;
 	fz_pixmap *pix = NULL;
 
-	allocator.super.alloc = fz_jbig2_alloc;
-	allocator.super.free = fz_jbig2_free;
-	allocator.super.realloc = fz_jbig2_realloc;
+	allocator.super.alloc_ = fz_jbig2_alloc;
+	allocator.super.free_ = fz_jbig2_free;
+	allocator.super.realloc_ = fz_jbig2_realloc;
 	allocator.ctx = ctx;
 
 	fz_var(jctx);

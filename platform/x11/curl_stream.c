@@ -9,6 +9,9 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 #else
 #include <pthread.h>
 #endif

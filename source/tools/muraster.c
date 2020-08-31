@@ -144,6 +144,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 /*
 	After this point, we convert the #defines set (or not set)
@@ -231,8 +234,11 @@
 #endif
 
 /* Enable for helpful threading debug */
-/* #define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0) */
+#if 01
+#define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0)
+#else
 #define DEBUG_THREADS(A) do { } while (0)
+#endif
 
 enum {
 	OUT_PGM,
@@ -1256,8 +1262,10 @@ static void drawrange(fz_context *ctx, fz_document *doc, const char *range)
 typedef struct
 {
 	size_t size;
-#if defined(_M_IA64) || defined(_M_AMD64)
+	size_t seqnum;
+#if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
 	size_t align;
+	size_t align2;
 #endif
 } trace_header;
 
@@ -1267,6 +1275,8 @@ typedef struct
 	size_t peak;
 	size_t total;
 } trace_info;
+
+static int trace_current_seqnum = 1;
 
 static void *
 trace_malloc(void *arg, size_t size)
@@ -1280,6 +1290,7 @@ trace_malloc(void *arg, size_t size)
 		return NULL;
 	p[0].size = size;
 	p[0].align = 0xEAD;
+	p[0].seqnum = trace_current_seqnum++;
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -1293,17 +1304,26 @@ trace_free(void *arg, void *p_)
 	trace_info *info = (trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
 
-	if (p == NULL)
+	if (p_ == NULL)
 		return;
-	info->current -= p[-1].size;
+
+	size_t size = p[-1].size;
+	int rotten = 0;
+	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
 		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
+		rotten = 1;
 	}
-#if 01
-	free(&p[-1]);
-#endif
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+	}
+	else
+	{
+		free(&p[-1]);
+	}
 }
 
 static void *
@@ -1318,19 +1338,36 @@ trace_realloc(void *arg, void *p_, size_t size)
 		trace_free(arg, p_);
 		return NULL;
 	}
-	if (p == NULL)
+
+	if (p_ == NULL)
 		return trace_malloc(arg, size);
+
+	int rotten = 0;
 	oldsize = p[-1].size;
-	p = realloc(&p[-1], size + sizeof(trace_header));
-	if (p == NULL)
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
 		return NULL;
-	info->current += size - oldsize;
-	if (size > oldsize)
-		info->total += size - oldsize;
-	if (info->current > info->peak)
-		info->peak = info->current;
-	p[0].size = size;
-	return &p[1];
+	}
+	else
+	{
+		p = realloc(&p[-1], size + sizeof(trace_header));
+		if (p == NULL)
+			return NULL;
+		info->current += size - oldsize;
+		if (size > oldsize)
+			info->total += size - oldsize;
+		if (info->current > info->peak)
+			info->peak = info->current;
+		p[0].size = size;
+		return &p[1];
+	}
 }
 
 #ifndef DISABLE_MUTHREADS
@@ -1472,7 +1509,7 @@ int muraster_main(int argc, const char *argv[])
 	max_band_memory = BAND_MEMORY;
 	width = 0;
 	height = 0;
-	num_workers = NUM_RENDER_THREADS;
+	num_workers = 1; // --> DO NOT set to NUM_RENDER_THREADS until fixed -- Warning: more than one worker causes heap corruption!
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
 
@@ -1576,6 +1613,12 @@ int muraster_main(int argc, const char *argv[])
 	fz_set_graphics_aa_level(ctx, alphabits_graphics);
 
 #ifndef DISABLE_MUTHREADS
+	// do not bgprint when there won't be any bg threads available, ever.
+	if (num_workers < 1)
+	{
+		bgprint.active = 0;
+	}
+
 	if (bgprint.active)
 	{
 		int fail = 0;
@@ -1586,6 +1629,7 @@ int muraster_main(int argc, const char *argv[])
 		if (fail)
 		{
 			fprintf(stderr, "bgprint startup failed\n");
+			fz_drop_context(bgprint.ctx);
 			return EXIT_FAILURE;
 		}
 	}
@@ -1606,6 +1650,14 @@ int muraster_main(int argc, const char *argv[])
 		if (fail)
 		{
 			fprintf(stderr, "worker startup failed\n");
+			for (i = 0; i < num_workers; i++)
+			{
+				mu_destroy_semaphore(&workers[i].start);
+				mu_destroy_semaphore(&workers[i].stop);
+				mu_destroy_thread(&workers[i].thread);
+				fz_drop_context(workers[i].ctx);
+			}
+			fz_free(ctx, workers);
 			return EXIT_FAILURE;
 		}
 	}

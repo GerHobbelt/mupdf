@@ -149,7 +149,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\include\;..\..\include\mupdf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -166,7 +166,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\include\;..\..\include\mupdf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -396,6 +396,7 @@
     <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_huffman.c" />
     <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_hufftab.c" />
     <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_image.c" />
+    <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_image_pbm.c" />
     <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_mmr.c" />
     <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_page.c" />
     <ClCompile Include="..\..\thirdparty\jbig2dec\jbig2_refinement.c" />
@@ -782,6 +783,23 @@
     <ClInclude Include="..\..\thirdparty\harfbuzz\src\hb-version.h" />
     <ClInclude Include="..\..\thirdparty\harfbuzz\src\hb.h" />
     <ClInclude Include="..\..\thirdparty\harfbuzz\src\hb.hh" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_arith.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_arith_iaid.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_arith_int.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_generic.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_halftone.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_huffman.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_hufftab.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_image.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_image_rw.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_mmr.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_page.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_priv.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_refinement.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_segment.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_symbol_dict.h" />
+    <ClInclude Include="..\..\thirdparty\jbig2dec\jbig2_text.h" />
     <ClInclude Include="..\..\thirdparty\lcms2\include\lcms2mt.h" />
     <ClInclude Include="..\..\thirdparty\lcms2\include\lcms2mt_plugin.h" />
     <ClInclude Include="..\..\thirdparty\lcms2\src\extra_xform.h" />

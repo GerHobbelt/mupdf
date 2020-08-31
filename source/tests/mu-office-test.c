@@ -7,6 +7,10 @@
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
+
 
 #define TEST_PDF_FILEPATH  "1905.07689.pdf"
 

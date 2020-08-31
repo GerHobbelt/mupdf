@@ -5,6 +5,9 @@
 #include "mupdf/pdf.h"
 
 #include <time.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 /*
  * Utility object for handling a pdf application / view

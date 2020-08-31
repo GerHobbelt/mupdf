@@ -8,6 +8,10 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 int mutool_main(int argc, const char** argv);
 

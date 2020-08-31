@@ -4,6 +4,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 #include "timeval.h"
 
@@ -28,7 +31,7 @@ do_scavenging_malloc(fz_context *ctx, size_t size)
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
-		p = ctx->alloc.malloc(ctx->alloc.user, size);
+		p = ctx->alloc.malloc_(ctx->alloc.user, size);
 		if (p != NULL)
 		{
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -48,7 +51,7 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
-		q = ctx->alloc.realloc(ctx->alloc.user, p, size);
+		q = ctx->alloc.realloc_(ctx->alloc.user, p, size);
 		if (q != NULL)
 		{
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -140,7 +143,7 @@ fz_free(fz_context *ctx, const void *p)
 	if (p)
 	{
 		fz_lock(ctx, FZ_LOCK_ALLOC);
-		ctx->alloc.free(ctx->alloc.user, (void *)p);
+		ctx->alloc.free_(ctx->alloc.user, (void *)p);
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
 	}
 }

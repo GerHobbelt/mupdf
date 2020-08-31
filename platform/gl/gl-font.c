@@ -18,6 +18,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 #define PADDING 1		/* set to 0 to save some space but disallow arbitrary transforms */
 
