@@ -266,5 +266,6 @@ int do_sign(void);
 void trace_action(const char *fmt, ...);
 void trace_page_update(void);
 void trace_save_snapshot(void);
+int search_results(const fz_quad **quads, const char **needle);
 
 #endif

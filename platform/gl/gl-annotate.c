@@ -817,6 +817,9 @@ void do_annotate_panel(void)
 
 	int has_redact = 0;
 	int was_dirty = pdf->dirty;
+	const fz_quad *quads;
+	int num_search_results;
+	char *needle;
 
 	ui_layout(T, X, NW, 2, 2);
 
@@ -1166,6 +1169,30 @@ void do_annotate_panel(void)
 			trace_page_update();
 			load_page();
 			render_page();
+		}
+	}
+
+	num_search_results = search_results(&quads, &needle);
+	if (num_search_results)
+	{
+		if (ui_button("Mark for redaction"))
+		{
+			for (n = 0; n < num_search_results; n++)
+			{
+				new_annot(PDF_ANNOT_REDACT);
+				pdf_clear_annot_quad_points(ctx, selected_annot);
+				trace_action("annot.addQuadPoint(%g, %g, %g, %g, %g, %g, %g, %g);\n",
+					quads[n].ul.x, quads[n].ul.y,
+					quads[n].ur.x, quads[n].ur.y,
+					quads[n].ll.x, quads[n].ll.y,
+					quads[n].lr.x, quads[n].lr.y);
+				pdf_add_annot_quad_point(ctx, selected_annot, quads[n]);
+				if (needle)
+				{
+					trace_action("annot.setContents(%q);\n", needle);
+					pdf_set_annot_contents(ctx, selected_annot, needle);
+				}
+			}
 		}
 	}
 

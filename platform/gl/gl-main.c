@@ -2016,6 +2016,13 @@ static void do_canvas(void)
 	glDisable(GL_SCISSOR_TEST);
 }
 
+int search_results(const fz_quad **quads, const char **needle)
+{
+	*quads = search_hit_quads;
+	*needle = search_needle;
+	return search_hit_count;
+}
+
 void do_main(void)
 {
 	if (search_active)
