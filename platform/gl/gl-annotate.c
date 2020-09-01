@@ -72,7 +72,8 @@ static void save_pdf_options(void)
 	can_be_incremental = pdf_can_be_saved_incrementally(ctx, pdf);
 
 	ui_checkbox("High Security", &do_high_security);
-	if (do_high_security) {
+	if (do_high_security)
+	{
 		int res200 = (hs_resolution == 200);
 		int res300 = (hs_resolution == 300);
 		int res600 = (hs_resolution == 600);
@@ -95,52 +96,57 @@ static void save_pdf_options(void)
 			hs_resolution = 200;
 		ui_label("OCR Language:");
 		ui_input(&ocr_language_input, 32, 1);
+
+		return; /* ignore normal PDF options */
 	}
 
-	if (!do_high_security && can_be_incremental)
-	{
+	if (can_be_incremental)
 		ui_checkbox("Incremental", &save_opts.do_incremental);
 
-		fz_try(ctx)
+	fz_try(ctx)
+	{
+		if (pdf_count_signatures(ctx, pdf))
 		{
-			if (pdf_count_signatures(ctx, pdf))
+			if (can_be_incremental)
 				ui_label("WARNING: Saving non-incrementally will break existing signatures");
+			else
+				ui_label("WARNING: Saving will break existing signatures");
 		}
-		fz_catch(ctx)
-		{
-			/* Ignore the error. */
-		}
+	}
+	fz_catch(ctx)
+	{
+		/* Ignore the error. */
+	}
+
+	ui_spacer();
+	ui_checkbox("Pretty-print", &save_opts.do_pretty);
+	ui_checkbox("Ascii", &save_opts.do_ascii);
+	ui_checkbox("Decompress", &save_opts.do_decompress);
+	ui_checkbox("Compress", &save_opts.do_compress);
+	ui_checkbox("Compress images", &save_opts.do_compress_images);
+	ui_checkbox("Compress fonts", &save_opts.do_compress_fonts);
+
+	if (save_opts.do_incremental)
+	{
+		save_opts.do_garbage = 0;
+		save_opts.do_linear = 0;
+		save_opts.do_clean = 0;
+		save_opts.do_sanitize = 0;
+		save_opts.do_encrypt = PDF_ENCRYPT_KEEP;
+	}
+	else
+	{
+		ui_spacer();
+		ui_checkbox("Linearize", &save_opts.do_linear);
+		ui_checkbox("Garbage collect", &save_opts.do_garbage);
+		ui_checkbox("Clean syntax", &save_opts.do_clean);
+		ui_checkbox("Sanitize syntax", &save_opts.do_sanitize);
 
 		ui_spacer();
-		ui_checkbox("Pretty-print", &save_opts.do_pretty);
-		ui_checkbox("Ascii", &save_opts.do_ascii);
-		ui_checkbox("Decompress", &save_opts.do_decompress);
-		ui_checkbox("Compress", &save_opts.do_compress);
-		ui_checkbox("Compress images", &save_opts.do_compress_images);
-		ui_checkbox("Compress fonts", &save_opts.do_compress_fonts);
-
-		if (save_opts.do_incremental)
-		{
-			save_opts.do_garbage = 0;
-			save_opts.do_linear = 0;
-			save_opts.do_clean = 0;
-			save_opts.do_sanitize = 0;
-			save_opts.do_encrypt = PDF_ENCRYPT_KEEP;
-		}
-		else
-		{
-			ui_spacer();
-			ui_checkbox("Linearize", &save_opts.do_linear);
-			ui_checkbox("Garbage collect", &save_opts.do_garbage);
-			ui_checkbox("Clean syntax", &save_opts.do_clean);
-			ui_checkbox("Sanitize syntax", &save_opts.do_sanitize);
-
-			ui_spacer();
-			ui_label("Encryption:");
-			choice = ui_select("Encryption", cryptalgo, cryptalgo_names, nelem(cryptalgo_names));
-			if (choice != -1)
-				save_opts.do_encrypt = choice;
-		}
+		ui_label("Encryption:");
+		choice = ui_select("Encryption", cryptalgo, cryptalgo_names, nelem(cryptalgo_names));
+		if (choice != -1)
+			save_opts.do_encrypt = choice;
 	}
 
 	if (save_opts.do_encrypt >= PDF_ENCRYPT_RC4_40)
