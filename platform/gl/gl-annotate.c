@@ -161,76 +161,71 @@ struct {
 	char *operation_text;
 	char *progress_text;
 	int (*step)(int cancel);
-	int cancelling;
-	char *failed;
-	int display;
 } ui_slow_operation_state;
 
-static void slow_operation_dialog(void)
+static void run_slow_operation_step(int cancel)
 {
-	ui_dialog_begin(400, 100);
-	ui_layout(T, X, NW, 2, 2);
-
-	ui_label("%s", ui_slow_operation_state.operation_text);
-	ui_spacer();
-
-	if (ui_slow_operation_state.failed)
-	{
-		ui_label("Operation Failed:");
-		if (ui_slow_operation_state.failed != (void *)1)
-			ui_label(ui_slow_operation_state.failed);
-		else
-			ui_label("Out of Memory");
-	}
-	if (ui_slow_operation_state.cancelling)
-	{
-		ui_label("Cancelling.");
-		ui.dialog = NULL;
-	}
-	else if (ui_slow_operation_state.i == 0)
-		ui_label("Starting.");
-	else if (ui_slow_operation_state.i <= ui_slow_operation_state.n)
-		ui_label("%s: %d/%d",
-			ui_slow_operation_state.progress_text,
-			ui_slow_operation_state.i,
-			ui_slow_operation_state.n);
-	else
-		ui_label("Finalising.");
-
-	ui_spacer();
-
-	if (ui_button("Cancel"))
-		ui_slow_operation_state.cancelling = 1;
-
-	glutPostRedisplay();
-
-	ui_slow_operation_state.display = !ui_slow_operation_state.display;
-
-	if (!ui_slow_operation_state.cancelling &&
-		!ui_slow_operation_state.display)
-		return; /* Exit now to update the display */
-
 	fz_try(ctx)
 	{
-		int i = ui_slow_operation_state.step(
-				ui_slow_operation_state.cancelling);
-
+		int i = ui_slow_operation_state.step(cancel);
 		if (ui_slow_operation_state.i == 0)
 		{
 			ui_slow_operation_state.i = 1;
 			ui_slow_operation_state.n = i;
 		}
 		else
+		{
 			ui_slow_operation_state.i = i;
+		}
 	}
 	fz_catch(ctx)
 	{
-		ui_slow_operation_state.failed = (void *)1;
-		ui_slow_operation_state.failed = fz_strdup(ctx, fz_caught_message(ctx));
+		ui_slow_operation_state.i = -1;
+		ui_show_error_dialog("%s failed: %s",
+			ui_slow_operation_state.operation_text,
+			fz_caught_message(ctx));
+	}
+}
+
+static void slow_operation_dialog(void)
+{
+	int start_time;
+
+	/* First time: run a single step to get the max progress. */
+	if (ui_slow_operation_state.i == 0)
+		run_slow_operation_step(0);
+
+	ui_dialog_begin(400, 100);
+	ui_layout(T, X, NW, 2, 2);
+
+	ui_label("%s", ui_slow_operation_state.operation_text);
+	ui_spacer();
+
+	ui_label("%s: %d/%d",
+		ui_slow_operation_state.progress_text,
+		ui_slow_operation_state.i,
+		ui_slow_operation_state.n);
+
+	ui_spacer();
+	if (ui_button("Cancel"))
+	{
+		ui.dialog = NULL;
+		run_slow_operation_step(1);
+		return;
+	}
+
+	/* Run steps for 200ms or until we're done. */
+	start_time = glutGet(GLUT_ELAPSED_TIME);
+	while (ui_slow_operation_state.i > 0 && glutGet(GLUT_ELAPSED_TIME) < start_time + 200)
+	{
+		run_slow_operation_step(0);
 	}
 
 	if (ui_slow_operation_state.i < 0)
 		ui.dialog = NULL;
+
+	/* ... and trigger a redisplay */
+	glutPostRedisplay();
 }
 
 static void
@@ -241,10 +236,6 @@ ui_start_slow_operation(char *operation, char *progress, int (*step)(int))
 	ui_slow_operation_state.progress_text = progress;
 	ui_slow_operation_state.i = 0;
 	ui_slow_operation_state.step = step;
-	ui_slow_operation_state.cancelling = 0;
-	ui_slow_operation_state.display = 1;
-	if (ui_slow_operation_state.failed != (void *)1)
-		fz_free(ctx, ui_slow_operation_state.failed);
 }
 
 struct {
