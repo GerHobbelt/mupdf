@@ -611,6 +611,25 @@ void ui_show_error_dialog(const char *fmt, ...)
 	ui.dialog = error_dialog;
 }
 
+static void non_fatal_dialog(void)
+{
+	ui_dialog_begin(500, (ui.gridsize+4)*4);
+	ui_layout(T, NONE, NW, 2, 2);
+	ui_label("%C %s", 0x1f4a3, error_message); /* BOMB */
+	ui_layout(B, NONE, S, 2, 2);
+	if (ui_button("Continue") || ui.key == KEY_ENTER || ui.key == KEY_ESCAPE)
+		ui.dialog = NULL;
+	ui_dialog_end();
+}
+void ui_show_non_fatal_dialog(const char *fmt, ...)
+{
+	va_list ap;
+	va_start(ap, fmt);
+	fz_vsnprintf(error_message, sizeof error_message, fmt, ap);
+	va_end(ap);
+	ui.dialog = non_fatal_dialog;
+}
+
 static char warning_message[256];
 static void warning_dialog(void)
 {

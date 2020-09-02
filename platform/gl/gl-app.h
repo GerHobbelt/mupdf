@@ -209,6 +209,8 @@ int ui_save_file(char filename[], void (*extra_panel)(void), const char *label);
 
 void ui_show_warning_dialog(const char *fmt, ...);
 void ui_show_error_dialog(const char *fmt, ...);
+void ui_show_non_fatal_dialog(const char *fmt, ...);
+
 
 /* Theming */
 
