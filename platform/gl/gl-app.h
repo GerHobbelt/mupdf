@@ -182,6 +182,7 @@ void ui_splitter(int *x, int min, int max, enum side side);
 void ui_label(const char *fmt, ...);
 void ui_label_with_scrollbar(char *text, int width, int height, int *scroll);
 int ui_button(const char *label);
+void ui_disabled_button(const char *label);
 int ui_checkbox(const char *label, int *value);
 int ui_slider(int *value, int min, int max, int width);
 int ui_select(const void *id, const char *current, const char *options[], int n);
@@ -221,6 +222,7 @@ enum
 	UI_COLOR_SCROLLBAR = 0xdfdfdf,
 	UI_COLOR_TEXT_BG = 0xffffff,
 	UI_COLOR_TEXT_FG = 0x000000,
+	UI_COLOR_TEXT_GRAY = 0x808080,
 	UI_COLOR_TEXT_SEL_BG = 0x000080,
 	UI_COLOR_TEXT_SEL_FG = 0xffffff,
 	UI_COLOR_BEVEL_1 = 0x000000,
