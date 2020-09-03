@@ -405,7 +405,7 @@ void fz_defer_reap_end(fz_context *ctx);
 
 #ifdef ENABLE_STORE_LOGGING
 
-void fz_log_dump_store(fz_context* ctx, const char* fmt, ...);
+void fz_log_dump_store(fz_context* ctx, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2, 3);
 
 #define FZ_LOG_STORE(CTX, ...) fz_log_module(CTX, "STORE", __VA_ARGS__)
 #define FZ_LOG_DUMP_STORE(...) fz_log_dump_store(__VA_ARGS__)

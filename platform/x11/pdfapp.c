@@ -156,7 +156,7 @@ void pdfapp_warn(pdfapp_t *app, const char *fmt, ...)
 	winwarn(app, buf);
 }
 
-void pdfapp_error(pdfapp_t *app, const char *fmt, ...)
+void pdfapp_error(pdfapp_t *app, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3)
 {
 	char buf[1024];
 	va_list ap;
