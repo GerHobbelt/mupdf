@@ -75,6 +75,7 @@ struct ui_color_theme
 		text_fg,
 		text_sel_bg,
 		text_sel_fg,
+		text_grey,
 		bevel_1,
 		bevel_2,
 		bevel_3,

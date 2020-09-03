@@ -22,6 +22,7 @@ struct ui_color_theme ui_light_theme = {
 	/* text_fg */ 0x000000,
 	/* text_sel_bg */ 0x000080,
 	/* text_sel_fg */ 0xffffff,
+	/* text_grey */ 	0x808080,
 	/* bevel_1 */ 0x000000,
 	/* bevel_2 */ 0x808080,
 	/* bevel_3 */ 0xdfdfdf,
@@ -36,6 +37,7 @@ struct ui_color_theme ui_dark_theme = {
 	/* text_fg */ 0xffffff,
 	/* text_sel_bg */ 0x404080,
 	/* text_sel_fg */ 0xffffff,
+	/* text_grey */ 	0x808080,
 	/* bevel_1 */ 0x202020,
 	/* bevel_2 */ 0x303030,
 	/* bevel_3 */ 0x606060,
@@ -800,8 +802,8 @@ void ui_disabled_button(const char *label)
 	fz_irect area = ui_pack(width + 20, ui.gridsize);
 	int text_x = area.x0 + ((area.x1 - area.x0) - width) / 2;
 
-	ui_draw_bevel_rect(area, UI_COLOR_BUTTON, 0);
-	glColorHex(UI_COLOR_TEXT_GRAY);
+	ui_draw_bevel_rect(area, ui.color.button, 0);
+	glColorHex(ui.color.text_grey);
 	ui_draw_string(text_x, area.y0+3, label);
 }
 
