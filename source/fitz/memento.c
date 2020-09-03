@@ -1556,7 +1556,6 @@ static int showInfo(Memento_BlkHeader *b, void *arg)
         fprintf(stderr, " (%s)", b->label);
     fprintf(stderr, "\nEvents:\n");
 
-    const char* hide_multiple_reallocs = getenv("MEMENTO_HIDE_MULTIPLE_REALLOCS");
     for (details = b->details; details; details = details->next)
     {
         if (hide_multiple_reallocs
