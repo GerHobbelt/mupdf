@@ -499,18 +499,11 @@ static void new_annot(int type)
 {
 	trace_action("annot = page.createAnnotation(%q);\n", pdf_string_from_annot_type(ctx, type));
 
-	if (type == PDF_ANNOT_WIDGET)
-	{
-		selected_annot = (pdf_annot*)pdf_create_signature_widget(ctx, page);
-	}
-	else
-	{
-		selected_annot = pdf_create_annot(ctx, page, type);
+	selected_annot = pdf_create_annot(ctx, page, type);
 
-		pdf_set_annot_modification_date(ctx, selected_annot, time(NULL));
-		if (pdf_annot_has_author(ctx, selected_annot))
-			pdf_set_annot_author(ctx, selected_annot, getuser());
-	}
+	pdf_set_annot_modification_date(ctx, selected_annot, time(NULL));
+	if (pdf_annot_has_author(ctx, selected_annot))
+		pdf_set_annot_author(ctx, selected_annot, getuser());
 
 	pdf_update_appearance(ctx, selected_annot);
 
@@ -720,7 +713,6 @@ static int should_edit_border(enum pdf_annot_type subtype)
 	case PDF_ANNOT_CIRCLE:
 	case PDF_ANNOT_POLYGON:
 	case PDF_ANNOT_POLY_LINE:
-	case PDF_ANNOT_WIDGET:
 		return 1;
 	}
 }
@@ -901,7 +893,6 @@ void do_annotate_panel(void)
 		if (ui_popup_item("Squiggly")) new_annot(PDF_ANNOT_SQUIGGLY);
 		if (ui_popup_item("FileAttachment")) new_annot(PDF_ANNOT_FILE_ATTACHMENT);
 		if (ui_popup_item("Redact")) new_annot(PDF_ANNOT_REDACT);
-		if (ui_popup_item("Signature")) new_annot(PDF_ANNOT_WIDGET);
 		ui_popup_end();
 	}
 
