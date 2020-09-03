@@ -93,7 +93,7 @@ static void save_pdf_options(void)
 			hs_resolution = 600;
 		else if (res1200 && hs_resolution != 1200)
 			hs_resolution = 1200;
-		else
+		else if (!res200 && !res300 && !res600 && !res1200)
 			hs_resolution = 200;
 		ui_label("OCR Language:");
 		ui_input(&ocr_language_input, 32, 1);
@@ -168,9 +168,10 @@ struct {
 	char *operation_text;
 	char *progress_text;
 	int (*step)(int cancel);
+	int display;
 } ui_slow_operation_state;
 
-static void run_slow_operation_step(int cancel)
+static int run_slow_operation_step(int cancel)
 {
 	fz_try(ctx)
 	{
@@ -188,19 +189,27 @@ static void run_slow_operation_step(int cancel)
 	fz_catch(ctx)
 	{
 		ui_slow_operation_state.i = -1;
-		ui_show_error_dialog("%s failed: %s",
+		ui_show_non_fatal_dialog("%s failed: %s",
 			ui_slow_operation_state.operation_text,
 			fz_caught_message(ctx));
+
+		/* Call to cancel. */
+		fz_try(ctx)
+			ui_slow_operation_state.step(1);
+		fz_catch(ctx)
+		{
+			/* Ignore any error from cancelling */
+		}
+		return 1;
 	}
+
+	return 0;
 }
 
 static void slow_operation_dialog(void)
 {
 	int start_time;
-
-	/* First time: run a single step to get the max progress. */
-	if (ui_slow_operation_state.i == 0)
-		run_slow_operation_step(0);
+	int errored = 0;
 
 	ui_dialog_begin(400, 100);
 	ui_layout(T, X, NW, 2, 2);
@@ -208,10 +217,15 @@ static void slow_operation_dialog(void)
 	ui_label("%s", ui_slow_operation_state.operation_text);
 	ui_spacer();
 
-	ui_label("%s: %d/%d",
-		ui_slow_operation_state.progress_text,
-		ui_slow_operation_state.i,
-		ui_slow_operation_state.n);
+	if (ui_slow_operation_state.i == 0)
+		ui_label("Initializing");
+	else if (ui_slow_operation_state.i > ui_slow_operation_state.n)
+		ui_label("Finalizing");
+	else
+		ui_label("%s: %d/%d",
+			ui_slow_operation_state.progress_text,
+			ui_slow_operation_state.i,
+			ui_slow_operation_state.n);
 
 	ui_spacer();
 	if (ui_button("Cancel"))
@@ -221,14 +235,22 @@ static void slow_operation_dialog(void)
 		return;
 	}
 
-	/* Run steps for 200ms or until we're done. */
-	start_time = glutGet(GLUT_ELAPSED_TIME);
-	while (ui_slow_operation_state.i > 0 && glutGet(GLUT_ELAPSED_TIME) < start_time + 200)
+	/* Only run the operations every other time. This ensures we
+	 * actually see the update for page i before page i is
+	 * processed. */
+	ui_slow_operation_state.display = !ui_slow_operation_state.display;
+	if (ui_slow_operation_state.display == 0)
 	{
-		run_slow_operation_step(0);
+		/* Run steps for 200ms or until we're done. */
+		start_time = glutGet(GLUT_ELAPSED_TIME);
+		while (!errored && ui_slow_operation_state.i >= 0 &&
+			glutGet(GLUT_ELAPSED_TIME) < start_time + 200)
+		{
+			errored = run_slow_operation_step(0);
+		}
 	}
 
-	if (ui_slow_operation_state.i < 0)
+	if (!errored && ui_slow_operation_state.i == -1)
 		ui.dialog = NULL;
 
 	/* ... and trigger a redisplay */
@@ -775,8 +797,12 @@ step_redact_all_pages(int cancel)
 		rap_state.opts.black_boxes ? "true" : "false",
 		rap_state.opts.image_method);
 	pg = pdf_load_page(ctx, pdf, rap_state.i-1);
-	pdf_redact_page(ctx, pdf, pg, &rap_state.opts);
-	fz_drop_page(ctx, (fz_page *)pg);
+	fz_try(ctx)
+		pdf_redact_page(ctx, pdf, pg, &rap_state.opts);
+	fz_always(ctx)
+		fz_drop_page(ctx, (fz_page *)pg);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 
 	return ++rap_state.i;
 }
@@ -800,6 +826,9 @@ void do_annotate_panel(void)
 
 	int has_redact = 0;
 	int was_dirty = pdf->dirty;
+	const fz_quad *quads;
+	int num_search_results;
+	char *needle;
 
 	ui_layout(T, X, NW, 2, 2);
 
@@ -1139,6 +1168,11 @@ void do_annotate_panel(void)
 		if (im_choice != -1)
 			redact_opts.image_method = im_choice;
 		ui_checkbox("Draw black boxes", &redact_opts.black_boxes);
+		if (ui_button("Redact All Pages"))
+		{
+			selected_annot = NULL;
+			redact_all_pages(&redact_opts);
+		}
 		if (ui_button("Redact Page"))
 		{
 			selected_annot = NULL;
@@ -1150,10 +1184,29 @@ void do_annotate_panel(void)
 			load_page();
 			render_page();
 		}
-		if (ui_button("Redact All Pages"))
+	}
+
+	num_search_results = search_results(&quads, &needle);
+	if (num_search_results)
+	{
+		if (ui_button("Mark for redaction"))
 		{
-			selected_annot = NULL;
-			redact_all_pages(&redact_opts);
+			for (n = 0; n < num_search_results; n++)
+			{
+				new_annot(PDF_ANNOT_REDACT);
+				pdf_clear_annot_quad_points(ctx, selected_annot);
+				trace_action("annot.addQuadPoint(%g, %g, %g, %g, %g, %g, %g, %g);\n",
+					quads[n].ul.x, quads[n].ul.y,
+					quads[n].ur.x, quads[n].ur.y,
+					quads[n].ll.x, quads[n].ll.y,
+					quads[n].lr.x, quads[n].lr.y);
+				pdf_add_annot_quad_point(ctx, selected_annot, quads[n]);
+				if (needle)
+				{
+					trace_action("annot.setContents(%q);\n", needle);
+					pdf_set_annot_contents(ctx, selected_annot, needle);
+				}
+			}
 		}
 	}
 

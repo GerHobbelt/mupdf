@@ -794,6 +794,17 @@ int ui_button(const char *label)
 	return ui.hot == label && ui.active == label && !ui.down;
 }
 
+void ui_disabled_button(const char *label)
+{
+	int width = ui_measure_string(label);
+	fz_irect area = ui_pack(width + 20, ui.gridsize);
+	int text_x = area.x0 + ((area.x1 - area.x0) - width) / 2;
+
+	ui_draw_bevel_rect(area, UI_COLOR_BUTTON, 0);
+	glColorHex(UI_COLOR_TEXT_GRAY);
+	ui_draw_string(text_x, area.y0+3, label);
+}
+
 int ui_checkbox(const char *label, int *value)
 {
 	int width = ui_measure_string(label);

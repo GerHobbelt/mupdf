@@ -203,6 +203,7 @@ void ui_splitter(int *x, int min, int max, enum side side);
 void ui_label(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 void ui_label_with_scrollbar(char *text, int width, int height, int *scroll);
 int ui_button(const char *label);
+void ui_disabled_button(const char *label);
 int ui_checkbox(const char *label, int *value);
 int ui_slider(int *value, int min, int max, int width);
 int ui_select(const void *id, const char *current, const char *options[], int n);
@@ -230,6 +231,8 @@ int ui_save_file(char filename[], void (*extra_panel)(void), const char *label);
 
 void ui_show_warning_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 void ui_show_error_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
+void ui_show_non_fatal_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
+
 
 /* Theming */
 
@@ -273,5 +276,6 @@ int do_sign(void);
 void trace_action(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 void trace_page_update(void);
 void trace_save_snapshot(void);
+int search_results(const fz_quad **quads, const char **needle);
 
 #endif
