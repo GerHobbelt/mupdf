@@ -38,8 +38,12 @@ typedef struct
 FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *fmt, va_list ap);
 FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(3,4);
 FZ_NORETURN void fz_rethrow(fz_context *ctx);
+void fz_verror(fz_context* ctx, const char* fmt, va_list ap);
+void fz_error(fz_context* ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3);
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap);
 void fz_warn(fz_context *ctx, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2,3);
+void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap);
+void fz_info(fz_context* ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2, 3);
 const char *fz_caught_message(fz_context *ctx);
 int fz_caught(fz_context *ctx);
 void fz_rethrow_if(fz_context *ctx, int errcode);
@@ -208,6 +212,28 @@ void fz_set_user_context(fz_context *ctx, void *user);
 void *fz_user_context(fz_context *ctx);
 
 /**
+	Get a reference to the global context.
+	Use this for access to error, warning and info log channels, for example.
+*/
+fz_context* fz_get_global_context(void);
+
+/**
+	Set the global context to a given context.
+
+	Will abort the application when a global context has been set up already.
+	Use has_global_context() check function to check for this condition before
+	calling this function.
+*/
+void fz_set_global_context(fz_context* ctx);
+
+/**
+	Return TRUE when there is an initialized global context available.
+*/
+int fz_has_global_context(void);
+
+void fz_drop_global_context(void);
+
+/**
 	FIXME: Better not to expose fz_default_error_callback, and
 	fz_default_warning callback and to allow 'NULL' to be used
 	int fz_set_xxxx_callback to mean "defaults".
@@ -231,6 +257,13 @@ void fz_default_error_callback(void *user, const char *message);
 void fz_default_warning_callback(void *user, const char *message);
 
 /**
+	The default info callback. Declared publicly just so that
+	the info callback can be set back to this after it has been
+	overridden.
+*/
+void fz_default_info_callback(void* user, const char* message);
+
+/**
 	Set the error callback. This will be called as part of the
 	exception handling.
 
@@ -245,6 +278,13 @@ void fz_set_error_callback(fz_context *ctx, void (*print)(void *user, const char
 	The callback must not throw exceptions!
 */
 void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
+
+/**
+	Set the info callback. This will be called by any invocation of fz_info() et al.
+
+	The callback must not throw exceptions!
+*/
+void fz_set_info_callback(fz_context* ctx, void (*print)(void* user, const char* message), void* user);
 
 /**
 	In order to tune MuPDF's behaviour, certain functions can
@@ -528,7 +568,7 @@ typedef struct
 	int errcode;
 	void *print_user;
 	void (*print)(void *user, const char *message);
-	char message[256];
+	char message[4096];
 } fz_error_context;
 
 typedef struct
@@ -536,8 +576,14 @@ typedef struct
 	void *print_user;
 	void (*print)(void *user, const char *message);
 	int count;
-	char message[256];
+	char message[4096];
 } fz_warn_context;
+
+typedef struct
+{
+	void* print_user;
+	void (*print)(void* user, const char* message);
+} fz_info_context;
 
 typedef struct
 {
@@ -556,6 +602,7 @@ struct fz_context
 	fz_locks_context locks;
 	fz_error_context error;
 	fz_warn_context warn;
+	fz_info_context info;
 
 	/* unshared contexts */
 	fz_aa_context aa;

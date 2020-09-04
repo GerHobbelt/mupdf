@@ -52,6 +52,27 @@ void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const ch
 	ctx->warn.print = print;
 }
 
+void fz_default_info_callback(void* user, const char* message)
+{
+	fprintf(stderr, "info: %s\n", message);
+#ifdef USE_OUTPUT_DEBUG_STRING
+	OutputDebugStringA("info: ");
+	OutputDebugStringA(message);
+	OutputDebugStringA("\n");
+#endif
+#ifdef USE_ANDROID_LOG
+	__android_log_print(ANDROID_LOG_INFO, "libmupdf", "%s", message);
+#endif
+}
+
+/* Warning context */
+
+void fz_set_info_callback(fz_context* ctx, void (*print)(void* user, const char* message), void* user)
+{
+	ctx->info.print_user = user;
+	ctx->info.print = print;
+}
+
 void fz_var_imp(void *var)
 {
 	/* Do nothing */
@@ -59,6 +80,9 @@ void fz_var_imp(void *var)
 
 void fz_flush_warnings(fz_context *ctx)
 {
+	if (!ctx)
+		return;
+
 	if (ctx->warn.count > 1)
 	{
 		char buf[50];
@@ -76,6 +100,12 @@ void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 
 	fz_vsnprintf(buf, sizeof buf, fmt, ap);
 	buf[sizeof(buf) - 1] = 0;
+
+	if (!ctx)
+	{
+		fz_default_warning_callback(NULL, buf);
+		return;
+	}
 
 	if (!strcmp(buf, ctx->warn.message))
 	{
@@ -96,6 +126,52 @@ void fz_warn(fz_context *ctx, const char *fmt, ...)
 	va_list ap;
 	va_start(ap, fmt);
 	fz_vwarn(ctx, fmt, ap);
+	va_end(ap);
+}
+
+void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
+{
+	char buf[4096];
+
+	fz_flush_warnings(ctx);
+
+	fz_vsnprintf(buf, sizeof buf, fmt, ap);
+	buf[sizeof(buf) - 1] = 0;
+
+	if (ctx && ctx->info.print)
+		ctx->info.print(ctx->info.print_user, buf);
+	else
+		fz_default_info_callback(NULL, buf);
+}
+
+void fz_info(fz_context* ctx, const char* fmt, ...)
+{
+	va_list ap;
+	va_start(ap, fmt);
+	fz_vinfo(ctx, fmt, ap);
+	va_end(ap);
+}
+
+void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
+{
+	char buf[4096];
+
+	fz_flush_warnings(ctx);
+
+	fz_vsnprintf(buf, sizeof buf, fmt, ap);
+	buf[sizeof(buf) - 1] = 0;
+
+	if (ctx && ctx->error.print)
+		ctx->error.print(ctx->error.print_user, buf);
+	else
+		fz_default_error_callback(NULL, buf);
+}
+
+void fz_error(fz_context* ctx, const char* fmt, ...)
+{
+	va_list ap;
+	va_start(ap, fmt);
+	fz_vinfo(ctx, fmt, ap);
 	va_end(ap);
 }
 

@@ -185,6 +185,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 
 	ctx->error.print = fz_default_error_callback;
 	ctx->warn.print = fz_default_warning_callback;
+	ctx->info.print = fz_default_info_callback;
 
 	fz_init_error_context(ctx);
 	fz_init_aa_context(ctx);
@@ -254,4 +255,42 @@ void *fz_user_context(fz_context *ctx)
 		return NULL;
 
 	return ctx->user;
+}
+
+static fz_context *global_ctx = NULL;
+
+fz_context* fz_get_global_context(void)
+{
+	if (!global_ctx)
+	{
+		fz_set_global_context(fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED));
+	}
+	return global_ctx;
+}
+
+void fz_set_global_context(fz_context *ctx)
+{
+	if (global_ctx)
+	{
+		fprintf(stderr, "cannot (re)set global context after initial setup");
+		exit(1);
+	}
+	if (!ctx)
+	{
+		fprintf(stderr, "cannot set global context to NULL (out of memory?)");
+		exit(1);
+	}
+	global_ctx = ctx;
+	atexit(fz_drop_global_context);
+}
+
+int fz_has_global_context(void)
+{
+	return global_ctx != NULL;
+}
+
+void fz_drop_global_context(void)
+{
+	fz_drop_context(global_ctx);
+	global_ctx = NULL;
 }
