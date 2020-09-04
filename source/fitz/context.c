@@ -158,6 +158,7 @@ fz_context *
 fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks, size_t max_store, const char *version)
 {
 	fz_context *ctx;
+	fz_context* global_default_ctx = NULL;
 
 	if (strcmp(version, FZ_VERSION))
 	{
@@ -165,11 +166,16 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		return NULL;
 	}
 
+	if (fz_has_global_context())
+	{
+		global_default_ctx = fz_get_global_context();
+	}
+
 	if (!alloc)
-		alloc = &fz_alloc_default;
+		alloc = global_default_ctx ? &global_default_ctx->alloc : &fz_alloc_default;
 
 	if (!locks)
-		locks = &fz_locks_default;
+		locks = global_default_ctx ? &global_default_ctx->locks : &fz_locks_default;
 
 	ctx = Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
 	if (!ctx)
@@ -183,13 +189,26 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	ctx->alloc = *alloc;
 	ctx->locks = *locks;
 
-	ctx->error.print = fz_default_error_callback;
-	ctx->warn.print = fz_default_warning_callback;
-	ctx->info.print = fz_default_info_callback;
+	if (global_default_ctx)
+	{
+		ctx->error = global_default_ctx->error;
+		ctx->warn = global_default_ctx->warn;
+		ctx->info = global_default_ctx->info;
+
+		// and copy the randomness pool across for predictable semi-random behaviour in all *default* sub contexts
+		memcpy(ctx->seed48, global_default_ctx->seed48, sizeof ctx->seed48);
+	}
+	else
+	{
+		ctx->error.print = fz_default_error_callback;
+		ctx->warn.print = fz_default_warning_callback;
+		ctx->info.print = fz_default_info_callback;
+
+		fz_init_random_context(ctx);
+	}
 
 	fz_init_error_context(ctx);
 	fz_init_aa_context(ctx);
-	fz_init_random_context(ctx);
 
 	/* Now initialise sections that are shared */
 	fz_try(ctx)

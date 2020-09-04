@@ -677,21 +677,6 @@ main(int argc, const char *argv[])
 	memset(&timing, 0, sizeof(timing));
 	timing.min = 1 << 30;
 
-	if (!fz_has_global_context())
-	{
-		ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
-		if (!ctx)
-		{
-			fz_error(ctx, "cannot initialise MuPDF context");
-			return EXIT_FAILURE;
-		}
-		fz_set_global_context(ctx);
-	}
-	else
-	{
-		ctx = fz_get_global_context();
-	}
-
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:Lvm:")) != -1)
 	{
@@ -738,15 +723,22 @@ main(int argc, const char *argv[])
 	if (lowmemory)
 		max_store = 1;
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(alloc_ctx, locks, max_store);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(alloc_ctx, locks, max_store);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
-	}
-	if (!fz_has_global_context())
-	{
-		fz_set_global_context(ctx);
 	}
 	atexit(mu_drop_context);
 
@@ -958,7 +950,7 @@ main(int argc, const char *argv[])
 		pdfapp_close(&gapp);
 
 	fz_flush_warnings(ctx);
-	//fz_drop_context(ctx);
+	fz_drop_context(ctx);
 
 	return errored;
 }

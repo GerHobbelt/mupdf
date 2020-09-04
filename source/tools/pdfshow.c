@@ -19,7 +19,7 @@ static int showcolumn = 0;
 
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx, "%s",
 		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *\n"
 		"\t-p -\tpassword\n"
 		"\t-o -\toutput file\n"
@@ -588,10 +588,21 @@ int pdfshow_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -624,7 +635,7 @@ int pdfshow_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s\n", fz_caught_message(ctx));
 		errored = 1;
 	}
 

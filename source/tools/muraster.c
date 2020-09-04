@@ -1733,20 +1733,24 @@ int muraster_main(int argc, const char *argv[])
 	if (lowmemory)
 		max_store = 1;
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(alloc_ctx, locks, max_store);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(alloc_ctx, locks, max_store);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
-	if (!fz_has_global_context())
-	{
-		fz_set_global_context(ctx);
-	}
-	else
-	{
-		atexit(mu_drop_context);
-	}
+	atexit(mu_drop_context);
 
 	fz_set_text_aa_level(ctx, alphabits_text);
 	fz_set_graphics_aa_level(ctx, alphabits_graphics);
@@ -2025,7 +2029,7 @@ int muraster_main(int argc, const char *argv[])
 	out = NULL;
 
 	fz_flush_warnings(ctx);
-	//fz_drop_context(ctx);
+	fz_drop_context(ctx);
 
 	return (errored != 0);
 }

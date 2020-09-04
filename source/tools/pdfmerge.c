@@ -10,21 +10,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static fz_context *ctx = NULL;
+static pdf_document *doc_des = NULL;
+static pdf_document *doc_src = NULL;
+
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx, "%s",
 		"usage: mutool merge [-o output.pdf] [-O options] input.pdf [pages] [input2.pdf] [pages2] ...\n"
 		"\t-o -\tname of PDF file to create\n"
 		"\t-O -\tcomma separated list of output options\n"
 		"\tinput.pdf\tname of input file from which to copy pages\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n\n"
 		);
-	fputs(fz_pdf_write_options_usage, stderr);
+	fz_info(ctx, "%s", fz_pdf_write_options_usage);
 }
-
-static fz_context *ctx = NULL;
-static pdf_document *doc_des = NULL;
-static pdf_document *doc_src = NULL;
 
 static void page_merge(int page_from, int page_to, pdf_graft_map *graft_map)
 {
@@ -143,10 +143,21 @@ int pdfmerge_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "error: Cannot initialize MuPDF context.\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -194,5 +205,6 @@ int pdfmerge_main(int argc, const char **argv)
 	pdf_drop_document(ctx, doc_des);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return 0;
+
+	return EXIT_SUCCESS;
 }
