@@ -531,7 +531,8 @@ fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc)
 		out = fz_new_output_with_buffer(ctx, buf);
 		fz_print_stext_header_as_xhtml(ctx, out);
 
-		for (i = 0; i < fz_count_pages(ctx, old_doc); ++i)
+		int n = fz_count_pages(ctx, old_doc);
+		for (i = 0; i < n; ++i)
 		{
 			text = fz_new_stext_page_from_page_number(ctx, old_doc, i, &opts);
 			fz_print_stext_page_as_xhtml(ctx, out, text, i+1);
