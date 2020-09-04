@@ -1956,7 +1956,7 @@ int muraster_main(int argc, const char *argv[])
 	fz_catch(ctx)
 	{
 		fz_drop_document(ctx, doc);
-		fz_error(ctx, "error: cannot draw '%s': %s", filename, fz_caught_message(ctx));
+		fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
 		errored = 1;
 	}
 

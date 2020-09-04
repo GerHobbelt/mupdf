@@ -639,7 +639,7 @@ int pdfshow_main(int argc, const char **argv)
 		int code = fz_caught(ctx);
 		if (code == FZ_ERROR_ABORT || code == FZ_ERROR_TRYLATER)
 		{
-			fz_error(ctx, "%s\n", fz_caught_message(ctx));
+			fz_error(ctx, "%s", fz_caught_message(ctx));
 		}
 		errored = 1;
 	}

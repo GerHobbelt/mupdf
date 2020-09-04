@@ -135,7 +135,7 @@ int pdfclean_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_warn(ctx, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		errors++;
 	}
 	fz_flush_warnings(ctx);

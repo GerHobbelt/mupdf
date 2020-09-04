@@ -42,7 +42,7 @@ showbox(fz_context *ctx, fz_output *out, pdf_obj *page, char *text, pdf_obj *nam
 	}
 	fz_catch(ctx)
 	{
-		fz_warn(ctx, "box error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "box error: %s", fz_caught_message(ctx));
 		failed = 1;
 	}
 
@@ -65,7 +65,7 @@ shownum(fz_context *ctx, fz_output *out, pdf_obj *page, char *text, pdf_obj *nam
 	}
 	fz_catch(ctx)
 	{
-		fz_warn(ctx, "num error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "num error: %s", fz_caught_message(ctx));
 		failed = 1;
 	}
 

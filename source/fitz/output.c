@@ -287,7 +287,7 @@ void
 fz_seek_output(fz_context *ctx, fz_output *out, int64_t off, int whence)
 {
 	if (out->seek == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot seek in unseekable output stream\n");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot seek in unseekable output stream");
 	fz_flush_output(ctx, out);
 	out->seek(ctx, out->state, off, whence);
 }
@@ -296,7 +296,7 @@ int64_t
 fz_tell_output(fz_context *ctx, fz_output *out)
 {
 	if (out->tell == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot tell in untellable output stream\n");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot tell in untellable output stream");
 	if (out->bp)
 		return out->tell(ctx, out->state) + (out->wp - out->bp);
 	return out->tell(ctx, out->state);

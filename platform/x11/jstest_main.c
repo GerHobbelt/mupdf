@@ -129,9 +129,9 @@ static void *hit_limit(void *val)
 static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		fz_error(ctx, "Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->mem_limit, size, info->current);
 	else
-		fz_error(ctx, "Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.", info->mem_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -139,9 +139,9 @@ static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t old
 static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		fz_error(ctx, "Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->alloc_limit, size, info->current);
 	else
-		fz_error(ctx, "Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.", info->alloc_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -186,13 +186,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
@@ -227,13 +227,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
 		return NULL;
 	}
 	else
@@ -277,7 +277,7 @@ void winerror(pdfapp_t *app, char *msg)
 
 void winalert(pdfapp_t *app, pdf_alert_event *alert)
 {
-	fz_error(ctx, "Alert %s: %s\n", alert->title, alert->message);
+	fz_error(ctx, "Alert %s: %s", alert->title, alert->message);
 	switch (alert->button_group_type)
 	{
 	case PDF_ALERT_BUTTON_GROUP_OK:
@@ -297,7 +297,7 @@ void winadvancetimer(pdfapp_t *app, float duration)
 
 void winprint(pdfapp_t *app)
 {
-	fz_warn(ctx, "The MuPDF library supports printing, but this application currently does not\n");
+	fz_warn(ctx, "The MuPDF library supports printing, but this application currently does not");
 }
 
 int winquery(pdfapp_t *app, const char *query)
@@ -590,14 +590,14 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 
 			if (!e)
 			{
-				fz_throw(ctx, FZ_ERROR_GENERIC, "MUTOOL command error: unterminated string parameter: %s\n", s);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "MUTOOL command error: unterminated string parameter: %s", s);
 				return;
 			}
 
 			// point at terminating quote, check if it is followed by whitespace or EOL:
 			if (e[1] != 0 && !isspace((unsigned char)e[1]))
 			{
-				fz_throw(ctx, FZ_ERROR_GENERIC, "MUTOOL command error: whitespace or end of command expected after quoted string parameter: %s\n", s);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "MUTOOL command error: whitespace or end of command expected after quoted string parameter: %s", s);
 				return;
 			}
 			*e = 0;
@@ -641,10 +641,10 @@ static void mu_drop_context(void)
 	{
 		timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
 
-		fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands\n",
+		fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands",
 			timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
-		fz_info(ctx, "fastest command line %d: %lldms (%s)\n", timing.minscriptline, timing.min / 1000, timing.mincommand);
-		fz_info(ctx, "slowest command line %d: %lldms (%s)\n", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+		fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
+		fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
 	}
 
 	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
@@ -781,7 +781,7 @@ main(int argc, const char *argv[])
 	locks = init_mudraw_locks();
 	if (locks == NULL)
 	{
-		fz_error(NULL, "mutex initialisation failed\n");
+		fz_error(NULL, "mutex initialisation failed");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -846,6 +846,8 @@ main(int argc, const char *argv[])
 				linecounter++;
 				fflush(logcfg.logfile);
 
+				if (linecounter > 100) break;
+
 				if (line == NULL)
 				{
 					if (ferror(script))
@@ -855,7 +857,9 @@ main(int argc, const char *argv[])
 					break;
 				}
 				if (verbosity)
-					fz_info(ctx, "L#%04d: %s\n", linecounter, line);
+				{
+					fz_info(ctx, "L#%04d: %s", linecounter, line);
+				}
 
 				begin_time = Curl_now();
 
@@ -1002,11 +1006,11 @@ main(int argc, const char *argv[])
 	}
 	fz_catch(ctx)
 	{
-		fz_info(ctx, "cannot execute '%s': %s", scriptname, fz_caught_message(ctx));
+		fz_error(ctx, "cannot execute '%s': %s", scriptname, fz_caught_message(ctx));
 
 		struct curltime now = Curl_now();
 
-		fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+		fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 
 		errored = 1;
 	}

@@ -1070,7 +1070,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				{
 					fz_snprintf(buf + 1 + i * 2, sizeof buf - 1 - i * 2, "%02x", digest[i]);
 				}
-				fz_info(ctx, "MD5:%s\v", buf);
+				fz_info(ctx, " MD5:%s", buf);
 			}
 		}
 		fz_always(ctx)
@@ -1143,7 +1143,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			timing.count ++;
 
-			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)\v", interptime, diff, diff + interptime);
+			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
 		}
 		else
 		{
@@ -1162,12 +1162,12 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			timing.total += diff;
 			timing.count ++;
 
-			fz_info(ctx, " %dms\v", diff);
+			fz_info(ctx, " %dms (total)", diff);
 		}
 	}
 
-	if (!quiet || showfeatures || showtime || showmd5)
-		fz_info(ctx, "\n");
+	//if (!quiet || showfeatures || showtime || showmd5)
+	//	fz_info(ctx, "\n");
 
 	if (lowmemory)
 		fz_empty_store(ctx);
@@ -1338,7 +1338,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		else if (bgprint.active)
 		{
 			if (!quiet || showfeatures || showtime || showmd5)
-				fz_info(ctx, "page %s %d%s\v", filename, pagenum, features);
+				fz_info(ctx, "page %s %d%s", filename, pagenum, features);
 
 			bgprint.started = 1;
 			bgprint.page = page;
@@ -1360,7 +1360,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	else
 	{
 		if (!quiet || showfeatures || showtime || showmd5)
-			fz_info(ctx, "page %s %d%s\v", filename, pagenum, features);
+			fz_info(ctx, "page %s %d%s", filename, pagenum, features);
 		fz_try(ctx)
 			dodrawpage(ctx, page, list, pagenum, &cookie, start, 0, filename, 0, seps);
 		fz_always(ctx)
@@ -1518,13 +1518,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
@@ -1559,13 +1559,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
 		return NULL;
 	}
 	else
@@ -1688,13 +1688,12 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 		fz_info(ctx, "Layer configs:\n");
 		for (config = 0; config < num_configs; config++)
 		{
-			fz_info(ctx, " %s%d:\v", config < 10 ? " " : "", config);
+			fz_info(ctx, " %s%d:", config < 10 ? " " : "", config);
 			pdf_layer_config_info(ctx, pdoc, config, &info);
 			if (info.name)
-				fz_info(ctx, " Name=\"%s\"\v", info.name);
+				fz_info(ctx, "  Name=\"%s\"", info.name);
 			if (info.creator)
-				fz_info(ctx, " Creator=\"%s\"\v", info.creator);
-			fz_info(ctx, "\n");
+				fz_info(ctx, "  Creator=\"%s\"", info.creator);
 		}
 		return;
 	}
@@ -1732,34 +1731,45 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	}
 
 	/* Now list the final state of the config */
-	fz_info(ctx, "Layer Config %d:\n", config);
+	fz_info(ctx, "Layer Config %d:", config);
 	pdf_layer_config_info(ctx, pdoc, config, &info);
 	if (info.name)
-		fz_info(ctx, " Name=\"%s\"\v", info.name);
+		fz_info(ctx, "  Name=\"%s\"", info.name);
 	if (info.creator)
-		fz_info(ctx, " Creator=\"%s\"\v", info.creator);
-	fz_info(ctx, "\n");
+		fz_info(ctx, "  Creator=\"%s\"", info.creator);
 	n = pdf_count_layer_config_ui(ctx, pdoc);
 	for (j = 0; j < n; j++)
 	{
 		pdf_layer_config_ui ui;
+		char msgbuf[2048];
 
 		pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
-		fz_info(ctx, "%s%d: \v", j < 10 ? " " : "", j);
+		fz_snprintf(msgbuf, sizeof(msgbuf), "%s%d: \v", j < 10 ? " " : "", j);
 		while (ui.depth > 0)
 		{
 			ui.depth--;
-			fz_info(ctx, "  \v");
+			fz_strlcat(msgbuf, "  ", sizeof(msgbuf));
 		}
 		if (ui.type == PDF_LAYER_UI_CHECKBOX)
-			fz_info(ctx, " [%c] \v", ui.selected ? 'x' : ' ');
+		{
+			size_t len = strlen(msgbuf);
+			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " [%c] ", ui.selected ? 'x' : ' ');
+		}
 		else if (ui.type == PDF_LAYER_UI_RADIOBOX)
-			fz_info(ctx, " (%c) \v", ui.selected ? 'x' : ' ');
+		{
+			size_t len = strlen(msgbuf);
+			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " (%c) \v", ui.selected ? 'x' : ' ');
+		}
 		if (ui.text)
-			fz_info(ctx, "%s\v", ui.text);
+		{
+			size_t len = strlen(msgbuf);
+			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, "%s", ui.text);
+		}
 		if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
-			fz_info(ctx, " <locked>\v");
-		fz_info(ctx, "\n");
+		{
+			fz_strlcat(msgbuf, " <locked>", sizeof(msgbuf));
+		}
+		fz_info(ctx, msgbuf);
 	}
 #endif
 }
