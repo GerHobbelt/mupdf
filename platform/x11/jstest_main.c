@@ -4,6 +4,10 @@
 #include "pdfapp.h"
 #include "mupdf/helpers/dir.h"
 
+#ifndef DISABLE_MUTHREADS
+#include "mupdf/helpers/mu-threads.h"
+#endif
+
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -24,6 +28,225 @@ int mutool_main(int argc, const char** argv);
 */
 
 #define LONGLINE 4096
+
+/*
+	In the presence of pthreads or Windows threads, we can offer
+	a multi-threaded option. In the absence, of such, we degrade
+	nicely.
+*/
+#ifndef DISABLE_MUTHREADS
+
+static mu_mutex mutexes[FZ_LOCK_MAX];
+
+static void mudraw_lock(void *user, int lock)
+{
+	mu_lock_mutex(&mutexes[lock]);
+}
+
+static void mudraw_unlock(void *user, int lock)
+{
+	mu_unlock_mutex(&mutexes[lock]);
+}
+
+static fz_locks_context mudraw_locks =
+{
+	NULL, mudraw_lock, mudraw_unlock
+};
+
+static void fin_mudraw_locks(void)
+{
+	int i;
+
+	for (i = 0; i < FZ_LOCK_MAX; i++)
+		mu_destroy_mutex(&mutexes[i]);
+}
+
+static fz_locks_context *init_mudraw_locks(void)
+{
+	int i;
+	int failed = 0;
+
+	for (i = 0; i < FZ_LOCK_MAX; i++)
+		failed |= mu_create_mutex(&mutexes[i]);
+
+	if (failed)
+	{
+		fin_mudraw_locks();
+		return NULL;
+	}
+
+	return &mudraw_locks;
+}
+
+#endif
+
+static int showtime = 0;
+static int showmemory = 0;
+
+static struct {
+	struct curltime start_time;
+	int count;
+	timediff_t total;
+	timediff_t min, max;
+	int minscriptline, maxscriptline;
+	const char *mincommand;
+	const char *maxcommand;
+} timing;
+
+typedef struct
+{
+	size_t size;
+	size_t seqnum;
+#if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
+	size_t align;
+	size_t align2;
+#endif
+} trace_header;
+
+struct trace_info
+{
+	size_t current;
+	size_t peak;
+	size_t total;
+	size_t allocs;
+	size_t mem_limit;
+	size_t alloc_limit;
+};
+
+static int trace_current_seqnum = 1;
+
+static struct trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
+
+static void *hit_limit(void *val)
+{
+	return val;
+}
+
+static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
+{
+	if (is_malloc)
+		printf("Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
+	else
+		printf("Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
+	return hit_limit(NULL);
+}
+
+
+static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
+{
+	if (is_malloc)
+		printf("Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
+	else
+		printf("Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
+	return hit_limit(NULL);
+}
+
+static void *
+trace_malloc(void *arg, size_t size)
+{
+	struct trace_info *info = (struct trace_info *) arg;
+	trace_header *p;
+	if (size == 0)
+		return NULL;
+	if (size > SIZE_MAX - sizeof(trace_header))
+		return NULL;
+	if (info->mem_limit > 0 && size > info->mem_limit - info->current)
+		return hit_memory_limit(info, 1, 0, size);
+	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
+		return hit_alloc_limit(info, 1, 0, size);
+	p = malloc(size + sizeof(trace_header));
+	if (p == NULL)
+		return NULL;
+	p[0].size = size;
+	p[0].align = 0xEAD;
+	p[0].seqnum = trace_current_seqnum++;
+	info->current += size;
+	info->total += size;
+	if (info->current > info->peak)
+		info->peak = info->current;
+	info->allocs++;
+	return (void *)&p[1];
+}
+
+static void
+trace_free(void *arg, void *p_)
+{
+	struct trace_info *info = (struct trace_info *) arg;
+	trace_header *p = (trace_header *)p_;
+
+	if (p_ == NULL)
+		return;
+
+	size_t size = p[-1].size;
+	int rotten = 0;
+	info->current -= size;
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+	}
+	else
+	{
+		free(&p[-1]);
+	}
+}
+
+static void *
+trace_realloc(void *arg, void *p_, size_t size)
+{
+	struct trace_info *info = (struct trace_info *) arg;
+	trace_header *p = (trace_header *)p_;
+	size_t oldsize;
+
+	if (size == 0)
+	{
+		trace_free(arg, p_);
+		return NULL;
+	}
+
+	if (p_ == NULL)
+		return trace_malloc(arg, size);
+	if (size > SIZE_MAX - sizeof(trace_header))
+		return NULL;
+	oldsize = p[-1].size;
+	if (info->mem_limit > 0 && size > info->mem_limit - info->current + oldsize)
+		return hit_memory_limit(info, 0, oldsize, size);
+	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
+		return hit_alloc_limit(info, 0, oldsize, size);
+
+	int rotten = 0;
+	oldsize = p[-1].size;
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		return NULL;
+	}
+	else
+	{
+		p = realloc(&p[-1], size + sizeof(trace_header));
+		if (p == NULL)
+			return NULL;
+		info->current += size - oldsize;
+		if (size > oldsize)
+			info->total += size - oldsize;
+		if (info->current > info->peak)
+			info->peak = info->current;
+		p[0].size = size;
+		info->allocs++;
+		return &p[1];
+	}
+}
 
 static pdfapp_t gapp;
 static int file_open = 0;
@@ -402,8 +625,34 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 	*argc = count;
 }
 
+static void mu_drop_context(void)
+{
+#ifndef DISABLE_MUTHREADS
+	fin_mudraw_locks();
+#endif /* DISABLE_MUTHREADS */
+
+	if (showtime && timing.count > 0)
+	{
+		timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
+
+		fprintf(stderr, "total %lldms / %d commands for an average of %lldms in %d commands\n",
+			timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
+		fprintf(stderr, "fastest command line %d: %lldms (%s)\n", timing.minscriptline, timing.min / 1000, timing.mincommand);
+		fprintf(stderr, "slowest command line %d: %lldms (%s)\n", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+	}
+
+	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	{
+		char buf[100];
+		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
+		fprintf(stderr, "%s\n", buf);
+	}
+}
+
+
 int
-main(int argc, char *argv[])
+main(int argc, const char *argv[])
 {
 	fz_context *ctx;
 	FILE *script = NULL;
@@ -412,18 +661,58 @@ main(int argc, char *argv[])
 	int errored = 0;
 	unsigned int linecounter = 0;
 	int rv = 0;
-	struct curltime start_time;
 	struct curltime begin_time;
 	const char* line_command = NULL;
+	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
+	fz_alloc_context *alloc_ctx = NULL;
+	fz_locks_context *locks = NULL;
+	size_t max_store = FZ_STORE_DEFAULT;
+	int lowmemory = 0;
+
+	showtime = 0;
+	showmemory = 0;
+
+	memset(&trace_info, 0, sizeof trace_info);
+
+	memset(&timing, 0, sizeof(timing));
+	timing.min = 1 << 30;
+
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+	else
+	{
+		ctx = fz_get_global_context();
+	}
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:v")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:Lvm:")) != -1)
 	{
 		switch(c)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'p': prefix = fz_optarg; break;
 		case 'v': verbosity ^= 1; break;
+		case 's':
+			if (strchr(fz_optarg, 't')) ++showtime;
+			if (strchr(fz_optarg, 'm')) ++showmemory;
+			break;
+		case 'm':
+			if (fz_optarg[0] == 's') trace_info.mem_limit = fz_atoi64(&fz_optarg[1]);
+			else if (fz_optarg[0] == 'a') trace_info.alloc_limit = fz_atoi64(&fz_optarg[1]);
+			else trace_info.mem_limit = fz_atoi64(fz_optarg);
+			break;
+		case 'L': lowmemory = 1; break;
+
+		case 'V': fprintf(stderr, "mujstest version %s\n", FZ_VERSION); return EXIT_FAILURE;
+
 		default: usage(); return EXIT_FAILURE;
 		}
 	}
@@ -434,12 +723,33 @@ main(int argc, char *argv[])
 		return EXIT_FAILURE;
 	}
 
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+#ifndef DISABLE_MUTHREADS
+	locks = init_mudraw_locks();
+	if (locks == NULL)
+	{
+		fprintf(stderr, "mutex initialisation failed\n");
+		return EXIT_FAILURE;
+	}
+#endif
+
+	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+		alloc_ctx = &trace_alloc_ctx;
+
+	if (lowmemory)
+		max_store = 1;
+
+	ctx = fz_new_context(alloc_ctx, locks, max_store);
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
 		return EXIT_FAILURE;
 	}
+	if (!fz_has_global_context())
+	{
+		fz_set_global_context(ctx);
+	}
+	atexit(mu_drop_context);
+
 	pdfapp_init(ctx, &gapp);
 	gapp.scrw = 640;
 	gapp.scrh = 480;
@@ -447,7 +757,7 @@ main(int argc, char *argv[])
 
 	fz_try(ctx)
 	{
-		start_time = Curl_now();
+		timing.start_time = Curl_now();
 
 		while (fz_optind < argc)
 		{
@@ -596,9 +906,28 @@ main(int argc, char *argv[])
 				if (report_time)
 				{
 					struct curltime now = Curl_now();
-					fprintf(stderr, "T:%03dms D:%0.3lfs %s %s\n", (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+					timediff_t diff = Curl_timediff(now, begin_time);
+					fprintf(stderr, "T:%03dms D:%0.3lfs %s %s\n", (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 
-					fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs %s %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+					fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs %s %s\n", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+
+					if (showtime)
+					{
+						if (diff < timing.min)
+						{
+							timing.min = diff;
+							timing.mincommand = line_command;
+							timing.minscriptline = linecounter;
+						}
+						if (diff > timing.max)
+						{
+							timing.max = diff;
+							timing.maxcommand = line_command;
+							timing.maxscriptline = linecounter;
+						}
+						timing.total += diff;
+						timing.count++;
+					}
 				}
 			}
 			while (!feof(script));
@@ -614,7 +943,7 @@ main(int argc, char *argv[])
 		{
 			struct curltime now = Curl_now();
 
-			fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+			fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 		}
 		errored = 1;
 	}
@@ -629,7 +958,7 @@ main(int argc, char *argv[])
 		pdfapp_close(&gapp);
 
 	fz_flush_warnings(ctx);
-	fz_drop_context(ctx);
+	//fz_drop_context(ctx);
 
 	return errored;
 }

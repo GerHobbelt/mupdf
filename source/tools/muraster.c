@@ -139,7 +139,10 @@
 #include "timeval.h"
 
 #include "mupdf/fitz.h"
+
+#ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
+#endif
 
 #include <string.h>
 #include <stdlib.h>
@@ -154,16 +157,9 @@
 	these for configuration.
 */
 
-/* Unless we have specifically disabled threading, enable it. */
-#ifndef DISABLE_MUTHREADS
-#ifndef MURASTER_THREADS
-#define MURASTER_THREADS 1
-#endif
-#endif
-
 /* If we have threading, and we haven't already configured BGPRINT,
  * enable it. */
-#if MURASTER_THREADS != 0
+#ifndef DISABLE_MUTHREADS
 #ifndef MURASTER_CONFIG_BGPRINT
 #define MURASTER_CONFIG_BGPRINT 1
 #endif
@@ -280,6 +276,12 @@ static const suffix_t suffix_table[] =
 #endif
 };
 
+
+/*
+	In the presence of pthreads or Windows threads, we can offer
+	a multi-threaded option. In the absence, of such, we degrade
+	nicely.
+*/
 #ifndef DISABLE_MUTHREADS
 
 static mu_mutex mutexes[FZ_LOCK_MAX];
@@ -340,7 +342,7 @@ static fz_locks_context *init_muraster_locks(void)
 
 #ifdef MURASTER_CONFIG_BGPRINT
 #define BGPRINT MURASTER_CONFIG_BGPRINT
-#elif MURASTER_THREADS == 0
+#elif defined(DISABLE_MUTHREADS)
 #define BGPRINT 0
 #else
 #define BGPRINT 1
@@ -362,9 +364,11 @@ typedef struct worker_t {
 	fz_pixmap *pix;
 	fz_bitmap *bit;
 	fz_cookie cookie;
+#ifndef DISABLE_MUTHREADS
 	mu_semaphore start;
 	mu_semaphore stop;
 	mu_thread thread;
+#endif
 } worker_t;
 
 static const char *output = NULL;
@@ -396,10 +400,12 @@ static int alphabits_graphics = 8;
 
 static int min_band_height;
 static size_t max_band_memory;
+static int lowmemory = 0;
 
 static int errored = 0;
 static fz_colorspace *colorspace;
 static const char *filename;
+static int files = 0;
 static int num_workers = 0;
 static worker_t *workers;
 
@@ -461,9 +467,11 @@ static struct {
 	int solo;
 	int status;
 	fz_context *ctx;
+#ifndef DISABLE_MUTHREADS
 	mu_thread thread;
 	mu_semaphore start;
 	mu_semaphore stop;
+#endif
 	int pagenum;
 	const char *filename;
 	render_details render;
@@ -477,6 +485,10 @@ static struct {
 	int minpage, maxpage;
 	const char *minfilename;
 	const char *maxfilename;
+	int layout;
+	int minlayout, maxlayout;
+	const char *minlayoutfilename;
+	const char *maxlayoutfilename;
 } timing;
 
 // https://stackoverflow.com/questions/2653214/stringification-of-a-macro-value
@@ -508,7 +520,8 @@ static void usage(void)
 		"\t-M -\tmax bandmemory (e.g. 655360)\n"
 #ifndef DISABLE_MUTHREADS
 		"\t-T -\tnumber of threads to use for rendering\n"
-		"\t-P\tparallel interpretation/rendering\n"
+#else
+		"\t-T -\tnumber of threads to use for rendering (disabled in this non-threading build)\n"
 #endif
 		"\n"
 		"\t-W -\tpage width for EPUB layout\n"
@@ -519,6 +532,12 @@ static void usage(void)
 		"\n"
 		"\t-A -\tnumber of bits of antialiasing (0 to 8)\n"
 		"\t-A -/-\tnumber of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"\t-L\tlow memory mode (avoid caching, clear objects after each page)\n"
+#ifndef DISABLE_MUTHREADS
+		"\t-P\tparallel interpretation/rendering\n"
+#else
+		"\t-P\tparallel interpretation/rendering (disabled in this non-threading build)\n"
+#endif
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);
@@ -550,6 +569,8 @@ static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_ma
 		fz_clear_pixmap_with_value(ctx, pix, 255);
 
 		dev = fz_new_draw_device(ctx, fz_identity, pix);
+		if (lowmemory)
+			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		if (alphabits_graphics == 0)
 			fz_enable_device_hints(ctx, dev, FZ_DONT_INTERPOLATE_IMAGES);
 		if (list)
@@ -616,9 +637,11 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				remaining_height -= band_height;
 				w->pix = fz_new_pixmap_with_bbox(ctx, colorspace, ibounds, NULL, 0);
 				fz_set_pixmap_resolution(ctx, w->pix, x_resolution, y_resolution);
-				DEBUG_THREADS(("Worker %d, Pre-triggering band %d\n", band, band));
 				w->started = 1;
+#ifndef DISABLE_MUTHREADS
+				DEBUG_THREADS(("Worker %d, Pre-triggering band %d\n", band, band));
 				mu_trigger_semaphore(&w->start);
+#endif
 				ctm.f -= band_height;
 			}
 			pix = workers[0].pix;
@@ -641,8 +664,10 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 			if (render->num_workers > 0)
 			{
 				worker_t *w = &workers[band % render->num_workers];
+#ifndef DISABLE_MUTHREADS
 				DEBUG_THREADS(("Waiting for worker %d to complete band %d\n", w->num, band));
 				mu_wait_semaphore(&w->stop);
+#endif
 				w->started = 0;
 				status = w->status;
 				pix = w->pix;
@@ -675,9 +700,11 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				w->ctm = ctm;
 				w->tbounds = tbounds;
 				memset(&w->cookie, 0, sizeof(fz_cookie));
-				DEBUG_THREADS(("Triggering worker %d for band_start= %d\n", w->num, w->band_start));
 				w->started = 1;
+#ifndef DISABLE_MUTHREADS
+				DEBUG_THREADS(("Triggering worker %d for band_start= %d\n", w->num, w->band_start));
 				mu_trigger_semaphore(&w->start);
+#endif
 			}
 			ctm.f -= draw_height;
 		}
@@ -695,10 +722,14 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				w->cookie.abort = 1;
 				if (w->started)
 				{
+#ifndef DISABLE_MUTHREADS
+					DEBUG_THREADS(("Waiting on worker %d to finish processing\n", band));
 					mu_wait_semaphore(&w->stop);
+#endif
 					w->started = 0;
 				}
 				fz_drop_pixmap(ctx, w->pix);
+				w->pix = NULL;
 			}
 		}
 		else
@@ -833,6 +864,9 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 		}
 	}
 
+	if (lowmemory)
+		fz_empty_store(ctx);
+
 	if (showmemory)
 	{
 		fz_dump_glyph_cache_stats(ctx, fz_stderr(ctx));
@@ -848,7 +882,9 @@ static int wait_for_bgprint_to_finish(void)
 	if (!bgprint.active || !bgprint.started)
 		return 0;
 
+#ifndef DISABLE_MUTHREADS
 	mu_wait_semaphore(&bgprint.stop);
+#endif
 	bgprint.started = 0;
 	return bgprint.status;
 }
@@ -1092,6 +1128,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_try(ctx)
 			{
 				test_dev = fz_new_test_device(ctx, &is_color, 0.01f, 0, NULL);
+				if (lowmemory)
+					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
 				fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
 				fz_close_device(ctx, test_dev);
 			}
@@ -1104,6 +1142,12 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 				/* We failed. Just give up. */
 				fz_drop_page(ctx, page);
 				fz_rethrow(ctx);
+			}
+
+			if (bgprint.active && showtime)
+			{
+				int end = gettime();
+				start = end - start;
 			}
 		}
 #endif
@@ -1119,6 +1163,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_try(ctx)
 			{
 				test_dev = fz_new_test_device(ctx, &is_color, 0.01f, FZ_TEST_OPT_IMAGES | FZ_TEST_OPT_SHADINGS, NULL);
+				if (lowmemory)
+					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
 				if (list)
 					fz_run_display_list(ctx, list, test_dev, &fz_identity, &fz_infinite_rect, &cookie);
 				else
@@ -1128,6 +1174,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_always(ctx)
 			{
 				fz_drop_device(ctx, test_dev);
+				test_dev = NULL;
 			}
 			fz_catch(ctx)
 			{
@@ -1196,7 +1243,9 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		bgprint.filename = filename;
 		bgprint.pagenum = pagenum;
 		bgprint.interptime = start;
+#ifndef DISABLE_MUTHREADS
 		mu_trigger_semaphore(&bgprint.start);
+#endif
 	}
 	else
 	{
@@ -1269,22 +1318,57 @@ typedef struct
 #endif
 } trace_header;
 
-typedef struct
+struct trace_info
 {
 	size_t current;
 	size_t peak;
 	size_t total;
-} trace_info;
+	size_t allocs;
+	size_t mem_limit;
+	size_t alloc_limit;
+};
 
 static int trace_current_seqnum = 1;
+
+static struct trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
+
+static void *hit_limit(void *val)
+{
+	return val;
+}
+
+static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
+{
+	if (is_malloc)
+		printf("Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
+	else
+		printf("Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
+	return hit_limit(NULL);
+}
+
+
+static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
+{
+	if (is_malloc)
+		printf("Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
+	else
+		printf("Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
+	return hit_limit(NULL);
+}
 
 static void *
 trace_malloc(void *arg, size_t size)
 {
-	trace_info *info = (trace_info *) arg;
+	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p;
 	if (size == 0)
 		return NULL;
+	if (size > SIZE_MAX - sizeof(trace_header))
+		return NULL;
+	if (info->mem_limit > 0 && size > info->mem_limit - info->current)
+		return hit_memory_limit(info, 1, 0, size);
+	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
+		return hit_alloc_limit(info, 1, 0, size);
 	p = malloc(size + sizeof(trace_header));
 	if (p == NULL)
 		return NULL;
@@ -1295,13 +1379,14 @@ trace_malloc(void *arg, size_t size)
 	info->total += size;
 	if (info->current > info->peak)
 		info->peak = info->current;
+	info->allocs++;
 	return (void *)&p[1];
 }
 
 static void
 trace_free(void *arg, void *p_)
 {
-	trace_info *info = (trace_info *) arg;
+	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
 
 	if (p_ == NULL)
@@ -1329,7 +1414,7 @@ trace_free(void *arg, void *p_)
 static void *
 trace_realloc(void *arg, void *p_, size_t size)
 {
-	trace_info *info = (trace_info *) arg;
+	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
 	size_t oldsize;
 
@@ -1341,6 +1426,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 
 	if (p_ == NULL)
 		return trace_malloc(arg, size);
+	if (size > SIZE_MAX - sizeof(trace_header))
+		return NULL;
+	oldsize = p[-1].size;
+	if (info->mem_limit > 0 && size > info->mem_limit - info->current + oldsize)
+		return hit_memory_limit(info, 0, oldsize, size);
+	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
+		return hit_alloc_limit(info, 0, oldsize, size);
 
 	int rotten = 0;
 	oldsize = p[-1].size;
@@ -1366,6 +1458,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 		if (info->current > info->peak)
 			info->peak = info->current;
 		p[0].size = size;
+		info->allocs++;
 		return &p[1];
 	}
 }
@@ -1384,11 +1477,14 @@ static void worker_thread(void *arg)
 		DEBUG_THREADS(("Worker %d woken for band_start %d\n", me->num, me->band_start));
 		me->status = RENDER_OK;
 		if (band_start >= 0)
+		{
 			me->status = drawband(me->ctx, NULL, me->list, me->ctm, me->tbounds, &me->cookie, band_start, me->pix, &me->bit);
+		}
 		DEBUG_THREADS(("Worker %d completed band_start %d (status=%d)\n", me->num, band_start, me->status));
 		mu_trigger_semaphore(&me->stop);
 	}
 	while (band_start >= 0);
+	DEBUG_THREADS(("Worker %d shutting down\n", me->num));
 }
 
 static void bgprint_worker(void *arg)
@@ -1414,6 +1510,7 @@ static void bgprint_worker(void *arg)
 		mu_trigger_semaphore(&bgprint.stop);
 	}
 	while (pagenum >= 0);
+	DEBUG_THREADS(("BGPrint shutting down\n"));
 }
 #endif
 
@@ -1458,6 +1555,21 @@ read_rotation(const char *arg)
 	return i;
 }
 
+static void mu_drop_context(void)
+{
+#ifndef DISABLE_MUTHREADS
+	fin_muraster_locks();
+#endif /* DISABLE_MUTHREADS */
+
+	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	{
+		char buf[100];
+		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
+		fprintf(stderr, "%s\n", buf);
+	}
+}
+
 #ifdef MURASTER_STANDALONE
 int main(int argc, const char** argv)
 #else
@@ -1468,12 +1580,14 @@ int muraster_main(int argc, const char *argv[])
 	fz_document *doc = NULL;
 	int c;
 	fz_context *ctx;
-	trace_info info = { 0, 0, 0 };
-	fz_alloc_context alloc_ctx = { &info, trace_malloc, trace_realloc, trace_free };
+	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
+	fz_alloc_context *alloc_ctx = NULL;
 	fz_locks_context *locks = NULL;
+	size_t max_store = FZ_STORE_DEFAULT;
 
 	fz_var(doc);
 
+	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
 	output = NULL;
 	out = NULL;
 
@@ -1491,11 +1605,16 @@ int muraster_main(int argc, const char *argv[])
 	showtime = 0;
 	showmemory = 0;
 
+	memset(&trace_info, 0, sizeof trace_info);
+
 	ignore_errors = 0;
 	alphabits_text = 8;
 	alphabits_graphics = 8;
 
+	lowmemory = 0;
+
 	errored = 0;
+	files = 0;
 
 	memset(&bgprint, 0, sizeof(bgprint));
 	memset(&timing, 0, sizeof(timing));
@@ -1514,7 +1633,7 @@ int muraster_main(int argc, const char *argv[])
 	y_resolution = Y_RESOLUTION;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XvP")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPm:")) != -1)
 	{
 		switch (c)
 		{
@@ -1558,20 +1677,26 @@ int muraster_main(int argc, const char *argv[])
 		case 'i': ignore_errors = 1; break;
 
 		case 'T':
-#if MURASTER_THREADS != 0
+#ifndef DISABLE_MUTHREADS
 			num_workers = atoi(fz_optarg); break;
 #else
 			fprintf(stderr, "Threads not enabled in this build\n");
 			break;
 #endif
+		case 'm':
+			if (fz_optarg[0] == 's') trace_info.mem_limit = fz_atoi64(&fz_optarg[1]);
+			else if (fz_optarg[0] == 'a') trace_info.alloc_limit = fz_atoi64(&fz_optarg[1]);
+			else trace_info.mem_limit = fz_atoi64(fz_optarg);
+			break;
+		case 'L': lowmemory = 1; break;
 		case 'P':
-#if MURASTER_THREADS != 0
+#ifndef DISABLE_MUTHREADS
 			bgprint.active = 1; break;
 #else
 			fprintf(stderr, "Threads not enabled in this build\n");
 			break;
 #endif
-		case 'v': fprintf(stderr, "muraster version %s\n", FZ_VERSION); return 1;
+		case 'v': fprintf(stderr, "muraster version %s\n", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
@@ -1602,11 +1727,25 @@ int muraster_main(int argc, const char *argv[])
 	}
 #endif
 
-	ctx = fz_new_context((showmemory == 0 ? NULL : &alloc_ctx), locks, FZ_STORE_DEFAULT);
+	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+		alloc_ctx = &trace_alloc_ctx;
+
+	if (lowmemory)
+		max_store = 1;
+
+	ctx = fz_new_context(alloc_ctx, locks, max_store);
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
 		return EXIT_FAILURE;
+	}
+	if (!fz_has_global_context())
+	{
+		fz_set_global_context(ctx);
+	}
+	else
+	{
+		atexit(mu_drop_context);
 	}
 
 	fz_set_text_aa_level(ctx, alphabits_text);
@@ -1744,6 +1883,13 @@ int muraster_main(int argc, const char *argv[])
 	timing.maxpage = 0;
 	timing.minfilename = "";
 	timing.maxfilename = "";
+	timing.layout = 0;
+	timing.minlayout = 1 << 30;
+	timing.maxlayout = 0;
+	timing.minlayoutfilename = "";
+	timing.maxlayoutfilename = "";
+	if (showtime && bgprint.active)
+		timing.total = gettime();
 
 	fz_try(ctx)
 	{
@@ -1751,9 +1897,12 @@ int muraster_main(int argc, const char *argv[])
 
 		while (fz_optind < argc)
 		{
+			int layouttime;
+
 			fz_try(ctx)
 			{
 				filename = argv[fz_optind++];
+				files++;
 
 				doc = fz_open_document(ctx, filename);
 
@@ -1763,7 +1912,22 @@ int muraster_main(int argc, const char *argv[])
 						fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
 				}
 
+				layouttime = gettime();
 				fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
+				(void) fz_count_pages(ctx, doc);   // added to ensure a more proper layouttime figure
+				layouttime = gettime() - layouttime;
+
+				timing.layout += layouttime;
+				if (layouttime < timing.minlayout)
+				{
+					timing.minlayout = layouttime;
+					timing.minlayoutfilename = filename;
+				}
+				if (layouttime > timing.maxlayout)
+				{
+					timing.maxlayout = layouttime;
+					timing.maxlayoutfilename = filename;
+				}
 
 				if (fz_optind == argc || !fz_is_page_range(ctx, argv[fz_optind]))
 					drawrange(ctx, doc, "1-N");
@@ -1788,23 +1952,48 @@ int muraster_main(int argc, const char *argv[])
 	fz_catch(ctx)
 	{
 		fz_drop_document(ctx, doc);
-		fz_warn(ctx, "error: %s\n", fz_caught_message(ctx));
-		fprintf(stderr, "error: cannot draw '%s'\n", filename);
+		fprintf(stderr, "error: cannot draw '%s': %s\n", filename, fz_caught_message(ctx));
 		errored = 1;
 	}
 
 	if (showtime && timing.count > 0)
 	{
-		fprintf(stderr, "total %dms / %d pages for an average of %dms\n",
-			timing.total, timing.count, timing.total / timing.count);
-		fprintf(stderr, "fastest page %d: %dms\n", timing.minpage, timing.min);
-		fprintf(stderr, "slowest page %d: %dms\n", timing.maxpage, timing.max);
+		if (bgprint.active)
+			timing.total = gettime() - timing.total;
+
+		if (files == 1)
+		{
+			fprintf(stderr, "total %dms (%dms layout) / %d pages for an average of %dms\n",
+					timing.total, timing.layout, timing.count, timing.total / timing.count);
+			if (bgprint.active)
+			{
+				fprintf(stderr, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)\n",
+						timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
+				fprintf(stderr, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)\n",
+						timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
+			}
+			else
+			{
+				fprintf(stderr, "fastest page %d: %dms\n", timing.minpage, timing.min);
+				fprintf(stderr, "slowest page %d: %dms\n", timing.maxpage, timing.max);
+			}
+		}
+		else
+		{
+			fprintf(stderr, "total %dms (%dms layout) / %d pages for an average of %dms in %d files\n",
+					timing.total, timing.layout, timing.count, timing.total / timing.count, files);
+			fprintf(stderr, "fastest layout: %dms (%s)\n", timing.minlayout, timing.minlayoutfilename);
+			fprintf(stderr, "slowest layout: %dms (%s)\n", timing.maxlayout, timing.maxlayoutfilename);
+			fprintf(stderr, "fastest page %d: %dms (%s)\n", timing.minpage, timing.min, timing.minfilename);
+			fprintf(stderr, "slowest page %d: %dms (%s)\n", timing.maxpage, timing.max, timing.maxfilename);
+		}
 	}
 
 #ifndef DISABLE_MUTHREADS
 	if (num_workers > 0)
 	{
 		int i;
+		DEBUG_THREADS(("Asking workers to shutdown, then destroy their resources\n"));
 		for (i = 0; i < num_workers; i++)
 		{
 			workers[i].band_start = -1;
@@ -1836,17 +2025,7 @@ int muraster_main(int argc, const char *argv[])
 	out = NULL;
 
 	fz_flush_warnings(ctx);
-	fz_drop_context(ctx);
-#ifndef DISABLE_MUTHREADS
-	fin_muraster_locks();
-#endif /* DISABLE_MUTHREADS */
-
-	if (showmemory)
-	{
-		char buf[100];
-		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", info.total, info.peak, info.current);
-		fprintf(stderr, "%s\n", buf);
-	}
+	//fz_drop_context(ctx);
 
 	return (errored != 0);
 }

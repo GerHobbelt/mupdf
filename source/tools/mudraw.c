@@ -49,8 +49,11 @@
 #endif
 
 /* Enable for helpful threading debug */
-/* #define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0) */
+#if 01
+#define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0)
+#else
 #define DEBUG_THREADS(A) do { } while (0)
+#endif
 
 enum {
 	OUT_NONE,
@@ -1093,7 +1096,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 						workers[i].running = 0;
 					}
 					else
+					{
 						DEBUG_THREADS(("Worker %d not processing anything\n", i));
+					}
 					fz_drop_pixmap(ctx, workers[i].pix);
 					workers[i].pix = NULL;
 				}
@@ -1163,7 +1168,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_empty_store(ctx);
 
 	if (showmemory)
+	{
 		fz_dump_glyph_cache_stats(ctx, fz_stderr(ctx));
+	}
 
 	fz_flush_warnings(ctx);
 
@@ -1420,12 +1427,14 @@ parse_colorspace(const char *name)
 typedef struct
 {
 	size_t size;
-#if defined(_M_IA64) || defined(_M_AMD64)
+	size_t seqnum;
+#if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
 	size_t align;
+	size_t align2;
 #endif
 } trace_header;
 
-typedef struct
+struct trace_info
 {
 	size_t current;
 	size_t peak;
@@ -1433,14 +1442,18 @@ typedef struct
 	size_t allocs;
 	size_t mem_limit;
 	size_t alloc_limit;
-} trace_info;
+};
+
+static int trace_current_seqnum = 1;
+
+static struct trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
 
 static void *hit_limit(void *val)
 {
 	return val;
 }
 
-static void *hit_memory_limit(trace_info *info, int is_malloc, size_t oldsize, size_t size)
+static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
 		printf("Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
@@ -1450,7 +1463,7 @@ static void *hit_memory_limit(trace_info *info, int is_malloc, size_t oldsize, s
 }
 
 
-static void *hit_alloc_limit(trace_info *info, int is_malloc, size_t oldsize, size_t size)
+static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
 		printf("Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
@@ -1462,7 +1475,7 @@ static void *hit_alloc_limit(trace_info *info, int is_malloc, size_t oldsize, si
 static void *
 trace_malloc(void *arg, size_t size)
 {
-	trace_info *info = (trace_info *) arg;
+	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p;
 	if (size == 0)
 		return NULL;
@@ -1476,6 +1489,8 @@ trace_malloc(void *arg, size_t size)
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
+	p[0].align = 0xEAD;
+	p[0].seqnum = trace_current_seqnum++;
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -1487,19 +1502,35 @@ trace_malloc(void *arg, size_t size)
 static void
 trace_free(void *arg, void *p_)
 {
-	trace_info *info = (trace_info *) arg;
+	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
 
-	if (p == NULL)
+	if (p_ == NULL)
 		return;
-	info->current -= p[-1].size;
-	free(&p[-1]);
+
+	size_t size = p[-1].size;
+	int rotten = 0;
+	info->current -= size;
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+	}
+	else
+	{
+		free(&p[-1]);
+	}
 }
 
 static void *
 trace_realloc(void *arg, void *p_, size_t size)
 {
-	trace_info *info = (trace_info *) arg;
+	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
 	size_t oldsize;
 
@@ -1508,7 +1539,8 @@ trace_realloc(void *arg, void *p_, size_t size)
 		trace_free(arg, p_);
 		return NULL;
 	}
-	if (p == NULL)
+
+	if (p_ == NULL)
 		return trace_malloc(arg, size);
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
@@ -1517,17 +1549,34 @@ trace_realloc(void *arg, void *p_, size_t size)
 		return hit_memory_limit(info, 0, oldsize, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 0, oldsize, size);
-	p = realloc(&p[-1], size + sizeof(trace_header));
-	if (p == NULL)
+
+	int rotten = 0;
+	oldsize = p[-1].size;
+	if (p[-1].align != 0xEAD)
+	{
+		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		p[-1].align++;
+		rotten = 1;
+	}
+	if (rotten)
+	{
+		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
 		return NULL;
-	info->current += size - oldsize;
-	if (size > oldsize)
-		info->total += size - oldsize;
-	if (info->current > info->peak)
-		info->peak = info->current;
-	p[0].size = size;
-	info->allocs++;
-	return &p[1];
+	}
+	else
+	{
+		p = realloc(&p[-1], size + sizeof(trace_header));
+		if (p == NULL)
+			return NULL;
+		info->current += size - oldsize;
+		if (size > oldsize)
+			info->total += size - oldsize;
+		if (info->current > info->peak)
+			info->peak = info->current;
+		p[0].size = size;
+		info->allocs++;
+		return &p[1];
+	}
 }
 
 #ifndef DISABLE_MUTHREADS
@@ -1762,6 +1811,21 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 	fz_save_accelerator(ctx, doc, absname);
 }
 
+static void mu_drop_context(void)
+{
+#ifndef DISABLE_MUTHREADS
+	fin_mudraw_locks();
+#endif /* DISABLE_MUTHREADS */
+
+	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	{
+		char buf[100];
+		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
+		fprintf(stderr, "%s\n", buf);
+	}
+}
+
 #ifdef MUDRAW_STANDALONE
 int main(int argc, const char **argv)
 #else
@@ -1773,7 +1837,6 @@ int mudraw_main(int argc, const char **argv)
 	fz_document *doc = NULL;
 	int c;
 	fz_context *ctx;
-	trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
 	fz_locks_context *locks = NULL;
@@ -1808,6 +1871,8 @@ int mudraw_main(int argc, const char **argv)
 	showtime = 0;
 	showmemory = 0;
 	showmd5 = 0;
+
+	memset(&trace_info, 0, sizeof trace_info);
 
 #if FZ_ENABLE_PDF
 	pdfout = NULL;
@@ -2001,6 +2066,11 @@ int mudraw_main(int argc, const char **argv)
 		fprintf(stderr, "cannot initialise context\n");
 		return EXIT_FAILURE;
 	}
+	if (!fz_has_global_context())
+	{
+		fz_set_global_context(ctx);
+	}
+	atexit(mu_drop_context);
 
 	fz_try(ctx)
 	{
@@ -2022,6 +2092,12 @@ int mudraw_main(int argc, const char **argv)
 			fz_enable_icc(ctx);
 
 #ifndef DISABLE_MUTHREADS
+		// do not bgprint when there won't be any bg threads available, ever.
+		if (num_workers < 1)
+		{
+			bgprint.active = 0;
+		}
+
 		if (bgprint.active)
 		{
 			int fail = 0;
@@ -2032,6 +2108,7 @@ int mudraw_main(int argc, const char **argv)
 			if (fail)
 			{
 				fprintf(stderr, "bgprint startup failed\n");
+				fz_drop_context(bgprint.ctx);
 				return EXIT_FAILURE;
 			}
 		}
@@ -2052,6 +2129,14 @@ int mudraw_main(int argc, const char **argv)
 			if (fail)
 			{
 				fprintf(stderr, "worker startup failed\n");
+				for (i = 0; i < num_workers; i++)
+				{
+					mu_destroy_semaphore(&workers[i].start);
+					mu_destroy_semaphore(&workers[i].stop);
+					mu_destroy_thread(&workers[i].thread);
+					fz_drop_context(workers[i].ctx);
+				}
+				fz_free(ctx, workers);
 				return EXIT_FAILURE;
 			}
 		}
@@ -2581,19 +2666,7 @@ int mudraw_main(int argc, const char **argv)
 	}
 
 	fz_flush_warnings(ctx);
-	fz_drop_context(ctx);
-
-#ifndef DISABLE_MUTHREADS
-	fin_mudraw_locks();
-#endif /* DISABLE_MUTHREADS */
-
-	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
-	{
-		char buf[100];
-		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
-		fprintf(stderr, "%s\n", buf);
-	}
+	//fz_drop_context(ctx);
 
 	return (errored != 0);
 }
