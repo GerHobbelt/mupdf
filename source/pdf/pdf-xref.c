@@ -2412,6 +2412,17 @@ pdf_open_document(fz_context *ctx, const char *filename)
 	}
 	fz_catch(ctx)
 	{
+		// keep the exception error code intact for the rethrow as the try/catch logic inside
+		// fz_drop_document() will reset the errorcode -- as that try/catch is indiscernible
+		// from a try/catch which *follows* this chunk as we *emulate* C++ exceptions but
+		// DO NOT have access to the compiler's *scope analysis* which is required for this
+		// emulation bug to go away.
+		//
+		// Hence we need to 'stow away' the error code for re-use by the fz_rethrow() call.
+		// For our 'hacky' solution to this conundrum, see the fz_rethrow() implementation:
+		// so as not having to wade to a zillion lines of code to patch all relevant try/catch/rethrow
+		// blocks, we simply remember the last non-zero error code and use that iff the
+		// rethrow would otherwise rethrow a zero=okay exception.
 		fz_drop_document(ctx, &doc->super);
 		fz_rethrow(ctx);
 	}

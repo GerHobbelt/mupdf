@@ -566,6 +566,8 @@ typedef struct
 	fz_error_stack_slot *top;
 	fz_error_stack_slot stack[256];
 	int errcode;
+	// See fz_rethrow() code comments for the complete story:
+	int last_nonzero_errcode;
 	void *print_user;
 	void (*print)(void *user, const char *message);
 	char message[4096];

@@ -324,6 +324,11 @@ int fz_do_always(fz_context *ctx)
 int fz_do_catch(fz_context *ctx)
 {
 	ctx->error.errcode = ctx->error.top->code;
+	if (ctx->error.errcode != FZ_ERROR_NONE)
+	{
+		// See fz_rethrow() code comments for the complete story:
+		ctx->error.last_nonzero_errcode = ctx->error.errcode;
+	}
 	int rv = ((ctx->error.top--)->state > 1);
 	if (rv)
 		return rv;
@@ -372,6 +377,24 @@ FZ_NORETURN void fz_throw(fz_context *ctx, int code, const char *fmt, ...)
 FZ_NORETURN void fz_rethrow(fz_context *ctx)
 {
 	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
+	if (ctx && ctx->error.errcode == FZ_ERROR_NONE)
+	{
+		// See pdf-xref.c for one occasion where this is relevant:
+		//
+		// keep the exception error code intact for the rethrow as the try/catch logic inside
+		// fz_drop_document() will reset the errorcode -- as that try/catch is indiscernible
+		// from a try/catch which *follows* this chunk as we *emulate* C++ exceptions but
+		// DO NOT have access to the compiler's *scope analysis* which is required for this
+		// emulation bug to go away.
+		//
+		// Hence we need to 'stow away' the error code for re-use by the fz_rethrow() call.
+		// For our 'hacky' solution to this conundrum, see the fz_rethrow() implementation:
+		// so as not having to wade to a zillion lines of code to patch all relevant try/catch/rethrow
+		// blocks, we simply remember the last non-zero error code and use that iff the
+		// rethrow would otherwise rethrow a zero=okay exception.
+		assert(ctx->error.last_nonzero_errcode > FZ_ERROR_NONE);
+		ctx->error.errcode = ctx->error.last_nonzero_errcode;
+	}
 	throw(ctx, ctx->error.errcode);
 }
 
