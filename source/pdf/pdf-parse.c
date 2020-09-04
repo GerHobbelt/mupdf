@@ -540,7 +540,7 @@ pdf_parse_array(fz_context *ctx, pdf_document *doc, fz_stream *file, pdf_lexbuf 
 
 			case PDF_TOK_R:
 				if (n != 2)
-					fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot parse indirect reference in array");
+					fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot parse indirect reference in array (n = %d)", n);
 				pdf_array_push_drop(ctx, ary, pdf_new_indirect(ctx, doc, a, b));
 				n = 0;
 				break;
@@ -619,7 +619,7 @@ pdf_parse_dict(fz_context *ctx, pdf_document *doc, fz_stream *file, pdf_lexbuf *
 
 			if (tok != PDF_TOK_NAME)
 			{
-				fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid key in dict");
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid key in dict (tok = %d)", (int)tok);
 			}
 
 			key = pdf_new_name(ctx, buf->scratch);
@@ -737,7 +737,7 @@ pdf_parse_ind_obj(fz_context *ctx, pdf_document *doc,
 	{
 		if (try_repair)
 			*try_repair = 1;
-		fz_throw(ctx, FZ_ERROR_SYNTAX, "expected object number");
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "expected object number (tok = %d)", (int)tok);
 	}
 	num = buf->i;
 	if (num < 0 || num > PDF_MAX_OBJECT_NUMBER)
@@ -757,7 +757,7 @@ pdf_parse_ind_obj(fz_context *ctx, pdf_document *doc,
 	{
 		if (try_repair)
 			*try_repair = 1;
-		fz_throw(ctx, FZ_ERROR_SYNTAX, "expected 'obj' keyword (%d %d ?)", num, gen);
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "expected 'obj' keyword (num:%d gen:%d tok:%d ?)", num, gen, (int)tok);
 	}
 
 	tok = pdf_lex(ctx, file, buf);
