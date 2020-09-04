@@ -9,16 +9,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static fz_context* ctx = NULL;
+
 static int x_factor = 0;
 static int y_factor = 0;
 
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"usage: mutool poster [options] input.pdf [output.pdf]\n"
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
-		"\t-y\ty decimation factor\n");
+		"\t-y\ty decimation factor\n"
+	);
 }
 
 static void
@@ -182,7 +185,8 @@ int pdfposter_main(int argc, const char **argv)
 	int errored = 0;
 	pdf_write_options opts = pdf_default_write_options;
 	pdf_document *doc;
-	fz_context *ctx;
+
+	ctx = NULL;
 
 	x_factor = 0;
 	y_factor = 0;
@@ -205,19 +209,30 @@ int pdfposter_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
+
 	infile = argv[fz_optind++];
 
 	if (argc - fz_optind > 0 &&
 		(strstr(argv[fz_optind], ".pdf") || strstr(argv[fz_optind], ".PDF")))
 	{
 		outfile = argv[fz_optind++];
-	}
-
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
-	if (!ctx)
-	{
-		fprintf(stderr, "cannot initialise context\n");
-		return EXIT_FAILURE;
 	}
 
 	fz_try(ctx)
@@ -235,7 +250,7 @@ int pdfposter_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		errored = 1;
 	}
 	fz_flush_warnings(ctx);

@@ -115,7 +115,7 @@ fz_argv_from_wargv(int argc, const wchar_t **wargv)
 	argv = Memento_label(calloc(argc, sizeof(char *)), "fz_argv");
 	if (argv == NULL)
 	{
-		fprintf(stderr, "Out of memory while processing command line args!\n");
+		fz_error(NULL, "Out of memory while processing command line args!");
 		return NULL;
 	}
 
@@ -124,7 +124,7 @@ fz_argv_from_wargv(int argc, const wchar_t **wargv)
 		argv[i] = Memento_label(fz_utf8_from_wchar(wargv[i]), "fz_arg");
 		if (argv[i] == NULL)
 		{
-			fprintf(stderr, "Out of memory while processing command line args!\n");
+			fz_error(NULL, "Out of memory while processing command line args!");
 			return NULL;
 		}
 	}

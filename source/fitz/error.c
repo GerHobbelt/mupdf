@@ -49,14 +49,13 @@ void fz_default_warning_callback(void *user, const char *message)
 void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user)
 {
 	ctx->warn.print_user = user;
-	ctx->warn.print = print;
+	ctx->warn.print = print ? print : fz_default_warning_callback;
 }
 
 void fz_default_info_callback(void* user, const char* message)
 {
-	fprintf(stderr, "info: %s\n", message);
+	fprintf(stderr, "%s\n", message);
 #ifdef USE_OUTPUT_DEBUG_STRING
-	OutputDebugStringA("info: ");
 	OutputDebugStringA(message);
 	OutputDebugStringA("\n");
 #endif
@@ -70,7 +69,7 @@ void fz_default_info_callback(void* user, const char* message)
 void fz_set_info_callback(fz_context* ctx, void (*print)(void* user, const char* message), void* user)
 {
 	ctx->info.print_user = user;
-	ctx->info.print = print;
+	ctx->info.print = print ? print : fz_default_info_callback;
 }
 
 void fz_var_imp(void *var)
@@ -94,12 +93,44 @@ void fz_flush_warnings(fz_context *ctx)
 	ctx->warn.count = 0;
 }
 
+static void prepare_message(char* buf, size_t bufsize, const char* fmt, va_list ap)
+{
+	size_t endidx = bufsize - 1;
+
+	fz_vsnprintf(buf, bufsize, fmt, ap);
+	buf[endidx] = 0;
+
+	size_t len = strlen(buf);
+	// has the input been truncated?
+	if (len == endidx)
+	{
+		strcpy(buf - sizeof("(...truncated...)"), "(...truncated...)");
+		return;
+	}
+
+	// as each message will be automatically appended with a LINEFEED suitable for the output channel of choice,
+	// we will now strip off one(1) LF at the end of the message, iff it has any.
+	//
+	// We only strip off one LF as messages with multiple LF characters at the end must have surely intended
+	// to be output that way.
+	if (buf[len - 1] == '\n')
+	{
+		buf[len - 1] = 0;
+	}
+}
+
+#define prepmsg(buf, fmt, ap)   prepare_message(buf, sizeof buf, fmt, ap)
+
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 {
 	char buf[sizeof ctx->warn.message];
 
-	fz_vsnprintf(buf, sizeof buf, fmt, ap);
-	buf[sizeof(buf) - 1] = 0;
+	prepmsg(buf, fmt, ap);
+
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
 
 	if (!ctx)
 	{
@@ -116,7 +147,7 @@ void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 		fz_flush_warnings(ctx);
 		if (ctx->warn.print)
 			ctx->warn.print(ctx->warn.print_user, buf);
-		fz_strlcpy(ctx->warn.message, buf, sizeof ctx->warn.message);
+		strcpy(ctx->warn.message, buf);
 		ctx->warn.count = 1;
 	}
 }
@@ -135,8 +166,12 @@ void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
 
 	fz_flush_warnings(ctx);
 
-	fz_vsnprintf(buf, sizeof buf, fmt, ap);
-	buf[sizeof(buf) - 1] = 0;
+	prepmsg(buf, fmt, ap);
+
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
 
 	if (ctx && ctx->info.print)
 		ctx->info.print(ctx->info.print_user, buf);
@@ -158,8 +193,12 @@ void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
 
 	fz_flush_warnings(ctx);
 
-	fz_vsnprintf(buf, sizeof buf, fmt, ap);
-	buf[sizeof(buf) - 1] = 0;
+	prepmsg(buf, fmt, ap);
+
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
 
 	if (ctx && ctx->error.print)
 		ctx->error.print(ctx->error.print_user, buf);
@@ -171,7 +210,7 @@ void fz_error(fz_context* ctx, const char* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
-	fz_vinfo(ctx, fmt, ap);
+	fz_verror(ctx, fmt, ap);
 	va_end(ap);
 }
 
@@ -180,7 +219,7 @@ void fz_error(fz_context* ctx, const char* fmt, ...)
 void fz_set_error_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user)
 {
 	ctx->error.print_user = user;
-	ctx->error.print = print;
+	ctx->error.print = print ? print : fz_default_error_callback;
 }
 
 /* When we first setjmp, state is set to 0. Whenever we throw, we add 2 to

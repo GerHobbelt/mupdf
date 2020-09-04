@@ -15,7 +15,9 @@
 #include <stdarg.h>
 #if defined(_MSC_VER)
 #include <crtdbg.h>
+#include <windows.h>
 #endif
+
 
 int mutool_main(int argc, const char** argv);
 
@@ -28,6 +30,8 @@ int mutool_main(int argc, const char** argv);
 */
 
 #define LONGLINE 4096
+
+static fz_context* ctx = NULL;
 
 /*
 	In the presence of pthreads or Windows threads, we can offer
@@ -125,9 +129,9 @@ static void *hit_limit(void *val)
 static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		printf("Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
 	else
-		printf("Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -135,9 +139,9 @@ static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t old
 static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		printf("Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
 	else
-		printf("Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -182,13 +186,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
 	}
 	else
 	{
@@ -223,13 +227,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
 		return NULL;
 	}
 	else
@@ -262,18 +266,18 @@ static char prefix_buffer[LONGLINE];
 
 void winwarn(pdfapp_t *app, char *msg)
 {
-	fprintf(stderr, "warning: %s\n", msg);
+	fz_warn(ctx, "%s", msg);
 }
 
 void winerror(pdfapp_t *app, char *msg)
 {
-	fprintf(stderr, "%s\n", msg);
+	fz_error(ctx, "%s", msg);
 	exit(1);
 }
 
 void winalert(pdfapp_t *app, pdf_alert_event *alert)
 {
-	fprintf(stderr, "Alert %s: %s\n", alert->title, alert->message);
+	fz_error(ctx, "Alert %s: %s\n", alert->title, alert->message);
 	switch (alert->button_group_type)
 	{
 	case PDF_ALERT_BUTTON_GROUP_OK:
@@ -293,7 +297,7 @@ void winadvancetimer(pdfapp_t *app, float duration)
 
 void winprint(pdfapp_t *app)
 {
-	fprintf(stderr, "The MuPDF library supports printing, but this application currently does not\n");
+	fz_warn(ctx, "The MuPDF library supports printing, but this application currently does not\n");
 }
 
 int winquery(pdfapp_t *app, const char *query)
@@ -409,20 +413,22 @@ void winopenuri(pdfapp_t *app, char *buf)
 
 static void usage(void)
 {
-	fprintf(stderr, "mujstest: Scriptable tester for mupdf + js\n");
-	fprintf(stderr, "\nSyntax: mujstest -o <filename> [ -p <prefix> ] [-v] <scriptfile>\n");
-	fprintf(stderr, "\n<filename> should sensibly be of the form file-%%d.png\n");
-	fprintf(stderr, "\n<prefix> is a path prefix to apply to filenames within the script\n");
-	fprintf(stderr, "\n-v\tverbose\n");
-	fprintf(stderr, "\nscriptfile contains a list of commands:\n");
-	fprintf(stderr, "\tPASSWORD <password>\tSet the password\n");
-	fprintf(stderr, "\tOPEN <filename>\tOpen a file\n");
-	fprintf(stderr, "\tGOTO <page>\tJump to a particular page\n");
-	fprintf(stderr, "\tSCREENSHOT\tSave a screenshot\n");
-	fprintf(stderr, "\tRESIZE <w> <h>\tResize the screen to a given size\n");
-	fprintf(stderr, "\tCLICK <x> <y> <btn>\tClick at a given position\n");
-	fprintf(stderr, "\tTEXT <string>\tSet a value to be entered\n");
-	fprintf(stderr, "\tMUTOOL <arguments>\tRun any mutool command as specified\n");
+	fz_info(ctx,
+		"mujstest: Scriptable tester for mupdf + js\n"
+		"\nSyntax: mujstest -o <filename> [ -p <prefix> ] [-v] <scriptfile>\n"
+		"\n<filename> should sensibly be of the form file-%%d.png\n"
+		"\n<prefix> is a path prefix to apply to filenames within the script\n"
+		"\n-v\tverbose\n"
+		"\nscriptfile contains a list of commands:\n"
+		"\tPASSWORD <password>\tSet the password\n"
+		"\tOPEN <filename>\tOpen a file\n"
+		"\tGOTO <page>\tJump to a particular page\n"
+		"\tSCREENSHOT\tSave a screenshot\n"
+		"\tRESIZE <w> <h>\tResize the screen to a given size\n"
+		"\tCLICK <x> <y> <btn>\tClick at a given position\n"
+		"\tTEXT <string>\tSet a value to be entered\n"
+		"\tMUTOOL <arguments>\tRun any mutool command as specified\n"
+	);
 }
 
 static char *
@@ -454,7 +460,7 @@ my_getline(FILE *file)
 	/* If we ran out of space, skip the rest of the line */
 	if (space == 0)
 	{
-		fprintf(stderr, "getline: line too long.\n");
+		fz_error(ctx, "getline: line too long.");
 		while (c >= 32)
 			c = fgetc(file);
 	}
@@ -635,29 +641,89 @@ static void mu_drop_context(void)
 	{
 		timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
 
-		fprintf(stderr, "total %lldms / %d commands for an average of %lldms in %d commands\n",
+		fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands\n",
 			timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
-		fprintf(stderr, "fastest command line %d: %lldms (%s)\n", timing.minscriptline, timing.min / 1000, timing.mincommand);
-		fprintf(stderr, "slowest command line %d: %lldms (%s)\n", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+		fz_info(ctx, "fastest command line %d: %lldms (%s)\n", timing.minscriptline, timing.min / 1000, timing.mincommand);
+		fz_info(ctx, "slowest command line %d: %lldms (%s)\n", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
 	}
 
 	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
 	{
-		char buf[100];
-		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
-		fprintf(stderr, "%s\n", buf);
+		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 	}
+
+	fz_free(ctx, timing.mincommand);
+	fz_free(ctx, timing.maxcommand);
+
+	fz_drop_context(ctx); // moved to atexit() as code in here still uses ctx
+	ctx = NULL;
 }
 
+struct logconfig
+{
+	int quiet;
+	FILE* logfile;
+};
+
+static void tst_error_callback(void* user, const char* message)
+{
+	struct logconfig* logcfg = (struct logconfig*)user;
+	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
+
+	fprintf(logfile, "error: %s\n", message);
+#ifdef USE_OUTPUT_DEBUG_STRING
+	OutputDebugStringA("error: ");
+	OutputDebugStringA(message);
+	OutputDebugStringA("\n");
+#endif
+}
+static void tst_warning_callback(void* user, const char* message)
+{
+	struct logconfig* logcfg = (struct logconfig*)user;
+	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
+
+	if (!logcfg->quiet)
+	{
+		fprintf(logfile, "warning: %s\n", message);
+#ifdef USE_OUTPUT_DEBUG_STRING
+		OutputDebugStringA("warning: ");
+		OutputDebugStringA(message);
+		OutputDebugStringA("\n");
+#endif
+	}
+}
+static void tst_info_callback(void* user, const char* message)
+{
+	struct logconfig* logcfg = (struct logconfig*)user;
+	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
+
+	if (!logcfg->quiet)
+	{
+		// show progress on stderr, while we log the real data to logfile:
+		if (logfile != stderr)
+		{
+			if (!strncmp(message, "OK:", 3))
+				fprintf(stderr, "#");
+			else if (!strncmp(message, "ERR:", 4))
+				fprintf(stderr, "-");
+			else
+				fprintf(stderr, ".");
+		}
+		fprintf(logfile, "%s\n", message);
+#ifdef USE_OUTPUT_DEBUG_STRING
+		OutputDebugStringA(message);
+		OutputDebugStringA("\n");
+#endif
+	}
+}
 
 int
 main(int argc, const char *argv[])
 {
-	fz_context *ctx;
 	FILE *script = NULL;
-	FILE* logfile = NULL;
 	int c;
+	struct logconfig logcfg = { 0 };
 	int errored = 0;
 	unsigned int linecounter = 0;
 	int rv = 0;
@@ -669,6 +735,8 @@ main(int argc, const char *argv[])
 	size_t max_store = FZ_STORE_DEFAULT;
 	int lowmemory = 0;
 
+	ctx = NULL;
+
 	showtime = 0;
 	showmemory = 0;
 
@@ -678,12 +746,13 @@ main(int argc, const char *argv[])
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:Lvm:")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:Lvqm:")) != -1)
 	{
 		switch(c)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'p': prefix = fz_optarg; break;
+		case 'q': logcfg.quiet = 1; break;
 		case 'v': verbosity ^= 1; break;
 		case 's':
 			if (strchr(fz_optarg, 't')) ++showtime;
@@ -696,7 +765,7 @@ main(int argc, const char *argv[])
 			break;
 		case 'L': lowmemory = 1; break;
 
-		case 'V': fprintf(stderr, "mujstest version %s\n", FZ_VERSION); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "mujstest version %s", FZ_VERSION); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}
@@ -712,7 +781,7 @@ main(int argc, const char *argv[])
 	locks = init_mudraw_locks();
 	if (locks == NULL)
 	{
-		fprintf(stderr, "mutex initialisation failed\n");
+		fz_error(NULL, "mutex initialisation failed\n");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -732,6 +801,10 @@ main(int argc, const char *argv[])
 			return EXIT_FAILURE;
 		}
 		fz_set_global_context(ctx);
+
+		fz_set_error_callback(ctx, tst_error_callback, &logcfg);
+		fz_set_warning_callback(ctx, tst_warning_callback, &logcfg);
+		fz_set_info_callback(ctx, tst_info_callback, &logcfg);
 	}
 
 	ctx = fz_new_context(alloc_ctx, locks, max_store);
@@ -761,7 +834,7 @@ main(int argc, const char *argv[])
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 
 			fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
-			logfile = fopen(logfilename, "w");
+			logcfg.logfile = fopen(logfilename, "w");
 
 			for(;;)
 			{
@@ -771,18 +844,18 @@ main(int argc, const char *argv[])
 				rv = 0;
 
 				linecounter++;
-				fflush(logfile);
+				fflush(logcfg.logfile);
 
 				if (line == NULL)
 				{
 					if (ferror(script))
 					{
-						fprintf(stderr, "script read error: %s (%s)\n", strerror(errno), scriptname);
+						fz_error(ctx, "script read error: %s (%s)", strerror(errno), scriptname);
 					}
 					break;
 				}
 				if (verbosity)
-					fprintf(stderr, "'%s'\n", line);
+					fz_info(ctx, "L#%04d: %s\n", linecounter, line);
 
 				begin_time = Curl_now();
 
@@ -879,12 +952,12 @@ main(int argc, const char *argv[])
 					rv = mutool_main(argc, argv);
 					if (rv != EXIT_SUCCESS)
 					{
-						fprintf(stderr, "ERR: error executing MUTOOL command: %s\n", line);
+						fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
 						errored = 1;
 					}
 					else if (verbosity)
 					{
-						fprintf(stderr, "OK: MUTOOL command: %s\n", line);
+						fz_info(ctx, "OK: MUTOOL command: %s", line);
 					}
 					free((void *)argv);
 				}
@@ -892,29 +965,29 @@ main(int argc, const char *argv[])
 				{
 					report_time = false;
 					if (verbosity)
-						fprintf(stderr, "Ignoring line without script statement.\n");
+						fz_info(ctx, "Ignoring line without script statement.");
 				}
 
 				if (report_time)
 				{
 					struct curltime now = Curl_now();
 					timediff_t diff = Curl_timediff(now, begin_time);
-					fprintf(stderr, "T:%03dms D:%0.3lfs %s %s\n", (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
-
-					fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs %s %s\n", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+					fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 
 					if (showtime)
 					{
 						if (diff < timing.min)
 						{
 							timing.min = diff;
-							timing.mincommand = line_command;
+							fz_free(ctx, timing.mincommand);
+							timing.mincommand = fz_strdup(ctx, line_command);
 							timing.minscriptline = linecounter;
 						}
 						if (diff > timing.max)
 						{
 							timing.max = diff;
-							timing.maxcommand = line_command;
+							fz_free(ctx, timing.maxcommand);
+							timing.maxcommand = fz_strdup(ctx, line_command);
 							timing.maxscriptline = linecounter;
 						}
 						timing.total += diff;
@@ -929,28 +1002,27 @@ main(int argc, const char *argv[])
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: cannot execute '%s': %s\n", scriptname, fz_caught_message(ctx));
+		fz_info(ctx, "cannot execute '%s': %s", scriptname, fz_caught_message(ctx));
 
-		if (logfile)
-		{
-			struct curltime now = Curl_now();
+		struct curltime now = Curl_now();
 
-			fprintf(logfile, "L:%05u T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
-		}
+		fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+
 		errored = 1;
-	}
-
-	if (logfile)
-	{
-		fclose(logfile);
-		logfile = NULL;
 	}
 
 	if (file_open)
 		pdfapp_close(&gapp);
 
 	fz_flush_warnings(ctx);
-	fz_drop_context(ctx);
+
+	if (logcfg.logfile)
+	{
+		fclose(logcfg.logfile);
+		logcfg.logfile = NULL;
+	}
+
+	//fz_drop_context(ctx); -- moved to atexit() as code in there still uses ctx
 
 	return errored;
 }

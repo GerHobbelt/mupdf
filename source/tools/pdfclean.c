@@ -16,9 +16,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static fz_context* ctx = NULL;
+
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"usage: mutool clean [options] input.pdf [output.pdf] [pages]\n"
 		"\t-p -\tpassword\n"
 		"\t-g\tgarbage collect unused objects\n"
@@ -41,7 +43,7 @@ static void usage(void)
 		"\t-A\tcreate appearance streams for annotations\n"
 		"\t-AA\trecreate appearance streams for annotations\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
-		);
+	);
 }
 
 static int encrypt_method_from_string(const char *name)
@@ -61,7 +63,8 @@ int pdfclean_main(int argc, const char **argv)
 	int c;
 	pdf_write_options opts = pdf_default_write_options;
 	int errors = 0;
-	fz_context *ctx;
+
+	ctx = NULL;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "adfgilp:sczDAE:O:U:P:")) != -1)
@@ -100,19 +103,30 @@ int pdfclean_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
+
 	infile = argv[fz_optind++];
 
 	if (argc - fz_optind > 0 &&
 		(strstr(argv[fz_optind], ".pdf") || strstr(argv[fz_optind], ".PDF")))
 	{
 		outfile = argv[fz_optind++];
-	}
-
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
-	if (!ctx)
-	{
-		fprintf(stderr, "cannot initialise context\n");
-		return EXIT_FAILURE;
 	}
 
 	fz_try(ctx)

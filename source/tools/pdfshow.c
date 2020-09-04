@@ -19,7 +19,7 @@ static int showcolumn = 0;
 
 static void usage(void)
 {
-	fz_info(ctx, "%s",
+	fz_info(ctx,
 		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *\n"
 		"\t-p -\tpassword\n"
 		"\t-o -\toutput file\n"
@@ -635,7 +635,12 @@ int pdfshow_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s\n", fz_caught_message(ctx));
+		// only log any type of exception which hasn't logged itself yet: prevent duplicate error log entries
+		int code = fz_caught(ctx);
+		if (code == FZ_ERROR_ABORT || code == FZ_ERROR_TRYLATER)
+		{
+			fz_error(ctx, "%s\n", fz_caught_message(ctx));
+		}
 		errored = 1;
 	}
 

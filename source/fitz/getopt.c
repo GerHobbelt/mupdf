@@ -5,6 +5,13 @@
  * This file is in the public domain.
  */
 
+#include "mupdf/fitz/version.h"
+#include "mupdf/fitz/config.h"
+#include "mupdf/fitz/system.h"
+#include "mupdf/fitz/context.h"
+
+#include "mupdf/fitz/getopt.h"
+
 #include <stdio.h>
 #include <string.h>
 
@@ -18,7 +25,7 @@ int optind = 0; /* Global argv index. */
 static const char *scan = NULL; /* Private scan pointer. */
 
 int
-getopt(int argc, const char *argv[], const char *optstring)
+getopt(int argc, const char * const *argv, const char *optstring)
 {
 	char c;
 	char *place;
@@ -44,7 +51,7 @@ getopt(int argc, const char *argv[], const char *optstring)
 	place = strchr(optstring, c);
 
 	if (!place || c == ':') {
-		fprintf(stderr, "%s: unknown option -%c\n", argv[0], c);
+		fz_error(NULL, "%s: unknown option -%c", argv[0], c);
 		return '?';
 	}
 
@@ -57,7 +64,7 @@ getopt(int argc, const char *argv[], const char *optstring)
 			optarg = argv[optind];
 			optind++;
 		} else {
-			fprintf(stderr, "%s: option requires argument -%c\n", argv[0], c);
+			fz_error(NULL, "%s: option requires argument -%c", argv[0], c);
 			return ':';
 		}
 	}

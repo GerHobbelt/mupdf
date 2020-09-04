@@ -10,15 +10,17 @@
 #include <stdio.h>
 #include <string.h>
 
+static fz_context* ctx = NULL;
+
 static void
-infousage(void)
+usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"usage: mutool pages [options] file.pdf [pages]\n"
 		"\t-o -\toutput file path. Default: page data will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
-		);
+	);
 }
 
 static int
@@ -114,7 +116,7 @@ showpages(fz_context *ctx, pdf_document *doc, fz_output *out, const char *pageli
 
 	if (!doc)
 	{
-		infousage();
+		usage();
 		fz_throw(ctx, FZ_ERROR_GENERIC, "no pdf document specified");
 	}
 
@@ -183,8 +185,9 @@ int pdfpages_main(int argc, const char **argv)
 	const char* output = NULL;
 	int c;
 	int ret;
-	fz_context *ctx;
 	fz_output *out = NULL;
+
+	ctx = NULL;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:")) != -1)
@@ -194,21 +197,32 @@ int pdfpages_main(int argc, const char **argv)
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		default:
-			infousage();
+			usage();
 			return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
 	{
-		infousage();
+		usage();
 		return EXIT_FAILURE;
+	}
+
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
 	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -231,7 +245,7 @@ int pdfpages_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		ret = 1;
 	}
 	fz_drop_output(ctx, out);

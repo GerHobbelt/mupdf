@@ -4,6 +4,8 @@
 
 #include "mupdf/memento.h"
 #include "mupdf/helpers/mu-office-lib.h"
+#include "mupdf/fitz.h"
+
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
@@ -24,7 +26,7 @@ load_progress(void *cookie, int pages_loaded, int complete)
 {
 	assert((intptr_t)cookie == 1234);
 
-	fprintf(stderr, "load_progress: pages_loaded=%d complete=%d\n", pages_loaded, complete);
+	fz_info(NULL, "load_progress: pages_loaded=%d complete=%d", pages_loaded, complete);
 
 	if (complete)
 		(void)ReleaseSemaphore(loaded, 1, NULL);
@@ -35,14 +37,14 @@ load_error(void *cookie, MuOfficeDocErrorType error)
 {
 	assert((intptr_t)cookie == 1234);
 
-	fprintf(stderr, "load_error: error=%d\n", error);
+	fz_error(NULL, "load_error: error=%d", error);
 }
 
 static void render_progress(void *cookie, MuError error)
 {
 	assert((intptr_t)cookie == 5678);
 
-	fprintf(stderr, "render_progress: error=%d\n", error);
+	fz_error(NULL, "render_progress: error=%d", error);
 	(void)ReleaseSemaphore(loaded, 1, NULL);
 }
 
@@ -57,6 +59,7 @@ test_async(MuOfficeLib *mu)
 	MuOfficeBitmap bitmap;
 	MuOfficeRenderArea area;
 	MuOfficeRender *render;
+	fz_context* ctx = fz_get_global_context();
 
 	err = MuOfficeLib_loadDocument(mu,
 					TEST_PDF_FILEPATH,
@@ -72,16 +75,16 @@ test_async(MuOfficeLib *mu)
 	err = MuOfficeDoc_getNumPages(doc, &count);
 	if (err)
 	{
-		fprintf(stderr, "Failed to count pages: error=%d\n", err);
+		fz_error(ctx, "Failed to count pages: error=%d", err);
 		return EXIT_FAILURE;
 	}
-	fprintf(stderr, "%d Pages in document\n", count);
+	fz_info(ctx, "%d Pages in document", count);
 
 	/* Get a page */
 	err = MuOfficeDoc_getPage(doc, 0, NULL, (void *)4321, &page);
 	if (err)
 	{
-		fprintf(stderr, "Failed to get page: error=%d\n", err);
+		fz_error(ctx, "Failed to get page: error=%d", err);
 		return EXIT_FAILURE;
 	}
 
@@ -89,16 +92,16 @@ test_async(MuOfficeLib *mu)
 	err = MuOfficePage_getSize(page, &w, &h);
 	if (err)
 	{
-		fprintf(stderr, "Failed to get page size: error=%d\n", err);
+		fz_error(ctx, "Failed to get page size: error=%d", err);
 		return EXIT_FAILURE;
 	}
-	fprintf(stderr, "Page size = %g x %g\n", w, h);
+	fz_info(ctx, "Page size = %g x %g", w, h);
 
 	/* Allocate ourselves a bitmap */
 	bitmap.width = (int)(w * 1.5f + 0.5f);
 	bitmap.height = (int)(h * 1.5f + 0.5f);
 	bitmap.lineSkip = bitmap.width * 4;
-	bitmap.memptr = malloc(bitmap.lineSkip * bitmap.height);
+	bitmap.memptr = fz_malloc(ctx, bitmap.lineSkip * bitmap.height);
 
 	/* Set the area to render the whole bitmap */
 	area.origin.x = 0;
@@ -112,7 +115,7 @@ test_async(MuOfficeLib *mu)
 	err = MuOfficePage_render(page, 1.5f, &bitmap, &area, render_progress, (void *)5678, &render);
 	if (err)
 	{
-		fprintf(stderr, "Page render failed: error=%d\n", err);
+		fz_error(ctx, "Page render failed: error=%d", err);
 		return EXIT_FAILURE;
 	}
 
@@ -124,7 +127,7 @@ test_async(MuOfficeLib *mu)
 
 	/* Output the bitmap */
 	int rv = save_png(&bitmap, "out_mu_office_async.png");
-	free(bitmap.memptr);
+	fz_free(ctx, bitmap.memptr);
 
 	MuOfficePage_destroy(page);
 
@@ -147,6 +150,7 @@ test_sync(MuOfficeLib *mu)
 	MuOfficeBitmap bitmap;
 	MuOfficeRenderArea area;
 	MuOfficeRender *render;
+	fz_context* ctx = fz_get_global_context();
 
 	loaded = CreateSemaphore(NULL, 0, 1, NULL);
 
@@ -161,16 +165,16 @@ test_sync(MuOfficeLib *mu)
 	err = MuOfficeDoc_getNumPages(doc, &count);
 	if (err)
 	{
-		fprintf(stderr, "Failed to count pages: error=%d\n", err);
+		fz_error(ctx, "Failed to count pages: error=%d", err);
 		return EXIT_FAILURE;
 	}
-	fprintf(stderr, "%d Pages in document\n", count);
+	fz_info(ctx, "%d Pages in document", count);
 
 	/* Get a page */
 	err = MuOfficeDoc_getPage(doc, 1, NULL, (void *)4321, &page);
 	if (err)
 	{
-		fprintf(stderr, "Failed to get page: error=%d\n", err);
+		fz_error(ctx, "Failed to get page: error=%d", err);
 		return EXIT_FAILURE;
 	}
 
@@ -178,16 +182,16 @@ test_sync(MuOfficeLib *mu)
 	err = MuOfficePage_getSize(page, &w, &h);
 	if (err)
 	{
-		fprintf(stderr, "Failed to get page size: error=%d\n", err);
+		fz_error(ctx, "Failed to get page size: error=%d", err);
 		return EXIT_FAILURE;
 	}
-	fprintf(stderr, "Page size = %g x %g\n", w, h);
+	fz_info(ctx, "Page size = %g x %g", w, h);
 
 	/* Allocate ourselves a bitmap */
 	bitmap.width = (int)(w * 1.5f + 0.5f);
 	bitmap.height = (int)(h * 1.5f + 0.5f);
 	bitmap.lineSkip = bitmap.width * 4;
-	bitmap.memptr = malloc(bitmap.lineSkip * bitmap.height);
+	bitmap.memptr = fz_malloc(ctx, bitmap.lineSkip * bitmap.height);
 
 	/* Set the area to render the whole bitmap */
 	area.origin.x = 0;
@@ -201,14 +205,14 @@ test_sync(MuOfficeLib *mu)
 	err = MuOfficePage_render(page, 1.5f, &bitmap, &area, NULL, NULL, &render);
 	if (err)
 	{
-		fprintf(stderr, "Page render failed: error=%d\n", err);
+		fz_error(ctx, "Page render failed: error=%d", err);
 		return EXIT_FAILURE;
 	}
 
 	err = MuOfficeRender_waitUntilComplete(render);
 	if (err)
 	{
-		fprintf(stderr, "Page render failed to complete: error=%d\n", err);
+		fz_error(ctx, "Page render failed to complete: error=%d", err);
 		return EXIT_FAILURE;
 	}
 
@@ -217,7 +221,7 @@ test_sync(MuOfficeLib *mu)
 
 	/* Output the bitmap */
 	int rv = save_png(&bitmap, "out_mu_office_sync.png");
-	free(bitmap.memptr);
+	fz_free(ctx, bitmap.memptr);
 
 	MuOfficePage_destroy(page);
 
@@ -232,10 +236,21 @@ int main(int argc, const char **argv)
 	MuError err;
 	int ret;
 
+	if (!fz_has_global_context())
+	{
+		fz_context *ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	err = MuOfficeLib_create(&mu);
 	if (err)
 	{
-		fprintf(stderr, "Failed to create lib instance: error=%d\n", err);
+		fz_error(NULL, "Failed to create lib instance: error=%d", err);
 		return EXIT_FAILURE;
 	}
 
@@ -270,7 +285,7 @@ save_png(const MuOfficeBitmap *bitmap, const char *filename)
 
 	if (ctx == NULL)
 	{
-		fprintf(stderr, "save_png failed!\n");
+		fz_error(NULL, "save_png failed! (out of memory)");
 		return EXIT_FAILURE;
 	}
 
@@ -286,7 +301,7 @@ save_png(const MuOfficeBitmap *bitmap, const char *filename)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "save_png failed! %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "save_png failed! %s", fz_caught_message(ctx));
 		errored = 1;
 	}
 

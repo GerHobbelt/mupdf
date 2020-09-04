@@ -11,9 +11,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static fz_context* ctx = NULL;
+static pdf_document* doc = NULL;
+
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"usage: mutool create [-o output.pdf] [-O options] page.txt [page2.txt ...]\n"
 		"\t-o -\tname of PDF file to create\n"
 		"\t-O -\tcomma separated list of output options\n"
@@ -24,12 +27,9 @@ static void usage(void)
 		"\t%%%%Font Name Filename (or base 14 font name)\n"
 		"\t%%%%CJKFont Name Language WMode Style (Language=zh-Hant|zh-Hans|ja|ko, WMode=H|V, Style=serif|sans)\n"
 		"\t%%%%Image Name Filename\n\n"
-		);
-	fputs(fz_pdf_write_options_usage, stderr);
+	);
+	fz_info(ctx, "%s", fz_pdf_write_options_usage);
 }
-
-static fz_context *ctx = NULL;
-static pdf_document *doc = NULL;
 
 static void add_font_res(pdf_obj *resources, char *name, char *path, char *encname)
 {
@@ -240,10 +240,21 @@ int pdfcreate_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -262,7 +273,7 @@ int pdfcreate_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 	}
 
 	fz_flush_warnings(ctx);

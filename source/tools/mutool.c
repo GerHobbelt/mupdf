@@ -99,10 +99,22 @@ int mutool_main(int argc, const char** argv)
 	const char *start, *end;
 	char buf[32];
 	int i;
+	fz_context* ctx = NULL;
+
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
 
 	if (argc == 0)
 	{
-		fprintf(stderr, "No command name found!\n");
+		fz_error(ctx, "No command name found!");
 		return EXIT_FAILURE;
 	}
 
@@ -137,17 +149,17 @@ int mutool_main(int argc, const char** argv)
 				return tools[i].func(argc - 1, argv + 1);
 		if (!strcmp(argv[1], "-v"))
 		{
-			fprintf(stderr, "mutool version %s\n", FZ_VERSION);
+			fz_info(ctx, "mutool version %s", FZ_VERSION);
 			return EXIT_SUCCESS;
 		}
 	}
 
 	/* Print usage */
 
-	fprintf(stderr, "usage: mutool <command> [options]\n");
+	fz_info(ctx, "usage: mutool <command> [options]");
 
 	for (i = 0; i < (int)nelem(tools); i++)
-		fprintf(stderr, "\t%s\t-- %s\n", tools[i].name, tools[i].desc);
+		fz_info(ctx, "\t%s\t-- %s", tools[i].name, tools[i].desc);
 
 	return EXIT_FAILURE;
 }

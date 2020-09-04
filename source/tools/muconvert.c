@@ -28,7 +28,7 @@ static int count;
 
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"mutool convert version " FZ_VERSION "\n"
 		"Usage: mutool convert [options] file [pages]\n"
 		"\t-p -\tpassword\n"
@@ -50,16 +50,16 @@ static void usage(void)
 		"\n"
 		"\tpages\tcomma separated list of page ranges (N=last page)\n"
 		"\n"
-		);
-	fputs(fz_draw_options_usage, stderr);
-	fputs(fz_pcl_write_options_usage, stderr);
-	fputs(fz_pclm_write_options_usage, stderr);
-	fputs(fz_pwg_write_options_usage, stderr);
-	fputs(fz_stext_options_usage, stderr);
+	);
+	fz_info(ctx, "%s", fz_draw_options_usage);
+	fz_info(ctx, "%s", fz_pcl_write_options_usage);
+	fz_info(ctx, "%s", fz_pclm_write_options_usage);
+	fz_info(ctx, "%s", fz_pwg_write_options_usage);
+	fz_info(ctx, "%s", fz_stext_options_usage);
 #if FZ_ENABLE_PDF
-	fputs(fz_pdf_write_options_usage, stderr);
+	fz_info(ctx, "%s", fz_pdf_write_options_usage);
 #endif
-	fputs(fz_svg_write_options_usage, stderr);
+	fz_info(ctx, "%s", fz_svg_write_options_usage);
 }
 
 static void runpage(int number)
@@ -152,11 +152,22 @@ int muconvert_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	/* Create a context to hold the exception stack and various caches. */
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot create mupdf context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -165,7 +176,7 @@ int muconvert_main(int argc, const char **argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot register document handlers: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "cannot register document handlers: %s", fz_caught_message(ctx));
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -186,7 +197,7 @@ int muconvert_main(int argc, const char **argv)
 		out = fz_new_document_writer(ctx, output, format, options);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot create document: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "cannot create document: %s", fz_caught_message(ctx));
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -211,7 +222,7 @@ int muconvert_main(int argc, const char **argv)
 		}
 		fz_catch(ctx)
 		{
-			fprintf(stderr, "cannot load document: %s\n", fz_caught_message(ctx));
+			fz_error(ctx, "cannot load document: %s", fz_caught_message(ctx));
 			fz_close_document_writer(ctx, out);
 			fz_drop_document_writer(ctx, out);
 			fz_drop_context(ctx);

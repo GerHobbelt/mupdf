@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+static fz_context* ctx = NULL;
+
 static void
 clean(char *p)
 {
@@ -19,7 +21,7 @@ clean(char *p)
 
 static void usage(void)
 {
-	fprintf(stderr, "usage: mutool cmapdump [lots of cmap files] > out.c\n");
+	fz_info(ctx, "usage: mutool cmapdump [lots of cmap files] > out.c");
 }
 
 int
@@ -29,7 +31,8 @@ cmapdump_main(int argc, const char **argv)
 	fz_stream *fi;
 	char name[256];
 	int k, c;
-	fz_context *ctx;
+
+	ctx = NULL;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "h")) != -1)
@@ -45,10 +48,21 @@ cmapdump_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 

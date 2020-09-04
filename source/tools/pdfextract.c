@@ -19,11 +19,13 @@ static int count = 0;
 
 static void usage(void)
 {
-	fprintf(stderr, "usage: mutool extract [options] file.pdf [object numbers]\n");
-	fprintf(stderr, "\t-o -\toutput files name template: generated filenames are appended\n");
-	fprintf(stderr, "\t-p\tpassword\n");
-	fprintf(stderr, "\t-r\tconvert images to rgb\n");
-	fprintf(stderr, "\t-N\tdo not use ICC color conversions\n");
+	fz_info(ctx,
+		"usage: mutool extract [options] file.pdf [object numbers]\n"
+		"\t-o -\toutput files name template: generated filenames are appended\n"
+		"\t-p\tpassword\n"
+		"\t-r\tconvert images to rgb\n"
+		"\t-N\tdo not use ICC color conversions\n"
+	);
 }
 
 static int isimage(pdf_obj *obj)
@@ -269,14 +271,25 @@ int pdfextract_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
-	infile = argv[fz_optind++];
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
+
+	infile = argv[fz_optind++];
 
 	fz_try(ctx)
 	{
@@ -309,7 +322,7 @@ int pdfextract_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		errored = 1;
 	}
 	fz_flush_warnings(ctx);

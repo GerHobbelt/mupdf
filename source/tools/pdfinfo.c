@@ -159,10 +159,12 @@ static void closexref(fz_context *ctx, globals *glo)
 	clearinfo(ctx, glo);
 }
 
+static fz_context* ctx = NULL;
+
 static void
-infousage(void)
+usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"usage: mutool info [options] file.pdf [pages]\n"
 		"\t-o -\toutput file path. Default: info will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
@@ -173,7 +175,7 @@ infousage(void)
 		"\t-S\tlist shadings\n"
 		"\t-X\tlist form and postscript xobjects\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
-		);
+	);
 }
 
 static void
@@ -922,7 +924,7 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 
 	if (!glo->doc)
 	{
-		infousage();
+		usage();
 		fz_throw(ctx, FZ_ERROR_GENERIC, "no document specified");
 	}
 
@@ -1013,8 +1015,9 @@ int pdfinfo_main(int argc, const char **argv)
 	int show = ALL;
 	int c;
 	int ret;
-	fz_context *ctx;
 	fz_output* out = NULL;
+
+	ctx = NULL;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "FISPXMo:p:")) != -1)
@@ -1030,21 +1033,32 @@ int pdfinfo_main(int argc, const char **argv)
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		default:
-			infousage();
+			usage();
 			return EXIT_FAILURE;
 		}
 	}
 
 	if (fz_optind == argc)
 	{
-		infousage();
+		usage();
 		return EXIT_FAILURE;
+	}
+
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
 	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot initialise context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -1067,7 +1081,7 @@ int pdfinfo_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
 	}
 	fz_drop_output(ctx, out);

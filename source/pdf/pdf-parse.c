@@ -618,7 +618,9 @@ pdf_parse_dict(fz_context *ctx, pdf_document *doc, fz_stream *file, pdf_lexbuf *
 				break;
 
 			if (tok != PDF_TOK_NAME)
+			{
 				fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid key in dict");
+			}
 
 			key = pdf_new_name(ctx, buf->scratch);
 

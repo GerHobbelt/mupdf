@@ -162,7 +162,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 
 	if (strcmp(version, FZ_VERSION))
 	{
-		fprintf(stderr, "cannot create context: incompatible header (%s) and library (%s) versions\n", version, FZ_VERSION);
+		fz_error(NULL, "cannot create context: incompatible header (%s) and library (%s) versions", version, FZ_VERSION);
 		return NULL;
 	}
 
@@ -180,7 +180,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	ctx = Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot create context (phase 1)\n");
+		fz_error(NULL, "cannot create context (phase 1)");
 		return NULL;
 	}
 	memset(ctx, 0, sizeof *ctx);
@@ -223,7 +223,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot create context (phase 2)\n");
+		fz_error(NULL, "cannot create context (phase 2)");
 		fz_drop_context(ctx);
 		return NULL;
 	}
@@ -289,14 +289,14 @@ fz_context* fz_get_global_context(void)
 
 void fz_set_global_context(fz_context *ctx)
 {
-	if (global_ctx)
+	if (fz_has_global_context())
 	{
-		fprintf(stderr, "cannot (re)set global context after initial setup");
+		fz_error(ctx, "cannot (re)set global context after initial setup");
 		exit(1);
 	}
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot set global context to NULL (out of memory?)");
+		fz_error(ctx, "cannot set global context to NULL (out of memory?)");
 		exit(1);
 	}
 	global_ctx = ctx;

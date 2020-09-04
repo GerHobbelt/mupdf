@@ -381,22 +381,23 @@ static void on_display(void)
 
 static void on_error(const char *fmt, va_list ap)
 {
-#ifdef _WIN32
 	char buf[1000];
+
+#ifdef _WIN32
 	fz_vsnprintf(buf, sizeof buf, fmt, ap);
 	MessageBoxA(NULL, buf, "MuPDF GLUT Error", MB_ICONERROR);
-#else
-	fprintf(stderr, "GLUT error: ");
-	vfprintf(stderr, fmt, ap);
-	fprintf(stderr, "\n");
 #endif
+
+	fz_snprintf(buf, sizeof buf, "GLUT error: %s", fmt);
+	fz_verror(ctx, buf, ap);
 }
 
 static void on_warning(const char *fmt, va_list ap)
 {
-	fprintf(stderr, "GLUT warning: ");
-	vfprintf(stderr, fmt, ap);
-	fprintf(stderr, "\n");
+	char buf[1000];
+
+	fz_snprintf(buf, sizeof buf, "GLUT warning: %s", fmt);
+	fz_vwarn(ctx, fmt, ap);
 }
 
 static void on_timer(int timer_id)

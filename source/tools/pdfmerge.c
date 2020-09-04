@@ -16,13 +16,13 @@ static pdf_document *doc_src = NULL;
 
 static void usage(void)
 {
-	fz_info(ctx, "%s",
+	fz_info(ctx,
 		"usage: mutool merge [-o output.pdf] [-O options] input.pdf [pages] [input2.pdf] [pages2] ...\n"
 		"\t-o -\tname of PDF file to create\n"
 		"\t-O -\tcomma separated list of output options\n"
 		"\tinput.pdf\tname of input file from which to copy pages\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n\n"
-		);
+	);
 	fz_info(ctx, "%s", fz_pdf_write_options_usage);
 }
 
@@ -169,7 +169,7 @@ int pdfmerge_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: Cannot create destination document.\n");
+		fz_error(ctx, "Cannot create destination document.");
 		fz_flush_warnings(ctx);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -191,7 +191,7 @@ int pdfmerge_main(int argc, const char **argv)
 		fz_always(ctx)
 			pdf_drop_document(ctx, doc_src);
 		fz_catch(ctx)
-			fprintf(stderr, "error: Cannot merge document '%s'.\n", input);
+			fz_error(ctx, "Cannot merge document '%s'.", input);
 	}
 
 	if (fz_optind == argc)
@@ -199,7 +199,7 @@ int pdfmerge_main(int argc, const char **argv)
 		fz_try(ctx)
 			pdf_save_document(ctx, doc_des, output, &opts);
 		fz_catch(ctx)
-			fprintf(stderr, "error: Cannot save output file: '%s'.\n", output);
+			fz_error(ctx, "Cannot save output file: '%s'.", output);
 	}
 
 	pdf_drop_document(ctx, doc_des);

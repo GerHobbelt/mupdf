@@ -371,6 +371,7 @@ typedef struct worker_t {
 #endif
 } worker_t;
 
+static fz_context *ctx = NULL;
 static const char *output = NULL;
 static fz_output *out = NULL;
 
@@ -497,7 +498,7 @@ static struct {
 
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"muraster version " FZ_VERSION "\n"
 		"Usage: muraster [options] file [pages]\n"
 		"\t-p -\tpassword\n"
@@ -841,7 +842,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 			timing.total += diff + interptime;
 			timing.count ++;
 
-			fprintf(stderr, " %dms (interpretation) %dms (rendering) %dms (total)\n", interptime, diff, diff + interptime);
+			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
 		}
 		else
 		{
@@ -860,7 +861,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 			timing.total += diff;
 			timing.count ++;
 
-			fprintf(stderr, " %dms\n", diff);
+			fz_info(ctx, " %dms", diff);
 		}
 	}
 
@@ -1079,7 +1080,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	fz_var(list_dev);
 	fz_var(test_dev);
 
-	do
+	for (;;)
 	{
 		start = (showtime ? gettime() : 0);
 
@@ -1229,11 +1230,10 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		}
 		/* Loop back to reload this page */
 	}
-	while (1);
 
 	if (showtime)
 	{
-		fprintf(stderr, "page %s %d", filename, pagenum);
+		fz_info(ctx, "page %s %d\v", filename, pagenum);
 	}
 	if (bgprint.active)
 	{
@@ -1397,13 +1397,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
@@ -1438,13 +1438,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
 		return NULL;
 	}
 	else
@@ -1548,7 +1548,7 @@ read_rotation(const char *arg)
 	i = i % 360;
 	if (i % 90 != 0)
 	{
-		fprintf(stderr, "Ignoring invalid rotation\n");
+		fz_error(ctx, "Ignoring invalid rotation");
 		i = 0;
 	}
 
@@ -1563,11 +1563,11 @@ static void mu_drop_context(void)
 
 	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
 	{
-		char buf[100];
-		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
-		fprintf(stderr, "%s\n", buf);
+		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 	}
+
+	fz_drop_context(ctx); // moved to atexit() as code in there still uses ctx
 }
 
 #ifdef MURASTER_STANDALONE
@@ -1579,7 +1579,6 @@ int muraster_main(int argc, const char *argv[])
 	const char *password = "";
 	fz_document *doc = NULL;
 	int c;
-	fz_context *ctx;
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
 	fz_locks_context *locks = NULL;
@@ -1590,6 +1589,7 @@ int muraster_main(int argc, const char *argv[])
 	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
 	output = NULL;
 	out = NULL;
+	ctx = NULL;
 
 	rotation = -1;
 	width = 0;
@@ -1680,7 +1680,7 @@ int muraster_main(int argc, const char *argv[])
 #ifndef DISABLE_MUTHREADS
 			num_workers = atoi(fz_optarg); break;
 #else
-			fprintf(stderr, "Threads not enabled in this build\n");
+			fz_warn(ctx, "Threads not enabled in this build");
 			break;
 #endif
 		case 'm':
@@ -1693,10 +1693,10 @@ int muraster_main(int argc, const char *argv[])
 #ifndef DISABLE_MUTHREADS
 			bgprint.active = 1; break;
 #else
-			fprintf(stderr, "Threads not enabled in this build\n");
+			fz_warn(ctx, "Threads not enabled in this build");
 			break;
 #endif
-		case 'v': fprintf(stderr, "muraster version %s\n", FZ_VERSION); return EXIT_FAILURE;
+		case 'v': fz_info(ctx, "muraster version %s", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
@@ -1714,7 +1714,7 @@ int muraster_main(int argc, const char *argv[])
 
 	if (min_band_height <= 0)
 	{
-		fprintf(stderr, "Require a positive minimum band height\n");
+		fz_error(ctx, "Require a positive minimum band height");
 		return EXIT_FAILURE;
 	}
 
@@ -1722,7 +1722,7 @@ int muraster_main(int argc, const char *argv[])
 	locks = init_muraster_locks();
 	if (locks == NULL)
 	{
-		fprintf(stderr, "cannot initialise mutexes\n");
+		fz_error(ctx, "cannot initialise mutexes");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -1771,7 +1771,7 @@ int muraster_main(int argc, const char *argv[])
 		fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
 		if (fail)
 		{
-			fprintf(stderr, "bgprint startup failed\n");
+			fz_error(bgprint.ctx, "bgprint startup failed");
 			fz_drop_context(bgprint.ctx);
 			return EXIT_FAILURE;
 		}
@@ -1792,7 +1792,7 @@ int muraster_main(int argc, const char *argv[])
 		}
 		if (fail)
 		{
-			fprintf(stderr, "worker startup failed\n");
+			fz_error(ctx, "worker startup failed");
 			for (i = 0; i < num_workers; i++)
 			{
 				mu_destroy_semaphore(&workers[i].start);
@@ -1832,7 +1832,7 @@ int muraster_main(int argc, const char *argv[])
 		}
 		if (i == (int)nelem(suffix_table))
 		{
-			fprintf(stderr, "Unknown output format '%s'\n", format);
+			fz_error(ctx, "Unknown output format '%s'", format);
 			return EXIT_FAILURE;
 		}
 	}
@@ -1956,7 +1956,7 @@ int muraster_main(int argc, const char *argv[])
 	fz_catch(ctx)
 	{
 		fz_drop_document(ctx, doc);
-		fprintf(stderr, "error: cannot draw '%s': %s\n", filename, fz_caught_message(ctx));
+		fz_error(ctx, "error: cannot draw '%s': %s", filename, fz_caught_message(ctx));
 		errored = 1;
 	}
 
@@ -1967,29 +1967,29 @@ int muraster_main(int argc, const char *argv[])
 
 		if (files == 1)
 		{
-			fprintf(stderr, "total %dms (%dms layout) / %d pages for an average of %dms\n",
+			fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
 					timing.total, timing.layout, timing.count, timing.total / timing.count);
 			if (bgprint.active)
 			{
-				fprintf(stderr, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)\n",
+				fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
 						timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
-				fprintf(stderr, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)\n",
+				fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
 						timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
 			}
 			else
 			{
-				fprintf(stderr, "fastest page %d: %dms\n", timing.minpage, timing.min);
-				fprintf(stderr, "slowest page %d: %dms\n", timing.maxpage, timing.max);
+				fz_info(ctx, "fastest page %d: %dms", timing.minpage, timing.min);
+				fz_info(ctx, "slowest page %d: %dms", timing.maxpage, timing.max);
 			}
 		}
 		else
 		{
-			fprintf(stderr, "total %dms (%dms layout) / %d pages for an average of %dms in %d files\n",
+			fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
 					timing.total, timing.layout, timing.count, timing.total / timing.count, files);
-			fprintf(stderr, "fastest layout: %dms (%s)\n", timing.minlayout, timing.minlayoutfilename);
-			fprintf(stderr, "slowest layout: %dms (%s)\n", timing.maxlayout, timing.maxlayoutfilename);
-			fprintf(stderr, "fastest page %d: %dms (%s)\n", timing.minpage, timing.min, timing.minfilename);
-			fprintf(stderr, "slowest page %d: %dms (%s)\n", timing.maxpage, timing.max, timing.maxfilename);
+			fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
+			fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
+			fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
+			fz_info(ctx, "slowest page %d: %dms (%s)", timing.maxpage, timing.max, timing.maxfilename);
 		}
 	}
 
@@ -2029,7 +2029,7 @@ int muraster_main(int argc, const char *argv[])
 	out = NULL;
 
 	fz_flush_warnings(ctx);
-	fz_drop_context(ctx);
+	//fz_drop_context(ctx); -- moved to atexit() as code in there still uses ctx
 
 	return (errored != 0);
 }

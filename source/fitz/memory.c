@@ -297,7 +297,7 @@ fz_assert_lock_held(fz_context *ctx, int lock)
 		return;
 
 	if (fz_locks_debug[idx][lock] == 0)
-		fprintf(stderr, "Lock %d not held when expected\n", lock);
+		fz_error(ctx, "Lock %d not held when expected", lock);
 }
 
 void
@@ -313,7 +313,7 @@ fz_assert_lock_not_held(fz_context *ctx, int lock)
 		return;
 
 	if (fz_locks_debug[idx][lock] != 0)
-		fprintf(stderr, "Lock %d held when not expected\n", lock);
+		fz_error(ctx, "Lock %d held when not expected", lock);
 }
 
 void fz_lock_debug_lock(fz_context *ctx, int lock)
@@ -329,13 +329,13 @@ void fz_lock_debug_lock(fz_context *ctx, int lock)
 
 	if (fz_locks_debug[idx][lock] != 0)
 	{
-		fprintf(stderr, "Attempt to take lock %d when held already!\n", lock);
+		fz_error(ctx, "Attempt to take lock %d when held already!", lock);
 	}
 	for (i = lock-1; i >= 0; i--)
 	{
 		if (fz_locks_debug[idx][i] != 0)
 		{
-			fprintf(stderr, "Lock ordering violation: Attempt to take lock %d when %d held already!\n", lock, i);
+			fz_error(ctx, "Lock ordering violation: Attempt to take lock %d when %d held already!", lock, i);
 		}
 	}
 	fz_locks_debug[idx][lock] = 1;
@@ -357,7 +357,7 @@ void fz_lock_debug_unlock(fz_context *ctx, int lock)
 
 	if (fz_locks_debug[idx][lock] == 0)
 	{
-		fprintf(stderr, "Attempt to release lock %d when not held!\n", lock);
+		fz_error(ctx, "Attempt to release lock %d when not held!", lock);
 	}
 	fz_locks_debug[idx][lock] = 0;
 #ifdef FITZ_DEBUG_LOCKING_TIMES

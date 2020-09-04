@@ -266,6 +266,7 @@ typedef struct worker_t {
 #endif
 } worker_t;
 
+static fz_context* ctx = NULL;
 static const char *output = NULL;
 static fz_output *out = NULL;
 static int output_pagenum = 0;
@@ -367,7 +368,7 @@ static struct {
 
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"mudraw version " FZ_VERSION "\n"
 		"Usage: mudraw [options] file [pages]\n"
 		"\t-p -\tpassword\n"
@@ -449,7 +450,7 @@ static void usage(void)
 		"\t-y -{,-}*\tSelect layer config (by number), and toggle the listed entries\n"
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
-		);
+	);
 }
 
 static int gettime_once = 1;
@@ -1061,11 +1062,15 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				unsigned char digest[16];
 				int i;
+				char buf[34];
 
 				fz_md5_pixmap(ctx, pix, digest);
-				fprintf(stderr, " ");
+				strcpy(buf, " ");
 				for (i = 0; i < 16; i++)
-					fprintf(stderr, "%02x", digest[i]);
+				{
+					fz_snprintf(buf + 1 + i * 2, sizeof buf - 1 - i * 2, "%02x", digest[i]);
+				}
+				fz_info(ctx, "MD5:%s\v", buf);
 			}
 		}
 		fz_always(ctx)
@@ -1138,7 +1143,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			timing.count ++;
 
-			fprintf(stderr, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
+			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)\v", interptime, diff, diff + interptime);
 		}
 		else
 		{
@@ -1157,12 +1162,12 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			timing.total += diff;
 			timing.count ++;
 
-			fprintf(stderr, " %dms", diff);
+			fz_info(ctx, " %dms\v", diff);
 		}
 	}
 
 	if (!quiet || showfeatures || showtime || showmd5)
-		fprintf(stderr, "\n");
+		fz_info(ctx, "\n");
 
 	if (lowmemory)
 		fz_empty_store(ctx);
@@ -1333,7 +1338,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		else if (bgprint.active)
 		{
 			if (!quiet || showfeatures || showtime || showmd5)
-				fprintf(stderr, "page %s %d%s", filename, pagenum, features);
+				fz_info(ctx, "page %s %d%s\v", filename, pagenum, features);
 
 			bgprint.started = 1;
 			bgprint.page = page;
@@ -1355,7 +1360,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	else
 	{
 		if (!quiet || showfeatures || showtime || showmd5)
-			fprintf(stderr, "page %s %d%s", filename, pagenum, features);
+			fz_info(ctx, "page %s %d%s\v", filename, pagenum, features);
 		fz_try(ctx)
 			dodrawpage(ctx, page, list, pagenum, &cookie, start, 0, filename, 0, seps);
 		fz_always(ctx)
@@ -1513,13 +1518,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
 	}
 	else
 	{
@@ -1554,13 +1559,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fprintf(stderr, "double free! %d\n", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "double free! %d\n", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fprintf(stderr, "corrupted heap record! %p\n", &p[-1]);
+		fz_error(ctx, "corrupted heap record! %p\n", &p[-1]);
 		return NULL;
 	}
 	else
@@ -1680,16 +1685,16 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	{
 		int num_configs = pdf_count_layer_configs(ctx, pdoc);
 
-		fprintf(stderr, "Layer configs:\n");
+		fz_info(ctx, "Layer configs:\n");
 		for (config = 0; config < num_configs; config++)
 		{
-			fprintf(stderr, " %s%d:", config < 10 ? " " : "", config);
+			fz_info(ctx, " %s%d:\v", config < 10 ? " " : "", config);
 			pdf_layer_config_info(ctx, pdoc, config, &info);
 			if (info.name)
-				fprintf(stderr, " Name=\"%s\"", info.name);
+				fz_info(ctx, " Name=\"%s\"\v", info.name);
 			if (info.creator)
-				fprintf(stderr, " Creator=\"%s\"", info.creator);
-			fprintf(stderr, "\n");
+				fz_info(ctx, " Creator=\"%s\"\v", info.creator);
+			fz_info(ctx, "\n");
 		}
 		return;
 	}
@@ -1697,7 +1702,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	/* Read the config number */
 	if (*lc < '0' || *lc > '9')
 	{
-		fprintf(stderr, "cannot find number expected for -y\n");
+		fz_error(ctx, "cannot find number expected for -y");
 		return;
 	}
 	config = fz_atoi(lc);
@@ -1719,7 +1724,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 			lc++;
 		if (*lc < '0' || *lc > '9')
 		{
-			fprintf(stderr, "Expected a number for UI item to toggle\n");
+			fz_error(ctx, "Expected a number for UI item to toggle");
 			return;
 		}
 		item = fz_atoi(lc);
@@ -1727,34 +1732,34 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	}
 
 	/* Now list the final state of the config */
-	fprintf(stderr, "Layer Config %d:\n", config);
+	fz_info(ctx, "Layer Config %d:\n", config);
 	pdf_layer_config_info(ctx, pdoc, config, &info);
 	if (info.name)
-		fprintf(stderr, " Name=\"%s\"", info.name);
+		fz_info(ctx, " Name=\"%s\"\v", info.name);
 	if (info.creator)
-		fprintf(stderr, " Creator=\"%s\"", info.creator);
-	fprintf(stderr, "\n");
+		fz_info(ctx, " Creator=\"%s\"\v", info.creator);
+	fz_info(ctx, "\n");
 	n = pdf_count_layer_config_ui(ctx, pdoc);
 	for (j = 0; j < n; j++)
 	{
 		pdf_layer_config_ui ui;
 
 		pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
-		fprintf(stderr, "%s%d: ", j < 10 ? " " : "", j);
+		fz_info(ctx, "%s%d: \v", j < 10 ? " " : "", j);
 		while (ui.depth > 0)
 		{
 			ui.depth--;
-			fprintf(stderr, "  ");
+			fz_info(ctx, "  \v");
 		}
 		if (ui.type == PDF_LAYER_UI_CHECKBOX)
-			fprintf(stderr, " [%c] ", ui.selected ? 'x' : ' ');
+			fz_info(ctx, " [%c] \v", ui.selected ? 'x' : ' ');
 		else if (ui.type == PDF_LAYER_UI_RADIOBOX)
-			fprintf(stderr, " (%c) ", ui.selected ? 'x' : ' ');
+			fz_info(ctx, " (%c) \v", ui.selected ? 'x' : ' ');
 		if (ui.text)
-			fprintf(stderr, "%s", ui.text);
+			fz_info(ctx, "%s\v", ui.text);
 		if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
-			fprintf(stderr, " <locked>");
-		fprintf(stderr, "\n");
+			fz_info(ctx, " <locked>\v");
+		fz_info(ctx, "\n");
 	}
 #endif
 }
@@ -1819,11 +1824,12 @@ static void mu_drop_context(void)
 
 	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
 	{
-		char buf[100];
-		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_snprintf(buf, sizeof buf, "Allocations total=%zu", trace_info.allocs);
-		fprintf(stderr, "%s\n", buf);
+		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 	}
+
+	fz_drop_context(ctx); // moved to atexit() as code in here still uses ctx
+	ctx = NULL;
 }
 
 #ifdef MUDRAW_STANDALONE
@@ -1836,7 +1842,6 @@ int mudraw_main(int argc, const char **argv)
 	const char* txtdraw_options = "";
 	fz_document *doc = NULL;
 	int c;
-	fz_context *ctx;
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
 	fz_locks_context *locks = NULL;
@@ -1845,6 +1850,7 @@ int mudraw_main(int argc, const char **argv)
 	fz_var(doc);
 
 	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
+	ctx = NULL;
 	output = NULL;
 	out = NULL;
 	output_pagenum = 0;
@@ -1953,7 +1959,7 @@ int mudraw_main(int argc, const char **argv)
 
 		case 'O': spots = fz_atof(fz_optarg);
 #ifndef FZ_ENABLE_SPOT_RENDERING
-			fprintf(stderr, "Spot rendering/Overprint/Overprint simulation not enabled in this build\n");
+			fz_warn(ctx, "Spot rendering/Overprint/Overprint simulation not enabled in this build");
 			spots = SPOTS_NONE;
 #endif
 			break;
@@ -1985,14 +1991,14 @@ int mudraw_main(int argc, const char **argv)
 #ifndef DISABLE_MUTHREADS
 			num_workers = atoi(fz_optarg); break;
 #else
-			fprintf(stderr, "Threads not enabled in this build\n");
+			fz_warn(ctx, "Threads not enabled in this build");
 			break;
 #endif
 		case 't':
 #ifndef OCR_DISABLED
 			ocr_language = fz_optarg; break;
 #else
-			fprintf(stderr, "OCR functionality not enabled in this build\n");
+			fz_warn(ctx, "OCR functionality not enabled in this build");
 			break;
 #endif
 		case 'm':
@@ -2005,14 +2011,14 @@ int mudraw_main(int argc, const char **argv)
 #ifndef DISABLE_MUTHREADS
 			bgprint.active = 1; break;
 #else
-			fprintf(stderr, "Threads not enabled in this build\n");
+			fz_warn(ctx, "Threads not enabled in this build");
 			break;
 #endif
 		case 'y': layer_config = fz_optarg; break;
 		case 'a': useaccel = 0; break;
 		case 'x': txtdraw_options = fz_optarg; break;
 
-		case 'v': fprintf(stderr, "mudraw version %s\n", FZ_VERSION); return EXIT_FAILURE;
+		case 'v': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
@@ -2026,13 +2032,13 @@ int mudraw_main(int argc, const char **argv)
 	{
 		if (uselist == 0)
 		{
-			fprintf(stderr, "cannot use multiple threads without using display list\n");
+			fz_error(ctx, "cannot use multiple threads without using display list");
 			return EXIT_FAILURE;
 		}
 
 		if (band_height == 0)
 		{
-			fprintf(stderr, "Using multiple threads without banding is pointless\n");
+			fz_error(ctx, "Using multiple threads without banding is pointless");
 		}
 	}
 
@@ -2040,7 +2046,7 @@ int mudraw_main(int argc, const char **argv)
 	{
 		if (uselist == 0)
 		{
-			fprintf(stderr, "cannot bgprint without using display list\n");
+			fz_error(ctx, "cannot bgprint without using display list");
 			return EXIT_FAILURE;
 		}
 	}
@@ -2049,7 +2055,7 @@ int mudraw_main(int argc, const char **argv)
 	locks = init_mudraw_locks();
 	if (locks == NULL)
 	{
-		fprintf(stderr, "mutex initialisation failed\n");
+		fz_error(ctx, "mutex initialisation failed");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -2114,7 +2120,7 @@ int mudraw_main(int argc, const char **argv)
 			fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
 			if (fail)
 			{
-				fprintf(stderr, "bgprint startup failed\n");
+				fz_error(ctx, "bgprint startup failed");
 				fz_drop_context(bgprint.ctx);
 				return EXIT_FAILURE;
 			}
@@ -2135,7 +2141,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 			if (fail)
 			{
-				fprintf(stderr, "worker startup failed\n");
+				fz_error(ctx, "worker startup failed");
 				for (i = 0; i < num_workers; i++)
 				{
 					mu_destroy_semaphore(&workers[i].start);
@@ -2161,7 +2167,7 @@ int mudraw_main(int argc, const char **argv)
 		/* Determine output type */
 		if (band_height < 0)
 		{
-			fprintf(stderr, "Bandheight must be > 0\n");
+			fz_error(ctx, "Bandheight must be > 0");
 			return EXIT_FAILURE;
 		}
 
@@ -2177,7 +2183,7 @@ int mudraw_main(int argc, const char **argv)
 					output_format = suffix_table[i].format;
 					if (spots == SPOTS_FULL && suffix_table[i].spots == 0)
 					{
-						fprintf(stderr, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.\n", suffix_table[i].suffix+1);
+						fz_error(ctx, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.", suffix_table[i].suffix+1);
 						spots = SPOTS_OVERPRINT_SIM;
 					}
 					break;
@@ -2185,7 +2191,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 			if (i == (int)nelem(suffix_table))
 			{
-				fprintf(stderr, "Unknown output format '%s'\n", format);
+				fz_error(ctx, "Unknown output format '%s'", format);
 				return EXIT_FAILURE;
 			}
 		}
@@ -2204,7 +2210,7 @@ int mudraw_main(int argc, const char **argv)
 					output_format = suffix_table[i].format;
 					if (spots == SPOTS_FULL && suffix_table[i].spots == 0)
 					{
-						fprintf(stderr, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.\n", suffix_table[i].suffix+1);
+						fz_error(ctx, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.", suffix_table[i].suffix+1);
 						spots = SPOTS_OVERPRINT_SIM;
 					}
 					// match the tail (= file extension) with the output format;
@@ -2232,12 +2238,12 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PSD &&
 				output_format != OUT_OCR_PDF)
 			{
-				fprintf(stderr, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs\n");
+				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
 				return EXIT_FAILURE;
 			}
 			if (showmd5)
 			{
-				fprintf(stderr, "Banded operation not compatible with MD5\n");
+				fz_error(ctx, "Banded operation not compatible with MD5");
 				return EXIT_FAILURE;
 			}
 		}
@@ -2258,7 +2264,7 @@ int mudraw_main(int argc, const char **argv)
 					}
 					if (j == (int)nelem(format_cs_table[i].permitted_cs))
 					{
-						fprintf(stderr, "Unsupported colorspace for this format\n");
+						fz_error(ctx, "Unsupported colorspace for this format");
 						return EXIT_FAILURE;
 					}
 				}
@@ -2293,18 +2299,18 @@ int mudraw_main(int argc, const char **argv)
 				}
 				fz_catch(ctx)
 				{
-					fprintf(stderr, "Invalid ICC destination color space\n");
+					fz_error(ctx, "Invalid ICC destination color space");
 					return EXIT_FAILURE;
 				}
 				if (colorspace == NULL)
 				{
-					fprintf(stderr, "Invalid ICC destination color space\n");
+					fz_error(ctx, "Invalid ICC destination color space");
 					return EXIT_FAILURE;
 				}
 				alpha = 0;
 				break;
 			default:
-				fprintf(stderr, "Unknown colorspace!\n");
+				fz_error(ctx, "Unknown colorspace!");
 				return EXIT_FAILURE;
 		}
 
@@ -2347,7 +2353,7 @@ int mudraw_main(int argc, const char **argv)
 
 			if (!okay)
 			{
-				fprintf(stderr, "ICC profile uses a colorspace that cannot be used for this format\n");
+				fz_error(ctx, "ICC profile uses a colorspace that cannot be used for this format");
 				return EXIT_FAILURE;
 			}
 		}
@@ -2413,7 +2419,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 			fz_catch(ctx)
 			{
-				fprintf(stderr, "warning: tesseract OCR engine could not be initialized. Falling back to the non-OCR-ed output format! %s\n", fz_caught_message(ctx));
+				fz_error(ctx, "warning: tesseract OCR engine could not be initialized. Falling back to the non-OCR-ed output format! %s", fz_caught_message(ctx));
 				switch (output_format)
 				{
 				case OUT_OCR_TRACE:
@@ -2572,7 +2578,7 @@ int mudraw_main(int argc, const char **argv)
 		{
 			bgprint_flush();
 			fz_drop_document(ctx, doc);
-			fprintf(stderr, "error: cannot draw '%s': %s\n", filename, fz_caught_message(ctx));
+			fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
 			errored = 1;
 		}
 
@@ -2602,29 +2608,29 @@ int mudraw_main(int argc, const char **argv)
 
 			if (files == 1)
 			{
-				fprintf(stderr, "total %dms (%dms layout) / %d pages for an average of %dms\n",
+				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
 						timing.total, timing.layout, timing.count, timing.total / timing.count);
 				if (bgprint.active)
 				{
-					fprintf(stderr, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)\n",
+					fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
 							timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
-					fprintf(stderr, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)\n",
+					fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
 							timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
 				}
 				else
 				{
-					fprintf(stderr, "fastest page %d: %dms\n", timing.minpage, timing.min);
-					fprintf(stderr, "slowest page %d: %dms\n", timing.maxpage, timing.max);
+					fz_info(ctx, "fastest page %d: %dms", timing.minpage, timing.min);
+					fz_info(ctx, "slowest page %d: %dms", timing.maxpage, timing.max);
 				}
 			}
 			else
 			{
-				fprintf(stderr, "total %dms (%dms layout) / %d pages for an average of %dms in %d files\n",
+				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
 						timing.total, timing.layout, timing.count, timing.total / timing.count, files);
-				fprintf(stderr, "fastest layout: %dms (%s)\n", timing.minlayout, timing.minlayoutfilename);
-				fprintf(stderr, "slowest layout: %dms (%s)\n", timing.maxlayout, timing.maxlayoutfilename);
-				fprintf(stderr, "fastest page %d: %dms (%s)\n", timing.minpage, timing.min, timing.minfilename);
-				fprintf(stderr, "slowest page %d: %dms (%s)\n", timing.maxpage, timing.max, timing.maxfilename);
+				fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
+				fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
+				fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
+				fz_info(ctx, "slowest page %d: %dms (%s)", timing.maxpage, timing.max, timing.maxfilename);
 			}
 		}
 
@@ -2665,15 +2671,15 @@ int mudraw_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "error: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		if (!errored) {
-			fprintf(stderr, "Rendering failed\n");
+			fz_error(ctx, "Rendering failed");
 			errored = 1;
 		}
 	}
 
 	fz_flush_warnings(ctx);
-	fz_drop_context(ctx);
+	//fz_drop_context(ctx); -- moved to atexit() as code in there still uses ctx
 
 	return (errored != 0);
 }

@@ -179,7 +179,9 @@ atobjend:
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
 		tok = pdf_lex(ctx, file, buf);
 		if (tok != PDF_TOK_ENDOBJ)
+		{
 			fz_warn(ctx, "object missing 'endobj' token");
+		}
 		else
 		{
 			/* Read another token as we always return the next one */

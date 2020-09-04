@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static fz_context *ctx = NULL;
 static const char *infile = NULL;
 static const char *outfile = NULL;
 static const char *certificatefile = NULL;
@@ -21,7 +22,7 @@ static int list = 1;
 
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"usage: mutool sign [options] input.pdf [signature object numbers]\n"
 		"\t-p -\tpassword\n"
 		"\t-v \tverify signature\n"
@@ -29,7 +30,7 @@ static void usage(void)
 		"\t-s -\tsign signatures using certificate file\n"
 		"\t-P -\tcertificate password\n"
 		"\t-o -\toutput file name\n"
-		   );
+	);
 }
 
 static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signature)
@@ -208,12 +209,12 @@ static void process_acro_form(fz_context *ctx, pdf_document *doc)
 
 int pdfsign_main(int argc, const char **argv)
 {
-	fz_context *ctx;
 	pdf_document *doc;
 	const char *password = "";
 	int c;
 	pdf_page *page = NULL;
 
+	ctx = NULL;
 	infile = NULL;
 	outfile = NULL;
 	certificatefile = NULL;
@@ -244,19 +245,30 @@ int pdfsign_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
+
 	infile = argv[fz_optind++];
 
 	if (!clear && !sign && !verify && argc - fz_optind > 0)
 	{
 		list = 0;
 		verify = 1;
-	}
-
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
-	if (!ctx)
-	{
-		fprintf(stderr, "cannot initialize context\n");
-		return EXIT_FAILURE;
 	}
 
 	fz_var(page);
@@ -293,7 +305,7 @@ int pdfsign_main(int argc, const char **argv)
 	fz_catch(ctx)
 	{
 		fz_drop_page(ctx, (fz_page*)page);
-		fprintf(stderr, "error processing signatures: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "error processing signatures: %s", fz_caught_message(ctx));
 	}
 
 	fz_flush_warnings(ctx);

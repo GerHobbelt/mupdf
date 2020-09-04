@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static fz_context* ctx = NULL;
+
 static void usage(void)
 {
-	fprintf(stderr,
+	fz_info(ctx,
 		"Usage: mutool trace [options] file [pages]\n"
 		"\t-o -\toutput file name (default is stdout)\n"
 		"\t-p -\tpassword\n"
@@ -20,7 +22,7 @@ static void usage(void)
 		"\t-d\tuse display list\n"
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
-		);
+	);
 }
 
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
@@ -87,13 +89,14 @@ static void runrange(fz_context *ctx, fz_document *doc, int count, fz_output *ou
 
 int mutrace_main(int argc, const char **argv)
 {
-	fz_context *ctx;
 	fz_document *doc = NULL;
 	fz_output* out = NULL;
 	const char *password = "";
 	const char* output = NULL;
 	int i, c, count;
 	int errored = 0;
+
+	ctx = NULL;
 
 	layout_w = FZ_DEFAULT_LAYOUT_W;
 	layout_h = FZ_DEFAULT_LAYOUT_H;
@@ -128,10 +131,21 @@ int mutrace_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
-		fprintf(stderr, "cannot create mupdf context\n");
+		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -148,7 +162,7 @@ int mutrace_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot initialize mupdf: %s\n",  fz_caught_message(ctx));
+		fz_error(ctx, "cannot initialize mupdf: %s",  fz_caught_message(ctx));
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -190,7 +204,7 @@ int mutrace_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot run document: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "cannot run document: %s", fz_caught_message(ctx));
 		fz_drop_document(ctx, doc);
 		errored = 1;
 	}
