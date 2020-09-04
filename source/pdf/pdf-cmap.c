@@ -110,17 +110,20 @@ struct cmap_splay {
 /*
 	The splaying steps used:
 
-	Case 1:	|              z              x
+	Case 1:
+	    |              z              x
 		|          y       D  =>  A       y
 		|        x   C                  B   z
 		|       A B                        C D
 
-	Case 2:	|         z              x
+	Case 2:
+	    |         z              x
 		|     y       D  =>   y     z
 		|   A   x            A B   C D
 		|  B C
 
-	Case 3:	|     y                 x
+	Case 3:
+	    |     y                 x
 		|  x     C       =>   A     y
 		| A B                      B C
 */
