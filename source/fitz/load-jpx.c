@@ -862,8 +862,8 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 		for (k = 0; k < comps; k++)
 		{
 			opj_image_comp_t *comp = &(jpx->comps[k]);
-			int oy = comp->y0 * comp->dy - jpx->y0;
-			int ox = comp->x0 * comp->dx - jpx->x0;
+			OPJ_UINT32 oy = comp->y0 * comp->dy - jpx->y0;
+			OPJ_UINT32 ox = comp->x0 * comp->dx - jpx->x0;
 
 			if (comp->data == NULL)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "No data for JP2 image component %d", k);
@@ -873,7 +873,10 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 				for (x = 0; x < comp->w; x++)
 				{
 					OPJ_INT32 v;
+					OPJ_UINT32 oox = ox + x * comp->dx;
+					OPJ_UINT32 ooy = oy + y * comp->dy;
 					OPJ_UINT32 dx, dy;
+					OPJ_UINT32 dxmin, dymin, dxmax, dymax;
 
 					v = comp->data[y * comp->w + x];
 
@@ -884,15 +887,30 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 					else if (comp->prec < 8)
 						v = v << (8 - comp->prec);
 
-					for (dy = 0; dy < comp->dy; dy++)
+					dymin = 0;
+					if ((int32_t)(ooy) < 0)
+						dymin = -ooy;
+					dymax = comp->dy;
+					if ((int32_t)(ooy + dymax) < 0 || ooy > h)
+						dymax = 0;
+					else if (ooy + dymax > h)
+						dymax = h - ooy;
+					dxmin = 0;
+					if ((int32_t)(oox) < 0)
+						dxmin = -oox;
+					dxmax = comp->dx;
+					if ((int32_t)(oox + dxmax) < 0 || oox > w)
+						dxmax = 0;
+					else if (oox + dxmax > w)
+						dxmax = w - oox;
+					for (dy = dymin; dy < dymax; dy++)
 					{
-						for (dx = 0; dx < comp->dx; dx++)
+						for (dx = dxmin; dx < dxmax; dx++)
 						{
-							OPJ_UINT32 xx = ox + x * comp->dx + dx;
-							OPJ_UINT32 yy = oy + y * comp->dy + dy;
+							OPJ_UINT32 xx = oox + dx;
+							OPJ_UINT32 yy = ooy + dy;
 
-							if (xx < w && yy < h)
-								samples[yy * stride + xx * comps + k] = v;
+							samples[yy * stride + xx * comps + k] = v;
 						}
 					}
 				}
