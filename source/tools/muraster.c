@@ -645,7 +645,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 #endif
 				ctm.f -= band_height;
 			}
-			pix = workers[0].pix;
+			//pix = workers[0].pix;
 		}
 		else
 		{
@@ -1997,6 +1997,18 @@ int muraster_main(int argc, const char *argv[])
 	}
 
 #ifndef DISABLE_MUTHREADS
+	// bgprint also uses the workers, hence we MUST shut down bgprint BEFORE the workers themselves:
+	if (bgprint.active)
+	{
+		bgprint.pagenum = -1;
+		mu_trigger_semaphore(&bgprint.start);
+		mu_wait_semaphore(&bgprint.stop);
+		mu_destroy_semaphore(&bgprint.start);
+		mu_destroy_semaphore(&bgprint.stop);
+		mu_destroy_thread(&bgprint.thread);
+		fz_drop_context(bgprint.ctx);
+	}
+
 	if (num_workers > 0)
 	{
 		int i;
@@ -2012,17 +2024,6 @@ int muraster_main(int argc, const char *argv[])
 			fz_drop_context(workers[i].ctx);
 		}
 		fz_free(ctx, workers);
-	}
-
-	if (bgprint.active)
-	{
-		bgprint.pagenum = -1;
-		mu_trigger_semaphore(&bgprint.start);
-		mu_wait_semaphore(&bgprint.stop);
-		mu_destroy_semaphore(&bgprint.start);
-		mu_destroy_semaphore(&bgprint.stop);
-		mu_destroy_thread(&bgprint.thread);
-		fz_drop_context(bgprint.ctx);
 	}
 #endif /* DISABLE_MUTHREADS */
 
