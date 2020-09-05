@@ -94,24 +94,22 @@ pushd $(dirname $0)                                                            2
 # The registered repositories:
 #
 
-git_repo_checkout_branch "../thirdparty/curl" f527d6002dad50c57e9944ed75a85b7e5788f7da mupdf
-git_repo_checkout_branch "../thirdparty/freeglut" 59a29ed67725a3c15fc464747e01902ba44da3de master
-git_repo_checkout_branch "../thirdparty/freetype" 24df965835afb009f5eb5dc238ed4205b8992de6 mupdf
-git_repo_checkout_branch "../thirdparty/gumbo-parser" e4fe0323a1490a23bb3c0065fb957ac88cf56bac master
-git_repo_checkout_branch "../thirdparty/gumbo-parser/testdata" 6ddcf58bea5a01e616911050c173622f84297211 master
-git_repo_checkout_branch "../thirdparty/gumbo-parser/third_party/gtest" b13bdb93206ade272b4d7ed1c197c937d7d52796 master
-git_repo_checkout_branch "../thirdparty/harfbuzz" f8e03ea3373fc01c2ee2ba9d71be38c7116708ab master
-git_repo_checkout_branch "../thirdparty/jbig2dec" 0f991866dde822b7bf289c930d903f926a726380 master
-git_repo_checkout_branch "../thirdparty/lcms2" 40cf05c1875ba6af3fec2b4ff0353f7a26140ea6 mupdf
-git_repo_checkout_branch "../thirdparty/leptonica" f47f5ef9253d59fe740aef632a3c08d5ce0a7e63 master
-git_repo_checkout_branch "../thirdparty/libjpeg" 2cb9121a49129a75c86762a50a5ce981cdb33e59 master
-git_repo_checkout_branch "../thirdparty/mujs" 2704d8835b65b354b2411f560f9c90aa3842492a mupdf
-git_repo_checkout_branch "../thirdparty/openjpeg" af68b4775b4676712b6cd7773711e23733ff2188 bleeding_edge
-git_repo_checkout_branch "../thirdparty/tesseract" c94a108d17b85af3bcdbffcc63f490c347a13330 master
-git_repo_checkout_branch "../thirdparty/tesseract/abseil" 4d2ff381a3709ef9dd4cbc0237bae847c0bb1ccd master
-git_repo_checkout_branch "../thirdparty/tesseract/googletest" df6b75949b1efab7606ba60c0f0a0125ac95c5af master
-git_repo_checkout_branch "../thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb master
-git_repo_checkout_branch "../thirdparty/zlib" c8d407e68bf40d4322c4fc25850ba9629c7a5761 master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/curl" 02645232dd7df70eb9a43b9779397ada9d9975bc mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/freeglut" 96997e7d7b6ee63f624fcf0ad36aa9a4fd7d4639 master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/freetype" c3c34ef14aeb9c7ecc998d382c87369c1e8c78e7 mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/gumbo-parser" 91075ac371c4e736b91295890cb8c38bce4c1baf mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/harfbuzz" 4c64e6e731979d2b7b1258e4d23e767e18e3edfc mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/jbig2dec" 04a59bf3cf4c2b06d0d0714ba1a62aee9db2525b master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/lcms2" 5a641af5dca56503990bc4d408814eb5b90b9fc4 mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/leptonica" 92c016d7788690bb6404729900aa3131b30fa8fe mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/libjpeg" 2727a4365ae480ecda656e8372f4c782c8dcc2df master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/mujs" 2704d8835b65b354b2411f560f9c90aa3842492a mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/openjpeg" 8b8de53dc38642cc3f57596db2672e9f3a40f357 mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract" 64d2618c1d4aa1f55e5ad1fcf5672d7866613115 mupdf
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract/abseil" 7ba8cdb56df3bf4fe4ab4606f3fe4b2ab825afac master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract/googletest" 7b1cf6dd5fbe0c22c5e638fce8caf7f0f5c1abbf master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb master
+git_repo_checkout_branch "../../../CS/MuPDF/thirdparty/zlib" 41b5852eba5825bd41900df01ffc8431c56eae31 master
 
 # --- all done ---
 
