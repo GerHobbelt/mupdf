@@ -253,7 +253,7 @@ int pdfextract_main(int argc, const char **argv)
 	count = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:rN")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:rNh")) != -1)
 	{
 		switch (c)
 		{
@@ -267,6 +267,7 @@ int pdfextract_main(int argc, const char **argv)
 
 	if (fz_optind == argc)
 	{
+		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
 	}

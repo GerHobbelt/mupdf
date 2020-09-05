@@ -44,6 +44,7 @@ cmapdump_main(int argc, const char **argv)
 	}
 	if (fz_optind == argc)
 	{
+		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
 	}

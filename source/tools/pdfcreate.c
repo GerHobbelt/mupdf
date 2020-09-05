@@ -224,7 +224,7 @@ int pdfcreate_main(int argc, const char **argv)
 	doc = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:O:")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:O:h")) != -1)
 	{
 		switch (c)
 		{
@@ -236,6 +236,7 @@ int pdfcreate_main(int argc, const char **argv)
 
 	if (fz_optind == argc)
 	{
+		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
 	}
