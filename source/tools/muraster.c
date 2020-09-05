@@ -1235,7 +1235,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 
 	if (showtime)
 	{
-		fz_info(ctx, "page %s %d\v", filename, pagenum);
+		fz_info(ctx, "page %s %d", filename, pagenum);
 	}
 	if (bgprint.active)
 	{

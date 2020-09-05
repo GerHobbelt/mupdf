@@ -1744,7 +1744,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 		char msgbuf[2048];
 
 		pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
-		fz_snprintf(msgbuf, sizeof(msgbuf), "%s%d: \v", j < 10 ? " " : "", j);
+		fz_snprintf(msgbuf, sizeof(msgbuf), "%s%d: ", j < 10 ? " " : "", j);
 		while (ui.depth > 0)
 		{
 			ui.depth--;
@@ -1758,7 +1758,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 		else if (ui.type == PDF_LAYER_UI_RADIOBOX)
 		{
 			size_t len = strlen(msgbuf);
-			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " (%c) \v", ui.selected ? 'x' : ' ');
+			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " (%c) ", ui.selected ? 'x' : ' ');
 		}
 		if (ui.text)
 		{
