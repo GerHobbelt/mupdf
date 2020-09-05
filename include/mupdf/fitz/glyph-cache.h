@@ -47,9 +47,9 @@ void fz_render_t3_glyph_direct(fz_context *ctx, fz_device *dev, fz_font *font, i
 void fz_prepare_t3_glyph(fz_context *ctx, fz_font *font, int gid);
 
 /**
-	Dump debug statistics for the glyph cache.
+	Dump debug statistics for the glyph cache via fz_info().
 */
-void fz_dump_glyph_cache_stats(fz_context *ctx, fz_output *out);
+void fz_dump_glyph_cache_stats(fz_context *ctx);
 
 /**
 	Perform subpixel quantisation and adjustment on a glyph matrix.

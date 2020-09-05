@@ -437,11 +437,11 @@ fz_render_glyph_pixmap(fz_context *ctx, fz_font *font, int gid, fz_matrix *ctm, 
 }
 
 void
-fz_dump_glyph_cache_stats(fz_context *ctx, fz_output *out)
+fz_dump_glyph_cache_stats(fz_context *ctx)
 {
 	fz_glyph_cache *cache = ctx->glyph_cache;
-	fz_write_printf(ctx, out, "Glyph Cache Size: %zu\n", cache->total);
+	fz_info(ctx, "Glyph Cache Size: %zu\n", cache->total);
 #ifndef NDEBUG
-	fz_write_printf(ctx, out, "Glyph Cache Evictions: %d (%zu bytes)\n", cache->num_evictions, cache->evicted);
+	fz_info(ctx, "Glyph Cache Evictions: %d (%zu bytes)\n", cache->num_evictions, cache->evicted);
 #endif
 }
