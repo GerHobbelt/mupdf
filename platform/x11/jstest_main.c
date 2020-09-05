@@ -633,10 +633,6 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 
 static void mu_drop_context(void)
 {
-#ifndef DISABLE_MUTHREADS
-	fin_mudraw_locks();
-#endif /* DISABLE_MUTHREADS */
-
 	if (showtime && timing.count > 0)
 	{
 		timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
@@ -658,6 +654,11 @@ static void mu_drop_context(void)
 
 	fz_drop_context(ctx); // moved to atexit() as code in here still uses ctx
 	ctx = NULL;
+
+	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
+#ifndef DISABLE_MUTHREADS
+	fin_mudraw_locks();
+#endif /* DISABLE_MUTHREADS */
 }
 
 struct logconfig
@@ -812,6 +813,7 @@ main(int argc, const char *argv[])
 	if (lowmemory)
 		max_store = 1;
 
+	atexit(mu_drop_context);
 	if (!fz_has_global_context())
 	{
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
@@ -833,7 +835,6 @@ main(int argc, const char *argv[])
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
-	atexit(mu_drop_context);
 
 	pdfapp_init(ctx, &gapp);
 	gapp.scrw = 640;

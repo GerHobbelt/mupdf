@@ -1828,10 +1828,6 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 
 static void mu_drop_context(void)
 {
-#ifndef DISABLE_MUTHREADS
-	fin_mudraw_locks();
-#endif /* DISABLE_MUTHREADS */
-
 	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
 	{
 		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
@@ -1840,6 +1836,11 @@ static void mu_drop_context(void)
 
 	fz_drop_context(ctx); // moved to atexit() as code in here still uses ctx
 	ctx = NULL;
+
+	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
+#ifndef DISABLE_MUTHREADS
+	fin_mudraw_locks();
+#endif /* DISABLE_MUTHREADS */
 }
 
 #ifdef MUDRAW_STANDALONE
@@ -2086,6 +2087,7 @@ int mudraw_main(int argc, const char **argv)
 	if (lowmemory)
 		max_store = 1;
 
+	atexit(mu_drop_context);
 	if (!fz_has_global_context())
 	{
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
@@ -2103,7 +2105,6 @@ int mudraw_main(int argc, const char **argv)
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
-	atexit(mu_drop_context);
 
 	fz_try(ctx)
 	{

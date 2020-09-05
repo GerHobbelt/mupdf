@@ -123,9 +123,10 @@ int mu_create_mutex(mu_mutex *mutex)
 	return 0; /* Magic function, never fails */
 }
 
+const static CRITICAL_SECTION empty = { 0 };
+
 void mu_destroy_mutex(mu_mutex *mutex)
 {
-	const static CRITICAL_SECTION empty = { 0 };
 	if (memcmp(&mutex->mutex, &empty, sizeof(empty)) == 0)
 		return;
 	DeleteCriticalSection(&mutex->mutex);
