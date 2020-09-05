@@ -47,9 +47,7 @@ jbig2_message(const char *msg, JB2_Message_Level level, void *userdata)
 		switch (level)
 		{
 		case cJB2_Message_Information:
-#ifdef JBIG2_DEBUG
 			fz_warn(state->ctx, "luratech jbig2 info: %s", msg);
-#endif
 			break;
 		case cJB2_Message_Warning:
 			fz_warn(state->ctx, "luratech jbig2 warning: %s", msg);
@@ -248,19 +246,22 @@ struct fz_jbig2_allocator
 };
 
 static void
-error_callback(void *data, const char *msg, Jbig2Severity severity, uint32_t seg_idx)
+error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg_idx)
 {
-	fz_context *ctx = data;
+	fz_context* ctx = data;
+	char idxbuf[50] = "";
+
+	if (seg_idx != JBIG2_UNKNOWN_SEGMENT_NUMBER)
+		fz_snprintf(idxbuf, sizeof idxbuf, " (segment 0x%02x)", seg_idx);
+
 	if (severity == JBIG2_SEVERITY_FATAL)
-		fz_warn(ctx, "jbig2dec error: %s (segment %u)", msg, seg_idx);
+		fz_error(ctx, "jbig2dec error: %s%s", msg, idxbuf);
 	else if (severity == JBIG2_SEVERITY_WARNING)
-		fz_warn(ctx, "jbig2dec warning: %s (segment %u)", msg, seg_idx);
-#ifdef JBIG2_DEBUG
+		fz_warn(ctx, "jbig2dec warning: %s%s", msg, idxbuf);
 	else if (severity == JBIG2_SEVERITY_INFO)
-		fz_warn(ctx, "jbig2dec info: %s (segment %u)", msg, seg_idx);
-	else if (severity == JBIG2_SEVERITY_DEBUG)
-		fz_warn(ctx, "jbig2dec debug: %s (segment %u)", msg, seg_idx);
-#endif
+		fz_info(ctx, "jbig2dec info: %s%s", msg, idxbuf);
+	else
+		fz_info(ctx, "jbig2dec debug: %s%s", msg, idxbuf);
 }
 
 static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
@@ -307,7 +308,7 @@ jbig2_read_image(fz_context *ctx, struct info *jbig2, const unsigned char *buf, 
 
 	fz_try(ctx)
 	{
-		jctx = jbig2_ctx_new((Jbig2Allocator *) &allocator, 0, NULL, (Jbig2ErrorCallback)error_callback, ctx);
+		jctx = jbig2_ctx_new((Jbig2Allocator *) &allocator, 0, NULL, error_callback, ctx);
 		if (jctx == NULL)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create jbig2 context");
 		if (jbig2_data_in(jctx, buf, len) < 0)

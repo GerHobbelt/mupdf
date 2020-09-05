@@ -1,4 +1,4 @@
-/*
+﻿/*
  * muraster -- Convert a document to a raster file.
  *
  * Deliberately simple. Designed to be a basis for what
@@ -477,7 +477,7 @@ static struct {
 	const char *filename;
 	render_details render;
 	int interptime;
-} bgprint;
+} bgprint = { 0 };
 
 static struct {
 	int count, total;
@@ -490,7 +490,7 @@ static struct {
 	int minlayout, maxlayout;
 	const char *minlayoutfilename;
 	const char *maxlayoutfilename;
-} timing;
+} timing = { 0 };
 
 // https://stackoverflow.com/questions/2653214/stringification-of-a-macro-value
 #define stringify(A) __stringify(A)
@@ -1399,13 +1399,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
+		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
@@ -1440,13 +1440,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
+		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 		return NULL;
 	}
 	else
@@ -1630,7 +1630,7 @@ int muraster_main(int argc, const char *argv[])
 	max_band_memory = BAND_MEMORY;
 	width = 0;
 	height = 0;
-	num_workers = NUM_RENDER_THREADS; // --> DO NOT set to NUM_RENDER_THREADS until fixed -- Warning: more than one worker causes heap corruption!
+	num_workers = NUM_RENDER_THREADS;
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
 

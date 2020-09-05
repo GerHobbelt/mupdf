@@ -1,4 +1,4 @@
-
+﻿
 #include "timeval.h"
 
 #include "pdfapp.h"
@@ -186,13 +186,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
+		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
@@ -227,13 +227,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
+		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 		return NULL;
 	}
 	else
@@ -666,25 +666,36 @@ struct logconfig
 	FILE* logfile;
 };
 
-static void tst_error_callback(void* user, const char* message)
+static void show_progress_on_stderr(struct logconfig* logcfg, const char *message)
 {
-	struct logconfig* logcfg = (struct logconfig*)user;
-	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
-
 	if (!logcfg->quiet)
 	{
+		FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
+
 		// show progress on stderr, while we log the real data to logfile:
 		if (logfile != stderr)
 		{
 			if (!strncmp(message, "OK:", 3))
 				fprintf(stderr, "#");
 			else if (!strncmp(message, "ERR:", 4))
-				fprintf(stderr, "-");
+				fprintf(stderr, "/");
+			else if (strstr(message, "*!*"))
+				fprintf(stderr, "*!*");
 			else
 				fprintf(stderr, ".");
 		}
 	}
+}
+
+static void tst_error_callback(void* user, const char* message)
+{
+	struct logconfig* logcfg = (struct logconfig*)user;
+	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
+
+	// show progress on stderr, while we log the real data to logfile:
+	show_progress_on_stderr(logcfg, message);
 	fprintf(logfile, "error: %s\n", message);
+	fflush(logfile);
 #ifdef USE_OUTPUT_DEBUG_STRING
 	OutputDebugStringA("error: ");
 	OutputDebugStringA(message);
@@ -699,16 +710,9 @@ static void tst_warning_callback(void* user, const char* message)
 	if (!logcfg->quiet)
 	{
 		// show progress on stderr, while we log the real data to logfile:
-		if (logfile != stderr)
-		{
-			if (!strncmp(message, "OK:", 3))
-				fprintf(stderr, "#");
-			else if (!strncmp(message, "ERR:", 4))
-				fprintf(stderr, "-");
-			else
-				fprintf(stderr, ".");
-		}
+		show_progress_on_stderr(logcfg, message);
 		fprintf(logfile, "warning: %s\n", message);
+		fflush(logfile);
 #ifdef USE_OUTPUT_DEBUG_STRING
 		OutputDebugStringA("warning: ");
 		OutputDebugStringA(message);
@@ -724,15 +728,7 @@ static void tst_info_callback(void* user, const char* message)
 	if (!logcfg->quiet)
 	{
 		// show progress on stderr, while we log the real data to logfile:
-		if (logfile != stderr)
-		{
-			if (!strncmp(message, "OK:", 3))
-				fprintf(stderr, "#");
-			else if (!strncmp(message, "ERR:", 4))
-				fprintf(stderr, "-");
-			else
-				fprintf(stderr, ".");
-		}
+		show_progress_on_stderr(logcfg, message);
 		fprintf(logfile, "%s\n", message);
 #ifdef USE_OUTPUT_DEBUG_STRING
 		OutputDebugStringA(message);
@@ -858,7 +854,7 @@ main(int argc, const char *argv[])
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 
 			fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
-			//logcfg.logfile = fopen(logfilename, "w");
+			logcfg.logfile = fopen(logfilename, "w");
 
 			for(;;)
 			{

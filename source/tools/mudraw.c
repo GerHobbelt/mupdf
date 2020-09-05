@@ -1,4 +1,4 @@
-/*
+﻿/*
  * mudraw -- command line tool for drawing and converting documents
  */
 
@@ -351,7 +351,7 @@ static struct {
 	fz_page *page;
 	int interptime;
 	fz_separations *seps;
-} bgprint;
+} bgprint = { 0 };
 
 static struct {
 	int count, total;
@@ -364,7 +364,7 @@ static struct {
 	int minlayout, maxlayout;
 	const char *minlayoutfilename;
 	const char *maxlayoutfilename;
-} timing;
+} timing = { 0 };
 
 static void usage(void)
 {
@@ -1518,13 +1518,13 @@ trace_free(void *arg, void *p_)
 	info->current -= size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
+		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
@@ -1559,13 +1559,13 @@ trace_realloc(void *arg, void *p_, size_t size)
 	oldsize = p[-1].size;
 	if (p[-1].align != 0xEAD)
 	{
-		fz_error(ctx, "double free! %d", (int)(p[-1].align - 0xEAD));
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
 		p[-1].align++;
 		rotten = 1;
 	}
 	if (rotten)
 	{
-		fz_error(ctx, "corrupted heap record! %p", &p[-1]);
+		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 		return NULL;
 	}
 	else
@@ -1934,6 +1934,15 @@ int mudraw_main(int argc, const char **argv)
 	memset(&timing, 0, sizeof(timing));
 
 	gettime_once = 1;
+
+	// ---
+
+	bgprint.active = 0;			/* set by -P */
+#if defined(DISABLE_MUTHREADS)
+	num_workers = 0;
+#else
+	num_workers = 3;
+#endif
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:h")) != -1)
@@ -2646,6 +2655,18 @@ int mudraw_main(int argc, const char **argv)
 		}
 
 #ifndef DISABLE_MUTHREADS
+		// bgprint also uses the workers, hence we MUST shut down bgprint BEFORE the workers themselves:
+		if (bgprint.active)
+		{
+			bgprint.pagenum = -1;
+			mu_trigger_semaphore(&bgprint.start);
+			mu_wait_semaphore(&bgprint.stop);
+			mu_destroy_semaphore(&bgprint.start);
+			mu_destroy_semaphore(&bgprint.stop);
+			mu_destroy_thread(&bgprint.thread);
+			fz_drop_context(bgprint.ctx);
+		}
+
 		if (num_workers > 0)
 		{
 			int i;
@@ -2661,17 +2682,6 @@ int mudraw_main(int argc, const char **argv)
 				fz_drop_context(workers[i].ctx);
 			}
 			fz_free(ctx, workers);
-		}
-
-		if (bgprint.active)
-		{
-			bgprint.pagenum = -1;
-			mu_trigger_semaphore(&bgprint.start);
-			mu_wait_semaphore(&bgprint.stop);
-			mu_destroy_semaphore(&bgprint.start);
-			mu_destroy_semaphore(&bgprint.stop);
-			mu_destroy_thread(&bgprint.thread);
-			fz_drop_context(bgprint.ctx);
 		}
 #endif /* DISABLE_MUTHREADS */
 	}
