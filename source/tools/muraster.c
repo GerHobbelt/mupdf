@@ -231,9 +231,9 @@
 
 /* Enable for helpful threading debug */
 #if 01
-#define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0)
+#define DEBUG_THREADS(code) do { code; } while (0)
 #else
-#define DEBUG_THREADS(A) do { } while (0)
+#define DEBUG_THREADS(code) do { } while (0)
 #endif
 
 enum {
@@ -408,7 +408,7 @@ static fz_colorspace *colorspace;
 static const char *filename;
 static int files = 0;
 static int num_workers = 0;
-static worker_t *workers;
+static worker_t *workers = NULL;
 
 typedef struct render_details
 {
@@ -619,7 +619,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 		 * We will adjust ctm as we go. */
 		ibounds.y1 = ibounds.y0 + band_height;
 		tbounds.y1 = tbounds.y0 + band_height + 2;
-		DEBUG_THREADS(("Using %d Bands\n", bands));
+		DEBUG_THREADS(fz_info(ctx, "Using %d Bands\n", bands));
 		ctm.f += start_offset;
 
 		if (render->num_workers > 0)
@@ -640,7 +640,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				fz_set_pixmap_resolution(ctx, w->pix, x_resolution, y_resolution);
 				w->started = 1;
 #ifndef DISABLE_MUTHREADS
-				DEBUG_THREADS(("Worker %d, Pre-triggering band %d\n", band, band));
+				DEBUG_THREADS(fz_info(ctx, "Worker %d, Pre-triggering band %d\n", band, band));
 				mu_trigger_semaphore(&w->start);
 #endif
 				ctm.f -= band_height;
@@ -666,7 +666,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 			{
 				worker_t *w = &workers[band % render->num_workers];
 #ifndef DISABLE_MUTHREADS
-				DEBUG_THREADS(("Waiting for worker %d to complete band %d\n", w->num, band));
+				DEBUG_THREADS(fz_info(ctx, "Waiting for worker %d to complete band %d\n", w->num, band));
 				mu_wait_semaphore(&w->stop);
 #endif
 				w->started = 0;
@@ -703,7 +703,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				memset(&w->cookie, 0, sizeof(fz_cookie));
 				w->started = 1;
 #ifndef DISABLE_MUTHREADS
-				DEBUG_THREADS(("Triggering worker %d for band_start= %d\n", w->num, w->band_start));
+				DEBUG_THREADS(fz_info(ctx, "Triggering worker %d for band_start= %d\n", w->num, w->band_start));
 				mu_trigger_semaphore(&w->start);
 #endif
 			}
@@ -724,7 +724,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				if (w->started)
 				{
 #ifndef DISABLE_MUTHREADS
-					DEBUG_THREADS(("Waiting on worker %d to finish processing\n", band));
+					DEBUG_THREADS(fz_info(ctx, "Waiting on worker %d to finish processing\n", band));
 					mu_wait_semaphore(&w->stop);
 #endif
 					w->started = 0;
@@ -734,7 +734,9 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 			}
 		}
 		else
+		{
 			fz_drop_pixmap(ctx, pix);
+		}
 	}
 	fz_catch(ctx)
 	{
@@ -780,7 +782,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 		/* If we are bgprinting, then ask the caller to try us again in solo mode. */
 		if (bg && !solo)
 		{
-			DEBUG_THREADS(("Render failure; trying again in solo mode\n"));
+			DEBUG_THREADS(fz_info(ctx, "Render failure; trying again in solo mode\n"));
 			return RENDER_RETRY; /* Avoids all the cleanup below! */
 		}
 
@@ -788,7 +790,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 		if (render->num_workers > 1)
 		{
 			render->num_workers >>= 1;
-			DEBUG_THREADS(("Render failure; trying again with %d render threads\n", render->num_workers));
+			DEBUG_THREADS(fz_info(ctx, "Render failure; trying again with %d render threads\n", render->num_workers));
 			continue;
 		}
 
@@ -796,7 +798,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 		if (render->band_height_multiple > 2)
 		{
 			render->band_height_multiple >>= 1;
-			DEBUG_THREADS(("Render failure; trying again with %d band height multiple\n", render->band_height_multiple));
+			DEBUG_THREADS(fz_info(ctx, "Render failure; trying again with %d band height multiple\n", render->band_height_multiple));
 			continue;
 		}
 
@@ -805,12 +807,12 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 		{
 			fz_drop_display_list(ctx, render->list);
 			render->list = NULL;
-			DEBUG_THREADS(("Render failure; trying again with no list\n"));
+			DEBUG_THREADS(fz_info(ctx, "Render failure; trying again with no list\n"));
 			continue;
 		}
 
 		/* Give up. */
-		DEBUG_THREADS(("Render failure; nothing else to try\n"));
+		DEBUG_THREADS(fz_info(ctx, "Render failure; nothing else to try\n"));
 		break;
 	}
 
@@ -870,7 +872,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 
 	if (showmemory)
 	{
-		fz_dump_glyph_cache_stats(ctx, fz_stderr(ctx));
+		fz_dump_glyph_cache_stats(ctx);
 	}
 
 	fz_flush_warnings(ctx);
@@ -1471,20 +1473,20 @@ static void worker_thread(void *arg)
 
 	do
 	{
-		DEBUG_THREADS(("Worker %d waiting\n", me->num));
+		DEBUG_THREADS(fz_info(ctx, "Worker %d waiting\n", me->num));
 		mu_wait_semaphore(&me->start);
 		band_start = me->band_start;
-		DEBUG_THREADS(("Worker %d woken for band_start %d\n", me->num, me->band_start));
+		DEBUG_THREADS(fz_info(ctx, "Worker %d woken for band_start %d\n", me->num, me->band_start));
 		me->status = RENDER_OK;
 		if (band_start >= 0)
 		{
 			me->status = drawband(me->ctx, NULL, me->list, me->ctm, me->tbounds, &me->cookie, band_start, me->pix, &me->bit);
 		}
-		DEBUG_THREADS(("Worker %d completed band_start %d (status=%d)\n", me->num, band_start, me->status));
+		DEBUG_THREADS(fz_info(ctx, "Worker %d completed band_start %d (status=%d)\n", me->num, band_start, me->status));
 		mu_trigger_semaphore(&me->stop);
 	}
 	while (band_start >= 0);
-	DEBUG_THREADS(("Worker %d shutting down\n", me->num));
+	DEBUG_THREADS(fz_info(ctx, "Worker %d shutting down\n", me->num));
 }
 
 static void bgprint_worker(void *arg)
@@ -1496,21 +1498,21 @@ static void bgprint_worker(void *arg)
 
 	do
 	{
-		DEBUG_THREADS(("BGPrint waiting\n"));
+		DEBUG_THREADS(fz_info(ctx, "BGPrint waiting\n"));
 		mu_wait_semaphore(&bgprint.start);
 		pagenum = bgprint.pagenum;
-		DEBUG_THREADS(("BGPrint woken for pagenum %d\n", pagenum));
+		DEBUG_THREADS(fz_info(ctx, "BGPrint woken for pagenum %d\n", pagenum));
 		if (pagenum >= 0)
 		{
 			int start = gettime();
 			memset(&cookie, 0, sizeof(cookie));
 			bgprint.status = try_render_page(bgprint.ctx, pagenum, &cookie, start, bgprint.interptime, bgprint.filename, 1, bgprint.solo, &bgprint.render);
 		}
-		DEBUG_THREADS(("BGPrint completed page %d\n", pagenum));
+		DEBUG_THREADS(fz_info(ctx, "BGPrint completed page %d\n", pagenum));
 		mu_trigger_semaphore(&bgprint.stop);
 	}
 	while (pagenum >= 0);
-	DEBUG_THREADS(("BGPrint shutting down\n"));
+	DEBUG_THREADS(fz_info(ctx, "BGPrint shutting down\n"));
 }
 #endif
 
@@ -1628,12 +1630,12 @@ int muraster_main(int argc, const char *argv[])
 	max_band_memory = BAND_MEMORY;
 	width = 0;
 	height = 0;
-	num_workers = 1; // --> DO NOT set to NUM_RENDER_THREADS until fixed -- Warning: more than one worker causes heap corruption!
+	num_workers = NUM_RENDER_THREADS; // --> DO NOT set to NUM_RENDER_THREADS until fixed -- Warning: more than one worker causes heap corruption!
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPm:")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPm:h")) != -1)
 	{
 		switch (c)
 		{
@@ -1708,6 +1710,7 @@ int muraster_main(int argc, const char *argv[])
 
 	if (fz_optind == argc)
 	{
+		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
 	}
@@ -1997,7 +2000,7 @@ int muraster_main(int argc, const char *argv[])
 	if (num_workers > 0)
 	{
 		int i;
-		DEBUG_THREADS(("Asking workers to shutdown, then destroy their resources\n"));
+		DEBUG_THREADS(fz_info(ctx, "Asking workers to shutdown, then destroy their resources\n"));
 		for (i = 0; i < num_workers; i++)
 		{
 			workers[i].band_start = -1;

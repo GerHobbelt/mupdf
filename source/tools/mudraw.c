@@ -50,9 +50,9 @@
 
 /* Enable for helpful threading debug */
 #if 01
-#define DEBUG_THREADS(A) do { printf A; fflush(stdout); } while (0)
+#define DEBUG_THREADS(code) do { code; } while (0)
 #else
-#define DEBUG_THREADS(A) do { } while (0)
+#define DEBUG_THREADS(code) do { } while (0)
 #endif
 
 enum {
@@ -962,7 +962,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					fz_set_pixmap_resolution(ctx, workers[band].pix, resolution, resolution);
 					workers[band].running = 1;
 #ifndef DISABLE_MUTHREADS
-					DEBUG_THREADS(("Worker %d, Pre-triggering band %d\n", band, band));
+					DEBUG_THREADS(fz_info(ctx, "Worker %d, Pre-triggering band %d\n", band, band));
 					mu_trigger_semaphore(&workers[band].start);
 #endif
 					ctm.f -= drawheight;
@@ -1018,7 +1018,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				{
 					worker_t *w = &workers[band % num_workers];
 #ifndef DISABLE_MUTHREADS
-					DEBUG_THREADS(("Waiting for worker %d to complete band %d\n", w->num, band));
+					DEBUG_THREADS(fz_info(ctx, "Waiting for worker %d to complete band %d\n", w->num, band));
 					mu_wait_semaphore(&w->stop);
 #endif
 					w->running = 0;
@@ -1050,7 +1050,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					memset(&w->cookie, 0, sizeof(fz_cookie));
 					w->running = 1;
 #ifndef DISABLE_MUTHREADS
-					DEBUG_THREADS(("Triggering worker %d for band %d\n", w->num, w->band));
+					DEBUG_THREADS(fz_info(ctx, "Triggering worker %d for band %d\n", w->num, w->band));
 					mu_trigger_semaphore(&w->start);
 #endif
 				}
@@ -1089,20 +1089,20 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			if (num_workers > 0)
 			{
 				int i;
-				DEBUG_THREADS(("Stopping workers and removing their pixmaps\n"));
+				DEBUG_THREADS(fz_info(ctx, "Stopping workers and removing their pixmaps\n"));
 				for (i = 0; i < num_workers; i++)
 				{
 					if (workers[i].running)
 					{
 #ifndef DISABLE_MUTHREADS
-						DEBUG_THREADS(("Waiting on worker %d to finish processing\n", i));
+						DEBUG_THREADS(fz_info(ctx, "Waiting on worker %d to finish processing\n", i));
 						mu_wait_semaphore(&workers[i].stop);
 #endif
 						workers[i].running = 0;
 					}
 					else
 					{
-						DEBUG_THREADS(("Worker %d not processing anything\n", i));
+						DEBUG_THREADS(fz_info(ctx, "Worker %d not processing anything\n", i));
 					}
 					fz_drop_pixmap(ctx, workers[i].pix);
 					workers[i].pix = NULL;
@@ -1174,7 +1174,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 	if (showmemory)
 	{
-		fz_dump_glyph_cache_stats(ctx, fz_stderr(ctx));
+		fz_dump_glyph_cache_stats(ctx);
 	}
 
 	fz_flush_warnings(ctx);
@@ -1592,27 +1592,27 @@ static void worker_thread(void *arg)
 
 	do
 	{
-		DEBUG_THREADS(("Worker %d waiting\n", me->num));
+		DEBUG_THREADS(fz_info(ctx, "Worker %d waiting\n", me->num));
 		mu_wait_semaphore(&me->start);
 		band = me->band;
-		DEBUG_THREADS(("Worker %d woken for band %d\n", me->num, band));
+		DEBUG_THREADS(fz_info(ctx, "Worker %d woken for band %d\n", me->num, band));
 		if (band >= 0)
 		{
 			fz_try(me->ctx)
 			{
 				drawband(me->ctx, NULL, me->list, me->ctm, me->tbounds, &me->cookie, band * band_height, me->pix, &me->bit);
-				DEBUG_THREADS(("Worker %d completed band %d\n", me->num, band));
+				DEBUG_THREADS(fz_info(ctx, "Worker %d completed band %d\n", me->num, band));
 			}
 			fz_catch(me->ctx)
 			{
-				DEBUG_THREADS(("Worker %d failed on band %d\n", me->num, band));
+				DEBUG_THREADS(fz_info(ctx, "Worker %d failed on band %d\n", me->num, band));
 				me->error = 1;
 			}
 		}
 		mu_trigger_semaphore(&me->stop);
 	}
 	while (band >= 0);
-	DEBUG_THREADS(("Worker %d shutting down\n", me->num));
+	DEBUG_THREADS(fz_info(ctx, "Worker %d shutting down\n", me->num));
 }
 
 static void bgprint_worker(void *arg)
@@ -1624,10 +1624,10 @@ static void bgprint_worker(void *arg)
 
 	do
 	{
-		DEBUG_THREADS(("BGPrint waiting\n"));
+		DEBUG_THREADS(fz_info(ctx, "BGPrint waiting\n"));
 		mu_wait_semaphore(&bgprint.start);
 		pagenum = bgprint.pagenum;
-		DEBUG_THREADS(("BGPrint woken for pagenum %d\n", pagenum));
+		DEBUG_THREADS(fz_info(ctx, "BGPrint woken for pagenum %d\n", pagenum));
 		if (pagenum >= 0)
 		{
 			int start = gettime();
@@ -1635,7 +1635,7 @@ static void bgprint_worker(void *arg)
 			fz_try(bgprint.ctx)
 			{
 				dodrawpage(bgprint.ctx, bgprint.page, bgprint.list, pagenum, &cookie, start, bgprint.interptime, bgprint.filename, 1, bgprint.seps);
-				DEBUG_THREADS(("BGPrint completed page %d\n", pagenum));
+				DEBUG_THREADS(fz_info(ctx, "BGPrint completed page %d\n", pagenum));
 			}
 			fz_always(bgprint.ctx)
 			{
@@ -1645,7 +1645,7 @@ static void bgprint_worker(void *arg)
 			}
 			fz_catch(bgprint.ctx)
 			{
-				DEBUG_THREADS(("BGPrint failed on page %d\n", pagenum));
+				DEBUG_THREADS(fz_info(ctx, "BGPrint failed on page %d\n", pagenum));
 				bgprint.error = 1;
 			}
 
@@ -1653,7 +1653,7 @@ static void bgprint_worker(void *arg)
 		mu_trigger_semaphore(&bgprint.stop);
 	}
 	while (pagenum >= 0);
-	DEBUG_THREADS(("BGPrint shutting down\n"));
+	DEBUG_THREADS(fz_info(ctx, "BGPrint shutting down\n"));
 }
 #endif
 
@@ -1936,7 +1936,7 @@ int mudraw_main(int argc, const char **argv)
 	gettime_once = 1;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:h")) != -1)
 	{
 		switch (c)
 		{
@@ -2034,6 +2034,7 @@ int mudraw_main(int argc, const char **argv)
 
 	if (fz_optind == argc)
 	{
+		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
 	}
@@ -2648,7 +2649,7 @@ int mudraw_main(int argc, const char **argv)
 		if (num_workers > 0)
 		{
 			int i;
-			DEBUG_THREADS(("Asking workers to shutdown, then destroy their resources\n"));
+			DEBUG_THREADS(fz_info(ctx, "Asking workers to shutdown, then destroy their resources\n"));
 			for (i = 0; i < num_workers; i++)
 			{
 				workers[i].band = -1;

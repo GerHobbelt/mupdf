@@ -671,6 +671,19 @@ static void tst_error_callback(void* user, const char* message)
 	struct logconfig* logcfg = (struct logconfig*)user;
 	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
 
+	if (!logcfg->quiet)
+	{
+		// show progress on stderr, while we log the real data to logfile:
+		if (logfile != stderr)
+		{
+			if (!strncmp(message, "OK:", 3))
+				fprintf(stderr, "#");
+			else if (!strncmp(message, "ERR:", 4))
+				fprintf(stderr, "-");
+			else
+				fprintf(stderr, ".");
+		}
+	}
 	fprintf(logfile, "error: %s\n", message);
 #ifdef USE_OUTPUT_DEBUG_STRING
 	OutputDebugStringA("error: ");
@@ -685,6 +698,16 @@ static void tst_warning_callback(void* user, const char* message)
 
 	if (!logcfg->quiet)
 	{
+		// show progress on stderr, while we log the real data to logfile:
+		if (logfile != stderr)
+		{
+			if (!strncmp(message, "OK:", 3))
+				fprintf(stderr, "#");
+			else if (!strncmp(message, "ERR:", 4))
+				fprintf(stderr, "-");
+			else
+				fprintf(stderr, ".");
+		}
 		fprintf(logfile, "warning: %s\n", message);
 #ifdef USE_OUTPUT_DEBUG_STRING
 		OutputDebugStringA("warning: ");
@@ -746,7 +769,7 @@ main(int argc, const char *argv[])
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:Lvqm:")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:Lvqm:h")) != -1)
 	{
 		switch(c)
 		{
@@ -773,6 +796,7 @@ main(int argc, const char *argv[])
 
 	if (fz_optind == argc)
 	{
+		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
 	}
@@ -834,7 +858,7 @@ main(int argc, const char *argv[])
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 
 			fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
-			logcfg.logfile = fopen(logfilename, "w");
+			//logcfg.logfile = fopen(logfilename, "w");
 
 			for(;;)
 			{
@@ -845,8 +869,6 @@ main(int argc, const char *argv[])
 
 				linecounter++;
 				fflush(logcfg.logfile);
-
-				if (linecounter > 100) break;
 
 				if (line == NULL)
 				{
