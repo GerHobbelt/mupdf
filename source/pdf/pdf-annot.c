@@ -198,6 +198,7 @@ pdf_string_from_annot_type(fz_context *ctx, enum pdf_annot_type type)
 int
 pdf_annot_type_from_string(fz_context *ctx, const char *subtype)
 {
+	if (!subtype) return PDF_ANNOT_UNKNOWN;
 	if (!strcmp("Text", subtype)) return PDF_ANNOT_TEXT;
 	if (!strcmp("Link", subtype)) return PDF_ANNOT_LINK;
 	if (!strcmp("FreeText", subtype)) return PDF_ANNOT_FREE_TEXT;
@@ -245,7 +246,7 @@ static void check_allowed_subtypes(fz_context *ctx, pdf_annot *annot, pdf_obj *p
 {
 	pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 	if (!is_allowed_subtype(ctx, annot, property, allowed))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "%s annotations have no %s property", pdf_to_name(ctx, subtype), pdf_to_name(ctx, property));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "%s annotations have no %s property", pdf_to_name_not_null(ctx, subtype), pdf_to_name_not_null(ctx, property));
 }
 
 pdf_annot *

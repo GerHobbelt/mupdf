@@ -225,7 +225,7 @@ build_filter(fz_context *ctx, fz_stream *chain, pdf_document *doc, pdf_obj *f, p
 	}
 
 	else
-		fz_warn(ctx, "unknown filter name (%s)", pdf_to_name(ctx, f));
+		fz_warn(ctx, "unknown filter name (%s)", pdf_to_name_not_null(ctx, f));
 
 	return fz_keep_stream(ctx, chain);
 }

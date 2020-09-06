@@ -61,7 +61,7 @@ pdf_new_crypt(fz_context *ctx, pdf_obj *dict, pdf_obj *id)
 	if (!pdf_name_eq(ctx, PDF_NAME(Standard), obj))
 	{
 		pdf_drop_crypt(ctx, crypt);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown encryption handler: '%s'", pdf_to_name(ctx, obj));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown encryption handler: '%s'", pdf_to_name_not_null(ctx, obj));
 	}
 
 	crypt->v = 0;
@@ -303,7 +303,7 @@ pdf_parse_crypt_filter(fz_context *ctx, pdf_crypt_filter *cf, pdf_crypt *crypt, 
 			else if (pdf_name_eq(ctx, PDF_NAME(AESV3), obj))
 				cf->method = PDF_CRYPT_AESV3;
 			else
-				fz_warn(ctx, "unknown encryption method: %s", pdf_to_name(ctx, obj));
+				fz_warn(ctx, "unknown encryption method: %s", pdf_to_name_not_null(ctx, obj));
 		}
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Length));

@@ -351,7 +351,7 @@ pdf_process_Do(fz_context *ctx, pdf_processor *proc, pdf_csi *csi)
 	else if (!strcmp(pdf_to_name(ctx, subtype), "PS"))
 		fz_warn(ctx, "ignoring XObject with subtype PS");
 	else
-		fz_warn(ctx, "ignoring XObject with unknown subtype: '%s'", pdf_to_name(ctx, subtype));
+		fz_warn(ctx, "ignoring XObject with unknown subtype: '%s'", pdf_to_name_not_null(ctx, subtype));
 }
 
 static void

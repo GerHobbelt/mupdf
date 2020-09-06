@@ -353,7 +353,7 @@ pdf_load_colorspace_imp(fz_context *ctx, pdf_obj *obj)
 		else if (pdf_name_eq(ctx, obj, PDF_NAME(DeviceCMYK)))
 			return fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
 		else
-			fz_throw(ctx, FZ_ERROR_SYNTAX, "unknown colorspace: %s", pdf_to_name(ctx, obj));
+			fz_throw(ctx, FZ_ERROR_SYNTAX, "unknown colorspace: %s", pdf_to_name_not_null(ctx, obj));
 	}
 
 	else if (pdf_is_array(ctx, obj))
@@ -417,7 +417,7 @@ pdf_load_colorspace_imp(fz_context *ctx, pdf_obj *obj)
 						cs = pdf_load_colorspace(ctx, pobj);
 					}
 					else
-						fz_throw(ctx, FZ_ERROR_SYNTAX, "unknown colorspace %s", pdf_to_name(ctx, name));
+						fz_throw(ctx, FZ_ERROR_SYNTAX, "unknown colorspace %s", pdf_to_name_not_null(ctx, name));
 				}
 				fz_always(ctx)
 				{
