@@ -368,6 +368,9 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			if (c == 'l') {
 				c = *fmt++;
 				bits = sizeof(int64_t) * 8;
+				if (c == 'l') {
+					c = *fmt++;
+				}
 				if (c == 0)
 					break;
 			}
