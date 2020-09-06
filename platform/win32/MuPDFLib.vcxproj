@@ -44,7 +44,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>false</CLRSupport>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -80,6 +80,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
+    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -193,6 +194,12 @@
     </ProjectReference>
     <ProjectReference Include="libcurl.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
     </ProjectReference>
     <ProjectReference Include="libresources.vcxproj">
       <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
