@@ -1340,7 +1340,10 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	else
 	{
 		if (!winfilename(wbuf, nelem(wbuf)))
-			exit(0);
+		{
+			fz_free_argv(argc, argv);
+			return EXIT_FAILURE;
+		}
 		code = WideCharToMultiByte(CP_UTF8, 0, wbuf, -1, filename, sizeof filename, NULL, NULL);
 		if (code == 0)
 			pdfapp_error(&gapp, "cannot convert filename to utf-8");
