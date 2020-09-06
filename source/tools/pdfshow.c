@@ -271,7 +271,7 @@ static void showjs(void)
 		pdf_obj *action = pdf_dict_get_val(ctx, tree, i);
 		pdf_obj *js = pdf_dict_get(ctx, action, PDF_NAME(JS));
 		char *src = pdf_load_stream_or_string_as_utf8(ctx, js);
-		fz_write_printf(ctx, out, "// %s\n", pdf_to_name(ctx, name));
+		fz_write_printf(ctx, out, "// %s\n", pdf_to_name_not_null(ctx, name));
 		showtext(src, 0);
 		fz_free(ctx, src);
 	}
@@ -316,7 +316,7 @@ static void showfield(pdf_obj *field)
 	parent = pdf_dict_get(ctx, field, PDF_NAME(Parent));
 
 	fz_write_printf(ctx, out, "field %d\n", pdf_to_num(ctx, field));
-	fz_write_printf(ctx, out, "    Type: %s\n", pdf_to_name(ctx, ft));
+	fz_write_printf(ctx, out, "    Type: %s\n", pdf_to_name_not_null(ctx, ft));
 	if (ff)
 	{
 		fz_write_printf(ctx, out, "    Flags:");
@@ -403,6 +403,8 @@ static int isnumber(char *s)
 	return 1;
 }
 
+#define PDF_XPATH_SIZE 1000
+
 static void showpath(char *path, pdf_obj *obj)
 {
 	if (path && path[0])
@@ -413,7 +415,7 @@ static void showpath(char *path, pdf_obj *obj)
 			if (!strcmp(part, "*"))
 			{
 				int i, n;
-				char buf[1000];
+				char buf[PDF_XPATH_SIZE];
 				if (pdf_is_array(ctx, obj))
 				{
 					n = pdf_array_len(ctx, obj);
@@ -477,7 +479,7 @@ static void showpathpage(char *path)
 			if (!strcmp(part, "*"))
 			{
 				int i, n;
-				char buf[1000];
+				char buf[PDF_XPATH_SIZE];
 				n = pdf_count_pages(ctx, doc);
 				for (i = 0; i < n; ++i)
 				{
@@ -506,7 +508,9 @@ static void showpathpage(char *path)
 
 static void showpathroot(const char *path)
 {
-	char buf[2000], *list = buf, *part;
+	char buf[PDF_XPATH_SIZE];
+	char* list = buf;
+	char* part;
 	fz_strlcpy(buf, path, sizeof buf);
 	part = fz_strsep(&list, SEP);
 	if (part && part[0])
@@ -629,8 +633,37 @@ int pdfshow_main(int argc, const char **argv)
 		if (fz_optind == argc)
 			showtrailer();
 
+		// when we are requested to show multiple sections, we include headers/separators:
+		int print_header = (fz_optind + 1 < argc);
+
 		while (fz_optind < argc)
-			show(argv[fz_optind++]);
+		{
+			const char *name = argv[fz_optind++];
+
+			// run every 'show' command independently, i.e. a fault in one does not mean we won't execute the others:
+			fz_try(ctx)
+			{
+				if (print_header)
+					fz_write_printf(ctx, out, "=== %s =======================================================================\n\n", name);
+
+				show(name);
+			}
+			fz_catch(ctx)
+			{
+				// only log any type of exception which hasn't logged itself yet: prevent duplicate error log entries
+				int code = fz_caught(ctx);
+				if (code == FZ_ERROR_ABORT || code == FZ_ERROR_TRYLATER)
+				{
+					fz_error(ctx, "%s", fz_caught_message(ctx));
+				}
+				fz_write_printf(ctx, out, "\n\n**ERROR**: %s: %s\n", name, fz_caught_message(ctx));
+				errored = 1;
+			}
+			if (print_header)
+				fz_write_printf(ctx, out, "\n\n");
+		}
+		if (print_header)
+			fz_write_printf(ctx, out, "===============================================================================\n");
 
 		fz_close_output(ctx, out);
 	}
