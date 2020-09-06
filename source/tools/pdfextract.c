@@ -57,13 +57,13 @@ static void writepixmap(fz_pixmap *pix, char *file)
 	if (!pix->colorspace || pix->colorspace->type == FZ_COLORSPACE_GRAY || pix->colorspace->type == FZ_COLORSPACE_RGB)
 	{
 		fz_snprintf(buf, sizeof(buf), "%s%s.png", output_template_path, file);
-		printf("extracting %s\n", buf);
+		fz_info(ctx, "extracting %s\n", buf);
 		fz_save_pixmap_as_png(ctx, pix, buf);
 	}
 	else
 	{
 		fz_snprintf(buf, sizeof(buf), "%s%s.pam", output_template_path, file);
-		printf("extracting %s\n", buf);
+		fz_info(ctx, "extracting %s\n", buf);
 		fz_save_pixmap_as_pam(ctx, pix, buf);
 	}
 
@@ -81,7 +81,7 @@ writejpeg(const unsigned char *data, size_t len, const char *file)
 	out = fz_new_output_with_path(ctx, buf, 0);
 	fz_try(ctx)
 	{
-		printf("extracting %s\n", buf);
+		fz_info(ctx, "extracting %s\n", buf);
 		fz_write_data(ctx, out, data, len);
 		fz_close_output(ctx, out);
 	}
@@ -184,7 +184,7 @@ static void savefont(pdf_obj *dict)
 		else if (pdf_name_eq(ctx, obj, PDF_NAME(OpenType)))
 			ext = "otf";
 		else
-			fz_throw(ctx, FZ_ERROR_GENERIC, "unhandled font type '%s'", pdf_to_name(ctx, obj));
+			fz_throw(ctx, FZ_ERROR_GENERIC, "unhandled font type '%s'", pdf_to_name_not_null(ctx, obj));
 	}
 
 	if (!stream)
@@ -198,7 +198,7 @@ static void savefont(pdf_obj *dict)
 	fz_try(ctx)
 	{
 		fz_snprintf(namebuf, sizeof(namebuf), "%sfont-%04d-%04d.%s", output_template_path, pdf_to_num(ctx, dict), ++count, ext);
-		printf("extracting %s\n", namebuf);
+		fz_info(ctx, "extracting %s\n", namebuf);
 		out = fz_new_output_with_path(ctx, namebuf, 0);
 		fz_try(ctx)
 		{
