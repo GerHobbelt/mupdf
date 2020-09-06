@@ -503,46 +503,56 @@ static void usage(void)
 	fz_info(ctx,
 		"muraster version " FZ_VERSION "\n"
 		"Usage: muraster [options] file [pages]\n"
-		"\t-p -\tpassword\n"
+		"  -p -  password\n"
 		"\n"
-		"\t-o -\toutput file name\n"
-		"\t-F -\toutput format (default inferred from output file name)\n"
-		"\t\tpam, pbm, pgm, pkm, ppm\n"
+		"  -o -  output file name\n"
+		"  -F -  output format (default inferred from output file name)\n"
+		"    pam, pbm, pgm, pkm, ppm\n"
 		"\n"
-		"\t-s -\tshow extra information:\n"
-		"\t\tm - show memory use\n"
-		"\t\tt - show timings\n"
+		"  -s -  show extra information:\n"
+		"    m   show memory use\n"
+		"    t   show timings\n"
 		"\n"
-		"\t-R {auto,0,90,180,270}\n"
-		"\t\trotate clockwise (default: auto)\n"
-		"\t-r -{,_}\tx and y resolution in dpi (default: " stringify(X_RESOLUTION) "x" stringify(Y_RESOLUTION) ")\n"
-		"\t-w -\tprintable width (in inches) (default: " stringify(PAPER_WIDTH) ")\n"
-		"\t-h -\tprintable height (in inches) (default: " stringify(PAPER_HEIGHT) "\n"
-		"\t-f\tfit file to page if too large\n"
-		"\t-B -\tminimum band height (e.g. 32)\n"
-		"\t-M -\tmax bandmemory (e.g. 655360)\n"
+		"  -R {auto,0,90,180,270}\n"
+		"        rotate clockwise (default: auto)\n"
+		"  -r -{,_}  x and y resolution in dpi (default: " stringify(X_RESOLUTION) "x" stringify(Y_RESOLUTION) ")\n"
+		"  -w -  printable width (in inches) (default: " stringify(PAPER_WIDTH) ")\n"
+		"  -h -  printable height (in inches) (default: " stringify(PAPER_HEIGHT) "\n"
+		"  -f    fit file to page if too large\n"
+		"  -B -  minimum band height (e.g. 32)\n"
+		"  -M -  max band memory (e.g. 655360)\n"
 #ifndef DISABLE_MUTHREADS
-		"\t-T -\tnumber of threads to use for rendering\n"
+		"  -T -  number of threads to use for rendering\n"
 #else
-		"\t-T -\tnumber of threads to use for rendering (disabled in this non-threading build)\n"
+		"  -T -  number of threads to use for rendering (disabled in this non-threading\n"
+		"        build)\n"
+#endif
+#ifndef DISABLE_MUTHREADS
+		"  -P    parallel interpretation/rendering\n"
+#else
+		"  -P    parallel interpretation/rendering (disabled in this non-threading build)\n"
 #endif
 		"\n"
-		"\t-W -\tpage width for EPUB layout\n"
-		"\t-H -\tpage height for EPUB layout\n"
-		"\t-S -\tfont size for EPUB layout\n"
-		"\t-U -\tfile name of user stylesheet for EPUB layout\n"
-		"\t-X\tdisable document styles for EPUB layout\n"
+		"  -W -  page width for EPUB layout\n"
+		"  -H -  page height for EPUB layout\n"
+		"  -S -  font size for EPUB layout\n"
+		"  -U -  file name of user stylesheet for EPUB layout\n"
+		"  -X    disable document styles for EPUB layout\n"
 		"\n"
-		"\t-A -\tnumber of bits of antialiasing (0 to 8)\n"
-		"\t-A -/-\tnumber of bits of antialiasing (0 to 8) (graphics, text)\n"
-		"\t-L\tlow memory mode (avoid caching, clear objects after each page)\n"
-#ifndef DISABLE_MUTHREADS
-		"\t-P\tparallel interpretation/rendering\n"
-#else
-		"\t-P\tparallel interpretation/rendering (disabled in this non-threading build)\n"
-#endif
+		"  -A -  number of bits of antialiasing (0 to 8)\n"
+		"  -A -/-  number of bits of antialiasing (0 to 8) (graphics, text)\n"
 		"\n"
-		"\tpages\tcomma separated list of page numbers and ranges\n"
+		"  -m -  specify custom memory limits:\n"
+		"    sNNN   set memory limit to NNN bytes: the application will not be allowed\n"
+		"           to consume more that NNN bytes heap memory at any time\n"
+		"    aNNN   set alloc limit to NNN: the application will not execute more than\n"
+		"           NNN heap allocation requests.\n"
+		"    NNN    set memory limit to NNN bytes (same as 'sNNN' above)\n"
+		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
+		"\n"
+		"  -v    display the version of this application and terminate\n"
+		"\n"
+		"  pages  comma separated list of page numbers and ranges\n"
 	);
 }
 
@@ -1972,7 +1982,6 @@ int muraster_main(int argc, const char *argv[])
 					drawrange(ctx, doc, "1-N");
 				if (fz_optind < argc && fz_is_page_range(ctx, argv[fz_optind]))
 					drawrange(ctx, doc, argv[fz_optind++]);
-
 			}
 			fz_always(ctx)
 			{
