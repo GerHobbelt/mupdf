@@ -178,6 +178,14 @@ usage(void)
 	);
 }
 
+static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
+{
+	if (pdf_name_eq(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Type)), PDF_NAME(Metadata)))
+		if (pdf_name_eq(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Subtype)), PDF_NAME(XML)))
+			return 1;
+	return 0;
+}
+
 static void
 showglobalinfo(fz_context *ctx, globals *glo)
 {
@@ -192,7 +200,7 @@ showglobalinfo(fz_context *ctx, globals *glo)
 	if (obj)
 	{
 		fz_write_printf(ctx, out, "Info object (%d 0 R):\n", pdf_to_num(ctx, obj));
-		pdf_print_obj(ctx, out, pdf_resolve_indirect(ctx, obj), 1, 1);
+		pdf_print_obj(ctx, out, pdf_resolve_indirect(ctx, obj), 0, 0);
 	}
 
 	obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
@@ -200,6 +208,37 @@ showglobalinfo(fz_context *ctx, globals *glo)
 	{
 		fz_write_printf(ctx, out, "\nEncryption object (%d 0 R):\n", pdf_to_num(ctx, obj));
 		pdf_print_obj(ctx, out, pdf_resolve_indirect(ctx, obj), 1, 1);
+	}
+
+	obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Metadata");
+	if (obj)
+	{
+		int num = pdf_to_num(ctx, obj);
+		fz_write_printf(ctx, out, "\nMetadata object (%d 0 R):\n", num);
+		pdf_print_obj(ctx, out, pdf_resolve_indirect(ctx, obj), 0, 0);
+
+		if (pdf_is_stream(ctx, obj))
+		{
+			if (is_xml_metadata(ctx, obj))
+			{
+				char* data = NULL;
+				fz_xml_doc* container_xml = NULL;
+
+				fz_try(ctx)
+				{
+					data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj);
+					fz_write_printf(ctx, out, "\n%s\n", data);
+				}
+				fz_always(ctx)
+				{
+					fz_free(ctx, data);
+				}
+				fz_catch(ctx)
+				{
+					// ignore error
+				}
+			}
+		}
 	}
 
 	fz_write_printf(ctx, out, "\nPages: %d\n\n", glo->pagecount);

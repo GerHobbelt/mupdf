@@ -327,6 +327,19 @@ const char *pdf_to_name(fz_context *ctx, pdf_obj *obj)
 	return "";
 }
 
+const char* pdf_to_name_not_null(fz_context* ctx, pdf_obj* obj)
+{
+	const char* str = NULL;
+
+	if (obj)
+		str = pdf_to_name(ctx, obj);
+	if (!str)
+		str = "{NULL}";
+	else if (!*str)
+		str = "{EMPTY}";
+	return str;
+}
+
 char *pdf_to_str_buf(fz_context *ctx, pdf_obj *obj)
 {
 	RESOLVE(obj);
