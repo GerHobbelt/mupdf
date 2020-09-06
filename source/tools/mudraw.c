@@ -2076,8 +2076,8 @@ int mudraw_main(int argc, const char **argv)
 	{
 		if (uselist == 0)
 		{
-			fz_error(ctx, "cannot use multiple threads without using display list");
-			return EXIT_FAILURE;
+			fz_error(ctx, "cannot use multiple threads without using display list. Falling back to single thread processing.");
+			num_workers = 0;
 		}
 
 		if (band_height == 0)
@@ -2090,8 +2090,8 @@ int mudraw_main(int argc, const char **argv)
 	{
 		if (uselist == 0)
 		{
-			fz_error(ctx, "cannot bgprint without using display list");
-			return EXIT_FAILURE;
+			fz_error(ctx, "cannot bgprint without using display list. Ignoring bgprint setting.");
+			bgprint.active = 0;
 		}
 	}
 
@@ -2281,11 +2281,13 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PSD &&
 				output_format != OUT_OCR_PDF)
 			{
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
+				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
+				band_height = 0;
 			}
-			if (showmd5)
+			if (showmd5 && band_height)
 			{
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Banded operation not compatible with MD5");
+				fz_error(ctx, "Banded operation not compatible with MD5");
+				band_height = 0;
 			}
 		}
 
@@ -2305,7 +2307,7 @@ int mudraw_main(int argc, const char **argv)
 					}
 					if (j == (int)nelem(format_cs_table[i].permitted_cs))
 					{
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unsupported colorspace for this format");
+						fz_throw(ctx, FZ_ERROR_GENERIC, "Unsupported colorspace (%d) for this format", output_format);
 					}
 				}
 			}
@@ -2348,7 +2350,7 @@ int mudraw_main(int argc, const char **argv)
 				alpha = 0;
 				break;
 			default:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown colorspace!");
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown colorspace %d!", out_cs);
 		}
 
 		if (out_cs != CS_ICC)
