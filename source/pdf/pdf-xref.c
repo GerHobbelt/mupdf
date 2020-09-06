@@ -141,7 +141,7 @@ static void pdf_populate_next_xref_level(fz_context *ctx, pdf_document *doc)
 
 pdf_obj *pdf_trailer(fz_context *ctx, pdf_document *doc)
 {
-	/* Return the document's trailer (of the appopriate vintage) */
+	/* Return the document's trailer (of the appropriate vintage) */
 	pdf_xref *xref = &doc->xref_sections[doc->xref_base];
 
 	return xref ? xref->trailer : NULL;
