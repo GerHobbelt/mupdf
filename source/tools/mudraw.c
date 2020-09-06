@@ -266,7 +266,9 @@ typedef struct worker_t {
 #endif
 } worker_t;
 
-static fz_context* ctx = NULL;
+static int mudraw_is_toplevel_ctx = 0;
+
+static fz_context *ctx = NULL;
 static const char *output = NULL;
 static fz_output *out = NULL;
 static int output_pagenum = 0;
@@ -327,7 +329,7 @@ static int useaccel = 1;
 static const char *filename;
 static int files = 0;
 static int num_workers = 0;
-static worker_t *workers;
+static worker_t *workers = NULL;
 static fz_band_writer *bander = NULL;
 
 static const char *layer_config = NULL;
@@ -945,7 +947,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					band_ibounds.y1 = band_ibounds.y0 + band_height;
 				bands = (totalheight + band_height-1)/band_height;
 				tbounds.y1 = tbounds.y0 + band_height + 2;
-				DEBUG_THREADS(("Using %d Bands\n", bands));
+				DEBUG_THREADS(fz_info(ctx, "Using %d Bands\n", bands));
 			}
 
 			if (num_workers > 0)
@@ -1165,9 +1167,6 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_info(ctx, " %dms (total)", diff);
 		}
 	}
-
-	//if (!quiet || showfeatures || showtime || showmd5)
-	//	fz_info(ctx, "\n");
 
 	if (lowmemory)
 		fz_empty_store(ctx);
@@ -1434,13 +1433,16 @@ typedef struct
 	size_t size;
 	size_t seqnum;
 #if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
-	size_t align;
-	size_t align2;
+	size_t magic;
+	size_t align128;
+#else
+	size_t magic;
 #endif
 } trace_header;
 
 struct trace_info
 {
+	int sequence_number;
 	size_t current;
 	size_t peak;
 	size_t total;
@@ -1449,9 +1451,7 @@ struct trace_info
 	size_t alloc_limit;
 };
 
-static int trace_current_seqnum = 1;
-
-static struct trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
+static struct trace_info trace_info = { 1, 0, 0, 0, 0, 0, 0 };
 
 static void *hit_limit(void *val)
 {
@@ -1461,9 +1461,9 @@ static void *hit_limit(void *val)
 static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		printf("Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->mem_limit, size, info->current);
 	else
-		printf("Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.", info->mem_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -1471,9 +1471,9 @@ static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t old
 static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		printf("Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->alloc_limit, size, info->current);
 	else
-		printf("Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.", info->alloc_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -1494,8 +1494,8 @@ trace_malloc(void *arg, size_t size)
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
-	p[0].align = 0xEAD;
-	p[0].seqnum = trace_current_seqnum++;
+	p[0].magic = 0xEAD;
+	p[0].seqnum = info->sequence_number++;
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -1516,10 +1516,10 @@ trace_free(void *arg, void *p_)
 	size_t size = p[-1].size;
 	int rotten = 0;
 	info->current -= size;
-	if (p[-1].align != 0xEAD)
+	if (p[-1].magic != 0xEAD)
 	{
-		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
-		p[-1].align++;
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
+		p[-1].magic++;
 		rotten = 1;
 	}
 	if (rotten)
@@ -1557,10 +1557,10 @@ trace_realloc(void *arg, void *p_, size_t size)
 
 	int rotten = 0;
 	oldsize = p[-1].size;
-	if (p[-1].align != 0xEAD)
+	if (p[-1].magic != 0xEAD)
 	{
-		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
-		p[-1].align++;
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
+		p[-1].magic++;
 		rotten = 1;
 	}
 	if (rotten)
@@ -1828,19 +1828,41 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 
 static void mu_drop_context(void)
 {
-	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	if (mudraw_is_toplevel_ctx)
 	{
-		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
+		{
+			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+
+			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
+			memset(&trace_info, 0, sizeof(trace_info));
+		}
 	}
 
-	fz_drop_context(ctx); // moved to atexit() as code in here still uses ctx
+	assert(!ctx || (ctx->error.top == ctx->error.stack));
+
+	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
+	if (mudraw_is_toplevel_ctx)
+	{
+		// as we registered a global context, we should clean the locks on it now
+		// so the atexit handler won't have to bother with it.
+		assert(fz_has_global_context());
+		ctx = fz_get_global_context();
+		fz_drop_context_locks(ctx);
+		ctx = NULL;
+
+		fz_drop_global_context();
+
 #ifndef DISABLE_MUTHREADS
-	fin_mudraw_locks();
+		fin_mudraw_locks();
 #endif /* DISABLE_MUTHREADS */
+
+		mudraw_is_toplevel_ctx = 0;
+	}
 }
 
 #ifdef MUDRAW_STANDALONE
@@ -1861,6 +1883,7 @@ int mudraw_main(int argc, const char **argv)
 	fz_var(doc);
 
 	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
+	mudraw_is_toplevel_ctx = 0;
 	ctx = NULL;
 	output = NULL;
 	out = NULL;
@@ -2076,7 +2099,7 @@ int mudraw_main(int argc, const char **argv)
 	locks = init_mudraw_locks();
 	if (locks == NULL)
 	{
-		fz_error(ctx, "mutex initialisation failed");
+		fz_error(NULL, "mutex initialisation failed");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -2087,7 +2110,6 @@ int mudraw_main(int argc, const char **argv)
 	if (lowmemory)
 		max_store = 1;
 
-	atexit(mu_drop_context);
 	if (!fz_has_global_context())
 	{
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
@@ -2097,9 +2119,12 @@ int mudraw_main(int argc, const char **argv)
 			return EXIT_FAILURE;
 		}
 		fz_set_global_context(ctx);
-	}
 
-	ctx = fz_new_context(alloc_ctx, locks, max_store);
+		mudraw_is_toplevel_ctx = 1;
+	}
+	atexit(mu_drop_context);
+
+	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
@@ -2141,9 +2166,9 @@ int mudraw_main(int argc, const char **argv)
 			fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
 			if (fail)
 			{
-				fz_error(ctx, "bgprint startup failed");
-				fz_drop_context(bgprint.ctx);
-				return EXIT_FAILURE;
+				mu_destroy_semaphore(&bgprint.start);
+				mu_destroy_semaphore(&bgprint.stop);
+				fz_throw(bgprint.ctx, FZ_ERROR_GENERIC, "bgprint startup failed");
 			}
 		}
 
@@ -2162,7 +2187,6 @@ int mudraw_main(int argc, const char **argv)
 			}
 			if (fail)
 			{
-				fz_error(ctx, "worker startup failed");
 				for (i = 0; i < num_workers; i++)
 				{
 					mu_destroy_semaphore(&workers[i].start);
@@ -2171,7 +2195,7 @@ int mudraw_main(int argc, const char **argv)
 					fz_drop_context(workers[i].ctx);
 				}
 				fz_free(ctx, workers);
-				return EXIT_FAILURE;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "worker startup failed");
 			}
 		}
 #endif /* DISABLE_MUTHREADS */
@@ -2188,8 +2212,7 @@ int mudraw_main(int argc, const char **argv)
 		/* Determine output type */
 		if (band_height < 0)
 		{
-			fz_error(ctx, "Bandheight must be > 0");
-			return EXIT_FAILURE;
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Bandheight must be > 0");
 		}
 
 		output_format = OUT_PNG;
@@ -2212,8 +2235,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 			if (i == (int)nelem(suffix_table))
 			{
-				fz_error(ctx, "Unknown output format '%s'", format);
-				return EXIT_FAILURE;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown output format '%s'", format);
 			}
 		}
 		else if (output)
@@ -2259,13 +2281,11 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PSD &&
 				output_format != OUT_OCR_PDF)
 			{
-				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
-				return EXIT_FAILURE;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
 			}
 			if (showmd5)
 			{
-				fz_error(ctx, "Banded operation not compatible with MD5");
-				return EXIT_FAILURE;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Banded operation not compatible with MD5");
 			}
 		}
 
@@ -2285,8 +2305,7 @@ int mudraw_main(int argc, const char **argv)
 					}
 					if (j == (int)nelem(format_cs_table[i].permitted_cs))
 					{
-						fz_error(ctx, "Unsupported colorspace for this format");
-						return EXIT_FAILURE;
+						fz_throw(ctx, FZ_ERROR_GENERIC, "Unsupported colorspace for this format");
 					}
 				}
 			}
@@ -2320,19 +2339,16 @@ int mudraw_main(int argc, const char **argv)
 				}
 				fz_catch(ctx)
 				{
-					fz_error(ctx, "Invalid ICC destination color space");
-					return EXIT_FAILURE;
+					fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid ICC destination color space");
 				}
 				if (colorspace == NULL)
 				{
-					fz_error(ctx, "Invalid ICC destination color space");
-					return EXIT_FAILURE;
+					fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid ICC destination color space");
 				}
 				alpha = 0;
 				break;
 			default:
-				fz_error(ctx, "Unknown colorspace!");
-				return EXIT_FAILURE;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown colorspace!");
 		}
 
 		if (out_cs != CS_ICC)
@@ -2374,8 +2390,7 @@ int mudraw_main(int argc, const char **argv)
 
 			if (!okay)
 			{
-				fz_error(ctx, "ICC profile uses a colorspace that cannot be used for this format");
-				return EXIT_FAILURE;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "ICC profile uses a colorspace that cannot be used for this format");
 			}
 		}
 
@@ -2457,7 +2472,6 @@ int mudraw_main(int argc, const char **argv)
 					output_format = OUT_PDF; break;
 				}
 			}
-
 		}
 
 		filename = argv[fz_optind];
@@ -2520,7 +2534,6 @@ int mudraw_main(int argc, const char **argv)
 							unlink(accelpath);
 							accel = NULL; /* In case we have jumped up from below */
 						}
-
 					}
 
 					doc = fz_open_accelerated_document(ctx, filename, accel);
@@ -2621,7 +2634,9 @@ int mudraw_main(int argc, const char **argv)
 			fz_drop_output(ctx, out);
 			out = NULL;
 		}
-
+	}
+	fz_always(ctx)
+	{
 		if (showtime && timing.count > 0)
 		{
 			if (bgprint.active)
@@ -2630,13 +2645,13 @@ int mudraw_main(int argc, const char **argv)
 			if (files == 1)
 			{
 				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
-						timing.total, timing.layout, timing.count, timing.total / timing.count);
+					timing.total, timing.layout, timing.count, timing.total / timing.count);
 				if (bgprint.active)
 				{
 					fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-							timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
+						timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
 					fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-							timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
+						timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
 				}
 				else
 				{
@@ -2647,7 +2662,7 @@ int mudraw_main(int argc, const char **argv)
 			else
 			{
 				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
-						timing.total, timing.layout, timing.count, timing.total / timing.count, files);
+					timing.total, timing.layout, timing.count, timing.total / timing.count, files);
 				fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
 				fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
 				fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
@@ -2666,6 +2681,8 @@ int mudraw_main(int argc, const char **argv)
 			mu_destroy_semaphore(&bgprint.stop);
 			mu_destroy_thread(&bgprint.thread);
 			fz_drop_context(bgprint.ctx);
+			bgprint.ctx = NULL;
+			bgprint.active = 0;
 		}
 
 		if (num_workers > 0)
@@ -2685,9 +2702,7 @@ int mudraw_main(int argc, const char **argv)
 			fz_free(ctx, workers);
 		}
 #endif /* DISABLE_MUTHREADS */
-	}
-	fz_always(ctx)
-	{
+
 		fz_drop_colorspace(ctx, colorspace);
 		fz_drop_colorspace(ctx, proof_cs);
 	}
@@ -2701,7 +2716,7 @@ int mudraw_main(int argc, const char **argv)
 	}
 
 	fz_flush_warnings(ctx);
-	//fz_drop_context(ctx); -- moved to atexit() as code in there still uses ctx
+	mu_drop_context();
 
-	return (errored != 0);
+	return errored;
 }

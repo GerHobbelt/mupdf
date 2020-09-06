@@ -87,6 +87,8 @@ static fz_locks_context *init_mudraw_locks(void)
 static int showtime = 0;
 static int showmemory = 0;
 
+static int mujstest_is_toplevel_ctx = 0;
+
 static struct {
 	struct curltime start_time;
 	int count;
@@ -102,13 +104,16 @@ typedef struct
 	size_t size;
 	size_t seqnum;
 #if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
-	size_t align;
-	size_t align2;
+	size_t magic;
+	size_t align128;
+#else
+	size_t magic;
 #endif
 } trace_header;
 
 struct trace_info
 {
+	int sequence_number;
 	size_t current;
 	size_t peak;
 	size_t total;
@@ -117,9 +122,7 @@ struct trace_info
 	size_t alloc_limit;
 };
 
-static int trace_current_seqnum = 1;
-
-static struct trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
+static struct trace_info trace_info = { 1, 0, 0, 0, 0, 0, 0 };
 
 static void *hit_limit(void *val)
 {
@@ -162,8 +165,8 @@ trace_malloc(void *arg, size_t size)
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
-	p[0].align = 0xEAD;
-	p[0].seqnum = trace_current_seqnum++;
+	p[0].magic = 0xEAD;
+	p[0].seqnum = info->sequence_number++;
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -184,10 +187,10 @@ trace_free(void *arg, void *p_)
 	size_t size = p[-1].size;
 	int rotten = 0;
 	info->current -= size;
-	if (p[-1].align != 0xEAD)
+	if (p[-1].magic != 0xEAD)
 	{
-		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
-		p[-1].align++;
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
+		p[-1].magic++;
 		rotten = 1;
 	}
 	if (rotten)
@@ -225,10 +228,10 @@ trace_realloc(void *arg, void *p_, size_t size)
 
 	int rotten = 0;
 	oldsize = p[-1].size;
-	if (p[-1].align != 0xEAD)
+	if (p[-1].magic != 0xEAD)
 	{
-		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
-		p[-1].align++;
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
+		p[-1].magic++;
 		rotten = 1;
 	}
 	if (rotten)
@@ -550,7 +553,7 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 
 	// allocate supra worst-case number of start+end slots for line decoding
 	// PLUS enough space to store the (dequoted) argument strings themselves:
-	char** start = malloc(len * sizeof(start[0]) + len + 2);
+	char** start = fz_malloc(ctx, len * sizeof(start[0]) + len + 2);
 	*argv = start;
 	*argc = 0;
 
@@ -631,6 +634,14 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 	*argc = count;
 }
 
+struct logconfig
+{
+	int quiet;
+	FILE* logfile;
+};
+
+static struct logconfig logcfg = { 0 };
+
 static void mu_drop_context(void)
 {
 	if (showtime && timing.count > 0)
@@ -641,31 +652,58 @@ static void mu_drop_context(void)
 			timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
 		fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
 		fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+
+		// reset timing after reporting: this atexit handler MAY be invoked multiple times!
+		memset(&timing, 0, sizeof(timing));
 	}
 
-	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	if (mujstest_is_toplevel_ctx)
 	{
-		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
+		{
+			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+
+			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
+			memset(&trace_info, 0, sizeof(trace_info));
+		}
+	}
+
+	if (logcfg.logfile)
+	{
+		fclose(logcfg.logfile);
+		logcfg.logfile = NULL;
 	}
 
 	fz_free(ctx, timing.mincommand);
 	fz_free(ctx, timing.maxcommand);
+	timing.mincommand = NULL;
+	timing.maxcommand = NULL;
 
-	fz_drop_context(ctx); // moved to atexit() as code in here still uses ctx
+	assert(!ctx || (ctx->error.top == ctx->error.stack));
+
+	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
-#ifndef DISABLE_MUTHREADS
-	fin_mudraw_locks();
-#endif /* DISABLE_MUTHREADS */
-}
+	if (mujstest_is_toplevel_ctx)
+	{
+		// as we registered a global context, we should clean the locks on it now
+		// so the atexit handler won't have to bother with it.
+		assert(fz_has_global_context());
+		ctx = fz_get_global_context();
+		fz_drop_context_locks(ctx);
+		ctx = NULL;
 
-struct logconfig
-{
-	int quiet;
-	FILE* logfile;
-};
+		fz_drop_global_context();
+
+#ifndef DISABLE_MUTHREADS
+		fin_mudraw_locks();
+#endif /* DISABLE_MUTHREADS */
+
+		mujstest_is_toplevel_ctx = 0;
+	}
+}
 
 static void show_progress_on_stderr(struct logconfig* logcfg, const char *message)
 {
@@ -703,6 +741,7 @@ static void tst_error_callback(void* user, const char* message)
 	OutputDebugStringA("\n");
 #endif
 }
+
 static void tst_warning_callback(void* user, const char* message)
 {
 	struct logconfig* logcfg = (struct logconfig*)user;
@@ -721,6 +760,7 @@ static void tst_warning_callback(void* user, const char* message)
 #endif
 	}
 }
+
 static void tst_info_callback(void* user, const char* message)
 {
 	struct logconfig* logcfg = (struct logconfig*)user;
@@ -743,7 +783,6 @@ main(int argc, const char *argv[])
 {
 	FILE *script = NULL;
 	int c;
-	struct logconfig logcfg = { 0 };
 	int errored = 0;
 	unsigned int linecounter = 0;
 	int rv = 0;
@@ -755,18 +794,20 @@ main(int argc, const char *argv[])
 	size_t max_store = FZ_STORE_DEFAULT;
 	int lowmemory = 0;
 
+	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
+	mujstest_is_toplevel_ctx = 0;
 	ctx = NULL;
 
 	showtime = 0;
 	showmemory = 0;
 
 	memset(&trace_info, 0, sizeof trace_info);
-
+	memset(&logcfg, 0, sizeof logcfg);
 	memset(&timing, 0, sizeof(timing));
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:Lvqm:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:LvqVm:s:h")) != -1)
 	{
 		switch(c)
 		{
@@ -813,7 +854,6 @@ main(int argc, const char *argv[])
 	if (lowmemory)
 		max_store = 1;
 
-	atexit(mu_drop_context);
 	if (!fz_has_global_context())
 	{
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
@@ -827,9 +867,12 @@ main(int argc, const char *argv[])
 		fz_set_error_callback(ctx, tst_error_callback, &logcfg);
 		fz_set_warning_callback(ctx, tst_warning_callback, &logcfg);
 		fz_set_info_callback(ctx, tst_info_callback, &logcfg);
-	}
 
-	ctx = fz_new_context(alloc_ctx, locks, max_store);
+		mujstest_is_toplevel_ctx = 1;
+	}
+	atexit(mu_drop_context);
+
+	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
@@ -982,7 +1025,7 @@ main(int argc, const char *argv[])
 					{
 						fz_info(ctx, "OK: MUTOOL command: %s", line);
 					}
-					free((void *)argv);
+					fz_free(ctx, (void *)argv);
 				}
 				else
 				{
@@ -1021,6 +1064,7 @@ main(int argc, const char *argv[])
 			while (!feof(script));
 
 			fclose(script);
+			script = NULL;
 		}
 	}
 	fz_catch(ctx)
@@ -1038,14 +1082,7 @@ main(int argc, const char *argv[])
 		pdfapp_close(&gapp);
 
 	fz_flush_warnings(ctx);
-
-	if (logcfg.logfile)
-	{
-		fclose(logcfg.logfile);
-		logcfg.logfile = NULL;
-	}
-
-	//fz_drop_context(ctx); -- moved to atexit() as code in there still uses ctx
+	mu_drop_context();
 
 	return errored;
 }

@@ -371,6 +371,8 @@ typedef struct worker_t {
 #endif
 } worker_t;
 
+static int muraster_is_toplevel_ctx = 0;
+
 static fz_context *ctx = NULL;
 static const char *output = NULL;
 static fz_output *out = NULL;
@@ -541,7 +543,7 @@ static void usage(void)
 #endif
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
-		);
+	);
 }
 
 static int gettime_once = 1;
@@ -863,7 +865,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 			timing.total += diff;
 			timing.count ++;
 
-			fz_info(ctx, " %dms", diff);
+			fz_info(ctx, " %dms (total)", diff);
 		}
 	}
 
@@ -1139,6 +1141,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_always(ctx)
 			{
 				fz_drop_device(ctx, test_dev);
+				test_dev = NULL;
 			}
 			fz_catch(ctx)
 			{
@@ -1315,13 +1318,16 @@ typedef struct
 	size_t size;
 	size_t seqnum;
 #if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
-	size_t align;
-	size_t align2;
+	size_t magic;
+	size_t align128;
+#else
+	size_t magic;
 #endif
 } trace_header;
 
 struct trace_info
 {
+	int sequence_number;
 	size_t current;
 	size_t peak;
 	size_t total;
@@ -1330,9 +1336,7 @@ struct trace_info
 	size_t alloc_limit;
 };
 
-static int trace_current_seqnum = 1;
-
-static struct trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
+static struct trace_info trace_info = { 1, 0, 0, 0, 0, 0, 0 };
 
 static void *hit_limit(void *val)
 {
@@ -1342,9 +1346,9 @@ static void *hit_limit(void *val)
 static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		printf("Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->mem_limit, size, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->mem_limit, size, info->current);
 	else
-		printf("Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->mem_limit, size, oldsize, info->current);
+		fz_error(ctx, "Memory limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.", info->mem_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -1352,9 +1356,9 @@ static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t old
 static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
 	if (is_malloc)
-		printf("Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.\n", info->alloc_limit, size, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->alloc_limit, size, info->current);
 	else
-		printf("Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.\n", info->alloc_limit, size, oldsize, info->current);
+		fz_error(ctx, "Allocation limit (%zu) hit upon realloc(%zu) from %zu bytes when %zu already allocated.", info->alloc_limit, size, oldsize, info->current);
 	return hit_limit(NULL);
 }
 
@@ -1375,8 +1379,8 @@ trace_malloc(void *arg, size_t size)
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
-	p[0].align = 0xEAD;
-	p[0].seqnum = trace_current_seqnum++;
+	p[0].magic = 0xEAD;
+	p[0].seqnum = info->sequence_number++;
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -1397,10 +1401,10 @@ trace_free(void *arg, void *p_)
 	size_t size = p[-1].size;
 	int rotten = 0;
 	info->current -= size;
-	if (p[-1].align != 0xEAD)
+	if (p[-1].magic != 0xEAD)
 	{
-		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
-		p[-1].align++;
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
+		p[-1].magic++;
 		rotten = 1;
 	}
 	if (rotten)
@@ -1438,10 +1442,10 @@ trace_realloc(void *arg, void *p_, size_t size)
 
 	int rotten = 0;
 	oldsize = p[-1].size;
-	if (p[-1].align != 0xEAD)
+	if (p[-1].magic != 0xEAD)
 	{
-		fz_error(ctx, "*!* double free! %d", (int)(p[-1].align - 0xEAD));
-		p[-1].align++;
+		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
+		p[-1].magic++;
 		rotten = 1;
 	}
 	if (rotten)
@@ -1559,22 +1563,45 @@ read_rotation(const char *arg)
 
 static void mu_drop_context(void)
 {
-	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	if (muraster_is_toplevel_ctx)
 	{
-		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
+		{
+			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+
+			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
+			memset(&trace_info, 0, sizeof(trace_info));
+		}
 	}
 
-	fz_drop_context(ctx); // moved to atexit() as code in there still uses ctx
+	assert(!ctx || (ctx->error.top == ctx->error.stack));
+
+	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
+	ctx = NULL;
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
+	if (muraster_is_toplevel_ctx)
+	{
+		// as we registered a global context, we should clean the locks on it now
+		// so the atexit handler won't have to bother with it.
+		assert(fz_has_global_context());
+		ctx = fz_get_global_context();
+		fz_drop_context_locks(ctx);
+		ctx = NULL;
+
+		fz_drop_global_context();
+
 #ifndef DISABLE_MUTHREADS
-	fin_muraster_locks();
+		fin_muraster_locks();
 #endif /* DISABLE_MUTHREADS */
+
+		muraster_is_toplevel_ctx = 0;
+	}
 }
 
 #ifdef MURASTER_STANDALONE
-int main(int argc, const char** argv)
+int main(int argc, const char **argv)
 #else
 int muraster_main(int argc, const char *argv[])
 #endif
@@ -1590,6 +1617,7 @@ int muraster_main(int argc, const char *argv[])
 	fz_var(doc);
 
 	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
+	muraster_is_toplevel_ctx = 0;
 	output = NULL;
 	out = NULL;
 	ctx = NULL;
@@ -1726,7 +1754,7 @@ int muraster_main(int argc, const char *argv[])
 	locks = init_muraster_locks();
 	if (locks == NULL)
 	{
-		fz_error(ctx, "cannot initialise mutexes");
+		fz_error(NULL, "mutex initialisation failed");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -1737,7 +1765,6 @@ int muraster_main(int argc, const char *argv[])
 	if (lowmemory)
 		max_store = 1;
 
-	atexit(mu_drop_context);
 	if (!fz_has_global_context())
 	{
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
@@ -1747,9 +1774,12 @@ int muraster_main(int argc, const char *argv[])
 			return EXIT_FAILURE;
 		}
 		fz_set_global_context(ctx);
-	}
 
-	ctx = fz_new_context(alloc_ctx, locks, max_store);
+		muraster_is_toplevel_ctx = 1;
+	}
+	atexit(mu_drop_context);
+
+	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
@@ -1776,7 +1806,8 @@ int muraster_main(int argc, const char *argv[])
 		if (fail)
 		{
 			fz_error(bgprint.ctx, "bgprint startup failed");
-			fz_drop_context(bgprint.ctx);
+			mu_destroy_semaphore(&bgprint.start);
+			mu_destroy_semaphore(&bgprint.stop);
 			return EXIT_FAILURE;
 		}
 	}
@@ -1942,6 +1973,9 @@ int muraster_main(int argc, const char *argv[])
 				if (fz_optind < argc && fz_is_page_range(ctx, argv[fz_optind]))
 					drawrange(ctx, doc, argv[fz_optind++]);
 
+			}
+			fz_always(ctx)
+			{
 				fz_drop_document(ctx, doc);
 				doc = NULL;
 			}
@@ -1950,8 +1984,6 @@ int muraster_main(int argc, const char *argv[])
 				if (!ignore_errors)
 					fz_rethrow(ctx);
 
-				fz_drop_document(ctx, doc);
-				doc = NULL;
 				fz_warn(ctx, "ignoring error in '%s'", filename);
 			}
 		}
@@ -1972,13 +2004,13 @@ int muraster_main(int argc, const char *argv[])
 		if (files == 1)
 		{
 			fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
-					timing.total, timing.layout, timing.count, timing.total / timing.count);
+				timing.total, timing.layout, timing.count, timing.total / timing.count);
 			if (bgprint.active)
 			{
 				fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-						timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
+					timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
 				fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-						timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
+					timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
 			}
 			else
 			{
@@ -1989,7 +2021,7 @@ int muraster_main(int argc, const char *argv[])
 		else
 		{
 			fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
-					timing.total, timing.layout, timing.count, timing.total / timing.count, files);
+				timing.total, timing.layout, timing.count, timing.total / timing.count, files);
 			fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
 			fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
 			fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
@@ -2008,6 +2040,8 @@ int muraster_main(int argc, const char *argv[])
 		mu_destroy_semaphore(&bgprint.stop);
 		mu_destroy_thread(&bgprint.thread);
 		fz_drop_context(bgprint.ctx);
+		bgprint.ctx = NULL;
+		bgprint.active = 0;
 	}
 
 	if (num_workers > 0)
@@ -2034,7 +2068,7 @@ int muraster_main(int argc, const char *argv[])
 	out = NULL;
 
 	fz_flush_warnings(ctx);
-	//fz_drop_context(ctx); -- moved to atexit() as code in there still uses ctx
+	mu_drop_context();
 
-	return (errored != 0);
+	return errored;
 }

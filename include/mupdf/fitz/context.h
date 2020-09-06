@@ -212,6 +212,13 @@ void fz_set_user_context(fz_context *ctx, void *user);
 void *fz_user_context(fz_context *ctx);
 
 /**
+	Drop the locks registered with this context.
+	You may use this to remove all locks before you call fz_drop_context()
+	on the context in any final application crash/cleanup code.
+*/
+void fz_drop_context_locks(fz_context* ctx);
+
+/**
 	Get a reference to the global context.
 	Use this for access to error, warning and info log channels, for example.
 */

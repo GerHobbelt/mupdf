@@ -121,6 +121,15 @@ static void fz_init_random_context(fz_context *ctx)
 }
 
 void
+fz_drop_context_locks(fz_context *ctx)
+{
+	if (!ctx)
+		return;
+		
+	ctx->locks = fz_locks_default;
+}
+
+void
 fz_drop_context(fz_context *ctx)
 {
 	if (!ctx)
@@ -310,6 +319,7 @@ int fz_has_global_context(void)
 
 void fz_drop_global_context(void)
 {
+	//fz_drop_context_locks(ctx);
 	fz_drop_context(global_ctx);
 	global_ctx = NULL;
 }
