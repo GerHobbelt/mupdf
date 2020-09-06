@@ -47,9 +47,13 @@ pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int id
 		doc->rev_page_map[idx].object = pdf_to_num(ctx, node);
 		++idx;
 	}
+	else if (type == NULL)
+	{
+		fz_warn(ctx, "non-page object in page tree (%s) -- ignoring the (probably corrupt) fast page tree", pdf_to_name_not_null(ctx, type));
+	}
 	else
 	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "non-page object in page tree");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "non-page object in page tree (%s)", pdf_to_name_not_null(ctx, type));
 	}
 	return idx;
 }
@@ -69,8 +73,21 @@ pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 	{
 		doc->rev_page_count = pdf_count_pages(ctx, doc);
 		doc->rev_page_map = Memento_label(fz_malloc_array(ctx, doc->rev_page_count, pdf_rev_page_map), "pdf_rev_page_map");
-		pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0);
-		qsort(doc->rev_page_map, doc->rev_page_count, sizeof *doc->rev_page_map, cmp_rev_page_map);
+		int idx = pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0);
+		if (idx < doc->rev_page_count)
+		{
+			// something went horribly wrong in there:
+			if (idx > 0)
+			{
+				fz_warn(ctx, "page tree only partially loaded before an error occurred. Ignoring fast page tree.");
+				idx = 0;
+			}
+			pdf_drop_page_tree(ctx, doc);
+		}
+		else
+		{
+			qsort(doc->rev_page_map, doc->rev_page_count, sizeof * doc->rev_page_map, cmp_rev_page_map);
+		}
 	}
 }
 
@@ -152,7 +169,7 @@ pdf_lookup_page_loc_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int *
 				else
 				{
 					if (type ? !pdf_name_eq(ctx, type, PDF_NAME(Page)) : !pdf_dict_get(ctx, kid, PDF_NAME(MediaBox)))
-						fz_warn(ctx, "non-page object in page tree (%s)", pdf_to_name(ctx, type));
+						fz_warn(ctx, "non-page object in page tree (%s)", pdf_to_name_not_null(ctx, type));
 					if (*skip == 0)
 					{
 						if (parentp) *parentp = node;
