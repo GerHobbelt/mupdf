@@ -261,7 +261,8 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, const char **ar
 			dest = pdf_array_get(ctx, dest ? dest : val, 0);
 			if (dest_is_valid_page(ctx, dest, page_object_nums, pagecount))
 			{
-				pdf_obj *key_str = pdf_new_string(ctx, pdf_to_name(ctx, key), strlen(pdf_to_name(ctx, key)));
+				const char* name = pdf_to_name(ctx, key);
+				pdf_obj *key_str = pdf_new_string(ctx, name, strlen(name));
 				pdf_array_push_drop(ctx, names_list, key_str);
 				pdf_array_push(ctx, names_list, val);
 			}
