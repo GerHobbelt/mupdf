@@ -175,26 +175,31 @@ fz_stext_page *fz_new_stext_page(fz_context *ctx, fz_rect mediabox);
 void fz_drop_stext_page(fz_context *ctx, fz_stext_page *page);
 
 /**
-	Output a page to a file in HTML (visual) format.
+	Output structured text to a file in HTML (visual) format.
 */
 void fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id);
 void fz_print_stext_header_as_html(fz_context *ctx, fz_output *out);
 void fz_print_stext_trailer_as_html(fz_context *ctx, fz_output *out);
 
 /**
-	Output a page to a file in XHTML (semantic) format.
+	Output structured text to a file in XHTML (semantic) format.
 */
 void fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id);
 void fz_print_stext_header_as_xhtml(fz_context *ctx, fz_output *out);
 void fz_print_stext_trailer_as_xhtml(fz_context *ctx, fz_output *out);
 
 /**
-	Output a page to a file in XML format.
+	Output structured text to a file in XML format.
 */
 void fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id);
 
 /**
-	Output a page to a file in UTF-8 format.
+	Output structured text to a file in JSON format.
+*/
+void fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, float scale);
+
+/**
+	Output structured text to a file in plain-text UTF-8 format.
 */
 void fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page);
 

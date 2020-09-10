@@ -447,6 +447,71 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 	fz_write_string(ctx, out, "</page>\n");
 }
 
+/* JSON dump */
+
+void
+fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, float scale)
+{
+	fz_stext_block *block;
+	fz_stext_line *line;
+	fz_stext_char *ch;
+
+	fz_write_printf(ctx, out, "{%q:[", "blocks");
+
+	for (block = page->first_block; block; block = block->next)
+	{
+		if (block != page->first_block)
+			fz_write_string(ctx, out, ",");
+		switch (block->type)
+		{
+		case FZ_STEXT_BLOCK_TEXT:
+			fz_write_printf(ctx, out, "{%q:%q,", "type", "text");
+			fz_write_printf(ctx, out, "%q:{", "bbox");
+			fz_write_printf(ctx, out, "%q:%d,", "x", (int)(block->bbox.x0 * scale));
+			fz_write_printf(ctx, out, "%q:%d,", "y", (int)(block->bbox.y0 * scale));
+			fz_write_printf(ctx, out, "%q:%d,", "w", (int)((block->bbox.x1 - block->bbox.x0) * scale));
+			fz_write_printf(ctx, out, "%q:%d},", "h", (int)((block->bbox.y1 - block->bbox.y0) * scale));
+			fz_write_printf(ctx, out, "%q:[", "lines");
+
+			for (line = block->u.t.first_line; line; line = line->next)
+			{
+				if (line != block->u.t.first_line)
+					fz_write_string(ctx, out, ",");
+				fz_write_printf(ctx, out, "{%q:%d,", "wmode", line->wmode);
+				fz_write_printf(ctx, out, "%q:{", "bbox");
+				fz_write_printf(ctx, out, "%q:%d,", "x", (int)(line->bbox.x0 * scale));
+				fz_write_printf(ctx, out, "%q:%d,", "y", (int)(line->bbox.y0 * scale));
+				fz_write_printf(ctx, out, "%q:%d,", "w", (int)((line->bbox.x1 - line->bbox.x0) * scale));
+				fz_write_printf(ctx, out, "%q:%d},", "h", (int)((line->bbox.y1 - line->bbox.y0) * scale));
+
+				fz_write_printf(ctx, out, "%q:\"", "text");
+				for (ch = line->first_char; ch; ch = ch->next)
+				{
+					if (ch->c == '"' || ch->c == '\\')
+						fz_write_printf(ctx, out, "\\%c", ch->c);
+					else if (ch->c < 32)
+						fz_write_printf(ctx, out, "\\u%04x", ch->c);
+					else
+						fz_write_printf(ctx, out, "%C", ch->c);
+				}
+				fz_write_printf(ctx, out, "\"}");
+			}
+			fz_write_string(ctx, out, "]}");
+			break;
+
+		case FZ_STEXT_BLOCK_IMAGE:
+			fz_write_printf(ctx, out, "{%q:%q,", "type", "image");
+			fz_write_printf(ctx, out, "%q:{", "bbox");
+			fz_write_printf(ctx, out, "%q:%d,", "x", (int)(block->bbox.x0 * scale));
+			fz_write_printf(ctx, out, "%q:%d,", "y", (int)(block->bbox.y0 * scale));
+			fz_write_printf(ctx, out, "%q:%d,", "w", (int)((block->bbox.x1 - block->bbox.x0) * scale));
+			fz_write_printf(ctx, out, "%q:%d}}", "h", (int)((block->bbox.y1 - block->bbox.y0) * scale));
+			break;
+		}
+	}
+	fz_write_string(ctx, out, "]}");
+}
+
 /* Plain text */
 
 void
