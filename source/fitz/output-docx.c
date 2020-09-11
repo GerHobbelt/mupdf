@@ -128,4 +128,13 @@ fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *format, cons
 	return &writer->super;
 }
 
+#else
+
+#include "mupdf/fitz.h"
+
+fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *format, const char *path, const char *options)
+{
+	fz_throw(ctx, FZ_ERROR_GENERIC, "fz_new_docx_writer() not available in this build.");
+}
+
 #endif
