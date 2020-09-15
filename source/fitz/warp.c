@@ -27,6 +27,9 @@
 
 #if FZ_ENABLE_RENDER_CORE 
 
+#undef SLOW_INTERPOLATION
+#undef SLOW_WARPING
+
 typedef struct
 {
 	int x;
@@ -69,8 +72,10 @@ init_bresenham_core(int start, int end, int n)
 	fz_bresenham_core b;
 	int delta = end-start;
 
-	b.di = n == 0 ? 0 : delta/(n-1);
-	b.df = delta - (n-1)*b.di; /* 0 <= b.df < n */
+	b.di = n == 0 ? 0 : delta/n;
+	b.df = delta - n*b.di; /* 0 <= b.df < n */
+	if (b.df < 0)
+		b.di--, b.df += n;
 	/* Starts with bi.i = start, bi.f = n, and then does a half
 	 * step. */
 	b.i = start + (b.di>>1);
@@ -130,12 +135,12 @@ step_ip(fz_ipoint_bresenham *b)
 }
 
 static inline fz_ipoint
-current_ip(const fz_ipoint_bresenham b)
+current_ip(const fz_ipoint_bresenham *b)
 {
 	fz_ipoint ip;
 
-	ip.x = b.x.i;
-	ip.y = b.y.i;
+	ip.x = b->x.i;
+	ip.y = b->y.i;
 
 	return ip;
 }
@@ -237,6 +242,28 @@ copy_pixel(unsigned char *d, const fz_pixmap *src, fz_ipoint p)
 		v = src->h-1, fv = 0;
 
 	s = &src->samples[u * n + v * stride];
+
+#ifdef SLOW_INTERPOLATION
+	{
+		int i;
+
+		for (i = 0; i < n; i++)
+		{
+			int v0 = s[0];
+			int v1 = s[n];
+			int v2 = s[stride];
+			int v3 = s[stride+n];
+			int v01, v23, v;
+			v01 = (v0<<8) + (v1-v0)*fu;
+			v23 = (v2<<8) + (v3-v2)*fu;
+			v   = (v01<<8) + (v23-v01)*fv;
+			assert(v >= 0 && v < (1<<24)-32768);
+			*d++ = (v + 32768)>>16;
+			s++;
+		}
+		return;
+	}
+#else
 	if (fu == 0)
 	{
 		if (fv == 0)
@@ -259,13 +286,14 @@ copy_pixel(unsigned char *d, const fz_pixmap *src, fz_ipoint p)
 	if (fu <= fv)
 	{
 		/* Top half of the trapezoid. */
-		interp2_n(d, s, s+n, s+stride, fu, fv, n);
+		interp2_n(d, s, s+stride, s+stride+n, fv, fu, n);
 	}
 	else
 	{
 		/* Bottom half of the trapezoid. */
-		interp2_n(d, s+n, s+stride, s+stride+n, fv, fu, n);
+		interp2_n(d, s, s+n, s+stride+n, fu, fv, n);
 	}
+#endif
 }
 
 static void
@@ -277,10 +305,31 @@ warp_core(unsigned char *d, int n, int width, int height, int stride,
 
 	/* We have a bresenham pair for how to move the start
 	 * and end of the row each y step. */
-	row_bres = init_ip2_bresenham(corner[0], corner[2],
-					corner[1], corner[3], height);
+	row_bres = init_ip2_bresenham(corner[0], corner[3],
+					corner[1], corner[2], height);
 	stride -= width * n;
 
+#ifdef SLOW_WARPING
+	{
+		int h;
+		for (h = 0 ; h < height ; h++)
+		{
+			int sx = corner[0].x + (corner[3].x - corner[0].x)*h/height;
+			int sy = corner[0].y + (corner[3].y - corner[0].y)*h/height;
+			int ex = corner[1].x + (corner[2].x - corner[1].x)*h/height;
+			int ey = corner[1].y + (corner[2].y - corner[1].y)*h/height;
+			for (x = 0; x < width; x++)
+			{
+				fz_ipoint p;
+				p.x = sx + (ex-sx)*x/width;
+				p.y = sy + (ey-sy)*x/width;
+				copy_pixel(d, src, p);
+				d += n;
+			}
+			d += stride;
+		}
+	}
+#else
 	for (; height > 0; height--)
 	{
 		/* We have a bresenham for how to move the
@@ -292,7 +341,7 @@ warp_core(unsigned char *d, int n, int width, int height, int stride,
 		for (x = width; x > 0; x--)
 		{
 			/* Copy pixel */
-			copy_pixel(d, src, current_ip(pix_bres));
+			copy_pixel(d, src, current_ip(&pix_bres));
 			d += n;
 			step_ip(&pix_bres);
 		}
@@ -301,6 +350,7 @@ warp_core(unsigned char *d, int n, int width, int height, int stride,
 		step_ip2(&row_bres);
 		d += stride;
 	}
+#endif
 }
 
 /*
@@ -335,10 +385,10 @@ fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int wi
 		corner[0].y = (int)(points[0].y * 256 + 128);
 		corner[1].x = (int)(points[1].x * 256 + 128);
 		corner[1].y = (int)(points[1].y * 256 + 128);
-		corner[2].x = (int)(points[3].x * 256 + 128);
-		corner[2].y = (int)(points[3].y * 256 + 128);
-		corner[3].x = (int)(points[2].x * 256 + 128);
-		corner[3].y = (int)(points[2].y * 256 + 128);
+		corner[2].x = (int)(points[2].x * 256 + 128);
+		corner[2].y = (int)(points[2].y * 256 + 128);
+		corner[3].x = (int)(points[3].x * 256 + 128);
+		corner[3].y = (int)(points[3].y * 256 + 128);
 
 		warp_core(d, n, width, height, width * n, corner, src);
 	}
