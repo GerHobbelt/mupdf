@@ -4595,25 +4595,6 @@ static void ffi_Pixmap_deskew(js_State *J)
 	ffi_pushpixmap(J, dest);
 }
 
-static void ffi_Pixmap_detect_document(js_State *J)
-{
-	fz_context *ctx = js_getcontext(J);
-	fz_pixmap *pixmap = js_touserdata(J, 0, "fz_pixmap");
-	fz_point points[4];
-	int i;
-
-	fz_try(ctx)
-		fz_detect_document(ctx, &points[0], pixmap);
-	fz_catch(ctx)
-		rethrow(J);
-
-	js_newarray(J);
-	for (i = 0; i < 8; ++i) {
-		js_pushnumber(J, i&1 ? points[i].y : points[i].x);
-		js_setindex(J, -2, (int)i);
-	}
-}
-
 static void ffi_Pixmap_asPNG(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -4655,6 +4636,30 @@ static void ffi_Pixmap_autowarp(js_State *J)
 
 	js_getregistry(J, "fz_pixmap");
 	js_newuserdata(J, "fz_pixmap", dest, ffi_gc_fz_pixmap);
+}
+
+static void ffi_Pixmap_detect_document(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = js_touserdata(J, 0, "fz_pixmap");
+	fz_point points[4];
+	int i, found;
+
+	fz_try(ctx)
+		found = fz_detect_document(ctx, &points[0], pixmap);
+	fz_catch(ctx)
+		rethrow(J);
+
+	if (found)
+	{
+		js_newarray(J);
+		for (i = 0; i < 8; ++i) {
+			js_pushnumber(J, i&1 ? points[i>>1].y : points[i>>1].x);
+			js_setindex(J, -2, (int)i);
+		}
+	} else {
+		js_pushnull(J);
+	}
 }
 
 static void ffi_Pixmap_saveAsPNG(js_State *J)
@@ -11169,6 +11174,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.detectdocument", ffi_Pixmap_detect_document, 0);
 		jsB_propfun(J, "Pixmap.convertToColorSpace", ffi_Pixmap_convertToColorSpace, 5);
 		jsB_propfun(J, "Pixmap.autowarp", ffi_Pixmap_autowarp, 1);
+		jsB_propfun(J, "Pixmap.detectdocument", ffi_Pixmap_detect_document, 0);
 
 		// Pixmap.getPixels() - Buffer
 		// Pixmap.scale()
