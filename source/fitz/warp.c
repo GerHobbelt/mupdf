@@ -1,6 +1,7 @@
 #include "mupdf/fitz.h"
 
 #include <string.h>
+#include <math.h>
 
 typedef struct
 {
@@ -243,17 +244,50 @@ copy_pixel(unsigned char *d, const fz_pixmap *src, fz_ipoint p)
 	}
 }
 
+static void
+warp_core(unsigned char *d, int n, int width, int height, int stride,
+	const fz_ipoint corner[4], const fz_pixmap *src)
+{
+	fz_ipoint2_bresenham row_bres;
+	int x;
+
+	/* We have a bresenham pair for how to move the start
+	 * and end of the row each y step. */
+	row_bres = init_ip2_bresenham(corner[0], corner[2],
+					corner[1], corner[3], height);
+	stride -= width * n;
+
+	for (; height > 0; height--)
+	{
+		/* We have a bresenham for how to move the
+		 * current pixel across the row. */
+		fz_ipoint_bresenham pix_bres;
+			pix_bres = init_ip_bresenham(start_ip(row_bres),
+					end_ip(row_bres),
+					width);
+		for (x = width; x > 0; x--)
+		{
+			/* Copy pixel */
+			copy_pixel(d, src, current_ip(pix_bres));
+			d += n;
+			step_ip(&pix_bres);
+		}
+
+		/* step to the next line. */
+		step_ip2(&row_bres);
+		d += stride;
+	}
+}
+
 /*
 	points are clockwise from NW.
+
+	This performs simple affine warping.
 */
 fz_pixmap *
 fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int width, int height)
 {
 	fz_pixmap *dst;
-	unsigned char *d;
-	fz_ipoint corner00, corner01, corner10, corner11;
-	fz_ipoint2_bresenham row_bres;
-	int n, x;
 
 	if (src == NULL)
 		return NULL;
@@ -263,48 +297,26 @@ fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int wi
 
 	dst = fz_new_pixmap(ctx, src->colorspace, width, height,
 			src->seps, src->alpha);
-	d = dst->samples;
-	n = dst->n;
 	dst->xres = src->xres;
 	dst->yres = src->yres;
 
 	fz_try(ctx)
 	{
+		unsigned char *d = dst->samples;
+		int n = dst->n;
+		fz_ipoint corner[4];
+
 		/* Find the corner texture positions as fixed point */
-		corner00.x = (int)(points[0].x * 256 + 128);
-		corner00.y = (int)(points[0].y * 256 + 128);
-		corner10.x = (int)(points[1].x * 256 + 128);
-		corner10.y = (int)(points[1].y * 256 + 128);
-		corner01.x = (int)(points[3].x * 256 + 128);
-		corner01.y = (int)(points[3].y * 256 + 128);
-		corner11.x = (int)(points[2].x * 256 + 128);
-		corner11.y = (int)(points[2].y * 256 + 128);
+		corner[0].x = (int)(points[0].x * 256 + 128);
+		corner[0].y = (int)(points[0].y * 256 + 128);
+		corner[1].x = (int)(points[1].x * 256 + 128);
+		corner[1].y = (int)(points[1].y * 256 + 128);
+		corner[2].x = (int)(points[3].x * 256 + 128);
+		corner[2].y = (int)(points[3].y * 256 + 128);
+		corner[3].x = (int)(points[2].x * 256 + 128);
+		corner[3].y = (int)(points[2].y * 256 + 128);
 
-		/* We have a bresenham pair for how to move the start
-		 * and end of the row each y step. */
-		row_bres = init_ip2_bresenham(corner00, corner01,
-					corner10, corner11, height);
-
-		for (; height > 0; height--)
-		{
-			/* We have a bresenham for how to move the
-			 * current pixel across the row. */
-			fz_ipoint_bresenham pix_bres;
-
-			pix_bres = init_ip_bresenham(start_ip(row_bres),
-						end_ip(row_bres),
-						width);
-			for (x = width; x > 0; x--)
-			{
-				/* Copy pixel */
-				copy_pixel(d, src, current_ip(pix_bres));
-				d += n;
-				step_ip(&pix_bres);
-			}
-
-			/* step to the next line. */
-			step_ip2(&row_bres);
-		}
+		warp_core(d, n, width, height, width * n, corner, src);
 	}
 	fz_catch(ctx)
 	{
@@ -313,4 +325,28 @@ fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int wi
 	}
 
 	return dst;
+}
+
+static float
+dist(fz_point a, fz_point b)
+{
+	float x = a.x-b.x;
+	float y = a.y-b.y;
+
+	return sqrtf(x*x+y*y);
+}
+
+/* Again, affine warping, but this time where the destination width/height
+ * are chosen automatically. */
+fz_pixmap *
+fz_autowarp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4])
+{
+	float w0 = dist(points[1], points[0]);
+	float w1 = dist(points[2], points[3]);
+	float h0 = dist(points[3], points[0]);
+	float h1 = dist(points[2], points[1]);
+	int w = (w0+w1+0.5)/2;
+	int h = (h0+h1+0.5)/2;
+
+	return fz_warp_pixmap(ctx, src, points, w, h);
 }
