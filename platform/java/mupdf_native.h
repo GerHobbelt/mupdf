@@ -2197,6 +2197,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFGraftMap_finalize
 JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFGraftMap_graftObject
   (JNIEnv *, jobject, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFGraftMap
+ * Method:    graftPage
+ * Signature: (ILcom/artifex/mupdf/fitz/PDFDocument;I)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFGraftMap_graftPage
+  (JNIEnv *, jobject, jint, jobject, jint);
+
 #ifdef __cplusplus
 }
 #endif
