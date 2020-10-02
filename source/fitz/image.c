@@ -422,8 +422,99 @@ subarea_stream(fz_context *ctx, fz_stream *stm, fz_image *image, const fz_irect 
 	return sstm;
 }
 
+typedef struct
+{
+	fz_stream *src;
+	int w; /* Width in source pixels. */
+	int h; /* Height (remaining) in scanlines. */
+	int n; /* Number of components. */
+	int f; /* Fill level (how many scanlines we've copied in). */
+	size_t r; /* How many samples Remain to be filled in this line. */
+	int l2; /* The amount of subsampling we're doing. */
+	unsigned char data[1];
+} l2sub_state;
+
+static void
+subsample_drop(fz_context *ctx, void *state)
+{
+	fz_free(ctx, state);
+}
+
+static int
+subsample_next(fz_context *ctx, fz_stream *stm, size_t len)
+{
+	l2sub_state *state = (l2sub_state *)stm->state;
+
+	stm->rp = stm->wp = &state->data[0];
+	if (state->h == 0)
+		return EOF;
+
+	/* Copy in data */
+	do
+	{
+		if (state->r == 0)
+			state->r = state->w * state->n;
+
+		while (state->r > 0)
+		{
+			size_t a;
+			a = fz_available(ctx, state->src, state->r);
+			if (a == 0)
+				return EOF;
+			if (a > state->r)
+				a = state->r;
+			memcpy(&state->data[(state->f+1) * state->w * state->n - state->r],
+				state->src->rp, a);
+			state->src->rp += a;
+			state->r -= a;
+		}
+		state->f++;
+		state->h--;
+	}
+	while (state->h > 0 && state->f != (1<<state->l2));
+
+	/* Perform the subsample */
+	fz_subsample_pixblock(state->data, state->w, state->f, state->n, state->l2, state->w * state->n);
+	state->f = 0;
+
+	/* Update data pointers. */
+	stm->rp = &state->data[0];
+	stm->wp = &state->data[((state->w + (1<<state->l2) - 1)>>state->l2) * state->n];
+
+	return *stm->rp++;
+}
+
+static fz_stream *
+subsample_stream(fz_context *ctx, fz_stream *src, int w, int h, int n, int l2extra)
+{
+	fz_stream *stm;
+	l2sub_state *state = fz_malloc(ctx, sizeof(l2sub_state) + w*(n<<l2extra));
+
+	state->src = src;
+	state->w = w;
+	state->h = h;
+	state->n = n;
+	state->f = 0;
+	state->r = 0;
+	state->l2 = l2extra;
+
+	fz_try(ctx)
+		stm = fz_new_stream(ctx, state, subsample_next, subsample_drop);
+	fz_catch(ctx)
+	{
+		fz_free(ctx, state);
+		fz_rethrow(ctx);
+	}
+
+	return stm;
+}
+
+/* l2factor is the amount of subsampling that the decoder is going to be
+ * doing for us already. (So for JPEG 0,1,2,3 corresponding to 1, 2, 4,
+ * 8. For other formats, probably 0.). l2extra is the additional amount
+ * of subsampling we should perform here. */
 fz_pixmap *
-fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image *cimg, fz_irect *subarea, int indexed, int l2factor)
+fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image *cimg, fz_irect *subarea, int indexed, int l2factor, int l2extra)
 {
 	fz_image *image = &cimg->super;
 	fz_pixmap *tile = NULL;
@@ -435,6 +526,7 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image
 	int matte = image->use_colorkey && image->mask;
 	fz_stream *read_stream = stm;
 	fz_stream *sstream = NULL;
+	fz_stream *l2stream = NULL;
 
 	if (matte)
 	{
@@ -458,12 +550,23 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image
 	fz_var(tile);
 	fz_var(samples);
 	fz_var(sstream);
+	fz_var(l2stream);
 
 	fz_try(ctx)
 	{
 		int alpha = (image->colorspace == NULL);
 		if (image->use_colorkey)
 			alpha = 1;
+
+		if (subarea)
+			read_stream = sstream = subarea_stream(ctx, stm, image, subarea, l2factor);
+		if (l2extra)
+		{
+			read_stream = l2stream = subsample_stream(ctx, read_stream, w, h, image->n, l2extra);
+			w = (w + (1<<l2extra) - 1)>>l2extra;
+			h = (h + (1<<l2extra) - 1)>>l2extra;
+		}
+
 		tile = fz_new_pixmap(ctx, image->colorspace, w, h, NULL, alpha);
 		if (image->interpolate & FZ_PIXMAP_FLAG_INTERPOLATE)
 			tile->flags |= FZ_PIXMAP_FLAG_INTERPOLATE;
@@ -474,9 +577,6 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image
 		if ((size_t)h > (size_t)(SIZE_MAX / stride))
 			fz_throw(ctx, FZ_ERROR_MEMORY, "image too large");
 		samples = Memento_label(fz_malloc(ctx, h * stride), "pixmap_samples");
-
-		if (subarea)
-			read_stream = sstream = subarea_stream(ctx, stm, image, subarea, l2factor);
 
 		len = fz_read(ctx, read_stream, samples, h * stride);
 
@@ -524,7 +624,10 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image
 			fz_unblend_masked_tile(ctx, tile, image, subarea);
 	}
 	fz_always(ctx)
+	{
 		fz_drop_stream(ctx, sstream);
+		fz_drop_stream(ctx, l2stream);
+	}
 	fz_catch(ctx)
 	{
 		fz_drop_pixmap(ctx, tile);
@@ -641,7 +744,9 @@ compressed_image_get_pixmap(fz_context *ctx, fz_image *image_, fz_irect *subarea
 				native_l2factor -= *l2factor;
 			indexed = fz_colorspace_is_indexed(ctx, image->super.colorspace);
 			can_sub = 1;
-			tile = fz_decomp_image_from_stream(ctx, stm, image, subarea, indexed, native_l2factor);
+			tile = fz_decomp_image_from_stream(ctx, stm, image, subarea, indexed, native_l2factor, l2factor ? *l2factor : 0);
+			if (l2factor)
+				*l2factor = 0;
 		}
 		fz_always(ctx)
 			fz_drop_stream(ctx, stm);
