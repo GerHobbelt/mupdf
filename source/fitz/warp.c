@@ -1493,7 +1493,7 @@ find_route(hough_point_t *points, int num_points, hough_route_t *route, int n)
 #define BLOT_ANG 10
 #define BLOT_DIS 10
 static fz_pixmap *
-make_hough(fz_context *ctx, const fz_pixmap *src)
+make_hough(fz_context *ctx, fz_pixmap *src)
 {
 	int w = src->w;
 	int h = src->h;
