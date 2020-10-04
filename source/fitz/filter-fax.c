@@ -724,6 +724,7 @@ eol:
 		 */
 		if (to_eat != 0)
 		{
+			fill_bits(ctx, fax);
 			if (fax->word >> (32 - to_eat) == 0)
 			{
 				eat_bits(fax, to_eat);
@@ -731,6 +732,7 @@ eol:
 			else
 			{
 				/* The data actually wasn't aligned. */
+				fz_warn(ctx, "faxd stream alignment bits not all 0, assuming scan lines not byte aligned");
 				fax->encoded_byte_align = 0;
 			}
 		}
