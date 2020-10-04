@@ -33,9 +33,9 @@ depending on your environment.
 
 //Include the MuPDF header file, and pthread's header file.
 #include <mupdf/fitz.h>
+#include <mupdf/helpers/mu-threads.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
 #if defined(_MSC_VER)
 #include <crtdbg.h>
 #endif
@@ -83,7 +83,7 @@ struct data {
 // pointer to an instance of the data structure described above and
 // renders the display list into the pixmap before exiting.
 
-void *
+void
 renderer(void *data)
 {
 	int pagenumber = ((struct data *) data)->pagenumber;
@@ -116,7 +116,7 @@ renderer(void *data)
 
 	fprintf(stderr, "thread at page %d done!\n", pagenumber);
 
-	return data;
+	return;
 }
 
 // These are the two locking functions required by MuPDF when
@@ -126,26 +126,24 @@ renderer(void *data)
 
 void lock_mutex(void *user, int lock)
 {
-	pthread_mutex_t *mutex = (pthread_mutex_t *) user;
+	mu_mutex *mutex = (mu_mutex *) user;
 
-	if (pthread_mutex_lock(&mutex[lock]) != 0)
-		fail("pthread_mutex_lock()");
+	mu_lock_mutex(&mutex[lock]);
 }
 
 void unlock_mutex(void *user, int lock)
 {
-	pthread_mutex_t *mutex = (pthread_mutex_t *) user;
+	mu_mutex *mutex = (mu_mutex *) user;
 
-	if (pthread_mutex_unlock(&mutex[lock]) != 0)
-		fail("pthread_mutex_unlock()");
+	mu_unlock_mutex(&mutex[lock]);
 }
 
 int main(int argc, char **argv)
 {
 	char *filename = argc >= 2 ? argv[1] : "";
-	pthread_t *thread = NULL;
+	mu_thread *thread = NULL;
 	fz_locks_context locks;
-	pthread_mutex_t mutex[FZ_LOCK_MAX];
+	mu_mutex mutex[FZ_LOCK_MAX];
 	fz_context *ctx;
 	fz_document *doc;
 	int threads;
@@ -155,8 +153,8 @@ int main(int argc, char **argv)
 
 	for (i = 0; i < FZ_LOCK_MAX; i++)
 	{
-		if (pthread_mutex_init(&mutex[i], NULL) != 0)
-			fail("pthread_mutex_init()");
+		if (mu_create_mutex(&mutex[i]) != 0)
+			fail("mu_create_mutex()");
 	}
 
 	// Initialize the locking structure with function pointers to
@@ -190,7 +188,7 @@ int main(int argc, char **argv)
 	threads = fz_count_pages(ctx, doc);
 	fprintf(stderr, "spawning %d threads, one per page...\n", threads);
 
-	thread = malloc(threads * sizeof (pthread_t));
+	thread = fz_calloc(ctx, threads, sizeof (thread[0]));
 
 	for (i = 0; i < threads; i++)
 	{
@@ -239,7 +237,7 @@ int main(int argc, char **argv)
 		// Populate the data structure to be sent to the
 		// rendering thread for this page.
 
-		data = malloc(sizeof (struct data));
+		data = fz_malloc(ctx, sizeof (struct data));
 
 		data->pagenumber = i + 1;
 		data->ctx = ctx;
@@ -249,7 +247,7 @@ int main(int argc, char **argv)
 
 		// Create the thread and pass it the data structure.
 
-		if (pthread_create(&thread[i], NULL, renderer, data) != 0)
+		if (mu_create_thread(&thread[i], renderer, data) != 0)
 			fail("pthread_create()");
 	}
 
@@ -260,10 +258,10 @@ int main(int argc, char **argv)
 	for (i = threads - 1; i >= 0; i--)
 	{
 		char filename[42];
-		struct data *data;
+		struct data *data = (struct data* )thread[i].arg;  // this was set up by mu_create_thread()
 
-		if (pthread_join(thread[i], (void **) &data) != 0)
-			fail("pthread_join");
+		// mu_destroy_thread() ~ pthread_join()
+		mu_destroy_thread(&thread[i]);
 
 		sprintf(filename, "out%04d.png", i);
 		fprintf(stderr, "\tSaving %s...\n", filename);
@@ -281,19 +279,25 @@ int main(int argc, char **argv)
 		// Free the data structured passed back and forth
 		// between the main thread and rendering thread.
 
-		free(data);
+		fz_free(ctx, data);
 	}
 
 	fprintf(stderr, "finally!\n");
-	fflush(NULL);
+	fflush(stderr);
 
-	free(thread);
+	fz_free(ctx, thread);
 
 	// Finally the document is closed and the main thread's
 	// context is freed.
 
 	fz_drop_document(ctx, doc);
 	fz_drop_context(ctx);
+
+	// destroy the locks only after the context has been dropped, as the free() in there uses these locks
+	for (i = 0; i < FZ_LOCK_MAX; i++)
+	{
+		mu_destroy_mutex(&mutex[i]);
+	}
 
 	return 0;
 }
