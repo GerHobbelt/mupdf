@@ -105,6 +105,7 @@ static void runrange(const char *range)
 int muconvert_main(int argc, const char **argv)
 {
 	int i, c;
+	int retval = EXIT_SUCCESS;
 
 	/* input options */
 	password = "";
@@ -202,9 +203,9 @@ int muconvert_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
-	for (i = fz_optind; i < argc; ++i)
+	fz_try(ctx)
 	{
-		fz_try(ctx)
+		for (i = fz_optind; i < argc; ++i)
 		{
 			doc = fz_open_document(ctx, argv[i]);
 			if (fz_needs_password(ctx, doc))
@@ -219,22 +220,22 @@ int muconvert_main(int argc, const char **argv)
 				runrange("1-N");
 
 			fz_drop_document(ctx, doc);
-		}
-		fz_catch(ctx)
-		{
-			fz_error(ctx, "cannot load document: %s", fz_caught_message(ctx));
-			fz_close_document_writer(ctx, out);
-			fz_drop_document_writer(ctx, out);
-			fz_drop_context(ctx);
-			// and delete incomplete/damaged output file:
-			unlink(output);
-			return EXIT_FAILURE;
-		}
+			doc = NULL;
+    	}
+	}
+	fz_catch(ctx)
+	{
+		fz_error(ctx, "cannot load document: %s", fz_caught_message(ctx));
+		fz_drop_document(ctx, doc);
+		doc = NULL;
+		// and delete incomplete/damaged output file:
+		unlink(output);
+		retval = EXIT_FAILURE;
 	}
 
 	fz_close_document_writer(ctx, out);
 
 	fz_drop_document_writer(ctx, out);
 	fz_drop_context(ctx);
-	return EXIT_SUCCESS;
+	return retval;
 }
