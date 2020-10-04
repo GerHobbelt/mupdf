@@ -371,7 +371,7 @@ pdfocr_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band
 		flush_strip(ctx, writer, h % sh);
 
 	/* Copy strip to ocrbitmap, converting if required. */
-	d += band_start*w;
+	d += band_start * w;
 	if (n == 1)
 	{
 		int y;
