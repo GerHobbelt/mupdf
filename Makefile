@@ -398,6 +398,9 @@ watch-recompile:
 java:
 	$(MAKE) -C platform/java
 
+java-clean:
+	$(MAKE) -C platform/java clean
+
 wasm:
 	$(MAKE) -C platform/wasm
 
