@@ -1303,6 +1303,9 @@ void do_redact_panel(void)
 	if (ui_button_aux("Mark search in document", search_needle == NULL))
 	{
 		mark_all_search_results();
+		search_hit_count = 0;
+		selected_annot = NULL;
+		render_page();
 	}
 
 	ui_spacer();
