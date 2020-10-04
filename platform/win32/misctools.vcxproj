@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{00111977-815B-4F64-BC9D-219078B1F3AA}</ProjectGuid>
-    <RootNamespace>bulktester</RootNamespace>
+    <ProjectGuid>{00112979-815B-4F64-BC9D-219078B1F3AA}</ProjectGuid>
+    <RootNamespace>misctools</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -65,7 +65,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\mujs;..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\include\mupdf;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -86,7 +86,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\mujs;..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\include\mupdf;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -105,7 +105,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\mujs;..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\include\mupdf;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -127,7 +127,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\mujs;..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\include\mupdf;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -143,11 +143,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\tools\bulktester.c" />
+    <ClCompile Include="..\..\thirdparty\mujs\main.c" />
+    <ClCompile Include="..\..\thirdparty\mujs\pp.c">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MUJS_PRETTYPRINT_MAIN=mujs_prettyprint_tool;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MUJS_PRETTYPRINT_MAIN=mujs_prettyprint_tool;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MUJS_PRETTYPRINT_MAIN=mujs_prettyprint_tool;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MUJS_PRETTYPRINT_MAIN=mujs_prettyprint_tool;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MuPDFLib.vcxproj">
-      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
+    <ProjectReference Include="libthirdparty.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-d58957ca5e3c}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

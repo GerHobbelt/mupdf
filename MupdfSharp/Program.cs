@@ -115,7 +115,7 @@ namespace MupdfSharp
 			const uint FZ_STORE_DEFAULT = 256 << 20;
 			const string DLL = "MuPDFLib.dll";
 			// note: modify the version number to match the FZ_VERSION definition in "fitz\version.h" file
-			const string FZ_VERSION = "1.17.0.GHO20042101";
+			const string FZ_VERSION = "1.17.0.GHO20200906";
 
 			[DllImport(DLL, CallingConvention = CC.Cdecl, EntryPoint = "fz_new_context_imp", BestFitMapping = false)]
 			static extern IntPtr NewContext(IntPtr alloc, IntPtr locks, uint max_store, [MarshalAs(UnmanagedType.LPStr)] string fz_version);

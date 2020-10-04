@@ -242,6 +242,13 @@
     <ClCompile Include="..\..\thirdparty\leptonica\src\zlibmem.c" />
     <ClCompile Include="..\..\thirdparty\leptonica\src\zlibmemstub.c" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\leptonica\src\Makefile.am" />
+    <None Include="..\..\thirdparty\leptonica\src\makefile.static" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\thirdparty\leptonica\src\CMakeLists.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -346,11 +353,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=0;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;WIN32;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;WIN32;_DEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty/openjpeg/thirdparty/libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -369,11 +376,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=0;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;MEMENTO;WIN32;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;MEMENTO;WIN32;_DEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty/openjpeg/thirdparty/libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -392,11 +399,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=0;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty/openjpeg/thirdparty/libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -414,11 +421,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=0;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;_DEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty/openjpeg/thirdparty/libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -436,11 +443,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=0;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;MEMENTO;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;MEMENTO;_DEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty/openjpeg/thirdparty/libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -458,11 +465,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=0;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBGIF=0;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=0;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\leptonica\src;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty/openjpeg/thirdparty/libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\scripts\libjpeg;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>UNICODE</UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4018;4244;4267;4305</DisableSpecificWarnings>

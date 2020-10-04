@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{00111977-815B-4F64-BC9D-219078B1F3AA}</ProjectGuid>
-    <RootNamespace>bulktester</RootNamespace>
+    <ProjectGuid>{00111979-815B-4F64-BC9D-219078B1F3AA}</ProjectGuid>
+    <RootNamespace>curl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -65,8 +65,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\include;..\..\thirdparty\zlib;..\..\include\mupdf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CURL_STATICLIB;CURL_DISABLE_LDAP;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -79,6 +79,9 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -86,8 +89,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\include;..\..\thirdparty\zlib;..\..\include\mupdf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CURL_STATICLIB;CURL_DISABLE_LDAP;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -100,13 +103,16 @@
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\include;..\..\thirdparty\zlib;..\..\include\mupdf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CURL_STATICLIB;CURL_DISABLE_LDAP;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -119,6 +125,9 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -127,8 +136,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\include;..\..\thirdparty\zlib;..\..\include\mupdf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CURL_STATICLIB;CURL_DISABLE_LDAP;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level3</WarningLevel>
@@ -141,14 +150,35 @@
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\curl\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\tools\bulktester.c" />
+    <ClCompile Include="..\..\source\tools\curl_tool.c" />
+    <ClCompile Include="..\..\thirdparty\curl\src\tool_main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MuPDFLib.vcxproj">
-      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\curl.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\curlbuild.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\curlver.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\easy.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\mprintf.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\multi.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\options.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\stdcheaders.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\system.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\typecheck-gcc.h" />
+    <ClInclude Include="..\..\thirdparty\curl\include\curl\urlapi.h" />
+    <ClInclude Include="..\..\thirdparty\curl\src\tool_main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\thirdparty\curl\src\curl.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
