@@ -1,6 +1,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include "annot-imp.h"
+
 #include <string.h>
 
 pdf_annot *
@@ -1700,4 +1702,39 @@ pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *
 	pdf_dict_del(ctx, annot->obj, PDF_NAME(RC)); /* not supported */
 
 	pdf_dirty_annot(ctx, annot);
+}
+
+pdf_obj *pdf_annot_obj(fz_context *ctx, pdf_annot *annot)
+{
+	return annot ? annot->obj : NULL;
+}
+
+int pdf_annot_is_hot(fz_context *ctx, pdf_annot *annot)
+{
+	return annot ? annot->is_hot : 0;
+}
+
+void pdf_annot_set_hot(fz_context *ctx, pdf_annot *annot, int hot)
+{
+	if (!annot)
+		return;
+	annot->is_hot = hot;
+}
+
+pdf_page *pdf_annot_page(fz_context *ctx, pdf_annot *annot)
+{
+	return annot ? annot->page : NULL;
+
+}
+
+int pdf_annot_needs_new_ap(fz_context *ctx, pdf_annot *annot)
+{
+	return annot ? annot->needs_new_ap : 0;
+}
+
+void pdf_annot_set_active(fz_context *ctx, pdf_annot *annot, int active)
+{
+	if (!annot)
+		return;
+	annot->is_active = active;
 }

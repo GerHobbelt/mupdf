@@ -2877,6 +2877,57 @@ static void ffi_Pixmap_warp(js_State *J)
 	js_newuserdata(J, "fz_pixmap", dest, ffi_gc_fz_pixmap);
 }
 
+static void ffi_Pixmap_autowarp(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = js_touserdata(J, 0, "fz_pixmap");
+	/* 1 = array of 8 floats for points */
+	fz_pixmap *dest = NULL;
+	fz_point points[4];
+	int i;
+
+	if (!js_isarray(J, 1) || js_getlength(J, 1) != 8)
+		js_throw(J);
+
+	for (i = 0; i < 8; i++)
+	{
+		float *f = i&1 ? &points[i>>1].y : &points[i>>1].x;
+		js_getindex(J, 1, i);
+		*f = js_tonumber(J, -1);
+		js_pop(J, 1);
+	}
+
+	fz_try(ctx)
+		dest = fz_autowarp_pixmap(ctx, pixmap, points);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_getregistry(J, "fz_pixmap");
+	js_newuserdata(J, "fz_pixmap", dest, ffi_gc_fz_pixmap);
+}
+
+extern void
+fz_detect_document(fz_context *ctx, fz_point *points, const fz_pixmap *src);
+
+static void ffi_Pixmap_detect_document(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = js_touserdata(J, 0, "fz_pixmap");
+	fz_point points[4];
+	int i;
+
+	fz_try(ctx)
+		fz_detect_document(ctx, &points[0], pixmap);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_newarray(J);
+	for (i = 0; i < 8; ++i) {
+		js_pushnumber(J, i&1 ? points[i].y : points[i].x);
+		js_setindex(J, -2, (int)i);
+	}
+}
+
 static void ffi_Pixmap_saveAsPNG(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5776,7 +5827,8 @@ static void ffi_PDFAnnotation_process(js_State *J)
 	pdf_processor *proc = new_js_processor(ctx, J);
 	fz_try(ctx)
 	{
-		pdf_process_annot(ctx, proc, annot->page->doc, annot->page, annot, NULL);
+		pdf_page *page = pdf_annot_page(ctx, annot);
+		pdf_process_annot(ctx, proc, page->doc, page, annot, NULL);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)
@@ -5791,7 +5843,7 @@ static void ffi_PDFWidget_getFieldType(js_State *J)
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	int type;
 	fz_try(ctx)
-		type = pdf_field_type(ctx, widget->obj);
+		type = pdf_field_type(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	switch (type)
@@ -5813,7 +5865,7 @@ static void ffi_PDFWidget_getFieldFlags(js_State *J)
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	int flags;
 	fz_try(ctx)
-		flags = pdf_field_flags(ctx, widget->obj);
+		flags = pdf_field_flags(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushnumber(J, flags);
@@ -5848,7 +5900,7 @@ static void ffi_PDFWidget_getValue(js_State *J)
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	const char *value;
 	fz_try(ctx)
-		value = pdf_field_value(ctx, widget->obj);
+		value = pdf_field_value(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushstring(J, value);
@@ -5908,13 +5960,13 @@ static void ffi_PDFWidget_getOptions(js_State *J)
 	const char *opt;
 	int i, n;
 	fz_try(ctx)
-		n = pdf_choice_field_option_count(ctx, widget->obj);
+		n = pdf_choice_field_option_count(ctx, pdf_annot_obj(ctx, widget));
 	fz_catch(ctx)
 		rethrow(J);
 	js_newarray(J);
 	for (i = 0; i < n; ++i) {
 		fz_try(ctx)
-			opt = pdf_choice_field_option(ctx, widget->obj, export, i);
+			opt = pdf_choice_field_option(ctx, pdf_annot_obj(ctx, widget), export, i);
 		fz_catch(ctx)
 			rethrow(J);
 		js_pushstring(J, opt);
@@ -6334,6 +6386,8 @@ int murun_main(int argc, const char **argv)
 		jsB_propfun(J, "Pixmap.getYResolution", ffi_Pixmap_getYResolution, 0);
 		jsB_propfun(J, "Pixmap.getSample", ffi_Pixmap_getSample, 3);
 		jsB_propfun(J, "Pixmap.warp", ffi_Pixmap_warp, 3);
+		jsB_propfun(J, "Pixmap.autowarp", ffi_Pixmap_autowarp, 1);
+		jsB_propfun(J, "Pixmap.detectdocument", ffi_Pixmap_detect_document, 0);
 
 		// Pixmap.samples()
 		// Pixmap.invert

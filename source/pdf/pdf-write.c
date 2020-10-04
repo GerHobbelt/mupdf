@@ -3,6 +3,10 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include "annot-imp.h"
+
+#include <zlib.h>
+
 #include <assert.h>
 #include <limits.h>
 #include <string.h>
