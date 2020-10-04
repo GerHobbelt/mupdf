@@ -14,6 +14,8 @@
 #define main main_utf8
 #endif
 
+int tesseract_main(int argc, const char** argv);
+
 int main(int argc, const char **argv)
 {
 	fz_context* ctx = NULL;
@@ -42,11 +44,8 @@ int main(int argc, const char **argv)
 		return 1;
 	}
 
-	/* Check argv[0] */
-
-	/* Print usage */
-
-	fz_info(ctx, "usage: mutesseract <command> [options]");
+	//fz_info(ctx, "usage: tesseract <command> [options]");
+	int rv = tesseract_main(argc, argv);
 
 #if 0   // test to see the reverse ordered number gen in this call work as expected.
 	char p[256];
@@ -55,7 +54,7 @@ int main(int argc, const char **argv)
 
 	fz_drop_context(ctx);
 
-	return EXIT_FAILURE;
+	return rv;
 }
 
 #ifdef _MSC_VER
