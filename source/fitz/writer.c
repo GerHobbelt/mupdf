@@ -153,6 +153,9 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 		if (is_extension(format, "pdf"))
 			return fz_new_pdf_writer(ctx, path, options);
 #endif
+		if (is_extension(format, "cbz"))
+			return fz_new_cbz_writer(ctx, path, options);
+
 		if (is_extension(format, "svg"))
 			return fz_new_svg_writer(ctx, path, options);
 
