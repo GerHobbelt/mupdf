@@ -2503,7 +2503,8 @@ int mudraw_main(int argc, const char **argv)
 		// If it cannot init, report a warning accordingly and fall back to the non-OCR output format:
 		if (output_format == OUT_OCR_TRACE ||
 			output_format == OUT_OCR_TEXT ||
-			output_format == OUT_OCR_STEXT ||
+			output_format == OUT_OCR_STEXT_JSON ||
+			output_format == OUT_OCR_STEXT_XML ||
 			output_format == OUT_OCR_HTML ||
 			output_format == OUT_OCR_XHTML ||
 			output_format == OUT_OCR_PDF)
@@ -2527,8 +2528,10 @@ int mudraw_main(int argc, const char **argv)
 					output_format = OUT_TRACE; break;
 				case OUT_OCR_TEXT:
 					output_format = OUT_TEXT; break;
-				case OUT_OCR_STEXT:
-					output_format = OUT_STEXT; break;
+				case OUT_OCR_STEXT_JSON:
+					output_format = OUT_STEXT_JSON; break;
+				case OUT_OCR_STEXT_XML:
+					output_format = OUT_STEXT_XML; break;
 				case OUT_OCR_HTML:
 					output_format = OUT_HTML; break;
 				case OUT_OCR_XHTML:
