@@ -46,7 +46,7 @@ int main(int argc, const char **argv)
 
 	/* Print usage */
 
-	fz_info(ctx, "usage: mutool <command> [options]");
+	fz_info(ctx, "usage: mutesseract <command> [options]");
 
 #if 0   // test to see the reverse ordered number gen in this call work as expected.
 	char p[256];
