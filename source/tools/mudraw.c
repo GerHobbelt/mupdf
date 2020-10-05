@@ -1347,7 +1347,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		fz_try(ctx)
 		{
 			if (list)
-				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, NULL);
+				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, &cookie);
 			else
 				fz_run_page(ctx, page, dev, fz_identity, &cookie);
 			fz_close_device(ctx, dev);

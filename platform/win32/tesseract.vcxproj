@@ -143,27 +143,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="libcurl.vcxproj">
-      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libleptonica.vcxproj">
-      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmupdf.vcxproj">
-      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtesseract.vcxproj">
-      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libthirdparty.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-d58957ca5e3c}</Project>
-    </ProjectReference>
+    <ClCompile Include="..\..\source\tools\tesseract_tool.c" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="MuPDFLib.vcxproj">
       <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\source\tools\tesseract_tool.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

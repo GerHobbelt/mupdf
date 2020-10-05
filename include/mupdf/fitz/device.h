@@ -292,7 +292,7 @@ enum
 */
 typedef struct
 {
-	int abort;
+	volatile int abort;
 	int progress;
 	size_t progress_max; /* (size_t)-1 for unknown */
 	int errors;
