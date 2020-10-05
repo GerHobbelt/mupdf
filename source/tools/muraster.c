@@ -393,10 +393,12 @@ static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
 static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
+static float min_line_width = 0.0f;
 
 static int showtime = 0;
 static int showmemory = 0;
 
+static int no_icc = 0;
 static int ignore_errors = 0;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
@@ -1642,12 +1644,14 @@ int muraster_main(int argc, const char *argv[])
 	layout_em = FZ_DEFAULT_LAYOUT_EM;
 	layout_css = NULL;
 	layout_use_doc_css = 1;
+	min_line_width = 0.0f;
 
 	showtime = 0;
 	showmemory = 0;
 
 	memset(&trace_info, 0, sizeof trace_info);
 
+	no_icc = 0;
 	ignore_errors = 0;
 	alphabits_text = 8;
 	alphabits_graphics = 8;
@@ -1674,7 +1678,7 @@ int muraster_main(int argc, const char *argv[])
 	y_resolution = Y_RESOLUTION;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPm:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPl:Nm:h")) != -1)
 	{
 		switch (c)
 		{
@@ -1715,7 +1719,9 @@ int muraster_main(int argc, const char *argv[])
 				alphabits_text = alphabits_graphics;
 			break;
 		}
+		case 'l': min_line_width = fz_atof(fz_optarg); break;
 		case 'i': ignore_errors = 1; break;
+		case 'N': no_icc = 1; break;
 
 		case 'T':
 #ifndef DISABLE_MUTHREADS
@@ -1796,285 +1802,305 @@ int muraster_main(int argc, const char *argv[])
 		return EXIT_FAILURE;
 	}
 
-	fz_set_text_aa_level(ctx, alphabits_text);
-	fz_set_graphics_aa_level(ctx, alphabits_graphics);
+	fz_try(ctx)
+	{
+		fz_set_text_aa_level(ctx, alphabits_text);
+		fz_set_graphics_aa_level(ctx, alphabits_graphics);
+		fz_set_graphics_min_line_width(ctx, min_line_width);
+		if (no_icc)
+			fz_disable_icc(ctx);
+		else
+			fz_enable_icc(ctx);
 
 #ifndef DISABLE_MUTHREADS
-	// do not bgprint when there won't be any bg threads available, ever.
-	if (num_workers < 1)
-	{
-		bgprint.active = 0;
-	}
-
-	if (bgprint.active)
-	{
-		int fail = 0;
-		bgprint.ctx = fz_clone_context(ctx);
-		fail |= mu_create_semaphore(&bgprint.start);
-		fail |= mu_create_semaphore(&bgprint.stop);
-		fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
-		if (fail)
+		// do not bgprint when there won't be any bg threads available, ever.
+		if (num_workers < 1)
 		{
-			fz_error(bgprint.ctx, "bgprint startup failed");
-			mu_destroy_semaphore(&bgprint.start);
-			mu_destroy_semaphore(&bgprint.stop);
-			return EXIT_FAILURE;
+			bgprint.active = 0;
 		}
-	}
 
-	if (num_workers > 0)
-	{
-		int i;
-		int fail = 0;
-		workers = fz_calloc(ctx, num_workers, sizeof(*workers));
-		for (i = 0; i < num_workers; i++)
+		if (bgprint.active)
 		{
-			workers[i].ctx = fz_clone_context(ctx);
-			workers[i].num = i;
-			fail |= mu_create_semaphore(&workers[i].start);
-			fail |= mu_create_semaphore(&workers[i].stop);
-			fail |= mu_create_thread(&workers[i].thread, worker_thread, &workers[i]);
+			int fail = 0;
+			bgprint.ctx = fz_clone_context(ctx);
+			fail |= mu_create_semaphore(&bgprint.start);
+			fail |= mu_create_semaphore(&bgprint.stop);
+			fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
+			if (fail)
+			{
+				mu_destroy_semaphore(&bgprint.start);
+				mu_destroy_semaphore(&bgprint.stop);
+				fz_throw(bgprint.ctx, FZ_ERROR_GENERIC, "bgprint startup failed");
+			}
 		}
-		if (fail)
+
+		if (num_workers > 0)
 		{
-			fz_error(ctx, "worker startup failed");
+			int i;
+			int fail = 0;
+			workers = fz_calloc(ctx, num_workers, sizeof(*workers));
 			for (i = 0; i < num_workers; i++)
 			{
+				workers[i].ctx = fz_clone_context(ctx);
+				workers[i].num = i;
+				fail |= mu_create_semaphore(&workers[i].start);
+				fail |= mu_create_semaphore(&workers[i].stop);
+				fail |= mu_create_thread(&workers[i].thread, worker_thread, &workers[i]);
+			}
+			if (fail)
+			{
+				for (i = 0; i < num_workers; i++)
+				{
+					mu_destroy_semaphore(&workers[i].start);
+					mu_destroy_semaphore(&workers[i].stop);
+					mu_destroy_thread(&workers[i].thread);
+					fz_drop_context(workers[i].ctx);
+				}
+				fz_free(ctx, workers);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "worker startup failed");
+			}
+		}
+#endif /* DISABLE_MUTHREADS */
+
+		if (layout_css)
+		{
+			fz_buffer *buf = fz_read_file(ctx, layout_css);
+			fz_set_user_css(ctx, fz_string_from_buffer(ctx, buf));
+			fz_drop_buffer(ctx, buf);
+		}
+
+		fz_set_use_document_css(ctx, layout_use_doc_css);
+
+		output_format = suffix_table[0].format;
+		output_cs = suffix_table[0].cs;
+		if (format)
+		{
+			int i;
+
+			for (i = 0; i < (int)nelem(suffix_table); i++)
+			{
+				if (!strcmp(format, suffix_table[i].suffix+1))
+				{
+					output_format = suffix_table[i].format;
+					output_cs = suffix_table[i].cs;
+					break;
+				}
+			}
+			if (i == (int)nelem(suffix_table))
+			{
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown output format '%s'", format);
+			}
+		}
+		else if (output)
+		{
+			const char *suffix = output;
+			int i;
+
+			for (i = 0; i < (int)nelem(suffix_table); i++)
+			{
+				char *s = strstr(suffix, suffix_table[i].suffix);
+
+				if (s != NULL)
+				{
+					suffix = s+strlen(suffix_table[i].suffix);
+					output_format = suffix_table[i].format;
+					output_cs = suffix_table[i].cs;
+					// match the tail (= file extension) with the output format;
+					// when there's still a tail left after this round, we need to look again:
+					if (*suffix)
+						i = -1;
+					else
+						break;
+				}
+			}
+		}
+
+		switch (output_cs)
+		{
+		case CS_GRAY:
+			colorspace = fz_device_gray(ctx);
+			break;
+		case CS_RGB:
+			colorspace = fz_device_rgb(ctx);
+			break;
+		case CS_CMYK:
+			colorspace = fz_device_cmyk(ctx);
+			break;
+		}
+
+		if (!output || *output == 0 || !strcmp(output, "-"))
+			out = fz_stdout(ctx);
+		else
+		{
+			char fbuf[4096];
+			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+			out = fz_new_output_with_path(ctx, fbuf, 0);
+		}
+
+		timing.count = 0;
+		timing.total = 0;
+		timing.min = 1 << 30;
+		timing.max = 0;
+		timing.mininterp = 1 << 30;
+		timing.maxinterp = 0;
+		timing.minpage = 0;
+		timing.maxpage = 0;
+		timing.minfilename = "";
+		timing.maxfilename = "";
+		timing.layout = 0;
+		timing.minlayout = 1 << 30;
+		timing.maxlayout = 0;
+		timing.minlayoutfilename = "";
+		timing.maxlayoutfilename = "";
+		if (showtime && bgprint.active)
+			timing.total = gettime();
+
+		fz_try(ctx)
+		{
+			fz_register_document_handlers(ctx);
+
+			while (fz_optind < argc)
+			{
+				int layouttime;
+
+				fz_try(ctx)
+				{
+					filename = argv[fz_optind++];
+					files++;
+
+					doc = fz_open_document(ctx, filename);
+
+					if (fz_needs_password(ctx, doc))
+					{
+						if (!fz_authenticate_password(ctx, doc, password))
+							fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
+					}
+
+					layouttime = gettime();
+					fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
+					(void) fz_count_pages(ctx, doc);   // added to ensure a more proper layouttime figure
+					layouttime = gettime() - layouttime;
+
+					timing.layout += layouttime;
+					if (layouttime < timing.minlayout)
+					{
+						timing.minlayout = layouttime;
+						timing.minlayoutfilename = filename;
+					}
+					if (layouttime > timing.maxlayout)
+					{
+						timing.maxlayout = layouttime;
+						timing.maxlayoutfilename = filename;
+					}
+
+					if (fz_optind == argc || !fz_is_page_range(ctx, argv[fz_optind]))
+						drawrange(ctx, doc, "1-N");
+					if (fz_optind < argc && fz_is_page_range(ctx, argv[fz_optind]))
+						drawrange(ctx, doc, argv[fz_optind++]);
+				}
+				fz_always(ctx)
+				{
+					fz_drop_document(ctx, doc);
+					doc = NULL;
+				}
+				fz_catch(ctx)
+				{
+					if (!ignore_errors)
+						fz_rethrow(ctx);
+
+					fz_warn(ctx, "ignoring error in '%s'", filename);
+				}
+			}
+			finish_bgprint(ctx);
+		}
+		fz_catch(ctx)
+		{
+			fz_drop_document(ctx, doc);
+			fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
+			errored = 1;
+		}
+	}
+	fz_always(ctx)
+	{
+		if (showtime && timing.count > 0)
+		{
+			if (bgprint.active)
+				timing.total = gettime() - timing.total;
+
+			if (files == 1)
+			{
+				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
+					timing.total, timing.layout, timing.count, timing.total / timing.count);
+				if (bgprint.active)
+				{
+					fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
+						timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
+					fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
+						timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
+				}
+				else
+				{
+					fz_info(ctx, "fastest page %d: %dms", timing.minpage, timing.min);
+					fz_info(ctx, "slowest page %d: %dms", timing.maxpage, timing.max);
+				}
+			}
+			else
+			{
+				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
+					timing.total, timing.layout, timing.count, timing.total / timing.count, files);
+				fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
+				fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
+				fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
+				fz_info(ctx, "slowest page %d: %dms (%s)", timing.maxpage, timing.max, timing.maxfilename);
+			}
+		}
+
+#ifndef DISABLE_MUTHREADS
+		// bgprint also uses the workers, hence we MUST shut down bgprint BEFORE the workers themselves:
+		if (bgprint.active)
+		{
+			bgprint.pagenum = -1;
+			mu_trigger_semaphore(&bgprint.start);
+			mu_wait_semaphore(&bgprint.stop);
+			mu_destroy_semaphore(&bgprint.start);
+			mu_destroy_semaphore(&bgprint.stop);
+			mu_destroy_thread(&bgprint.thread);
+			fz_drop_context(bgprint.ctx);
+			bgprint.ctx = NULL;
+			bgprint.active = 0;
+		}
+
+		if (num_workers > 0)
+		{
+			int i;
+			DEBUG_THREADS(fz_info(ctx, "Asking workers to shutdown, then destroy their resources\n"));
+			for (i = 0; i < num_workers; i++)
+			{
+				workers[i].band_start = -1;
+				mu_trigger_semaphore(&workers[i].start);
+				mu_wait_semaphore(&workers[i].stop);
 				mu_destroy_semaphore(&workers[i].start);
 				mu_destroy_semaphore(&workers[i].stop);
 				mu_destroy_thread(&workers[i].thread);
 				fz_drop_context(workers[i].ctx);
 			}
 			fz_free(ctx, workers);
-			return EXIT_FAILURE;
 		}
-	}
 #endif /* DISABLE_MUTHREADS */
 
-	if (layout_css)
-	{
-		fz_buffer *buf = fz_read_file(ctx, layout_css);
-		fz_set_user_css(ctx, fz_string_from_buffer(ctx, buf));
-		fz_drop_buffer(ctx, buf);
-	}
-
-	fz_set_use_document_css(ctx, layout_use_doc_css);
-
-	output_format = suffix_table[0].format;
-	output_cs = suffix_table[0].cs;
-	if (format)
-	{
-		int i;
-
-		for (i = 0; i < (int)nelem(suffix_table); i++)
-		{
-			if (!strcmp(format, suffix_table[i].suffix+1))
-			{
-				output_format = suffix_table[i].format;
-				output_cs = suffix_table[i].cs;
-				break;
-			}
-		}
-		if (i == (int)nelem(suffix_table))
-		{
-			fz_error(ctx, "Unknown output format '%s'", format);
-			return EXIT_FAILURE;
-		}
-	}
-	else if (output)
-	{
-		const char *suffix = output;
-		int i;
-
-		for (i = 0; i < (int)nelem(suffix_table); i++)
-		{
-			char *s = strstr(suffix, suffix_table[i].suffix);
-
-			if (s != NULL)
-			{
-				suffix = s+1;
-				output_format = suffix_table[i].format;
-				output_cs = suffix_table[i].cs;
-				i = 0;
-			}
-		}
-	}
-
-	switch (output_cs)
-	{
-	case CS_GRAY:
-		colorspace = fz_device_gray(ctx);
-		break;
-	case CS_RGB:
-		colorspace = fz_device_rgb(ctx);
-		break;
-	case CS_CMYK:
-		colorspace = fz_device_cmyk(ctx);
-		break;
-	}
-
-	if (!output || *output == 0 || !strcmp(output, "-"))
-		out = fz_stdout(ctx);
-	else
-	{
-		char fbuf[4096];
-		fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
-		out = fz_new_output_with_path(ctx, fbuf, 0);
-	}
-
-	timing.count = 0;
-	timing.total = 0;
-	timing.min = 1 << 30;
-	timing.max = 0;
-	timing.mininterp = 1 << 30;
-	timing.maxinterp = 0;
-	timing.minpage = 0;
-	timing.maxpage = 0;
-	timing.minfilename = "";
-	timing.maxfilename = "";
-	timing.layout = 0;
-	timing.minlayout = 1 << 30;
-	timing.maxlayout = 0;
-	timing.minlayoutfilename = "";
-	timing.maxlayoutfilename = "";
-	if (showtime && bgprint.active)
-		timing.total = gettime();
-
-	fz_try(ctx)
-	{
-		fz_register_document_handlers(ctx);
-
-		while (fz_optind < argc)
-		{
-			int layouttime;
-
-			fz_try(ctx)
-			{
-				filename = argv[fz_optind++];
-				files++;
-
-				doc = fz_open_document(ctx, filename);
-
-				if (fz_needs_password(ctx, doc))
-				{
-					if (!fz_authenticate_password(ctx, doc, password))
-						fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
-				}
-
-				layouttime = gettime();
-				fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
-				(void) fz_count_pages(ctx, doc);   // added to ensure a more proper layouttime figure
-				layouttime = gettime() - layouttime;
-
-				timing.layout += layouttime;
-				if (layouttime < timing.minlayout)
-				{
-					timing.minlayout = layouttime;
-					timing.minlayoutfilename = filename;
-				}
-				if (layouttime > timing.maxlayout)
-				{
-					timing.maxlayout = layouttime;
-					timing.maxlayoutfilename = filename;
-				}
-
-				if (fz_optind == argc || !fz_is_page_range(ctx, argv[fz_optind]))
-					drawrange(ctx, doc, "1-N");
-				if (fz_optind < argc && fz_is_page_range(ctx, argv[fz_optind]))
-					drawrange(ctx, doc, argv[fz_optind++]);
-			}
-			fz_always(ctx)
-			{
-				fz_drop_document(ctx, doc);
-				doc = NULL;
-			}
-			fz_catch(ctx)
-			{
-				if (!ignore_errors)
-					fz_rethrow(ctx);
-
-				fz_warn(ctx, "ignoring error in '%s'", filename);
-			}
-		}
-		finish_bgprint(ctx);
+		fz_flush_output(ctx, out);
+		fz_close_output(ctx, out);
+		fz_drop_output(ctx, out);
+		out = NULL;
 	}
 	fz_catch(ctx)
 	{
-		fz_drop_document(ctx, doc);
-		fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
-		errored = 1;
-	}
-
-	if (showtime && timing.count > 0)
-	{
-		if (bgprint.active)
-			timing.total = gettime() - timing.total;
-
-		if (files == 1)
-		{
-			fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
-				timing.total, timing.layout, timing.count, timing.total / timing.count);
-			if (bgprint.active)
-			{
-				fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-					timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
-				fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-					timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
-			}
-			else
-			{
-				fz_info(ctx, "fastest page %d: %dms", timing.minpage, timing.min);
-				fz_info(ctx, "slowest page %d: %dms", timing.maxpage, timing.max);
-			}
-		}
-		else
-		{
-			fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
-				timing.total, timing.layout, timing.count, timing.total / timing.count, files);
-			fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
-			fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
-			fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
-			fz_info(ctx, "slowest page %d: %dms (%s)", timing.maxpage, timing.max, timing.maxfilename);
+		fz_error(ctx, "%s", fz_caught_message(ctx));
+		if (!errored) {
+			fz_error(ctx, "Rendering failed");
+			errored = 1;
 		}
 	}
-
-#ifndef DISABLE_MUTHREADS
-	// bgprint also uses the workers, hence we MUST shut down bgprint BEFORE the workers themselves:
-	if (bgprint.active)
-	{
-		bgprint.pagenum = -1;
-		mu_trigger_semaphore(&bgprint.start);
-		mu_wait_semaphore(&bgprint.stop);
-		mu_destroy_semaphore(&bgprint.start);
-		mu_destroy_semaphore(&bgprint.stop);
-		mu_destroy_thread(&bgprint.thread);
-		fz_drop_context(bgprint.ctx);
-		bgprint.ctx = NULL;
-		bgprint.active = 0;
-	}
-
-	if (num_workers > 0)
-	{
-		int i;
-		DEBUG_THREADS(fz_info(ctx, "Asking workers to shutdown, then destroy their resources\n"));
-		for (i = 0; i < num_workers; i++)
-		{
-			workers[i].band_start = -1;
-			mu_trigger_semaphore(&workers[i].start);
-			mu_wait_semaphore(&workers[i].stop);
-			mu_destroy_semaphore(&workers[i].start);
-			mu_destroy_semaphore(&workers[i].stop);
-			mu_destroy_thread(&workers[i].thread);
-			fz_drop_context(workers[i].ctx);
-		}
-		fz_free(ctx, workers);
-	}
-#endif /* DISABLE_MUTHREADS */
-
-	fz_flush_output(ctx, out);
-	fz_close_output(ctx, out);
-	fz_drop_output(ctx, out);
-	out = NULL;
 
 	fz_flush_warnings(ctx);
 	mu_drop_context();
