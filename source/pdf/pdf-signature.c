@@ -192,7 +192,11 @@ void pdf_sign_signature(fz_context *ctx, pdf_widget *widget, pdf_pkcs7_signer *s
 		memset(tm, 0, sizeof(*tm));
 #endif
 
-		pdf_dirty_annot(ctx, widget);
+		/* Mark annotation as dirty. Do NOT call pdf_dirty_widget
+		 * as that requests a new appearance stream for the
+		 * widget that breaks stuff. */
+		if (widget->page && widget->page->doc)
+			widget->page->doc->dirty = 1;
 
 		/* Ensure that all fields that will be locked by this signature
 		 * are marked as ReadOnly. */
