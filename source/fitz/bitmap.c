@@ -342,7 +342,7 @@ pkm_write_header(fz_context *ctx, fz_band_writer *writer, fz_colorspace *cs)
 }
 
 void
-fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, fz_bitmap *bitmap)
+fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap)
 {
 	fz_band_writer *writer;
 
@@ -362,7 +362,7 @@ fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, fz_bitmap *bitmap)
 }
 
 void
-fz_write_bitmap_as_pkm(fz_context *ctx, fz_output *out, fz_bitmap *bitmap)
+fz_write_bitmap_as_pkm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap)
 {
 	fz_band_writer *writer;
 
@@ -459,7 +459,7 @@ fz_band_writer *fz_new_pkm_band_writer(fz_context *ctx, fz_output *out)
 }
 
 void
-fz_save_bitmap_as_pbm(fz_context *ctx, fz_bitmap *bitmap, const char *filename)
+fz_save_bitmap_as_pbm(fz_context *ctx, const fz_bitmap *bitmap, const char *filename)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_try(ctx)
@@ -474,7 +474,7 @@ fz_save_bitmap_as_pbm(fz_context *ctx, fz_bitmap *bitmap, const char *filename)
 }
 
 void
-fz_save_bitmap_as_pkm(fz_context *ctx, fz_bitmap *bitmap, const char *filename)
+fz_save_bitmap_as_pkm(fz_context *ctx, const fz_bitmap *bitmap, const char *filename)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_try(ctx)
@@ -489,7 +489,7 @@ fz_save_bitmap_as_pkm(fz_context *ctx, fz_bitmap *bitmap, const char *filename)
 }
 
 void
-fz_save_pixmap_as_pbm(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
+fz_save_pixmap_as_pbm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
 	fz_bitmap *bitmap = fz_new_bitmap_from_pixmap(ctx, pixmap, NULL);
 	fz_try(ctx)
@@ -501,7 +501,7 @@ fz_save_pixmap_as_pbm(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
 }
 
 void
-fz_save_pixmap_as_pkm(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
+fz_save_pixmap_as_pkm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
 	fz_bitmap *bitmap = fz_new_bitmap_from_pixmap(ctx, pixmap, NULL);
 	fz_try(ctx)

@@ -44,7 +44,7 @@ typedef struct fz_pixmap_image fz_pixmap_image;
 
 	Returns a non NULL pixmap pointer. May throw exceptions.
 */
-fz_pixmap *fz_get_pixmap_from_image(fz_context *ctx, fz_image *image, const fz_irect *subarea, fz_matrix *ctm, int *w, int *h);
+fz_pixmap *fz_get_pixmap_from_image(fz_context *ctx, const fz_image *image, const fz_irect *subarea, fz_matrix *ctm, int *w, int *h);
 
 /**
 	Increment the (normal) reference count for an image. Returns the
@@ -70,7 +70,7 @@ void fz_drop_image(fz_context *ctx, fz_image *image);
 
 	Never throws exceptions.
 */
-fz_image *fz_keep_image_store_key(fz_context *ctx, fz_image *image);
+fz_image *fz_keep_image_store_key(fz_context *ctx, const fz_image *image);
 
 /**
 	Decrement the store key reference count for an image. When the
@@ -79,7 +79,7 @@ fz_image *fz_keep_image_store_key(fz_context *ctx, fz_image *image);
 
 	Never throws exceptions.
 */
-void fz_drop_image_store_key(fz_context *ctx, fz_image *image);
+void fz_drop_image_store_key(fz_context *ctx, const fz_image *image);
 
 /**
 	Function type to destroy an images data
@@ -110,7 +110,7 @@ typedef void (fz_drop_image_fn)(fz_context *ctx, fz_image *image);
 	requirements of the request. The caller owns the returned
 	reference.
 */
-typedef fz_pixmap *(fz_image_get_pixmap_fn)(fz_context *ctx, fz_image *im, fz_irect *subarea, int w, int h, int *l2factor);
+typedef fz_pixmap *(fz_image_get_pixmap_fn)(fz_context *ctx, const fz_image *im, fz_irect *subarea, int w, int h, int *l2factor);
 
 /**
 	Function type to get the given storage
@@ -260,10 +260,12 @@ void fz_drop_image_imp(fz_context *ctx, fz_storable *image);
 void fz_drop_image_base(fz_context *ctx, fz_image *image);
 
 /**
-	Decode a subarea of a compressed image at a given l2factor
-	from the given stream.
+	Decode a subarea of a compressed image. l2factor is the amount
+	of subsampling inbuilt to the stream (i.e. performed by the
+	decoder). l2extra is the extra amount of subsampling that should
+	be performed by this routine.
 */
-fz_pixmap *fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image *image, fz_irect *subarea, int indexed, int l2factor);
+fz_pixmap *fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed_image *image, fz_irect *subarea, int indexed, int l2factor, int l2extra);
 
 /**
 	Convert pixmap from indexed to base colorspace.

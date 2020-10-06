@@ -158,7 +158,7 @@ fz_write_bitmap_as_pwg(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap,
 	before being filled in, for future expansion).
 */
 void
-fz_save_pixmap_as_pwg(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append, const fz_pwg_options *pwg)
+fz_save_pixmap_as_pwg(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append, const fz_pwg_options *pwg)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, append);
 	fz_try(ctx)
@@ -185,7 +185,7 @@ fz_save_pixmap_as_pwg(fz_context *ctx, fz_pixmap *pixmap, char *filename, int ap
 	before being filled in, for future expansion).
 */
 void
-fz_save_bitmap_as_pwg(fz_context *ctx, fz_bitmap *bitmap, char *filename, int append, const fz_pwg_options *pwg)
+fz_save_bitmap_as_pwg(fz_context *ctx, const fz_bitmap *bitmap, char *filename, int append, const fz_pwg_options *pwg)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, append);
 	fz_try(ctx)

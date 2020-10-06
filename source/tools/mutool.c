@@ -29,6 +29,9 @@ int pdfsign_main(int argc, const char *argv[]);
 
 int cmapdump_main(int argc, const char *argv[]);
 
+int tesseract_main(int argc, const char** argv);
+int curl_main(int argc, const char* argv[]);
+
 static struct {
 	int (*func)(int argc, const char *argv[]);
 	const char *name;
@@ -63,6 +66,8 @@ static struct {
 	{ cmapdump_main, "cmapdump", "dump CMap resource as C source file" },
 #endif
 #endif
+	{ tesseract_main, "tesseract", "OCR given image or PDF" },
+	{ curl_main, "curl", "access/fetch a given URI" },
 };
 
 static int

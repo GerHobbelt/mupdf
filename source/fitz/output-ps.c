@@ -179,7 +179,7 @@ void fz_write_pixmap_as_ps(fz_context *ctx, fz_output *out, const fz_pixmap *pix
 	fz_write_ps_file_trailer(ctx, out, 1);
 }
 
-void fz_save_pixmap_as_ps(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append)
+void fz_save_pixmap_as_ps(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, append);
 	fz_try(ctx)

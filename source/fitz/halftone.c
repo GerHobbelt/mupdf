@@ -497,7 +497,7 @@ static void do_threshold_4(const unsigned char * FZ_RESTRICT ht_line, const unsi
 }
 #endif
 
-fz_bitmap *fz_new_bitmap_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_halftone *ht)
+fz_bitmap *fz_new_bitmap_from_pixmap(fz_context *ctx, const fz_pixmap *pix, fz_halftone *ht)
 {
 	return fz_new_bitmap_from_pixmap_band(ctx, pix, ht, 0);
 }
@@ -518,7 +518,7 @@ static int gcd(int u, int v)
 	while (1);
 }
 
-fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, fz_pixmap *pix, fz_halftone *ht, int band_start)
+fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, const fz_pixmap *pix, fz_halftone *ht, int band_start)
 {
 	fz_bitmap *out = NULL;
 	unsigned char *ht_line = NULL;

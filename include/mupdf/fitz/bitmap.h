@@ -58,7 +58,7 @@ typedef struct fz_halftone fz_halftone;
 	Returns the resultant bitmap. Throws exceptions in the case of
 	failure to allocate.
 */
-fz_bitmap *fz_new_bitmap_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_halftone *ht);
+fz_bitmap *fz_new_bitmap_from_pixmap(fz_context *ctx, const fz_pixmap *pix, fz_halftone *ht);
 
 /**
 	Make a bitmap from a pixmap and a
@@ -76,7 +76,7 @@ fz_bitmap *fz_new_bitmap_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_halfton
 	Returns the resultant bitmap. Throws exceptions in the case of
 	failure to allocate.
 */
-fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, fz_pixmap *pix, fz_halftone *ht, int band_start);
+fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, const fz_pixmap *pix, fz_halftone *ht, int band_start);
 
 /**
 	Create a new bitmap.

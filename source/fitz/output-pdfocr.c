@@ -643,7 +643,7 @@ fz_band_writer *fz_new_pdfocr_band_writer(fz_context *ctx, fz_output *out, const
 }
 
 void
-fz_save_pixmap_as_pdfocr(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append, const fz_pdfocr_options *pdfocr)
+fz_save_pixmap_as_pdfocr(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append, const fz_pdfocr_options *pdfocr)
 {
 #ifdef OCR_DISABLED
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");

@@ -3,7 +3,7 @@
 #include <string.h>
 
 void
-fz_save_pixmap_as_psd(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
+fz_save_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_band_writer *writer = NULL;

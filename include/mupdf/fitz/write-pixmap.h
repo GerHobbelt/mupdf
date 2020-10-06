@@ -183,12 +183,12 @@ void fz_write_pixmap_as_pdfocr(fz_context *ctx, fz_output *out, const fz_pixmap 
 /**
 	Save a (Greyscale or RGB) pixmap as pdfocr.
 */
-void fz_save_pixmap_as_pdfocr(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append, const fz_pdfocr_options *options);
+void fz_save_pixmap_as_pdfocr(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append, const fz_pdfocr_options *options);
 
 /**
 	Save a (Greyscale or RGB) pixmap as a png.
 */
-void fz_save_pixmap_as_png(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Write a (Greyscale or RGB) pixmap as a png.
@@ -202,28 +202,28 @@ void fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, const fz_pixmap *pi
 fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out);
 
 /**
-	Reencode a given image as a PNG into a buffer.
+	Re-encode a given image as a PNG into a buffer.
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *image, fz_color_params color_params);
 
 /**
-	Reencode a given pixmap as a PNG into a buffer.
+	Re-encode a given pixmap as a PNG into a buffer.
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
 
 /**
 	Save a pixmap as a pnm (greyscale or rgb, no alpha).
 */
-void fz_save_pixmap_as_pnm(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Write a pixmap as a pnm (greyscale or rgb, no alpha).
 */
-void fz_write_pixmap_as_pnm(fz_context *ctx, fz_output *out, fz_pixmap *pixmap);
+void fz_write_pixmap_as_pnm(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
 	Create a band writer targetting pnm (greyscale or rgb, no
@@ -235,13 +235,13 @@ fz_band_writer *fz_new_pnm_band_writer(fz_context *ctx, fz_output *out);
 	Save a pixmap as a pnm (greyscale, rgb or cmyk, with or without
 	alpha).
 */
-void fz_save_pixmap_as_pam(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Write a pixmap as a pnm (greyscale, rgb or cmyk, with or without
 	alpha).
 */
-void fz_write_pixmap_as_pam(fz_context *ctx, fz_output *out, fz_pixmap *pixmap);
+void fz_write_pixmap_as_pam(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
 	Create a band writer targetting pnm (greyscale, rgb or cmyk,
@@ -252,12 +252,12 @@ fz_band_writer *fz_new_pam_band_writer(fz_context *ctx, fz_output *out);
 /**
 	Save a bitmap as a pbm.
 */
-void fz_save_bitmap_as_pbm(fz_context *ctx, fz_bitmap *bitmap, const char *filename);
+void fz_save_bitmap_as_pbm(fz_context *ctx, const fz_bitmap *bitmap, const char *filename);
 
 /**
 	Write a bitmap as a pbm.
 */
-void fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, fz_bitmap *bitmap);
+void fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap);
 
 /**
 	Create a new band writer, targetting pbm.
@@ -267,17 +267,17 @@ fz_band_writer *fz_new_pbm_band_writer(fz_context *ctx, fz_output *out);
 /**
 	Save a pixmap as a pbm. (Performing halftoning).
 */
-void fz_save_pixmap_as_pbm(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_pbm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Save a CMYK bitmap as a pkm.
 */
-void fz_save_bitmap_as_pkm(fz_context *ctx, fz_bitmap *bitmap, const char *filename);
+void fz_save_bitmap_as_pkm(fz_context *ctx, const fz_bitmap *bitmap, const char *filename);
 
 /**
 	Write a CMYK bitmap as a pkm.
 */
-void fz_write_bitmap_as_pkm(fz_context *ctx, fz_output *out, fz_bitmap *bitmap);
+void fz_write_bitmap_as_pkm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap);
 
 /**
 	Create a new pkm band writer for CMYK pixmaps.
@@ -287,7 +287,7 @@ fz_band_writer *fz_new_pkm_band_writer(fz_context *ctx, fz_output *out);
 /**
 	Save a CMYK pixmap as a pkm. (Performing halftoning).
 */
-void fz_save_pixmap_as_pkm(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_pkm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Write a (gray, rgb, or cmyk, no alpha) pixmap out as postscript.
@@ -297,7 +297,7 @@ void fz_write_pixmap_as_ps(fz_context *ctx, fz_output *out, const fz_pixmap *pix
 /**
 	Save a (gray, rgb, or cmyk, no alpha) pixmap out as postscript.
 */
-void fz_save_pixmap_as_ps(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append);
+void fz_save_pixmap_as_ps(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append);
 
 /**
 	Create a postscript band writer for gray, rgb, or cmyk, no
@@ -318,7 +318,7 @@ void fz_write_ps_file_trailer(fz_context *ctx, fz_output *out, int pages);
 /**
 	Save a pixmap as a PSD file.
 */
-void fz_save_pixmap_as_psd(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Write a pixmap as a PSD file.
@@ -375,12 +375,12 @@ typedef struct
 /**
 	Save a pixmap as a PWG.
 */
-void fz_save_pixmap_as_pwg(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append, const fz_pwg_options *pwg);
+void fz_save_pixmap_as_pwg(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append, const fz_pwg_options *pwg);
 
 /**
 	Save a bitmap as a PWG.
 */
-void fz_save_bitmap_as_pwg(fz_context *ctx, fz_bitmap *bitmap, char *filename, int append, const fz_pwg_options *pwg);
+void fz_save_bitmap_as_pwg(fz_context *ctx, const fz_bitmap *bitmap, char *filename, int append, const fz_pwg_options *pwg);
 
 /**
 	Write a pixmap as a PWG.

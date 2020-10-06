@@ -29,7 +29,7 @@ static void putchunk(fz_context *ctx, fz_output *out, char *tag, unsigned char *
 }
 
 void
-fz_save_pixmap_as_png(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
+fz_save_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_band_writer *writer = NULL;
@@ -366,8 +366,6 @@ png_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, i
 
 	if (pix->w == 0 || pix->h == 0)
 	{
-		if (drop)
-			fz_drop_pixmap(ctx, pix);
 		return NULL;
 	}
 
@@ -399,14 +397,14 @@ png_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, i
 }
 
 fz_buffer *
-fz_new_buffer_from_image_as_png(fz_context *ctx, fz_image *image, fz_color_params color_params)
+fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *image, fz_color_params color_params)
 {
 	fz_pixmap *pix = fz_get_pixmap_from_image(ctx, image, NULL, NULL, NULL, NULL);
 	return png_from_pixmap(ctx, pix, color_params, 1);
 }
 
 fz_buffer *
-fz_new_buffer_from_pixmap_as_png(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params)
+fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params)
 {
-	return png_from_pixmap(ctx, pix, color_params, 0);
+	return png_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0);
 }
