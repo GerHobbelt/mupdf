@@ -426,7 +426,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 
 			case 'C': /* unicode char */
 				c = va_arg(args, int);
-				if (c < 128)
+				if (c >= 0 && c < 128)
 					fmtputc(&out, c);
 				else {
 					char buf[10];

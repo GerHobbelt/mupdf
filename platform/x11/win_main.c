@@ -506,11 +506,23 @@ int winchoiceinput(pdfapp_t *app, int nopts, const char *opts[], int *nvals, con
 	return pd_okay;
 }
 
+static void dloginfoline(HWND hwnd, fz_context* ctx, fz_document* doc, int id, const char *key)
+{
+	char buf[256];
+	wchar_t bufx[256];
+
+	if (fz_lookup_metadata(ctx, doc, key, buf, sizeof buf) < 0)
+	{
+		buf[0] = 0;
+	}
+	MultiByteToWideChar(CP_UTF8, 0, buf, -1, bufx, nelem(bufx));
+	SetDlgItemTextW(hwnd, id, bufx);
+}
+
 static INT_PTR CALLBACK
 dloginfoproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	char buf[256];
-	wchar_t bufx[256];
 	fz_context *ctx = gapp.ctx;
 	fz_document *doc = gapp.doc;
 
@@ -556,12 +568,7 @@ dloginfoproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			strcpy(buf, "none");
 		SetDlgItemTextA(hwnd, 0x13, buf);
 
-#define SETUTF8(ID, STRING) \
-		if (fz_lookup_metadata(ctx, doc, "info:" STRING, buf, sizeof buf) >= 0) \
-		{ \
-			MultiByteToWideChar(CP_UTF8, 0, buf, -1, bufx, nelem(bufx)); \
-			SetDlgItemTextW(hwnd, ID, bufx); \
-		}
+#define SETUTF8(ID, STRING)			dloginfoline(hwnd, ctx, doc, ID, "info:" STRING)
 
 		SETUTF8(0x20, "Title");
 		SETUTF8(0x21, "Author");

@@ -624,6 +624,7 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 	int config;
 	int n, j;
 	pdf_layer_config info;
+	char msgbuf[2048];
 
 	if (!pdoc)
 	{
@@ -638,9 +639,9 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 		fz_write_printf(ctx, out, "\nPDF Layer configs (%d):\n", num_configs);
 		for (config = 0; config < num_configs; config++)
 		{
-			fz_write_printf(ctx, out, "%-3d:", config);
+			fz_snprintf(msgbuf, sizeof(msgbuf), "%3d:", config);
 			pdf_layer_config_info(ctx, pdoc, config, &info);
-			fz_write_printf(ctx, out, "  Name=\"%s\" Creator=\"%s\"\n", info.name ? info.name : "", info.creator ? info.creator : "");
+			fz_write_printf(ctx, out, "%s Name=\"%s\" Creator=\"%s\"\n", msgbuf, info.name ? info.name : "", info.creator ? info.creator : "");
 		}
 	}
 
@@ -651,10 +652,9 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 		for (j = 0; j < n; j++)
 		{
 			pdf_layer_config_ui ui;
-			char msgbuf[2048];
 
 			pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
-			fz_snprintf(msgbuf, sizeof(msgbuf), "%-3d: ", j);
+			fz_snprintf(msgbuf, sizeof(msgbuf), "%3d: ", j);
 			while (ui.depth > 0)
 			{
 				ui.depth--;
@@ -682,7 +682,7 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 
 			if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
 			{
-				fz_strlcat(msgbuf, " <locked>", sizeof(msgbuf));
+				fz_strlcat(msgbuf, " <locked> ", sizeof(msgbuf));
 			}
 			if (ui.text)
 			{

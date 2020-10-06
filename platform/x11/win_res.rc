@@ -1,7 +1,21 @@
-IDI_ICONAPP ICON "mupdf.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICONAPP             ICON                    "mupdf.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
 
 IDD_DLOGPASS DIALOG 50, 50, 204, 60
-//STYLE DS_MODALFRAME | WS_POPUP
+//STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
 STYLE 128 | 0x80000000
 CAPTION " MuPDF: Password "
 FONT 8, "MS Shell Dlg"
@@ -13,22 +27,23 @@ BEGIN
 	LTEXT "Password:",		5, 17, 22, 40, 10, 0x00000
 END
 
-IDD_DLOGINFO DIALOG 50, 50, 300, 145
+IDD_DLOGINFO DIALOGEX 50, 50, 600, 145
+//STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
 STYLE 128 | 0x80000000
 CAPTION " Document Properties "
-FONT 8, "MS Shell Dlg"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-	DEFPUSHBUTTON "Okay",	1, 300-10-50, 145-7-14, 50, 14, 0x50010001
+	DEFPUSHBUTTON "Okay",	1, 600-10-50, 145-7-14, 50, 14, 0x50010001
 
 	LTEXT "File:",		-1, 10, 10, 50, 10, 0
 	LTEXT "Format:",	-1, 10, 20, 50, 10, 0
 	LTEXT "Encryption:",	-1, 10, 30, 50, 10, 0
 	LTEXT "Permissions:",	-1, 10, 40, 50, 10, 0
 
-	LTEXT "<file",		0x10, 60, 10, 230, 10, 0
-	LTEXT "<version",	0x11, 60, 20, 230, 10, 0
-	LTEXT "<encryption",	0x12, 60, 30, 230, 10, 0
-	LTEXT "<permissions",	0x13, 60, 40, 230, 10, 0
+	LTEXT "<file",		0x10, 60, 10, 600-10-14, 10, 0
+	LTEXT "<version",	0x11, 60, 20, 600-10-14, 10, 0
+	LTEXT "<encryption",	0x12, 60, 30, 600-10-14, 10, 0
+	LTEXT "<permissions",	0x13, 60, 40, 600-10-14, 10, 0
 
 	LTEXT "Title:",		-1, 10, 55, 50, 10, 0
 	LTEXT "Author:",	-1, 10, 65, 50, 10, 0
@@ -39,17 +54,18 @@ BEGIN
 	LTEXT "Created:",	-1, 10, 115, 50, 10, 0
 	LTEXT "Modified:",	-1, 10, 125, 50, 10, 0
 
-	LTEXT "",		0x20, 60, 55, 230, 10, 0
-	LTEXT "",		0x21, 60, 65, 230, 10, 0
-	LTEXT "",		0x22, 60, 75, 230, 10, 0
-	LTEXT "",		0x23, 60, 85, 230, 10, 0
-	LTEXT "",		0x24, 60, 95, 230, 10, 0
-	LTEXT "",		0x25, 60, 105, 230, 10, 0
+	LTEXT "",		0x20, 60, 55, 600-10-14, 10, 0
+	LTEXT "",		0x21, 60, 65, 600-10-14, 10, 0
+	LTEXT "",		0x22, 60, 75, 600-10-14, 10, 0
+	LTEXT "",		0x23, 60, 85, 600-10-14, 10, 0
+	LTEXT "",		0x24, 60, 95, 600-10-14, 10, 0
+	LTEXT "",		0x25, 60, 105, 600-10-14, 10, 0
 	LTEXT "",		0x26, 60, 115, 100, 10, 0
 	LTEXT "",		0x27, 60, 125, 100, 10, 0
 END
 
 IDD_DLOGTEXT DIALOG 50, 50, 204, 85
+//STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
 STYLE 128 | 0x80000000
 CAPTION " MuPDF: fill out form"
 FONT 8, "MS Shell Dlg"
@@ -60,17 +76,19 @@ BEGIN
 	LTEXT			"** Invalid value **",4,11,65,62,8
 END
 
-IDD_DLOGLIST DIALOG 50, 50, 204, 85
+IDD_DLOGLIST DIALOGEX 50, 50, 295, 117
+//STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
 STYLE 128 | 0x80000000
 CAPTION " MuPDF: select an item"
-FONT 8, "MS Shell Dlg"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-	LISTBOX			3,8,7,183,50,0x210102
-	DEFPUSHBUTTON	"Okay",1,89,64,50,14
-	PUSHBUTTON		"Cancel",2,147,64,50,14
+    LISTBOX         3,8,7,280,87,0x210102
+    DEFPUSHBUTTON   "Okay",1,179,99,50,14
+    PUSHBUTTON      "Cancel",2,237,99,50,14
 END
 
 IDD_DLOGABOUT DIALOG 50, 50, 200, 360
+//STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
 STYLE 128 | 0x80000000
 CAPTION " About MuPDF "
 FONT 8, "MS Shell Dlg"
@@ -79,3 +97,4 @@ BEGIN
 	LTEXT "<copyright>",	 2, 10, 10, 180, 20, 0
 	LTEXT "<usage>",	 3, 10, 35, 180, 300, 0
 END
+

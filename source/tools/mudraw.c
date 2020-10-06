@@ -1730,6 +1730,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	int config;
 	int n, j;
 	pdf_layer_config info;
+	char msgbuf[2048];
 
 	if (!pdoc)
 	{
@@ -1749,9 +1750,9 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 			fz_info(ctx, "\nPDF Layer configs (%d):", num_configs);
 			for (config = 0; config < num_configs; config++)
 			{
-				fz_info(ctx, "%-3d:", config);
+				fz_snprintf(msgbuf, sizeof(msgbuf), "%3d:", config);
 				pdf_layer_config_info(ctx, pdoc, config, &info);
-				fz_info(ctx, "  Name=\"%s\" Creator=\"%s\"", info.name ? info.name : "", info.creator ? info.creator : "");
+				fz_info(ctx, "%s Name=\"%s\" Creator=\"%s\"", msgbuf, info.name ? info.name : "", info.creator ? info.creator : "");
 			}
 		}
 		return;
@@ -1790,7 +1791,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	}
 
 	/* Now list the final state of the config */
-	fz_info(ctx, "Layer Config %d:", config);
+	fz_info(ctx, "Layer Config %d (final):", config);
 	pdf_layer_config_info(ctx, pdoc, config, &info);
 	fz_info(ctx, "  Name=\"%s\" Creator=\"%s\"", info.name ? info.name : "", info.creator ? info.creator : "");
 
@@ -1801,10 +1802,9 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 		for (j = 0; j < n; j++)
 		{
 			pdf_layer_config_ui ui;
-			char msgbuf[2048];
 
 			pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
-			fz_snprintf(msgbuf, sizeof(msgbuf), "%-3d: ", j);
+			fz_snprintf(msgbuf, sizeof(msgbuf), "%3d: ", j);
 			while (ui.depth > 0)
 			{
 				ui.depth--;
@@ -1832,7 +1832,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 
 			if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
 			{
-				fz_strlcat(msgbuf, " <locked>", sizeof(msgbuf));
+				fz_strlcat(msgbuf, " <locked> ", sizeof(msgbuf));
 			}
 			if (ui.text)
 			{
@@ -2553,8 +2553,6 @@ int mudraw_main(int argc, const char **argv)
 				}
 			}
 		}
-
-		filename = argv[fz_optind];
 
 		timing.count = 0;
 		timing.total = 0;
