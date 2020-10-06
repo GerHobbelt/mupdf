@@ -9,7 +9,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#if 0
+int curl_main(int argc, const char* argv[]);
 
 #ifdef _MSC_VER
 #define main main_utf8
@@ -43,11 +43,8 @@ int main(int argc, const char **argv)
 		return 1;
 	}
 
-	/* Check argv[0] */
-
-	/* Print usage */
-
-	fz_info(ctx, "usage: mutool <command> [options]");
+	//fz_info(ctx, "usage: curl [options]");
+	int rv = curl_main(argc, argv);
 
 #if 0   // test to see the reverse ordered number gen in this call work as expected.
 	char p[256];
@@ -56,7 +53,7 @@ int main(int argc, const char **argv)
 
 	fz_drop_context(ctx);
 
-	return EXIT_FAILURE;
+	return rv;
 }
 
 #ifdef _MSC_VER
@@ -69,6 +66,4 @@ int wmain(int argc, const wchar_t *wargv[])
 	fz_free_argv(argc, argv);
 	return ret;
 }
-#endif
-
 #endif

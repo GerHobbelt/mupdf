@@ -1364,6 +1364,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	}
 
 	fz_free_argv(argc, argv);
+	LocalFree(wargv);
 
 	do_close(&gapp);
 

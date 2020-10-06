@@ -2370,6 +2370,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return EXIT_FAILURE;
 	int ret = main_utf8(argc, argv);
 	fz_free_argv(argc, argv);
+	LocalFree(wargv);
 	return ret;
 }
 #endif
