@@ -1744,15 +1744,15 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	{
 		int num_configs = pdf_count_layer_configs(ctx, pdoc);
 
-		fz_info(ctx, "Layer configs:\n");
-		for (config = 0; config < num_configs; config++)
+		if (num_configs > 0)
 		{
-			fz_info(ctx, " %s%d:", config < 10 ? " " : "", config);
-			pdf_layer_config_info(ctx, pdoc, config, &info);
-			if (info.name)
-				fz_info(ctx, "  Name=\"%s\"", info.name);
-			if (info.creator)
-				fz_info(ctx, "  Creator=\"%s\"", info.creator);
+			fz_info(ctx, "\nPDF Layer configs (%d):", num_configs);
+			for (config = 0; config < num_configs; config++)
+			{
+				fz_info(ctx, "%-3d:", config);
+				pdf_layer_config_info(ctx, pdoc, config, &info);
+				fz_info(ctx, "  Name=\"%s\" Creator=\"%s\"", info.name ? info.name : "", info.creator ? info.creator : "");
+			}
 		}
 		return;
 	}
@@ -1792,43 +1792,55 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	/* Now list the final state of the config */
 	fz_info(ctx, "Layer Config %d:", config);
 	pdf_layer_config_info(ctx, pdoc, config, &info);
-	if (info.name)
-		fz_info(ctx, "  Name=\"%s\"", info.name);
-	if (info.creator)
-		fz_info(ctx, "  Creator=\"%s\"", info.creator);
-	n = pdf_count_layer_config_ui(ctx, pdoc);
-	for (j = 0; j < n; j++)
-	{
-		pdf_layer_config_ui ui;
-		char msgbuf[2048];
+	fz_info(ctx, "  Name=\"%s\" Creator=\"%s\"", info.name ? info.name : "", info.creator ? info.creator : "");
 
-		pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
-		fz_snprintf(msgbuf, sizeof(msgbuf), "%s%d: ", j < 10 ? " " : "", j);
-		while (ui.depth > 0)
+	n = pdf_count_layer_config_ui(ctx, pdoc);
+	if (n > 0)
+	{
+		fz_info(ctx, "PDF UI Layer configs (%d):", n);
+		for (j = 0; j < n; j++)
 		{
-			ui.depth--;
-			fz_strlcat(msgbuf, "  ", sizeof(msgbuf));
-		}
-		if (ui.type == PDF_LAYER_UI_CHECKBOX)
-		{
+			pdf_layer_config_ui ui;
+			char msgbuf[2048];
+
+			pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
+			fz_snprintf(msgbuf, sizeof(msgbuf), "%-3d: ", j);
+			while (ui.depth > 0)
+			{
+				ui.depth--;
+				fz_strlcat(msgbuf, "  ", sizeof(msgbuf));
+			}
+
 			size_t len = strlen(msgbuf);
-			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " [%c] ", ui.selected ? 'x' : ' ');
+			switch (ui.type)
+			{
+			case PDF_LAYER_UI_CHECKBOX:
+				fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " [%c] ", ui.selected ? 'x' : ' ');
+				break;
+
+			case PDF_LAYER_UI_RADIOBOX:
+				fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " (%c) ", ui.selected ? 'x' : ' ');
+				break;
+
+			case PDF_LAYER_UI_LABEL:
+				break;
+
+			default:
+				fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " {UNKNOWN UI.TYPE:%d} ", (int)ui.type);
+				break;
+			}
+
+			if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
+			{
+				fz_strlcat(msgbuf, " <locked>", sizeof(msgbuf));
+			}
+			if (ui.text)
+			{
+				fz_strlcat(msgbuf, ui.text, sizeof(msgbuf));
+			}
+
+			fz_info(ctx, "%s", msgbuf);
 		}
-		else if (ui.type == PDF_LAYER_UI_RADIOBOX)
-		{
-			size_t len = strlen(msgbuf);
-			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " (%c) ", ui.selected ? 'x' : ' ');
-		}
-		if (ui.text)
-		{
-			size_t len = strlen(msgbuf);
-			fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, "%s", ui.text);
-		}
-		if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
-		{
-			fz_strlcat(msgbuf, " <locked>", sizeof(msgbuf));
-		}
-		fz_info(ctx, msgbuf);
 	}
 #endif
 }

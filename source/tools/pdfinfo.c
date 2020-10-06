@@ -18,7 +18,8 @@ enum
 	SHADINGS = 0x08,
 	PATTERNS = 0x10,
 	XOBJS = 0x20,
-	ALL = DIMENSIONS | FONTS | IMAGES | SHADINGS | PATTERNS | XOBJS
+	LAYERS = 0x40,
+	ALL = DIMENSIONS | FONTS | IMAGES | SHADINGS | PATTERNS | XOBJS | LAYERS
 };
 
 struct info
@@ -616,6 +617,84 @@ gatherpatterns(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_ob
 }
 
 static void
+gatherlayersinfo(fz_context* ctx, globals* glo)
+{
+	pdf_document* pdoc = glo->doc;
+	fz_output* out = glo->out;
+	int config;
+	int n, j;
+	pdf_layer_config info;
+
+	if (!pdoc)
+	{
+		fz_warn(ctx, "Only PDF files have layers");
+		return;
+	}
+
+	int num_configs = pdf_count_layer_configs(ctx, pdoc);
+
+	if (num_configs > 0)
+	{
+		fz_write_printf(ctx, out, "\nPDF Layer configs (%d):\n", num_configs);
+		for (config = 0; config < num_configs; config++)
+		{
+			fz_write_printf(ctx, out, "%-3d:", config);
+			pdf_layer_config_info(ctx, pdoc, config, &info);
+			fz_write_printf(ctx, out, "  Name=\"%s\" Creator=\"%s\"\n", info.name ? info.name : "", info.creator ? info.creator : "");
+		}
+	}
+
+	n = pdf_count_layer_config_ui(ctx, pdoc);
+	if (n > 0)
+	{
+		fz_write_printf(ctx, out, "PDF UI Layer configs (%d):\n", n);
+		for (j = 0; j < n; j++)
+		{
+			pdf_layer_config_ui ui;
+			char msgbuf[2048];
+
+			pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
+			fz_snprintf(msgbuf, sizeof(msgbuf), "%-3d: ", j);
+			while (ui.depth > 0)
+			{
+				ui.depth--;
+				fz_strlcat(msgbuf, "  ", sizeof(msgbuf));
+			}
+
+			size_t len = strlen(msgbuf);
+			switch (ui.type)
+			{
+			case PDF_LAYER_UI_CHECKBOX:
+				fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " [%c] ", ui.selected ? 'x' : ' ');
+				break;
+
+			case PDF_LAYER_UI_RADIOBOX:
+				fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " (%c) ", ui.selected ? 'x' : ' ');
+				break;
+
+			case PDF_LAYER_UI_LABEL:
+				break;
+
+			default:
+				fz_snprintf(msgbuf + len, sizeof(msgbuf) - len, " {UNKNOWN UI.TYPE:%d} ", (int)ui.type);
+				break;
+			}
+
+			if (ui.type != PDF_LAYER_UI_LABEL && ui.locked)
+			{
+				fz_strlcat(msgbuf, " <locked>", sizeof(msgbuf));
+			}
+			if (ui.text)
+			{
+				fz_strlcat(msgbuf, ui.text, sizeof(msgbuf));
+			}
+
+			fz_write_printf(ctx, out, "%s\n", msgbuf);
+		}
+	}
+}
+
+static void
 gatherresourceinfo(fz_context *ctx, globals *glo, int page, pdf_obj *rsrc, int show)
 {
 	pdf_obj *pageref;
@@ -693,6 +772,8 @@ gatherresourceinfo(fz_context *ctx, globals *glo, int page, pdf_obj *rsrc, int s
 					gatherresourceinfo(ctx, glo, page, subrsrc, show);
 			}
 		}
+
+		gatherlayersinfo(ctx, glo);
 	}
 	fz_always(ctx)
 		pdf_unmark_obj(ctx, rsrc);
@@ -1059,7 +1140,7 @@ int pdfinfo_main(int argc, const char **argv)
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "FISPXMo:p:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "FISPXyMo:p:h")) != -1)
 	{
 		switch (c)
 		{
@@ -1068,6 +1149,7 @@ int pdfinfo_main(int argc, const char **argv)
 		case 'S': if (show == ALL) show = SHADINGS; else show |= SHADINGS; break;
 		case 'P': if (show == ALL) show = PATTERNS; else show |= PATTERNS; break;
 		case 'X': if (show == ALL) show = XOBJS; else show |= XOBJS; break;
+		case 'y': if (show == ALL) show = LAYERS; else show |= LAYERS; break;
 		case 'M': if (show == ALL) show = DIMENSIONS; else show |= DIMENSIONS; break;
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
