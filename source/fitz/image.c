@@ -360,6 +360,7 @@ subarea_next(fz_context *ctx, fz_stream *stm, size_t len)
 		return EOF;
 	stm->rp = state->src->rp;
 	stm->wp = stm->rp + n;
+	stm->pos += n;
 	state->src->rp = stm->wp;
 	state->nread -= n;
 	if (state->nread == 0)
@@ -444,6 +445,7 @@ static int
 subsample_next(fz_context *ctx, fz_stream *stm, size_t len)
 {
 	l2sub_state *state = (l2sub_state *)stm->state;
+	size_t fill;
 
 	stm->rp = stm->wp = &state->data[0];
 	if (state->h == 0)
@@ -478,8 +480,10 @@ subsample_next(fz_context *ctx, fz_stream *stm, size_t len)
 	state->f = 0;
 
 	/* Update data pointers. */
+	fill = ((state->w + (1<<state->l2) - 1)>>state->l2) * state->n;
+	stm->pos += fill;
 	stm->rp = &state->data[0];
-	stm->wp = &state->data[((state->w + (1<<state->l2) - 1)>>state->l2) * state->n];
+	stm->wp = &state->data[fill];
 
 	return *stm->rp++;
 }
@@ -514,7 +518,7 @@ subsample_stream(fz_context *ctx, fz_stream *src, int w, int h, int n, int l2ext
  * 8. For other formats, probably 0.). l2extra is the additional amount
  * of subsampling we should perform here. */
 fz_pixmap *
-fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed_image *cimg, fz_irect *subarea, int indexed, int l2factor, int l2extra)
+fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed_image *cimg, fz_irect *subarea, int indexed, int l2factor, int *l2extra)
 {
 	const fz_image *image = &cimg->super;
 	fz_pixmap *tile = NULL;
@@ -527,6 +531,7 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 	fz_stream *read_stream = stm;
 	fz_stream *sstream = NULL;
 	fz_stream *l2stream = NULL;
+	fz_stream *unpstream = NULL;
 
 	if (matte)
 	{
@@ -540,9 +545,15 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 	}
 	if (subarea)
 	{
-		fz_adjust_image_subarea(ctx, image, subarea, l2factor);
-		w = (subarea->x1 - subarea->x0);
-		h = (subarea->y1 - subarea->y0);
+		if (subarea->x0 == 0 && subarea->x1 == image->w &&
+			subarea->y0 == 0 && subarea->y1 == image->h)
+			subarea = NULL;
+		else
+		{
+			fz_adjust_image_subarea(ctx, image, subarea, l2factor);
+			w = (subarea->x1 - subarea->x0);
+			h = (subarea->y1 - subarea->y0);
+		}
 	}
 	w = (w + f - 1) >> l2factor;
 	h = (h + f - 1) >> l2factor;
@@ -560,11 +571,14 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 
 		if (subarea)
 			read_stream = sstream = subarea_stream(ctx, stm, image, subarea, l2factor);
-		if (l2extra)
+		if (image->bpc != 8 || image->use_colorkey)
+			read_stream = unpstream = fz_unpack_stream(ctx, read_stream, image->bpc, w, h, image->n, indexed, image->use_colorkey);
+		if (l2extra && *l2extra && !indexed)
 		{
-			read_stream = l2stream = subsample_stream(ctx, read_stream, w, h, image->n, l2extra);
-			w = (w + (1<<l2extra) - 1)>>l2extra;
-			h = (h + (1<<l2extra) - 1)>>l2extra;
+			read_stream = l2stream = subsample_stream(ctx, read_stream, w, h, image->n + image->use_colorkey, *l2extra);
+			w = (w + (1<<*l2extra) - 1)>>*l2extra;
+			h = (h + (1<<*l2extra) - 1)>>*l2extra;
+			*l2extra = 0;
 		}
 
 		tile = fz_new_pixmap(ctx, image->colorspace, w, h, NULL, alpha);
@@ -573,10 +587,8 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 		else
 			tile->flags &= ~FZ_PIXMAP_FLAG_INTERPOLATE;
 
-		stride = (w * image->n * image->bpc + 7) / 8;
-		if ((size_t)h > (size_t)(SIZE_MAX / stride))
-			fz_throw(ctx, FZ_ERROR_MEMORY, "image too large");
-		samples = Memento_label(fz_malloc(ctx, h * stride), "pixmap_samples");
+		samples = tile->samples;
+		stride = tile->stride;
 
 		len = fz_read(ctx, read_stream, samples, h * stride);
 
@@ -596,11 +608,6 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 			for (i = 0; i < len; i++)
 				p[i] = ~p[i];
 		}
-
-		fz_unpack_tile(ctx, tile, samples, image->n, image->bpc, stride, indexed);
-
-		fz_free(ctx, samples);
-		samples = NULL;
 
 		/* color keyed transparency */
 		if (image->use_colorkey && !image->mask)
@@ -626,6 +633,7 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 	fz_always(ctx)
 	{
 		fz_drop_stream(ctx, sstream);
+		fz_drop_stream(ctx, unpstream);
 		fz_drop_stream(ctx, l2stream);
 	}
 	fz_catch(ctx)
@@ -744,9 +752,7 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 				native_l2factor -= *l2factor;
 			indexed = fz_colorspace_is_indexed(ctx, image->super.colorspace);
 			can_sub = 1;
-			tile = fz_decomp_image_from_stream(ctx, stm, image, subarea, indexed, native_l2factor, l2factor ? *l2factor : 0);
-			if (l2factor)
-				*l2factor = 0;
+			tile = fz_decomp_image_from_stream(ctx, stm, image, subarea, indexed, native_l2factor, l2factor);
 		}
 		fz_always(ctx)
 			fz_drop_stream(ctx, stm);
