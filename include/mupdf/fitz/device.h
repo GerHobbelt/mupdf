@@ -293,7 +293,7 @@ enum
 typedef struct
 {
 	volatile int abort;
-	int progress;
+	size_t progress;
 	size_t progress_max; /* (size_t)-1 for unknown */
 	int errors;
 	int incomplete;

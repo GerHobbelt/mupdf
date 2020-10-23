@@ -1484,7 +1484,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	fz_display_node *next_node;
 	int clipped = 0;
 	int tiled = 0;
-	int progress = 0;
+	size_t progress = 0;
 
 	/* Current graphics state as unpacked from list */
 	fz_path *path = NULL;
@@ -1510,7 +1510,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	color_params = fz_default_color_params;
 
 	clock_t start_time = clock();
-	int prev_progress = 0;
+	size_t prev_progress = 0;
 	int do_not_draw = 0;
 	int dnd_modulus = list->len / 100000000;		// just a tweak: when things take to long to render, we render only about 1000 parts of the page...
 
