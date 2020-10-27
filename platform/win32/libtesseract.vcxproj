@@ -5,22 +5,6 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Disabled|Win32">
-      <Configuration>Disabled</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Disabled|x64">
-      <Configuration>Disabled</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Memento|Win32">
-      <Configuration>Memento</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Memento|x64">
-      <Configuration>Memento</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -426,20 +410,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Memento|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -452,21 +423,8 @@
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Memento|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -477,28 +435,7 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Memento|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Memento|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -507,17 +444,7 @@
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Memento|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
@@ -527,17 +454,7 @@
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Memento|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
@@ -572,27 +489,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Memento|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;MEMENTO;WIN32;_DEBUG;_LIB</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff</AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <DisableSpecificWarnings>4244;4566;4018</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>
-      </SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -608,29 +504,6 @@
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4018;4244;4267</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>
-      </SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>UNICODE</UndefinePreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <DisableSpecificWarnings>4244;4566;4018</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -661,25 +534,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Memento|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;MEMENTO;_DEBUG;_LIB</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-    </ClCompile>
-    <Link>
-      <SubSystem>
-      </SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -695,28 +549,6 @@
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4018;4244;4267</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>
-      </SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Disabled|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>UNICODE</UndefinePreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
