@@ -257,9 +257,12 @@ static void make_unused_field_name(fz_context *ctx, pdf_document *doc, const cha
 			++x;
 		}
 	}
-	fz_catch(ctx)
+	fz_always(ctx)
 	{
 		pdf_drop_obj(ctx, field_names);
+	}
+	fz_catch(ctx)
+	{
 		fz_rethrow(ctx);
 	}
 }
