@@ -14,7 +14,7 @@ typedef struct
 	fz_context *ctx;
 	fz_buffer *intermediate_buffer;
 	fz_output *intermediate_output;
-	fz_output* output;
+	fz_output *output;
 	int we_own_output;
 	char output_cache[1024];
 } fz_docx_writer;
@@ -44,7 +44,7 @@ static void s_end_page(fz_context *ctx, fz_document_writer *writer_, fz_device *
 	}
 }
 
-static int s_buffer_to_output_write(void* handle, const void* source, size_t numbytes, size_t* o_actual)
+static int s_buffer_to_output_write(void *handle, const void *source, size_t numbytes, size_t *o_actual)
 /* Callback for extract_buffer_t. <source> will be zip/docx content. */
 {
 	int e = 0;
@@ -63,7 +63,7 @@ static int s_buffer_to_output_write(void* handle, const void* source, size_t num
 	return e;
 }
 
-static int s_buffer_to_output_cache(void* handle, void** o_cache, size_t* o_numbytes)
+static int s_buffer_to_output_cache(void *handle, void **o_cache, size_t *o_numbytes)
 {
 	fz_docx_writer *writer = handle;
 	*o_cache = writer->output_cache;
@@ -90,12 +90,14 @@ static void s_close(fz_context *ctx, fz_document_writer *writer_)
 	{
 		unsigned char *data;
 		size_t data_size;
-		writer->ctx = ctx;	/* For s_buffer_write_to_output() callback. */
+		writer->ctx = ctx;	/* For s_buffer_to_output_write() callback. */
 
-		/* Load intermediate data. Intermediate data from xmltext device is (via
-		writer->intermediate_output) in writer->intermediate_buffer. We need to create
-		an extract_buffer_t that reads this intermediate data, in order to call
-		extract_intermediate_to_document_buffer(). */
+		/*
+		 * Load intermediate data. Intermediate data from xmltext device is
+		 * (via * writer->intermediate_output) in writer->intermediate_buffer. We
+		 * need to create * an extract_buffer_t that reads this intermediate
+		 * data, in order to call * extract_intermediate_to_document_buffer().
+		 */
 		fz_close_output(ctx, writer->intermediate_output);
 		data_size = fz_buffer_storage(ctx, writer->intermediate_buffer, &data);
 		if (extract_buffer_open_simple(data, data_size, NULL /*handle*/, NULL /*fn_close*/,
@@ -111,22 +113,26 @@ static void s_close(fz_context *ctx, fz_document_writer *writer_)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to join spans: %s", strerror(errno));
 
 		/* Convert paragraphs into docx content. */
-		if (extract_document_to_docx_content(extract_document, 1 /*spacing*/, &extract_content,
+		if (extract_document_to_docx_content(extract_document, 1 /*spacing*/, 1 /*rotation*/, 1 /*images*/, &extract_content,
 				&extract_content_length))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to generate docx content: %s", strerror(errno));
 
-		/* Write docx to writer->output. Need to create an extract_buffer_t that
-		writes to writer->output, for use by extract_docx_content_to_docx(). */
+		/*
+		 * Write docx to writer->output. Need to create an
+		 * extract_buffer_t that * writes to writer->output, for use by
+		 * extract_docx_content_to_docx().
+		 */
 		if (extract_buffer_open(writer, NULL /*fn_read*/, s_buffer_to_output_write,
 				s_buffer_to_output_cache, NULL /*fn_close*/, &extract_buffer_output))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to create extract_buffer_output: %s", strerror(errno));
-		if (extract_docx_content_to_docx(extract_content, extract_content_length, extract_buffer_output))
+		if (extract_docx_content_to_docx(extract_content, extract_content_length, extract_document, extract_buffer_output))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to create .docx file: %s", strerror(errno));
 		if (extract_buffer_close(&extract_buffer_output))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to close extract_buffer: %s", strerror(errno));
 	}
 	fz_always(ctx)
 	{
+		writer->ctx = NULL;
 		fz_close_output(ctx, writer->intermediate_output);
 		extract_buffer_close(&extract_buffer_intermediate);
 		free(extract_content);
@@ -145,7 +151,8 @@ static void s_drop(fz_context *ctx, fz_document_writer *writer_)
 	fz_docx_writer *writer = (fz_docx_writer*) writer_;
 	fz_drop_output(ctx, writer->intermediate_output);
 	fz_drop_buffer(ctx, writer->intermediate_buffer);
-	if (writer->we_own_output) {
+	if (writer->we_own_output)
+	{
 		fz_drop_output(ctx, writer->output);
 		writer->output = NULL;
 	}
@@ -180,7 +187,7 @@ fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *o
 
 fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *format, const char *path, const char *options)
 {
-	fz_output* out = fz_new_output_with_path(ctx, path, 0 /*append*/);
+	fz_output *out = fz_new_output_with_path(ctx, path, 0 /*append*/);
 	return fz_new_docx_writer_internal(ctx, out, options, 1 /*we_own_output*/);
 }
 
@@ -190,12 +197,12 @@ fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *format, cons
 
 fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *format, const char *path, const char *options)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "fz_new_docx_writer() not available in this build.");
+	fz_throw(ctx, FZ_ERROR_GENERIC, "docx output not available in this build.");
 }
 
 fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "fz_new_docx_writer_with_output() not available in this build.");
+	fz_throw(ctx, FZ_ERROR_GENERIC, "docx output not available in this build.");
 }
 
 #endif
