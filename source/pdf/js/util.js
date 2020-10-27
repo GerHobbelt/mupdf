@@ -367,9 +367,9 @@ function AFParseTime(string, date) {
 	return date;
 }
 
-function AFMakeDate(out, yearIn, month, date, time)
+function AFMakeDate(out, year, month, date, time)
 {
-	year = parseInt(yearIn);  //  incoming value is a string
+	year = year | 0; // force type to integer
 	if (year < 50)
 		year += 2000;
 	if (year < 100)
