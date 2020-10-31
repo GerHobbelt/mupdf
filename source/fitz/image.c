@@ -330,7 +330,7 @@ typedef struct {
 	fz_stream *src;
 	size_t l_skip; /* Number of bytes to skip on the left. */
 	size_t r_skip; /* Number of bytes to skip on the right. */
-	size_t b_skip; /* Number of bytes to skip on the right. */
+	size_t b_skip; /* Number of bytes to skip on the bottom. */
 	int lines; /* Number of lines left to copy. */
 	size_t stride; /* Number of bytes to read in the image. */
 	size_t nskip; /* Number of bytes left to skip on this line. */
@@ -572,7 +572,7 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, const fz_compressed
 		if (subarea)
 			read_stream = sstream = subarea_stream(ctx, stm, image, subarea, l2factor);
 		if (image->bpc != 8 || image->use_colorkey)
-			read_stream = unpstream = fz_unpack_stream(ctx, read_stream, image->bpc, w, h, image->n, indexed, image->use_colorkey);
+			read_stream = unpstream = fz_unpack_stream(ctx, read_stream, image->bpc, w, h, image->n, indexed, image->use_colorkey, 0);
 		if (l2extra && *l2extra && !indexed)
 		{
 			read_stream = l2stream = subsample_stream(ctx, read_stream, w, h, image->n + image->use_colorkey, *l2extra);

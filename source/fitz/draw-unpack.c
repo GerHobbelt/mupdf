@@ -413,7 +413,7 @@ unpack_drop(fz_context *ctx, void *state)
 }
 
 fz_stream *
-fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n, int indexed, int pad)
+fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n, int indexed, int pad, int skip)
 {
 	int src_stride = (w*depth*n+7)>>3;
 	int dst_stride;
@@ -451,7 +451,10 @@ fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n
 		unpack_line = fz_unpack_line_with_padding;
 	else if (depth == 1 || depth == 2 || depth == 4 || depth == 8 || depth  == 16 || depth == 24 || depth == 32)
 		unpack_line = fz_unpack_any_l2depth;
+	else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Unsupported combination in fz_unpack_stream");
 
+	state = fz_malloc(ctx, sizeof(unpack_state) + dst_stride + src_stride);
 	state->src = src;
 	state->depth = depth;
 	state->w = w;

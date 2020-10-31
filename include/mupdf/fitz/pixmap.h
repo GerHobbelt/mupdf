@@ -342,7 +342,7 @@ void fz_decode_tile(fz_context *ctx, fz_pixmap *pix, const float *decode);
 void fz_md5_pixmap(fz_context *ctx, fz_pixmap *pixmap, unsigned char digest[16]);
 
 fz_stream *
-fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n, int indexed, int pad);
+fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n, int indexed, int pad, int skip);
 
 /**
 	Pixmaps represent a set of pixels for a 2 dimensional region of

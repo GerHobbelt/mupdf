@@ -527,13 +527,13 @@ fz_transform_rect(fz_rect r, fz_matrix m)
 	}
 	else if (fabsf(m.a) < FLT_EPSILON && fabsf(m.d) < FLT_EPSILON)
 	{
-		if (m.c < 0)
+		if (m.b < 0)
 		{
 			float f = r.x0;
 			r.x0 = r.x1;
 			r.x1 = f;
 		}
-		if (m.b < 0)
+		if (m.c < 0)
 		{
 			float f = r.y0;
 			r.y0 = r.y1;
