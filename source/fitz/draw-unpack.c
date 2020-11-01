@@ -420,7 +420,6 @@ fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n
 	unpack_state *state;
 	fz_stream *dst;
 	fz_unpack_line_fn unpack_line = NULL;
-	int skip = 0;
 	int scale = 1;
 
 	if (depth == 1)
