@@ -928,7 +928,7 @@ show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t l
 		if (cid >= 0)
 			pdf_show_char(ctx, pr, cid);
 		else
-			fz_warn(ctx, "cannot encode character");
+			fz_warn(ctx, "cannot encode character 0x%x with cmap %s", cpt, fontdesc->encoding->cmap_name);
 		if (cpt == 32 && w == 1)
 			pdf_show_space(ctx, pr, gstate->text.word_space);
 	}
