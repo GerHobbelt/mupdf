@@ -306,10 +306,9 @@ struct jbig2_segment_header {
 	int length;
 };
 
-/* coverity[-tainted_data_return] */
 static uint32_t getu32(const unsigned char *data)
 {
-	return ((uint32_t)data[0]<<24) | ((uint32_t)data[1]<<16) | ((uint32_t)data[2]<<8) | (uint32_t)data[3];
+	return (((uint32_t)data[0]<<24) | ((uint32_t)data[1]<<16) | ((uint32_t)data[2]<<8) | (uint32_t)data[3]) & 0xFFFFFFFF;
 }
 
 static size_t
@@ -352,7 +351,7 @@ pdf_parse_jbig2_segment_header(fz_context *ctx,
 	else
 	{
 		if (data + n + 1 > end) return 0;
-		info->page = data[n];
+		info->page = data[n] & 0xFF;
 		n += 1;
 	}
 
