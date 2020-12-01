@@ -371,8 +371,6 @@ fz_irect_from_rect(fz_rect r)
 	fz_irect b;
 	if (fz_is_infinite_rect(r))
 		return fz_infinite_irect;
-	if (fz_is_empty_rect(r))
-		return fz_empty_irect;
 	if (!fz_is_valid_rect(r))
 		return fz_invalid_irect;
 
@@ -420,6 +418,8 @@ fz_round_rect(fz_rect r)
 fz_rect
 fz_intersect_rect(fz_rect a, fz_rect b)
 {
+	if (fz_is_empty_rect(a) || fz_is_empty_rect(b))
+		return fz_invalid_rect;
 	if (fz_is_infinite_rect(b)) return a;
 	if (fz_is_infinite_rect(a)) return b;
 	if (a.x0 < b.x0)
@@ -436,6 +436,8 @@ fz_intersect_rect(fz_rect a, fz_rect b)
 fz_irect
 fz_intersect_irect(fz_irect a, fz_irect b)
 {
+	if (fz_is_empty_irect(a) || fz_is_empty_irect(b))
+		return fz_invalid_irect;
 	if (fz_is_infinite_irect(b)) return a;
 	if (fz_is_infinite_irect(a)) return b;
 	if (a.x0 < b.x0)
