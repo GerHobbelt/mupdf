@@ -870,7 +870,7 @@ void do_annotate_panel(void)
 
 	ui_layout(T, X, NW, 2, 2);
 
-	if (ui_popup("CreateAnnotPopup", "Create...", 1, 16))
+	if (ui_popup("CreateAnnotPopup", "Create...", 1, 17))
 	{
 		if (ui_popup_item("Text")) new_annot(PDF_ANNOT_TEXT);
 		if (ui_popup_item("FreeText")) new_annot(PDF_ANNOT_FREE_TEXT);
@@ -888,6 +888,13 @@ void do_annotate_panel(void)
 		if (ui_popup_item("Squiggly")) new_annot(PDF_ANNOT_SQUIGGLY);
 		if (ui_popup_item("FileAttachment")) new_annot(PDF_ANNOT_FILE_ATTACHMENT);
 		if (ui_popup_item("Redact")) new_annot(PDF_ANNOT_REDACT);
+		if (ui_popup_item("Signature")) {
+			selected_annot = pdf_create_signature_widget(ctx, page, "Unknown");
+
+			pdf_update_appearance(ctx, selected_annot);
+			is_draw_mode = 1;
+			render_page();
+		}
 		ui_popup_end();
 	}
 
