@@ -4,20 +4,31 @@
 Simple tests of the Python MuPDF API.
 '''
 
-import mupdf
+import inspect
 import os
 import sys
+
+if 0:
+    # Use SWIG binding.
+    import mupdf
+elif 1:
+    # Use cppyy binding.
+    mupdf_dir = os.path.abspath( f'{__file__}/../..')
+    sys.path.insert(0, f'{mupdf_dir}/platform/python')
+    import mupdf
+    mupdf = mupdf.cppyy.gbl.mupdf
 
 
 _log_prefix = ''
 
 def log(text):
-    print(f'{_log_prefix}{text}')
+    f = inspect.stack()[1]
+    print(f'{f.filename}:{f.lineno} {_log_prefix}{text}', file=sys.stderr)
+    sys.stderr.flush()
 
 def log_prefix_set(prefix):
     global _log_prefix
     _log_prefix = prefix
-
 
 g_test_n = 0
 
@@ -65,7 +76,7 @@ def test(path):
         v = document.lookup_metadata(k)
         log(f'document.lookup_metadata() k={k} returned v={v!r}')
         if k == 'qwerty':
-            assert v is None
+            assert v is None, f'v={v!r}'
         else:
             pass
 
@@ -86,9 +97,9 @@ def test(path):
     # Print image data in ascii PPM format. Copied from
     # mupdf/docs/examples/example.c.
     #
-    samples = pixmap.m_internal.samples
-    stride = pixmap.m_internal.stride
-    n = pixmap.m_internal.n
+    samples = pixmap.samples()
+    stride = pixmap.stride()
+    n = pixmap.n()
     filename = f'mupdf_test-out2-{g_test_n}.ppm'
     with open(filename, 'w') as f:
         f.write('P3\n')
@@ -99,11 +110,20 @@ def test(path):
                 if x:
                     f.write('  ')
                 offset = y * stride + x * n
-                f.write('%3d %3d %3d' % (
-                        mupdf.bytes_getitem(samples, offset + 0),
-                        mupdf.bytes_getitem(samples, offset + 1),
-                        mupdf.bytes_getitem(samples, offset + 2),
-                        ))
+                if hasattr(mupdf, 'bytes_getitem'):
+                    # swig
+                    f.write('%3d %3d %3d' % (
+                            mupdf.bytes_getitem(samples, offset + 0),
+                            mupdf.bytes_getitem(samples, offset + 1),
+                            mupdf.bytes_getitem(samples, offset + 2),
+                            ))
+                else:
+                    # cppyy
+                    f.write('%3d %3d %3d' % (
+                            samples[offset + 0],
+                            samples[offset + 1],
+                            samples[offset + 2],
+                            ))
             f.write('\n')
     log(f'Have created {filename} by scanning pixmap.')
 
@@ -152,7 +172,7 @@ def test(path):
     try:
         stext_page = mupdf.StextPage(document, page_num, stext_options)
     except Exception:
-        log('no page_num={page_num}')
+        log(f'no page_num={page_num}')
     else:
         device_stext = mupdf.Device(stext_page, stext_options)
         matrix = mupdf.Matrix()
@@ -192,7 +212,7 @@ def test(path):
     bitmap = mupdf.Bitmap(10, 20, 8, 72, 72)
     bitmap_details = bitmap.bitmap_details()
     log(f'{bitmap_details}')
-    assert bitmap_details == [10, 20, 8, 12]
+    assert list(bitmap_details) == [10, 20, 8, 12], f'bitmap_details={bitmap_details!r}'
 
     log(f'finished test of %s' % path)
 
