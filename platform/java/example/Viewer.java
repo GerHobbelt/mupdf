@@ -426,6 +426,11 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			clearSearch();
 	}
 
+	public void save() {
+		PDFDocument pdf = (PDFDocument) doc;
+		pdf.redactSaveSecure("/tmp/tomte.pdf", "");
+	}
+
 	protected void canvasKeyTyped(KeyEvent e) {
 		char c = e.getKeyChar();
 
@@ -433,6 +438,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		{
 		case 'r': reload(); break;
 		case 'q': dispose(); break;
+		case 'S': save(); break;
 
 		case 'f': toggleFullscreen(); break;
 
