@@ -46,6 +46,8 @@ JAVA_CFLAGS := \
 JAVA_LIBS := \
 	$(shell pkg-config --libs freetype2) \
 	$(shell pkg-config --libs libcrypto) \
+	-lm \
+	-lpthread \
 	-lz
 JAVA_LDFLAGS := \
 	-z noexecstack
