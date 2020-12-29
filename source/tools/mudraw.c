@@ -513,6 +513,15 @@ static int gettime(void)
 	return Curl_timediff(now, first);
 }
 
+static int page_counter = 0;
+
+static int inc_page_counter(void) {
+	return page_counter++;
+}
+static void reset_page_counter(void) {
+	page_counter = 0;
+}
+
 static int has_percent_d(const char *s)
 {
 	/* find '%[0-9]*d' */
@@ -660,8 +669,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			fz_write_printf(ctx, out, "<page mediabox=\"%g %g %g %g\">\n",
-					mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1);
+			fz_rect mb = fz_transform_rect(mediabox, ctm);
+
+			fz_write_printf(ctx, out, "<page mediabox=\"%R\">\n", &mb);
 			dev = fz_new_trace_device(ctx, out);
 			if (output_format == OUT_OCR_TRACE)
 			{
@@ -698,8 +708,15 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	{
 		fz_try(ctx)
 		{
-			fz_write_printf(ctx, out, "<page mediabox=\"%g %g %g %g\">\n",
-					mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1);
+			float zoom;
+			fz_matrix ctm;
+
+			zoom = resolution / 72;
+			ctm = fz_pre_scale(fz_rotate(rotation), zoom, zoom);
+
+			fz_rect mb = fz_transform_rect(mediabox, ctm);
+
+			fz_write_printf(ctx, out, "<page mediabox=\"%R\">\n", &mb);
 			dev = fz_new_xmltext_device(ctx, out);
 			if (list)
 				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, cookie);
@@ -798,24 +815,22 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			pre_ocr_dev = NULL;
 			if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML)
 			{
-				fz_print_stext_page_as_xml(ctx, out, text, pagenum);
+				fz_print_stext_page_as_xml(ctx, out, text, pagenum, ctm);
 			}
 			else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 			{
-				static int first = 1;
-				if (first)
-					first = 0;
-				else
+				int first = (inc_page_counter() == 0);
+				if (!first)
 					fz_write_string(ctx, out, ",");
-				fz_print_stext_page_as_json(ctx, out, text, 1);
+				fz_print_stext_page_as_json(ctx, out, text, pagenum, ctm);
 			}
 			else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 			{
-				fz_print_stext_page_as_html(ctx, out, text, pagenum);
+				fz_print_stext_page_as_html(ctx, out, text, pagenum, ctm);
 			}
 			else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 			{
-				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum);
+				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum, ctm);
 			}
 			else if (output_format == OUT_TEXT || output_format == OUT_OCR_TEXT)
 			{
@@ -2658,6 +2673,9 @@ int mudraw_main(int argc, const char **argv)
 
 					if (layer_config)
 						apply_layer_config(ctx, doc, layer_config);
+
+					// reset the page counter which is used by the JSON output to ensure we output proper format for multipage ranges.
+					reset_page_counter();
 
 					if (fz_optind == argc || !fz_is_page_range(ctx, argv[fz_optind]))
 						drawrange(ctx, doc, "1-N");

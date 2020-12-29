@@ -423,6 +423,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtfloat(&out, point->y);
 				}
 				break;
+			case 'Z':
+				{
+					fz_quad *quad = va_arg(args, fz_quad*);
+					fmtfloat(&out, quad->ul.x); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->ul.y); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->ur.x); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->ur.y); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->ll.x); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->ll.y); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->lr.x); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->lr.y);
+				}
+				break;
 
 			case 'C': /* unicode char */
 				c = va_arg(args, int);

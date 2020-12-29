@@ -146,14 +146,18 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 }
 
 void
-fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id)
+fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
 {
 	fz_stext_block *block;
+	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	int w = page->mediabox.x1 - page->mediabox.x0;
-	int h = page->mediabox.y1 - page->mediabox.y0;
+	int w = mediabox.x1 - mediabox.x0;
+	int h = mediabox.y1 - mediabox.y0;
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%dpt;height:%dpt;background-color:white\">\n", id, w, h);
+	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%dpt;height:%dpt;background-color:white\" data-mediabox=\"%R\">\n", 
+		id, 
+		w, h, 
+		&page->mediabox);
 
 	for (block = page->first_block; block; block = block->next)
 	{
@@ -324,11 +328,16 @@ static void fz_print_stext_block_as_xhtml(fz_context *ctx, fz_output *out, fz_st
 }
 
 void
-fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id)
+fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
 {
 	fz_stext_block *block;
+	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\">\n", id);
+	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%g\" height=\"%g\" data-mediabox=\"%R\">\n", 
+		id,
+		mediabox.x1 - mediabox.x0,
+		mediabox.y1 - mediabox.y0,
+		&page->mediabox);
 
 	for (block = page->first_block; block; block = block->next)
 	{
@@ -367,33 +376,34 @@ fz_print_stext_trailer_as_xhtml(fz_context *ctx, fz_output *out)
 /* Detailed XML dump of the entire structured text data */
 
 void
-fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id)
+fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
 {
 	fz_stext_block *block;
 	fz_stext_line *line;
 	fz_stext_char *ch;
+	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	fz_write_printf(ctx, out, "<page id=\"page%d\" width=\"%g\" height=\"%g\">\n", id,
-		page->mediabox.x1 - page->mediabox.x0,
-		page->mediabox.y1 - page->mediabox.y0);
+	fz_write_printf(ctx, out, "<page id=\"page%d\" width=\"%g\" height=\"%g\" mediabox=\"%R\">\n", id,
+		mediabox.x1 - mediabox.x0,
+		mediabox.y1 - mediabox.y0,
+		&page->mediabox);
 
 	for (block = page->first_block; block; block = block->next)
 	{
 		switch (block->type)
 		{
 		case FZ_STEXT_BLOCK_TEXT:
-			fz_write_printf(ctx, out, "<block bbox=\"%g %g %g %g\">\n",
-					block->bbox.x0, block->bbox.y0, block->bbox.x1, block->bbox.y1);
+			fz_write_printf(ctx, out, "<block bbox=\"%R\">\n", &block->bbox);
 			for (line = block->u.t.first_line; line; line = line->next)
 			{
 				fz_font *font = NULL;
 				float size = 0;
 				const char *name = NULL;
 
-				fz_write_printf(ctx, out, "<line bbox=\"%g %g %g %g\" wmode=\"%d\" dir=\"%g %g\">\n",
-						line->bbox.x0, line->bbox.y0, line->bbox.x1, line->bbox.y1,
+				fz_write_printf(ctx, out, "<line bbox=\"%R\" wmode=\"%d\" dir=\"%P\">\n",
+						&line->bbox,
 						line->wmode,
-						line->dir.x, line->dir.y);
+						&line->dir);
 
 				for (ch = line->first_char; ch; ch = ch->next)
 				{
@@ -406,11 +416,8 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 						name = font_full_name(ctx, font);
 						fz_write_printf(ctx, out, "<font name=\"%s\" size=\"%g\">\n", name, size);
 					}
-					fz_write_printf(ctx, out, "<char quad=\"%g %g %g %g %g %g %g %g\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
-							ch->quad.ul.x, ch->quad.ul.y,
-							ch->quad.ur.x, ch->quad.ur.y,
-							ch->quad.ll.x, ch->quad.ll.y,
-							ch->quad.lr.x, ch->quad.lr.y,
+					fz_write_printf(ctx, out, "<char quad=\"%Z\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
+							&ch->quad,
 							ch->origin.x, ch->origin.y,
 							ch->color);
 					switch (ch->c)
@@ -439,8 +446,7 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 			break;
 
 		case FZ_STEXT_BLOCK_IMAGE:
-			fz_write_printf(ctx, out, "<image bbox=\"%g %g %g %g\" />\n",
-					block->bbox.x0, block->bbox.y0, block->bbox.x1, block->bbox.y1);
+			fz_write_printf(ctx, out, "<image bbox=\"%R\" />\n", &block->bbox);
 			break;
 		}
 	}
@@ -450,13 +456,25 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 /* JSON dump */
 
 void
-fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, float scale)
+fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
 {
 	fz_stext_block *block;
 	fz_stext_line *line;
 	fz_stext_char *ch;
+	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
+	float w = mediabox.x1 - mediabox.x0;
+	float h = mediabox.y1 - mediabox.y0;
 
-	fz_write_printf(ctx, out, "{%q:[", "blocks");
+	fz_write_printf(ctx, out, "{%q:%d, %q:%g, %q:%g, %q:{%q:%g, %q:%g, %q:%g, %q:%g}, %q:[",
+		"page_id", id,
+		"width", w,
+		"height", h,
+		"mediabox",
+		"x0", page->mediabox.x0,
+		"y0", page->mediabox.y0,
+		"x1", page->mediabox.x1,
+		"y1", page->mediabox.y1,
+		"blocks");
 
 	for (block = page->first_block; block; block = block->next)
 	{
@@ -467,10 +485,10 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 		case FZ_STEXT_BLOCK_TEXT:
 			fz_write_printf(ctx, out, "{%q:%q,", "type", "text");
 			fz_write_printf(ctx, out, "%q:{", "bbox");
-			fz_write_printf(ctx, out, "%q:%d,", "x", (int)(block->bbox.x0 * scale));
-			fz_write_printf(ctx, out, "%q:%d,", "y", (int)(block->bbox.y0 * scale));
-			fz_write_printf(ctx, out, "%q:%d,", "w", (int)((block->bbox.x1 - block->bbox.x0) * scale));
-			fz_write_printf(ctx, out, "%q:%d},", "h", (int)((block->bbox.y1 - block->bbox.y0) * scale));
+			fz_write_printf(ctx, out, "%q:%g,", "x", block->bbox.x0);
+			fz_write_printf(ctx, out, "%q:%g,", "y", block->bbox.y0);
+			fz_write_printf(ctx, out, "%q:%g,", "w", (block->bbox.x1 - block->bbox.x0));
+			fz_write_printf(ctx, out, "%q:%g},", "h", (block->bbox.y1 - block->bbox.y0));
 			fz_write_printf(ctx, out, "%q:[", "lines");
 
 			for (line = block->u.t.first_line; line; line = line->next)
@@ -479,10 +497,10 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 					fz_write_string(ctx, out, ",");
 				fz_write_printf(ctx, out, "{%q:%d,", "wmode", line->wmode);
 				fz_write_printf(ctx, out, "%q:{", "bbox");
-				fz_write_printf(ctx, out, "%q:%d,", "x", (int)(line->bbox.x0 * scale));
-				fz_write_printf(ctx, out, "%q:%d,", "y", (int)(line->bbox.y0 * scale));
-				fz_write_printf(ctx, out, "%q:%d,", "w", (int)((line->bbox.x1 - line->bbox.x0) * scale));
-				fz_write_printf(ctx, out, "%q:%d},", "h", (int)((line->bbox.y1 - line->bbox.y0) * scale));
+				fz_write_printf(ctx, out, "%q:%g,", "x", line->bbox.x0);
+				fz_write_printf(ctx, out, "%q:%g,", "y", line->bbox.y0);
+				fz_write_printf(ctx, out, "%q:%g,", "w", (line->bbox.x1 - line->bbox.x0));
+				fz_write_printf(ctx, out, "%q:%g},", "h", (line->bbox.y1 - line->bbox.y0));
 
 				/* Since we force preserve-spans, the first char has the style for the entire line. */
 				if (line->first_char)
@@ -500,9 +518,9 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 					fz_write_printf(ctx, out, "%q:%q,", "family", font_family);
 					fz_write_printf(ctx, out, "%q:%q,", "weight", font_weight);
 					fz_write_printf(ctx, out, "%q:%q,", "style", font_style);
-					fz_write_printf(ctx, out, "%q:%d},", "size", (int)(line->first_char->size * scale));
-					fz_write_printf(ctx, out, "%q:%d,", "x", (int)(line->first_char->origin.x * scale));
-					fz_write_printf(ctx, out, "%q:%d,", "y", (int)(line->first_char->origin.y * scale));
+					fz_write_printf(ctx, out, "%q:%g},", "size", line->first_char->size);
+					fz_write_printf(ctx, out, "%q:%g,", "x", line->first_char->origin.x);
+					fz_write_printf(ctx, out, "%q:%g,", "y", line->first_char->origin.y);
 				}
 
 				fz_write_printf(ctx, out, "%q:\"", "text");
@@ -523,10 +541,10 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 		case FZ_STEXT_BLOCK_IMAGE:
 			fz_write_printf(ctx, out, "{%q:%q,", "type", "image");
 			fz_write_printf(ctx, out, "%q:{", "bbox");
-			fz_write_printf(ctx, out, "%q:%d,", "x", (int)(block->bbox.x0 * scale));
-			fz_write_printf(ctx, out, "%q:%d,", "y", (int)(block->bbox.y0 * scale));
-			fz_write_printf(ctx, out, "%q:%d,", "w", (int)((block->bbox.x1 - block->bbox.x0) * scale));
-			fz_write_printf(ctx, out, "%q:%d}}", "h", (int)((block->bbox.y1 - block->bbox.y0) * scale));
+			fz_write_printf(ctx, out, "%q:%g,", "x", block->bbox.x0);
+			fz_write_printf(ctx, out, "%q:%g,", "y", block->bbox.y0);
+			fz_write_printf(ctx, out, "%q:%g,", "w", (block->bbox.x1 - block->bbox.x0));
+			fz_write_printf(ctx, out, "%q:%g}}", "h", (block->bbox.y1 - block->bbox.y0));
 			break;
 		}
 	}
@@ -615,18 +633,18 @@ text_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 			fz_print_stext_page_as_text(ctx, wri->out, wri->page);
 			break;
 		case FZ_FORMAT_HTML:
-			fz_print_stext_page_as_html(ctx, wri->out, wri->page, wri->number);
+			fz_print_stext_page_as_html(ctx, wri->out, wri->page, wri->number, fz_identity);
 			break;
 		case FZ_FORMAT_XHTML:
-			fz_print_stext_page_as_xhtml(ctx, wri->out, wri->page, wri->number);
+			fz_print_stext_page_as_xhtml(ctx, wri->out, wri->page, wri->number, fz_identity);
 			break;
 		case FZ_FORMAT_STEXT_XML:
-			fz_print_stext_page_as_xml(ctx, wri->out, wri->page, wri->number);
+			fz_print_stext_page_as_xml(ctx, wri->out, wri->page, wri->number, fz_identity);
 			break;
 		case FZ_FORMAT_STEXT_JSON:
 			if (wri->number > 1)
 				fz_write_string(ctx, wri->out, ",");
-			fz_print_stext_page_as_json(ctx, wri->out, wri->page, 1);
+			fz_print_stext_page_as_json(ctx, wri->out, wri->page, wri->number, fz_identity);
 			break;
 		}
 	}
