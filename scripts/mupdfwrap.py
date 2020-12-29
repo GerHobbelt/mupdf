@@ -321,6 +321,7 @@ class ClangInfo:
         if os.uname()[0] == 'OpenBSD':
             clang_bin = glob.glob( f'/usr/local/bin/clang-{version}')
             if not clang_bin:
+                log('Cannot find {clang_bin=}')
                 return
             clang_bin = clang_bin[0]
             self.clang_version = version
@@ -332,6 +333,9 @@ class ClangInfo:
                     out='return',
                     ).strip()
             self.include_path = os.path.join( self.resource_dir, 'include')
+            logx('{self.libclang_so=} {self.resource_dir=} {self.include_path=}')
+            if os.environ.get('VIRTUAL_ENV'):
+                clang.cindex.Config.set_library_file( self.libclang_so)
             return True
 
         for p in os.environ.get( 'PATH').split( ':'):
@@ -4885,15 +4889,16 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
 
             import re
 
-            # Wrap parse_page_range() to fix SWIG bug where a NULL return value
-            # is not included in the returned list. This occurs with SWIG-3.0;
-            # maybe fixed in SWIG-4?
+            # Wrap parse_page_range() to fix SWIG bug where a NULL return
+            # value seems to mess up the returned list - we end up with ret
+            # containing two elements rather than three, e.g. [0, 2]. This
+            # occurs with SWIG-3.0; maybe fixed in SWIG-4?
             #
             w_parse_page_range = parse_page_range
             def parse_page_range(s, n):
                 ret = w_parse_page_range(s, n)
                 if len(ret) == 2:
-                    return None, ret[0], ret[1]
+                    return None, 0, 0
                 else:
                     return ret[0], ret[1], ret[2]
 
