@@ -167,6 +167,12 @@ void pdf_walk_tree(fz_context *ctx, pdf_obj *tree, pdf_obj *kid_name,
 			pdf_obj **values);
 
 /*
+	create a new link on the specified page. The returned fz_link
+	structure is owned by the page and does not need to be freed.
+*/
+fz_link *pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri);
+
+/*
 	create a new annotation of the specified type on the
 	specified page. Populate it with sensible defaults per the type.
 

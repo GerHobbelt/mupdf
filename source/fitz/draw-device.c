@@ -918,7 +918,7 @@ draw_glyph(unsigned char *colorbv, fz_pixmap *dst, fz_glyph *glyph,
 	skip_y = y - glyph->y - yorig;
 
 	msk = glyph->pixmap;
-	dp = dst->samples + (unsigned int)((y - dst->y) * dst->stride + (x - dst->x) * dst->n);
+	dp = dst->samples + (y - dst->y) * (size_t)dst->stride + (x - dst->x) * (size_t)dst->n;
 	if (msk == NULL)
 	{
 		fz_paint_glyph(colorbv, dst, dp, glyph, w, h, skip_x, skip_y, eop);
@@ -1577,7 +1577,7 @@ fz_transform_pixmap(fz_context *ctx, fz_draw_device *dev, const fz_pixmap *image
 {
 	fz_pixmap *scaled;
 
-	if (fz_is_empty_irect(*clip))
+	if (clip != NULL && fz_is_empty_irect(*clip))
 		return NULL;
 
 	if (ctm->a != 0 && ctm->b == 0 && ctm->c == 0 && ctm->d != 0)

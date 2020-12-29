@@ -144,9 +144,9 @@ static void pdf_populate_next_xref_level(fz_context *ctx, pdf_document *doc)
 pdf_obj *pdf_trailer(fz_context *ctx, pdf_document *doc)
 {
 	/* Return the document's trailer (of the appropriate vintage) */
-	pdf_xref *xref = &doc->xref_sections[doc->xref_base];
+	pdf_xref *xrefs = doc->xref_sections;
 
-	return xref ? xref->trailer : NULL;
+	return xrefs ? xrefs[doc->xref_base].trailer : NULL;
 }
 
 void pdf_set_populating_xref_trailer(fz_context *ctx, pdf_document *doc, pdf_obj *trailer)
@@ -1504,7 +1504,7 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 			doc->crypt = pdf_new_crypt(ctx, encrypt, id);
 
 		/* Allow lazy clients to read encrypted files with a blank password */
-		pdf_authenticate_password(ctx, doc, "");
+		(void)pdf_authenticate_password(ctx, doc, "");
 
 		if (repaired)
 		{
@@ -1715,7 +1715,7 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 
 	fz_try(ctx)
 	{
-		pdf_mark_obj(ctx, objstm);
+		(void)pdf_mark_obj(ctx, objstm);
 
 		count = pdf_dict_get_int(ctx, objstm, PDF_NAME(N));
 		first = pdf_dict_get_int(ctx, objstm, PDF_NAME(First));
@@ -3144,8 +3144,8 @@ check_unchanged_between(fz_context *ctx, pdf_document *doc, pdf_changes *changes
 				/* Different objects, so lock them */
 				if (!pdf_obj_marked(ctx, nobj) && !pdf_obj_marked(ctx, oobj))
 				{
-					pdf_mark_obj(ctx, nobj);
-					pdf_mark_obj(ctx, oobj);
+					(void)pdf_mark_obj(ctx, nobj);
+					(void)pdf_mark_obj(ctx, oobj);
 					marked = 1;
 				}
 			}
@@ -3477,7 +3477,7 @@ filter_changes_accepted(fz_context *ctx, pdf_changes *changes, pdf_obj *obj, fil
 	{
 		if (obj_num != 0)
 		{
-			pdf_mark_obj(ctx, obj);
+			(void)pdf_mark_obj(ctx, obj);
 			changes->obj_changes[obj_num] |= FIELD_CHANGE_VALID;
 		}
 		if (filter == NULL)
@@ -3547,7 +3547,7 @@ check_field(fz_context *ctx, pdf_document *doc, pdf_changes *changes, pdf_obj *o
 		pdf_obj *t;
 		int is_locked;
 
-		pdf_mark_obj(ctx, obj);
+		(void)pdf_mark_obj(ctx, obj);
 
 		/* Do this within the try, so we can catch any problems */
 		doc->xref_base = o_xref_base+1;
@@ -3855,7 +3855,7 @@ find_locked_fields_aux(fz_context *ctx, pdf_obj *field, pdf_locked_fields *field
 	{
 		pdf_obj *kids, *v, *ft;
 
-		pdf_mark_obj(ctx, field);
+		(void)pdf_mark_obj(ctx, field);
 
 		v = pdf_dict_get(ctx, field, PDF_NAME(V));
 		if (v == NULL)

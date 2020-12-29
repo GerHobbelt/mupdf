@@ -1018,12 +1018,17 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			const char *reg, *ord;
 
 			cidinfo = pdf_dict_get(ctx, dict, PDF_NAME(CIDSystemInfo));
-			if (!cidinfo)
-				fz_throw(ctx, FZ_ERROR_SYNTAX, "cid font is missing info");
-
-			reg = pdf_dict_get_string(ctx, cidinfo, PDF_NAME(Registry), NULL);
-			ord = pdf_dict_get_string(ctx, cidinfo, PDF_NAME(Ordering), NULL);
-			fz_snprintf(collection, sizeof collection, "%s-%s", reg, ord);
+			if (cidinfo)
+			{
+				reg = pdf_dict_get_string(ctx, cidinfo, PDF_NAME(Registry), NULL);
+				ord = pdf_dict_get_string(ctx, cidinfo, PDF_NAME(Ordering), NULL);
+				fz_snprintf(collection, sizeof collection, "%s-%s", reg, ord);
+			}
+			else
+			{
+				fz_warn(ctx, "CIDFont is missing CIDSystemInfo dictionary; assuming Adobe-Identity");
+				fz_strlcpy(collection, "Adobe-Identity", sizeof collection);
+			}
 		}
 
 		/* Encoding */
@@ -1404,7 +1409,7 @@ pdf_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
 		fontdesc = pdf_load_simple_font(ctx, doc, dict);
 	}
 
-	pdf_mark_obj(ctx, dict);
+	(void)pdf_mark_obj(ctx, dict);
 	fz_try(ctx)
 	{
 		/* Create glyph width table for stretching substitute fonts and text extraction. */

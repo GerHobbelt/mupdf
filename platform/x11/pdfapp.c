@@ -986,7 +986,7 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 		sprintf(buf2, " - %d/%d (%g dpi)",
 				app->pageno, app->pagecount, app->resolution);
 		len = MAX_TITLE-strlen(buf2);
-		if (strlen(app->doctitle) > len)
+		if (strlen(app->doctitle) >= len)
 		{
 			fz_strlcpy(buf, app->doctitle, len-3);
 			fz_strlcat(buf, "...", MAX_TITLE);
@@ -1042,7 +1042,7 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 			cookie.errors++;
 	}
 
-	if (transition)
+	if (transition && drawpage)
 	{
 		app->new_image = app->image;
 		app->image = NULL;
