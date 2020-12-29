@@ -539,4 +539,5 @@ pdf_page *pdf_annot_page(fz_context *ctx, pdf_annot *annot);
 int pdf_annot_needs_new_ap(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_set_active(fz_context *ctx, pdf_annot *annot, int active);
 
+pdf_obj *pdf_annot_ap(fz_context *ctx, pdf_annot *annot);
 #endif
