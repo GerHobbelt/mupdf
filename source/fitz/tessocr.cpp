@@ -118,7 +118,7 @@ tess_file_reader(const char *fname, std::vector<char> *out)
 	/* FIXME: Look for inbuilt ones. */
 
 	/* Then under TESSDATA */
-	printf("tesseract %d.%d.%d used by mupdf as tesseract >= 5\n", TESSERACT_MAJOR_VERSION, TESSERACT_MINOR_VERSION, TESSERACT_MICRO_VERSION);
+	fz_info(leptonica_mem, "tesseract %d.%d.%d used by mupdf as tesseract >= 5\n", TESSERACT_MAJOR_VERSION, TESSERACT_MINOR_VERSION, TESSERACT_MICRO_VERSION);
 	return load_file(fname, out);
 }
 
@@ -137,7 +137,7 @@ tess_file_reader(const STRING& fname, GenericVector<char> *out)
 	/* FIXME: Look for inbuilt ones. */
 
 	/* Then under TESSDATA */
-	printf("tesseract %d.%d.%d used by mupdf as tesseract <= 4\n", TESSERACT_MAJOR_VERSION, TESSERACT_MINOR_VERSION, TESSERACT_MICRO_VERSION);
+	fz_info(leptonica_mem, "tesseract %d.%d.%d used by mupdf as tesseract <= 4\n", TESSERACT_MAJOR_VERSION, TESSERACT_MINOR_VERSION, TESSERACT_MICRO_VERSION);
 	return load_file(fname.c_str(), out);
 }
 #endif
