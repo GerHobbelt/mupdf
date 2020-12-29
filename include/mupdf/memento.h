@@ -274,7 +274,7 @@ void Memento_fin(void);
 
 void Memento_bt(void);
 
-#ifdef MEMENTO
+#if defined(MEMENTO) && !defined(_CRTDBG_MAP_ALLOC)
 
 #ifndef COMPILING_MEMENTO_C
 #define malloc(size)        Memento_malloc(size)
