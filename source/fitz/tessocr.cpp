@@ -1,9 +1,7 @@
 #if defined(HAVE_LEPTONICA) && defined(HAVE_TESSERACT)
 
 #include "tesseract/baseapi.h"
-#include "tesseract/genericvector.h"
 #include "tesseract/serialis.h"
-#include "tesseract/strngs.h"
 #include "tesseract/ocrclass.h"          // for ETEXT_DESC
 
 extern "C" {
@@ -80,7 +78,7 @@ static void my_leptonica_free(void *ptr)
 }
 
 static bool
-load_file(const char* filename, GenericVector<char>* data)
+load_file(const char* filename, std::vector<char>* data)
 {
 	bool result = false;
 	FILE *fp = fopen(filename, "rb");
@@ -96,7 +94,9 @@ load_file(const char* filename, GenericVector<char>* data)
 	{
 		// reserve an extra byte in case caller wants to append a '\0' character
 		data->reserve(size + 1);
-		data->resize_no_init(size);
+		// https://stackoverflow.com/questions/7689406/resizing-a-c-stdvectorchar-without-initializing-data#7689457:
+		// You can't write beyond vector::size() elements, even if you have reserved the space.
+		data->resize(size);
 		result = static_cast<long>(fread(&(*data)[0], 1, size, fp)) == size;
 	}
 	fclose(fp);
@@ -106,7 +106,7 @@ load_file(const char* filename, GenericVector<char>* data)
 #if TESSERACT_MAJOR_VERSION >= 5
 
 static bool
-tess_file_reader(const char *fname, GenericVector<char> *out)
+tess_file_reader(const char *fname, std::vector<char> *out)
 {
 	//const char *file = fname;
 	//const char *s;
@@ -281,7 +281,7 @@ do_cancel(void *arg, int dummy)
 }
 
 static bool
-progress_callback(ETEXT_DESC *monitor, int l, int r, int t, int b)
+progress_callback(tesseract::ETEXT_DESC *monitor, int l, int r, int t, int b)
 {
 	progress_arg *details = (progress_arg *)monitor->cancel_this;
 	int cancel;
@@ -321,7 +321,7 @@ void ocr_recognise(fz_context *ctx,
 	bool bold, italic, underlined, monospace, serif, smallcaps;
 	int pointsize, font_id;
 	const char* font_name;
-	ETEXT_DESC monitor;
+	tesseract::ETEXT_DESC monitor;
 	progress_arg details;
 
 	if (api == NULL)

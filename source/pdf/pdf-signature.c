@@ -398,7 +398,7 @@ pdf_pkcs7_designated_name *pdf_signature_get_signatory(fz_context *ctx, pdf_pkcs
 {
 	char *contents = NULL;
 	size_t contents_len;
-	pdf_pkcs7_designated_name *dn;
+	pdf_pkcs7_designated_name *dn = NULL;
 
 	contents_len = pdf_signature_contents(ctx, doc, signature, &contents);
 	if (contents_len == 0)
