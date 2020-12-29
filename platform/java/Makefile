@@ -23,13 +23,13 @@ ifndef OUT
   OUT := build/java/$(build)
 endif
 
-ifeq ($(OS),"Darwin")
+ifeq ($(OS),Darwin)
 MUPDF_JAVA := ../../$(OUT)/libmupdf_java64.jnilib
 JAVA_VM := $(shell /usr/libexec/java_home)
 JAVA_CFLAGS := \
 	-I $(JAVA_VM)/include \
 	-I $(JAVA_VM)/include/darwin
-JAVA_LDFLAGS :=
+JAVA_LDFLAGS :=  -lstdc++ -lc++
 
 else
 
@@ -46,9 +46,23 @@ JAVA_CFLAGS := \
 JAVA_LIBS := \
 	$(shell pkg-config --libs freetype2) \
 	$(shell pkg-config --libs libcrypto) \
+	-lm \
+	-lpthread \
 	-lz
 JAVA_LDFLAGS := \
 	-z noexecstack
+
+endif
+
+ifeq ($(USE_TESSERACT), yes)
+ifeq ($(USE_SYSTEM_TESSERACT), yes)
+JAVA_LIBS += \
+	$(shell pkg-config --libs lept) \
+	$(shell pkg-config --libs tesseract)
+CONFIGFLAGS += USE_SYSTEM_TESSERACT=yes
+else
+CONFIGFLAGS += USE_TESSERACT=yes
+endif
 endif
 
 MUPDF_JAR := ../../$(OUT)/libmupdf.jar
@@ -58,10 +72,10 @@ default: $(MUPDF_JAVA) $(MUPDF_JAR) $(EXAMPLE_JAVA_SOURCES)
 MUPDF_CORE := ../../$(OUT)/libmupdf.a ../../$(OUT)/libmupdf-third.a
 ifeq "$(OS)" "Linux"
 $(MUPDF_CORE) : .FORCE
-	$(MAKE) -C ../.. OUT=$(OUT) XCFLAGS=-fPIC build=$(build) USE_SYSTEM_FREETYPE=yes USE_SYSTEM_ZLIB=yes libs
+	$(MAKE) -C ../.. OUT=$(OUT) XCFLAGS=-fPIC build=$(build) USE_SYSTEM_FREETYPE=yes USE_SYSTEM_ZLIB=yes $(CONFIGFLAGS) libs
 else
 $(MUPDF_CORE) : .FORCE
-	$(MAKE) -C ../.. OUT=$(OUT) XCFLAGS=-fPIC build=$(build) libs
+	$(MAKE) -C ../.. OUT=$(OUT) XCFLAGS=-fPIC build=$(build) $(CONFIGFLAGS) libs
 endif
 
 LIBRARY_JAVA_SOURCES := $(sort $(wildcard src/com/artifex/mupdf/fitz/*.java))
