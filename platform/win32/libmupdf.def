@@ -182,7 +182,10 @@ EXPORTS
 	fz_set_default_cmyk
 	fz_set_default_output_intent
 	fz_drop_colorspace_imp
+	fz_deflate_bound
 	fz_deflate
+	fz_new_deflated_data
+	fz_new_deflated_data_from_buffer
 	fz_compress_ccitt_fax_g3
 	fz_compress_ccitt_fax_g4
 	fz_compressed_buffer_size
@@ -358,6 +361,7 @@ EXPORTS
 	fz_document_output_intent
 	fz_page_separations
 	fz_page_uses_overprint
+	fz_create_link
 	fz_open_null_filter
 	fz_open_range_filter
 	fz_open_endstream_filter
@@ -754,6 +758,7 @@ EXPORTS
 	fz_print_stext_header_as_xhtml
 	fz_print_stext_trailer_as_xhtml
 	fz_print_stext_page_as_xml
+	fz_print_stext_page_as_json
 	fz_print_stext_page_as_text
 	fz_search_stext_page
 	fz_highlight_selection
@@ -817,6 +822,7 @@ EXPORTS
 	fz_save_pixmap_as_pclm
 	fz_parse_pdfocr_options
 	fz_new_pdfocr_band_writer
+	fz_pdfocr_band_writer_set_progress
 	fz_write_pixmap_as_pdfocr
 	fz_save_pixmap_as_pdfocr
 	fz_save_pixmap_as_png
@@ -855,12 +861,17 @@ EXPORTS
 	fz_new_svg_writer
 	fz_new_text_writer
 	fz_new_text_writer_with_output
+	fz_new_docx_writer
+	fz_new_docx_writer_with_output
 	fz_new_ps_writer
 	fz_new_ps_writer_with_output
 	fz_new_pclm_writer
 	fz_new_pclm_writer_with_output
 	fz_new_cbz_writer
 	fz_new_cbz_writer_with_output
+	fz_new_pdfocr_writer
+	fz_new_pdfocr_writer_with_output
+	fz_pdfocr_writer_set_progress
 	fz_new_png_pixmap_writer
 	fz_new_pam_pixmap_writer
 	fz_new_pnm_pixmap_writer
@@ -870,6 +881,7 @@ EXPORTS
 	fz_new_pkm_pixmap_writer
 	fz_begin_page
 	fz_end_page
+	fz_write_document
 	fz_close_document_writer
 	fz_drop_document_writer
 	fz_new_pixmap_writer
@@ -919,6 +931,7 @@ EXPORTS
 	pdf_resolve_link
 	pdf_annot_transform
 	pdf_create_annot_raw
+	pdf_create_link
 	pdf_create_annot
 	pdf_delete_annot
 	pdf_set_annot_popup
@@ -1012,6 +1025,7 @@ EXPORTS
 	pdf_annot_MK_BC
 	pdf_annot_MK_BG_rgb
 	pdf_annot_MK_BC_rgb
+	pdf_annot_ap
 	pdf_clean_file
 	pdf_new_cmap
 	pdf_keep_cmap
@@ -1085,6 +1099,8 @@ EXPORTS
 	pdf_keep_graft_map
 	pdf_drop_graft_map
 	pdf_graft_mapped_object
+	pdf_graft_page
+	pdf_graft_mapped_page
 	pdf_page_write
 	pdf_add_page
 	pdf_insert_page
@@ -1241,6 +1257,7 @@ EXPORTS
 	pdf_dict_gets
 	pdf_dict_getsa
 	pdf_dict_get_inheritable
+	pdf_dict_getp_inheritable
 	pdf_dict_put
 	pdf_dict_put_drop
 	pdf_dict_get_put_drop
@@ -1425,6 +1442,7 @@ EXPORTS
 	pdf_xref_ensure_incremental_object
 	pdf_xref_is_incremental
 	pdf_xref_store_unsaved_signature
+	pdf_xref_remove_unsaved_signature
 	pdf_xref_obj_is_unsaved_signature
 	pdf_repair_xref
 	pdf_repair_obj_stms

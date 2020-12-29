@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="gen_libmupdf.def.py" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>MuPDFLib</ProjectName>
     <ProjectGuid>{C21B464F-7799-4B39-8CA6-67CE0468966C}</ProjectGuid>
@@ -96,6 +99,9 @@
       <TargetMachine>MachineX86</TargetMachine>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)gen_libmupdf.def.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -119,6 +125,9 @@
       <AssemblyDebug>true</AssemblyDebug>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)gen_libmupdf.def.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -140,6 +149,9 @@
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)gen_libmupdf.def.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -160,6 +172,9 @@
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)gen_libmupdf.def.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\win32\libmupdf.vcxproj">
