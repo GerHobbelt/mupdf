@@ -1032,7 +1032,27 @@ main(int argc, const char *argv[])
 				else if (match(&line, "CD"))
 				{
 					char path[LONGLINE];
+
 					unescape_string(path, line);
+
+					// expand dir macro {SCRIPTDIR} if it exists:
+					const char* m = strstr(path, "{SCRIPTDIR}");
+					if (m) {
+						char buf[LONGLINE];
+						char* l;
+						char* k;
+
+						memset(buf, 0, sizeof(buf));
+						strncpy(buf, path, m - path);
+						strncat(buf, scriptname, sizeof(buf));
+						k = strrchr(buf, '/');
+						l = strrchr(buf, '\\'); // Windows paths...
+						if (l > k) k = l;
+						if (k) *k = 0;
+						strncat(buf, m + 11, sizeof(buf));
+						strncpy(path, buf, sizeof(path));
+					}
+
 					fz_chdir(ctx, path);
 				}
 				else if (match(&line, "MUTOOL"))
@@ -1094,11 +1114,17 @@ main(int argc, const char *argv[])
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "cannot execute '%s': %s", scriptname, fz_caught_message(ctx));
+		fz_error(ctx, "Failure when executing '%s': %s", scriptname, fz_caught_message(ctx));
 
 		struct curltime now = Curl_now();
 
 		fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+
+		// also log to stderr if we haven't already:
+		if (logcfg.logfile)
+		{
+			fprintf(stderr, "\nL#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+		}
 
 		errored = 1;
 	}
