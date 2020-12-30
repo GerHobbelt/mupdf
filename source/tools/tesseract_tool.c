@@ -2,9 +2,9 @@
  * mutool -- swiss army knife of pdf manipulation tools
  */
 
-//#include "mupdf/fitz.h"
 #include "../dll/pch.h"
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #include <string.h>
@@ -13,8 +13,6 @@
 #ifdef _MSC_VER
 #define main main_utf8
 #endif
-
-int tesseract_main(int argc, const char** argv);
 
 int main(int argc, const char **argv)
 {

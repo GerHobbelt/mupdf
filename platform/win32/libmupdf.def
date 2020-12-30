@@ -4,7 +4,8 @@ LIBRARY MuPDFLib
 
 EXPORTS
 
-	tesseract_main
+; MuPDF tool exports
+
 	muconvert_main
 	mudraw_main
 	muraster_main
@@ -20,36 +21,113 @@ EXPORTS
 	pdfmerge_main
 	pdfsign_main
 	cmapdump_main
+	tesseract_main
+	curl_main
+
+; Tesseract OCR exports
 
 	ocr_init
 	ocr_fin
 	ocr_recognise
 
+; curl exports
+
+
+	curl_strequal
+	curl_strnequal
+	curl_mime_init
+	curl_mime_free
+	curl_mime_addpart
+	curl_mime_name
+	curl_mime_filename
+	curl_mime_type
+	curl_mime_encoder
+	curl_mime_data
+	curl_mime_filedata
+	curl_mime_data_cb
+	curl_mime_subparts
+	curl_mime_headers
+	curl_formadd
+	curl_formget
+	curl_formfree
+	curl_getenv
+	curl_version
+	curl_easy_escape
+	curl_escape
+	curl_easy_unescape
+	curl_unescape
+	curl_free
+	curl_global_init
+	curl_global_init_mem
+	curl_global_cleanup
+	curl_global_sslset
+	curl_slist_free_all
+	curl_getdate
+	curl_share_init
+	curl_share_setopt
+	curl_share_cleanup
+	curl_version_info
+	curl_easy_pause
+
+
 	curl_easy_init
 	curl_easy_setopt
 	curl_easy_perform
 	curl_easy_cleanup
-	curl_version
+	curl_easy_getinfo
+	curl_easy_duphandle
+	curl_easy_reset
+	curl_easy_recv
+	curl_easy_send
+	curl_easy_upkeep
 
-	curlx_win32_fopen
+	curl_mprintf
+	curl_mfprintf
+	curl_msprintf
+	curl_msnprintf
+	curl_mvprintf
+	curl_mvfprintf
+	curl_mvsprintf
+	curl_mvsnprintf
+	curl_maprintf
+	curl_mvaprintf
+	curl_multi_init
+	curl_multi_add_handle
+	curl_multi_remove_handle
+	curl_multi_fdset
+	curl_multi_wait
+	curl_multi_poll
+	curl_multi_wakeup
+	curl_multi_perform
+	curl_multi_cleanup
+	curl_multi_info_read
+	curl_multi_socket
+	curl_multi_socket_action
+	curl_multi_socket_all
+	curl_multi_timeout
+	curl_multi_setopt
+	curl_multi_assign
+	curl_pushheader_bynum
+	curl_pushheader_byname
+
+
+
+
+	curl_url
+	curl_url_cleanup
+	curl_url_dup
+	curl_url_get
+	curl_url_set
+
+; platform exports
 
 	fz_open_file_progressive
 	fz_open_url
 
-	fz_argv_from_wargv
-	fz_verror
-	fz_error
-	fz_vwarn
-	fz_warn
-	fz_vinfo
-	fz_info
-	fz_get_global_context
-	fz_set_global_context
-	fz_has_global_context
-	fz_drop_global_context
-	fz_drop_context_locks
+; helpers exports
 
-	fz_register_document_handlers
+	fz_chdir
+	fz_mkdir_for_file
 
 	mu_create_semaphore
 	mu_destroy_semaphore
@@ -62,10 +140,11 @@ EXPORTS
 	mu_lock_mutex
 	mu_unlock_mutex
 
-	; data, not a function:
-	fz_identity
 
 ; Fitz exports
+
+	; data, not a function:
+	fz_identity
 
 	fz_open_archive
 	fz_open_archive_with_stream
@@ -182,10 +261,7 @@ EXPORTS
 	fz_set_default_cmyk
 	fz_set_default_output_intent
 	fz_drop_colorspace_imp
-	; fz_deflate_bound
 	fz_deflate
-	; fz_new_deflated_data
-	; fz_new_deflated_data_from_buffer
 	fz_compress_ccitt_fax_g3
 	fz_compress_ccitt_fax_g4
 	fz_compressed_buffer_size
@@ -198,8 +274,12 @@ EXPORTS
 	fz_vthrow
 	fz_throw
 	fz_rethrow
+	fz_verror
+	fz_error
 	fz_vwarn
 	fz_warn
+	fz_vinfo
+	fz_info
 	fz_caught_message
 	fz_caught
 	fz_rethrow_if
@@ -208,6 +288,10 @@ EXPORTS
 	fz_drop_context
 	fz_set_user_context
 	fz_user_context
+	fz_drop_context_locks
+	fz_set_global_context
+	fz_has_global_context
+	fz_drop_global_context
 	fz_default_error_callback
 	fz_default_warning_callback
 	fz_default_info_callback
@@ -394,8 +478,10 @@ EXPORTS
 	fz_windows_1252_from_unicode
 	fz_unicode_from_glyph_name
 	fz_unicode_from_glyph_name_strict
+	fz_duplicate_glyph_names_from_unicode
 	fz_glyph_name_from_unicode_sc
 	fz_font_ft_face
+	fz_font_t3_procs
 	fz_font_flags
 	fz_font_shaper_data
 	fz_font_name
@@ -483,6 +569,7 @@ EXPORTS
 	fz_is_quad_inside_quad
 	fz_is_quad_intersecting_quad
 	fz_getopt
+	fz_getopt_reset
 	fz_purge_glyph_cache
 	fz_render_glyph_pixmap
 	fz_render_t3_glyph_direct
@@ -772,6 +859,7 @@ EXPORTS
 	fz_wchar_from_utf8
 	fz_fopen_utf8
 	fz_remove_utf8
+	fz_argv_from_wargv
 	fz_free_argv
 	fz_new_text
 	fz_keep_text
@@ -909,14 +997,61 @@ EXPORTS
 	fz_xml_find_next_match
 	fz_xml_find_down_match
 
+; Fitz Documents exports
+
+	fz_register_document_handler
+	fz_register_document_handlers
+	fz_recognize_document
+	fz_open_document
+	fz_open_accelerated_document
+	fz_open_document_with_stream
+	fz_open_accelerated_document_with_stream
+	fz_document_supports_accelerator
+	fz_save_accelerator
+	fz_output_accelerator
+	fz_new_document_of_size
+	fz_keep_document
+	fz_drop_document
+	fz_needs_password
+	fz_authenticate_password
+	fz_load_outline
+	fz_is_document_reflowable
+	fz_layout_document
+	fz_make_bookmark
+	fz_lookup_bookmark
+	fz_count_pages
+	fz_resolve_link
+	fz_last_page
+	fz_next_page
+	fz_previous_page
+	fz_clamp_location
+	fz_location_from_page_number
+	fz_page_number_from_location
+	fz_load_page
+	fz_count_chapters
+	fz_count_chapter_pages
+	fz_load_chapter_page
+	fz_load_links
+	fz_new_page_of_size
+	fz_bound_page
+	fz_run_page
+	fz_run_page_contents
+	fz_run_page_annots
+	fz_run_page_widgets
+	fz_keep_page
+	fz_drop_page
+	fz_page_presentation
+	fz_has_permission
+	fz_lookup_metadata
+	fz_document_output_intent
+	fz_page_separations
+	fz_page_uses_overprint
+	fz_create_link
+
 ; MuPDF exports
 
 	pdf_string_from_annot_type
 	pdf_annot_type_from_string
-	pdf_line_ending_from_name
-	pdf_line_ending_from_string
-	pdf_name_from_line_ending
-	pdf_string_from_line_ending
 	pdf_keep_annot
 	pdf_drop_annot
 	pdf_first_annot
@@ -924,13 +1059,8 @@ EXPORTS
 	pdf_bound_annot
 	pdf_annot_type
 	pdf_run_annot
-	pdf_lookup_name
 	pdf_load_name_tree
-	pdf_lookup_number
 	pdf_walk_tree
-	pdf_resolve_link
-	pdf_annot_transform
-	pdf_create_annot_raw
 	pdf_create_link
 	pdf_create_annot
 	pdf_delete_annot
@@ -1004,27 +1134,20 @@ EXPORTS
 	pdf_print_default_appearance
 	pdf_annot_default_appearance
 	pdf_set_annot_default_appearance
-	pdf_dirty_annot
 	pdf_new_display_list_from_annot
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
-	pdf_guess_mime_type_from_file_name
-	pdf_embedded_file_stream
 	pdf_embedded_file_name
 	pdf_embedded_file_type
 	pdf_is_embedded_file
 	pdf_load_embedded_file
 	pdf_add_embedded_file
-	pdf_parse_link_dest
-	pdf_parse_link_action
-	pdf_lookup_dest
-	pdf_load_link_annots
-	pdf_load_annots
-	pdf_drop_annots
-	pdf_annot_MK_BG
-	pdf_annot_MK_BC
-	pdf_annot_MK_BG_rgb
-	pdf_annot_MK_BC_rgb
+	pdf_annot_obj
+	pdf_annot_is_hot
+	pdf_annot_set_hot
+	pdf_annot_page
+	pdf_annot_needs_new_ap
+	pdf_annot_set_active
 	pdf_annot_ap
 	pdf_clean_file
 	pdf_new_cmap

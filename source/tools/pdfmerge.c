@@ -4,6 +4,7 @@
  * Simple test bed to work with merging pages from multiple PDFs into a single PDF.
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 

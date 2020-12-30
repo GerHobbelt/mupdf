@@ -4,12 +4,11 @@
 
 #include "../dll/pch.h"
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #include <string.h>
 #include <stdio.h>
-
-int curl_main(int argc, const char* argv[]);
 
 #ifdef _MSC_VER
 #define main main_utf8
