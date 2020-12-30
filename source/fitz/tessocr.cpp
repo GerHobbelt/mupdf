@@ -1,7 +1,6 @@
 #if defined(HAVE_LEPTONICA) && defined(HAVE_TESSERACT)
 
 #include "tesseract/baseapi.h"
-#include "tesseract/serialis.h"
 #include "tesseract/ocrclass.h"          // for ETEXT_DESC
 
 extern "C" {

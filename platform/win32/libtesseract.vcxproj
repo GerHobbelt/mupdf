@@ -102,6 +102,7 @@
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\errcode.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\fileerr.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\genericheap.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\genericvector.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\host.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\indexmapbidi.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\kdpair.h" />
@@ -110,7 +111,9 @@
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\params.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\qrsequence.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\scanutils.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\serialis.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\sorthelper.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\strngs.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\tessdatamanager.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\tprintf.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\unicharcompress.h" />
@@ -462,7 +465,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -495,7 +498,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -520,7 +523,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -546,7 +549,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
