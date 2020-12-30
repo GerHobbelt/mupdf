@@ -138,6 +138,7 @@
 
 #include "timeval.h"
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #ifndef DISABLE_MUTHREADS

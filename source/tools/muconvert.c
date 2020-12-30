@@ -2,6 +2,7 @@
  * muconvert -- command line tool for converting documents
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #include <stdlib.h>

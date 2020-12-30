@@ -2,6 +2,7 @@
  * pdfextract -- the ultimate way to extract images and fonts from pdfs
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 

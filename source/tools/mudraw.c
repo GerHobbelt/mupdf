@@ -4,6 +4,7 @@
 
 #include "timeval.h"
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #if FZ_ENABLE_PDF

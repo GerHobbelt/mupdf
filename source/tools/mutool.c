@@ -2,6 +2,7 @@
  * mutool -- swiss army knife of pdf manipulation tools
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #include <string.h>
@@ -10,27 +11,6 @@
 #ifdef _MSC_VER
 #define main main_utf8
 #endif
-
-int muconvert_main(int argc, const char *argv[]);
-int mudraw_main(int argc, const char *argv[]);
-int muraster_main(int argc, const char *argv[]);
-int mutrace_main(int argc, const char *argv[]);
-int murun_main(int argc, const char *argv[]);
-
-int pdfclean_main(int argc, const char *argv[]);
-int pdfextract_main(int argc, const char *argv[]);
-int pdfinfo_main(int argc, const char *argv[]);
-int pdfposter_main(int argc, const char *argv[]);
-int pdfshow_main(int argc, const char *argv[]);
-int pdfpages_main(int argc, const char *argv[]);
-int pdfcreate_main(int argc, const char *argv[]);
-int pdfmerge_main(int argc, const char *argv[]);
-int pdfsign_main(int argc, const char *argv[]);
-
-int cmapdump_main(int argc, const char *argv[]);
-
-int tesseract_main(int argc, const char** argv);
-int curl_main(int argc, const char* argv[]);
 
 static struct {
 	int (*func)(int argc, const char *argv[]);

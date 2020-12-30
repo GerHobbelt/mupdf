@@ -9,6 +9,7 @@
  * TODO: linearize document for fast web view
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 

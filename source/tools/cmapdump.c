@@ -1,5 +1,6 @@
 /* cmapdump.c -- parse a CMap file and dump it as a c-struct */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 

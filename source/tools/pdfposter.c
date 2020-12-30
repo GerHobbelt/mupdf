@@ -2,6 +2,7 @@
  * PDF posteriser; split pages within a PDF file into smaller lumps.
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 

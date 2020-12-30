@@ -1,3 +1,4 @@
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
 #include <string.h>
