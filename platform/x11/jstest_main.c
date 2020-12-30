@@ -1064,7 +1064,8 @@ main(int argc, const char *argv[])
 					if (rv != EXIT_SUCCESS)
 					{
 						fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
-						errored = 1;
+						errored++;
+						if (errored > 99) errored = 99;
 					}
 					else if (verbosity)
 					{
@@ -1126,7 +1127,7 @@ main(int argc, const char *argv[])
 			fprintf(stderr, "\nL#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 		}
 
-		errored = 1;
+		errored += 100;
 	}
 
 	if (file_open)
