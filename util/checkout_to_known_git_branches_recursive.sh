@@ -94,14 +94,14 @@ pushd $(dirname $0)                                                            2
 # The registered repositories:
 #
 
-git_repo_checkout_branch "../thirdparty/curl" ef8a878b6d41d20b8bbd12725f425d7bc841a49e master
+git_repo_checkout_branch "../thirdparty/curl" 97b62fca11288fd38cc0c089f7d1c6091c853c29 master
 git_repo_checkout_branch "../thirdparty/extract" 76c51b47f862c646f029ca5a13c91b680f58c087 master
 git_repo_checkout_branch "../thirdparty/freeglut" 8e87a0df250b6270d322c13a30ec68a612044201 master
 git_repo_checkout_branch "../thirdparty/freetype" 0b480e41560d98e4c7aaa977487db8ef6b42f0d1 mupdf
 git_repo_checkout_branch "../thirdparty/freetype/submodules/dlg" fc6f9e58c30c0bb72624753e9ee834babcfed1eb master
 git_repo_checkout_branch "../thirdparty/gumbo-parser" 91075ac371c4e736b91295890cb8c38bce4c1baf mupdf
 git_repo_checkout_branch "../thirdparty/harfbuzz" 7fdf91560b2b1ede05ee262ec4058ba56c22c52b master
-git_repo_checkout_branch "../thirdparty/jbig2dec" 4bcea38183431540eb3eb8d5b2b426fd33ca7fd4 mupdf
+git_repo_checkout_branch "../thirdparty/jbig2dec" 4bcea38183431540eb3eb8d5b2b426fd33ca7fd4 master
 git_repo_checkout_branch "../thirdparty/jpeginfo" fc166a33a9dc190a27854e95237ef2e82bbea2a2 master
 git_repo_checkout_branch "../thirdparty/langdata_LSTM" f0714d60cdc221fceb11787acb5e35b3937643ae master
 git_repo_checkout_branch "../thirdparty/lcms2" 01497bdb3df286d2cf14147340a8071c0a4fe800 master
@@ -109,15 +109,15 @@ git_repo_checkout_branch "../thirdparty/leptonica" 1f8b00e102951e1f4ed8c3a15e2fc
 git_repo_checkout_branch "../thirdparty/libjpeg" 2727a4365ae480ecda656e8372f4c782c8dcc2df master
 git_repo_checkout_branch "../thirdparty/libpng" 5a8048483ef0a92dda6db4b9928e9c8eaf28ef4c libpng16
 git_repo_checkout_branch "../thirdparty/libtiff" 14e4ec131079b4f64f8d3b97add91204c3f6b2bc master
-git_repo_checkout_branch "../thirdparty/mujs" edd72544bef6a495e4d7c07ecf99c3fc3e648b8f mupdf
-git_repo_checkout_branch "../thirdparty/openjpeg" 745bf92a8814d01df5d49420fd5ca4c361127e88 mupdf
+git_repo_checkout_branch "../thirdparty/mujs" edd72544bef6a495e4d7c07ecf99c3fc3e648b8f master
+git_repo_checkout_branch "../thirdparty/openjpeg" 27b1cf9e3fb6e54e881a7a9bdde9bbb81496f542 master
 git_repo_checkout_branch "../thirdparty/tessconfigs" 3decf1c8252ba6dbeef0bf908f4b0aab7f18d113 master
 git_repo_checkout_branch "../thirdparty/tessdata" 04b3a062bafba11cb61afdb760e4ca07388a49b2 master
 git_repo_checkout_branch "../thirdparty/tessdata_best" 9e8aeef07ce8c4f6e6519577cee76363246bc6de master
 git_repo_checkout_branch "../thirdparty/tessdata_contrib" 5860cde5da2aa530a0d6cb1b9de5f526a7172d81 master
 git_repo_checkout_branch "../thirdparty/tessdata_fast" 65727574dfcd264acbb0c3e07860e4e9e9b22185 master
 git_repo_checkout_branch "../thirdparty/tessdoc" 70c4bac5ff33860f93c13b4123b52f4411058fee master
-git_repo_checkout_branch "../thirdparty/tesseract" dbceadaae5a60903b2334c555b9401d2574f159e master
+git_repo_checkout_branch "../thirdparty/tesseract" 607688200f2b36b9c11b922b1aa4995e38a00574 master
 git_repo_checkout_branch "../thirdparty/tesseract/abseil" e7ca23acac146b10edc4f752edd0bd28b0f14ea3 master
 git_repo_checkout_branch "../thirdparty/tesseract/googletest" 389cb68b87193358358ae87cc56d257fd0d80189 master
 git_repo_checkout_branch "../thirdparty/tesseract/test" e27d9566917d7d167636a7d0cd59bcfb2c61c7eb master
