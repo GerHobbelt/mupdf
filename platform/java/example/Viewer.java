@@ -8,6 +8,10 @@ import java.awt.image.*;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
 import java.util.Vector;
 
@@ -426,9 +430,70 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			clearSearch();
 	}
 
+	class Progressmeter implements DocumentWriter.OCRListener {
+		int page;
+
+		public void setPage(int i) {
+			page = i;
+		}
+
+		public boolean progress(int percent) {
+			System.out.println("page " + page + ": " + percent + "%");
+			return false;
+		}
+	}
+
+	class MyStream implements SeekableOutputStream {
+		File f;
+		FileOutputStream s;
+
+		public MyStream(String filename) throws FileNotFoundException {
+			f = new File(filename);
+			s = new FileOutputStream(f);
+		}
+
+		public long seek(long offset, int whence) throws IOException {
+			throw new IOException("seek not supported");
+		}
+
+		public long position() throws IOException {
+			return f.length();
+		}
+
+		public void write(byte[] b, int off, int len) throws IOException {
+			s.write(b, off,len);
+		}
+
+		public void truncate() throws IOException {
+			RandomAccessFile raf = new RandomAccessFile(f, "rw");
+			raf.setLength(f.length());
+			raf.close();
+		}
+	}
+
 	public void save() {
-		PDFDocument pdf = (PDFDocument) doc;
-		pdf.redactSaveSecure("/tmp/tomte.pdf", "");
+		try {
+			PDFDocument pdf = (PDFDocument) doc;
+			Progressmeter meter = new Progressmeter();
+			DocumentWriter wri = new DocumentWriter(new MyStream("/tmp/tomte.pdf"), "ocr", "");
+			wri.addOCRListener(meter);
+
+			int pages = pdf.countPages();
+
+			for (int i = 0; i < pages; i++)
+			{
+				meter.setPage(i);
+				Page page = pdf.loadPage(i);
+				Rect bounds = page.getBounds();
+				Device dev = wri.beginPage(bounds);
+				page.run(dev, new Matrix());
+				wri.endPage();
+			}
+
+			wri.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e);
+		}
 	}
 
 	protected void canvasKeyTyped(KeyEvent e) {
