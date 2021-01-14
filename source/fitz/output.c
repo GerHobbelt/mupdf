@@ -11,8 +11,10 @@
 #include <stdio.h>
 #include <string.h>
 #ifdef _WIN32
-#include <io.h>
 #include <windows.h>
+#endif
+#ifdef _WIN32
+#include <io.h>
 #else
 #include <unistd.h>
 #endif
