@@ -1,3 +1,3 @@
 ifdef USE_TESSERACT
-	APP_STL := c++_static
+APP_STL := c++_static
 endif

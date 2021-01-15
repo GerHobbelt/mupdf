@@ -463,6 +463,8 @@ void pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const ch
 void pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, float color[3]);
 void pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, const float color[3]);
 
+int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_widget *widget, const char *text, int ignore_trigger_events);
+
 /*
 	Recreate the appearance stream for an annotation, if necessary.
 */
@@ -540,4 +542,10 @@ int pdf_annot_needs_new_ap(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_set_active(fz_context *ctx, pdf_annot *annot, int active);
 
 pdf_obj *pdf_annot_ap(fz_context *ctx, pdf_annot *annot);
+
+int pdf_annot_active(fz_context *ctx, pdf_annot *annot);
+void pdf_annot_set_active(fz_context *ctx, pdf_annot *annot, int active);
+int pdf_annot_hot(fz_context *ctx, pdf_annot *annot);
+void pdf_annot_set_hot(fz_context *ctx, pdf_annot *annot, int hot);
+
 #endif

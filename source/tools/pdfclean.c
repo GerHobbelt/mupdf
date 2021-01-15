@@ -68,6 +68,8 @@ int pdfclean_main(int argc, const char **argv)
 	ctx = NULL;
 
 	fz_getopt_reset();
+	opts.dont_regenerate_id = 1;
+
 	while ((c = fz_getopt(argc, argv, "adfgilp:sczDAE:O:U:P:")) != -1)
 	{
 		switch (c)

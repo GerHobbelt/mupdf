@@ -52,16 +52,16 @@ JAVA_LIBS := \
 JAVA_LDFLAGS := \
 	-z noexecstack
 
-endif
-
 ifeq ($(USE_TESSERACT), yes)
 ifeq ($(USE_SYSTEM_TESSERACT), yes)
 JAVA_LIBS += \
 	$(shell pkg-config --libs lept) \
 	$(shell pkg-config --libs tesseract)
+
 CONFIGFLAGS += USE_SYSTEM_TESSERACT=yes
 else
 CONFIGFLAGS += USE_TESSERACT=yes
+endif
 endif
 endif
 

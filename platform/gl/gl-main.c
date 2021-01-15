@@ -1472,6 +1472,7 @@ static void load_document(void)
 			trace_action("doc.enableJS();\n");
 			pdf_enable_js(ctx, pdf);
 		}
+		pdf_enable_journal(ctx, pdf);
 		if (trace_file)
 		{
 			int vsns = pdf_count_versions(ctx, pdf);
@@ -2350,6 +2351,13 @@ int main(int argc, const char **argv)
 	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+
+#ifdef _WIN32
+	/* stderr goes nowhere. Get us a debug stream we have a chance
+	 * of seeing. */
+	fz_set_stddbg(ctx, fz_stdods(ctx));
+#endif
+
 	fz_register_document_handlers(ctx);
 
 	if (trace_file_name)
