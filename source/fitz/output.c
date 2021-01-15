@@ -83,7 +83,7 @@ fz_output *fz_stderr(fz_context *ctx)
 static void
 stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
-	unsigned char *buf = fz_malloc(ctx, count+1);
+	char *buf = fz_malloc(ctx, count+1);
 
 	memcpy(buf, buffer, count);
 	buf[count] = 0;
