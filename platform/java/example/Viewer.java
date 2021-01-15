@@ -437,7 +437,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 	public void save() {
 		PDFDocument pdf = (PDFDocument) doc;
 		long start = System.currentTimeMillis();
-		pdf.redactSaveSecure("/Users/fredrossperry/Desktop/out.pdf", "compression=flate,resolution=200,ocr-language=eng");
+		pdf.redactSaveSecure("/tmp/mupdf-viewer-out.pdf", "compression=flate,resolution=200,ocr-language=eng");
 		long stop = System.currentTimeMillis();
 		System.out.println(String.format("redactSaveSecure finished in %d msec.", stop-start));
 	}
