@@ -140,9 +140,11 @@ int pdfclean_main(int argc, const char **argv)
 	{
 		fz_error(ctx, "%s", fz_caught_message(ctx));
 		errors++;
+		// delete damaged/incomplete output file:
+		unlink(outfile);
 	}
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 
-	return errors != 0;
+	return errors != 0 ? EXIT_FAILURE : EXIT_SUCCESS;
 }
