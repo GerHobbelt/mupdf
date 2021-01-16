@@ -5,6 +5,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
+#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -204,6 +205,7 @@ int muconvert_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	assert(retval == EXIT_SUCCESS);
 	fz_try(ctx)
 	{
 		for (i = fz_optind; i < argc; ++i)
@@ -229,8 +231,6 @@ int muconvert_main(int argc, const char **argv)
 		fz_error(ctx, "cannot load document: %s", fz_caught_message(ctx));
 		fz_drop_document(ctx, doc);
 		doc = NULL;
-		// and delete incomplete/damaged output file:
-		unlink(output);
 		retval = EXIT_FAILURE;
 	}
 
@@ -238,5 +238,12 @@ int muconvert_main(int argc, const char **argv)
 
 	fz_drop_document_writer(ctx, out);
 	fz_drop_context(ctx);
+
+	// and delete incomplete/damaged output file:
+	if (retval != EXIT_SUCCESS && output != NULL)
+	{
+		unlink(output);
+	}
+
 	return retval;
 }
