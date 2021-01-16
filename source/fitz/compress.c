@@ -24,7 +24,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 	}
 
 	fz_try(ctx)
-		fz_realloc(ctx, output_p, output_n);
+		output_p = fz_realloc(ctx, output_p, output_n);
 	fz_catch(ctx)
 	{
 		fz_free(ctx, output_p);
