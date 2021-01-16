@@ -931,6 +931,7 @@ main(int argc, const char *argv[])
 		while (fz_optind < argc)
 		{
 			char logfilename[4096];
+			char skip_to_label[LONGLINE] = "";
 
 			scriptname = argv[fz_optind++];
 			script = fopen(scriptname, "rb");
@@ -970,6 +971,41 @@ main(int argc, const char *argv[])
 					/* Comment */
 					report_time = false;
 				}
+				else if (match(&line, "LABEL:"))
+				{
+					// Just a jump-to point in the script: if we don't have a pending 'skip-to' instruction
+					// we hop over this one and continue.
+					if (*skip_to_label)
+					{
+						char label[LONGLINE];
+						unescape_string(label, line);
+						if (!strcmp(label, skip_to_label))
+						{
+							*skip_to_label = 0;
+							fz_info(ctx, "SKIP TO LABEL found. Going back to work.\n");
+						}
+					}
+					report_time = false;
+				}
+				else if (*skip_to_label)
+				{
+					// skip command as we're skipping to label X
+					fz_info(ctx, "SKIPPING: %s\n", line);
+					report_time = false;
+				}
+				else if (match(&line, "SKIP_TO_LABEL"))
+				{
+					// Specify a label that SHOULD appear further down the script.
+					// Skip all commands until we've hit that label.
+					unescape_string(skip_to_label, line);
+					fz_info(ctx, "SKIP TO LABEL %s\n", skip_to_label);
+				}
+				else if (match(&line, "ECHO"))
+				{
+					unescape_string(echoline, line);
+					fz_info(ctx, "::ECHO: %s\n", echoline);
+					report_time = false;
+				}
 				else if (match(&line, "PASSWORD"))
 				{
 					strcpy(pd_password, line);
@@ -994,11 +1030,6 @@ main(int argc, const char *argv[])
 				else if (match(&line, "GOTO"))
 				{
 					pdfapp_gotopage(&gapp, atoi(line)-1);
-				}
-				else if (match(&line, "ECHO"))
-				{
-					unescape_string(echoline, line);
-					fz_info(ctx, "::ECHO: %s\n", echoline);
 				}
 				else if (match(&line, "SCREENSHOT"))
 				{
