@@ -315,6 +315,7 @@ int wingetcertpath(pdfapp_t* app, char *buf, int len)
 
 static char pd_password[256] = "";
 static char td_textinput[LONGLINE] = "";
+static char echoline[LONGLINE] = "";
 
 const char *winpassword(pdfapp_t *app, const char *filename)
 {
@@ -740,13 +741,27 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 		if (logfile != stderr)
 		{
 			if (!strncmp(message, "OK:", 3))
+			{
+				//fprintf(stderr, u8"✅");
 				fprintf(stderr, "#");
+			}
 			else if (!strncmp(message, "ERR:", 4))
-				fprintf(stderr, "/");
+			{
+				//fprintf(stderr, u8"❎");
+				fprintf(stderr, "[E]");
+			}
+			else if (!strncmp(message, "::ECHO: ", 8))
+			{
+				fprintf(stderr, "\n%s", message + 8);
+			}
 			else if (strstr(message, "*!*"))
+			{
 				fprintf(stderr, "*!*");
+			}
 			else
+			{
 				fprintf(stderr, ".");
+			}
 		}
 	}
 }
@@ -979,6 +994,11 @@ main(int argc, const char *argv[])
 				else if (match(&line, "GOTO"))
 				{
 					pdfapp_gotopage(&gapp, atoi(line)-1);
+				}
+				else if (match(&line, "ECHO"))
+				{
+					unescape_string(echoline, line);
+					fz_info(ctx, "::ECHO: %s\n", echoline);
 				}
 				else if (match(&line, "SCREENSHOT"))
 				{
