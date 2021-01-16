@@ -2246,10 +2246,3 @@ int pdf_annot_needs_new_ap(fz_context *ctx, pdf_annot *annot)
 {
 	return annot ? annot->needs_new_ap : 0;
 }
-
-void pdf_annot_set_active(fz_context *ctx, pdf_annot *annot, int active)
-{
-	if (!annot)
-		return;
-	annot->is_active = active;
-}

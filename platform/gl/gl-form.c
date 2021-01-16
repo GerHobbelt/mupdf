@@ -404,7 +404,7 @@ void do_widget_canvas(fz_irect canvas_area)
 		}
 		else
 		{
-			if (pdf_annot_is_hot(ctx, widget))
+			if (pdf_annot_hot(ctx, widget))
 			{
 				trace_action("page.getWidgets()[%d].eventExit();\n", idx);
 				pdf_annot_event_exit(ctx, widget);

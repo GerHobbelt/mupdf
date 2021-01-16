@@ -54,8 +54,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugJava|Win32'">
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
     <NMakeOutput>javaviewer.jar</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -63,8 +63,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugJava|x64'">
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
     <NMakeOutput>javaviewer.jar</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN64;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -72,8 +72,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseJava|Win32'">
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
     <NMakeOutput>javaviewer.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -81,8 +81,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseJava|x64'">
     <OutDir>$(Configuration)-$(PlatformArchitecture)\</OutDir>
     <IntDir>$(Configuration)-$(PlatformArchitecture)\$(ProjectName)\</IntDir>
-    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Platform)\$(Configuration)</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
     <NMakeOutput>javaviewer.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN64;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -90,8 +90,11 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\java\Application.mk" />
     <None Include="..\java\example\PageCanvas.java" />
     <None Include="..\java\example\Viewer.java" />
+    <None Include="..\java\Makefile" />
+    <None Include="..\java\winmake.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="javaviewerlib.vcxproj">

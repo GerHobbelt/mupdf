@@ -634,6 +634,9 @@ EXPORTS
 	fz_new_output_with_path
 	fz_new_output_with_buffer
 	fz_stdout
+	fz_stdods
+	fz_set_stddbg
+	fz_stddbg
 	fz_write_printf
 	fz_write_vprintf
 	fz_seek_output
@@ -1134,6 +1137,7 @@ EXPORTS
 	pdf_print_default_appearance
 	pdf_annot_default_appearance
 	pdf_set_annot_default_appearance
+	pdf_set_annot_field_value
 	pdf_new_display_list_from_annot
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
@@ -1143,12 +1147,15 @@ EXPORTS
 	pdf_load_embedded_file
 	pdf_add_embedded_file
 	pdf_annot_obj
-	pdf_annot_is_hot
 	pdf_annot_set_hot
 	pdf_annot_page
 	pdf_annot_needs_new_ap
 	pdf_annot_set_active
 	pdf_annot_ap
+	pdf_annot_active
+	pdf_annot_set_active
+	pdf_annot_hot
+	pdf_annot_set_hot
 	pdf_clean_file
 	pdf_new_cmap
 	pdf_keep_cmap
@@ -1450,6 +1457,18 @@ EXPORTS
 	pdf_get_bound_document
 	pdf_set_int
 	pdf_set_str_len
+	pdf_enable_journal
+	pdf_begin_operation
+	pdf_begin_implicit_operation
+	pdf_end_operation
+	pdf_undoredo_state
+	pdf_undoredo_step
+	pdf_can_undo
+	pdf_can_redo
+	pdf_undo
+	pdf_redo
+	pdf_discard_journal
+	pdf_drop_journal
 	pdf_new_pdf_device
 	pdf_localise_page_resources
 	pdf_lookup_page_number

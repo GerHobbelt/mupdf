@@ -535,7 +535,6 @@ fz_buffer *pdf_load_embedded_file(fz_context *ctx, pdf_obj *fs);
 pdf_obj *pdf_add_embedded_file(fz_context *ctx, pdf_document *doc, const char *filename, const char *mimetype, fz_buffer *contents);
 
 pdf_obj *pdf_annot_obj(fz_context *ctx, pdf_annot *annot);
-int pdf_annot_is_hot(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_set_hot(fz_context *ctx, pdf_annot *annot, int hot);
 pdf_page *pdf_annot_page(fz_context *ctx, pdf_annot *annot);
 int pdf_annot_needs_new_ap(fz_context *ctx, pdf_annot *annot);
