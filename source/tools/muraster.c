@@ -238,6 +238,7 @@
 #endif
 
 enum {
+	OUT_PNG,
 	OUT_PGM,
 	OUT_PPM,
 	OUT_PAM,
@@ -260,6 +261,7 @@ typedef struct
 
 static const suffix_t suffix_table[] =
 {
+	{ ".png", OUT_PNG, 0 },
 #if FZ_PLOTTERS_G || FZ_PLOTTERS_N
 	{ ".pgm", OUT_PGM, CS_GRAY },
 #endif
@@ -408,6 +410,7 @@ static int min_band_height;
 static size_t max_band_memory;
 static int lowmemory = 0;
 
+static int quiet = 0;
 static int errored = 0;
 static fz_colorspace *colorspace;
 static const char *filename;
@@ -512,6 +515,7 @@ static void usage(void)
 		"  -F -  output format (default inferred from output file name)\n"
 		"    pam, pbm, pgm, pkm, ppm\n"
 		"\n"
+		"  -q    be quiet (don't print progress messages)\n"
 		"  -s -  show extra information:\n"
 		"    m   show memory use\n"
 		"    t   show timings\n"
@@ -1659,6 +1663,7 @@ int muraster_main(int argc, const char *argv[])
 
 	lowmemory = 0;
 
+	quiet = 0;
 	errored = 0;
 	files = 0;
 
@@ -1684,6 +1689,8 @@ int muraster_main(int argc, const char *argv[])
 		switch (c)
 		{
 		default: usage(); return EXIT_FAILURE;
+
+		case 'q': quiet = 1; fz_default_error_warn_info_mode(1, 1, 1); break;
 
 		case 'p': password = fz_optarg; break;
 
@@ -1930,7 +1937,15 @@ int muraster_main(int argc, const char *argv[])
 		}
 
 		if (!output || *output == 0 || !strcmp(output, "-"))
+		{
+			quiet = 1; /* automatically be quiet if printing to stdout */
+			fz_default_error_warn_info_mode(1, 1, 1);
+#ifdef _WIN32
+			/* Windows specific code to make stdout binary. */
+			setmode(fileno(stdout), O_BINARY);
+#endif
 			out = fz_stdout(ctx);
+		}
 		else
 		{
 			char fbuf[4096];
