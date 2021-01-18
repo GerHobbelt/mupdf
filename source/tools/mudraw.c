@@ -406,7 +406,7 @@ static void usage(void)
 		"Usage: mudraw [options] file [pages]\n"
 		"  -p -  password\n"
 		"\n"
-		"  -o -  output file name (%%d for page number)\n"
+		"  -o -  output file name (%%d for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
 		"    raster: png, pnm, pam, pbm, pkm, pwg, pcl, ps\n"
 		"    vector: svg, pdf, trace, ocr.trace\n"
@@ -2062,7 +2062,7 @@ int mudraw_main(int argc, const char **argv)
 		{
 		default: usage(); return EXIT_FAILURE;
 
-		case 'q': quiet = 1; break;
+		case 'q': quiet = 1; fz_default_error_warn_info_mode(1, 1, 1); break;
 
 		case 'p': password = fz_optarg; break;
 
@@ -2504,6 +2504,7 @@ int mudraw_main(int argc, const char **argv)
 			else
 			{
 				quiet = 1; /* automatically be quiet if printing to stdout */
+				fz_default_error_warn_info_mode(1, 1, 1);
 #ifdef _WIN32
 				/* Windows specific code to make stdout binary. */
 				if (output_format != OUT_TEXT &&

@@ -18,9 +18,18 @@
 #include <android/log.h>
 #endif
 
+#define QUIET_ERROR 0x0001
+#define QUIET_WARN  0x0002
+#define QUIET_INFO  0x0004
+
+static int quiet_mode = 0;
+
 void fz_default_error_callback(void *user, const char *message)
 {
-	fprintf(stderr, "error: %s\n", message);
+	if (!(quiet_mode & QUIET_ERROR))
+	{
+		fprintf(stderr, "error: %s\n", message);
+	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	OutputDebugStringA("error: ");
 	OutputDebugStringA(message);
@@ -33,7 +42,10 @@ void fz_default_error_callback(void *user, const char *message)
 
 void fz_default_warning_callback(void *user, const char *message)
 {
-	fprintf(stderr, "warning: %s\n", message);
+	if (!(quiet_mode & QUIET_WARN))
+	{
+		fprintf(stderr, "warning: %s\n", message);
+	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	OutputDebugStringA("warning: ");
 	OutputDebugStringA(message);
@@ -54,7 +66,10 @@ void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const ch
 
 void fz_default_info_callback(void* user, const char* message)
 {
-	fprintf(stderr, "%s\n", message);
+	if (!(quiet_mode & QUIET_INFO))
+	{
+		fprintf(stderr, "%s\n", message);
+	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	OutputDebugStringA(message);
 	OutputDebugStringA("\n");
@@ -70,6 +85,11 @@ void fz_set_info_callback(fz_context* ctx, void (*print)(void* user, const char*
 {
 	ctx->info.print_user = user;
 	ctx->info.print = print ? print : fz_default_info_callback;
+}
+
+void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info)
+{
+	quiet_mode = (quiet_error ? QUIET_ERROR : 0) | (quiet_warn ? QUIET_WARN : 0) | (quiet_info ? QUIET_INFO : 0);
 }
 
 void fz_var_imp(void *var)

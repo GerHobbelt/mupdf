@@ -272,6 +272,15 @@ void fz_default_warning_callback(void *user, const char *message);
 void fz_default_info_callback(void* user, const char* message);
 
 /**
+	Sets default error/warn/info log callbacks to quiet mode.
+	Useful when binary data is written to stdout or stderr, where such output
+	might clash with output written by these callbacks.
+
+	A non-zero value (TRUE) sets the channel to quiet mode.
+*/
+void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info);
+
+/**
 	Set the error callback. This will be called as part of the
 	exception handling.
 
