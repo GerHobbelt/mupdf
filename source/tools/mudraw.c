@@ -657,6 +657,90 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	else
 		mediabox = fz_bound_page(ctx, page);
 
+	/* MuPDF measures in points (72ths of an inch). */
+
+	// when dpi has been set to zero, recalculate it below.
+	if (res_specified && resolution <= 0 && (width || height))
+	{
+		// Here we simply make sure the recalc happens by setting it to a large value initially.
+		{
+			float pb = max(mediabox.x1 - mediabox.x0, mediabox.y1 - mediabox.y0);
+			float uq = max(width, height);
+			resolution = 2.0 * 72 * uq / pb;  // overestimate dpi by a factor of 2
+		}
+
+		{
+			float zoom;
+			fz_matrix ctm;
+			fz_rect tbounds;
+			fz_irect ibounds;
+			int w, h;
+
+			zoom = resolution / 72;
+			ctm = fz_pre_scale(fz_rotate(rotation), zoom, zoom);
+
+			tbounds = fz_transform_rect(mediabox, ctm);
+			ibounds = fz_round_rect(tbounds);
+
+			/* Make local copies of our width/height */
+			w = width;
+			h = height;
+
+			/* If a resolution is specified, check to see whether w/h are
+			 * exceeded; if not, unset them. */
+			{
+				int t;
+				t = ibounds.x1 - ibounds.x0;
+				if (w && t <= w)
+					w = 0;
+				t = ibounds.y1 - ibounds.y0;
+				if (h && t <= h)
+					h = 0;
+			}
+
+			/* Now w or h will be 0 unless they need to be enforced. */
+			{
+				float scalex = w / (tbounds.x1 - tbounds.x0);
+				float scaley = h / (tbounds.y1 - tbounds.y0);
+				fz_matrix scale_mat;
+
+				if (fit)
+				{
+					if (w == 0)
+						scalex = 1.0f;
+					if (h == 0)
+						scaley = 1.0f;
+				}
+				else
+				{
+					if (w == 0)
+						scalex = scaley;
+					if (h == 0)
+						scaley = scalex;
+				}
+				if (!fit)
+				{
+					if (scalex > scaley)
+						scalex = scaley;
+					else
+						scaley = scalex;
+				}
+				scale_mat = fz_scale(scalex, scaley);
+				ctm = fz_concat(ctm, scale_mat);
+				tbounds = fz_transform_rect(mediabox, ctm);
+			}
+			ibounds = fz_round_rect(tbounds);
+			tbounds = fz_rect_from_irect(ibounds);
+
+			// reconstruct dpi from these numbers:
+			float mbw = mediabox.x1 - mediabox.x0;
+			float mbh = mediabox.y1 - mediabox.y0;
+			w = width;
+			h = height;
+			resolution = max(w / mbw * 72, h / mbh * 72);
+		}
+	}
+
 	if (output_format == OUT_TRACE || output_format == OUT_OCR_TRACE)
 	{
 		float zoom;
