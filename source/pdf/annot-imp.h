@@ -63,6 +63,7 @@ pdf_annot *pdf_create_annot_raw(fz_context *ctx, pdf_page *page, enum pdf_annot_
 void pdf_dirty_annot(fz_context *ctx, pdf_annot *annot);
 
 void pdf_update_signature_appearance(fz_context *ctx, pdf_annot *annot, const char *name, const char *text, const char *date);
+void pdf_update_signature_appearance_with_image(fz_context* ctx, pdf_annot* annot, fz_image* image);
 
 fz_layout_block *pdf_layout_text_widget(fz_context *ctx, pdf_annot *annot);
 
