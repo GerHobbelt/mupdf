@@ -12,7 +12,7 @@
 static void trace_field_value(pdf_annot *annot, const char *set_value)
 {
 	const char *get_value = pdf_annot_field_value(ctx, annot);
-	trace_action("print('Set field %d:', repr(%q), repr(%q));\n", pdf_to_num(ctx, annot->obj), set_value, get_value);
+	trace_action("print('Set field %d:', repr(%q), repr(%q));\n", pdf_to_num(ctx, pdf_annot_obj(ctx, annot)), set_value, get_value);
 }
 
 static pdf_widget *sig_widget;
