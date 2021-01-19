@@ -696,7 +696,7 @@ pnm_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, size_t
 	char signature[3] = { 0 };
 	fz_pixmap *pix = NULL;
 
-	while (p < e && ((!onlymeta && subimage >= 0) || onlymeta))
+	while (p < e && subimage >= 0)
 	{
 		int subonlymeta = onlymeta || (subimage > 0);
 
