@@ -463,12 +463,26 @@ void pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const ch
 void pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, float color[3]);
 void pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, const float color[3]);
 
+int pdf_annot_field_flags(fz_context *ctx, pdf_annot *annot);
+const char *pdf_annot_field_value(fz_context *ctx, pdf_annot *annot);
+const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *widget);
+
 int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_widget *widget, const char *text, int ignore_trigger_events);
 
 /*
 	Recreate the appearance stream for an annotation, if necessary.
 */
 void pdf_update_appearance(fz_context *ctx, pdf_annot *annot);
+
+/*
+	Start/Stop using the annotation-local xref. This allows us to
+	generate appearance streams that don't actually hit the underlying
+	document.
+*/
+void pdf_annot_push_local_xref(fz_context *ctx, pdf_annot *annot);
+void pdf_annot_pop_local_xref(fz_context *ctx, pdf_annot *annot);
+void pdf_annot_ensure_local_xref(fz_context *ctx, pdf_annot *annot);
+void pdf_annot_pop_and_discard_local_xref(fz_context *ctx, pdf_annot *annot);
 
 /*
 	Regenerate any appearance streams that are out of date and check for
