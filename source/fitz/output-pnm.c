@@ -159,6 +159,8 @@ pam_write_header(fz_context *ctx, fz_band_writer *writer, fz_colorspace *cs)
 	else if (n == 3 && alpha) fz_write_printf(ctx, out, "TUPLTYPE RGB_ALPHA\n");
 	else if (n == 4 && !alpha) fz_write_printf(ctx, out, "TUPLTYPE CMYK\n");
 	else if (n == 4 && alpha) fz_write_printf(ctx, out, "TUPLTYPE CMYK_ALPHA\n");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "colorspace not supported in pam image");
+
 	fz_write_printf(ctx, out, "ENDHDR\n");
 }
 
@@ -303,13 +305,28 @@ void
 fz_write_pixmap_as_pam(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap)
 {
 	fz_band_writer *writer = fz_new_pam_band_writer(ctx, out);
+	fz_pixmap *cvt = NULL;
+
+	fz_var(cvt);
+
 	fz_try(ctx)
 	{
+		if ((fz_colorspace_n(ctx, pixmap->colorspace) == 0 && pixmap->alpha) || fz_colorspace_is_gray(ctx, pixmap->colorspace) ||
+			fz_colorspace_is_rgb(ctx, pixmap->colorspace) || fz_colorspace_is_cmyk(ctx, pixmap->colorspace))
+			cvt = NULL;
+		else
+		{
+			cvt = fz_convert_pixmap(ctx, pixmap, fz_device_cmyk(ctx), NULL, NULL, fz_default_color_params, 0);
+			pixmap = cvt;
+		}
 		fz_write_header(ctx, writer, pixmap->w, pixmap->h, pixmap->n, pixmap->alpha, 0, 0, 0, pixmap->colorspace, pixmap->seps);
 		fz_write_band(ctx, writer, pixmap->stride, pixmap->h, pixmap->samples);
 	}
 	fz_always(ctx)
+	{
 		fz_drop_band_writer(ctx, writer);
+		fz_drop_pixmap(ctx, cvt);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
@@ -319,11 +336,21 @@ fz_save_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, const char *file
 {
 	fz_band_writer *writer = NULL;
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
+	fz_pixmap *cvt = NULL;
 
 	fz_var(writer);
+	fz_var(cvt);
 
 	fz_try(ctx)
 	{
+		if ((fz_colorspace_n(ctx, pixmap->colorspace) == 0 && pixmap->alpha) || fz_colorspace_is_gray(ctx, pixmap->colorspace) ||
+			fz_colorspace_is_rgb(ctx, pixmap->colorspace) || fz_colorspace_is_cmyk(ctx, pixmap->colorspace))
+			cvt = NULL;
+		else
+		{
+			cvt = fz_convert_pixmap(ctx, pixmap, fz_device_cmyk(ctx), NULL, NULL, fz_default_color_params, 0);
+			pixmap = cvt;
+		}
 		writer = fz_new_pam_band_writer(ctx, out);
 		fz_write_header(ctx, writer, pixmap->w, pixmap->h, pixmap->n, pixmap->alpha, 0, 0, 0, pixmap->colorspace, pixmap->seps);
 		fz_write_band(ctx, writer, pixmap->stride, pixmap->h, pixmap->samples);
@@ -333,6 +360,7 @@ fz_save_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, const char *file
 	{
 		fz_drop_band_writer(ctx, writer);
 		fz_drop_output(ctx, out);
+		fz_drop_pixmap(ctx, cvt);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
