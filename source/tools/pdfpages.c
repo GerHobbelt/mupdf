@@ -13,7 +13,7 @@
 
 static fz_context* ctx = NULL;
 
-static void
+static int
 usage(void)
 {
 	fz_info(ctx,
@@ -22,6 +22,8 @@ usage(void)
 		"\t-p -\tpassword for decryption\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static int
@@ -198,16 +200,14 @@ int pdfpages_main(int argc, const char **argv)
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		default:
-			usage();
-			return EXIT_FAILURE;
+			return usage();
 		}
 	}
 
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())
@@ -248,7 +248,7 @@ int pdfpages_main(int argc, const char **argv)
 	fz_catch(ctx)
 	{
 		fz_error(ctx, "%s", fz_caught_message(ctx));
-		ret = 1;
+		ret = EXIT_FAILURE;
 	}
 	fz_drop_output(ctx, out);
 	fz_flush_warnings(ctx);

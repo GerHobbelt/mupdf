@@ -504,7 +504,7 @@ static struct {
 #define stringify(A) __stringify(A)
 #define __stringify(A) #A
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"muraster version " FZ_VERSION "\n"
@@ -561,6 +561,8 @@ static void usage(void)
 		"\n"
 		"  pages  comma separated list of page numbers and ranges\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static int gettime_once = 1;
@@ -1688,7 +1690,7 @@ int muraster_main(int argc, const char *argv[])
 	{
 		switch (c)
 		{
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 
 		case 'q': quiet = 1; fz_default_error_warn_info_mode(1, 1, 1); break;
 
@@ -1764,8 +1766,7 @@ int muraster_main(int argc, const char *argv[])
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (min_band_height <= 0)

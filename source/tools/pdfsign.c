@@ -21,7 +21,7 @@ static int clear = 0;
 static int sign = 0;
 static int list = 1;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool sign [options] input.pdf [signature object numbers]\n"
@@ -32,6 +32,8 @@ static void usage(void)
 		"\t-P -\tcertificate password\n"
 		"\t-o -\toutput file name\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signature)
@@ -253,14 +255,13 @@ int pdfsign_main(int argc, const char **argv)
 		case 'P': certificatepassword = fz_optarg; break;
 		case 's': list = 0; sign = 1; certificatefile = fz_optarg; break;
 		case 'v': list = 0; verify = 1; break;
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
 	if (argc == fz_optind)
 	{
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())
@@ -330,5 +331,5 @@ int pdfsign_main(int argc, const char **argv)
 
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return 0;
+	return EXIT_SUCCESS;
 }

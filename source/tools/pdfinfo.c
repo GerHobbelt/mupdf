@@ -163,7 +163,7 @@ static void closexref(fz_context *ctx, globals *glo)
 
 static fz_context* ctx = NULL;
 
-static void
+static int
 usage(void)
 {
 	fz_info(ctx,
@@ -178,6 +178,8 @@ usage(void)
 		"\t-X\tlist form and postscript xobjects\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
@@ -1046,7 +1048,7 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 	if (!glo->doc)
 	{
 		usage();
-		fz_throw(ctx, FZ_ERROR_GENERIC, "no document specified");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "No document specified: cannot show info without document");
 	}
 
 	allpages = !strcmp(pagelist, "1-N");
@@ -1155,16 +1157,14 @@ int pdfinfo_main(int argc, const char **argv)
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		default:
-			usage();
-			return EXIT_FAILURE;
+			return usage();
 		}
 	}
 
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())

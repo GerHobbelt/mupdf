@@ -15,7 +15,7 @@
 static fz_context* ctx = NULL;
 static pdf_document* doc = NULL;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool create [-o output.pdf] [-O options] page.txt [page2.txt ...]\n"
@@ -30,6 +30,8 @@ static void usage(void)
 		"\t%%%%Image Name Filename\n\n"
 	);
 	fz_info(ctx, "%s", fz_pdf_write_options_usage);
+
+	return EXIT_FAILURE;
 }
 
 static void add_font_res(pdf_obj *resources, char *name, char *path, char *encname)
@@ -244,15 +246,14 @@ int pdfcreate_main(int argc, const char **argv)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'O': flags = fz_optarg; break;
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())

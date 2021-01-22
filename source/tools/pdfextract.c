@@ -18,7 +18,7 @@ static int doicc = 1;
 static const char *output_template_path = "";
 static int count = 0;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool extract [options] file.pdf [object numbers]\n"
@@ -26,7 +26,8 @@ static void usage(void)
 		"\t-p\tpassword\n"
 		"\t-r\tconvert images to rgb\n"
 		"\t-N\tdo not use ICC color conversions\n"
-	);
+		
+	return EXIT_FAILURE;
 }
 
 static int isimage(pdf_obj *obj)
@@ -262,15 +263,14 @@ int pdfextract_main(int argc, const char **argv)
 		case 'p': password = fz_optarg; break;
 		case 'r': dorgb++; break;
 		case 'N': doicc^=1; break;
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())

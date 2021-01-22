@@ -19,7 +19,7 @@
 
 static fz_context* ctx = NULL;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool clean [options] input.pdf [output.pdf] [pages]\n"
@@ -45,6 +45,8 @@ static void usage(void)
 		"\t-AA\trecreate appearance streams for annotations\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static int encrypt_method_from_string(const char *name)
@@ -93,7 +95,7 @@ int pdfclean_main(int argc, const char **argv)
 		case 'O': fz_strlcpy(opts.opwd_utf8, fz_optarg, sizeof opts.opwd_utf8); break;
 		case 'U': fz_strlcpy(opts.upwd_utf8, fz_optarg, sizeof opts.upwd_utf8); break;
 
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
@@ -102,8 +104,7 @@ int pdfclean_main(int argc, const char **argv)
 
 	if (argc == fz_optind)
 	{
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())

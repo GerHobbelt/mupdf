@@ -18,7 +18,7 @@ static int showdecode = 1;
 static int tight = 0;
 static int showcolumn = 0;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *\n"
@@ -32,6 +32,8 @@ static void usage(void)
 		"\t\tpath elements separated by '.' or '/'. Path elements must be\n"
 		"\t\tarray index numbers, dictionary property names, or '*'.\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static void showtrailer(void)
@@ -584,15 +586,14 @@ int pdfshow_main(int argc, const char **argv)
 		case 'b': showbinary = 1; break;
 		case 'e': showdecode = 0; break;
 		case 'g': tight = 1; break;
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())
@@ -659,7 +660,7 @@ int pdfshow_main(int argc, const char **argv)
 					fz_error(ctx, "%s", fz_caught_message(ctx));
 				}
 				fz_write_printf(ctx, out, "\n\n**ERROR**: %s: %s\n", name, fz_caught_message(ctx));
-				errored = 1;
+				errored = EXIT_FAILURE;
 			}
 			if (print_header)
 				fz_write_printf(ctx, out, "\n\n");
@@ -677,7 +678,7 @@ int pdfshow_main(int argc, const char **argv)
 		{
 			fz_error(ctx, "%s", fz_caught_message(ctx));
 		}
-		errored = 1;
+		errored = EXIT_FAILURE;
 	}
 
 	fz_drop_output(ctx, out);

@@ -15,7 +15,7 @@ static fz_context *ctx = NULL;
 static pdf_document *doc_des = NULL;
 static pdf_document *doc_src = NULL;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool merge [-o output.pdf] [-O options] input.pdf [pages] [input2.pdf] [pages2] ...\n"
@@ -25,6 +25,8 @@ static void usage(void)
 		"\tpages\tcomma separated list of page numbers and ranges\n\n"
 	);
 	fz_info(ctx, "%s", fz_pdf_write_options_usage);
+	
+	return EXIT_FAILURE;
 }
 
 static void page_merge(int page_from, int page_to, pdf_graft_map *graft_map)
@@ -81,15 +83,14 @@ int pdfmerge_main(int argc, const char **argv)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'O': flags = fz_optarg; break;
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())

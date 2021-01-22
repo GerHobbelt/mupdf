@@ -28,7 +28,7 @@ static fz_document *doc;
 static fz_document_writer *out;
 static int count;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"mutool convert version " FZ_VERSION "\n"
@@ -62,6 +62,8 @@ static void usage(void)
 	fz_info(ctx, "%s", fz_pdf_write_options_usage);
 #endif
 	fz_info(ctx, "%s", fz_svg_write_options_usage);
+	
+	return EXIT_FAILURE;
 }
 
 static void runpage(int number)
@@ -133,7 +135,7 @@ int muconvert_main(int argc, const char **argv)
 	{
 		switch (c)
 		{
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 
 		case 'p': password = fz_optarg; break;
 		case 'A': alphabits = atoi(fz_optarg); break;
@@ -151,8 +153,7 @@ int muconvert_main(int argc, const char **argv)
 
 	if (fz_optind == argc || (!format && !output))
 	{
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())

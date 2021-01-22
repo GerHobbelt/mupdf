@@ -15,14 +15,15 @@ static fz_context* ctx = NULL;
 static int x_factor = 0;
 static int y_factor = 0;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool poster [options] input.pdf [output.pdf]\n"
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n"
-	);
+		
+	return EXIT_FAILURE;
 }
 
 static void
@@ -200,14 +201,13 @@ int pdfposter_main(int argc, const char **argv)
 		case 'p': password = fz_optarg; break;
 		case 'x': x_factor = atoi(fz_optarg); break;
 		case 'y': y_factor = atoi(fz_optarg); break;
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		}
 	}
 
 	if (argc == fz_optind)
 	{
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())
@@ -252,7 +252,7 @@ int pdfposter_main(int argc, const char **argv)
 	fz_catch(ctx)
 	{
 		fz_error(ctx, "%s", fz_caught_message(ctx));
-		errored = 1;
+		errored = EXIT_FAILURE;
 	}
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);

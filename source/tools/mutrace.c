@@ -7,7 +7,7 @@
 
 static fz_context* ctx = NULL;
 
-static void usage(void)
+static int usage(void)
 {
 	fz_info(ctx,
 		"Usage: mutool trace [options] file [pages]\n"
@@ -24,6 +24,8 @@ static void usage(void)
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
+	
+	return EXIT_FAILURE;
 }
 
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
@@ -112,7 +114,7 @@ int mutrace_main(int argc, const char **argv)
 	{
 		switch (c)
 		{
-		default: usage(); return EXIT_FAILURE;
+		default: return usage();
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 
@@ -129,8 +131,7 @@ int mutrace_main(int argc, const char **argv)
 	if (fz_optind == argc)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
-		usage();
-		return EXIT_FAILURE;
+		return usage();
 	}
 
 	if (!fz_has_global_context())
