@@ -3906,3 +3906,4 @@ fz_new_pdf_writer(fz_context *ctx, const char *path, const char *options)
 	}
 	return wri;
 }
+
