@@ -25,8 +25,8 @@ static int usage(void)
 		"\t-o -\toutput files name template: generated filenames are appended\n"
 		"\t-p\tpassword\n"
 		"\t-r\tconvert images to rgb\n"
-		"\t-N\tdo not use ICC color conversions\n"
-		
+		"\t-N\tdo not use ICC color conversions\n");
+
 	return EXIT_FAILURE;
 }
 

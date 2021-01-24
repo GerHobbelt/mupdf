@@ -21,8 +21,8 @@ static int usage(void)
 		"usage: mutool poster [options] input.pdf [output.pdf]\n"
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
-		"\t-y\ty decimation factor\n"
-		
+		"\t-y\ty decimation factor\n");
+
 	return EXIT_FAILURE;
 }
 
