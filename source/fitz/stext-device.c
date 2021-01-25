@@ -67,7 +67,7 @@ typedef struct
 {
 	fz_device super;
 	fz_stext_page *page;
-	fz_point pen, start;
+	fz_point pen_p, pen_q, start;
 	fz_matrix trm;
 	int new_obj;
 	int curdir;
@@ -304,6 +304,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	float base_offset = 0;
 	int rtl = 0;
 
+	int dir_prev = dev->curdir;
 	dev->curdir = direction_from_bidi_class(ucdn_get_bidi_class(c), dev->curdir);
 
 	/* dir = direction vector for motion. ndir = normalised(dir) */
@@ -373,7 +374,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		new_para = 1;
 		new_line = 1;
 	}
-	else
+	else if (1)
 	{
 		/* Detect fake bold where text is printed twice in the same place. */
 		delta.x = fabsf(q.x - dev->pen.x);
@@ -381,9 +382,86 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		if (delta.x < FLT_EPSILON && delta.y < FLT_EPSILON && c == dev->lastchar)
 			return;
 
+		delta_p.x = p.x - dev->pen_p.x;
+		delta_p.y = p.y - dev->pen_p.y;
+		delta_q.x = q.x - dev->pen_q.x;
+		delta_q.y = q.y - dev->pen_q.y;
+
+		base_offset = -ndir.y * delta.x + ndir.x * delta.y;
+
+		if (fabsf(base_offset) < size * 0.8f)
+		{
+			/* Only a small amount off the baseline - we'll take this */
+
+			if (c == dev->lastchar && fabs(delta_p.x) < FLT_EPSILON && fabs(delta_p.y) < FLT_EPSILON)
+			{
+				/* Fake bold where text is printed twice in the same place. */
+				return;
+			}
+
+			float spacing_p = ndir.x * delta_p.x + ndir.y * delta_p.y;
+			float spacing_q = ndir.x * delta_q.x + ndir.y * delta_q.y;
+			if (fabs(spacing_q) > (1+SPACE_MAX_DIST) * size)
+			{
+				/* Motion is in line and large enough to warrant splitting to a new line */
+				new_line = 1;
+			}
+			else if (spacing_q >= 0)
+			{
+				/* Left to right or downwards. */
+				if (spacing_q > (1+SPACE_DIST) * size)
+				{
+					/* Motion is forward in line and large enough to warrant us adding a space. */
+					if (dev->lastchar != ' ' && wmode == 0)
+						add_space = 1;
+					new_line = 0;
+				}
+				else
+				{
+					/* Normal. */
+					new_line = 0;
+				}
+
+				if (dev->curdir == -1)
+				{
+					/* This glyph is rtl. */
+				}
+			}
+			else
+			{
+				/* Right to left or upwards. */
+
+			}
+		}
+		else if (fabsf(base_offset) <= size * PARAGRAPH_DIST)
+		{
+			/* Enough for a new line, but not enough for a new paragraph */
+			/* Check indent to spot text-indent style paragraphs */
+			if (wmode == 0 && cur_line && dev->new_obj)
+				if (fabsf(p.x - dev->start.x) > size * 0.5f)
+					new_para = 1;
+			new_line = 1;
+		}
+
+		/* Way off the baseline - open a new paragraph */
+		else
+		{
+			new_para = 1;
+			new_line = 1;
+		}
+	}
+	#if 0
+	else
+	{
+		/* Detect fake bold where text is printed twice in the same place. */
+		delta.x = fabsf(q.x - dev->pen_q.x);
+		delta.y = fabsf(q.y - dev->pen_q.y);
+		if (delta.x < FLT_EPSILON && delta.y < FLT_EPSILON && c == dev->lastchar)
+			return;
+
 		/* Calculate how far we've moved since the last character. */
-		delta.x = p.x - dev->pen.x;
-		delta.y = p.y - dev->pen.y;
+		delta.x = p.x - dev->pen_q.x;
+		delta.y = p.y - dev->pen_q.y;
 
 		/* The transform has not changed, so we know we're in the same
 		 * direction. Calculate 2 distances; how far off the previous
@@ -450,6 +528,28 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 			new_line = 1;
 		}
 	}
+	#endif
+
+	fprintf(stderr, "%s:%i: fz_add_stext_char_imp() c=0x%08x trm.e=%f trm.f=%f pen=(%f %f) dev->curdir=%i"
+			" size=%f spacing=%f base_offset=%f rtl=%i new_para=%i new_line=%i delta=(%f %f) ndir=(%f %f)\n",
+			__FILE__, __LINE__,
+			c,
+			trm.e,
+			trm.f,
+			dev->pen.x,
+			dev->pen.y,
+			dev->curdir,
+			size,
+			spacing,
+			base_offset,
+			rtl,
+			new_para,
+			new_line,
+			delta.x,
+			delta.y,
+			ndir.x,
+			ndir.y
+			);
 
 	/* Start a new block (but only at the beginning of a text object) */
 	if (new_para || !cur_block)
@@ -475,9 +575,19 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	if (add_space && !(dev->flags & FZ_STEXT_INHIBIT_SPACES))
 		add_char_to_line(ctx, page, cur_line, trm, font, size, ' ', &dev->pen, &p, dev->color);
 
+	if (getenv("MUPDF_LR"))
+	{
+		static int i = -1;
+		i += 1;
+		int cc = (rtl ? 'A' : 'a') + (i % 26);
+		add_char_to_line(ctx, page, cur_line, trm, font, size, ' ', &p, &q, dev->color);
+		add_char_to_line(ctx, page, cur_line, trm, font, size, cc, &p, &q, dev->color);
+		add_char_to_line(ctx, page, cur_line, trm, font, size, ' ', &p, &q, dev->color);
+	}
 	add_char_to_line(ctx, page, cur_line, trm, font, size, c, &p, &q, dev->color);
 	dev->lastchar = c;
-	dev->pen = q;
+	dev->pen_p = p;
+	dev->pen_q = q;
 
 	dev->new_obj = 0;
 	dev->trm = trm;
