@@ -39,7 +39,7 @@ int main(int argc, const char **argv)
 	if (argc == 0)
 	{
 		fz_error(ctx, "No command name found!");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	//fz_info(ctx, "usage: tesseract <command> [options]");
