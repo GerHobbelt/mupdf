@@ -1048,6 +1048,7 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 	if (!glo->doc)
 	{
 		usage();
+		fz_throw(ctx, FZ_ERROR_GENERIC, "No document specified: cannot show info without document");
 	}
 
 	allpages = !strcmp(pagelist, "1-N");

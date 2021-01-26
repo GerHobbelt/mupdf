@@ -234,6 +234,7 @@ int pdfcreate_main(int argc, const char **argv)
 	const char *output = "out.pdf";
 	const char *flags = "compress";
 	int i, c;
+	int error = EXIT_SUCCESS;
 
 	ctx = NULL;
 	doc = NULL;
@@ -279,10 +280,6 @@ int pdfcreate_main(int argc, const char **argv)
 	{
 		pdf_parse_write_options(ctx, &opts, flags);
 
-	fz_var(doc);
-
-	fz_try(ctx)
-	{
 		doc = pdf_create_document(ctx);
 
 		for (i = fz_optind; i < argc; ++i)
@@ -297,6 +294,7 @@ int pdfcreate_main(int argc, const char **argv)
 	fz_catch(ctx)
 	{
 		fz_error(ctx, "%s", fz_caught_message(ctx));
+		error = EXIT_FAILURE;
 	}
 
 	fz_flush_warnings(ctx);
