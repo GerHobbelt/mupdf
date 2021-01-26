@@ -695,10 +695,14 @@ pnm_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, size_t
 	const unsigned char *e = p + total;
 	char signature[3] = { 0 };
 	fz_pixmap *pix = NULL;
+	int subimages = 1;
 
-	while (p < e && subimage >= 0)
+	while (p < e && (subimage >= 0 || onlymeta))
 	{
 		int subonlymeta = onlymeta || (subimage > 0);
+
+		memset(pnm, 0, sizeof (*pnm));
+		pnm->subimages = subimages;
 
 		p = pnm_read_signature(ctx, p, e, signature);
 		p = pnm_read_white(ctx, p, e, 0);
@@ -739,7 +743,7 @@ pnm_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, size_t
 			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported portable anymap signature (0x%02x, 0x%02x)", signature[0], signature[1]);
 
 		if (onlymeta)
-			pnm->subimages++;
+			subimages++;
 		if (subimage >= 0)
 			subimage--;
 	}
