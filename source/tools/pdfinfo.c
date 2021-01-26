@@ -1048,7 +1048,6 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 	if (!glo->doc)
 	{
 		usage();
-		fz_throw(ctx, FZ_ERROR_GENERIC, "No document specified: cannot show info without document");
 	}
 
 	allpages = !strcmp(pagelist, "1-N");
@@ -1158,6 +1157,7 @@ int pdfinfo_main(int argc, const char **argv)
 		case 'p': password = fz_optarg; break;
 		default:
 			return usage();
+			break;
 		}
 	}
 
@@ -1165,6 +1165,7 @@ int pdfinfo_main(int argc, const char **argv)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
 		return usage();
+		return 1;
 	}
 
 	if (!fz_has_global_context())

@@ -755,7 +755,7 @@ pdf_parse_ind_obj(fz_context *ctx, pdf_document *doc,
 	{
 		if (try_repair)
 			*try_repair = 1;
-		fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid generation number (%d)", num);
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid generation number (%d)", gen);
 	}
 
 	tok = pdf_lex(ctx, file, buf);
