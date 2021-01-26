@@ -930,7 +930,7 @@ FUN(Document_enableJournal)(JNIEnv *env, jobject self)
 
 	if (!ctx || !doc) return;
 
-	pdf_document_enable_journal(ctx, doc);
+	pdf_enable_journal(ctx, doc);
 }
 
 JNIEXPORT jint JNICALL
