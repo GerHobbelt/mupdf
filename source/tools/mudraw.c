@@ -525,22 +525,6 @@ static void reset_page_counter(void) {
 	page_counter = 0;
 }
 
-static int has_percent_d(const char *s)
-{
-	/* find '%[0-9]*d' */
-	while (*s)
-	{
-		if (*s++ == '%')
-		{
-			while (*s >= '0' && *s <= '9')
-				++s;
-			if (*s == 'd')
-				return 1;
-		}
-	}
-	return 0;
-}
-
 /* Output file level (as opposed to page level) headers */
 static void
 file_level_headers(fz_context *ctx)
@@ -1471,7 +1455,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 
 	if (output_file_per_page)
 	{
-		char text_buffer[512];
+		char text_buffer[PATH_MAX];
 
 		bgprint_flush();
 		if (out)
@@ -2581,7 +2565,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 			else if (output && (output[0] != '-' || output[1] != 0) && *output != 0)
 			{
-				if (has_percent_d(output))
+				if (fz_has_percent_d(output))
 					output_file_per_page = 1;
 				else
 					out = fz_new_output_with_path(ctx, output, 0);

@@ -292,7 +292,7 @@ void
 fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void *user, int c), const char *fmt, va_list args)
 {
 	struct fmtbuf out;
-	int c, s, z, p, w;
+	int c, s, z, p, w, l;
 	int32_t i32;
 	int64_t i64;
 	const char *str;
@@ -321,7 +321,9 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				/* zero padding */
 				else if (c == '0')
 					z = '0';
-				/* TODO: '-' to left justify */
+				/* '-' to left justify */
+				else if (c == '-')
+					l = 1;
 				else
 					break;
 			}

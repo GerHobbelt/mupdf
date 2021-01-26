@@ -83,7 +83,7 @@ char *fz_urldecode(char *url);
 /**
 	create output file name using a template.
 
-	If the path contains %[0-9]*d, the first such pattern will be
+	If the path contains %[+-][0-9]*d, every such pattern will be
 	replaced with the page number. If the template does not contain
 	such a pattern, the page number will be inserted before the
 	filename extension. If the template does not have a filename
@@ -110,6 +110,13 @@ char *fz_realpath(const char *path, char *resolved_path);
 */
 int fz_strcasecmp(const char *a, const char *b);
 int fz_strncasecmp(const char *a, const char *b, size_t n);
+
+/**
+	Return TRUE when the given string contains a `%d` format specifier.
+	Any legal `%d`-alike format is accepted:
+	'%[+-][ ][0-9]*[.][0-9]*d', e.g. `%04d` or `%+4.0d` or `%d` 
+*/
+int fz_has_percent_d(const char* s);
 
 /**
 	FZ_UTFMAX: Maximum number of bytes in a decoded rune (maximum

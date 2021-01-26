@@ -201,47 +201,157 @@ fz_urldecode(char *url)
 	return url;
 }
 
+static const char *check_percent_d(const char* s)
+{
+	/* find '%[+-][ ][0-9]*[.][0-9]*d', e.g. %04d or %+4.0d */
+	if (*s++ == '%')
+	{
+		if (*s == '+' || *s == '-')
+			++s;
+		if (*s == ' ')
+			++s;
+		while (*s >= '0' && *s <= '9')
+			++s;
+		if (*s == '.')
+			++s;
+		while (*s >= '0' && *s <= '9')
+			++s;
+		if (*s == 'd')
+			return s + 1;
+	}
+	return NULL;
+}
+
+int fz_has_percent_d(const char* s)
+{
+	/* find '%[+-][ ][0-9]*[.][0-9]*d', e.g. %04d or %+4.0d */
+	while (*s)
+	{
+		if (check_percent_d(s))
+			return 1;
+		++s;
+	}
+	return 0;
+}
+
+// skip directory/(Windows)drive separators:
+static char* path_basename(char* path)
+{
+	char* p = strrchr(path, '/');
+	if (p > path)
+		path = p + 1;
+	p = strrchr(path, '\\');
+	if (p > path)
+		path = p + 1;
+	p = strrchr(path, ':');
+	if (p > path)
+		path = p + 1;
+	return path;
+}
+
 void
-fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *fmt, int page)
+fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *format, int page)
 {
 	const char *s, *p;
-	char num[40];
-	int i, n;
-	int z = 0;
+	char* fmt = fz_strdup(ctx, format);
+	size_t w = size;
+	char* d = path;
+	int done = 0;
 
-	for (i = 0; page; page /= 10)
-		num[i++] = '0' + page % 10;
-	num[i] = 0;
+	s = fmt;
+	while (w > 0)
+	{
+		p = strchr(s, '%');
+		if (p)
+		{
+			char* p2 = (char*)check_percent_d(p);
+			if (p2)
+			{
+				// cut after the 'd' of '%d':
+				char c = *p2;
+				*p2 = 0;
 
-	s = p = strchr(fmt, '%');
-	if (p)
-	{
-		++p;
-		while (*p >= '0' && *p <= '9')
-			z = z * 10 + (*p++ - '0');
-	}
-	if (p && *p == 'd')
-	{
-		++p;
-	}
-	else
-	{
-		s = p = strrchr(fmt, '.');
-		if (!p)
-			s = p = fmt + strlen(fmt);
-	}
+				// copy the chunk that precedes the %d:
+				size_t l = p - s;
+				if (l >= w)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				if (l > 0)
+					memcpy(d, s, l);
+				w -= l;
+				d += l;
 
-	if (z < 1)
-		z = 1;
-	while (i < z && i < (int)sizeof num)
-		num[i++] = '0';
-	n = s - fmt;
-	if (n + i + strlen(p) >= size)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-	memcpy(path, fmt, n);
-	while (i > 0)
-		path[n++] = num[--i];
-	fz_strlcpy(path + n, p, size - n);
+				// bingo: workable/legal %d particle:
+				l = fz_snprintf(d, w, p, page);
+				if (l >= w)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				w -= l;
+				d += l;
+
+				*p2 = c;
+				s = p2;
+
+				done = 1;
+			}
+			else
+			{
+				// unknown %... sequence: skip and copy verbatim
+				++p;
+				size_t l = p - s;
+				// while treating %% as %:
+				if (*p == '%')
+					++p;
+
+				if (l >= w)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				if (l > 0)
+					memcpy(d, s, l);
+				w -= l;
+				d += l;
+
+				s = p;
+			}
+		}
+		else
+		{
+			// no more %, copy end chunk verbatim, including NUL sentinel
+			//
+			// do reckon with the situation where no %d has been encountered yet.
+			size_t l;
+
+			if (!done)
+			{
+				p = path_basename(s);
+				p = strrchr(p, '.');
+				// jump to end if no file extension found
+				if (!p)
+					p = s + strlen(s);
+				l = s - p;
+				if (l >= w)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				if (l > 0)
+					memcpy(d, s, l);
+				w -= l;
+				d += l;
+
+				s = p;
+
+				char num[40];
+				l = fz_snprintf(num, sizeof(num), "%04d", page);
+				if (l >= w)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				memcpy(d, num, l);
+				w -= l;
+				d += l;
+			}
+
+			l = strlen(s) + 1;
+			if (l > w)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+			memcpy(d, s, l);
+			break;
+		}
+	}
+	fz_free(ctx, fmt);
 }
 
 #define SEP(x) ((x)=='/' || (x) == 0)
