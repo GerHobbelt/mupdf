@@ -1502,7 +1502,7 @@ parse_location(const char *anchor, fz_location *loc)
 	if (s == p)
 		loc->page = 0;
 	else
-		loc->page = atoi(p)-1;
+		loc->page = fz_atoi(p)-1;
 
 	return 1;
 }
