@@ -64,8 +64,8 @@ LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 TAGS_CMD = $(QUIET_TAGS) ctags -R --c-kinds=+p --exclude=platform/python --exclude=platform/c++
 WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
 OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
-DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d $(<:%.dll=%.def) -D $^ -l $@
 GENDEF_CMD = $(QUIET_GENDEF) gendef - $< > $@
+DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d $< -D $(notdir $(^:%.def=%.dll)) -l $@
 
 ifeq ($(shared),yes)
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ \
@@ -87,8 +87,10 @@ $(OUT)/%.exe: %.c
 $(OUT)/%.$(SO):
 	$(LINK_CMD) $(LIB_LDFLAGS) $(THIRD_LIBS) $(LIBCRYPTO_LIBS)
 
-$(OUT)/%.$(SO).a: $(OUT)/%.$(SO)
+$(OUT)/%.def: $(OUT)/%.$(SO)
 	$(GENDEF_CMD)
+
+$(OUT)/%_$(SO).a: $(OUT)/%.def
 	$(DLLTOOL_CMD)
 
 $(OUT)/source/helpers/mu-threads/%.o : source/helpers/mu-threads/%.c
@@ -230,7 +232,7 @@ generate: source/html/css-properties.h
 ifeq ($(shared),yes)
 MUPDF_LIB = $(OUT)/libmupdf.$(SO)
 ifeq ($(OS),MINGW)
-MUPDF_LIB_IMPORT = $(OUT)/libmupdf.$(SO).a
+MUPDF_LIB_IMPORT = $(OUT)/libmupdf_$(SO).a
 LIBS_TO_INSTALL_IN_BIN = $(MUPDF_LIB)
 LIBS_TO_INSTALL_IN_LIB = $(MUPDF_LIB_IMPORT)
 else
