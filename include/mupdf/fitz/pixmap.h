@@ -426,4 +426,7 @@ fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int wi
 fz_pixmap *
 fz_autowarp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4]);
 
+void
+fz_detect_document(fz_context* ctx, fz_point* points, const fz_pixmap* src);
+
 #endif

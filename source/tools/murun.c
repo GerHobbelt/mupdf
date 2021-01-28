@@ -2929,9 +2929,6 @@ static void ffi_Pixmap_autowarp(js_State *J)
 	js_newuserdata(J, "fz_pixmap", dest, ffi_gc_fz_pixmap);
 }
 
-extern void
-fz_detect_document(fz_context *ctx, fz_point *points, const fz_pixmap *src);
-
 static void ffi_Pixmap_detect_document(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
