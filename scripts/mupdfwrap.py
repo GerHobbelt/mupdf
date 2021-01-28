@@ -967,6 +967,29 @@ classextras = ClassExtras(
                 method_wrappers_static = [
                     'fz_new_xhtml_document_from_document',
                     ],
+                methods_extra = [
+                    # This duplicates our creation of extra lookup_metadata()
+                    # function in make_function_wrappers(). Maybe we could
+                    # parse the generated functions.h instead of fitz.h so that
+                    # we pick up extra C++ wrappers automatically, but this
+                    # would be a fairly major change.
+                    #
+                    ExtraMethod(
+                            'std::string',
+                            'lookup_metadata(const char* key, int* o_out=NULL)',
+                            f'''
+                            {{
+                                return {rename.function_call("lookup_metadata")}(m_internal, key, o_out);
+                            }}
+                            ''',
+                           textwrap.dedent('''
+                            /* Extra wrapper for fz_lookup_metadata() that returns a std::string and sets
+                            *o_out to length of string plus one. If <key> is not found, returns empty
+                            string with *o_out=-1. <o_out> can be NULL if caller is not interested in
+                            error information. */
+                            ''')
+                            ),
+                    ],
                 ),
 
         fz_document_writer = ClassExtra(
@@ -3607,13 +3630,18 @@ def class_custom_method( register_fn_use, classname, extramethod, out_h, out_cpp
 
     out_h.write( f'\n')
     if extramethod.comment:
-        out_h.write( f'    {extramethod.comment}\n')
+        for line in extramethod.comment.strip().split('\n'):
+            out_h.write( f'    {line}\n')
     else:
         out_h.write( f'    /* {comment} */\n')
     out_h.write( f'    {return_space}{name_args};\n')
 
     out_cpp.write( f'/* {comment} */\n')
-    out_cpp.write( f'{return_space}{classname}::{name_args}')
+    # Remove any default arg values from <name_args>.
+    name_args_no_defaults = re.sub('= *[^(][^),]*', '', name_args)
+    if name_args_no_defaults != name_args:
+        log('have changed {name_args=} to {name_args_no_defaults=}')
+    out_cpp.write( f'{return_space}{classname}::{name_args_no_defaults}')
     out_cpp.write( textwrap.dedent(extramethod.body))
     out_cpp.write( f'\n')
 
