@@ -235,7 +235,7 @@ int fz_has_percent_d(const char* s)
 }
 
 // skip directory/(Windows)drive separators:
-static char* path_basename(char* path)
+static const char* path_basename(const char* path)
 {
 	char* p = strrchr(path, '/');
 	if (p > path)
@@ -252,7 +252,7 @@ static char* path_basename(char* path)
 void
 fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *format, int page)
 {
-	const char *s, *p;
+	const char* s, *p;
 	char* fmt = fz_strdup(ctx, format);
 	size_t w = size;
 	char* d = path;
