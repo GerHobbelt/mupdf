@@ -472,7 +472,7 @@ char_callback(fz_context *ctx, void *arg, int unicode,
 	fz_ocr_device *ocr = (fz_ocr_device *)arg;
 	fz_rect bbox = { word_bbox[0]-1, word_bbox[1]-1, word_bbox[2]+1, word_bbox[3]+1 };
 
-	if (unicode == 'b')
+	if (unicode == 'b') // TODO: unicode == 0xFFFD (Bad = Runeerror) (?)
 	{
 		fz_device *device = fz_new_draw_device(ctx, fz_identity, ocr->pixmap);
 		fz_path *path = fz_new_path(ctx);
@@ -1063,7 +1063,7 @@ fz_ocr_close_device(fz_context *ctx, fz_device *dev)
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
-	fz_save_pixmap_as_png(ctx, ocr->pixmap, "ass.png");
+	//fz_save_pixmap_as_png(ctx, ocr->pixmap, "ass.png");
 
 	/* If we're not using a list, we're done! */
 	if (ocr->list_dev == ocr->target)
