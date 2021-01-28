@@ -882,7 +882,7 @@ static void indexed_via_separation_via_base(fz_context *ctx, fz_color_converter 
 	const unsigned char *lookup = ss->u.indexed.lookup;
 	int high = ss->u.indexed.high;
 	int n = ss->u.indexed.base->n;
-	float base[4], mid[4];
+	float base[4], mid[FZ_MAX_COLORS];
 	int i, k;
 
 	/* First map through the index. */
