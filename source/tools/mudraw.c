@@ -965,7 +965,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		float zoom;
 		fz_matrix ctm;
 		fz_rect tbounds;
-		char buf[512];
+		char buf[PATH_MAX];
 		fz_output *outs = NULL;
 
 		fz_var(outs);
@@ -1011,7 +1011,6 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_rect tbounds;
 		fz_irect ibounds;
 		fz_pixmap *pix = NULL;
-		int w, h;
 		fz_bitmap *bit = NULL;
 
 		fz_var(pix);
@@ -1023,58 +1022,6 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		tbounds = fz_transform_rect(mediabox, ctm);
 		ibounds = fz_round_rect(tbounds);
-
-		/* Make local copies of our width/height */
-		w = width;
-		h = height;
-
-		/* If a resolution is specified, check to see whether w/h are
-		 * exceeded; if not, unset them. */
-		if (res_specified)
-		{
-			int t;
-			t = ibounds.x1 - ibounds.x0;
-			if (w && t <= w)
-				w = 0;
-			t = ibounds.y1 - ibounds.y0;
-			if (h && t <= h)
-				h = 0;
-		}
-
-		/* Now w or h will be 0 unless they need to be enforced. */
-		if (w || h)
-		{
-			float scalex = w / (tbounds.x1 - tbounds.x0);
-			float scaley = h / (tbounds.y1 - tbounds.y0);
-			fz_matrix scale_mat;
-
-			if (fit)
-			{
-				if (w == 0)
-					scalex = 1.0f;
-				if (h == 0)
-					scaley = 1.0f;
-			}
-			else
-			{
-				if (w == 0)
-					scalex = scaley;
-				if (h == 0)
-					scaley = scalex;
-			}
-			if (!fit)
-			{
-				if (scalex > scaley)
-					scalex = scaley;
-				else
-					scaley = scalex;
-			}
-			scale_mat = fz_scale(scalex, scaley);
-			ctm = fz_concat(ctm, scale_mat);
-			tbounds = fz_transform_rect(mediabox, ctm);
-		}
-		ibounds = fz_round_rect(tbounds);
-		tbounds = fz_rect_from_irect(ibounds);
 
 		fz_try(ctx)
 		{
