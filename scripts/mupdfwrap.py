@@ -4871,6 +4871,7 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             namespace std
             {{
                 %template(vectori) vector<int>;
+                %template(vectors) vector<std::string>;
             }};
 
             // Make sure that operator++() gets converted to __next__().
