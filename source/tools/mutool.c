@@ -48,6 +48,8 @@ static struct {
 #endif
 	{ tesseract_main, "tesseract", "OCR given image or PDF" },
 	{ curl_main, "curl", "access/fetch a given URI" },
+	{ mujs_main, "mujs", "basic REPL for MuJS JavaScript interpreter" },
+	{ mujs_prettyprint_main, "mujs_pp", "prettyprint (reformat) MuJS JavaScript source files" },
 };
 
 static int

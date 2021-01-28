@@ -32,7 +32,11 @@ int cmapdump_main(int argc, const char* argv[]);
 #ifndef TESSERACT_STANDALONE
 int tesseract_main(int argc, const char** argv);
 #endif
+
 int curl_main(int argc, const char* argv[]);
+
+int mujs_main(int argc, const char* argv[]);				// MUJS_MAIN
+int mujs_prettyprint_main(int argc, const char* argv[]);    // MUJS_PRETTYPRINT_MAIN
 
 #ifdef __cplusplus
 }
