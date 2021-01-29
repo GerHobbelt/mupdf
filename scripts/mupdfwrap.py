@@ -1135,16 +1135,7 @@ classextras = ClassExtras(
 
         fz_link = ClassExtra(
                 iterator_next = ('', ''),
-                constructor_raw = False,    # *** This means that we ignore things like fz_load_links
-                constructors_extra = [
-                    ExtraConstructor( '(fz_link* link)',
-                        f'''
-                        : m_internal( {rename.function_call("fz_keep_link")}(link))
-                        {{
-                        }}
-                        ''',
-                        )
-                ],
+                constructor_raw = True,
                 ),
 
         fz_location = ClassExtra(
