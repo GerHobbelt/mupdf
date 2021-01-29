@@ -5082,21 +5082,23 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             command,
             )
 
-    mupdf_py_prefix = textwrap.dedent(
-            f'''
-            # Explicitly load required .so's using absolute paths, so that we
-            # work without needing LD_LIBRARY_PATH to be defined.
-            #
-            import ctypes
-            import os
-            import importlib
-            for leaf in ('libmupdf.so', 'libmupdfcpp.so', '_mupdf.so'):
-                path = os.path.abspath(f'{{__file__}}/../{{leaf}}')
-                print(f'path={{path}}')
-                print(f'exists={{os.path.exists(path)}}')
-                ctypes.cdll.LoadLibrary( path)
-                print(f'have loaded {{path}}')
-            ''')
+    mupdf_py_prefix = ''
+    if os.uname()[0] == 'OpenBSD':
+        mupdf_py_prefix = textwrap.dedent(
+                f'''
+                # Explicitly load required .so's using absolute paths, so that we
+                # work without needing LD_LIBRARY_PATH to be defined.
+                #
+                import ctypes
+                import os
+                import importlib
+                for leaf in ('libmupdf.so', 'libmupdfcpp.so', '_mupdf.so'):
+                    path = os.path.abspath(f'{{__file__}}/../{{leaf}}')
+                    print(f'path={{path}}')
+                    print(f'exists={{os.path.exists(path)}}')
+                    ctypes.cdll.LoadLibrary( path)
+                    print(f'have loaded {{path}}')
+                ''')
     with open( swig_py) as f:
         mupdf_py_content = mupdf_py_prefix + f.read()
     with open( swig_py, 'w') as f:
@@ -5638,8 +5640,11 @@ def main():
                 ld_library_path = os.path.abspath( f'{build_dirs.dir_so}')
                 pythonpath = build_dirs.dir_so
 
-                #envs = f'LD_LIBRARY_PATH={ld_library_path} PYTHONPATH={pythonpath}'
-                envs = f'PYTHONPATH={pythonpath}'
+                if os.uname()[0] == 'OpenBSD':
+                    # We have special support to not require LD_LIBRARY_PATH.
+                    envs = f'PYTHONPATH={pythonpath}'
+                else:
+                    envs = f'LD_LIBRARY_PATH={ld_library_path} PYTHONPATH={pythonpath}'
 
                 log( 'running mupdf_test.py...')
 
