@@ -64,8 +64,8 @@ LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 TAGS_CMD = $(QUIET_TAGS) ctags -R --c-kinds=+p --exclude=platform/python --exclude=platform/c++
 WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
 OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
-DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d libmupdf.def -D $^ -l $@
-GENDEF_CMD = $(QUIET_GENDEF) gendef $^
+DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d $(<:%.dll=%.def) -D $^ -l $@
+GENDEF_CMD = $(QUIET_GENDEF) gendef - $< > $@
 
 ifeq ($(shared),yes)
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ \
