@@ -4910,6 +4910,10 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             #include "mupdf/functions.h"
 
             #include "mupdf/classes.h"
+
+            typedef pdf_obj* p_pdf_obj;
+            typedef fz_buffer* p_fz_buffer;
+
             %}}
 
             %include exception.i
@@ -4975,7 +4979,11 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             %pointer_functions(int, pint);
             %pointer_functions(fz_font, pfont);
 
+            %pointer_functions(p_pdf_obj, pp_pdf_obj)
+            %pointer_functions(p_fz_buffer, pp_fz_buffer)
+
             %pythoncode %{{
+
             # Override default Document.lookup_metadata() method so we can
             # return the string value directly.
             Document_lookup_metadata_0 = Document.lookup_metadata
@@ -4990,6 +4998,20 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                     return None
                 return ret
             Document.lookup_metadata = Document_lookup_metadata
+
+
+            def PdfDocument_page_write(self, rect):
+                """
+                Returns (device, resouces, pcontents).
+                """
+                presources = new_pp_pdf_obj()
+                pcontents = new_pp_fz_buffer()
+                dev = pdf_page_write(self, rect, presources, pcontents)
+                resources = PdfObj(pp_pdf_obj_value(presources))
+                contents = Buffer(pp_fz_buffer_value(pcontents))
+                return dev, resources, contents
+            PdfDocument.page_write = PdfDocument_page_write
+
             %}}
 
             ''')
