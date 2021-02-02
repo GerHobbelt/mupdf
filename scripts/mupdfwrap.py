@@ -5118,10 +5118,10 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                     import importlib
                     for leaf in ('libmupdf.so', 'libmupdfcpp.so', '_mupdf.so'):
                         path = os.path.abspath(f'{{__file__}}/../{{leaf}}')
-                        print(f'path={{path}}')
-                        print(f'exists={{os.path.exists(path)}}')
+                        #print(f'path={{path}}')
+                        #print(f'exists={{os.path.exists(path)}}')
                         ctypes.cdll.LoadLibrary( path)
-                        print(f'have loaded {{path}}')
+                        #print(f'have loaded {{path}}')
                     ''')
             with open( swig_py) as f:
                 mupdf_py_content = mupdf_py_prefix + f.read()
