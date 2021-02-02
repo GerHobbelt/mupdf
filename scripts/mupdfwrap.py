@@ -1367,6 +1367,22 @@ classextras = ClassExtras(
                     'fz_load_page',
                     'fz_load_chapter_page',
                     ],
+                methods_extra = [
+                    ExtraMethod(
+                        f'std::vector<{rename.class_("fz_quad")}>',
+                        f'search_page(const char* needle, int max)',
+                        f'''
+                        {{
+                            std::vector<{rename.class_("fz_quad")}> ret(max);
+                            fz_quad* hit_bbox = ret[0].internal();
+                            int n = {rename.function_call('fz_search_page')}(m_internal, needle, hit_bbox, ret.size());
+                            ret.resize(n);
+                            return ret;
+                        }}
+                        ''',
+                        comment=f'/* Wrapper for fz_search_page(). */',
+                        ),
+                ],
                 constructor_raw = True,
                 ),
 
@@ -1447,7 +1463,18 @@ classextras = ClassExtras(
         fz_quad = ClassExtra(
                 constructor_prefixes = [
                     'fz_transform_quad',
+                    'fz_quad_from_rect'
                     ],
+                constructors_extra = [
+                    ExtraConstructor(
+                        '()',
+                        '''
+                        : ul{0,0}, ur{0,0}, ll{0,0}, lr{0,0}
+                        {
+                        }''',
+                        comment = '/* Default constructor. */',
+                        ),
+                ],
                 pod='inline',
                 constructor_raw = True,
                 ),
@@ -4896,6 +4923,7 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             {{
                 %template(vectori) vector<int>;
                 %template(vectors) vector<std::string>;
+                %template(vectorq) vector<mupdf::{rename.class_("fz_quad")}>;
             }};
 
             // Make sure that operator++() gets converted to __next__().
