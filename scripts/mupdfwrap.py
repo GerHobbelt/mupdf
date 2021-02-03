@@ -5073,16 +5073,17 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                 buffer_extract_helper(self.m_internal, out)
                 print(f'out.data={{out.data}} out.size={{out.size}}')
                 b = cdata(out.data, out.size)
-                print(f'b={{b}}')
-                return b
+                #print(f'b={{b}}')
+                #return b
+                return out.data, out.size
             Buffer.buffer_extract = Buffer_buffer_extract
             
             
-            def Stream_open_memory(b):
+            def Stream_open_memory(data, size):
                 """
                 Creates Stream from bytes using fz_open_memory().
                 """
-                stream = open_memory(b, len(b))
+                stream = open_memory(data, size)
                 return Stream(stream)
             Stream.open_memory = Stream_open_memory
             
