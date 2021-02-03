@@ -36,10 +36,8 @@ def convert_to_pdf(document, page_from=0, page_to=-1, rotate=0):
     
     for p in range(page_from, page_to + page_delta, page_delta):
         page = document.load_page(p)
-        print(f'*** document.__weakref__={document.__weakref__}')
         rect = page.bound_page()
         dev, resources, contents = document_out.page_write(rect)
-        print(f'dev={dev} resources={resources} contents={contents}')
         page.run(dev, mupdf.Matrix(), mupdf.Cookie())   # calls fz_run_page().
         pdf_obj = document_out.add_page(rect, rotate, resources, contents)
         document_out.insert_page(-1, pdf_obj)
@@ -59,17 +57,11 @@ def convert_to_pdf(document, page_from=0, page_to=-1, rotate=0):
     buffer_ = mupdf.Buffer(8192)
     output = mupdf.Output(buffer_)
     document_out.write_document(output, write_options)
-    ret = buffer_.buffer_extract()
-    print(f'buffer_.buffer_extract() returned: {ret}')
-    return ret
+    data, size = buffer_.buffer_extract()
+    print(f'buffer_.buffer_extract() returned: {data, size}')
+    return data, size
 
 data, size = convert_to_pdf(document)
 
-stream = mupdf.Stream.open_memory(data, size)
+stream = mupdf.Stream(data, size)
 document2 = mupdf.Document("pdf", stream)   # uses fz_open_document_with_stream().
-
-    
-
-
-#b = convert_to_pdf(document)
-#pdf = Document(
