@@ -471,7 +471,7 @@ class Rename:
     def internal( self, name):
         return f'internal_{name}'
     def method( self, structname, fnname):
-        if 1 and structname == 'fz_page':
+        if 1 and structname == 'fz_page':   # fixme: why?
             prefix = 'fz_run_page'
             if fnname.startswith( prefix):
                 return f'run{fnname[len(prefix):]}'
@@ -1678,6 +1678,7 @@ classextras = ClassExtras(
         pdf_document = ClassExtra(
                 constructor_prefixes = [
                     'pdf_open_document',
+                    'pdf_create_document',
                     ],
                 ),
 
@@ -4904,6 +4905,9 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             //
             // So for now we just #include <stdexcept> and handle
             // std::exception only.
+            
+            %include "typemaps.i"
+            %include "cpointer.i"
 
             %{{
             #include <stdexcept>
@@ -4911,14 +4915,34 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
 
             #include "mupdf/classes.h"
 
-            typedef pdf_obj* p_pdf_obj;
-            typedef fz_buffer* p_fz_buffer;
-
+            typedef pdf_obj*    p_pdf_obj;
+            typedef fz_buffer*  p_fz_buffer;
+            typedef char*       p_char;
+            
+            typedef struct
+            {{
+                pdf_obj*    resources;
+                fz_buffer*  contents;
+            }} pdf_page_write_helper_out;
+            
+            fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out)
+            {{
+                out->resources = NULL;
+                out->contents = NULL;
+                fz_device* dev = mupdf::ppdf_page_write(doc, mediabox, &out->resources, &out->contents);
+                printf("%s:%i:%s: out->resources=%p out->contents=%p dev=%p\\n",
+                        __FILE__, __LINE__, __FUNCTION__,
+                        out->resources, out->contents, dev
+                        );
+                return dev;
+            }}
+            
             %}}
 
             %include exception.i
             %include std_string.i
             %include carrays.i
+            %include cdata.i
             %include std_vector.i
             %include argcargv.i
 
@@ -4976,12 +5000,23 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             #include "mupdf/functions.h"
             #include "mupdf/classes.h"
 
+            // fixme: this decl duplicates above.
+            typedef struct
+            {{
+                pdf_obj*    resources;
+                fz_buffer*  contents;
+            }} pdf_page_write_helper_out;
+            
+            fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out);
+
             %pointer_functions(int, pint);
             %pointer_functions(fz_font, pfont);
 
             %pointer_functions(p_pdf_obj, pp_pdf_obj)
             %pointer_functions(p_fz_buffer, pp_fz_buffer)
 
+            %pointer_functions(p_char, pp_char)
+            
             %pythoncode %{{
 
             # Override default Document.lookup_metadata() method so we can
@@ -5000,20 +5035,65 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             Document.lookup_metadata = Document_lookup_metadata
 
 
+            #def PdfDocument_page_write(self, rect):
+            #    """
+            #    Returns (device, resouces, pcontents).
+            #    """
+            #    presources = new_pp_pdf_obj()
+            #    pcontents = new_pp_fz_buffer()
+            #    
+            #    print(f'presources={{presources}}')
+            #    print(f'pcontents={{pcontents}}')
+            #    
+            #    #print(f'pp_pdf_obj_value(presources)={{pp_pdf_obj_value(presources)}}')
+            #    #print(f'pp_pdf_obj_value(pcontents)={{pp_pdf_obj_value(pcontents)}}')
+            #    
+            #    dev = ppdf_page_write(self.m_internal, rect.internal(), presources, pcontents)
+            #    
+            #    print(f'dev={{dev}}')
+            #    print(f'pp_pdf_obj_value(presources)={{pp_pdf_obj_value(presources)}}')
+            #    
+            #    resources = PdfObj(presources)
+            #    resources = PdfObj(pp_pdf_obj_value(presources))
+            #    contents = Buffer(pp_fz_buffer_value(pcontents))
+            #    return dev, resources, contents
+            
             def PdfDocument_page_write(self, rect):
-                """
-                Returns (device, resouces, pcontents).
-                """
-                presources = new_pp_pdf_obj()
-                pcontents = new_pp_fz_buffer()
-                dev = pdf_page_write(self, rect, presources, pcontents)
-                resources = PdfObj(pp_pdf_obj_value(presources))
-                contents = Buffer(pp_fz_buffer_value(pcontents))
-                return dev, resources, contents
+                out = pdf_page_write_helper_out()
+                device = pdf_page_write_helper(self.m_internal, rect.internal(), out)
+                device2 = Device(device)
+                print(f'device={{device}} device2={{device2}} out.resources={{out.resources}} out.contents={{out.contents}}')
+                resources = PdfObj(out.resources)
+                print(f'resources={{resources}}')
+                contents = Buffer(out.contents)
+                print(f'contents={{contents}}')
+                return device2, resources, contents
+            
             PdfDocument.page_write = PdfDocument_page_write
-
+            
+            def Buffer_buffer_extract(self):
+                """
+                Call buffer_extract() (which calls fz_buffer_extract()) and
+                return byte string.
+                """
+                d = new_pp_char()
+                n = buffer_extract(d)
+                print(f'buffer_extract() returned n={{n}}')
+                d = pp_char_value(d)
+                b = cdata(d, nn)
+                print(f'returning b={{b}}')
+                return b
+            Buffer.buffer_extract = Buffer_buffer_extract
+            
+            def Stream_open_memory(b):
+                """
+                Creates Stream from bytes using fz_open_memory().
+                """
+                stream = open_memory(b, len(b))
+                return Stream(stream)
+            Stream.open_memory = Stream_open_memory
+            
             %}}
-
             ''')
 
     # Make some additions to the generated Python module.
