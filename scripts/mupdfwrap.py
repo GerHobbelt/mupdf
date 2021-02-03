@@ -4861,6 +4861,44 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
 
     # Create a .i file for SWIG.
     #
+    
+    common = f'''
+            #include <stdexcept>
+            #include "mupdf/functions.h"
+
+            #include "mupdf/classes.h"
+
+            typedef struct
+            {{
+                pdf_obj*    resources;
+                fz_buffer*  contents;
+            }} pdf_page_write_helper_out;
+            
+            fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out)
+            {{
+                out->resources = NULL;
+                out->contents = NULL;
+                fz_device* dev = mupdf::ppdf_page_write(doc, mediabox, &out->resources, &out->contents);
+                printf("%s:%i:%s: out->resources=%p out->contents=%p dev=%p\\n",
+                        __FILE__, __LINE__, __FUNCTION__,
+                        out->resources, out->contents, dev
+                        );
+                return dev;
+            }}
+            
+            typedef struct
+            {{
+                unsigned char*  data;
+                size_t          size;
+            }} buffer_extract_helper_out;
+            void buffer_extract_helper(fz_buffer* buffer, buffer_extract_helper_out* out)
+            {{
+                out->data = NULL;
+                out->size = 0;
+                out->size = mupdf::buffer_extract(buffer, &out->data);
+            }}
+            '''
+    
     text = textwrap.dedent(f'''
             %ignore fz_append_vprintf;
             %ignore fz_error_stack_slot;
@@ -4910,45 +4948,7 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             %include "cpointer.i"
 
             %{{
-            #include <stdexcept>
-            #include "mupdf/functions.h"
-
-            #include "mupdf/classes.h"
-
-            typedef pdf_obj*    p_pdf_obj;
-            typedef fz_buffer*  p_fz_buffer;
-            typedef char*       p_char;
-            
-            typedef struct
-            {{
-                pdf_obj*    resources;
-                fz_buffer*  contents;
-            }} pdf_page_write_helper_out;
-            
-            fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out)
-            {{
-                out->resources = NULL;
-                out->contents = NULL;
-                fz_device* dev = mupdf::ppdf_page_write(doc, mediabox, &out->resources, &out->contents);
-                printf("%s:%i:%s: out->resources=%p out->contents=%p dev=%p\\n",
-                        __FILE__, __LINE__, __FUNCTION__,
-                        out->resources, out->contents, dev
-                        );
-                return dev;
-            }}
-            
-            typedef struct
-            {{
-                unsigned char*  data;
-                size_t          size;
-            }} buffer_extract_helper_out;
-            void buffer_extract_helper(fz_buffer* buffer, buffer_extract_helper_out* out)
-            {{
-                out->data = NULL;
-                out->size = 0;
-                out->size = mupdf::buffer_extract(buffer, &out->data);
-            }}
-            
+            {common}
             %}}
 
             %include exception.i
@@ -5009,40 +5009,18 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             // Get swig about pdf_clean_file()'s (int,argv)-style args:
             %apply (int ARGC, char **ARGV) {{ (int retainlen, char *retainlist[]) }}
 
-            #include "mupdf/functions.h"
-            #include "mupdf/classes.h"
-
-            // fixme: this decl duplicates above.
-            typedef struct
-            {{
-                pdf_obj*    resources;
-                fz_buffer*  contents;
-            }} pdf_page_write_helper_out;
+            {common}
             
-            fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out);
-
-            typedef struct
-            {{
-                unsigned char*  data;
-                size_t          size;
-            }} buffer_extract_helper_out;
-            void buffer_extract_helper(fz_buffer* buffer, buffer_extract_helper_out* out);
             
             %pointer_functions(int, pint);
             %pointer_functions(fz_font, pfont);
 
-            %pointer_functions(p_pdf_obj, pp_pdf_obj)
-            %pointer_functions(p_fz_buffer, pp_fz_buffer)
-
-            %pointer_functions(p_char, pp_char)
-            
             %pythoncode %{{
 
-            # Override default Document.lookup_metadata() method so we can
-            # return the string value directly.
-            Document_lookup_metadata_0 = Document.lookup_metadata
             def Document_lookup_metadata(self, key):
                 """
+                Python implementation override of Document.lookup_metadata().
+                
                 Returns string or None if not found.
                 """
                 e = new_pint()
@@ -5051,34 +5029,46 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                 if e < 0:
                     return None
                 return ret
+            
             Document.lookup_metadata = Document_lookup_metadata
 
 
             def PdfDocument_page_write(self, rect):
+                """
+                Python implementation override of PdfDocument.page_write using
+                pdf_page_write_helper* to handle out-params.
+                
+                Returns (device, resources, contents).
+                """
                 out = pdf_page_write_helper_out()
                 device = pdf_page_write_helper(self.m_internal, rect.internal(), out)
-                device2 = Device(device)
-                print(f'device={{device}} device2={{device2}} out.resources={{out.resources}} out.contents={{out.contents}}')
+                device = Device(device)
                 resources = PdfObj(out.resources)
-                print(f'resources={{resources}}')
                 contents = Buffer(out.contents)
-                print(f'contents={{contents}}')
-                return device2, resources, contents
+                return device, resources, contents
             
             PdfDocument.page_write = PdfDocument_page_write
 
 
             def Buffer_buffer_extract(self):
+                """
+                Python implementation override of Buffer.buffer_extract().
+
+                Returns (data, size), where <data> and <size> are the raw
+                C pointer and size_t values, e.g. suitable for pasing to
+                mupdf.Stream.open_memory().
+                """
                 out = buffer_extract_helper_out()
                 buffer_extract_helper(self.m_internal, out)
                 print(f'out.data={{out.data}} out.size={{out.size}}')
                 
                 # We could convert to a Python <bytes> with 'b =
                 # cdata(out.data, out.size)', but can't find a way to convert
-                # the resulting <bytes> to a (data,size) suitable to pass back
+                # the resulting <bytes> back into (data,size) suitable to pass
                 # into C, e.g. for mupdf.Stream.open_memory().
                 #
                 return out.data, out.size
+            
             Buffer.buffer_extract = Buffer_buffer_extract
             
             %}}
