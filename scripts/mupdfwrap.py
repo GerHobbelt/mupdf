@@ -4937,6 +4937,18 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                 return dev;
             }}
             
+            typedef struct
+            {{
+                unsigned char*  data;
+                size_t          size;
+            }} buffer_extract_helper_out;
+            void buffer_extract_helper(fz_buffer* buffer, buffer_extract_helper_out* out)
+            {{
+                out->data = NULL;
+                out->size = 0;
+                out->size = mupdf::buffer_extract(buffer, &out->data);
+            }}
+            
             %}}
 
             %include exception.i
@@ -5009,6 +5021,13 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             
             fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out);
 
+            typedef struct
+            {{
+                unsigned char*  data;
+                size_t          size;
+            }} buffer_extract_helper_out;
+            void buffer_extract_helper(fz_buffer* buffer, buffer_extract_helper_out* out);
+            
             %pointer_functions(int, pint);
             %pointer_functions(fz_font, pfont);
 
@@ -5035,28 +5054,6 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             Document.lookup_metadata = Document_lookup_metadata
 
 
-            #def PdfDocument_page_write(self, rect):
-            #    """
-            #    Returns (device, resouces, pcontents).
-            #    """
-            #    presources = new_pp_pdf_obj()
-            #    pcontents = new_pp_fz_buffer()
-            #    
-            #    print(f'presources={{presources}}')
-            #    print(f'pcontents={{pcontents}}')
-            #    
-            #    #print(f'pp_pdf_obj_value(presources)={{pp_pdf_obj_value(presources)}}')
-            #    #print(f'pp_pdf_obj_value(pcontents)={{pp_pdf_obj_value(pcontents)}}')
-            #    
-            #    dev = ppdf_page_write(self.m_internal, rect.internal(), presources, pcontents)
-            #    
-            #    print(f'dev={{dev}}')
-            #    print(f'pp_pdf_obj_value(presources)={{pp_pdf_obj_value(presources)}}')
-            #    
-            #    resources = PdfObj(presources)
-            #    resources = PdfObj(pp_pdf_obj_value(presources))
-            #    contents = Buffer(pp_fz_buffer_value(pcontents))
-            #    return dev, resources, contents
             
             def PdfDocument_page_write(self, rect):
                 out = pdf_page_write_helper_out()
@@ -5072,18 +5069,14 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             PdfDocument.page_write = PdfDocument_page_write
             
             def Buffer_buffer_extract(self):
-                """
-                Call buffer_extract() (which calls fz_buffer_extract()) and
-                return byte string.
-                """
-                d = new_pp_char()
-                n = buffer_extract(d)
-                print(f'buffer_extract() returned n={{n}}')
-                d = pp_char_value(d)
-                b = cdata(d, nn)
-                print(f'returning b={{b}}')
+                out = buffer_extract_helper_out()
+                buffer_extract_helper(self.m_internal, out)
+                print(f'out.data={{out.data}} out.size={{out.size}}')
+                b = cdata(out.data, out.size)
+                print(f'b={{b}}')
                 return b
             Buffer.buffer_extract = Buffer_buffer_extract
+            
             
             def Stream_open_memory(b):
                 """
