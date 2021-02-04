@@ -2057,7 +2057,7 @@ def show_ast( filename):
 
 get_args_cache = dict()
 
-def get_args( tu, cursor, include_fz_context=False, verbose=False):
+def get_args( tu, cursor, include_fz_context=False, verbose=False, escape_python=False):
     '''
     Yields information about each arg of the function at <cursor>.
 
@@ -2070,6 +2070,8 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
             If false, we skip args that are 'struct fz_context*'
         verbose:
             .
+        escape_python:
+            If true, we rename to avoid python keywords such as 'in'.
 
     Yields (arg, name, separator, alt, double_ptr) for each argument of
     function at <cursor>:
@@ -2105,6 +2107,8 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                 # use internalContextGet() to get a context.
                 continue
             name = arg.mangled_name or f'arg_{i}'
+            if 0 and name == 'stmofsp':
+                verbose = True
             alt = None
             out_param = False
             # Set <alt> to wrapping class if possible.
@@ -2128,11 +2132,11 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                         ):
                     alt = base_type_cursor
             if verbose:
-                log( '{arg.type.spelling=} {base_type.spelling=}')
+                log( '{arg.type.spelling=} {base_type.spelling=} {arg.type.kind=}')
             if alt:
                 if is_double_pointer( arg.type):
                     out_param = True
-            elif get_base_typename( arg.type) in ('char', 'unsigned char', 'signed char', 'void'):
+            elif get_base_typename( arg.type) in ('char', 'unsigned char', 'signed char', 'void', 'FILE'):
                 if is_double_pointer( arg.type):
                     #log( 'setting outparam: {cursor.spelling=} {arg.type=}')
                     if cursor.spelling == 'pdf_clean_file':
@@ -2146,16 +2150,23 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                 # Pointer to fz_ struct is not usually an out-param.
                 if verbose: log( 'not out-param because arg is: {arg.displayname=} {base_type.spelling=} {extras}')
             elif arg.type.kind == clang.cindex.TypeKind.POINTER:
+                if verbose:
+                    log( 'clang.cindex.TypeKind.POINTER')
                 if arg.type.get_pointee().get_canonical().kind == clang.cindex.TypeKind.FUNCTIONPROTO:
                     # Don't mark function-pointer args as out-params.
+                    if verbose:
+                        log( 'clang.cindex.TypeKind.FUNCTIONPROTO')
                     pass
-                elif arg.type.get_pointee().is_const_qualified:
+                elif arg.type.get_pointee().is_const_qualified():
+                    if verbose:
+                        log( 'is_const_qualified()')
                     pass
                 else:
+                    if verbose:
+                        log( 'setting out_param = True')
                     out_param = True
             if verbose:
-                log( 'returning {(arg.displayname, name, separator, alt, out_param)}')
-
+                log( '*** returning {(arg.displayname, name, separator, alt, out_param)}')
             #yield arg, name, separator, alt, out_param
             ret.append( (arg, name, separator, alt, out_param))
             i += 1
@@ -2163,8 +2174,11 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
 
         get_args_cache[ key] = ret
 
-    for i in ret:
-        yield i
+    for arg, name, separator, alt, out_param in ret:
+        if escape_python:
+            if name in ('in', 'is'):
+                name += '_'
+        yield arg, name, separator, alt, out_param
 
 
 def fn_has_struct_args( tu, cursor):
@@ -2401,9 +2415,9 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
     out_cpp.write( '\n')
     
     if num_out_params:
-        # Create extra C++ and python code to make tuple-returning wrapper.
+        # Create extra C++ and Python code to make tuple-returning wrapper.
         
-        main_name = clip(rename.function_raw(cursor.mangled_name), '::')
+        main_name = rename.function(cursor.mangled_name)
         out_swig_c.write( '\n')
         
         # Write struct.
@@ -2420,6 +2434,7 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
             pointee = arg.type.get_pointee() #.get_canonical()
             out_swig_c.write(f'    {declaration_text( pointee, name)};\n')
         out_swig_c.write(f'}} {main_name}_outparams;\n')
+        out_swig_c.write('\n')
         
         # Write C wrapper fn.
         
@@ -2439,11 +2454,13 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         
         # body.
         out_swig_c.write('{\n')
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-            if not out_param:
-                continue
-            out_swig_c.write(f'    outparams->{name} = NULL;\n')
-        out_swig_c.write(f'    return {main_name}(')
+        if 0:
+            # Set all fields to 0.
+            for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+                if not out_param:
+                    continue
+                out_swig_c.write(f'    outparams->{name} = NULL;\n')
+        out_swig_c.write(f'    return {rename.function_call(cursor.mangled_name)}(')
         sep = ''
         for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
             out_swig_c.write(sep)
@@ -2456,28 +2473,69 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         out_swig_c.write('}\n')
         out_swig_c.write('\n')
         
+        # Write python wrapper.
         out_swig_python.write('')
         out_swig_python.write(f'def {main_name}(')
         sep = ''
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        for arg, name, separator, alt, out_param in get_args(
+                tu,
+                cursor,
+                include_fz_context=False,
+                escape_python=True,
+                ):
             if out_param:
                 continue
             out_swig_python.write(f'{sep}{name}')
             sep = ', '
         out_swig_python.write('):\n')
+        out_swig_python.write(f'    """\n')
+        out_swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
+        sep = ''
+        out_swig_python.write(f'    Returns: ')
+        return_void = cursor.result_type.spelling == 'void'
+        sep = ''
+        if not return_void:
+            out_swig_python.write( f'{cursor.result_type.spelling}')
+            sep = ', '
+        for arg, name, separator, alt, out_param in get_args(
+                tu,
+                cursor,
+                include_fz_context=False,
+                escape_python=True,
+                ):
+            if out_param:
+                out_swig_python.write(f'{sep}{declaration_text(arg.type.get_pointee(), name)}')
+                sep = ', '
+        out_swig_python.write(f'\n')
+        out_swig_python.write(f'    """\n')
         out_swig_python.write(f'    outparams = {main_name}_outparams()\n')
         out_swig_python.write(f'    ret = {main_name}_outparams_fn(')
         sep = ''
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        for arg, name, separator, alt, out_param in get_args(
+                tu,
+                cursor,
+                include_fz_context=False,
+                escape_python=True,
+                ):
             if out_param:
                 continue
             out_swig_python.write(f'{sep}{name}')
             sep = ', '
         out_swig_python.write(f'{sep}outparams)\n')
-        out_swig_python.write(f'    return ret')
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        out_swig_python.write(f'    return ')
+        sep = ''
+        if not return_void:
+            out_swig_python.write(f'ret')
+            sep = ', '
+        for arg, name, separator, alt, out_param in get_args(
+                tu,
+                cursor,
+                include_fz_context=False,
+                escape_python=True,
+                ):
             if out_param:
-                out_swig_python.write(f', outparams.{name}')
+                out_swig_python.write(f'{sep}outparams.{name}')
+                sep = ', '
         out_swig_python.write('\n')
         out_swig_python.write('\n')
     
@@ -5184,15 +5242,12 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
     
     text += swig_python
     
-    text += f'}}'
-
     # Make some additions to the generated Python module.
     #
     # E.g. python wrappers for functions that take out-params should return
     # tuples.
     #
     text += textwrap.dedent('''
-            %pythoncode %{
 
             import re
 
