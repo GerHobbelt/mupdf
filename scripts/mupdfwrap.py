@@ -231,6 +231,24 @@ C++ wrapping:
         We use SWIG on this C++ API to give a python interface onto the
         mupdf::*() functions and classes.
 
+
+Python wrapping:
+
+    The Python API wraps the C++ API and uses identical names for functions,
+    classes and methods.
+    
+    Out-parameters.
+    
+    Functions and methods that have out-parameters are modified to return the
+    out-parameters directly in a tuple. This does not use SWIG typemaps etc;
+    instead we internally create a struct containing the out-params and a C
+    wrapper function and a Python wrapper function that use the struct for the
+    out-params.
+
+    The Python function ends up returning the out parameters in the same order
+    as they occur in the original function's args.
+
+
 Tools:
 
     Clang:
@@ -1790,6 +1808,7 @@ def write_call_arg(
         have_used_this,
         out_cpp,
         verbose=False,
+        python=False,
         ):
     '''
     Write an arg of a function call, translating between raw and wrapping
@@ -1817,6 +1836,8 @@ def write_call_arg(
         If true, we never use 'this->...'.
     out_cpp:
         .
+    python:
+        If true, we write python code, not C.
 
     Returns True if we have used 'this->...', else return <have_used_this>.
     '''
@@ -1835,19 +1856,30 @@ def write_call_arg(
         type_ = type_.get_pointee().get_canonical()
         ptr = ''
     extras = get_fz_extras( type_.spelling)
-    assert extras
+    assert extras, f'No extras for type_.spelling={type_.spelling}'
     if verbose:
         log( 'param is fz: {type_.spelling=} {extras2.pod=}')
-    if extras.pod == 'inline':
+    if python:
+        if extras.pod == 'inline':
+            out_cpp.write( f'{name}.internal()')
+        elif extras.pod:
+            out_cpp.write( f'{name}.m_internal')
+        else:
+            out_cpp.write( f'{name}')
+        
+    elif extras.pod == 'inline':
         # We use the address of the first class member, casting it to a pointer
         # to the wrapped type. Not sure this is guaranteed safe, but should
         # work in practise.
-        name_ = f'{name}.'
-        if not have_used_this and rename.class_(alt.type.spelling) == classname:
-            have_used_this = True
-            name_ = 'this->'
-        field0 = get_field0(type_).spelling
-        out_cpp.write( f'{ptr}({cursor.type.spelling}{ptr}) &{name_}{field0}')
+        if python:
+            out_cpp.write( '{name_}.internal()')
+        else:
+            name_ = f'{name}.'
+            if not have_used_this and rename.class_(alt.type.spelling) == classname:
+                have_used_this = True
+                name_ = 'this->'
+            field0 = get_field0(type_).spelling
+            out_cpp.write( f'{ptr}({cursor.type.spelling}{ptr}) &{name_}{field0}')
     else:
         if verbose:
             log( '{cursor=} {name=} {classname=} {extras2.pod=}')
@@ -2505,7 +2537,7 @@ def make_python_class_method_outparam_override(
             continue
         if is_pointer_to( arg.type, structname):
             continue
-        out.write( f', {name}')
+        write_call_arg(arg, name, separator, alt, out_param, classname, False, out, python=True)
     out.write( ')\n')
     
     # return ret, a, b
@@ -2526,13 +2558,15 @@ def make_python_class_method_outparam_override(
         if not out_param:
             continue
         if alt:
-            out.write( f'{sep}{rename.class_(alt.type.spelling)}(name)')
+            out.write( f'{sep}{rename.class_(alt.type.spelling)}({name})')
         else:
             out.write(f'{sep}{name}')
         sep = ', '
     out.write('\n')
     out.write('\n')
-    out.write(f'{classname}.{main_name} = {classname}_{main_name}_outparams_fn\n')
+    
+    # foo.bar = foo_bar_outparams_fn
+    out.write(f'{classname}.{rename.method(structname, cursor.mangled_name)} = {classname}_{main_name}_outparams_fn\n')
     out.write('\n')
     out.write('\n')
     
@@ -3745,9 +3779,14 @@ def class_write_method(
     have_used_this = False
     num_out_params = 0
     comma = ''
+    debug = structname == 'pdf_document' and fnname == 'pdf_page_write'
     for arg, name, separator, alt, out_param in get_args( tu, fn_cursor):
+        if debug:
+            log( '*** {structname=} {arg=} {name=} {alt=} {out_param=}')
         decl_h += comma
         decl_cpp += comma
+        if out_param:
+            num_out_params += 1
         if alt:
             # This parameter is something like 'fz_foo* arg',
             # which we convert to 'mupdf_foo_s& arg' so that the caller can
@@ -3781,7 +3820,6 @@ def class_write_method(
         else:
             if out_param:
                 decl_h += declaration_text( arg.type, f'mupdf_OUTPARAM({name})')
-                num_out_params += 1
             else:
                 logx( '{arg.spelling=}')
                 decl_h += declaration_text( arg.type, name)
