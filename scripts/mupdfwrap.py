@@ -2149,6 +2149,8 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                 if arg.type.get_pointee().get_canonical().kind == clang.cindex.TypeKind.FUNCTIONPROTO:
                     # Don't mark function-pointer args as out-params.
                     pass
+                elif arg.type.get_pointee().is_const_qualified:
+                    pass
                 else:
                     out_param = True
             if verbose:
@@ -2425,12 +2427,12 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         name_args = f'{main_name}_outparams_fn('
         sep = ''
         for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-            if not out_param:
+            if out_param:
                 continue
             name_args += sep
             name_args += declaration_text( arg.type, name, verbose=verbose)
             sep = ', '
-        name_args += f'{sep}{main_name}_helper_outparams* outparams'
+        name_args += f'{sep}{main_name}_outparams* outparams'
         name_args += ')'
         out_swig_c.write(declaration_text( cursor.result_type, name_args))
         out_swig_c.write('\n')
@@ -2469,13 +2471,14 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
             if out_param:
                 continue
-            out_swig_python.write(f'{sep}name')
+            out_swig_python.write(f'{sep}{name}')
             sep = ', '
-        out_swig_python.write(f'{sep}, outparams)\n')
-        out_swig_python.write(f'return ret')
+        out_swig_python.write(f'{sep}outparams)\n')
+        out_swig_python.write(f'    return ret')
         for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
             if out_param:
                 out_swig_python.write(f', outparams.{name}')
+        out_swig_python.write('\n')
         out_swig_python.write('\n')
     
 
@@ -5114,8 +5117,11 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
 
             // Get swig about pdf_clean_file()'s (int,argv)-style args:
             %apply (int ARGC, char **ARGV) {{ (int retainlen, char *retainlist[]) }}
-            {common}
+            ''')
             
+    text += common
+    
+    text += textwrap.dedent(f'''
             %pointer_functions(int, pint);
 
             %pythoncode %{{
@@ -5174,10 +5180,11 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             
             Buffer.buffer_extract = Buffer_buffer_extract
             
-            %}}
             ''')
     
     text += swig_python
+    
+    text += f'}}'
 
     # Make some additions to the generated Python module.
     #
