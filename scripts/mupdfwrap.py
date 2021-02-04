@@ -2421,7 +2421,7 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         out_swig_c.write( '\n')
         
         # Write struct.
-        out_swig_c.write(f'/* Helper for out-params of {main_name}(). */\n')
+        out_swig_c.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
         out_swig_c.write(f'typedef struct\n')
         out_swig_c.write( '{\n')
         for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
@@ -2454,12 +2454,13 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         
         # body.
         out_swig_c.write('{\n')
-        if 0:
-            # Set all fields to 0.
-            for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-                if not out_param:
-                    continue
+        # Set all pointer fields to NULL.
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if not out_param:
+                continue
+            if arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
                 out_swig_c.write(f'    outparams->{name} = NULL;\n')
+        # Make call.
         out_swig_c.write(f'    return {rename.function_call(cursor.mangled_name)}(')
         sep = ''
         for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
