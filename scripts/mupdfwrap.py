@@ -2318,6 +2318,138 @@ def make_fncall( tu, cursor, return_type, fncall, out):
 
 
 
+def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_swig_python):
+    '''
+    Create extra C++ and Python code to make tuple-returning wrapper of
+    specified function.
+    
+    We write to out_swig_c and out_swig_python.
+    '''
+    verbose = False
+    main_name = rename.function(cursor.mangled_name)
+    out_swig_c.write( '\n')
+
+    # Write struct.
+    out_swig_c.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
+    out_swig_c.write(f'typedef struct\n')
+    out_swig_c.write( '{\n')
+    for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        if not out_param:
+            continue
+        decl = declaration_text( arg.type, name, verbose=verbose)
+        if verbose:
+            log( '{decl=}')
+        assert arg.type.kind == clang.cindex.TypeKind.POINTER
+        pointee = arg.type.get_pointee() #.get_canonical()
+        out_swig_c.write(f'    {declaration_text( pointee, name)};\n')
+    out_swig_c.write(f'}} {main_name}_outparams;\n')
+    out_swig_c.write('\n')
+
+    # Write C wrapper fn.
+
+    # decl.
+    name_args = f'{main_name}_outparams_fn('
+    sep = ''
+    for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        if out_param:
+            continue
+        name_args += sep
+        name_args += declaration_text( arg.type, name, verbose=verbose)
+        sep = ', '
+    name_args += f'{sep}{main_name}_outparams* outparams'
+    name_args += ')'
+    out_swig_c.write(declaration_text( cursor.result_type, name_args))
+    out_swig_c.write('\n')
+
+    # body.
+    out_swig_c.write('{\n')
+    # Set all pointer fields to NULL.
+    for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        if not out_param:
+            continue
+        if arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
+            out_swig_c.write(f'    outparams->{name} = NULL;\n')
+    # Make call.
+    out_swig_c.write(f'    return {rename.function_call(cursor.mangled_name)}(')
+    sep = ''
+    for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+        out_swig_c.write(sep)
+        if out_param:
+            out_swig_c.write(f'&outparams->{name}')
+        else:
+            out_swig_c.write(f'{name}')
+        sep = ', '
+    out_swig_c.write(');\n')
+    out_swig_c.write('}\n')
+    out_swig_c.write('\n')
+
+    # Write python wrapper.
+    out_swig_python.write('')
+    out_swig_python.write(f'def {main_name}(')
+    sep = ''
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if out_param:
+            continue
+        out_swig_python.write(f'{sep}{name}')
+        sep = ', '
+    out_swig_python.write('):\n')
+    out_swig_python.write(f'    """\n')
+    out_swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
+    sep = ''
+    out_swig_python.write(f'    Returns: ')
+    return_void = cursor.result_type.spelling == 'void'
+    sep = ''
+    if not return_void:
+        out_swig_python.write( f'{cursor.result_type.spelling}')
+        sep = ', '
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if out_param:
+            out_swig_python.write(f'{sep}{declaration_text(arg.type.get_pointee(), name)}')
+            sep = ', '
+    out_swig_python.write(f'\n')
+    out_swig_python.write(f'    """\n')
+    out_swig_python.write(f'    outparams = {main_name}_outparams()\n')
+    out_swig_python.write(f'    ret = {main_name}_outparams_fn(')
+    sep = ''
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if out_param:
+            continue
+        out_swig_python.write(f'{sep}{name}')
+        sep = ', '
+    out_swig_python.write(f'{sep}outparams)\n')
+    out_swig_python.write(f'    return ')
+    sep = ''
+    if not return_void:
+        out_swig_python.write(f'ret')
+        sep = ', '
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if out_param:
+            out_swig_python.write(f'{sep}outparams.{name}')
+            sep = ', '
+    out_swig_python.write('\n')
+    out_swig_python.write('\n')
+    
+
 def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_swig_python):
     '''
     Writes simple C++ wrapper fn, converting any fz_try..fz_catch exception
@@ -2415,131 +2547,16 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
     out_cpp.write( '\n')
     
     if num_out_params:
-        # Create extra C++ and Python code to make tuple-returning wrapper.
-        
-        main_name = rename.function(cursor.mangled_name)
-        out_swig_c.write( '\n')
-        
-        # Write struct.
-        out_swig_c.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
-        out_swig_c.write(f'typedef struct\n')
-        out_swig_c.write( '{\n')
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-            if not out_param:
-                continue
-            decl = declaration_text( arg.type, name, verbose=verbose)
-            if verbose:
-                log( '{decl=}')
-            assert arg.type.kind == clang.cindex.TypeKind.POINTER
-            pointee = arg.type.get_pointee() #.get_canonical()
-            out_swig_c.write(f'    {declaration_text( pointee, name)};\n')
-        out_swig_c.write(f'}} {main_name}_outparams;\n')
-        out_swig_c.write('\n')
-        
-        # Write C wrapper fn.
-        
-        # decl.
-        name_args = f'{main_name}_outparams_fn('
-        sep = ''
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-            if out_param:
-                continue
-            name_args += sep
-            name_args += declaration_text( arg.type, name, verbose=verbose)
-            sep = ', '
-        name_args += f'{sep}{main_name}_outparams* outparams'
-        name_args += ')'
-        out_swig_c.write(declaration_text( cursor.result_type, name_args))
-        out_swig_c.write('\n')
-        
-        # body.
-        out_swig_c.write('{\n')
-        # Set all pointer fields to NULL.
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-            if not out_param:
-                continue
-            if arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
-                out_swig_c.write(f'    outparams->{name} = NULL;\n')
-        # Make call.
-        out_swig_c.write(f'    return {rename.function_call(cursor.mangled_name)}(')
-        sep = ''
-        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
-            out_swig_c.write(sep)
-            if out_param:
-                out_swig_c.write(f'&outparams->{name}')
-            else:
-                out_swig_c.write(f'{name}')
-            sep = ', '
-        out_swig_c.write(');\n')
-        out_swig_c.write('}\n')
-        out_swig_c.write('\n')
-        
-        # Write python wrapper.
-        out_swig_python.write('')
-        out_swig_python.write(f'def {main_name}(')
-        sep = ''
-        for arg, name, separator, alt, out_param in get_args(
+        make_python_outparam_helpers(
                 tu,
                 cursor,
-                include_fz_context=False,
-                escape_python=True,
-                ):
-            if out_param:
-                continue
-            out_swig_python.write(f'{sep}{name}')
-            sep = ', '
-        out_swig_python.write('):\n')
-        out_swig_python.write(f'    """\n')
-        out_swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
-        sep = ''
-        out_swig_python.write(f'    Returns: ')
-        return_void = cursor.result_type.spelling == 'void'
-        sep = ''
-        if not return_void:
-            out_swig_python.write( f'{cursor.result_type.spelling}')
-            sep = ', '
-        for arg, name, separator, alt, out_param in get_args(
-                tu,
-                cursor,
-                include_fz_context=False,
-                escape_python=True,
-                ):
-            if out_param:
-                out_swig_python.write(f'{sep}{declaration_text(arg.type.get_pointee(), name)}')
-                sep = ', '
-        out_swig_python.write(f'\n')
-        out_swig_python.write(f'    """\n')
-        out_swig_python.write(f'    outparams = {main_name}_outparams()\n')
-        out_swig_python.write(f'    ret = {main_name}_outparams_fn(')
-        sep = ''
-        for arg, name, separator, alt, out_param in get_args(
-                tu,
-                cursor,
-                include_fz_context=False,
-                escape_python=True,
-                ):
-            if out_param:
-                continue
-            out_swig_python.write(f'{sep}{name}')
-            sep = ', '
-        out_swig_python.write(f'{sep}outparams)\n')
-        out_swig_python.write(f'    return ')
-        sep = ''
-        if not return_void:
-            out_swig_python.write(f'ret')
-            sep = ', '
-        for arg, name, separator, alt, out_param in get_args(
-                tu,
-                cursor,
-                include_fz_context=False,
-                escape_python=True,
-                ):
-            if out_param:
-                out_swig_python.write(f'{sep}outparams.{name}')
-                sep = ', '
-        out_swig_python.write('\n')
-        out_swig_python.write('\n')
-    
+                fnname,
+                out_h,
+                out_cpp,
+                out_swig_c,
+                out_swig_python,
+                )
+
 
 def make_namespace_open( namespace, out):
     if namespace:
