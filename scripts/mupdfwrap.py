@@ -186,7 +186,7 @@ C++ wrapping:
         in various constructors and methods that wrap auto-detected fz_*
         functions, plus explicitly-specified methods that wrap/use fz_*
         functions.
-
+        
         More specifically, for each wrapping class:
 
             Copy constructors/operator=:
@@ -195,7 +195,7 @@ C++ wrapping:
                 copy constructor and operator= that use these functions.
 
             Constructors:
-
+            
                 We look for all fz_*() functions called fz_new*() that
                 return a pointer to the wrapped class, and wrap these into
                 constructors. If any of these constructors have duplicate
@@ -219,6 +219,11 @@ C++ wrapping:
                 There are various subleties with wrapping classes that are not
                 copyable etc.
 
+        Reference counting:
+        
+            Constructors for wrapping classes generally do not call
+            fz_keep_*(). Destructors generally do call fz_drop_*().
+
         mupdf::* functions methods generally have the same args as the fz_*
         functions that they wrap except that they don't take any fz_context*
         parameter. If the fz_* functions takes a fz_context*, one appropriate
@@ -237,16 +242,22 @@ Python wrapping:
     The Python API wraps the C++ API and uses identical names for functions,
     classes and methods.
     
-    Out-parameters.
+    Out-parameters:
     
-    Functions and methods that have out-parameters are modified to return the
-    out-parameters directly in a tuple. This does not use SWIG typemaps etc;
-    instead we internally create a struct containing the out-params and a C
-    wrapper function and a Python wrapper function that use the struct for the
-    out-params.
+        Functions and methods that have out-parameters are modified to return
+        the out-parameters directly in a tuple.
+        
+        This does not use SWIG typemaps etc because it's very difficult to make
+        things work that way. Instead we internally create a struct containing
+        the out-params together with C and Python wrapper functions that use
+        the struct to pass the out-params back from C into Python.
 
-    The Python function ends up returning the out parameters in the same order
-    as they occur in the original function's args.
+        The Python function ends up returning the out parameters in the same
+        order as they occur in the original function's args, prefixed by the
+        original function's return value if it is not void.
+
+        If a function returns void and has exactly one out-param, the Python
+        wrapper will return the out-param directly, not as part of a tuple.
 
 
 Tools:
@@ -982,6 +993,9 @@ classextras = ClassExtras(
                     'fz_open_accelerated_document',
                     'fz_open_document',
                     ],
+                method_wrappers = [
+                    'fz_load_outline',
+                ],
                 method_wrappers_static = [
                     'fz_new_xhtml_document_from_document',
                     ],
@@ -1194,19 +1208,19 @@ classextras = ClassExtras(
         fz_outline = ClassExtra(
                 # We add various methods to give depth-first iteration of outlines.
                 #
-                constructor_raw = False,
+                #constructor_raw = False,
                 constructor_prefixes = [
                     'fz_load_outline',
                     ],
-                constructors_extra = [
-                    ExtraConstructor( '(struct fz_outline* internal)',
-                    f'''
-                    : m_internal( {rename.function_call("fz_keep_outline")}(internal))
-                    {{
-                    }}
-                    '''
-                    ),
-                    ],
+                #constructors_extra = [
+                #    ExtraConstructor( '(struct fz_outline* internal)',
+                #    f'''
+                #    : m_internal( {rename.function_call("fz_keep_outline")}(internal))
+                #    {{
+                #    }}
+                #    '''
+                #    ),
+                #    ],
                 methods_extra = [
                     ExtraMethod( 'OutlineIterator', 'begin()',
                     '''
@@ -1245,71 +1259,82 @@ classextras = ClassExtras(
                     };
                     ''',
                 extra_cpp =
-                    '''
+                    f'''
                     OutlineIterator::OutlineIterator(const Outline& item)
                     : m_outline(item), m_depth(0)
-                    {
-                    }
+                    {{
+                    }}
                     OutlineIterator::OutlineIterator()
                     : m_outline(NULL)
-                    {
-                    }
+                    {{
+                    }}
                     OutlineIterator& OutlineIterator::operator++()
-                    {
-                        if (m_outline.m_internal->down) {
+                    {{
+                        if (m_outline.m_internal->down)
+                        {{
                             m_up.push_back(m_outline.m_internal);
+                            {rename.function_call("fz_keep_outline")}(m_outline.m_internal->down);
                             m_outline = Outline(m_outline.m_internal->down);
                             m_depth += 1;
-                        }
-                        else if (m_outline.m_internal->next) {
+                        }}
+                        else if (m_outline.m_internal->next)
+                        {{
+                            {rename.function_call("fz_keep_outline")}(m_outline.m_internal->next);
                             m_outline = Outline(m_outline.m_internal->next);
-                        }
-                        else {
+                        }}
+                        else
+                        {{
                             /* Go up and across in the tree. */
-                            for(;;) {
-                                if (m_up.empty()) {
+                            for(;;)
+                            {{
+                                if (m_up.empty())
+                                {{
                                     m_outline = Outline(NULL);
                                     assert(m_depth == 0);
                                     break;
-                                }
+                                }}
                                 fz_outline* p = m_up.back();
                                 m_up.pop_back();
                                 m_depth -= 1;
-                                if (p->next) {
+                                if (p->next)
+                                {{
+                                    {rename.function_call("fz_keep_outline")}(p->next);
                                     m_outline = Outline(p->next);
                                     break;
-                                }
-                            }
-                        }
+                                }}
+                            }}
+                        }}
                         return *this;
-                    }
+                    }}
                     bool OutlineIterator::operator==(const OutlineIterator& rhs)
-                    {
+                    {{
                         bool ret = m_outline.m_internal == rhs.m_outline.m_internal;
                         return ret;
-                    }
+                    }}
                     bool OutlineIterator::operator!=(const OutlineIterator& rhs)
-                    {
+                    {{
                         return m_outline.m_internal != rhs.m_outline.m_internal;
-                    }
+                    }}
                     OutlineIterator& OutlineIterator::operator*()
-                    {
+                    {{
                         return *this;
-                    }
+                    }}
                     OutlineIterator* OutlineIterator::operator->()
-                    {
+                    {{
                         return this;
-                    }
+                    }}
 
                     void test(Outline& item)
-                    {
-                        for( OutlineIterator it = item.begin(); it != item.end(); ++it) {
+                    {{
+                        for( OutlineIterator it = item.begin(); it != item.end(); ++it)
+                        {{
                             (void) *it;
-                        }
-                        for (auto i: item) {
+                        }}
+                        for (auto i: item)
+                        {{
                             (void) i;
-                        }
-                    }
+                        }}
+                    }}
 
                     ''',
                 accessors=True,
@@ -2985,7 +3010,7 @@ def find_wrappable_function_with_arg0_type_cache_populate( tu):
 
         if exclude_reasons:
             find_wrappable_function_with_arg0_type_excluded_cache[ fnname] = exclude_reasons
-            if 0:   # lgtm [py/unreachable-statement]
+            if fnname == 'fz_load_outline':   # lgtm [py/unreachable-statement]
                 log( 'excluding {fnname=} because:')
                 for i in exclude_reasons:
                     log( '    {i}')
@@ -5210,38 +5235,6 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             #include "mupdf/classes.h"
             '''
             
-    _ = '''
-            typedef struct
-            {{
-                pdf_obj*    resources;
-                fz_buffer*  contents;
-            }} pdf_page_write_helper_out;
-            
-            
-            fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out)
-            {{
-                out->resources = NULL;
-                out->contents = NULL;
-                fz_device* dev = mupdf::ppdf_page_write(doc, mediabox, &out->resources, &out->contents);
-                printf("%s:%i:%s: out->resources=%p out->contents=%p dev=%p\\n",
-                        __FILE__, __LINE__, __FUNCTION__,
-                        out->resources, out->contents, dev
-                        );
-                return dev;
-            }}
-            
-            typedef struct
-            {{
-                unsigned char*  data;
-                size_t          size;
-            }} buffer_extract_helper_out;
-            void buffer_extract_helper(fz_buffer* buffer, buffer_extract_helper_out* out)
-            {{
-                out->data = NULL;
-                out->size = 0;
-                out->size = mupdf::buffer_extract(buffer, &out->data);
-            }}
-            '''
     common += swig_c
     
     text = textwrap.dedent(f'''
@@ -5379,47 +5372,6 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
 
             ''')
 
-    _ = textwrap.dedent(f'''
-            def PdfDocument_page_write(self, rect):
-                """
-                Python implementation override of PdfDocument.page_write using
-                pdf_page_write_helper* to handle out-params.
-                
-                Returns (device, resources, contents).
-                """
-                out = pdf_page_write_helper_out()
-                device = pdf_page_write_helper(self.m_internal, rect.internal(), out)
-                device = Device(device)
-                resources = PdfObj(out.resources)
-                contents = Buffer(out.contents)
-                return device, resources, contents
-            
-            PdfDocument.page_write = PdfDocument_page_write
-
-
-            def Buffer_buffer_extract(self):
-                """
-                Python implementation override of Buffer.buffer_extract().
-
-                Returns (data, size), where <data> and <size> are the raw
-                C pointer and size_t values, e.g. suitable for pasing to
-                mupdf.Stream.open_memory().
-                """
-                out = buffer_extract_helper_out()
-                buffer_extract_helper(self.m_internal, out)
-                print(f'out.data={{out.data}} out.size={{out.size}}')
-                
-                # We could convert to a Python <bytes> with 'b =
-                # cdata(out.data, out.size)', but can't find a way to convert
-                # the resulting <bytes> back into (data,size) suitable to pass
-                # into C, e.g. for mupdf.Stream.open_memory().
-                #
-                return out.data, out.size
-            
-            Buffer.buffer_extract = Buffer_buffer_extract
-            
-            ''')
-    
     text += swig_python
     
     # Make some additions to the generated Python module.
