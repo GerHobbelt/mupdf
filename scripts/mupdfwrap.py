@@ -5009,12 +5009,9 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
 
             // Get swig about pdf_clean_file()'s (int,argv)-style args:
             %apply (int ARGC, char **ARGV) {{ (int retainlen, char *retainlist[]) }}
-
             {common}
             
-            
             %pointer_functions(int, pint);
-            %pointer_functions(fz_font, pfont);
 
             %pythoncode %{{
 
