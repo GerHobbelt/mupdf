@@ -2448,6 +2448,93 @@ def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c
             sep = ', '
     out_swig_python.write('\n')
     out_swig_python.write('\n')
+
+
+def make_python_class_method_outparam_override(
+        tu,
+        cursor,
+        fnname,
+        out,
+        structname,
+        classname,
+        return_type,
+        ):
+    main_name = rename.function(cursor.mangled_name)
+    out.write( f'def {classname}_{main_name}_outparams_fn( self')
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if out_param:
+            continue
+        if is_pointer_to( arg.type, structname):
+            continue
+        out.write(f', {name}')
+    out.write('):\n')
+    out.write( '    """\n')
+    out.write(f'    Helper for out-params of {structname}::{main_name}() [{cursor.mangled_name}()].\n')
+    out.write( '    """\n')
+    
+    # ret, a, b, ...
+    out.write(f'    ')
+    sep = ''
+    if cursor.result_type.spelling != 'void':
+        out.write( 'ret')
+        sep = ', '
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if not out_param:
+            continue
+        out.write( f'{sep}{name}')
+        sep = ', '
+    # = foo::bar(self.m_internal, p, q, r, ...)
+    out.write( f' = {main_name}( self.m_internal')
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if out_param:
+            continue
+        if is_pointer_to( arg.type, structname):
+            continue
+        out.write( f', {name}')
+    out.write( ')\n')
+    
+    # return ret, a, b
+    out.write( '    return ')
+    sep = ''
+    if cursor.result_type.spelling != 'void':
+        if return_type:
+            out.write( f'{return_type}(ret)')
+        else:
+            out.write( f'ret')
+        sep = ', '
+    for arg, name, separator, alt, out_param in get_args(
+            tu,
+            cursor,
+            include_fz_context=False,
+            escape_python=True,
+            ):
+        if not out_param:
+            continue
+        if alt:
+            out.write( f'{sep}{rename.class_(alt.type.spelling)}(name)')
+        else:
+            out.write(f'{sep}{name}')
+        sep = ', '
+    out.write('\n')
+    out.write('\n')
+    out.write(f'{classname}.{main_name} = {classname}_{main_name}_outparams_fn\n')
+    out.write('\n')
+    out.write('\n')
     
 
 def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_swig_python):
@@ -3598,9 +3685,13 @@ def class_write_method(
         extras=None,
         struct=None,
         duplicate_type=None,
+        out_swig_python=None,
         ):
     '''
     Writes a method that calls <fnname>.
+    
+    Also appends python code to <out_swig_python> if specified.
+    
         tu
             .
         register_fn_use
@@ -3625,9 +3716,13 @@ def class_write_method(
         extras
             None or ClassExtras instance.
             Only used if <constructor> is true.
-        struct=None
+        struct
             None or cursor for the struct definition.
             Only used if <constructor> is true.
+        out_swig_python
+            If specified and there are one or more out-params, we write python
+            code to overwride the default SWIG-generated method, to call our
+            *_outparams_fn() alternative.
     '''
     assert fnname not in omit_methods
     logx( '{classname=} {fnname=}')
@@ -3647,6 +3742,7 @@ def class_write_method(
         decl_h = f'{methodname}('
         decl_cpp = f'{methodname}('
     have_used_this = False
+    num_out_params = 0
     comma = ''
     for arg, name, separator, alt, out_param in get_args( tu, fn_cursor):
         decl_h += comma
@@ -3684,6 +3780,7 @@ def class_write_method(
         else:
             if out_param:
                 decl_h += declaration_text( arg.type, f'mupdf_OUTPARAM({name})')
+                num_out_params += 1
             else:
                 logx( '{arg.spelling=}')
                 decl_h += declaration_text( arg.type, name)
@@ -3813,6 +3910,17 @@ def class_write_method(
 
     if duplicate_type:
         out_cpp.write( f'*/\n')
+    
+    if out_swig_python and num_out_params:
+        make_python_class_method_outparam_override(
+                tu,
+                fn_cursor,
+                fnname,
+                out_swig_python,
+                structname,
+                classname,
+                return_type,
+                )
 
 
 def class_custom_method( register_fn_use, classname, extramethod, out_h, out_cpp):
@@ -4086,7 +4194,16 @@ def class_destructor(
 
 
 
-def class_wrapper( tu, register_fn_use, struct, structname, classname, out_h, out_cpp, out_h_end):
+def class_wrapper(
+        tu,
+        register_fn_use,
+        struct,
+        structname, classname,
+        out_h,
+        out_cpp,
+        out_h_end,
+        out_swig_python,
+        ):
     '''
     Creates source for a class called <classname> that wraps <struct>, with
     methods that call selected fz_*() functions. Writes to out_h and out_cpp.
@@ -4258,6 +4375,7 @@ def class_wrapper( tu, register_fn_use, struct, structname, classname, out_h, ou
                 out_cpp,
                 static=True,
                 struct=struct,
+                out_swig_python=out_swig_python,
                 )
 
     # Extra methods that wrap fz_*() fns.
@@ -4277,6 +4395,7 @@ def class_wrapper( tu, register_fn_use, struct, structname, classname, out_h, ou
                 out_h,
                 out_cpp,
                 struct=struct,
+                out_swig_python=out_swig_python,
                 )
 
     # Custom methods.
@@ -4831,6 +4950,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
                     out_hs.classes,
                     out_cpps.classes,
                     out_h_classes_end,
+                    out_swig_python,
                     )
         if is_container:
             container_classnames.append( classname)
@@ -5050,12 +5170,15 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             #include "mupdf/functions.h"
 
             #include "mupdf/classes.h"
-
+            '''
+            
+    _ = '''
             typedef struct
             {{
                 pdf_obj*    resources;
                 fz_buffer*  contents;
             }} pdf_page_write_helper_out;
+            
             
             fz_device* pdf_page_write_helper(pdf_document* doc, fz_rect mediabox, pdf_page_write_helper_out* out)
             {{
@@ -5216,7 +5339,9 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             
             Document.lookup_metadata = Document_lookup_metadata
 
+            ''')
 
+    _ = textwrap.dedent(f'''
             def PdfDocument_page_write(self, rect):
                 """
                 Python implementation override of PdfDocument.page_write using
