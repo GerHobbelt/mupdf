@@ -2302,7 +2302,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
 
 
 
-def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp):
+def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_swig_python):
     '''
     Writes simple C++ wrapper fn, converting any fz_try..fz_catch exception
     into a C++ exception and getting internal context.
@@ -2315,7 +2315,11 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp):
         Stream to which we write header output.
     out_cpp:
         Stream to which we write cpp output.
-
+    out_swig_c:
+        Stream to which we write extra C++ code for SWIG .i file.
+    out_swig_python:
+        Stream to which we write extra Python code for SWIG .i file.
+    
     Example generated function:
 
         fz_band_writer * mupdf_new_band_writer_of_size(fz_context *ctx, size_t size, fz_output *out)
@@ -2349,6 +2353,7 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp):
     name_args_h = f'{fnname}('
     name_args_cpp = f'{fnname}('
     comma = ''
+    num_out_params = 0
     for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=True):
         if verbose:
             log( '{arg=} {name=} {separator=} {alt=} {out_param=}')
@@ -2356,6 +2361,7 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp):
             continue
         name2 = name
         if out_param:
+            num_out_params += 1
             name2 = f'mupdf_OUTPARAM({name})'
         decl = declaration_text( arg.type, name2, verbose=verbose)
         if verbose:
@@ -2364,6 +2370,7 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp):
         decl = declaration_text( arg.type, name)
         name_args_cpp += f'{comma}{decl}'
         comma = ', '
+    
     name_args_h += ')'
     name_args_cpp += ')'
     declaration_h = declaration_text( cursor.result_type, name_args_h)
@@ -2390,7 +2397,87 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp):
     make_fncall( tu, cursor, return_type, fncall, out_cpp)
     out_cpp.write( '}\n')
     out_cpp.write( '\n')
-
+    
+    if num_out_params:
+        # Create extra C++ and python code to make tuple-returning wrapper.
+        
+        main_name = clip(rename.function_raw(cursor.mangled_name), '::')
+        out_swig_c.write( '\n')
+        
+        # Write struct.
+        out_swig_c.write(f'/* Helper for out-params of {main_name}(). */\n')
+        out_swig_c.write(f'typedef struct\n')
+        out_swig_c.write( '{\n')
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if not out_param:
+                continue
+            decl = declaration_text( arg.type, name, verbose=verbose)
+            if verbose:
+                log( '{decl=}')
+            assert arg.type.kind == clang.cindex.TypeKind.POINTER
+            pointee = arg.type.get_pointee() #.get_canonical()
+            out_swig_c.write(f'    {declaration_text( pointee, name)};\n')
+        out_swig_c.write(f'}} {main_name}_outparams;\n')
+        
+        # Write C wrapper fn.
+        
+        # decl.
+        name_args = f'{main_name}_outparams_fn('
+        sep = ''
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if not out_param:
+                continue
+            name_args += sep
+            name_args += declaration_text( arg.type, name, verbose=verbose)
+            sep = ', '
+        name_args += f'{sep}{main_name}_helper_outparams* outparams'
+        name_args += ')'
+        out_swig_c.write(declaration_text( cursor.result_type, name_args))
+        out_swig_c.write('\n')
+        
+        # body.
+        out_swig_c.write('{\n')
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if not out_param:
+                continue
+            out_swig_c.write(f'    outparams->{name} = NULL;\n')
+        out_swig_c.write(f'    return {main_name}(')
+        sep = ''
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            out_swig_c.write(sep)
+            if out_param:
+                out_swig_c.write(f'&outparams->{name}')
+            else:
+                out_swig_c.write(f'{name}')
+            sep = ', '
+        out_swig_c.write(');\n')
+        out_swig_c.write('}\n')
+        out_swig_c.write('\n')
+        
+        out_swig_python.write('')
+        out_swig_python.write(f'def {main_name}(')
+        sep = ''
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if out_param:
+                continue
+            out_swig_python.write(f'{sep}{name}')
+            sep = ', '
+        out_swig_python.write('):\n')
+        out_swig_python.write(f'    outparams = {main_name}_outparams()\n')
+        out_swig_python.write(f'    ret = {main_name}_outparams_fn(')
+        sep = ''
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if out_param:
+                continue
+            out_swig_python.write(f'{sep}name')
+            sep = ', '
+        out_swig_python.write(f'{sep}, outparams)\n')
+        out_swig_python.write(f'return ret')
+        for arg, name, separator, alt, out_param in get_args( tu, cursor, include_fz_context=False):
+            if out_param:
+                out_swig_python.write(f', outparams.{name}')
+        out_swig_python.write('\n')
+    
 
 def make_namespace_open( namespace, out):
     if namespace:
@@ -2746,6 +2833,8 @@ def make_function_wrappers(
         out_functions_cpp,
         out_internal_h,
         out_internal_cpp,
+        out_swig_c,
+        out_swig_python,
         ):
     '''
     Generates C++ source code containing wrappers for all fz_*() functions.
@@ -2923,6 +3012,8 @@ def make_function_wrappers(
                     fnname_wrapper,
                     temp_out_h,
                     temp_out_cpp,
+                    out_swig_c,
+                    out_swig_python,
                     )
         except Clang6FnArgsBug as e:
             #log( jlib.exception_info())
@@ -4259,7 +4350,7 @@ def tabify( filename, text):
     return ret
 
 
-def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
+def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_python, doit=True):
     '''
     Generates all .h and .cpp files.
 
@@ -4272,7 +4363,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
     doit:
         For debugging only. If false, we don't actually write to any files.
 
-    Returns (tu, hs, cpps, fn_usage_filename, container_classnames, fn_usage).
+    Returns (tu, hs, cpps, fn_usage_filename, container_classnames, fn_usage, output_param_fns).
         tu:
             From clang.
         hs:
@@ -4287,6 +4378,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
             Dict mapping fz_* function names to number of usages in generated
             class code.
             Name of output file containing information on function usage.
+        output_param_fns:
+            .
     '''
     assert dir_mupdf.endswith( '/')
     assert base.endswith( '/')
@@ -4397,7 +4490,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
             ):
         out_hs.add( name, f'{base}include/mupdf/{name}.h')
         out_cpps.add( name, f'{base}implementation/{name}.cpp')
-
+    
     # Create extra File that writes to internal buffer rather than an actual
     # file, which we will append to out_h.
     #
@@ -4556,7 +4649,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
     # Write source code for exceptions and wrapper functions.
     #
     log( 'Creating wrapper functions...')
-    make_function_wrappers(
+    output_param_fns = make_function_wrappers(
             tu,
             namespace,
             out_hs.exceptions,
@@ -4565,6 +4658,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
             out_cpps.functions,
             out_hs.internal,
             out_cpps.internal,
+            out_swig_c,
+            out_swig_python,
             )
 
     fn_usage = dict()
@@ -4750,7 +4845,16 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
 
     out_fn_usage.close()
 
-    return tu, base, filenames_h, filenames_cpp, fn_usage_filename, container_classnames, fn_usage
+    return (
+            tu,
+            base,
+            filenames_h,
+            filenames_cpp,
+            fn_usage_filename,
+            container_classnames,
+            fn_usage,
+            output_param_fns,
+            )
 
 
 def compare_fz_usage(
@@ -4848,7 +4952,7 @@ def compare_fz_usage(
 
 
 
-def build_swig( build_dirs, container_classnames, language='python', swig='swig'):
+def build_swig( build_dirs, container_classnames, swig_c, swig_python, language='python', swig='swig'):
     '''
     Builds python wrapper for all mupdf_* functions and classes.
     '''
@@ -4898,6 +5002,7 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                 out->size = mupdf::buffer_extract(buffer, &out->data);
             }}
             '''
+    common += swig_c
     
     text = textwrap.dedent(f'''
             %ignore fz_append_vprintf;
@@ -5070,6 +5175,8 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             
             %}}
             ''')
+    
+    text += swig_python
 
     # Make some additions to the generated Python module.
     #
@@ -5368,8 +5475,11 @@ def main():
                 h_files     = []
                 cpp_files   = []
                 container_classnames = None
+                output_param_fns = None
                 force_rebuild = False
                 header_git = False
+                swig_c = None
+                swig_python = None
                 jlib.log('{build_dirs.dir_so=}')
 
                 while 1:
@@ -5419,11 +5529,15 @@ def main():
                         elif action == '0':
                             # Generate C++ code that wraps the fz_* API.
                             namespace = 'mupdf'
-                            tu, base, hs, cpps, fn_usage_filename, container_classnames, fn_usage = cpp_source(
+                            swig_c = io.StringIO()
+                            swig_python = io.StringIO()
+                            tu, base, hs, cpps, fn_usage_filename, container_classnames, fn_usage, output_param_fns = cpp_source(
                                     build_dirs.dir_mupdf,
                                     namespace,
                                     f'{build_dirs.dir_mupdf}platform/c++/',
                                     header_git,
+                                    swig_c,
+                                    swig_python,
                                     )
 
                             h_files += hs
@@ -5502,7 +5616,13 @@ def main():
                             if not container_classnames:
                                 raise Exception( 'action "0" required')
                             with jlib.LogPrefixScope( f'swig: '):
-                                build_swig( build_dirs, container_classnames, swig=swig)
+                                build_swig(
+                                        build_dirs,
+                                        container_classnames,
+                                        swig_c.getvalue(),
+                                        swig_python.getvalue(),
+                                        swig=swig,
+                                        )
 
                         elif action == 'j':
                             # Just experimenting.
