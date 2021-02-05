@@ -38,7 +38,7 @@ def convert_to_pdf(document, page_from=0, page_to=-1, rotate=0):
         page = document.load_page(p)
         rect = page.bound_page()
         dev, resources, contents = document_out.page_write(rect)
-        page.run(dev, mupdf.Matrix(), mupdf.Cookie())   # calls fz_run_page().
+        page.run_page(dev, mupdf.Matrix(), mupdf.Cookie())
         pdf_obj = document_out.add_page(rect, rotate, resources, contents)
         document_out.insert_page(-1, pdf_obj)
 

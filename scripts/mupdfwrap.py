@@ -502,10 +502,6 @@ class Rename:
     def internal( self, name):
         return f'internal_{name}'
     def method( self, structname, fnname):
-        if 1 and structname == 'fz_page':   # fixme: why?
-            prefix = 'fz_run_page'
-            if fnname.startswith( prefix):
-                return f'run{fnname[len(prefix):]}'
         if structname.startswith( 'fz_'):
             ret = clip( fnname, "fz_")
             if ret in ('stdin', 'stdout', 'stderr'):
