@@ -5186,6 +5186,16 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             #include "mupdf/functions.h"
 
             #include "mupdf/classes.h"
+            
+            //PyObject* PyBytes_FromStringAndSize(const char *, Py_ssize_t);
+            
+            PyObject* buffer_to_bytes(fz_buffer* buffer)
+            {{
+                unsigned char* c = NULL;
+                size_t len = mupdf::buffer_storage(buffer, &c);
+                fprintf(stderr, "c=%p len=%zi\\n", c, len);
+                return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+            }}
             '''
             
     common += swig_c
@@ -5393,6 +5403,15 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
                 def next( self):    # for python3.
                     return self.__next__()
 
+            def Buffer_buffer_extract_bytes(self):
+                """
+                Returns Python <bytes> for data.
+                """
+                size, data = self.buffer_extract()
+                return cdata(data, size)
+                
+            Buffer.buffer_extract_bytes = Buffer_buffer_extract_bytes
+            
             ''')
 
     # Add __iter__() methods for all classes with begin() and end() methods.
