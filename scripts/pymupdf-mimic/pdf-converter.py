@@ -57,11 +57,22 @@ def convert_to_pdf(document, page_from=0, page_to=-1, rotate=0):
     buffer_ = mupdf.Buffer(8192)
     output = mupdf.Output(buffer_)
     document_out.write_document(output, write_options)
-    data, size = buffer_.buffer_extract()
-    print(f'buffer_.buffer_extract() returned: {data, size}')
+    size, data = buffer_.buffer_extract()
+    print(f'buffer_.buffer_extract() returned: {size, data}')
     return data, size
 
 data, size = convert_to_pdf(document)
 
 stream = mupdf.Stream(data, size)
-document2 = mupdf.Document("pdf", stream)   # uses fz_open_document_with_stream().
+document2 = mupdf.Document("pdf", stream)
+
+
+def get_toc(document, simple=True):
+    print(f'get_toc()')
+    outline = document.load_outline()
+    for outline_it in outline:
+        depth = outline_it.m_depth
+        o = outline_it.m_outline
+        print(f'    {" "*4*depth} page={o.page()} coord=({o.x()} {o.y()}) title={o.title()} uri={o.uri()}')
+
+get_toc(document)
