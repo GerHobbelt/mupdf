@@ -120,21 +120,10 @@ def get_page(pno, zoom=False, max_size=None):
         pix = dlist.new_pixmap_from_display_list(mat, mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB), alpha=0)
 
     size = pix.pixmap_stride() * pix.h()
-    print(f'pix.pixmap_stride()={pix.pixmap_stride()} pix.h()={pix.h()} size={size}')
     buffer_ = mupdf.Buffer(size)
     output = mupdf.Output(buffer_)
     output.write_pixmap_as_pnm(pix)
-    #img = buffer_.buffer_extract_bytes()
-    img = mupdf.buffer_to_bytes(buffer_.m_internal)
-    #with open('foo.ppm', 'wb') as f:
-    #    f.write(img)
-    #img2 = img.encode('utf-8')
-    #assert size2 == size, f'size={size} size2={size2}'
-    #print(f'img={img!r}')
-    print(f'size={size} type(img)={type(img)} len(img)={len(img)}')
-    print(f'img={img[:32]!r}')
-    #print(f'len(img2)={len(img2)}')
-    #img = pix.getImageData("ppm")  # make PPM image from pixmap for tkinter
+    img = buffer_.buffer_extract()
     return img, (clip.x0, clip.y0)  # return image, clip position
 
 

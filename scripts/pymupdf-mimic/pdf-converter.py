@@ -57,7 +57,7 @@ def convert_to_pdf(document, page_from=0, page_to=-1, rotate=0):
     buffer_ = mupdf.Buffer(8192)
     output = mupdf.Output(buffer_)
     document_out.write_document(output, write_options)
-    size, data = buffer_.buffer_extract()
+    size, data = buffer_.buffer_extract_raw()
     print(f'buffer_.buffer_extract() returned: {size, data}')
     return data, size
 
