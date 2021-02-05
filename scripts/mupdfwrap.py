@@ -221,8 +221,10 @@ C++ wrapping:
 
         Reference counting:
         
-            Constructors for wrapping classes generally do not call
-            fz_keep_*(). Destructors generally do call fz_drop_*().
+            Constructors for wrapping classes generally do not call fz_keep_*()
+            - we expect any supplied fz_* pointer to point to something that
+            has already been passed to fz_keep*() or similar. Destructors
+            generally do call fz_drop_*().
 
         mupdf::* functions methods generally have the same args as the fz_*
         functions that they wrap except that they don't take any fz_context*
