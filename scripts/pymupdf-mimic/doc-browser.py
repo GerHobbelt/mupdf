@@ -33,6 +33,8 @@ will be stored in a list and looked up by page number. This way, zooming
 pixmaps and page re-visits will re-use a once-created display list.
 
 """
+
+print('started')
 import sys
 import mupdf
 
@@ -66,7 +68,7 @@ if not fname:
     raise SystemExit("Cancelled: no filename supplied")
 
 doc = mupdf.Document(fname)
-page_count = doc.fz_count_pages()
+page_count = doc.count_pages()
 
 # allocate storage for page display lists
 dlist_tab = [None] * page_count
@@ -94,10 +96,10 @@ def get_page(pno, zoom=False, max_size=None):
     # exploit, but do not exceed width or height
     zoom_0 = 1
     if max_size:
-        zoom_0 = min(1, max_size[0] / r.width, max_size[1] / r.height)
+        zoom_0 = min(1, max_size[0] / (r.x1 - r.x0), max_size[1] / (r.y1 - r.y0))
         if zoom_0 == 1:
-            zoom_0 = min(max_size[0] / r.width, max_size[1] / r.height)
-    mat_0 = mupdf.Matrix(zoom_0, zoom_0)
+            zoom_0 = min(max_size[0] / (r.x1 - r.x0), max_size[1] / (r.y1 - r.y0))
+    mat_0 = mupdf.Matrix.scale(zoom_0, zoom_0)
 
     if not zoom:  # show the total page
         pix = dlist.new_pixmap_from_display_list(mat_0, mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB), alpha=0)
@@ -112,19 +114,28 @@ def get_page(pno, zoom=False, max_size=None):
         tl.y += zoom[2] * (h2 / 2)  # provided, but ...
         tl.y = max(0, tl.y)  # stay within ...
         tl.y = min(h2, tl.y)  # the page rect
-        clip = mupdf.Rect(tl, tl.x + w2, tl.y + h2)
+        clip = mupdf.Rect(tl, tl.x + w2, tl.y + h2) # fixme: this looks wrong.
         # clip rect is ready, now fill it
         mat = mat_0 * mupdf.Matrix(2, 2)  # zoom matrix
         pix = dlist.new_pixmap_from_display_list(mat, mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB), alpha=0)
 
     size = pix.pixmap_stride() * pix.h()
+    print(f'pix.pixmap_stride()={pix.pixmap_stride()} pix.h()={pix.h()} size={size}')
     buffer_ = mupdf.Buffer(size)
     output = mupdf.Output(buffer_)
     output.write_pixmap_as_pnm(pix)
-    size2, img = buffer_.buffer_extract()
-    assert size2 = size
+    #img = buffer_.buffer_extract_bytes()
+    img = mupdf.buffer_to_bytes(buffer_.m_internal)
+    #with open('foo.ppm', 'wb') as f:
+    #    f.write(img)
+    #img2 = img.encode('utf-8')
+    #assert size2 == size, f'size={size} size2={size2}'
+    #print(f'img={img!r}')
+    print(f'size={size} type(img)={type(img)} len(img)={len(img)}')
+    print(f'img={img[:32]!r}')
+    #print(f'len(img2)={len(img2)}')
     #img = pix.getImageData("ppm")  # make PPM image from pixmap for tkinter
-    return img, clip.tl  # return image, clip position
+    return img, (clip.x0, clip.y0)  # return image, clip position
 
 
 # ------------------------------------------------------------------------------
