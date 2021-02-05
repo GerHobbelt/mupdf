@@ -5188,9 +5188,17 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
 
             #include "mupdf/classes.h"
             
-            //PyObject* PyBytes_FromStringAndSize(const char *, Py_ssize_t);
+            /* Support for extracting buffer data into a Python bytes. */
             
-            PyObject* buffer_to_bytes(fz_buffer* buffer)
+            PyObject* buffer_extract_bytes(fz_buffer* buffer)
+            {{
+                unsigned char* c = NULL;
+                size_t len = mupdf::buffer_extract(buffer, &c);
+                fprintf(stderr, "c=%p len=%zi\\n", c, len);
+                return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+            }}
+            
+            PyObject* buffer_storage_bytes(fz_buffer* buffer)
             {{
                 unsigned char* c = NULL;
                 size_t len = mupdf::buffer_storage(buffer, &c);
@@ -5404,14 +5412,41 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
                 def next( self):    # for python3.
                     return self.__next__()
 
-            def Buffer_buffer_extract_bytes(self):
+            # The auto-generated Python Buffer.buffer_extract() and
+            # Buffer.buffer_storage() methods both return (size, data).
+            #
+            # But these raw values aren't particularly useful to Python
+            # code so we change these methods to each return a Python bytes
+            # instance instead, using the special C functions defined above,
+            # buffer_extract_bytes() and buffer_storage_bytes().
+            #
+            # We make the original methods available as
+            # Buffer.buffer_extract_raw() and Buffer.buffer_storage_raw(); they
+            # can be used to create a mupdf.Stream with:
+            #
+            #   data, size = buffer_.buffer_extract_raw()
+            #   stream = mupdf.Stream(data, size))
+            #
+            # It is likely that there are ownership issues here.
+            
+            Buffer.buffer_extract_raw = Buffer.buffer_extract
+            Buffer_buffer_storage_raw = Buffer.buffer_storage
+
+            def Buffer_buffer_extract(self):
                 """
-                Returns Python <bytes> for data.
+                Returns buffer data as a Python bytes instance.
                 """
-                size, data = self.buffer_extract()
-                return cdata(data, size)
-                
-            Buffer.buffer_extract_bytes = Buffer_buffer_extract_bytes
+                return buffer_extract_bytes(self.m_internal)
+            
+            Buffer.buffer_extract = Buffer_buffer_extract
+            
+            def Buffer_buffer_storage(self):
+                """
+                Returns buffer data as a Python bytes instance.
+                """
+                return buffer_storage_bytes(self.m_internal)
+            
+            Buffer.buffer_storage = Buffer_buffer_storage
             
             ''')
 
