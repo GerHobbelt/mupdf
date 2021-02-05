@@ -1860,10 +1860,12 @@ def write_call_arg(
     '''
     assert isinstance( arg, Arg)
     assert isinstance( arg.cursor, clang.cindex.Cursor)
-    out_cpp.write( arg.separator)
     if not arg.alt:
         # Arg is a normal type; no conversion necessary.
-        out_cpp.write( arg.name)
+        if python:
+            out_cpp.write( arg.name_python)
+        else:
+            out_cpp.write( arg.name)
         return have_used_this
 
     if verbose:
@@ -1879,25 +1881,22 @@ def write_call_arg(
         log( 'param is fz: {type_.spelling=} {extras2.pod=}')
     if python:
         if extras.pod == 'inline':
-            out_cpp.write( f'{arg.name}.internal()')
+            out_cpp.write( f'{arg.name_python}.internal()')
         elif extras.pod:
-            out_cpp.write( f'{arg.name}.m_internal')
+            out_cpp.write( f'{arg.name_python}.m_internal')
         else:
-            out_cpp.write( f'{arg.name}')
+            out_cpp.write( f'{arg.name_python}')
         
     elif extras.pod == 'inline':
         # We use the address of the first class member, casting it to a pointer
         # to the wrapped type. Not sure this is guaranteed safe, but should
         # work in practise.
-        if python:
-            out_cpp.write( '{name_}.internal()')
-        else:
-            name_ = f'{arg.name}.'
-            if not have_used_this and rename.class_(arg.alt.type.spelling) == classname:
-                have_used_this = True
-                name_ = 'this->'
-            field0 = get_field0(type_).spelling
-            out_cpp.write( f'{ptr}({arg.cursor.type.spelling}{ptr}) &{name_}{field0}')
+        name_ = f'{arg.name}.'
+        if not have_used_this and rename.class_(arg.alt.type.spelling) == classname:
+            have_used_this = True
+            name_ = 'this->'
+        field0 = get_field0(type_).spelling
+        out_cpp.write( f'{ptr}({arg.cursor.type.spelling}{ptr}) &{name_}{field0}')
     else:
         if verbose:
             log( '{arg.cursor=} {arg.name=} {classname=} {extras2.pod=}')
@@ -2118,6 +2117,8 @@ class Arg:
         .out_param:
             True if this looks like an out-parameter, e.g. alt is set and
             double pointer, or arg is pointer other than to char.
+        .name_python:
+            Same as .name or .name+'_' if .name is a Python keyword.
     '''
     def __init__(self, cursor, name, separator, alt, out_param):
         self.cursor = cursor
@@ -2126,9 +2127,9 @@ class Arg:
         self.alt = alt
         self.out_param = out_param
         if name in ('in', 'is'):
-            self.name_python = f'{self.name}_'
+            self.name_python = f'{name}_'
         else:
-            self.name_python = self.name
+            self.name_python = name
 
 get_args_cache = dict()
 
@@ -2522,6 +2523,7 @@ def make_python_class_method_outparam_override(
             continue
         if is_pointer_to( arg.cursor.type, structname):
             continue
+        out.write( ', ')
         write_call_arg(arg, classname, False, out, python=True)
     out.write( ')\n')
     
@@ -3657,16 +3659,19 @@ def class_write_method_body(
         out_cpp.write( f'    return mupdf::{fnname2}(')
 
     have_used_this = False
+    sep = ''
     for arg in get_args( tu, fn_cursor):
         arg_classname = classname
         if static or constructor:
             arg_classname = None
+        out_cpp.write( sep)
         have_used_this = write_call_arg(
                 arg,
                 arg_classname,
                 have_used_this,
                 out_cpp,
                 )
+        sep = ', '
     out_cpp.write( f');\n')
 
     if fnname in functions_that_return_non_kept:
