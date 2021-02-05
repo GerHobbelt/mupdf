@@ -66,13 +66,12 @@ data, size = convert_to_pdf(document)
 stream = mupdf.Stream(data, size)
 document2 = mupdf.Document("pdf", stream)
 
+# Fixme: we don't yet copy the TOC.
 
-def get_toc(document, simple=True):
-    print(f'get_toc()')
-    outline = document.load_outline()
-    for outline_it in outline:
-        depth = outline_it.m_depth
-        o = outline_it.m_outline
-        print(f'    {" "*4*depth} page={o.page()} coord=({o.x()} {o.y()}) title={o.title()} uri={o.uri()}')
+# Fixme: we don't yet copy links.
 
-get_toc(document)
+document3 = document2.pdf_specifics()
+opts = mupdf.PdfWriteOptions()
+opts.do_garbage = 4
+opts.do_compress = 1
+document3.save_document(path+ '.pdf', opts)
