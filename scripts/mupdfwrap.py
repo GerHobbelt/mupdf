@@ -2125,10 +2125,14 @@ class Arg:
         self.separator = separator
         self.alt = alt
         self.out_param = out_param
+        if name in ('in', 'is'):
+            self.name_python = f'{self.name}_'
+        else:
+            self.name_python = self.name
 
 get_args_cache = dict()
 
-def get_args( tu, cursor, include_fz_context=False, verbose=False, escape_python=False):
+def get_args( tu, cursor, include_fz_context=False, verbose=False):
     '''
     Yields Arg instance for each arg of the function at <cursor>.
 
@@ -2141,8 +2145,6 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False, escape_python
             If false, we skip args that are 'struct fz_context*'
         verbose:
             .
-        escape_python:
-            If true, we rename to avoid python keywords such as 'in'.
     '''
     # We are called a few times for each function, and the calculations we do
     # are slow, so we cache the returned items. E.g. this reduces total time of
@@ -2229,16 +2231,7 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False, escape_python
         get_args_cache[ key] = ret
 
     for arg in ret:
-        if escape_python and arg.name in ('in', 'is'):
-            yield Arg(
-                    arg.cursor,
-                    arg.name + '_',
-                    arg.separator,
-                    arg.alt,
-                    arg.out_param,
-                    )
-        else:
-            yield arg
+        yield arg
 
 
 def fn_has_struct_args( tu, cursor):
@@ -2446,10 +2439,10 @@ def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c
     out_swig_python.write('')
     out_swig_python.write(f'def {main_name}(')
     sep = ''
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
-        out_swig_python.write(f'{sep}{arg.name}')
+        out_swig_python.write(f'{sep}{arg.name_python}')
         sep = ', '
     out_swig_python.write('):\n')
     out_swig_python.write(f'    """\n')
@@ -2461,19 +2454,19 @@ def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c
     if not return_void:
         out_swig_python.write( f'{cursor.result_type.spelling}')
         sep = ', '
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if arg.out_param:
-            out_swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name)}')
+            out_swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
             sep = ', '
     out_swig_python.write(f'\n')
     out_swig_python.write(f'    """\n')
     out_swig_python.write(f'    outparams = {main_name}_outparams()\n')
     out_swig_python.write(f'    ret = {main_name}_outparams_fn(')
     sep = ''
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
-        out_swig_python.write(f'{sep}{arg.name}')
+        out_swig_python.write(f'{sep}{arg.name_python}')
         sep = ', '
     out_swig_python.write(f'{sep}outparams)\n')
     out_swig_python.write(f'    return ')
@@ -2481,9 +2474,9 @@ def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c
     if not return_void:
         out_swig_python.write(f'ret')
         sep = ', '
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if arg.out_param:
-            out_swig_python.write(f'{sep}outparams.{arg.name}')
+            out_swig_python.write(f'{sep}outparams.{arg.name_python}')
             sep = ', '
     out_swig_python.write('\n')
     out_swig_python.write('\n')
@@ -2500,12 +2493,12 @@ def make_python_class_method_outparam_override(
         ):
     main_name = rename.function(cursor.mangled_name)
     out.write( f'def {classname}_{main_name}_outparams_fn( self')
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
         if is_pointer_to( arg.cursor.type, structname):
             continue
-        out.write(f', {arg.name}')
+        out.write(f', {arg.name_python}')
     out.write('):\n')
     out.write( '    """\n')
     out.write(f'    Helper for out-params of {structname}::{main_name}() [{cursor.mangled_name}()].\n')
@@ -2517,14 +2510,14 @@ def make_python_class_method_outparam_override(
     if cursor.result_type.spelling != 'void':
         out.write( 'ret')
         sep = ', '
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
-        out.write( f'{sep}{arg.name}')
+        out.write( f'{sep}{arg.name_python}')
         sep = ', '
     # = foo::bar(self.m_internal, p, q, r, ...)
     out.write( f' = {main_name}( self.m_internal')
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
         if is_pointer_to( arg.cursor.type, structname):
@@ -2541,13 +2534,13 @@ def make_python_class_method_outparam_override(
         else:
             out.write( f'ret')
         sep = ', '
-    for arg in get_args( tu, cursor, escape_python=True):
+    for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
         if arg.alt:
-            out.write( f'{sep}{rename.class_(arg.alt.type.spelling)}({arg.name})')
+            out.write( f'{sep}{rename.class_(arg.alt.type.spelling)}({arg.name_python})')
         else:
-            out.write(f'{sep}{arg.name}')
+            out.write(f'{sep}{arg.name_python}')
         sep = ', '
     out.write('\n')
     out.write('\n')
