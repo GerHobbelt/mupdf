@@ -5194,7 +5194,6 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             {{
                 unsigned char* c = NULL;
                 size_t len = mupdf::buffer_extract(buffer, &c);
-                fprintf(stderr, "c=%p len=%zi\\n", c, len);
                 return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
             }}
             
@@ -5202,7 +5201,6 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             {{
                 unsigned char* c = NULL;
                 size_t len = mupdf::buffer_storage(buffer, &c);
-                fprintf(stderr, "c=%p len=%zi\\n", c, len);
                 return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
             }}
             '''
