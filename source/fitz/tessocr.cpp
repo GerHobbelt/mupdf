@@ -1,7 +1,8 @@
 #if defined(HAVE_LEPTONICA) && defined(HAVE_TESSERACT)
 
+#include <climits>
 #include "tesseract/baseapi.h"
-#include "tesseract/ocrclass.h"          // for ETEXT_DESC
+#include "tesseract/capi.h"          // for ETEXT_DESC
 
 extern "C" {
 
@@ -76,6 +77,8 @@ static void my_leptonica_free(void *ptr)
 	fz_free(leptonica_mem, ptr);
 }
 
+#if TESSERACT_MAJOR_VERSION >= 5
+
 static bool
 load_file(const char* filename, std::vector<char>* data)
 {
@@ -101,8 +104,6 @@ load_file(const char* filename, std::vector<char>* data)
 	fclose(fp);
 	return result;
 }
-
-#if TESSERACT_MAJOR_VERSION >= 5
 
 static bool
 tess_file_reader(const char *fname, std::vector<char> *out)

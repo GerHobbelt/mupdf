@@ -473,6 +473,7 @@ int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_widget *wi
 	Recreate the appearance stream for an annotation, if necessary.
 */
 void pdf_update_appearance(fz_context *ctx, pdf_annot *annot);
+void pdf_update_signature_appearance_with_image(fz_context *ctx, pdf_annot *annot, fz_image *image);
 
 /*
 	Start/Stop using the annotation-local xref. This allows us to
