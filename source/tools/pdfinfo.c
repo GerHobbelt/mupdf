@@ -22,7 +22,9 @@ enum
 	PATTERNS = 0x10,
 	XOBJS = 0x20,
 	LAYERS = 0x40,
-	ALL = DIMENSIONS | FONTS | IMAGES | SHADINGS | PATTERNS | XOBJS | LAYERS
+	ANNOTATIONS = 0x80,
+	LINKS = 0x100,
+	ALL = DIMENSIONS | FONTS | IMAGES | SHADINGS | PATTERNS | XOBJS | LAYERS | ANNOTATIONS | LINKS
 };
 
 struct info
@@ -172,10 +174,12 @@ usage(void)
 		"usage: mutool info [options] file.pdf [pages]\n"
 		"\t-o -\toutput file path. Default: info will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
+		"\t-A\tlist annotations\n"
 		"\t-F\tlist fonts\n"
 		"\t-I\tlist images\n"
 		"\t-M\tlist dimensions\n"
 		"\t-P\tlist patterns\n"
+		"\t-U\tlist URLs (links in pages)\n"
 		"\t-S\tlist shadings\n"
 		"\t-X\tlist form and postscript xobjects\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
@@ -833,7 +837,7 @@ gatherpageinfo(fz_context *ctx, globals *glo, int page, int show)
 }
 
 static void
-printinfo(fz_context* ctx, globals* glo, const char* filename, int show, int page)
+printinfo(fz_context* ctx, globals* glo, int show, int page)
 {
 	int i;
 	int j;
@@ -1448,9 +1452,6 @@ printinfo(fz_context* ctx, globals* glo, const char* filename, int show, int pag
 
 // fz_link* fz_load_links(fz_context* ctx, fz_page* page);
 
-// IsCrypted:
-//	cryptVer = pdf_crypt_version(ctx, idoc->crypt);
-//	return (cryptVer == 0) ? JNI_TRUE : JNI_FALSE;
 
 
 
@@ -1673,7 +1674,7 @@ printtail(fz_context* ctx, globals* glo)
 }
 
 static void
-showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const char *pagelist)
+showinfo(fz_context *ctx, globals *glo, int show, const char *pagelist)
 {
 	int page, spage, epage;
 	int allpages;
@@ -1701,7 +1702,7 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 			if (!allpages)
 			{
 				fz_write_printf(ctx, out, "Page %d:\n", page);
-				printinfo(ctx, glo, filename, show, page);
+				printinfo(ctx, glo, show, page);
 				fz_write_printf(ctx, out, "\n");
 				clearinfo(ctx, glo);
 			}
@@ -1709,13 +1710,13 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 	}
 
 	if (allpages)
-		printinfo(ctx, glo, filename, show, -1);
+		printinfo(ctx, glo, show, -1);
 
 	printtail(ctx, glo);
 }
 
 static void
-pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *password, int show, const char *argv[], int argc)
+pdfinfo_info(fz_context *ctx, fz_output *out, const char *password, int show, const char *argv[], int argc)
 {
 	enum { NO_FILE_OPENED, NO_INFO_GATHERED, INFO_SHOWN } state;
 	int argidx = 0;
@@ -1734,12 +1735,12 @@ pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *
 			{
 				if (state == NO_INFO_GATHERED)
 				{
-					showinfo(ctx, &glo, filename, show, "1-N");
+					showinfo(ctx, &glo, show, "1-N");
 				}
 
 				closexref(ctx, &glo);
 
-				filename = argv[argidx];
+				const char* filename = argv[argidx];
 				fz_write_printf(ctx, out, "%s:\n", filename);
 				glo.doc = pdf_open_document(glo.ctx, filename);
 				if (pdf_needs_password(ctx, glo.doc))
@@ -1756,7 +1757,7 @@ pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *
 			}
 			else
 			{
-				showinfo(ctx, &glo, filename, show, argv[argidx]);
+				showinfo(ctx, &glo, show, argv[argidx]);
 				state = INFO_SHOWN;
 			}
 
@@ -1764,7 +1765,7 @@ pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *
 		}
 
 		if (state == NO_INFO_GATHERED)
-			showinfo(ctx, &glo, filename, show, "1-N");
+			showinfo(ctx, &glo, show, "1-N");
 	}
 	fz_always(ctx)
 		closexref(ctx, &glo);
@@ -1774,7 +1775,6 @@ pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *
 
 int pdfinfo_main(int argc, const char **argv)
 {
-	const char *filename = "";
 	const char *password = "";
 	const char* output = NULL;
 	int show = ALL;
@@ -1785,14 +1785,16 @@ int pdfinfo_main(int argc, const char **argv)
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "FISPXyMo:p:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "AFISPUXyMo:p:h")) != -1)
 	{
 		switch (c)
 		{
+		case 'A': if (show == ALL) show = ANNOTATIONS; else show |= ANNOTATIONS; break;
 		case 'F': if (show == ALL) show = FONTS; else show |= FONTS; break;
 		case 'I': if (show == ALL) show = IMAGES; else show |= IMAGES; break;
 		case 'S': if (show == ALL) show = SHADINGS; else show |= SHADINGS; break;
 		case 'P': if (show == ALL) show = PATTERNS; else show |= PATTERNS; break;
+		case 'U': if (show == ALL) show = LINKS; else show |= LINKS; break;
 		case 'X': if (show == ALL) show = XOBJS; else show |= XOBJS; break;
 		case 'y': if (show == ALL) show = LAYERS; else show |= LAYERS; break;
 		case 'M': if (show == ALL) show = DIMENSIONS; else show |= DIMENSIONS; break;
@@ -1840,7 +1842,7 @@ int pdfinfo_main(int argc, const char **argv)
 			out = fz_new_output_with_path(ctx, fbuf, 0);
 		}
 
-		pdfinfo_info(ctx, out, filename, password, show, &argv[fz_optind], argc - fz_optind);
+		pdfinfo_info(ctx, out, password, show, &argv[fz_optind], argc - fz_optind);
 
 		fz_flush_output(ctx, out);
 		fz_close_output(ctx, out);
