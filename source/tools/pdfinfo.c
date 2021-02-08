@@ -7,6 +7,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include "mupdf/helpers/pkcs7-openssl.h"
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -191,7 +193,7 @@ static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
 }
 
 static void
-showglobalinfo(fz_context *ctx, globals *glo)
+showglobalinfo(fz_context *ctx, globals *glo, int show)
 {
 	pdf_obj *obj;
 	fz_output *out = glo->out;
@@ -246,6 +248,35 @@ showglobalinfo(fz_context *ctx, globals *glo)
 	}
 
 	fz_write_printf(ctx, out, "\nPages: %d\n\n", glo->pagecount);
+
+	fz_document* pdf = (fz_document*)glo->doc;
+
+	int chaptercount = fz_count_chapters(ctx, pdf);
+
+	fz_write_printf(ctx, out, "Chapters: %d\n\n", chaptercount);
+
+	int alt_page_count = 0;
+	for (int i = 0; i < chaptercount; i++)
+	{
+		int count = fz_count_chapter_pages(ctx, pdf, i);
+
+		if (chaptercount > 1)
+		{
+			fz_write_printf(ctx, out, "+ Chapter %d:: Pages: %d\n", i + 1, count);
+		}
+
+		alt_page_count += count;
+	}
+
+	if (chaptercount > 1)
+	{
+		fz_write_printf(ctx, out, "\n");
+	}
+
+	if (alt_page_count != glo->pagecount)
+	{
+		fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
+	}
 }
 
 static void
@@ -802,11 +833,11 @@ gatherpageinfo(fz_context *ctx, globals *glo, int page, int show)
 }
 
 static void
-printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int page)
+printinfo(fz_context* ctx, globals* glo, const char* filename, int show, int page)
 {
 	int i;
 	int j;
-	fz_output *out = glo->out;
+	fz_output* out = glo->out;
 
 #define PAGE_FMT_zu "\t%d\t(%d 0 R):\t"
 
@@ -848,8 +879,8 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 		fz_write_printf(ctx, out, "Images (%d):\n", glo->images);
 		for (i = 0; i < glo->images; i++)
 		{
-			char *cs = NULL;
-			char *altcs = NULL;
+			char* cs = NULL;
+			char* altcs = NULL;
 
 			fz_write_printf(ctx, out, PAGE_FMT_zu "[ ",
 				glo->image[i].page,
@@ -860,8 +891,8 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 				int n = pdf_array_len(ctx, glo->image[i].u.image.filter);
 				for (j = 0; j < n; j++)
 				{
-					pdf_obj *obj = pdf_array_get(ctx, glo->image[i].u.image.filter, j);
-					char *filter = fz_strdup(ctx, pdf_to_name(ctx, obj));
+					pdf_obj* obj = pdf_array_get(ctx, glo->image[i].u.image.filter, j);
+					char* filter = fz_strdup(ctx, pdf_to_name(ctx, obj));
 
 					if (strstr(filter, "Decode"))
 						*(strstr(filter, "Decode")) = '\0';
@@ -874,8 +905,8 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 			}
 			else if (glo->image[i].u.image.filter)
 			{
-				pdf_obj *obj = glo->image[i].u.image.filter;
-				char *filter = fz_strdup(ctx, pdf_to_name(ctx, obj));
+				pdf_obj* obj = glo->image[i].u.image.filter;
+				char* filter = fz_strdup(ctx, pdf_to_name(ctx, obj));
 
 				if (strstr(filter, "Decode"))
 					*(strstr(filter, "Decode")) = '\0';
@@ -945,7 +976,7 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 		fz_write_printf(ctx, out, "Shading patterns (%d):\n", glo->shadings);
 		for (i = 0; i < glo->shadings; i++)
 		{
-			char *shadingtype[] =
+			char* shadingtype[] =
 			{
 				"",
 				"Function",
@@ -973,13 +1004,13 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 		{
 			if (pdf_to_int(ctx, glo->pattern[i].u.pattern.type) == 1)
 			{
-				char *painttype[] =
+				char* painttype[] =
 				{
 					"",
 					"Colored",
 					"Uncolored",
 				};
-				char *tilingtype[] =
+				char* tilingtype[] =
 				{
 					"",
 					"Constant",
@@ -988,19 +1019,19 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 				};
 
 				fz_write_printf(ctx, out, PAGE_FMT_zu "Tiling %s %s (%d 0 R)\n",
-						glo->pattern[i].page,
-						pdf_to_num(ctx, glo->pattern[i].pageref),
-						painttype[pdf_to_int(ctx, glo->pattern[i].u.pattern.paint)],
-						tilingtype[pdf_to_int(ctx, glo->pattern[i].u.pattern.tiling)],
-						pdf_to_num(ctx, glo->pattern[i].u.pattern.obj));
+					glo->pattern[i].page,
+					pdf_to_num(ctx, glo->pattern[i].pageref),
+					painttype[pdf_to_int(ctx, glo->pattern[i].u.pattern.paint)],
+					tilingtype[pdf_to_int(ctx, glo->pattern[i].u.pattern.tiling)],
+					pdf_to_num(ctx, glo->pattern[i].u.pattern.obj));
 			}
 			else
 			{
 				fz_write_printf(ctx, out, PAGE_FMT_zu "Shading %d 0 R (%d 0 R)\n",
-						glo->pattern[i].page,
-						pdf_to_num(ctx, glo->pattern[i].pageref),
-						pdf_to_num(ctx, glo->pattern[i].u.pattern.shading),
-						pdf_to_num(ctx, glo->pattern[i].u.pattern.obj));
+					glo->pattern[i].page,
+					pdf_to_num(ctx, glo->pattern[i].pageref),
+					pdf_to_num(ctx, glo->pattern[i].u.pattern.shading),
+					pdf_to_num(ctx, glo->pattern[i].u.pattern.obj));
 			}
 		}
 		fz_write_printf(ctx, out, "\n");
@@ -1035,6 +1066,610 @@ printinfo(fz_context *ctx, globals *glo, const char *filename, int show, int pag
 		}
 		fz_write_printf(ctx, out, "\n");
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
+	static struct list annot_list;
+	enum pdf_annot_type subtype;
+	pdf_annot* annot;
+	int idx;
+	int n;
+
+	int was_dirty = pdf->dirty;
+
+	ui_layout(T, X, NW, 2, 2);
+
+	if (ui_popup("CreateAnnotPopup", "Create...", 1, 17))
+	{
+		if (ui_popup_item("Text")) new_annot(PDF_ANNOT_TEXT);
+		if (ui_popup_item("FreeText")) new_annot(PDF_ANNOT_FREE_TEXT);
+		if (ui_popup_item("Stamp")) new_annot(PDF_ANNOT_STAMP);
+		if (ui_popup_item("Caret")) new_annot(PDF_ANNOT_CARET);
+		if (ui_popup_item("Ink")) new_annot(PDF_ANNOT_INK);
+		if (ui_popup_item("Square")) new_annot(PDF_ANNOT_SQUARE);
+		if (ui_popup_item("Circle")) new_annot(PDF_ANNOT_CIRCLE);
+		if (ui_popup_item("Line")) new_annot(PDF_ANNOT_LINE);
+		if (ui_popup_item("Polygon")) new_annot(PDF_ANNOT_POLYGON);
+		if (ui_popup_item("PolyLine")) new_annot(PDF_ANNOT_POLY_LINE);
+		if (ui_popup_item("Highlight")) new_annot(PDF_ANNOT_HIGHLIGHT);
+		if (ui_popup_item("Underline")) new_annot(PDF_ANNOT_UNDERLINE);
+		if (ui_popup_item("StrikeOut")) new_annot(PDF_ANNOT_STRIKE_OUT);
+		if (ui_popup_item("Squiggly")) new_annot(PDF_ANNOT_SQUIGGLY);
+		if (ui_popup_item("FileAttachment")) new_annot(PDF_ANNOT_FILE_ATTACHMENT);
+		if (ui_popup_item("Redact")) new_annot(PDF_ANNOT_REDACT);
+		if (ui_popup_item("Signature")) {
+			selected_annot = pdf_create_signature_widget(ctx, page, "Unknown");
+
+			pdf_update_appearance(ctx, selected_annot);
+			is_draw_mode = 1;
+			render_page();
+		}
+		ui_popup_end();
+	}
+
+	n = 0;
+	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
+		++n;
+
+	ui_list_begin(&annot_list, n, 0, ui.lineheight * 10 + 4);
+	for (idx = 0, annot = pdf_first_annot(ctx, page); annot; ++idx, annot = pdf_next_annot(ctx, annot))
+	{
+		char buf[256];
+		int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
+		subtype = pdf_annot_type(ctx, annot);
+		fz_snprintf(buf, sizeof buf, "%d: %s", num, pdf_string_from_annot_type(ctx, subtype));
+		if (ui_list_item(&annot_list, pdf_annot_obj(ctx, annot), buf, selected_annot == annot))
+		{
+			trace_action("annot = page.getAnnotations()[%d];\n", idx);
+			selected_annot = annot;
+		}
+	}
+	ui_list_end(&annot_list);
+
+	if (selected_annot && (subtype = pdf_annot_type(ctx, selected_annot)) != PDF_ANNOT_WIDGET)
+	{
+		int n, choice;
+		pdf_obj* obj;
+
+		/* common annotation properties */
+
+		ui_spacer();
+
+		do_annotate_author();
+		do_annotate_date();
+
+		obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, selected_annot), PDF_NAME(Popup));
+		if (obj)
+			ui_label("Popup: %d 0 R", pdf_to_num(ctx, obj));
+
+		do_annotate_contents();
+
+		ui_spacer();
+
+		if (subtype == PDF_ANNOT_FREE_TEXT)
+		{
+			int lang_choice, font_choice, color_choice, size_changed;
+			int q;
+			const char* text_lang;
+			const char* text_font;
+			char lang_buf[8];
+			static float text_size_f, text_color[4];
+			static int text_size;
+
+			q = pdf_annot_quadding(ctx, selected_annot);
+			ui_label("Text Alignment:");
+			choice = ui_select("Q", quadding_names[q], quadding_names, nelem(quadding_names));
+			if (choice != -1)
+			{
+				trace_action("annot.setQuadding(%d);\n", choice);
+				pdf_set_annot_quadding(ctx, selected_annot, choice);
+			}
+
+			text_lang = fz_string_from_text_language(lang_buf, pdf_annot_language(ctx, selected_annot));
+			ui_label("Text Language:");
+			lang_choice = ui_select("DA/Lang", text_lang, lang_names, nelem(lang_names));
+			if (lang_choice != -1)
+			{
+				text_lang = lang_names[lang_choice];
+				trace_action("annot.setLanguage(%q);\n", text_lang);
+				pdf_set_annot_language(ctx, selected_annot, fz_text_language_from_string(text_lang));
+			}
+
+			pdf_annot_default_appearance(ctx, selected_annot, &text_font, &text_size_f, text_color);
+			text_size = text_size_f;
+			ui_label("Text Font:");
+			font_choice = ui_select("DA/Font", text_font, font_names, nelem(font_names));
+			ui_label("Text Size: %d", text_size);
+			size_changed = ui_slider(&text_size, 8, 36, 256);
+			ui_label("Text Color:");
+			color_choice = ui_select("DA/Color", name_from_hex(hex_from_color(3, text_color)), color_names + 1, nelem(color_names) - 1);
+			if (font_choice != -1 || color_choice != -1 || size_changed)
+			{
+				if (font_choice != -1)
+					text_font = font_names[font_choice];
+				if (color_choice != -1)
+				{
+					text_color[0] = ((color_values[color_choice + 1] >> 16) & 0xff) / 255.0f;
+					text_color[1] = ((color_values[color_choice + 1] >> 8) & 0xff) / 255.0f;
+					text_color[2] = ((color_values[color_choice + 1]) & 0xff) / 255.0f;
+				}
+				trace_action("annot.setDefaultAppearance(%q, %d, [%g, %g, %g]);\n",
+					text_font, text_size, text_color[0], text_color[1], text_color[2]);
+				pdf_set_annot_default_appearance(ctx, selected_annot, text_font, text_size, text_color);
+			}
+			ui_spacer();
+		}
+
+		if (subtype == PDF_ANNOT_LINE)
+		{
+			enum pdf_line_ending s, e;
+			int s_choice, e_choice;
+
+			pdf_annot_line_ending_styles(ctx, selected_annot, &s, &e);
+
+			ui_label("Line Start:");
+			s_choice = ui_select("LE0", line_ending_styles[s], line_ending_styles, nelem(line_ending_styles));
+
+			ui_label("Line End:");
+			e_choice = ui_select("LE1", line_ending_styles[e], line_ending_styles, nelem(line_ending_styles));
+
+			if (s_choice != -1 || e_choice != -1)
+			{
+				if (s_choice != -1) s = s_choice;
+				if (e_choice != -1) e = e_choice;
+				trace_action("annot.setLineEndingStyles(%q, %q);\n", line_ending_styles[s], line_ending_styles[e]);
+				pdf_set_annot_line_ending_styles(ctx, selected_annot, s, e);
+			}
+
+			fz_point a, b;
+			pdf_annot_line(ctx, selected_annot, &a, &b);
+			ui_label("Line Length: %f", sqrtf((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
+		}
+
+		if (pdf_annot_has_icon_name(ctx, selected_annot))
+		{
+			const char* name = pdf_annot_icon_name(ctx, selected_annot);
+			ui_label("Icon:");
+			switch (pdf_annot_type(ctx, selected_annot))
+			{
+			default:
+				break;
+			case PDF_ANNOT_TEXT:
+				choice = ui_select("Icon", name, text_icons, nelem(text_icons));
+				if (choice != -1)
+				{
+					trace_action("annot.setIcon(%q)\n", text_icons[choice]);
+					pdf_set_annot_icon_name(ctx, selected_annot, text_icons[choice]);
+				}
+				break;
+			case PDF_ANNOT_FILE_ATTACHMENT:
+				choice = ui_select("Icon", name, file_attachment_icons, nelem(file_attachment_icons));
+				if (choice != -1)
+				{
+					trace_action("annot.setIcon(%q)\n", file_attachment_icons[choice]);
+					pdf_set_annot_icon_name(ctx, selected_annot, file_attachment_icons[choice]);
+				}
+				break;
+			case PDF_ANNOT_SOUND:
+				choice = ui_select("Icon", name, sound_icons, nelem(sound_icons));
+				if (choice != -1)
+				{
+					trace_action("annot.setIcon(%q)\n", sound_icons[choice]);
+					pdf_set_annot_icon_name(ctx, selected_annot, sound_icons[choice]);
+				}
+				break;
+			case PDF_ANNOT_STAMP:
+				choice = ui_select("Icon", name, stamp_icons, nelem(stamp_icons));
+				if (choice != -1)
+				{
+					trace_action("annot.setIcon(%q)\n", stamp_icons[choice]);
+					pdf_set_annot_icon_name(ctx, selected_annot, stamp_icons[choice]);
+				}
+				break;
+			}
+		}
+
+		if (should_edit_border(subtype))
+		{
+			static int border;
+			border = pdf_annot_border(ctx, selected_annot);
+			ui_label("Border: %d", border);
+			if (ui_slider(&border, 0, 12, 100))
+			{
+				trace_action("annot.setBorder(%d);\n", border);
+				pdf_set_annot_border(ctx, selected_annot, border);
+			}
+		}
+
+		if (should_edit_color(subtype))
+			do_annotate_color("Color", pdf_annot_color, pdf_set_annot_color);
+		if (should_edit_icolor(subtype))
+			do_annotate_color("InteriorColor", pdf_annot_interior_color, pdf_set_annot_interior_color);
+
+		if (subtype == PDF_ANNOT_HIGHLIGHT)
+		{
+			static int opacity;
+			opacity = pdf_annot_opacity(ctx, selected_annot) * 255;
+			ui_label("Opacity:");
+			if (ui_slider(&opacity, 0, 255, 256))
+			{
+				trace_action("annot.setOpacity(%g);\n", opacity / 255.0f);
+				pdf_set_annot_opacity(ctx, selected_annot, opacity / 255.0f);
+			}
+		}
+
+		ui_spacer();
+
+		if (pdf_annot_has_quad_points(ctx, selected_annot))
+		{
+			if (is_draw_mode)
+			{
+				n = pdf_annot_quad_point_count(ctx, selected_annot);
+				ui_label("QuadPoints: %d", n);
+				if (ui_button("Clear"))
+				{
+					trace_action("annot.clearQuadPoints();\n");
+					pdf_clear_annot_quad_points(ctx, selected_annot);
+				}
+				if (ui_button("Done"))
+					is_draw_mode = 0;
+			}
+			else
+			{
+				if (ui_button("Edit"))
+					is_draw_mode = 1;
+			}
+		}
+
+		if (pdf_annot_has_vertices(ctx, selected_annot))
+		{
+			if (is_draw_mode)
+			{
+				n = pdf_annot_vertex_count(ctx, selected_annot);
+				ui_label("Vertices: %d", n);
+				if (ui_button("Clear"))
+				{
+					trace_action("annot.clearVertices();\n");
+					pdf_clear_annot_vertices(ctx, selected_annot);
+				}
+				if (ui_button("Done"))
+					is_draw_mode = 0;
+			}
+			else
+			{
+				if (ui_button("Edit"))
+					is_draw_mode = 1;
+			}
+		}
+
+		if (pdf_annot_has_ink_list(ctx, selected_annot))
+		{
+			if (is_draw_mode)
+			{
+				n = pdf_annot_ink_list_count(ctx, selected_annot);
+				ui_label("InkList: %d strokes", n);
+				if (ui_button("Clear"))
+				{
+					trace_action("annot.clearInkList();\n");
+					pdf_clear_annot_ink_list(ctx, selected_annot);
+				}
+				if (ui_button("Done"))
+					is_draw_mode = 0;
+			}
+			else
+			{
+				if (ui_button("Edit"))
+					is_draw_mode = 1;
+			}
+		}
+
+		if (pdf_annot_type(ctx, selected_annot) == PDF_ANNOT_FILE_ATTACHMENT)
+		{
+			char attname[PATH_MAX];
+			pdf_obj* fs = pdf_dict_get(ctx, pdf_annot_obj(ctx, selected_annot), PDF_NAME(FS));
+			if (pdf_is_embedded_file(ctx, fs))
+			{
+				if (ui_button("Save..."))
+				{
+					fz_dirname(attname, filename, sizeof attname);
+					fz_strlcat(attname, "/", sizeof attname);
+					fz_strlcat(attname, pdf_embedded_file_name(ctx, fs), sizeof attname);
+					ui_init_save_file(attname, NULL);
+					ui.dialog = save_attachment_dialog;
+				}
+			}
+			if (ui_button("Embed..."))
+			{
+				fz_dirname(attname, filename, sizeof attname);
+				ui_init_open_file(attname, NULL);
+				ui.dialog = open_attachment_dialog;
+			}
+		}
+
+		ui_spacer();
+
+		if (ui_button("Delete"))
+		{
+			trace_action("page.deleteAnnotation(annot);\n");
+			pdf_delete_annot(ctx, page, selected_annot);
+			selected_annot = NULL;
+			render_page();
+			return;
+		}
+
+		if (selected_annot && pdf_annot_needs_new_ap(ctx, selected_annot))
+		{
+			trace_action("annot.updateAppearance();\n");
+			pdf_update_appearance(ctx, selected_annot);
+			render_page();
+		}
+	}
+
+	ui_layout(B, X, NW, 2, 2);
+
+	if (ui_button("Save PDF..."))
+		do_save_pdf_file();
+
+	if (was_dirty != pdf->dirty)
+		update_title();
+
+#endif
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// fz_link* fz_load_links(fz_context* ctx, fz_page* page);
+
+// IsCrypted:
+//	cryptVer = pdf_crypt_version(ctx, idoc->crypt);
+//	return (cryptVer == 0) ? JNI_TRUE : JNI_FALSE;
+
+
+
+typedef struct
+{
+	int max;
+	int len;
+	pdf_obj** sig;
+} sigs_list;
+
+static void
+process_sigs(fz_context* ctx_, pdf_obj* field, void* arg, pdf_obj** ft)
+{
+	sigs_list* sigs = (sigs_list*)arg;
+
+	if (!pdf_name_eq(ctx, pdf_dict_get(ctx, field, PDF_NAME(Type)), PDF_NAME(Annot)) ||
+		!pdf_name_eq(ctx, pdf_dict_get(ctx, field, PDF_NAME(Subtype)), PDF_NAME(Widget)) ||
+		!pdf_name_eq(ctx, pdf_dict_get(ctx, field, ft[0]), PDF_NAME(Sig)))
+		return;
+
+	if (sigs->len == sigs->max)
+	{
+		int newsize = sigs->max * 2;
+		if (newsize == 0)
+			newsize = 4;
+		sigs->sig = fz_realloc_array(ctx, sigs->sig, newsize, pdf_obj*);
+		sigs->max = newsize;
+	}
+
+	sigs->sig[sigs->len++] = field;
+}
+
+static char* short_signature_error_desc(pdf_signature_error err)
+{
+	switch (err)
+	{
+	case PDF_SIGNATURE_ERROR_OKAY:
+		return "OK";
+	case PDF_SIGNATURE_ERROR_NO_SIGNATURES:
+		return "No signatures";
+	case PDF_SIGNATURE_ERROR_NO_CERTIFICATE:
+		return "No certificate";
+	case PDF_SIGNATURE_ERROR_DIGEST_FAILURE:
+		return "Invalid";
+	case PDF_SIGNATURE_ERROR_SELF_SIGNED:
+		return "Self-signed";
+	case PDF_SIGNATURE_ERROR_SELF_SIGNED_IN_CHAIN:
+		return "Self-signed in chain";
+	case PDF_SIGNATURE_ERROR_NOT_TRUSTED:
+		return "Untrusted";
+	default:
+	case PDF_SIGNATURE_ERROR_UNKNOWN:
+		return "Unknown error";
+	}
+}
+
+static const char* bool2str(int state)
+{
+	return state ? "YES" : "NO";
+}
+
+static void write_item(fz_context* ctx, fz_output* out, const char *label, const char *value)
+{
+	char buf[1024];
+	size_t len = 0;
+	pdf_obj* obj = pdf_new_string(ctx, value, strlen(value));
+
+	const char *v = pdf_sprint_obj(ctx, buf, sizeof(buf), &len, obj, 0 /* tight */, 1 /* ascii */);
+	fz_write_printf(ctx, out, "+ %s:\n"
+		"%s\n",
+		label,
+		v);
+	fz_free(ctx, obj);
+}
+
+static void
+printtail(fz_context* ctx, globals* glo)
+{
+	fz_output* out = glo->out;
+	char buf[1024];
+	pdf_document* doc = glo->doc;
+	fz_document* pdf = (fz_document*)doc;
+
+	fz_write_printf(ctx, out, "\n\nDocument General Status / Info:\n\n");
+
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_TITLE, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Title", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_AUTHOR, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Author", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_FORMAT, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Format", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_ENCRYPTION, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Encryption", buf);
+
+	int updates = pdf_count_versions(ctx, doc);
+
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATOR, buf, sizeof buf) > 0)
+		write_item(ctx, out, "PDF Creator", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_PRODUCER, buf, sizeof buf) > 0)
+		write_item(ctx, out, "PDF Producer", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_SUBJECT, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Subject", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_KEYWORDS, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Keywords", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATION_DATE, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Creation Date", buf);
+	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_MODIFICATION_DATE, buf, sizeof buf) > 0)
+		write_item(ctx, out, "Modification Date", buf);
+
+	{
+		pdf_obj* info = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
+
+		if (info)
+		{
+			fz_write_printf(ctx, out, "+ Meta Info Dictionary\n");
+			pdf_print_obj(ctx, out, info, 0 /* tight */, 1 /* ascii */);
+			fz_write_printf(ctx, out, "\n");
+		}
+	}
+
+	buf[0] = 0;
+	if (fz_has_permission(ctx, pdf, FZ_PERMISSION_PRINT))
+		fz_strlcat(buf, "print, ", sizeof buf);
+	if (fz_has_permission(ctx, pdf, FZ_PERMISSION_COPY))
+		fz_strlcat(buf, "copy, ", sizeof buf);
+	if (fz_has_permission(ctx, pdf, FZ_PERMISSION_EDIT))
+		fz_strlcat(buf, "edit, ", sizeof buf);
+	if (fz_has_permission(ctx, pdf, FZ_PERMISSION_ANNOTATE))
+		fz_strlcat(buf, "annotate, ", sizeof buf);
+	if (strlen(buf) > 2)
+		buf[strlen(buf) - 2] = 0;
+	else
+		fz_strlcat(buf, "none", sizeof buf);
+	write_item(ctx, out, "Permissions", buf);
+
+	fz_write_printf(ctx, out, "+ PDF %sdocument with %d update%s.\n",
+		pdf_doc_was_linearized(ctx, doc) ? "linearized " : "",
+		updates, updates > 1 ? "s" : "");
+
+	if (updates > 0)
+	{
+		int n = pdf_validate_change_history(ctx, doc);
+		if (n == 0)
+			fz_write_printf(ctx, out, "+ Change history seems valid.\n");
+		else if (n == 1)
+			fz_write_printf(ctx, out, "+ Invalid changes made to the document in the last update.\n");
+		else if (n == 2)
+			fz_write_printf(ctx, out, "+ Invalid changes made to the document in the penultimate update.\n");
+		else
+			fz_write_printf(ctx, out, "+ Invalid changes made to the document %d updates ago.\n", n);
+	}
+
+	{
+		sigs_list list = { 0, 0, NULL };
+		static pdf_obj* ft_list[2] = { PDF_NAME(FT), NULL };
+		pdf_obj* ft;
+		pdf_obj* form_fields = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/AcroForm/Fields");
+		pdf_walk_tree(ctx, form_fields, PDF_NAME(Kids), process_sigs, NULL, &list, &ft_list[0], &ft);
+
+		if (list.len)
+		{
+			int i;
+			for (i = 0; i < list.len; i++)
+			{
+				pdf_obj* field = list.sig[i];
+				fz_try(ctx)
+				{
+					if (pdf_signature_is_signed(ctx, doc, field))
+					{
+						pdf_pkcs7_verifier* verifier = pkcs7_openssl_new_verifier(ctx);
+						pdf_signature_error sig_cert_error = pdf_check_certificate(ctx, verifier, doc, field);
+						pdf_signature_error sig_digest_error = pdf_check_digest(ctx, verifier, doc, field);
+						fz_write_printf(ctx, out, "+ Signature %d:\n"
+							"  + CERT: %s,\n"
+							"  + DIGEST: %s%s\n",
+							i + 1,
+							short_signature_error_desc(sig_cert_error),
+							short_signature_error_desc(sig_digest_error),
+							pdf_signature_incremental_change_since_signing(ctx, doc, field) ? ", Changed since" : "");
+
+						pdf_drop_verifier(ctx, verifier);
+					}
+					else
+					{
+						fz_write_printf(ctx, out, "+ Signature %d:\n"
+							"Unsigned\n",
+							i + 1);
+					}
+				}
+				fz_catch(ctx)
+				{
+					fz_write_printf(ctx, out, "+ Signature %d:\n"
+						"  + Error\n",
+						i + 1);
+				}
+			}
+			fz_free(ctx, list.sig);
+		}
+	}
+
+	if (updates == 0)
+	{
+		fz_write_printf(ctx, out, "+ No updates since document creation\n");
+	}
+	else
+	{
+		int n = pdf_validate_change_history(ctx, doc);
+		if (n == 0)
+			fz_write_printf(ctx, out, "+ Document changes conform to permissions\n");
+		else
+			fz_write_printf(ctx, out, "+ Document permissions violated %d updates ago\n", n);
+	}
+
+	fz_write_printf(ctx, out,
+		"  + Repaired: %s\n"
+		"  + Crypted:  %s\n",
+		bool2str(pdf_was_repaired(ctx, glo->doc)),
+		bool2str(pdf_needs_password(ctx, glo->doc))
+	);
 }
 
 static void
@@ -1044,6 +1679,7 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 	int allpages;
 	int pagecount;
 	fz_output *out = glo->out;
+	fz_document* pdf = (fz_document * )glo->doc;
 
 	if (!glo->doc)
 	{
@@ -1074,6 +1710,8 @@ showinfo(fz_context *ctx, globals *glo, const char *filename, int show, const ch
 
 	if (allpages)
 		printinfo(ctx, glo, filename, show, -1);
+
+	printtail(ctx, glo);
 }
 
 static void
@@ -1105,11 +1743,15 @@ pdfinfo_info(fz_context *ctx, fz_output *out, const char *filename, const char *
 				fz_write_printf(ctx, out, "%s:\n", filename);
 				glo.doc = pdf_open_document(glo.ctx, filename);
 				if (pdf_needs_password(ctx, glo.doc))
+				{
 					if (!pdf_authenticate_password(ctx, glo.doc, password))
+					{
 						fz_throw(glo.ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
+					}
+				}
 				glo.pagecount = pdf_count_pages(ctx, glo.doc);
 
-				showglobalinfo(ctx, &glo);
+				showglobalinfo(ctx, &glo, show);
 				state = NO_INFO_GATHERED;
 			}
 			else
@@ -1166,7 +1808,6 @@ int pdfinfo_main(int argc, const char **argv)
 	{
 		fz_error(ctx, "No files specified to process\n\n");
 		return usage();
-		return 1;
 	}
 
 	if (!fz_has_global_context())

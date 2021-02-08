@@ -51,6 +51,9 @@ int pdf_is_array(fz_context *ctx, pdf_obj *obj);
 int pdf_is_dict(fz_context *ctx, pdf_obj *obj);
 int pdf_is_indirect(fz_context *ctx, pdf_obj *obj);
 
+// -> "null"; "boolean"; "name"; "integer"; "real"; "string"; "name"; "array"; "dictionary"; "reference"; "<unknown>";
+const char* pdf_objkindstr(pdf_obj* obj);
+
 /*
 	Check if an object is a stream or not.
 */

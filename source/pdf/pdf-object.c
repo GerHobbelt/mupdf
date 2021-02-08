@@ -259,7 +259,7 @@ pdf_new_indirect(fz_context *ctx, pdf_document *doc, int num, int gen)
 
 #define RESOLVE(obj) \
 	if (OBJ_IS_INDIRECT(obj)) \
-		obj = pdf_resolve_indirect_chain(ctx, obj); \
+		obj = pdf_resolve_indirect_chain(ctx, obj);
 
 int pdf_is_indirect(fz_context *ctx, pdf_obj *obj)
 {
@@ -591,7 +591,7 @@ int pdf_name_eq(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 	return 0;
 }
 
-static char *
+const char *
 pdf_objkindstr(pdf_obj *obj)
 {
 	if (obj == PDF_NULL)
@@ -2670,8 +2670,40 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 		fmt_puts(ctx, fmt, "false");
 	else if (pdf_is_indirect(ctx, obj))
 	{
-		fz_snprintf(buf, sizeof buf, "%d %d R", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
-		fmt_puts(ctx, fmt, buf);
+		// First print the indirect reference.
+		// Then *resolve* the indirect ref:
+		//   RESOLVE(obj); --> pdf_resolve_indirect_chain(ctx, obj)
+		// but *we* want to see the entire chain of indirections here, so we replicate that logic here:
+		pdf_obj* ref = obj;
+		int sanity = 10;
+		int current_indent = fmt->indent;
+
+		while (pdf_is_indirect(ctx, ref))
+		{
+			fz_snprintf(buf, sizeof buf, "{%d %d R} -->\n", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
+			fmt_puts(ctx, fmt, buf);
+			fmt->indent++;
+			fmt_indent(ctx, fmt);
+
+			if (--sanity == 0)
+			{
+				fz_snprintf(buf, sizeof buf, "!Error: too many indirections (possible indirection cycle involving %d 0 R)\n", pdf_to_num(ctx, ref));
+				fmt_puts(ctx, fmt, buf);
+				fmt->indent = current_indent;
+				fmt_indent(ctx, fmt);
+				ref = NULL;
+			}
+			else
+			{
+				ref = pdf_resolve_indirect(ctx, ref);
+			}
+		}
+
+		if (ref)
+		{
+			fmt_obj(ctx, fmt, ref);
+		}
+		fmt->indent = current_indent;
 	}
 	else if (pdf_is_int(ctx, obj))
 	{
