@@ -237,12 +237,18 @@ C++ wrapping:
 
         We use SWIG on this C++ API to give a python interface onto the
         mupdf::*() functions and classes.
+        
+        Extra items:
+        
+            metadata_keys: This contains the keys that are suitable for passing to
+            fz_lookup_metadata() and its wrappers, mupdf::fz_lookup_metadata()
+            and mupdf::Document::lookup_metadata().
 
 
 Python wrapping:
 
-    The Python API wraps the C++ API and uses identical names for functions,
-    classes and methods.
+    The Python API is a module called mupdf that wraps the C++ API and uses
+    identical names for functions, classes and methods.
     
     Out-parameters:
     
@@ -260,6 +266,31 @@ Python wrapping:
 
         If a function returns void and has exactly one out-param, the Python
         wrapper will return the out-param directly, not as part of a tuple.
+    
+    Access to buffer data:
+
+        Wrappers for fz_buffer_extract():
+
+            mupdf.Buffer.buffer_extract() returns a Python bytes instance.
+
+            An extra method mupdf.Buffer.buffer_extract_raw() is provided
+            which returns (size, data) from the underlying fz_buffer_extract()
+            function. One use for this is to pass back into C/C++ with a call
+            to mupdf.Stream(data, size).
+
+        Wrappers for fz_buffer_storage():
+
+            mupdf.Buffer.buffer_storage() is not provided to Python because the
+            semantics are not useful - creating a Python bytes object always
+            takes a copy of the underlying data.
+
+            An extra method mupdf.Buffer.buffer_extract_raw() is provided
+            which returns (size, data) from the underlying fz_buffer_extract()
+            function.
+
+    Functions taking a va_list arg:
+    
+        We do not provide Python wrappers for functions such as fz_vsnprintf().
 
 
 Tools:
@@ -2606,11 +2637,9 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
             log( '{arg.cursor=} {arg.name=} {arg.separator=} {arg.alt=} {arg.out_param=}')
         if is_pointer_to(arg.cursor.type, 'fz_context'):
             continue
-        name2 = arg.name
         if arg.out_param:
             num_out_params += 1
-            name2 = f'mupdf_OUTPARAM({arg.name})'
-        decl = declaration_text( arg.cursor.type, name2, verbose=verbose)
+        decl = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
         if verbose:
             log( '{decl=}')
         name_args_h += f'{comma}{decl}'
@@ -3788,17 +3817,11 @@ def class_write_method(
             if not arg.out_param and not classextras.get( arg.alt.type.spelling).pod:
                 const = 'const '
             decl_h +=   f'{const}{rename.class_(arg.alt.type.spelling)}& '
-            if arg.out_param:
-                decl_h += f'mupdf_OUTPARAM({arg.name})'
-            else:
-                decl_h += f'{arg.name}'
+            decl_h += f'{arg.name}'
             decl_cpp += f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
         else:
-            if arg.out_param:
-                decl_h += declaration_text( arg.cursor.type, f'mupdf_OUTPARAM({arg.name})')
-            else:
-                logx( '{arg.spelling=}')
-                decl_h += declaration_text( arg.cursor.type, arg.name)
+            logx( '{arg.spelling=}')
+            decl_h += declaration_text( arg.cursor.type, arg.name)
             decl_cpp += declaration_text( arg.cursor.type, arg.name)
         comma = ', '
 
@@ -4761,12 +4784,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             #include <string>
             #include <vector>
 
-            #ifdef SWIG
-                #define mupdf_OUTPARAM(name)  OUTPUT
-            #else
-                #define mupdf_OUTPARAM(name)  name
-            #endif
-
 
             '''))
 
@@ -4778,12 +4795,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
 
             #include <string>
             #include <vector>
-
-            #ifdef SWIG
-                #define mupdf_OUTPARAM(name)  OUTPUT
-            #else
-                #define mupdf_OUTPARAM(name)  name
-            #endif
 
 
             '''))
@@ -5218,8 +5229,6 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             // Not implemented in mupdf.so: fz_colorspace_name_process_colorants
             %ignore fz_colorspace_name_process_colorants;
 
-            %ignore fz_set_stderr;
-            %ignore fz_set_stdout;
             %ignore fz_open_file_w;
 
             %ignore {rename.function('fz_append_vprintf')};
@@ -5229,10 +5238,6 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             %ignore {rename.function('fz_vthrow')};
             %ignore {rename.function('fz_vwarn')};
             %ignore {rename.function('fz_write_vprintf')};
-            %ignore {rename.function('fz_set_stderr')};
-            %ignore {rename.function('fz_set_stdout')};
-            %ignore {rename.function('fz_open_file_w')};
-
             %ignore {rename.function('fz_vsnprintf')};
             %ignore {rename.function('fz_vthrow')};
             %ignore {rename.function('fz_vwarn')};
