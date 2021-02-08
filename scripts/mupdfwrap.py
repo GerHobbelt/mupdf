@@ -5192,15 +5192,15 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
             PyObject* buffer_extract_bytes(fz_buffer* buffer)
             {{
                 unsigned char* c = NULL;
-                size_t len = mupdf::buffer_extract(buffer, &c);
-                return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
-            }}
-            
-            PyObject* buffer_storage_bytes(fz_buffer* buffer)
-            {{
-                unsigned char* c = NULL;
+                /* We mimic the affects of fz_buffer_extract(), which leaves
+                the buffer with zero capacity. */
                 size_t len = mupdf::buffer_storage(buffer, &c);
-                return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+                PyObject* ret = PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+                if (ret) {{
+                    mupdf::clear_buffer(buffer);
+                    mupdf::trim_buffer(buffer);
+                }}
+                return ret;
             }}
             '''
             
@@ -5409,41 +5409,42 @@ def build_swig( build_dirs, container_classnames, swig_c, swig_python, language=
                 def next( self):    # for python3.
                     return self.__next__()
 
-            # The auto-generated Python Buffer.buffer_extract() and
-            # Buffer.buffer_storage() methods both return (size, data).
+            # The auto-generated Python class methd Buffer.buffer_extract()
+            # returns (size, data).
             #
-            # But these raw values aren't particularly useful to Python
-            # code so we change these methods to each return a Python bytes
-            # instance instead, using the special C functions defined above,
-            # buffer_extract_bytes() and buffer_storage_bytes().
+            # But these raw values aren't particularly useful to Python code so
+            # we change the method to return a Python bytes instance instead,
+            # using the special C function buffer_storage_bytes() defined
+            # above.
             #
-            # We make the original methods available as
-            # Buffer.buffer_extract_raw() and Buffer.buffer_storage_raw(); they
-            # can be used to create a mupdf.Stream with:
+            # We make the original method available as
+            # Buffer.buffer_extract_raw(); this can be used to create a
+            # mupdf.Stream by passing the raw values back to C++ with:
             #
             #   data, size = buffer_.buffer_extract_raw()
             #   stream = mupdf.Stream(data, size))
             #
-            # It is likely that there are ownership issues here.
+            # We don't provide a similar wrapper for Buffer.buffer_storage()
+            # because we can't create a Python bytes object that
+            # points into the buffer'a storage. We still provide
+            # Buffer.buffer_storage_raw() just in case there is a need for
+            # Python code that can pass the raw (data, size) back in to C.
+            #
             
             Buffer.buffer_extract_raw = Buffer.buffer_extract
-            Buffer_buffer_storage_raw = Buffer.buffer_storage
 
             def Buffer_buffer_extract(self):
                 """
-                Returns buffer data as a Python bytes instance.
+                Returns buffer data as a Python bytes instance, leaving the
+                buffer empty. Note that this will make a copy of the underlying
+                data.
                 """
                 return buffer_extract_bytes(self.m_internal)
             
             Buffer.buffer_extract = Buffer_buffer_extract
             
-            def Buffer_buffer_storage(self):
-                """
-                Returns buffer data as a Python bytes instance.
-                """
-                return buffer_storage_bytes(self.m_internal)
-            
-            Buffer.buffer_storage = Buffer_buffer_storage
+            Buffer.buffer_storage_raw = Buffer.buffer_storage
+            delattr(Buffer, 'buffer_storage')
             
             ''')
 
