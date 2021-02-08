@@ -92,6 +92,13 @@ char *fz_urldecode(char *url);
 void fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *fmt, int page);
 
 /**
+    Skip directory/(Windows)drive separators.
+
+    Returns pointer to basename part in the input string.
+*/
+const char* fz_path_basename(const char* path);
+
+/**
 	rewrite path to the shortest string that names the same path.
 
 	Eliminates multiple and trailing slashes, interprets "." and

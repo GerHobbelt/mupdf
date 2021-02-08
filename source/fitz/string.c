@@ -234,18 +234,18 @@ int fz_has_percent_d(const char* s)
 	return 0;
 }
 
-// skip directory/(Windows)drive separators:
-static const char* path_basename(const char* path)
+// Skip directory/(Windows)drive separators.
+//
+// Returns pointer to basename part in the input string.
+const char* fz_path_basename(const char* path)
 {
-	char* p = strrchr(path, '/');
-	if (p > path)
-		path = p + 1;
-	p = strrchr(path, '\\');
-	if (p > path)
-		path = p + 1;
-	p = strrchr(path, ':');
-	if (p > path)
-		path = p + 1;
+	size_t i;
+	size_t len = strlen(path);
+	for (i = strcspn(path, ":/\\"); i < len; i = strcspn(path, ":/\\"))
+	{
+		path = path + i + 1;
+		len -= i + 1;
+	}
 	return path;
 }
 
@@ -320,7 +320,7 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 
 			if (!done)
 			{
-				p = path_basename(s);
+				p = fz_path_basename(s);
 				p = strrchr(p, '.');
 				// jump to end if no file extension found
 				if (!p)
