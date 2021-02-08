@@ -48,15 +48,16 @@ static struct {
 #endif
 	{ tesseract_main, "tesseract", "OCR given image or PDF" },
 	{ curl_main, "curl", "access/fetch a given URI" },
-	{ mujs_main, "mujs", "basic REPL for MuJS JavaScript interpreter" },
-	{ mujs_prettyprint_main, "mujs_pp", "prettyprint (reformat) MuJS JavaScript source files" },
+	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
+	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
 };
 
 static int
 namematch(const char *end, const char *start, const char *match)
 {
 	size_t len = strlen(match);
-	return ((end-len >= start) && (strncmp(end-len, match, len) == 0));
+	const char* p = end - len;
+	return ((p >= start) && (strncmp(p, match, len) == 0));
 }
 
 
@@ -109,13 +110,13 @@ int mutool_main(int argc, const char** argv)
 
 	if (argc > 0)
 	{
-		end = start = argv[0];
-		while (*end)
-			end++;
+		start = fz_path_basename(argv[0]);
+		end = start + strlen(argv[0]);
 		if ((end-4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
 			end = end-4;
 		for (i = 0; i < (int)nelem(tools); i++)
 		{
+			// test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
 			strcpy(buf, "mupdf");
 			strcat(buf, tools[i].name);
 			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
@@ -132,13 +133,25 @@ int mutool_main(int argc, const char** argv)
 	if (argc > 1)
 	{
 		for (i = 0; i < (int)nelem(tools); i++)
-			if (!strcmp(tools[i].name, argv[1]))
+		{
+			start = argv[1];
+			end = start + strlen(start);
+			// test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
+			strcpy(buf, "mupdf");
+			strcat(buf, tools[i].name);
+			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc - 1, argv + 1);
+			strcpy(buf, "mu");
+			strcat(buf, tools[i].name);
+			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
+				return tools[i].func(argc - 1, argv + 1);
+		}
 		if (!strcmp(argv[1], "-v"))
 		{
 			fz_info(ctx, "mutool version %s", FZ_VERSION);
 			return EXIT_SUCCESS;
 		}
+		fz_error(ctx, "mutool: unrecognized command '%s'\n", argv[1]);
 	}
 
 	/* Print usage */
