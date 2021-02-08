@@ -47,6 +47,15 @@ def test(path):
     assert os.path.isfile(path)
     global g_test_n
     g_test_n += 1
+    
+    # See notes in mupdfwrap.py:build_swig() about buffer_extract() and
+    # buffer_storage().
+    #
+    assert getattr(mupdf.Buffer, 'buffer_storage_raw')
+    assert getattr(mupdf.Buffer, 'buffer_storage', None) is None
+    
+    assert getattr(mupdf.Buffer, 'buffer_extract_raw')
+    assert getattr(mupdf.Buffer, 'buffer_extract')
 
     # Test operations using functions:
     #
