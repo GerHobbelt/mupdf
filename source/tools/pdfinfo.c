@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 enum
 {
@@ -196,12 +197,31 @@ static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
 	return 0;
 }
 
-static void
-showglobalinfo(fz_context *ctx, globals *glo, int show)
+static const char* bool2str(int state)
 {
-	pdf_obj *obj;
-	fz_output *out = glo->out;
-	pdf_document *doc = glo->doc;
+	return state ? "YES" : "NO";
+}
+
+static void write_item(fz_context* ctx, fz_output* out, const char* label, const char* value)
+{
+	char buf[1024];
+	size_t len = 0;
+	pdf_obj* obj = pdf_new_string(ctx, value, strlen(value));
+
+	const char* v = pdf_sprint_obj(ctx, buf, sizeof(buf), &len, obj, 0 /* tight */, 1 /* ascii */);
+	fz_write_printf(ctx, out, "+ %s:\n"
+		"%s\n",
+		label,
+		v);
+	fz_free(ctx, obj);
+}
+
+static void
+showglobalinfo(fz_context* ctx, globals* glo, int show)
+{
+	pdf_obj* obj;
+	fz_output* out = glo->out;
+	pdf_document* doc = glo->doc;
 	int version = pdf_version(ctx, doc);
 
 	fz_write_printf(ctx, out, "\nPDF-%d.%d\n", version / 10, version % 10);
@@ -281,7 +301,91 @@ showglobalinfo(fz_context *ctx, globals *glo, int show)
 	{
 		fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
 	}
+
+
+	if (show & LINKS)
+	{
+		fz_write_printf(ctx, out, "\n\nDocument Outline:\n\n");
+
+		/*
+		fz_outline is a tree of the outline of a document (also known
+		as table of contents).
+
+		title: Title of outline item using UTF-8 encoding. May be NULL
+		if the outline item has no text string.
+
+		uri: Destination in the document to be displayed when this
+		outline item is activated. May be an internal or external
+		link, or NULL if the outline item does not have a destination.
+
+		page: The page number of an internal link, or -1 for external
+		links or links with no destination.
+
+		next: The next outline item at the same level as this outline
+		item. May be NULL if no more outline items exist at this level.
+
+		down: The outline items immediate children in the hierarchy.
+		May be NULL if no children exist.
+		*/
+		fz_outline* outlines = NULL;
+
+		fz_try(ctx)
+		{
+			outlines = pdf_load_outline(ctx, doc);
+
+			fz_outline* outline_parents[100];
+			int parents_index = 0;
+			fz_outline* outline = outlines;
+			char indent_buf[100 * 2 + 1] = "";
+
+			while (outline)
+			{
+				if (!fz_is_external_link(ctx, outline->uri))
+				{
+					int target_page = outline->page + 1;
+
+					fz_write_printf(ctx, out, "%s+ Internal Level %d Link: '%s'\n", indent_buf, parents_index + 1, outline->uri);
+					fz_write_printf(ctx, out, "%s  + Target Page Number: %d\n", indent_buf, target_page);
+					fz_write_printf(ctx, out, "%s  + Target Coordinates: X:%f Y:%f\n", indent_buf, outline->x, outline->y);
+				}
+				else
+				{
+					fz_write_printf(ctx, out, "%s+ External Level %d Link: '%s'\n", indent_buf, parents_index + 1, outline->uri);
+				}
+
+				if (outline->down)
+				{
+					outline_parents[parents_index++] = outline->next;
+					if (parents_index >= 100)
+					{
+						fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: 100 or more!");
+					}
+
+					fz_snprintf(indent_buf, sizeof(indent_buf), "%*s", parents_index * 2, "");
+
+					outline = outline->down;
+				}
+
+				outline = outline->next;
+				while (!outline && parents_index > 0)
+				{
+					outline = outline_parents[--parents_index];
+
+					fz_snprintf(indent_buf, sizeof(indent_buf), "%*s", parents_index * 2, "");
+				}
+			}
+		}
+		fz_always(ctx)
+		{
+			fz_drop_outline(ctx, outlines);
+		}
+		fz_catch(ctx)
+		{
+			fz_error(ctx, "Error while processing PDF Outline.\n");
+		}
+	}
 }
+
 
 static void
 gatherdimensions(fz_context *ctx, globals *glo, int page, pdf_obj *pageref)
@@ -1070,389 +1174,395 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 		}
 		fz_write_printf(ctx, out, "\n");
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if 0
-	static struct list annot_list;
-	enum pdf_annot_type subtype;
-	pdf_annot* annot;
-	int idx;
-	int n;
-
-	int was_dirty = pdf->dirty;
-
-	ui_layout(T, X, NW, 2, 2);
-
-	if (ui_popup("CreateAnnotPopup", "Create...", 1, 17))
-	{
-		if (ui_popup_item("Text")) new_annot(PDF_ANNOT_TEXT);
-		if (ui_popup_item("FreeText")) new_annot(PDF_ANNOT_FREE_TEXT);
-		if (ui_popup_item("Stamp")) new_annot(PDF_ANNOT_STAMP);
-		if (ui_popup_item("Caret")) new_annot(PDF_ANNOT_CARET);
-		if (ui_popup_item("Ink")) new_annot(PDF_ANNOT_INK);
-		if (ui_popup_item("Square")) new_annot(PDF_ANNOT_SQUARE);
-		if (ui_popup_item("Circle")) new_annot(PDF_ANNOT_CIRCLE);
-		if (ui_popup_item("Line")) new_annot(PDF_ANNOT_LINE);
-		if (ui_popup_item("Polygon")) new_annot(PDF_ANNOT_POLYGON);
-		if (ui_popup_item("PolyLine")) new_annot(PDF_ANNOT_POLY_LINE);
-		if (ui_popup_item("Highlight")) new_annot(PDF_ANNOT_HIGHLIGHT);
-		if (ui_popup_item("Underline")) new_annot(PDF_ANNOT_UNDERLINE);
-		if (ui_popup_item("StrikeOut")) new_annot(PDF_ANNOT_STRIKE_OUT);
-		if (ui_popup_item("Squiggly")) new_annot(PDF_ANNOT_SQUIGGLY);
-		if (ui_popup_item("FileAttachment")) new_annot(PDF_ANNOT_FILE_ATTACHMENT);
-		if (ui_popup_item("Redact")) new_annot(PDF_ANNOT_REDACT);
-		if (ui_popup_item("Signature")) {
-			selected_annot = pdf_create_signature_widget(ctx, page, "Unknown");
-
-			pdf_update_appearance(ctx, selected_annot);
-			is_draw_mode = 1;
-			render_page();
-		}
-		ui_popup_end();
-	}
-
-	n = 0;
-	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
-		++n;
-
-	ui_list_begin(&annot_list, n, 0, ui.lineheight * 10 + 4);
-	for (idx = 0, annot = pdf_first_annot(ctx, page); annot; ++idx, annot = pdf_next_annot(ctx, annot))
-	{
-		char buf[256];
-		int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
-		subtype = pdf_annot_type(ctx, annot);
-		fz_snprintf(buf, sizeof buf, "%d: %s", num, pdf_string_from_annot_type(ctx, subtype));
-		if (ui_list_item(&annot_list, pdf_annot_obj(ctx, annot), buf, selected_annot == annot))
-		{
-			trace_action("annot = page.getAnnotations()[%d];\n", idx);
-			selected_annot = annot;
-		}
-	}
-	ui_list_end(&annot_list);
-
-	if (selected_annot && (subtype = pdf_annot_type(ctx, selected_annot)) != PDF_ANNOT_WIDGET)
-	{
-		int n, choice;
-		pdf_obj* obj;
-
-		/* common annotation properties */
-
-		ui_spacer();
-
-		do_annotate_author();
-		do_annotate_date();
-
-		obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, selected_annot), PDF_NAME(Popup));
-		if (obj)
-			ui_label("Popup: %d 0 R", pdf_to_num(ctx, obj));
-
-		do_annotate_contents();
-
-		ui_spacer();
-
-		if (subtype == PDF_ANNOT_FREE_TEXT)
-		{
-			int lang_choice, font_choice, color_choice, size_changed;
-			int q;
-			const char* text_lang;
-			const char* text_font;
-			char lang_buf[8];
-			static float text_size_f, text_color[4];
-			static int text_size;
-
-			q = pdf_annot_quadding(ctx, selected_annot);
-			ui_label("Text Alignment:");
-			choice = ui_select("Q", quadding_names[q], quadding_names, nelem(quadding_names));
-			if (choice != -1)
-			{
-				trace_action("annot.setQuadding(%d);\n", choice);
-				pdf_set_annot_quadding(ctx, selected_annot, choice);
-			}
-
-			text_lang = fz_string_from_text_language(lang_buf, pdf_annot_language(ctx, selected_annot));
-			ui_label("Text Language:");
-			lang_choice = ui_select("DA/Lang", text_lang, lang_names, nelem(lang_names));
-			if (lang_choice != -1)
-			{
-				text_lang = lang_names[lang_choice];
-				trace_action("annot.setLanguage(%q);\n", text_lang);
-				pdf_set_annot_language(ctx, selected_annot, fz_text_language_from_string(text_lang));
-			}
-
-			pdf_annot_default_appearance(ctx, selected_annot, &text_font, &text_size_f, text_color);
-			text_size = text_size_f;
-			ui_label("Text Font:");
-			font_choice = ui_select("DA/Font", text_font, font_names, nelem(font_names));
-			ui_label("Text Size: %d", text_size);
-			size_changed = ui_slider(&text_size, 8, 36, 256);
-			ui_label("Text Color:");
-			color_choice = ui_select("DA/Color", name_from_hex(hex_from_color(3, text_color)), color_names + 1, nelem(color_names) - 1);
-			if (font_choice != -1 || color_choice != -1 || size_changed)
-			{
-				if (font_choice != -1)
-					text_font = font_names[font_choice];
-				if (color_choice != -1)
-				{
-					text_color[0] = ((color_values[color_choice + 1] >> 16) & 0xff) / 255.0f;
-					text_color[1] = ((color_values[color_choice + 1] >> 8) & 0xff) / 255.0f;
-					text_color[2] = ((color_values[color_choice + 1]) & 0xff) / 255.0f;
-				}
-				trace_action("annot.setDefaultAppearance(%q, %d, [%g, %g, %g]);\n",
-					text_font, text_size, text_color[0], text_color[1], text_color[2]);
-				pdf_set_annot_default_appearance(ctx, selected_annot, text_font, text_size, text_color);
-			}
-			ui_spacer();
-		}
-
-		if (subtype == PDF_ANNOT_LINE)
-		{
-			enum pdf_line_ending s, e;
-			int s_choice, e_choice;
-
-			pdf_annot_line_ending_styles(ctx, selected_annot, &s, &e);
-
-			ui_label("Line Start:");
-			s_choice = ui_select("LE0", line_ending_styles[s], line_ending_styles, nelem(line_ending_styles));
-
-			ui_label("Line End:");
-			e_choice = ui_select("LE1", line_ending_styles[e], line_ending_styles, nelem(line_ending_styles));
-
-			if (s_choice != -1 || e_choice != -1)
-			{
-				if (s_choice != -1) s = s_choice;
-				if (e_choice != -1) e = e_choice;
-				trace_action("annot.setLineEndingStyles(%q, %q);\n", line_ending_styles[s], line_ending_styles[e]);
-				pdf_set_annot_line_ending_styles(ctx, selected_annot, s, e);
-			}
-
-			fz_point a, b;
-			pdf_annot_line(ctx, selected_annot, &a, &b);
-			ui_label("Line Length: %f", sqrtf((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
-		}
-
-		if (pdf_annot_has_icon_name(ctx, selected_annot))
-		{
-			const char* name = pdf_annot_icon_name(ctx, selected_annot);
-			ui_label("Icon:");
-			switch (pdf_annot_type(ctx, selected_annot))
-			{
-			default:
-				break;
-			case PDF_ANNOT_TEXT:
-				choice = ui_select("Icon", name, text_icons, nelem(text_icons));
-				if (choice != -1)
-				{
-					trace_action("annot.setIcon(%q)\n", text_icons[choice]);
-					pdf_set_annot_icon_name(ctx, selected_annot, text_icons[choice]);
-				}
-				break;
-			case PDF_ANNOT_FILE_ATTACHMENT:
-				choice = ui_select("Icon", name, file_attachment_icons, nelem(file_attachment_icons));
-				if (choice != -1)
-				{
-					trace_action("annot.setIcon(%q)\n", file_attachment_icons[choice]);
-					pdf_set_annot_icon_name(ctx, selected_annot, file_attachment_icons[choice]);
-				}
-				break;
-			case PDF_ANNOT_SOUND:
-				choice = ui_select("Icon", name, sound_icons, nelem(sound_icons));
-				if (choice != -1)
-				{
-					trace_action("annot.setIcon(%q)\n", sound_icons[choice]);
-					pdf_set_annot_icon_name(ctx, selected_annot, sound_icons[choice]);
-				}
-				break;
-			case PDF_ANNOT_STAMP:
-				choice = ui_select("Icon", name, stamp_icons, nelem(stamp_icons));
-				if (choice != -1)
-				{
-					trace_action("annot.setIcon(%q)\n", stamp_icons[choice]);
-					pdf_set_annot_icon_name(ctx, selected_annot, stamp_icons[choice]);
-				}
-				break;
-			}
-		}
-
-		if (should_edit_border(subtype))
-		{
-			static int border;
-			border = pdf_annot_border(ctx, selected_annot);
-			ui_label("Border: %d", border);
-			if (ui_slider(&border, 0, 12, 100))
-			{
-				trace_action("annot.setBorder(%d);\n", border);
-				pdf_set_annot_border(ctx, selected_annot, border);
-			}
-		}
-
-		if (should_edit_color(subtype))
-			do_annotate_color("Color", pdf_annot_color, pdf_set_annot_color);
-		if (should_edit_icolor(subtype))
-			do_annotate_color("InteriorColor", pdf_annot_interior_color, pdf_set_annot_interior_color);
-
-		if (subtype == PDF_ANNOT_HIGHLIGHT)
-		{
-			static int opacity;
-			opacity = pdf_annot_opacity(ctx, selected_annot) * 255;
-			ui_label("Opacity:");
-			if (ui_slider(&opacity, 0, 255, 256))
-			{
-				trace_action("annot.setOpacity(%g);\n", opacity / 255.0f);
-				pdf_set_annot_opacity(ctx, selected_annot, opacity / 255.0f);
-			}
-		}
-
-		ui_spacer();
-
-		if (pdf_annot_has_quad_points(ctx, selected_annot))
-		{
-			if (is_draw_mode)
-			{
-				n = pdf_annot_quad_point_count(ctx, selected_annot);
-				ui_label("QuadPoints: %d", n);
-				if (ui_button("Clear"))
-				{
-					trace_action("annot.clearQuadPoints();\n");
-					pdf_clear_annot_quad_points(ctx, selected_annot);
-				}
-				if (ui_button("Done"))
-					is_draw_mode = 0;
-			}
-			else
-			{
-				if (ui_button("Edit"))
-					is_draw_mode = 1;
-			}
-		}
-
-		if (pdf_annot_has_vertices(ctx, selected_annot))
-		{
-			if (is_draw_mode)
-			{
-				n = pdf_annot_vertex_count(ctx, selected_annot);
-				ui_label("Vertices: %d", n);
-				if (ui_button("Clear"))
-				{
-					trace_action("annot.clearVertices();\n");
-					pdf_clear_annot_vertices(ctx, selected_annot);
-				}
-				if (ui_button("Done"))
-					is_draw_mode = 0;
-			}
-			else
-			{
-				if (ui_button("Edit"))
-					is_draw_mode = 1;
-			}
-		}
-
-		if (pdf_annot_has_ink_list(ctx, selected_annot))
-		{
-			if (is_draw_mode)
-			{
-				n = pdf_annot_ink_list_count(ctx, selected_annot);
-				ui_label("InkList: %d strokes", n);
-				if (ui_button("Clear"))
-				{
-					trace_action("annot.clearInkList();\n");
-					pdf_clear_annot_ink_list(ctx, selected_annot);
-				}
-				if (ui_button("Done"))
-					is_draw_mode = 0;
-			}
-			else
-			{
-				if (ui_button("Edit"))
-					is_draw_mode = 1;
-			}
-		}
-
-		if (pdf_annot_type(ctx, selected_annot) == PDF_ANNOT_FILE_ATTACHMENT)
-		{
-			char attname[PATH_MAX];
-			pdf_obj* fs = pdf_dict_get(ctx, pdf_annot_obj(ctx, selected_annot), PDF_NAME(FS));
-			if (pdf_is_embedded_file(ctx, fs))
-			{
-				if (ui_button("Save..."))
-				{
-					fz_dirname(attname, filename, sizeof attname);
-					fz_strlcat(attname, "/", sizeof attname);
-					fz_strlcat(attname, pdf_embedded_file_name(ctx, fs), sizeof attname);
-					ui_init_save_file(attname, NULL);
-					ui.dialog = save_attachment_dialog;
-				}
-			}
-			if (ui_button("Embed..."))
-			{
-				fz_dirname(attname, filename, sizeof attname);
-				ui_init_open_file(attname, NULL);
-				ui.dialog = open_attachment_dialog;
-			}
-		}
-
-		ui_spacer();
-
-		if (ui_button("Delete"))
-		{
-			trace_action("page.deleteAnnotation(annot);\n");
-			pdf_delete_annot(ctx, page, selected_annot);
-			selected_annot = NULL;
-			render_page();
-			return;
-		}
-
-		if (selected_annot && pdf_annot_needs_new_ap(ctx, selected_annot))
-		{
-			trace_action("annot.updateAppearance();\n");
-			pdf_update_appearance(ctx, selected_annot);
-			render_page();
-		}
-	}
-
-	ui_layout(B, X, NW, 2, 2);
-
-	if (ui_button("Save PDF..."))
-		do_save_pdf_file();
-
-	if (was_dirty != pdf->dirty)
-		update_title();
-
-#endif
-
 }
 
+static void
+printadvancedinfo(fz_context* ctx, globals* glo, int show, int page)
+{
+	fz_output* out = glo->out;
+	pdf_document* doc = glo->doc;
+	fz_document* pdf = (fz_document*)glo->doc;
+	pdf_page* page_obj = NULL;
+	fz_page* page_ref = (fz_page*)page_obj;
 
+	fz_try(ctx)
+	{
+		page_obj = pdf_load_page(ctx, doc, page - 1);
 
+		fz_rect mediabox = fz_bound_page(ctx, page_ref);
 
+		fz_matrix ctm = fz_pre_scale(fz_rotate(0), 1.0, 1.0);
 
+		if (show & ANNOTATIONS)
+		{
+			pdf_annot* annot;
 
+			int n = 0;
+			for (annot = pdf_first_annot(ctx, page_obj); annot; annot = pdf_next_annot(ctx, annot))
+				++n;
 
+			fz_write_printf(ctx, out, "\n\nAnnotations in Page %d:\n\n", page);
+			fz_write_printf(ctx, out, "+ Page Bounds: %R\n", mediabox);
+			fz_write_printf(ctx, out, "+ Number of Annotations: %d\n", n);
 
+			int idx;
+			for (idx = 0, annot = pdf_first_annot(ctx, page_obj); annot; ++idx, annot = pdf_next_annot(ctx, annot))
+			{
+				char buf[256];
+				int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
+				enum pdf_annot_type subtype = pdf_annot_type(ctx, annot);
+				fz_write_printf(ctx, out, "Annot %d: %s", num, pdf_string_from_annot_type(ctx, subtype));
 
+				fz_rect bounds_in_doc = pdf_annot_rect(ctx, annot);
 
+				fz_write_printf(ctx, out, "+ Bounds In Document: %R\n", bounds_in_doc);
 
+				fz_rect bounds = pdf_bound_annot(ctx, annot);
+				bounds = fz_transform_rect(bounds, ctm);
+				//fz_irect area = fz_irect_from_rect(bounds);
 
-// fz_link* fz_load_links(fz_context* ctx, fz_page* page);
+				fz_write_printf(ctx, out, "+ Bounds: %R\n", bounds);
 
+				fz_write_printf(ctx, out, "+ Needs new AP: %s\n", bool2str(pdf_annot_needs_new_ap(ctx, annot)));
 
+				if (pdf_annot_has_author(ctx, annot))
+				{
+					const char* author = pdf_annot_author(ctx, annot);
+					if (strlen(author) > 0)
+					{
+						write_item(ctx, out, "Author", author);
+					}
+					else
+					{
+						fz_write_printf(ctx, out, "+ Author: <empty>\n");
+					}
+				}
+				else
+				{
+					fz_write_printf(ctx, out, "+ Author: <none specified>\n");
+				}
+
+				{
+					time_t secs = pdf_annot_creation_date(ctx, annot);
+					if (secs >= 0)
+					{
+#ifdef _POSIX_SOURCE
+						struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
+#else
+						struct tm* tm = gmtime(&secs);
+#endif
+						if (tm)
+						{
+							strftime(buf, sizeof buf, "%Y-%m-%d %H:%M UTC", tm);
+							write_item(ctx, out, "Creation Date", buf);
+						}
+					}
+				}
+
+				{
+					time_t secs = pdf_annot_modification_date(ctx, annot);
+					if (secs >= 0)
+					{
+#ifdef _POSIX_SOURCE
+						struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
+#else
+						struct tm* tm = gmtime(&secs);
+#endif
+						if (tm)
+						{
+							strftime(buf, sizeof buf, "%Y-%m-%d %H:%M UTC", tm);
+							write_item(ctx, out, "Modification Date", buf);
+						}
+					}
+				}
+
+				int flags = pdf_annot_flags(ctx, annot);
+
+				buf[0] = 0;
+
+				if (flags & PDF_ANNOT_IS_INVISIBLE)
+					fz_strlcat(buf, "invisible | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_HIDDEN)
+					fz_strlcat(buf, "hidden | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_PRINT)
+					fz_strlcat(buf, "print | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_NO_ZOOM)
+					fz_strlcat(buf, "no_zoom | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_NO_ROTATE)
+					fz_strlcat(buf, "no_rotate | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_NO_VIEW)
+					fz_strlcat(buf, "no_view | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_READ_ONLY)
+					fz_strlcat(buf, "read_only | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_LOCKED)
+					fz_strlcat(buf, "locked | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_TOGGLE_NO_VIEW)
+					fz_strlcat(buf, "toggle_no_view | ", sizeof(buf));
+				if (flags & PDF_ANNOT_IS_LOCKED_CONTENTS)
+					fz_strlcat(buf, "locked_contents | ", sizeof(buf));
+				if (*buf) {
+					char* end = buf + strlen(buf);
+					end[-3] = 0;
+				}
+				else
+				{
+					fz_strlcat(buf, "<none>", sizeof(buf));
+				}
+				write_item(ctx, out, "Flags", buf);
+
+				{
+					fz_rect popup_bounds = pdf_annot_popup(ctx, annot);
+					fz_write_printf(ctx, out, "+ Popup Bounds: %R\n", popup_bounds);
+				}
+
+				write_item(ctx, out, "Has Ink List", bool2str(pdf_annot_has_ink_list(ctx, annot)));
+				write_item(ctx, out, "Has Quad Points", bool2str(pdf_annot_has_quad_points(ctx, annot)));
+				write_item(ctx, out, "Has Vertex Data", bool2str(pdf_annot_has_vertices(ctx, annot)));
+				write_item(ctx, out, "Has Line Data", bool2str(pdf_annot_has_line(ctx, annot)));
+				write_item(ctx, out, "Has Interior Color", bool2str(pdf_annot_has_interior_color(ctx, annot)));
+				write_item(ctx, out, "Has Line Ending Styles", bool2str(pdf_annot_has_line_ending_styles(ctx, annot)));
+				write_item(ctx, out, "Has Icon Name", bool2str(pdf_annot_has_icon_name(ctx, annot)));
+				write_item(ctx, out, "Has Open Action", bool2str(pdf_annot_has_open(ctx, annot)));
+				write_item(ctx, out, "Has Author Data", bool2str(pdf_annot_has_author(ctx, annot)));
+				write_item(ctx, out, "Is Active", bool2str(pdf_annot_active(ctx, annot)));
+				write_item(ctx, out, "Is Hot", bool2str(pdf_annot_hot(ctx, annot)));
+
+				/*
+					Retrieve the annotations text language (either from the
+					annotation, or from the document).
+				*/
+				{
+					fz_text_language lang = pdf_annot_language(ctx, annot);
+					const char* lang_str = fz_string_from_text_language(buf, lang);
+					write_item(ctx, out, "Language", lang_str ? lang_str : "<not set>");
+				}
+
+				{
+					const char* icon_name = pdf_annot_icon_name(ctx, annot);
+					write_item(ctx, out, "Icon", icon_name ? icon_name : "<not set>");
+				}
+
+				{
+					int field_flags = pdf_annot_field_flags(ctx, annot);
+					const char* field_value = pdf_annot_field_value(ctx, annot);
+					const char* field_key = pdf_annot_field_label(ctx, annot);
+
+					if (field_flags || field_value || field_key)
+					{
+						buf[0] = 0;
+
+						/* All fields */
+						if (field_flags & PDF_FIELD_IS_READ_ONLY)
+							fz_strlcat(buf, "read_only | ", sizeof(buf));
+						if (field_flags & PDF_FIELD_IS_REQUIRED)
+							fz_strlcat(buf, "required | ", sizeof(buf));
+						if (field_flags & PDF_FIELD_IS_NO_EXPORT)
+							fz_strlcat(buf, "no_export | ", sizeof(buf));
+
+						/* Text fields */
+						if (field_flags & PDF_TX_FIELD_IS_MULTILINE)
+							fz_strlcat(buf, "multiline | ", sizeof(buf));
+						if (field_flags & PDF_TX_FIELD_IS_PASSWORD)
+							fz_strlcat(buf, "password | ", sizeof(buf));
+						if (field_flags & PDF_TX_FIELD_IS_FILE_SELECT)
+							fz_strlcat(buf, "file_select | ", sizeof(buf));
+						if (field_flags & PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK)
+							fz_strlcat(buf, "do_not_spell_check | ", sizeof(buf));
+						if (field_flags & PDF_TX_FIELD_IS_DO_NOT_SCROLL)
+							fz_strlcat(buf, "do_not_scroll | ", sizeof(buf));
+						if (field_flags & PDF_TX_FIELD_IS_COMB)
+							fz_strlcat(buf, "comb | ", sizeof(buf));
+						if (field_flags & PDF_TX_FIELD_IS_RICH_TEXT)
+							fz_strlcat(buf, "rich_text | ", sizeof(buf));
+
+						/* Button fields */
+						if (field_flags & PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF)
+							fz_strlcat(buf, "no_toggle_to_off | ", sizeof(buf));
+						if (field_flags & PDF_BTN_FIELD_IS_RADIO)
+							fz_strlcat(buf, "radio | ", sizeof(buf));
+						if (field_flags & PDF_BTN_FIELD_IS_PUSHBUTTON)
+							fz_strlcat(buf, "pushbutton | ", sizeof(buf));
+						if (field_flags & PDF_BTN_FIELD_IS_RADIOS_IN_UNISON)
+							fz_strlcat(buf, "radios_in_unison | ", sizeof(buf));
+
+						/* Choice fields */
+						if (field_flags & PDF_CH_FIELD_IS_COMBO)
+							fz_strlcat(buf, "combo | ", sizeof(buf));
+						if (field_flags & PDF_CH_FIELD_IS_EDIT)
+							fz_strlcat(buf, "edit | ", sizeof(buf));
+						if (field_flags & PDF_CH_FIELD_IS_SORT)
+							fz_strlcat(buf, "sort | ", sizeof(buf));
+						if (field_flags & PDF_CH_FIELD_IS_MULTI_SELECT)
+							fz_strlcat(buf, "multi_select | ", sizeof(buf));
+						if (field_flags & PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK)
+							fz_strlcat(buf, "do_not_spell_check | ", sizeof(buf));
+						if (field_flags & PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE)
+							fz_strlcat(buf, "commit_on_sel_change | ", sizeof(buf));
+
+						if (*buf)
+						{
+							char* end = buf + strlen(buf);
+							end[-3] = 0;
+						}
+						else
+						{
+							fz_strlcat(buf, "<none>", sizeof(buf));
+						}
+						write_item(ctx, out, "Field Flags", buf);
+						write_item(ctx, out, "Field Key", field_key);
+						write_item(ctx, out, "Field Value", field_value);
+					}
+				}
+
+				//if (pdf_annot_type(ctx, annot) == PDF_ANNOT_FILE_ATTACHMENT)
+				{
+					pdf_obj* fs = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(FS));
+					if (fs)
+					{
+						write_item(ctx, out, "Is Embedded File", bool2str(pdf_is_embedded_file(ctx, fs)));
+						const char* filename = pdf_embedded_file_name(ctx, fs);
+						write_item(ctx, out, "Embedded File Name", filename ? filename : "<none>");
+						const char* filetype = pdf_embedded_file_type(ctx, fs);
+						write_item(ctx, out, "Embedded File Type", filetype ? filetype : "<none>");
+					}
+				}
+
+				{
+					pdf_obj* obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(Popup));
+					if (obj)
+					{
+						fz_write_printf(ctx, out, "+ Popup: %d 0 R", pdf_to_num(ctx, obj));
+					}
+				}
+
+				{
+					const char* contents = pdf_annot_contents(ctx, annot);
+
+					write_item(ctx, out, "Contents", contents);
+				}
+
+				switch (subtype)
+				{
+				case PDF_ANNOT_TEXT:
+				case PDF_ANNOT_LINK:
+				case PDF_ANNOT_FREE_TEXT:
+				case PDF_ANNOT_LINE:
+				case PDF_ANNOT_SQUARE:
+				case PDF_ANNOT_CIRCLE:
+				case PDF_ANNOT_POLYGON:
+				case PDF_ANNOT_POLY_LINE:
+				case PDF_ANNOT_HIGHLIGHT:
+				case PDF_ANNOT_UNDERLINE:
+				case PDF_ANNOT_SQUIGGLY:
+				case PDF_ANNOT_STRIKE_OUT:
+				case PDF_ANNOT_REDACT:
+				case PDF_ANNOT_STAMP:
+				case PDF_ANNOT_CARET:
+				case PDF_ANNOT_INK:
+				case PDF_ANNOT_POPUP:
+				case PDF_ANNOT_FILE_ATTACHMENT:
+				case PDF_ANNOT_SOUND:
+				case PDF_ANNOT_MOVIE:
+				case PDF_ANNOT_RICH_MEDIA:
+				case PDF_ANNOT_WIDGET:
+				case PDF_ANNOT_SCREEN:
+				case PDF_ANNOT_PRINTER_MARK:
+				case PDF_ANNOT_TRAP_NET:
+				case PDF_ANNOT_WATERMARK:
+				case PDF_ANNOT_3D:
+				case PDF_ANNOT_PROJECTION:
+				case PDF_ANNOT_UNKNOWN:
+				default:
+					break;
+				}
+			}
+		}
+
+		/*
+		fz_link is a list of interactive links on a page.
+
+		There is no relation between the order of the links in the
+		list and the order they appear on the page. The list of links
+		for a given page can be obtained from fz_load_links.
+
+		A link is reference counted. Dropping a reference to a link is
+		done by calling fz_drop_link.
+
+		rect: The hot zone. The area that can be clicked in
+		untransformed coordinates.
+
+		uri: Link destinations come in two forms: internal and external.
+		Internal links refer to other pages in the same document.
+		External links are URLs to other documents.
+
+		next: A pointer to the next link on the same page.
+		*/
+		if (show & LINKS)
+		{
+			//pdf_page* page_obj = NULL;
+			fz_link* links = NULL;
+
+			fz_try(ctx)
+			{
+				//page_obj = pdf_load_page(ctx, doc, page);
+				links = fz_load_links(ctx, page_ref);
+
+				fz_rect bounds;
+				float link_x = 0.0f, link_y = 0.0f;
+				fz_link* link = links;
+
+				while (link)
+				{
+					bounds = link->rect;
+					bounds = fz_transform_rect(bounds, ctm);
+					//area = fz_irect_from_rect(bounds);
+
+					if (!fz_is_external_link(ctx, link->uri))
+					{
+						fz_location loc = fz_resolve_link(ctx, pdf, link->uri, &link_x, &link_y);
+						int target_page = fz_page_number_from_location(ctx, pdf, loc) + 1;
+
+						fz_write_printf(ctx, out, "+ Internal Link: '%s'\n", link->uri);
+						if (loc.chapter >= 0 && loc.page >= 0)
+						{
+							fz_write_printf(ctx, out, "  + Target Page Number: %d (Chapter: %d, Chapter Page: %d)\n", target_page, loc.chapter + 1, loc.page + 1);
+						}
+						else
+						{
+							fz_write_printf(ctx, out, "  + Target Error: (Chapter: %d, Chapter Page: %d)\n", loc.chapter, loc.page);
+						}
+						fz_write_printf(ctx, out, "  + Target Coordinates: X:%f Y:%f\n", link_x, link_y);
+						fz_write_printf(ctx, out, "  + Link Bounds: %R\n", bounds);
+					}
+					else
+					{
+						fz_write_printf(ctx, out, "+ External Link: '%s'\n", link->uri);
+						fz_write_printf(ctx, out, "  + Link Bounds: %R\n", bounds);
+					}
+
+					link = link->next;
+				}
+			}
+			fz_always(ctx)
+			{
+				fz_drop_link(ctx, links);
+				//fz_drop_page(ctx, page_obj);
+			}
+			fz_catch(ctx)
+			{
+				fz_error(ctx, "Error while processing links in page %d\n", page);
+			}
+		}
+	}
+	fz_always(ctx)
+	{
+		fz_drop_page(ctx, page_ref);
+	}
+	fz_catch(ctx)
+	{
+		fz_error(ctx, "Error while loading/processing page %d\n", page);
+	}
+}
 
 
 typedef struct
@@ -1506,25 +1616,6 @@ static char* short_signature_error_desc(pdf_signature_error err)
 	case PDF_SIGNATURE_ERROR_UNKNOWN:
 		return "Unknown error";
 	}
-}
-
-static const char* bool2str(int state)
-{
-	return state ? "YES" : "NO";
-}
-
-static void write_item(fz_context* ctx, fz_output* out, const char *label, const char *value)
-{
-	char buf[1024];
-	size_t len = 0;
-	pdf_obj* obj = pdf_new_string(ctx, value, strlen(value));
-
-	const char *v = pdf_sprint_obj(ctx, buf, sizeof(buf), &len, obj, 0 /* tight */, 1 /* ascii */);
-	fz_write_printf(ctx, out, "+ %s:\n"
-		"%s\n",
-		label,
-		v);
-	fz_free(ctx, obj);
 }
 
 static void

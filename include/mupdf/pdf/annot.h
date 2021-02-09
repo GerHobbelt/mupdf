@@ -465,7 +465,7 @@ void pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const c
 
 int pdf_annot_field_flags(fz_context *ctx, pdf_annot *annot);
 const char *pdf_annot_field_value(fz_context *ctx, pdf_annot *annot);
-const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *widget);
+const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *annot);
 
 int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_widget *widget, const char *text, int ignore_trigger_events);
 
