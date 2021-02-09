@@ -2798,6 +2798,8 @@ enum
 
 static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj);
 
+static const char* hex_lut = "0123456789ABCDEF";
+
 static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
 {
 	if (pdf_name_eq(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Type)), PDF_NAME(Metadata)))
@@ -2806,11 +2808,44 @@ static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
 	return 0;
 }
 
-static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const unsigned char* s, size_t n)
+// Compared to fmt_hex_out(), this one injects single spaces between hex-ed bytes,
+// i.e. output 'DE AD BE EF' instead of 'DEADBEEF'
+static void fmt_hex_out_bytespaced(fz_context* ctx, struct fmt* fmt, const unsigned char* s, size_t n)
+{
+	size_t i;
+	unsigned int b;
+
+	i = 0;
+	if (i < n) {
+		b = (unsigned char)s[0];
+		fmt_putc(ctx, fmt, hex_lut[(b >> 4) & 0x0F]);
+		fmt_putc(ctx, fmt, hex_lut[b & 0x0F]);
+		i++;
+	}
+
+	for (; i < n; i++) {
+		fmt_putc(ctx, fmt, ' ');
+
+		b = (unsigned char)s[i];
+		fmt_putc(ctx, fmt, hex_lut[(b >> 4) & 0x0F]);
+		fmt_putc(ctx, fmt, hex_lut[b & 0x0F]);
+	}
+}
+
+
+// Do not write the string, just observe what happens and report so sane choices for final output can be made.
+static int fmt_test_str_to_json(fz_context* ctx, const unsigned char* s, size_t n)
 {
 	int c;
 	size_t i;
-	static const char* hex_lut = "0123456789ABCDEF";
+	int bad_unicodes = 0;
+	int control_chars = 0;
+	int irregular_control_chars = 0;
+	int unicodes = 0;
+	int output_len = 0;
+	int has_nuls = 0;
+	int has_linebreaks = 0;
+	int has_astral_unicodes = 0;
 
 	for (i = 0; i < n; i++)
 	{
@@ -2818,38 +2853,45 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 		switch (c)
 		{
 		case 0:
-			fmt_puts(ctx, fmt, "\\x00");
+			has_nuls++;
+			output_len += 4;
 			break;
 		case '\n':
-			fmt_puts(ctx, fmt, "\\n");
+			has_linebreaks++;
+			output_len += 2;
 			break;
 		case '\r':
-			fmt_puts(ctx, fmt, "\\r");
+			has_linebreaks++;
+			output_len += 2;
 			break;
 		case '\t':
-			fmt_puts(ctx, fmt, "\\t");
+			output_len += 2;
 			break;
 		case '\b':
-			fmt_puts(ctx, fmt, "\\b");
+			control_chars++;
+			output_len += 2;
 			break;
 		case '\f':
-			fmt_puts(ctx, fmt, "\\f");
+			has_linebreaks++;
+			control_chars++;
+			output_len += 2;
 			break;
 		case '\v':
-			fmt_puts(ctx, fmt, "\\v");
+			has_linebreaks++;
+			control_chars++;
+			output_len += 2;
 			break;
 		case '"':
-			fmt_puts(ctx, fmt, "\\\"");
+			output_len += 2;
 			break;
 		case '\\':
-			fmt_puts(ctx, fmt, "\\\\");
+			output_len += 2;
 			break;
 		default:
 			if (c < 32) {
-				fmt_putc(ctx, fmt, '\\');
-				fmt_putc(ctx, fmt, 'x');
-				fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
-				fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+				control_chars++;
+				irregular_control_chars++;
+				output_len += 4;
 			}
 			else if (c > 0x7F) {
 				// decode UTF8 to unicode
@@ -2857,24 +2899,120 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 				int l = fz_chartorune(&u, s + i);
 				i += l - 1;
 				if (l == 1 && u == Runeerror) {
-					// whoops. Well, we'll abuse the 'ascii' for this as there's a choice to make:
-					// - dump as is and let the receiver cope with the bad stuff as-is.
-					//   This would be useful when there's trouble with codepages we don't want to deal with, while the receiver *can*.
-					// - dump as HEX bytes.
-					//   This will "remove" the *badness*, but if it's a wrongdoing somewhere with an old codepage,
-					//   then this will make it harder to fix it at the receiver side as, after decoding the JSON, there won't be
-					//   any identifiable difference between this hex byte and a *legal* unicode character!
-					if (fmt->ascii) {
-						fmt_putc(ctx, fmt, '\\');
-						fmt_putc(ctx, fmt, 'x');
-						fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
-						fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
-					}
-					else {
-						fmt_putc(ctx, fmt, c);
-					}
+					bad_unicodes++;
+					output_len += 4;
 				}
 				else {
+					unicodes++;
+					output_len += 6;
+					if (u > 0xFFFF)
+					{
+						has_astral_unicodes++;
+						output_len += 2;
+					}
+				}
+			}
+			else {
+				output_len++;
+			}
+			break;
+		}
+	}
+
+	// Now check if we consider this a "sane" string value:
+	if (bad_unicodes ||
+		(unicodes && control_chars) ||
+		has_nuls ||
+		irregular_control_chars
+	) {
+		return -1;   // clearly NOT...
+	}
+	// return +1 if the string is "non-simple", i.e. contains ANY escapes:
+	return (output_len > n);
+}
+
+
+// Output raw string data to a buffer.
+//
+// Comes with the surrounding double quotes, UNLESS the inner sanity-checking logic has decided
+// the string is corrupted: then a JSON serialized OBJECT is returned instead:
+//
+// {
+//   HEX: "...hex-encoded 'string' data, e.g. 'BA C3 1F DE AD BE EF'...",
+//   RAW: "...string as-is, with minimal escapes..."
+// }
+static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const unsigned char* s, size_t n, int prefix_char)
+{
+	int c;
+	size_t i;
+
+	int mode = fmt_test_str_to_json(ctx, s, n);
+
+	switch (mode)
+	{
+	case 0:
+		// plain string, guaranteed no escapes!
+		fmt_putc(ctx, fmt, '"');
+		if (prefix_char)
+		{
+			fmt_putc(ctx, fmt, prefix_char);
+		}
+
+		for (i = 0; i < n; i++) {
+			fmt_putc(ctx, fmt, *s++);
+		}
+		fmt_putc(ctx, fmt, '"');
+		break;
+
+	case 1:
+		// legal string, but comes with some escapes. Maybe many. But none of them *illegal*.
+		//
+		// NOTE: the switch/case below has been reduced to its near minimum,
+		// so if you change the sanity criteria above, make sure to check this one too!
+
+		fmt_putc(ctx, fmt, '"');
+		if (prefix_char)
+		{
+			fmt_putc(ctx, fmt, prefix_char);
+		}
+
+		for (i = 0; i < n; i++)
+		{
+			c = (unsigned char)s[i];
+			switch (c)
+			{
+			case '\n':
+				fmt_puts(ctx, fmt, "\\n");
+				break;
+			case '\r':
+				fmt_puts(ctx, fmt, "\\r");
+				break;
+			case '\t':
+				fmt_puts(ctx, fmt, "\\t");
+				break;
+			case '\b':
+				fmt_puts(ctx, fmt, "\\b");
+				break;
+			case '\f':
+				fmt_puts(ctx, fmt, "\\f");
+				break;
+			case '\v':
+				fmt_puts(ctx, fmt, "\\v");
+				break;
+			case '"':
+				fmt_puts(ctx, fmt, "\\\"");
+				break;
+			case '\\':
+				fmt_puts(ctx, fmt, "\\\\");
+				break;
+			default:
+				if (c > 0x7F) {
+					// decode UTF8 to unicode
+					int u;
+					int l = fz_chartorune(&u, s + i);
+					i += l - 1;
+					// no errors expected. Those are caught by the sanitycheck routine at the top
+					// and we wouldn't then have arrived at this render mode!
 					if (u > 0xFFFF)
 					{
 						fmt_putc(ctx, fmt, '\\');
@@ -2895,12 +3033,123 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
 					}
 				}
+				else {
+					fmt_putc(ctx, fmt, c);
+				}
+				break;
 			}
-			else {
-				fmt_putc(ctx, fmt, c);
-			}
-			break;
 		}
+		fmt_putc(ctx, fmt, '"');
+		break;
+
+	default:
+		// insanity detected. Output JSON object with HEX + RAW
+		fmt_puts(ctx, fmt, "{ HEX: \"");
+		if (prefix_char)
+		{
+			fmt_putc(ctx, fmt, hex_lut[(prefix_char >> 4) & 0xF]);
+			fmt_putc(ctx, fmt, hex_lut[prefix_char & 0xF]);
+			if (n > 0)
+				fmt_putc(ctx, fmt, ' ');
+		}
+		fmt_hex_out_bytespaced(ctx, fmt, s, n);
+		fmt_puts(ctx, fmt, "\",\n  RAW: \"");
+		if (prefix_char)
+		{
+			fmt_putc(ctx, fmt, prefix_char);
+		}
+
+		// no serialize with minimal attempt at escapes; BREAKS illegal UTF8 code sequences into separate hex-encoded 'bytes'.
+		for (i = 0; i < n; i++)
+		{
+			c = (unsigned char)s[i];
+			switch (c)
+			{
+			case '\n':
+				fmt_puts(ctx, fmt, "\\n");
+				break;
+			case '\r':
+				fmt_puts(ctx, fmt, "\\r");
+				break;
+			case '\t':
+				fmt_puts(ctx, fmt, "\\t");
+				break;
+			case '\b':
+				fmt_puts(ctx, fmt, "\\b");
+				break;
+			case '\f':
+				fmt_puts(ctx, fmt, "\\f");
+				break;
+			case '\v':
+				fmt_puts(ctx, fmt, "\\v");
+				break;
+			case '"':
+				fmt_puts(ctx, fmt, "\\\"");
+				break;
+			case '\\':
+				fmt_puts(ctx, fmt, "\\\\");
+				break;
+			default:
+				if (c < 32) {
+					fmt_putc(ctx, fmt, '\\');
+					fmt_putc(ctx, fmt, 'x');
+					fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+					fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+				}
+				else if (c > 0x7F) {
+					// decode UTF8 to unicode
+					int u;
+					int l = fz_chartorune(&u, s + i);
+					i += l - 1;
+					if (l == 1 && u == Runeerror) {
+						// whoops. Well, we'll abuse the 'ascii' for this as there's a choice to make:
+						// - dump as is and let the receiver cope with the bad stuff as-is.
+						//   This would be useful when there's trouble with codepages we don't want to deal with, while the receiver *can*.
+						// - dump as HEX bytes.
+						//   This will "remove" the *badness*, but if it's a wrongdoing somewhere with an old codepage,
+						//   then this will make it harder to fix it at the receiver side as, after decoding the JSON, there won't be
+						//   any identifiable difference between this hex byte and a *legal* unicode character!
+						if (fmt->ascii) {
+							fmt_putc(ctx, fmt, '\\');
+							fmt_putc(ctx, fmt, 'x');
+							fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+						}
+						else {
+							fmt_putc(ctx, fmt, c);
+						}
+					}
+					else {
+						if (u > 0xFFFF)
+						{
+							fmt_putc(ctx, fmt, '\\');
+							fmt_putc(ctx, fmt, 'u');
+							fmt_putc(ctx, fmt, hex_lut[(u >> 20) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[(u >> 16) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+						}
+						else {
+							fmt_putc(ctx, fmt, '\\');
+							fmt_putc(ctx, fmt, 'u');
+							fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+						}
+					}
+				}
+				else {
+					fmt_putc(ctx, fmt, c);
+				}
+				break;
+			}
+		}
+
+		fmt_puts(ctx, fmt, "\"\n}");
+		break;
 	}
 }
 
@@ -2909,9 +3158,7 @@ static void fmt_str_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	unsigned char* s = (unsigned char*)pdf_to_str_buf(ctx, obj);
 	size_t n = pdf_to_str_len(ctx, obj);
 
-	fmt_putc(ctx, fmt, '"');
-	fmt_str_to_json_internal(ctx, fmt, s, n);
-	fmt_putc(ctx, fmt, '"');
+	fmt_str_to_json_internal(ctx, fmt, s, n, 0);
 }
 
 static void fmt_name_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
@@ -2919,10 +3166,8 @@ static void fmt_name_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	unsigned char* s = (unsigned char*)pdf_to_name(ctx, obj);
 	size_t n = strlen(s);
 
-	fmt_putc(ctx, fmt, '"');
 	fmt_putc(ctx, fmt, '/');
-	fmt_str_to_json_internal(ctx, fmt, s, n);
-	fmt_putc(ctx, fmt, '"');
+	fmt_str_to_json_internal(ctx, fmt, s, n, '/');
 }
 
 static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
@@ -3015,9 +3260,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			{
 				data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj);
 				size_t n = strlen(data);
-				fmt_putc(ctx, fmt, '"');
-				fmt_str_to_json_internal(ctx, fmt, data, n);
-				fmt_putc(ctx, fmt, '"');
+				fmt_str_to_json_internal(ctx, fmt, data, n, 0);
 			}
 			fz_always(ctx)
 			{
@@ -3026,10 +3269,9 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			fz_catch(ctx)
 			{
 				// ignore error
-				fmt_puts(ctx, fmt, "\n  null,\n  error: \"");
+				fmt_puts(ctx, fmt, "\n  null,\n  error: ");
 				const char* errmsg = fz_caught_message(ctx);
-				fmt_str_to_json_internal(ctx, fmt, errmsg, strlen(errmsg));
-				fmt_putc(ctx, fmt, '"');
+				fmt_str_to_json_internal(ctx, fmt, errmsg, strlen(errmsg), 0);
 			}
 		}
 		else
@@ -3041,13 +3283,19 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	}
 	else if (pdf_is_indirect(ctx, obj))
 	{
-		fz_snprintf(buf, sizeof buf, "{\n"
-			"  type: \"R\",\n"
-			"  num: %d,\n"
-			"  gen: %d,\n"
-			"  data:\n", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
-		fmt_obj_to_json(ctx, fmt, pdf_resolve_indirect(ctx, obj));
-		fmt_puts(ctx, fmt, "\n}");
+		// re-using this field to track the depth of indirect resolving we went thus far. This is here to prevent stack overruns and huge output files.
+		if (fmt->tight < 3) {
+			fmt_obj_to_json(ctx, fmt, pdf_resolve_indirect(ctx, obj));
+		}
+		else {
+			fz_snprintf(buf, sizeof buf, "{\n"
+				"  type: \"R\",\n"
+				"  num: %d,\n"
+				"  gen: %d,\n"
+				"  S_D_R: 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
+				"}", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
+			fmt_puts(ctx, fmt, buf);
+		}
 	}
 	else if (pdf_is_int(ctx, obj))
 	{
@@ -3067,28 +3315,41 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		fmt_name_to_json(ctx, fmt, obj);
 	else if (pdf_is_array(ctx, obj)) {
 		// re-using this field to track the depth of indirect resolving we went thus far. This is here to prevent stack overruns and huge output files.
-		fmt->tight++;
 		if (fmt->tight < 3) {
+			fmt->tight++;
 			fmt_array_to_json(ctx, fmt, obj);
+			fmt->tight--;
 		}
 		else {
-			fmt_puts(ctx, fmt, "\"MAX_DEPTH_REACHED\""); // deliberately use the wrong type: string vs. array
+			fz_snprintf(buf, sizeof buf, "{\n"
+				"  type: \"R\",\n"
+				"  num: %d,\n"
+				"  gen: %d,\n"
+				"  S_D_R: 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
+				"}", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
+			fmt_puts(ctx, fmt, buf);
 		}
-		fmt->tight--;
 	}
 	else if (pdf_is_dict(ctx, obj)) {
 		// re-using this field to track the depth of indirect resolving we went thus far. This is here to prevent stack overruns and huge output files.
-		fmt->tight++;
 		if (fmt->tight < 3) {
+			fmt->tight++;
 			fmt_dict_to_json(ctx, fmt, obj);
+			fmt->tight--;
 		}
 		else {
-			fmt_puts(ctx, fmt, "\"MAX_DEPTH_REACHED\""); // deliberately use the wrong type: string vs. object
+			fz_snprintf(buf, sizeof buf, "{\n"
+				"  type: \"R\",\n"
+				"  num: %d,\n"
+				"  gen: %d,\n"
+				"  S_D_R: 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
+				"}", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
+			fmt_puts(ctx, fmt, buf);
 		}
-		fmt->tight--;
 	}
-	else
+	else {
 		fmt_puts(ctx, fmt, "{ type: \"<unknown object>\" }");
+	}
 }
 
 char*
@@ -3173,9 +3434,7 @@ pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, cons
 	fmt.num = 0;
 	fmt.gen = 0;
 
-	fmt_putc(ctx, &fmt, '"');
-	fmt_str_to_json_internal(ctx, &fmt, str, str_len);
-	fmt_putc(ctx, &fmt, '"');
+	fmt_str_to_json_internal(ctx, &fmt, str, str_len, 0);
 
 	fmt_putc(ctx, &fmt, 0);
 

@@ -177,6 +177,15 @@ void pdf_print_encrypted_obj(fz_context *ctx, fz_output *out, pdf_obj *obj, int 
 
 char* pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_obj* obj, int dump_bad_raw);
 void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int dump_bad_raw);
+// Output raw string data to a buffer.
+//
+// Comes with the surrounding double quotes, UNLESS the inner sanity-checking logic has decided
+// the string is corrupted: then a JSON serialized OBJECT is returned instead:
+//
+// {
+//   HEX: "...hex-encoded 'string' data, e.g. 'BA C3 1F DE AD BE EF'...",
+//   RAW: "...string as-is, with minimal escapes..."
+// }
 char* pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, const char* str, size_t str_len, int dump_bad_raw);
 
 void pdf_debug_obj(fz_context *ctx, pdf_obj *obj);

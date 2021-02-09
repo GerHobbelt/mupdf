@@ -178,7 +178,7 @@ static void write_string(fz_context* ctx, fz_output* out, const char* str)
 	}
 
 	const char* v = pdf_sprint_str_to_json(ctx, buf, sizeof(buf), &len, str, strlen(str), 0);
-	fz_write_printf(ctx, out, "\"%s\"", v);
+	fz_write_string(ctx, out, v);
 	if (v != buf)
 		fz_free(ctx, v);
 }
@@ -265,6 +265,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 	{
 		write_sep(ctx, out);
 		fz_write_printf(ctx, out, "ChapterPages: [\n");
+		json_sep_state = 1;
 	}
 
 	int alt_page_count = 0;
@@ -274,7 +275,8 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 		if (chaptercount > 1)
 		{
-			fz_write_printf(ctx, out, "%d\n", i + 1, count);
+			write_sep(ctx, out);
+			fz_write_printf(ctx, out, "%d", count);
 		}
 
 		alt_page_count += count;
@@ -282,7 +284,8 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 	if (chaptercount > 1)
 	{
-		fz_write_printf(ctx, out, "]");
+		fz_write_printf(ctx, out, "\n]");
+		json_sep_state = 2;
 	}
 
 	if (alt_page_count != glo->pagecount)
@@ -312,9 +315,6 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		May be NULL if no children exist.
 		*/
 		fz_outline* outlines = NULL;
-
-		int old_state = json_sep_state;
-		json_sep_state = 1;
 
 		fz_try(ctx)
 		{
@@ -354,6 +354,8 @@ showglobalinfo(fz_context* ctx, globals* glo)
 				write_item(ctx, out, "Title", outline->title);
 				write_item_bool(ctx, out, "IsOpen", outline->is_open);
 
+				fz_write_printf(ctx, out, "\n}");
+
 				if (outline->down)
 				{
 					outline_parents[parents_index++] = outline->next;
@@ -381,8 +383,6 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		}
 		fz_always(ctx)
 		{
-			json_sep_state = old_state;
-
 			if (outlines)
 			{
 				fz_write_printf(ctx, out, "\n]");
@@ -847,9 +847,11 @@ printinfo(fz_context* ctx, globals* glo, int page)
 			fz_write_printf(ctx, out, "{\n");
 			json_sep_state = 1;
 			write_item_int(ctx, out, "Page", glo->dim[i].page);
+#if 0
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "PageRef:\n");
 			pdf_print_obj_to_json(ctx, out, glo->dim[i].pageref, 0);
+#endif
 			write_item_bbox(ctx, out, "Bounds", glo->dim[i].u.dim.bbox);
 			fz_write_printf(ctx, out, "\n}");
 		}
@@ -870,15 +872,19 @@ printinfo(fz_context* ctx, globals* glo, int page)
 			fz_write_printf(ctx, out, "{\n");
 			json_sep_state = 1;
 			write_item_int(ctx, out, "Page", glo->font[i].page);
+#if 0
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "PageRef:\n");
 			pdf_print_obj_to_json(ctx, out, glo->font[i].pageref, 0);
+#endif
 			write_item(ctx, out, "FontType", pdf_to_name(ctx, glo->font[i].u.font.subtype));
 			write_item(ctx, out, "FontName", pdf_to_name(ctx, glo->font[i].u.font.name));
 			write_item(ctx, out, "FontEncoding", glo->font[i].u.font.encoding ? pdf_to_name(ctx, glo->font[i].u.font.encoding) : "");
+#if 0
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "Font:\n");
 			pdf_print_obj_to_json(ctx, out, glo->font[i].u.font.obj, 0);
+#endif
 			fz_write_printf(ctx, out, "\n}");
 		}
 
@@ -898,10 +904,11 @@ printinfo(fz_context* ctx, globals* glo, int page)
 			fz_write_printf(ctx, out, "{\n");
 			json_sep_state = 1;
 			write_item_int(ctx, out, "Page", glo->image[i].page);
+#if 0
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "PageRef:\n");
 			pdf_print_obj_to_json(ctx, out, glo->image[i].pageref, 0);
-
+#endif
 			if (pdf_is_array(ctx, glo->image[i].u.image.filter))
 			{
 				write_sep(ctx, out);
@@ -1027,10 +1034,11 @@ printinfo(fz_context* ctx, globals* glo, int page)
 			fz_write_printf(ctx, out, "{\n");
 			json_sep_state = 1;
 			write_item_int(ctx, out, "Page", glo->form[i].page);
+#if 0
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "PageRef:\n");
 			pdf_print_obj_to_json(ctx, out, glo->form[i].pageref, 0);
-
+#endif
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "FormType: \"Form%s%s%s%s\"",
 				glo->form[i].u.form.groupsubtype ? " " : "",
@@ -1059,9 +1067,11 @@ printinfo(fz_context* ctx, globals* glo, int page)
 			fz_write_printf(ctx, out, "{\n");
 			json_sep_state = 1;
 			write_item_int(ctx, out, "Page", glo->psobj[i].page);
+#if 0
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "PageRef:\n");
 			pdf_print_obj_to_json(ctx, out, glo->psobj[i].pageref, 0);
+#endif
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "Form:\n");
 			pdf_print_obj_to_json(ctx, out, glo->psobj[i].u.form.obj, 0);
@@ -1109,7 +1119,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 			int idx;
 			for (idx = 0, annot = pdf_first_annot(ctx, page_obj); annot; ++idx, annot = pdf_next_annot(ctx, annot))
 			{
-				char buf[256];
+				char buf[1024];
 
 				write_sep(ctx, out);
 				fz_write_printf(ctx, out, "{\n");
@@ -1616,11 +1626,11 @@ printtail(fz_context* ctx, globals* glo)
 		char buf[256];
 
 		if (n == 0)
-			fz_strlcat(buf, "Change history seems valid.", sizeof(buf));
+			fz_strlcpy(buf, "Change history seems valid.", sizeof(buf));
 		else if (n == 1)
-			fz_strlcat(buf, "Invalid changes made to the document in the last update.", sizeof(buf));
+			fz_strlcpy(buf, "Invalid changes made to the document in the last update.", sizeof(buf));
 		else if (n == 2)
-			fz_strlcat(buf, "Invalid changes made to the document in the penultimate update.", sizeof(buf));
+			fz_strlcpy(buf, "Invalid changes made to the document in the penultimate update.", sizeof(buf));
 		else
 			fz_snprintf(buf, sizeof(buf), "Invalid changes made to the document %d updates ago.", n);
 		write_item(ctx, out, "ChangeHistoryValidation", buf);
@@ -1690,13 +1700,13 @@ printtail(fz_context* ctx, globals* glo)
 
 		if (updates == 0)
 		{
-			fz_strlcat(buf, "No updates since document creation", sizeof(buf));
+			fz_strlcpy(buf, "No updates since document creation", sizeof(buf));
 		}
 		else
 		{
 			int n = pdf_validate_change_history(ctx, doc);
 			if (n == 0)
-				fz_strlcat(buf, "Document changes conform to permissions", sizeof(buf));
+				fz_strlcpy(buf, "Document changes conform to permissions", sizeof(buf));
 			else
 				fz_snprintf(buf, sizeof(buf), "Document permissions violated %d updates ago", n);
 		}
