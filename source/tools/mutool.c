@@ -50,6 +50,7 @@ static struct {
 	{ curl_main, "curl", "access/fetch a given URI" },
 	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
+	{ pdfmultipurp_main, "multipurp", "multitool shows information about pdf in JSON format" },
 };
 
 static int

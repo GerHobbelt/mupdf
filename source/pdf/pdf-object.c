@@ -2833,6 +2833,383 @@ int pdf_obj_refs(fz_context *ctx, pdf_obj *obj)
 	return obj->refs;
 }
 
+/* JSON formatting functions */
+
+enum
+{
+	Runeerror = 0xFFFD, /* decoding error in UTF */
+	Runemax = 0x10FFFF, /* maximum rune value */
+};
+
+static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj);
+
+static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
+{
+	if (pdf_name_eq(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Type)), PDF_NAME(Metadata)))
+		if (pdf_name_eq(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Subtype)), PDF_NAME(XML)))
+			return 1;
+	return 0;
+}
+
+static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const unsigned char* s, size_t n)
+{
+	int c;
+	size_t i;
+	static const char* hex_lut = "0123456789ABCDEF";
+
+	for (i = 0; i < n; i++)
+	{
+		c = (unsigned char)s[i];
+		switch (c)
+		{
+		case 0:
+			fmt_puts(ctx, fmt, "\\x00");
+			break;
+		case '\n':
+			fmt_puts(ctx, fmt, "\\n");
+			break;
+		case '\r':
+			fmt_puts(ctx, fmt, "\\r");
+			break;
+		case '\t':
+			fmt_puts(ctx, fmt, "\\t");
+			break;
+		case '\b':
+			fmt_puts(ctx, fmt, "\\b");
+			break;
+		case '\f':
+			fmt_puts(ctx, fmt, "\\f");
+			break;
+		case '\v':
+			fmt_puts(ctx, fmt, "\\v");
+			break;
+		case '"':
+			fmt_puts(ctx, fmt, "\\\"");
+			break;
+		case '\\':
+			fmt_puts(ctx, fmt, "\\\\");
+			break;
+		default:
+			if (c < 32) {
+				fmt_putc(ctx, fmt, '\\');
+				fmt_putc(ctx, fmt, 'x');
+				fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+				fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+			}
+			else if (c > 0x7F) {
+				// decode UTF8 to unicode
+				int u;
+				int l = fz_chartorune(&u, s + i);
+				i += l - 1;
+				if (l == 1 && u == Runeerror) {
+					// whoops. Well, we'll abuse the 'ascii' for this as there's a choice to make:
+					// - dump as is and let the receiver cope with the bad stuff as-is.
+					//   This would be useful when there's trouble with codepages we don't want to deal with, while the receiver *can*.
+					// - dump as HEX bytes.
+					//   This will "remove" the *badness*, but if it's a wrongdoing somewhere with an old codepage,
+					//   then this will make it harder to fix it at the receiver side as, after decoding the JSON, there won't be
+					//   any identifiable difference between this hex byte and a *legal* unicode character!
+					if (fmt->ascii) {
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'x');
+						fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+					}
+					else {
+						fmt_putc(ctx, fmt, c);
+					}
+				}
+				else {
+					if (u > 0xFFFF)
+					{
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'u');
+						fmt_putc(ctx, fmt, hex_lut[(u >> 20) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 16) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+					}
+					else {
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'u');
+						fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+					}
+				}
+			}
+			else {
+				fmt_putc(ctx, fmt, c);
+			}
+			break;
+		}
+	}
+}
+
+static void fmt_str_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
+{
+	unsigned char* s = (unsigned char*)pdf_to_str_buf(ctx, obj);
+	size_t n = pdf_to_str_len(ctx, obj);
+
+	fmt_putc(ctx, fmt, '"');
+	fmt_str_to_json_internal(ctx, fmt, s, n);
+	fmt_putc(ctx, fmt, '"');
+}
+
+static void fmt_name_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
+{
+	unsigned char* s = (unsigned char*)pdf_to_name(ctx, obj);
+	size_t n = strlen(s);
+
+	fmt_putc(ctx, fmt, '"');
+	fmt_putc(ctx, fmt, '/');
+	fmt_str_to_json_internal(ctx, fmt, s, n);
+	fmt_putc(ctx, fmt, '"');
+}
+
+static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
+{
+	int i, n;
+
+	n = pdf_array_len(ctx, obj);
+	fmt_putc(ctx, fmt, '[');
+	fmt->indent++;
+	for (i = 0; i < n; i++) {
+		if (i != 0)
+			fmt_putc(ctx, fmt, ',');
+		if (fmt->col > 60) {
+			fmt_putc(ctx, fmt, '\n');
+			fmt_indent(ctx, fmt);
+		}
+		else {
+			fmt_putc(ctx, fmt, ' ');
+		}
+		fmt_obj_to_json(ctx, fmt, pdf_array_get(ctx, obj, i));
+	}
+	fmt->indent--;
+	fmt_putc(ctx, fmt, ' ');
+	fmt_putc(ctx, fmt, ']');
+	fmt_sep(ctx, fmt);
+}
+
+static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
+{
+	int i, n;
+	pdf_obj* key, * val;
+
+	n = pdf_dict_len(ctx, obj);
+	fmt_puts(ctx, fmt, "{\n");
+	fmt->indent++;
+	for (i = 0; i < n; i++) {
+		key = pdf_dict_get_key(ctx, obj, i);
+		val = pdf_dict_get_val(ctx, obj, i);
+		fmt_indent(ctx, fmt);
+		fmt_obj_to_json(ctx, fmt, key);
+		fmt_puts(ctx, fmt, ": ");
+		if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
+			fmt->indent++;
+		if (key == PDF_NAME(Contents) && is_signature(ctx, obj))
+		{
+			pdf_crypt* crypt = fmt->crypt;
+			fz_try(ctx)
+			{
+				fmt->crypt = NULL;
+				fmt_obj_to_json(ctx, fmt, val);
+			}
+			fz_always(ctx)
+				fmt->crypt = crypt;
+			fz_catch(ctx)
+				fz_rethrow(ctx);
+		}
+		else
+			fmt_obj_to_json(ctx, fmt, val);
+		if (i + 1 != n)
+			fmt_putc(ctx, fmt, ',');
+		fmt_putc(ctx, fmt, '\n');
+		if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
+			fmt->indent--;
+	}
+	fmt->indent--;
+	fmt_indent(ctx, fmt);
+	fmt_puts(ctx, fmt, "}");
+}
+
+static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
+{
+	char buf[256];
+
+	if (obj == PDF_NULL)
+		fmt_puts(ctx, fmt, "null");
+	else if (obj == PDF_TRUE)
+		fmt_puts(ctx, fmt, "true");
+	else if (obj == PDF_FALSE)
+		fmt_puts(ctx, fmt, "false");
+	else if (pdf_is_stream(ctx, obj))
+	{
+		fmt_puts(ctx, fmt, "{ type: \"stream\", data:\n");
+
+		if (is_xml_metadata(ctx, obj))
+		{
+			char* data = NULL;
+			fz_xml_doc* container_xml = NULL;
+
+			fz_try(ctx)
+			{
+				data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj);
+				size_t n = strlen(data);
+				fmt_putc(ctx, fmt, '"');
+				fmt_str_to_json_internal(ctx, fmt, data, n);
+				fmt_putc(ctx, fmt, '"');
+			}
+			fz_always(ctx)
+			{
+				fz_free(ctx, data);
+			}
+			fz_catch(ctx)
+			{
+				// ignore error
+				fmt_puts(ctx, fmt, "\n  null,\n  error: \"");
+				const char* errmsg = fz_caught_message(ctx);
+				fmt_str_to_json_internal(ctx, fmt, errmsg, strlen(errmsg));
+				fmt_putc(ctx, fmt, '"');
+			}
+		}
+		else
+		{
+			fmt_obj_to_json(ctx, fmt, pdf_resolve_indirect(ctx, obj));
+		}
+
+		fmt_puts(ctx, fmt, "\n}");
+	}
+	else if (pdf_is_indirect(ctx, obj))
+	{
+		fz_snprintf(buf, sizeof buf, "{\n"
+			"  type: \"R\",\n"
+			"  num: %d,\n"
+			"  gen: %d,\n"
+			"  data:\n", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
+		fmt_obj_to_json(ctx, fmt, pdf_resolve_indirect(ctx, obj));
+		fmt_puts(ctx, fmt, "\n}");
+	}
+	else if (pdf_is_int(ctx, obj))
+	{
+		fz_snprintf(buf, sizeof buf, "%d", pdf_to_int(ctx, obj));
+		fmt_puts(ctx, fmt, buf);
+	}
+	else if (pdf_is_real(ctx, obj))
+	{
+		fz_snprintf(buf, sizeof buf, "%g", pdf_to_real(ctx, obj));
+		fmt_puts(ctx, fmt, buf);
+	}
+	else if (pdf_is_string(ctx, obj))
+	{
+		fmt_str_to_json(ctx, fmt, obj);
+	}
+	else if (pdf_is_name(ctx, obj))
+		fmt_name_to_json(ctx, fmt, obj);
+	else if (pdf_is_array(ctx, obj))
+		fmt_array_to_json(ctx, fmt, obj);
+	else if (pdf_is_dict(ctx, obj))
+		fmt_dict_to_json(ctx, fmt, obj);
+	else
+		fmt_puts(ctx, fmt, "{ type: \"<unknown object>\" }");
+}
+
+char*
+pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_obj* obj, int dump_bad_raw)
+{
+	struct fmt fmt;
+
+	fmt.indent = 0;
+	fmt.col = 0;
+	fmt.sep = 0;
+	fmt.last = 0;
+
+	if (!buf || cap == 0)
+	{
+		fmt.cap = 1024;
+		fmt.buf = NULL;
+		fmt.ptr = Memento_label(fz_malloc(ctx, fmt.cap), "fmt_buf");
+	}
+	else
+	{
+		fmt.cap = cap;
+		fmt.buf = buf;
+		fmt.ptr = buf;
+	}
+
+	fmt.tight = 0;
+	fmt.ascii = dump_bad_raw;
+	fmt.len = 0;
+	fmt.crypt = NULL;
+	fmt.num = 0;
+	fmt.gen = 0;
+	fmt_obj_to_json(ctx, &fmt, obj);
+
+	fmt_putc(ctx, &fmt, 0);
+
+	return *len = fmt.len - 1, fmt.ptr;
+}
+
+void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int dump_bad_raw)
+{
+	char buf[1024];
+	char* ptr;
+	size_t n;
+
+	ptr = pdf_sprint_obj_to_json(ctx, buf, sizeof buf, &n, obj, dump_bad_raw);
+	fz_try(ctx)
+		fz_write_data(ctx, out, ptr, n);
+	fz_always(ctx)
+		if (ptr != buf)
+			fz_free(ctx, ptr);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+char*
+pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, const char *str, size_t str_len, int dump_bad_raw)
+{
+	struct fmt fmt;
+
+	fmt.indent = 0;
+	fmt.col = 0;
+	fmt.sep = 0;
+	fmt.last = 0;
+
+	if (!buf || cap == 0)
+	{
+		fmt.cap = 1024;
+		fmt.buf = NULL;
+		fmt.ptr = Memento_label(fz_malloc(ctx, fmt.cap), "fmt_buf");
+	}
+	else
+	{
+		fmt.cap = cap;
+		fmt.buf = buf;
+		fmt.ptr = buf;
+	}
+
+	fmt.tight = 0;
+	fmt.ascii = dump_bad_raw;
+	fmt.len = 0;
+	fmt.crypt = NULL;
+	fmt.num = 0;
+	fmt.gen = 0;
+
+	fmt_putc(ctx, &fmt, '"');
+	fmt_str_to_json_internal(ctx, &fmt, str, str_len);
+	fmt_putc(ctx, &fmt, '"');
+
+	fmt_putc(ctx, &fmt, 0);
+
+	return *len = fmt.len - 1, fmt.ptr;
+}
+
+
 /* Convenience functions */
 
 pdf_obj *
