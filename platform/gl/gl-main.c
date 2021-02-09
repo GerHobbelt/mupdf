@@ -1976,7 +1976,7 @@ static void do_info(void)
 	if (pdoc)
 	{
 		static pdf_obj *ft_list[2] = { PDF_NAME(FT), NULL };
-		pdf_obj *ft;
+		pdf_obj *ft = NULL;
 		pdf_obj *form_fields = pdf_dict_getp(ctx, pdf_trailer(ctx, pdoc), "Root/AcroForm/Fields");
 		pdf_walk_tree(ctx, form_fields, PDF_NAME(Kids), process_sigs, NULL, &list, &ft_list[0], &ft);
 	}

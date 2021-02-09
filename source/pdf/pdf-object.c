@@ -2697,10 +2697,44 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 		else if (fmt->ascii && is_binary_string(ctx, obj))
 		{
 			fmt_hex(ctx, fmt, obj);
-			fmt_puts(ctx, fmt, " % semi-ASCII text: ");
-			size_t n = pdf_to_str_len(ctx, obj);
-			// fmt_str_out will ensure no string will produce any newlines, so it all remains as PostScript comment:
-			fmt_str_out(ctx, fmt, str, n);
+			if (!fmt->tight && !fmt->crypt)
+			{
+				fmt_puts(ctx, fmt, " % semi-ASCII text: ");
+				size_t n = pdf_to_str_len(ctx, obj);
+				// fmt_str_out will ensure no string will produce any newlines, so it all remains as PostScript comment:
+				//fmt_str_out(ctx, fmt, str, n); --> a close derivative here, which print hex encodes and no escaped braces: it's to become a Postscript COMMENT string for human perusal!
+				// BTW: only output this aid when we can be sure that it won't damage any of the remainder of the Postscript output.
+				{
+					unsigned int c;
+					size_t i;
+					static const char* hex_lut = "0123456789ABCDEF";
+
+					for (i = 0; i < n; i++)
+					{
+						c = (unsigned char)str[i];
+						if (c == '\n')
+							fmt_puts(ctx, fmt, "\\n");
+						else if (c == '\r')
+							fmt_puts(ctx, fmt, "\\r");
+						else if (c == '\t')
+							fmt_puts(ctx, fmt, "\\t");
+						else if (c == '\b')
+							fmt_puts(ctx, fmt, "\\b");
+						else if (c == '\f')
+							fmt_puts(ctx, fmt, "\\f");
+						else if (c == '\\')
+							fmt_puts(ctx, fmt, "\\\\");
+						else if (c < 32 || c >= 127) {
+							fmt_putc(ctx, fmt, '\\');
+							fmt_putc(ctx, fmt, 'x');
+							fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+							fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+						}
+						else
+							fmt_putc(ctx, fmt, c);
+					}
+				}
+			}
 		}
 		else
 		{

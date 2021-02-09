@@ -358,9 +358,9 @@ showglobalinfo(fz_context* ctx, globals* glo, int show)
 					fz_write_printf(ctx, out, "%s+ External Level %d Link: '%s'\n", indent_buf, parents_index + 1, outline->uri);
 				}
 
-				fz_write_printf(ctx, out, "%s  ");
+				fz_write_printf(ctx, out, "%s  ", indent_buf);
 				write_item(ctx, out, "Title", outline->title);
-				fz_write_printf(ctx, out, "%s  ");
+				fz_write_printf(ctx, out, "%s  ", indent_buf);
 				write_item(ctx, out, "Is Open", bool2str(outline->is_open));
 
 				if (outline->down)
@@ -1716,7 +1716,7 @@ printtail(fz_context* ctx, globals* glo)
 	{
 		sigs_list list = { 0, 0, NULL };
 		static pdf_obj* ft_list[2] = { PDF_NAME(FT), NULL };
-		pdf_obj* ft;
+		pdf_obj* ft = NULL;
 		pdf_obj* form_fields = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/AcroForm/Fields");
 		pdf_walk_tree(ctx, form_fields, PDF_NAME(Kids), process_sigs, NULL, &list, &ft_list[0], &ft);
 
