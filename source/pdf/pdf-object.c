@@ -2670,40 +2670,8 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 		fmt_puts(ctx, fmt, "false");
 	else if (pdf_is_indirect(ctx, obj))
 	{
-		// First print the indirect reference.
-		// Then *resolve* the indirect ref:
-		//   RESOLVE(obj); --> pdf_resolve_indirect_chain(ctx, obj)
-		// but *we* want to see the entire chain of indirections here, so we replicate that logic here:
-		pdf_obj* ref = obj;
-		int sanity = 10;
-		int current_indent = fmt->indent;
-
-		while (pdf_is_indirect(ctx, ref))
-		{
-			fz_snprintf(buf, sizeof buf, "{%d %d R} -->\n", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
-			fmt_puts(ctx, fmt, buf);
-			fmt->indent++;
-			fmt_indent(ctx, fmt);
-
-			if (--sanity == 0)
-			{
-				fz_snprintf(buf, sizeof buf, "!Error: too many indirections (possible indirection cycle involving %d 0 R)\n", pdf_to_num(ctx, ref));
-				fmt_puts(ctx, fmt, buf);
-				fmt->indent = current_indent;
-				fmt_indent(ctx, fmt);
-				ref = NULL;
-			}
-			else
-			{
-				ref = pdf_resolve_indirect(ctx, ref);
-			}
-		}
-
-		if (ref)
-		{
-			fmt_obj(ctx, fmt, ref);
-		}
-		fmt->indent = current_indent;
+		fz_snprintf(buf, sizeof buf, "%d %d R", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
+		fmt_puts(ctx, fmt, buf);
 	}
 	else if (pdf_is_int(ctx, obj))
 	{
@@ -2719,14 +2687,25 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 	{
 		unsigned char *str = (unsigned char *)pdf_to_str_buf(ctx, obj);
 		if (fmt->crypt
-			|| (fmt->ascii && is_binary_string(ctx, obj))
-			|| (str[0]==0xff && str[1]==0xfe)
-			|| (str[0]==0xfe && str[1] == 0xff)
+			|| (str[0] == 0xff && str[1] == 0xfe)
+			|| (str[0] == 0xfe && str[1] == 0xff)
 			|| is_longer_than_hex(ctx, obj)
 			)
+		{
 			fmt_hex(ctx, fmt, obj);
+		}
+		else if (fmt->ascii && is_binary_string(ctx, obj))
+		{
+			fmt_hex(ctx, fmt, obj);
+			fmt_puts(ctx, fmt, " % semi-ASCII text: ");
+			size_t n = pdf_to_str_len(ctx, obj);
+			// fmt_str_out will ensure no string will produce any newlines, so it all remains as PostScript comment:
+			fmt_str_out(ctx, fmt, str, n);
+		}
 		else
+		{
 			fmt_str(ctx, fmt, obj);
+		}
 	}
 	else if (pdf_is_name(ctx, obj))
 		fmt_name(ctx, fmt, obj);

@@ -45,6 +45,8 @@ fz_is_external_link(fz_context *ctx, const char *uri)
 {
 	/* Basically, this function returns true, if the URI starts with
 	 * a valid 'scheme' followed by ':'. */
+	if (!uri)
+		return 0;
 
 	/* All schemes must start with a letter; exit if we don't. */
 	if ((*uri < 'a' || *uri > 'z') && (*uri < 'A' || *uri > 'Z'))

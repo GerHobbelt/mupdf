@@ -206,6 +206,8 @@ static void write_item(fz_context* ctx, fz_output* out, const char* label, const
 {
 	char buf[1024];
 	size_t len = 0;
+	if (!value)
+		value = "<null>";
 	pdf_obj* obj = pdf_new_string(ctx, value, strlen(value));
 
 	const char* v = pdf_sprint_obj(ctx, buf, sizeof(buf), &len, obj, 0 /* tight */, 1 /* ascii */);
@@ -305,8 +307,6 @@ showglobalinfo(fz_context* ctx, globals* glo, int show)
 
 	if (show & LINKS)
 	{
-		fz_write_printf(ctx, out, "\n\nDocument Outline:\n\n");
-
 		/*
 		fz_outline is a tree of the outline of a document (also known
 		as table of contents).
@@ -333,6 +333,11 @@ showglobalinfo(fz_context* ctx, globals* glo, int show)
 		{
 			outlines = pdf_load_outline(ctx, doc);
 
+			if (outlines)
+			{
+				fz_write_printf(ctx, out, "\n\nDocument Outline:\n\n");
+			}
+
 			fz_outline* outline_parents[100];
 			int parents_index = 0;
 			fz_outline* outline = outlines;
@@ -352,6 +357,11 @@ showglobalinfo(fz_context* ctx, globals* glo, int show)
 				{
 					fz_write_printf(ctx, out, "%s+ External Level %d Link: '%s'\n", indent_buf, parents_index + 1, outline->uri);
 				}
+
+				fz_write_printf(ctx, out, "%s  ");
+				write_item(ctx, out, "Title", outline->title);
+				fz_write_printf(ctx, out, "%s  ");
+				write_item(ctx, out, "Is Open", bool2str(outline->is_open));
 
 				if (outline->down)
 				{
@@ -1201,9 +1211,12 @@ printadvancedinfo(fz_context* ctx, globals* glo, int show, int page)
 			for (annot = pdf_first_annot(ctx, page_obj); annot; annot = pdf_next_annot(ctx, annot))
 				++n;
 
-			fz_write_printf(ctx, out, "\n\nAnnotations in Page %d:\n\n", page);
-			fz_write_printf(ctx, out, "+ Page Bounds: %R\n", mediabox);
-			fz_write_printf(ctx, out, "+ Number of Annotations: %d\n", n);
+			if (n)
+			{
+				fz_write_printf(ctx, out, "\n\nAnnotations in Page %d:\n\n", page);
+				fz_write_printf(ctx, out, "+ Page Bounds: %R\n", mediabox);
+				fz_write_printf(ctx, out, "+ Number of Annotations: %d\n", n);
+			}
 
 			int idx;
 			for (idx = 0, annot = pdf_first_annot(ctx, page_obj); annot; ++idx, annot = pdf_next_annot(ctx, annot))
@@ -1507,6 +1520,11 @@ printadvancedinfo(fz_context* ctx, globals* glo, int show, int page)
 				//page_obj = pdf_load_page(ctx, doc, page);
 				links = fz_load_links(ctx, page_ref);
 
+				if (links)
+				{
+					fz_write_printf(ctx, out, "\n\nInternal and External Links (URLs) in Page %d:\n\n", page);
+				}
+
 				fz_rect bounds;
 				float link_x = 0.0f, link_y = 0.0f;
 				fz_link* link = links;
@@ -1658,7 +1676,7 @@ printtail(fz_context* ctx, globals* glo)
 		if (info)
 		{
 			fz_write_printf(ctx, out, "+ Meta Info Dictionary\n");
-			pdf_print_obj(ctx, out, info, 0 /* tight */, 1 /* ascii */);
+			pdf_print_obj(ctx, out, pdf_resolve_indirect_chain(ctx, info), 0 /* tight */, 1 /* ascii */);
 			fz_write_printf(ctx, out, "\n");
 		}
 	}
@@ -1925,7 +1943,10 @@ int pdfinfo_main(int argc, const char **argv)
 	fz_try(ctx)
 	{
 		if (!output || *output == 0 || !strcmp(output, "-"))
+		{
 			out = fz_stdout(ctx);
+			output = NULL;
+		}
 		else
 		{
 			char fbuf[4096];
@@ -1934,15 +1955,20 @@ int pdfinfo_main(int argc, const char **argv)
 		}
 
 		pdfinfo_info(ctx, out, password, show, &argv[fz_optind], argc - fz_optind);
-
-		fz_flush_output(ctx, out);
-		fz_close_output(ctx, out);
 	}
 	fz_catch(ctx)
 	{
+		// when the data isn't dumped to stdout, echo the fatal error to the output file:
+		if (output && out)
+		{
+			fz_write_printf(ctx, out, "\n\n\n==========================================================\n!Fatal Error: %s\n\n", fz_caught_message(ctx));
+		}
 		fz_error(ctx, "%s", fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
 	}
+
+	fz_flush_output(ctx, out);
+	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
