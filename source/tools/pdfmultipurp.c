@@ -169,7 +169,7 @@ static void write_sep(fz_context* ctx, fz_output* out)
 
 static void write_string(fz_context* ctx, fz_output* out, const char* str)
 {
-	char buf[1024];
+	char buf[4096];
 	size_t len = 0;
 
 	if (!str) {
