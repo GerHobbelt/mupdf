@@ -1856,7 +1856,6 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 				fz_write_printf(ctx, out, "{\n");
 				json_sep_state = 1;
 
-				write_sep(ctx, out);
 				write_item(ctx, out, "DocumentFilePath", filename);
 
 				showglobalinfo(ctx, &glo);

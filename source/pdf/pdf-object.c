@@ -2931,6 +2931,204 @@ static int fmt_test_str_to_json(fz_context* ctx, const unsigned char* s, size_t 
 	return (output_len > n);
 }
 
+// Output raw WIDE string data to a buffer.
+//
+// Comes with the surrounding double quotes, UNLESS the inner sanity-checking logic has decided
+// the string is corrupted: then a JSON serialized OBJECT is returned instead:
+//
+// {
+//   HEX: "...hex-encoded 'string' data, e.g. 'BA C3 1F DE AD BE EF'...",
+//   RAW: "...string as-is, with minimal escapes..."
+// }
+static void fmt_widestr_to_json_internal(fz_context* ctx, struct fmt* fmt, const uint16_t* s, size_t n, int prefix_char)
+{
+	int c;
+	size_t i;
+
+	// does the string match our machine's endinaess?
+	int endianess = (*s == 0xFEFF);
+
+	fmt_putc(ctx, fmt, '"');
+
+	if (prefix_char)
+	{
+		fmt_putc(ctx, fmt, prefix_char);
+	}
+
+	s++; // skip BOM
+
+	if (!endianess)
+	{
+#define SWAP_ENDIANESS16(c)      ((((c) & 0xFF) << 8) | (((c) & 0xFF00) >> 8))
+
+		// serialize with minimal attempt at escapes; BREAKS illegal UTF16 code sequences into separate hex-encoded 'words'.
+		for (i = 0; i < n; i++)
+		{
+			c = s[i];
+			c = SWAP_ENDIANESS16(c);
+			switch (c)
+			{
+			case '\n':
+				fmt_puts(ctx, fmt, "\\n");
+				break;
+			case '\r':
+				fmt_puts(ctx, fmt, "\\r");
+				break;
+			case '\t':
+				fmt_puts(ctx, fmt, "\\t");
+				break;
+			case '\b':
+				fmt_puts(ctx, fmt, "\\b");
+				break;
+			case '\f':
+				fmt_puts(ctx, fmt, "\\f");
+				break;
+			case '\v':
+				fmt_puts(ctx, fmt, "\\v");
+				break;
+			case '"':
+				fmt_puts(ctx, fmt, "\\\"");
+				break;
+			case '\\':
+				fmt_puts(ctx, fmt, "\\\\");
+				break;
+			default:
+				if (c < 32) {
+					fmt_putc(ctx, fmt, '\\');
+					fmt_putc(ctx, fmt, 'x');
+					fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+					fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+				}
+				else if (c > 0x7F) {
+					// decode UTF16 to unicode?
+					int u = c;
+
+					if (i + 1 < n)
+					{
+						int c2 = s[i + 1];
+						c2 = SWAP_ENDIANESS16(c2);
+
+						if (c >= 0xD800 && c <= 0xDBFF && c2 >= 0xDC00 && c2 <= 0xDFFF) {
+							u = (c - 0xD800) << 10;
+							u |= (c2 - 0xDC00);
+							u += 0x10000;
+							i++;
+						}
+					}
+
+					if (u > 0xFFFF)
+					{
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'u');
+						fmt_putc(ctx, fmt, hex_lut[(u >> 20) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 16) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+					}
+					else {
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'u');
+						fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+					}
+				}
+				else {
+					fmt_putc(ctx, fmt, c);
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		// serialize with minimal attempt at escapes; BREAKS illegal UTF16 code sequences into separate hex-encoded 'words'.
+		for (i = 0; i < n; i++)
+		{
+			c = s[i];
+			switch (c)
+			{
+			case '\n':
+				fmt_puts(ctx, fmt, "\\n");
+				break;
+			case '\r':
+				fmt_puts(ctx, fmt, "\\r");
+				break;
+			case '\t':
+				fmt_puts(ctx, fmt, "\\t");
+				break;
+			case '\b':
+				fmt_puts(ctx, fmt, "\\b");
+				break;
+			case '\f':
+				fmt_puts(ctx, fmt, "\\f");
+				break;
+			case '\v':
+				fmt_puts(ctx, fmt, "\\v");
+				break;
+			case '"':
+				fmt_puts(ctx, fmt, "\\\"");
+				break;
+			case '\\':
+				fmt_puts(ctx, fmt, "\\\\");
+				break;
+			default:
+				if (c < 32) {
+					fmt_putc(ctx, fmt, '\\');
+					fmt_putc(ctx, fmt, 'x');
+					fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
+					fmt_putc(ctx, fmt, hex_lut[c & 0xF]);
+				}
+				else if (c > 0x7F) {
+					// decode UTF16 to unicode?
+					int u = c;
+
+					if (i + 1 < n)
+					{
+						int c2 = s[i + 1];
+
+						if (c >= 0xD800 && c <= 0xDBFF && c2 >= 0xDC00 && c2 <= 0xDFFF) {
+							u = (c - 0xD800) << 10;
+							u |= (c2 - 0xDC00);
+							u += 0x10000;
+							i++;
+						}
+					}
+
+					if (u > 0xFFFF)
+					{
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'u');
+						fmt_putc(ctx, fmt, hex_lut[(u >> 20) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 16) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+					}
+					else {
+						fmt_putc(ctx, fmt, '\\');
+						fmt_putc(ctx, fmt, 'u');
+						fmt_putc(ctx, fmt, hex_lut[(u >> 12) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 8) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[(u >> 4) & 0xF]);
+						fmt_putc(ctx, fmt, hex_lut[u & 0xF]);
+					}
+				}
+				else {
+					fmt_putc(ctx, fmt, c);
+				}
+				break;
+			}
+		}
+	}
+
+	fmt_putc(ctx, fmt, '"');
+}
+
 
 // Output raw string data to a buffer.
 //
@@ -2945,6 +3143,13 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 {
 	int c;
 	size_t i;
+
+	// ultra-fast track to "not a sane UTF8 string": when there's FE FF of FF FE prefix to begin with: that's always wchar_t/UTF16 stuff:
+	if (n > 2 && ((n & 1) == 0) && ((s[0] == 0xFF && s[1] == 0xFE) || (s[0] == 0xFE && s[1] == 0xFF))) {
+		fmt_widestr_to_json_internal(ctx, fmt, (const uint16_t*)s, n / 2, prefix_char);
+		return;
+	}
+
 
 	int mode = fmt_test_str_to_json(ctx, s, n);
 
@@ -3043,17 +3248,25 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 		break;
 
 	default:
-		// insanity detected. Output JSON object with HEX + RAW
-		fmt_puts(ctx, fmt, "{ HEX: \"");
-		if (prefix_char)
-		{
-			fmt_putc(ctx, fmt, hex_lut[(prefix_char >> 4) & 0xF]);
-			fmt_putc(ctx, fmt, hex_lut[prefix_char & 0xF]);
-			if (n > 0)
-				fmt_putc(ctx, fmt, ' ');
+		// insanity detected.
+		// Oh, do we have a "key string being output" override here?
+		if (!(fmt->ascii & 0x02)) {
+			// Nope. Output JSON object with HEX + RAW
+			fmt_puts(ctx, fmt, "{ HEX: \"");
+			if (prefix_char)
+			{
+				fmt_putc(ctx, fmt, hex_lut[(prefix_char >> 4) & 0xF]);
+				fmt_putc(ctx, fmt, hex_lut[prefix_char & 0xF]);
+				if (n > 0)
+					fmt_putc(ctx, fmt, ' ');
+			}
+			fmt_hex_out_bytespaced(ctx, fmt, s, n);
+			fmt_puts(ctx, fmt, "\",\n  RAW: \"");
 		}
-		fmt_hex_out_bytespaced(ctx, fmt, s, n);
-		fmt_puts(ctx, fmt, "\",\n  RAW: \"");
+		else {
+			fmt_putc(ctx, fmt, '"');
+		}
+
 		if (prefix_char)
 		{
 			fmt_putc(ctx, fmt, prefix_char);
@@ -3109,7 +3322,7 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 						//   This will "remove" the *badness*, but if it's a wrongdoing somewhere with an old codepage,
 						//   then this will make it harder to fix it at the receiver side as, after decoding the JSON, there won't be
 						//   any identifiable difference between this hex byte and a *legal* unicode character!
-						if (fmt->ascii) {
+						if (fmt->ascii & 0x01) {
 							fmt_putc(ctx, fmt, '\\');
 							fmt_putc(ctx, fmt, 'x');
 							fmt_putc(ctx, fmt, hex_lut[(c >> 4) & 0xF]);
@@ -3148,7 +3361,12 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 			}
 		}
 
-		fmt_puts(ctx, fmt, "\"\n}");
+		if (!(fmt->ascii & 0x02)) {
+			fmt_puts(ctx, fmt, "\"\n}");
+		}
+		else {
+			fmt_putc(ctx, fmt, '"');
+		}
 		break;
 	}
 }
@@ -3166,7 +3384,6 @@ static void fmt_name_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	unsigned char* s = (unsigned char*)pdf_to_name(ctx, obj);
 	size_t n = strlen(s);
 
-	fmt_putc(ctx, fmt, '/');
 	fmt_str_to_json_internal(ctx, fmt, s, n, '/');
 }
 
@@ -3207,7 +3424,11 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		key = pdf_dict_get_key(ctx, obj, i);
 		val = pdf_dict_get_val(ctx, obj, i);
 		fmt_indent(ctx, fmt);
+		// make sure "less than sane" keys are printed as STRING any way!
+		int old_flags = fmt->ascii;
+		fmt->ascii |= 0x02;
 		fmt_obj_to_json(ctx, fmt, key);
+		fmt->ascii = old_flags;
 		fmt_puts(ctx, fmt, ": ");
 		if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
 			fmt->indent++;
@@ -3353,7 +3574,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 }
 
 char*
-pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_obj* obj, int dump_bad_raw)
+pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_obj* obj, int flags)
 {
 	struct fmt fmt;
 
@@ -3376,7 +3597,7 @@ pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_
 	}
 
 	fmt.tight = 0;
-	fmt.ascii = dump_bad_raw;
+	fmt.ascii = flags;
 	fmt.len = 0;
 	fmt.crypt = NULL;
 	fmt.num = 0;
@@ -3388,13 +3609,13 @@ pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_
 	return *len = fmt.len - 1, fmt.ptr;
 }
 
-void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int dump_bad_raw)
+void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int flags)
 {
 	char buf[1024];
 	char* ptr;
 	size_t n;
 
-	ptr = pdf_sprint_obj_to_json(ctx, buf, sizeof buf, &n, obj, dump_bad_raw);
+	ptr = pdf_sprint_obj_to_json(ctx, buf, sizeof buf, &n, obj, flags);
 	fz_try(ctx)
 		fz_write_data(ctx, out, ptr, n);
 	fz_always(ctx)
@@ -3405,7 +3626,7 @@ void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int du
 }
 
 char*
-pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, const char *str, size_t str_len, int dump_bad_raw)
+pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, const char *str, size_t str_len, int flags)
 {
 	struct fmt fmt;
 
@@ -3428,7 +3649,7 @@ pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, cons
 	}
 
 	fmt.tight = 0;
-	fmt.ascii = dump_bad_raw;
+	fmt.ascii = flags;
 	fmt.len = 0;
 	fmt.crypt = NULL;
 	fmt.num = 0;
