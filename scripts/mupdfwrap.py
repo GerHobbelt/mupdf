@@ -5055,7 +5055,6 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
             Document.lookup_metadata = Document_lookup_metadata
 
 
-            
             def PdfDocument_page_write(self, rect):
                 out = pdf_page_write_helper_out()
                 device = pdf_page_write_helper(self.m_internal, rect.internal(), out)
@@ -5068,25 +5067,20 @@ def build_swig( build_dirs, container_classnames, language='python', swig='swig'
                 return device2, resources, contents
             
             PdfDocument.page_write = PdfDocument_page_write
-            
+
+
             def Buffer_buffer_extract(self):
                 out = buffer_extract_helper_out()
                 buffer_extract_helper(self.m_internal, out)
                 print(f'out.data={{out.data}} out.size={{out.size}}')
-                b = cdata(out.data, out.size)
-                #print(f'b={{b}}')
-                #return b
+
+                # We could convert to a Python <bytes> with 'b =
+                # cdata(out.data, out.size)', but can't find a way to convert
+                # the resulting <bytes> to a (data,size) suitable to pass back
+                # into C, e.g. for mupdf.Stream.open_memory().
+                #
                 return out.data, out.size
             Buffer.buffer_extract = Buffer_buffer_extract
-            
-            
-            def Stream_open_memory(data, size):
-                """
-                Creates Stream from bytes using fz_open_memory().
-                """
-                stream = open_memory(data, size)
-                return Stream(stream)
-            Stream.open_memory = Stream_open_memory
             
             %}}
             ''')
