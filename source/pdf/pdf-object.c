@@ -3065,10 +3065,28 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	}
 	else if (pdf_is_name(ctx, obj))
 		fmt_name_to_json(ctx, fmt, obj);
-	else if (pdf_is_array(ctx, obj))
-		fmt_array_to_json(ctx, fmt, obj);
-	else if (pdf_is_dict(ctx, obj))
-		fmt_dict_to_json(ctx, fmt, obj);
+	else if (pdf_is_array(ctx, obj)) {
+		// re-using this field to track the depth of indirect resolving we went thus far. This is here to prevent stack overruns and huge output files.
+		fmt->tight++;
+		if (fmt->tight < 3) {
+			fmt_array_to_json(ctx, fmt, obj);
+		}
+		else {
+			fmt_puts(ctx, fmt, "\"MAX_DEPTH_REACHED\""); // deliberately use the wrong type: string vs. array
+		}
+		fmt->tight--;
+	}
+	else if (pdf_is_dict(ctx, obj)) {
+		// re-using this field to track the depth of indirect resolving we went thus far. This is here to prevent stack overruns and huge output files.
+		fmt->tight++;
+		if (fmt->tight < 3) {
+			fmt_dict_to_json(ctx, fmt, obj);
+		}
+		else {
+			fmt_puts(ctx, fmt, "\"MAX_DEPTH_REACHED\""); // deliberately use the wrong type: string vs. object
+		}
+		fmt->tight--;
+	}
 	else
 		fmt_puts(ctx, fmt, "{ type: \"<unknown object>\" }");
 }

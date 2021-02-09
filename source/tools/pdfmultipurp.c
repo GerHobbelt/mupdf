@@ -872,7 +872,7 @@ printinfo(fz_context* ctx, globals* glo, int page)
 			write_item_int(ctx, out, "Page", glo->font[i].page);
 			write_sep(ctx, out);
 			fz_write_printf(ctx, out, "PageRef:\n");
-			pdf_print_obj_to_json(ctx, out, glo->dim[i].pageref, 0);
+			pdf_print_obj_to_json(ctx, out, glo->font[i].pageref, 0);
 			write_item(ctx, out, "FontType", pdf_to_name(ctx, glo->font[i].u.font.subtype));
 			write_item(ctx, out, "FontName", pdf_to_name(ctx, glo->font[i].u.font.name));
 			write_item(ctx, out, "FontEncoding", glo->font[i].u.font.encoding ? pdf_to_name(ctx, glo->font[i].u.font.encoding) : "");
