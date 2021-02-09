@@ -1134,8 +1134,10 @@ classextras = ClassExtras(
                 ),
 
         fz_link = ClassExtra(
+                accessors = True,
                 iterator_next = ('', ''),
                 constructor_raw = True,
+                copyable = True,
                 ),
 
         fz_location = ClassExtra(
@@ -1555,9 +1557,12 @@ classextras = ClassExtras(
                 opaque = True,
                 ),
 
+        # Our wrappers of the fz_stext_* structs all have a default copy
+        # constructor - there are no fz_keep_stext_*() functions.
+        #
         fz_stext_block = ClassExtra(
                 iterator_next = ('u.t.first_line', 'u.t.last_line'),
-                copyable='default', # needs to be copyable to allow iterator.
+                copyable='default',
                 ),
 
         fz_stext_char = ClassExtra(
@@ -3064,7 +3069,7 @@ def class_add_iterator( struct, structname, classname, extras):
     extras.class_post += f'''
             struct {classname}Iterator
             {{
-                {classname}Iterator({it_internal_type}* item);
+                {classname}Iterator(const {it_type}& item);
                 {classname}Iterator& operator++();
                 bool operator==( const {classname}Iterator& rhs);
                 bool operator!=( const {classname}Iterator& rhs);
@@ -3074,14 +3079,32 @@ def class_add_iterator( struct, structname, classname, extras):
                 {it_type} m_item;
             }};
             '''
+    keep_text = ''
+    if extras.copyable and extras.copyable != 'default':
+        # Our operator++ needs to create it_type from m_item.m_internal->next,
+        # so we need to call fz_keep_<it_type>().
+        #
+        # [Perhaps life would be simpler if our generated constructors always
+        # called fz_keep_*() as necessary? In some circumstances this would
+        # require us to call fz_drop_*() when constructing an instance, but
+        # that might be simpler?]
+        #
+        base_name = clip( structname, ('fz_', 'pdf_'))
+        if structname.startswith( 'fz_'):
+            keep_name = f'fz_keep_{base_name}'
+        elif structname.startswith( 'pdf_'):
+            keep_name = f'pdf_keep_{base_name}'
+        keep_name = rename.function_call(keep_name)
+        keep_text = f'{keep_name}(m_item.m_internal->next);'
 
     extras.extra_cpp += f'''
-            {classname}Iterator::{classname}Iterator({it_internal_type}* item)
+            {classname}Iterator::{classname}Iterator(const {it_type}& item)
             : m_item( item)
             {{
             }}
             {classname}Iterator& {classname}Iterator::operator++()
             {{
+                {keep_text}
                 m_item = {it_type}(m_item.m_internal->next);
                 return *this;
             }}
@@ -3833,6 +3856,7 @@ def class_accessors(
 def class_destructor(
         register_fn_use,
         classname,
+        extras,
         destructor_fns,
         out_h,
         out_cpp,
@@ -4121,6 +4145,7 @@ def class_wrapper( tu, register_fn_use, struct, structname, classname, out_h, ou
         class_destructor(
                 register_fn_use,
                 classname,
+                extras,
                 destructor_fns,
                 out_h,
                 out_cpp,
@@ -4631,6 +4656,10 @@ def cpp_source( dir_mupdf, namespace, base, header_git, doit=True):
         log( 'Have created:')
         for filename in filenames_h + filenames_cpp:
             log( '    {filename}')
+
+
+    # Output usage information.
+    #
 
     fn_usage_filename = f'{base}fn_usage.txt'
     out_fn_usage = File( fn_usage_filename, tabify=False)
