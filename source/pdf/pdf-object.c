@@ -2956,6 +2956,8 @@ static void fmt_widestr_to_json_internal(fz_context* ctx, struct fmt* fmt, const
 	}
 
 	s++; // skip BOM
+	n--;
+
 
 	if (!endianess)
 	{
@@ -3145,7 +3147,7 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 	size_t i;
 
 	// ultra-fast track to "not a sane UTF8 string": when there's FE FF of FF FE prefix to begin with: that's always wchar_t/UTF16 stuff:
-	if (n > 2 && ((n & 1) == 0) && ((s[0] == 0xFF && s[1] == 0xFE) || (s[0] == 0xFE && s[1] == 0xFF))) {
+	if (n >= 2 && ((n & 1) == 0) && ((s[0] == 0xFF && s[1] == 0xFE) || (s[0] == 0xFE && s[1] == 0xFF))) {
 		fmt_widestr_to_json_internal(ctx, fmt, (const uint16_t*)s, n / 2, prefix_char);
 		return;
 	}
