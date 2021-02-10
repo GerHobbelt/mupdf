@@ -766,6 +766,19 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 	}
 }
 
+static fz_output* stddbgchannel(void)
+{
+	fz_output* dbg = fz_stddbg(ctx);
+	fz_output* err = fz_stderr(ctx);
+
+	if (dbg == err)
+	{
+		return NULL;
+	}
+	return dbg;
+}
+
+
 static void tst_error_callback(void* user, const char* message)
 {
 	struct logconfig* logcfg = (struct logconfig*)user;
@@ -775,11 +788,10 @@ static void tst_error_callback(void* user, const char* message)
 	show_progress_on_stderr(logcfg, message);
 	fprintf(logfile, "error: %s\n", message);
 	fflush(logfile);
-#ifdef USE_OUTPUT_DEBUG_STRING
-	OutputDebugStringA("error: ");
-	OutputDebugStringA(message);
-	OutputDebugStringA("\n");
-#endif
+
+	fz_output* dbg = stddbgchannel();
+	if (dbg)
+		fz_write_printf(ctx, dbg, "error: %s\n", message);
 }
 
 static void tst_warning_callback(void* user, const char* message)
@@ -793,11 +805,10 @@ static void tst_warning_callback(void* user, const char* message)
 		show_progress_on_stderr(logcfg, message);
 		fprintf(logfile, "warning: %s\n", message);
 		fflush(logfile);
-#ifdef USE_OUTPUT_DEBUG_STRING
-		OutputDebugStringA("warning: ");
-		OutputDebugStringA(message);
-		OutputDebugStringA("\n");
-#endif
+
+		fz_output* dbg = stddbgchannel();
+		if (dbg)
+			fz_write_printf(ctx, dbg, "warning: %s\n", message);
 	}
 }
 
@@ -811,10 +822,10 @@ static void tst_info_callback(void* user, const char* message)
 		// show progress on stderr, while we log the real data to logfile:
 		show_progress_on_stderr(logcfg, message);
 		fprintf(logfile, "%s\n", message);
-#ifdef USE_OUTPUT_DEBUG_STRING
-		OutputDebugStringA(message);
-		OutputDebugStringA("\n");
-#endif
+
+		fz_output* dbg = stddbgchannel();
+		if (dbg)
+			fz_write_printf(ctx, dbg, "%s\n", message);
 	}
 }
 
@@ -907,6 +918,11 @@ main(int argc, const char *argv[])
 		fz_set_error_callback(ctx, tst_error_callback, &logcfg);
 		fz_set_warning_callback(ctx, tst_warning_callback, &logcfg);
 		fz_set_info_callback(ctx, tst_info_callback, &logcfg);
+
+#ifdef _WIN32
+		// Get us a debug stream we have a chance of seeing *independently* of stderr.
+		fz_set_stddbg(ctx, fz_stdods(ctx));
+#endif
 
 		mujstest_is_toplevel_ctx = 1;
 	}
