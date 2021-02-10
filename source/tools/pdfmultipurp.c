@@ -12,6 +12,7 @@
 #include "mupdf/pdf.h"
 
 #include "mupdf/helpers/pkcs7-openssl.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -73,6 +74,9 @@ typedef struct
 	struct info *psobj;
 	int psobjs;
 } globals;
+
+static dump_observed_errors(fz_context* ctx, fz_output* out);
+static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open);
 
 static void clearinfo(fz_context *ctx, globals *glo)
 {
@@ -150,8 +154,7 @@ static void write_sep(fz_context* ctx, fz_output* out)
 	{
 	case 0:
 		// start of output: 
-		fz_write_printf(ctx, out, "{\n");
-		json_sep_state = 1;
+		write_level_start(ctx, out, '{');
 		break;
 
 	case 1:
@@ -209,9 +212,109 @@ static void write_item_int(fz_context* ctx, fz_output* out, const char* label, i
 static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, fz_rect* bbox)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": %R",
+	fz_write_printf(ctx, out, "\"%s\": \"%R\"",
 		label,
 		bbox);
+}
+
+// we consider any JSON with more than 1024 levels of object/array "removed from sanity" ;-)
+static char json_stack[1024] = "";
+
+static int write_level_get_level(fz_context* ctx)
+{
+	size_t stack_offset = strlen(json_stack);
+	return (int)stack_offset;
+}
+
+static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open)
+{
+	fz_write_printf(ctx, out, "%c\n",
+		bracket_open);
+
+	size_t stack_offset = strlen(json_stack);
+	if (stack_offset > sizeof(json_stack) - 2)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JSON tracking stack overflow");
+	json_stack[stack_offset++] = (bracket_open == '{' ? '}' : ']');
+	json_stack[stack_offset] = 0;
+
+	// Also (re)set the JSON formatting output state as this call (re)starts another JSON object/array:
+	json_sep_state = 1;
+
+	return (int)stack_offset - 1;
+}
+
+static int write_level_end(fz_context* ctx, fz_output* out, const char bracket_close)
+{
+	size_t stack_offset = strlen(json_stack);
+	if (stack_offset == 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JSON tracking stack underflow");
+	if (json_stack[stack_offset - 1] != bracket_close)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JSON tracking stack: mismatching closing bracket");
+	json_stack[stack_offset - 1] = 0;
+
+	fz_write_printf(ctx, out, "\n%c", bracket_close);
+
+	// Also set the JSON formatting output state as this closes an object, so the next sibling should be preceded by a comma at least:
+	json_sep_state = 2;
+
+	return (int)stack_offset;
+}
+
+static size_t write_level_guarantee_level(fz_context* ctx, fz_output* out, int target_stack_level)
+{
+	size_t stack_offset = strlen(json_stack);
+
+	// see if we need to pop off elements off the stack:
+	if (target_stack_level < stack_offset) {
+		fz_error(ctx, "JSON stack tracking: recovering from unclosed elements. Target level %d < Current Depth %d\n", target_stack_level, stack_offset);
+		fz_write_printf(ctx, out, "\n%s\n", json_stack + target_stack_level);
+		stack_offset = target_stack_level;
+		json_stack[stack_offset] = 0;
+
+		// Also set the JSON formatting output state as this closes an object, so the next sibling should be preceded by a comma at least:
+		json_sep_state = 2;
+	}
+	if (target_stack_level != stack_offset) {
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JSON tracking stack: internal error, corrupted concept of stack position");
+	}
+	return stack_offset;
+}
+
+static int write_level_end_guaranteed(fz_context* ctx, fz_output* out, const char bracket_close, int target_stack_level)
+{
+	size_t stack_offset = strlen(json_stack);
+	if (stack_offset == 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JSON tracking stack underflow");
+
+	// see if we need to pop off elements off the stack:
+	stack_offset = write_level_guarantee_level(ctx, out, target_stack_level + 1);
+
+	if (json_stack[stack_offset - 1] != bracket_close)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JSON tracking stack: mismatching closing bracket");
+	json_stack[stack_offset - 1] = 0;
+
+	fz_write_printf(ctx, out, "\n%c", bracket_close);
+
+	// Also set the JSON formatting output state as this closes an object, so the next sibling should be preceded by a comma at least:
+	json_sep_state = 2;
+
+	return (int)stack_offset - 1;
+}
+
+static int write_item_starter_block(fz_context* ctx, fz_output* out, const char* label, const char bracket_open)
+{
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "\"%s\": ",
+		label);
+
+	return write_level_start(ctx, out, bracket_open);
+}
+
+static void write_item_starter(fz_context* ctx, fz_output* out, const char* label)
+{
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "\"%s\":\n",
+		label);
 }
 
 static void
@@ -222,78 +325,71 @@ showglobalinfo(fz_context* ctx, globals* glo)
 	pdf_document* doc = glo->doc;
 	int version = pdf_version(ctx, doc);
 
-	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "GlobalInfo: {\n");
-	json_sep_state = 1;
+	int json_stack_level = write_item_starter_block(ctx, out, "GlobalInfo", '{');
 
-	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "Version: \"PDF-%d.%d\"", version / 10, version % 10);
-
-	obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
-	if (obj)
+	fz_try(ctx)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "Info:\n");
-		pdf_print_obj_to_json(ctx, out, obj, 0);
-	}
+		write_item_starter(ctx, out, "Version");
+		fz_write_printf(ctx, out, "\"PDF-%d.%d\"", version / 10, version % 10);
 
-	obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
-	if (obj)
-	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "Encryption:\n");
-		pdf_print_obj_to_json(ctx, out, obj, 0);
-	}
+		obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
+		if (obj)
+		{
+			write_item_starter(ctx, out, "Info");
+			pdf_print_obj_to_json(ctx, out, obj, 0);
+		}
 
-	obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Metadata");
-	if (obj)
-	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "Metadata:\n");
-		pdf_print_obj_to_json(ctx, out, obj, 0);
-	}
+		obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
+		if (obj)
+		{
+			write_item_starter(ctx, out, "Encryption");
+			pdf_print_obj_to_json(ctx, out, obj, 0);
+		}
 
-	write_item_int(ctx, out, "Pages", glo->pagecount);
+		obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Metadata");
+		if (obj)
+		{
+			write_item_starter(ctx, out, "Metadata");
+			pdf_print_obj_to_json(ctx, out, obj, 0);
+		}
 
-	fz_document* pdf = (fz_document*)glo->doc;
+		write_item_int(ctx, out, "Pages", glo->pagecount);
 
-	int chaptercount = fz_count_chapters(ctx, pdf);
+		fz_document* pdf = (fz_document*)glo->doc;
 
-	write_item_int(ctx, out, "Chapters", chaptercount);
+		int chaptercount = fz_count_chapters(ctx, pdf);
 
-	if (chaptercount > 1)
-	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "ChapterPages: [\n");
-		json_sep_state = 1;
-	}
-
-	int alt_page_count = 0;
-	for (int i = 0; i < chaptercount; i++)
-	{
-		int count = fz_count_chapter_pages(ctx, pdf, i);
+		write_item_int(ctx, out, "Chapters", chaptercount);
 
 		if (chaptercount > 1)
 		{
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "%d", count);
+			write_item_starter_block(ctx, out, "ChapterPages", '[');
 		}
 
-		alt_page_count += count;
-	}
+		int alt_page_count = 0;
+		for (int i = 0; i < chaptercount; i++)
+		{
+			int count = fz_count_chapter_pages(ctx, pdf, i);
 
-	if (chaptercount > 1)
-	{
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
-	}
+			if (chaptercount > 1)
+			{
+				write_sep(ctx, out);
+				fz_write_printf(ctx, out, "%d", count);
+			}
 
-	if (alt_page_count != glo->pagecount)
-	{
-		fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
-	}
+			alt_page_count += count;
+		}
 
-	{
+		if (chaptercount > 1)
+		{
+			write_level_end(ctx, out, ']');
+		}
+
+		if (alt_page_count != glo->pagecount)
+		{
+			fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
+		}
+
 		/*
 		fz_outline is a tree of the outline of a document (also known
 		as table of contents).
@@ -315,17 +411,11 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		May be NULL if no children exist.
 		*/
 		fz_outline* outlines = NULL;
+		int json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
 
 		fz_try(ctx)
 		{
 			outlines = pdf_load_outline(ctx, doc);
-
-			if (outlines)
-			{
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "DocumentOutline: [\n");
-				json_sep_state = 1;
-			}
 
 			fz_outline* outline_parents[100];
 			int parents_index = 0;
@@ -334,8 +424,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			while (outline)
 			{
 				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "{\n");
-				json_sep_state = 1;
+				write_level_start(ctx, out, '{');
 
 				if (!fz_is_external_link(ctx, outline->uri))
 				{
@@ -343,8 +432,8 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 					write_item(ctx, out, "InternalLink", outline->uri);
 					write_item_int(ctx, out, "TargetPageNumber", target_page);
-					write_sep(ctx, out);
-					fz_write_printf(ctx, out, "TargetCoordinates: { X: %f Y: %f }", outline->x, outline->y);
+					write_item_starter(ctx, out, "TargetCoordinates");
+					fz_write_printf(ctx, out, "{ X: %f Y: %f }", outline->x, outline->y);
 				}
 				else
 				{
@@ -354,7 +443,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 				write_item(ctx, out, "Title", outline->title);
 				write_item_bool(ctx, out, "IsOpen", outline->is_open);
 
-				fz_write_printf(ctx, out, "\n}");
+				write_level_end(ctx, out, '}');
 
 				if (outline->down)
 				{
@@ -364,9 +453,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 						fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: 100 or more!");
 					}
 
-					write_sep(ctx, out);
-					fz_write_printf(ctx, out, "Children: [\n");
-					json_sep_state = 1;
+					write_item_starter_block(ctx, out, "Children", '[');
 
 					outline = outline->down;
 				}
@@ -376,29 +463,31 @@ showglobalinfo(fz_context* ctx, globals* glo)
 				{
 					outline = outline_parents[--parents_index];
 
-					fz_write_printf(ctx, out, "\n]");
-					json_sep_state = 2;
+					write_level_end(ctx, out, ']');
 				}
 			}
 		}
 		fz_always(ctx)
 		{
-			if (outlines)
-			{
-				fz_write_printf(ctx, out, "\n]");
-				json_sep_state = 2;
-			}
+			write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
 
 			fz_drop_outline(ctx, outlines);
 		}
 		fz_catch(ctx)
 		{
-			fz_error(ctx, "Error while processing PDF Outline: %s\n, fz_caught_message(ctx)");
+			fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
 		}
 	}
-
-	fz_write_printf(ctx, out, "\n}");
-	json_sep_state = 2;
+	fz_always(ctx)
+	{
+		write_level_guarantee_level(ctx, out, json_stack_level + 1);
+		dump_observed_errors(ctx, out);
+		write_level_end_guaranteed(ctx, out, '}', json_stack_level);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
 }
 
 
@@ -679,29 +768,25 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 
 	if (num_configs > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "PDFLayerConfigs: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "PDFLayerConfigs", '[');
+
 		for (config = 0; config < num_configs; config++)
 		{
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{");
-			json_sep_state = 1;
+			write_level_start(ctx, out, '{');
 			pdf_layer_config_info(ctx, pdoc, config, &info);
 			write_item(ctx, out, "Name", info.name ? info.name : "");
 			write_item(ctx, out, "Creator", info.creator ? info.creator : "");
-			fz_write_printf(ctx, out, "\n}");
+			write_level_end(ctx, out, '}');
 		}
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+
+		write_level_end(ctx, out, ']');
 	}
 
 	n = pdf_count_layer_config_ui(ctx, pdoc);
 	if (n > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "PDFUILayerConfigs: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "PDFUILayerConfigs", '[');
 
 		for (j = 0; j < n; j++)
 		{
@@ -709,10 +794,9 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 
 			pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{");
-			json_sep_state = 1;
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "Depth: %d", ui.depth);
+			write_level_start(ctx, out, '{');
+			write_item_starter(ctx, out, "Depth");
+			fz_write_printf(ctx, out, "%d", ui.depth);
 
 			switch (ui.type)
 			{
@@ -731,8 +815,8 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 				break;
 
 			default:
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "Type: \"UNKNOWN UI.TYPE:%d\"", (int)ui.type);
+				write_item_starter(ctx, out, "Type");
+				fz_write_printf(ctx, out, "\"UNKNOWN UI.TYPE:%d\"", (int)ui.type);
 				break;
 			}
 
@@ -741,29 +825,31 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 				write_item_bool(ctx, out, "Locked", ui.locked);
 			}
 			write_item(ctx, out, "Text", ui.text ? ui.text : "");
-			fz_write_printf(ctx, out, "}");
+
+			write_level_end(ctx, out, '}');
 		}
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+		write_level_end(ctx, out, ']');
 	}
 }
 
 static void
-gatherresourceinfo(fz_context *ctx, globals *glo, int page, pdf_obj *rsrc)
+gatherresourceinfo(fz_context* ctx, globals* glo, int page, pdf_obj* rsrc)
 {
-	pdf_obj *pageref;
-	pdf_obj *font;
-	pdf_obj *xobj;
-	pdf_obj *subrsrc;
+	pdf_obj* pageref;
+	pdf_obj* font;
+	pdf_obj* xobj;
+	pdf_obj* subrsrc;
 	int i;
 
-	pageref = pdf_lookup_page_obj(ctx, glo->doc, page-1);
+	pageref = pdf_lookup_page_obj(ctx, glo->doc, page - 1);
 	if (!pageref)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot retrieve info from page %d", page);
 
 	/* stop on cyclic resource dependencies */
 	if (pdf_mark_obj(ctx, rsrc))
 		return;
+
+	int json_stack_level = write_level_get_level(ctx);
 
 	fz_try(ctx)
 	{
@@ -776,7 +862,7 @@ gatherresourceinfo(fz_context *ctx, globals *glo, int page, pdf_obj *rsrc)
 			n = pdf_dict_len(ctx, font);
 			for (i = 0; i < n; i++)
 			{
-				pdf_obj *obj = pdf_dict_get_val(ctx, font, i);
+				pdf_obj* obj = pdf_dict_get_val(ctx, font, i);
 
 				subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
 				if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
@@ -790,13 +876,13 @@ gatherresourceinfo(fz_context *ctx, globals *glo, int page, pdf_obj *rsrc)
 			int n;
 
 			gatherimages(ctx, glo, page, pageref, xobj);
-				gatherforms(ctx, glo, page, pageref, xobj);
-				gatherpsobjs(ctx, glo, page, pageref, xobj);
+			gatherforms(ctx, glo, page, pageref, xobj);
+			gatherpsobjs(ctx, glo, page, pageref, xobj);
 
 			n = pdf_dict_len(ctx, xobj);
 			for (i = 0; i < n; i++)
 			{
-				pdf_obj *obj = pdf_dict_get_val(ctx, xobj, i);
+				pdf_obj* obj = pdf_dict_get_val(ctx, xobj, i);
 				subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
 				if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
 					gatherresourceinfo(ctx, glo, page, subrsrc);
@@ -806,9 +892,13 @@ gatherresourceinfo(fz_context *ctx, globals *glo, int page, pdf_obj *rsrc)
 		gatherlayersinfo(ctx, glo);
 	}
 	fz_always(ctx)
+	{
 		pdf_unmark_obj(ctx, rsrc);
+	}
 	fz_catch(ctx)
+	{
 		fz_rethrow(ctx);
+	}
 }
 
 static void
@@ -829,7 +919,7 @@ gatherpageinfo(fz_context *ctx, globals *glo, int page)
 }
 
 static void
-printinfo(fz_context* ctx, globals* glo, int page)
+printinfo(fz_context* ctx, globals* glo)
 {
 	int i;
 	int j;
@@ -837,83 +927,66 @@ printinfo(fz_context* ctx, globals* glo, int page)
 
 	if (glo->dims > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "Mediaboxes: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "Mediaboxes", '[');
 
 		for (i = 0; i < glo->dims; i++)
 		{
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{\n");
-			json_sep_state = 1;
+			write_level_start(ctx, out, '{');
 			write_item_int(ctx, out, "Page", glo->dim[i].page);
 #if 0
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "PageRef:\n");
+			write_item_starter(ctx, out, "PageRef");
 			pdf_print_obj_to_json(ctx, out, glo->dim[i].pageref, 0);
 #endif
 			write_item_bbox(ctx, out, "Bounds", glo->dim[i].u.dim.bbox);
-			fz_write_printf(ctx, out, "\n}");
+			write_level_end(ctx, out, '}');
 		}
 
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+		write_level_end(ctx, out, ']');
 	}
 
 	if (glo->fonts > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "Fonts: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "Fonts", '[');
 
 		for (i = 0; i < glo->fonts; i++)
 		{
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{\n");
-			json_sep_state = 1;
+			write_level_start(ctx, out, '{');
 			write_item_int(ctx, out, "Page", glo->font[i].page);
 #if 0
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "PageRef:\n");
+			write_item_starter(ctx, out, "PageRef");
 			pdf_print_obj_to_json(ctx, out, glo->font[i].pageref, 0);
 #endif
 			write_item(ctx, out, "FontType", pdf_to_name(ctx, glo->font[i].u.font.subtype));
 			write_item(ctx, out, "FontName", pdf_to_name(ctx, glo->font[i].u.font.name));
 			write_item(ctx, out, "FontEncoding", glo->font[i].u.font.encoding ? pdf_to_name(ctx, glo->font[i].u.font.encoding) : "");
 #if 0
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "Font:\n");
+			write_item_starter(ctx, out, "Font");
 			pdf_print_obj_to_json(ctx, out, glo->font[i].u.font.obj, 0);
 #endif
-			fz_write_printf(ctx, out, "\n}");
+			write_level_end(ctx, out, '}');
 		}
 
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+		write_level_end(ctx, out, ']');
 	}
 
 	if (glo->images > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "Images: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "Images", '[');
 
 		for (i = 0; i < glo->images; i++)
 		{
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{\n");
-			json_sep_state = 1;
+			write_level_start(ctx, out, '{');
 			write_item_int(ctx, out, "Page", glo->image[i].page);
 #if 0
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "PageRef:\n");
+			write_item_starter(ctx, out, "PageRef");
 			pdf_print_obj_to_json(ctx, out, glo->image[i].pageref, 0);
 #endif
 			if (pdf_is_array(ctx, glo->image[i].u.image.filter))
 			{
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "ImageFilters: [\n");
-				json_sep_state = 1;
+				write_item_starter_block(ctx, out, "ImageFilters", '[');
 
 				int n = pdf_array_len(ctx, glo->image[i].u.image.filter);
 				for (j = 0; j < n; j++)
@@ -925,14 +998,12 @@ printinfo(fz_context* ctx, globals* glo, int page)
 						*(strstr(filter, "Decode")) = '\0';
 
 					write_sep(ctx, out);
-					fz_write_printf(ctx, out, "{\n");
-					json_sep_state = 1;
+					write_level_start(ctx, out, '{');
 					write_item(ctx, out, "Filter", filter);
 					fz_free(ctx, filter);
-					fz_write_printf(ctx, out, "\n}");
+					write_level_end(ctx, out, '}');
 				}
-				fz_write_printf(ctx, out, "\n]");
-				json_sep_state = 2;
+				write_level_end(ctx, out, ']');
 			}
 			else if (glo->image[i].u.image.filter)
 			{
@@ -942,12 +1013,10 @@ printinfo(fz_context* ctx, globals* glo, int page)
 				if (strstr(filter, "Decode"))
 					*(strstr(filter, "Decode")) = '\0';
 
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "ImageFilter: {\n");
-				json_sep_state = 1;
+				write_item_starter_block(ctx, out, "ImageFilter", '{');
 				write_item(ctx, out, "Filter", filter);
 				fz_free(ctx, filter);
-				fz_write_printf(ctx, out, "\n}");
+				write_level_end(ctx, out, '}');
 			}
 			else
 			{
@@ -998,88 +1067,74 @@ printinfo(fz_context* ctx, globals* glo, int page)
 
 			write_item_int(ctx, out, "ImageWidth", pdf_to_int(ctx, glo->image[i].u.image.width));
 			write_item_int(ctx, out, "ImageHeight", pdf_to_int(ctx, glo->image[i].u.image.height));
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "ImageDimensions: %dx%d",
+			write_item_starter(ctx, out, "ImageDimensions");
+			fz_write_printf(ctx, out, "\"%dx%d\"",
 				pdf_to_int(ctx, glo->image[i].u.image.width),
 				pdf_to_int(ctx, glo->image[i].u.image.height));
 			write_item_int(ctx, out, "ImageBPC", glo->image[i].u.image.bpc ? pdf_to_int(ctx, glo->image[i].u.image.bpc) : 1);
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "ImageCS: %s%s%s",
-				glo->image[i].u.image.cs ? cs : "ImageMask",
+			write_item_starter(ctx, out, "ImageCS");
+			fz_write_printf(ctx, out, "\"%s%s%s\"",
+						glo->image[i].u.image.cs ? cs : "ImageMask",
 				glo->image[i].u.image.altcs ? " " : "",
 				glo->image[i].u.image.altcs ? altcs : "");
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "Image:\n");
+			write_item_starter(ctx, out, "Image");
 			pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, 0);
 
 			fz_free(ctx, cs);
 			fz_free(ctx, altcs);
 
-			fz_write_printf(ctx, out, "\n}");
+			write_level_end(ctx, out, '}');
 		}
 
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+		write_level_end(ctx, out, ']');
 	}
 
 	if (glo->forms > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "FormXObjects: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "FormXObjects", '[');
 
 		for (i = 0; i < glo->forms; i++)
 		{
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{\n");
-			json_sep_state = 1;
+			write_level_start(ctx, out, '{');
 			write_item_int(ctx, out, "Page", glo->form[i].page);
 #if 0
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "PageRef:\n");
+			write_item_starter(ctx, out, "PageRef");
 			pdf_print_obj_to_json(ctx, out, glo->form[i].pageref, 0);
 #endif
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "FormType: \"Form%s%s%s%s\"",
-				glo->form[i].u.form.groupsubtype ? " " : "",
+			write_item_starter(ctx, out, "FormType");
+			fz_write_printf(ctx, out, "\"Form%s%s%s%s\"",
+						glo->form[i].u.form.groupsubtype ? " " : "",
 				glo->form[i].u.form.groupsubtype ? pdf_to_name(ctx, glo->form[i].u.form.groupsubtype) : "",
 				glo->form[i].u.form.groupsubtype ? " Group" : "",
 				glo->form[i].u.form.reference ? " Reference" : "");
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "Form:\n");
+			write_item_starter(ctx, out, "Form");
 			pdf_print_obj_to_json(ctx, out, glo->form[i].u.form.obj, 0);
-			fz_write_printf(ctx, out, "\n}");
+			write_level_end(ctx, out, '}');
 		}
 
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+		write_level_end(ctx, out, ']');
 	}
 
 	if (glo->psobjs > 0)
 	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "PostscriptXObjects: [\n");
-		json_sep_state = 1;
+		write_item_starter_block(ctx, out, "PostscriptXObjects", '[');
 
 		for (i = 0; i < glo->psobjs; i++)
 		{
 			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{\n");
-			json_sep_state = 1;
+			write_level_start(ctx, out, '{');
 			write_item_int(ctx, out, "Page", glo->psobj[i].page);
 #if 0
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "PageRef:\n");
+			write_item_starter(ctx, out, "PageRef");
 			pdf_print_obj_to_json(ctx, out, glo->psobj[i].pageref, 0);
 #endif
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "Form:\n");
+			write_item_starter(ctx, out, "Form");
 			pdf_print_obj_to_json(ctx, out, glo->psobj[i].u.form.obj, 0);
-			fz_write_printf(ctx, out, "\n}");
+			write_level_end(ctx, out, '}');
 		}
 
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
+		write_level_end(ctx, out, ']');
 	}
 }
 
@@ -1091,6 +1146,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 	fz_document* pdf = (fz_document*)glo->doc;
 	pdf_page* page_obj = NULL;
 	fz_page* page_ref = (fz_page*)page_obj;
+	int json_stack_level = write_level_get_level(ctx);
 
 	fz_try(ctx)
 	{
@@ -1111,9 +1167,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 
 			if (n > 0)
 			{
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "Annotations: [\n");
-				json_sep_state = 1;
+				write_item_starter_block(ctx, out, "Annotations", '[');
 			}
 
 			int idx;
@@ -1122,8 +1176,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 				char buf[1024];
 
 				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "{\n");
-				json_sep_state = 1;
+				write_level_start(ctx, out, '{');
 
 				int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
 				enum pdf_annot_type subtype = pdf_annot_type(ctx, annot);
@@ -1329,8 +1382,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 					pdf_obj* obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(Popup));
 					if (obj)
 					{
-						write_sep(ctx, out);
-						fz_write_printf(ctx, out, "Popup:\n");
+						write_item_starter(ctx, out, "Popup");
 						pdf_print_obj_to_json(ctx, out, obj, 0);
 					}
 				}
@@ -1376,13 +1428,12 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 					break;
 				}
 
-				fz_write_printf(ctx, out, "\n}");
+				write_level_end(ctx, out, '}');
 			}
 
 			if (n > 0)
 			{
-				fz_write_printf(ctx, out, "\n]");
-				json_sep_state = 2;
+				write_level_end(ctx, out, ']');
 			}
 		}
 
@@ -1409,17 +1460,16 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 		{
 			//pdf_page* page_obj = NULL;
 			fz_link* links = NULL;
+			int json_stack_outlines_level = -1;
 
 			fz_try(ctx)
 			{
-				//page_obj = pdf_load_page(ctx, doc, page);
+				//page_obj = pdf_load_page(ctx, doc, page - 1);
 				links = fz_load_links(ctx, page_ref);
 
 				if (links)
 				{
-					write_sep(ctx, out);
-					fz_write_printf(ctx, out, "LinksInPage: [\n");
-					json_sep_state = 1;
+					json_stack_outlines_level = write_item_starter_block(ctx, out, "LinksInPage", '[');
 				}
 
 				fz_rect bounds;
@@ -1429,8 +1479,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 				while (link)
 				{
 					write_sep(ctx, out);
-					fz_write_printf(ctx, out, "{\n");
-					json_sep_state = 1;
+					write_level_start(ctx, out, '{');
 
 					bounds = link->rect;
 					bounds = fz_transform_rect(bounds, ctm);
@@ -1451,11 +1500,11 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 						}
 						else
 						{
-							write_sep(ctx, out);
-							fz_write_printf(ctx, out, "TargetError: \"(Chapter: %d, Chapter Page: %d)\"", loc.chapter, loc.page);
+							write_item_starter(ctx, out, "TargetError");
+							fz_write_printf(ctx, out, "\"(Chapter: %d, Chapter Page: %d)\"", loc.chapter, loc.page);
 						}
-						write_sep(ctx, out);
-						fz_write_printf(ctx, out, "TargetCoordinates: { X: %f Y: %f }", link_x, link_y);
+						write_item_starter(ctx, out, "TargetCoordinates");
+						fz_write_printf(ctx, out, "{ X: %f Y: %f }", link_x, link_y);
 						write_item_bbox(ctx, out, "LinkBounds", &bounds);
 					}
 					else
@@ -1464,19 +1513,18 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 						write_item(ctx, out, "Url:", link->uri);
 						write_item_bbox(ctx, out, "LinkBounds", &bounds);
 					}
-					fz_write_printf(ctx, out, "\n}");
+					write_level_end(ctx, out, '}');
 
 					link = link->next;
-				}
-
-				if (links)
-				{
-					fz_write_printf(ctx, out, "\n]");
-					json_sep_state = 2;
 				}
 			}
 			fz_always(ctx)
 			{
+				if (links)
+				{
+					write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
+				}
+
 				fz_drop_link(ctx, links);
 				//fz_drop_page(ctx, page_obj);
 			}
@@ -1494,6 +1542,8 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 	{
 		fz_error(ctx, "Error while loading/processing page %d\n", page);
 	}
+
+	write_level_guarantee_level(ctx, out, json_stack_level);
 }
 
 
@@ -1558,9 +1608,7 @@ printtail(fz_context* ctx, globals* glo)
 	pdf_document* doc = glo->doc;
 	fz_document* pdf = (fz_document*)doc;
 
-	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "DocumentGeneralInfo: {\n");
-	json_sep_state = 1;
+	write_item_starter_block(ctx, out, "DocumentGeneralInfo", '{');
 
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_TITLE, buf, sizeof buf) > 0)
 		write_item(ctx, out, "Title", buf);
@@ -1591,8 +1639,7 @@ printtail(fz_context* ctx, globals* glo)
 
 		if (info)
 		{
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "MetaInfoDictionary:\n");
+			write_item_starter(ctx, out, "MetaInfoDictionary");
 			pdf_print_obj_to_json(ctx, out, pdf_resolve_indirect_chain(ctx, info), 0);
 		}
 	}
@@ -1612,8 +1659,8 @@ printtail(fz_context* ctx, globals* glo)
 		fz_strlcat(buf, "none", sizeof buf);
 	write_item(ctx, out, "Permissions", buf);
 
-	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "Status: \"PDF %sdocument with %d update%s.\"",
+	write_item_starter(ctx, out, "Status");
+	fz_write_printf(ctx, out, "\"PDF %sdocument with %d update%s.\"",
 		pdf_doc_was_linearized(ctx, doc) ? "linearized " : "",
 		updates, updates > 1 ? "s" : "");
 	write_item_bool(ctx, out, "DocWasLinearized", pdf_doc_was_linearized(ctx, doc));
@@ -1645,30 +1692,29 @@ printtail(fz_context* ctx, globals* glo)
 
 		if (list.len)
 		{
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "FormFieldSignatures: [\n");
-			json_sep_state = 1;
+			write_item_starter_block(ctx, out, "FormFieldSignatures", '[');
 
 			int i;
 			for (i = 0; i < list.len; i++)
 			{
 				pdf_obj* field = list.sig[i];
+				int json_stack_sig_level = -1;
+
 				fz_try(ctx)
 				{
+					write_sep(ctx, out);
+					json_stack_sig_level = write_level_start(ctx, out, '{');
+
 					if (pdf_signature_is_signed(ctx, doc, field))
 					{
 						pdf_pkcs7_verifier* verifier = pkcs7_openssl_new_verifier(ctx);
 						pdf_signature_error sig_cert_error = pdf_check_certificate(ctx, verifier, doc, field);
 						pdf_signature_error sig_digest_error = pdf_check_digest(ctx, verifier, doc, field);
 
-						write_sep(ctx, out);
-						fz_write_printf(ctx, out, "{\n");
-						json_sep_state = 1;
-
 						write_item(ctx, out, "Type", "Signed");
 						write_item(ctx, out, "CERT", short_signature_error_desc(sig_cert_error));
-						write_sep(ctx, out);
-						fz_write_printf(ctx, out, "DIGEST: \"%s%s\"",
+						write_item_starter(ctx, out, "DIGEST");
+						fz_write_printf(ctx, out, "\"%s%s\"",
 							short_signature_error_desc(sig_digest_error),
 							pdf_signature_incremental_change_since_signing(ctx, doc, field) ? ", Changed since" : "");
 
@@ -1681,15 +1727,14 @@ printtail(fz_context* ctx, globals* glo)
 				}
 				fz_catch(ctx)
 				{
+					write_level_guarantee_level(ctx, out, json_stack_sig_level + 1);
 					write_item(ctx, out, "Type", "Error");
-					write_sep(ctx, out);
-					fz_write_printf(ctx, out, "Error: \"%s\"", fz_caught_message(ctx));
+					write_item(ctx, out, "SignatureError", fz_caught_message(ctx));
 				}
-				fz_write_printf(ctx, out, "\n}");
+				write_level_end_guaranteed(ctx, out, '}', json_stack_sig_level);
 			}
 
-			fz_write_printf(ctx, out, "\n]");
-			json_sep_state = 2;
+			write_level_end(ctx, out, ']');
 
 			fz_free(ctx, list.sig);
 		}
@@ -1716,18 +1761,16 @@ printtail(fz_context* ctx, globals* glo)
 	write_item_bool(ctx, out, "WasRepaired", pdf_was_repaired(ctx, glo->doc));
 	write_item_bool(ctx, out, "NeedsPassword", pdf_needs_password(ctx, glo->doc));
 
-	fz_write_printf(ctx, out, "\n}");
-	json_sep_state = 2;
+	write_level_end(ctx, out, '}');
 }
 
 static void
-showinfo(fz_context *ctx, globals *glo, const char *pagelist)
+showinfo(fz_context* ctx, globals* glo, const char* pagelist, const char **first_important_error)
 {
 	int page, spage, epage;
-	int allpages;
 	int pagecount;
-	fz_output *out = glo->out;
-	fz_document* pdf = (fz_document * )glo->doc;
+	fz_output* out = glo->out;
+	fz_document* pdf = (fz_document*)glo->doc;
 
 	if (!glo->doc)
 	{
@@ -1735,112 +1778,199 @@ showinfo(fz_context *ctx, globals *glo, const char *pagelist)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "No document specified: cannot show info without document");
 	}
 
-	allpages = !strcmp(pagelist, "1-N");
+	int allpages = !strcmp(pagelist, "1-N");
 
 	write_item(ctx, out, "InfoMode", allpages ? "AllPages" : "PageRange");
 
 	pagecount = pdf_count_pages(ctx, glo->doc);
 
-	if (!allpages)
-	{
-		write_sep(ctx, out);
-		fz_write_printf(ctx, out, "PageSeries: [\n");
-		json_sep_state = 1;
-	}
+	int json_stack_series_level = write_item_starter_block(ctx, out, "PageSeries", '[');
 
 	while ((pagelist = fz_parse_page_range(ctx, pagelist, &spage, &epage, pagecount)))
 	{
 		fz_info(ctx, "Retrieving info from pages %d-%d...\n", spage, epage);
 
-		if (!allpages)
-		{
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "{\n");
-			json_sep_state = 1;
-			write_item_int(ctx, out, "FirstPage", spage);
-			write_item_int(ctx, out, "LastPage", epage);
-			write_sep(ctx, out);
-			fz_write_printf(ctx, out, "Info: [\n");
-			json_sep_state = 1;
-		}
+		write_sep(ctx, out);
+		int json_stack_page_level = write_level_start(ctx, out, '{');
+
+		write_item_int(ctx, out, "FirstPage", spage);
+		write_item_int(ctx, out, "LastPage", epage);
+		write_item_starter_block(ctx, out, "Info", '[');
 
 		for (page = spage; page <= epage; page++)
 		{
-			gatherpageinfo(ctx, glo, page);
+			int json_stack_level = -1;
 
-			if (!allpages)
+			fz_try(ctx)
 			{
 				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "{\n");
-				json_sep_state = 1;
+				json_stack_level = write_level_start(ctx, out, '{');
 
 				write_item_int(ctx, out, "PageNumber", page);
 
-				printinfo(ctx, glo, page);
-				fz_write_printf(ctx, out, "\n");
-				clearinfo(ctx, glo);
+				gatherpageinfo(ctx, glo, page);
 
-				fz_write_printf(ctx, out, "\n}");
+				printinfo(ctx, glo);
+				printadvancedinfo(ctx, glo, page);
 			}
+			fz_always(ctx)
+			{
+				clearinfo(ctx, glo);
+			}
+			fz_catch(ctx)
+			{
+				write_level_guarantee_level(ctx, out, json_stack_level + 1);
+
+				write_item(ctx, out, "PageError", fz_caught_message(ctx));
+				if (*first_important_error == NULL) {
+					*first_important_error = fz_strdup(ctx, fz_caught_message(ctx));
+				}
+			}
+
+			write_level_guarantee_level(ctx, out, json_stack_level + 1);
+			dump_observed_errors(ctx, out);
+			write_level_end_guaranteed(ctx, out, '}', json_stack_level);
 		}
 
-		if (!allpages)
-		{
-			fz_write_printf(ctx, out, "\n]");
-			fz_write_printf(ctx, out, "\n}");
-			json_sep_state = 2;
-		}
+		write_level_end(ctx, out, ']');
+		write_level_end_guaranteed(ctx, out, '}', json_stack_page_level);
 	}
 
-	if (!allpages)
-	{
-		fz_write_printf(ctx, out, "\n]");
-		json_sep_state = 2;
-	}
-
-
-	if (allpages)
-	{
-		printinfo(ctx, glo, -1);
-	}
+	write_level_end_guaranteed(ctx, out, ']', json_stack_series_level);
 
 	printtail(ctx, glo);
 }
 
-static void
+static fz_error_print_callback* orig_error_print = NULL;
+static fz_error_print_callback* orig_warn_print = NULL;
+
+static struct logbuffer {
+	size_t fill;		// offset where next message is to be appended to the logbuffer.
+	char buf[10240];
+	int overflow;
+} logbuffer = { 0 };
+
+static void do_buffer_log_output(const char* message)
+{
+	const char overflow_mark[] = "[...continued...]";
+
+	size_t len = strlen(message);
+	if (logbuffer.overflow == 0)
+	{
+		if (len + 1 + sizeof(overflow_mark) < sizeof(logbuffer.buf) - logbuffer.fill)
+		{
+			memcpy(logbuffer.buf + logbuffer.fill, message, len);
+			logbuffer.fill += len;
+			logbuffer.buf[logbuffer.fill++] = '\n';
+			logbuffer.buf[logbuffer.fill] = 0;
+		}
+		else
+		{
+			logbuffer.overflow = 1;
+			strcpy(logbuffer.buf + logbuffer.fill, overflow_mark);  // guaranteed safe: there always space left for this one!
+		}
+	}
+}
+
+static void error_print_callback(void* user, const char* message)
+{
+	do_buffer_log_output(message);
+
+	if (orig_error_print)
+		orig_error_print(user, message);
+}
+
+static void warn_print_callback(void* user, const char* message)
+{
+	do_buffer_log_output(message);
+
+	if (orig_warn_print)
+		orig_warn_print(user, message);
+}
+
+static clear_observed_errors_logbuffers(fz_context* ctx)
+{
+	// make sure all warnings are flushed to output too so we clean it all...
+	fz_flush_warnings(ctx);
+
+	// reset buffer:
+	logbuffer.fill = 0;
+	logbuffer.overflow = 0;
+}
+
+// echo the fz_error and fz_warn output for this file/section into the output JSON for further analysis by the caller.
+static dump_observed_errors(fz_context* ctx, fz_output* out)
+{
+	// make sure all warnings are flushed to output before we grab the logbuffer and dump it...
+	fz_flush_warnings(ctx);
+
+	if (logbuffer.fill)
+	{
+		write_item_starter_block(ctx, out, "GatheredErrors", '{');
+		write_item(ctx, out, "Log", logbuffer.buf);
+		write_item_bool(ctx, out, "LogOverflow", logbuffer.overflow);
+		write_level_end(ctx, out, '}');
+	}
+	clear_observed_errors_logbuffers(ctx);
+}
+
+static int
 pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* argv[], int argc)
 {
 	enum { NO_FILE_OPENED, NO_INFO_GATHERED, INFO_SHOWN } state;
 	int argidx = 0;
 	globals glo = { 0 };
+	const char* ex = NULL;
+	int ret = EXIT_SUCCESS;
 
 	glo.out = out;
 	glo.ctx = ctx;
 
-	fz_write_printf(ctx, out, "[\n");
-	json_sep_state = 1;
+	int json_stack_file_level = -1;
+	int json_stack_outermost_level = write_level_start(ctx, out, '[');
 
 	state = NO_FILE_OPENED;
 
 	fz_try(ctx)
 	{
+
 		while (argidx < argc)
 		{
 			if (state == NO_FILE_OPENED || !fz_is_page_range(ctx, argv[argidx]))
 			{
 				if (state == NO_INFO_GATHERED)
 				{
-					showinfo(ctx, &glo, "1-N");
+					write_sep(ctx, out);
+					int json_stack_chunk_level = write_level_start(ctx, out, '{');
+
+					showinfo(ctx, &glo, "1-N", &ex);
+
+					write_level_guarantee_level(ctx, out, json_stack_chunk_level + 1);
+					dump_observed_errors(ctx, out);
+
+					write_level_end_guaranteed(ctx, out, '}', json_stack_chunk_level);
 				}
 
 				closexref(ctx, &glo);
 
 				if (state != NO_FILE_OPENED)
 				{
-					fz_write_printf(ctx, out, "\n}");
+					write_level_end_guaranteed(ctx, out, ']', json_stack_file_level + 1);  // PageSeries
+					dump_observed_errors(ctx, out);
+
+					write_level_end_guaranteed(ctx, out, '}', json_stack_file_level);
 				}
 
+				// starting analysis of another PDF: just to be on the safe side,
+				// clear any left-over buffered error reports from a previous one:
+				clear_observed_errors_logbuffers(ctx);
+
 				const char* filename = argv[argidx];
+
+				write_sep(ctx, out);
+				json_stack_file_level = write_level_start(ctx, out, '{');
+
+				write_item(ctx, out, "DocumentFilePath", filename);
 
 				glo.doc = pdf_open_document(glo.ctx, filename);
 				if (pdf_needs_password(ctx, glo.doc))
@@ -1852,26 +1982,24 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 				}
 				glo.pagecount = pdf_count_pages(ctx, glo.doc);
 
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "{\n");
-				json_sep_state = 1;
-
-				write_item(ctx, out, "DocumentFilePath", filename);
-
 				showglobalinfo(ctx, &glo);
+
+				write_item_starter_block(ctx, out, "PageSeries", '[');
 
 				state = NO_INFO_GATHERED;
 			}
 			else
 			{
 				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "{\n");
-				json_sep_state = 1;
+				int json_stack_chunk_level = write_level_start(ctx, out, '{');
 
-				showinfo(ctx, &glo, argv[argidx]);
+				showinfo(ctx, &glo, argv[argidx], &ex);
 				state = INFO_SHOWN;
 
-				fz_write_printf(ctx, out, "\n}");
+				write_level_guarantee_level(ctx, out, json_stack_chunk_level + 1);
+				dump_observed_errors(ctx, out);
+
+				write_level_end_guaranteed(ctx, out, '}', json_stack_chunk_level);
 			}
 
 			argidx++;
@@ -1879,21 +2007,61 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 
 		if (state == NO_INFO_GATHERED)
 		{
-			showinfo(ctx, &glo, "1-N");
+			write_sep(ctx, out);
+			int json_stack_chunk_level = write_level_start(ctx, out, '{');
+
+			showinfo(ctx, &glo, "1-N", &ex);
+
+			write_level_guarantee_level(ctx, out, json_stack_chunk_level + 1);
+			dump_observed_errors(ctx, out);
+
+			write_level_end_guaranteed(ctx, out, '}', json_stack_chunk_level);
 		}
 	}
 	fz_always(ctx)
-		closexref(ctx, &glo);
-	fz_catch(ctx)
-		fz_rethrow(ctx);
-
-	if (state != NO_FILE_OPENED)
 	{
-		fz_write_printf(ctx, out, "\n}");
+		closexref(ctx, &glo);
+
+		if (state != NO_FILE_OPENED)
+		{
+			write_level_end_guaranteed(ctx, out, ']', json_stack_file_level + 1);  // PageSeries
+			dump_observed_errors(ctx, out);
+
+			write_level_end_guaranteed(ctx, out, '}', json_stack_file_level);
+		}
+
+		if (ex)
+			ret = EXIT_FAILURE;
+	}
+	fz_catch(ctx)
+	{
+		// exceptions landing here have prevalence over page errors:
+		fz_free(ctx, ex);
+		ex = fz_strdup(ctx, fz_caught_message(ctx));
+		ret = EXIT_FAILURE;
 	}
 
-	fz_write_printf(ctx, out, "\n]\n");
+	// Now unwind the JSON stack, no matter how deep the errors came from:
+	// when possible, dump the error infos in the last document record,
+	// otherwise append an additional general error info record to the end
+	// of the list.
+	write_level_guarantee_level(ctx, out, json_stack_outermost_level + 1);
+
+	// So now we must be at the outer array level: add an extra info record when there's any buffered error log pending.
+	if (logbuffer.fill || ex)
+	{
+		write_sep(ctx, out);
+		write_level_start(ctx, out, '{');
+		write_item(ctx, out, "Type", "TerminalFailureInfo");
+		write_item(ctx, out, "FailureMessage", ex);
+		dump_observed_errors(ctx, out);
+		write_level_end(ctx, out, '}');
+	}
+
+	write_level_end_guaranteed(ctx, out, ']', json_stack_outermost_level);
+
 	// Done!
+	return ret;
 }
 
 int pdfmultipurp_main(int argc, const char **argv)
@@ -1943,6 +2111,17 @@ int pdfmultipurp_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	// keep the original error + warn callbacks and replace them with ones, which collect the log data
+	// in a buffer, to be appended at the end of the metadata file.
+	{
+		void* userdata;
+		fz_get_error_callback(ctx, &orig_error_print, &userdata);
+		fz_set_error_callback(ctx, error_print_callback, userdata);
+
+		fz_get_warning_callback(ctx, &orig_warn_print, &userdata);
+		fz_set_warning_callback(ctx, warn_print_callback, userdata);
+	}
+
 	ret = EXIT_SUCCESS;
 	fz_try(ctx)
 	{
@@ -1960,23 +2139,30 @@ int pdfmultipurp_main(int argc, const char **argv)
 			out = fz_new_output_with_path(ctx, fbuf, 0);
 		}
 
-		pdfinfo_info(ctx, out, password, &argv[fz_optind], argc - fz_optind);
+		// reset the JSON object/array delimiters tracking stack:
+		json_stack[0] = 0;
+
+		ret = pdfinfo_info(ctx, out, password, &argv[fz_optind], argc - fz_optind);
 	}
 	fz_catch(ctx)
 	{
-		// when the data isn't dumped to stdout, echo the fatal error to the output file:
-		if (output && out)
-		{
-			fz_write_printf(ctx, out, "\n\n\n==========================================================\n!Fatal Error: %s\n\n", fz_caught_message(ctx));
-		}
-		fz_error(ctx, "%s", fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
 	}
 
-	fz_flush_output(ctx, out);
+	// restore the original error + warn callbacks.
+	{
+		void* userdata;
+		fz_error_print_callback* dummy;
+		fz_get_error_callback(ctx, &dummy, &userdata);
+		fz_set_error_callback(ctx, orig_error_print, userdata);
+
+		fz_get_warning_callback(ctx, &dummy, &userdata);
+		fz_set_warning_callback(ctx, orig_warn_print, userdata);
+	}
+
+	// Append 
 	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
-	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return ret;
 }
