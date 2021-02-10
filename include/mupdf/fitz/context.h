@@ -284,12 +284,20 @@ void fz_default_info_callback(void* user, const char* message);
 void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info);
 
 /**
+ * The protoype of the error/warning/info callback.
+ */
+typedef void fz_error_print_callback(void* user, const char* message);
+
+/**
 	Set the error callback. This will be called as part of the
 	exception handling.
 
 	The callback must not throw exceptions!
+
+	Returns the previously set error callback.
 */
-void fz_set_error_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
+void fz_set_error_callback(fz_context *ctx, fz_error_print_callback* print, void *user);
+void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
 /**
 	Set the warning callback. This will be called as part of the
@@ -297,14 +305,16 @@ void fz_set_error_callback(fz_context *ctx, void (*print)(void *user, const char
 
 	The callback must not throw exceptions!
 */
-void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
+void fz_set_warning_callback(fz_context *ctx, fz_error_print_callback* print, void *user);
+void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
 /**
 	Set the info callback. This will be called by any invocation of fz_info() et al.
 
 	The callback must not throw exceptions!
 */
-void fz_set_info_callback(fz_context* ctx, void (*print)(void* user, const char* message), void* user);
+void fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void* user);
+void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
 /**
 	In order to tune MuPDF's behaviour, certain functions can
