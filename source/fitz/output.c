@@ -83,12 +83,21 @@ fz_output *fz_stderr(fz_context *ctx)
 static void
 stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
-	char *buf = fz_malloc(ctx, count+1);
+	// Assume that the heap MAY be corrupted when we call into here.
+	// Such last effort error messages will invariably be short-ish.
+	// Besides, using a bit of stack for smaller messages reduces heap alloc+free
+	// call overhead.
+	char stkbuf[512];
+	char* buf = stkbuf;
+	if (count > sizeof(stkbuf) - 1)
+		buf = fz_malloc(ctx, count+1);
 
 	memcpy(buf, buffer, count);
 	buf[count] = 0;
 	OutputDebugStringA(buf);
-	fz_free(ctx, buf);
+
+	if (buf != stkbuf)
+		fz_free(ctx, buf);
 }
 
 static fz_output fz_stdods_global = {
