@@ -325,7 +325,7 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 				// jump to end if no file extension found
 				if (!p)
 					p = s + strlen(s);
-				l = s - p;
+				l = p - s;
 				if (l >= w)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
 				if (l > 0)
