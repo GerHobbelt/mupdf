@@ -3152,7 +3152,6 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 		return;
 	}
 
-
 	int mode = fmt_test_str_to_json(ctx, s, n);
 
 	switch (mode)
@@ -3254,7 +3253,7 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 		// Oh, do we have a "key string being output" override here?
 		if (!(fmt->ascii & 0x02)) {
 			// Nope. Output JSON object with HEX + RAW
-			fmt_puts(ctx, fmt, "{ HEX: \"");
+			fmt_puts(ctx, fmt, "{ \"HEX\": \"");
 			if (prefix_char)
 			{
 				fmt_putc(ctx, fmt, hex_lut[(prefix_char >> 4) & 0xF]);
@@ -3263,7 +3262,7 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 					fmt_putc(ctx, fmt, ' ');
 			}
 			fmt_hex_out_bytespaced(ctx, fmt, s, n);
-			fmt_puts(ctx, fmt, "\",\n  RAW: \"");
+			fmt_puts(ctx, fmt, "\",\n  \"RAW\": \"");
 		}
 		else {
 			fmt_putc(ctx, fmt, '"');
@@ -3395,23 +3394,32 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 	n = pdf_array_len(ctx, obj);
 	fmt_putc(ctx, fmt, '[');
+	int old_indent = fmt->indent;
 	fmt->indent++;
-	for (i = 0; i < n; i++) {
-		if (i != 0)
-			fmt_putc(ctx, fmt, ',');
-		if (fmt->col > 60) {
-			fmt_putc(ctx, fmt, '\n');
-			fmt_indent(ctx, fmt);
+	fz_try(ctx)
+	{
+		for (i = 0; i < n; i++) {
+			if (i != 0)
+				fmt_putc(ctx, fmt, ',');
+			if (fmt->col > 60) {
+				fmt_putc(ctx, fmt, '\n');
+				fmt_indent(ctx, fmt);
+			}
+			else {
+				fmt_putc(ctx, fmt, ' ');
+			}
+			fmt_obj_to_json(ctx, fmt, pdf_array_get(ctx, obj, i));
 		}
-		else {
-			fmt_putc(ctx, fmt, ' ');
-		}
-		fmt_obj_to_json(ctx, fmt, pdf_array_get(ctx, obj, i));
 	}
-	fmt->indent--;
-	fmt_putc(ctx, fmt, ' ');
-	fmt_putc(ctx, fmt, ']');
-	fmt_sep(ctx, fmt);
+	fz_always(ctx)
+	{
+		fmt->indent = old_indent;
+		fmt_putc(ctx, fmt, ' ');
+		fmt_putc(ctx, fmt, ']');
+		fmt_sep(ctx, fmt);
+	}
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
@@ -3421,43 +3429,52 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 	n = pdf_dict_len(ctx, obj);
 	fmt_puts(ctx, fmt, "{\n");
+	int old_indent = fmt->indent;
 	fmt->indent++;
-	for (i = 0; i < n; i++) {
-		key = pdf_dict_get_key(ctx, obj, i);
-		val = pdf_dict_get_val(ctx, obj, i);
-		fmt_indent(ctx, fmt);
-		// make sure "less than sane" keys are printed as STRING any way!
-		int old_flags = fmt->ascii;
-		fmt->ascii |= 0x02;
-		fmt_obj_to_json(ctx, fmt, key);
-		fmt->ascii = old_flags;
-		fmt_puts(ctx, fmt, ": ");
-		if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
-			fmt->indent++;
-		if (key == PDF_NAME(Contents) && is_signature(ctx, obj))
-		{
-			pdf_crypt* crypt = fmt->crypt;
-			fz_try(ctx)
+	fz_try(ctx)
+	{
+		for (i = 0; i < n; i++) {
+			key = pdf_dict_get_key(ctx, obj, i);
+			val = pdf_dict_get_val(ctx, obj, i);
+			fmt_indent(ctx, fmt);
+			// make sure "less than sane" keys are printed as STRING any way!
+			int old_flags = fmt->ascii;
+			fmt->ascii |= 0x02;
+			fmt_obj_to_json(ctx, fmt, key);
+			fmt->ascii = old_flags;
+			fmt_puts(ctx, fmt, ": ");
+			if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
+				fmt->indent++;
+			if (key == PDF_NAME(Contents) && is_signature(ctx, obj))
 			{
-				fmt->crypt = NULL;
-				fmt_obj_to_json(ctx, fmt, val);
+				pdf_crypt* crypt = fmt->crypt;
+				fz_try(ctx)
+				{
+					fmt->crypt = NULL;
+					fmt_obj_to_json(ctx, fmt, val);
+				}
+				fz_always(ctx)
+					fmt->crypt = crypt;
+				fz_catch(ctx)
+					fz_rethrow(ctx);
 			}
-			fz_always(ctx)
-				fmt->crypt = crypt;
-			fz_catch(ctx)
-				fz_rethrow(ctx);
+			else
+				fmt_obj_to_json(ctx, fmt, val);
+			if (i + 1 != n)
+				fmt_putc(ctx, fmt, ',');
+			fmt_putc(ctx, fmt, '\n');
+			if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
+				fmt->indent--;
 		}
-		else
-			fmt_obj_to_json(ctx, fmt, val);
-		if (i + 1 != n)
-			fmt_putc(ctx, fmt, ',');
-		fmt_putc(ctx, fmt, '\n');
-		if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
-			fmt->indent--;
 	}
-	fmt->indent--;
-	fmt_indent(ctx, fmt);
-	fmt_puts(ctx, fmt, "}");
+	fz_always(ctx)
+	{
+		fmt->indent = old_indent;
+		fmt_indent(ctx, fmt);
+		fmt_puts(ctx, fmt, "}");
+	}
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
@@ -3472,7 +3489,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		fmt_puts(ctx, fmt, "false");
 	else if (pdf_is_stream(ctx, obj))
 	{
-		fmt_puts(ctx, fmt, "{ type: \"stream\", data:\n");
+		fmt_puts(ctx, fmt, "{ \"type\": \"stream\", \"data\":\n");
 
 		if (is_xml_metadata(ctx, obj))
 		{
@@ -3492,7 +3509,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			fz_catch(ctx)
 			{
 				// ignore error
-				fmt_puts(ctx, fmt, "\n  null,\n  error: ");
+				fmt_puts(ctx, fmt, "\n  null,\n  \"error\": ");
 				const char* errmsg = fz_caught_message(ctx);
 				fmt_str_to_json_internal(ctx, fmt, errmsg, strlen(errmsg), 0);
 			}
@@ -3512,10 +3529,10 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		}
 		else {
 			fz_snprintf(buf, sizeof buf, "{\n"
-				"  type: \"R\",\n"
-				"  num: %d,\n"
-				"  gen: %d,\n"
-				"  S_D_R: 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
+				"  \"type\": \"R\",\n"
+				"  \"num\": %d,\n"
+				"  \"gen\": %d,\n"
+				"  \"S_D_R\": 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
 				"}", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
 			fmt_puts(ctx, fmt, buf);
 		}
@@ -3545,10 +3562,10 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		}
 		else {
 			fz_snprintf(buf, sizeof buf, "{\n"
-				"  type: \"R\",\n"
-				"  num: %d,\n"
-				"  gen: %d,\n"
-				"  S_D_R: 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
+				"  \"type\": \"R\",\n"
+				"  \"num\": %d,\n"
+				"  \"gen\": %d,\n"
+				"  \"S_D_R\": 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
 				"}", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
 			fmt_puts(ctx, fmt, buf);
 		}
@@ -3562,16 +3579,16 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		}
 		else {
 			fz_snprintf(buf, sizeof buf, "{\n"
-				"  type: \"R\",\n"
-				"  num: %d,\n"
-				"  gen: %d,\n"
-				"  S_D_R: 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
+				"  \"type\": \"R\",\n"
+				"  \"num\": %d,\n"
+				"  \"gen\": %d,\n"
+				"  \"S_D_R\": 1\n"		// flag 'stack depth reached' with this, instead of `data: ...`
 				"}", pdf_to_num(ctx, obj), pdf_to_gen(ctx, obj));
 			fmt_puts(ctx, fmt, buf);
 		}
 	}
 	else {
-		fmt_puts(ctx, fmt, "{ type: \"<unknown object>\" }");
+		fmt_puts(ctx, fmt, "{ \"type\": \"<unknown object>\" }");
 	}
 }
 
