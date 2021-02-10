@@ -24,6 +24,30 @@ int fz_chdir(fz_context* ctx, const char* path);
 */
 void fz_mkdir_for_file(fz_context* ctx, const char* path);
 
+/**
+ * Normalize a given path, i.e. resolve the ./ and ../ directories that may be part of it.
+ * Also UNIXify the path by replacing \ backslashes with / slashes, which work on all platforms.
+ *
+ * When path is NULL, the path is assumed to already be present in the dstpath buffer and
+ * will be modified in place.
+ *
+ * Throws an exception when the path is buggy, e.g. contains a ../ which cannot be resolved,
+ * e.g. C:\..\b0rk
+ */
+void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path);
+
+/**
+ * Sanitize a given path, i.e. replace any "illegal" characters in the path, using generic
+ * OS/filesystem heuristics. "Illegal" characters are replaced with an _ underscore.
+ *
+ * When path is NULL, the path is assumed to already be present in the dstpath buffer and
+ * will be modified in place.
+ *
+ * The path is assumed to have been normalized already, hence little intermezzos like '/./'
+ * shall not exist in the input. IFF they do, they will be sanitized to '/_/'.
+ */
+void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path);
+
 #ifdef __cplusplus
 }
 #endif
