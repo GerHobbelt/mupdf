@@ -2105,7 +2105,6 @@ int muraster_main(int argc, const char *argv[])
 		}
 #endif /* DISABLE_MUTHREADS */
 
-		fz_flush_output(ctx, out);
 		fz_close_output(ctx, out);
 		fz_drop_output(ctx, out);
 		out = NULL;

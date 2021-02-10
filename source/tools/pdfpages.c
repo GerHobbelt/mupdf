@@ -242,7 +242,6 @@ int pdfpages_main(int argc, const char **argv)
 
 		ret = pdfpages_pages(ctx, out, filename, password, &argv[fz_optind], argc - fz_optind);
 
-		fz_flush_output(ctx, out);
 		fz_close_output(ctx, out);
 	}
 	fz_catch(ctx)

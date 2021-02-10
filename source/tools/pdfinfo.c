@@ -1221,7 +1221,6 @@ int pdfinfo_main(int argc, const char** argv)
 			fz_rethrow(ctx);
 		}
 
-		fz_flush_output(ctx, out);
 		fz_close_output(ctx, out);
 	}
 	fz_catch(ctx)
