@@ -203,6 +203,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		ctx->error = global_default_ctx->error;
 		ctx->warn = global_default_ctx->warn;
 		ctx->info = global_default_ctx->info;
+		ctx->stddbg = global_default_ctx->stddbg;
 
 		// and copy the randomness pool across for predictable semi-random behaviour in all *default* sub contexts
 		memcpy(ctx->seed48, global_default_ctx->seed48, sizeof ctx->seed48);
