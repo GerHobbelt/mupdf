@@ -11,6 +11,7 @@
 typedef struct
 {
 	fz_document_writer super;
+	extract_alloc_t *alloc;
 	fz_context *ctx;
 	fz_output *output;
 	extract_t *extract;
@@ -266,6 +267,7 @@ static void writer_close(fz_context *ctx, fz_document_writer *writer_)
 		 */
 		writer->ctx = ctx;
 		if (extract_buffer_open(
+				writer->alloc,
 				writer,
 				NULL /*fn_read*/,
 				buffer_write,
@@ -286,6 +288,7 @@ static void writer_close(fz_context *ctx, fz_document_writer *writer_)
 		fz_close_output(ctx, writer->output);
 
 		writer->ctx = NULL;
+		extract_alloc_destroy(&writer->alloc);
 	}
 	fz_catch(ctx)
 	{
@@ -297,7 +300,7 @@ static void writer_close(fz_context *ctx, fz_document_writer *writer_)
 		extract_buffer_close(&extract_buffer_output);
 		extract_end(&writer->extract);
 		writer->ctx = NULL;
-
+		extract_alloc_destroy(&writer->alloc);
 		fz_rethrow(ctx);
 	}
 }
@@ -328,12 +331,24 @@ static int get_bool_option(fz_context *ctx, const char *options, const char *nam
 	}
 }
 
+static void *s_realloc_fn(void *state, void *prev, size_t size)
+{
+	fz_context *ctx = state;
+	return fz_realloc(ctx, prev, size);
+}
+
 static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_output *out, const char *options, int we_own_output)
 {
 	fz_docx_writer *writer = NULL;
+	extract_alloc_t *alloc = NULL;
 	fz_var(writer);
+	fz_var(alloc);
 	fz_try(ctx)
 	{
+		if (extract_alloc_create(s_realloc_fn, ctx, &alloc))
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to create extract_alloc instance");
+		}
 		writer = fz_new_derived_document_writer(
 				ctx,
 				fz_docx_writer,
@@ -342,8 +357,12 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 				writer_close,
 				writer_drop
 				);
-		if (extract_begin(&writer->extract))
+		if (extract_begin(alloc, &writer->extract))
+		{
+			extract_alloc_destroy(&alloc);
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to create extract instance");
+		}
+		writer->alloc = alloc;
 		writer->output = out;
 		writer->we_own_output = we_own_output;
 		writer->spacing = get_bool_option(ctx, options, "spacing", 1);
@@ -353,6 +372,7 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 	fz_catch(ctx)
 	{
 		fz_drop_document_writer(ctx, &writer->super);
+		extract_alloc_destroy(&alloc);
 		fz_rethrow(ctx);
 	}
 	return &writer->super;
