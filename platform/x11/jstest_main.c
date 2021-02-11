@@ -1,8 +1,8 @@
 ﻿
 #include "timeval.h"
 
-#include "pdfapp.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/fitz.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
@@ -20,14 +20,6 @@
 
 
 int mutool_main(int argc, const char** argv);
-
-/*
-	A useful bit of bash script to call this is:
-	for f in ../ghostpcl/tests_private/pdf/forms/v1.3/ *.pdf ; do g=${f%.*} ; echo $g ; win32/debug/mujstest-v8.exe -o $g-%d.png -p ../ghostpcl/ $g.mjs > $g.log 2>&1 ; done
-
-	Remove the space from "/ *.pdf" before running - can't leave that
-	in here, as it causes a warning about a possibly malformed comment.
-*/
 
 #define LONGLINE 4096
 
@@ -255,183 +247,21 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 }
 
-static pdfapp_t gapp;
-static int file_open = 0;
 static const char *scriptname;
-static const char *output = "out-%04d.png";
 static const char *prefix = NULL;
-static int shotcount = 0;
 static int verbosity = 0;
 
 static char getline_buffer[LONGLINE];
-static char output_buffer[LONGLINE];
-static char prefix_buffer[LONGLINE];
 
-void winwarn(pdfapp_t *app, char *msg)
-{
-	fz_warn(ctx, "%s", msg);
-}
-
-void winerror(pdfapp_t *app, char *msg)
-{
-	fz_error(ctx, "%s", msg);
-	exit(1);
-}
-
-void winalert(pdfapp_t *app, pdf_alert_event *alert)
-{
-	fz_error(ctx, "Alert %s: %s", alert->title, alert->message);
-	switch (alert->button_group_type)
-	{
-	case PDF_ALERT_BUTTON_GROUP_OK:
-	case PDF_ALERT_BUTTON_GROUP_OK_CANCEL:
-		alert->button_pressed = PDF_ALERT_BUTTON_OK;
-		break;
-	case PDF_ALERT_BUTTON_GROUP_YES_NO:
-	case PDF_ALERT_BUTTON_GROUP_YES_NO_CANCEL:
-		alert->button_pressed = PDF_ALERT_BUTTON_YES;
-		break;
-	}
-}
-
-void winadvancetimer(pdfapp_t *app, float duration)
-{
-}
-
-void winprint(pdfapp_t *app)
-{
-	fz_warn(ctx, "The MuPDF library supports printing, but this application currently does not");
-}
-
-int winquery(pdfapp_t *app, const char *query)
-{
-	return QUERY_NO;
-}
-
-int wingetcertpath(pdfapp_t* app, char *buf, int len)
-{
-	return 0;
-}
-
-static char pd_password[256] = "";
-static char td_textinput[LONGLINE] = "";
-static char echoline[LONGLINE] = "";
-
-const char *winpassword(pdfapp_t *app, const char *filename)
-{
-	if (pd_password[0] == 0)
-		return NULL;
-	return pd_password;
-}
-
-char *wintextinput(pdfapp_t *app, char *inittext, int retry)
-{
-	if (retry)
-		return NULL;
-
-	if (td_textinput[0] != 0)
-		return td_textinput;
-	return inittext;
-}
-
-int winchoiceinput(pdfapp_t *app, int nopts, const char *opts[], int *nvals, const char *vals[])
-{
-	return 0;
-}
-
-void winhelp(pdfapp_t*app)
-{
-}
-
-void winclose(pdfapp_t *app)
-{
-	pdfapp_close(app);
-	exit(0);
-}
-
-int winsavequery(pdfapp_t *app)
-{
-	return DISCARD;
-}
-
-int wingetsavepath(pdfapp_t *app, char *buf, int len)
-{
-	return 0;
-}
-
-void winreplacefile(pdfapp_t* app, char *source, char *target)
-{
-}
-
-void wincopyfile(pdfapp_t* app, char *source, char *target)
-{
-}
-
-void wincursor(pdfapp_t *app, int curs)
-{
-}
-
-void wintitle(pdfapp_t *app, char *title)
-{
-}
-
-void windrawrect(pdfapp_t *app, int x0, int y0, int x1, int y1)
-{
-}
-
-void windrawstring(pdfapp_t *app, int x, int y, char *s)
-{
-}
-
-void winresize(pdfapp_t *app, int w, int h)
-{
-}
-
-void winrepaint(pdfapp_t *app)
-{
-}
-
-void winrepaintsearch(pdfapp_t *app)
-{
-}
-
-void winfullscreen(pdfapp_t *app, int state)
-{
-}
-
-/*
- * Event handling
- */
-
-void windocopy(pdfapp_t *app)
-{
-}
-
-void winreloadpage(pdfapp_t *app)
-{
-}
-
-void winopenuri(pdfapp_t *app, char *buf)
-{
-}
 
 static void usage(void)
 {
 	fz_info(ctx,
 		"mujstest: Scriptable tester for mupdf + js\n"
 		"\n"
-		"Syntax: mujstest -o <filename> [ -p <prefix> ] [options] <scriptfile>\n"
+		"Syntax: mujstest -o [options] <scriptfile>\n"
 		"\n"
 		"Options:\n"
-		"  -o -    output file name (%%d for page number) template for the SCREENSHOT\n"
-		"          script command\n"
-		"     <filename>\n"
-		"          should sensibly be of the form file-%%d.png\n"
-		"\n"
-		"  -p -    input path prefix for the OPEN script command\n"
-		"     <prefix>\n"
-		"          is a path prefix to apply to filenames within the script\n"
-		"\n"
 		"  -v      verbose (toggle)\n"
 		"  -q      be quiet (don't print progress messages)\n"
 		"  -s -    show extra information:\n"
@@ -449,13 +279,7 @@ static void usage(void)
 		"  -V      display the version of this application and terminate\n"
 		"\n"
 		"\nscriptfile contains a list of commands:\n"
-		"  PASSWORD <password>  Set the password\n"
-		"  OPEN <filename>      Open a file\n"
-		"  GOTO <page>          Jump to a particular page\n"
-		"  SCREENSHOT           Save a screenshot\n"
-		"  RESIZE <w> <h>       Resize the screen to a given size\n"
-		"  CLICK <x> <y> <btn>  Click at a given position\n"
-		"  TEXT <string>        Set a value to be entered\n"
+		"  CD <path>            Change current directory to the indicated path\n"
 		"  MUTOOL <arguments>   Run any mutool command as specified\n"
 	);
 }
@@ -862,8 +686,6 @@ main(int argc, const char *argv[])
 	{
 		switch(c)
 		{
-		case 'o': output = fz_optarg; break;
-		case 'p': prefix = fz_optarg; break;
 		case 'q': logcfg.quiet = 1; break;
 		case 'v': verbosity ^= 1; break;
 		case 's':
@@ -934,11 +756,6 @@ main(int argc, const char *argv[])
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
-
-	pdfapp_init(ctx, &gapp);
-	gapp.scrw = 640;
-	gapp.scrh = 480;
-	gapp.colorspace = fz_device_rgb(ctx);
 
 	fz_try(ctx)
 	{
@@ -1018,82 +835,16 @@ main(int argc, const char *argv[])
 				}
 				else if (match(&line, "ECHO"))
 				{
-					unescape_string(echoline, line);
-					fz_info(ctx, "::ECHO: %s\n", echoline);
-					report_time = false;
-				}
-				else if (match(&line, "PASSWORD"))
-				{
-					strcpy(pd_password, line);
-					report_time = false;
-				}
-				else if (match(&line, "OPEN"))
-				{
-					char path[LONGLINE];
-					if (file_open)
-						pdfapp_close(&gapp);
-					if (prefix)
+					char buf[LONGLINE];
+					if (strlen(line) < sizeof(buf))
 					{
-						sprintf(path, "%s%s", prefix, line);
+						unescape_string(buf, line);
+						fz_info(ctx, "::ECHO: %s\n", buf);
 					}
 					else
 					{
-						strcpy(path, line);
+						fz_error(ctx, "::ECHO:ERROR: not printing buffer-overflowing line\n");
 					}
-					pdfapp_open(&gapp, path, 0);
-					file_open = 1;
-				}
-				else if (match(&line, "GOTO"))
-				{
-					pdfapp_gotopage(&gapp, atoi(line)-1);
-				}
-				else if (match(&line, "SCREENSHOT"))
-				{
-					char text[1024];
-
-					fz_snprintf(text, sizeof(text), output, ++shotcount);
-					if (strstr(text, ".pgm") || strstr(text, ".ppm") || strstr(text, ".pnm"))
-						fz_save_pixmap_as_pnm(ctx, gapp.image, text);
-					else
-						fz_save_pixmap_as_png(ctx, gapp.image, text);
-				}
-				else if (match(&line, "RESIZE"))
-				{
-					int w, h;
-					sscanf(line, "%d %d", &w, &h);
-					pdfapp_onresize(&gapp, w, h);
-				}
-				else if (match(&line, "CLICK"))
-				{
-					float x, y, b;
-					int n;
-					n = sscanf(line, "%f %f %f", &x, &y, &b);
-					if (n < 1)
-						x = 0.0f;
-					if (n < 2)
-						y = 0.0f;
-					if (n < 3)
-						b = 1;
-					/* state = 1 = transition down */
-					pdfapp_onmouse(&gapp, (int)x, (int)y, b, 0, 1);
-					/* state = -1 = transition up */
-					pdfapp_onmouse(&gapp, (int)x, (int)y, b, 0, -1);
-				}
-				else if (match(&line, "TEXT"))
-				{
-					unescape_string(td_textinput, line);
-					report_time = false;
-				}
-				else if (match(&line, "SET-PREFIX"))
-				{
-					unescape_string(prefix_buffer, line);
-					prefix = prefix_buffer;
-					report_time = false;
-				}
-				else if (match(&line, "SET-OUTPUT"))
-				{
-					unescape_string(output_buffer, line);
-					output = output_buffer;
 					report_time = false;
 				}
 				else if (match(&line, "CD"))
@@ -1196,9 +947,6 @@ main(int argc, const char *argv[])
 
 		errored += 100;
 	}
-
-	if (file_open)
-		pdfapp_close(&gapp);
 
 	fz_flush_warnings(ctx);
 	mu_drop_context();
