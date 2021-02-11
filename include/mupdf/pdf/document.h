@@ -96,6 +96,12 @@ pdf_document *pdf_specifics(fz_context *ctx, fz_document *doc);
 */
 pdf_document *pdf_document_from_fz_document(fz_context *ctx, fz_document *ptr);
 pdf_page *pdf_page_from_fz_page(fz_context *ctx, fz_page *ptr);
+/*
+    Up-cast pdf specific variants into generic fitz objects.
+	Returns NULL if the objects are not from a PDF document.
+*/
+fz_document* fz_document_from_pdf_document(fz_context* ctx, pdf_document* ptr);
+fz_page* fz_page_from_pdf_page(fz_context* ctx, pdf_page* ptr);
 
 int pdf_needs_password(fz_context *ctx, pdf_document *doc);
 
