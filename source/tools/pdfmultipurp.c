@@ -355,9 +355,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 		write_item_int(ctx, out, "Pages", glo->pagecount);
 
-		fz_document* pdf = (fz_document*)glo->doc;
-
-		int chaptercount = fz_count_chapters(ctx, pdf);
+		int chaptercount = fz_count_chapters(ctx, fz_document_from_pdf_document(ctx, glo->doc));
 
 		write_item_int(ctx, out, "Chapters", chaptercount);
 
@@ -369,7 +367,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		int alt_page_count = 0;
 		for (int i = 0; i < chaptercount; i++)
 		{
-			int count = fz_count_chapter_pages(ctx, pdf, i);
+			int count = fz_count_chapter_pages(ctx, fz_document_from_pdf_document(ctx, glo->doc), i);
 
 			if (chaptercount > 1)
 			{
@@ -1142,17 +1140,14 @@ static void
 printadvancedinfo(fz_context* ctx, globals* glo, int page)
 {
 	fz_output* out = glo->out;
-	pdf_document* doc = glo->doc;
-	fz_document* pdf = (fz_document*)glo->doc;
 	pdf_page* page_obj = NULL;
-	fz_page* page_ref = (fz_page*)page_obj;
 	int json_stack_level = write_level_get_level(ctx);
 
 	fz_try(ctx)
 	{
-		page_obj = pdf_load_page(ctx, doc, page - 1);
+		page_obj = pdf_load_page(ctx, glo->doc, page - 1);
 
-		fz_rect mediabox = fz_bound_page(ctx, page_ref);
+		fz_rect mediabox = fz_bound_page(ctx, fz_page_from_pdf_page(ctx, page_obj));
 
 		fz_matrix ctm = fz_pre_scale(fz_rotate(0), 1.0, 1.0);
 
@@ -1465,7 +1460,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 			fz_try(ctx)
 			{
 				//page_obj = pdf_load_page(ctx, doc, page - 1);
-				links = fz_load_links(ctx, page_ref);
+				links = fz_load_links(ctx, fz_page_from_pdf_page(ctx, page_obj));
 
 				if (links)
 				{
@@ -1487,8 +1482,8 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 
 					if (!fz_is_external_link(ctx, link->uri))
 					{
-						fz_location loc = fz_resolve_link(ctx, pdf, link->uri, &link_x, &link_y);
-						int target_page = fz_page_number_from_location(ctx, pdf, loc) + 1;
+						fz_location loc = fz_resolve_link(ctx, fz_document_from_pdf_document(ctx, glo->doc), link->uri, &link_x, &link_y);
+						int target_page = fz_page_number_from_location(ctx, fz_document_from_pdf_document(ctx, glo->doc), loc) + 1;
 
 						write_item(ctx, out, "LinkType", "Internal");
 						write_item(ctx, out, "Url:", link->uri);
@@ -1536,7 +1531,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 	}
 	fz_always(ctx)
 	{
-		fz_drop_page(ctx, page_ref);
+		fz_drop_page(ctx, fz_page_from_pdf_page(ctx, page_obj));
 	}
 	fz_catch(ctx)
 	{
@@ -1770,7 +1765,6 @@ showinfo(fz_context* ctx, globals* glo, const char* pagelist, const char **first
 	int page, spage, epage;
 	int pagecount;
 	fz_output* out = glo->out;
-	fz_document* pdf = (fz_document*)glo->doc;
 
 	if (!glo->doc)
 	{
@@ -2039,6 +2033,8 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 		fz_free(ctx, ex);
 		ex = fz_strdup(ctx, fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
+
+		write_level_guarantee_level(ctx, out, json_stack_outermost_level + 1);
 	}
 
 	// Now unwind the JSON stack, no matter how deep the errors came from:
