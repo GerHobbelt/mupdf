@@ -212,9 +212,15 @@ static void write_item_int(fz_context* ctx, fz_output* out, const char* label, i
 static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, fz_rect* bbox)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": \"%R\"",
+	fz_write_printf(ctx, out, "\"%s\": [ %,R ]",
 		label,
 		bbox);
+}
+
+static void write_item_coord(fz_context* ctx, fz_output* out, const char* label, float x, float y)
+{
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "\"%s\": { X: %g, Y: %g }", label, x, y);
 }
 
 // we consider any JSON with more than 1024 levels of object/array "removed from sanity" ;-)
@@ -267,8 +273,10 @@ static size_t write_level_guarantee_level(fz_context* ctx, fz_output* out, int t
 	// see if we need to pop off elements off the stack:
 	if (target_stack_level < stack_offset) {
 		fz_error(ctx, "JSON stack tracking: recovering from unclosed elements. Target level %d < Current Depth %d\n", target_stack_level, stack_offset);
-		fz_write_printf(ctx, out, "\n%s\n", json_stack + target_stack_level);
-		stack_offset = target_stack_level;
+		while (target_stack_level < stack_offset) {
+			fz_write_printf(ctx, out, "\n%c\n", json_stack[--stack_offset]);
+		}
+		//ASSERT(stack_offset == target_stack_level);
 		json_stack[stack_offset] = 0;
 
 		// Also set the JSON formatting output state as this closes an object, so the next sibling should be preceded by a comma at least:
@@ -430,8 +438,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 					write_item(ctx, out, "InternalLink", outline->uri);
 					write_item_int(ctx, out, "TargetPageNumber", target_page);
-					write_item_starter(ctx, out, "TargetCoordinates");
-					fz_write_printf(ctx, out, "{ X: %f Y: %f }", outline->x, outline->y);
+					write_item_coord(ctx, out, "TargetCoordinates", outline->x, outline->y);
 				}
 				else
 				{
@@ -1068,9 +1075,9 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "ImageWidth", pdf_to_int(ctx, glo->image[i].u.image.width));
 			write_item_int(ctx, out, "ImageHeight", pdf_to_int(ctx, glo->image[i].u.image.height));
 			write_item_starter(ctx, out, "ImageDimensions");
-			fz_write_printf(ctx, out, "\"%dx%d\"",
-				pdf_to_int(ctx, glo->image[i].u.image.width),
-				pdf_to_int(ctx, glo->image[i].u.image.height));
+			fz_write_printf(ctx, out, "{ W: %g, H: %g }",
+				pdf_to_real(ctx, glo->image[i].u.image.width),
+				pdf_to_real(ctx, glo->image[i].u.image.height));
 			write_item_int(ctx, out, "ImageBPC", glo->image[i].u.image.bpc ? pdf_to_int(ctx, glo->image[i].u.image.bpc) : 1);
 			write_item_starter(ctx, out, "ImageCS");
 			fz_write_printf(ctx, out, "\"%s%s%s\"",
@@ -1500,8 +1507,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 							write_item_starter(ctx, out, "TargetError");
 							fz_write_printf(ctx, out, "\"(Chapter: %d, Chapter Page: %d)\"", loc.chapter, loc.page);
 						}
-						write_item_starter(ctx, out, "TargetCoordinates");
-						fz_write_printf(ctx, out, "{ X: %f Y: %f }", link_x, link_y);
+						write_item_coord(ctx, out, "TargetCoordinates", link_x, link_y);
 						write_item_bbox(ctx, out, "LinkBounds", &bounds);
 					}
 					else
@@ -1537,7 +1543,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "Error while loading/processing page %d\n", page);
+		fz_error(ctx, "Error while loading/processing page %d: %s\n", page, fz_caught_message(ctx));
 	}
 
 	write_level_guarantee_level(ctx, out, json_stack_level);
