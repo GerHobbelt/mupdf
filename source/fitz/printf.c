@@ -35,6 +35,12 @@ static inline void fmtputc(struct fmtbuf *out, int c)
 	out->emit(out->ctx, out->user, c);
 }
 
+static void fmtputs(struct fmtbuf* out, const char *s)
+{
+	while (*s)
+		fmtputc(out, *s++);
+}
+
 /*
  * Convert float to shortest possible string that won't lose precision, except:
  * NaN to 0, +Inf to FLT_MAX, -Inf to -FLT_MAX.
@@ -61,6 +67,7 @@ static void fmtfloat(struct fmtbuf *out, float f)
 
 	if (point <= 0)
 	{
+		fmtputc(out, '0');
 		fmtputc(out, '.');
 		while (point++ < 0)
 			fmtputc(out, '0');
@@ -293,6 +300,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 {
 	struct fmtbuf out;
 	int c, s, z, p, w, l;
+	const char *comma;
 	int32_t i32;
 	int64_t i64;
 	const char *str;
@@ -308,6 +316,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 		{
 			s = 0;
 			z = ' ';
+			comma = " ";
 
 			/* flags */
 			while ((c = *fmt++) != 0)
@@ -324,6 +333,9 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				/* '-' to left justify */
 				else if (c == '-')
 					l = 1;
+				/* ',' for comma separator in R,M,... */
+				else if (c == ',')
+					comma = ", ";
 				else
 					break;
 			}
@@ -401,40 +413,40 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			case 'M':
 				{
 					fz_matrix *matrix = va_arg(args, fz_matrix*);
-					fmtfloat(&out, matrix->a); fmtputc(&out, ' ');
-					fmtfloat(&out, matrix->b); fmtputc(&out, ' ');
-					fmtfloat(&out, matrix->c); fmtputc(&out, ' ');
-					fmtfloat(&out, matrix->d); fmtputc(&out, ' ');
-					fmtfloat(&out, matrix->e); fmtputc(&out, ' ');
+					fmtfloat(&out, matrix->a); fmtputs(&out, comma);
+					fmtfloat(&out, matrix->b); fmtputs(&out, comma);
+					fmtfloat(&out, matrix->c); fmtputs(&out, comma);
+					fmtfloat(&out, matrix->d); fmtputs(&out, comma);
+					fmtfloat(&out, matrix->e); fmtputs(&out, comma);
 					fmtfloat(&out, matrix->f);
 				}
 				break;
 			case 'R':
 				{
 					fz_rect *rect = va_arg(args, fz_rect*);
-					fmtfloat(&out, rect->x0); fmtputc(&out, ' ');
-					fmtfloat(&out, rect->y0); fmtputc(&out, ' ');
-					fmtfloat(&out, rect->x1); fmtputc(&out, ' ');
+					fmtfloat(&out, rect->x0); fmtputs(&out, comma);
+					fmtfloat(&out, rect->y0); fmtputs(&out, comma);
+					fmtfloat(&out, rect->x1); fmtputs(&out, comma);
 					fmtfloat(&out, rect->y1);
 				}
 				break;
 			case 'P':
 				{
 					fz_point *point = va_arg(args, fz_point*);
-					fmtfloat(&out, point->x); fmtputc(&out, ' ');
+					fmtfloat(&out, point->x); fmtputs(&out, comma);
 					fmtfloat(&out, point->y);
 				}
 				break;
 			case 'Z':
 				{
 					fz_quad *quad = va_arg(args, fz_quad*);
-					fmtfloat(&out, quad->ul.x); fmtputc(&out, ' ');
-					fmtfloat(&out, quad->ul.y); fmtputc(&out, ' ');
-					fmtfloat(&out, quad->ur.x); fmtputc(&out, ' ');
-					fmtfloat(&out, quad->ur.y); fmtputc(&out, ' ');
-					fmtfloat(&out, quad->ll.x); fmtputc(&out, ' ');
-					fmtfloat(&out, quad->ll.y); fmtputc(&out, ' ');
-					fmtfloat(&out, quad->lr.x); fmtputc(&out, ' ');
+					fmtfloat(&out, quad->ul.x); fmtputs(&out, comma);
+					fmtfloat(&out, quad->ul.y); fmtputs(&out, comma);
+					fmtfloat(&out, quad->ur.x); fmtputs(&out, comma);
+					fmtfloat(&out, quad->ur.y); fmtputs(&out, comma);
+					fmtfloat(&out, quad->ll.x); fmtputs(&out, comma);
+					fmtfloat(&out, quad->ll.y); fmtputs(&out, comma);
+					fmtfloat(&out, quad->lr.x); fmtputs(&out, comma);
 					fmtfloat(&out, quad->lr.y);
 				}
 				break;
