@@ -1275,6 +1275,9 @@ def build(
     verbose:
         Passed to jlib.system().
 
+    Returns:
+        true if we have run the command, otherwise None.
+
     We compare mtimes of <infiles> and <outfiles>, and we also detect changes
     to the command itself.
 
@@ -1336,6 +1339,8 @@ def build(
 
     with open( command_filename, 'w') as f:
         f.write( command)
+
+    return True
 
 
 def link_l_flags( sos):
