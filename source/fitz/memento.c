@@ -1,3 +1,7 @@
+// Duplicate of ../../thirdparty/extract/src/memento.c
+
+#if 0
+
 /* Copyright (C) 2009-2020 Artifex Software, Inc.
    All Rights Reserved.
 
@@ -25,9 +29,6 @@
 #define MEMENTO_FREELIST_MAX_SINGLE_BLOCK (MEMENTO_FREELIST_MAX/4)
 
 #define COMPILING_MEMENTO_C
-
-/* SHUT UP, MSVC. I KNOW WHAT I AM DOING. */
-#define _CRT_SECURE_NO_WARNINGS
 
 /* We have some GS specific tweaks; more for the GS build environment than
  * anything else. */
@@ -3612,5 +3613,7 @@ int (Memento_squeezing)(void)
 {
     return 0;
 }
+
+#endif
 
 #endif

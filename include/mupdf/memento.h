@@ -1,3 +1,9 @@
+// Duplicate of ../../thirdparty/extract/src/memento.h
+
+#include "../../thirdparty/extract/src/memento.h"
+
+#if 0
+
 /* Copyright (C) 2009-2018 Artifex Software, Inc.
    All Rights Reserved.
 
@@ -343,3 +349,5 @@ void Memento_bt(void);
 #endif /* MEMENTO */
 
 #endif /* MEMENTO_H */
+
+#endif
