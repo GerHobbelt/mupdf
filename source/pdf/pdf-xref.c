@@ -3057,13 +3057,13 @@ pdf_page *pdf_page_from_fz_page(fz_context *ctx, fz_page *ptr)
 fz_document* fz_document_from_pdf_document(fz_context* ctx, pdf_document* ptr)
 {
 	fz_document* fzptr = (fz_document*)ptr;
-	return ((fzptr && fzptr->count_pages == pdf_count_pages_imp) ? ptr : NULL);
+	return ((fzptr && fzptr->count_pages == pdf_count_pages_imp) ? fzptr : NULL);
 }
 
 fz_page* fz_page_from_pdf_page(fz_context* ctx, pdf_page* ptr)
 {
 	fz_page* fzptr = (fz_page*)ptr;
-	return (pdf_page*)((fzptr && fzptr->bound_page == (fz_page_bound_page_fn*)pdf_bound_page) ? ptr : NULL);
+	return ((fzptr && fzptr->bound_page == (fz_page_bound_page_fn*)pdf_bound_page) ? fzptr : NULL);
 }
 
 pdf_document *pdf_specifics(fz_context *ctx, fz_document *doc)
