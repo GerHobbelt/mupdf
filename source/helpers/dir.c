@@ -193,7 +193,7 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 		int c = *e;
 		if (c > 0x7F) {
 			int u;
-			int l = fz_chartorune(&u, e);
+			int l = fz_chartorune_unsafe(&u, e);
 			e += l - 1;
 			if (l == 1 && u == Runeerror) {
 				// bad UTF8 is to be discarded!

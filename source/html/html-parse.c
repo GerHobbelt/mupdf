@@ -212,7 +212,7 @@ static fz_html_flow *split_flow(fz_context *ctx, fz_pool *pool, fz_html_flow *fl
 	while (*text && offset)
 	{
 		int rune;
-		text += fz_chartorune(&rune, text);
+		text += fz_chartorune_unsafe(&rune, text);
 		offset--;
 	}
 	len = strlen(text);
@@ -340,7 +340,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 			while (*text && !iswhite(*text))
 			{
 				prev = text;
-				text += fz_chartorune(&c, text);
+				text += fz_chartorune_unsafe(&c, text);
 				if (c == 0xAD) /* soft hyphen */
 				{
 					if (mark != prev)
@@ -1206,7 +1206,7 @@ detect_flow_directionality(fz_context *ctx, fz_pool *pool, uni_buf *buffer, fz_b
 			while (*text)
 			{
 				int rune;
-				text += fz_chartorune(&rune, text);
+				text += fz_chartorune_unsafe(&rune, text);
 				buffer->data[buffer->len++] = rune;
 			}
 		}

@@ -295,7 +295,7 @@ pdf_add_embedded_file(fz_context *ctx, pdf_document *doc,
 	for (i = 0, s = filename; *s && i + 1 < sizeof asciiname; ++i)
 	{
 		int c;
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 		asciiname[i] = (c >= 32 && c <= 126) ? c : '_';
 	}
 	asciiname[i] = 0;

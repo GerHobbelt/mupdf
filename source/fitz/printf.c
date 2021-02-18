@@ -201,7 +201,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, int sq, int eq, int verb
 	int i, n, c;
 	fmtputc(out, sq);
 	while (*s != 0) {
-		n = fz_chartorune(&c, s);
+		n = fz_chartorune_unsafe(&c, s);
 		switch (c) {
 		default:
 			if (c < 32) {

@@ -731,7 +731,7 @@ static void pdf_docenc_from_utf8(char *password, const char *utf8, int n)
 	int i = 0, k, c;
 	while (*utf8 && i + 1 < n)
 	{
-		utf8 += fz_chartorune(&c, utf8);
+		utf8 += fz_chartorune_unsafe(&c, utf8);
 		for (k = 0; k < 256; k++)
 		{
 			if (c == fz_unicode_from_pdf_doc_encoding[k])

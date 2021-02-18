@@ -135,7 +135,7 @@ void fz_debug_xml(fz_xml *item, int level)
 		xml_indent(level);
 		putchar('"');
 		while (*s) {
-			s += fz_chartorune(&c, s);
+			s += fz_chartorune_unsafe(&c, s);
 			switch (c) {
 			default:
 				if (c > 0xFFFF)

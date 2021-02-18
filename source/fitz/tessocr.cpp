@@ -388,7 +388,7 @@ void ocr_recognise(fz_context *ctx,
 					res_it->BoundingBox(tesseract::RIL_SYMBOL,
 							char_bbox, char_bbox+1,
 							char_bbox+2, char_bbox+3);
-					fz_chartorune(&unicode, graph);
+					fz_chartorune_unsafe(&unicode, graph);
 					callback(ctx, arg, unicode, font_name, line_bbox, word_bbox, char_bbox, pointsize);
 				}
 				res_it->Next(tesseract::RIL_SYMBOL);

@@ -763,7 +763,7 @@ void wintitle(pdfapp_t *app, char *title)
 	sp = title;
 	while (*sp && dp < wide + 255)
 	{
-		sp += fz_chartorune(&rune, sp);
+		sp += fz_chartorune(&rune, sp, wide + 255 - dp);
 		*dp++ = rune;
 	}
 	*dp = 0;

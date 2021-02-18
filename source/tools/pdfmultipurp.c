@@ -75,6 +75,8 @@ typedef struct
 	int psobjs;
 } globals;
 
+static int PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | /* PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX | */ PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
+
 static dump_observed_errors(fz_context* ctx, fz_output* out);
 static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open);
 
@@ -140,6 +142,10 @@ usage(void)
 		"usage: mutool info [options] file.pdf [pages]\n"
 		"\t-o -\toutput file path. Default: info will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
+		"\t-m {0,1,2}\tmode for printing bad string content:\n"
+		"\t          \t- 0: massaged to hex,\n"
+		"\t          \t- 1: hex dumped with legible characters interleaved,\n"
+		"\t          \t- 2: dump as JSON {HEX:'...', MASSAGED:'...'} struct.\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
 
@@ -273,6 +279,7 @@ static size_t write_level_guarantee_level(fz_context* ctx, fz_output* out, int t
 	// see if we need to pop off elements off the stack:
 	if (target_stack_level < stack_offset) {
 		fz_error(ctx, "JSON stack tracking: recovering from unclosed elements. Target level %d < Current Depth %d\n", target_stack_level, stack_offset);
+
 		while (target_stack_level < stack_offset) {
 			fz_write_printf(ctx, out, "\n%c\n", json_stack[--stack_offset]);
 		}
@@ -344,21 +351,21 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Info");
-			pdf_print_obj_to_json(ctx, out, obj, 0);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
 		}
 
 		obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Encryption");
-			pdf_print_obj_to_json(ctx, out, obj, 0);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
 		}
 
 		obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Metadata");
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Metadata");
-			pdf_print_obj_to_json(ctx, out, obj, 0);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
 		}
 
 		write_item_int(ctx, out, "Pages", glo->pagecount);
@@ -462,15 +469,16 @@ showglobalinfo(fz_context* ctx, globals* glo)
 				}
 				else
 				{
+					write_level_end(ctx, out, '}');
+
 					outline = outline->next;
 					while (!outline && parents_index > 0)
 					{
 						outline = outline_parents[--parents_index];
 
 						write_level_end(ctx, out, ']');
+						write_level_end(ctx, out, '}');
 					}
-
-					write_level_end(ctx, out, '}');
 				}
 			}
 		}
@@ -483,6 +491,14 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		fz_catch(ctx)
 		{
 			fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
+		}
+
+		// See if there are any embedded files:
+		pdf_obj* files_obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Names");
+		if (files_obj)
+		{
+			write_item_starter(ctx, out, "AttachedFiles");
+			pdf_print_obj_to_json(ctx, out, files_obj, PRINT_OBJ_TO_JSON_FLAGS);
 		}
 	}
 	fz_always(ctx)
@@ -943,7 +959,7 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "Page", glo->dim[i].page);
 #if 0
 			write_item_starter(ctx, out, "PageRef");
-			pdf_print_obj_to_json(ctx, out, glo->dim[i].pageref, 0);
+			pdf_print_obj_to_json(ctx, out, glo->dim[i].pageref, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
 			write_item_bbox(ctx, out, "Bounds", glo->dim[i].u.dim.bbox);
 			write_level_end(ctx, out, '}');
@@ -963,14 +979,14 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "Page", glo->font[i].page);
 #if 0
 			write_item_starter(ctx, out, "PageRef");
-			pdf_print_obj_to_json(ctx, out, glo->font[i].pageref, 0);
+			pdf_print_obj_to_json(ctx, out, glo->font[i].pageref, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
 			write_item(ctx, out, "FontType", pdf_to_name(ctx, glo->font[i].u.font.subtype));
 			write_item(ctx, out, "FontName", pdf_to_name(ctx, glo->font[i].u.font.name));
 			write_item(ctx, out, "FontEncoding", glo->font[i].u.font.encoding ? pdf_to_name(ctx, glo->font[i].u.font.encoding) : "");
 #if 0
 			write_item_starter(ctx, out, "Font");
-			pdf_print_obj_to_json(ctx, out, glo->font[i].u.font.obj, 0);
+			pdf_print_obj_to_json(ctx, out, glo->font[i].u.font.obj, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
 			write_level_end(ctx, out, '}');
 		}
@@ -989,7 +1005,7 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "Page", glo->image[i].page);
 #if 0
 			write_item_starter(ctx, out, "PageRef");
-			pdf_print_obj_to_json(ctx, out, glo->image[i].pageref, 0);
+			pdf_print_obj_to_json(ctx, out, glo->image[i].pageref, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
 			if (pdf_is_array(ctx, glo->image[i].u.image.filter))
 			{
@@ -1085,7 +1101,7 @@ printinfo(fz_context* ctx, globals* glo)
 				glo->image[i].u.image.altcs ? " " : "",
 				glo->image[i].u.image.altcs ? altcs : "");
 			write_item_starter(ctx, out, "Image");
-			pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, 0);
+			pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, PRINT_OBJ_TO_JSON_FLAGS);
 
 			fz_free(ctx, cs);
 			fz_free(ctx, altcs);
@@ -1107,7 +1123,7 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "Page", glo->form[i].page);
 #if 0
 			write_item_starter(ctx, out, "PageRef");
-			pdf_print_obj_to_json(ctx, out, glo->form[i].pageref, 0);
+			pdf_print_obj_to_json(ctx, out, glo->form[i].pageref, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
 			write_item_starter(ctx, out, "FormType");
 			fz_write_printf(ctx, out, "\"Form%s%s%s%s\"",
@@ -1116,7 +1132,7 @@ printinfo(fz_context* ctx, globals* glo)
 				glo->form[i].u.form.groupsubtype ? " Group" : "",
 				glo->form[i].u.form.reference ? " Reference" : "");
 			write_item_starter(ctx, out, "Form");
-			pdf_print_obj_to_json(ctx, out, glo->form[i].u.form.obj, 0);
+			pdf_print_obj_to_json(ctx, out, glo->form[i].u.form.obj, PRINT_OBJ_TO_JSON_FLAGS);
 			write_level_end(ctx, out, '}');
 		}
 
@@ -1134,10 +1150,10 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "Page", glo->psobj[i].page);
 #if 0
 			write_item_starter(ctx, out, "PageRef");
-			pdf_print_obj_to_json(ctx, out, glo->psobj[i].pageref, 0);
+			pdf_print_obj_to_json(ctx, out, glo->psobj[i].pageref, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
 			write_item_starter(ctx, out, "Form");
-			pdf_print_obj_to_json(ctx, out, glo->psobj[i].u.form.obj, 0);
+			pdf_print_obj_to_json(ctx, out, glo->psobj[i].u.form.obj, PRINT_OBJ_TO_JSON_FLAGS);
 			write_level_end(ctx, out, '}');
 		}
 
@@ -1295,7 +1311,10 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 					write_item(ctx, out, "Language", fz_string_from_text_language(buf, lang));
 				}
 
-				write_item(ctx, out, "Icon", pdf_annot_icon_name(ctx, annot));
+					if (pdf_annot_has_icon_name(ctx, annot))
+					{
+						write_item(ctx, out, "Icon", pdf_annot_icon_name(ctx, annot));
+					}
 
 				{
 					int field_flags = pdf_annot_field_flags(ctx, annot);
@@ -1387,7 +1406,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 					if (obj)
 					{
 						write_item_starter(ctx, out, "Popup");
-						pdf_print_obj_to_json(ctx, out, obj, 0);
+						pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
 					}
 				}
 
@@ -1643,7 +1662,7 @@ printtail(fz_context* ctx, globals* glo)
 		if (info)
 		{
 			write_item_starter(ctx, out, "MetaInfoDictionary");
-			pdf_print_obj_to_json(ctx, out, pdf_resolve_indirect_chain(ctx, info), 0);
+			pdf_print_obj_to_json(ctx, out, pdf_resolve_indirect_chain(ctx, info), PRINT_OBJ_TO_JSON_FLAGS);
 		}
 	}
 
@@ -2070,7 +2089,7 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 
 int pdfmultipurp_main(int argc, const char **argv)
 {
-	const char *password = "";
+	const char* password = NULL; /* don't throw errors if encrypted */
 	const char* output = NULL;
 	int c;
 	int ret;
@@ -2079,12 +2098,28 @@ int pdfmultipurp_main(int argc, const char **argv)
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:m:h")) != -1)
 	{
 		switch (c)
 		{
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
+		case 'm': 
+			switch (atoi(fz_optarg))
+			{
+			case 0:
+				PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | 1 /* ASCII flag */);
+				break;
+
+			case 1:
+				PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX | 1 /* ASCII flag */);
+				break;
+
+			default:
+				PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
+				break;
+			}
+			break;
 		default:
 			return usage();
 			break;
@@ -2164,7 +2199,6 @@ int pdfmultipurp_main(int argc, const char **argv)
 		fz_set_warning_callback(ctx, orig_warn_print, userdata);
 	}
 
-	// Append
 	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
 	fz_drop_context(ctx);

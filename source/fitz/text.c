@@ -116,7 +116,7 @@ fz_show_string(fz_context *ctx, fz_text *text, fz_font *user_font, fz_matrix trm
 
 	while (*s)
 	{
-		s += fz_chartorune(&ucs, s);
+		s += fz_chartorune_unsafe(&ucs, s);
 		gid = fz_encode_character_with_fallback(ctx, user_font, ucs, 0, language, &font);
 		fz_show_glyph(ctx, text, font, trm, gid, ucs, wmode, bidi_level, markup_dir, language);
 		adv = fz_advance_glyph(ctx, font, gid, wmode);
@@ -139,7 +139,7 @@ fz_measure_string(fz_context *ctx, fz_font *user_font, fz_matrix trm, const char
 
 	while (*s)
 	{
-		s += fz_chartorune(&ucs, s);
+		s += fz_chartorune_unsafe(&ucs, s);
 		gid = fz_encode_character_with_fallback(ctx, user_font, ucs, 0, language, &font);
 		adv = fz_advance_glyph(ctx, font, gid, wmode);
 		if (wmode == 0)

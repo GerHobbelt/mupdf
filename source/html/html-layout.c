@@ -127,7 +127,7 @@ static int walk_string(string_walker *walker)
 	{
 		int c;
 
-		walker->s += fz_chartorune(&c, walker->s);
+		walker->s += fz_chartorune_unsafe(&c, walker->s);
 		(void)fz_encode_character_with_fallback(ctx, walker->base_font, c, walker->script, walker->language, &walker->next_font);
 		if (walker->next_font != walker->font)
 		{
@@ -993,7 +993,7 @@ static void draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, flo
 					k = 0;
 					while (walker.start + k < walker.end)
 					{
-						n = fz_chartorune(&c, walker.start + k);
+						n = fz_chartorune(&c, walker.start + k, walker.end - (walker.start + k));
 
 						for (i = 0; i < walker.glyph_count; ++i)
 						{
@@ -1207,7 +1207,7 @@ static void draw_list_mark(fz_context *ctx, fz_html_box *box, float page_top, fl
 	w = 0;
 	while (*s)
 	{
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 		g = fz_encode_character_with_fallback(ctx, box->style->font, c, UCDN_SCRIPT_LATIN, FZ_LANG_UNSET, &font);
 		w += fz_advance_glyph(ctx, font, g, 0) * box->em;
 	}
@@ -1221,7 +1221,7 @@ static void draw_list_mark(fz_context *ctx, fz_html_box *box, float page_top, fl
 		trm.f = y - page_top;
 		while (*s)
 		{
-			s += fz_chartorune(&c, s);
+			s += fz_chartorune_unsafe(&c, s);
 			g = fz_encode_character_with_fallback(ctx, box->style->font, c, UCDN_SCRIPT_LATIN, FZ_LANG_UNSET, &font);
 			fz_show_glyph(ctx, text, font, trm, g, c, 0, 0, FZ_BIDI_NEUTRAL, FZ_LANG_UNSET);
 			trm.e += fz_advance_glyph(ctx, font, g, 0) * box->em;

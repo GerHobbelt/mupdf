@@ -727,43 +727,51 @@ pdf_write_icon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_
 	else
 		fz_append_string(ctx, buf, "0 g\n");
 
-	name = pdf_annot_icon_name(ctx, annot);
+	fz_try(ctx)
+	{
+		name = pdf_annot_icon_name(ctx, annot);
 
-	/* Text names */
-	if (!strcmp(name, "Comment"))
-		fz_append_string(ctx, buf, icon_comment);
-	else if (!strcmp(name, "Key"))
-		fz_append_string(ctx, buf, icon_key);
-	else if (!strcmp(name, "Note"))
-		fz_append_string(ctx, buf, icon_note);
-	else if (!strcmp(name, "Help"))
-		fz_append_string(ctx, buf, icon_help);
-	else if (!strcmp(name, "NewParagraph"))
-		fz_append_string(ctx, buf, icon_new_paragraph);
-	else if (!strcmp(name, "Paragraph"))
-		fz_append_string(ctx, buf, icon_paragraph);
-	else if (!strcmp(name, "Insert"))
-		fz_append_string(ctx, buf, icon_insert);
+		/* Text names */
+		if (!strcmp(name, "Comment"))
+			fz_append_string(ctx, buf, icon_comment);
+		else if (!strcmp(name, "Key"))
+			fz_append_string(ctx, buf, icon_key);
+		else if (!strcmp(name, "Note"))
+			fz_append_string(ctx, buf, icon_note);
+		else if (!strcmp(name, "Help"))
+			fz_append_string(ctx, buf, icon_help);
+		else if (!strcmp(name, "NewParagraph"))
+			fz_append_string(ctx, buf, icon_new_paragraph);
+		else if (!strcmp(name, "Paragraph"))
+			fz_append_string(ctx, buf, icon_paragraph);
+		else if (!strcmp(name, "Insert"))
+			fz_append_string(ctx, buf, icon_insert);
 
-	/* FileAttachment names */
-	else if (!strcmp(name, "Graph"))
-		fz_append_string(ctx, buf, icon_graph);
-	else if (!strcmp(name, "PushPin"))
-		fz_append_string(ctx, buf, icon_push_pin);
-	else if (!strcmp(name, "Paperclip"))
-		fz_append_string(ctx, buf, icon_paperclip);
-	else if (!strcmp(name, "Tag"))
-		fz_append_string(ctx, buf, icon_tag);
+		/* FileAttachment names */
+		else if (!strcmp(name, "Graph"))
+			fz_append_string(ctx, buf, icon_graph);
+		else if (!strcmp(name, "PushPin"))
+			fz_append_string(ctx, buf, icon_push_pin);
+		else if (!strcmp(name, "Paperclip"))
+			fz_append_string(ctx, buf, icon_paperclip);
+		else if (!strcmp(name, "Tag"))
+			fz_append_string(ctx, buf, icon_tag);
 
-	/* Sound names */
-	else if (!strcmp(name, "Speaker"))
-		fz_append_string(ctx, buf, icon_speaker);
-	else if (!strcmp(name, "Mic"))
-		fz_append_string(ctx, buf, icon_mic);
+		/* Sound names */
+		else if (!strcmp(name, "Speaker"))
+			fz_append_string(ctx, buf, icon_speaker);
+		else if (!strcmp(name, "Mic"))
+			fz_append_string(ctx, buf, icon_mic);
 
-	/* Unknown */
-	else
+		/* Unknown */
+		else
+			fz_append_string(ctx, buf, icon_star);
+	}
+	fz_catch(ctx)
+	{
+		/* Unknown */
 		fz_append_string(ctx, buf, icon_star);
+	}
 
 	*rect = fz_make_rect(xc - 9, yc - 9, xc + 9, yc + 9);
 	*bbox = fz_make_rect(0, 0, 16, 16);
@@ -776,7 +784,7 @@ measure_stamp_string(fz_context *ctx, fz_font *font, const char *text)
 	while (*text)
 	{
 		int c, g;
-		text += fz_chartorune(&c, text);
+		text += fz_chartorune_unsafe(&c, text);
 		if (fz_windows_1252_from_unicode(c) < 0)
 			c = REPLACEMENT;
 		g = fz_encode_character(ctx, font, c);
@@ -792,7 +800,7 @@ write_stamp_string(fz_context *ctx, fz_buffer *buf, fz_font *font, const char *t
 	while (*text)
 	{
 		int c;
-		text += fz_chartorune(&c, text);
+		text += fz_chartorune_unsafe(&c, text);
 		c = fz_windows_1252_from_unicode(c);
 		if (c < 0) c = REPLACEMENT;
 		if (c == '(' || c == ')' || c == '\\')
@@ -923,7 +931,7 @@ add_required_fonts(fz_context *ctx, pdf_document *doc, pdf_obj *res_font,
 	while (*text)
 	{
 		int c;
-		text += fz_chartorune(&c, text);
+		text += fz_chartorune_unsafe(&c, text);
 		switch (ucdn_get_script(c))
 		{
 		default: add_latin = 1; /* for fallback bullet character */ break;
@@ -1020,7 +1028,7 @@ static int find_initial_script(const char *text)
 	int c;
 	while (*text)
 	{
-		text += fz_chartorune(&c, text);
+		text += fz_chartorune_unsafe(&c, text);
 		script = ucdn_get_script(c);
 		if (script != UCDN_SCRIPT_COMMON && script != UCDN_SCRIPT_INHERITED)
 			break;
@@ -1062,7 +1070,7 @@ static int next_text_walk(fz_context *ctx, struct text_walk_state *state)
 		return 0;
 	}
 
-	state->n = fz_chartorune(&state->u, state->text);
+	state->n = fz_chartorune_unsafe(&state->u, state->text);
 	script = ucdn_get_script(state->u);
 	if (script == UCDN_SCRIPT_COMMON || script == UCDN_SCRIPT_INHERITED)
 		script = state->last_script;
@@ -1328,7 +1336,7 @@ layout_comb_string(fz_context *ctx, fz_layout_block *out, float x, float y,
 		fz_add_layout_line(ctx, out, x + cell_w / 2, y, size, a);
 	while (a < b)
 	{
-		n = fz_chartorune(&c, a);
+		n = fz_chartorune(&c, a, b - a);
 		c = fz_windows_1252_from_unicode(c);
 		if (c < 0) c = REPLACEMENT;
 		g = fz_encode_character(ctx, font, c);

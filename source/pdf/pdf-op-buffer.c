@@ -47,7 +47,7 @@ static void
 pdf_out_d(fz_context *ctx, pdf_processor *proc, pdf_obj *array, float phase)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = ((pdf_output_processor*)proc)->ahxencode;
+	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
 	if (!((pdf_output_processor*)proc)->extgstate)
 	{
 		pdf_print_obj(ctx, out, array, 1, ahx);
@@ -388,7 +388,7 @@ static void
 pdf_out_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = ((pdf_output_processor*)proc)->ahxencode;
+	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
 	pdf_print_obj(ctx, out, array, 1, ahx);
 	fz_write_string(ctx, out, " TJ\n");
 }
@@ -552,7 +552,7 @@ static void
 pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colorspace)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = ((pdf_output_processor*)proc)->ahxencode;
+	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
 	fz_compressed_buffer *cbuf;
 	fz_buffer *buf;
 	int i;
@@ -729,7 +729,7 @@ static void
 pdf_out_DP(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = ((pdf_output_processor*)proc)->ahxencode;
+	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
 	fz_write_printf(ctx, out, "%n ", tag);
 	pdf_print_obj(ctx, out, raw, 1, ahx);
 	fz_write_string(ctx, out, " DP\n");
@@ -746,7 +746,7 @@ static void
 pdf_out_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = ((pdf_output_processor*)proc)->ahxencode;
+	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
 	fz_write_printf(ctx, out, "%n ", tag);
 	pdf_print_obj(ctx, out, raw, 1, ahx);
 	fz_write_string(ctx, out, " BDC\n");
@@ -915,7 +915,7 @@ pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode)
 	}
 
 	proc->out = out;
-	proc->ahxencode = ahxencode;
+	proc->ahxencode = !!ahxencode;
 
 	return (pdf_processor*)proc;
 }

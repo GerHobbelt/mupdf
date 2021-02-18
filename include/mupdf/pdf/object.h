@@ -171,9 +171,15 @@ int pdf_obj_refs(fz_context *ctx, pdf_obj *ref);
 
 int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 
+#define PDF_PRINT_RESOLVE_ALL_INDIRECT      			0x0400
+
 char *pdf_sprint_obj(fz_context *ctx, char *buf, size_t cap, size_t *len, pdf_obj *obj, int tight, int ascii);
 void pdf_print_obj(fz_context *ctx, fz_output *out, pdf_obj *obj, int tight, int ascii);
 void pdf_print_encrypted_obj(fz_context *ctx, fz_output *out, pdf_obj *obj, int tight, int ascii, pdf_crypt *crypt, int num, int gen);
+
+#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x0100
+#define PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW		0x0200
+#define PDF_PRINT_JSON_DEPTH_LEVEL(n)					((n) & 0x7F)
 
 char* pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_obj* obj, int flags);
 void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int flags);

@@ -335,13 +335,13 @@ end_annot_op(fz_context *ctx, pdf_annot *annot)
 	pdf_end_operation(ctx, annot->page->doc);
 }
 
-static int is_allowed_subtype(fz_context *ctx, pdf_annot *annot, pdf_obj *property, pdf_obj **allowed)
+static int is_allowed_subtype(fz_context *ctx, pdf_annot *annot, pdf_obj *property, const pdf_obj **allowed)
 {
 	pdf_obj *subtype;
 
 	subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 	while (*allowed) {
-		if (pdf_name_eq(ctx, subtype, *allowed))
+		if (pdf_name_eq(ctx, subtype, (pdf_obj *)*allowed))
 			return 1;
 		allowed++;
 	}
@@ -349,7 +349,7 @@ static int is_allowed_subtype(fz_context *ctx, pdf_annot *annot, pdf_obj *proper
 	return 0;
 }
 
-static int is_allowed_subtype_wrap(fz_context *ctx, pdf_annot *annot, pdf_obj *property, pdf_obj **allowed)
+static int is_allowed_subtype_wrap(fz_context *ctx, pdf_annot *annot, pdf_obj *property, const pdf_obj **allowed)
 {
 	int ret;
 
@@ -365,7 +365,7 @@ static int is_allowed_subtype_wrap(fz_context *ctx, pdf_annot *annot, pdf_obj *p
 	return ret;
 }
 
-static void check_allowed_subtypes(fz_context *ctx, pdf_annot *annot, pdf_obj *property, pdf_obj **allowed)
+static void check_allowed_subtypes(fz_context *ctx, pdf_annot *annot, pdf_obj *property, const pdf_obj **allowed)
 {
 	pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 	if (!is_allowed_subtype(ctx, annot, property, allowed))
@@ -1006,7 +1006,7 @@ pdf_set_annot_is_open(fz_context *ctx, pdf_annot *annot, int is_open)
 		fz_rethrow(ctx);
 }
 
-static pdf_obj *icon_name_subtypes[] = {
+static const pdf_obj *icon_name_subtypes[] = {
 	PDF_NAME(FileAttachment),
 	PDF_NAME(Sound),
 	PDF_NAME(Stamp),
@@ -1490,7 +1490,7 @@ static int pdf_annot_color_rgb(fz_context *ctx, pdf_obj *arr, float rgb[3])
 	return 1;
 }
 
-static void pdf_set_annot_color_imp(fz_context *ctx, pdf_annot *annot, pdf_obj *key, int n, const float *color, pdf_obj **allowed)
+static void pdf_set_annot_color_imp(fz_context *ctx, pdf_annot *annot, pdf_obj *key, int n, const float *color, const pdf_obj **allowed)
 {
 	pdf_document *doc = annot->page->doc;
 	pdf_obj *arr;

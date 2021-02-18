@@ -270,7 +270,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 	size_t i, n;
 
 	/* UTF-16BE */
-	if (srclen >= 2 && srcptr[0] == 254 && srcptr[1] == 255)
+	if (srclen >= 2 && srcptr[0] == 0xFE && srcptr[1] == 0xFF)
 	{
 		i = 2;
 		while (i + 2 <= srclen)
@@ -302,7 +302,7 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 	}
 
 	/* UTF-16LE */
-	else if (srclen >= 2 && srcptr[0] == 255 && srcptr[1] == 254)
+	else if (srclen >= 2 && srcptr[0] == 0xFF && srcptr[1] == 0xFE)
 	{
 		i = 2;
 		while (i + 2 <= srclen)
@@ -437,17 +437,17 @@ pdf_new_text_string_utf16be(fz_context *ctx, const char *s)
 	n = 0;
 	while (*ss)
 	{
-		ss += fz_chartorune(&c, ss);
+		ss += fz_chartorune_unsafe(&c, ss);
 		n += (c >= 0x10000) ? 2 : 1;
 	}
 
 	p = fz_malloc(ctx, n * 2 + 2);
 	i = 0;
-	p[i++] = 254;
-	p[i++] = 255;
+	p[i++] = 0xFE;
+	p[i++] = 0xFF;
 	while (*s)
 	{
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 		if (c >= 0x10000)
 		{
 			a = (((c - 0x10000) >> 10) & 0x3ff) + 0xD800;

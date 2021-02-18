@@ -47,7 +47,7 @@ fz_wchar_from_utf8(const char *s)
 	if (!r)
 		return NULL;
 	while (*s) {
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 		/* Truncating c to a wchar_t can be problematic if c
 		 * is 0x10000. */
 		if (c >= 0x10000)

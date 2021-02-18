@@ -581,7 +581,7 @@ walk_string(fz_context *ctx, int uni, int remove, editable_str *str)
 	{
 		char *s = &str->utf8[str->pos];
 		size_t len;
-		int n = fz_chartorune(&rune, s);
+		int n = fz_chartorune_unsafe(&rune, s);
 		if (rune == 0)
 		{
 			/* End of string. No point in tracking through any more. */

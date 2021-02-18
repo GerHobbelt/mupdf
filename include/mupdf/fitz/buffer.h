@@ -52,6 +52,16 @@ size_t fz_buffer_storage(fz_context *ctx, fz_buffer *buf, unsigned char **datap)
 /**
 	Ensure that a buffer's data ends in a
 	0 byte, and return a pointer to it.
+
+	WARNING: If the buffer may contain NUL bytes, these will prematurely terminate
+	the returned C string. Use
+
+		fz_terminate_buffer(ctx, buf);
+		unsigned char *string_value;
+		size_t string_length = fz_buffer_storage(ctx, buf, &string_value);
+
+	to obtain an equivalent NUL-terminated string *with* the
+	string length specified in string_length (including embedded NUL bytes).
 */
 const char *fz_string_from_buffer(fz_context *ctx, fz_buffer *buf);
 

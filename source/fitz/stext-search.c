@@ -425,7 +425,7 @@ static inline int canon(int c)
 
 static inline int chartocanon(int *c, const char *s)
 {
-	int n = fz_chartorune(c, s);
+	int n = fz_chartorune_unsafe(c, s);
 	*c = canon(*c);
 	return n;
 }
@@ -525,7 +525,7 @@ try_new_match:
 								goto try_new_match;
 						}
 					}
-					haystack += fz_chartorune(&c, haystack);
+					haystack += fz_chartorune_unsafe(&c, haystack);
 				}
 				assert(*haystack == '\n');
 				++haystack;

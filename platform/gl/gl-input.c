@@ -8,7 +8,7 @@ static char *find_string_location(char *s, char *e, float w, float x)
 	int c;
 	while (s < e)
 	{
-		int n = fz_chartorune(&c, s);
+		int n = fz_chartorune(&c, s, e - s);
 		float cw = ui_measure_character(c);
 		if (w + (cw / 2) >= x)
 			return s;
@@ -29,7 +29,7 @@ static char *find_input_location(struct line *lines, int n, float left, float to
 static inline int myisalnum(char *s)
 {
 	int cat, c;
-	fz_chartorune(&c, s);
+	fz_chartorune_unsafe(&c, s);
 	cat = ucdn_get_general_category(c);
 	if (cat >= UCDN_GENERAL_CATEGORY_LL && cat <= UCDN_GENERAL_CATEGORY_LU)
 		return 1;

@@ -447,7 +447,7 @@ enum
 };
 
 int
-fz_chartorune(int *rune, const char *str)
+fz_chartorune(int *rune, const char *str, size_t n)
 {
 	int c, c1, c2, c3;
 	int l;
@@ -456,6 +456,8 @@ fz_chartorune(int *rune, const char *str)
 	 * one character sequence
 	 *	00000-0007F => T1
 	 */
+	if (n < 1)
+		goto bad;
 	c = *(const unsigned char*)str;
 	if(c < Tx) {
 		*rune = c;
@@ -466,6 +468,8 @@ fz_chartorune(int *rune, const char *str)
 	 * two character sequence
 	 *	0080-07FF => T2 Tx
 	 */
+	if (n < 2)
+		goto bad;
 	c1 = *(const unsigned char*)(str+1) ^ Tx;
 	if(c1 & Testx)
 		goto bad;
@@ -483,6 +487,8 @@ fz_chartorune(int *rune, const char *str)
 	 * three character sequence
 	 *	0800-FFFF => T3 Tx Tx
 	 */
+	if (n < 3)
+		goto bad;
 	c2 = *(const unsigned char*)(str+2) ^ Tx;
 	if(c2 & Testx)
 		goto bad;
@@ -498,6 +504,8 @@ fz_chartorune(int *rune, const char *str)
 	 * four character sequence (21-bit value)
 	 *	10000-1FFFFF => T4 Tx Tx Tx
 	 */
+	if (n < 4)
+		goto bad;
 	c3 = *(const unsigned char*)(str+3) ^ Tx;
 	if (c3 & Testx)
 		goto bad;
@@ -519,6 +527,17 @@ fz_chartorune(int *rune, const char *str)
 bad:
 	*rune = Bad;
 	return 1;
+}
+
+/*
+* 'Unsafe' version of chars->unicode point: this one assumes your
+* input string is properly NUL terminated, which will help it detect
+* invalid UTF8 inputs.
+*/
+int
+fz_chartorune_unsafe(int* rune, const char* str)
+{
+	return fz_chartorune(rune, str, 7 /* arbitrary */);
 }
 
 int
@@ -596,7 +615,7 @@ fz_utflen(const char *s)
 				return n;
 			s++;
 		} else
-			s += fz_chartorune(&rune, s);
+			s += fz_chartorune_unsafe(&rune, s);
 		n++;
 	}
 	return 0;
