@@ -220,7 +220,7 @@ static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, 
 static void write_item_coord(fz_context* ctx, fz_output* out, const char* label, float x, float y)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": { X: %g, Y: %g }", label, x, y);
+	fz_write_printf(ctx, out, "\"%s\": { \"X\": %g, \"Y\": %g }", label, x, y);
 }
 
 // we consider any JSON with more than 1024 levels of object/array "removed from sanity" ;-)
@@ -1075,7 +1075,7 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "ImageWidth", pdf_to_int(ctx, glo->image[i].u.image.width));
 			write_item_int(ctx, out, "ImageHeight", pdf_to_int(ctx, glo->image[i].u.image.height));
 			write_item_starter(ctx, out, "ImageDimensions");
-			fz_write_printf(ctx, out, "{ W: %g, H: %g }",
+			fz_write_printf(ctx, out, "{ \"W\": %g, \"H\": %g }",
 				pdf_to_real(ctx, glo->image[i].u.image.width),
 				pdf_to_real(ctx, glo->image[i].u.image.height));
 			write_item_int(ctx, out, "ImageBPC", glo->image[i].u.image.bpc ? pdf_to_int(ctx, glo->image[i].u.image.bpc) : 1);
@@ -1495,7 +1495,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 						int target_page = fz_page_number_from_location(ctx, fz_document_from_pdf_document(ctx, glo->doc), loc) + 1;
 
 						write_item(ctx, out, "LinkType", "Internal");
-						write_item(ctx, out, "Url:", link->uri);
+						write_item(ctx, out, "Url", link->uri);
 						if (loc.chapter >= 0 && loc.page >= 0)
 						{
 							write_item_int(ctx, out, "TargetPageNumber", target_page);
@@ -1513,7 +1513,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 					else
 					{
 						write_item(ctx, out, "LinkType", "External");
-						write_item(ctx, out, "Url:", link->uri);
+						write_item(ctx, out, "Url", link->uri);
 						write_item_bbox(ctx, out, "LinkBounds", &bounds);
 					}
 					write_level_end(ctx, out, '}');

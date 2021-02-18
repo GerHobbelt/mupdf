@@ -3262,7 +3262,7 @@ static void fmt_str_to_json_internal(fz_context* ctx, struct fmt* fmt, const uns
 					fmt_putc(ctx, fmt, ' ');
 			}
 			fmt_hex_out_bytespaced(ctx, fmt, s, n);
-			fmt_puts(ctx, fmt, "\",\n  \"RAW\": \"");
+			fmt_puts(ctx, fmt, "\"\n  // RAW: \"");
 		}
 		else {
 			fmt_putc(ctx, fmt, '"');
