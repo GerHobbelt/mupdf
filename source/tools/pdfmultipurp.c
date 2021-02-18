@@ -142,7 +142,7 @@ usage(void)
 		"\t-p -\tpassword for decryption\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -153,18 +153,18 @@ static void write_sep(fz_context* ctx, fz_output* out)
 	switch (json_sep_state)
 	{
 	case 0:
-		// start of output: 
+		// start of output:
 		write_level_start(ctx, out, '{');
 		break;
 
 	case 1:
-		// first element in object: 
+		// first element in object:
 		fz_write_printf(ctx, out, "  ");
 		json_sep_state = 2;
 		break;
 
 	case 2:
-		// next element in object: 
+		// next element in object:
 		fz_write_printf(ctx, out, ",\n  ");
 		break;
 	}
@@ -441,8 +441,6 @@ showglobalinfo(fz_context* ctx, globals* glo)
 				write_item(ctx, out, "Title", outline->title);
 				write_item_bool(ctx, out, "IsOpen", outline->is_open);
 
-				write_level_end(ctx, out, '}');
-
 				if (outline->down)
 				{
 					outline_parents[parents_index++] = outline->next;
@@ -455,13 +453,17 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 					outline = outline->down;
 				}
-
-				outline = outline->next;
-				while (!outline && parents_index > 0)
+				else
 				{
-					outline = outline_parents[--parents_index];
+					outline = outline->next;
+					while (!outline && parents_index > 0)
+					{
+						outline = outline_parents[--parents_index];
 
-					write_level_end(ctx, out, ']');
+						write_level_end(ctx, out, ']');
+					}
+
+					write_level_end(ctx, out, '}');
 				}
 			}
 		}
@@ -1617,17 +1619,17 @@ printtail(fz_context* ctx, globals* glo)
 	int updates = pdf_count_versions(ctx, doc);
 
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATOR, buf, sizeof buf) > 0)
-		write_item(ctx, out, "PDF Creator", buf);
+		write_item(ctx, out, "PDF_Creator", buf);
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_PRODUCER, buf, sizeof buf) > 0)
-		write_item(ctx, out, "PDF Producer", buf);
+		write_item(ctx, out, "PDF_Producer", buf);
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_SUBJECT, buf, sizeof buf) > 0)
 		write_item(ctx, out, "Subject", buf);
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_KEYWORDS, buf, sizeof buf) > 0)
 		write_item(ctx, out, "Keywords", buf);
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATION_DATE, buf, sizeof buf) > 0)
-		write_item(ctx, out, "Creation Date", buf);
+		write_item(ctx, out, "Creation_Date", buf);
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_MODIFICATION_DATE, buf, sizeof buf) > 0)
-		write_item(ctx, out, "Modification Date", buf);
+		write_item(ctx, out, "Modification_Date", buf);
 
 	{
 		pdf_obj* info = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
@@ -1778,7 +1780,7 @@ showinfo(fz_context* ctx, globals* glo, const char* pagelist, const char **first
 
 	pagecount = pdf_count_pages(ctx, glo->doc);
 
-	int json_stack_series_level = write_item_starter_block(ctx, out, "PageSeries", '[');
+	int json_stack_series_level = write_item_starter_block(ctx, out, "PageSequence", '[');
 
 	while ((pagelist = fz_parse_page_range(ctx, pagelist, &spage, &epage, pagecount)))
 	{
@@ -1978,7 +1980,7 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 
 				showglobalinfo(ctx, &glo);
 
-				write_item_starter_block(ctx, out, "PageSeries", '[');
+				write_item_starter_block(ctx, out, "PageInfoSeries", '[');
 
 				state = NO_INFO_GATHERED;
 			}
@@ -2156,7 +2158,7 @@ int pdfmultipurp_main(int argc, const char **argv)
 		fz_set_warning_callback(ctx, orig_warn_print, userdata);
 	}
 
-	// Append 
+	// Append
 	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
 	fz_drop_context(ctx);
