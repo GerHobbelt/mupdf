@@ -410,11 +410,11 @@ static int usage(void)
 		"  -F -  output format (default inferred from output file name)\n"
 		"    raster: png, pnm, pam, pbm, pkm, pwg, pcl, ps\n"
 		"    vector: svg, pdf, trace, ocr.trace\n"
-		"    text: txt, html, xhtml, stext\n"
+		"    text: txt, html, xhtml, stext, stext.json\n"
 #ifndef OCR_DISABLED
-		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.stext\n"
+		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.stext, ocr.stext.json\n"
 #else
-		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.stext (disabled)\n"
+		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.stext, ocr.stext.json (disabled)\n"
 #endif
 		"    bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
 		"\n"
