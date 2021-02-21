@@ -261,7 +261,7 @@ is_valid_utf8(const unsigned char *s, const unsigned char *end)
 }
 
 char *
-pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen)
+pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen, size_t *dstlen_ref)
 {
 	const unsigned char *srcptr = (const unsigned char*)ssrcptr;
 	char *dstptr, *dst;
@@ -386,20 +386,27 @@ pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *ssrcptr, size_t srclen
 	}
 
 	*dstptr = 0;
+	if (dstlen_ref) {
+		// extra: ignore trailing NUL bytes in the result string
+		// --> reduce the reported string/buffer length accordingly
+		while (dstptr > dst && !dstptr[-1])
+			dstptr--;
+		*dstlen_ref = dstptr - dst;
+	}
 	return dst;
 }
 
 char *
-pdf_new_utf8_from_pdf_string_obj(fz_context *ctx, pdf_obj *src)
+pdf_new_utf8_from_pdf_string_obj(fz_context *ctx, pdf_obj *src, size_t* dstlen_ref)
 {
 	const char *srcptr;
 	size_t srclen;
 	srcptr = pdf_to_string(ctx, src, &srclen);
-	return pdf_new_utf8_from_pdf_string(ctx, srcptr, srclen);
+	return pdf_new_utf8_from_pdf_string(ctx, srcptr, srclen, dstlen_ref);
 }
 
 char *
-pdf_new_utf8_from_pdf_stream_obj(fz_context *ctx, pdf_obj *src)
+pdf_new_utf8_from_pdf_stream_obj(fz_context *ctx, pdf_obj *src, size_t* dstlen_ref)
 {
 	fz_buffer *stmbuf;
 	char *srcptr;
@@ -409,7 +416,7 @@ pdf_new_utf8_from_pdf_stream_obj(fz_context *ctx, pdf_obj *src)
 	stmbuf = pdf_load_stream(ctx, src);
 	srclen = fz_buffer_storage(ctx, stmbuf, (unsigned char **)&srcptr);
 	fz_try(ctx)
-		dst = pdf_new_utf8_from_pdf_string(ctx, srcptr, srclen);
+		dst = pdf_new_utf8_from_pdf_string(ctx, srcptr, srclen, dstlen_ref);
 	fz_always(ctx)
 		fz_drop_buffer(ctx, stmbuf);
 	fz_catch(ctx)
@@ -418,11 +425,11 @@ pdf_new_utf8_from_pdf_stream_obj(fz_context *ctx, pdf_obj *src)
 }
 
 char *
-pdf_load_stream_or_string_as_utf8(fz_context *ctx, pdf_obj *src)
+pdf_load_stream_or_string_as_utf8(fz_context *ctx, pdf_obj *src, size_t* dstlen_ref)
 {
 	if (pdf_is_stream(ctx, src))
-		return pdf_new_utf8_from_pdf_stream_obj(ctx, src);
-	return pdf_new_utf8_from_pdf_string_obj(ctx, src);
+		return pdf_new_utf8_from_pdf_stream_obj(ctx, src, dstlen_ref);
+	return pdf_new_utf8_from_pdf_string_obj(ctx, src, dstlen_ref);
 }
 
 static pdf_obj *

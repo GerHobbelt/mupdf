@@ -1022,7 +1022,7 @@ FUN(PDFObject_asString)(JNIEnv *env, jobject self)
 	if (!ctx || !obj) return NULL;
 
 	fz_try(ctx)
-		str = pdf_to_text_string(ctx, obj);
+		str = pdf_to_text_string(ctx, obj, NULL);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 

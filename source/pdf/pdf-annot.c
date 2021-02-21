@@ -1300,7 +1300,7 @@ pdf_document_language(fz_context *ctx, pdf_document *doc)
 	pdf_obj *trailer = pdf_trailer(ctx, doc);
 	pdf_obj *root = pdf_dict_get(ctx, trailer, PDF_NAME(Root));
 	pdf_obj *lang = pdf_dict_get(ctx, root, PDF_NAME(Lang));
-	return fz_text_language_from_string(pdf_to_text_string(ctx, lang));
+	return fz_text_language_from_string(pdf_to_text_string(ctx, lang, NULL));
 }
 
 void pdf_set_document_language(fz_context *ctx, pdf_document *doc, fz_text_language lang)

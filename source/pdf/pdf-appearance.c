@@ -1768,7 +1768,7 @@ pdf_write_ch_widget_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 				if (pdf_is_array(ctx, val))
 					fz_append_string(ctx, text, pdf_array_get_text_string(ctx, val, 1));
 				else
-					fz_append_string(ctx, text, pdf_to_text_string(ctx, val));
+					fz_append_string(ctx, text, pdf_to_text_string(ctx, val, NULL));
 				fz_append_byte(ctx, text, '\n');
 			}
 			pdf_write_tx_widget_appearance(ctx, annot, buf, rect, bbox, matrix, res,
@@ -2111,10 +2111,10 @@ static void pdf_update_button_appearance(fz_context *ctx, pdf_annot *annot)
 			CA = pdf_dict_get(ctx, MK, PDF_NAME(CA));
 			AC = pdf_dict_get(ctx, MK, PDF_NAME(AC));
 
-			label = pdf_to_text_string(ctx, CA);
+			label = pdf_to_text_string(ctx, CA, NULL);
 			ap_n = draw_push_button(ctx, annot, bbox, matrix, w, h, label, font, size, color, 0);
 
-			label = pdf_to_text_string(ctx, AC ? AC : CA);
+			label = pdf_to_text_string(ctx, AC ? AC : CA, NULL);
 			ap_d = draw_push_button(ctx, annot, bbox, matrix, w, h, label, font, size, color, 1);
 
 			ap = pdf_dict_put_dict(ctx, annot->obj, PDF_NAME(AP), 2);

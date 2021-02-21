@@ -7,6 +7,7 @@
 #include "mupdf/pdf.h"
 
 #include "mupdf/helpers/dir.h"
+#include "utf.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -244,13 +245,21 @@ static void showoutline(void)
 		fz_rethrow(ctx);
 }
 
-static void showtext(char* buf, int indent)
+static void showtext(char* buf, size_t buflen, int indent)
 {
 	int bol = 1;
-	int c = *buf;
-	while (*buf)
+	int c;
+	while (buflen--)
 	{
 		c = *buf++;
+		if (c == 0)
+		{
+			// whoa! JS sourcefile has embedded NUL byte!
+			// print so it will be noticable:
+			fz_write_printf(ctx, out, "%C<NUL>%C", Runeerror, Runeerror);
+			bol = 0;
+			continue;
+		}
 		if (c == '\r')
 		{
 			if (*buf == '\n')
@@ -277,9 +286,10 @@ static void showjs(void)
 		pdf_obj* name = pdf_dict_get_key(ctx, tree, i);
 		pdf_obj* action = pdf_dict_get_val(ctx, tree, i);
 		pdf_obj* js = pdf_dict_get(ctx, action, PDF_NAME(JS));
-		char* src = pdf_load_stream_or_string_as_utf8(ctx, js);
+		size_t srclength = 0;
+		char* src = pdf_load_stream_or_string_as_utf8(ctx, js, &srclength);
 		fz_write_printf(ctx, out, "// %s\n", pdf_to_name_not_null(ctx, name));
-		showtext(src, 0);
+		showtext(src, srclength, 0);
 		fz_free(ctx, src);
 	}
 }
@@ -291,9 +301,10 @@ static void showaction(pdf_obj* action, const char* name)
 		pdf_obj* js = pdf_dict_get(ctx, action, PDF_NAME(JS));
 		if (js)
 		{
-			char* src = pdf_load_stream_or_string_as_utf8(ctx, js);
+			size_t srclength = 0;
+			char* src = pdf_load_stream_or_string_as_utf8(ctx, js, &srclength);
 			fz_write_printf(ctx, out, "    %s: {\n", name);
-			showtext(src, 1);
+			showtext(src, srclength, 1);
 			fz_write_printf(ctx, out, "    }\n", name);
 			fz_free(ctx, src);
 		}

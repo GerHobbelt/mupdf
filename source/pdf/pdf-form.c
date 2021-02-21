@@ -28,7 +28,7 @@ const char *pdf_field_value(fz_context *ctx, pdf_obj *field)
 	if (pdf_is_stream(ctx, v))
 	{
 		// FIXME: pdf_dict_put_inheritable...
-		char *str = pdf_new_utf8_from_pdf_stream_obj(ctx, v);
+		char *str = pdf_new_utf8_from_pdf_stream_obj(ctx, v, NULL);
 		fz_try(ctx)
 			pdf_dict_put_text_string(ctx, field, PDF_NAME(V), str);
 		fz_always(ctx)
@@ -37,7 +37,7 @@ const char *pdf_field_value(fz_context *ctx, pdf_obj *field)
 			fz_rethrow(ctx);
 		v = pdf_dict_get(ctx, field, PDF_NAME(V));
 	}
-	return pdf_to_text_string(ctx, v);
+	return pdf_to_text_string(ctx, v, NULL);
 }
 
 int pdf_field_flags(fz_context *ctx, pdf_obj *obj)
@@ -139,7 +139,7 @@ lookup_field_sub(fz_context *ctx, pdf_obj *dict, const char *str)
 	 * portion of str. If not, exit. */
 	if (name)
 	{
-		const char *match = pdf_to_text_string(ctx, name);
+		const char *match = pdf_to_text_string(ctx, name, NULL);
 		const char *e = str;
 		size_t len;
 		while (*e && *e != '.')
@@ -827,7 +827,7 @@ const char *pdf_field_label(fz_context *ctx, pdf_obj *field)
 	if (!label)
 		label = pdf_dict_get_inheritable(ctx, field, PDF_NAME(T));
 	if (label)
-		return pdf_to_text_string(ctx, label);
+		return pdf_to_text_string(ctx, label, NULL);
 	return "Unnamed";
 }
 
@@ -998,7 +998,7 @@ int pdf_text_widget_format(fz_context *ctx, pdf_widget *tw)
 	pdf_obj *js = pdf_dict_getl(ctx, annot->obj, PDF_NAME(AA), PDF_NAME(F), PDF_NAME(JS), NULL);
 	if (js)
 	{
-		char *code = pdf_load_stream_or_string_as_utf8(ctx, js);
+		char *code = pdf_load_stream_or_string_as_utf8(ctx, js, NULL);
 		if (strstr(code, "AFNumber_Format"))
 			type = PDF_WIDGET_TX_FORMAT_NUMBER;
 		else if (strstr(code, "AFSpecial_Format"))
@@ -1117,7 +1117,7 @@ const char *pdf_choice_field_option(fz_context *ctx, pdf_obj *field, int export,
 	if (pdf_array_len(ctx, ent) == 2)
 		return pdf_array_get_text_string(ctx, ent, export ? 0 : 1);
 	else
-		return pdf_to_text_string(ctx, ent);
+		return pdf_to_text_string(ctx, ent, NULL);
 }
 
 int pdf_choice_widget_is_multiselect(fz_context *ctx, pdf_widget *tw)
@@ -1149,7 +1149,7 @@ int pdf_choice_widget_value(fz_context *ctx, pdf_widget *tw, const char *opts[])
 	if (pdf_is_string(ctx, optarr))
 	{
 		if (opts)
-			opts[0] = pdf_to_text_string(ctx, optarr);
+			opts[0] = pdf_to_text_string(ctx, optarr, NULL);
 		return 1;
 	}
 	else
@@ -1162,7 +1162,7 @@ int pdf_choice_widget_value(fz_context *ctx, pdf_widget *tw, const char *opts[])
 				pdf_obj *elem = pdf_array_get(ctx, optarr, i);
 				if (pdf_is_array(ctx, elem))
 					elem = pdf_array_get(ctx, elem, 1);
-				opts[i] = pdf_to_text_string(ctx, elem);
+				opts[i] = pdf_to_text_string(ctx, elem, NULL);
 			}
 		}
 		return n;
@@ -1833,8 +1833,14 @@ static void pdf_execute_js_action(fz_context *ctx, pdf_document *doc, pdf_obj *t
 {
 	if (js)
 	{
-		char *code = pdf_load_stream_or_string_as_utf8(ctx, js);
+		size_t codelength = 0;
+		char *code = pdf_load_stream_or_string_as_utf8(ctx, js, &codelength);
 		int in_op = 0;
+
+		// basic validation check of the JS source file
+		if (codelength != strlen(code)) {
+			fz_throw(ctx, FZ_ERROR_SYNTAX, "PDF Javascript action has embedded NUL characters");
+		}
 
 		fz_var(in_op);
 		fz_try(ctx)

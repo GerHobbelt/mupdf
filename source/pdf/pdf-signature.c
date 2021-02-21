@@ -117,7 +117,7 @@ check_field_locking(fz_context *ctx, pdf_obj *obj, void *data_, pdf_obj **ff)
 		t = pdf_dict_get(ctx, obj, PDF_NAME(T));
 		if (t != NULL)
 		{
-			name = pdf_to_text_string(ctx, t);
+			name = pdf_to_text_string(ctx, t, NULL);
 			n += strlen(name);
 		}
 		if (data->prefix->name[0] && name)

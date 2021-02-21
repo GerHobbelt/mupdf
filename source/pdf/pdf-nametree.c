@@ -144,7 +144,7 @@ pdf_load_name_tree_imp(fz_context *ctx, pdf_obj *dict, pdf_document *doc, pdf_ob
 			pdf_obj *val = pdf_array_get(ctx, names, i + 1);
 			if (pdf_is_string(ctx, key))
 			{
-				key = pdf_new_name(ctx, pdf_to_text_string(ctx, key));
+				key = pdf_new_name(ctx, pdf_to_text_string(ctx, key, NULL));
 				fz_try(ctx)
 					pdf_dict_put(ctx, dict, key, val);
 				fz_always(ctx)

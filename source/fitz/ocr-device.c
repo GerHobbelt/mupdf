@@ -1,4 +1,5 @@
 #include "mupdf/fitz.h"
+#include "utf.h"
 
 #include <assert.h>
 #include <string.h>

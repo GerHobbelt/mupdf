@@ -164,7 +164,7 @@ pdf_parse_file_spec(fz_context *ctx, pdf_document *doc, pdf_obj *file_spec, pdf_
 	else
 		frag[0] = 0;
 
-	path = pdf_to_text_string(ctx, filename);
+	path = pdf_to_text_string(ctx, filename, NULL);
 	uri = NULL;
 #ifdef _WIN32
 	if (!pdf_name_eq(ctx, pdf_dict_get(ctx, file_spec, PDF_NAME(FS)), PDF_NAME(URL)))
@@ -188,7 +188,7 @@ pdf_embedded_file_name(fz_context *ctx, pdf_obj *fs)
 	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(Unix));
 	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(DOS));
 	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(Mac));
-	return pdf_to_text_string(ctx, filename);
+	return pdf_to_text_string(ctx, filename, NULL);
 }
 
 pdf_obj *
@@ -351,7 +351,7 @@ pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *action, int p
 		if (!fz_is_external_link(ctx, uri))
 		{
 			pdf_obj *uri_base_obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/URI/Base");
-			const char *uri_base = uri_base_obj ? pdf_to_text_string(ctx, uri_base_obj) : "file://";
+			const char *uri_base = uri_base_obj ? pdf_to_text_string(ctx, uri_base_obj, NULL) : "file://";
 			char *new_uri = Memento_label(fz_malloc(ctx, strlen(uri_base) + strlen(uri) + 1), "link_action");
 			strcpy(new_uri, uri_base);
 			strcat(new_uri, uri);

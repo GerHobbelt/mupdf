@@ -271,20 +271,41 @@ void fz_write_base64(fz_context *ctx, fz_output *out, const unsigned char *data,
 void fz_write_base64_buffer(fz_context *ctx, fz_output *out, fz_buffer *data, int newline);
 
 /**
+	HEX nibble conversion lookup table. Used internally by fz_printf() et al.
+*/
+extern const char* fz_hex_digits;
+
+/**
 	Our customised 'printf'-like string formatter.
-	Takes %c, %d, %s, %u, %x, as usual.
+	Takes %c, %d, %s, %u, %x as usual.
 	Modifiers are not supported except for zero-padding ints (e.g.
-	%02d, %03u, %04x, etc).
+	%02d, %03u, %04x, etc) and integer sign formatting flags (e.g.
+	%+d, % d).
 	%g output in "as short as possible hopefully lossless
 	non-exponent" form, see fz_ftoa for specifics.
 	%f and %e output as usual.
 	%C outputs a utf8 encoded int.
+	%p output as usual: a '0x'-prefixed hex representation of the void* pointer.
 	%M outputs a fz_matrix*.
 	%R outputs a fz_rect*.
 	%P outputs a fz_point*.
+	%Z outputs a fz_quad*.
+	The ',' comma modifier for %M/%R/%P/%Z will print a comma+space separator
+	between the values instead of only a space.
+	%T outputs a in64_t as time (time_t, UTC).
+	%H outputs a byte buffer in hex. (argument passed as void* pointer + size_t length).
 	%n outputs a PDF name (with appropriate escaping).
-	%q and %( output escaped strings in C/PDF syntax.
+	%q, %Q and %( output escaped strings in C/PDF syntax.
+	%Q outputs unicode codepoints verbatim (UTF8 encoded), while
+	%q outputs unicode codepoints as \uNNNN/\uNNNNNN escapes.
+	The 'j' modifier for %q/%Q signals to print control characters
+	in JSON-compliant format as \u00NN escapes instead of \xNN
+	hex escapes.
+	The 'j' modifier for %T/%H signals to print quotes surrounding 
+	the output (thus producing a JSON-compliant string).
 	%l{d,u,x} indicates that the values are int64_t.
+	%ll{d,u,x} is treated as synonymous to %l{d,u,x}.
+	%t{d,u,x} indicates that the value is a ptrdiff_t.
 	%z{d,u,x} indicates that the value is a size_t.
 
 	user: An opaque pointer that is passed to the emit function.

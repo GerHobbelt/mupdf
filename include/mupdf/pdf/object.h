@@ -80,10 +80,29 @@ int64_t pdf_to_int64(fz_context *ctx, pdf_obj *obj);
 float pdf_to_real(fz_context *ctx, pdf_obj *obj);
 const char *pdf_to_name(fz_context *ctx, pdf_obj *obj);
 const char* pdf_to_name_not_null(fz_context* ctx, pdf_obj* obj);
-const char *pdf_to_text_string(fz_context *ctx, pdf_obj *obj);
+
+/**
+	Convert Unicode/PdfDocEncoding string into utf-8.
+
+	The returned string is cached in the pdf_obj object and MUST NOT be freed by the caller.
+*/
+const char *pdf_to_text_string(fz_context *ctx, pdf_obj *obj, size_t* dstlen_ref);
+
+/**
+	Return the raw Unicode/PdfDocEncoding data reference from the pdf_obj string object.
+*/
 const char *pdf_to_string(fz_context *ctx, pdf_obj *obj, size_t *sizep);
+
+/**
+	Return the raw Unicode/PdfDocEncoding data reference from the pdf_obj string object.
+*/
 char *pdf_to_str_buf(fz_context *ctx, pdf_obj *obj);
+
+/**
+	Return the raw Unicode/PdfDocEncoding data length from the pdf_obj string object.
+*/
 size_t pdf_to_str_len(fz_context *ctx, pdf_obj *obj);
+
 int pdf_to_num(fz_context *ctx, pdf_obj *obj);
 int pdf_to_gen(fz_context *ctx, pdf_obj *obj);
 
@@ -171,59 +190,68 @@ int pdf_obj_refs(fz_context *ctx, pdf_obj *ref);
 
 int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 
-#define PDF_PRINT_RESOLVE_ALL_INDIRECT      			0x0400
+// Extra `ascii`/`flags` bits:
+
+// resolve any indirect node to dictionary, array, etc.
+#define PDF_PRINT_RESOLVE_ALL_INDIRECT      			0x0100
+
+// The way the next few bits resolve is:
+// - there's really three(3) modes: HEX_PLUS_RAW, ILLEGAL_UNICODE_AS_HEX and 'regular'.
+// - HEX_PLUS_RAW has precedence over ILLEGAL_UNICODE_AS_HEX and 'regular'
+// - ILLEGAL_UNICODE_AS_HEX has precedence over 'regular'
+// - PURE_HEX *modsifies* both ILLEGAL_UNICODE_AS_HEX and HEX_PLUS_RAW behaviour: when there's
+//   enough 'bad shite' in the input data, the data is considered to be 'very probably binary data';
+//   PURE_HEX then results in an unadorned hexdump. This makes for a cleaner display of 'binary content'
+//   then the alternative in this situation, which is a hexdump adorned with any legible characters
+//   placed between braces, e.g. "65(a) 66(b)" instead of "65 66" for input snippet "ab" (in the case
+//   of ILLEGAL_UNICODE_AS_HEX) or a hedump followed by a `strings`-alike stripped ('massaged') output
+//   of the legible characters only (in the case of HEX_PLUS_RAW): when the input is 'binary data'
+//   those 'legible bits' are meaningless anyway.
+
+#define PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW		0x0400		// HEX:...hexdump...;MASSAGED:...readable text bits...
+#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x0200		// 'smart' hexdump with charcodes intermingled
+#define PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX			0x0800		// when analyzed as 'probably binary': hexdump only, no characters
+
+// the maximum number of nested dictionaries and arrays to resolve in the output
+#define PDF_PRINT_JSON_DEPTH_LEVEL(n)					((n) & 0x7F)
 
 char *pdf_sprint_obj(fz_context *ctx, char *buf, size_t cap, size_t *len, pdf_obj *obj, int tight, int ascii);
 void pdf_print_obj(fz_context *ctx, fz_output *out, pdf_obj *obj, int tight, int ascii);
 void pdf_print_encrypted_obj(fz_context *ctx, fz_output *out, pdf_obj *obj, int tight, int ascii, pdf_crypt *crypt, int num, int gen);
 
-#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x0100
-#define PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW		0x0200
-#define PDF_PRINT_JSON_DEPTH_LEVEL(n)					((n) & 0x7F)
-
 char* pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_obj* obj, int flags);
 void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int flags);
-// Output raw string data to a buffer.
-//
-// Comes with the surrounding double quotes, UNLESS the inner sanity-checking logic has decided
-// the string is corrupted: then a JSON serialized OBJECT is returned instead:
-//
-// {
-//   HEX: "...hex-encoded 'string' data, e.g. 'BA C3 1F DE AD BE EF'...",
-//   RAW: "...string as-is, with minimal escapes..."
-// }
-char* pdf_sprint_str_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, const char* str, size_t str_len, int flags);
 
 void pdf_debug_obj(fz_context *ctx, pdf_obj *obj);
 void pdf_debug_ref(fz_context *ctx, pdf_obj *obj);
 
-/*
+/**
 	Convert Unicode/PdfDocEncoding string into utf-8.
 
 	The returned string must be freed by the caller.
 */
-char *pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *srcptr, size_t srclen);
+char *pdf_new_utf8_from_pdf_string(fz_context *ctx, const char *srcptr, size_t srclen, size_t* dstlen_ref);
 
-/*
+/**
 	Convert text string object to UTF-8.
 
 	The returned string must be freed by the caller.
 */
-char *pdf_new_utf8_from_pdf_string_obj(fz_context *ctx, pdf_obj *src);
+char *pdf_new_utf8_from_pdf_string_obj(fz_context *ctx, pdf_obj *src, size_t* dstlen_ref);
 
-/*
+/**
 	Load text stream and convert to UTF-8.
 
 	The returned string must be freed by the caller.
 */
-char *pdf_new_utf8_from_pdf_stream_obj(fz_context *ctx, pdf_obj *src);
+char *pdf_new_utf8_from_pdf_stream_obj(fz_context *ctx, pdf_obj *src, size_t* dstlen_ref);
 
-/*
+/**
 	Load text stream or text string and convert to UTF-8.
 
 	The returned string must be freed by the caller.
 */
-char *pdf_load_stream_or_string_as_utf8(fz_context *ctx, pdf_obj *src);
+char *pdf_load_stream_or_string_as_utf8(fz_context *ctx, pdf_obj *src, size_t* dstlen_ref);
 
 fz_quad pdf_to_quad(fz_context *ctx, pdf_obj *array, int offset);
 fz_rect pdf_to_rect(fz_context *ctx, pdf_obj *array);

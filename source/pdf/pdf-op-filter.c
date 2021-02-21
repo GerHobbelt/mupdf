@@ -1870,10 +1870,10 @@ pdf_filter_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *r
 	bdc->mcid_obj = pdf_keep_obj(ctx, pdf_array_get(ctx, p->structarray, bdc->mcid_num));
 	str = pdf_dict_get(ctx, bdc->mcid_obj, PDF_NAME(Alt));
 	if (str)
-		bdc->alt.utf8 = pdf_new_utf8_from_pdf_string_obj(ctx, str);
+		bdc->alt.utf8 = pdf_new_utf8_from_pdf_string_obj(ctx, str, NULL);
 	str = pdf_dict_get(ctx, bdc->mcid_obj, PDF_NAME(ActualText));
 	if (str)
-		bdc->actualtext.utf8 = pdf_new_utf8_from_pdf_string_obj(ctx, str);
+		bdc->actualtext.utf8 = pdf_new_utf8_from_pdf_string_obj(ctx, str, NULL);
 }
 
 /* Bin the topmost (most recent) tag from a tag list. */

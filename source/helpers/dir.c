@@ -1,5 +1,6 @@
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "utf.h"
 
 #ifdef _MSC_VER
 #include <direct.h>
@@ -137,12 +138,6 @@ void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, c
 		// hence we're stuck with this ../ that we currently have.
 	}
 }
-
-enum
-{
-	Runeerror = 0xFFFD, /* decoding error in UTF */
-	Runemax = 0x10FFFF, /* maximum rune value */
-};
 
 /**
  * Sanitize a given path, i.e. replace any "illegal" characters in the path, using generic

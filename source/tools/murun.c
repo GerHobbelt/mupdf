@@ -4938,7 +4938,7 @@ static void ffi_PDFObject_asString(js_State *J)
 	const char *string = NULL;
 
 	fz_try(ctx)
-		string = pdf_to_text_string(ctx, obj);
+		string = pdf_to_text_string(ctx, obj, NULL);
 	fz_catch(ctx)
 		rethrow(J);
 

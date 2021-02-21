@@ -227,11 +227,13 @@ showglobalinfo(fz_context *ctx, globals *glo)
 			{
 				char* data = NULL;
 				fz_xml_doc* container_xml = NULL;
+				size_t datalen = 0;
 
 				fz_try(ctx)
 				{
-					data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj);
-					fz_write_printf(ctx, out, "\n%s\n", data);
+					data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj, &datalen);
+					// use %H instead of %s to cope with corrupted content containing embedded NUL bytes:
+					fz_write_printf(ctx, out, "\n%.*H\n", -(PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX), data, datalen);
 				}
 				fz_always(ctx)
 				{

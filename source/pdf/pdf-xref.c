@@ -2608,7 +2608,7 @@ pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *b
 		if (!info)
 			return -1;
 
-		s = pdf_to_text_string(ctx, info);
+		s = pdf_to_text_string(ctx, info, NULL);
 		n = 1 + (int)fz_strlcpy(buf, s, size);
 		return n;
 	}
@@ -3811,7 +3811,7 @@ check_field(fz_context *ctx, pdf_document *doc, pdf_changes *changes, pdf_obj *o
 		t = pdf_dict_get(ctx, old_obj, PDF_NAME(T));
 		if (t != NULL)
 		{
-			name = pdf_to_text_string(ctx, pdf_dict_get(ctx, old_obj, PDF_NAME(T)));
+			name = pdf_to_text_string(ctx, pdf_dict_get(ctx, old_obj, PDF_NAME(T)), NULL);
 			n = strlen(name)+1;
 			if (*name_prefix)
 				n += 1 + strlen(name_prefix);
@@ -3988,7 +3988,7 @@ merge_lock_specification(fz_context *ctx, pdf_locked_fields *fields, pdf_obj *lo
 				 * We need to remove <Fields> from <excludes>. */
 				for (i = 0; i < len; i++)
 				{
-					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i));
+					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i), NULL);
 					int r, w;
 
 					for (r = w = 0; r < fields->excludes.len; r++)
@@ -4005,7 +4005,7 @@ merge_lock_specification(fz_context *ctx, pdf_locked_fields *fields, pdf_obj *lo
 				 * We need to add <Fields> to <include> (avoiding repetition). */
 				for (i = 0; i < len; i++)
 				{
-					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i));
+					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i), NULL);
 
 					for (r = 0; r < fields->includes.len; r++)
 					{
@@ -4027,7 +4027,7 @@ merge_lock_specification(fz_context *ctx, pdf_locked_fields *fields, pdf_obj *lo
 				{
 					for (i = 0; i < len; i++)
 					{
-						const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i));
+						const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i), NULL);
 						if (!strcmp(s, fields->excludes.list[r]))
 							break;
 					}
@@ -4043,7 +4043,7 @@ merge_lock_specification(fz_context *ctx, pdf_locked_fields *fields, pdf_obj *lo
 				fields->all = 1;
 				for (i = 0; i < len; i++)
 				{
-					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i));
+					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i), NULL);
 					for (r = 0; r < fields->includes.len; r++)
 					{
 						if (!strcmp(s, fields->includes.list[r]))

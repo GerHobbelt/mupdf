@@ -1266,6 +1266,14 @@ fix_nexts(fz_html_box *box)
 	}
 }
 
+#ifndef NDEBUG
+static void html_debug_emit(fz_context* ctx, void* user, int c)
+{
+	fz_output* out = (fz_output*)user;
+	fz_write_char(ctx, out, c);
+}
+#endif
+
 static fz_html *
 fz_parse_html_imp(fz_context *ctx,
 	fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css,
@@ -1324,7 +1332,9 @@ fz_parse_html_imp(fz_context *ctx,
 
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_XML")))
-		fz_debug_xml(root, 0);
+	{
+		fz_debug_xml(ctx, fz_stdout(ctx), html_debug_emit, root, 0);
+	}
 #endif
 
 	fz_try(ctx)

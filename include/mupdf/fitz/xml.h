@@ -98,9 +98,9 @@ int fz_xml_att_eq(fz_xml *item, const char *name, const char *match);
 char *fz_xml_text(fz_xml *item);
 
 /**
-	Pretty-print an XML tree to stdout.
+	Pretty-print an XML tree to arbitrary output, cf. the fz_format_string() interface.
 */
-void fz_debug_xml(fz_xml *item, int level);
+void fz_debug_xml(fz_context* ctx, void* user, void (*emit)(fz_context* ctx, void* user, int c), fz_xml* item, int level);
 
 /**
 	Search the siblings of XML nodes starting with item looking for

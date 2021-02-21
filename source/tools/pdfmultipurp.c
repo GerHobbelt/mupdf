@@ -77,7 +77,7 @@ typedef struct
 
 static int PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | /* PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX | */ PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
 
-static dump_observed_errors(fz_context* ctx, fz_output* out);
+static void dump_observed_errors(fz_context* ctx, fz_output* out);
 static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open);
 
 static void clearinfo(fz_context *ctx, globals *glo)
@@ -139,14 +139,13 @@ static int
 usage(void)
 {
 	fz_info(ctx,
-		"usage: mutool info [options] file.pdf [pages]\n"
+		"usage: mutool info [options] file.pdf\n"
 		"\t-o -\toutput file path. Default: info will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
 		"\t-m {0,1,2}\tmode for printing bad string content:\n"
 		"\t          \t- 0: massaged to hex,\n"
 		"\t          \t- 1: hex dumped with legible characters interleaved,\n"
 		"\t          \t- 2: dump as JSON {HEX:'...', MASSAGED:'...'} struct.\n"
-		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
 
 	return EXIT_FAILURE;
@@ -178,31 +177,25 @@ static void write_sep(fz_context* ctx, fz_output* out)
 
 static void write_string(fz_context* ctx, fz_output* out, const char* str)
 {
-	char buf[4096];
-	size_t len = 0;
-
 	if (!str) {
 		fz_write_printf(ctx, out, "undefined");
 		return;
 	}
 
-	const char* v = pdf_sprint_str_to_json(ctx, buf, sizeof(buf), &len, str, strlen(str), 0);
-	fz_write_string(ctx, out, v);
-	if (v != buf)
-		fz_free(ctx, v);
+	fz_write_printf(ctx, out, "%jq", str);
 }
 
 static void write_item(fz_context* ctx, fz_output* out, const char* label, const char* value)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": ", label);
+	fz_write_printf(ctx, out, "%jq: ", label);
 	write_string(ctx, out, value);
 }
 
 static void write_item_bool(fz_context* ctx, fz_output* out, const char* label, int value)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": %s",
+	fz_write_printf(ctx, out, "%jq: %s",
 		label,
 		value ? "true" : "false");
 }
@@ -210,7 +203,7 @@ static void write_item_bool(fz_context* ctx, fz_output* out, const char* label, 
 static void write_item_int(fz_context* ctx, fz_output* out, const char* label, int value)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": %d",
+	fz_write_printf(ctx, out, "%jq: %d",
 		label,
 		value);
 }
@@ -218,7 +211,7 @@ static void write_item_int(fz_context* ctx, fz_output* out, const char* label, i
 static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, fz_rect* bbox)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": [ %,R ]",
+	fz_write_printf(ctx, out, "%jq: [ %,R ]",
 		label,
 		bbox);
 }
@@ -226,7 +219,15 @@ static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, 
 static void write_item_coord(fz_context* ctx, fz_output* out, const char* label, float x, float y)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": { \"X\": %g, \"Y\": %g }", label, x, y);
+	fz_write_printf(ctx, out, "%jq: { %q: %g, %q: %g }", label, "X", x, "Y", y);
+}
+
+static void write_item_date(fz_context* ctx, fz_output* out, const char* label, int64_t value)
+{
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "%jq: %jT",
+		label,
+		value);
 }
 
 // we consider any JSON with more than 1024 levels of object/array "removed from sanity" ;-)
@@ -319,7 +320,7 @@ static int write_level_end_guaranteed(fz_context* ctx, fz_output* out, const cha
 static int write_item_starter_block(fz_context* ctx, fz_output* out, const char* label, const char bracket_open)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\": ",
+	fz_write_printf(ctx, out, "%jq: ",
 		label);
 
 	return write_level_start(ctx, out, bracket_open);
@@ -328,7 +329,7 @@ static int write_item_starter_block(fz_context* ctx, fz_output* out, const char*
 static void write_item_starter(fz_context* ctx, fz_output* out, const char* label)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "\"%s\":\n",
+	fz_write_printf(ctx, out, "%jq:\n",
 		label);
 }
 
@@ -872,8 +873,6 @@ gatherresourceinfo(fz_context* ctx, globals* glo, int page, pdf_obj* rsrc)
 	if (pdf_mark_obj(ctx, rsrc))
 		return;
 
-	int json_stack_level = write_level_get_level(ctx);
-
 	fz_try(ctx)
 	{
 		font = pdf_dict_get(ctx, rsrc, PDF_NAME(Font));
@@ -1091,9 +1090,9 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_int(ctx, out, "ImageWidth", pdf_to_int(ctx, glo->image[i].u.image.width));
 			write_item_int(ctx, out, "ImageHeight", pdf_to_int(ctx, glo->image[i].u.image.height));
 			write_item_starter(ctx, out, "ImageDimensions");
-			fz_write_printf(ctx, out, "{ \"W\": %g, \"H\": %g }",
-				pdf_to_real(ctx, glo->image[i].u.image.width),
-				pdf_to_real(ctx, glo->image[i].u.image.height));
+			fz_write_printf(ctx, out, "{ %q: %g, %q: %g }",
+				"W", pdf_to_real(ctx, glo->image[i].u.image.width),
+				"H", pdf_to_real(ctx, glo->image[i].u.image.height));
 			write_item_int(ctx, out, "ImageBPC", glo->image[i].u.image.bpc ? pdf_to_int(ctx, glo->image[i].u.image.bpc) : 1);
 			write_item_starter(ctx, out, "ImageCS");
 			fz_write_printf(ctx, out, "\"%s%s%s\"",
@@ -1217,39 +1216,8 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 
 				write_item(ctx, out, "Author", pdf_annot_author(ctx, annot));
 
-				{
-					time_t secs = pdf_annot_creation_date(ctx, annot);
-					if (secs >= 0)
-					{
-#ifdef _POSIX_SOURCE
-						struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
-#else
-						struct tm* tm = gmtime(&secs);
-#endif
-						if (tm)
-						{
-							strftime(buf, sizeof buf, "%Y-%m-%d %H:%M UTC", tm);
-							write_item(ctx, out, "CreationDate", buf);
-						}
-					}
-				}
-
-				{
-					time_t secs = pdf_annot_modification_date(ctx, annot);
-					if (secs >= 0)
-					{
-#ifdef _POSIX_SOURCE
-						struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
-#else
-						struct tm* tm = gmtime(&secs);
-#endif
-						if (tm)
-						{
-							strftime(buf, sizeof buf, "%Y-%m-%d %H:%M UTC", tm);
-							write_item(ctx, out, "ModificationDate", buf);
-						}
-					}
-				}
+				write_item_date(ctx, out, "CreationDate", pdf_annot_creation_date(ctx, annot));
+				write_item_date(ctx, out, "ModificationDate", pdf_annot_modification_date(ctx, annot));
 
 				int flags = pdf_annot_flags(ctx, annot);
 
@@ -1630,7 +1598,7 @@ printtail(fz_context* ctx, globals* glo)
 	pdf_document* doc = glo->doc;
 	fz_document* pdf = (fz_document*)doc;
 
-	write_item_starter_block(ctx, out, "DocumentGeneralInfo", '{');
+	int general_info_stack_level = write_item_starter_block(ctx, out, "DocumentGeneralInfo", '{');
 
 	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_TITLE, buf, sizeof buf) > 0)
 		write_item(ctx, out, "Title", buf);
@@ -1783,83 +1751,55 @@ printtail(fz_context* ctx, globals* glo)
 	write_item_bool(ctx, out, "WasRepaired", pdf_was_repaired(ctx, glo->doc));
 	write_item_bool(ctx, out, "NeedsPassword", pdf_needs_password(ctx, glo->doc));
 
-	write_level_end(ctx, out, '}');
+	write_level_end_guaranteed(ctx, out, '}', general_info_stack_level);
 }
 
 static void
-showinfo(fz_context* ctx, globals* glo, const char* pagelist, const char **first_important_error)
+showinfo(fz_context* ctx, globals* glo, int spage, int epage, const char** first_important_error)
 {
-	int page, spage, epage;
-	int pagecount;
+	int page;
 	fz_output* out = glo->out;
 
-	if (!glo->doc)
+	write_item_int(ctx, out, "FirstPage", spage);
+	write_item_int(ctx, out, "LastPage", epage);
+	int page_info_array_stack_level = write_item_starter_block(ctx, out, "PageInfo", '[');
+
+	for (page = spage; page <= epage; page++)
 	{
-		usage();
-		fz_throw(ctx, FZ_ERROR_GENERIC, "No document specified: cannot show info without document");
-	}
+		int json_stack_level = -1;
 
-	int allpages = !strcmp(pagelist, "1-N");
-
-	write_item(ctx, out, "InfoMode", allpages ? "AllPages" : "PageRange");
-
-	pagecount = pdf_count_pages(ctx, glo->doc);
-
-	int json_stack_series_level = write_item_starter_block(ctx, out, "PageSequence", '[');
-
-	while ((pagelist = fz_parse_page_range(ctx, pagelist, &spage, &epage, pagecount)))
-	{
-		fz_info(ctx, "Retrieving info from pages %d-%d...\n", spage, epage);
-
-		write_sep(ctx, out);
-		int json_stack_page_level = write_level_start(ctx, out, '{');
-
-		write_item_int(ctx, out, "FirstPage", spage);
-		write_item_int(ctx, out, "LastPage", epage);
-		write_item_starter_block(ctx, out, "Info", '[');
-
-		for (page = spage; page <= epage; page++)
+		fz_try(ctx)
 		{
-			int json_stack_level = -1;
+			write_sep(ctx, out);
+			json_stack_level = write_level_start(ctx, out, '{');
 
-			fz_try(ctx)
-			{
-				write_sep(ctx, out);
-				json_stack_level = write_level_start(ctx, out, '{');
+			write_item_int(ctx, out, "PageNumber", page);
 
-				write_item_int(ctx, out, "PageNumber", page);
+			gatherpageinfo(ctx, glo, page);
 
-				gatherpageinfo(ctx, glo, page);
-
-				printinfo(ctx, glo);
-				printadvancedinfo(ctx, glo, page);
-			}
-			fz_always(ctx)
-			{
-				clearinfo(ctx, glo);
-			}
-			fz_catch(ctx)
-			{
-				write_level_guarantee_level(ctx, out, json_stack_level + 1);
-
-				write_item(ctx, out, "PageError", fz_caught_message(ctx));
-				if (*first_important_error == NULL) {
-					*first_important_error = fz_strdup(ctx, fz_caught_message(ctx));
-				}
-			}
-
+			printinfo(ctx, glo);
+			printadvancedinfo(ctx, glo, page);
+		}
+		fz_always(ctx)
+		{
+			clearinfo(ctx, glo);
+		}
+		fz_catch(ctx)
+		{
 			write_level_guarantee_level(ctx, out, json_stack_level + 1);
-			dump_observed_errors(ctx, out);
-			write_level_end_guaranteed(ctx, out, '}', json_stack_level);
+
+			write_item(ctx, out, "PageError", fz_caught_message(ctx));
+			if (*first_important_error == NULL) {
+				*first_important_error = fz_strdup(ctx, fz_caught_message(ctx));
+			}
 		}
 
-		write_level_end(ctx, out, ']');
-		write_level_end_guaranteed(ctx, out, '}', json_stack_page_level);
+		write_level_guarantee_level(ctx, out, json_stack_level + 1);
+		dump_observed_errors(ctx, out);
+		write_level_end_guaranteed(ctx, out, '}', json_stack_level);
 	}
 
-	write_level_end_guaranteed(ctx, out, ']', json_stack_series_level);
-
-	printtail(ctx, glo);
+	write_level_end_guaranteed(ctx, out, ']', page_info_array_stack_level);
 }
 
 static fz_error_print_callback* orig_error_print = NULL;
@@ -1920,7 +1860,7 @@ static clear_observed_errors_logbuffers(fz_context* ctx)
 }
 
 // echo the fz_error and fz_warn output for this file/section into the output JSON for further analysis by the caller.
-static dump_observed_errors(fz_context* ctx, fz_output* out)
+static void dump_observed_errors(fz_context* ctx, fz_output* out)
 {
 	// make sure all warnings are flushed to output before we grab the logbuffer and dump it...
 	fz_flush_warnings(ctx);
@@ -1936,10 +1876,8 @@ static dump_observed_errors(fz_context* ctx, fz_output* out)
 }
 
 static int
-pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* argv[], int argc)
+pdfinfo_info(fz_context* ctx, fz_output* out, const char *filename, const char* password)
 {
-	enum { NO_FILE_OPENED, NO_INFO_GATHERED, INFO_SHOWN } state;
-	int argidx = 0;
 	globals glo = { 0 };
 	const char* ex = NULL;
 	int ret = EXIT_SUCCESS;
@@ -1950,106 +1888,48 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* password, const char* 
 	int json_stack_file_level = -1;
 	int json_stack_outermost_level = write_level_start(ctx, out, '[');
 
-	state = NO_FILE_OPENED;
-
 	fz_try(ctx)
 	{
+		write_sep(ctx, out);
+		json_stack_file_level = write_level_start(ctx, out, '{');
 
-		while (argidx < argc)
+		write_item(ctx, out, "DocumentFilePath", filename);
+
+		glo.doc = pdf_open_document(glo.ctx, filename);
+		if (!glo.doc)
 		{
-			if (state == NO_FILE_OPENED || !fz_is_page_range(ctx, argv[argidx]))
+			usage();
+			fz_throw(ctx, FZ_ERROR_GENERIC, "No document specified: cannot show info without document");
+		}
+		if (pdf_needs_password(ctx, glo.doc))
+		{
+			if (!pdf_authenticate_password(ctx, glo.doc, password))
 			{
-				if (state == NO_INFO_GATHERED)
-				{
-					write_sep(ctx, out);
-					int json_stack_chunk_level = write_level_start(ctx, out, '{');
-
-					showinfo(ctx, &glo, "1-N", &ex);
-
-					write_level_guarantee_level(ctx, out, json_stack_chunk_level + 1);
-					dump_observed_errors(ctx, out);
-
-					write_level_end_guaranteed(ctx, out, '}', json_stack_chunk_level);
-				}
-
-				closexref(ctx, &glo);
-
-				if (state != NO_FILE_OPENED)
-				{
-					write_level_end_guaranteed(ctx, out, ']', json_stack_file_level + 1);  // PageSeries
-					dump_observed_errors(ctx, out);
-
-					write_level_end_guaranteed(ctx, out, '}', json_stack_file_level);
-				}
-
-				// starting analysis of another PDF: just to be on the safe side,
-				// clear any left-over buffered error reports from a previous one:
-				clear_observed_errors_logbuffers(ctx);
-
-				const char* filename = argv[argidx];
-
-				write_sep(ctx, out);
-				json_stack_file_level = write_level_start(ctx, out, '{');
-
-				write_item(ctx, out, "DocumentFilePath", filename);
-
-				glo.doc = pdf_open_document(glo.ctx, filename);
-				if (pdf_needs_password(ctx, glo.doc))
-				{
-					if (!pdf_authenticate_password(ctx, glo.doc, password))
-					{
-						fz_throw(glo.ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
-					}
-				}
-				glo.pagecount = pdf_count_pages(ctx, glo.doc);
-
-				showglobalinfo(ctx, &glo);
-
-				write_item_starter_block(ctx, out, "PageInfoSeries", '[');
-
-				state = NO_INFO_GATHERED;
+				fz_throw(glo.ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
 			}
-			else
-			{
-				write_sep(ctx, out);
-				int json_stack_chunk_level = write_level_start(ctx, out, '{');
-
-				showinfo(ctx, &glo, argv[argidx], &ex);
-				state = INFO_SHOWN;
-
-				write_level_guarantee_level(ctx, out, json_stack_chunk_level + 1);
-				dump_observed_errors(ctx, out);
-
-				write_level_end_guaranteed(ctx, out, '}', json_stack_chunk_level);
-			}
-
-			argidx++;
 		}
 
-		if (state == NO_INFO_GATHERED)
-		{
-			write_sep(ctx, out);
-			int json_stack_chunk_level = write_level_start(ctx, out, '{');
+		glo.pagecount = pdf_count_pages(ctx, glo.doc);
 
-			showinfo(ctx, &glo, "1-N", &ex);
+		showglobalinfo(ctx, &glo);
 
-			write_level_guarantee_level(ctx, out, json_stack_chunk_level + 1);
-			dump_observed_errors(ctx, out);
+		fz_info(ctx, "Retrieving info from pages %d-%d...\n", 1, glo.pagecount);
 
-			write_level_end_guaranteed(ctx, out, '}', json_stack_chunk_level);
-		}
+		showinfo(ctx, &glo, 1, glo.pagecount, &ex);
+
+		write_level_guarantee_level(ctx, out, json_stack_file_level + 1);  // PageSeries
+
+			printtail(ctx, &glo);
 	}
 	fz_always(ctx)
 	{
 		closexref(ctx, &glo);
 
-		if (state != NO_FILE_OPENED)
-		{
-			write_level_end_guaranteed(ctx, out, ']', json_stack_file_level + 1);  // PageSeries
-			dump_observed_errors(ctx, out);
+		write_level_guarantee_level(ctx, out, json_stack_file_level + 1);  // PageSeries
 
-			write_level_end_guaranteed(ctx, out, '}', json_stack_file_level);
-		}
+		dump_observed_errors(ctx, out);
+
+		write_level_end_guaranteed(ctx, out, '}', json_stack_file_level);
 
 		if (ex)
 			ret = EXIT_FAILURE;
@@ -2095,6 +1975,8 @@ int pdfmultipurp_main(int argc, const char **argv)
 	int ret;
 	fz_output* out = NULL;
 
+	PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
+
 	ctx = NULL;
 
 	fz_getopt_reset();
@@ -2128,7 +2010,12 @@ int pdfmultipurp_main(int argc, const char **argv)
 
 	if (fz_optind == argc)
 	{
-		fz_error(ctx, "No files specified to process\n\n");
+		fz_error(ctx, "No files specified to process.\n\n");
+		return usage();
+	}
+	if (fz_optind + 1 < argc)
+	{
+		fz_error(ctx, "Too many files specified to process: you can only specify one file at a time.\n\n");
 		return usage();
 	}
 
@@ -2181,7 +2068,7 @@ int pdfmultipurp_main(int argc, const char **argv)
 		// reset the JSON object/array delimiters tracking stack:
 		json_stack[0] = 0;
 
-		ret = pdfinfo_info(ctx, out, password, &argv[fz_optind], argc - fz_optind);
+		ret = pdfinfo_info(ctx, out, argv[fz_optind], password);
 	}
 	fz_catch(ctx)
 	{

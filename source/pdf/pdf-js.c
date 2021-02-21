@@ -820,12 +820,20 @@ static void pdf_js_load_document_level(pdf_js *js)
 		{
 			pdf_obj *fragment = pdf_dict_get_val(ctx, javascript, i);
 			pdf_obj *code = pdf_dict_get(ctx, fragment, PDF_NAME(JS));
-			char *codebuf = pdf_load_stream_or_string_as_utf8(ctx, code);
+			size_t codebuflength = 0;
+			char *codebuf = pdf_load_stream_or_string_as_utf8(ctx, code, &codebuflength);
+
 			char buf[100];
 			if (pdf_is_indirect(ctx, code))
 				fz_snprintf(buf, sizeof buf, "%d", pdf_to_num(ctx, code));
 			else
 				fz_snprintf(buf, sizeof buf, "Root/Names/JavaScript/Names/%d/JS", (i+1)*2);
+
+			// basic validation check of the JS source file
+			if (strlen(codebuf) != codebuflength) {
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "PDF Javascript file %q has embedded NUL characters", buf);
+			}
+
 			pdf_js_execute(js, buf, codebuf);
 			fz_free(ctx, codebuf);
 		}

@@ -1,9 +1,13 @@
 #include "mupdf/fitz.h"
+#include "mupdf/pdf/object.h"
+#include "utf.h"
 
 #include <float.h>
 #include <math.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
+#include <time.h>
 
 #ifdef _MSC_VER
 #if _MSC_VER < 1500 /* MSVC 2008 */
@@ -21,7 +25,9 @@ int snprintf(char *s, size_t n, const char *fmt, ...)
 #endif
 #endif
 
-static const char *fz_hex_digits = "0123456789abcdef";
+const char *fz_hex_digits = "0123456789ABCDEF";
+
+#define FMT_DEFAULT_FLOAT_PRECISION		6
 
 struct fmtbuf
 {
@@ -35,7 +41,7 @@ static inline void fmtputc(struct fmtbuf *out, int c)
 	out->emit(out->ctx, out->user, c);
 }
 
-static void fmtputs(struct fmtbuf* out, const char *s)
+static inline void fmtputs(struct fmtbuf* out, const char *s)
 {
 	while (*s)
 		fmtputc(out, *s++);
@@ -47,7 +53,8 @@ static void fmtputs(struct fmtbuf* out, const char *s)
  */
 static void fmtfloat(struct fmtbuf *out, float f)
 {
-	char digits[40], *s = digits;
+	char digits[100];
+	char* s = digits;
 	int exp, ndigits, point;
 
 	if (isnan(f)) f = 0;
@@ -74,7 +81,6 @@ static void fmtfloat(struct fmtbuf *out, float f)
 		while (ndigits-- > 0)
 			fmtputc(out, *s++);
 	}
-
 	else
 	{
 		while (ndigits-- > 0)
@@ -90,7 +96,12 @@ static void fmtfloat(struct fmtbuf *out, float f)
 
 static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p)
 {
-	char buf[100], *s = buf;
+	char buf[100];
+	char* s = buf;
+	if (p == INT_MAX)
+		p = FMT_DEFAULT_FLOAT_PRECISION;
+	if (w < 0) // uninitialized value is INT_MIN but user may have passed bad negative width via '*' modifier either.
+		w = 0;
 	snprintf(buf, sizeof buf, "%*.*e", w, p, f);
 	while (*s)
 		fmtputc(out, *s++);
@@ -99,6 +110,10 @@ static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p)
 static void fmtfloat_f(struct fmtbuf *out, double f, int w, int p)
 {
 	char buf[100], *s = buf;
+	if (p == INT_MAX)
+		p = FMT_DEFAULT_FLOAT_PRECISION;
+	if (w < 0) // uninitialized value is INT_MIN but user may have passed bad negative width via '*' modifier either.
+		w = 0;
 	snprintf(buf, sizeof buf, "%*.*f", w, p, f);
 	while (*s)
 		fmtputc(out, *s++);
@@ -106,7 +121,7 @@ static void fmtfloat_f(struct fmtbuf *out, double f, int w, int p)
 
 static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, int base)
 {
-	char buf[40];
+	char buf[100];
 	int i;
 
 	i = 0;
@@ -130,7 +145,7 @@ static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, i
 
 static void fmtuint64(struct fmtbuf *out, uint64_t a, int s, int z, int w, int base)
 {
-	char buf[80];
+	char buf[100];
 	int i;
 
 	i = 0;
@@ -196,33 +211,74 @@ static void fmtint64(struct fmtbuf *out, int64_t value, int s, int z, int w, int
 	fmtuint64(out, a, s, z, w, base);
 }
 
-static void fmtquote(struct fmtbuf *out, const char *s, int sq, int eq, int verbatim)
+static void fmtquote(struct fmtbuf *out, const unsigned char *s, size_t slen, int sq, int eq, int verbatim, int no_hex_unicode_only)
 {
 	int i, n, c;
 	fmtputc(out, sq);
-	while (*s != 0) {
-		n = fz_chartorune_unsafe(&c, s);
+	while (slen > 0) {
+		n = fz_chartorune(&c, s, slen);
 		switch (c) {
 		default:
 			if (c < 32) {
-				fmtputc(out, '\\');
-				fmtputc(out, 'x');
-				fmtputc(out, "0123456789ABCDEF"[(c>>4)&15]);
-				fmtputc(out, "0123456789ABCDEF"[(c)&15]);
-			} else if (c > 127) {
+				if (!no_hex_unicode_only) {
+					fmtputc(out, '\\');
+					fmtputc(out, 'x');
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+				}
+				else {
+					// some JSON parsers don't accept \xNN encodings, only \u00XX
+					fmtputs(out, "\\u00");
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+				}
+			} else if (c >= 127) {
+				if (n == 1 && c == Runeerror)
+				{
+					// output \uFFFD + hex-encoded bad char:
+					char buf[10];
+					int l = fz_runetochar(buf, c);
+					for (i = 0; i < l; ++i)
+						fmtputc(out, buf[i]);
+
+					c = s[0];
+					if (!no_hex_unicode_only) {
+						fmtputc(out, '\\');
+						fmtputc(out, 'x');
+						fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+					}
+					else {
+						// some JSON parsers don't accept \xNN encodings, only \u00XX
+						fmtputs(out, "\\u00");
+						fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+					}
+				}
 				if (verbatim)
 				{
 					for (i = 0; i < n; ++i)
 						fmtputc(out, s[i]);
 				}
+				else if (c < 0x10000)
+				{
+					fmtputc(out, '\\');
+					fmtputc(out, 'u');
+					fmtputc(out, fz_hex_digits[(c >> 12) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+				}
 				else
 				{
 					fmtputc(out, '\\');
 					fmtputc(out, 'u');
-					fmtputc(out, "0123456789ABCDEF"[(c>>12)&15]);
-					fmtputc(out, "0123456789ABCDEF"[(c>>8)&15]);
-					fmtputc(out, "0123456789ABCDEF"[(c>>4)&15]);
-					fmtputc(out, "0123456789ABCDEF"[(c)&15]);
+					fmtputc(out, fz_hex_digits[(c >> 20) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 16) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 12) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 				}
 			} else {
 				if (c == sq || c == eq)
@@ -237,6 +293,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, int sq, int eq, int verb
 		case '\r': fmtputc(out, '\\'); fmtputc(out, 'r'); break;
 		case '\t': fmtputc(out, '\\'); fmtputc(out, 't'); break;
 		}
+		slen -= n;
 		s += n;
 	}
 	fmtputc(out, eq);
@@ -249,7 +306,7 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 	while ((c = (unsigned char)*s++) != 0) {
 		switch (c) {
 		default:
-			if (c < 32 || c > 127) {
+			if (c < 32 || c >= 127) {
 				fmtputc(out, '\\');
 				if (sq == '(')
 				{
@@ -260,8 +317,8 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 				else
 				{
 					fmtputc(out, 'x');
-					fmtputc(out, "0123456789ABCDEF"[(c>>4)&15]);
-					fmtputc(out, "0123456789ABCDEF"[(c)&15]);
+					fmtputc(out, fz_hex_digits[(c>>4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 				}
 			} else {
 				if (c == sq || c == eq)
@@ -287,22 +344,474 @@ static void fmtname(struct fmtbuf *out, const char *s)
 	while ((c = *s++) != 0) {
 		if (c <= 32 || c == '/' || c == '#') {
 			fmtputc(out, '#');
-			fmtputc(out, "0123456789ABCDEF"[(c>>4)&15]);
-			fmtputc(out, "0123456789ABCDEF"[(c)&15]);
+			fmtputc(out, fz_hex_digits[(c>>4) & 0x0F]);
+			fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 		} else {
 			fmtputc(out, c);
 		}
 	}
 }
 
+#define FPBO_JSON_MODE				0x0001
+#define FPBO_VERBATIM_UNICODE		0x0002
+#define FPBO_NO_CONTROL_ESCAPES		0x0004
+
+static void fmt_print_buffer_as_hex(struct fmtbuf* out, const unsigned char* data, size_t datalen, int p, int mode)
+{
+	if (mode & FPBO_JSON_MODE)
+		fmtputc(out, '"');
+	// precision determines the chunking: byte, word, ...
+	//
+	// as *uninitialized* precision was INT_MAX (we're 're-using' a floating point modifier here)
+	// we make that 1: byte segmentation by default.
+	//
+	// Note: %.0H would mean NO segmentation what-so-ever!
+	if (p == INT_MAX)
+		p = 1;
+	int segging = p;
+	while (datalen-- > 0) {
+		int c = *data++;
+		fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+		fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+		--segging;
+		if (segging == 0 && datalen > 0) {
+			fmtputc(out, ' ');
+			segging = p;
+		}
+	}
+	if (mode & FPBO_JSON_MODE)
+		fmtputc(out, '"');
+}
+
+/*
+	When this function is called (inside printf()) we assume that the incoming data has already been converted to the UTF8 'codepage'
+	if any such conversion was applicable. (We assume it was, and has been done, as we are treating the data as STRING data here,
+	unless proven otherwise by the analysis which will be performed first.
+
+	The results from that analysis will determine how the data is printed exactly: as a HEX DUMP or a more-or-less sane STRING.
+*/
+static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, const unsigned char* data, size_t datalen, int flags, int mode)
+{
+	// Step 1: Content Analysis
+	//
+	// Do not write the string/data, just observe what happens and report so sane choices for final output can be made.
+	int c;
+	size_t i;
+	int bad_unicodes = 0;
+	int control_chars = 0;
+	int has_C_control_escapes = 0;		// \b, \v, \f
+	int irregular_control_chars = 0;
+	int unicodes = 0;
+	int has_nuls = 0;
+	int has_linebreaks = 0;
+	int has_misc_escapes = 0;		// \t, \\, \"
+	int has_astral_unicodes = 0;
+
+	for (i = 0; i < datalen; i++)
+	{
+		c = data[i];
+		switch (c)
+		{
+		case 0:
+			has_nuls++;
+			break;
+		case '\n':
+			has_linebreaks++;
+			break;
+		case '\r':
+			has_linebreaks++;
+			break;
+		case '\t':
+			has_misc_escapes++;
+			break;
+		case '\b':
+			control_chars++;
+			has_C_control_escapes++;
+			break;
+		case '\f':
+			has_linebreaks++;
+			control_chars++;
+			has_C_control_escapes++;
+			break;
+		case '\v':
+			has_linebreaks++;
+			control_chars++;
+			has_C_control_escapes++;
+			break;
+		case '"':
+			has_misc_escapes++;
+			break;
+		case '\\':
+			has_misc_escapes++;
+			break;
+		default:
+			if (c < 32)
+			{
+				control_chars++;
+				irregular_control_chars++;
+			}
+			else if (c >= 127)
+			{
+				// decode UTF8 to unicode
+				int u;
+				int l = fz_chartorune(&u, data + i, datalen - i);
+				i += l - 1;
+				if (l == 1 && u == Runeerror)
+				{
+					bad_unicodes++;
+				}
+				else
+				{
+					unicodes++;
+					if (u > 0xFFFF)
+					{
+						has_astral_unicodes++;
+					}
+				}
+			}
+			break;
+		}
+	}
+
+	// correct flags: must have control escape codes in 'JSON mode' (quoted string)
+	if (mode & FPBO_JSON_MODE) {
+		mode &= ~FPBO_NO_CONTROL_ESCAPES;
+	}
+
+	static const char* controls_display_escaped_mode[] =
+	{
+		"\\\"",
+		"\\\\",
+		"\\b",
+		"\\f",
+		"\\n",
+		"\\r",
+		"\\t",
+		"\\v"
+	};
+	static const char* controls_display_semi_escaped_mode[] =
+	{
+		"\"",
+		"\\\\",
+		"\b",
+		"\f",
+		"\n",
+		"\r",
+		"\t",
+		"\v"
+	};
+	static const char* controls_display_direct_mode[] =
+	{
+		"\"",
+		"\\",
+		"\b",
+		"\f",
+		"\n",
+		"\r",
+		"\t",
+		"\v"
+	};
+
+	const char** ctrl_tbl = controls_display_escaped_mode;
+	if (!(mode & FPBO_JSON_MODE)) {
+		if ((mode & FPBO_NO_CONTROL_ESCAPES) && (mode & FPBO_VERBATIM_UNICODE)) {
+			ctrl_tbl = controls_display_direct_mode;
+		}
+		else {
+			ctrl_tbl = controls_display_semi_escaped_mode;
+		}
+	}
+
+	if (mode & FPBO_JSON_MODE) {
+		fmtputc(fmt, '"');
+	}
+
+	// Now check if we consider this a "sane" string value:
+	if (bad_unicodes ||
+		(unicodes && control_chars) ||
+		has_nuls ||
+		irregular_control_chars)
+	{
+		// clearly NOT...
+		//
+		// decide whether to hex dump or to print with some hex, depending on the number
+		// of items which are irregular:
+		int bad_count = bad_unicodes + control_chars + has_nuls;
+		int non_ascii_count = bad_count + has_misc_escapes + unicodes;
+
+		if (flags & PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW) {
+			if (flags & PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX) {
+				int chunking = PDF_PRINT_JSON_DEPTH_LEVEL(flags);
+				if (!chunking)
+					chunking = 1;
+				fmt_print_buffer_as_hex(fmt, data, datalen, chunking, mode & ~FPBO_JSON_MODE);
+				// mark data as all done
+				datalen = 0;
+			}
+			else {
+				fmtputs(fmt, "HEX:");
+				int chunking = PDF_PRINT_JSON_DEPTH_LEVEL(flags);
+				if (!chunking)
+					chunking = 1;
+				fmt_print_buffer_as_hex(fmt, data, datalen, chunking, mode & ~FPBO_JSON_MODE);
+				fmtputs(fmt, ";MASSAGED:");
+
+				while (datalen) {
+					int n = fz_chartorune(&c, data, datalen);
+					switch (c) {
+					default:
+						if (c < 32) {
+							fmtputc(fmt, ' ');
+						}
+						else if (c >= 127) {
+							if (n == 1 && c == Runeerror)
+							{
+								fmtputc(fmt, ' ');
+							}
+							else if (mode & FPBO_VERBATIM_UNICODE)
+							{
+								for (i = 0; i < n; ++i)
+									fmtputc(fmt, data[i]);
+							}
+							else if (c < 0x10000)
+							{
+								fmtputc(fmt, '\\');
+								fmtputc(fmt, 'u');
+								fmtputc(fmt, fz_hex_digits[(c >> 12) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 8) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+							}
+							else
+							{
+								fmtputc(fmt, '\\');
+								fmtputc(fmt, 'u');
+								fmtputc(fmt, fz_hex_digits[(c >> 20) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 16) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 12) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 8) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+							}
+						}
+						else
+						{
+							fmtputc(fmt, c);
+						}
+						break;
+					case '"':
+						fmtputs(fmt, ctrl_tbl[0]);
+						break;
+					case '\\':
+						fmtputs(fmt, ctrl_tbl[1]);
+						break;
+					case '\b':
+						fmtputs(fmt, ctrl_tbl[2]);
+						break;
+					case '\f':
+						fmtputs(fmt, ctrl_tbl[3]);
+						break;
+					case '\n':
+						fmtputs(fmt, ctrl_tbl[4]);
+						break;
+					case '\r':
+						fmtputs(fmt, ctrl_tbl[5]);
+						break;
+					case '\t':
+						fmtputs(fmt, ctrl_tbl[6]);
+						break;
+					case '\v':
+						fmtputs(fmt, ctrl_tbl[7]);
+						break;
+					}
+					datalen -= n;
+					data += n;
+				}
+			}
+		}
+		else if (flags & PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX) {
+			// heuristics: when enough is bad or non-ASCII, we dump hex.
+			if (bad_count * 100 / datalen >= 15 || non_ascii_count * 100 / datalen >= 40) {
+				if (flags & PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX) {
+					int chunking = PDF_PRINT_JSON_DEPTH_LEVEL(flags);
+					if (!chunking)
+						chunking = 1;
+					fmt_print_buffer_as_hex(fmt, data, datalen, chunking, mode & ~FPBO_JSON_MODE);
+					// mark data as all done
+					datalen = 0;
+				}
+				else {
+					while (datalen) {
+						int n = fz_chartorune(&c, data, datalen);
+						if (n == 1) {
+							// grab byte/character again for hexdumping, as `c` can be Runeerror and we don't wanna see that one.
+							int b = *data;
+							fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
+							fmtputc(fmt, fz_hex_digits[(b) & 0x0F]);
+
+							// show character itself when it's in ASCII printable range
+							if (b >= 32 || b < 127) {
+								fmtputc(fmt, '(');
+								fmtputc(fmt, b);
+								fmtputc(fmt, ')');
+							}
+							fmtputc(fmt, ' ');
+						}
+						else {
+							for (i = 0; i < n; ++i) {
+								int b = data[i];
+								if (i > 0)
+									fmtputc(fmt, '.');
+								fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(b) & 0x0F]);
+							}
+							fmtputc(fmt, '(');
+							if (c < 0x10000)
+							{
+								fmtputc(fmt, '\\');
+								fmtputc(fmt, 'u');
+								fmtputc(fmt, fz_hex_digits[(c >> 12) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 8) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+							}
+							else
+							{
+								fmtputc(fmt, '\\');
+								fmtputc(fmt, 'u');
+								fmtputc(fmt, fz_hex_digits[(c >> 20) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 16) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 12) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 8) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+								fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+							}
+							fmtputc(fmt, ')');
+						}
+						datalen -= n;
+						data += n;
+					}
+				}
+			}
+		}
+	}
+
+	// is the string "non-simple", i.e. contains ANY escapes?
+	// we don't care. Simply print the bugger.
+	//
+	// Also note that this code is the fallback for the "insane content",
+	// so better make sure we can deal with that too!
+	while (datalen) {
+		int n = fz_chartorune(&c, data, datalen);
+		switch (c) {
+		default:
+			if (c < 32) {
+				if (mode & FPBO_JSON_MODE) {
+					// some JSON parsers don't accept \xNN encodings, only \u00XX
+					fmtputs(fmt, "\\u00");
+					fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+				}
+				else {
+					fmtputc(fmt, '\\');
+					fmtputc(fmt, 'x');
+					fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+				}
+			}
+			else if (c >= 127) {
+				if (n == 1 && c == Runeerror)
+				{
+					// output \uFFFD + hex-encoded bad char:
+					char buf[10];
+					int l = fz_runetochar(buf, c);
+					for (i = 0; i < l; ++i)
+						fmtputc(fmt, buf[i]);
+
+					c = data[0];
+					if ((mode & FPBO_JSON_MODE) || !(flags & PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX)) {
+						// some JSON parsers don't accept \xNN encodings, only \u00XX
+						fmtputs(fmt, "\\u00");
+						fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+						fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+					}
+					else {
+						fmtputc(fmt, '\\');
+						fmtputc(fmt, 'x');
+						fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+						fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+					}
+				}
+				else if (mode & FPBO_VERBATIM_UNICODE)
+				{
+					for (i = 0; i < n; ++i)
+						fmtputc(fmt, data[i]);
+				}
+				else if (c < 0x10000)
+				{
+					fmtputc(fmt, '\\');
+					fmtputc(fmt, 'u');
+					fmtputc(fmt, fz_hex_digits[(c >> 12) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c >> 8) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+				}
+				else
+				{
+					fmtputc(fmt, '\\');
+					fmtputc(fmt, 'u');
+					fmtputc(fmt, fz_hex_digits[(c >> 20) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c >> 16) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c >> 12) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c >> 8) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(fmt, fz_hex_digits[(c) & 0x0F]);
+				}
+			}
+			else
+			{
+				fmtputc(fmt, c);
+			}
+			break;
+		case '"':
+			fmtputs(fmt, ctrl_tbl[0]);
+			break;
+		case '\\':
+			fmtputs(fmt, ctrl_tbl[1]);
+			break;
+		case '\b':
+			fmtputs(fmt, ctrl_tbl[2]);
+			break;
+		case '\f':
+			fmtputs(fmt, ctrl_tbl[3]);
+			break;
+		case '\n':
+			fmtputs(fmt, ctrl_tbl[4]);
+			break;
+		case '\r':
+			fmtputs(fmt, ctrl_tbl[5]);
+			break;
+		case '\t':
+			fmtputs(fmt, ctrl_tbl[6]);
+			break;
+		case '\v':
+			fmtputs(fmt, ctrl_tbl[7]);
+			break;
+		}
+		datalen -= n;
+		data += n;
+	}
+
+	if (mode & FPBO_JSON_MODE)
+		fmtputc(fmt, '"');
+}
+
 void
 fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void *user, int c), const char *fmt, va_list args)
 {
 	struct fmtbuf out;
-	int c, s, z, p, w, l;
+	int c, s, z, p, w, l, j;
 	const char *comma;
-	int32_t i32;
-	int64_t i64;
 	const char *str;
 	size_t bits;
 
@@ -315,10 +824,10 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 		if (c == '%')
 		{
 			s = 0;
+			l = 0;
 			z = ' ';
-			comma = " ";
 
-			/* flags */
+			/* sign/justification flags */
 			while ((c = *fmt++) != 0)
 			{
 				/* plus sign */
@@ -333,9 +842,6 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				/* '-' to left justify */
 				else if (c == '-')
 					l = 1;
-				/* ',' for comma separator in R,M,... */
-				else if (c == ',')
-					comma = ", ";
 				else
 					break;
 			}
@@ -343,7 +849,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			/* width */
-			w = 0;
+			w = INT_MIN;		// flag as 'unintialized'; different default for floats and strings will be applied later.
 			if (c == '*') {
 				c = *fmt++;
 				w = va_arg(args, int);
@@ -357,7 +863,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			/* precision */
-			p = 6;
+			p = INT_MAX;		// flag as 'unintialized'; different default for floats and strings' precision will be applied later.
 			if (c == '.') {
 				c = *fmt++;
 				if (c == 0)
@@ -376,6 +882,20 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			}
 			if (c == 0)
 				break;
+
+			/* misc flags */
+			j = 0;
+			comma = " ";
+			/* ',' for comma separator in R,M,... */
+			if (c == ',') {
+				c = *fmt++;
+				comma = ", ";
+			}
+			/* unicode-only */
+			if (c == 'j') {
+				c = *fmt++;
+				j = 1;
+			}
 
 			/* lengths */
 			bits = 0;
@@ -451,6 +971,43 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				break;
 
+			case 'T':
+				{
+					int64_t tv = va_arg(args, int64_t);
+					char s[40];
+					time_t secs = tv;
+#ifdef _POSIX_SOURCE
+					struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
+#else
+					struct tm* tm = gmtime(&secs);
+#endif
+
+					str = s;
+					if (tv < 0 || !tm || !strftime(s, nelem(s), "D:%Y-%m-%d %H:%M:%S UTC", tm))
+						str = "(invalid)";
+					if (j)
+						fmtquote(&out, str, strlen(str), '"', '"', 0, 0);
+					else
+						while ((c = *str++) != 0)
+							fmtputc(&out, c);
+				}
+				break;
+
+			case 'H':
+			{
+				uint8_t *ptr = (uint8_t*)va_arg(args, void*);
+				size_t seglen = va_arg(args, size_t);
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0) {
+					fmt_print_buffer_optimally(ctx, &out, ptr, seglen, -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE);
+				}
+				else {
+					fmt_print_buffer_as_hex(&out, ptr, seglen, p, (j ? FPBO_JSON_MODE : 0));
+				}
+			}
+			break;
+
 			case 'C': /* unicode char */
 				c = va_arg(args, int);
 				if (c >= 0 && c < 128)
@@ -486,12 +1043,12 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			case 'x':
 				if (bits == 64)
 				{
-					i64 = va_arg(args, int64_t);
+					uint64_t i64 = va_arg(args, uint64_t);
 					fmtuint64(&out, i64, 0, z, w, 16);
 				}
 				else
 				{
-					i32 = va_arg(args, int);
+					unsigned int i32 = va_arg(args, unsigned int);
 					fmtuint32(&out, i32, 0, z, w, 16);
 				}
 				break;
@@ -499,44 +1056,75 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			case 'i':
 				if (bits == 64)
 				{
-					i64 = va_arg(args, int64_t);
+					int64_t i64 = va_arg(args, int64_t);
 					fmtint64(&out, i64, s, z, w, 10);
 				}
 				else
 				{
-					i32 = va_arg(args, int);
+					int i32 = va_arg(args, int);
 					fmtint32(&out, i32, s, z, w, 10);
 				}
 				break;
 			case 'u':
 				if (bits == 64)
 				{
-					i64 = va_arg(args, int64_t);
-					fmtuint64(&out, i64, 0, z, w, 10);
+					uint64_t u64 = va_arg(args, uint64_t);
+					fmtuint64(&out, u64, 0, z, w, 10);
 				}
 				else
 				{
-					i32 = va_arg(args, int);
-					fmtuint32(&out, i32, 0, z, w, 10);
+					unsigned int u32 = va_arg(args, unsigned int);
+					fmtuint32(&out, u32, 0, z, w, 10);
 				}
 				break;
 
 			case 's':
 				str = va_arg(args, const char*);
-				if (!str)
-					str = "(null)";
-				while ((c = *str++) != 0)
-					fmtputc(&out, c);
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0 && str && *str) {
+					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE | FPBO_NO_CONTROL_ESCAPES);
+				}
+				else {
+					if (!str) {
+						str = "(null)";
+						p = INT_MAX;			// don't care about the clipping length, a.k.a. 'precision', now.
+					}
+					if (p == INT_MAX)
+						p = -1;
+					size_t cliplen = (p > 0 ? p : strlen(str));
+					while (cliplen-- > 0) {
+						fmtputc(&out, *str++);
+					}
+				}
 				break;
 			case 'Q': /* quoted string (with verbatim unicode) */
 				str = va_arg(args, const char*);
 				if (!str) str = "";
-				fmtquote(&out, str, '"', '"', 1);
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0) {
+					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE | FPBO_VERBATIM_UNICODE);
+				}
+				else {
+					if (p == INT_MAX)
+						p = -1;
+					fmtquote(&out, str, (p > 0 ? p : strlen(str)), '"', '"', 1, j);
+				}
 				break;
 			case 'q': /* quoted string */
 				str = va_arg(args, const char*);
 				if (!str) str = "";
-				fmtquote(&out, str, '"', '"', 0);
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0) {
+					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE);
+				}
+				else {
+					if (p == INT_MAX)
+						p = -1;
+					fmtquote(&out, str, (p > 0 ? p : strlen(str)), '"', '"', 0, j);
+				}
 				break;
 			case '(': /* pdf string */
 				str = va_arg(args, const char*);

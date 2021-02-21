@@ -1,4 +1,5 @@
 #include "mupdf/fitz.h"
+#include "utf.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -118,72 +119,121 @@ struct fz_xml
 #define MAGIC_TEXT ((fz_xml *)1)
 #define FZ_TEXT_ITEM(item) (item && item->down == MAGIC_TEXT)
 
-static void xml_indent(int n)
+struct fmtbuf
+{
+	fz_context* ctx;
+	void* user;
+	void (*emit)(fz_context* ctx, void* user, int c);
+};
+
+static inline void xml_putc(struct fmtbuf* out, int c)
+{
+	out->emit(out->ctx, out->user, c);
+}
+
+static inline void xml_puts(struct fmtbuf* out, const char* s)
+{
+	while (*s)
+		xml_putc(out, *s++);
+}
+
+static inline void xml_indent(struct fmtbuf* out, int n)
 {
 	while (n--) {
-		putchar(' ');
-		putchar(' ');
+		xml_putc(out, ' ');
+		xml_putc(out, ' ');
 	}
 }
 
-void fz_debug_xml(fz_xml *item, int level)
+static void xml_printf_emit(fz_context* ctx, void *user, int c)
 {
-	char *s = fz_xml_text(item);
+	struct fmtbuf* out = (struct fmtbuf *)user;
+	xml_putc(out, c);
+}
+
+static inline void xml_printf(struct fmtbuf* out, const char* s, ...)
+{
+	va_list ap;
+
+	va_start(ap, s);
+	fz_format_string(out->ctx, out, xml_printf_emit, s, ap);
+	va_end(ap);
+}
+
+static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
+{
+	const char *s = fz_xml_text(item);
 	if (s)
 	{
 		int c;
-		xml_indent(level);
-		putchar('"');
+		xml_indent(out, level);
+		xml_putc(out, '"');
 		while (*s) {
-			s += fz_chartorune_unsafe(&c, s);
+			int l = fz_chartorune_unsafe(&c, s);
 			switch (c) {
 			default:
-				if (c > 0xFFFF)
-					printf("\\u{%X}", c);
-				else if (c < 32 || c > 127)
-					printf("\\u%04X", c);
+				if (l == 1 && c == Runeerror)
+				{
+					xml_putc(out, s[0]);
+				}
+				else if (c > 0xFFFF)
+					xml_printf(out, "\\u{%X}", c);
+				else if (c < 32 || c >= 127)
+					xml_printf(out, "\\u%04X", c);
 				else
-					putchar(c);
+					xml_putc(out, c);
 				break;
-			case '\\': putchar('\\'); putchar('\\'); break;
-			case '\b': putchar('\\'); putchar('b'); break;
-			case '\f': putchar('\\'); putchar('f'); break;
-			case '\n': putchar('\\'); putchar('n'); break;
-			case '\r': putchar('\\'); putchar('r'); break;
-			case '\t': putchar('\\'); putchar('t'); break;
+			case '\\': xml_putc(out, '\\'); xml_putc(out, '\\'); break;
+			case '\b': xml_putc(out, '\\'); xml_putc(out, 'b'); break;
+			case '\f': xml_putc(out, '\\'); xml_putc(out, 'f'); break;
+			case '\n': xml_putc(out, '\\'); xml_putc(out, 'n'); break;
+			case '\r': xml_putc(out, '\\'); xml_putc(out, 'r'); break;
+			case '\t': xml_putc(out, '\\'); xml_putc(out, 't'); break;
 			}
+			s += l;
 		}
-		putchar('"');
+		xml_putc(out, '"');
 #ifdef FZ_XML_SEQ
-		printf(" <%d>", item->seq);
+		xml_printf(out, " <%d>", item->seq);
 #endif
-		putchar('\n');
+		xml_putc(out, '\n');
 	}
 	else
 	{
 		fz_xml *child;
 		struct attribute *att;
 
-		xml_indent(level);
+		xml_indent(out, level);
 #ifdef FZ_XML_SEQ
-		printf("(%s <%d>\n", item->u.d.name, item->seq);
+		xml_printf(out, "(%s <%d>\n", item->u.d.name, item->seq);
 #else
-		printf("(%s\n", item->u.d.name);
+		xml_printf(out, "(%s\n", item->u.d.name);
 #endif
 		for (att = item->u.d.atts; att; att = att->next)
 		{
-			xml_indent(level);
-			printf("=%s %s\n", att->name, att->value);
+			xml_indent(out, level);
+			xml_printf(out, "=%s %s\n", att->name, att->value);
 		}
 		for (child = fz_xml_down(item); child; child = child->next)
-			fz_debug_xml(child, level + 1);
-		xml_indent(level);
+			xml_print_xml(out, child, level + 1);
+		xml_indent(out, level);
 #ifdef FZ_XML_SEQ
-		printf(")%s <%d>\n", item->u.d.name, item->seq);
+		xml_printf(out, ")%s <%d>\n", item->u.d.name, item->seq);
 #else
-		printf(")%s\n", item->u.d.name);
+		xml_printf(out, ")%s\n", item->u.d.name);
 #endif
 	}
+}
+
+void fz_debug_xml(fz_context* ctx, void* user, void (*emit)(fz_context* ctx, void* user, int c), fz_xml* item, int level)
+{
+	struct fmtbuf out;
+
+	out.ctx = ctx;
+	out.user = user;
+	out.emit = emit;
+
+	xml_print_xml(&out, item, level);
 }
 
 fz_xml *fz_xml_prev(fz_xml *item)
