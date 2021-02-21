@@ -359,7 +359,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Encryption");
-			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB);
 		}
 
 		obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Metadata");
@@ -1216,8 +1216,16 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 
 				write_item(ctx, out, "Author", pdf_annot_author(ctx, annot));
 
-				write_item_date(ctx, out, "CreationDate", pdf_annot_creation_date(ctx, annot));
-				write_item_date(ctx, out, "ModificationDate", pdf_annot_modification_date(ctx, annot));
+				{
+					// check if the Date nodes exist: only if they do, do we print their contents.
+					pdf_obj* cdo = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(CreationDate));
+					pdf_obj* mdo = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(M));
+					if (cdo || mdo)
+					{
+						write_item_date(ctx, out, "CreationDate", pdf_annot_creation_date(ctx, annot));
+						write_item_date(ctx, out, "ModificationDate", pdf_annot_modification_date(ctx, annot));
+					}
+				}
 
 				int flags = pdf_annot_flags(ctx, annot);
 
@@ -1750,6 +1758,7 @@ printtail(fz_context* ctx, globals* glo)
 
 	write_item_bool(ctx, out, "WasRepaired", pdf_was_repaired(ctx, glo->doc));
 	write_item_bool(ctx, out, "NeedsPassword", pdf_needs_password(ctx, glo->doc));
+	write_item_bool(ctx, out, "WasCryptedWithEmptyPassword", glo->doc->crypt && !pdf_needs_password(ctx, glo->doc));
 
 	write_level_end_guaranteed(ctx, out, '}', general_info_stack_level);
 }

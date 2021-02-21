@@ -82,6 +82,13 @@ const char *pdf_to_name(fz_context *ctx, pdf_obj *obj);
 const char* pdf_to_name_not_null(fz_context* ctx, pdf_obj* obj);
 
 /**
+	Produce the predefined NAME object matching the given utf-8 string.
+
+	Return NULL when the given string does not exactly match any of the known names.
+*/
+pdf_obj* pdf_string_to_name_obj(fz_context* ctx, const char* str);
+
+/**
 	Convert Unicode/PdfDocEncoding string into utf-8.
 
 	The returned string is cached in the pdf_obj object and MUST NOT be freed by the caller.
@@ -194,6 +201,8 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 
 // resolve any indirect node to dictionary, array, etc.
 #define PDF_PRINT_RESOLVE_ALL_INDIRECT      			0x0100
+// force all string type objects to print as binary blobs (instead of trying to parse them as 'text' in whatever format/codepage).
+#define PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB           0x0200
 
 // The way the next few bits resolve is:
 // - there's really three(3) modes: HEX_PLUS_RAW, ILLEGAL_UNICODE_AS_HEX and 'regular'.
@@ -209,8 +218,8 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 //   those 'legible bits' are meaningless anyway.
 
 #define PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW		0x0400		// HEX:...hexdump...;MASSAGED:...readable text bits...
-#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x0200		// 'smart' hexdump with charcodes intermingled
-#define PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX			0x0800		// when analyzed as 'probably binary': hexdump only, no characters
+#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x0800		// 'smart' hexdump with charcodes intermingled
+#define PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX			0x1000		// when analyzed as 'probably binary': hexdump only, no characters
 
 // the maximum number of nested dictionaries and arrays to resolve in the output
 #define PDF_PRINT_JSON_DEPTH_LEVEL(n)					((n) & 0x7F)

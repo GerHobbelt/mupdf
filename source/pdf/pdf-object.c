@@ -18,6 +18,9 @@ static const char *PDF_NAME_LIST[] = {
 
 #define PDF_DEFAULT_PRINT_DEPTH   11
 
+// mask to extract only the flags suitable for fz_format_printf():
+#define PDF_SMART_MOD_MASK			(PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX | PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX)
+
 typedef enum pdf_objkind_e
 {
 	PDF_INT = 'i',
@@ -202,22 +205,11 @@ pdf_new_string(fz_context *ctx, const char *str, size_t len)
 pdf_obj *
 pdf_new_name(fz_context *ctx, const char *str)
 {
-	pdf_obj_name *obj;
-	int l = 3; /* skip dummy slots */
-	int r = nelem(PDF_NAME_LIST) - 1;
-	while (l <= r)
-	{
-		int m = (l + r) >> 1;
-		int c = strcmp(str, PDF_NAME_LIST[m]);
-		if (c < 0)
-			r = m - 1;
-		else if (c > 0)
-			l = m + 1;
-		else
-			return (pdf_obj*)(intptr_t)m;
-	}
+	pdf_obj* n_obj = pdf_string_to_name_obj(ctx, str);
+	if (n_obj)
+		return n_obj;
 
-	obj = Memento_label(fz_malloc(ctx, offsetof(pdf_obj_name, n) + strlen(str) + 1), "pdf_obj(name)");
+	pdf_obj_name* obj = Memento_label(fz_malloc(ctx, offsetof(pdf_obj_name, n) + strlen(str) + 1), "pdf_obj(name)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_NAME;
 	obj->super.flags = 0;
@@ -394,6 +386,24 @@ const char* pdf_to_name_not_null(fz_context* ctx, pdf_obj* obj)
 	else if (!*str)
 		str = "{EMPTY}";
 	return str;
+}
+
+pdf_obj* pdf_string_to_name_obj(fz_context* ctx, const char* str)
+{
+	int l = 3; /* skip dummy slots */
+	int r = nelem(PDF_NAME_LIST) - 1;
+	while (l <= r)
+	{
+		int m = (l + r) >> 1;
+		int c = strcmp(str, PDF_NAME_LIST[m]);
+		if (c < 0)
+			r = m - 1;
+		else if (c > 0)
+			l = m + 1;
+		else
+			return (pdf_obj*)(intptr_t)m;
+	}
+	return NULL;
 }
 
 char *pdf_to_str_buf(fz_context *ctx, pdf_obj *obj)
@@ -2722,9 +2732,11 @@ static void fmt_dict(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 	int i, n;
 
 	n = pdf_dict_len(ctx, obj);
-	if (fmt->tight) {
+	if (fmt->tight)
+	{
 		fmt_puts(ctx, fmt, "<<");
-		for (i = 0; i < n; i++) {
+		for (i = 0; i < n; i++)
+		{
 			pdf_obj* key = pdf_dict_get_key(ctx, obj, i);
 			pdf_obj* val = pdf_dict_get_val(ctx, obj, i);
 			fmt_obj(ctx, fmt, key);
@@ -2734,15 +2746,16 @@ static void fmt_dict(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 			{
 				fmt->flags &= ~PDF_PRINT_RESOLVE_ALL_INDIRECT;
 			}
-			else {
+			else
+			{
 				if (!(fmt->flags & PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW))
 				{
 					// make sure "less than sane" keys are printed as hexdumped STRING any way!
 					fmt->flags |= PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX;
 				}
-				if (key == PDF_NAME(ColorSpace))
+				if (key == PDF_NAME(ColorSpace) || key == PDF_NAME(Encryption))
 				{
-					fmt->flags |= PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX;
+					fmt->flags |= PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX | PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB;
 				}
 			}
 			fmt_sep(ctx, fmt);
@@ -2771,10 +2784,12 @@ static void fmt_dict(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 		}
 		fmt_puts(ctx, fmt, ">>");
 	}
-	else {
+	else
+	{
 		fmt_puts(ctx, fmt, "<<\n");
 		fmt->indent ++;
-		for (i = 0; i < n; i++) {
+		for (i = 0; i < n; i++)
+		{
 			pdf_obj* key = pdf_dict_get_key(ctx, obj, i);
 			pdf_obj* val = pdf_dict_get_val(ctx, obj, i);
 			fmt_indent(ctx, fmt);
@@ -2791,9 +2806,9 @@ static void fmt_dict(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 					// make sure "less than sane" keys are printed as hexdumped STRING any way!
 					fmt->flags |= PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX;
 				}
-				if (key == PDF_NAME(ColorSpace))
+				if (key == PDF_NAME(ColorSpace) || key == PDF_NAME(Encryption))
 				{
-					fmt->flags |= PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX;
+					fmt->flags |= PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX | PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB;
 				}
 			}
 			fmt_putc(ctx, fmt, ' ');
@@ -2865,7 +2880,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 			fmt_printf(ctx, fmt, "filename:%q type:%s length:%zu", fname, ftype, fdatalen);
 			fmt_sep(ctx, fmt);
-			int smart_mod = (fmt->flags & ~(PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_DEPTH_LEVEL(~0)));
+			int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 			if (smart_mod)
 				smart_mod = -smart_mod;
 			else
@@ -2944,7 +2959,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 				fmt_indent(ctx, fmt);
 				fmt_putc(ctx, fmt, '(');
 				fmt_putc(ctx, fmt, '\n');
-				int smart_mod = (fmt->flags & ~(PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_DEPTH_LEVEL(~0)));
+				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 				if (smart_mod)
 					smart_mod = -smart_mod;
 				else
@@ -3001,7 +3016,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 	{
 		if (fmt->flags & PDF_PRINT_RESOLVE_ALL_INDIRECT)
 		{
-			if (fmt->crypt)
+			if (fmt->crypt || (fmt->flags & PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB))
 			{
 				fmt_hex(ctx, fmt, obj);
 			}
@@ -3009,7 +3024,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 			{
 				size_t datalen = 0;
 				const char* data = pdf_to_text_string(ctx, obj, &datalen);
-				int smart_mod = (fmt->flags & ~(PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_DEPTH_LEVEL(~0)));
+				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 				if (smart_mod)
 					smart_mod = -smart_mod;
 				else
@@ -3220,7 +3235,8 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	fz_always(ctx)
 	{
 		fmt->indent = old_indent;
-		fmt_backpedal_to(ctx, fmt, ',');
+		if (n > 0)
+			fmt_backpedal_to(ctx, fmt, ',');
 		fmt_putc(ctx, fmt, ']');
 	}
 	fz_catch(ctx)
@@ -3304,7 +3320,7 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				fmt_indent(ctx, fmt);
 				size_t slen = 0;
 				const char* s = pdf_to_text_string(ctx, fdesc, &slen);
-				int smart_mod = (fmt->flags & ~(PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_DEPTH_LEVEL(~0)));
+				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 				if (smart_mod)
 					smart_mod = -smart_mod;
 				else
@@ -3356,9 +3372,9 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				fz_catch(ctx)
 					fz_rethrow(ctx);
 			}
-			else if (key == PDF_NAME(ColorSpace))
+			else if (key == PDF_NAME(ColorSpace) || key == PDF_NAME(Encryption))
 			{
-				fmt->flags |= PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX;
+				fmt->flags |= PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX | PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB;
 				fmt_obj_to_json(ctx, fmt, val);
 			}
 			else if (key == PDF_NAME(CheckSum))
@@ -3454,7 +3470,8 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			fmt->flags = old_flags;
 		}
 		// when we get here, there's a ",\n" at the end that must be removed, or rather the comma should go:
-		fmt_backpedal_to(ctx, fmt, ',');
+		if (n > 0)
+			fmt_backpedal_to(ctx, fmt, ',');
 		fmt_putc(ctx, fmt, '\n');
 	}
 	fz_always(ctx)
@@ -3515,7 +3532,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 #endif
 
 				fmt_indent(ctx, fmt);
-				int smart_mod = (fmt->flags & ~(PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_DEPTH_LEVEL(~0)));
+				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 				if (smart_mod)
 					smart_mod = -smart_mod;
 				else
@@ -3571,15 +3588,27 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	}
 	else if (pdf_is_string(ctx, obj))
 	{
-		size_t datalen = 0;
-		const char* data = pdf_to_text_string(ctx, obj, &datalen);
-		int smart_mod = (fmt->flags & ~(PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_DEPTH_LEVEL(~0)));
-		if (smart_mod)
-			smart_mod = -smart_mod;
+		if (fmt->flags & PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB)
+		{
+			// we expect a true binary blob. We DO NOT attempt conversion to UTF8.
+			size_t datalen = pdf_to_str_len(ctx, obj);
+			const unsigned char* data = (const unsigned char*)pdf_to_str_buf(ctx, obj);
+			// use unadulterated hexdump
+			fmt_printf(ctx, fmt, "%jH", data, datalen);
+		}
 		else
-			smart_mod = datalen;
-		// use format 'width'/'precision' to clip string at given length: no NUL sentinel needed that way!
-		fmt_printf(ctx, fmt, "%*.*jq", (int)datalen, smart_mod, data);
+		{
+			// This will attempt to 'decode' the content into UTF8 format, with trailing NUL bytes stripped off.
+			size_t datalen = 0;
+			const unsigned char* data = pdf_to_text_string(ctx, obj, &datalen);
+			int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
+			if (smart_mod)
+				smart_mod = -smart_mod;
+			else
+				smart_mod = datalen;
+			// use format 'width'/'precision' to clip string at given length: no NUL sentinel needed that way!
+			fmt_printf(ctx, fmt, "%*.*jq", (int)datalen, smart_mod, data);
+		}
 	}
 	else if (pdf_is_name(ctx, obj))
 	{

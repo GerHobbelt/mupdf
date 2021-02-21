@@ -433,11 +433,11 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 			control_chars++;
 			has_C_control_escapes++;
 			break;
-		case '\v':
-			has_linebreaks++;
-			control_chars++;
-			has_C_control_escapes++;
-			break;
+//		case '\v':
+//			has_linebreaks++;
+//			control_chars++;
+//			has_C_control_escapes++;
+//			break;
 		case '"':
 			has_misc_escapes++;
 			break;
@@ -487,7 +487,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 		"\\n",
 		"\\r",
 		"\\t",
-		"\\v"
+//		"\\v"
 	};
 	static const char* controls_display_semi_escaped_mode[] =
 	{
@@ -498,7 +498,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 		"\n",
 		"\r",
 		"\t",
-		"\v"
+//		"\v"
 	};
 	static const char* controls_display_direct_mode[] =
 	{
@@ -509,7 +509,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 		"\n",
 		"\r",
 		"\t",
-		"\v"
+//		"\v"
 	};
 
 	const char** ctrl_tbl = controls_display_escaped_mode;
@@ -536,7 +536,8 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 		//
 		// decide whether to hex dump or to print with some hex, depending on the number
 		// of items which are irregular:
-		int bad_count = bad_unicodes + control_chars + has_nuls;
+		int bad_count_sans_nuls = bad_unicodes + control_chars;
+		int bad_count = bad_count_sans_nuls + has_nuls;
 		int non_ascii_count = bad_count + has_misc_escapes + unicodes;
 
 		if (flags & PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW) {
@@ -620,9 +621,9 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 					case '\t':
 						fmtputs(fmt, ctrl_tbl[6]);
 						break;
-					case '\v':
-						fmtputs(fmt, ctrl_tbl[7]);
-						break;
+//					case '\v':
+//						fmtputs(fmt, ctrl_tbl[7]);
+//						break;
 					}
 					datalen -= n;
 					data += n;
@@ -631,8 +632,9 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 		}
 		else if (flags & PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX) {
 			// heuristics: when enough is bad or non-ASCII, we dump hex.
-			if (bad_count * 100 / datalen >= 15 || non_ascii_count * 100 / datalen >= 40) {
-				if (flags & PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX) {
+			// (In larger files we trigger earlier and harder; when there's more than 30 bad entries, we assume it's pure binary all the way.)
+			if (bad_count * 100 / datalen >= 15 || non_ascii_count * 100 / datalen >= 40 || bad_count >= 50) {
+				if (flags & PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX || bad_count_sans_nuls >= 30) {
 					int chunking = PDF_PRINT_JSON_DEPTH_LEVEL(flags);
 					if (!chunking)
 						chunking = 1;
@@ -652,7 +654,36 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 							// show character itself when it's in ASCII printable range
 							if (b >= 32 || b < 127) {
 								fmtputc(fmt, '(');
-								fmtputc(fmt, b);
+								switch (b)
+								{
+								default:
+									fmtputc(fmt, b);
+									break;
+								case '"':
+									fmtputs(fmt, ctrl_tbl[0]);
+									break;
+								case '\\':
+									fmtputs(fmt, ctrl_tbl[1]);
+									break;
+								case '\b':
+									fmtputs(fmt, ctrl_tbl[2]);
+									break;
+								case '\f':
+									fmtputs(fmt, ctrl_tbl[3]);
+									break;
+								case '\n':
+									fmtputs(fmt, ctrl_tbl[4]);
+									break;
+								case '\r':
+									fmtputs(fmt, ctrl_tbl[5]);
+									break;
+								case '\t':
+									fmtputs(fmt, ctrl_tbl[6]);
+									break;
+//								case '\v':
+//									fmtputs(fmt, ctrl_tbl[7]);
+//									break;
+								}
 								fmtputc(fmt, ')');
 							}
 							fmtputc(fmt, ' ');
@@ -794,9 +825,9 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 		case '\t':
 			fmtputs(fmt, ctrl_tbl[6]);
 			break;
-		case '\v':
-			fmtputs(fmt, ctrl_tbl[7]);
-			break;
+//		case '\v':
+//			fmtputs(fmt, ctrl_tbl[7]);
+//			break;
 		}
 		datalen -= n;
 		data += n;
