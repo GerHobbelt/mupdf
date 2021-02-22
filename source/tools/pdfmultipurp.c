@@ -2063,6 +2063,8 @@ int pdfmultipurp_main(int argc, const char **argv)
 		if (!output || *output == 0 || !strcmp(output, "-"))
 		{
 			out = fz_stdout(ctx);
+			// help output write perf by setting stdout to block buffered mode
+			setvbuf(stdout, NULL, _IOFBF, 4096);
 			output = NULL;
 		}
 		else
