@@ -3484,6 +3484,36 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		fz_rethrow(ctx);
 }
 
+// helper function for fz_debug_xml(), when we use it to 'dump' a parsed XML into a single JSON string value.
+static void fmt_putc_inside_jsonstring(fz_context* ctx, void* user, int c)
+{
+	struct fmt* fmt = (struct fmt*)user;
+
+	switch (c)
+	{
+	case '"': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, '"'); break;
+	case '\\': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, '\\'); break;
+	case '\b': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, 'b'); break;
+	case '\f': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, 'f'); break;
+	case '\n': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, 'n'); break;
+	case '\r': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, 'r'); break;
+	case '\t': fmt_putc(ctx, fmt, '\\'); fmt_putc(ctx, fmt, 't'); break;
+	default:
+		if (c < 32)
+		{
+			fmt_puts(ctx, fmt, "\\u00");
+			fmt_putc(ctx, fmt, fz_hex_digits[(c >> 4) & 0x0F]);
+			fmt_putc(ctx, fmt, fz_hex_digits[(c) & 0x0F]);
+		}
+		else
+		{
+			// output everything else as-is: this assumes the XML content is UTF8 encoded already when we parsed it.
+			fmt_putc(ctx, fmt, c);
+		}
+		break;
+	}
+}
+
 static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 {
 	if (obj == PDF_NULL)
@@ -3494,7 +3524,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		fmt_puts(ctx, fmt, "false");
 	else if ((fmt->flags & PDF_PRINT_RESOLVE_ALL_INDIRECT) && pdf_is_stream(ctx, obj))
 	{
-		fmt_printf(ctx, fmt, "{ %q: %q, %q:\n", "type", "stream", "data");
+		fmt_printf(ctx, fmt, "{ %q: %q, %q:\n", "type", "stream", "raw_data");
 
 		if (is_xml_metadata(ctx, obj))
 		{
@@ -3510,7 +3540,17 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				// `data` will be freed when we drop xml_buf:
 				xml_buf = fz_new_buffer_from_data(ctx, data, datalen);
 
+				fmt_indent(ctx, fmt);
+				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
+				if (smart_mod)
+					smart_mod = -smart_mod;
+				else
+					smart_mod = 1;
+				fmt_printf(ctx, fmt, "%.*jH,\n", smart_mod, data, datalen);
+
 				fz_try(ctx)
+					// NOTE: fz_parse_xml() totally clobbers the string buffer pointed at by `data`
+					// so if you want to print the raw contents, do that first, or create a copy.
 					xml_doc = fz_parse_xml(ctx, xml_buf, 0);
 				fz_catch(ctx)
 				{
@@ -3524,20 +3564,10 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				}
 				xml_root = fz_xml_root(xml_doc);
 
-#if 0
-				fmt_putc(ctx, fmt, '"');
-				fz_debug_xml(ctx, fmt, fmt_putc, xml_root, 0);
-				fmt_putc(ctx, fmt, '"');
-				fmt_putc(ctx, fmt, '\n');
-#endif
-
 				fmt_indent(ctx, fmt);
-				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
-				if (smart_mod)
-					smart_mod = -smart_mod;
-				else
-					smart_mod = 1;
-				fmt_printf(ctx, fmt, "%.*jH", smart_mod, data, datalen);
+				fmt_printf(ctx, fmt, "%q: \"", "parsed_data");
+				fz_debug_xml(ctx, fmt, fmt_putc_inside_jsonstring, xml_root, 0);
+				fmt_putc(ctx, fmt, '"');
 			}
 			fz_always(ctx)
 			{
