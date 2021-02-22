@@ -3572,6 +3572,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				}
 				else
 				{
+					fz_warn(ctx, "syntax error in XML; unable to parse content as XML");
 					fmt_printf(ctx, fmt, "(error: unable to parse content as XML)");
 				}
 				fmt_putc(ctx, fmt, '"');
