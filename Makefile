@@ -66,6 +66,10 @@ WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
 OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
 GENDEF_CMD = $(QUIET_GENDEF) gendef - $< > $@
 DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d $< -D $(notdir $(^:%.def=%.dll)) -l $@
+ifeq ($(OS),OpenBSD)
+  # Fixme: don't hard-code amd64 here.
+  OBJCOPY_CMD += -m elf_amd64
+endif
 
 ifeq ($(shared),yes)
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ \

@@ -6,6 +6,13 @@ OS := $(OS:MSYS%=MINGW)
 OS := $(OS:Windows_NT=MINGW)
 OS := $(OS:Darwin=MACOS)
 
+ifeq ($(OS),Linux)
+  Unix=yes
+endif
+ifeq ($(OS),OpenBSD)
+  Unix=yes
+endif
+
 WARNING_CFLAGS := -Wall -Wsign-compare
 
 # Feature configuration options
@@ -150,7 +157,7 @@ else ifeq ($(OS),MACOS)
   LD = xcrun ld
   RANLIB = xcrun ranlib
 
-else ifeq ($(OS),Linux)
+else ifeq ($(Unix),yes)
   HAVE_OBJCOPY := yes
 
   ifeq ($(shell pkg-config --exists freetype2 && echo yes),yes)
@@ -202,8 +209,16 @@ else ifeq ($(OS),Linux)
 
   HAVE_GLUT := yes
   ifeq ($(HAVE_GLUT),yes)
+    ifeq ($(OS),OpenBSD)
+	# 2021-02-22 pkg-config is missing -I/usr/X11R6/include.
+	SYS_GLUT_CFLAGS := $(shell pkg-config --cflags freeglut gl) -I/usr/X11R6/include
+	SYS_GLUT_LIBS := $(shell pkg-config --libs freeglut gl)
+	GLUT_CFLAGS := -I/usr/X11R6/include
+	GLUT_LIBS := -L/usr/X11R6/lib
+    else
 	SYS_GLUT_CFLAGS :=
 	SYS_GLUT_LIBS := -lglut -lGL
+    endif
   endif
 
   HAVE_X11 := $(shell pkg-config --exists x11 xext && echo yes)
