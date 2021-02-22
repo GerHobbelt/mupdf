@@ -288,7 +288,7 @@ pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf
 {
 	pdf_xref_entry *x = NULL;
 	fz_stream *null_stm, *crypt_stm;
-	int hascrypt;
+	int hasexplicitcrypt;
 	int len;
 
 	if (num > 0 && num < pdf_xref_len(ctx, doc))
@@ -310,10 +310,10 @@ pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf
 			return fz_open_buffer(ctx, x->stm_buf);
 	}
 
-	hascrypt = pdf_stream_has_crypt(ctx, stmobj);
+	hasexplicitcrypt = pdf_stream_has_crypt(ctx, stmobj);
 	len = pdf_dict_get_int(ctx, stmobj, PDF_NAME(Length));
 	null_stm = fz_open_endstream_filter(ctx, file_stm, len, offset);
-	if (doc->crypt && !hascrypt)
+	if (doc->crypt && !hasexplicitcrypt)
 	{
 		fz_try(ctx)
 			crypt_stm = pdf_open_crypt(ctx, null_stm, doc->crypt, *orig_num, *orig_gen);

@@ -3566,7 +3566,14 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 				fmt_indent(ctx, fmt);
 				fmt_printf(ctx, fmt, "%q: \"", "parsed_data");
-				fz_debug_xml(ctx, fmt, fmt_putc_inside_jsonstring, xml_root, 0);
+				if (xml_root)
+				{
+					fz_debug_xml(ctx, fmt, fmt_putc_inside_jsonstring, xml_root, 0);
+				}
+				else
+				{
+					fmt_printf(ctx, fmt, "(error: unable to parse content as XML)");
+				}
 				fmt_putc(ctx, fmt, '"');
 			}
 			fz_always(ctx)
