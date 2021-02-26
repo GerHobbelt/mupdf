@@ -494,18 +494,24 @@ static struct logconfig logcfg = { 0 };
 
 static void mu_drop_context(void)
 {
-	if (showtime && timing.count > 0)
+	if (showtime)
 	{
 		timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
 
-		fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands",
-			timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
-		fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
-		fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+		if (timing.count > 0)
+		{
+			fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands",
+				timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
+			fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
+			fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
 
-		// reset timing after reporting: this atexit handler MAY be invoked multiple times!
-		memset(&timing, 0, sizeof(timing));
+			// reset timing after reporting: this atexit handler MAY be invoked multiple times!
+			memset(&timing, 0, sizeof(timing));
+		}
+
+		fz_dump_lock_times(ctx, duration);
 	}
+	showtime = 0;
 
 	if (mujstest_is_toplevel_ctx)
 	{

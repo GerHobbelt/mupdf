@@ -119,6 +119,7 @@ void fz_assert_lock_held(fz_context *ctx, int lock);
 void fz_assert_lock_not_held(fz_context *ctx, int lock);
 void fz_lock_debug_lock(fz_context *ctx, int lock);
 void fz_lock_debug_unlock(fz_context *ctx, int lock);
+void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms);
 
 #else
 
@@ -126,6 +127,7 @@ void fz_lock_debug_unlock(fz_context *ctx, int lock);
 #define fz_assert_lock_not_held(A,B) do { } while (0)
 #define fz_lock_debug_lock(A,B) do { } while (0)
 #define fz_lock_debug_unlock(A,B) do { } while (0)
+#define fz_dump_lock_times(C,T) do { } while (0)
 
 #endif /* !FITZ_DEBUG_LOCKING */
 

@@ -2768,37 +2768,42 @@ int mudraw_main(int argc, const char **argv)
 	}
 	fz_always(ctx)
 	{
-		if (showtime && timing.count > 0)
+		if (showtime)
 		{
-			if (bgprint.active)
-				timing.total = gettime() - timing.total;
-
-			if (files == 1)
+			if (timing.count > 0)
 			{
-				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
-					timing.total, timing.layout, timing.count, timing.total / timing.count);
 				if (bgprint.active)
+					timing.total = gettime() - timing.total;
+
+				if (files == 1)
 				{
-					fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-						timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
-					fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
-						timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
+					fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms",
+						timing.total, timing.layout, timing.count, timing.total / timing.count);
+					if (bgprint.active)
+					{
+						fz_info(ctx, "fastest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
+							timing.minpage, timing.mininterp, timing.min - timing.mininterp, timing.min);
+						fz_info(ctx, "slowest page %d: %dms (interpretation) %dms (rendering) %dms(total)",
+							timing.maxpage, timing.maxinterp, timing.max - timing.maxinterp, timing.max);
+					}
+					else
+					{
+						fz_info(ctx, "fastest page %d: %dms", timing.minpage, timing.min);
+						fz_info(ctx, "slowest page %d: %dms", timing.maxpage, timing.max);
+					}
 				}
 				else
 				{
-					fz_info(ctx, "fastest page %d: %dms", timing.minpage, timing.min);
-					fz_info(ctx, "slowest page %d: %dms", timing.maxpage, timing.max);
+					fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
+						timing.total, timing.layout, timing.count, timing.total / timing.count, files);
+					fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
+					fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
+					fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
+					fz_info(ctx, "slowest page %d: %dms (%s)", timing.maxpage, timing.max, timing.maxfilename);
 				}
 			}
-			else
-			{
-				fz_info(ctx, "total %dms (%dms layout) / %d pages for an average of %dms in %d files",
-					timing.total, timing.layout, timing.count, timing.total / timing.count, files);
-				fz_info(ctx, "fastest layout: %dms (%s)", timing.minlayout, timing.minlayoutfilename);
-				fz_info(ctx, "slowest layout: %dms (%s)", timing.maxlayout, timing.maxlayoutfilename);
-				fz_info(ctx, "fastest page %d: %dms (%s)", timing.minpage, timing.min, timing.minfilename);
-				fz_info(ctx, "slowest page %d: %dms (%s)", timing.maxpage, timing.max, timing.maxfilename);
-			}
+
+			fz_dump_lock_times(ctx, gettime());
 		}
 
 #ifndef DISABLE_MUTHREADS

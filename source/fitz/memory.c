@@ -212,23 +212,16 @@ int fz_locks_debug[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX];
 
 #ifdef FITZ_DEBUG_LOCKING_TIMES
 
-int fz_debug_locking_inited = 0;
-struct curltime fz_lock_program_start;
-int fz_lock_time[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
-struct curltime fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
+static int fz_lock_time[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
+static struct curltime fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
 
 /* We implement our own millisecond clock, as clock() cannot be trusted
  * when threads are involved. */
-static struct curltime ms_clock(void)
-{
-	return Curl_now();
-}
 
-static void dump_lock_times(void)
+void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms)
 {
 	int i, j;
 	struct curltime now = Curl_now();
-	int prog_time = Curl_timediff(now, fz_lock_program_start);
 
 	for (j = 0; j < FZ_LOCK_MAX; j++)
 	{
@@ -237,9 +230,9 @@ static void dump_lock_times(void)
 		{
 			total += fz_lock_time[i][j];
 		}
-		fprintf(stderr, "Lock %d held for %g seconds (%g%%)\n", j, total / 1000.0f, 100.0f*total/prog_time);
+		fz_info(ctx, "Lock %d held for %g seconds (%g%%)\n", j, total / 1000.0f, 100.0f * total / max(1.0f, total_program_time_ms));
 	}
-	fprintf(stderr, "Total program time %g seconds\n", prog_time / 1000.0f);
+	fz_info(ctx, "Total program time %g seconds\n", total_program_time_ms / 1000.0f);
 }
 
 #endif
@@ -267,14 +260,6 @@ static int find_context(fz_context *ctx)
 			{
 				gottit = 1;
 				fz_lock_debug_contexts[i] = ctx;
-#ifdef FITZ_DEBUG_LOCKING_TIMES
-				if (fz_debug_locking_inited == 0)
-				{
-					fz_debug_locking_inited = 1;
-					fz_lock_program_start = ms_clock();
-					atexit(dump_lock_times);
-				}
-#endif
 			}
 			ctx->locks.unlock(ctx->locks.user, FZ_LOCK_ALLOC);
 			if (gottit)
@@ -340,7 +325,7 @@ void fz_lock_debug_lock(fz_context *ctx, int lock)
 	}
 	fz_locks_debug[idx][lock] = 1;
 #ifdef FITZ_DEBUG_LOCKING_TIMES
-	fz_lock_taken[idx][lock] = ms_clock();
+	fz_lock_taken[idx][lock] = Curl_now();
 #endif
 }
 
@@ -361,7 +346,7 @@ void fz_lock_debug_unlock(fz_context *ctx, int lock)
 	}
 	fz_locks_debug[idx][lock] = 0;
 #ifdef FITZ_DEBUG_LOCKING_TIMES
-	fz_lock_time[idx][lock] += Curl_timediff(ms_clock(), fz_lock_taken[idx][lock]);
+	fz_lock_time[idx][lock] += Curl_timediff(Curl_now(), fz_lock_taken[idx][lock]);
 #endif
 }
 
