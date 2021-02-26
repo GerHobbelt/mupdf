@@ -11,6 +11,7 @@
 
 static int x_factor = 0;
 static int y_factor = 0;
+static int offset = 0;
 
 static int usage(void)
 {
@@ -18,7 +19,8 @@ static int usage(void)
 		"usage: mutool poster [options] input.pdf [output.pdf]\n"
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
-		"\t-y\ty decimation factor\n");
+		"\t-y\ty decimation factor\n"
+		"\t-o\toffset\n");
 	return 1;
 }
 
@@ -136,16 +138,22 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 
 				newmediabox = pdf_new_array(ctx, doc, 4);
 
-				mb.x0 = mediabox.x0 + (w/xf)*x;
+				if (x == 0)
+					mb.x0 = mediabox.x0;
+				else
+					mb.x0 = mediabox.x0 + (w/xf)*x - offset;
 				if (x == xf-1)
 					mb.x1 = mediabox.x1;
 				else
-					mb.x1 = mediabox.x0 + (w/xf)*(x+1);
-				mb.y0 = mediabox.y0 + (h/yf)*y;
+					mb.x1 = mediabox.x0 + (w/xf)*(x+1) + offset;
+				if (y == 0)
+					mb.y0 = mediabox.y0;
+				else
+					mb.y0 = mediabox.y0 + (h/yf)*y - offset;
 				if (y == yf-1)
 					mb.y1 = mediabox.y1;
 				else
-					mb.y1 = mediabox.y0 + (h/yf)*(y+1);
+					mb.y1 = mediabox.y0 + (h/yf)*(y+1) + offset;
 
 				pdf_array_push_real(ctx, newmediabox, mb.x0);
 				pdf_array_push_real(ctx, newmediabox, mb.y0);
