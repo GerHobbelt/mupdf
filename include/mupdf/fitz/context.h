@@ -535,7 +535,7 @@ typedef struct
 typedef struct
 {
 	fz_error_stack_slot *top;
-	fz_error_stack_slot stack[256];
+	fz_error_stack_slot stack[512];
 	int errcode;
 	void *print_user;
 	void (*print)(void *user, const char *message);

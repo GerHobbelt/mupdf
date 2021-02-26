@@ -2,7 +2,7 @@
 #include "mupdf/pdf.h"
 
 static fz_outline *
-pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
+pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outline* parent, int depth)
 {
 	fz_outline *node, **prev, *first = NULL;
 	pdf_obj *obj;
@@ -39,16 +39,22 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 				node->page = -1;
 
 			obj = pdf_dict_get(ctx, dict, PDF_NAME(First));
+			pdf_obj* next_dict = pdf_dict_get(ctx, dict, PDF_NAME(Next));
+			pdf_obj* last_obj = pdf_dict_get(ctx, dict, PDF_NAME(Last));
 			if (obj)
 			{
-				node->down = pdf_load_outline_imp(ctx, doc, obj);
+				int d1 = pdf_to_num(ctx, obj);
+				int d2 = pdf_to_num(ctx, last_obj);
+				int dnxt = pdf_to_num(ctx, next_dict);
+
+				node->down = pdf_load_outline_imp(ctx, doc, obj, node, depth + 1);
 
 				obj = pdf_dict_get(ctx, dict, PDF_NAME(Count));
 				if (pdf_to_int(ctx, obj) > 0)
 					node->is_open = 1;
 			}
 
-			dict = pdf_dict_get(ctx, dict, PDF_NAME(Next));
+			dict = next_dict;
 		}
 	}
 	fz_always(ctx)
@@ -79,7 +85,7 @@ pdf_load_outline(fz_context *ctx, pdf_document *doc)
 		/* cache page tree for fast link destination lookups */
 		pdf_load_page_tree(ctx, doc);
 		fz_try(ctx)
-			outline = pdf_load_outline_imp(ctx, doc, first);
+			outline = pdf_load_outline_imp(ctx, doc, first, NULL, 0);
 		fz_always(ctx)
 			pdf_drop_page_tree(ctx, doc);
 		fz_catch(ctx)
