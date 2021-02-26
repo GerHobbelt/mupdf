@@ -5,6 +5,10 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
+#ifndef DISABLE_MUTHREADS
+#include "mupdf/helpers/mu-threads.h"
+#endif
+
 #include <string.h>
 #include <stdio.h>
 
@@ -61,6 +65,82 @@ namematch(const char *end, const char *start, const char *match)
 	return ((p >= start) && (strncmp(p, match, len) == 0));
 }
 
+/*
+	In the presence of pthreads or Windows threads, we can offer
+	a multi-threaded option. In the absence of such we degrade
+	nicely.
+*/
+#ifndef DISABLE_MUTHREADS
+
+static mu_mutex mutexes[FZ_LOCK_MAX];
+
+static void mudraw_lock(void* user, int lock)
+{
+	mu_lock_mutex(&mutexes[lock]);
+}
+
+static void mudraw_unlock(void* user, int lock)
+{
+	mu_unlock_mutex(&mutexes[lock]);
+}
+
+static fz_locks_context mudraw_locks =
+{
+	NULL, mudraw_lock, mudraw_unlock
+};
+
+static void fin_mudraw_locks(void)
+{
+	int i;
+
+	for (i = 0; i < FZ_LOCK_MAX; i++)
+		mu_destroy_mutex(&mutexes[i]);
+}
+
+static fz_locks_context* init_mudraw_locks(void)
+{
+	int i;
+	int failed = 0;
+
+	for (i = 0; i < FZ_LOCK_MAX; i++)
+		failed |= mu_create_mutex(&mutexes[i]);
+
+	if (failed)
+	{
+		fin_mudraw_locks();
+		return NULL;
+	}
+
+	return &mudraw_locks;
+}
+
+#endif
+
+static int mutool_is_toplevel_ctx = 0;
+static fz_context* ctx = NULL;
+
+static void mu_drop_context(void)
+{
+	assert(!ctx || (ctx->error.top == ctx->error.stack));
+
+	if (mutool_is_toplevel_ctx)
+	{
+		// as we registered a global context, we should clean the locks on it now
+		// so the atexit handler won't have to bother with it.
+		assert(fz_has_global_context());
+		ctx = fz_get_global_context();
+		fz_drop_context_locks(ctx);
+		ctx = NULL;
+
+		fz_drop_global_context();
+
+#ifndef DISABLE_MUTHREADS
+		fin_mudraw_locks();
+#endif /* DISABLE_MUTHREADS */
+
+		mutool_is_toplevel_ctx = 0;
+	}
+}
 
 #ifdef GPERF
 #include "gperftools/profiler.h"
@@ -88,18 +168,38 @@ int mutool_main(int argc, const char** argv)
 	const char *start, *end;
 	char buf[32];
 	int i;
-	fz_context* ctx = NULL;
+
+	ctx = NULL;
+	mutool_is_toplevel_ctx = 0;
 
 	if (!fz_has_global_context())
 	{
-		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		fz_locks_context* locks = NULL;
+
+#ifndef DISABLE_MUTHREADS
+		locks = init_mudraw_locks();
+		if (locks == NULL)
+		{
+			fz_error(NULL, "mutex initialisation failed");
+			return EXIT_FAILURE;
+		}
+#endif
+
+		ctx = fz_new_context(NULL, locks, FZ_STORE_UNLIMITED);
 		if (!ctx)
 		{
 			fz_error(ctx, "cannot initialise MuPDF context");
 			return EXIT_FAILURE;
 		}
 		fz_set_global_context(ctx);
+
+		mutool_is_toplevel_ctx = 1;
 	}
+	else
+	{
+		ctx = fz_get_global_context();
+	}
+	atexit(mu_drop_context);
 
 	if (argc == 0)
 	{

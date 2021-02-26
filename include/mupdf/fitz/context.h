@@ -245,6 +245,11 @@ int fz_has_global_context(void);
 void fz_drop_global_context(void);
 
 /**
+	Return TRUE when the provided context includes locking support.
+*/
+int fz_has_locking_support(fz_context* ctx);
+
+/**
 	FIXME: Better not to expose fz_default_error_callback, and
 	fz_default_warning callback and to allow 'NULL' to be used
 	int fz_set_xxxx_callback to mean "defaults".

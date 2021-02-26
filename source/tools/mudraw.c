@@ -229,7 +229,7 @@ stat_mtime(const char *path)
 
 /*
 	In the presence of pthreads or Windows threads, we can offer
-	a multi-threaded option. In the absence, of such, we degrade
+	a multi-threaded option. In the absence of such we degrade
 	nicely.
 */
 #ifndef DISABLE_MUTHREADS
@@ -1981,7 +1981,6 @@ int mudraw_main(int argc, const char **argv)
 	int c;
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
-	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
 
 	fz_var(doc);
@@ -2198,15 +2197,6 @@ int mudraw_main(int argc, const char **argv)
 		}
 	}
 
-#ifndef DISABLE_MUTHREADS
-	locks = init_mudraw_locks();
-	if (locks == NULL)
-	{
-		fz_error(NULL, "mutex initialisation failed");
-		return EXIT_FAILURE;
-	}
-#endif
-
 	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
 		alloc_ctx = &trace_alloc_ctx;
 
@@ -2215,6 +2205,17 @@ int mudraw_main(int argc, const char **argv)
 
 	if (!fz_has_global_context())
 	{
+		fz_locks_context* locks = NULL;
+
+#ifndef DISABLE_MUTHREADS
+		locks = init_mudraw_locks();
+		if (locks == NULL)
+		{
+			fz_error(NULL, "mutex initialisation failed");
+			return EXIT_FAILURE;
+		}
+#endif
+
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
 		if (!ctx)
 		{
@@ -2222,8 +2223,24 @@ int mudraw_main(int argc, const char **argv)
 			return EXIT_FAILURE;
 		}
 		fz_set_global_context(ctx);
+		ctx = NULL;
 
 		mudraw_is_toplevel_ctx = 1;
+	}
+	else
+	{
+		// caller of mudraw_main() has set global CTX.
+		//
+		// check if that CTX has locking, because if it has none,
+		// then we CANNOT use bands or threads!
+		ctx = fz_get_global_context();
+		if (!fz_has_locking_support(ctx))
+		{
+			fz_error(ctx, "cannot use multiple threads without locking support. Falling back to single thread processing.");
+			num_workers = 0;
+			bgprint.active = 0;
+			band_height = 0;
+		}
 	}
 	atexit(mu_drop_context);
 

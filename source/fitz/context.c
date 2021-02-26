@@ -324,3 +324,8 @@ void fz_drop_global_context(void)
 	fz_drop_context(global_ctx);
 	global_ctx = NULL;
 }
+
+int fz_has_locking_support(fz_context* ctx)
+{
+	return !(ctx == NULL || (ctx->locks.lock == fz_locks_default.lock && ctx->locks.unlock == fz_locks_default.unlock));
+}

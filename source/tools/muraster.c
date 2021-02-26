@@ -282,7 +282,7 @@ static const suffix_t suffix_table[] =
 
 /*
 	In the presence of pthreads or Windows threads, we can offer
-	a multi-threaded option. In the absence, of such, we degrade
+	a multi-threaded option. In the absence of such we degrade
 	nicely.
 */
 #ifndef DISABLE_MUTHREADS
