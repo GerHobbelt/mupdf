@@ -76,6 +76,8 @@ typedef struct
 } globals;
 
 static int PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | /* PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX | */ PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
+static int ignore_password_troubles = 0;
+static int has_password_troubles = 0;
 
 static void dump_observed_errors(fz_context* ctx, fz_output* out);
 static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open);
@@ -142,6 +144,8 @@ usage(void)
 		"usage: mutool info [options] file.pdf\n"
 		"\t-o -\toutput file path. Default: info will be written to stdout\n"
 		"\t-p -\tpassword for decryption\n"
+		"\t-i -\tignore:\n"
+		"\t  p \t- password troubles (delivers starkly reduced info)\n"
 		"\t-m {0,1,2}\tmode for printing bad string content:\n"
 		"\t          \t- 0: massaged to hex,\n"
 		"\t          \t- 1: hex dumped with legible characters interleaved,\n"
@@ -348,11 +352,14 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		write_item_starter(ctx, out, "Version");
 		fz_write_printf(ctx, out, "\"PDF-%d.%d\"", version / 10, version % 10);
 
-		obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
-		if (obj)
+		if (!has_password_troubles)
 		{
-			write_item_starter(ctx, out, "Info");
-			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
+			obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
+			if (obj)
+			{
+				write_item_starter(ctx, out, "Info");
+				pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
+			}
 		}
 
 		obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
@@ -369,129 +376,132 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
 		}
 
-		write_item_int(ctx, out, "Pages", glo->pagecount);
-
-		int chaptercount = fz_count_chapters(ctx, fz_document_from_pdf_document(ctx, glo->doc));
-
-		write_item_int(ctx, out, "Chapters", chaptercount);
-
-		if (chaptercount > 1)
+		if (!has_password_troubles)
 		{
-			write_item_starter_block(ctx, out, "ChapterPages", '[');
-		}
+			write_item_int(ctx, out, "Pages", glo->pagecount);
 
-		int alt_page_count = 0;
-		for (int i = 0; i < chaptercount; i++)
-		{
-			int count = fz_count_chapter_pages(ctx, fz_document_from_pdf_document(ctx, glo->doc), i);
+			int chaptercount = fz_count_chapters(ctx, fz_document_from_pdf_document(ctx, glo->doc));
+
+			write_item_int(ctx, out, "Chapters", chaptercount);
 
 			if (chaptercount > 1)
 			{
-				write_sep(ctx, out);
-				fz_write_printf(ctx, out, "%d", count);
+				write_item_starter_block(ctx, out, "ChapterPages", '[');
 			}
 
-			alt_page_count += count;
-		}
-
-		if (chaptercount > 1)
-		{
-			write_level_end(ctx, out, ']');
-		}
-
-		if (alt_page_count != glo->pagecount)
-		{
-			fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
-		}
-
-		/*
-		fz_outline is a tree of the outline of a document (also known
-		as table of contents).
-
-		title: Title of outline item using UTF-8 encoding. May be NULL
-		if the outline item has no text string.
-
-		uri: Destination in the document to be displayed when this
-		outline item is activated. May be an internal or external
-		link, or NULL if the outline item does not have a destination.
-
-		page: The page number of an internal link, or -1 for external
-		links or links with no destination.
-
-		next: The next outline item at the same level as this outline
-		item. May be NULL if no more outline items exist at this level.
-
-		down: The outline items immediate children in the hierarchy.
-		May be NULL if no children exist.
-		*/
-		fz_outline* outlines = NULL;
-		int json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
-
-		fz_try(ctx)
-		{
-			outlines = pdf_load_outline(ctx, doc);
-
-			fz_outline* outline_parents[100];
-			int parents_index = 0;
-			fz_outline* outline = outlines;
-
-			while (outline)
+			int alt_page_count = 0;
+			for (int i = 0; i < chaptercount; i++)
 			{
-				write_sep(ctx, out);
-				write_level_start(ctx, out, '{');
+				int count = fz_count_chapter_pages(ctx, fz_document_from_pdf_document(ctx, glo->doc), i);
 
-				if (!fz_is_external_link(ctx, outline->uri))
+				if (chaptercount > 1)
 				{
-					int target_page = outline->page + 1;
-
-					write_item(ctx, out, "InternalLink", outline->uri);
-					write_item_int(ctx, out, "TargetPageNumber", target_page);
-					write_item_coord(ctx, out, "TargetCoordinates", outline->x, outline->y);
-				}
-				else
-				{
-					write_item(ctx, out, "ExternalLink", outline->uri);
+					write_sep(ctx, out);
+					fz_write_printf(ctx, out, "%d", count);
 				}
 
-				write_item(ctx, out, "Title", outline->title);
-				write_item_bool(ctx, out, "IsOpen", outline->is_open);
+				alt_page_count += count;
+			}
 
-				if (outline->down)
+			if (chaptercount > 1)
+			{
+				write_level_end(ctx, out, ']');
+			}
+
+			if (alt_page_count != glo->pagecount)
+			{
+				fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
+			}
+
+			/*
+			fz_outline is a tree of the outline of a document (also known
+			as table of contents).
+
+			title: Title of outline item using UTF-8 encoding. May be NULL
+			if the outline item has no text string.
+
+			uri: Destination in the document to be displayed when this
+			outline item is activated. May be an internal or external
+			link, or NULL if the outline item does not have a destination.
+
+			page: The page number of an internal link, or -1 for external
+			links or links with no destination.
+
+			next: The next outline item at the same level as this outline
+			item. May be NULL if no more outline items exist at this level.
+
+			down: The outline items immediate children in the hierarchy.
+			May be NULL if no children exist.
+			*/
+			fz_outline* outlines = NULL;
+			int json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
+
+			fz_try(ctx)
+			{
+				outlines = pdf_load_outline(ctx, doc);
+
+				fz_outline* outline_parents[100];
+				int parents_index = 0;
+				fz_outline* outline = outlines;
+
+				while (outline)
 				{
-					outline_parents[parents_index++] = outline->next;
-					if (parents_index >= 100)
+					write_sep(ctx, out);
+					write_level_start(ctx, out, '{');
+
+					if (!fz_is_external_link(ctx, outline->uri))
 					{
-						fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: 100 or more!");
+						int target_page = outline->page + 1;
+
+						write_item(ctx, out, "InternalLink", outline->uri);
+						write_item_int(ctx, out, "TargetPageNumber", target_page);
+						write_item_coord(ctx, out, "TargetCoordinates", outline->x, outline->y);
+					}
+					else
+					{
+						write_item(ctx, out, "ExternalLink", outline->uri);
 					}
 
-					write_item_starter_block(ctx, out, "Children", '[');
+					write_item(ctx, out, "Title", outline->title);
+					write_item_bool(ctx, out, "IsOpen", outline->is_open);
 
-					outline = outline->down;
-				}
-				else
-				{
-					write_level_end(ctx, out, '}');
-
-					outline = outline->next;
-					while (!outline && parents_index > 0)
+					if (outline->down)
 					{
-						outline = outline_parents[--parents_index];
+						outline_parents[parents_index++] = outline->next;
+						if (parents_index >= 100)
+						{
+							fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: 100 or more!");
+						}
 
-						write_level_end(ctx, out, ']');
+						write_item_starter_block(ctx, out, "Children", '[');
+
+						outline = outline->down;
+					}
+					else
+					{
 						write_level_end(ctx, out, '}');
+
+						outline = outline->next;
+						while (!outline && parents_index > 0)
+						{
+							outline = outline_parents[--parents_index];
+
+							write_level_end(ctx, out, ']');
+							write_level_end(ctx, out, '}');
+						}
 					}
 				}
 			}
-		}
-		fz_always(ctx)
-		{
-			write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
+			fz_always(ctx)
+			{
+				write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
 
-			fz_drop_outline(ctx, outlines);
-		}
-		fz_catch(ctx)
-		{
-			fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
+				fz_drop_outline(ctx, outlines);
+			}
+			fz_catch(ctx)
+			{
+				fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
+			}
 		}
 
 		// See if there are any embedded files:
@@ -1619,26 +1629,29 @@ printtail(fz_context* ctx, globals* glo)
 
 	int updates = pdf_count_versions(ctx, doc);
 
-	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATOR, buf, sizeof buf) > 0)
-		write_item(ctx, out, "PDF_Creator", buf);
-	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_PRODUCER, buf, sizeof buf) > 0)
-		write_item(ctx, out, "PDF_Producer", buf);
-	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_SUBJECT, buf, sizeof buf) > 0)
-		write_item(ctx, out, "Subject", buf);
-	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_KEYWORDS, buf, sizeof buf) > 0)
-		write_item(ctx, out, "Keywords", buf);
-	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATION_DATE, buf, sizeof buf) > 0)
-		write_item(ctx, out, "Creation_Date", buf);
-	if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_MODIFICATION_DATE, buf, sizeof buf) > 0)
-		write_item(ctx, out, "Modification_Date", buf);
-
+	if (!has_password_troubles)
 	{
-		pdf_obj* info = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATOR, buf, sizeof buf) > 0)
+			write_item(ctx, out, "PDF_Creator", buf);
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_PRODUCER, buf, sizeof buf) > 0)
+			write_item(ctx, out, "PDF_Producer", buf);
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_SUBJECT, buf, sizeof buf) > 0)
+			write_item(ctx, out, "Subject", buf);
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_KEYWORDS, buf, sizeof buf) > 0)
+			write_item(ctx, out, "Keywords", buf);
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATION_DATE, buf, sizeof buf) > 0)
+			write_item(ctx, out, "Creation_Date", buf);
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_MODIFICATION_DATE, buf, sizeof buf) > 0)
+			write_item(ctx, out, "Modification_Date", buf);
 
-		if (info)
 		{
-			write_item_starter(ctx, out, "MetaInfoDictionary");
-			pdf_print_obj_to_json(ctx, out, pdf_resolve_indirect_chain(ctx, info), PRINT_OBJ_TO_JSON_FLAGS);
+			pdf_obj* info = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info));
+
+			if (info)
+			{
+				write_item_starter(ctx, out, "MetaInfoDictionary");
+				pdf_print_obj_to_json(ctx, out, pdf_resolve_indirect_chain(ctx, info), PRINT_OBJ_TO_JSON_FLAGS);
+			}
 		}
 	}
 
@@ -1885,7 +1898,7 @@ static void dump_observed_errors(fz_context* ctx, fz_output* out)
 }
 
 static int
-pdfinfo_info(fz_context* ctx, fz_output* out, const char *filename, const char* password)
+pdfinfo_info(fz_context* ctx, fz_output* out, const char* filename, const char* password)
 {
 	globals glo = { 0 };
 	const char* ex = NULL;
@@ -1914,7 +1927,14 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char *filename, const char* 
 		{
 			if (!pdf_authenticate_password(ctx, glo.doc, password))
 			{
-				fz_throw(glo.ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
+				if (!ignore_password_troubles)
+				{
+					fz_throw(glo.ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
+				}
+				else
+				{
+					has_password_troubles = 1;
+				}
 			}
 		}
 
@@ -1922,13 +1942,16 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char *filename, const char* 
 
 		showglobalinfo(ctx, &glo);
 
-		fz_info(ctx, "Retrieving info from pages %d-%d...\n", 1, glo.pagecount);
+		if (!has_password_troubles)
+		{
+			fz_info(ctx, "Retrieving info from pages %d-%d...\n", 1, glo.pagecount);
 
-		showinfo(ctx, &glo, 1, glo.pagecount, &ex);
+			showinfo(ctx, &glo, 1, glo.pagecount, &ex);
+		}
 
 		write_level_guarantee_level(ctx, out, json_stack_file_level + 1);  // PageSeries
 
-			printtail(ctx, &glo);
+		printtail(ctx, &glo);
 	}
 	fz_always(ctx)
 	{
@@ -1985,14 +2008,18 @@ int pdfmultipurp_main(int argc, const char **argv)
 	fz_output* out = NULL;
 
 	PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
+	ignore_password_troubles = 0;
 
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:m:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "i:o:p:m:h")) != -1)
 	{
 		switch (c)
 		{
+		case 'i':
+			if (strchr(fz_optarg, 'p')) ++ignore_password_troubles;
+			break;
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		case 'm': 
