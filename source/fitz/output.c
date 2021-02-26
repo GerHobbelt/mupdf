@@ -38,13 +38,41 @@ file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 
 	n = fwrite(buffer, 1, count, file);
 	if (n < count && ferror(file))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s", strerror(errno));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes)", strerror(errno), n, count);
 }
 
 static void
 stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
+	// Windows: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefile#pipes
+	// > "When writing to a non-blocking, byte-mode pipe handle with insufficient buffer space,
+	// > WriteFile returns TRUE with *lpNumberOfBytesWritten < nNumberOfBytesToWrite."
+#if defined(WIN32) || defined(WIN64)
+	unsigned char* p = (unsigned char*)buffer;
+	size_t n = count;
+	while (n > 0)
+	{
+		DWORD written = 0;
+		int rv = WriteFile(GetStdHandle(STD_OUTPUT_HANDLE), p, n, &written, NULL);
+		int err = GetLastError();
+		n -= written;
+		p += written;
+		if (!rv && !(err == ERROR_IO_PENDING || err == ERROR_NO_DATA))
+		{
+			LPSTR errmsgbuf = NULL;
+			FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, err, 0, (LPSTR)&errmsgbuf, 0, NULL);
+			char errmsg[512];
+			// DMLERR_EXECACKTIMEOUT happens when you try to debug-run this stuff in the MSVC2019 debugger. Should be fine in other settings...
+			strncpy(errmsg, errmsgbuf ? errmsgbuf : err == DMLERR_EXECACKTIMEOUT ? "DMLERR_EXECACKTIMEOUT: A request for a synchronous execute transaction has timed out." : "Unidentified Windows error.", sizeof(errmsg));
+			if (errmsgbuf)
+				LocalFree(errmsgbuf);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot write to STDOUT: %08x: %s (written %zu of %zu bytes)", err, errmsg, count - n, count);
+		}
+		// wait until STDOUT pipe becomes empty again
+	}
+#else
 	file_write(ctx, stdout, buffer, count);
+#endif
 }
 
 static fz_output fz_stdout_global = {

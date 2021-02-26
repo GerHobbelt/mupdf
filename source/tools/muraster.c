@@ -1939,8 +1939,12 @@ int muraster_main(int argc, const char *argv[])
 
 		if (!output || *output == 0 || !strcmp(output, "-"))
 		{
+			// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
+#if 0
 			quiet = 1; /* automatically be quiet if printing to stdout */
 			fz_default_error_warn_info_mode(1, 1, 1);
+#endif
+
 #ifdef _WIN32
 			/* Windows specific code to make stdout binary. */
 			setmode(fileno(stdout), O_BINARY);

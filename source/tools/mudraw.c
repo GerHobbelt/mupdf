@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -977,7 +978,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_try(ctx)
 		{
 			if (!output || *output == 0 || !strcmp(output, "-"))
+			{
 				outs = fz_stdout(ctx);
+			}
 			else
 			{
 				fz_format_output_path(ctx, buf, sizeof buf, output, pagenum);
@@ -2536,8 +2539,12 @@ int mudraw_main(int argc, const char **argv)
 			}
 			else
 			{
+				// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
+#if 0
 				quiet = 1; /* automatically be quiet if printing to stdout */
 				fz_default_error_warn_info_mode(1, 1, 1);
+#endif
+
 #ifdef _WIN32
 				/* Windows specific code to make stdout binary. */
 				if (output_format != OUT_TEXT &&
