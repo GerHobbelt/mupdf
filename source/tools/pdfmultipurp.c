@@ -182,7 +182,7 @@ static void write_sep(fz_context* ctx, fz_output* out)
 static void write_string(fz_context* ctx, fz_output* out, const char* str)
 {
 	if (!str) {
-		fz_write_printf(ctx, out, "undefined");
+		fz_write_printf(ctx, out, "null");
 		return;
 	}
 
@@ -440,7 +440,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			{
 				outlines = pdf_load_outline(ctx, doc);
 
-				fz_outline* outline_parents[100];
+				fz_outline* outline_parents[500];
 				int parents_index = 0;
 				fz_outline* outline = outlines;
 
@@ -468,9 +468,9 @@ showglobalinfo(fz_context* ctx, globals* glo)
 					if (outline->down)
 					{
 						outline_parents[parents_index++] = outline->next;
-						if (parents_index >= 100)
+						if (parents_index >= nelem(outline_parents))
 						{
-							fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: 100 or more!");
+							fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: %d or more!", (int)nelem(outline_parents));
 						}
 
 						write_item_starter_block(ctx, out, "Children", '[');

@@ -610,7 +610,7 @@ typedef struct
 typedef struct
 {
 	fz_error_stack_slot *top;
-	fz_error_stack_slot stack[256];
+	fz_error_stack_slot stack[512];
 	int errcode;
 	// See fz_rethrow() code comments for the complete story:
 	int last_nonzero_errcode;
