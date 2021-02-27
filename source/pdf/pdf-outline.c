@@ -1,8 +1,23 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include <string.h>
+
+static int are_outline_nodes_equal(fz_outline* a, fz_outline* b)
+{
+	if (!a || !b)
+		return 0;
+	const char* ta = a->title;
+	const char* tb = b->title;
+	const char* ua = a->uri;
+	const char* ub = b->uri;
+	return (a->page == b->page &&
+		!strcmp(ta ? ta : "", tb ? tb : "") &&
+		!strcmp(ua ? ua : "", ub ? ub : ""));
+}
+
 static fz_outline *
-pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outline* parent, int depth)
+pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outline* grandparent, fz_outline* parent, int depth)
 {
 	fz_outline *node, **prev, *first = NULL;
 	pdf_obj *obj;
@@ -45,9 +60,31 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outli
 			{
 				int d1 = pdf_to_num(ctx, obj);
 				int d2 = pdf_to_num(ctx, last_obj);
-				int dnxt = pdf_to_num(ctx, next_dict);
 
-				node->down = pdf_load_outline_imp(ctx, doc, obj, node, depth + 1);
+				// when this node has the same datums as its parent AND its grandparent AND it has only a single child,
+				// then we declare this node *superfluous* and do NOT include it in the outline.
+				//
+				// This specifically folds the > 260(!) levels deep outline of https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4835977/
+				// but is hoped to be both more generic and a potential fix for malicious PDFs which try to
+				// exercise our call and exception stacks.
+				//
+				// We do not recurse then as this would be a pure tail call.
+				if (d1 == d2 &&
+					node == first &&
+					are_outline_nodes_equal(parent, node) &&
+					are_outline_nodes_equal(parent, grandparent))
+				{
+					// discard `node`
+					for (dict = odict; dict && pdf_obj_marked(ctx, dict); dict = pdf_dict_get(ctx, dict, PDF_NAME(Next)))
+						pdf_unmark_obj(ctx, dict);
+					fz_drop_outline(ctx, first);
+					first = NULL;
+					odict = dict = obj;
+					prev = &first;
+					continue;
+				}
+
+				node->down = pdf_load_outline_imp(ctx, doc, obj, parent, node, depth + 1);
 
 				obj = pdf_dict_get(ctx, dict, PDF_NAME(Count));
 				if (pdf_to_int(ctx, obj) > 0)
@@ -85,7 +122,7 @@ pdf_load_outline(fz_context *ctx, pdf_document *doc)
 		/* cache page tree for fast link destination lookups */
 		pdf_load_page_tree(ctx, doc);
 		fz_try(ctx)
-			outline = pdf_load_outline_imp(ctx, doc, first, NULL, 0);
+			outline = pdf_load_outline_imp(ctx, doc, first, NULL, NULL, 0);
 		fz_always(ctx)
 			pdf_drop_page_tree(ctx, doc);
 		fz_catch(ctx)
