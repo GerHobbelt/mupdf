@@ -1178,6 +1178,8 @@ void pdf_choice_widget_set_value(fz_context *ctx, pdf_widget *tw, int n, const c
 	if (!annot)
 		return;
 
+	begin_annot_op(ctx, annot, "Set choice");
+
 	fz_var(optarr);
 	fz_try(ctx)
 	{
@@ -1206,6 +1208,8 @@ void pdf_choice_widget_set_value(fz_context *ctx, pdf_widget *tw, int n, const c
 		if (pdf_field_dirties_document(ctx, annot->page->doc, annot->obj))
 			annot->page->doc->dirty = 1;
 	}
+	fz_always(ctx)
+		end_annot_op(ctx, annot);
 	fz_catch(ctx)
 	{
 		pdf_drop_obj(ctx, optarr);
