@@ -434,11 +434,28 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			May be NULL if no children exist.
 			*/
 			fz_outline* outlines = NULL;
-			int json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
+			fz_outline_summary outline_summary = { 0 };
+			int json_stack_outlines_level = -1;
 
 			fz_try(ctx)
 			{
-				outlines = pdf_load_outline(ctx, doc);
+				outlines = pdf_load_outline(ctx, doc, &outline_summary);
+
+				if (outlines)
+				{
+					// print these summary statistics in a way that we can easily `grep` sample PDFs with certain features.
+					// e.g.: only print a summary, when the document *has* outlines.
+					write_item_int(ctx, out, "DocumentOutlinesMaxHierarchyDepth", outline_summary.hierarchy_levels);
+					write_item_int(ctx, out, "DocumentOutlinesItemCount", outline_summary.total_item_count);
+					if (outline_summary.is_repaired)
+					{
+						write_item_bool(ctx, out, "DocumentOutlinesDamagedHierarchy", outline_summary.is_repaired);
+						write_item_int(ctx, out, "DocumentOutlinesRepairedMaxHierarchyDepth", outline_summary.hierarchy_levels_after_repair);
+						write_item_int(ctx, out, "DocumentOutlinesRepairedItemCount", outline_summary.total_item_count_after_repair);
+					}
+				}
+
+				json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
 
 				fz_outline* outline_parents[500];
 				int parents_index = 0;
@@ -494,7 +511,8 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			}
 			fz_always(ctx)
 			{
-				write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
+				if (json_stack_outlines_level >= 0)
+					write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
 
 				fz_drop_outline(ctx, outlines);
 			}
@@ -1400,41 +1418,6 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 					const char* contents = pdf_annot_contents(ctx, annot);
 
 					write_item(ctx, out, "Contents", contents);
-				}
-
-				switch (subtype)
-				{
-				case PDF_ANNOT_TEXT:
-				case PDF_ANNOT_LINK:
-				case PDF_ANNOT_FREE_TEXT:
-				case PDF_ANNOT_LINE:
-				case PDF_ANNOT_SQUARE:
-				case PDF_ANNOT_CIRCLE:
-				case PDF_ANNOT_POLYGON:
-				case PDF_ANNOT_POLY_LINE:
-				case PDF_ANNOT_HIGHLIGHT:
-				case PDF_ANNOT_UNDERLINE:
-				case PDF_ANNOT_SQUIGGLY:
-				case PDF_ANNOT_STRIKE_OUT:
-				case PDF_ANNOT_REDACT:
-				case PDF_ANNOT_STAMP:
-				case PDF_ANNOT_CARET:
-				case PDF_ANNOT_INK:
-				case PDF_ANNOT_POPUP:
-				case PDF_ANNOT_FILE_ATTACHMENT:
-				case PDF_ANNOT_SOUND:
-				case PDF_ANNOT_MOVIE:
-				case PDF_ANNOT_RICH_MEDIA:
-				case PDF_ANNOT_WIDGET:
-				case PDF_ANNOT_SCREEN:
-				case PDF_ANNOT_PRINTER_MARK:
-				case PDF_ANNOT_TRAP_NET:
-				case PDF_ANNOT_WATERMARK:
-				case PDF_ANNOT_3D:
-				case PDF_ANNOT_PROJECTION:
-				case PDF_ANNOT_UNKNOWN:
-				default:
-					break;
 				}
 
 				write_level_end(ctx, out, '}');

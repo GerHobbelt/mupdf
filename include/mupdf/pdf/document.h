@@ -121,7 +121,17 @@ int pdf_authenticate_password(fz_context *ctx, pdf_document *doc, const char *pw
 int pdf_has_permission(fz_context *ctx, pdf_document *doc, fz_permission p);
 int pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *ptr, int size);
 
-fz_outline *pdf_load_outline(fz_context *ctx, pdf_document *doc);
+typedef struct fz_outline_summry
+{
+	int hierarchy_levels;
+	int total_item_count;
+	int hierarchy_levels_after_repair;
+	int total_item_count_after_repair;
+
+	unsigned int is_repaired : 1;
+} fz_outline_summary;
+
+fz_outline *pdf_load_outline(fz_context *ctx, pdf_document *doc, fz_outline_summary *outline_summary);
 
 /*
 	Get the number of layer configurations defined in this document.

@@ -19,7 +19,7 @@ static int are_outline_nodes_equal(fz_outline* a, fz_outline* b)
 }
 
 static fz_outline *
-pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outline* grandparent, fz_outline* parent, int depth)
+pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outline* grandparent, fz_outline* parent, int depth, int corrected_depth, fz_outline_summary* outline_summary)
 {
 	fz_outline *node, **prev, *first = NULL;
 	pdf_obj *obj;
@@ -27,6 +27,11 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outli
 
 	fz_var(dict);
 	fz_var(first);
+
+	if (outline_summary->hierarchy_levels < depth)
+		outline_summary->hierarchy_levels = depth;
+	if (outline_summary->hierarchy_levels_after_repair < corrected_depth)
+		outline_summary->hierarchy_levels_after_repair = corrected_depth;
 
 	fz_try(ctx)
 	{
@@ -38,6 +43,9 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outli
 			node = fz_new_outline(ctx);
 			*prev = node;
 			prev = &node->next;
+
+			outline_summary->total_item_count++;
+			outline_summary->total_item_count_after_repair++;
 
 			obj = pdf_dict_get(ctx, dict, PDF_NAME(Title));
 			if (obj)
@@ -83,10 +91,20 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outli
 					first = NULL;
 					odict = dict = obj;
 					prev = &first;
+
+					parent->is_repaired = 1;
+
+					outline_summary->is_repaired = 1;
+					outline_summary->total_item_count_after_repair--;
+
+					depth++;   // tail recursion: the original depth would go +1 now!
+					if (outline_summary->hierarchy_levels < depth)
+						outline_summary->hierarchy_levels = depth;
+
 					continue;
 				}
 
-				node->down = pdf_load_outline_imp(ctx, doc, obj, parent, node, depth + 1);
+				node->down = pdf_load_outline_imp(ctx, doc, obj, parent, node, depth + 1, corrected_depth + 1, outline_summary);
 
 				obj = pdf_dict_get(ctx, dict, PDF_NAME(Count));
 				if (pdf_to_int(ctx, obj) > 0)
@@ -111,10 +129,16 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_outli
 }
 
 fz_outline *
-pdf_load_outline(fz_context *ctx, pdf_document *doc)
+pdf_load_outline(fz_context *ctx, pdf_document *doc, fz_outline_summary* outline_summary)
 {
 	pdf_obj *root, *obj, *first;
 	fz_outline *outline = NULL;
+	fz_outline_summary alt_summary;
+
+	// always have a summary block, even if the user didn't provide us with one:
+	if (!outline_summary)
+		outline_summary = &alt_summary;
+	memset(outline_summary, 0, sizeof(*outline_summary));
 
 	root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 	obj = pdf_dict_get(ctx, root, PDF_NAME(Outlines));
@@ -124,7 +148,7 @@ pdf_load_outline(fz_context *ctx, pdf_document *doc)
 		/* cache page tree for fast link destination lookups */
 		pdf_load_page_tree(ctx, doc);
 		fz_try(ctx)
-			outline = pdf_load_outline_imp(ctx, doc, first, NULL, NULL, 0);
+			outline = pdf_load_outline_imp(ctx, doc, first, NULL, NULL, 1, 1, outline_summary);
 		fz_always(ctx)
 			pdf_drop_page_tree(ctx, doc);
 		fz_catch(ctx)

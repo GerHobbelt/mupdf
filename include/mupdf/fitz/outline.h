@@ -38,6 +38,7 @@ typedef struct fz_outline
 	struct fz_outline *next;
 	struct fz_outline *down;
 	int is_open;
+	int is_repaired;
 } fz_outline;
 
 /**
