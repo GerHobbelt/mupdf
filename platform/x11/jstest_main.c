@@ -328,6 +328,9 @@ my_getline(FILE *file)
 static char *
 expand_template_variables(const char* line, int linecounter, int argc, const char** argv)
 {
+	if (line == NULL)
+		return line;
+
 	char* d = getline_buffer;
 	int space = sizeof(getline_buffer) - 1;
 
@@ -353,41 +356,44 @@ expand_template_variables(const char* line, int linecounter, int argc, const cha
 			memcpy(d, s, l);
 			space -= l;
 			d += l;
-			m++;
-			// escape: double marker -> marker
-			if (*m == marker)
-			{
-				if (1 >= space)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+		}
+		m++;
+		// escape: double marker -> marker
+		if (*m == marker)
+		{
+			if (1 >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
 
-				*d++ = *m++;
-				space--;
-				s = m;
-			}
-			else if (!strchr("123456789", *m))
-			{
-				// when marker isn't immediately followed by a decimal number (without leading zeroes),
-				// then it's not a template marker either. Copy marker verbatim.
-				if (1 >= space)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+			*d++ = *m++;
+			space--;
+			s = m;
+		}
+		else if (!*m || !strchr("123456789", *m))
+		{
+			// when marker isn't immediately followed by a decimal number (without leading zeroes),
+			// then it's not a template marker either. Copy marker verbatim.
+			if (1 >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
 
-				*d++ = marker;
-				space--;
-				s = m;
-			}
-			else
+			*d++ = marker;
+			space--;
+			s = m;
+		}
+		else
+		{
+			char* e = NULL;
+			int param_index = (int)strtol(m, &e, 10);  // %NNN parameters are expected to range 1..argc
+			if (param_index <= 0 || param_index > argc)
 			{
-				char* e = NULL;
-				int param_index = (int)strtol(m, &e, 10);
-				if (param_index <= 0 || param_index >= argc)
-				{
-					fz_throw(ctx, FZ_ERROR_GENERIC, "TEST: error at script line %d: script template parameter index %d is out of available range 1..%d.", linecounter, param_index, argc);
-				}
-				if (strlen(argv[param_index]) >= space)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
-				strncpy(d, argv[param_index], space);
-				s = e;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "TEST: error at script line %d: script template parameter index %d is out of available range 1..%d.", linecounter, param_index, argc);
 			}
+			if (strlen(argv[param_index - 1]) >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+			strncpy(d, argv[param_index - 1], space);
+			s = e;
+			size_t l = strlen(d);
+			d += l;
+			space -= l;
 		}
 	}
 	return getline_buffer;
