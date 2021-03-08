@@ -247,7 +247,6 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 }
 
-static const char *scriptname;
 static const char *prefix = NULL;
 static int verbosity = 0;
 
@@ -259,9 +258,12 @@ static void usage(void)
 	fz_info(ctx,
 		"mujstest: Scriptable tester for mupdf + js\n"
 		"\n"
-		"Syntax: mujstest -o [options] <scriptfile>\n"
+		"Syntax: mujstest -o [options] <scriptfile> [<datafile> ...]\n"
 		"\n"
 		"Options:\n"
+		"  -T      scriptfile is a script TEMPLATE file, which is filled with data from\n"
+		"          the datafiles, one line at a time, and repeated until all datafile records\n"
+		"          have been processed that way.\n"
 		"  -v      verbose (toggle)\n"
 		"  -q      be quiet (don't print progress messages)\n"
 		"  -s -    show extra information:\n"
@@ -322,6 +324,75 @@ my_getline(FILE *file)
 
 	return getline_buffer;
 }
+
+static char *
+expand_template_variables(const char* line, int linecounter, int argc, const char** argv)
+{
+	char* d = getline_buffer;
+	int space = sizeof(getline_buffer) - 1;
+
+	// first copy `line` to internal buffer as it'll be pointing at getline_buffer
+	char src[LONGLINE];
+	strncpy(src, line, sizeof(src));
+	char* s = src;
+	const char marker = '%';
+
+	while (*s)
+	{
+		char* m = strchr(s, marker);
+		if (!m)
+		{
+			strncpy(d, s, space);
+			break;
+		}
+		if (m > s)
+		{
+			size_t l = m - s;
+			if (l >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+			memcpy(d, s, l);
+			space -= l;
+			d += l;
+			m++;
+			// escape: double marker -> marker
+			if (*m == marker)
+			{
+				if (1 >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+
+				*d++ = *m++;
+				space--;
+				s = m;
+			}
+			else if (!strchr("123456789", *m))
+			{
+				// when marker isn't immediately followed by a decimal number (without leading zeroes),
+				// then it's not a template marker either. Copy marker verbatim.
+				if (1 >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+
+				*d++ = marker;
+				space--;
+				s = m;
+			}
+			else
+			{
+				char* e = NULL;
+				int param_index = (int)strtol(m, &e, 10);
+				if (param_index <= 0 || param_index >= argc)
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "TEST: error at script line %d: script template parameter index %d is out of available range 1..%d.", linecounter, param_index, argc);
+				}
+				if (strlen(argv[param_index]) >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				strncpy(d, argv[param_index], space);
+				s = e;
+			}
+		}
+	}
+	return getline_buffer;
+}
+
 
 static int
 match(char **line, const char *match)
@@ -663,9 +734,11 @@ int
 main(int argc, const char *argv[])
 {
 	FILE *script = NULL;
+	FILE *datafeed = NULL;
 	int c;
 	int errored = 0;
 	unsigned int linecounter = 0;
+	int script_is_template = 0;
 	int rv = 0;
 	struct curltime begin_time;
 	const char* line_command = NULL;
@@ -688,10 +761,11 @@ main(int argc, const char *argv[])
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:LvqVm:s:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:TLvqVm:s:h")) != -1)
 	{
 		switch(c)
 		{
+		case 'T': script_is_template = 1; break;
 		case 'q': logcfg.quiet = 1; break;
 		case 'v': verbosity ^= 1; break;
 		case 's':
@@ -763,6 +837,9 @@ main(int argc, const char *argv[])
 		return EXIT_FAILURE;
 	}
 
+	const char* scriptname = NULL;
+	const char* datafilename = NULL;
+
 	fz_try(ctx)
 	{
 		timing.start_time = Curl_now();
@@ -772,166 +849,225 @@ main(int argc, const char *argv[])
 			char logfilename[4096];
 			char skip_to_label[LONGLINE] = "";
 
-			scriptname = argv[fz_optind++];
-			script = fopen(scriptname, "rb");
-			if (script == NULL)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
-
-			fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
-			logcfg.logfile = fopen(logfilename, "w");
-
-			for(;;)
+			if (!scriptname || !script_is_template)
 			{
-				bool report_time = true;
-				char *line = my_getline(script);
-				line_command = line;
-				rv = 0;
+				// load a script
+				scriptname = argv[fz_optind++];
 
-				linecounter++;
-				fflush(logcfg.logfile);
-
-				if (line == NULL)
+				if (logcfg.logfile)
 				{
-					if (ferror(script))
+					fclose(logcfg.logfile);
+					logcfg.logfile = NULL;
+				}
+
+				fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
+				logcfg.logfile = fopen(logfilename, "w");
+
+				script = fopen(scriptname, "rb");
+				if (script == NULL)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
+			}
+
+			if (script_is_template)
+			{
+				if (fz_optind >= argc)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "expected at least one datafile to go with the script: %s", scriptname);
+
+				// load a datafile if we already have a script AND we're in "template mode".
+				datafilename = argv[fz_optind++];
+
+				datafeed = fopen(datafilename, "rb");
+				if (datafeed == NULL)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
+			}
+
+			do
+			{
+				// oh, and REWIND that (template) scriptfile again!
+				fseek(script, 0, SEEK_SET);
+
+				const char** template_argv = NULL;
+				int template_argc = 0;
+
+				if (script_is_template)
+				{
+					// process another line = record from the datafeed.
+					// skip comment and eempty lines in there...
+					char* dataline = NULL;
+					do
 					{
-						fz_error(ctx, "script read error: %s (%s)", strerror(errno), scriptname);
+						dataline = my_getline(datafeed);
+						size_t pos = strcspn(dataline, " \t\r\n#%");  // comment lines in datafeeds start with # or %
+						if (dataline[pos] == 0 || strchr("#%", dataline[pos]))
+							dataline = NULL;  // discard 
+					} while (!dataline && !feof(datafeed));
+
+					// when we've reached the end of the datafeed, it's time to check if there's another datafile waiting for us...
+					if (feof(datafeed))
+						break;
+
+					// parse datafeed line (record)
+					convert_string_to_argv(ctx, &template_argv, &template_argc, dataline);
+				}
+
+				do
+				{
+					bool report_time = true;
+					char* line = my_getline(script);
+					linecounter++;
+
+					if (script_is_template)
+					{
+						line = expand_template_variables(line, linecounter, template_argc, template_argv);
 					}
-					break;
-				}
-				if (verbosity)
-				{
-					fz_info(ctx, "L#%04d: %s", linecounter, line);
-				}
 
-				begin_time = Curl_now();
+					line_command = line;
+					rv = 0;
 
-				if (match(&line, "%"))
-				{
-					/* Comment */
-					report_time = false;
-				}
-				else if (match(&line, "LABEL:"))
-				{
-					// Just a jump-to point in the script: if we don't have a pending 'skip-to' instruction
-					// we hop over this one and continue.
-					if (*skip_to_label)
+					fflush(logcfg.logfile);
+
+					if (line == NULL)
 					{
-						char label[LONGLINE];
-						unescape_string(label, line);
-						if (!strcmp(label, skip_to_label))
+						if (ferror(script))
 						{
-							*skip_to_label = 0;
-							fz_info(ctx, "SKIP TO LABEL found. Going back to work.\n");
+							fz_error(ctx, "script read error: %s (%s)", strerror(errno), scriptname);
 						}
+						break;
 					}
-					report_time = false;
-				}
-				else if (*skip_to_label)
-				{
-					// skip command as we're skipping to label X
-					fz_info(ctx, "SKIPPING: %s\n", line);
-					report_time = false;
-				}
-				else if (match(&line, "SKIP_TO_LABEL"))
-				{
-					// Specify a label that SHOULD appear further down the script.
-					// Skip all commands until we've hit that label.
-					unescape_string(skip_to_label, line);
-					fz_info(ctx, "SKIP TO LABEL %s\n", skip_to_label);
-				}
-				else if (match(&line, "ECHO"))
-				{
-					char buf[LONGLINE];
-					if (strlen(line) < sizeof(buf))
+					if (verbosity)
 					{
-						unescape_string(buf, line);
-						fz_info(ctx, "::ECHO: %s\n", buf);
+						fz_info(ctx, "L#%04d: %s", linecounter, line);
+					}
+
+					begin_time = Curl_now();
+
+					if (match(&line, "%"))
+					{
+						/* Comment */
+						report_time = false;
+					}
+					else if (match(&line, "LABEL:"))
+					{
+						// Just a jump-to point in the script: if we don't have a pending 'skip-to' instruction
+						// we hop over this one and continue.
+						if (*skip_to_label)
+						{
+							char label[LONGLINE];
+							unescape_string(label, line);
+							if (!strcmp(label, skip_to_label))
+							{
+								*skip_to_label = 0;
+								fz_info(ctx, "SKIP TO LABEL found. Going back to work.\n");
+							}
+						}
+						report_time = false;
+					}
+					else if (*skip_to_label)
+					{
+						// skip command as we're skipping to label X
+						fz_info(ctx, "SKIPPING: %s\n", line);
+						report_time = false;
+					}
+					else if (match(&line, "SKIP_TO_LABEL"))
+					{
+						// Specify a label that SHOULD appear further down the script.
+						// Skip all commands until we've hit that label.
+						unescape_string(skip_to_label, line);
+						fz_info(ctx, "SKIP TO LABEL %s\n", skip_to_label);
+					}
+					else if (match(&line, "ECHO"))
+					{
+						char buf[LONGLINE];
+						if (strlen(line) < sizeof(buf))
+						{
+							unescape_string(buf, line);
+							fz_info(ctx, "::ECHO: %s\n", buf);
+						}
+						else
+						{
+							fz_error(ctx, "::ECHO:ERROR: not printing buffer-overflowing line\n");
+						}
+						report_time = false;
+					}
+					else if (match(&line, "CD"))
+					{
+						char path[LONGLINE];
+
+						unescape_string(path, line);
+
+						// expand dir macro {SCRIPTDIR} if it exists:
+						const char* m = strstr(path, "{SCRIPTDIR}");
+						if (m) {
+							char buf[LONGLINE];
+							char* l;
+							char* k;
+
+							memset(buf, 0, sizeof(buf));
+							strncpy(buf, path, m - path);
+							strncat(buf, scriptname, sizeof(buf));
+							k = strrchr(buf, '/');
+							l = strrchr(buf, '\\'); // Windows paths...
+							if (l > k) k = l;
+							if (k) *k = 0;
+							strncat(buf, m + 11, sizeof(buf));
+							strncpy(path, buf, sizeof(path));
+						}
+
+						fz_chdir(ctx, path);
+					}
+					else if (match(&line, "MUTOOL"))
+					{
+						const char** argv = NULL;
+						int argc = 0;
+						convert_string_to_argv(ctx, &argv, &argc, line);
+						rv = mutool_main(argc, argv);
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+							if (errored > 99) errored = 99;
+						}
+						else if (verbosity)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+						fz_free(ctx, (void*)argv);
 					}
 					else
 					{
-						fz_error(ctx, "::ECHO:ERROR: not printing buffer-overflowing line\n");
-					}
-					report_time = false;
-				}
-				else if (match(&line, "CD"))
-				{
-					char path[LONGLINE];
-
-					unescape_string(path, line);
-
-					// expand dir macro {SCRIPTDIR} if it exists:
-					const char* m = strstr(path, "{SCRIPTDIR}");
-					if (m) {
-						char buf[LONGLINE];
-						char* l;
-						char* k;
-
-						memset(buf, 0, sizeof(buf));
-						strncpy(buf, path, m - path);
-						strncat(buf, scriptname, sizeof(buf));
-						k = strrchr(buf, '/');
-						l = strrchr(buf, '\\'); // Windows paths...
-						if (l > k) k = l;
-						if (k) *k = 0;
-						strncat(buf, m + 11, sizeof(buf));
-						strncpy(path, buf, sizeof(path));
+						report_time = false;
+						if (verbosity)
+							fz_info(ctx, "Ignoring line without script statement.");
 					}
 
-					fz_chdir(ctx, path);
-				}
-				else if (match(&line, "MUTOOL"))
-				{
-					const char** argv = NULL;
-					int argc = 0;
-					convert_string_to_argv(ctx, &argv, &argc, line);
-					rv = mutool_main(argc, argv);
-					if (rv != EXIT_SUCCESS)
+					if (report_time)
 					{
-						fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
-						errored++;
-						if (errored > 99) errored = 99;
-					}
-					else if (verbosity)
-					{
-						fz_info(ctx, "OK: MUTOOL command: %s", line);
-					}
-					fz_free(ctx, (void *)argv);
-				}
-				else
-				{
-					report_time = false;
-					if (verbosity)
-						fz_info(ctx, "Ignoring line without script statement.");
-				}
+						struct curltime now = Curl_now();
+						timediff_t diff = Curl_timediff(now, begin_time);
+						fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 
-				if (report_time)
-				{
-					struct curltime now = Curl_now();
-					timediff_t diff = Curl_timediff(now, begin_time);
-					fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
-
-					if (showtime)
-					{
-						if (diff < timing.min)
+						if (showtime)
 						{
-							timing.min = diff;
-							fz_free(ctx, timing.mincommand);
-							timing.mincommand = fz_strdup(ctx, line_command);
-							timing.minscriptline = linecounter;
+							if (diff < timing.min)
+							{
+								timing.min = diff;
+								fz_free(ctx, timing.mincommand);
+								timing.mincommand = fz_strdup(ctx, line_command);
+								timing.minscriptline = linecounter;
+							}
+							if (diff > timing.max)
+							{
+								timing.max = diff;
+								fz_free(ctx, timing.maxcommand);
+								timing.maxcommand = fz_strdup(ctx, line_command);
+								timing.maxscriptline = linecounter;
+							}
+							timing.total += diff;
+							timing.count++;
 						}
-						if (diff > timing.max)
-						{
-							timing.max = diff;
-							fz_free(ctx, timing.maxcommand);
-							timing.maxcommand = fz_strdup(ctx, line_command);
-							timing.maxscriptline = linecounter;
-						}
-						timing.total += diff;
-						timing.count++;
 					}
-				}
-			}
-			while (!feof(script));
+				} while (!feof(script));
+			} while (script_is_template);
 
 			fclose(script);
 			script = NULL;
