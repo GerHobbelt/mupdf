@@ -1982,7 +1982,7 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* filename, const char* 
 	return ret;
 }
 
-int pdfmultipurp_main(int argc, const char **argv)
+int pdfmetadump_main(int argc, const char **argv)
 {
 	const char* password = NULL; /* don't throw errors if encrypted */
 	const char* output = NULL;
