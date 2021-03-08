@@ -40,6 +40,8 @@ EXPORTS
 
 %(ocr_exports)s
 
+%(ocr_train_exports)s
+
 ; curl exports
 
 %(curl_exports)s
@@ -84,6 +86,7 @@ def main():
 	mupdf_exports = generateExports("include/mupdf/pdf", form_exports + sign_exports + ["pdf_drop_designated_name", "pdf_print_xref", "pdf_recognize", "pdf_resolve_obj", "pdf_open_compressed_stream", "pdf_finish_edit"])
 	tool_exports = generateExports("include/mupdf/mutool.h")
 	ocr_exports = generateExports("source/fitz/tessocr.h")
+	ocr_train_exports = generateExports("thirdparty/tesseract/include/tesseract/capi_training_tools.h")
 	curl_exports = generateExports("thirdparty/curl/include/curl", ["fread", "fwrite", "strcasecmp", "strncasecmp", "curlx_win32_fopen"])
 	platform_exports = generateExports("platform/x11/curl_stream.h")
 	office_exports = generateExports("include/mupdf/helpers/mu-office-lib.h")

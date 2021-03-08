@@ -4,6 +4,7 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
@@ -51,6 +52,22 @@ static struct {
 #endif
 #endif
 	{ tesseract_main, "tesseract", "OCR given image or PDF" },
+
+#if defined(HAS_LIBICU)
+	{ tesseract_merge_unicharsets_main, "tess_merge_unicharsets", "OCR training helper utility" },
+	{ tesseract_set_unicharset_properties_main, "tess_set_unicharset_properties", "OCR training helper utility" },
+	{ tesseract_unicharset_extractor_main, "tess_unicharset_extractor", "OCR training helper utility" },
+	{ tesseract_combine_lang_model_main, "tess_combine_lang_model", "OCR training helper utility" },
+#endif
+	{ tesseract_combine_tessdata_main, "tess_combine_tessdata", "OCR training helper utility" },
+	{ tesseract_dawg2wordlist_main, "tess_dawg2wordlist", "OCR training helper utility" },
+	{ tesseract_wordlist2dawg_main, "tess_wordlist2dawg", "OCR training helper utility" },
+	{ tesseract_lstm_eval_main, "tess_lstm_eval", "OCR training helper utility" },
+	{ tesseract_lstm_training_main, "tess_lstm_training", "OCR training helper utility" },
+#if defined(PANGO_ENABLE_ENGINE)
+	{ tesseract_text2image_main, "tess_text2image", "OCR training helper utility" },
+#endif
+
 	{ curl_main, "curl", "access/fetch a given URI" },
 	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },

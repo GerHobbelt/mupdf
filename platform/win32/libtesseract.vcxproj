@@ -23,6 +23,7 @@
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\apitypes.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\baseapi.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\capi.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\capi_training_tools.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\genericvector.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\ltrresultiterator.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\ocrclass.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\strngs.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\thresholder.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\unichar.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\api\pdf_ttf.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\arch\dotproduct.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\arch\intsimdmatrix.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\arch\simddetect.h" />
@@ -220,6 +222,39 @@
     <ClInclude Include="..\..\thirdparty\tesseract\src\textord\underlin.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\textord\wordseg.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\textord\workingpartset.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\commandlineflags.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\commontraining.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\ctc.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\errorcounter.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\export.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\intfeaturedist.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\intfeaturemap.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\mastertrainer.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\networkbuilder.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\sampleiterator.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\common\trainingsampleset.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\degradeimage.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\mergenf.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\pango\boxchar.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\pango\export.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\pango\ligature_table.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\pango\pango_font_info.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\pango\stringrenderer.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\pango\tlog.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\export.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\fileio.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\icuerrorcode.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\lang_model_helpers.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\lstmtester.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\lstmtrainer.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\normstrngs.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\unicharset_training_utils.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_grapheme.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_indic.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_javanese.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_khmer.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_myanmar.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\training\unicharset\validator.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\viewer\scrollview.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\viewer\svmnode.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\viewer\svutil.h" />
@@ -331,6 +366,7 @@
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccutil\unicharset.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccutil\universalambigs.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\classify\classify.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\cutil\oldlist.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\dict\context.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\dict\dawg.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\dict\dawg_cache.cpp" />
@@ -356,6 +392,7 @@
     <ClCompile Include="..\..\thirdparty\tesseract\src\lstm\stridemap.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\lstm\tfnetwork.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\lstm\weightmatrix.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\opencl\openclwrapper.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\textord\alignedblob.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\textord\baselinedetect.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\textord\bbgrid.cpp" />
@@ -395,6 +432,51 @@
     <ClCompile Include="..\..\thirdparty\tesseract\src\textord\underlin.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\textord\wordseg.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\textord\workingpartset.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\ambiguous_words.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\classifier_tester.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\cntraining.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\combine_lang_model.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\combine_tessdata.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\commandlineflags.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\commontraining.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\ctc.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\errorcounter.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\intfeaturedist.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\intfeaturemap.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\mastertrainer.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\networkbuilder.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\sampleiterator.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\common\trainingsampleset.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\dawg2wordlist.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\degradeimage.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\lstmeval.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\lstmtraining.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\mergenf.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\merge_unicharsets.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\mftraining.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\pango\boxchar.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\pango\ligature_table.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\pango\pango_font_info.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\pango\stringrenderer.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\pango\tlog.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\set_unicharset_properties.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\shapeclustering.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\text2image.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\fileio.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\icuerrorcode.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\lang_model_helpers.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\lstmtester.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\lstmtrainer.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\normstrngs.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\unicharset_training_utils.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_grapheme.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_indic.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_javanese.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_khmer.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\validate_myanmar.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset\validator.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\unicharset_extractor.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\training\wordlist2dawg.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\viewer\scrollview.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\viewer\svmnode.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\viewer\svutil.cpp" />
@@ -405,6 +487,14 @@
     <ProjectReference Include="libleptonica.vcxproj">
       <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\thirdparty\tesseract\src\training\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\tesseract\src\training\language-specific.sh" />
+    <None Include="..\..\thirdparty\tesseract\src\training\tesstrain.sh" />
+    <None Include="..\..\thirdparty\tesseract\src\training\tesstrain_utils.sh" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
