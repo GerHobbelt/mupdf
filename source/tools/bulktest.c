@@ -18,7 +18,6 @@
 #include <windows.h>
 #endif
 
-
 int mutool_main(int argc, const char** argv);
 
 #define LONGLINE 4096
@@ -286,6 +285,22 @@ static void usage(void)
 	);
 }
 
+static const char *
+mk_absolute_path(fz_context* ctx, const char* filepath)
+{
+	char buf[2048];
+	char* q;
+#ifdef _MSC_VER
+	q = _fullpath(buf, filepath, sizeof(buf));
+#else
+	q = realpath(filepath, buf);
+#endif
+	if (!q) {
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot get absolute path for script file %q.", filepath);
+	}
+	return fz_strdup(ctx, q);
+}
+
 // Get a line of text from file.
 // Return NULL at EOF. Return a reference to a static buffer containing a string value otherwise.
 static char *
@@ -331,7 +346,7 @@ static char *
 expand_template_variables(const char* line, int linecounter, int argc, const char** argv)
 {
 	if (line == NULL)
-		return line;
+		return NULL;
 
 	char* d = getline_buffer;
 	int space = sizeof(getline_buffer) - 1;
@@ -475,20 +490,26 @@ static void unescape_string(char *d, const char *s)
 	*d = 0;
 }
 
-static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* argc, char* line)
+// convert line to arguments, starting at start_index.
+static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* argc, char* line, int start_index)
 {
 	int count = 0;
 	size_t len = strlen(line);
 
 	// allocate supra worst-case number of start+end slots for line decoding
 	// PLUS enough space to store the (dequoted) argument strings themselves:
-	char** start = fz_malloc(ctx, len * sizeof(start[0]) + len + 2);
+	char** start = fz_malloc(ctx, (len + start_index) * sizeof(start[0]) + len + 2);
 	*argv = start;
 	*argc = 0;
 
 	char* buf = (char*)&start[len];
 	strcpy(buf, line);
 	buf[len + 1] = 0;  // make sure there's a double NUL sentinel at the end.
+
+	for (; start_index > 0; start_index--)
+	{
+		start[count++] = "bulktest";
+	}
 
 	char* s = buf;
 
@@ -739,7 +760,7 @@ static void tst_info_callback(void* user, const char* message)
 }
 
 int
-main(int argc, const char *argv[])
+bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 {
 	FILE *script = NULL;
 	FILE *datafeed = NULL;
@@ -758,15 +779,19 @@ main(int argc, const char *argv[])
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
-	ctx = NULL;
 
-	showtime = 0;
-	showmemory = 0;
+	if (bulktest_call_level == 0)
+	{
+		ctx = NULL;
 
-	memset(&trace_info, 0, sizeof trace_info);
-	memset(&logcfg, 0, sizeof logcfg);
-	memset(&timing, 0, sizeof(timing));
-	timing.min = 1 << 30;
+		showtime = 0;
+		showmemory = 0;
+
+		memset(&trace_info, 0, sizeof trace_info);
+		memset(&logcfg, 0, sizeof logcfg);
+		memset(&timing, 0, sizeof(timing));
+		timing.min = 1 << 30;
+	}
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:TLvqVm:s:h")) != -1)
@@ -852,21 +877,28 @@ main(int argc, const char *argv[])
 	{
 		timing.start_time = Curl_now();
 
-		while (fz_optind < argc)
+		// fz_optind is a global that may change by recursive calls to this main. Keep a local copy and use that instead:
+		int optind = fz_optind;
+
+		while (optind < argc)
 		{
 			char logfilename[4096];
 			char skip_to_label[LONGLINE] = "";
 
 			if (!scriptname || !script_is_template)
 			{
+				fz_free(ctx, scriptname);
+
 				// load a script
-				scriptname = argv[fz_optind++];
+				const char *p = argv[optind++];
 
 				if (logcfg.logfile)
 				{
 					fclose(logcfg.logfile);
 					logcfg.logfile = NULL;
 				}
+
+				scriptname = mk_absolute_path(ctx, p);
 
 				fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
 				logcfg.logfile = fopen(logfilename, "w");
@@ -878,11 +910,15 @@ main(int argc, const char *argv[])
 
 			if (script_is_template)
 			{
-				if (fz_optind >= argc)
+				if (optind >= argc)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "expected at least one datafile to go with the script: %s", scriptname);
 
+				fz_free(ctx, datafilename);
+
 				// load a datafile if we already have a script AND we're in "template mode".
-				datafilename = argv[fz_optind++];
+				const char *p = argv[optind++];
+
+				datafilename = mk_absolute_path(ctx, p);
 
 				datafeed = fopen(datafilename, "rb");
 				if (datafeed == NULL)
@@ -917,7 +953,7 @@ main(int argc, const char *argv[])
 						break;
 
 					// parse datafeed line (record)
-					convert_string_to_argv(ctx, &template_argv, &template_argc, dataline);
+					convert_string_to_argv(ctx, &template_argv, &template_argc, dataline, 0);
 				}
 
 				do
@@ -1006,15 +1042,14 @@ main(int argc, const char *argv[])
 						unescape_string(path, line);
 
 						// expand dir macro {SCRIPTDIR} if it exists:
+						// this one is assumed to bee at the START of the path as it will represent an *absolute* path itself:
 						const char* m = strstr(path, "{SCRIPTDIR}");
 						if (m) {
 							char buf[LONGLINE];
 							char* l;
 							char* k;
 
-							memset(buf, 0, sizeof(buf));
-							strncpy(buf, path, m - path);
-							strncat(buf, scriptname, sizeof(buf));
+							strncpy(buf, scriptname, sizeof(buf));
 							k = strrchr(buf, '/');
 							l = strrchr(buf, '\\'); // Windows paths...
 							if (l > k) k = l;
@@ -1029,8 +1064,26 @@ main(int argc, const char *argv[])
 					{
 						const char** argv = NULL;
 						int argc = 0;
-						convert_string_to_argv(ctx, &argv, &argc, line);
+						convert_string_to_argv(ctx, &argv, &argc, line, 0);
 						rv = mutool_main(argc, argv);
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+							if (errored > 99) errored = 99;
+						}
+						else if (verbosity)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+						fz_free(ctx, (void*)argv);
+					}
+					else if (match(&line, "BULKTEST"))
+					{
+						const char** argv = NULL;
+						int argc = 0;
+						convert_string_to_argv(ctx, &argv, &argc, line, 1);  // result: argv[0] = NULL but that's OK
+						rv = bulktest_main(argc, argv, bulktest_call_level + 1);
 						if (rv != EXIT_SUCCESS)
 						{
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
@@ -1046,8 +1099,7 @@ main(int argc, const char *argv[])
 					else
 					{
 						report_time = false;
-						if (verbosity)
-							fz_info(ctx, "Ignoring line without script statement.");
+						fz_error(ctx, "Ignoring line with UNSUPPORTED script statement:\n    %s", line);
 					}
 
 					if (report_time)
@@ -1077,6 +1129,8 @@ main(int argc, const char *argv[])
 						}
 					}
 				} while (!feof(script));
+
+				fz_free(ctx, (void *)template_argv);
 			} while (script_is_template);
 
 			fclose(script);
@@ -1100,8 +1154,16 @@ main(int argc, const char *argv[])
 		errored += 100;
 	}
 
+	fz_free(ctx, (void *)scriptname);
+	fz_free(ctx, (void*)datafilename);
 	fz_flush_warnings(ctx);
 	mu_drop_context();
 
 	return errored;
+}
+
+int
+main(int argc, const char* argv[])
+{
+	return bulktest_main(argc, argv, 0);
 }
