@@ -22,56 +22,56 @@
 struct info
 {
 	int page;
-	pdf_obj *pageref;
+	pdf_obj* pageref;
 	union {
 		struct {
-			pdf_obj *obj;
+			pdf_obj* obj;
 		} info;
 		struct {
-			pdf_obj *obj;
+			pdf_obj* obj;
 		} crypt;
 		struct {
-			pdf_obj *obj;
-			fz_rect *bbox;
+			pdf_obj* obj;
+			fz_rect* bbox;
 		} dim;
 		struct {
-			pdf_obj *obj;
-			pdf_obj *subtype;
-			pdf_obj *name;
-			pdf_obj *encoding;
+			pdf_obj* obj;
+			pdf_obj* subtype;
+			pdf_obj* name;
+			pdf_obj* encoding;
 		} font;
 		struct {
-			pdf_obj *obj;
-			pdf_obj *width;
-			pdf_obj *height;
-			pdf_obj *bpc;
-			pdf_obj *filter;
-			pdf_obj *cs;
-			pdf_obj *altcs;
+			pdf_obj* obj;
+			pdf_obj* width;
+			pdf_obj* height;
+			pdf_obj* bpc;
+			pdf_obj* filter;
+			pdf_obj* cs;
+			pdf_obj* altcs;
 		} image;
 		struct {
-			pdf_obj *obj;
-			pdf_obj *groupsubtype;
-			pdf_obj *reference;
+			pdf_obj* obj;
+			pdf_obj* groupsubtype;
+			pdf_obj* reference;
 		} form;
 	} u;
 };
 
 typedef struct
 {
-	pdf_document *doc;
-	fz_context *ctx;
-	fz_output *out;
+	pdf_document* doc;
+	fz_context* ctx;
+	fz_output* out;
 	int pagecount;
-	struct info *dim;
+	struct info* dim;
 	int dims;
-	struct info *font;
+	struct info* font;
 	int fonts;
-	struct info *image;
+	struct info* image;
 	int images;
-	struct info *form;
+	struct info* form;
 	int forms;
-	struct info *psobj;
+	struct info* psobj;
 	int psobjs;
 } globals;
 
@@ -82,7 +82,7 @@ static int has_password_troubles = 0;
 static void dump_observed_errors(fz_context* ctx, fz_output* out);
 static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open);
 
-static void clearinfo(fz_context *ctx, globals *glo)
+static void clearinfo(fz_context* ctx, globals* glo)
 {
 	int i;
 
@@ -124,7 +124,7 @@ static void clearinfo(fz_context *ctx, globals *glo)
 	}
 }
 
-static void closexref(fz_context *ctx, globals *glo)
+static void closexref(fz_context* ctx, globals* glo)
 {
 	if (glo->doc)
 	{
@@ -234,6 +234,19 @@ static void write_item_date(fz_context* ctx, fz_output* out, const char* label, 
 		value);
 }
 
+static void write_item_printf(fz_context* ctx, fz_output* out, const char* label, const char* value_fmt, ...)
+{
+	va_list ap;
+
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "%jq: ",
+		label);
+	va_start(ap, value_fmt);
+	fz_write_vprintf(ctx, out, value_fmt,
+		ap);
+	va_end(ap);
+}
+
 // we consider any JSON with more than 1024 levels of object/array "removed from sanity" ;-)
 static char json_stack[1024] = "";
 
@@ -333,7 +346,7 @@ static int write_item_starter_block(fz_context* ctx, fz_output* out, const char*
 static void write_item_starter(fz_context* ctx, fz_output* out, const char* label)
 {
 	write_sep(ctx, out);
-	fz_write_printf(ctx, out, "%jq:\n",
+	fz_write_printf(ctx, out, "%jq: ",
 		label);
 }
 
@@ -349,8 +362,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 	fz_try(ctx)
 	{
-		write_item_starter(ctx, out, "Version");
-		fz_write_printf(ctx, out, "\"PDF-%d.%d\"", version / 10, version % 10);
+		write_item_printf(ctx, out, "Version", "\"PDF-%d.%d\"", version / 10, version % 10);
 
 		if (!has_password_troubles)
 		{
@@ -387,52 +399,18 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			if (chaptercount > 1)
 			{
 				write_item_starter_block(ctx, out, "ChapterPages", '[');
-			}
 
-			int alt_page_count = 0;
-			for (int i = 0; i < chaptercount; i++)
-			{
-				int count = fz_count_chapter_pages(ctx, fz_document_from_pdf_document(ctx, glo->doc), i);
-
-				if (chaptercount > 1)
+				for (int i = 0; i < chaptercount; i++)
 				{
+					int count = fz_count_chapter_pages(ctx, fz_document_from_pdf_document(ctx, glo->doc), i);
+
 					write_sep(ctx, out);
 					fz_write_printf(ctx, out, "%d", count);
 				}
 
-				alt_page_count += count;
-			}
-
-			if (chaptercount > 1)
-			{
 				write_level_end(ctx, out, ']');
 			}
 
-			if (alt_page_count != glo->pagecount)
-			{
-				fz_warn(ctx, "Document page count (%d) does not match with the sum of pages (%d) in all chapters combined.\n", glo->pagecount, alt_page_count);
-			}
-
-			/*
-			fz_outline is a tree of the outline of a document (also known
-			as table of contents).
-
-			title: Title of outline item using UTF-8 encoding. May be NULL
-			if the outline item has no text string.
-
-			uri: Destination in the document to be displayed when this
-			outline item is activated. May be an internal or external
-			link, or NULL if the outline item does not have a destination.
-
-			page: The page number of an internal link, or -1 for external
-			links or links with no destination.
-
-			next: The next outline item at the same level as this outline
-			item. May be NULL if no more outline items exist at this level.
-
-			down: The outline items immediate children in the hierarchy.
-			May be NULL if no children exist.
-			*/
 			fz_outline* outlines = NULL;
 			fz_outline_summary outline_summary = { 0 };
 			int json_stack_outlines_level = -1;
@@ -453,58 +431,59 @@ showglobalinfo(fz_context* ctx, globals* glo)
 						write_item_int(ctx, out, "DocumentOutlinesRepairedMaxHierarchyDepth", outline_summary.hierarchy_levels_after_repair);
 						write_item_int(ctx, out, "DocumentOutlinesRepairedItemCount", outline_summary.total_item_count_after_repair);
 					}
-				}
 
-				json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
+					json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
 
-				fz_outline* outline_parents[500];
-				int parents_index = 0;
-				fz_outline* outline = outlines;
 
-				while (outline)
-				{
-					write_sep(ctx, out);
-					write_level_start(ctx, out, '{');
+					fz_outline* outline_parents[500];
+					int parents_index = 0;
+					fz_outline* outline = outlines;
 
-					if (!fz_is_external_link(ctx, outline->uri))
+					while (outline)
 					{
-						int target_page = outline->page + 1;
+						write_sep(ctx, out);
+						write_level_start(ctx, out, '{');
 
-						write_item(ctx, out, "InternalLink", outline->uri);
-						write_item_int(ctx, out, "TargetPageNumber", target_page);
-						write_item_coord(ctx, out, "TargetCoordinates", outline->x, outline->y);
-					}
-					else
-					{
-						write_item(ctx, out, "ExternalLink", outline->uri);
-					}
-
-					write_item(ctx, out, "Title", outline->title);
-					write_item_bool(ctx, out, "IsOpen", outline->is_open);
-
-					if (outline->down)
-					{
-						outline_parents[parents_index++] = outline->next;
-						if (parents_index >= nelem(outline_parents))
+						if (!fz_is_external_link(ctx, outline->uri))
 						{
-							fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: %d or more!", (int)nelem(outline_parents));
+							int target_page = outline->page + 1;
+
+							write_item(ctx, out, "InternalLink", outline->uri);
+							write_item_int(ctx, out, "TargetPageNumber", target_page);
+							write_item_coord(ctx, out, "TargetCoordinates", outline->x, outline->y);
+						}
+						else
+						{
+							write_item(ctx, out, "ExternalLink", outline->uri);
 						}
 
-						write_item_starter_block(ctx, out, "Children", '[');
+						write_item(ctx, out, "Title", outline->title);
+						write_item_bool(ctx, out, "IsOpen", outline->is_open);
 
-						outline = outline->down;
-					}
-					else
-					{
-						write_level_end(ctx, out, '}');
-
-						outline = outline->next;
-						while (!outline && parents_index > 0)
+						if (outline->down)
 						{
-							outline = outline_parents[--parents_index];
+							outline_parents[parents_index++] = outline->next;
+							if (parents_index >= nelem(outline_parents))
+							{
+								fz_throw(ctx, FZ_ERROR_GENERIC, "PDF Outline has too many levels: %d or more!", (int)nelem(outline_parents));
+							}
 
-							write_level_end(ctx, out, ']');
+							write_item_starter_block(ctx, out, "Children", '[');
+
+							outline = outline->down;
+						}
+						else
+						{
 							write_level_end(ctx, out, '}');
+
+							outline = outline->next;
+							while (!outline && parents_index > 0)
+							{
+								outline = outline_parents[--parents_index];
+
+								write_level_end(ctx, out, ']');
+								write_level_end(ctx, out, '}');
+							}
 						}
 					}
 				}
@@ -529,6 +508,69 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			write_item_starter(ctx, out, "AttachedFiles");
 			pdf_print_obj_to_json(ctx, out, files_obj, PRINT_OBJ_TO_JSON_FLAGS);
 		}
+
+		// See if there's any embedded JavaScript code
+		{
+			pdf_obj* javascript;
+			int len, i;
+			
+			javascript = pdf_load_name_tree(ctx, doc, PDF_NAME(JavaScript));
+			len = pdf_dict_len(ctx, javascript);
+
+			if (len > 0)
+			{
+				int js_outline_level = write_item_starter_block(ctx, out, "EmbeddedJavaScripts", '[');
+
+				fz_try(ctx)
+				{
+					for (i = 0; i < len; i++)
+					{
+						pdf_obj* fragment = pdf_dict_get_val(ctx, javascript, i);
+						pdf_obj* code = pdf_dict_get(ctx, fragment, PDF_NAME(JS));
+						size_t codebuflength = 0;
+						char* codebuf = pdf_load_stream_or_string_as_utf8(ctx, code, &codebuflength);
+
+						char buf[100];
+						if (pdf_is_indirect(ctx, code))
+							fz_snprintf(buf, sizeof buf, "%d", pdf_to_num(ctx, code));
+						else
+							fz_snprintf(buf, sizeof buf, "Root/Names/JavaScript/Names/%d/JS", (i + 1) * 2);
+
+						write_sep(ctx, out);
+						write_level_start(ctx, out, '{');
+						write_item(ctx, out, "JSFilePath", buf);
+						write_item_int(ctx, out, "JSScriptLength", codebuflength);
+
+						// basic validation check of the JS source file
+						if (strlen(codebuf) != codebuflength)
+						{
+							write_item_bool(ctx, out, "JSHasEmbeddedNULCharacters", 1);
+							fz_error(ctx, "PDF Javascript file %q has embedded NUL characters.", buf);
+						}
+
+						write_item(ctx, out, "JSScriptContent", codebuf);
+						fz_free(ctx, codebuf);
+
+						write_level_end(ctx, out, '}');
+					}
+				}
+				fz_always(ctx)
+				{
+					pdf_drop_obj(ctx, javascript);
+
+					write_level_end_guaranteed(ctx, out, ']', js_outline_level);
+				}
+				fz_catch(ctx)
+				{
+					fz_rethrow(ctx);
+				}
+			}
+		}
+
+		// and dump a PDF internal aspects list while we're at it: use that
+		// for test bench diagnostics where you want to dig out PDFs with particular
+		// 'aspects' to them for (regression) testing.
+		// Also useful to help diagnose a PDF to see "what's so special about *this* one".
 	}
 	fz_always(ctx)
 	{
@@ -544,10 +586,10 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 
 static void
-gatherdimensions(fz_context *ctx, globals *glo, int page, pdf_obj *pageref)
+gatherdimensions(fz_context* ctx, globals* glo, int page, pdf_obj* pageref)
 {
 	fz_rect bbox;
-	pdf_obj *obj;
+	pdf_obj* obj;
 	int j;
 
 	obj = pdf_dict_get(ctx, pageref, PDF_NAME(MediaBox));
@@ -567,37 +609,37 @@ gatherdimensions(fz_context *ctx, globals *glo, int page, pdf_obj *pageref)
 	}
 
 	for (j = 0; j < glo->dims; j++)
-		if (!memcmp(glo->dim[j].u.dim.bbox, &bbox, sizeof (fz_rect)))
+		if (!memcmp(glo->dim[j].u.dim.bbox, &bbox, sizeof(fz_rect)))
 			break;
 
 	if (j < glo->dims)
 		return;
 
-	glo->dim = fz_realloc_array(ctx, glo->dim, glo->dims+1, struct info);
+	glo->dim = fz_realloc_array(ctx, glo->dim, glo->dims + 1, struct info);
 	glo->dims++;
 
 	glo->dim[glo->dims - 1].page = page;
 	glo->dim[glo->dims - 1].pageref = pageref;
 	glo->dim[glo->dims - 1].u.dim.bbox = NULL;
 	glo->dim[glo->dims - 1].u.dim.bbox = fz_malloc(ctx, sizeof(fz_rect));
-	memcpy(glo->dim[glo->dims - 1].u.dim.bbox, &bbox, sizeof (fz_rect));
+	memcpy(glo->dim[glo->dims - 1].u.dim.bbox, &bbox, sizeof(fz_rect));
 
 	return;
 }
 
 static void
-gatherfonts(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *dict)
+gatherfonts(fz_context* ctx, globals* glo, int page, pdf_obj* pageref, pdf_obj* dict)
 {
 	int i, n;
 
 	n = pdf_dict_len(ctx, dict);
 	for (i = 0; i < n; i++)
 	{
-		pdf_obj *fontdict = NULL;
-		pdf_obj *subtype = NULL;
-		pdf_obj *basefont = NULL;
-		pdf_obj *name = NULL;
-		pdf_obj *encoding = NULL;
+		pdf_obj* fontdict = NULL;
+		pdf_obj* subtype = NULL;
+		pdf_obj* basefont = NULL;
+		pdf_obj* name = NULL;
+		pdf_obj* encoding = NULL;
 		int k;
 
 		fontdict = pdf_dict_get_val(ctx, dict, i);
@@ -622,7 +664,7 @@ gatherfonts(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *
 		if (k < glo->fonts)
 			continue;
 
-		glo->font = fz_realloc_array(ctx, glo->font, glo->fonts+1, struct info);
+		glo->font = fz_realloc_array(ctx, glo->font, glo->fonts + 1, struct info);
 		glo->fonts++;
 
 		glo->font[glo->fonts - 1].page = page;
@@ -635,21 +677,21 @@ gatherfonts(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *
 }
 
 static void
-gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *dict)
+gatherimages(fz_context* ctx, globals* glo, int page, pdf_obj* pageref, pdf_obj* dict)
 {
 	int i, n;
 
 	n = pdf_dict_len(ctx, dict);
 	for (i = 0; i < n; i++)
 	{
-		pdf_obj *imagedict;
-		pdf_obj *type;
-		pdf_obj *width;
-		pdf_obj *height;
-		pdf_obj *bpc = NULL;
-		pdf_obj *filter = NULL;
-		pdf_obj *cs = NULL;
-		pdf_obj *altcs;
+		pdf_obj* imagedict;
+		pdf_obj* type;
+		pdf_obj* width;
+		pdf_obj* height;
+		pdf_obj* bpc = NULL;
+		pdf_obj* filter = NULL;
+		pdf_obj* cs = NULL;
+		pdf_obj* altcs;
 		int k;
 
 		imagedict = pdf_dict_get_val(ctx, dict, i);
@@ -669,7 +711,7 @@ gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 		cs = pdf_dict_get(ctx, imagedict, PDF_NAME(ColorSpace));
 		if (pdf_is_array(ctx, cs))
 		{
-			pdf_obj *cses = cs;
+			pdf_obj* cses = cs;
 
 			cs = pdf_array_get(ctx, cses, 0);
 			if (pdf_name_eq(ctx, cs, PDF_NAME(DeviceN)) || pdf_name_eq(ctx, cs, PDF_NAME(Separation)))
@@ -691,7 +733,7 @@ gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 		if (k < glo->images)
 			continue;
 
-		glo->image = fz_realloc_array(ctx, glo->image, glo->images+1, struct info);
+		glo->image = fz_realloc_array(ctx, glo->image, glo->images + 1, struct info);
 		glo->images++;
 
 		glo->image[glo->images - 1].page = page;
@@ -707,19 +749,19 @@ gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 }
 
 static void
-gatherforms(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *dict)
+gatherforms(fz_context* ctx, globals* glo, int page, pdf_obj* pageref, pdf_obj* dict)
 {
 	int i, n;
 
 	n = pdf_dict_len(ctx, dict);
 	for (i = 0; i < n; i++)
 	{
-		pdf_obj *xobjdict;
-		pdf_obj *type;
-		pdf_obj *subtype;
-		pdf_obj *group;
-		pdf_obj *groupsubtype;
-		pdf_obj *reference;
+		pdf_obj* xobjdict;
+		pdf_obj* type;
+		pdf_obj* subtype;
+		pdf_obj* group;
+		pdf_obj* groupsubtype;
+		pdf_obj* reference;
 		int k;
 
 		xobjdict = pdf_dict_get_val(ctx, dict, i);
@@ -748,7 +790,7 @@ gatherforms(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *
 		if (k < glo->forms)
 			continue;
 
-		glo->form = fz_realloc_array(ctx, glo->form, glo->forms+1, struct info);
+		glo->form = fz_realloc_array(ctx, glo->form, glo->forms + 1, struct info);
 		glo->forms++;
 
 		glo->form[glo->forms - 1].page = page;
@@ -760,16 +802,16 @@ gatherforms(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *
 }
 
 static void
-gatherpsobjs(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj *dict)
+gatherpsobjs(fz_context* ctx, globals* glo, int page, pdf_obj* pageref, pdf_obj* dict)
 {
 	int i, n;
 
 	n = pdf_dict_len(ctx, dict);
 	for (i = 0; i < n; i++)
 	{
-		pdf_obj *xobjdict;
-		pdf_obj *type;
-		pdf_obj *subtype;
+		pdf_obj* xobjdict;
+		pdf_obj* type;
+		pdf_obj* subtype;
 		int k;
 
 		xobjdict = pdf_dict_get_val(ctx, dict, i);
@@ -792,7 +834,7 @@ gatherpsobjs(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 		if (k < glo->psobjs)
 			continue;
 
-		glo->psobj = fz_realloc_array(ctx, glo->psobj, glo->psobjs+1, struct info);
+		glo->psobj = fz_realloc_array(ctx, glo->psobj, glo->psobjs + 1, struct info);
 		glo->psobjs++;
 
 		glo->psobj[glo->psobjs - 1].page = page;
@@ -847,8 +889,7 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 			pdf_layer_config_ui_info(ctx, pdoc, j, &ui);
 			write_sep(ctx, out);
 			write_level_start(ctx, out, '{');
-			write_item_starter(ctx, out, "Depth");
-			fz_write_printf(ctx, out, "%d", ui.depth);
+			write_item_printf(ctx, out, "Depth", "%d", ui.depth);
 
 			switch (ui.type)
 			{
@@ -867,8 +908,7 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 				break;
 
 			default:
-				write_item_starter(ctx, out, "Type");
-				fz_write_printf(ctx, out, "\"UNKNOWN UI.TYPE:%d\"", (int)ui.type);
+				write_item_printf(ctx, out, "Type", "\"UNKNOWN UI.TYPE:%d\"", (int)ui.type);
 				break;
 			}
 
@@ -952,12 +992,12 @@ gatherresourceinfo(fz_context* ctx, globals* glo, int page, pdf_obj* rsrc)
 }
 
 static void
-gatherpageinfo(fz_context *ctx, globals *glo, int page)
+gatherpageinfo(fz_context* ctx, globals* glo, int page)
 {
-	pdf_obj *pageref;
-	pdf_obj *rsrc;
+	pdf_obj* pageref;
+	pdf_obj* rsrc;
 
-	pageref = pdf_lookup_page_obj(ctx, glo->doc, page-1);
+	pageref = pdf_lookup_page_obj(ctx, glo->doc, page - 1);
 
 	if (!pageref)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot retrieve info from page %d", page);
@@ -1117,14 +1157,12 @@ printinfo(fz_context* ctx, globals* glo)
 
 			write_item_int(ctx, out, "ImageWidth", pdf_to_int(ctx, glo->image[i].u.image.width));
 			write_item_int(ctx, out, "ImageHeight", pdf_to_int(ctx, glo->image[i].u.image.height));
-			write_item_starter(ctx, out, "ImageDimensions");
-			fz_write_printf(ctx, out, "{ %q: %g, %q: %g }",
+			write_item_printf(ctx, out, "ImageDimensions", "{ %q: %g, %q: %g }",
 				"W", pdf_to_real(ctx, glo->image[i].u.image.width),
 				"H", pdf_to_real(ctx, glo->image[i].u.image.height));
 			write_item_int(ctx, out, "ImageBPC", glo->image[i].u.image.bpc ? pdf_to_int(ctx, glo->image[i].u.image.bpc) : 1);
-			write_item_starter(ctx, out, "ImageCS");
-			fz_write_printf(ctx, out, "\"%s%s%s\"",
-						glo->image[i].u.image.cs ? cs : "ImageMask",
+			write_item_printf(ctx, out, "ImageCS", "\"%s%s%s\"",
+				glo->image[i].u.image.cs ? cs : "ImageMask",
 				glo->image[i].u.image.altcs ? " " : "",
 				glo->image[i].u.image.altcs ? altcs : "");
 			write_item_starter(ctx, out, "Image");
@@ -1152,9 +1190,8 @@ printinfo(fz_context* ctx, globals* glo)
 			write_item_starter(ctx, out, "PageRef");
 			pdf_print_obj_to_json(ctx, out, glo->form[i].pageref, PRINT_OBJ_TO_JSON_FLAGS);
 #endif
-			write_item_starter(ctx, out, "FormType");
-			fz_write_printf(ctx, out, "\"Form%s%s%s%s\"",
-						glo->form[i].u.form.groupsubtype ? " " : "",
+			write_item_printf(ctx, out, "FormType", "\"Form%s%s%s%s\"",
+				glo->form[i].u.form.groupsubtype ? " " : "",
 				glo->form[i].u.form.groupsubtype ? pdf_to_name(ctx, glo->form[i].u.form.groupsubtype) : "",
 				glo->form[i].u.form.groupsubtype ? " Group" : "",
 				glo->form[i].u.form.reference ? " Reference" : "");
@@ -1189,6 +1226,202 @@ printinfo(fz_context* ctx, globals* glo)
 }
 
 static void
+show_annot_info(fz_context* ctx, fz_output* out, fz_matrix ctm, pdf_annot* annot)
+{
+	fz_rect bounds_in_doc = pdf_annot_rect(ctx, annot);
+
+	write_item_bbox(ctx, out, "BoundsInDocument", &bounds_in_doc);
+
+	fz_rect bounds = pdf_bound_annot(ctx, annot);
+	bounds = fz_transform_rect(bounds, ctm);
+	//fz_irect area = fz_irect_from_rect(bounds);
+
+	write_item_bbox(ctx, out, "Bounds", &bounds);
+
+	write_item_bool(ctx, out, "NeedsNewAP", pdf_annot_needs_new_ap(ctx, annot));
+
+	write_item(ctx, out, "Author", pdf_annot_author(ctx, annot));
+
+	{
+		// check if the Date nodes exist: only if they do, do we print their contents.
+		pdf_obj* cdo = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(CreationDate));
+		pdf_obj* mdo = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(M));
+		if (cdo || mdo)
+		{
+			write_item_date(ctx, out, "CreationDate", pdf_annot_creation_date(ctx, annot));
+			write_item_date(ctx, out, "ModificationDate", pdf_annot_modification_date(ctx, annot));
+		}
+	}
+
+	int flags = pdf_annot_flags(ctx, annot);
+
+	char buf[1024];
+
+	buf[0] = 0;
+
+	if (flags & PDF_ANNOT_IS_INVISIBLE)
+		fz_strlcat(buf, "invisible | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_HIDDEN)
+		fz_strlcat(buf, "hidden | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_PRINT)
+		fz_strlcat(buf, "print | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_NO_ZOOM)
+		fz_strlcat(buf, "no_zoom | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_NO_ROTATE)
+		fz_strlcat(buf, "no_rotate | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_NO_VIEW)
+		fz_strlcat(buf, "no_view | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_READ_ONLY)
+		fz_strlcat(buf, "read_only | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		fz_strlcat(buf, "locked | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_TOGGLE_NO_VIEW)
+		fz_strlcat(buf, "toggle_no_view | ", sizeof(buf));
+	if (flags & PDF_ANNOT_IS_LOCKED_CONTENTS)
+		fz_strlcat(buf, "locked_contents | ", sizeof(buf));
+	if (*buf) {
+		char* end = buf + strlen(buf);
+		end[-3] = 0;
+	}
+	else
+	{
+		fz_strlcat(buf, "<none>", sizeof(buf));
+	}
+	write_item(ctx, out, "Flags", buf);
+
+	{
+		fz_rect popup_bounds = pdf_annot_popup(ctx, annot);
+		write_item_bbox(ctx, out, "PopupBounds", &popup_bounds);
+	}
+
+	write_item_bool(ctx, out, "HasInkList", pdf_annot_has_ink_list(ctx, annot));
+	write_item_bool(ctx, out, "HasQuadPoints", pdf_annot_has_quad_points(ctx, annot));
+	write_item_bool(ctx, out, "HasVertexData", pdf_annot_has_vertices(ctx, annot));
+	write_item_bool(ctx, out, "HasLineData", pdf_annot_has_line(ctx, annot));
+	write_item_bool(ctx, out, "HasInteriorColor", pdf_annot_has_interior_color(ctx, annot));
+	write_item_bool(ctx, out, "HasLineEndingStyles", pdf_annot_has_line_ending_styles(ctx, annot));
+	write_item_bool(ctx, out, "HasIconName", pdf_annot_has_icon_name(ctx, annot));
+	write_item_bool(ctx, out, "HasOpenAction", pdf_annot_has_open(ctx, annot));
+	write_item_bool(ctx, out, "HasAuthorData", pdf_annot_has_author(ctx, annot));
+	write_item_bool(ctx, out, "IsActive", pdf_annot_active(ctx, annot));
+	write_item_bool(ctx, out, "IsHot", pdf_annot_hot(ctx, annot));
+
+	/*
+		Retrieve the annotations text language (either from the
+		annotation, or from the document).
+	*/
+	{
+		fz_text_language lang = pdf_annot_language(ctx, annot);
+		write_item(ctx, out, "Language", fz_string_from_text_language(buf, lang));
+	}
+
+	if (pdf_annot_has_icon_name(ctx, annot))
+	{
+		write_item(ctx, out, "Icon", pdf_annot_icon_name(ctx, annot));
+	}
+
+	{
+		int field_flags = pdf_annot_field_flags(ctx, annot);
+		const char* field_value = pdf_annot_field_value(ctx, annot);
+		const char* field_key = pdf_annot_field_label(ctx, annot);
+
+		if (field_flags || field_value || field_key)
+		{
+			buf[0] = 0;
+
+			/* All fields */
+			if (field_flags & PDF_FIELD_IS_READ_ONLY)
+				fz_strlcat(buf, "read_only | ", sizeof(buf));
+			if (field_flags & PDF_FIELD_IS_REQUIRED)
+				fz_strlcat(buf, "required | ", sizeof(buf));
+			if (field_flags & PDF_FIELD_IS_NO_EXPORT)
+				fz_strlcat(buf, "no_export | ", sizeof(buf));
+
+			/* Text fields */
+			if (field_flags & PDF_TX_FIELD_IS_MULTILINE)
+				fz_strlcat(buf, "multiline | ", sizeof(buf));
+			if (field_flags & PDF_TX_FIELD_IS_PASSWORD)
+				fz_strlcat(buf, "password | ", sizeof(buf));
+			if (field_flags & PDF_TX_FIELD_IS_FILE_SELECT)
+				fz_strlcat(buf, "file_select | ", sizeof(buf));
+			if (field_flags & PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK)
+				fz_strlcat(buf, "do_not_spell_check | ", sizeof(buf));
+			if (field_flags & PDF_TX_FIELD_IS_DO_NOT_SCROLL)
+				fz_strlcat(buf, "do_not_scroll | ", sizeof(buf));
+			if (field_flags & PDF_TX_FIELD_IS_COMB)
+				fz_strlcat(buf, "comb | ", sizeof(buf));
+			if (field_flags & PDF_TX_FIELD_IS_RICH_TEXT)
+				fz_strlcat(buf, "rich_text | ", sizeof(buf));
+
+			/* Button fields */
+			if (field_flags & PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF)
+				fz_strlcat(buf, "no_toggle_to_off | ", sizeof(buf));
+			if (field_flags & PDF_BTN_FIELD_IS_RADIO)
+				fz_strlcat(buf, "radio | ", sizeof(buf));
+			if (field_flags & PDF_BTN_FIELD_IS_PUSHBUTTON)
+				fz_strlcat(buf, "pushbutton | ", sizeof(buf));
+			if (field_flags & PDF_BTN_FIELD_IS_RADIOS_IN_UNISON)
+				fz_strlcat(buf, "radios_in_unison | ", sizeof(buf));
+
+			/* Choice fields */
+			if (field_flags & PDF_CH_FIELD_IS_COMBO)
+				fz_strlcat(buf, "combo | ", sizeof(buf));
+			if (field_flags & PDF_CH_FIELD_IS_EDIT)
+				fz_strlcat(buf, "edit | ", sizeof(buf));
+			if (field_flags & PDF_CH_FIELD_IS_SORT)
+				fz_strlcat(buf, "sort | ", sizeof(buf));
+			if (field_flags & PDF_CH_FIELD_IS_MULTI_SELECT)
+				fz_strlcat(buf, "multi_select | ", sizeof(buf));
+			if (field_flags & PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK)
+				fz_strlcat(buf, "do_not_spell_check | ", sizeof(buf));
+			if (field_flags & PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE)
+				fz_strlcat(buf, "commit_on_sel_change | ", sizeof(buf));
+
+			if (*buf)
+			{
+				char* end = buf + strlen(buf);
+				end[-3] = 0;
+			}
+			else
+			{
+				fz_strlcat(buf, "<none>", sizeof(buf));
+			}
+			write_item(ctx, out, "FieldFlags", buf);
+			write_item(ctx, out, "FieldKey", field_key);
+			write_item(ctx, out, "FieldValue", field_value);
+		}
+	}
+
+	//if (pdf_annot_type(ctx, annot) == PDF_ANNOT_FILE_ATTACHMENT)
+	{
+		pdf_obj* fs = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(FS));
+		if (fs)
+		{
+			write_item_bool(ctx, out, "IsEmbeddedFile", pdf_is_embedded_file(ctx, fs));
+			const char* filename = pdf_embedded_file_name(ctx, fs);
+			write_item(ctx, out, "EmbeddedFileName", filename);
+			const char* filetype = pdf_embedded_file_type(ctx, fs);
+			write_item(ctx, out, "EmbeddedFileType", filetype);
+		}
+	}
+
+	{
+		pdf_obj* obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(Popup));
+		if (obj)
+		{
+			write_item_starter(ctx, out, "Popup");
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
+		}
+	}
+
+	{
+		const char* contents = pdf_annot_contents(ctx, annot);
+
+		write_item(ctx, out, "Contents", contents);
+	}
+}
+
+static void
 printadvancedinfo(fz_context* ctx, globals* glo, int page)
 {
 	fz_output* out = glo->out;
@@ -1215,216 +1448,62 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 			if (n > 0)
 			{
 				write_item_starter_block(ctx, out, "Annotations", '[');
+
+				int idx;
+				for (idx = 0, annot = pdf_first_annot(ctx, page_obj); annot; ++idx, annot = pdf_next_annot(ctx, annot))
+				{
+					write_sep(ctx, out);
+					write_level_start(ctx, out, '{');
+
+					int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
+					enum pdf_annot_type subtype = pdf_annot_type(ctx, annot);
+					write_item_int(ctx, out, "AnnotNumber", num);
+					write_item(ctx, out, "AnnotType", pdf_string_from_annot_type(ctx, subtype));
+
+					show_annot_info(ctx, out, ctm, annot);
+
+					write_level_end(ctx, out, '}');
+				}
+
+				write_level_end(ctx, out, ']');
 			}
+		}
 
-			int idx;
-			for (idx = 0, annot = pdf_first_annot(ctx, page_obj); annot; ++idx, annot = pdf_next_annot(ctx, annot))
-			{
-				char buf[1024];
 
-				write_sep(ctx, out);
-				write_level_start(ctx, out, '{');
+		{
+			pdf_widget* widget;
 
-				int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
-				enum pdf_annot_type subtype = pdf_annot_type(ctx, annot);
-				write_item_int(ctx, out, "AnnotNumber", num);
-				write_item(ctx, out, "AnnotType", pdf_string_from_annot_type(ctx, subtype));
-
-				fz_rect bounds_in_doc = pdf_annot_rect(ctx, annot);
-
-				write_item_bbox(ctx, out, "BoundsInDocument", &bounds_in_doc);
-
-				fz_rect bounds = pdf_bound_annot(ctx, annot);
-				bounds = fz_transform_rect(bounds, ctm);
-				//fz_irect area = fz_irect_from_rect(bounds);
-
-				write_item_bbox(ctx, out, "Bounds", &bounds);
-
-				write_item_bool(ctx, out, "NeedsNewAP", pdf_annot_needs_new_ap(ctx, annot));
-
-				write_item(ctx, out, "Author", pdf_annot_author(ctx, annot));
-
-				{
-					// check if the Date nodes exist: only if they do, do we print their contents.
-					pdf_obj* cdo = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(CreationDate));
-					pdf_obj* mdo = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(M));
-					if (cdo || mdo)
-					{
-						write_item_date(ctx, out, "CreationDate", pdf_annot_creation_date(ctx, annot));
-						write_item_date(ctx, out, "ModificationDate", pdf_annot_modification_date(ctx, annot));
-					}
-				}
-
-				int flags = pdf_annot_flags(ctx, annot);
-
-				buf[0] = 0;
-
-				if (flags & PDF_ANNOT_IS_INVISIBLE)
-					fz_strlcat(buf, "invisible | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_HIDDEN)
-					fz_strlcat(buf, "hidden | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_PRINT)
-					fz_strlcat(buf, "print | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_NO_ZOOM)
-					fz_strlcat(buf, "no_zoom | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_NO_ROTATE)
-					fz_strlcat(buf, "no_rotate | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_NO_VIEW)
-					fz_strlcat(buf, "no_view | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_READ_ONLY)
-					fz_strlcat(buf, "read_only | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_LOCKED)
-					fz_strlcat(buf, "locked | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_TOGGLE_NO_VIEW)
-					fz_strlcat(buf, "toggle_no_view | ", sizeof(buf));
-				if (flags & PDF_ANNOT_IS_LOCKED_CONTENTS)
-					fz_strlcat(buf, "locked_contents | ", sizeof(buf));
-				if (*buf) {
-					char* end = buf + strlen(buf);
-					end[-3] = 0;
-				}
-				else
-				{
-					fz_strlcat(buf, "<none>", sizeof(buf));
-				}
-				write_item(ctx, out, "Flags", buf);
-
-				{
-					fz_rect popup_bounds = pdf_annot_popup(ctx, annot);
-					write_item_bbox(ctx, out, "PopupBounds", &popup_bounds);
-				}
-
-				write_item_bool(ctx, out, "HasInkList", pdf_annot_has_ink_list(ctx, annot));
-				write_item_bool(ctx, out, "HasQuadPoints", pdf_annot_has_quad_points(ctx, annot));
-				write_item_bool(ctx, out, "HasVertexData", pdf_annot_has_vertices(ctx, annot));
-				write_item_bool(ctx, out, "HasLineData", pdf_annot_has_line(ctx, annot));
-				write_item_bool(ctx, out, "HasInteriorColor", pdf_annot_has_interior_color(ctx, annot));
-				write_item_bool(ctx, out, "HasLineEndingStyles", pdf_annot_has_line_ending_styles(ctx, annot));
-				write_item_bool(ctx, out, "HasIconName", pdf_annot_has_icon_name(ctx, annot));
-				write_item_bool(ctx, out, "HasOpenAction", pdf_annot_has_open(ctx, annot));
-				write_item_bool(ctx, out, "HasAuthorData", pdf_annot_has_author(ctx, annot));
-				write_item_bool(ctx, out, "IsActive", pdf_annot_active(ctx, annot));
-				write_item_bool(ctx, out, "IsHot", pdf_annot_hot(ctx, annot));
-
-				/*
-					Retrieve the annotations text language (either from the
-					annotation, or from the document).
-				*/
-				{
-					fz_text_language lang = pdf_annot_language(ctx, annot);
-					write_item(ctx, out, "Language", fz_string_from_text_language(buf, lang));
-				}
-
-					if (pdf_annot_has_icon_name(ctx, annot))
-					{
-						write_item(ctx, out, "Icon", pdf_annot_icon_name(ctx, annot));
-					}
-
-				{
-					int field_flags = pdf_annot_field_flags(ctx, annot);
-					const char* field_value = pdf_annot_field_value(ctx, annot);
-					const char* field_key = pdf_annot_field_label(ctx, annot);
-
-					if (field_flags || field_value || field_key)
-					{
-						buf[0] = 0;
-
-						/* All fields */
-						if (field_flags & PDF_FIELD_IS_READ_ONLY)
-							fz_strlcat(buf, "read_only | ", sizeof(buf));
-						if (field_flags & PDF_FIELD_IS_REQUIRED)
-							fz_strlcat(buf, "required | ", sizeof(buf));
-						if (field_flags & PDF_FIELD_IS_NO_EXPORT)
-							fz_strlcat(buf, "no_export | ", sizeof(buf));
-
-						/* Text fields */
-						if (field_flags & PDF_TX_FIELD_IS_MULTILINE)
-							fz_strlcat(buf, "multiline | ", sizeof(buf));
-						if (field_flags & PDF_TX_FIELD_IS_PASSWORD)
-							fz_strlcat(buf, "password | ", sizeof(buf));
-						if (field_flags & PDF_TX_FIELD_IS_FILE_SELECT)
-							fz_strlcat(buf, "file_select | ", sizeof(buf));
-						if (field_flags & PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK)
-							fz_strlcat(buf, "do_not_spell_check | ", sizeof(buf));
-						if (field_flags & PDF_TX_FIELD_IS_DO_NOT_SCROLL)
-							fz_strlcat(buf, "do_not_scroll | ", sizeof(buf));
-						if (field_flags & PDF_TX_FIELD_IS_COMB)
-							fz_strlcat(buf, "comb | ", sizeof(buf));
-						if (field_flags & PDF_TX_FIELD_IS_RICH_TEXT)
-							fz_strlcat(buf, "rich_text | ", sizeof(buf));
-
-						/* Button fields */
-						if (field_flags & PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF)
-							fz_strlcat(buf, "no_toggle_to_off | ", sizeof(buf));
-						if (field_flags & PDF_BTN_FIELD_IS_RADIO)
-							fz_strlcat(buf, "radio | ", sizeof(buf));
-						if (field_flags & PDF_BTN_FIELD_IS_PUSHBUTTON)
-							fz_strlcat(buf, "pushbutton | ", sizeof(buf));
-						if (field_flags & PDF_BTN_FIELD_IS_RADIOS_IN_UNISON)
-							fz_strlcat(buf, "radios_in_unison | ", sizeof(buf));
-
-						/* Choice fields */
-						if (field_flags & PDF_CH_FIELD_IS_COMBO)
-							fz_strlcat(buf, "combo | ", sizeof(buf));
-						if (field_flags & PDF_CH_FIELD_IS_EDIT)
-							fz_strlcat(buf, "edit | ", sizeof(buf));
-						if (field_flags & PDF_CH_FIELD_IS_SORT)
-							fz_strlcat(buf, "sort | ", sizeof(buf));
-						if (field_flags & PDF_CH_FIELD_IS_MULTI_SELECT)
-							fz_strlcat(buf, "multi_select | ", sizeof(buf));
-						if (field_flags & PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK)
-							fz_strlcat(buf, "do_not_spell_check | ", sizeof(buf));
-						if (field_flags & PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE)
-							fz_strlcat(buf, "commit_on_sel_change | ", sizeof(buf));
-
-						if (*buf)
-						{
-							char* end = buf + strlen(buf);
-							end[-3] = 0;
-						}
-						else
-						{
-							fz_strlcat(buf, "<none>", sizeof(buf));
-						}
-						write_item(ctx, out, "FieldFlags", buf);
-						write_item(ctx, out, "FieldKey", field_key);
-						write_item(ctx, out, "FieldValue", field_value);
-					}
-				}
-
-				//if (pdf_annot_type(ctx, annot) == PDF_ANNOT_FILE_ATTACHMENT)
-				{
-					pdf_obj* fs = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(FS));
-					if (fs)
-					{
-						write_item_bool(ctx, out, "IsEmbeddedFile", pdf_is_embedded_file(ctx, fs));
-						const char* filename = pdf_embedded_file_name(ctx, fs);
-						write_item(ctx, out, "EmbeddedFileName", filename);
-						const char* filetype = pdf_embedded_file_type(ctx, fs);
-						write_item(ctx, out, "EmbeddedFileType", filetype);
-					}
-				}
-
-				{
-					pdf_obj* obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(Popup));
-					if (obj)
-					{
-						write_item_starter(ctx, out, "Popup");
-						pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
-					}
-				}
-
-				{
-					const char* contents = pdf_annot_contents(ctx, annot);
-
-					write_item(ctx, out, "Contents", contents);
-				}
-
-				write_level_end(ctx, out, '}');
-			}
+			int n = 0;
+			for (widget = pdf_first_widget(ctx, page_obj); widget; widget = pdf_next_widget(ctx, widget))
+				++n;
 
 			if (n > 0)
 			{
+				write_item_starter_block(ctx, out, "PageWidgets", '[');
+
+				int idx;
+				for (idx = 0, widget = pdf_first_widget(ctx, page_obj); widget; ++idx, widget = pdf_next_widget(ctx, widget))
+				{
+					write_sep(ctx, out);
+					write_level_start(ctx, out, '{');
+
+					int num = pdf_to_num(ctx, pdf_annot_obj(ctx, widget));
+					enum pdf_widget_type subtype = pdf_widget_type(ctx, widget);
+					write_item_int(ctx, out, "WidgetNumber", num);
+					write_item(ctx, out, "WidgetType", pdf_string_from_widget_type(ctx, subtype));
+
+					if (subtype == PDF_WIDGET_TYPE_TEXT)
+					{
+						write_item_int(ctx, out, "WidgetTextMaximumLength", pdf_text_widget_max_len(ctx, widget));
+						enum pdf_widget_tx_format txf = pdf_text_widget_format(ctx, widget);
+						write_item(ctx, out, "WidgetTextFormat", pdf_string_from_widget_tx_format(ctx, txf));
+					}
+
+					show_annot_info(ctx, out, ctm, widget);
+
+					write_level_end(ctx, out, '}');
+				}
+
 				write_level_end(ctx, out, ']');
 			}
 		}
@@ -1450,13 +1529,11 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 		next: A pointer to the next link on the same page.
 		*/
 		{
-			//pdf_page* page_obj = NULL;
 			fz_link* links = NULL;
 			int json_stack_outlines_level = -1;
 
 			fz_try(ctx)
 			{
-				//page_obj = pdf_load_page(ctx, doc, page - 1);
 				links = fz_load_links(ctx, fz_page_from_pdf_page(ctx, page_obj));
 
 				if (links)
@@ -1492,8 +1569,8 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 						}
 						else
 						{
-							write_item_starter(ctx, out, "TargetError");
-							fz_write_printf(ctx, out, "\"(Chapter: %d, Chapter Page: %d)\"", loc.chapter, loc.page);
+							write_item_int(ctx, out, "TargetErrorChapter", loc.chapter);
+							write_item_int(ctx, out, "TargetErrorChapterPage", loc.page);
 						}
 						write_item_coord(ctx, out, "TargetCoordinates", link_x, link_y);
 						write_item_bbox(ctx, out, "LinkBounds", &bounds);
@@ -1523,6 +1600,49 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 			{
 				fz_error(ctx, "Error while processing links in page %d\n", page);
 			}
+		}
+
+		{
+			fz_separations* seps = pdf_page_separations(ctx, page_obj);
+			int count = fz_count_separations(ctx, seps);
+			write_item_int(ctx, out, "PageSeparationsCount", count);
+			write_item_int(ctx, out, "PageActiveSeparationsCount", fz_count_active_separations(ctx, seps));
+
+			write_item_starter_block(ctx, out, "PageSeparations", '[');
+
+			int i;
+			for (i = 0; i < count; i++)
+			{
+				write_sep(ctx, out);
+				write_level_start(ctx, out, '{');
+
+				write_item(ctx, out, "PageSeparationName", fz_separation_name(ctx, seps, i));
+
+				fz_separation_behavior behaviour = fz_separation_current_behavior(ctx, seps, i);
+				char buf[100];
+				const char* beh_descr = buf;
+
+				switch (behaviour)
+				{
+				case FZ_SEPARATION_COMPOSITE:
+					beh_descr = "Composite";
+					break;
+				case FZ_SEPARATION_SPOT:
+					beh_descr = "Spot";
+					break;
+				case FZ_SEPARATION_DISABLED:
+					beh_descr = "Disabled";
+					break;
+				default:
+					fz_snprintf(buf, sizeof(buf), "UNKOWN-%d", behaviour);
+					break;
+				}
+				write_item(ctx, out, "PageSeparationBehaviour", beh_descr);
+
+				write_level_end(ctx, out, '}');
+			}
+
+			write_level_end(ctx, out, ']');
 		}
 	}
 	fz_always(ctx)
@@ -1653,8 +1773,7 @@ printtail(fz_context* ctx, globals* glo)
 		fz_strlcat(buf, "none", sizeof buf);
 	write_item(ctx, out, "Permissions", buf);
 
-	write_item_starter(ctx, out, "Status");
-	fz_write_printf(ctx, out, "\"PDF %sdocument with %d update%s.\"",
+	write_item_printf(ctx, out, "Status", "\"PDF %sdocument with %d update%s.\"",
 		pdf_doc_was_linearized(ctx, doc) ? "linearized " : "",
 		updates, updates > 1 ? "s" : "");
 	write_item_bool(ctx, out, "DocWasLinearized", pdf_doc_was_linearized(ctx, doc));
@@ -1707,8 +1826,7 @@ printtail(fz_context* ctx, globals* glo)
 
 						write_item(ctx, out, "Type", "Signed");
 						write_item(ctx, out, "CERT", short_signature_error_desc(sig_cert_error));
-						write_item_starter(ctx, out, "DIGEST");
-						fz_write_printf(ctx, out, "\"%s%s\"",
+						write_item_printf(ctx, out, "DIGEST", "\"%s%s\"",
 							short_signature_error_desc(sig_digest_error),
 							pdf_signature_incremental_change_since_signing(ctx, doc, field) ? ", Changed since" : "");
 
@@ -1982,7 +2100,7 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* filename, const char* 
 	return ret;
 }
 
-int pdfmetadump_main(int argc, const char **argv)
+int pdfmetadump_main(int argc, const char** argv)
 {
 	const char* password = NULL; /* don't throw errors if encrypted */
 	const char* output = NULL;
@@ -2005,7 +2123,7 @@ int pdfmetadump_main(int argc, const char **argv)
 			break;
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
-		case 'm': 
+		case 'm':
 			switch (atoi(fz_optarg))
 			{
 			case 0:

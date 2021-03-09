@@ -595,6 +595,49 @@ enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_widget *widget)
 	return ret;
 }
 
+const char*
+pdf_string_from_widget_type(fz_context* ctx, enum pdf_widget_type type)
+{
+	switch (type)
+	{
+	case PDF_WIDGET_TYPE_BUTTON: return "Button";
+	case PDF_WIDGET_TYPE_CHECKBOX: return "Checkbox";
+	case PDF_WIDGET_TYPE_COMBOBOX: return "Combobox";
+	case PDF_WIDGET_TYPE_LISTBOX: return "Listbox";
+	case PDF_WIDGET_TYPE_RADIOBUTTON: return "Radiobutton";
+	case PDF_WIDGET_TYPE_SIGNATURE: return "Signature";
+	case PDF_WIDGET_TYPE_TEXT: return "Text";
+	default: return "UNKNOWN";
+	}
+}
+
+int
+pdf_widget_type_from_string(fz_context* ctx, const char* subtype)
+{
+	if (!subtype) return PDF_WIDGET_TYPE_UNKNOWN;
+	if (!strcmp("Button", subtype)) return PDF_WIDGET_TYPE_BUTTON;
+	if (!strcmp("Checkbox", subtype)) return PDF_WIDGET_TYPE_CHECKBOX;
+	if (!strcmp("Combobox", subtype)) return PDF_WIDGET_TYPE_COMBOBOX;
+	if (!strcmp("Listbox", subtype)) return PDF_WIDGET_TYPE_LISTBOX;
+	if (!strcmp("Radiobutton", subtype)) return PDF_WIDGET_TYPE_RADIOBUTTON;
+	if (!strcmp("Signature", subtype)) return PDF_WIDGET_TYPE_SIGNATURE;
+	if (!strcmp("Text", subtype)) return PDF_WIDGET_TYPE_TEXT;
+	return PDF_WIDGET_TYPE_UNKNOWN;
+}
+
+const char*
+pdf_string_from_widget_tx_format(fz_context* ctx, enum pdf_widget_tx_format tx_format)
+{
+	switch (tx_format)
+	{
+	case PDF_WIDGET_TX_FORMAT_NUMBER: return "Number";
+	case PDF_WIDGET_TX_FORMAT_SPECIAL: return "Special";
+	case PDF_WIDGET_TX_FORMAT_DATE: return "Date";
+	case PDF_WIDGET_TX_FORMAT_TIME: return "Time";
+	default: return "UNKNOWN";
+	}
+}
+
 static int set_validated_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int ignore_trigger_events)
 {
 	if (!ignore_trigger_events)
@@ -991,10 +1034,10 @@ int pdf_text_widget_max_len(fz_context *ctx, pdf_widget *tw)
 	return pdf_to_int(ctx, pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(MaxLen)));
 }
 
-int pdf_text_widget_format(fz_context *ctx, pdf_widget *tw)
+enum pdf_widget_tx_format pdf_text_widget_format(fz_context *ctx, pdf_widget *tw)
 {
 	pdf_annot *annot = (pdf_annot *)tw;
-	int type = PDF_WIDGET_TX_FORMAT_NONE;
+	enum pdf_widget_tx_format type = PDF_WIDGET_TX_FORMAT_NONE;
 	pdf_obj *js = pdf_dict_getl(ctx, annot->obj, PDF_NAME(AA), PDF_NAME(F), PDF_NAME(JS), NULL);
 	if (js)
 	{

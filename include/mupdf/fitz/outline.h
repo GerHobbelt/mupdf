@@ -25,7 +25,7 @@
 	next: The next outline item at the same level as this outline
 	item. May be NULL if no more outline items exist at this level.
 
-	down: The outline items immediate children in the hierarchy.
+	down: The outline item's immediate children in the hierarchy.
 	May be NULL if no children exist.
 */
 typedef struct fz_outline

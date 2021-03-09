@@ -41,6 +41,12 @@ enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_widget *widget);
 
 fz_rect pdf_bound_widget(fz_context *ctx, pdf_widget *widget);
 
+const char* pdf_string_from_widget_tx_format(fz_context* ctx, enum pdf_widget_tx_format tx_format);
+
+const char* pdf_string_from_widget_type(fz_context* ctx, enum pdf_widget_type type);
+
+int pdf_widget_type_from_string(fz_context* ctx, const char* subtype);
+
 /*
 	get the maximum number of
 	characters permitted in a text widget
@@ -51,7 +57,7 @@ int pdf_text_widget_max_len(fz_context *ctx, pdf_widget *tw);
 	get the type of content
 	required by a text widget
 */
-int pdf_text_widget_format(fz_context *ctx, pdf_widget *tw);
+enum pdf_widget_tx_format pdf_text_widget_format(fz_context *ctx, pdf_widget *tw);
 
 /*
 	get the list of options for a list box or combo box.
