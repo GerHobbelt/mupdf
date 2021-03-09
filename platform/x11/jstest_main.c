@@ -286,6 +286,8 @@ static void usage(void)
 	);
 }
 
+// Get a line of text from file.
+// Return NULL at EOF. Return a reference to a static buffer containing a string value otherwise.
 static char *
 my_getline(FILE *file)
 {
@@ -903,10 +905,12 @@ main(int argc, const char *argv[])
 					do
 					{
 						dataline = my_getline(datafeed);
+						if (!dataline)
+							break;		// EOF
 						size_t pos = strcspn(dataline, " \t\r\n#%");  // comment lines in datafeeds start with # or %
 						if (dataline[pos] == 0 || strchr("#%", dataline[pos]))
-							dataline = NULL;  // discard 
-					} while (!dataline && !feof(datafeed));
+							dataline = NULL;  // discard
+					} while (!dataline);
 
 					// when we've reached the end of the datafeed, it's time to check if there's another datafile waiting for us...
 					if (feof(datafeed))
