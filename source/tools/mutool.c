@@ -175,7 +175,7 @@ int main(int argc, const char **argv)
 
 static int profiled_main(int argc, const char **argv)
 #else
-#ifndef MUTOOL_AS_MUJSTEST_CMD
+#ifndef MUTOOL_AS_BULKTEST_CMD
 int main(int argc, const char **argv)
 #else
 int mutool_main(int argc, const char** argv)
@@ -282,7 +282,7 @@ int mutool_main(int argc, const char** argv)
 	return EXIT_FAILURE;
 }
 
-#ifndef MUTOOL_AS_MUJSTEST_CMD
+#ifndef MUTOOL_AS_BULKTEST_CMD
 
 #ifdef _MSC_VER
 int wmain(int argc, const wchar_t *wargv[])
@@ -296,5 +296,5 @@ int wmain(int argc, const wchar_t *wargv[])
 }
 #endif
 
-#endif // MUTOOL_AS_MUJSTEST_CMD
+#endif // MUTOOL_AS_BULKTEST_CMD
 
