@@ -1939,8 +1939,9 @@ static void mu_drop_context(void)
 	{
 		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
 		{
-			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+            char buf[200];
+			fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu\nAllocations total=%zu\n", trace_info.total, trace_info.peak, trace_info.current, trace_info.allocs);
+			fz_info(ctx, "%s", buf);
 
 			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
 			memset(&trace_info, 0, sizeof(trace_info));
