@@ -1643,6 +1643,8 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 			}
 
 			write_level_end(ctx, out, ']');
+
+			fz_drop_separations(ctx, seps);
 		}
 	}
 	fz_always(ctx)
