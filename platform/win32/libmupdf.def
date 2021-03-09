@@ -271,6 +271,7 @@ EXPORTS
 	fz_clamp_color
 	fz_convert_color
 	fz_new_default_colorspaces
+	fz_keep_default_colorspaces
 	fz_drop_default_colorspaces
 	fz_clone_default_colorspaces
 	fz_default_gray
@@ -310,6 +311,7 @@ EXPORTS
 	fz_set_user_context
 	fz_user_context
 	fz_drop_context_locks
+	fz_get_global_context
 	fz_set_global_context
 	fz_has_global_context
 	fz_drop_global_context
@@ -850,6 +852,7 @@ EXPORTS
 	fz_dirname
 	fz_urldecode
 	fz_format_output_path
+	fz_path_basename
 	fz_cleanname
 	fz_realpath
 	fz_strcasecmp
@@ -1255,6 +1258,8 @@ EXPORTS
 	pdf_specifics
 	pdf_document_from_fz_document
 	pdf_page_from_fz_page
+	fz_document_from_pdf_document
+	fz_page_from_pdf_page
 	pdf_needs_password
 	pdf_authenticate_password
 	pdf_has_permission
@@ -1338,6 +1343,8 @@ EXPORTS
 	pdf_create_signature_widget
 	pdf_widget_type
 	pdf_bound_widget
+	pdf_string_from_widget_tx_format
+	pdf_string_from_widget_type
 	pdf_widget_type_from_string
 	pdf_text_widget_max_len
 	pdf_text_widget_format
@@ -1461,6 +1468,7 @@ EXPORTS
 	pdf_is_array
 	pdf_is_dict
 	pdf_is_indirect
+	pdf_objkindstr
 	pdf_obj_num_is_stream
 	pdf_is_stream
 	pdf_objcmp
@@ -1479,6 +1487,8 @@ EXPORTS
 	pdf_to_int64
 	pdf_to_real
 	pdf_to_name
+	pdf_to_name_not_null
+	pdf_string_to_name_obj
 	pdf_to_text_string
 	pdf_to_string
 	pdf_to_str_buf
@@ -1563,6 +1573,7 @@ EXPORTS
 	pdf_sprint_obj
 	pdf_print_obj
 	pdf_print_encrypted_obj
+	pdf_sprint_obj_to_json
 	pdf_print_obj_to_json
 	pdf_debug_obj
 	pdf_debug_ref
