@@ -330,9 +330,9 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 
 	pdf_discard_journal(ctx, doc->journal);
 
-	if (doc->repair_attempted)
+	if (doc->repair_attempted & 0x01)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Repair failed already - not trying again");
-	doc->repair_attempted = 1;
+	doc->repair_attempted |= 0x01;
 
 	doc->dirty = 1;
 

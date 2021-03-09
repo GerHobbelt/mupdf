@@ -333,6 +333,9 @@ struct pdf_document
 	int rev_page_count;
 	pdf_rev_page_map *rev_page_map;
 
+	// bits:
+	// - 0x01: xref repair;
+	// - 0x02: pagee list repair.
 	int repair_attempted;
 
 	/* Flag to be set while loading signature details */

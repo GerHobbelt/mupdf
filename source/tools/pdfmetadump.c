@@ -1872,7 +1872,11 @@ printtail(fz_context* ctx, globals* glo)
 		write_item(ctx, out, "UpdatesStatus", buf);
 	}
 
+	// This is one of the last things to write/report, as several activitiees of our COULD have triggered
+	// SOME repair behaviour. Hence we only are assured we'll get a *final* value returned here if we
+	// call this API *after* we've done all our other PDF metadata scan&report work.
 	write_item_bool(ctx, out, "WasRepaired", pdf_was_repaired(ctx, glo->doc));
+
 	write_item_bool(ctx, out, "NeedsPassword", pdf_needs_password(ctx, glo->doc));
 	write_item_bool(ctx, out, "WasCryptedWithEmptyPassword", glo->doc->crypt && !pdf_needs_password(ctx, glo->doc));
 

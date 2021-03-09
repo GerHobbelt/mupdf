@@ -154,6 +154,104 @@ pdf_lookup_page_loc_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int *
 			for (i = 0; i < len; i++)
 			{
 				pdf_obj *kid = pdf_array_get(ctx, kids, i);
+
+				// sanity checking, before we go in. Some buggy PDFs can cause a hefty cost due to repeated error reports and exception handling otherwise.
+				if (pdf_is_indirect(ctx, kid))
+				{
+					pdf_document* doc = pdf_get_indirect_document(ctx, kid);
+					int num = pdf_to_num(ctx, kid);
+					if (num <= 0 || num >= pdf_xref_len(ctx, doc))
+					{
+						//fz_warn(ctx, "object out of range (%d 0 R); xref size %d", num, pdf_xref_len(ctx, doc));
+
+						// when this happens, we've got a corrupt PDF that would otherwise bombard us with exceptions during
+						// the remainder of the execution of this iteration and any subsequent calls to this API.
+						// When you 'page' through a PDF, i.e. loop through its pages, this will result in a total O(N^2)
+						// cost hitting you as each page will invoke this API and do this whole dance all over again.
+						//
+						// As we know all pdf_dict_get() calls for this out-of-bounds 'kid' will FAIL, we can shortcut quite a bit
+						// and prevent a series of error report and exception handling costs in there.
+						//
+						// To prevent the O(N^2) cost we do more work now: we scan the page list, report EVERY rotten entry in there
+						// ONCE and then NULL the rotten entries as we go. The benefit of that is that the next timee we enter in here,
+						// we can take the shortcut route out immediately as we'll hit those PDF_NULLs!
+						fz_warn(ctx, "non-page object at index %d in page tree due to num %d out of bounds <0 .. %d>", i, num, pdf_xref_len(ctx, doc));
+
+						pdf_array_put(ctx, kids, i, PDF_NULL);
+						doc->repair_attempted |= 0x02;
+
+						// loop through the remainder of the list to report all those broken slots in one go!
+						int j;
+						for (j = i + 1; j < len; j++)
+						{
+							kid = pdf_array_get(ctx, kids, j);
+
+							if (pdf_is_indirect(ctx, kid))
+							{
+								pdf_document* doc = pdf_get_indirect_document(ctx, kid);
+								int num = pdf_to_num(ctx, kid);
+								if (num <= 0 || num >= pdf_xref_len(ctx, doc))
+								{
+									fz_warn(ctx, "non-page object at index %d in page tree due to num %d out of bounds <0 .. %d>", j, num, pdf_xref_len(ctx, doc));
+
+									// another bad slot: drop it!
+									pdf_array_put(ctx, kids, j, PDF_NULL);
+									doc->repair_attempted |= 0x02;
+								}
+							}
+						}
+
+						// now return to the job we had to originally: produce a hit for this page.
+						//
+						// This is the shortcut/reduced code for when we're looking at a corrupt kid.
+						// If there are any next rounds, those will hit the PDF_NULL checks instead
+						// and be even quicker outa here!
+						if (*skip == 0)
+						{
+							if (parentp) *parentp = node;
+							if (indexp) *indexp = i;
+							hit = NULL;
+							// ^^^^^^^ this last bit we do *different* than the regular iteration code because we *know*
+							// this out-of-bounds kid is NOT a proper page reference and thus any dereferencing from it will FAIL too.
+							// Better to report a missing page, therefor!
+							//
+							// Also make sure to break the outer while(...) for otherwisee we'll get an (incorrect) "cycle in page tree"
+							// report after this. There's corruption all right, but not a cycle!
+							i = len;
+							break;
+						}
+						else
+						{
+							(*skip)--;
+						}
+						continue;         // better luck with the next kid.
+					}
+				}
+
+				// This is the shortcut/reduced code for when we're looking at a PDF_NULLed (corrupted) kid.
+				if (kid == PDF_NULL)
+				{
+					if (*skip == 0)
+					{
+						if (parentp) *parentp = node;
+						if (indexp) *indexp = i;
+						hit = NULL;
+						// ^^^^^^^ this last bit we do *different* than the regular iteration code because we *know*
+						// this out-of-bounds kid is NOT a proper page reference and thus any dereferencing from it will FAIL too.
+						// Better to report a missing page, therefor!
+						//
+						// Also make sure to break the outer while(...) for otherwisee we'll get an (incorrect) "cycle in page tree"
+						// report after this. There's corruption all right, but not a cycle!
+						i = len;
+						break;
+					}
+					else
+					{
+						(*skip)--;
+					}
+					continue;         // better luck with the next kid.
+				}
+
 				pdf_obj *type = pdf_dict_get(ctx, kid, PDF_NAME(Type));
 				if (type ? pdf_name_eq(ctx, type, PDF_NAME(Pages)) : pdf_dict_get(ctx, kid, PDF_NAME(Kids)) && !pdf_dict_get(ctx, kid, PDF_NAME(MediaBox)))
 				{
