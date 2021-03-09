@@ -3209,11 +3209,37 @@ static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
 	return 0;
 }
 
+// when to trigger the "restricted mode"? When buffer reaches this size:
+#define JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD    10000
+
 static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 {
 	int i, n;
+	int old_flags = fmt->flags;
+	int restricted = (old_flags & PDF_PRINT_LIMITED_ARRAY_DUMP);
+	int restricted_is_active = (old_flags & PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE);
+
+	if (restricted && fmt->len > JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD)
+	{
+		restricted_is_active = 1;
+
+		// permanently set the restricted mode: we've got a buffer filling up like mad!
+		fmt->flags |= PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE;
+	}
 
 	n = pdf_array_len(ctx, obj);
+
+	if (restricted_is_active)
+	{
+		fmt_printf(ctx, fmt, "{\n"
+			"  %q: true,\n"
+			"  %q: %d\n"
+			"}",
+			"__MuPDFRestrictedArrayDisplay__",
+			"ArraySize", n);
+		return;
+	}
+
 	fmt_putc(ctx, fmt, '[');
 	int old_indent = fmt->indent;
 	fmt->indent++;
@@ -3221,6 +3247,14 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	{
 		for (i = 0; i < n; i++) 
 		{
+			// activate the array dump restrictions?
+			// if yes, continue dumping this array, but limit any nested *complex* items from taking up much space.
+			if (restricted && i > 19)
+			{
+				fmt->flags |= PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE;
+				//fmt->flags &= ~PDF_PRINT_RESOLVE_ALL_INDIRECT;
+			}
+
 			if (fmt->col > 60) {
 				fmt_putc(ctx, fmt, '\n');
 				fmt_indent(ctx, fmt);
@@ -3238,6 +3272,9 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		if (n > 0)
 			fmt_backpedal_to(ctx, fmt, ',');
 		fmt_putc(ctx, fmt, ']');
+
+		// when done, reset flags
+		fmt->flags = old_flags;
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
@@ -3246,8 +3283,30 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 {
 	int i, n;
+	int restricted = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP);
+	int restricted_is_active = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE);
+
+	if (restricted && fmt->len > JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD)
+	{
+		restricted_is_active = 1;
+
+		// permanently set the restricted mode: we've got a buffer filling up like mad!
+		fmt->flags |= PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE;
+	}
 
 	n = pdf_dict_len(ctx, obj);
+
+	if (restricted_is_active)
+	{
+		fmt_printf(ctx, fmt, "{\n"
+			"  %q: true,\n"
+			"  %q: %d\n"
+			"}",
+			"__MuPDFRestrictedDictionaryDisplay__",
+			"DictionarySize", n);
+		return;
+	}
+
 	fmt_puts(ctx, fmt, "{\n");
 	int old_indent = fmt->indent;
 	fmt->indent++;
@@ -3336,6 +3395,12 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			}
 		}
 
+		// do NOT dump ColorSpace Metadata (hex dumps) when in restricted mode
+		int do_not_print_Metadata_hexdump = restricted &&
+			pdf_dict_get(ctx, obj, PDF_NAME(ColorSpace)) &&
+			pdf_dict_get(ctx, obj, PDF_NAME(Filter)) &&
+			pdf_dict_get(ctx, obj, PDF_NAME(BitsPerComponent));
+
 		for (i = 0; i < n; i++)
 		{
 			pdf_obj* key = pdf_dict_get_key(ctx, obj, i);
@@ -3357,7 +3422,15 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			}
 			if (!pdf_is_indirect(ctx, val) && pdf_is_array(ctx, val))
 				fmt->indent++;
-			if (key == PDF_NAME(Contents) && is_signature(ctx, obj))
+
+			if (do_not_print_Metadata_hexdump && key == PDF_NAME(Metadata))
+			{
+				fmt_printf(ctx, fmt, "%jq,\n"
+					" %q: true",
+					"(error: data dump is restricted due to type)",
+					"__MuPDFRestrictedColorspaceDisplay__");
+			}
+			else if (key == PDF_NAME(Contents) && is_signature(ctx, obj))
 			{
 				pdf_crypt* crypt = fmt->crypt;
 				fz_try(ctx)
@@ -3524,7 +3597,23 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		fmt_puts(ctx, fmt, "false");
 	else if ((fmt->flags & PDF_PRINT_RESOLVE_ALL_INDIRECT) && pdf_is_stream(ctx, obj))
 	{
-		fmt_printf(ctx, fmt, "{ %q: %q, %q:\n", "type", "stream", "raw_data");
+		int restricted = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP);
+		int restricted_is_active = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE);
+
+		if (restricted_is_active)
+		{
+			fmt_printf(ctx, fmt, "{\n"
+				"  %q: true,\n"
+				"  %q: %q,\n"
+				"  %q:", 
+				"__MuPDFRestrictedStreamDisplay__",
+				"type", "stream",
+				"raw_data");
+		}
+		else
+		{
+			fmt_printf(ctx, fmt, "{ %q: %q, %q:\n", "type", "stream", "raw_data");
+		}
 
 		if (is_xml_metadata(ctx, obj))
 		{
@@ -3533,6 +3622,8 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			fz_buffer* xml_buf = NULL;
 			fz_xml* xml_root = NULL;
 			size_t datalen = 0;
+			int value_ex = 1;
+			int do_not_dump = 0;
 
 			fz_try(ctx)
 			{
@@ -3540,42 +3631,94 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				// `data` will be freed when we drop xml_buf:
 				xml_buf = fz_new_buffer_from_data(ctx, data, datalen);
 
-				fmt_indent(ctx, fmt);
-				int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
-				if (smart_mod)
-					smart_mod = -smart_mod;
-				else
-					smart_mod = 1;
-				fmt_printf(ctx, fmt, "%.*jH,\n", smart_mod, data, datalen);
-
-				fz_try(ctx)
-					// NOTE: fz_parse_xml() totally clobbers the string buffer pointed at by `data`
-					// so if you want to print the raw contents, do that first, or create a copy.
-					xml_doc = fz_parse_xml(ctx, xml_buf, 0);
-				fz_catch(ctx)
+				if (!restricted_is_active && (!restricted || (datalen < JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD / 10)))
 				{
-					if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
+					if (!restricted)
 					{
-						fz_warn(ctx, "syntax error in XML; retrying using HTML5 parser");
-						xml_doc = fz_parse_xml_from_html5(ctx, xml_buf);
+						restricted++;
+						restricted--;
+					}
+					fmt_indent(ctx, fmt);
+					int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
+					if (smart_mod)
+						smart_mod = -smart_mod;
+					else
+						smart_mod = 1;
+					fmt_printf(ctx, fmt, "%.*jH,\n", smart_mod, data, datalen);
+				}
+				else
+				{
+					fmt_printf(ctx, fmt, "%jq,\n"
+						" %q: true,\n",
+						"(error: data dump is restricted due to size)",
+						"__MuPDFRestrictedXMLDisplay__");
+					do_not_dump = 1;
+				}
+				value_ex = 0;
+
+				if (!do_not_dump)
+				{
+					fz_try(ctx)
+					{
+						// NOTE: fz_parse_xml() totally clobbers the string buffer pointed at by `data`
+						// so if you want to print the raw contents, do that first, or create a copy.
+						xml_doc = fz_parse_xml(ctx, xml_buf, 0);
+					}
+					fz_catch(ctx)
+					{
+						if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
+						{
+							if (!restricted)
+							{
+								fz_warn(ctx, "syntax error in XML; retrying using HTML5 parser");
+								fz_try(ctx)
+								{
+									xml_doc = fz_parse_xml_from_html5(ctx, xml_buf);
+								}
+								fz_catch(ctx)
+								{
+									fz_rethrow(ctx);
+								}
+							}
+							else
+							{
+								// don't bother trying to parse this as HTML. Fail and keep it short.
+								fz_warn(ctx, "cannot parse stream data as XML");
+								fz_rethrow(ctx);
+							}
+						}
+						else
+						{
+							fz_rethrow(ctx);
+						}
+					}
+					xml_root = fz_xml_root(xml_doc);
+
+					if (!restricted_is_active && (!restricted || (datalen < JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD / 10)))
+					{
+						fmt_indent(ctx, fmt);
+						fmt_printf(ctx, fmt, "%q: \"", "parsed_data");
+						if (xml_root)
+						{
+							fz_debug_xml(ctx, fmt, fmt_putc_inside_jsonstring, xml_root, 0);
+						}
+						else
+						{
+							fz_warn(ctx, "syntax error in XML; unable to parse content as XML");
+							fmt_printf(ctx, fmt, "(error: unable to parse content as XML)");
+						}
+						fmt_putc(ctx, fmt, '"');
 					}
 					else
-						fz_rethrow(ctx);
-				}
-				xml_root = fz_xml_root(xml_doc);
+					{
+						fmt_backpedal_to(ctx, fmt, ',');
 
-				fmt_indent(ctx, fmt);
-				fmt_printf(ctx, fmt, "%q: \"", "parsed_data");
-				if (xml_root)
-				{
-					fz_debug_xml(ctx, fmt, fmt_putc_inside_jsonstring, xml_root, 0);
+						if (!xml_root)
+						{
+							fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in XML; unable to parse content as XML");
+						}
+					}
 				}
-				else
-				{
-					fz_warn(ctx, "syntax error in XML; unable to parse content as XML");
-					fmt_printf(ctx, fmt, "(error: unable to parse content as XML)");
-				}
-				fmt_putc(ctx, fmt, '"');
 			}
 			fz_always(ctx)
 			{
@@ -3587,7 +3730,11 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			{
 				// ignore error
 				const char* errmsg = fz_caught_message(ctx);
-				fmt_printf(ctx, fmt, "\n  null,\n  %q: %jq", "error", errmsg);
+				if (value_ex)
+				{
+					fmt_puts(ctx, fmt, "\n  null,");
+				}
+				fmt_printf(ctx, fmt, "\n  %q: %jq", "error", errmsg);
 			}
 		}
 		else
@@ -3609,7 +3756,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			fmt_printf(ctx, fmt, "{\n"
 				"  %q: %q,\n"
 				"  %q: %d,\n"
-				"  %q: %d,\n"
+				"  %q: %d\n"
 				"}",
 				"type", "R",
 				"num", pdf_to_num(ctx, obj),
@@ -3750,6 +3897,10 @@ void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int fl
 	size_t n;
 
 	ptr = pdf_sprint_obj_to_json(ctx, buf, sizeof buf, &n, obj, flags);
+	if (n > JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD)
+	{
+		buf[0] = 0;
+	}
 	fz_try(ctx)
 		fz_write_data(ctx, out, ptr, n);
 	fz_always(ctx)

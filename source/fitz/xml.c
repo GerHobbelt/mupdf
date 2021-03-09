@@ -1020,7 +1020,17 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
 		opts.fragment_context = GUMBO_TAG_LAST;
 		opts.fragment_namespace = GUMBO_NAMESPACE_HTML;
 
-		soup = gumbo_parse_with_options(&opts, (const char *)p, strlen(p));
+		soup = gumbo_parse_with_options(&opts, p, strlen(p));
+		const char** errmsgs = soup->error_messages;
+		if (errmsgs)
+		{
+			do
+			{
+				const char* errmsg = *errmsgs++;
+				fz_error(ctx, "HTML parser error: %s.\n", errmsg);
+			} while (*errmsgs);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to parse buffer as HTML");
+		}
 
 		xml_from_gumbo(ctx, &parser, soup->root);
 

@@ -203,6 +203,10 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 #define PDF_PRINT_RESOLVE_ALL_INDIRECT      			0x0100
 // force all string type objects to print as binary blobs (instead of trying to parse them as 'text' in whatever format/codepage).
 #define PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB           0x0200
+// restrict array dumps to a limit number of entries.
+#define PDF_PRINT_LIMITED_ARRAY_DUMP                    0x0400
+// INTERNAL USE: marks thatPDF_PRINT_LIMITED_ARRAY_DUMP is currently activee.
+#define PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE          0x0800
 
 // The way the next few bits resolve is:
 // - there's really three(3) modes: HEX_PLUS_RAW, ILLEGAL_UNICODE_AS_HEX and 'regular'.
@@ -217,9 +221,9 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 //   of the legible characters only (in the case of HEX_PLUS_RAW): when the input is 'binary data'
 //   those 'legible bits' are meaningless anyway.
 
-#define PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW		0x0400		// HEX:...hexdump...;MASSAGED:...readable text bits...
-#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x0800		// 'smart' hexdump with charcodes intermingled
-#define PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX			0x1000		// when analyzed as 'probably binary': hexdump only, no characters
+#define PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW		0x1000		// HEX:...hexdump...;MASSAGED:...readable text bits...
+#define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x2000		// 'smart' hexdump with charcodes intermingled
+#define PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX			0x4000		// when analyzed as 'probably binary': hexdump only, no characters
 
 // the maximum number of nested dictionaries and arrays to resolve in the output
 #define PDF_PRINT_JSON_DEPTH_LEVEL(n)					((n) & 0x7F)

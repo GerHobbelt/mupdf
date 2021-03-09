@@ -378,14 +378,14 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Encryption");
-			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB | PDF_PRINT_LIMITED_ARRAY_DUMP);
 		}
 
 		obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Metadata");
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Metadata");
-			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP);
 		}
 
 		if (!has_password_troubles)
@@ -506,7 +506,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		if (files_obj)
 		{
 			write_item_starter(ctx, out, "AttachedFiles");
-			pdf_print_obj_to_json(ctx, out, files_obj, PRINT_OBJ_TO_JSON_FLAGS);
+			pdf_print_obj_to_json(ctx, out, files_obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP);
 		}
 
 		// See if there's any embedded JavaScript code
@@ -1166,7 +1166,7 @@ printinfo(fz_context* ctx, globals* glo)
 				glo->image[i].u.image.altcs ? " " : "",
 				glo->image[i].u.image.altcs ? altcs : "");
 			write_item_starter(ctx, out, "Image");
-			pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, PRINT_OBJ_TO_JSON_FLAGS);
+			pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP);
 
 			fz_free(ctx, cs);
 			fz_free(ctx, altcs);
