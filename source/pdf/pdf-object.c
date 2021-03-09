@@ -3633,11 +3633,6 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 				if (!restricted_is_active && (!restricted || (datalen < JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD / 10)))
 				{
-					if (!restricted)
-					{
-						restricted++;
-						restricted--;
-					}
 					fmt_indent(ctx, fmt);
 					int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 					if (smart_mod)
@@ -3656,7 +3651,8 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				}
 				value_ex = 0;
 
-				if (!do_not_dump)
+				// should we perform some XML parsing on this one?
+				if (!do_not_dump && datalen > 0)
 				{
 					fz_try(ctx)
 					{
@@ -3718,6 +3714,10 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 							fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in XML; unable to parse content as XML");
 						}
 					}
+				}
+				else
+				{
+					fmt_backpedal_to(ctx, fmt, ',');
 				}
 			}
 			fz_always(ctx)
@@ -3897,10 +3897,6 @@ void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int fl
 	size_t n;
 
 	ptr = pdf_sprint_obj_to_json(ctx, buf, sizeof buf, &n, obj, flags);
-	if (n > JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD)
-	{
-		buf[0] = 0;
-	}
 	fz_try(ctx)
 		fz_write_data(ctx, out, ptr, n);
 	fz_always(ctx)
