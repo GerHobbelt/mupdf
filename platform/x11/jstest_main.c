@@ -79,7 +79,7 @@ static fz_locks_context *init_mudraw_locks(void)
 static int showtime = 0;
 static int showmemory = 0;
 
-static int mujstest_is_toplevel_ctx = 0;
+static int bulktest_is_toplevel_ctx = 0;
 
 static struct {
 	struct curltime start_time;
@@ -256,9 +256,9 @@ static char getline_buffer[LONGLINE];
 static void usage(void)
 {
 	fz_info(ctx,
-		"mujstest: Scriptable tester for mupdf + js\n"
+		"bulktest: Scriptable tester for mupdf + js\n"
 		"\n"
-		"Syntax: mujstest -o [options] <scriptfile> [<datafile> ...]\n"
+		"Syntax: bulktest -o [options] <scriptfile> [<datafile> ...]\n"
 		"\n"
 		"Options:\n"
 		"  -T      scriptfile is a script TEMPLATE file, which is filled with data from\n"
@@ -592,7 +592,7 @@ static void mu_drop_context(void)
 	}
 	showtime = 0;
 
-	if (mujstest_is_toplevel_ctx)
+	if (bulktest_is_toplevel_ctx)
 	{
 		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
 		{
@@ -621,7 +621,7 @@ static void mu_drop_context(void)
 	ctx = NULL;
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
-	if (mujstest_is_toplevel_ctx)
+	if (bulktest_is_toplevel_ctx)
 	{
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
@@ -636,7 +636,7 @@ static void mu_drop_context(void)
 		fin_mudraw_locks();
 #endif /* DISABLE_MUTHREADS */
 
-		mujstest_is_toplevel_ctx = 0;
+		bulktest_is_toplevel_ctx = 0;
 	}
 }
 
@@ -756,8 +756,8 @@ main(int argc, const char *argv[])
 	size_t max_store = FZ_STORE_DEFAULT;
 	int lowmemory = 0;
 
-	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
-	mujstest_is_toplevel_ctx = 0;
+	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
+	bulktest_is_toplevel_ctx = 0;
 	ctx = NULL;
 
 	showtime = 0;
@@ -787,7 +787,7 @@ main(int argc, const char *argv[])
 			break;
 		case 'L': lowmemory = 1; break;
 
-		case 'V': fz_info(ctx, "mujstest version %s", FZ_VERSION); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "bulktest version %s", FZ_VERSION); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}
@@ -834,7 +834,7 @@ main(int argc, const char *argv[])
 		fz_set_stddbg(ctx, fz_stdods(ctx));
 #endif
 
-		mujstest_is_toplevel_ctx = 1;
+		bulktest_is_toplevel_ctx = 1;
 	}
 	atexit(mu_drop_context);
 

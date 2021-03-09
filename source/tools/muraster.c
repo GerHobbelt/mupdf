@@ -1635,7 +1635,7 @@ int muraster_main(int argc, const char *argv[])
 
 	fz_var(doc);
 
-	// reset global vars: this tool MAY be re-invoked via mujstest or others and should RESET completely between runs:
+	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	muraster_is_toplevel_ctx = 0;
 	output = NULL;
 	out = NULL;
