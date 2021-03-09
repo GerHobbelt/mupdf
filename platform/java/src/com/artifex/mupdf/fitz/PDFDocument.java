@@ -148,5 +148,6 @@ public class PDFDocument extends Document
 	public native void redo();
 
 	public native void beginOperation(String operation);
+	public native void beginImplicitOperation();
 	public native void endOperation();
 }
