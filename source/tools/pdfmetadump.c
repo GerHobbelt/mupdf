@@ -1285,7 +1285,19 @@ show_annot_info(fz_context* ctx, fz_output* out, fz_matrix ctm, pdf_annot* annot
 
 	write_item_bool(ctx, out, "NeedsNewAP", pdf_annot_needs_new_ap(ctx, annot));
 
-	write_item(ctx, out, "Author", pdf_annot_author(ctx, annot));
+	const char* author = NULL;
+	fz_try(ctx)
+	{
+		author = pdf_annot_author(ctx, annot);
+	}
+	fz_catch(ctx)
+	{
+		author = NULL;
+	}
+	if (author)
+	{
+		write_item(ctx, out, "Author", author);
+	}
 
 	{
 		// check if the Date nodes exist: only if they do, do we print their contents.
