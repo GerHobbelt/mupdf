@@ -22,6 +22,11 @@ int mutool_main(int argc, const char** argv);
 
 #define LONGLINE 4096
 
+static inline void memclr(void* ptr, size_t size)
+{
+	memset(ptr, 0, size);
+}
+
 static fz_context* ctx = NULL;
 
 /*
@@ -80,15 +85,17 @@ static int showmemory = 0;
 
 static int bulktest_is_toplevel_ctx = 0;
 
-static struct {
+struct timing {
 	struct curltime start_time;
 	int count;
 	timediff_t total;
 	timediff_t min, max;
 	int minscriptline, maxscriptline;
-	const char *mincommand;
-	const char *maxcommand;
-} timing;
+	const char* mincommand;
+	const char* maxcommand;
+};
+
+static struct timing timing;
 
 typedef struct
 {
@@ -113,7 +120,14 @@ struct trace_info
 	size_t alloc_limit;
 };
 
-static struct trace_info trace_info = { 1, 0, 0, 0, 0, 0, 0 };
+static struct trace_info trace_info = { 1 };
+
+static void clear_trace_info(void)
+{
+	int seqnr = trace_info.sequence_number;
+	memclr(&trace_info, sizeof(trace_info));
+	trace_info.sequence_number = seqnr;
+}
 
 static void *hit_limit(void *val)
 {
@@ -288,7 +302,7 @@ static void usage(void)
 static const char *
 mk_absolute_path(fz_context* ctx, const char* filepath)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	char* q;
 #ifdef _MSC_VER
 	q = _fullpath(buf, filepath, sizeof(buf));
@@ -304,7 +318,7 @@ mk_absolute_path(fz_context* ctx, const char* filepath)
 // Get a line of text from file.
 // Return NULL at EOF. Return a reference to a static buffer containing a string value otherwise.
 static char *
-my_getline(FILE *file)
+my_getline(FILE *file, int *linecounter_ref)
 {
 	int c;
 	char *d = getline_buffer;
@@ -314,6 +328,8 @@ my_getline(FILE *file)
 	do
 	{
 		c = fgetc(file);
+		if (c == '\n')
+			(*linecounter_ref)++;
 	}
 	while (c > 0 && isspace(c));
 
@@ -326,6 +342,8 @@ my_getline(FILE *file)
 	{
 		*d++ = (char)c;
 		c = fgetc(file);
+		if (c == '\n')
+			(*linecounter_ref)++;
 	}
 	while (c >= 32 && --space);
 
@@ -334,7 +352,11 @@ my_getline(FILE *file)
 	{
 		fz_error(ctx, "getline: line too long.");
 		while (c >= 32)
+		{
 			c = fgetc(file);
+			if (c == '\n')
+				(*linecounter_ref)++;
+		}
 	}
 
 	*d = 0;
@@ -588,9 +610,36 @@ struct logconfig
 {
 	int quiet;
 	FILE* logfile;
+	const char* logfilepath;
 };
 
 static struct logconfig logcfg = { 0 };
+
+static void close_active_logfile(void)
+{
+	if (logcfg.logfile)
+	{
+		fclose(logcfg.logfile);
+		logcfg.logfile = NULL;
+	}
+}
+
+// at least on Windows, you loose your logfile contents if you don't *close* the blasted file!
+//
+// Hence this is a hard flush, which writes the logfile, then *re-opens* it in *append mode*.
+static void flush_active_logfile_hard(void)
+{
+	if (logcfg.logfile)
+	{
+		fclose(logcfg.logfile);
+		logcfg.logfile = NULL;
+	}
+
+	if (logcfg.logfilepath)
+	{
+		logcfg.logfile = fopen(logcfg.logfilepath, "a");
+	}
+}
 
 static void mu_drop_context(void)
 {
@@ -606,30 +655,25 @@ static void mu_drop_context(void)
 			fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
 
 			// reset timing after reporting: this atexit handler MAY be invoked multiple times!
-			memset(&timing, 0, sizeof(timing));
+			memclr(&timing, sizeof(timing));
 		}
 
 		fz_dump_lock_times(ctx, duration);
 	}
 	showtime = 0;
 
-	if (bulktest_is_toplevel_ctx)
+	if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
 	{
-		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
-		{
-			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
-			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 
-			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
-			memset(&trace_info, 0, sizeof(trace_info));
-		}
+		// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
+		clear_trace_info();
 	}
 
-	if (logcfg.logfile)
-	{
-		fclose(logcfg.logfile);
-		logcfg.logfile = NULL;
-	}
+	close_active_logfile();
+	fz_free(ctx, logcfg.logfilepath);
+	logcfg.logfilepath = NULL;
 
 	fz_free(ctx, timing.mincommand);
 	fz_free(ctx, timing.maxcommand);
@@ -646,9 +690,16 @@ static void mu_drop_context(void)
 	{
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
-		assert(fz_has_global_context());
-		ctx = fz_get_global_context();
+		//
+		// Note: our atexit handler CAN be invoked multiple times, so the second time through (etc.),
+		// we will ALREADY have cleaned up the global context: DO NOT attempt to recreate it implicitly
+		// then via fz_get_global_context() internals!
+		if (fz_has_global_context())
+		{
+			ctx = fz_get_global_context();
+		}
 		fz_drop_context_locks(ctx);
+
 		ctx = NULL;
 
 		fz_drop_global_context();
@@ -659,6 +710,15 @@ static void mu_drop_context(void)
 
 		bulktest_is_toplevel_ctx = 0;
 	}
+}
+
+static void mu_drop_context_at_exit(void)
+{
+	// we're aborting/exiting the application.
+	// One thing's for sure anyhow: we are NOT in a recursive call anymore, so we can/MUST say:
+	bulktest_is_toplevel_ctx = 1;
+	// and then go and clean up as best we can:
+	mu_drop_context();
 }
 
 static void show_progress_on_stderr(struct logconfig* logcfg, const char *message)
@@ -760,13 +820,10 @@ static void tst_info_callback(void* user, const char* message)
 }
 
 int
-bulktest_main(int argc, const char *argv[], int bulktest_call_level)
+bulktest_main(int argc, const char *argv[])
 {
-	FILE *script = NULL;
-	FILE *datafeed = NULL;
 	int c;
 	int errored = 0;
-	unsigned int linecounter = 0;
 	int script_is_template = 0;
 	int rv = 0;
 	struct curltime begin_time;
@@ -780,18 +837,13 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
 
-	if (bulktest_call_level == 0)
-	{
-		ctx = NULL;
+	showtime = 0;
+	showmemory = 0;
 
-		showtime = 0;
-		showmemory = 0;
-
-		memset(&trace_info, 0, sizeof trace_info);
-		memset(&logcfg, 0, sizeof logcfg);
-		memset(&timing, 0, sizeof(timing));
-		timing.min = 1 << 30;
-	}
+	clear_trace_info();
+	memclr(&logcfg, sizeof logcfg);
+	memclr(&timing, sizeof(timing));
+	timing.min = 1 << 30;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:p:TLvqVm:s:h")) != -1)
@@ -829,7 +881,7 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 	locks = init_mudraw_locks();
 	if (locks == NULL)
 	{
-		fz_error(NULL, "mutex initialisation failed");
+		fz_error(ctx, "mutex initialisation failed");
 		return EXIT_FAILURE;
 	}
 #endif
@@ -861,7 +913,7 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 
 		bulktest_is_toplevel_ctx = 1;
 	}
-	atexit(mu_drop_context);
+	atexit(mu_drop_context_at_exit);
 
 	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)
@@ -870,11 +922,18 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 		return EXIT_FAILURE;
 	}
 
+	unsigned int linecounter = 0;
+	unsigned int datalinecounter = 0;
+	FILE* script = NULL;
+	FILE* datafeed = NULL;
 	const char* scriptname = NULL;
 	const char* datafilename = NULL;
 
 	fz_try(ctx)
 	{
+		char skip_to_label[LONGLINE] = "";
+		int skip_to_datalinecounter = 0;
+
 		timing.start_time = Curl_now();
 
 		// fz_optind is a global that may change by recursive calls to this main. Keep a local copy and use that instead:
@@ -882,30 +941,29 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 
 		while (optind < argc)
 		{
-			char logfilename[4096];
-			char skip_to_label[LONGLINE] = "";
-
 			if (!scriptname || !script_is_template)
 			{
 				fz_free(ctx, scriptname);
+				scriptname = NULL;
 
 				// load a script
 				const char *p = argv[optind++];
 
-				if (logcfg.logfile)
-				{
-					fclose(logcfg.logfile);
-					logcfg.logfile = NULL;
-				}
+				close_active_logfile();
 
 				scriptname = mk_absolute_path(ctx, p);
 
+				char logfilename[LONGLINE];
+
 				fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
 				logcfg.logfile = fopen(logfilename, "w");
+				logcfg.logfilepath = fz_strdup(ctx, logfilename);
 
 				script = fopen(scriptname, "rb");
 				if (script == NULL)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
+				linecounter = 0;
+				*skip_to_label = 0;
 			}
 
 			if (script_is_template)
@@ -914,6 +972,7 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "expected at least one datafile to go with the script: %s", scriptname);
 
 				fz_free(ctx, datafilename);
+				datafilename = NULL;
 
 				// load a datafile if we already have a script AND we're in "template mode".
 				const char *p = argv[optind++];
@@ -923,12 +982,15 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 				datafeed = fopen(datafilename, "rb");
 				if (datafeed == NULL)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
+				datalinecounter = 0;
+				skip_to_datalinecounter = 0;
 			}
 
 			do
 			{
 				// oh, and REWIND that (template) scriptfile again!
 				fseek(script, 0, SEEK_SET);
+				linecounter = 0;
 
 				const char** template_argv = NULL;
 				int template_argc = 0;
@@ -940,16 +1002,16 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 					char* dataline = NULL;
 					do
 					{
-						dataline = my_getline(datafeed);
+						dataline = my_getline(datafeed, &datalinecounter);
 						if (!dataline)
 							break;		// EOF
 						size_t pos = strcspn(dataline, " \t\r\n#%");  // comment lines in datafeeds start with # or %
 						if (dataline[pos] == 0 || strchr("#%", dataline[pos]))
 							dataline = NULL;  // discard
-					} while (!dataline);
+					} while (!dataline || skip_to_datalinecounter > datalinecounter);
 
 					// when we've reached the end of the datafeed, it's time to check if there's another datafile waiting for us...
-					if (feof(datafeed))
+					if (!dataline /* ~ feof(datafeed) */ )
 						break;
 
 					// parse datafeed line (record)
@@ -959,8 +1021,7 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 				do
 				{
 					bool report_time = true;
-					char* line = my_getline(script);
-					linecounter++;
+					char* line = my_getline(script, &linecounter);
 
 					if (script_is_template)
 					{
@@ -1014,12 +1075,27 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 						fz_info(ctx, "SKIPPING: %s\n", line);
 						report_time = false;
 					}
+					else if (skip_to_datalinecounter > datalinecounter)
+					{
+						// skip rest of script as we're skipping to dataline X
+						fz_info(ctx, "SKIPPING TO DATALINE: %d (currently at dataline %d)\n", skip_to_datalinecounter, datalinecounter);
+						report_time = false;
+						break;
+					}
 					else if (match(&line, "SKIP_TO_LABEL"))
 					{
 						// Specify a label that SHOULD appear further down the script.
 						// Skip all commands until we've hit that label.
 						unescape_string(skip_to_label, line);
 						fz_info(ctx, "SKIP TO LABEL %s\n", skip_to_label);
+						report_time = false;
+					}
+					else if (match(&line, "SKIP_UNTIL_DATALINE"))
+					{
+						// Specify a data linenumber that SHOULD be reached before we do anything further in this script.
+						skip_to_datalinecounter = atoi(line);
+						fz_info(ctx, "SKIP TO DATA LINE %d\n", skip_to_datalinecounter);
+						report_time = false;
 					}
 					else if (match(&line, "ECHO"))
 					{
@@ -1077,13 +1153,45 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
 						fz_free(ctx, (void*)argv);
+
+						flush_active_logfile_hard();
 					}
 					else if (match(&line, "BULKTEST"))
 					{
 						const char** argv = NULL;
 						int argc = 0;
 						convert_string_to_argv(ctx, &argv, &argc, line, 1);  // result: argv[0] = NULL but that's OK
-						rv = bulktest_main(argc, argv, bulktest_call_level + 1);
+
+						// Ah! Before we go in and recurse on ourselves, we need to do a bit of housekeeping:
+						// we must keep the active logfile around (as it surely will be replaced in the recursive call!)
+						// so we keep a temporary local copy:
+						struct logconfig parent_logcfg = logcfg;
+						close_active_logfile();
+
+						// We also need to keep a local copy of some otheers, so we can restore them as well:
+						int parent_showtime = showtime;
+						int parent_showmemory = showmemory;
+						struct timing parent_timing = timing;
+						struct trace_info parent_trace_info = trace_info;
+						fz_context* parent_ctx = ctx;
+
+						rv = bulktest_main(argc, argv);
+
+						// recover our own stored-away settings, but keep the heap memory tracee sequence number continuous:
+						{
+							int seqnr = trace_info.sequence_number;
+							trace_info = parent_trace_info;
+							trace_info.sequence_number = seqnr;
+						}
+						timing = parent_timing;
+						showmemory = parent_showmemory;
+						showtime = parent_showtime;
+						ctx = parent_ctx;
+
+						// And before we go back to our job, we need to 'recover' the original 'active logfile':
+						logcfg = parent_logcfg;
+						flush_active_logfile_hard();   // <-- the easiest way to re-open our logfile now: one call is all it takes  :-)
+
 						if (rv != EXIT_SUCCESS)
 						{
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
@@ -1095,6 +1203,8 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
 						fz_free(ctx, (void*)argv);
+
+						flush_active_logfile_hard();
 					}
 					else
 					{
@@ -1133,12 +1243,31 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 				fz_free(ctx, (void *)template_argv);
 			} while (script_is_template);
 
-			fclose(script);
-			script = NULL;
+			if (datafeed)
+			{
+				fclose(datafeed);
+				datafeed = NULL;
+			}
+			if (script)
+			{
+				fclose(script);
+				script = NULL;
+			}
 		}
 	}
 	fz_catch(ctx)
 	{
+		if (datafeed)
+		{
+			fclose(datafeed);
+			datafeed = NULL;
+		}
+		if (script)
+		{
+			fclose(script);
+			script = NULL;
+		}
+
 		fz_error(ctx, "Failure when executing '%s': %s", scriptname, fz_caught_message(ctx));
 
 		struct curltime now = Curl_now();
@@ -1154,8 +1283,11 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 		errored += 100;
 	}
 
-	fz_free(ctx, (void *)scriptname);
-	fz_free(ctx, (void*)datafilename);
+	fz_free(ctx, scriptname);
+	scriptname = NULL;
+	fz_free(ctx, datafilename);
+	datafilename = NULL;
+
 	fz_flush_warnings(ctx);
 	mu_drop_context();
 
@@ -1165,5 +1297,5 @@ bulktest_main(int argc, const char *argv[], int bulktest_call_level)
 int
 main(int argc, const char* argv[])
 {
-	return bulktest_main(argc, argv, 0);
+	return bulktest_main(argc, argv);
 }
