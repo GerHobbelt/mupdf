@@ -82,7 +82,6 @@ pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 			if (idx > 0)
 			{
 				fz_warn(ctx, "page tree only partially loaded before an error occurred. Ignoring fast page tree.");
-				idx = 0;
 			}
 			pdf_drop_page_tree(ctx, doc);
 		}
