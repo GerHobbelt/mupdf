@@ -1,8 +1,8 @@
 ﻿
 #include "timeval.h"
 
-#include "mupdf/helpers/dir.h"
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
