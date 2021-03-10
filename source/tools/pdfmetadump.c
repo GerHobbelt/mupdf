@@ -1037,6 +1037,7 @@ printinfo(fz_context* ctx, globals* glo)
 
 	if (glo->fonts > 0)
 	{
+		write_item_int(ctx, out, "FontsCount", glo->fonts);
 		write_item_starter_block(ctx, out, "Fonts", '[');
 
 		for (i = 0; i < glo->fonts; i++)
@@ -1063,9 +1064,17 @@ printinfo(fz_context* ctx, globals* glo)
 
 	if (glo->images > 0)
 	{
+		int n = glo->images;
+		write_item_int(ctx, out, "ImagesCount", n);
+		if (n > 42)
+		{
+			// cut back on large numbers of images: there'll be a lot of nonsense then anyway.
+			n = 20;
+			write_item_int(ctx, out, "__MuPDFRestrictedImagesCount__", n);
+		}
 		write_item_starter_block(ctx, out, "Images", '[');
 
-		for (i = 0; i < glo->images; i++)
+		for (i = 0; i < n; i++)
 		{
 			write_sep(ctx, out);
 			write_level_start(ctx, out, '{');
@@ -1076,9 +1085,11 @@ printinfo(fz_context* ctx, globals* glo)
 #endif
 			if (pdf_is_array(ctx, glo->image[i].u.image.filter))
 			{
+				int n = pdf_array_len(ctx, glo->image[i].u.image.filter);
+
+				write_item_int(ctx, out, "ImageFiltersCount", n);
 				write_item_starter_block(ctx, out, "ImageFilters", '[');
 
-				int n = pdf_array_len(ctx, glo->image[i].u.image.filter);
 				for (j = 0; j < n; j++)
 				{
 					pdf_obj* obj = pdf_array_get(ctx, glo->image[i].u.image.filter, j);
@@ -1088,10 +1099,8 @@ printinfo(fz_context* ctx, globals* glo)
 						*(strstr(filter, "Decode")) = '\0';
 
 					write_sep(ctx, out);
-					write_level_start(ctx, out, '{');
-					write_item(ctx, out, "Filter", filter);
+					write_string(ctx, out, filter);
 					fz_free(ctx, filter);
-					write_level_end(ctx, out, '}');
 				}
 				write_level_end(ctx, out, ']');
 			}
@@ -1103,10 +1112,8 @@ printinfo(fz_context* ctx, globals* glo)
 				if (strstr(filter, "Decode"))
 					*(strstr(filter, "Decode")) = '\0';
 
-				write_item_starter_block(ctx, out, "ImageFilter", '{');
-				write_item(ctx, out, "Filter", filter);
+				write_item(ctx, out, "ImageFilter", filter);
 				fz_free(ctx, filter);
-				write_level_end(ctx, out, '}');
 			}
 			else
 			{
@@ -1165,8 +1172,44 @@ printinfo(fz_context* ctx, globals* glo)
 				glo->image[i].u.image.cs ? cs : "ImageMask",
 				glo->image[i].u.image.altcs ? " " : "",
 				glo->image[i].u.image.altcs ? altcs : "");
-			write_item_starter(ctx, out, "Image");
-			pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP);
+			{
+				pdf_obj* img_obj = glo->image[i].u.image.obj;
+				int img_of_known_type = 0;
+
+				if (pdf_is_stream(ctx, img_obj))
+				{
+					img_obj = pdf_resolve_indirect_chain(ctx, img_obj);
+					pdf_obj* colorspace = pdf_resolve_indirect(ctx, pdf_dict_get(ctx, img_obj, PDF_NAME(ColorSpace)));
+					const char* img_type = NULL;
+					const char* dev_type = NULL;
+
+					if (pdf_is_array(ctx, colorspace))
+					{
+						img_type = pdf_to_name(ctx, pdf_array_get(ctx, colorspace, 0));
+						dev_type = pdf_to_name(ctx, pdf_array_get(ctx, colorspace, 1));
+
+						img_of_known_type = (img_type && dev_type);
+					}
+					else if (pdf_is_name(ctx, colorspace))
+					{
+						img_type = pdf_to_name(ctx, colorspace);
+
+						img_of_known_type = (!!img_type);
+					}
+
+					if (img_of_known_type)
+					{
+						write_item(ctx, out, "ImageColorSpace", img_type);
+						if (dev_type)
+							write_item(ctx, out, "ImageColorMode", dev_type);
+					}
+				}
+				if (!img_of_known_type)
+				{
+					write_item_starter(ctx, out, "Image");
+					pdf_print_obj_to_json(ctx, out, glo->image[i].u.image.obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP);
+				}
+			}
 
 			fz_free(ctx, cs);
 			fz_free(ctx, altcs);
@@ -1179,6 +1222,7 @@ printinfo(fz_context* ctx, globals* glo)
 
 	if (glo->forms > 0)
 	{
+		write_item_int(ctx, out, "FormXObjectsCount", glo->forms);
 		write_item_starter_block(ctx, out, "FormXObjects", '[');
 
 		for (i = 0; i < glo->forms; i++)
@@ -1205,6 +1249,7 @@ printinfo(fz_context* ctx, globals* glo)
 
 	if (glo->psobjs > 0)
 	{
+		write_item_int(ctx, out, "PostscriptXObjectsCount", glo->psobjs);
 		write_item_starter_block(ctx, out, "PostscriptXObjects", '[');
 
 		for (i = 0; i < glo->psobjs; i++)
@@ -1447,6 +1492,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 
 			if (n > 0)
 			{
+				write_item_int(ctx, out, "AnnotationsCount", n);
 				write_item_starter_block(ctx, out, "Annotations", '[');
 
 				int idx;
@@ -1479,6 +1525,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 
 			if (n > 0)
 			{
+				write_item_int(ctx, out, "PageWidgetsCount", n);
 				write_item_starter_block(ctx, out, "PageWidgets", '[');
 
 				int idx;
@@ -1531,6 +1578,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 		{
 			fz_link* links = NULL;
 			int json_stack_outlines_level = -1;
+			int links_count = 0;
 
 			fz_try(ctx)
 			{
@@ -1559,6 +1607,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 						fz_location loc = fz_resolve_link(ctx, fz_document_from_pdf_document(ctx, glo->doc), link->uri, &link_x, &link_y);
 						int target_page = fz_page_number_from_location(ctx, fz_document_from_pdf_document(ctx, glo->doc), loc) + 1;
 
+						links_count++;
 						write_item(ctx, out, "LinkType", "Internal");
 						write_item(ctx, out, "Url", link->uri);
 						if (loc.chapter >= 0 && loc.page >= 0)
@@ -1591,6 +1640,10 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 				if (links)
 				{
 					write_level_end_guaranteed(ctx, out, ']', json_stack_outlines_level);
+				}
+				if (links_count > 0)
+				{
+					write_item_int(ctx, out, "LinksInPageCount", links_count);
 				}
 
 				fz_drop_link(ctx, links);
