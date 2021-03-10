@@ -1087,14 +1087,19 @@ bulktest_main(int argc, const char *argv[])
 						// Specify a label that SHOULD appear further down the script.
 						// Skip all commands until we've hit that label.
 						unescape_string(skip_to_label, line);
-						fz_info(ctx, "SKIP TO LABEL %s\n", skip_to_label);
+						fz_info(ctx, "Skip to label %s\n", skip_to_label);
 						report_time = false;
 					}
 					else if (match(&line, "SKIP_UNTIL_DATALINE"))
 					{
 						// Specify a data linenumber that SHOULD be reached before we do anything further in this script.
 						skip_to_datalinecounter = atoi(line);
-						fz_info(ctx, "SKIP TO DATA LINE %d\n", skip_to_datalinecounter);
+						// Do we have some skipping to do? If so, mention this command, otherwise plain ignore it.
+						if (skip_to_datalinecounter > datalinecounter)
+						{
+							fz_info(ctx, "Skip to data line %d\n", skip_to_datalinecounter);
+						}
+
 						report_time = false;
 					}
 					else if (match(&line, "ECHO"))
