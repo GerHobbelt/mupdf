@@ -2215,7 +2215,7 @@ int mudraw_main(int argc, const char **argv)
 		locks = init_mudraw_locks();
 		if (locks == NULL)
 		{
-			fz_error(NULL, "mutex initialisation failed");
+			fz_error(ctx, "mutex initialisation failed");
 			return EXIT_FAILURE;
 		}
 #endif
