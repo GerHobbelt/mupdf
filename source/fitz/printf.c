@@ -358,8 +358,13 @@ static void fmtname(struct fmtbuf *out, const char *s)
 
 static void fmt_print_buffer_as_hex(struct fmtbuf* out, const unsigned char* data, size_t datalen, int p, int mode)
 {
+	if (!data)
+		fmtputs(out, "(null)");
 	if (mode & FPBO_JSON_MODE)
 		fmtputc(out, '"');
+	else if (!datalen)
+		fmtputs(out, "(empty)");
+
 	// precision determines the chunking: byte, word, ...
 	//
 	// as *uninitialized* precision was INT_MAX (we're 're-using' a floating point modifier here)
@@ -406,6 +411,9 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 	int has_linebreaks = 0;
 	int has_misc_escapes = 0;		// \t, \\, \"
 	int has_astral_unicodes = 0;
+
+	if (!data)
+		datalen = 0;
 
 	for (i = 0; i < datalen; i++)
 	{
