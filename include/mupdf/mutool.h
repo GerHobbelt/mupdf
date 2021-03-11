@@ -39,6 +39,9 @@ int curl_main(int argc, const char* argv[]);
 int mujs_main(int argc, const char* argv[]);				// MUJS_MAIN
 int mujs_prettyprint_main(int argc, const char* argv[]);    // MUJS_PRETTYPRINT_MAIN
 
+int qiqqa_fingerprint0_main(int argc, const char* argv[]);
+int qiqqa_fingerprint1_main(int argc, const char* argv[]);
+
 #ifdef __cplusplus
 }
 #endif

@@ -72,6 +72,9 @@ static struct {
 	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
 	{ pdfmetadump_main, "metadump", "multitool shows information about pdf in JSON format" },
+
+	{ qiqqa_fingerprint0_main, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
+	{ qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
 };
 
 static int
