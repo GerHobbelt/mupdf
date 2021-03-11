@@ -95,6 +95,13 @@ qiqqa_fingerprint0_main(int argc, const char *argv[])
 	output = NULL;
 	datafeed = NULL;
 
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
+
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:vV")) != -1)
 	{
@@ -116,13 +123,6 @@ qiqqa_fingerprint0_main(int argc, const char *argv[])
 	{
 		fz_error(ctx, "No files specified to process\n\n");
 		usage();
-		return EXIT_FAILURE;
-	}
-
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
-	if (!ctx)
-	{
-		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 

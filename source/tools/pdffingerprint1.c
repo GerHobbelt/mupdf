@@ -93,6 +93,13 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 	output = NULL;
 	datafeed = NULL;
 
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
+
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "o:vV")) != -1)
 	{
@@ -114,13 +121,6 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 	{
 		fz_error(ctx, "No files specified to process\n\n");
 		usage();
-		return EXIT_FAILURE;
-	}
-
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
-	if (!ctx)
-	{
-		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
 
@@ -163,16 +163,6 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 			uint8_t hash[BLAKE3_OUT_LEN];
 			blake3_hasher_finalize(&hasher, hash, BLAKE3_OUT_LEN);
 
-			// Print the hash as hexadecimal.
-			if (verbosity)
-			{
-				fz_write_printf(ctx, output, "%q: %.0H\n", datafilename, hash, sizeof(hash));
-			}
-			else
-			{
-				fz_write_printf(ctx, output, "%.0H\n", hash, sizeof(hash));
-			}
-
 			// now encode the fingerprint in base58X:
 			char b58buf[120];
 			const char* b58X = EncodeBase58X(b58buf, sizeof(b58buf), hash, sizeof(hash) /* BLAKE3_OUT_LEN */ );
@@ -183,7 +173,18 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 			size_t b58r2size = 0;
 			const uint8_t* b58R2 = DecodeBase58X(b58rbuf2, sizeof(b58rbuf2), &b58r2size, b58X);
 
-			fz_write_printf(ctx, output, "base58X encodings: %s / %.0H / %.0H\n", b58X, b58R, b58rsize, b58R2, b58r2size);
+			// Print the hash as hexadecimal.
+			if (verbosity)
+			{
+				fz_write_printf(ctx, output, "%q: %s\n", datafilename, b58X);
+			}
+			else
+			{
+				fz_write_printf(ctx, output, "%s\n", b58X);
+			}
+
+#if 1
+			//fz_write_printf(ctx, output, "base58X encodings: %s / %.0H / %.0H\n", b58X, b58R, b58rsize, b58R2, b58r2size);
 
 			// check our custom encoding: the mixing of big and little endian handling plus 3 different number bases (2^64, 2^41, 58^7)
 			// isn't stuff that's without its historical crap-ups, so I'd rather not add myself to that list of sad sacks...
@@ -200,6 +201,7 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 			{
 				fz_error(ctx, "FATAL ERROR: base58X(2) encoding failed for %q vs %q.\n", testbuf[0], testbuf[2]);
 			}
+#endif
 
 			if (datafeed)
 			{
