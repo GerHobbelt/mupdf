@@ -302,7 +302,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 // NOTE: `*targetsize` is set to the *decoded* number of bytes produced by this decode.
 //
 // NOTE: The buffer MUST be 8 bytes larger to account for boundary effects during decoding.
-const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t *targetsize_ref, const char* src)
+const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_ref, const char* src)
 {
 	if (!src || !dst || dstsize == 0)
 		return NULL;
@@ -325,7 +325,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t *targetsize_re
 		// get 7 new digits.
 		// little endian, arbitrary memory alignment
 		uint64_t word = 0;
-		
+
 #define DECODE_MACRO(pos)					\
 		{									\
 			uint8_t c = *src++;				\
@@ -402,15 +402,15 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t *targetsize_re
 		uint64_t number_mask = 0;
 
 		while (*src)
-		{									
-			uint8_t c = *src++;				
-			if (!c)   						
+		{
+			uint8_t c = *src++;
+			if (!c)
 				break;	         	// EOF!
-			int d = mapBase58[c];			
-			if (d < 0)						
-				return NULL;				
-			word *= 58;						
-			word += d;						
+			int d = mapBase58[c];
+			if (d < 0)
+				return NULL;
+			word *= 58;
+			word += d;
 			number_mask *= 58;
 			number_mask += 57;   // this is kinda like saying `~0` in base 58!   :-)
 		}
@@ -427,11 +427,11 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t *targetsize_re
 		// now translate this 1..64-bit number `v` to an 8-byte buffer segment:
 
 		while (number_mask)
-		{			
-			uint8_t c = (uint8_t)v;							
-			if (!dstsize)									
-				return NULL; /* dst buffer overflow */		
-			*dst++ = c;										
+		{
+			uint8_t c = (uint8_t)v;
+			if (!dstsize)
+				return NULL; /* dst buffer overflow */
+			*dst++ = c;
 			dstsize--;
 			v >>= 8;
 			number_mask >>= 8;

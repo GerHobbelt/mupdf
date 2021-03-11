@@ -86,7 +86,7 @@ static fz_output* stddbgchannel(void)
 
 
 extern "C" int
-qiqqa_fingerprint0_main(int argc, const char *argv[])
+qiqqa_fingerprint0_main(int argc, const char* argv[])
 {
 	int verbosity = 0;
 	int c;
@@ -149,9 +149,9 @@ qiqqa_fingerprint0_main(int argc, const char *argv[])
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
 
 			// Initialize the hasher.
-				using namespace CryptoPP;
+			using namespace CryptoPP;
 
-				SHA1 hash;
+			SHA1 hash;
 
 			// Read input bytes from file.
 			unsigned char buf[65536];

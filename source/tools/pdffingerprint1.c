@@ -165,7 +165,7 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 
 			// now encode the fingerprint in base58X:
 			char b58buf[120];
-			const char* b58X = EncodeBase58X(b58buf, sizeof(b58buf), hash, sizeof(hash) /* BLAKE3_OUT_LEN */ );
+			const char* b58X = EncodeBase58X(b58buf, sizeof(b58buf), hash, sizeof(hash) /* BLAKE3_OUT_LEN */);
 			uint8_t b58rbuf[BLAKE3_OUT_LEN + 8];
 			size_t b58rsize = 0;
 			const uint8_t* b58R = DecodeBase58X(b58rbuf, sizeof(b58rbuf), &b58rsize, b58X);
