@@ -194,13 +194,12 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 
 			if (strcmp(testbuf[0], testbuf[1]))
 			{
-				fz_error(ctx, "FATAL EERROR: base58X encoding failed for %q vs %q.\n", testbuf[0], testbuf[1]);
+				fz_error(ctx, "FATAL ERROR: base58X encoding failed for %q vs %q.\n", testbuf[0], testbuf[1]);
 			}
 			if (strcmp(testbuf[0], testbuf[2]))
 			{
-				fz_error(ctx, "FATAL EERROR: base58X(2) encoding failed for %q vs %q.\n", testbuf[0], testbuf[2]);
+				fz_error(ctx, "FATAL ERROR: base58X(2) encoding failed for %q vs %q.\n", testbuf[0], testbuf[2]);
 			}
-
 
 			if (datafeed)
 			{
