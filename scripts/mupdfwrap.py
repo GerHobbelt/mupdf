@@ -408,9 +408,23 @@ Usage:
 
             As of 2020-03-09 requires patched mupdf/ checkout.
 
-        -t:
-        --test:
+        -t
+        --test
             Tests the python API.
+
+        --test-setup.py <args>
+            Tests that setup.py installs a usable mupdf module.
+
+                * Creates a Python virtual environment.
+                * Activates the Python environment.
+                * Runs setup.py.
+                * Runs scripts/mupdfwrap_test.py.
+                * Deactivates the Python environment.
+
+            <args> should be a single arg containing extra args to pass to
+            setup.py, e.g.:
+
+                --test-setup.py '--mupdf-build-dir build/shared-debug-extract --mupdf-build'
 
     Examples:
 
@@ -457,22 +471,33 @@ logx = jlib.logx
 assert sys.version_info[0] == 3 and sys.version_info[1] >= 6, (
         'We require python-3.6+')
 
-
 try:
-    import clang.cindex
+    try:
+        import clang.cindex
 
-except ModuleNotFoundError:
+    except ModuleNotFoundError as e:
 
-    # On devuan, clang-python isn't on python3's path, but python2's
-    # clang-python works fine with python3, so we deviously get the path by
-    # running some python 2.
-    #
-    clang_path = jlib.system( 'python2 -c "import clang; print clang.__path__[0]"', out='return')
-    #log( 'Retrying import of clang using info from python2 {clang_path=}')
+        print(f'"import clang.cindex" failed: {e}')
+        print(f'sys.executable={sys.executable}')
+        # On devuan, clang-python isn't on python3's path, but python2's
+        # clang-python works fine with python3, so we deviously get the path by
+        # running some python 2.
+        #
+        clang_path = jlib.system( 'python2 -c "import clang; print clang.__path__[0]"', out='return')
 
-    sys.path.append( os.path.dirname( clang_path))
-    import clang.cindex
+        #log( 'Retrying import of clang using info from python2 {clang_path=}')
 
+        sys.path.append( os.path.dirname( clang_path))
+        import clang.cindex
+
+except Exception as e:
+    print(f'{__file__} error: failed to import clang.cindex: {e}\n'
+            + 'We need Clang Python bindings to build MuPDF python bindings.\n'
+            + 'For example install with:\n'
+            + '    OpenBSD: pkg_add py3-llvm\n'
+            + '    Linux:debian/devuan: apt install python-clang\n'
+            )
+    sys.exit(1)
 
 
 class ClangInfo:
@@ -632,7 +657,7 @@ class Rename:
             return 'p' + name
         ret = f'{clip( name, "fz_")}'
         if ret in ('stdin', 'stdout', 'stderr'):
-            log( 'appending underscore to {ret=}')
+            logx( 'appending underscore to {ret=}')
             ret += '_'
         return ret
     def function_call( self, name):
@@ -6500,6 +6525,27 @@ def main():
                             )
 
                 log( 'Tests ran ok.')
+
+            elif arg == '--test-setup.py':
+                # We use the '.' command to run pylocal/bin/activate rather
+                # than 'source', because the latter is not portable, e.g. not
+                # supported by ksh. The '.' command is posix so should work on
+                # all shells.
+                jlib.system(
+                            'true'
+                            + f' && cd {build_dirs.dir_mupdf}'
+                            + f' && echo == creating venv'
+                            + f' && python3 -m venv pylocal'
+                            + f' && echo == running pylocal/bin/activate'
+                            + f' && . pylocal/bin/activate'
+                            + f' && echo == running setup.py install'
+                            + f' && python setup.py install'
+                            + f' && echo == running scripts/mupdfwrap_test.py'
+                            + f' && python scripts/mupdfwrap_test.py'
+                            + f' && echo running deactivate'
+                            + f' && deactivate'
+                            ,
+                        )
 
             elif arg == '--test-swig':
                 test_swig()
