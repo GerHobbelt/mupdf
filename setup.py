@@ -4,59 +4,104 @@ import os
 import re
 import setuptools
 import subprocess
+import sys
+
 
 mupdf_dir = os.path.abspath(f'{__file__}/..')
 
-def version():
+def mupdf_version():
     with open(f'{mupdf_dir}/include/mupdf/fitz/version.h') as f:
         text = f.read()
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
     version = m.group(1)
 
-# Build MuPDF's C++ and Python bindings:
-def build():
-    subprocess.check_call(f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -b all', shell=1)
+# Information about supported build directories.
+#
+build_dir_allowed = (
+        'build/shared-debug',
+        'build/shared-debug-extract',
+        'build/shared-release',
+        'build/shared-release-extract',
+        )
+build_dir_default = 'build/shared-release'
 
-def install():
-    print(f'version={version}')
+def build_dir_allowed_text(indentation):
+    ret = ''
+    for b in build_dir_allowed:
+        ret += f'{indentation*" "}{b}'
+        if b == build_dir_default:
+            ret += ' (default)'
+        ret += '\n'
+    return ret
+
+# Handle our extra --mupdf-* options. We remove any such options from sys.argv
+# after we have handled them.
+#
+do_build = False
+build_dir = None
+
+i = 1
+while 1:
+    if i == len(sys.argv):
+        break
+    if sys.argv[i] == '--mupdf-build':
+        do_build = True
+        del sys.argv[i]
+    elif sys.argv[i] == '--mupdf-build-dir':
+        build_dir = sys.argv[i+1]
+        if build_dir not in build_dir_allowed:
+            print(f'Unrecognised build-dir {build_dir!r}. Must be one of:\n{build_dir_allowed_text(4)}')
+        del sys.argv[i:i+2]
+    elif sys.argv[i] in ('-h', '--help'):
+        print(
+                'Additional options for mupdf:\n'
+                +  '    --mupdf-build\n'
+                +  '        Build mupdf C, C++ and Python bindings.\n'
+                +  '    --mupdf-build-dir\n'
+                + f'        Set mupdf build type/directory; must be one of:\n{build_dir_allowed_text(12)}'
+                )
+        i += 1
+    else:
+        i += 1
+
+if do_build:
+    command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py'
+    if build_dir:
+        command += f' -d {build_dir}'
+    command += f' -b all'
+    print(f'Building mupdf C, C++ and Python bindings with: {command}')
+    subprocess.check_call(command, shell=True)
 
 
-if 0:
-    args = iter(sys.argv[1:])
-    while 1:
-        try:
-            arg = next(args)
-        except StopIteration:
-            break
-        if arg == 'build':
-            build()
-        elif arg == 'install':
-            install()
-        else:
-            raise Exception(f'Unrecognised arg: {arg}')
+# Set the extra files that should be copied into install directory.
+#
+data_files_leaf = [
+        '_mupdf.so',
+        'libmupdf.so',
+        'libmupdfcpp.so',
+        ]
+data_files = [f'{mupdf_dir}/build/shared-release/{leaf}' for leaf in data_files_leaf]
 
-if 1:
-    setuptools.setup(
-            name='mupdf',
-            version=version(),
-            description="Python bindings for MuPDF",
-            url='https://mupdf.com/',
-            py_modules=['mupdf'],
-            package_dir={
-                    '': f'{mupdf_dir}/build/shared-release',
-                    },
-            #ext_modules=[
-            #        setuptools.Extension('_mupdf', []),
-            #        ],
-            #package_data={
-            #        '_mupdf.so': ['_mupdf.so'],
-            #        },
-            data_files=[
-                    ('', [
-                        f'{mupdf_dir}/build/shared-release/_mupdf.so',
-                        f'{mupdf_dir}/build/shared-release/libmupdf.so',
-                        f'{mupdf_dir}/build/shared-release/libmupdfcpp.so',
-                        ]),
-                    ],
-            )
+# Check whether extra files exist.
+#
+missing = []
+for f in data_files:
+    if not os.path.isfile(f):
+        missing.append(f)
+if missing:
+    print('Warning: mupdf binaries are missing; run with --mupdf-build to build binaries.')
+
+
+# Run setuptools.
+#
+setuptools.setup(
+        name='mupdf',
+        version=mupdf_version(),
+        description="Python bindings for MuPDF",
+        url='https://mupdf.com/',
+        py_modules=['mupdf'],
+        data_files=[
+                ('', data_files),
+                ],
+        )
