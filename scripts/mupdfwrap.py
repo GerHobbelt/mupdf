@@ -6226,7 +6226,7 @@ def main():
                             build_swig_java()
 
                         elif action == '3':
-                            # Compile and link to create _mupdfcpp_swig.so.
+                            # Compile and link to create _mupdf.so.
                             #
                             # We use g++ debug/release flags as implied by
                             # --dir-so, but all builds output the same file
@@ -6531,21 +6531,20 @@ def main():
                 # than 'source', because the latter is not portable, e.g. not
                 # supported by ksh. The '.' command is posix so should work on
                 # all shells.
-                jlib.system(
-                            'true'
-                            + f' && cd {build_dirs.dir_mupdf}'
-                            + f' && echo == creating venv'
-                            + f' && python3 -m venv pylocal'
-                            + f' && echo == running pylocal/bin/activate'
-                            + f' && . pylocal/bin/activate'
-                            + f' && echo == running setup.py install'
-                            + f' && python setup.py install'
-                            + f' && echo == running scripts/mupdfwrap_test.py'
-                            + f' && python scripts/mupdfwrap_test.py'
-                            + f' && echo running deactivate'
-                            + f' && deactivate'
-                            ,
-                        )
+                commands = [
+                            f'cd {build_dirs.dir_mupdf}',
+                            f'python3 -m venv pylocal',
+                            f'. pylocal/bin/activate',
+                            f'pip install clang',
+                            f'python setup.py install',
+                            f'python scripts/mupdfwrap_test.py',
+                            f'deactivate',
+                            ]
+                command = 'true'
+                for c in commands:
+                    command += f' && echo == running: {c}'
+                    command += f' && {c}'
+                jlib.system( command)
 
             elif arg == '--test-swig':
                 test_swig()
