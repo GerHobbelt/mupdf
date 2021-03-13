@@ -6,6 +6,7 @@ import setuptools
 import subprocess
 import sys
 
+print(f'== sys.argv={sys.argv}')
 
 mupdf_dir = os.path.abspath(f'{__file__}/..')
 
@@ -38,7 +39,7 @@ def build_dir_allowed_text(indentation):
 # Handle our extra --mupdf-* options. We remove any such options from sys.argv
 # after we have handled them so setuptools.setup() does not see them.
 #
-do_build = True
+do_build = 1
 build_dir = build_dir_default
 show_help = False
 show_help_commands = False
@@ -70,6 +71,8 @@ data_files = [
         f'{mupdf_dir}/{build_dir}/libmupdf.so',      # C
         f'{mupdf_dir}/{build_dir}/libmupdfcpp.so',   # C++
         f'{mupdf_dir}/{build_dir}/_mupdf.so',        # Python internals
+        f'{mupdf_dir}/{build_dir}/libmupdf-pkcs7.a',
+        f'{mupdf_dir}/{build_dir}/libmupdf-threads.a',
         ]
 
 
@@ -110,10 +113,10 @@ else:
         print()
 
 
-argv = sys.argv[:]
-
 # Run setuptools.
 #
+print(f'== calling setuptools.setup. sys.argv={sys.argv}')
+
 setuptools.setup(
         name='mupdf',
         version=mupdf_version(),
@@ -133,6 +136,9 @@ setuptools.setup(
                 'Documentation': 'https://twiki.ghostscript.com/do/view/Main/MuPDFWrap/',
                 'Source': 'https://git.ghostscript.com/?p=mupdf.git',
                 'Tracker': 'https://bugs.ghostscript.com/',
+                },
+        package_dir={
+                '': f'{mupdf_dir}/{build_dir}',
                 },
         py_modules=['mupdf'],
         #install_requires='clang',
