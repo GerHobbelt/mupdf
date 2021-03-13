@@ -380,6 +380,19 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
+        --python-package-create
+            Creates Python sdist in dist/
+
+            See:
+                https://packaging.python.org/tutorials/packaging-projects/
+
+        --py-package-testupload
+            Uploads dist to https://test.pypi.org/.
+            https://test.pypi.org/project/mupdf/1.18.0/
+
+        --py-package-testinstall-test
+            Installs from https://test.pypi.org/ into venv and tests.
+
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
 
@@ -500,11 +513,12 @@ try:
         import clang.cindex
 
 except Exception as e:
-    print(f'{__file__} error: failed to import clang.cindex: {e}\n'
-            + 'We need Clang Python to build MuPDF python.\n'
-            + 'For example install with:\n'
-            + '    OpenBSD: pkg_add py3-llvm\n'
-            + '    Linux:debian/devuan: apt install python-clang\n'
+    print(f'*** {__file__}\n'
+            + f'*** Error: failed to import clang.cindex: {e}\n'
+            + f'*** We need Clang Python to build MuPDF python.\n'
+            + f'*** For example install with:\n'
+            + f'***     OpenBSD: pkg_add py3-llvm\n'
+            + f'***     Linux:debian/devuan: apt install python-clang\n'
             )
     sys.exit(1)
 
@@ -6060,6 +6074,76 @@ def test_setup_py( build_dirs, extra=''):
         command += f' && {c}'
     jlib.system( command)
 
+def py_package_create(build_dirs):
+    jlib.system( f'cd {build_dirs.dir_mupdf}'
+            + f' && ./setup.py sdist'
+            + f' && ls -lh {build_dirs.dir_mupdf}/dist',
+            prefix='py_package_create: ',
+            verbose=1,
+            )
+
+def py_package_createinstall(build_dirs):
+    '''
+    Creates sdist and installs from it into a venv.
+    '''
+    jlib.system( f'cd {build_dirs.dir_mupdf}'
+            + f' && (rm -r dist || true)'
+            + f' && ./setup.py sdist'
+            + f' && ls -lh {build_dirs.dir_mupdf}/dist'
+            ,
+            prefix='py_package_createinstall: ',
+            verbose=1,
+            )
+    mupdfs = glob.glob('dist/mupdf-*.tar.gz')
+    assert(len(mupdfs) == 1)
+    mupdf = mupdfs[-1]
+    jlib.log('{mupdf=}')
+    jlib.system( f'cd {build_dirs.dir_mupdf}'
+            + f' && (rm -r pylocal-createinstall || true)'
+            + f' && python3 -m venv pylocal-createinstall'
+            + f' && . pylocal-createinstall/bin/activate'
+            + f' && python -m pip install clang'
+            + f' && python -m pip -vvv install {mupdf}'
+            + f' && python scripts/mupdfwrap_test.py'
+            + f' && deactivate'
+            ,
+            prefix='py_package_createinstall: ',
+            verbose=1,
+            )
+
+def py_package_testupload(build_dirs):
+    # Use os.system because we need user input.
+    command = ( f'('
+            + f' cd {build_dirs.dir_mupdf}'
+            + f' && python3 -m venv pylocal'
+            + f' && . pylocal/bin/activate'
+            + f' && python -m pip install --upgrade twine'
+            + f' && python -m twine upload --repository testpypi dist/*'
+            + f' && deactivate'
+            + f') 2>&1'
+            )
+    jlib.log( 'py_package_testupload(): Uploading sdist with twine. Use username="__token__", psasword="pypi-...".')
+    jlib.log( 'py_package_testupload(): Running: {command}')
+    e = os.system(command)
+    jlib.log( '{e=}')
+    assert e == 0
+    # Package should be visible at:
+    #   https://test.pypi.org/project/example-pkg-julian.smith_artifex.com
+    # But actually it is at: https://test.pypi.org/project/mupdf/1.18.0/
+
+def py_package_testdownload(build_dirs):
+    jlib.system( f'cd {build_dirs.dir_mupdf}'
+            + f' && (rm -r pylocal-testdownload || true)'
+            + f' && python3 -m venv pylocal-testdownload'
+            + f' && . pylocal-testdownload/bin/activate'
+            + f' && python -m pip install clang'
+            + f' && python -m pip -vvv install --index-url https://test.pypi.org/simple mupdf'
+            + f' && python scripts/mupdfwrap_test.py'
+            + f' && deactivate',
+            prefix='py_package_testdownload: ',
+            verbose=1,
+            )
+
 
 
 def main():
@@ -6437,6 +6521,23 @@ def main():
             elif arg == '--dir-so' or arg == '-d':
                 d = args.next()
                 build_dirs.set_dir_so( d)
+
+            elif arg == '--py-package-create':
+                py_package_create( build_dirs)
+
+            elif arg == '--py-package-testupload':
+                py_package_testupload( build_dirs)
+
+            elif arg == '--py-package-testdownload':
+                py_package_testdownload( build_dirs)
+
+            elif arg == '--py-package-testall':
+                py_package_create( build_dirs)
+                py_package_testupload( build_dirs)
+                py_package_testdownload( build_dirs)
+
+            elif arg == '--py-package-createinstall':
+                py_package_createinstall( build_dirs)
 
             elif arg == '--run-py':
                 command = ''
