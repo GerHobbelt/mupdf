@@ -390,8 +390,16 @@ Usage:
             Uploads dist to https://test.pypi.org/.
             https://test.pypi.org/project/mupdf/1.18.0/
 
-        --py-package-testinstall-test
+        --py-package-testdownload
             Installs from https://test.pypi.org/ into venv and tests.
+
+        --py-package-testall
+            Equivalent to:
+
+                --python-package-create --py-package-testupload --py-package-testdownload
+
+        --py-package-createinstall
+            Creates local sdist and installs into fresh Python venv.
 
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
