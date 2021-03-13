@@ -39,7 +39,7 @@ static inline void memclr(void* ptr, size_t size)
 }
 
 static fz_context* ctx = NULL;
-static fz_output* output = NULL;
+static fz_output* out = NULL;
 static fz_stream* datafeed = NULL;
 
 static void usage(void)
@@ -61,9 +61,9 @@ static void usage(void)
 
 static void mu_drop_context(void)
 {
-	fz_close_output(ctx, output);
-	fz_drop_output(ctx, output);
-	output = NULL;
+	fz_close_output(ctx, out);
+	fz_drop_output(ctx, out);
+	out = NULL;
 	fz_drop_stream(ctx, datafeed);
 	datafeed = NULL;
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
@@ -88,9 +88,10 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 {
 	int verbosity = 0;
 	int c;
+	const char* output = NULL;
 
 	ctx = NULL;
-	output = NULL;
+	out = NULL;
 	datafeed = NULL;
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
@@ -105,7 +106,7 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 	{
 		switch (c)
 		{
-		case 'o': output = fz_new_output_with_path(ctx, fz_optarg, 0); break;
+		case 'o': output = fz_optarg; break;
 
 		case 'v': verbosity ^= 1; break;
 
@@ -129,8 +130,19 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 	fz_set_stddbg(ctx, fz_stdods(ctx));
 #endif
 
-	if (!output)
-		output = fz_stdout(ctx);
+	if (!output || *output == 0 || !strcmp(output, "-"))
+	{
+		out = fz_stdout(ctx);
+		output = NULL;
+	}
+	else
+	{
+		char fbuf[4096];
+		fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+		fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
+		fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
+		out = fz_new_output_with_path(ctx, fbuf, 0);
+	}
 
 	const char* datafilename = NULL;
 	int errored = 0;
@@ -176,15 +188,15 @@ qiqqa_fingerprint1_main(int argc, const char* argv[])
 			// Print the hash as hexadecimal.
 			if (verbosity)
 			{
-				fz_write_printf(ctx, output, "%q: %s\n", datafilename, b58X);
+				fz_write_printf(ctx, out, "%q: %s\n", datafilename, b58X);
 			}
 			else
 			{
-				fz_write_printf(ctx, output, "%s\n", b58X);
+				fz_write_printf(ctx, out, "%s\n", b58X);
 			}
 
 #if 1
-			//fz_write_printf(ctx, output, "base58X encodings: %s / %.0H / %.0H\n", b58X, b58R, b58rsize, b58R2, b58r2size);
+			//fz_write_printf(ctx, out, "base58X encodings: %s / %.0H / %.0H\n", b58X, b58R, b58rsize, b58R2, b58r2size);
 
 			// check our custom encoding: the mixing of big and little endian handling plus 3 different number bases (2^64, 2^41, 58^7)
 			// isn't stuff that's without its historical crap-ups, so I'd rather not add myself to that list of sad sacks...
