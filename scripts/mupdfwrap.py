@@ -412,19 +412,27 @@ Usage:
         --test
             Tests the python API.
 
-        --test-setup.py <args>
-            Tests that setup.py installs a usable mupdf module.
+        --test-setup.py <arg>
+            Tests that setup.py installs a usable Python mupdf module.
 
                 * Creates a Python virtual environment.
                 * Activates the Python environment.
-                * Runs setup.py.
+                * Runs setup.py install.
+                    * Builds C, C++ and Python librariess in build/shared-release.
+                    * Copies build/shared-release/*.so into virtual envionment.
                 * Runs scripts/mupdfwrap_test.py.
+                    * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
 
-            <args> should be a single arg containing extra args to pass to
-            setup.py, e.g.:
+        --test-setup.py-extra <arg>
+            Like --test-setup.py but appends <arg> to the setup.py command.
 
-                --test-setup.py '--mupdf-build-dir build/shared-debug-extract --mupdf-build'
+            For example this allows one to specify a debug build of MuPDF C,
+            C++ and Python librariess and omit the MuPDF build:
+
+                --test-setup.py-extra '--mupdf-build-dir build/shared-debug-extract --mupdf-build 0'
+
+            Se setup.py itself for more details.
 
     Examples:
 
@@ -477,8 +485,9 @@ try:
 
     except ModuleNotFoundError as e:
 
-        print(f'"import clang.cindex" failed: {e}')
-        print(f'sys.executable={sys.executable}')
+        #print(f'"import clang.cindex" failed: {e}')
+        #print(f'sys.executable={sys.executable}')
+
         # On devuan, clang-python isn't on python3's path, but python2's
         # clang-python works fine with python3, so we deviously get the path by
         # running some python 2.
@@ -492,7 +501,7 @@ try:
 
 except Exception as e:
     print(f'{__file__} error: failed to import clang.cindex: {e}\n'
-            + 'We need Clang Python bindings to build MuPDF python bindings.\n'
+            + 'We need Clang Python to build MuPDF python.\n'
             + 'For example install with:\n'
             + '    OpenBSD: pkg_add py3-llvm\n'
             + '    Linux:debian/devuan: apt install python-clang\n'
@@ -6029,6 +6038,29 @@ class BuildDirs:
             log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
 
 
+def test_setup_py( build_dirs, extra=''):
+    '''
+    Implementation of --test-setup.py*.
+    '''
+    # We use the '.' command to run pylocal/bin/activate rather than 'source',
+    # because the latter is not portable, e.g. not supported by ksh. The '.'
+    # command is posix so should work on all shells.
+    commands = [
+                f'cd {build_dirs.dir_mupdf}',
+                f'python3 -m venv pylocal',
+                f'. pylocal/bin/activate',
+                f'pip install clang',
+                f'python setup.py {extra} install',
+                f'python scripts/mupdfwrap_test.py',
+                f'deactivate',
+                ]
+    command = 'true'
+    for c in commands:
+        command += f' && echo == running: {c}'
+        command += f' && {c}'
+    jlib.system( command)
+
+
 
 def main():
 
@@ -6527,24 +6559,11 @@ def main():
                 log( 'Tests ran ok.')
 
             elif arg == '--test-setup.py':
-                # We use the '.' command to run pylocal/bin/activate rather
-                # than 'source', because the latter is not portable, e.g. not
-                # supported by ksh. The '.' command is posix so should work on
-                # all shells.
-                commands = [
-                            f'cd {build_dirs.dir_mupdf}',
-                            f'python3 -m venv pylocal',
-                            f'. pylocal/bin/activate',
-                            f'pip install clang',
-                            f'python setup.py install',
-                            f'python scripts/mupdfwrap_test.py',
-                            f'deactivate',
-                            ]
-                command = 'true'
-                for c in commands:
-                    command += f' && echo == running: {c}'
-                    command += f' && {c}'
-                jlib.system( command)
+                test_setup_py( build_dirs)
+
+            elif arg == '--test-setup.py-extra':
+                extra = args.next()
+                test_setup_py( build_dirs, extra)
 
             elif arg == '--test-swig':
                 test_swig()
