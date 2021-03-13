@@ -1,12 +1,33 @@
 #!/usr/bin/env python3
 
+'''
+Installation script for MuPDF Python bindings.
+
+We operate like a normal setup.py script except that we first build MuPDF's C,
+C++ and Python libraries, and list the .so files as data_files when calling
+setuptools.setup().
+
+This is unusual, but the only alternative seems to be to somehow get
+setuptools.setup() to build MuPDF's C, C++ and Python libraries itself, which
+is impractical.
+
+Is there an alternative where we specify a callback to setuptools.setup() which
+is called when libraries should be built?
+'''
+
 import os
 import re
 import setuptools
 import subprocess
 import sys
 
-print(f'== sys.argv={sys.argv}')
+
+def log(text=''):
+    for line in text.split('\n'):
+        print(f'mupdf/setup.py: {line}', file=sys.stdout)
+    sys.stdout.flush()
+
+log(f'== sys.argv={sys.argv}')
 
 mupdf_dir = os.path.abspath(f'{__file__}/..')
 
@@ -30,6 +51,9 @@ build_dir_allowed = (
 build_dir_default = 'build/shared-release'
 
 def build_dir_allowed_text(indentation):
+    '''
+    Returns string describing allowed build directories.
+    '''
     ret = ''
     for b in build_dir_allowed:
         ret += f'{indentation*" "}{b}\n'
@@ -64,23 +88,19 @@ while 1:
     else:
         i += 1
 
-
 # Extra files that should be copied into install directory.
 #
 data_files = [
         f'{mupdf_dir}/{build_dir}/libmupdf.so',      # C
         f'{mupdf_dir}/{build_dir}/libmupdfcpp.so',   # C++
         f'{mupdf_dir}/{build_dir}/_mupdf.so',        # Python internals
-        f'{mupdf_dir}/{build_dir}/libmupdf-pkcs7.a',
-        f'{mupdf_dir}/{build_dir}/libmupdf-threads.a',
         ]
 
-
 if show_help:
-    print(
+    log(
             'Additional options for mupdf:\n'
             +  '    --mupdf-build 0 | 1\n'
-            +  '        Whether to build mupdf C, C++ and Python bindings. Default is 1.\n'
+            +  '        Whether to build mupdf C, C++ and Python libraries. Default is 1.\n'
             +  '    --mupdf-build-dir\n'
             + f'        Set mupdf build type/directory; must be one of:\n{build_dir_allowed_text(12)}'
             + f'        Default is: {build_dir_default}\n'
@@ -91,12 +111,8 @@ else:
     # Only build mupdf etc if we are not showing help.
     #
     if do_build:
-        command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py'
-        if build_dir:
-            command += f' -d {build_dir}'
-        command += f' -b all'
-        print(f'Building mupdf C, C++ and Python bindings with: {command}')
-        sys.stdout.flush()
+        command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+        log(f'Building mupdf C, C++ and Python libraries with: {command}')
         subprocess.check_call(command, shell=True)
 
     # Check whether extra files exist.
@@ -106,16 +122,19 @@ else:
         if not os.path.isfile(f):
             missing.append(f)
     if missing:
-        print('Warning: mupdf binaries are missing:')
+        log('Warning: expected mupdf binaries are missing:')
         for m in missing:
-            print(f'    {m}')
-        print('Run with --mupdf-build to build binaries.')
-        print()
+            log(f'    {m}')
+        if do_build:
+            log('*** do_build is true so this should not have happened.')
+        else:
+            log('Suggest running again without "--mupdf-build 0".')
+        log()
 
 
 # Run setuptools.
 #
-print(f'== calling setuptools.setup. sys.argv={sys.argv}')
+log(f'== calling setuptools.setup(). sys.argv={sys.argv}')
 
 setuptools.setup(
         name='mupdf',
@@ -141,6 +160,5 @@ setuptools.setup(
                 '': f'{mupdf_dir}/{build_dir}',
                 },
         py_modules=['mupdf'],
-        #install_requires='clang',
         data_files=[('', data_files)],
         )
