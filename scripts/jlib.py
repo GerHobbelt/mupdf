@@ -1343,7 +1343,17 @@ def build(
     return True
 
 
-def link_l_flags( sos):
+def link_l_flags( sos, ld_origin=None):
+    '''
+    Returns link flags suitable for linking with each .so in <sos>.
+
+    We return -L flags for each unique parent directory and -l flags for each
+    leafname.
+
+    In addition on Linux we append " -Wl,-rpath='$ORIGIN'" so that libraries
+    will be searched for next to each other. This can be disabled by setting
+    ld_origin to false.
+    '''
     dirs = set()
     names = []
     if isinstance( sos, str):
@@ -1365,4 +1375,10 @@ def link_l_flags( sos):
         ret += f' -L {dir_}'
     for name in names:
         ret += f' -l {name}'
+    if ld_origin is None:
+        if os.uname()[0] == 'Linux':
+            ld_origin = True
+    if ld_origin:
+        ret += " -Wl,-rpath='$ORIGIN'"
+    #log('{sos=} {ld_origin=} {ret=}')
     return ret
