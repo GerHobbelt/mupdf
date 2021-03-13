@@ -20,6 +20,7 @@ import re
 import setuptools
 import subprocess
 import sys
+import time
 
 
 def log(text=''):
@@ -37,6 +38,9 @@ def mupdf_version():
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
     version = m.group(1)
+    # Append unique(ish) suffix so we can easily experiment on test.pypi.org.
+    #
+    version += time.strftime(".%Y%m%d.%H%M")
     return version
 
 
@@ -63,7 +67,14 @@ def build_dir_allowed_text(indentation):
 # Handle our extra --mupdf-* options. We remove any such options from sys.argv
 # after we have handled them so setuptools.setup() does not see them.
 #
-do_build = 1
+
+do_mupdf_build = None
+
+do_build = False
+do_install = False
+do_egg_info = False
+do_sdist = False
+
 build_dir = build_dir_default
 show_help = False
 show_help_commands = False
@@ -72,7 +83,7 @@ while 1:
     if i == len(sys.argv):
         break
     if sys.argv[i] == '--mupdf-build':
-        do_build = int(sys.argv[i+1])
+        do_mupdf_build = int(sys.argv[i+1])
         del sys.argv[i:i+2]
     elif sys.argv[i] == '--mupdf-build-dir':
         build_dir = sys.argv[i+1]
@@ -82,18 +93,35 @@ while 1:
     elif sys.argv[i] in ('-h', '--help'):
         show_help = True
         i += 1
-    elif sys.argv[i] in ('--help-commands'):
+    elif sys.argv[i] == '--help-commands':
         show_help_commands = True
+        i += 1
+    elif sys.argv[i] == 'build':
+        do_build = True
+        i += 1
+    elif sys.argv[i] == 'install':
+        do_install = True
+        i += 1
+    elif sys.argv[i] == 'egg_info':
+        do_egg_info = True
+        i += 1
+    elif sys.argv[i] == 'sdist':
+        do_sdist = True
         i += 1
     else:
         i += 1
 
+if do_mupdf_build is None:
+    if do_build or do_install:
+        do_mupdf_build = 1
+
 # Extra files that should be copied into install directory.
 #
-data_files = [
+so_files = [
         f'{mupdf_dir}/{build_dir}/libmupdf.so',      # C
         f'{mupdf_dir}/{build_dir}/libmupdfcpp.so',   # C++
         f'{mupdf_dir}/{build_dir}/_mupdf.so',        # Python internals
+        #f'{mupdf_dir}/{build_dir}/mupdf.py',         # Python
         ]
 
 if show_help:
@@ -110,7 +138,7 @@ elif show_help_commands:
 else:
     # Only build mupdf etc if we are not showing help.
     #
-    if do_build:
+    if do_mupdf_build:
         command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
         log(f'Building mupdf C, C++ and Python libraries with: {command}')
         subprocess.check_call(command, shell=True)
@@ -118,23 +146,37 @@ else:
     # Check whether extra files exist.
     #
     missing = []
-    for f in data_files:
+    for f in so_files:
         if not os.path.isfile(f):
             missing.append(f)
     if missing:
-        log('Warning: expected mupdf binaries are missing:')
+        log('Warning: mupdf binaries have not been built and are missing:')
         for m in missing:
             log(f'    {m}')
-        if do_build:
-            log('*** do_build is true so this should not have happened.')
-        else:
-            log('Suggest running again without "--mupdf-build 0".')
         log()
 
+log(f'== do_egg_info={do_egg_info}')
 
 # Run setuptools.
 #
-log(f'== calling setuptools.setup(). sys.argv={sys.argv}')
+if do_sdist:
+    package_dir = {
+            '': mupdf_dir,
+            }
+    sys.path.append( f'{mupdf_dir}/scripts')
+    import jlib
+    data_files = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
+elif do_build or do_install:
+    package_dir={
+            '': f'{mupdf_dir}/{build_dir}',
+            }
+    data_files = so_files
+else:
+    package_dir = {}
+    data_files = []
+
+
+log(f'== calling setuptools.setup(). sys.argv={sys.argv} package_dir={package_dir}')
 
 setuptools.setup(
         name='mupdf',
@@ -143,11 +185,11 @@ setuptools.setup(
         url='https://mupdf.com/',
         author='Artifex Software, Inc',
         author_email='support@artifex.com',
-        license='GNU Affero',
+        license='GNU Affero General Public License v3',
         classifiers=[
                 'Development Status :: 4 - Beta',
                 'Intended Audience :: Developers',
-                'License :: GNU Affero',
+                'License :: OSI Approved :: GNU Affero General Public License v3',
                 'Programming Language :: Python :: 3',
                 ],
         keywords='pdf',
@@ -156,9 +198,7 @@ setuptools.setup(
                 'Source': 'https://git.ghostscript.com/?p=mupdf.git',
                 'Tracker': 'https://bugs.ghostscript.com/',
                 },
-        package_dir={
-                '': f'{mupdf_dir}/{build_dir}',
-                },
+        package_dir=package_dir,
         py_modules=['mupdf'],
         data_files=[('', data_files)],
         )
