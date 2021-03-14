@@ -629,16 +629,77 @@ static void close_active_logfile(void)
 // Hence this is a hard flush, which writes the logfile, then *re-opens* it in *append mode*.
 static void flush_active_logfile_hard(void)
 {
+	long file_size = 0;
+
 	if (logcfg.logfile)
 	{
+		file_size = ftell(logcfg.logfile);
 		fclose(logcfg.logfile);
 		logcfg.logfile = NULL;
 	}
 
+	// append when the logfile is not very huge yet, otherwise 'rotate':
 	if (logcfg.logfilepath)
 	{
-		logcfg.logfile = fopen(logcfg.logfilepath, "a");
+		// logfiles are cut up into ~20MB chunks:
+		if (file_size < 20000000)
+		{
+			logcfg.logfile = fopen(logcfg.logfilepath, "a");
+		}
+		else
+		{
+			char logfilename[LONGLINE];
+			char basename[LONGLINE];
+			strncpy(basename, logcfg.logfilepath, sizeof(basename));
+			char* dotp = strrchr(basename, '.');
+			*dotp = 0;
+			fz_snprintf(logfilename, sizeof(logfilename), "%s.log", basename);
+			int count = 1;
+			while (fz_file_exists(ctx, logfilename))
+			{
+				// rename old logfile:
+				fz_snprintf(logfilename, sizeof(logfilename), "%s.%04d.log", basename, count++);
+			}
+			if (strcmp(logcfg.logfilepath, logfilename))
+			{
+				(void)rename(logcfg.logfilepath, logfilename);
+				int errcode = errno;
+				if (fz_file_exists(ctx, logcfg.logfilepath))
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "%s: failed to rename old logfile %q to %q.", errcode ? strerror(errcode) : "Unknown rename error", logfilename, logcfg.logfilepath);
+				}
+			}
+
+			logcfg.logfile = fopen(logcfg.logfilepath, "w");
+		}
 	}
+}
+
+static void open_logfile(const char* scriptname)
+{
+	char logfilename[LONGLINE];
+	char logfilename_0[LONGLINE];
+
+	fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
+	strncpy(logfilename_0, logfilename, sizeof(logfilename_0));
+	int count = 1;
+	while (fz_file_exists(ctx, logfilename))
+	{
+		// rename old logfile:
+		fz_snprintf(logfilename, sizeof(logfilename), "%s.%04d.log", scriptname, count++);
+	}
+	if (strcmp(logfilename_0, logfilename))
+	{
+		(void)rename(logfilename_0, logfilename);
+		int errcode = errno;
+		if (fz_file_exists(ctx, logfilename_0))
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "%s: failed to rename old logfile %q to %q.", errcode ? strerror(errcode) : "Unknown rename error", logfilename, logfilename_0);
+		}
+	}
+
+	logcfg.logfile = fopen(logfilename_0, "w");
+	logcfg.logfilepath = fz_strdup(ctx, logfilename_0);
 }
 
 static void mu_drop_context(void)
@@ -846,7 +907,7 @@ bulktest_main(int argc, const char *argv[])
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:TLvqVm:s:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "TLvqVm:s:h")) != -1)
 	{
 		switch(c)
 		{
@@ -953,11 +1014,7 @@ bulktest_main(int argc, const char *argv[])
 
 				scriptname = mk_absolute_path(ctx, p);
 
-				char logfilename[LONGLINE];
-
-				fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
-				logcfg.logfile = fopen(logfilename, "w");
-				logcfg.logfilepath = fz_strdup(ctx, logfilename);
+				open_logfile(scriptname);
 
 				script = fopen(scriptname, "rb");
 				if (script == NULL)
@@ -1214,7 +1271,7 @@ bulktest_main(int argc, const char *argv[])
 					else
 					{
 						report_time = false;
-						fz_error(ctx, "Ignoring line with UNSUPPORTED script statement:\n    %s", line);
+						fz_throw(ctx, FZ_ERROR_GENERIC, "Ignoring line with UNSUPPORTED script statement:\n    %s", line);
 					}
 
 					if (report_time)
