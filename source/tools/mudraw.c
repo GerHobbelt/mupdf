@@ -854,11 +854,14 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			page_stext_options.flags = stext_options.flags;
 
 			// override the preserve_images flag:
-			stext_options.flags = (output_format == OUT_HTML ||
-						output_format == OUT_XHTML ||
-						output_format == OUT_OCR_HTML ||
-						output_format == OUT_OCR_XHTML
-						) ? FZ_STEXT_PRESERVE_IMAGES : 0;
+			if (output_format == OUT_HTML ||
+				output_format == OUT_XHTML ||
+				output_format == OUT_OCR_HTML ||
+				output_format == OUT_OCR_XHTML
+				)
+				stext_options.flags |= FZ_STEXT_PRESERVE_IMAGES;
+			else
+				stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
 			if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 				stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 			text = fz_new_stext_page(ctx, mediabox);
