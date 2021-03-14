@@ -692,7 +692,9 @@ fz_stext_fill_image(fz_context *ctx, fz_device *dev, fz_image *img, fz_matrix ct
 
 	/* If the alpha is less than 50% then it's probably a watermark or effect or something. Skip it. */
 	if (alpha < 0.5f)
+	{
 		return;
+	}
 
 	add_image_block_to_page(ctx, tdev->page, ctm, img);
 }
@@ -806,6 +808,8 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags |= FZ_STEXT_PRESERVE_WHITESPACE;
 	if (fz_has_option(ctx, string, "preserve-images", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_PRESERVE_IMAGES;
+	if (fz_has_option(ctx, string, "reference-images", &val) && fz_option_eq(val, "yes"))
+		opts->flags |= FZ_STEXT_REFERENCE_IMAGES;
 	if (fz_has_option(ctx, string, "inhibit-spaces", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_INHIBIT_SPACES;
 	if (fz_has_option(ctx, string, "dehyphenate", &val) && fz_option_eq(val, "yes"))

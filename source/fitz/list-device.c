@@ -1569,7 +1569,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	clock_t start_time = clock();
 	size_t prev_progress = 0;
 	int do_not_draw = 0;
-	int dnd_modulus = list->len / 100000000;		// just a tweak: when things take to long to render, we render only about 1000 parts of the page...
+	int dnd_modulus = list->len / 100000000;		// just a tweak: when things take too long to render, we render only about 1000 parts of the page...
 
 	node = list->list;
 	node_end = &list->list[list->len];

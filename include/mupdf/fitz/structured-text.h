@@ -86,6 +86,11 @@ typedef struct fz_stext_block fz_stext_block;
 	will be stored in the structured text structure. The default is
 	to ignore all images.
 
+	FZ_STEXT_REFERENCE_IMAGES: If this option is set, then a reference
+	("link") to the images will be stored in the structured text structure
+	instead of the image data itself. This modifies
+	the FZ_STEXT_PRESERVE_IMAGES flag behaviour.
+
 	FZ_STEXT_INHIBIT_SPACES: If this option is set, we will not try
 	to add missing space characters where there are large gaps
 	between characters.
@@ -109,6 +114,7 @@ enum
 	FZ_STEXT_DEHYPHENATE = 16,
 	FZ_STEXT_PRESERVE_SPANS = 32,
 	FZ_STEXT_MEDIABOX_CLIP = 64,
+	FZ_STEXT_REFERENCE_IMAGES = 128,
 };
 
 /**
