@@ -6110,7 +6110,7 @@ def py_package_createinstall(build_dirs):
             + f' && (rm -r pylocal-createinstall || true)'
             + f' && python3 -m venv pylocal-createinstall'
             + f' && . pylocal-createinstall/bin/activate'
-            + f' && python -m pip install clang'
+            + f' && python -m pip install clang wheel'
             + f' && python -m pip -vvv install {mupdf}'
             + f' && python scripts/mupdfwrap_test.py'
             + f' && deactivate'

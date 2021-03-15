@@ -74,6 +74,8 @@ do_build = False
 do_install = False
 do_egg_info = False
 do_sdist = False
+do_bdist_wheel = False
+do_d = None
 
 build_dir = build_dir_default
 show_help = False
@@ -108,11 +110,17 @@ while 1:
     elif sys.argv[i] == 'sdist':
         do_sdist = True
         i += 1
+    elif sys.argv[i] == 'bdist_wheel':
+        do_bdist_wheel = True
+        i += 1
+    elif sys.argv[i] == '-d':
+        do_d = sys.argv[i+1]
+        i += 2
     else:
         i += 1
 
 if do_mupdf_build is None:
-    if do_build or do_install:
+    if do_build or do_install or do_bdist_wheel:
         do_mupdf_build = 1
 
 # Extra files that should be copied into install directory.
@@ -139,7 +147,19 @@ else:
     # Only build mupdf etc if we are not showing help.
     #
     if do_mupdf_build:
-        command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+        if 1:
+            log(f'*** Doing fake build of sos. do_d={do_d}')
+            command = f'cd {mupdf_dir} && mkdir -p {build_dir} '
+            for leaf in (
+                    'libmupdf.so',
+                    'libmupdfcpp.so',
+                    '_mupdf.so',
+                    ):
+                command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {build_dir}/{leaf}'
+                if do_d:
+                    command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {do_d}/build/lib/{leaf}'
+        else:
+            command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
         log(f'Building mupdf C, C++ and Python libraries with: {command}')
         subprocess.check_call(command, shell=True)
 
@@ -163,9 +183,12 @@ if do_sdist:
     package_dir = {
             '': mupdf_dir,
             }
-    sys.path.append( f'{mupdf_dir}/scripts')
-    import jlib
-    data_files = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
+    if 1:
+        data_files = ['setup.py']
+    else:
+        sys.path.append( f'{mupdf_dir}/scripts')
+        import jlib
+        data_files = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
 elif do_build or do_install:
     package_dir={
             '': f'{mupdf_dir}/{build_dir}',
@@ -176,7 +199,7 @@ else:
     data_files = []
 
 
-log(f'== calling setuptools.setup(). sys.argv={sys.argv} package_dir={package_dir}')
+log(f'== calling setuptools.setup(). sys.argv={sys.argv} package_dir={package_dir} data_files={data_files}')
 
 setuptools.setup(
         name='mupdf',
