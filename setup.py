@@ -17,11 +17,14 @@ is called when libraries should be built?
 
 import os
 import re
-import setuptools
+import site
+import shutil
 import subprocess
 import sys
+import tarfile
 import time
 
+import distutils.core
 
 def log(text=''):
     for line in text.split('\n'):
@@ -54,6 +57,30 @@ build_dir_allowed = (
         )
 build_dir_default = 'build/shared-release'
 
+# Important that this does not start with blank line - looks like it is treated
+# like an email - headers, blank line, content.
+#
+metainfo = f'''Metadata-Version: 1.2
+Name: mupdf
+Version: {mupdf_version()}
+Summary: Python bindings for MuPDF
+Home-page: https://mupdf.com/
+Author: Artifex Software, Inc
+Author-email: support@artifex.com
+License: GNU Affero General Public License v3
+Project-URL: Documentation, https://twiki.ghostscript.com/do/view/Main/MuPDFWrap/
+Project-URL: Source, https://git.ghostscript.com/?p=mupdf.git
+Project-URL: Tracker, https://bugs.ghostscript.com/
+Description: UNKNOWN
+Keywords: pdf
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3
+Classifier: Programming Language :: Python :: 3
+'''
+
+
 def build_dir_allowed_text(indentation):
     '''
     Returns string describing allowed build directories.
@@ -63,165 +90,159 @@ def build_dir_allowed_text(indentation):
         ret += f'{indentation*" "}{b}\n'
     return ret
 
-
-# Handle our extra --mupdf-* options. We remove any such options from sys.argv
-# after we have handled them so setuptools.setup() does not see them.
-#
-
-do_mupdf_build = None
-
-do_build = False
-do_install = False
-do_egg_info = False
-do_sdist = False
-do_bdist_wheel = False
-do_d = None
-
-build_dir = build_dir_default
-show_help = False
-show_help_commands = False
-i = 1
-while 1:
-    if i == len(sys.argv):
-        break
-    if sys.argv[i] == '--mupdf-build':
-        do_mupdf_build = int(sys.argv[i+1])
-        del sys.argv[i:i+2]
-    elif sys.argv[i] == '--mupdf-build-dir':
-        build_dir = sys.argv[i+1]
-        if build_dir not in build_dir_allowed:
-            raise Exception(f'Unrecognised build-dir {build_dir!r}. Must be one of:\n{build_dir_allowed_text(4)}')
-        del sys.argv[i:i+2]
-    elif sys.argv[i] in ('-h', '--help'):
-        show_help = True
-        i += 1
-    elif sys.argv[i] == '--help-commands':
-        show_help_commands = True
-        i += 1
-    elif sys.argv[i] == 'build':
-        do_build = True
-        i += 1
-    elif sys.argv[i] == 'install':
-        do_install = True
-        i += 1
-    elif sys.argv[i] == 'egg_info':
-        do_egg_info = True
-        i += 1
-    elif sys.argv[i] == 'sdist':
-        do_sdist = True
-        i += 1
-    elif sys.argv[i] == 'bdist_wheel':
-        do_bdist_wheel = True
-        i += 1
-    elif sys.argv[i] == '-d':
-        do_d = sys.argv[i+1]
-        i += 2
-    else:
-        i += 1
-
-if do_mupdf_build is None:
-    if do_build or do_install or do_bdist_wheel:
-        do_mupdf_build = 1
-
-# Extra files that should be copied into install directory.
-#
-so_files = [
-        f'{mupdf_dir}/{build_dir}/libmupdf.so',      # C
-        f'{mupdf_dir}/{build_dir}/libmupdfcpp.so',   # C++
-        f'{mupdf_dir}/{build_dir}/_mupdf.so',        # Python internals
-        #f'{mupdf_dir}/{build_dir}/mupdf.py',         # Python
-        ]
-
-if show_help:
-    log(
-            'Additional options for mupdf:\n'
-            +  '    --mupdf-build 0 | 1\n'
-            +  '        Whether to build mupdf C, C++ and Python libraries. Default is 1.\n'
-            +  '    --mupdf-build-dir\n'
-            + f'        Set mupdf build type/directory; must be one of:\n{build_dir_allowed_text(12)}'
-            + f'        Default is: {build_dir_default}\n'
-            )
-elif show_help_commands:
+class ArgsRaise:
     pass
-else:
-    # Only build mupdf etc if we are not showing help.
+class Args:
+    '''
+    Iterates over argv items.
+    '''
+    def __init__( self, argv):
+        self.items = iter( argv)
+    class Raise:
+        pass
+    def next( self, eof=ArgsRaise):
+        try:
+            return next( self.items)
+        except StopIteration:
+            if eof == ArgsRaise:
+                raise Exception('Not enough args')
+            return eof
+
+def main():
+
+    do = None
+
+    opt_egginfo = None
+    opt_install_headers = None
+    opt_record = None
+
+    build_dir = build_dir_default
+    args = Args(sys.argv[1:])
+    while 1:
+        arg = args.next(None)
+        if arg is None:
+            break
+        if arg in ('install', 'sdist', 'egg_info', 'bdist_wheel'):
+            assert do is None
+            do = arg
+        elif arg == '--record':
+            opt_record = args.next()
+        elif arg in (
+                '--single-version-externally-managed',
+                '--compile',
+                ):
+            pass
+        elif arg == '--install-headers':
+            opt_install_headers = args.next()
+        elif arg == '--egg-base':
+            opt_egginfo = args.next()
+        elif arg == '--mupdf-build-dir':
+            build_dir = args.next()
+            if build_dir not in build_dir_allowed:
+                raise Exception(f'Unrecognised build-dir {build_dir!r}. Must be one of:\n{build_dir_allowed_text(4)}')
+        elif arg in ('-h', '--help'):
+            log(
+                    'Additional options for mupdf:\n'
+                    +  '    --mupdf-build 0 | 1\n'
+                    +  '        Whether to build mupdf C, C++ and Python libraries. Default is 1.\n'
+                    +  '    --mupdf-build-dir\n'
+                    + f'        Set mupdf build type/directory; must be one of:\n{build_dir_allowed_text(12)}'
+                    + f'        Default is: {build_dir_default}\n'
+                    )
+            return
+        elif arg == '--help-commands':
+            print('help')
+            return
+        else:
+           raise Exception(f'Unrecognised arg: {arg}')
+
+    if not do:
+        return
+
+
+    # Extra files that should be copied into install directory.
     #
-    if do_mupdf_build:
+    so_files = [
+            f'{mupdf_dir}/{build_dir}/libmupdf.so',      # C
+            f'{mupdf_dir}/{build_dir}/libmupdfcpp.so',   # C++
+            f'{mupdf_dir}/{build_dir}/_mupdf.so',        # Python internals
+            f'{mupdf_dir}/{build_dir}/mupdf.py',         # Python
+            ]
+
+    if 0:
+        pass
+
+    elif do == 'egg_info':
+        log(f'doing egg_info')
+        assert opt_egginfo
+        root = f'{opt_egginfo}/.egg-info'
+        os.mkdir(root)
+        with open(f'{root}/PKG-INFO', 'w') as f:
+            f.write(metainfo)
+        #with open(f'{root}/METADTA', 'w') as f:
+        #    f.write(metainfo)
+        with open(f'{root}/SOURCES.txt', 'w') as f:
+            pass
+        with open(f'{root}/dependency_links.txt', 'w') as f:
+            pass
+        with open(f'{root}/top_level.txt', 'w') as f:
+            f.write('mupdf\n')
+
+    elif do == 'sdist':
         if 1:
-            log(f'*** Doing fake build of sos. do_d={do_d}')
-            command = f'cd {mupdf_dir} && mkdir -p {build_dir} '
-            for leaf in (
-                    'libmupdf.so',
-                    'libmupdfcpp.so',
-                    '_mupdf.so',
-                    ):
-                command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {build_dir}/{leaf}'
-                if do_d:
-                    command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {do_d}/build/lib/{leaf}'
+            paths = [
+                    'include/mupdf/fitz/version.h',
+                    'setup.py',
+                    'README',
+                    'COPYING',
+                    ]
+        else:
+            paths = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
+        shutil.rmtree(f'{mupdf_dir}/dist', ignore_errors=True)
+        os.mkdir(f'{mupdf_dir}/dist')
+        version = mupdf_version()
+        tarpath = f'{mupdf_dir}/dist/mupdf-{version}.tar.gz'
+        with tarfile.open(tarpath, 'w:gz') as tar:
+            for path in paths:
+                tar.add( f'{mupdf_dir}/{path}', path, recursive=False)
+        log( f'Have created: {tarpath}')
+
+    elif do == 'install':
+        if 1:
+            log(f'*** Doing fake build of sos.')
+            command = f'cd {mupdf_dir}'
+            command += ' && pwd && ls -la'
+            command += f' && mkdir -p {build_dir}'
+            for so in so_files:
+                leaf = os.path.basename(so)
+                command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {mupdf_dir}/{build_dir}/'
         else:
             command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+
         log(f'Building mupdf C, C++ and Python libraries with: {command}')
         subprocess.check_call(command, shell=True)
 
-    # Check whether extra files exist.
-    #
-    missing = []
-    for f in so_files:
-        if not os.path.isfile(f):
-            missing.append(f)
-    if missing:
-        log('Warning: mupdf binaries have not been built and are missing:')
-        for m in missing:
-            log(f'    {m}')
-        log()
+        # Check whether extra files exist.
+        #
+        missing = []
+        for f in so_files:
+            if not os.path.isfile(f):
+                missing.append(f)
+        if missing:
+            log('Warning: mupdf binaries have not been built and are missing:')
+            for m in missing:
+                log(f'    {m}')
+            log()
 
-log(f'== do_egg_info={do_egg_info}')
+        sitepackages = site.getsitepackages()
+        assert len(sitepackages) == 1
+        sitepackages = sitepackages[0]
+        for so_file in so_files:
+            log( f'Copying {so_file} to {sitepackages}')
+            shutil.copy2( so_file, sitepackages)
 
-# Run setuptools.
-#
-if do_sdist:
-    package_dir = {
-            '': mupdf_dir,
-            }
-    if 1:
-        data_files = ['setup.py']
     else:
-        sys.path.append( f'{mupdf_dir}/scripts')
-        import jlib
-        data_files = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
-elif do_build or do_install:
-    package_dir={
-            '': f'{mupdf_dir}/{build_dir}',
-            }
-    data_files = so_files
-else:
-    package_dir = {}
-    data_files = []
+        assert 0, f'Unrecognised do={do}'
 
-
-log(f'== calling setuptools.setup(). sys.argv={sys.argv} package_dir={package_dir} data_files={data_files}')
-
-setuptools.setup(
-        name='mupdf',
-        version=mupdf_version(),
-        description="Python bindings for MuPDF",
-        url='https://mupdf.com/',
-        author='Artifex Software, Inc',
-        author_email='support@artifex.com',
-        license='GNU Affero General Public License v3',
-        classifiers=[
-                'Development Status :: 4 - Beta',
-                'Intended Audience :: Developers',
-                'License :: OSI Approved :: GNU Affero General Public License v3',
-                'Programming Language :: Python :: 3',
-                ],
-        keywords='pdf',
-        project_urls={
-                'Documentation': 'https://twiki.ghostscript.com/do/view/Main/MuPDFWrap/',
-                'Source': 'https://git.ghostscript.com/?p=mupdf.git',
-                'Tracker': 'https://bugs.ghostscript.com/',
-                },
-        package_dir=package_dir,
-        py_modules=['mupdf'],
-        data_files=[('', data_files)],
-        )
+if __name__ == '__main__':
+    main()
