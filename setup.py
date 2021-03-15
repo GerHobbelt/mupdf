@@ -23,10 +23,12 @@ import subprocess
 import sys
 import tarfile
 import time
-
-import distutils.core
+import zipfile
 
 def log(text=''):
+    '''
+    Logs lines with prefix.
+    '''
     for line in text.split('\n'):
         print(f'mupdf/setup.py: {line}', file=sys.stdout)
     sys.stdout.flush()
@@ -57,10 +59,15 @@ build_dir_allowed = (
         )
 build_dir_default = 'build/shared-release'
 
-# Important that this does not start with blank line - looks like it is treated
-# like an email - headers, blank line, content.
-#
-metainfo = f'''Metadata-Version: 1.2
+
+def metainfo():
+    '''
+    Returns metainfo text for the 'egg_info' command.
+
+    Important that this does not start with blank line - looks like it is
+    treated like an email - headers, blank line, content.
+    '''
+    ret = f'''Metadata-Version: 1.2
 Name: mupdf
 Version: {mupdf_version()}
 Summary: Python bindings for MuPDF
@@ -79,6 +86,7 @@ Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: GNU Affero General Public License v3
 Classifier: Programming Language :: Python :: 3
 '''
+    return ret
 
 
 def build_dir_allowed_text(indentation):
@@ -90,8 +98,10 @@ def build_dir_allowed_text(indentation):
         ret += f'{indentation*" "}{b}\n'
     return ret
 
+
 class ArgsRaise:
     pass
+
 class Args:
     '''
     Iterates over argv items.
@@ -101,6 +111,10 @@ class Args:
     class Raise:
         pass
     def next( self, eof=ArgsRaise):
+        '''
+        Returns next arg. If no more args, we return eof or raise an exception
+        if eof == ArgsRaise.
+        '''
         try:
             return next( self.items)
         except StopIteration:
@@ -108,77 +122,166 @@ class Args:
                 raise Exception('Not enough args')
             return eof
 
+
 def main():
 
-    do = None
+    command = None
 
-    opt_egginfo = None
+    opt_egg_base = None
     opt_install_headers = None
     opt_record = None
+    opt_d = None
+    opt_dist_dir = 'dist'
+
+    opt_mupdf_fake_build = os.environ.get('SETUP_PY_MUPDF_FAKE_BUILD', None)
+    if opt_mupdf_fake_build:
+        opt_mupdf_fake_build = int(opt_mupdf_fake_build)
 
     build_dir = build_dir_default
+
     args = Args(sys.argv[1:])
+
     while 1:
         arg = args.next(None)
         if arg is None:
             break
-        if arg in ('install', 'sdist', 'egg_info', 'bdist_wheel'):
-            assert do is None
-            do = arg
-        elif arg == '--record':
-            opt_record = args.next()
-        elif arg in (
-                '--single-version-externally-managed',
-                '--compile',
-                ):
+
+        elif arg in ('install', 'sdist', 'egg_info', 'bdist_wheel'):
+            assert command is None, 'Two commands specified: {command} and {arg}.'
+            command = arg
+
+        elif arg == '--compile':
             pass
+
+        elif arg == '-d':
+            opt_d = args.next()
+
+        elif arg == '--dist-dir':
+            opt_dist_dir = args.next()
+
+        elif arg == '--egg-base':
+            opt_egg_base = args.next()
+
+        elif arg in ('-h', '--help'):
+            log(
+                    'Options:\n'
+                    '    bdist_wheel\n'
+                    '        Not implemented.\n'
+                    '    clean\n'
+                    '        Not implemented.\n'
+                    '    egg_info\n'
+                    '        Creates files in: <egg-base>/.egg-info/\n'
+                    '    install\n'
+                    '        Installs into Python\'s site.getsitepackages()[0].'
+                    '        Logs to <record> (not implemented).\n'
+                    '    sdist\n'
+                    '        Make a source distribution:\n'
+                    '            <dist-dir>/mupdf-<version>.tar.gz\n'
+                    '    --egg-base <egg-base>\n'
+                    '        Not implemented.\n'
+                    '    -d <d>\n'
+                    '        Not implemented.\n'
+                    '    --dist-dir <dist-dir>\n'
+                    '        Default is "dist".'
+                    '    --record <record>\n'
+                    '        Ignored.\n'
+                    '    --single-version-externally-managed\n'
+                    '        Ignored.\n'
+                    '    --compile\n'
+                    '        Ignored.\n'
+                    '    --install-headers <directory>\n'
+                    '        Ignored.\n'
+                    '\n'
+                    f'MuPDF options:\n'
+                    f'    --mupdf-build-dir\n'
+                    f'        Set mupdf build type/directory; must be one of:\n{build_dir_allowed_text(12)}'
+                    f'        Default is: {build_dir_default}\n'
+                    )
+            return
+
+        elif arg == '--help-commands':
+            print('help')
+            return
+
         elif arg == '--install-headers':
             opt_install_headers = args.next()
-        elif arg == '--egg-base':
-            opt_egginfo = args.next()
+
         elif arg == '--mupdf-build-dir':
             build_dir = args.next()
             if build_dir not in build_dir_allowed:
                 raise Exception(f'Unrecognised build-dir {build_dir!r}. Must be one of:\n{build_dir_allowed_text(4)}')
-        elif arg in ('-h', '--help'):
-            log(
-                    'Additional options for mupdf:\n'
-                    +  '    --mupdf-build 0 | 1\n'
-                    +  '        Whether to build mupdf C, C++ and Python libraries. Default is 1.\n'
-                    +  '    --mupdf-build-dir\n'
-                    + f'        Set mupdf build type/directory; must be one of:\n{build_dir_allowed_text(12)}'
-                    + f'        Default is: {build_dir_default}\n'
-                    )
-            return
-        elif arg == '--help-commands':
-            print('help')
-            return
+
+        elif arg == '--mupdf-fake-build':
+            opt_mupdf_fake_build = int(args.next())
+
+        elif arg == '--record':
+            # todo: do something with this, presumably write a log to the
+            # specified file?
+            #
+            opt_record = args.next()
+
+        elif arg == '--single-version-externally-managed':
+            pass
+
         else:
            raise Exception(f'Unrecognised arg: {arg}')
 
-    if not do:
+    if not command:
         return
 
-
-    # Extra files that should be copied into install directory.
+    # Files that should be copied into site.getsitepackages()[0].
     #
-    so_files = [
+    paths = [
             f'{mupdf_dir}/{build_dir}/libmupdf.so',      # C
             f'{mupdf_dir}/{build_dir}/libmupdfcpp.so',   # C++
             f'{mupdf_dir}/{build_dir}/_mupdf.so',        # Python internals
             f'{mupdf_dir}/{build_dir}/mupdf.py',         # Python
             ]
 
+    log(f'Handling command={command}')
     if 0:
         pass
 
-    elif do == 'egg_info':
-        log(f'doing egg_info')
-        assert opt_egginfo
-        root = f'{opt_egginfo}/.egg-info'
+    elif command == 'bdist_wheel':
+        # Can't figure out how bdist_wheel is supposed to work. We can create a
+        # zipped .whl below but pip doesn't like it.
+        #
+        raise Exception(f'bdist_wheel not implemented')
+
+        assert opt_d
+        if opt_mupdf_fake_build:
+            log(f'*** Doing fake build of sos.')
+            command = f'cd {mupdf_dir}'
+            command += ' && pwd && ls -la'
+            command += f' && mkdir -p {build_dir}'
+            for path in paths:
+                leaf = os.path.basename(path)
+                command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {mupdf_dir}/{build_dir}/'
+        else:
+            command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+
+        log(f'Building mupdf C, C++ and Python libraries with: {command}')
+        subprocess.check_call(command, shell=True)
+
+        with zipfile.ZipFile(f'{opt_d}/mupdf-{mupdf_version()}-py3-none-any.whl', 'w') as f:
+            for path in paths:
+                f.write(path, os.path.basename(path))
+            d = f'mupdf-{mupdf_version()}.dist-info'
+            #f.writestr(f'{d}/WHEEL',
+            f.writestr(f'WHEEL',
+                    ''
+                    + 'Wheel-Version: 1.0\n'
+                    + 'Generator: bdist_wheel\n'
+                    + 'Root-Is-Purelib: false\n'
+                    + 'Tag: py3-none-any\n'
+                    )
+
+    elif command == 'egg_info':
+        assert opt_egg_base
+        root = f'{opt_egg_base}/.egg-info'
         os.mkdir(root)
         with open(f'{root}/PKG-INFO', 'w') as f:
-            f.write(metainfo)
+            f.write(metainfo())
         #with open(f'{root}/METADTA', 'w') as f:
         #    f.write(metainfo)
         with open(f'{root}/SOURCES.txt', 'w') as f:
@@ -188,33 +291,14 @@ def main():
         with open(f'{root}/top_level.txt', 'w') as f:
             f.write('mupdf\n')
 
-    elif do == 'sdist':
-        if 1:
-            paths = [
-                    'include/mupdf/fitz/version.h',
-                    'setup.py',
-                    'README',
-                    'COPYING',
-                    ]
-        else:
-            paths = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
-        shutil.rmtree(f'{mupdf_dir}/dist', ignore_errors=True)
-        os.mkdir(f'{mupdf_dir}/dist')
-        version = mupdf_version()
-        tarpath = f'{mupdf_dir}/dist/mupdf-{version}.tar.gz'
-        with tarfile.open(tarpath, 'w:gz') as tar:
-            for path in paths:
-                tar.add( f'{mupdf_dir}/{path}', path, recursive=False)
-        log( f'Have created: {tarpath}')
-
-    elif do == 'install':
-        if 1:
+    elif command == 'install':
+        if opt_mupdf_fake_build:
             log(f'*** Doing fake build of sos.')
             command = f'cd {mupdf_dir}'
             command += ' && pwd && ls -la'
             command += f' && mkdir -p {build_dir}'
-            for so in so_files:
-                leaf = os.path.basename(so)
+            for path in paths:
+                leaf = os.path.basename(path)
                 command += f' && rsync -ai /home/jules/artifex/mupdf/build/shared-release/{leaf} {mupdf_dir}/{build_dir}/'
         else:
             command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
@@ -225,24 +309,58 @@ def main():
         # Check whether extra files exist.
         #
         missing = []
-        for f in so_files:
-            if not os.path.isfile(f):
-                missing.append(f)
+        for path in paths:
+            if not os.path.isfile(path):
+                missing.append(path)
         if missing:
             log('Warning: mupdf binaries have not been built and are missing:')
-            for m in missing:
-                log(f'    {m}')
+            for path in missing:
+                log(f'    {path}')
             log()
 
         sitepackages = site.getsitepackages()
         assert len(sitepackages) == 1
         sitepackages = sitepackages[0]
-        for so_file in so_files:
-            log( f'Copying {so_file} to {sitepackages}')
-            shutil.copy2( so_file, sitepackages)
+        # If we create a <opt_record> file, pip complains that we haven't
+        # indicated that we've installed an .egg-info directory. So for now we
+        # ignore <opt_record>.
+        #
+        f = 0   #open(opt_record, 'w') if opt_record else None
+        try:
+            for path in paths:
+                log( f'Copying {path} to {sitepackages}')
+                dest = f'{sitepackages}/{os.path.basename(path)}'
+                shutil.copy2( path, dest)
+                if f:
+                    f.write(f'{dest}\n')
+        finally:
+            if f:
+                f.close()
+
+    elif command == 'sdist':
+        if opt_mupdf_fake_build:
+            paths = [
+                    'include/mupdf/fitz/version.h',
+                    'setup.py',
+                    'README',
+                    'COPYING',
+                    ]
+        else:
+            sys.path.append(f'{mupdf_dir}/scripts')
+            import jlib
+            paths = jlib.get_gitfiles( f'{mupdf_dir}', submodules=True)
+        shutil.rmtree(f'{mupdf_dir}/{opt_dist_dir}', ignore_errors=True)
+        os.mkdir(f'{mupdf_dir}/{opt_dist_dir}')
+        version = mupdf_version()
+        tarpath = f'{mupdf_dir}/{opt_dist_dir}/mupdf-{version}.tar.gz'
+        with tarfile.open(tarpath, 'w:gz') as tar:
+            for path in paths:
+                tar.add( f'{mupdf_dir}/{path}', path, recursive=False)
+        log( f'Have created: {tarpath}')
 
     else:
-        assert 0, f'Unrecognised do={do}'
+        assert 0, f'Unrecognised command: {command}'
+
 
 if __name__ == '__main__':
     main()
