@@ -15,10 +15,11 @@ Is there an alternative where we specify a callback to setuptools.setup() which
 is called when libraries should be built?
 '''
 
+import io
 import os
 import re
-import site
 import shutil
+import site
 import subprocess
 import sys
 import tarfile
@@ -275,6 +276,7 @@ def main():
                     + 'Root-Is-Purelib: false\n'
                     + 'Tag: py3-none-any\n'
                     )
+            f.writestr(f'PKG-INFO', metainfo())
 
     elif command == 'egg_info':
         assert opt_egg_base
@@ -353,9 +355,18 @@ def main():
         os.mkdir(f'{mupdf_dir}/{opt_dist_dir}')
         version = mupdf_version()
         tarpath = f'{mupdf_dir}/{opt_dist_dir}/mupdf-{version}.tar.gz'
+        def add(tar, name, contents):
+            '''
+            Adds item called <name> to tarfile.TarInfo <tar>, containing
+            <contents> (which must be bytes, not str).
+            '''
+            ti = tarfile.TarInfo(name)
+            ti.size = len(contents)
+            tar.addfile(ti, io.BytesIO(contents))
         with tarfile.open(tarpath, 'w:gz') as tar:
             for path in paths:
                 tar.add( f'{mupdf_dir}/{path}', path, recursive=False)
+            add(tar, 'PKG-INFO', metainfo().encode('utf8'))
         log( f'Have created: {tarpath}')
 
     else:
