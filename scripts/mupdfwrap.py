@@ -6110,8 +6110,8 @@ def py_package_createinstall(build_dirs):
             + f' && (rm -r pylocal-createinstall || true)'
             + f' && python3 -m venv pylocal-createinstall'
             + f' && . pylocal-createinstall/bin/activate'
-            + f' && python -m pip install clang wheel'
-            + f' && python -m pip {"-vvv"*1} install {mupdf_sdist}'
+            + f' && pip install clang wheel'
+            + f' && pip {"-vvv"*1} install {mupdf_sdist}'
             + f' && python scripts/mupdfwrap_test.py'
             + f' && deactivate'
             ,
@@ -6154,11 +6154,10 @@ def py_package_testdownload(build_dirs):
             + f' && (rm -r py_package_testdownload || true)'
             + f' && mkdir py_package_testdownload'
             + f' && cd py_package_testdownload'
-            + f' && (rm -r pylocal-testdownload || true)'
-            + f' && python3 -m venv pylocal-testdownload'
-            + f' && . pylocal-testdownload/bin/activate'
-            + f' && python -m pip install clang'
-            + f' && python -m pip -vvv install --index-url https://test.pypi.org/simple mupdf'
+            + f' && python3 -m venv pylocal'
+            + f' && . pylocal/bin/activate'
+            + f' && pip install clang'
+            + f' && pip -vvv install --index-url https://test.pypi.org/simple mupdf'
             + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
             + f' && deactivate',
             prefix='py_package_testdownload: ',
