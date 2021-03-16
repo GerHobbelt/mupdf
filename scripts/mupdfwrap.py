@@ -6102,16 +6102,16 @@ def py_package_createinstall(build_dirs):
             prefix='py_package_createinstall: ',
             verbose=1,
             )
-    mupdfs = glob.glob('dist/mupdf-*.tar.gz')
-    assert(len(mupdfs) == 1)
-    mupdf = mupdfs[-1]
-    jlib.log('{mupdf=}')
+    mupdf_sdists = glob.glob('dist/mupdf-*.tar.gz')
+    assert(len(mupdf_sdists) == 1)
+    mupdf_sdist = mupdf_sdists[-1]
+    jlib.log('{mupdf_sdist=}')
     jlib.system( f'cd {build_dirs.dir_mupdf}'
             + f' && (rm -r pylocal-createinstall || true)'
             + f' && python3 -m venv pylocal-createinstall'
             + f' && . pylocal-createinstall/bin/activate'
             + f' && python -m pip install clang wheel'
-            + f' && python -m pip -vvv install {mupdf}'
+            + f' && python -m pip {"-vvv"*1} install {mupdf_sdist}'
             + f' && python scripts/mupdfwrap_test.py'
             + f' && deactivate'
             ,
