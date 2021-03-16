@@ -380,14 +380,14 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
-        --python-package-create
+        --py-package-create
             Creates Python sdist in dist/
 
             See:
                 https://packaging.python.org/tutorials/packaging-projects/
 
         --py-package-testupload
-            Uploads dist to https://test.pypi.org/.
+            Uploads sdist to https://test.pypi.org/.
             https://test.pypi.org/project/mupdf/1.18.0/
 
         --py-package-testdownload
@@ -396,7 +396,7 @@ Usage:
         --py-package-testall
             Equivalent to:
 
-                --python-package-create --py-package-testupload --py-package-testdownload
+                --py-package-create --py-package-testupload --py-package-testdownload
 
         --py-package-createinstall
             Creates local sdist and installs into fresh Python venv.
@@ -6140,13 +6140,26 @@ def py_package_testupload(build_dirs):
     # But actually it is at: https://test.pypi.org/project/mupdf/1.18.0/
 
 def py_package_testdownload(build_dirs):
+
+    # For some reason on Linux, if we are in the mupdf directory, 'pip install
+    # mupdf' says:
+    #
+    #   Requirement already satisfied: mupdf in /home/jules/artifex-remote/mupdf (1.18.0)
+    #
+    # And doesn't attempt to install mupdf.
+    #
+    # So we use a sub-directory py_package_testdownload.
+    #
     jlib.system( f'cd {build_dirs.dir_mupdf}'
+            + f' && (rm -r py_package_testdownload || true)'
+            + f' && mkdir py_package_testdownload'
+            + f' && cd py_package_testdownload'
             + f' && (rm -r pylocal-testdownload || true)'
             + f' && python3 -m venv pylocal-testdownload'
             + f' && . pylocal-testdownload/bin/activate'
             + f' && python -m pip install clang'
             + f' && python -m pip -vvv install --index-url https://test.pypi.org/simple mupdf'
-            + f' && python scripts/mupdfwrap_test.py'
+            + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
             + f' && deactivate',
             prefix='py_package_testdownload: ',
             verbose=1,
