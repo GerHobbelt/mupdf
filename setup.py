@@ -62,7 +62,7 @@ def metainfo():
     ret = f'''Metadata-Version: 1.2
 Name: mupdf
 Version: {mupdf_version()}
-Summary: Python bindings for MuPDF
+Summary: Python bindings for MuPDF library
 Home-page: https://mupdf.com/
 Author: Artifex Software, Inc
 Author-email: support@artifex.com
@@ -70,8 +70,8 @@ License: GNU Affero General Public License v3
 Project-URL: Documentation, https://twiki.ghostscript.com/do/view/Main/MuPDFWrap/
 Project-URL: Source, https://git.ghostscript.com/?p=mupdf.git
 Project-URL: Tracker, https://bugs.ghostscript.com/
-Description: UNKNOWN
-Keywords: pdf
+Description: Python bindings for MuPDF library
+Keywords: PDF
 Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
