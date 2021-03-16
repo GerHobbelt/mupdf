@@ -66,8 +66,9 @@ def run(
         fn_build = None,
         ):
     '''
-    Handles command-line passed to setup.py, for Python package specified by
-    the args.
+    Handles command-line argv passed to setup.py.
+
+    The args we are passed define the Python package that we work with.
 
     argv
         E.g. sys.argv. argv[0] is ignored.
@@ -80,12 +81,12 @@ def run(
     description
         A string.
     classifiers
-        List of strings.
+        A list of strings.
     url_home
     url_source
     url_docs
     utl_tracker
-        Useful URLs.
+        Strings contaiing particular URLs.
     keywords
         A string containing space-separated keywords, or a list of keywords.
     platform
@@ -93,7 +94,7 @@ def run(
     fn_clean
         A function taking no args that cleans generated files.
     fn_sdist
-        A function taking no args, returning a list of paths, e.g. from
+        A function taking no args that returns a list of paths, e.g. from
         git_items(), for files that should be copied into the sdist.
     fn_build
         A function taking no args that builds everything.
@@ -127,7 +128,7 @@ def run(
                     ]
                 )
 
-        And this could result in the installed package looking like:
+        And this would result in the installed package looking like:
 
             .../site-packages/
                 foo/__init__.py
@@ -161,6 +162,12 @@ def run(
                 return eof
 
     def metainfo():
+        '''
+        Returns text for PKG-INFO file (e.g. in .egg-info/ directory or
+        top-level in an sdist tar.gz file).
+        '''
+        # We use an array here so that local add() function can modify ret[0].
+        #
         ret = ['']
         def add(key, value):
             if value is not None:
@@ -284,6 +291,7 @@ def run(
     elif command == 'egg_info':
         assert opt_egg_base
         root = f'{opt_egg_base}/.egg-info'
+        log(f'{command}: creating files in root={root}')
         os.mkdir(root)
         with open(f'{root}/PKG-INFO', 'w') as f:
             f.write(metainfo())
