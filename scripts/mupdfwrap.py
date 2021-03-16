@@ -6233,7 +6233,7 @@ def main():
                             command = f'cd {build_dirs.dir_mupdf} && {make} HAVE_GLUT=no HAVE_PTHREAD=yes shared=yes verbose=yes'
                             #command += ' USE_SYSTEM_FREETYPE=yes USE_SYSTEM_ZLIB=yes'
                             prefix = f'{build_dirs.dir_mupdf}build/shared-'
-                            assert build_dirs.dir_so.startswith(prefix)
+                            assert build_dirs.dir_so.startswith(prefix), f'build_dirs.dir_so={build_dirs.dir_so} prefix={prefix}'
                             flags = build_dirs.dir_so[ len(prefix): ]
                             if flags.endswith('/'):    flags = flags[:-1]
                             flags = flags.split('-')
