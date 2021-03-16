@@ -3,16 +3,7 @@
 '''
 Installation script for MuPDF Python bindings.
 
-We operate like a normal setup.py script except that we first build MuPDF's C,
-C++ and Python libraries, and list the .so files as data_files when calling
-setuptools.setup().
-
-This is unusual, but the only alternative seems to be to somehow get
-setuptools.setup() to build MuPDF's C, C++ and Python libraries itself, which
-is impractical.
-
-Is there an alternative where we specify a callback to setuptools.setup() which
-is called when libraries should be built?
+For creating a sdist, we need to be a git checkout - we use 'git ls-files'.
 '''
 
 import io
@@ -320,9 +311,8 @@ def main():
                 log(f'    {path}')
             log()
 
-        sitepackages = site.getsitepackages()
-        assert len(sitepackages) == 1
-        sitepackages = sitepackages[0]
+        sitepackages = site.getsitepackages()[0]
+
         # If we create a <opt_record> file, pip complains that we haven't
         # indicated that we've installed an .egg-info directory. So for now we
         # ignore <opt_record>.
@@ -365,7 +355,12 @@ def main():
             tar.addfile(ti, io.BytesIO(contents))
         with tarfile.open(tarpath, 'w:gz') as tar:
             for path in paths:
-                tar.add( f'{mupdf_dir}/{path}', path, recursive=False)
+                p = f'{mupdf_dir}/{path}'
+                if os.path.isdir(p):
+                    # This appears to happen for sub-sub-modules.
+                    log(f'*** Ignoring git ls-files item that is actually a directory: {p}')
+                else:
+                    tar.add( p, path, recursive=False)
             add(tar, 'PKG-INFO', metainfo().encode('utf8'))
         log( f'Have created: {tarpath}')
 
