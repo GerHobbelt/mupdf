@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 '''
-Installation script for MuPDF Python bindings.
+Installation script for MuPDF Python bindings, using scripts/pipcl.py.
 
 For creating a sdist, we need to be a git checkout - we use 'git ls-files'.
 '''
@@ -13,14 +13,15 @@ import sys
 import sys
 import time
 
-import pipcl
+mupdf_dir = os.path.abspath(f'{__file__}/..')
 
+sys.path.append(f'{mupdf_dir}/scripts')
+import pipcl
 
 log = pipcl.log
 
 log(f'== sys.argv={sys.argv}')
 
-mupdf_dir = os.path.abspath(f'{__file__}/..')
 
 def mupdf_version():
     with open(f'{mupdf_dir}/include/mupdf/fitz/version.h') as f:

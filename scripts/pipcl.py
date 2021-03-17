@@ -86,7 +86,7 @@ def run(
     url_source
     url_docs
     utl_tracker
-        Strings contaiing particular URLs.
+        Strings containing particular URLs.
     keywords
         A string containing space-separated keywords, or a list of keywords.
     platform
@@ -232,7 +232,7 @@ def run(
             log(
                     'Options:\n'
                     '    clean\n'
-                    '        Not implemented.\n'
+                    '        Cleans build files.\n'
                     '    egg_info\n'
                     '        Creates files in: <egg-base>/.egg-info/\n'
                     '    install\n'
