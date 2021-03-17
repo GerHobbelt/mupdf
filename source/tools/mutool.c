@@ -295,7 +295,7 @@ int wmain(int argc, const wchar_t *wargv[])
 		return EXIT_FAILURE;
 	int ret = main(argc, argv);
 	fz_free_argv(argc, argv);
-	return ret;
+ 	return ret;
 }
 #endif
 

@@ -76,15 +76,23 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block)
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, fz_stext_options* options)
 {
-	int x = block->bbox.x0;
-	int y = block->bbox.y0;
-	int w = block->bbox.x1 - block->bbox.x0;
-	int h = block->bbox.y1 - block->bbox.y0;
+	float x = block->bbox.x0;
+	float y = block->bbox.y0;
+	float w = block->bbox.x1 - block->bbox.x0;
+	float h = block->bbox.y1 - block->bbox.y0;
 
-	fz_write_printf(ctx, out, "<img style=\"position:absolute;top:%dpt;left:%dpt;width:%dpt;height:%dpt\" src=\"", y, x, w, h);
-	fz_write_image_as_data_uri(ctx, out, block->u.i.image);
+	fz_write_printf(ctx, out, "<img style=\"position:absolute;top:%gpt;left:%gpt;width:%gpt;height:%gpt\" data-mediabox=\"%R\" src=\"", y, x, w, h, &block->bbox);
+	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
+	{
+		// TBD
+		fz_write_string(ctx, out, "IMAGE_URL_TODO");
+	}
+	else
+	{
+		fz_write_image_as_data_uri(ctx, out, block->u.i.image);
+	}
 	fz_write_string(ctx, out, "\">\n");
 }
 
@@ -93,7 +101,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 {
 	fz_stext_line *line;
 	fz_stext_char *ch;
-	int x, y;
+	float x, y;
 
 	fz_font *font = NULL;
 	float size = 0;
@@ -105,7 +113,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 		x = line->bbox.x0;
 		y = line->bbox.y0;
 
-		fz_write_printf(ctx, out, "<p style=\"position:absolute;white-space:pre;margin:0;padding:0;top:%dpt;left:%dpt\">", y, x);
+		fz_write_printf(ctx, out, "<p style=\"position:absolute;white-space:pre;margin:0;padding:0;top:%gpt;left:%gpt\" data-mediabox=\"%R\">", y, x, &line->bbox);
 		font = NULL;
 
 		for (ch = line->first_char; ch; ch = ch->next)
@@ -146,23 +154,23 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 }
 
 void
-fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
+fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, fz_stext_options *options)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	int w = mediabox.x1 - mediabox.x0;
-	int h = mediabox.y1 - mediabox.y0;
+	float w = mediabox.x1 - mediabox.x0;
+	float h = mediabox.y1 - mediabox.y0;
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%dpt;height:%dpt;background-color:white\" data-mediabox=\"%R\">\n", 
+	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%g\" height=\"%g\" style=\"position:relative;background-color:white;\" data-mediabox=\"%R\">\n", 
 		id, 
 		w, h, 
 		&page->mediabox);
 
 	for (block = page->first_block; block; block = block->next)
 	{
-		if (block->type == FZ_STEXT_BLOCK_IMAGE)
-			fz_print_stext_image_as_html(ctx, out, block);
+		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
+			fz_print_stext_image_as_html(ctx, out, block, options);
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
 			fz_print_stext_block_as_html(ctx, out, block);
 	}
@@ -194,13 +202,21 @@ fz_print_stext_trailer_as_html(fz_context *ctx, fz_output *out)
 /* XHTML output (semantic, little layout, suitable for reflow) */
 
 static void
-fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block)
+fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, fz_stext_options *options)
 {
-	int w = block->bbox.x1 - block->bbox.x0;
-	int h = block->bbox.y1 - block->bbox.y0;
+	float w = block->bbox.x1 - block->bbox.x0;
+	float h = block->bbox.y1 - block->bbox.y0;
 
-	fz_write_printf(ctx, out, "<p><img width=\"%d\" height=\"%d\" src=\"", w, h);
-	fz_write_image_as_data_uri(ctx, out, block->u.i.image);
+	fz_write_printf(ctx, out, "<p><img width=\"%g\" height=\"%g\" data-mediabox=\"%R\" src=\"", w, h, &block->bbox);
+	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
+	{
+		// TBD
+		fz_write_string(ctx, out, "IMAGE_URL_TODO");
+	}
+	else
+	{
+		fz_write_image_as_data_uri(ctx, out, block->u.i.image);
+	}
 	fz_write_string(ctx, out, "\"/></p>\n");
 }
 
@@ -328,7 +344,7 @@ static void fz_print_stext_block_as_xhtml(fz_context *ctx, fz_output *out, fz_st
 }
 
 void
-fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
+fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, fz_stext_options *options)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
@@ -341,8 +357,8 @@ fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *pag
 
 	for (block = page->first_block; block; block = block->next)
 	{
-		if (block->type == FZ_STEXT_BLOCK_IMAGE)
-			fz_print_stext_image_as_xhtml(ctx, out, block);
+		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
+			fz_print_stext_image_as_xhtml(ctx, out, block, options);
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
 			fz_print_stext_block_as_xhtml(ctx, out, block);
 	}
@@ -633,10 +649,10 @@ text_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 			fz_print_stext_page_as_text(ctx, wri->out, wri->page);
 			break;
 		case FZ_FORMAT_HTML:
-			fz_print_stext_page_as_html(ctx, wri->out, wri->page, wri->number, fz_identity);
+			fz_print_stext_page_as_html(ctx, wri->out, wri->page, wri->number, fz_identity, &wri->opts);
 			break;
 		case FZ_FORMAT_XHTML:
-			fz_print_stext_page_as_xhtml(ctx, wri->out, wri->page, wri->number, fz_identity);
+			fz_print_stext_page_as_xhtml(ctx, wri->out, wri->page, wri->number, fz_identity, &wri->opts);
 			break;
 		case FZ_FORMAT_STEXT_XML:
 			fz_print_stext_page_as_xml(ctx, wri->out, wri->page, wri->number, fz_identity);

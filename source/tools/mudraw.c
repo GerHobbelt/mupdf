@@ -901,11 +901,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 			{
-				fz_print_stext_page_as_html(ctx, out, text, pagenum, ctm);
+				fz_print_stext_page_as_html(ctx, out, text, pagenum, ctm, &page_stext_options);
 			}
 			else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 			{
-				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum, ctm);
+				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum, ctm, &page_stext_options);
 			}
 			else if (output_format == OUT_TEXT || output_format == OUT_OCR_TEXT)
 			{

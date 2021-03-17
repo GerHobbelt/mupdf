@@ -833,7 +833,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 			else if (fz_document_output_intent(app->ctx, app->doc))
 			{
 				/* We have an output intent. Force the overprint
-				 *simulation on, because this ensures that
+				 * simulation on, because this ensures that
 				 * we 'simulate' the output intent too. */
 				app->seps = fz_new_separations(app->ctx, 0);
 			}
