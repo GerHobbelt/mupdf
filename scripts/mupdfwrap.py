@@ -380,6 +380,10 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
+        --py-package-bdist_wheel
+            Checks we can create a wheel, and checks it is ok with
+            check-wheel-contents.
+
         --py-package-create
             Creates Python sdist in dist/
 
@@ -6541,6 +6545,17 @@ def main():
             elif arg == '--dir-so' or arg == '-d':
                 d = args.next()
                 build_dirs.set_dir_so( d)
+
+            elif arg == '--py-package-bdist_wheel':
+                command = ('true'
+                        f' && python3 -m venv pylocal'
+                        f' && . pylocal/bin/activate'
+                        f' && pip install clang check-wheel-contents'
+                        f' && (rm -r dist_bdist_wheel || true)'
+                        f' && ./setup.py -d dist_bdist_wheel bdist_wheel --mupdf-build 0'
+                        f' && check-wheel-contents dist_bdist_wheel/*'
+                        )
+                jlib.system(command, verbose=1)
 
             elif arg == '--py-package-create':
                 py_package_create( build_dirs)
