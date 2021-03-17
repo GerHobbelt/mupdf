@@ -315,9 +315,9 @@ def run(
 
         with zipfile.ZipFile(path, 'w') as z:
 
-            record_text = ['']
+            record = ['']
 
-            def record_update_str(content, to_):
+            def record_update(content, to_):
                 if isinstance(content, str):
                     content = content.encode('latin1')
                 h = hashlib.sha256(content)
@@ -325,18 +325,22 @@ def run(
                 log(f'digest={digest}')
                 digest2 = base64.urlsafe_b64encode(digest)
                 log(f'digest2={digest2}')
-                record_text[0] += f'{to_},sha256={digest2},{len(content)}\n'
+                record[0] += f'{to_},sha256={digest2},{len(content)}\n'
 
-            def record_update(from_, to_):
+            def add_file(from_, to_):
+                z.write(from_, to_)
                 with open(from_, 'rb') as f:
                     content = f.read()
-                record_update_str(content, to_)
+                record_update(content, to_)
+
+            def add_str(content, to_):
+                z.writestr(to_, content)
+                record_update(content, to_)
 
             for item in pys + sos + datas:
                 from_, to_ = fromto(item)
                 to_ = f'{name}/{to_}'
-                z.write(from_, to_)
-                record_update( from_, to_)
+                add_file(from_, to_)
 
             d = f'{name}-{version}.dist-info'
             content = (''
@@ -345,26 +349,19 @@ def run(
                     + 'Root-Is-Purelib: false\n'
                     + 'Tag: py3-none-any\n'
                     )
-            to_ = f'{d}/WHEEL'
-            z.writestr(to_, content)
-            record_update_str(content, to_)
+            add_str(content, f'{d}/WHEEL')
 
-            content = metainfo()
-            to_ = f'{d}/METADATA'
-            z.writestr(to_, content)
-            record_update_str(content, to_)
+            add_str(metainfo(), f'{d}/METADATA')
 
             if license_files:
                 if isinstance(license_files, str):
                     license_files = license_files,
                 for l in license_files:
                     from_, to_ = fromto(l)
-                    to_ = f'{d}/{to_}'
-                    z.writestr(from_, to_)
-                    record_update(from_, to_)
+                    add_file(from_, f'{d}/{to_}')
 
-            log(f'RECORD is:\n{record_text[0]}')
-            z.writestr(f'{d}/RECORD', record_text[0])
+            log(f'RECORD is:\n{record[0]}')
+            z.writestr(f'{d}/RECORD', record[0])
 
     elif command == 'clean':
         if fn_clean:
