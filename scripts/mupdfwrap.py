@@ -6115,7 +6115,7 @@ def py_package_createinstall(build_dirs):
             + f' && python3 -m venv pylocal-createinstall'
             + f' && . pylocal-createinstall/bin/activate'
             + f' && pip install clang wheel'
-            + f' && pip {"-vvv"*1} install {mupdf_sdist}'
+            + f' && MUPDF_SETUP_BUILDFROM={build_dirs.dir_mupdf}/build/shared-release pip {"-vvv"*1} install {mupdf_sdist}'
             + f' && python scripts/mupdfwrap_test.py'
             + f' && deactivate'
             ,

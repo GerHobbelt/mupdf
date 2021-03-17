@@ -302,6 +302,8 @@ def run(
         # zipped .whl below but pip doesn't like it.
         #
         #raise Exception(f'bdist_wheel not implemented')
+        assert 0, 'deliberate failure for bdist_wheel'
+
         if opt_d is None:
             opt_d = 'dist'
         os.makedirs(opt_d, exist_ok=True)
@@ -315,17 +317,16 @@ def run(
 
         with zipfile.ZipFile(path, 'w') as z:
 
+            # We update record[0] each time we add an item to the zip file.
+            #
             record = ['']
-
             def record_update(content, to_):
                 if isinstance(content, str):
                     content = content.encode('latin1')
                 h = hashlib.sha256(content)
                 digest = h.digest()
-                log(f'digest={digest}')
-                digest2 = base64.urlsafe_b64encode(digest)
-                log(f'digest2={digest2}')
-                record[0] += f'{to_},sha256={digest2},{len(content)}\n'
+                digest = base64.urlsafe_b64encode(digest)
+                record[0] += f'{to_},sha256={digest},{len(content)}\n'
 
             def add_file(from_, to_):
                 z.write(from_, to_)
@@ -337,11 +338,15 @@ def run(
                 z.writestr(to_, content)
                 record_update(content, to_)
 
+            # Add the files returned by fn_build().
+            #
             for item in pys + sos + datas:
                 from_, to_ = fromto(item)
                 to_ = f'{name}/{to_}'
                 add_file(from_, to_)
 
+            # Add ...dist-info/*.
+            #
             d = f'{name}-{version}.dist-info'
             content = (''
                     + 'Wheel-Version: 1.0\n'
@@ -350,9 +355,10 @@ def run(
                     + 'Tag: py3-none-any\n'
                     )
             add_str(content, f'{d}/WHEEL')
-
             add_str(metainfo(), f'{d}/METADATA')
 
+            # Add license files.
+            #
             if license_files:
                 if isinstance(license_files, str):
                     license_files = license_files,
@@ -360,7 +366,9 @@ def run(
                     from_, to_ = fromto(l)
                     add_file(from_, f'{d}/{to_}')
 
-            log(f'RECORD is:\n{record[0]}')
+            # Update ...dist-info/RECORD. This must be last.
+            #
+            #log(f'RECORD is:\n{record[0]}')
             z.writestr(f'{d}/RECORD', record[0])
 
     elif command == 'clean':

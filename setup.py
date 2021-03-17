@@ -68,7 +68,7 @@ class Args:
                 raise Exception('Not enough args')
             return eof
 
-mupdf_do_build = '1'
+mupdf_do_build = None
 
 i = 1
 while 1:
@@ -81,18 +81,43 @@ while 1:
         i += 1
 
 def sdist():
-    return pipcl.git_items( '.', submodules=True)
+    # If we are a git checkout, return all files known to git. Otherwise return
+    # all files outside of build/.
+    #
+    if os.path.exists('.git'):
+        return pipcl.git_items( '.', submodules=True)
+    log(f'No .git so including all files apart from build/.')
+    ret = []
+    for dirpath, dirnames, filenames in os.walk('.'):
+        if dirpath.startswith('./build'):
+            continue
+        for filename in filenames:
+            path = os.path.join(dirpath, filename)
+            ret.append(path)
+    return ret
 
 def build():
+    global mupdf_do_build
+    if mupdf_do_build is None:
+        mupdf_do_build = os.environ.get('MUPDF_SETUP_BUILDFROM')
+
+    if mupdf_do_build is None:
+        mupdf_do_build = '1'
+
     if mupdf_do_build == 'fake':
-        command = 'true'
-        for name in names:
-            command += ( ' && rsync -ai'
-                    + f' /home/jules/artifex/mupdf/build/shared-release/{name}'
-                    + f' {mupdf_dir}/{build_dir}/{name}'
-                    )
-    elif mupdf_do_build == '1':
+        mupdf_do_build = '/home/jules/artifex/mupdf/build/shared-release'
+
+    if mupdf_do_build == '1':
         command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+    elif mupdf_do_build:
+        log(f'Building by copying files from {mupdf_do_build} into {build_dir}/')
+        command = (
+                f'echo "building by copying from {mupdf_do_build}"'
+                f' && pwd'
+                f' && mkdir -p {build_dir}'
+                )
+        for n in out_names:
+            command += f' && rsync -ai {mupdf_do_build}/{n} {build_dir}/'
     else:
         command = None
 
