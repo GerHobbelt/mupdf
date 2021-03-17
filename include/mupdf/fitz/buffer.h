@@ -164,7 +164,7 @@ void fz_append_pdf_string(fz_context *ctx, fz_buffer *buffer, const char *text);
 
 	The buffer will automatically grow as required.
 */
-void fz_append_printf(fz_context *ctx, fz_buffer *buffer, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(3, 4);
+void fz_append_printf(fz_context *ctx, fz_buffer *buffer, const char* fmt, ...);
 
 /**
 	fz_append_vprintf: Format and append data to buffer using
