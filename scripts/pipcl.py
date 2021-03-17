@@ -302,7 +302,7 @@ def run(
         # zipped .whl below but pip doesn't like it.
         #
         #raise Exception(f'bdist_wheel not implemented')
-        assert 0, 'deliberate failure for bdist_wheel'
+        #assert 0, 'deliberate failure for bdist_wheel'
 
         if opt_d is None:
             opt_d = 'dist'
@@ -342,7 +342,6 @@ def run(
             #
             for item in pys + sos + datas:
                 from_, to_ = fromto(item)
-                to_ = f'{name}/{to_}'
                 add_file(from_, to_)
 
             # Add ...dist-info/*.
