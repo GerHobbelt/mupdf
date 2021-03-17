@@ -47,23 +47,60 @@ out_names = [
 
 build_dir = 'build/shared-release'
 
+class ArgsRaise:
+    pass
+
+class Args:
+    '''
+    Iterates over argv items.
+    '''
+    def __init__( self, argv):
+        self.items = iter( argv)
+    def next( self, eof=ArgsRaise):
+        '''
+        Returns next arg. If no more args, we return eof or raise an exception
+        if eof == ArgsRaise.
+        '''
+        try:
+            return next( self.items)
+        except StopIteration:
+            if eof == ArgsRaise:
+                raise Exception('Not enough args')
+            return eof
+
+mupdf_do_build = '1'
+
+i = 1
+while 1:
+    if i == len(sys.argv):
+        break
+    if sys.argv[i] == '--mupdf-build':
+        mupdf_do_build = sys.argv[i+1]
+        del sys.argv[i:i+2]
+    else:
+        i += 1
+
 def sdist():
     return pipcl.git_items( '.', submodules=True)
 
 def build():
-    if 0:
-        # Fake build.
+    if mupdf_do_build == 'fake':
         command = 'true'
         for name in names:
             command += ( ' && rsync -ai'
                     + f' /home/jules/artifex/mupdf/build/shared-release/{name}'
                     + f' {mupdf_dir}/{build_dir}/{name}'
                     )
-    else:
+    elif mupdf_do_build == '1':
         command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+    else:
+        command = None
 
-    log(f'Building mupdf C, C++ and Python libraries with: {command}')
-    subprocess.check_call(command, shell=True)
+    if command:
+        log(f'Building mupdf C, C++ and Python libraries with: {command}')
+        subprocess.check_call(command, shell=True)
+    else:
+        log(f'Not building mupdf because mupdf_do_build={mupdf_do_build}')
 
     pys = []
     sos = []
@@ -76,7 +113,9 @@ def build():
             sos.append( (path, name))
         else:
             datas.append( (path, name))
-    return pys, sos, datas
+    ret = pys, sos, datas
+    log(f'returning pys={pys} sos={sos} datas={datas}')
+    return ret
 
 pipcl.run(
         argv = sys.argv,
@@ -101,4 +140,5 @@ pipcl.run(
         fn_clean = None,
         fn_sdist = sdist,
         fn_build = build,
+        license_files = 'COPYING',
         )
