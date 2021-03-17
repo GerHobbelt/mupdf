@@ -2,6 +2,8 @@
 Support for implementing a setup.py package script.
 '''
 
+import base64
+import hashlib
 import io
 import os
 import shutil
@@ -9,6 +11,7 @@ import site
 import subprocess
 import sys
 import tarfile
+import zipfile
 
 
 def log(text=''):
@@ -64,6 +67,7 @@ def run(
         fn_clean = None,
         fn_sdist = None,
         fn_build = None,
+        license_files = None,
         ):
     '''
     Handles command-line argv passed to setup.py.
@@ -136,6 +140,8 @@ def run(
                 wibble.py
                 _wibble.so
                 data/data.txt
+    license_files
+        Either string name of license file or list of names of license files.
     '''
 
     class ArgsRaise:
@@ -147,8 +153,6 @@ def run(
         '''
         def __init__( self, argv):
             self.items = iter( argv)
-        class Raise:
-            pass
         def next( self, eof=ArgsRaise):
             '''
             Returns next arg. If no more args, we return eof or raise an exception
@@ -212,7 +216,7 @@ def run(
         if arg is None:
             break
 
-        elif arg in ('clean','egg_info', 'install', 'sdist'):
+        elif arg in ('bdist_wheel', 'clean', 'egg_info', 'install', 'sdist'):
             assert command is None, 'Two commands specified: {command} and {arg}.'
             command = arg
 
@@ -280,9 +284,87 @@ def run(
     if not command:
         return
 
+    def fromto(p):
+        if isinstance(p, str):
+            return p, p
+        elif len(p) == 2:
+            from_, to_ = p
+            if isinstance(from_, str) and isinstance(to_, str):
+                return from_, to_
+        assert 0, 'p should be str or (str, str), but is: {p}'
+
     log(f'Handling command={command}')
     if 0:
         pass
+
+    elif command == 'bdist_wheel':
+        # Can't figure out how bdist_wheel is supposed to work. We can create a
+        # zipped .whl below but pip doesn't like it.
+        #
+        #raise Exception(f'bdist_wheel not implemented')
+        if opt_d is None:
+            opt_d = 'dist'
+        os.makedirs(opt_d, exist_ok=True)
+
+        psy = sos = datas = []
+        if fn_build:
+            pys, sos, datas = fn_build()
+
+        path = f'{opt_d}/{name}-{version}-py3-none-any.whl'
+        log(f'creating wheel/zip: {path}')
+
+        with zipfile.ZipFile(path, 'w') as z:
+
+            record_text = ['']
+
+            def record_update_str(content, to_):
+                if isinstance(content, str):
+                    content = content.encode('latin1')
+                h = hashlib.sha256(content)
+                digest = h.digest()
+                log(f'digest={digest}')
+                digest2 = base64.urlsafe_b64encode(digest)
+                log(f'digest2={digest2}')
+                record_text[0] += f'{to_},sha256={digest2},{len(content)}\n'
+
+            def record_update(from_, to_):
+                with open(from_, 'rb') as f:
+                    content = f.read()
+                record_update_str(content, to_)
+
+            for item in pys + sos + datas:
+                from_, to_ = fromto(item)
+                to_ = f'{name}/{to_}'
+                z.write(from_, to_)
+                record_update( from_, to_)
+
+            d = f'{name}-{version}.dist-info'
+            content = (''
+                    + 'Wheel-Version: 1.0\n'
+                    + 'Generator: bdist_wheel\n'
+                    + 'Root-Is-Purelib: false\n'
+                    + 'Tag: py3-none-any\n'
+                    )
+            to_ = f'{d}/WHEEL'
+            z.writestr(to_, content)
+            record_update_str(content, to_)
+
+            content = metainfo()
+            to_ = f'{d}/METADATA'
+            z.writestr(to_, content)
+            record_update_str(content, to_)
+
+            if license_files:
+                if isinstance(license_files, str):
+                    license_files = license_files,
+                for l in license_files:
+                    from_, to_ = fromto(l)
+                    to_ = f'{d}/{to_}'
+                    z.writestr(from_, to_)
+                    record_update(from_, to_)
+
+            log(f'RECORD is:\n{record_text[0]}')
+            z.writestr(f'{d}/RECORD', record_text[0])
 
     elif command == 'clean':
         if fn_clean:
@@ -316,11 +398,7 @@ def run(
         try:
             # For now, we copy everything into .../site-packages/.
             for item in pys + sos + datas:
-                if isinstance(item, str):
-                    from_ = item
-                    to_ = item
-                else:
-                    from_, to_ = item
+                from_, to_ = fromto(item)
                 to_path = f'{sitepackages}/{to_}'
                 log( f'Copying {from_} to {to_path}')
                 shutil.copy2( from_, f'{to_path}')
