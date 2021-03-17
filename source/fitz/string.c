@@ -223,12 +223,26 @@ static const char *check_percent_d(const char* s)
 	return NULL;
 }
 
+static const char* check_percent_d_alternative(const char* s)
+{
+	/* find '####', which represents %04d */
+	if (*s++ == '#')
+	{
+		while (*s == '#')
+			++s;
+		return s;
+	}
+	return NULL;
+}
+
 int fz_has_percent_d(const char* s)
 {
 	/* find '%[+-][ ][0-9]*[.][0-9]*d', e.g. %04d or %+4.0d */
 	while (*s)
 	{
 		if (check_percent_d(s))
+			return 1;
+		if (check_percent_d_alternative(s))
 			return 1;
 		++s;
 	}
@@ -253,7 +267,7 @@ const char* fz_path_basename(const char* path)
 void
 fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *format, int page)
 {
-	const char* s, *p;
+	const char* s, *p, *q;
 	char* fmt = fz_strdup(ctx, format);
 	size_t w = size;
 	char* d = path;
@@ -263,6 +277,15 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 	while (w > 0)
 	{
 		p = strchr(s, '%');
+		q = strchr(s, '#');
+		// when both are found, the first one wins... this round, at least.
+		if (p && q)
+		{
+			if (p > q)
+				p = NULL;
+			else
+				q = NULL;
+		}
 		if (p)
 		{
 			char* p2 = (char*)check_percent_d(p);
@@ -311,8 +334,38 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 
 				s = p;
 			}
+			continue;
 		}
-		else
+
+		if (q)
+		{
+			const char* q2 = check_percent_d_alternative(q);
+
+			// copy the chunk that precedes the first #:
+			size_t l = q - s;
+			if (l >= w)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+			if (l > 0)
+				memcpy(d, s, l);
+			w -= l;
+			d += l;
+
+			// bingo: workable/legal #### particle:
+			l = q2 - q;
+			char fmt[10];
+			fz_snprintf(fmt, sizeof(fmt), "%%0%zud", l);
+			l = fz_snprintf(d, w, fmt, page);
+			if (l >= w)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+			w -= l;
+			d += l;
+
+			s = q2;
+
+			done = 1;
+			continue;
+		}
+
 		{
 			// no more %, copy end chunk verbatim, including NUL sentinel
 			//
