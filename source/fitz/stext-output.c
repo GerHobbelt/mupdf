@@ -162,7 +162,7 @@ fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page
 	float w = mediabox.x1 - mediabox.x0;
 	float h = mediabox.y1 - mediabox.y0;
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%g\" height=\"%g\" style=\"position:relative;background-color:white;\" data-mediabox=\"%R\">\n", 
+	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%gpt;height:%gpt;background-color:white;\" data-mediabox=\"%R\">\n", 
 		id, 
 		w, h, 
 		&page->mediabox);
@@ -207,7 +207,7 @@ fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *b
 	float w = block->bbox.x1 - block->bbox.x0;
 	float h = block->bbox.y1 - block->bbox.y0;
 
-	fz_write_printf(ctx, out, "<p><img width=\"%g\" height=\"%g\" data-mediabox=\"%R\" src=\"", w, h, &block->bbox);
+	fz_write_printf(ctx, out, "<p><img width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\" src=\"", w, h, &block->bbox);
 	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
 	{
 		// TBD
@@ -349,7 +349,7 @@ fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *pag
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%g\" height=\"%g\" data-mediabox=\"%R\">\n", 
+	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\">\n", 
 		id,
 		mediabox.x1 - mediabox.x0,
 		mediabox.y1 - mediabox.y0,
