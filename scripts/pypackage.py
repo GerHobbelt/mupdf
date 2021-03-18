@@ -84,7 +84,7 @@ def make_manylinux():
                 # f'pip wheel /io/{os.path.basename(sdist)}\n'
 
                 f'true'
-                    #' && (rm -r mupdf || true)'
+                    ' && (rm -r mupdf || true)'
                     ' && mkdir -p mupdf'
                     ' && cd mupdf'
                     ' && tar -xzf /io/*.tar.gz'
