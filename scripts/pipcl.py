@@ -280,11 +280,6 @@ def run(
         pass
 
     elif command == 'bdist_wheel':
-        # Can't figure out how bdist_wheel is supposed to work. We can create a
-        # zipped .whl below but pip doesn't like it.
-        #
-        #raise Exception(f'bdist_wheel not implemented')
-        #assert 0, 'deliberate failure for bdist_wheel'
 
         os.makedirs(opt_dist_dir, exist_ok=True)
 
@@ -295,6 +290,7 @@ def run(
         path = f'{opt_dist_dir}/{name}-{version}-py3-none-any.whl'
         log(f'creating wheel/zip: {path}')
 
+        record = Record()
         with zipfile.ZipFile(path, 'w') as z:
 
             def add_file(from_, to_):
@@ -399,6 +395,10 @@ def run(
                 if os.path.abspath(path).startswith(f'{os.path.abspath(opt_dist_dir)}/'):
                     # Ignore files inside <opt_dist_dir>, to save fn_sdist()
                     # from worrying about this.
+                    continue
+                if not os.path.exists(path):
+                    # This appears to happen for sub-submodules.
+                    log(f'Ignoring non-existant path: {path}')
                     continue
                 #log(f'path={path}')
                 tar.add( path, path, recursive=False)
