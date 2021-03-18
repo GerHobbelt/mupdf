@@ -13,6 +13,7 @@
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
+#include "mupdf/helpers/cpu.h"
 #endif
 
 #include "../fitz/tessocr.h"
@@ -309,7 +310,7 @@ static int output_file_per_page = 0;
 static const char *format = NULL;
 static int output_format = OUT_NONE;
 
-static float rotation = 0;
+static int rotation = -1;
 static float resolution = 72;
 static int res_specified = 0;
 static int width = 0;
@@ -407,7 +408,7 @@ static int usage(void)
 		"Usage: mudraw [options] file [pages]\n"
 		"  -p -  password\n"
 		"\n"
-		"  -o -  output file name (%%d for page number, '-' for stdout)\n"
+		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
 		"    raster: png, pnm, pam, pbm, pkm, pwg, pcl, ps\n"
 		"    vector: svg, pdf, trace, ocr.trace\n"
@@ -426,12 +427,13 @@ static int usage(void)
 		"    f - show page features\n"
 		"    5 - show md5 checksum of rendered image\n"
 		"\n"
-		"  -R -  rotate clockwise (default: 0 degrees)\n"
+		"  -R {auto,0,90,180,270}\n"
+		"        rotate clockwise (default: auto)\n"
 		"  -r -  resolution in dpi (default: 72)\n"
-		"  -w -  width (in pixels) (maximum width if -r is specified)\n"
-		"  -h -  height (in pixels) (maximum height if -r is specified)\n"
-		"  -f -  fit width and/or height exactly; ignore original aspect ratio\n"
-		"  -B -  maximum band_height (pXm, pcl, pclm, ocr.pdf, ps, psd and png output\n"
+		"  -w -  page width (in pixels) (maximum width if -r is specified)\n"
+		"  -h -  page height (in pixels) (maximum height if -r is specified)\n"
+		"  -f    fit file to page if too large\n"
+		"  -B -  maximum band height (pXm, pcl, pclm, ocr.pdf, ps, psd and png output\n"
 		"        only)\n"
 #ifndef DISABLE_MUTHREADS
 		"  -T -  number of threads to use for rendering (banded mode only)\n"
@@ -629,6 +631,112 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 	}
 }
 
+static void calc_page_render_details(fz_context* ctx, fz_page* page, fz_rect mediabox)
+{
+	/* MuPDF measures in points (72ths of an inch). */
+
+	// has rotation been configured for auto-detect?
+	// if so, quickest approach is to pick maximum resolution for rotation=0 or rotation=90
+	float best_res = resolution;
+	float best_res_override = resolution;
+	int best_rot = rotation;
+	int rotations[2] = { rotation, 90 };
+	int n = 1;
+	if (rotation == -1)
+	{
+		n = 2;
+		rotations[0] = 0;
+		best_rot = 0;
+	}
+
+	// when dpi has been set to zero, recalculate it below.
+
+	if (resolution <= 0)
+	{
+		best_res = 0;
+		best_res_override = 0;
+
+		if (width > 0 || height > 0)
+		{
+			// when the page is width/height constrained, calculate the maximum potential resolution for the given constraints:
+			float pb = fz_min(mediabox.x1 - mediabox.x0, mediabox.y1 - mediabox.y0);
+			float uq = fz_max(width, height);
+			resolution = 2.0 * 72 * uq / pb;  // overestimate dpi by a factor of 2
+		}
+		else
+		{
+			// no constraints known, no resolution specified, hence assume default
+			resolution = 72;
+		}
+	}
+
+	if (width > 0 || height > 0)
+	{
+		// width and/or height have been specified: REDUCE resolution to fit?
+		best_res = 0;
+		best_res_override = 0;
+	}
+	else
+	{
+		// no width/height constraints have been specified.
+		//
+		// hence only tweak the rotation, when that one was set to 'auto'
+		if (n == 2)
+			best_res = 0;
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		float zoom = resolution / 72;
+		fz_matrix ctm = fz_pre_scale(fz_rotate(rotations[i]), zoom, zoom);
+
+		fz_rect tbounds = fz_transform_rect(mediabox, ctm);
+		fz_irect ibounds = fz_round_rect(tbounds);
+
+		/* Make local copies of our width/height */
+		int w = (width > 0 ? width : ibounds.x1 - ibounds.x0);
+		int h = (height > 0 ? height : ibounds.y1 - ibounds.y0);
+
+		float scalex = w / (float)(ibounds.x1 - ibounds.x0);
+		float scaley = h / (float)(ibounds.y1 - ibounds.y0);
+		fz_matrix scale_mat;
+
+		// get the largest scaling factor which still allows page to fit within the w/h constraints
+		if (scalex > scaley)
+			scalex = scaley;
+
+		// might NOT want to scale UP to fit snuggly within the constraints
+		if (!fit)
+			scalex = fz_min(1.0f, scalex);
+		scaley = scalex;
+
+		scale_mat = fz_scale(scalex, scaley);
+		ctm = fz_concat(ctm, scale_mat);
+		tbounds = fz_transform_rect(mediabox, ctm);
+		ibounds = fz_round_rect(tbounds);
+
+		// reconstruct dpi from these numbers:
+		fz_matrix ctm2 = fz_pre_scale(fz_rotate(rotations[i]), 1.0f, 1.0f);
+
+		fz_rect tbounds2 = fz_transform_rect(mediabox, ctm2);
+		fz_irect ibounds2 = fz_round_rect(tbounds2);
+
+		float res = max(72 * (ibounds.x1 - ibounds.x0) / (float)(ibounds2.x1 - ibounds2.x0), 72 * (ibounds.y1 - ibounds.y0) / (float)(ibounds2.y1 - ibounds2.y0));
+		// round resolution down to nearest int:
+		res = (int)res;
+		if (best_res < res)
+		{
+			best_res = res;
+			best_rot = rotations[i];
+		}
+	}
+
+	rotation = best_rot;
+	if (best_res_override > best_res)
+		best_res = best_res_override;
+	resolution = best_res;
+}
+
 static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, const char *fname, int bg, fz_separations *seps)
 {
 	fz_rect mediabox;
@@ -644,89 +752,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	else
 		mediabox = fz_bound_page(ctx, page);
 
-	/* MuPDF measures in points (72ths of an inch). */
-
-	// when dpi has been set to zero, recalculate it below.
-	if (res_specified && resolution <= 0 && (width || height))
-	{
-		// Here we simply make sure the recalc happens by setting it to a large value initially.
-		{
-			float pb = max(mediabox.x1 - mediabox.x0, mediabox.y1 - mediabox.y0);
-			float uq = max(width, height);
-			resolution = 2.0 * 72 * uq / pb;  // overestimate dpi by a factor of 2
-		}
-
-		{
-			float zoom;
-			fz_matrix ctm;
-			fz_rect tbounds;
-			fz_irect ibounds;
-			int w, h;
-
-			zoom = resolution / 72;
-			ctm = fz_pre_scale(fz_rotate(rotation), zoom, zoom);
-
-			tbounds = fz_transform_rect(mediabox, ctm);
-			ibounds = fz_round_rect(tbounds);
-
-			/* Make local copies of our width/height */
-			w = width;
-			h = height;
-
-			/* If a resolution is specified, check to see whether w/h are
-			 * exceeded; if not, unset them. */
-			{
-				int t;
-				t = ibounds.x1 - ibounds.x0;
-				if (w && t <= w)
-					w = 0;
-				t = ibounds.y1 - ibounds.y0;
-				if (h && t <= h)
-					h = 0;
-			}
-
-			/* Now w or h will be 0 unless they need to be enforced. */
-			{
-				float scalex = w / (tbounds.x1 - tbounds.x0);
-				float scaley = h / (tbounds.y1 - tbounds.y0);
-				fz_matrix scale_mat;
-
-				if (fit)
-				{
-					if (w == 0)
-						scalex = 1.0f;
-					if (h == 0)
-						scaley = 1.0f;
-				}
-				else
-				{
-					if (w == 0)
-						scalex = scaley;
-					if (h == 0)
-						scaley = scalex;
-				}
-				if (!fit)
-				{
-					if (scalex > scaley)
-						scalex = scaley;
-					else
-						scaley = scalex;
-				}
-				scale_mat = fz_scale(scalex, scaley);
-				ctm = fz_concat(ctm, scale_mat);
-				tbounds = fz_transform_rect(mediabox, ctm);
-			}
-			ibounds = fz_round_rect(tbounds);
-			tbounds = fz_rect_from_irect(ibounds);
-
-			// reconstruct dpi from these numbers:
-			float mbw = mediabox.x1 - mediabox.x0;
-			float mbh = mediabox.y1 - mediabox.y0;
-			w = width;
-			h = height;
-			resolution = max(w / mbw * 72, h / mbh * 72);
-		}
-	}
+	/* Calculate Page resolution & rotation */
+	calc_page_render_details(ctx, page, mediabox);
 
 	if (output_format == OUT_TRACE || output_format == OUT_OCR_TRACE)
 	{
@@ -1043,7 +1070,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				drawheight = band_height;
 				if (totalheight > band_height)
 					band_ibounds.y1 = band_ibounds.y0 + band_height;
-				bands = (totalheight + band_height-1)/band_height;
+				bands = (totalheight + band_height - 1) / band_height;
 				tbounds.y1 = tbounds.y0 + band_height + 2;
 				DEBUG_THREADS(fz_info(ctx, "Using %d Bands\n", bands));
 			}
@@ -1241,6 +1268,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				timing.maxpage = pagenum;
 				timing.maxfilename = fname;
 			}
+			timing.total += diff + interptime;
 			timing.count ++;
 
 			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
@@ -1936,15 +1964,36 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 	fz_save_accelerator(ctx, doc, absname);
 }
 
+static int
+read_rotation(const char *arg)
+{
+	int i;
+
+	if (strcmp(arg, "auto"))
+	{
+		return -1;
+	}
+
+	i = fz_atoi(arg);
+
+	i = i % 360;
+	if (i % 90 != 0)
+	{
+		fz_error(ctx, "Ignoring invalid rotation");
+		i = 0;
+	}
+
+	return i;
+}
+
 static void mu_drop_context(void)
 {
 	if (mudraw_is_toplevel_ctx)
 	{
 		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
 		{
-            char buf[200];
-			fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu\nAllocations total=%zu\n", trace_info.total, trace_info.peak, trace_info.current, trace_info.allocs);
-			fz_info(ctx, "%s", buf);
+			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 
 			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
 			memset(&trace_info, 0, sizeof(trace_info));
@@ -2003,7 +2052,7 @@ int mudraw_main(int argc, const char **argv)
 	format = NULL;
 	output_format = OUT_NONE;
 
-	rotation = 0;
+	rotation = -1;
 	resolution = 72;
 	res_specified = 0;
 	width = 0;
@@ -2072,11 +2121,7 @@ int mudraw_main(int argc, const char **argv)
 	// ---
 
 	bgprint.active = 0;			/* set by -P */
-#if defined(DISABLE_MUTHREADS)
 	num_workers = 0;
-#else
-	num_workers = 3;
-#endif
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:h")) != -1)
@@ -2092,7 +2137,7 @@ int mudraw_main(int argc, const char **argv)
 		case 'o': output = fz_optarg; break;
 		case 'F': format = fz_optarg; break;
 
-		case 'R': rotation = fz_atof(fz_optarg); break;
+		case 'R': rotation = read_rotation(fz_optarg); break;
 		case 'r': resolution = fz_atof(fz_optarg); res_specified = 1; break;
 		case 'w': width = fz_atof(fz_optarg); break;
 		case 'h': height = fz_atof(fz_optarg); break;
@@ -2162,7 +2207,10 @@ int mudraw_main(int argc, const char **argv)
 		case 'L': lowmemory = 1; break;
 		case 'P':
 #ifndef DISABLE_MUTHREADS
-			bgprint.active = 1; break;
+			bgprint.active = 1;
+			if (!num_workers)
+				num_workers = max(3, fz_get_cpu_core_count());
+			break;
 #else
 			fz_warn(ctx, "Threads not enabled in this build");
 			break;
@@ -2189,9 +2237,10 @@ int mudraw_main(int argc, const char **argv)
 			num_workers = 0;
 		}
 
-		if (band_height == 0)
+		if (band_height == 0 && num_workers > 0)
 		{
-			fz_error(ctx, "Using multiple threads without banding is pointless");
+			band_height = fz_maxi(16, 11 * fz_maxi(72, resolution) / (2 * num_workers));
+			fz_error(ctx, "Using multiple threads without banding is pointless. Using a band height of %d and %d workers.", band_height, num_workers);
 		}
 	}
 
@@ -2530,47 +2579,47 @@ int mudraw_main(int argc, const char **argv)
 		}
 		else
 #endif
-			if (output_format == OUT_SVG)
-			{
-				/* SVG files are always opened for each page. Do not open "output". */
-			}
-			else if (output && (output[0] != '-' || output[1] != 0) && *output != 0)
-			{
-				if (fz_has_percent_d(output))
-					output_file_per_page = 1;
-				else
-					out = fz_new_output_with_path(ctx, output, 0);
-			}
+		if (output_format == OUT_SVG)
+		{
+			/* SVG files are always opened for each page. Do not open "output". */
+		}
+		else if (output && strcmp(output, "-") != 0 && *output != 0)
+		{
+			if (fz_has_percent_d(output))
+				output_file_per_page = 1;
 			else
-			{
-				// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
+				out = fz_new_output_with_path(ctx, output, 0);
+		}
+		else
+		{
+			// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
 #if 0
-				quiet = 1; /* automatically be quiet if printing to stdout */
-				fz_default_error_warn_info_mode(1, 1, 1);
+			quiet = 1; /* automatically be quiet if printing to stdout */
+			fz_default_error_warn_info_mode(1, 1, 1);
 #endif
 
 #ifdef _WIN32
-				/* Windows specific code to make stdout binary. */
-				if (output_format != OUT_TEXT &&
-					output_format != OUT_STEXT_XML &&
-					output_format != OUT_STEXT_JSON &&
-					output_format != OUT_HTML &&
-					output_format != OUT_XHTML &&
-					output_format != OUT_TRACE &&
-					output_format != OUT_OCR_TRACE &&
-					output_format != OUT_BBOX &&
-					output_format != OUT_OCR_TEXT &&
-					output_format != OUT_OCR_STEXT_XML &&
-					output_format != OUT_OCR_STEXT_JSON &&
-					output_format != OUT_OCR_HTML &&
-					output_format != OUT_OCR_XHTML &&
-					output_format != OUT_XMLTEXT)
-				{
-					setmode(fileno(stdout), O_BINARY);
-				}
-#endif
-				out = fz_stdout(ctx);
+			/* Windows specific code to make stdout binary. */
+			if (output_format != OUT_TEXT &&
+				output_format != OUT_STEXT_XML &&
+				output_format != OUT_STEXT_JSON &&
+				output_format != OUT_HTML &&
+				output_format != OUT_XHTML &&
+				output_format != OUT_TRACE &&
+				output_format != OUT_OCR_TRACE &&
+				output_format != OUT_BBOX &&
+				output_format != OUT_OCR_TEXT &&
+				output_format != OUT_OCR_STEXT_XML &&
+				output_format != OUT_OCR_STEXT_JSON &&
+				output_format != OUT_OCR_HTML &&
+				output_format != OUT_OCR_XHTML &&
+				output_format != OUT_XMLTEXT)
+			{
+				setmode(fileno(stdout), O_BINARY);
 			}
+#endif
+			out = fz_stdout(ctx);
+		}
 
 		// Check if the Tesseract engine can initialize properly when one of the OCR modes is requested.
 		// If it cannot init, report a warning accordingly and fall back to the non-OCR output format:
@@ -2702,7 +2751,7 @@ int mudraw_main(int argc, const char **argv)
 
 					layouttime = gettime();
 					fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
-					(void) fz_count_pages(ctx, doc);
+					(void) fz_count_pages(ctx, doc);   // added to ensure a more proper layouttime figure
 					layouttime = gettime() - layouttime;
 
 					timing.layout += layouttime;

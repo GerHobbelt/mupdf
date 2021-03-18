@@ -238,6 +238,7 @@
 #endif
 
 enum {
+	OUT_NONE,
 	OUT_PNG,
 	OUT_PGM,
 	OUT_PPM,
@@ -380,13 +381,14 @@ static fz_context *ctx = NULL;
 static const char *output = NULL;
 static fz_output *out = NULL;
 
-static const char *format;
-static int output_format;
+static const char *format = NULL;
+static int output_format = OUT_NONE;
 static int output_cs;
 
 static int rotation = -1;
 static float x_resolution;
 static float y_resolution;
+static int res_specified = 0;
 static int width = 0;
 static int height = 0;
 static int fit = 0;
@@ -511,9 +513,9 @@ static int usage(void)
 		"Usage: muraster [options] file [pages]\n"
 		"  -p -  password\n"
 		"\n"
-		"  -o -  output file name\n"
+		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
-		"    pam, pbm, pgm, pkm, ppm\n"
+		"    png, pam, pbm, pgm, pkm, ppm\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
 		"  -s -  show extra information:\n"
@@ -626,7 +628,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 	int remaining_start = ibounds.y0 + start_offset;
 	int remaining_height = ibounds.y1 - remaining_start;
 	int band_height = min_band_height * render->band_height_multiple;
-	int bands = (remaining_height + band_height-1) / band_height;
+	int bands = (remaining_height + band_height - 1) / band_height;
 	fz_matrix ctm = render->ctm;
 	int band;
 
@@ -925,8 +927,8 @@ get_page_render_details(fz_context *ctx, fz_page *page, render_details *render)
 	render->num_workers = num_workers;
 
 	render->bounds = fz_bound_page(ctx, page);
-	page_width = (render->bounds.x1 - render->bounds.x0)/72;
-	page_height = (render->bounds.y1 - render->bounds.y0)/72;
+	page_width = (render->bounds.x1 - render->bounds.x0) / 72;
+	page_height = (render->bounds.y1 - render->bounds.y0) / 72;
 
 	s_x = x_resolution / 72;
 	s_y = y_resolution / 72;
@@ -1051,7 +1053,7 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 		h = render->ibounds.y1 - render->ibounds.y0;
 		num_bands = (h + min_band_height - 1) / min_band_height;
 		/* num_bands = number of min_band_height bands */
-		runs = (num_bands + reps-1) / reps;
+		runs = (num_bands + reps - 1) / reps;
 		/* runs = number of worker runs of reps min_band_height bands */
 		runs = ((runs + render->num_workers - 1) / render->num_workers) * render->num_workers;
 		/* runs = number of worker runs rounded up to make use of all our threads */
@@ -1080,6 +1082,11 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	{
 		render->bander = fz_new_pkm_band_writer(ctx, out);
 		render->n = 4;
+	}
+	else if (output_format == OUT_PNG)
+	{
+		render->bander = fz_new_png_band_writer(ctx, out);
+		render->n = 3;
 	}
 }
 
@@ -1684,6 +1691,7 @@ int muraster_main(int argc, const char *argv[])
 	num_workers = NUM_RENDER_THREADS;
 	x_resolution = X_RESOLUTION;
 	y_resolution = Y_RESOLUTION;
+	res_specified = 0;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPl:Nm:h")) != -1)
@@ -1700,7 +1708,7 @@ int muraster_main(int argc, const char *argv[])
 		case 'F': format = fz_optarg; break;
 
 		case 'R': rotation = read_rotation(fz_optarg); break;
-		case 'r': read_resolution(fz_optarg); break;
+		case 'r': read_resolution(fz_optarg); res_specified = 1; break;
 		case 'w': width = fz_atof(fz_optarg); break;
 		case 'h': height = fz_atof(fz_optarg); break;
 		case 'f': fit = 1; break;
