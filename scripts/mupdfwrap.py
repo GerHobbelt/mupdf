@@ -534,7 +534,8 @@ except Exception as e:
             + f'***     OpenBSD: pkg_add py3-llvm\n'
             + f'***     Linux:debian/devuan: apt install python-clang\n'
             )
-    sys.exit(1)
+    #sys.exit(1)
+    clang = None
 
 
 class ClangInfo:
@@ -555,6 +556,22 @@ class ClangInfo:
         clang.cindex.Config.set_library_file(). This appears to be necessary
         even when clang is installed as a standard package.
         '''
+        #self.libclang_so = os.environ.get('MUPDFWRAP_CLANG_SO')
+        #self.include_path = os.environ.get('MUPDFWRAP_CLANG_INCLUDE')
+        #if self.libclang_so and self.include_path:
+        #    assert os.path.isfile(self.libclang_so), f'MUPDFWRAP_CLANG_SO={self.libclang_so} is not a file'
+        #    assert os.path.isdir(self.include_path), f'MUPDFWRAP_CLANG_INCLUDE={self.include_path} is not a dir'
+        #    #clang_bin = None
+        #    version = '0'
+        #    #self.resource_dir = jlib.system(
+        #    #        f'{clang_bin} -print-resource-dir',
+        #    #        out='return',
+        #    #        ).strip()
+        #    #self.include_path = os.path.join( self.resource_dir, 'include')
+        #    self.clang_version = version
+        #    clang.cindex.Config.set_library_file( self.libclang_so)
+        #    return
+
         for version in 10, 9, 8, 7, 6,:
             ok = self._try_init_clang( version)
             if ok:
@@ -584,6 +601,7 @@ class ClangInfo:
             return True
 
         for p in os.environ.get( 'PATH').split( ':'):
+            log('{p=}')
             clang_bins = glob.glob( os.path.join( p, f'clang-{version}*'))
             if not clang_bins:
                 continue
@@ -607,14 +625,14 @@ class ClangInfo:
                     for leaf in f'libclang-{version}.*so*', f'libclang.so.{version}.*':
                         p = os.path.join( i, leaf)
                         p = os.path.abspath( p)
-                        #log( '{p=}')
+                        log( '{p=}')
                         libclang_so = glob.glob( p)
                         if not libclang_so:
                             continue
 
                         # We have found libclang.so.
                         self.libclang_so = libclang_so[0]
-                        log1( 'Using {self.libclang_so=}')
+                        log( 'Using {self.libclang_so=}')
                         clang.cindex.Config.set_library_file( self.libclang_so)
                         self.resource_dir = jlib.system(
                                 f'{clang_bin} -print-resource-dir',
@@ -625,7 +643,13 @@ class ClangInfo:
                         return True
 
 
-g_clang_info = ClangInfo()
+clang_info_cache = None
+
+def clang_info():
+    global clang_info_cache
+    if not clang_info_cache:
+        clang_info_cache = ClangInfo()
+    return clang_info_cache
 
 
 
@@ -2297,7 +2321,7 @@ def declaration_text( type_, name, nest=0, name_is_simple=True, arg_names=False,
         try:
             args = type_.argument_types()
         except Exception as e:
-            if 'libclang-6' in g_clang_info.libclang_so:
+            if 'libclang-6' in clang_info().libclang_so:
                 raise Clang6FnArgsBug( f'type_.spelling is {type_.spelling}: {e!r}')
 
         for arg in args:
@@ -2336,7 +2360,7 @@ def dump_ast( cursor, depth=0):
 def show_ast( filename):
     index = clang.cindex.Index.create()
     tu = index.parse( filename,
-            args=( '-I', g_clang_info.include_path),
+            args=( '-I', clang_info().include_path),
             )
     dump_ast( tu.cursor)
 
@@ -5001,6 +5025,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     '''
     assert dir_mupdf.endswith( '/')
     assert base.endswith( '/')
+    clang_info()    # Ensure we have set up clang-python.
+
     index = clang.cindex.Index.create()
     #log( '{dir_mupdf=} {base=}')
 
@@ -5024,7 +5050,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
                     temp_h,
                     args=(
                             '-I', f'{dir_mupdf}include',
-                            '-I', g_clang_info.include_path,
+                            '-I', clang_info().include_path,
                             ),
                     )
     finally:
@@ -6198,7 +6224,13 @@ def main():
                 print( __doc__)
 
             elif arg == '--build' or arg == '-b':
-                h_files     = []
+                h_files = [
+                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/classes.h',
+                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/exceptions.h',
+                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/functions.h',
+                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/internal.h',
+                        ]
+                h_files.sort()
                 cpp_files   = []
                 container_classnames = None
                 output_param_fns = None
@@ -6257,9 +6289,12 @@ def main():
 
                         elif action == '0':
                             # Generate C++ code that wraps the fz_* API.
+                            if not clang:
+                                raise Exception('Cannot do "-b 0" because failed to import clang.')
                             namespace = 'mupdf'
                             swig_c = io.StringIO()
                             swig_python = io.StringIO()
+                            h_files_actual = []
                             (
                                     tu,
                                     base,
@@ -6279,8 +6314,20 @@ def main():
                                     swig_python,
                                     )
 
-                            h_files += hs
+                            h_files_actual += hs
                             cpp_files += cpps
+
+                            h_files_actual.sort()
+                            if h_files_actual != h_files:
+                                text = ''
+                                text += f'Generated h_files_actual differs from expected h_files:\n'
+                                text += f'    h_files:\n'
+                                for i in h_files:
+                                    text += f'        {i}\n'
+                                text += f'    h_files:\n'
+                                for i in h_files_actual:
+                                    text += f'        {i}\n'
+                                raise Exception(text)
 
                             for dir_ in (
                                     f'{build_dirs.dir_mupdf}platform/c++/implementation/',
@@ -6319,8 +6366,6 @@ def main():
 
                         elif action == '1':
                             # Compile and link generated C++ code to create libmupdfcpp.so.
-                            if not h_files:
-                                raise Exception( 'action "0" required')
 
                             out_so = f'{build_dirs.dir_mupdf}platform/c++/libmupdfcpp.so'
                             if build_dirs.dir_so:
