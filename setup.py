@@ -93,19 +93,27 @@ def sdist():
     pipcl callback. If we are a git checkout, return all files known to
     git. Otherwise return all files except for those in build/.
     '''
-    if os.path.exists('.git'):
-        return pipcl.git_items( '.', submodules=True)
-    log(f'No .git so including all files apart from build/.')
-    ret = []
-    for dirpath, dirnames, filenames in os.walk('.'):
-        if dirpath.startswith('./build'):
-            continue
-        if dirpath.startswith('pylocal'):
-            continue
-        for filename in filenames:
-            path = os.path.join(dirpath, filename)
-            ret.append(path)
-    return ret
+    if not os.path.exists('.git'):
+        raise Exception(f'Cannot make sdist because not a git checkout')
+    paths = pipcl.git_items( '.', submodules=True)
+
+    # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
+    # used on systems without clang-python or SWIG.
+    #
+    subprocess.check_call('./scripts/mupdfwrap.py -b 02', shell=True)
+    paths += [
+            'build/shared-release/mupdf.py',
+            'platform/c++/implementation/classes.cpp',
+            'platform/c++/implementation/exceptions.cpp',
+            'platform/c++/implementation/functions.cpp',
+            'platform/c++/implementation/internal.cpp',
+            'platform/c++/include/mupdf/classes.h',
+            'platform/c++/include/mupdf/exceptions.h',
+            'platform/c++/include/mupdf/functions.h',
+            'platform/c++/include/mupdf/internal.h',
+            'platform/python/mupdfcpp_swig.cpp',
+            ]
+    return paths
 
 def build():
     '''
@@ -120,7 +128,16 @@ def build():
         mupdf_build = '1'
 
     if mupdf_build == '1':
-        command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b all'
+        have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '1') == '1'
+        have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
+        b = 'm'         # Build C library.
+        if have_clang_python:
+            b += '0'    # Build C++ source.
+        b += '1'        # Build C++ library.
+        if have_swig:
+            b += '2'    # Build SWIG-generated source.
+        b += '3'        # Build SWIG library _mupdf.so.
+        command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b {b}'
     elif mupdf_build == '0':
         command = None
     else:
