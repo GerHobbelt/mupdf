@@ -19,7 +19,7 @@ def log(text=''):
     Logs lines with prefix.
     '''
     for line in text.split('\n'):
-        print(f'pipcl.py: {line}', file=sys.stdout)
+        print(f'pipcl.py: {line}')
     sys.stdout.flush()
 
 
@@ -94,52 +94,28 @@ def run(
     keywords
         A string containing space-separated keywords, or a list of keywords.
     platform
-        A string.
+        A string, used in metainfo.
     fn_clean
-        A function taking no args that cleans generated files.
+        A function taking a single arg <all_> that cleans generated files.
+        <all_> is true iff --all is in argv.
     fn_sdist
         A function taking no args that returns a list of paths, e.g. from
         git_items(), for files that should be copied into the sdist.
     fn_build
         A function taking no args that builds everything.
 
-        Should return (pys, sos, datas), each a list of items, each item being
-        either a string <path> or a tuple (from_, to_). <path> is treated as a
-        tuple (path, path).
+        Should return a list of items, each item being a tuple of two strings
+        (from_, to_), or a single string <path> which is treated as a tuple
+        (path, path).
 
-            pys: .py files. For each item, we copy from_ to
-            .../site-packages/<to_>.
+        <from_> should be the path to a file. <to_> identifies what the file
+        should be called when generating a wheel or installing.
 
-            sos: .so files. For each item, we copy <from_> to
-            .../site-packages/<to_>.
+        The 'bdist_wheel' command will copy <from_> to <to_> in the wheel.
 
-            datas: misc files. For each item, we copy <from_> to
-            .../site-packages/<to_>.
+        The 'install' command will copy <from_> to <sitepackages>/<to_> where
+        <sitepackages> is Python's site.getsitepackages()[0].
 
-        E.g. fn_build() could return:
-
-                (
-                    [
-                        ('build/foo/__init__.py', 'foo/__init__.py'),
-                        ('build/bar.py', 'bar.py'),
-                        'wibble.py',
-                    ],
-                    [
-                        ('build/objs/_wibble.so', '_wibble.so'),
-                    ],
-                    [
-                        ('src/data.txt', 'data/data.txt'),
-                    ]
-                )
-
-        And this would result in the installed package looking like:
-
-            .../site-packages/
-                foo/__init__.py
-                bar.py
-                wibble.py
-                _wibble.so
-                data/data.txt
     license_files
         Either string name of license file or list of names of license files.
     '''
@@ -167,8 +143,8 @@ def run(
 
     def metainfo():
         '''
-        Returns text for PKG-INFO file (e.g. in .egg-info/ directory or
-        top-level in an sdist tar.gz file).
+        Returns text for .egg-info/PKG-INFO file, or PKG-INFO in an sdist
+        tar.gz file, or ...dist-info/METADATA in a wheel.
         '''
         # We use an array here so that local add() function can modify ret[0].
         #
@@ -203,11 +179,11 @@ def run(
 
     command = None
 
+    opt_all = None
+    opt_dist_dir = 'dist'
     opt_egg_base = None
     opt_install_headers = None
     opt_record = None
-    opt_d = None
-    opt_dist_dir = 'dist'
 
     args = Args(argv[1:])
 
@@ -220,13 +196,13 @@ def run(
             assert command is None, 'Two commands specified: {command} and {arg}.'
             command = arg
 
+        elif arg == '--all':
+            opt_all = True
+
         elif arg == '--compile':
             pass
 
-        elif arg == '-d':
-            opt_d = args.next()
-
-        elif arg == '--dist-dir':
+        elif arg == '--dist-dir' or arg == '-d':
             opt_dist_dir = args.next()
 
         elif arg == '--egg-base':
@@ -235,24 +211,30 @@ def run(
         elif arg in ('-h', '--help'):
             log(
                     'Options:\n'
+                    '    bdist_wheel\n'
+                    '        Creates a wheel called\n'
+                    '        <dist-dir>/<name>-<version>-<details>.whl, where\n'
+                    '        <dist-dir> is "dist" or as specified by --dist-dir,\n'
+                    '        and <details> encodes ABI and platform etc.\n'
                     '    clean\n'
                     '        Cleans build files.\n'
                     '    egg_info\n'
-                    '        Creates files in: <egg-base>/.egg-info/\n'
+                    '        Creates files in: <egg-base>/.egg-info/, where\n'
+                    '        <egg-base> is as specified with --egg-base.\n'
                     '    install\n'
-                    '        Installs into Python\'s site.getsitepackages()[0].\n'
-                    '        Logs to <record> (not implemented).\n'
+                    '        Installs into Python\'s\n'
+                    '        site.getsitepackages()[0]. Writes installation\n'
+                    '        information to <record> if --record\n'
+                    '        was specified.\n'
                     '    sdist\n'
                     '        Make a source distribution:\n'
                     '            <dist-dir>/<name>-<version>.tar.gz\n'
+                    '    --dist-dir | -d <dist-dir>\n'
+                    '        Default is "dist".\n'
                     '    --egg-base <egg-base>\n'
-                    '        Not implemented.\n'
-                    '    -d <d>\n'
-                    '        Not implemented.\n'
-                    '    --dist-dir <dist-dir>\n'
-                    '        Default is "dist".'
+                    '        Used by "egg_info".\n'
                     '    --record <record>\n'
-                    '        Ignored.\n'
+                    '        Used by "install".\n'
                     '    --single-version-externally-managed\n'
                     '        Ignored.\n'
                     '    --compile\n'
@@ -304,43 +286,28 @@ def run(
         #raise Exception(f'bdist_wheel not implemented')
         #assert 0, 'deliberate failure for bdist_wheel'
 
-        if opt_d is None:
-            opt_d = 'dist'
-        os.makedirs(opt_d, exist_ok=True)
+        os.makedirs(opt_dist_dir, exist_ok=True)
 
-        psy = sos = datas = []
+        items = []
         if fn_build:
-            pys, sos, datas = fn_build()
+            items = fn_build()
 
-        path = f'{opt_d}/{name}-{version}-py3-none-any.whl'
+        path = f'{opt_dist_dir}/{name}-{version}-py3-none-any.whl'
         log(f'creating wheel/zip: {path}')
 
         with zipfile.ZipFile(path, 'w') as z:
 
-            # We update record[0] each time we add an item to the zip file.
-            #
-            record = ['']
-            def record_update(content, to_):
-                if isinstance(content, str):
-                    content = content.encode('latin1')
-                h = hashlib.sha256(content)
-                digest = h.digest()
-                digest = base64.urlsafe_b64encode(digest)
-                record[0] += f'{to_},sha256={digest},{len(content)}\n'
-
             def add_file(from_, to_):
                 z.write(from_, to_)
-                with open(from_, 'rb') as f:
-                    content = f.read()
-                record_update(content, to_)
+                record.add_file(from_, to_)
 
             def add_str(content, to_):
                 z.writestr(to_, content)
-                record_update(content, to_)
+                record.add_content(content, to_)
 
             # Add the files returned by fn_build().
             #
-            for item in pys + sos + datas:
+            for item in items:
                 from_, to_ = fromto(item)
                 add_file(from_, to_)
 
@@ -368,11 +335,11 @@ def run(
             # Update ...dist-info/RECORD. This must be last.
             #
             #log(f'RECORD is:\n{record[0]}')
-            z.writestr(f'{d}/RECORD', record[0])
+            z.writestr(f'{d}/RECORD', record.get())
 
     elif command == 'clean':
         if fn_clean:
-            fn_clean()
+            fn_clean(opt_all)
 
     elif command == 'egg_info':
         assert opt_egg_base
@@ -389,28 +356,25 @@ def run(
             f.write(f'{name}\n')
 
     elif command == 'install':
+        items = []
         if fn_build:
-            pys, sos, datas = fn_build()
+            items = fn_build()
 
         sitepackages = site.getsitepackages()[0]
 
-        # If we create a <opt_record> file, pip complains that we haven't
-        # indicated that we've installed an .egg-info directory. So for now we
-        # ignore <opt_record>.
-        #
-        f = 0   #open(opt_record, 'w') if opt_record else None
-        try:
-            # For now, we copy everything into .../site-packages/.
-            for item in pys + sos + datas:
-                from_, to_ = fromto(item)
-                to_path = f'{sitepackages}/{to_}'
-                log( f'Copying {from_} to {to_path}')
-                shutil.copy2( from_, f'{to_path}')
-                if f:
-                    f.write(f'{to_path}\n')
-        finally:
-            if f:
-                f.close()
+        record = Record() if opt_record else None
+        for item in items:
+            from_, to_ = fromto(item)
+            to_path = f'{sitepackages}/{to_}'
+            log(f'copying from {from_} to {to_path}')
+            shutil.copy2( from_, f'{to_path}')
+            if record:
+                # Could maybe use relative path of to_path from sitepackages/.
+                record.add_file(from_, to_)
+
+        if opt_record:
+            with open(opt_record, 'w') as f:
+                f.write(record.get())
 
     elif command == 'sdist':
         if fn_sdist:
@@ -432,6 +396,11 @@ def run(
         tarpath = f'{opt_dist_dir}/{name}-{version}.tar.gz'
         with tarfile.open(tarpath, 'w:gz') as tar:
             for path in paths:
+                if os.path.abspath(path).startswith(f'{os.path.abspath(opt_dist_dir)}/'):
+                    # Ignore files inside <opt_dist_dir>, to save fn_sdist()
+                    # from worrying about this.
+                    continue
+                #log(f'path={path}')
                 tar.add( path, path, recursive=False)
             add(tar, 'PKG-INFO', metainfo().encode('utf8'))
 
@@ -439,3 +408,27 @@ def run(
 
     else:
         assert 0, f'Unrecognised command: {command}'
+
+
+class Record:
+    '''
+    Builds up text suitable for writing to a RECORD item, e.g. within a wheel.
+    '''
+    def __init__(self):
+        self.text = ''
+
+    def add_content(self, content, to_):
+        if isinstance(content, str):
+            content = content.encode('latin1')
+        h = hashlib.sha256(content)
+        digest = h.digest()
+        digest = base64.urlsafe_b64encode(digest)
+        self.text += f'{to_},sha256={digest},{len(content)}\n'
+
+    def add_file(self, from_, to_):
+        with open(from_, 'rb') as f:
+            content = f.read()
+        self.add_content(content, to_)
+
+    def get(self):
+        return self.text

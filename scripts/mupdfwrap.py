@@ -394,6 +394,8 @@ Usage:
             Uploads sdist to https://test.pypi.org/.
             https://test.pypi.org/project/mupdf/1.18.0/
 
+            Note usually good to do --py-packate-create first.
+
         --py-package-testdownload
             Installs from https://test.pypi.org/ into venv and tests.
 
@@ -6115,7 +6117,8 @@ def py_package_createinstall(build_dirs):
             + f' && python3 -m venv pylocal-createinstall'
             + f' && . pylocal-createinstall/bin/activate'
             + f' && pip install clang wheel'
-            + f' && MUPDF_SETUP_BUILDFROM={build_dirs.dir_mupdf}/build/shared-release pip {"-vvv"*1} install {mupdf_sdist}'
+            #+ f' && MUPDF_SETUP_BUILD={build_dirs.dir_mupdf}/build/shared-release pip {"-vvv"*1} install {mupdf_sdist}'
+            + f' && pip {"-vvv"*1} install {mupdf_sdist}'
             + f' && python scripts/mupdfwrap_test.py'
             + f' && deactivate'
             ,
