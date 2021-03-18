@@ -54,16 +54,16 @@ EXPORTS
 
 %(helpers_exports)s
 
+; Fitz Documents exports
+
+%(pubdoc_exports)s
+
 ; Fitz exports
 
 	; data, not a function:
 	fz_identity
 
 %(fitz_exports)s
-
-; Fitz Documents exports
-
-%(pubdoc_exports)s
 
 ; MuPDF exports
 
@@ -94,6 +94,22 @@ def main():
 	helpers_exports = generateExports("include/mupdf/helpers", office_exports + pkcs7ex_exports)
 
 	list = LIBMUPDF_DEF % locals()
+	# remove duplicate entries
+	lines = list.splitlines()
+	new_lines = []
+	empties = 0
+	for line in lines:
+		# Strip white spaces
+		str = line.strip()
+		if not str:
+			empties = empties + 1
+			if empties < 2:
+				new_lines.append(str)
+		else:
+			empties = 0
+			if line not in new_lines:
+				new_lines.append(line)
+	list = "\n".join(new_lines)
 	list = list.replace("\n", "\r\n")
 	open("platform/win32/libmupdf.def", "wb").write(list.encode('utf8'))
 

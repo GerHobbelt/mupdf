@@ -53,7 +53,6 @@ EXPORTS
 
 ; curl exports
 
-
 	curl_strequal
 	curl_strnequal
 	curl_mime_init
@@ -89,7 +88,6 @@ EXPORTS
 	curl_share_cleanup
 	curl_version_info
 	curl_easy_pause
-
 
 	curl_easy_init
 	curl_easy_setopt
@@ -131,9 +129,6 @@ EXPORTS
 	curl_pushheader_bynum
 	curl_pushheader_byname
 
-
-
-
 	curl_url
 	curl_url_cleanup
 	curl_url_dup
@@ -147,7 +142,7 @@ EXPORTS
 
 ; helpers exports
 
-
+	fz_get_cpu_core_count
 	fz_chdir
 	fz_mkdir_for_file
 	fz_normalize_path
@@ -164,6 +159,56 @@ EXPORTS
 	mu_lock_mutex
 	mu_unlock_mutex
 
+; Fitz Documents exports
+
+	fz_register_document_handler
+	fz_register_document_handlers
+	fz_recognize_document
+	fz_open_document
+	fz_open_accelerated_document
+	fz_open_document_with_stream
+	fz_open_accelerated_document_with_stream
+	fz_document_supports_accelerator
+	fz_save_accelerator
+	fz_output_accelerator
+	fz_new_document_of_size
+	fz_keep_document
+	fz_drop_document
+	fz_needs_password
+	fz_authenticate_password
+	fz_load_outline
+	fz_is_document_reflowable
+	fz_layout_document
+	fz_make_bookmark
+	fz_lookup_bookmark
+	fz_count_pages
+	fz_resolve_link
+	fz_last_page
+	fz_next_page
+	fz_previous_page
+	fz_clamp_location
+	fz_location_from_page_number
+	fz_page_number_from_location
+	fz_load_page
+	fz_count_chapters
+	fz_count_chapter_pages
+	fz_load_chapter_page
+	fz_load_links
+	fz_new_page_of_size
+	fz_bound_page
+	fz_run_page
+	fz_run_page_contents
+	fz_run_page_annots
+	fz_run_page_widgets
+	fz_keep_page
+	fz_drop_page
+	fz_page_presentation
+	fz_has_permission
+	fz_lookup_metadata
+	fz_document_output_intent
+	fz_page_separations
+	fz_page_uses_overprint
+	fz_create_link
 
 ; Fitz exports
 
@@ -430,53 +475,6 @@ EXPORTS
 	fz_bound_display_list
 	fz_new_image_from_display_list
 	fz_display_list_is_empty
-	fz_register_document_handler
-	fz_recognize_document
-	fz_open_document
-	fz_open_accelerated_document
-	fz_open_document_with_stream
-	fz_open_accelerated_document_with_stream
-	fz_document_supports_accelerator
-	fz_save_accelerator
-	fz_output_accelerator
-	fz_new_document_of_size
-	fz_keep_document
-	fz_drop_document
-	fz_needs_password
-	fz_authenticate_password
-	fz_load_outline
-	fz_is_document_reflowable
-	fz_layout_document
-	fz_make_bookmark
-	fz_lookup_bookmark
-	fz_count_pages
-	fz_resolve_link
-	fz_last_page
-	fz_next_page
-	fz_previous_page
-	fz_clamp_location
-	fz_location_from_page_number
-	fz_page_number_from_location
-	fz_load_page
-	fz_count_chapters
-	fz_count_chapter_pages
-	fz_load_chapter_page
-	fz_load_links
-	fz_new_page_of_size
-	fz_bound_page
-	fz_run_page
-	fz_run_page_contents
-	fz_run_page_annots
-	fz_run_page_widgets
-	fz_keep_page
-	fz_drop_page
-	fz_page_presentation
-	fz_has_permission
-	fz_lookup_metadata
-	fz_document_output_intent
-	fz_page_separations
-	fz_page_uses_overprint
-	fz_create_link
 	fz_open_null_filter
 	fz_open_range_filter
 	fz_open_endstream_filter
@@ -1036,57 +1034,6 @@ EXPORTS
 	fz_xml_find_next_match
 	fz_xml_find_down_match
 
-; Fitz Documents exports
-
-	fz_register_document_handler
-	fz_register_document_handlers
-	fz_recognize_document
-	fz_open_document
-	fz_open_accelerated_document
-	fz_open_document_with_stream
-	fz_open_accelerated_document_with_stream
-	fz_document_supports_accelerator
-	fz_save_accelerator
-	fz_output_accelerator
-	fz_new_document_of_size
-	fz_keep_document
-	fz_drop_document
-	fz_needs_password
-	fz_authenticate_password
-	fz_load_outline
-	fz_is_document_reflowable
-	fz_layout_document
-	fz_make_bookmark
-	fz_lookup_bookmark
-	fz_count_pages
-	fz_resolve_link
-	fz_last_page
-	fz_next_page
-	fz_previous_page
-	fz_clamp_location
-	fz_location_from_page_number
-	fz_page_number_from_location
-	fz_load_page
-	fz_count_chapters
-	fz_count_chapter_pages
-	fz_load_chapter_page
-	fz_load_links
-	fz_new_page_of_size
-	fz_bound_page
-	fz_run_page
-	fz_run_page_contents
-	fz_run_page_annots
-	fz_run_page_widgets
-	fz_keep_page
-	fz_drop_page
-	fz_page_presentation
-	fz_has_permission
-	fz_lookup_metadata
-	fz_document_output_intent
-	fz_page_separations
-	fz_page_uses_overprint
-	fz_create_link
-
 ; MuPDF exports
 
 	pdf_string_from_annot_type
@@ -1204,9 +1151,7 @@ EXPORTS
 	pdf_annot_set_active
 	pdf_annot_ap
 	pdf_annot_active
-	pdf_annot_set_active
 	pdf_annot_hot
-	pdf_annot_set_hot
 	pdf_clean_file
 	pdf_new_cmap
 	pdf_keep_cmap
@@ -1750,4 +1695,3 @@ EXPORTS
 	pdf_was_pure_xfa
 	pdf_new_local_xref
 	pdf_drop_local_xref
-

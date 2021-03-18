@@ -9,7 +9,12 @@ extern "C" {
 #include "mupdf/fitz/config.h"
 #include "mupdf/fitz/system.h"
 
-	int fz_get_cpu_core_count(void);
+/**
+  Return the number of logical cores in the CPU.
+
+  Return 0 if this number cannot be determined.
+*/
+int fz_get_cpu_core_count(void);
 
 #ifdef __cplusplus
 }
