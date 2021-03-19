@@ -1186,6 +1186,17 @@ def remove( path):
     shutil.rmtree( path, ignore_errors=1)
     assert not os.path.exists( path)
 
+def remove_dir_contents( path):
+    '''
+    Removes all items in directory <path>; does not remove <path> itself.
+    '''
+    for leaf in os.listdir( path):
+        path2 = os.path.join( path, leaf)
+        remove(path2)
+
+def ensure_empty_dir( path):
+    os.makedirs( path, exist_ok=True)
+    remove_dir_contents( path)
 
 # Things for figuring out whether files need updating, using mtimes.
 #
