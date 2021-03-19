@@ -530,10 +530,10 @@ try:
 except Exception as e:
     print(''
             + f'{__file__}: Warning, failed to import clang.cindex: {e}\n'
-            + f'We need Clang Python to build MuPDF python.\n'
-            + f'For example install with:\n'
-            + f'    OpenBSD: pkg_add py3-llvm\n'
-            + f'    Linux:debian/devuan: apt install python-clang\n'
+            + f'    We need Clang Python to build MuPDF python.\n'
+            + f'    For example install with:\n'
+            + f'        OpenBSD: pkg_add py3-llvm\n'
+            + f'        Linux:debian/devuan: apt install python-clang\n'
             )
     clang = None
 
@@ -6231,14 +6231,18 @@ def main():
                 print( __doc__)
 
             elif arg == '--build' or arg == '-b':
+                cpp_files   = [
+                        f'{build_dirs.dir_mupdf}platform/c++/implementation/classes.cpp',
+                        f'{build_dirs.dir_mupdf}platform/c++/implementation/exceptions.cpp',
+                        f'{build_dirs.dir_mupdf}platform/c++/implementation/functions.cpp',
+                        f'{build_dirs.dir_mupdf}platform/c++/implementation/internal.cpp',
+                        ]
                 h_files = [
                         f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/classes.h',
                         f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/exceptions.h',
                         f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/functions.h',
                         f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/internal.h',
                         ]
-                h_files.sort()
-                cpp_files   = []
                 container_classnames = None
                 output_param_fns = None
                 force_rebuild = False
@@ -6301,12 +6305,12 @@ def main():
                             namespace = 'mupdf'
                             swig_c = io.StringIO()
                             swig_python = io.StringIO()
-                            h_files_actual = []
+
                             (
                                     tu,
                                     base,
-                                    hs,
-                                    cpps,
+                                    h_files_actual,
+                                    cpp_files_actual,
                                     fn_usage_filename,
                                     container_classnames,
                                     to_string_structnames,
@@ -6321,25 +6325,25 @@ def main():
                                     swig_python,
                                     )
 
-                            h_files_actual += hs
-                            cpp_files += cpps
-
                             to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle')
                             to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle')
                             to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle')
                             to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle')
 
-                            h_files_actual.sort()
-                            if h_files_actual != h_files:
-                                text = ''
-                                text += f'Generated h_files_actual differs from expected h_files:\n'
-                                text += f'    h_files:\n'
-                                for i in h_files:
-                                    text += f'        {i}\n'
-                                text += f'    h_files:\n'
-                                for i in h_files_actual:
-                                    text += f'        {i}\n'
-                                raise Exception(text)
+                            def check_lists_equal(name, expected, actual):
+                                expected.sort()
+                                actual.sort()
+                                if expected != actual:
+                                    text = f'Generated {name} filenames differ from expected:\n'
+                                    text += '    expected ({len(expected)}:\n'
+                                    for i in expected:
+                                        text += f'        {i}\n'
+                                    text += '    generated ({len(actual)}:\n'
+                                    for i in actual:
+                                        text += f'        {i}\n'
+                                    raise Exception(text)
+                            check_lists_equal('C++ source', cpp_files, cpp_files_actual)
+                            check_lists_equal('C++ headers', h_files, h_files_actual)
 
                             for dir_ in (
                                     f'{build_dirs.dir_mupdf}platform/c++/implementation/',
