@@ -556,22 +556,6 @@ class ClangInfo:
         clang.cindex.Config.set_library_file(). This appears to be necessary
         even when clang is installed as a standard package.
         '''
-        #self.libclang_so = os.environ.get('MUPDFWRAP_CLANG_SO')
-        #self.include_path = os.environ.get('MUPDFWRAP_CLANG_INCLUDE')
-        #if self.libclang_so and self.include_path:
-        #    assert os.path.isfile(self.libclang_so), f'MUPDFWRAP_CLANG_SO={self.libclang_so} is not a file'
-        #    assert os.path.isdir(self.include_path), f'MUPDFWRAP_CLANG_INCLUDE={self.include_path} is not a dir'
-        #    #clang_bin = None
-        #    version = '0'
-        #    #self.resource_dir = jlib.system(
-        #    #        f'{clang_bin} -print-resource-dir',
-        #    #        out='return',
-        #    #        ).strip()
-        #    #self.include_path = os.path.join( self.resource_dir, 'include')
-        #    self.clang_version = version
-        #    clang.cindex.Config.set_library_file( self.libclang_so)
-        #    return
-
         for version in 10, 9, 8, 7, 6,:
             ok = self._try_init_clang( version)
             if ok:
