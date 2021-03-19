@@ -269,6 +269,9 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (!strcmp(filename, "/dev/null") || !fz_strcasecmp(filename, "nul:"))
 		return fz_new_output(ctx, 0, NULL, null_write, NULL, NULL);
 
+	if (!strcmp(filename, "/dev/stdout"))
+		return fz_stdout(ctx);
+
 	fz_mkdir_for_file(ctx, filename);
 
 	/* If <append> is false, we use fopen()'s 'x' flag to force an error if

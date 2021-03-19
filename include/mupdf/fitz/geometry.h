@@ -748,6 +748,12 @@ fz_quad fz_quad_from_rect(fz_rect r);
 fz_rect fz_rect_from_quad(fz_quad q);
 
 /**
+	Return TRUE when the quad is oriented with the axis, i.e. is a rectangle at zero degrees rotation with the x/y axes
+	and can thusly be losslessly converted to a rect.
+*/
+int fz_quad_is_axis_oriented(fz_quad q);
+
+/**
 	Transform a quad by a matrix.
 */
 fz_quad fz_transform_quad(fz_quad q, fz_matrix m);

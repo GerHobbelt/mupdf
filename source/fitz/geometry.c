@@ -635,6 +635,17 @@ fz_rect_from_quad(fz_quad q)
 	return r;
 }
 
+int
+fz_quad_is_axis_oriented(fz_quad q)
+{
+	return (
+		q.ll.x == q.ul.x &&
+		q.lr.x == q.ur.x &&
+		q.ll.y == q.lr.y &&
+		q.ul.y == q.ur.y
+	);
+}
+
 fz_quad
 fz_transform_quad(fz_quad q, fz_matrix m)
 {

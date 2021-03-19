@@ -146,7 +146,7 @@ typedef struct
 } fz_list_device;
 
 enum { ISOLATED = 1, KNOCKOUT = 2 };
-enum { OPM = 1, OP = 2, BP = 3, RI = 4};
+enum { OPM = 1, OP = 2, BP = 3, RI = 4 };
 
 #define SIZE_IN_NODES(t) \
 	((t + sizeof(fz_display_node) - 1) / sizeof(fz_display_node))

@@ -432,10 +432,21 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 						name = font_full_name(ctx, font);
 						fz_write_printf(ctx, out, "<font name=\"%s\" size=\"%g\">\n", name, size);
 					}
-					fz_write_printf(ctx, out, "<char quad=\"%Z\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
+					if (fz_quad_is_axis_oriented(ch->quad))
+					{
+						fz_rect bb = fz_rect_from_quad(ch->quad);
+						fz_write_printf(ctx, out, "<char rect=\"%R\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
+							&bb,
+							ch->origin.x, ch->origin.y,
+							ch->color);
+					}
+					else
+					{
+						fz_write_printf(ctx, out, "<char quad=\"%Z\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
 							&ch->quad,
 							ch->origin.x, ch->origin.y,
 							ch->color);
+					}
 					switch (ch->c)
 					{
 					case '<': fz_write_string(ctx, out, "&lt;"); break;

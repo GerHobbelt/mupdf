@@ -59,16 +59,19 @@
 #endif
 
 enum {
+	OUT_NONE,
 	OUT_BBOX,
 	OUT_HTML,
-	OUT_NONE,
 	OUT_OCR_HTML,
+#if FZ_ENABLE_PDF
 	OUT_OCR_PDF,
+#endif
 	OUT_OCR_STEXT_JSON,
 	OUT_OCR_STEXT_XML,
 	OUT_OCR_TEXT,
 	OUT_OCR_TRACE,
 	OUT_OCR_XHTML,
+	OUT_OCR_XMLTEXT,
 	OUT_PAM,
 	OUT_PBM,
 	OUT_PCL,
@@ -115,6 +118,8 @@ static const suffix_t suffix_table[] =
 	{ ".ocr.html", OUT_OCR_HTML, 0 },
 	{ ".ocr.xhtml", OUT_OCR_XHTML, 0 },
 	{ ".ocr.stext", OUT_OCR_STEXT_XML, 0 },
+	{ ".ocr.xmltext", OUT_OCR_XMLTEXT, 0 },
+	{ ".ocr.xml", OUT_OCR_XMLTEXT, 0 },
 	{ ".ocr.pdf", OUT_OCR_PDF, 0 },
 	{ ".ocr.trace", OUT_OCR_TRACE, 0 },
 	{ ".stext.json", OUT_STEXT_JSON, 0 },
@@ -145,6 +150,7 @@ static const suffix_t suffix_table[] =
 
 	{ ".trace", OUT_TRACE, 0 },
 	{ ".xmltext", OUT_XMLTEXT, 0 },
+	{ ".xml", OUT_XMLTEXT, 0 },
 	{ ".bbox", OUT_BBOX, 0 },
 };
 
@@ -212,6 +218,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_OCR_HTML, CS_GRAY, { CS_GRAY } },
 	{ OUT_OCR_XHTML, CS_GRAY, { CS_GRAY } },
 	{ OUT_OCR_STEXT_XML, CS_GRAY, { CS_GRAY } },
+	{ OUT_OCR_XMLTEXT, CS_RGB, { CS_RGB } },
 	{ OUT_OCR_STEXT_JSON, CS_GRAY, { CS_GRAY } },
 	{ OUT_OCR_TRACE, CS_GRAY, { CS_GRAY } },
 };
@@ -331,6 +338,7 @@ static int showmd5 = 0;
 
 #if FZ_ENABLE_PDF
 static pdf_document *pdfout = NULL;
+static const char *pdfoutpath = NULL;
 #endif
 
 static int no_icc = 0;
@@ -532,16 +540,23 @@ static void reset_page_counter(void) {
 static void
 file_level_headers(fz_context *ctx)
 {
-	if (output_format == OUT_STEXT_XML || output_format == OUT_TRACE || output_format == OUT_BBOX || output_format == OUT_OCR_STEXT_XML || output_format == OUT_XMLTEXT)
+	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
+		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
+		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
+	{
 		fz_write_printf(ctx, out, "<?xml version=\"1.0\"?>\n");
+	}
 
 	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 		fz_print_stext_header_as_html(ctx, out);
 	if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 		fz_print_stext_header_as_xhtml(ctx, out);
 
-	if (output_format == OUT_STEXT_XML || output_format == OUT_TRACE || output_format == OUT_BBOX || output_format == OUT_OCR_STEXT_XML)
+	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
+		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX)
+	{
 		fz_write_printf(ctx, out, "<document name=\"%s\">\n", filename);
+	}
 	if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "{%q:%q,%q:[", "file", filename, "pages");
 
@@ -571,8 +586,11 @@ file_level_headers(fz_context *ctx)
 static void
 file_level_trailers(fz_context *ctx)
 {
-	if (output_format == OUT_STEXT_XML || output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX || output_format == OUT_OCR_STEXT_XML)
+	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
+		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX)
+	{
 		fz_write_printf(ctx, out, "</document>\n");
+	}
 	if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "]}");
 
@@ -803,8 +821,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	if (output_format == OUT_XMLTEXT)
+	if (output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
 	{
+		fz_device* pre_ocr_dev = NULL;
+
 		fz_try(ctx)
 		{
 			float zoom;
@@ -817,16 +837,28 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			fz_write_printf(ctx, out, "<page mediabox=\"%R\">\n", &mb);
 			dev = fz_new_xmltext_device(ctx, out);
+			if (output_format == OUT_OCR_XMLTEXT)
+			{
+				pre_ocr_dev = dev;
+				dev = NULL;
+				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, NULL, NULL);
+			}
 			if (list)
-				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, cookie);
+				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
 			else
-				fz_run_page(ctx, page, dev, fz_identity, cookie);
+				fz_run_page(ctx, page, dev, ctm, cookie);
 			fz_write_printf(ctx, out, "</page>\n");
 			fz_close_device(ctx, dev);
+			fz_drop_device(ctx, dev);
+			dev = NULL;
+			fz_close_device(ctx, pre_ocr_dev);
+			fz_drop_device(ctx, pre_ocr_dev);
+			pre_ocr_dev = NULL;
 		}
 		fz_always(ctx)
 		{
 			fz_drop_device(ctx, dev);
+			fz_drop_device(ctx, pre_ocr_dev);
 		}
 		fz_catch(ctx)
 		{
@@ -877,8 +909,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			// Even when OCR fails, we want to see what we got thus far as text,
 			// hence we should *postpone* bubbling up the OCR error, if one occurs.
-			fz_stext_options page_stext_options;
-			page_stext_options.flags = stext_options.flags;
+			fz_stext_options page_stext_options = stext_options;
 
 			// override the preserve_images flag:
 			if (output_format == OUT_HTML ||
@@ -886,11 +917,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				output_format == OUT_OCR_HTML ||
 				output_format == OUT_OCR_XHTML
 				)
-				stext_options.flags |= FZ_STEXT_PRESERVE_IMAGES;
+				page_stext_options.flags |= FZ_STEXT_PRESERVE_IMAGES;
 			else
-				stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
+				page_stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
 			if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
-				stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
+				page_stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 			text = fz_new_stext_page(ctx, mediabox);
 			dev = fz_new_stext_device(ctx, text, &page_stext_options);
 			if (lowmemory)
@@ -898,6 +929,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			if (output_format == OUT_OCR_TEXT ||
 				output_format == OUT_OCR_STEXT_JSON ||
 				output_format == OUT_OCR_STEXT_XML ||
+				output_format == OUT_OCR_XMLTEXT ||
 				output_format == OUT_OCR_HTML ||
 				output_format == OUT_OCR_XHTML)
 			{
@@ -996,10 +1028,6 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		float zoom;
 		fz_matrix ctm;
 		fz_rect tbounds;
-		char buf[PATH_MAX];
-		fz_output *outs = NULL;
-
-		fz_var(outs);
 
 		zoom = resolution / 72;
 		ctm = fz_pre_rotate(fz_scale(zoom, zoom), rotation);
@@ -1007,17 +1035,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			if (!output || *output == 0 || !strcmp(output, "-"))
-			{
-				outs = fz_stdout(ctx);
-			}
-			else
-			{
-				fz_format_output_path(ctx, buf, sizeof buf, output, pagenum);
-				outs = fz_new_output_with_path(ctx, buf, 0);
-			}
-
-			dev = fz_new_svg_device(ctx, outs, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, FZ_SVG_TEXT_AS_PATH, 1);
+			dev = fz_new_svg_device(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, FZ_SVG_TEXT_AS_PATH, 1);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)
@@ -1025,12 +1043,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else
 				fz_run_page(ctx, page, dev, ctm, cookie);
 			fz_close_device(ctx, dev);
-			fz_close_output(ctx, outs);
 		}
 		fz_always(ctx)
 		{
 			fz_drop_device(ctx, dev);
-			fz_drop_output(ctx, outs);
 		}
 		fz_catch(ctx)
 		{
@@ -1245,7 +1261,21 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	}
 
 	if (output_file_per_page)
+	{
 		file_level_trailers(ctx);
+
+#if FZ_ENABLE_PDF
+		if (output_format == OUT_PDF)
+		{
+			// save previous page?
+			pdf_save_document(ctx, pdfout, pdfoutpath, NULL);
+			pdf_drop_document(ctx, pdfout);
+			pdfout = NULL;
+			fz_free(ctx, pdfoutpath);
+			pdfoutpath = NULL;
+		}
+#endif
+	}
 
 	if (showtime)
 	{
@@ -1443,9 +1473,19 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		{
 			fz_close_output(ctx, out);
 			fz_drop_output(ctx, out);
+			out = NULL;
 		}
 		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
-		out = fz_new_output_with_path(ctx, text_buffer, 0);
+
+#if FZ_ENABLE_PDF
+		if (output_format == OUT_PDF)
+		{
+			pdfout = pdf_create_document(ctx);
+			pdfoutpath = fz_strdup(ctx, text_buffer);
+		}
+		else
+#endif
+			out = fz_new_output_with_path(ctx, text_buffer, 0);
 	}
 
 	if (bgprint.active)
@@ -2075,6 +2115,7 @@ int mudraw_main(int argc, const char **argv)
 
 #if FZ_ENABLE_PDF
 	pdfout = NULL;
+	pdfoutpath = NULL;
 #endif
 
 	no_icc = 0;
@@ -2572,31 +2613,21 @@ int mudraw_main(int argc, const char **argv)
 			}
 		}
 
-#if FZ_ENABLE_PDF
-		if (output_format == OUT_PDF)
-		{
-			pdfout = pdf_create_document(ctx);
-		}
-		else
-#endif
 		if (output_format == OUT_SVG)
 		{
-			/* SVG files are always opened for each page. Do not open "output". */
+			/* SVG files are always opened for each page. */
+			output_file_per_page = 1;
 		}
-		else if (output && strcmp(output, "-") != 0 && *output != 0)
-		{
-			if (fz_has_percent_d(output))
-				output_file_per_page = 1;
-			else
-				out = fz_new_output_with_path(ctx, output, 0);
-		}
-		else
+
+		if (!output || *output == 0 || !strcmp(output, "-"))
 		{
 			// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
 #if 0
 			quiet = 1; /* automatically be quiet if printing to stdout */
 			fz_default_error_warn_info_mode(1, 1, 1);
 #endif
+
+			output = NULL;
 
 #ifdef _WIN32
 			/* Windows specific code to make stdout binary. */
@@ -2610,6 +2641,7 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_BBOX &&
 				output_format != OUT_OCR_TEXT &&
 				output_format != OUT_OCR_STEXT_XML &&
+				output_format != OUT_OCR_XMLTEXT &&
 				output_format != OUT_OCR_STEXT_JSON &&
 				output_format != OUT_OCR_HTML &&
 				output_format != OUT_OCR_XHTML &&
@@ -2620,6 +2652,26 @@ int mudraw_main(int argc, const char **argv)
 #endif
 			out = fz_stdout(ctx);
 		}
+		else
+		{
+			if (fz_has_percent_d(output) || output_file_per_page)
+				output_file_per_page = 1;
+			else
+				out = fz_new_output_with_path(ctx, output, 0);
+		}
+
+#if FZ_ENABLE_PDF
+		if (output_format == OUT_PDF)
+		{
+			// Nuke `out`. We will be using `pdfout` instead.
+			if (out)
+			{
+				fz_close_output(ctx, out);
+				fz_drop_output(ctx, out);
+				out = NULL;
+			}
+		}
+#endif
 
 		// Check if the Tesseract engine can initialize properly when one of the OCR modes is requested.
 		// If it cannot init, report a warning accordingly and fall back to the non-OCR output format:
@@ -2627,6 +2679,7 @@ int mudraw_main(int argc, const char **argv)
 			output_format == OUT_OCR_TEXT ||
 			output_format == OUT_OCR_STEXT_JSON ||
 			output_format == OUT_OCR_STEXT_XML ||
+			output_format == OUT_OCR_XMLTEXT ||
 			output_format == OUT_OCR_HTML ||
 			output_format == OUT_OCR_XHTML ||
 			output_format == OUT_OCR_PDF)
@@ -2654,12 +2707,16 @@ int mudraw_main(int argc, const char **argv)
 					output_format = OUT_STEXT_JSON; break;
 				case OUT_OCR_STEXT_XML:
 					output_format = OUT_STEXT_XML; break;
+				case OUT_OCR_XMLTEXT:
+					output_format = OUT_XMLTEXT; break;
 				case OUT_OCR_HTML:
 					output_format = OUT_HTML; break;
 				case OUT_OCR_XHTML:
 					output_format = OUT_XHTML; break;
+#if FZ_ENABLE_PDF
 				case OUT_OCR_PDF:
 					output_format = OUT_PDF; break;
+#endif
 				}
 			}
 		}
@@ -2811,15 +2868,24 @@ int mudraw_main(int argc, const char **argv)
 			file_level_trailers(ctx);
 
 #if FZ_ENABLE_PDF
-		if (output_format == OUT_PDF)
+		if (pdfout)
 		{
 			if (!output)
-				output = "out.pdf";
-			pdf_save_document(ctx, pdfout, output, NULL);
+			{
+				// write PDF to stdout
+				pdf_save_document(ctx, pdfout, "/dev/stdout", NULL);
+			}
+			else
+			{
+				char text_buffer[PATH_MAX];
+				fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, 0 /* page # 0 */);
+				pdf_save_document(ctx, pdfout, text_buffer, NULL);
+			}
 			pdf_drop_document(ctx, pdfout);
+			pdfout = NULL;
 		}
-		else
 #endif
+
 		{
 			fz_close_output(ctx, out);
 			fz_drop_output(ctx, out);
