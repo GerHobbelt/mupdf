@@ -663,7 +663,6 @@ generate_boxes(fz_context *ctx,
 
 	while (node)
 	{
-
 		tag = fz_xml_tag(node);
 		if (tag)
 		{
@@ -675,7 +674,7 @@ generate_boxes(fz_context *ctx,
 
 			fz_apply_css_style(ctx, g->set, &style, &match);
 
-			if (tag[0]=='b' && tag[1]=='r' && tag[2]==0)
+			if (!strcmp(tag, "br"))
 			{
 				fz_html_box *flow;
 				if (top->type != BOX_INLINE)
@@ -705,8 +704,7 @@ generate_boxes(fz_context *ctx,
 				}
 				g->at_bol = 1;
 			}
-
-			else if (tag[0]=='i' && tag[1]=='m' && tag[2]=='g' && tag[3]==0)
+			else if (!strcmp(tag, "img"))
 			{
 				const char *src = fz_xml_att(node, "src");
 				if (src)
@@ -745,16 +743,14 @@ generate_boxes(fz_context *ctx,
 					}
 				}
 			}
-
-			else if (tag[0]=='s' && tag[1]=='v' && tag[2]=='g' && tag[3]==0)
+			else if (!strcmp(tag, "svg"))
 			{
 				box = new_short_box(ctx, g->pool, markup_dir);
 				box->style = fz_css_enlist(ctx, &style, &g->styles, g->pool);
 				insert_inline_box(ctx, box, top, markup_dir, g);
 				generate_image(ctx, box, load_svg_image(ctx, g->zip, g->base_uri, node), g);
 			}
-
-			else if (g->is_fb2 && tag[0]=='i' && tag[1]=='m' && tag[2]=='a' && tag[3]=='g' && tag[4]=='e' && tag[5]==0)
+			else if (g->is_fb2 && !strcmp(tag, "image"))
 			{
 				const char *src = fz_xml_att(node, "l:href");
 				if (!src)
@@ -782,7 +778,6 @@ generate_boxes(fz_context *ctx,
 					}
 				}
 			}
-
 			else if (display != DIS_NONE)
 			{
 				const char *dir, *lang, *id, *href;

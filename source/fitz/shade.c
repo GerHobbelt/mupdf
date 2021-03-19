@@ -516,7 +516,7 @@ split_curve(fz_point *pole, fz_point *q0, fz_point *q1, int polestep)
 	split bezier curve given by control points pole[0]..pole[3]
 	using de casteljau algo at midpoint and build two new
 	bezier curves q0[0]..q0[3] and q1[0]..q1[3]. all indices
-	should be multiplies by polestep == 1 for vertical bezier
+	should be multiplied by polestep == 1 for vertical bezier
 	curves in patch and == 4 for horizontal bezier curves due
 	to C's multi-dimensional matrix memory layout.
 	*/

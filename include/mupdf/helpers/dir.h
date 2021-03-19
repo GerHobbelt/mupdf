@@ -17,6 +17,7 @@ extern "C" {
 #endif
 
 int fz_chdir(fz_context* ctx, const char* path);
+
 /**
   Create directory for given *file* path, so that a subsequent file-create action will not fail due to the given path not existing.
 
