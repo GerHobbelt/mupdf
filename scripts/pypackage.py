@@ -43,6 +43,8 @@ def make_manylinux():
     # Copy sdist into (what will be) the docker's /io/ directory.
     #
     jlib.system(f'rsync -ai {sdist} python-docker-io/')
+    jlib.system(f'rsync -ai scripts/mupdfwrap_test.py python-docker-io/')
+    jlib.system(f'rsync -ai thirdparty/extract/test/Python2.pdf python-docker-io/')
 
     # Ensure we have the docker image available.
     #
@@ -60,13 +62,20 @@ def make_manylinux():
     # quay.io/pypa/manylinux2014_x86_64, and the version installed by yum is
     # old - swig-2.0.10.
     #
-    script = 'python-docker-io/build-wheels.sh'
+    script = 'python-docker-io/pypackage-install.sh'
     with open(script, 'w') as f:
         f.write(
                 f'#!/bin/bash\n'
+                f'set -e\n' # Exit if any command fails.
                 f'ls -l /io/\n'
                 f'yum --assumeyes install python3-devel\n'
-                f'MUPDF_SETUP_HAVE_CLANG_PYTHON=0 pip3 -vvv install /io/*.tar.gz'
+                f'ls -l /io/\n'
+                f'MUPDF_SETUP_HAVE_CLANG_PYTHON=0 pip3 -vvv install /io/*.tar.gz\n'
+                f'ls -l /io/\n'
+                f'echo running mupdfwrap_test.py on Python2.pdf\n'
+                f'ls -l /io/\n'
+                f'/io/mupdfwrap_test.py /io/Python2.pdf\n'
+                f'ls -l /io/\n'
                 )
     os.chmod(script, 0o755)
 
@@ -102,13 +111,14 @@ def make_manylinux():
 
         # Run our script inside the docker instance.
         #
-        e = os.system(
+        jlib.system(
                 f'docker exec'
-                f' mupdf-docker'
-                f' /io/{os.path.basename(script)}'
+                    f' mupdf-docker'
+                    f' /io/{os.path.basename(script)}'
+                ,
+                prefix='docker: ',
+                verbose=1,
                 )
-        log(f'docker start: e={e}')
-        assert e == 0
 
     else:
         command = (
