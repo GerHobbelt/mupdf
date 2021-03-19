@@ -601,7 +601,6 @@ class ClangInfo:
             return True
 
         for p in os.environ.get( 'PATH').split( ':'):
-            log('{p=}')
             clang_bins = glob.glob( os.path.join( p, f'clang-{version}*'))
             if not clang_bins:
                 continue
