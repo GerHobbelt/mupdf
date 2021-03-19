@@ -52,7 +52,13 @@ def make_manylinux():
     docker_image = 'quay.io/pypa/manylinux2014_x86_64'
     system(f'docker pull {docker_image}')
 
-    # Create a script to run inside the docker instance.
+    # Create a script to run inside the docker instance, which will use pip to
+    # install from our sdist file.
+    #
+    # We ensure that python3-devel is installed. We don't attempt to
+    # install swig because swig-4.0.2 seems to be already part of
+    # quay.io/pypa/manylinux2014_x86_64, and the version installed by yum is
+    # old - swig-2.0.10.
     #
     script = 'python-docker-io/build-wheels.sh'
     with open(script, 'w') as f:
@@ -60,15 +66,7 @@ def make_manylinux():
                 f'#!/bin/bash\n'
                 f'ls -l /io/\n'
                 f'yum --assumeyes install python3-devel\n'
-                f'true'
-                    ' && (rm -r mupdf || true)'
-                    ' && mkdir -p mupdf'
-                    ' && cd mupdf'
-                    ' && tar -xzf /io/*.tar.gz'
-                    ' &&'
-                        ' MUPDF_SETUP_HAVE_CLANG_PYTHON=0'
-                        #' MUPDF_SETUP_HAVE_SWIG=0'
-                        ' ./setup.py --dist-dir /io bdist_wheel'
+                f'MUPDF_SETUP_HAVE_CLANG_PYTHON=0 pip3 -vvv install /io/*.tar.gz'
                 )
     os.chmod(script, 0o755)
 
@@ -83,8 +81,8 @@ def make_manylinux():
     #
 
     if 1:
-        # Ensure container is created and running. Also give it a name so we
-        # can refer to it below.
+        # Ensure docker instance is created and running. Also give it a name so
+        # we can refer to it below.
         #
         # '-itd' ensures docker instance runs in background.
         #
@@ -97,12 +95,12 @@ def make_manylinux():
             )
         log(f'docker run: e={e}')
 
-        # Start container if not already started.
+        # Start docker instance if not already started.
         #
         e = os.system('docker start mupdf-docker')
         log(f'docker start: e={e}')
 
-        # Run our script inside the container.
+        # Run our script inside the docker instance.
         #
         e = os.system(
                 f'docker exec'
