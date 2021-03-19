@@ -103,6 +103,7 @@ def sdist():
     subprocess.check_call('./scripts/mupdfwrap.py -b 02', shell=True)
     paths += [
             'build/shared-release/mupdf.py',
+            'platform/c++/container_classnames.pickle',
             'platform/c++/implementation/classes.cpp',
             'platform/c++/implementation/exceptions.cpp',
             'platform/c++/implementation/functions.cpp',
@@ -111,6 +112,9 @@ def sdist():
             'platform/c++/include/mupdf/exceptions.h',
             'platform/c++/include/mupdf/functions.h',
             'platform/c++/include/mupdf/internal.h',
+            'platform/c++/swig_c.pickle',
+            'platform/c++/swig_python.pickle',
+            'platform/c++/to_string_structnames.pickle',
             'platform/python/mupdfcpp_swig.cpp',
             ]
     return paths
