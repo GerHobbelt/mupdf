@@ -483,6 +483,7 @@ Usage:
 import glob
 import io
 import os
+import pickle
 import re
 import shutil
 import sys
@@ -527,14 +528,13 @@ try:
         import clang.cindex
 
 except Exception as e:
-    print(f'*** {__file__}\n'
-            + f'*** Error: failed to import clang.cindex: {e}\n'
-            + f'*** We need Clang Python to build MuPDF python.\n'
-            + f'*** For example install with:\n'
-            + f'***     OpenBSD: pkg_add py3-llvm\n'
-            + f'***     Linux:debian/devuan: apt install python-clang\n'
+    print(''
+            + f'{__file__}: Warning, failed to import clang.cindex: {e}\n'
+            + f'We need Clang Python to build MuPDF python.\n'
+            + f'For example install with:\n'
+            + f'    OpenBSD: pkg_add py3-llvm\n'
+            + f'    Linux:debian/devuan: apt install python-clang\n'
             )
-    #sys.exit(1)
     clang = None
 
 
@@ -6197,6 +6197,13 @@ def py_package_testdownload(build_dirs):
             verbose=1,
             )
 
+def to_pickle( obj, path):
+    with open( path, 'wb') as f:
+        pickle.dump( obj, f)
+
+def from_pickle( path):
+    with open( path, 'rb') as f:
+        return pickle.load( f)
 
 
 def main():
@@ -6317,6 +6324,11 @@ def main():
                             h_files_actual += hs
                             cpp_files += cpps
 
+                            to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle')
+                            to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle')
+                            to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle')
+                            to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle')
+
                             h_files_actual.sort()
                             if h_files_actual != h_files:
                                 text = ''
@@ -6397,15 +6409,15 @@ def main():
 
                         elif action == '2':
                             # Generate C++ code for python module using SWIG.
-                            if not container_classnames:
+                            if not os.path.isfile(f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle'):
                                 raise Exception( 'action "0" required')
                             with jlib.LogPrefixScope( f'swig: '):
                                 build_swig(
                                         build_dirs,
-                                        container_classnames,
-                                        to_string_structnames,
-                                        swig_c.getvalue(),
-                                        swig_python.getvalue(),
+                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle'),
                                         swig=swig,
                                         )
 
