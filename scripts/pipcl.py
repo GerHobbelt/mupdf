@@ -11,6 +11,7 @@ import site
 import subprocess
 import sys
 import tarfile
+import time
 import zipfile
 
 
@@ -356,7 +357,21 @@ def run(
         if fn_build:
             items = fn_build()
 
-        sitepackages = site.getsitepackages()[0]
+        # Find where to install.
+        #
+        # It seems that some items don't exist, so we can't simply use
+        # site.getsitepackages()[0].
+        #
+        sitepackages_all = site.getsitepackages()
+        for p in sitepackages_all:
+            if os.path.exists(p):
+                sitepackages = p
+                break
+        else:
+            text = 'No item exists in site.getsitepackages():\n'
+            for i in sitepackages_all:
+                text += f'    {i}\n'
+            raise Exception(text)
 
         record = Record() if opt_record else None
         for item in items:
@@ -387,6 +402,7 @@ def run(
             '''
             ti = tarfile.TarInfo(name)
             ti.size = len(contents)
+            ti.mtime = time.time()
             tar.addfile(ti, io.BytesIO(contents))
 
         tarpath = f'{opt_dist_dir}/{name}-{version}.tar.gz'
