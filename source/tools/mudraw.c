@@ -2670,6 +2670,11 @@ int mudraw_main(int argc, const char **argv)
 				fz_drop_output(ctx, out);
 				out = NULL;
 			}
+
+			if (!output_file_per_page)
+			{
+				pdfout = pdf_create_document(ctx);
+			}
 		}
 #endif
 
@@ -2877,9 +2882,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 			else
 			{
-				char text_buffer[PATH_MAX];
-				fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, 0 /* page # 0 */);
-				pdf_save_document(ctx, pdfout, text_buffer, NULL);
+				pdf_save_document(ctx, pdfout, output, NULL);
 			}
 			pdf_drop_document(ctx, pdfout);
 			pdfout = NULL;
