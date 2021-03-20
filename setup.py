@@ -18,9 +18,22 @@ Extra command-line options:
 
         Otherwise we default to "--mupdf-build 1".
 
-    --mupdf-build-dir <dir>
+    --mupdf-build-dir <build-dir>
         Sets the type of build by specifing the build directory, for example:
         --mupdf-build-dir build/shared-debug
+
+Environmental variables:
+
+    MUPDF_SETUP_BUILD_DIR
+        Sets the build directory; overriden if --mupdf-build-dir is specified.
+
+    MUPDF_SETUP_HAVE_CLANG_PYTHON
+        If set and not '1', we do not attempt to use clang-python, and instead
+        assume that generated files are already available in platform/c++/.
+
+    MUPDF_SETUP_HAVE_SWIG
+        If set and not '1', we do not attempt to run swig, and instead assume
+        that generated files are already available in platform/python/.
 '''
 
 import os
@@ -67,7 +80,10 @@ out_names = [
         'mupdf.py',         # Python
         ]
 
-build_dir = 'build/shared-release'
+build_dir = os.environ.get('MUPDF_SETUP_BUILD_DIR', 'build/shared-release')
+log(f'MUPDF_SETUP_BUILD_DIR={os.environ.get("MUPDF_SETUP_BUILD_DIR")}')
+log(f'build_dir={build_dir}')
+
 mupdf_build = None
 
 # Process any of our own command-line options.
@@ -100,7 +116,7 @@ def sdist():
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
     #
-    subprocess.check_call('./scripts/mupdfwrap.py -b 02', shell=True)
+    subprocess.check_call(f'./scripts/mupdfwrap.py -d {build_dir} -b 02', shell=True)
     paths += [
             'build/shared-release/mupdf.py',
             'platform/c++/container_classnames.pickle',
