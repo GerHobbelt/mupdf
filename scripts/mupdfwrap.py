@@ -4508,19 +4508,19 @@ def struct_to_string_fns(
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes {structname}\'s members, labelled and inside (...), to a stream. */\n')
-    out_h.write( f'std::ostream& operator<< (std::ostream& out, {structname}& rhs);\n')
+    out_h.write( f'std::ostream& operator<< (std::ostream& out, const {structname}& rhs);\n')
 
     out_h.write( f'\n')
     out_h.write( f'/* Returns string containing a {structname}\'s members, labelled and inside (...), using operator<<. */\n')
-    out_h.write( f'std::string to_string_{structname}({structname}& s);\n')
+    out_h.write( f'std::string to_string_{structname}(const {structname}& s);\n')
 
     out_h.write( f'\n')
     out_h.write( f'/* Returns string containing a {structname}\'s members, labelled and inside (...), using operator<<.\n')
     out_h.write( f'(Convenience overload). */\n')
-    out_h.write( f'std::string to_string({structname}& s);\n')
+    out_h.write( f'std::string to_string(const {structname}& s);\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::ostream& operator<< (std::ostream& out, {structname}& rhs)\n')
+    out_cpp.write( f'std::ostream& operator<< (std::ostream& out, const {structname}& rhs)\n')
     out_cpp.write( f'{{\n')
     i = 0
     out_cpp.write( f'    out\n')
@@ -4540,7 +4540,7 @@ def struct_to_string_fns(
     out_cpp.write( f'\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::string to_string_{structname}({structname}& s)\n')
+    out_cpp.write( f'std::string to_string_{structname}(const {structname}& s)\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    std::ostringstream buffer;\n')
     out_cpp.write( f'    buffer << s;\n')
@@ -4548,7 +4548,7 @@ def struct_to_string_fns(
     out_cpp.write( f'}}\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::string to_string({structname}& s)\n')
+    out_cpp.write( f'std::string to_string(const {structname}& s)\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    return to_string_{structname}(s);\n')
     out_cpp.write( f'}}\n')
@@ -4570,10 +4570,10 @@ def class_to_string_fns(
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes a {classname}\'s underlying {structname}\'s members, labelled and inside (...), to a stream. */\n')
-    out_h.write( f'std::ostream& operator<< (std::ostream& out, {classname}& rhs);\n')
+    out_h.write( f'std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::ostream& operator<< (std::ostream& out, {classname}& rhs)\n')
+    out_cpp.write( f'std::ostream& operator<< (std::ostream& out, const {classname}& rhs)\n')
     out_cpp.write( f'{{\n')
     if extras.pod == 'inline':
         out_cpp.write( f'    return out << *rhs.internal();\n')
