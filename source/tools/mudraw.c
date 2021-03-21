@@ -1,4 +1,4 @@
-﻿/*
+/*
  * mudraw -- command line tool for drawing and converting documents
  */
 
@@ -1035,7 +1035,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			dev = fz_new_svg_device(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, FZ_SVG_TEXT_AS_PATH, 1);
+			int text_format = (stext_options.flags & FZ_STEXT_NO_TEXT_AS_PATH ? FZ_SVG_TEXT_AS_TEXT : FZ_SVG_TEXT_AS_PATH);
+			int reuse_images = !(stext_options.flags & FZ_STEXT_NO_REUSE_IMAGES);
+			dev = fz_new_svg_device(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, text_format, reuse_images);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)

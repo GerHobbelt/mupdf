@@ -91,6 +91,11 @@ typedef struct fz_stext_block fz_stext_block;
 	instead of the image data itself. This modifies
 	the FZ_STEXT_PRESERVE_IMAGES flag behaviour.
 
+	FZ_STEXT_NO_REUSE_IMAGES: If this option is set, then every image
+	in the generated (SVG) output will be rendered individually.
+	When not set, identical images inside the same SVG will use a common
+	(symbol) reference.
+
 	FZ_STEXT_INHIBIT_SPACES: If this option is set, we will not try
 	to add missing space characters where there are large gaps
 	between characters.
@@ -104,17 +109,23 @@ typedef struct fz_stext_block fz_stext_block;
 
 	FZ_STEXT_MEDIABOX_CLIP: If this option is set, characters entirely
 	outside each page's mediabox will be ignored.
+
+	FZ_STEXT_NO_TEXT_AS_PATH: If this option is set, SVG text will be
+	kept as-is. When this option is not set, SVG text will be rendered
+	as curves.
 */
 enum
 {
 	FZ_STEXT_PRESERVE_LIGATURES = 1,
 	FZ_STEXT_PRESERVE_WHITESPACE = 2,
 	FZ_STEXT_PRESERVE_IMAGES = 4,
-	FZ_STEXT_INHIBIT_SPACES = 8,
-	FZ_STEXT_DEHYPHENATE = 16,
-	FZ_STEXT_PRESERVE_SPANS = 32,
-	FZ_STEXT_MEDIABOX_CLIP = 64,
-	FZ_STEXT_REFERENCE_IMAGES = 128,
+	FZ_STEXT_NO_REUSE_IMAGES = 8,
+	FZ_STEXT_REFERENCE_IMAGES = 16,
+	FZ_STEXT_INHIBIT_SPACES = 32,
+	FZ_STEXT_DEHYPHENATE = 64,
+	FZ_STEXT_PRESERVE_SPANS = 128,
+	FZ_STEXT_MEDIABOX_CLIP = 256,
+	FZ_STEXT_NO_TEXT_AS_PATH = 512,
 };
 
 /**
