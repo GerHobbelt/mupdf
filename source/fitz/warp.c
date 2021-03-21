@@ -1418,7 +1418,7 @@ score_by_area(const hough_point_t *points, const hough_route_t *route)
  * 2*i+1 = point number
  */
 static void
-find_route(hough_point_t *points, int num_points, hough_route_t *route, int n)
+find_route(fz_context* ctx, hough_point_t *points, int num_points, hough_route_t *route, int n)
 {
 	int i;
 
@@ -1455,7 +1455,7 @@ find_route(hough_point_t *points, int num_points, hough_route_t *route, int n)
 			if (score > 0)
 				score *= score_by_area(points, route);
 
-			printf("Found route: (point=%d %d %d %d) (edge %d %d %d %d) score=%d\n",
+			fz_info(ctx, "Found route: (point=%d %d %d %d) (edge %d %d %d %d) score=%d\n",
 				route->point[0], route->point[1], route->point[2], route->point[3],
 				route->edge[0], route->edge[1], route->edge[2], route->edge[3],
 				score);
@@ -1484,7 +1484,7 @@ find_route(hough_point_t *points, int num_points, hough_route_t *route, int n)
 			/* Possible. Extend the route, and recurse. */
 			route->point[n] = i;
 			route->edge[n+1] = e1;
-			find_route(points, num_points, route, n+1);
+			find_route(ctx, points, num_points, route, n+1);
 		}
 	}
 }
@@ -1573,7 +1573,7 @@ make_hough(fz_context *ctx, fz_pixmap *src)
 		/* We don't want to find any other maxima that are too
 		 * close to this one, so we 'blot out' stuff around this
 		 * maxima. */
-		printf("Maxima %d: dist=%d ang=%d strength=%d\n",
+		fz_info(ctx, "Maxima %d: dist=%d ang=%d strength=%d\n",
 			x, (dis<<reduce)-maxlen, ang-90, edge[x].strength);
 		minang = ang - BLOT_ANG;
 		if (minang < 0)
@@ -1629,9 +1629,9 @@ make_hough(fz_context *ctx, fz_pixmap *src)
 			num_points += intersect(&points[num_points],
 						edge, x, y);
 
-	printf("%d edges, %d points\n", num_edges, num_points);
+	fz_info(ctx, "%d edges, %d points\n", num_edges, num_points);
 	for (x = 0; x < num_points; x++)
-		printf("%d %d (score %d, %d+%d)\n",
+		fz_info(ctx, "%d %d (score %d, %d+%d)\n",
 			points[x].x, points[x].y, points[x].score,
 			points[x].e0, points[x].e1);
 
@@ -1646,12 +1646,12 @@ make_hough(fz_context *ctx, fz_pixmap *src)
 			route.edge[0] = points[i].e0;
 			route.point[0] = i;
 			route.edge[1] = points[i].e1;
-			find_route(points, num_points, &route, 1);
+			find_route(ctx, points, num_points, &route, 1);
 		}
 
 		if (route.best_score)
 		{
-			printf("Score: %d, Edges=%d->%d->%d->%d, Points=%d->%d->%d->%d\n",
+			fz_info(ctx, "Score: %d, Edges=%d->%d->%d->%d, Points=%d->%d->%d->%d\n",
 				route.best_score,
 				route.best_edge[0],
 				route.best_edge[1],
@@ -1661,7 +1661,7 @@ make_hough(fz_context *ctx, fz_pixmap *src)
 				route.best_point[1],
 				route.best_point[2],
 				route.best_point[3]);
-			printf("(%d,%d)->(%d,%d)->(%d,%d)->(%d,%d)\n",
+			fz_info(ctx, "(%d,%d)->(%d,%d)->(%d,%d)->(%d,%d)\n",
 				points[route.best_point[0]].x,
 				points[route.best_point[0]].y,
 				points[route.best_point[1]].x,
@@ -1687,7 +1687,7 @@ make_hough(fz_context *ctx, fz_pixmap *src)
 			fz_lineto(ctx, path, edge[x].x1, edge[x].y1);
 			fz_stroke_path(ctx, dev, path, stroke, fz_identity, fz_device_gray(ctx), &col, 1, params);
 			fz_drop_path(ctx, path);
-			//printf("%d %d -> %d %d\n", edge[x].x0, edge[x].y0, edge[x].x1, edge[x].y1);
+			//fz_info(ctx, "%d %d -> %d %d\n", edge[x].x0, edge[x].y0, edge[x].x1, edge[x].y1);
 			sprintf(text, "line%d.png", x);
 			fz_save_pixmap_as_png(ctx, src, text);
 		}

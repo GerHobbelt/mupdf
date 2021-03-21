@@ -369,21 +369,21 @@ dump_splay(cmap_splay *tree, unsigned int node, int depth, const char *pre)
 		return;
 
 	for (i = 0; i < depth; i++)
-		fprintf(stderr, " ");
-	fprintf(stderr, "%s%d:", pre, node);
+		fz_info(ctx, " ");
+	fz_info(ctx, "%s%d:", pre, node);
 	if (tree[node].parent == EMPTY)
-		fprintf(stderr, "^EMPTY");
+		fz_info(ctx, "^EMPTY");
 	else
-		fprintf(stderr, "^%d", tree[node].parent);
+		fz_info(ctx, "^%d", tree[node].parent);
 	if (tree[node].left == EMPTY)
-		fprintf(stderr, "<EMPTY");
+		fz_info(ctx, "<EMPTY");
 	else
-		fprintf(stderr, "<%d", tree[node].left);
+		fz_info(ctx, "<%d", tree[node].left);
 	if (tree[node].right == EMPTY)
-		fprintf(stderr, ">EMPTY");
+		fz_info(ctx, ">EMPTY");
 	else
-		fprintf(stderr, ">%d", tree[node].right);
-	fprintf(stderr, "(%x,%x,%x,%d)\n", tree[node].low, tree[node].high, tree[node].out, tree[node].many);
+		fz_info(ctx, ">%d", tree[node].right);
+	fz_info(ctx, "(%x,%x,%x,%d)\n", tree[node].low, tree[node].high, tree[node].out, tree[node].many);
 	assert(tree[node].parent == EMPTY || depth);
 	assert(tree[node].left == EMPTY || tree[tree[node].left].parent == node);
 	assert(tree[node].right == EMPTY || tree[tree[node].right].parent == node);

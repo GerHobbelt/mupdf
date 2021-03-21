@@ -219,7 +219,7 @@ split_at_script(const uint32_t *fragment,
  * behaviour that the character exhibits.
  */
 static void
-classify_characters(const uint32_t *text,
+classify_characters(fz_context* ctx, const uint32_t *text,
 		fz_bidi_chartype *types,
 		size_t len,
 		fz_bidi_flags flags)
@@ -236,7 +236,7 @@ classify_characters(const uint32_t *text,
 	else
 	{
 #ifdef DEBUG_BIDI_VERBOSE
-		fprintf(stderr, "Text:  ");
+		fz_info(ctx, "Text:  ");
 		for (i = 0; i < len; i++)
 		{
 			/* So that we can actually sort of read the debug string, any
@@ -244,20 +244,20 @@ classify_characters(const uint32_t *text,
 			 * value from 0-9, making non-english characters appear
 			 * as numbers
 			 */
-			fprintf(stderr, "%c", (text[i] <= 127 && text[i] >= 32) ?
+			fz_info(ctx, "%c", (text[i] <= 127 && text[i] >= 32) ?
 					text[i] : text[i] % 9 + '0');
 		}
-		fprintf(stderr, "\nTypes: ");
+		fz_info(ctx, "\nTypes: ");
 #endif
 		for (i = 0; i < len; i++)
 		{
 			types[i] = class_from_ch_n(text[i]);
 #ifdef DEBUG_BIDI_VERBOSE
-			fprintf(stderr, "%c", char_from_types[(int)types[i]]);
+			fz_info(ctx, "%c", char_from_types[(int)types[i]]);
 #endif
 		}
 #ifdef DEBUG_BIDI_VERBOSE
-		fprintf(stderr, "\n");
+		fz_info(ctx, "\n");
 #endif
 	}
 }
@@ -431,7 +431,7 @@ create_levels(fz_context *ctx,
 	{
 		types = fz_malloc(ctx, len * sizeof(fz_bidi_chartype));
 
-		classify_characters(text, types, len, flags);
+		classify_characters(ctx, text, types, len, flags);
 
 		if (*baseDir != FZ_BIDI_LTR && *baseDir != FZ_BIDI_RTL)
 		{
@@ -483,7 +483,7 @@ create_levels(fz_context *ctx,
 			fz_bidi_resolve_neutrals(baseLevel, ptypes, plevels, plen);
 			fz_bidi_resolve_implicit(ptypes, plevels, plen);
 
-			classify_characters(ptext, ptypes, plen, FZ_BIDI_CLASSIFY_WHITE_SPACE);
+			classify_characters(ctx, ptext, ptypes, plen, FZ_BIDI_CLASSIFY_WHITE_SPACE);
 
 			if (resolveWhiteSpace)
 			{
@@ -501,14 +501,14 @@ create_levels(fz_context *ctx,
 		 * rtl or ltr characters, respectively.
 		 */
 #ifdef DEBUG_BIDI_VERBOSE
-		fprintf(stderr, "Levels: ");
+		fz_info(ctx, "Levels: ");
 		{
 			size_t i;
 			for (i = 0; i < len; i++)
 			{
-				fprintf(stderr, "%d", levels[i]>9?0:levels[i]);
+				fz_info(ctx, "%d", levels[i]>9?0:levels[i]);
 			}
-			fprintf(stderr, "\n");
+			fz_info(ctx, "\n");
 		}
 #endif
 	}

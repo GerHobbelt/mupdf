@@ -1371,7 +1371,7 @@ fz_parse_html_imp(fz_context *ctx,
 
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_CSS")))
-		fz_debug_css(ctx, g.css);
+		fz_debug_css(ctx, fz_stddbg(ctx), g.css);
 #endif
 
 	fz_try(ctx)
@@ -1460,7 +1460,7 @@ static void indent(int level)
 }
 
 static void
-fz_debug_html_flow(fz_context *ctx, fz_html_flow *flow, int level)
+fz_debug_html_flow(fz_context *ctx, fz_output* out, fz_html_flow *flow, int level)
 {
 	fz_html_box *sbox = NULL;
 	while (flow)
@@ -1468,111 +1468,111 @@ fz_debug_html_flow(fz_context *ctx, fz_html_flow *flow, int level)
 		if (flow->box != sbox) {
 			if (sbox) {
 				indent(level);
-				printf("}\n");
+				fz_write_printf(ctx, out, "}\n");
 			}
 			sbox = flow->box;
 			indent(level);
-			printf("span em=%g font='%s'", sbox->em, fz_font_name(ctx, sbox->style->font));
+			fz_write_printf(ctx, out, "span em=%g font='%s'", sbox->em, fz_font_name(ctx, sbox->style->font));
 			if (fz_font_is_serif(ctx, sbox->style->font))
-				printf(" serif");
+				fz_write_printf(ctx, out, " serif");
 			else
-				printf(" sans");
+				fz_write_printf(ctx, out, " sans");
 			if (fz_font_is_monospaced(ctx, sbox->style->font))
-				printf(" monospaced");
+				fz_write_printf(ctx, out, " monospaced");
 			if (fz_font_is_bold(ctx, sbox->style->font))
-				printf(" bold");
+				fz_write_printf(ctx, out, " bold");
 			if (fz_font_is_italic(ctx, sbox->style->font))
-				printf(" italic");
+				fz_write_printf(ctx, out, " italic");
 			if (sbox->style->small_caps)
-				printf(" small-caps");
-			printf("\n");
+				fz_write_printf(ctx, out, " small-caps");
+			fz_write_printf(ctx, out, "\n");
 			indent(level);
-			printf("{\n");
+			fz_write_printf(ctx, out, "{\n");
 		}
 
 		indent(level+1);
 		switch (flow->type) {
-		case FLOW_WORD: printf("word "); break;
-		case FLOW_SPACE: printf("space"); break;
-		case FLOW_SBREAK: printf("sbrk "); break;
-		case FLOW_SHYPHEN: printf("shy  "); break;
-		case FLOW_BREAK: printf("break"); break;
-		case FLOW_IMAGE: printf("image"); break;
-		case FLOW_ANCHOR: printf("anchor"); break;
+		case FLOW_WORD: fz_write_printf(ctx, out, "word "); break;
+		case FLOW_SPACE: fz_write_printf(ctx, out, "space"); break;
+		case FLOW_SBREAK: fz_write_printf(ctx, out, "sbrk "); break;
+		case FLOW_SHYPHEN: fz_write_printf(ctx, out, "shy  "); break;
+		case FLOW_BREAK: fz_write_printf(ctx, out, "break"); break;
+		case FLOW_IMAGE: fz_write_printf(ctx, out, "image"); break;
+		case FLOW_ANCHOR: fz_write_printf(ctx, out, "anchor"); break;
 		}
-		printf(" y=%g x=%g w=%g", flow->y, flow->x, flow->w);
+		fz_write_printf(ctx, out, " y=%g x=%g w=%g", flow->y, flow->x, flow->w);
 		if (flow->type == FLOW_IMAGE)
-			printf(" h=%g", flow->h);
+			fz_write_printf(ctx, out, " h=%g", flow->h);
 		if (flow->type == FLOW_WORD)
-			printf(" text='%s'", flow->content.text);
-		printf("\n");
+			fz_write_printf(ctx, out, " text='%s'", flow->content.text);
+		fz_write_printf(ctx, out, "\n");
 		if (flow->breaks_line) {
 			indent(level+1);
-			printf("*\n");
+			fz_write_printf(ctx, out, "*\n");
 		}
 
 		flow = flow->next;
 	}
 	indent(level);
-	printf("}\n");
+	fz_write_printf(ctx, out, "}\n");
 }
 
 static void
-fz_debug_html_box(fz_context *ctx, fz_html_box *box, int level)
+fz_debug_html_box(fz_context *ctx, fz_output *out, fz_html_box *box, int level)
 {
 	while (box)
 	{
 		indent(level);
 		switch (box->type) {
-		case BOX_BLOCK: printf("block"); break;
-		case BOX_FLOW: printf("flow"); break;
-		case BOX_INLINE: printf("inline"); break;
-		case BOX_TABLE: printf("table"); break;
-		case BOX_TABLE_ROW: printf("table-row"); break;
-		case BOX_TABLE_CELL: printf("table-cell"); break;
+		case BOX_BLOCK: fz_write_printf(ctx, out, "block"); break;
+		case BOX_FLOW: fz_write_printf(ctx, out, "flow"); break;
+		case BOX_INLINE: fz_write_printf(ctx, out, "inline"); break;
+		case BOX_TABLE: fz_write_printf(ctx, out, "table"); break;
+		case BOX_TABLE_ROW: fz_write_printf(ctx, out, "table-row"); break;
+		case BOX_TABLE_CELL: fz_write_printf(ctx, out, "table-cell"); break;
 		}
 
-		printf(" em=%g x=%g y=%g w=%g b=%g\n", box->em, box->x, box->y, box->w, box->b);
+		fz_write_printf(ctx, out, " em=%g x=%g y=%g w=%g b=%g\n", box->em, box->x, box->y, box->w, box->b);
 
 		indent(level);
-		printf("{\n");
+		fz_write_printf(ctx, out, "{\n");
 		if (box->type == BOX_BLOCK) {
 			indent(level+1);
-			printf("margin=%g %g %g %g\n", box->margin[0], box->margin[1], box->margin[2], box->margin[3]);
+			fz_write_printf(ctx, out, "margin=%g %g %g %g\n", box->margin[0], box->margin[1], box->margin[2], box->margin[3]);
 		}
 		if (box->is_first_flow) {
 			indent(level+1);
-			printf("is-first-flow\n");
+			fz_write_printf(ctx, out, "is-first-flow\n");
 		}
 		if (box->list_item) {
 			indent(level+1);
-			printf("list=%d\n", box->list_item);
+			fz_write_printf(ctx, out, "list=%d\n", box->list_item);
 		}
 		if (box->id) {
 			indent(level+1);
-			printf("id=%s\n", box->id);
+			fz_write_printf(ctx, out, "id=%s\n", box->id);
 		}
 		if (box->href) {
 			indent(level+1);
-			printf("href=%s\n", box->href);
+			fz_write_printf(ctx, out, "href=%s\n", box->href);
 		}
 
 		if (box->down)
-			fz_debug_html_box(ctx, box->down, level + 1);
+			fz_debug_html_box(ctx, out, box->down, level + 1);
 		if (box->flow_head)
-			fz_debug_html_flow(ctx, box->flow_head, level + 1);
+			fz_debug_html_flow(ctx, out, box->flow_head, level + 1);
 
 		indent(level);
-		printf("}\n");
+		fz_write_printf(ctx, out, "}\n");
 
 		box = box->next;
 	}
 }
 
 void
-fz_debug_html(fz_context *ctx, fz_html_box *box)
+fz_debug_html(fz_context *ctx, fz_output* out, fz_html_box *box)
 {
-	fz_debug_html_box(ctx, box, 0);
+	fz_debug_html_box(ctx, out, box, 0);
 }
 
 static size_t
@@ -1626,7 +1626,7 @@ static void
 fz_format_html_key(fz_context *ctx, char *s, size_t n, void *key_)
 {
 	fz_html_key *key = (fz_html_key *)key_;
-	fz_snprintf(s, n, "(html doc=%p, ch=%d)", key->doc, key->chapter_num);
+	fz_snprintf(ctx, s, n, "(html doc=%p, ch=%d)", key->doc, key->chapter_num);
 }
 
 static const fz_store_type fz_html_store_type =

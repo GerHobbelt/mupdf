@@ -887,7 +887,7 @@ fz_layout_html(fz_context *ctx, fz_html *html, float w, float h, float em)
 
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_HTML")))
-		fz_debug_html(ctx, html->root);
+		fz_debug_html(ctx, fz_stddbg(ctx), html->root);
 #endif
 }
 

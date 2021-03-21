@@ -10,7 +10,7 @@ static void dump_usage(void)
 
 	while (u)
 	{
-		fprintf(stderr, "USAGE: %s (%s:%d) %d calls\n",
+		fz_info(ctx, "USAGE: %s (%s:%d) %d calls\n",
 			u->desc, u->function, u->line, u->count);
 		u = u->next;
 	}

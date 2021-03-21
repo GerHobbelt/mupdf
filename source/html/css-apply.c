@@ -1331,21 +1331,21 @@ fz_apply_css_style(fz_context *ctx, fz_html_font_set *set, fz_css_style *style, 
 static void
 do_verify_splay(const fz_css_style_splay *x)
 {
-	printf("%x<", x);
+	fz_write_printf(ctx, out, "%x<", x);
 	if (x->lt)
 	{
 		assert(memcmp(&x->lt->style, &x->style, sizeof(x->style)) < 0);
 		assert(x->lt->up == x);
 		do_verify_splay(x->lt);
 	}
-	printf(",");
+	fz_write_printf(ctx, out, ",");
 	if (x->gt)
 	{
 		assert(memcmp(&x->gt->style, &x->style, sizeof(x->style)) > 0);
 		assert(x->gt->up == x);
 		do_verify_splay(x->gt);
 	}
-	printf(">\n");
+	fz_write_printf(ctx, out, ">\n");
 }
 
 static void
@@ -1355,7 +1355,7 @@ verify_splay(const fz_css_style_splay *x)
 		return;
 	assert(x->up == NULL);
 	do_verify_splay(x);
-	printf("-----\n");
+	fz_write_printf(ctx, out, "-----\n");
 }
 #endif
 
@@ -1412,7 +1412,7 @@ fz_css_enlist(fz_context *ctx, const fz_css_style *style, fz_css_style_splay **t
 		|     A B                  B C                  B C           A B
 	*/
 #ifdef DEBUG_CSS_SPLAY
-	printf("BEFORE\n");
+	fz_write_printf(ctx, out, "BEFORE\n");
 	verify_splay(*tree);
 #endif
 	while ((y = x->up) != NULL ) /* While we're not at the root */
@@ -1504,7 +1504,7 @@ fz_css_enlist(fz_context *ctx, const fz_css_style *style, fz_css_style_splay **t
 
 	*tree = x;
 #ifdef DEBUG_CSS_SPLAY
-	printf("AFTER\n");
+	fz_write_printf(ctx, out, "AFTER\n");
 	verify_splay(x);
 #endif
 
@@ -1514,92 +1514,92 @@ fz_css_enlist(fz_context *ctx, const fz_css_style *style, fz_css_style_splay **t
  * Pretty printing
  */
 
-static void print_value(fz_css_value *val)
+static void print_value(fz_context* ctx, fz_output *out, fz_css_value *val)
 {
-	printf("%s", val->data);
+	fz_write_printf(ctx, out, "%s", val->data);
 	if (val->args)
 	{
-		printf("(");
-		print_value(val->args);
-		printf(")");
+		fz_write_printf(ctx, out, "(");
+		print_value(ctx, out, val->args);
+		fz_write_printf(ctx, out, ")");
 	}
 	if (val->next)
 	{
-		printf(" ");
-		print_value(val->next);
+		fz_write_printf(ctx, out, " ");
+		print_value(ctx, out, val->next);
 	}
 }
 
-static void print_property(fz_css_property *prop)
+static void print_property(fz_context* ctx, fz_output* out, fz_css_property *prop)
 {
-	printf("\t%s: ", fz_css_property_name(prop->name));
-	print_value(prop->value);
+	fz_write_printf(ctx, out, "\t%s: ", fz_css_property_name(prop->name));
+	print_value(ctx, out, prop->value);
 	if (prop->important)
-		printf(" !important");
-	printf(";\n");
+		fz_write_printf(ctx, out, " !important");
+	fz_write_printf(ctx, out, ";\n");
 }
 
-static void print_condition(fz_css_condition *cond)
+static void print_condition(fz_context* ctx, fz_output* out, fz_css_condition *cond)
 {
 	if (cond->type == '=')
-		printf("[%s=%s]", cond->key, cond->val);
+		fz_write_printf(ctx, out, "[%s=%s]", cond->key, cond->val);
 	else if (cond->type == '[')
-		printf("[%s]", cond->key);
+		fz_write_printf(ctx, out, "[%s]", cond->key);
 	else
-		printf("%c%s", cond->type, cond->val);
+		fz_write_printf(ctx, out, "%c%s", cond->type, cond->val);
 	if (cond->next)
-		print_condition(cond->next);
+		print_condition(ctx, out, cond->next);
 }
 
-static void print_selector(fz_css_selector *sel)
+static void print_selector(fz_context* ctx, fz_output* out, fz_css_selector *sel)
 {
 	if (sel->combine)
 	{
-		print_selector(sel->left);
+		print_selector(ctx, out, sel->left);
 		if (sel->combine == ' ')
-			printf(" ");
+			fz_write_printf(ctx, out, " ");
 		else
-			printf(" %c ", sel->combine);
-		print_selector(sel->right);
+			fz_write_printf(ctx, out, " %c ", sel->combine);
+		print_selector(ctx, out, sel->right);
 	}
 	else if (sel->name)
-		printf("%s", sel->name);
+		fz_write_printf(ctx, out, "%s", sel->name);
 	else
-		printf("*");
+		fz_write_printf(ctx, out, "*");
 	if (sel->cond)
 	{
-		print_condition(sel->cond);
+		print_condition(ctx, out, sel->cond);
 	}
 }
 
-static void print_rule(fz_css_rule *rule)
+static void print_rule(fz_context* ctx, fz_output* out, fz_css_rule *rule)
 {
 	fz_css_selector *sel;
 	fz_css_property *prop;
 
 	for (sel = rule->selector; sel; sel = sel->next)
 	{
-		print_selector(sel);
-		printf(" /* %d */", selector_specificity(sel, 0));
+		print_selector(ctx, out, sel);
+		fz_write_printf(ctx, out, " /* %d */", selector_specificity(sel, 0));
 		if (sel->next)
-			printf(", ");
+			fz_write_printf(ctx, out, ", ");
 	}
 
-	printf("\n{\n");
+	fz_write_printf(ctx, out, "\n{\n");
 	for (prop = rule->declaration; prop; prop = prop->next)
 	{
-		print_property(prop);
+		print_property(ctx, out, prop);
 	}
-	printf("}\n");
+	fz_write_printf(ctx, out, "}\n");
 }
 
 void
-fz_debug_css(fz_context *ctx, fz_css *css)
+fz_debug_css(fz_context* ctx, fz_output* out, fz_css *css)
 {
 	fz_css_rule *rule = css->rule;
 	while (rule)
 	{
-		print_rule(rule);
+		print_rule(ctx, out, rule);
 		rule = rule->next;
 	}
 }

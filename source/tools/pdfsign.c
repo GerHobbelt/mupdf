@@ -44,11 +44,11 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 	int edits;
 	pdf_pkcs7_designated_name *dn = NULL;
 
-	printf("Verifying signature %d:\n", pdf_to_num(ctx, signature));
+	fz_info(ctx, "Verifying signature %d:\n", pdf_to_num(ctx, signature));
 
 	if (!pdf_signature_is_signed(ctx, doc, signature))
 	{
-		printf("\tSignature is not signed.\n");
+		fz_info(ctx, "\tSignature is not signed.\n");
 		return;
 	}
 
@@ -60,28 +60,28 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 		if (dn)
 		{
 			name = pdf_signature_format_designated_name(ctx, dn);
-			printf("\tDesignated name: %s\n", name);
+			fz_info(ctx, "\tDesignated name: %s\n", name);
 			fz_free(ctx, name);
 		}
 		else
 		{
-			printf("\tSignature information missing.\n");
+			fz_info(ctx, "\tSignature information missing.\n");
 		}
 
 		err = pdf_check_certificate(ctx, verifier, doc, signature);
 		if (err)
-			printf("\tCertificate error: %s\n", pdf_signature_error_description(err));
+			fz_info(ctx, "\tCertificate error: %s\n", pdf_signature_error_description(err));
 		else
-			printf("\tCertificate is trusted.\n");
+			fz_info(ctx, "\tCertificate is trusted.\n");
 
 		err = pdf_check_digest(ctx, verifier, doc, signature);
 		edits = pdf_signature_incremental_change_since_signing(ctx, doc, signature);
 		if (err)
-			printf("\tDigest error: %s\n", pdf_signature_error_description(err));
+			fz_info(ctx, "\tDigest error: %s\n", pdf_signature_error_description(err));
 		else if (edits)
-			printf("\tThe signature is valid but there have been edits since signing.\n");
+			fz_info(ctx, "\tThe signature is valid but there have been edits since signing.\n");
 		else
-			printf("\tThe document is unchanged since signing.\n");
+			fz_info(ctx, "\tThe document is unchanged since signing.\n");
 	}
 	fz_always(ctx)
 	{
@@ -89,7 +89,7 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 		pdf_drop_verifier(ctx, verifier);
 	}
 	fz_catch(ctx)
-		printf("\tVerification error: %s\n", fz_caught_message(ctx));
+		fz_info(ctx, "\tVerification error: %s\n", fz_caught_message(ctx));
 }
 
 static void clear_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signature)
@@ -101,7 +101,7 @@ static void clear_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatu
 
 	fz_var(page);
 
-	printf("Clearing signature %d.\n", pdf_to_num(ctx, signature));
+	fz_info(ctx, "Clearing signature %d.\n", pdf_to_num(ctx, signature));
 
 	fz_try(ctx)
 	{
@@ -129,7 +129,7 @@ static void sign_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatur
 	fz_var(page);
 	fz_var(signer);
 
-	printf("Signing signature %d.\n", pdf_to_num(ctx, signature));
+	fz_info(ctx, "Signing signature %d.\n", pdf_to_num(ctx, signature));
 
 	fz_try(ctx)
 	{
@@ -159,7 +159,7 @@ static void list_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatur
 
 	if (!pdf_signature_is_signed(ctx, doc, signature))
 	{
-		printf("%5d: Signature is not signed.\n", pdf_to_num(ctx, signature));
+		fz_info(ctx, "%5d: Signature is not signed.\n", pdf_to_num(ctx, signature));
 		return;
 	}
 
@@ -169,13 +169,13 @@ static void list_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatur
 	if (dn)
 	{
 		char *s = pdf_signature_format_designated_name(ctx, dn);
-		printf("%5d: Designated name: %s\n", pdf_to_num(ctx, signature), s);
+		fz_info(ctx, "%5d: Designated name: %s\n", pdf_to_num(ctx, signature), s);
 		fz_free(ctx, s);
 		pdf_signature_drop_designated_name(ctx, dn);
 	}
 	else
 	{
-		printf("%5d: Signature information missing.\n", pdf_to_num(ctx, signature));
+		fz_info(ctx, "%5d: Signature information missing.\n", pdf_to_num(ctx, signature));
 	}
 
 	pdf_drop_verifier(ctx, verifier);

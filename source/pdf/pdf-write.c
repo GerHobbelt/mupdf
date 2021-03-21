@@ -385,10 +385,10 @@ heap_sort(int *list, int n, const int *val, int (*ge)(int, int))
 	int i, j;
 
 #ifdef DEBUG_HEAP_SORT
-	fprintf(stderr, "Initially:\n");
+	fz_info(ctx, "Initially:\n");
 	for (i=0; i < n; i++)
 	{
-		fprintf(stderr, "%d: %d %x\n", i, list[i], val[list[i]]);
+		fz_info(ctx, "%d: %d %x\n", i, list[i], val[list[i]]);
 	}
 #endif
 	/* Step 1: Make a heap */
@@ -410,28 +410,28 @@ heap_sort(int *list, int n, const int *val, int (*ge)(int, int))
 		}
 	}
 #ifdef DEBUG_HEAP_SORT
-	fprintf(stderr, "Valid heap:\n");
+	fz_info(ctx, "Valid heap:\n");
 	for (i=0; i < n; i++)
 	{
 		int k;
-		fprintf(stderr, "%d: %d %x ", i, list[i], val[list[i]]);
+		fz_info(ctx, "%d: %d %x ", i, list[i], val[list[i]]);
 		k = (i+1)*2-1;
 		if (k < n)
 		{
 			if (ge(val[list[i]], val[list[k]]))
-				fprintf(stderr, "OK ");
+				fz_info(ctx, "OK ");
 			else
-				fprintf(stderr, "BAD ");
+				fz_info(ctx, "BAD ");
 		}
 		if (k+1 < n)
 		{
 			if (ge(val[list[i]], val[list[k+1]]))
-				fprintf(stderr, "OK\n");
+				fz_info(ctx, "OK\n");
 			else
-				fprintf(stderr, "BAD\n");
+				fz_info(ctx, "BAD\n");
 		}
 		else
-				fprintf(stderr, "\n");
+				fz_info(ctx, "\n");
 	}
 #endif
 
@@ -469,18 +469,18 @@ heap_sort(int *list, int n, const int *val, int (*ge)(int, int))
 		}
 	}
 #ifdef DEBUG_HEAP_SORT
-	fprintf(stderr, "Sorted:\n");
+	fz_info(ctx, "Sorted:\n");
 	for (i=0; i < n; i++)
 	{
-		fprintf(stderr, "%d: %d %x ", i, list[i], val[list[i]]);
+		fz_info(ctx, "%d: %d %x ", i, list[i], val[list[i]]);
 		if (i+1 < n)
 		{
 			if (ge(val[list[i+1]], val[list[i]]))
-				fprintf(stderr, "OK");
+				fz_info(ctx, "OK");
 			else
-				fprintf(stderr, "BAD");
+				fz_info(ctx, "BAD");
 		}
-		fprintf(stderr, "\n");
+		fz_info(ctx, "\n");
 	}
 #endif
 }
@@ -529,15 +529,15 @@ page_objects_dump(pdf_write_state *opts)
 	for (i = 0; i < pol->len; i++)
 	{
 		page_objects *p = pol->page[i];
-		fprintf(stderr, "Page %d\n", i+1);
+		fz_info(ctx, "Page %d\n", i+1);
 		for (j = 0; j < p->len; j++)
 		{
 			int o = p->object[j];
-			fprintf(stderr, "\tObject %d: use=%x\n", o, opts->use_list[o]);
+			fz_info(ctx, "\tObject %d: use=%x\n", o, opts->use_list[o]);
 		}
-		fprintf(stderr, "Byte range=%d->%d\n", p->min_ofs, p->max_ofs);
-		fprintf(stderr, "Number of objects=%d, Number of shared objects=%d\n", p->num_objects, p->num_shared);
-		fprintf(stderr, "Page object number=%d\n", p->page_object_number);
+		fz_info(ctx, "Byte range=%d->%d\n", p->min_ofs, p->max_ofs);
+		fz_info(ctx, "Number of objects=%d, Number of shared objects=%d\n", p->num_objects, p->num_shared);
+		fz_info(ctx, "Page object number=%d\n", p->page_object_number);
 	}
 }
 
@@ -548,7 +548,7 @@ objects_dump(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 
 	for (i=0; i < pdf_xref_len(ctx, doc); i++)
 	{
-		fprintf(stderr, "Object %d use=%x offset=%d\n", i, opts->use_list[i], (int)opts->ofs_list[i]);
+		fz_info(ctx, "Object %d use=%x offset=%d\n", i, opts->use_list[i], (int)opts->ofs_list[i]);
 	}
 }
 #endif
@@ -692,7 +692,7 @@ static void removeduplicateobjs(fz_context *ctx, pdf_document *doc, pdf_write_st
 	if (xref_len > 10000)
 	{
 		int64_t count = (int64_t)xref_len * (int64_t)xref_len / 2;
-		fprintf(stderr, "warning: deduplication cost pathological at O(%llu)?\n", count);
+		fz_info(ctx, "warning: deduplication cost pathological at O(%llu)?\n", count);
 		limit_time = 100000;
 	}
 	struct curltime start;
@@ -1554,10 +1554,10 @@ linearize(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 	add_linearization_objs(ctx, doc, opts);
 
 #ifdef DEBUG_WRITING
-	fprintf(stderr, "Usage calculated:\n");
+	fz_info(ctx, "Usage calculated:\n");
 	for (i=0; i < pdf_xref_len(ctx, doc); i++)
 	{
-		fprintf(stderr, "%d: use=%d\n", i, opts->use_list[i]);
+		fz_info(ctx, "%d: use=%d\n", i, opts->use_list[i]);
 	}
 #endif
 
@@ -1573,10 +1573,10 @@ linearize(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 	heap_sort(reorder+1, n-1, opts->use_list, &order_ge);
 
 #ifdef DEBUG_WRITING
-	fprintf(stderr, "Reordered:\n");
+	fz_info(ctx, "Reordered:\n");
 	for (i=1; i < pdf_xref_len(ctx, doc); i++)
 	{
-		fprintf(stderr, "%d: use=%d\n", i, opts->use_list[reorder[i]]);
+		fz_info(ctx, "%d: use=%d\n", i, opts->use_list[reorder[i]]);
 	}
 #endif
 
@@ -2836,7 +2836,7 @@ static void dump_object_details(fz_context *ctx, pdf_document *doc, pdf_write_st
 
 	for (i = 0; i < pdf_xref_len(ctx, doc); i++)
 	{
-		fprintf(stderr, "%d@%ld: use=%d\n", i, opts->ofs_list[i], opts->use_list[i]);
+		fz_info(ctx, "%d@%ld: use=%d\n", i, opts->ofs_list[i], opts->use_list[i]);
 	}
 }
 #endif

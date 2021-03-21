@@ -348,7 +348,7 @@ fz_css *fz_new_css(fz_context *ctx);
 void fz_parse_css(fz_context *ctx, fz_css *css, const char *source, const char *file);
 fz_css_property *fz_parse_css_properties(fz_context *ctx, fz_pool *pool, const char *source);
 void fz_drop_css(fz_context *ctx, fz_css *css);
-void fz_debug_css(fz_context *ctx, fz_css *css);
+void fz_debug_css(fz_context *ctx, fz_output *out, fz_css *css);
 const char *fz_css_property_name(int name);
 
 void fz_match_css(fz_context *ctx, fz_css_match *match, fz_css_match *up, fz_css *css, fz_xml *node);
@@ -390,7 +390,7 @@ fz_html *fz_keep_html(fz_context *ctx, fz_html *html);
 void fz_drop_html(fz_context *ctx, fz_html *html);
 fz_bookmark fz_make_html_bookmark(fz_context *ctx, fz_html *html, int page);
 int fz_lookup_html_bookmark(fz_context *ctx, fz_html *html, fz_bookmark mark);
-void fz_debug_html(fz_context *ctx, fz_html_box *box);
+void fz_debug_html(fz_context *ctx, fz_output *out, fz_html_box *box);
 
 fz_html *fz_store_html(fz_context *ctx, fz_html *html, void *doc, int chapter);
 fz_html *fz_find_html(fz_context *ctx, void *doc, int chapter);
