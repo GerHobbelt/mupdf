@@ -3,6 +3,15 @@
 '''
 Installation script for MuPDF Python bindings, using scripts/pipcl.py.
 
+Default behaviour:
+
+    When building an sdist (e.g. with 'pip sdist'), we use clang-python to
+    generate C++ source which is then included in the sdist.
+
+    When installing or building a wheel (e.g. 'pip install <sdist>'), we
+    assume that generated C++ source is already present. Thus we don't rely on
+    clang-python being present.
+
 Extra command-line options:
 
     --mupdf-build 0 | 1 | <path>
@@ -28,8 +37,12 @@ Environmental variables:
         Sets the build directory; overriden if --mupdf-build-dir is specified.
 
     MUPDF_SETUP_HAVE_CLANG_PYTHON
+        Affects whether we use clang-python when building.
+
         If set and not '1', we do not attempt to use clang-python, and instead
         assume that generated files are already available in platform/c++/.
+
+        Default is '0'.
 
     MUPDF_SETUP_HAVE_SWIG
         If set and not '1', we do not attempt to run swig, and instead assume
@@ -148,7 +161,7 @@ def build():
         mupdf_build = '1'
 
     if mupdf_build == '1':
-        have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '1') == '1'
+        have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '0') == '1'
         have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
         b = 'm'         # Build C library.
         if have_clang_python:
