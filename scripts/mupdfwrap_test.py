@@ -281,7 +281,11 @@ if __name__ == '__main__':
 
         log_prefix_set(f'{os.path.relpath(path, g_mupdf_root)}: ')
         try:
-            test(path)
+            if 0:
+                document = mupdf.Document(path)
+                show_stext(document)
+            else:
+                test(path)
         finally:
             log_prefix_set('')
 
