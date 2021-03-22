@@ -24,7 +24,56 @@ def system(command):
     e = os.system(command)
     assert e == 0
 
+
+test_cpp = '''
+#include <iostream>
+
+#include "platform/c++/include/mupdf/classes.h"
+
+static void show_stext(mupdf::Document& document)
+{
+    for (int p=0; p<document.count_pages(); ++p)
+    {
+        mupdf::Page page(document.load_page(p);
+        StextOptions    options;
+        StextPage   stextpage(page, options);
+        for (mupdf::StextBlock stextblock: stextpage)
+        {
+            for (mupdf::StextLine stextline: stextblock)
+            {
+                for (mupdf::StextChar stextchar: stextline)
+                {
+                    std::cout << "char:"
+                            << " " << stextchar.m_internal->c
+                            << " " << (int) stextchar.m_internal->c
+                            << " " << stextchar.m_internal->color
+                            << " " << mupdf::Point(stextchar.m_internal->origin)
+                            << " " << mupdf::Quad(stextchar.m_internal->quad)
+                            << " " << stextchar.m_internal->size
+                            << "\n";
+                }
+            }
+        }
+    }
+}
+
+int main(int argc, char** argv)
+{
+    for (int i=1; i<argv; ++i)
+    {
+        mupdf::Document document(argv[i]);
+        show_stext(document);
+    }
+}
+'''
+
+
 def make_manylinux():
+
+    # This affects all builds we do later on.
+    #
+    os.environ['MUPDF_SETUP_BUILD_DIR'] = 'build/shared-debug'
+
     if 1:
         # Create new sdist.
         jlib.ensure_empty_dir('docker-dist')
@@ -45,6 +94,10 @@ def make_manylinux():
     jlib.system(f'rsync -ai {sdist} python-docker-io/')
     jlib.system(f'rsync -ai scripts/mupdfwrap_test.py python-docker-io/')
     jlib.system(f'rsync -ai thirdparty/extract/test/Python2.pdf python-docker-io/')
+
+    if 1:
+        with open('python-docker-io/test.cpp', 'w') as f:
+            f.write(test_cpp)
 
     # Ensure we have the docker image available.
     #
@@ -67,15 +120,15 @@ def make_manylinux():
         f.write(
                 f'#!/bin/bash\n'
                 f'set -e\n' # Exit if any command fails.
-                f'ls -l /io/\n'
+                )
+        if os.environ.get('MUPDF_SETUP_BUILD_DIR'):
+            f.write(f'export MUPDF_SETUP_BUILD_DIR={os.environ["MUPDF_SETUP_BUILD_DIR"]}\n')
+        f.write(
+                f'echo MUPDF_SETUP_BUILD_DIR=$MUPDF_SETUP_BUILD_DIR\n'
                 f'yum --assumeyes install python3-devel\n'
-                f'ls -l /io/\n'
-                f'MUPDF_SETUP_HAVE_CLANG_PYTHON=0 pip3 -vvv install /io/*.tar.gz\n'
-                f'ls -l /io/\n'
+                f'pip3 -vvv install /io/*.tar.gz\n'
                 f'echo running mupdfwrap_test.py on Python2.pdf\n'
-                f'ls -l /io/\n'
                 f'/io/mupdfwrap_test.py /io/Python2.pdf\n'
-                f'ls -l /io/\n'
                 )
     os.chmod(script, 0o755)
 
