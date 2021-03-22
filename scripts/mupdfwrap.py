@@ -405,7 +405,8 @@ Usage:
                 --py-package-create --py-package-testupload --py-package-testdownload
 
         --py-package-createinstall
-            Creates local sdist and installs into fresh Python venv.
+            Creates local sdist, installs into fresh Python venv and checks
+            with mupdfwrap_test.py.
 
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
@@ -5917,6 +5918,7 @@ def build_swig( build_dirs, container_classnames, to_string_structnames, swig_c,
     swig_py     = f'{build_dirs.dir_so}mupdf.py'
 
     os.makedirs( f'{build_dirs.dir_mupdf}platform/python', exist_ok=True)
+    os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
     jlib.update_file( text, swig_i)
 
     command = (
