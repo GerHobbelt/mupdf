@@ -198,8 +198,7 @@ def clean(all_):
     else:
         subprocess.check_call(f'(rm -r {build_dir} || true)', shell=True)
 
-pipcl.run(
-        argv = sys.argv,
+package_params = dict(
         name = 'mupdf',
         version = mupdf_version(),
         summary = 'Python bindings for MuPDF library',
@@ -223,3 +222,29 @@ pipcl.run(
         fn_build = build,
         license_files = 'COPYING',
         )
+
+log(f'package_params={package_params}')
+
+# Things to allow direct support of PIP-517.
+#
+
+def build_wheel( wheel_directory, config_settings=None, metadata_directory=None):
+    path = pipcl.run(
+            ['', '--dist-dir', wheel_directory, 'bdist_wheel'],
+            **package_params,
+            )
+    return os.path.basename(path)
+
+def build_sdist( sdist_directory, config_settings=None):
+    path = pipcl.run(
+            ['', '--dist-dir', sdist_directory, 'sdist'],
+            **package_params,
+            )
+    return os.path.basename(path)
+
+
+if __name__ == '__main__':
+    pipcl.run(
+            sys.argv,
+            *package_params,
+            )
