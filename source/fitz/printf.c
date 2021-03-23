@@ -849,7 +849,7 @@ void
 fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void *user, int c), const char *fmt, va_list args)
 {
 	struct fmtbuf out;
-	int c, s, z, p, w, l, j;
+	int c, s, z, p, w, l, j, hexprefix;
 	const char *comma;
 	const char *str;
 	size_t bits;
@@ -930,7 +930,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				c = *fmt++;
 				comma = ", ";
 			}
-			/* unicode-only */
+			/* JSON-only */
 			if (c == 'j') {
 				c = *fmt++;
 				j = 1;
@@ -959,6 +959,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (c == 0)
 					break;
 			}
+
+			hexprefix = 0;
 
 			switch (c) {
 			default:
@@ -1049,6 +1051,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 
 			case 'C': /* unicode char */
 				c = va_arg(args, int);
+				if (j)
+					fmtputc(&out, '"');
 				if (c >= 0 && c < 128)
 					fmtputc(&out, c);
 				else {
@@ -1057,29 +1061,53 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					for (i=0; i < n; ++i)
 						fmtputc(&out, buf[i]);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'c':
 				c = va_arg(args, int);
+				if (j)
+					fmtputc(&out, '"');
 				fmtputc(&out, c);
+				if (j)
+					fmtputc(&out, '"');
 				break;
 
 			case 'e':
+				if (j)
+					fmtputc(&out, '"');
 				fmtfloat_e(&out, va_arg(args, double), w, p);
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'f':
+				if (j)
+					fmtputc(&out, '"');
 				fmtfloat_f(&out, va_arg(args, double), w, p);
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'g':
+				if (j)
+					fmtputc(&out, '"');
 				fmtfloat(&out, va_arg(args, double));
+				if (j)
+					fmtputc(&out, '"');
 				break;
 
 			case 'p':
 				bits = 8 * sizeof(void *);
 				z = '0';
-				fmtputc(&out, '0');
-				fmtputc(&out, 'x');
+				hexprefix = 1;
 				/* fallthrough */
 			case 'x':
+				if (j)
+					fmtputc(&out, '"');
+				if (hexprefix)
+				{
+					fmtputc(&out, '0');
+					fmtputc(&out, 'x');
+				}
 				if (bits == 64)
 				{
 					uint64_t i64 = va_arg(args, uint64_t);
@@ -1090,9 +1118,13 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					unsigned int i32 = va_arg(args, unsigned int);
 					fmtuint32(&out, i32, 0, z, w, 16);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'd':
 			case 'i':
+				if (j)
+					fmtputc(&out, '"');
 				if (bits == 64)
 				{
 					int64_t i64 = va_arg(args, int64_t);
@@ -1103,8 +1135,12 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					int i32 = va_arg(args, int);
 					fmtint32(&out, i32, s, z, w, 10);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'u':
+				if (j)
+					fmtputc(&out, '"');
 				if (bits == 64)
 				{
 					uint64_t u64 = va_arg(args, uint64_t);
@@ -1115,7 +1151,28 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					unsigned int u32 = va_arg(args, unsigned int);
 					fmtuint32(&out, u32, 0, z, w, 10);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
+
+			case 'B':
+			{
+				if (j)
+					fmtputc(&out, '"');
+				if (bits == 64)
+				{
+					uint64_t u64 = va_arg(args, uint64_t);
+					fmtuint64(&out, u64, 0, z, w, 2);
+				}
+				else
+				{
+					unsigned int u32 = va_arg(args, unsigned int);
+					fmtuint32(&out, u32, 0, z, w, 2);
+				}
+				if (j)
+					fmtputc(&out, '"');
+			}
+			break;
 
 			case 's':
 				str = va_arg(args, const char*);
@@ -1172,8 +1229,12 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 			case 'n': /* pdf name */
 				str = va_arg(args, const char*);
+				if (j)
+					fmtputc(&out, '"');
 				if (!str) str = "";
 				fmtname(&out, str);
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			}
 		}

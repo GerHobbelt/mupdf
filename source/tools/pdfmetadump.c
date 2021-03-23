@@ -212,7 +212,23 @@ static void write_item_int(fz_context* ctx, fz_output* out, const char* label, i
 		value);
 }
 
-static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, fz_rect* bbox)
+static void write_item_bits(fz_context* ctx, fz_output* out, const char* label, unsigned int value)
+{
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "%jq: %jB",
+		label,
+		value);
+}
+
+static void write_item_float(fz_context* ctx, fz_output* out, const char* label, float value)
+{
+	write_sep(ctx, out);
+	fz_write_printf(ctx, out, "%jq: %g",
+		label,
+		value);
+}
+
+static void write_item_bbox(fz_context* ctx, fz_output* out, const char* label, const fz_rect* bbox)
 {
 	write_sep(ctx, out);
 	fz_write_printf(ctx, out, "%jq: [ %,R ]",
@@ -1479,10 +1495,11 @@ show_annot_info(fz_context* ctx, fz_output* out, fz_matrix ctm, pdf_annot* annot
 }
 
 static void
-printadvancedinfo(fz_context* ctx, globals* glo, int page)
+printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistics* stats)
 {
 	fz_output* out = glo->out;
 	pdf_page* page_obj = NULL;
+	fz_device* stats_dev = NULL;
 	int json_stack_level = write_level_get_level(ctx);
 
 	fz_try(ctx)
@@ -1494,6 +1511,11 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 		fz_matrix ctm = fz_pre_scale(fz_rotate(0), 1.0, 1.0);
 
 		write_item_bbox(ctx, out, "PageBounds", &mediabox);
+
+		stats_dev = fz_new_stats_device(ctx, stats, NULL);
+		fz_run_page(ctx, fz_page_from_pdf_page(ctx, page_obj), stats_dev, fz_identity, NULL);
+		// and pick up the updated statistics...
+		fz_extract_device_statistics(ctx, stats_dev, stats);
 
 		{
 			pdf_annot* annot;
@@ -1715,6 +1737,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page)
 	fz_always(ctx)
 	{
 		fz_drop_page(ctx, fz_page_from_pdf_page(ctx, page_obj));
+		fz_drop_device(ctx, stats_dev);
 	}
 	fz_catch(ctx)
 	{
@@ -1779,7 +1802,7 @@ static char* short_signature_error_desc(pdf_signature_error err)
 }
 
 static void
-printtail(fz_context* ctx, globals* glo)
+printtail(fz_context* ctx, globals* glo, const fz_gathered_statistics* stats)
 {
 	fz_output* out = glo->out;
 	char buf[1024];
@@ -1946,10 +1969,115 @@ printtail(fz_context* ctx, globals* glo)
 	write_item_bool(ctx, out, "WasCryptedWithEmptyPassword", glo->doc->crypt && !pdf_needs_password(ctx, glo->doc));
 
 	write_level_end_guaranteed(ctx, out, '}', general_info_stack_level);
+
+	{
+		int stats_stack_level = write_item_starter_block(ctx, out, "DocumentPrimitivesStatistics", '{');
+
+		write_item_int(ctx, out, "RegularAlphaCount", stats->opaque_alpha);
+		write_item_int(ctx, out, "TransparentAlphaCount", stats->transparent_alpha);
+		write_item_int(ctx, out, "OutOfBoundsAlphaCount", stats->outofbounds_alpha);
+
+		write_item_int(ctx, out, "NonOpaqueAlphaCount", stats->non_opaque_alpha);
+		if (stats->non_opaque_alpha)
+		{
+			write_item_float(ctx, out, "NonOpaqueAlphaMax", stats->non_opaque_alpha_largest);
+			write_item_float(ctx, out, "NonOpaqueAlphaMin", stats->non_opaque_alpha_smallest);
+		}
+
+		write_item_int(ctx, out, "LuminosityCount", stats->luminosity);
+		if (stats->luminosity)
+		{
+			write_item_float(ctx, out, "LuminosityMax", stats->luminosity_largest);
+			write_item_float(ctx, out, "LuminosityMin", stats->luminosity_smallest);
+		}
+
+		write_item_bits(ctx, out, "RenderingIntent", stats->color_params_aggregate.ri);
+		write_item_bits(ctx, out, "BlackPointCompensation", stats->color_params_aggregate.bp);
+		write_item_bits(ctx, out, "Overprinting", stats->color_params_aggregate.op);
+		write_item_bits(ctx, out, "OverprintingModes", stats->color_params_aggregate.opm);
+
+		write_item_bits(ctx, out, "BlendModes", stats->blendmodes_as_bits);
+
+		if (fz_is_empty_rect(stats->bounds_smallest))
+			write_item(ctx, out, "ContentBoundsSmallest", "(empty)");
+		else
+			write_item_bbox(ctx, out, "ContentBoundsSmallest", &stats->bounds_smallest);
+		if (fz_is_infinite_rect(stats->bounds_largest))
+			write_item(ctx, out, "ContentBoundsLargest", "(infinite)");
+		else
+			write_item_bbox(ctx, out, "ContentBoundsLargest", &stats->bounds_largest);
+
+		int name_count = 0;
+		const int max_names = sizeof(stats->layer_names) / sizeof(stats->layer_names[0]);
+		for (int i = 0; i < max_names; i++)
+		{
+			const char* nm = stats->layer_names[i];
+			if (!nm)
+				break;
+			name_count++;
+		}
+		write_item_int(ctx, out, "LayerNamesCount", name_count);
+		if (name_count)
+		{
+			write_item_starter_block(ctx, out, "LayerNames", '[');
+			for (int i = 0; i < max_names; i++)
+			{
+				const char* nm = stats->layer_names[i];
+				if (!nm)
+					break;
+
+				write_sep(ctx, out);
+				fz_write_printf(ctx, out, "%q", stats->layer_names[i]);
+			}
+			write_level_end(ctx, out, ']');
+		}
+
+		write_item_int(ctx, out, "FillPathCount", stats->fill_path);
+		write_item_int(ctx, out, "StrokePathCount", stats->stroke_path);
+		write_item_int(ctx, out, "ClipPathCount", stats->clip_path);
+		write_item_int(ctx, out, "ClipStrokePathCount", stats->clip_stroke_path);
+		write_item_int(ctx, out, "FillTextCount", stats->fill_text);
+		write_item_int(ctx, out, "StrokeTextCount", stats->stroke_text);
+		write_item_int(ctx, out, "ClipTextCount", stats->clip_text);
+		write_item_int(ctx, out, "ClipStrokeTextCount", stats->clip_stroke_text);
+		write_item_int(ctx, out, "IgnoreTextCount", stats->ignore_text);
+		write_item_int(ctx, out, "FillShadeCount", stats->fill_shade);
+		write_item_int(ctx, out, "FillImageCount", stats->fill_image);
+		write_item_int(ctx, out, "FillImageMaskCount", stats->fill_image_mask);
+		write_item_int(ctx, out, "ClipImageMaskCount", stats->clip_image_mask);
+
+		write_item_int(ctx, out, "ClipCount", stats->clip_count);
+		write_item_int(ctx, out, "ClipDepth", stats->clip_depth);
+		write_item_int(ctx, out, "MaskCount", stats->mask_count);
+		write_item_int(ctx, out, "MaskDepth", stats->mask_depth);
+		write_item_int(ctx, out, "GroupCount", stats->group_count);
+		write_item_int(ctx, out, "GroupDepth", stats->group_depth);
+		write_item_int(ctx, out, "GroupKnockoutCount", stats->group_knockout);
+		write_item_int(ctx, out, "GroupIsolatedCount", stats->group_isolated);
+
+		write_item_int(ctx, out, "TileCount", stats->tile_count);
+		write_item_int(ctx, out, "TileDepth", stats->tile_depth);
+
+		write_item_int(ctx, out, "DefaultColorspacesCount", stats->default_colorspaces);
+
+		write_item_int(ctx, out, "LayerCount", stats->layer_count);
+		write_item_int(ctx, out, "LayerDepth", stats->layer_depth);
+
+		write_item_int(ctx, out, "StackDepth", stats->stack_depth);
+
+		write_item_int(ctx, out, "GreyColorspaceCount", stats->colorspaces.grey);
+		write_item_int(ctx, out, "RgbColorspaceCount", stats->colorspaces.rgb);
+		write_item_int(ctx, out, "CmykColorspaceCount", stats->colorspaces.cmyk);
+		write_item_int(ctx, out, "IndexedColorspaceCount", stats->colorspaces.indexed);
+		write_item_int(ctx, out, "IndexedColorspaceSmallestColorCount", stats->colorspaces.indexed_smallest);
+		write_item_int(ctx, out, "IndexedColorspaceLargestColorCount", stats->colorspaces.indexed_largest);
+
+		write_level_end_guaranteed(ctx, out, '}', stats_stack_level);
+	}
 }
 
 static void
-showinfo(fz_context* ctx, globals* glo, int spage, int epage, const char** first_important_error)
+showinfo(fz_context* ctx, globals* glo, int spage, int epage, fz_gathered_statistics* stats, const char** first_important_error)
 {
 	int page;
 	fz_output* out = glo->out;
@@ -1972,7 +2100,7 @@ showinfo(fz_context* ctx, globals* glo, int spage, int epage, const char** first
 			gatherpageinfo(ctx, glo, page);
 
 			printinfo(ctx, glo);
-			printadvancedinfo(ctx, glo, page);
+			printadvancedinfo(ctx, glo, page, stats);
 		}
 		fz_always(ctx)
 		{
@@ -2073,8 +2201,11 @@ static int
 pdfinfo_info(fz_context* ctx, fz_output* out, const char* filename, const char* password)
 {
 	globals glo = { 0 };
+	fz_gathered_statistics stats;
 	const char* ex = NULL;
 	int ret = EXIT_SUCCESS;
+
+	fz_clear_statistics(ctx, &stats);
 
 	glo.out = out;
 	glo.ctx = ctx;
@@ -2118,12 +2249,12 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* filename, const char* 
 		{
 			fz_info(ctx, "Retrieving info from pages %d-%d...\n", 1, glo.pagecount);
 
-			showinfo(ctx, &glo, 1, glo.pagecount, &ex);
+			showinfo(ctx, &glo, 1, glo.pagecount, &stats, &ex);
 		}
 
 		write_level_guarantee_level(ctx, out, json_stack_file_level + 1);  // PageSeries
 
-		printtail(ctx, &glo);
+		printtail(ctx, &glo, &stats);
 	}
 	fz_always(ctx)
 	{
