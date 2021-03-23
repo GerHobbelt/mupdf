@@ -390,13 +390,12 @@ Usage:
             See:
                 https://packaging.python.org/tutorials/packaging-projects/
 
-        --py-package-testupload
-            Uploads sdist to https://test.pypi.org/.
-            https://test.pypi.org/project/mupdf/1.18.0/
+        --py-package-create-testupload
+            Creates sdist and uploads to https://test.pypi.org/.
 
-            Note usually good to do --py-packate-create first.
+            See: https://test.pypi.org/project/mupdf/1.18.0/
 
-        --py-package-testdownload
+        --py-package-testdownload-test
             Installs from https://test.pypi.org/ into venv and tests.
 
         --py-package-testall
@@ -6157,7 +6156,7 @@ def py_package_testupload(build_dirs):
     #   https://test.pypi.org/project/example-pkg-julian.smith_artifex.com
     # But actually it is at: https://test.pypi.org/project/mupdf/1.18.0/
 
-def py_package_testdownload(build_dirs):
+def py_package_testdownload_test(build_dirs):
 
     # For some reason on Linux, if we are in the mupdf directory, 'pip install
     # mupdf' says:
@@ -6609,16 +6608,17 @@ def main():
             elif arg == '--py-package-create':
                 py_package_create( build_dirs)
 
-            elif arg == '--py-package-testupload':
+            elif arg == '--py-package-create-testupload':
+                py_package_create( build_dirs)
                 py_package_testupload( build_dirs)
 
-            elif arg == '--py-package-testdownload':
-                py_package_testdownload( build_dirs)
+            elif arg == '--py-package-testdownload-test':
+                py_package_testdownload_test( build_dirs)
 
             elif arg == '--py-package-testall':
                 py_package_create( build_dirs)
                 py_package_testupload( build_dirs)
-                py_package_testdownload( build_dirs)
+                py_package_testdownload_test( build_dirs)
 
             elif arg == '--py-package-createinstall':
                 py_package_createinstall( build_dirs)
