@@ -73,53 +73,62 @@ def run(
     '''
     Handles command-line argv passed to setup.py.
 
-    The args we are passed define the Python package that we work with.
+    The args we are passed define the Python package that we work with:
 
-    argv
-        E.g. sys.argv. argv[0] is ignored.
-    name
-        A string, the name of the Python package.
-    version
-        A string containing only 0-9 and '.'.
-    summary
-        A string.
-    description
-        A string.
-    classifiers
-        A list of strings.
-    url_home
-    url_source
-    url_docs
-    utl_tracker
-        Strings containing particular URLs.
-    keywords
-        A string containing space-separated keywords, or a list of keywords.
-    platform
-        A string, used in metainfo.
-    fn_clean
-        A function taking a single arg <all_> that cleans generated files.
-        <all_> is true iff --all is in argv.
-    fn_sdist
-        A function taking no args that returns a list of paths, e.g. from
-        git_items(), for files that should be copied into the sdist.
-    fn_build
-        A function taking no args that builds everything.
+        argv
+            The command line to process. E.g. sys.argv. argv[0] is ignored.
+        name
+            A string, the name of the Python package.
+        version
+            A string containing only 0-9 and '.'.
+        summary
+            A string.
+        description
+            A string.
+        classifiers
+            A list of strings.
+        url_home
+        url_source
+        url_docs
+        utl_tracker
+            Strings containing particular URLs.
+        keywords
+            A string containing space-separated keywords, or a list of
+            keywords.
+        platform
+            A string, used in metainfo.
+        fn_clean
+            A function taking a single arg <all_> that cleans generated files.
+            <all_> is true iff --all is in argv.
+        fn_sdist
+            A function taking no args that returns a list of paths, e.g. from
+            git_items(), for files that should be copied into the sdist.
+        fn_build
+            A function taking no args that builds everything.
 
-        Should return a list of items, each item being a tuple of two strings
-        (from_, to_), or a single string <path> which is treated as a tuple
-        (path, path).
+            Should return a list of items, each item being a tuple of two
+            strings (from_, to_), or a single string <path> which is treated as
+            a tuple (path, path).
 
-        <from_> should be the path to a file. <to_> identifies what the file
-        should be called when generating a wheel or installing.
+            <from_> should be the path to a file. <to_> identifies what the
+            file should be called when generating a wheel or installing.
 
-        The 'bdist_wheel' command will copy <from_> to <to_> in the wheel.
+            The 'bdist_wheel' command will copy <from_> to <to_> in the wheel.
 
-        The 'install' command will copy <from_> to <sitepackages>/<to_> where
-        <sitepackages> is Python's site.getsitepackages()[0].
+            The 'install' command will copy <from_> to <sitepackages>/<to_>
+            where <sitepackages> is Python's site.getsitepackages()[0].
 
-    license_files
-        Either string name of license file or list of names of license files.
+        license_files
+            Either string name of license file or list of names of license
+            files.
+
+    Returns:
+        If <argv> has 'bdist_wheel' or 'sdist' command, we return the full path
+        of the sdist or wheel that we have created.
+
+        Otherwise we return None.
     '''
+    log(f'argv={argv} name={name} fn_build={fn_build}')
 
     class ArgsRaise:
         pass
@@ -288,7 +297,9 @@ def run(
         if fn_build:
             items = fn_build()
 
-        path = f'{opt_dist_dir}/{name}-{version}-py3-none-any.whl'
+        uname = os.uname()
+        tag = f'py3-none-{uname[0]}-{uname[2]}-{uname[4]}'  #E.g: py3-none-OpenBSD-6.8-amd64
+        path = f'{opt_dist_dir}/{name}-{version}-{tag}.whl'
         log(f'creating wheel/zip: {path}')
 
         record = Record()
@@ -315,7 +326,7 @@ def run(
                     + 'Wheel-Version: 1.0\n'
                     + 'Generator: bdist_wheel\n'
                     + 'Root-Is-Purelib: false\n'
-                    + 'Tag: py3-none-any\n'
+                    + f'Tag: {tag}\n'
                     )
             add_str(content, f'{d}/WHEEL')
             add_str(metainfo(), f'{d}/METADATA')
@@ -333,6 +344,8 @@ def run(
             #
             #log(f'RECORD is:\n{record[0]}')
             z.writestr(f'{d}/RECORD', record.get())
+
+        return path
 
     elif command == 'clean':
         if fn_clean:
@@ -421,6 +434,7 @@ def run(
             add(tar, 'PKG-INFO', metainfo().encode('utf8'))
 
         log( f'Have created: {tarpath}')
+        return tarpath
 
     else:
         assert 0, f'Unrecognised command: {command}'
