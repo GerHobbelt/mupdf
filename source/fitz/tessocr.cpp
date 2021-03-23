@@ -120,13 +120,6 @@ tess_file_reader(const char *fname, std::vector<char> *out)
 static bool
 tess_file_reader(const STRING& fname, GenericVector<char> *out)
 {
-	//const char *file = fname;
-	//const char *s;
-
-	//for (s = fname; *s; s++)
-	//	if (*s == '\\' || *s == '/')
-	//		file = s+1;
-
 	/* FIXME: Look for inbuilt ones. */
 
 	/* Then under TESSDATA */
