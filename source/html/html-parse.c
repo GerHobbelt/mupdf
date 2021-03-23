@@ -1334,7 +1334,7 @@ fz_parse_html_imp(fz_context *ctx,
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_XML")))
 	{
-		fz_debug_xml(ctx, fz_stdout(ctx), html_debug_emit, root, 0);
+		fz_debug_xml(ctx, fz_stddbg(ctx), html_debug_emit, root, 0);
 	}
 #endif
 
@@ -1626,7 +1626,7 @@ static void
 fz_format_html_key(fz_context *ctx, char *s, size_t n, void *key_)
 {
 	fz_html_key *key = (fz_html_key *)key_;
-	fz_snprintf(ctx, s, n, "(html doc=%p, ch=%d)", key->doc, key->chapter_num);
+	fz_snprintf(s, n, "(html doc=%p, ch=%d)", key->doc, key->chapter_num);
 }
 
 static const fz_store_type fz_html_store_type =
