@@ -1086,7 +1086,7 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	else if (output_format == OUT_PNG)
 	{
 		render->bander = fz_new_png_band_writer(ctx, out);
-		render->n = 3;
+		render->n = 1;
 	}
 }
 
