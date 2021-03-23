@@ -45,6 +45,7 @@ extern "C" {
 
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/display-list.h"
+#include "mupdf/fitz/display-statistics.h"
 #include "mupdf/fitz/structured-text.h"
 
 #include "mupdf/fitz/transition.h"

@@ -18,6 +18,7 @@
 		The list device stores them in a list to play back later.
 		The text device performs text extraction and searching.
 		The bbox device calculates the bounding box for the page.
+		The stats device calculates the drawing primitives' statistics (occurrence, count, variants) for the page.
 	Other devices can (and will) be written in the future.
 */
 typedef struct fz_device fz_device;
