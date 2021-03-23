@@ -159,6 +159,7 @@ pam_write_header(fz_context *ctx, fz_band_writer *writer, fz_colorspace *cs)
 	else if (n == 3 && alpha) fz_write_printf(ctx, out, "TUPLTYPE RGB_ALPHA\n");
 	else if (n == 4 && !alpha) fz_write_printf(ctx, out, "TUPLTYPE CMYK\n");
 	else if (n == 4 && alpha) fz_write_printf(ctx, out, "TUPLTYPE CMYK_ALPHA\n");
+	else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "colorspace not supported in pam image");
 
 	fz_write_printf(ctx, out, "ENDHDR\n");

@@ -221,6 +221,7 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 
 	dp = writer->udata;
 	stride -= w*n;
+	assert(stride >= 0);
 	if (writer->super.alpha)
 	{
 		/* Unpremultiply data */
@@ -366,6 +367,8 @@ png_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, i
 
 	if (pix->w == 0 || pix->h == 0)
 	{
+		if (drop)
+			fz_drop_pixmap(ctx, pix);
 		return NULL;
 	}
 
