@@ -426,8 +426,8 @@ def force_line_buffering():
     '''
     stdout0 = sys.stdout
     stderr0 = sys.stderr
-    sys.stdout = os.fdopen( os.dup( sys.stdout.fileno()), 'w', 1)
-    sys.stderr = os.fdopen( os.dup( sys.stderr.fileno()), 'w', 1)
+    sys.stdout = os.fdopen( sys.stdout.fileno(), 'w', 1)
+    sys.stderr = os.fdopen( sys.stderr.fileno(), 'w', 1)
     return stdout0, stderr0
 
 
