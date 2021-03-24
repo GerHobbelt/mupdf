@@ -117,6 +117,10 @@ while 1:
     else:
         i += 1
 
+
+# pipcl Callbacks.
+#
+
 def sdist():
     '''
     pipcl callback. If we are a git checkout, return all files known to
@@ -147,6 +151,7 @@ def sdist():
             'platform/python/mupdfcpp_swig.cpp',
             ]
     return paths
+
 
 def build():
     '''
@@ -192,13 +197,15 @@ def build():
     log(f'build(): returning: {paths}')
     return paths
 
+
 def clean(all_):
     if all_:
         subprocess.check_call('(rm -r build || true)', shell=True)
     else:
         subprocess.check_call(f'(rm -r {build_dir} || true)', shell=True)
 
-package_params = dict(
+
+mupdf_package = pipcl.Package(
         name = 'mupdf',
         version = mupdf_version(),
         summary = 'Python bindings for MuPDF library',
@@ -217,34 +224,30 @@ package_params = dict(
         url_tracker = 'https://bugs.ghostscript.com/',
         keywords = 'PDF',
         platform = None,
+        license_files = ['COPYING'],
         fn_clean = clean,
         fn_sdist = sdist,
         fn_build = build,
-        license_files = 'COPYING',
         )
 
-log(f'package_params={package_params}')
+log(f'mupdf_package={mupdf_package}')
 
-# Things to allow direct support of PIP-517.
+# Things to allow us to function as a PIP-517 backend:
 #
-
 def build_wheel( wheel_directory, config_settings=None, metadata_directory=None):
-    path = pipcl.run(
-            ['', '--dist-dir', wheel_directory, 'bdist_wheel'],
-            **package_params,
+    return mupdf_package.build_wheel(
+            wheel_directory,
+            config_settings,
+            metadata_directory,
             )
-    return os.path.basename(path)
 
 def build_sdist( sdist_directory, config_settings=None):
-    path = pipcl.run(
-            ['', '--dist-dir', sdist_directory, 'sdist'],
-            **package_params,
+    return mupdf_package.build_sdist(
+            sdist_directory,
+            config_settings,
             )
-    return os.path.basename(path)
 
-
+# Allow us to be used as a pre-PIP-517 setup.py script.
+#
 if __name__ == '__main__':
-    pipcl.run(
-            sys.argv,
-            *package_params,
-            )
+    mupdf_package.handle_argv(sys.argv)
