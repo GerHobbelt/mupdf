@@ -6623,6 +6623,38 @@ def main():
             elif arg == '--py-package-createinstall':
                 py_package_createinstall( build_dirs)
 
+            elif arg == '--py-package-sdist-wheel-install':
+                jlib.system('true'
+                        f' && (rm -r pylocal-pep517 || true)'
+                        f' && python3 -m venv pylocal-pep517'
+                        f' && . pylocal-pep517/bin/activate'
+                        f' && (rm -r dist wheels || true)'
+                        f' && pip install clang'
+                        f' && ./setup.py sdist'
+                        f' && ls -ld dist/*'
+                        f' && pip -vvv wheel --wheel-dir wheels dist/* '
+                        f' && ls -ld wheels/*'
+                        f' && pip -vvv install wheels/*'
+                        f' && ./scripts/mupdfwrap_test.py'
+                        f' && deactivate'
+                        )
+                jlib.system(command, verbose=1)
+
+            elif arg == '--py-package-sdist-install':
+                command = ('true'
+                        f' && (rm -r pylocal-pep517 || true)'
+                        f' && python3 -m venv pylocal-pep517'
+                        f' && . pylocal-pep517/bin/activate'
+                        f' && (rm -r dist || true)'
+                        f' && pip install clang'
+                        f' && ./setup.py sdist'
+                        f' && ls -ld dist/*'
+                        f' && pip -vvv install dist/* '
+                        f' && ./scripts/mupdfwrap_test.py'
+                        f' && deactivate'
+                        )
+                jlib.system(command, verbose=1)
+
             elif arg == '--run-py':
                 command = ''
                 while 1:
