@@ -66,12 +66,34 @@ mupdf_dir = os.path.abspath(f'{__file__}/..')
 
 log(f'== sys.argv={sys.argv}')
 log(f'== mupdf_dir={mupdf_dir}')
+log(f'== pwd:')
+subprocess.check_call('pwd', shell=True)
+log(f'== ls -l:')
+subprocess.check_call('ls -l', shell=True)
 
 sys.path.append(f'{mupdf_dir}/scripts')
 import pipcl
 
 
 def mupdf_version():
+
+    # If PKG-INFO exists, we are being used to create a wheel from an sdist, so
+    # use the version from the PKG-INFO file.
+    #
+    if os.path.exists('PKG-INFO'):
+        items = pipcl._parse_pkg_info('PKG-INFO')
+        assert items['Name'] == 'mupdf'
+        ret = items['Version']
+        log(f'Using version from PKG-INFO: {ret}')
+        return ret
+
+    # If we get here, we are in a source tree, e.g. to create an sdist. We use
+    # the MuPDF version with a unique(ish) suffix based on the current date
+    # and time, so we can make multiple Python releases without requiring an
+    # increment to the MuPDF version.
+    #
+    # This also allows us to easily experiment on test.pypi.org.
+    #
     with open(f'{mupdf_dir}/include/mupdf/fitz/version.h') as f:
         text = f.read()
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
@@ -82,6 +104,7 @@ def mupdf_version():
     # MuPDF version.
     #
     version += time.strftime(".%Y%m%d.%H%M")
+    log(f'Have created version number: {version}')
     return version
 
 # Generated files that are copied into the Python installation.
@@ -121,12 +144,15 @@ while 1:
 # pipcl Callbacks.
 #
 
+g_test_minimal = True
+
 def sdist():
     '''
     pipcl callback. If we are a git checkout, return all files known to
     git. Otherwise return all files except for those in build/.
     '''
-    if 1:
+    if g_test_minimal:
+        # Cut-down for testing.
         return [
                 'setup.py',
                 'pyproject.toml',
@@ -166,7 +192,8 @@ def build():
     pipcl callback. Build MuPDF C, C++ and Python libraries, with exact
     behaviour depending on <mupdf_build> and <build_dir>.
     '''
-    if 1:
+    if g_test_minimal:
+        # Cut-down for testing.
         log(f'Faking build...')
         os.makedirs(f'{mupdf_dir}/{build_dir}', exist_ok=True)
         path = f'{mupdf_dir}/{build_dir}/mupdf.py'
