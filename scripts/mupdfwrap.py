@@ -390,6 +390,10 @@ Usage:
             See:
                 https://packaging.python.org/tutorials/packaging-projects/
 
+        --py-package-create-install-test
+            Creates local sdist, installs into fresh Python venv and checks
+            with mupdfwrap_test.py.
+
         --py-package-create-testupload
             Creates sdist and uploads to https://test.pypi.org/.
 
@@ -402,10 +406,6 @@ Usage:
             Equivalent to:
 
                 --py-package-create --py-package-testupload --py-package-testdownload
-
-        --py-package-createinstall
-            Creates local sdist, installs into fresh Python venv and checks
-            with mupdfwrap_test.py.
 
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
@@ -6098,88 +6098,6 @@ def test_setup_py( build_dirs, extra=''):
         command += f' && {c}'
     jlib.system( command)
 
-def py_package_create(build_dirs):
-    jlib.system( f'cd {build_dirs.dir_mupdf}'
-            + f' && ./setup.py sdist'
-            + f' && ls -lh {build_dirs.dir_mupdf}/dist',
-            prefix='py_package_create: ',
-            verbose=1,
-            )
-
-def py_package_createinstall(build_dirs):
-    '''
-    Creates sdist and installs from it into a venv.
-    '''
-    jlib.system( f'cd {build_dirs.dir_mupdf}'
-            + f' && (rm -r dist || true)'
-            + f' && ./setup.py sdist'
-            + f' && ls -lh {build_dirs.dir_mupdf}/dist'
-            ,
-            prefix='py_package_createinstall: ',
-            verbose=1,
-            )
-    mupdf_sdists = glob.glob('dist/mupdf-*.tar.gz')
-    assert(len(mupdf_sdists) == 1)
-    mupdf_sdist = mupdf_sdists[-1]
-    jlib.log('{mupdf_sdist=}')
-    jlib.system( f'cd {build_dirs.dir_mupdf}'
-            + f' && (rm -r pylocal-createinstall || true)'
-            + f' && python3 -m venv pylocal-createinstall'
-            + f' && . pylocal-createinstall/bin/activate'
-            + f' && pip install clang wheel'
-            #+ f' && MUPDF_SETUP_BUILD={build_dirs.dir_mupdf}/build/shared-release pip {"-vvv"*1} install {mupdf_sdist}'
-            + f' && pip {"-vvv"*1} install {mupdf_sdist}'
-            + f' && python scripts/mupdfwrap_test.py'
-            + f' && deactivate'
-            ,
-            prefix='py_package_createinstall: ',
-            verbose=1,
-            )
-
-def py_package_testupload(build_dirs):
-    # Use os.system because we need user input.
-    command = ( f'('
-            + f' cd {build_dirs.dir_mupdf}'
-            + f' && python3 -m venv pylocal'
-            + f' && . pylocal/bin/activate'
-            + f' && python -m pip install --upgrade twine'
-            + f' && python -m twine upload --repository testpypi dist/*'
-            + f' && deactivate'
-            + f') 2>&1'
-            )
-    jlib.log( 'py_package_testupload(): Uploading sdist with twine. Use username="__token__", psasword="pypi-...".')
-    jlib.log( 'py_package_testupload(): Running: {command}')
-    e = os.system(command)
-    jlib.log( '{e=}')
-    assert e == 0
-    # Package should be visible at:
-    #   https://test.pypi.org/project/example-pkg-julian.smith_artifex.com
-    # But actually it is at: https://test.pypi.org/project/mupdf/1.18.0/
-
-def py_package_testdownload_test(build_dirs):
-
-    # For some reason on Linux, if we are in the mupdf directory, 'pip install
-    # mupdf' says:
-    #
-    #   Requirement already satisfied: mupdf in /home/jules/artifex-remote/mupdf (1.18.0)
-    #
-    # And doesn't attempt to install mupdf.
-    #
-    # So we use a sub-directory py_package_testdownload.
-    #
-    jlib.system( f'cd {build_dirs.dir_mupdf}'
-            + f' && (rm -r py_package_testdownload || true)'
-            + f' && mkdir py_package_testdownload'
-            + f' && cd py_package_testdownload'
-            + f' && python3 -m venv pylocal'
-            + f' && . pylocal/bin/activate'
-            + f' && pip install clang'
-            + f' && pip -vvv install --index-url https://test.pypi.org/simple mupdf'
-            + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
-            + f' && deactivate',
-            prefix='py_package_testdownload: ',
-            verbose=1,
-            )
 
 def to_pickle( obj, path):
     with open( path, 'wb') as f:
@@ -6606,22 +6524,94 @@ def main():
                 jlib.system(command, verbose=1)
 
             elif arg == '--py-package-create':
-                py_package_create( build_dirs)
+                jlib.system( f'cd {build_dirs.dir_mupdf}'
+                        + f' && ./setup.py sdist'
+                        + f' && ls -lh {build_dirs.dir_mupdf}/dist'
+                        ,
+                        verbose=1,
+                        )
 
-            elif arg == '--py-package-create-testupload':
-                py_package_create( build_dirs)
-                py_package_testupload( build_dirs)
+            elif arg == '--py-package-create-install-test':
+                jlib.system( f'cd {build_dirs.dir_mupdf}'
+                        + f' && (rm -r dist || true)'
+                        + f' && ./setup.py sdist'
+                        + f' && ls -lh {build_dirs.dir_mupdf}/dist'
+                        ,
+                        prefix='py_package_createinstall: ',
+                        verbose=1,
+                        )
+                mupdf_sdists = glob.glob('dist/mupdf-*.tar.gz')
+                assert(len(mupdf_sdists) == 1)
+                mupdf_sdist = mupdf_sdists[-1]
+                jlib.log('{mupdf_sdist=}')
+                jlib.system( f'cd {build_dirs.dir_mupdf}'
+                        + f' && (rm -r pylocal-createinstall || true)'
+                        + f' && python3 -m venv pylocal-createinstall'
+                        + f' && . pylocal-createinstall/bin/activate'
+                        + f' && pip install clang wheel'
+                        + f' && python -m pip install --upgrade pip'
+                        #+ f' && MUPDF_SETUP_BUILD={build_dirs.dir_mupdf}/build/shared-release pip {"-vvv"*1} install {mupdf_sdist}'
+                        + f' && pip {"-vvv"*1} install {mupdf_sdist}'
+                        + f' && python scripts/mupdfwrap_test.py'
+                        + f' && deactivate'
+                        ,
+                        prefix='py_package_createinstall: ',
+                        verbose=1,
+                        )
+
+            elif arg == '--py-package-testupload':
+                # Use os.system because we need user input.
+                command = ( f'('
+                        + f' cd {build_dirs.dir_mupdf}'
+                        + f' && (rm -r dist pylocal-testupload || true)'
+                        + f' && ./setup.py sdist'
+                        + f' && python3 -m venv pylocal-testupload'
+                        + f' && . pylocal-testupload/bin/activate'
+                        + f' && python -m pip install --upgrade twine'
+                        + f' && python -m twine upload --repository testpypi dist/*'
+                        + f' && deactivate'
+                        + f') 2>&1'
+                        )
+                jlib.log( 'py_package_testupload(): Uploading sdist with twine. Use username="__token__", psasword="pypi-...".')
+                jlib.log( 'py_package_testupload(): Running: {command}')
+                e = os.system(command)
+                jlib.log( '{e=}')
+                assert e == 0
+                # Package should be visible at:
+                #   https://test.pypi.org/project/example-pkg-julian.smith_artifex.com
+                # But actually it is at:
+                #   https://test.pypi.org/project/mupdf/
+                # Also see list at:
+                #   https://test.pypi.org/simple/mupdf/
 
             elif arg == '--py-package-testdownload-test':
-                py_package_testdownload_test( build_dirs)
+                # For some reason on Linux, if we are in the mupdf directory, 'pip install
+                # mupdf' says:
+                #
+                #   Requirement already satisfied: mupdf in /home/jules/artifex-remote/mupdf (1.18.0)
+                #
+                # And doesn't attempt to install mupdf.
+                #
+                # So we use a sub-directory py_package_testdownload.
+                #
+                jlib.system( f'cd {build_dirs.dir_mupdf}'
+                        + f' && (rm -r py_package_testdownload || true)'
+                        + f' && mkdir py_package_testdownload'
+                        + f' && cd py_package_testdownload'
+                        + f' && python3 -m venv pylocal'
+                        + f' && . pylocal/bin/activate'
+                        + f' && python -m pip install --upgrade pip'
+                        + f' && pip -vvv install --index-url https://test.pypi.org/simple mupdf'
+                        + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
+                        + f' && deactivate',
+                        prefix='py_package_testdownload: ',
+                        verbose=1,
+                        )
 
-            elif arg == '--py-package-testall':
-                py_package_create( build_dirs)
-                py_package_testupload( build_dirs)
-                py_package_testdownload_test( build_dirs)
-
-            elif arg == '--py-package-createinstall':
-                py_package_createinstall( build_dirs)
+            #elif arg == '--py-package-testall':
+            #    py_package_create( build_dirs)
+            #    py_package_testupload( build_dirs)
+            #    py_package_testdownload_test( build_dirs)
 
             elif arg == '--py-package-sdist-wheel-install':
                 jlib.system('true'
