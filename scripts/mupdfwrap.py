@@ -6195,7 +6195,7 @@ def main():
     # Set up behaviour of jlib.log().
     #
     jlib.g_log_prefixes.append( jlib.LogPrefixTime( elapsed=True))
-    jlib.g_log_prefixes.append( jlib.g_log_prefixe_scopes)
+    jlib.g_log_prefixes.append( jlib.g_log_prefix_scopes)
     jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
 
     build_dirs = BuildDirs()
@@ -6654,6 +6654,59 @@ def main():
                         f' && deactivate'
                         )
                 jlib.system(command, verbose=1)
+
+            elif arg == '--py-package-multi':
+                def system(command):
+                    jlib.system(command, verbose=1, out=lambda text: jlib.log(text))
+                system( '(rm -r pylocal-multi dist || true)')
+                system( './setup.py sdist')
+                system( 'cp -p pyproject.toml pyproject.toml-0')
+                results = dict()
+                try:
+                    for toml in 0, 1:
+                        for pip_upgrade in 0, 1:
+                            for do_wheel in 0, 1:
+                                with jlib.LogPrefixScope(f'toml={toml} pip_upgrade={pip_upgrade} do_wheel={do_wheel}: '):
+                                    #print(f'jlib.g_log_prefixes={jlib.g_log_prefixes}')
+                                    #print(f'jlib.g_log_prefix_scopes.items={jlib.g_log_prefix_scopes.items}')
+                                    #print(f'jlib.log_text(""): {jlib.log_text("")}')
+                                    result_key = toml, pip_upgrade, do_wheel
+                                    jlib.log( '')
+                                    jlib.log( '=== {pip_upgrade=} {do_wheel=}')
+                                    if toml:
+                                        system( 'cp -p pyproject.toml-0 pyproject.toml')
+                                    else:
+                                        system( 'rm pyproject.toml || true')
+                                    system( 'ls -l pyproject.toml || true')
+                                    system(
+                                            '(rm -r pylocal-multi wheels || true)'
+                                            ' && python3 -m venv pylocal-multi'
+                                            ' && . pylocal-multi/bin/activate'
+                                            ' && pip install clang'
+                                            )
+                                    try:
+                                        if pip_upgrade:
+                                            system( '. pylocal-multi/bin/activate && pip install --upgrade pip')
+                                        if do_wheel:
+                                            system( '. pylocal-multi/bin/activate && pip install check-wheel-contents')
+                                            system( '. pylocal-multi/bin/activate && pip wheel --wheel-dir wheels dist/*')
+                                            system( '. pylocal-multi/bin/activate && check-wheel-contents wheels/*')
+                                            system( '. pylocal-multi/bin/activate && pip install wheels/*')
+                                        else:
+                                            system( '. pylocal-multi/bin/activate && pip install dist/*')
+                                        #system( './scripts/mupdfwrap_test.py')
+                                        system( '. pylocal-multi/bin/activate && python -m mupdf')
+                                    except Exception as ee:
+                                        e = ee
+                                    else:
+                                        e = 0
+                                    results[ result_key] = e
+                                    jlib.log( '== {e=}')
+                    jlib.log( '== Results:')
+                    for (toml, pip_upgrade, do_wheel), e in results.items():
+                        jlib.log( '    {toml=} {pip_upgrade=} {do_wheel=}: {e=}')
+                finally:
+                    system( 'cp -p pyproject.toml-0 pyproject.toml')
 
             elif arg == '--run-py':
                 command = ''
