@@ -3,6 +3,7 @@ Support for Python packaging operations.
 '''
 
 import base64
+import distutils.util
 import hashlib
 import io
 import os
@@ -139,10 +140,12 @@ class Package:
         if self.fn_build:
             items = self.fn_build()
 
-        # Set tag used in wheel filename, e.g: py3-none-OpenBSD-6.8-amd64
+        # Set tag used in wheel filename
         #
-        uname = os.uname()
-        tag = f'py3-none-{uname[0]}-{uname[2]}-{uname[4]}'
+        # See PEP-0425 for use of distutils.util.get_platform().
+        #
+        tag_platform = distutils.util.get_platform().replace('-', '_').replace('.', '_')
+        tag = f'py3-none-{tag_platform}'
 
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
         _log(f'creating wheel/zip: {path}')
