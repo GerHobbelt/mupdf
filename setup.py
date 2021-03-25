@@ -87,10 +87,11 @@ def mupdf_version():
         log(f'Using version from PKG-INFO: {ret}')
         return ret
 
-    # If we get here, we are in a source tree, e.g. to create an sdist. We use
-    # the MuPDF version with a unique(ish) suffix based on the current date
-    # and time, so we can make multiple Python releases without requiring an
-    # increment to the MuPDF version.
+    # If we get here, we are in a source tree, e.g. to create an sdist.
+    #
+    # We use the MuPDF version with a unique(ish) suffix based on the current
+    # date and time, so we can make multiple Python releases without requiring
+    # an increment to the MuPDF version.
     #
     # This also allows us to easily experiment on test.pypi.org.
     #
@@ -99,10 +100,6 @@ def mupdf_version():
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
     version = m.group(1)
-    # Append unique(ish) suffix so we can easily experiment on test.pypi.org
-    # and make multiple Python releases without requiring an increment to the
-    # MuPDF version.
-    #
     version += time.strftime(".%Y%m%d.%H%M")
     log(f'Have created version number: {version}')
     return version
@@ -144,7 +141,7 @@ while 1:
 # pipcl Callbacks.
 #
 
-g_test_minimal = True
+g_test_minimal = False
 
 def sdist():
     '''
@@ -160,6 +157,7 @@ def sdist():
                 'include/mupdf/fitz/version.h',
                 'COPYING',
                 ]
+
     if not os.path.exists('.git'):
         raise Exception(f'Cannot make sdist because not a git checkout')
     paths = pipcl.git_items( '.', submodules=True)
@@ -194,7 +192,7 @@ def build():
     '''
     if g_test_minimal:
         # Cut-down for testing.
-        log(f'Faking build...')
+        log(f'g_test_minimal set so doing minimal build.')
         os.makedirs(f'{mupdf_dir}/{build_dir}', exist_ok=True)
         path = f'{mupdf_dir}/{build_dir}/mupdf.py'
         with open(path, 'w') as f:
