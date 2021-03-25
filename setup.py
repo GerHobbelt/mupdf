@@ -126,6 +126,14 @@ def sdist():
     pipcl callback. If we are a git checkout, return all files known to
     git. Otherwise return all files except for those in build/.
     '''
+    if 1:
+        return [
+                'setup.py',
+                'pyproject.toml',
+                'scripts/pipcl.py',
+                'include/mupdf/fitz/version.h',
+                'COPYING',
+                ]
     if not os.path.exists('.git'):
         raise Exception(f'Cannot make sdist because not a git checkout')
     paths = pipcl.git_items( '.', submodules=True)
@@ -158,6 +166,14 @@ def build():
     pipcl callback. Build MuPDF C, C++ and Python libraries, with exact
     behaviour depending on <mupdf_build> and <build_dir>.
     '''
+    if 1:
+        log(f'Faking build...')
+        os.makedirs(f'{mupdf_dir}/{build_dir}', exist_ok=True)
+        path = f'{mupdf_dir}/{build_dir}/mupdf.py'
+        with open(path, 'w') as f:
+            f.write('print("This is fake mupdf!")')
+        return [(path, os.path.basename(path))]
+
     global mupdf_build
     if mupdf_build is None:
         mupdf_build = os.environ.get('MUPDF_SETUP_BUILD')
