@@ -136,20 +136,48 @@ class Package:
         '''
         Helper for implementing a PEP-517 backend's build_wheel() function.
         '''
-        items = []
-        if self.fn_build:
-            items = self.fn_build()
+        _log('build_wheel():'
+                f' wheel_directory={wheel_directory}'
+                f' config_settings={config_settings}'
+                f' metadata_directory={metadata_directory}'
+                )
 
-        # Set tag used in wheel filename
-        #
-        # See PEP-0425 for use of distutils.util.get_platform().
+        _log(f'Running pwd:')
+        subprocess.check_call(f'pwd', shell=True)
+
+        _log(f'Running ls -l:')
+        subprocess.check_call(f'ls -l', shell=True)
+
+        # Find platform tag used in wheel filename, as described in PEP-0425.
         #
         tag_platform = distutils.util.get_platform().replace('-', '_').replace('.', '_')
         tag = f'py3-none-{tag_platform}'
+        _log(f'tag={tag}')
+
+        #if os.path.exists(f'PKG-INFO'):
+        #    # Use version number from PKG-INFO.
+        #    info = _parse_pkg_info('PKG-INFO')
+        #    _log(f'info: {info}')
+        #    name = info['Name']
+        #    version = info['Version']
+        #    assert name == self.name
+        #    _log(f'using version from PKG-INFO: {version}')
+        #else:
+        #    # Use version number in self, which could have a date/time
+        #    # component.
+        #    #
+        #    version = self.version
+        #    _log(f'using self.version={self.version}')
 
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
-        _log(f'creating wheel/zip: {path}')
+        _log(f'path={path}')
 
+        items = []
+        if self.fn_build:
+            _log(f'calling self.fn_build()')
+            items = self.fn_build()
+
+        _log(f'creating wheel/zip: {path}')
         os.makedirs(wheel_directory, exist_ok=True)
         record = _Record()
         with zipfile.ZipFile(path, 'w') as z:
@@ -558,3 +586,17 @@ class _Record:
 
     def get(self):
         return self.text
+
+def _parse_pkg_info(path):
+    '''
+    Parses a PKJG-INFO file, each line is '<key>: <value>\n'. Returns a dict.
+    '''
+    ret = dict()
+    with open(path) as f:
+        for line in f:
+            s = line.find(': ')
+            if s >= 0 and line.endswith('\n'):
+                k = line[:s]
+                v = line[s+2:-1]
+                ret[k] = v
+    return ret
