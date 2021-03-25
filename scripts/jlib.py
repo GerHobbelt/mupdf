@@ -162,10 +162,10 @@ class LogPrefixScope:
     def __init__( self, prefix):
         self.prefix = prefix
     def __enter__( self):
-        g_log_prefixe_scopes.items.append( self.prefix)
+        g_log_prefix_scopes.items.append( self.prefix)
     def __exit__( self, exc_type, exc_value, traceback):
         global g_log_prefix
-        g_log_prefixe_scopes.items.pop()
+        g_log_prefix_scopes.items.pop()
 
 
 g_log_delta = 0
@@ -192,7 +192,7 @@ class LogDeltaScope:
 # Special item that can be inserted into <g_log_prefixes> to enable
 # temporary addition of text into log prefixes.
 #
-g_log_prefixe_scopes = LogPrefixScopes()
+g_log_prefix_scopes = LogPrefixScopes()
 
 # List of items that form prefix for all output from log().
 #
@@ -216,7 +216,6 @@ def log_text( text=None, caller=1, nv=True):
     if isinstance( caller, int):
         caller += 1
     prefix = ''
-    prefix += g_log_prefixe_scopes()
     for p in g_log_prefixes:
         if callable( p):
             if isinstance( p, LogPrefixFileLine):
