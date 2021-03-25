@@ -154,21 +154,6 @@ class Package:
         tag = f'py3-none-{tag_platform}'
         _log(f'tag={tag}')
 
-        #if os.path.exists(f'PKG-INFO'):
-        #    # Use version number from PKG-INFO.
-        #    info = _parse_pkg_info('PKG-INFO')
-        #    _log(f'info: {info}')
-        #    name = info['Name']
-        #    version = info['Version']
-        #    assert name == self.name
-        #    _log(f'using version from PKG-INFO: {version}')
-        #else:
-        #    # Use version number in self, which could have a date/time
-        #    # component.
-        #    #
-        #    version = self.version
-        #    _log(f'using self.version={self.version}')
-
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
         _log(f'path={path}')
 
