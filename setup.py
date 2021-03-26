@@ -207,18 +207,33 @@ def build():
         mupdf_build = '1'
 
     if mupdf_build == '1':
-        have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '0') == '1'
-        have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
-        b = 'm'         # Build C library.
-        if have_clang_python:
-            b += '0'    # Build C++ source.
-        b += '1'        # Build C++ library.
-        if have_swig:
-            b += '2'    # Build SWIG-generated source.
-        b += '3'        # Build SWIG library _mupdf.so.
+        if os.path.exists(f'{mupdf_dir}/PKG-INFO'):
+            # We are in an sdist, so generated C++ source and generated SWIG
+            # source files should be in place.
+            #
+            # We default to assuming that clang-python is not available and
+            # SWIG is available.
+            #
+            have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '0') == '1'
+            have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
+            b = 'm'         # Build C library.
+            if have_clang_python:
+                b += '0'    # Build C++ source.
+            b += '1'        # Build C++ library.
+            if have_swig:
+                b += '2'    # Build SWIG-generated source.
+            b += '3'        # Build SWIG library _mupdf.so.
+        else:
+            # Not an sdist so can't rely on pre-build C++ source etc, so build
+            # everything.
+            #
+            log(f'Building with "-b all" because we do not appear to be in an sdist')
+            b = 'all'
         command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b {b}'
+
     elif mupdf_build == '0':
         command = None
+
     else:
         log(f'build(): Building by copying files from {mupdf_build} into {build_dir}/')
         command = f'mkdir -p {build_dir}'
