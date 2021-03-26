@@ -257,6 +257,27 @@ Tools required to build:
         doxygen-style comments for structures and functions into the generated
         C++ code.
 
+Python packaging test:
+
+    The --py-package-* options test various aspects of Python packaging.
+
+    The main test is to run
+
+        ./scripts/mupdfwrap.py --py-package-create-testupload
+
+    And then after waiting a few minutes for the pypi server to update its
+    state, run:
+
+        ./scripts/mupdfwrap.py --py-package-create-testdownload-test
+
+    This creates and uploads an sdist to the test.pypi.org server, then does a
+    'pip install mupdf' in a venv followed by running scripts/mupdfwrap_test.py
+    to check basic operation of the installed package.
+
+    Note that installing the mupdf package takes a few minutes because it has
+    to build the C, C++ and Python libraries.
+
+
 Usage:
 
     Args:
@@ -384,28 +405,31 @@ Usage:
             Checks we can create a wheel, and checks it is ok with
             check-wheel-contents.
 
-        --py-package-create
-            Creates Python sdist in dist/
-
-            See:
-                https://packaging.python.org/tutorials/packaging-projects/
+        --py-package-create-sdist
+            Creates Python sdist in dist/.
 
         --py-package-create-install-test
-            Creates local sdist, installs into fresh Python venv and checks
-            with mupdfwrap_test.py.
+            Creates local sdist, installs into fresh Python venv using pip, and
+            checks it runs with mupdfwrap_test.py.
 
         --py-package-create-testupload
             Creates sdist and uploads to https://test.pypi.org/.
 
-            See: https://test.pypi.org/project/mupdf/1.18.0/
+            See uploaded sdists:
+                https://test.pypi.org/project/mupdf/
+                https://test.pypi.org/simple/mupdf/
 
         --py-package-testdownload-test
-            Installs from https://test.pypi.org/ into venv and tests.
+            Installs latest mupdf from https://test.pypi.org/ into venv and tests
+            with scripts/mupdfwrap.py.
 
-        --py-package-testall
-            Equivalent to:
+        --py-package-sdist-install
+            Create sdist and use pip to install directly, and test with
+            scripts/mupdfwrap_test.py.
 
-                --py-package-create --py-package-testupload --py-package-testdownload
+        --py-package-sdist-wheel-install
+            Create sdist and use pip to install via a wheel, and test with
+            scripts/mupdfwrap_test.py.
 
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
@@ -6523,7 +6547,7 @@ def main():
                         )
                 jlib.system(command, verbose=1)
 
-            elif arg == '--py-package-create':
+            elif arg == '--py-package-create-sdist':
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
                         + f' && ./setup.py sdist'
                         + f' && ls -lh {build_dirs.dir_mupdf}/dist'
@@ -6545,12 +6569,11 @@ def main():
                 mupdf_sdist = mupdf_sdists[-1]
                 jlib.log('{mupdf_sdist=}')
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r pylocal-createinstall || true)'
-                        + f' && python3 -m venv pylocal-createinstall'
-                        + f' && . pylocal-createinstall/bin/activate'
+                        + f' && (rm -r pylocal-create-install || true)'
+                        + f' && python3 -m venv pylocal-create-install'
+                        + f' && . pylocal-create-install/bin/activate'
                         + f' && pip install clang wheel'
                         + f' && python -m pip install --upgrade pip'
-                        #+ f' && MUPDF_SETUP_BUILD={build_dirs.dir_mupdf}/build/shared-release pip {"-vvv"*1} install {mupdf_sdist}'
                         + f' && pip {"-vvv"*1} install {mupdf_sdist}'
                         + f' && python scripts/mupdfwrap_test.py'
                         + f' && deactivate'
@@ -6577,12 +6600,6 @@ def main():
                 e = os.system(command)
                 jlib.log( '{e=}')
                 assert e == 0
-                # Package should be visible at:
-                #   https://test.pypi.org/project/example-pkg-julian.smith_artifex.com
-                # But actually it is at:
-                #   https://test.pypi.org/project/mupdf/
-                # Also see list at:
-                #   https://test.pypi.org/simple/mupdf/
 
             elif arg == '--py-package-testdownload-test':
                 # For some reason on Linux, if we are in the mupdf directory, 'pip install
@@ -6592,33 +6609,44 @@ def main():
                 #
                 # And doesn't attempt to install mupdf.
                 #
-                # So we use a sub-directory py_package_testdownload.
+                # So we use a sub-directory py-package-testdownload.
                 #
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r py_package_testdownload || true)'
-                        + f' && mkdir py_package_testdownload'
-                        + f' && cd py_package_testdownload'
+                        + f' && (rm -r py-package-testdownload || true)'
+                        + f' && mkdir py-package-testdownload'
+                        + f' && cd py-package-testdownload'
                         + f' && python3 -m venv pylocal'
                         + f' && . pylocal/bin/activate'
                         + f' && python -m pip install --upgrade pip'
                         + f' && pip -vvv install --index-url https://test.pypi.org/simple mupdf'
                         + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
                         + f' && deactivate',
-                        prefix='py_package_testdownload: ',
+                        prefix='py-package-testdownload: ',
                         verbose=1,
                         )
 
-            #elif arg == '--py-package-testall':
-            #    py_package_create( build_dirs)
-            #    py_package_testupload( build_dirs)
-            #    py_package_testdownload_test( build_dirs)
+            elif arg == '--py-package-sdist-install':
+                jlib.system('true'
+                        f' && (rm -r pylocal-pep517 dist || true)'
+                        f' && python3 -m venv pylocal-pep517'
+                        f' && . pylocal-pep517/bin/activate'
+                        f' && pip install --upgrade pip'
+                        f' && pip install clang'
+                        f' && ./setup.py sdist'
+                        f' && ls -ld dist/*'
+                        f' && pip install dist/* '
+                        f' && ./scripts/mupdfwrap_test.py'
+                        f' && deactivate'
+                        ,
+                        verbose=1,
+                        )
 
             elif arg == '--py-package-sdist-wheel-install':
                 jlib.system('true'
-                        f' && (rm -r pylocal-pep517 || true)'
+                        f' && (rm -r pylocal-pep517 dist wheels || true)'
                         f' && python3 -m venv pylocal-pep517'
                         f' && . pylocal-pep517/bin/activate'
-                        f' && (rm -r dist wheels || true)'
+                        f' && pip install --upgrade pip'
                         f' && pip install clang'
                         f' && ./setup.py sdist'
                         f' && ls -ld dist/*'
@@ -6627,23 +6655,9 @@ def main():
                         f' && pip -vvv install wheels/*'
                         f' && ./scripts/mupdfwrap_test.py'
                         f' && deactivate'
+                        ,
+                        verbose=1,
                         )
-                jlib.system(command, verbose=1)
-
-            elif arg == '--py-package-sdist-install':
-                command = ('true'
-                        f' && (rm -r pylocal-pep517 || true)'
-                        f' && python3 -m venv pylocal-pep517'
-                        f' && . pylocal-pep517/bin/activate'
-                        f' && (rm -r dist || true)'
-                        f' && pip install clang'
-                        f' && ./setup.py sdist'
-                        f' && ls -ld dist/*'
-                        f' && pip -vvv install dist/* '
-                        f' && ./scripts/mupdfwrap_test.py'
-                        f' && deactivate'
-                        )
-                jlib.system(command, verbose=1)
 
             elif arg == '--py-package-multi':
                 def system(command):
