@@ -476,7 +476,7 @@ class Package:
         def add(key, value):
             if value is not None:
                 ret[0] += f'{key}: {value}\n'
-        add('Metadata-Version', '1.2')
+        add('Metadata-Version', '1.0')
         add('Name', self.name)
         add('Version', self.version)
         add('Summary', self.summary)
