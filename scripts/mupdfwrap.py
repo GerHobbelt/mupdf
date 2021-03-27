@@ -412,14 +412,14 @@ Usage:
             Creates local sdist, installs into fresh Python venv using pip, and
             checks it runs with mupdfwrap_test.py.
 
-        --py-package-create-testupload
+        --py-package-testupload
             Creates sdist and uploads to https://test.pypi.org/.
 
             See uploaded sdists:
                 https://test.pypi.org/project/mupdf/
                 https://test.pypi.org/simple/mupdf/
 
-        --py-package-testdownload-test
+        --py-package-testdownload
             Installs latest mupdf from https://test.pypi.org/ into venv and tests
             with scripts/mupdfwrap.py.
 
@@ -6601,7 +6601,7 @@ def main():
                 jlib.log( '{e=}')
                 assert e == 0
 
-            elif arg == '--py-package-testdownload-test':
+            elif arg == '--py-package-testdownload':
                 # For some reason on Linux, if we are in the mupdf directory, 'pip install
                 # mupdf' says:
                 #
@@ -6612,13 +6612,13 @@ def main():
                 # So we use a sub-directory py-package-testdownload.
                 #
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r py-package-testdownload || true)'
-                        + f' && mkdir py-package-testdownload'
+                        #+ f' && (rm -r py-package-testdownload || true)'
+                        #+ f' && mkdir py-package-testdownload'
                         + f' && cd py-package-testdownload'
                         + f' && python3 -m venv pylocal'
                         + f' && . pylocal/bin/activate'
-                        + f' && python -m pip install --upgrade pip'
-                        + f' && pip -vvv install --index-url https://test.pypi.org/simple mupdf'
+                        #+ f' && python -m pip install --upgrade pip'
+                        + f' && pip -vvvv install --index-url https://test.pypi.org/simple --no-clean mupdf mupdf'
                         + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
                         + f' && deactivate',
                         prefix='py-package-testdownload: ',
