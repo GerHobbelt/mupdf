@@ -40,18 +40,15 @@ import time
 
 def log(text=''):
     for line in text.split('\n'):
-        print(f'setup.py: {line}')
+        print(f'mupdf:setup.py [{__file__}]: {line}')
     sys.stdout.flush()
 
+if __name__ == '__main__':
+    log(f'== We are being run directly. sys.argv={sys.argv}')
+else:
+    log(f'== We are being imported.')
+
 mupdf_dir = os.path.abspath(f'{__file__}/..')
-
-log(f'== sys.argv={sys.argv}')
-log(f'== mupdf_dir={mupdf_dir}')
-log(f'== pwd:')
-subprocess.check_call('pwd', shell=True)
-log(f'== ls -l:')
-subprocess.check_call('ls -l', shell=True)
-
 sys.path.append(f'{mupdf_dir}/scripts')
 import pipcl
 
@@ -65,7 +62,7 @@ def mupdf_version():
         items = pipcl._parse_pkg_info('PKG-INFO')
         assert items['Name'] == 'mupdf'
         ret = items['Version']
-        log(f'Using version from PKG-INFO: {ret}')
+        #log(f'Using version from PKG-INFO: {ret}')
         return ret
 
     # If we get here, we are in a source tree, e.g. to create an sdist.
@@ -95,8 +92,8 @@ out_names = [
         ]
 
 build_dir = os.environ.get('MUPDF_SETUP_BUILD_DIR', 'build/shared-release')
-log(f'MUPDF_SETUP_BUILD_DIR={os.environ.get("MUPDF_SETUP_BUILD_DIR")}')
-log(f'build_dir={build_dir}')
+#log(f'MUPDF_SETUP_BUILD_DIR={os.environ.get("MUPDF_SETUP_BUILD_DIR")}')
+#log(f'build_dir={build_dir}')
 
 mupdf_build = None
 
@@ -249,7 +246,8 @@ mupdf_package = pipcl.Package(
         fn_build = build,
         )
 
-log(f'mupdf_package={mupdf_package}')
+if 0:
+    log(f'mupdf_package={mupdf_package}')
 
 # Things to allow us to function as a PIP-517 backend:
 #
@@ -269,4 +267,5 @@ def build_sdist( sdist_directory, config_settings=None):
 # Allow us to be used as a pre-PIP-517 setup.py script.
 #
 if __name__ == '__main__':
+    log(f'setup.py __main__. sys.argv: {sys.argv}')
     mupdf_package.handle_argv(sys.argv)

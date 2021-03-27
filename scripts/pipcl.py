@@ -142,27 +142,19 @@ class Package:
                 f' metadata_directory={metadata_directory}'
                 )
 
-        _log(f'Running pwd:')
-        subprocess.check_call(f'pwd', shell=True)
-
-        _log(f'Running ls -l:')
-        subprocess.check_call(f'ls -l', shell=True)
-
         # Find platform tag used in wheel filename, as described in PEP-0425.
         #
         tag_platform = distutils.util.get_platform().replace('-', '_').replace('.', '_')
         tag = f'py3-none-{tag_platform}'
-        _log(f'tag={tag}')
 
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
-        _log(f'path={path}')
 
         items = []
         if self.fn_build:
-            _log(f'calling self.fn_build()')
+            _log(f'calling self.fn_build={self.fn_build}')
             items = self.fn_build()
 
-        _log(f'creating wheel/zip: {path}')
+        _log(f'creating wheel: {path}')
         os.makedirs(wheel_directory, exist_ok=True)
         record = _Record()
         with zipfile.ZipFile(path, 'w') as z:
@@ -249,28 +241,30 @@ class Package:
                 manifest.append(path)
             add(tar, f'{self.name}-{self.version}/PKG-INFO', self._metainfo().encode('utf8'))
 
-            # Add manifest:
-            add(tar, f'{self.name}-{self.version}/MANIFEST', '\n'.join(manifest))
+            if 0:
+                # Add manifest:
+                add(tar, f'{self.name}-{self.version}/MANIFEST', '\n'.join(manifest))
 
-            # add setup.cfg
-            setup_cfg = ''
-            setup_cfg += '[bdist_wheel]\n'
-            setup_cfg += 'universal = 1\n'
-            setup_cfg += '\n'
-            setup_cfg += '[flake8]\n'
-            setup_cfg += 'max-line-length = 100\n'
-            setup_cfg += 'ignore = F821\n'
-            setup_cfg += '\n'
-            setup_cfg += '[metadata]\n'
-            setup_cfg += 'license_file = LICENSE\n'
-            setup_cfg += '\n'
-            setup_cfg += '[tool:pytest]\n'
-            setup_cfg += 'minversion = 2.2.0\n'
-            setup_cfg += '\n'
-            setup_cfg += '[egg_info]\n'
-            setup_cfg += 'tag_build = \n'
-            setup_cfg += 'tag_date = 0\n'
-            add(tar, f'{self.name}-{self.version}/setup.cfg', setup_cfg)
+            if 0:
+                # add setup.cfg
+                setup_cfg = ''
+                setup_cfg += '[bdist_wheel]\n'
+                setup_cfg += 'universal = 1\n'
+                setup_cfg += '\n'
+                setup_cfg += '[flake8]\n'
+                setup_cfg += 'max-line-length = 100\n'
+                setup_cfg += 'ignore = F821\n'
+                setup_cfg += '\n'
+                setup_cfg += '[metadata]\n'
+                setup_cfg += 'license_file = LICENSE\n'
+                setup_cfg += '\n'
+                setup_cfg += '[tool:pytest]\n'
+                setup_cfg += 'minversion = 2.2.0\n'
+                setup_cfg += '\n'
+                setup_cfg += '[egg_info]\n'
+                setup_cfg += 'tag_build = \n'
+                setup_cfg += 'tag_date = 0\n'
+                add(tar, f'{self.name}-{self.version}/setup.cfg', setup_cfg)
 
         _log( f'build_sdist(): Have created sdist: {tarpath}')
         return os.path.basename(tarpath)
@@ -374,7 +368,7 @@ class Package:
         Handles old-style (pre PEP-517) command line passed by pip to a
         setup.py script.
         '''
-        _log(f'argv={argv} name={self.name} fn_build={self.fn_build}')
+        _log(f'handle_argv(): argv: {argv}')
 
         class ArgsRaise:
             pass
@@ -501,24 +495,25 @@ class Package:
 
 
     def __str__(self):
-        return (''
-            f' name={self.name}'
-            f' version={self.version}'
-            f' summary={self.summary}'
-            f' description={self.description}'
-            f' classifiers={self.classifiers}'
-            f' author={self.author}'
-            f' author_email ={self.author_email }'
-            f' url_docs={self.url_docs}'
-            f' url_home ={self.url_home }'
-            f' url_source={self.url_source}'
-            f' url_tracker={self.url_tracker}'
-            f' keywords={self.keywords}'
-            f' platform={self.platform}'
-            f' license_files={self.license_files}'
-            f' fn_clean={self.fn_clean}'
-            f' fn_sdist={self.fn_sdist}'
-            f' fn_build={self.fn_build}'
+        return ('{'
+            f'name={self.name!r}'
+            f' version={self.version!r}'
+            f' summary={self.summary!r}'
+            f' description={self.description!r}'
+            f' classifiers={self.classifiers!r}'
+            f' author={self.author!r}'
+            f' author_email ={self.author_email!r}'
+            f' url_docs={self.url_docs!r}'
+            f' url_home ={self.url_home!r}'
+            f' url_source={self.url_source!r}'
+            f' url_tracker={self.url_tracker!r}'
+            f' keywords={self.keywords!r}'
+            f' platform={self.platform!r}'
+            f' license_files={self.license_files!r}'
+            f' fn_clean={self.fn_clean!r}'
+            f' fn_sdist={self.fn_sdist!r}'
+            f' fn_build={self.fn_build!r}'
+            '}'
             )
 
 
