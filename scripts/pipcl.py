@@ -219,11 +219,14 @@ class Package:
         if self.fn_sdist:
             paths = self.fn_sdist()
 
+        manifest = []
         def add(tar, name, contents):
             '''
             Adds item called <name> to tarfile.TarInfo <tar>, containing
             <contents> (which must be bytes, not str).
             '''
+            if isinstance(contents, str):
+                contents = contents.encode('utf8')
             ti = tarfile.TarInfo(name)
             ti.size = len(contents)
             ti.mtime = time.time()
@@ -242,8 +245,32 @@ class Package:
                     _log(f'Ignoring non-existant path: {path}')
                     continue
                 #log(f'path={path}')
-                tar.add( path, path, recursive=False)
-            add(tar, 'PKG-INFO', self._metainfo().encode('utf8'))
+                tar.add( path, f'{self.name}-{self.version}/{path}', recursive=False)
+                manifest.append(path)
+            add(tar, f'{self.name}-{self.version}/PKG-INFO', self._metainfo().encode('utf8'))
+
+            # Add manifest:
+            add(tar, f'{self.name}-{self.version}/MANIFEST', '\n'.join(manifest))
+
+            # add setup.cfg
+            setup_cfg = ''
+            setup_cfg += '[bdist_wheel]\n'
+            setup_cfg += 'universal = 1\n'
+            setup_cfg += '\n'
+            setup_cfg += '[flake8]\n'
+            setup_cfg += 'max-line-length = 100\n'
+            setup_cfg += 'ignore = F821\n'
+            setup_cfg += '\n'
+            setup_cfg += '[metadata]\n'
+            setup_cfg += 'license_file = LICENSE\n'
+            setup_cfg += '\n'
+            setup_cfg += '[tool:pytest]\n'
+            setup_cfg += 'minversion = 2.2.0\n'
+            setup_cfg += '\n'
+            setup_cfg += '[egg_info]\n'
+            setup_cfg += 'tag_build = \n'
+            setup_cfg += 'tag_date = 0\n'
+            add(tar, f'{self.name}-{self.version}/setup.cfg', setup_cfg)
 
         _log( f'build_sdist(): Have created sdist: {tarpath}')
         return os.path.basename(tarpath)
@@ -261,10 +288,13 @@ class Package:
         '''
         Called by handle_argv().
         '''
-        assert egg_base
+        _log(f'os.getcwd()={os.getcwd()} egg_base={egg_base}')
+        #assert egg_base
+        if egg_base is None:
+            egg_base = '.'
         root = f'{egg_base}/.egg-info'
-        _log(f'internal_egg_info(): creating files in root={root}')
         os.mkdir(root)
+        _log(f'internal_egg_info(): creating files in root={root}')
         with open(f'{root}/PKG-INFO', 'w') as f:
             f.write(self._metainfo())
         with open(f'{root}/SOURCES.txt', 'w') as f:
@@ -317,6 +347,28 @@ class Package:
         _log(f'internal_install(): Finished.')
 
 
+    def dist_info(self, egg_base):
+        '''
+        Called by handle_argv().
+        '''
+        root = f'{egg_base}/{self.name}.dist-info'
+        os.mkdir(root)
+        #root = egg_base
+        _log(f'internal_egg_info(): creating files in root={root}')
+        with open(f'{root}/PKG-INFO', 'w') as f:
+            f.write(self._metainfo())
+        with open(f'{root}/SOURCES.txt', 'w') as f:
+            pass
+        with open(f'{root}/dependency_links.txt', 'w') as f:
+            pass
+        with open(f'{root}/top_level.txt', 'w') as f:
+            f.write(f'{self.name}\n')
+        with open(f'{root}/METADATA', 'w') as f:
+            f.write(self._metainfo())
+        _log(f'egg_base:')
+        os.system(f'find {egg_base}')
+
+
     def handle_argv(self, argv):
         '''
         Handles old-style (pre PEP-517) command line passed by pip to a
@@ -351,6 +403,7 @@ class Package:
         opt_egg_base = None
         opt_install_headers = None
         opt_record = None
+        opt_python_tag = None
 
         args = Args(argv[1:])
 
@@ -359,7 +412,7 @@ class Package:
             if arg is None:
                 break
 
-            elif arg in ('bdist_wheel', 'clean', 'egg_info', 'install', 'sdist'):
+            elif arg in ('bdist_wheel', 'clean', 'egg_info', 'install', 'sdist', 'dist_info',):
                 assert command is None, 'Two commands specified: {command} and {arg}.'
                 command = arg
 
@@ -421,6 +474,9 @@ class Package:
             elif arg == '--record':
                 opt_record = args.next()
 
+            elif arg == '--python-tag':
+                opt_python_tag = args.next()
+
             elif arg == '--single-version-externally-managed':
                 pass
 
@@ -437,6 +493,7 @@ class Package:
         elif command == 'egg_info':     self.internal_egg_info(opt_egg_base)
         elif command == 'install':      self.internal_install(opt_record)
         elif command == 'sdist':        self.build_sdist(opt_dist_dir)
+        elif command == 'dist_info':    self.dist_info(opt_egg_base)
         else:
             assert 0, f'Unrecognised command: {command}'
 

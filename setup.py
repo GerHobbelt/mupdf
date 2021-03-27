@@ -81,7 +81,7 @@ def mupdf_version():
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
     version = m.group(1)
-    version += time.strftime(".%Y%m%d.%H%M")
+    #version += time.strftime(".%Y%m%d.%H%M")
     log(f'Have created version number: {version}')
     return version
 
@@ -115,7 +115,7 @@ def sdist():
         # Cut-down for testing.
         return [
                 'setup.py',
-                #'pyproject.toml',
+                'pyproject.toml',
                 'scripts/pipcl.py',
                 'include/mupdf/fitz/version.h',
                 'COPYING',
