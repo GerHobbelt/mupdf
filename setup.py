@@ -40,7 +40,7 @@ import time
 
 def log(text=''):
     for line in text.split('\n'):
-        print(f'mupdf:setup.py [{__file__}]: {line}')
+        print(f'mupdf:setup.py: {line}')
     sys.stdout.flush()
 
 if __name__ == '__main__':
@@ -78,7 +78,7 @@ def mupdf_version():
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
     version = m.group(1)
-    #version += time.strftime(".%Y%m%d.%H%M")
+    version += time.strftime(".%Y%m%d.%H%M")
     log(f'Have created version number: {version}')
     return version
 
@@ -241,13 +241,12 @@ mupdf_package = pipcl.Package(
         keywords = 'PDF',
         platform = None,
         license_files = ['COPYING'],
+        fn_build = build,
         fn_clean = clean,
         fn_sdist = sdist,
-        fn_build = build,
         )
 
-if 0:
-    log(f'mupdf_package={mupdf_package}')
+#log(f'mupdf_package={mupdf_package}')
 
 # Things to allow us to function as a PIP-517 backend:
 #
@@ -267,5 +266,4 @@ def build_sdist( sdist_directory, config_settings=None):
 # Allow us to be used as a pre-PIP-517 setup.py script.
 #
 if __name__ == '__main__':
-    log(f'setup.py __main__. sys.argv: {sys.argv}')
     mupdf_package.handle_argv(sys.argv)

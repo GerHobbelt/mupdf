@@ -22,11 +22,11 @@ class Package:
 
     Our constructor takes a definition of a Python package similar to that
     passed to distutils.core.setup() or setuptools.setup() - name, version,
-    summary etc, plus callbacks to clean, return list of sdist filenames, and
-    do a build.
+    summary etc, plus callbacks for build, clean and getting list of sdist filenames.
 
-    We then provide methods that can be used to help implement a Python
-    package's setup.py script and/or a PEP-517 backend.
+    We then provide methods that can be used to implement a Python package's
+    PEP-517 backend and/or minimal setup.py support for use with a legacy
+    (pre-PEP-517) pip.
 
     A PEP-517 backend can do:
 
@@ -62,9 +62,9 @@ class Package:
             keywords = None,
             platform = None,
             license_files = None,
+            fn_build = None,
             fn_clean = None,
             fn_sdist = None,
-            fn_build = None,
             ):
         '''
         name
@@ -88,12 +88,6 @@ class Package:
             A string, used in metainfo.
         license_files
             List of string names of license files.
-        fn_clean
-            A function taking a single arg <all_> that cleans generated files.
-            <all_> is true iff --all is in argv.
-        fn_sdist
-            A function taking no args that returns a list of paths, e.g. from
-            git_items(), for files that should be copied into the sdist.
         fn_build
             A function taking no args that builds the package.
 
@@ -112,6 +106,12 @@ class Package:
             self.handle_argv()), we copy <from_> to <sitepackages>/<to_>, where
             <sitepackages> is the first item in site.getsitepackages()[] that
             exists.
+        fn_clean
+            A function taking a single arg <all_> that cleans generated files.
+            <all_> is true iff --all is in argv.
+        fn_sdist
+            A function taking no args that returns a list of paths, e.g. from
+            git_items(), for files that should be copied into the sdist.
         '''
         self.name = name
         self.version = version
@@ -127,14 +127,16 @@ class Package:
         self.keywords = keywords
         self.platform = platform
         self.license_files = license_files
+        self.fn_build = fn_build
         self.fn_clean = fn_clean
         self.fn_sdist = fn_sdist
-        self.fn_build = fn_build
 
 
     def build_wheel(self, wheel_directory, config_settings=None, metadata_directory=None):
         '''
         Helper for implementing a PEP-517 backend's build_wheel() function.
+
+        Also called by handle_argv() to handle the 'bdist_wheel' command.
         '''
         _log('build_wheel():'
                 f' wheel_directory={wheel_directory}'
@@ -149,6 +151,8 @@ class Package:
 
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
 
+        # Do build and get list of files to copy into the wheel.
+        #
         items = []
         if self.fn_build:
             _log(f'calling self.fn_build={self.fn_build}')
@@ -173,28 +177,28 @@ class Package:
                 from_, to_ = _fromto(item)
                 add_file(from_, to_)
 
-            # Add ...dist-info/*.
+            dist_info_path = f'{self.name}-{self.version}.dist-info'
+            # Add <name>-<version>.dist-info/WHEEL.
             #
-            d = f'{self.name}-{self.version}.dist-info'
-            content = (''
-                    + 'Wheel-Version: 1.0\n'
-                    + 'Generator: bdist_wheel\n'
-                    + 'Root-Is-Purelib: false\n'
-                    + f'Tag: {tag}\n'
+            add_str(
+                    f'Wheel-Version: 1.0\n'
+                    f'Generator: bdist_wheel\n'
+                    f'Root-Is-Purelib: false\n'
+                    f'Tag: {tag}\n'
+                    ,
+                    f'{dist_info_path}/WHEEL',
                     )
-            add_str(content, f'{d}/WHEEL')
-            add_str(self._metainfo(), f'{d}/METADATA')
-
-            # Add license files.
+            # Add <name>-<version>.dist-info/METADATA.
             #
+            add_str(self._metainfo(), f'{dist_info_path}/METADATA')
             if self.license_files:
                 for license_file in self.license_files:
                     from_, to_ = _fromto(license_file)
-                    add_file(from_, f'{d}/{to_}')
+                    add_file(from_, f'{dist_info_path}/{to_}')
 
-            # Update ...dist-info/RECORD. This must be last.
+            # Update <name>-<version>.dist-info/RECORD. This must be last.
             #
-            z.writestr(f'{d}/RECORD', record.get())
+            z.writestr(f'{dist_info_path}/RECORD', record.get())
 
         _log( f'build_wheel(): Have created wheel: {path}')
         return os.path.basename(path)
@@ -206,6 +210,8 @@ class Package:
 
         [Though as of 2021-03-24 pip doesn't actually seem to ever call the
         backend's build_sdist() function?]
+
+        Also called by handle_argv() to handle the 'sdist' command.
         '''
         paths = []
         if self.fn_sdist:
@@ -241,6 +247,8 @@ class Package:
                 manifest.append(path)
             add(tar, f'{self.name}-{self.version}/PKG-INFO', self._metainfo().encode('utf8'))
 
+            # It doesn't look like MANIFEST or setup.cfg are required.
+            #
             if 0:
                 # Add manifest:
                 add(tar, f'{self.name}-{self.version}/MANIFEST', '\n'.join(manifest))
@@ -270,7 +278,7 @@ class Package:
         return os.path.basename(tarpath)
 
 
-    def internal_clean(self, all_):
+    def argv_clean(self, all_):
         '''
         Called by handle_argv().
         '''
@@ -278,28 +286,7 @@ class Package:
             self.fn_clean(all_)
 
 
-    def internal_egg_info(self, egg_base):
-        '''
-        Called by handle_argv().
-        '''
-        _log(f'os.getcwd()={os.getcwd()} egg_base={egg_base}')
-        #assert egg_base
-        if egg_base is None:
-            egg_base = '.'
-        root = f'{egg_base}/.egg-info'
-        os.mkdir(root)
-        _log(f'internal_egg_info(): creating files in root={root}')
-        with open(f'{root}/PKG-INFO', 'w') as f:
-            f.write(self._metainfo())
-        with open(f'{root}/SOURCES.txt', 'w') as f:
-            pass
-        with open(f'{root}/dependency_links.txt', 'w') as f:
-            pass
-        with open(f'{root}/top_level.txt', 'w') as f:
-            f.write(f'{self.name}\n')
-
-
-    def internal_install(self, record_path):
+    def argv_install(self, record_path):
         '''
         Called by handle_argv().
         '''
@@ -307,11 +294,7 @@ class Package:
         if self.fn_build:
             items = self.fn_build()
 
-        # Find where to install.
-        #
-        # It seems that some items in site.getsitepackages() don't exist, so we
-        # can't simply use site.getsitepackages()[0]. Instead we look for the
-        # first item that exists.
+        # We install to the first item in site.getsitepackages()[] that exists.
         #
         sitepackages_all = site.getsitepackages()
         for p in sitepackages_all:
@@ -338,35 +321,54 @@ class Package:
             with open(record_path, 'w') as f:
                 f.write(record.get())
 
-        _log(f'internal_install(): Finished.')
+        _log(f'argv_install(): Finished.')
 
 
-    def dist_info(self, egg_base):
+    def argv_dist_info(self, egg_base):
+        '''
+        Called by handle_argv(). There doesn't seem to be any documentation for
+        setup.py dist_info, but it appears to be like egg_info except it writes
+        to a slightly different directory.
+        '''
+        self._write_info(f'{egg_base}/{self.name}.dist-info')
+
+
+    def argv_egg_info(self, egg_base):
         '''
         Called by handle_argv().
         '''
-        root = f'{egg_base}/{self.name}.dist-info'
+        if egg_base is None:
+            egg_base = '.'
+        self._write_info(f'{egg_base}/.egg-info')
+
+
+    def _write_info(self, root):
+        '''
+        Writes egg/dist info to files in <root>/.
+        '''
+        _log(f'_write_info(): creating files in root={root}')
         os.mkdir(root)
-        #root = egg_base
-        _log(f'internal_egg_info(): creating files in root={root}')
         with open(f'{root}/PKG-INFO', 'w') as f:
             f.write(self._metainfo())
-        with open(f'{root}/SOURCES.txt', 'w') as f:
-            pass
-        with open(f'{root}/dependency_links.txt', 'w') as f:
-            pass
-        with open(f'{root}/top_level.txt', 'w') as f:
-            f.write(f'{self.name}\n')
-        with open(f'{root}/METADATA', 'w') as f:
-            f.write(self._metainfo())
-        _log(f'egg_base:')
-        os.system(f'find {egg_base}')
+
+        # These don't seem to be required?
+        #
+        #with open(f'{root}/SOURCES.txt', 'w') as f:
+        #    pass
+        #with open(f'{root}/dependency_links.txt', 'w') as f:
+        #    pass
+        #with open(f'{root}/top_level.txt', 'w') as f:
+        #    f.write(f'{self.name}\n')
+        #with open(f'{root}/METADATA', 'w') as f:
+        #    f.write(self._metainfo())
 
 
     def handle_argv(self, argv):
         '''
-        Handles old-style (pre PEP-517) command line passed by pip to a
+        Handles old-style (pre PEP-517) command line passed by old releases of pip to a
         setup.py script.
+
+        We only handle those args that seem to be used by pre-PEP-517 pip.
         '''
         _log(f'handle_argv(): argv: {argv}')
 
@@ -381,13 +383,13 @@ class Package:
                 self.items = iter( argv)
             def next( self, eof=ArgsRaise):
                 '''
-                Returns next arg. If no more args, we return eof or raise an exception
-                if eof == ArgsRaise.
+                Returns next arg. If no more args, we return <eof> or raise an
+                exception if <eof> is ArgsRaise.
                 '''
                 try:
                     return next( self.items)
                 except StopIteration:
-                    if eof == ArgsRaise:
+                    if eof is ArgsRaise:
                         raise Exception('Not enough args')
                     return eof
 
@@ -396,8 +398,8 @@ class Package:
         opt_dist_dir = 'dist'
         opt_egg_base = None
         opt_install_headers = None
-        opt_record = None
         opt_python_tag = None
+        opt_record = None
 
         args = Args(argv[1:])
 
@@ -405,22 +407,6 @@ class Package:
             arg = args.next(None)
             if arg is None:
                 break
-
-            elif arg in ('bdist_wheel', 'clean', 'egg_info', 'install', 'sdist', 'dist_info',):
-                assert command is None, 'Two commands specified: {command} and {arg}.'
-                command = arg
-
-            elif arg == '--all':
-                opt_all = True
-
-            elif arg == '--compile':
-                pass
-
-            elif arg == '--dist-dir' or arg == '-d':
-                opt_dist_dir = args.next()
-
-            elif arg == '--egg-base':
-                opt_egg_base = args.next()
 
             elif arg in ('-h', '--help'):
                 _log(
@@ -433,7 +419,7 @@ class Package:
                         '    clean\n'
                         '        Cleans build files.\n'
                         '    egg_info\n'
-                        '        Creates files in: <egg-base>/.egg-info/, where\n'
+                        '        Creates files in <egg-base>/.egg-info/, where\n'
                         '        <egg-base> is as specified with --egg-base.\n'
                         '    install\n'
                         '        Installs into location from Python\'s\n'
@@ -443,6 +429,9 @@ class Package:
                         '    sdist\n'
                         '        Make a source distribution:\n'
                         '            <dist-dir>/<name>-<version>.tar.gz\n'
+                        '    dist_info\n'
+                        '        Like <egg_info> but creates files in\n'
+                        '        <egg-base>/<name>.dist-info/\n'
                         '    --dist-dir | -d <dist-dir>\n'
                         '        Default is "dist".\n'
                         '    --egg-base <egg-base>\n'
@@ -458,6 +447,22 @@ class Package:
                         )
                 return
 
+            elif arg in ('bdist_wheel', 'clean', 'egg_info', 'install', 'sdist', 'dist_info'):
+                assert command is None, 'Two commands specified: {command} and {arg}.'
+                command = arg
+
+            elif arg == '--all':
+                opt_all = True
+
+            elif arg == '--compile':
+                pass
+
+            elif arg == '--dist-dir' or arg == '-d':
+                opt_dist_dir = args.next()
+
+            elif arg == '--egg-base':
+                opt_egg_base = args.next()
+
             elif arg == '--help-commands':
                 print('help')
                 return
@@ -465,11 +470,11 @@ class Package:
             elif arg == '--install-headers':
                 opt_install_headers = args.next()
 
-            elif arg == '--record':
-                opt_record = args.next()
-
             elif arg == '--python-tag':
                 opt_python_tag = args.next()
+
+            elif arg == '--record':
+                opt_record = args.next()
 
             elif arg == '--single-version-externally-managed':
                 pass
@@ -483,11 +488,11 @@ class Package:
         _log(f'handle_argv(): Handling command={command}')
         if 0:   pass
         elif command == 'bdist_wheel':  self.build_wheel(opt_dist_dir)
-        elif command == 'clean':        self.internal_clean(opt_all)
-        elif command == 'egg_info':     self.internal_egg_info(opt_egg_base)
-        elif command == 'install':      self.internal_install(opt_record)
+        elif command == 'clean':        self.argv_clean(opt_all)
+        elif command == 'dist_info':    self.argv_dist_info(opt_egg_base)
+        elif command == 'egg_info':     self.argv_egg_info(opt_egg_base)
+        elif command == 'install':      self.argv_install(opt_record)
         elif command == 'sdist':        self.build_sdist(opt_dist_dir)
-        elif command == 'dist_info':    self.dist_info(opt_egg_base)
         else:
             assert 0, f'Unrecognised command: {command}'
 
@@ -522,12 +527,10 @@ class Package:
         Returns text for .egg-info/PKG-INFO file, or PKG-INFO in an sdist
         tar.gz file, or ...dist-info/METADATA in a wheel.
         '''
-        # We use an array here so that local add() function can modify ret[0].
-        #
-        ret = ['']
+        ret = []
         def add(key, value):
             if value is not None:
-                ret[0] += f'{key}: {value}\n'
+                ret.append(f'{key}: {value}')
         add('Metadata-Version', '1.0')
         add('Name', self.name)
         add('Version', self.version)
@@ -547,7 +550,7 @@ class Package:
                 classifiers2 = classifiers2.split('\n')
             for c in classifiers2:
                 add('Classifier', c)
-        return ret[0]
+        return '\n'.join(ret)
 
 
 def git_items( directory, submodules=False):
