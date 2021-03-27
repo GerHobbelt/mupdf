@@ -12,25 +12,6 @@ Default behaviour:
     assume that generated C++ source is already present. Thus we don't rely on
     clang-python being present.
 
-Extra command-line options:
-
-    --mupdf-build 0 | 1 | <path>
-        0:  We do not do a build.
-        1:  We do a build.
-        <path>:
-            Instead of doing a build we copy from an existing build directory
-            called <path>, e.g. from a different tree with: --mupdf-build
-            .../mupdf/build/shared-release
-
-        If --mupdf-build is not specified we use $MUPDF_SETUP_BUILD if it is
-        set.
-
-        Otherwise we default to "--mupdf-build 1".
-
-    --mupdf-build-dir <build-dir>
-        Sets the type of build by specifing the build directory, for example:
-        --mupdf-build-dir build/shared-debug
-
 Environmental variables:
 
     MUPDF_SETUP_BUILD_DIR
@@ -119,29 +100,11 @@ log(f'build_dir={build_dir}')
 
 mupdf_build = None
 
-# Process any of our own command-line options.
-#
-i = 1
-while 1:
-    if i == len(sys.argv):
-        break
-    if sys.argv[i] == '--mupdf-build':
-        mupdf_build = sys.argv[i+1]
-        del sys.argv[i:i+2]
-    elif sys.argv[i] == '--mupdf-build-dir':
-        build_dir = sys.argv[i+1]
-        infix = 'build/shared-'
-        if infix not in build_dir:
-            raise Exception('--mupdf-build-dir value "{build_dir}" must contain {infix}')
-        del sys.argv[i:i+2]
-    else:
-        i += 1
-
 
 # pipcl Callbacks.
 #
 
-g_test_minimal = False
+g_test_minimal = 1
 
 def sdist():
     '''
@@ -152,7 +115,7 @@ def sdist():
         # Cut-down for testing.
         return [
                 'setup.py',
-                'pyproject.toml',
+                #'pyproject.toml',
                 'scripts/pipcl.py',
                 'include/mupdf/fitz/version.h',
                 'COPYING',
