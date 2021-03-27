@@ -263,7 +263,7 @@ class Package:
         '''
         assert egg_base
         root = f'{egg_base}/.egg-info'
-        _log(f'{command}: creating files in root={root}')
+        _log(f'internal_egg_info(): creating files in root={root}')
         os.mkdir(root)
         with open(f'{root}/PKG-INFO', 'w') as f:
             f.write(self._metainfo())
@@ -275,7 +275,7 @@ class Package:
             f.write(f'{self.name}\n')
 
 
-    def internal_install(self, record):
+    def internal_install(self, record_path):
         '''
         Called by handle_argv().
         '''
@@ -300,7 +300,7 @@ class Package:
                 text += f'    {i}\n'
             raise Exception(text)
 
-        record = _Record() if record else None
+        record = _Record() if record_path else None
         for item in items:
             from_, to_ = _fromto(item)
             to_path = f'{sitepackages}/{to_}'
@@ -311,7 +311,7 @@ class Package:
                 record.add_file(from_, to_)
 
         if record:
-            with open(record, 'w') as f:
+            with open(record_path, 'w') as f:
                 f.write(record.get())
 
         _log(f'internal_install(): Finished.')
