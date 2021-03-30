@@ -75,6 +75,8 @@ static struct {
 
 	{ qiqqa_fingerprint0_main, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
 	{ qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
+
+	{ sqlite_main, "sqlite", "SQLite3 tool" },
 };
 
 static int
