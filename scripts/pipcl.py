@@ -558,13 +558,12 @@ def git_items( directory, submodules=False):
     Helper for Package's fn_sdist() callback.
 
     Returns list of paths for all files known to git within <directory>. Each
-    path starts with <directory>.
+    path is relative to <directory>.
 
     <directory> must be somewhere within a git checkout.
 
     We run a 'git ls-files' command internally.
     '''
-    assert os.path.isdir( '%s/.git' % directory)
     command = 'cd ' + directory + ' && git ls-files'
     if submodules:
         command += ' --recurse-submodules'
@@ -575,7 +574,7 @@ def git_items( directory, submodules=False):
         if os.path.isdir(path2):
             _log(f'*** Ignoring git ls-files item that is actually a directory: {path2}')
         else:
-            ret.append(path2)
+            ret.append(path)
     return ret
 
 
