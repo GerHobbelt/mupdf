@@ -6572,7 +6572,6 @@ def main():
                         + f' && (rm -r pylocal-create-install || true)'
                         + f' && python3 -m venv pylocal-create-install'
                         + f' && . pylocal-create-install/bin/activate'
-                        + f' && pip install clang wheel'
                         + f' && python -m pip install --upgrade pip'
                         + f' && pip {"-vvv"*1} install {mupdf_sdist}'
                         + f' && python scripts/mupdfwrap_test.py'
@@ -6612,13 +6611,14 @@ def main():
                 # So we use a sub-directory py-package-testdownload.
                 #
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        #+ f' && (rm -r py-package-testdownload || true)'
-                        #+ f' && mkdir py-package-testdownload'
+                        + f' && (rm -r py-package-testdownload || true)'
+                        + f' && mkdir py-package-testdownload'
                         + f' && cd py-package-testdownload'
                         + f' && python3 -m venv pylocal'
                         + f' && . pylocal/bin/activate'
-                        #+ f' && python -m pip install --upgrade pip'
-                        + f' && pip -vvvv install --index-url https://test.pypi.org/simple --no-clean mupdf mupdf'
+                        + f' && python -m pip install --upgrade pip'
+                        #+ f' && python -m pip install wheel'
+                        + f' && pip -vvvv install --index-url https://test.pypi.org/simple mupdf'
                         + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
                         + f' && deactivate',
                         prefix='py-package-testdownload: ',
