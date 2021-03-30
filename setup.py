@@ -101,7 +101,10 @@ mupdf_build = None
 # pipcl Callbacks.
 #
 
-g_test_minimal = 1
+# Set to True to create minimal package for testing upload/download etc,
+# avoiding compilation when installing.
+#
+g_test_minimal = False
 
 def sdist():
     '''
@@ -120,7 +123,7 @@ def sdist():
 
     if not os.path.exists('.git'):
         raise Exception(f'Cannot make sdist because not a git checkout')
-    paths = pipcl.git_items( '.', submodules=True)
+    paths = pipcl.git_items( mupdf_dir, submodules=True)
 
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
