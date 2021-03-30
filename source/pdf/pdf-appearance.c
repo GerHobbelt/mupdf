@@ -2,8 +2,6 @@
 #include "mupdf/pdf.h"
 #include "mupdf/ucdn.h"
 
-#include "annot-imp.h"
-
 #include <float.h>
 #include <limits.h>
 #include <math.h>

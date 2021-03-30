@@ -1,8 +1,6 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#include "annot-imp.h"
-
 #include <string.h>
 
 static int are_outline_nodes_equal(fz_outline* a, fz_outline* b)

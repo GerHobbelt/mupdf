@@ -1,8 +1,6 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#include "annot-imp.h"
-
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>

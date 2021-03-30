@@ -1,7 +1,6 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#include "annot-imp.h"
 #include "utf.h"
 
 #include <stdarg.h>
