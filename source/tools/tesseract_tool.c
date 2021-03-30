@@ -1,5 +1,5 @@
 /*
- * mutool -- swiss army knife of pdf manipulation tools
+ * tesseract CLI
  */
 
 #include "../dll/pch.h"
