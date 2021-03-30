@@ -1,4 +1,4 @@
-ABOUT
+# ABOUT
 
 MuPDF is a lightweight open source software framework for viewing and converting
 PDF, XPS, and E-book documents.
@@ -7,7 +7,7 @@ See the documentation in docs/index.html for an overview.
 
 Build instructions can be found in docs/building.html.
 
-LICENSE
+# LICENSE
 
 MuPDF is Copyright (c) 2006-2020 Artifex Software, Inc.
 
@@ -26,7 +26,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 For commercial licensing, including our "Indie Dev" friendly options,
 please contact sales@artifex.com.
 
-REPORTING BUGS AND PROBLEMS
+# REPORTING BUGS AND PROBLEMS
 
 The MuPDF developers hang out on IRC in the #mupdf channel on irc.freenode.net.
 
