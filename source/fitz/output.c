@@ -12,6 +12,7 @@
 #include <string.h>
 #ifdef _WIN32
 #include <windows.h>
+#include <time.h>
 #endif
 #ifdef _WIN32
 #include <io.h>
@@ -47,9 +48,10 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 	// Windows: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefile#pipes
 	// > "When writing to a non-blocking, byte-mode pipe handle with insufficient buffer space,
 	// > WriteFile returns TRUE with *lpNumberOfBytesWritten < nNumberOfBytesToWrite."
-#if defined(WIN32) || defined(WIN64)
+#ifdef _WIN32
 	unsigned char* p = (unsigned char*)buffer;
 	size_t n = count;
+	clock_t tick = 0;
 	while (n > 0)
 	{
 		DWORD written = 0;
@@ -57,6 +59,7 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 		int err = GetLastError();
 		n -= written;
 		p += written;
+
 		if (!rv && !(err == ERROR_IO_PENDING || err == ERROR_NO_DATA))
 		{
 			LPSTR errmsgbuf = NULL;
@@ -68,7 +71,20 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 				LocalFree(errmsgbuf);
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot write to STDOUT: %08x: %s (written %zu of %zu bytes)", err, errmsg, count - n, count);
 		}
-		// wait until STDOUT pipe becomes empty again
+		// wait until STDOUT pipe becomes empty again, but don't wait too long: timeout after a "sensible" 15 seconds:
+		else if (written == 0)
+		{
+			if (!tick)
+			{
+				tick = clock();
+			}
+			else if (clock() - tick >= 15 * CLOCKS_PER_SEC)
+			{
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot write to STDOUT: timeout while waiting for FileWrite() API to accept a byte to write (written %zu of %zu bytes)", count - n, count);
+			}
+			// Don't load the CPU for a while: we'll have to wait for the calling process to gobble the bytes buffered in the pipe before we can continue here.
+			SleepEx(2, TRUE);
+		}
 	}
 #else
 	file_write(ctx, stdout, buffer, count);
