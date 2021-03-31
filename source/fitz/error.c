@@ -6,10 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef _MSC_VER
-#ifdef USE_OUTPUT_DEBUG_STRING
+#ifdef _WIN32
+#define USE_OUTPUT_DEBUG_STRING  1
 #include <windows.h>
-#endif
 #endif
 
 #ifdef __ANDROID__
@@ -17,9 +16,12 @@
 #include <android/log.h>
 #endif
 
-#define QUIET_ERROR 0x0001
-#define QUIET_WARN  0x0002
-#define QUIET_INFO  0x0004
+#define QUIET_ERROR				0x0001
+#define QUIET_WARN				0x0002
+#define QUIET_INFO				0x0004
+#define QUIET_DEBUG				0x0008
+
+#define QUIET_STDIO_FATALITY	0x0010
 
 static int quiet_mode = 0;
 
@@ -30,9 +32,12 @@ void fz_default_error_callback(void *user, const char *message)
 		fprintf(stderr, "error: %s\n", message);
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
-	OutputDebugStringA("error: ");
-	OutputDebugStringA(message);
-	OutputDebugStringA("\n");
+	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
+	{
+		OutputDebugStringA("error: ");
+		OutputDebugStringA(message);
+		OutputDebugStringA("\n");
+	}
 #endif
 #ifdef USE_ANDROID_LOG
 	__android_log_print(ANDROID_LOG_ERROR, "libmupdf", "%s", message);
@@ -46,9 +51,12 @@ void fz_default_warning_callback(void *user, const char *message)
 		fprintf(stderr, "warning: %s\n", message);
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
-	OutputDebugStringA("warning: ");
-	OutputDebugStringA(message);
-	OutputDebugStringA("\n");
+	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
+	{
+		OutputDebugStringA("warning: ");
+		OutputDebugStringA(message);
+		OutputDebugStringA("\n");
+	}
 #endif
 #ifdef USE_ANDROID_LOG
 	__android_log_print(ANDROID_LOG_WARN, "libmupdf", "%s", message);
@@ -76,8 +84,11 @@ void fz_default_info_callback(void* user, const char* message)
 		fprintf(stderr, "%s\n", message);
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
-	OutputDebugStringA(message);
-	OutputDebugStringA("\n");
+	if (quiet_mode & QUIET_DEBUG)
+	{
+		OutputDebugStringA(message);
+		OutputDebugStringA("\n");
+	}
 #endif
 #ifdef USE_ANDROID_LOG
 	__android_log_print(ANDROID_LOG_INFO, "libmupdf", "%s", message);
@@ -98,9 +109,23 @@ void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void
 	*print = ctx->info.print;
 }
 
+static inline int edit_bit(int user, int set)
+{
+	if (user < 0)
+		return quiet_mode & set;  // current state of the flag
+	if (user)
+		return set;
+	return 0;
+}
+
 void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info)
 {
-	quiet_mode = (quiet_error ? QUIET_ERROR : 0) | (quiet_warn ? QUIET_WARN : 0) | (quiet_info ? QUIET_INFO : 0);
+	quiet_mode = edit_bit(quiet_error, QUIET_ERROR) | edit_bit(quiet_warn, QUIET_WARN) | edit_bit(quiet_info, QUIET_INFO);
+}
+
+void fz_enable_dbg_output(int severity)
+{
+	quiet_mode |= (severity ? QUIET_STDIO_FATALITY : QUIET_DEBUG);
 }
 
 void fz_var_imp(void *var)

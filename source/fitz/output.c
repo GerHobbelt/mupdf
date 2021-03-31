@@ -52,6 +52,12 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 	unsigned char* p = (unsigned char*)buffer;
 	size_t n = count;
 	clock_t tick = 0;
+	static int caller_is_aborted = 0;
+	// when a previous call to this function already discovered that the caller has aborted, don't even bother to try:
+	if (caller_is_aborted)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot write to STDOUT: previous timeout while waiting for FileWrite() API signaled caller has aborted already");
+	}
 	while (n > 0)
 	{
 		DWORD written = 0;
@@ -80,6 +86,10 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 			}
 			else if (clock() - tick >= 15 * CLOCKS_PER_SEC)
 			{
+				extern void fz_enable_dbg_output(int severity);
+
+				caller_is_aborted = 1;
+				fz_enable_dbg_output(1);
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot write to STDOUT: timeout while waiting for FileWrite() API to accept a byte to write (written %zu of %zu bytes)", count - n, count);
 			}
 			// Don't load the CPU for a while: we'll have to wait for the calling process to gobble the bytes buffered in the pipe before we can continue here.
