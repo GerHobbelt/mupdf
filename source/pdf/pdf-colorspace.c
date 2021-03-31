@@ -70,7 +70,13 @@ load_icc_based(fz_context *ctx, pdf_obj *dict, int allow_alt)
 		if (n == 1) cs = fz_keep_colorspace(ctx, fz_device_gray(ctx));
 		else if (n == 3) cs = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
 		else if (n == 4) cs = fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
-		else fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid ICC colorspace");
+		else {
+			pdf_obj* nobj = pdf_dict_get(ctx, dict, PDF_NAME(N));
+			if (!nobj)
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid ICC colorspace (unspecified N)");
+			else
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid ICC colorspace N=%d", n);
+		}
 	}
 
 	return cs;
