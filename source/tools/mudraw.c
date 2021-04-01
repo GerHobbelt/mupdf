@@ -23,10 +23,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 
 #ifdef _WIN32
 #include <windows.h>
+#include <fcntl.h>
 #include <direct.h> /* for getcwd */
 #if defined(_MSC_VER)
 #include <crtdbg.h>
@@ -1117,40 +1117,37 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 
 			/* Output any page level headers (for banded formats) */
-			if (output)
+			if (output_format == OUT_PGM || output_format == OUT_PPM || output_format == OUT_PNM)
+				bander = fz_new_pnm_band_writer(ctx, out);
+			else if (output_format == OUT_PAM)
+				bander = fz_new_pam_band_writer(ctx, out);
+			else if (output_format == OUT_PNG)
+				bander = fz_new_png_band_writer(ctx, out);
+			else if (output_format == OUT_PBM)
+				bander = fz_new_pbm_band_writer(ctx, out);
+			else if (output_format == OUT_PKM)
+				bander = fz_new_pkm_band_writer(ctx, out);
+			else if (output_format == OUT_PS)
+				bander = fz_new_ps_band_writer(ctx, out);
+			else if (output_format == OUT_PSD)
+				bander = fz_new_psd_band_writer(ctx, out);
+			else if (output_format == OUT_PWG)
 			{
-				if (output_format == OUT_PGM || output_format == OUT_PPM || output_format == OUT_PNM)
-					bander = fz_new_pnm_band_writer(ctx, out);
-				else if (output_format == OUT_PAM)
-					bander = fz_new_pam_band_writer(ctx, out);
-				else if (output_format == OUT_PNG)
-					bander = fz_new_png_band_writer(ctx, out);
-				else if (output_format == OUT_PBM)
-					bander = fz_new_pbm_band_writer(ctx, out);
-				else if (output_format == OUT_PKM)
-					bander = fz_new_pkm_band_writer(ctx, out);
-				else if (output_format == OUT_PS)
-					bander = fz_new_ps_band_writer(ctx, out);
-				else if (output_format == OUT_PSD)
-					bander = fz_new_psd_band_writer(ctx, out);
-				else if (output_format == OUT_PWG)
-				{
-					if (out_cs == CS_MONO)
-						bander = fz_new_mono_pwg_band_writer(ctx, out, NULL);
-					else
-						bander = fz_new_pwg_band_writer(ctx, out, NULL);
-				}
-				else if (output_format == OUT_PCL)
-				{
-					if (out_cs == CS_MONO)
-						bander = fz_new_mono_pcl_band_writer(ctx, out, NULL);
-					else
-						bander = fz_new_color_pcl_band_writer(ctx, out, NULL);
-				}
-				if (bander)
-				{
-					fz_write_header(ctx, bander, pix->w, totalheight, pix->n, pix->alpha, pix->xres, pix->yres, output_pagenum++, pix->colorspace, pix->seps);
-				}
+				if (out_cs == CS_MONO)
+					bander = fz_new_mono_pwg_band_writer(ctx, out, NULL);
+				else
+					bander = fz_new_pwg_band_writer(ctx, out, NULL);
+			}
+			else if (output_format == OUT_PCL)
+			{
+				if (out_cs == CS_MONO)
+					bander = fz_new_mono_pcl_band_writer(ctx, out, NULL);
+				else
+					bander = fz_new_color_pcl_band_writer(ctx, out, NULL);
+			}
+			if (bander)
+			{
+				fz_write_header(ctx, bander, pix->w, totalheight, pix->n, pix->alpha, pix->xres, pix->yres, output_pagenum++, pix->colorspace, pix->seps);
 			}
 
 			for (band = 0; band < bands; band++)
@@ -1174,13 +1171,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				else
 					drawband(ctx, page, list, ctm, tbounds, cookie, band * band_height, pix, &bit);
 
-				if (output)
-				{
-					if (bander && (pix || bit))
-						fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
-					fz_drop_bitmap(ctx, bit);
-					bit = NULL;
-				}
+				if (bander && (pix || bit))
+					fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
+				fz_drop_bitmap(ctx, bit);
+				bit = NULL;
 
 				if (num_workers > 0 && band + num_workers < bands)
 				{
@@ -2272,6 +2266,17 @@ int mudraw_main(int argc, const char **argv)
 		return usage();
 	}
 
+	if (!output || *output == 0 || !strcmp(output, "-"))
+	{
+		// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
+#if 0
+		quiet = 1; /* automatically be quiet if printing to stdout */
+		fz_default_error_warn_info_mode(1, 1, 1);
+#endif
+
+		output = "/dev/stdout";
+	}
+
 	if (num_workers > 0)
 	{
 		if (uselist == 0)
@@ -2457,7 +2462,7 @@ int mudraw_main(int argc, const char **argv)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown output format '%s'", format);
 			}
 		}
-		else if (output)
+		else
 		{
 			const char *suffix = output;
 			int i;
@@ -2621,45 +2626,14 @@ int mudraw_main(int argc, const char **argv)
 			output_file_per_page = 1;
 		}
 
-		if (!output || *output == 0 || !strcmp(output, "-"))
+		if ((fz_has_percent_d(output) || output_file_per_page) && strcmp(output, "/dev/output"))
 		{
-			// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
-#if 0
-			quiet = 1; /* automatically be quiet if printing to stdout */
-			fz_default_error_warn_info_mode(1, 1, 1);
-#endif
-
-			output = NULL;
-
-#ifdef _WIN32
-			/* Windows specific code to make stdout binary. */
-			if (output_format != OUT_TEXT &&
-				output_format != OUT_STEXT_XML &&
-				output_format != OUT_STEXT_JSON &&
-				output_format != OUT_HTML &&
-				output_format != OUT_XHTML &&
-				output_format != OUT_TRACE &&
-				output_format != OUT_OCR_TRACE &&
-				output_format != OUT_BBOX &&
-				output_format != OUT_OCR_TEXT &&
-				output_format != OUT_OCR_STEXT_XML &&
-				output_format != OUT_OCR_XMLTEXT &&
-				output_format != OUT_OCR_STEXT_JSON &&
-				output_format != OUT_OCR_HTML &&
-				output_format != OUT_OCR_XHTML &&
-				output_format != OUT_XMLTEXT)
-			{
-				setmode(fileno(stdout), O_BINARY);
-			}
-#endif
-			out = fz_stdout(ctx);
+			output_file_per_page = 1;
 		}
 		else
 		{
-			if (fz_has_percent_d(output) || output_file_per_page)
-				output_file_per_page = 1;
-			else
-				out = fz_new_output_with_path(ctx, output, 0);
+			output_file_per_page = 0;
+			out = fz_new_output_with_path(ctx, output, 0);
 		}
 
 		if (output_format == OUT_PDF)
@@ -2894,15 +2868,7 @@ int mudraw_main(int argc, const char **argv)
 #if FZ_ENABLE_PDF
 		if (pdfout)
 		{
-			if (!output)
-			{
-				// write PDF to stdout
-				pdf_save_document(ctx, pdfout, "/dev/stdout", NULL);
-			}
-			else
-			{
-				pdf_save_document(ctx, pdfout, output, NULL);
-			}
+			pdf_save_document(ctx, pdfout, output, NULL);
 			pdf_drop_document(ctx, pdfout);
 			pdfout = NULL;
 		}
