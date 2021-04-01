@@ -2727,6 +2727,8 @@ void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
 						if (ap_d)
 							ap_n = ap_d;
 					}
+					if (!pdf_is_stream(ctx, ap_n))
+						ap_n = pdf_dict_get(ctx, ap_n, as);
 				}
 				fz_always(ctx)
 				{
