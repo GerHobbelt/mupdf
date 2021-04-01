@@ -221,7 +221,6 @@ static struct curltime fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = {
 void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms)
 {
 	int i, j;
-	struct curltime now = Curl_now();
 
 	for (j = 0; j < FZ_LOCK_MAX; j++)
 	{
