@@ -2728,6 +2728,23 @@ int mudraw_main(int argc, const char **argv)
 			}
 		}
 
+		// report output format in verbode mode:
+		if (!quiet)
+		{
+			int i;
+			const char* fmtstr = ".???";
+
+			for (i = 0; i < (int)nelem(suffix_table); i++)
+			{
+				if (output_format == suffix_table[i].format)
+				{
+					fmtstr = suffix_table[i].suffix + 1;
+					break;
+				}
+			}
+			fz_info(ctx, "Output format: %s (%s%s)", fmtstr, colorspace->name, alpha ? ", Alpha" : "");
+		}
+
 		timing.count = 0;
 		timing.total = 0;
 		timing.min = 1 << 30;
