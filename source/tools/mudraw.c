@@ -63,9 +63,7 @@ enum {
 	OUT_BBOX,
 	OUT_HTML,
 	OUT_OCR_HTML,
-#if FZ_ENABLE_PDF
 	OUT_OCR_PDF,
-#endif
 	OUT_OCR_STEXT_JSON,
 	OUT_OCR_STEXT_XML,
 	OUT_OCR_TEXT,
@@ -91,9 +89,7 @@ enum {
 	OUT_TRACE,
 	OUT_XHTML,
 	OUT_XMLTEXT,
-#if FZ_ENABLE_PDF
 	OUT_PDF,
-#endif
 };
 
 enum { CS_INVALID, CS_UNSET, CS_MONO, CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA, CS_ICC };
@@ -120,9 +116,7 @@ static const suffix_t suffix_table[] =
 	{ ".ocr.stext", OUT_OCR_STEXT_XML, 0 },
 	{ ".ocr.xmltext", OUT_OCR_XMLTEXT, 0 },
 	{ ".ocr.xml", OUT_OCR_XMLTEXT, 0 },
-#if FZ_ENABLE_PDF
 	{ ".ocr.pdf", OUT_OCR_PDF, 0 },
-#endif
 	{ ".ocr.trace", OUT_OCR_TRACE, 0 },
 	{ ".stext.json", OUT_STEXT_JSON, 0 },
 
@@ -138,9 +132,7 @@ static const suffix_t suffix_table[] =
 	{ ".pwg", OUT_PWG, 0 },
 	{ ".pclm", OUT_PCLM, 0 },
 	{ ".pcl", OUT_PCL, 0 },
-#if FZ_ENABLE_PDF
 	{ ".pdf", OUT_PDF, 0 },
-#endif
 	{ ".psd", OUT_PSD, 1 },
 	{ ".ps", OUT_PS, 0 },
 
@@ -206,10 +198,8 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_XMLTEXT, CS_RGB, { CS_RGB } },
 	{ OUT_BBOX, CS_RGB, { CS_RGB } },
 	{ OUT_SVG, CS_RGB, { CS_RGB } },
-#if FZ_ENABLE_PDF
 	{ OUT_OCR_PDF, CS_RGB, { CS_RGB, CS_GRAY } },
 	{ OUT_PDF, CS_RGB, { CS_RGB } },
-#endif
 
 	{ OUT_TEXT, CS_RGB, { CS_RGB } },
 	{ OUT_HTML, CS_RGB, { CS_RGB } },
@@ -575,7 +565,6 @@ file_level_headers(fz_context *ctx)
 		bander = fz_new_pclm_band_writer(ctx, out, &opts);
 	}
 
-#if FZ_ENABLE_PDF
 	if (output_format == OUT_OCR_PDF)
 	{
 		char options[300];
@@ -584,7 +573,6 @@ file_level_headers(fz_context *ctx)
 		fz_parse_pdfocr_options(ctx, &opts, options);
 		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
 	}
-#endif
 }
 
 static void
@@ -606,11 +594,7 @@ file_level_trailers(fz_context *ctx)
 	if (output_format == OUT_PS)
 		fz_write_ps_file_trailer(ctx, out, output_pagenum);
 
-#if FZ_ENABLE_PDF
 	if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
-#else
-	if (output_format == OUT_PCLM)
-#endif
 	{
 		fz_drop_band_writer(ctx, bander);
 	}
@@ -994,9 +978,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-#if FZ_ENABLE_PDF
 	else if (output_format == OUT_PDF)
 	{
+#if FZ_ENABLE_PDF
 		fz_buffer *contents = NULL;
 		pdf_obj *resources = NULL;
 
@@ -1030,8 +1014,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			fz_rethrow(ctx);
 		}
-	}
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "PDF output is not supported by this mupdf build.");
 #endif
+	}
 
 	else if (output_format == OUT_SVG)
 	{
@@ -1230,11 +1216,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 		fz_always(ctx)
 		{
-#if FZ_ENABLE_PDF
 			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
-#else
-			if (output_format != OUT_PCLM)
-#endif
 			{
 				fz_drop_band_writer(ctx, bander);
 				/* bander must be set to NULL to avoid use-after-frees. A use-after-free
@@ -1493,15 +1475,19 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		}
 		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
 
-#if FZ_ENABLE_PDF
 		if (output_format == OUT_PDF)
 		{
+#if FZ_ENABLE_PDF
 			pdfout = pdf_create_document(ctx);
 			pdfoutpath = fz_strdup(ctx, text_buffer);
+#else
+			fz_throw(ctx, FZ_ERROR_GENERIC, "PDF output is not supported by this mupdf build.");
+#endif
 		}
 		else
-#endif
+		{
 			out = fz_new_output_with_path(ctx, text_buffer, 0);
+		}
 	}
 
 	if (bgprint.active)
@@ -2512,11 +2498,7 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PCLM &&
 				output_format != OUT_PS &&
 				output_format != OUT_PSD &&
-#if FZ_ENABLE_PDF
 				output_format != OUT_OCR_PDF)
-#else
-				0)
-#endif
 			{
 				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
 				band_height = 0;
@@ -2680,9 +2662,9 @@ int mudraw_main(int argc, const char **argv)
 				out = fz_new_output_with_path(ctx, output, 0);
 		}
 
-#if FZ_ENABLE_PDF
 		if (output_format == OUT_PDF)
 		{
+#if FZ_ENABLE_PDF
 			// Nuke `out`. We will be using `pdfout` instead.
 			if (out)
 			{
@@ -2695,8 +2677,10 @@ int mudraw_main(int argc, const char **argv)
 			{
 				pdfout = pdf_create_document(ctx);
 			}
-		}
+#else
+			fz_throw(ctx, FZ_ERROR_GENERIC, "PDF output is not supported by this mupdf build.");
 #endif
+		}
 
 		// Check if the Tesseract engine can initialize properly when one of the OCR modes is requested.
 		// If it cannot init, report a warning accordingly and fall back to the non-OCR output format:
@@ -2707,11 +2691,7 @@ int mudraw_main(int argc, const char **argv)
 			output_format == OUT_OCR_XMLTEXT ||
 			output_format == OUT_OCR_HTML ||
 			output_format == OUT_OCR_XHTML ||
-#if FZ_ENABLE_PDF
 			output_format == OUT_OCR_PDF)
-#else
-			0)
-#endif
 		{
 			void* tess_api = NULL;
 
@@ -2742,10 +2722,8 @@ int mudraw_main(int argc, const char **argv)
 					output_format = OUT_HTML; break;
 				case OUT_OCR_XHTML:
 					output_format = OUT_XHTML; break;
-#if FZ_ENABLE_PDF
 				case OUT_OCR_PDF:
 					output_format = OUT_PDF; break;
-#endif
 				}
 			}
 		}
