@@ -213,6 +213,8 @@ static void ffi_gc_fz_document(js_State *J, void *doc)
 	fz_drop_document(ctx, doc);
 }
 
+#if FZ_ENABLE_PDF
+
 static void ffi_gc_pdf_pkcs7_signer(js_State *J, void *signer_)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -220,6 +222,8 @@ static void ffi_gc_pdf_pkcs7_signer(js_State *J, void *signer_)
 	if (signer)
 		signer->drop(ctx, signer);
 }
+
+#endif
 
 static void ffi_gc_fz_page(js_State *J, void *page)
 {
@@ -383,7 +387,7 @@ static fz_document *ffi_todocument(js_State *J, int idx)
 static void ffi_pushdocument(js_State *J, fz_document *document)
 {
 	js_getregistry(J, "fz_document");
-	js_newuserdata(J, "fz_document", doc, ffi_gc_fz_document);
+	js_newuserdata(J, "fz_document", document, ffi_gc_fz_document);
 }
 
 static fz_page *ffi_topage(js_State *J, int idx)
@@ -597,6 +601,8 @@ static const char *string_from_join(fz_linejoin join)
 	}
 }
 
+#if FZ_ENABLE_PDF
+
 static const char *string_from_line_ending(enum pdf_line_ending style)
 {
 	switch (style) {
@@ -614,6 +620,8 @@ static const char *string_from_line_ending(enum pdf_line_ending style)
 	}
 }
 
+#endif
+
 static fz_linecap cap_from_string(const char *str)
 {
 	if (!strcmp(str, "Round")) return FZ_LINECAP_ROUND;
@@ -630,6 +638,8 @@ static fz_linejoin join_from_string(const char *str)
 	return FZ_LINEJOIN_MITER;
 }
 
+#if FZ_ENABLE_PDF
+
 static enum pdf_line_ending line_ending_from_string(const char *str)
 {
 	if (!strcmp(str, "None")) return PDF_ANNOT_LE_NONE;
@@ -644,6 +654,8 @@ static enum pdf_line_ending line_ending_from_string(const char *str)
 	if (!strcmp(str, "Slash")) return PDF_ANNOT_LE_SLASH;
 	return PDF_ANNOT_LE_NONE;
 }
+
+#endif
 
 static void ffi_pushstroke(js_State *J, const fz_stroke_state *stroke)
 {
@@ -6801,7 +6813,9 @@ int murun_main(int argc, const char **argv)
 		jsB_propcon(J, "fz_device", "DrawDevice", ffi_new_DrawDevice, 2);
 		jsB_propcon(J, "fz_device", "DisplayListDevice", ffi_new_DisplayListDevice, 1);
 		jsB_propcon(J, "fz_document_writer", "DocumentWriter", ffi_new_DocumentWriter, 3);
+#if FZ_ENABLE_PDF
 		jsB_propcon(J, "pdf_pkcs7_signer", "PDFPKCS7Signer", ffi_new_PDFPKCS7Signer, 2);
+#endif
 
 		jsB_propfun(J, "readFile", ffi_readFile, 1);
 

@@ -204,11 +204,7 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_widget *widget, pdf_pkcs
 		pdf_obj *form;
 		int sf;
 
-		/* Mark annotation as dirty. Do NOT call pdf_dirty_widget
-		 * as that requests a new appearance stream for the
-		 * widget that breaks stuff. */
-		if (widget->page && widget->page->doc)
-			widget->page->doc->dirty = 1;
+		pdf_dirty_annot(ctx, widget);
 
 		/* Ensure that all fields that will be locked by this signature
 		 * are marked as ReadOnly. */

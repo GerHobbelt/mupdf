@@ -120,7 +120,9 @@ static const suffix_t suffix_table[] =
 	{ ".ocr.stext", OUT_OCR_STEXT_XML, 0 },
 	{ ".ocr.xmltext", OUT_OCR_XMLTEXT, 0 },
 	{ ".ocr.xml", OUT_OCR_XMLTEXT, 0 },
+#if FZ_ENABLE_PDF
 	{ ".ocr.pdf", OUT_OCR_PDF, 0 },
+#endif
 	{ ".ocr.trace", OUT_OCR_TRACE, 0 },
 	{ ".stext.json", OUT_STEXT_JSON, 0 },
 
@@ -204,8 +206,8 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_XMLTEXT, CS_RGB, { CS_RGB } },
 	{ OUT_BBOX, CS_RGB, { CS_RGB } },
 	{ OUT_SVG, CS_RGB, { CS_RGB } },
-	{ OUT_OCR_PDF, CS_RGB, { CS_RGB, CS_GRAY } },
 #if FZ_ENABLE_PDF
+	{ OUT_OCR_PDF, CS_RGB, { CS_RGB, CS_GRAY } },
 	{ OUT_PDF, CS_RGB, { CS_RGB } },
 #endif
 
@@ -573,6 +575,7 @@ file_level_headers(fz_context *ctx)
 		bander = fz_new_pclm_band_writer(ctx, out, &opts);
 	}
 
+#if FZ_ENABLE_PDF
 	if (output_format == OUT_OCR_PDF)
 	{
 		char options[300];
@@ -581,6 +584,7 @@ file_level_headers(fz_context *ctx)
 		fz_parse_pdfocr_options(ctx, &opts, options);
 		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
 	}
+#endif
 }
 
 static void
@@ -602,8 +606,14 @@ file_level_trailers(fz_context *ctx)
 	if (output_format == OUT_PS)
 		fz_write_ps_file_trailer(ctx, out, output_pagenum);
 
+#if FZ_ENABLE_PDF
 	if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
+#else
+	if (output_format == OUT_PCLM)
+#endif
+	{
 		fz_drop_band_writer(ctx, bander);
+	}
 }
 
 static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_matrix ctm, fz_rect tbounds, fz_cookie *cookie, int band_start, fz_pixmap *pix, fz_bitmap **bit)
@@ -1220,7 +1230,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 		fz_always(ctx)
 		{
+#if FZ_ENABLE_PDF
 			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
+#else
+			if (output_format != OUT_PCLM)
+#endif
 			{
 				fz_drop_band_writer(ctx, bander);
 				/* bander must be set to NULL to avoid use-after-frees. A use-after-free
@@ -2498,7 +2512,11 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PCLM &&
 				output_format != OUT_PS &&
 				output_format != OUT_PSD &&
+#if FZ_ENABLE_PDF
 				output_format != OUT_OCR_PDF)
+#else
+				0)
+#endif
 			{
 				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
 				band_height = 0;
@@ -2689,7 +2707,11 @@ int mudraw_main(int argc, const char **argv)
 			output_format == OUT_OCR_XMLTEXT ||
 			output_format == OUT_OCR_HTML ||
 			output_format == OUT_OCR_XHTML ||
+#if FZ_ENABLE_PDF
 			output_format == OUT_OCR_PDF)
+#else
+			0)
+#endif
 		{
 			void* tess_api = NULL;
 

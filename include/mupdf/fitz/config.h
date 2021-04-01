@@ -125,7 +125,7 @@
 #endif
 
 #ifndef FZ_ENABLE_PDF
-#define FZ_ENABLE_PDF 1
+#define FZ_ENABLE_PDF 0
 #endif /* FZ_ENABLE_PDF */
 
 #ifndef FZ_ENABLE_XPS
