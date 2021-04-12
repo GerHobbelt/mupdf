@@ -2595,38 +2595,27 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     out.write(      f'    fz_context* auto_ctx = {icg}();\n')
     out.write(      f'    fz_var(auto_ctx);\n')
 
-    out.write( f'    if (s_trace) {{\n')
-
-    out.write( f'        fprintf(stderr, "%s:%i:%s(): calling {cursor.mangled_name}():')
-
-    items = []
+    out.write( '    if (s_trace) {\n')
+    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": calling {cursor.mangled_name}():"')
     for arg in get_args( tu, cursor, include_fz_context=True):
         if is_pointer_to( arg.cursor.type, 'fz_context'):
-            text = 'auto_ctx=%p'
-            value = 'auto_ctx'
-        elif is_pointer_to( arg.cursor.type, 'char'):
-            text = f'{arg.name}=%s'
-            value = f'{arg.name}'
-        elif arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
-            text = f'{arg.name}=%p'
-            value = f'{arg.name}'
-        elif arg.alt:
-            text = f'&{arg.name}=%p'
-            value = f'&{arg.name}'
+            out.write( f' << " &auto_ctx=" << &auto_ctx')
         else:
-            text = f'(long){arg.name}=%li'
-            value = f'(long){arg.name}'
-        items.append( (text, value))
-
-    for text, value in items:
-        out.write( f' {text}')
-
-    out.write( '\\n", __FILE__, __LINE__, __FUNCTION__')
-
-    for text, value in items:
-        out.write( f', {value}')
-
-    out.write( ');\n')
+            use_address = False
+            if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
+                pass
+            elif arg.alt:
+                # If not a pod, there will not be an operator<<, so just show
+                # the address of this arg.
+                #
+                extras = get_fz_extras(arg.alt.type.spelling)
+                if not extras.pod:
+                    use_address = True
+            if use_address:
+                out.write( f' << " &{arg.name}=" << &{arg.name}')
+            else:
+                out.write( f' << " {arg.name}=" << {arg.name}')
+    out.write( f' << "\\n";\n')
     out.write( '    }\n')
 
     if return_type != 'void':
@@ -3443,6 +3432,11 @@ def make_function_wrappers(
         if cursor.type.is_function_variadic():
             # We don't attempt to wrap variadic functions - would need to find
             # the equivalent function that takes a va_list.
+            continue
+        if fnname == 'fz_push_try':
+            # This is partof implementation of fz_try/catch so doesn't make
+            # sense to provide a wrapper. Also it is OS-dependent so including
+            # it makes our generated code OS-specific.
             continue
 
         functions.append( (fnname, cursor))
