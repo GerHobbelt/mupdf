@@ -1666,7 +1666,7 @@ classextras = ClassExtras(
                         {{
                             std::vector<{rename.class_("fz_quad")}> ret(max);
                             fz_quad* hit_bbox = ret[0].internal();
-                            int n = {rename.function_call('fz_search_page')}(m_internal, needle, hit_bbox, ret.size());
+                            int n = {rename.function_call('fz_search_page')}(m_internal, needle, hit_bbox, (int) ret.size());
                             ret.resize(n);
                             return ret;
                         }}
@@ -2599,7 +2599,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": calling {cursor.mangled_name}():"')
     for arg in get_args( tu, cursor, include_fz_context=True):
         if is_pointer_to( arg.cursor.type, 'fz_context'):
-            out.write( f' << " &auto_ctx=" << &auto_ctx')
+            out.write( f' << " auto_ctx=" << auto_ctx')
         else:
             use_address = False
             if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
