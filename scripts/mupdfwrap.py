@@ -5012,7 +5012,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     doit:
         For debugging only. If false, we don't actually write to any files.
 
-    Returns (tu, hs, cpps, fn_usage_filename, container_classnames, to_string_structnames, fn_usage, output_param_fns).
+    Returns (tu, hs, cpps, fn_usage_filename, container_classnames, to_string_structnames, fn_usage, output_param_fns, c_functions).
         tu:
             From clang.
         hs:
@@ -5031,6 +5031,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             Name of output file containing information on function usage.
         output_param_fns:
             .
+        c_functions:
+            List of C function names.
     '''
     assert dir_mupdf.endswith( '/')
     assert base.endswith( '/')
@@ -5317,8 +5319,11 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
 
     fn_usage = dict()
     functions_unrecognised = set()
+    c_functions = []
+
     for fnname, cursor in find_functions_starting_with( tu, ('fz_', 'pdf_'), method=True):
         fn_usage[ fnname] = [0, cursor]
+        c_functions.append(fnname)
 
     def register_fn_use( name):
         assert name.startswith( ('fz_', 'pdf_'))
@@ -5525,6 +5530,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             to_string_structnames,
             fn_usage,
             output_param_fns,
+            c_functions,
             )
 
 
@@ -5623,7 +5629,16 @@ def compare_fz_usage(
 
 
 
-def build_swig( build_dirs, container_classnames, to_string_structnames, swig_c, swig_python, language='python', swig='swig'):
+def build_swig(
+        build_dirs,
+        container_classnames,
+        to_string_structnames,
+        swig_c,
+        swig_python,
+        c_functions,
+        language='python',
+        swig='swig'
+        ):
     '''
     Builds python wrapper for all mupdf_* functions and classes.
     '''
@@ -5662,7 +5677,11 @@ def build_swig( build_dirs, container_classnames, to_string_structnames, swig_c,
 
     common += swig_c
 
-    text = textwrap.dedent(f'''
+    text = ''
+    for fnname in c_functions:
+        text += f'%ignore {fnname};\n'
+
+    text += textwrap.dedent(f'''
             %ignore fz_append_vprintf;
             %ignore fz_error_stack_slot;
             %ignore fz_format_string;
@@ -6262,6 +6281,7 @@ def main():
                                     to_string_structnames,
                                     fn_usage,
                                     output_param_fns,
+                                    c_functions,
                             ) = cpp_source(
                                     build_dirs.dir_mupdf,
                                     namespace,
@@ -6275,6 +6295,7 @@ def main():
                             to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle')
                             to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle')
                             to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle')
+                            to_pickle( c_functions,             f'{build_dirs.dir_mupdf}platform/c++/c_functions.pickle')
 
                             def check_lists_equal(name, expected, actual):
                                 expected.sort()
@@ -6386,6 +6407,7 @@ def main():
                                         from_pickle( f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle'),
                                         from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle'),
                                         from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/c_functions.pickle'),
                                         swig=swig,
                                         )
 
