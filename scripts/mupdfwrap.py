@@ -1497,13 +1497,13 @@ classextras = ClassExtras(
                     '''
                     struct OutlineIterator
                     {
-                        OutlineIterator();
-                        OutlineIterator(const Outline& item);
-                        OutlineIterator& operator++();
-                        bool operator==(const OutlineIterator& rhs);
-                        bool operator!=(const OutlineIterator& rhs);
-                        OutlineIterator& operator*();
-                        OutlineIterator* operator->();
+                        mupdf_EXPORT OutlineIterator();
+                        mupdf_EXPORT OutlineIterator(const Outline& item);
+                        mupdf_EXPORT OutlineIterator& operator++();
+                        mupdf_EXPORT bool operator==(const OutlineIterator& rhs);
+                        mupdf_EXPORT bool operator!=(const OutlineIterator& rhs);
+                        mupdf_EXPORT OutlineIterator& operator*();
+                        mupdf_EXPORT OutlineIterator* operator->();
                         Outline m_outline;
                         int m_depth;
                         private:
@@ -1512,15 +1512,15 @@ classextras = ClassExtras(
                     ''',
                 extra_cpp =
                     f'''
-                    OutlineIterator::OutlineIterator(const Outline& item)
+                    mupdf_EXPORT OutlineIterator::OutlineIterator(const Outline& item)
                     : m_outline(item), m_depth(0)
                     {{
                     }}
-                    OutlineIterator::OutlineIterator()
+                    mupdf_EXPORT OutlineIterator::OutlineIterator()
                     : m_outline(NULL)
                     {{
                     }}
-                    OutlineIterator& OutlineIterator::operator++()
+                    mupdf_EXPORT OutlineIterator& OutlineIterator::operator++()
                     {{
                         if (m_outline.m_internal->down)
                         {{
@@ -1558,20 +1558,20 @@ classextras = ClassExtras(
                         }}
                         return *this;
                     }}
-                    bool OutlineIterator::operator==(const OutlineIterator& rhs)
+                    mupdf_EXPORT bool OutlineIterator::operator==(const OutlineIterator& rhs)
                     {{
                         bool ret = m_outline.m_internal == rhs.m_outline.m_internal;
                         return ret;
                     }}
-                    bool OutlineIterator::operator!=(const OutlineIterator& rhs)
+                    mupdf_EXPORT bool OutlineIterator::operator!=(const OutlineIterator& rhs)
                     {{
                         return m_outline.m_internal != rhs.m_outline.m_internal;
                     }}
-                    OutlineIterator& OutlineIterator::operator*()
+                    mupdf_EXPORT OutlineIterator& OutlineIterator::operator*()
                     {{
                         return *this;
                     }}
-                    OutlineIterator* OutlineIterator::operator->()
+                    mupdf_EXPORT OutlineIterator* OutlineIterator::operator->()
                     {{
                         return this;
                     }}
@@ -3638,12 +3638,12 @@ def class_add_iterator( struct, structname, classname, extras):
     extras.class_post += f'''
             struct {classname}Iterator
             {{
-                {classname}Iterator(const {it_type}& item);
-                {classname}Iterator& operator++();
-                bool operator==( const {classname}Iterator& rhs);
-                bool operator!=( const {classname}Iterator& rhs);
-                {it_type} operator*();
-                {it_type}* operator->();
+                mupdf_EXPORT {classname}Iterator(const {it_type}& item);
+                mupdf_EXPORT {classname}Iterator& operator++();
+                mupdf_EXPORT bool operator==( const {classname}Iterator& rhs);
+                mupdf_EXPORT bool operator!=( const {classname}Iterator& rhs);
+                mupdf_EXPORT {it_type} operator*();
+                mupdf_EXPORT {it_type}* operator->();
                 private:
                 {it_type} m_item;
             }};
@@ -3667,29 +3667,29 @@ def class_add_iterator( struct, structname, classname, extras):
         keep_text = f'{keep_name}(m_item.m_internal->next);'
 
     extras.extra_cpp += f'''
-            {classname}Iterator::{classname}Iterator(const {it_type}& item)
+            mupdf_EXPORT {classname}Iterator::{classname}Iterator(const {it_type}& item)
             : m_item( item)
             {{
             }}
-            {classname}Iterator& {classname}Iterator::operator++()
+            mupdf_EXPORT {classname}Iterator& {classname}Iterator::operator++()
             {{
                 {keep_text}
                 m_item = {it_type}(m_item.m_internal->next);
                 return *this;
             }}
-            bool {classname}Iterator::operator==( const {classname}Iterator& rhs)
+            mupdf_EXPORT bool {classname}Iterator::operator==( const {classname}Iterator& rhs)
             {{
                 return m_item.m_internal == rhs.m_item.m_internal;
             }}
-            bool {classname}Iterator::operator!=( const {classname}Iterator& rhs)
+            mupdf_EXPORT bool {classname}Iterator::operator!=( const {classname}Iterator& rhs)
             {{
                 return m_item.m_internal != rhs.m_item.m_internal;
             }}
-            {it_type} {classname}Iterator::operator*()
+            mupdf_EXPORT {it_type} {classname}Iterator::operator*()
             {{
                 return m_item;
             }}
-            {it_type}* {classname}Iterator::operator->()
+            mupdf_EXPORT {it_type}* {classname}Iterator::operator->()
             {{
                 return &m_item;
             }}
@@ -4239,14 +4239,14 @@ def class_custom_method( register_fn_use, classname, extramethod, out_h, out_cpp
             out_h.write( f'    {line}\n')
     else:
         out_h.write( f'    /* {comment} */\n')
-    out_h.write( f'    {return_space}{name_args};\n')
+    out_h.write( f'    mupdf_EXPORT {return_space}{name_args};\n')
 
     out_cpp.write( f'/* {comment} */\n')
     # Remove any default arg values from <name_args>.
     name_args_no_defaults = re.sub('= *[^(][^),]*', '', name_args)
     if name_args_no_defaults != name_args:
         log('have changed {name_args=} to {name_args_no_defaults=}')
-    out_cpp.write( f'{return_space}{classname}::{name_args_no_defaults}')
+    out_cpp.write( f'mupdf_EXPORT {return_space}{classname}::{name_args_no_defaults}')
     out_cpp.write( textwrap.dedent(extramethod.body))
     out_cpp.write( f'\n')
 
@@ -4337,9 +4337,9 @@ def class_raw_constructor(
             const_space = 'const ' if const else ''
             out_h.write( '\n')
             out_h.write( f'    /* Access as underlying struct. */\n')
-            out_h.write( f'    {const_space}{structname}* internal(){space_const};\n')
+            out_h.write( f'    mupdf_EXPORT {const_space}{structname}* internal(){space_const};\n')
             out_cpp.write( f'{comment}\n')
-            out_cpp.write( f'{const_space}{structname}* {classname}::internal(){space_const}\n')
+            out_cpp.write( f'mupdf_EXPORT {const_space}{structname}* {classname}::internal(){space_const}\n')
             out_cpp.write( '{\n')
             field0 = get_field0(struct.type).spelling
             out_cpp.write( f'    return ({const_space}{structname}*) &this->{field0};\n')
@@ -4446,8 +4446,8 @@ def class_accessors(
         # todo: if return type is uint8_t or int8_t, maybe return as <int>
         # so SWIG doesn't think it is a string? This would fix errors witht
         # fz_image::n and fz_image::bpc.
-        out_h.write( f'    {decl % cursor.spelling};\n')
-        out_cpp.write( '%s\n' % (decl % ( f'{classname}::{cursor.spelling}')))
+        out_h.write( f'    mupdf_EXPORT {decl % cursor.spelling};\n')
+        out_cpp.write( 'mupdf_EXPORT %s\n' % (decl % ( f'{classname}::{cursor.spelling}')))
         out_cpp.write( '{\n')
         if keep_function:
             out_cpp.write( f'    {rename.function_call(keep_function)}(m_internal->{cursor.spelling});\n')
@@ -4510,9 +4510,9 @@ def class_to_string_member(
     '''
     out_h.write( f'\n')
     out_h.write( f'    /* Returns string containing our members, labelled and inside (...), using operator<<. */\n')
-    out_h.write( f'    std::string to_string();\n')
+    out_h.write( f'    mupdf_EXPORT std::string to_string();\n')
 
-    out_cpp.write( f'std::string {classname}::to_string()\n')
+    out_cpp.write( f'mupdf_EXPORT std::string {classname}::to_string()\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    std::ostringstream buffer;\n')
     out_cpp.write( f'    buffer << *this;\n')
@@ -4534,19 +4534,19 @@ def struct_to_string_fns(
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes {structname}\'s members, labelled and inside (...), to a stream. */\n')
-    out_h.write( f'std::ostream& operator<< (std::ostream& out, const {structname}& rhs);\n')
+    out_h.write( f'mupdf_EXPORT std::ostream& operator<< (std::ostream& out, const {structname}& rhs);\n')
 
     out_h.write( f'\n')
     out_h.write( f'/* Returns string containing a {structname}\'s members, labelled and inside (...), using operator<<. */\n')
-    out_h.write( f'std::string to_string_{structname}(const {structname}& s);\n')
+    out_h.write( f'mupdf_EXPORT std::string to_string_{structname}(const {structname}& s);\n')
 
     out_h.write( f'\n')
     out_h.write( f'/* Returns string containing a {structname}\'s members, labelled and inside (...), using operator<<.\n')
     out_h.write( f'(Convenience overload). */\n')
-    out_h.write( f'std::string to_string(const {structname}& s);\n')
+    out_h.write( f'mupdf_EXPORT std::string to_string(const {structname}& s);\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::ostream& operator<< (std::ostream& out, const {structname}& rhs)\n')
+    out_cpp.write( f'mupdf_EXPORT std::ostream& operator<< (std::ostream& out, const {structname}& rhs)\n')
     out_cpp.write( f'{{\n')
     i = 0
     out_cpp.write( f'    out\n')
@@ -4566,7 +4566,7 @@ def struct_to_string_fns(
     out_cpp.write( f'\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::string to_string_{structname}(const {structname}& s)\n')
+    out_cpp.write( f'mupdf_EXPORT std::string to_string_{structname}(const {structname}& s)\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    std::ostringstream buffer;\n')
     out_cpp.write( f'    buffer << s;\n')
@@ -4574,7 +4574,7 @@ def struct_to_string_fns(
     out_cpp.write( f'}}\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::string to_string(const {structname}& s)\n')
+    out_cpp.write( f'mupdf_EXPORT std::string to_string(const {structname}& s)\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    return to_string_{structname}(s);\n')
     out_cpp.write( f'}}\n')
@@ -4596,10 +4596,10 @@ def class_to_string_fns(
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes a {classname}\'s underlying {structname}\'s members, labelled and inside (...), to a stream. */\n')
-    out_h.write( f'std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
+    out_h.write( f'mupdf_EXPORT std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'std::ostream& operator<< (std::ostream& out, const {classname}& rhs)\n')
+    out_cpp.write( f'mupdf_EXPORT std::ostream& operator<< (std::ostream& out, const {classname}& rhs)\n')
     out_cpp.write( f'{{\n')
     if extras.pod == 'inline':
         out_cpp.write( f'    return out << *rhs.internal();\n')
@@ -6450,7 +6450,7 @@ def main():
                                         f' /Fa"Release\"'
                                         f' /EHsc'
                                         #f' /nologo'
-                                        f' /Fo"Release\"'
+                                        f' /Fo"platform/win32/Release/mupdfcpp_swig.obj"'
                                         f' /Fp"Release\_mupdf.pch"'
                                         f' /diagnostics:column'
                                         f' platform/python/mupdfcpp_swig.cpp'
