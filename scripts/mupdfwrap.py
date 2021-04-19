@@ -5969,14 +5969,14 @@ def build_swig( build_dirs, container_classnames, to_string_structnames, swig_c,
                 {" -doxygen" if swig_major >= 4 else ""}
                 -{language}
                 -module mupdf
-                -outdir {build_dirs.dir_so}
-                -o {swig_cpp}
+                -outdir {os.path.relpath(build_dirs.dir_so)}
+                -o {os.path.relpath(swig_cpp)}
                 -includeall
-                -I{build_dirs.dir_mupdf}platform/python/include
-                -I{include1}
-                -I{include2}
+                -I{os.path.relpath(build_dirs.dir_mupdf)}/platform/python/include
+                -I{os.path.relpath(include1)}
+                -I{os.path.relpath(include2)}
                 -ignoremissing
-                {swig_i}
+                {os.path.relpath(swig_i)}
             ''').strip().replace( '\n', ' \\\n')
             )
 
@@ -6852,6 +6852,9 @@ def main():
                 import urllib.request
                 import zipfile
                 name = 'swigwin-4.0.2'
+
+                # Download swig .zip file if not already present.
+                #
                 if not os.path.exists(f'{name}.zip'):
                     url = f'http://prdownloads.sourceforge.net/swig/{name}.zip'
                     log(f'Downloading Windows SWIG from: {url}')
@@ -6859,23 +6862,24 @@ def main():
                         with open(f'{name}.zip-', 'wb') as f:
                             shutil.copyfileobj(response, f)
                     os.rename(f'{name}.zip-', f'{name}.zip')
-                z = zipfile.ZipFile(f'{name}.zip')
-                info = z.getinfo(f'{name}/swig.exe')
-                log(f'info.file_size={info.file_size}')
+
+                # Extract swig from .zip file if not already extracted.
+                #
                 swig_local = f'{name}/swig.exe'
-                swig_local_stat = None
-                if os.path.isfile(swig_local):
+                if not os.path.exists(swig_local):
+                    # Extract
+                    z = zipfile.ZipFile(f'{name}.zip')
+                    jlib.ensure_empty_dir('{name}-0')
+                    z.extractall(f'{name}-0')
+                    os.rename(f'{name}-0/{name}', name)
+                    os.rmdir(f'{name}-0')
+
+                    # Need to make swig.exe executable.
                     swig_local_stat = os.stat(swig_local)
-                    log(f'swig_local_stat.st_size={swig_local_stat.st_size}')
-                if swig_local_stat and swig_local_stat.st_size == info.file_size:
-                    log('{swig_local} and {name}.zip:{name}/swig.exe are same size.')
-                else:
-                    # Need to extract.
-                    log(f'Extracting {name}.zip:{name}/swig.exe.')
-                    z.extract(f'{name}/swig.exe')
-                    swig_local_stat = os.stat(swig_local)
-                # Set executable
-                mode = os.chmod(swig_local, swig_local_stat.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+                    os.chmod(swig_local, swig_local_stat.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+
+                # Set our <swig> to be the local windows swig.exe.
+                #
                 swig = swig_local
 
                 # Build mupdfcpp.dll.
