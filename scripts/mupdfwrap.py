@@ -6338,11 +6338,12 @@ def main():
                                 command = (
                                         f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Build DebugPython'
+                                        f' /Build ReleasePython'
                                         f' /Project mupdfcpp'
                                         )
                                 log(f'Building mupdfcpp.dll ...')
                                 jlib.system(command, verbose=1)
+                                shutil.copy2('platform/win32/Release/mupdfcpp.dll', 'build/shared-release/')
 
                             else:
 
@@ -6404,8 +6405,93 @@ def main():
                             # Link:
                             # /OUT:"Debug\mupdfcpp.dll" /MANIFEST /NXCOMPAT /PDB:"Debug\mupdfcpp.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /IMPLIB:"Debug\mupdfcpp.lib" /DEBUG /DLL /MACHINE:X86 /SAFESEH /INCREMENTAL /PGD:"Debug\mupdfcpp.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\mupdfcpp\mupdfcpp.dll.intermediate.manifest" /LTCGOUT:"Debug\mupdfcpp\mupdfcpp.iobj" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
 
-                            if os.uname()[0] == 'Windows':
+                            o = os.uname()[0]
+                            if o.startswith('CYGWIN_NT') or o == 'Windows':
                                 command = (
+                                        f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
+                                        f' "&&"'
+                                        f' "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86/cl.exe"'
+                                        f' /permissive-'
+                                        f' /ifcOutput "Release\"'
+                                        f' /c'
+                                        f' /GS'
+                                        f' /GL'
+                                        f' /analyze-'
+                                        f' /W3'
+                                        f' /Gy'
+                                        f' /Zc:wchar_t'
+                                        #f' /I"C:/Program Files/WindowsApps/PythonSoftwareFoundation.Python.3.9_3.9.1264.0_x64__qbz5n2kfra8p/include"'
+                                        rf' /I"C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.1264.0_x64__qbz5n2kfra8p0\include"'
+                                        rf' /I"C:\cygwin64\home\jules\artifex\mupdf\platform\c++\include"'
+                                        rf' /I"C:\cygwin64\home\jules\artifex\mupdf\include"'
+                                        f' /Zi'
+                                        f' /Gm-'
+                                        f' /O2'
+                                        f' /sdl'
+                                        #rf' /Fd"Release\vc142.pdb"'
+                                        f' /Zc:inline'
+                                        f' /fp:precise'
+                                        f' /D "WIN32"'
+                                        f' /D "NDEBUG"'
+                                        f' /D "MUPDF_EXPORTS"'
+                                        f' /D "_WINDOWS"'
+                                        f' /D "_USRDLL"'
+                                        f' /D "_WINDLL"'
+                                        f' /D "_UNICODE"'
+                                        f' /D "UNICODE"'
+                                        f' /errorReport:prompt'
+                                        f' /WX-'
+                                        f' /Zc:forScope'
+                                        f' /Gd'
+                                        f' /Oy-'
+                                        f' /Oi'
+                                        f' /MD'
+                                        f' /FC'
+                                        f' /Fa"Release\"'
+                                        f' /EHsc'
+                                        #f' /nologo'
+                                        f' /Fo"Release\"'
+                                        f' /Fp"Release\_mupdf.pch"'
+                                        f' /diagnostics:column'
+                                        f' platform/python/mupdfcpp_swig.cpp'
+                                        )
+                                jlib.system(command, verbose=1, out=sys.stderr)
+
+                                command = (
+                                        f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
+                                        f' "&&"'
+                                        f' "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86/link.exe"'
+                                        rf' /OUT:"build\shared-release\_mupdf.dll"'
+                                        f' /MANIFEST'
+                                        f' /LTCG:incremental'
+                                        f' /NXCOMPAT'
+                                        rf' /PDB:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.pdb"'
+                                        f' /DYNAMICBASE'
+                                        rf' /LIBPATH:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release"'
+                                        f' "mupdfcpp.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
+                                        rf' /IMPLIB:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.lib"'
+                                        f' /DEBUG'
+                                        f' /DLL'
+                                        f' /MACHINE:X86'
+                                        f' /OPT:REF'
+                                        f' /SAFESEH'
+                                        f' /INCREMENTAL:NO'
+                                        #f' /PGD:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.pgd"'
+                                        f' /SUBSYSTEM:WINDOWS'
+                                        f' /MANIFESTUAC:NO'
+                                        rf' /ManifestFile:"Release\_mupdf.dll.intermediate.manifest"'
+                                        f' /LTCGOUT:"Release\_mupdf.iobj"'
+                                        f' /OPT:ICF'
+                                        f' /ERRORREPORT:PROMPT'
+                                        #f' /NOLOGO'
+                                        rf' /LIBPATH:"C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.1264.0_x64__qbz5n2kfra8p0\libs"'
+                                        f' /TLBID:1'
+                                        f' platform/win32/Release/mupdfcpp_swig.obj'
+                                        )
+                                jlib.system(command, verbose=1, out=sys.stderr)
+
+                                # old
+                                command_old = (
                                         f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
                                         f' "&&"'
                                         f' "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86/cl.exe"'
