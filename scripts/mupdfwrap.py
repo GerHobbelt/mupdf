@@ -6848,11 +6848,11 @@ def main():
                 swig = args.next()
 
             elif arg == '--swig-windows-auto':
-
-                import urllib
+                import stat
+                import urllib.request
                 import zipfile
                 name = 'swigwin-4.0.2'
-                if not os.path.exists(f'{name}/zip'):
+                if not os.path.exists(f'{name}.zip'):
                     url = f'http://prdownloads.sourceforge.net/swig/{name}.zip'
                     log(f'Downloading Windows SWIG from: {url}')
                     with urllib.request.urlopen(url) as response:
@@ -6861,13 +6861,22 @@ def main():
                     os.rename(f'{name}.zip-', f'{name}.zip')
                 z = zipfile.ZipFile(f'{name}.zip')
                 info = z.getinfo(f'{name}/swig.exe')
-                if os.path.isfile('swig.exe') and os.path.getsize('swig.exe') == info.file_size:
-                    log('swig.exe and {name}.zip:{name}/swig.exe are same size.')
+                log(f'info.file_size={info.file_size}')
+                swig_local = f'{name}/swig.exe'
+                swig_local_stat = None
+                if os.path.isfile(swig_local):
+                    swig_local_stat = os.stat(swig_local)
+                    log(f'swig_local_stat.st_size={swig_local_stat.st_size}')
+                if swig_local_stat and swig_local_stat.st_size == info.file_size:
+                    log('{swig_local} and {name}.zip:{name}/swig.exe are same size.')
                 else:
                     # Need to extract.
                     log(f'Extracting {name}.zip:{name}/swig.exe.')
                     z.extract(f'{name}/swig.exe')
-                    swig = './swig.exe'
+                    swig_local_stat = os.stat(swig_local)
+                # Set executable
+                mode = os.chmod(swig_local, swig_local_stat.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+                swig = swig_local
 
                 # Build mupdfcpp.dll.
                 command = (
