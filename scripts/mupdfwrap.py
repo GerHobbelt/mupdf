@@ -5694,6 +5694,10 @@ def build_swig( build_dirs, container_classnames, to_string_structnames, swig_c,
             // SWIG can't handle this because it uses a valist.
             %ignore {rename.function('Memento_vasprintf')};
 
+            // asprintf() isn't available on windows, so exclude Memento_asprintf because
+            // it is #define-d to asprintf.
+            %ignore {rename.function('Memento_asprintf')};
+
             // Might prefer to #include mupdf/exceptions.h and make the
             // %exception block below handle all the different exception types,
             // but swig-3 cannot parse 'throw()' in mupdf/exceptions.h.
@@ -6392,6 +6396,14 @@ def main():
                             # Compile and link to create _mupdf.so.
                             #
 
+                            # Windows dll command lines:
+                            #
+                            # Compile:
+                            #/ifcOutput "Debug\mupdfcpp\" /GS /analyze- /W3 /Zc:wchar_t /I"../../include" /I"../../platform/c++/include" /Zi /Od /Fd"Debug\mupdfcpp\vc142.pdb" /Zc:inline /fp:precise /D "WIN32" /D "_DEBUG" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /FC /Fa"Debug\mupdfcpp\" /EHsc /nologo /Fo"Debug\mupdfcpp\" /Fp"Debug\mupdfcpp\mupdfcpp.pch" /diagnostics:column
+
+                            # Link:
+                            # /OUT:"Debug\mupdfcpp.dll" /MANIFEST /NXCOMPAT /PDB:"Debug\mupdfcpp.pdb" /DYNAMICBASE "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /IMPLIB:"Debug\mupdfcpp.lib" /DEBUG /DLL /MACHINE:X86 /SAFESEH /INCREMENTAL /PGD:"Debug\mupdfcpp.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"Debug\mupdfcpp\mupdfcpp.dll.intermediate.manifest" /LTCGOUT:"Debug\mupdfcpp\mupdfcpp.iobj" /ERRORREPORT:PROMPT /NOLOGO /TLBID:1
+
                             if os.uname()[0] == 'Windows':
                                 command = (
                                         f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
@@ -6869,7 +6881,7 @@ def main():
                 if not os.path.exists(swig_local):
                     # Extract
                     z = zipfile.ZipFile(f'{name}.zip')
-                    jlib.ensure_empty_dir('{name}-0')
+                    jlib.ensure_empty_dir(f'{name}-0')
                     z.extractall(f'{name}-0')
                     os.rename(f'{name}-0/{name}', name)
                     os.rmdir(f'{name}-0')
@@ -6882,15 +6894,16 @@ def main():
                 #
                 swig = swig_local
 
-                # Build mupdfcpp.dll.
-                command = (
-                        f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
-                        f' platform/win32/mupdf.sln'
-                        f' /Build DebugPython'
-                        f' /Project mupdfcpp'
-                        )
-                log(f'Building mupdfcpp.dll')
-                jlib.system(command, verbose=1)
+                if 0:
+                    # Build mupdfcpp.dll.
+                    command = (
+                            f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
+                            f' platform/win32/mupdf.sln'
+                            f' /Build DebugPython'
+                            f' /Project mupdfcpp'
+                            )
+                    log(f'Building mupdfcpp.dll')
+                    jlib.system(command, verbose=1)
 
 
 
