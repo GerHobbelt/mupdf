@@ -29,6 +29,7 @@ EXPORTS
 	qiqqa_fingerprint0_main
 	qiqqa_fingerprint1_main
 	sqlite_main
+	jpegtran_main
 
 ; Tesseract OCR exports
 
@@ -623,6 +624,7 @@ EXPORTS
 	fz_hash_insert
 	fz_hash_remove
 	fz_hash_for_each
+	fz_hash_filter
 	fz_get_pixmap_from_image
 	fz_get_unscaled_pixmap_from_image
 	fz_keep_image
@@ -992,6 +994,8 @@ EXPORTS
 	fz_new_svg_writer
 	fz_new_text_writer
 	fz_new_text_writer_with_output
+	fz_new_odt_writer
+	fz_new_odt_writer_with_output
 	fz_new_docx_writer
 	fz_new_docx_writer_with_output
 	fz_new_ps_writer
@@ -1636,6 +1640,7 @@ EXPORTS
 	pdf_find_font_resource
 	pdf_insert_font_resource
 	pdf_drop_resource_tables
+	pdf_purge_local_font_resources
 	pdf_eval_function
 	pdf_keep_function
 	pdf_drop_function
@@ -1665,6 +1670,7 @@ EXPORTS
 	pdf_delete_object
 	pdf_update_object
 	pdf_update_stream
+	pdf_is_local_object
 	pdf_add_object
 	pdf_add_object_drop
 	pdf_add_stream

@@ -2729,9 +2729,9 @@ void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
 					pdf_update_appearance_from_display_list(ctx, annot, rect, dlist);
 					/* Updating the signature appearance may leave us holding
 					 * pointers to the wrong versions of as, ap, ap_n etc. */
-					as = pdf_dict_get(ctx, annot->obj, PDF_NAME(AS));
-					ap = pdf_dict_get(ctx, annot->obj, PDF_NAME(AP));
-					ap_n = pdf_dict_get(ctx, ap, PDF_NAME(N));
+					pdf_obj *as = pdf_dict_get(ctx, annot->obj, PDF_NAME(AS));
+					pdf_obj *ap = pdf_dict_get(ctx, annot->obj, PDF_NAME(AP));
+					pdf_obj *ap_n = pdf_dict_get(ctx, ap, PDF_NAME(N));
 					if (annot->is_hot && annot->is_active && subtype == PDF_NAME(Widget))
 					{
 						pdf_obj *ap_d = pdf_dict_get(ctx, ap, PDF_NAME(D));
