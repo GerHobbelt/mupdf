@@ -5278,13 +5278,13 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             /*
             The keys that are defined for fz_lookup_metadata().
             */
-            extern const std::vector<std::string> metadata_keys;
+            mupdf_EXPORT extern const std::vector<std::string> metadata_keys;
 
             '''))
     out_cpps.functions.write(
             textwrap.dedent(
             '''
-            const std::vector<std::string> metadata_keys = {
+            mupdf_EXPORT const std::vector<std::string> metadata_keys = {
                     "format",
                     "encryption",
                     "info:Title",
@@ -6013,7 +6013,7 @@ def build_swig(
             (swig_cpp, swig_py),
             command,
             )
-
+    jlib.log('{rebuilt=}')
     if rebuilt:
         if os.uname()[0] == 'OpenBSD':
             mupdf_py_prefix = textwrap.dedent(
@@ -6034,6 +6034,43 @@ def build_swig(
             with open( swig_py) as f:
                 mupdf_py_content = mupdf_py_prefix + f.read()
             with open( swig_py, 'w') as f:
+                f.write( mupdf_py_content)
+
+        elif os.uname()[0] == 'Windows' or os.uname()[0].startswith('CYGWIN'):
+            jlib.log('Adding prefix to {swig_cpp=}')
+            prefix = ''
+            postfix = ''
+            for name in (
+                    'Py_ENABLE_SHARED',
+                    'Py_NO_ENABLE_SHARED',
+                    '__CYGWIN__',
+                    'HAVE_DECLSPEC_DLL',
+                    'Py_BUILD_CORE',
+                    'Py_BUILD_CORE_MODULE',
+                    ):
+                prefix += textwrap.dedent(
+                    f'''
+                    #ifdef {name}
+                        #pragma message ( "{name} is defined" )
+                    #else
+                        #pragma message ( "{name} is undefined" )
+                    #endif
+                    ''')
+                postfix += textwrap.dedent(
+                    f'''
+                    #ifdef {name}
+                        #pragma message ( "{name} is defined" )
+                    #else
+                        #pragma message ( "{name} is undefined" )
+                    #endif
+                    ''')
+            prefix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
+
+            postfix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
+
+            with open( swig_cpp) as f:
+                mupdf_py_content = prefix + f.read() + postfix
+            with open( swig_cpp, 'w') as f:
                 f.write( mupdf_py_content)
 
     if swig_cpp_old:
@@ -6461,6 +6498,8 @@ def main():
                                         f' /D "_WINDLL"'
                                         f' /D "_UNICODE"'
                                         f' /D "UNICODE"'
+                                        f' /D "Py_NO_ENABLE_SHARED"'
+                                        f' /D "PyAPI_FUNC(RTYPE)=RTYPE"'
                                         f' /errorReport:prompt'
                                         f' /WX-'
                                         f' /Zc:forScope'
@@ -6475,6 +6514,7 @@ def main():
                                         f' /Fo"platform/win32/Release/mupdfcpp_swig.obj"'
                                         f' /Fp"Release\_mupdf.pch"'
                                         f' /diagnostics:column'
+                                        #f' /P /Fi"mupdfcpp_swig.cpp.cpp"'  # Generates preprocessed output. Beware that this stops generation of the .obj file.
                                         f' platform/python/mupdfcpp_swig.cpp'
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
@@ -6490,7 +6530,10 @@ def main():
                                         rf' /PDB:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.pdb"'
                                         f' /DYNAMICBASE'
                                         rf' /LIBPATH:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release"'
-                                        f' "mupdfcpp.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
+                                        rf' /LIBPATH:"C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.1264.0_x64__qbz5n2kfra8p0\libs"'
+                                        f' "mupdfcpp.lib"'
+                                        #f' "python39.lib"' # not needed because on Windows Python.h has info about library.
+                                        f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
                                         rf' /IMPLIB:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.lib"'
                                         f' /DEBUG'
                                         f' /DLL'
@@ -6506,9 +6549,9 @@ def main():
                                         f' /OPT:ICF'
                                         f' /ERRORREPORT:PROMPT'
                                         #f' /NOLOGO'
-                                        rf' /LIBPATH:"C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.1264.0_x64__qbz5n2kfra8p0\libs"'
                                         f' /TLBID:1'
                                         f' platform/win32/Release/mupdfcpp_swig.obj'
+                                        f' "python39.lib"' # not needed because on Windows Python.h has info about library.
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
 
