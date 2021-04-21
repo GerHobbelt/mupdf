@@ -3054,26 +3054,29 @@ def make_internal_functions( namespace, out_h, out_cpp):
 
 # Maps from <tu> to dict of fnname: cursor.
 g_functions_cache = dict()
+g_global_data = dict()
 
 def functions_cache_populate( tu):
     if tu in g_functions_cache:
         return
     fns = dict()
+    global_data = dict()
 
     for cursor in tu.cursor.get_children():
-        if (1
-                and cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL
-                and (
-                    cursor.linkage == clang.cindex.LinkageKind.EXTERNAL
-                    or
-                    cursor.is_definition()  # Picks up static inline functions.
-                    )
+        if (cursor.linkage == clang.cindex.LinkageKind.EXTERNAL
+                or cursor.is_definition()  # Picks up static inline functions.
                 ):
-            fnname = cursor.mangled_name
-            if fnname.startswith( ('fz_', 'pdf_')) and fnname not in omit_fns:
-                fns[ fnname] = cursor
+            if cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL:
+                fnname = cursor.mangled_name
+                #if fnname.startswith( ('fz_', 'pdf_')) and fnname not in omit_fns:
+                if fnname not in omit_fns:
+                    fns[ fnname] = cursor
+            else:
+                global_data[ cursor.mangled_name] = cursor
 
     g_functions_cache[ tu] = fns
+    g_global_data[tu] = global_data
+
 
 def find_functions_starting_with( tu, name_prefix, method):
     '''
@@ -3091,6 +3094,10 @@ def find_functions_starting_with( tu, name_prefix, method):
             continue
         yield fnname, cursor
 
+def find_global_data_starting_with( tu, prefix):
+    for name, cursor in g_global_data[tu].items():
+        if name.startswith( prefix):
+            yield name, cursor
 
 def find_function( tu, fnname, method):
     '''
@@ -5323,9 +5330,19 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     functions_unrecognised = set()
     c_functions = []
 
-    for fnname, cursor in find_functions_starting_with( tu, ('fz_', 'pdf_'), method=True):
+    for fnname, cursor in find_functions_starting_with( tu, '', method=True):
         fn_usage[ fnname] = [0, cursor]
         c_functions.append(fnname)
+    #c_functions += [
+    #        'ft_char_index',
+    #        'ft_error_string',
+    #        'ft_name_index',
+    #        ]
+
+    c_globals = []
+    for name, cursor in find_global_data_starting_with( tu, ('fz_', 'pdf_')):
+        log('globa: {name=}')
+        c_globals.append(name)
 
     def register_fn_use( name):
         assert name.startswith( ('fz_', 'pdf_'))
@@ -5533,6 +5550,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             fn_usage,
             output_param_fns,
             c_functions,
+            c_globals,
             )
 
 
@@ -5638,6 +5656,7 @@ def build_swig(
         swig_c,
         swig_python,
         c_functions,
+        c_globals,
         language='python',
         swig='swig'
         ):
@@ -5682,6 +5701,8 @@ def build_swig(
     text = ''
     for fnname in c_functions:
         text += f'%ignore {fnname};\n'
+    for name in c_globals:
+        text += f'%ignore {name};\n'
 
     text += textwrap.dedent(f'''
             %ignore fz_append_vprintf;
@@ -6330,6 +6351,8 @@ def main():
                                     fn_usage,
                                     output_param_fns,
                                     c_functions,
+                                    c_globals,
+
                             ) = cpp_source(
                                     build_dirs.dir_mupdf,
                                     namespace,
@@ -6344,6 +6367,7 @@ def main():
                             to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle')
                             to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle')
                             to_pickle( c_functions,             f'{build_dirs.dir_mupdf}platform/c++/c_functions.pickle')
+                            to_pickle( c_globals,               f'{build_dirs.dir_mupdf}platform/c++/c_globals.pickle')
 
                             def check_lists_equal(name, expected, actual):
                                 expected.sort()
@@ -6456,6 +6480,7 @@ def main():
                                         from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle'),
                                         from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle'),
                                         from_pickle( f'{build_dirs.dir_mupdf}platform/c++/c_functions.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/c_globals.pickle'),
                                         swig=swig,
                                         )
 
@@ -6528,6 +6553,7 @@ def main():
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
 
+                                # Link
                                 command = (
                                         f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
                                         f' "&&"'
@@ -6538,13 +6564,13 @@ def main():
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
                                         f' "mupdfcpp.lib"'
                                         f' "python3.lib"' # not needed because on Windows Python.h has info about library.
-                                        f' /DEBUG'
+                                        #f' /DEBUG'
                                         f' /DLL'
                                         f' /DYNAMICBASE'
                                         f' /ERRORREPORT:PROMPT'
                                         f' /INCREMENTAL:NO'
                                         f' /LTCG:incremental'
-                                        f' /LTCGOUT:"Release\_mupdf.iobj"'
+                                        f' /LTCGOUT:"platform/win32/Release/_mupdf.iobj"'
                                         f' /MACHINE:X86'
                                         f' /MANIFEST'
                                         f' /MANIFESTUAC:NO'
@@ -6555,12 +6581,12 @@ def main():
                                         f' /SUBSYSTEM:WINDOWS'
                                         f' /TLBID:1'
                                         f' platform/win32/Release/mupdfcpp_swig.obj'
-                                        rf' /IMPLIB:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.lib"'
-                                        rf' /LIBPATH:"{python_root}\libs"'
-                                        rf' /LIBPATH:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release"'
-                                        rf' /ManifestFile:"Release\_mupdf.dll.intermediate.manifest"'
-                                        rf' /OUT:"build\shared-release\_mupdf.dll"'
-                                        rf' /PDB:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.pdb"'
+                                        rf' /LIBPATH:"{python_root}/libs"'
+                                        rf' /ManifestFile:"platform/win32/Release/_mupdf.dll.intermediate.manifest"'
+                                        rf' /LIBPATH:"platform/win32/Release"'
+                                        rf' /IMPLIB:"platform/win32/Release/_mupdf.lib"'
+                                        rf' /OUT:"platform/win32/Release/_mupdf.dll"'
+                                        rf' /PDB:"platform/win32/Release/_mupdf.pdb"'
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
 
