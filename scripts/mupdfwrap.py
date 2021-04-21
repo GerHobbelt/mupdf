@@ -528,6 +528,11 @@ import traceback
 
 import jlib
 
+os_name = os.uname()[0]
+
+g_windows = os_name == 'Windows' or os_name.startswith('CYGWIN')
+g_openbsd = os_name == 'OpenBSD'
+g_linux = os_name == 'Linux'
 
 log = jlib.log
 log0 = jlib.log0
@@ -599,7 +604,7 @@ class ClangInfo:
             raise Exception( 'cannot find libclang.so')
 
     def _try_init_clang( self, version):
-        if os.uname()[0] == 'OpenBSD':
+        if g_openbsd:
             clang_bin = glob.glob( f'/usr/local/bin/clang-{version}')
             if not clang_bin:
                 log('Cannot find {clang_bin=}')
@@ -5333,11 +5338,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     for fnname, cursor in find_functions_starting_with( tu, '', method=True):
         fn_usage[ fnname] = [0, cursor]
         c_functions.append(fnname)
-    #c_functions += [
-    #        'ft_char_index',
-    #        'ft_error_string',
-    #        'ft_name_index',
-    #        ]
 
     c_globals = []
     for name, cursor in find_global_data_starting_with( tu, ('fz_', 'pdf_')):
@@ -5701,8 +5701,13 @@ def build_swig(
     text = ''
     for fnname in c_functions:
         text += f'%ignore {fnname};\n'
-    for name in c_globals:
-        text += f'%ignore {name};\n'
+    if g_windows:
+        # Haven't yet figured out how to export global data from a DLL on
+        # Windows. Probably needs mupdf_IMPORT in header only, but that's a
+        # little tricky to do because we are using the raw mupdf headers.
+        #
+        for name in c_globals:
+            text += f'%ignore {name};\n'
 
     text += textwrap.dedent(f'''
             %ignore fz_append_vprintf;
@@ -6038,7 +6043,7 @@ def build_swig(
             )
     jlib.log('{rebuilt=}')
     if rebuilt:
-        if os.uname()[0] == 'OpenBSD':
+        if g_openbsd:
             mupdf_py_prefix = textwrap.dedent(
                     f'''
                     # Explicitly load required .so's using absolute paths, so that we
@@ -6059,7 +6064,7 @@ def build_swig(
             with open( swig_py, 'w') as f:
                 f.write( mupdf_py_content)
 
-        elif os.uname()[0] == 'Windows' or os.uname()[0].startswith('CYGWIN'):
+        elif g_windows:
             jlib.log('Adding prefix to {swig_cpp=}')
             prefix = ''
             postfix = ''
@@ -6270,7 +6275,7 @@ def main():
                             # Build libmupdf.so.
                             log( '{build_dirs.dir_mupdf=}')
                             make = 'make'
-                            if os.uname()[0] == 'OpenBSD':
+                            if g_openbsd:
                                 # Need to run gmake, not make. Also for some
                                 # reason gmake on OpenBSD sets CC to clang, but
                                 # CXX to g++, so need to force CXX=clang++ too.
@@ -6384,9 +6389,7 @@ def main():
 
                         elif action == '1':
                             # Compile and link generated C++ code to create libmupdfcpp.so.
-                            log(f'os.uname()[0]={os.uname()[0]}')
-                            o = os.uname()[0]
-                            if o.startswith('CYGWIN_NT') or o == 'Windows':
+                            if g_windows:
                                 # We build mupdfcpp.dll using the .sln; it will
                                 # contain all C functions internally - there is
                                 # no mupdf.dll.
@@ -6457,11 +6460,10 @@ def main():
                             # Compile and link mupdfcpp_swic.cpp to create _mupdf.so.
                             #
 
-                            if os.uname()[0].startswith('CYGWIN_NT') or os.uname()[0] == 'Windows':
-
+                            if g_windows:
                                 # Windows dll command lines:
                                 #
-                                vcvars = 'c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
+                                vcvars = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
                                 vs_root = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86'
                                 python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39-32'
 
@@ -7075,15 +7077,13 @@ def main():
 
                 # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
                 # test .py programme can load mupdf.py and _mupdf.so.
-                os_name = os.uname()[0]
-                log('{os_name=}')
-                if os_name == 'Windows' or os_name.startswith('CYGWIN'):
+                if g_windows:
                     # On Windows, it seems that 'py' runs the default
                     # python. Also, Windows appears to be able to find
                     # _mupdf.pyd in same directory as mupdf.py.#
                     #
                     command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} py'
-                elif os_name == 'OpenBSD':
+                elif g_openbsd:
                     # We have special support to not require LD_LIBRARY_PATH.
                     command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
                 else:
