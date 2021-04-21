@@ -5195,10 +5195,10 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             #ifndef mupdf_EXPORT
                 #ifdef WIN32
                     #define mupdf_EXPORT __declspec(dllexport)
-		            #define mupdf_IMPORT __declspec(dllimport)
+                    #define mupdf_IMPORT __declspec(dllimport)
                 #else
                     #define mupdf_EXPORT
-		            #define mupdf_IMPORT
+                    #define mupdf_IMPORT
                 #endif
             #endif
 
@@ -6399,6 +6399,8 @@ def main():
                                         )
                                 log(f'Building mupdfcpp.dll ...')
                                 jlib.system(command, verbose=1)
+
+                                log('Copying mupdfcpp.dll to build/shared-release/')
                                 shutil.copy2('platform/win32/Release/mupdfcpp.dll', 'build/shared-release/')
 
                             else:
@@ -6550,6 +6552,14 @@ def main():
                                         f' /PDB:"platform/win32/Release/_mupdf.pdb"'
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
+
+                                log('Copying _mupdf.dll to build/shared-release/')
+
+                                # To be found at runtime, we need to rename _mupdf.dll to _mupdf.pyd. As usual, totally
+                                # undocumented. Discovered this at:
+                                # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
+                                #
+                                shutil.copy2('platform/win32/Release/_mupdf.dll', 'build/shared-release/_mupdf.pyd')
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -7065,28 +7075,31 @@ def main():
 
                 # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
                 # test .py programme can load mupdf.py and _mupdf.so.
-                ld_library_path = os.path.abspath( f'{build_dirs.dir_so}')
-                pythonpath = build_dirs.dir_so
-
-                if os.uname()[0] == 'OpenBSD':
+                os_name = os.uname()[0]
+                log('{os_name=}')
+                if os_name == 'Windows' or os_name.startswith('CYGWIN'):
+                    # On Windows, it seems that 'py' runs the default
+                    # python. Also, Windows appears to be able to find
+                    # _mupdf.pyd in same directory as mupdf.py.#
+                    #
+                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} py'
+                elif os_name == 'OpenBSD':
                     # We have special support to not require LD_LIBRARY_PATH.
-                    envs = f'PYTHONPATH={pythonpath}'
+                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
                 else:
-                    envs = f'LD_LIBRARY_PATH={ld_library_path} PYTHONPATH={pythonpath}'
+                    # On Linux it looks like we need to specify
+                    # LD_LIBRARY_PATH. fixme: revisit this because these days
+                    # jlib.y uses rpath when constructing link commands.
+                    #
+                    command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
 
                 log( 'running mupdf_test.py...')
-
+                command = f'{command_prefix} ./scripts/mupdfwrap_test.py'
                 with open( f'{build_dirs.dir_mupdf}platform/python/mupdf_test.py.out.txt', 'w') as f:
-
                     def outfn( text):
                         log( text, nv=0)
                         f.write( text)
-
-                    jlib.system(
-                            f'cd {build_dirs.dir_mupdf}platform/python/; {envs} ../../scripts/mupdfwrap_test.py',
-                            out = outfn,
-                            verbose=1,
-                            )
+                    jlib.system( command, out = outfn, verbose=1)
 
                 # Run mutool.py.
                 #
@@ -7099,7 +7112,7 @@ def main():
                         f'draw -o zlib.png -R 10 {zlib_pdf}',
                         f'clean -gggg -l {zlib_pdf} zlib.clean.pdf',
                         ):
-                    command = f'{envs} {mutool_py} {args2}'
+                    command = f'{command_prefix} {mutool_py} {args2}'
                     log( 'running: {command}')
                     jlib.system(
                             f'{command}',
