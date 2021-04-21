@@ -6069,7 +6069,7 @@ def build_swig(
                     #else
                         #pragma message("_DEBUG is not defined")
                     #endif
-                    #undef _DEBUG'
+                    #undef _DEBUG
                     ''')
             postfix = ''
             for name in (
@@ -6096,9 +6096,9 @@ def build_swig(
                         #pragma message ( "{name} is undefined" )
                     #endif
                     ''')
-            prefix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
+            #prefix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
 
-            postfix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
+            #postfix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
 
             with open( swig_cpp) as f:
                 mupdf_py_content = prefix + f.read() + postfix
@@ -6494,15 +6494,15 @@ def main():
 
                             # Windows dll command lines:
                             #
+                            vcvars = 'c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
                             vs_root = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86'
-                            python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39'
                             python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39-32'
 
                             # Compile:
                             o = os.uname()[0]
                             if o.startswith('CYGWIN_NT') or o == 'Windows':
                                 command = (
-                                        f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
+                                        f'cmd.exe /V /C @ "{vcvars}"'
                                         f' "&&"'
                                         f' "{vs_root}/cl.exe"'
                                         #f' /P /Fi"mupdfcpp_swig.cpp.cpp"'  # Generates preprocessed output. Beware that this stops generation of the .obj file.
@@ -6511,7 +6511,6 @@ def main():
                                         f' /D "MUPDF_EXPORTS"'
                                         f' /D "NDEBUG"'
                                         f' /D "PyAPI_FUNC(RTYPE)=RTYPE"'
-                                        #f' /D "Py_NO_ENABLE_SHARED"'
                                         f' /D "UNICODE"'
                                         f' /D "WIN32"'
                                         f' /D "_UNICODE"'
@@ -6555,7 +6554,7 @@ def main():
 
                                 # Link
                                 command = (
-                                        f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
+                                        f'cmd.exe /V /C @ "{vcvars}"'
                                         f' "&&"'
                                         f' "{vs_root}/link.exe"'
                                         #f' "python39.lib"' # not needed because on Windows Python.h has info about library.
@@ -6589,48 +6588,6 @@ def main():
                                         rf' /PDB:"platform/win32/Release/_mupdf.pdb"'
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
-
-                                # old
-                                command_old = (
-                                        f'cmd.exe /V /C @ "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat"'
-                                        f' "&&"'
-                                        f' "c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86/cl.exe"'
-                                        f' /D "UNICODE"'
-                                        f' /D "WIN32"'
-                                        f' /D "_CONSOLE"'
-                                        f' /D "_DEBUG"'
-                                        f' /D "_UNICODE"'
-                                        f' /EHsc'               # Enable C++ exceptions.
-                                        f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
-                                        f' /Fd"{name}.cl.pdb"'  # Otherwise we get 'vc140.pdb' and 'vc140.idb'.
-                                        f' /Fo"{name}\"'        # Name of generated object file.
-                                        f' /GS'                 # Buffers security check.
-                                        f' /Gd'                 # Uses the __cdecl calling convention (x86 only).
-                                        f' /Gm-'                # Deprecated. Enables minimal rebuild.
-                                        f' /I"C:/cygwin64/home/jules/artifex/mupdf/include"'
-                                        f' /I"C:/cygwin64/home/jules/artifex/mupdf/platform/c++/include"'
-                                        f' /JMC'                # Supports native C++ Just My Code debugging.
-                                        f' /MDd'                # Creates a debug multithreaded DLL using MSVCRTD.lib.
-                                        f' /Od'                 # Disables optimization.
-                                        f' /Oy-'                # Omits frame pointer (x86 only).
-                                        f' /RTC1'               # Enables run-time error checking.
-                                        f' /W3'                 # Sets which warning level to output.
-                                        f' /WX'                 # Treats all warnings as errors.
-                                        f' /ZI'                 # Includes debug information in a program database compatible with Edit and Continue.
-                                        f' /Zc:forScope'
-                                        f' /Zc:inline'
-                                        f' /Zc:wchar_t'
-                                        f' /analyze-'           # Enable code analysis.
-                                        f' /c'                  # Compiles without linking.
-                                        f' /diagnostics:column' # Controls the format of diagnostic messages.
-                                        f' /errorReport:prompt' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                        f' /fp:precise'         # Specify floating-point behavior.
-                                        f' /ifcOutput "Debug\"' #
-                                        f' /nologo'             # Suppresses display of sign-on banner.
-                                        f' /permissive-'        # Set standard-conformance mode.
-                                        f' /sdl'                # Enables additional security features and warnings.
-                                        f' foo.cpp'
-                                        )
 
                             else:
                                 # We use g++ debug/release flags as implied by
