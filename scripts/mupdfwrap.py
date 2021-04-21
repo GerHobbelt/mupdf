@@ -3483,13 +3483,13 @@ def make_function_wrappers(
                     *o_out to length of string plus one. If <key> is not found, returns empty
                     string with *o_out=-1. <o_out> can be NULL if caller is not interested in
                     error information. */
-                    std::string lookup_metadata(fz_document *doc, const char *key, int* o_out=NULL);
+                    mupdf_EXPORT std::string lookup_metadata(fz_document *doc, const char *key, int* o_out=NULL);
 
                     '''))
             out_functions_cpp.write(
                     textwrap.dedent(
                     f'''
-                    std::string lookup_metadata(fz_document *doc, const char *key, int* o_out)
+                    mupdf_EXPORT std::string lookup_metadata(fz_document *doc, const char *key, int* o_out)
                     {{
                         int e = lookup_metadata(doc, key, NULL /*buf*/, 0 /*size*/);
                         if (e < 0) {{
@@ -5188,8 +5188,10 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             #ifndef mupdf_EXPORT
                 #ifdef WIN32
                     #define mupdf_EXPORT __declspec(dllexport)
+		            #define mupdf_IMPORT __declspec(dllimport)
                 #else
                     #define mupdf_EXPORT
+		            #define mupdf_IMPORT
                 #endif
             #endif
 
@@ -5278,7 +5280,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             /*
             The keys that are defined for fz_lookup_metadata().
             */
-            mupdf_EXPORT extern const std::vector<std::string> metadata_keys;
+            mupdf_IMPORT extern const std::vector<std::string> metadata_keys;
 
             '''))
     out_cpps.functions.write(
