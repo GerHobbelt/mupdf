@@ -6062,44 +6062,7 @@ def build_swig(
         elif os.uname()[0] == 'Windows' or os.uname()[0].startswith('CYGWIN'):
             jlib.log('Adding prefix to {swig_cpp=}')
             prefix = ''
-            prefix += textwrap.dedent(
-                    f'''
-                    #ifdef _DEBUG
-                        #pragma message("_DEBUG is defined")
-                    #else
-                        #pragma message("_DEBUG is not defined")
-                    #endif
-                    #undef _DEBUG
-                    ''')
             postfix = ''
-            for name in (
-                    'Py_ENABLE_SHARED',
-                    'Py_NO_ENABLE_SHARED',
-                    '__CYGWIN__',
-                    'HAVE_DECLSPEC_DLL',
-                    'Py_BUILD_CORE',
-                    'Py_BUILD_CORE_MODULE',
-                    ):
-                prefix += textwrap.dedent(
-                    f'''
-                    #ifdef {name}
-                        #pragma message ( "{name} is defined" )
-                    #else
-                        #pragma message ( "{name} is undefined" )
-                    #endif
-                    ''')
-                postfix += textwrap.dedent(
-                    f'''
-                    #ifdef {name}
-                        #pragma message ( "{name} is defined" )
-                    #else
-                        #pragma message ( "{name} is undefined" )
-                    #endif
-                    ''')
-            #prefix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
-
-            #postfix += '#define PyAPI_FUNC(RTYPE) RTYPE\n'
-
             with open( swig_cpp) as f:
                 mupdf_py_content = prefix + f.read() + postfix
             with open( swig_cpp, 'w') as f:
@@ -6489,18 +6452,18 @@ def main():
                             build_swig_java()
 
                         elif action == '3':
-                            # Compile and link to create _mupdf.so.
+                            # Compile and link mupdfcpp_swic.cpp to create _mupdf.so.
                             #
 
-                            # Windows dll command lines:
-                            #
-                            vcvars = 'c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
-                            vs_root = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86'
-                            python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39-32'
+                            if os.uname()[0].startswith('CYGWIN_NT') or os.uname()[0] == 'Windows':
 
-                            # Compile:
-                            o = os.uname()[0]
-                            if o.startswith('CYGWIN_NT') or o == 'Windows':
+                                # Windows dll command lines:
+                                #
+                                vcvars = 'c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
+                                vs_root = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86'
+                                python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39-32'
+
+                                # Compile.
                                 command = (
                                         f'cmd.exe /V /C @ "{vcvars}"'
                                         f' "&&"'
@@ -6517,42 +6480,41 @@ def main():
                                         f' /D "_USRDLL"'
                                         f' /D "_WINDLL"'
                                         f' /D "_WINDOWS"'
-                                        f' /EHsc'
-                                        f' /FC'
+                                        f' /EHsc'               # Enable C++ exceptions.
+                                        f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
                                         f' /Fa"Release\"'
-                                        f' /Fo"platform/win32/Release/mupdfcpp_swig.obj"'
+                                        f' /Fo"platform/win32/Release/mupdfcpp_swig.obj"'        # Name of generated object file.
                                         f' /Fp"Release\_mupdf.pch"'
                                         f' /GL'
-                                        f' /GS'
-                                        f' /Gd'
-                                        f' /Gm-'
+                                        f' /GS'                 # Buffers security check.
+                                        f' /Gd'                 # Uses the __cdecl calling convention (x86 only).
+                                        f' /Gm-'                # Deprecated. Enables minimal rebuild.
                                         f' /Gy'
                                         f' /MD' # Creates a multithreaded DLL using MSVCRT.lib.
                                         f' /O2'
                                         f' /Oi'
-                                        f' /Oy-'
-                                        f' /W3'
-                                        f' /WX-'
+                                        f' /Oy-'                # Omits frame pointer (x86 only).
+                                        f' /W3'                 # Sets which warning level to output.
+                                        f' /WX-'                 # Treats all warnings as errors.
                                         f' /Zc:forScope'
                                         f' /Zc:inline'
                                         f' /Zc:wchar_t'
                                         f' /Zi'
-                                        f' /analyze-'
-                                        f' /c'
-                                        f' /diagnostics:column'
-                                        f' /errorReport:prompt'
-                                        f' /fp:precise'
-                                        f' /ifcOutput "Release\"'
-                                        f' /permissive-'
-                                        f' /sdl'
-                                        rf' /I"{python_root}\include"'
-                                        rf' /I"C:\cygwin64\home\jules\artifex\mupdf\include"'
-                                        rf' /I"C:\cygwin64\home\jules\artifex\mupdf\platform\c++\include"'
+                                        f' /analyze-'           # Enable code analysis.
+                                        f' /c'                  # Compiles without linking.
+                                        f' /diagnostics:column' # Controls the format of diagnostic messages.
+                                        f' /errorReport:prompt' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
+                                        f' /fp:precise'         # Specify floating-point behavior.
+                                        f' /permissive-'        # Set standard-conformance mode.
+                                        f' /sdl'                        # Enables additional security features and warnings.
+                                        rf' /I"{python_root}/include"'
+                                        rf' /I"include"'
+                                        rf' /I"platform/c++/include"'
                                         f' platform/python/mupdfcpp_swig.cpp'
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
 
-                                # Link
+                                # Link.
                                 command = (
                                         f'cmd.exe /V /C @ "{vcvars}"'
                                         f' "&&"'
@@ -6565,27 +6527,27 @@ def main():
                                         f' "python3.lib"' # not needed because on Windows Python.h has info about library.
                                         #f' /DEBUG'
                                         f' /DLL'
-                                        f' /DYNAMICBASE'
-                                        f' /ERRORREPORT:PROMPT'
-                                        f' /INCREMENTAL:NO'
+                                        f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
+                                        f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
+                                        f' /INCREMENTAL:NO'        # Controls incremental linking.
                                         f' /LTCG:incremental'
                                         f' /LTCGOUT:"platform/win32/Release/_mupdf.iobj"'
-                                        f' /MACHINE:X86'
-                                        f' /MANIFEST'
-                                        f' /MANIFESTUAC:NO'
-                                        f' /NXCOMPAT'
+                                        f' /MACHINE:X86'        # Specifies the target platform.
+                                        f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
+                                        f' /MANIFESTUAC:NO'   # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
+                                        f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
                                         f' /OPT:ICF'
                                         f' /OPT:REF'
                                         f' /SAFESEH'
-                                        f' /SUBSYSTEM:WINDOWS'
+                                        f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'
                                         f' platform/win32/Release/mupdfcpp_swig.obj'
-                                        rf' /LIBPATH:"{python_root}/libs"'
-                                        rf' /ManifestFile:"platform/win32/Release/_mupdf.dll.intermediate.manifest"'
-                                        rf' /LIBPATH:"platform/win32/Release"'
-                                        rf' /IMPLIB:"platform/win32/Release/_mupdf.lib"'
-                                        rf' /OUT:"platform/win32/Release/_mupdf.dll"'
-                                        rf' /PDB:"platform/win32/Release/_mupdf.pdb"'
+                                        f' /LIBPATH:"{python_root}/libs"'
+                                        f' /ManifestFile:"platform/win32/Release/_mupdf.dll.intermediate.manifest"'
+                                        f' /LIBPATH:"platform/win32/Release"'
+                                        f' /IMPLIB:"platform/win32/Release/_mupdf.lib"'
+                                        f' /OUT:"platform/win32/Release/_mupdf.dll"'
+                                        f' /PDB:"platform/win32/Release/_mupdf.pdb"'
                                         )
                                 jlib.system(command, verbose=1, out=sys.stderr)
 
