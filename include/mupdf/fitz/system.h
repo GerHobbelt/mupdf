@@ -36,11 +36,27 @@ typedef unsigned __int64 uint64_t;
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
 
-#if defined(WIN32) && defined(FZ_SHARED)
-	/* We are building client of MuPDF DLL. */
-	#define FZ_EXPORT_DATA __declspec(dllimport)
+#ifdef FZ_DLL_INTERNAL
+	#pragma message("FZ_DLL_INTERNAL defined")
 #else
-	#define FZ_EXPORT_DATA
+	#pragma message("FZ_DLL_INTERNAL undefined")
+#endif
+
+#if defined(WIN32)
+	#ifdef FZ_SHARED
+		#pragma message("FZ_SHARED defined")
+	#else
+		#pragma message("FZ_SHARED undefined")
+	#endif
+	#if defined(FZ_SHARED)
+		#define FZ_DATA_DECLARATION __declspec(dllimport)
+		#define FZ_DATA_DEFINITION
+	#else
+		#define FZ_DATA_DECLARATION
+		#define FZ_DATA_DEFINITION
+	#endif
+#else
+	#define FZ_DATA_DECLARATION
 #endif
 
 #define nelem(x) (sizeof(x)/sizeof((x)[0]))
