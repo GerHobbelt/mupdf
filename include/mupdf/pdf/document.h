@@ -565,7 +565,14 @@ typedef struct
 	char upwd_utf8[128]; /* User password. */
 } pdf_write_options;
 
-extern const pdf_write_options pdf_default_write_options;
+#ifdef WIN32
+/* Allow Windows DLL to export global data. */
+#define PDF_EXPORT_DATA __declspec(dllimport)
+#else
+#define PDF_EXPORT_DATA
+#endif
+
+PDF_EXPORT_DATA extern const pdf_write_options pdf_default_write_options;
 
 /*
 	Parse option string into a pdf_write_options struct.

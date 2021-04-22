@@ -36,6 +36,13 @@ typedef unsigned __int64 uint64_t;
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
 
+#ifdef WIN32
+/* Allow Windows DLL to export global data. */
+#define FZ_EXPORT_DATA __declspec(dllimport)
+#else
+#define FZ_EXPORT_DATA
+#endif
+
 #define nelem(x) (sizeof(x)/sizeof((x)[0]))
 
 #define FZ_PI 3.14159265f
