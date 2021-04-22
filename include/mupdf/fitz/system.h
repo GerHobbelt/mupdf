@@ -36,33 +36,11 @@ typedef unsigned __int64 uint64_t;
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
 
-#ifdef WIN32
-	#pragma message("WIN32")
-#endif
-#ifdef NDEBUG
-	#pragma message("NDEBUG")
-#endif
-#if FZ_SHARED
-	#pragma message("FZ_SHARED")
-#endif
-#if FZ_SHARED_INTERNAL
-	#pragma message("FZ_SHARED_INTERNAL")
-#endif
-
 #if defined(WIN32) && defined(FZ_SHARED)
-	/* We are building client code. */
+	/* We are building client of MuPDF DLL. */
 	#define FZ_EXPORT_DATA __declspec(dllimport)
-	#pragma message("FZ_EXPORT_DATA is dllimport")
-	//#error FZ_EXPORT_DATA is dllimport
-//#elif defined(WIN32) && defined(FZ_SHARED_INTERNAL)
-//	/* We are building MuPDF DLL. */
-//	#define FZ_EXPORT_DATA __declspec(dllexport)
-//	#pragma message("FZ_EXPORT_DATA is dllexport")
-//	//#error FZ_EXPORT_DATA is dllexport
 #else
 	#define FZ_EXPORT_DATA
-	#pragma message("FZ_EXPORT_DATA is blank")
-	//#error FZ_EXPORT_DATA is blank
 #endif
 
 #define nelem(x) (sizeof(x)/sizeof((x)[0]))

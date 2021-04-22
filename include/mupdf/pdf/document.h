@@ -565,11 +565,11 @@ typedef struct
 	char upwd_utf8[128]; /* User password. */
 } pdf_write_options;
 
-#ifdef WIN32
-/* Allow Windows DLL to export global data. */
-#define PDF_EXPORT_DATA __declspec(dllimport)
+#if defined(WIN32) && defined(FZ_SHARED)
+	/* We are building client of MuPDF DLL. */
+	#define PDF_EXPORT_DATA __declspec(dllimport)
 #else
-#define PDF_EXPORT_DATA
+	#define PDF_EXPORT_DATA
 #endif
 
 PDF_EXPORT_DATA extern const pdf_write_options pdf_default_write_options;
