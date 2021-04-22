@@ -82,12 +82,9 @@ pdf_load_outline_imp(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj 
 					are_outline_nodes_equal(parent, node) &&
 					are_outline_nodes_equal(parent, grandparent))
 				{
-					// discard `node`
-					for (dict = odict; dict && pdf_obj_marked(ctx, dict); dict = pdf_dict_get(ctx, dict, PDF_NAME(Next)))
-						pdf_unmark_obj(ctx, dict);
 					fz_drop_outline(ctx, first);
 					first = NULL;
-					odict = dict = obj;
+					dict = obj;
 					prev = &first;
 
 					parent->is_repaired = 1;
