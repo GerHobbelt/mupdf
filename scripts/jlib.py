@@ -236,7 +236,7 @@ def log_text( text=None, caller=1, nv=True):
 
     text = ''
     for line in lines:
-        text += prefix + line + '\n'
+        text += prefix + line.replace('\r', '') + '\n'
     return text
 
 
@@ -333,6 +333,15 @@ def log( text, level=0, caller=1, nv=True, out=None):
         out.write( text)
         out.flush()
 
+def log_raw( text, level=0, caller=1, nv=False, out=None):
+    '''
+    Like log() but defaults to nv=False so any {...} are not evaluated as
+    expressions.
+
+    Useful for things like:
+        jlib.system(..., out=jlib.log_raw)
+    '''
+    log( text, level=0, caller=caller+1, nv=nv, out=out)
 
 def log0( text, caller=1, nv=True, out=None):
     '''
@@ -928,6 +937,8 @@ def system(
             write to <out>:
                 If <out> is 'return' we store the output and include it in our
                 return value or exception.
+                Otherwise if <out> is 'log' we write to jlib.log() using our
+                caller's stack frame.
                 Otherwise if <out> is an integer, we do: os.write( out, text)
                 Otherwise if <out> is callable, we do: out( text)
                 Otherwise we assume <out> is python stream or similar, and do:
@@ -976,7 +987,10 @@ def system(
             errors = 'replace'
 
     out_original = out
-    if out == 'return':
+    if out == 'log':
+        out_frame_record = inspect.stack()[1]
+        out = lambda text: log( text, caller=out_frame_record, nv=False)
+    elif out == 'return':
         # Store the output ourselves so we can return it.
         out = io.StringIO()
 
@@ -1197,6 +1211,17 @@ def ensure_empty_dir( path):
     os.makedirs( path, exist_ok=True)
     remove_dir_contents( path)
 
+def rename(src, dest):
+    '''
+    Renames <src> to <dest>. If we get an error, we try to remove <dest>
+    expicitly and then retry; this is to make things work on Windows.
+    '''
+    try:
+        os.rename(src, dest)
+    except Exception:
+        os.remove(dest)
+        os.rename(src, dest)
+
 # Things for figuring out whether files need updating, using mtimes.
 #
 def newest( names):
@@ -1373,8 +1398,8 @@ def link_l_flags( sos, ld_origin=None):
             continue
         dir_ = os.path.dirname( so)
         name = os.path.basename( so)
-        assert name.startswith( 'lib')
-        assert name.endswith ( '.so')
+        assert name.startswith( 'lib'), f'name={name}'
+        assert name.endswith ( '.so'), f'name={name}'
         name = name[3:-3]
         dirs.add( dir_)
         names.append( name)
