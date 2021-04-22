@@ -333,6 +333,15 @@ def log( text, level=0, caller=1, nv=True, out=None):
         out.write( text)
         out.flush()
 
+def log_raw( text, level=0, caller=1, nv=False, out=None):
+    '''
+    Like log() but defaults to nv=False so any {...} are not evaluated as
+    expressions.
+
+    Useful for things like:
+        jlib.system(..., out=jlib.log_raw)
+    '''
+    log( text, level=0, caller=caller+1, nv=nv, out=out)
 
 def log0( text, caller=1, nv=True, out=None):
     '''
@@ -928,6 +937,8 @@ def system(
             write to <out>:
                 If <out> is 'return' we store the output and include it in our
                 return value or exception.
+                Otherwise if <out> is 'log' we write to jlib.log() using our
+                caller's stack frame.
                 Otherwise if <out> is an integer, we do: os.write( out, text)
                 Otherwise if <out> is callable, we do: out( text)
                 Otherwise we assume <out> is python stream or similar, and do:
@@ -976,7 +987,10 @@ def system(
             errors = 'replace'
 
     out_original = out
-    if out == 'return':
+    if out == 'log':
+        out_frame_record = inspect.stack()[1]
+        out = lambda text: log( text, caller=out_frame_record, nv=False)
+    elif out == 'return':
         # Store the output ourselves so we can return it.
         out = io.StringIO()
 
