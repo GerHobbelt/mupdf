@@ -6407,13 +6407,14 @@ def main():
                                 command = (
                                         f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Build ReleasePython'
+                                        f' /Build "ReleasePython|Win32"'
                                         f' /Project mupdfcpp'
                                         )
                                 log(f'Building mupdfcpp.dll ...')
                                 jlib.system(command, verbose=1, out='log')
 
                                 log('Copying mupdfcpp.dll to build/shared-release/')
+                                os.makedirs( 'build/shared-release', exist_ok=True)
                                 shutil.copy2('platform/win32/Release/mupdfcpp.dll', 'build/shared-release/')
 
                             else:
@@ -6493,6 +6494,7 @@ def main():
                                         f' /D "_UNICODE"'
                                         #f' /D "_USRDLL"'
                                         #f' /D "_WINDLL"'
+                                        f' /D "FZ_SHARED"'
                                         f' /D "_WINDOWS"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
