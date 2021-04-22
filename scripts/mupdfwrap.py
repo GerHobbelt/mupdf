@@ -5203,8 +5203,14 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             '''
             #ifndef mupdf_EXPORT
                 #ifdef WIN32
-                    #define mupdf_EXPORT __declspec(dllexport)
-                    #define mupdf_IMPORT __declspec(dllimport)
+                    #ifdef FZ_SHARED
+                        // Building client code.
+                        #define mupdf_IMPORT __declspec(dllimport)
+                        #define mupdf_EXPORT __declspec(dllexport)
+                    #else
+                        #define mupdf_EXPORT __declspec(dllexport)
+                        #define mupdf_IMPORT __declspec(dllexport)
+                    #endif
                 #else
                     #define mupdf_EXPORT
                     #define mupdf_IMPORT
