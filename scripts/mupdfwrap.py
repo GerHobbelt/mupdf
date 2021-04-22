@@ -5041,10 +5041,14 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             Dict mapping fz_* function names to number of usages in generated
             class code.
             Name of output file containing information on function usage.
+        windows_def_filename:
+            Name of created .def filename.
         output_param_fns:
             .
         c_functions:
             List of C function names.
+        c_globals:
+            List of global variables.
     '''
     assert dir_mupdf.endswith( '/')
     assert base.endswith( '/')
@@ -5340,9 +5344,15 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         c_functions.append(fnname)
 
     c_globals = []
+    windows_def = ''
+    #windows_def += 'LIBRARY mupdfcpp\n'    # This breaks things.
+    windows_def += 'EXPORTS\n'
     for name, cursor in find_global_data_starting_with( tu, ('fz_', 'pdf_')):
-        log('globa: {name=}')
+        log('global: {name=}')
         c_globals.append(name)
+        windows_def += f'    {name} DATA\n'
+
+    jlib.update_file( windows_def, f'{base}windows_mupdf.def')
 
     def register_fn_use( name):
         assert name.startswith( ('fz_', 'pdf_'))
@@ -5701,7 +5711,7 @@ def build_swig(
     text = ''
     for fnname in c_functions:
         text += f'%ignore {fnname};\n'
-    if g_windows:
+    if 0 and g_windows:
         # Haven't yet figured out how to export global data from a DLL on
         # Windows. Probably needs mupdf_IMPORT in header only, but that's a
         # little tricky to do because we are using the raw mupdf headers.
@@ -6401,7 +6411,7 @@ def main():
                                         f' /Project mupdfcpp'
                                         )
                                 log(f'Building mupdfcpp.dll ...')
-                                jlib.system(command, verbose=1)
+                                jlib.system(command, verbose=1, out='log')
 
                                 log('Copying mupdfcpp.dll to build/shared-release/')
                                 shutil.copy2('platform/win32/Release/mupdfcpp.dll', 'build/shared-release/')
@@ -6481,25 +6491,25 @@ def main():
                                         f' /D "UNICODE"'
                                         f' /D "WIN32"'
                                         f' /D "_UNICODE"'
-                                        f' /D "_USRDLL"'
-                                        f' /D "_WINDLL"'
+                                        #f' /D "_USRDLL"'
+                                        #f' /D "_WINDLL"'
                                         f' /D "_WINDOWS"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
-                                        f' /Fa"Release\"'
+                                        f' /Fa"Release\"'       # Sets the listing file name.
                                         f' /Fo"platform/win32/Release/mupdfcpp_swig.obj"'        # Name of generated object file.
-                                        f' /Fp"Release\_mupdf.pch"'
-                                        f' /GL'
+                                        f' /Fp"Release\_mupdf.pch"' # Specifies a precompiled header file name.
+                                        f' /GL'                 # Enables whole program optimization.
                                         f' /GS'                 # Buffers security check.
                                         f' /Gd'                 # Uses the __cdecl calling convention (x86 only).
                                         f' /Gm-'                # Deprecated. Enables minimal rebuild.
-                                        f' /Gy'
-                                        f' /MD' # Creates a multithreaded DLL using MSVCRT.lib.
+                                        f' /Gy'                 # Enables function-level linking.
+                                        f' /MD'                 # Creates a multithreaded DLL using MSVCRT.lib.
                                         f' /O2'
                                         f' /Oi'
                                         f' /Oy-'                # Omits frame pointer (x86 only).
                                         f' /W3'                 # Sets which warning level to output.
-                                        f' /WX-'                 # Treats all warnings as errors.
+                                        f' /WX-'                # Treats all warnings as errors.
                                         f' /Zc:forScope'
                                         f' /Zc:inline'
                                         f' /Zc:wchar_t'
@@ -6516,7 +6526,7 @@ def main():
                                         rf' /I"platform/c++/include"'
                                         f' platform/python/mupdfcpp_swig.cpp'
                                         )
-                                jlib.system(command, verbose=1, out=sys.stderr)
+                                jlib.system(command, verbose=1, out='log')
 
                                 # Link.
                                 command = (
@@ -6527,9 +6537,9 @@ def main():
                                         #f' /NOLOGO'
                                         #f' /PGD:"C:\cygwin64\home\jules\artifex\mupdf\platform\win32\Release\_mupdf.pgd"'
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
-                                        f' "mupdfcpp.lib"'
                                         f' "python3.lib"' # not needed because on Windows Python.h has info about library.
                                         #f' /DEBUG'
+                                        #f' /DEF:"platform/c++/windows_mupdf.def"'
                                         f' /DLL'
                                         f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
                                         f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
@@ -6546,6 +6556,7 @@ def main():
                                         f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'
                                         f' platform/win32/Release/mupdfcpp_swig.obj'
+                                        f' "mupdfcpp.lib"'
                                         f' /LIBPATH:"{python_root}/libs"'
                                         f' /ManifestFile:"platform/win32/Release/_mupdf.dll.intermediate.manifest"'
                                         f' /LIBPATH:"platform/win32/Release"'
@@ -6553,7 +6564,7 @@ def main():
                                         f' /OUT:"platform/win32/Release/_mupdf.dll"'
                                         f' /PDB:"platform/win32/Release/_mupdf.pdb"'
                                         )
-                                jlib.system(command, verbose=1, out=sys.stderr)
+                                jlib.system(command, verbose=1, out='log')
 
                                 log('Copying _mupdf.dll to build/shared-release/')
 
@@ -6561,6 +6572,7 @@ def main():
                                 # undocumented. Discovered this at:
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
+                                log('Copying _mupdf.dll to build/shared-release/')
                                 shutil.copy2('platform/win32/Release/_mupdf.dll', 'build/shared-release/_mupdf.pyd')
 
                             else:
@@ -6643,7 +6655,7 @@ def main():
                     jlib.system(
                             command,
                             raise_errors=False,
-                            out=lambda text: log( text, nv=False),
+                            out='log',
                             )
 
             elif arg == '--diff-all':
@@ -6727,15 +6739,15 @@ def main():
                 jlib.system(
                         f'rm -r {build_dirs.ref_dir}',
                         raise_errors=False,
-                        out=lambda text: log(text),
+                        out='log',
                         )
                 jlib.system(
                         f'rsync -ai {build_dirs.dir_mupdf}platform/c++/implementation {build_dirs.ref_dir}',
-                        out=lambda text: log(text),
+                        out='log',
                         )
                 jlib.system(
                         f'rsync -ai {build_dirs.dir_mupdf}platform/c++/include {build_dirs.ref_dir}',
-                        out=lambda text: log(text),
+                        out='log',
                         )
 
             elif arg == '--dir-so' or arg == '-d':
@@ -6901,7 +6913,7 @@ def main():
 
             elif arg == '--py-package-multi':
                 def system(command):
-                    jlib.system(command, verbose=1, out=lambda text: jlib.log(text))
+                    jlib.system(command, verbose=1, out='log')
                 system( '(rm -r pylocal-multi dist || true)')
                 system( './setup.py sdist')
                 system( 'cp -p pyproject.toml pyproject.toml-0')
@@ -7103,8 +7115,8 @@ def main():
 
                 # Run mutool.py.
                 #
-                mutool_py = os.path.abspath( __file__ + '/../mutool.py')
-                zlib_pdf = f'{build_dirs.dir_mupdf}thirdparty/zlib/zlib.3.pdf'
+                mutool_py = os.path.relpath( f'{__file__}/../mutool.py')
+                zlib_pdf = os.path.relpath(f'{build_dirs.dir_mupdf}thirdparty/zlib/zlib.3.pdf')
                 for args2 in (
                         f'trace {zlib_pdf}',
                         f'convert -o zlib.3.pdf-%d.png {zlib_pdf}',
@@ -7116,7 +7128,7 @@ def main():
                     log( 'running: {command}')
                     jlib.system(
                             f'{command}',
-                            out = lambda text: log( text, nv=0),
+                            out='log',
                             )
 
                 log( 'Tests ran ok.')
