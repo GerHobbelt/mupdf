@@ -77,6 +77,12 @@ static struct {
 	{ qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
 
 	{ sqlite_main, "sqlite", "SQLite3 tool" },
+
+	{ jpegtran_main, "jpegtran", "jpegtran tool" },
+	{ rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
+	{ wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
+	{ djpeg_main, "djpeg", "djpeg tool" },
+	{ cjpeg_main, "cjpeg", "cjpeg tool" },
 };
 
 static int

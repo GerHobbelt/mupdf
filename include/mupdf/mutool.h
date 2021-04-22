@@ -45,7 +45,11 @@ int qiqqa_fingerprint1_main(int argc, const char* argv[]);
 #define SQLITE_SHELL_IS_UTF8 1
 int sqlite_main(int argc, const char** argv);
 
-int jpegtran_main(int argc, char** argv);
+int jpegtran_main(int argc, const char** argv);
+int rdjpegcom_main(int argc, const char** argv);
+int wrjpegcom_main(int argc, const char** argv);
+int cjpeg_main(int argc, const char** argv);
+int djpeg_main(int argc, const char** argv);
 
 #ifdef __cplusplus
 }
