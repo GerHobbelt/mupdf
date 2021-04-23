@@ -43,20 +43,20 @@ typedef unsigned __int64 uint64_t;
 #endif
 
 #if defined(WIN32)
-	#ifdef FZ_SHARED
-		#pragma message("FZ_SHARED defined")
+	#ifdef FZ_DLL_CLIENT
+		#pragma message("FZ_DLL_CLIENT defined")
 	#else
-		#pragma message("FZ_SHARED undefined")
+		#pragma message("FZ_DLL_CLIENT undefined")
 	#endif
-	#if defined(FZ_SHARED)
-		#define FZ_DATA_DECLARATION __declspec(dllimport)
-		#define FZ_DATA_DEFINITION
+	#if defined(FZ_DLL_CLIENT)
+		/* Building DLL client code. */
+		#define FZ_DATA __declspec(dllimport)
 	#else
-		#define FZ_DATA_DECLARATION
-		#define FZ_DATA_DEFINITION
+		/* Building DLL. */
+		#define FZ_DATA
 	#endif
 #else
-	#define FZ_DATA_DECLARATION
+	#define FZ_DATA
 #endif
 
 #define nelem(x) (sizeof(x)/sizeof((x)[0]))

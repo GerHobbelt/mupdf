@@ -565,14 +565,24 @@ typedef struct
 	char upwd_utf8[128]; /* User password. */
 } pdf_write_options;
 
-#if defined(WIN32) && defined(FZ_SHARED)
-	/* We are building client of MuPDF DLL. */
-	#define PDF_EXPORT_DATA __declspec(dllimport)
+#if defined(WIN32)
+	#ifdef FZ_DLL_CLIENT
+		#pragma message("FZ_DLL_CLIENT defined")
+	#else
+		#pragma message("FZ_DLL_CLIENT undefined")
+	#endif
+	#if defined(FZ_DLL_CLIENT)
+		/* Building DLL client code. */
+		#define FZ_DATA __declspec(dllimport)
+	#else
+		/* Building DLL. */
+		#define FZ_DATA
+	#endif
 #else
-	#define PDF_EXPORT_DATA
+	#define FZ_DATA
 #endif
 
-PDF_EXPORT_DATA extern const pdf_write_options pdf_default_write_options;
+FZ_DATA extern const pdf_write_options pdf_default_write_options;
 
 /*
 	Parse option string into a pdf_write_options struct.
