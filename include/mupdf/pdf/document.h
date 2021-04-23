@@ -1,6 +1,8 @@
 #ifndef MUPDF_PDF_DOCUMENT_H
 #define MUPDF_PDF_DOCUMENT_H
 
+#include "mupdf/fitz/export.h"
+
 typedef struct pdf_xref pdf_xref;
 typedef struct pdf_ocg_descriptor pdf_ocg_descriptor;
 
@@ -565,7 +567,7 @@ typedef struct
 	char upwd_utf8[128]; /* User password. */
 } pdf_write_options;
 
-extern const pdf_write_options pdf_default_write_options;
+FZ_DATA extern const pdf_write_options pdf_default_write_options;
 
 /*
 	Parse option string into a pdf_write_options struct.
