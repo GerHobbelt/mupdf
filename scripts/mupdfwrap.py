@@ -6204,6 +6204,65 @@ def from_pickle( path):
         return pickle.load( f)
 
 
+class Cpu:
+    '''
+    A CPU's different representations as text.
+    '''
+    def __init__(self, name):
+        self.name = name
+        if name == 'x32':
+            self.bits = 32
+            self.windows_subdir = ''
+            self.windows_name = 'x86'
+            self.windows_config = 'Win32'
+            self.windows_suffix = ''
+        elif name == 'x64':
+            self.bits = 64
+            self.windows_subdir = 'x64/'    # platform/win32/x64/Release
+            self.windows_name = 'x64'       # /MACHINE:x64
+            self.windows_config = 'x64'     # /Build Release|x64
+            self.windows_suffix = '64'      # mupdfcpp64.dll
+        else:
+            assert 0, f'Unrecognised cpu name: {name}'
+    def __str__(self):
+        return self.name
+
+def find_python( cpu):
+    '''
+    Returns (path, version, root) for python that matches <cpu>.
+
+    path:
+        Path of python binary.
+    version:
+        Version as a string, e.g. '3.9'.
+    root:
+        The parent directory of <path>; allows
+        Python headers to be found, for example
+        <root>/include/Python.h.
+    '''
+    text = jlib.system('py -0p', out='return')
+    version_list_highest = [0]
+    ret = None
+    for line in text.split('\n'):
+        log( '{line=}')
+        m = re.match( '^ *-([0-9.]+)-((64)|(32)) +(.*)( [*])?$', line)
+        if m:
+            version = m.group(1)
+            version_list = [int(x) for x in version.split('.')]
+            cpu_ = int(m.group(2))
+            path = m.group(5)
+            log( '{version=} {cpu=} {path=}')
+            if cpu_ == cpu.bits and version_list > version_list_highest:
+                root = path[ :path.rfind('\\')]
+                ret = path, version, root
+                version_list_highest = version_list
+    if not ret:
+        raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
+    log( f'Returning {ret}')
+    return ret
+
+
+
 def main():
 
     # Set up behaviour of jlib.log().
@@ -6214,6 +6273,8 @@ def main():
 
     build_dirs = BuildDirs()
     swig = 'swig'
+
+    cpu = Cpu('x32')
 
     args = jlib.Args( sys.argv[1:])
     while 1:
@@ -6248,15 +6309,11 @@ def main():
                 swig_c = None
                 swig_python = None
                 jlib.log('{build_dirs.dir_so=}')
-                windows_cpu = 32    # Default to 32-bit.
 
                 while 1:
                     actions = args.next()
                     if actions == '-f':
                         force_rebuild = True
-                    elif actions == '--cpu':
-                        windows_cpu = int(args.next())
-                        assert windows_cpu in (32, 64)
                     elif actions.startswith( '-'):
                         raise Exception( f'Unrecognised --build flag: {actions}')
                     else:
@@ -6397,7 +6454,7 @@ def main():
                                 command = (
                                         f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Build "ReleasePython|{"Win32" if windows_cpu==32 else "x64"}"'
+                                        f' /Build "ReleasePython|{cpu.windows_config}"'
                                         f' /Project mupdfcpp'
                                         )
                                 log(f'Building mupdfcpp.dll ...')
@@ -6405,11 +6462,7 @@ def main():
 
                                 log('Copying mupdfcpp.dll to build/shared-release/')
                                 os.makedirs( 'build/shared-release', exist_ok=True)
-                                if windows_cpu == 32:
-                                    dll = 'platform/win32/Release/mupdfcpp.dll'
-                                else:
-                                    dll = 'platform/win32/x64/Release/mupdfcpp64.dll'
-                                shutil.copy2( dll, 'build/shared-release/')
+                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/mupdfcpp{cpu.windows_suffix}.dll', 'build/shared-release/mupdfcpp.dll')
 
                             else:
 
@@ -6467,49 +6520,11 @@ def main():
 
                             if g_windows:
 
-                                def find_python():
-                                    '''
-                                    Returns (path, version, root) for python that matches windows_cpu.
-
-                                    path:
-                                        Path of python binary.
-                                    version:
-                                        Version as a string, e.g. '3.9'.
-                                    root:
-                                        The parent directory of <path>; allows
-                                        Python headers to be found, for example
-                                        <root>/include/Python.h.
-                                    '''
-                                    text = jlib.system('py -0p', out='return')
-                                    version_list_highest = [0]
-                                    ret = None
-                                    for line in text.split('\n'):
-                                        log( '{line=}')
-                                        m = re.match( '^ *-([0-9.]+)-((64)|(32)) +(.*)( [*])?$', line)
-                                        if m:
-                                            version = m.group(1)
-                                            version_list = [int(x) for x in version.split('.')]
-                                            cpu = int(m.group(2))
-                                            path = m.group(5)
-                                            log( '{version=} {cpu=} {path=}')
-                                            if cpu == windows_cpu and version_list > version_list_highest:
-                                                root = path[ :path.rfind('\\')]
-                                                ret = path, version, root
-                                                version_list_highest = version_list
-                                    if not ret:
-                                        raise Exception( f'Failed to find python matching windows_cpu={windows_cpu}. Run "py -0p" to see available pythons')
-                                    log( f'Returning {ret}')
-                                    return ret
-
-                                python_path, python_version, python_root = find_python()
-                                log( 'best python for {windows_cpu=}: {python_path=} {python_version=}')
+                                python_path, python_version, python_root = find_python( cpu)
+                                log( 'best python for {cpu=}: {python_path=} {python_version=}')
 
                                 vcvars = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
-                                vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/'
-                                vs_root += 'x64' if windows_cpu==64 else 'x86'
-                                #python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39'
-                                #if windows_cpu == 32:
-                                #    python_root += '-32'
+                                vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{cpu.windows_name}'
 
                                 # Compile.
                                 command = (
@@ -6520,15 +6535,15 @@ def main():
                                         f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
                                         f' /D "NDEBUG"'
                                         f' /D "UNICODE"'
-                                        f' /D "WIN{windows_cpu}"'
+                                        f' /D "WIN{cpu.bits}"'
                                         f' /D "_UNICODE"'
                                         f' /D "_WINDOWS"'
                                         #f' /D "_WINDLL"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
                                         f' /Fa"Release\"'       # Sets the listing file name.
-                                        f' /Fdplatform/win32/{"x64/" if windows_cpu==64 else ""}Release/'       # Specifies a file name for the program database (PDB) file
-                                        f' /Fo"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
+                                        f' /Fdplatform/win32/{cpu.windows_subdir}Release/'       # Specifies a file name for the program database (PDB) file
+                                        f' /Fo"platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
                                         f' /Fp"Release/_mupdf.pch"' # Specifies a precompiled header file name.
                                         f' /GL'                 # Enables whole program optimization.
                                         f' /GS'                 # Buffers security check.
@@ -6569,30 +6584,30 @@ def main():
                                         f' /DLL'
                                         f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
                                         f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                        f' /IMPLIB:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.lib"'
+                                        f' /IMPLIB:"platform/win32/{cpu.windows_subdir}Release/_mupdf.lib"'
                                         f' /INCREMENTAL:NO'     # Controls incremental linking.
-                                        f' /LIBPATH:"{"platform/win32/Release" if windows_cpu==32 else "platform/win32/x64/Release"}"'
+                                        f' /LIBPATH:"platform/win32/{cpu.windows_subdir}Release"'
                                         f' /LIBPATH:"{python_root}/libs"'
                                         f' /LTCG:incremental'
-                                        f' /LTCGOUT:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.iobj"'
-                                        f' /MACHINE:{"X86" if windows_cpu==32 else "X64"}'   # Specifies the target platform.
+                                        f' /LTCGOUT:"platform/win32/{cpu.windows_subdir}Release/_mupdf.iobj"'
+                                        f' /MACHINE:{cpu.windows_name}'   # Specifies the target platform.
                                         f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
                                         f' /MANIFESTUAC:NO'     # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
-                                        f' /ManifestFile:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.dll.intermediate.manifest"'
+                                        f' /ManifestFile:"platform/win32/{cpu.windows_subdir}Release/_mupdf.dll.intermediate.manifest"'
                                         f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
                                         f' /OPT:ICF'
                                         f' /OPT:REF'
-                                        f' /OUT:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.dll"'
-                                        f' /PDB:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.pdb"'
-                                        f' {"/SAFESEH" if windows_cpu==32 else ""}'
+                                        f' /OUT:"platform/win32/{cpu.windows_subdir}Release/_mupdf.dll"'
+                                        f' /PDB:"platform/win32/{cpu.windows_subdir}Release/_mupdf.pdb"'
+                                        f' {"/SAFESEH" if cpu.bits==32 else ""}'
                                         f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
                                         f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
                                         #f' ucrt.lib vcruntime.lib'
                                         #f' python3.lib'         # not needed because on Windows Python.h has info about library.
-                                        f' platform/win32/{"x64/" if windows_cpu==64 else ""}Release/mupdfcpp_swig.obj'
-                                        f' mupdfcpp{64 if windows_cpu==64 else ""}.lib'
+                                        f' platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj'
+                                        f' mupdfcpp{cpu.windows_suffix}.lib'
                                         )
                                 log('Linking SWIG-generated code.')
                                 jlib.system(command, verbose=1, out='log')
@@ -6604,10 +6619,7 @@ def main():
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
                                 log('Copying _mupdf.dll to build/shared-release/')
-                                dll = 'platform/win32/Release/_mupdf.dll'
-                                if windows_cpu == 64:
-                                    dll = 'platform/win32/x64/Release/_mupdf.dll'
-                                shutil.copy2( dll, 'build/shared-release/_mupdf.pyd')
+                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/_mupdf.dll', 'build/shared-release/_mupdf.pyd')
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -6675,6 +6687,9 @@ def main():
             elif arg == '--compare-fz_usage':
                 directory = args.next()
                 compare_fz_usage( tu, directory, fn_usage)
+
+            elif arg == '--cpu':
+                cpu = Cpu(args.next())
 
             elif arg == '--diff':
                 for path in jlib.get_filenames( build_dirs.ref_dir):
@@ -7128,7 +7143,9 @@ def main():
                     # python. Also, Windows appears to be able to find
                     # _mupdf.pyd in same directory as mupdf.py.#
                     #
-                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} py'
+                    python_path, python_version, python_root = find_python( cpu)
+                    python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
+                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} "{python_path}"'
                 elif g_openbsd:
                     # We have special support to not require LD_LIBRARY_PATH.
                     command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
