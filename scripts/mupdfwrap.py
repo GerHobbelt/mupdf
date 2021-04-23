@@ -1502,13 +1502,13 @@ classextras = ClassExtras(
                     '''
                     struct OutlineIterator
                     {
-                        mupdf_FN OutlineIterator();
-                        mupdf_FN OutlineIterator(const Outline& item);
-                        mupdf_FN OutlineIterator& operator++();
-                        mupdf_FN bool operator==(const OutlineIterator& rhs);
-                        mupdf_FN bool operator!=(const OutlineIterator& rhs);
-                        mupdf_FN OutlineIterator& operator*();
-                        mupdf_FN OutlineIterator* operator->();
+                        FZ_FN OutlineIterator();
+                        FZ_FN OutlineIterator(const Outline& item);
+                        FZ_FN OutlineIterator& operator++();
+                        FZ_FN bool operator==(const OutlineIterator& rhs);
+                        FZ_FN bool operator!=(const OutlineIterator& rhs);
+                        FZ_FN OutlineIterator& operator*();
+                        FZ_FN OutlineIterator* operator->();
                         Outline m_outline;
                         int m_depth;
                         private:
@@ -1517,15 +1517,15 @@ classextras = ClassExtras(
                     ''',
                 extra_cpp =
                     f'''
-                    mupdf_FN OutlineIterator::OutlineIterator(const Outline& item)
+                    FZ_FN OutlineIterator::OutlineIterator(const Outline& item)
                     : m_outline(item), m_depth(0)
                     {{
                     }}
-                    mupdf_FN OutlineIterator::OutlineIterator()
+                    FZ_FN OutlineIterator::OutlineIterator()
                     : m_outline(NULL)
                     {{
                     }}
-                    mupdf_FN OutlineIterator& OutlineIterator::operator++()
+                    FZ_FN OutlineIterator& OutlineIterator::operator++()
                     {{
                         if (m_outline.m_internal->down)
                         {{
@@ -1563,20 +1563,20 @@ classextras = ClassExtras(
                         }}
                         return *this;
                     }}
-                    mupdf_FN bool OutlineIterator::operator==(const OutlineIterator& rhs)
+                    FZ_FN bool OutlineIterator::operator==(const OutlineIterator& rhs)
                     {{
                         bool ret = m_outline.m_internal == rhs.m_outline.m_internal;
                         return ret;
                     }}
-                    mupdf_FN bool OutlineIterator::operator!=(const OutlineIterator& rhs)
+                    FZ_FN bool OutlineIterator::operator!=(const OutlineIterator& rhs)
                     {{
                         return m_outline.m_internal != rhs.m_outline.m_internal;
                     }}
-                    mupdf_FN OutlineIterator& OutlineIterator::operator*()
+                    FZ_FN OutlineIterator& OutlineIterator::operator*()
                     {{
                         return *this;
                     }}
-                    mupdf_FN OutlineIterator* OutlineIterator::operator->()
+                    FZ_FN OutlineIterator* OutlineIterator::operator->()
                     {{
                         return this;
                     }}
@@ -2897,12 +2897,12 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
     name_args_cpp += ')'
     declaration_h = declaration_text( cursor.result_type, name_args_h)
     declaration_cpp = declaration_text( cursor.result_type, name_args_cpp)
-    out_h.write( f'mupdf_FN {declaration_h};\n')
+    out_h.write( f'FZ_FN {declaration_h};\n')
     out_h.write( '\n')
 
     # Write function definition.
     #
-    out_cpp.write( f'mupdf_FN {declaration_cpp}\n')
+    out_cpp.write( f'FZ_FN {declaration_cpp}\n')
     out_cpp.write( '{\n')
     return_type = cursor.result_type.spelling
     fncall = ''
@@ -3495,13 +3495,13 @@ def make_function_wrappers(
                     *o_out to length of string plus one. If <key> is not found, returns empty
                     string with *o_out=-1. <o_out> can be NULL if caller is not interested in
                     error information. */
-                    mupdf_FN std::string lookup_metadata(fz_document *doc, const char *key, int* o_out=NULL);
+                    FZ_FN std::string lookup_metadata(fz_document *doc, const char *key, int* o_out=NULL);
 
                     '''))
             out_functions_cpp.write(
                     textwrap.dedent(
                     f'''
-                    mupdf_FN std::string lookup_metadata(fz_document *doc, const char *key, int* o_out)
+                    FZ_FN std::string lookup_metadata(fz_document *doc, const char *key, int* o_out)
                     {{
                         int e = lookup_metadata(doc, key, NULL /*buf*/, 0 /*size*/);
                         if (e < 0) {{
@@ -3650,12 +3650,12 @@ def class_add_iterator( struct, structname, classname, extras):
     extras.class_post += f'''
             struct {classname}Iterator
             {{
-                mupdf_FN {classname}Iterator(const {it_type}& item);
-                mupdf_FN {classname}Iterator& operator++();
-                mupdf_FN bool operator==( const {classname}Iterator& rhs);
-                mupdf_FN bool operator!=( const {classname}Iterator& rhs);
-                mupdf_FN {it_type} operator*();
-                mupdf_FN {it_type}* operator->();
+                FZ_FN {classname}Iterator(const {it_type}& item);
+                FZ_FN {classname}Iterator& operator++();
+                FZ_FN bool operator==( const {classname}Iterator& rhs);
+                FZ_FN bool operator!=( const {classname}Iterator& rhs);
+                FZ_FN {it_type} operator*();
+                FZ_FN {it_type}* operator->();
                 private:
                 {it_type} m_item;
             }};
@@ -3679,29 +3679,29 @@ def class_add_iterator( struct, structname, classname, extras):
         keep_text = f'{keep_name}(m_item.m_internal->next);'
 
     extras.extra_cpp += f'''
-            mupdf_FN {classname}Iterator::{classname}Iterator(const {it_type}& item)
+            FZ_FN {classname}Iterator::{classname}Iterator(const {it_type}& item)
             : m_item( item)
             {{
             }}
-            mupdf_FN {classname}Iterator& {classname}Iterator::operator++()
+            FZ_FN {classname}Iterator& {classname}Iterator::operator++()
             {{
                 {keep_text}
                 m_item = {it_type}(m_item.m_internal->next);
                 return *this;
             }}
-            mupdf_FN bool {classname}Iterator::operator==( const {classname}Iterator& rhs)
+            FZ_FN bool {classname}Iterator::operator==( const {classname}Iterator& rhs)
             {{
                 return m_item.m_internal == rhs.m_item.m_internal;
             }}
-            mupdf_FN bool {classname}Iterator::operator!=( const {classname}Iterator& rhs)
+            FZ_FN bool {classname}Iterator::operator!=( const {classname}Iterator& rhs)
             {{
                 return m_item.m_internal != rhs.m_item.m_internal;
             }}
-            mupdf_FN {it_type} {classname}Iterator::operator*()
+            FZ_FN {it_type} {classname}Iterator::operator*()
             {{
                 return m_item;
             }}
-            mupdf_FN {it_type}* {classname}Iterator::operator->()
+            FZ_FN {it_type}* {classname}Iterator::operator->()
             {{
                 return &m_item;
             }}
@@ -3865,7 +3865,7 @@ def class_copy_constructor(
         comment = f'Copy constructor using {keep_name}().'
         out_h.write( '\n')
         out_h.write( f'    /* {comment} */\n')
-        out_h.write( f'    mupdf_FN {classname}(const {classname}& rhs);\n')
+        out_h.write( f'    FZ_FN {classname}(const {classname}& rhs);\n')
         out_h.write( '\n')
 
         cast = ''
@@ -3874,7 +3874,7 @@ def class_copy_constructor(
             cast = f'({structname}*) '
 
         out_cpp.write( f'/* {comment} */\n')
-        out_cpp.write( f'mupdf_FN {classname}::{classname}(const {classname}& rhs)\n')
+        out_cpp.write( f'FZ_FN {classname}::{classname}(const {classname}& rhs)\n')
         out_cpp.write( f': m_internal({cast}{rename.function_call(keep_name)}(rhs.m_internal))\n')
         out_cpp.write( '{\n')
         out_cpp.write( '}\n')
@@ -3884,10 +3884,10 @@ def class_copy_constructor(
     #
     comment = f'operator= using {keep_name}() and {drop_name}().'
     out_h.write( f'    /* {comment} */\n')
-    out_h.write( f'    mupdf_FN {classname}& operator=(const {classname}& rhs);\n')
+    out_h.write( f'    FZ_FN {classname}& operator=(const {classname}& rhs);\n')
 
     out_cpp.write( f'/* {comment} */\n')
-    out_cpp.write( f'mupdf_FN {classname}& {classname}::operator=(const {classname}& rhs)\n')
+    out_cpp.write( f'FZ_FN {classname}& {classname}::operator=(const {classname}& rhs)\n')
     out_cpp.write(  '{\n')
     out_cpp.write( f'    {rename.function_call(drop_name)}(this->m_internal);\n')
     out_cpp.write( f'    {rename.function_call(keep_name)}(rhs.m_internal);\n')
@@ -4175,7 +4175,7 @@ def class_write_method(
     if duplicate_type:
         out_h.write( f'    /* Disabled because same args as {duplicate_type}.\n')
 
-    out_h.write( f'    mupdf_FN {"static " if static else ""}{fn_h};\n')
+    out_h.write( f'    FZ_FN {"static " if static else ""}{fn_h};\n')
     if duplicate_type:
         out_h.write( f'    */\n')
 
@@ -4183,7 +4183,7 @@ def class_write_method(
     if duplicate_type:
         out_cpp.write( f'/* Disabled because same args as {duplicate_type}.\n')
 
-    out_cpp.write( f'mupdf_FN {fn_cpp}\n')
+    out_cpp.write( f'FZ_FN {fn_cpp}\n')
 
     class_write_method_body(
             tu,
@@ -4251,14 +4251,14 @@ def class_custom_method( register_fn_use, classname, extramethod, out_h, out_cpp
             out_h.write( f'    {line}\n')
     else:
         out_h.write( f'    /* {comment} */\n')
-    out_h.write( f'    mupdf_FN {return_space}{name_args};\n')
+    out_h.write( f'    FZ_FN {return_space}{name_args};\n')
 
     out_cpp.write( f'/* {comment} */\n')
     # Remove any default arg values from <name_args>.
     name_args_no_defaults = re.sub('= *[^(][^),]*', '', name_args)
     if name_args_no_defaults != name_args:
         log('have changed {name_args=} to {name_args_no_defaults=}')
-    out_cpp.write( f'mupdf_FN {return_space}{classname}::{name_args_no_defaults}')
+    out_cpp.write( f'FZ_FN {return_space}{classname}::{name_args_no_defaults}')
     out_cpp.write( textwrap.dedent(extramethod.body))
     out_cpp.write( f'\n')
 
@@ -4302,11 +4302,11 @@ def class_raw_constructor(
     out_h.write( '\n')
     out_h.write( f'    {comment}\n')
     if extras.constructor_raw == 'default':
-        out_h.write( f'    mupdf_FN {classname}({structname}* internal=NULL);\n')
+        out_h.write( f'    FZ_FN {classname}({structname}* internal=NULL);\n')
     else:
-        out_h.write( f'    mupdf_FN {constructor_decl};\n')
+        out_h.write( f'    FZ_FN {constructor_decl};\n')
 
-    out_cpp.write( f'mupdf_FN {classname}::{constructor_decl}\n')
+    out_cpp.write( f'FZ_FN {classname}::{constructor_decl}\n')
     if extras.pod == 'inline':
         pass
     elif extras.pod:
@@ -4330,9 +4330,9 @@ def class_raw_constructor(
         constructor_decl = f'{classname}(const {structname} internal)'
         out_h.write( '\n')
         out_h.write( f'    {comment}\n')
-        out_h.write( f'    mupdf_FN {constructor_decl};\n')
+        out_h.write( f'    FZ_FN {constructor_decl};\n')
 
-        out_cpp.write( f'mupdf_FN {classname}::{constructor_decl}\n')
+        out_cpp.write( f'FZ_FN {classname}::{constructor_decl}\n')
         out_cpp.write( '{\n')
         for c in struct.type.get_canonical().get_fields():
             if c.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
@@ -4349,9 +4349,9 @@ def class_raw_constructor(
             const_space = 'const ' if const else ''
             out_h.write( '\n')
             out_h.write( f'    /* Access as underlying struct. */\n')
-            out_h.write( f'    mupdf_FN {const_space}{structname}* internal(){space_const};\n')
+            out_h.write( f'    FZ_FN {const_space}{structname}* internal(){space_const};\n')
             out_cpp.write( f'{comment}\n')
-            out_cpp.write( f'mupdf_FN {const_space}{structname}* {classname}::internal(){space_const}\n')
+            out_cpp.write( f'FZ_FN {const_space}{structname}* {classname}::internal(){space_const}\n')
             out_cpp.write( '{\n')
             field0 = get_field0(struct.type).spelling
             out_cpp.write( f'    return ({const_space}{structname}*) &this->{field0};\n')
@@ -4458,8 +4458,8 @@ def class_accessors(
         # todo: if return type is uint8_t or int8_t, maybe return as <int>
         # so SWIG doesn't think it is a string? This would fix errors witht
         # fz_image::n and fz_image::bpc.
-        out_h.write( f'    mupdf_FN {decl % cursor.spelling};\n')
-        out_cpp.write( 'mupdf_FN %s\n' % (decl % ( f'{classname}::{cursor.spelling}')))
+        out_h.write( f'    FZ_FN {decl % cursor.spelling};\n')
+        out_cpp.write( 'FZ_FN %s\n' % (decl % ( f'{classname}::{cursor.spelling}')))
         out_cpp.write( '{\n')
         if keep_function:
             out_cpp.write( f'    {rename.function_call(keep_function)}(m_internal->{cursor.spelling});\n')
@@ -4497,9 +4497,9 @@ def class_destructor(
         fnname, cursor = destructor_fns[0]
         register_fn_use( cursor.spelling)
         out_h.write( f'    /* Destructor using {cursor.spelling}(). */\n')
-        out_h.write( f'    mupdf_FN ~{classname}();\n');
+        out_h.write( f'    FZ_FN ~{classname}();\n');
 
-        out_cpp.write( f'mupdf_FN {classname}::~{classname}()\n')
+        out_cpp.write( f'FZ_FN {classname}::~{classname}()\n')
         out_cpp.write(  '{\n')
         out_cpp.write( f'    {rename.function_call(fnname)}(m_internal);\n')
         out_cpp.write(  '}\n')
@@ -4522,9 +4522,9 @@ def class_to_string_member(
     '''
     out_h.write( f'\n')
     out_h.write( f'    /* Returns string containing our members, labelled and inside (...), using operator<<. */\n')
-    out_h.write( f'    mupdf_FN std::string to_string();\n')
+    out_h.write( f'    FZ_FN std::string to_string();\n')
 
-    out_cpp.write( f'mupdf_FN std::string {classname}::to_string()\n')
+    out_cpp.write( f'FZ_FN std::string {classname}::to_string()\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    std::ostringstream buffer;\n')
     out_cpp.write( f'    buffer << *this;\n')
@@ -4546,19 +4546,19 @@ def struct_to_string_fns(
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes {structname}\'s members, labelled and inside (...), to a stream. */\n')
-    out_h.write( f'mupdf_FN std::ostream& operator<< (std::ostream& out, const {structname}& rhs);\n')
+    out_h.write( f'FZ_FN std::ostream& operator<< (std::ostream& out, const {structname}& rhs);\n')
 
     out_h.write( f'\n')
     out_h.write( f'/* Returns string containing a {structname}\'s members, labelled and inside (...), using operator<<. */\n')
-    out_h.write( f'mupdf_FN std::string to_string_{structname}(const {structname}& s);\n')
+    out_h.write( f'FZ_FN std::string to_string_{structname}(const {structname}& s);\n')
 
     out_h.write( f'\n')
     out_h.write( f'/* Returns string containing a {structname}\'s members, labelled and inside (...), using operator<<.\n')
     out_h.write( f'(Convenience overload). */\n')
-    out_h.write( f'mupdf_FN std::string to_string(const {structname}& s);\n')
+    out_h.write( f'FZ_FN std::string to_string(const {structname}& s);\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'mupdf_FN std::ostream& operator<< (std::ostream& out, const {structname}& rhs)\n')
+    out_cpp.write( f'FZ_FN std::ostream& operator<< (std::ostream& out, const {structname}& rhs)\n')
     out_cpp.write( f'{{\n')
     i = 0
     out_cpp.write( f'    out\n')
@@ -4578,7 +4578,7 @@ def struct_to_string_fns(
     out_cpp.write( f'\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'mupdf_FN std::string to_string_{structname}(const {structname}& s)\n')
+    out_cpp.write( f'FZ_FN std::string to_string_{structname}(const {structname}& s)\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    std::ostringstream buffer;\n')
     out_cpp.write( f'    buffer << s;\n')
@@ -4586,7 +4586,7 @@ def struct_to_string_fns(
     out_cpp.write( f'}}\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'mupdf_FN std::string to_string(const {structname}& s)\n')
+    out_cpp.write( f'FZ_FN std::string to_string(const {structname}& s)\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    return to_string_{structname}(s);\n')
     out_cpp.write( f'}}\n')
@@ -4608,10 +4608,10 @@ def class_to_string_fns(
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes a {classname}\'s underlying {structname}\'s members, labelled and inside (...), to a stream. */\n')
-    out_h.write( f'mupdf_FN std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
+    out_h.write( f'FZ_FN std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
 
     out_cpp.write( f'\n')
-    out_cpp.write( f'mupdf_FN std::ostream& operator<< (std::ostream& out, const {classname}& rhs)\n')
+    out_cpp.write( f'FZ_FN std::ostream& operator<< (std::ostream& out, const {classname}& rhs)\n')
     out_cpp.write( f'{{\n')
     if extras.pod == 'inline':
         out_cpp.write( f'    return out << *rhs.internal();\n')
@@ -5199,33 +5199,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         name = filename[ len(prefix):]
         header_guard( name, file)
 
-    mupdf_export_text = textwrap.dedent(
-            '''
-            #ifndef mupdf_FN
-                #ifdef WIN32
-                    #if defined(FZ_DLL)
-                        // Building dll.
-                        #pragma message("FZ_DLL")
-                        #define mupdf_FN __declspec(dllexport)
-                        #define mupdf_DATA __declspec(dllexport)
-                    #elif defined(FZ_DLL_CLIENT)
-                        // Building client code.
-                        #pragma message("FZ_DLL_CLIENT")
-                        #define mupdf_FN __declspec(dllexport)
-                        #define mupdf_DATA __declspec(dllimport)
-                    #else
-                        #pragma message("not dll")
-                        #define mupdf_FN
-                        #define mupdf_DATA
-                    #endif
-                #else
-                    #define mupdf_FN
-                    #define mupdf_DATA
-                #endif
-            #endif
-
-            ''')
-
     # Write required #includes into .h files:
     #
     out_hs.exceptions.write( textwrap.dedent(
@@ -5247,7 +5220,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             #include <vector>
 
             '''))
-    out_hs.functions.write( mupdf_export_text)
 
     out_hs.classes.write( textwrap.dedent(
             '''
@@ -5259,7 +5231,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             #include <vector>
 
             '''))
-    out_hs.classes.write( mupdf_export_text)
 
     # Write required #includes into .cpp files:
     #
@@ -5309,13 +5280,13 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             /*
             The keys that are defined for fz_lookup_metadata().
             */
-            mupdf_DATA extern const std::vector<std::string> metadata_keys;
+            FZ_DATA extern const std::vector<std::string> metadata_keys;
 
             '''))
     out_cpps.functions.write(
             textwrap.dedent(
             '''
-            mupdf_FN const std::vector<std::string> metadata_keys = {
+            FZ_FN const std::vector<std::string> metadata_keys = {
                     "format",
                     "encryption",
                     "info:Title",
