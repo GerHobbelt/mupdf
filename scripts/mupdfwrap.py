@@ -6219,7 +6219,7 @@ class Cpu:
         elif name == 'x64':
             self.bits = 64
             self.windows_subdir = 'x64/'    # platform/win32/x64/Release
-            self.windows_name = 'x64'       # /MACHINE:x64
+            self.windows_name = 'x64'       #
             self.windows_config = 'x64'     # /Build Release|x64
             self.windows_suffix = '64'      # mupdfcpp64.dll
         else:
@@ -6245,12 +6245,12 @@ def find_python( cpu):
     ret = None
     for line in text.split('\n'):
         log( '{line=}')
-        m = re.match( '^ *-([0-9.]+)-((64)|(32)) +(.*)( [*])?$', line)
+        m = re.match( '^ *-([0-9.]+)-((64)|(32)) +([^\\r*]+)[\\r*]*$', line)
         if m:
             version = m.group(1)
             version_list = [int(x) for x in version.split('.')]
             cpu_ = int(m.group(2))
-            path = m.group(5)
+            path = m.group(5).strip()
             log( '{version=} {cpu=} {path=}')
             if cpu_ == cpu.bits and version_list > version_list_highest:
                 root = path[ :path.rfind('\\')]
@@ -6259,6 +6259,12 @@ def find_python( cpu):
     if not ret:
         raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
     log( f'Returning {ret}')
+    path, version, root = ret
+    if not os.path.exists(path):
+        assert path.endswith('.exe'), f'path={path!r}'
+        path = f'{path[:-4]}{version}.exe'
+        assert os.path.exists( path)
+        ret = path, version, root
     return ret
 
 
@@ -6523,7 +6529,7 @@ def main():
                                 python_path, python_version, python_root = find_python( cpu)
                                 log( 'best python for {cpu=}: {python_path=} {python_version=}')
 
-                                vcvars = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
+                                vcvars = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{cpu.bits}.bat'
                                 vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{cpu.windows_name}'
 
                                 # Compile.
@@ -6537,11 +6543,11 @@ def main():
                                         f' /D "UNICODE"'
                                         f' /D "WIN{cpu.bits}"'
                                         f' /D "_UNICODE"'
-                                        f' /D "_WINDOWS"'
+                                        #f' /D "_WINDOWS"'
                                         #f' /D "_WINDLL"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
-                                        f' /Fa"Release\"'       # Sets the listing file name.
+                                        f' /Faplatform/win32/{cpu.windows_subdir}Release/'       # Sets the listing file name.
                                         f' /Fdplatform/win32/{cpu.windows_subdir}Release/'       # Specifies a file name for the program database (PDB) file
                                         f' /Fo"platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
                                         f' /Fp"Release/_mupdf.pch"' # Specifies a precompiled header file name.
@@ -6590,7 +6596,7 @@ def main():
                                         f' /LIBPATH:"{python_root}/libs"'
                                         f' /LTCG:incremental'
                                         f' /LTCGOUT:"platform/win32/{cpu.windows_subdir}Release/_mupdf.iobj"'
-                                        f' /MACHINE:{cpu.windows_name}'   # Specifies the target platform.
+                                        f' /MACHINE:{cpu.windows_name.upper()}'   # Specifies the target platform.
                                         f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
                                         f' /MANIFESTUAC:NO'     # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
                                         f' /ManifestFile:"platform/win32/{cpu.windows_subdir}Release/_mupdf.dll.intermediate.manifest"'
@@ -6680,6 +6686,98 @@ def main():
                                         command,
                                         force_rebuild,
                                         )
+
+                        elif action == 'd':
+                            # debug, check executable that uses mupdfcpp.dll works.
+                            assert g_windows
+                            name = 'foo'
+                            with open( f'{name}.cpp', 'w') as f:
+                                f.write(textwrap.dedent(
+                                    '''
+                                    #include "mupdf/classes.h"
+                                    int main(void)
+                                    {
+                                        mupdf::Document document("awsd");
+                                        return 0;
+                                    }
+                                    '''))
+                            # Compile
+                            vcvars = f'c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{cpu.bits}.bat'
+                            vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{cpu.windows_name}'
+                            jlib.system(
+                                    f'cmd.exe /V /C @ "{vcvars}"'
+                                    f' "&&"'
+                                    f' "{vs_root}/cl.exe"'
+                                    f' /D "UNICODE"'
+                                    f' /D "WIN{cpu.bits}"'
+                                    f' /D FZ_DLL_CLIENT'
+                                    #f' /D "_CONSOLE"'
+                                    f' /D "NDEBUG"'
+                                    f' /D "_UNICODE"'
+                                    f' /EHsc'               # Enable C++ exceptions.
+                                    f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
+                                    f' /Fd"{name}.cl.pdb"'  # Otherwise we get 'vc140.pdb' and 'vc140.idb'.
+                                    f' /Fo"{name}\"'        # Name of generated object file.
+                                    f' /GS'                 # Buffers security check.
+                                    f' /Gd'                 # Uses the __cdecl calling convention (x86 only).
+                                    f' /Gm-'                # Deprecated. Enables minimal rebuild.
+                                    f' /I"include"'
+                                    f' /I"platform/c++/include"'
+                                    f' /JMC'                # Supports native C++ Just My Code debugging.
+                                    f' /Od'                 # Disables optimization.
+                                    f' /Oy-'                # Omits frame pointer (x86 only).
+                                    f' /RTC1'               # Enables run-time error checking.
+                                    f' /W3'                 # Sets which warning level to output.
+                                    f' /WX'                 # Treats all warnings as errors.
+                                    f' /ZI'                 # Includes debug information in a program database compatible with Edit and Continue.
+                                    f' /Zc:forScope'
+                                    f' /Zc:inline'
+                                    f' /Zc:wchar_t'
+                                    f' /analyze-'           # Enable code analysis.
+                                    f' /c'                  # Compiles without linking.
+                                    f' /diagnostics:column' # Controls the format of diagnostic messages.
+                                    f' /errorReport:prompt' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
+                                    f' /fp:precise'         # Specify floating-point behavior.
+                                    f' /nologo'             # Suppresses display of sign-on banner.
+                                    f' /permissive-'        # Set standard-conformance mode.
+                                    f' /sdl'                # Enables additional security features and warnings.
+                                    f' foo.cpp'
+                                    ,
+                                    verbose=1,
+                                    )
+
+                            # Link
+                            jlib.system(
+                                    f'cmd.exe /V /C @ "{vcvars}"'
+                                    f' "&&"'
+                                    f' "{vs_root}/link.exe"'
+                                    #f' /DEBUG'
+                                    f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
+                                    f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
+                                    f' /INCREMENTAL'        # Controls incremental linking.
+                                    f' /LIBPATH:"platform/win32/{cpu.windows_subdir}Release"'
+                                    f' /LTCGOUT:{name}.iobj'
+                                    f' /MACHINE:{cpu.windows_name.upper()}'        # Specifies the target platform.
+                                    f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
+                                    f' /MANIFESTFILE:{name}.manifest'   # Changes the default name of the manifest file.
+                                    f' /MANIFESTUAC:"level=\'asInvoker\' uiAccess=\'false\'"'   # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
+                                    f' /NOLOGO'             # Suppresses the startup banner.
+                                    f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
+                                    f' /OUT:{name}.exe'     # Specifies the output file name.
+                                    f' /PDB:{name}.pdb'     # Creates a PDB file.
+                                    f' /SUBSYSTEM:CONSOLE'  # Tells the operating system how to run the .exe file.
+                                    f' /TLBID:1'            # Specifies the resource ID of the linker-generated type library.
+                                    #f' /LIBPATH:"{python_root}/libs"'
+                                    f' {name}.obj'
+                                    f' "mupdfcpp{cpu.windows_suffix}.lib"'
+                                    f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
+                                    f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
+                                    #f' "python39.lib"'
+                                    ,
+                                    verbose=1,
+                                    )
+                            jlib.system( f'PATH=$PATH:platform/win32/{cpu.windows_subdir}Release ./{name}.exe')
+
 
                         else:
                             raise Exception( 'unrecognised --build action %r' % action)
