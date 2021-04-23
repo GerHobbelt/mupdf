@@ -6152,6 +6152,7 @@ class BuildDirs:
 
         # Default to release build.
         self.set_dir_so( f'{self.dir_mupdf}build/shared-release/')
+        self.dir_so_without_cpu = self.dir_so
 
     def set_dir_so( self, dir_so):
         dir_so = os.path.abspath( dir_so)
@@ -6170,6 +6171,10 @@ class BuildDirs:
         else:
             self.cpp_flags = None
             log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
+
+    def set_cpu( self, cpu):
+        if g_windows:
+            self.dir_so = self.dir_so_without_cpu[:-1] + cpu.name + '/'
 
 
 def test_setup_py( build_dirs, extra=''):
@@ -6224,8 +6229,14 @@ class Cpu:
             self.windows_suffix = '64'      # mupdfcpp64.dll
         else:
             assert 0, f'Unrecognised cpu name: {name}'
+    def build_shared( self):
+        if g_windows:
+            return f'build/shared-release-{self.name}'
+        return 'build/shared-release'
+
     def __str__(self):
         return self.name
+
 
 def find_python( cpu):
     '''
@@ -6278,9 +6289,11 @@ def main():
     jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
 
     build_dirs = BuildDirs()
-    swig = 'swig'
 
     cpu = Cpu('x32')
+    build_dirs.set_cpu( cpu)
+
+    swig = 'swig'
 
     args = jlib.Args( sys.argv[1:])
     while 1:
@@ -6467,8 +6480,8 @@ def main():
                                 jlib.system(command, verbose=1, out='log')
 
                                 log('Copying mupdfcpp.dll to build/shared-release/')
-                                os.makedirs( 'build/shared-release', exist_ok=True)
-                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/mupdfcpp{cpu.windows_suffix}.dll', 'build/shared-release/mupdfcpp.dll')
+                                os.makedirs( build_dirs.dir_so, exist_ok=True)
+                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}mupdfcpp.dll')
 
                             else:
 
@@ -6613,7 +6626,7 @@ def main():
                                         #f' ucrt.lib vcruntime.lib'
                                         #f' python3.lib'         # not needed because on Windows Python.h has info about library.
                                         f' platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj'
-                                        f' mupdfcpp{cpu.windows_suffix}.lib'
+                                        f' mupdfcpp.lib'
                                         )
                                 log('Linking SWIG-generated code.')
                                 jlib.system(command, verbose=1, out='log')
@@ -6624,8 +6637,9 @@ def main():
                                 # undocumented. Discovered this at:
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
-                                log('Copying _mupdf.dll to build/shared-release/')
-                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/_mupdf.dll', 'build/shared-release/_mupdf.pyd')
+                                log( 'Copying _mupdf.dll to {build_dirs.dir_so}_mupdf.pyd')
+                                os.makedirs( build_dirs.dir_so, exist_ok=True)
+                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/_mupdf.dll', f'{build_dirs.dir_so}_mupdf.pyd')
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -6769,7 +6783,7 @@ def main():
                                     f' /TLBID:1'            # Specifies the resource ID of the linker-generated type library.
                                     #f' /LIBPATH:"{python_root}/libs"'
                                     f' {name}.obj'
-                                    f' "mupdfcpp{cpu.windows_suffix}.lib"'
+                                    f' "mupdfcpp.lib"'
                                     f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
                                     f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
                                     #f' "python39.lib"'
@@ -6788,6 +6802,7 @@ def main():
 
             elif arg == '--cpu':
                 cpu = Cpu(args.next())
+                build_dirs.set_cpu( cpu)
 
             elif arg == '--diff':
                 for path in jlib.get_filenames( build_dirs.ref_dir):
