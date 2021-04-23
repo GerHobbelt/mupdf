@@ -12,18 +12,18 @@
 #if defined(WIN32)
 	#if defined(FZ_DLL)
 		/* Building DLL. */
-		#define FZ_FN __declspec(dllexport)
+		#define FZ_FUNCTION __declspec(dllexport)
 		#define FZ_DATA __declspec(dllexport)
 	#elif defined(FZ_DLL_CLIENT)
 		/* Building DLL client code. */
-		#define FZ_FN __declspec(dllexport)
+		#define FZ_FUNCTION __declspec(dllexport)
 		#define FZ_DATA __declspec(dllimport)
 	#else
-		#define FZ_FN
+		#define FZ_FUNCTION
 		#define FZ_DATA
 	#endif
 #else
-	#define FZ_FN
+	#define FZ_FUNCTION
 	#define FZ_DATA
 #endif
 
