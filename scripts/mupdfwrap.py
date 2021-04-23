@@ -6405,7 +6405,11 @@ def main():
 
                                 log('Copying mupdfcpp.dll to build/shared-release/')
                                 os.makedirs( 'build/shared-release', exist_ok=True)
-                                shutil.copy2('platform/win32/Release/mupdfcpp.dll', 'build/shared-release/')
+                                if windows_cpu == 32:
+                                    dll = 'platform/win32/Release/mupdfcpp.dll'
+                                else:
+                                    dll = 'platform/win32/x64/Release/mupdfcpp64.dll'
+                                shutil.copy2( dll, 'build/shared-release/')
 
                             else:
 
@@ -6517,13 +6521,14 @@ def main():
                                         f' /D "NDEBUG"'
                                         f' /D "UNICODE"'
                                         f' /D "WIN32"'
+                                        f' /D "WIN64"'
                                         f' /D "_UNICODE"'
                                         f' /D "_WINDOWS"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
                                         f' /Fa"Release\"'       # Sets the listing file name.
-                                        f' /Fdplatform/win32/Release/'       # Specifies a file name for the program database (PDB) file
-                                        f' /Fo"platform/win32/Release/mupdfcpp_swig.obj"'        # Name of generated object file.
+                                        f' /Fdplatform/win32/{"x64/" if windows_cpu==64 else ""}Release/'       # Specifies a file name for the program database (PDB) file
+                                        f' /Fo"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
                                         f' /Fp"Release/_mupdf.pch"' # Specifies a precompiled header file name.
                                         f' /GL'                 # Enables whole program optimization.
                                         f' /GS'                 # Buffers security check.
@@ -6564,29 +6569,29 @@ def main():
                                         f' /DLL'
                                         f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
                                         f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                        f' /IMPLIB:"platform/win32/Release/_mupdf.lib"'
+                                        f' /IMPLIB:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.lib"'
                                         f' /INCREMENTAL:NO'     # Controls incremental linking.
-                                        f' /LIBPATH:"platform/win32/Release"'
+                                        f' /LIBPATH:"{"platform/win32/Release" if windows_cpu==32 else "platform/win32/x64/Release"}"'
                                         f' /LIBPATH:"{python_root}/libs"'
                                         f' /LTCG:incremental'
-                                        f' /LTCGOUT:"platform/win32/Release/_mupdf.iobj"'
+                                        f' /LTCGOUT:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.iobj"'
                                         f' /MACHINE:{"X86" if windows_cpu==32 else "X64"}'   # Specifies the target platform.
                                         f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
                                         f' /MANIFESTUAC:NO'     # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
-                                        f' /ManifestFile:"platform/win32/Release/_mupdf.dll.intermediate.manifest"'
+                                        f' /ManifestFile:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.dll.intermediate.manifest"'
                                         f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
                                         f' /OPT:ICF'
                                         f' /OPT:REF'
-                                        f' /OUT:"platform/win32/Release/_mupdf.dll"'
-                                        f' /PDB:"platform/win32/Release/_mupdf.pdb"'
+                                        f' /OUT:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.dll"'
+                                        f' /PDB:"platform/win32/{"x64/" if windows_cpu==64 else ""}Release/_mupdf.pdb"'
                                         f' {"/SAFESEH" if windows_cpu==32 else ""}'
                                         f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
                                         f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
                                         #f' python3.lib'         # not needed because on Windows Python.h has info about library.
-                                        f' platform/win32/Release/mupdfcpp_swig.obj'
-                                        f' mupdfcpp.lib'
+                                        f' platform/win32/{"x64/" if windows_cpu==64 else ""}Release/mupdfcpp_swig.obj'
+                                        f' mupdfcpp{64 if windows_cpu==64 else ""}.lib'
                                         )
                                 log('Linking SWIG-generated code.')
                                 jlib.system(command, verbose=1, out='log')
@@ -6598,7 +6603,10 @@ def main():
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
                                 log('Copying _mupdf.dll to build/shared-release/')
-                                shutil.copy2('platform/win32/Release/_mupdf.dll', 'build/shared-release/_mupdf.pyd')
+                                dll = 'platform/win32/Release/_mupdf.dll'
+                                if windows_cpu == 64:
+                                    dll = 'platform/win32/x64/Release/_mupdf.dll'
+                                shutil.copy2( dll, 'build/shared-release/_mupdf.pyd')
 
                             else:
                                 # We use g++ debug/release flags as implied by
