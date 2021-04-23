@@ -299,6 +299,8 @@ Usage:
             args:
                 -f:
                     Force rebuilds.
+                --cpu 32 | 64
+                    Specify 32 or 64-bit builds (Windows only).
 
             <actions> is list of single-character actions which are processed in
             order. If <actions> is 'all', it is replaced by m0123.
@@ -6246,11 +6248,15 @@ def main():
                 swig_c = None
                 swig_python = None
                 jlib.log('{build_dirs.dir_so=}')
+                windows_cpu = 32    # Default to 32-bit.
 
                 while 1:
                     actions = args.next()
                     if actions == '-f':
                         force_rebuild = True
+                    elif actions == '--cpu':
+                        windows_cpu = int(args.next())
+                        assert windows_cpu in (32, 64)
                     elif actions.startswith( '-'):
                         raise Exception( f'Unrecognised --build flag: {actions}')
                     else:
@@ -6391,7 +6397,7 @@ def main():
                                 command = (
                                         f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Build "ReleasePython|Win32"'
+                                        f' /Build "ReleasePython|{"Win32" if windows_cpu==32 else "x64"}"'
                                         f' /Project mupdfcpp'
                                         )
                                 log(f'Building mupdfcpp.dll ...')
@@ -6456,9 +6462,50 @@ def main():
                             #
 
                             if g_windows:
+
+                                def find_python():
+                                    '''
+                                    Returns (path, version, root) for python that matches windows_cpu.
+
+                                    path:
+                                        Path of python binary.
+                                    version:
+                                        Version as a string, e.g. '3.9'.
+                                    root:
+                                        The parent directory of <path>; allows
+                                        Python headers to be found, for example
+                                        <root>/include/Python.h.
+                                    '''
+                                    text = jlib.system('py -0p', out='return')
+                                    version_list_highest = [0]
+                                    ret = None
+                                    for line in text.split('\n'):
+                                        log( '{line=}')
+                                        m = re.match( '^ *-([0-9.]+)-((64)|(32)) +(.*)( [*])?$', line)
+                                        if m:
+                                            version = m.group(1)
+                                            version_list = [int(x) for x in version.split('.')]
+                                            cpu = int(m.group(2))
+                                            path = m.group(5)
+                                            log( '{version=} {cpu=} {path=}')
+                                            if cpu == windows_cpu and version_list > version_list_highest:
+                                                root = path[ :path.rfind('\\')]
+                                                ret = path, version, root
+                                                version_list_highest = version_list
+                                    if not ret:
+                                        raise Exception( f'Failed to find python matching windows_cpu={windows_cpu}. Run "py -0p" to see available pythons')
+                                    log( f'Returning {ret}')
+                                    return ret
+
+                                python_path, python_version, python_root = find_python()
+                                log( 'best python for {windows_cpu=}: {python_path=} {python_version=}')
+
                                 vcvars = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars32.bat'
-                                vs_root = 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x86'
-                                python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39-32'
+                                vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/'
+                                vs_root += 'x64' if windows_cpu==64 else 'x86'
+                                #python_root = 'C:/Users/jules/AppData/Local/Programs/Python/Python39'
+                                #if windows_cpu == 32:
+                                #    python_root += '-32'
 
                                 # Compile.
                                 command = (
@@ -6505,6 +6552,7 @@ def main():
                                         rf' /I"platform/c++/include"'
                                         f' platform/python/mupdfcpp_swig.cpp'
                                         )
+                                log('Compiling SWIG-generated code.')
                                 jlib.system(command, verbose=1, out='log')
 
                                 # Link.
@@ -6522,7 +6570,7 @@ def main():
                                         f' /LIBPATH:"{python_root}/libs"'
                                         f' /LTCG:incremental'
                                         f' /LTCGOUT:"platform/win32/Release/_mupdf.iobj"'
-                                        f' /MACHINE:X86'        # Specifies the target platform.
+                                        f' /MACHINE:{"X86" if windows_cpu==32 else "X64"}'   # Specifies the target platform.
                                         f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
                                         f' /MANIFESTUAC:NO'     # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
                                         f' /ManifestFile:"platform/win32/Release/_mupdf.dll.intermediate.manifest"'
@@ -6531,7 +6579,7 @@ def main():
                                         f' /OPT:REF'
                                         f' /OUT:"platform/win32/Release/_mupdf.dll"'
                                         f' /PDB:"platform/win32/Release/_mupdf.pdb"'
-                                        f' /SAFESEH'
+                                        f' {"/SAFESEH" if windows_cpu==32 else ""}'
                                         f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
@@ -6540,6 +6588,7 @@ def main():
                                         f' platform/win32/Release/mupdfcpp_swig.obj'
                                         f' mupdfcpp.lib'
                                         )
+                                log('Linking SWIG-generated code.')
                                 jlib.system(command, verbose=1, out='log')
 
                                 log('Copying _mupdf.dll to build/shared-release/')
