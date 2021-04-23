@@ -6466,13 +6466,11 @@ def main():
                                         f' "&&"'
                                         f' "{vs_root}/cl.exe"'
                                         #f' /nologo'
-                                        f' /D "MUPDF_EXPORTS"'
+                                        f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
                                         f' /D "NDEBUG"'
-                                        f' /D "PyAPI_FUNC(RTYPE)=RTYPE"'
                                         f' /D "UNICODE"'
                                         f' /D "WIN32"'
                                         f' /D "_UNICODE"'
-                                        f' /D "FZ_DLL_CLIENT"'
                                         f' /D "_WINDOWS"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
