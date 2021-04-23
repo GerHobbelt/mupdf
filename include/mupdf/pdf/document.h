@@ -1,6 +1,8 @@
 #ifndef MUPDF_PDF_DOCUMENT_H
 #define MUPDF_PDF_DOCUMENT_H
 
+#include "../fitz/export.h"
+
 typedef struct pdf_xref pdf_xref;
 typedef struct pdf_ocg_descriptor pdf_ocg_descriptor;
 
@@ -564,23 +566,6 @@ typedef struct
 	char opwd_utf8[128]; /* Owner password. */
 	char upwd_utf8[128]; /* User password. */
 } pdf_write_options;
-
-#if defined(WIN32)
-	#ifdef FZ_DLL_CLIENT
-		#pragma message("FZ_DLL_CLIENT defined")
-	#else
-		#pragma message("FZ_DLL_CLIENT undefined")
-	#endif
-	#if defined(FZ_DLL_CLIENT)
-		/* Building DLL client code. */
-		#define FZ_DATA __declspec(dllimport)
-	#else
-		/* Building DLL. */
-		#define FZ_DATA
-	#endif
-#else
-	#define FZ_DATA
-#endif
 
 FZ_DATA extern const pdf_write_options pdf_default_write_options;
 

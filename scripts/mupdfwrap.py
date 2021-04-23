@@ -5203,16 +5203,16 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             '''
             #ifndef mupdf_FN
                 #ifdef WIN32
-                    #if defined(FZ_DLL_CLIENT)
-                        // Building client code.
-                        #pragma message("FZ_DLL_CLIENT")
-                        #define mupdf_FN __declspec(dllexport)
-                        #define mupdf_DATA __declspec(dllimport)
-                    #elif defined(FZ_DLL)
+                    #if defined(FZ_DLL)
                         // Building dll.
                         #pragma message("FZ_DLL")
                         #define mupdf_FN __declspec(dllexport)
                         #define mupdf_DATA __declspec(dllexport)
+                    #elif defined(FZ_DLL_CLIENT)
+                        // Building client code.
+                        #pragma message("FZ_DLL_CLIENT")
+                        #define mupdf_FN __declspec(dllexport)
+                        #define mupdf_DATA __declspec(dllimport)
                     #else
                         #pragma message("not dll")
                         #define mupdf_FN

@@ -17,6 +17,8 @@
 #include <setjmp.h> /* needed for the try/catch macros */
 #include <stdio.h> /* useful for debug printfs */
 
+#include "export.h"
+
 #if defined(_MSC_VER) && (_MSC_VER < 1700) /* MSVC older than VS2012 */
 typedef signed char int8_t;
 typedef short int int16_t;
@@ -35,29 +37,6 @@ typedef unsigned __int64 uint64_t;
 
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
-
-#ifdef FZ_DLL_INTERNAL
-	#pragma message("FZ_DLL_INTERNAL defined")
-#else
-	#pragma message("FZ_DLL_INTERNAL undefined")
-#endif
-
-#if defined(WIN32)
-	#ifdef FZ_DLL_CLIENT
-		#pragma message("FZ_DLL_CLIENT defined")
-	#else
-		#pragma message("FZ_DLL_CLIENT undefined")
-	#endif
-	#if defined(FZ_DLL_CLIENT)
-		/* Building DLL client code. */
-		#define FZ_DATA __declspec(dllimport)
-	#else
-		/* Building DLL. */
-		#define FZ_DATA
-	#endif
-#else
-	#define FZ_DATA
-#endif
 
 #define nelem(x) (sizeof(x)/sizeof((x)[0]))
 
