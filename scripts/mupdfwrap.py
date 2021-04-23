@@ -6520,10 +6520,10 @@ def main():
                                         f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
                                         f' /D "NDEBUG"'
                                         f' /D "UNICODE"'
-                                        f' /D "WIN32"'
-                                        f' /D "WIN64"'
+                                        f' /D "WIN{windows_cpu}"'
                                         f' /D "_UNICODE"'
                                         f' /D "_WINDOWS"'
+                                        #f' /D "_WINDLL"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
                                         f' /Fa"Release\"'       # Sets the listing file name.
@@ -6589,6 +6589,7 @@ def main():
                                         f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
                                         f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
+                                        #f' ucrt.lib vcruntime.lib'
                                         #f' python3.lib'         # not needed because on Windows Python.h has info about library.
                                         f' platform/win32/{"x64/" if windows_cpu==64 else ""}Release/mupdfcpp_swig.obj'
                                         f' mupdfcpp{64 if windows_cpu==64 else ""}.lib'
