@@ -2641,9 +2641,43 @@ pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *b
 static fz_location
 pdf_resolve_link_imp(fz_context *ctx, fz_document *doc_, const char *uri, float *xp, float *yp)
 {
-	pdf_document *doc = (pdf_document*)doc_;
+	pdf_document *doc = pdf_document_from_fz_document(ctx, doc_);
 	return fz_make_location(0, pdf_resolve_link(ctx, doc, uri, xp, yp));
 }
+
+
+/*
+	Wrappers used to silence the C compilers due to type conversions
+*/
+static void __pdf_drop_document_imp(fz_context* ctx, fz_document* doc)
+{
+	pdf_drop_document_imp(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+static fz_colorspace* __pdf_document_output_intent(fz_context* ctx, fz_document* doc)
+{
+	return pdf_document_output_intent(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+static int __pdf_needs_password(fz_context* ctx, fz_document* doc)
+{
+	return pdf_needs_password(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+static int __pdf_authenticate_password(fz_context* ctx, fz_document* doc, const char* password)
+{
+	return pdf_authenticate_password(ctx, pdf_document_from_fz_document(ctx, doc), password);
+}
+static int __pdf_has_permission(fz_context* ctx, fz_document* doc, fz_permission permission)
+{
+	return pdf_has_permission(ctx, pdf_document_from_fz_document(ctx, doc), permission);
+}
+static fz_outline* __pdf_load_outline(fz_context* ctx, fz_document* doc)
+{
+	return pdf_load_outline(ctx, pdf_document_from_fz_document(ctx, doc), NULL);
+}
+static int __pdf_lookup_metadata(fz_context* ctx, fz_document* doc, const char* key, char* buf, int size)
+{
+	return pdf_lookup_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, buf, size);
+}
+
 
 /*
 	Initializers for the fz_document interface.
@@ -2660,16 +2694,16 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 {
 	pdf_document *doc = fz_new_derived_document(ctx, pdf_document);
 
-	doc->super.drop_document = (fz_document_drop_fn*)pdf_drop_document_imp;
-	doc->super.get_output_intent = (fz_document_output_intent_fn*)pdf_document_output_intent;
-	doc->super.needs_password = (fz_document_needs_password_fn*)pdf_needs_password;
-	doc->super.authenticate_password = (fz_document_authenticate_password_fn*)pdf_authenticate_password;
-	doc->super.has_permission = (fz_document_has_permission_fn*)pdf_has_permission;
-	doc->super.load_outline = (fz_document_load_outline_fn*)pdf_load_outline;
+	doc->super.drop_document = __pdf_drop_document_imp;
+	doc->super.get_output_intent = __pdf_document_output_intent;
+	doc->super.needs_password = __pdf_needs_password;
+	doc->super.authenticate_password = __pdf_authenticate_password;
+	doc->super.has_permission = __pdf_has_permission;
+	doc->super.load_outline = __pdf_load_outline;
 	doc->super.resolve_link = pdf_resolve_link_imp;
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;
-	doc->super.lookup_metadata = (fz_document_lookup_metadata_fn*)pdf_lookup_metadata;
+	doc->super.lookup_metadata = __pdf_lookup_metadata;
 
 	pdf_lexbuf_init(ctx, &doc->lexbuf.base, PDF_LEXBUF_LARGE);
 	doc->file = fz_keep_stream(ctx, file);

@@ -17,7 +17,7 @@ pdf_count_pages(fz_context *ctx, pdf_document *doc)
 
 int pdf_count_pages_imp(fz_context *ctx, fz_document *doc, int chapter)
 {
-	return pdf_count_pages(ctx, (pdf_document*)doc);
+	return pdf_count_pages(ctx, pdf_document_from_fz_document(ctx, doc));
 }
 
 static int
@@ -1186,7 +1186,7 @@ pdf_load_page(fz_context *ctx, pdf_document *doc, int number)
 fz_page *
 pdf_load_page_imp(fz_context *ctx, fz_document *doc_, int chapter, int number)
 {
-	pdf_document *doc = (pdf_document*)doc_;
+	pdf_document *doc = pdf_document_from_fz_document(ctx, doc_);
 	pdf_page *page;
 	pdf_annot *annot;
 	pdf_obj *pageobj, *obj;
