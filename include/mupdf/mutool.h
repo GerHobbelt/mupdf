@@ -42,7 +42,6 @@ int mujs_prettyprint_main(int argc, const char* argv[]);    // MUJS_PRETTYPRINT_
 int qiqqa_fingerprint0_main(int argc, const char* argv[]);
 int qiqqa_fingerprint1_main(int argc, const char* argv[]);
 
-#define SQLITE_SHELL_IS_UTF8 1
 int sqlite_main(int argc, const char** argv);
 
 int jpegtran_main(int argc, const char** argv);
