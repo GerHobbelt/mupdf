@@ -15,7 +15,7 @@ Default behaviour:
 Environmental variables:
 
     MUPDF_SETUP_BUILD_DIR
-        Sets the build directory; overriden if --mupdf-build-dir is specified.
+        Overrides the default build directory.
 
     MUPDF_SETUP_HAVE_CLANG_PYTHON
         Affects whether we use clang-python when building.
@@ -52,6 +52,8 @@ mupdf_dir = os.path.abspath(f'{__file__}/..')
 sys.path.append(f'{mupdf_dir}/scripts')
 import pipcl
 
+os_name = os.uname()[0]
+g_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
 
 def mupdf_version():
 
@@ -84,18 +86,30 @@ def mupdf_version():
 
 # Generated files that are copied into the Python installation.
 #
-out_names = [
-        'libmupdf.so',      # C
-        'libmupdfcpp.so',   # C++
-        '_mupdf.so',        # Python internals
-        'mupdf.py',         # Python
-        ]
+if g_windows:
+    # Windows.
+    out_names  = [
+            'libmupdfcpp.dll',  # C and C++.
+            '_mupdf.pyd',       # Python internals.
+            'mupdf.py',         # Python.
+            ]
+    if sys.maxsize == 2**31 - 1:
+        build_dir = 'build/shared-release-x32'
+    else:
+        build_dir = 'build/shared-release-x64'
+else:
+    # Unix.
+    out_names = [
+            'libmupdf.so',      # C.
+            'libmupdfcpp.so',   # C++.
+            '_mupdf.so',        # Python internals.
+            'mupdf.py',         # Python.
+            ]
+    build_dir = 'build/shared-release'
 
-build_dir = os.environ.get('MUPDF_SETUP_BUILD_DIR', 'build/shared-release')
+build_dir = os.environ.get('MUPDF_SETUP_BUILD_DIR', build_dir)
 #log(f'MUPDF_SETUP_BUILD_DIR={os.environ.get("MUPDF_SETUP_BUILD_DIR")}')
 #log(f'build_dir={build_dir}')
-
-mupdf_build = None
 
 
 # pipcl Callbacks.
@@ -163,6 +177,9 @@ def sdist():
     subprocess.check_call(f'./scripts/mupdfwrap.py -d {build_dir} -b 02', shell=True)
     paths += [
             'build/shared-release/mupdf.py',
+            'git-info',
+            'platform/c++/c_functions.pickle',
+            'platform/c++/c_globals.pickle',
             'platform/c++/container_classnames.pickle',
             'platform/c++/implementation/classes.cpp',
             'platform/c++/implementation/exceptions.cpp',
@@ -175,16 +192,15 @@ def sdist():
             'platform/c++/swig_c.pickle',
             'platform/c++/swig_python.pickle',
             'platform/c++/to_string_structnames.pickle',
+            'platform/c++/windows_mupdf.def',
             'platform/python/mupdfcpp_swig.cpp',
-            'git-info',
             ]
     return paths
 
 
 def build():
     '''
-    pipcl callback. Build MuPDF C, C++ and Python libraries, with exact
-    behaviour depending on <mupdf_build> and <build_dir>.
+    pipcl callback. Build MuPDF C, C++ and Python libraries.
     '''
     if g_test_minimal:
         # Cut-down for testing.
@@ -195,66 +211,55 @@ def build():
             f.write('print("This is fake mupdf!")')
         return [(path, os.path.basename(path))]
 
-    global mupdf_build
-    if mupdf_build is None:
-        mupdf_build = os.environ.get('MUPDF_SETUP_BUILD')
-
-    if mupdf_build is None:
-        mupdf_build = '1'
-
-    if mupdf_build == '1':
-        if os.path.exists(f'{mupdf_dir}/PKG-INFO'):
-            # We are in an sdist, so generated C++ source and generated SWIG
-            # source files should be in place.
-            #
-            # We default to assuming that clang-python is not available and
-            # SWIG is available.
-            #
-            have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '0') == '1'
-            have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
-            b = 'm'         # Build C library.
-            if have_clang_python:
-                b += '0'    # Build C++ source.
-            b += '1'        # Build C++ library.
-            if have_swig:
-                b += '2'    # Build SWIG-generated source.
-            b += '3'        # Build SWIG library _mupdf.so.
-        else:
-            # Not an sdist so can't rely on pre-build C++ source etc, so build
-            # everything.
-            #
-            log(f'Building with "-b all" because we do not appear to be in an sdist')
-            b = 'all'
-        command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b {b}'
-
-    elif mupdf_build == '0':
-        command = None
-
+    if os.path.exists(f'{mupdf_dir}/PKG-INFO'):
+        # We are in an sdist, so generated C++ source and generated SWIG
+        # source files should be in place.
+        #
+        # We default to assuming that clang-python is not available and
+        # SWIG is available.
+        #
+        have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '0') == '1'
+        have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
+        if not g_windows:
+            b = 'm'     # Build C library.
+        if have_clang_python:
+            b += '0'    # Build C++ source.
+        b += '1'        # Build C++ library (contains C library on Windows).
+        if have_swig:
+            b += '2'    # Build SWIG-generated source.
+        b += '3'        # Build SWIG library _mupdf.so.
     else:
-        log(f'build(): Building by copying files from {mupdf_build} into {build_dir}/')
-        command = f'mkdir -p {build_dir}'
-        for n in out_names:
-            command += f' && rsync -ai {mupdf_build}/{n} {build_dir}/'
+        # Not an sdist so can't rely on pre-build C++ source etc, so build
+        # everything.
+        #
+        log(f'Building with "-b all" because we do not appear to be in an sdist')
+        b = 'all'
 
-    if command:
+    command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b {b}'
+
+    do_build = os.environ.get('MUPDF_SETUP_DO_BUILD')
+    if do_build == '0':
+        # This is a hack for testing.
+        log(f'Not doing build because $MUPDF_SETUP_DO_BUILD={do_build}')
+    else:
         log(f'build(): Building MuPDF C, C++ and Python libraries with: {command}')
         subprocess.check_call(command, shell=True)
-    else:
-        log(f'build(): Not building mupdf because mupdf_build={mupdf_build}')
 
+    # Return generated files to copy into wheel.
+    #
     paths = []
     for name in out_names:
-        path = f'{mupdf_dir}/{build_dir}/{name}'
-        paths.append((path, name))
+        paths.append((f'{build_dir}/{name}', name))
+
     log(f'build(): returning: {paths}')
     return paths
 
 
 def clean(all_):
     if all_:
-        subprocess.check_call('(rm -r build || true)', shell=True)
+        return 'build'
     else:
-        subprocess.check_call(f'(rm -r {build_dir} || true)', shell=True)
+        return build_dir
 
 
 mupdf_package = pipcl.Package(
@@ -280,6 +285,7 @@ mupdf_package = pipcl.Package(
         fn_build = build,
         fn_clean = clean,
         fn_sdist = sdist,
+        root_dir = os.path.dirname(__file__),
         )
 
 #log(f'mupdf_package={mupdf_package}')
