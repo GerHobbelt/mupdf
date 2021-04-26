@@ -6808,6 +6808,8 @@ def main():
             elif arg == '--py-package-bdist_wheel':
                 shutil.rmtree('dist_bdist_wheel', ignore_errors=True)
                 if g_windows:
+                    # Run under cmd.exe, in case we're in cygwin.
+                    #
                     command = ('cmd.exe /c "true'
                             f'&&py -m venv pylocal'
                             f'&&pylocal\\Scripts\\activate.bat'
@@ -6830,12 +6832,19 @@ def main():
                     jlib.system(command, verbose=1)
 
                 else:
+                    # We have to tell check-wheel-contents to allow our
+                    # top-level files, otherwise it fails with:
+                    #   W009: Wheel contains multiple toplevel library entries
+                    #
                     command = ('true'
-                            f' && python3 -m venv pylocal'
-                            f' && . pylocal/bin/activate'
+                            f' && (rm -r pylocal-test-bdist || true)'
+                            f' && python3 -m venv pylocal-test-bdist'
+                            f' && . pylocal-test-bdist/bin/activate'
                             f' && pip install clang check-wheel-contents'
                             f' && ./setup.py -d dist_bdist_wheel bdist_wheel'
-                            f' && check-wheel-contents dist_bdist_wheel/*'
+                            f' && check-wheel-contents --toplevel libmupdf.so,libmupdfcpp.so,_mupdf.so,mupdf.py dist_bdist_wheel/*'
+                            f' && pip install dist_bdist_wheel/*'
+                            f' && ./scripts/mupdfwrap_test.py'
                             f' && deactivate'
                             )
                     jlib.system(command, verbose=1)
