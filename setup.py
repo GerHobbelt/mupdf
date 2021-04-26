@@ -12,6 +12,9 @@ Default behaviour:
     assume that generated C++ source is already present. Thus we don't rely on
     clang-python being present.
 
+    When building a wheel, we build 32 or 64-bit binaries depending on whether
+    we are being run on 32 or 64-bit Python.
+
 Environmental variables:
 
     MUPDF_SETUP_BUILD_DIR
@@ -91,7 +94,9 @@ def mupdf_version():
 # Generated files that are copied into the Python installation.
 #
 if g_windows:
-    # Windows.
+    # Windows. We generate 32 or 64-bit binaries to match whatever Python we
+    # are running under.
+    #
     out_names  = [
             'mupdfcpp.dll', # C and C++.
             '_mupdf.pyd',   # Python internals.
