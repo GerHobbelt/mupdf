@@ -1211,6 +1211,17 @@ def ensure_empty_dir( path):
     os.makedirs( path, exist_ok=True)
     remove_dir_contents( path)
 
+def rename(src, dest):
+    '''
+    Renames <src> to <dest>. If we get an error, we try to remove <dest>
+    expicitly and then retry; this is to make things work on Windows.
+    '''
+    try:
+        os.rename(src, dest)
+    except Exception:
+        os.remove(dest)
+        os.rename(src, dest)
+
 # Things for figuring out whether files need updating, using mtimes.
 #
 def newest( names):
