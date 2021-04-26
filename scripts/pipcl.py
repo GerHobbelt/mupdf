@@ -7,6 +7,7 @@ import distutils.util
 import hashlib
 import io
 import os
+import platform
 import shutil
 import site
 import subprocess
@@ -153,10 +154,19 @@ class Package:
                 f' metadata_directory={metadata_directory}'
                 )
 
-        # Find platform tag used in wheel filename, as described in PEP-0425.
+        # Find platform tag used in wheel filename, as described in
+        # PEP-0425. E.g. 'openbsd_6_8_amd64', 'win_amd64' or 'win32'.
         #
         tag_platform = distutils.util.get_platform().replace('-', '_').replace('.', '_')
-        tag = f'py3-none-{tag_platform}'
+
+        # Get two-digit python version, e.g. 38 for python-3.8.6.
+        #
+        tag_python = ''.join(platform.python_version().split('.')[:2])
+
+        # Final tag is, for example, 'py39-none-win32', 'py39-none-win_amd64'
+        # or 'py38-none-openbsd_6_8_amd64'.
+        #
+        tag = f'py{tag_python}-none-{tag_platform}'
 
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
 
