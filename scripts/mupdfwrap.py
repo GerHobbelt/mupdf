@@ -6824,14 +6824,18 @@ def main():
                     # we also use glob.glob() because don't know how to do wildcards.
                     #
 
+                    # On Windows we use 'py' to run default python.
+                    py = 'py'
+                    #py = 'py -3-32' # Force 32-bit.
+
                     # Create bdist.
                     #
                     command = ('cmd.exe /c "true'
-                            f'&&py -m venv {pylocal}'
+                            f'&&{py} -m venv {pylocal}'
                             f'&&{pylocal}\\Scripts\\activate.bat'
                             f'&&pip install clang check-wheel-contents'
                             f'{"" if do_build else "&&set MUPDF_SETUP_DO_BUILD=0"}'
-                            f'&&py setup.py -d dist_bdist_wheel bdist_wheel'
+                            f'&&{py} setup.py -d dist_bdist_wheel bdist_wheel'
                             f'&&deactivate'
                             f'"'
                             )
