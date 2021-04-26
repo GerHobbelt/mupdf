@@ -403,7 +403,9 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
-        --py-package-bdist_wheel
+        --py-package-bdist_wheel <do-build>
+            <do-build> is 0 or 1.
+
             Checks we can create a wheel, and checks it is ok with
             check-wheel-contents.
 
@@ -6806,42 +6808,90 @@ def main():
                 build_dirs.set_dir_so( d)
 
             elif arg == '--py-package-bdist_wheel':
+
+                do_build = int(args.next())
+                # Check we can create and install and use a bdist, using a
+                # fresh venv each time.
+                #
+                pylocal = 'pylocal-test-bdist'
                 shutil.rmtree('dist_bdist_wheel', ignore_errors=True)
+                shutil.rmtree(pylocal, ignore_errors=True)
+
+                # We have to tell check-wheel-contents to allow our
+                # top-level files, otherwise it fails with:
+                #   W009: Wheel contains multiple toplevel library entries
+                #
+
                 if g_windows:
-                    # Run under cmd.exe, in case we're in cygwin.
+                    # On Windows we explicitly run under cmd.exe, in case we're in cygwin. And
+                    # we also use glob.glob() because don't know how to do wildcards.
+                    #
+
+                    # Create bdist.
                     #
                     command = ('cmd.exe /c "true'
-                            f'&&py -m venv pylocal'
-                            f'&&pylocal\\Scripts\\activate.bat'
+                            f'&&py -m venv {pylocal}'
+                            f'&&{pylocal}\\Scripts\\activate.bat'
                             f'&&pip install clang check-wheel-contents'
-                            f'&&set MUPDF_SETUP_DO_BUILD=0'
+                            f'{"" if do_build else "&&set MUPDF_SETUP_DO_BUILD=0"}'
                             f'&&py setup.py -d dist_bdist_wheel bdist_wheel'
+                            f'&&deactivate'
                             f'"'
                             )
                     jlib.system(command, verbose=1)
 
+                    # Find the generated wheel.
+                    #
                     bdist = glob.glob('dist_bdist_wheel/*')
                     assert len(bdist) == 1
                     bdist = bdist[0]
+
+                    # Check that our wheel is ok with check-wheel-contents,
+                    # but expect one error: 'W003: Wheel contains non-module
+                    # at library toplevel'. This is for mupdfcpp.dll; not sure
+                    # whether this DLL should be installed somewhere different?
+                    #
                     command = ('cmd.exe /c "true'
-                            f'&&pylocal\\Scripts\\activate.bat'
-                            f'&&check-wheel-contents {bdist}'
+                            f'&&{pylocal}\\Scripts\\activate.bat'
+                            f'&&(check-wheel-contents --toplevel _mupdf.pyd,mupdf.py,mupdfcpp.dll {bdist}||true)'
+                            f'&&deactivate'
+                            f'"'
+                            )
+                    text = jlib.system(command, verbose=1, out='return')
+                    log(f'output from check-wheel-contents:\n{text}')
+                    # Check we get expected error W003.
+                    num_errors = 0
+                    num_w003 = 0
+                    for line in text.split('\n'):
+                        m = re.match('^dist_bdist_wheel.mupdf-.*.whl: (W[0-9]+):.*', line)
+                        if m:
+                            if m.group(1) == 'W003':
+                                num_w003 += 1
+                            else:
+                                num_errors += 1
+                    assert num_w003 == 1 and num_errors == 0, f'Unexpected output num_errors={num_errors} num_w003={num_w003}:\n{text!r}'
+
+                    # Check scripts/mupdfwrap_test.py works.
+                    #
+                    command = ('cmd.exe /c "true'
+                            f'&&{pylocal}\\Scripts\\activate.bat'
+                            f'&&pip install {bdist}'
+                            f'&&python scripts/mupdfwrap_test.py'
                             f'&&deactivate'
                             f'"'
                             )
                     jlib.system(command, verbose=1)
 
                 else:
-                    # We have to tell check-wheel-contents to allow our
-                    # top-level files, otherwise it fails with:
-                    #   W009: Wheel contains multiple toplevel library entries
+                    # Unix. Create bdist, check with check-wheel-contents, run
+                    # scripts/mupdfwrap_test.py.
                     #
                     command = ('true'
-                            f' && (rm -r pylocal-test-bdist || true)'
-                            f' && python3 -m venv pylocal-test-bdist'
-                            f' && . pylocal-test-bdist/bin/activate'
+                            f' && (rm -r {pylocal} || true)'
+                            f' && python3 -m venv {pylocal}'
+                            f' && . {pylocal}/bin/activate'
                             f' && pip install clang check-wheel-contents'
-                            f' && ./setup.py -d dist_bdist_wheel bdist_wheel'
+                            f' && {"" if do_build else "MUPDF_SETUP_DO_BUILD=0"} ./setup.py -d dist_bdist_wheel bdist_wheel'
                             f' && check-wheel-contents --toplevel libmupdf.so,libmupdfcpp.so,_mupdf.so,mupdf.py dist_bdist_wheel/*'
                             f' && pip install dist_bdist_wheel/*'
                             f' && ./scripts/mupdfwrap_test.py'
