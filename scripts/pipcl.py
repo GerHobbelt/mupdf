@@ -184,7 +184,7 @@ class Package:
             #
             for item in items:
                 from_, to_ = _fromto(item)
-                add_file(from_, f'{self.name}/{to_}')
+                add_file(from_, to_)
 
             dist_info_path = f'{self.name}-{self.version}.dist-info'
             # Add <name>-<version>.dist-info/WHEEL.
