@@ -17,17 +17,20 @@ Environmental variables:
     MUPDF_SETUP_BUILD_DIR
         Overrides the default build directory.
 
-    MUPDF_SETUP_HAVE_CLANG_PYTHON
+    MUPDF_SETUP_USE_CLANG_PYTHON
         Affects whether we use clang-python when building.
 
-        If set and not '1', we do not attempt to use clang-python, and instead
-        assume that generated files are already available in platform/c++/.
+        If set, must be '0' or '1', and we override the default and do not
+        ('0') / do ('1') use clang-python to generate C++ source code from
+        MuPDF headers.
 
-        Default is '0'.
+        If we are an sdist we default to not re-generating C++ - the generated
+        files will be already available in platform/c++/. Otherwise we default
+        to generating C++ source code.
 
-    MUPDF_SETUP_HAVE_SWIG
-        If set and not '1', we do not attempt to run swig, and instead assume
-        that generated files are already available in platform/python/.
+    MUPDF_SETUP_USE_SWIG
+        If set, must be '0' or '1', and we do not ('0') / do ('1') attempt to
+        run swig.
 '''
 
 import os
@@ -175,7 +178,7 @@ def sdist():
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
     #
-    subprocess.check_call(f'./scripts/mupdfwrap.py -d {build_dir} -b 02', shell=True)
+    subprocess.check_call(f'{sys.executable} ./scripts/mupdfwrap.py -d {build_dir} -b 02', shell=True)
     paths += [
             'build/shared-release/mupdf.py',
             'git-info',
@@ -199,6 +202,26 @@ def sdist():
     return paths
 
 
+def get_flag(name, default):
+    '''
+    name:
+        Name of environmental variable.
+    default:
+        Value to return if <name> undefined.
+    Returns False if name is '0', True if name is '1', <default> if
+    undefined. Otherwise assert fails.
+    '''
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    elif value == '0':
+        return False
+    elif value == '1':
+        return True
+    else:
+        assert 0, f'If set, ${name} must be "0" or "1", but is: {value!r}'
+
+
 def build():
     '''
     pipcl callback. Build MuPDF C, C++ and Python libraries.
@@ -212,31 +235,31 @@ def build():
             f.write('print("This is fake mupdf!")')
         return [(path, os.path.basename(path))]
 
-    if os.path.exists(f'{mupdf_dir}/PKG-INFO'):
-        # We are in an sdist, so generated C++ source and generated SWIG
-        # source files should be in place.
-        #
-        # We default to assuming that clang-python is not available and
-        # SWIG is available.
-        #
-        have_clang_python = os.environ.get('MUPDF_SETUP_HAVE_CLANG_PYTHON', '0') == '1'
-        have_swig = os.environ.get('MUPDF_SETUP_HAVE_SWIG', '1') == '1'
-        if not g_windows:
-            b = 'm'     # Build C library.
-        if have_clang_python:
-            b += '0'    # Build C++ source.
-        b += '1'        # Build C++ library (contains C library on Windows).
-        if have_swig:
-            b += '2'    # Build SWIG-generated source.
-        b += '3'        # Build SWIG library _mupdf.so.
-    else:
-        # Not an sdist so can't rely on pre-build C++ source etc, so build
-        # everything.
-        #
-        log(f'Building with "-b all" because we do not appear to be in an sdist')
-        b = 'all'
+    # If we are an sdist, default to not trying to run clang-python - the
+    # generated files will already exist, and installing/using clang-python
+    # might be tricky.
+    #
+    in_sdist = os.path.exists(f'{mupdf_dir}/PKG-INFO')
+    use_clang_python = get_flag('MUPDF_SETUP_USE_CLANG_PYTHON', not in_sdist)
+    use_swig = get_flag('MUPDF_SETUP_USE_SWIG', True)
 
-    command = f'cd {mupdf_dir} && ./scripts/mupdfwrap.py -d {build_dir} -b {b}'
+    b = ''
+    if not g_windows:
+        b = 'm'     # Build C library.
+    if use_clang_python:
+        b += '0'    # Build C++ source.
+    b += '1'        # Build C++ library (also contains C library on Windows).
+    if use_swig:
+        b += '2'    # Build SWIG-generated source.
+    b += '3'        # Build SWIG library _mupdf.so.
+
+    command = (
+            f'cd {mupdf_dir}'
+            f' && {sys.executable} ./scripts/mupdfwrap.py'
+                f'{" --swig-windows-auto" if g_windows else ""}'
+                f' -d {build_dir}'
+                f' -b {b}'
+            )
 
     do_build = os.environ.get('MUPDF_SETUP_DO_BUILD')
     if do_build == '0':
