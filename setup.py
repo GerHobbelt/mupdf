@@ -31,6 +31,7 @@ Environmental variables:
 '''
 
 import os
+import platform
 import re
 import subprocess
 import sys
@@ -52,7 +53,7 @@ mupdf_dir = os.path.abspath(f'{__file__}/..')
 sys.path.append(f'{mupdf_dir}/scripts')
 import pipcl
 
-os_name = os.uname()[0]
+os_name = platform.system()
 g_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
 
 def mupdf_version():
@@ -89,9 +90,9 @@ def mupdf_version():
 if g_windows:
     # Windows.
     out_names  = [
-            'libmupdfcpp.dll',  # C and C++.
-            '_mupdf.pyd',       # Python internals.
-            'mupdf.py',         # Python.
+            'mupdfcpp.dll', # C and C++.
+            '_mupdf.pyd',   # Python internals.
+            'mupdf.py',     # Python.
             ]
     if sys.maxsize == 2**31 - 1:
         build_dir = 'build/shared-release-x32'
