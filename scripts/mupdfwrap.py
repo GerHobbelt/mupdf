@@ -299,8 +299,6 @@ Usage:
             args:
                 -f:
                     Force rebuilds.
-                --cpu 32 | 64
-                    Specify 32 or 64-bit builds (Windows only).
 
             <actions> is list of single-character actions which are processed in
             order. If <actions> is 'all', it is replaced by m0123.
@@ -5653,8 +5651,9 @@ def build_swig(
     Builds python wrapper for all mupdf_* functions and classes.
     '''
 
-    # Find version of swig.
-    t = jlib.system( f'{swig} -version', out='return')
+    # Find version of swig. (We use quotes around <swig> to make things work on
+    # Windows.)
+    t = jlib.system( f'"{swig}" -version', out='return')
     m = re.search( 'SWIG Version ([0-9]+)[.]([0-9]+)[.]([0-9]+)', t)
     assert m
     swig_major = int( m.group(1))
@@ -5981,7 +5980,7 @@ def build_swig(
         # first include path so that our modified mupdf/pdf/object.h will get
         # included in preference to the original.
         #
-        jlib.system( f'mkdir -p {build_dirs.dir_mupdf}platform/python/include/mupdf/pdf')
+        os.makedirs(f'{build_dirs.dir_mupdf}platform/python/include/mupdf/pdf', exist_ok=True)
         with open( f'{build_dirs.dir_mupdf}include/mupdf/pdf/object.h') as f:
             o = f.read()
         with open( f'{build_dirs.dir_mupdf}include/mupdf/pdf/name-table.h') as f:
@@ -6000,10 +5999,11 @@ def build_swig(
     os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
     jlib.update_file( text, swig_i)
 
+    line_end = '^' if g_windows else '\\'
     command = (
             textwrap.dedent(
             f'''
-            {swig}
+            "{swig}"
                 -Wall
                 -c++
                 {" -doxygen" if swig_major >= 4 else ""}
@@ -6017,7 +6017,7 @@ def build_swig(
                 -I{os.path.relpath(include2)}
                 -ignoremissing
                 {os.path.relpath(swig_i)}
-            ''').strip().replace( '\n', ' \\\n')
+            ''').strip().replace( '\n', "" if g_windows else "\\\n")
             )
 
     swig_cpp_old = None
@@ -6070,7 +6070,7 @@ def build_swig(
         swig_cpp_text = read_all(swig_cpp)
         if swig_cpp_text == swig_cpp_old_text:
             jlib.log('Preserving old file mtime etc because unchanged: {swig_cpp=}')
-            os.rename(swig_cpp_old, swig_cpp)
+            jlib.rename(swig_cpp_old, swig_cpp)
 
 
 def build_swig_java( container_classnames):
@@ -6121,64 +6121,6 @@ def test_swig():
             ''').replace( '\n', ' \\\n')
             )
 
-
-class BuildDirs:
-    '''
-    Locations of various generated files.
-    '''
-    def __init__( self):
-
-        # Assume we are in mupdf/scripts/.
-        file_ = os.path.abspath( __file__)
-        assert file_.endswith( '/scripts/mupdfwrap.py'), '__file__=%s file_=%s' % (__file__, file_)
-        dir_mupdf = os.path.abspath( f'{file_}/../../')
-        if not dir_mupdf.endswith( '/'):
-            dir_mupdf += '/'
-
-        # Directories used with --build.
-        self.dir_mupdf      = dir_mupdf
-
-        # Directory used with --ref.
-        self.ref_dir        = os.path.abspath( f'{self.dir_mupdf}mupdfwrap_ref/')
-        if not self.ref_dir.endswith( '/'):
-            self.ref_dir += '/'
-
-        # Default to release build.
-        self.set_dir_so( f'{self.dir_mupdf}build/shared-release/')
-        self.dir_so_without_cpu = self.dir_so
-
-    def set_dir_so( self, dir_so):
-        dir_so = os.path.abspath( dir_so)
-        if not dir_so.endswith( '/'):
-            dir_so += '/'
-        self.dir_so = dir_so
-
-        # Compile flags that we use to build libmupdfcpp.so depend on the flags
-        # used to build libmupdf.so - mupdf code is different depending on
-        # whether NDEBUG is defined.
-        #
-        if 0: pass  # lgtm [py/unreachable-statement]
-        elif '-debug' in dir_so:    self.cpp_flags = '-g'
-        elif '-release' in dir_so:  self.cpp_flags = '-O2 -DNDEBUG'
-        elif '-memento' in dir_so:  self.cpp_flags = '-g -DMEMENTO'
-        else:
-            self.cpp_flags = None
-            log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
-
-    def set_cpu( self, cpu):
-        if g_windows:
-            self.dir_so = f'{self.dir_so_without_cpu[:-1]}-{cpu.name}/'
-
-
-def to_pickle( obj, path):
-    with open( path, 'wb') as f:
-        pickle.dump( obj, f)
-
-def from_pickle( path):
-    with open( path, 'rb') as f:
-        return pickle.load( f)
-
-
 class Cpu:
     '''
     A CPU's different representations as text.
@@ -6206,6 +6148,68 @@ class Cpu:
 
     def __str__(self):
         return self.name
+
+
+
+class BuildDirs:
+    '''
+    Locations of various generated files.
+    '''
+    def __init__( self):
+
+        # Assume we are in mupdf/scripts/.
+        file_ = os.path.abspath( __file__)
+        assert file_.endswith( f'{os.sep}scripts{os.sep}mupdfwrap.py'), '__file__=%s file_=%s' % (__file__, file_)
+        dir_mupdf = os.path.abspath( f'{file_}/../../')
+        if not dir_mupdf.endswith( '/'):
+            dir_mupdf += '/'
+
+        # Directories used with --build.
+        self.dir_mupdf      = dir_mupdf
+
+        # Directory used with --ref.
+        self.ref_dir        = os.path.abspath( f'{self.dir_mupdf}mupdfwrap_ref/')
+        if not self.ref_dir.endswith( '/'):
+            self.ref_dir += '/'
+
+        # Default to release build.
+        if g_windows:
+            self.set_dir_so( f'{self.dir_mupdf}build/shared-release-x64/')
+        else:
+            self.set_dir_so( f'{self.dir_mupdf}build/shared-release/')
+        #self.dir_so_without_cpu = self.dir_so
+
+    def set_dir_so( self, dir_so):
+        dir_so = os.path.abspath( dir_so)
+        if not dir_so.endswith( '/'):
+            dir_so += '/'
+        self.dir_so = dir_so
+
+        # Compile flags that we use to build libmupdfcpp.so depend on the flags
+        # used to build libmupdf.so - mupdf code is different depending on
+        # whether NDEBUG is defined.
+        #
+        if 0: pass  # lgtm [py/unreachable-statement]
+        elif '-debug' in dir_so:    self.cpp_flags = '-g'
+        elif '-release' in dir_so:  self.cpp_flags = '-O2 -DNDEBUG'
+        elif '-memento' in dir_so:  self.cpp_flags = '-g -DMEMENTO'
+        else:
+            self.cpp_flags = None
+            log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
+
+        if self.dir_so.endswith('-x32/'):
+            self.cpu = Cpu('x32')
+        if self.dir_so.endswith('-x64/'):
+            self.cpu = Cpu('x64')
+
+
+def to_pickle( obj, path):
+    with open( path, 'wb') as f:
+        pickle.dump( obj, f)
+
+def from_pickle( path):
+    with open( path, 'rb') as f:
+        return pickle.load( f)
 
 
 def find_python( cpu):
@@ -6270,9 +6274,6 @@ def main():
     jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
 
     build_dirs = BuildDirs()
-
-    cpu = Cpu('x32')
-    build_dirs.set_cpu( cpu)
 
     swig = 'swig'
 
@@ -6453,17 +6454,17 @@ def main():
                                 # no mupdf.dll.
                                 #
                                 command = (
-                                        f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
+                                        f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Build "ReleasePython|{cpu.windows_config}"'
+                                        f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfcpp'
                                         )
                                 log(f'Building mupdfcpp.dll ...')
                                 jlib.system(command, verbose=1, out='log')
 
-                                log('Copying mupdfcpp.dll to build/shared-release/')
+                                log(f'Copying mupdfcpp.dll to: {build_dirs.dir_so}')
                                 os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}mupdfcpp.dll')
+                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}mupdfcpp.dll')
 
                             else:
 
@@ -6526,11 +6527,11 @@ def main():
                                 # would have to hack things to pass in the
                                 # appropriate python directory.
                                 #
-                                python_path, python_version, python_root = find_python( cpu)
-                                log( 'best python for {cpu=}: {python_path=} {python_version=}')
+                                python_path, python_version, python_root = find_python( build_dirs.cpu)
+                                log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
 
-                                vcvars = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{cpu.bits}.bat'
-                                vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{cpu.windows_name}'
+                                vcvars = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{build_dirs.cpu.bits}.bat'
+                                vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{build_dirs.cpu.windows_name}'
 
                                 # Compile.
                                 command = (
@@ -6541,13 +6542,13 @@ def main():
                                         f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
                                         f' /D "NDEBUG"'
                                         f' /D "UNICODE"'
-                                        f' /D "WIN{cpu.bits}"'
+                                        f' /D "WIN{build_dirs.cpu.bits}"'
                                         f' /D "_UNICODE"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
-                                        f' /Faplatform/win32/{cpu.windows_subdir}Release/'       # Sets the listing file name.
-                                        f' /Fdplatform/win32/{cpu.windows_subdir}Release/'       # Specifies a file name for the program database (PDB) file
-                                        f' /Fo"platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
+                                        f' /Faplatform/win32/{build_dirs.cpu.windows_subdir}Release/'       # Sets the listing file name.
+                                        f' /Fdplatform/win32/{build_dirs.cpu.windows_subdir}Release/'       # Specifies a file name for the program database (PDB) file
+                                        f' /Fo"platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
                                         f' /Fp"Release/_mupdf.pch"' # Specifies a precompiled header file name.
                                         f' /GL'                 # Enables whole program optimization.
                                         f' /GS'                 # Buffers security check.
@@ -6588,28 +6589,28 @@ def main():
                                         f' /DLL'
                                         f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
                                         f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                        f' /IMPLIB:"platform/win32/{cpu.windows_subdir}Release/_mupdf.lib"'
+                                        f' /IMPLIB:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.lib"'
                                         f' /INCREMENTAL:NO'     # Controls incremental linking.
-                                        f' /LIBPATH:"platform/win32/{cpu.windows_subdir}Release"'
+                                        f' /LIBPATH:"platform/win32/{build_dirs.cpu.windows_subdir}Release"'
                                         f' /LIBPATH:"{python_root}/libs"'
                                         f' /LTCG:incremental'
-                                        f' /LTCGOUT:"platform/win32/{cpu.windows_subdir}Release/_mupdf.iobj"'
-                                        f' /MACHINE:{cpu.windows_name.upper()}'   # Specifies the target platform.
+                                        f' /LTCGOUT:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.iobj"'
+                                        f' /MACHINE:{build_dirs.cpu.windows_name.upper()}'   # Specifies the target platform.
                                         f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
                                         f' /MANIFESTUAC:NO'     # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
-                                        f' /ManifestFile:"platform/win32/{cpu.windows_subdir}Release/_mupdf.dll.intermediate.manifest"'
+                                        f' /ManifestFile:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll.intermediate.manifest"'
                                         f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
                                         f' /OPT:ICF'
                                         f' /OPT:REF'
-                                        f' /OUT:"platform/win32/{cpu.windows_subdir}Release/_mupdf.dll"'
-                                        f' /PDB:"platform/win32/{cpu.windows_subdir}Release/_mupdf.pdb"'
-                                        f' {"/SAFESEH" if cpu.bits==32 else ""}'    # Not supported on x64.
+                                        f' /OUT:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll"'
+                                        f' /PDB:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.pdb"'
+                                        f' {"/SAFESEH" if build_dirs.cpu.bits==32 else ""}'    # Not supported on x64.
                                         f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
                                         f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
                                         #f' python3.lib'         # not needed because on Windows Python.h has info about library.
-                                        f' platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj'
+                                        f' platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp_swig.obj'
                                         f' mupdfcpp.lib'
                                         )
                                 log('Linking SWIG-generated code.')
@@ -6623,7 +6624,7 @@ def main():
                                 #
                                 log( 'Copying _mupdf.dll to {build_dirs.dir_so}_mupdf.pyd')
                                 os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{cpu.windows_subdir}Release/_mupdf.dll', f'{build_dirs.dir_so}_mupdf.pyd')
+                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll', f'{build_dirs.dir_so}_mupdf.pyd')
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -6690,10 +6691,6 @@ def main():
             elif arg == '--compare-fz_usage':
                 directory = args.next()
                 compare_fz_usage( tu, directory, fn_usage)
-
-            elif arg == '--cpu':
-                cpu = Cpu(args.next())
-                build_dirs.set_cpu( cpu)
 
             elif arg == '--diff':
                 for path in jlib.get_filenames( build_dirs.ref_dir):
@@ -7231,7 +7228,7 @@ def main():
                     # python. Also, Windows appears to be able to find
                     # _mupdf.pyd in same directory as mupdf.py.#
                     #
-                    python_path, python_version, python_root = find_python( cpu)
+                    python_path, python_version, python_root = find_python( build_dirs.cpu)
                     python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
                     command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} "{python_path}"'
                 elif g_openbsd:
