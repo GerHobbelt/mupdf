@@ -511,6 +511,7 @@ import glob
 import io
 import os
 import pickle
+import platform
 import re
 import shutil
 import sys
@@ -520,7 +521,7 @@ import traceback
 
 import jlib
 
-os_name = os.uname()[0]
+os_name = platform.system()
 
 g_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
 g_openbsd = os_name == 'OpenBSD'
@@ -6805,15 +6806,39 @@ def main():
                 build_dirs.set_dir_so( d)
 
             elif arg == '--py-package-bdist_wheel':
-                command = ('true'
-                        f' && python3 -m venv pylocal'
-                        f' && . pylocal/bin/activate'
-                        f' && pip install clang check-wheel-contents'
-                        f' && (rm -r dist_bdist_wheel || true)'
-                        f' && ./setup.py -d dist_bdist_wheel bdist_wheel'
-                        f' && check-wheel-contents dist_bdist_wheel/*'
-                        )
-                jlib.system(command, verbose=1)
+                shutil.rmtree('dist_bdist_wheel', ignore_errors=True)
+                if g_windows:
+                    command = ('cmd.exe /c "true'
+                            f'&&py -m venv pylocal'
+                            f'&&pylocal\\Scripts\\activate.bat'
+                            f'&&pip install clang check-wheel-contents'
+                            f'&&set MUPDF_SETUP_DO_BUILD=0'
+                            f'&&py setup.py -d dist_bdist_wheel bdist_wheel'
+                            f'"'
+                            )
+                    jlib.system(command, verbose=1)
+
+                    bdist = glob.glob('dist_bdist_wheel/*')
+                    assert len(bdist) == 1
+                    bdist = bdist[0]
+                    command = ('cmd.exe /c "true'
+                            f'&&pylocal\\Scripts\\activate.bat'
+                            f'&&check-wheel-contents {bdist}'
+                            f'&&deactivate'
+                            f'"'
+                            )
+                    jlib.system(command, verbose=1)
+
+                else:
+                    command = ('true'
+                            f' && python3 -m venv pylocal'
+                            f' && . pylocal/bin/activate'
+                            f' && pip install clang check-wheel-contents'
+                            f' && ./setup.py -d dist_bdist_wheel bdist_wheel'
+                            f' && check-wheel-contents dist_bdist_wheel/*'
+                            f' && deactivate'
+                            )
+                    jlib.system(command, verbose=1)
 
             elif arg == '--py-package-create-sdist':
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
@@ -6962,6 +6987,9 @@ def main():
                         )
 
             elif arg == '--py-package-multi':
+                # Investigating different combinations of pip, pyproject.toml,
+                # setup.py
+                #
                 def system(command):
                     jlib.system(command, verbose=1, out='log')
                 system( '(rm -r pylocal-multi dist || true)')
