@@ -488,16 +488,6 @@ Usage:
                     * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
 
-        --test-setup.py-extra <arg>
-            Like --test-setup.py but appends <arg> to the setup.py command.
-
-            For example this allows one to specify a debug build of MuPDF C,
-            C++ and Python librariess and omit the MuPDF build:
-
-                --test-setup.py-extra '--mupdf-build-dir build/shared-debug-extract --mupdf-build 0'
-
-            Se setup.py itself for more details.
-
     Examples:
 
         ./scripts/mupdfwrap.py -b all -t
@@ -532,7 +522,7 @@ import jlib
 
 os_name = os.uname()[0]
 
-g_windows = os_name == 'Windows' or os_name.startswith('CYGWIN')
+g_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
 g_openbsd = os_name == 'OpenBSD'
 g_linux = os_name == 'Linux'
 
@@ -6174,30 +6164,7 @@ class BuildDirs:
 
     def set_cpu( self, cpu):
         if g_windows:
-            self.dir_so = self.dir_so_without_cpu[:-1] + cpu.name + '/'
-
-
-def test_setup_py( build_dirs, extra=''):
-    '''
-    Implementation of --test-setup.py*.
-    '''
-    # We use the '.' command to run pylocal/bin/activate rather than 'source',
-    # because the latter is not portable, e.g. not supported by ksh. The '.'
-    # command is posix so should work on all shells.
-    commands = [
-                f'cd {build_dirs.dir_mupdf}',
-                f'python3 -m venv pylocal',
-                f'. pylocal/bin/activate',
-                f'pip install clang',
-                f'python setup.py {extra} install',
-                f'python scripts/mupdfwrap_test.py',
-                f'deactivate',
-                ]
-    command = 'true'
-    for c in commands:
-        command += f' && echo == running: {c}'
-        command += f' && {c}'
-    jlib.system( command)
+            self.dir_so = f'{self.dir_so_without_cpu[:-1]}-{cpu.name}/'
 
 
 def to_pickle( obj, path):
@@ -6240,7 +6207,13 @@ class Cpu:
 
 def find_python( cpu):
     '''
-    Returns (path, version, root) for python that matches <cpu>.
+    Windows only.
+
+    Returns (path, version, root) for python that matches <cpu>, which should
+    be a Cpu instance.
+
+    We parse the output from 'py -0p' to find all available python
+    installations.
 
     path:
         Path of python binary.
@@ -6251,6 +6224,7 @@ def find_python( cpu):
         Python headers to be found, for example
         <root>/include/Python.h.
     '''
+    assert g_windows
     text = jlib.system('py -0p', out='return')
     version_list_highest = [0]
     ret = None
@@ -6262,20 +6236,24 @@ def find_python( cpu):
             version_list = [int(x) for x in version.split('.')]
             cpu_ = int(m.group(2))
             path = m.group(5).strip()
-            log( '{version=} {cpu=} {path=}')
             if cpu_ == cpu.bits and version_list > version_list_highest:
                 root = path[ :path.rfind('\\')]
                 ret = path, version, root
                 version_list_highest = version_list
     if not ret:
         raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
-    log( f'Returning {ret}')
+
     path, version, root = ret
     if not os.path.exists(path):
+        # Sometimes it seems that the specified .../python.exe does not exist,
+        # and we have to change it to .../python<version>.exe.
+        #
         assert path.endswith('.exe'), f'path={path!r}'
-        path = f'{path[:-4]}{version}.exe'
+        path2 = f'{path[:-4]}{version}.exe'
+        log( 'Python {path!r} does not exist; changed to: {path2!r}')
         assert os.path.exists( path)
-        ret = path, version, root
+        ret = path2, version, root
+
     return ret
 
 
@@ -6339,7 +6317,7 @@ def main():
                         break
 
                 if actions == 'all':
-                    actions = 'm0123'
+                    actions = '0123' if g_windows else 'm0123'
 
                 for action in actions:
                     with jlib.LogPrefixScope( f'{action}: '):
@@ -6349,6 +6327,7 @@ def main():
 
                         elif action == 'm':
                             # Build libmupdf.so.
+                            assert not g_windows, 'Cannot do "-b m" on Windows; C library is integrated into C++ library built by "-b 01"'
                             log( '{build_dirs.dir_mupdf=}')
                             make = 'make'
                             if g_openbsd:
@@ -6538,7 +6517,12 @@ def main():
                             #
 
                             if g_windows:
-
+                                # We run Windows compiler and linker manually;
+                                # could probably add a project to mupdf.sln
+                                # instead and build it with devenv.exe, but
+                                # would have to hack things to pass in the
+                                # appropriate python directory.
+                                #
                                 python_path, python_version, python_root = find_python( cpu)
                                 log( 'best python for {cpu=}: {python_path=} {python_version=}')
 
@@ -6556,8 +6540,6 @@ def main():
                                         f' /D "UNICODE"'
                                         f' /D "WIN{cpu.bits}"'
                                         f' /D "_UNICODE"'
-                                        #f' /D "_WINDOWS"'
-                                        #f' /D "_WINDLL"'
                                         f' /EHsc'               # Enable C++ exceptions.
                                         f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
                                         f' /Faplatform/win32/{cpu.windows_subdir}Release/'       # Sets the listing file name.
@@ -6618,12 +6600,11 @@ def main():
                                         f' /OPT:REF'
                                         f' /OUT:"platform/win32/{cpu.windows_subdir}Release/_mupdf.dll"'
                                         f' /PDB:"platform/win32/{cpu.windows_subdir}Release/_mupdf.pdb"'
-                                        f' {"/SAFESEH" if cpu.bits==32 else ""}'
+                                        f' {"/SAFESEH" if cpu.bits==32 else ""}'    # Not supported on x64.
                                         f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
                                         f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
                                         f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
                                         f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
-                                        #f' ucrt.lib vcruntime.lib'
                                         #f' python3.lib'         # not needed because on Windows Python.h has info about library.
                                         f' platform/win32/{cpu.windows_subdir}Release/mupdfcpp_swig.obj'
                                         f' mupdfcpp.lib'
@@ -6700,99 +6681,6 @@ def main():
                                         command,
                                         force_rebuild,
                                         )
-
-                        elif action == 'd':
-                            # debug, check executable that uses mupdfcpp.dll works.
-                            assert g_windows
-                            name = 'foo'
-                            with open( f'{name}.cpp', 'w') as f:
-                                f.write(textwrap.dedent(
-                                    '''
-                                    #include "mupdf/classes.h"
-                                    int main(void)
-                                    {
-                                        mupdf::Document document("awsd");
-                                        return 0;
-                                    }
-                                    '''))
-                            # Compile
-                            vcvars = f'c:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{cpu.bits}.bat'
-                            vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{cpu.windows_name}'
-                            jlib.system(
-                                    f'cmd.exe /V /C @ "{vcvars}"'
-                                    f' "&&"'
-                                    f' "{vs_root}/cl.exe"'
-                                    f' /D "UNICODE"'
-                                    f' /D "WIN{cpu.bits}"'
-                                    f' /D FZ_DLL_CLIENT'
-                                    #f' /D "_CONSOLE"'
-                                    f' /D "NDEBUG"'
-                                    f' /D "_UNICODE"'
-                                    f' /EHsc'               # Enable C++ exceptions.
-                                    f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
-                                    f' /Fd"{name}.cl.pdb"'  # Otherwise we get 'vc140.pdb' and 'vc140.idb'.
-                                    f' /Fo"{name}\"'        # Name of generated object file.
-                                    f' /GS'                 # Buffers security check.
-                                    f' /Gd'                 # Uses the __cdecl calling convention (x86 only).
-                                    f' /Gm-'                # Deprecated. Enables minimal rebuild.
-                                    f' /I"include"'
-                                    f' /I"platform/c++/include"'
-                                    f' /JMC'                # Supports native C++ Just My Code debugging.
-                                    f' /Od'                 # Disables optimization.
-                                    f' /Oy-'                # Omits frame pointer (x86 only).
-                                    f' /RTC1'               # Enables run-time error checking.
-                                    f' /W3'                 # Sets which warning level to output.
-                                    f' /WX'                 # Treats all warnings as errors.
-                                    f' /ZI'                 # Includes debug information in a program database compatible with Edit and Continue.
-                                    f' /Zc:forScope'
-                                    f' /Zc:inline'
-                                    f' /Zc:wchar_t'
-                                    f' /analyze-'           # Enable code analysis.
-                                    f' /c'                  # Compiles without linking.
-                                    f' /diagnostics:column' # Controls the format of diagnostic messages.
-                                    f' /errorReport:prompt' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                    f' /fp:precise'         # Specify floating-point behavior.
-                                    f' /nologo'             # Suppresses display of sign-on banner.
-                                    f' /permissive-'        # Set standard-conformance mode.
-                                    f' /sdl'                # Enables additional security features and warnings.
-                                    f' foo.cpp'
-                                    ,
-                                    verbose=1,
-                                    )
-
-                            # Link
-                            jlib.system(
-                                    f'cmd.exe /V /C @ "{vcvars}"'
-                                    f' "&&"'
-                                    f' "{vs_root}/link.exe"'
-                                    #f' /DEBUG'
-                                    f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
-                                    f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                    f' /INCREMENTAL'        # Controls incremental linking.
-                                    f' /LIBPATH:"platform/win32/{cpu.windows_subdir}Release"'
-                                    f' /LTCGOUT:{name}.iobj'
-                                    f' /MACHINE:{cpu.windows_name.upper()}'        # Specifies the target platform.
-                                    f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
-                                    f' /MANIFESTFILE:{name}.manifest'   # Changes the default name of the manifest file.
-                                    f' /MANIFESTUAC:"level=\'asInvoker\' uiAccess=\'false\'"'   # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
-                                    f' /NOLOGO'             # Suppresses the startup banner.
-                                    f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
-                                    f' /OUT:{name}.exe'     # Specifies the output file name.
-                                    f' /PDB:{name}.pdb'     # Creates a PDB file.
-                                    f' /SUBSYSTEM:CONSOLE'  # Tells the operating system how to run the .exe file.
-                                    f' /TLBID:1'            # Specifies the resource ID of the linker-generated type library.
-                                    #f' /LIBPATH:"{python_root}/libs"'
-                                    f' {name}.obj'
-                                    f' "mupdfcpp.lib"'
-                                    f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
-                                    f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
-                                    #f' "python39.lib"'
-                                    ,
-                                    verbose=1,
-                                    )
-                            jlib.system( f'PATH=$PATH:platform/win32/{cpu.windows_subdir}Release ./{name}.exe')
-
-
                         else:
                             raise Exception( 'unrecognised --build action %r' % action)
 
@@ -6922,7 +6810,7 @@ def main():
                         f' && . pylocal/bin/activate'
                         f' && pip install clang check-wheel-contents'
                         f' && (rm -r dist_bdist_wheel || true)'
-                        f' && ./setup.py -d dist_bdist_wheel bdist_wheel --mupdf-build 0'
+                        f' && ./setup.py -d dist_bdist_wheel bdist_wheel'
                         f' && check-wheel-contents dist_bdist_wheel/*'
                         )
                 jlib.system(command, verbose=1)
@@ -7298,11 +7186,23 @@ def main():
                 log( 'Tests ran ok.')
 
             elif arg == '--test-setup.py':
-                test_setup_py( build_dirs)
-
-            elif arg == '--test-setup.py-extra':
-                extra = args.next()
-                test_setup_py( build_dirs, extra)
+                # We use the '.' command to run pylocal/bin/activate rather than 'source',
+                # because the latter is not portable, e.g. not supported by ksh. The '.'
+                # command is posix so should work on all shells.
+                commands = [
+                            f'cd {build_dirs.dir_mupdf}',
+                            f'python3 -m venv pylocal',
+                            f'. pylocal/bin/activate',
+                            f'pip install clang',
+                            f'python setup.py {extra} install',
+                            f'python scripts/mupdfwrap_test.py',
+                            f'deactivate',
+                            ]
+                command = 'true'
+                for c in commands:
+                    command += f' && echo == running: {c}'
+                    command += f' && {c}'
+                jlib.system( command)
 
             elif arg == '--test-swig':
                 test_swig()
