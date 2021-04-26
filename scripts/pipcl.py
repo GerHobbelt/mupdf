@@ -65,6 +65,7 @@ class Package:
             fn_build = None,
             fn_clean = None,
             fn_sdist = None,
+            root_dir = None,
             ):
         '''
         name
@@ -109,9 +110,16 @@ class Package:
         fn_clean
             A function taking a single arg <all_> that cleans generated files.
             <all_> is true iff --all is in argv.
+
+            If <root_dir> is specified, this function can also returns a list
+            of files/directories to be deleted; we assert that each of these
+            paths startswith <root_dir>.
         fn_sdist
             A function taking no args that returns a list of paths, e.g. from
             git_items(), for files that should be copied into the sdist.
+        root_dir:
+            Root of package; used as a check when deleting paths returned by
+            fn_clean().
         '''
         self.name = name
         self.version = version
@@ -130,6 +138,7 @@ class Package:
         self.fn_build = fn_build
         self.fn_clean = fn_clean
         self.fn_sdist = fn_sdist
+        self.root_dir = os.path.abspath(root_dir)
 
 
     def build_wheel(self, wheel_directory, config_settings=None, metadata_directory=None):
@@ -175,7 +184,7 @@ class Package:
             #
             for item in items:
                 from_, to_ = _fromto(item)
-                add_file(from_, to_)
+                add_file(from_, f'{self.name}/{to_}')
 
             dist_info_path = f'{self.name}-{self.version}.dist-info'
             # Add <name>-<version>.dist-info/WHEEL.
@@ -282,8 +291,20 @@ class Package:
         '''
         Called by handle_argv().
         '''
-        if self.fn_clean:
-            self.fn_clean(all_)
+        if not self.fn_clean:
+            return
+        paths = self.fn_clean(all_)
+        if paths:
+            assert self.root_dir, \
+                    'fn_clean() returned paths but <root_dir> was not specified'
+            if isinstance(paths, str):
+                paths = paths,
+            for path in paths:
+                path = os.path.abspath(path)
+                assert path.startswith(self.root_dir), \
+                        f'path={path!r} does not start with root_dir={root_dir!r}'
+                _log(f'would remove: {path}')
+                if 0: shutil.rmtree(path, ignore_errors=True)
 
 
     def argv_install(self, record_path):
