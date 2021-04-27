@@ -270,7 +270,7 @@ def test(path):
 
 
 if __name__ == '__main__':
-    log(f'cpu=x{32 if sys.maxsize == 2**31 else 64} python_version={platform.python_version()}')
+    log(f'cpu=x{32 if sys.maxsize == 2**31-1 else 64} python_version={platform.python_version()}')
     paths = sys.argv[1:]
     if not paths:
         paths = [
