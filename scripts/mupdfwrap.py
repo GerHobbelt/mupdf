@@ -6148,10 +6148,6 @@ class Cpu:
             self.windows_suffix = '64'      # mupdfcpp64.dll
         else:
             assert 0, f'Unrecognised cpu name: {name}'
-    #def build_shared( self):
-    #    if g_windows:
-    #        return f'build/shared-release-{self.name}'
-    #    return 'build/shared-release'
 
     def __str__(self):
         return self.name
@@ -6160,6 +6156,7 @@ def python_version():
     return '.'.join(platform.python_version().split('.')[:2])
 
 def cpu_name():
+    #log(f'sys.maxsize={hex(sys.maxsize)}')
     return f'x{32 if sys.maxsize == 2**31 else 64}'
 
 class BuildDirs:
@@ -6205,11 +6202,11 @@ class BuildDirs:
             log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
         if g_windows:
             m = re.match( 'shared-release(-(x[0-9]+))?(-py([0-9.]+))?$', os.path.basename(self.dir_so))
-            log(f'self.dir_so={self.dir_so} {os.path.basename(self.dir_so)} m={m}')
+            #log(f'self.dir_so={self.dir_so} {os.path.basename(self.dir_so)} m={m}')
             assert m, f'Failed to parse dir_so={self.dir_so!r} - should be *-x32|x64-pyA.B'
             self.cpu = Cpu( m.group(2))
             self.python_version = m.group(4)
-            log(f'cpu={self.cpu} python_version={self.python_version} dir_so={dir_so}')
+            #log(f'cpu={self.cpu} python_version={self.python_version} dir_so={dir_so}')
         else:
             self.cpu = Cpu(cpu_name())
             self.python_version = python_version()
@@ -6222,6 +6219,19 @@ def to_pickle( obj, path):
 def from_pickle( path):
     with open( path, 'rb') as f:
         return pickle.load( f)
+
+def cmd_run_multiple(commands, prefix=None):
+    '''
+    Windows-only.
+
+    Runs multiple commands joined by &&, using cmd.exe if we are running under
+    Cygwin. We cope with commands that already contain double-quote characters.
+    '''
+    if g_cygwin:
+        command = 'cmd.exe /V /C @ ' + ' "&&" '.join(commands)
+    else:
+        command = ' && '.join(commands)
+    jlib.system(command, verbose=1, out='log', prefix=prefix)
 
 
 def find_python( cpu, version=None):
@@ -6261,7 +6271,7 @@ def find_python( cpu, version=None):
     version_list_highest = [0]
     ret = None
     for line in text.split('\n'):
-        log( '{line=}')
+        log( '    {line}')
         m = re.match( '^ *-([0-9.]+)-((64)|(32)) +([^\\r*]+)[\\r*]*$', line)
         if not m:
             continue
@@ -6352,6 +6362,7 @@ def main():
 
                         elif action == 'm':
                             # Build libmupdf.so.
+                            jlib.log( 'Building libmupdf.so ...')
                             assert not g_windows, 'Cannot do "-b m" on Windows; C library is integrated into C++ library built by "-b 01"'
                             log( '{build_dirs.dir_mupdf=}')
                             make = 'make'
@@ -6379,10 +6390,11 @@ def main():
                                 else:
                                     raise Exception(f'Unrecognised flag {flag!r} in {flags!r} in {build_dirs.dir_so!r}')
 
-                            jlib.system( command, prefix=jlib.log_text(), out=sys.stderr, verbose=1)
+                            jlib.system( command, prefix=jlib.log_text(), out='log', verbose=1)
 
                         elif action == '0':
                             # Generate C++ code that wraps the fz_* API.
+                            jlib.log( 'Generating C++ source code ...')
                             if not clang:
                                 raise Exception('Cannot do "-b 0" because failed to import clang.')
                             namespace = 'mupdf'
@@ -6475,13 +6487,13 @@ def main():
                                 # contain all C functions internally - there is
                                 # no mupdf.dll.
                                 #
+                                log(f'Building mupdfcpp.dll by running devenv ...')
                                 command = (
                                         f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
                                         f' platform/win32/mupdf.sln'
                                         f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfcpp'
                                         )
-                                log(f'Building mupdfcpp.dll ...')
                                 jlib.system(command, verbose=1, out='log')
 
                                 log(f'Copying mupdfcpp.dll to: {build_dirs.dir_so}')
@@ -6489,7 +6501,7 @@ def main():
                                 shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}/mupdfcpp.dll')
 
                             else:
-
+                                jlib.log( 'Compiling generated C++ source code to create libmupdfcpp.so ...')
                                 out_so = f'{build_dirs.dir_mupdf}/platform/c++/libmupdfcpp.so'
                                 if build_dirs.dir_so:
                                     out_so = f'{build_dirs.dir_so}/libmupdfcpp.so'
@@ -6520,6 +6532,7 @@ def main():
 
                         elif action == '2':
                             # Generate C++ code for python module using SWIG.
+                            jlib.log( 'Generating Python module source code using SWIG ...')
                             if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
                                 raise Exception( 'action "0" required')
                             with jlib.LogPrefixScope( f'swig: '):
@@ -6541,6 +6554,7 @@ def main():
                         elif action == '3':
                             # Compile and link mupdfcpp_swig.cpp to create _mupdf.so.
                             #
+                            jlib.log( 'Compiling/linking generated Python module source code to create _mupdf.so ...')
 
                             if g_windows:
                                 # We run Windows compiler and linker manually;
@@ -6558,15 +6572,8 @@ def main():
                                 vcvars = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{build_dirs.cpu.bits}.bat'
                                 vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{build_dirs.cpu.windows_name}'
 
-                                def cmd_run_multiple(commands):
-                                    if g_cygwin:
-                                        command = 'cmd.exe /V /C @ ' + ' "&&" '.join(commands)
-                                    else:
-                                        command = ' && '.join(commands)
-                                    jlib.system(command, verbose=1, out='log')
-
                                 command = (
-                                        f' "{vs_root}/cl.exe"'
+                                        f'"{vs_root}/cl.exe"'
                                         #f' /nologo'
                                         f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
                                         f' /D "NDEBUG"'
@@ -6607,11 +6614,11 @@ def main():
                                         f' platform/python/mupdfcpp_swig.cpp'
                                         )
                                 log('Compiling SWIG-generated code.')
-                                cmd_run_multiple( [f'"{vcvars}"', command])
+                                cmd_run_multiple( [f'"{vcvars}"', command], prefix='cl.exe: ')
 
                                 # Link.
                                 command = (
-                                        f' "{vs_root}/link.exe"'
+                                        f'"{vs_root}/link.exe"'
                                         #f' /NOLOGO'
                                         f' /DLL'
                                         f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
@@ -6641,17 +6648,17 @@ def main():
                                         f' mupdfcpp.lib'
                                         )
                                 log('Linking SWIG-generated code.')
-                                cmd_run_multiple( [f'"{vcvars}"', command])
-
-                                log('Copying _mupdf.dll to build/shared-release/')
+                                cmd_run_multiple( [f'"{vcvars}"', command], prefix='link.exe: ')
 
                                 # To be found at runtime, we need to rename _mupdf.dll to _mupdf.pyd. As usual, totally
                                 # undocumented. Discovered this at:
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
-                                log( 'Copying _mupdf.dll to {build_dirs.dir_so}/_mupdf.pyd')
+                                from_ = f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll'
+                                to_ = f'{build_dirs.dir_so}/_mupdf.pyd'
+                                log( 'Copying {from_} to {to_}')
                                 os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll', f'{build_dirs.dir_so}/_mupdf.pyd')
+                                shutil.copy2( from_, to_)
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -6747,7 +6754,7 @@ def main():
                             a_path = os.path.join(dirpath, filename)
                             b_path = os.path.join( b, root, filename)
                             command = f'diff -u {a_path} {b_path}'
-                            jlib.system( command, raise_errors=False)
+                            jlib.system( command, out='log', raise_errors=False)
 
             elif arg == '--doc':
 
@@ -6803,7 +6810,10 @@ def main():
                     elif lang == 'python':
                         ld_library_path = os.path.abspath( f'{build_dirs.dir_so}')
                         pythonpath = build_dirs.dir_so
-                        jlib.system( f'cd {build_dirs.dir_so}; LD_LIBRARY_PATH={ld_library_path} PYTHONPATH={pythonpath} pydoc3 -w ./mupdf.py')
+                        jlib.system(
+                                f'cd {build_dirs.dir_so}; LD_LIBRARY_PATH={ld_library_path} PYTHONPATH={pythonpath} pydoc3 -w ./mupdf.py',
+                                out='log',
+                                )
                         path = f'{build_dirs.dir_so}/mupdf.html'
                         assert os.path.isfile( path)
                         log( 'have created: {path}')
@@ -6884,7 +6894,7 @@ def main():
                             f'&&deactivate'
                             f'"'
                             )
-                    jlib.system(command, verbose=1)
+                    jlib.system(command, verbose=1, out='log')
 
                     # Find the generated wheel.
                     #
@@ -6898,9 +6908,9 @@ def main():
                     # whether this DLL should be installed somewhere different?
                     #
                     command = ('cmd.exe /c "true'
-                            f'&&{pylocal}\\Scripts\\activate.bat'
-                            f'&&(check-wheel-contents --toplevel _mupdf.pyd,mupdf.py,mupdfcpp.dll {bdist}||true)'
-                            f'&&deactivate'
+                            f'&& {pylocal}\\Scripts\\activate.bat'
+                            f'&& (check-wheel-contents --toplevel _mupdf.pyd,mupdf.py,mupdfcpp.dll {bdist}||true)'
+                            f'&& deactivate'
                             f'"'
                             )
                     text = jlib.system(command, verbose=1, out='return')
@@ -6926,7 +6936,7 @@ def main():
                             f'&&deactivate'
                             f'"'
                             )
-                    jlib.system(command, verbose=1)
+                    jlib.system(command, verbose=1, out='log')
 
                 else:
                     # Unix. Create bdist, check with check-wheel-contents, run
@@ -6945,7 +6955,7 @@ def main():
                             f' && ./scripts/mupdfwrap_test.py'
                             f' && deactivate'
                             )
-                    jlib.system(command, verbose=1)
+                    jlib.system(command, verbose=1, out='log')
 
             elif arg == '--py-package-create-sdist':
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
@@ -6953,6 +6963,7 @@ def main():
                         + f' && ls -lh {build_dirs.dir_mupdf}/dist'
                         ,
                         verbose=1,
+                        out='log',
                         )
 
             elif arg == '--py-package-create-install-test':
@@ -6963,6 +6974,7 @@ def main():
                         ,
                         prefix='py_package_createinstall: ',
                         verbose=1,
+                        out='log',
                         )
                 mupdf_sdists = glob.glob('dist/mupdf-*.tar.gz')
                 assert(len(mupdf_sdists) == 1)
@@ -6979,6 +6991,7 @@ def main():
                         ,
                         prefix='py_package_createinstall: ',
                         verbose=1,
+                        out='log',
                         )
 
             elif arg == '--py-package-testupload':
@@ -7023,6 +7036,7 @@ def main():
                         + f' && deactivate',
                         prefix='py-package-testdownload: ',
                         verbose=1,
+                        out='log',
                         )
 
             elif arg == '--py-package-upload':
@@ -7057,6 +7071,7 @@ def main():
                         + f' && deactivate',
                         prefix='py-package-download: ',
                         verbose=1,
+                        out='log',
                         )
 
             elif arg == '--py-package-sdist-install':
@@ -7073,6 +7088,7 @@ def main():
                         f' && deactivate'
                         ,
                         verbose=1,
+                        out='log',
                         )
 
             elif arg == '--py-package-sdist-wheel-install':
@@ -7091,6 +7107,7 @@ def main():
                         f' && deactivate'
                         ,
                         verbose=1,
+                        out='log',
                         )
 
             elif arg == '--py-package-multi':
@@ -7167,6 +7184,7 @@ def main():
                         command,
                         raise_errors=False,
                         verbose=False,
+                        out='log',
                         )
                 sys.exit(e)
 
@@ -7217,9 +7235,7 @@ def main():
                             f' /Project mupdfcpp'
                             )
                     log(f'Building mupdfcpp.dll')
-                    jlib.system(command, verbose=1)
-
-
+                    jlib.system(command, verbose=1, out='log')
 
             elif arg == '--sync':
                 sync_docs = False
@@ -7267,8 +7283,7 @@ def main():
                 for i in range( len( files)):
                     files[i] = files[i].replace( '/mupdf/', '/./mupdf/')
 
-                jlib.system( f'rsync -aiRz {" ".join( files)} {destination}', verbose=1)
-
+                jlib.system( f'rsync -aiRz {" ".join( files)} {destination}', verbose=1, out='log')
 
             elif arg == '--test' or arg == '-t':
 
@@ -7295,10 +7310,7 @@ def main():
                 log( 'running mupdf_test.py...')
                 command = f'{command_prefix} ./scripts/mupdfwrap_test.py'
                 with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
-                    def outfn( text):
-                        log( text, nv=0)
-                        f.write( text)
-                    jlib.system( command, out = outfn, verbose=1)
+                    jlib.system( command, out='log', verbose=1)
 
                 # Run mutool.py.
                 #
@@ -7337,7 +7349,7 @@ def main():
                 for c in commands:
                     command += f' && echo == running: {c}'
                     command += f' && {c}'
-                jlib.system( command)
+                jlib.system( command, verbose=1, out='log')
 
             elif arg == '--test-swig':
                 test_swig()
