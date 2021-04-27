@@ -102,10 +102,9 @@ if g_windows:
             '_mupdf.pyd',   # Python internals.
             'mupdf.py',     # Python.
             ]
-    if sys.maxsize == 2**31 - 1:
-        build_dir = 'build/shared-release-x32'
-    else:
-        build_dir = 'build/shared-release-x64'
+    cpu = 'x32' if sys.maxsize == 2**31 - 1 else 'x64'
+    python_version = '.'.join(platform.python_version().split('.')[:2])
+    build_dir = f'build/shared-release-{cpu}-py{python_version}'
 else:
     # Unix.
     out_names = [
