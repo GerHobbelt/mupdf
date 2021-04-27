@@ -258,8 +258,8 @@ def build():
     b += '3'        # Build SWIG library _mupdf.so.
 
     command = (
-            f'cd {mupdf_dir}'
-            f' && {sys.executable} ./scripts/mupdfwrap.py'
+            f'cd "{mupdf_dir}"'
+            f' && "{sys.executable}" ./scripts/mupdfwrap.py'
                 f'{" --swig-windows-auto" if g_windows else ""}'
                 f' -d {build_dir}'
                 f' -b {b}'
