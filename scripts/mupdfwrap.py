@@ -446,6 +446,21 @@ Usage:
             Create sdist and use pip to install via a wheel, and test with
             scripts/mupdfwrap_test.py.
 
+        --py-package-upload-all [-v <version>] <upload>
+            Windows only.
+
+            Creates sdist and all possible wheels and uploads to PyPi.
+
+            version:
+                If specified, we force created wheels to have
+                the specified version and don't create/upload
+                sdist. E.g. "1.18.0.20210330.1800".
+            upload:
+                'pypi': upload to pypi.org.
+                'testpypi': upload to test.pypi.org.
+                '': do not upload.
+                '.': do not upload.
+
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
 
@@ -6326,14 +6341,26 @@ def find_python( cpu, version=None):
     raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
 
 
-def make_wheel( do_build, cpu, python_version, upload=False):
+def make_wheel( do_build, cpu=None, python_version=None, upload=False, version=None):
     '''
-    Makes wheel and checks it runs ok with scripts/mupdfwrap_test.py.
+    Makes wheel, checks that check-wheel-contents accepts it, and checks it
+    runs ok with scripts/mupdfwrap_test.py.
+
+    do_build
+        If false we don't build anything, but just copy files to build/shared-*/.
+    cpu
+        None for current cpu, otherwise 'x32' or 'x64'. Must
+        be None if not Windows.
+    python_version
+        Two-digit python version number e.g. '3.8', or None. Must be None if
+        not Windows.
+
+    Returns path of wheel, which will be in its own directory.
     '''
     log(f'cpu={cpu} python_version={python_version}')
 
-    # Check we can create and install and use a bdist, using a
-    # fresh venv each time.
+    # We create a clean Python venv for building and testing the wheel; the
+    # wheel itself is placed in a new empty directory.
     #
     pylocal = f'pylocal-wheel-{cpu}-{python_version}'
     shutil.rmtree(pylocal, ignore_errors=True)
@@ -6358,19 +6385,24 @@ def make_wheel( do_build, cpu, python_version, upload=False):
             py += '-3'
         if cpu in ('x32', 'x64'):
             py += f'-{cpu[1:]}'
+        else:
+            assert cpu is None, f'Unrecognised {cpu=}'
 
         # Create bdist.
         #
+        set_do_build = '' if do_build else f'&&set MUPDF_SETUP_DO_BUILD=0'
+        set_version = f'&&set MUPDF_SETUP_VERSION={version}' if version else ""
         command = ('cmd.exe /c "true'
                 f'&&{py} -m venv {pylocal}'
                 f'&&{pylocal}\\Scripts\\activate.bat'
                 f'&&pip install clang check-wheel-contents'
-                f'{"" if do_build else "&&set MUPDF_SETUP_DO_BUILD=0"}'
+                f'{set_do_build}'
+                f'{set_version}'
                 f'&&{py} setup.py -d {wheel_dir} bdist_wheel'
                 f'&&deactivate'
                 f'"'
                 )
-        jlib.system(command, verbose=1, out='log', prefix='creating wheel: ')
+        jlib.system(command, verbose=1, out='log', prefix=f'creating wheel {cpu} {python_version}: ')
 
         # Find the generated wheel.
         #
@@ -6422,12 +6454,14 @@ def make_wheel( do_build, cpu, python_version, upload=False):
         #
         if cpu or python_version:
             raise Exception(f'Cannot select non-default cpu or python-version on Unix')
+        set_do_build = '' if do_build else f'MUPDF_SETUP_DO_BUILD=0 '
+        set_version = f'MUPDF_SETUP_VERSION={version} ' if version else ''
         command = ('true'
                 f' && (rm -r {pylocal} || true)'
                 f' && python3 -m venv {pylocal}'
                 f' && . {pylocal}/bin/activate'
                 f' && pip install clang check-wheel-contents'
-                f' && {"" if do_build else "MUPDF_SETUP_DO_BUILD=0"} ./setup.py -d {wheel_dir} bdist_wheel'
+                f' && {set_do_build}{set_version}./setup.py -d {wheel_dir} bdist_wheel'
                 f' && check-wheel-contents --toplevel libmupdf.so,libmupdfcpp.so,_mupdf.so,mupdf.py {wheel_dir}/*'
                 f' && pip install {wheel_dir}/*'
                 f' && ./scripts/mupdfwrap_test.py'
@@ -6440,7 +6474,6 @@ def make_wheel( do_build, cpu, python_version, upload=False):
         wheel_path = wheel_path[0]
 
     return wheel_path
-
 
 
 def main():
@@ -7163,6 +7196,90 @@ def main():
                         verbose=1,
                         out='log',
                         )
+
+            elif arg == '--py-package-upload-all':
+                #in_sdist = os.path.exists(f'{build_dirs.dir_mupdf}/PKG-INFO')
+                #if not in_sdist:
+                #    raise Exception( f'Refusing to generate and upload wheels because we are not an sdist, so individual wheels will have different date/time version number')
+                version = None
+                do_build = True
+                while 1:
+                    a = args.next()
+                    if not a.startswith('-'):
+                        upload_to = a
+                        break
+                    elif a == '-b':
+                        do_build = int(args.next())
+                    elif a == '-v':
+                        version = args.next()
+                    else:
+                        assert 0, f'Unexpected after {arg}: {a!r}'
+                assert upload_to in ('', '.', 'pypi', 'testpypi'), \
+                        f'Unrecognised arg should be "", ".", "pypi" or "testpypi": {upload_to}'
+
+                if version:
+                    log( f'Not creating sdist because version was specified: {version}')
+                    sdist = None
+                else:
+                    # Create sdist.
+                    jlib.remove( 'dist')
+                    jlib.system( './setup.py sdist', out='log', prefix='sdist: ')
+                    sdist = glob.glob( 'dist/*')
+                    assert len(sdist) == 1, f'sdist={sdist}'
+                    sdist = sdist[0]
+                    m = re.match( '^mupdf-(.*)[.]tar[.]gz$', os.path.basename(sdist))
+                    assert(m)
+                    version = m.group(1)
+                    log( '{sdist_version=}')
+
+                # Create wheels.
+                wheels = []
+                if g_windows:
+                    for cpu in 'x32', 'x64':
+                        for python_version in ('3.8', '3.9'):
+                            wheel = make_wheel(
+                                    do_build=False,
+                                    cpu=cpu,
+                                    python_version=python_version,
+                                    upload=False,
+                                    version=version,
+                                    )
+                            wheels.append( wheel)
+                else:
+                    assert 0, 'Not uploading Unix wheel.'
+                    wheel = make_wheel( do_build=True, upload=False)
+                    wheels.append( wheel)
+
+                if upload_to in ('pypi', 'testpypi'):
+                    pylocal = f'pylocal-wheel-upload'
+                    shutil.rmtree(pylocal, ignore_errors=True)
+                    commands = []
+                    if g_windows:
+                        commands.append( f'py -m venv {pylocal}')
+                        commands.append( f'{pylocal}\\Scripts\\activate.bat')
+                    else:
+                        commands.append( f'python -m venv {pylocal}')
+                        commands.append( f'. {pylocal}/bin/activate')
+                    commands.append( f'python -m pip install --upgrade twine')
+
+                    c = f'python -m twine upload-x '
+                    if upload_to == 'testpypi':
+                        c += '--repository testpypi '
+                    if sdist:
+                        c += f'{sdist} '
+                    c += ' '.join(wheels)
+                    commands.append( c)
+
+                    if g_windows:
+                        command = '&&'.join(commands)
+                        command = 'cmd.exe /c "' + command + '"'
+                    else:
+                        command = ' && '.join(commands)
+
+                    # We use os.system() because twine upload needs user input of password.
+                    #
+                    log( 'Running: {command}')
+                    os.system( command)
 
             elif arg == '--py-package-multi':
                 # Investigating different combinations of pip, pyproject.toml,
