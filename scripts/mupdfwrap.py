@@ -6130,7 +6130,19 @@ def test_swig():
 
 class Cpu:
     '''
-    A CPU's different representations as text.
+    For Windows only. Paths and names that depend on cpu.
+
+    Members:
+        .bits
+            .
+        .windows_subdir
+            '' or 'x64/', e.g. platform/win32/x64/Release.
+        .windows_name
+            'x86' or 'x64'.
+        .windows_config
+            'x64' or 'Win32', e.g. /Build Release|x64
+        .windows_suffix
+            '64' or '', e.g. mupdfcpp64.dll
     '''
     def __init__(self, name):
         self.name = name
@@ -6142,10 +6154,10 @@ class Cpu:
             self.windows_suffix = ''
         elif name == 'x64':
             self.bits = 64
-            self.windows_subdir = 'x64/'    # platform/win32/x64/Release
-            self.windows_name = 'x64'       #
-            self.windows_config = 'x64'     # /Build Release|x64
-            self.windows_suffix = '64'      # mupdfcpp64.dll
+            self.windows_subdir = 'x64/'
+            self.windows_name = 'x64'
+            self.windows_config = 'x64'
+            self.windows_suffix = '64'
         else:
             assert 0, f'Unrecognised cpu name: {name}'
 
@@ -6153,9 +6165,15 @@ class Cpu:
         return self.name
 
 def python_version():
+    '''
+    Returns two-digit version number of Python as a string, e.g. '3.9'.
+    '''
     return '.'.join(platform.python_version().split('.')[:2])
 
 def cpu_name():
+    '''
+    Returns 'x32' or 'x64' depending on Python build.
+    '''
     #log(f'sys.maxsize={hex(sys.maxsize)}')
     return f'x{32 if sys.maxsize == 2**31 else 64}'
 
@@ -6167,32 +6185,32 @@ class BuildDirs:
 
         # Assume we are in mupdf/scripts/.
         file_ = os.path.abspath( __file__)
-        assert file_.endswith( f'{os.sep}scripts{os.sep}mupdfwrap.py'), '__file__=%s file_=%s' % (__file__, file_)
+        assert file_.endswith( f'{os.sep}scripts{os.sep}mupdfwrap.py'), \
+                'Unexpected __file__=%s file_=%s' % (__file__, file_)
         dir_mupdf = os.path.abspath( f'{file_}/../../')
         assert not dir_mupdf.endswith( '/')
 
         # Directories used with --build.
-        self.dir_mupdf      = dir_mupdf
+        self.dir_mupdf = dir_mupdf
 
         # Directory used with --ref.
-        self.ref_dir        = os.path.abspath( f'{self.dir_mupdf}/mupdfwrap_ref')
+        self.ref_dir = os.path.abspath( f'{self.dir_mupdf}/mupdfwrap_ref')
         assert not self.ref_dir.endswith( '/')
 
-        # Default to release build.
         if g_windows:
+            # Default build depends on the Python that we are running under.
+            #
             self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-{cpu_name()}-py{python_version()}')
         else:
             self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
-        #self.dir_so_without_cpu = self.dir_so
 
     def set_dir_so( self, dir_so):
+        '''
+        Sets self.dir_so and also updates self.cpp_flags etc.
+        '''
         dir_so = os.path.abspath( dir_so)
         self.dir_so = dir_so
 
-        # Compile flags that we use to build libmupdfcpp.so depend on the flags
-        # used to build libmupdf.so - mupdf code is different depending on
-        # whether NDEBUG is defined.
-        #
         if 0: pass  # lgtm [py/unreachable-statement]
         elif '-debug' in dir_so:    self.cpp_flags = '-g'
         elif '-release' in dir_so:  self.cpp_flags = '-O2 -DNDEBUG'
@@ -6200,7 +6218,10 @@ class BuildDirs:
         else:
             self.cpp_flags = None
             log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
+
+        # Set self.cpu and self.python_version.
         if g_windows:
+            # Infer from self.dir_so.
             m = re.match( 'shared-release(-(x[0-9]+))?(-py([0-9.]+))?$', os.path.basename(self.dir_so))
             #log(f'self.dir_so={self.dir_so} {os.path.basename(self.dir_so)} m={m}')
             assert m, f'Failed to parse dir_so={self.dir_so!r} - should be *-x32|x64-pyA.B'
@@ -6208,15 +6229,22 @@ class BuildDirs:
             self.python_version = m.group(4)
             #log(f'cpu={self.cpu} python_version={self.python_version} dir_so={dir_so}')
         else:
+            # Use Python we are running under.
             self.cpu = Cpu(cpu_name())
             self.python_version = python_version()
 
 
 def to_pickle( obj, path):
+    '''
+    Pickles <obj> to file <path>.
+    '''
     with open( path, 'wb') as f:
         pickle.dump( obj, f)
 
 def from_pickle( path):
+    '''
+    Returns contents of file <path> unpickled.
+    '''
     with open( path, 'rb') as f:
         return pickle.load( f)
 
@@ -6267,7 +6295,9 @@ def find_python( cpu, version=None):
         cpu = Cpu(cpu_name())
     if version is None:
         version = python_version()
-    text = jlib.system('py -0p', out='return')
+    command = 'py -0p'
+    log('Running: {command}')
+    text = jlib.system(command, out='return')
     version_list_highest = [0]
     ret = None
     for line in text.split('\n'):
@@ -6300,12 +6330,16 @@ def main():
 
     # Set up behaviour of jlib.log().
     #
-    jlib.g_log_prefixes.append( jlib.LogPrefixTime( elapsed=True))
+    jlib.g_log_prefixes.append( jlib.LogPrefixTime( time_=False, elapsed=True))
     jlib.g_log_prefixes.append( jlib.g_log_prefix_scopes)
     jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
 
+    # Set default build directory. Can br overridden by '-d'.
+    #
     build_dirs = BuildDirs()
 
+    # Set default swig.
+    #
     swig = 'swig'
 
     args = jlib.Args( sys.argv[1:])
