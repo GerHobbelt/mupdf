@@ -401,8 +401,14 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
-        --py-package-bdist_wheel <do-build>
-            <do-build> is 0 or 1.
+        --py-package-bdist_wheel <args> <cpu> <python-version>
+            args:
+                -b 0 | 1
+                    Whether to do a build or not. Default is 1.
+            cpu:
+                'x32' or 'x64'. If '.' or '' we use current Python.
+            python-version
+                E.g. '3.8'. If '.' or '' we use current Python.
 
             Checks we can create a wheel, and checks it is ok with
             check-wheel-contents.
@@ -524,6 +530,7 @@ import jlib
 os_name = platform.system()
 
 g_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
+g_cygwin = os_name.startswith('CYGWIN')
 g_openbsd = os_name == 'OpenBSD'
 g_linux = os_name == 'Linux'
 
@@ -5974,28 +5981,28 @@ def build_swig(
         # cope with some code in system headers.
         #
         # So instead we copy include/mupdf/pdf/object.h into
-        # {build_dirs.dir_mupdf}platform/python/include/mupdf/pdf/object.h,
+        # {build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf/object.h,
         # manually expanding the #include using a simpe .replace() call. The
-        # we specify {build_dirs.dir_mupdf}platform/python/include as the
+        # we specify {build_dirs.dir_mupdf}/platform/python/include as the
         # first include path so that our modified mupdf/pdf/object.h will get
         # included in preference to the original.
         #
-        os.makedirs(f'{build_dirs.dir_mupdf}platform/python/include/mupdf/pdf', exist_ok=True)
-        with open( f'{build_dirs.dir_mupdf}include/mupdf/pdf/object.h') as f:
+        os.makedirs(f'{build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf', exist_ok=True)
+        with open( f'{build_dirs.dir_mupdf}/include/mupdf/pdf/object.h') as f:
             o = f.read()
-        with open( f'{build_dirs.dir_mupdf}include/mupdf/pdf/name-table.h') as f:
+        with open( f'{build_dirs.dir_mupdf}/include/mupdf/pdf/name-table.h') as f:
             name_table_h = f.read()
         oo = o.replace( '#include "mupdf/pdf/name-table.h"\n', name_table_h)
         assert oo != o
-        jlib.update_file( oo, f'{build_dirs.dir_mupdf}platform/python/include/mupdf/pdf/object.h')
+        jlib.update_file( oo, f'{build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf/object.h')
 
-    swig_i      = f'{build_dirs.dir_mupdf}platform/python/mupdfcpp_swig.i'
-    include1    = f'{build_dirs.dir_mupdf}include/'
-    include2    = f'{build_dirs.dir_mupdf}platform/c++/include'
-    swig_cpp    = f'{build_dirs.dir_mupdf}platform/python/mupdfcpp_swig.cpp'
-    swig_py     = f'{build_dirs.dir_so}mupdf.py'
+    swig_i      = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.i'
+    include1    = f'{build_dirs.dir_mupdf}/include/'
+    include2    = f'{build_dirs.dir_mupdf}/platform/c++/include'
+    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
+    swig_py     = f'{build_dirs.dir_so}/mupdf.py'
 
-    os.makedirs( f'{build_dirs.dir_mupdf}platform/python', exist_ok=True)
+    os.makedirs( f'{build_dirs.dir_mupdf}/platform/python', exist_ok=True)
     os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
     jlib.update_file( text, swig_i)
 
@@ -6141,15 +6148,19 @@ class Cpu:
             self.windows_suffix = '64'      # mupdfcpp64.dll
         else:
             assert 0, f'Unrecognised cpu name: {name}'
-    def build_shared( self):
-        if g_windows:
-            return f'build/shared-release-{self.name}'
-        return 'build/shared-release'
+    #def build_shared( self):
+    #    if g_windows:
+    #        return f'build/shared-release-{self.name}'
+    #    return 'build/shared-release'
 
     def __str__(self):
         return self.name
 
+def python_version():
+    return '.'.join(platform.python_version().split('.')[:2])
 
+def cpu_name():
+    return f'x{32 if sys.maxsize == 2**31 else 64}'
 
 class BuildDirs:
     '''
@@ -6161,28 +6172,24 @@ class BuildDirs:
         file_ = os.path.abspath( __file__)
         assert file_.endswith( f'{os.sep}scripts{os.sep}mupdfwrap.py'), '__file__=%s file_=%s' % (__file__, file_)
         dir_mupdf = os.path.abspath( f'{file_}/../../')
-        if not dir_mupdf.endswith( '/'):
-            dir_mupdf += '/'
+        assert not dir_mupdf.endswith( '/')
 
         # Directories used with --build.
         self.dir_mupdf      = dir_mupdf
 
         # Directory used with --ref.
-        self.ref_dir        = os.path.abspath( f'{self.dir_mupdf}mupdfwrap_ref/')
-        if not self.ref_dir.endswith( '/'):
-            self.ref_dir += '/'
+        self.ref_dir        = os.path.abspath( f'{self.dir_mupdf}/mupdfwrap_ref')
+        assert not self.ref_dir.endswith( '/')
 
         # Default to release build.
         if g_windows:
-            self.set_dir_so( f'{self.dir_mupdf}build/shared-release-x64/')
+            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-{cpu_name()}-py{python_version()}')
         else:
-            self.set_dir_so( f'{self.dir_mupdf}build/shared-release/')
+            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
         #self.dir_so_without_cpu = self.dir_so
 
     def set_dir_so( self, dir_so):
         dir_so = os.path.abspath( dir_so)
-        if not dir_so.endswith( '/'):
-            dir_so += '/'
         self.dir_so = dir_so
 
         # Compile flags that we use to build libmupdfcpp.so depend on the flags
@@ -6196,11 +6203,16 @@ class BuildDirs:
         else:
             self.cpp_flags = None
             log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
-
-        if self.dir_so.endswith('-x32/'):
-            self.cpu = Cpu('x32')
-        if self.dir_so.endswith('-x64/'):
-            self.cpu = Cpu('x64')
+        if g_windows:
+            m = re.match( 'shared-release(-(x[0-9]+))?(-py([0-9.]+))?$', os.path.basename(self.dir_so))
+            log(f'self.dir_so={self.dir_so} {os.path.basename(self.dir_so)} m={m}')
+            assert m, f'Failed to parse dir_so={self.dir_so!r} - should be *-x32|x64-pyA.B'
+            self.cpu = Cpu( m.group(2))
+            self.python_version = m.group(4)
+            log(f'cpu={self.cpu} python_version={self.python_version} dir_so={dir_so}')
+        else:
+            self.cpu = Cpu(cpu_name())
+            self.python_version = python_version()
 
 
 def to_pickle( obj, path):
@@ -6212,57 +6224,66 @@ def from_pickle( path):
         return pickle.load( f)
 
 
-def find_python( cpu):
+def find_python( cpu, version=None):
     '''
-    Windows only.
+    Windows only. Finds installed Python with specific word size and version.
 
-    Returns (path, version, root) for python that matches <cpu>, which should
-    be a Cpu instance.
+    cpu:
+        A Cpu instance. If None, we use whatever we are running on.
+    version:
+        Two-digit Python version as a string such as '3.8'. If None we use
+        current Python's version.
+
+    Returns (path, version, root, cpu):
+
+        path:
+            Path of python binary.
+        version:
+            Version as a string, e.g. '3.9'. Same as <version> if not None,
+            otherwise the inferred version.
+        root:
+            The parent directory of <path>; allows
+            Python headers to be found, for example
+            <root>/include/Python.h.
+        cpu:
+            A Cpu instance, same as <cpu> if not None, otherwise the inferred
+            cpu.
 
     We parse the output from 'py -0p' to find all available python
     installations.
-
-    path:
-        Path of python binary.
-    version:
-        Version as a string, e.g. '3.9'.
-    root:
-        The parent directory of <path>; allows
-        Python headers to be found, for example
-        <root>/include/Python.h.
     '''
     assert g_windows
+    if cpu is None:
+        cpu = Cpu(cpu_name())
+    if version is None:
+        version = python_version()
     text = jlib.system('py -0p', out='return')
     version_list_highest = [0]
     ret = None
     for line in text.split('\n'):
         log( '{line=}')
         m = re.match( '^ *-([0-9.]+)-((64)|(32)) +([^\\r*]+)[\\r*]*$', line)
-        if m:
-            version = m.group(1)
-            version_list = [int(x) for x in version.split('.')]
-            cpu_ = int(m.group(2))
-            path = m.group(5).strip()
-            if cpu_ == cpu.bits and version_list > version_list_highest:
-                root = path[ :path.rfind('\\')]
-                ret = path, version, root
-                version_list_highest = version_list
-    if not ret:
-        raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
+        if not m:
+            continue
+        version2 = m.group(1)
+        bits = int(m.group(2))
+        if bits != cpu.bits or version2 != version:
+            continue
+        path = m.group(5).strip()
+        root = path[ :path.rfind('\\')]
+        if not os.path.exists(path):
+            # Sometimes it seems that the specified .../python.exe does not exist,
+            # and we have to change it to .../python<version>.exe.
+            #
+            assert path.endswith('.exe'), f'path={path!r}'
+            path2 = f'{path[:-4]}{version}.exe'
+            log( 'Python {path!r} does not exist; changed to: {path2!r}')
+            assert os.path.exists( path2)
+            path = path2
 
-    path, version, root = ret
-    if not os.path.exists(path):
-        # Sometimes it seems that the specified .../python.exe does not exist,
-        # and we have to change it to .../python<version>.exe.
-        #
-        assert path.endswith('.exe'), f'path={path!r}'
-        path2 = f'{path[:-4]}{version}.exe'
-        log( 'Python {path!r} does not exist; changed to: {path2!r}')
-        assert os.path.exists( path)
-        ret = path2, version, root
+        return path, version, root, cpu
 
-    return ret
-
+    raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
 
 
 def main():
@@ -6292,16 +6313,16 @@ def main():
 
             elif arg == '--build' or arg == '-b':
                 cpp_files   = [
-                        f'{build_dirs.dir_mupdf}platform/c++/implementation/classes.cpp',
-                        f'{build_dirs.dir_mupdf}platform/c++/implementation/exceptions.cpp',
-                        f'{build_dirs.dir_mupdf}platform/c++/implementation/functions.cpp',
-                        f'{build_dirs.dir_mupdf}platform/c++/implementation/internal.cpp',
+                        f'{build_dirs.dir_mupdf}/platform/c++/implementation/classes.cpp',
+                        f'{build_dirs.dir_mupdf}/platform/c++/implementation/exceptions.cpp',
+                        f'{build_dirs.dir_mupdf}/platform/c++/implementation/functions.cpp',
+                        f'{build_dirs.dir_mupdf}/platform/c++/implementation/internal.cpp',
                         ]
                 h_files = [
-                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/classes.h',
-                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/exceptions.h',
-                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/functions.h',
-                        f'{build_dirs.dir_mupdf}platform/c++/include/mupdf/internal.h',
+                        f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/classes.h',
+                        f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/exceptions.h',
+                        f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/functions.h',
+                        f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/internal.h',
                         ]
                 container_classnames = None
                 output_param_fns = None
@@ -6343,10 +6364,11 @@ def main():
 
                             command = f'cd {build_dirs.dir_mupdf} && {make} HAVE_GLUT=no HAVE_PTHREAD=yes shared=yes verbose=yes'
                             #command += ' USE_SYSTEM_FREETYPE=yes USE_SYSTEM_ZLIB=yes'
-                            prefix = f'{build_dirs.dir_mupdf}build/shared-'
+                            prefix = f'{build_dirs.dir_mupdf}/build/shared-'
                             assert build_dirs.dir_so.startswith(prefix), f'build_dirs.dir_so={build_dirs.dir_so} prefix={prefix}'
                             flags = build_dirs.dir_so[ len(prefix): ]
-                            if flags.endswith('/'):    flags = flags[:-1]
+                            assert not flags.endswith('/')
+                            #if flags.endswith('/'):    flags = flags[:-1]
                             flags = flags.split('-')
                             for flag in flags:
                                 if 0: pass   # lgtm [py/unreachable-statement]
@@ -6383,18 +6405,18 @@ def main():
                             ) = cpp_source(
                                     build_dirs.dir_mupdf,
                                     namespace,
-                                    f'{build_dirs.dir_mupdf}platform/c++/',
+                                    f'{build_dirs.dir_mupdf}/platform/c++/',
                                     header_git,
                                     swig_c,
                                     swig_python,
                                     )
 
-                            to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle')
-                            to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle')
-                            to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle')
-                            to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle')
-                            to_pickle( c_functions,             f'{build_dirs.dir_mupdf}platform/c++/c_functions.pickle')
-                            to_pickle( c_globals,               f'{build_dirs.dir_mupdf}platform/c++/c_globals.pickle')
+                            to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle')
+                            to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle')
+                            to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle')
+                            to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle')
+                            to_pickle( c_functions,             f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle')
+                            to_pickle( c_globals,               f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle')
 
                             def check_lists_equal(name, expected, actual):
                                 expected.sort()
@@ -6412,8 +6434,8 @@ def main():
                             check_lists_equal('C++ headers', h_files, h_files_actual)
 
                             for dir_ in (
-                                    f'{build_dirs.dir_mupdf}platform/c++/implementation/',
-                                    f'{build_dirs.dir_mupdf}platform/c++/include/', '.h',
+                                    f'{build_dirs.dir_mupdf}/platform/c++/implementation/',
+                                    f'{build_dirs.dir_mupdf}/platform/c++/include/', '.h',
                                     ):
                                 for path in jlib.get_filenames( dir_):
                                     _, ext = os.path.splitext( path)
@@ -6464,18 +6486,18 @@ def main():
 
                                 log(f'Copying mupdfcpp.dll to: {build_dirs.dir_so}')
                                 os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}mupdfcpp.dll')
+                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}/mupdfcpp.dll')
 
                             else:
 
-                                out_so = f'{build_dirs.dir_mupdf}platform/c++/libmupdfcpp.so'
+                                out_so = f'{build_dirs.dir_mupdf}/platform/c++/libmupdfcpp.so'
                                 if build_dirs.dir_so:
-                                    out_so = f'{build_dirs.dir_so}libmupdfcpp.so'
+                                    out_so = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
                                 mupdf_so = f'{build_dirs.dir_so}libmupdf.so'
 
-                                include1 = f'{build_dirs.dir_mupdf}include'
-                                include2 = f'{build_dirs.dir_mupdf}platform/c++/include'
+                                include1 = f'{build_dirs.dir_mupdf}/include'
+                                include2 = f'{build_dirs.dir_mupdf}/platform/c++/include'
                                 command = ( textwrap.dedent(
                                         f'''
                                         c++
@@ -6498,17 +6520,17 @@ def main():
 
                         elif action == '2':
                             # Generate C++ code for python module using SWIG.
-                            if not os.path.isfile(f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle'):
+                            if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
                                 raise Exception( 'action "0" required')
                             with jlib.LogPrefixScope( f'swig: '):
                                 build_swig(
                                         build_dirs,
-                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/container_classnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/to_string_structnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_c.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/swig_python.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/c_functions.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}platform/c++/c_globals.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle'),
+                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle'),
                                         swig=swig,
                                         )
 
@@ -6527,16 +6549,23 @@ def main():
                                 # would have to hack things to pass in the
                                 # appropriate python directory.
                                 #
-                                python_path, python_version, python_root = find_python( build_dirs.cpu)
+                                python_path, python_version, python_root, cpu = find_python(
+                                        build_dirs.cpu,
+                                        build_dirs.python_version,
+                                        )
                                 log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
 
                                 vcvars = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{build_dirs.cpu.bits}.bat'
                                 vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{build_dirs.cpu.windows_name}'
 
-                                # Compile.
+                                def cmd_run_multiple(commands):
+                                    if g_cygwin:
+                                        command = 'cmd.exe /V /C @ ' + ' "&&" '.join(commands)
+                                    else:
+                                        command = ' && '.join(commands)
+                                    jlib.system(command, verbose=1, out='log')
+
                                 command = (
-                                        f'cmd.exe /V /C @ "{vcvars}"'
-                                        f' "&&"'
                                         f' "{vs_root}/cl.exe"'
                                         #f' /nologo'
                                         f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
@@ -6578,12 +6607,10 @@ def main():
                                         f' platform/python/mupdfcpp_swig.cpp'
                                         )
                                 log('Compiling SWIG-generated code.')
-                                jlib.system(command, verbose=1, out='log')
+                                cmd_run_multiple( [f'"{vcvars}"', command])
 
                                 # Link.
                                 command = (
-                                        f'cmd.exe /V /C @ "{vcvars}"'
-                                        f' "&&"'
                                         f' "{vs_root}/link.exe"'
                                         #f' /NOLOGO'
                                         f' /DLL'
@@ -6614,7 +6641,7 @@ def main():
                                         f' mupdfcpp.lib'
                                         )
                                 log('Linking SWIG-generated code.')
-                                jlib.system(command, verbose=1, out='log')
+                                cmd_run_multiple( [f'"{vcvars}"', command])
 
                                 log('Copying _mupdf.dll to build/shared-release/')
 
@@ -6622,9 +6649,9 @@ def main():
                                 # undocumented. Discovered this at:
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
-                                log( 'Copying _mupdf.dll to {build_dirs.dir_so}_mupdf.pyd')
+                                log( 'Copying _mupdf.dll to {build_dirs.dir_so}/_mupdf.pyd')
                                 os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll', f'{build_dirs.dir_so}_mupdf.pyd')
+                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll', f'{build_dirs.dir_so}/_mupdf.pyd')
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -6646,16 +6673,16 @@ def main():
 
                                 # These are the input files to our g++ command:
                                 #
-                                mupdfcpp_swig_cpp   = f'{build_dirs.dir_mupdf}platform/python/mupdfcpp_swig.cpp'
-                                include1            = f'{build_dirs.dir_mupdf}include'
-                                include2            = f'{build_dirs.dir_mupdf}platform/c++/include'
+                                mupdfcpp_swig_cpp   = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
+                                include1            = f'{build_dirs.dir_mupdf}/include'
+                                include2            = f'{build_dirs.dir_mupdf}/platform/c++/include'
 
-                                mupdf_so            = f'{build_dirs.dir_so}libmupdf.so'
-                                mupdfcpp_so         = f'{build_dirs.dir_so}libmupdfcpp.so'
+                                mupdf_so            = f'{build_dirs.dir_so}/libmupdf.so'
+                                mupdfcpp_so         = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
                                 # Python expects _mupdf.so to be in same directory as mupdf.py.
                                 #
-                                out_so              = f'{build_dirs.dir_so}_mupdf.so'
+                                out_so              = f'{build_dirs.dir_so}/_mupdf.so'
 
                                 # We use jlib.link_l_flags() to add -L options
                                 # to search parent directories of each .so that
@@ -6699,7 +6726,7 @@ def main():
                     if not path.endswith( '.h') and not path.endswith( '.cpp'):
                         continue
                     tail = path[ len( build_dirs.ref_dir):]
-                    path2 = f'{build_dirs.dir_mupdf}platform/c++/{tail}'
+                    path2 = f'{build_dirs.dir_mupdf}/platform/c++/{tail}'
                     command = f'diff -u {path} {path2}'
                     log( 'running: {command}')
                     jlib.system(
@@ -6710,8 +6737,8 @@ def main():
 
             elif arg == '--diff-all':
                 for a, b in (
-                        (f'{build_dirs.dir_mupdf}platform/c++/', f'{build_dirs.dir_mupdf}platform/c++/'),
-                        (f'{build_dirs.dir_mupdf}platform/python/', f'{build_dirs.dir_mupdf}platform/python/')
+                        (f'{build_dirs.dir_mupdf}/platform/c++/', f'{build_dirs.dir_mupdf}/platform/c++/'),
+                        (f'{build_dirs.dir_mupdf}/platform/python/', f'{build_dirs.dir_mupdf}/platform/python/')
                         ):
                     for dirpath, dirnames, filenames in os.walk( a):
                         assert dirpath.startswith( a)
@@ -6777,7 +6804,7 @@ def main():
                         ld_library_path = os.path.abspath( f'{build_dirs.dir_so}')
                         pythonpath = build_dirs.dir_so
                         jlib.system( f'cd {build_dirs.dir_so}; LD_LIBRARY_PATH={ld_library_path} PYTHONPATH={pythonpath} pydoc3 -w ./mupdf.py')
-                        path = f'{build_dirs.dir_so}mupdf.html'
+                        path = f'{build_dirs.dir_so}/mupdf.html'
                         assert os.path.isfile( path)
                         log( 'have created: {path}')
 
@@ -6792,11 +6819,11 @@ def main():
                         out='log',
                         )
                 jlib.system(
-                        f'rsync -ai {build_dirs.dir_mupdf}platform/c++/implementation {build_dirs.ref_dir}',
+                        f'rsync -ai {build_dirs.dir_mupdf}/platform/c++/implementation {build_dirs.ref_dir}',
                         out='log',
                         )
                 jlib.system(
-                        f'rsync -ai {build_dirs.dir_mupdf}platform/c++/include {build_dirs.ref_dir}',
+                        f'rsync -ai {build_dirs.dir_mupdf}/platform/c++/include {build_dirs.ref_dir}',
                         out='log',
                         )
 
@@ -6805,8 +6832,21 @@ def main():
                 build_dirs.set_dir_so( d)
 
             elif arg == '--py-package-bdist_wheel':
+                do_build = True
+                while 1:
+                    a = args.next()
+                    if not a.startswith('-'):
+                        break
+                    if a == '-b':
+                        do_build = int(args.next())
+                    else:
+                        assert 0, f'Unrecognised arg after {arg}: {a}'
+                cpu = a
+                python_version = args.next()
+                if cpu in ('', '.'): cpu = None
+                if python_version in ('', '.'): python_version = None
+                log(f'cpu={cpu} python_version={python_version}')
 
-                do_build = int(args.next())
                 # Check we can create and install and use a bdist, using a
                 # fresh venv each time.
                 #
@@ -6825,8 +6865,13 @@ def main():
                     #
 
                     # On Windows we use 'py' to run default python.
-                    py = 'py'
-                    #py = 'py -3-32' # Force 32-bit.
+                    py = 'py '
+                    if python_version:
+                        py += f'-{python_version}'
+                    else:
+                        py += '-3'
+                    if cpu in ('x32', 'x64'):
+                        py += f'-{cpu[1:]}'
 
                     # Create bdist.
                     #
@@ -6887,6 +6932,8 @@ def main():
                     # Unix. Create bdist, check with check-wheel-contents, run
                     # scripts/mupdfwrap_test.py.
                     #
+                    if cpu or python_version:
+                        raise Exception(f'Cannot select non-default cpu or python-version on Unix')
                     command = ('true'
                             f' && (rm -r {pylocal} || true)'
                             f' && python3 -m venv {pylocal}'
@@ -7182,8 +7229,8 @@ def main():
                     destination = args.next()
                 log( 'Syncing to {destination=}')
                 files = list( hs) + list( cpps) + [
-                        f'{build_dirs.dir_so}mupdf.py',
-                        f'{build_dirs.dir_mupdf}platform/c++/fn_usage.txt',
+                        f'{build_dirs.dir_so}/mupdf.py',
+                        f'{build_dirs.dir_mupdf}/platform/c++/fn_usage.txt',
                         ]
                 # Generate .html files with syntax colouring for source files. See:
                 #   https://github.com/google/code-prettify
@@ -7209,9 +7256,9 @@ def main():
 
                 if sync_docs:
                     files += [
-                            f'{build_dirs.dir_mupdf}include/html/',
-                            f'{build_dirs.dir_mupdf}platform/c++/include/html/',
-                            f'{build_dirs.dir_so}mupdf.html',
+                            f'{build_dirs.dir_mupdf}/include/html/',
+                            f'{build_dirs.dir_mupdf}/platform/c++/include/html/',
+                            f'{build_dirs.dir_so}/mupdf.html',
                             ]
 
                 # Insert extra './' into each path so that rsync -R uses the
@@ -7232,7 +7279,7 @@ def main():
                     # python. Also, Windows appears to be able to find
                     # _mupdf.pyd in same directory as mupdf.py.#
                     #
-                    python_path, python_version, python_root = find_python( build_dirs.cpu)
+                    python_path, python_version, python_root, cpu = find_python( build_dirs.cpu, build_dirs.python_version)
                     python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
                     command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} "{python_path}"'
                 elif g_openbsd:
@@ -7247,7 +7294,7 @@ def main():
 
                 log( 'running mupdf_test.py...')
                 command = f'{command_prefix} ./scripts/mupdfwrap_test.py'
-                with open( f'{build_dirs.dir_mupdf}platform/python/mupdf_test.py.out.txt', 'w') as f:
+                with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
                     def outfn( text):
                         log( text, nv=0)
                         f.write( text)
@@ -7256,7 +7303,7 @@ def main():
                 # Run mutool.py.
                 #
                 mutool_py = os.path.relpath( f'{__file__}/../mutool.py')
-                zlib_pdf = os.path.relpath(f'{build_dirs.dir_mupdf}thirdparty/zlib/zlib.3.pdf')
+                zlib_pdf = os.path.relpath(f'{build_dirs.dir_mupdf}/thirdparty/zlib/zlib.3.pdf')
                 for args2 in (
                         f'trace {zlib_pdf}',
                         f'convert -o zlib.3.pdf-%d.png {zlib_pdf}',
