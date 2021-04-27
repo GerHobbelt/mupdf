@@ -236,7 +236,7 @@ def log_text( text=None, caller=1, nv=True):
 
     text = ''
     for line in lines:
-        text += prefix + line + '\n'
+        text += prefix + line.replace('\r', '') + '\n'
     return text
 
 
