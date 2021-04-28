@@ -7221,7 +7221,7 @@ def main():
                     log( f'Not creating sdist because version was specified: {version}')
                     sdist = None
                 else:
-                    # Create sdist.
+                    # Create sdist and remember its version when we create wheels.
                     jlib.remove( 'dist')
                     jlib.system( './setup.py sdist', out='log', prefix='sdist: ')
                     sdist = glob.glob( 'dist/*')
