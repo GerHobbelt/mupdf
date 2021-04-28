@@ -1398,8 +1398,8 @@ def link_l_flags( sos, ld_origin=None):
             continue
         dir_ = os.path.dirname( so)
         name = os.path.basename( so)
-        assert name.startswith( 'lib')
-        assert name.endswith ( '.so')
+        assert name.startswith( 'lib'), f'name={name}'
+        assert name.endswith ( '.so'), f'name={name}'
         name = name[3:-3]
         dirs.add( dir_)
         names.append( name)
