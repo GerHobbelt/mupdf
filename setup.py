@@ -3,19 +3,16 @@
 '''
 Installation script for MuPDF Python bindings, using scripts/pipcl.py.
 
-Default behaviour:
+Notes:
 
     When building an sdist (e.g. with 'pip sdist'), we use clang-python to
     generate C++ source which is then included in the sdist.
 
-    When installing or building a wheel (e.g. 'pip install <sdist>'), we
-    assume that generated C++ source is already present. Thus we don't rely on
-    clang-python being present.
+    Thus when we are in an sdist and are installing or building a wheel, we
+    don't need clang-python .
 
-    When building a wheel, we build 32 or 64-bit binaries depending on whether
-    we are being run on 32 or 64-bit Python.
 
-Environmental variables:
+Internal testing only - environmental variables:
 
     MUPDF_SETUP_BUILD_DIR
         Overrides the default build directory.
@@ -50,26 +47,55 @@ def log(text=''):
         print(f'mupdf:setup.py: {line}')
     sys.stdout.flush()
 
-if __name__ == '__main__':
-    log(f'== We are being run directly. sys.argv={sys.argv}')
-else:
-    log(f'== We are being imported.')
+def cache(function):
+    '''
+    Simple (and probably unnecessary) caching decorator.
+    '''
+    cache = {}
+    def wrapper(*args):
+        if not args in cache:
+            cache[args] = function()
+        return cache[args]
+    return wrapper
 
-mupdf_dir = os.path.abspath(f'{__file__}/..')
-sys.path.append(f'{mupdf_dir}/scripts')
+@cache
+def windows():
+    s = platform.system()
+    return s == 'Windows' or s.startswith('CYGWIN')
+
+@cache
+def build_dir():
+    if windows():
+        # Windows. We generate 32 or 64-bit binaries to match whatever Python we
+        # are running under.
+        #
+        cpu = 'x32' if sys.maxsize == 2**31 - 1 else 'x64'
+        python_version = '.'.join(platform.python_version().split('.')[:2])
+        ret = f'build/shared-release-{cpu}-py{python_version}'
+    else:
+        ret = 'build/shared-release'
+
+    ret = os.environ.get('MUPDF_SETUP_BUILD_DIR', ret)
+    return ret
+
+@cache
+def mupdf_dir():
+    return os.path.abspath(f'{__file__}/..')
+
+@cache
+def in_sdist():
+    return os.path.exists(f'{mupdf_dir()}/PKG-INFO')
+
+sys.path.append(f'{mupdf_dir()}/scripts')
 import pipcl
 
-g_os_name = platform.system()
-g_windows = (g_os_name == 'Windows' or g_os_name.startswith('CYGWIN'))
-
-g_in_sdist = os.path.exists(f'{mupdf_dir}/PKG-INFO')
 
 def mupdf_version():
     '''
     Returns version string.
 
-    If $MUPDF_SETUP_VERSION we use it directly. We assert that it starts with
-    the base version in include/mupdf/fitz/version.h.
+    If $MUPDF_SETUP_VERSION is set we use it directly, asserting that it starts
+    with the version string defined in include/mupdf/fitz/version.h.
 
     Otherwise if we are in an sdist ('PKG-INFO' exists) we use its
     version. We assert that this starts with the base version in
@@ -79,29 +105,31 @@ def mupdf_version():
     time to the base version in include/mupdf/fitz/version.h. For example
     '1.18.0.20210330.1800'.
     '''
-    with open(f'{mupdf_dir}/include/mupdf/fitz/version.h') as f:
+    with open(f'{mupdf_dir()}/include/mupdf/fitz/version.h') as f:
         text = f.read()
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
     base_version = m.group(1)
 
     # If MUPDF_SETUP_VERSION exists, use it.
+    #
     ret = os.environ.get('MUPDF_SETUP_VERSION')
     if ret:
         log(f'Using version from $MUPDF_SETUP_VERSION: {ret}')
         assert ret.startswith(base_version)
         return ret
 
-    if g_in_sdist:
-        # We are in an sdist, so use the version from the PKG-INFO file.
-        items = pipcl._parse_pkg_info('PKG-INFO')
+    # If we are in an sdist, so use the version from the PKG-INFO file.
+    #
+    if in_sdist():
+        items = pipcl.parse_pkg_info('PKG-INFO')
         assert items['Name'] == 'mupdf'
         ret = items['Version']
         #log(f'Using version from PKG-INFO: {ret}')
         assert ret.startswith(base_version)
         return ret
 
-    # If we get here, we are in a source tree, e.g. to create an sdist.
+    # If we get here, we are in a source tree.
     #
     # We use the MuPDF version with a unique(ish) suffix based on the current
     # date and time, so we can make multiple Python releases without requiring
@@ -110,40 +138,9 @@ def mupdf_version():
     # This also allows us to easily experiment on test.pypi.org.
     #
     ret = base_version + time.strftime(".%Y%m%d.%H%M")
-    log(f'Have created version number: {ret}')
+    #log(f'Have created version number: {ret}')
     return ret
 
-# Generated files that are copied into the Python installation.
-#
-if g_windows:
-    # Windows. We generate 32 or 64-bit binaries to match whatever Python we
-    # are running under.
-    #
-    out_names  = [
-            'mupdfcpp.dll', # C and C++.
-            '_mupdf.pyd',   # Python internals.
-            'mupdf.py',     # Python.
-            ]
-    cpu = 'x32' if sys.maxsize == 2**31 - 1 else 'x64'
-    python_version = '.'.join(platform.python_version().split('.')[:2])
-    build_dir = f'build/shared-release-{cpu}-py{python_version}'
-else:
-    # Unix.
-    out_names = [
-            'libmupdf.so',      # C.
-            'libmupdfcpp.so',   # C++.
-            '_mupdf.so',        # Python internals.
-            'mupdf.py',         # Python.
-            ]
-    build_dir = 'build/shared-release'
-
-build_dir = os.environ.get('MUPDF_SETUP_BUILD_DIR', build_dir)
-#log(f'MUPDF_SETUP_BUILD_DIR={os.environ.get("MUPDF_SETUP_BUILD_DIR")}')
-#log(f'build_dir={build_dir}')
-
-
-# pipcl Callbacks.
-#
 
 # Set MUPDF_SETUP_MINIMAL=1 to create minimal package for testing
 # upload/download etc, avoiding compilation when installing.
@@ -192,6 +189,9 @@ def get_flag(name, default):
     return ret
 
 
+# pipcl Callbacks.
+#
+
 def sdist():
     '''
     pipcl callback. If we are a git checkout, return all files known to
@@ -221,7 +221,7 @@ def sdist():
 
     if not os.path.exists('.git'):
         raise Exception(f'Cannot make sdist because not a git checkout')
-    paths = pipcl.git_items( mupdf_dir, submodules=True)
+    paths = pipcl.git_items( mupdf_dir(), submodules=True)
 
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
@@ -233,7 +233,7 @@ def sdist():
         b += '0'
     if use_swig:
         b += '2'
-    command = f'{sys.executable} ./scripts/mupdfwrap.py -d {build_dir} -b "{b}"'
+    command = f'{sys.executable} ./scripts/mupdfwrap.py -d {build_dir()} -b "{b}"'
     log(f'Running: {command}')
     subprocess.check_call(command, shell=True)
     paths += [
@@ -266,8 +266,8 @@ def build():
     if g_test_minimal:
         # Cut-down for testing.
         log(f'g_test_minimal set so doing minimal build.')
-        os.makedirs(f'{mupdf_dir}/{build_dir}', exist_ok=True)
-        path = f'{mupdf_dir}/{build_dir}/mupdf.py'
+        os.makedirs(f'{mupdf_dir()}/{build_dir()}', exist_ok=True)
+        path = f'{mupdf_dir()}/{build_dir()}/mupdf.py'
         with open(path, 'w') as f:
             f.write('print("This is fake mupdf!")')
         return [(path, os.path.basename(path))]
@@ -276,11 +276,11 @@ def build():
     # generated files will already exist, and installing/using clang-python
     # might be tricky.
     #
-    use_clang_python = get_flag('MUPDF_SETUP_USE_CLANG_PYTHON', not g_in_sdist)
+    use_clang_python = get_flag('MUPDF_SETUP_USE_CLANG_PYTHON', not in_sdist())
     use_swig = get_flag('MUPDF_SETUP_USE_SWIG', True)
 
     b = ''
-    if not g_windows:
+    if not windows():
         b = 'm'     # Build C library.
     if use_clang_python:
         b += '0'    # Build C++ source.
@@ -290,10 +290,10 @@ def build():
     b += '3'        # Build SWIG library _mupdf.so.
 
     command = (
-            f'cd "{mupdf_dir}"'
+            f'cd "{mupdf_dir()}"'
             f' && "{sys.executable}" ./scripts/mupdfwrap.py'
-                f'{" --swig-windows-auto" if g_windows else ""}'
-                f' -d {build_dir}'
+                f'{" --swig-windows-auto" if windows() else ""}'
+                f' -d {build_dir()}'
                 f' -b {b}'
             )
 
@@ -305,11 +305,24 @@ def build():
         log(f'build(): Building MuPDF C, C++ and Python libraries with: {command}')
         subprocess.check_call(command, shell=True)
 
-    # Return generated files to copy into wheel.
+    # Return generated files to install or copy into wheel.
     #
+    if windows():
+        names = [
+                'mupdfcpp.dll', # C and C++.
+                '_mupdf.pyd',   # Python internals.
+                'mupdf.py',     # Python.
+                ]
+    else:
+        names = [
+                'libmupdf.so',      # C.
+                'libmupdfcpp.so',   # C++.
+                '_mupdf.so',        # Python internals.
+                'mupdf.py',         # Python.
+                ]
     paths = []
-    for name in out_names:
-        paths.append((f'{build_dir}/{name}', name))
+    for name in names:
+        paths.append((f'{build_dir()}/{name}', name))
 
     log(f'build(): returning: {paths}')
     return paths
@@ -317,11 +330,22 @@ def build():
 
 def clean(all_):
     if all_:
-        return 'build'
+        return [
+                'build',
+                'platform/win32/Release',
+                'platform/win32/ReleaseDLL',
+                'platform/win32/Win32',
+                'platform/win32/x64',
+                ]
     else:
-        return build_dir
+        # Ideally we would return selected directories in platform/win32/ if on
+        # Windows, but that would get a little involved.
+        #
+        return build_dir()
 
 
+# Setup pipcl.
+#
 mupdf_package = pipcl.Package(
         name = 'mupdf',
         version = mupdf_version(),
@@ -348,7 +372,6 @@ mupdf_package = pipcl.Package(
         root_dir = os.path.dirname(__file__),
         )
 
-#log(f'mupdf_package={mupdf_package}')
 
 # Things to allow us to function as a PIP-517 backend:
 #
