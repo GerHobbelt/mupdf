@@ -5065,14 +5065,14 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         c_globals:
             List of global variables.
     '''
-    assert dir_mupdf.endswith( '/')
-    assert base.endswith( '/')
+    assert not dir_mupdf.endswith( '/')
+    assert not base.endswith( '/')
     clang_info()    # Ensure we have set up clang-python.
 
     index = clang.cindex.Index.create()
     #log( '{dir_mupdf=} {base=}')
 
-    header = f'{dir_mupdf}include/mupdf/fitz.h'
+    header = f'{dir_mupdf}/include/mupdf/fitz.h'
     assert os.path.isfile( header), f'header={header}'
 
     # Get clang to parse mupdf/fitz.h and mupdf/pdf.h.
@@ -5091,7 +5091,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         tu = index.parse(
                     temp_h,
                     args=(
-                            '-I', f'{dir_mupdf}include',
+                            '-I', f'{dir_mupdf}/include',
                             '-I', clang_info().include_path,
                             ),
                     )
@@ -5099,8 +5099,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         if os.path.isfile( temp_h):
             os.remove( temp_h)
 
-    os.makedirs( f'{base}include/mupdf', exist_ok=True)
-    os.makedirs( f'{base}implementation', exist_ok=True)
+    os.makedirs( f'{base}/include/mupdf', exist_ok=True)
+    os.makedirs( f'{base}/implementation', exist_ok=True)
 
     if doit:
         class File:
@@ -5174,8 +5174,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             'functions',
             'internal',
             ):
-        out_hs.add( name, f'{base}include/mupdf/{name}.h')
-        out_cpps.add( name, f'{base}implementation/{name}.cpp')
+        out_hs.add( name, f'{base}/include/mupdf/{name}.h')
+        out_cpps.add( name, f'{base}/implementation/{name}.cpp')
 
     # Create extra File that writes to internal buffer rather than an actual
     # file, which we will append to out_h.
@@ -5209,7 +5209,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     # Write multiple-inclusion guards into headers:
     #
     for name, filename, file in out_hs.get():
-        prefix = f'{base}include/'
+        prefix = f'{base}/include/'
         assert filename.startswith( prefix)
         name = filename[ len(prefix):]
         header_guard( name, file)
@@ -5351,7 +5351,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         c_globals.append(name)
         windows_def += f'    {name} DATA\n'
 
-    jlib.update_file( windows_def, f'{base}windows_mupdf.def')
+    jlib.update_file( windows_def, f'{base}/windows_mupdf.def')
 
     def register_fn_use( name):
         assert name.startswith( ('fz_', 'pdf_'))
@@ -5486,7 +5486,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     # Output usage information.
     #
 
-    fn_usage_filename = f'{base}fn_usage.txt'
+    fn_usage_filename = f'{base}/fn_usage.txt'
     out_fn_usage = File( fn_usage_filename, tabify=False)
     functions_unused = 0
     functions_used = 0
@@ -6601,7 +6601,7 @@ def main():
                             ) = cpp_source(
                                     build_dirs.dir_mupdf,
                                     namespace,
-                                    f'{build_dirs.dir_mupdf}/platform/c++/',
+                                    f'{build_dirs.dir_mupdf}/platform/c++',
                                     header_git,
                                     swig_c,
                                     swig_python,
@@ -6690,7 +6690,7 @@ def main():
                                 if build_dirs.dir_so:
                                     out_so = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
-                                mupdf_so = f'{build_dirs.dir_so}libmupdf.so'
+                                mupdf_so = f'{build_dirs.dir_so}/libmupdf.so'
 
                                 include1 = f'{build_dirs.dir_mupdf}/include'
                                 include2 = f'{build_dirs.dir_mupdf}/platform/c++/include'
@@ -7262,7 +7262,7 @@ def main():
                         commands.append( f'. {pylocal}/bin/activate')
                     commands.append( f'python -m pip install --upgrade twine')
 
-                    c = f'python -m twine upload-x '
+                    c = f'python -m twine upload '
                     if upload_to == 'testpypi':
                         c += '--repository testpypi '
                     if sdist:
