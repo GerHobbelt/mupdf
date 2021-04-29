@@ -187,7 +187,7 @@ struct fz_stext_char
 	fz_stext_char *next;
 };
 
-extern const char *fz_stext_options_usage;
+FZ_DATA extern const char *fz_stext_options_usage;
 
 /**
 	Options for creating a pixmap and draw device.
