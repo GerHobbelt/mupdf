@@ -567,29 +567,20 @@ class Package:
         Returns text for .egg-info/PKG-INFO file, or PKG-INFO in an sdist
         tar.gz file, or ...dist-info/METADATA in a wheel.
         '''
-        ret = []
+        # 2021-04-30: Have been unable to get multiline content working on
+        # test.pypi.org so we currently put the description as the body after
+        # all the other headers.
+        #
+        ret = ['']
         def add(key, value):
             if value is not None:
-                # Would like to use metadata version 1.2 as defined by PEP 345,
-                # but the indentation for multiline values (7 spaces plus '|')
-                # is rejected by pypi.
-                #
-                # So instead we specify metadata version 1.1 (see PEP 314) and
-                # use 8 spaces only.
-                #
-                if '\n' in value:
-                    value = value.replace('\n', '\n' + ' '*8)
-                    # We need to end with an empty line otherwise 'twine check'
-                    # complains and pypi doesn't show multi-line Description
-                    # text on the project page.
-                    #
-                    value += '\n'
-                ret.append(f'{key}: {value}')
-        add('Metadata-Version', '1.1')
+                assert '\n' not in value, f'key={key} value contains newline: {value!r}'
+                ret[0] += f'{key}: {value}\n'
+        add('Metadata-Version', '1.2')
         add('Name', self.name)
         add('Version', self.version)
         add('Summary', self.summary)
-        add('Description', self.description)
+        #add('Description', self.description)
         add('Home-page', self.url_home)
         add('Platform', self.platform)
         add('Author', self.author)
@@ -605,7 +596,14 @@ class Package:
                 classifiers2 = classifiers2.split('\n')
             for c in classifiers2:
                 add('Classifier', c)
-        return '\n'.join(ret)
+        ret = ret[0]
+
+        # Append description as the body
+        if self.description:
+            ret += '\n' # Empty line separates headers from body.
+            ret += self.description.strip()
+            ret += '\n'
+        return ret
 
 
 # Functions that might be useful.
