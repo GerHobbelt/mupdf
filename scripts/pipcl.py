@@ -125,7 +125,8 @@ class Package:
             of these paths startswith <root_dir>.
         fn_sdist
             A function taking no args that returns a list of paths, e.g. using
-            git_items(), for files that should be copied into the sdist.
+            git_items(), for files that should be copied into the sdist. It is
+            an error if a path does not exist or is not a file.
         root_dir:
             Root of package; used as a check when deleting paths returned by
             fn_clean().
@@ -267,11 +268,11 @@ class Package:
             for path in paths:
                 if os.path.abspath(path).startswith(f'{os.path.abspath(sdist_directory)}/'):
                     # Ignore files inside <sdist_directory>.
-                    continue
+                    assert 0, f'Path is inside sdist_directory={sdist_directory}: {path!r}'
                 if not os.path.exists(path):
-                    # This appears to happen for sub-submodules.
-                    _log(f'Ignoring non-existant path: {path}')
-                    continue
+                    assert 0, f'Path does not exist: {path!r}'
+                if not os.path.isfile(path):
+                    assert 0, f'Path is not a file: {path!r}'
                 #log(f'path={path}')
                 tar.add( path, f'{self.name}-{self.version}/{path}', recursive=False)
                 manifest.append(path)
@@ -622,7 +623,12 @@ def git_items( directory, submodules=False):
     ret = []
     for path in text.decode('utf8').strip().split( '\n'):
         path2 = os.path.join(directory, path)
-        if os.path.isdir(path2):
+        # Sometimes git ls-files seems to list empty/non-existant directories
+        # within submodules.
+        #
+        if not os.path.exists(path2):
+            _log(f'*** Ignoring git ls-files item that does not exist: {path2}')
+        elif os.path.isdir(path2):
             _log(f'*** Ignoring git ls-files item that is actually a directory: {path2}')
         else:
             ret.append(path)
