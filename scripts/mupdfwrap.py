@@ -540,15 +540,20 @@ Usage:
             Create sdist and use pip to install via a wheel, and test with
             scripts/mupdfwrap_test.py.
 
-        --py-package-upload-all [-v <version>] <upload>
+        --py-package-upload [<options>] <upload>
             Windows only.
 
             Creates sdist and all possible wheels and uploads to PyPi.
 
-            version:
-                If specified, we force created wheels to have
-                the specified version and don't create/upload
-                sdist. E.g. "1.18.0.20210330.1800".
+            options:
+                -b 0 | 1:
+                    If 0, don't build - assume build(s) are up to date.
+                -v version:
+                    If specified, we force created wheels to have
+                    the specified version and don't create/upload
+                    sdist. E.g. "1.18.0.20210330.1800".
+                -w 0 | 1
+                    Whether to build/upload wheels.
             upload:
                 'pypi': upload to pypi.org.
                 'testpypi': upload to test.pypi.org.
@@ -7220,24 +7225,24 @@ def main():
                         out='log',
                         )
 
-            elif arg == '--py-package-upload':
-                # Use os.system because we need user input.
-                command = ( f'('
-                        + f' cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r dist pylocal-upload || true)'
-                        + f' && ./setup.py sdist'
-                        + f' && python3 -m venv pylocal-upload'
-                        + f' && . pylocal-upload/bin/activate'
-                        + f' && python -m pip install --upgrade twine'
-                        + f' && python -m twine upload dist/*'
-                        + f' && deactivate'
-                        + f') 2>&1'
-                        )
-                jlib.log( '--py-package-upload(): Uploading sdist with twine.')
-                jlib.log( '--py-package-upload(): Running: {command}')
-                e = os.system(command)
-                jlib.log( '{e=}')
-                assert e == 0
+            #elif arg == '--py-package-upload':
+            #    # Use os.system because we need user input.
+            #    command = ( f'('
+            #            + f' cd {build_dirs.dir_mupdf}'
+            #            + f' && (rm -r dist pylocal-upload || true)'
+            #            + f' && ./setup.py sdist'
+            #            + f' && python3 -m venv pylocal-upload'
+            #            + f' && . pylocal-upload/bin/activate'
+            #            + f' && python -m pip install --upgrade twine'
+            #            + f' && python -m twine upload dist/*'
+            #            + f' && deactivate'
+            #            + f') 2>&1'
+            #            )
+            #    jlib.log( '--py-package-upload(): Uploading sdist with twine.')
+            #    jlib.log( '--py-package-upload(): Running: {command}')
+            #    e = os.system(command)
+            #    jlib.log( '{e=}')
+            #    assert e == 0
 
             elif arg == '--py-package-download':
                 jlib.system( f'cd {build_dirs.dir_mupdf}'
@@ -7308,12 +7313,13 @@ def main():
                             jlib.system(command, prefix=f'x{cpu}-{python_version}: ', verbose=1, out='log')
 
 
-            elif arg == '--py-package-upload-all':
+            elif arg == '--py-package-upload':
                 #in_sdist = os.path.exists(f'{build_dirs.dir_mupdf}/PKG-INFO')
                 #if not in_sdist:
                 #    raise Exception( f'Refusing to generate and upload wheels because we are not an sdist, so individual wheels will have different date/time version number')
                 version = None
                 do_build = True
+                do_wheels = True
                 while 1:
                     a = args.next()
                     if not a.startswith('-'):
@@ -7323,11 +7329,14 @@ def main():
                         do_build = int(args.next())
                     elif a == '-v':
                         version = args.next()
+                    elif a == '-w':
+                        do_wheels = int(args.next())
                     else:
                         assert 0, f'Unexpected after {arg}: {a!r}'
                 assert upload_to in ('', '.', 'pypi', 'testpypi'), \
                         f'Unrecognised arg should be "", ".", "pypi" or "testpypi": {upload_to}'
 
+                log('{version=} {do_build=} {do_wheels=}')
                 if version:
                     log( f'Not creating sdist because version was specified: {version}')
                     sdist = None
@@ -7345,21 +7354,22 @@ def main():
 
                 # Create wheels.
                 wheels = []
-                if g_windows:
-                    for cpu in 'x32', 'x64':
-                        for python_version in ('3.8', '3.9'):
-                            wheel = make_wheel(
-                                    do_build=do_build,
-                                    cpu=cpu,
-                                    python_version=python_version,
-                                    upload=False,
-                                    version=version,
-                                    )
-                            wheels.append( wheel)
-                else:
-                    assert 0, 'Not uploading Unix wheel.'
-                    wheel = make_wheel( do_build=do_build, upload=False)
-                    wheels.append( wheel)
+                if do_wheels:
+                    if g_windows:
+                        for cpu in 'x32', 'x64':
+                            for python_version in ('3.8', '3.9'):
+                                wheel = make_wheel(
+                                        do_build=do_build,
+                                        cpu=cpu,
+                                        python_version=python_version,
+                                        upload=False,
+                                        version=version,
+                                        )
+                                wheels.append( wheel)
+                    else:
+                        assert 0, 'Not uploading Unix wheel.'
+                        wheel = make_wheel( do_build=do_build, upload=False)
+                        wheels.append( wheel)
 
                 if upload_to in ('pypi', 'testpypi'):
                     pylocal = f'pylocal-wheel-upload'
