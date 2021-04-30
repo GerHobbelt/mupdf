@@ -269,10 +269,19 @@ def build():
         # Cut-down for testing.
         log(f'g_test_minimal set so doing minimal build.')
         os.makedirs(f'{mupdf_dir()}/{build_dir()}', exist_ok=True)
-        path = f'{mupdf_dir()}/{build_dir()}/mupdf.py'
-        with open(path, 'w') as f:
-            f.write('print("This is fake mupdf!")')
-        return [(path, os.path.basename(path))]
+        paths = (
+                f'{mupdf_dir()}/{build_dir()}/mupdf.py',
+                f'{mupdf_dir()}/{build_dir()}/_mupdf.pyd',
+                f'{mupdf_dir()}/{build_dir()}/mupdfcpp.dll',
+                )
+        ret = []
+        for path in paths:
+            with open(path, 'w') as f:
+                # Need to make files non-identical, otherwise
+                # check-wheel-contents complains.
+                f.write(f'{path}\n')
+            ret.append( (path, os.path.basename(path)))
+        return ret
 
     # If we are an sdist, default to not trying to run clang-python - the
     # generated files will already exist, and installing/using clang-python
@@ -439,10 +448,10 @@ More information
 ----------------
 
 https://twiki.ghostscript.com/do/view/Main/MuPDFWrap
-""".strip()
+"""
 
 mupdf_package = pipcl.Package(
-        name = 'mupdf',
+        name = 'mupdfminimal' if g_test_minimal else 'mupdf',
         version = mupdf_version(),
         summary = 'Python bindings for MuPDF library.',
         description = description,
