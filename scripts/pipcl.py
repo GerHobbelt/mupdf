@@ -569,8 +569,16 @@ class Package:
         ret = []
         def add(key, value):
             if value is not None:
+                # Would like to use metadata version 1.2 as defined by PEP 345,
+                # but the indentation for multiline values (7 spaces plus '|')
+                # is rejected by pypi.
+                #
+                # So instead we specify metadata version 1.1 (see PEP 314) and
+                # use 8 spaces only.
+                #
+                value = value.replace('\n', '\n' + ' '*8)
                 ret.append(f'{key}: {value}')
-        add('Metadata-Version', '1.0')
+        add('Metadata-Version', '1.1')
         add('Name', self.name)
         add('Version', self.version)
         add('Summary', self.summary)
