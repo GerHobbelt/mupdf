@@ -7386,9 +7386,10 @@ def main():
                     c = f'python -m twine upload '
                     if upload_to == 'testpypi':
                         c += '--repository testpypi '
-                    if sdist:
-                        c += f'{sdist} '
                     c += ' '.join(wheels)
+                    # Put sdist last so that its Description is used for pypi web page?
+                    if sdist:
+                        c += f' {sdist}'
                     commands.append( c)
 
                     if g_windows:
