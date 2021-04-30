@@ -448,10 +448,11 @@ More information
 ----------------
 
 https://twiki.ghostscript.com/do/view/Main/MuPDFWrap
+
 """
 
 mupdf_package = pipcl.Package(
-        name = 'mupdfminimal' if g_test_minimal else 'mupdf',
+        name = 'mupdf',
         version = mupdf_version(),
         summary = 'Python bindings for MuPDF library.',
         description = description,
