@@ -577,7 +577,13 @@ class Package:
                 # So instead we specify metadata version 1.1 (see PEP 314) and
                 # use 8 spaces only.
                 #
-                value = value.replace('\n', '\n' + ' '*8)
+                if '\n' in value:
+                    value = value.replace('\n', '\n' + ' '*8)
+                    # We need to end with an empty line otherwise 'twine check'
+                    # complains and pypi doesn't show multi-line Description
+                    # text on the project page.
+                    #
+                    value += '\n'
                 ret.append(f'{key}: {value}')
         add('Metadata-Version', '1.1')
         add('Name', self.name)
