@@ -90,6 +90,7 @@ sys.path.append(f'{mupdf_dir()}/scripts')
 import pipcl
 
 
+@cache
 def mupdf_version():
     '''
     Returns version string.
@@ -347,11 +348,104 @@ def clean(all_):
 
 # Setup pipcl.
 #
+description = """
+Summary
+-------
+
+* Python bindings for the MuPDF PDF library.
+* A python module called ``mupdf``.
+* Generated from the MuPDF C++ API, which is itself generated from the MuPDF C API.
+* Provides Python functions that wrap most ``fz_`` and ``pdf_`` functions.
+* Provides Python classes that wrap most ``fz_`` and ``pdf_`` structs.
+
+  * Class methods provide access to most of the underlying C API functions (except for functions that don't take struct args such as ``fz_strlcpy()``).
+* MuPDF's ``setjmp``/``longjmp`` exceptions are converted to Python exceptions.
+* Functions and methods do not take ``fz_context`` arguments. (Automatically-generated per-thread contexts are used internally.)
+* Wrapper classes automatically handle reference counting of the underlying structs (with internal calls to ``fz_keep_*()`` and ``fz_drop_*()``).
+* Provides a small number of extensions beyond the basic C API:
+
+  * Some generated classes have extra support for iteration.
+  * Some custom class methods and constructors.
+  * Simple 'POD' structs have ``__str__()`` methods, for example ``mupdf.Rect`` is represented like: ``(x0=90.51 y0=160.65 x1=501.39 y1=215.6)``.
+
+Example usage
+-------------
+
+Minimal Python code that uses the ``mupdf`` module:
+
+::
+
+    import mupdf
+    document = mupdf.Document('foo.pdf')
+
+
+A simple example Python test script (run by ``scripts/mupdfwrap.py -t``) is:
+
+* ``scripts/mupdfwrap_test.py``
+
+More detailed usage of the Python API can be found in:
+
+* ``scripts/mutool.py``
+* ``scripts/mutool_draw.py``
+
+Here is some example code that shows all available information about document's Stext blocks, lines and characters:
+
+::
+
+    #!/usr/bin/env python3
+
+    import mupdf
+
+    def show_stext(document):
+        '''
+        Shows all available information about Stext blocks, lines and characters.
+        '''
+        for p in range(document.count_pages()):
+            page = document.load_page(p)
+            stextpage = mupdf.StextPage(page, mupdf.StextOptions())
+            for block in stextpage:
+                block_ = block.m_internal
+                log(f'block: type={block_.type} bbox={block_.bbox}')
+                for line in block:
+                    line_ = line.m_internal
+                    log(f'    line: wmode={line_.wmode}'
+                            + f' dir={line_.dir}'
+                            + f' bbox={line_.bbox}'
+                            )
+                    for char in line:
+                        char_ = char.m_internal
+                        log(f'        char: {chr(char_.c)!r} c={char_.c:4} color={char_.color}'
+                                + f' origin={char_.origin}'
+                                + f' quad={char_.quad}'
+                                + f' size={char_.size:6.2f}'
+                                + f' font=('
+                                    +  f'is_mono={char_.font.flags.is_mono}'
+                                    + f' is_bold={char_.font.flags.is_bold}'
+                                    + f' is_italic={char_.font.flags.is_italic}'
+                                    + f' ft_substitute={char_.font.flags.ft_substitute}'
+                                    + f' ft_stretch={char_.font.flags.ft_stretch}'
+                                    + f' fake_bold={char_.font.flags.fake_bold}'
+                                    + f' fake_italic={char_.font.flags.fake_italic}'
+                                    + f' has_opentype={char_.font.flags.has_opentype}'
+                                    + f' invalid_bbox={char_.font.flags.invalid_bbox}'
+                                    + f' name={char_.font.name}'
+                                    + f')'
+                                )
+
+    document = mupdf.Document('foo.pdf')
+    show_stext(document)
+
+More information
+----------------
+
+https://twiki.ghostscript.com/do/view/Main/MuPDFWrap
+""".strip()
+
 mupdf_package = pipcl.Package(
         name = 'mupdf',
         version = mupdf_version(),
         summary = 'Python bindings for MuPDF library.',
-        description = 'Python bindings for MuPDF library.',
+        description = description,
         classifiers = [
                 'Development Status :: 4 - Beta',
                 'Intended Audience :: Developers',
