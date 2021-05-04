@@ -172,4 +172,10 @@ public class PDFWidget extends PDFAnnotation
 	public native int validateSignature();
 	public native void clearSignature();
 	public native boolean isSigned();
+
+	//  create a signature appearance
+	public native DisplayList signatureAppearance(Rect rect, Image image, String leftText, String rightText, boolean logo);
+
+	//  sign with an appearance
+	public native boolean signWithAppearance(PKCS7Signer signer, DisplayList dlist, boolean useDate);
 }
