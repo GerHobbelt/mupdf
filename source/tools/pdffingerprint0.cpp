@@ -48,7 +48,7 @@ static fz_stream* datafeed = NULL;
 static void usage(void)
 {
 	fz_info(ctx,
-		"fingerprint0: produce a classic Qiqqa fingerprint for the given PDF\n"
+		"fingerprint0: produce a classic (SHA1B) Qiqqa fingerprint for the given PDF\n"
 		"\n"
 		"Syntax: fingerprint0 [options] <file-to-fingerprint>\n"
 		"\n"
