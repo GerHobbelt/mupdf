@@ -5,16 +5,24 @@ Script for creating a wheel inside a docker instance.
 
 Args:
 
-    -b <items>
+    -m [<options>] <items>
+        Do a manylinux build using manylinux docker container.
+
+        options:
+            -s <sdist>
+                Specify existing sdist.
         items:
-            s   Build sdist
-            d   Install docker.
+            s   Build sdist on local machine (not docker container).
+            d   Ensure docker is installed.
             i   Use 'docker pull' to get/update container image.
-            b   Build wheel inside container.
+            b   Build wheels inside docker container.
+            t   Test that compatible wheel installs and runs on local machine.
+
 '''
 
 import glob
 import os
+import platform
 import re
 import sys
 
@@ -174,7 +182,7 @@ def make_manylinux( items, sdist=None):
         command = command.replace('"', '\\"')
         jlib.system( f'docker exec mupdf-docker bash -c "{command}"', verbose=1, prefix=prefix, out='log')
 
-    if 't' in items:
+    if 0 and 't' in items:
         # Test direct intall from sdist.
         #
         docker_system( f'pip3 -vvv install /io/{os.path.basename(sdist)}')
@@ -188,9 +196,9 @@ def make_manylinux( items, sdist=None):
         assert sdist_leaf.endswith('.tar.gz')
         sdist_prefix = sdist_leaf[ : -len('.tar.gz')]
         docker_system( f'tar -xzf /io/{sdist_leaf}')
-        for p in 38, 39:
+        for p in 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39':
             docker_system(
-                    f'cd {sdist_prefix} && /opt/python/cp{p}-cp{p}/bin/python ./setup.py --dist-dir /io bdist_wheel',
+                    f'cd {sdist_prefix} && /opt/python/{p}/bin/python ./setup.py --dist-dir /io bdist_wheel',
                     f'wheel py{p}: ',
                     )
     for i in os.listdir( io_directory):
@@ -202,6 +210,29 @@ def make_manylinux( items, sdist=None):
     for w in wheels:
         log( f'    {w}')
 
+    if 't' in items:
+        # Test wheel can be installed into local python.
+        python_version = ''.join(platform.python_version().split('.')[:2])
+        for wheel in wheels:
+            base = os.path.basename(wheel)
+            m = re.match( f'^{package_root}-py{python_version}-none-.*[.]whl$', base)
+            log( f'base={base} package_root={package_root} python_version={python_version} m={m}')
+            if m:
+                log( f'Testing wheel: {wheel}')
+                jlib.system( f'true'
+                        + f' && (rm -r pylocal-wheel-test || true)'
+                        + f' && python3 -m venv pylocal-wheel-test'
+                        + f' && . pylocal-wheel-test/bin/activate'
+                        + f' && python -m pip install --upgrade pip'
+                        + f' && pip install {wheel}'
+                        + f' && python3 scripts/mupdfwrap_test.py'
+                        + f' && deactivate'
+                        ,
+                        prefix='wheel test: ',
+                        verbose=1,
+                        out='log',
+                        )
+
 
 
 def main():
@@ -212,7 +243,16 @@ def main():
         if arg is None:
             break
         if arg == '-m':
-            items = args.next()
+            while 1:
+                a = args.next()
+                if a.startswith('-'):
+                    if a == '-s':
+                        sdist = args.next()
+                    else:
+                        raise Exception(f'unrecognised -m option: {a}')
+                else:
+                    items = a
+                    break
             make_manylinux(items, sdist)
         elif arg == '-s':
             sdist = args.next()
