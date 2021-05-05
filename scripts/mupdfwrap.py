@@ -489,6 +489,13 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
+        --py-package-create-sdist
+            Creates Python sdist in dist/.
+
+        --py-package-create-sdist-install-test
+            Creates local sdist, installs into fresh Python venv using pip, and
+            checks it runs with mupdfwrap_test.py.
+
         --py-package-create-wheel-test [<args>] <cpu> <python-version>
             args:
                 -b 0 | 1
@@ -501,12 +508,17 @@ Usage:
             Checks we can create a wheel, and checks it is ok with
             check-wheel-contents.
 
-        --py-package-create-sdist
-            Creates Python sdist in dist/.
+        --py-package-download
+            Installs latest mupdf with 'pip install mupdf' into venv and tests
+            with scripts/mupdfwrap.py.
 
-        --py-package-create-sdist-install-test
-            Creates local sdist, installs into fresh Python venv using pip, and
-            checks it runs with mupdfwrap_test.py.
+        --py-package-sdist-install
+            Create sdist and use pip to install directly, and test with
+            scripts/mupdfwrap_test.py.
+
+        --py-package-sdist-wheel-install
+            Create sdist and use pip to install via a wheel, and test with
+            scripts/mupdfwrap_test.py.
 
         --py-package-testupload
             Creates sdist and uploads to https://test.pypi.org/.
@@ -523,22 +535,7 @@ Usage:
             Checks that 'pip install mupdf' works for all supported combinations
             of cpu and python version.
 
-            Useful as a test after --py-package-upload-all.
-
-        --py-package-upload
-            Uploads latest mupdf to pypi.org.
-
-        --py-package-download
-            Installs latest mupdf with 'pip install mupdf' into venv and tests
-            with scripts/mupdfwrap.py.
-
-        --py-package-sdist-install
-            Create sdist and use pip to install directly, and test with
-            scripts/mupdfwrap_test.py.
-
-        --py-package-sdist-wheel-install
-            Create sdist and use pip to install via a wheel, and test with
-            scripts/mupdfwrap_test.py.
+            Useful as a test after --py-package-upload.
 
         --py-package-upload [<options>] <upload>
             Windows only.
@@ -6349,7 +6346,7 @@ class BuildDirs:
             assert m, f'Failed to parse dir_so={self.dir_so!r} - should be *-x32|x64-pyA.B'
             self.cpu = Cpu( m.group(2))
             self.python_version = m.group(4)
-            #log(f'cpu={self.cpu} python_version={self.python_version} dir_so={dir_so}')
+            #log('{self.cpu=} {self.python_version=} {dir_so=}')
         else:
             # Use Python we are running under.
             self.cpu = Cpu(cpu_name())
@@ -6464,7 +6461,7 @@ def make_wheel( do_build, cpu=None, python_version=None, upload=False, version=N
 
     Returns path of wheel, which will be in its own directory.
     '''
-    log(f'{cpu=} {python_version=} {minimal=}')
+    log('{cpu=} {python_version=} {minimal=}')
 
     # We create a clean Python venv for building and testing the wheel; the
     # wheel itself is placed in a new empty directory.
@@ -6493,7 +6490,7 @@ def make_wheel( do_build, cpu=None, python_version=None, upload=False, version=N
         if cpu in ('x32', 'x64'):
             py += f'-{cpu[1:]}'
         else:
-            assert cpu is None, f'Unrecognised {cpu=}'
+            assert cpu is None, f'Unrecognised cpu={cpu}'
 
         # Create bdist.
         #
@@ -6685,16 +6682,37 @@ def main():
                             assert not flags.endswith('/')
                             #if flags.endswith('/'):    flags = flags[:-1]
                             flags = flags.split('-')
+                            assert prefix.endswith('-')
+                            actual_build_dir = prefix[:-1]
                             for flag in flags:
-                                if 0: pass   # lgtm [py/unreachable-statement]
-                                elif flag == 'debug':   command += ' build=debug'
-                                elif flag == 'release': command += ' build=release'
-                                elif flag == 'memento': command += ' build=memento'
-                                elif flag == 'extract': command += ' extract=yes'
+                                if flag in ('x32', 'x64') or flag.startswith('py'):
+                                    # setup.py puts cpu and python version
+                                    # elements into the build directory name
+                                    # when creating wheels; we need to ignore
+                                    # them.
+                                    pass
                                 else:
-                                    raise Exception(f'Unrecognised flag {flag!r} in {flags!r} in {build_dirs.dir_so!r}')
+                                    if 0: pass  # lgtm [py/unreachable-statement]
+                                    elif flag == 'debug':   command += ' build=debug'
+                                    elif flag == 'release': command += ' build=release'
+                                    elif flag == 'memento': command += ' build=memento'
+                                    elif flag == 'extract': command += ' extract=yes'
+                                    else:
+                                        raise Exception(f'Unrecognised flag {flag!r} in {flags!r} in {build_dirs.dir_so!r}')
+                                    actual_build_dir += f'-{flag}'
 
                             jlib.system( command, prefix=jlib.log_text(), out='log', verbose=1)
+
+                            if actual_build_dir != build_dirs.dir_so:
+                                # This happens when we are being run by
+                                # setup.py - it it might specify '-d
+                                # build/shared-release-x64-py3.8' (which
+                                # will be put into build_dirs.dir_so) but
+                                # the above 'make' command will create
+                                # build/shared-release/libmupdf.so, so we need
+                                # to copy into build/shared-release-x64-py3.8/.
+                                #
+                                jlib.copy( f'{actual_build_dir}/libmupdf.so', f'{build_dirs.dir_so}/libmupdf.so', verbose=1)
 
                         elif action == '0':
                             # Generate C++ code that wraps the fz_* API.
@@ -6800,9 +6818,11 @@ def main():
                                         )
                                 jlib.system(command, verbose=1, out='log')
 
-                                log(f'Copying mupdfcpp.dll to: {build_dirs.dir_so}')
-                                os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}/mupdfcpp.dll')
+                                jlib.copy(
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll',
+                                        f'{build_dirs.dir_so}/mupdfcpp.dll',
+                                        verbose=1,
+                                        )
 
                             else:
                                 jlib.log( 'Compiling generated C++ source code to create libmupdfcpp.so ...')
@@ -6958,11 +6978,11 @@ def main():
                                 # undocumented. Discovered this at:
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
-                                from_ = f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll'
-                                to_ = f'{build_dirs.dir_so}/_mupdf.pyd'
-                                log( 'Copying {from_} to {to_}')
-                                os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( from_, to_)
+                                jlib.copy(
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll',
+                                        f'{build_dirs.dir_so}/_mupdf.pyd',
+                                        verbose=1,
+                                        )
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -7159,7 +7179,7 @@ def main():
                 python_version = args.next()
                 if cpu in ('', '.'): cpu = None
                 if python_version in ('', '.'): python_version = None
-                log(f'cpu={cpu} python_version={python_version}')
+                log('{cpu=} {python_version=}')
 
                 wheel_path = make_wheel( do_build, cpu, python_version)
                 log('{wheel_path=}')
@@ -7316,9 +7336,6 @@ def main():
 
 
             elif arg == '--py-package-upload':
-                #in_sdist = os.path.exists(f'{build_dirs.dir_mupdf}/PKG-INFO')
-                #if not in_sdist:
-                #    raise Exception( f'Refusing to generate and upload wheels because we are not an sdist, so individual wheels will have different date/time version number')
                 version = None
                 do_build = True
                 do_wheels = True
