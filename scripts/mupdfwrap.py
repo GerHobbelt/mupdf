@@ -6997,10 +6997,34 @@ def main():
                                 # libmupdfcpp.so and libmupdf.sp.]
                                 #
 
-                                # Use pkg-config to find compile/link flags for building with python.
-                                python_includes = jlib.system( 'pkg-config --cflags python3', out='return')
-                                python_link     = jlib.system( 'pkg-config --libs python3', out='return')
-                                libpython_so    = None
+                                if 1:
+                                    # We use python-config which appears to
+                                    # work better than pkg-config because
+                                    # it copes with multiple installed
+                                    # python's, e.g. manylinux_2014's
+                                    # /opt/python/cp*-cp*/bin/python*.
+                                    #
+                                    # But... it seems that we should not
+                                    # attempt to specify libpython on the link
+                                    # command. The manylinkux docker containers
+                                    # don't actually contain libpython.so, and
+                                    # it seems that this deliberate. And the
+                                    # link command runs ok.
+                                    #
+                                    python_exe = os.path.realpath( sys.executable)
+                                    python_config = f'{python_exe}-config'
+                                    # --cflags gives things like
+                                    # -Wno-unused-result -g etc, so we just use
+                                    # --includes.
+                                    python_includes = jlib.system( f'{python_config} --includes', out='return')
+                                    #python_link     = jlib.system( f'{python_config} --ldflags', out='return')
+                                    python_link = ''
+                                    libpython_so    = None
+                                else:
+                                    # Use pkg-config to find compile/link flags for building with python.
+                                    python_includes = jlib.system( 'pkg-config --cflags python3', out='return')
+                                    python_link     = jlib.system( 'pkg-config --libs python3', out='return')
+                                    libpython_so    = None
 
                                 # These are the input files to our g++ command:
                                 #
