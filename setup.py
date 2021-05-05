@@ -65,17 +65,16 @@ def windows():
 
 @cache
 def build_dir():
-    if windows():
-        # Windows. We generate 32 or 64-bit binaries to match whatever Python we
-        # are running under.
-        #
+    # This is x86/x64-specific.
+    #
+    # We generate 32 or 64-bit binaries to match whatever Python we
+    # are running under.
+    #
+    ret = os.environ.get('MUPDF_SETUP_BUILD_DIR')
+    if ret is None:
         cpu = 'x32' if sys.maxsize == 2**31 - 1 else 'x64'
         python_version = '.'.join(platform.python_version().split('.')[:2])
         ret = f'build/shared-release-{cpu}-py{python_version}'
-    else:
-        ret = 'build/shared-release'
-
-    ret = os.environ.get('MUPDF_SETUP_BUILD_DIR', ret)
     return ret
 
 @cache
