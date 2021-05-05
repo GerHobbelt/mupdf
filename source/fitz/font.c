@@ -855,7 +855,7 @@ fz_adjust_ft_glyph_width(fz_context *ctx, fz_font *font, int gid, fz_matrix *trm
 			fz_warn(ctx, "FT_Get_Advance(%s,%d): %s", font->name, gid, ft_error_string(fterr));
 
 		realw = adv * 1000.0f / ((FT_Face)font->ft_face)->units_per_EM;
-		if (gid < font->width_count)
+		if (gid >= 0 && gid < font->width_count)
 			subw = font->width_table[gid];
 		else
 			subw = font->width_default;
@@ -1696,7 +1696,7 @@ fz_advance_ft_glyph(fz_context *ctx, fz_font *font, int gid, int wmode)
 	{
 		if (font->width_table)
 		{
-			if (gid < font->width_count)
+			if (gid >= 0 && gid < font->width_count)
 				return font->width_table[gid] / 1000.0f;
 			return font->width_default / 1000.0f;
 		}
@@ -1713,7 +1713,7 @@ fz_advance_ft_glyph(fz_context *ctx, fz_font *font, int gid, int wmode)
 		fz_warn(ctx, "FT_Get_Advance(%s,%d): %s", font->name, gid, ft_error_string(fterr));
 		if (font->width_table)
 		{
-			if (gid < font->width_count)
+			if (gid >= 0 && gid < font->width_count)
 				return font->width_table[gid] / 1000.0f;
 			return font->width_default / 1000.0f;
 		}
@@ -1852,7 +1852,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 
 	gid = fz_encode_character(ctx, user_font, unicode);
 	if (gid > 0)
-		return *out_font = user_font, gid;
+	{
+		*out_font = user_font;
+		return gid;
+	}
 
 	if (script == 0)
 		script = ucdn_get_script(unicode);
@@ -1872,7 +1875,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 	{
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
 #ifndef TOFU_CJK_LANG
@@ -1883,28 +1889,40 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 		{
 			gid = fz_encode_character(ctx, font, unicode);
 			if (gid > 0)
-				return *out_font = font, gid;
+			{
+				*out_font = font;
+				return gid;
+			}
 		}
 		font = fz_load_fallback_font(ctx, script, FZ_LANG_ja, user_font->flags.is_serif, user_font->flags.is_bold, user_font->flags.is_italic);
 		if (font)
 		{
 			gid = fz_encode_character(ctx, font, unicode);
 			if (gid > 0)
-				return *out_font = font, gid;
+			{
+				*out_font = font;
+				return gid;
+			}
 		}
 		font = fz_load_fallback_font(ctx, script, FZ_LANG_ko, user_font->flags.is_serif, user_font->flags.is_bold, user_font->flags.is_italic);
 		if (font)
 		{
 			gid = fz_encode_character(ctx, font, unicode);
 			if (gid > 0)
-				return *out_font = font, gid;
+			{
+				*out_font = font;
+				return gid;
+			}
 		}
 		font = fz_load_fallback_font(ctx, script, FZ_LANG_zh_Hans, user_font->flags.is_serif, user_font->flags.is_bold, user_font->flags.is_italic);
 		if (font)
 		{
 			gid = fz_encode_character(ctx, font, unicode);
 			if (gid > 0)
-				return *out_font = font, gid;
+			{
+				*out_font = font;
+				return gid;
+			}
 		}
 	}
 #endif
@@ -1914,7 +1932,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 	{
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
 	font = fz_load_fallback_music_font(ctx);
@@ -1922,7 +1943,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 	{
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
 	font = fz_load_fallback_symbol1_font(ctx);
@@ -1930,7 +1954,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 	{
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
 	font = fz_load_fallback_symbol2_font(ctx);
@@ -1938,7 +1965,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 	{
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
 	font = fz_load_fallback_emoji_font(ctx);
@@ -1946,7 +1976,10 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 	{
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
 	font = fz_new_base14_font(ctx, "Symbol");
@@ -1955,10 +1988,14 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 		fz_drop_font(ctx, font); /* it's cached in the font context, return a borrowed pointer */
 		gid = fz_encode_character(ctx, font, unicode);
 		if (gid > 0)
-			return *out_font = font, gid;
+		{
+			*out_font = font;
+			return gid;
+		}
 	}
 
-	return *out_font = user_font, 0;
+	*out_font = user_font;
+	return 0;
 }
 
 int fz_font_is_bold(fz_context *ctx, fz_font *font)

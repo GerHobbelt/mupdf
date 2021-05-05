@@ -82,8 +82,8 @@ void pdf_add_hmtx(fz_context *ctx, pdf_font_desc *font, int lo, int hi, int w);
 void pdf_add_vmtx(fz_context *ctx, pdf_font_desc *font, int lo, int hi, int x, int y, int w);
 void pdf_end_hmtx(fz_context *ctx, pdf_font_desc *font);
 void pdf_end_vmtx(fz_context *ctx, pdf_font_desc *font);
-pdf_hmtx pdf_lookup_hmtx(fz_context *ctx, pdf_font_desc *font, int cid);
-pdf_vmtx pdf_lookup_vmtx(fz_context *ctx, pdf_font_desc *font, int cid);
+pdf_hmtx pdf_lookup_hmtx(fz_context *ctx, pdf_font_desc *font, unsigned int cid);
+pdf_vmtx pdf_lookup_vmtx(fz_context *ctx, pdf_font_desc *font, unsigned int cid);
 
 void pdf_load_to_unicode(fz_context *ctx, pdf_document *doc, pdf_font_desc *font, const char **strings, char *collection, pdf_obj *cmapstm);
 

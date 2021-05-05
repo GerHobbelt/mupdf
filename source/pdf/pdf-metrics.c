@@ -89,7 +89,7 @@ pdf_end_vmtx(fz_context *ctx, pdf_font_desc *font)
 }
 
 pdf_hmtx
-pdf_lookup_hmtx(fz_context *ctx, pdf_font_desc *font, int cid)
+pdf_lookup_hmtx(fz_context *ctx, pdf_font_desc *font, unsigned int cid)
 {
 	int l = 0;
 	int r = font->hmtx_len - 1;
@@ -114,7 +114,7 @@ notfound:
 }
 
 pdf_vmtx
-pdf_lookup_vmtx(fz_context *ctx, pdf_font_desc *font, int cid)
+pdf_lookup_vmtx(fz_context *ctx, pdf_font_desc *font, unsigned int cid)
 {
 	pdf_hmtx h;
 	pdf_vmtx v;
