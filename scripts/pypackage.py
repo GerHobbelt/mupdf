@@ -2,10 +2,20 @@
 
 '''
 Script for creating a wheel inside a docker instance.
+
+Args:
+
+    -b <items>
+        items:
+            s   Build sdist
+            d   Install docker.
+            i   Use 'docker pull' to get/update container image.
+            b   Build wheel inside container.
 '''
 
 import glob
 import os
+import re
 import sys
 
 import jlib
@@ -68,69 +78,50 @@ int main(int argc, char** argv)
 '''
 
 
-def make_manylinux():
+def make_manylinux( items, sdist=None):
 
-    # This affects all builds we do later on.
-    #
-    os.environ['MUPDF_SETUP_BUILD_DIR'] = 'build/shared-debug'
+    sdist_directory = 'python-docker-dist'
+    io_directory = 'python-docker-io'
 
-    if 1:
+    if 's' in items:
         # Create new sdist.
-        jlib.ensure_empty_dir('docker-dist')
-        jlib.system('./setup.py sdist -d python-docker-dist', prefix='creating sdist: ')
-    sdist = glob.glob('python-docker-dist/*')
-    assert len(sdist) == 1
-    sdist = sdist[0]
+        jlib.ensure_empty_dir(sdist_directory)
+        jlib.system(f'./setup.py sdist -d {sdist_directory}', prefix='creating sdist: ', verbose=1)
 
-    # Note that if docker is not already installed, we will
-    # need to add user to docker group, e.g. with:
-    #   sudo usermod -a -G docker $USER
-    system('sudo apt install docker.io')
+    if not sdist:
+        sdist = glob.glob(f'{sdist_directory}/*')
+        assert len(sdist) == 1
+        sdist = sdist[0]
 
-    jlib.ensure_empty_dir('python-docker-io')
+    assert sdist.endswith('.tar.gz')
+    package_root = os.path.basename( sdist[ : -len('.tar.gz')])
+
+    if 'd' in items:
+        # Note that if docker is not already installed, we will
+        # need to add user to docker group, e.g. with:
+        #   sudo usermod -a -G docker $USER
+        system('sudo apt install docker.io')
+
+    os.makedirs( io_directory, exist_ok=True)
 
     # Copy sdist into (what will be) the docker's /io/ directory.
     #
-    jlib.system(f'rsync -ai {sdist} python-docker-io/')
-    jlib.system(f'rsync -ai scripts/mupdfwrap_test.py python-docker-io/')
-    jlib.system(f'rsync -ai thirdparty/extract/test/Python2.pdf python-docker-io/')
+    jlib.system( f'rsync -ai {sdist} {io_directory}/')
+    jlib.system( f'rsync -ai scripts/mupdfwrap_test.py {io_directory}/')
+    jlib.system( f'rsync -ai thirdparty/extract/test/Python2.pdf {io_directory}/')
 
     if 1:
-        with open('python-docker-io/test.cpp', 'w') as f:
+        with open( f'{io_directory}/test.cpp', 'w') as f:
             f.write(test_cpp)
 
-    # Ensure we have the docker image available.
-    #
-    # (Note that older docker image 'manylinux1_x86_64' doesn't seem to be able
-    # to run bash.)
-    #
     docker_image = 'quay.io/pypa/manylinux2014_x86_64'
-    system(f'docker pull {docker_image}')
-
-    # Create a script to run inside the docker instance, which will use pip to
-    # install from our sdist file.
-    #
-    # We ensure that python3-devel is installed. We don't attempt to
-    # install swig because swig-4.0.2 seems to be already part of
-    # quay.io/pypa/manylinux2014_x86_64, and the version installed by yum is
-    # old - swig-2.0.10.
-    #
-    script = 'python-docker-io/pypackage-install.sh'
-    with open(script, 'w') as f:
-        f.write(
-                f'#!/bin/bash\n'
-                f'set -e\n' # Exit if any command fails.
-                )
-        if os.environ.get('MUPDF_SETUP_BUILD_DIR'):
-            f.write(f'export MUPDF_SETUP_BUILD_DIR={os.environ["MUPDF_SETUP_BUILD_DIR"]}\n')
-        f.write(
-                f'echo MUPDF_SETUP_BUILD_DIR=$MUPDF_SETUP_BUILD_DIR\n'
-                f'yum --assumeyes install python3-devel\n'
-                f'pip3 -vvv install /io/*.tar.gz\n'
-                f'echo running mupdfwrap_test.py on Python2.pdf\n'
-                f'/io/mupdfwrap_test.py /io/Python2.pdf\n'
-                )
-    os.chmod(script, 0o755)
+    if 'i' in items:
+        # Ensure we have the docker image available.
+        #
+        # (Note that older docker image 'manylinux1_x86_64' doesn't seem to be able
+        # to run bash.)
+        #
+        system(f'docker pull {docker_image}')
 
     # Docker notes:
     #
@@ -138,6 +129,7 @@ def make_manylinux():
     #
     # Interactive session inside docker instance:
     #   docker exec -it mupdf-docker bash
+    #
 
     # Run our script inside the docker instance.
     #
@@ -148,42 +140,85 @@ def make_manylinux():
         #
         # '-itd' ensures docker instance runs in background.
         #
-        e = os.system(
+        # It's ok for this to fail - container already created.
+        #
+        e = jlib.system(
             f' docker run'
             f' -itd'
             f' --name mupdf-docker'
-            f' -v {os.path.abspath("python-docker-io")}:/io'
+            f' -v {os.path.abspath(io_directory)}:/io'
             f' {docker_image}'
+            ,
+            prefix='docker run: ',
+            verbose=1,
+            raise_errors=0,
             )
         log(f'docker run: e={e}')
 
         # Start docker instance if not already started.
         #
-        e = os.system('docker start mupdf-docker')
+        e = jlib.system(
+                'docker start mupdf-docker',
+                prefix='docker start: ',
+                verbose=1,
+                raise_errors=0,
+                )
         log(f'docker start: e={e}')
 
-        # Run our script inside the docker instance.
-        #
-        jlib.system(
-                f'docker exec'
-                    f' mupdf-docker'
-                    f' /io/{os.path.basename(script)}'
-                ,
-                prefix='docker: ',
-                verbose=1,
-                )
+    def docker_system(command, prefix=''):
+        '''
+        Runs specified command inside container. Runs via bash so <command> can
+        contain shell constructs.
+        '''
+        prefix = f'docker: {prefix}'
+        command = command.replace('"', '\\"')
+        jlib.system( f'docker exec mupdf-docker bash -c "{command}"', verbose=1, prefix=prefix, out='log')
 
-    else:
-        command = (
-                f' docker container run'
-                f' -t'
-                #f' --rm'
-                f' --name python-manylinux'
-                f' -e PLAT=manylinux1_x86_64'
-                f' -v {os.path.abspath("python-manylinux-io")}:/io'
-                f' {docker_image} /io/{os.path.basename(script)}'
-                )
-        system(command)
+    if 't' in items:
+        # Test direct intall from sdist.
+        #
+        docker_system( f'pip3 -vvv install /io/{os.path.basename(sdist)}')
+        docker_system( f'/io/mupdfwrap_test.py /io/Python2.pdf')
+
+    wheels = []
+    if 'w' in items:
+        # Build wheels.
+        #
+        sdist_leaf = os.path.basename(sdist)
+        assert sdist_leaf.endswith('.tar.gz')
+        sdist_prefix = sdist_leaf[ : -len('.tar.gz')]
+        docker_system( f'tar -xzf /io/{sdist_leaf}')
+        for p in 38, 39:
+            docker_system(
+                    f'cd {sdist_prefix} && /opt/python/cp{p}-cp{p}/bin/python ./setup.py --dist-dir /io bdist_wheel',
+                    f'wheel py{p}: ',
+                    )
+    for i in os.listdir( io_directory):
+        m = re.match( f'^{package_root}-py([0-9][0-9])-none-(.*)[.]whl$', i)
+        if m:
+            wheels.append( os.path.join( io_directory, i))
+
+    log( f'wheels are ({len(wheels)}):')
+    for w in wheels:
+        log( f'    {w}')
+
+
+
+def main():
+    sdist = None
+    args = jlib.Args(sys.argv[1:])
+    while 1:
+        arg = args.next_or_none()
+        if arg is None:
+            break
+        if arg == '-m':
+            items = args.next()
+            make_manylinux(items, sdist)
+        elif arg == '-s':
+            sdist = args.next()
+        else:
+            raise Exception(f'Unrecognised arg: {arg}')
+
 
 if __name__ == '__main__':
-    make_manylinux()
+    main()
