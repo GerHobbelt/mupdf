@@ -5,6 +5,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
+#include "../../thirdparty/owemdjee/libwebp/extras/tools.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
@@ -83,6 +84,19 @@ static struct {
 	{ wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
 	{ djpeg_main, "djpeg", "djpeg tool" },
 	{ cjpeg_main, "cjpeg", "cjpeg tool" },
+
+	{ cwebp_main, "cwebp", "cwebp tool" },
+	{ dwebp_main, "dwebp", "dwebp tool" },
+	{ gif2webp_main, "gif2webp", "gif2webp tool" },
+	{ img2webp_main, "img2webp", "img2webp tool" },
+	{ vwebp_main, "vwebp", "vwebp tool" },
+	{ vwebp_sdl_main, "vwebp_sdl", "vwebp_sdl tool" },
+	{ webp_anim_diff_main, "webp_anim_diff", "webp: webp_anim_diff tool" },
+	{ webp_anim_dump_main, "webp_anim_dump", "webp_anim_dump tool" },
+	{ webp_get_disto_main, "webp_get_disto", "webp_get_disto tool" },
+	{ webp_quality_main, "webp_quality", "webp_quality tool" },
+	{ webpinfo_main, "webpinfo", "webpinfo tool" },
+	{ webpmux_main, "webpmux", "webpmux tool" },
 };
 
 static int

@@ -1,0 +1,60 @@
+//
+// prep vcxproj for a new project
+// 
+
+let fs = require('fs');
+let path = require('path');
+
+
+let filepath = process.argv[2];
+if (!fs.existsSync(filepath)) {
+	console.error("must specify valid vcxproj file");
+	process.exit(1);
+}
+let src = fs.readFileSync(filepath, 'utf8');
+
+let projectName = path.basename(filepath, '.vcxproj');
+
+console.error({projectName});
+
+//     <ClCompile Include="..\..\thirdparty\curl\src\tool_operhlp.c" />
+//     <ClInclude Include="..\..\thirdparty\curl\include\curl\easy.h" />
+//     <None Include="..\..\thirdparty\curl\src\Makefile.am" />
+//     <ResourceCompile Include="..\..\thirdparty\curl\lib\libcurl.rc" />
+src = src
+.replace(/<[A-Za-z]+ Include="[^"]*" \/>/g, '')
+//    <ProjectName>libcurl</ProjectName>
+//    <RootNamespace>libcurl</RootNamespace>
+.replace(/<ProjectName>[^<]+<\/ProjectName>/g, (m) => `<ProjectName>${projectName}</ProjectName>`)
+.replace(/<RootNamespace>[^<]+<\/RootNamespace>/g, (m) => `<RootNamespace>${projectName}</RootNamespace>`)
+//      <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+.replace(/<AdditionalDependencies>[^<]+<\/AdditionalDependencies>/g, "<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>")
+//      <TypeLibraryName>.\Release/libcurl.tlb</TypeLibraryName>
+.replace(/<TypeLibraryName>[^<]+<\/TypeLibraryName>/g, "<TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>")
+//      <AdditionalIncludeDirectories>.;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\curl\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+.replace(/<AdditionalIncludeDirectories>[^<]+<\/AdditionalIncludeDirectories>/g, "<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>")
+//       <PreprocessorDefinitions>BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+.replace(/<PreprocessorDefinitions>([^<]+)<\/PreprocessorDefinitions>/g, (m, p1) => {
+	p1 = p1
+	.replace(/[A-Z]+_DISABLE_LDAP;/g, '')	
+	.replace(/_USRDLL;/g, '')	
+	.replace(/BUILDING_[A-Z]+;/g, '')	
+	.replace(/[A-Z]+_STATICLIB;/g, '')	
+	.replace(/[A-Z_]*MONOLITHIC;/g, '')	
+	.replace(/USE_SCHANNEL;/g, '')	
+	.replace(/USE_WINDOWS_SSPI;/g, '')	
+
+	let pnu = projectName.toUpperCase();
+	p1 = `BUILD_MONOLITHIC;BUILDING_${pnu};${ pnu.replace(/LIB/, '')}_STATICLIB;${p1}`;
+	return `<PreprocessorDefinitions>${p1}</PreprocessorDefinitions>`;
+})
+//    <ProjectGuid>{87EE9DA4-DE1E-4448-8324-183C98DCA588}</ProjectGuid>
+.replace(/<ProjectGuid>([^<]+)<\/ProjectGuid>/g, (m, p1) => {
+	 let r = Math.random().toString(16).toUpperCase().replace(/0\./, '');
+	 p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
+	 return `<ProjectGuid>${p1}</ProjectGuid>`;
+});
+
+fs.writeFileSync(filepath, src, 'utf8');
+
+
