@@ -1222,6 +1222,16 @@ def rename(src, dest):
         os.remove(dest)
         os.rename(src, dest)
 
+def copy(src, dest, verbose=False):
+    '''
+    Wrapper for shutil.copy() that also ensures parent of <dest> exists and
+    optionally calls jlib.log() with diagnostic.
+    '''
+    if verbose:
+        log('Copying {src} to {dest}')
+    os.makedirs( os.path.dirname(dest), exist_ok=True)
+    shutil.copy( src, dest)
+
 # Things for figuring out whether files need updating, using mtimes.
 #
 def newest( names):
