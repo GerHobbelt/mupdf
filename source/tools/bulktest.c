@@ -271,7 +271,7 @@ static void usage(void)
 	fz_info(ctx,
 		"bulktest: Scriptable tester for mupdf + js\n"
 		"\n"
-		"Syntax: bulktest -o [options] <scriptfile> [<datafile> ...]\n"
+		"Syntax: bulktest [options] <scriptfile> [<datafile> ...]\n"
 		"\n"
 		"Options:\n"
 		"  -T      scriptfile is a script TEMPLATE file, which is filled with data from\n"
