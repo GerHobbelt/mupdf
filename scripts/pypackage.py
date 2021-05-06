@@ -12,72 +12,87 @@ Overview:
 
     On Windows we use the 'py' command to find different installed Pythons.
 
+Command-line usage:
 
-Args:
+    Note that args are handled sequentially. So for example with 'pypackage.py
+    wheels --sdist=...' wheels will be built without the --sdist option.
 
-    build-wheels
-        Builds wheels.
+    Args:
 
-        On Unix we build an sdist, copy it into container, extract it, and then
-        build the wheel in the extracted directory.
+        --build
+            Build wheels.
 
-        On Windows we build sdist and wheels in the current tree.
+            If --sdist has not been specified earlier, we build an sdist in the
+            current tree.
 
-        todo: provide an option to use 'pip wheel <sdist>'. This forces clean build
-        each time so can be slow when experimenting, but is probably more correct.
+            We extract the sdist (locally on Windows, in a container on Unix)
+            and build wheels in the extracted tree.
 
-    test [-w <wheel>] <code>
-        Tests wheel by running <code> inside a clean venv.
+            todo: provide an option to use 'pip wheel <sdist>'. This would
+            force clean build each time so can be slow when experimenting, but
+            is probably more correct.
 
-        We install wheel using 'pip install' If <wheel> is not specified we
-        search the list of created wheels for one that matches the default
-        python.
 
-    -h
-    --help
-        Show this help.
+        --test [-w <wheel>] <code>
+            Tests wheel by running <code> inside a clean Pyhton venv.
 
-    --abis <abis>
-        Set the list of ABIs for which we build wheels.
+            We install wheel using 'pip install'. If <wheel> is not specified
+            we search the list of created wheels for one that matches the
+            default python.
 
-        abis
-            Comma-separated list of <abi>
-            On Windows:
-                abi: <cpu>-<python-version>
-                    cpu:
-                        'x32' or 'x64'
-            On Unix:
-                abi: <python-version>
+        -h
+        --help
+            Show this help.
 
-            python-version:
-                Python version; may contain '.'. E.g. '38' or '3.9'.
+        --abis <abis>
+            Set the list of ABIs for which we build wheels.
 
-        Examples:
-            Windows: --abis x32-38,x32-39,x64-39,x64-39
-            Unix: --abis 38,39
+            abis
+                Comma-separated list of <abi>
+                On Windows:
+                    abi: <cpu>-<python-version>
+                        cpu:
+                            'x32' or 'x64'
+                On Unix:
+                    abi: <python-version>
 
-        Default is:
-            Unix: 37,38,39
-            Windows: x32-38,x32-39,x64-38,x64-39
+                python-version:
+                    Python version; may contain '.'. E.g. '38' or '3.9'.
 
-    --sdist <sdist>
-        Specify path of existing sdist. If not specified we build a new
-        sdist as required by running './setup.py sdist' locally.
+            Examples:
+                Windows: --abis x32-38,x32-39,x64-39,x64-39
+                Unix: --abis 38,39
 
-        Not currently supported on Windows.
+            Default is:
+                Unix: 37,38,39
+                Windows: x32-38,x32-39,x64-38,x64-39
 
-    Unix only:
-        --manylinux-c <container-name>
-            Name of container to create/start/use.
+        --sdist <sdist>
+            Specify path of existing sdist. If specified, wheels are built by
+            extracting the sdist (either locally on Windows or inside docker
+            container on Unix) and building inside this resulting tree.
 
-        --manylinux-d 0 | 1
-            Whether to ensure that docker is installed.
+            Otherwise we build a new sdist as required by running './setup.py
+            sdist' locally.
 
-        --manylinux-i <docker-image>
-            Set docker image; default is 'quay.io/pypa/manylinux2014_x86_64'.
+        --wheels <pattern>
+            An alternative to building wheels. <pattern> should be a glob that
+            matches previously-build wheels. The resulting list of wheels is
+            used by later occurrencies of --test, upload-- etc.
 
-        --manylinux-p 0 | 1
-            Whether to use 'docker pull' to get/update container image.
+        Unix only:
+            --manylinux-c <container-name>
+                Name of container to create/start/use.
+
+            --manylinux-d 0 | 1
+                Whether to ensure that docker is installed.
+
+            --manylinux-i <docker-image>
+                Set docker image; default is
+                'quay.io/pypa/manylinux2014_x86_64'.
+
+            --manylinux-p 0 | 1
+                Whether to use 'docker pull' to get/update container image.
 
 Docker notes:
     Interactive session inside docker instance:
@@ -104,8 +119,20 @@ def log(text=''):
     sys.stdout.flush()
 
 
-def system(command, error_raise=True):
+def system(command, error_raise=True, return_output=False):
     log(f'Running: {command}')
+    if return_output:
+        log(f'Running with subprocess.run(): {command}')
+        ret = subprocess.run(
+                command,
+                shell=True,
+                universal_newlines=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                )
+        if error_raise:
+            ret.check_returncode()
+        return ret.stdout
     e = os.system(command)
     if error_raise and e:
         raise Exception(f'Command failed ({e}): {command}')
@@ -122,19 +149,23 @@ def unix():
 
 venv_installed = set()
 
-def venv_run(commands, venv='pypackage-venv', py='py', clean=False):
+def venv_run(commands, venv='pypackage-venv', py=None, clean=False, return_output=False):
     '''
     Runs commands inside Pyton venv, joined by &&.
     commands:
-        List of commands.
+        List of commands to run.
     venv:
-        Name of venv.
+        Name of venv to create and use.
     py:
-        Windows only, command to run to enter the venv, instead of 'py'.
+        Python to run. If None we use sys.executable.
+    clean:
+        If true we first delete any existing <venv>. We assert that<venv>
+        starts with 'pypackage-venv'.
     '''
     if isinstance(commands, str):
         commands = [commands]
-
+    if py is None:
+        py = sys.executable
     if windows():
         pre = [
                 f'cmd.exe /c "true',
@@ -144,7 +175,7 @@ def venv_run(commands, venv='pypackage-venv', py='py', clean=False):
         post = [f'deactivate"']
     else:
         pre = [
-                f'python3 -m venv {venv}',
+                f'{py} -m venv {venv}',
                 f'. {venv}/bin/activate',
                 ]
         post = [f'deactivate']
@@ -154,12 +185,19 @@ def venv_run(commands, venv='pypackage-venv', py='py', clean=False):
             assert venv.startswith('pypackage-venv')
             shutil.rmtree(venv, ignore_errors=1)
         venv_installed.add(venv)
-        # Seem to be necessary to install twine in separate pip command,
-        # otherwise it fails with python-3.7.
+
+        # It looks like first attempt to upgrade pip can fail with
+        # 'EnvironmentError: [WinError 5] Access is denied'. So we run twice.
+        #
         pre += [
                 'pip install --upgrade pip',
                 'pip install --upgrade twine',
                 ]
+        if windows:
+            commands0 = pre + post
+            command0 = '&&'.join(commands0)
+            log(f'Running pre: {command0}')
+            system(command0, error_raise=False)
 
     commands = pre + commands + post
 
@@ -168,7 +206,7 @@ def venv_run(commands, venv='pypackage-venv', py='py', clean=False):
     else:
         command = ' && '.join(commands)
 
-    system(command)
+    return system(command, return_output=return_output)
 
 
 def check_sdist(sdist):
@@ -234,22 +272,25 @@ def make_unix(
             List of string python versions for which we build
             wheels. Any '.' are removed and we then take the first two
             characters. E.g. ['3.8.4', '39'] is same as ['38', '39'].
-            List of
         sdist:
-            If None we build sdist inside container. Otherwise should be path
-            of sdist file to copy into the container.
+            Path of sdist file to copy into container.
+            If None we build a new sdist inside the container.
         test_direct_install
             If true we run 'pip install <sdist>' in the container.
+            If None we default to false.
         install_docker
             If true we attempt to install docker (currently specific to
             Debian/Devuan).
+            If None we default to false.
         docker_image
-            If not None, the name of docker image to use. Default is
-            quay.io/pypa/manylinux2014_x86_64.
+            Name of docker image to use.
+            If None we default to: quay.io/pypa/manylinux2014_x86_64
         pull_docker_image
             If true we run 'docker pull ...' to update the image.
+            If None we default to true.
         container_name
             Name to use for the container.
+            If None we default to 'pypackage'.
 
     Returns (sdist, wheels).
 
@@ -396,7 +437,9 @@ def make_windows(
                 String version number, may contain '.' characters, e.g. '3.8'
                 or '39'.
     sdist:
-        If not None, should be path of sdist. (Not currently supported.)
+        If not None, should be path of sdist; we extract it and generate wheels
+        inside the extracted tree. Note that this means that running a second
+        time with the same sdist will not be a clean build.
 
     Returns (sdist, wheels).
     '''
@@ -447,7 +490,7 @@ def make_windows(
     return sdist, wheels
 
 
-def test(wheels, code):
+def test(wheels, code, py=None):
     '''
     Basic testing of wheels.
 
@@ -458,29 +501,52 @@ def test(wheels, code):
         List of wheel paths.
     code:
         Python code to run. E.g. 'import foo\nfoo.qwert()\n'
+    py:
+        Python executable. If None we use sys.executable.
     '''
-    python_version = ''.join(platform.python_version().split('.')[:2])
+    #python_version = ''.join(platform.python_version().split('.')[:2])
+    # Find what Python version is being run by.
+    if py is None:
+        py = 'py' if windows() else sys.executable
+    script_name = 'pypackage_test.py'
+
+    # Find python version and cpu whene we run <python>
+    with open(script_name, 'w') as f:
+        f.write('import platform, sys\n')
+        f.write('print(f"version={platform.python_version()} 64={sys.maxsize==2**63-1}")\n')
+    text = venv_run(
+            f'python {script_name}',
+            return_output=True,
+            venv='pypackage-venv-test',
+            py=py,
+            clean=True,
+            )
+    log(f'text=\n{text}')
+    m = re.search('version=([0-9.]+) 64=((True)|(False))', text)
+    assert m, f'No match in text={text!r}'
+    python_version = ''.join(m.group(1).split('.')[:2])
+    cpu = '64' if m.group(2) == 'True' else '32'
+
+    with open(script_name, 'w') as f:
+        f.write(code)
+    log(f'Looking for wheel matching cpu={cpu} python_version={python_version}')
     for wheel in wheels:
         base = os.path.basename(wheel)
-        m = re.match( f'^.*-py{python_version}-none-.*[.]whl$', base)
+        m = re.match( f'^.*-py{python_version}-none-.*{cpu}[.]whl$', base)
         log( f'base={base} python_version={python_version} m={m}')
         if m:
             log( f'Testing wheel: {wheel}')
-            script_name = 'pypackage_test.py'
-            with open(script_name, 'w') as f:
-                f.write(code)
             venv_run(
                     [
                         f'pip install {wheel}',
-                        f'python {script_name}',
+                        f'{py} {script_name}',
                     ],
                     venv='pypackage-venv-test',
+                    py=py,
                     clean=True,
                     )
 
 def main():
-
-    s = platform.system()
 
     sdist = None
     wheels = []
@@ -501,6 +567,7 @@ def main():
             arg = next(args)
         except StopIteration:
             break
+        log(f'Handling arg={arg!r}')
 
         if arg in ('-h', '--help'):
             print( __doc__)
@@ -526,7 +593,7 @@ def main():
         elif unix() and arg == '--manylinux-p':
             manylinux_pull_docker_image = next(args)
 
-        elif arg == 'build-wheels':
+        elif arg == '--build':
             if windows():
                 sdist, wheels = make_windows(abis, sdist)
 
@@ -544,7 +611,7 @@ def main():
             for wheel in wheels:
                 log(f'    wheel: {wheel}')
 
-        elif arg == 'test':
+        elif arg == '--test':
             test_wheels = wheels
             while 1:
                 a = next(args)
@@ -560,16 +627,20 @@ def main():
             log(f'Code to run is:\n{code}')
             test(test_wheels, code)
 
-        elif arg == 'upload':
+        elif arg == '--upload':
             venv = ensure_venv()
             if windows():
                 command = f'python -m twine upload {sdist} {" ".join(wheels)}'
                 venv_run(command)
 
+        elif arg == '--wheels':
+            pattern = next(args)
+            wheels = glob.glob(pattern)
+            if not wheels:
+                log(f'Warning: no matches found for --wheels pattern {pattern!r}.')
+
         else:
             raise Exception(f'Unrecognised arg: {arg}')
-
-
 
 
 if __name__ == '__main__':
