@@ -5,7 +5,7 @@ Support for creating Python wheels and uploading to pypi.org.
 
 Overview:
 
-    We expect to be run in the directory containing a package's setup.py and
+    We expect to be run in the directory containing a package's setup.py and/or
     pyproject.toml.
 
     On Unix we use a manylinux docker container.
@@ -13,64 +13,71 @@ Overview:
     On Windows we use the 'py' command to find different installed Pythons.
 
 
-Use as a Python module:
+Args:
 
-    Use these functions:
+    build-wheels
+        Builds wheels.
 
-        make_unix()
-        make_windows()
+        On Unix we build an sdist, copy it into container, extract it, and then
+        build the wheel in the extracted directory.
 
+        On Windows we build sdist and wheels in the current tree.
 
-Command line usage:
+        todo: provide an option to use 'pip wheel <sdist>'. This forces clean build
+        each time so can be slow when experimenting, but is probably more correct.
 
-    Args:
+    test [-w <wheel>] <code>
+        Tests wheel by running <code> inside a clean venv.
 
-        -h
-        --help
-            Show this help.
+        We install wheel using 'pip install' If <wheel> is not specified we
+        search the list of created wheels for one that matches the default
+        python.
 
-        --abis <abis>
-            Set the list of ABIs for which we build wheels.
+    -h
+    --help
+        Show this help.
 
-            abis
-                Comma-separated list of <abi>
-                On Windows:
-                    abi: <cpu>-<python-version>
-                        cpu:
-                            'x32' or 'x64'
-                On Unix:
-                    abi: <python-version>
+    --abis <abis>
+        Set the list of ABIs for which we build wheels.
 
-                python-version:
-                    Python version; may contain '.'. E.g. '38' or '3.9'.
+        abis
+            Comma-separated list of <abi>
+            On Windows:
+                abi: <cpu>-<python-version>
+                    cpu:
+                        'x32' or 'x64'
+            On Unix:
+                abi: <python-version>
 
-            Examples:
-                Windows: --abis x32-38,x32-39,x64-39,x64-39
-                Unix: --abis 38,39
+            python-version:
+                Python version; may contain '.'. E.g. '38' or '3.9'.
 
-            Default is:
-                Unix: 37,38,39
-                Windows: x32-38,x32-39,x64-38,x64-39
+        Examples:
+            Windows: --abis x32-38,x32-39,x64-39,x64-39
+            Unix: --abis 38,39
 
-        --sdist <sdist>
-            Specify path of existing sdist. If not specified we build a new sdist
-            locally by running './setup.py sdist'. The sdist is copied into the
-            container where it is used to build the wheels.
+        Default is:
+            Unix: 37,38,39
+            Windows: x32-38,x32-39,x64-38,x64-39
 
-            Not currently supported on Windows.
+    --sdist <sdist>
+        Specify path of existing sdist. If not specified we build a new
+        sdist as required by running './setup.py sdist' locally.
 
-        Unix only:
-            --manylinux-c <container-name>
-                Name of container to create/start/use.
+        Not currently supported on Windows.
 
-            --manylinux-d 0 | 1
-                Whether to ensure that docker is installed.
+    Unix only:
+        --manylinux-c <container-name>
+            Name of container to create/start/use.
 
-            --manylinux-i <docker-image>
-                Set docker image; default is 'quay.io/pypa/manylinux2014_x86_64'.
+        --manylinux-d 0 | 1
+            Whether to ensure that docker is installed.
 
-            --manylinux-p 0 | 1
-                Whether to use 'docker pull' to get/update container image.
+        --manylinux-i <docker-image>
+            Set docker image; default is 'quay.io/pypa/manylinux2014_x86_64'.
+
+        --manylinux-p 0 | 1
+            Whether to use 'docker pull' to get/update container image.
 
 Docker notes:
     Interactive session inside docker instance:
@@ -84,6 +91,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
 
 
@@ -114,11 +122,15 @@ def unix():
 
 venv_installed = set()
 
-def venv_run(commands, venv='pypackage-venv', clean=False):
+def venv_run(commands, venv='pypackage-venv', py='py', clean=False):
     '''
     Runs commands inside Pyton venv, joined by &&.
     commands:
         List of commands.
+    venv:
+        Name of venv.
+    py:
+        Windows only, command to run to enter the venv, instead of 'py'.
     '''
     if isinstance(commands, str):
         commands = [commands]
@@ -126,7 +138,7 @@ def venv_run(commands, venv='pypackage-venv', clean=False):
     if windows():
         pre = [
                 f'cmd.exe /c "true',
-                f'py -m venv {venv}',
+                f'{py} -m venv {venv}',
                 f'{venv}\\Scripts\\activate.bat',
                 ]
         post = [f'deactivate"']
@@ -344,7 +356,9 @@ def make_unix(
         assert len(paths) == 1, f'No single match for glob pattern in container {pattern}: {paths}'
         container_pythons.append( (vv, paths[0]))
 
-    # Extract sdist into directory shared with container.
+    # In the container, extract <sdist>; we will use the extracted sdist to
+    # build wheels.
+    #
     docker_system( f'tar -xzf /io/{sdist_leaf}')
 
     # Build wheels.
@@ -387,26 +401,47 @@ def make_windows(
     Returns (sdist, wheels).
     '''
     assert windows()
+    subdir = None
     if sdist:
-        assert 0, 'Building Windows wheels from sdist not currently supported'
-
-    sdist_directory = 'pypackage-sdist'
-    make_sdist(sdist_directory)
+        #assert 0, 'Building Windows wheels from sdist not currently supported'
+        # Extact sdist and run ourselves inside the extracted tree.
+        with tarfile.open(sdist, 'r:gz') as t:
+            items = t.getnames()
+            assert items
+            item = items[0]
+            log(f'item={item}')
+            s = item.find('/')
+            assert s >= 0
+            prefix = item[:s+1]
+            for item in items:
+                assert item.startswith(prefix)
+            t.extractall()
+            subdir = prefix
+    else:
+        sdist_directory = 'pypackage-sdist'
+        make_sdist(sdist_directory)
 
     wheel_dir = 'pypackage-wheels'
     os.makedirs(wheel_dir, exist_ok=True)
+    wheel_dir2 = f'../{wheel_dir}' if subdir else wheel_dir
 
     wheels = []
     for abi in abis:
         cpu, python_version = abi.split('-')
+        python_version = '.'.join(python_version)
         assert cpu in ('x32', 'x64')
         py = f'py -{python_version}-{cpu[1:]}'
+        cd_command = f'cd {subdir}' if subdir else 'true'
         t = time.time()
-        venv_run([
+        venv_run(
+                [
                 f'pip install clang check-wheel-contents twine',
-                f'{py} setup.py -d {wheel_dir} bdist_wheel',
-                ])
-        wheel = find_new_file(f'{wheel_dir}/*.whl')
+                f'{cd_command}',
+                f'python setup.py -d {wheel_dir2} bdist_wheel',
+                ],
+                py=py,
+                )
+        wheel = find_new_file(f'{wheel_dir}/*.whl', t)
         wheels.append(wheel)
 
     return sdist, wheels
@@ -422,7 +457,7 @@ def test(wheels, code):
     wheels:
         List of wheel paths.
     code:
-        Python code to run. '\n' will be replaced by newline. E.g. 'import foo'
+        Python code to run. E.g. 'import foo\nfoo.qwert()\n'
     '''
     python_version = ''.join(platform.python_version().split('.')[:2])
     for wheel in wheels:
@@ -522,6 +557,7 @@ def main():
                     code = a
                     code = code.replace('\\n', '\n')
                     break
+            log(f'Code to run is:\n{code}')
             test(test_wheels, code)
 
         elif arg == 'upload':
