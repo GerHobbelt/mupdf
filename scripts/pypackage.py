@@ -1,32 +1,90 @@
 #!/usr/bin/env python3
 
 '''
-Script for creating a wheel inside a docker instance.
+Support for creating Python wheels and uploading to pypi.org.
 
-Args:
+Overview:
 
-    -m [<options>] <items>
-        Do a manylinux build using manylinux docker container.
+    We expect to be run in the directory containing a package's setup.py and
+    pyproject.toml.
 
-        options:
-            -s <sdist>
-                Specify existing sdist.
-        items:
-            s   Build sdist on local machine (not docker container).
-            d   Ensure docker is installed.
-            i   Use 'docker pull' to get/update container image.
-            b   Build wheels inside docker container.
-            t   Test that compatible wheel installs and runs on local machine.
+    On Unix we use a manylinux docker container.
 
+    On Windows we use the 'py' command to find different installed Pythons.
+
+
+Use as a Python module:
+
+    Use these functions:
+
+        make_unix()
+        make_windows()
+
+
+Command line usage:
+
+    Args:
+
+        -h
+        --help
+            Show this help.
+
+        --abis <abis>
+            Set the list of ABIs for which we build wheels.
+
+            abis
+                Comma-separated list of <abi>
+                On Windows:
+                    abi: <cpu>-<python-version>
+                        cpu:
+                            'x32' or 'x64'
+                On Unix:
+                    abi: <python-version>
+
+                python-version:
+                    Python version; may contain '.'. E.g. '38' or '3.9'.
+
+            Examples:
+                Windows: --abis x32-38,x32-39,x64-39,x64-39
+                Unix: --abis 38,39
+
+            Default is:
+                Unix: 37,38,39
+                Windows: x32-38,x32-39,x64-38,x64-39
+
+        --sdist <sdist>
+            Specify path of existing sdist. If not specified we build a new sdist
+            locally by running './setup.py sdist'. The sdist is copied into the
+            container where it is used to build the wheels.
+
+            Not currently supported on Windows.
+
+        Unix only:
+            --manylinux-c <container-name>
+                Name of container to create/start/use.
+
+            --manylinux-d 0 | 1
+                Whether to ensure that docker is installed.
+
+            --manylinux-i <docker-image>
+                Set docker image; default is 'quay.io/pypa/manylinux2014_x86_64'.
+
+            --manylinux-p 0 | 1
+                Whether to use 'docker pull' to get/update container image.
+
+Docker notes:
+    Interactive session inside docker instance:
+        docker exec -it pypackage bash
 '''
 
 import glob
 import os
 import platform
 import re
+import subprocess
 import sys
+import time
 
-import jlib
 
 def log(text=''):
     '''
@@ -36,228 +94,391 @@ def log(text=''):
         print(f'pypackage.py: {line}')
     sys.stdout.flush()
 
-def system(command):
-    print(f'running: {command}')
-    sys.stdout.flush()
+
+def system(command, error_raise=True):
+    log(f'Running: {command}')
     e = os.system(command)
-    assert e == 0
+    if error_raise and e:
+        raise Exception(f'Command failed ({e}): {command}')
+    return e
 
 
-test_cpp = '''
-#include <iostream>
+def windows():
+    s = platform.system()
+    return s == 'Windows' or s.startswith('CYGWIN')
 
-#include "platform/c++/include/mupdf/classes.h"
-
-static void show_stext(mupdf::Document& document)
-{
-    for (int p=0; p<document.count_pages(); ++p)
-    {
-        mupdf::Page page(document.load_page(p);
-        StextOptions    options;
-        StextPage   stextpage(page, options);
-        for (mupdf::StextBlock stextblock: stextpage)
-        {
-            for (mupdf::StextLine stextline: stextblock)
-            {
-                for (mupdf::StextChar stextchar: stextline)
-                {
-                    std::cout << "char:"
-                            << " " << stextchar.m_internal->c
-                            << " " << (int) stextchar.m_internal->c
-                            << " " << stextchar.m_internal->color
-                            << " " << mupdf::Point(stextchar.m_internal->origin)
-                            << " " << mupdf::Quad(stextchar.m_internal->quad)
-                            << " " << stextchar.m_internal->size
-                            << "\n";
-                }
-            }
-        }
-    }
-}
-
-int main(int argc, char** argv)
-{
-    for (int i=1; i<argv; ++i)
-    {
-        mupdf::Document document(argv[i]);
-        show_stext(document);
-    }
-}
-'''
+def unix():
+    return not windows()
 
 
-def make_manylinux( items, sdist=None):
+venv_installed = set()
 
-    sdist_directory = 'python-docker-dist'
-    io_directory = 'python-docker-io'
+def venv_run(commands, venv='pypackage-venv'):
+    '''
+    Runs commands inside Pyton venv, joined by &&.
+    commands:
+        List of commands.
+    '''
+    if isinstance(commands, str):
+        commands = [commands]
 
-    if 's' in items:
-        # Create new sdist.
-        jlib.ensure_empty_dir(sdist_directory)
-        jlib.system(f'./setup.py sdist -d {sdist_directory}', prefix='creating sdist: ', verbose=1)
+    if windows():
+        pre = [
+                f'cmd.exe /c "true',
+                f'py -m venv {venv}',
+                f'{venv}\\Scripts\\activate.bat',
+                ]
+        post = [f'deactivate"']
+    else:
+        pre = [
+                f'python3 -m venv {venv}',
+                f'. {venv}/bin/activate',
+                ]
+        post = [f'deactivate']
+
+    if venv not in venv_installed:
+        venv_installed.add(venv)
+        pre += ['pip install --upgrade pip twine']
+
+    commands = pre + commands + post
+
+    if windows():
+        command = '&&'.join(commands)
+    else:
+        command = ' && '.join(commands)
+
+    system(command)
+
+
+def check_sdist(sdist):
+    '''
+    Checks sdist with 'twine check'.
+    '''
+    venv_run(f'twine check {sdist}')
+
+
+def find_new_file(pattern, t):
+    '''
+    Finds file matching <pattern> whose mtime is >= t. Raises exception if
+    there isn't exactly one such file.
+    '''
+    paths = glob.glob(pattern)
+
+    paths_new = []
+    for path in paths:
+        tt = os.path.getmtime(path)
+        if tt >= t:
+            paths_new.append(path)
+
+    if len(paths_new) == 0:
+        raise Exception(f'No new file found matching glob: {pattern}')
+    elif len(paths_new) > 1:
+        text = 'More than one file found matching glob: {pattern}\n'
+        for path in paths_new:
+            text += f'    {path}\n'
+        raise Exception(text)
+
+    return paths_new[0]
+
+
+def make_sdist(out_directory):
+    '''
+    Creates sdist by running ./setup.py. Returns path of the created sdist.
+    '''
+    os.makedirs(out_directory, exist_ok=True)
+    t = time.time()
+    command = f'./setup.py sdist -d "{out_directory}"'
+    system(command)
+
+    # Find new file in <sdist_directory>.
+    sdist = find_new_file(f'{out_directory}/*.tar.gz', t)
+    check_sdist(sdist)
+
+    return sdist
+
+
+def make_unix(
+        abis,
+        sdist,
+        test_direct_install=False,
+        install_docker=None,
+        docker_image=None,
+        pull_docker_image=None,
+        container_name=None,
+        ):
+    '''
+    Builds Python wheels using a manylinux container.
+
+        python_versions
+            List of string python versions for which we build
+            wheels. Any '.' are removed and we then take the first two
+            characters. E.g. ['3.8.4', '39'] is same as ['38', '39'].
+            List of
+        sdist:
+            If None we build sdist inside container. Otherwise should be path
+            of sdist file to copy into the container.
+        test_direct_install
+            If true we run 'pip install <sdist>' in the container.
+        install_docker
+            If true we attempt to install docker (currently specific to
+            Debian/Devuan).
+        docker_image
+            If not None, the name of docker image to use. Default is
+            quay.io/pypa/manylinux2014_x86_64.
+        pull_docker_image
+            If true we run 'docker pull ...' to update the image.
+        container_name
+            Name to use for the container.
+
+    Returns (sdist, wheels).
+
+    '''
+    if test_direct_install is None:
+        test_direct_install = False
+    if install_docker is None:
+        install_docker = False
+    if docker_image is None:
+        docker_image='quay.io/pypa/manylinux2014_x86_64'
+    if pull_docker_image is None:
+        pull_docker_image = True
+    if container_name is None:
+        container_name = 'pypackage'
+
+    sdist_directory = 'pypackage-dist'
+    io_directory = 'pypackage-io'
 
     if not sdist:
-        sdist = glob.glob(f'{sdist_directory}/*')
-        assert len(sdist) == 1
-        sdist = sdist[0]
+        # Create new sdist.
+        sdist = make_sdist(sdist_directory)
 
     assert sdist.endswith('.tar.gz')
-    package_root = os.path.basename( sdist[ : -len('.tar.gz')])
+    sdist_leaf = os.path.basename(sdist)    # e.g. mupdf-1.18.0.20210504.1544.tar.gz
+    package_root = sdist_leaf[ : -len('.tar.gz')]   # e.g. mupdf-1.18.0.20210504.1544
 
-    if 'd' in items:
+    check_sdist(sdist)
+
+    if install_docker:
         # Note that if docker is not already installed, we will
         # need to add user to docker group, e.g. with:
         #   sudo usermod -a -G docker $USER
         system('sudo apt install docker.io')
 
-    os.makedirs( io_directory, exist_ok=True)
-
-    # Copy sdist into (what will be) the docker's /io/ directory.
+    # Copy sdist into what will be the container's /io/ directory.
     #
-    jlib.system( f'rsync -ai {sdist} {io_directory}/')
-    jlib.system( f'rsync -ai scripts/mupdfwrap_test.py {io_directory}/')
-    jlib.system( f'rsync -ai thirdparty/extract/test/Python2.pdf {io_directory}/')
+    os.makedirs( io_directory, exist_ok=True)
+    system( f'rsync -ai {sdist} {io_directory}/')
 
-    if 1:
-        with open( f'{io_directory}/test.cpp', 'w') as f:
-            f.write(test_cpp)
-
-    docker_image = 'quay.io/pypa/manylinux2014_x86_64'
-    if 'i' in items:
-        # Ensure we have the docker image available.
-        #
-        # (Note that older docker image 'manylinux1_x86_64' doesn't seem to be able
-        # to run bash.)
+    if pull_docker_image:
+        # Ensure we have latest version of the docker image.
         #
         system(f'docker pull {docker_image}')
 
-    # Docker notes:
-    #
-    # With docker run's '-v HOST:CONTAINER' option, HOST must be absolute path.
-    #
-    # Interactive session inside docker instance:
-    #   docker exec -it mupdf-docker bash
-    #
-
-    # Run our script inside the docker instance.
-    #
-
     if 1:
-        # Ensure docker instance is created and running. Also give it a name so
-        # we can refer to it below.
+        # Ensure docker instance is created and running. Also give it a name
+        # <container_name> so we can refer to it below.
         #
         # '-itd' ensures docker instance runs in background.
         #
-        # It's ok for this to fail - container already created.
+        # With '-v HOST:CONTAINER', HOST must be absolute path.
         #
-        e = jlib.system(
+        # It's ok for this to fail - container is already created and running.
+        #
+        e = system(
             f' docker run'
             f' -itd'
-            f' --name mupdf-docker'
+            f' --name {container_name}'
             f' -v {os.path.abspath(io_directory)}:/io'
             f' {docker_image}'
             ,
-            prefix='docker run: ',
-            verbose=1,
-            raise_errors=0,
+            error_raise=False,
             )
         log(f'docker run: e={e}')
 
         # Start docker instance if not already started.
         #
-        e = jlib.system(
-                'docker start mupdf-docker',
-                prefix='docker start: ',
-                verbose=1,
-                raise_errors=0,
-                )
+        e = system(f'docker start {container_name}', error_raise=False,)
         log(f'docker start: e={e}')
 
-    def docker_system(command, prefix=''):
+    def docker_system(command, return_output=False):
         '''
         Runs specified command inside container. Runs via bash so <command> can
-        contain shell constructs.
+        contain shell constructs. If out is 'capture', we return the output text.
         '''
-        prefix = f'docker: {prefix}'
+        #prefix = f'docker: {prefix}'
         command = command.replace('"', '\\"')
-        jlib.system( f'docker exec mupdf-docker bash -c "{command}"', verbose=1, prefix=prefix, out='log')
+        command = f'docker exec {container_name} bash -c "{command}"'
+        log(f'Running: {command}')
+        # Set universal_newlines=True so we get text output, not bytes.
+        if return_output:
+            ret = subprocess.run(command, shell=True, universal_newlines=True, stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT)
+            ret.check_returncode()
+            return ret.stdout
+        else:
+            e = os.system(command)
+            if e:
+                raise Exception(f'Docker command failed: {command}')
 
-    if 0 and 't' in items:
+    if test_direct_install:
         # Test direct intall from sdist.
         #
-        docker_system( f'pip3 -vvv install /io/{os.path.basename(sdist)}')
-        docker_system( f'/io/mupdfwrap_test.py /io/Python2.pdf')
+        docker_system( f'pip3 -vvv install /io/{sdist_leaf}')
+        #docker_system( f'/io/mupdfwrap_test.py /io/Python2.pdf')
 
+    container_pythons = []
+    for abi in abis:
+        vv = abi.replace('.', '')[:2] # E.g. '38' for Python-3.8.
+        pattern = f'ls -d /opt/python/cp{vv}-cp{vv}*'
+        paths = docker_system(pattern, return_output=1)
+        log(f'vv={vv}: paths={paths!r}')
+        paths = paths.strip().split('\n')
+        assert len(paths) == 1, f'No single match for glob pattern in container {pattern}: {paths}'
+        container_pythons.append( (vv, paths[0]))
+
+    # Extract sdist into directory shared with container.
+    docker_system( f'tar -xzf /io/{sdist_leaf}')
+
+    # Build wheels.
     wheels = []
-    if 'w' in items:
-        # Build wheels.
-        #
-        sdist_leaf = os.path.basename(sdist)
-        assert sdist_leaf.endswith('.tar.gz')
-        sdist_prefix = sdist_leaf[ : -len('.tar.gz')]
-        docker_system( f'tar -xzf /io/{sdist_leaf}')
-        for p in 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39':
-            docker_system(
-                    f'cd {sdist_prefix} && /opt/python/{p}/bin/python ./setup.py --dist-dir /io bdist_wheel',
-                    f'wheel py{p}: ',
-                    )
-    for i in os.listdir( io_directory):
-        m = re.match( f'^{package_root}-py([0-9][0-9])-none-(.*)[.]whl$', i)
-        if m:
-            wheels.append( os.path.join( io_directory, i))
+    for vv, container_python in container_pythons:
+        log(f'Building wheel with python {vv}: {container_python}')
+
+        # Build wheel.
+        t = time.time()
+        docker_system(f'cd {package_root} && {container_python}/bin/python ./setup.py --dist-dir /io bdist_wheel')
+
+        # Find new wheel.
+        wheel = find_new_file(f'{io_directory}/{package_root}-py{vv}-none-*.whl', t)
+        wheels.append(wheel)
 
     log( f'wheels are ({len(wheels)}):')
-    for w in wheels:
-        log( f'    {w}')
+    for wheel in wheels:
+        log( f'    {wheel}')
 
-    if 't' in items:
-        # Test wheel can be installed into local python.
-        python_version = ''.join(platform.python_version().split('.')[:2])
-        for wheel in wheels:
-            base = os.path.basename(wheel)
-            m = re.match( f'^{package_root}-py{python_version}-none-.*[.]whl$', base)
-            log( f'base={base} package_root={package_root} python_version={python_version} m={m}')
-            if m:
-                log( f'Testing wheel: {wheel}')
-                jlib.system( f'true'
-                        + f' && (rm -r pylocal-wheel-test || true)'
-                        + f' && python3 -m venv pylocal-wheel-test'
-                        + f' && . pylocal-wheel-test/bin/activate'
-                        + f' && python -m pip install --upgrade pip'
-                        + f' && pip install {wheel}'
-                        + f' && python3 scripts/mupdfwrap_test.py'
-                        + f' && deactivate'
-                        ,
-                        prefix='wheel test: ',
-                        verbose=1,
-                        out='log',
-                        )
+    return sdist, wheels
 
+
+def make_windows(
+        abis,
+        sdist=None,
+        ):
+    '''
+    Builds Python wheels on Windows.
+
+    abis:
+        List of <cpu>-<pythonversion> strings.
+            cpu:
+                'x32' or 'x64'
+            pythonversion:
+                String version number, may contain '.' characters, e.g. '3.8'
+                or '39'.
+    sdist:
+        If not None, should be path of sdist. (Not currently supported.)
+
+    Returns (sdist, wheels).
+    '''
+    assert windows()
+    if sdist:
+        assert 0, 'Building Windows wheels from sdist not currently supported'
+
+    sdist_directory = 'pypackage-sdist'
+    make_sdist(sdist_directory)
+
+    wheel_dir = 'pypackage-wheels'
+    os.makedirs(wheel_dir, exist_ok=True)
+
+    wheels = []
+    for abi in abis:
+        cpu, python_version = abi.split('-')
+        assert cpu in ('x32', 'x64')
+        py = f'py -{python_version}-{cpu[1:]}'
+        t = time.time()
+        venv_run([
+                f'pip install clang check-wheel-contents twine',
+                f'{py} setup.py -d {wheel_dir} bdist_wheel',
+                ])
+        wheel = find_new_file(f'{wheel_dir}/*.whl')
+        wheels.append(wheel)
+
+    return sdist, wheels
 
 
 def main():
+
+    s = platform.system()
+
     sdist = None
-    args = jlib.Args(sys.argv[1:])
+    wheels = []
+    pypi = None
+
+    if windows():
+        abis = ['x32-38', 'x32-39', 'x64-38', 'x64-39']
+    else:
+        abis = ['37', '38', '39']
+        manylinux_container_name = None
+        manylinux_install_docker = False
+        manylinux_docker_image = None
+        manylinux_pull_docker_image = None
+
+    args = iter(sys.argv[1:])
     while 1:
-        arg = args.next_or_none()
-        if arg is None:
+        try:
+            arg = next(args)
+        except StopIteration:
             break
-        if arg == '-m':
-            while 1:
-                a = args.next()
-                if a.startswith('-'):
-                    if a == '-s':
-                        sdist = args.next()
-                    else:
-                        raise Exception(f'unrecognised -m option: {a}')
-                else:
-                    items = a
-                    break
-            make_manylinux(items, sdist)
-        elif arg == '-s':
-            sdist = args.next()
+
+        if arg in ('-h', '--help'):
+            print( __doc__)
+
+        elif arg == '--abis':
+            abis = next(args).split(',')
+
+        elif arg == '--pypi':
+            pypi = next(args)
+
+        elif arg == '--sdist':
+            sdist = next(args)
+
+        elif unix() and arg == '--manylinux-c':
+            manylinux_container_name = next(args)
+
+        elif unix() and arg == '--manylinux-d':
+            manylinux_install_docker = int(next(args))
+
+        elif unix() and arg == '--manylinux-i':
+            manylinux_docker_image = next(args)
+
+        elif unix() and arg == '--manylinux-p':
+            manylinux_pull_docker_image = next(args)
+
+        elif arg == 'build-wheels':
+            if windows():
+                sdist, wheels = make_windows(abis, sdist)
+
+            else:
+                sdist, wheels = make_unix(
+                        abis,
+                        sdist,
+                        test_direct_install = False,
+                        install_docker = manylinux_install_docker,
+                        docker_image = manylinux_docker_image,
+                        pull_docker_image = manylinux_pull_docker_image,
+                        container_name = manylinux_container_name,
+                        )
+            log(f'sdist: {sdist}')
+            for wheel in wheels:
+                log(f'    wheel: {wheel}')
+
+        elif arg == 'upload':
+            venv = ensure_venv()
+            if windows():
+                command = f'python -m twine upload {sdist} {" ".join(wheels)}'
+                venv_run(command)
+
         else:
             raise Exception(f'Unrecognised arg: {arg}')
+
+
 
 
 if __name__ == '__main__':
