@@ -81,6 +81,7 @@ import glob
 import os
 import platform
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -113,7 +114,7 @@ def unix():
 
 venv_installed = set()
 
-def venv_run(commands, venv='pypackage-venv'):
+def venv_run(commands, venv='pypackage-venv', clean=False):
     '''
     Runs commands inside Pyton venv, joined by &&.
     commands:
@@ -136,9 +137,17 @@ def venv_run(commands, venv='pypackage-venv'):
                 ]
         post = [f'deactivate']
 
-    if venv not in venv_installed:
+    if clean or venv not in venv_installed:
+        if clean:
+            assert venv.startswith('pypackage-venv')
+            shutil.rmtree(venv, ignore_errors=1)
         venv_installed.add(venv)
-        pre += ['pip install --upgrade pip twine']
+        # Seem to be necessary to install twine in separate pip command,
+        # otherwise it fails with python-3.7.
+        pre += [
+                'pip install --upgrade pip',
+                'pip install --upgrade twine',
+                ]
 
     commands = pre + commands + post
 
@@ -403,6 +412,37 @@ def make_windows(
     return sdist, wheels
 
 
+def test(wheels, code):
+    '''
+    Basic testing of wheels.
+
+    Finds matching wheel in <wheels>, installs in temporary venv, and runs
+    python <code>.
+
+    wheels:
+        List of wheel paths.
+    code:
+        Python code to run. '\n' will be replaced by newline. E.g. 'import foo'
+    '''
+    python_version = ''.join(platform.python_version().split('.')[:2])
+    for wheel in wheels:
+        base = os.path.basename(wheel)
+        m = re.match( f'^.*-py{python_version}-none-.*[.]whl$', base)
+        log( f'base={base} python_version={python_version} m={m}')
+        if m:
+            log( f'Testing wheel: {wheel}')
+            script_name = 'pypackage_test.py'
+            with open(script_name, 'w') as f:
+                f.write(code)
+            venv_run(
+                    [
+                        f'pip install {wheel}',
+                        f'python {script_name}',
+                    ],
+                    venv='pypackage-venv-test',
+                    clean=True,
+                    )
+
 def main():
 
     s = platform.system()
@@ -468,6 +508,21 @@ def main():
             log(f'sdist: {sdist}')
             for wheel in wheels:
                 log(f'    wheel: {wheel}')
+
+        elif arg == 'test':
+            test_wheels = wheels
+            while 1:
+                a = next(args)
+                if a.startswith('-'):
+                    if a == '-w':
+                        test_wheels = [next(args)]
+                    else:
+                        raise Exception(f'Unrecognised arg: {a}')
+                else:
+                    code = a
+                    code = code.replace('\\n', '\n')
+                    break
+            test(test_wheels, code)
 
         elif arg == 'upload':
             venv = ensure_venv()
