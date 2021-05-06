@@ -18,6 +18,33 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\charter.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\charter_string.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\clist.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\latex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\main_svg.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\main_tex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\parser.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\svg.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\svg-charter\src\svg_utils.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\owemdjee\svg-charter\src\charter.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\svg-charter\src\charter_string.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\svg-charter\src\clist.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\svg-charter\src\parser.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\svg-charter\src\renderer.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\svg-charter\src\svg_utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\svg-charter\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libsvgcharter</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7FCF79}</ProjectGuid>
@@ -119,7 +146,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tinyexpr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSVGCHARTER;SVGCHARTER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -204,7 +231,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tinyexpr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSVGCHARTER;SVGCHARTER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

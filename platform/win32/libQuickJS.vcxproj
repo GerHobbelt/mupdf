@@ -18,6 +18,49 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\cutils.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\libbf.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\libregexp.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\libunicode.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\qjs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\qjsc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\quickjs-find-module.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\quickjs-libc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\quickjs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\run-test262.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\unicode_gen.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\cutils.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\libbf.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\libregexp-opcode.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\libregexp.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\libunicode-table.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\libunicode.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\list.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\quickjs-atom.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\quickjs-libc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\quickjs-opcode.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\quickjs.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\QuickJS\unicode_gen_def.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\cfg.sh" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\Changelog" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\qjscalc.js" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\repl.js" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\test262.conf" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\test262o.conf" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\TODO" />
+    <None Include="..\..\thirdparty\owemdjee\QuickJS\unicode_download.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\thirdparty\owemdjee\QuickJS\CMakeLists.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\QuickJS\readme.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\QuickJS\test262o_errors.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\QuickJS\test262_errors.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libQuickJS</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0E57BA}</ProjectGuid>
@@ -119,7 +162,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -204,7 +247,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
