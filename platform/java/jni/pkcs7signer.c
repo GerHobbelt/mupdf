@@ -241,3 +241,54 @@ FUN(PKCS7Signer_finalize)(JNIEnv *env, jobject self)
 	(*env)->SetLongField(env, self, fid_PKCS7Signer_pointer, 0);
 	pdf_drop_signer(ctx, signer);
 }
+
+JNIEXPORT jstring JNICALL
+FUN(PKCS7Signer_formatInfo)(JNIEnv *env, jobject self, jstring jname, jobject jdname,
+		jstring jreason, jstring jlocation, int64_t time, jboolean labels)
+{
+	fz_context *ctx = get_context(env);
+	pdf_pkcs7_signer *signer = from_PKCS7Signer_safe(env, self);
+
+	jobject jresult = NULL;
+	char *name = NULL;
+	char *reason = NULL;
+	char *location = NULL;
+	pdf_pkcs7_designated_name *dname = NULL;
+	char *result = NULL;
+
+	if (!ctx || !signer)
+		return NULL;
+
+	if (jname)
+		name = (*env)->GetStringUTFChars(env, jname, NULL);
+	if (jreason)
+		reason = (*env)->GetStringUTFChars(env, jreason, NULL);
+	if (jlocation)
+		location = (*env)->GetStringUTFChars(env, jlocation, NULL);
+
+	dname = signer_designated_name(ctx, signer);
+
+	fz_try(ctx) {
+		result = pdf_signature_info(ctx, name, dname,
+									   reason, location,
+									   time,
+									   labels);
+		jresult = (*env)->NewStringUTF(env, result);
+	}
+	fz_always(ctx) {
+		if (jname)
+			(*env)->ReleaseStringUTFChars(env, jname, name);
+		if (jreason)
+			(*env)->ReleaseStringUTFChars(env, jreason, reason);
+		if (jlocation)
+			(*env)->ReleaseStringUTFChars(env, jlocation, location);
+	}
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return jresult;
+}
+
+
+
+

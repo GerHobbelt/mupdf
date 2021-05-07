@@ -27,4 +27,6 @@ public abstract class PKCS7Signer
 	// This should be based on the chosen signing certificate (and any associated auxiliary
 	// certificates required)
 	public abstract int maxDigest();
+
+	public native String formatInfo(String name, PKCS7DesignatedName dname, String reason, String location, long time, boolean labels);
 }
