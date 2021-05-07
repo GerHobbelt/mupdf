@@ -79,6 +79,15 @@ static int PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | /* PDF_PR
 static int ignore_password_troubles = 0;
 static int has_password_troubles = 0;
 
+static int skip_fonts_dump = 0;
+static int skip_images_dump = 0;
+static int skip_forms_dump = 0;
+static int skip_psobjects_dump = 0;
+static int skip_annotations_dump = 0;
+static int skip_pagewidgets_dump = 0;
+static int skip_uri_links_dump = 0;
+static int skip_separations_dump = 0;
+
 static void dump_observed_errors(fz_context* ctx, fz_output* out);
 static int write_level_start(fz_context* ctx, fz_output* out, const char bracket_open);
 
@@ -146,6 +155,16 @@ usage(void)
 		"\t-p -\tpassword for decryption\n"
 		"\t-i -\tignore:\n"
 		"\t  p \t- password troubles (delivers starkly reduced info)\n"
+		"\t-s -\tskip / do not dump:\n"
+		"\t  f \t- fonts\n"
+		"\t  i \t- images\n"
+		"\t  q \t- forms ('questionaires')\n"
+		"\t  x \t- PostScript XObjects\n"
+		"\t  a \t- annotations\n"
+		"\t  w \t- widgets\n"
+		"\t  u \t- (uri) links\n"
+		"\t  s \t- separations\n"
+		"\t  i \t- images\n"
 		"\t-m {0,1,2}\tmode for printing bad string content:\n"
 		"\t          \t- 0: massaged to hex,\n"
 		"\t          \t- 1: hex dumped with legible characters interleaved,\n"
@@ -1051,7 +1070,7 @@ printinfo(fz_context* ctx, globals* glo)
 		write_level_end(ctx, out, ']');
 	}
 
-	if (glo->fonts > 0)
+	if (glo->fonts > 0 && !skip_fonts_dump)
 	{
 		write_item_int(ctx, out, "FontsCount", glo->fonts);
 		write_item_starter_block(ctx, out, "Fonts", '[');
@@ -1078,7 +1097,7 @@ printinfo(fz_context* ctx, globals* glo)
 		write_level_end(ctx, out, ']');
 	}
 
-	if (glo->images > 0)
+	if (glo->images > 0 && !skip_images_dump)
 	{
 		int n = glo->images;
 		write_item_int(ctx, out, "ImagesCount", n);
@@ -1236,7 +1255,7 @@ printinfo(fz_context* ctx, globals* glo)
 		write_level_end(ctx, out, ']');
 	}
 
-	if (glo->forms > 0)
+	if (glo->forms > 0 && !skip_forms_dump)
 	{
 		write_item_int(ctx, out, "FormXObjectsCount", glo->forms);
 		write_item_starter_block(ctx, out, "FormXObjects", '[');
@@ -1263,7 +1282,7 @@ printinfo(fz_context* ctx, globals* glo)
 		write_level_end(ctx, out, ']');
 	}
 
-	if (glo->psobjs > 0)
+	if (glo->psobjs > 0 && !skip_psobjects_dump)
 	{
 		write_item_int(ctx, out, "PostscriptXObjectsCount", glo->psobjs);
 		write_item_starter_block(ctx, out, "PostscriptXObjects", '[');
@@ -1517,6 +1536,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 		// and pick up the updated statistics...
 		fz_extract_device_statistics(ctx, stats_dev, stats);
 
+		if (!skip_annotations_dump)
 		{
 			pdf_annot* annot;
 
@@ -1549,7 +1569,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 			}
 		}
 
-
+		if (!skip_pagewidgets_dump)
 		{
 			pdf_widget* widget;
 
@@ -1609,6 +1629,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 
 		next: A pointer to the next link on the same page.
 		*/
+		if (!skip_uri_links_dump)
 		{
 			fz_link* links = NULL;
 			int json_stack_outlines_level = -1;
@@ -1689,6 +1710,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 			}
 		}
 
+		if (!skip_separations_dump)
 		{
 			fz_separations* seps = pdf_page_separations(ctx, page_obj);
 			int count = fz_count_separations(ctx, seps);
@@ -2312,11 +2334,19 @@ int pdfmetadump_main(int argc, const char** argv)
 
 	PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
 	ignore_password_troubles = 0;
+	skip_fonts_dump = 0;
+	skip_images_dump = 0;
+	skip_forms_dump = 0;
+	skip_psobjects_dump = 0;
+	skip_annotations_dump = 0;
+	skip_pagewidgets_dump = 0;
+	skip_uri_links_dump = 0;
+	skip_separations_dump = 0;
 
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "i:o:p:m:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "i:o:p:m:s:h")) != -1)
 	{
 		switch (c)
 		{
@@ -2339,6 +2369,52 @@ int pdfmetadump_main(int argc, const char** argv)
 			default:
 				PRINT_OBJ_TO_JSON_FLAGS = (PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | 1 /* ASCII flag */);
 				break;
+			}
+			break;
+		case 's':
+			{
+			const char* spec = fz_optarg;
+			while (spec && *spec)
+			{
+				switch (*spec)
+				{
+				case 'f':
+					++skip_fonts_dump;
+					break;
+
+				case 'i':
+					++skip_images_dump;
+					break;
+
+				case 'q':
+					++skip_forms_dump;
+					break;
+
+				case 'x':
+					++skip_psobjects_dump;
+					break;
+
+				case 'a':
+					++skip_annotations_dump;
+					break;
+
+				case 'w':
+					++skip_pagewidgets_dump;
+					break;
+
+				case 'u':
+					++skip_uri_links_dump;
+					break;
+
+				case 's':
+					++skip_separations_dump;
+					break;
+
+				default:
+					fz_error(ctx, "Unsupported -s argument: %c in -s %s\n\n", *spec, fz_optarg);
+					return usage();
+				}
+			}
 			}
 			break;
 		default:
