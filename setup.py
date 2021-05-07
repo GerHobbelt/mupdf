@@ -59,6 +59,10 @@ def cache(function):
     return wrapper
 
 @cache
+def root_dir():
+    return os.path.dirname(os.path.abspath(__file__))
+
+@cache
 def windows():
     s = platform.system()
     return s == 'Windows' or s.startswith('CYGWIN')
@@ -74,18 +78,14 @@ def build_dir():
     if ret is None:
         cpu = 'x32' if sys.maxsize == 2**31 - 1 else 'x64'
         python_version = '.'.join(platform.python_version().split('.')[:2])
-        ret = f'build/shared-release-{cpu}-py{python_version}'
+        ret = f'{root_dir()}/build/shared-release-{cpu}-py{python_version}'
     return ret
 
 @cache
-def mupdf_dir():
-    return os.path.abspath(f'{__file__}/..')
-
-@cache
 def in_sdist():
-    return os.path.exists(f'{mupdf_dir()}/PKG-INFO')
+    return os.path.exists(f'{root_dir()}/PKG-INFO')
 
-sys.path.append(f'{mupdf_dir()}/scripts')
+sys.path.append(f'{root_dir()}/scripts')
 import pipcl
 
 
@@ -105,7 +105,7 @@ def mupdf_version():
     time to the base version in include/mupdf/fitz/version.h. For example
     '1.18.0.20210330.1800'.
     '''
-    with open(f'{mupdf_dir()}/include/mupdf/fitz/version.h') as f:
+    with open(f'{root_dir()}/include/mupdf/fitz/version.h') as f:
         text = f.read()
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
@@ -156,14 +156,15 @@ def git_info():
         diff: diff relative to current.
     '''
     def get_id(command):
-        text = subprocess.check_output(command, shell=True)
+        text = subprocess.check_output(command, shell=True, cwd=root_dir())
         text = text.decode('utf8')
         text = text.split('\n', 1)[0]
         text = text.split(' ', 1)[0]
         return text
     current = get_id('git show --pretty=oneline')
     origin = get_id('git show --pretty=oneline origin')
-    diff = subprocess.check_output('git diff', shell=True).decode('utf8')
+    command = ''
+    diff = subprocess.check_output(f'cd {root_dir()} && git diff', shell=True).decode('utf8')
     return current, origin, diff
 
 
@@ -203,7 +204,7 @@ def sdist():
     # diff relative to origin.
     #
     git_id, git_id_origin, git_diff = git_info()
-    with open('git-info', 'w') as f:
+    with open(f'{root_dir()}/git-info', 'w') as f:
         f.write(f'git-id: {git_id}\n')
         f.write(f'git-id-origin: {git_id_origin}\n')
         f.write(f'git-diff:\n{git_diff}\n')
@@ -219,9 +220,9 @@ def sdist():
                 'git-info',
                 ]
 
-    if not os.path.exists('.git'):
+    if not os.path.exists(f'{root_dir()}/.git'):
         raise Exception(f'Cannot make sdist because not a git checkout')
-    paths = pipcl.git_items( mupdf_dir(), submodules=True)
+    paths = pipcl.git_items( root_dir(), submodules=True)
 
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
@@ -234,7 +235,8 @@ def sdist():
     if use_swig:
         b += '2'
     extra = ' --swig-windows-auto' if windows() else ''
-    command = f'{sys.executable} ./scripts/mupdfwrap.py{extra} -d {build_dir()} -b "{b}"'
+    command = '' if os.getcwd() == root_dir() else f'cd {os.path.relpath(root_dir())} && '
+    command += f'{sys.executable} ./scripts/mupdfwrap.py{extra} -d {build_dir()} -b "{b}"'
     log(f'Running: {command}')
     subprocess.check_call(command, shell=True)
     paths += [
@@ -267,11 +269,11 @@ def build():
     if g_test_minimal:
         # Cut-down for testing.
         log(f'g_test_minimal set so doing minimal build.')
-        os.makedirs(f'{mupdf_dir()}/{build_dir()}', exist_ok=True)
+        os.makedirs(f'{root_dir()}/{build_dir()}', exist_ok=True)
         paths = (
-                f'{mupdf_dir()}/{build_dir()}/mupdf.py',
-                f'{mupdf_dir()}/{build_dir()}/_mupdf.pyd',
-                f'{mupdf_dir()}/{build_dir()}/mupdfcpp.dll',
+                f'{root_dir()}/{build_dir()}/mupdf.py',
+                f'{root_dir()}/{build_dir()}/_mupdf.pyd',
+                f'{root_dir()}/{build_dir()}/mupdfcpp.dll',
                 )
         ret = []
         for path in paths:
@@ -299,12 +301,12 @@ def build():
         b += '2'    # Build SWIG-generated source.
     b += '3'        # Build SWIG library _mupdf.so.
 
-    command = (
-            f'cd "{mupdf_dir()}"'
-            f' && "{sys.executable}" ./scripts/mupdfwrap.py'
-                f'{" --swig-windows-auto" if windows() else ""}'
-                f' -d {build_dir()}'
-                f' -b {b}'
+    command = '' if root_dir() == os.getcwd() else f'cd {os.path.relpath(root_dir())} && '
+    command += (
+            f'"{sys.executable}" ./scripts/mupdfwrap.py'
+            f'{" --swig-windows-auto" if windows() else ""}'
+            f' -d {build_dir()}'
+            f' -b {b}'
             )
 
     do_build = os.environ.get('MUPDF_SETUP_DO_BUILD')
@@ -453,6 +455,7 @@ https://twiki.ghostscript.com/do/view/Main/MuPDFWrap
 mupdf_package = pipcl.Package(
         name = 'mupdf',
         version = mupdf_version(),
+        root = root_dir(),
         summary = 'Python bindings for MuPDF library.',
         description = description,
         classifiers = [
@@ -473,7 +476,6 @@ mupdf_package = pipcl.Package(
         fn_build = build,
         fn_clean = clean,
         fn_sdist = sdist,
-        root_dir = os.path.dirname(__file__),
         )
 
 
