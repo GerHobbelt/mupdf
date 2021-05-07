@@ -448,7 +448,7 @@ FUN(PDFWidget_signatureAppearance)(JNIEnv *env, jobject self, jobject jrect, job
     char *left = NULL;
     char *right = NULL;
     fz_display_list *dlist = NULL;
-    fz_text_language lang = FZ_LANG_UNSET;  //  pdf_annot_language(ctx, (pdf_annot *)widget);
+    fz_text_language lang = pdf_annot_language(ctx, (pdf_annot *)widget);
 
     if (!ctx || !widget)
         return NULL;
