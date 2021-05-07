@@ -59,6 +59,7 @@ class Package:
     def __init__(self,
             name,
             version,
+            root=None,
             summary = None,
             description = None,
             classifiers = None,
@@ -74,13 +75,14 @@ class Package:
             fn_build = None,
             fn_clean = None,
             fn_sdist = None,
-            root_dir = None,
             ):
         '''
         name
             A string, the name of the Python package.
         version
             A string containing only 0-9 and '.'.
+        root:
+            Root of package, defaults to current directory.
         summary
             A string.
         description
@@ -102,11 +104,12 @@ class Package:
             A function taking no args that builds the package.
 
             Should return a list of items; each item should be a tuple of two
-            strings (from_, to_), or a single string <path> which is treated as
+            strings (from_, to_) or a single string <path> which is treated as
             the tuple (path, path).
 
-            <from_> should be the path to a file. <to_> identifies what the
-            file should be called within a wheel or when installing.
+            <from_> should be the path to a file; if a relative path it is
+            assumed to be relative to <root>. <to_> identifies what the file
+            should be called within a wheel or when installing.
 
             If we are building a wheel (e.g. 'bdist_wheel' in the argv passed
             to self.handle_argv() or PEP-517 pip calls self.build_wheel()), we
@@ -120,19 +123,18 @@ class Package:
             A function taking a single arg <all_> that cleans generated files.
             <all_> is true iff --all is in argv.
 
-            If <root_dir> is specified, this function can also returns a list
-            of files/directories to be deleted; for safety we assert that each
-            of these paths startswith <root_dir>.
+            Can also returns a list of files/directories to be deleted.
+            Relative paths are interpreted as relative to <root>. Paths are
+            asserted to be within <root>.
         fn_sdist
-            A function taking no args that returns a list of paths, e.g. using
-            git_items(), for files that should be copied into the sdist. It is
+            A function taking no args that returns a list of paths, e.g.
+            using git_items(), for files that should be copied into the
+            sdist. Relative paths are interpreted as relative to <root>. It is
             an error if a path does not exist or is not a file.
-        root_dir:
-            Root of package; used as a check when deleting paths returned by
-            fn_clean().
         '''
         self.name = name
         self.version = version
+        self.root_sep = os.path.abspath(root if root else os.getcwd()) + os.sep
         self.summary = summary
         self.description = description
         self.classifiers = classifiers
@@ -148,7 +150,6 @@ class Package:
         self.fn_build = fn_build
         self.fn_clean = fn_clean
         self.fn_sdist = fn_sdist
-        self.root_dir = os.path.abspath(root_dir) + os.sep
 
 
     def build_wheel(self, wheel_directory, config_settings=None, metadata_directory=None):
@@ -204,8 +205,8 @@ class Package:
             # Add the files returned by fn_build().
             #
             for item in items:
-                from_, to_ = _fromto(item)
-                add_file(from_, to_)
+                (from_abs, from_rel), (to_abs, to_rel) = self._fromto(item)
+                add_file(from_abs, to_rel)
 
             dist_info_path = f'{self.name}-{self.version}.dist-info'
             # Add <name>-<version>.dist-info/WHEEL.
@@ -223,8 +224,8 @@ class Package:
             add_str(self._metainfo(), f'{dist_info_path}/METADATA')
             if self.license_files:
                 for license_file in self.license_files:
-                    from_, to_ = _fromto(license_file)
-                    add_file(from_, f'{dist_info_path}/{to_}')
+                    (from_abs, from_to), (to_abs, to_rel) = self._fromto(license_file)
+                    add_file(from_abs, f'{dist_info_path}/{to_rel}')
 
             # Update <name>-<version>.dist-info/RECORD. This must be last.
             #
@@ -266,16 +267,17 @@ class Package:
         tarpath = f'{sdist_directory}/{self.name}-{self.version}.tar.gz'
         with tarfile.open(tarpath, 'w:gz') as tar:
             for path in paths:
-                if os.path.abspath(path).startswith(f'{os.path.abspath(sdist_directory)}/'):
+                path_rel, path_abs = self._path_relative_to_root( path)
+                if path_abs.startswith(f'{os.path.abspath(sdist_directory)}/'):
                     # Ignore files inside <sdist_directory>.
-                    assert 0, f'Path is inside sdist_directory={sdist_directory}: {path!r}'
-                if not os.path.exists(path):
-                    assert 0, f'Path does not exist: {path!r}'
-                if not os.path.isfile(path):
-                    assert 0, f'Path is not a file: {path!r}'
+                    assert 0, f'Path is inside sdist_directory={sdist_directory}: {path_abs!r}'
+                if not os.path.exists(path_abs):
+                    assert 0, f'Path does not exist: {path_abs!r}'
+                if not os.path.isfile(path_abs):
+                    assert 0, f'Path is not a file: {path_abs!r}'
                 #log(f'path={path}')
-                tar.add( path, f'{self.name}-{self.version}/{path}', recursive=False)
-                manifest.append(path)
+                tar.add( path_abs, f'{self.name}-{self.version}/{path_rel}', recursive=False)
+                manifest.append(path_rel)
             add(tar, f'{self.name}-{self.version}/PKG-INFO', self._metainfo())
 
             # It doesn't look like MANIFEST or setup.cfg are required?
@@ -317,14 +319,12 @@ class Package:
             return
         paths = self.fn_clean(all_)
         if paths:
-            assert self.root_dir, \
-                    'fn_clean() returned paths but <root_dir> was not specified'
             if isinstance(paths, str):
                 paths = paths,
             for path in paths:
                 path = os.path.abspath(path)
-                assert path.startswith(self.root_dir), \
-                        f'path={path!r} does not start with root_dir={self.root_dir!r}'
+                assert path.startswith(self.root_sep), \
+                        f'path={path!r} does not start with root={self.root_sep!r}'
                 _log(f'Removing: {path}')
                 shutil.rmtree(path, ignore_errors=True)
 
@@ -352,13 +352,13 @@ class Package:
 
         record = _Record() if record_path else None
         for item in items:
-            from_, to_ = _fromto(item)
-            to_path = f'{sitepackages}/{to_}'
-            _log(f'copying from {from_} to {to_path}')
-            shutil.copy2( from_, f'{to_path}')
+            (from_abs, from_rel), (to_abs, to_rel) = self._fromto(item)
+            to_path = f'{sitepackages}/{to_rel}'
+            _log(f'copying from {from_abs} to {to_path}')
+            shutil.copy2( from_abs, f'{to_path}')
             if record:
                 # Could maybe use relative path of to_path from sitepackages/.
-                record.add_file(from_, to_)
+                record.add_file(from_abs, to_path)
 
         if record:
             with open(record_path, 'w') as f:
@@ -385,24 +385,24 @@ class Package:
         self._write_info(f'{egg_base}/.egg-info')
 
 
-    def _write_info(self, root):
+    def _write_info(self):
         '''
         Writes egg/dist info to files in <root>/.
         '''
         _log(f'_write_info(): creating files in root={root}')
         os.mkdir(root)
-        with open(f'{root}/PKG-INFO', 'w') as f:
+        with open(f'{self.root_sep}PKG-INFO', 'w') as f:
             f.write(self._metainfo())
 
         # These don't seem to be required?
         #
-        #with open(f'{root}/SOURCES.txt', 'w') as f:
+        #with open(f'{root_sep}SOURCES.txt', 'w') as f:
         #    pass
-        #with open(f'{root}/dependency_links.txt', 'w') as f:
+        #with open(f'{root_sep}dependency_links.txt', 'w') as f:
         #    pass
-        #with open(f'{root}/top_level.txt', 'w') as f:
+        #with open(f'{root_sep}top_level.txt', 'w') as f:
         #    f.write(f'{self.name}\n')
-        #with open(f'{root}/METADATA', 'w') as f:
+        #with open(f'{root_sep}METADATA', 'w') as f:
         #    f.write(self._metainfo())
 
 
@@ -542,6 +542,7 @@ class Package:
         return ('{'
             f'name={self.name!r}'
             f' version={self.version!r}'
+            f' root_sep={self.root_sep!r}'
             f' summary={self.summary!r}'
             f' description={self.description!r}'
             f' classifiers={self.classifiers!r}'
@@ -557,7 +558,6 @@ class Package:
             f' fn_build={self.fn_build!r}'
             f' fn_sdist={self.fn_sdist!r}'
             f' fn_clean={self.fn_clean!r}'
-            f' root_dir={self.root_dir!r}'
             '}'
             )
 
@@ -604,6 +604,50 @@ class Package:
             ret += self.description.strip()
             ret += '\n'
         return ret
+
+    def _path_relative_to_root(self, path):
+        '''
+        Returns (path_abs, path_rel), where <path_rel> is relative to
+        self.root_sep and <path_abs> is absolute path.
+
+        Interprets <path> as relative to self.root_sep if not absolute.
+
+        We use os.path.realpath() to resolve any links.
+
+        Assert-fails if path is not within self.root_sep.
+        '''
+        if os.path.isabs(path):
+            p = path
+        else:
+            p = os.path.join(self.root_sep, path)
+        p = os.path.realpath(os.path.abspath(p))
+        assert p.startswith(self.root_sep), f'Path not within root={self.root_sep}: {path}'
+        return p, os.path.relpath(p, self.root_sep)
+
+    def _fromto(self, p):
+        '''
+        Returns ((from_abs, from_rel), (to_abs, to_rel)).
+
+        If <p> is a string we convert to (p, p). Otherwise we assert that
+        <p> is a tuple of two strings. Non-absolute paths are assumed to be
+        relative to self.root_sep.
+
+        from_abs and to_abs are absolute paths, asserted to be within
+        self.root_sep.
+
+        from_rel and to_rel are derived from the _abs paths and are relative to
+        self.root_sep.
+        '''
+        ret = None
+        if isinstance(p, str):
+            ret = p, p
+        elif isinstance(p, tuple) and len(p) == 2:
+            from_, to_ = p
+            if isinstance(from_, str) and isinstance(to_, str):
+                ret = from_, to_
+        assert ret, 'p should be str or (str, str), but is: {p}'
+        from_, to_ = ret
+        return self._path_relative_to_root(from_), self._path_relative_to_root(to_)
 
 
 # Functions that might be useful.
@@ -664,20 +708,6 @@ def _log(text=''):
     for line in text.split('\n'):
         print(f'pipcl.py: {line}')
     sys.stdout.flush()
-
-
-def _fromto(p):
-    '''
-    If <p> is a string we return (p, p). Otherwise we assert that <p> is a
-    tuple of two strings and return <p> itself.
-    '''
-    if isinstance(p, str):
-        return p, p
-    elif isinstance(p, tuple) and len(p) == 2:
-        from_, to_ = p
-        if isinstance(from_, str) and isinstance(to_, str):
-            return from_, to_
-    assert 0, 'p should be str or (str, str), but is: {p}'
 
 
 class _Record:
