@@ -413,38 +413,25 @@ def make_unix(
         e = system(f'docker start {container_name}', raise_errors=False,)
         log(f'docker start: e={e}')
 
-    def docker_system(command, return_output=False):
+    def docker_system(command, prefix='', return_output=False):
         '''
         Runs specified command inside container. Runs via bash so <command> can
         contain shell constructs. If out is 'capture', we return the output text.
         '''
-        #prefix = f'docker: {prefix}'
         command = command.replace('"', '\\"')
         command = f'docker exec {container_name} bash -c "{command}"'
         log(f'Running: {command}')
         return jlib.system(
                 command,
                 out='return' if return_output else 'log',
-                prefix=None if return_output else 'container: ',
+                prefix=None if return_output else f'container: {prefix}',
                 out_log_caller=2,
                 )
-        # Set universal_newlines=True so we get text output, not bytes.
-        #if return_output:
-        #ret = subprocess.run(
-        #        command, shell=True, universal_newlines=True, stdout=subprocess.PIPE,
-        #        stderr=subprocess.STDOUT)
-        #    ret.check_returncode()
-        #    return ret.stdout
-        #else:
-        #    e = os.system(command)
-        #    if e:
-        #        raise Exception(f'Docker command failed: {command}')
 
     if test_direct_install:
         # Test direct intall from sdist.
         #
         docker_system( f'pip3 -vvv install /io/{sdist_leaf}')
-        #docker_system( f'/io/mupdfwrap_test.py /io/Python2.pdf')
 
     container_pythons = []
     for abi in abis:
@@ -468,7 +455,10 @@ def make_unix(
 
         # Build wheel.
         t = time.time()
-        docker_system(f'cd {package_root} && {container_python}/bin/python ./setup.py --dist-dir /io bdist_wheel')
+        docker_system(
+                f'cd {package_root} && {container_python}/bin/python ./setup.py --dist-dir /io bdist_wheel',
+                prefix=f'{container_python}: '
+                )
 
         # Find new wheel.
         wheel = find_new_file(f'{io_directory}/{package_root}-py{vv}-none-*.whl', t)
