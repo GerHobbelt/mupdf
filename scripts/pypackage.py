@@ -125,7 +125,7 @@ import time
 
 try:
     import jlib
-except Exception as e:
+except ModuleNotFoundError as e:
     print(f'Unable to import jlib: {e}')
     jlib = None
 
@@ -141,7 +141,7 @@ def log(text=''):
     sys.stdout.flush()
 
 
-def system(command, raise_errors=True, return_output=False, prefix=None):
+def system(command, raise_errors=True, return_output=False, prefix=None, caller=1):
     if jlib:
         return jlib.system(
                 command,
@@ -149,6 +149,7 @@ def system(command, raise_errors=True, return_output=False, prefix=None):
                 raise_errors=raise_errors,
                 out='return' if return_output else 'log',
                 prefix=prefix,
+                out_log_caller=caller+1,
                 )
     else:
         log(f'Running: {command}')
@@ -305,6 +306,7 @@ def make_sdist(out_directory):
 def make_unix(
         sdist=None,
         abis=None,
+        out_dir=None,
         test_direct_install=False,
         install_docker=None,
         docker_image=None,
@@ -321,6 +323,8 @@ def make_unix(
             List of string python versions for which we build
             wheels. Any '.' are removed and we then take the first two
             characters. E.g. ['3.8.4', '39'] is same as ['38', '39'].
+        out_dir
+            If not None, the directory into which we generated wheels.
         test_direct_install
             If true we run 'pip install <sdist>' in the container.
             If None we default to false.
@@ -355,6 +359,7 @@ def make_unix(
 
     sdist_directory = 'pypackage-dist'
     io_directory = 'pypackage-io'
+    #io_directory = out_dir if out_dir else 'pypackage-io'
 
     if not sdist:
         # Create new sdist.
@@ -399,13 +404,13 @@ def make_unix(
             f' -v {os.path.abspath(io_directory)}:/io'
             f' {docker_image}'
             ,
-            error_raise=False,
+            raise_errors=False,
             )
         log(f'docker run: e={e}')
 
         # Start docker instance if not already started.
         #
-        e = system(f'docker start {container_name}', error_raise=False,)
+        e = system(f'docker start {container_name}', raise_errors=False,)
         log(f'docker start: e={e}')
 
     def docker_system(command, return_output=False):
@@ -417,16 +422,23 @@ def make_unix(
         command = command.replace('"', '\\"')
         command = f'docker exec {container_name} bash -c "{command}"'
         log(f'Running: {command}')
+        return jlib.system(
+                command,
+                out='return' if return_output else 'log',
+                prefix=None if return_output else 'container: ',
+                out_log_caller=2,
+                )
         # Set universal_newlines=True so we get text output, not bytes.
-        if return_output:
-            ret = subprocess.run(command, shell=True, universal_newlines=True, stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT)
-            ret.check_returncode()
-            return ret.stdout
-        else:
-            e = os.system(command)
-            if e:
-                raise Exception(f'Docker command failed: {command}')
+        #if return_output:
+        #ret = subprocess.run(
+        #        command, shell=True, universal_newlines=True, stdout=subprocess.PIPE,
+        #        stderr=subprocess.STDOUT)
+        #    ret.check_returncode()
+        #    return ret.stdout
+        #else:
+        #    e = os.system(command)
+        #    if e:
+        #        raise Exception(f'Docker command failed: {command}')
 
     if test_direct_install:
         # Test direct intall from sdist.
@@ -461,6 +473,8 @@ def make_unix(
         # Find new wheel.
         wheel = find_new_file(f'{io_directory}/{package_root}-py{vv}-none-*.whl', t)
         wheels.append(wheel)
+        if out_dir:
+            shutil.copy2(wheel, out_dir)
 
     log( f'wheels are ({len(wheels)}):')
     for wheel in wheels:
@@ -489,6 +503,10 @@ def make_windows(
             pythonversion:
                 String version number, may contain '.' characters, e.g. '3.8'
                 or '39'.
+    out_dir:
+        Directory into which we copy the generated wheels. Defaults to
+        'pypackage-wheels'.
+
     Returns (sdist, wheels).
     '''
     log(f'sdist={sdist} abis={abis} out_dir={out_dir}')
@@ -692,6 +710,7 @@ def main():
                 sdist, wheels = make_unix(
                         sdist,
                         abis,
+                        outdir,
                         test_direct_install = False,
                         install_docker = manylinux_install_docker,
                         docker_image = manylinux_docker_image,
