@@ -14,6 +14,7 @@
 static pdf_document *doc = NULL;
 static fz_context *ctx = NULL;
 static int dorgb = 0;
+static int doalpha = 0;
 static int doicc = 1;
 static const char *output_template_path = "";
 static int count = 0;
@@ -25,6 +26,7 @@ static int usage(void)
 		"\t-o -\toutput files name template: generated filenames are appended\n"
 		"\t-p\tpassword\n"
 		"\t-r\tconvert images to rgb\n"
+        "\t-a\tembed SMasks as alpha channel\n"
 		"\t-N\tdo not use ICC color conversions\n");
 
 	return EXIT_FAILURE;
@@ -97,6 +99,7 @@ static void saveimage(pdf_obj *ref)
 {
 	fz_image *image = NULL;
 	fz_pixmap *pix = NULL;
+	fz_pixmap *mask = NULL;
 	char buf[40];
 	fz_compressed_buffer *cbuf;
 	int type;
@@ -133,12 +136,27 @@ static void saveimage(pdf_obj *ref)
 		else
 		{
 			pix = fz_get_pixmap_from_image(ctx, image, NULL, NULL, 0, 0);
+			if (image->mask && doalpha)
+			{
+				mask = fz_get_pixmap_from_image(ctx, image->mask, NULL, NULL, 0, 0);
+				if (mask->w == pix->w && mask->h == pix->h)
+				{
+					fz_pixmap *apix = fz_new_pixmap_from_color_and_mask(ctx, pix, mask);
+					fz_drop_pixmap(ctx, pix);
+					pix = apix;
+				}
+				else
+				{
+					fz_warn(ctx, "cannot combine image with smask if different resolution");
+				}
+			}
 			writepixmap(pix, buf);
 		}
 	}
 	fz_always(ctx)
 	{
 		fz_drop_image(ctx, image);
+		fz_drop_pixmap(ctx, mask);
 		fz_drop_pixmap(ctx, pix);
 	}
 	fz_catch(ctx)
@@ -255,13 +273,14 @@ int pdfextract_main(int argc, const char **argv)
 	count = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:rNh")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:raNh")) != -1)
 	{
 		switch (c)
 		{
 		case 'o': output_template_path = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		case 'r': dorgb++; break;
+		case 'a': doalpha++; break;
 		case 'N': doicc^=1; break;
 		default: return usage();
 		}
