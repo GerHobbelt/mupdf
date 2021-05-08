@@ -6595,12 +6595,6 @@ def make_wheel( do_build, cpu=None, python_version=None, upload=False, version=N
 
 def main():
 
-    # Set up behaviour of jlib.log().
-    #
-    jlib.g_log_prefixes.append( jlib.LogPrefixTime( time_=False, elapsed=True))
-    jlib.g_log_prefixes.append( jlib.g_log_prefix_scopes)
-    jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
-
     # Set default build directory. Can br overridden by '-d'.
     #
     build_dirs = BuildDirs()
