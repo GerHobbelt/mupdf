@@ -400,9 +400,83 @@ FUN(PDFWidget_signNative)(JNIEnv *env, jobject self, jobject signer, jobject jim
 	if (!pkcs7signer) jni_throw_arg(env, "signer must not be null");
 
 	fz_try(ctx)
-		pdf_sign_signature(ctx, widget, pkcs7signer, image);
+        pdf_sign_signature(ctx, widget, pkcs7signer, image);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
 	return JNI_TRUE;
+}
+
+//  this is basically just like PDFWidget_signNative except we use a
+//  display list when signing.
+JNIEXPORT jboolean JNICALL
+FUN(PDFWidget_signWithAppearance)(JNIEnv *env, jobject self, jobject signer, jobject jdlist, jboolean useDate)
+{
+	fz_context *ctx = get_context(env);
+	pdf_widget *widget = from_PDFWidget_safe(env, self);
+	pdf_pkcs7_signer *pkcs7signer = from_PKCS7Signer_safe(env, signer);
+	fz_display_list *dlist = from_DisplayList_safe(env, jdlist);
+    int64_t signTime = 0;
+
+	if (!ctx || !widget)
+		return JNI_FALSE;
+	if (!pkcs7signer)
+		jni_throw_arg(env, "signer must not be null");
+	if (!dlist)
+		jni_throw_arg(env, "display list must not be null");
+
+	if (useDate) {
+        //  use the current date/time
+        signTime = time(NULL);
+	}
+
+	fz_try(ctx)
+		pdf_sign_signature_with_appearance(ctx, widget, pkcs7signer, signTime, dlist);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return JNI_TRUE;
+}
+
+JNIEXPORT jobject JNICALL
+FUN(PDFWidget_signatureAppearance)(JNIEnv *env, jobject self, jobject jrect, jobject jimage, jstring jleft, jstring jright, jboolean logo)
+{
+    fz_context *ctx = get_context(env);
+    pdf_widget *widget = from_PDFWidget_safe(env, self);
+    fz_rect rect;
+    fz_image *image = NULL;
+    char *left = NULL;
+    char *right = NULL;
+    fz_display_list *dlist = NULL;
+    fz_text_language lang = pdf_annot_language(ctx, (pdf_annot *)widget);
+
+    if (!ctx || !widget)
+        return NULL;
+
+    //  if we were passed a rect, use that. Otherwise, use the one from the widget's object
+    if (jrect)
+        rect = from_Rect(env, jrect);
+    else
+        rect = pdf_dict_get_rect(ctx, widget->obj, PDF_NAME(Rect));
+
+    if (jimage)
+        image = from_Image_safe(env, jimage);
+    if (jleft)
+        left = (*env)->GetStringUTFChars(env, jleft, NULL);
+    if (jright)
+        right = (*env)->GetStringUTFChars(env, jright, NULL);
+
+    fz_try(ctx) {
+        dlist = pdf_signature_appearance(ctx, rect, lang, image, left, right, logo);
+    }
+    fz_always(ctx) {
+        if (jleft)
+            (*env)->ReleaseStringUTFChars(env, jleft, left);
+        if (jright)
+            (*env)->ReleaseStringUTFChars(env, jright, right);
+    }
+    fz_catch(ctx)
+        jni_rethrow(env, ctx);
+
+	return to_DisplayList_safe_own(ctx, env, dlist);
 }
