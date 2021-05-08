@@ -267,7 +267,7 @@ class Package:
         tarpath = f'{sdist_directory}/{self.name}-{self.version}.tar.gz'
         with tarfile.open(tarpath, 'w:gz') as tar:
             for path in paths:
-                path_rel, path_abs = self._path_relative_to_root( path)
+                path_abs, path_rel = self._path_relative_to_root( path)
                 if path_abs.startswith(f'{os.path.abspath(sdist_directory)}/'):
                     # Ignore files inside <sdist_directory>.
                     assert 0, f'Path is inside sdist_directory={sdist_directory}: {path_abs!r}'
@@ -607,8 +607,8 @@ class Package:
 
     def _path_relative_to_root(self, path):
         '''
-        Returns (path_abs, path_rel), where <path_rel> is relative to
-        self.root_sep and <path_abs> is absolute path.
+        Returns (path_abs, path_rel), where <path_abs> is absolute path and
+        <path_rel> is relative to self.root_sep.
 
         Interprets <path> as relative to self.root_sep if not absolute.
 
@@ -622,7 +622,8 @@ class Package:
             p = os.path.join(self.root_sep, path)
         p = os.path.realpath(os.path.abspath(p))
         assert p.startswith(self.root_sep), f'Path not within root={self.root_sep}: {path}'
-        return p, os.path.relpath(p, self.root_sep)
+        p_rel = os.path.relpath(p, self.root_sep)
+        return p, p_rel
 
     def _fromto(self, p):
         '''
