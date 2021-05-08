@@ -196,7 +196,11 @@ g_log_prefix_scopes = LogPrefixScopes()
 
 # List of items that form prefix for all output from log().
 #
-g_log_prefixes = []
+g_log_prefixes = [
+        LogPrefixTime( time_=False, elapsed=True),
+        g_log_prefix_scopes,
+        LogPrefixFileLine(),
+        ]
 
 
 def log_text( text=None, caller=1, nv=True):
@@ -236,7 +240,7 @@ def log_text( text=None, caller=1, nv=True):
 
     text = ''
     for line in lines:
-        text += prefix + line.replace('\r', '') + '\n'
+        text += prefix + line + '\n'
     return text
 
 
@@ -798,7 +802,7 @@ def system_raw(
         command,
         out=None,
         shell=True,
-        encoding='latin_1',
+        encoding=None,
         errors='strict',
         buffer_len=-1,
         executable=None,
@@ -856,7 +860,7 @@ def system_raw(
             stderr=stderr,
             close_fds=True,
             executable=executable,
-            #encoding=encoding - only python-3.6+.
+            universal_newlines=False if encoding else True,
             )
 
     child_out = child.stdout
@@ -908,6 +912,7 @@ def system(
         errors='replace',
         buffer_len=-1,
         executable=None,
+        out_log_caller=1,
         ):
     '''
     Runs a command like os.system() or subprocess.*, but with more flexibility.
@@ -988,7 +993,7 @@ def system(
 
     out_original = out
     if out == 'log':
-        out_frame_record = inspect.stack()[1]
+        out_frame_record = inspect.stack()[out_log_caller]
         out = lambda text: log( text, caller=out_frame_record, nv=False)
     elif out == 'return':
         # Store the output ourselves so we can return it.
