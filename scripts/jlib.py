@@ -968,6 +968,10 @@ def system(
         buffer_len:
             The number of bytes we attempt to read at a time. If -1 we read
             output one line at a time.
+        executable=None:
+            .
+        out_log_caller:
+            Only used if out is 'log'; e.g. 2 to look extra frame up stack.
 
     Returns:
         If <rusage> is true, we return the rusage text.
