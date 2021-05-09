@@ -533,7 +533,7 @@ pdf_is_ocg_hidden(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *
 		return 0;
 
 	/* If no ocg descriptor, everything is visible */
-	if (!desc)
+	if (!desc || desc->num_configs == 0)
 		return 0;
 
 	/* If we've been handed a name, look it up in the properties. */
