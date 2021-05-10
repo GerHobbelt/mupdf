@@ -253,6 +253,8 @@ def log_text( text=None, caller=1, nv=True, raw=False):
         nl = text.find('\n', pos)
         if nl == -1:
             text2 += text[pos:]
+            if not raw:
+                text2 += '\n'
             pos = len(text)
         else:
             text2 += text[pos:nl+1]
@@ -893,7 +895,13 @@ def system_raw(
             #
             decoder = codecs.getincrementaldecoder(encoding)(errors)
         while 1:
-            bytes_ = child.stdout.read(1000)
+            # os.read() seems to be better for us than child.stdout.read()
+            # because it returns a short read if data is not available. Where
+            # as child.stdout.read() appears to be more willing to wait for
+            # data until the requested number of bytes have been received.
+            #
+            #bytes_ = child.stdout.read(10000)
+            bytes_ = os.read( child.stdout.fileno(), 10000)
             if decoder:
                 final = not bytes_
                 text = decoder.decode(bytes_, final)
