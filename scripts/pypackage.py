@@ -150,7 +150,7 @@ Command-line usage:
             Otherwise we build a new sdist as required by running './setup.py
             sdist' locally.
 
-        --test [-i <package-name>] <code>
+        --test [-p <package-name>] <code>
             Tests installation of local or pypi wheel by running <code> inside
             a clean Python venv. For example, <code> could be: 'import foo;
             foo.test()'.
@@ -158,14 +158,16 @@ Command-line usage:
             On Windows the venv will use "py"; otherwise we use sys.executable,
             i.e. whatever python is running this script itself.
 
-            If '-i <package-name>' is specified we do 'pip install
-            <package-name>', using pypi's test repository depending on previous
-            --pypi arg. Otherwise we do 'pip install <wheel>' where <wheel> is
-            found by searching <wheels> for a match for the python we run.
+            If '-p <package-name>' is specified we do 'pip install
+            <package-name>' to install from pypi.org (using pypi's test
+            repository if '--pypi-test 1' was previously specified). Otherwise
+            we do 'pip install <wheel>' where <wheel> is found by searching
+            <wheels> for a match for the python we run.
 
             If <code> is an empty string, we infer a package name either from
             the -i arg or from the name of the matching wheel, and set <code>
-            to 'import <package-name>'.
+            to 'import <package-name>'. Thus we default to testing that the
+            package imports ok into Python.
 
         --upload
             Uploads <sdist> and <wheels> to pypi.org or test.pypi.org depending on
@@ -326,7 +328,7 @@ def venv_run(
     if isinstance(commands, str):
         commands = [commands]
     if py is None:
-        py = sys.executable
+        py = 'py' if windows() else sys.executable
     if windows():
         # Run under cmd.exe with all commands inside "...".
         pre = [
@@ -931,7 +933,7 @@ def main():
             while 1:
                 a = next(args)
                 if a.startswith('-'):
-                    if a == '-i':
+                    if a == '-p':
                         package_name = next(args)
                     else:
                         raise Exception(f'Unrecognised arg: {a}')
