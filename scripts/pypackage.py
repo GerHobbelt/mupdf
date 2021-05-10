@@ -203,6 +203,8 @@ try:
 except ModuleNotFoundError as e:
     print(f'Unable to import jlib: {e}')
     jlib = None
+    # We can cope without jlib, but use it if available to get better
+    # diagnostics when running external commands.
 
 
 def log(text=''):
@@ -274,6 +276,8 @@ def make_tag(py_version=None):
     return tag
 
 
+# We keep track of all the venv's we have created so that we can avoid
+# unnecessarily running pip --upgrade. todo: check this is actually necessary.
 venv_installed = set()
 
 def venv_run(
@@ -300,11 +304,12 @@ def venv_run(
         If true we first delete any existing <venv>. For safety we assert that
         <venv> starts with 'pypackage-venv'.
     directory:
-        Directory in which to create venv and run <commands>.
+        Directory in which to create venv and run <commands>. If None we use
+        the current directory.
     prefix:
         Prefix to prepend to each output line.
     pip_upgrade:
-        If true (the defautl) we do 'pip install --upgrade pip' before running
+        If true (the default) we do 'pip install --upgrade pip' before running
         <commands>.
     '''
     if isinstance(commands, str):
@@ -312,6 +317,7 @@ def venv_run(
     if py is None:
         py = sys.executable
     if windows():
+        # Run under cmd.exe with all commands inside "...".
         pre = [
                 f'cmd.exe /c "'
                 f'{"cd "+directory if directory else "true"}',
@@ -347,11 +353,12 @@ def venv_run(
                 log(f'Running pre-install of pip: {command0}')
                 e = system(command0, raise_errors=False, prefix=prefix)
                 if e:
-                    log(f'Ignoring error from first run of pip install')
+                    log(f'[Ignoring error from dummy run of pip install on Windows.]')
 
     commands = pre + commands + post
 
     if windows():
+        # Spaces mess things up on Windows.
         command = '&&'.join(commands)
     else:
         command = ' && '.join(commands)
@@ -690,7 +697,7 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
     script_name = 'pypackage_test.py'
 
     # Find wheel tag by running ourselves with --tag inside a venv running <py>:
-    log(f'Finding wheel tag for {py}')
+    log(f'Finding wheel tag for {py!r}')
     text = venv_run(
             f'python {sys.argv[0]} --tag',
             return_output=True,
@@ -733,7 +740,7 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
                 f'import {package_name}\n'
                 f'print("Successfully imported {package_name}")\n'
                 )
-        log('Testing default code for package_name={package_name}:\n{code}')
+        log(f'Testing default code for package_name={package_name}:\n{code}')
     with open(script_name, 'w') as f:
         f.write(code)
     venv_run(
