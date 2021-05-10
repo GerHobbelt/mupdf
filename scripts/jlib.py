@@ -203,7 +203,9 @@ g_log_prefixes = [
         ]
 
 
-def log_text( text=None, caller=1, nv=True):
+_log_text_line_start = True
+
+def log_text( text=None, caller=1, nv=True, raw=False):
     '''
     Returns log text, prepending all lines with text from g_log_prefixes.
 
@@ -219,6 +221,7 @@ def log_text( text=None, caller=1, nv=True):
     '''
     if isinstance( caller, int):
         caller += 1
+    # Construct line prefix.
     prefix = ''
     for p in g_log_prefixes:
         if callable( p):
@@ -231,18 +234,32 @@ def log_text( text=None, caller=1, nv=True):
     if text is None:
         return prefix
 
+    # Expand {...} using our enhanced f-string support.
     if nv:
         text = expand_nv( text, caller)
 
-    if text.endswith( '\n'):
-        text = text[:-1]
-    lines = text.split( '\n')
-
-    text = ''
-    for line in lines:
-        text += prefix + line + '\n'
-    return text
-
+    # Prefix each line. If <raw> is false, we terminate the last line with a
+    # newline. Otherwise we use _log_text_line_start to remember whether we are
+    # at the beginning of a line.
+    #
+    global _log_text_line_start
+    text2 = ''
+    pos = 0
+    while 1:
+        if pos == len(text):
+            break
+        if not raw or _log_text_line_start:
+            text2 += prefix
+        nl = text.find('\n', pos)
+        if nl == -1:
+            text2 += text[pos:]
+            pos = len(text)
+        else:
+            text2 += text[pos:nl+1]
+            pos = nl+1
+        if raw:
+            _log_text_line_start = (nl >= 0)
+    return text2
 
 
 s_log_levels_cache = dict()
@@ -294,7 +311,7 @@ def log_levels_add( delta, filename_prefix, function_prefix):
     s_log_levels_items.sort( reverse=True)
 
 
-def log( text, level=0, caller=1, nv=True, out=None):
+def log( text, level=0, caller=1, nv=True, out=None, raw=False):
     '''
     Writes log text, with special handling of {<expression>} items in <text>
     similar to python3's f-strings.
@@ -309,6 +326,10 @@ def log( text, level=0, caller=1, nv=True, out=None):
         If true, we expand {...} in <text> using expand_nv().
     out:
         Where to send output. If None we use sys.stdout.
+    raw:
+        If true we don't ensure output text is terminated with a newline. E.g.
+        use by jlib.system() when sending us raw output which is not
+        line-based.
 
     <expression> is evaluated in our caller's context (<n> stack frames up)
     using eval(), and expanded to <expression> or <expression>=<value>.
@@ -333,7 +354,7 @@ def log( text, level=0, caller=1, nv=True, out=None):
         caller += 1
     level += log_levels_find( caller)
     if level <= 0:
-        text = log_text( text, caller, nv=nv)
+        text = log_text( text, caller, nv=nv, raw=raw)
         out.write( text)
         out.flush()
 
@@ -804,8 +825,8 @@ def system_raw(
         shell=True,
         encoding=None,
         errors='strict',
-        buffer_len=-1,
         executable=None,
+        bufsize=-1,
         ):
     '''
     Runs command, writing output to <out> which can be an int fd, a python
@@ -828,13 +849,12 @@ def system_raw(
             Whether to run command inside a shell (see subprocess.Popen).
         encoding:
             Sepecify the encoding used to translate the command's output
-            to characters. If None we set univeral_newlines to True.
+            to characters. If None we write bytes to <out>.
         errors:
             How to handle encoding errors; see docs for codecs module for
             details.
-        buffer_len:
-            The number of bytes we attempt to read at a time. If -1 we read
-            output one line at a time.
+        bufsize:
+            As subprocess.Popen()'s bufsize arg. Use 0 to see prompts.
 
     Returns:
         subprocess's <returncode>, i.e. -N means killed by signal N, otherwise
@@ -855,25 +875,33 @@ def system_raw(
             stderr=stderr,
             close_fds=True,
             executable=executable,
-            universal_newlines=False if encoding else True,
+            bufsize=bufsize,
             )
 
     child_out = child.stdout
-    if encoding:
-        child_out = codecs.getreader( encoding)( child_out, errors)
 
     if stdout == subprocess.PIPE:
         out = make_out_callable( out)
-        if buffer_len == -1:
-            for line in child_out:
-                out.write( line)
-        else:
-            while 1:
-                text = child_out.read( buffer_len)
-                if not text:
-                    break
-                out.write( text)
-    #decode( lambda : os.read( child_out.fileno(), 100), outfn, encoding)
+        decoder = None
+        if encoding:
+            # subprocess's universal_newlines and codec.streamreader seem to
+            # always use buffering even with bufsize=0, so they don't reliably
+            # display prompts or other text that doesn't end with a newline.
+            #
+            # So we create our own incremental decode, which seems to work
+            # better.
+            #
+            decoder = codecs.getincrementaldecoder(encoding)(errors)
+        while 1:
+            bytes_ = child.stdout.read(1000)
+            if decoder:
+                final = not bytes_
+                text = decoder.decode(bytes_, final)
+                out.write(text)
+            else:
+                out.write(bytes_)
+            if not bytes_:
+                break
 
     return child.wait()
 
@@ -903,11 +931,11 @@ def system(
         prefix=None,
         rusage=False,
         shell=True,
-        encoding=None,
+        encoding='utf8',
         errors='replace',
-        buffer_len=-1,
         executable=None,
         out_log_caller=1,
+        bufsize=-1,
         ):
     '''
     Runs a command like os.system() or subprocess.*, but with more flexibility.
@@ -955,18 +983,21 @@ def system(
             Passed to underlying subprocess.Popen() call.
         encoding:
             Sepecify the encoding used to translate the command's output to
-            characters. If None (the default) we set universal_newlines=True.
+            characters. If None (the default) we send bytes to <out>.
         errors:
             How to handle encoding errors; see docs for codecs module
             for details. Defaults to 'replace' so we never raise a
             UnicodeDecodeError.
-        buffer_len:
-            The number of bytes we attempt to read at a time. If -1 we read
-            output one line at a time.
         executable=None:
             .
         out_log_caller:
             Only used if out is 'log'; e.g. 2 to look extra frame up stack.
+        bufsize:
+            As subprocess.Popen()'s bufsize arg, sets buffer size when creating
+            stdout, stderr and stdin pipes. Use 0 for unbuffered, e.g. to see
+            login/password prompts that don't end with a newline. Default -1
+            means io.DEFAULT_BUFFER_SIZE. +1 Line-buffered does not work because
+            we read raw bytes and decode ourselves into string.
 
     Returns:
         If <rusage> is true, we return the rusage text.
@@ -988,7 +1019,7 @@ def system(
     out_original = out
     if out == 'log':
         out_frame_record = inspect.stack()[out_log_caller]
-        out = lambda text: log( text, caller=out_frame_record, nv=False)
+        out = lambda text: log( text, caller=out_frame_record, nv=False, raw=True)
     elif out == 'return':
         # Store the output ourselves so we can return it.
         out = io.StringIO()
@@ -1021,7 +1052,6 @@ def system(
                 shell,
                 encoding,
                 errors,
-                buffer_len=buffer_len,
                 executable=executable,
                 )
         if e:
@@ -1044,10 +1074,13 @@ def system(
                 shell,
                 encoding,
                 errors,
-                buffer_len=buffer_len,
                 executable=executable,
+                bufsize=bufsize,
                 )
-
+        if out_original == 'log':
+            if not _log_text_line_start:
+                # Terminate last incomplete line.
+                sys.stdout.write('\n')
         if verbose:
             verbose.write('[returned e=%s]\n' % e)
 
