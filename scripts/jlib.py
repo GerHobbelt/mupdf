@@ -828,12 +828,7 @@ def system_raw(
             Whether to run command inside a shell (see subprocess.Popen).
         encoding:
             Sepecify the encoding used to translate the command's output
-            to characters.
-
-            Note that if <encoding> is None and we are being run by python3,
-            <out> will be passed bytes, not a string.
-
-            Note that latin_1 will never raise a UnicodeDecodeError.
+            to characters. If None we set univeral_newlines to True.
         errors:
             How to handle encoding errors; see docs for codecs module for
             details.
@@ -959,8 +954,8 @@ def system(
         shell:
             Passed to underlying subprocess.Popen() call.
         encoding:
-            Sepecify the encoding used to translate the command's output
-            to characters. Defaults to utf-8.
+            Sepecify the encoding used to translate the command's output to
+            characters. If None (the default) we set universal_newlines=True.
         errors:
             How to handle encoding errors; see docs for codecs module
             for details. Defaults to 'replace' so we never raise a
@@ -986,14 +981,9 @@ def system(
 
         Else we return <e>, the command's exit code.
     '''
-    if encoding is None:
-        if sys.version_info[0] == 2:
-            # python-2 doesn't seem to implement 'replace' properly.
-            encoding = None
-            errors = None
-        else:
-            encoding = 'utf-8'
-            errors = 'replace'
+    if 0 and encoding is None:
+        encoding = 'utf-8'
+        errors = 'replace'
 
     out_original = out
     if out == 'log':
