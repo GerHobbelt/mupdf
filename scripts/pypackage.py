@@ -15,12 +15,31 @@ Overview:
 Command-line usage:
 
     Note that args are handled sequentially. So for example with 'pypackage.py
-    --build --sdist=foo.tgz', wheels will be built without the --sdist option.
+    --sdist bar.tar.gz --build-wheels --sdist bar.tgz', wheels will be built
+    from bar.tar.gz. option.
+
+    Examples:
+
+        Build packages on two remote systems and copy back to local system,
+        then check that there is a generated wheel that matches the host system
+        and that 'import mypackage' works on the local system, then update
+        sdist and all wheels to test.pypi.org using 'twine upload'.
+
+            pypackage.py \
+                    --build-sdist \
+                    --build-wheels-remote user@foo:build-dir \
+                    --build-wheels-remote user@foo-win:build \
+                    --test mypackage '' \
+                    --pypi-test 1 \
+                    --upload
+
+        Install
+        pypackage.py --remote-args somehost:testing "--wheels 'pypackage-out/*' --test ''"
 
     Args:
 
         --abis <abis>
-            Set the list of ABIs for which --build builds wheels.
+            Set the list of ABIs for which --build-wheels builds wheels.
 
             abis:
                 Comma-separated list of <abi>.
@@ -42,20 +61,29 @@ Command-line usage:
                 Unix: 37,38,39
                 Windows: x32-38,x32-39,x64-38,x64-39
 
-        --build
-            Build wheels.
+        --build-sdist <package-directory>
+            Builds sdist for source tree <package-directory> in <outdir>.
+
+            Currently works by running <package-directory>/setup.py.
+
+            Either this or '--sdist <sdist>' must be
+            specified before --build-wheels*.
+
+        --build-wheels
+            Build wheels and copy them into <outdir>.
 
             If --sdist has not been specified earlier, we first build an sdist
-            in the current tree.
+            in the current tree and copy into <outdir>.
 
             We extract the sdist (locally on Windows, in a container on Unix)
-            and build wheels in the extracted tree.
+            and build wheels in the extracted tree, finally copying them into
+            <outdir>.
 
             todo: provide an option to use 'pip wheel <sdist>'. This would
             force clean build each time so can be slow when experimenting, but
             is probably more correct.
 
-        --build-remote [<options>] <remote>
+        --build-wheels-remote [<options>] <remote>
             Builds wheels on remote host and copies them back to local
             <outdir>.
 
@@ -101,6 +129,19 @@ Command-line usage:
 
             Default is 1.
 
+        --remote-args [<user>@]<host>:[<directory>] <args>
+            Runs pypackage.py on remote host in specified directory, passing
+            <args>.
+
+            We rsync pypackage.py to the remote host and then use
+            ssh to run remote command of the form:
+
+                ssh user@host 'cd test-dir && ./pypackage.py <args>'
+
+            For example:
+                --remote-args foo@machine:test-directory "--wheels 'pypackage-out/*' --test ''"
+                --remote-args foo@machine:test-directory "--test -i mymodule ''"
+
         --sdist <sdist>
             Specify path of existing sdist. If specified, wheels are built by
             extracting the sdist (either locally on Windows or inside docker
@@ -111,17 +152,20 @@ Command-line usage:
 
         --test [-i <package-name>] <code>
             Tests installation of local or pypi wheel by running <code> inside
-            a clean Python venv. For example code could be: 'import foo;
+            a clean Python venv. For example, <code> could be: 'import foo;
             foo.test()'.
 
-            On Windows the venv will use "py"; otherwise
-            we use sys.executable, i.e. whatever python is running this script
-            itself.
+            On Windows the venv will use "py"; otherwise we use sys.executable,
+            i.e. whatever python is running this script itself.
 
-            If <package-name> is specified we do 'pip install <package-name>',
-            using pypi's test repository depending on previous --pypi
-            arg. Otherwise we do 'pip install <wheel>' where <wheel> is found
-            by searching <wheels> for a match for the python we run.
+            If '-i <package-name>' is specified we do 'pip install
+            <package-name>', using pypi's test repository depending on previous
+            --pypi arg. Otherwise we do 'pip install <wheel>' where <wheel> is
+            found by searching <wheels> for a match for the python we run.
+
+            If <code> is an empty string, we infer a package name either from
+            the -i arg or from the name of the matching wheel, and set <code>
+            to 'import <package-name>'.
 
         --upload
             Uploads <sdist> and <wheels> to pypi.org or test.pypi.org depending on
@@ -172,11 +216,11 @@ def log(text=''):
     sys.stdout.flush()
 
 
-def system(command, raise_errors=True, return_output=False, prefix=None, caller=1):
+def system(command, raise_errors=True, return_output=False, prefix=None, caller=1, out_log_caller=1):
     if jlib:
         return jlib.system(
                 command,
-                verbose=1,
+                verbose=not return_output,
                 raise_errors=raise_errors,
                 out='return' if return_output else 'log',
                 prefix=prefix,
@@ -205,9 +249,6 @@ def windows():
 def unix():
     return not windows()
 
-def mupdf_directory():
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 def make_tag(py_version=None):
     '''
@@ -235,23 +276,31 @@ def make_tag(py_version=None):
 
 venv_installed = set()
 
-def venv_run(commands, venv='pypackage-venv', py=None, clean=False, return_output=False, directory=None, prefix=None, pip_upgrade=True):
+def venv_run(
+        commands,
+        venv='pypackage-venv',
+        py=None,
+        clean=False,
+        return_output=False,
+        directory=None,
+        prefix=None,
+        pip_upgrade=True,
+        ):
     '''
-    Runs commands inside Python venv, joined by &&, with cwd set to
-    mupdf_directory().
+    Runs commands inside Python venv, joined by &&.
 
     commands:
         List of commands to run.
     venv:
-        Name of venv to create and use. Relative to mupdf_directory() if not
-        absolute.
+        Name of venv to create and use. Relative to <directory> if <directory>
+        is not None.
     py:
         Python to run. If None we use sys.executable.
     clean:
-        If true we first delete any existing <venv>. We assert that<venv>
-        starts with 'pypackage-venv'.
+        If true we first delete any existing <venv>. For safety we assert that
+        <venv> starts with 'pypackage-venv'.
     directory:
-        Directory in which to run; we use mupdf_directory() if None.
+        Directory in which to create venv and run <commands>.
     prefix:
         Prefix to prepend to each output line.
     pip_upgrade:
@@ -262,8 +311,6 @@ def venv_run(commands, venv='pypackage-venv', py=None, clean=False, return_outpu
         commands = [commands]
     if py is None:
         py = sys.executable
-    #if directory is None:
-    #    directory = mupdf_directory()
     if windows():
         pre = [
                 f'cmd.exe /c "'
@@ -290,7 +337,7 @@ def venv_run(commands, venv='pypackage-venv', py=None, clean=False, return_outpu
             pre += [
                     'pip install --upgrade pip',
                     ]
-            if windows:
+            if windows():
                 # It looks like first attempt to upgrade pip can fail with
                 # 'EnvironmentError: [WinError 5] Access is denied'. So we make an
                 # extra first attempt.
@@ -358,15 +405,17 @@ def find_new_file(pattern, t):
     return paths_new[0]
 
 
-def make_sdist(out_directory):
+def make_sdist(package_directory, out_directory):
     '''
-    Creates sdist by running ./setup.py. Returns path of the created sdist.
+    Creates sdist from source tree <package_directory>, in <out_directory>. Returns
+    the path of the generated sdist.
     '''
     os.makedirs(out_directory, exist_ok=True)
     t = time.time()
-    command = ''
-    setup_py = f'{mupdf_directory()}/setup.py'
-    command = f'{os.path.relpath(setup_py)} sdist -d "{out_directory}"'
+    command = (
+            f'cd {os.path.relpath(package_directory)}'
+            f' && ./setup.py sdist -d "{os.path.relpath(out_directory, package_directory)}"'
+            )
     system(command)
 
     # Find new file in <sdist_directory>.
@@ -377,7 +426,7 @@ def make_sdist(out_directory):
 
 
 def make_unix(
-        sdist=None,
+        sdist,
         abis=None,
         out_dir=None,
         test_direct_install=False,
@@ -390,8 +439,7 @@ def make_unix(
     Builds Python wheels using a manylinux container.
 
         sdist:
-            Path of sdist file to copy into container.
-            If None we build a new sdist inside the container.
+            Pathname of sdist file; we copy into container and extract there.
         abis
             List of string python versions for which we build
             wheels. Any '.' are removed and we then take the first two
@@ -415,7 +463,7 @@ def make_unix(
             Name to use for the container.
             If None we default to 'pypackage'.
 
-    Returns (sdist, wheels).
+    Returns wheels, a list of wheel pathnames.
     '''
     if abis is None:
         abis = ['37', '38', '39']
@@ -430,13 +478,7 @@ def make_unix(
     if container_name is None:
         container_name = 'pypackage'
 
-    sdist_directory = 'pypackage-dist'
     io_directory = 'pypackage-io'
-    #io_directory = out_dir if out_dir else 'pypackage-io'
-
-    if not sdist:
-        # Create new sdist.
-        sdist = make_sdist(sdist_directory)
 
     assert sdist.endswith('.tar.gz')
     sdist_leaf = os.path.basename(sdist)    # e.g. mupdf-1.18.0.20210504.1544.tar.gz
@@ -479,7 +521,7 @@ def make_unix(
             ,
             raise_errors=False,
             )
-        log(f'docker run: e={e}')
+        log(f'docker run: ignoring any error. e={e}')
 
         # Start docker instance if not already started.
         #
@@ -494,9 +536,9 @@ def make_unix(
         command = command.replace('"', '\\"')
         command = f'docker exec {container_name} bash -c "{command}"'
         log(f'Running: {command}')
-        return jlib.system(
+        return system(
                 command,
-                out='return' if return_output else 'log',
+                return_output=return_output,
                 prefix=None if return_output else f'container: {prefix}',
                 out_log_caller=2,
                 )
@@ -509,11 +551,11 @@ def make_unix(
     container_pythons = []
     for abi in abis:
         vv = abi.replace('.', '')[:2] # E.g. '38' for Python-3.8.
-        pattern = f'ls -d /opt/python/cp{vv}-cp{vv}*'
-        paths = docker_system(pattern, return_output=1)
+        pattern = f'/opt/python/cp{vv}-cp{vv}*'
+        paths = docker_system(f'ls -d {pattern}', return_output=1)
         log(f'vv={vv}: paths={paths!r}')
         paths = paths.strip().split('\n')
-        assert len(paths) == 1, f'No single match for glob pattern in container {pattern}: {paths}'
+        assert len(paths) == 1, f'No single match for glob pattern in container. pattern={pattern}: {paths}'
         container_pythons.append( (vv, paths[0]))
 
     # In the container, extract <sdist>; we will use the extracted sdist to
@@ -544,11 +586,11 @@ def make_unix(
     for wheel in wheels:
         log( f'    {wheel}')
 
-    return sdist, wheels
+    return wheels
 
 
 def make_windows(
-        sdist=None,
+        sdist,
         abis=None,
         out_dir=None,
         ):
@@ -556,9 +598,9 @@ def make_windows(
     Builds Python wheels on Windows.
 
     sdist:
-        If not None, should be path of sdist; we extract it and generate wheels
-        inside the extracted tree. Note that this means that running a second
-        time with the same sdist will not be a clean build.
+        Pathname of sdist; we extract it and generate wheels inside the
+        extracted tree. Note that this means that running a second time with
+        the same sdist will not be a clean build.
 
     abis:
         List of <cpu>-<pythonversion> strings.
@@ -571,7 +613,7 @@ def make_windows(
         Directory into which we copy the generated wheels. Defaults to
         'pypackage-out'.
 
-    Returns (sdist, wheels).
+    Returns wheels, a list of wheel pathnames.
     '''
     log(f'sdist={sdist} abis={abis} out_dir={out_dir}')
     assert windows()
@@ -579,27 +621,23 @@ def make_windows(
         abis = ['x32-38', 'x32-39', 'x64-38', 'x64-39']
     if out_dir is None:
         out_dir = 'pypackage-out'
-    if sdist:
-        # Extact sdist and run ourselves inside the extracted tree. We make
-        # basic checks that this will extract to a single subdirectory.
-        log(f'Extracting sdist={sdist}')
-        with tarfile.open(sdist, 'r:gz') as t:
-            items = t.getnames()
-            assert items
-            item = items[0]
-            #log(f'item={item}')
-            assert not item.startswith('.')
-            s = item.find('/')
-            assert s > 0
-            prefix = item[:s+1]
-            for item in items:
-                assert item.startswith(prefix)
-            t.extractall()
-            directory = prefix
-    else:
-        sdist_directory = 'pypackage-sdist'
-        make_sdist(sdist_directory)
-        directory = mupdf_directory()
+
+    # Extact sdist and run ourselves inside the extracted tree. We make
+    # basic checks that this will extract to a single subdirectory.
+    log(f'Extracting sdist={sdist}')
+    with tarfile.open(sdist, 'r:gz') as t:
+        items = t.getnames()
+        assert items
+        item = items[0]
+        #log(f'item={item}')
+        assert not item.startswith('.')
+        s = item.find('/')
+        assert s > 0
+        prefix = item[:s+1]
+        for item in items:
+            assert item.startswith(prefix)
+        t.extractall()
+        directory = prefix
 
     os.makedirs(out_dir, exist_ok=True)
     out_dir2 = os.path.relpath(os.path.abspath(out_dir), directory)
@@ -625,7 +663,7 @@ def make_windows(
         check_wheel(wheel)
         wheels.append(wheel)
 
-    return sdist, wheels
+    return wheels
 
 
 def test(code, wheels_or_package_name, pypi_test, py=None):
@@ -646,11 +684,13 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
     py:
         Python executable. If None we use 'py' on Windows else sys.executable.
     '''
+    assert wheels_or_package_name
     if py is None:
         py = 'py' if windows() else sys.executable
     script_name = 'pypackage_test.py'
 
     # Find wheel tag by running ourselves with --tag inside a venv running <py>:
+    log(f'Finding wheel tag for {py}')
     text = venv_run(
             f'python {sys.argv[0]} --tag',
             return_output=True,
@@ -667,23 +707,35 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
 
     # Run <code> after installing matching wheel or specified package.
     #
-    with open(script_name, 'w') as f:
-        f.write(code)
     if isinstance(wheels_or_package_name, str):
-        pip_install_arg = wheels_or_package_name
+        package_name = wheels_or_package_name
+        pip_install_arg = f'{"--repository testpypi " if pypi_test else ""}{package_name}'
     else:
-        pattern = f'^.*-{tag}[.]whl$'
+        pattern = f'^([^-]+)-([^-]+)-{tag}[.]whl$'
         log(f'Looking for wheel matching {pattern!r}')
         for wheel in wheels_or_package_name:
             base = os.path.basename(wheel)
             m = re.match(pattern, base)
             if m:
                 log( f'Matching wheel: {wheel}')
+                package_name = m.group(1)
                 pip_install_arg = wheel
                 break
         else:
-            raise Exception(f'Cannot find wheel matching: {pattern!r}')
+            text = f'Cannot find wheel matching: {pattern!r}\n'
+            text += f'Wheels are ({len(wheels_or_package_name)}):\n'
+            for wheel in wheels_or_package_name:
+                text += f'    {wheel}\n'
+            raise Exception(text)
 
+    if not code:
+        code = (
+                f'import {package_name}\n'
+                f'print("Successfully imported {package_name}")\n'
+                )
+        log('Testing default code for package_name={package_name}:\n{code}')
+    with open(script_name, 'w') as f:
+        f.write(code)
     venv_run(
             [
             f'pip install {pip_install_arg}',
@@ -695,7 +747,7 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
             )
 
 
-def get_remote(remote):
+def parse_remote(remote):
     '''
     remote:
         [<user>@]<host>:[<directory>]
@@ -751,12 +803,18 @@ def main():
         elif arg == '--abis':
             abis = next(args).split(',')
 
-        elif arg == '--build':
+        elif arg == '--build-sdist':
+            package_directory = next(args)
+            sdist = make_sdist(package_directory, outdir)
+
+        elif arg == '--build-wheels':
+            if not sdist:
+                raise Exception(f'Need to specify --build-sdist or --sdist=... before {arg}.')
             if windows():
-                sdist, wheels = make_windows(sdist, abis, outdir)
+                wheels = make_windows(sdist, abis, outdir)
 
             else:
-                sdist, wheels = make_unix(
+                wheels = make_unix(
                         sdist,
                         abis,
                         outdir,
@@ -770,7 +828,7 @@ def main():
             for wheel in wheels:
                 log(f'    wheel: {wheel}')
 
-        elif arg == '--build-remote':
+        elif arg == '--build-wheels-remote':
             sync_sdist = True
             while 1:
                 a = next(args)
@@ -781,9 +839,9 @@ def main():
                 else:
                     raise Exception('Unrecognised arg: {a!r}')
             user, host, directory = parse_remote(a)
-            if not sdist:
-                # Make sdist locally.
-                sdist = pypackage.make_sdist('pypackage-sdist')
+            if sync_sdist:
+                if not sdist:
+                    raise Exception(f'No sdist specified, specify --build-sdist before {arg}.')
             rsync_remote = f'{user}{host}{directory}'
             local_dir = os.path.dirname(__file__)
             command = (''
@@ -792,11 +850,11 @@ def main():
                     f' && ssh {user}{host} '
                     f'"'
                     f'{"cd "+directory if directory else "true"}'
-                    f' && ./pypackage.py --sdist {os.path.basename(sdist)} --o-clean pypackage-out --build'
+                    f' && ./pypackage.py --sdist {os.path.basename(sdist)} --build-wheels'
                     f'"'
                     f' && rsync -ai {user}{host}:{directory}pypackage-out/ {outdir}/'
                     )
-            system(command, prefix=f'{remote}: ')
+            system(command, prefix=f'{user}{host}:{directory}: ')
 
         elif arg == '--clean':
             assert 'pypackage' in outdir
@@ -826,7 +884,7 @@ def main():
             pypi_test = int(next(args))
 
         elif arg == '--remote-args':
-            user, host, directory = get_remote(next(args))
+            user, host, directory = parse_remote(next(args))
             remote_args = next(args)
             local_dir = os.path.dirname(__file__)
             command = (
@@ -858,7 +916,16 @@ def main():
                     code = a
                     code = code.replace('\\n', '\n')
                     break
-            log(f'Code to run is:\n{code}')
+            if package_name:
+                package_name_or_wheels = package_name
+            else:
+                if not wheels:
+                    raise Exception(f'No wheels specified, so cannot test. E.g. use --build-wheels or --wheels <pattern>.')
+                package_name_or_wheels = wheels
+            if code:
+                log(f'Code to run is:\n{code}')
+            else:
+                log(f'Code to run is empty so will default to import of inferred package name')
             test(code, package_name if package_name else wheels, pypi_test)
 
         elif arg in '--upload':
