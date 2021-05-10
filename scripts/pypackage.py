@@ -218,7 +218,15 @@ def log(text=''):
     sys.stdout.flush()
 
 
-def system(command, raise_errors=True, return_output=False, prefix=None, caller=1, out_log_caller=1):
+def system(
+        command,
+        raise_errors=True,
+        return_output=False,
+        prefix=None,
+        caller=1,
+        out_log_caller=1,
+        bufsize=-1,
+        ):
     if jlib:
         return jlib.system(
                 command,
@@ -227,6 +235,7 @@ def system(command, raise_errors=True, return_output=False, prefix=None, caller=
                 out='return' if return_output else 'log',
                 prefix=prefix,
                 out_log_caller=caller+1,
+                bufsize=bufsize,
                 )
     else:
         log(f'Running: {command}')
@@ -236,6 +245,7 @@ def system(command, raise_errors=True, return_output=False, prefix=None, caller=
                 universal_newlines=True,
                 stdout=subprocess.PIPE if return_output else None,
                 stderr=subprocess.STDOUT if return_output else None,
+                bufsize=bufsize,
                 )
         if raise_errors:
             ret.check_returncode()
@@ -289,6 +299,7 @@ def venv_run(
         directory=None,
         prefix=None,
         pip_upgrade=True,
+        bufsize=-1,
         ):
     '''
     Runs commands inside Python venv, joined by &&.
@@ -363,7 +374,12 @@ def venv_run(
     else:
         command = ' && '.join(commands)
 
-    return system(command, return_output=return_output, prefix=prefix)
+    return system(
+            command,
+            return_output=return_output,
+            prefix=prefix,
+            bufsize=bufsize,
+            )
 
 
 def check_sdist(sdist):
@@ -936,10 +952,14 @@ def main():
             test(code, package_name if package_name else wheels, pypi_test)
 
         elif arg in '--upload':
+            if not sdist:
+                raise Exception(f'No sdist specified; use "--sdist ..." before {arg}')
             venv_run([
                     f'pip install twine',
                     f'python -m twine upload {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
-                    ])
+                    ],
+                    bufsize=0,  # So we see login/password prompts.
+                    )
 
         elif arg == '--wheels':
             pattern = next(args)
