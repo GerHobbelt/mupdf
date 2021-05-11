@@ -946,7 +946,7 @@ def system(
         encoding='utf8',
         errors='replace',
         executable=None,
-        out_log_caller=1,
+        caller=1,
         bufsize=-1,
         ):
     '''
@@ -961,11 +961,8 @@ def system(
         command:
             The command to run.
         verbose:
-            If true, we include information about the command that was run, and
-            its result.
-
-            If callable or something with a .write() method, information is
-            sent to <verbose> itself. Otherwise it is sent to <out>.
+            If true, we write information about the command that was run, and
+            its result, to jlib.log().
         raise_errors:
             If true, we raise an exception if the command fails, otherwise we
             return the failing error code or zero.
@@ -1002,8 +999,8 @@ def system(
             UnicodeDecodeError.
         executable=None:
             .
-        out_log_caller:
-            Only used if out is 'log'; e.g. 2 to look extra frame up stack.
+        caller:
+            Number of frames to look up stack when showing caller information.
         bufsize:
             As subprocess.Popen()'s bufsize arg, sets buffer size when creating
             stdout, stderr and stdin pipes. Use 0 for unbuffered, e.g. to see
@@ -1030,7 +1027,7 @@ def system(
 
     out_original = out
     if out == 'log':
-        out_frame_record = inspect.stack()[out_log_caller]
+        out_frame_record = inspect.stack()[caller]
         out = lambda text: log( text, caller=out_frame_record, nv=False, raw=True)
     elif out == 'return':
         # Store the output ourselves so we can return it.
@@ -1039,14 +1036,7 @@ def system(
     out_raw = out in (None, subprocess.DEVNULL)
 
     if verbose:
-        if callable( verbose) or getattr( verbose, 'write', None):
-            pass
-        elif out_raw:
-            raise Exception( 'No out stream available for verbose')
-        else:
-            verbose = out
-        verbose = make_out_callable( verbose)
-        verbose.write('running: %s\n' % command)
+        log(f'running: {command}', nv=0, caller=caller+1)
 
     if prefix:
         if out_raw:
@@ -1094,7 +1084,7 @@ def system(
                 # Terminate last incomplete line.
                 sys.stdout.write('\n')
         if verbose:
-            verbose.write('[returned e=%s]\n' % e)
+            log(f'[returned e={e}]', nv=0, caller=caller+1)
 
         if raise_errors:
             if e:
@@ -1126,7 +1116,7 @@ def get_gitfiles( directory, submodules=False):
         if submodules:
             command += ' --recurse-submodules'
         command += ' > jtest-git-files'
-        system( command, verbose=sys.stdout)
+        system( command, verbose=True)
 
     with open( '%s/jtest-git-files' % directory, 'r') as f:
         text = f.read()
@@ -1383,7 +1373,6 @@ def build(
 
     if out is None:
         out = 'log'
-        out_log_caller = 2
 
     command_filename = f'{outfiles[0]}.cmd'
     reasons = []
@@ -1423,7 +1412,7 @@ def build(
     with open( command_filename, 'w') as f:
         pass
 
-    system( command, out=out, verbose=verbose, executable=executable, out_log_caller=2)
+    system( command, out=out, verbose=verbose, executable=executable, caller=2)
 
     with open( command_filename, 'w') as f:
         f.write( command)
