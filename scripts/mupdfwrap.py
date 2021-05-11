@@ -7712,5 +7712,5 @@ if __name__ == '__main__':
     try:
         main()
     except Exception:
-        print( jlib.exception_info())
+        sys.stderr.write(jlib.exception_info())
         sys.exit(1)
