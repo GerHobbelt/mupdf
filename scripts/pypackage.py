@@ -72,8 +72,8 @@ Command-line usage:
         --build-wheels
             Build wheels and copy them into <outdir>.
 
-            If --sdist has not been specified earlier, we first build an sdist
-            in the current tree and copy into <outdir>.
+            Requires previous args to set <sdist>:
+                --sdist or --build-sdist.
 
             We extract the sdist (locally on Windows, in a container on Unix)
             and build wheels in the extracted tree, finally copying them into
@@ -83,20 +83,16 @@ Command-line usage:
             force clean build each time so can be slow when experimenting, but
             is probably more correct.
 
-        --build-wheels-remote [<options>] <remote>
+        --build-wheels-remote
             Builds wheels on remote host and copies them back to local
             <outdir>.
 
-            remote
-                [<user>@]<host>:[<directory>]
+            Requires previous args:
+                --remote
+                --sdist or --build-sdist.
 
-            options
-                -s 0 | 1
-                    If 0 we don't rsync local sdist to remote machine, and
-                    assume it is already there.
-
-        --clean <outdir>
-            Removes any *.whl or *.tar.gz files from <outdir>. For safety it
+        --clean
+            Removes any *.whl or *.tar.gz files in <outdir>. For safety it
             asserts that <outdir> contains 'pypackage'.
 
         -h
@@ -129,31 +125,50 @@ Command-line usage:
 
             Default is 1.
 
-        --remote-args [<user>@]<host>:[<directory>] <args>
-            Runs pypackage.py on remote host in specified directory, passing
-            <args>.
+        --remote [<user>@]<host>:[<directory>]
 
-            We rsync pypackage.py to the remote host and then use
-            ssh to run remote command of the form:
+            Sets remote location to be used by --build-wheels-remote, --remote-args etc.
+
+        --remote-args <args>
+            Runs pypackage.py on remote host, passing <args>.
+
+            Requires previous arg --remote.
+
+            Note that <args> is a single arg so should be in quotes if multiple
+            args are to be used on remote host.
+
+            We rsync pypackage.py to the remote host and then use ssh to run
+            remote command of the form:
 
                 ssh user@host 'cd test-dir && ./pypackage.py <args>'
 
             For example:
-                --remote-args foo@machine:test-directory "--wheels 'pypackage-out/*' --test ''"
-                --remote-args foo@machine:test-directory "--test -i mymodule ''"
+                --remote-args "--wheels 'pypackage-out/*' --test"
+                --remote testmachine: ----remote-args "--test -p mymodule ."
+
+        --remote-sync <locals>
+            Requires previous arg --remote.
+
+            Uses rsync to copy items in <locals> (comma-separated) to remote
+            host.
 
         --sdist <sdist>
-            Specify path of existing sdist. If specified, wheels are built by
-            extracting the sdist (either locally on Windows or inside docker
+            Specify path of an existing sdist. If specified, wheels are built
+            by extracting the sdist (either locally on Windows or inside docker
             container on Unix) and building inside this resulting tree.
 
             Otherwise we build a new sdist as required by running './setup.py
             sdist' locally.
 
-        --test [-p <package-name>] <code>
-            Tests installation of local or pypi wheel by running <code> inside
-            a clean Python venv. For example, <code> could be: 'import foo;
-            foo.test()'.
+        --tag
+            Internal use only.
+
+        --test [-p <package-name>] <command>
+            Tests installation of local or pypi wheel by running 'python
+            <command>' inside a clean Python venv.
+
+            <command> is a single arg so should be in quotes and/or escape
+            spaces.
 
             On Windows the venv will use "py"; otherwise we use sys.executable,
             i.e. whatever python is running this script itself.
@@ -164,15 +179,18 @@ Command-line usage:
             we do 'pip install <wheel>' where <wheel> is found by searching
             <wheels> for a match for the python we run.
 
-            If <code> is an empty string, we infer a package name either from
-            the -i arg or from the name of the matching wheel, and set <code>
-            to 'import <package-name>'. Thus we default to testing that the
-            package imports ok into Python.
+            If <command> is '.' or an empty string, we infer a package
+            name either from the -p arg or from the name of the matching
+            wheel, and run a temporary pythong script containing 'import
+            <package-name>'. Thus we default to testing that the package
+            imports ok into Python.
 
         --upload
             Uploads <sdist> and <wheels> in <outdir> that match <sdist>, to
             pypi.org or test.pypi.org depending on previous --pypi arg, using
             'twine upload'.
+
+            Requires previous arg --sdist or --build-sdist.
 
         --wheels <pattern>
             Specify wheel files that already exist.
@@ -865,8 +883,7 @@ def main():
             sdist = make_sdist(package_directory, outdir)
 
         elif arg == '--build-wheels':
-            if not sdist:
-                raise Exception(f'Need to specify --build-sdist or --sdist=... before {arg}.')
+            assert sdist, f'Need to specify --build-sdist or --sdist=... before {arg}.'
             if windows():
                 wheels = make_windows(sdist, abis, outdir)
 
@@ -887,9 +904,8 @@ def main():
 
         elif arg == '--build-wheels-remote':
             assert remote, f'Must specify --remote ... before {arg}'
+            assert sdist, f'No sdist specified, specify --build-sdist before {arg}.'
             user, host, directory = remote
-            if not sdist:
-                raise Exception(f'No sdist specified, specify --build-sdist before {arg}.')
             rsync_remote = f'{user}{host}{directory}'
             local_dir = os.path.dirname(__file__)
             command = (''
