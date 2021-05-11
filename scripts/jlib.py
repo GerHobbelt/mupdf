@@ -900,6 +900,10 @@ def system_raw(
             # as child.stdout.read() appears to be more willing to wait for
             # data until the requested number of bytes have been received.
             #
+            # Also, os.read() does the right thing if the sender has made
+            # multipe calls to write() - it returns all available data, not
+            # just from the first unread write() call.
+            #
             #bytes_ = child.stdout.read(10000)
             bytes_ = os.read( child.stdout.fileno(), 10000)
             if decoder:
@@ -1351,8 +1355,9 @@ def build(
     force_rebuild:
         If true, we always re-run the command.
     out:
-        A callable, passed to jlib.system(). If None, we use jlib.log() with
-        our caller's stack record.
+        A callable, passed to jlib.system(). If None, we use jlib.log()
+        with our caller's stack record (by passing (out='log', caller=2) to
+        jlib.system()).
     all_reasons:
         If true we check all ways for a build being needed, even if we already
         know a build is needed; this only affects the diagnostic that we
@@ -1376,12 +1381,11 @@ def build(
     if isinstance( outfiles, str):
         outfiles = (outfiles,)
 
-    if not out:
-        out_frame_record = inspect.stack()[1]
-        out = lambda text: log( text, caller=out_frame_record, nv=False)
+    if out is None:
+        out = 'log'
+        out_log_caller = 2
 
     command_filename = f'{outfiles[0]}.cmd'
-
     reasons = []
 
     if not reasons or all_reasons:
@@ -1403,14 +1407,13 @@ def build(
             reasons.append( reason)
 
     if not reasons:
-        out( 'Already up to date: ' + ' '.join(outfiles))
+        log( 'Already up to date: ' + ' '.join(outfiles), caller=2, nv=0)
         return
 
-    if out:
-        out( 'Rebuilding because %s: %s' % (
-                ', and '.join( reasons),
-                ' '.join(outfiles),
-                ))
+    log( f'Rebuilding because {", and ".join(reasons)}: {" ".join(outfiles)}',
+            caller=2,
+            nv=0,
+            )
 
     # Empty <command_filename) while we run the command so that if command
     # fails but still creates target(s), then next time we will know target(s)
@@ -1420,7 +1423,7 @@ def build(
     with open( command_filename, 'w') as f:
         pass
 
-    system( command, out=out, verbose=verbose, executable=executable)
+    system( command, out=out, verbose=verbose, executable=executable, out_log_caller=2)
 
     with open( command_filename, 'w') as f:
         f.write( command)
