@@ -189,7 +189,7 @@ class Package:
             _log(f'calling self.fn_build={self.fn_build}')
             items = self.fn_build()
 
-        _log(f'creating wheel: {path}')
+        _log(f'build_wheel(): Writing wheel {path} ...')
         os.makedirs(wheel_directory, exist_ok=True)
         record = _Record()
         with zipfile.ZipFile(path, 'w') as z:
@@ -265,6 +265,7 @@ class Package:
 
         os.makedirs(sdist_directory, exist_ok=True)
         tarpath = f'{sdist_directory}/{self.name}-{self.version}.tar.gz'
+        _log(f'build_sdist(): Writing sdist {tarpath} ...')
         with tarfile.open(tarpath, 'w:gz') as tar:
             for path in paths:
                 path_abs, path_rel = self._path_relative_to_root( path)
