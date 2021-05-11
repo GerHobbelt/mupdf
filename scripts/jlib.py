@@ -477,66 +477,61 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
         traceback.print_exc()
         traceback.print_exception()
 
+    Args:
+        exception:
+            None, or a (type, value, traceback) tuple, e.g. from
+            sys.exc_info(). If None, we call sys.exc_info() and use its return
+            value.
+        limit:
+            None or maximum number of stackframes to output.
+        out:
+            None or callable taking single <text> parameter or object with a
+            'write' member that takes a single <text> parameter.
+        prefix:
+            Used to prefix all lines of text.
+        oneline:
+            If true, we only show one line of information.
+
     Returns:
-        A string containing description of specified exception and backtrace.
+        A string containing description of specified exception (if any) and
+        backtrace. Also sends this description to <out> if specified.
 
     Inclusion of outer frames:
-        We improve upon traceback.* in that we also include stack frames above
-        the point at which an exception was caught - frames from the top-level
-        <module> or thread creation fn to the try..catch block, which makes
-        backtraces much more useful.
+        We improve upon traceback.* in that we also include outermost stack
+        frames above the point at which an exception was caught - frames from
+        the top-level <module> or thread creation fn to the try..catch block,
+        which makes backtraces much more useful.
 
         Google 'sys.exc_info backtrace incomplete' for more details.
 
-        We deliberately leave a slightly curious pair of items in the backtrace
-        - the point in the try: block that ended up raising an exception, and
-        the point in the associated except: block from which we were called.
-
-        For clarity, we insert an empty frame in-between these two items, so
-        that one can easily distinguish the two parts of the backtrace.
+        We separate the two parts of the backtrace using a line '^except
+        raise:'; the idea here is that '^except' is pointing upwards to the
+        frame that caught the exception, while 'raise:' is referring downwards
+        to the frames that eventually raised the exception.
 
         So the backtrace looks like this:
 
             root (e.g. <module> or /usr/lib/python2.7/threading.py:778:__bootstrap():
             ...
             file:line in the except: block where the exception was caught.
-            ::(): marker
+            ^except raise:
             file:line in the try: block.
             ...
             file:line where the exception was raised.
 
-        The items after the ::(): marker are the usual items that traceback.*
-        shows for an exception.
+        The items below the '^except raise:' marker are the usual items that
+        traceback.* shows for an exception.
 
     Also the backtraces that are generated are more concise than those provided
     by traceback.* - just one line per frame instead of two - and filenames are
     output relative to the current directory if applicatble. And one can easily
     prefix all lines with a specified string, e.g. to indent the text.
-
-    Returns a string containing backtrace and exception information, and sends
-    returned string to <out> if specified.
-
-    exception:
-        None, or a (type, value, traceback) tuple, e.g. from sys.exc_info(). If
-        None, we call sys.exc_info() and use its return value.
-    limit:
-        None or maximum number of stackframes to output.
-    out:
-        None or callable taking single <text> parameter or object with a
-        'write' member that takes a single <text> parameter.
-    prefix:
-        Used to prefix all lines of text.
     '''
     if exception is None:
         exception = sys.exc_info()
     etype, value, tb = exception
-
-    if sys.version_info[0] == 2:
-        out2 = io.BytesIO()
-    else:
-        out2 = io.StringIO()
+    out2 = io.StringIO()
     try:
-
         frames = []
 
         # Get frames above point at which exception was caught - frames
@@ -551,7 +546,7 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
             ff = f[1], f[2], f[3], f[4][0].strip()
             frames.append(ff)
 
-        # It's useful to see boundary between upper and lower frames.
+        # Insert a marker for our special '^except raise:' line.
         frames.append( None)
 
         # Append frames from point in the try: block that caused the exception
