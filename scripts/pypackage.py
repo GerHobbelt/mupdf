@@ -170,8 +170,9 @@ Command-line usage:
             package imports ok into Python.
 
         --upload
-            Uploads <sdist> and <wheels> to pypi.org or test.pypi.org depending on
-            previous --pypi arg, using 'twine upload'.
+            Uploads <sdist> and <wheels> in <outdir> that match <sdist>, to
+            pypi.org or test.pypi.org depending on previous --pypi arg, using
+            'twine upload'.
 
         --wheels <pattern>
             Specify wheel files that already exist.
@@ -798,6 +799,19 @@ def parse_remote(remote):
     return user, host, directory
 
 
+def wheels_for_sdist(sdist, outdir):
+    '''
+    Returns list of paths of wheels in <outdir> that match <sdist>.
+    '''
+    m = re.match('^([^-]+)-([^-]+)[.]tar.gz$', os.path.basename(sdist))
+    assert m, f'Bad sdist name, expected .../<name>-<version>.tar.gz: {sdist!r}'
+    name_version = f'{m.group(1)}-{m.group(2)}-'
+    ret = []
+    for i in os.listdir(outdir):
+        if i.startswith(name_version) and i.endswith('.whl'):
+            ret.append(os.path.join(outdir, i))
+    return ret
+
 def main():
 
     sdist = None
@@ -956,6 +970,10 @@ def main():
         elif arg in '--upload':
             if not sdist:
                 raise Exception(f'No sdist specified; use "--sdist ..." before {arg}')
+            wheels = wheels_for_sdist(sdist, outdir)
+            log(f'Uploading wheels ({len(wheels)} for sdist: {sdist!r}')
+            for wheel in wheels:
+                log(f'    {wheel}')
             venv_run([
                     f'pip install twine',
                     f'python -m twine upload {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
