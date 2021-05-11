@@ -605,8 +605,16 @@ def make_unix(
         wheels.append(wheel)
         check_wheel(wheel)
         if out_dir:
+            # Rename the wheel to be a manylinux wheel so it can be uploaded to
+            # pypi.org.
+            #
+            leaf = os.path.basename(wheel)
+            m = re.match('^([^-]+-[^-]+-[^-]+-[^-]+-)linux(_[^.]+.whl)$', leaf)
+            assert m, f'Cannot parse wheel: {wheel!r}'
+            leaf2 = f'{m.group(1)}manylinux2014{m.group(2)}'
+            log(f'changing leaf from {leaf} to {leaf2}')
             os.makedirs(out_dir, exist_ok=1)
-            shutil.copy2(wheel, out_dir)
+            shutil.copy2(wheel, f'{out_dir}/{leaf2}')
 
     log( f'wheels are ({len(wheels)}):')
     for wheel in wheels:
@@ -976,7 +984,7 @@ def main():
                 log(f'    {wheel}')
             venv_run([
                     f'pip install twine',
-                    f'python -m twine upload {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
+                    f'python -m twine upload --disable-progress-bar {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
                     ],
                     bufsize=0,  # So we see login/password prompts.
                     )
