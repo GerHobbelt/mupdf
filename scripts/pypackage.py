@@ -26,7 +26,7 @@ Command-line usage:
         sdist and all wheels to test.pypi.org using 'twine upload'.
 
             pypackage.py \
-                    --build-sdist \
+                    --build-sdist mypackage \
                     --build-wheels-remote user@foo:build-dir \
                     --build-wheels-remote user@foo-win:build \
                     --test mypackage '' \
@@ -226,7 +226,6 @@ def system(
         return_output=False,
         prefix=None,
         caller=1,
-        out_log_caller=1,
         bufsize=-1,
         ):
     if jlib:
@@ -236,7 +235,7 @@ def system(
                 raise_errors=raise_errors,
                 out='return' if return_output else 'log',
                 prefix=prefix,
-                out_log_caller=caller+1,
+                caller=caller+1,
                 bufsize=bufsize,
                 )
     else:
@@ -565,7 +564,7 @@ def make_unix(
                 command,
                 return_output=return_output,
                 prefix=None if return_output else f'container: {prefix}',
-                out_log_caller=2,
+                caller=2,
                 )
 
     if test_direct_install:
