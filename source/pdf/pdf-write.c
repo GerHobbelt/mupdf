@@ -3443,6 +3443,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			create_encryption_dictionary(ctx, doc, opts->crypt);
 		}
 
+		/* Stash Encrypt entry in the writer state, in case a repair pass throws away the old trailer. */
 		opts->crypt_obj = pdf_keep_obj(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt)));
 
 		/* Make sure any objects hidden in compressed streams have been loaded */
