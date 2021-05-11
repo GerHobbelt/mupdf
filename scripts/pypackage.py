@@ -700,15 +700,15 @@ def make_windows(
     return wheels
 
 
-def test(code, wheels_or_package_name, pypi_test, py=None):
+def test(test_command, wheels_or_package_name, pypi_test, py=None):
     '''
     Basic testing of wheels.
 
     Finds wheel in <wheels> that matches <py>, installs in temporary venv, and
-    runs 'python <code>'.
+    runs 'python <script>'.
 
-    code:
-        Python code to run. E.g. 'import foo\nfoo.qwerty()\n'
+    test_command:
+        Command to run, e.g. 'foo/testscript.py'.
     wheels_or_package_name:
         If a string, the name of a package to install using pip. Otherwise
         should be a list of wheel paths to be searched for a match for <py>.
@@ -721,7 +721,6 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
     assert wheels_or_package_name
     if py is None:
         py = 'py' if windows() else sys.executable
-    script_name = 'pypackage_test.py'
 
     # Find wheel tag by running ourselves with --tag inside a venv running <py>:
     log(f'Finding wheel tag for {py!r}')
@@ -739,11 +738,10 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
     assert not '\r' in tag, f'tag is: {tag!r}'
     log(f'tag is: {tag!r}')
 
-    # Run <code> after installing matching wheel or specified package.
+    # Run <test_command> after installing matching wheel or specified package.
     #
     if isinstance(wheels_or_package_name, str):
         package_name = wheels_or_package_name
-        pip_install_arg = f'{"--repository testpypi " if pypi_test else ""}{package_name}'
     else:
         pattern = f'^([^-]+)-([^-]+)-{tag}[.]whl$'
         log(f'Looking for wheel matching {pattern!r}')
@@ -762,18 +760,19 @@ def test(code, wheels_or_package_name, pypi_test, py=None):
                 text += f'    {wheel}\n'
             raise Exception(text)
 
-    if not code:
+    if not test_command:
+        test_command = 'pypackage_test.py'
         code = (
                 f'import {package_name}\n'
                 f'print("Successfully imported {package_name}")\n'
                 )
         log(f'Testing default code for package_name={package_name}:\n{code}')
-    with open(script_name, 'w') as f:
-        f.write(code)
+        with open(test_command, 'w') as f:
+            f.write(code)
     venv_run(
             [
-            f'pip install {pip_install_arg}',
-            f'{py} {script_name}',
+            f'pip install {"-i https://test.pypi.org/simple" if pypi_test else ""} {package_name}',
+            f'python {test_command}',
             ],
             venv='pypackage-venv-test',
             py=py,
@@ -820,6 +819,16 @@ def wheels_for_sdist(sdist, outdir):
             ret.append(os.path.join(outdir, i))
     return ret
 
+
+def parse_sdist(sdist):
+    '''
+    Parses leafname of sdist, returning (name, version).
+    '''
+    m = re.match('^([^-]+)-([^-]+)[.]tar.gz$', os.path.basename(sdist))
+    assert m, f'Unable to parse sdist: {sdist!r}'
+    return m.group(1), m.group(2)
+
+
 def main():
 
     sdist = None
@@ -827,6 +836,7 @@ def main():
     pypi_test = True
     abis = None
     outdir = 'pypackage-out'
+    remote = None
     if windows():
         abis = ['x32-38', 'x32-39', 'x64-38', 'x64-39']
     else:
@@ -876,23 +886,14 @@ def main():
                 log(f'    wheel: {wheel}')
 
         elif arg == '--build-wheels-remote':
-            sync_sdist = True
-            while 1:
-                a = next(args)
-                if not a.startswith('-'):
-                    break
-                if a == '-s':
-                    sync_sdist = int(next(args))
-                else:
-                    raise Exception('Unrecognised arg: {a!r}')
-            user, host, directory = parse_remote(a)
-            if sync_sdist:
-                if not sdist:
-                    raise Exception(f'No sdist specified, specify --build-sdist before {arg}.')
+            assert remote, f'Must specify --remote ... before {arg}'
+            user, host, directory = remote
+            if not sdist:
+                raise Exception(f'No sdist specified, specify --build-sdist before {arg}.')
             rsync_remote = f'{user}{host}{directory}'
             local_dir = os.path.dirname(__file__)
             command = (''
-                    f'rsync -aP {local_dir}/pypackage.py {local_dir}/jlib.py {sdist if sync_sdist else ""} {user}{host}:{directory}'
+                    f'rsync -aP {local_dir}/pypackage.py {local_dir}/jlib.py {sdist} {user}{host}:{directory}'
                     f' && echo rsync finished'
                     f' && ssh {user}{host} '
                     f'"'
@@ -930,8 +931,12 @@ def main():
         elif arg == '--pypi-test':
             pypi_test = int(next(args))
 
+        elif arg == '--remote':
+            remote = parse_remote(next(args))
+
         elif arg == '--remote-args':
-            user, host, directory = parse_remote(next(args))
+            assert remote, f'Must specify --remote ... before {arg}'
+            user, host, directory = remote
             remote_args = next(args)
             local_dir = os.path.dirname(__file__)
             command = (
@@ -944,6 +949,13 @@ def main():
                     )
             system(command, prefix=f'{user}{host}:{directory}: ')
 
+        elif arg == '--remote-sync':
+            assert remote, f'Must specify --remote ... before {arg}'
+            user, host, directory = remote
+            items = next(args)
+            command = f'rsync -ai {items.replace(",", " ")} {user}{host}:{directory}'
+            system(command, prefix=f'rsync to {user}{host}:{directory}: ')
+
         elif arg == '--sdist':
             sdist = next(args)
 
@@ -952,6 +964,8 @@ def main():
 
         elif arg == '--test':
             package_name = None
+            if sdist:
+                package_name, _ = parse_sdist(sdist)
             while 1:
                 a = next(args)
                 if a.startswith('-'):
@@ -960,8 +974,7 @@ def main():
                     else:
                         raise Exception(f'Unrecognised arg: {a}')
                 else:
-                    code = a
-                    code = code.replace('\\n', '\n')
+                    test_command = a
                     break
             if package_name:
                 package_name_or_wheels = package_name
@@ -969,11 +982,13 @@ def main():
                 if not wheels:
                     raise Exception(f'No wheels specified, so cannot test. E.g. use --build-wheels or --wheels <pattern>.')
                 package_name_or_wheels = wheels
-            if code:
-                log(f'Code to run is:\n{code}')
+            if test_command == '.':
+                test_command = ''
+            if not test_command:
+                log(f'Test command is empty so will default to import of inferred package name.')
             else:
-                log(f'Code to run is empty so will default to import of inferred package name')
-            test(code, package_name if package_name else wheels, pypi_test)
+                log(f'Test command to run is: {test_command}')
+            test(test_command, package_name if package_name else wheels, pypi_test)
 
         elif arg in '--upload':
             if not sdist:
