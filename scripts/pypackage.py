@@ -604,6 +604,7 @@ def make_unix(
         wheels.append(wheel)
         check_wheel(wheel)
         if out_dir:
+            os.makedirs(out_dir, exist_ok=1)
             shutil.copy2(wheel, out_dir)
 
     log( f'wheels are ({len(wheels)}):')
