@@ -237,6 +237,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\scripts\curl\tool_hugehelp.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\altsvc.c" />
+    <ClCompile Include="..\..\thirdparty\curl\lib\amigaos.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\asyn-ares.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\asyn-thread.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\base64.c" />
@@ -318,6 +319,7 @@
     <ClCompile Include="..\..\thirdparty\curl\lib\nwlib.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\nwos.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\openldap.c" />
+    <ClCompile Include="..\..\thirdparty\curl\lib\openlock.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\parsedate.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\pingpong.c" />
     <ClCompile Include="..\..\thirdparty\curl\lib\pop3.c" />
@@ -443,11 +445,22 @@
     <ClInclude Include="..\..\thirdparty\curl\include\curl\typecheck-gcc.h" />
     <ClInclude Include="..\..\thirdparty\curl\include\curl\urlapi.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\altsvc.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\amigaos.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\arpa_telnet.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\asyn.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\bufref.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\c-hyper.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\cacert.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-amigaos.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-dos.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-mac.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-os400.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-plan9.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-riscos.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-tpf.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-vxworks.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\config-win32.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\config-win32ce.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\conncache.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\connect.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\content_encoding.h" />
@@ -464,6 +477,7 @@
     <ClInclude Include="..\..\thirdparty\curl\lib\curl_get_line.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\curl_gssapi.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\curl_hmac.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\curl_krb5.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\curl_ldap.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\curl_md4.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\curl_md5.h" />
@@ -499,6 +513,7 @@
     <ClInclude Include="..\..\thirdparty\curl\lib\hash.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\hostcheck.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\hostip.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\hsts.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\http.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\http2.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\http_aws_sigv4.h" />
@@ -520,6 +535,7 @@
     <ClInclude Include="..\..\thirdparty\curl\lib\netrc.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\non-ascii.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\nonblock.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\openlock.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\parsedate.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\pingpong.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\pop3.h" />
@@ -532,6 +548,8 @@
     <ClInclude Include="..\..\thirdparty\curl\lib\select.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\sendf.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\setopt.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\setup-os400.h" />
+    <ClInclude Include="..\..\thirdparty\curl\lib\setup-vms.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\setup-win32.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\share.h" />
     <ClInclude Include="..\..\thirdparty\curl\lib\sigpipe.h" />
@@ -628,9 +646,16 @@
     <ClInclude Include="..\..\thirdparty\curl\src\tool_xattr.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\thirdparty\curl\lib\checksrc.pl" />
+    <None Include="..\..\thirdparty\curl\lib\curl_config.h.cmake" />
+    <None Include="..\..\thirdparty\curl\lib\libcurl.plist" />
+    <None Include="..\..\thirdparty\curl\lib\libcurl.soname" />
+    <None Include="..\..\thirdparty\curl\lib\libcurl.vers.in" />
     <None Include="..\..\thirdparty\curl\lib\Makefile.am" />
     <None Include="..\..\thirdparty\curl\lib\Makefile.inc" />
     <None Include="..\..\thirdparty\curl\lib\Makefile.m32" />
+    <None Include="..\..\thirdparty\curl\lib\mk-ca-bundle.pl" />
+    <None Include="..\..\thirdparty\curl\lib\optiontable.pl" />
     <None Include="..\..\thirdparty\curl\src\Makefile.am" />
     <None Include="..\..\thirdparty\curl\src\Makefile.inc" />
     <None Include="..\..\thirdparty\curl\src\Makefile.m32" />
@@ -641,6 +666,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\thirdparty\curl\lib\CMakeLists.txt" />
+    <Text Include="..\..\thirdparty\curl\src\CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

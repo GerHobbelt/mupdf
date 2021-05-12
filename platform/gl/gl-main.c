@@ -951,7 +951,7 @@ void load_page(void)
 	page_contents_changed = 1;
 }
 
-static void render_page(void)
+void render_page(void)
 {
 	fz_irect bbox;
 	fz_pixmap *pix;
