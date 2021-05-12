@@ -106,6 +106,7 @@ typedef struct
 	char upwd_utf8[128];
 	int permissions;
 	pdf_crypt *crypt;
+	pdf_obj *crypt_obj;
 } pdf_write_state;
 
 /*
@@ -2243,9 +2244,8 @@ static void writexref(fz_context *ctx, pdf_document *doc, pdf_write_state *opts,
 			if (obj)
 				pdf_dict_put(ctx, trailer, PDF_NAME(ID), obj);
 
-			obj = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
-			if (obj)
-				pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), obj);
+			if (opts->crypt_obj)
+				pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), opts->crypt_obj);
 		}
 		if (main_xref_offset != 0)
 		{
@@ -3450,6 +3450,9 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			create_encryption_dictionary(ctx, doc, opts->crypt);
 		}
 
+		/* Stash Encrypt entry in the writer state, in case a repair pass throws away the old trailer. */
+		opts->crypt_obj = pdf_keep_obj(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt)));
+
 		/* Make sure any objects hidden in compressed streams have been loaded */
 		if (!opts->do_incremental)
 		{
@@ -3604,6 +3607,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		finalise_write_state(ctx, opts);
 		if (opts->crypt != doc->crypt)
 			pdf_drop_crypt(ctx, opts->crypt);
+		pdf_drop_obj(ctx, opts->crypt_obj);
 		doc->save_in_progress = 0;
 	}
 	fz_catch(ctx)
