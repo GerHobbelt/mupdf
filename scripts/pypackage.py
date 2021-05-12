@@ -5,209 +5,20 @@ Support for creating Python wheels and uploading to pypi.org.
 
 Overview:
 
-    We expect to be run in the directory containing a package's setup.py and/or
-    pyproject.toml.
+    Support for building sdist, building wheels locally/remotely, uploading
+    sdist and wheels to pypi.org, testing that 'pip install <package-name>'
+    works.
 
-    On Unix we use a manylinux docker container.
-
-    On Windows we use the 'py' command to find different installed Pythons.
-
-Command-line usage:
-
-    Note that args are handled sequentially. So for example with 'pypackage.py
-    --sdist bar.tar.gz --build-wheels --sdist bar.tgz', wheels will be built
-    from bar.tar.gz. option.
-
-    Examples:
-
-        Build packages on two remote systems and copy back to local system,
-        then check that there is a generated wheel that matches the host system
-        and that 'import mypackage' works on the local system, then update
-        sdist and all wheels to test.pypi.org using 'twine upload'.
-
-            pypackage.py \
-                    --build-sdist mypackage \
-                    --build-wheels-remote user@foo:build-dir \
-                    --build-wheels-remote user@foo-win:build \
-                    --test mypackage '' \
-                    --pypi-test 1 \
-                    --upload
-
-        Install
-        pypackage.py --remote-args somehost:testing "--wheels 'pypackage-out/*' --test ''"
-
-    Args:
-
-        --abis <abis>
-            Set the list of ABIs for which --build-wheels builds wheels.
-
-            abis:
-                Comma-separated list of <abi>.
-                On Windows:
-                    abi: <cpu>-<python-version>
-                        cpu:
-                            'x32' or 'x64'.
-                On Unix:
-                    abi: <python-version>
-
-                python-version:
-                    Python version; may contain '.'. E.g. '38' or '3.9'.
-
-            Examples:
-                Windows: --abis x32-38,x32-39,x64-39,x64-39
-                Unix: --abis 38,39
-
-            Default is:
-                Unix: 37,38,39
-                Windows: x32-38,x32-39,x64-38,x64-39
-
-        --build-sdist <package-directory>
-            Builds sdist for source tree <package-directory> in <outdir>.
-
-            Currently works by running <package-directory>/setup.py.
-
-            Either this or '--sdist <sdist>' must be
-            specified before --build-wheels*.
-
-        --build-wheels
-            Build wheels and copy them into <outdir>.
-
-            Requires previous args to set <sdist>:
-                --sdist or --build-sdist.
-
-            We extract the sdist (locally on Windows, in a container on Unix)
-            and build wheels in the extracted tree, finally copying them into
-            <outdir>.
-
-            todo: provide an option to use 'pip wheel <sdist>'. This would
-            force clean build each time so can be slow when experimenting, but
-            is probably more correct.
-
-        --build-wheels-remote
-            Builds wheels on remote host and copies them back to local
-            <outdir>.
-
-            Requires previous args:
-                --remote
-                --sdist or --build-sdist.
-
-        --clean
-            Removes any *.whl or *.tar.gz files in <outdir>. For safety it
-            asserts that <outdir> contains 'pypackage'.
-
-        -h
-        --help
-            Show this help.
-
-        --manylinux-c <container-name>
-            [Linux only]
-            Name of container to create/start/use. Default is 'pypackage'.
-
-        --manylinux-d 0 | 1
-            [Linux only]
-            Whether to ensure that docker is installed. Default is 0.
-
-        --manylinux-i <docker-image>
-            [Linux only]
-            Set docker image; default is 'quay.io/pypa/manylinux2014_x86_64'.
-
-        --manylinux-p 0 | 1
-            [Linux only]
-            Whether to use 'docker pull' to get/update container image. Default
-            is 1.
-
-        -o <outdir>
-            Set the directory in which to put generated wheels. Default is
-            'pypackage-out'.
-
-        --pypi-test 0 | 1
-            Whether we use the pypi test repository for --upload and --test.
-
-            Default is 1.
-
-        --remote [<user>@]<host>:[<directory>]
-
-            Sets remote location to be used by --build-wheels-remote, --remote-args etc.
-
-        --remote-args <args>
-            Runs pypackage.py on remote host, passing <args>.
-
-            Requires previous arg --remote.
-
-            Note that <args> is a single arg so should be in quotes if multiple
-            args are to be used on remote host.
-
-            We rsync pypackage.py to the remote host and then use ssh to run
-            remote command of the form:
-
-                ssh user@host 'cd test-dir && ./pypackage.py <args>'
-
-            For example:
-                --remote-args "--wheels 'pypackage-out/*' --test"
-                --remote testmachine: ----remote-args "--test -p mymodule ."
-
-        --remote-sync <locals>
-            Requires previous arg --remote.
-
-            Uses rsync to copy items in <locals> (comma-separated) to remote
-            host.
-
-        --sdist <sdist>
-            Specify path of an existing sdist. If specified, wheels are built
-            by extracting the sdist (either locally on Windows or inside docker
-            container on Unix) and building inside this resulting tree.
-
-            Otherwise we build a new sdist as required by running './setup.py
-            sdist' locally.
-
-        --tag
-            Internal use only.
-
-        --test [-p <package-name>] <command>
-            Tests installation of local or pypi wheel by running 'python
-            <command>' inside a clean Python venv.
-
-            <command> is a single arg so should be in quotes and/or escape
-            spaces.
-
-            On Windows the venv will use "py"; otherwise we use sys.executable,
-            i.e. whatever python is running this script itself.
-
-            If '-p <package-name>' is specified we do 'pip install
-            <package-name>' to install from pypi.org (using pypi's test
-            repository if '--pypi-test 1' was previously specified). Otherwise
-            we do 'pip install <wheel>' where <wheel> is found by searching
-            <wheels> for a match for the python we run.
-
-            If <command> is '.' or an empty string, we infer a package
-            name either from the -p arg or from the name of the matching
-            wheel, and run a temporary pythong script containing 'import
-            <package-name>'. Thus we default to testing that the package
-            imports ok into Python.
-
-        --upload
-            Uploads <sdist> and <wheels> in <outdir> that match <sdist>, to
-            pypi.org or test.pypi.org depending on previous --pypi arg, using
-            'twine upload'.
-
-            Requires previous arg --sdist or --build-sdist.
-
-        --wheels <pattern>
-            Specify wheel files that already exist.
-
-            <pattern> should be a glob that matches previously-build wheels; we
-            only use matches that end with ".whl" so for example one can use:
-
-                --wheels 'pypackag-out/*'
-
-            The resulting list of wheels is used by later occurrencies of
-            --test, --upload etc.
-
-Docker notes:
-    Interactive session inside docker instance:
-        docker exec -it pypackage bash
+    When building wheels, on Unix we use a manylinux docker container, on
+    Windows we use the 'py' command to find different installed Pythons.
 '''
 
+
+# Interactive session inside docker instance:
+#        docker exec -it pypackage bash
+
+
+import argparse
 import distutils.util
 import glob
 import os
@@ -219,24 +30,10 @@ import sys
 import tarfile
 import time
 
-try:
-    import jlib
-except ModuleNotFoundError as e:
-    print(f'Unable to import jlib: {e}')
-    jlib = None
-    # We can cope without jlib, but use it if available to get better
-    # diagnostics when running external commands.
+import jlib
 
 
-def log(text=''):
-    '''
-    Logs lines with prefix.
-    '''
-    if jlib:
-        return jlib.log(text, caller=2)
-    for line in text.split('\n'):
-        print(f'pypackage.py: {line}')
-    sys.stdout.flush()
+log = jlib.log
 
 
 def system(
@@ -247,31 +44,15 @@ def system(
         caller=1,
         bufsize=-1,
         ):
-    if jlib:
-        return jlib.system(
-                command,
-                verbose=not return_output,
-                raise_errors=raise_errors,
-                out='return' if return_output else 'log',
-                prefix=prefix,
-                caller=caller+1,
-                bufsize=bufsize,
-                )
-    else:
-        log(f'Running: {command}')
-        ret = subprocess.run(
-                command,
-                shell=True,
-                universal_newlines=True,
-                stdout=subprocess.PIPE if return_output else None,
-                stderr=subprocess.STDOUT if return_output else None,
-                bufsize=bufsize,
-                )
-        if raise_errors:
-            ret.check_returncode()
-        if return_output:
-            return ret.stdout
-        return ret.returncode
+    return jlib.system(
+            command,
+            verbose=not return_output,
+            raise_errors=raise_errors,
+            out='return' if return_output else 'log',
+            prefix=prefix,
+            caller=caller+1,
+            bufsize=bufsize,
+            )
 
 
 def windows():
@@ -743,7 +524,7 @@ def test(test_command, wheels_or_package_name, pypi_test, py=None):
     # Find wheel tag by running ourselves with --tag inside a venv running <py>:
     log(f'Finding wheel tag for {py!r}')
     text = venv_run(
-            f'python {sys.argv[0]} --tag',
+            f'python {sys.argv[0]} tag',
             return_output=True,
             venv='pypackage-venv-test',
             py=py,
@@ -847,6 +628,55 @@ def parse_sdist(sdist):
     return m.group(1), m.group(2)
 
 
+class ArgsRaise:
+    pass
+
+class Args:
+    def __init__(self, argv):
+        self.argv = argv
+        self.pos = 0
+        self.anchor = None
+
+    def __next__(self):
+        return self.next()
+
+    def __iter__(self):
+        return self
+
+    def next(self, eof=ArgsRaise, anchor=False):
+        if anchor:
+            self.anchor = self.pos
+        if self.pos == len(self.argv):
+            if eof is ArgsRaise:
+                if self.anchor:
+                    print(f'Not enough arguments after {self.argv[self.anchor]!r}.')
+                raise StopIteration
+            else:
+                return eof
+        ret = self.argv[self.pos]
+        self.pos += 1
+        return ret
+
+    def peek(self):
+        if self.pos < len(self.argv):
+            return self.argv[self.pos]
+
+    def next_is(self, match):
+        if self.peek() == match:
+            self.pos += 1
+            return True
+
+    def help(self, syntax='', text=''):
+        if self.peek() in ('-h', '--help'):
+            self.next()
+            print(f'{self.argv[self.anchor]} {syntax}\n    {text}\n')
+
+    def prev(self):
+        assert self.pos > 0
+        self.pos -= 1
+
+
+
 def main():
 
     sdist = None
@@ -864,29 +694,115 @@ def main():
         manylinux_docker_image = None
         manylinux_pull_docker_image = None
 
-    args = iter(sys.argv[1:])
-    while 1:
-        try:
-            arg = next(args)
-        except StopIteration:
-            break
-        log(f'Handling arg={arg!r}')
+    parser = jlib.Arg('', required=1, help=__doc__,
+            subargs=[
+                jlib.Arg('build', help='Build wheels.', multi=True,
+                        subargs = [
+                            jlib.Arg('-r <uri>',
+                                    help='''
+                                    Build on specified remote machine
+                                    [<user>@]<host>:[<directory>] and copy them
+                                    back to local machine.
+                                    ''',
+                                    ),
+                            ],
+                        ),
+                jlib.Arg('pypi-test <t:int>',
+                        help='Whether to use test.pypi.org.',
+                        ),
+                jlib.Arg('remote',
+                        help='''
+                        Sync to and run pypackage.py on remote machine.
+                        ''',
+                        subargs=[
+                            jlib.Arg('-s <files>',
+                                    help='''
+                                    Comma-separated files to sync to remote
+                                    machine.
+                                    ''',
+                                    ),
+                            jlib.Arg('-a <args>',
+                                    help='''
+                                    Args to pass to pypackage.py on remote
+                                    machine.
+                                    ''',
+                                    ),
+                            jlib.Arg('<uri>', required=1,
+                                    help='''
+                                    The remote machine:
+                                    [<user>@]<host>:[<directory>]
+                                    ''',
+                                    ),
+                            ],
+                        ),
+                jlib.Arg('sdist <sdist|package-dir>',
+                        help='''
+                        Name of preexisting sdist file to use or Python package
+                        directory (e.g. containing setup.py) in which to build
+                        a new sdist.
+                        ''',
+                        ),
+                jlib.Arg('tag', help='Internal use only.'),
+                jlib.Arg('test',
+                        help='''
+                        Run test programme. If <command> is '.' or '', we
+                        instead run a temporary test programme that imports the
+                        package. If -p is not specified we infer the package
+                        name from the sdist.
+                        ''',
+                        subargs = [
+                            jlib.Arg('-p <package-name>',
+                                    help='Set package name to install from pypi.',
+                                    ),
+                            jlib.Arg('<command>', required=1,
+                                    help='The command to run.'
+                                    ),
+                            ],
+                        ),
+                jlib.Arg('upload', help='Upload sdist and wheels to pypi.'),
+                jlib.Arg('wheels <pattern>',
+                        help='Specify pre-existing wheels using glob pattern.',
+                        ),
+                ],
+            )
 
-        if 0:
-            pass
+    args = parser.parse(sys.argv[1:])
 
-        elif arg == '--abis':
-            abis = next(args).split(',')
-
-        elif arg == '--build-sdist':
-            package_directory = next(args)
+    # Need to handle args in particular order because some depend on others.
+    #
+    if args.sdist:
+        if os.path.isfile(args.sdist):
+            parse_sdist(args.sdist)
+            sdist = args.sdist
+        else:
+            package_directory = args.sdist
             sdist = make_sdist(package_directory, outdir)
 
-        elif arg == '--build-wheels':
-            assert sdist, f'Need to specify --build-sdist or --sdist=... before {arg}.'
+    if args.pypi_test:
+        pypi_test = int(args.pypi_test)
+
+    for build in args.build:
+        assert sdist, f'build requires sdist'
+        if build.r:
+            # Remote build.
+            user, host, directory = parse_remote(build.r)
+            local_dir = os.path.dirname(__file__)
+            command = (''
+                    f'rsync -aP {local_dir}/pypackage.py {local_dir}/jlib.py {sdist} {user}{host}:{directory}'
+                    f' && echo rsync finished'
+                    f' && ssh {user}{host} '
+                    f'"'
+                    f'{"cd "+directory if directory else "true"}'
+                    f' && ./pypackage.py --sdist {os.path.basename(sdist)} --build-wheels'
+                    f'"'
+                    f' && rsync -ai {user}{host}:{directory}pypackage-out/ {outdir}/'
+                    )
+            system(command, prefix=f'{user}{host}:{directory}: ')
+
+        else:
+            # Local build.
             if windows():
                 wheels = make_windows(sdist, abis, outdir)
-
             else:
                 wheels = make_unix(
                         sdist,
@@ -902,140 +818,73 @@ def main():
             for wheel in wheels:
                 log(f'    wheel: {wheel}')
 
-        elif arg == '--build-wheels-remote':
-            assert remote, f'Must specify --remote ... before {arg}'
-            assert sdist, f'No sdist specified, specify --build-sdist before {arg}.'
-            user, host, directory = remote
-            rsync_remote = f'{user}{host}{directory}'
-            local_dir = os.path.dirname(__file__)
-            command = (''
-                    f'rsync -aP {local_dir}/pypackage.py {local_dir}/jlib.py {sdist} {user}{host}:{directory}'
-                    f' && echo rsync finished'
-                    f' && ssh {user}{host} '
-                    f'"'
-                    f'{"cd "+directory if directory else "true"}'
-                    f' && ./pypackage.py --sdist {os.path.basename(sdist)} --build-wheels'
-                    f'"'
-                    f' && rsync -ai {user}{host}:{directory}pypackage-out/ {outdir}/'
-                    )
-            system(command, prefix=f'{user}{host}:{directory}: ')
+    if args.tag:
+        print(f'tag: {make_tag()}')
 
-        elif arg == '--clean':
-            assert 'pypackage' in outdir
-            for leaf in os.listdir(outdir):
-                if leaf.endswith('.whl') or leaf.endswith('.tar.gz'):
-                    os.remove(os.path.join(outdir, leaf))
+    if args.wheels:
+        pattern = args.wheels
+        wheels_raw = glob.glob(pattern)
+        if not wheels_raw:
+            log(f'Warning: no matches found for wheels pattern {pattern!r}.')
+        wheels = []
+        for wheel in wheels_raw:
+            if wheel.endswith('.whl'):
+                wheels.append(wheel)
+        log(f'Found {len(wheels)} wheels with pattern {pattern}:')
+        for wheel in wheels:
+            log(f'    {wheel}')
 
-        elif arg in ('-h', '--help'):
-            print( __doc__)
-
-        elif unix() and arg == '--manylinux-c':
-            manylinux_container_name = next(args)
-
-        elif unix() and arg == '--manylinux-d':
-            manylinux_install_docker = int(next(args))
-
-        elif unix() and arg == '--manylinux-i':
-            manylinux_docker_image = next(args)
-
-        elif unix() and arg == '--manylinux-p':
-            manylinux_pull_docker_image = next(args)
-
-        elif arg == '-o':
-            outdir = next(args)
-
-        elif arg == '--pypi-test':
-            pypi_test = int(next(args))
-
-        elif arg == '--remote':
-            remote = parse_remote(next(args))
-
-        elif arg == '--remote-args':
-            assert remote, f'Must specify --remote ... before {arg}'
-            user, host, directory = remote
-            remote_args = next(args)
-            local_dir = os.path.dirname(__file__)
-            command = (
-                    f'rsync -aP {local_dir}/pypackage.py {local_dir}/jlib.py {user}{host}:{directory}'
-                    f' && ssh {user}{host} '
-                    f'"'
-                    f'{"cd "+directory if directory else "true"}'
-                    f' && ./pypackage.py {remote_args}'
-                    f'"'
-                    )
-            system(command, prefix=f'{user}{host}:{directory}: ')
-
-        elif arg == '--remote-sync':
-            assert remote, f'Must specify --remote ... before {arg}'
-            user, host, directory = remote
-            items = next(args)
-            command = f'rsync -ai {items.replace(",", " ")} {user}{host}:{directory}'
-            system(command, prefix=f'rsync to {user}{host}:{directory}: ')
-
-        elif arg == '--sdist':
-            sdist = next(args)
-
-        elif arg == '--tag':
-            print(f'tag: {make_tag()}')
-
-        elif arg == '--test':
-            package_name = None
-            if sdist:
-                package_name, _ = parse_sdist(sdist)
-            while 1:
-                a = next(args)
-                if a.startswith('-'):
-                    if a == '-p':
-                        package_name = next(args)
-                    else:
-                        raise Exception(f'Unrecognised arg: {a}')
-                else:
-                    test_command = a
-                    break
-            if package_name:
-                package_name_or_wheels = package_name
-            else:
-                if not wheels:
-                    raise Exception(f'No wheels specified, so cannot test. E.g. use --build-wheels or --wheels <pattern>.')
-                package_name_or_wheels = wheels
-            if test_command == '.':
-                test_command = ''
-            if not test_command:
-                log(f'Test command is empty so will default to import of inferred package name.')
-            else:
-                log(f'Test command to run is: {test_command}')
-            test(test_command, package_name if package_name else wheels, pypi_test)
-
-        elif arg in '--upload':
-            if not sdist:
-                raise Exception(f'No sdist specified; use "--sdist ..." before {arg}')
-            wheels = wheels_for_sdist(sdist, outdir)
-            log(f'Uploading wheels ({len(wheels)} for sdist: {sdist!r}')
-            for wheel in wheels:
-                log(f'    {wheel}')
-            venv_run([
-                    f'pip install twine',
-                    f'python -m twine upload --disable-progress-bar {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
-                    ],
-                    bufsize=0,  # So we see login/password prompts.
-                    )
-
-        elif arg == '--wheels':
-            pattern = next(args)
-            wheels_raw = glob.glob(pattern)
-            if not wheels_raw:
-                log(f'Warning: no matches found for --wheels pattern {pattern!r}.')
-            wheels = []
-            for wheel in wheels_raw:
-                if wheel.endswith('.whl'):
-                    wheels.append(wheel)
-            log(f'Found {len(wheels)} wheels with pattern {pattern}:')
-            for wheel in wheels:
-                log(f'    {wheel}')
-
+    if args.test:
+        package_name = args.test.p
+        assert package_name or wheels, f'Cannot run test - need to specify "-p <package-name" or "wheels <pattern>".'
+        command = args.test.command
+        if command == '.':
+            command = ''
+        if command:
+            log(f'Test command to run is: {command}')
         else:
-            raise Exception(f'Unrecognised arg: {arg}')
+            log(f'Test command is empty so will default to import of inferred package name.')
+        test(command, package_name if package_name else wheels, pypi_test)
+
+    if args.upload:
+        assert sdist, f'Cannot upload because no sdist specified; use "sdist ...".'
+        wheels = wheels_for_sdist(sdist, outdir)
+        log(f'Uploading wheels ({len(wheels)} for sdist: {sdist!r}')
+        for wheel in wheels:
+            log(f'    {wheel}')
+        venv_run([
+                f'pip install twine',
+                f'python -m twine upload --disable-progress-bar {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
+                ],
+                bufsize=0,  # So we see login/password prompts.
+                )
+
+    if args.remote:
+        user, host, directory = parse_remote(args.remote.uri)
+        local_dir = os.path.dirname(__file__)
+        sync_files = f'{local_dir}/pypackage.py,{local_dir}/jlib.py'
+        if args.remote.s:
+            sync_files += f',{args.remote.s}'
+        system(
+                f'rsync -ai {sync_files.replace(",", " ")} {sdist if sdist else ""} {user}{host}:{directory}',
+                prefix=f'rsync to {user}{host}:{directory}: ',
+                )
+        if args.remote.a:
+            remote_args = args.remote.a
+            system(
+                    f'ssh {user}{host} '
+                    f'"'
+                    f'{"cd "+directory+" && " if directory else ""}'
+                    f'./pypackage.py {remote_args}'
+                    f'"'
+                    ,
+                    prefix=f'{user}{host}:{directory}: ',
+                    )
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception:
+        sys.stderr.write(jlib.exception_info())
+        sys.exit(1)
