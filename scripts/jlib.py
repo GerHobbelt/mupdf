@@ -598,7 +598,13 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
                 out2.write( '%sException:\n' % prefix)
                 lines = traceback.format_exception_only( etype, value)
                 for line in lines:
-                    out2.write( '%s    %s' % ( prefix, line))
+                    # It seems that the lines returned from
+                    # traceback.format_exception_only() can sometimes contain
+                    # \n characters, so we do an additional loop to ensure that
+                    # these are indented consistently.
+                    #
+                    for line2 in line.split('\n'):
+                        out2.write( '%s    %s\n' % ( prefix, line2))
 
         text = out2.getvalue()
 
@@ -1083,7 +1089,14 @@ def system(
 
         if raise_errors:
             if e:
-                raise Exception( 'command failed: %s' % command)
+                if out_original == 'return':
+                    raise Exception(
+                            f'Command failed: {command}\n'
+                            f'Output was:\n'
+                            f'{out.getvalue()}'
+                            )
+                else:
+                    raise Exception( 'command failed: %s' % command)
             elif out_original == 'return':
                 return out.getvalue()
             else:
