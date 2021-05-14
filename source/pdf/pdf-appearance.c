@@ -2423,12 +2423,12 @@ pdf_signature_appearance_unsigned(fz_context *ctx, fz_rect rect, fz_text_languag
 		float text_color[] = { 1.0f, 1.0f, 1.0f };
 		float arrow_color[] = { 0.95f, 0.33f, 0.18f };
 
-		rect.y0 = rect.y1 - (rect.y1 - rect.y0) / 6;
-		rect.x1 = rect.x0 + (rect.y1 - rect.y0) * 4;
-		font = fz_new_base14_font(ctx, "Helvetica");
-
 		dlist = fz_new_display_list(ctx, rect);
 		dev = fz_new_list_device(ctx, dlist);
+
+		rect.y1 = rect.y0 + (rect.y1 - rect.y0) / 6;
+		rect.x1 = rect.x0 + (rect.y1 - rect.y0) * 4;
+		font = fz_new_base14_font(ctx, "Helvetica");
 
 		path = fz_new_path(ctx);
 		/* Draw a rectangle with a protusion to the right [xxxxx> */
