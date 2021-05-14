@@ -2519,7 +2519,7 @@ pdf_signature_info(fz_context *ctx, const char *name, pdf_pkcs7_designated_name 
 			fz_append_string(ctx, fzbuf, location);
 		}
 
-		if (tm)
+		if (date >= 0)
 		{
 			len = strftime(now_str, sizeof now_str, "%FT%T%z", tm);
 			if (len)
