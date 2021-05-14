@@ -2312,7 +2312,7 @@ static void draw_logo(fz_context *ctx, fz_path *path)
 static float logo_color[3] = { (float)0xa4 / (float)0xFF, (float)0xca / (float)0xFF, (float)0xf5 / (float)0xFF };
 
 fz_display_list *
-pdf_signature_appearance(fz_context *ctx, fz_rect rect, fz_text_language lang, fz_image *img, const char *left_text, const char *right_text, int include_logo)
+pdf_signature_appearance_signed(fz_context *ctx, fz_rect rect, fz_text_language lang, fz_image *img, const char *left_text, const char *right_text, int include_logo)
 {
 	fz_display_list *dlist = NULL;
 	fz_device *dev = NULL;
