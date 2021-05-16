@@ -47,6 +47,15 @@ public class PDFWidget extends PDFAnnotation
 	public static final int PDF_CH_FIELD_IS_SORT = 1 << 19;
 	public static final int PDF_CH_FIELD_IS_MULTI_SELECT = 1 << 21;
 
+	/* Signature appearance */
+	public static final int PDF_SIGNATURE_SHOW_LABELS = 1;
+	public static final int PDF_SIGNATURE_SHOW_DN = 2;
+	public static final int PDF_SIGNATURE_SHOW_DATE = 4;
+	public static final int PDF_SIGNATURE_SHOW_TEXT_NAME = 8;
+	public static final int PDF_SIGNATURE_SHOW_GRAPHIC_NAME = 16;
+	public static final int PDF_SIGNATURE_SHOW_LOGO = 32;
+	public static final int PDF_SIGNATURE_DEFAULT_APPEARANCE = 63;
+
 	// These don't change after creation, so are cached in java fields.
 	private int fieldType;
 	private int fieldFlags;
@@ -150,12 +159,12 @@ public class PDFWidget extends PDFAnnotation
 	public native boolean setChoiceValue(String val);
 
 	/* Signature fields */
-	public native boolean signNative(PKCS7Signer signer, Image image);
+	public native boolean signNative(PKCS7Signer signer, int flags, Image image, String reason, String Location);
 	public boolean sign(PKCS7Signer signer, Image image) {
-		return signNative(signer, image);
+		return signNative(signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, image, null, null);
 	}
 	public boolean sign(PKCS7Signer signer) {
-		return signNative(signer, null);
+		return signNative(signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, null, null, null);
 	}
 	public native int checkCertificate(PKCS7Verifier verifier);
 	public native int checkDigest(PKCS7Verifier verifier);
