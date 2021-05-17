@@ -18,15 +18,16 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\{#MyAppName}
+DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSES.txt
 InfoBeforeFile=..\..\scripts\qiqqa-mutools-packager\installer-info-before.txt
 InfoAfterFile=..\..\scripts\qiqqa-mutools-packager\installer-info-after.txt
 OutputBaseFilename=qiqqa-mutools-setup
+OutputDir=..\..\platform\win32\__Installer\
 SetupIconFile=..\..\scripts\qiqqa-mutools-packager\icon.ico
-Compression=lzma2/max
+Compression=lzma2/ultra64
 SolidCompression=yes
 
 [Languages]
@@ -47,6 +48,9 @@ Source: "..\..\platform\win32\Debug-32\MupdfSharp.exe"; DestDir: "{app}"; Flags:
 Source: "..\..\platform\win32\Debug-32\muraster.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\platform\win32\Debug-32\mutool.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\platform\win32\Debug-32\tesseract.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\tessdata\*"; DestDir: "{app}\tessdata"; Flags: ignoreversion recursesubdirs createallsubdirs
+; ,--- this tessdata stuff is HUGE and has a much lower update frequency than our stuff.
+;      We should fetch it elsewhere or at least provide it in a separate installer, which can
+;      be downloaded and executed when that stuff is not present YET.
+; Source: "..\..\platform\win32\Debug-32\tessdata\*"; DestDir: "{app}\tessdata"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
