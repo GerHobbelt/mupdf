@@ -252,7 +252,8 @@ pdf_format_signature_info(fz_context *ctx, pdf_pkcs7_signer *signer, int flags, 
 	fz_var(dn);
 	fz_try(ctx)
 	{
-		dn = signer->get_signing_name(ctx, signer);
+		if (signer)
+			dn = signer->get_signing_name(ctx, signer);
 		if (!dn)
 			dn = &placeholder_dn;
 		*name = fz_strdup(ctx, dn->cn ? dn->cn : "Your Common Name Here");
@@ -265,7 +266,10 @@ pdf_format_signature_info(fz_context *ctx, pdf_pkcs7_signer *signer, int flags, 
 			(flags & PDF_SIGNATURE_SHOW_LABELS) ? 1 : 0);
 	}
 	fz_always(ctx)
-		pdf_signature_drop_designated_name(ctx, dn);
+	{
+		if (dn != &placeholder_dn)
+			pdf_signature_drop_designated_name(ctx, dn);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 	return info;
