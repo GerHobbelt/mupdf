@@ -161,11 +161,14 @@ static void signature_appearance_dialog(void)
 
 		{
 			ui_label("Graphic:");
-			ui_checkbox("Full name", &graphic_name);
+			ui_checkbox("Name", &graphic_name);
 
 			ui_panel_begin(ui.gridsize * 10, ui.gridsize, 0, 0, 0);
 			ui_layout(L, X, NW, 0, 0);
 			ui_checkbox("Image", &graphic_image);
+
+			ui_spacer();
+
 			if (ui_button("Select image"))
 			{
 				fz_drop_image(ctx, sign_image);
@@ -196,7 +199,7 @@ static void signature_appearance_dialog(void)
 				{
 					ui_layout(T, Y, NW, 0, 0);
 					ui_checkbox("Labels", &labels);
-					ui_checkbox("Name", &text_name);
+					ui_checkbox("Common name", &text_name);
 					ui_checkbox("Distinguished name", &dn);
 					ui_checkbox("Date", &date);
 					ui_checkbox("Logo", &logo);
@@ -210,12 +213,14 @@ static void signature_appearance_dialog(void)
 					ui_panel_begin(ui.gridsize * 10, ui.gridsize, 0, 0, 0);
 					ui_layout(L, X, NW, 0, 0);
 					ui_label("Reason:");
+					ui_spacer();
 					ui_input(&sign_reason_input, ui.gridsize * 5, 1);
 					ui_panel_end();
 
 					ui_panel_begin(ui.gridsize * 10, ui.gridsize, 0, 0, 0);
 					ui_layout(L, X, NW, 0, 0);
 					ui_label("Location:");
+					ui_spacer();
 					ui_input(&sign_location_input, ui.gridsize * 5, 1);
 					ui_panel_end();
 				}
