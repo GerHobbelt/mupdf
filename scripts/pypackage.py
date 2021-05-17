@@ -793,7 +793,7 @@ def main():
                     f' && ssh {user}{host} '
                     f'"'
                     f'{"cd "+directory if directory else "true"}'
-                    f' && ./pypackage.py --sdist {os.path.basename(sdist)} --build-wheels'
+                    f' && ./pypackage.py sdist {os.path.basename(sdist)} build'
                     f'"'
                     f' && rsync -ai {user}{host}:{directory}pypackage-out/ {outdir}/'
                     )
