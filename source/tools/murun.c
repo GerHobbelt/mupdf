@@ -6184,8 +6184,8 @@ static void ffi_PDFWidget_sign(js_State *J)
 	pdf_pkcs7_signer *signer = js_touserdata(J, 1, "pdf_pkcs7_signer");
 	int flags = 0;
 	fz_image *graphic = js_iscoercible(J, 3) ? js_touserdata(J, 3, "fz_image") : NULL;
-	const char *reason = js_isstring(J, 4) ? js_tostring(J, 4) : NULL;
-	const char *location = js_isstring(J, 5) ? js_tostring(J, 5) : NULL;
+	const char *reason = js_iscoercible(J, 4) ? js_tostring(J, 4) : NULL;
+	const char *location = js_iscoercible(J, 5) ? js_tostring(J, 5) : NULL;
 
 	if (js_isobject(J, 2)) {
 		if (check_option(J, 2, "showLabels"))
@@ -6214,15 +6214,15 @@ static void ffi_PDFWidget_sign(js_State *J)
 		rethrow(J);
 }
 
-static void ffi_PDFWidget_preview(js_State *J)
+static void ffi_PDFWidget_previewSignature(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_widget *widget = js_touserdata(J, 0, "pdf_widget");
 	pdf_pkcs7_signer *signer = NULL;
 	int flags = 0;
 	fz_image *graphic = js_iscoercible(J, 3) ? js_touserdata(J, 3, "fz_image") : NULL;
-	const char *reason = js_isstring(J, 4) ? js_tostring(J, 4) : NULL;
-	const char *location = js_isstring(J, 5) ? js_tostring(J, 5) : NULL;
+	const char *reason = js_iscoercible(J, 4) ? js_tostring(J, 4) : NULL;
+	const char *location = js_iscoercible(J, 5) ? js_tostring(J, 5) : NULL;
 	fz_pixmap *pixmap;
 
 	if (js_isuserdata(J, 1, "pdf_pkcs7_signer"))
@@ -6714,7 +6714,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "PDFWidget.getSignatory", ffi_PDFWidget_getSignatory, 0);
 		jsB_propfun(J, "PDFWidget.clearSignature", ffi_PDFWidget_clearSignature, 0);
 		jsB_propfun(J, "PDFWidget.sign", ffi_PDFWidget_sign, 5);
-		jsB_propfun(J, "PDFWidget.preview", ffi_PDFWidget_preview, 5);
+		jsB_propfun(J, "PDFWidget.previewSignature", ffi_PDFWidget_previewSignature, 5);
 	}
 	js_dup(J);
 	js_setglobal(J, "PDFWidget");
