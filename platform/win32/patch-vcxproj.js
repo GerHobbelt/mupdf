@@ -38,7 +38,7 @@ src = src
 	p1 = p1
 	.replace(/[A-Z]+_DISABLE_LDAP;/g, '')	
 	.replace(/_USRDLL;/g, '')	
-	.replace(/BUILDING_[A-Z]+;/g, '')	
+	.replace(/BUILDING_[A-Z_]+;/g, '')	
 	.replace(/[A-Z]+_STATICLIB;/g, '')	
 	.replace(/[A-Z_]*MONOLITHIC;/g, '')	
 	.replace(/USE_SCHANNEL;/g, '')	
