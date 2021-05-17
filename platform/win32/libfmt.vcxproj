@@ -19,17 +19,39 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\glob\source\glob.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\glob\standalone\source\main.cpp" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\ChangeLog.rst" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\CONTRIBUTING.md" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\doc\api.rst" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\doc\contents.rst" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\doc\fmt.less" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\doc\index.rst" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\doc\syntax.rst" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\doc\usage.rst" />
+    <None Include="..\..\thirdparty\owemdjee\fmt\README.rst" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\glob\include\glob\glob.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\glob\single_include\glob\glob.hpp" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\args.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\chrono.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\color.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\compile.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\core.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\format-inl.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\format.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\locale.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\os.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\ostream.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\printf.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\fmt\include\fmt\ranges.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\src\fmt.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\src\format.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\src\os.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libglob</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF518D62}</ProjectGuid>
-    <RootNamespace>libglob</RootNamespace>
+    <ProjectName>libfmt</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAF3A53}</ProjectGuid>
+    <RootNamespace>libfmt</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -74,7 +96,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -85,7 +107,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -105,7 +127,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -118,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -128,7 +150,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -146,7 +168,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -159,7 +181,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -170,7 +192,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -190,7 +212,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -203,7 +225,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -213,7 +235,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -231,7 +253,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLOB;GLOB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>

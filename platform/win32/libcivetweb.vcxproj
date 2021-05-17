@@ -18,6 +18,34 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\thirdparty\owemdjee\civet-webserver\src\CivetServer.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\civet-webserver\src\civetweb.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\civet-webserver\src\civetweb_ex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\civet-webserver\src\main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\handle_form.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\md5.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\mod_duktape.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\mod_http2.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\mod_lua.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\mod_lua_shared.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\mod_mbedtls.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\mod_zlib.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\openssl_dl.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\response.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\sha1.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\timer.inl" />
+    <None Include="..\..\thirdparty\owemdjee\civet-webserver\src\wolfssl_extras.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\owemdjee\civet-webserver\include\CivetServer.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\civet-webserver\include\civetweb.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\civet-webserver\include\civetweb_ex.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\civet-webserver\include\civetweb_legacy.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\civet-webserver\include\civetweb_sys_porting.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libcivetweb</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF315E76}</ProjectGuid>
@@ -76,7 +104,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\civet-webserver\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCIVETWEB;CIVETWEB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -119,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\civet-webserver\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCIVETWEB;CIVETWEB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -161,7 +189,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\civet-webserver\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCIVETWEB;CIVETWEB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -204,7 +232,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\civet-webserver\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCIVETWEB;CIVETWEB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
