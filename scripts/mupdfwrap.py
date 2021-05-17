@@ -6638,6 +6638,30 @@ def main():
                             jlib.log( 'Compiling/linking generated Python module source code to create _mupdf.so ...')
 
                             if g_windows:
+                                python_path, python_version, python_root, cpu = find_python(
+                                        build_dirs.cpu,
+                                        build_dirs.python_version,
+                                        )
+                                log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
+
+                                py_root = python_root.replace('\\', '/')
+                                command = (
+                                        f'MUPDF_PYTHON_INCLUDE_PATH={py_root}/include'
+                                        f' MUPDF_PYTHON_LIBRARY_PATH={py_root}/libs'
+                                        f' "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                        f' platform/win32/mupdf.sln'
+                                        f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
+                                        f' /Project mupdfpyswig'
+                                        )
+                                jlib.system(command, verbose=1, out='log')
+
+                                jlib.copy(
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll',
+                                        f'{build_dirs.dir_so}/mupdfcpp.dll',
+                                        verbose=1,
+                                        )
+
+                            elif g_windows:
                                 # We run Windows compiler and linker manually;
                                 # could probably add a project to mupdf.sln
                                 # instead and build it with devenv.exe, but
