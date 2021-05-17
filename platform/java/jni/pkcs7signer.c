@@ -250,9 +250,9 @@ FUN(PKCS7Signer_formatInfo)(JNIEnv *env, jobject self, jstring jname, jobject jd
 	pdf_pkcs7_signer *signer = from_PKCS7Signer_safe(env, self);
 
 	jobject jresult = NULL;
-	char *name = NULL;
-	char *reason = NULL;
-	char *location = NULL;
+	const char *name = NULL;
+	const char *reason = NULL;
+	const char *location = NULL;
 	pdf_pkcs7_designated_name *dname = NULL;
 	char *result = NULL;
 
