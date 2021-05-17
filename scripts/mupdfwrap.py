@@ -315,14 +315,15 @@ Windows builds:
 
         The MuPDF DLL itself is built with FZ_DLL predefined.
 
-    There is no separate C library, instead the C and C++ API are both in
-    mupdfcpp.dll, which is built by running devenv on platform/win32/mupdf.sln.
+    DLLs:
 
-    The Python SWIG internals are in _mupdf.pyd which, despite the name, is a
-    standard Windows DLL. Unlike mupdfcpp.dll it needs to be built slightly
-    differently depending on which installed Python it will be using, so it is
-    currently built by running Windows compiler (cl.exe) and linker (link.exe)
-    directly.
+        There is no separate C library, instead the C and C++ API are
+        both in mupdfcpp.dll, which is built by running devenv on
+        platform/win32/mupdf.sln.
+
+        The Python SWIG library is called _mupdf.pyd which,
+        despite the name, is a standard Windows DLL, built from
+        platform/python/mupdfcpp_swig.cpp.
 
     DLL export of functions and data:
 
@@ -344,6 +345,23 @@ Windows builds:
         C functions with FZ_FUNCTION, but this is required for C++ functions
         otherwise we get unresolved symbols when building MuPDF client code.
 
+    Building the DLLs:
+
+        We build Windows binaries by running devenv.com directly. As of
+        2021-05-17 the location of devenv.com is hard-coded in this Python
+        script.
+
+        Building _mupdf.pyd is tricky because it needs to be built with a
+        specific Pyhthon.h and linked with a specific python.lib. This is
+        done by setting environmental variables MUPDF_PYTHON_INCLUDE_PATH and
+        MUPDF_PYTHON_LIBRARY_PATH when running devenv.com, which are referenced
+        by platform/win32/mupdfpyswig.vcxproj. Thus one cannot easily build
+        _mupdf.pyd directly from the Visual Studio GUI.
+
+        [There is some older code that builds _mupdf.pyd by running the Windows
+        compiler and linker cl.exe and link.exe directly, which avoids the
+        complications of going via devenv, at the expense of needing to know
+        where cl.exe and link.exe are.]
 
 Usage:
 
@@ -452,6 +470,13 @@ Usage:
             Examples:
                 -d build/shared-debug
                 -d build/shared-release
+
+            On Windows one can specify the CPU and Python version; we then
+            use 'py -0f' to find the matching installed Python along with its
+            Python.h and python.lib. For example:
+
+                -d build/shared-release-x32-py3.8
+                -d build/shared-release-x64-py3.9
 
         --doc <languages>
             Generates documentation for the different APIs.
