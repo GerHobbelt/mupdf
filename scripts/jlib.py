@@ -473,8 +473,8 @@ def force_line_buffering():
 def exception_info( exception=None, limit=None, out=None, prefix='', oneline=False):
     '''
     General replacement for traceback.* functions that print/return information
-    about exceptions. This function provides a simple way of getting the
-    functionality provided by these traceback functions:
+    about exceptions and backtraces. This function provides a simple way of
+    getting the functionality provided by these traceback functions:
 
         traceback.format_exc()
         traceback.format_exception()
@@ -485,7 +485,8 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
         exception:
             None, or a (type, value, traceback) tuple, e.g. from
             sys.exc_info(). If None, we call sys.exc_info() and use its return
-            value.
+            value. If there is no live exception we show information about the
+            current backtrace.
         limit:
             None or maximum number of stackframes to output.
         out:
@@ -528,7 +529,7 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
 
     Also the backtraces that are generated are more concise than those provided
     by traceback.* - just one line per frame instead of two - and filenames are
-    output relative to the current directory if applicatble. And one can easily
+    output relative to the current directory if applicable. And one can easily
     prefix all lines with a specified string, e.g. to indent the text.
     '''
     if exception is None:
@@ -538,31 +539,42 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
     try:
         frames = []
 
-        # Get frames above point at which exception was caught - frames
-        # starting at top-level <module> or thread creation fn, and ending
-        # at the point in the catch: block from which we were called.
-        #
-        # These frames are not included explicitly in sys.exc_info()[2] and are
-        # also omitted by traceback.* functions, which makes for incomplete
-        # backtraces that miss much useful information.
-        #
-        for f in reversed(inspect.getouterframes(tb.tb_frame)):
-            ff = f[1], f[2], f[3], f[4][0].strip()
-            frames.append(ff)
+        if tb:
+            # There is a live exception.
+            #
+            # Get frames above point at which exception was caught - frames
+            # starting at top-level <module> or thread creation fn, and ending
+            # at the point in the catch: block from which we were called.
+            #
+            # These frames are not included explicitly in sys.exc_info()[2] and are
+            # also omitted by traceback.* functions, which makes for incomplete
+            # backtraces that miss much useful information.
+            #
+            for f in reversed(inspect.getouterframes(tb.frame)):
+                ff = f[1], f[2], f[3], f[4][0].strip()
+                frames.append(ff)
+        else:
+            # No exception; use current backtrace.
+            for f in inspect.stack():
+                ff = f[1], f[2], f[3], f[4][0].strip()
+                frames.append(ff)
 
-        # Insert a marker for our special '^except raise:' line.
-        frames.append( None)
-
-        # Append frames from point in the try: block that caused the exception
-        # to be raised, to the point at which the exception was thrown.
+        # If there is a live exception, append frames from point in the try:
+        # block that caused the exception to be raised, to the point at which
+        # the exception was thrown.
         #
         # [One can get similar information using traceback.extract_tb(tb):
         #   for f in traceback.extract_tb(tb):
         #       frames.append(f)
         # ]
-        for f in inspect.getinnerframes(tb):
-            ff = f[1], f[2], f[3], f[4][0].strip()
-            frames.append(ff)
+        if tb:
+            # Insert a marker to separate the two parts of the backtrace, used
+            # for our special '^except raise:' line.
+            frames.append( None)
+
+            for f in inspect.getinnerframes(tb):
+                ff = f[1], f[2], f[3], f[4][0].strip()
+                frames.append(ff)
 
         cwd = os.getcwd() + os.sep
         if oneline:
@@ -1478,14 +1490,17 @@ class Arg:
     Command-line parser with simple text-based specifications and support for
     multiple sub-commands (e.g. search for "argparse multiple sub commands").
 
-    A basic Arg instance matches a fixed number (usually one or two) of
-    command-line items, specified by a syntax string such as '-flag' or '-f
-    <foo>' or '-f <foo> <bar>'.
+    A basic Arg instance is specified by space-separated items in a syntax
+    string, such as '-flag' or '-f <foo>' or 'foo <foo> <bar>'. These items
+    are to match an equal number of argv items; <...> matches any argv item,
+    otherwise matching is literal. Items that start with '-' are not treated
+    specially.
 
     Command-line parsing is achieved by creating an empty top-level Arg
     instance with <subargs> set to a list of other Arg instances. The resulting
-    top-level Arg instance will try to match these subargs with the command
-    line, returning a simple representation of the matched <...> items.
+    top-level Arg instance will try to match the entire command line argv with
+    any or all of these subargs, returning a simple representation of the
+    matched <...> items.
 
     For example:
 
@@ -1497,29 +1512,25 @@ class Arg:
         'in.txt'
 
     Attribute names (in this case 'f' and 'o') are always generated from the
-    first item in the Arg's syntax string, with some basic processing to ensure
+    first item in an Arg's syntax string, with some basic processing to ensure
     they are legal Python identifiers - removing inital '-', converting '-' to
     '_', and removing any non-alphanumeric characters. So '-f' is converted to
     'f', '--foo-bar' is converted to 'foo_bar' etc.
 
-    Some details: having zero <...> items results in True, more than one <...>
-    items results in a list of values; there can be zero literal items:
+    An Arg with zero <...> items results in True, more than one <...> item
+    results in a list of values; there can be zero literal items:
 
         >>> parser = Arg('', subargs=[Arg('-i'), Arg('-f <file-a> <file-b>'), Arg('<log>')])
         >>> parser.parse('-f foo/a foo/b logfile -i')
         namespace(f=['foo/a', 'foo/b'], i=True, log='logfile')
 
-    An Arg can be matched an arbitary number of times by setting <multi>:
+    An Arg can be matched an arbitary number of times by setting <multi> to
+    true; unmatched multi items appear as [] rather than None:
 
-        >>> parser = Arg('', subargs=[Arg('-f <input>', multi=1), Arg('-o <output>')])
-        >>> args = parser.parse('-f a.txt -f b.txt -f c.txt -o out.txt')
+        >>> parser = Arg('', subargs=[Arg('-f <input>', multi=1), Arg('-o <output>', multi=1)])
+        >>> args = parser.parse('-f a.txt -f b.txt -f c.txt')
         >>> args
-        namespace(f=['a.txt', 'b.txt', 'c.txt'], o='out.txt')
-
-    Un-matched multi items appear as [] rather than None:
-
-        >>> parser.parse('-o out.txt')
-        namespace(f=[], o='out.txt')
+        namespace(f=['a.txt', 'b.txt', 'c.txt'], o=[])
 
     Sub commands:
 
@@ -1555,11 +1566,12 @@ class Arg:
         what could have allowed the parse to make more progress. By default
         we then call sys.exit(1); set exit_ to false to avoid this.
 
-            >>> parser = Arg('', subargs=[Arg('-i <in>'), Arg('-o <out>')])
-            >>> parser.parse('-i', exit_=0)
-            Failed at argv[0]='-i', expected one of:
+            >>> parser = Arg('', subargs=[Arg('<command>'), Arg('-i <in>'), Arg('-o <out>')])
+            >>> parser.parse('foo -i', exit_=0)
+            Failed at argv[1]='-i', expected one of:
                 -i <in>
                 -o <out>
+            >>> parser.parse('-i', exit_=0)
 
         Args can be marked as required:
 
@@ -1895,6 +1907,9 @@ class Arg:
             self.pos = 0
             self.args = []
         def add(self, pos, arg, extra=None):
+            if not arg.name:
+                log('top-level arg added to failures')
+                log(exception_info())
             if pos < self.pos:
                 return
             if pos > self.pos:
@@ -1909,6 +1924,7 @@ class Arg:
                 ret += f'Failed at argv[{self.pos}]={self.argv[self.pos]!r},'
             ret += f' expected one of:\n'
             for arg, extra in self.args:
+                ret += f' [arg is: {arg}]'
                 ret += f'    {arg.syntax}'
                 more = []
                 if arg.parent and arg.parent.name:
