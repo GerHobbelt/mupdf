@@ -170,7 +170,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../include;../../platform/c++/include;C:/Users/jules/AppData/Local/Programs/Python/Python38/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;../../platform/c++/include;%MUPDF_PYTHON_INCLUDE_PATH;%MUPDF_PYTHON_INCLUDE_PATH%;%(MUPDF_PYTHON_INCLUDE_PATH);%(MUPDF_PYTHON_INCLUDE_PATH)%;$MUPDF_PYTHON_INCLUDE_PATH;$(MUPDF_PYTHON_INCLUDE_PATH)$;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;NDEBUG;FZ_DLL_CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader />
@@ -184,7 +184,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalLibraryDirectories>C:\Users\jules\AppData\Local\Programs\Python\Python38\libs;C:\cygwin64\home\jules\artifex-remote\mupdf\platform\win32\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%MUPDF_PYTHON_LIBRARY_PATH%;%(MUPDF_PYTHON_LIBRARY_PATH)%;%(MUPDF_PYTHON_LIBRARY_PATH);$MUPDF_PYTHON_LIBRARY_PATH;$(MUPDF_PYTHON_LIBRARY_PATH);C:\cygwin64\home\jules\artifex-remote\mupdf\platform\win32\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>mupdfcpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
