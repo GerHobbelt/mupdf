@@ -1544,6 +1544,10 @@ class Arg:
                 -i <in>
                 -o <out>
             >>> parser.parse('-i', exit_=0)
+            Failed at argv[0]='-i', expected one of:
+                <command>  (value must not start with "-")
+                -i <in>
+                -o <out>
 
         Args can be marked as required:
 
@@ -1793,11 +1797,11 @@ class Arg:
         for i, item in enumerate(self.items):
             if item.literal:
                 if item.text != argv[pos+i]:
-                    failures.add(pos+i, self if i else self.parent)
+                    failures.add(pos+i, self)
                     return None
             else:
                 if argv[pos+i].startswith('-'):
-                    failures.add(pos+i, self if i else self.parent, f'value must not start with "-"')
+                    failures.add(pos+i, self, f'value must not start with "-"')
                     return None
                 values.append(argv[pos+i])
 
@@ -1896,7 +1900,7 @@ class Arg:
                 ret += f'Failed at argv[{self.pos}]={self.argv[self.pos]!r},'
             ret += f' expected one of:\n'
             for arg, extra in self.args:
-                ret += f' [arg is: {arg}]'
+                #ret += f' [arg is: {arg}]'
                 ret += f'    {arg.syntax}'
                 more = []
                 if arg.parent and arg.parent.name:
