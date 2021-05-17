@@ -368,7 +368,7 @@ m; } console.log({ i, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : "") }); }
 ...
 { i: 174, p: 1019.2886931521975, ppm: 283, v: 'USABLE' }
 >
-> which ALSO tells us that thee 'optimal' encoding of a 256-bit bignum would take i=44 base58 'digits',
+> which ALSO tells us that the 'optimal' encoding of a 256-bit bignum would take i=44 base58 'digits',
 > hence we also now know for sure that our 'chop that 256 bit number into 41-bit chunks' approach is
 > AS GOOD as treating the entire number as a BigNum: both ways we can encode this bit series as a
 > 44 character long string! Without us having to resort to costly BigNum arithmetic because we can
