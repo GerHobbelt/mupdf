@@ -36,7 +36,7 @@ int do_sign(void)
 	{
 		trace_action("widget.sign(new PDFPKCS7Signer(%q, %q));\n", cert_filename, cert_password.text);
 		signer = pkcs7_openssl_read_pfx(ctx, cert_filename, cert_password.text);
-		pdf_sign_signature(ctx, sig_widget, signer, NULL);
+		pdf_sign_signature(ctx, sig_widget, signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, NULL, NULL, NULL);
 		ui_show_warning_dialog("Signed document successfully.");
 	}
 	fz_always(ctx)
@@ -63,6 +63,18 @@ static void do_clear_signature(void)
 		ui_show_warning_dialog("%s", fz_caught_message(ctx));
 }
 
+static int is_valid_certificate_and_password(void)
+{
+	fz_try(ctx)
+	{
+		pdf_pkcs7_signer *signer = pkcs7_openssl_read_pfx(ctx, cert_filename, cert_password.text);
+		pdf_drop_signer(ctx, signer);
+	}
+	fz_catch(ctx)
+		return 0;
+	return 1;
+}
+
 static void cert_password_dialog(void)
 {
 	int is;
@@ -81,8 +93,12 @@ static void cert_password_dialog(void)
 			ui_spacer();
 			if (ui_button("Okay") || is == UI_INPUT_ACCEPT)
 			{
-				ui.dialog = NULL;
-				do_save_signed_pdf_file();
+				if (is_valid_certificate_and_password()) {
+					ui.dialog = NULL;
+					do_save_signed_pdf_file();
+				} else {
+					ui_show_warning_dialog("%s", fz_caught_message(ctx));
+				}
 			}
 		}
 		ui_panel_end();
