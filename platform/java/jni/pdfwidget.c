@@ -388,19 +388,33 @@ FUN(PDFWidget_getDesignatedName)(JNIEnv *env, jobject self, jobject jverifier)
 }
 
 JNIEXPORT jboolean JNICALL
-FUN(PDFWidget_signNative)(JNIEnv *env, jobject self, jobject signer, jobject jimage)
+FUN(PDFWidget_signNative)(JNIEnv *env, jobject self, jobject signer, jint flags, jobject jimage, jstring jreason, jstring jlocation)
 {
 	fz_context *ctx = get_context(env);
 	pdf_widget *widget = from_PDFWidget_safe(env, self);
 	pdf_document *pdf = pdf_annot_page(ctx, widget)->doc;
 	pdf_pkcs7_signer *pkcs7signer = from_PKCS7Signer_safe(env, signer);
 	fz_image *image = from_Image_safe(env, jimage);
+	const char *reason = NULL;
+	const char *location = NULL;
 
 	if (!ctx || !widget || !pdf) return JNI_FALSE;
 	if (!pkcs7signer) jni_throw_arg(env, "signer must not be null");
 
+	if (jreason)
+		reason = (*env)->GetStringUTFChars(env, jreason, NULL);
+	if (jlocation)
+		location = (*env)->GetStringUTFChars(env, jlocation, NULL);
+
 	fz_try(ctx)
-        pdf_sign_signature(ctx, widget, pkcs7signer, image);
+		pdf_sign_signature(ctx, widget, pkcs7signer, flags, image, reason, location);
+	fz_always(ctx)
+	{
+		if (jreason)
+			(*env)->ReleaseStringUTFChars(env, jreason, reason);
+		if (jlocation)
+			(*env)->ReleaseStringUTFChars(env, jlocation, location);
+	}
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
