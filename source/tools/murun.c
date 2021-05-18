@@ -5592,6 +5592,8 @@ static void ffi_PDFAnnotation_addVertex(js_State *J)
 		rethrow(J);
 }
 
+/* Returns an array of strokes, where each stroke is an array of points, where
+each point is a two element array consisting of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_getInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5618,15 +5620,14 @@ static void ffi_PDFAnnotation_getInkList(js_State *J)
 				pt = pdf_annot_ink_list_stroke_vertex(ctx, annot, i, k);
 			fz_catch(ctx)
 				rethrow(J);
-			js_pushnumber(J, pt.x);
-			js_setindex(J, -2, k * 2 + 0);
-			js_pushnumber(J, pt.y);
-			js_setindex(J, -2, k * 2 + 1);
+			ffi_pushpoint(J, pt);
+			js_setindex(J, -2, k);
 		}
 		js_setindex(J, -2, i);
 	}
 }
 
+/* Takes an argument on the same format as getInkList returns. */
 static void ffi_PDFAnnotation_setInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5642,7 +5643,7 @@ static void ffi_PDFAnnotation_setInkList(js_State *J)
 	nv = 0;
 	for (i = 0; i < n; ++i) {
 		js_getindex(J, 1, i);
-		nv += js_getlength(J, -1) / 2;
+		nv += js_getlength(J, -1);
 		js_pop(J, 1);
 	}
 
@@ -5662,13 +5663,10 @@ static void ffi_PDFAnnotation_setInkList(js_State *J)
 	}
 	for (i = v = 0; i < n; ++i) {
 		js_getindex(J, 1, i);
-		counts[i] = js_getlength(J, -1) / 2;
+		counts[i] = js_getlength(J, -1);
 		for (k = 0; k < counts[i]; ++k) {
-			js_getindex(J, -1, k*2);
-			points[v].x = js_tonumber(J, -1);
-			js_pop(J, 1);
-			js_getindex(J, -1, k*2+1);
-			points[v].y = js_tonumber(J, -1);
+			js_getindex(J, -1, k);
+			points[v] = ffi_topoint(J, -1);
 			js_pop(J, 1);
 			++v;
 		}
@@ -5695,34 +5693,27 @@ static void ffi_PDFAnnotation_clearInkList(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 }
-
+/* Takes a stroke argument being an array of points, where each
+point is a two element array of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_addInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	int i, n;
-	float x, y;
-
-	n = js_getlength(J, 1);
+	int i, n = js_getlength(J, 1);
+	fz_point pt;
 
 	fz_try(ctx)
 		pdf_add_annot_ink_list_stroke(ctx, annot);
 	fz_catch(ctx)
 		rethrow(J);
-
-	for (i = 0; i < n; i += 2) {
+	for (i = 0; i < n; ++i) {
 		js_getindex(J, 1, i);
-		x = js_tonumber(J, -1);
-		js_pop(J, 1);
-
-		js_getindex(J, 1, i+1);
-		y = js_tonumber(J, -1);
-		js_pop(J, 1);
-
+		pt = ffi_topoint(J, -1);
 		fz_try(ctx)
-			pdf_add_annot_ink_list_stroke_vertex(ctx, annot, fz_make_point(x, y));
+			pdf_add_annot_ink_list_stroke_vertex(ctx, annot, pt);
 		fz_catch(ctx)
 			rethrow(J);
+		js_pop(J, 1);
 	}
 }
 
@@ -5736,14 +5727,15 @@ static void ffi_PDFAnnotation_addInkListStroke(js_State *J)
 		rethrow(J);
 }
 
+/* Takes a point argument which is a two element array
+consisting of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_addInkListStrokeVertex(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	float x = js_tonumber(J, 1);
-	float y = js_tonumber(J, 2);
+	fz_point pt = ffi_topoint(J, 1);
 	fz_try(ctx)
-		pdf_add_annot_ink_list_stroke_vertex(ctx, annot, fz_make_point(x, y));
+		pdf_add_annot_ink_list_stroke_vertex(ctx, annot, pt);
 	fz_catch(ctx)
 		rethrow(J);
 }
