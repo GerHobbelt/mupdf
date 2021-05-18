@@ -6376,6 +6376,7 @@ def find_python( cpu, version=None):
             assert os.path.exists( path2)
             path = path2
 
+        jlib.log('{cpu=} {version=}: returning {path=} {version=} {root=} {cpu=}')
         return path, version, root, cpu
 
     raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
@@ -6601,8 +6602,8 @@ def main():
                                 jlib.system(command, verbose=1, out='log')
 
                                 jlib.copy(
-                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll',
-                                        f'{build_dirs.dir_so}/mupdfcpp.dll',
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp{build_dirs.cpu.windows_suffix}.dll',
+                                        f'{build_dirs.dir_so}/',
                                         verbose=1,
                                         )
 
@@ -6996,6 +6997,7 @@ def main():
             elif arg == '--dir-so' or arg == '-d':
                 d = args.next()
                 build_dirs.set_dir_so( d)
+                log('Have set {build_dirs=}')
 
             elif arg == '--py-package-multi':
                 # Investigating different combinations of pip, pyproject.toml,
@@ -7176,28 +7178,41 @@ def main():
 
                 # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
                 # test .py programme can load mupdf.py and _mupdf.so.
+                env_extra = {}
+                command_prefix = ''
+                log('{build_dirs=}')
                 if g_windows:
                     # On Windows, it seems that 'py' runs the default
                     # python. Also, Windows appears to be able to find
-                    # _mupdf.pyd in same directory as mupdf.py.#
+                    # _mupdf.pyd in same directory as mupdf.py.
                     #
                     python_path, python_version, python_root, cpu = find_python( build_dirs.cpu, build_dirs.python_version)
                     python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
-                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} "{python_path}"'
+                    env_extra = {
+                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                            }
+                    command_prefix = f'"{python_path}"'
                 elif g_openbsd:
                     # We have special support to not require LD_LIBRARY_PATH.
-                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                    #command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                    env_extra = {
+                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so)
+                            }
                 else:
                     # On Linux it looks like we need to specify
                     # LD_LIBRARY_PATH. fixme: revisit this because these days
                     # jlib.y uses rpath when constructing link commands.
                     #
-                    command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                    env_extra = {
+                            'LD_LIBRARY_PATH': os.path.abspath(build_dirs.dir_so),
+                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                            }
+                    #command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
 
                 log( 'running mupdf_test.py...')
                 command = f'{command_prefix} ./scripts/mupdfwrap_test.py'
                 with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
-                    jlib.system( command, out='log', verbose=1)
+                    jlib.system( command, env_extra=env_extra, out='log', verbose=1)
 
                 # Run mutool.py.
                 #
@@ -7212,10 +7227,7 @@ def main():
                         ):
                     command = f'{command_prefix} {mutool_py} {args2}'
                     log( 'running: {command}')
-                    jlib.system(
-                            f'{command}',
-                            out='log',
-                            )
+                    jlib.system( f'{command}', env_extra=env_extra, out='log', verbose=1)
 
                 log( 'Tests ran ok.')
 
