@@ -44,6 +44,9 @@ def system(
         caller=1,
         bufsize=-1,
         ):
+    '''
+    Runs a command. See jlib.system()'s docs for details.
+    '''
     return jlib.system(
             command,
             verbose=not return_output,
@@ -123,6 +126,8 @@ def venv_run(
     pip_upgrade:
         If true (the default) we do 'pip install --upgrade pip' before running
         <commands>.
+    bufsize:
+        Use 0 if we expect interactive prompts.
     '''
     if isinstance(commands, str):
         commands = [commands]
@@ -626,55 +631,6 @@ def parse_sdist(sdist):
     m = re.match('^([^-]+)-([^-]+)[.]tar.gz$', os.path.basename(sdist))
     assert m, f'Unable to parse sdist: {sdist!r}'
     return m.group(1), m.group(2)
-
-
-class ArgsRaise:
-    pass
-
-class Args:
-    def __init__(self, argv):
-        self.argv = argv
-        self.pos = 0
-        self.anchor = None
-
-    def __next__(self):
-        return self.next()
-
-    def __iter__(self):
-        return self
-
-    def next(self, eof=ArgsRaise, anchor=False):
-        if anchor:
-            self.anchor = self.pos
-        if self.pos == len(self.argv):
-            if eof is ArgsRaise:
-                if self.anchor:
-                    print(f'Not enough arguments after {self.argv[self.anchor]!r}.')
-                raise StopIteration
-            else:
-                return eof
-        ret = self.argv[self.pos]
-        self.pos += 1
-        return ret
-
-    def peek(self):
-        if self.pos < len(self.argv):
-            return self.argv[self.pos]
-
-    def next_is(self, match):
-        if self.peek() == match:
-            self.pos += 1
-            return True
-
-    def help(self, syntax='', text=''):
-        if self.peek() in ('-h', '--help'):
-            self.next()
-            print(f'{self.argv[self.anchor]} {syntax}\n    {text}\n')
-
-    def prev(self):
-        assert self.pos > 0
-        self.pos -= 1
-
 
 
 def main():
