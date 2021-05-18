@@ -1188,7 +1188,7 @@ def update_file( text, filename):
         filename_temp = f'{filename}-jlib-temp'
         with open( filename_temp, 'w') as f:
             f.write( text)
-        os.rename( filename_temp, filename)
+        rename( filename_temp, filename)
 
 
 def mtime( filename, default=0):
