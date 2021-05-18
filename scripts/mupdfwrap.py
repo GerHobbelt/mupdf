@@ -6683,8 +6683,8 @@ def main():
                                 jlib.system(command, verbose=1, out='log', env_extra=env_extra)
 
                                 jlib.copy(
-                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll',
-                                        f'{build_dirs.dir_so}/mupdfcpp.dll',
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfpyswig.dll',
+                                        f'{build_dirs.dir_so}/_mupdf.pyd',
                                         verbose=1,
                                         )
 
