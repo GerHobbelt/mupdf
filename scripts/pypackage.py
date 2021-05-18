@@ -538,7 +538,7 @@ def test(test_command, wheels_or_package_name, pypi_test, py=None):
             )
     m = re.search('tag: (.+)', text)
     assert m, f'Failed to find expected tag: ... in output text: {text!r}'
-    tag = m.group(1)
+    tag = m.group(1).strip()    # Sometimes we get \r at end, so remove it here.
     assert not '\r' in tag, f'tag is: {tag!r}'
     log(f'tag is: {tag!r}')
 
@@ -631,6 +631,13 @@ def parse_sdist(sdist):
     m = re.match('^([^-]+)-([^-]+)[.]tar.gz$', os.path.basename(sdist))
     assert m, f'Unable to parse sdist: {sdist!r}'
     return m.group(1), m.group(2)
+
+
+def parse_wheel(wheel):
+    m = re.match('^([^-]+)-([^-]+)-([^-]+)-([^-]+)-([^-]+)[.]whl$', os.path.basename(wheel))
+    assert m, f'Cannot parse wheel path: {wheel}'
+    name, version, py, none, cpu = m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
+    return name, version, py, none, cpu
 
 
 def main():
@@ -771,7 +778,7 @@ def main():
 
             if build.t:
                 # Also run basic import test.
-                command += " test ."
+                command += " -t"
 
             command += (
                     f'"'
@@ -795,9 +802,21 @@ def main():
                         container_name = manylinux_container_name,
                         )
             if build.t:
-                # Run basic test.
-                package_name, _ = parse_sdist(sdist)
-                test(command, wheels, pypi_test)
+                # Run basic import test.
+                if windows():
+                    # Test with each wheel.
+                    for wheel in wheels:
+                        name, version, py, none, cpu = parse_wheel(wheel)
+                        if windows():
+                            pyv = py[0]+py[2]
+                            cpu_bits = 64 if cpu == 'win_amd64' else 32
+                            py = f'py -{pyv}-{cpu_bits}'
+                        else:
+                            py = None
+                        test('', wheels, pypi_test, py=py)
+                else:
+                    # Test with default python.
+                    test('', wheels, pypi_test)
 
             log(f'sdist: {sdist}')
             for wheel in wheels:
@@ -821,7 +840,7 @@ def main():
 
     if args.test:
         package_name = args.test.p
-        assert package_name or wheels, f'Cannot run test - need to specify "-p <package-name" or "wheels <pattern>".'
+        assert package_name or wheels, f'Cannot run test - need to specify "-p <package-name>" or "wheels <pattern>".'
         command = args.test.command
         if command == '.':
             command = ''
