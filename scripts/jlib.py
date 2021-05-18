@@ -834,133 +834,19 @@ def make_out_callable( out):
     return ret
 
 
-def system_raw(
-        command,
-        out=None,
-        shell=True,
-        encoding=None,
-        errors='strict',
-        executable=None,
-        bufsize=-1,
-        ):
-    '''
-    Runs command, writing output to <out> which can be an int fd, a python
-    stream or a Stream object.
-
-    Args:
-        command:
-            The command to run.
-        out:
-            Where output is sent.
-            If None, child process inherits this process's stdout and stderr.
-            If subprocess.DEVNULL, child process's output is lost.
-            Otherwise we repeatedly read child process's output via a pipe and
-            write to <out>:
-                If <out> is an integer, we do: os.write( out, text)
-                Otherwise if <out> is callable, we do: out( text)
-                Otherwise we assume <out> is python stream or similar, and do:
-                out.write(text)
-        shell:
-            Whether to run command inside a shell (see subprocess.Popen).
-        encoding:
-            Sepecify the encoding used to translate the command's output
-            to characters. If None we write bytes to <out>.
-        errors:
-            How to handle encoding errors; see docs for codecs module for
-            details.
-        bufsize:
-            As subprocess.Popen()'s bufsize arg. Use 0 to see prompts.
-
-    Returns:
-        subprocess's <returncode>, i.e. -N means killed by signal N, otherwise
-        the exit value (e.g. 12 if command terminated with exit(12)).
-    '''
-    stdin = None
-    if out in (None, subprocess.DEVNULL):
-        stdout = out
-        stderr = out
-    else:
-        stdout = subprocess.PIPE
-        stderr = subprocess.STDOUT
-    child = subprocess.Popen(
-            command,
-            shell=shell,
-            stdin=stdin,
-            stdout=stdout,
-            stderr=stderr,
-            close_fds=True,
-            executable=executable,
-            bufsize=bufsize,
-            )
-
-    child_out = child.stdout
-
-    if stdout == subprocess.PIPE:
-        out = make_out_callable( out)
-        decoder = None
-        if encoding:
-            # subprocess's universal_newlines and codec.streamreader seem to
-            # always use buffering even with bufsize=0, so they don't reliably
-            # display prompts or other text that doesn't end with a newline.
-            #
-            # So we create our own incremental decode, which seems to work
-            # better.
-            #
-            decoder = codecs.getincrementaldecoder(encoding)(errors)
-        while 1:
-            # os.read() seems to be better for us than child.stdout.read()
-            # because it returns a short read if data is not available. Where
-            # as child.stdout.read() appears to be more willing to wait for
-            # data until the requested number of bytes have been received.
-            #
-            # Also, os.read() does the right thing if the sender has made
-            # multipe calls to write() - it returns all available data, not
-            # just from the first unread write() call.
-            #
-            #bytes_ = child.stdout.read(10000)
-            bytes_ = os.read( child.stdout.fileno(), 10000)
-            if decoder:
-                final = not bytes_
-                text = decoder.decode(bytes_, final)
-                out.write(text)
-            else:
-                out.write(bytes_)
-            if not bytes_:
-                break
-
-    return child.wait()
-
-if __name__ == '__main__':
-
-    if os.getenv( 'jtest_py_system_raw_test') == '1':
-        out = io.StringIO()
-        system_raw(
-                'jtest_py_system_raw_test=2 python jlib.py',
-                sys.stdout,
-                encoding='utf-8',
-                #'latin_1',
-                errors='replace',
-                )
-        print( repr( out.getvalue()))
-
-    elif os.getenv( 'jtest_py_system_raw_test') == '2':
-        for i in range(256):
-            sys.stdout.write( chr(i))
-
-
 def system(
         command,
         verbose=None,
         raise_errors=True,
         out=sys.stdout,
         prefix=None,
-        rusage=False,
         shell=True,
         encoding='utf8',
         errors='replace',
         executable=None,
         caller=1,
         bufsize=-1,
+        env_extra=None,
         ):
     '''
     Runs a command like os.system() or subprocess.*, but with more flexibility.
@@ -997,15 +883,11 @@ def system(
             If not None, should be prefix string or callable used to prefix
             all output. [This is for convenience to avoid the need to do
             out=StreamPrefix(...).]
-        rusage:
-            If true, we run via /usr/bin/time and return rusage string
-            containing information on execution. <raise_errors> and
-            out='return' are ignored.
         shell:
             Passed to underlying subprocess.Popen() call.
         encoding:
             Sepecify the encoding used to translate the command's output to
-            characters. If None (the default) we send bytes to <out>.
+            characters. If None we send bytes to <out>.
         errors:
             How to handle encoding errors; see docs for codecs module
             for details. Defaults to 'replace' so we never raise a
@@ -1013,111 +895,201 @@ def system(
         executable=None:
             .
         caller:
-            Number of frames to look up stack when showing caller information.
+            The number of frames to look up stack when call jlib.log() (used
+            for out='log' and verbose).
         bufsize:
             As subprocess.Popen()'s bufsize arg, sets buffer size when creating
             stdout, stderr and stdin pipes. Use 0 for unbuffered, e.g. to see
             login/password prompts that don't end with a newline. Default -1
             means io.DEFAULT_BUFFER_SIZE. +1 Line-buffered does not work because
             we read raw bytes and decode ourselves into string.
+        env_extra:
+            If not None, a dict with extra items that are added to the
+            environment passed to the child process.
 
     Returns:
-        If <rusage> is true, we return the rusage text.
-
-        Else if raise_errors is true:
-            If the command failed, we raise an exception.
-            Else if <out> is 'return' we return the text output from the command.
+        If raise_errors is true:
+            If the command failed, we raise an exception; if <out> is 'return'
+            the exception text includes the output.
+            If <out> is 'return' we return the text output from the command.
             Else we return None
 
         Else if <out> is 'return', we return (e, text) where <e> is the
         command's exit code and <text> is the output from the command.
 
         Else we return <e>, the command's exit code.
-    '''
-    if 0 and encoding is None:
-        encoding = 'utf-8'
-        errors = 'replace'
 
+    >>> print(system('echo hello a', prefix='foo:', out='return'))
+    foo:hello a
+    foo:
+
+    >>> system('echo hello b', prefix='foo:', out='return', raise_errors=False)
+    (0, 'foo:hello b\\nfoo:')
+
+    >>> system('echo hello c && false', prefix='foo:', out='return')
+    Traceback (most recent call last):
+    Exception: Command failed: echo hello c && false
+    Output was:
+    foo:hello c
+    foo:
+    <BLANKLINE>
+    '''
     out_original = out
     if out == 'log':
         out_frame_record = inspect.stack()[caller]
         out = lambda text: log( text, caller=out_frame_record, nv=False, raw=True)
     elif out == 'return':
         # Store the output ourselves so we can return it.
-        out = io.StringIO()
-
-    out_raw = out in (None, subprocess.DEVNULL)
+        out_return = io.StringIO()
+        out = out_return
 
     if verbose:
         log(f'running: {command}', nv=0, caller=caller+1)
 
+    out_raw = out in (None, subprocess.DEVNULL)
     if prefix:
         if out_raw:
             raise Exception( 'No out stream available for prefix')
         out = StreamPrefix( make_out_callable( out), prefix)
 
-    if rusage:
-        command2 = ''
-        command2 += '/usr/bin/time -o ubt-out -f "D=%D E=%D F=%F I=%I K=%K M=%M O=%O P=%P R=%r S=%S U=%U W=%W X=%X Z=%Z c=%c e=%e k=%k p=%p r=%r s=%s t=%t w=%w x=%x C=%C"'
-        command2 += ' '
-        command2 += command
-        e = system_raw(
-                command2,
-                out,
-                shell,
-                encoding,
-                errors,
-                executable=executable,
-                )
-        if e:
-            raise Exception('/usr/bin/time failed')
-        with open('ubt-out') as f:
-            rusage_text = f.read()
-        #print 'have read rusage output: %r' % rusage_text
-        if rusage_text.startswith( 'Command '):
-            # Annoyingly, /usr/bin/time appears to write 'Command
-            # exited with ...' or 'Command terminated by ...' to the
-            # output file before the rusage info if command doesn't
-            # exit 0.
-            nl = rusage_text.find('\n')
-            rusage_text = rusage_text[ nl+1:]
-        return rusage_text
+    if out_raw:
+        stdout = out
+        stderr = out
     else:
-        e = system_raw(
-                command,
-                out,
-                shell,
-                encoding,
-                errors,
-                executable=executable,
-                bufsize=bufsize,
-                )
-        if out_original == 'log':
-            if not _log_text_line_start:
-                # Terminate last incomplete line.
-                sys.stdout.write('\n')
-        if verbose:
-            log(f'[returned e={e}]', nv=0, caller=caller+1)
+        stdout = subprocess.PIPE
+        stderr = subprocess.STDOUT
 
-        if raise_errors:
-            if e:
-                if out_original == 'return':
-                    raise Exception(
-                            f'Command failed: {command}\n'
-                            f'Output was:\n'
-                            f'{out.getvalue()}'
-                            )
-                else:
-                    raise Exception( 'command failed: %s' % command)
-            elif out_original == 'return':
-                return out.getvalue()
+    env = None
+    if env_extra:
+        env = os.environ.copy()
+        env.update(env_extra)
+
+    child = subprocess.Popen(
+            command,
+            shell=shell,
+            stdin=None,
+            stdout=stdout,
+            stderr=stderr,
+            close_fds=True,
+            executable=executable,
+            bufsize=bufsize,
+            env=env
+            )
+
+    child_out = child.stdout
+
+    if stdout == subprocess.PIPE:
+        out2 = make_out_callable( out)
+        decoder = None
+        if encoding:
+            # subprocess's universal_newlines and codec.streamreader seem to
+            # always use buffering even with bufsize=0, so they don't reliably
+            # display prompts or other text that doesn't end with a newline.
+            #
+            # So we create our own incremental decode, which seems to work
+            # better.
+            #
+            decoder = codecs.getincrementaldecoder(encoding)(errors)
+        while 1:
+            # os.read() seems to be better for us than child.stdout.read()
+            # because it returns a short read if data is not available. Where
+            # as child.stdout.read() appears to be more willing to wait for
+            # data until the requested number of bytes have been received.
+            #
+            # Also, os.read() does the right thing if the sender has made
+            # multipe calls to write() - it returns all available data, not
+            # just from the first unread write() call.
+            #
+            bytes_ = os.read( child.stdout.fileno(), 10000)
+            if decoder:
+                final = not bytes_
+                text = decoder.decode(bytes_, final)
+                out2.write(text)
             else:
-                return
+                out2.write(bytes_)
+            if not bytes_:
+                break
 
-        if out_original == 'return':
-            return e, out.getvalue()
+    e = child.wait()
+
+    if out_original == 'log':
+        if not _log_text_line_start:
+            # Terminate last incomplete line.
+            sys.stdout.write('\n')
+    if verbose:
+        log(f'[returned e={e}]', nv=0, caller=caller+1)
+
+    if out_original == 'return':
+        output_return = out_return.getvalue()
+
+    if raise_errors:
+        if e:
+            if out_original == 'return':
+                if not output_return.endswith('\n'):
+                    output_return += '\n'
+                raise Exception(
+                        f'Command failed: {command}\n'
+                        f'Output was:\n'
+                        f'{output_return}'
+                        )
+            else:
+                raise Exception( 'command failed: %s' % command)
+        elif out_original == 'return':
+            return output_return
         else:
-            return e
+            return
+
+    if out_original == 'return':
+        return e, output_return
+    else:
+        return e
+
+
+def system_rusage(
+        command,
+        verbose=None,
+        raise_errors=True,
+        out=sys.stdout,
+        prefix=None,
+        rusage=False,
+        shell=True,
+        encoding='utf8',
+        errors='replace',
+        executable=None,
+        caller=1,
+        bufsize=-1,
+        env_extra=None,
+        ):
+    '''
+    Old code that gets timing info; probably doesn't work.
+    '''
+    command2 = ''
+    command2 += '/usr/bin/time -o ubt-out -f "D=%D E=%D F=%F I=%I K=%K M=%M O=%O P=%P R=%r S=%S U=%U W=%W X=%X Z=%Z c=%c e=%e k=%k p=%p r=%r s=%s t=%t w=%w x=%x C=%C"'
+    command2 += ' '
+    command2 += command
+
+    e = system(
+            command2,
+            out,
+            shell,
+            encoding,
+            errors,
+            executable=executable,
+            )
+    if e:
+        raise Exception('/usr/bin/time failed')
+    with open('ubt-out') as f:
+        rusage_text = f.read()
+    #print 'have read rusage output: %r' % rusage_text
+    if rusage_text.startswith( 'Command '):
+        # Annoyingly, /usr/bin/time appears to write 'Command
+        # exited with ...' or 'Command terminated by ...' to the
+        # output file before the rusage info if command doesn't
+        # exit 0.
+        nl = rusage_text.find('\n')
+        rusage_text = rusage_text[ nl+1:]
+    return rusage_text
+
 
 def get_gitfiles( directory, submodules=False):
     '''
