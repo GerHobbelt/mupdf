@@ -652,6 +652,7 @@ def main():
 
     parser = jlib.Arg('', required=1, help=__doc__,
             subargs=[
+                jlib.Arg('abis <abis>', help=f'Set ABIs to build, comma-separated, default is {abis}.'),
                 jlib.Arg('build', help='Build wheels.', multi=True,
                         subargs = [
                             jlib.Arg('-r <uri>',
@@ -661,6 +662,10 @@ def main():
                                     back to local machine.
                                     ''',
                                     ),
+                            jlib.Arg('-a <abis>',
+                                    help='Set ABIs to build remotely, comma-separated.'
+                                    ),
+                            jlib.Arg('-t', help='Run basic "test ." import test'),
                             ],
                         ),
                 jlib.Arg('pypi-test <t:int>',
@@ -726,6 +731,11 @@ def main():
 
     # Need to handle args in particular order because some depend on others.
     #
+    if args.abis:
+        abis_prev = abis
+        abis = args.abis.split(',')
+        log(f'Changing abis from {abis_prev} to {abis}')
+
     if args.sdist:
         if os.path.isfile(args.sdist):
             parse_sdist(args.sdist)
@@ -749,7 +759,21 @@ def main():
                     f' && ssh {user}{host} '
                     f'"'
                     f'{"cd "+directory if directory else "true"}'
-                    f' && ./pypackage.py sdist {os.path.basename(sdist)} build'
+                    f' && ./pypackage.py sdist {os.path.basename(sdist)}'
+                    )
+
+            if build.a:
+                command += f' abis {build.a}'
+
+            command += (
+                    f' build'
+                    )
+
+            if build.t:
+                # Also run basic import test.
+                command += " test ."
+
+            command += (
                     f'"'
                     f' && rsync -ai {user}{host}:{directory}pypackage-out/ {outdir}/'
                     )
@@ -770,6 +794,11 @@ def main():
                         pull_docker_image = manylinux_pull_docker_image,
                         container_name = manylinux_container_name,
                         )
+            if build.t:
+                # Run basic test.
+                package_name, _ = parse_sdist(sdist)
+                test(command, wheels, pypi_test)
+
             log(f'sdist: {sdist}')
             for wheel in wheels:
                 log(f'    wheel: {wheel}')
