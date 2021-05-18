@@ -6670,15 +6670,17 @@ def main():
                                 log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
 
                                 py_root = python_root.replace('\\', '/')
+                                env_extra = {
+                                        'MUPDF_PYTHON_INCLUDE_PATH': f'{py_root}/include',
+                                        'MUPDF_PYTHON_LIBRARY_PATH': f'{py_root}/libs',
+                                        }
                                 command = (
-                                        f'MUPDF_PYTHON_INCLUDE_PATH={py_root}/include'
-                                        f' MUPDF_PYTHON_LIBRARY_PATH={py_root}/libs'
-                                        f' "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                        f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
                                         f' platform/win32/mupdf.sln'
                                         f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfpyswig'
                                         )
-                                jlib.system(command, verbose=1, out='log')
+                                jlib.system(command, verbose=1, out='log', env_extra=env_extra)
 
                                 jlib.copy(
                                         f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll',
