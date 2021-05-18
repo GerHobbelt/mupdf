@@ -687,6 +687,13 @@ compressed_image_get_pixmap(fz_context *ctx, fz_image *image_, fz_irect *subarea
 	case FZ_IMAGE_PNG:
 		tile = fz_load_png(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
+	case FZ_IMAGE_JPEGXL:
+#ifdef HAVE_JPEGXL
+		tile = fz_load_jpegxl(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");
+#endif
+		break;
 	case FZ_IMAGE_GIF:
 		tile = fz_load_gif(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
@@ -1185,6 +1192,12 @@ fz_recognize_image_format(fz_context *ctx, unsigned char p[8])
 	if (p[0] == 0x97 && p[1] == 'J' && p[2] == 'B' && p[3] == '2' &&
 		p[4] == '\r' && p[5] == '\n'  && p[6] == 0x1a && p[7] == '\n')
 		return FZ_IMAGE_JBIG2;
+	if (p[0] == 0 && p[1] == 0 && p[2] == 0 && p[3] == 0x0c &&
+		p[4] == 'J' && p[5] == 'X'  && p[6] == 'L' && p[7] == ' ' &&
+		p[8] == 0x0d && p[9] == 0x0a)
+		return FZ_IMAGE_JPEGXL;
+	if (p[0] == 0xff && p[1] == 0x0a)
+		return FZ_IMAGE_JPEGXL;
 	return FZ_IMAGE_UNKNOWN;
 }
 
@@ -1216,6 +1229,13 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 		break;
 	case FZ_IMAGE_JPEG:
 		fz_load_jpeg_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
+		break;
+	case FZ_IMAGE_JPEGXL:
+#ifdef HAVE_JPEGXL
+		fz_load_jpegxl_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");
+#endif
 		break;
 	case FZ_IMAGE_PNG:
 		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
