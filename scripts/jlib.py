@@ -469,8 +469,8 @@ def force_line_buffering():
 def exception_info( exception=None, limit=None, out=None, prefix='', oneline=False):
     '''
     General replacement for traceback.* functions that print/return information
-    about exceptions. This function provides a simple way of getting the
-    functionality provided by these traceback functions:
+    about exceptions and backtraces. This function provides a simple way of
+    getting the functionality provided by these traceback functions:
 
         traceback.format_exc()
         traceback.format_exception()
@@ -481,7 +481,8 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
         exception:
             None, or a (type, value, traceback) tuple, e.g. from
             sys.exc_info(). If None, we call sys.exc_info() and use its return
-            value.
+            value. If there is no live exception we show information about the
+            current backtrace.
         limit:
             None or maximum number of stackframes to output.
         out:
@@ -524,7 +525,7 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
 
     Also the backtraces that are generated are more concise than those provided
     by traceback.* - just one line per frame instead of two - and filenames are
-    output relative to the current directory if applicatble. And one can easily
+    output relative to the current directory if applicable. And one can easily
     prefix all lines with a specified string, e.g. to indent the text.
     '''
     if exception is None:
@@ -534,31 +535,42 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
     try:
         frames = []
 
-        # Get frames above point at which exception was caught - frames
-        # starting at top-level <module> or thread creation fn, and ending
-        # at the point in the catch: block from which we were called.
-        #
-        # These frames are not included explicitly in sys.exc_info()[2] and are
-        # also omitted by traceback.* functions, which makes for incomplete
-        # backtraces that miss much useful information.
-        #
-        for f in reversed(inspect.getouterframes(tb.tb_frame)):
-            ff = f[1], f[2], f[3], f[4][0].strip()
-            frames.append(ff)
+        if tb:
+            # There is a live exception.
+            #
+            # Get frames above point at which exception was caught - frames
+            # starting at top-level <module> or thread creation fn, and ending
+            # at the point in the catch: block from which we were called.
+            #
+            # These frames are not included explicitly in sys.exc_info()[2] and are
+            # also omitted by traceback.* functions, which makes for incomplete
+            # backtraces that miss much useful information.
+            #
+            for f in reversed(inspect.getouterframes(tb.tb_frame)):
+                ff = f[1], f[2], f[3], f[4][0].strip()
+                frames.append(ff)
+        else:
+            # No exception; use current backtrace.
+            for f in inspect.stack():
+                ff = f[1], f[2], f[3], f[4][0].strip()
+                frames.append(ff)
 
-        # Insert a marker for our special '^except raise:' line.
-        frames.append( None)
-
-        # Append frames from point in the try: block that caused the exception
-        # to be raised, to the point at which the exception was thrown.
+        # If there is a live exception, append frames from point in the try:
+        # block that caused the exception to be raised, to the point at which
+        # the exception was thrown.
         #
         # [One can get similar information using traceback.extract_tb(tb):
         #   for f in traceback.extract_tb(tb):
         #       frames.append(f)
         # ]
-        for f in inspect.getinnerframes(tb):
-            ff = f[1], f[2], f[3], f[4][0].strip()
-            frames.append(ff)
+        if tb:
+            # Insert a marker to separate the two parts of the backtrace, used
+            # for our special '^except raise:' line.
+            frames.append( None)
+
+            for f in inspect.getinnerframes(tb):
+                ff = f[1], f[2], f[3], f[4][0].strip()
+                frames.append(ff)
 
         cwd = os.getcwd() + os.sep
         if oneline:
