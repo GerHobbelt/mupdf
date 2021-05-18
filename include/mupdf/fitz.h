@@ -5,7 +5,6 @@
 extern "C" {
 #endif
 
-#include "mupdf/fitz/export.h"
 #include "mupdf/fitz/version.h"
 #include "mupdf/fitz/config.h"
 #include "mupdf/fitz/system.h"

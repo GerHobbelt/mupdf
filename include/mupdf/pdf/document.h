@@ -1,7 +1,7 @@
 #ifndef MUPDF_PDF_DOCUMENT_H
 #define MUPDF_PDF_DOCUMENT_H
 
-#include "../fitz/export.h"
+#include "mupdf/fitz/export.h"
 
 typedef struct pdf_xref pdf_xref;
 typedef struct pdf_ocg_descriptor pdf_ocg_descriptor;
