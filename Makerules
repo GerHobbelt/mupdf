@@ -25,6 +25,11 @@ ifeq ($(tofu_cjk),yes)
   XCFLAGS += -DTOFU_CJK
 endif
 
+ifeq ($(jpegxl),yes)
+  USE_JPEGXL := yes
+  build_suffix += -jpegxl
+endif
+
 # System specific features
 
 ifeq ($(findstring -fembed-bitcode,$(XCFLAGS)),)
@@ -127,6 +132,7 @@ SYS_OPENJPEG_LIBS := -lopenjp2
 SYS_ZLIB_LIBS := -lz
 SYS_TESSERACT_LIBS := -ltesseract
 SYS_LEPTONICA_LIBS := -llept
+SYS_JPEGXL_LIBS := -ljpeg-xl
 
 ifneq "$(CLUSTER)" ""
   CFLAGS += -DCLUSTER
@@ -187,6 +193,12 @@ else ifeq ($(OS),Linux)
   ifeq ($(HAVE_SYS_TESSERACT),yes)
 	SYS_TESSERACT_CFLAGS := $(shell pkg-config --cflags tesseract)
 	SYS_TESSERACT_LIBS := $(shell pkg-config --libs tesseract)
+  endif
+
+  HAVE_SYS_JPEGXL := $(shell pkg-config --exists jpegxl && echo yes)
+  ifeq ($(HAVE_SYS_JPEGXL),yes)
+	SYS_JPEGXL_CFLAGS := $(shell pkg-config --cflags jpegxl)
+	SYS_JPEGXL_LIBS := $(shell pkg-config --libs jpegxl)
   endif
 
   HAVE_SYS_CURL := $(shell pkg-config --exists libcurl && echo yes)
