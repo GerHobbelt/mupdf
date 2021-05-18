@@ -1462,14 +1462,17 @@ class Arg:
     Command-line parser with simple text-based specifications and support for
     multiple sub-commands (e.g. search for "argparse multiple sub commands").
 
-    A basic Arg instance matches a fixed number (usually one or two) of
-    command-line items, specified by a syntax string such as '-flag' or '-f
-    <foo>' or '-f <foo> <bar>'.
+    A basic Arg instance is specified by space-separated items in a syntax
+    string, such as '-flag' or '-f <foo>' or 'foo <foo> <bar>'. These items
+    are to match an equal number of argv items; <...> matches any argv item,
+    otherwise matching is literal. Items that start with '-' are not treated
+    specially.
 
     Command-line parsing is achieved by creating an empty top-level Arg
     instance with <subargs> set to a list of other Arg instances. The resulting
-    top-level Arg instance will try to match these subargs with the command
-    line, returning a simple representation of the matched <...> items.
+    top-level Arg instance will try to match the entire command line argv with
+    any or all of these subargs, returning a simple representation of the
+    matched <...> items.
 
     For example:
 
@@ -1481,29 +1484,25 @@ class Arg:
         'in.txt'
 
     Attribute names (in this case 'f' and 'o') are always generated from the
-    first item in the Arg's syntax string, with some basic processing to ensure
+    first item in an Arg's syntax string, with some basic processing to ensure
     they are legal Python identifiers - removing inital '-', converting '-' to
     '_', and removing any non-alphanumeric characters. So '-f' is converted to
     'f', '--foo-bar' is converted to 'foo_bar' etc.
 
-    Some details: having zero <...> items results in True, more than one <...>
-    items results in a list of values; there can be zero literal items:
+    An Arg with zero <...> items results in True, more than one <...> item
+    results in a list of values; there can be zero literal items:
 
         >>> parser = Arg('', subargs=[Arg('-i'), Arg('-f <file-a> <file-b>'), Arg('<log>')])
         >>> parser.parse('-f foo/a foo/b logfile -i')
         namespace(f=['foo/a', 'foo/b'], i=True, log='logfile')
 
-    An Arg can be matched an arbitary number of times by setting <multi>:
+    An Arg can be matched an arbitary number of times by setting <multi> to
+    true; unmatched multi items appear as [] rather than None:
 
-        >>> parser = Arg('', subargs=[Arg('-f <input>', multi=1), Arg('-o <output>')])
-        >>> args = parser.parse('-f a.txt -f b.txt -f c.txt -o out.txt')
+        >>> parser = Arg('', subargs=[Arg('-f <input>', multi=1), Arg('-o <output>', multi=1)])
+        >>> args = parser.parse('-f a.txt -f b.txt -f c.txt')
         >>> args
-        namespace(f=['a.txt', 'b.txt', 'c.txt'], o='out.txt')
-
-    Un-matched multi items appear as [] rather than None:
-
-        >>> parser.parse('-o out.txt')
-        namespace(f=[], o='out.txt')
+        namespace(f=['a.txt', 'b.txt', 'c.txt'], o=[])
 
     Sub commands:
 
@@ -1539,11 +1538,12 @@ class Arg:
         what could have allowed the parse to make more progress. By default
         we then call sys.exit(1); set exit_ to false to avoid this.
 
-            >>> parser = Arg('', subargs=[Arg('-i <in>'), Arg('-o <out>')])
-            >>> parser.parse('-i', exit_=0)
-            Failed at argv[0]='-i', expected one of:
+            >>> parser = Arg('', subargs=[Arg('<command>'), Arg('-i <in>'), Arg('-o <out>')])
+            >>> parser.parse('foo -i', exit_=0)
+            Failed at argv[1]='-i', expected one of:
                 -i <in>
                 -o <out>
+            >>> parser.parse('-i', exit_=0)
 
         Args can be marked as required:
 
@@ -1879,6 +1879,9 @@ class Arg:
             self.pos = 0
             self.args = []
         def add(self, pos, arg, extra=None):
+            if not arg.name:
+                log('top-level arg added to failures')
+                log(exception_info())
             if pos < self.pos:
                 return
             if pos > self.pos:
@@ -1893,6 +1896,7 @@ class Arg:
                 ret += f'Failed at argv[{self.pos}]={self.argv[self.pos]!r},'
             ret += f' expected one of:\n'
             for arg, extra in self.args:
+                ret += f' [arg is: {arg}]'
                 ret += f'    {arg.syntax}'
                 more = []
                 if arg.parent and arg.parent.name:
