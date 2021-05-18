@@ -320,10 +320,11 @@ def build():
     # Return generated files to install or copy into wheel.
     #
     if windows():
+        infix = '' if sys.maxsize == 2**31 - 1 else '64'
         names = [
-                'mupdfcpp.dll', # C and C++.
-                '_mupdf.pyd',   # Python internals.
-                'mupdf.py',     # Python.
+                f'mupdfcpp{infix}.dll', # C and C++.
+                '_mupdf.pyd',           # Python internals.
+                'mupdf.py',             # Python.
                 ]
     else:
         names = [
