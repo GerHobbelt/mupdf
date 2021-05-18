@@ -5618,10 +5618,7 @@ static void ffi_PDFAnnotation_getInkList(js_State *J)
 				pt = pdf_annot_ink_list_stroke_vertex(ctx, annot, i, k);
 			fz_catch(ctx)
 				rethrow(J);
-			js_pushnumber(J, pt.x);
-			js_setindex(J, -2, k * 2 + 0);
-			js_pushnumber(J, pt.y);
-			js_setindex(J, -2, k * 2 + 1);
+			ffi_pushpoint(J, pt);
 		}
 		js_setindex(J, -2, i);
 	}
@@ -5664,12 +5661,7 @@ static void ffi_PDFAnnotation_setInkList(js_State *J)
 		js_getindex(J, 1, i);
 		counts[i] = js_getlength(J, -1) / 2;
 		for (k = 0; k < counts[i]; ++k) {
-			js_getindex(J, -1, k*2);
-			points[v].x = js_tonumber(J, -1);
-			js_pop(J, 1);
-			js_getindex(J, -1, k*2+1);
-			points[v].y = js_tonumber(J, -1);
-			js_pop(J, 1);
+			points[v] = ffi_topoint(J, -1);
 			++v;
 		}
 		js_pop(J, 1);
@@ -5700,29 +5692,23 @@ static void ffi_PDFAnnotation_addInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	int i, n;
-	float x, y;
-
-	n = js_getlength(J, 1);
-
+	int i, k, m, n = js_getlength(J, 1);
 	fz_try(ctx)
 		pdf_add_annot_ink_list_stroke(ctx, annot);
 	fz_catch(ctx)
 		rethrow(J);
-
 	for (i = 0; i < n; i += 2) {
 		js_getindex(J, 1, i);
-		x = js_tonumber(J, -1);
-		js_pop(J, 1);
+		m = js_getlength(J, -1);
+		for (k = 0; k < m; ++k) {
+			fz_point pt = ffi_topoint(J, -1);
+			fz_try(ctx)
+				pdf_add_annot_ink_list_stroke_vertex(ctx, annot, pt);
+			fz_catch(ctx)
+				rethrow(J);
 
-		js_getindex(J, 1, i+1);
-		y = js_tonumber(J, -1);
+		}
 		js_pop(J, 1);
-
-		fz_try(ctx)
-			pdf_add_annot_ink_list_stroke_vertex(ctx, annot, fz_make_point(x, y));
-		fz_catch(ctx)
-			rethrow(J);
 	}
 }
 
@@ -5740,10 +5726,9 @@ static void ffi_PDFAnnotation_addInkListStrokeVertex(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	float x = js_tonumber(J, 1);
-	float y = js_tonumber(J, 2);
+	fz_point pt = ffi_topoint(J, 1);
 	fz_try(ctx)
-		pdf_add_annot_ink_list_stroke_vertex(ctx, annot, fz_make_point(x, y));
+		pdf_add_annot_ink_list_stroke_vertex(ctx, annot, pt);
 	fz_catch(ctx)
 		rethrow(J);
 }
