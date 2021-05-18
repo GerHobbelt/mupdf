@@ -1240,8 +1240,6 @@ EXPORTS
 	pdf_signature_hash_bytes
 	pdf_signature_incremental_change_since_signing
 	pdf_signature_contents
-	pdf_sign_signature_with_appearance
-	pdf_clear_signature
 	pdf_encrypt_data
 	pdf_encrypted_len
 	pdf_open_document
@@ -1279,6 +1277,7 @@ EXPORTS
 	pdf_graft_page
 	pdf_graft_mapped_page
 	pdf_page_write
+	pdf_new_pdf_device
 	pdf_add_page
 	pdf_insert_page
 	pdf_delete_page
@@ -1376,10 +1375,14 @@ EXPORTS
 	pdf_signature_drop_designated_name
 	pdf_signature_format_designated_name
 	pdf_signature_info
-	pdf_signature_appearance
+	pdf_signature_appearance_signed
 	pdf_signature_appearance_unsigned
 	pdf_check_digest
 	pdf_check_certificate
+	pdf_clear_signature
+	pdf_sign_signature_with_appearance
+	pdf_preview_signature_as_display_list
+	pdf_preview_signature_as_pixmap
 	pdf_check_signature
 	pdf_drop_signer
 	pdf_drop_verifier
@@ -1597,8 +1600,6 @@ EXPORTS
 	pdf_redo
 	pdf_discard_journal
 	pdf_drop_journal
-	pdf_new_pdf_device
-	pdf_localise_page_resources
 	pdf_lookup_page_number
 	pdf_count_pages
 	pdf_count_pages_imp

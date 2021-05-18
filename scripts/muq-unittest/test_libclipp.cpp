@@ -159,30 +159,3 @@ TEST(LibClipp, values_sequencing) {
   EXPECT_EQ(clipp_values_sequencing_test_main(), EXIT_SUCCESS);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
