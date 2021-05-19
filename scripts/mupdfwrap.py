@@ -6678,7 +6678,7 @@ def main():
                                 command = (
                                         f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
+                                        f' /Rebuild "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfpyswig'
                                         )
                                 jlib.log('{env_extra=}')
