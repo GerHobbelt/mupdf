@@ -2491,7 +2491,7 @@ pdf_set_annot_author(fz_context *ctx, pdf_annot *annot, const char *author)
 }
 
 void
-pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font, float *size, float color[3])
+pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font, float *size, float *color)
 {
 	char buf[100], *p = buf, *tok, *end;
 	float stack[3] = { 0, 0, 0 };
@@ -2554,7 +2554,7 @@ pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *f
 }
 
 void
-pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, float color[3])
+pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, float *color)
 {
 	pdf_obj *da = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(DA));
 	if (!da)
