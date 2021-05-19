@@ -909,18 +909,18 @@ def main():
                 bufsize=0,  # So we see login/password prompts.
                 )
 
-    if args.remote:
-        user, host, directory = parse_remote(args.remote.uri)
+    for remote in args.remote:
+        user, host, directory = parse_remote(remote.uri)
         local_dir = os.path.dirname(__file__)
         sync_files = f'{local_dir}/pypackage.py,{local_dir}/jlib.py'
-        if args.remote.s:
-            sync_files += f',{args.remote.s}'
+        if remote.s:
+            sync_files += f',{remote.s}'
         system(
                 f'rsync -ai {sync_files.replace(",", " ")} {sdist if sdist else ""} {user}{host}:{directory}',
                 prefix=f'rsync to {user}{host}:{directory}: ',
                 )
-        if args.remote.a:
-            remote_args = args.remote.a
+        if remote.a:
+            remote_args = remote.a
             system(
                     f'ssh {user}{host} '
                     f'"'
