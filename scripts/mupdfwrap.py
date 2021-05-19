@@ -6675,13 +6675,33 @@ def main():
                                         'MUPDF_PYTHON_INCLUDE_PATH': f'{py_root}/include',
                                         'MUPDF_PYTHON_LIBRARY_PATH': f'{py_root}/libs',
                                         }
+                                jlib.log('{env_extra=}')
+
+                                # The swig-generated .cpp file must exist at
+                                # this point.
+                                #
+                                cpp_path = 'platform/python/mupdfcpp_swig.cpp'
+                                assert os.path.exists(cpp_path), f'SWIG-generated file does not exist: {cpp_path}'
+
+                                # We need to update mtime of the .cpp file to
+                                # force recompile and link, because we run
+                                # devenv with different environmental variables
+                                # depending on the Python for which we are
+                                # building.
+                                #
+                                # [Using /Rebuild or /Clean appears to clean
+                                # the entire solution even if we specify
+                                # /Project.]
+                                #
+                                os.utime(cpp_path)
+
+                                jlib.log('Building mupdfpyswig project')
                                 command = (
                                         f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
                                         f' platform/win32/mupdf.sln'
-                                        f' /Rebuild "ReleasePython|{build_dirs.cpu.windows_config}"'
+                                        f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfpyswig'
                                         )
-                                jlib.log('{env_extra=}')
                                 jlib.system(command, verbose=1, out='log', env_extra=env_extra)
 
                                 jlib.copy(
