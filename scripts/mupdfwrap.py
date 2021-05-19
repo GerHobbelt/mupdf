@@ -6681,6 +6681,7 @@ def main():
                                         f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfpyswig'
                                         )
+                                jlib.log('{env_extra=}')
                                 jlib.system(command, verbose=1, out='log', env_extra=env_extra)
 
                                 jlib.copy(
