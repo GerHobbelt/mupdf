@@ -504,7 +504,7 @@ def make_windows(
     return wheels
 
 
-def test(test_command, wheels_or_package_name, pypi_test, py=None):
+def test(test_command, package_name, wheels, use_pypi, pypi_test, py):
     '''
     Basic testing of wheels.
 
@@ -513,56 +513,61 @@ def test(test_command, wheels_or_package_name, pypi_test, py=None):
 
     test_command:
         Command to run, e.g. 'foo/testscript.py'.
-    wheels_or_package_name:
-        If a string, the name of a package to install using pip. Otherwise
+    wheels:
+        List of wheel paths.
+    package_name:
+        Name of a package to import/install using pip. Otherwise
         should be a list of wheel paths to be searched for a match for <py>.
-    pypi_test:
-        Only used if wheels_or_package_name is a string. If true we use pypi's
-        test repository.
+    pypi:
+        If true we use pypi.org, otherwise install package in <wheels> that
+        matches <py>.
+        'test' - use test.pypi.org.
+        true - use
     py:
         Python executable. If None we use 'py' on Windows else sys.executable.
     '''
-    assert wheels_or_package_name
     if py is None:
         py = 'py' if windows() else sys.executable
-
-    # Find wheel tag by running ourselves with --tag inside a venv running <py>:
-    log(f'Finding wheel tag for {py!r}')
-    text = venv_run(
-            f'python {sys.argv[0]} tag',
-            return_output=True,
-            venv='pypackage-venv-test',
-            py=py,
-            clean=True,
-            pip_upgrade=False,  # Saves a little time.
-            )
-    m = re.search('tag: (.+)', text)
-    assert m, f'Failed to find expected tag: ... in output text: {text!r}'
-    tag = m.group(1).strip()    # Sometimes we get \r at end, so remove it here.
-    assert not '\r' in tag, f'tag is: {tag!r}'
-    log(f'tag is: {tag!r}')
-
-    # Run <test_command> after installing matching wheel or specified package.
-    #
-    if isinstance(wheels_or_package_name, str):
-        package_name = wheels_or_package_name
+    if test_command == '.':
+        test_command = ''
+    if test_command:
+        log(f'Test command to run is: {test_command}')
     else:
-        pattern = f'^([^-]+)-([^-]+)-{tag}[.]whl$'
-        log(f'Looking for wheel matching {pattern!r}')
-        for wheel in wheels_or_package_name:
-            base = os.path.basename(wheel)
-            m = re.match(pattern, base)
-            if m:
+        log(f'Test command is empty so will default to import of inferred package name.')
+
+    if use_pypi:
+        assert package_name, f'Need package_name to install package from pypi.'
+        pip_install_arg = package_name
+    else:
+        # Find wheel matching tag output by running <py> ourselves with --tag
+        # inside a venv running <py>:
+        log(f'Finding wheel tag for {py!r}')
+        text = venv_run(
+                f'python {sys.argv[0]} tag',
+                return_output=True,
+                venv='pypackage-venv-test',
+                py=py,
+                clean=True,
+                pip_upgrade=False,  # Saves a little time.
+                )
+        m = re.search('tag: (.+)', text)
+        assert m, f'Failed to find expected tag: ... in output text: {text!r}'
+        tag = m.group(1).strip()    # Sometimes we get \r at end, so remove it here.
+        assert not '\r' in tag, f'tag is: {tag!r}'
+        log(f'Looking for wheel matching tag {tag!r}')
+        for wheel in wheels:
+            name, version, py_, none, cpu = parse_wheel(wheel)
+            if '-'.join((py_, none, cpu)) == tag:
                 log( f'Matching wheel: {wheel}')
-                package_name = m.group(1)
+                package_name = name
                 pip_install_arg = wheel
                 break
         else:
-            text = f'Cannot find wheel matching: {pattern!r}\n'
-            text += f'Wheels are ({len(wheels_or_package_name)}):\n'
-            for wheel in wheels_or_package_name:
+            text = f'Cannot find wheel matching: tag={tag!r}\n'
+            text += f'Wheels are ({len(wheels)}):\n'
+            for wheel in wheels:
                 text += f'    {wheel}\n'
-            raise Exception(text)
+            assert 0, text
 
     if not test_command:
         test_command = 'pypackage_test.py'
@@ -575,7 +580,7 @@ def test(test_command, wheels_or_package_name, pypi_test, py=None):
             f.write(code)
     venv_run(
             [
-            f'pip install {"-i https://test.pypi.org/simple" if pypi_test else ""} {package_name}',
+            f'pip install {"-i https://test.pypi.org/simple" if pypi_test else ""} {pip_install_arg}',
             f'python {test_command}',
             ],
             venv='pypackage-venv-test',
@@ -583,6 +588,20 @@ def test(test_command, wheels_or_package_name, pypi_test, py=None):
             clean=True,
             )
 
+
+def test2(test_command, package_name, wheels, pypi, pypi_test, py):
+    if windows() and not py:
+        # Test with each wheel.
+        for wheel in wheels:
+            name, version, py, none, cpu = parse_wheel(wheel)
+            log('{py=}')
+            pyv = f'{py[2]}.{py[3]}'
+            log('{pyv=}')
+            cpu_bits = 64 if cpu == 'win_amd64' else 32
+            py = f'py -{pyv}-{cpu_bits}'
+            test(test_command, package_name, wheels, args.test.pypi, pypi_test, py=py)
+    else:
+        test(test_command, package_name, wheels, pypi, pypi_test, py)
 
 def parse_remote(remote):
     '''
@@ -672,7 +691,14 @@ def main():
                             jlib.Arg('-a <abis>',
                                     help='Set ABIs to build remotely, comma-separated.'
                                     ),
-                            jlib.Arg('-t', help='Run basic "test ." import test'),
+                            jlib.Arg('-t',
+                                    help='''
+                                    Run basic "test ." import test. On Windows
+                                    this is is done for each wheel we have
+                                    built by running "py <abi>"; otherwise we
+                                    only test with native python.
+                                    ''',
+                                    ),
                             ],
                         ),
                 jlib.Arg('pypi-test <t:int>',
@@ -686,7 +712,7 @@ def main():
                             jlib.Arg('-s <files>',
                                     help='''
                                     Comma-separated files to sync to remote
-                                    machine.
+                                    machine. (pypackage.py is always synced.)
                                     ''',
                                     ),
                             jlib.Arg('-a <args>',
@@ -715,21 +741,39 @@ def main():
                         help='''
                         Run test programme. If <command> is '.' or '', we
                         instead run a temporary test programme that imports the
-                        package. If -p is not specified we infer the package
-                        name from the sdist.
+                        package.
                         ''',
                         subargs = [
-                            jlib.Arg('-p <package-name>',
-                                    help='Set package name to install from pypi.',
+                            jlib.Arg('-n <package-name>',
+                                    help='''
+                                    Set package name to install from pypi. If
+                                    not specified we infer from wheels.
+                                    ''',
+                                    ),
+                            jlib.Arg('-p <python>',
+                                    help='''
+                                    Set python to run. If not specified and we
+                                    are on Windows we test with each wheel's
+                                    matching python.
+                                    ''',
+                                    ),
+                            jlib.Arg('--pypi',
+                                    help='''
+                                    Install from pypi; otherwise we install
+                                    from local wheels.
+                                    ''',
                                     ),
                             jlib.Arg('<command>', required=1,
-                                    help='The command to run.'
+                                    help='The command to run.',
                                     ),
                             ],
                         ),
                 jlib.Arg('upload', help='Upload sdist and wheels to pypi.'),
                 jlib.Arg('wheels <pattern>',
-                        help='Specify pre-existing wheels using glob pattern.',
+                        help='''
+                        Specify pre-existing wheels using glob pattern. A "*"
+                        is appended if does not end with ".whl".
+                        ''',
                         ),
                 ],
             )
@@ -807,12 +851,11 @@ def main():
                     # Test with each wheel.
                     for wheel in wheels:
                         name, version, py, none, cpu = parse_wheel(wheel)
-                        if windows():
-                            pyv = py[0]+py[2]
-                            cpu_bits = 64 if cpu == 'win_amd64' else 32
-                            py = f'py -{pyv}-{cpu_bits}'
-                        else:
-                            py = None
+                        log('{py=}')
+                        pyv = f'{py[2]}.{py[3]}'
+                        log('{pyv=}')
+                        cpu_bits = 64 if cpu == 'win_amd64' else 32
+                        py = f'py -{pyv}-{cpu_bits}'
                         test('', wheels, pypi_test, py=py)
                 else:
                     # Test with default python.
@@ -827,6 +870,9 @@ def main():
 
     if args.wheels:
         pattern = args.wheels
+        if not pattern.endswith('.whl'):
+            pattern += '*'
+            log(f'Have appended "*" to get pattern={pattern!r}')
         wheels_raw = glob.glob(pattern)
         if not wheels_raw:
             log(f'Warning: no matches found for wheels pattern {pattern!r}.')
@@ -839,16 +885,9 @@ def main():
             log(f'    {wheel}')
 
     if args.test:
-        package_name = args.test.p
-        assert package_name or wheels, f'Cannot run test - need to specify "-p <package-name>" or "wheels <pattern>".'
-        command = args.test.command
-        if command == '.':
-            command = ''
-        if command:
-            log(f'Test command to run is: {command}')
-        else:
-            log(f'Test command is empty so will default to import of inferred package name.')
-        test(command, package_name if package_name else wheels, pypi_test)
+        package_name = args.test.n
+        #assert package_name or wheels, f'Cannot run test - need to specify "-n <package-name>" or "wheels <pattern>".'
+        test2(args.test.command, package_name, wheels, args.test.pypi, pypi_test, py=args.test.p)
 
     if args.upload:
         assert sdist, f'Cannot upload because no sdist specified; use "sdist ...".'
