@@ -428,6 +428,17 @@ def make_unix(
     return wheels
 
 
+def windows_python_from_abi(abi):
+    '''
+    Returns (cpu, python_version, py).
+    '''
+    cpu, python_version = abi.split('-')
+    python_version = '.'.join(python_version)
+    assert cpu in ('x32', 'x64')
+    py = f'py -{python_version}-{cpu[1:]}'
+    return cpu, python_version, py
+
+
 def make_windows(
         sdist,
         abis=None,
@@ -485,10 +496,7 @@ def make_windows(
 
     wheels = []
     for abi in abis:
-        cpu, python_version = abi.split('-')
-        python_version = '.'.join(python_version)
-        assert cpu in ('x32', 'x64')
-        py = f'py -{python_version}-{cpu[1:]}'
+        cpu, python_version, py = windows_python_from_abi(abi)
         t = time.time()
         log(f'*** Running venv_run() with directory={directory} os.getcwd()={os.getcwd()}')
         venv_run(
@@ -511,6 +519,7 @@ def test_internal(test_command, package_name, pip_install_arg, py):
     if test_command == '.':
         test_command = ''
 
+    jlib.log('Testing {package_name=} {pip_install_arg=} {py=}')
     if not test_command:
         test_command = 'pypackage_test.py'
         code = (
@@ -572,7 +581,7 @@ def test_pypi(test_command, package_name, pypi_test, py):
     test_internal(test_command, package_name, pip_install_arg, py)
 
 
-def test(test_command, package_name, wheels, pypi, pypi_test, py):
+def test(test_command, package_name, wheels, abis, pypi, pypi_test, py):
     '''
     If on Windows and <py> is false, we run test() with a python for
     each wheel in <wheels>.
@@ -591,22 +600,31 @@ def test(test_command, package_name, wheels, pypi, pypi_test, py):
         Python command. If None, on Windows we test ABI from each wheel,
         otherwise we use native python.
     '''
-    if not py and windows() and wheels:
-        # Test with each wheel.
-        log('Testing for python implied by each wheel.')
-        for wheel in wheels:
-            name, version, py, none, cpu = parse_wheel(wheel)
-            log('{py=}')
-            pyv = f'{py[2]}.{py[3]}'
-            log('{pyv=}')
-            cpu_bits = 64 if cpu == 'win_amd64' else 32
-            py = f'py -{pyv}-{cpu_bits}'
-            if package_name is None:
-                package_name = name
-            if pypi:
+    if not py and windows():
+        if wheels:
+            # Test with each wheel.
+            log('Testing for python implied by each wheel.')
+            for wheel in wheels:
+                name, version, py, none, cpu = parse_wheel(wheel)
+                log('{py=}')
+                pyv = f'{py[2]}.{py[3]}'
+                log('{pyv=}')
+                cpu_bits = 64 if cpu == 'win_amd64' else 32
+                py = f'py -{pyv}-{cpu_bits}'
+                if package_name is None:
+                    package_name = name
+                if pypi:
+                    test_pypi(test_command, package_name, pypi_test, py)
+                else:
+                    test_local(test_command, wheels, py)
+        else:
+            assert pypi, f'No wheels specified; need to use *pypi.org.'
+            assert package_name, f'No wheels specified; need package_name.'
+            # Test with each ABI.
+            for abi in abis:
+                cpu, python_version, py = windows_python_from_abi(abi)
+                jlib.log('Testing with {package_name=} {pypi_test=} {py=}')
                 test_pypi(test_command, package_name, pypi_test, py)
-            else:
-                test_local(test_command, wheels, py)
     else:
         if not py:
             if windows():
@@ -696,7 +714,11 @@ def main():
 
     parser = jlib.Arg('', required=1, help=__doc__,
             subargs=[
-                jlib.Arg('abis <abis>', help=f'Set ABIs to build, comma-separated, default is {abis}.'),
+                jlib.Arg('abis <abis>',
+                        help=f'''
+                        Set ABIs to build, comma-separated. Default is {abis}.
+                        ''',
+                        ),
                 jlib.Arg('build', help='Build wheels.', multi=True,
                         subargs = [
                             jlib.Arg('-r <uri>',
@@ -759,28 +781,28 @@ def main():
                         help='''
                         Run test programme. If <command> is '.' or '', we
                         instead run a temporary test programme that imports the
-                        package. Uses list of wheels from "wheels <pattern>" or
-                        "build ...".
+                        package. Uses list of wheels from "wheels <pattern>"
+                        or "build ...", otherwise uses ABIs (default or as
+                        specified with 'abis ...').
                         ''',
                         subargs = [
                             jlib.Arg('-p <python>',
                                     help='''
-                                    Set python to run. If not specified, one
-                                    windows we are on Windows we test with each
-                                    wheel's matching python, otherwise we use
-                                    default python.
+                                    Set python to run. If not specified, on
+                                    Windows we test with each wheel/abi's
+                                    matching python, otherwise we use default
+                                    python.
                                     ''',
                                     ),
                             jlib.Arg('--pypi <package-name>',
                                     help='''
-                                    Install specified package from pypi;
-                                    otherwise we install from local wheels.
+                                    Install specified package from pypi before
+                                    running test; otherwise we install from
+                                    local wheels.
                                     ''',
                                     ),
                             jlib.Arg('<command>', required=1,
-                                    help='''
-                                    The command to run or "" or ".".
-                                    ''',
+                                    help='The test command to run.',
                                     ),
                             ],
                         ),
@@ -863,7 +885,7 @@ def main():
             if build.t:
                 # Run basic import test.
                 package_name, _ = parse_sdist(sdist)
-                test('', package_name, wheels, pypi=False, pypi_test=None, py=None)
+                test('', package_name, wheels, abis, pypi=False, pypi_test=None, py=None)
 
             log(f'sdist: {sdist}')
             for wheel in wheels:
@@ -894,7 +916,7 @@ def main():
         if args.test.pypi:
             pypi = True
             package_name = args.test.pypi
-        test(args.test.command, package_name, wheels, pypi, pypi_test, py=args.test.p)
+        test(args.test.command, package_name, wheels, abis, pypi, pypi_test, py=args.test.p)
 
     if args.upload:
         assert sdist, f'Cannot upload because no sdist specified; use "sdist ...".'
