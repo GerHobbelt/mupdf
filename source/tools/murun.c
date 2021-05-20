@@ -5927,9 +5927,9 @@ static void ffi_PDFAnnotation_getDefaultAppearance(js_State *J)
 	const char *font = NULL;
 	float size = 0.0f;
 	float color[3] = { 0.0f };
-	size_t i;
+	int i, n = 0;
 	fz_try(ctx)
-		pdf_annot_default_appearance(ctx, annot, &font, &size, color);
+		pdf_annot_default_appearance(ctx, annot, &font, &size, &n, color);
 	fz_catch(ctx)
 		rethrow(J);
 	js_newobject(J);
@@ -5938,7 +5938,7 @@ static void ffi_PDFAnnotation_getDefaultAppearance(js_State *J)
 	js_pushnumber(J, size);
 	js_setproperty(J, -2, "size");
 	js_newarray(J);
-	for (i = 0; i < nelem(color); ++i) {
+	for (i = 0; i < n && i < (int) nelem(color); ++i) {
 		js_pushnumber(J, color[i]);
 		js_setindex(J, -2, i);
 	}
@@ -5952,14 +5952,14 @@ static void ffi_PDFAnnotation_setDefaultAppearance(js_State *J)
 	const char *font = js_tostring(J, 1);
 	float size = js_tonumber(J, 2);
 	int i, n = js_getlength(J, 3);
-	float color[3];
-	for (i = 0; i < n && i < 3; ++i) {
+	float color[3] = { 0.0f };
+	for (i = 0; i < n && i < (int) nelem(color); ++i) {
 		js_getindex(J, 3, i);
 		color[i] = js_tonumber(J, -1);
 		js_pop(J, 1);
 	}
 	fz_try(ctx)
-		pdf_set_annot_default_appearance(ctx, annot, font, size, color);
+		pdf_set_annot_default_appearance(ctx, annot, font, size, n, color);
 	fz_catch(ctx)
 		rethrow(J);
 }
