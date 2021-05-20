@@ -1534,6 +1534,31 @@ class Arg:
             >>> parser.parse('commit -f foo diff -f bar commit -f bar', exit_=0)
             namespace(commit=[namespace(f='foo'), namespace(f='bar')], diff=namespace(f='bar'), o=None)
 
+    Consuming all remaining args:
+
+        Use '...' to match all remaining args.
+
+            >>> parser = Arg('', \
+                        subargs=[ \
+                            Arg('-o <file>'), \
+                            Arg('-i ...'), \
+                            ], \
+                        )
+            >>> parser.parse('-i foo bar abc pqr')
+            namespace(i=['foo', 'bar', 'abc', 'pqr'], o=None)
+
+        If '...' is the first item in the syntax
+        string, it will appear with special name _remaining:
+
+            >>> parser = Arg('', \
+                        subargs=[ \
+                            Arg('-o <file>'), \
+                            Arg('...'), \
+                            ], \
+                        )
+            >>> parser.parse('-i foo bar abc pqr')
+            namespace(_remaining=['-i', 'foo', 'bar', 'abc', 'pqr'], o=None)
+
     Error messages:
 
         If we fail to parse the command line, we show information about
@@ -1750,6 +1775,9 @@ class Arg:
             if syntax_item.startswith('<') and syntax_item.endswith('>'):
                 self.text = syntax_item[1:-1]
                 self.literal = False
+            elif syntax_item == '...':
+                self.text = syntax_item
+                self.literal = False
             else:
                 self.text = syntax_item
                 self.literal = True
@@ -1757,12 +1785,15 @@ class Arg:
             # self.name as attribute name, so we need to make it a usable
             # Python identifier.
             self.name = self.text
-            while self.name.startswith('-'):
-                self.name = self.name[1:]
-            self.name = self.name.replace('-', '_')
-            self.name = re.sub('[^a-zA-Z0-9_]', '', self.name)
-            if self.name[0] in '0123456789':
-                self.name = '_' + self.name
+            if self.name == '...':
+                self.name = '_remaining'
+            else:
+                while self.name.startswith('-'):
+                    self.name = self.name[1:]
+                self.name = self.name.replace('-', '_')
+                self.name = re.sub('[^a-zA-Z0-9_]', '', self.name)
+                if self.name[0] in '0123456789':
+                    self.name = '_' + self.name
         def __repr__(self):
             return f'text={self.text} literal={self.literal}'
 
@@ -1796,11 +1827,16 @@ class Arg:
         # Match each item in self.items[] with an item in argv[], putting
         # non-literal items into value[].
         values = []
+        dot_dot_dot = False
         for i, item in enumerate(self.items):
             if item.literal:
                 if item.text != argv[pos+i]:
                     failures.add(pos+i, self)
                     return None
+            elif item.text == '...':
+                # Match all remaining args.
+                values.append(argv[pos+i:])
+                dot_dot_dot = True
             else:
                 if argv[pos+i].startswith('-'):
                     failures.add(pos+i, self, f'value must not start with "-"')
@@ -1809,7 +1845,7 @@ class Arg:
 
         # Condense <value> for convenience.
         value = True if len(values) == 0 else values[0] if len(values) == 1 else values
-        ret = len(self.items)
+        ret = len(argv) - pos if dot_dot_dot else len(self.items)
 
         name = self.name if self.name else '_'
 
