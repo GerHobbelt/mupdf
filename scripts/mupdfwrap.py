@@ -6698,7 +6698,7 @@ def main():
                                 jlib.log('Building mupdfpyswig project')
                                 command = (
                                         f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
-                                        f' platform/win32/mupdf.sln'
+                                        f' platform/win32/mupdfpyswig.sln'
                                         f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                         f' /Project mupdfpyswig'
                                         )
@@ -7135,17 +7135,6 @@ def main():
                 # Set our <swig> to be the local windows swig.exe.
                 #
                 swig = swig_local
-
-                if 0:
-                    # Build mupdfcpp.dll.
-                    command = (
-                            f'C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Community/Common7/IDE/devenv.com'
-                            f' platform/win32/mupdf.sln'
-                            f' /Build DebugPython'
-                            f' /Project mupdfcpp'
-                            )
-                    log(f'Building mupdfcpp.dll')
-                    jlib.system(command, verbose=1, out='log')
 
             elif arg == '--sync':
                 sync_docs = False
