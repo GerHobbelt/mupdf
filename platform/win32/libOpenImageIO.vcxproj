@@ -234,6 +234,12 @@
     <ClCompile Include="..\..\thirdparty\owemdjee\OpenImageIO\testsuite\coiio\coiiotest.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\scripts\OpenImageIO\detail\fmt\format.h" />
+    <ClInclude Include="..\..\scripts\OpenImageIO\detail\fmt\ostream.h" />
+    <ClInclude Include="..\..\scripts\OpenImageIO\detail\fmt\printf.h" />
+    <ClInclude Include="..\..\scripts\OpenImageIO\OpenEXR\ImfTimeCode.h" />
+    <ClInclude Include="..\..\scripts\OpenImageIO\OpenImageIO\Imath.h" />
+    <ClInclude Include="..\..\scripts\OpenImageIO\OpenImageIO\oiioversion.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\OpenImageIO\src\bmp.imageio\bmp_pvt.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\OpenImageIO\src\cineon.imageio\libcineon\BaseTypeConverter.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\OpenImageIO\src\cineon.imageio\libcineon\Cineon.h" />
@@ -416,7 +422,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;../../thirdparty/owemdjee/fmt/include;../../thirdparty\owemdjee\Imath\src\Imath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -459,7 +465,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;../../thirdparty/owemdjee/fmt/include;../../thirdparty\owemdjee\Imath\src\Imath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -501,7 +507,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;../../thirdparty/owemdjee/fmt/include;../../thirdparty\owemdjee\Imath\src\Imath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -544,7 +550,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\OpenImageIO\src\include;../../scripts/OpenImageIO;../../thirdparty/owemdjee/boost;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/CPython/Include;../../thirdparty/owemdjee/fmt/include;../../thirdparty\owemdjee\Imath\src\Imath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

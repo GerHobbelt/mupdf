@@ -119,7 +119,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIB_NAS_FILELOCK;_NAS_FILELOCK_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -204,7 +204,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIB_NAS_FILELOCK;_NAS_FILELOCK_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -235,39 +235,13 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\AtomicFile.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\File.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\Lockfile.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile_b.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile_c.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\mktemp.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\procutils.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\serialport.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\Stat.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\StdMakeUnique.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\TemporaryFile.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\Win32Util.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\winerror_to_errno.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\nas_lockfile.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\AtomicFile.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\dotlockfile.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\Lockfile.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile_b.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile_unix.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\lockfile_win.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\mktemp.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\nfslock.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\procutils.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\serialport.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\Stat.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\TemporaryFile.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\Win32Util.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\nas_lockfile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\README.md" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
