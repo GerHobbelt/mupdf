@@ -330,7 +330,6 @@ void wincopyfile(pdfapp_t *app, char *source, char *target)
 	CopyFile(wsource, wtarget, FALSE);
 }
 
-static char pd_filename[256] = "The file is encrypted.";
 static char pd_password[256] = "";
 static wchar_t pd_passwordw[256] = {0};
 static char td_textinput[1024] = "";
@@ -347,7 +346,7 @@ dlogpassproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch(message)
 	{
 	case WM_INITDIALOG:
-		SetDlgItemTextA(hwnd, 4, pd_filename);
+		SetDlgItemTextA(hwnd, 4, "The file is encrypted.");
 		return TRUE;
 	case WM_COMMAND:
 		switch(wParam)
@@ -455,7 +454,6 @@ dlogchoiceproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 const char *winpassword(pdfapp_t *app, const char *filename)
 {
-	char buf[1024], *s;
 	int code;
 
 	if (password)
@@ -465,13 +463,6 @@ const char *winpassword(pdfapp_t *app, const char *filename)
 		return p;
 	}
 
-	strcpy(buf, filename);
-	s = buf;
-	if (strrchr(s, '\\')) s = strrchr(s, '\\') + 1;
-	if (strrchr(s, '/')) s = strrchr(s, '/') + 1;
-	if (strlen(s) > 32)
-		strcpy(s + 30, "...");
-	sprintf(pd_filename, "The file \"%s\" is encrypted.", s);
 	code = DialogBoxW(NULL, L"IDD_DLOGPASS", hwndframe, dlogpassproc);
 	if (code <= 0)
 		pdfapp_error(app, "cannot create password dialog");

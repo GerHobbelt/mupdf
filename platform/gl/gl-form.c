@@ -296,6 +296,7 @@ static void cert_password_dialog(void)
 			if (ui_button("Okay") || is == UI_INPUT_ACCEPT)
 			{
 				if (is_valid_certificate_and_password()) {
+					ui.dialog = NULL;
 					signature_appearance_init();
 					ui.dialog = signature_appearance_dialog;
 				} else {
