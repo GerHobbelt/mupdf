@@ -1273,6 +1273,8 @@ def newest( names):
     ret_t = 0
     ret_name = None
     for filename in get_filenames( names):
+        if filename.endswith('.pyc'):
+            continue
         t = mtime( filename)
         if t > ret_t:
             ret_t = t
