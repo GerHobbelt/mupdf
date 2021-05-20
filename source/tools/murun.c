@@ -5608,10 +5608,10 @@ static void ffi_PDFAnnotation_addVertex(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	fz_point p = ffi_topoint(J, 1);
-
+	float x = js_tonumber(J, 1);
+	float y = js_tonumber(J, 2);
 	fz_try(ctx)
-		pdf_add_annot_vertex(ctx, annot, p);
+		pdf_add_annot_vertex(ctx, annot, fz_make_point(x, y));
 	fz_catch(ctx)
 		rethrow(J);
 }
