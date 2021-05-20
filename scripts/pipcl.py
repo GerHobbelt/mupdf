@@ -175,10 +175,10 @@ class Package:
         #
         tag_python = ''.join(platform.python_version().split('.')[:2])
 
-        # Final tag is, for example, 'py39-none-win32', 'py39-none-win_amd64'
-        # or 'py38-none-openbsd_6_8_amd64'.
+        # Final tag is, for example, 'cp39-none-win32', 'cp39-none-win_amd64'
+        # or 'cp38-none-openbsd_6_8_amd64'.
         #
-        tag = f'py{tag_python}-none-{tag_platform}'
+        tag = f'cp{tag_python}-none-{tag_platform}'
 
         path = f'{wheel_directory}/{self.name}-{self.version}-{tag}.whl'
 
