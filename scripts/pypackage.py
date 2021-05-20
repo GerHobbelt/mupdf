@@ -606,9 +606,7 @@ def test(test_command, package_name, wheels, abis, pypi, pypi_test, py):
             log('Testing for python implied by each wheel.')
             for wheel in wheels:
                 name, version, py, none, cpu = parse_wheel(wheel)
-                log('{py=}')
                 pyv = f'{py[2]}.{py[3]}'
-                log('{pyv=}')
                 cpu_bits = 64 if cpu == 'win_amd64' else 32
                 py = f'py -{pyv}-{cpu_bits}'
                 if package_name is None:
