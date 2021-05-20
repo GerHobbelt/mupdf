@@ -86,7 +86,7 @@ def make_tag(py_version=None):
     # Final tag is, for example, 'py39-none-win32', 'py39-none-win_amd64'
     # or 'py38-none-openbsd_6_8_amd64'.
     #
-    tag = f'py{tag_python}-none-{tag_platform}'
+    tag = f'cp{tag_python}-none-{tag_platform}'
     return tag
 
 
@@ -406,7 +406,7 @@ def make_unix(
                 )
 
         # Find new wheel.
-        wheel = find_new_file(f'{io_directory}/{package_root}-py{vv}-none-*.whl', t)
+        wheel = find_new_file(f'{io_directory}/{package_root}-cp{vv}-none-*.whl', t)
         wheels.append(wheel)
         check_wheel(wheel)
         if out_dir:
