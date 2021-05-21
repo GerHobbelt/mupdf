@@ -2561,9 +2561,9 @@ pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *f
 {
 	if (n == 4 && (color[0] > 0 || color[1] > 0 || color[2] > 0 || color[3] > 0))
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g %g %g %g k", font, size, color[0], color[1], color[2], color[3]);
-	if (n == 3 && (color[0] > 0 || color[1] > 0 || color[2] > 0))
+	else if (n == 3 && (color[0] > 0 || color[1] > 0 || color[2] > 0))
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g %g %g rg", font, size, color[0], color[1], color[2]);
-	if (n == 1 && color[0] > 0)
+	else if (n == 1 && color[0] > 0)
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g g", font, size, color[0]);
 	else
 		fz_snprintf(buf, nbuf, "/%s %g Tf", font, size);
