@@ -17,7 +17,13 @@
 #define VERSION  "2.0.91"
 
 /* The size of `size_t', as computed by sizeof. */
-#define SIZEOF_SIZE_T  8
+#if defined(_MSC_VER)
+#if defined(_WIN64)
+#  define SIZEOF_SIZE_T 8
+#else
+#  define SIZEOF_SIZE_T 4
+#endif
+#endif
 
 /* Define if your compiler has __builtin_ctzl() and sizeof(unsigned long) == sizeof(size_t). */
 /* #undef HAVE_BUILTIN_CTZL */
