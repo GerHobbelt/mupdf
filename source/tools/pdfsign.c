@@ -42,7 +42,7 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 	pdf_signature_error err;
 	pdf_pkcs7_verifier *verifier;
 	int edits;
-	pdf_pkcs7_designated_name *dn = NULL;
+	pdf_pkcs7_distinguished_name *dn = NULL;
 
 	fz_info(ctx, "Verifying signature %d:\n", pdf_to_num(ctx, signature));
 
@@ -59,8 +59,8 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 		dn = pdf_signature_get_signatory(ctx, verifier, doc, signature);
 		if (dn)
 		{
-			name = pdf_signature_format_designated_name(ctx, dn);
-			fz_info(ctx, "\tDesignated name: %s\n", name);
+			name = pdf_signature_format_distinguished_name(ctx, dn);
+			fz_info(ctx, "\tDistinguished name: %s\n", name);
 			fz_free(ctx, name);
 		}
 		else
@@ -85,7 +85,7 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 	}
 	fz_always(ctx)
 	{
-		pdf_signature_drop_designated_name(ctx, dn);
+		pdf_signature_drop_distinguished_name(ctx, dn);
 		pdf_drop_verifier(ctx, verifier);
 	}
 	fz_catch(ctx)
@@ -158,7 +158,7 @@ static void sign_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatur
 
 static void list_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signature)
 {
-	pdf_pkcs7_designated_name *dn;
+	pdf_pkcs7_distinguished_name *dn;
 	pdf_pkcs7_verifier *verifier;
 
 	if (!pdf_signature_is_signed(ctx, doc, signature))
@@ -172,10 +172,10 @@ static void list_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatur
 	dn = pdf_signature_get_signatory(ctx, verifier, doc, signature);
 	if (dn)
 	{
-		char *s = pdf_signature_format_designated_name(ctx, dn);
-		fz_info(ctx, "%5d: Designated name: %s\n", pdf_to_num(ctx, signature), s);
+		char *s = pdf_signature_format_distinguished_name(ctx, dn);
+		fz_info(ctx, "%5d: Distinguished name: %s\n", pdf_to_num(ctx, signature), s);
 		fz_free(ctx, s);
-		pdf_signature_drop_designated_name(ctx, dn);
+		pdf_signature_drop_distinguished_name(ctx, dn);
 	}
 	else
 	{

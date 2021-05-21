@@ -59,37 +59,37 @@ def cache(function):
     return wrapper
 
 @cache
+def root_dir():
+    return os.path.dirname(os.path.abspath(__file__))
+
+@cache
 def windows():
     s = platform.system()
     return s == 'Windows' or s.startswith('CYGWIN')
 
 @cache
 def build_dir():
-    if windows():
-        # Windows. We generate 32 or 64-bit binaries to match whatever Python we
-        # are running under.
-        #
+    # This is x86/x64-specific.
+    #
+    # We generate 32 or 64-bit binaries to match whatever Python we
+    # are running under.
+    #
+    ret = os.environ.get('MUPDF_SETUP_BUILD_DIR')
+    if ret is None:
         cpu = 'x32' if sys.maxsize == 2**31 - 1 else 'x64'
         python_version = '.'.join(platform.python_version().split('.')[:2])
-        ret = f'build/shared-release-{cpu}-py{python_version}'
-    else:
-        ret = 'build/shared-release'
-
-    ret = os.environ.get('MUPDF_SETUP_BUILD_DIR', ret)
+        ret = f'{root_dir()}/build/shared-release-{cpu}-py{python_version}'
     return ret
 
 @cache
-def mupdf_dir():
-    return os.path.abspath(f'{__file__}/..')
-
-@cache
 def in_sdist():
-    return os.path.exists(f'{mupdf_dir()}/PKG-INFO')
+    return os.path.exists(f'{root_dir()}/PKG-INFO')
 
-sys.path.append(f'{mupdf_dir()}/scripts')
+sys.path.append(f'{root_dir()}/scripts')
 import pipcl
 
 
+@cache
 def mupdf_version():
     '''
     Returns version string.
@@ -105,7 +105,7 @@ def mupdf_version():
     time to the base version in include/mupdf/fitz/version.h. For example
     '1.18.0.20210330.1800'.
     '''
-    with open(f'{mupdf_dir()}/include/mupdf/fitz/version.h') as f:
+    with open(f'{root_dir()}/include/mupdf/fitz/version.h') as f:
         text = f.read()
     m = re.search('\n#define FZ_VERSION "([^"]+)"\n', text)
     assert m
@@ -156,14 +156,15 @@ def git_info():
         diff: diff relative to current.
     '''
     def get_id(command):
-        text = subprocess.check_output(command, shell=True)
+        text = subprocess.check_output(command, shell=True, cwd=root_dir())
         text = text.decode('utf8')
         text = text.split('\n', 1)[0]
         text = text.split(' ', 1)[0]
         return text
     current = get_id('git show --pretty=oneline')
     origin = get_id('git show --pretty=oneline origin')
-    diff = subprocess.check_output('git diff', shell=True).decode('utf8')
+    command = ''
+    diff = subprocess.check_output(f'cd {root_dir()} && git diff', shell=True).decode('utf8')
     return current, origin, diff
 
 
@@ -203,7 +204,7 @@ def sdist():
     # diff relative to origin.
     #
     git_id, git_id_origin, git_diff = git_info()
-    with open('git-info', 'w') as f:
+    with open(f'{root_dir()}/git-info', 'w') as f:
         f.write(f'git-id: {git_id}\n')
         f.write(f'git-id-origin: {git_id_origin}\n')
         f.write(f'git-diff:\n{git_diff}\n')
@@ -219,9 +220,9 @@ def sdist():
                 'git-info',
                 ]
 
-    if not os.path.exists('.git'):
+    if not os.path.exists(f'{root_dir()}/.git'):
         raise Exception(f'Cannot make sdist because not a git checkout')
-    paths = pipcl.git_items( mupdf_dir(), submodules=True)
+    paths = pipcl.git_items( root_dir(), submodules=True)
 
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
@@ -234,7 +235,8 @@ def sdist():
     if use_swig:
         b += '2'
     extra = ' --swig-windows-auto' if windows() else ''
-    command = f'{sys.executable} ./scripts/mupdfwrap.py{extra} -d {build_dir()} -b "{b}"'
+    command = '' if os.getcwd() == root_dir() else f'cd {os.path.relpath(root_dir())} && '
+    command += f'{sys.executable} ./scripts/mupdfwrap.py{extra} -d {build_dir()} -b "{b}"'
     log(f'Running: {command}')
     subprocess.check_call(command, shell=True)
     paths += [
@@ -267,12 +269,20 @@ def build():
     if g_test_minimal:
         # Cut-down for testing.
         log(f'g_test_minimal set so doing minimal build.')
-        os.makedirs(f'{mupdf_dir()}/{build_dir()}', exist_ok=True)
-        path = f'{mupdf_dir()}/{build_dir()}/mupdf.py'
-        with open(path, 'w') as f:
-            f.write('print("This is fake mupdf!")')
-        return [(path, os.path.basename(path))]
-
+        os.makedirs(f'{root_dir()}/{build_dir()}', exist_ok=True)
+        paths = (
+                f'{root_dir()}/{build_dir()}/mupdf.py',
+                f'{root_dir()}/{build_dir()}/_mupdf.pyd',
+                f'{root_dir()}/{build_dir()}/mupdfcpp.dll',
+                )
+        ret = []
+        for path in paths:
+            with open(path, 'w') as f:
+                # Need to make files non-identical, otherwise
+                # check-wheel-contents complains.
+                f.write(f'{path}\n')
+            ret.append( (path, os.path.basename(path)))
+        return ret
     # If we are an sdist, default to not trying to run clang-python - the
     # generated files will already exist, and installing/using clang-python
     # might be tricky.
@@ -290,12 +300,12 @@ def build():
         b += '2'    # Build SWIG-generated source.
     b += '3'        # Build SWIG library _mupdf.so.
 
-    command = (
-            f'cd "{mupdf_dir()}"'
-            f' && "{sys.executable}" ./scripts/mupdfwrap.py'
-                f'{" --swig-windows-auto" if windows() else ""}'
-                f' -d {build_dir()}'
-                f' -b {b}'
+    command = '' if root_dir() == os.getcwd() else f'cd {os.path.relpath(root_dir())} && '
+    command += (
+            f'"{sys.executable}" ./scripts/mupdfwrap.py'
+            f'{" --swig-windows-auto" if windows() else ""}'
+            f' -d {build_dir()}'
+            f' -b {b}'
             )
 
     do_build = os.environ.get('MUPDF_SETUP_DO_BUILD')
@@ -309,10 +319,11 @@ def build():
     # Return generated files to install or copy into wheel.
     #
     if windows():
+        infix = '' if sys.maxsize == 2**31 - 1 else '64'
         names = [
-                'mupdfcpp.dll', # C and C++.
-                '_mupdf.pyd',   # Python internals.
-                'mupdf.py',     # Python.
+                f'mupdfcpp{infix}.dll', # C and C++.
+                '_mupdf.pyd',           # Python internals.
+                'mupdf.py',             # Python.
                 ]
     else:
         names = [
@@ -347,18 +358,113 @@ def clean(all_):
 
 # Setup pipcl.
 #
+description = """
+Summary
+-------
+
+* Python bindings for the MuPDF PDF library.
+* A python module called ``mupdf``.
+* Generated from the MuPDF C++ API, which is itself generated from the MuPDF C API.
+* Provides Python functions that wrap most ``fz_`` and ``pdf_`` functions.
+* Provides Python classes that wrap most ``fz_`` and ``pdf_`` structs.
+
+  * Class methods provide access to most of the underlying C API functions (except for functions that don't take struct args such as ``fz_strlcpy()``).
+* MuPDF's ``setjmp``/``longjmp`` exceptions are converted to Python exceptions.
+* Functions and methods do not take ``fz_context`` arguments. (Automatically-generated per-thread contexts are used internally.)
+* Wrapper classes automatically handle reference counting of the underlying structs (with internal calls to ``fz_keep_*()`` and ``fz_drop_*()``).
+* Provides a small number of extensions beyond the basic C API:
+
+  * Some generated classes have extra support for iteration.
+  * Some custom class methods and constructors.
+  * Simple 'POD' structs have ``__str__()`` methods, for example ``mupdf.Rect`` is represented like: ``(x0=90.51 y0=160.65 x1=501.39 y1=215.6)``.
+
+Example usage
+-------------
+
+Minimal Python code that uses the ``mupdf`` module:
+
+::
+
+    import mupdf
+    document = mupdf.Document('foo.pdf')
+
+
+A simple example Python test script (run by ``scripts/mupdfwrap.py -t``) is:
+
+* ``scripts/mupdfwrap_test.py``
+
+More detailed usage of the Python API can be found in:
+
+* ``scripts/mutool.py``
+* ``scripts/mutool_draw.py``
+
+Here is some example code that shows all available information about document's Stext blocks, lines and characters:
+
+::
+
+    #!/usr/bin/env python3
+
+    import mupdf
+
+    def show_stext(document):
+        '''
+        Shows all available information about Stext blocks, lines and characters.
+        '''
+        for p in range(document.count_pages()):
+            page = document.load_page(p)
+            stextpage = mupdf.StextPage(page, mupdf.StextOptions())
+            for block in stextpage:
+                block_ = block.m_internal
+                log(f'block: type={block_.type} bbox={block_.bbox}')
+                for line in block:
+                    line_ = line.m_internal
+                    log(f'    line: wmode={line_.wmode}'
+                            + f' dir={line_.dir}'
+                            + f' bbox={line_.bbox}'
+                            )
+                    for char in line:
+                        char_ = char.m_internal
+                        log(f'        char: {chr(char_.c)!r} c={char_.c:4} color={char_.color}'
+                                + f' origin={char_.origin}'
+                                + f' quad={char_.quad}'
+                                + f' size={char_.size:6.2f}'
+                                + f' font=('
+                                    +  f'is_mono={char_.font.flags.is_mono}'
+                                    + f' is_bold={char_.font.flags.is_bold}'
+                                    + f' is_italic={char_.font.flags.is_italic}'
+                                    + f' ft_substitute={char_.font.flags.ft_substitute}'
+                                    + f' ft_stretch={char_.font.flags.ft_stretch}'
+                                    + f' fake_bold={char_.font.flags.fake_bold}'
+                                    + f' fake_italic={char_.font.flags.fake_italic}'
+                                    + f' has_opentype={char_.font.flags.has_opentype}'
+                                    + f' invalid_bbox={char_.font.flags.invalid_bbox}'
+                                    + f' name={char_.font.name}'
+                                    + f')'
+                                )
+
+    document = mupdf.Document('foo.pdf')
+    show_stext(document)
+
+More information
+----------------
+
+https://twiki.ghostscript.com/do/view/Main/MuPDFWrap
+
+"""
+
 mupdf_package = pipcl.Package(
         name = 'mupdf',
         version = mupdf_version(),
-        summary = 'Python bindings for MuPDF library',
-        description = 'Python bindings for MuPDF library',
+        root = root_dir(),
+        summary = 'Python bindings for MuPDF library.',
+        description = description,
         classifiers = [
                 'Development Status :: 4 - Beta',
                 'Intended Audience :: Developers',
                 'License :: OSI Approved :: GNU Affero General Public License v3',
                 'Programming Language :: Python :: 3',
                 ],
-        author = 'Artifex Software, Inc',
+        author = 'Artifex Software, Inc.',
         author_email = 'support@artifex.com',
         url_docs = 'https://twiki.ghostscript.com/do/view/Main/MuPDFWrap/',
         url_home = 'https://mupdf.com/',

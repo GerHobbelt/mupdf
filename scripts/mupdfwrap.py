@@ -315,14 +315,15 @@ Windows builds:
 
         The MuPDF DLL itself is built with FZ_DLL predefined.
 
-    There is no separate C library, instead the C and C++ API are both in
-    mupdfcpp.dll, which is built by running devenv on platform/win32/mupdf.sln.
+    DLLs:
 
-    The Python SWIG internals are in _mupdf.pyd which, despite the name, is a
-    standard Windows DLL. Unlike mupdfcpp.dll it needs to be built slightly
-    differently depending on which installed Python it will be using, so it is
-    currently built by running Windows compiler (cl.exe) and linker (link.exe)
-    directly.
+        There is no separate C library, instead the C and C++ API are
+        both in mupdfcpp.dll, which is built by running devenv on
+        platform/win32/mupdf.sln.
+
+        The Python SWIG library is called _mupdf.pyd which,
+        despite the name, is a standard Windows DLL, built from
+        platform/python/mupdfcpp_swig.cpp.
 
     DLL export of functions and data:
 
@@ -344,27 +345,23 @@ Windows builds:
         C functions with FZ_FUNCTION, but this is required for C++ functions
         otherwise we get unresolved symbols when building MuPDF client code.
 
+    Building the DLLs:
 
-Python packaging test:
+        We build Windows binaries by running devenv.com directly. As of
+        2021-05-17 the location of devenv.com is hard-coded in this Python
+        script.
 
-    The --py-package-* options test various aspects of Python packaging.
+        Building _mupdf.pyd is tricky because it needs to be built with a
+        specific Pyhthon.h and linked with a specific python.lib. This is
+        done by setting environmental variables MUPDF_PYTHON_INCLUDE_PATH and
+        MUPDF_PYTHON_LIBRARY_PATH when running devenv.com, which are referenced
+        by platform/win32/mupdfpyswig.vcxproj. Thus one cannot easily build
+        _mupdf.pyd directly from the Visual Studio GUI.
 
-    The main test is to run
-
-        ./scripts/mupdfwrap.py --py-package-create-testupload
-
-    And then after waiting a few minutes for the pypi server to update its
-    state, run:
-
-        ./scripts/mupdfwrap.py --py-package-create-testdownload-test
-
-    This creates and uploads an sdist to the test.pypi.org server, then does a
-    'pip install mupdf' in a venv followed by running scripts/mupdfwrap_test.py
-    to check basic operation of the installed package.
-
-    Note that installing the mupdf package takes a few minutes because it has
-    to build the C, C++ and Python libraries.
-
+        [There is some older code that builds _mupdf.pyd by running the Windows
+        compiler and linker cl.exe and link.exe directly, which avoids the
+        complications of going via devenv, at the expense of needing to know
+        where cl.exe and link.exe are.]
 
 Usage:
 
@@ -474,6 +471,13 @@ Usage:
                 -d build/shared-debug
                 -d build/shared-release
 
+            On Windows one can specify the CPU and Python version; we then
+            use 'py -0f' to find the matching installed Python along with its
+            Python.h and python.lib. For example:
+
+                -d build/shared-release-x32-py3.8
+                -d build/shared-release-x64-py3.9
+
         --doc <languages>
             Generates documentation for the different APIs.
 
@@ -488,72 +492,6 @@ Usage:
                 python
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
-
-        --py-package-create-wheel-test [<args>] <cpu> <python-version>
-            args:
-                -b 0 | 1
-                    Whether to do a build or not. Default is 1.
-            cpu:
-                'x32' or 'x64'. If '.' or '' we use current Python.
-            python-version
-                E.g. '3.8'. If '.' or '' we use current Python.
-
-            Checks we can create a wheel, and checks it is ok with
-            check-wheel-contents.
-
-        --py-package-create-sdist
-            Creates Python sdist in dist/.
-
-        --py-package-create-sdist-install-test
-            Creates local sdist, installs into fresh Python venv using pip, and
-            checks it runs with mupdfwrap_test.py.
-
-        --py-package-testupload
-            Creates sdist and uploads to https://test.pypi.org/.
-
-            See uploaded sdists:
-                https://test.pypi.org/project/mupdf/
-                https://test.pypi.org/simple/mupdf/
-
-        --py-package-testdownload
-            Installs latest mupdf from https://test.pypi.org/ into venv and tests
-            with scripts/mupdfwrap.py.
-
-        --py-package-test-windows-wheels
-            Checks that 'pip install mupdf' works for all supported combinations
-            of cpu and python version.
-
-            Useful as a test after --py-package-upload-all.
-
-        --py-package-upload
-            Uploads latest mupdf to pypi.org.
-
-        --py-package-download
-            Installs latest mupdf with 'pip install mupdf' into venv and tests
-            with scripts/mupdfwrap.py.
-
-        --py-package-sdist-install
-            Create sdist and use pip to install directly, and test with
-            scripts/mupdfwrap_test.py.
-
-        --py-package-sdist-wheel-install
-            Create sdist and use pip to install via a wheel, and test with
-            scripts/mupdfwrap_test.py.
-
-        --py-package-upload-all [-v <version>] <upload>
-            Windows only.
-
-            Creates sdist and all possible wheels and uploads to PyPi.
-
-            version:
-                If specified, we force created wheels to have
-                the specified version and don't create/upload
-                sdist. E.g. "1.18.0.20210330.1800".
-            upload:
-                'pypi': upload to pypi.org.
-                'testpypi': upload to test.pypi.org.
-                '': do not upload.
-                '.': do not upload.
 
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
@@ -6344,7 +6282,7 @@ class BuildDirs:
             assert m, f'Failed to parse dir_so={self.dir_so!r} - should be *-x32|x64-pyA.B'
             self.cpu = Cpu( m.group(2))
             self.python_version = m.group(4)
-            #log(f'cpu={self.cpu} python_version={self.python_version} dir_so={dir_so}')
+            #log('{self.cpu=} {self.python_version=} {dir_so=}')
         else:
             # Use Python we are running under.
             self.cpu = Cpu(cpu_name())
@@ -6438,6 +6376,7 @@ def find_python( cpu, version=None):
             assert os.path.exists( path2)
             path = path2
 
+        jlib.log('{cpu=} {version=}: returning {path=} {version=} {root=} {cpu=}')
         return path, version, root, cpu
 
     raise Exception( f'Failed to find python matching cpu={cpu}. Run "py -0p" to see available pythons')
@@ -6580,12 +6519,6 @@ def make_wheel( do_build, cpu=None, python_version=None, upload=False, version=N
 
 def main():
 
-    # Set up behaviour of jlib.log().
-    #
-    jlib.g_log_prefixes.append( jlib.LogPrefixTime( time_=False, elapsed=True))
-    jlib.g_log_prefixes.append( jlib.g_log_prefix_scopes)
-    jlib.g_log_prefixes.append( jlib.LogPrefixFileLine())
-
     # Set default build directory. Can br overridden by '-d'.
     #
     build_dirs = BuildDirs()
@@ -6667,16 +6600,37 @@ def main():
                             assert not flags.endswith('/')
                             #if flags.endswith('/'):    flags = flags[:-1]
                             flags = flags.split('-')
+                            assert prefix.endswith('-')
+                            actual_build_dir = prefix[:-1]
                             for flag in flags:
-                                if 0: pass   # lgtm [py/unreachable-statement]
-                                elif flag == 'debug':   command += ' build=debug'
-                                elif flag == 'release': command += ' build=release'
-                                elif flag == 'memento': command += ' build=memento'
-                                elif flag == 'extract': command += ' extract=yes'
+                                if flag in ('x32', 'x64') or flag.startswith('py'):
+                                    # setup.py puts cpu and python version
+                                    # elements into the build directory name
+                                    # when creating wheels; we need to ignore
+                                    # them.
+                                    pass
                                 else:
-                                    raise Exception(f'Unrecognised flag {flag!r} in {flags!r} in {build_dirs.dir_so!r}')
+                                    if 0: pass  # lgtm [py/unreachable-statement]
+                                    elif flag == 'debug':   command += ' build=debug'
+                                    elif flag == 'release': command += ' build=release'
+                                    elif flag == 'memento': command += ' build=memento'
+                                    elif flag == 'extract': command += ' extract=yes'
+                                    else:
+                                        raise Exception(f'Unrecognised flag {flag!r} in {flags!r} in {build_dirs.dir_so!r}')
+                                    actual_build_dir += f'-{flag}'
 
                             jlib.system( command, prefix=jlib.log_text(), out='log', verbose=1)
+
+                            if actual_build_dir != build_dirs.dir_so:
+                                # This happens when we are being run by
+                                # setup.py - it it might specify '-d
+                                # build/shared-release-x64-py3.8' (which
+                                # will be put into build_dirs.dir_so) but
+                                # the above 'make' command will create
+                                # build/shared-release/libmupdf.so, so we need
+                                # to copy into build/shared-release-x64-py3.8/.
+                                #
+                                jlib.copy( f'{actual_build_dir}/libmupdf.so', f'{build_dirs.dir_so}/libmupdf.so', verbose=1)
 
                         elif action == '0':
                             # Generate C++ code that wraps the fz_* API.
@@ -6782,9 +6736,11 @@ def main():
                                         )
                                 jlib.system(command, verbose=1, out='log')
 
-                                log(f'Copying mupdfcpp.dll to: {build_dirs.dir_so}')
-                                os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp.dll', f'{build_dirs.dir_so}/mupdfcpp.dll')
+                                jlib.copy(
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp{build_dirs.cpu.windows_suffix}.dll',
+                                        f'{build_dirs.dir_so}/',
+                                        verbose=1,
+                                        )
 
                             else:
                                 jlib.log( 'Compiling generated C++ source code to create libmupdfcpp.so ...')
@@ -6843,6 +6799,59 @@ def main():
                             jlib.log( 'Compiling/linking generated Python module source code to create _mupdf.so ...')
 
                             if g_windows:
+                                # We run Windows compiler and linker manually;
+                                # could probably add a project to mupdf.sln
+                                # instead and build it with devenv.exe, but
+                                # would have to hack things to pass in the
+                                # appropriate python directory.
+                                #
+                                python_path, python_version, python_root, cpu = find_python(
+                                        build_dirs.cpu,
+                                        build_dirs.python_version,
+                                        )
+                                log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
+
+                                py_root = python_root.replace('\\', '/')
+                                env_extra = {
+                                        'MUPDF_PYTHON_INCLUDE_PATH': f'{py_root}/include',
+                                        'MUPDF_PYTHON_LIBRARY_PATH': f'{py_root}/libs',
+                                        }
+                                jlib.log('{env_extra=}')
+
+                                # The swig-generated .cpp file must exist at
+                                # this point.
+                                #
+                                cpp_path = 'platform/python/mupdfcpp_swig.cpp'
+                                assert os.path.exists(cpp_path), f'SWIG-generated file does not exist: {cpp_path}'
+
+                                # We need to update mtime of the .cpp file to
+                                # force recompile and link, because we run
+                                # devenv with different environmental variables
+                                # depending on the Python for which we are
+                                # building.
+                                #
+                                # [Using /Rebuild or /Clean appears to clean
+                                # the entire solution even if we specify
+                                # /Project.]
+                                #
+                                os.utime(cpp_path)
+
+                                jlib.log('Building mupdfpyswig project')
+                                command = (
+                                        f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                        f' platform/win32/mupdfpyswig.sln'
+                                        f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
+                                        f' /Project mupdfpyswig'
+                                        )
+                                jlib.system(command, verbose=1, out='log', env_extra=env_extra)
+
+                                jlib.copy(
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfpyswig.dll',
+                                        f'{build_dirs.dir_so}/_mupdf.pyd',
+                                        verbose=1,
+                                        )
+
+                            elif g_windows:
                                 # We run Windows compiler and linker manually;
                                 # could probably add a project to mupdf.sln
                                 # instead and build it with devenv.exe, but
@@ -6940,11 +6949,11 @@ def main():
                                 # undocumented. Discovered this at:
                                 # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
                                 #
-                                from_ = f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll'
-                                to_ = f'{build_dirs.dir_so}/_mupdf.pyd'
-                                log( 'Copying {from_} to {to_}')
-                                os.makedirs( build_dirs.dir_so, exist_ok=True)
-                                shutil.copy2( from_, to_)
+                                jlib.copy(
+                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll',
+                                        f'{build_dirs.dir_so}/_mupdf.pyd',
+                                        verbose=1,
+                                        )
 
                             else:
                                 # We use g++ debug/release flags as implied by
@@ -6959,10 +6968,34 @@ def main():
                                 # libmupdfcpp.so and libmupdf.sp.]
                                 #
 
-                                # Use pkg-config to find compile/link flags for building with python.
-                                python_includes = jlib.system( 'pkg-config --cflags python3', out='return')
-                                python_link     = jlib.system( 'pkg-config --libs python3', out='return')
-                                libpython_so    = None
+                                if 1:
+                                    # We use python-config which appears to
+                                    # work better than pkg-config because
+                                    # it copes with multiple installed
+                                    # python's, e.g. manylinux_2014's
+                                    # /opt/python/cp*-cp*/bin/python*.
+                                    #
+                                    # But... it seems that we should not
+                                    # attempt to specify libpython on the link
+                                    # command. The manylinkux docker containers
+                                    # don't actually contain libpython.so, and
+                                    # it seems that this deliberate. And the
+                                    # link command runs ok.
+                                    #
+                                    python_exe = os.path.realpath( sys.executable)
+                                    python_config = f'{python_exe}-config'
+                                    # --cflags gives things like
+                                    # -Wno-unused-result -g etc, so we just use
+                                    # --includes.
+                                    python_includes = jlib.system( f'{python_config} --includes', out='return')
+                                    #python_link     = jlib.system( f'{python_config} --ldflags', out='return')
+                                    python_link = ''
+                                    libpython_so    = None
+                                else:
+                                    # Use pkg-config to find compile/link flags for building with python.
+                                    python_includes = jlib.system( 'pkg-config --cflags python3', out='return')
+                                    python_link     = jlib.system( 'pkg-config --libs python3', out='return')
+                                    libpython_so    = None
 
                                 # These are the input files to our g++ command:
                                 #
@@ -7126,279 +7159,7 @@ def main():
             elif arg == '--dir-so' or arg == '-d':
                 d = args.next()
                 build_dirs.set_dir_so( d)
-
-            elif arg == '--py-package-create-wheel-test':
-                do_build = True
-                while 1:
-                    a = args.next()
-                    if not a.startswith('-'):
-                        break
-                    if a == '-b':
-                        do_build = int(args.next())
-                    else:
-                        assert 0, f'Unrecognised arg after {arg}: {a}'
-                cpu = a
-                python_version = args.next()
-                if cpu in ('', '.'): cpu = None
-                if python_version in ('', '.'): python_version = None
-                log(f'cpu={cpu} python_version={python_version}')
-
-                wheel_path = make_wheel( do_build, cpu, python_version)
-                log('{wheel_path=}')
-
-            elif arg == '--py-package-create-sdist':
-                jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && ./setup.py sdist'
-                        + f' && ls -lh {build_dirs.dir_mupdf}/dist'
-                        ,
-                        verbose=1,
-                        out='log',
-                        )
-
-            elif arg == '--py-package-create-sdist-install-test':
-                jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r dist || true)'
-                        + f' && ./setup.py sdist'
-                        + f' && ls -lh {build_dirs.dir_mupdf}/dist'
-                        ,
-                        prefix='py_package_createinstall: ',
-                        verbose=1,
-                        out='log',
-                        )
-                mupdf_sdists = glob.glob('dist/mupdf-*.tar.gz')
-                assert(len(mupdf_sdists) == 1)
-                mupdf_sdist = mupdf_sdists[-1]
-                jlib.log('{mupdf_sdist=}')
-                jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r pylocal-create-install || true)'
-                        + f' && python3 -m venv pylocal-create-install'
-                        + f' && . pylocal-create-install/bin/activate'
-                        + f' && python -m pip install --upgrade pip'
-                        + f' && pip {"-vvv"*1} install {mupdf_sdist}'
-                        + f' && python scripts/mupdfwrap_test.py'
-                        + f' && deactivate'
-                        ,
-                        prefix='py_package_createinstall: ',
-                        verbose=1,
-                        out='log',
-                        )
-
-            elif arg == '--py-package-testupload':
-                # Use os.system because we need user input.
-                command = ( f'('
-                        + f' cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r dist pylocal-testupload || true)'
-                        + f' && ./setup.py sdist'
-                        + f' && python3 -m venv pylocal-testupload'
-                        + f' && . pylocal-testupload/bin/activate'
-                        + f' && python -m pip install --upgrade twine'
-                        + f' && python -m twine upload --repository testpypi dist/*'
-                        + f' && deactivate'
-                        + f') 2>&1'
-                        )
-                jlib.log( 'py_package_testupload(): Uploading sdist with twine. Use username="__token__", psasword="pypi-...".')
-                jlib.log( 'py_package_testupload(): Running: {command}')
-                e = os.system(command)
-                jlib.log( '{e=}')
-                assert e == 0
-
-            elif arg == '--py-package-testdownload':
-                # For some reason on Linux, if we are in the mupdf directory, 'pip install
-                # mupdf' says:
-                #
-                #   Requirement already satisfied: mupdf in /home/jules/artifex-remote/mupdf (1.18.0)
-                #
-                # And doesn't attempt to install mupdf.
-                #
-                # So we use a sub-directory py-package-testdownload.
-                #
-                jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r py-package-testdownload || true)'
-                        + f' && mkdir py-package-testdownload'
-                        + f' && cd py-package-testdownload'
-                        + f' && python3 -m venv pylocal'
-                        + f' && . pylocal/bin/activate'
-                        + f' && python -m pip install --upgrade pip'
-                        #+ f' && python -m pip install wheel'
-                        + f' && pip -vvvv install --index-url https://test.pypi.org/simple mupdf'
-                        + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
-                        + f' && deactivate',
-                        prefix='py-package-testdownload: ',
-                        verbose=1,
-                        out='log',
-                        )
-
-            elif arg == '--py-package-upload':
-                # Use os.system because we need user input.
-                command = ( f'('
-                        + f' cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r dist pylocal-upload || true)'
-                        + f' && ./setup.py sdist'
-                        + f' && python3 -m venv pylocal-upload'
-                        + f' && . pylocal-upload/bin/activate'
-                        + f' && python -m pip install --upgrade twine'
-                        + f' && python -m twine upload dist/*'
-                        + f' && deactivate'
-                        + f') 2>&1'
-                        )
-                jlib.log( '--py-package-upload(): Uploading sdist with twine.')
-                jlib.log( '--py-package-upload(): Running: {command}')
-                e = os.system(command)
-                jlib.log( '{e=}')
-                assert e == 0
-
-            elif arg == '--py-package-download':
-                jlib.system( f'cd {build_dirs.dir_mupdf}'
-                        + f' && (rm -r py-package-download || true)'
-                        + f' && mkdir py-package-download'
-                        + f' && cd py-package-download'
-                        + f' && python3 -m venv pylocal'
-                        + f' && . pylocal/bin/activate'
-                        + f' && python -m pip install --upgrade pip'
-                        + f' && pip -vvvv install mupdf'
-                        + f' && python {build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py'
-                        + f' && deactivate',
-                        prefix='py-package-download: ',
-                        verbose=1,
-                        out='log',
-                        )
-
-            elif arg == '--py-package-sdist-install':
-                jlib.system('true'
-                        f' && (rm -r pylocal-pep517 dist || true)'
-                        f' && python3 -m venv pylocal-pep517'
-                        f' && . pylocal-pep517/bin/activate'
-                        f' && pip install --upgrade pip'
-                        f' && pip install clang'
-                        f' && ./setup.py sdist'
-                        f' && ls -ld dist/*'
-                        f' && pip install dist/* '
-                        f' && ./scripts/mupdfwrap_test.py'
-                        f' && deactivate'
-                        ,
-                        verbose=1,
-                        out='log',
-                        )
-
-            elif arg == '--py-package-sdist-wheel-install':
-                jlib.system('true'
-                        f' && (rm -r pylocal-pep517 dist wheels || true)'
-                        f' && python3 -m venv pylocal-pep517'
-                        f' && . pylocal-pep517/bin/activate'
-                        f' && pip install --upgrade pip'
-                        f' && pip install clang'
-                        f' && ./setup.py sdist'
-                        f' && ls -ld dist/*'
-                        f' && pip -vvv wheel --wheel-dir wheels dist/* '
-                        f' && ls -ld wheels/*'
-                        f' && pip -vvv install wheels/*'
-                        f' && ./scripts/mupdfwrap_test.py'
-                        f' && deactivate'
-                        ,
-                        verbose=1,
-                        out='log',
-                        )
-
-            elif arg == '--py-package-test-windows-wheels':
-                if g_windows:
-                    for cpu in '32', '64':
-                        for python_version in ('3.8', '3.9'):
-                            py = f'py -{python_version}-{cpu}'
-                            pylocal = f'pylocal-test-wheel-x{cpu}-py{python_version}'
-                            jlib.remove(pylocal)
-                            command = ('cmd.exe /c "true'
-                                    f'&&{py} -m venv {pylocal}'
-                                    f'&&{pylocal}\\Scripts\\activate.bat'
-                                    f'&&pip install -i https://test.pypi.org/simple mupdf'
-                                    f'&&python scripts/mupdfwrap_test.py'
-                                    f'"'
-                                    )
-                            jlib.system(command, prefix=f'x{cpu}-{python_version}: ', verbose=1, out='log')
-
-
-            elif arg == '--py-package-upload-all':
-                #in_sdist = os.path.exists(f'{build_dirs.dir_mupdf}/PKG-INFO')
-                #if not in_sdist:
-                #    raise Exception( f'Refusing to generate and upload wheels because we are not an sdist, so individual wheels will have different date/time version number')
-                version = None
-                do_build = True
-                while 1:
-                    a = args.next()
-                    if not a.startswith('-'):
-                        upload_to = a
-                        break
-                    elif a == '-b':
-                        do_build = int(args.next())
-                    elif a == '-v':
-                        version = args.next()
-                    else:
-                        assert 0, f'Unexpected after {arg}: {a!r}'
-                assert upload_to in ('', '.', 'pypi', 'testpypi'), \
-                        f'Unrecognised arg should be "", ".", "pypi" or "testpypi": {upload_to}'
-
-                if version:
-                    log( f'Not creating sdist because version was specified: {version}')
-                    sdist = None
-                else:
-                    # Create sdist and remember its version when we create wheels.
-                    jlib.remove( 'dist')
-                    jlib.system( './setup.py sdist', out='log', prefix='sdist: ')
-                    sdist = glob.glob( 'dist/*')
-                    assert len(sdist) == 1, f'sdist={sdist}'
-                    sdist = sdist[0]
-                    m = re.match( '^mupdf-(.*)[.]tar[.]gz$', os.path.basename(sdist))
-                    assert(m)
-                    version = m.group(1)
-                    log( '{version=}')
-
-                # Create wheels.
-                wheels = []
-                if g_windows:
-                    for cpu in 'x32', 'x64':
-                        for python_version in ('3.8', '3.9'):
-                            wheel = make_wheel(
-                                    do_build=do_build,
-                                    cpu=cpu,
-                                    python_version=python_version,
-                                    upload=False,
-                                    version=version,
-                                    )
-                            wheels.append( wheel)
-                else:
-                    assert 0, 'Not uploading Unix wheel.'
-                    wheel = make_wheel( do_build=do_build, upload=False)
-                    wheels.append( wheel)
-
-                if upload_to in ('pypi', 'testpypi'):
-                    pylocal = f'pylocal-wheel-upload'
-                    shutil.rmtree(pylocal, ignore_errors=True)
-                    commands = []
-                    if g_windows:
-                        commands.append( f'py -m venv {pylocal}')
-                        commands.append( f'{pylocal}\\Scripts\\activate.bat')
-                    else:
-                        commands.append( f'python -m venv {pylocal}')
-                        commands.append( f'. {pylocal}/bin/activate')
-                    commands.append( f'python -m pip install --upgrade twine')
-
-                    c = f'python -m twine upload '
-                    if upload_to == 'testpypi':
-                        c += '--repository testpypi '
-                    if sdist:
-                        c += f'{sdist} '
-                    c += ' '.join(wheels)
-                    commands.append( c)
-
-                    if g_windows:
-                        command = '&&'.join(commands)
-                        command = 'cmd.exe /c "' + command + '"'
-                    else:
-                        command = ' && '.join(commands)
-
-                    # We use os.system() because twine upload needs user input of password.
-                    #
-                    log( 'Running: {command}')
-                    os.system( command)
+                log('Have set {build_dirs=}')
 
             elif arg == '--py-package-multi':
                 # Investigating different combinations of pip, pyproject.toml,
@@ -7579,28 +7340,41 @@ def main():
 
                 # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
                 # test .py programme can load mupdf.py and _mupdf.so.
+                env_extra = {}
+                command_prefix = ''
+                log('{build_dirs=}')
                 if g_windows:
                     # On Windows, it seems that 'py' runs the default
                     # python. Also, Windows appears to be able to find
-                    # _mupdf.pyd in same directory as mupdf.py.#
+                    # _mupdf.pyd in same directory as mupdf.py.
                     #
                     python_path, python_version, python_root, cpu = find_python( build_dirs.cpu, build_dirs.python_version)
                     python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
-                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)} "{python_path}"'
+                    env_extra = {
+                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                            }
+                    command_prefix = f'"{python_path}"'
                 elif g_openbsd:
                     # We have special support to not require LD_LIBRARY_PATH.
-                    command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                    #command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                    env_extra = {
+                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so)
+                            }
                 else:
                     # On Linux it looks like we need to specify
                     # LD_LIBRARY_PATH. fixme: revisit this because these days
                     # jlib.y uses rpath when constructing link commands.
                     #
-                    command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                    env_extra = {
+                            'LD_LIBRARY_PATH': os.path.abspath(build_dirs.dir_so),
+                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                            }
+                    #command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
 
                 log( 'running mupdf_test.py...')
                 command = f'{command_prefix} ./scripts/mupdfwrap_test.py'
                 with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
-                    jlib.system( command, out='log', verbose=1)
+                    jlib.system( command, env_extra=env_extra, out='log', verbose=1)
 
                 # Run mutool.py.
                 #
@@ -7615,10 +7389,7 @@ def main():
                         ):
                     command = f'{command_prefix} {mutool_py} {args2}'
                     log( 'running: {command}')
-                    jlib.system(
-                            f'{command}',
-                            out='log',
-                            )
+                    jlib.system( f'{command}', env_extra=env_extra, out='log', verbose=1)
 
                 log( 'Tests ran ok.')
 
@@ -7653,5 +7424,5 @@ if __name__ == '__main__':
     try:
         main()
     except Exception:
-        print( jlib.exception_info())
+        sys.stderr.write(jlib.exception_info())
         sys.exit(1)

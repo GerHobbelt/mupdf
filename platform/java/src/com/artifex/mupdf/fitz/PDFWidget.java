@@ -159,7 +159,47 @@ public class PDFWidget extends PDFAnnotation
 	public native boolean setChoiceValue(String val);
 
 	/* Signature fields */
-	public native boolean signNative(PKCS7Signer signer, int flags, Image image, String reason, String Location);
+	private static native Pixmap previewSignatureNative(int width, int height, int lang, PKCS7Signer signer, int flags, Image image, String reason, String location);
+	public static Pixmap previewSignature(int width, int height, int lang, PKCS7Signer signer, int flags, Image image, String reason, String location) {
+		return previewSignatureNative(width, height, lang, signer, flags, image, reason, location);
+	}
+	public static Pixmap previewSignature(int width, int height, int lang, PKCS7Signer signer, Image image) {
+		return previewSignatureNative(width, height, lang, signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, image, null, null);
+	}
+	public static Pixmap previewSignature(int width, int height, int lang, PKCS7Signer signer) {
+		return previewSignatureNative(width, height, lang, signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, null, null, null);
+	}
+	public static Pixmap previewSignature(int width, int height, PKCS7Signer signer, Image image) {
+		return previewSignatureNative(width, height, LANGUAGE_UNSET, signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, image, null, null);
+	}
+	public static Pixmap previewSignature(int width, int height, PKCS7Signer signer) {
+		return previewSignatureNative(width, height, LANGUAGE_UNSET, signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, null, null, null);
+	}
+	public Pixmap previewSignature(float dpi, PKCS7Signer signer, int flags, Image image, String reason, String location) {
+		Rect r = getBounds();
+		float scale = dpi / 72.0f;
+		int w = Math.round((r.x1 - r.x0) * scale);
+		int h = Math.round((r.x1 - r.x0) * scale);
+		return previewSignature(w, h, getLanguage(), signer, flags, image, reason, location);
+	}
+	public Pixmap previewSignature(float dpi, PKCS7Signer signer, Image image) {
+		Rect r = getBounds();
+		float scale = dpi / 72.0f;
+		int w = Math.round((r.x1 - r.x0) * scale);
+		int h = Math.round((r.x1 - r.x0) * scale);
+		return previewSignature(w, h, getLanguage(), signer, image);
+	}
+	public Pixmap previewSignature(float dpi, PKCS7Signer signer) {
+		Rect r = getBounds();
+		float scale = dpi / 72.0f;
+		int w = Math.round((r.x1 - r.x0) * scale);
+		int h = Math.round((r.x1 - r.x0) * scale);
+		return previewSignature(w, h, getLanguage(), signer);
+	}
+	private native boolean signNative(PKCS7Signer signer, int flags, Image image, String reason, String location);
+	public boolean sign(PKCS7Signer signer, int flags, Image image, String reason, String location) {
+		return signNative(signer, flags, image, reason, location);
+	}
 	public boolean sign(PKCS7Signer signer, Image image) {
 		return signNative(signer, PDF_SIGNATURE_DEFAULT_APPEARANCE, image, null, null);
 	}
@@ -176,7 +216,7 @@ public class PDFWidget extends PDFAnnotation
 			return false;
 		return !incrementalChangeAfterSigning();
 	}
-	public native PKCS7DesignatedName getDesignatedName(PKCS7Verifier verifier);
+	public native PKCS7DistinguishedName getDistinguishedName(PKCS7Verifier verifier);
 
 	public native int validateSignature();
 	public native void clearSignature();
