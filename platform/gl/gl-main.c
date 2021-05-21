@@ -1604,15 +1604,14 @@ static void load_document(void)
 		if (pdf && trace_file)
 		{
 			trace_action(
-					"tmp = doc.authenticatePassword(\"%s\");\n"
+					"tmp = doc.authenticatePassword(%q);\n"
 					"if (errored == 0 && tmp != %s) {\n"
-					"  print(\"Expected opening PDF with password '%s'%s to succeed.\\n\");\n"
+					"  print(\"Expected opening PDF with password to %s.\\n\");\n"
 					"  errored=%d;\n"
 					"}\n",
 					password,
 					result ? "true" : "false",
-					password,
-					result ? "" : " not",
+					result ? "succeed" : "fail",
 					trace_next_error());
 		}
 
