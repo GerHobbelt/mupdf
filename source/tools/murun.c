@@ -5619,6 +5619,7 @@ static void ffi_PDFAnnotation_getInkList(js_State *J)
 			fz_catch(ctx)
 				rethrow(J);
 			ffi_pushpoint(J, pt);
+			js_setindex(J, -2, k);
 		}
 		js_setindex(J, -2, i);
 	}
@@ -5639,7 +5640,7 @@ static void ffi_PDFAnnotation_setInkList(js_State *J)
 	nv = 0;
 	for (i = 0; i < n; ++i) {
 		js_getindex(J, 1, i);
-		nv += js_getlength(J, -1) / 2;
+		nv += js_getlength(J, -1);
 		js_pop(J, 1);
 	}
 
@@ -5659,9 +5660,11 @@ static void ffi_PDFAnnotation_setInkList(js_State *J)
 	}
 	for (i = v = 0; i < n; ++i) {
 		js_getindex(J, 1, i);
-		counts[i] = js_getlength(J, -1) / 2;
+		counts[i] = js_getlength(J, -1);
 		for (k = 0; k < counts[i]; ++k) {
+			js_getindex(J, -1, k);
 			points[v] = ffi_topoint(J, -1);
+			js_pop(J, 1);
 			++v;
 		}
 		js_pop(J, 1);
