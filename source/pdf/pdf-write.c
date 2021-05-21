@@ -4033,3 +4033,163 @@ fz_new_pdf_writer(fz_context *ctx, const char *path, const char *options)
 	}
 	return wri;
 }
+
+static void
+pdf_fingerprint_file(fz_context *ctx, pdf_document *doc, unsigned char digest[16], int i)
+{
+	fz_md5 state;
+
+	fz_md5_init(&state);
+	fz_md5_update_int64(&state, doc->num_xref_sections);
+	for (; i < doc->num_xref_sections; i++)
+	{
+		pdf_xref_subsec *subsec = doc->xref_sections[i].subsec;
+		fz_md5_update_int64(&state, doc->xref_sections[i].num_objects);
+		while (subsec)
+		{
+			fz_md5_update_int64(&state, subsec->start);
+			fz_md5_update_int64(&state, subsec->len);
+			subsec = subsec->next;
+		}
+	}
+	fz_md5_final(&state, digest);
+}
+
+void pdf_write_journal(fz_context *ctx, pdf_document *doc, fz_output *out)
+{
+	unsigned char digest[16];
+	int i;
+
+	if (!doc || !out)
+		return;
+
+	if (!doc->journal)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't write non-existent journal");
+
+	pdf_fingerprint_file(ctx, doc, digest, doc->num_incremental_sections);
+
+	fz_write_printf(ctx, out, "JOURNAL\n");
+	fz_write_printf(ctx, out, "NIS %d\n", doc->num_incremental_sections);
+	fz_write_printf(ctx, out, "SIZE %ld\n", doc->file_size);
+	fz_write_printf(ctx, out, "FINGERPRINT ");
+	for (i = 0; i < 16; i++)
+		fz_write_printf(ctx, out, "%02x", digest[i]);
+	fz_write_printf(ctx, out, "\n");
+
+	pdf_serialise_journal(ctx, doc, out);
+}
+
+void pdf_save_journal(fz_context *ctx, pdf_document *doc, const char *filename)
+{
+	fz_output *out;
+
+	if (!doc)
+		return;
+
+	out = fz_new_output_with_path(ctx, filename, 0);
+	fz_try(ctx)
+	{
+		pdf_write_journal(ctx, doc, out);
+		fz_close_output(ctx, out);
+	}
+	fz_always(ctx)
+		fz_drop_output(ctx, out);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+void pdf_read_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
+{
+	unsigned char digest[16], read[16];
+	int i, c, d;
+	int nis = 0;
+	int64_t file_size = 0;
+
+	if (!doc || !stm)
+		return;
+
+	if (fz_skip_string(ctx, stm, "JOURNAL\nNIS "))
+		goto syntax;
+
+	while (1)
+	{
+		c = fz_peek_byte(ctx, stm);
+		if (c < '0' || c > '9')
+			break;
+		nis = (nis*10) + c - '0';
+		(void)fz_read_byte(ctx, stm);
+	}
+
+	if (fz_skip_string(ctx, stm, "\nSIZE "))
+		goto syntax;
+
+	while (1)
+	{
+		c = fz_peek_byte(ctx, stm);
+		if (c < '0' || c > '9')
+			break;
+		file_size = (file_size*10) + c - '0';
+		(void)fz_read_byte(ctx, stm);
+	}
+
+	pdf_fingerprint_file(ctx, doc, digest, nis);
+
+	if (fz_skip_string(ctx, stm, "\nFINGERPRINT "))
+		goto syntax;
+	for (i = 0; i < 16; i++)
+	{
+		c = fz_read_byte(ctx, stm);
+		if (c >= '0' && c <= '9')
+			c -= '0';
+		else if (c >= 'a' && c <= 'f')
+			c -= 'a' - 10;
+		else if (c >= 'A' && c <= 'F')
+			c -= 'A' - 10;
+		else
+			goto syntax;
+		d = fz_read_byte(ctx, stm);
+		if (d >= '0' && d <= '9')
+			d -= '0';
+		else if (d >= 'a' && d <= 'f')
+			d -= 'a' - 10;
+		else if (d >= 'A' && d <= 'F')
+			d -= 'A' - 10;
+		else
+			goto syntax;
+		read[i] = (c<<4)|d;
+	}
+	if (memcmp(read, digest, 16) != 0)
+		return;
+
+	if (doc->file_size < file_size)
+		return;
+
+	if (fz_skip_string(ctx, stm, "\n\n"))
+		goto syntax;
+
+	pdf_deserialise_journal(ctx, doc, stm);
+
+	doc->file_size = file_size;
+	doc->num_incremental_sections = nis;
+
+	return;
+
+syntax:
+	fz_throw(ctx, FZ_ERROR_GENERIC, "Bad journal format");
+}
+
+void pdf_load_journal(fz_context *ctx, pdf_document *doc, const char *filename)
+{
+	fz_stream *stm;
+
+	if (!doc)
+		return;
+
+	stm = fz_open_file(ctx, filename);
+	fz_try(ctx)
+		pdf_read_journal(ctx, doc, stm);
+	fz_always(ctx)
+		fz_drop_stream(ctx, stm);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
