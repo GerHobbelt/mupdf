@@ -5927,7 +5927,7 @@ static void ffi_PDFAnnotation_getDefaultAppearance(js_State *J)
 	const char *font = NULL;
 	float size = 0.0f;
 	float color[3] = { 0.0f };
-	int i, n = 0;
+	int n = 0;
 	fz_try(ctx)
 		pdf_annot_default_appearance(ctx, annot, &font, &size, &n, color);
 	fz_catch(ctx)
@@ -5937,11 +5937,10 @@ static void ffi_PDFAnnotation_getDefaultAppearance(js_State *J)
 	js_setproperty(J, -2, "font");
 	js_pushnumber(J, size);
 	js_setproperty(J, -2, "size");
-	js_newarray(J);
-	for (i = 0; i < n && i < (int) nelem(color); ++i) {
-		js_pushnumber(J, color[i]);
-		js_setindex(J, -2, i);
-	}
+	if (n > 0)
+		ffi_pusharray(J, color, n);
+	else
+		js_pushundefined(J);
 	js_setproperty(J, -2, "color");
 }
 
