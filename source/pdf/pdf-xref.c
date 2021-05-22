@@ -874,7 +874,7 @@ int fz_skip_string(fz_context *ctx, fz_stream *stm, const char *str)
  */
 
 static int
-pdf_xref_size_from_old_trailer(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
+pdf_xref_size_from_old_trailer(fz_context *ctx, pdf_document *doc)
 {
 	int len;
 	char *s;
@@ -885,6 +885,7 @@ pdf_xref_size_from_old_trailer(fz_context *ctx, pdf_document *doc, pdf_lexbuf *b
 	int64_t ofs;
 	pdf_obj *trailer = NULL;
 	size_t n;
+	pdf_lexbuf *buf = &doc->lexbuf.base;
 
 	fz_var(trailer);
 
@@ -1027,7 +1028,7 @@ pdf_xref_find_subsection(fz_context *ctx, pdf_document *doc, int start, int len)
 }
 
 static pdf_obj *
-pdf_read_old_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
+pdf_read_old_xref(fz_context *ctx, pdf_document *doc)
 {
 	int start, len, c, i, xref_len, carried;
 	fz_stream *file = doc->file;
@@ -1035,8 +1036,9 @@ pdf_read_old_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
 	pdf_token tok;
 	size_t n;
 	char *s, *e;
+	pdf_lexbuf *buf = &doc->lexbuf.base;
 
-	xref_len = pdf_xref_size_from_old_trailer(ctx, doc, buf);
+	xref_len = pdf_xref_size_from_old_trailer(ctx, doc);
 
 	fz_skip_space(ctx, doc->file);
 	if (fz_skip_string(ctx, doc->file, "xref"))
@@ -1181,7 +1183,7 @@ pdf_read_new_xref_section(fz_context *ctx, pdf_document *doc, fz_stream *stm, in
 
 /* Entered with file locked, remains locked throughout. */
 static pdf_obj *
-pdf_read_new_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
+pdf_read_new_xref(fz_context *ctx, pdf_document *doc)
 {
 	fz_stream *stm = NULL;
 	pdf_obj *trailer = NULL;
@@ -1198,7 +1200,7 @@ pdf_read_new_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
 	fz_try(ctx)
 	{
 		ofs = fz_tell(ctx, doc->file);
-		trailer = pdf_parse_ind_obj(ctx, doc, doc->file, buf, &num, &gen, &stm_ofs, NULL);
+		trailer = pdf_parse_ind_obj(ctx, doc, doc->file, &num, &gen, &stm_ofs, NULL);
 		if (num == 0)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Trailer object number cannot be 0\n");
 	}
@@ -1277,7 +1279,7 @@ pdf_read_new_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
 }
 
 static pdf_obj *
-pdf_read_xref(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *buf)
+pdf_read_xref(fz_context *ctx, pdf_document *doc, int64_t ofs)
 {
 	pdf_obj *trailer;
 	int c;
@@ -1289,9 +1291,9 @@ pdf_read_xref(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *buf)
 
 	c = fz_peek_byte(ctx, doc->file);
 	if (c == 'x')
-		trailer = pdf_read_old_xref(ctx, doc, buf);
+		trailer = pdf_read_old_xref(ctx, doc);
 	else if (isdigit(c))
-		trailer = pdf_read_new_xref(ctx, doc, buf);
+		trailer = pdf_read_new_xref(ctx, doc);
 	else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot recognize xref format");
 
@@ -1299,14 +1301,14 @@ pdf_read_xref(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *buf)
 }
 
 static int64_t
-read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *buf)
+read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs)
 {
 	pdf_obj *trailer = NULL;
 	pdf_obj *prevobj;
 	int64_t xrefstmofs = 0;
 	int64_t prevofs = 0;
 
-	trailer = pdf_read_xref(ctx, doc, ofs, buf);
+	trailer = pdf_read_xref(ctx, doc, ofs);
 	fz_try(ctx)
 	{
 		pdf_set_populating_xref_trailer(ctx, doc, trailer);
@@ -1324,7 +1326,7 @@ read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *b
 				follow any Prev tag therein, as specified on Page 108 of the PDF reference
 				1.7
 			*/
-			pdf_drop_obj(ctx, pdf_read_xref(ctx, doc, xrefstmofs, buf));
+			pdf_drop_obj(ctx, pdf_read_xref(ctx, doc, xrefstmofs));
 		}
 
 		prevobj = pdf_dict_get(ctx, trailer, PDF_NAME(Prev));
@@ -1344,7 +1346,7 @@ read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *b
 }
 
 static void
-pdf_read_xref_sections(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexbuf *buf, int read_previous)
+pdf_read_xref_sections(fz_context *ctx, pdf_document *doc, int64_t ofs, int read_previous)
 {
 	int i, len, cap;
 	int64_t *offsets;
@@ -1375,7 +1377,7 @@ pdf_read_xref_sections(fz_context *ctx, pdf_document *doc, int64_t ofs, pdf_lexb
 			offsets[len++] = ofs;
 
 			pdf_populate_next_xref_level(ctx, doc);
-			ofs = read_xref_section(ctx, doc, ofs, buf);
+			ofs = read_xref_section(ctx, doc, ofs);
 			if (!read_previous)
 				break;
 		}
@@ -1423,7 +1425,7 @@ pdf_prime_xref_index(fz_context *ctx, pdf_document *doc)
  */
 
 static void
-pdf_load_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
+pdf_load_xref(fz_context *ctx, pdf_document *doc)
 {
 	int i;
 	int xref_len;
@@ -1431,7 +1433,7 @@ pdf_load_xref(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf)
 
 	pdf_read_start_xref(ctx, doc);
 
-	pdf_read_xref_sections(ctx, doc, doc->startxref, buf, 1);
+	pdf_read_xref_sections(ctx, doc, doc->startxref, 1);
 
 	if (pdf_xref_len(ctx, doc) == 0)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "found xref was empty");
@@ -1488,7 +1490,7 @@ pdf_check_linear(fz_context *ctx, pdf_document *doc)
 
 	fz_try(ctx)
 	{
-		dict = pdf_parse_ind_obj(ctx, doc, doc->file, &doc->lexbuf.base, &num, &gen, &stmofs, NULL);
+		dict = pdf_parse_ind_obj(ctx, doc, doc->file, &num, &gen, &stmofs, NULL);
 		if (!pdf_is_dict(ctx, dict))
 			break;
 		o = pdf_dict_get(ctx, dict, PDF_NAME(Linearized));
@@ -1522,7 +1524,7 @@ pdf_load_linear(fz_context *ctx, pdf_document *doc)
 	{
 		pdf_xref_entry *entry;
 
-		dict = pdf_parse_ind_obj(ctx, doc, doc->file, &doc->lexbuf.base, &num, &gen, &stmofs, NULL);
+		dict = pdf_parse_ind_obj(ctx, doc, doc->file, &num, &gen, &stmofs, NULL);
 		if (!pdf_is_dict(ctx, dict))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read linearized dictionary");
 		o = pdf_dict_get(ctx, dict, PDF_NAME(Linearized));
@@ -1536,7 +1538,7 @@ pdf_load_linear(fz_context *ctx, pdf_document *doc)
 		if (len != doc->file_length)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "File has been updated since linearization");
 
-		pdf_read_xref_sections(ctx, doc, fz_tell(ctx, doc->file), &doc->lexbuf.base, 0);
+		pdf_read_xref_sections(ctx, doc, fz_tell(ctx, doc->file), 0);
 
 		doc->linear_page_count = pdf_dict_get_int(ctx, dict, PDF_NAME(N));
 		doc->linear_page_refs = fz_realloc_array(ctx, doc->linear_page_refs, doc->linear_page_count, pdf_obj *);
@@ -1608,7 +1610,7 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 		 * and has set us back to non-progressive mode), load normally.
 		 */
 		if (!doc->file_reading_linearly)
-			pdf_load_xref(ctx, doc, &doc->lexbuf.base);
+			pdf_load_xref(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
@@ -2186,7 +2188,7 @@ pdf_load_unencrypted_object(fz_context *ctx, pdf_document *doc, int num)
 	if (x->type == 'n')
 	{
 		fz_seek(ctx, doc->file, x->ofs, SEEK_SET);
-		return pdf_parse_ind_obj(ctx, doc, doc->file, &doc->lexbuf.base, NULL, NULL, NULL, NULL);
+		return pdf_parse_ind_obj(ctx, doc, doc->file, NULL, NULL, NULL, NULL);
 	}
 	return NULL;
 }
@@ -2221,7 +2223,7 @@ object_updated:
 
 		fz_try(ctx)
 		{
-			x->obj = pdf_parse_ind_obj(ctx, doc, doc->file, &doc->lexbuf.base,
+			x->obj = pdf_parse_ind_obj(ctx, doc, doc->file,
 					&rnum, &rgen, &x->stm_ofs, &try_repair);
 		}
 		fz_catch(ctx)
@@ -3017,7 +3019,6 @@ pdf_load_hint_object(fz_context *ctx, pdf_document *doc)
 
 pdf_obj *pdf_progressive_advance(fz_context *ctx, pdf_document *doc, int pagenum)
 {
-	pdf_lexbuf *buf = &doc->lexbuf.base;
 	int curr_pos;
 	pdf_obj *page = NULL;
 
@@ -3057,7 +3058,7 @@ pdf_obj *pdf_progressive_advance(fz_context *ctx, pdf_document *doc, int pagenum
 			pdf_obj *catalog;
 			pdf_obj *pages;
 			doc->linear_pos = doc->file_length;
-			pdf_load_xref(ctx, doc, buf);
+			pdf_load_xref(ctx, doc);
 			catalog = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 			pages = pdf_dict_get(ctx, catalog, PDF_NAME(Pages));
 
