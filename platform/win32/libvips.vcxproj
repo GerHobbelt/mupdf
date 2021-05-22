@@ -475,6 +475,7 @@
     <ClCompile Include="..\..\thirdparty\owemdjee\libvips\tools\vipsthumbnail.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\scripts\libvips\vips-config.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\libvips\cplusplus\include\vips\VConnection8.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\libvips\cplusplus\include\vips\VError8.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\libvips\cplusplus\include\vips\VImage8.h" />
@@ -566,6 +567,11 @@
     <ClInclude Include="..\..\thirdparty\owemdjee\libvips\libvips\resample\presample.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\libvips\libvips\resample\templates.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\libvips\ChangeLog" />
+    <None Include="..\..\thirdparty\owemdjee\libvips\NEWS" />
+    <None Include="..\..\thirdparty\owemdjee\libvips\README.md" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libvips</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF517840}</ProjectGuid>
@@ -624,7 +630,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libvips/libvips/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIPS;VIPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -667,7 +673,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libvips/libvips/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIPS;VIPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -709,7 +715,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libvips/libvips/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIPS;VIPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -752,7 +758,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libvips/libvips/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIPS;VIPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
