@@ -1665,7 +1665,7 @@ static void do_edit_polygon(fz_irect canvas_area, int close)
 		if (!ui.down)
 		{
 			fz_point p = fz_transform_point_xy(ui.x, ui.y, view_page_inv_ctm);
-			trace_action("annot.addVertex(%g, %g)\n", p.x, p.y);
+			trace_action("annot.addVertex(%g, %g);\n", p.x, p.y);
 			pdf_add_annot_vertex(ctx, selected_annot, p);
 			drawing = 0;
 		}
