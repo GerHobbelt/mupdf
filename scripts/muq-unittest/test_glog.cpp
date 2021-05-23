@@ -31,11 +31,25 @@ TEST(LibGoogleLog, logging_custom_prefix) {
 	EXPECT_EQ(glog_logging_custom_prefix_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
 }
 
-TEST(LibGoogleLog, logging_stripped) {
+TEST(LibGoogleLog, logging_stripped1) {
 	int lcl_argc;
 	const char** lcl_argv;
 	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_logging_striptest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
+	EXPECT_EQ(glog_logging_striptest0_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
+}
+
+TEST(LibGoogleLog, logging_stripped2) {
+	int lcl_argc;
+	const char** lcl_argv;
+	init_test_argv(lcl_argc, lcl_argv);
+	EXPECT_EQ(glog_logging_striptest2_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
+}
+
+TEST(LibGoogleLog, logging_stripped10) {
+	int lcl_argc;
+	const char** lcl_argv;
+	init_test_argv(lcl_argc, lcl_argv);
+	EXPECT_EQ(glog_logging_striptest10_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
 }
 
 TEST(LibGoogleLog, logging) {
