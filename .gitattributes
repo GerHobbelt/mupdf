@@ -1,76 +1,189 @@
 # Macros:
-[attr]tabs		whitespace=trailing-space,space-before-tab,indent-with-non-tab,tabwidth=4
-[attr]spaces		whitespace=trailing-space,space-before-tab,tabs-in-indent
-[attr]makefile		whitespace=trailing-space,space-before-tab,indent-with-non-tab,tabwidth=8
+[attr]tabs          whitespace=trailing-space,space-before-tab,indent-with-non-tab,tabwidth=4
+[attr]spaces        whitespace=trailing-space,space-before-tab,tabs-in-indent
+[attr]makefile      whitespace=trailing-space,space-before-tab,indent-with-non-tab,tabwidth=8
 
 # Source files:
-*			text=auto
-Make*			makefile
-*.mk			makefile
-*.make			makefile
-*.[chm]			tabs
-*.java			tabs
-*.xml			tabs
-*.props			spaces
-*.targets		spaces
-*.vcxproj		spaces
-*.vcxproj.filters	spaces
-bin2coff.xml		spaces
+*               text=auto
+Make*           makefile eol=lf
+*.mk            makefile eol=lf
+*.make          makefile eol=lf
+*.props         spaces
+*.targets       spaces
+*.vcxproj       spaces
+*.vcxproj.filters   spaces
+bin2coff.xml    spaces
 
 # Documentation files:
-*.txt			spaces
+*.txt           spaces
 
 # Legacy source files:
-memento.*		spaces
+memento.*       spaces
 source/tools/extract_text.c    spaces
 
 # Generated source files:
-source/html/css-properties.h	spaces
+source/html/css-properties.h    spaces
 
 # iOS project files:
-*.xib			spaces
-*.xcscheme		spaces
-*.json			spaces
+*.xib           spaces
+*.xcscheme      spaces
+*.json          spaces
 
 # CRLF vs LF-only
+*.ac            text eol=lf
+*.am            text eol=lf
+*.asm           text eol=lf
+*.autopkg       text eol=lf
 *.bat           text eol=crlf
+*.bbk           text eol=lf
+*.bsh           text eol=lf
 *.c             text eol=lf
+*.cc            text eol=lf
+*.cfg           text eol=lf
+*.cgi           text eol=lf
+*.classpath     text eol=lf
+*.cmake         text eol=lf
+*.cmd           text eol=crlf
 *.cpp           text eol=lf
-*.csproj        text eol=lf
+*.cproject      text eol=lf
+*.csh           text eol=lf
+*.csproj        text eol=crlf
 *.css           text eol=lf
+*.csv           text eol=lf
+*.cxx           text eol=lf
+*.dbproj        text eol=crlf
+*.def           text eol=lf
+*.dot           text eol=lf
+*.dsp           text eol=crlf
+*.dsw           text eol=crlf
+*.dtd           text eol=lf
 *.ejs           text eol=lf
+*.eps           text eol=lf
+*.filter        text eol=crlf
+*.filters       text eol=crlf
+*.fsproj        text eol=crlf
+*.gitattributes text eol=lf
+*.gradle        text eol=lf
 *.h             text eol=lf
+*.hh            text eol=lf
+*.hpp           text eol=lf
+*.htm           text eol=lf
 *.html          text eol=lf
+*.i             text eol=lf
+*.in            text eol=lf
 *.inc           text eol=lf
 *.ini           text eol=lf
+*.ipp           text eol=lf
+*.iss           text eol=lf
+*.jam           text eol=lf
+*.java          text eol=lf
 *.jison         text eol=lf
 *.jisonlex      text eol=lf
 *.js            text eol=lf
 *.json          text eol=lf
 *.json5         text eol=lf
 *.l             text eol=lf
+*.latex         text eol=lf
 *.less          text eol=lf
 *.lex           text eol=lf
+*.log           text eol=lf
+*.lst           text eol=lf
+*.mak           text eol=lf
 *.markdown      text eol=lf
 *.md            text eol=lf
+*.mk            text eol=lf
+*.patch         text eol=lf
+*.pbxproj       text eol=crlf
 *.php           text eol=lf
+*.pl            text eol=lf
+*.pm            text eol=lf
+*.project       text eol=lf
+*.properties    text eol=lf
+*.props         text eol=crlf
+*.ps            text eol=lf
+*.ps1           text eol=lf
+*.py            text eol=lf
+*.qbk           text eol=lf
+*.rb            text eol=lf
+*.rc            text eol=lf
+*.rss           text eol=lf
+*.rst           text eol=lf
+*.rtf           text eol=lf
 *.sass          text eol=lf
+*.scss          text eol=lf
 *.sed           text eol=lf
 *.sh            text eol=lf
-*.sln           text eol=lf
+*.sln           text eol=crlf
+*.sql           text eol=lf
 *.src           text eol=lf
+*.strings       text eol=lf
+*.svg           text eol=lf
+*.swg           text eol=lf
+*.tex           text eol=lf
+*.tpp           text eol=lf
 *.txt           text eol=lf
-*.vcxproj       text eol=lf
+*.vbproj        text eol=crlf
+*.vcproj        text eol=crlf
+*.vcxproj       text eol=crlf
+*.vcxproj.filters  text eol=crlf
+*.vsprops       text eol=crlf
 *.vue           text eol=lf
 *.xaml          text eol=lf
+*.xhtml         text eol=lf
 *.xml           text eol=lf
+*.xsd           text eol=lf
+*.xsl           text eol=lf
+*.xslt          text eol=lf
+*.xul           text eol=lf
 *.y             text eol=lf
 *.yacc          text eol=lf
 *.yaml          text eol=lf
 *.yml           text eol=lf
+.htaccess       text eol=lf
+boost-no-inspect  text eol=lf
+CHANGES         text eol=lf
+configure       text eol=lf
+COPYING         text eol=lf
+Dockerfile      text eol=lf
+INSTALL         text eol=lf
+Jamfile         text eol=lf
+Jamfile.v2      text eol=lf
+Jamroot         text eol=lf
+Jamrules        text eol=lf
+README          text eol=lf
+TODO            text eol=lf
 
-*.pdf			binary
-*.psd			binary
-*.pptx			binary
-*.xlsx			binary
+
+*.avi           binary
+*.bmp           binary
+*.doc           binary
+*.gif           binary
+*.gz            binary
+*.ico           binary
+*.jpeg          binary
+*.jpg           binary
+*.mov           binary
+*.mp3           binary
+*.odt           binary
+*.pbm           binary
+*.pdf           binary
+*.pgm           binary
+*.png           binary
+*.pnm           binary
+*.ppm           binary
+*.ppt           binary
+*.pptx          binary
+*.psd           binary
+*.raw           binary
+*.spir          binary
+*.swf           binary
+*.tga           binary
+*.tgz           binary
+*.tif           binary
+*.tiff          binary
+*.wav           binary
+*.xls           binary
+*.xlsx          binary
+*.zip           binary
+.* icns         binary
 
