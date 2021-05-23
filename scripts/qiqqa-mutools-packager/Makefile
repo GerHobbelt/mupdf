@@ -10,6 +10,17 @@
 # SOLUTIONDIR=$(SolutionDir) 
 # TARGETNAME=$(TargetName)
 #
+#-----------------------------------------------
+# Sample values for my dev box:
+#
+#::OUTDIR=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-NotSet-32bit-x86\
+#::PLATFORM=Win32
+#::PLATFORM_TARGET=x86
+#::PROJECTDIR=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\
+#::INTERMEDIATEDIR=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\obj\Release-NotSet-32bit-x86\-Makefile-qiqqa-mutools-packager\
+#::SOLUTIONDIR=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\
+#::TARGETNAME=qiqqa-mutools-packager"
+#
 
 !IFNDEF OUTDIR
 OUTDIR=tmp
@@ -58,7 +69,6 @@ build:    "$(TARGET_PACKAGE_EXE)"
 	@echo "build: SOLUTIONDIR=$(SOLUTIONDIR)"
 	@echo "build: TARGETNAME=$(TARGETNAME)"
 	@echo "-----------------------------------------------"
-	-mkdir "$(INTERMEDIATEDIR)"
 	-cd
 	node ../../scripts/qiqqa-mutools-packager/adjust-inno-setup-script.js ../../scripts/qiqqa-mutools-packager/inno-setup-script.iss \
 		"::OUTDIR=$(OUTDIR)\
@@ -68,7 +78,6 @@ build:    "$(TARGET_PACKAGE_EXE)"
 		::INTERMEDIATEDIR=$(INTERMEDIATEDIR) \
 		::SOLUTIONDIR=$(SOLUTIONDIR) \
 		::TARGETNAME=$(TARGETNAME)"
-	-mkdir "$(OUTDIR)"
 	"$(ISCC)" "..\..\scripts\qiqqa-mutools-packager\inno-setup-script.iss"
 # echo x > "$(TARGET_PACKAGE_EXE)"
 

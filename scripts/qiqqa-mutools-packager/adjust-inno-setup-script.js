@@ -47,8 +47,21 @@ console.error(JSON.stringify(process.argv, null, 2), {params, pms, db})
  */
 
 // dirty hack to point at the correct output directory:
-db['INDIR'] = db['OUTDIR'].replace(/-NotSet-/g, '-Unicode-');
+db['OUTDIR'] = db['INDIR'] = db['OUTDIR'].replace(/-NotSet-/g, '-Unicode-');
+db['INTERMEDIATEDIR'] = db['INTERMEDIATEDIR'].replace(/-NotSet-/g, '-Unicode-');
 
+
+// determine if we're creating an installer for x86 or x64 mode:
+// https://jrsoftware.org/ishelp/index.php?topic=setup_architecturesinstallin64bitmode
+if (db['PLATFORM_TARGET'] === 'x64') {
+	src = src
+		.replace(/^ArchitecturesInstallIn64BitMode=.*$/mg, `ArchitecturesInstallIn64BitMode=x64`)
+		.replace(/^ArchitecturesAllowed=.*$/mg, `ArchitecturesAllowed=x64`);
+} else {
+	src = src
+		.replace(/^ArchitecturesInstallIn64BitMode=.*$/mg, `ArchitecturesInstallIn64BitMode=`)
+		.replace(/^ArchitecturesAllowed=.*$/mg, `ArchitecturesAllowed=x86 x64 ia64`);
+}
 
 
 src = src
@@ -63,3 +76,12 @@ src = src
 
 console.log(src);
 fs.writeFileSync(filepath, src, 'utf8');
+
+
+// prepwork which we can better do here than in the makefile as we have the properly patched OUTDIR right here!
+
+if (!fs.existsSync(db['OUTDIR'])) {
+	fs.mkdirSync(db['OUTDIR']);
+}
+
+
