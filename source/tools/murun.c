@@ -615,7 +615,7 @@ static const char *string_from_line_ending(enum pdf_line_ending style)
 	case PDF_ANNOT_LE_CLOSED_ARROW: return "ClosedArrow";
 	case PDF_ANNOT_LE_BUTT: return "Butt";
 	case PDF_ANNOT_LE_R_OPEN_ARROW: return "ROpenArrow";
-	case PDF_ANNOT_LE_R_CLOSED_ARROW: return "RCloseArrow";
+	case PDF_ANNOT_LE_R_CLOSED_ARROW: return "RClosedArrow";
 	case PDF_ANNOT_LE_SLASH: return "Slash";
 	}
 }
@@ -5756,22 +5756,19 @@ static void ffi_PDFAnnotation_addInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	int i, k, m, n = js_getlength(J, 1);
+	int i, n = js_getlength(J, 1);
+	fz_point pt;
 	fz_try(ctx)
 		pdf_add_annot_ink_list_stroke(ctx, annot);
 	fz_catch(ctx)
 		rethrow(J);
-	for (i = 0; i < n; i += 2) {
+	for (i = 0; i < n; ++i) {
 		js_getindex(J, 1, i);
-		m = js_getlength(J, -1);
-		for (k = 0; k < m; ++k) {
-			fz_point pt = ffi_topoint(J, -1);
-			fz_try(ctx)
-				pdf_add_annot_ink_list_stroke_vertex(ctx, annot, pt);
-			fz_catch(ctx)
-				rethrow(J);
-
-		}
+		pt = ffi_topoint(J, -1);
+		fz_try(ctx)
+			pdf_add_annot_ink_list_stroke_vertex(ctx, annot, pt);
+		fz_catch(ctx)
+			rethrow(J);
 		js_pop(J, 1);
 	}
 }
@@ -6909,9 +6906,9 @@ int murun_main(int argc, const char **argv)
 		jsB_propfun(J, "PDFAnnotation.getAuthor", ffi_PDFAnnotation_getAuthor, 0);
 		jsB_propfun(J, "PDFAnnotation.setAuthor", ffi_PDFAnnotation_setAuthor, 1);
 		jsB_propfun(J, "PDFAnnotation.getModificationDate", ffi_PDFAnnotation_getModificationDate, 0);
-		jsB_propfun(J, "PDFAnnotation.setModificationDate", ffi_PDFAnnotation_setModificationDate, 0);
+		jsB_propfun(J, "PDFAnnotation.setModificationDate", ffi_PDFAnnotation_setModificationDate, 1);
 		jsB_propfun(J, "PDFAnnotation.getLineEndingStyles", ffi_PDFAnnotation_getLineEndingStyles, 0);
-		jsB_propfun(J, "PDFAnnotation.setLineEndingStyles", ffi_PDFAnnotation_setLineEndingStyles, 0);
+		jsB_propfun(J, "PDFAnnotation.setLineEndingStyles", ffi_PDFAnnotation_setLineEndingStyles, 2);
 		jsB_propfun(J, "PDFAnnotation.getIcon", ffi_PDFAnnotation_getIcon, 0);
 		jsB_propfun(J, "PDFAnnotation.setIcon", ffi_PDFAnnotation_setIcon, 1);
 		jsB_propfun(J, "PDFAnnotation.getQuadding", ffi_PDFAnnotation_getQuadding, 0);

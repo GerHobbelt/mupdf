@@ -1076,7 +1076,7 @@ void do_annotate_panel(void)
 				choice = ui_select("Icon", name, text_icons, nelem(text_icons));
 				if (choice != -1)
 				{
-					trace_action("annot.setIcon(%q)\n", text_icons[choice]);
+					trace_action("annot.setIcon(%q);\n", text_icons[choice]);
 					pdf_set_annot_icon_name(ctx, selected_annot, text_icons[choice]);
 				}
 				break;
@@ -1084,7 +1084,7 @@ void do_annotate_panel(void)
 				choice = ui_select("Icon", name, file_attachment_icons, nelem(file_attachment_icons));
 				if (choice != -1)
 				{
-					trace_action("annot.setIcon(%q)\n", file_attachment_icons[choice]);
+					trace_action("annot.setIcon(%q);\n", file_attachment_icons[choice]);
 					pdf_set_annot_icon_name(ctx, selected_annot, file_attachment_icons[choice]);
 				}
 				break;
@@ -1092,7 +1092,7 @@ void do_annotate_panel(void)
 				choice = ui_select("Icon", name, sound_icons, nelem(sound_icons));
 				if (choice != -1)
 				{
-					trace_action("annot.setIcon(%q)\n", sound_icons[choice]);
+					trace_action("annot.setIcon(%q);\n", sound_icons[choice]);
 					pdf_set_annot_icon_name(ctx, selected_annot, sound_icons[choice]);
 				}
 				break;
@@ -1100,7 +1100,7 @@ void do_annotate_panel(void)
 				choice = ui_select("Icon", name, stamp_icons, nelem(stamp_icons));
 				if (choice != -1)
 				{
-					trace_action("annot.setIcon(%q)\n", stamp_icons[choice]);
+					trace_action("annot.setIcon(%q);\n", stamp_icons[choice]);
 					pdf_set_annot_icon_name(ctx, selected_annot, stamp_icons[choice]);
 				}
 				break;
@@ -1681,7 +1681,7 @@ static void do_edit_polygon(fz_irect canvas_area, int close)
 		if (!ui.down)
 		{
 			fz_point p = fz_transform_point_xy(ui.x, ui.y, view_page_inv_ctm);
-			trace_action("annot.addVertex(%g, %g)\n", p.x, p.y);
+			trace_action("annot.addVertex(%g, %g);\n", p.x, p.y);
 			pdf_add_annot_vertex(ctx, selected_annot, p);
 			drawing = 0;
 		}
