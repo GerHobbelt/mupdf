@@ -9,16 +9,22 @@ used by SumatraPDF-no-MuPDF.exe (unarr, libdjvu, zlib, lzma, libwebp).
 
 import os, re
 
-def generateExports(header, exclude=[]):
-	if os.path.isdir(header):
-		return "\n".join([generateExports(os.path.join(header, file), exclude) for file in os.listdir(header)])
-
+def collectExports(header):
 	data = open(header, "r").read()
 	data = re.sub(r"(?sm)^#ifndef NDEBUG\s.*?^#endif", "", data, 0)
 	data = re.sub(r"(?sm)^#ifdef ARCH_ARM\s.*?^#endif", "", data, 0)
 	data = re.sub(r"(?sm)^#ifdef FITZ_DEBUG_LOCKING\s.*?^#endif", "", data, 0)
+	data = re.sub(r"(?sm)^#ifndef SQLITE_OMIT_DEPRECATED\s.*?^#endif", "", data, 0)
+	data = re.sub(r"(?sm)^static +\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?\w+\(.*?\);?", "", data, 0)
+	data = re.sub(r"(?sm)^\w+ *\*?\*? +SQLITE_DEPRECATED +(?:\w+ *\*?\*? )*\*?\*?\w+\(.*?\);", "", data, 0)
 	data = data.replace(" FZ_NORETURN;", ";")
-	functions = re.findall(r"(?sm)^\w+\*?\*? (?:\w+\*?\*? )?\*?\*?(\w+)\(.*?\);", data)
+	return re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+)\(.*?\);", data)
+
+def generateExports(header, exclude=[]):
+	if os.path.isdir(header):
+		return "\n".join([generateExports(os.path.join(header, file), exclude) for file in os.listdir(header)])
+
+	functions = collectExports(header)
 	return "\n".join(["\t" + name for name in functions if name not in exclude])
 
 def collectFunctions(file):
@@ -29,7 +35,7 @@ def generateExportsJpeg(file, exclude=[], include=[]):
 	data = open(file, "r").read()
 	data = re.sub(r"(?sm)^\s*JMETHOD\([^\)]*\)", "", data, 0)
 	data = re.sub(r"(?sm)[\s\r\n]+JPP\([^\)]*\)", "(XXXXX)", data, 0)
-	functions = re.findall(r"(?sm)^EXTERN\([^)]+\) (\w+)\s*\(XXXXX\)", data)
+	functions = re.findall(r"(?sm)^EXTERN\([^)]+\) +(\w+)\s*\(XXXXX\)", data)
 	return "\n".join(["\t" + name for name in functions if name not in exclude]) + "\n" + "\n".join(["\t" + name for name in include])
 
 LIBMUPDF_DEF = """\
@@ -42,6 +48,14 @@ EXPORTS
 ; MuPDF tool exports
 
 %(tool_exports)s
+
+; MuPDF ucdn exports
+
+%(ucdn_exports)s
+
+; PKCS7 exports
+
+%(pkcs7ex_exports)s
 
 ; Tesseract OCR exports
 
@@ -89,6 +103,9 @@ EXPORTS
 	fz_invalid_irect
 	fz_unit_bbox
 
+	pdf_default_write_options
+	fz_default_color_params
+
 %(fitz_exports)s
 
 ; MuPDF exports
@@ -109,7 +126,15 @@ EXPORTS
 
 ; libSQLite3 exports
 
-%(libsqlite3_exports)s
+%(sqlite3_exports)s
+
+; MuJS exports
+
+%(mujs_exports)s
+
+; freeGLut exports
+
+%(freeglut_exports)s
 
 ; monolithic tool exports
 
@@ -134,26 +159,30 @@ def main():
 	# don't include/export doc_* functions, support for additional input/output formats and form support
 	doc_exports = collectFunctions("source/fitz/document-all.c") + ["fz_log_dump_store"]
 	more_formats = []
-	form_exports = collectFunctions("source/pdf/pdf-form.c") + collectFunctions("source/pdf/pdf-event.c") + collectFunctions("source/pdf/pdf-appearance.c")
+	form_exports = []
 	misc_exports = ["fz_valgrind_pixmap", "track_usage", "fz_error_print_callback"]
-	sign_exports = ["pdf_crypt_buffer", "pdf_read_pfx", "pdf_sign_signature", "pdf_signer_designated_name", "pdf_free_designated_name"]
-
+	sign_exports = []
+	pkcs7_ignores = ["pkcs7_openssl_check_digest", "pkcs7_openssl_check_certificate", "pkcs7_openssl_distinguished_name"]
+	office_exports = collectExports("include/mupdf/helpers/mu-office-lib.h")
+	
 	fitz_exports = generateExports("include/mupdf/fitz", doc_exports + more_formats + misc_exports)
 	pubdoc_exports = generateExports("include/mupdf/fitz/document.h")
-	mupdf_exports = generateExports("include/mupdf/pdf", sign_exports + ["pdf_drop_designated_name", "pdf_print_xref", "pdf_recognize", "pdf_resolve_obj", "pdf_open_compressed_stream", "pdf_finish_edit"])
+	mupdf_exports = generateExports("include/mupdf/pdf", sign_exports)
 	tool_exports = generateExports("include/mupdf/mutool.h")
+	ucdn_exports = generateExports("include/mupdf/ucdn.h")
 	ocr_exports = generateExports("source/fitz/tessocr.h")
 	ocr_train_exports = generateExports("thirdparty/tesseract/include/tesseract/capi_training_tools.h")
 	curl_exports = generateExports("thirdparty/curl/include/curl", ["fread", "fwrite", "strcasecmp", "strncasecmp"])
 	curl_time_exports = generateExports("thirdparty/curl/lib/timeval.h")
 	platform_exports = generateExports("platform/x11/curl_stream.h")
-	office_exports = generateExports("include/mupdf/helpers/mu-office-lib.h")
-	pkcs7ex_exports = generateExports("include/mupdf/helpers/pkcs7-openssl.h")
-	helpers_exports = generateExports("include/mupdf/helpers", office_exports + pkcs7ex_exports)
+	pkcs7ex_exports = generateExports("include/mupdf/helpers/pkcs7-openssl.h", pkcs7_ignores)
+	helpers_exports = generateExports("include/mupdf/helpers", office_exports + pkcs7_ignores)
 	libjpeg_exports = generateExportsJpeg("thirdparty/libjpeg/jpeglib.h", [], ["jpeg_cust_mem_init"])
 	libgif_exports = generateExports("thirdparty/owemdjee/libgif/gif_lib.h")
 	libwebp_exports = generateExports("thirdparty/owemdjee/libwebp/src/webp")
-	libsqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
+	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
+	mujs_exports = generateExports("thirdparty/mujs/mujs.h")
+	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
 
 	list = LIBMUPDF_DEF % locals()
 	# remove duplicate entries
