@@ -67,11 +67,12 @@ if (db['PLATFORM_TARGET'] === 'x64') {
 src = src
 	.replace(/^OutputDir=.*$/mg, `OutputDir=${db['OUTDIR']}`)
 	// Source: "..\..\platform\win32\Debug-32\bulktest.exe"; DestDir: "{app}"; Flags: ignoreversion
-	.replace(/^Source: "(.*)\\([^\\"]+.exe)"; DestDir: "\{app\}"; Flags: ignoreversion\s*$/mg, (m, p1, p2) => {
-		return `Source: "${db['INDIR']}${p2}"; DestDir: "{app}"; Flags: ignoreversion`;
+	// Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\bin2coff.exe";             DestDir: "{app}"; Flags: ignoreversion
+	.replace(/^Source: "(.*)\\([^\\"]+.exe)"(; +DestDir: "\{app\}"; Flags: ignoreversion)\s*$/mg, (m, p1, p2, p3) => {
+		return `Source: "${db['INDIR']}${p2}"${p3}`;
 	})
-	.replace(/^Source: "(.*)\\([^\\"]+.dll)"; DestDir: "\{app\}"; Flags: ignoreversion\s*$/mg, (m, p1, p2) => {
-		return `Source: "${db['INDIR']}${p2}"; DestDir: "{app}"; Flags: ignoreversion`;
+	.replace(/^Source: "(.*)\\([^\\"]+.dll)"(; +DestDir: "\{app\}"; Flags: ignoreversion)\s*$/mg, (m, p1, p2, p3) => {
+		return `Source: "${db['INDIR']}${p2}"${p3}`;
 	})
 
 console.log(src);

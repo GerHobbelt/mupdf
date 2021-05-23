@@ -43,7 +43,6 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "..\..\LICENSES.txt"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\bin2coff.exe";             DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\bulktest.exe";             DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\curl.exe";                 DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\example1.exe";             DestDir: "{app}"; Flags: ignoreversion
@@ -56,7 +55,6 @@ Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\jpeginfo.exe";             DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\misctests.exe";            DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\misctools.exe";            DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mu-office-test.exe";       DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mudraw.exe";               DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mupdf-curl.exe";           DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mupdf-gl.exe";             DestDir: "{app}"; Flags: ignoreversion
@@ -69,7 +67,6 @@ Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mutool.exe";               DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\sync_nas_filelock.exe";    DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\tesseract.exe";            DestDir: "{app}"; Flags: ignoreversion
-
 ; ,--- this tessdata stuff is HUGE and has a much lower update frequency than our stuff.
 ;      We should fetch it elsewhere or at least provide it in a separate installer, which can
 ;      be downloaded and executed when that stuff is not present YET.

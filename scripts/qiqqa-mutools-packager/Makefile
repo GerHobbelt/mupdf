@@ -59,7 +59,7 @@ misc:
 
 build:    "$(TARGET_PACKAGE_EXE)"
 
-"$(TARGET_PACKAGE_EXE)":
+"$(TARGET_PACKAGE_EXE)": ../../scripts/qiqqa-mutools-packager/adjust-inno-setup-script.js ../../scripts/qiqqa-mutools-packager/inno-setup-script.iss ../../scripts/qiqqa-mutools-packager/Makefile
 	@echo "-----------------------------------------------"
 	@echo "build: OUTDIR=$(OUTDIR)"
 	@echo "build: PLATFORM=$(PLATFORM)"
@@ -71,7 +71,7 @@ build:    "$(TARGET_PACKAGE_EXE)"
 	@echo "-----------------------------------------------"
 	-cd
 	node ../../scripts/qiqqa-mutools-packager/adjust-inno-setup-script.js ../../scripts/qiqqa-mutools-packager/inno-setup-script.iss \
-		"::OUTDIR=$(OUTDIR)\
+		"::OUTDIR=$(OUTDIR) \
 		::PLATFORM=$(PLATFORM) \
 		::PLATFORM_TARGET=$(PLATFORM_TARGET) \
 		::PROJECTDIR=$(PROJECTDIR) \

@@ -566,7 +566,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -585,6 +585,9 @@
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -613,7 +616,7 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -624,6 +627,8 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -652,7 +657,7 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -664,6 +669,9 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -692,7 +700,7 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -703,6 +711,8 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>
