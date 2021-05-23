@@ -27,6 +27,9 @@ static int sign_location_input_initialised = 0;
 static char sign_image_filename[PATH_MAX];
 static fz_image *sign_image = NULL;
 
+static struct texture preview_tex = { 0 };
+static int preview_needs_update = 0;
+
 static void trace_field_value(pdf_annot *annot, const char *set_value)
 {
 	const char *get_value = pdf_annot_field_value(ctx, annot);
@@ -90,6 +93,7 @@ static void signature_select_image_dialog(void)
 			{
 				sign_image = fz_new_image_from_file(ctx, sign_image_filename);
 				sign_flags &= ~PDF_SIGNATURE_SHOW_GRAPHIC_NAME;
+				preview_needs_update = 1;
 			}
 			fz_catch(ctx)
 			{
@@ -101,6 +105,7 @@ static void signature_select_image_dialog(void)
 		ui.dialog = signature_appearance_dialog;
 	}
 }
+
 
 static void signature_appearance_init(void)
 {
@@ -114,12 +119,14 @@ static void signature_appearance_init(void)
 		ui_input_init(&sign_location_input, "");
 		sign_location_input_initialised = 1;
 	}
+	preview_needs_update = 1;
 }
 
 static void signature_appearance_dialog(void)
 {
-	ui_dialog_begin(ui.gridsize*16, (ui.gridsize+4)*13);
+	ui_dialog_begin(ui.gridsize*16, (ui.gridsize+4)*16);
 	{
+		int orig_flags = sign_flags;
 		int labels = sign_flags & PDF_SIGNATURE_SHOW_LABELS;
 		int graphic_name = sign_flags & PDF_SIGNATURE_SHOW_GRAPHIC_NAME;
 		int graphic_image = sign_image != NULL;
@@ -127,6 +134,7 @@ static void signature_appearance_dialog(void)
 		int dn = sign_flags & PDF_SIGNATURE_SHOW_DN;
 		int date = sign_flags & PDF_SIGNATURE_SHOW_DATE;
 		int logo = sign_flags & PDF_SIGNATURE_SHOW_LOGO;
+		fz_irect preview_rect;
 
 		ui_layout(T, X, NW, ui.padsize*2, ui.padsize);
 
@@ -153,6 +161,9 @@ static void signature_appearance_dialog(void)
 			ui_texture_from_pixmap(&preview_tex, pix);
 			ui_draw_image(&preview_tex, ui.cavity->x0, ui.cavity->y0);
 			fz_drop_pixmap(ctx, pix);
+			
+			ui_layout(ALL, BOTH, CENTER, 0, 0);
+			preview_rect = ui_pack(0, 0);
 
 			ui_panel_end();
 		}
@@ -210,18 +221,20 @@ static void signature_appearance_dialog(void)
 				{
 					ui_layout(T, Y, NW, 0, 0);
 
-					ui_panel_begin(ui.gridsize * 10, ui.gridsize, 0, 0, 0);
+					ui_panel_begin(ui.gridsize * 5, ui.gridsize, 0, 0, 0);
 					ui_layout(L, X, NW, 0, 0);
 					ui_label("Reason:");
 					ui_spacer();
-					ui_input(&sign_reason_input, ui.gridsize * 5, 1);
+					if (ui_input(&sign_reason_input, ui.gridsize * 5, 1))
+						preview_needs_update = 1;
 					ui_panel_end();
 
 					ui_panel_begin(ui.gridsize * 10, ui.gridsize, 0, 0, 0);
 					ui_layout(L, X, NW, 0, 0);
 					ui_label("Location:");
 					ui_spacer();
-					ui_input(&sign_location_input, ui.gridsize * 5, 1);
+					if (ui_input(&sign_location_input, ui.gridsize * 5, 1))
+						preview_needs_update = 1;
 					ui_panel_end();
 				}
 				ui_panel_end();
@@ -242,6 +255,30 @@ static void signature_appearance_dialog(void)
 		sign_flags |= text_name ? PDF_SIGNATURE_SHOW_TEXT_NAME : 0;
 		sign_flags |= graphic_name ? PDF_SIGNATURE_SHOW_GRAPHIC_NAME : 0;
 		sign_flags |= logo ? PDF_SIGNATURE_SHOW_LOGO : 0;
+
+		if (orig_flags != sign_flags)
+			preview_needs_update = 1;
+
+		if (preview_needs_update)
+		{
+			fz_pixmap *pix;
+			pdf_pkcs7_signer *signer;
+			int w = preview_rect.x1 - preview_rect.x0;
+			int h = preview_rect.y1 - preview_rect.y0;
+
+			signer = pkcs7_openssl_read_pfx(ctx, cert_filename, cert_password.text);
+			pix = pdf_preview_signature_as_pixmap(ctx,
+				w, h, FZ_LANG_UNSET, signer, sign_flags, sign_image,
+				strlen(sign_reason_input.text) ? sign_reason_input.text : NULL,
+				strlen(sign_location_input.text) ? sign_location_input.text : NULL);
+			pdf_drop_signer(ctx, signer);
+			ui_texture_from_pixmap(&preview_tex, pix);
+			fz_drop_pixmap(ctx, pix);
+
+			preview_needs_update = 0;
+		}
+
+		ui_draw_image(&preview_tex, preview_rect.x0, preview_rect.y0);
 
 		ui_layout(B, X, NW, ui.padsize, ui.padsize);
 		ui_panel_begin(0, ui.gridsize, 0, 0, 0);
@@ -296,7 +333,6 @@ static void cert_password_dialog(void)
 			if (ui_button("Okay") || is == UI_INPUT_ACCEPT)
 			{
 				if (is_valid_certificate_and_password()) {
-					ui.dialog = NULL;
 					signature_appearance_init();
 					ui.dialog = signature_appearance_dialog;
 				} else {
