@@ -20,6 +20,12 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL} 
 DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
+; https://documentation.help/Inno-Setup/topic_setup_architecturesinstallin64bitmode.htm
+ArchitecturesInstallIn64BitMode=x64
+ArchitecturesAllowed=x64
+; only support Windows 10
+MinVersion=10.0
+UsePreviousAppDir=yes
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSES.txt
 InfoBeforeFile=..\..\scripts\qiqqa-mutools-packager\installer-info-before.txt
@@ -29,6 +35,7 @@ OutputDir=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-NotSet-64bit-x64
 SetupIconFile=..\..\scripts\qiqqa-mutools-packager\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
+LZMAUseSeparateProcess=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -37,6 +44,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Source: "..\..\LICENSES.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\bulktest.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\curl.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\glob.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\jpeginfo.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\misctools.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\mudraw.exe"; DestDir: "{app}"; Flags: ignoreversion
