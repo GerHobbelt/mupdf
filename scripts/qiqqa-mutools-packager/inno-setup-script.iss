@@ -25,7 +25,7 @@ LicenseFile=..\..\LICENSES.txt
 InfoBeforeFile=..\..\scripts\qiqqa-mutools-packager\installer-info-before.txt
 InfoAfterFile=..\..\scripts\qiqqa-mutools-packager\installer-info-after.txt
 OutputBaseFilename=qiqqa-mutools-setup
-OutputDir=..\..\platform\win32\__Installer\
+OutputDir=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-NotSet-64bit-x64\
 SetupIconFile=..\..\scripts\qiqqa-mutools-packager\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -35,19 +35,19 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 Source: "..\..\LICENSES.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\bulktest.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\curl.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\jpeginfo.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\misctools.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\mudraw.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\mupdf.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\mupdf-curl.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\mupdf-gl.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\MuPDFLib.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\MupdfSharp.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\muraster.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\mutool.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\platform\win32\Debug-32\tesseract.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\bulktest.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\curl.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\jpeginfo.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\misctools.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\mudraw.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\mupdf.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\mupdf-curl.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\mupdf-gl.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\MuPDFLib.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\MupdfSharp.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\muraster.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\mutool.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-64bit-x64\tesseract.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; ,--- this tessdata stuff is HUGE and has a much lower update frequency than our stuff.
 ;      We should fetch it elsewhere or at least provide it in a separate installer, which can
 ;      be downloaded and executed when that stuff is not present YET.

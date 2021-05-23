@@ -59,9 +59,18 @@ build:    "$(TARGET_PACKAGE_EXE)"
 	@echo "build: TARGETNAME=$(TARGETNAME)"
 	@echo "-----------------------------------------------"
 	-mkdir "$(INTERMEDIATEDIR)"
-	-"$(ISCC)"
+	-cd
+	node ../../scripts/qiqqa-mutools-packager/adjust-inno-setup-script.js ../../scripts/qiqqa-mutools-packager/inno-setup-script.iss \
+		"::OUTDIR=$(OUTDIR)\
+		::PLATFORM=$(PLATFORM) \
+		::PLATFORM_TARGET=$(PLATFORM_TARGET) \
+		::PROJECTDIR=$(PROJECTDIR) \
+		::INTERMEDIATEDIR=$(INTERMEDIATEDIR) \
+		::SOLUTIONDIR=$(SOLUTIONDIR) \
+		::TARGETNAME=$(TARGETNAME)"
 	-mkdir "$(OUTDIR)"
-	echo x > "$(TARGET_PACKAGE_EXE)"
+	"$(ISCC)" "..\..\scripts\qiqqa-mutools-packager\inno-setup-script.iss"
+# echo x > "$(TARGET_PACKAGE_EXE)"
 
 rebuild: clean build
 

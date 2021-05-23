@@ -102,6 +102,8 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="..\..\scripts\qiqqa-mutools-packager\installer-info-after.txt" />
+    <Text Include="..\..\scripts\qiqqa-mutools-packager\installer-info-before.txt" />
     <Text Include="..\..\scripts\qiqqa-mutools-packager\Makefile" />
   </ItemGroup>
   <ItemGroup>
@@ -141,9 +143,6 @@
     <ProjectReference Include="MuPDFLib.vcxproj">
       <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
     </ProjectReference>
-    <ProjectReference Include="muq-unittest.vcxproj">
-      <Project>{fc63588d-259e-4e61-998a-08569c1091b9}</Project>
-    </ProjectReference>
     <ProjectReference Include="muraster.vcxproj">
       <Project>{0fdc74d7-d18c-45ce-94d6-edfcc5a0cdf2}</Project>
     </ProjectReference>
@@ -159,6 +158,10 @@
     <ProjectReference Include="tesseract.vcxproj">
       <Project>{00115919-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\scripts\qiqqa-mutools-packager\adjust-inno-setup-script.js" />
+    <None Include="..\..\scripts\qiqqa-mutools-packager\inno-setup-script.iss" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
