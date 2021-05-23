@@ -5232,6 +5232,30 @@ static void ffi_PDFPage_process(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFPage_toPixmap(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_page *page = pdf_page_from_fz_page(ctx, ffi_topage(J, 0));
+	fz_matrix ctm = ffi_tomatrix(J, 1);
+	fz_colorspace *colorspace = js_touserdata(J, 2, "fz_colorspace");
+	int alpha = js_toboolean(J, 3);
+	int no_annots = js_isdefined(J, 4) ? js_toboolean(J, 4) : 0;
+	const char *usage = js_isdefined(J, 5) ? js_tostring(J, 5) : "View";
+	fz_pixmap *pixmap = NULL;
+
+	fz_try(ctx)
+		if (no_annots)
+			pixmap = pdf_new_pixmap_from_page_contents(ctx, page, ctm, colorspace, alpha, usage);
+		else
+			pixmap = pdf_new_pixmap_from_page(ctx, page, ctm, colorspace, alpha, usage);
+
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_getregistry(J, "fz_pixmap");
+	js_newuserdata(J, "fz_pixmap", pixmap, ffi_gc_fz_pixmap);
+}
+
 static void ffi_PDFAnnotation_bound(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -6877,6 +6901,7 @@ int murun_main(int argc, const char **argv)
 		jsB_propfun(J, "PDFPage.update", ffi_PDFPage_update, 0);
 		jsB_propfun(J, "PDFPage.applyRedactions", ffi_PDFPage_applyRedactions, 2);
 		jsB_propfun(J, "PDFPage.process", ffi_PDFPage_process, 1);
+		jsB_propfun(J, "PDFPage.toPixmap", ffi_PDFPage_toPixmap, 5);
 	}
 	js_setregistry(J, "pdf_page");
 
@@ -7081,6 +7106,10 @@ int murun_main(int argc, const char **argv)
 	js_dostring(J, "var Identity = Object.freeze([1,0,0,1,0,0]);");
 	js_dostring(J, "function Scale(sx,sy) { return [sx,0,0,sy,0,0]; }");
 	js_dostring(J, "function Translate(tx,ty) { return [1,0,0,1,tx,ty]; }");
+	js_dostring(J, "function Rotate(theta) { return ["
+			"Math.cos(theta * Math.PI / 180), Math.sin(theta * Math.PI / 180),"
+			"-Math.sin(theta * Math.PI / 180), Math.cos(theta * Math.PI / 180),"
+			"0, 0]; }");
 	js_dostring(J, "function Concat(a,b) { return ["
 			"a[0] * b[0] + a[1] * b[2],"
 			"a[0] * b[1] + a[1] * b[3],"
