@@ -9,15 +9,6 @@ FZ_DATA extern int fz_optind;
 FZ_DATA extern const char *fz_optarg;
 
 /**
-	Windows unicode versions.
-*/
-#if defined(_WIN32) || defined(_WIN64)
-extern int fz_getoptw(int nargc, const wchar_t * const *nargv, const wchar_t *ostr);
-extern int fz_optindw;
-extern const wchar_t *fz_optargw;
-#endif
-
-/**
     Reset the fz_getopt() internals for when you want to use it on yet another argv/argc set.
 */
 extern void fz_getopt_reset(void);

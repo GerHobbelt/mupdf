@@ -232,6 +232,18 @@ FZ_DATA extern const fz_rect fz_infinite_rect;
 FZ_DATA extern const fz_irect fz_infinite_irect;
 
 /**
+	An unit rectangle.
+*/
+FZ_DATA extern const fz_rect fz_unit_rect;
+FZ_DATA extern const fz_irect fz_unit_irect;
+
+/**
+	An invalid rectangle.
+*/
+FZ_DATA extern const fz_rect fz_invalid_rect;
+FZ_DATA extern const fz_irect fz_invalid_irect;
+
+/**
 	Check if rectangle is empty.
 
 	An empty rectangle is defined as one whose area is zero.
