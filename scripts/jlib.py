@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import codecs
 import doctest
 import inspect
@@ -30,7 +28,7 @@ def place( frame_record):
     return ret
 
 
-def expand_nv( text, caller):
+def expand_nv( text, caller=1):
     '''
     Returns <text> with special handling of {<expression>} items.
 
@@ -48,15 +46,19 @@ def expand_nv( text, caller):
     If <expression> ends with '=', this character is removed and we prefix the
     result with <expression>=.
 
-    E.g.:
-        x = 45
-        y = 'hello'
-        expand_nv( 'foo {x} {y=}')
-    returns:
-        foo 45 y=hello
+
+    >>> x = 45
+    >>> y = 'hello'
+    >>> expand_nv( 'foo {x} {y=}')
+    'foo 45 y=hello'
 
     <expression> can also use ':' and '!' to control formatting, like
     str.format().
+
+    >>> x = 45
+    >>> y = 'hello'
+    >>> expand_nv( 'foo {x} {y!r=}')
+    "foo 45 y='hello'"
     '''
     if isinstance( caller, int):
         frame_record = inspect.stack()[ caller]
@@ -104,10 +106,12 @@ def expand_nv( text, caller):
                     value = eval( expression, frame.f_globals, frame.f_locals)
                     value_text = ('{0%s}' % tail).format( value)
                 except Exception as e:
-                    value_text = '{??Failed to evaluate %r in context %s:%s because: %s??}' % (
+                    value_text = '{??Failed to evaluate %r in context %s:%s; expression=%r tail=%r: %s}' % (
                             expression,
                             frame_record.filename,
                             frame_record.lineno,
+                            expression,
+                            tail,
                             e,
                             )
                 if nv:
@@ -361,7 +365,17 @@ def log( text, level=0, caller=1, nv=True, out=None, raw=False):
     level += log_levels_find( caller)
     if level <= 0:
         text = log_text( text, caller, nv=nv, raw=raw)
-        out.write( text)
+        try:
+            out.write( text)
+        except UnicodeEncodeError:
+            # Retry, ignoring errors by encoding then decoding with
+            # errors='replace'.
+            #
+            out.write('[***write encoding error***]')
+            text_encoded = codecs.encode(text, out.encoding, errors='replace')
+            text_encoded_decoded = codecs.decode(text_encoded, out.encoding, errors='replace')
+            out.write(text_encoded_decoded)
+            out.write('[/***write encoding error***]')
         out.flush()
 
 def log_raw( text, level=0, caller=1, nv=False, out=None):
@@ -449,7 +463,7 @@ def split_first_of( text, substrings):
     and <post> is empty or starts with an item in <substrings>.
     '''
     pos, _ = strpbrk( text, substrings)
-    return text[ :pos], text[ pos+1:]
+    return text[ :pos], text[ pos:]
 
 
 
@@ -736,6 +750,24 @@ def time_duration( seconds, verbose=False, s_format='%i'):
         '4d3h2m23s'.
     s_format:
         If specified, use as printf-style format string for seconds.
+
+    >>> time_duration( 303333)
+    '3d12h15m33s'
+
+    >>> time_duration( 303333.33, s_format='%.1f')
+    '3d12h15m33.3s'
+
+    >>> time_duration( 303333, verbose=True)
+    '3 days 12 hours 15 mins 33 secs'
+
+    >>> time_duration( 303333.33, verbose=True, s_format='%.1f')
+    '3 days 12 hours 15 mins 33.3 secs'
+
+    >>> time_duration( 0)
+    '0s'
+
+    >>> time_duration( 0, verbose=True)
+    '0 sec'
     '''
     x = abs(seconds)
     ret = ''
@@ -770,14 +802,6 @@ def time_duration( seconds, verbose=False, s_format='%i'):
     if seconds < 0:
         ret = '-%s' % ret
     return ret
-
-assert time_duration( 303333) == '3d12h15m33s'
-assert time_duration( 303333.33, s_format='%.1f') == '3d12h15m33.3s'
-assert time_duration( 303333, verbose=True) == '3 days 12 hours 15 mins 33 secs'
-assert time_duration( 303333.33, verbose=True, s_format='%.1f') == '3 days 12 hours 15 mins 33.3 secs'
-
-assert time_duration( 0) == '0s'
-assert time_duration( 0, verbose=True) == '0 sec'
 
 
 def date_time( t=None):
