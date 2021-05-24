@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import codecs
 import doctest
 import inspect
@@ -30,7 +28,7 @@ def place( frame_record):
     return ret
 
 
-def expand_nv( text, caller):
+def expand_nv( text, caller=1):
     '''
     Returns <text> with special handling of {<expression>} items.
 
@@ -48,15 +46,19 @@ def expand_nv( text, caller):
     If <expression> ends with '=', this character is removed and we prefix the
     result with <expression>=.
 
-    E.g.:
-        x = 45
-        y = 'hello'
-        expand_nv( 'foo {x} {y=}')
-    returns:
-        foo 45 y=hello
+
+    >>> x = 45
+    >>> y = 'hello'
+    >>> expand_nv( 'foo {x} {y=}')
+    'foo 45 y=hello'
 
     <expression> can also use ':' and '!' to control formatting, like
     str.format().
+
+    >>> x = 45
+    >>> y = 'hello'
+    >>> expand_nv( 'foo {x} {y!r=}')
+    "foo 45 y='hello'"
     '''
     if isinstance( caller, int):
         frame_record = inspect.stack()[ caller]
@@ -104,10 +106,12 @@ def expand_nv( text, caller):
                     value = eval( expression, frame.f_globals, frame.f_locals)
                     value_text = ('{0%s}' % tail).format( value)
                 except Exception as e:
-                    value_text = '{??Failed to evaluate %r in context %s:%s because: %s??}' % (
+                    value_text = '{??Failed to evaluate %r in context %s:%s; expression=%r tail=%r: %s}' % (
                             expression,
                             frame_record.filename,
                             frame_record.lineno,
+                            expression,
+                            tail,
                             e,
                             )
                 if nv:
@@ -449,7 +453,7 @@ def split_first_of( text, substrings):
     and <post> is empty or starts with an item in <substrings>.
     '''
     pos, _ = strpbrk( text, substrings)
-    return text[ :pos], text[ pos+1:]
+    return text[ :pos], text[ pos:]
 
 
 
@@ -736,6 +740,24 @@ def time_duration( seconds, verbose=False, s_format='%i'):
         '4d3h2m23s'.
     s_format:
         If specified, use as printf-style format string for seconds.
+
+    >>> time_duration( 303333)
+    '3d12h15m33s'
+
+    >>> time_duration( 303333.33, s_format='%.1f')
+    '3d12h15m33.3s'
+
+    >>> time_duration( 303333, verbose=True)
+    '3 days 12 hours 15 mins 33 secs'
+
+    >>> time_duration( 303333.33, verbose=True, s_format='%.1f')
+    '3 days 12 hours 15 mins 33.3 secs'
+
+    >>> time_duration( 0)
+    '0s'
+
+    >>> time_duration( 0, verbose=True)
+    '0 sec'
     '''
     x = abs(seconds)
     ret = ''
@@ -770,14 +792,6 @@ def time_duration( seconds, verbose=False, s_format='%i'):
     if seconds < 0:
         ret = '-%s' % ret
     return ret
-
-assert time_duration( 303333) == '3d12h15m33s'
-assert time_duration( 303333.33, s_format='%.1f') == '3d12h15m33.3s'
-assert time_duration( 303333, verbose=True) == '3 days 12 hours 15 mins 33 secs'
-assert time_duration( 303333.33, verbose=True, s_format='%.1f') == '3 days 12 hours 15 mins 33.3 secs'
-
-assert time_duration( 0) == '0s'
-assert time_duration( 0, verbose=True) == '0 sec'
 
 
 def date_time( t=None):
@@ -1465,10 +1479,11 @@ class Arg:
     multiple sub-commands (e.g. search for "argparse multiple sub commands").
 
     A basic Arg instance is specified by space-separated items in a syntax
-    string, such as '-flag' or '-f <foo>' or 'foo <foo> <bar>'. These items
-    are to match an equal number of argv items; <...> matches any argv item,
-    otherwise matching is literal. Items that start with '-' are not treated
-    specially.
+    string such as '-flag' or '-f <foo>' or 'foo <foo> <bar>'. These items are
+    to match an equal number of argv items; items inside angled brackets such
+    as '<foo>' matches any argv item, otherwise matching is literal. Items
+    that start with '-' are not treated specially. Special item '...' (without
+    quotes) matches all remaining args.
 
     Command-line parsing is achieved by creating an empty top-level Arg
     instance with <subargs> set to a list of other Arg instances. The resulting
@@ -1476,7 +1491,7 @@ class Arg:
     any or all of these subargs, returning a simple representation of the
     matched <...> items.
 
-    For example:
+    Basic example:
 
         >>> parser = Arg('', subargs=[Arg('-f <input>'), Arg('-o <output>')])
         >>> args = parser.parse('-f in.txt')
@@ -1485,14 +1500,20 @@ class Arg:
         >>> args.f
         'in.txt'
 
-    Attribute names (in this case 'f' and 'o') are always generated from the
-    first item in an Arg's syntax string, with some basic processing to ensure
-    they are legal Python identifiers - removing inital '-', converting '-' to
-    '_', and removing any non-alphanumeric characters. So '-f' is converted to
-    'f', '--foo-bar' is converted to 'foo_bar' etc.
+    Parsing can be given strings or argv-style lists of strings:
 
-    An Arg with zero <...> items results in True, more than one <...> item
-    results in a list of values; there can be zero literal items:
+        >>> parser.parse(['-f', 'in.txt'])
+        namespace(f='in.txt', o=None)
+
+    Attribute names for individual Arg's (in this case 'f' and 'o') are
+    always generated from the first item in an Arg's syntax string, with some
+    basic processing to ensure they are legal Python identifiers (removing
+    inital '-', converting '-' to '_', and removing any non-alphanumeric
+    characters). So '-f' is converted to 'f', '--foo-bar' is converted to
+    'foo_bar' etc.
+
+    A matching Arg with zero <...> items results in True, more than one <...>
+    item results in a list of values; there can be zero literal items:
 
         >>> parser = Arg('', subargs=[Arg('-i'), Arg('-f <file-a> <file-b>'), Arg('<log>')])
         >>> parser.parse('-f foo/a foo/b logfile -i')
@@ -1511,51 +1532,50 @@ class Arg:
         One can nest Arg's to represent sub-commands such as 'git commit ...',
         'git diff ...' etc.
 
-            >>> parser = Arg('', \
-                    subargs=[ \
-                        Arg('-o <file>'), \
-                        Arg('commit', subargs=[Arg('-a'), Arg('-f <file>')]), \
-                        Arg('diff', subargs=[Arg('-f <file>')]), \
-                        ], \
-                    )
-
+            >>> parser = Arg('',
+            ...         subargs=[
+            ...             Arg('-o <file>'),
+            ...             Arg('commit', subargs=[Arg('-a'), Arg('-f <file>')]),
+            ...             Arg('diff', subargs=[Arg('-f <file>')]),
+            ...             ],
+            ...         )
             >>> parser.parse('commit -a -f foo', exit_=0)
             namespace(commit=namespace(a=True, f='foo'), diff=None, o=None)
 
         One can allow multiple subcommands by setting <multi> to true:
 
-            >>> parser = Arg('', \
-                    subargs=[ \
-                        Arg('-o <file>'), \
-                        Arg('commit', multi=1, subargs=[Arg('-f <file>')]), \
-                        Arg('diff', subargs=[Arg('-f <file>')]), \
-                        ], \
-                    )
+            >>> parser = Arg('',
+            ...         subargs=[
+            ...             Arg('-o <file>'),
+            ...             Arg('commit', multi=1, subargs=[Arg('-f <file>')]),
+            ...             Arg('diff', subargs=[Arg('-f <file>')]),
+            ...             ],
+            ...         )
             >>> parser.parse('commit -f foo diff -f bar commit -f bar', exit_=0)
             namespace(commit=[namespace(f='foo'), namespace(f='bar')], diff=namespace(f='bar'), o=None)
 
     Consuming all remaining args:
 
-        Use '...' to match all remaining args.
+        Use '...' in an Arg syntax string to match all remaining args.
 
-            >>> parser = Arg('', \
-                        subargs=[ \
-                            Arg('-o <file>'), \
-                            Arg('-i ...'), \
-                            ], \
-                        )
+            >>> parser = Arg('',
+            ...         subargs=[
+            ...             Arg('-o <file>'),
+            ...             Arg('-i ...'),
+            ...             ],
+            ...         )
             >>> parser.parse('-i foo bar abc pqr')
             namespace(i=['foo', 'bar', 'abc', 'pqr'], o=None)
 
         If '...' is the first item in the syntax
         string, it will appear with special name _remaining:
 
-            >>> parser = Arg('', \
-                        subargs=[ \
-                            Arg('-o <file>'), \
-                            Arg('...'), \
-                            ], \
-                        )
+            >>> parser = Arg('',
+            ...         subargs=[
+            ...             Arg('-o <file>'),
+            ...             Arg('...'),
+            ...             ],
+            ...         )
             >>> parser.parse('-i foo bar abc pqr')
             namespace(_remaining=['-i', 'foo', 'bar', 'abc', 'pqr'], o=None)
 
@@ -1585,12 +1605,14 @@ class Arg:
 
     Help text:
 
+        Help text is formatted similarly to the argparse module.
+
         The help_text() method returns help text for a particular Arg,
         consisting of the <help> value passed to the Arg constructor followed
         by recursive syntax and help text for subargs.
 
         If parsing fails at '-h' or '--help' in argv, we show the help text for
-        the most recent failing Arg.
+        the failing Arg.
 
         Help text for the top-level Arg (e.g. if parsing fails at an initial
         '-h' or '--help' in argv) shows all available help and syntax
@@ -1605,23 +1627,22 @@ class Arg:
 
         Top-level help:
 
-            >>> parser = Arg('', \
-                    help=""" \
-                        Top level help. \
-                        """, \
-                    subargs=[ \
-                        Arg('foo', required=1, multi=1, help='Do foo', \
-                            subargs=[ \
-                                Arg('-f <file>', help='Input file'), \
-                                Arg('-o <file>', required=1, help='Output file'), \
-                                ], \
-                            ), \
-                        Arg('bar <qwerty>', help='Do bar') \
-                        ], \
-                    )
-
+            >>> parser = Arg('',
+            ...         help="""
+            ...             This is the top level help.
+            ...             """,
+            ...         subargs=[
+            ...             Arg('foo', required=1, multi=1, help='Do foo',
+            ...                 subargs=[
+            ...                     Arg('-f <file>', help='Input file'),
+            ...                     Arg('-o <file>', required=1, help='Output file'),
+            ...                     ],
+            ...                 ),
+            ...             Arg('bar <qwerty>', help='Do bar'),
+            ...             ],
+            ...         )
             >>> parser.parse('-h', exit_=0)
-            Top level help.
+            This is the top level help.
             <BLANKLINE>
             Usage:
                 foo  (required, multi)
@@ -1660,18 +1681,19 @@ class Arg:
         syntax:
             Text description of this argument, using space-separated items,
             each of which is to match an item in argv. Items are literal by
-            default, or match anything if inside <...>. E.g.: '-d <files>' will
-            match -d followed by one arg whose value will be available as .d.
+            default, match anything if inside angled brackets <...>, or match
+            all remaining args if '...'. E.g.: '-d <files>' will match -d
+            followed by one arg whose value will be available as .d.
 
             todo: Use <foo:type> to do automatic type conversion.
         subargs:
             If not None, an unordered list of additional Arg instances to
             match.
         help:
-            Help text for this item. Is passed through textwrap.dedent etc so
+            Help text for this item. Is passed through textwrap.dedent() etc so
             can be indented arbitrarily.
         required:
-            Set to true if this item is required.
+            If true this item is required.
         multi:
             If true we allow any number of these args.
         '''
