@@ -1505,15 +1505,32 @@ class Namespace:
         if name.startswith('_'):
             return super().__getattr__(name)
         if name not in self._items_dict:
+            #log('cannot find {name=}')
             raise AttributeError
         assert name in self._items_dict, f'Cannot find name={name} in self._items_dict={self._items_dict}'
         return self._items_dict[name]
     def __setattr__(self, name, value):
-        #print(f'name={name} value={value}')
         if name.startswith('_'):
             return super().__setattr__(name, value)
         self._items_dict[name] = value
         self._items_list.append((name, value))
+
+    def _add(self, name, value, multi, verbose=0):
+        if verbose:
+            log('*** {name=} {value=}')
+        if name.startswith('_'):
+            super().__setattr__(name, value)
+        v = self._items_dict.get(name, None)
+        if multi:
+            if v is None:
+                v = []
+                self._items_dict[name] = v
+            v.append(value)
+        else:
+            assert v is None
+            self._items_dict[name] = value
+        self._items_list.append((name, value))
+
     def __iter__(self):
         return self._items_list.__iter__()
     def __repr__(self):
@@ -1939,19 +1956,13 @@ class Arg:
                 if value is True:
                     # We are top-level Arg with no name. Set None values for
                     # all failed top-level subargs.
-                    setattr(out, name, out_subargs)
+                    #setattr(out, name, out_subargs)
+                    out._add(name, out_subargs, self.multi)
                 return None
             ret += ret_subargs
             value = out_subargs if value is True else (value, out_subargs)
 
-        if self.multi:
-            out_multi = getattr(out, name, None)
-            if out_multi is None:
-                out_multi = []
-                setattr(out, name, out_multi)
-            out_multi.append(value)
-        else:
-            setattr(out, name, value)
+        out._add(name, value, self.multi)
 
         return ret
 
@@ -1989,7 +2000,7 @@ class Arg:
         # Copy subargs_out into <out>, setting missing argv items to None/[].
         for subarg in self.subargs:
             v = getattr(subargs_out, subarg.name, [] if subarg.multi else None)
-            setattr( out, subarg.name, v)
+            out._add(subarg.name, v, multi=False)
         return ret
 
     class _Help(Exception):
@@ -2149,4 +2160,8 @@ class Arg:
 
 if __name__ == '__main__':
     import doctest
-    doctest.testmod()
+    try:
+        doctest.testmod()
+        #optionflags=doctest.FAIL_FAST)
+    except Exception:
+        print(exception_info())
