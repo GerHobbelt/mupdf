@@ -1473,6 +1473,66 @@ def link_l_flags( sos, ld_origin=None):
     return ret
 
 
+class Namespace:
+    '''
+    Looks like a types.SimpleNamespace but iteration steps through items in the
+    order in which they were added.
+
+    >>> ns = Namespace()
+    >>> ns.foo = 'bar'
+    >>> ns.bar = 'pqr'
+    >>> ns
+    namespace(bar='pqr', foo='bar')
+
+    >>> for n, v in ns: print(f'{n}={v}')
+    foo=bar
+    bar=pqr
+
+    >>> ns = Namespace()
+    >>> ns.foo = []
+    >>> ns
+    namespace(foo=[])
+    >>> ns.foo
+    []
+    '''
+    def __init__(self):
+        self._items_dict = dict()
+        self._items_list = list()
+    def __getattr__(self, name):
+        if isinstance(name, int):
+            assert name < len(self._tems_list)
+            return self._tems_list[name]
+        if name.startswith('_'):
+            return super().__getattr__(name)
+        if name not in self._items_dict:
+            raise AttributeError
+        assert name in self._items_dict, f'Cannot find name={name} in self._items_dict={self._items_dict}'
+        return self._items_dict[name]
+    def __setattr__(self, name, value):
+        #print(f'name={name} value={value}')
+        if name.startswith('_'):
+            return super().__setattr__(name, value)
+        self._items_dict[name] = value
+        self._items_list.append((name, value))
+    def __iter__(self):
+        return self._items_list.__iter__()
+    def __repr__(self):
+        ret = ''
+        for n in sorted(self._items_dict.keys()):
+            v = self._items_dict[n]
+            if ret:
+                ret += ', '
+            ret += f'{n}={v!r}'
+        return f'namespace({ret})'
+        return repr(self._items_dict)
+        ret = f'items ({len(self._items_dict)} {len(self._items_list)}):\n'
+        for n, v in self._items_dict.items():
+            ret += f'    {n}={v}\n'
+        for i, v in enumerate(self._items_list):
+            ret += f'    {i}: {v}\n'
+        return ret[:-1]
+
+
 class Arg:
     '''
     Command-line parser with simple text-based specifications and support for
@@ -1568,7 +1628,7 @@ class Arg:
             namespace(i=['foo', 'bar', 'abc', 'pqr'], o=None)
 
         If '...' is the first item in the syntax
-        string, it will appear with special name _remaining:
+        string, it will appear with special name remaining_:
 
             >>> parser = Arg('',
             ...         subargs=[
@@ -1577,7 +1637,7 @@ class Arg:
             ...             ],
             ...         )
             >>> parser.parse('-i foo bar abc pqr')
-            namespace(_remaining=['-i', 'foo', 'bar', 'abc', 'pqr'], o=None)
+            namespace(o=None, remaining_=['-i', 'foo', 'bar', 'abc', 'pqr'])
 
     Error messages:
 
@@ -1736,8 +1796,8 @@ class Arg:
 
     def parse(self, argv, exit_=True):
         '''
-        Attempts to parse <argv>. Returns tree of types.SimpleNamespace's
-        representing <argv> after parsing.
+        Attempts to parse <argv>. Returns tree of Namespace's representing
+        <argv> after parsing.
 
         If '-h' or '--help' is found we output appropriate help; if we fail to
         parse the command line we output information about where things went
@@ -1746,7 +1806,7 @@ class Arg:
         '''
         if isinstance(argv, str):
             argv = argv.split()
-        value = types.SimpleNamespace()
+        value = Namespace()
         failures = Arg._Failures(argv)
         n = self._parse_internal(argv, 0, value, failures, depth=0)
 
@@ -1803,12 +1863,11 @@ class Arg:
             else:
                 self.text = syntax_item
                 self.literal = True
-            # self.parse() will return a types.SimpleNamespace that uses
-            # self.name as attribute name, so we need to make it a usable
-            # Python identifier.
+            # self.parse() will return a Namespace that uses self.name as
+            # attribute name, so we need to make it a usable Python identifier.
             self.name = self.text
             if self.name == '...':
-                self.name = '_remaining'
+                self.name = 'remaining_'
             else:
                 while self.name.startswith('-'):
                     self.name = self.name[1:]
@@ -1873,7 +1932,7 @@ class Arg:
 
         if self.subargs:
             # Match all subargs; we fail if any required subarg is not matched.
-            out_subargs = types.SimpleNamespace()
+            out_subargs = Namespace()
             ret_subargs = self._parse_internal_subargs(argv, pos+ret, out_subargs, failures, depth)
             if ret_subargs is None:
                 # We failed to match one or more required subargs.
@@ -1904,7 +1963,7 @@ class Arg:
         subarg.
         '''
         prefix = ' ' * depth*4
-        subargs_out = types.SimpleNamespace()
+        subargs_out = Namespace()
         ret = 0
         while 1:
             # Try to match next item in argv.
