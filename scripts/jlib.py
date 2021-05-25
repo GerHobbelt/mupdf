@@ -1628,8 +1628,11 @@ class Arg:
             ...             Arg('diff', subargs=[Arg('-f <file>')]),
             ...             ],
             ...         )
-            >>> parser.parse('commit -f foo diff -f bar commit -f bar', exit_=0)
+            >>> args = parser.parse('commit -f foo diff -f bar commit -f bar', exit_=0)
+            >>> args
             namespace(commit=[namespace(f='foo'), namespace(f='bar')], diff=namespace(f='bar'), o=None)
+            >>> args._items_list
+
 
     Consuming all remaining args:
 
@@ -1962,7 +1965,11 @@ class Arg:
             ret += ret_subargs
             value = out_subargs if value is True else (value, out_subargs)
 
+        if name == 'commit':
+            log('{name=} {value=} {self=} {out._items_list=}')
         out._add(name, value, self.multi)
+        if name == 'commit':
+            log('{name=} {value=} {self=} {out._items_list=}')
 
         return ret
 
