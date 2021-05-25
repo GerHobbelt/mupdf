@@ -1475,49 +1475,66 @@ def link_l_flags( sos, ld_origin=None):
 
 class Namespace:
     '''
-    Looks like a types.SimpleNamespace but iteration steps through items in the
-    order in which they were added.
+    Return type for Arg.parse(), providing access via name, string or integer,
+    plus iteration.
 
-    >>> ns = Namespace()
-    >>> ns.foo = 'bar'
-    >>> ns.bar = 'pqr'
-    >>> ns
-    namespace(bar='pqr', foo='bar')
+    String representation is similar to types.SimpleNamespace:
 
-    >>> for n, v in ns: print(f'{n}={v}')
-    foo=bar
-    bar=pqr
+        >>> ns = Namespace()
+        >>> ns._add('foo', 'abc', 0)
+        >>> ns._add('bar', 'pqr', 0)
+        >>> ns
+        namespace(bar='pqr', foo='abc')
 
-    >>> ns = Namespace()
-    >>> ns.foo = []
-    >>> ns
-    namespace(foo=[])
-    >>> ns.foo
-    []
+    Items can be accessed by name similarly to class instances or
+    types.SimpleNamespace's:
+
+        >>> ns.bar
+        'pqr'
+        >>> ns.foo
+        'abc'
+
+    Items can also be accessed by name similarly to a dict:
+
+        >>> ns['bar']
+        'pqr'
+        >>> ns['foo']
+        'abc'
+
+    Items can be accessed by integer and iteration, using the order in which
+    items were added, and returning (name, value):
+
+        >>> ns[0]
+        ('foo', 'abc')
+        >>> ns[1]
+        ('bar', 'pqr')
+        >>> ns[-1]
+        ('bar', 'pqr')
+        >>> for n, v in ns: print(f'{n}={v}')
+        foo=abc
+        bar=pqr
     '''
     def __init__(self):
         self._items_dict = dict()
         self._items_list = list()
+
     def __getattr__(self, name):
-        if isinstance(name, int):
-            assert name < len(self._tems_list)
-            return self._tems_list[name]
         if name.startswith('_'):
             return super().__getattr__(name)
         if name not in self._items_dict:
-            #log('cannot find {name=}')
             raise AttributeError
         assert name in self._items_dict, f'Cannot find name={name} in self._items_dict={self._items_dict}'
         return self._items_dict[name]
-    def __setattr__(self, name, value):
-        if name.startswith('_'):
-            return super().__setattr__(name, value)
-        self._items_dict[name] = value
-        self._items_list.append((name, value))
 
-    def _add(self, name, value, multi, verbose=0):
-        if verbose:
-            log('*** {name=} {value=}')
+    def __getitem__(self, i):
+        if not isinstance(i, int):
+            return self.__getattr__(i)
+        if i < 0:
+            i += len(self._items_list)
+        assert i < len(self._items_list)
+        return self._items_list[i]
+
+    def _add(self, name, value, multi):
         if name.startswith('_'):
             super().__setattr__(name, value)
         v = self._items_dict.get(name, None)
@@ -1533,6 +1550,7 @@ class Namespace:
 
     def __iter__(self):
         return self._items_list.__iter__()
+
     def __repr__(self):
         ret = ''
         for n in sorted(self._items_dict.keys()):
@@ -1541,13 +1559,6 @@ class Namespace:
                 ret += ', '
             ret += f'{n}={v!r}'
         return f'namespace({ret})'
-        return repr(self._items_dict)
-        ret = f'items ({len(self._items_dict)} {len(self._items_list)}):\n'
-        for n, v in self._items_dict.items():
-            ret += f'    {n}={v}\n'
-        for i, v in enumerate(self._items_list):
-            ret += f'    {i}: {v}\n'
-        return ret[:-1]
 
 
 class Arg:
@@ -1587,7 +1598,8 @@ class Arg:
     basic processing to ensure they are legal Python identifiers (removing
     inital '-', converting '-' to '_', and removing any non-alphanumeric
     characters). So '-f' is converted to 'f', '--foo-bar' is converted to
-    'foo_bar' etc.
+    'foo_bar' etc. It is an error if two or more items in <subargs> have the
+    same name.
 
     A matching Arg with zero <...> items results in True, more than one <...>
     item results in a list of values; there can be zero literal items:
@@ -1638,10 +1650,9 @@ class Arg:
             >>> args._items_list
             [('commit', namespace(f='foo')), ('diff', namespace(f='bar')), ('commit', namespace(f='bar'))]
 
-
     Consuming all remaining args:
 
-        Use '...' in an Arg syntax string to match all remaining args.
+        '...' in an Arg syntax string matches all remaining args.
 
             >>> parser = Arg('',
             ...         subargs=[
@@ -1693,8 +1704,8 @@ class Arg:
         Help text is formatted similarly to the argparse module.
 
         The help_text() method returns help text for a particular Arg,
-        consisting of the <help> value passed to the Arg constructor followed
-        by recursive syntax and help text for subargs.
+        consisting of any <help> text passed to the Arg constructor followed by
+        recursive syntax and help text for subargs.
 
         If parsing fails at '-h' or '--help' in argv, we show the help text for
         the failing Arg.
@@ -1707,8 +1718,8 @@ class Arg:
         arbitrarily indented paragraphs with Python triple-quotes; any common
         indentation will be removed.
 
-        After showing help, we default to calling sys.exit(); pass exit_=0
-        to disable this.
+        After showing help, we default to calling sys.exit(0); pass exit_=0 to
+        disable this.
 
         Top-level help:
 
@@ -1772,8 +1783,7 @@ class Arg:
 
             todo: Use <foo:type> to do automatic type conversion.
         subargs:
-            If not None, an unordered list of additional Arg instances to
-            match.
+            If not None, a list of additional Arg instances to match.
         help:
             Help text for this item. Is passed through textwrap.dedent() etc so
             can be indented arbitrarily.
@@ -1790,7 +1800,8 @@ class Arg:
         self.parent = None
 
         # We represent each space-separated element in <syntax> as an _ArgItem
-        # in self.items. Each of these will match exactly one item in argv.
+        # in self.items. Each of these will match exactly one item in argv
+        # (except for '...').
         #
         self.items = []
         for syntax_item in syntax.split():
@@ -1798,19 +1809,7 @@ class Arg:
             self.items.append(item)
 
         self.name = self.items[0].name if self.items else ''
-
-        # Assert that subargs is ok.
-        if self.subargs:
-            assert isinstance(subargs, list)
-            name_to_subarg = dict()
-            for subarg in subargs:
-                subarg.parent = self
-                duplicate = name_to_subarg.get(subarg.name)
-                assert duplicate is None, (
-                        f'Duplicate name {subarg.name!r} in subargs of {self.syntax!r}:'
-                        f' {duplicate.syntax!r} {subarg.syntax!r}'
-                        )
-                name_to_subarg[subarg.name] = subarg
+        self._check_subargs()
 
     def add_subarg(self, subarg):
         '''
@@ -1821,13 +1820,19 @@ class Arg:
 
     def parse(self, argv, exit_=True):
         '''
-        Attempts to parse <argv>. Returns tree of Namespace's representing
-        <argv> after parsing.
+        Attempts to parse <argv>.
 
-        If '-h' or '--help' is found we output appropriate help; if we fail to
-        parse the command line we output information about where things went
-        wrong. In both cases we then call exit() if exit_ it true, else we
-        return None.
+        On success:
+            Returns a Namespace instance, usually containing other nested
+            Namespace instances, representing <argv> after parsing.
+
+        On failure:
+            If the next un-matched item in argv is '-h' or '--help' we output
+            appropriate help, then call sys.exit(0) if <exit_> is true else
+            return None.
+
+            Otherwise we output information about where things went wrong and
+            call sys.exit(1) if <exit_> is true else return None.
         '''
         if isinstance(argv, str):
             argv = argv.split()
@@ -1904,10 +1909,13 @@ class Arg:
             return f'text={self.text} literal={self.literal}'
 
     def _check_subargs(self):
+        '''
+        Assert that there are no duplicate names in self.subargs.
+        '''
         if self.subargs:
-            assert isinstance(subargs, list)
+            assert isinstance(self.subargs, list)
             name_to_subarg = dict()
-            for subarg in subargs:
+            for subarg in self.subargs:
                 subarg.parent = self
                 duplicate = name_to_subarg.get(subarg.name)
                 assert duplicate is None, (
@@ -1918,9 +1926,13 @@ class Arg:
 
     def _parse_internal(self, argv, pos, out, failures, depth):
         '''
-        Matches initial item(s) in argv, sets out.<self.name> to be the value
-        or list of values, and returns number of items consumed. We addionally
-        require that remaining argv matches self.subargs if not empty.
+        Tries to match initial item(s) in argv with self.items and
+        self.subargs.
+
+        On success we set/update out.<self.name> and return the number of argv
+        items consumed. Otherwise returns None with <failures> updated.
+
+        We fail if self.multi is false and out.<self.name> alread exists.
         '''
         if not self.multi and getattr(out, self.name, None) is not None:
             # Already found.
@@ -1931,7 +1943,7 @@ class Arg:
             return None
 
         # Match each item in self.items[] with an item in argv[], putting
-        # non-literal items into value[].
+        # non-literal items into values[].
         values = []
         dot_dot_dot = False
         for i, item in enumerate(self.items):
@@ -1949,70 +1961,61 @@ class Arg:
                     return None
                 values.append(argv[pos+i])
 
-        # Condense <value> for convenience.
+        # Condense <values> for convenience.
         value = True if len(values) == 0 else values[0] if len(values) == 1 else values
-        ret = len(argv) - pos if dot_dot_dot else len(self.items)
-
-        name = self.name if self.name else '_'
+        n = len(argv) - pos if dot_dot_dot else len(self.items)
 
         if self.subargs:
             # Match all subargs; we fail if any required subarg is not matched.
-            ret_subargs, out_subargs = self._parse_internal_subargs(argv, pos+ret, failures, depth)
-            if ret_subargs is None:
+            subargs_n, subargs_out = self._parse_internal_subargs(argv, pos+n, failures, depth)
+            if subargs_n is None:
                 # We failed to match one or more required subargs.
-                if value is True:
-                    # We are top-level Arg with no name. Set None values for
-                    # all failed top-level subargs.
-                    out._add(name, out_subargs, self.multi)
                 return None
-            ret += ret_subargs
-            value = out_subargs if value is True else (value, out_subargs)
+            n += subargs_n
+            value = subargs_out if value is True else (value, subargs_out)
 
-        out._add(name, value, self.multi)
-        return ret
+        out._add(self.name if self.name else '_', value, self.multi)
+        return n
 
     def _parse_internal_subargs(self, argv, pos, failures, depth):
         '''
-        Returns number of argv items consumed, with <out> containing, for
-        each subarg, the value of the matching item in argv or None (or []
-        if multi). So if we return None, out will contain None/[] for every
-        subarg.
+        Matches as many items in self.subargs as possible, in any order.
 
-        Returns n, value.
+        Returns (n, out) where <n> is number of argv items consumed and <out>
+        is a Namespace containing, for each matching subarg, the value of the
+        matching item in argv or None (or [] if multi) if not matched.
+
+        Returns (None, None) if we failed to match an item in self.subargs
+        where .required is true.
         '''
-        prefix = ' ' * depth*4
         subargs_out = Namespace()
-        ret = 0
+        n = 0
         while 1:
-            # Try to match next item in argv.
+            # Try to match one item in self.subargs.
             for subarg in self.subargs:
-                n = subarg._parse_internal(argv, pos+ret, subargs_out, failures, depth+1)
+                nn = subarg._parse_internal(argv, pos+n, subargs_out, failures, depth+1)
                 #log('{self=} {subarg=} {n=} {pos+ret=}')
-                if n is not None:
-                    ret += n
+                if nn is not None:
+                    n += nn
                     break
             else:
                 # No match for next item in argv, so we're done.
                 break
 
         # See whether all required subargs were found.
-        value = Namespace()
         for subarg in self.subargs:
             if subarg.required and not hasattr(subargs_out, subarg.name):
-                # Failire to match a required item; return zero with <value>
-                # containing None/[] for each subarg.
-                for subarg in self.subargs:
-                    setattr( value, subarg.name, [] if subarg.multi else None)
                 return None, None
 
-        # Copy subargs_out into <value>, setting missing argv items to None/[]. We
-        # don't use value._add() for this because it doesn't do the right thing for
-        # multi items.
+        # Copy subargs_out into <value>, setting missing argv items to
+        # None/[]. We don't use value._add() for this because it doesn't do the
+        # right thing for value._items_list.
+        value = Namespace()
         for subarg in self.subargs:
             v = getattr(subargs_out, subarg.name, [] if subarg.multi else None)
             value._items_dict[subarg.name] = v
         value._items_list = subargs_out._items_list
-        return ret, value
+        return n, value
 
     class _Help(Exception):
         def __init__(self, arg):
