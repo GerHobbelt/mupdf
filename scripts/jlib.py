@@ -1957,9 +1957,7 @@ class Arg:
 
         if self.subargs:
             # Match all subargs; we fail if any required subarg is not matched.
-            out_subargs = Namespace()
-
-            ret_subargs = self._parse_internal_subargs(argv, pos+ret, out_subargs, failures, depth)
+            ret_subargs, out_subargs = self._parse_internal_subargs(argv, pos+ret, failures, depth)
             if ret_subargs is None:
                 # We failed to match one or more required subargs.
                 if value is True:
@@ -1973,12 +1971,14 @@ class Arg:
         out._add(name, value, self.multi)
         return ret
 
-    def _parse_internal_subargs(self, argv, pos, out, failures, depth):
+    def _parse_internal_subargs(self, argv, pos, failures, depth):
         '''
         Returns number of argv items consumed, with <out> containing, for
         each subarg, the value of the matching item in argv or None (or []
         if multi). So if we return None, out will contain None/[] for every
         subarg.
+
+        Returns n, value.
         '''
         prefix = ' ' * depth*4
         subargs_out = Namespace()
@@ -1996,22 +1996,23 @@ class Arg:
                 break
 
         # See whether all required subargs were found.
+        value = Namespace()
         for subarg in self.subargs:
             if subarg.required and not hasattr(subargs_out, subarg.name):
-                # Failire to match a required item; return zero with <out>
+                # Failire to match a required item; return zero with <value>
                 # containing None/[] for each subarg.
                 for subarg in self.subargs:
-                    setattr( out, subarg.name, [] if subarg.multi else None)
-                return None
+                    setattr( value, subarg.name, [] if subarg.multi else None)
+                return None, None
 
-        # Copy subargs_out into <out>, setting missing argv items to None/[]. We
-        # don't use out._add() for this because it doesn't do the right thing for
+        # Copy subargs_out into <value>, setting missing argv items to None/[]. We
+        # don't use value._add() for this because it doesn't do the right thing for
         # multi items.
         for subarg in self.subargs:
             v = getattr(subargs_out, subarg.name, [] if subarg.multi else None)
-            out._items_dict[subarg.name] = v
-        out._items_list = subargs_out._items_list
-        return ret
+            value._items_dict[subarg.name] = v
+        value._items_list = subargs_out._items_list
+        return ret, value
 
     class _Help(Exception):
         def __init__(self, arg):
