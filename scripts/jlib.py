@@ -1560,11 +1560,11 @@ class Arg:
     multiple sub-commands (e.g. search for "argparse multiple sub commands").
 
     A basic Arg instance is specified by space-separated items in a syntax
-    string such as '-flag' or '-f <foo>' or 'foo <foo> <bar>'. These items are
-    to match an equal number of argv items; items inside angled brackets such
-    as '<foo>' matches any argv item, otherwise matching is literal. Items
-    that start with '-' are not treated specially. Special item '...' (without
-    quotes) matches all remaining args.
+    string such as '-flag' or '-f <foo>' or 'foo <foo> <bar>'. These items will
+    match an equal number of argv items. Items inside angled brackets such
+    as '<foo>' match any argv item that doesn't starting with '-', otherwise
+    matching is literal. If the last item is '...' (without quotes), it matches
+    all remaining items in argv.
 
     Command-line parsing is achieved by creating an empty top-level Arg
     instance with <subargs> set to a list of other Arg instances. The resulting
@@ -1572,42 +1572,47 @@ class Arg:
     any or all of these subargs, returning a simple representation of the
     matched <...> items.
 
-    Basic example:
+    Basics:
 
-        >>> parser = Arg('', subargs=[Arg('-f <input>'), Arg('-o <output>')])
-        >>> args = parser.parse('-f in.txt')
-        >>> args
-        namespace(f='in.txt', o=None)
-        >>> args.f
-        'in.txt'
+        A very simple example:
 
-    Parsing can be given strings or argv-style lists of strings:
+            >>> parser = Arg('', subargs=[Arg('-f <input>'), Arg('-o <output>')])
+            >>> args = parser.parse(['-f', 'in.txt'])
+            >>> args
+            namespace(f='in.txt', o=None)
+            >>> args.f
+            'in.txt'
 
-        >>> parser.parse(['-f', 'in.txt'])
-        namespace(f='in.txt', o=None)
+        The .parse() method also accepts a string instead of an argv-style
+        list. This is intended for testing ony; the string is split into an
+        argv-style list using .split() so quotes and escaped spaces etc are not
+        handled correctly.
 
-    Attribute names for individual Arg's (in this case 'f' and 'o') are
-    always generated from the first item in an Arg's syntax string, with some
-    basic processing to ensure they are legal Python identifiers (removing
-    inital '-', converting '-' to '_', and removing any non-alphanumeric
-    characters). So '-f' is converted to 'f', '--foo-bar' is converted to
-    'foo_bar' etc. It is an error if two or more items in <subargs> have the
-    same name.
+            >>> parser.parse('-f in.txt')
+            namespace(f='in.txt', o=None)
 
-    A matching Arg with zero <...> items results in True, more than one <...>
-    item results in a list of values; there can be zero literal items:
+        Attribute names for individual Arg's (in this case 'f' and 'o') are
+        always generated from the first item in an Arg's syntax string, with some
+        basic processing to ensure they are legal Python identifiers (removing
+        inital '-', converting '-' to '_', and removing any non-alphanumeric
+        characters). So '-f' is converted to 'f', '--foo-bar' is converted to
+        'foo_bar' etc. It is an error if two or more items in <subargs> have the
+        same name.
 
-        >>> parser = Arg('', subargs=[Arg('-i'), Arg('-f <file-a> <file-b>'), Arg('<log>')])
-        >>> parser.parse('-f foo/a foo/b logfile -i')
-        namespace(f=['foo/a', 'foo/b'], i=True, log='logfile')
+        A matching Arg with no <...> items results in True; more than one <...>
+        item results in a list of values; there can be zero literal items:
 
-    An Arg can be matched an arbitary number of times by setting <multi> to
-    true; unmatched multi items appear as [] rather than None:
+            >>> parser = Arg('', subargs=[Arg('-i'), Arg('-f <file-a> <file-b>'), Arg('<log>')])
+            >>> parser.parse('-f foo/a foo/b logfile -i')
+            namespace(f=['foo/a', 'foo/b'], i=True, log='logfile')
 
-        >>> parser = Arg('', subargs=[Arg('-f <input>', multi=1), Arg('-o <output>', multi=1)])
-        >>> args = parser.parse('-f a.txt -f b.txt -f c.txt')
-        >>> args
-        namespace(f=['a.txt', 'b.txt', 'c.txt'], o=[])
+        An Arg can be matched an arbitary number of times by setting <multi> to
+        true; unmatched multi items appear as [] rather than None:
+
+            >>> parser = Arg('', subargs=[Arg('-f <input>', multi=1), Arg('-o <output>', multi=1)])
+            >>> args = parser.parse('-f a.txt -f b.txt -f c.txt')
+            >>> args
+            namespace(f=['a.txt', 'b.txt', 'c.txt'], o=[])
 
     Sub commands:
 
@@ -1649,7 +1654,7 @@ class Arg:
     Consuming all remaining args:
 
         One can match all remaining items in argv by specifying '...' as the
-        last item in syntax string. This gives a list (which may be empty)
+        last item in the syntax string. This gives a list (which may be empty)
         containing all remaining args.
 
             >>> parser = Arg('',
@@ -1774,6 +1779,18 @@ class Arg:
             <BLANKLINE>
             Usage:
                 -f <file>
+
+        Help text from the.help_text() method.
+            >> parser.help_text()
+            This is the top level help.
+            <BLANKLINE>
+            Usage:
+                foo  (required, multi)
+                                Do foo
+                    -f <file>   Input file
+                    -o <file>  (required)
+                                Output file
+                bar <qwerty>    Do bar
     '''
 
     def __init__(self, syntax, subargs=None, help=None, required=False, multi=False):
