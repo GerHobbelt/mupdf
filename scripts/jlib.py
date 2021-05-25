@@ -1648,8 +1648,9 @@ class Arg:
 
     Consuming all remaining args:
 
-        '...' in an Arg syntax string gives a list containing all remaining
-        args.
+        One can match all remaining items in argv by specifying '...' as the
+        last item in syntax string. This gives a list (which may be empty)
+        containing all remaining args.
 
             >>> parser = Arg('',
             ...         subargs=[
@@ -1664,8 +1665,8 @@ class Arg:
             >>> parser.parse('-i')
             namespace(i=[], o=None)
 
-        If '...' is the first item in the syntax
-        string, it will appear with special name remaining_:
+        If '...' is the only item in the syntax string, it will appear with
+        special name 'remaining_':
 
             >>> parser = Arg('',
             ...         subargs=[
@@ -1675,6 +1676,8 @@ class Arg:
             ...         )
             >>> parser.parse('-i foo bar abc pqr')
             namespace(o=None, remaining_=['-i', 'foo', 'bar', 'abc', 'pqr'])
+            >>> parser.parse('')
+            namespace(o=None, remaining_=[])
 
     Error messages:
 
