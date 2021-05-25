@@ -1637,15 +1637,19 @@ class Arg:
             >>> args
             namespace(commit=[namespace(f='foo'), namespace(f='bar')], diff=namespace(f='bar'), o=None)
 
-        The ._items_list field is a list of (name, value) tuples showing the
-        order in which items were found in argv:
+        Iterating <args> gives (name, value) tuples in the order in which items
+        were found in argv:
 
-            >>> args._items_list
-            [('commit', namespace(f='foo')), ('diff', namespace(f='bar')), ('commit', namespace(f='bar'))]
+            >>> for nv in args:
+            ...     print(nv)
+            ('commit', namespace(f='foo'))
+            ('diff', namespace(f='bar'))
+            ('commit', namespace(f='bar'))
 
     Consuming all remaining args:
 
-        '...' in an Arg syntax string matches all remaining args.
+        '...' in an Arg syntax string gives a list containing all remaining
+        args.
 
             >>> parser = Arg('',
             ...         subargs=[
@@ -1655,6 +1659,10 @@ class Arg:
             ...         )
             >>> parser.parse('-i foo bar abc pqr')
             namespace(i=['foo', 'bar', 'abc', 'pqr'], o=None)
+            >>> parser.parse('-i foo')
+            namespace(i=['foo'], o=None)
+            >>> parser.parse('-i')
+            namespace(i=[], o=None)
 
         If '...' is the first item in the syntax
         string, it will appear with special name remaining_:
@@ -1791,17 +1799,24 @@ class Arg:
         self.required = required
         self.multi = multi
         self.parent = None
+        self.match_remaining = False
 
         # We represent each space-separated element in <syntax> as an _ArgItem
         # in self.items. Each of these will match exactly one item in argv
         # (except for '...').
         #
         self.items = []
-        for syntax_item in syntax.split():
+        syntax_items = syntax.split()
+        for i, syntax_item in enumerate(syntax_items):
+            if i == len(syntax_items) - 1 and syntax_item == '...':
+                self.match_remaining = True
+                break
             item = Arg._ArgItem(syntax_item)
             self.items.append(item)
-
-        self.name = self.items[0].name if self.items else ''
+        if self.match_remaining and not self.items:
+            self.name = 'remaining_'
+        else:
+            self.name = self.items[0].name if self.items else ''
         self._check_subargs()
 
     def add_subarg(self, subarg):
@@ -1880,24 +1895,18 @@ class Arg:
             if syntax_item.startswith('<') and syntax_item.endswith('>'):
                 self.text = syntax_item[1:-1]
                 self.literal = False
-            elif syntax_item == '...':
-                self.text = syntax_item
-                self.literal = False
             else:
                 self.text = syntax_item
                 self.literal = True
             # self.parse() will return a Namespace that uses self.name as
             # attribute name, so we need to make it a usable Python identifier.
             self.name = self.text
-            if self.name == '...':
-                self.name = 'remaining_'
-            else:
-                while self.name.startswith('-'):
-                    self.name = self.name[1:]
-                self.name = self.name.replace('-', '_')
-                self.name = re.sub('[^a-zA-Z0-9_]', '', self.name)
-                if self.name[0] in '0123456789':
-                    self.name = '_' + self.name
+            while self.name.startswith('-'):
+                self.name = self.name[1:]
+            self.name = self.name.replace('-', '_')
+            self.name = re.sub('[^a-zA-Z0-9_]', '', self.name)
+            if self.name[0] in '0123456789':
+                self.name = '_' + self.name
         def __repr__(self):
             return f'text={self.text} literal={self.literal}'
 
@@ -1944,19 +1953,19 @@ class Arg:
                 if item.text != argv[pos+i]:
                     failures.add(pos+i, self)
                     return None
-            elif item.text == '...':
-                # Match all remaining args.
-                values.append(argv[pos+i:])
-                dot_dot_dot = True
             else:
                 if argv[pos+i].startswith('-'):
                     failures.add(pos+i, self, f'value must not start with "-"')
                     return None
                 values.append(argv[pos+i])
+        if self.match_remaining:
+            values.append(argv[pos+len(self.items):])
+            n = len(argv) - pos
+        else:
+            n = len(self.items)
 
         # Condense <values> for convenience.
         value = True if len(values) == 0 else values[0] if len(values) == 1 else values
-        n = len(argv) - pos if dot_dot_dot else len(self.items)
 
         if self.subargs:
             # Match all subargs; we fail if any required subarg is not matched.
