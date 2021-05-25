@@ -1631,6 +1631,10 @@ class Arg:
             >>> args = parser.parse('commit -f foo diff -f bar commit -f bar', exit_=0)
             >>> args
             namespace(commit=[namespace(f='foo'), namespace(f='bar')], diff=namespace(f='bar'), o=None)
+
+        The ._items_list field is a list of (name, value) tuples showing the
+        order in which items were found in argv:
+
             >>> args._items_list
             [('commit', namespace(f='foo')), ('diff', namespace(f='bar')), ('commit', namespace(f='bar'))]
 
@@ -1955,33 +1959,18 @@ class Arg:
             # Match all subargs; we fail if any required subarg is not matched.
             out_subargs = Namespace()
 
-            #log('calling _parse_internal_subargs()')
             ret_subargs = self._parse_internal_subargs(argv, pos+ret, out_subargs, failures, depth)
-
-            #log('{out_subargs._items_list=}')
             if ret_subargs is None:
                 # We failed to match one or more required subargs.
                 if value is True:
                     # We are top-level Arg with no name. Set None values for
                     # all failed top-level subargs.
-                    #setattr(out, name, out_subargs)
                     out._add(name, out_subargs, self.multi)
                 return None
             ret += ret_subargs
             value = out_subargs if value is True else (value, out_subargs)
 
-            #log('{value._items_list=}')
-
-        if name == 'commit':
-            #log('{name=} {value=} {self=} {out._items_list=}')
-            pass
         out._add(name, value, self.multi)
-        if name == 'commit':
-            #log('{name=} {value=} {self=} {out._items_list=}')
-            pass
-
-
-        #log('{out._items_list=}')
         return ret
 
     def _parse_internal_subargs(self, argv, pos, out, failures, depth):
@@ -1991,7 +1980,6 @@ class Arg:
         if multi). So if we return None, out will contain None/[] for every
         subarg.
         '''
-        #log('{out._items_list=}')
         prefix = ' ' * depth*4
         subargs_out = Namespace()
         ret = 0
@@ -2000,7 +1988,6 @@ class Arg:
             for subarg in self.subargs:
                 n = subarg._parse_internal(argv, pos+ret, subargs_out, failures, depth+1)
                 #log('{self=} {subarg=} {n=} {pos+ret=}')
-                #log('{subargs_out._items_list=}')
                 if n is not None:
                     ret += n
                     break
@@ -2009,26 +1996,21 @@ class Arg:
                 break
 
         # See whether all required subargs were found.
-        #log('{subargs_out._items_list=}')
         for subarg in self.subargs:
             if subarg.required and not hasattr(subargs_out, subarg.name):
                 # Failire to match a required item; return zero with <out>
                 # containing None/[] for each subarg.
                 for subarg in self.subargs:
                     setattr( out, subarg.name, [] if subarg.multi else None)
-                #log('')
                 return None
 
-        # Copy subargs_out into <out>, setting missing argv items to None/[].
-        #log('{subargs_out._items_list=}')
-        #log('{out._items_list=}')
+        # Copy subargs_out into <out>, setting missing argv items to None/[]. We
+        # don't use out._add() for this because it doesn't do the right thing for
+        # multi items.
         for subarg in self.subargs:
             v = getattr(subargs_out, subarg.name, [] if subarg.multi else None)
-            #out._add(subarg.name, v, multi=subarg.multi)
             out._items_dict[subarg.name] = v
-        for item in subargs_out._items_list:
-            out._items_list.append(item)
-        #log('{out._items_list=}')
+        out._items_list = subargs_out._items_list
         return ret
 
     class _Help(Exception):
@@ -2188,21 +2170,7 @@ class Arg:
 
 if __name__ == '__main__':
 
-    if 0:
-        parser = Arg('',
-                subargs=[
-                    Arg('-o <file>'),
-                    Arg('commit', multi=1, subargs=[Arg('-f <file>')]),
-                    Arg('diff', subargs=[Arg('-f <file>')]),
-                    ],
-                )
-        args = parser.parse('commit -f foo diff -f bar commit -f bar', exit_=0)
-        print(args)
-        print(args._items_list)
-        sys.exit()
     import doctest
-    try:
-        doctest.testmod()
-        #optionflags=doctest.FAIL_FAST)
-    except Exception:
-        print(exception_info())
+    doctest.testmod(
+            optionflags=doctest.FAIL_FAST,
+            )
