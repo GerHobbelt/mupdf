@@ -1486,20 +1486,13 @@ class Namespace:
         >>> ns
         namespace(bar='pqr', foo='abc')
 
-    Items can be accessed by name similarly to class instances or
-    types.SimpleNamespace's:
+    Items can be accessed directly by name similarly to class instances or
+    types.SimpleNamespace's, or like a dict:
 
-        >>> ns.bar
-        'pqr'
         >>> ns.foo
         'abc'
-
-    Items can also be accessed by name similarly to a dict:
-
         >>> ns['bar']
         'pqr'
-        >>> ns['foo']
-        'abc'
 
     Items can be accessed by integer and iteration, using the order in which
     items were added, and returning (name, value):
@@ -1742,11 +1735,11 @@ class Arg:
             <BLANKLINE>
             Usage:
                 foo  (required, multi)
-                                  Do foo
-                    -f <file>     Input file
+                                Do foo
+                    -f <file>   Input file
                     -o <file>  (required)
-                                  Output file
-                bar <qwerty>      Do bar
+                                Output file
+                bar <qwerty>    Do bar
 
         Help for a particular Arg:
 
@@ -1757,9 +1750,9 @@ class Arg:
             <BLANKLINE>
             Usage:
                 foo  (required, multi)
-                    -f <file>     Input file
+                    -f <file>   Input file
                     -o <file>  (required)
-                                  Output file
+                                Output file
 
         Help for a lower-level Arg:
 
@@ -2017,10 +2010,6 @@ class Arg:
         value._items_list = subargs_out._items_list
         return n, value
 
-    class _Help(Exception):
-        def __init__(self, arg):
-            self.arg = arg
-
     class _Failures:
         def __init__(self, argv):
             self.argv = argv
@@ -2044,7 +2033,6 @@ class Arg:
                 ret += f'Failed at argv[{self.pos}]={self.argv[self.pos]!r},'
             ret += f' expected one of:\n'
             for arg, extra in self.args:
-                #ret += f' [arg is: {arg}]'
                 ret += f'    {arg.syntax}'
                 more = []
                 if arg.parent and arg.parent.name:
@@ -2093,36 +2081,31 @@ class Arg:
             if self.name:
                 prefix += '    '
         if self.items:
-            # E.g. '-s <files>'.
+            # Show syntax, e.g. '-s <files>'.
             text += f'{prefix}'
             for i, item in enumerate(self.items):
                 if i: text += ' '
                 text += item.text if item.literal else f'<{item.text}>'
+            # Show flags, if any.
             extra = []
             if self.required:   extra.append('required')
             if self.multi:  extra.append('multi')
             if extra:
                 text += f'  ({", ".join(extra)})'
 
-            # Write self.help_ starting at column <mid>, starting on new line
-            # if we are already beyond <mid>.
+            # Show self.help_ starting at column <mid>, starting on a second
+            # line if we are already too close to or beyond <mid>.
             if self.help_ and not top_level:
-                h = Arg._format(self.help_, mid*' '+'  ', width)
-                if len(text) < mid:
+                h = Arg._format(self.help_, mid*' ', width)
+                if len(text) <= mid-2:
                     # First line of help will fit on current line.
                     h = h[len(text):]
-                    text += h
                 else:
                     text += '\n'
-                    text += h
+                text += h
             text += '\n'
 
         if self.subargs:
-            if mid is None:
-                mid = 0
-                for subarg in self.subargs:
-                    t = subarg.show( prefix + '    ', simple=True)
-                    mid = max(max_width, len(t))
             for subarg in self.subargs:
                 t = subarg.help_text( prefix + '    ', mid=mid)
                 text += t
@@ -2165,12 +2148,14 @@ class Arg:
             para = textwrap.fill(para, width - len(prefix))
             para = textwrap.indent(para, prefix + indent*' ')
             if indent <= indent_prev:
+                # Put blank lines before less-indented paragraphs.
                 paras.append('')
             paras.append(para)
             indent_prev = indent
         ret = f'\n'.join(paras)
         assert not ret.endswith('\n')
         return ret
+
 
 if __name__ == '__main__':
 
