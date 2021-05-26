@@ -760,7 +760,7 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 	pdf_document *doc;
 	pdf_annot **annotptr;
 	pdf_obj *annot_arr, *popup;
-	int i;
+	int flags, i;
 	int is_widget = 0;
 
 	if (annot == NULL || page == NULL || page != annot->page)
@@ -789,6 +789,10 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 
 	/* Check the passed annotation was of this page */
 	if (*annotptr == NULL)
+		return;
+
+	flags = pdf_dict_get_int(ctx, (*annotptr)->obj, PDF_NAME(F));
+	if (flags & PDF_ANNOT_IS_LOCKED)
 		return;
 
 	/* Remove annot from page's list */
@@ -884,6 +888,10 @@ pdf_annot_flags(fz_context *ctx, pdf_annot *annot)
 void
 pdf_set_annot_flags(fz_context *ctx, pdf_annot *annot, int flags)
 {
+	int flagz = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	if (flagz & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	begin_annot_op(ctx, annot, "Set flags");
 
 	fz_try(ctx)
@@ -910,6 +918,10 @@ void
 pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 {
 	fz_matrix page_ctm, inv_page_ctm;
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
 
 	pdf_begin_operation(ctx, annot->page->doc, "Set rectangle");
 
@@ -925,7 +937,8 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 	fz_always(ctx)
 		pdf_end_operation(ctx, annot->page->doc);
 	fz_catch(ctx)
-		fz_rethrow(ctx);}
+		fz_rethrow(ctx);
+}
 
 const char *
 pdf_annot_contents(fz_context *ctx, pdf_annot *annot)
@@ -936,6 +949,11 @@ pdf_annot_contents(fz_context *ctx, pdf_annot *annot)
 void
 pdf_set_annot_contents(fz_context *ctx, pdf_annot *annot, const char *text)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+
+	if (flags & PDF_ANNOT_IS_LOCKED_CONTENTS)
+		return;
+
 	begin_annot_op(ctx, annot, "Set contents");
 
 	fz_try(ctx)
@@ -1084,6 +1102,11 @@ pdf_annot_icon_name(fz_context *ctx, pdf_annot *annot)
 void
 pdf_set_annot_icon_name(fz_context *ctx, pdf_annot *annot, const char *name)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	begin_annot_op(ctx, annot, "Set icon name");
 
 	fz_try(ctx)
@@ -1223,6 +1246,10 @@ pdf_set_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot,
 {
 	pdf_document *doc = annot->page->doc;
 	pdf_obj *style;
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
 
 	begin_annot_op(ctx, annot, "Set line endings");
 
@@ -1289,6 +1316,10 @@ pdf_annot_border(fz_context *ctx, pdf_annot *annot)
 void
 pdf_set_annot_border(fz_context *ctx, pdf_annot *annot, float w)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	begin_annot_op(ctx, annot, "Set border");
 
 	fz_try(ctx)
@@ -1384,6 +1415,10 @@ pdf_annot_quadding(fz_context *ctx, pdf_annot *annot)
 void
 pdf_set_annot_quadding(fz_context *ctx, pdf_annot *annot, int q)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	q = (q < 0 || q > 2) ? 0 : q;
 
 	begin_annot_op(ctx, annot, "Set quadding");
@@ -1420,6 +1455,10 @@ float pdf_annot_opacity(fz_context *ctx, pdf_annot *annot)
 
 void pdf_set_annot_opacity(fz_context *ctx, pdf_annot *annot, float opacity)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	begin_annot_op(ctx, annot, "Set opacity");
 
 	fz_try(ctx)
@@ -1639,6 +1678,10 @@ pdf_annot_MK_BC_rgb(fz_context *ctx, pdf_annot *annot, float rgb[3])
 void
 pdf_set_annot_color(fz_context *ctx, pdf_annot *annot, int n, const float *color)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	begin_annot_op(ctx, annot, "Set color");
 
 	fz_try(ctx)
@@ -1683,6 +1726,10 @@ pdf_annot_interior_color(fz_context *ctx, pdf_annot *annot, int *n, float color[
 void
 pdf_set_annot_interior_color(fz_context *ctx, pdf_annot *annot, int n, const float *color)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
+
 	begin_annot_op(ctx, annot, "Set interior color");
 
 	fz_try(ctx)
@@ -2600,7 +2647,11 @@ pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **fon
 void
 pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, int n, const float *color)
 {
+	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
 	char buf[100];
+
+	if (flags & PDF_ANNOT_IS_LOCKED)
+		return;
 
 	begin_annot_op(ctx, annot, "Set default appearance");
 
