@@ -138,8 +138,7 @@ def venv_run(
     if windows():
         # Run under cmd.exe with all commands inside "...".
         pre = [
-                f'cmd.exe /c "'
-                f'{"cd "+directory if directory else "true"}',
+                f'cmd.exe /c "{"cd "+directory if directory else "true"}',
                 f'{py} -m venv {venv}',
                 f'{venv}\\Scripts\\activate.bat',
                 ]
