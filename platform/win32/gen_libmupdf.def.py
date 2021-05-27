@@ -23,7 +23,7 @@ def collectExports(header):
 		data = re.sub(r"(?sm)PTW32_CDECL +", "", data, 0)
 		data = re.sub(r"(?sm)FGAPIENTRY +", "", data, 0)
 		data = re.sub(r"(?sm)^typedef\s+[^;]+;", "", data, 0)
-		return re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+) *\(.*?\);", data)
+		return sorted(re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+) *\(.*?\);", data))
 	except: # catch *all* exceptions
 		e = sys.exc_info()[0]
 		print( "Error: %s while processing file %s" % ( e, header ) )
@@ -38,13 +38,13 @@ def generateExports(header, exclude=[]):
 
 def collectFunctions(file):
 	data = open(file, "r", encoding='utf8').read()
-	return re.findall(r"(?sm)^\w+(?: \*\n|\n| \*| )((?:fz_|pdf_|xps_)\w+) *\(", data)
+	return sorted(re.findall(r"(?sm)^\w+(?: \*\n|\n| \*| )((?:fz_|pdf_|xps_)\w+) *\(", data))
 
 def generateExportsJpeg(file, exclude=[], include=[]):
 	data = open(file, "r", encoding='utf8').read()
 	data = re.sub(r"(?sm)^\s*JMETHOD *\([^\)]*\)", "", data, 0)
 	data = re.sub(r"(?sm)[\s\r\n]+JPP *\([^\)]*\)", "(XXXXX)", data, 0)
-	functions = re.findall(r"(?sm)^EXTERN *\([^)]+\) +(\w+)\s*\(XXXXX\)", data)
+	functions = sorted(re.findall(r"(?sm)^EXTERN *\([^)]+\) +(\w+)\s*\(XXXXX\)", data))
 	return "\n".join(["\t" + name for name in functions if name not in exclude]) + "\n" + "\n".join(["\t" + name for name in include])
 
 LIBMUPDF_DEF = """\

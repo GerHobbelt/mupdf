@@ -6,160 +6,160 @@ EXPORTS
 
 ; MuPDF tool exports
 
+	cjpeg_main
+	cmapdump_main
+	curl_main
+	djpeg_main
+	jpegtran_main
 	muconvert_main
 	mudraw_main
-	muraster_main
-	mutrace_main
-	murun_main
-	pdfclean_main
-	pdfextract_main
-	pdfinfo_main
-	pdfposter_main
-	pdfshow_main
-	pdfpages_main
-	pdfcreate_main
-	pdfmerge_main
-	pdfsign_main
-	pdfmetadump_main
-	cmapdump_main
-	tesseract_main
-	curl_main
 	mujs_main
 	mujs_prettyprint_main
+	muraster_main
+	murun_main
+	mutrace_main
+	pdfclean_main
+	pdfcreate_main
+	pdfextract_main
+	pdfinfo_main
+	pdfmerge_main
+	pdfmetadump_main
+	pdfpages_main
+	pdfposter_main
+	pdfshow_main
+	pdfsign_main
 	qiqqa_fingerprint0_main
 	qiqqa_fingerprint1_main
-	sqlite_main
-	jpegtran_main
 	rdjpegcom_main
+	sqlite_main
+	tesseract_main
 	wrjpegcom_main
-	cjpeg_main
-	djpeg_main
 
 ; MuPDF ucdn exports
 
-	ucdn_get_unicode_version
+	ucdn_compat_decompose
+	ucdn_compose
+	ucdn_decompose
+	ucdn_get_bidi_class
 	ucdn_get_combining_class
 	ucdn_get_east_asian_width
 	ucdn_get_general_category
-	ucdn_get_bidi_class
-	ucdn_get_script
 	ucdn_get_linebreak_class
-	ucdn_get_resolved_linebreak_class
 	ucdn_get_mirrored
+	ucdn_get_resolved_linebreak_class
+	ucdn_get_script
+	ucdn_get_unicode_version
 	ucdn_mirror
 	ucdn_paired_bracket
 	ucdn_paired_bracket_type
-	ucdn_decompose
-	ucdn_compat_decompose
-	ucdn_compose
 
 ; PKCS7 exports
 
-	pkcs7_openssl_read_pfx
 	pkcs7_openssl_new_verifier
+	pkcs7_openssl_read_pfx
 
 ; Tesseract OCR exports
 
-	ocr_init
 	ocr_fin
+	ocr_init
 	ocr_recognise
 
 	tesseract_ambiguous_words_main
 	tesseract_classifier_tester_main
 	tesseract_cn_training_main
-	tesseract_mf_training_main
-	tesseract_shape_clustering_main
 	tesseract_combine_lang_model_main
 	tesseract_combine_tessdata_main
 	tesseract_dawg2wordlist_main
 	tesseract_lstm_eval_main
 	tesseract_lstm_training_main
 	tesseract_merge_unicharsets_main
+	tesseract_mf_training_main
 	tesseract_set_unicharset_properties_main
+	tesseract_shape_clustering_main
 	tesseract_text2image_main
 	tesseract_unicharset_extractor_main
 	tesseract_wordlist2dawg_main
 
 ; curl exports
 
-	curl_strequal
-	curl_strnequal
-	curl_mime_init
-	curl_mime_free
-	curl_mime_addpart
-	curl_mime_name
-	curl_mime_filename
-	curl_mime_type
-	curl_mime_encoder
-	curl_mime_data
-	curl_mime_filedata
-	curl_mime_data_cb
-	curl_mime_subparts
-	curl_mime_headers
-	curl_formadd
-	curl_formget
-	curl_formfree
-	curl_getenv
-	curl_version
 	curl_easy_escape
-	curl_escape
+	curl_easy_pause
+	curl_easy_strerror
 	curl_easy_unescape
-	curl_unescape
+	curl_escape
+	curl_formadd
+	curl_formfree
+	curl_formget
 	curl_free
+	curl_getdate
+	curl_getenv
+	curl_global_cleanup
 	curl_global_init
 	curl_global_init_mem
-	curl_global_cleanup
 	curl_global_sslset
-	curl_slist_append
-	curl_slist_free_all
-	curl_getdate
+	curl_mime_addpart
+	curl_mime_data
+	curl_mime_data_cb
+	curl_mime_encoder
+	curl_mime_filedata
+	curl_mime_filename
+	curl_mime_free
+	curl_mime_headers
+	curl_mime_init
+	curl_mime_name
+	curl_mime_subparts
+	curl_mime_type
+	curl_share_cleanup
 	curl_share_init
 	curl_share_setopt
-	curl_share_cleanup
-	curl_version_info
-	curl_easy_strerror
 	curl_share_strerror
-	curl_easy_pause
+	curl_slist_append
+	curl_slist_free_all
+	curl_strequal
+	curl_strnequal
+	curl_unescape
+	curl_version
+	curl_version_info
 
-	curl_easy_init
-	curl_easy_setopt
-	curl_easy_perform
 	curl_easy_cleanup
-	curl_easy_getinfo
 	curl_easy_duphandle
-	curl_easy_reset
+	curl_easy_getinfo
+	curl_easy_init
+	curl_easy_perform
 	curl_easy_recv
+	curl_easy_reset
 	curl_easy_send
+	curl_easy_setopt
 	curl_easy_upkeep
-	curl_mprintf
-	curl_mfprintf
-	curl_msprintf
-	curl_msnprintf
-	curl_mvprintf
-	curl_mvfprintf
-	curl_mvsprintf
-	curl_mvsnprintf
 	curl_maprintf
+	curl_mfprintf
+	curl_mprintf
+	curl_msnprintf
+	curl_msprintf
 	curl_mvaprintf
-	curl_multi_init
+	curl_mvfprintf
+	curl_mvprintf
+	curl_mvsnprintf
+	curl_mvsprintf
 	curl_multi_add_handle
-	curl_multi_remove_handle
-	curl_multi_fdset
-	curl_multi_wait
-	curl_multi_poll
-	curl_multi_wakeup
-	curl_multi_perform
+	curl_multi_assign
 	curl_multi_cleanup
+	curl_multi_fdset
 	curl_multi_info_read
-	curl_multi_strerror
+	curl_multi_init
+	curl_multi_perform
+	curl_multi_poll
+	curl_multi_remove_handle
+	curl_multi_setopt
 	curl_multi_socket
 	curl_multi_socket_action
 	curl_multi_socket_all
+	curl_multi_strerror
 	curl_multi_timeout
-	curl_multi_setopt
-	curl_multi_assign
-	curl_pushheader_bynum
+	curl_multi_wait
+	curl_multi_wakeup
 	curl_pushheader_byname
+	curl_pushheader_bynum
 
 	curl_url
 	curl_url_cleanup
@@ -190,67 +190,67 @@ EXPORTS
 	fz_normalize_path
 	fz_sanitize_path
 
-	mu_create_semaphore
-	mu_destroy_semaphore
-	mu_trigger_semaphore
-	mu_wait_semaphore
-	mu_create_thread
-	mu_destroy_thread
 	mu_create_mutex
+	mu_create_semaphore
+	mu_create_thread
 	mu_destroy_mutex
+	mu_destroy_semaphore
+	mu_destroy_thread
 	mu_lock_mutex
+	mu_trigger_semaphore
 	mu_unlock_mutex
+	mu_wait_semaphore
 
 ; Fitz Documents exports
 
-	fz_register_document_handler
-	fz_register_document_handlers
-	fz_recognize_document
-	fz_open_document
-	fz_open_accelerated_document
-	fz_open_document_with_stream
-	fz_open_accelerated_document_with_stream
-	fz_document_supports_accelerator
-	fz_save_accelerator
-	fz_output_accelerator
-	fz_new_document_of_size
-	fz_keep_document
-	fz_drop_document
-	fz_needs_password
 	fz_authenticate_password
-	fz_load_outline
-	fz_is_document_reflowable
-	fz_layout_document
-	fz_make_bookmark
-	fz_lookup_bookmark
-	fz_count_pages
-	fz_resolve_link
-	fz_last_page
-	fz_next_page
-	fz_previous_page
+	fz_bound_page
 	fz_clamp_location
-	fz_location_from_page_number
-	fz_page_number_from_location
-	fz_load_page
-	fz_count_chapters
 	fz_count_chapter_pages
+	fz_count_chapters
+	fz_count_pages
+	fz_create_link
+	fz_document_output_intent
+	fz_document_supports_accelerator
+	fz_drop_document
+	fz_drop_page
+	fz_has_permission
+	fz_is_document_reflowable
+	fz_keep_document
+	fz_keep_page
+	fz_last_page
+	fz_layout_document
 	fz_load_chapter_page
 	fz_load_links
-	fz_new_page_of_size
-	fz_bound_page
-	fz_run_page
-	fz_run_page_contents
-	fz_run_page_annots
-	fz_run_page_widgets
-	fz_keep_page
-	fz_drop_page
-	fz_page_presentation
-	fz_has_permission
+	fz_load_outline
+	fz_load_page
+	fz_location_from_page_number
+	fz_lookup_bookmark
 	fz_lookup_metadata
-	fz_document_output_intent
+	fz_make_bookmark
+	fz_needs_password
+	fz_new_document_of_size
+	fz_new_page_of_size
+	fz_next_page
+	fz_open_accelerated_document
+	fz_open_accelerated_document_with_stream
+	fz_open_document
+	fz_open_document_with_stream
+	fz_output_accelerator
+	fz_page_number_from_location
+	fz_page_presentation
 	fz_page_separations
 	fz_page_uses_overprint
-	fz_create_link
+	fz_previous_page
+	fz_recognize_document
+	fz_register_document_handler
+	fz_register_document_handlers
+	fz_resolve_link
+	fz_run_page
+	fz_run_page_annots
+	fz_run_page_contents
+	fz_run_page_widgets
+	fz_save_accelerator
 
 ; Fitz exports
 
@@ -302,1692 +302,1692 @@ EXPORTS
 	fz_unicode_from_windows_1251      DATA
 	fz_unicode_from_windows_1252      DATA
 
-	fz_open_archive
-	fz_open_archive_with_stream
-	fz_open_directory
-	fz_is_directory
-	fz_drop_archive
 	fz_archive_format
+	fz_close_zip_writer
 	fz_count_archive_entries
-	fz_list_archive_entry
+	fz_drop_archive
+	fz_drop_zip_writer
 	fz_has_archive_entry
-	fz_open_archive_entry
-	fz_read_archive_entry
+	fz_is_directory
 	fz_is_tar_archive
-	fz_open_tar_archive
-	fz_open_tar_archive_with_stream
 	fz_is_zip_archive
-	fz_open_zip_archive
-	fz_open_zip_archive_with_stream
+	fz_list_archive_entry
+	fz_new_archive_of_size
 	fz_new_zip_writer
 	fz_new_zip_writer_with_output
+	fz_open_archive
+	fz_open_archive_entry
+	fz_open_archive_with_stream
+	fz_open_directory
+	fz_open_tar_archive
+	fz_open_tar_archive_with_stream
+	fz_open_zip_archive
+	fz_open_zip_archive_with_stream
+	fz_read_archive_entry
 	fz_write_zip_entry
-	fz_close_zip_writer
-	fz_drop_zip_writer
-	fz_new_archive_of_size
-	fz_write_header
-	fz_write_band
 	fz_drop_band_writer
 	fz_new_band_writer_of_size
+	fz_write_band
+	fz_write_header
 	fz_bidi_fragment_text
-	fz_keep_bitmap
-	fz_drop_bitmap
-	fz_new_bitmap_from_pixmap
-	fz_new_bitmap_from_pixmap_band
-	fz_new_bitmap
 	fz_bitmap_details
 	fz_clear_bitmap
 	fz_default_halftone
-	fz_keep_halftone
+	fz_drop_bitmap
 	fz_drop_halftone
-	fz_keep_buffer
-	fz_drop_buffer
-	fz_buffer_storage
-	fz_string_from_buffer
-	fz_new_buffer
-	fz_new_buffer_from_data
-	fz_new_buffer_from_shared_data
-	fz_new_buffer_from_copied_data
-	fz_new_buffer_from_base64
-	fz_resize_buffer
-	fz_grow_buffer
-	fz_trim_buffer
-	fz_clear_buffer
-	fz_append_buffer
-	fz_append_data
-	fz_append_string
-	fz_append_byte
-	fz_append_rune
-	fz_append_int32_le
-	fz_append_int16_le
-	fz_append_int32_be
-	fz_append_int16_be
+	fz_keep_bitmap
+	fz_keep_halftone
+	fz_new_bitmap
+	fz_new_bitmap_from_pixmap
+	fz_new_bitmap_from_pixmap_band
 	fz_append_bits
 	fz_append_bits_pad
+	fz_append_buffer
+	fz_append_byte
+	fz_append_data
+	fz_append_int16_be
+	fz_append_int16_le
+	fz_append_int32_be
+	fz_append_int32_le
 	fz_append_pdf_string
 	fz_append_printf
+	fz_append_rune
+	fz_append_string
 	fz_append_vprintf
-	fz_terminate_buffer
-	fz_md5_buffer
 	fz_buffer_extract
-	fz_lookup_rendering_intent
-	fz_rendering_intent_name
-	fz_new_colorspace
-	fz_keep_colorspace
-	fz_drop_colorspace
-	fz_new_indexed_colorspace
-	fz_new_icc_colorspace
-	fz_new_cal_gray_colorspace
-	fz_new_cal_rgb_colorspace
-	fz_colorspace_type
-	fz_colorspace_name
-	fz_colorspace_n
-	fz_colorspace_is_subtractive
-	fz_colorspace_device_n_has_only_cmyk
+	fz_buffer_storage
+	fz_clear_buffer
+	fz_drop_buffer
+	fz_grow_buffer
+	fz_keep_buffer
+	fz_md5_buffer
+	fz_new_buffer
+	fz_new_buffer_from_base64
+	fz_new_buffer_from_copied_data
+	fz_new_buffer_from_data
+	fz_new_buffer_from_shared_data
+	fz_resize_buffer
+	fz_string_from_buffer
+	fz_terminate_buffer
+	fz_trim_buffer
+	fz_clamp_color
+	fz_clone_default_colorspaces
+	fz_colorspace_colorant
 	fz_colorspace_device_n_has_cmyk
-	fz_colorspace_is_gray
-	fz_colorspace_is_rgb
+	fz_colorspace_device_n_has_only_cmyk
 	fz_colorspace_is_cmyk
-	fz_colorspace_is_lab
-	fz_colorspace_is_indexed
-	fz_colorspace_is_device_n
 	fz_colorspace_is_device
-	fz_colorspace_is_device_gray
 	fz_colorspace_is_device_cmyk
+	fz_colorspace_is_device_gray
+	fz_colorspace_is_device_n
+	fz_colorspace_is_gray
+	fz_colorspace_is_indexed
+	fz_colorspace_is_lab
 	fz_colorspace_is_lab_icc
-	fz_is_valid_blend_colorspace
-	fz_device_gray
-	fz_device_rgb
+	fz_colorspace_is_rgb
+	fz_colorspace_is_subtractive
+	fz_colorspace_n
+	fz_colorspace_name
+	fz_colorspace_name_colorant
+	fz_colorspace_type
+	fz_convert_color
+	fz_default_cmyk
+	fz_default_gray
+	fz_default_output_intent
+	fz_default_rgb
 	fz_device_bgr
 	fz_device_cmyk
+	fz_device_gray
 	fz_device_lab
-	fz_colorspace_name_colorant
-	fz_colorspace_colorant
-	fz_clamp_color
-	fz_convert_color
-	fz_new_default_colorspaces
-	fz_keep_default_colorspaces
-	fz_drop_default_colorspaces
-	fz_clone_default_colorspaces
-	fz_default_gray
-	fz_default_rgb
-	fz_default_cmyk
-	fz_default_output_intent
-	fz_set_default_gray
-	fz_set_default_rgb
-	fz_set_default_cmyk
-	fz_set_default_output_intent
+	fz_device_rgb
+	fz_drop_colorspace
 	fz_drop_colorspace_imp
-	fz_deflate
+	fz_drop_default_colorspaces
+	fz_is_valid_blend_colorspace
+	fz_keep_colorspace
+	fz_keep_default_colorspaces
+	fz_lookup_rendering_intent
+	fz_new_cal_gray_colorspace
+	fz_new_cal_rgb_colorspace
+	fz_new_colorspace
+	fz_new_default_colorspaces
+	fz_new_icc_colorspace
+	fz_new_indexed_colorspace
+	fz_rendering_intent_name
+	fz_set_default_cmyk
+	fz_set_default_gray
+	fz_set_default_output_intent
+	fz_set_default_rgb
 	fz_compress_ccitt_fax_g3
 	fz_compress_ccitt_fax_g4
+	fz_deflate
 	fz_compressed_buffer_size
-	fz_open_compressed_buffer
-	fz_open_image_decomp_stream_from_buffer
-	fz_open_image_decomp_stream
-	fz_recognize_image_format
 	fz_drop_compressed_buffer
+	fz_open_compressed_buffer
+	fz_open_image_decomp_stream
+	fz_open_image_decomp_stream_from_buffer
+	fz_recognize_image_format
 
-	fz_vthrow
-	fz_throw
-	fz_rethrow
-	fz_verror
-	fz_error
-	fz_vwarn
-	fz_warn
-	fz_vinfo
-	fz_info
-	fz_caught_message
-	fz_caught
-	fz_rethrow_if
-	fz_flush_warnings
-	fz_clone_context
-	fz_drop_context
-	fz_set_user_context
-	fz_user_context
-	fz_drop_context_locks
-	fz_get_global_context
-	fz_set_global_context
-	fz_has_global_context
-	fz_drop_global_context
-	fz_has_locking_support
-	fz_default_error_callback
-	fz_default_warning_callback
-	fz_default_info_callback
-	fz_default_error_warn_info_mode
-	fz_set_error_callback
-	fz_get_error_callback
-	fz_set_warning_callback
-	fz_get_warning_callback
-	fz_set_info_callback
-	fz_get_info_callback
-	fz_tune_image_decode
-	fz_tune_image_scale
 	fz_aa_level
-	fz_set_aa_level
-	fz_text_aa_level
-	fz_set_text_aa_level
-	fz_graphics_aa_level
-	fz_set_graphics_aa_level
-	fz_graphics_min_line_width
-	fz_set_graphics_min_line_width
-	fz_user_css
-	fz_set_user_css
-	fz_use_document_css
-	fz_set_use_document_css
-	fz_enable_icc
-	fz_disable_icc
-	fz_malloc
 	fz_calloc
-	fz_realloc
-	fz_free
-	fz_malloc_no_throw
 	fz_calloc_no_throw
-	fz_realloc_no_throw
-	fz_strdup
-	fz_memrnd
-	fz_var_imp
-	fz_push_try
-	fz_do_try
+	fz_caught
+	fz_caught_message
+	fz_clone_context
+	fz_default_error_callback
+	fz_default_error_warn_info_mode
+	fz_default_info_callback
+	fz_default_warning_callback
+	fz_disable_icc
 	fz_do_always
 	fz_do_catch
+	fz_do_try
+	fz_drop_context
+	fz_drop_context_locks
+	fz_drop_global_context
+	fz_enable_icc
+	fz_error
+	fz_flush_warnings
+	fz_free
+	fz_get_error_callback
+	fz_get_global_context
+	fz_get_info_callback
+	fz_get_warning_callback
+	fz_graphics_aa_level
+	fz_graphics_min_line_width
+	fz_has_global_context
+	fz_has_locking_support
+	fz_info
+	fz_malloc
+	fz_malloc_no_throw
+	fz_memrnd
 	fz_new_context_imp
+	fz_push_try
+	fz_realloc
+	fz_realloc_no_throw
+	fz_rethrow
+	fz_rethrow_if
+	fz_set_aa_level
+	fz_set_error_callback
+	fz_set_global_context
+	fz_set_graphics_aa_level
+	fz_set_graphics_min_line_width
+	fz_set_info_callback
+	fz_set_text_aa_level
+	fz_set_use_document_css
+	fz_set_user_context
+	fz_set_user_css
+	fz_set_warning_callback
+	fz_strdup
+	fz_text_aa_level
+	fz_throw
+	fz_tune_image_decode
+	fz_tune_image_scale
+	fz_use_document_css
+	fz_user_context
+	fz_user_css
+	fz_var_imp
+	fz_verror
+	fz_vinfo
+	fz_vthrow
+	fz_vwarn
+	fz_warn
+	fz_aes_crypt_cbc
+	fz_aes_setkey_dec
+	fz_aes_setkey_enc
+	fz_arc4_encrypt
+	fz_arc4_final
+	fz_arc4_init
+	fz_md5_final
 	fz_md5_init
 	fz_md5_update
 	fz_md5_update_int64
-	fz_md5_final
+	fz_sha256_final
 	fz_sha256_init
 	fz_sha256_update
-	fz_sha256_final
-	fz_sha512_init
-	fz_sha512_update
-	fz_sha512_final
+	fz_sha384_final
 	fz_sha384_init
 	fz_sha384_update
-	fz_sha384_final
-	fz_arc4_init
-	fz_arc4_encrypt
-	fz_arc4_final
-	fz_aes_setkey_enc
-	fz_aes_setkey_dec
-	fz_aes_crypt_cbc
-	fz_lookup_blendmode
-	fz_blendmode_name
-	fz_fill_path
-	fz_stroke_path
-	fz_clip_path
-	fz_clip_stroke_path
-	fz_fill_text
-	fz_stroke_text
-	fz_clip_text
-	fz_clip_stroke_text
-	fz_ignore_text
-	fz_pop_clip
-	fz_fill_shade
-	fz_fill_image
-	fz_fill_image_mask
-	fz_clip_image_mask
-	fz_begin_mask
-	fz_end_mask
+	fz_sha512_final
+	fz_sha512_init
+	fz_sha512_update
 	fz_begin_group
-	fz_end_group
+	fz_begin_layer
+	fz_begin_mask
 	fz_begin_tile
 	fz_begin_tile_id
-	fz_end_tile
-	fz_render_flags
-	fz_set_default_colorspaces
-	fz_begin_layer
-	fz_end_layer
-	fz_new_device_of_size
+	fz_blendmode_name
+	fz_clip_image_mask
+	fz_clip_path
+	fz_clip_stroke_path
+	fz_clip_stroke_text
+	fz_clip_text
 	fz_close_device
-	fz_drop_device
-	fz_keep_device
-	fz_enable_device_hints
-	fz_disable_device_hints
 	fz_device_current_scissor
+	fz_disable_device_hints
+	fz_drop_device
+	fz_enable_device_hints
+	fz_end_group
+	fz_end_layer
+	fz_end_mask
+	fz_end_tile
+	fz_fill_image
+	fz_fill_image_mask
+	fz_fill_path
+	fz_fill_shade
+	fz_fill_text
+	fz_ignore_text
+	fz_keep_device
+	fz_lookup_blendmode
+	fz_new_bbox_device
+	fz_new_device_of_size
+	fz_new_draw_device
+	fz_new_draw_device_type3
+	fz_new_draw_device_with_bbox
+	fz_new_draw_device_with_bbox_proof
+	fz_new_draw_device_with_options
+	fz_new_draw_device_with_proof
+	fz_new_test_device
 	fz_new_trace_device
 	fz_new_xmltext_device
-	fz_new_bbox_device
-	fz_new_test_device
-	fz_new_draw_device
-	fz_new_draw_device_with_bbox
-	fz_new_draw_device_with_proof
-	fz_new_draw_device_with_bbox_proof
-	fz_new_draw_device_type3
 	fz_parse_draw_options
-	fz_new_draw_device_with_options
+	fz_pop_clip
+	fz_render_flags
+	fz_set_default_colorspaces
+	fz_stroke_path
+	fz_stroke_text
+	fz_bound_display_list
+	fz_display_list_is_empty
+	fz_drop_display_list
+	fz_keep_display_list
 	fz_new_display_list
+	fz_new_image_from_display_list
 	fz_new_list_device
 	fz_run_display_list
-	fz_keep_display_list
-	fz_drop_display_list
-	fz_bound_display_list
-	fz_new_image_from_display_list
-	fz_display_list_is_empty
-	fz_new_stats_device
 	fz_clear_statistics
 	fz_extract_device_statistics
+	fz_new_stats_device
 
-	fz_open_null_filter
-	fz_open_range_filter
-	fz_open_endstream_filter
-	fz_open_concat
 	fz_concat_push_drop
-	fz_open_arc4
-	fz_open_aesd
-	fz_open_a85d
-	fz_open_ahxd
-	fz_open_rld
-	fz_open_dctd
-	fz_open_faxd
-	fz_open_flated
-	fz_open_lzwd
-	fz_open_predict
-	fz_open_jbig2d
-	fz_load_jbig2_globals
-	fz_keep_jbig2_globals
 	fz_drop_jbig2_globals
 	fz_drop_jbig2_globals_imp
 	fz_jbig2_globals_data
+	fz_keep_jbig2_globals
+	fz_load_jbig2_globals
+	fz_open_a85d
+	fz_open_aesd
+	fz_open_ahxd
+	fz_open_arc4
+	fz_open_concat
+	fz_open_dctd
+	fz_open_endstream_filter
+	fz_open_faxd
+	fz_open_flated
+	fz_open_jbig2d
+	fz_open_lzwd
+	fz_open_null_filter
+	fz_open_predict
+	fz_open_range_filter
+	fz_open_rld
 	fz_open_sgilog16
 	fz_open_sgilog24
 	fz_open_sgilog32
 	fz_open_thunder
-	fz_iso8859_1_from_unicode
-	fz_iso8859_7_from_unicode
-	fz_koi8u_from_unicode
-	fz_windows_1250_from_unicode
-	fz_windows_1251_from_unicode
-	fz_windows_1252_from_unicode
-	fz_unicode_from_glyph_name
-	fz_unicode_from_glyph_name_strict
+	ft_char_index
+	ft_error_string
+	ft_name_index
+	fz_advance_glyph
+	fz_bound_glyph
+	fz_decouple_type3_font
+	fz_drop_font
 	fz_duplicate_glyph_names_from_unicode
-	fz_glyph_name_from_unicode_sc
-	fz_font_ft_face
-	fz_font_t3_procs
+	fz_encode_character
+	fz_encode_character_by_glyph_name
+	fz_encode_character_sc
+	fz_encode_character_with_fallback
+	fz_font_ascender
+	fz_font_bbox
+	fz_font_descender
+	fz_font_digest
 	fz_font_flags
-	fz_font_shaper_data
-	fz_font_name
+	fz_font_ft_face
 	fz_font_is_bold
 	fz_font_is_italic
-	fz_font_is_serif
 	fz_font_is_monospaced
-	fz_font_bbox
+	fz_font_is_serif
+	fz_font_name
+	fz_font_shaper_data
+	fz_font_t3_procs
+	fz_get_glyph_name
+	fz_glyph_cacheable
+	fz_glyph_name_from_unicode_sc
+	fz_hb_lock
+	fz_hb_unlock
 	fz_install_load_system_font_funcs
-	fz_load_system_font
+	fz_iso8859_1_from_unicode
+	fz_iso8859_7_from_unicode
+	fz_keep_font
+	fz_koi8u_from_unicode
+	fz_load_fallback_font
 	fz_load_system_cjk_font
-	fz_lookup_builtin_font
+	fz_load_system_font
 	fz_lookup_base14_font
+	fz_lookup_builtin_font
 	fz_lookup_cjk_font
 	fz_lookup_cjk_font_by_language
 	fz_lookup_cjk_ordering_by_language
+	fz_lookup_noto_emoji_font
 	fz_lookup_noto_font
 	fz_lookup_noto_math_font
 	fz_lookup_noto_music_font
 	fz_lookup_noto_symbol1_font
 	fz_lookup_noto_symbol2_font
-	fz_lookup_noto_emoji_font
-	fz_load_fallback_font
-	fz_new_type3_font
-	fz_new_font_from_memory
+	fz_new_base14_font
+	fz_new_builtin_font
+	fz_new_cjk_font
 	fz_new_font_from_buffer
 	fz_new_font_from_file
-	fz_new_base14_font
-	fz_new_cjk_font
-	fz_new_builtin_font
-	fz_keep_font
-	fz_drop_font
-	fz_set_font_bbox
-	fz_bound_glyph
-	fz_glyph_cacheable
+	fz_new_font_from_memory
+	fz_new_type3_font
 	fz_run_t3_glyph
-	fz_advance_glyph
-	fz_encode_character
-	fz_encode_character_sc
-	fz_encode_character_by_glyph_name
-	fz_encode_character_with_fallback
-	fz_get_glyph_name
-	fz_font_ascender
-	fz_font_descender
-	fz_font_digest
-	fz_decouple_type3_font
-	ft_error_string
-	ft_char_index
-	ft_name_index
-	fz_hb_lock
-	fz_hb_unlock
+	fz_set_font_bbox
+	fz_unicode_from_glyph_name
+	fz_unicode_from_glyph_name_strict
+	fz_windows_1250_from_unicode
+	fz_windows_1251_from_unicode
+	fz_windows_1252_from_unicode
 	fz_atof
 	fz_atoi
 	fz_atoi64
 	fz_concat
-	fz_scale
-	fz_pre_scale
-	fz_post_scale
-	fz_shear
-	fz_pre_shear
-	fz_rotate
-	fz_pre_rotate
-	fz_translate
-	fz_pre_translate
-	fz_transform_page
-	fz_invert_matrix
-	fz_try_invert_matrix
-	fz_is_rectilinear
-	fz_matrix_expansion
-	fz_intersect_rect
-	fz_intersect_irect
-	fz_union_rect
-	fz_irect_from_rect
-	fz_round_rect
-	fz_rect_from_irect
-	fz_expand_rect
-	fz_expand_irect
-	fz_include_point_in_rect
-	fz_translate_rect
-	fz_translate_irect
 	fz_contains_rect
-	fz_transform_point
-	fz_transform_point_xy
-	fz_transform_vector
-	fz_transform_rect
-	fz_normalize_vector
+	fz_expand_irect
+	fz_expand_rect
 	fz_gridfit_matrix
-	fz_matrix_max_expansion
-	fz_quad_from_rect
-	fz_rect_from_quad
-	fz_quad_is_axis_oriented
-	fz_transform_quad
+	fz_include_point_in_rect
+	fz_intersect_irect
+	fz_intersect_rect
+	fz_invert_matrix
+	fz_irect_from_rect
+	fz_is_point_inside_irect
 	fz_is_point_inside_quad
 	fz_is_point_inside_rect
-	fz_is_point_inside_irect
 	fz_is_quad_inside_quad
 	fz_is_quad_intersecting_quad
+	fz_is_rectilinear
+	fz_matrix_expansion
+	fz_matrix_max_expansion
+	fz_normalize_vector
+	fz_post_scale
+	fz_pre_rotate
+	fz_pre_scale
+	fz_pre_shear
+	fz_pre_translate
+	fz_quad_from_rect
+	fz_quad_is_axis_oriented
+	fz_rect_from_irect
+	fz_rect_from_quad
+	fz_rotate
+	fz_round_rect
+	fz_scale
+	fz_shear
+	fz_transform_page
+	fz_transform_point
+	fz_transform_point_xy
+	fz_transform_quad
+	fz_transform_rect
+	fz_transform_vector
+	fz_translate
+	fz_translate_irect
+	fz_translate_rect
+	fz_try_invert_matrix
+	fz_union_rect
 	fz_getopt
 	fz_getopt_reset
+	fz_dump_glyph_cache_stats
+	fz_prepare_t3_glyph
 	fz_purge_glyph_cache
 	fz_render_glyph_pixmap
 	fz_render_t3_glyph_direct
-	fz_prepare_t3_glyph
-	fz_dump_glyph_cache_stats
 	fz_subpixel_adjust
+	fz_drop_glyph
 	fz_glyph_bbox
 	fz_glyph_bbox_no_ctx
-	fz_glyph_width
 	fz_glyph_height
+	fz_glyph_width
 	fz_keep_glyph
-	fz_drop_glyph
 	fz_outline_glyph
-	fz_new_hash_table
 	fz_drop_hash_table
+	fz_hash_filter
 	fz_hash_find
+	fz_hash_for_each
 	fz_hash_insert
 	fz_hash_remove
-	fz_hash_for_each
-	fz_hash_filter
-	fz_get_pixmap_from_image
-	fz_get_unscaled_pixmap_from_image
-	fz_keep_image
-	fz_drop_image
-	fz_keep_image_store_key
-	fz_drop_image_store_key
-	fz_new_image_of_size
-	fz_new_image_from_compressed_buffer
-	fz_new_image_from_pixmap
-	fz_new_image_from_buffer
-	fz_new_image_from_file
-	fz_drop_image_imp
-	fz_drop_image_base
-	fz_decomp_image_from_stream
+	fz_new_hash_table
+	fz_compressed_image_buffer
 	fz_convert_indexed_pixmap_to_base
 	fz_convert_separation_pixmap_to_base
-	fz_image_size
-	fz_image_resolution
+	fz_decomp_image_from_stream
+	fz_drop_image
+	fz_drop_image_base
+	fz_drop_image_imp
+	fz_drop_image_store_key
+	fz_get_pixmap_from_image
+	fz_get_unscaled_pixmap_from_image
 	fz_image_orientation
-	fz_compressed_image_buffer
-	fz_set_compressed_image_buffer
-	fz_pixmap_image_tile
-	fz_set_pixmap_image_tile
-	fz_load_jpx
-	fz_load_tiff_subimage_count
-	fz_load_tiff_subimage
-	fz_load_pnm_subimage_count
-	fz_load_pnm_subimage
-	fz_load_jbig2_subimage_count
-	fz_load_jbig2_subimage
-	fz_load_bmp_subimage_count
+	fz_image_resolution
+	fz_image_size
+	fz_keep_image
+	fz_keep_image_store_key
 	fz_load_bmp_subimage
-	fz_new_link
-	fz_keep_link
+	fz_load_bmp_subimage_count
+	fz_load_jbig2_subimage
+	fz_load_jbig2_subimage_count
+	fz_load_jpx
+	fz_load_pnm_subimage
+	fz_load_pnm_subimage_count
+	fz_load_tiff_subimage
+	fz_load_tiff_subimage_count
+	fz_new_image_from_buffer
+	fz_new_image_from_compressed_buffer
+	fz_new_image_from_file
+	fz_new_image_from_pixmap
+	fz_new_image_of_size
+	fz_pixmap_image_tile
+	fz_set_compressed_image_buffer
+	fz_set_pixmap_image_tile
 	fz_drop_link
 	fz_is_external_link
+	fz_keep_link
+	fz_new_link
 	fz_log
 	fz_log_module
 	fz_new_log_for_module
-	fz_new_outline
-	fz_keep_outline
 	fz_drop_outline
+	fz_keep_outline
+	fz_new_outline
 	fz_new_svg_device
 	fz_new_svg_device_with_id
-	fz_new_output
-	fz_new_output_with_path
-	fz_new_output_with_buffer
-	fz_stdout
-	fz_stderr
-	fz_stdods
-	fz_set_stddbg
-	fz_stddbg
-	fz_write_printf
-	fz_write_vprintf
-	fz_seek_output
-	fz_tell_output
-	fz_flush_output
+	fz_asprintf
 	fz_close_output
 	fz_drop_output
+	fz_flush_output
+	fz_format_string
+	fz_new_arc4_output
+	fz_new_ascii85_output
+	fz_new_asciihex_output
+	fz_new_deflate_output
+	fz_new_output
+	fz_new_output_with_buffer
+	fz_new_output_with_path
+	fz_new_rle_output
 	fz_output_supports_stream
+	fz_save_buffer
+	fz_seek_output
+	fz_set_stddbg
+	fz_snprintf
+	fz_stddbg
+	fz_stderr
+	fz_stdods
+	fz_stdout
 	fz_stream_from_output
+	fz_tell_output
 	fz_truncate_output
-	fz_write_data
-	fz_write_string
-	fz_write_int32_be
-	fz_write_int32_le
-	fz_write_uint32_be
-	fz_write_uint32_le
-	fz_write_int16_be
-	fz_write_int16_le
-	fz_write_uint16_be
-	fz_write_uint16_le
-	fz_write_char
-	fz_write_byte
-	fz_write_float_be
-	fz_write_float_le
-	fz_write_rune
+	fz_vsnprintf
 	fz_write_base64
 	fz_write_base64_buffer
-	fz_format_string
-	fz_vsnprintf
-	fz_snprintf
-	fz_asprintf
-	fz_save_buffer
-	fz_new_asciihex_output
-	fz_new_ascii85_output
-	fz_new_rle_output
-	fz_new_arc4_output
-	fz_new_deflate_output
-	fz_walk_path
-	fz_new_path
-	fz_keep_path
-	fz_drop_path
-	fz_trim_path
-	fz_packed_path_size
-	fz_pack_path
+	fz_write_byte
+	fz_write_char
+	fz_write_data
+	fz_write_float_be
+	fz_write_float_le
+	fz_write_int16_be
+	fz_write_int16_le
+	fz_write_int32_be
+	fz_write_int32_le
+	fz_write_printf
+	fz_write_rune
+	fz_write_string
+	fz_write_uint16_be
+	fz_write_uint16_le
+	fz_write_uint32_be
+	fz_write_uint32_le
+	fz_write_vprintf
+	fz_adjust_rect_for_stroke
+	fz_bound_path
 	fz_clone_path
+	fz_clone_stroke_state
+	fz_closepath
 	fz_currentpoint
-	fz_moveto
-	fz_lineto
-	fz_rectto
-	fz_quadto
 	fz_curveto
 	fz_curvetov
 	fz_curvetoy
-	fz_closepath
-	fz_transform_path
-	fz_bound_path
-	fz_adjust_rect_for_stroke
+	fz_drop_path
+	fz_drop_stroke_state
+	fz_keep_path
+	fz_keep_stroke_state
+	fz_lineto
+	fz_moveto
+	fz_new_path
 	fz_new_stroke_state
 	fz_new_stroke_state_with_dash_len
-	fz_keep_stroke_state
-	fz_drop_stroke_state
+	fz_pack_path
+	fz_packed_path_size
+	fz_quadto
+	fz_rectto
+	fz_transform_path
+	fz_trim_path
 	fz_unshare_stroke_state
 	fz_unshare_stroke_state_with_dash_len
-	fz_clone_stroke_state
-	fz_pixmap_bbox
-	fz_pixmap_width
-	fz_pixmap_height
-	fz_pixmap_x
-	fz_pixmap_y
-	fz_new_pixmap
-	fz_new_pixmap_with_bbox
-	fz_new_pixmap_with_data
-	fz_new_pixmap_with_bbox_and_data
-	fz_new_pixmap_from_pixmap
-	fz_clone_pixmap
-	fz_keep_pixmap
-	fz_drop_pixmap
-	fz_pixmap_colorspace
-	fz_pixmap_components
-	fz_pixmap_colorants
-	fz_pixmap_spots
-	fz_pixmap_alpha
-	fz_pixmap_samples
-	fz_pixmap_stride
-	fz_set_pixmap_resolution
-	fz_clear_pixmap_with_value
-	fz_fill_pixmap_with_color
-	fz_clear_pixmap_rect_with_value
+	fz_walk_path
+	fz_alpha_from_gray
 	fz_clear_pixmap
+	fz_clear_pixmap_rect_with_value
+	fz_clear_pixmap_with_value
+	fz_clone_pixmap
+	fz_clone_pixmap_area_with_different_seps
+	fz_convert_pixmap
+	fz_decode_tile
+	fz_drop_pixmap
+	fz_fill_pixmap_with_color
+	fz_gamma_pixmap
 	fz_invert_pixmap
 	fz_invert_pixmap_luminance
-	fz_tint_pixmap
 	fz_invert_pixmap_rect
-	fz_gamma_pixmap
-	fz_convert_pixmap
 	fz_is_pixmap_monochrome
-	fz_alpha_from_gray
-	fz_decode_tile
+	fz_keep_pixmap
 	fz_md5_pixmap
-	fz_clone_pixmap_area_with_different_seps
+	fz_new_pixmap
 	fz_new_pixmap_from_alpha_channel
 	fz_new_pixmap_from_color_and_mask
+	fz_new_pixmap_from_pixmap
+	fz_new_pixmap_with_bbox
+	fz_new_pixmap_with_bbox_and_data
+	fz_new_pixmap_with_data
+	fz_pixmap_alpha
+	fz_pixmap_bbox
+	fz_pixmap_colorants
+	fz_pixmap_colorspace
+	fz_pixmap_components
+	fz_pixmap_height
+	fz_pixmap_samples
+	fz_pixmap_spots
+	fz_pixmap_stride
+	fz_pixmap_width
+	fz_pixmap_x
+	fz_pixmap_y
+	fz_set_pixmap_resolution
+	fz_tint_pixmap
+	fz_drop_pool
 	fz_new_pool
 	fz_pool_alloc
-	fz_pool_strdup
 	fz_pool_size
-	fz_drop_pool
-	fz_new_separations
-	fz_keep_separations
-	fz_drop_separations
+	fz_pool_strdup
 	fz_add_separation
 	fz_add_separation_equivalents
-	fz_set_separation_behavior
-	fz_separation_current_behavior
-	fz_separation_name
-	fz_count_separations
-	fz_count_active_separations
 	fz_clone_separations_for_overprint
 	fz_convert_separation_colors
+	fz_count_active_separations
+	fz_count_separations
+	fz_drop_separations
+	fz_keep_separations
+	fz_new_separations
+	fz_separation_current_behavior
 	fz_separation_equivalent
-	fz_keep_shade
-	fz_drop_shade
+	fz_separation_name
+	fz_set_separation_behavior
 	fz_bound_shade
+	fz_drop_shade
+	fz_drop_shade_imp
+	fz_keep_shade
 	fz_paint_shade
 	fz_process_shade
-	fz_drop_shade_imp
-	fz_keep_storable
-	fz_drop_storable
-	fz_keep_key_storable
+	fz_debug_store
+	fz_defer_reap_end
+	fz_defer_reap_start
 	fz_drop_key_storable
-	fz_keep_key_storable_key
 	fz_drop_key_storable_key
-	fz_new_store_context
-	fz_keep_store_context
+	fz_drop_storable
 	fz_drop_store_context
-	fz_store_item
-	fz_find_item
-	fz_remove_item
 	fz_empty_store
+	fz_filter_store
+	fz_find_item
+	fz_keep_key_storable
+	fz_keep_key_storable_key
+	fz_keep_storable
+	fz_keep_store_context
+	fz_new_store_context
+	fz_remove_item
+	fz_shrink_store
+	fz_store_item
 	fz_store_scavenge
 	fz_store_scavenge_external
-	fz_shrink_store
-	fz_filter_store
-	fz_debug_store
-	fz_defer_reap_start
-	fz_defer_reap_end
-	fz_file_exists
-	fz_open_file
-	fz_open_file_w
-	fz_open_memory
-	fz_open_buffer
-	fz_open_leecher
-	fz_keep_stream
 	fz_drop_stream
-	fz_tell
-	fz_seek
-	fz_read
-	fz_skip
-	fz_read_all
-	fz_read_file
-	fz_read_uint16
-	fz_read_uint24
-	fz_read_uint32
-	fz_read_uint64
-	fz_read_uint16_le
-	fz_read_uint24_le
-	fz_read_uint32_le
-	fz_read_uint64_le
-	fz_read_int16
-	fz_read_int32
-	fz_read_int64
-	fz_read_int16_le
-	fz_read_int32_le
-	fz_read_int64_le
-	fz_read_float_le
-	fz_read_float
-	fz_read_string
+	fz_file_exists
+	fz_keep_stream
 	fz_new_stream
-	fz_read_best
-	fz_read_line
-	fz_skip_string
-	fz_skip_space
+	fz_open_buffer
+	fz_open_file
 	fz_open_file_ptr_no_close
-	fz_strnlen
-	fz_strsep
-	fz_strlcpy
-	fz_strlcat
-	fz_memmem
-	fz_dirname
-	fz_urldecode
-	fz_format_output_path
-	fz_path_basename
-	fz_cleanname
-	fz_realpath
-	fz_strcasecmp
-	fz_strncasecmp
-	fz_has_percent_d
+	fz_open_file_w
+	fz_open_leecher
+	fz_open_memory
+	fz_read
+	fz_read_all
+	fz_read_best
+	fz_read_file
+	fz_read_float
+	fz_read_float_le
+	fz_read_int16
+	fz_read_int16_le
+	fz_read_int32
+	fz_read_int32_le
+	fz_read_int64
+	fz_read_int64_le
+	fz_read_line
+	fz_read_string
+	fz_read_uint16
+	fz_read_uint16_le
+	fz_read_uint24
+	fz_read_uint24_le
+	fz_read_uint32
+	fz_read_uint32_le
+	fz_read_uint64
+	fz_read_uint64_le
+	fz_seek
+	fz_skip
+	fz_skip_space
+	fz_skip_string
+	fz_tell
 	fz_chartorune
 	fz_chartorune_unsafe
-	fz_runetochar
-	fz_runelen
-	fz_utflen
-	fz_strtof
+	fz_cleanname
+	fz_dirname
+	fz_format_output_path
 	fz_grisu
+	fz_has_percent_d
 	fz_is_page_range
+	fz_memmem
 	fz_parse_page_range
-	fz_new_layout
-	fz_drop_layout
-	fz_add_layout_line
+	fz_path_basename
+	fz_realpath
+	fz_runelen
+	fz_runetochar
+	fz_strcasecmp
+	fz_strlcat
+	fz_strlcpy
+	fz_strncasecmp
+	fz_strnlen
+	fz_strsep
+	fz_strtof
+	fz_urldecode
+	fz_utflen
 	fz_add_layout_char
-	fz_new_stext_page
+	fz_add_layout_line
+	fz_copy_rectangle
+	fz_copy_selection
+	fz_drop_layout
 	fz_drop_stext_page
-	fz_print_stext_page_as_html
+	fz_highlight_selection
+	fz_new_layout
+	fz_new_ocr_device
+	fz_new_stext_device
+	fz_new_stext_page
+	fz_parse_stext_options
 	fz_print_stext_header_as_html
-	fz_print_stext_trailer_as_html
-	fz_print_stext_page_as_xhtml
 	fz_print_stext_header_as_xhtml
-	fz_print_stext_trailer_as_xhtml
-	fz_print_stext_page_as_xml
+	fz_print_stext_page_as_html
 	fz_print_stext_page_as_json
 	fz_print_stext_page_as_text
+	fz_print_stext_page_as_xhtml
+	fz_print_stext_page_as_xml
+	fz_print_stext_trailer_as_html
+	fz_print_stext_trailer_as_xhtml
 	fz_search_stext_page
-	fz_highlight_selection
 	fz_snap_selection
-	fz_copy_selection
-	fz_copy_rectangle
-	fz_parse_stext_options
-	fz_new_stext_device
-	fz_new_ocr_device
+	fz_argv_from_wargv
+	fz_fopen_utf8
+	fz_free_argv
+	fz_remove_utf8
 	fz_utf8_from_wchar
 	fz_wchar_from_utf8
-	fz_fopen_utf8
-	fz_remove_utf8
-	fz_argv_from_wargv
-	fz_free_argv
-	fz_new_text
-	fz_keep_text
+	fz_bound_text
 	fz_drop_text
+	fz_keep_text
+	fz_new_text
 	fz_show_glyph
 	fz_show_string
-	fz_bound_text
-	fz_text_language_from_string
 	fz_string_from_text_language
+	fz_text_language_from_string
 
 	fz_generate_transition
-	fz_tree_lookup
-	fz_tree_insert
 	fz_drop_tree
-	fz_new_display_list_from_page
-	fz_new_display_list_from_page_number
-	fz_new_display_list_from_page_contents
-	fz_new_pixmap_from_display_list
-	fz_new_pixmap_from_page
-	fz_new_pixmap_from_page_number
-	fz_new_pixmap_from_page_contents
-	fz_new_pixmap_from_display_list_with_separations
-	fz_new_pixmap_from_page_with_separations
-	fz_new_pixmap_from_page_number_with_separations
-	fz_new_pixmap_from_page_contents_with_separations
-	fz_new_stext_page_from_page
-	fz_new_stext_page_from_page_number
-	fz_new_stext_page_from_display_list
-	fz_new_buffer_from_stext_page
+	fz_tree_insert
+	fz_tree_lookup
+	fz_new_buffer_from_display_list
 	fz_new_buffer_from_page
 	fz_new_buffer_from_page_number
-	fz_new_buffer_from_display_list
-	fz_search_page
-	fz_search_page_number
+	fz_new_buffer_from_stext_page
+	fz_new_display_list_from_page
+	fz_new_display_list_from_page_contents
+	fz_new_display_list_from_page_number
+	fz_new_display_list_from_svg
+	fz_new_display_list_from_svg_xml
+	fz_new_image_from_svg
+	fz_new_image_from_svg_xml
+	fz_new_pixmap_from_display_list
+	fz_new_pixmap_from_display_list_with_separations
+	fz_new_pixmap_from_page
+	fz_new_pixmap_from_page_contents
+	fz_new_pixmap_from_page_contents_with_separations
+	fz_new_pixmap_from_page_number
+	fz_new_pixmap_from_page_number_with_separations
+	fz_new_pixmap_from_page_with_separations
+	fz_new_stext_page_from_display_list
+	fz_new_stext_page_from_page
+	fz_new_stext_page_from_page_number
+	fz_new_xhtml_document_from_document
 	fz_search_chapter_page_number
 	fz_search_display_list
-	fz_new_display_list_from_svg
-	fz_new_image_from_svg
-	fz_new_display_list_from_svg_xml
-	fz_new_image_from_svg_xml
+	fz_search_page
+	fz_search_page_number
 	fz_write_image_as_data_uri
 	fz_write_pixmap_as_data_uri
-	fz_new_xhtml_document_from_document
 
-	fz_pcl_preset
-	fz_parse_pcl_options
-	fz_new_mono_pcl_band_writer
-	fz_write_bitmap_as_pcl
-	fz_save_bitmap_as_pcl
-	fz_new_color_pcl_band_writer
-	fz_write_pixmap_as_pcl
-	fz_save_pixmap_as_pcl
-	fz_parse_pclm_options
-	fz_new_pclm_band_writer
-	fz_write_pixmap_as_pclm
-	fz_save_pixmap_as_pclm
-	fz_parse_pdfocr_options
-	fz_new_pdfocr_band_writer
-	fz_pdfocr_band_writer_set_progress
-	fz_write_pixmap_as_pdfocr
-	fz_save_pixmap_as_pdfocr
-	fz_save_pixmap_as_png
-	fz_write_pixmap_as_png
-	fz_new_png_band_writer
 	fz_new_buffer_from_image_as_png
 	fz_new_buffer_from_pixmap_as_png
-	fz_save_pixmap_as_pnm
-	fz_write_pixmap_as_pnm
-	fz_new_pnm_band_writer
-	fz_save_pixmap_as_pam
-	fz_write_pixmap_as_pam
+	fz_new_color_pcl_band_writer
+	fz_new_mono_pcl_band_writer
+	fz_new_mono_pwg_band_writer
 	fz_new_pam_band_writer
-	fz_save_bitmap_as_pbm
-	fz_write_bitmap_as_pbm
 	fz_new_pbm_band_writer
-	fz_save_pixmap_as_pbm
-	fz_save_bitmap_as_pkm
-	fz_write_bitmap_as_pkm
+	fz_new_pclm_band_writer
+	fz_new_pdfocr_band_writer
 	fz_new_pkm_band_writer
-	fz_save_pixmap_as_pkm
-	fz_write_pixmap_as_ps
-	fz_save_pixmap_as_ps
+	fz_new_png_band_writer
+	fz_new_pnm_band_writer
 	fz_new_ps_band_writer
+	fz_new_psd_band_writer
+	fz_new_pwg_band_writer
+	fz_parse_pcl_options
+	fz_parse_pclm_options
+	fz_parse_pdfocr_options
+	fz_pcl_preset
+	fz_pdfocr_band_writer_set_progress
+	fz_save_bitmap_as_pbm
+	fz_save_bitmap_as_pcl
+	fz_save_bitmap_as_pkm
+	fz_save_bitmap_as_pwg
+	fz_save_pixmap_as_pam
+	fz_save_pixmap_as_pbm
+	fz_save_pixmap_as_pcl
+	fz_save_pixmap_as_pclm
+	fz_save_pixmap_as_pdfocr
+	fz_save_pixmap_as_pkm
+	fz_save_pixmap_as_png
+	fz_save_pixmap_as_pnm
+	fz_save_pixmap_as_ps
+	fz_save_pixmap_as_psd
+	fz_save_pixmap_as_pwg
+	fz_write_bitmap_as_pbm
+	fz_write_bitmap_as_pcl
+	fz_write_bitmap_as_pkm
+	fz_write_bitmap_as_pwg
+	fz_write_bitmap_as_pwg_page
+	fz_write_pixmap_as_pam
+	fz_write_pixmap_as_pcl
+	fz_write_pixmap_as_pclm
+	fz_write_pixmap_as_pdfocr
+	fz_write_pixmap_as_png
+	fz_write_pixmap_as_pnm
+	fz_write_pixmap_as_ps
+	fz_write_pixmap_as_psd
+	fz_write_pixmap_as_pwg
+	fz_write_pixmap_as_pwg_page
 	fz_write_ps_file_header
 	fz_write_ps_file_trailer
-	fz_save_pixmap_as_psd
-	fz_write_pixmap_as_psd
-	fz_new_psd_band_writer
-	fz_save_pixmap_as_pwg
-	fz_save_bitmap_as_pwg
-	fz_write_pixmap_as_pwg
-	fz_write_bitmap_as_pwg
-	fz_write_pixmap_as_pwg_page
-	fz_write_bitmap_as_pwg_page
-	fz_new_mono_pwg_band_writer
-	fz_new_pwg_band_writer
 	fz_write_pwg_file_header
-	fz_has_option
-	fz_option_eq
+	fz_begin_page
+	fz_close_document_writer
 	fz_copy_option
+	fz_drop_document_writer
+	fz_end_page
+	fz_has_option
+	fz_new_cbz_writer
+	fz_new_cbz_writer_with_output
 	fz_new_document_writer
-	fz_new_pdf_writer
-	fz_new_pdf_writer_with_output
-	fz_new_svg_writer
-	fz_new_text_writer
-	fz_new_text_writer_with_output
-	fz_new_odt_writer
-	fz_new_odt_writer_with_output
+	fz_new_document_writer_of_size
 	fz_new_docx_writer
 	fz_new_docx_writer_with_output
-	fz_new_ps_writer
-	fz_new_ps_writer_with_output
+	fz_new_odt_writer
+	fz_new_odt_writer_with_output
+	fz_new_pam_pixmap_writer
+	fz_new_pbm_pixmap_writer
 	fz_new_pcl_writer
 	fz_new_pcl_writer_with_output
 	fz_new_pclm_writer
 	fz_new_pclm_writer_with_output
-	fz_new_pwg_writer
-	fz_new_pwg_writer_with_output
-	fz_new_cbz_writer
-	fz_new_cbz_writer_with_output
+	fz_new_pdf_writer
+	fz_new_pdf_writer_with_output
 	fz_new_pdfocr_writer
 	fz_new_pdfocr_writer_with_output
-	fz_pdfocr_writer_set_progress
-	fz_new_png_pixmap_writer
-	fz_new_pam_pixmap_writer
-	fz_new_pnm_pixmap_writer
 	fz_new_pgm_pixmap_writer
-	fz_new_ppm_pixmap_writer
-	fz_new_pbm_pixmap_writer
-	fz_new_pkm_pixmap_writer
-	fz_begin_page
-	fz_end_page
-	fz_write_document
-	fz_close_document_writer
-	fz_drop_document_writer
 	fz_new_pixmap_writer
-	fz_new_document_writer_of_size
+	fz_new_pkm_pixmap_writer
+	fz_new_png_pixmap_writer
+	fz_new_pnm_pixmap_writer
+	fz_new_ppm_pixmap_writer
+	fz_new_ps_writer
+	fz_new_ps_writer_with_output
+	fz_new_pwg_writer
+	fz_new_pwg_writer_with_output
+	fz_new_svg_writer
+	fz_new_text_writer
+	fz_new_text_writer_with_output
+	fz_option_eq
+	fz_pdfocr_writer_set_progress
+	fz_write_document
+	fz_debug_xml
+	fz_detach_xml
+	fz_drop_xml
 	fz_parse_xml
 	fz_parse_xml_from_html5
-	fz_drop_xml
-	fz_detach_xml
-	fz_xml_root
-	fz_xml_prev
-	fz_xml_next
-	fz_xml_up
-	fz_xml_down
-	fz_xml_is_tag
-	fz_xml_tag
 	fz_xml_att
 	fz_xml_att_alt
 	fz_xml_att_eq
-	fz_xml_text
-	fz_debug_xml
+	fz_xml_down
 	fz_xml_find
-	fz_xml_find_next
 	fz_xml_find_down
-	fz_xml_find_match
-	fz_xml_find_next_match
 	fz_xml_find_down_match
+	fz_xml_find_match
+	fz_xml_find_next
+	fz_xml_find_next_match
+	fz_xml_is_tag
+	fz_xml_next
+	fz_xml_prev
+	fz_xml_root
+	fz_xml_tag
+	fz_xml_text
+	fz_xml_up
 
 ; MuPDF exports
 
-	pdf_string_from_annot_type
-	pdf_annot_type_from_string
-	pdf_line_ending_from_name
-	pdf_line_ending_from_string
-	pdf_name_from_line_ending
-	pdf_string_from_line_ending
-	pdf_keep_annot
-	pdf_drop_annot
-	pdf_first_annot
-	pdf_next_annot
-	pdf_bound_annot
-	pdf_annot_type
-	pdf_run_annot
-	pdf_lookup_name
-	pdf_load_name_tree
-	pdf_lookup_number
-	pdf_walk_tree
-	pdf_resolve_link
-	pdf_annot_transform
-	pdf_create_annot_raw
-	pdf_create_link
-	pdf_create_annot
-	pdf_delete_annot
-	pdf_set_annot_popup
-	pdf_annot_popup
+	pdf_add_annot_ink_list
+	pdf_add_annot_ink_list_stroke
+	pdf_add_annot_ink_list_stroke_vertex
+	pdf_add_annot_quad_point
+	pdf_add_annot_vertex
+	pdf_add_embedded_file
+	pdf_annot_MK_BC
+	pdf_annot_MK_BC_rgb
+	pdf_annot_MK_BG
+	pdf_annot_MK_BG_rgb
+	pdf_annot_active
+	pdf_annot_ap
+	pdf_annot_author
+	pdf_annot_border
+	pdf_annot_color
+	pdf_annot_contents
+	pdf_annot_creation_date
+	pdf_annot_default_appearance
+	pdf_annot_ensure_local_xref
+	pdf_annot_field_flags
+	pdf_annot_field_label
+	pdf_annot_field_value
+	pdf_annot_flags
+	pdf_annot_has_author
+	pdf_annot_has_icon_name
 	pdf_annot_has_ink_list
+	pdf_annot_has_interior_color
+	pdf_annot_has_line
+	pdf_annot_has_line_ending_styles
+	pdf_annot_has_open
 	pdf_annot_has_quad_points
 	pdf_annot_has_vertices
-	pdf_annot_has_line
-	pdf_annot_has_interior_color
-	pdf_annot_has_line_ending_styles
-	pdf_annot_has_icon_name
-	pdf_annot_has_open
-	pdf_annot_has_author
-	pdf_annot_flags
-	pdf_annot_rect
-	pdf_annot_border
-	pdf_annot_opacity
-	pdf_annot_color
-	pdf_annot_interior_color
-	pdf_annot_quadding
-	pdf_annot_language
-	pdf_annot_quad_point_count
-	pdf_annot_quad_point
+	pdf_annot_hot
+	pdf_annot_icon_name
 	pdf_annot_ink_list_count
 	pdf_annot_ink_list_stroke_count
 	pdf_annot_ink_list_stroke_vertex
-	pdf_set_annot_flags
-	pdf_set_annot_rect
-	pdf_set_annot_border
-	pdf_set_annot_opacity
-	pdf_set_annot_color
-	pdf_set_annot_interior_color
-	pdf_set_annot_quadding
-	pdf_set_annot_language
-	pdf_set_annot_quad_points
-	pdf_clear_annot_quad_points
-	pdf_add_annot_quad_point
-	pdf_set_annot_ink_list
-	pdf_clear_annot_ink_list
-	pdf_add_annot_ink_list_stroke
-	pdf_add_annot_ink_list_stroke_vertex
-	pdf_add_annot_ink_list
-	pdf_set_annot_icon_name
-	pdf_set_annot_is_open
-	pdf_annot_line_start_style
+	pdf_annot_interior_color
+	pdf_annot_is_open
+	pdf_annot_language
+	pdf_annot_line
 	pdf_annot_line_end_style
 	pdf_annot_line_ending_styles
-	pdf_set_annot_line_start_style
-	pdf_set_annot_line_end_style
-	pdf_set_annot_line_ending_styles
-	pdf_annot_icon_name
-	pdf_annot_is_open
-	pdf_annot_line
-	pdf_set_annot_line
-	pdf_annot_vertex_count
-	pdf_annot_vertex
-	pdf_set_annot_vertices
-	pdf_clear_annot_vertices
-	pdf_add_annot_vertex
-	pdf_set_annot_vertex
-	pdf_annot_contents
-	pdf_set_annot_contents
-	pdf_annot_author
-	pdf_set_annot_author
+	pdf_annot_line_start_style
 	pdf_annot_modification_date
-	pdf_set_annot_modification_date
-	pdf_annot_creation_date
-	pdf_set_annot_creation_date
-	pdf_parse_default_appearance
-	pdf_print_default_appearance
-	pdf_annot_default_appearance
-	pdf_set_annot_default_appearance
-	pdf_dirty_annot
-	pdf_annot_field_flags
-	pdf_annot_field_value
-	pdf_annot_field_label
-	pdf_set_annot_field_value
-	pdf_layout_fit_text
-	pdf_update_appearance
-	pdf_update_appearance_from_display_list
-	pdf_annot_push_local_xref
-	pdf_annot_pop_local_xref
-	pdf_annot_ensure_local_xref
+	pdf_annot_needs_new_ap
+	pdf_annot_obj
+	pdf_annot_opacity
+	pdf_annot_page
 	pdf_annot_pop_and_discard_local_xref
-	pdf_update_annot
-	pdf_update_page
-	pdf_set_widget_editing_state
+	pdf_annot_pop_local_xref
+	pdf_annot_popup
+	pdf_annot_push_local_xref
+	pdf_annot_quad_point
+	pdf_annot_quad_point_count
+	pdf_annot_quadding
+	pdf_annot_rect
+	pdf_annot_set_active
+	pdf_annot_set_hot
+	pdf_annot_transform
+	pdf_annot_type
+	pdf_annot_type_from_string
+	pdf_annot_vertex
+	pdf_annot_vertex_count
+	pdf_bound_annot
+	pdf_clear_annot_ink_list
+	pdf_clear_annot_quad_points
+	pdf_clear_annot_vertices
+	pdf_create_annot
+	pdf_create_annot_raw
+	pdf_create_link
+	pdf_delete_annot
+	pdf_dirty_annot
+	pdf_drop_annot
+	pdf_drop_annots
+	pdf_drop_widgets
+	pdf_embedded_file_name
+	pdf_embedded_file_stream
+	pdf_embedded_file_type
+	pdf_first_annot
 	pdf_get_widget_editing_state
-	pdf_toggle_widget
+	pdf_guess_mime_type_from_file_name
+	pdf_is_embedded_file
+	pdf_keep_annot
+	pdf_layout_fit_text
+	pdf_layout_text_widget
+	pdf_line_ending_from_name
+	pdf_line_ending_from_string
+	pdf_load_annots
+	pdf_load_embedded_file
+	pdf_load_link_annots
+	pdf_load_name_tree
+	pdf_lookup_dest
+	pdf_lookup_name
+	pdf_lookup_number
+	pdf_name_from_line_ending
 	pdf_new_display_list_from_annot
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
-	pdf_layout_text_widget
-	pdf_guess_mime_type_from_file_name
-	pdf_embedded_file_stream
-	pdf_embedded_file_name
-	pdf_embedded_file_type
-	pdf_is_embedded_file
-	pdf_load_embedded_file
-	pdf_add_embedded_file
-	pdf_parse_link_dest
+	pdf_next_annot
+	pdf_parse_default_appearance
 	pdf_parse_link_action
-	pdf_lookup_dest
-	pdf_load_link_annots
-	pdf_load_annots
-	pdf_drop_annots
-	pdf_drop_widgets
-	pdf_annot_MK_BG
-	pdf_annot_MK_BC
-	pdf_annot_MK_BG_rgb
-	pdf_annot_MK_BC_rgb
-	pdf_annot_obj
-	pdf_annot_page
-	pdf_annot_needs_new_ap
-	pdf_annot_ap
-	pdf_annot_active
-	pdf_annot_set_active
-	pdf_annot_hot
-	pdf_annot_set_hot
+	pdf_parse_link_dest
+	pdf_print_default_appearance
+	pdf_resolve_link
+	pdf_run_annot
+	pdf_set_annot_author
+	pdf_set_annot_border
+	pdf_set_annot_color
+	pdf_set_annot_contents
+	pdf_set_annot_creation_date
+	pdf_set_annot_default_appearance
+	pdf_set_annot_field_value
+	pdf_set_annot_flags
+	pdf_set_annot_icon_name
+	pdf_set_annot_ink_list
+	pdf_set_annot_interior_color
+	pdf_set_annot_is_open
+	pdf_set_annot_language
+	pdf_set_annot_line
+	pdf_set_annot_line_end_style
+	pdf_set_annot_line_ending_styles
+	pdf_set_annot_line_start_style
+	pdf_set_annot_modification_date
+	pdf_set_annot_opacity
+	pdf_set_annot_popup
+	pdf_set_annot_quad_points
+	pdf_set_annot_quadding
+	pdf_set_annot_rect
+	pdf_set_annot_vertex
+	pdf_set_annot_vertices
+	pdf_set_widget_editing_state
+	pdf_string_from_annot_type
+	pdf_string_from_line_ending
+	pdf_toggle_widget
+	pdf_update_annot
+	pdf_update_appearance
+	pdf_update_appearance_from_display_list
+	pdf_update_page
+	pdf_walk_tree
 	pdf_clean_file
-	pdf_new_cmap
-	pdf_keep_cmap
-	pdf_drop_cmap
-	pdf_drop_cmap_imp
+	pdf_add_codespace
 	pdf_cmap_size
 	pdf_cmap_wmode
-	pdf_set_cmap_wmode
-	pdf_set_usecmap
-	pdf_add_codespace
-	pdf_map_range_to_range
-	pdf_map_one_to_many
-	pdf_sort_cmap
+	pdf_decode_cmap
+	pdf_drop_cmap
+	pdf_drop_cmap_imp
+	pdf_keep_cmap
+	pdf_load_builtin_cmap
+	pdf_load_cmap
+	pdf_load_embedded_cmap
+	pdf_load_system_cmap
 	pdf_lookup_cmap
 	pdf_lookup_cmap_full
-	pdf_decode_cmap
+	pdf_map_one_to_many
+	pdf_map_range_to_range
+	pdf_new_cmap
 	pdf_new_identity_cmap
-	pdf_load_cmap
-	pdf_load_system_cmap
-	pdf_load_builtin_cmap
-	pdf_load_embedded_cmap
-	pdf_new_crypt
-	pdf_new_encrypt
-	pdf_drop_crypt
-	pdf_crypt_obj
-	pdf_open_crypt
-	pdf_open_crypt_with_filter
-	pdf_crypt_version
-	pdf_crypt_revision
-	pdf_crypt_method
-	pdf_crypt_length
-	pdf_crypt_permissions
+	pdf_set_cmap_wmode
+	pdf_set_usecmap
+	pdf_sort_cmap
 	pdf_crypt_encrypt_metadata
-	pdf_crypt_owner_password
-	pdf_crypt_user_password
-	pdf_crypt_owner_encryption
-	pdf_crypt_user_encryption
-	pdf_crypt_permissions_encryption
 	pdf_crypt_key
-	pdf_print_crypt
-	pdf_write_digest
+	pdf_crypt_length
+	pdf_crypt_method
+	pdf_crypt_obj
+	pdf_crypt_owner_encryption
+	pdf_crypt_owner_password
+	pdf_crypt_permissions
+	pdf_crypt_permissions_encryption
+	pdf_crypt_revision
+	pdf_crypt_user_encryption
+	pdf_crypt_user_password
+	pdf_crypt_version
 	pdf_document_permissions
-	pdf_signature_byte_range
-	pdf_signature_hash_bytes
-	pdf_signature_incremental_change_since_signing
-	pdf_signature_contents
+	pdf_drop_crypt
 	pdf_encrypt_data
 	pdf_encrypted_len
-	pdf_open_document
-	pdf_open_document_with_stream
-	pdf_drop_document
-	pdf_keep_document
-	pdf_specifics
-	pdf_document_from_fz_document
-	pdf_page_from_fz_page
+	pdf_new_crypt
+	pdf_new_encrypt
+	pdf_open_crypt
+	pdf_open_crypt_with_filter
+	pdf_print_crypt
+	pdf_signature_byte_range
+	pdf_signature_contents
+	pdf_signature_hash_bytes
+	pdf_signature_incremental_change_since_signing
+	pdf_write_digest
 	fz_document_from_pdf_document
 	fz_page_from_pdf_page
-	pdf_needs_password
-	pdf_authenticate_password
-	pdf_has_permission
-	pdf_lookup_metadata
-	pdf_load_outline
-	pdf_count_layer_configs
-	pdf_invalidate_xfa
-	pdf_layer_config_info
-	pdf_select_layer_config
-	pdf_count_layer_config_ui
-	pdf_select_layer_config_ui
-	pdf_deselect_layer_config_ui
-	pdf_toggle_layer_config_ui
-	pdf_layer_config_ui_info
-	pdf_set_layer_config_as_default
-	pdf_has_unsaved_changes
-	pdf_was_repaired
-	pdf_create_document
-	pdf_graft_object
-	pdf_new_graft_map
-	pdf_keep_graft_map
-	pdf_drop_graft_map
-	pdf_graft_mapped_object
-	pdf_graft_page
-	pdf_graft_mapped_page
-	pdf_page_write
-	pdf_new_pdf_device
 	pdf_add_page
-	pdf_insert_page
+	pdf_authenticate_password
+	pdf_can_be_saved_incrementally
+	pdf_count_layer_config_ui
+	pdf_count_layer_configs
+	pdf_create_document
 	pdf_delete_page
 	pdf_delete_page_range
+	pdf_deselect_layer_config_ui
+	pdf_document_from_fz_document
 	pdf_document_language
-	pdf_set_document_language
-	pdf_parse_write_options
-	pdf_has_unsaved_sigs
-	pdf_write_document
-	pdf_save_document
-	pdf_save_snapshot
-	pdf_write_snapshot
+	pdf_drop_document
+	pdf_drop_graft_map
 	pdf_format_write_options
-	pdf_can_be_saved_incrementally
-	pdf_write_journal
-	pdf_save_journal
+	pdf_graft_mapped_object
+	pdf_graft_mapped_page
+	pdf_graft_object
+	pdf_graft_page
+	pdf_has_permission
+	pdf_has_unsaved_changes
+	pdf_has_unsaved_sigs
+	pdf_insert_page
+	pdf_invalidate_xfa
+	pdf_keep_document
+	pdf_keep_graft_map
+	pdf_layer_config_info
+	pdf_layer_config_ui_info
 	pdf_load_journal
+	pdf_load_outline
+	pdf_lookup_metadata
+	pdf_needs_password
+	pdf_new_graft_map
+	pdf_new_pdf_device
+	pdf_open_document
+	pdf_open_document_with_stream
+	pdf_page_from_fz_page
+	pdf_page_write
+	pdf_parse_write_options
 	pdf_read_journal
-	pdf_set_doc_event_callback
-	pdf_get_doc_event_callback_data
+	pdf_save_document
+	pdf_save_journal
+	pdf_save_snapshot
+	pdf_select_layer_config
+	pdf_select_layer_config_ui
+	pdf_set_document_language
+	pdf_set_layer_config_as_default
+	pdf_specifics
+	pdf_toggle_layer_config_ui
+	pdf_was_repaired
+	pdf_write_document
+	pdf_write_journal
+	pdf_write_snapshot
 	pdf_access_alert_event
 	pdf_access_exec_menu_item_event
 	pdf_access_launch_url_event
 	pdf_access_mail_doc_event
 	pdf_event_issue_alert
-	pdf_event_issue_print
 	pdf_event_issue_exec_menu_item
 	pdf_event_issue_launch_url
 	pdf_event_issue_mail_doc
-	pdf_load_encoding
-	pdf_set_font_wmode
-	pdf_set_default_hmtx
-	pdf_set_default_vmtx
-	pdf_add_hmtx
-	pdf_add_vmtx
-	pdf_end_hmtx
-	pdf_end_vmtx
-	pdf_lookup_hmtx
-	pdf_lookup_vmtx
-	pdf_load_to_unicode
-	pdf_font_cid_to_gid
-	pdf_clean_font_name
-	pdf_lookup_substitute_font
-	pdf_load_type3_font
-	pdf_load_type3_glyphs
-	pdf_load_font
-	pdf_load_hail_mary_font
-	pdf_new_font_desc
-	pdf_keep_font
-	pdf_drop_font
-	pdf_print_font
-	pdf_run_glyph
-	pdf_add_simple_font
+	pdf_event_issue_print
+	pdf_get_doc_event_callback_data
+	pdf_set_doc_event_callback
 	pdf_add_cid_font
 	pdf_add_cjk_font
+	pdf_add_hmtx
+	pdf_add_simple_font
+	pdf_add_vmtx
+	pdf_clean_font_name
+	pdf_drop_font
+	pdf_end_hmtx
+	pdf_end_vmtx
+	pdf_font_cid_to_gid
 	pdf_font_writing_supported
-	pdf_keep_widget
-	pdf_drop_widget
-	pdf_first_widget
-	pdf_next_widget
-	pdf_update_widget
-	pdf_create_signature_widget
-	pdf_widget_type
-	pdf_bound_widget
-	pdf_string_from_widget_tx_format
-	pdf_string_from_widget_type
-	pdf_widget_type_from_string
-	pdf_text_widget_max_len
-	pdf_text_widget_format
-	pdf_choice_widget_options
-	pdf_choice_widget_is_multiselect
-	pdf_choice_widget_value
-	pdf_choice_widget_set_value
-	pdf_choice_field_option_count
-	pdf_choice_field_option
-	pdf_widget_is_signed
-	pdf_widget_is_readonly
-	pdf_calculate_form
-	pdf_reset_form
-	pdf_field_type
-	pdf_field_flags
-	pdf_field_name
-	pdf_field_value
-	pdf_create_field_name
-	pdf_field_border_style
-	pdf_field_set_border_style
-	pdf_field_set_button_caption
-	pdf_field_set_fill_color
-	pdf_field_set_text_color
-	pdf_field_display
-	pdf_field_set_display
-	pdf_field_label
-	pdf_button_field_on_state
-	pdf_set_field_value
-	pdf_set_text_field_value
-	pdf_set_choice_field_value
-	pdf_signature_is_signed
-	pdf_signature_set_value
-	pdf_count_signatures
-	pdf_signature_error_description
-	pdf_signature_get_signatory
-	pdf_signature_drop_distinguished_name
-	pdf_signature_format_distinguished_name
-	pdf_signature_info
-	pdf_signature_appearance_signed
-	pdf_signature_appearance_unsigned
-	pdf_check_digest
-	pdf_check_certificate
-	pdf_clear_signature
-	pdf_sign_signature_with_appearance
-	pdf_sign_signature
-	pdf_preview_signature_as_display_list
-	pdf_preview_signature_as_pixmap
-	pdf_check_signature
-	pdf_drop_signer
-	pdf_drop_verifier
-	pdf_field_reset
-	pdf_lookup_field
-	pdf_field_event_keystroke
-	pdf_field_event_validate
-	pdf_field_event_calculate
-	pdf_field_event_format
-	pdf_annot_field_event_keystroke
-	pdf_document_event_will_close
-	pdf_document_event_will_save
-	pdf_document_event_did_save
-	pdf_document_event_will_print
-	pdf_document_event_did_print
-	pdf_page_event_open
-	pdf_page_event_close
+	pdf_keep_font
+	pdf_load_encoding
+	pdf_load_font
+	pdf_load_hail_mary_font
+	pdf_load_to_unicode
+	pdf_load_type3_font
+	pdf_load_type3_glyphs
+	pdf_lookup_hmtx
+	pdf_lookup_substitute_font
+	pdf_lookup_vmtx
+	pdf_new_font_desc
+	pdf_print_font
+	pdf_run_glyph
+	pdf_set_default_hmtx
+	pdf_set_default_vmtx
+	pdf_set_font_wmode
+	pdf_annot_event_blur
+	pdf_annot_event_down
 	pdf_annot_event_enter
 	pdf_annot_event_exit
-	pdf_annot_event_down
-	pdf_annot_event_up
 	pdf_annot_event_focus
-	pdf_annot_event_blur
-	pdf_annot_event_page_open
 	pdf_annot_event_page_close
-	pdf_annot_event_page_visible
 	pdf_annot_event_page_invisible
-	pdf_new_processor
+	pdf_annot_event_page_open
+	pdf_annot_event_page_visible
+	pdf_annot_event_up
+	pdf_annot_field_event_keystroke
+	pdf_bound_widget
+	pdf_button_field_on_state
+	pdf_calculate_form
+	pdf_check_certificate
+	pdf_check_digest
+	pdf_check_signature
+	pdf_choice_field_option
+	pdf_choice_field_option_count
+	pdf_choice_widget_is_multiselect
+	pdf_choice_widget_options
+	pdf_choice_widget_set_value
+	pdf_choice_widget_value
+	pdf_clear_signature
+	pdf_count_signatures
+	pdf_create_field_name
+	pdf_create_signature_widget
+	pdf_document_event_did_print
+	pdf_document_event_did_save
+	pdf_document_event_will_close
+	pdf_document_event_will_print
+	pdf_document_event_will_save
+	pdf_drop_signer
+	pdf_drop_verifier
+	pdf_drop_widget
+	pdf_field_border_style
+	pdf_field_display
+	pdf_field_event_calculate
+	pdf_field_event_format
+	pdf_field_event_keystroke
+	pdf_field_event_validate
+	pdf_field_flags
+	pdf_field_label
+	pdf_field_name
+	pdf_field_reset
+	pdf_field_set_border_style
+	pdf_field_set_button_caption
+	pdf_field_set_display
+	pdf_field_set_fill_color
+	pdf_field_set_text_color
+	pdf_field_type
+	pdf_field_value
+	pdf_first_widget
+	pdf_keep_widget
+	pdf_lookup_field
+	pdf_next_widget
+	pdf_page_event_close
+	pdf_page_event_open
+	pdf_preview_signature_as_display_list
+	pdf_preview_signature_as_pixmap
+	pdf_reset_form
+	pdf_set_choice_field_value
+	pdf_set_field_value
+	pdf_set_text_field_value
+	pdf_sign_signature
+	pdf_sign_signature_with_appearance
+	pdf_signature_appearance_signed
+	pdf_signature_appearance_unsigned
+	pdf_signature_drop_distinguished_name
+	pdf_signature_error_description
+	pdf_signature_format_distinguished_name
+	pdf_signature_get_signatory
+	pdf_signature_info
+	pdf_signature_is_signed
+	pdf_signature_set_value
+	pdf_string_from_widget_tx_format
+	pdf_string_from_widget_type
+	pdf_text_widget_format
+	pdf_text_widget_max_len
+	pdf_update_widget
+	pdf_widget_is_readonly
+	pdf_widget_is_signed
+	pdf_widget_type
+	pdf_widget_type_from_string
 	pdf_close_processor
 	pdf_drop_processor
-	pdf_new_run_processor
-	pdf_new_buffer_processor
-	pdf_new_output_processor
-	pdf_new_filter_processor
 	pdf_filter_xobject_instance
-	pdf_process_contents
+	pdf_new_buffer_processor
+	pdf_new_filter_processor
+	pdf_new_output_processor
+	pdf_new_processor
+	pdf_new_run_processor
 	pdf_process_annot
+	pdf_process_contents
 	pdf_process_glyph
-	pdf_tos_save
-	pdf_tos_restore
 	pdf_tos_get_text
-	pdf_tos_reset
 	pdf_tos_make_trm
 	pdf_tos_move_after_char
-	pdf_tos_translate
-	pdf_tos_set_matrix
 	pdf_tos_newline
-	pdf_enable_js
+	pdf_tos_reset
+	pdf_tos_restore
+	pdf_tos_save
+	pdf_tos_set_matrix
+	pdf_tos_translate
 	pdf_disable_js
-	pdf_js_supported
 	pdf_drop_js
+	pdf_enable_js
 	pdf_js_event_init
-	pdf_js_event_result
-	pdf_js_event_value
 	pdf_js_event_init_keystroke
+	pdf_js_event_result
 	pdf_js_event_result_keystroke
+	pdf_js_event_value
 	pdf_js_execute
+	pdf_js_supported
 
-	pdf_new_int
-	pdf_new_real
-	pdf_new_name
-	pdf_new_string
-	pdf_new_text_string
-	pdf_new_indirect
-	pdf_new_array
-	pdf_new_dict
-	pdf_new_rect
-	pdf_new_matrix
-	pdf_new_date
-	pdf_copy_array
-	pdf_copy_dict
-	pdf_deep_copy_obj
-	pdf_keep_obj
-	pdf_drop_obj
-	pdf_is_null
-	pdf_is_bool
-	pdf_is_int
-	pdf_is_real
-	pdf_is_number
-	pdf_is_name
-	pdf_is_string
-	pdf_is_array
-	pdf_is_dict
-	pdf_is_indirect
-	pdf_objkindstr
-	pdf_obj_num_is_stream
-	pdf_is_stream
-	pdf_objcmp
-	pdf_objcmp_resolve
-	pdf_name_eq
-	pdf_obj_marked
-	pdf_mark_obj
-	pdf_unmark_obj
-	pdf_set_obj_memo
-	pdf_obj_memo
-	pdf_obj_is_dirty
-	pdf_dirty_obj
-	pdf_clean_obj
-	pdf_to_bool
-	pdf_to_int
-	pdf_to_int64
-	pdf_to_real
-	pdf_to_name
-	pdf_to_name_not_null
-	pdf_string_to_name_obj
-	pdf_to_text_string
-	pdf_to_string
-	pdf_to_str_buf
-	pdf_to_str_len
-	pdf_to_num
-	pdf_to_gen
-	pdf_array_len
-	pdf_array_get
-	pdf_array_put
-	pdf_array_put_drop
-	pdf_array_push
-	pdf_array_push_drop
-	pdf_array_insert
-	pdf_array_insert_drop
+	pdf_array_contains
 	pdf_array_delete
 	pdf_array_find
-	pdf_array_contains
-	pdf_dict_len
-	pdf_dict_get_key
-	pdf_dict_get_val
-	pdf_dict_put_val_null
-	pdf_dict_get
-	pdf_dict_getp
-	pdf_dict_getl
-	pdf_dict_geta
-	pdf_dict_gets
-	pdf_dict_getsa
-	pdf_dict_get_inheritable
-	pdf_dict_getp_inheritable
-	pdf_dict_put
-	pdf_dict_put_drop
-	pdf_dict_get_put_drop
-	pdf_dict_puts
-	pdf_dict_puts_drop
-	pdf_dict_putp
-	pdf_dict_putp_drop
-	pdf_dict_putl
-	pdf_dict_putl_drop
-	pdf_dict_del
-	pdf_dict_dels
-	pdf_sort_dict
-	pdf_dict_put_bool
-	pdf_dict_put_int
-	pdf_dict_put_real
-	pdf_dict_put_name
-	pdf_dict_put_string
-	pdf_dict_put_text_string
-	pdf_dict_put_rect
-	pdf_dict_put_matrix
-	pdf_dict_put_date
-	pdf_dict_put_array
-	pdf_dict_put_dict
-	pdf_dict_puts_dict
-	pdf_dict_get_bool
-	pdf_dict_get_int
-	pdf_dict_get_real
-	pdf_dict_get_name
-	pdf_dict_get_string
-	pdf_dict_get_text_string
-	pdf_dict_get_rect
-	pdf_dict_get_matrix
-	pdf_dict_get_date
-	pdf_array_push_bool
-	pdf_array_push_int
-	pdf_array_push_real
-	pdf_array_push_name
-	pdf_array_push_string
-	pdf_array_push_text_string
-	pdf_array_push_array
-	pdf_array_push_dict
+	pdf_array_get
 	pdf_array_get_bool
 	pdf_array_get_int
-	pdf_array_get_real
+	pdf_array_get_matrix
 	pdf_array_get_name
+	pdf_array_get_real
+	pdf_array_get_rect
 	pdf_array_get_string
 	pdf_array_get_text_string
-	pdf_array_get_rect
-	pdf_array_get_matrix
-	pdf_set_obj_parent
-	pdf_obj_refs
-	pdf_obj_parent_num
-	pdf_sprint_obj
-	pdf_print_obj
-	pdf_print_encrypted_obj
-	pdf_sprint_obj_to_json
-	pdf_print_obj_to_json
+	pdf_array_insert
+	pdf_array_insert_drop
+	pdf_array_len
+	pdf_array_push
+	pdf_array_push_array
+	pdf_array_push_bool
+	pdf_array_push_dict
+	pdf_array_push_drop
+	pdf_array_push_int
+	pdf_array_push_name
+	pdf_array_push_real
+	pdf_array_push_string
+	pdf_array_push_text_string
+	pdf_array_put
+	pdf_array_put_drop
+	pdf_begin_implicit_operation
+	pdf_begin_operation
+	pdf_can_redo
+	pdf_can_undo
+	pdf_clean_obj
+	pdf_copy_array
+	pdf_copy_dict
 	pdf_debug_obj
 	pdf_debug_ref
-	pdf_new_utf8_from_pdf_string
-	pdf_new_utf8_from_pdf_string_obj
-	pdf_new_utf8_from_pdf_stream_obj
-	pdf_load_stream_or_string_as_utf8
-	pdf_to_quad
-	pdf_to_rect
-	pdf_to_matrix
-	pdf_to_date
-	pdf_get_indirect_document
-	pdf_get_bound_document
-	pdf_set_int
-	pdf_set_str_len
-	pdf_enable_journal
-	pdf_begin_operation
-	pdf_begin_implicit_operation
-	pdf_end_operation
-	pdf_undoredo_state
-	pdf_undoredo_step
-	pdf_can_undo
-	pdf_can_redo
-	pdf_undo
-	pdf_redo
+	pdf_deep_copy_obj
+	pdf_deserialise_journal
+	pdf_dict_del
+	pdf_dict_dels
+	pdf_dict_get
+	pdf_dict_get_bool
+	pdf_dict_get_date
+	pdf_dict_get_inheritable
+	pdf_dict_get_int
+	pdf_dict_get_key
+	pdf_dict_get_matrix
+	pdf_dict_get_name
+	pdf_dict_get_put_drop
+	pdf_dict_get_real
+	pdf_dict_get_rect
+	pdf_dict_get_string
+	pdf_dict_get_text_string
+	pdf_dict_get_val
+	pdf_dict_geta
+	pdf_dict_getl
+	pdf_dict_getp
+	pdf_dict_getp_inheritable
+	pdf_dict_gets
+	pdf_dict_getsa
+	pdf_dict_len
+	pdf_dict_put
+	pdf_dict_put_array
+	pdf_dict_put_bool
+	pdf_dict_put_date
+	pdf_dict_put_dict
+	pdf_dict_put_drop
+	pdf_dict_put_int
+	pdf_dict_put_matrix
+	pdf_dict_put_name
+	pdf_dict_put_real
+	pdf_dict_put_rect
+	pdf_dict_put_string
+	pdf_dict_put_text_string
+	pdf_dict_put_val_null
+	pdf_dict_putl
+	pdf_dict_putl_drop
+	pdf_dict_putp
+	pdf_dict_putp_drop
+	pdf_dict_puts
+	pdf_dict_puts_dict
+	pdf_dict_puts_drop
+	pdf_dirty_obj
 	pdf_discard_journal
 	pdf_drop_journal
+	pdf_drop_obj
+	pdf_enable_journal
+	pdf_end_operation
+	pdf_get_bound_document
+	pdf_get_indirect_document
+	pdf_is_array
+	pdf_is_bool
+	pdf_is_dict
+	pdf_is_indirect
+	pdf_is_int
+	pdf_is_name
+	pdf_is_null
+	pdf_is_number
+	pdf_is_real
+	pdf_is_stream
+	pdf_is_string
+	pdf_keep_obj
+	pdf_load_stream_or_string_as_utf8
+	pdf_mark_obj
+	pdf_name_eq
+	pdf_new_array
+	pdf_new_date
+	pdf_new_dict
+	pdf_new_indirect
+	pdf_new_int
+	pdf_new_matrix
+	pdf_new_name
+	pdf_new_real
+	pdf_new_rect
+	pdf_new_string
+	pdf_new_text_string
+	pdf_new_utf8_from_pdf_stream_obj
+	pdf_new_utf8_from_pdf_string
+	pdf_new_utf8_from_pdf_string_obj
+	pdf_obj_is_dirty
+	pdf_obj_marked
+	pdf_obj_memo
+	pdf_obj_num_is_stream
+	pdf_obj_parent_num
+	pdf_obj_refs
+	pdf_objcmp
+	pdf_objcmp_resolve
+	pdf_objkindstr
+	pdf_print_encrypted_obj
+	pdf_print_obj
+	pdf_print_obj_to_json
+	pdf_redo
 	pdf_serialise_journal
-	pdf_deserialise_journal
-	pdf_lookup_page_number
+	pdf_set_int
+	pdf_set_obj_memo
+	pdf_set_obj_parent
+	pdf_set_str_len
+	pdf_sort_dict
+	pdf_sprint_obj
+	pdf_sprint_obj_to_json
+	pdf_string_to_name_obj
+	pdf_to_bool
+	pdf_to_date
+	pdf_to_gen
+	pdf_to_int
+	pdf_to_int64
+	pdf_to_matrix
+	pdf_to_name
+	pdf_to_name_not_null
+	pdf_to_num
+	pdf_to_quad
+	pdf_to_real
+	pdf_to_rect
+	pdf_to_str_buf
+	pdf_to_str_len
+	pdf_to_string
+	pdf_to_text_string
+	pdf_undo
+	pdf_undoredo_state
+	pdf_undoredo_step
+	pdf_unmark_obj
+	pdf_bound_page
 	pdf_count_pages
 	pdf_count_pages_imp
-	pdf_lookup_page_obj
-	pdf_load_page_tree
+	pdf_drop_ocg
 	pdf_drop_page_tree
-	pdf_lookup_anchor
+	pdf_filter_annot_contents
+	pdf_filter_page_contents
 	pdf_flatten_inheritable_page_items
+	pdf_is_ocg_hidden
+	pdf_load_default_colorspaces
+	pdf_load_links
 	pdf_load_page
 	pdf_load_page_imp
-	pdf_page_obj_transform
-	pdf_page_transform
-	pdf_page_resources
-	pdf_page_contents
-	pdf_page_group
-	pdf_page_separations
-	pdf_read_ocg
-	pdf_drop_ocg
-	pdf_is_ocg_hidden
-	pdf_load_links
-	pdf_bound_page
-	pdf_run_page
-	pdf_run_page_with_usage
-	pdf_run_page_contents
-	pdf_run_page_annots
-	pdf_run_page_widgets
-	pdf_run_page_contents_with_usage
-	pdf_run_page_annots_with_usage
-	pdf_run_page_widgets_with_usage
-	pdf_filter_page_contents
-	pdf_filter_annot_contents
-	pdf_new_pixmap_from_page_contents
+	pdf_load_page_tree
+	pdf_lookup_anchor
+	pdf_lookup_page_number
+	pdf_lookup_page_obj
 	pdf_new_pixmap_from_page
+	pdf_new_pixmap_from_page_contents
 	pdf_new_pixmap_from_page_contents_with_separations
 	pdf_new_pixmap_from_page_with_separations
-	pdf_redact_page
+	pdf_page_contents
+	pdf_page_group
+	pdf_page_obj_transform
 	pdf_page_presentation
-	pdf_load_default_colorspaces
+	pdf_page_resources
+	pdf_page_separations
+	pdf_page_transform
+	pdf_read_ocg
+	pdf_redact_page
+	pdf_run_page
+	pdf_run_page_annots
+	pdf_run_page_annots_with_usage
+	pdf_run_page_contents
+	pdf_run_page_contents_with_usage
+	pdf_run_page_widgets
+	pdf_run_page_widgets_with_usage
+	pdf_run_page_with_usage
 	pdf_update_default_colorspaces
-	pdf_lexbuf_init
-	pdf_lexbuf_fin
-	pdf_lexbuf_grow
+	pdf_append_token
 	pdf_lex
 	pdf_lex_no_string
+	pdf_lexbuf_fin
+	pdf_lexbuf_grow
+	pdf_lexbuf_init
 	pdf_parse_array
 	pdf_parse_dict
-	pdf_parse_stm_obj
 	pdf_parse_ind_obj
 	pdf_parse_journal_obj
-	pdf_append_token
-	pdf_store_item
-	pdf_find_item
-	pdf_remove_item
-	pdf_empty_store
-	pdf_find_font_resource
-	pdf_insert_font_resource
-	pdf_drop_resource_tables
-	pdf_purge_local_font_resources
-	pdf_eval_function
-	pdf_keep_function
-	pdf_drop_function
-	pdf_function_size
-	pdf_load_function
-	pdf_document_output_intent
-	pdf_load_colorspace
-	pdf_is_tint_colorspace
-	pdf_load_shading
-	pdf_load_inline_image
-	pdf_is_jpx_image
-	pdf_load_image
+	pdf_parse_stm_obj
 	pdf_add_image
-	pdf_load_pattern
-	pdf_keep_pattern
+	pdf_document_output_intent
+	pdf_drop_function
 	pdf_drop_pattern
+	pdf_drop_resource_tables
+	pdf_empty_store
+	pdf_eval_function
+	pdf_find_font_resource
+	pdf_find_item
+	pdf_function_size
+	pdf_insert_font_resource
+	pdf_is_jpx_image
+	pdf_is_tint_colorspace
+	pdf_keep_function
+	pdf_keep_pattern
+	pdf_load_colorspace
+	pdf_load_function
+	pdf_load_image
+	pdf_load_inline_image
+	pdf_load_pattern
+	pdf_load_shading
 	pdf_new_xobject
+	pdf_purge_local_font_resources
+	pdf_remove_item
+	pdf_store_item
 	pdf_update_xobject
-	pdf_xobject_resources
 	pdf_xobject_bbox
-	pdf_xobject_matrix
+	pdf_xobject_colorspace
 	pdf_xobject_isolated
 	pdf_xobject_knockout
+	pdf_xobject_matrix
+	pdf_xobject_resources
 	pdf_xobject_transparency
-	pdf_xobject_colorspace
-	pdf_create_object
-	pdf_delete_object
-	pdf_update_object
-	pdf_update_stream
-	pdf_is_local_object
+	pdf_add_new_array
+	pdf_add_new_dict
 	pdf_add_object
 	pdf_add_object_drop
 	pdf_add_stream
-	pdf_add_new_dict
-	pdf_add_new_array
 	pdf_cache_object
-	pdf_count_objects
-	pdf_resolve_indirect
-	pdf_resolve_indirect_chain
-	pdf_load_object
-	pdf_load_unencrypted_object
-	pdf_load_raw_stream_number
-	pdf_load_raw_stream
-	pdf_load_stream_number
-	pdf_load_stream
-	pdf_open_raw_stream_number
-	pdf_open_raw_stream
-	pdf_open_stream_number
-	pdf_open_stream
-	pdf_open_inline_stream
-	pdf_load_compressed_stream
-	pdf_load_compressed_inline_image
-	pdf_open_stream_with_offset
-	pdf_open_contents_stream
-	pdf_version
-	pdf_trailer
-	pdf_set_populating_xref_trailer
-	pdf_xref_len
-	pdf_get_populating_xref_entry
-	pdf_get_xref_entry
-	pdf_replace_xref
-	pdf_forget_xref
-	pdf_xref_ensure_incremental_object
-	pdf_xref_is_incremental
-	pdf_xref_store_unsaved_signature
-	pdf_xref_remove_unsaved_signature
-	pdf_xref_obj_is_unsaved_signature
-	pdf_xref_ensure_local_object
-	pdf_repair_xref
-	pdf_repair_obj_stms
-	pdf_ensure_solid_xref
-	pdf_mark_xref
 	pdf_clear_xref
 	pdf_clear_xref_to_mark
-	pdf_repair_obj
-	pdf_progressive_advance
-	pdf_count_versions
+	pdf_count_objects
 	pdf_count_unsaved_versions
-	pdf_validate_changes
+	pdf_count_versions
+	pdf_create_object
+	pdf_delete_object
 	pdf_doc_was_linearized
-	pdf_is_field_locked
+	pdf_drop_local_xref
 	pdf_drop_locked_fields
+	pdf_ensure_solid_xref
 	pdf_find_locked_fields
 	pdf_find_locked_fields_for_sig
-	pdf_validate_change_history
 	pdf_find_version_for_obj
-	pdf_validate_signature
-	pdf_was_pure_xfa
+	pdf_forget_xref
+	pdf_get_populating_xref_entry
+	pdf_get_xref_entry
+	pdf_is_field_locked
+	pdf_is_local_object
+	pdf_load_compressed_inline_image
+	pdf_load_compressed_stream
+	pdf_load_object
+	pdf_load_raw_stream
+	pdf_load_raw_stream_number
+	pdf_load_stream
+	pdf_load_stream_number
+	pdf_load_unencrypted_object
+	pdf_mark_xref
 	pdf_new_local_xref
-	pdf_drop_local_xref
+	pdf_open_contents_stream
+	pdf_open_inline_stream
+	pdf_open_raw_stream
+	pdf_open_raw_stream_number
+	pdf_open_stream
+	pdf_open_stream_number
+	pdf_open_stream_with_offset
+	pdf_progressive_advance
+	pdf_repair_obj
+	pdf_repair_obj_stms
+	pdf_repair_xref
+	pdf_replace_xref
+	pdf_resolve_indirect
+	pdf_resolve_indirect_chain
+	pdf_set_populating_xref_trailer
+	pdf_trailer
+	pdf_update_object
+	pdf_update_stream
+	pdf_validate_change_history
+	pdf_validate_changes
+	pdf_validate_signature
+	pdf_version
+	pdf_was_pure_xfa
+	pdf_xref_ensure_incremental_object
+	pdf_xref_ensure_local_object
+	pdf_xref_is_incremental
+	pdf_xref_len
+	pdf_xref_obj_is_unsaved_signature
+	pdf_xref_remove_unsaved_signature
+	pdf_xref_store_unsaved_signature
 
 ; libJPEG exports
 
-	jpeg_std_error
 	jpeg_CreateCompress
 	jpeg_CreateDecompress
-	jpeg_destroy_compress
-	jpeg_destroy_decompress
-	jpeg_stdio_dest
-	jpeg_stdio_src
-	jpeg_mem_dest
-	jpeg_mem_src
-	jpeg_set_defaults
-	jpeg_set_colorspace
-	jpeg_default_colorspace
-	jpeg_set_quality
-	jpeg_set_linear_quality
-	jpeg_default_qtables
-	jpeg_add_quant_table
-	jpeg_quality_scaling
-	jpeg_simple_progression
-	jpeg_suppress_tables
-	jpeg_alloc_quant_table
-	jpeg_alloc_huff_table
-	jpeg_start_compress
-	jpeg_write_scanlines
-	jpeg_finish_compress
-	jpeg_calc_jpeg_dimensions
-	jpeg_write_raw_data
-	jpeg_write_marker
-	jpeg_write_m_header
-	jpeg_write_m_byte
-	jpeg_write_tables
-	jpeg_read_header
-	jpeg_start_decompress
-	jpeg_read_scanlines
-	jpeg_finish_decompress
-	jpeg_read_raw_data
-	jpeg_has_multiple_scans
-	jpeg_start_output
-	jpeg_finish_output
-	jpeg_input_complete
-	jpeg_new_colormap
-	jpeg_consume_input
-	jpeg_core_output_dimensions
-	jpeg_calc_output_dimensions
-	jpeg_save_markers
-	jpeg_set_marker_processor
-	jpeg_read_coefficients
-	jpeg_write_coefficients
-	jpeg_copy_critical_parameters
+	jpeg_abort
 	jpeg_abort_compress
 	jpeg_abort_decompress
-	jpeg_abort
+	jpeg_add_quant_table
+	jpeg_alloc_huff_table
+	jpeg_alloc_quant_table
+	jpeg_calc_jpeg_dimensions
+	jpeg_calc_output_dimensions
+	jpeg_consume_input
+	jpeg_copy_critical_parameters
+	jpeg_core_output_dimensions
+	jpeg_default_colorspace
+	jpeg_default_qtables
 	jpeg_destroy
+	jpeg_destroy_compress
+	jpeg_destroy_decompress
+	jpeg_finish_compress
+	jpeg_finish_decompress
+	jpeg_finish_output
+	jpeg_has_multiple_scans
+	jpeg_input_complete
+	jpeg_mem_dest
+	jpeg_mem_src
+	jpeg_new_colormap
+	jpeg_quality_scaling
+	jpeg_read_coefficients
+	jpeg_read_header
+	jpeg_read_raw_data
+	jpeg_read_scanlines
 	jpeg_resync_to_restart
+	jpeg_save_markers
+	jpeg_set_colorspace
+	jpeg_set_defaults
+	jpeg_set_linear_quality
+	jpeg_set_marker_processor
+	jpeg_set_quality
+	jpeg_simple_progression
+	jpeg_start_compress
+	jpeg_start_decompress
+	jpeg_start_output
+	jpeg_std_error
+	jpeg_stdio_dest
+	jpeg_stdio_src
+	jpeg_suppress_tables
+	jpeg_write_coefficients
+	jpeg_write_m_byte
+	jpeg_write_m_header
+	jpeg_write_marker
+	jpeg_write_raw_data
+	jpeg_write_scanlines
+	jpeg_write_tables
 	jpeg_cust_mem_init
 
 ; libGIF exports
 
-	EGifOpenFileName
-	EGifOpenFileHandle
-	EGifOpen
-	EGifSpew
-	EGifGetGifVersion
-	EGifCloseFile
-	EGifPutScreenDesc
-	EGifPutImageDesc
-	EGifSetGifVersion
-	EGifPutLine
-	EGifPutPixel
-	EGifPutComment
-	EGifPutExtensionLeader
-	EGifPutExtensionBlock
-	EGifPutExtensionTrailer
-	EGifPutExtension
-	EGifPutCode
-	EGifPutCodeNext
-	DGifOpenFileName
-	DGifOpenFileHandle
-	DGifSlurp
-	DGifOpen
-	DGifGetScreenDesc
-	DGifGetRecordType
-	DGifGetImageHeader
-	DGifGetImageDesc
-	DGifGetLine
-	DGifGetPixel
-	DGifGetExtension
-	DGifGetExtensionNext
+	DGifExtensionToGCB
 	DGifGetCode
 	DGifGetCodeNext
-	DGifGetLZCodes
+	DGifGetExtension
+	DGifGetExtensionNext
 	DGifGetGifVersion
-	GifErrorString
-	GifMakeMapObject
-	GifFreeMapObject
-	GifUnionColorMap
-	GifBitSize
-	GifApplyTranslation
-	GifAddExtensionBlock
-	GifFreeExtensions
-	GifMakeSavedImage
-	GifFreeSavedImages
-	DGifExtensionToGCB
-	EGifGCBToExtension
+	DGifGetImageDesc
+	DGifGetImageHeader
+	DGifGetLZCodes
+	DGifGetLine
+	DGifGetPixel
+	DGifGetRecordType
+	DGifGetScreenDesc
+	DGifOpen
+	DGifOpenFileHandle
+	DGifOpenFileName
 	DGifSavedExtensionToGCB
+	DGifSlurp
+	EGifCloseFile
+	EGifGCBToExtension
 	EGifGCBToSavedExtension
-	GifDrawText8x8
+	EGifGetGifVersion
+	EGifOpen
+	EGifOpenFileHandle
+	EGifOpenFileName
+	EGifPutCode
+	EGifPutCodeNext
+	EGifPutComment
+	EGifPutExtension
+	EGifPutExtensionBlock
+	EGifPutExtensionLeader
+	EGifPutExtensionTrailer
+	EGifPutImageDesc
+	EGifPutLine
+	EGifPutPixel
+	EGifPutScreenDesc
+	EGifSetGifVersion
+	EGifSpew
+	GifAddExtensionBlock
+	GifApplyTranslation
+	GifBitSize
 	GifDrawBox
-	GifDrawRectangle
 	GifDrawBoxedText8x8
+	GifDrawRectangle
+	GifDrawText8x8
+	GifErrorString
+	GifFreeExtensions
+	GifFreeMapObject
+	GifFreeSavedImages
+	GifMakeMapObject
+	GifMakeSavedImage
+	GifUnionColorMap
 	gif2rgb_main
 	gifbg_main
 	gifbuild_main
@@ -2005,800 +2005,800 @@ EXPORTS
 
 ; libWEBP exports
 
-	WebPGetDecoderVersion
-	WebPGetInfo
-	WebPDecodeRGBA
+	WebPDecode
 	WebPDecodeARGB
-	WebPDecodeBGRA
-	WebPDecodeRGB
-	WebPDecodeBGR
-	WebPDecodeYUV
-	WebPDecodeRGBAInto
 	WebPDecodeARGBInto
+	WebPDecodeBGR
+	WebPDecodeBGRA
 	WebPDecodeBGRAInto
-	WebPDecodeRGBInto
 	WebPDecodeBGRInto
+	WebPDecodeRGB
+	WebPDecodeRGBA
+	WebPDecodeRGBAInto
+	WebPDecodeRGBInto
+	WebPDecodeYUV
 	WebPDecodeYUVInto
-	WebPInitDecBufferInternal
 	WebPFreeDecBuffer
-	WebPINewDecoder
-	WebPINewRGB
-	WebPINewYUVA
-	WebPINewYUV
-	WebPIDelete
+	WebPGetDecoderVersion
+	WebPGetFeaturesInternal
+	WebPGetInfo
 	WebPIAppend
-	WebPIUpdate
 	WebPIDecGetRGB
 	WebPIDecGetYUVA
-	WebPIDecodedArea
-	WebPGetFeaturesInternal
-	WebPInitDecoderConfigInternal
 	WebPIDecode
-	WebPDecode
-	WebPGetDemuxVersion
-	WebPDemuxInternal
-	WebPDemuxDelete
-	WebPDemuxGetI
-	WebPDemuxGetFrame
-	WebPDemuxNextFrame
-	WebPDemuxPrevFrame
-	WebPDemuxReleaseIterator
-	WebPDemuxGetChunk
-	WebPDemuxNextChunk
-	WebPDemuxPrevChunk
-	WebPDemuxReleaseChunkIterator
-	WebPAnimDecoderOptionsInitInternal
-	WebPAnimDecoderNewInternal
+	WebPIDecodedArea
+	WebPIDelete
+	WebPINewDecoder
+	WebPINewRGB
+	WebPINewYUV
+	WebPINewYUVA
+	WebPIUpdate
+	WebPInitDecBufferInternal
+	WebPInitDecoderConfigInternal
+	WebPAnimDecoderDelete
+	WebPAnimDecoderGetDemuxer
 	WebPAnimDecoderGetInfo
 	WebPAnimDecoderGetNext
 	WebPAnimDecoderHasMoreFrames
+	WebPAnimDecoderNewInternal
+	WebPAnimDecoderOptionsInitInternal
 	WebPAnimDecoderReset
-	WebPAnimDecoderGetDemuxer
-	WebPAnimDecoderDelete
-	WebPGetEncoderVersion
-	WebPEncodeRGB
-	WebPEncodeBGR
-	WebPEncodeRGBA
-	WebPEncodeBGRA
-	WebPEncodeLosslessRGB
-	WebPEncodeLosslessBGR
-	WebPEncodeLosslessRGBA
-	WebPEncodeLosslessBGRA
+	WebPDemuxDelete
+	WebPDemuxGetChunk
+	WebPDemuxGetFrame
+	WebPDemuxGetI
+	WebPDemuxInternal
+	WebPDemuxNextChunk
+	WebPDemuxNextFrame
+	WebPDemuxPrevChunk
+	WebPDemuxPrevFrame
+	WebPDemuxReleaseChunkIterator
+	WebPDemuxReleaseIterator
+	WebPGetDemuxVersion
+	WebPBlendAlpha
+	WebPCleanupTransparentArea
 	WebPConfigInitInternal
 	WebPConfigLosslessPreset
-	WebPValidateConfig
-	WebPMemoryWriterInit
-	WebPMemoryWriterClear
+	WebPEncode
+	WebPEncodeBGR
+	WebPEncodeBGRA
+	WebPEncodeLosslessBGR
+	WebPEncodeLosslessBGRA
+	WebPEncodeLosslessRGB
+	WebPEncodeLosslessRGBA
+	WebPEncodeRGB
+	WebPEncodeRGBA
+	WebPGetEncoderVersion
 	WebPMemoryWrite
-	WebPPictureInitInternal
+	WebPMemoryWriterClear
+	WebPMemoryWriterInit
+	WebPPictureARGBToYUVA
+	WebPPictureARGBToYUVADithered
 	WebPPictureAlloc
-	WebPPictureFree
 	WebPPictureCopy
-	WebPPlaneDistortion
-	WebPPictureDistortion
 	WebPPictureCrop
-	WebPPictureView
-	WebPPictureIsView
-	WebPPictureRescale
-	WebPPictureImportRGB
-	WebPPictureImportRGBA
-	WebPPictureImportRGBX
+	WebPPictureDistortion
+	WebPPictureFree
+	WebPPictureHasTransparency
 	WebPPictureImportBGR
 	WebPPictureImportBGRA
 	WebPPictureImportBGRX
-	WebPPictureARGBToYUVA
-	WebPPictureARGBToYUVADithered
+	WebPPictureImportRGB
+	WebPPictureImportRGBA
+	WebPPictureImportRGBX
+	WebPPictureInitInternal
+	WebPPictureIsView
+	WebPPictureRescale
 	WebPPictureSharpARGBToYUVA
 	WebPPictureSmartARGBToYUVA
+	WebPPictureView
 	WebPPictureYUVAToARGB
-	WebPCleanupTransparentArea
-	WebPPictureHasTransparency
-	WebPBlendAlpha
-	WebPEncode
+	WebPPlaneDistortion
+	WebPValidateConfig
 
-	WebPGetMuxVersion
-	WebPNewInternal
-	WebPMuxDelete
-	WebPMuxCreateInternal
-	WebPMuxSetChunk
-	WebPMuxGetChunk
-	WebPMuxDeleteChunk
-	WebPMuxSetImage
-	WebPMuxPushFrame
-	WebPMuxGetFrame
-	WebPMuxDeleteFrame
-	WebPMuxSetAnimationParams
-	WebPMuxGetAnimationParams
-	WebPMuxSetCanvasSize
-	WebPMuxGetCanvasSize
-	WebPMuxGetFeatures
-	WebPMuxNumChunks
-	WebPMuxAssemble
-	WebPAnimEncoderOptionsInitInternal
-	WebPAnimEncoderNewInternal
 	WebPAnimEncoderAdd
 	WebPAnimEncoderAssemble
-	WebPAnimEncoderGetError
 	WebPAnimEncoderDelete
+	WebPAnimEncoderGetError
+	WebPAnimEncoderNewInternal
+	WebPAnimEncoderOptionsInitInternal
+	WebPGetMuxVersion
+	WebPMuxAssemble
+	WebPMuxCreateInternal
+	WebPMuxDelete
+	WebPMuxDeleteChunk
+	WebPMuxDeleteFrame
+	WebPMuxGetAnimationParams
+	WebPMuxGetCanvasSize
+	WebPMuxGetChunk
+	WebPMuxGetFeatures
+	WebPMuxGetFrame
+	WebPMuxNumChunks
+	WebPMuxPushFrame
+	WebPMuxSetAnimationParams
+	WebPMuxSetCanvasSize
+	WebPMuxSetChunk
+	WebPMuxSetImage
+	WebPNewInternal
 
-	WebPMalloc
 	WebPFree
+	WebPMalloc
 
 ; libSQLite3 exports
 
-	sqlite3_libversion
-	sqlite3_sourceid
-	sqlite3_libversion_number
-	sqlite3_compileoption_used
-	sqlite3_compileoption_get
-	sqlite3_threadsafe
-	sqlite3_close
-	sqlite3_close_v2
-	sqlite3_exec
-	sqlite3_initialize
-	sqlite3_shutdown
-	sqlite3_os_init
-	sqlite3_os_end
-	sqlite3_config
-	sqlite3_db_config
-	sqlite3_extended_result_codes
-	sqlite3_last_insert_rowid
-	sqlite3_set_last_insert_rowid
-	sqlite3_changes
-	sqlite3_total_changes
-	sqlite3_interrupt
-	sqlite3_complete
-	sqlite3_complete16
-	sqlite3_busy_handler
-	sqlite3_busy_timeout
-	sqlite3_get_table
-	sqlite3_free_table
-	sqlite3_mprintf
-	sqlite3_vmprintf
-	sqlite3_snprintf
-	sqlite3_vsnprintf
-	sqlite3_malloc
-	sqlite3_malloc64
-	sqlite3_realloc
-	sqlite3_realloc64
-	sqlite3_free
-	sqlite3_msize
-	sqlite3_memory_used
-	sqlite3_memory_highwater
-	sqlite3_randomness
-	sqlite3_set_authorizer
-	sqlite3_trace_v2
-	sqlite3_progress_handler
-	sqlite3_open
-	sqlite3_open16
-	sqlite3_open_v2
-	sqlite3_uri_parameter
-	sqlite3_uri_boolean
-	sqlite3_uri_int64
-	sqlite3_uri_key
-	sqlite3_filename_database
-	sqlite3_filename_journal
-	sqlite3_filename_wal
-	sqlite3_database_file_object
-	sqlite3_create_filename
-	sqlite3_free_filename
-	sqlite3_errcode
-	sqlite3_extended_errcode
-	sqlite3_errmsg
-	sqlite3_errmsg16
-	sqlite3_errstr
-	sqlite3_limit
-	sqlite3_prepare
-	sqlite3_prepare_v2
-	sqlite3_prepare_v3
-	sqlite3_prepare16
-	sqlite3_prepare16_v2
-	sqlite3_prepare16_v3
-	sqlite3_sql
-	sqlite3_expanded_sql
-	sqlite3_normalized_sql
-	sqlite3_stmt_readonly
-	sqlite3_stmt_isexplain
-	sqlite3_stmt_busy
+	sqlite3_aggregate_context
+	sqlite3_auto_extension
+	sqlite3_backup_finish
+	sqlite3_backup_init
+	sqlite3_backup_pagecount
+	sqlite3_backup_remaining
+	sqlite3_backup_step
 	sqlite3_bind_blob
 	sqlite3_bind_blob64
 	sqlite3_bind_double
 	sqlite3_bind_int
 	sqlite3_bind_int64
 	sqlite3_bind_null
+	sqlite3_bind_parameter_count
+	sqlite3_bind_parameter_index
+	sqlite3_bind_parameter_name
+	sqlite3_bind_pointer
 	sqlite3_bind_text
 	sqlite3_bind_text16
 	sqlite3_bind_text64
 	sqlite3_bind_value
-	sqlite3_bind_pointer
 	sqlite3_bind_zeroblob
 	sqlite3_bind_zeroblob64
-	sqlite3_bind_parameter_count
-	sqlite3_bind_parameter_name
-	sqlite3_bind_parameter_index
+	sqlite3_blob_bytes
+	sqlite3_blob_close
+	sqlite3_blob_open
+	sqlite3_blob_read
+	sqlite3_blob_reopen
+	sqlite3_blob_write
+	sqlite3_busy_handler
+	sqlite3_busy_timeout
+	sqlite3_cancel_auto_extension
+	sqlite3_changes
 	sqlite3_clear_bindings
+	sqlite3_close
+	sqlite3_close_v2
+	sqlite3_collation_needed
+	sqlite3_collation_needed16
+	sqlite3_column_blob
+	sqlite3_column_bytes
+	sqlite3_column_bytes16
 	sqlite3_column_count
-	sqlite3_column_name
-	sqlite3_column_name16
 	sqlite3_column_database_name
 	sqlite3_column_database_name16
-	sqlite3_column_table_name
-	sqlite3_column_table_name16
-	sqlite3_column_origin_name
-	sqlite3_column_origin_name16
 	sqlite3_column_decltype
 	sqlite3_column_decltype16
-	sqlite3_step
-	sqlite3_data_count
-	sqlite3_column_blob
 	sqlite3_column_double
 	sqlite3_column_int
 	sqlite3_column_int64
+	sqlite3_column_name
+	sqlite3_column_name16
+	sqlite3_column_origin_name
+	sqlite3_column_origin_name16
+	sqlite3_column_table_name
+	sqlite3_column_table_name16
 	sqlite3_column_text
 	sqlite3_column_text16
-	sqlite3_column_value
-	sqlite3_column_bytes
-	sqlite3_column_bytes16
 	sqlite3_column_type
-	sqlite3_finalize
-	sqlite3_reset
+	sqlite3_column_value
+	sqlite3_commit_hook
+	sqlite3_compileoption_get
+	sqlite3_compileoption_used
+	sqlite3_complete
+	sqlite3_complete16
+	sqlite3_config
+	sqlite3_context_db_handle
+	sqlite3_create_collation
+	sqlite3_create_collation16
+	sqlite3_create_collation_v2
+	sqlite3_create_filename
 	sqlite3_create_function
 	sqlite3_create_function16
 	sqlite3_create_function_v2
+	sqlite3_create_module
+	sqlite3_create_module_v2
 	sqlite3_create_window_function
-	sqlite3_value_blob
-	sqlite3_value_double
-	sqlite3_value_int
-	sqlite3_value_int64
-	sqlite3_value_pointer
-	sqlite3_value_text
-	sqlite3_value_text16
-	sqlite3_value_text16le
-	sqlite3_value_text16be
-	sqlite3_value_bytes
-	sqlite3_value_bytes16
-	sqlite3_value_type
-	sqlite3_value_numeric_type
-	sqlite3_value_nochange
-	sqlite3_value_frombind
-	sqlite3_value_subtype
-	sqlite3_value_dup
-	sqlite3_value_free
-	sqlite3_aggregate_context
-	sqlite3_user_data
-	sqlite3_context_db_handle
+	sqlite3_data_count
+	sqlite3_database_file_object
+	sqlite3_db_cacheflush
+	sqlite3_db_config
+	sqlite3_db_filename
+	sqlite3_db_handle
+	sqlite3_db_mutex
+	sqlite3_db_readonly
+	sqlite3_db_release_memory
+	sqlite3_db_status
+	sqlite3_declare_vtab
+	sqlite3_deserialize
+	sqlite3_drop_modules
+	sqlite3_enable_load_extension
+	sqlite3_errcode
+	sqlite3_errmsg
+	sqlite3_errmsg16
+	sqlite3_errstr
+	sqlite3_exec
+	sqlite3_expanded_sql
+	sqlite3_extended_errcode
+	sqlite3_extended_result_codes
+	sqlite3_file_control
+	sqlite3_filename_database
+	sqlite3_filename_journal
+	sqlite3_filename_wal
+	sqlite3_finalize
+	sqlite3_free
+	sqlite3_free_filename
+	sqlite3_free_table
+	sqlite3_get_autocommit
 	sqlite3_get_auxdata
-	sqlite3_set_auxdata
+	sqlite3_get_table
+	sqlite3_hard_heap_limit64
+	sqlite3_initialize
+	sqlite3_interrupt
+	sqlite3_keyword_check
+	sqlite3_keyword_count
+	sqlite3_keyword_name
+	sqlite3_last_insert_rowid
+	sqlite3_libversion
+	sqlite3_libversion_number
+	sqlite3_limit
+	sqlite3_load_extension
+	sqlite3_log
+	sqlite3_malloc
+	sqlite3_malloc64
+	sqlite3_memory_highwater
+	sqlite3_memory_used
+	sqlite3_mprintf
+	sqlite3_msize
+	sqlite3_mutex_alloc
+	sqlite3_mutex_enter
+	sqlite3_mutex_free
+	sqlite3_mutex_leave
+	sqlite3_mutex_try
+	sqlite3_next_stmt
+	sqlite3_normalized_sql
+	sqlite3_open
+	sqlite3_open16
+	sqlite3_open_v2
+	sqlite3_os_end
+	sqlite3_os_init
+	sqlite3_overload_function
+	sqlite3_prepare
+	sqlite3_prepare16
+	sqlite3_prepare16_v2
+	sqlite3_prepare16_v3
+	sqlite3_prepare_v2
+	sqlite3_prepare_v3
+	sqlite3_preupdate_count
+	sqlite3_preupdate_depth
+	sqlite3_preupdate_hook
+	sqlite3_preupdate_new
+	sqlite3_preupdate_old
+	sqlite3_progress_handler
+	sqlite3_randomness
+	sqlite3_realloc
+	sqlite3_realloc64
+	sqlite3_release_memory
+	sqlite3_reset
+	sqlite3_reset_auto_extension
 	sqlite3_result_blob
 	sqlite3_result_blob64
 	sqlite3_result_double
 	sqlite3_result_error
 	sqlite3_result_error16
-	sqlite3_result_error_toobig
-	sqlite3_result_error_nomem
 	sqlite3_result_error_code
+	sqlite3_result_error_nomem
+	sqlite3_result_error_toobig
 	sqlite3_result_int
 	sqlite3_result_int64
 	sqlite3_result_null
-	sqlite3_result_text
-	sqlite3_result_text64
-	sqlite3_result_text16
-	sqlite3_result_text16le
-	sqlite3_result_text16be
-	sqlite3_result_value
 	sqlite3_result_pointer
+	sqlite3_result_subtype
+	sqlite3_result_text
+	sqlite3_result_text16
+	sqlite3_result_text16be
+	sqlite3_result_text16le
+	sqlite3_result_text64
+	sqlite3_result_value
 	sqlite3_result_zeroblob
 	sqlite3_result_zeroblob64
-	sqlite3_result_subtype
-	sqlite3_create_collation
-	sqlite3_create_collation_v2
-	sqlite3_create_collation16
-	sqlite3_collation_needed
-	sqlite3_collation_needed16
-	sqlite3_sleep
-	sqlite3_win32_set_directory
-	sqlite3_win32_set_directory8
-	sqlite3_win32_set_directory16
-	sqlite3_get_autocommit
-	sqlite3_db_handle
-	sqlite3_db_filename
-	sqlite3_db_readonly
-	sqlite3_txn_state
-	sqlite3_next_stmt
-	sqlite3_commit_hook
 	sqlite3_rollback_hook
-	sqlite3_update_hook
-	sqlite3_release_memory
-	sqlite3_db_release_memory
+	sqlite3_rtree_geometry_callback
+	sqlite3_rtree_query_callback
+	sqlite3_serialize
+	sqlite3_set_authorizer
+	sqlite3_set_auxdata
+	sqlite3_set_last_insert_rowid
+	sqlite3_shutdown
+	sqlite3_sleep
+	sqlite3_snapshot_cmp
+	sqlite3_snapshot_free
+	sqlite3_snapshot_get
+	sqlite3_snapshot_open
+	sqlite3_snapshot_recover
+	sqlite3_snprintf
 	sqlite3_soft_heap_limit64
-	sqlite3_hard_heap_limit64
-	sqlite3_table_column_metadata
-	sqlite3_load_extension
-	sqlite3_enable_load_extension
-	sqlite3_auto_extension
-	sqlite3_cancel_auto_extension
-	sqlite3_reset_auto_extension
-	sqlite3_create_module
-	sqlite3_create_module_v2
-	sqlite3_drop_modules
-	sqlite3_declare_vtab
-	sqlite3_overload_function
-	sqlite3_blob_open
-	sqlite3_blob_reopen
-	sqlite3_blob_close
-	sqlite3_blob_bytes
-	sqlite3_blob_read
-	sqlite3_blob_write
-	sqlite3_vfs_find
-	sqlite3_vfs_register
-	sqlite3_vfs_unregister
-	sqlite3_mutex_alloc
-	sqlite3_mutex_free
-	sqlite3_mutex_enter
-	sqlite3_mutex_try
-	sqlite3_mutex_leave
-	sqlite3_db_mutex
-	sqlite3_file_control
-	sqlite3_test_control
-	sqlite3_keyword_count
-	sqlite3_keyword_name
-	sqlite3_keyword_check
-	sqlite3_str_new
-	sqlite3_str_finish
-	sqlite3_str_appendf
-	sqlite3_str_vappendf
+	sqlite3_sourceid
+	sqlite3_sql
+	sqlite3_status
+	sqlite3_status64
+	sqlite3_step
+	sqlite3_stmt_busy
+	sqlite3_stmt_isexplain
+	sqlite3_stmt_readonly
+	sqlite3_stmt_scanstatus
+	sqlite3_stmt_scanstatus_reset
+	sqlite3_stmt_status
 	sqlite3_str_append
 	sqlite3_str_appendall
 	sqlite3_str_appendchar
-	sqlite3_str_reset
+	sqlite3_str_appendf
 	sqlite3_str_errcode
+	sqlite3_str_finish
 	sqlite3_str_length
+	sqlite3_str_new
+	sqlite3_str_reset
 	sqlite3_str_value
-	sqlite3_status
-	sqlite3_status64
-	sqlite3_db_status
-	sqlite3_stmt_status
-	sqlite3_backup_init
-	sqlite3_backup_step
-	sqlite3_backup_finish
-	sqlite3_backup_remaining
-	sqlite3_backup_pagecount
-	sqlite3_unlock_notify
-	sqlite3_stricmp
-	sqlite3_strnicmp
+	sqlite3_str_vappendf
 	sqlite3_strglob
+	sqlite3_stricmp
 	sqlite3_strlike
-	sqlite3_log
-	sqlite3_wal_hook
+	sqlite3_strnicmp
+	sqlite3_system_errno
+	sqlite3_table_column_metadata
+	sqlite3_test_control
+	sqlite3_threadsafe
+	sqlite3_total_changes
+	sqlite3_trace_v2
+	sqlite3_txn_state
+	sqlite3_unlock_notify
+	sqlite3_update_hook
+	sqlite3_uri_boolean
+	sqlite3_uri_int64
+	sqlite3_uri_key
+	sqlite3_uri_parameter
+	sqlite3_user_data
+	sqlite3_value_blob
+	sqlite3_value_bytes
+	sqlite3_value_bytes16
+	sqlite3_value_double
+	sqlite3_value_dup
+	sqlite3_value_free
+	sqlite3_value_frombind
+	sqlite3_value_int
+	sqlite3_value_int64
+	sqlite3_value_nochange
+	sqlite3_value_numeric_type
+	sqlite3_value_pointer
+	sqlite3_value_subtype
+	sqlite3_value_text
+	sqlite3_value_text16
+	sqlite3_value_text16be
+	sqlite3_value_text16le
+	sqlite3_value_type
+	sqlite3_vfs_find
+	sqlite3_vfs_register
+	sqlite3_vfs_unregister
+	sqlite3_vmprintf
+	sqlite3_vsnprintf
+	sqlite3_vtab_collation
+	sqlite3_vtab_config
+	sqlite3_vtab_nochange
+	sqlite3_vtab_on_conflict
 	sqlite3_wal_autocheckpoint
 	sqlite3_wal_checkpoint
 	sqlite3_wal_checkpoint_v2
-	sqlite3_vtab_config
-	sqlite3_vtab_on_conflict
-	sqlite3_vtab_nochange
-	sqlite3_vtab_collation
-	sqlite3_stmt_scanstatus
-	sqlite3_stmt_scanstatus_reset
-	sqlite3_db_cacheflush
-	sqlite3_preupdate_hook
-	sqlite3_preupdate_old
-	sqlite3_preupdate_count
-	sqlite3_preupdate_depth
-	sqlite3_preupdate_new
-	sqlite3_system_errno
-	sqlite3_snapshot_get
-	sqlite3_snapshot_open
-	sqlite3_snapshot_free
-	sqlite3_snapshot_cmp
-	sqlite3_snapshot_recover
-	sqlite3_serialize
-	sqlite3_deserialize
-	sqlite3_rtree_geometry_callback
-	sqlite3_rtree_query_callback
-	sqlite3session_create
-	sqlite3session_delete
-	sqlite3session_enable
-	sqlite3session_indirect
-	sqlite3session_attach
-	sqlite3session_table_filter
-	sqlite3session_changeset
-	sqlite3session_diff
-	sqlite3session_patchset
-	sqlite3session_isempty
-	sqlite3session_memory_used
-	sqlite3changeset_start
-	sqlite3changeset_start_v2
+	sqlite3_wal_hook
+	sqlite3_win32_set_directory
+	sqlite3_win32_set_directory16
+	sqlite3_win32_set_directory8
+	sqlite3changegroup_add
+	sqlite3changegroup_add_strm
+	sqlite3changegroup_delete
+	sqlite3changegroup_new
+	sqlite3changegroup_output
+	sqlite3changegroup_output_strm
+	sqlite3changeset_apply
+	sqlite3changeset_apply_strm
+	sqlite3changeset_apply_v2
+	sqlite3changeset_apply_v2_strm
+	sqlite3changeset_concat
+	sqlite3changeset_concat_strm
+	sqlite3changeset_conflict
+	sqlite3changeset_finalize
+	sqlite3changeset_fk_conflicts
+	sqlite3changeset_invert
+	sqlite3changeset_invert_strm
+	sqlite3changeset_new
 	sqlite3changeset_next
+	sqlite3changeset_old
 	sqlite3changeset_op
 	sqlite3changeset_pk
-	sqlite3changeset_old
-	sqlite3changeset_new
-	sqlite3changeset_conflict
-	sqlite3changeset_fk_conflicts
-	sqlite3changeset_finalize
-	sqlite3changeset_invert
-	sqlite3changeset_concat
-	sqlite3changegroup_new
-	sqlite3changegroup_add
-	sqlite3changegroup_output
-	sqlite3changegroup_delete
-	sqlite3changeset_apply
-	sqlite3changeset_apply_v2
-	sqlite3rebaser_create
-	sqlite3rebaser_configure
-	sqlite3rebaser_rebase
-	sqlite3rebaser_delete
-	sqlite3changeset_apply_strm
-	sqlite3changeset_apply_v2_strm
-	sqlite3changeset_concat_strm
-	sqlite3changeset_invert_strm
+	sqlite3changeset_start
 	sqlite3changeset_start_strm
+	sqlite3changeset_start_v2
 	sqlite3changeset_start_v2_strm
-	sqlite3session_changeset_strm
-	sqlite3session_patchset_strm
-	sqlite3changegroup_add_strm
-	sqlite3changegroup_output_strm
+	sqlite3rebaser_configure
+	sqlite3rebaser_create
+	sqlite3rebaser_delete
+	sqlite3rebaser_rebase
 	sqlite3rebaser_rebase_strm
+	sqlite3session_attach
+	sqlite3session_changeset
+	sqlite3session_changeset_strm
 	sqlite3session_config
+	sqlite3session_create
+	sqlite3session_delete
+	sqlite3session_diff
+	sqlite3session_enable
+	sqlite3session_indirect
+	sqlite3session_isempty
+	sqlite3session_memory_used
+	sqlite3session_patchset
+	sqlite3session_patchset_strm
+	sqlite3session_table_filter
 
 ; MuJS exports
 
-	js_newstate
-	js_setcontext
-	js_getcontext
-	js_setreport
 	js_atpanic
+	js_call
+	js_compare
+	js_concat
+	js_construct
+	js_copy
+	js_currentfunction
+	js_defaccessor
+	js_defglobal
+	js_defproperty
+	js_delglobal
+	js_delindex
+	js_delproperty
+	js_delregistry
+	js_dofile
+	js_dostring
+	js_dup
+	js_dup2
+	js_endtry
+	js_equal
+	js_error
+	js_eval
+	js_evalerror
 	js_freestate
 	js_gc
-	js_dostring
-	js_dofile
-	js_ploadstring
-	js_ploadfile
-	js_pcall
-	js_pconstruct
-	js_savetry
-	js_endtry
-	js_report
+	js_getcontext
+	js_getglobal
+	js_getindex
+	js_getlength
+	js_getproperty
+	js_getregistry
+	js_gettop
+	js_hasindex
+	js_hasproperty
+	js_insert
+	js_instanceof
+	js_isarray
+	js_isboolean
+	js_iscallable
+	js_iscoercible
+	js_isdefined
+	js_iserror
+	js_isnull
+	js_isnumber
+	js_isnumberobject
+	js_isobject
+	js_isprimitive
+	js_isregexp
+	js_isstring
+	js_isstringobject
+	js_isundefined
+	js_isuserdata
+	js_loadfile
+	js_loadstring
+	js_newarray
+	js_newboolean
+	js_newcconstructor
+	js_newcfunction
 	js_newerror
 	js_newevalerror
+	js_newnumber
+	js_newobject
+	js_newobjectx
 	js_newrangeerror
 	js_newreferenceerror
+	js_newregexp
+	js_newstate
+	js_newstring
 	js_newsyntaxerror
 	js_newtypeerror
 	js_newurierror
-	js_error
-	js_evalerror
-	js_rangeerror
-	js_referenceerror
-	js_syntaxerror
-	js_typeerror
-	js_urierror
-	js_throw
-	js_loadstring
-	js_loadfile
-	js_eval
-	js_call
-	js_construct
-	js_ref
-	js_unref
-	js_getregistry
-	js_setregistry
-	js_delregistry
-	js_getglobal
-	js_setglobal
-	js_defglobal
-	js_delglobal
-	js_hasproperty
-	js_getproperty
-	js_setproperty
-	js_defproperty
-	js_delproperty
-	js_defaccessor
-	js_getlength
-	js_setlength
-	js_hasindex
-	js_getindex
-	js_setindex
-	js_delindex
-	js_currentfunction
-	js_pushglobal
-	js_pushundefined
-	js_pushnull
-	js_pushboolean
-	js_pushnumber
-	js_pushstring
-	js_pushlstring
-	js_pushliteral
-	js_newobjectx
-	js_newobject
-	js_newarray
-	js_newboolean
-	js_newnumber
-	js_newstring
-	js_newcfunction
-	js_newcconstructor
 	js_newuserdata
 	js_newuserdatax
-	js_newregexp
-	js_pushiterator
 	js_nextiterator
-	js_isdefined
-	js_isundefined
-	js_isnull
-	js_isboolean
-	js_isnumber
-	js_isstring
-	js_isprimitive
-	js_isobject
-	js_isarray
-	js_isregexp
-	js_iscoercible
-	js_iscallable
-	js_isuserdata
-	js_iserror
-	js_isnumberobject
-	js_isstringobject
-	js_toboolean
-	js_tonumber
-	js_tostring
-	js_touserdata
-	js_trystring
-	js_trynumber
-	js_tryinteger
-	js_tryboolean
-	js_tointeger
-	js_toint32
-	js_touint32
-	js_toint16
-	js_touint16
-	js_gettop
+	js_pcall
+	js_pconstruct
+	js_ploadfile
+	js_ploadstring
 	js_pop
-	js_rot
-	js_copy
+	js_pushboolean
+	js_pushglobal
+	js_pushiterator
+	js_pushliteral
+	js_pushlstring
+	js_pushnull
+	js_pushnumber
+	js_pushstring
+	js_pushundefined
+	js_rangeerror
+	js_ref
+	js_referenceerror
 	js_remove
-	js_insert
 	js_replace
-	js_dup
-	js_dup2
-	js_rot2
-	js_rot3
-	js_rot4
-	js_rot2pop1
-	js_rot3pop2
-	js_concat
-	js_compare
-	js_equal
-	js_strictequal
-	js_instanceof
-	js_typeof
-	js_type
+	js_report
 	js_repr
+	js_rot
+	js_rot2
+	js_rot2pop1
+	js_rot3
+	js_rot3pop2
+	js_rot4
+	js_savetry
+	js_setcontext
+	js_setglobal
+	js_setindex
+	js_setlength
+	js_setproperty
+	js_setregistry
+	js_setreport
+	js_strictequal
+	js_syntaxerror
+	js_throw
+	js_toboolean
+	js_toint16
+	js_toint32
+	js_tointeger
+	js_tonumber
 	js_torepr
+	js_tostring
+	js_touint16
+	js_touint32
+	js_touserdata
+	js_tryboolean
+	js_tryinteger
+	js_trynumber
 	js_tryrepr
+	js_trystring
+	js_type
+	js_typeerror
+	js_typeof
+	js_unref
+	js_urierror
 
 ; freeGLut exports
 
-	glutMainLoopEvent
-	glutLeaveMainLoop
+	glutAppStatusFunc
+	glutBitmapHeight
+	glutBitmapString
+	glutCloseFunc
 	glutExit
 	glutFullScreenToggle
-	glutLeaveFullScreen
-	glutSetMenuFont
-	glutKeyboardExtFunc
-	glutMouseWheelFunc
-	glutPositionFunc
-	glutCloseFunc
-	glutWMCloseFunc
-	glutMenuDestroyFunc
-	glutSetOption
-	glutGetModeValues
-	glutGetWindowData
-	glutSetWindowData
-	glutGetMenuData
-	glutSetMenuData
-	glutSetClipboard
 	glutGetClipboard
-	glutBitmapHeight
-	glutStrokeHeight
-	glutBitmapString
-	glutStrokeString
-	glutWireRhombicDodecahedron
-	glutSolidRhombicDodecahedron
-	glutWireSierpinskiSponge
-	glutSolidSierpinskiSponge
-	glutWireCylinder
-	glutSolidCylinder
-	glutWireTeacup
-	glutSolidTeacup
-	glutWireTeaspoon
-	glutSolidTeaspoon
+	glutGetMenuData
+	glutGetModeValues
 	glutGetProcAddress
-	glutMultiEntryFunc
-	glutMultiButtonFunc
-	glutMultiMotionFunc
-	glutMultiPassiveFunc
-	glutJoystickGetNumAxes
-	glutJoystickGetNumButtons
-	glutJoystickNotWorking
-	glutJoystickGetDeadBand
-	glutJoystickSetDeadBand
-	glutJoystickGetSaturation
-	glutJoystickSetSaturation
-	glutJoystickSetMinRange
-	glutJoystickSetMaxRange
-	glutJoystickSetCenter
-	glutJoystickGetMinRange
-	glutJoystickGetMaxRange
-	glutJoystickGetCenter
-	glutInitContextVersion
+	glutGetWindowData
 	glutInitContextFlags
+	glutInitContextFunc
 	glutInitContextProfile
+	glutInitContextVersion
 	glutInitErrorFunc
 	glutInitWarningFunc
+	glutJoystickGetCenter
+	glutJoystickGetDeadBand
+	glutJoystickGetMaxRange
+	glutJoystickGetMinRange
+	glutJoystickGetNumAxes
+	glutJoystickGetNumButtons
+	glutJoystickGetSaturation
+	glutJoystickNotWorking
+	glutJoystickSetCenter
+	glutJoystickSetDeadBand
+	glutJoystickSetMaxRange
+	glutJoystickSetMinRange
+	glutJoystickSetSaturation
+	glutKeyboardExtFunc
+	glutLeaveFullScreen
+	glutLeaveMainLoop
+	glutMainLoopEvent
+	glutMenuDestroyFunc
+	glutMouseWheelFunc
+	glutMultiButtonFunc
+	glutMultiEntryFunc
+	glutMultiMotionFunc
+	glutMultiPassiveFunc
+	glutPositionFunc
+	glutSetClipboard
+	glutSetMenuData
+	glutSetMenuFont
+	glutSetOption
 	glutSetVertexAttribCoord3
 	glutSetVertexAttribNormal
 	glutSetVertexAttribTexCoord2
-	glutInitContextFunc
-	glutAppStatusFunc
-	glutInit
-	glutInitWindowPosition
-	glutInitWindowSize
-	glutInitDisplayMode
-	glutInitDisplayString
-	glutMainLoop
-	glutCreateWindow
-	glutCreateSubWindow
-	glutDestroyWindow
-	glutSetWindow
-	glutGetWindow
-	glutSetWindowTitle
-	glutSetIconTitle
-	glutReshapeWindow
-	glutPositionWindow
-	glutShowWindow
-	glutHideWindow
-	glutIconifyWindow
-	glutPushWindow
-	glutPopWindow
-	glutFullScreen
-	glutPostWindowRedisplay
-	glutPostRedisplay
-	glutSwapBuffers
-	glutWarpPointer
-	glutSetCursor
-	glutEstablishOverlay
-	glutRemoveOverlay
-	glutUseLayer
-	glutPostOverlayRedisplay
-	glutPostWindowOverlayRedisplay
-	glutShowOverlay
-	glutHideOverlay
-	glutCreateMenu
-	glutDestroyMenu
-	glutGetMenu
-	glutSetMenu
+	glutSetWindowData
+	glutSolidCylinder
+	glutSolidRhombicDodecahedron
+	glutSolidSierpinskiSponge
+	glutSolidTeacup
+	glutSolidTeaspoon
+	glutStrokeHeight
+	glutStrokeString
+	glutWMCloseFunc
+	glutWireCylinder
+	glutWireRhombicDodecahedron
+	glutWireSierpinskiSponge
+	glutWireTeacup
+	glutWireTeaspoon
+	__glutCreateMenuWithExit
+	__glutCreateWindowWithExit
+	__glutInitWithExit
 	glutAddMenuEntry
 	glutAddSubMenu
+	glutAttachMenu
+	glutBitmapCharacter
+	glutBitmapLength
+	glutBitmapWidth
+	glutButtonBoxFunc
 	glutChangeToMenuEntry
 	glutChangeToSubMenu
-	glutRemoveMenuItem
-	glutAttachMenu
+	glutCopyColormap
+	glutCreateMenu
+	glutCreateSubWindow
+	glutCreateWindow
+	glutDestroyMenu
+	glutDestroyWindow
 	glutDetachMenu
-	glutTimerFunc
-	glutIdleFunc
-	glutKeyboardFunc
-	glutSpecialFunc
-	glutReshapeFunc
-	glutVisibilityFunc
+	glutDeviceGet
+	glutDialsFunc
 	glutDisplayFunc
-	glutMouseFunc
-	glutMotionFunc
-	glutPassiveMotionFunc
+	glutEnterGameMode
 	glutEntryFunc
-	glutKeyboardDownFunc
-	glutKeyboardUpFunc
-	glutSpecialUpFunc
+	glutEstablishOverlay
+	glutExtensionSupported
+	glutForceJoystickFunc
+	glutFullScreen
+	glutGameModeGet
+	glutGameModeString
+	glutGet
+	glutGetColor
+	glutGetMenu
+	glutGetModifiers
+	glutGetWindow
+	glutHideOverlay
+	glutHideWindow
+	glutIconifyWindow
+	glutIdleFunc
+	glutIgnoreKeyRepeat
+	glutInit
+	glutInitDisplayMode
+	glutInitDisplayString
+	glutInitWindowPosition
+	glutInitWindowSize
 	glutJoystickFunc
+	glutKeyboardDownFunc
+	glutKeyboardFunc
+	glutKeyboardUpFunc
+	glutLayerGet
+	glutLeaveGameMode
+	glutMainLoop
 	glutMenuStateFunc
 	glutMenuStatusFunc
+	glutMotionFunc
+	glutMouseFunc
 	glutOverlayDisplayFunc
-	glutWindowStatusFunc
+	glutPassiveMotionFunc
+	glutPopWindow
+	glutPositionWindow
+	glutPostOverlayRedisplay
+	glutPostRedisplay
+	glutPostWindowOverlayRedisplay
+	glutPostWindowRedisplay
+	glutPushWindow
+	glutRemoveMenuItem
+	glutRemoveOverlay
+	glutReportErrors
+	glutReshapeFunc
+	glutReshapeWindow
+	glutSetColor
+	glutSetCursor
+	glutSetIconTitle
+	glutSetKeyRepeat
+	glutSetMenu
+	glutSetWindow
+	glutSetWindowTitle
+	glutSetupVideoResizing
+	glutShowOverlay
+	glutShowWindow
+	glutSolidCone
+	glutSolidCube
+	glutSolidDodecahedron
+	glutSolidIcosahedron
+	glutSolidOctahedron
+	glutSolidSphere
+	glutSolidTeapot
+	glutSolidTetrahedron
+	glutSolidTorus
+	glutSpaceballButtonFunc
 	glutSpaceballMotionFunc
 	glutSpaceballRotateFunc
-	glutSpaceballButtonFunc
-	glutButtonBoxFunc
-	glutDialsFunc
-	glutTabletMotionFunc
-	glutTabletButtonFunc
-	glutGet
-	glutDeviceGet
-	glutGetModifiers
-	glutLayerGet
-	glutBitmapCharacter
-	glutBitmapWidth
+	glutSpecialFunc
+	glutSpecialUpFunc
+	glutStopVideoResizing
 	glutStrokeCharacter
-	glutStrokeWidth
-	glutStrokeWidthf
-	glutBitmapLength
 	glutStrokeLength
 	glutStrokeLengthf
-	glutWireCube
-	glutSolidCube
-	glutWireSphere
-	glutSolidSphere
-	glutWireCone
-	glutSolidCone
-	glutWireTorus
-	glutSolidTorus
-	glutWireDodecahedron
-	glutSolidDodecahedron
-	glutWireOctahedron
-	glutSolidOctahedron
-	glutWireTetrahedron
-	glutSolidTetrahedron
-	glutWireIcosahedron
-	glutSolidIcosahedron
-	glutWireTeapot
-	glutSolidTeapot
-	glutGameModeString
-	glutEnterGameMode
-	glutLeaveGameMode
-	glutGameModeGet
-	glutVideoResizeGet
-	glutSetupVideoResizing
-	glutStopVideoResizing
-	glutVideoResize
+	glutStrokeWidth
+	glutStrokeWidthf
+	glutSwapBuffers
+	glutTabletButtonFunc
+	glutTabletMotionFunc
+	glutTimerFunc
+	glutUseLayer
 	glutVideoPan
-	glutSetColor
-	glutGetColor
-	glutCopyColormap
-	glutIgnoreKeyRepeat
-	glutSetKeyRepeat
-	glutForceJoystickFunc
-	glutExtensionSupported
-	glutReportErrors
-	__glutInitWithExit
-	__glutCreateWindowWithExit
-	__glutCreateMenuWithExit
-	glutCreateMenuUcall
-	glutTimerFuncUcall
-	glutIdleFuncUcall
-	glutKeyboardFuncUcall
-	glutSpecialFuncUcall
-	glutReshapeFuncUcall
-	glutVisibilityFuncUcall
-	glutDisplayFuncUcall
-	glutMouseFuncUcall
-	glutMotionFuncUcall
-	glutPassiveMotionFuncUcall
-	glutEntryFuncUcall
-	glutKeyboardUpFuncUcall
-	glutSpecialUpFuncUcall
-	glutJoystickFuncUcall
-	glutMenuStatusFuncUcall
-	glutOverlayDisplayFuncUcall
-	glutWindowStatusFuncUcall
-	glutSpaceballMotionFuncUcall
-	glutSpaceballRotateFuncUcall
-	glutSpaceballButtonFuncUcall
+	glutVideoResize
+	glutVideoResizeGet
+	glutVisibilityFunc
+	glutWarpPointer
+	glutWindowStatusFunc
+	glutWireCone
+	glutWireCube
+	glutWireDodecahedron
+	glutWireIcosahedron
+	glutWireOctahedron
+	glutWireSphere
+	glutWireTeapot
+	glutWireTetrahedron
+	glutWireTorus
+	__glutCreateMenuUcallWithExit
+	glutAppStatusFuncUcall
 	glutButtonBoxFuncUcall
-	glutDialsFuncUcall
-	glutTabletMotionFuncUcall
-	glutTabletButtonFuncUcall
-	glutMouseWheelFuncUcall
-	glutPositionFuncUcall
 	glutCloseFuncUcall
-	glutWMCloseFuncUcall
-	glutMenuDestroyFuncUcall
-	glutMultiEntryFuncUcall
-	glutMultiButtonFuncUcall
-	glutMultiMotionFuncUcall
-	glutMultiPassiveFuncUcall
+	glutCreateMenuUcall
+	glutDialsFuncUcall
+	glutDisplayFuncUcall
+	glutEntryFuncUcall
+	glutIdleFuncUcall
+	glutInitContextFuncUcall
 	glutInitErrorFuncUcall
 	glutInitWarningFuncUcall
-	glutInitContextFuncUcall
-	glutAppStatusFuncUcall
-	__glutCreateMenuUcallWithExit
+	glutJoystickFuncUcall
+	glutKeyboardFuncUcall
+	glutKeyboardUpFuncUcall
+	glutMenuDestroyFuncUcall
+	glutMenuStatusFuncUcall
+	glutMotionFuncUcall
+	glutMouseFuncUcall
+	glutMouseWheelFuncUcall
+	glutMultiButtonFuncUcall
+	glutMultiEntryFuncUcall
+	glutMultiMotionFuncUcall
+	glutMultiPassiveFuncUcall
+	glutOverlayDisplayFuncUcall
+	glutPassiveMotionFuncUcall
+	glutPositionFuncUcall
+	glutReshapeFuncUcall
+	glutSpaceballButtonFuncUcall
+	glutSpaceballMotionFuncUcall
+	glutSpaceballRotateFuncUcall
+	glutSpecialFuncUcall
+	glutSpecialUpFuncUcall
+	glutTabletButtonFuncUcall
+	glutTabletMotionFuncUcall
+	glutTimerFuncUcall
+	glutVisibilityFuncUcall
+	glutWMCloseFuncUcall
+	glutWindowStatusFuncUcall
 
 ; libXML2 exports
 
@@ -2812,270 +2812,270 @@ EXPORTS
 
 	xmlInitializeDict
 
-	xmlInitGlobals
-	xmlCleanupGlobals
-	xmlParserInputBufferCreateFilenameDefault
-	xmlOutputBufferCreateFilenameDefault
-	xmlThrDefSetGenericErrorFunc
-	xmlThrDefSetStructuredErrorFunc
-	xmlRegisterNodeDefault
-	xmlThrDefRegisterNodeDefault
-	xmlDeregisterNodeDefault
-	xmlThrDefDeregisterNodeDefault
-	__xmlMalloc
-	__xmlMallocAtomic
-	__xmlRealloc
-	__xmlFree
-	__xmlMemStrdup
 	__docbDefaultSAXHandler
 	__htmlDefaultSAXHandler
-	__xmlLastError
 	__oldXMLWDcompatibility
 	__xmlBufferAllocScheme
 	__xmlDefaultBufferSize
-	xmlThrDefDefaultBufferSize
 	__xmlDefaultSAXHandler
 	__xmlDefaultSAXLocator
-	__xmlDoValidityCheckingDefaultValue
-	xmlThrDefDoValidityCheckingDefaultValue
-	__xmlGenericError
-	__xmlStructuredError
-	__xmlGetWarningsDefaultValue
-	xmlThrDefGetWarningsDefaultValue
-	__xmlIndentTreeOutput
-	xmlThrDefIndentTreeOutput
-	xmlThrDefTreeIndentString
-	__xmlKeepBlanksDefaultValue
-	xmlThrDefKeepBlanksDefaultValue
-	__xmlLineNumbersDefaultValue
-	xmlThrDefLineNumbersDefaultValue
-	__xmlLoadExtDtdDefaultValue
-	xmlThrDefLoadExtDtdDefaultValue
-	__xmlParserDebugEntities
-	xmlThrDefParserDebugEntities
-	__xmlPedanticParserDefaultValue
-	xmlThrDefPedanticParserDefaultValue
-	__xmlSaveNoEmptyTags
-	xmlThrDefSaveNoEmptyTags
-	__xmlSubstituteEntitiesDefaultValue
-	xmlThrDefSubstituteEntitiesDefaultValue
-	__xmlRegisterNodeDefaultValue
 	__xmlDeregisterNodeDefaultValue
+	__xmlDoValidityCheckingDefaultValue
+	__xmlFree
+	__xmlGenericError
+	__xmlGetWarningsDefaultValue
+	__xmlIndentTreeOutput
+	__xmlKeepBlanksDefaultValue
+	__xmlLastError
+	__xmlLineNumbersDefaultValue
+	__xmlLoadExtDtdDefaultValue
+	__xmlMalloc
+	__xmlMallocAtomic
+	__xmlMemStrdup
 	__xmlOutputBufferCreateFilenameValue
+	__xmlParserDebugEntities
+	__xmlPedanticParserDefaultValue
+	__xmlRealloc
+	__xmlRegisterNodeDefaultValue
+	__xmlSaveNoEmptyTags
+	__xmlStructuredError
+	__xmlSubstituteEntitiesDefaultValue
+	xmlCleanupGlobals
+	xmlDeregisterNodeDefault
+	xmlInitGlobals
+	xmlOutputBufferCreateFilenameDefault
+	xmlParserInputBufferCreateFilenameDefault
+	xmlRegisterNodeDefault
+	xmlThrDefDefaultBufferSize
+	xmlThrDefDeregisterNodeDefault
+	xmlThrDefDoValidityCheckingDefaultValue
+	xmlThrDefGetWarningsDefaultValue
+	xmlThrDefIndentTreeOutput
+	xmlThrDefKeepBlanksDefaultValue
+	xmlThrDefLineNumbersDefaultValue
+	xmlThrDefLoadExtDtdDefaultValue
+	xmlThrDefParserDebugEntities
+	xmlThrDefPedanticParserDefaultValue
+	xmlThrDefRegisterNodeDefault
+	xmlThrDefSaveNoEmptyTags
+	xmlThrDefSetGenericErrorFunc
+	xmlThrDefSetStructuredErrorFunc
+	xmlThrDefSubstituteEntitiesDefaultValue
+	xmlThrDefTreeIndentString
 
+	xmlIsLetter
+	xmlStringComment
 	xmlStringText
 	xmlStringTextNoenc
-	xmlStringComment
-	xmlIsLetter
 
 	xmlSchemaFreeType
 	xmlSchemaFreeWildcard
 
+	xmlAttrSerializeTxtContent
 	xmlBufEnd
 	xmlBufUse
-	xmlAttrSerializeTxtContent
 
 	xmlCheckVersion
 
-	xmlXPathEqualValues
-	xmlXPathNotEqualValues
-	xmlXPathCompareValues
-	xmlXPathValueFlipSign
 	xmlXPathAddValues
-	xmlXPathSubValues
-	xmlXPathMultValues
+	xmlXPathBooleanFunction
+	xmlXPathCeilingFunction
+	xmlXPathCompareValues
+	xmlXPathConcatFunction
+	xmlXPathContainsFunction
+	xmlXPathCountFunction
 	xmlXPathDivValues
-	xmlXPathModValues
+	xmlXPathEqualValues
+	xmlXPathFalseFunction
+	xmlXPathFloorFunction
+	xmlXPathIdFunction
 	xmlXPathIsNodeType
-	xmlXPathNextSelf
+	xmlXPathLangFunction
+	xmlXPathLastFunction
+	xmlXPathLocalNameFunction
+	xmlXPathModValues
+	xmlXPathMultValues
+	xmlXPathNamespaceURIFunction
+	xmlXPathNextAncestor
+	xmlXPathNextAncestorOrSelf
+	xmlXPathNextAttribute
 	xmlXPathNextChild
 	xmlXPathNextDescendant
 	xmlXPathNextDescendantOrSelf
-	xmlXPathNextParent
-	xmlXPathNextAncestorOrSelf
-	xmlXPathNextFollowingSibling
 	xmlXPathNextFollowing
+	xmlXPathNextFollowingSibling
 	xmlXPathNextNamespace
-	xmlXPathNextAttribute
+	xmlXPathNextParent
 	xmlXPathNextPreceding
-	xmlXPathNextAncestor
 	xmlXPathNextPrecedingSibling
-	xmlXPathLastFunction
+	xmlXPathNextSelf
+	xmlXPathNodeSetFreeNs
+	xmlXPathNormalizeFunction
+	xmlXPathNotEqualValues
+	xmlXPathNotFunction
+	xmlXPathNumberFunction
 	xmlXPathPositionFunction
-	xmlXPathCountFunction
-	xmlXPathIdFunction
-	xmlXPathLocalNameFunction
-	xmlXPathNamespaceURIFunction
+	xmlXPathRoundFunction
+	xmlXPathStartsWithFunction
 	xmlXPathStringFunction
 	xmlXPathStringLengthFunction
-	xmlXPathConcatFunction
-	xmlXPathContainsFunction
-	xmlXPathStartsWithFunction
-	xmlXPathSubstringFunction
-	xmlXPathSubstringBeforeFunction
+	xmlXPathSubValues
 	xmlXPathSubstringAfterFunction
-	xmlXPathNormalizeFunction
-	xmlXPathTranslateFunction
-	xmlXPathNotFunction
-	xmlXPathTrueFunction
-	xmlXPathFalseFunction
-	xmlXPathLangFunction
-	xmlXPathNumberFunction
+	xmlXPathSubstringBeforeFunction
+	xmlXPathSubstringFunction
 	xmlXPathSumFunction
-	xmlXPathFloorFunction
-	xmlXPathCeilingFunction
-	xmlXPathRoundFunction
-	xmlXPathBooleanFunction
-	xmlXPathNodeSetFreeNs
+	xmlXPathTranslateFunction
+	xmlXPathTrueFunction
+	xmlXPathValueFlipSign
 
 ; pthread-Win32 exports
 
 	ptw32_strdup
 	ptw32_throw
 
-	pthread_attr_init
+	pthreadCancelableTimedWait
+	pthreadCancelableWait
 	pthread_attr_destroy
 	pthread_attr_getaffinity_np
 	pthread_attr_getdetachstate
+	pthread_attr_getinheritsched
+	pthread_attr_getname_np
+	pthread_attr_getschedparam
+	pthread_attr_getschedpolicy
+	pthread_attr_getscope
 	pthread_attr_getstackaddr
 	pthread_attr_getstacksize
+	pthread_attr_init
 	pthread_attr_setaffinity_np
 	pthread_attr_setdetachstate
-	pthread_attr_setstackaddr
-	pthread_attr_setstacksize
-	pthread_attr_getschedparam
+	pthread_attr_setinheritsched
+	pthread_attr_setname_np
 	pthread_attr_setschedparam
 	pthread_attr_setschedpolicy
-	pthread_attr_getschedpolicy
-	pthread_attr_setinheritsched
-	pthread_attr_getinheritsched
 	pthread_attr_setscope
-	pthread_attr_getscope
+	pthread_attr_setstackaddr
+	pthread_attr_setstacksize
+	pthread_barrier_destroy
+	pthread_barrier_init
+	pthread_barrier_wait
+	pthread_barrierattr_destroy
+	pthread_barrierattr_getpshared
+	pthread_barrierattr_init
+	pthread_barrierattr_setpshared
+	pthread_cancel
+	pthread_cond_broadcast
+	pthread_cond_destroy
+	pthread_cond_init
+	pthread_cond_signal
+	pthread_cond_timedwait
+	pthread_cond_wait
+	pthread_condattr_destroy
+	pthread_condattr_getpshared
+	pthread_condattr_init
+	pthread_condattr_setpshared
 	pthread_create
+	pthread_delay_np
 	pthread_detach
 	pthread_equal
 	pthread_exit
+	pthread_getaffinity_np
+	pthread_getconcurrency
+	pthread_getname_np
+	pthread_getschedparam
+	pthread_getspecific
+	pthread_getunique_np
+	pthread_getw32threadhandle_np
+	pthread_getw32threadid_np
 	pthread_join
-	pthread_self
-	pthread_cancel
-	pthread_setcancelstate
-	pthread_setcanceltype
-	pthread_testcancel
-	pthread_once
-	ptw32_pop_cleanup
-	ptw32_push_cleanup
 	pthread_key_create
 	pthread_key_delete
-	pthread_setspecific
-	pthread_getspecific
-	pthread_mutexattr_init
-	pthread_mutexattr_destroy
-	pthread_mutexattr_getpshared
-	pthread_mutexattr_setpshared
-	pthread_mutexattr_settype
-	pthread_mutexattr_gettype
-	pthread_mutexattr_setrobust
-	pthread_mutexattr_getrobust
-	pthread_barrierattr_init
-	pthread_barrierattr_destroy
-	pthread_barrierattr_getpshared
-	pthread_barrierattr_setpshared
-	pthread_mutex_init
+	pthread_kill
+	pthread_mutex_consistent
 	pthread_mutex_destroy
+	pthread_mutex_init
 	pthread_mutex_lock
 	pthread_mutex_timedlock
 	pthread_mutex_trylock
 	pthread_mutex_unlock
-	pthread_mutex_consistent
-	pthread_spin_init
+	pthread_mutexattr_destroy
+	pthread_mutexattr_getkind_np
+	pthread_mutexattr_getpshared
+	pthread_mutexattr_getrobust
+	pthread_mutexattr_gettype
+	pthread_mutexattr_init
+	pthread_mutexattr_setkind_np
+	pthread_mutexattr_setpshared
+	pthread_mutexattr_setrobust
+	pthread_mutexattr_settype
+	pthread_num_processors_np
+	pthread_once
+	pthread_rwlock_destroy
+	pthread_rwlock_init
+	pthread_rwlock_rdlock
+	pthread_rwlock_timedrdlock
+	pthread_rwlock_timedwrlock
+	pthread_rwlock_tryrdlock
+	pthread_rwlock_trywrlock
+	pthread_rwlock_unlock
+	pthread_rwlock_wrlock
+	pthread_rwlockattr_destroy
+	pthread_rwlockattr_getpshared
+	pthread_rwlockattr_init
+	pthread_rwlockattr_setpshared
+	pthread_self
+	pthread_setaffinity_np
+	pthread_setcancelstate
+	pthread_setcanceltype
+	pthread_setconcurrency
+	pthread_setname_np
+	pthread_setschedparam
+	pthread_setspecific
 	pthread_spin_destroy
+	pthread_spin_init
 	pthread_spin_lock
 	pthread_spin_trylock
 	pthread_spin_unlock
-	pthread_barrier_init
-	pthread_barrier_destroy
-	pthread_barrier_wait
-	pthread_condattr_init
-	pthread_condattr_destroy
-	pthread_condattr_getpshared
-	pthread_condattr_setpshared
-	pthread_cond_init
-	pthread_cond_destroy
-	pthread_cond_wait
-	pthread_cond_timedwait
-	pthread_cond_signal
-	pthread_cond_broadcast
-	pthread_setschedparam
-	pthread_getschedparam
-	pthread_setconcurrency
-	pthread_getconcurrency
-	pthread_rwlock_init
-	pthread_rwlock_destroy
-	pthread_rwlock_tryrdlock
-	pthread_rwlock_trywrlock
-	pthread_rwlock_rdlock
-	pthread_rwlock_timedrdlock
-	pthread_rwlock_wrlock
-	pthread_rwlock_timedwrlock
-	pthread_rwlock_unlock
-	pthread_rwlockattr_init
-	pthread_rwlockattr_destroy
-	pthread_rwlockattr_getpshared
-	pthread_rwlockattr_setpshared
-	pthread_kill
-	pthread_mutexattr_setkind_np
-	pthread_mutexattr_getkind_np
+	pthread_testcancel
+	pthread_timechange_handler_np
 	pthread_timedjoin_np
 	pthread_tryjoin_np
-	pthread_setaffinity_np
-	pthread_getaffinity_np
-	pthread_delay_np
-	pthread_num_processors_np
-	pthread_getunique_np
+	pthread_win32_getabstime_np
 	pthread_win32_process_attach_np
 	pthread_win32_process_detach_np
+	pthread_win32_set_terminate_np
+	pthread_win32_test_features_np
 	pthread_win32_thread_attach_np
 	pthread_win32_thread_detach_np
-	pthread_win32_getabstime_np
-	pthread_win32_test_features_np
-	pthread_timechange_handler_np
-	pthread_getw32threadhandle_np
-	pthread_getw32threadid_np
-	pthread_setname_np
-	pthread_attr_setname_np
-	pthread_getname_np
-	pthread_attr_getname_np
-	pthreadCancelableWait
-	pthreadCancelableTimedWait
-	pthread_win32_set_terminate_np
 	ptw32_get_exception_services_code
-	sched_yield
-	sched_get_priority_min
+	ptw32_pop_cleanup
+	ptw32_push_cleanup
+	_sched_affinitycpuand
+	_sched_affinitycpuclr
+	_sched_affinitycpucount
+	_sched_affinitycpuequal
+	_sched_affinitycpuisset
+	_sched_affinitycpuor
+	_sched_affinitycpuset
+	_sched_affinitycpuxor
+	_sched_affinitycpuzero
 	sched_get_priority_max
-	sched_setscheduler
+	sched_get_priority_min
+	sched_getaffinity
 	sched_getscheduler
 	sched_setaffinity
-	sched_getaffinity
-	_sched_affinitycpucount
-	_sched_affinitycpuzero
-	_sched_affinitycpuset
-	_sched_affinitycpuclr
-	_sched_affinitycpuisset
-	_sched_affinitycpuand
-	_sched_affinitycpuor
-	_sched_affinitycpuxor
-	_sched_affinitycpuequal
-	sem_init
+	sched_setscheduler
+	sched_yield
+	sem_close
 	sem_destroy
-	sem_trywait
-	sem_wait
-	sem_timedwait
+	sem_getvalue
+	sem_init
+	sem_open
 	sem_post
 	sem_post_multiple
-	sem_open
-	sem_close
+	sem_timedwait
+	sem_trywait
 	sem_unlink
-	sem_getvalue
+	sem_wait
 
 ; monolithic tool exports
 
