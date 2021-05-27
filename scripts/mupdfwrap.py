@@ -541,6 +541,13 @@ Usage:
                     * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
 
+        --windows-py <venv> ...
+            Runs mupdfwrap.py via cmd.exe in a venv containing libclang,
+            passing remaining args.
+
+            E.g.:
+                --windows-py pylocal --swig-windows-auto -b 0
+
     Examples:
 
         ./scripts/mupdfwrap.py -b all -t
@@ -594,14 +601,16 @@ logx = jlib.logx
 assert sys.version_info[0] == 3 and sys.version_info[1] >= 6, (
         'We require python-3.6+')
 
+jlib.log('trying to import clang...')
 try:
     try:
         import clang.cindex
 
     except ModuleNotFoundError as e:
 
-        #print(f'"import clang.cindex" failed: {e}')
-        #print(f'sys.executable={sys.executable}')
+        jlib.log(f'"import clang.cindex" failed: {e}')
+        print(f'"import clang.cindex" failed: {e}')
+        print(f'sys.executable={sys.executable}')
 
         # On devuan, clang-python isn't on python3's path, but python2's
         # clang-python works fine with python3, so we deviously get the path by
@@ -609,7 +618,7 @@ try:
         #
         clang_path = jlib.system( 'python2 -c "import clang; print clang.__path__[0]"', out='return')
 
-        #log( 'Retrying import of clang using info from python2 {clang_path=}')
+        log( 'Retrying import of clang using info from python2 {clang_path=}')
 
         sys.path.append( os.path.dirname( clang_path))
         import clang.cindex
@@ -643,6 +652,8 @@ class ClangInfo:
         clang.cindex.Config.set_library_file(). This appears to be necessary
         even when clang is installed as a standard package.
         '''
+        if g_windows:
+            return
         for version in 10, 9, 8, 7, 6,:
             ok = self._try_init_clang( version)
             if ok:
@@ -5128,13 +5139,13 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         with open( temp_h, 'w') as f:
             f.write( '#include "mupdf/fitz.h"\n')
             f.write( '#include "mupdf/pdf.h"\n')
-        tu = index.parse(
-                    temp_h,
-                    args=(
-                            '-I', f'{dir_mupdf}/include',
-                            '-I', clang_info().include_path,
-                            ),
-                    )
+        args = []
+        args.append(['-I', f'{dir_mupdf}/include'])
+        if g_windows:
+            args = ('-I', f'{dir_mupdf}/include')
+        else:
+            args = ('-I', f'{dir_mupdf}/include', '-I', clang_info().include_path)
+        tu = index.parse( temp_h, args=args)
     finally:
         if os.path.isfile( temp_h):
             os.remove( temp_h)
@@ -6232,6 +6243,11 @@ def cpu_name():
     #log(f'sys.maxsize={hex(sys.maxsize)}')
     return f'x{32 if sys.maxsize == 2**31 else 64}'
 
+def abspath(path):
+    ret = os.path.abspath(path)
+    ret = ret.replace('\\', '/')
+    return ret
+
 class BuildDirs:
     '''
     Locations of various generated files.
@@ -6239,17 +6255,17 @@ class BuildDirs:
     def __init__( self):
 
         # Assume we are in mupdf/scripts/.
-        file_ = os.path.abspath( __file__)
-        assert file_.endswith( f'{os.sep}scripts{os.sep}mupdfwrap.py'), \
+        file_ = abspath( __file__)
+        assert file_.endswith( f'/scripts/mupdfwrap.py'), \
                 'Unexpected __file__=%s file_=%s' % (__file__, file_)
-        dir_mupdf = os.path.abspath( f'{file_}/../../')
+        dir_mupdf = abspath( f'{file_}/../../')
         assert not dir_mupdf.endswith( '/')
 
         # Directories used with --build.
         self.dir_mupdf = dir_mupdf
 
         # Directory used with --ref.
-        self.ref_dir = os.path.abspath( f'{self.dir_mupdf}/mupdfwrap_ref')
+        self.ref_dir = abspath( f'{self.dir_mupdf}/mupdfwrap_ref')
         assert not self.ref_dir.endswith( '/')
 
         if g_windows:
@@ -6263,7 +6279,7 @@ class BuildDirs:
         '''
         Sets self.dir_so and also updates self.cpp_flags etc.
         '''
-        dir_so = os.path.abspath( dir_so)
+        dir_so = abspath( dir_so)
         self.dir_so = dir_so
 
         if 0: pass  # lgtm [py/unreachable-statement]
@@ -6550,11 +6566,14 @@ def main():
                             check_lists_equal('C++ source', cpp_files, cpp_files_actual)
                             check_lists_equal('C++ headers', h_files, h_files_actual)
 
+                            log('{h_files=}')
+                            log('{cpp_files=}')
                             for dir_ in (
                                     f'{build_dirs.dir_mupdf}/platform/c++/implementation/',
                                     f'{build_dirs.dir_mupdf}/platform/c++/include/', '.h',
                                     ):
                                 for path in jlib.get_filenames( dir_):
+                                    path = path.replace('\\', '/')
                                     _, ext = os.path.splitext( path)
                                     if ext not in ('.h', '.cpp'):
                                         continue
@@ -7262,6 +7281,25 @@ def main():
 
             elif arg == '--test-swig':
                 test_swig()
+
+            elif arg == '--windows-py':
+                venv = args.next()
+                args_tail = ''
+                while 1:
+                    try:
+                        args_tail += ' ' + args.next()
+                    except StopIteration:
+                        break
+                commands = (
+                        f'cmd.exe /c "py -m venv {venv}',
+                        f'{venv}\\Scripts\\activate.bat',
+                        f'(pip install --upgrade pip || pip install --upgrade pip)',
+                        f'pip install libclang',
+                        f'python {sys.argv[0]} {args_tail}',
+                        f'deactivate"',
+                        )
+                command = '&&'.join(commands)
+                jlib.system(command, out='log', prefix=f'{arg}: ', verbose=1)
 
             else:
                 raise Exception( f'unrecognised arg: {arg}')
