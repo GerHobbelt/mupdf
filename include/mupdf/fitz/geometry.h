@@ -212,12 +212,13 @@ static inline fz_irect fz_make_irect(int x0, int y0, int x1, int y1)
 }
 
 /**
-	A rectangle with sides of length one.
+	A rectangle with sides of length one, i.e. a unit rectangle.
 
 	The bottom left corner is at (0, 0) and the top right corner
 	is at (1, 1).
 */
 FZ_DATA extern const fz_rect fz_unit_rect;
+FZ_DATA extern const fz_irect fz_unit_irect;
 
 /**
 	An empty rectangle with an area equal to zero.
@@ -230,12 +231,6 @@ FZ_DATA extern const fz_irect fz_empty_irect;
 */
 FZ_DATA extern const fz_rect fz_infinite_rect;
 FZ_DATA extern const fz_irect fz_infinite_irect;
-
-/**
-	An unit rectangle.
-*/
-FZ_DATA extern const fz_rect fz_unit_rect;
-FZ_DATA extern const fz_irect fz_unit_irect;
 
 /**
 	An invalid rectangle.

@@ -7,35 +7,44 @@ and adds exports for the other libraries contained within libmupdf.dll but
 used by SumatraPDF-no-MuPDF.exe (unarr, libdjvu, zlib, lzma, libwebp).
 """
 
-import os, re
+import os, re, sys
 
 def collectExports(header):
-	data = open(header, "r").read()
-	data = re.sub(r"(?sm)^#ifndef NDEBUG\s.*?^#endif", "", data, 0)
-	data = re.sub(r"(?sm)^#ifdef ARCH_ARM\s.*?^#endif", "", data, 0)
-	data = re.sub(r"(?sm)^#ifdef FITZ_DEBUG_LOCKING\s.*?^#endif", "", data, 0)
-	data = re.sub(r"(?sm)^#ifndef SQLITE_OMIT_DEPRECATED\s.*?^#endif", "", data, 0)
-	data = re.sub(r"(?sm)^static +\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?\w+\(.*?\);?", "", data, 0)
-	data = re.sub(r"(?sm)^\w+ *\*?\*? +SQLITE_DEPRECATED +(?:\w+ *\*?\*? )*\*?\*?\w+\(.*?\);", "", data, 0)
-	data = data.replace(" FZ_NORETURN;", ";")
-	return re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+)\(.*?\);", data)
+	try:
+		data = open(header, "r", encoding='utf8').read()
+		data = re.sub(r"(?sm)^#ifndef NDEBUG\s.*?^#endif", "", data, 0)
+		data = re.sub(r"(?sm)^#ifdef ARCH_ARM\s.*?^#endif", "", data, 0)
+		data = re.sub(r"(?sm)^#ifdef FITZ_DEBUG_LOCKING\s.*?^#endif", "", data, 0)
+		data = re.sub(r"(?sm)^#ifndef SQLITE_OMIT_DEPRECATED\s.*?^#endif", "", data, 0)
+		data = re.sub(r"(?sm)^static +\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?\w+ *\(.*?\);?", "", data, 0)
+		data = re.sub(r"(?sm)^\w+ *\*?\*? +SQLITE_DEPRECATED +(?:\w+ *\*?\*? )*\*?\*?\w+ *\(.*?\);", "", data, 0)
+		data = data.replace(" FZ_NORETURN;", ";")
+		data = re.sub(r"(?sm)^PTW32_DLLPORT +", "", data, 0)
+		data = re.sub(r"(?sm)PTW32_CDECL +", "", data, 0)
+		data = re.sub(r"(?sm)FGAPIENTRY +", "", data, 0)
+		data = re.sub(r"(?sm)^typedef\s+[^;]+;", "", data, 0)
+		return re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+) *\(.*?\);", data)
+	except: # catch *all* exceptions
+		e = sys.exc_info()[0]
+		print( "Error: %s while processing file %s" % ( e, header ) )
+		# raise
 
 def generateExports(header, exclude=[]):
 	if os.path.isdir(header):
-		return "\n".join([generateExports(os.path.join(header, file), exclude) for file in os.listdir(header)])
+		return "\n".join([generateExports(os.path.join(header, file), exclude) for file in os.listdir(header) if re.match(r'.*?[.][hH]', file)])
 
 	functions = collectExports(header)
 	return "\n".join(["\t" + name for name in functions if name not in exclude])
 
 def collectFunctions(file):
-	data = open(file, "r").read()
-	return re.findall(r"(?sm)^\w+(?: \*\n|\n| \*| )((?:fz_|pdf_|xps_)\w+)\(", data)
+	data = open(file, "r", encoding='utf8').read()
+	return re.findall(r"(?sm)^\w+(?: \*\n|\n| \*| )((?:fz_|pdf_|xps_)\w+) *\(", data)
 
 def generateExportsJpeg(file, exclude=[], include=[]):
-	data = open(file, "r").read()
-	data = re.sub(r"(?sm)^\s*JMETHOD\([^\)]*\)", "", data, 0)
-	data = re.sub(r"(?sm)[\s\r\n]+JPP\([^\)]*\)", "(XXXXX)", data, 0)
-	functions = re.findall(r"(?sm)^EXTERN\([^)]+\) +(\w+)\s*\(XXXXX\)", data)
+	data = open(file, "r", encoding='utf8').read()
+	data = re.sub(r"(?sm)^\s*JMETHOD *\([^\)]*\)", "", data, 0)
+	data = re.sub(r"(?sm)[\s\r\n]+JPP *\([^\)]*\)", "(XXXXX)", data, 0)
+	functions = re.findall(r"(?sm)^EXTERN *\([^)]+\) +(\w+)\s*\(XXXXX\)", data)
 	return "\n".join(["\t" + name for name in functions if name not in exclude]) + "\n" + "\n".join(["\t" + name for name in include])
 
 LIBMUPDF_DEF = """\
@@ -89,22 +98,54 @@ EXPORTS
 ; Fitz exports
 
 	; data, not a function:
-	fz_identity
+	fz_identity                       DATA
 
-	fz_optarg
-	fz_optind
+	fz_optarg                         DATA
+	fz_optind                         DATA
 
-	fz_infinite_rect
-	fz_empty_rect
-	fz_invalid_rect
-	fz_unit_rect
-	fz_infinite_irect
-	fz_empty_irect
-	fz_invalid_irect
-	fz_unit_bbox
+	fz_infinite_rect                  DATA
+	fz_empty_rect                     DATA
+	fz_invalid_rect                   DATA
+	fz_unit_rect                      DATA
+	fz_infinite_irect                 DATA
+	fz_empty_irect                    DATA
+	fz_invalid_irect                  DATA
+	fz_unit_irect                     DATA
 
-	pdf_default_write_options
-	fz_default_color_params
+	pdf_default_write_options         DATA
+	fz_default_color_params           DATA
+
+	fz_draw_options_usage             DATA
+
+	fz_default_stroke_state           DATA
+
+	fz_stext_options_usage            DATA
+
+	fz_pdf_write_options_usage        DATA
+	fz_svg_write_options_usage        DATA
+
+	fz_pcl_write_options_usage        DATA
+	fz_pclm_write_options_usage       DATA
+	fz_pwg_write_options_usage        DATA
+	fz_pdfocr_write_options_usage     DATA
+
+	fz_glyph_name_from_adobe_standard DATA
+	fz_glyph_name_from_iso8859_7      DATA
+	fz_glyph_name_from_koi8u          DATA
+	fz_glyph_name_from_mac_expert     DATA
+	fz_glyph_name_from_mac_roman      DATA
+	fz_glyph_name_from_win_ansi       DATA
+	fz_glyph_name_from_windows_1252   DATA
+
+	fz_unicode_from_iso8859_1         DATA
+	fz_unicode_from_iso8859_7         DATA
+	fz_unicode_from_koi8u             DATA
+	fz_unicode_from_pdf_doc_encoding  DATA
+	fz_unicode_from_windows_1250      DATA
+	fz_unicode_from_windows_1251      DATA
+	fz_unicode_from_windows_1252      DATA
+
+
 
 %(fitz_exports)s
 
@@ -136,6 +177,14 @@ EXPORTS
 
 %(freeglut_exports)s
 
+; libXML2 exports
+
+%(libxml_exports)s
+
+; pthread-Win32 exports
+
+%(pthread_exports)s
+
 ; monolithic tool exports
 
 	dwebp_main
@@ -151,6 +200,10 @@ EXPORTS
 	webpmux_main
 	webpinfo_main
 
+; extra debug APIs and other misc extras
+
+	fz_dump_lock_times
+
 """
 
 def main():
@@ -164,7 +217,7 @@ def main():
 	sign_exports = []
 	pkcs7_ignores = ["pkcs7_openssl_check_digest", "pkcs7_openssl_check_certificate", "pkcs7_openssl_distinguished_name"]
 	office_exports = collectExports("include/mupdf/helpers/mu-office-lib.h")
-	
+
 	fitz_exports = generateExports("include/mupdf/fitz", doc_exports + more_formats + misc_exports)
 	pubdoc_exports = generateExports("include/mupdf/fitz/document.h")
 	mupdf_exports = generateExports("include/mupdf/pdf", sign_exports)
@@ -183,6 +236,8 @@ def main():
 	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
 	mujs_exports = generateExports("thirdparty/mujs/mujs.h")
 	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
+	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml")
+	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "VOID", "DWORD"])
 
 	list = LIBMUPDF_DEF % locals()
 	# remove duplicate entries

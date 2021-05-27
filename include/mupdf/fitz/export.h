@@ -16,7 +16,7 @@
 		#define FZ_DATA __declspec(dllexport)
 	#elif defined(FZ_DLL_CLIENT)
 		/* Building DLL client code. */
-		#define FZ_FUNCTION __declspec(dllexport)
+		#define FZ_FUNCTION __declspec(dllimport)
 		#define FZ_DATA __declspec(dllimport)
 	#else
 		#define FZ_FUNCTION

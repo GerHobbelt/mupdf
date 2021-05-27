@@ -349,4 +349,13 @@ void fz_lock_debug_unlock(fz_context *ctx, int lock)
 #endif
 }
 
+#elif !(defined(FITZ_DEBUG_LOCKING) && defined(FITZ_DEBUG_LOCKING_TIMES)) && defined(fz_dump_lock_times)
+
+// provide dummy for MuPDFLib.DLL anytime the real thing isn't available...
+
+#undef fz_dump_lock_times
+void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms)
+{
+}
+
 #endif

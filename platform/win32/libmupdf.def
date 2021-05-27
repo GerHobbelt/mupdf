@@ -131,7 +131,6 @@ EXPORTS
 	curl_easy_recv
 	curl_easy_send
 	curl_easy_upkeep
-
 	curl_mprintf
 	curl_mfprintf
 	curl_msprintf
@@ -256,22 +255,52 @@ EXPORTS
 ; Fitz exports
 
 	; data, not a function:
-	fz_identity
+	fz_identity                       DATA
 
-	fz_optarg
-	fz_optind
+	fz_optarg                         DATA
+	fz_optind                         DATA
 
-	fz_infinite_rect
-	fz_empty_rect
-	fz_invalid_rect
-	fz_unit_rect
-	fz_infinite_irect
-	fz_empty_irect
-	fz_invalid_irect
-	fz_unit_bbox
+	fz_infinite_rect                  DATA
+	fz_empty_rect                     DATA
+	fz_invalid_rect                   DATA
+	fz_unit_rect                      DATA
+	fz_infinite_irect                 DATA
+	fz_empty_irect                    DATA
+	fz_invalid_irect                  DATA
+	fz_unit_irect                     DATA
 
-	pdf_default_write_options
-	fz_default_color_params
+	pdf_default_write_options         DATA
+	fz_default_color_params           DATA
+
+	fz_draw_options_usage             DATA
+
+	fz_default_stroke_state           DATA
+
+	fz_stext_options_usage            DATA
+
+	fz_pdf_write_options_usage        DATA
+	fz_svg_write_options_usage        DATA
+
+	fz_pcl_write_options_usage        DATA
+	fz_pclm_write_options_usage       DATA
+	fz_pwg_write_options_usage        DATA
+	fz_pdfocr_write_options_usage     DATA
+
+	fz_glyph_name_from_adobe_standard DATA
+	fz_glyph_name_from_iso8859_7      DATA
+	fz_glyph_name_from_koi8u          DATA
+	fz_glyph_name_from_mac_expert     DATA
+	fz_glyph_name_from_mac_roman      DATA
+	fz_glyph_name_from_win_ansi       DATA
+	fz_glyph_name_from_windows_1252   DATA
+
+	fz_unicode_from_iso8859_1         DATA
+	fz_unicode_from_iso8859_7         DATA
+	fz_unicode_from_koi8u             DATA
+	fz_unicode_from_pdf_doc_encoding  DATA
+	fz_unicode_from_windows_1250      DATA
+	fz_unicode_from_windows_1251      DATA
+	fz_unicode_from_windows_1252      DATA
 
 	fz_open_archive
 	fz_open_archive_with_stream
@@ -1725,8 +1754,15 @@ EXPORTS
 	pdf_run_page_contents
 	pdf_run_page_annots
 	pdf_run_page_widgets
+	pdf_run_page_contents_with_usage
+	pdf_run_page_annots_with_usage
+	pdf_run_page_widgets_with_usage
 	pdf_filter_page_contents
 	pdf_filter_annot_contents
+	pdf_new_pixmap_from_page_contents
+	pdf_new_pixmap_from_page
+	pdf_new_pixmap_from_page_contents_with_separations
+	pdf_new_pixmap_from_page_with_separations
 	pdf_redact_page
 	pdf_page_presentation
 	pdf_load_default_colorspaces
@@ -2764,6 +2800,283 @@ EXPORTS
 	glutAppStatusFuncUcall
 	__glutCreateMenuUcallWithExit
 
+; libXML2 exports
+
+	xmlIsBaseCharGroup
+	xmlIsCharGroup
+	xmlIsCombiningGroup
+	xmlIsDigitGroup
+	xmlIsExtenderGroup
+	xmlIsIdeographicGroup
+	xmlIsPubidChar_unsafe
+
+	xmlInitializeDict
+
+	xmlInitGlobals
+	xmlCleanupGlobals
+	xmlParserInputBufferCreateFilenameDefault
+	xmlOutputBufferCreateFilenameDefault
+	xmlThrDefSetGenericErrorFunc
+	xmlThrDefSetStructuredErrorFunc
+	xmlRegisterNodeDefault
+	xmlThrDefRegisterNodeDefault
+	xmlDeregisterNodeDefault
+	xmlThrDefDeregisterNodeDefault
+	__xmlMalloc
+	__xmlMallocAtomic
+	__xmlRealloc
+	__xmlFree
+	__xmlMemStrdup
+	__docbDefaultSAXHandler
+	__htmlDefaultSAXHandler
+	__xmlLastError
+	__oldXMLWDcompatibility
+	__xmlBufferAllocScheme
+	__xmlDefaultBufferSize
+	xmlThrDefDefaultBufferSize
+	__xmlDefaultSAXHandler
+	__xmlDefaultSAXLocator
+	__xmlDoValidityCheckingDefaultValue
+	xmlThrDefDoValidityCheckingDefaultValue
+	__xmlGenericError
+	__xmlStructuredError
+	__xmlGetWarningsDefaultValue
+	xmlThrDefGetWarningsDefaultValue
+	__xmlIndentTreeOutput
+	xmlThrDefIndentTreeOutput
+	xmlThrDefTreeIndentString
+	__xmlKeepBlanksDefaultValue
+	xmlThrDefKeepBlanksDefaultValue
+	__xmlLineNumbersDefaultValue
+	xmlThrDefLineNumbersDefaultValue
+	__xmlLoadExtDtdDefaultValue
+	xmlThrDefLoadExtDtdDefaultValue
+	__xmlParserDebugEntities
+	xmlThrDefParserDebugEntities
+	__xmlPedanticParserDefaultValue
+	xmlThrDefPedanticParserDefaultValue
+	__xmlSaveNoEmptyTags
+	xmlThrDefSaveNoEmptyTags
+	__xmlSubstituteEntitiesDefaultValue
+	xmlThrDefSubstituteEntitiesDefaultValue
+	__xmlRegisterNodeDefaultValue
+	__xmlDeregisterNodeDefaultValue
+	__xmlOutputBufferCreateFilenameValue
+
+	xmlStringText
+	xmlStringTextNoenc
+	xmlStringComment
+	xmlIsLetter
+
+	xmlSchemaFreeType
+	xmlSchemaFreeWildcard
+
+	xmlBufEnd
+	xmlBufUse
+	xmlAttrSerializeTxtContent
+
+	xmlCheckVersion
+
+	xmlXPathEqualValues
+	xmlXPathNotEqualValues
+	xmlXPathCompareValues
+	xmlXPathValueFlipSign
+	xmlXPathAddValues
+	xmlXPathSubValues
+	xmlXPathMultValues
+	xmlXPathDivValues
+	xmlXPathModValues
+	xmlXPathIsNodeType
+	xmlXPathNextSelf
+	xmlXPathNextChild
+	xmlXPathNextDescendant
+	xmlXPathNextDescendantOrSelf
+	xmlXPathNextParent
+	xmlXPathNextAncestorOrSelf
+	xmlXPathNextFollowingSibling
+	xmlXPathNextFollowing
+	xmlXPathNextNamespace
+	xmlXPathNextAttribute
+	xmlXPathNextPreceding
+	xmlXPathNextAncestor
+	xmlXPathNextPrecedingSibling
+	xmlXPathLastFunction
+	xmlXPathPositionFunction
+	xmlXPathCountFunction
+	xmlXPathIdFunction
+	xmlXPathLocalNameFunction
+	xmlXPathNamespaceURIFunction
+	xmlXPathStringFunction
+	xmlXPathStringLengthFunction
+	xmlXPathConcatFunction
+	xmlXPathContainsFunction
+	xmlXPathStartsWithFunction
+	xmlXPathSubstringFunction
+	xmlXPathSubstringBeforeFunction
+	xmlXPathSubstringAfterFunction
+	xmlXPathNormalizeFunction
+	xmlXPathTranslateFunction
+	xmlXPathNotFunction
+	xmlXPathTrueFunction
+	xmlXPathFalseFunction
+	xmlXPathLangFunction
+	xmlXPathNumberFunction
+	xmlXPathSumFunction
+	xmlXPathFloorFunction
+	xmlXPathCeilingFunction
+	xmlXPathRoundFunction
+	xmlXPathBooleanFunction
+	xmlXPathNodeSetFreeNs
+
+; pthread-Win32 exports
+
+	ptw32_strdup
+	ptw32_throw
+
+	pthread_attr_init
+	pthread_attr_destroy
+	pthread_attr_getaffinity_np
+	pthread_attr_getdetachstate
+	pthread_attr_getstackaddr
+	pthread_attr_getstacksize
+	pthread_attr_setaffinity_np
+	pthread_attr_setdetachstate
+	pthread_attr_setstackaddr
+	pthread_attr_setstacksize
+	pthread_attr_getschedparam
+	pthread_attr_setschedparam
+	pthread_attr_setschedpolicy
+	pthread_attr_getschedpolicy
+	pthread_attr_setinheritsched
+	pthread_attr_getinheritsched
+	pthread_attr_setscope
+	pthread_attr_getscope
+	pthread_create
+	pthread_detach
+	pthread_equal
+	pthread_exit
+	pthread_join
+	pthread_self
+	pthread_cancel
+	pthread_setcancelstate
+	pthread_setcanceltype
+	pthread_testcancel
+	pthread_once
+	ptw32_pop_cleanup
+	ptw32_push_cleanup
+	pthread_key_create
+	pthread_key_delete
+	pthread_setspecific
+	pthread_getspecific
+	pthread_mutexattr_init
+	pthread_mutexattr_destroy
+	pthread_mutexattr_getpshared
+	pthread_mutexattr_setpshared
+	pthread_mutexattr_settype
+	pthread_mutexattr_gettype
+	pthread_mutexattr_setrobust
+	pthread_mutexattr_getrobust
+	pthread_barrierattr_init
+	pthread_barrierattr_destroy
+	pthread_barrierattr_getpshared
+	pthread_barrierattr_setpshared
+	pthread_mutex_init
+	pthread_mutex_destroy
+	pthread_mutex_lock
+	pthread_mutex_timedlock
+	pthread_mutex_trylock
+	pthread_mutex_unlock
+	pthread_mutex_consistent
+	pthread_spin_init
+	pthread_spin_destroy
+	pthread_spin_lock
+	pthread_spin_trylock
+	pthread_spin_unlock
+	pthread_barrier_init
+	pthread_barrier_destroy
+	pthread_barrier_wait
+	pthread_condattr_init
+	pthread_condattr_destroy
+	pthread_condattr_getpshared
+	pthread_condattr_setpshared
+	pthread_cond_init
+	pthread_cond_destroy
+	pthread_cond_wait
+	pthread_cond_timedwait
+	pthread_cond_signal
+	pthread_cond_broadcast
+	pthread_setschedparam
+	pthread_getschedparam
+	pthread_setconcurrency
+	pthread_getconcurrency
+	pthread_rwlock_init
+	pthread_rwlock_destroy
+	pthread_rwlock_tryrdlock
+	pthread_rwlock_trywrlock
+	pthread_rwlock_rdlock
+	pthread_rwlock_timedrdlock
+	pthread_rwlock_wrlock
+	pthread_rwlock_timedwrlock
+	pthread_rwlock_unlock
+	pthread_rwlockattr_init
+	pthread_rwlockattr_destroy
+	pthread_rwlockattr_getpshared
+	pthread_rwlockattr_setpshared
+	pthread_kill
+	pthread_mutexattr_setkind_np
+	pthread_mutexattr_getkind_np
+	pthread_timedjoin_np
+	pthread_tryjoin_np
+	pthread_setaffinity_np
+	pthread_getaffinity_np
+	pthread_delay_np
+	pthread_num_processors_np
+	pthread_getunique_np
+	pthread_win32_process_attach_np
+	pthread_win32_process_detach_np
+	pthread_win32_thread_attach_np
+	pthread_win32_thread_detach_np
+	pthread_win32_getabstime_np
+	pthread_win32_test_features_np
+	pthread_timechange_handler_np
+	pthread_getw32threadhandle_np
+	pthread_getw32threadid_np
+	pthread_setname_np
+	pthread_attr_setname_np
+	pthread_getname_np
+	pthread_attr_getname_np
+	pthreadCancelableWait
+	pthreadCancelableTimedWait
+	pthread_win32_set_terminate_np
+	ptw32_get_exception_services_code
+	sched_yield
+	sched_get_priority_min
+	sched_get_priority_max
+	sched_setscheduler
+	sched_getscheduler
+	sched_setaffinity
+	sched_getaffinity
+	_sched_affinitycpucount
+	_sched_affinitycpuzero
+	_sched_affinitycpuset
+	_sched_affinitycpuclr
+	_sched_affinitycpuisset
+	_sched_affinitycpuand
+	_sched_affinitycpuor
+	_sched_affinitycpuxor
+	_sched_affinitycpuequal
+	sem_init
+	sem_destroy
+	sem_trywait
+	sem_wait
+	sem_timedwait
+	sem_post
+	sem_post_multiple
+	sem_open
+	sem_close
+	sem_unlink
+	sem_getvalue
+
 ; monolithic tool exports
 
 	dwebp_main
@@ -2778,3 +3091,7 @@ EXPORTS
 	webp_anim_dump_main
 	webpmux_main
 	webpinfo_main
+
+; extra debug APIs and other misc extras
+
+	fz_dump_lock_times

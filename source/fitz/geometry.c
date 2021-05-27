@@ -363,7 +363,7 @@ const fz_rect fz_unit_rect = { 0, 0, 1, 1 };
 const fz_irect fz_infinite_irect = { FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT };
 const fz_irect fz_empty_irect = { FZ_MAX_INF_RECT, FZ_MAX_INF_RECT, FZ_MIN_INF_RECT, FZ_MIN_INF_RECT };
 const fz_irect fz_invalid_irect = { 0, 0, -1, -1 };
-const fz_irect fz_unit_bbox = { 0, 0, 1, 1 };
+const fz_irect fz_unit_irect = { 0, 0, 1, 1 };
 
 fz_irect
 fz_irect_from_rect(fz_rect r)
