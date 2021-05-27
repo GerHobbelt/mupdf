@@ -365,7 +365,17 @@ def log( text, level=0, caller=1, nv=True, out=None, raw=False):
     level += log_levels_find( caller)
     if level <= 0:
         text = log_text( text, caller, nv=nv, raw=raw)
-        out.write( text)
+        try:
+            out.write( text)
+        except UnicodeEncodeError:
+            # Retry, ignoring errors by encoding then decoding with
+            # errors='replace'.
+            #
+            out.write('[***write encoding error***]')
+            text_encoded = codecs.encode(text, out.encoding, errors='replace')
+            text_encoded_decoded = codecs.decode(text_encoded, out.encoding, errors='replace')
+            out.write(text_encoded_decoded)
+            out.write('[/***write encoding error***]')
         out.flush()
 
 def log_raw( text, level=0, caller=1, nv=False, out=None):
