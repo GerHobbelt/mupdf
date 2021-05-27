@@ -541,12 +541,19 @@ Usage:
                     * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
 
-        --windows-py <venv> ...
-            Runs mupdfwrap.py via cmd.exe in a venv containing libclang,
-            passing remaining args.
+        --venv <venv> ...
+            Runs mupdfwrap.py in a venv containing libclang, passing remaining
+            args.
 
             E.g.:
-                --windows-py pylocal --swig-windows-auto -b 0
+                --venv --swig-windows-auto -b all -t
+
+        --windows-cmd ...
+            Runs mupdfwrap.py via cmd.exe, passing remaining args. Useful to
+            get from cygwin to native Windows.
+
+            E.g.:
+                --windows-cmd --windows-venv pylocal --swig-windows-auto -b all
 
     Examples:
 
@@ -7260,6 +7267,18 @@ def main():
 
                 log( 'Tests ran ok.')
 
+            elif arg == '--test-output-buffering':
+                n = 10
+                print(f'{arg}: writing 10 lines periodically...')
+                print(f'{arg}: writing 10 lines periodically...', file=sys.stderr)
+                for i in range(n):
+                    print(f'stdout i={i}')
+                    print(f'stderr i={i}', file=sys.stderr)
+                    sys.stdout.flush()
+                    time.sleep(1)
+                print(f'{arg}: finished')
+                print(f'{arg}: finished', file=sys.stderr)
+
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
                 # because the latter is not portable, e.g. not supported by ksh. The '.'
@@ -7282,7 +7301,7 @@ def main():
             elif arg == '--test-swig':
                 test_swig()
 
-            elif arg == '--windows-py':
+            elif arg == '--venv':
                 venv = args.next()
                 args_tail = ''
                 while 1:
@@ -7291,15 +7310,25 @@ def main():
                     except StopIteration:
                         break
                 commands = (
-                        f'cmd.exe /c "py -m venv {venv}',
+                        f'{sys.executable} -m venv {venv}',
                         f'{venv}\\Scripts\\activate.bat',
                         f'(pip install --upgrade pip || pip install --upgrade pip)',
                         f'pip install libclang',
                         f'python {sys.argv[0]} {args_tail}',
-                        f'deactivate"',
+                        f'deactivate',
                         )
                 command = '&&'.join(commands)
-                jlib.system(command, out='log', prefix=f'{arg}: ', verbose=1)
+                jlib.system(command, out='log', verbose=1)
+
+            elif arg == '--windows-cmd':
+                args_tail = ''
+                while 1:
+                    try:
+                        args_tail += f' {args.next()}'
+                    except StopIteration:
+                        break
+                command = f'cmd.exe /c "py {sys.argv[0]} {args_tail}"'
+                jlib.system(command, out='log', verbose=1)
 
             else:
                 raise Exception( f'unrecognised arg: {arg}')
