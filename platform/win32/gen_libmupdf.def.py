@@ -236,8 +236,8 @@ def main():
 	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
 	mujs_exports = generateExports("thirdparty/mujs/mujs.h")
 	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
-	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml")
-	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "VOID", "DWORD"])
+	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc"])
+	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "DWORD", "pthread_win32_set_terminate_np"])
 
 	list = LIBMUPDF_DEF % locals()
 	# remove duplicate entries
