@@ -21,8 +21,13 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 ; https://documentation.help/Inno-Setup/topic_setup_architecturesinstallin64bitmode.htm
-ArchitecturesInstallIn64BitMode=
-ArchitecturesAllowed=x86 x64 ia64
+; "ArchitecturesAllowed=x64" specifies that Setup cannot run on
+; anything but x64.
+ArchitecturesAllowed=x64
+; "ArchitecturesInstallIn64BitMode=x64" requests that the install be
+; done in "64-bit mode" on x64, meaning it should use the native
+; 64-bit Program Files directory and the 64-bit view of the registry.
+ArchitecturesInstallIn64BitMode=x64
 ; only support Windows 10 and Windows 8.1
 MinVersion=6.3
 UsePreviousAppDir=yes
