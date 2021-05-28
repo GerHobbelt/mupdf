@@ -47,7 +47,7 @@
 #undef HAVE_LIB_UNWIND
 
 /* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
+#define HAVE_MEMORY_H 1
 
 /* define to disable multithreading support. */
 #undef NO_THREADS
@@ -131,7 +131,7 @@
 #undef HAVE___SYNC_VAL_COMPARE_AND_SWAP
 
 /* define if symbolize support is available */
-#undef HAVE_SYMBOLIZE
+#define HAVE_SYMBOLIZE 1
 
 /* define if localtime_r is available in time.h */
 #undef HAVE_LOCALTIME_R
@@ -191,10 +191,10 @@
 #undef TEST_SRC_DIR 
 
 /* Define to necessary thread-local storage attribute. */
-#undef GLOG_THREAD_LOCAL_STORAGE 
+#define GLOG_THREAD_LOCAL_STORAGE __declspec(thread)
 
 /* Check whether aligned_storage and alignof present */
-#undef HAVE_ALIGNED_STORAGE 
+#define HAVE_ALIGNED_STORAGE 1
 
 /* Check whether C++11 atomic is available */
 #define HAVE_CXX11_ATOMIC 1

@@ -81,10 +81,10 @@
 // parsing of --vmodule flag and/or SetVLOGLevel calls.
 #define VLOG_IS_ON(verboselevel)                                \
   __extension__  \
-  ({ static google::int32* vlocal__ = NULL;           \
+  ({ static google::SiteFlag vlocal__{NULL, NULL, 0, NULL};       \
      google::int32 verbose_level__ = (verboselevel);                    \
-     (vlocal__ == NULL ? google::InitVLOG3__(&vlocal__, &FLAGS_v, \
-                        __FILE__, verbose_level__) : *vlocal__ >= verbose_level__); \
+     (vlocal__.level == NULL ? google::InitVLOG3__(&vlocal__, &FLAGS_v, \
+                        __FILE__, verbose_level__) : *vlocal__.level >= verbose_level__); \
   })
 #else
 // GNU extensions not available, so we do not support --vmodule.
@@ -105,6 +105,13 @@ extern GOOGLE_GLOG_DLL_DECL int SetVLOGLevel(const char* module_pattern,
 
 // Various declarations needed for VLOG_IS_ON above: =========================
 
+struct SiteFlag {
+  google::int32* level;
+  const char* base_name;
+  size_t base_len;
+  SiteFlag* next;
+};
+
 // Helper routine which determines the logging info for a particalur VLOG site.
 //   site_flag     is the address of the site-local pointer to the controlling
 //                 verbosity level
@@ -114,7 +121,7 @@ extern GOOGLE_GLOG_DLL_DECL int SetVLOGLevel(const char* module_pattern,
 // We will return the return value for VLOG_IS_ON
 // and if possible set *site_flag appropriately.
 extern GOOGLE_GLOG_DLL_DECL bool InitVLOG3__(
-    google::int32** site_flag,
+    google::SiteFlag* site_flag,
     google::int32* site_default,
     const char* fname,
     google::int32 verbose_level);
