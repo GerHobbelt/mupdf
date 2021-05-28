@@ -390,7 +390,7 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 				s = p;
 
 				char num[40];
-				l = fz_snprintf(num, sizeof(num), "%04d", page);
+				l = fz_snprintf(num, sizeof(num), "%s%04d", (*s == '.' ? "." : "_p"), page);
 				if (l >= w)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
 				memcpy(d, num, l);
