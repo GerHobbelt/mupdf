@@ -101,7 +101,7 @@ pdf_new_stext_page_from_annot(fz_context *ctx, pdf_annot *annot, const fz_stext_
 }
 
 fz_pixmap *
-pdf_new_pixmap_from_page_contents_with_separations(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, const char *usage)
+pdf_new_pixmap_from_page_contents_with_separations_and_usage(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, const char *usage)
 {
 	fz_rect rect;
 	fz_irect bbox;
@@ -149,13 +149,13 @@ pdf_new_pixmap_from_page_contents_with_separations(fz_context *ctx, pdf_page *pa
 }
 
 fz_pixmap *
-pdf_new_pixmap_from_page_contents(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, int alpha, const char *usage)
+pdf_new_pixmap_from_page_contents_with_usage(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, int alpha, const char *usage)
 {
-	return pdf_new_pixmap_from_page_contents_with_separations(ctx, page, ctm, cs, NULL, alpha, usage);
+	return pdf_new_pixmap_from_page_contents_with_separations_and_usage(ctx, page, ctm, cs, NULL, alpha, usage);
 }
 
 fz_pixmap *
-pdf_new_pixmap_from_page_with_separations(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, const char *usage)
+pdf_new_pixmap_from_page_with_separations_and_usage(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, const char *usage)
 {
 	fz_rect rect;
 	fz_irect bbox;
@@ -204,7 +204,7 @@ pdf_new_pixmap_from_page_with_separations(fz_context *ctx, pdf_page *page, fz_ma
 }
 
 fz_pixmap *
-pdf_new_pixmap_from_page(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, int alpha, const char *usage)
+pdf_new_pixmap_from_page_with_usage(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, int alpha, const char *usage)
 {
-	return pdf_new_pixmap_from_page_with_separations(ctx, page, ctm, cs, NULL, alpha, usage);
+	return pdf_new_pixmap_from_page_with_separations_and_usage(ctx, page, ctm, cs, NULL, alpha, usage);
 }

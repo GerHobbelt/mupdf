@@ -5245,9 +5245,9 @@ static void ffi_PDFPage_toPixmap(js_State *J)
 
 	fz_try(ctx)
 		if (no_annots)
-			pixmap = pdf_new_pixmap_from_page_contents(ctx, page, ctm, colorspace, alpha, usage);
+			pixmap = pdf_new_pixmap_from_page_contents_with_usage(ctx, page, ctm, colorspace, alpha, usage);
 		else
-			pixmap = pdf_new_pixmap_from_page(ctx, page, ctm, colorspace, alpha, usage);
+			pixmap = pdf_new_pixmap_from_page_with_usage(ctx, page, ctm, colorspace, alpha, usage);
 
 	fz_catch(ctx)
 		rethrow(J);
@@ -5677,6 +5677,8 @@ static void ffi_PDFAnnotation_addVertex(js_State *J)
 		rethrow(J);
 }
 
+/* Returns an array of strokes, where each stroke is an array of points, where
+each point is a two element array consisting of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_getInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5710,6 +5712,7 @@ static void ffi_PDFAnnotation_getInkList(js_State *J)
 	}
 }
 
+/* Takes an argument on the same format as getInkList returns. */
 static void ffi_PDFAnnotation_setInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5775,7 +5778,8 @@ static void ffi_PDFAnnotation_clearInkList(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 }
-
+/* Takes a stroke argument being an array of points, where each
+point is a two element array of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_addInkList(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5807,6 +5811,8 @@ static void ffi_PDFAnnotation_addInkListStroke(js_State *J)
 		rethrow(J);
 }
 
+/* Takes a point argument which is a two element array
+consisting of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_addInkListStrokeVertex(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -6002,6 +6008,9 @@ static void ffi_PDFAnnotation_setLanguage(js_State *J)
 		rethrow(J);
 }
 
+/* Returns an array of two point denoting the end points of the
+line annotation. Each point is a two element array consisting
+of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_getLine(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -6018,6 +6027,9 @@ static void ffi_PDFAnnotation_getLine(js_State *J)
 	js_setindex(J, -2, 1);
 }
 
+/* Takes two point arguments denoting the end points of the
+line annotation. Each point is a two element array consisting
+of the point's x and y coordinates. */
 static void ffi_PDFAnnotation_setLine(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);

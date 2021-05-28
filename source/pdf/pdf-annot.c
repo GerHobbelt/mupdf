@@ -2553,10 +2553,10 @@ pdf_set_annot_author(fz_context *ctx, pdf_annot *annot, const char *author)
 }
 
 void
-pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font, float *size, int *n, float *color)
+pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font, float *size, int *n, float color[4])
 {
 	char buf[100], *p = buf, *tok, *end;
-	float stack[4] = { 0, 0, 0 };
+	float stack[4] = { 0, 0, 0, 0};
 	int top = 0;
 
 	*font = "Helv";
@@ -2619,7 +2619,7 @@ pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font,
 }
 
 void
-pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *font, float size, int n, const float *color)
+pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *font, float size, int n, const float color[4])
 {
 	if (n == 4 && (color[0] > 0 || color[1] > 0 || color[2] > 0 || color[3] > 0))
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g %g %g %g k", font, size, color[0], color[1], color[2], color[3]);
@@ -2632,7 +2632,7 @@ pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *f
 }
 
 void
-pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, int *n, float *color)
+pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, int *n, float color[4])
 {
 	pdf_obj *da = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(DA));
 	if (!da)
@@ -2644,7 +2644,7 @@ pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **fon
 }
 
 void
-pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, int n, const float *color)
+pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, int n, const float color[4])
 {
 	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
 	char buf[100];

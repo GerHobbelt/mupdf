@@ -1051,7 +1051,7 @@ FUN(PDFAnnotation_getDefaultAppearance)(JNIEnv *env, jobject self)
 }
 
 JNIEXPORT void JNICALL
-FUN(PDFAnnotation_setDefaultAppearance)(JNIEnv *env, jobject self, jobject jfont, jfloat size, jobject jcolor)
+FUN(PDFAnnotation_setDefaultAppearance)(JNIEnv *env, jobject self, jstring jfont, jfloat size, jobject jcolor)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
