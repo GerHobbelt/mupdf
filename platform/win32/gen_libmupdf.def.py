@@ -185,6 +185,10 @@ EXPORTS
 
 %(pthread_exports)s
 
+; zlib exports
+
+%(zlib_exports)s
+
 ; monolithic tool exports
 
 	dwebp_main
@@ -238,6 +242,7 @@ def main():
 	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
 	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc"])
 	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "DWORD", "pthread_win32_set_terminate_np"])
+	zlib_exports = generateExports("thirdparty/zlib/zlib-ng.h", ["zng_deflateInit", "zng_inflateInit", "zng_deflateInit2", "zng_inflateInit2", "zng_inflateBackInit"])
 
 	list = LIBMUPDF_DEF % locals()
 	# remove duplicate entries
