@@ -145,7 +145,7 @@ EXPORTS
 	fz_unicode_from_windows_1251      DATA
 	fz_unicode_from_windows_1252      DATA
 
-
+	sqlite3OSTrace                    DATA
 
 %(fitz_exports)s
 
