@@ -7,7 +7,7 @@
 typedef struct
 {
 	fz_stream *chain;
-	z_stream z;
+	zng_stream z;
 	unsigned char buffer[4096];
 } fz_inflate_state;
 
@@ -26,7 +26,7 @@ next_flated(fz_context *ctx, fz_stream *stm, size_t required)
 {
 	fz_inflate_state *state = stm->state;
 	fz_stream *chain = state->chain;
-	z_streamp zp = &state->z;
+	zng_streamp zp = &state->z;
 	int code;
 	unsigned char *outbuf = state->buffer;
 	int outlen = sizeof(state->buffer);
@@ -42,7 +42,7 @@ next_flated(fz_context *ctx, fz_stream *stm, size_t required)
 		zp->avail_in = (uInt)fz_available(ctx, chain, 1);
 		zp->next_in = chain->rp;
 
-		code = inflate(zp, Z_SYNC_FLUSH);
+		code = zng_inflate(zp, Z_SYNC_FLUSH);
 
 		chain->rp = chain->wp - zp->avail_in;
 
@@ -89,7 +89,7 @@ close_flated(fz_context *ctx, void *state_)
 	fz_inflate_state *state = (fz_inflate_state *)state_;
 	int code;
 
-	code = inflateEnd(&state->z);
+	code = zng_inflateEnd(&state->z);
 	if (code != Z_OK)
 		fz_warn(ctx, "zlib error: inflateEnd: %s", state->z.msg);
 
@@ -110,7 +110,7 @@ fz_open_flated(fz_context *ctx, fz_stream *chain, int window_bits)
 	state->z.next_in = NULL;
 	state->z.avail_in = 0;
 
-	code = inflateInit2(&state->z, window_bits);
+	code = zng_inflateInit2(&state->z, window_bits);
 	if (code != Z_OK)
 	{
 		fz_free(ctx, state);

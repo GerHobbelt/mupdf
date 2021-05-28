@@ -306,7 +306,7 @@ fz_new_arc4_output(fz_context *ctx, fz_output *chain, unsigned char *key, size_t
 struct deflate
 {
 	fz_output *chain;
-	z_stream z;
+	zng_stream z;
 };
 
 static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_t n)
@@ -321,7 +321,7 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 	{
 		state->z.next_out = buffer;
 		state->z.avail_out = sizeof buffer;
-		err = deflate(&state->z, Z_NO_FLUSH);
+		err = zng_deflate(&state->z, Z_NO_FLUSH);
 		if (err != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "zlib compression failed: %d", err);
 		if (state->z.avail_out > 0)
@@ -341,7 +341,7 @@ static void deflate_close(fz_context *ctx, void *opaque)
 	{
 		state->z.next_out = buffer;
 		state->z.avail_out = sizeof buffer;
-		err = deflate(&state->z, Z_FINISH);
+		err = zng_deflate(&state->z, Z_FINISH);
 		if (state->z.avail_out > 0)
 			fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 	} while (err == Z_OK);
@@ -353,7 +353,7 @@ static void deflate_close(fz_context *ctx, void *opaque)
 static void deflate_drop(fz_context *ctx, void *opaque)
 {
 	struct deflate *state = opaque;
-	(void)deflateEnd(&state->z);
+	(void)zng_deflateEnd(&state->z);
 	fz_free(ctx, state);
 }
 
@@ -367,10 +367,10 @@ fz_new_deflate_output(fz_context *ctx, fz_output *chain, int effort, int raw)
 	state->z.opaque = ctx;
 	state->z.zalloc = fz_zlib_alloc;
 	state->z.zfree = fz_zlib_free;
-	err = deflateInit2(&state->z, effort, Z_DEFLATED, raw ? -15 : 15, 8, Z_DEFAULT_STRATEGY);
+	err = zng_deflateInit2(&state->z, effort, Z_DEFLATED, raw ? -15 : 15, 8, Z_DEFAULT_STRATEGY);
 	if (err != Z_OK)
 	{
-		(void)deflateEnd(&state->z);
+		(void)zng_deflateEnd(&state->z);
 		fz_free(ctx, state);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "zlib deflateInit2 failed: %d", err);
 	}

@@ -5,7 +5,7 @@
 typedef struct ps_band_writer_s
 {
 	fz_band_writer super;
-	z_stream stream;
+	zng_stream stream;
 	int stream_ended;
 	int input_size;
 	unsigned char *input;
@@ -74,7 +74,7 @@ ps_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	writer->stream.zfree = fz_zlib_free;
 	writer->stream.opaque = ctx;
 
-	err = deflateInit(&writer->stream, Z_DEFAULT_COMPRESSION);
+	err = zng_deflateInit(&writer->stream, Z_DEFAULT_COMPRESSION);
 	if (err != Z_OK)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 
@@ -126,11 +126,11 @@ ps_write_trailer(fz_context *ctx, fz_band_writer *writer_)
 	writer->stream.next_out = (Bytef*)writer->output;
 	writer->stream.avail_out = (uInt)writer->output_size;
 
-	err = deflate(&writer->stream, Z_FINISH);
+	err = zng_deflate(&writer->stream, Z_FINISH);
 	if (err != Z_STREAM_END)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 	writer->stream_ended = 1;
-	err = deflateEnd(&writer->stream);
+	err = zng_deflateEnd(&writer->stream);
 	if (err != Z_OK)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 
@@ -145,7 +145,7 @@ ps_drop_band_writer(fz_context *ctx, fz_band_writer *writer_)
 
 	if (!writer->stream_ended)
 	{
-		int err = deflateEnd(&writer->stream);
+		int err = zng_deflateEnd(&writer->stream);
 		if (err != Z_OK)
 			fz_warn(ctx, "ignoring compression error %d", err);
 	}
@@ -213,7 +213,7 @@ ps_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_sta
 		band_height = h - band_start;
 
 	required_input = w*n*band_height;
-	required_output = (int)deflateBound(&writer->stream, required_input);
+	required_output = (int)zng_deflateBound(&writer->stream, required_input);
 
 	if (writer->input == NULL || writer->input_size < required_input)
 	{
@@ -247,7 +247,7 @@ ps_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_sta
 	writer->stream.next_out = (Bytef*)writer->output;
 	writer->stream.avail_out = (uInt)writer->output_size;
 
-	err = deflate(&writer->stream, Z_NO_FLUSH);
+	err = zng_deflate(&writer->stream, Z_NO_FLUSH);
 	if (err != Z_OK)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 

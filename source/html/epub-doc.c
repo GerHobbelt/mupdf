@@ -4,7 +4,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <zlib.h> /* for crc32 */
+#include <zlib-ng.h> /* for crc32 */
 
 enum { T, R, B, L };
 
@@ -68,9 +68,9 @@ user_css_sum(fz_context *ctx)
 {
 	uint32_t sum = 0;
 	const char *css = fz_user_css(ctx);
-	sum = crc32(0, NULL, 0);
+	sum = zng_crc32(0, NULL, 0);
 	if (css)
-		sum = crc32(sum, (Byte*)css, (int)strlen(css));
+		sum = zng_crc32(sum, (Byte*)css, (int)strlen(css));
 	return sum;
 }
 

@@ -374,14 +374,14 @@ png_read_icc(fz_context *ctx, struct info *info, const unsigned char *p, unsigne
 }
 
 static void
-png_read_idat(fz_context *ctx, struct info *info, const unsigned char *p, unsigned int size, z_stream *stm)
+png_read_idat(fz_context *ctx, struct info *info, const unsigned char *p, unsigned int size, zng_stream *stm)
 {
 	int code;
 
 	stm->next_in = (Bytef*)p;
 	stm->avail_in = size;
 
-	code = inflate(stm, Z_SYNC_FLUSH);
+	code = zng_inflate(stm, Z_SYNC_FLUSH);
 	if (code != Z_OK && code != Z_STREAM_END)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error: %s", stm->msg);
 	if (stm->avail_in != 0)
@@ -409,7 +409,7 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 {
 	unsigned int passw[7], passh[7], passofs[8];
 	unsigned int code, size;
-	z_stream stm;
+	zng_stream stm;
 
 	memset(info, 0, sizeof (struct info));
 	memset(info->palette, 255, sizeof(info->palette));
@@ -460,7 +460,7 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 		stm.next_out = info->samples;
 		stm.avail_out = info->size;
 
-		code = inflateInit(&stm);
+		code = zng_inflateInit(&stm);
 		if (code != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error: %s", stm.msg);
 	}
@@ -503,7 +503,7 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 	{
 		if (!only_metadata)
 		{
-			inflateEnd(&stm);
+			zng_inflateEnd(&stm);
 			fz_free(ctx, info->samples);
 			info->samples = NULL;
 		}
@@ -512,7 +512,7 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 
 	if (!only_metadata)
 	{
-		code = inflateEnd(&stm);
+		code = zng_inflateEnd(&stm);
 		if (code != Z_OK)
 		{
 			fz_free(ctx, info->samples);

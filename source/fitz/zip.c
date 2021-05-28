@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-#include <zlib.h> /* for crc32() */
+#include <zlib-ng.h> /* for crc32() */
 
 #if !defined (INT32_MAX)
 #define INT32_MAX 2147483647L
@@ -28,8 +28,8 @@ fz_write_zip_entry(fz_context *ctx, fz_zip_writer *zip, const char *name, fz_buf
 
 	/* TODO: respect 'compress' option */
 
-	sum = crc32(0, NULL, 0);
-	sum = crc32(sum, buf->data, (uInt)buf->len);
+	sum = zng_crc32(0, NULL, 0);
+	sum = zng_crc32(sum, buf->data, (uInt)buf->len);
 
 	fz_append_int32_le(ctx, zip->central, ZIP_CENTRAL_DIRECTORY_SIG);
 	fz_append_int16_le(ctx, zip->central, 0); /* version made by: MS-DOS */

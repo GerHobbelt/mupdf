@@ -1,6 +1,6 @@
 #include "mupdf/fitz.h"
 
-#include <zlib.h> /* for compressBound() and compress() */
+#include <zlib-ng.h> /* for compressBound() and compress() */
 
 fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 {
@@ -14,9 +14,9 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 	if (input->len != (size_t)input_n)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "buffer is too large to deflate");
 
-	output_n = compressBound(input_n);
+	output_n = zng_compressBound(input_n);
 	output_p = Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
-	result = compress(output_p, &output_n, input_p, input_n);
+	result = zng_compress(output_p, &output_n, input_p, input_n);
 	if (result != Z_OK)
 	{
 		fz_free(ctx, output_p);

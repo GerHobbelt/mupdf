@@ -22,9 +22,9 @@ static void putchunk(fz_context *ctx, fz_output *out, char *tag, unsigned char *
 	fz_write_int32_be(ctx, out, (int)size);
 	fz_write_data(ctx, out, tag, 4);
 	fz_write_data(ctx, out, data, size);
-	sum = crc32(0, NULL, 0);
-	sum = crc32(sum, (unsigned char*)tag, 4);
-	sum = crc32(sum, data, (unsigned int)size);
+	sum = zng_crc32(0, NULL, 0);
+	sum = zng_crc32(sum, (unsigned char*)tag, 4);
+	sum = zng_crc32(sum, data, (unsigned int)size);
 	fz_write_int32_be(ctx, out, sum);
 }
 
@@ -85,7 +85,7 @@ typedef struct png_band_writer_s
 	unsigned char *udata;
 	unsigned char *cdata;
 	uLong usize, csize;
-	z_stream stream;
+	zng_stream stream;
 	int stream_ended;
 } png_band_writer;
 
@@ -208,13 +208,13 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 		 * the buffering can result in you suddenly getting a block
 		 * larger than compressBound outputted in one go, even if you
 		 * take all the data out each time. */
-		writer->csize = compressBound(writer->usize);
+		writer->csize = zng_compressBound(writer->usize);
 		writer->udata = Memento_label(fz_malloc(ctx, writer->usize), "png_write_udata");
 		writer->cdata = Memento_label(fz_malloc(ctx, writer->csize), "png_write_cdata");
 		writer->stream.opaque = ctx;
 		writer->stream.zalloc = fz_zlib_alloc;
 		writer->stream.zfree = fz_zlib_free;
-		err = deflateInit(&writer->stream, Z_DEFAULT_COMPRESSION);
+		err = zng_deflateInit(&writer->stream, Z_DEFAULT_COMPRESSION);
 		if (err != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 	}
@@ -282,13 +282,13 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 
 		if (!finalband)
 		{
-			err = deflate(&writer->stream, Z_NO_FLUSH);
+			err = zng_deflate(&writer->stream, Z_NO_FLUSH);
 			if (err != Z_OK)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 		}
 		else
 		{
-			err = deflate(&writer->stream, Z_FINISH);
+			err = zng_deflate(&writer->stream, Z_FINISH);
 			if (err == Z_OK)
 			{
 				/* more output space needed, try again */
@@ -316,7 +316,7 @@ png_write_trailer(fz_context *ctx, fz_band_writer *writer_)
 	int err;
 
 	writer->stream_ended = 1;
-	err = deflateEnd(&writer->stream);
+	err = zng_deflateEnd(&writer->stream);
 	if (err != Z_OK)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 
@@ -330,7 +330,7 @@ png_drop_band_writer(fz_context *ctx, fz_band_writer *writer_)
 
 	if (!writer->stream_ended)
 	{
-		int err = deflateEnd(&writer->stream);
+		int err = zng_deflateEnd(&writer->stream);
 		if (err != Z_OK)
 			fz_warn(ctx, "ignoring compression error %d", err);
 	}

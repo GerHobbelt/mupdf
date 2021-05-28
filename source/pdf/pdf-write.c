@@ -3,7 +3,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#include <zlib.h>
+#include <zlib-ng.h>
 
 #include <assert.h>
 #include <limits.h>

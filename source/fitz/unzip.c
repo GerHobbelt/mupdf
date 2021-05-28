@@ -297,7 +297,7 @@ static fz_buffer *read_zip_entry(fz_context *ctx, fz_archive *arch, const char *
 	fz_buffer *ubuf;
 	unsigned char *cbuf = NULL;
 	int method;
-	z_stream z;
+	zng_stream z;
 	int code;
 	uint64_t len;
 	zip_entry *ent;
@@ -342,18 +342,18 @@ static fz_buffer *read_zip_entry(fz_context *ctx, fz_archive *arch, const char *
 			z.next_out = ubuf->data;
 			z.avail_out = ent->usize;
 
-			code = inflateInit2(&z, -15);
+			code = zng_inflateInit2(&z, -15);
 			if (code != Z_OK)
 			{
 				fz_throw(ctx, FZ_ERROR_GENERIC, "zlib inflateInit2 error: %s", z.msg);
 			}
-			code = inflate(&z, Z_FINISH);
+			code = zng_inflate(&z, Z_FINISH);
 			if (code != Z_STREAM_END)
 			{
-				inflateEnd(&z);
+				zng_inflateEnd(&z);
 				fz_throw(ctx, FZ_ERROR_GENERIC, "zlib inflate error: %s", z.msg);
 			}
-			code = inflateEnd(&z);
+			code = zng_inflateEnd(&z);
 			if (code != Z_OK)
 			{
 				fz_throw(ctx, FZ_ERROR_GENERIC, "zlib inflateEnd error: %s", z.msg);
