@@ -7,7 +7,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 	unsigned char *input_p = input->data;
 	uLong input_n = (uLong) input->len;
 	unsigned char *output_p;
-	uLongf output_n;
+	size_t output_n;
 	int result;
 
 	/* check possible size_t / uLong precision mismatch */

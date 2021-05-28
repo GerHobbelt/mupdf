@@ -330,7 +330,7 @@ flush_strip(fz_context *ctx, pdfocr_band_writer *writer, int fill)
 	/* Buffer is full, compress it and write it. */
 	if (writer->options.compress)
 	{
-		uLongf destLen = writer->complen;
+		size_t destLen = writer->complen;
 		zng_compress(writer->compbuf, &destLen, data, len);
 		len = destLen;
 		data = writer->compbuf;

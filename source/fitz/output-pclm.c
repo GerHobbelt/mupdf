@@ -196,7 +196,7 @@ flush_strip(fz_context *ctx, pclm_band_writer *writer, int fill)
 	/* Buffer is full, compress it and write it. */
 	if (writer->options.compress)
 	{
-		uLong destLen = writer->complen;
+		size_t destLen = writer->complen;
 		result = zng_compress(writer->compbuf, &destLen, data, len);
 		if (result != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error when compressing strip");
