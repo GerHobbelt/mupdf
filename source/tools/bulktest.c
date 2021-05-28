@@ -365,7 +365,7 @@ my_getline(FILE *file, int *linecounter_ref)
 }
 
 static char *
-expand_template_variables(const char* line, int linecounter, int argc, const char** argv)
+expand_template_variables(const char* line, int linecounter, int argc, const char** argv, int datalinecounter)
 {
 	if (line == NULL)
 		return NULL;
@@ -406,6 +406,20 @@ expand_template_variables(const char* line, int linecounter, int argc, const cha
 			*d++ = *m++;
 			space--;
 			s = m;
+		}
+		else if (strncmp(m, "datarow", 7) == 0 || strncmp(m, "{datarow}", 9) == 0)
+		{
+			size_t skip_dist = (strncmp(m, "datarow", 7) == 0 ? 7 : 9);
+			// `%datarow`: print the current dataline number.
+			char rowstr[40];
+			fz_snprintf(rowstr, 40, "%05d", datalinecounter);
+			if (strlen(rowstr) >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+			strncpy(d, rowstr, space);
+			s = m + skip_dist;
+			size_t l = strlen(d);
+			d += l;
+			space -= l;
 		}
 		else if (!*m || !strchr("123456789", *m))
 		{
@@ -1082,7 +1096,7 @@ bulktest_main(int argc, const char *argv[])
 
 					if (script_is_template)
 					{
-						line = expand_template_variables(line, linecounter, template_argc, template_argv);
+						line = expand_template_variables(line, linecounter, template_argc, template_argv, datalinecounter);
 					}
 
 					line_command = line;
