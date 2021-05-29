@@ -512,27 +512,51 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
+    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -564,10 +588,15 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   
+
+
+
+
+
+
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
-       
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
@@ -575,7 +604,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
       <BrowseInformation>false</BrowseInformation>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -592,6 +621,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -628,8 +658,14 @@
     <Link>
       <SubSystem>
       </SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	
+	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
+	
+	  		<OptimizeReferences>true</OptimizeReferences>
+	</Link>
     <CustomBuildStep>
       <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
 robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
@@ -672,8 +708,10 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	</Link>
     <CustomBuildStep>
       <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
 robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
@@ -714,8 +752,14 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
     <Link>
       <SubSystem>
       </SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	
+	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
+	
+	  		<OptimizeReferences>true</OptimizeReferences>
+	</Link>
     <CustomBuildStep>
       <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
 robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
@@ -758,8 +802,10 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	</Link>
     <CustomBuildStep>
       <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
 robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*

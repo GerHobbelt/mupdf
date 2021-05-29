@@ -33,28 +33,52 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
     <CLRSupport>false</CLRSupport>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
     <CLRSupport>false</CLRSupport>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
     <CLRSupport>false</CLRSupport>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
     <CLRSupport>false</CLRSupport>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
@@ -94,10 +118,15 @@
     </CustomBuildBeforeTargets>
   </PropertyGroup>
   
+
+
+
+
+
+
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
-       
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
@@ -105,7 +134,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
       <BrowseInformation>false</BrowseInformation>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -122,6 +151,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -152,11 +182,17 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
       <TargetMachine>MachineX86</TargetMachine>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
-    </Link>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	
+	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
+	
+	  		<OptimizeReferences>true</OptimizeReferences>
+	</Link>
     <PreBuildEvent>
       <Command>nmake  -f ..\..\scripts\$(TargetName)\Makefile build    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</Command>
       <Message>Constructing the DLL DEF file...</Message>
@@ -186,10 +222,16 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
-    </Link>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	
+	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
+	
+	  		<OptimizeReferences>true</OptimizeReferences>
+	</Link>
     <PreBuildEvent>
       <Command>nmake  -f ..\..\scripts\$(TargetName)\Makefile build    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</Command>
       <Message>Constructing the DLL DEF file...</Message>
@@ -218,11 +260,17 @@
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>ws2_32.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	
+	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
+	
+	  		<OptimizeReferences>true</OptimizeReferences>
+	</Link>
     <PreBuildEvent>
       <Command>nmake  -f ..\..\scripts\$(TargetName)\Makefile build    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</Command>
       <Message>Constructing the DLL DEF file...</Message>
@@ -251,10 +299,16 @@
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>ws2_32.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
+    
+	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+	
+	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
+	
+	  		<OptimizeReferences>true</OptimizeReferences>
+	</Link>
     <PreBuildEvent>
       <Command>nmake  -f ..\..\scripts\$(TargetName)\Makefile build    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</Command>
       <Message>Constructing the DLL DEF file...</Message>
