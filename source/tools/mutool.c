@@ -6,6 +6,7 @@
 #include "mupdf/fitz.h"
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
 #include "../../thirdparty/owemdjee/libwebp/extras/tools.h"
+#include "../../thirdparty/owemdjee/pmt-png-tools/pngtools-monolithic.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
@@ -97,6 +98,14 @@ static struct {
 	{ webp_quality_main, "webp_quality", "webp_quality tool" },
 	{ webpinfo_main, "webpinfo", "webpinfo tool" },
 	{ webpmux_main, "webpmux", "webpmux tool" },
+
+	{ pngcrush_main, "pngcrush", "pngcrush tool" },
+	{ pngmeta_main, "pngmeta", "pngmeta tool" },
+	{ pngzop_zlib_to_idat_main, "pngzop_zlib_to_idat", "pngzop_zlib_to_idat tool" },
+	{ pngidat_main, "pngidat", "pngidat tool" },
+	{ pngiend_main, "pngiend", "pngiend tool" },
+	{ pngihdr_main, "pngihdr", "pngihdr tool" },
+
 };
 
 static int

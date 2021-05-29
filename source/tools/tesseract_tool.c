@@ -45,11 +45,6 @@ int main(int argc, const char **argv)
 	//fz_info(ctx, "usage: tesseract <command> [options]");
 	int rv = tesseract_main(argc, argv);
 
-#if 0   // test to see the reverse ordered number gen in this call work as expected.
-	char p[256];
-	fz_format_output_path(NULL, p, sizeof(p), "out-%04d.png", 42);
-#endif
-
 	fz_drop_context(ctx);
 
 	return rv;

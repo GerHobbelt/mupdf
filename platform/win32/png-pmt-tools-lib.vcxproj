@@ -18,42 +18,99 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\png2uri\png2uri.sh" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\ChangeLog.html" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\LICENSE" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\Makefile" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\Makefile-nolib" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\ChangeLog" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\config.h.in" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\configure.in" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\Makefile.am" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\Makefile.old" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\NEWS" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.1" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.spec" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.spec.in" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\README" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test1" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test1.xpt" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test2" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test2.xpt" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test3" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test3.xpt" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test4" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test4.xpt" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop.sh" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_references.html" />
+    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\thirdparty\owemdjee\pmt-png-tools\png2uri\png2uri-README.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop-1.0.2-README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\pngcrush.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_get_idat.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_get_iend.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_get_ihdr.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_zlib_to_idat.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\8859.png" />
+    <Image Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\ct1n0g04.png" />
+    <Image Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\ctzn0g04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\monolithic.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\cexcept.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\pngchunk.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\pngcrush.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libthirdparty.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-d58957ca5e3c}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>sync_nas_filelock</ProjectName>
-    <ProjectGuid>{87EE9DA4-DE1E-4448-8324-183C98F87EAA}</ProjectGuid>
-    <RootNamespace>mupdf</RootNamespace>
+    <ProjectName>png-pmt-tools-lib</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1147A4}</ProjectGuid>
+    <RootNamespace>png-pmt-tools-lib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -65,7 +122,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -75,8 +132,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pmt-png-tools;../../thirdparty/libpng;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG_PMT_TOOLS_LIB;PNG_PMT_TOOLS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -96,7 +153,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -106,17 +163,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -125,8 +175,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pmt-png-tools;../../thirdparty/libpng;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG_PMT_TOOLS_LIB;PNG_PMT_TOOLS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -144,7 +194,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -154,18 +204,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX86</TargetMachine>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -175,8 +217,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pmt-png-tools;../../thirdparty/libpng;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG_PMT_TOOLS_LIB;PNG_PMT_TOOLS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -196,7 +238,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -206,17 +248,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX64</TargetMachine>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
@@ -225,8 +260,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pmt-png-tools;../../thirdparty/libpng;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG_PMT_TOOLS_LIB;PNG_PMT_TOOLS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -244,7 +279,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PNG-PMT-TOOLS-LIB;PNG-PMT-TOOLS-_STATICLIB;BUILDING_PNG-PMT-TOOLS;PNG-PMT-CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -254,26 +289,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX64</TargetMachine>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-    </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="libgoogletest.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="lib_nas_filelock.vcxproj">
-      <Project>{87ee9da4-de1e-4448-8324-183c982a33eb}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\tests\main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
