@@ -139,7 +139,7 @@ src = src
 
 	// now patch the entries and remove those that all build modees have in common:
 	p2 = p2
-	.replace(/<Optimization>[^<]+<\/Optimization>/g, (m) => `<Optimization>${ isDebug ? "Disabled" : "MaxSpeed" }</Optimization>`)
+	.replace(/<Optimization>[^<]+<\/Optimization>/g, (m) => `<Optimization>${ isDebug ? "Custom" : "MaxSpeed" }</Optimization>`)
 	.replace(/<MinimalRebuild>[^<]+<\/MinimalRebuild>/g, (m) => ``)
 	.replace(/<BasicRuntimeChecks>[^<]+<\/BasicRuntimeChecks>/g, (m) => `<BasicRuntimeChecks>${ isDebug ? "EnableFastChecks" : "Default" }</BasicRuntimeChecks>`)
 	.replace(/<RuntimeLibrary>[^<]+<\/RuntimeLibrary>/g, (m) => `<RuntimeLibrary>${ isDebug ? "MultiThreadedDebugDLL" : "MultiThreadedDLL" }</RuntimeLibrary>`)

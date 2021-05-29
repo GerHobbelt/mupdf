@@ -91,7 +91,7 @@
   
 <ItemDefinitionGroup>
     <ClCompile>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Custom</Optimization>
        
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -140,7 +140,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='DLL-Import Debug'" Label="Debug Configuration">
     <ClCompile>
       <PreprocessorDefinitions>USE_PRECOMPILED_HEADERS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Custom</Optimization>
       
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       
@@ -174,7 +174,7 @@
     <ClCompile>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Disabled</Optimization>
+			<Optimization>Custom</Optimization>
       <PreprocessorDefinitions>USE_PRECOMPILED_HEADERS;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -182,7 +182,7 @@
     <ClCompile>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Disabled</Optimization>
+			<Optimization>Custom</Optimization>
       <PreprocessorDefinitions>NDEBUG;USE_PRECOMPILED_HEADERS;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -209,7 +209,7 @@
     <ClCompile>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Disabled</Optimization>
+			<Optimization>Custom</Optimization>
       
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
