@@ -1059,6 +1059,9 @@ bulktest_main(int argc, const char *argv[])
 
 			do
 			{
+				int if_level = 0;
+				int skip_if_block[20];
+
 				// oh, and REWIND that (template) scriptfile again!
 				fseek(script, 0, SEEK_SET);
 				linecounter = 0;
@@ -1117,11 +1120,63 @@ bulktest_main(int argc, const char *argv[])
 						fz_info(ctx, "L#%04d: %s", linecounter, line);
 					}
 
+					// check if this statement is obscured by an outer IF/ENDIF condition
+					int skip_this_statement = FALSE;
+					for (int i = 0; i < if_level; i++)
+					{
+						if (skip_if_block[i])
+						{
+							skip_this_statement = TRUE;
+							break;
+						}
+					}
+
 					begin_time = Curl_now();
 
 					if (match(&line, "%"))
 					{
 						/* Comment */
+						report_time = false;
+					}
+					else if (match(&line, "IF"))
+					{
+						int condition = strtol(line, &line, 10);
+						int maxdepth = sizeof(skip_if_block) / sizeof(skip_if_block[0]);
+
+						if (if_level >= maxdepth)
+						{
+							fz_error(ctx, "ERR: IF statements nested too deep (more than %d levels) at line %d.", maxdepth, linecounter);
+							errored++;
+						}
+						else
+						{
+							skip_if_block[if_level++] = !condition;
+						}
+						report_time = false;
+					}
+					else if (match(&line, "ELSE"))
+					{
+						if (if_level < 0)
+						{
+							fz_error(ctx, "ERR: unmatched superfluous ELSE statement at line %d.", linecounter);
+							errored++;
+						}
+						else
+						{
+							skip_if_block[if_level - 1] = !skip_if_block[if_level - 1];
+						}
+						report_time = false;
+					}
+					else if (match(&line, "ENDIF"))
+					{
+						if_level--;
+						if (if_level < 0)
+						{
+							if_level = 0;
+
+							fz_error(ctx, "ERR: unmatched superfluous ENDIF statement at line %d.", linecounter);
+							errored++;
+						}
 						report_time = false;
 					}
 					else if (match(&line, "LABEL:"))
@@ -1140,9 +1195,9 @@ bulktest_main(int argc, const char *argv[])
 						}
 						report_time = false;
 					}
-					else if (*skip_to_label)
+					else if (*skip_to_label || skip_this_statement)
 					{
-						// skip command as we're skipping to label X
+						// skip command as we're skipping to label X / out of an IF/ELSE/ENDIF conditional block
 						fz_info(ctx, "SKIPPING: %s\n", line);
 						report_time = false;
 					}
