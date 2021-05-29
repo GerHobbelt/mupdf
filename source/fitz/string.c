@@ -372,7 +372,7 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 			// do reckon with the situation where no %d has been encountered yet.
 			size_t l;
 
-			if (!done)
+			if (!done && page != 0)
 			{
 				p = fz_path_basename(s);
 				p = strrchr(p, '.');
