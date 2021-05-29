@@ -2621,7 +2621,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 		}
 
-		if (output_format == OUT_SVG)
+		if (output_format == OUT_SVG || output_format == OUT_PNG || output_format == OUT_PSD)
 		{
 			/* SVG files are always opened for each page. */
 			output_file_per_page = 1;
