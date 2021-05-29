@@ -17,6 +17,9 @@ static const char *PDF_NAME_LIST[] = {
 
 #define PDF_DEFAULT_PRINT_DEPTH   11
 
+// when to trigger the "restricted mode"? When buffer reaches this size:
+#define JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD    10000
+
 // mask to extract only the flags suitable for fz_format_printf():
 #define PDF_SMART_MOD_MASK			(PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX | PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX)
 
@@ -2512,6 +2515,7 @@ struct fmt
 	char *ptr; /* buffer we're writing to, maybe dynamically reallocated */
 	size_t cap;
 	size_t len;
+	size_t restricted_size_limit;
 	int indent;
 	int tight;
 	int ascii;
@@ -3249,6 +3253,7 @@ pdf_sprint_encrypted_obj(fz_context* ctx, char* buf, size_t cap, size_t* len, pd
 		fmt.depth = PDF_DEFAULT_PRINT_DEPTH;
 	}
 	fmt.flags = (flags & ~PDF_PRINT_JSON_DEPTH_LEVEL(~0));
+	fmt.restricted_size_limit = JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD;
 	fmt.len = 0;
 	fmt.crypt = crypt;
 	fmt.num = num;
@@ -3316,9 +3321,6 @@ static int is_xml_metadata(fz_context* ctx, pdf_obj* obj)
 	return 0;
 }
 
-// when to trigger the "restricted mode"? When buffer reaches this size:
-#define JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD    10000
-
 static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 {
 	int i, n;
@@ -3326,7 +3328,7 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	int restricted = (old_flags & PDF_PRINT_LIMITED_ARRAY_DUMP);
 	int restricted_is_active = (old_flags & PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE);
 
-	if (restricted && fmt->len > JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD)
+	if (restricted && fmt->len > fmt->restricted_size_limit)
 	{
 		restricted_is_active = 1;
 
@@ -3350,6 +3352,8 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	fmt_putc(ctx, fmt, '[');
 	int old_indent = fmt->indent;
 	fmt->indent++;
+	size_t old_size_limit = fmt->restricted_size_limit;
+	fmt->restricted_size_limit = fz_maxz(100, (fmt->restricted_size_limit * 2) / fmt->indent);
 	fz_try(ctx)
 	{
 		for (i = 0; i < n; i++) 
@@ -3382,6 +3386,7 @@ static void fmt_array_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 		// when done, reset flags
 		fmt->flags = old_flags;
+		fmt->restricted_size_limit = old_size_limit;
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
@@ -3393,7 +3398,7 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	int restricted = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP);
 	int restricted_is_active = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE);
 
-	if (restricted && fmt->len > JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD)
+	if (restricted && fmt->len > fmt->restricted_size_limit)
 	{
 		restricted_is_active = 1;
 
@@ -3417,6 +3422,8 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	fmt_puts(ctx, fmt, "{\n");
 	int old_indent = fmt->indent;
 	fmt->indent++;
+	size_t old_size_limit = fmt->restricted_size_limit;
+	fmt->restricted_size_limit = fz_maxz(100, (fmt->restricted_size_limit * 2) / fmt->indent);
 	fz_try(ctx)
 	{
 		if (pdf_is_embedded_file(ctx, obj))
@@ -3656,6 +3663,7 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	}
 	fz_always(ctx)
 	{
+		fmt->restricted_size_limit = old_size_limit;
 		fmt->indent = old_indent;
 		fmt_indent(ctx, fmt);
 		fmt_putc(ctx, fmt, '}');
@@ -3738,7 +3746,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				// `data` will be freed when we drop xml_buf:
 				xml_buf = fz_new_buffer_from_data(ctx, data, datalen);
 
-				if (!restricted_is_active && (!restricted || (datalen < JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD / 10)))
+				if (!restricted_is_active && (!restricted || (datalen < fmt->restricted_size_limit)))
 				{
 					fmt_indent(ctx, fmt);
 					int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
@@ -3797,7 +3805,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 					}
 					xml_root = fz_xml_root(xml_doc);
 
-					if (!restricted_is_active && (!restricted || (datalen < JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD / 10)))
+					if (!restricted_is_active && (!restricted || (datalen < fmt->restricted_size_limit / 4)))
 					{
 						fmt_indent(ctx, fmt);
 						fmt_printf(ctx, fmt, "%q: \"", "parsed_data");
@@ -3985,6 +3993,7 @@ pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_
 		fmt.depth = PDF_DEFAULT_PRINT_DEPTH;
 	}
 	fmt.flags = (flags & ~PDF_PRINT_JSON_DEPTH_LEVEL(~0));
+	fmt.restricted_size_limit = JSON_RESTRICTED_MODE_BUFFER_SIZE_THRESHOLD;
 	fmt.len = 0;
 	fmt.crypt = NULL;
 	fmt.num = 0;
