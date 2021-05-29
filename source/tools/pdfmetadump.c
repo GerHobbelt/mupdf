@@ -1715,43 +1715,47 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 			fz_separations* seps = pdf_page_separations(ctx, page_obj);
 			int count = fz_count_separations(ctx, seps);
 			write_item_int(ctx, out, "PageSeparationsCount", count);
-			write_item_int(ctx, out, "PageActiveSeparationsCount", fz_count_active_separations(ctx, seps));
 
-			write_item_starter_block(ctx, out, "PageSeparations", '[');
-
-			int i;
-			for (i = 0; i < count; i++)
+			if (count)
 			{
-				write_sep(ctx, out);
-				write_level_start(ctx, out, '{');
+				write_item_int(ctx, out, "PageActiveSeparationsCount", fz_count_active_separations(ctx, seps));
 
-				write_item(ctx, out, "PageSeparationName", fz_separation_name(ctx, seps, i));
+				write_item_starter_block(ctx, out, "PageSeparations", '[');
 
-				fz_separation_behavior behaviour = fz_separation_current_behavior(ctx, seps, i);
-				char buf[100];
-				const char* beh_descr = buf;
-
-				switch (behaviour)
+				int i;
+				for (i = 0; i < count; i++)
 				{
-				case FZ_SEPARATION_COMPOSITE:
-					beh_descr = "Composite";
-					break;
-				case FZ_SEPARATION_SPOT:
-					beh_descr = "Spot";
-					break;
-				case FZ_SEPARATION_DISABLED:
-					beh_descr = "Disabled";
-					break;
-				default:
-					fz_snprintf(buf, sizeof(buf), "UNKOWN-%d", behaviour);
-					break;
+					write_sep(ctx, out);
+					write_level_start(ctx, out, '{');
+
+					write_item(ctx, out, "PageSeparationName", fz_separation_name(ctx, seps, i));
+
+					fz_separation_behavior behaviour = fz_separation_current_behavior(ctx, seps, i);
+					char buf[100];
+					const char* beh_descr = buf;
+
+					switch (behaviour)
+					{
+					case FZ_SEPARATION_COMPOSITE:
+						beh_descr = "Composite";
+						break;
+					case FZ_SEPARATION_SPOT:
+						beh_descr = "Spot";
+						break;
+					case FZ_SEPARATION_DISABLED:
+						beh_descr = "Disabled";
+						break;
+					default:
+						fz_snprintf(buf, sizeof(buf), "UNKOWN-%d", behaviour);
+						break;
+					}
+					write_item(ctx, out, "PageSeparationBehaviour", beh_descr);
+
+					write_level_end(ctx, out, '}');
 				}
-				write_item(ctx, out, "PageSeparationBehaviour", beh_descr);
 
-				write_level_end(ctx, out, '}');
+				write_level_end(ctx, out, ']');
 			}
-
-			write_level_end(ctx, out, ']');
 
 			fz_drop_separations(ctx, seps);
 		}
