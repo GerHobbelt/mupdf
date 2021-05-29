@@ -99,7 +99,38 @@
     <NMakeReBuildCommandLine>nmake  -f ..\..\scripts\$(TargetName)\Makefile rebuild    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>nmake  -f ..\..\scripts\$(TargetName)\Makefile clean    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</NMakeCleanCommandLine>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+  
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="..\..\scripts\qiqqa-mutools-packager\installer-info-after.txt" />

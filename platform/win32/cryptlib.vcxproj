@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Microsoft documentation for VCXPROJ file format is located at -->
+  <!-- the following URL. The documentation leaves a lot to be desired. -->
+  <!-- https://msdn.microsoft.com/en-us/library/2208a1f2.aspx -->
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Debug|Win32">
+      <Configuration>DLL-Import Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Debug|x64">
+      <Configuration>DLL-Import Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Release|Win32">
+      <Configuration>DLL-Import Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Release|x64">
+      <Configuration>DLL-Import Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <!-- Microsoft documentation clearly shows the Global property group -->
+  <!-- preceeds the import of Cpp.Default.props and Cpp.props -->
+  <!-- https://msdn.microsoft.com/en-us/library/2208a1f2.aspx -->
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{c39f4b46-6e89-4074-902e-ca57073044d2}</ProjectGuid>
+    <RootNamespace>mupdf</RootNamespace>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <!-- Use DefaultPlatformToolset after Microsoft.Cpp.Default.props -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <!-- Set DefaultPlatformToolset to v100 (VS2010) if not defined -->
+  <PropertyGroup Label="EmptyDefaultPlatformToolset">
+    <DefaultPlatformToolset Condition=" '$(DefaultPlatformToolset)' == '' ">v100</DefaultPlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="PlatformToolset">
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <!-- End of Visual Studio boilerplate -->
+  <!-- All Configurations -->
+  <PropertyGroup Label="All Configurations">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <!-- Intermediate and Output directories -->
+  <!-- Cryptlib and Cryptest need extra care due to Non-DLL/DLL configs -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'" Label="Non-DLL Directories">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='DLL-Import Debug'" Label="DLL Directories">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='DLL-Import Release'" Label="DLL Directories">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <!-- All Configurations -->
+  
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Label="All Configurations">
+    <ClCompile>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+			<Optimization>MaxSpeed</Optimization>
+      
+      <ErrorReporting>Prompt</ErrorReporting>
+      
+      <DisableSpecificWarnings>4231;4251;4275;4355;4505;4244;4242;4018;4146;4245;4267</DisableSpecificWarnings>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalOptions>$(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <ErrorReporting>NoErrorReport</ErrorReporting>
+    </Lib>
+  </ItemDefinitionGroup>
+  <!-- Debug Configurations -->
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='DLL-Import Debug'" Label="Debug Configuration">
+    <ClCompile>
+      <PreprocessorDefinitions>USE_PRECOMPILED_HEADERS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Disabled</Optimization>
+      
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <!-- Release Configurations -->
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='DLL-Import Release'" Label="Release Configuration">
+    <ClCompile>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>NDEBUG;USE_PRECOMPILED_HEADERS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>MaxSpeed</Optimization>
+      
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      
+      
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <!-- DLL-Import Overrides for Preprocessor -->
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='DLL-Import Debug'" Label="DLL Debug Configuration">
+    <ClCompile>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+			<Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>USE_PRECOMPILED_HEADERS;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='DLL-Import Release'" Label="DLL Debug Configuration">
+    <ClCompile>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+			<Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>NDEBUG;USE_PRECOMPILED_HEADERS;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!-- X86 Configurations -->
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'" Label="X86 Configuration">
+    <ClCompile>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+			<Optimization>MaxSpeed</Optimization>
+      
+    </ClCompile>
+    <Lib>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Lib>
+  </ItemDefinitionGroup>
+  <!-- X64 Configurations -->
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'" Label="X64 Configuration">
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+			<Optimization>Disabled</Optimization>
+      
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MultiProcessorCompilation>
+      <StringPooling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</StringPooling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ConformanceMode>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdcpp17</LanguageStandard>
+      <LanguageStandard_C Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdc17</LanguageStandard_C>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!-- Original File with special treatment -->
+  <!-- Source Files -->
+  <!-- The order of the first three matters -->
+  <ItemGroup>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cryptlib.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cpu.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\integer.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\3way.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\adler32.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\algebra.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\algparam.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\allocate.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\arc4.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\aria.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\aria_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ariatab.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\asn.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\authenc.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\base32.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\base64.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\basecode.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\bfinit.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\blake2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\blake2s_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\blake2b_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\blowfish.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\blumshub.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\camellia.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cast.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\casts.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cbcmac.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ccm.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\chacha.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\chacha_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\chacha_avx.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\chachapoly.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cham.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cham_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\channels.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\cmac.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\crc.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\crc_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\darn.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\default.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\des.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dessp.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dh.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dh2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dilithium.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dilithium_ntt.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dilithium_poly.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dilithium_utils.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dll.cpp">
+      <PrecompiledHeader />
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\donna_32.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\donna_64.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\donna_sse.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dsa.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\eax.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ec2n.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\eccrypto.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ecp.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\elgamal.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\emsa2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\eprecomp.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\esign.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\files.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\filters.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\fips140.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\fipstest.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gcm.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gcm_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gf256.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gf2_32.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gf2n.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gf2n_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gfpcrypt.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gost.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\gzip.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\hc128.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\hc256.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\hex.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\hight.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\hmac.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\hrtimer.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ida.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\idea.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\iterhash.cpp">
+      <PrecompiledHeader />
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\kalyna.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\kalynatab.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\keccak.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\keccak_core.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\keccak_simd.cpp" />
+    <ClCOmpile Include="..\..\thirdparty\owemdjee\cryptpp\kyber.cpp" />
+    <ClCOmpile Include="..\..\thirdparty\owemdjee\cryptpp\kyber_ntt.cpp" />
+    <ClCOmpile Include="..\..\thirdparty\owemdjee\cryptpp\kyber_poly.cpp" />
+    <ClCOmpile Include="..\..\thirdparty\owemdjee\cryptpp\kyber_utils.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lea.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lea_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lsh256.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lsh256_sse.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lsh256_avx.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lsh512.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lsh512_sse.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\lsh512_avx.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\luc.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\mars.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\marss.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\md2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\md4.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\md5.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\misc.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\modes.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\mqueue.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\mqv.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\nbtheory.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\oaep.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\osrng.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\padlkrng.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\panama.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\pkcspad.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\poly1305.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\polynomi.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\pssr.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\pubkey.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\queue.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rabin.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\randpool.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rabbit.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rc2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rc5.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rc6.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rdrand.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rdtables.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rijndael.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rijndael_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ripemd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rng.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rsa.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\rw.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\saber.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\saber_poly.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\saber_utils.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\safer.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\salsa.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\scrypt.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\seal.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\seed.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\serpent.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sha.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sha_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sha3.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\shacal2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\shacal2_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\shake.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\shark.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sharkbox.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\simeck.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\simon.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\simon128_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\simple.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\skipjack.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sm3.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sm4.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sm4_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sosemanuk.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\speck.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\speck128_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\square.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\squaretb.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\sse_simd.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\strciphr.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\tea.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\tftables.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\threefish.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\tiger.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\tigertab.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\ttmac.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\tweetnacl.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\twofish.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\vmac.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\wake.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\whrlpool.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\xed25519.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\xtr.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\xtrcrypt.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\xts.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\zdeflate.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\zinflate.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\zlib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\thirdparty\owemdjee\cryptpp\adhoc.cpp.proto">
+      <Command>
+        if not exist adhoc.cpp copy "%(FullPath)" adhoc.cpp
+        echo: &gt;&gt; adhoc.cpp.copied
+      </Command>
+      <Outputs>adhoc.cpp.copied;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="..\..\thirdparty\owemdjee\cryptpp\Doxyfile" />
+    <None Include="..\..\thirdparty\owemdjee\cryptpp\GNUmakefile" />
+    <None Include="..\..\thirdparty\owemdjee\cryptpp\License.txt" />
+    <None Include="..\..\thirdparty\owemdjee\cryptpp\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Condition="'$(Platform)'=='Win32'" Include="..\..\thirdparty\owemdjee\cryptpp\rdrand.asm">
+      <Message>Building and assembling rdrand.asm</Message>
+      <Command>ml.exe /c /nologo /D_M_X86 /W3 /Cx /Zi /safeseh /Fo"$(IntDir)rdrand-x86.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)\rdrand-x86.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptpp\rdrand.asm">
+      <Message>Building and assembling rdrand.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Cx /Zi /Fo"$(IntDir)rdrand-x64.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)\rdrand-x64.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='Win32'" Include="..\..\thirdparty\owemdjee\cryptpp\rdseed.asm">
+      <Message>Building and assembling rdseed.asm</Message>
+      <Command>ml.exe /c /nologo /D_M_X86 /W3 /Cx /Zi /safeseh /Fo"$(IntDir)rdseed-x86.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)\rdseed-x86.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptpp\rdseed.asm">
+      <Message>Building and assembling rdseed.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Cx /Zi /Fo"$(IntDir)rdseed-x64.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)\rdseed-x64.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64' AND ('$(Configuration)'=='Debug' Or '$(Configuration)'=='Release')" Include="..\..\thirdparty\owemdjee\cryptpp\x64dll.asm">
+      <Message>Building and assembling x64dll.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64dll.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)x64dll.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptpp\x64masm.asm">
+      <Message>Building and Assembling x64masm.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64masm.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)x64masm.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\3way.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\adler32.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\adv_simd.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\aes.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\algebra.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\algparam.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\allocate.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\arc4.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\aria.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\argnames.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\asn.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\authenc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\base32.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\base64.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\basecode.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\blake2.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\blowfish.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\blumshub.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\camellia.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\cast.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\cbcmac.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ccm.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\chacha.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\chachapoly.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\cham.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\channels.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\cmac.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_align.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_asm.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_cpu.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_cxx.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_dll.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_int.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_misc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_ns.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_os.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\config_ver.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\cpu.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\crc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\cryptlib.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\darn.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\default.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\des.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\dh.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\dh2.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\dilithium.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\dmac.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\drbg.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\donna.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\donna_32.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\donna_64.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\donna_sse.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\dsa.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\eax.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ec2n.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\eccrypto.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ecp.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ecpoint.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\elgamal.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\emsa2.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\eprecomp.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\esign.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\files.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\filters.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\fips140.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\fhmqv.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\fltrimpl.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gcm.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gf256.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gf2_32.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gf2n.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gfpcrypt.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gost.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\gzip.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hc128.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hc256.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hex.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hight.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hkdf.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hmac.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hmqv.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\hrtimer.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ida.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\idea.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\integer.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\iterhash.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\kalyna.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\keccak.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\kyber.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\lubyrack.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\lea.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\lsh.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\luc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\mars.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\md2.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\md4.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\md5.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\mdc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\misc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\modarith.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\modes.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\modexppc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\mqueue.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\mqv.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\naclite.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\nbtheory.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\nr.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\oaep.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\oids.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\osrng.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\padlkrng.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\panama.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\pch.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\pkcspad.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\poly1305.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\polynomi.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\pssr.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\pubkey.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\pwdbased.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\queue.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rabin.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\randpool.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rabbit.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rc2.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rc5.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rc6.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rdrand.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rijndael.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ripemd.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rng.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rsa.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\rw.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\saber.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\safer.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\salsa.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\scrypt.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\seal.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\secblock.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\secblockfwd.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\seckey.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\seed.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\serpent.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\sha.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\sha3.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\shacal2.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\shake.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\shark.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\simple.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\simeck.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\simon.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\siphash.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\skipjack.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\sm3.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\sm4.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\smartptr.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\sosemanuk.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\speck.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\square.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\stdcpp.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\strciphr.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\tea.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\threefish.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\tiger.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\trap.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\trunhash.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\ttmac.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\tweetnacl.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\twofish.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\vmac.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\wake.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\whrlpool.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\words.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\xed25519.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\xtr.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\xtrcrypt.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\xts.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\zdeflate.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\zinflate.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\zlib.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

@@ -563,15 +563,47 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  
+<ItemDefinitionGroup>
     <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
       <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+			<Optimization>Disabled</Optimization>
+      
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
+      
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -581,17 +613,17 @@
       <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <SDLCheck>false</SDLCheck>
-      <StringPooling>true</StringPooling>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ExceptionHandling>Async</ExceptionHandling>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
     </ClCompile>
     <Link>
       <SubSystem>
@@ -615,13 +647,14 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>
-      </SDLCheck>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+			<Optimization>MaxSpeed</Optimization>
+      
+      
+      
+      
       <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
@@ -629,10 +662,10 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
+      
+      
+      
+      
     </ClCompile>
     <Link>
       <SubSystem>
@@ -658,24 +691,25 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>
-      </SDLCheck>
+			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+			<Optimization>Disabled</Optimization>
+      
+      
       <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
+      
+      
+      
+      
+      
     </ClCompile>
     <Link>
       <SubSystem>
@@ -699,13 +733,14 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>
-      </SDLCheck>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+			<Optimization>MaxSpeed</Optimization>
+      
+      
+      
+      
       <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
@@ -713,10 +748,10 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
+      
+      
+      
+      
     </ClCompile>
     <Link>
       <SubSystem>
