@@ -1,58 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Microsoft documentation for VCXPROJ file format is located at -->
-  <!-- the following URL. The documentation leaves a lot to be desired. -->
-  <!-- https://msdn.microsoft.com/en-us/library/2208a1f2.aspx -->
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Debug|Win32">
+    <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Debug|x64">
+    <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Release|Win32">
+    <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\Release|x64">
+    <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Debug|Win32">
-      <Configuration>DLL-Import Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Debug|x64">
-      <Configuration>DLL-Import Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Release|Win32">
-      <Configuration>DLL-Import Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="..\..\thirdparty\owemdjee\cryptpp\DLL-Import Release|x64">
-      <Configuration>DLL-Import Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <!-- Microsoft documentation clearly shows the Global property group -->
-  <!-- preceeds the import of Cpp.Default.props and Cpp.props -->
-  <!-- https://msdn.microsoft.com/en-us/library/2208a1f2.aspx -->
   <PropertyGroup Label="Globals">
     <ProjectGuid>{09cdac08-e6ae-48a9-8de7-0fbc779eebde}</ProjectGuid>
     <RootNamespace>mupdf</RootNamespace>
-    <ConfigurationType>Application</ConfigurationType>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
-  <!-- Use DefaultPlatformToolset after Microsoft.Cpp.Default.props -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <!-- Set DefaultPlatformToolset to v100 (VS2010) if not defined -->
-  <PropertyGroup Label="EmptyDefaultPlatformToolset">
-    <DefaultPlatformToolset Condition=" '$(DefaultPlatformToolset)' == '' ">v100</DefaultPlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="PlatformToolset">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
 	<WholeProgramOptimization>true</WholeProgramOptimization>
@@ -60,45 +33,66 @@
 	
 	
 	
+    
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+    
+    <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <!-- End of Visual Studio boilerplate -->
-  <!-- All Configurations -->
-  <PropertyGroup Label="All Configurations">
-    <ConfigurationType>Application</ConfigurationType>
-    <TargetName>$(ProjectName)</TargetName>
-    <TargetExt>.exe</TargetExt>
-    <UseOfMfc>false</UseOfMfc>
-    
-    
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
   </PropertyGroup>
-  <!-- Intermediate and Output directories -->
-  <!-- Cryptlib and Cryptest need extra care due to Non-DLL/DLL configs -->
-  <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'" Label="Non-DLL Directories">
+  <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='DLL-Import Debug'" Label="DLL Directories">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  <PropertyGroup>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='DLL-Import Release'" Label="DLL Directories">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <!-- All Configurations -->
   
 
 
-
-
+  
 
 
 <ItemDefinitionGroup>
@@ -131,370 +125,263 @@
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
 </ItemDefinitionGroup>
-<ItemDefinitionGroup Label="All Configurations">
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
-			<Optimization>MaxSpeed</Optimization>
-      
-      <ErrorReporting>None</ErrorReporting>
-      
-      <DisableSpecificWarnings>4231; 4251; 4275; 4355; 4505</DisableSpecificWarnings>
-      <PrecompiledHeader />
-      <PrecompiledHeadeFile />
-      <AdditionalOptions>$(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <Link>
-      <ErrorReporting>NoErrorReport</ErrorReporting>
-      <AdditionalDependencies>cryptlib.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(Platform)\Output\$(Configuration)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)\cryptlib.pdb</ProgramDatabaseFile>
-      <OutputFile>$(OutDir)\cryptest.exe</OutputFile>
-      <SubSystem>Console</SubSystem>
-    
-	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-	
-	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
-	
-	  		<OptimizeReferences>true</OptimizeReferences>
-	</Link>
-  </ItemDefinitionGroup>
-  <!-- Debug Configurations -->
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='DLL-Import Debug'" Label="Debug Configuration">
-    <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization>Custom</Optimization>
-      
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;_CRTDBG_MAP_ALLOC;MUTOOL_AS_BULKTEST_CMD;WIN32;_DEBUG;FT2_BUILD_LIBRARY;OPJ_STATIC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
     </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
-  <!-- Release Configurations -->
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='DLL-Import Release'" Label="Release Configuration">
-    <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
-      <Optimization>MaxSpeed</Optimization>
-      
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      
-      
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-    </ResourceCompile>
     <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-    
-	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-	
-	  		<GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-	</Link>
-  </ItemDefinitionGroup>
-  <!-- DLL-Import Overrides for Preprocessor and Libraries -->
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='DLL-Import Debug'" Label="DLL Debug Configuration">
-    <ClCompile>
-			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(Platform)\DLL_Output\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cryptopp.lib;cryptlib.lib</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-	
-	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
-	
-	  		<OptimizeReferences>true</OptimizeReferences>
-	
-	  		<GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-	</Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='DLL-Import Release'" Label="DLL Debug Configuration">
-    <ClCompile>
-			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>NDEBUG;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(Platform)\DLL_Output\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cryptopp.lib;cryptlib.lib</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-	
-	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
-	
-	  		<OptimizeReferences>true</OptimizeReferences>
-	
-	  		<GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-	</Link>
-  </ItemDefinitionGroup>
-  <!-- X86 Configurations -->
-  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'" Label="X86 Configuration">
-    <ClCompile>
-			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
-			<Optimization>MaxSpeed</Optimization>
-      
-    </ClCompile>
-    <Link>
-      <TargetMachine>MachineX86</TargetMachine>
-      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
-    
-	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-	
-	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
-	
-	  		<OptimizeReferences>true</OptimizeReferences>
-	
-	  		<GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-	</Link>
-  </ItemDefinitionGroup>
-  <!-- X64 Configurations -->
-  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'" Label="X64 Configuration">
-    <Link>
-      <TargetMachine>MachineX64</TargetMachine>
-    
-	  		<LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-	
-	  		<EnableCOMDATFolding>true</EnableCOMDATFolding>
-	
-	  		<OptimizeReferences>true</OptimizeReferences>
-	
-	  		<GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-	</Link>
-  </ItemDefinitionGroup>
-  <!-- FIPS Validated Warning -->
-  <ItemDefinitionGroup Label="FIPS Warning">
-    <PreBuildEvent Condition="'$(Configuration)'=='DLL-Import Debug' Or '$(Configuration)'=='DLL-Import Release'">
-      <Command>
-        echo *************************************************************************
-        echo This configuration requires cryptopp.dll. You can build it yourself using
-        echo the cryptdll project, or obtain a pre-built, FIPS 140-2 validated DLL. If
-        echo you build it yourself the resulting DLL will not be considered FIPS
-        echo validated unless it undergoes the FIPS validation process.
-        echo *************************************************************************
-      </Command>
-    </PreBuildEvent>
-  </ItemDefinitionGroup>
-  <!-- Target for Appvoyer                           -->
-  <!-- The rule copies cryptest.exe to the project   -->
-  <!-- root directory so it can be executed in place -->
-  <Target Name="CopyCryptestToRoot">
-    <Exec Command="copy &quot;$(Platform)\Output\$(Configuration)\cryptest.exe&quot; &quot;$(SolutionDir)&quot;" />
-  </Target>
-  <Target Name="CopyToRoot">
-    <Exec Command="copy &quot;$(Platform)\Output\$(Configuration)\cryptest.exe&quot; &quot;$(SolutionDir)&quot;" />
-  </Target>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Custom</Optimization>
-      
-    </ClCompile>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
     <ClCompile>
-			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<Optimization>Custom</Optimization>
-      
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;_CRTDBG_MAP_ALLOC;MUTOOL_AS_BULKTEST_CMD;WIN64;_DEBUG;FT2_BUILD_LIBRARY;OPJ_STATIC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
     </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
   </ItemDefinitionGroup>
-  <!-- Source Files -->
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;MUTOOL_AS_BULKTEST_CMD;_UNICODE;UNICODE;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;MUTOOL_AS_BULKTEST_CMD;_UNICODE;UNICODE;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\adhoc.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\test.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\bench1.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\bench2.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\bench3.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\datatest.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dilithium_test.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\dlltest.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\fipsalgt.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\kyber_test.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\regtest1.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\regtest2.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\regtest3.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\regtest4.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\saber_test.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat0.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat1.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat2.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat3.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat4.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat5.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat6.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat7.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat8.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat9.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cryptpp\validat10.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\adhoc.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\test.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\bench1.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\bench2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\bench3.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\datatest.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\dilithium_test.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\dlltest.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\fipsalgt.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\kyber_test.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\regtest1.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\regtest2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\regtest3.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\regtest4.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\saber_test.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat0.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat1.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat2.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat3.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat4.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat5.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat6.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat7.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat8.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat9.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cryptopp\validat10.cpp" />
   </ItemGroup>
   <!-- Header Files -->
   <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\bench.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\dilithium_test.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\factory.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\kyber_test.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\saber_test.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\cryptpp\validate.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptopp\bench.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptopp\dilithium_test.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptopp\factory.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptopp\kyber_test.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptopp\saber_test.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\cryptopp\validate.h" />
   </ItemGroup>
   <!-- Test Vectors -->
   <ItemGroup>
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\aes.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\all.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\blake2.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\blake2b.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\blake2s.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\aria.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\camellia.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\ccm.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\chacha.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\chacha_tls.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\cham.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\cmac.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\dlies.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\dsa.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\dsa_1363.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\dsa_rfc6979.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\eax.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\esign.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\gcm.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\hc128.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\hc256.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\hight.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\hkdf.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\hmac.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\kalyna.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\keccak.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\lea.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\mars.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\nr.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\panama.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\Readme.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\rabbit.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\rsa_oaep.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\rsa_pkcs1_1_5.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\rsa_pss.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\rw.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\salsa.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\seal.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\seed.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha1_160_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha1_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha2.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha2_224_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha2_256_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha2_384_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha2_512_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha2_fips_180.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha3.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha3_224_fips_202.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha3_256_fips_202.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha3_384_fips_202.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha3_512_fips_202.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sha3_fips_202.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\shacal2.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\simon.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\siphash.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\simeck.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sm3.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sm4.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\sosemanuk.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\speck.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\tea.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\threefish.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\ttmac.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\vmac.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\wake.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\cryptpp\TestVectors\whrlpool.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\aes.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\all.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\blake2.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\blake2b.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\blake2s.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\aria.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\camellia.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\ccm.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\chacha.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\chacha_tls.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\cham.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\cmac.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\dlies.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\dsa.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\dsa_1363.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\dsa_rfc6979.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\eax.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\esign.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\gcm.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\hc128.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\hc256.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\hight.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\hkdf.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\hmac.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\kalyna.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\keccak.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\lea.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\mars.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\nr.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\panama.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\Readme.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\rabbit.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\rsa_oaep.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\rsa_pkcs1_1_5.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\rsa_pss.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\rw.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\salsa.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\seal.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\seed.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha1_160_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha1_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha2.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha2_224_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha2_256_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha2_384_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha2_512_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha2_fips_180.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha3.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha3_224_fips_202.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha3_256_fips_202.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha3_384_fips_202.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha3_512_fips_202.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sha3_fips_202.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\shacal2.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\simon.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\siphash.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\simeck.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sm3.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sm4.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\sosemanuk.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\speck.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\tea.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\threefish.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\ttmac.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\vmac.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\wake.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\cryptopp\TestVectors\whrlpool.txt" />
   </ItemGroup>
   <!-- Test Data -->
   <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\3desval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\3wayval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\aria.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\camellia.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\cast128v.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\cast256v.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\descert.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\defdmac1.bin" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\defdmac2.bin" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dh1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dh2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dlie1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dlie2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dsa1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dsa1024b.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\dsa512.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\ed25519.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\elgc1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\esig1023.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\esig1536.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\esig2046.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\fhmqv160.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\fhmqv256.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\fhmqv384.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\fhmqv512.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\gostval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\hmqv160.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\hmqv256.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\hmqv384.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\hmqv512.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\ideaval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\luc1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\luc2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\lucc1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\lucc512.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\lucd1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\lucd512.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\lucs1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\lucs512.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\marsval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\mqv1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\mqv2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\nr1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\nr2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rabi1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rabi2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rc2val.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rc5val.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rc6val.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rijndael.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rsa1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rsa2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rsa2048a.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rsa400pb.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rsa400pv.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rsa512a.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rw1024.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\rw2048.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\saferval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\serpentv.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\shacal2v.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\sharkval.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\skipjack.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\squareva.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\twofishv.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\usage.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\x25519.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\xtrdh171.dat" />
-    <None Include="..\..\thirdparty\owemdjee\cryptpp\TestData\xtrdh342.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\3desval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\3wayval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\aria.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\camellia.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\cast128v.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\cast256v.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\descert.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\defdmac1.bin" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\defdmac2.bin" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dh1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dh2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dlie1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dlie2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dsa1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dsa1024b.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\dsa512.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\ed25519.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\elgc1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\esig1023.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\esig1536.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\esig2046.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\fhmqv160.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\fhmqv256.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\fhmqv384.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\fhmqv512.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\gostval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\hmqv160.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\hmqv256.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\hmqv384.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\hmqv512.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\ideaval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\luc1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\luc2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\lucc1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\lucc512.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\lucd1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\lucd512.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\lucs1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\lucs512.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\marsval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\mqv1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\mqv2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\nr1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\nr2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rabi1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rabi2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rc2val.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rc5val.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rc6val.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rijndael.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rsa1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rsa2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rsa2048a.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rsa400pb.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rsa400pv.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rsa512a.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rw1024.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\rw2048.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\saferval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\serpentv.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\shacal2v.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\sharkval.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\skipjack.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\squareva.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\twofishv.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\usage.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\x25519.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\xtrdh171.dat" />
+    <None Include="..\..\thirdparty\owemdjee\cryptopp\TestData\xtrdh342.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
