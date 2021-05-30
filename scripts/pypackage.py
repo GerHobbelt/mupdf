@@ -740,7 +740,7 @@ def main():
                                     ),
                             ],
                         ),
-                jlib.Arg('pypi-test <t:int>',
+                jlib.Arg('pypi-test <test>',
                         help='Whether to use test.pypi.org.',
                         ),
                 jlib.Arg('remote', multi=True,
