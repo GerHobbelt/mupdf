@@ -139,12 +139,13 @@
     <Link>
       <AdditionalDependencies>ws2_32.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AssemblyDebug>true</AssemblyDebug>
       <TargetMachine>MachineX86</TargetMachine>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AssemblyDebug />
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
       <Command>nmake  -f ..\..\scripts\$(TargetName)\Makefile build    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</Command>
@@ -169,11 +170,13 @@
     <Link>
       <AdditionalDependencies>ws2_32.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AssemblyDebug>true</AssemblyDebug>
+      <AssemblyDebug>
+      </AssemblyDebug>
       <ModuleDefinitionFile>libmupdf.def</ModuleDefinitionFile>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
       <Command>nmake  -f ..\..\scripts\$(TargetName)\Makefile build    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</Command>
@@ -249,9 +252,6 @@
     </ProjectReference>
     <ProjectReference Include="..\win32\libmupdf.vcxproj">
       <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
-    </ProjectReference>
-    <ProjectReference Include="cryptlib.vcxproj">
-      <Project>{c39f4b46-6e89-4074-902e-ca57073044d2}</Project>
     </ProjectReference>
     <ProjectReference Include="libcurl.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>

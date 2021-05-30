@@ -478,7 +478,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 	}
 
 	// process the remainder of `src':
-	uint64_t last_legs_value;
+	uint64_t last_legs_value = 0;
 	uint64_t last_legs_bitcount = 0;
 
 	while (srcsize > 0 || bitpos > 0)
