@@ -1942,7 +1942,7 @@ class Arg:
                     sys.stdout.write(f'Help for {syntax}\n\n')
                 sys.stdout.write(arg.help_text(brief=brief))
                 if brief:
-                    sys.stdout.write('Use --help to see full information.\n')
+                    sys.stdout.write('\nUse --help to see full information.\n')
             else:
                 # Show information about the parse failures.
                 sys.stdout.write(str(failures))
@@ -2205,7 +2205,7 @@ class Arg:
 
             # Show self.help_ starting at column <mid>, starting on a second
             # line if we are already too close to or beyond <mid>.
-            if self.help_ and not top_level:
+            if not brief and self.help_ and not top_level:
                 h = Arg._format(self.help_, mid*' ', width, n=1 if brief else None)
                 if h:
                     if len(text) <= mid-2:
