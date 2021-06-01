@@ -2559,7 +2559,7 @@ pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font,
 
 	*font = "Helv";
 	*size = 12;
-	*n = 1;
+	*n = 0;
 	color[0] = color[1] = color[2] = color[3] = 0;
 
 	fz_strlcpy(buf, da, sizeof buf);
@@ -2617,13 +2617,13 @@ pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font,
 }
 
 void
-pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *font, float size, int n, const float color[4])
+pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *font, float size, int n, const float *color)
 {
-	if (n == 4 && (color[0] > 0 || color[1] > 0 || color[2] > 0 || color[3] > 0))
+	if (n == 4)
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g %g %g %g k", font, size, color[0], color[1], color[2], color[3]);
-	else if (n == 3 && (color[0] > 0 || color[1] > 0 || color[2] > 0))
+	else if (n == 3)
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g %g %g rg", font, size, color[0], color[1], color[2]);
-	else if (n == 1 && color[0] > 0)
+	else if (n == 1)
 		fz_snprintf(buf, nbuf, "/%s %g Tf %g g", font, size, color[0]);
 	else
 		fz_snprintf(buf, nbuf, "/%s %g Tf", font, size);
@@ -2642,7 +2642,7 @@ pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **fon
 }
 
 void
-pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, int n, const float color[4])
+pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *font, float size, int n, const float *color)
 {
 	char buf[100];
 
