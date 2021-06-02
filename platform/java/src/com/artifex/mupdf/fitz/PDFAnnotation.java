@@ -235,4 +235,7 @@ public class PDFAnnotation
 
 	public native DefaultAppearance getDefaultAppearance();
 	public native void setDefaultAppearance(String font, float size, float[] color);
+
+	private native void updateAppearanceFromDisplayList(DisplayList dlist);
+	public void updateAppearance(DisplayList dlist) {updateAppearanceFromDisplayList(dlist);}
 }

@@ -1931,6 +1931,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getDefaultAp
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setDefaultAppearance
   (JNIEnv *, jobject, jstring, jfloat, jfloatArray);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFAnnotation
+ * Method:    updateAppearanceFromDisplayList
+ * Signature: (Lcom/artifex/mupdf/fitz/DisplayList;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_updateAppearanceFromDisplayList
+  (JNIEnv *, jobject, jobject);
+
 #ifdef __cplusplus
 }
 #endif
