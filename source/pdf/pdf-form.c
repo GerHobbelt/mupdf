@@ -1867,19 +1867,79 @@ static void pdf_execute_js_action(fz_context *ctx, pdf_document *doc, pdf_obj *t
 	}
 }
 
+static void pdf_execute_hide_action_imp(fz_context *ctx, pdf_document *doc, int hide, pdf_obj *target)
+{
+	pdf_obj *form = pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(Fields), NULL);
+	pdf_widget *widget;
+	pdf_page *page;
+	pdf_obj *pobj;
+	int nbr;
+
+
+	if (pdf_is_string(ctx, target))
+		target = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, target));
+
+	if (!pdf_is_dict(ctx, target))
+		return;
+
+	pobj = pdf_dict_get(ctx, target, PDF_NAME(P));
+	nbr = pdf_lookup_page_number(ctx, doc, pobj);
+	page = pdf_load_page(ctx, doc, nbr);
+
+	fz_try(ctx)
+	{
+		for (widget = pdf_first_widget(ctx, page);
+			widget != NULL;
+			widget = pdf_next_widget(ctx, widget))
+		{
+			if (!pdf_objcmp_resolve(ctx, widget->obj, target))
+			{
+				int flags = pdf_annot_flags(ctx, widget);
+				if (hide)
+					flags |= PDF_ANNOT_IS_HIDDEN;
+				else
+					flags &= ~PDF_ANNOT_IS_HIDDEN;
+				pdf_set_annot_flags(ctx, widget, flags);
+			}
+		}
+	}
+	fz_always(ctx)
+		fz_drop_page(ctx, (fz_page *) page);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
 static void pdf_execute_action_imp(fz_context *ctx, pdf_document *doc, pdf_obj *target, const char *path, pdf_obj *action)
 {
 	pdf_obj *S = pdf_dict_get(ctx, action, PDF_NAME(S));
+
 	if (pdf_name_eq(ctx, S, PDF_NAME(JavaScript)))
 	{
 		if (doc->js)
 			pdf_execute_js_action(ctx, doc, target, path, pdf_dict_get(ctx, action, PDF_NAME(JS)));
 	}
-	if (pdf_name_eq(ctx, S, PDF_NAME(ResetForm)))
+	else if (pdf_name_eq(ctx, S, PDF_NAME(ResetForm)))
 	{
 		pdf_obj *fields = pdf_dict_get(ctx, action, PDF_NAME(Fields));
 		int flags = pdf_dict_get_int(ctx, action, PDF_NAME(Flags));
 		pdf_reset_form(ctx, doc, fields, flags & 1);
+	}
+	else if (pdf_name_eq(ctx, S, PDF_NAME(Hide)))
+	{
+		pdf_obj *h = pdf_dict_get(ctx, action, PDF_NAME(H));
+		int hide = h ? pdf_to_bool(ctx, h) : 1;
+		pdf_obj *t = pdf_dict_get(ctx, action, PDF_NAME(T));
+		if (pdf_is_array(ctx, t))
+		{
+			int i, n = pdf_array_len(ctx, t);
+			fz_warn(ctx, "hide action array");
+			for (i = 0; i < n; ++i)
+				pdf_execute_hide_action_imp(ctx, doc, hide, pdf_array_get(ctx, t, i));
+		}
+		else
+		{
+			pdf_execute_hide_action_imp(ctx, doc, hide, t);
+		}
 	}
 }
 
