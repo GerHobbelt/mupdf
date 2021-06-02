@@ -969,7 +969,8 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 	fz_always(ctx)
 		pdf_end_operation(ctx, annot->page->doc);
 	fz_catch(ctx)
-		fz_rethrow(ctx);}
+		fz_rethrow(ctx);
+}
 
 const char *
 pdf_annot_contents(fz_context *ctx, pdf_annot *annot)
