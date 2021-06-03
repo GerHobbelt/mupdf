@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -146,6 +146,7 @@ enum
 	FZ_IMAGE_PNG,
 	FZ_IMAGE_PNM,
 	FZ_IMAGE_TIFF,
+	FZ_IMAGE_WEBP,
 };
 
 /**
