@@ -937,3 +937,35 @@ FUN(Document_search)(JNIEnv *env, jobject self, jint chapter, jint page, jstring
 
 	return to_QuadArray_safe(ctx, env, hits, n);
 }
+
+JNIEXPORT jobject JNICALL
+FUN(Document_toReflowedDocument)(JNIEnv *env, jobject self, jstring joptions)
+{
+	fz_context *ctx = get_context(env);
+	fz_document *doc = from_Document(env, self);
+	fz_document *newdoc = NULL;
+	fz_stext_options opts;
+	const char *options = NULL;
+
+	fz_var(newdoc);
+
+	if (!ctx) return NULL;
+	if (joptions)
+	{
+		options = (*env)->GetStringUTFChars(env, joptions, NULL);
+		if (!options) return 0;
+	}
+
+	fz_try(ctx)
+	{
+		fz_parse_stext_options(ctx, &opts, options);
+		newdoc = fz_new_xhtml_document_from_document(ctx, doc, &opts);
+	}
+	fz_always(ctx)
+		if (joptions)
+			(*env)->ReleaseStringUTFChars(env, joptions, options);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return to_Document_safe_own(ctx, env, newdoc);
+}
