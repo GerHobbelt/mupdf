@@ -658,6 +658,14 @@ JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Document_hasPermission
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Document_isUnencryptedPDF
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_Document
+ * Method:    toReflowedDocument
+ * Signature: (Ljava/lang/String;)Lcom/artifex/mupdf/fitz/Document;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Document_toReflowedDocument
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif

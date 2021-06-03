@@ -197,4 +197,5 @@ public class Document
 		return false;
 	}
 
+	public native Document toReflowedDocument(String options);
 }
