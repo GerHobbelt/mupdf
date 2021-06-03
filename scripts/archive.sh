@@ -36,6 +36,7 @@ make_submodule_archive mujs
 make_submodule_archive openjpeg
 make_submodule_archive tesseract	unittest
 make_submodule_archive zlib		test contrib
+make_submodule_archive libwebp		tests webp_js
 
 echo gzip $STEM.tar
 pigz -f -k -11 $STEM.tar
