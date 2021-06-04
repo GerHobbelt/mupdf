@@ -204,6 +204,7 @@ int page_contents_changed = 0;
 int page_annots_changed = 0;
 
 static fz_output *trace_file = NULL;
+static char *reflow_options = NULL;
 static int isfullscreen = 0;
 static int showoutline = 0;
 static int showundo = 0;
@@ -1719,6 +1720,46 @@ void reload_document(void)
 	}
 }
 
+static void reflow_document(void)
+{
+	char buf[256];
+	fz_document *new_doc;
+	fz_stext_options opts;
+
+	if (fz_is_document_reflowable(ctx, doc))
+		return;
+
+	fz_drop_outline(ctx, outline);
+
+	fz_parse_stext_options(ctx, &opts, reflow_options);
+
+	printf("Converting document to XHTML...\n");
+
+	new_doc = fz_open_reflowed_document(ctx, doc, &opts);
+	fz_drop_document(ctx, doc);
+	doc = new_doc;
+	pdf = NULL;
+	page = NULL;
+
+	fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
+
+	fz_try(ctx)
+		outline = fz_load_outline(ctx, doc);
+	fz_catch(ctx)
+		outline = NULL;
+
+	fz_strlcpy(buf, filename, sizeof buf);
+	fz_snprintf(filename, sizeof filename, "%s.xhtml", buf);
+
+	load_history();
+
+	if (anchor)
+		jump_to_page(fz_atoi(anchor) - 1);
+	anchor = NULL;
+
+	currentpage = fz_clamp_location(ctx, doc, currentpage);
+}
+
 static void toggle_outline(void)
 {
 	if (outline)
@@ -2489,6 +2530,8 @@ static void do_open_document_dialog(void)
 			load_document();
 			if (doc)
 			{
+				if (reflow_options)
+					reflow_document();
 				load_page();
 				shrinkwrap();
 				update_title();
@@ -2546,7 +2589,7 @@ int main(int argc, char **argv)
 
 	glutInit(&argc, argv);
 
-	while ((c = fz_getopt(argc, argv, "p:r:IW:H:S:U:XJA:B:C:T:Y:")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:r:IW:H:S:U:XJA:B:C:T:Y:R:")) != -1)
 	{
 		switch (c)
 		{
@@ -2565,6 +2608,7 @@ int main(int argc, char **argv)
 		case 'B': currenttint = 1; tint_black = strtol(fz_optarg, NULL, 16); break;
 		case 'T': trace_file_name = fz_optarg; break;
 		case 'Y': scale = fz_atof(fz_optarg); break;
+		case 'R': reflow_options = fz_optarg; break;
 		}
 	}
 
@@ -2621,7 +2665,11 @@ int main(int argc, char **argv)
 			page_tex.h = 700;
 			load_document();
 			if (doc)
+			{
+				if (reflow_options)
+					reflow_document();
 				load_page();
+			}
 		}
 		fz_always(ctx)
 		{
