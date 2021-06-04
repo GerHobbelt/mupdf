@@ -2564,7 +2564,7 @@ pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font,
 
 	*font = "Helv";
 	*size = 12;
-	*n = 1;
+	*n = 0;
 	color[0] = color[1] = color[2] = color[3] = 0;
 
 	fz_strlcpy(buf, da, sizeof buf);
