@@ -1723,6 +1723,11 @@ class Arg:
             Ran out of arguments, expected one of:
                 -i <in>
 
+            >>> parser.parse('-i foo -i bar', exit_=0)
+            Failed at argv[2]='-i', only one instance of -i <in> allowed, expected one of:
+                <command>  (value must not start with "-")
+                -o <out>
+
         Args can be marked as required:
 
             >>> parser = Arg('', subargs=[Arg('-i <in>'), Arg('-o <out>', required=1)])
@@ -1774,11 +1779,10 @@ class Arg:
             <BLANKLINE>
             Usage:
                 foo  (required, multi)
-                                Do foo
-                    -f <file>   Input file
+                    -f <file>
                     -o <file>  (required)
-                                Output file
-                bar <qwerty>    Do bar
+                bar <qwerty>
+            <BLANKLINE>
             Use --help to see full information.
 
         Help for a particular Arg:
@@ -1803,6 +1807,7 @@ class Arg:
             <BLANKLINE>
             Usage:
                 -f <file>
+            <BLANKLINE>
             Use --help to see full information.
 
         Help text from the.help_text() method.
@@ -2006,6 +2011,10 @@ class Arg:
         '''
         if not self.multi and getattr(out, self.name, None) is not None:
             # Already found.
+            if self.syntax_items and pos < len(argv):
+                item = self.syntax_items[0]
+                if item.literal and item.text == argv[pos]:
+                    failures.add(pos, None, f'only one instance of {self.syntax} allowed')
             return None
 
         # Match each item in self.syntax_items[] with an item in argv[],
@@ -2029,6 +2038,7 @@ class Arg:
                     if result is None:
                         result = ArgResult()
                     result._set(item.name, item.name, argv[pos+i])
+
         if self.match_remaining:
             r = argv[pos+len(self.syntax_items):]
             if result is None:
@@ -2123,8 +2133,9 @@ class Arg:
             self.argv = argv
             self.pos = 0
             self.args = []
+            self.misc = []
         def add(self, pos, arg, extra=None):
-            if not arg.name:
+            if arg and not arg.name:
                 log('top-level arg added to failures')
                 log(exception_info())
             if pos < self.pos:
@@ -2132,14 +2143,19 @@ class Arg:
             if pos > self.pos:
                 self.args = []
                 self.pos = pos
-            self.args.append((arg, extra))
+            if arg:
+                self.args.append((arg, extra))
+            else:
+                self.misc.append(extra)
         def __str__(self):
             ret = ''
             if self.pos == len(self.argv):
-                ret += f'Ran out of arguments,'
+                ret += f'Ran out of arguments'
             else:
-                ret += f'Failed at argv[{self.pos}]={self.argv[self.pos]!r},'
-            ret += f' expected one of:\n'
+                ret += f'Failed at argv[{self.pos}]={self.argv[self.pos]!r}'
+            for i in self.misc:
+                 ret += f', {i}'
+            ret += f', expected one of:\n'
             for arg, extra in self.args:
                 ret += f'    {arg.syntax}'
                 more = []
