@@ -81,6 +81,11 @@ LOCAL_SRC_FILES += $(wildcard $(MUPDF_PATH)/generated/resources/fonts/urw/*.c)
 
 LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS)
 
+ifdef USE_EXTRACT
+LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(EXTRACT_CFLAGS)))
+LOCAL_CFLAGS += -DHAVE_EXTRACT
+endif
+
 include $(BUILD_STATIC_LIBRARY)
 
 # --- Build local static libraries for thirdparty libraries ---
@@ -175,6 +180,17 @@ include $(BUILD_STATIC_LIBRARY)
 
 endif  #  USE_TESSERACT
 
+ifdef USE_EXTRACT
+include $(CLEAR_VARS)
+LOCAL_MODULE += mupdf_thirdparty_extract
+LOCAL_SRC_FILES += $(patsubst %,$(MUPDF_PATH)/%,$(EXTRACT_SRC))
+LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(EXTRACT_CFLAGS) $(EXTRACT_BUILD_CFLAGS)))
+LOCAL_CFLAGS += $(filter-out -I%,$(EXTRACT_CFLAGS) $(EXTRACT_BUILD_CFLAGS))
+LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS)
+LOCAL_CFLAGS += -DHAVE_EXTRACT
+include $(BUILD_STATIC_LIBRARY)
+endif
+
 # --- Build the final JNI shared library ---
 
 include $(CLEAR_VARS)
@@ -201,6 +217,10 @@ LOCAL_STATIC_LIBRARIES += mupdf_thirdparty_openjpeg
 ifdef USE_TESSERACT
 LOCAL_STATIC_LIBRARIES += mupdf_thirdparty_leptonica
 LOCAL_STATIC_LIBRARIES += mupdf_thirdparty_tesseract
+endif
+
+ifdef USE_EXTRACT
+LOCAL_STATIC_LIBRARIES += mupdf_thirdparty_extract
 endif
 
 LOCAL_LDLIBS += $(MUPDF_EXTRA_LDLIBS)
