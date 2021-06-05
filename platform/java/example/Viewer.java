@@ -376,6 +376,8 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		else
 			doc = Document.openDocument(documentPath);
 
+		doc = doc.toReflowedDocument("dehyphenate,preserve-images");
+
 		if (doc.needsPassword()) {
 			String pwd;
 			do {
