@@ -969,6 +969,14 @@ JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Image_newNativeFromFile
 
 /*
  * Class:     com_artifex_mupdf_fitz_Image
+ * Method:    newNativeFromBytes
+ * Signature: ([B)J
+ */
+JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Image_newNativeFromBytes
+  (JNIEnv *, jobject, jbyteArray);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Image
  * Method:    getWidth
  * Signature: ()I
  */
@@ -1922,6 +1930,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getDefaultAp
  */
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setDefaultAppearance
   (JNIEnv *, jobject, jstring, jfloat, jfloatArray);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFAnnotation
+ * Method:    updateAppearanceFromDisplayList
+ * Signature: (Lcom/artifex/mupdf/fitz/DisplayList;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_updateAppearanceFromDisplayList
+  (JNIEnv *, jobject, jobject);
 
 #ifdef __cplusplus
 }
