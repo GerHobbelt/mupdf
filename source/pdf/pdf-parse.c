@@ -871,7 +871,6 @@ pdf_parse_journal_obj(fz_context *ctx, pdf_document *doc, fz_stream *stm,
 	int *onum, fz_buffer **ostm)
 {
 	pdf_obj *obj = NULL;
-	int num = 0;
 	pdf_token tok;
 	pdf_lexbuf *buf = &doc->lexbuf.base;
 	int64_t stmofs;

@@ -1113,36 +1113,6 @@ void pdf_discard_journal(fz_context *ctx, pdf_journal *journal)
 	journal->current = NULL;
 }
 
-void
-pdf_serialise_journal(fz_context *ctx, pdf_document *doc, fz_output *out)
-{
-	pdf_journal_entry *entry;
-	int pos = 0, currentpos = 0;
-
-	fz_write_string(ctx, out, "\njournal\n");
-	for (entry = doc->journal->head; entry != NULL; entry = entry->next)
-	{
-		pdf_journal_fragment *frag;
-		fz_write_printf(ctx, out, "entry\n%(\n", entry->title);
-		for (frag = entry->head; frag != NULL; frag = frag->next)
-		{
-			fz_write_printf(ctx, out, "%d 0 obj\n", frag->obj_num, 0);
-			pdf_print_encrypted_obj(ctx, out, frag->inactive, 1, 0, NULL, frag->obj_num, 0);
-			if (frag->stream)
-			{
-				fz_write_printf(ctx, out, "stream\n");
-				fz_write_data(ctx, out, frag->stream->data, frag->stream->len);
-				fz_write_string(ctx, out, "\nendstream");
-			}
-			fz_write_string(ctx, out, "\nendobj\n");
-		}
-		pos++;
-		if (entry == doc->journal->current)
-			currentpos = pos;
-	}
-	fz_write_printf(ctx, out, "endjournal %d\n", currentpos);
-}
-
 static void
 pdf_fingerprint_file(fz_context *ctx, pdf_document *doc, unsigned char digest[16], int i)
 {

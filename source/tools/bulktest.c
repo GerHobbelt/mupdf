@@ -997,8 +997,8 @@ bulktest_main(int argc, const char *argv[])
 		return EXIT_FAILURE;
 	}
 
-	unsigned int linecounter = 0;
-	unsigned int datalinecounter = 0;
+	int linecounter = 0;
+	int datalinecounter = 0;
 	FILE* script = NULL;
 	FILE* datafeed = NULL;
 	const char* scriptname = NULL;
