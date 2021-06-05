@@ -192,7 +192,7 @@ def sdist():
     pipcl callback. If we are a git checkout, return all files known to
     git. Otherwise return all files except for those in build/.
     '''
-    assert os.path.exists(f'{root_dir()}/.git'), f'Cannot make sdist because not a git checkout')
+    assert os.path.exists(f'{root_dir()}/.git'), f'Cannot make sdist because not a git checkout: {root_dir()}'
 
     # Create 'git-info' file containing git ids that identify this tree. For
     # the moment this is a simple text format, but we could possibly use pickle
