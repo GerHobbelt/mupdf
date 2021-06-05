@@ -1220,6 +1220,7 @@ EXPORTS
 	pdf_annot_line_start_style
 	pdf_annot_modification_date
 	pdf_annot_needs_new_ap
+	pdf_annot_needs_resynthesis
 	pdf_annot_obj
 	pdf_annot_opacity
 	pdf_annot_page
@@ -1231,6 +1232,7 @@ EXPORTS
 	pdf_annot_quad_point_count
 	pdf_annot_quadding
 	pdf_annot_rect
+	pdf_annot_request_resynthesis
 	pdf_annot_transform
 	pdf_annot_type
 	pdf_annot_type_from_string
@@ -1246,8 +1248,6 @@ EXPORTS
 	pdf_delete_annot
 	pdf_dirty_annot
 	pdf_drop_annot
-	pdf_drop_annots
-	pdf_drop_widgets
 	pdf_embedded_file_name
 	pdf_embedded_file_stream
 	pdf_embedded_file_type
@@ -1260,7 +1260,6 @@ EXPORTS
 	pdf_layout_text_widget
 	pdf_line_ending_from_name
 	pdf_line_ending_from_string
-	pdf_load_annots
 	pdf_load_embedded_file
 	pdf_load_link_annots
 	pdf_load_name_tree
@@ -1278,6 +1277,7 @@ EXPORTS
 	pdf_print_default_appearance
 	pdf_resolve_link
 	pdf_run_annot
+	pdf_set_annot_active
 	pdf_set_annot_author
 	pdf_set_annot_border
 	pdf_set_annot_color
@@ -1286,6 +1286,7 @@ EXPORTS
 	pdf_set_annot_default_appearance
 	pdf_set_annot_field_value
 	pdf_set_annot_flags
+	pdf_set_annot_hot
 	pdf_set_annot_icon_name
 	pdf_set_annot_ink_list
 	pdf_set_annot_interior_color
@@ -1301,6 +1302,7 @@ EXPORTS
 	pdf_set_annot_quad_points
 	pdf_set_annot_quadding
 	pdf_set_annot_rect
+	pdf_set_annot_resynthesised
 	pdf_set_annot_vertex
 	pdf_set_annot_vertices
 	pdf_set_widget_editing_state
@@ -1469,6 +1471,8 @@ EXPORTS
 	pdf_check_certificate
 	pdf_check_digest
 	pdf_check_signature
+	pdf_check_widget_certificate
+	pdf_check_widget_digest
 	pdf_choice_field_option
 	pdf_choice_field_option_count
 	pdf_choice_widget_is_multiselect
@@ -1524,6 +1528,7 @@ EXPORTS
 	pdf_signature_error_description
 	pdf_signature_format_distinguished_name
 	pdf_signature_get_signatory
+	pdf_signature_get_widget_signatory
 	pdf_signature_info
 	pdf_signature_is_signed
 	pdf_signature_set_value
