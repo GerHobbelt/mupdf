@@ -2792,12 +2792,6 @@ int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_widget *an
 	return ret;
 }
 
-pdf_page *pdf_annot_page(fz_context *ctx, pdf_annot *annot)
-{
-	return annot ? annot->page : NULL;
-
-}
-
 int pdf_annot_needs_new_ap(fz_context *ctx, pdf_annot *annot)
 {
 	return annot ? annot->needs_new_ap : 0;

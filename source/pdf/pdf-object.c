@@ -156,6 +156,8 @@ struct pdf_journal
 #define ARRAY(obj) ((pdf_obj_array *)(obj))
 #define REF(obj) ((pdf_obj_ref *)(obj))
 
+struct fmt;
+
 static int is_xml_metadata(fz_context* ctx, pdf_obj* obj);
 static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj);
 

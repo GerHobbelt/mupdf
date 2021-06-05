@@ -204,7 +204,7 @@ int page_contents_changed = 0;
 int page_annots_changed = 0;
 
 static fz_output *trace_file = NULL;
-static char *reflow_options = NULL;
+static const char *reflow_options = NULL;
 static int isfullscreen = 0;
 static int showoutline = 0;
 static int showundo = 0;
@@ -2645,7 +2645,6 @@ int main(int argc, const char **argv)
 		case 'A': currentaa = fz_atoi(fz_optarg); break;
 		case 'C': currenttint = 1; tint_white = strtol(fz_optarg, NULL, 16); break;
 		case 'B': currenttint = 1; tint_black = strtol(fz_optarg, NULL, 16); break;
-		case 'R': reflow_options = fz_optarg; break;
 		case 'T': trace_file_name = fz_optarg; break;
 		case 'Y': scale = fz_atof(fz_optarg); break;
 		case 'R': reflow_options = fz_optarg; break;
