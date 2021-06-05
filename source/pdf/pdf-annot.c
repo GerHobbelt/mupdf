@@ -78,7 +78,10 @@ check_change(fz_context *ctx, pdf_annot *annot)
 	{
 		pdf_obj *ap_d = pdf_dict_get(ctx, ap, PDF_NAME(D));
 		if (ap_d)
+		{
 			annot->has_new_ap = 1;
+			pdf_set_annot_has_changed(ctx, annot);
+		}
 	}
 	else if (!readonly && annot->is_hot)
 	{
@@ -190,10 +193,7 @@ pdf_load_annots(fz_context *ctx, pdf_page *page, pdf_obj *annots)
 			annot = pdf_new_annot(ctx, page, obj);
 			pdf_begin_implicit_operation(ctx, page->doc);
 			fz_try(ctx)
-			{
 				pdf_update_annot(ctx, annot);
-				annot->has_new_ap = 0;
-			}
 			fz_always(ctx)
 				pdf_end_operation(ctx, page->doc);
 			fz_catch(ctx)
@@ -258,9 +258,51 @@ pdf_bound_annot(fz_context *ctx, pdf_annot *annot)
 }
 
 void
+pdf_annot_request_resynthesis(fz_context *ctx, pdf_annot *annot)
+{
+	if (annot == NULL)
+		return;
+
+	/* Some appearances can NEVER be resynthesised. Spot those here. */
+	if (pdf_name_eq(ctx, pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype)), PDF_NAME(Stamp)))
+	{
+		/* We can't resynthesise a stamp if we don't have the name! */
+		/* In particular, this is the case we hit when we are asked to
+		 * resynthesise an e-sig. Just exit and do nothing. */
+		if (pdf_dict_get(ctx, annot->obj, PDF_NAME(Name)) == NULL)
+			return;
+	}
+
+	annot->needs_new_ap = 1;
+}
+
+int
+pdf_annot_needs_resynthesis(fz_context *ctx, pdf_annot *annot)
+{
+	return annot ? annot->needs_new_ap : 0;
+}
+
+void pdf_set_annot_resynthesised(fz_context *ctx, pdf_annot *annot)
+{
+	if (annot == NULL)
+		return;
+
+	annot->needs_new_ap = 0;
+	pdf_set_annot_has_changed(ctx, annot);
+}
+
+void pdf_set_annot_has_changed(fz_context *ctx, pdf_annot *annot)
+{
+	if (annot == NULL)
+		return;
+
+	annot->has_new_ap = 1;
+}
+
+void
 pdf_dirty_annot(fz_context *ctx, pdf_annot *annot)
 {
-	annot->needs_new_ap = 1;
+	pdf_annot_request_resynthesis(ctx, annot);
 	if (annot->page && annot->page->doc)
 		annot->page->doc->dirty = 1;
 }
@@ -2556,7 +2598,7 @@ void
 pdf_parse_default_appearance(fz_context *ctx, const char *da, const char **font, float *size, int *n, float color[4])
 {
 	char buf[100], *p = buf, *tok, *end;
-	float stack[4] = { 0, 0, 0, 0};
+	float stack[4] = { 0, 0, 0, 0 };
 	int top = 0;
 
 	*font = "Helv";

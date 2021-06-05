@@ -2010,19 +2010,18 @@ static void do_app(void)
 			}
 			search_hit_page = fz_make_location(-1, -1);
 			break;
-
 		default:
-			if (ui.key >= '0' && ui.key <= '9')
-			{
-				number = number * 10 + ui.key - '0';
-			}
-			else
+			if (ui.key < '0' || ui.key > '9')
 			{
 				number = 0;
-				return; // unknown key event
+				return; /* unrecognized key, pass it through */
 			}
-			break;
 		}
+
+		if (ui.key >= '0' && ui.key <= '9')
+			number = number * 10 + ui.key - '0';
+		else
+			number = 0;
 
 		currentpage = fz_clamp_location(ctx, doc, currentpage);
 		while (currentrotate < 0) currentrotate += 360;
@@ -2631,11 +2630,9 @@ int main(int argc, const char **argv)
 			trace_file = fz_new_output_with_path(ctx, trace_file_name, 0);
 		trace_action("var doc, page, annot, widget, widgetstr, hits, tmp;\n");
 		trace_action("function RegressionError() {\n");
-		trace_action("  var e = new Error('');\n");
-		trace_action("	e.name = 'RegressionError';\n");
-		trace_action("	for (var arg in arguments)\n");
-		trace_action("	  e.message += (arg > 0 ? ' ' : '') + arguments[arg];\n");
-		trace_action("	return e;\n");
+		trace_action("  var err = new Error(Array.prototype.join.call(arguments, ' '));\n");
+		trace_action("	err.name = 'RegressionError';\n");
+		trace_action("	return err;\n");
 		trace_action("}\n");
 	}
 

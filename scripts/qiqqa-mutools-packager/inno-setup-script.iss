@@ -36,7 +36,7 @@ LicenseFile=..\..\LICENSES.txt
 InfoBeforeFile=..\..\scripts\qiqqa-mutools-packager\installer-info-before.txt
 InfoAfterFile=..\..\scripts\qiqqa-mutools-packager\installer-info-after.txt
 OutputBaseFilename=qiqqa-mutools-setup
-OutputDir=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\
+OutputDir=tmp
 SetupIconFile=..\..\scripts\qiqqa-mutools-packager\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -48,30 +48,30 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "..\..\LICENSES.txt"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\bulktest.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\curl.exe";                 DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\example1.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\example2.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\glob.exe";                 DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\google-gtest-demos.exe";   DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\googlemock-demos.exe";     DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\googletest-demos.exe";     DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\googletest-samples.exe";   DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\jpeginfo.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\misctests.exe";            DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\misctools.exe";            DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\mudraw.exe";               DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\mupdf-curl.exe";           DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\mupdf-gl.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\mupdf.exe";                DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\MuPDFLib.dll";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\MupdfSharp.exe";           DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\muq-unittest.exe";         DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\muraster.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\murepl.exe";               DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\mutool.exe";               DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\sync_nas_filelock.exe";    DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-32bit-x86\tesseract.exe";            DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpbulktest.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpcurl.exe";                 DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpexample1.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpexample2.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpglob.exe";                 DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpgoogle-gtest-demos.exe";   DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpgooglemock-demos.exe";     DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpgoogletest-demos.exe";     DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpgoogletest-samples.exe";   DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpjpeginfo.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmisctests.exe";            DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmisctools.exe";            DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmudraw.exe";               DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmupdf-curl.exe";           DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmupdf-gl.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmupdf.exe";                DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpMuPDFLib.dll";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpMupdfSharp.exe";           DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmuq-unittest.exe";         DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmuraster.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmurepl.exe";               DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpmutool.exe";               DestDir: "{app}"; Flags: ignoreversion
+Source: "tmpsync_nas_filelock.exe";    DestDir: "{app}"; Flags: ignoreversion
+Source: "tmptesseract.exe";            DestDir: "{app}"; Flags: ignoreversion
 ; ,--- this tessdata stuff is HUGE and has a much lower update frequency than our stuff.
 ;      We should fetch it elsewhere or at least provide it in a separate installer, which can
 ;      be downloaded and executed when that stuff is not present YET.
