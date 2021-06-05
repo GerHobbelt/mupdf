@@ -1,7 +1,7 @@
 #include "timeval.h"
 
 #include "mupdf/fitz.h"
-#include "mupdf/pdf.h"
+#include "pdf-annot-imp.h"
 
 #include <zlib-ng.h>
 

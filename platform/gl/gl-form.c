@@ -33,7 +33,7 @@ static int preview_needs_update = 0;
 static void trace_field_value(pdf_annot *annot, const char *set_value)
 {
 	const char *get_value = pdf_annot_field_value(ctx, annot);
-	trace_action("print('Set field %d:', repr(%q), repr(%q));\n", pdf_to_num(ctx, annot->obj), set_value, get_value);
+	trace_action("print('Set field %d:', repr(%q), repr(%q));\n", pdf_to_num(ctx, pdf_annot_obj(ctx, annot)), set_value, get_value);
 }
 
 int do_sign(void)
@@ -476,11 +476,11 @@ static void show_sig_dialog(pdf_widget *widget)
 
 			verifier = pkcs7_openssl_new_verifier(ctx);
 
-			sig_cert_error = pdf_check_certificate(ctx, verifier, pdf, pdf_annot_obj(ctx, widget));
-			sig_digest_error = pdf_check_digest(ctx, verifier, pdf, pdf_annot_obj(ctx, widget));
+			sig_cert_error = pdf_check_widget_certificate(ctx, verifier, widget);
+			sig_digest_error = pdf_check_widget_digest(ctx, verifier, widget);
 
 			fz_free(ctx, sig_distinguished_name);
-			dn = pdf_signature_get_signatory(ctx, verifier, pdf, pdf_annot_obj(ctx, widget));
+			dn = pdf_signature_get_widget_signatory(ctx, verifier, widget);
 			if (dn)
 				sig_distinguished_name = pdf_signature_format_distinguished_name(ctx, dn);
 			else

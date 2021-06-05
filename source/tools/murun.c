@@ -6400,9 +6400,8 @@ static void ffi_PDFWidget_checkCertificate(js_State *J)
 	fz_var(verifier);
 	fz_try(ctx)
 	{
-		pdf_page* page = pdf_annot_page(ctx, widget);
 		verifier = pkcs7_openssl_new_verifier(ctx);
-		val = pdf_check_certificate(ctx, verifier, page->doc, pdf_annot_obj(ctx, widget));
+		val = pdf_check_widget_certificate(ctx, verifier, widget);
 	}
 	fz_always(ctx)
 		pdf_drop_verifier(ctx, verifier);
@@ -6420,9 +6419,8 @@ static void ffi_PDFWidget_checkDigest(js_State *J)
 	fz_var(verifier);
 	fz_try(ctx)
 	{
-		pdf_page* page = pdf_annot_page(ctx, widget);
 		verifier = pkcs7_openssl_new_verifier(ctx);
-		val = pdf_check_digest(ctx, verifier, page->doc, pdf_annot_obj(ctx, widget));
+		val = pdf_check_widget_digest(ctx, verifier, widget);
 	}
 	fz_always(ctx)
 		pdf_drop_verifier(ctx, verifier);
@@ -6442,9 +6440,8 @@ static void ffi_PDFWidget_getSignatory(js_State *J)
 	fz_var(dn);
 	fz_try(ctx)
 	{
-		pdf_page* page = pdf_annot_page(ctx, widget);
 		verifier = pkcs7_openssl_new_verifier(ctx);
-		dn = pdf_signature_get_signatory(ctx, verifier, page->doc, pdf_annot_obj(ctx, widget));
+		dn = pdf_signature_get_widget_signatory(ctx, verifier, widget);
 		if (dn)
 		{
 			char *s = pdf_signature_format_distinguished_name(ctx, dn);
