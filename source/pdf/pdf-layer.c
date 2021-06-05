@@ -531,8 +531,9 @@ calc_ve_state(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usag
 	pdf_obj *obj;
 
 	if (pdf_is_dict(ctx, ve))
-	{ // an OCG: return its state
-		return !pdf_is_hidden_ocg(ctx, doc, rdb, usage, ve);
+	{
+		// an OCG: return its state
+		return !pdf_is_ocg_hidden(ctx, doc, rdb, usage, ve);
 	}
 
 	if (ve_len < 2)

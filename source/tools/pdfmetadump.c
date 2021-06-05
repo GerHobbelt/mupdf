@@ -2197,7 +2197,7 @@ static void warn_print_callback(void* user, const char* message)
 		orig_warn_print(user, message);
 }
 
-static clear_observed_errors_logbuffers(fz_context* ctx)
+static void clear_observed_errors_logbuffers(fz_context* ctx)
 {
 	// make sure all warnings are flushed to output too so we clean it all...
 	fz_flush_warnings(ctx);

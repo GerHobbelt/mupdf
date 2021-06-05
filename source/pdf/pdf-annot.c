@@ -79,7 +79,6 @@ check_change(fz_context *ctx, pdf_annot *annot)
 		pdf_obj *ap_d = pdf_dict_get(ctx, ap, PDF_NAME(D));
 		if (ap_d)
 		{
-			annot->has_new_ap = 1;
 			pdf_set_annot_has_changed(ctx, annot);
 		}
 	}
@@ -87,13 +86,17 @@ check_change(fz_context *ctx, pdf_annot *annot)
 	{
 		pdf_obj *ap_r = pdf_dict_get(ctx, ap, PDF_NAME(R));
 		if (ap_r)
-			annot->has_new_ap = 1;
+		{
+			pdf_set_annot_has_changed(ctx, annot);
+		}
 	}
 	else
 	{
 		pdf_obj *ap_n = pdf_dict_get(ctx, ap, PDF_NAME(N));
 		if (ap_n)
-			annot->has_new_ap = 1;
+		{
+			pdf_set_annot_has_changed(ctx, annot);
+		}
 	}
 }
 

@@ -4034,7 +4034,6 @@ merge_lock_specification(fz_context *ctx, pdf_locked_fields *fields, pdf_obj *lo
 				for (i = 0; i < len; i++)
 				{
 					const char *s = pdf_to_text_string(ctx, pdf_array_get(ctx, f, i), NULL);
-					int r, w;
 
 					for (r = w = 0; r < fields->excludes.len; r++)
 					{
