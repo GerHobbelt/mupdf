@@ -57,7 +57,7 @@ FUN(Image_newNativeFromBytes)(JNIEnv *env, jobject self, jbyteArray jByteArray)
 	fz_context *ctx = get_context(env);
 	fz_image *image = NULL;
 	jbyte *bytes = NULL;
-	fz_buffer *fzbuffer;
+	fz_buffer *buffer = NULL;
 	int count;
 
 	if (!ctx) return 0;
@@ -68,14 +68,13 @@ FUN(Image_newNativeFromBytes)(JNIEnv *env, jobject self, jbyteArray jByteArray)
 	if (!bytes)
 		jni_throw_run(env, "cannot get buffer");
 
-	fz_var(fzbuffer);
+	fz_var(buffer);
 	fz_try(ctx) {
-		fzbuffer = fz_new_buffer(ctx, count);
-		fz_append_data(ctx, fzbuffer, bytes, count);
-		image = fz_new_image_from_buffer(ctx, fzbuffer);
+		buffer = fz_new_buffer_from_copied_data(ctx, bytes, count);
+		image = fz_new_image_from_buffer(ctx, buffer);
 	}
 	fz_always(ctx) {
-		fz_drop_buffer(ctx, fzbuffer);
+		fz_drop_buffer(ctx, buffer);
 		if (bytes) (*env)->ReleaseByteArrayElements(env, jByteArray, bytes, 0);
 	}
 	fz_catch(ctx) {
