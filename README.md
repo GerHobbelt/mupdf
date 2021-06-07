@@ -1,6 +1,6 @@
 # About this fork
 
-This MuPDF fork is geared towards use with Qiqqa (document and citation manager). It is based on the original MuPDF work done by Artifex, *closely tracks the developments overthere* and augments the codebase with other C/C++ based tools, which are useful in and around the Qiqqa document processes, such as 
+This MuPDF fork is geared towards use with [Qiqqa (document and citation manager)](https://github.com/jimmejardine/qiqqa-open-source/). It is based on the original MuPDF work done by Artifex, *closely tracks the developments overthere* and augments the codebase with other C/C++ based tools, which are useful in and around the Qiqqa document processes, such as 
 
 - text extraction
 - metadata extraction (including annotations)
@@ -88,7 +88,9 @@ Install/unpack the entire set using:
 
 # Problems? Questions? Anything to report?
 
-Please file an issue in this repository (or over at the Qiqqa repository; be sure to mention this repository or at least "mupdf fork" then); unless redirected by the fork maintainer(s), file trouble here before bothered Artifex: chances are we introduced a bug somewhere and it wouldn't be very polite to bother and load them with that.
+Please file an issue in this repository (or [over at the Qiqqa repository](https://github.com/jimmejardine/qiqqa-open-source/issues); **be sure to mention this repository or at least "mupdf fork" then**); unless redirected by the fork maintainer(s), file trouble here before bothered Artifex: chances are we introduced a bug somewhere and it wouldn't be very polite to bother and load them with that.
+
+
 
 
 ----
