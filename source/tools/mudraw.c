@@ -2627,7 +2627,7 @@ int mudraw_main(int argc, const char **argv)
 			output_file_per_page = 1;
 		}
 
-		if ((fz_has_percent_d(output) || output_file_per_page) && strcmp(output, "/dev/output"))
+		if ((fz_has_percent_d(output) || output_file_per_page) && strcmp(output, "/dev/stdout"))
 		{
 			output_file_per_page = 1;
 		}
