@@ -1160,18 +1160,3 @@ FUN(PDFAnnotation_setNativeAppearanceDisplayList)(JNIEnv *env, jobject self, jst
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
 }
-
-JNIEXPORT void JNICALL
-FUN(PDFAnnotation_updateAppearanceFromDisplayList)(JNIEnv *env, jobject self, jobject jdlist)
-{
-	fz_context *ctx = get_context(env);
-	pdf_annot *annot = from_PDFAnnotation(env, self);
-	fz_display_list *dlist = from_DisplayList_safe(env, jdlist);
-
-	if (!ctx || !annot) return;
-
-	fz_try(ctx)
-		pdf_update_appearance_from_display_list(ctx, annot, dlist);
-	fz_catch(ctx)
-		jni_rethrow_void(env, ctx);
-}
