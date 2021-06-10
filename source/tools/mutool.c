@@ -275,10 +275,12 @@ int mutool_main(int argc, const char** argv)
 			// test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
 			strcpy(buf, "mupdf");
 			strcat(buf, tools[i].name);
+			assert(strlen(buf) < sizeof(buf));
 			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc, argv);
 			strcpy(buf, "mu");
 			strcat(buf, tools[i].name);
+			assert(strlen(buf) < sizeof(buf));
 			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc, argv);
 		}
@@ -295,10 +297,12 @@ int mutool_main(int argc, const char** argv)
 			// test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
 			strcpy(buf, "mupdf");
 			strcat(buf, tools[i].name);
+			assert(strlen(buf) < sizeof(buf));
 			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc - 1, argv + 1);
 			strcpy(buf, "mu");
 			strcat(buf, tools[i].name);
+			assert(strlen(buf) < sizeof(buf));
 			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
 				return tools[i].func(argc - 1, argv + 1);
 		}
