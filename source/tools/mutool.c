@@ -221,7 +221,7 @@ int mutool_main(int argc, const char** argv)
 #endif
 {
 	const char *start, *end;
-	char buf[32];
+	char buf[64];
 	int i;
 
 	ctx = NULL;
