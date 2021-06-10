@@ -77,13 +77,13 @@ Install/unpack the entire set using:
 
 ### Build the executables (a.k.a. "binaries")
 
-- Open `platforms/win32/mupdf.sln` file to open the project with Visual Studio 2019.
+- Open `/platform/win32/mupdf.sln` file to open the project with Visual Studio 2019.
 
 - Choose the Debug/Relase 32/64-bit platform target as you like.
 
 - In the `Build` menu click on `Build Solution` or `Rebuild Solution`. This should take a while.
 
-- Find the executables in the `/platforms/win32/bin/...` subdirectory, where `...` is the name generated for the target build you selected.
+- Find the executables in the `/platform/win32/bin/...` subdirectory, where `...` is the name generated for the target build you selected.
 
 
 # Problems? Questions? Anything to report?
