@@ -144,7 +144,7 @@ src = src
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4244;4018;4267;5105;4100</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -174,7 +174,7 @@ let compiler_settings = `
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4244;4018;4267;5105;4100</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -213,7 +213,7 @@ src = src
 			<RuntimeLibrary>XXX</RuntimeLibrary>`);
 	}
 
-	// now patch the entries and remove those that all build modees have in common:
+	// now patch the entries and remove those that all build modes have in common:
 	p2 = p2
 	.replace(/<Optimization>[^]*?<\/Optimization>/g, (m) => `<Optimization>${ isDebug ? "Custom" : "MaxSpeed" }</Optimization>`)
 	.replace(/<MinimalRebuild>[^]*?<\/MinimalRebuild>/g, (m) => ``)
@@ -231,6 +231,7 @@ src = src
 	.replace(/<LanguageStandard_C>[^]*?<\/LanguageStandard_C>/g, (m) => ``)
 	.replace(/<SupportJustMyCode>[^]*?<\/SupportJustMyCode>/g, (m) => ``)
 	.replace(/<SDLCheck>[^]*?<\/SDLCheck>/g, (m) => ``)
+	.replace(/<DisableSpecificWarnings>[^]*?<\/DisableSpecificWarnings>/g, (m) => ``)
 	.replace(/<MultiProcessorCompilation>[^]*?<\/MultiProcessorCompilation>/g, (m) => ``)
 	.replace(/<IntrinsicFunctions>[^]*?<\/IntrinsicFunctions>/g, (m) => ``)
 	.replace(/<StringPooling>[^]*?<\/StringPooling>/g, (m) => ``)

@@ -28,27 +28,43 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+    
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+    
+    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+    
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+    
+    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -65,7 +81,11 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+  
+  
+
+
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -79,6 +99,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -94,8 +115,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -110,7 +131,7 @@
       <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;..\..\thirdparty\owemdjee\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
+      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -146,7 +167,7 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
+      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -183,7 +204,7 @@
       <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\lib_nas_lockfile\src;../../thirdparty/owemdjee/googletest/googletest/include;..\..\thirdparty\owemdjee\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
+      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -219,7 +240,7 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <DisableSpecificWarnings>4244;4018;4244;4267;5105</DisableSpecificWarnings>
+      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SYNC_NAS_FILELOCK;SYNC_NAS_FILELOCK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
