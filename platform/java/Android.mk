@@ -175,9 +175,9 @@ LOCAL_SRC_FILES += $(patsubst %,$(MUPDF_PATH)/%,$(TESSERACT_SRC))
 LOCAL_SRC_FILES += $(MUPDF_PATH)/source/fitz/tessocr.cpp
 LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(TESSERACT_CFLAGS) $(TESSERACT_BUILD_CFLAGS)))
 LOCAL_CFLAGS += $(filter-out -I%,$(TESSERACT_CFLAGS) $(TESSERACT_BUILD_CFLAGS))
-LOCAL_CFLAGS += -DANDROID -Wno-sign-compare
+LOCAL_CFLAGS += -Wno-sign-compare
 LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS) -std=c++17
-LOCAL_CPP_FEATURES += exceptions
+LOCAL_CPP_FEATURES := exceptions
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
