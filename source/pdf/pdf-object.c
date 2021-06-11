@@ -3067,7 +3067,6 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 		fmt_dict(ctx, fmt, pdf_resolve_indirect(ctx, obj));
 
 		const char* ftype = pdf_embedded_file_type(ctx, obj);
-		pdf_obj* ef = pdf_dict_get(ctx, obj, PDF_NAME(EF));
 		const char* fname = NULL;
 		fz_buffer* fbuf = NULL;
 		unsigned char* fdata = NULL;
