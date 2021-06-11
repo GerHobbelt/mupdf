@@ -73,18 +73,6 @@ static void mu_drop_context(void)
 	ctx = NULL;
 }
 
-static fz_output* stddbgchannel(void)
-{
-	fz_output* dbg = fz_stddbg(ctx);
-	fz_output* err = fz_stderr(ctx);
-
-	if (dbg == err)
-	{
-		return NULL;
-	}
-	return dbg;
-}
-
 
 extern "C" int
 qiqqa_fingerprint0_main(int argc, const char* argv[])
