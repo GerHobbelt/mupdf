@@ -1046,7 +1046,6 @@ showinfo(fz_context *ctx, globals *glo, int show, const char *pagelist)
 	int allpages;
 	int pagecount;
 	fz_output *out = glo->out;
-	fz_document* pdf = (fz_document * )glo->doc;
 
 	if (!glo->doc)
 	{
