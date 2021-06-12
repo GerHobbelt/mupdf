@@ -2242,7 +2242,7 @@ int mudraw_main(int argc, const char **argv)
 	num_workers = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:hj:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:hj:J:")) != -1)
 	{
 		switch (c)
 		{
@@ -2267,6 +2267,7 @@ int mudraw_main(int argc, const char **argv)
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
 		case 'I': invert++; break;
 		case 'j': parse_render_options(&master_cookie, fz_optarg); break;
+		case 'J': fz_default_png_compression_level(fz_atoi(fz_optarg)); break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;
 		case 'H': layout_h = fz_atof(fz_optarg); break;

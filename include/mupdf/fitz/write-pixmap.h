@@ -221,6 +221,11 @@ fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *imag
 fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
 
 /**
+	Set default PNG output compression level: 0..9, Z_DEFAULT_COMPRESSION (-1) by default
+*/
+void fz_default_png_compression_level(int level);
+
+/**
 	Save a pixmap as a pnm (greyscale or rgb, no alpha).
 */
 void fz_save_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);

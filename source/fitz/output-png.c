@@ -180,6 +180,15 @@ png_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	png_write_icc(ctx, writer, cs);
 }
 
+static int png_compresion_level = Z_DEFAULT_COMPRESSION;
+
+void fz_default_png_compression_level(int level)
+{
+	if (level < 0 || level > Z_BEST_COMPRESSION)
+		level = Z_DEFAULT_COMPRESSION;
+	png_compresion_level = level;
+}
+
 static void
 png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_start, int band_height, const unsigned char *sp)
 {
@@ -214,7 +223,7 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 		writer->stream.opaque = ctx;
 		writer->stream.zalloc = fz_zlib_alloc;
 		writer->stream.zfree = fz_zlib_free;
-		err = zng_deflateInit(&writer->stream, Z_DEFAULT_COMPRESSION);
+		err = zng_deflateInit(&writer->stream, png_compresion_level);
 		if (err != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 	}
