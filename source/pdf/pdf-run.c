@@ -18,14 +18,30 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 
 	pdf_annot_push_local_xref(ctx, annot);
 
+	pdf_obj* subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
+	enum pdf_annot_type type = pdf_annot_type_from_string(ctx, pdf_to_name(ctx, subtype));
+
 	/* Widgets only get displayed if they have both a T and a TF flag,
 	 * apparently */
-	if (pdf_name_eq(ctx, pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype)), PDF_NAME(Widget)))
+	if (type == PDF_ANNOT_WIDGET)
 	{
 		pdf_obj *ft = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(FT));
 		pdf_obj *t = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(T));
 
 		if (ft == NULL || t == NULL)
+		{
+			pdf_annot_pop_local_xref(ctx, annot);
+			return;
+		}
+	}
+
+	// is this particular type rejected from the render run?
+	if (cookie)
+	{
+		int test_index = 1 + type;
+		assert(test_index >= 0);
+		assert(test_index < sizeof(cookie->run_annotations_reject_mask));
+		if (cookie->run_annotations_reject_mask[test_index])
 		{
 			pdf_annot_pop_local_xref(ctx, annot);
 			return;
@@ -154,6 +170,13 @@ void pdf_run_page_contents_with_usage(fz_context *ctx, pdf_page *page, fz_device
 	pdf_document *doc = page->doc;
 	int nocache;
 
+	if (cookie)
+	{
+		enum fz_run_flags mode = cookie->run_mode;
+		if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_CONTENT))
+			return;
+	}
+
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
 		pdf_mark_xref(ctx, doc);
@@ -184,9 +207,17 @@ void pdf_run_annot(fz_context *ctx, pdf_annot *annot, fz_device *dev, fz_matrix 
 	pdf_document *doc = page->doc;
 	int nocache;
 
+	if (cookie)
+	{
+		enum fz_run_flags mode = cookie->run_mode;
+		if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_ANNOTATIONS))
+			return;
+	}
+
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
 		pdf_mark_xref(ctx, doc);
+
 	fz_try(ctx)
 	{
 		pdf_run_annot_with_usage(ctx, doc, page, annot, dev, ctm, "View", cookie);
@@ -261,6 +292,13 @@ void pdf_run_page_annots_with_usage(fz_context *ctx, pdf_page *page, fz_device *
 	pdf_document *doc = page->doc;
 	int nocache;
 
+	if (cookie)
+	{
+		enum fz_run_flags mode = cookie->run_mode;
+		if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_ANNOTATIONS))
+			return;
+	}
+
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
 		pdf_mark_xref(ctx, doc);
@@ -289,6 +327,13 @@ void pdf_run_page_widgets_with_usage(fz_context *ctx, pdf_page *page, fz_device 
 {
 	pdf_document *doc = page->doc;
 	int nocache;
+
+	if (cookie)
+	{
+		enum fz_run_flags mode = cookie->run_mode;
+		if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_WIDGETS))
+			return;
+	}
 
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
@@ -324,8 +369,31 @@ pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matr
 		pdf_mark_xref(ctx, doc);
 	fz_try(ctx)
 	{
+		if (cookie)
+		{
+			enum fz_run_flags mode = cookie->run_mode;
+			if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_CONTENT))
+				return;
+		}
+
 		pdf_run_page_contents_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
+
+		if (cookie)
+		{
+			enum fz_run_flags mode = cookie->run_mode;
+			if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_ANNOTATIONS))
+				return;
+		}
+
 		pdf_run_page_annots_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
+
+		if (cookie)
+		{
+			enum fz_run_flags mode = cookie->run_mode;
+			if (mode != FZ_RUN_EVERYTHING && !(mode & FZ_RUN_WIDGETS))
+				return;
+		}
+
 		pdf_run_page_widgets_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
 	}
 	fz_always(ctx)
