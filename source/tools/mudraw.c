@@ -491,6 +491,7 @@ static int usage(void)
 		"  -j -  render only selected types of content. Use a comma-separated list\n"
 		"        to combine types (everything,content,annotations,widgets,Unknown,\n"
 		"        %s)\n"
+		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"  -i    ignore errors\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
 #ifndef DISABLE_MUTHREADS
