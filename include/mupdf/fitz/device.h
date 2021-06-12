@@ -252,6 +252,14 @@ enum
 	Cookie support - simple communication channel between app/library.
 */
 
+enum fz_run_flags
+{
+	FZ_RUN_EVERYTHING				= 0,
+	FZ_RUN_CONTENT					= 0x0001,
+	FZ_RUN_ANNOTATIONS				= 0x0002,
+	FZ_RUN_WIDGETS					= 0x0004,
+};
+
 /**
 	Provide two-way communication between application and library.
 	Intended for multi-threaded applications where one thread is
@@ -290,6 +298,18 @@ enum
 
 	incomplete: Initially should be set to 0. Will be set to
 	non-zero if a TRYLATER error is thrown during rendering.
+
+	run_mode: a bit set signaling which type of content to render.
+	For backwards compatibility of the code, the ZERO(0) value
+	signals to run everything (FZ_RUN_EVERYTHING).
+
+	run_annotations_reject_mask: a boolean array set signaling which
+	annotation types to ignore/skip when rendering (and the run_mode
+	includes annotations).
+	Each slot is for a particular annotation subtype (enum pdf_annot_type);
+	slot indexes are pdf_annot_type+1, so that slot 0 is for 
+	the PDF_ANNOT_UNKNOWN type, slot 1 is for the PDF_ANNOT_TEXT type,
+	and so on.
 */
 typedef struct
 {
@@ -298,6 +318,8 @@ typedef struct
 	size_t progress_max; /* (size_t)-1 for unknown */
 	int errors;
 	int incomplete;
+	enum fz_run_flags run_mode;
+	char run_annotations_reject_mask[32];   // char acts as boolean value carrier: 0 = false, !0 = true
 } fz_cookie;
 
 /**
