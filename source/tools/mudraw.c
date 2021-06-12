@@ -217,6 +217,8 @@ static const format_cs_table_t format_cs_table[] =
 
 static fz_stext_options stext_options = { 0 };
 
+static fz_cookie master_cookie = { 0 };
+
 static time_t
 stat_mtime(const char *path)
 {
@@ -403,6 +405,31 @@ static struct {
 
 static int usage(void)
 {
+	// create a nice list of the annotation types for use in the usage help message:
+	char annot_type_list[500] = "";
+	size_t buflen = sizeof(annot_type_list);
+	char* dst = annot_type_list;
+	size_t width = 0;
+
+	for (int i = PDF_ANNOT_TEXT; ; i++)
+	{
+		const char *name = pdf_string_from_annot_type(ctx, i);
+		if (!strcmp(name, "UNKNOWN"))
+			break;
+		if (width + strlen(name) > 70)
+		{
+			size_t extra_len = fz_snprintf(dst, buflen, "\n        ");
+			width = 0;
+			dst += extra_len;
+			buflen -= extra_len;
+		}
+		size_t nlen = fz_snprintf(dst, buflen, "%s,", name);
+		width += nlen;
+		dst += nlen;
+		buflen -= nlen;
+	}
+	dst[-1] = 0;   // nuke that last ','
+
 	fz_info(ctx,
 		"mudraw version " FZ_VERSION "\n"
 		"Usage: mudraw [options] file [pages]\n"
@@ -457,10 +484,13 @@ static int usage(void)
 		"  -G -  apply gamma correction\n"
 		"  -I    invert colors\n"
 		"\n"
-		"  -A -  number of bits of antialiasing (0 to 8)\n"
-		"  -A -/-  number of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
+		"  -A -/-  number of bits of anti-aliasing (0 to 8) (graphics, text)\n"
 		"  -l -  minimum stroked line width (in pixels)\n"
 		"  -D    disable use of display list\n"
+		"  -j -  render only selected types of content. Use a comma-separated list\n"
+		"        to combine types (everything,content,annotations,widgets,Unknown,\n"
+		"        %s)\n"
 		"  -i    ignore errors\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
 #ifndef DISABLE_MUTHREADS
@@ -498,7 +528,8 @@ static int usage(void)
 		"\n"
 		"  -v    display the version of this application and terminate\n"
 		"\n"
-		"  pages  comma separated list of page numbers and ranges\n"
+		"  pages  comma separated list of page numbers and ranges\n",
+		annot_type_list
 	);
 	
 	return EXIT_FAILURE;
@@ -1098,7 +1129,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					workers[band].error = 0;
 					workers[band].ctm = ctm;
 					workers[band].tbounds = tbounds;
-					memset(&workers[band].cookie, 0, sizeof(fz_cookie));
+					workers[band].cookie = master_cookie;
 					workers[band].list = list;
 					workers[band].pix = fz_new_pixmap_with_bbox(ctx, colorspace, band_ibounds, seps, alpha);
 					fz_set_pixmap_resolution(ctx, workers[band].pix, resolution, resolution);
@@ -1183,7 +1214,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					w->band = band + num_workers;
 					w->ctm = ctm;
 					w->tbounds = tbounds;
-					memset(&w->cookie, 0, sizeof(fz_cookie));
+					w->cookie = master_cookie;
 					w->running = 1;
 #ifndef DISABLE_MUTHREADS
 					DEBUG_THREADS(fz_info(ctx, "Triggering worker %d for band %d\n", w->num, w->band));
@@ -1348,7 +1379,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	fz_display_list *list = NULL;
 	fz_device *dev = NULL;
 	int start;
-	fz_cookie cookie = { 0 };
+	fz_cookie cookie = master_cookie;
 	fz_separations *seps = NULL;
 	const char *features = "";
 
@@ -1780,7 +1811,7 @@ static void worker_thread(void *arg)
 
 static void bgprint_worker(void *arg)
 {
-	fz_cookie cookie = { 0 };
+	fz_cookie cookie = master_cookie;
 	int pagenum;
 
 	(void)arg;
@@ -2023,6 +2054,52 @@ read_rotation(const char *arg)
 	return i;
 }
 
+static int
+fz_strnieq(const char* arg, size_t wlen, const char* word)
+{
+	if (wlen != strlen(word))
+		return 0;
+	return fz_strncasecmp(arg, word, wlen) == 0;
+}
+
+static void
+parse_render_options(fz_cookie* cookie, const char* arg)
+{
+	const char* SEPS = " ,;:";
+
+	while (*arg)
+	{
+		size_t wlen = strcspn(arg, SEPS);
+
+		if (fz_strnieq(arg, wlen, "everything"))
+			cookie->run_mode = FZ_RUN_EVERYTHING;
+		else if (fz_strnieq(arg, wlen, "content"))
+			cookie->run_mode |= FZ_RUN_CONTENT;
+		else if (fz_strnieq(arg, wlen, "annotations"))
+			cookie->run_mode |= FZ_RUN_ANNOTATIONS;
+		else if (fz_strnieq(arg, wlen, "widgets"))
+			cookie->run_mode |= FZ_RUN_WIDGETS;
+		else if (fz_strnieq(arg, wlen, "unknown"))
+			cookie->run_annotations_reject_mask[PDF_ANNOT_UNKNOWN + 1] = 1;
+		else
+		{
+			// check if the item matches any of the annotation types:
+			char buf[64];
+			strncpy(buf, arg, wlen);
+			buf[wlen] = 0;
+			enum fz_annot_type type = pdf_annot_type_from_string(ctx, buf);
+			if (type == PDF_ANNOT_UNKNOWN)
+			{
+				fz_error(ctx, "Unrecognized annotation type '%s' specified as part of the render filter. Treating it as UNKNOWN annotation type.\n", buf);
+			}
+			cookie->run_annotations_reject_mask[type + 1] = 1;
+		}
+
+		arg += wlen;
+		arg += strspn(arg, SEPS);
+	}
+}
+
 static void mu_drop_context(void)
 {
 	if (mudraw_is_toplevel_ctx)
@@ -2154,6 +2231,9 @@ int mudraw_main(int argc, const char **argv)
 	memset(&bgprint, 0, sizeof(bgprint));
 	memset(&timing, 0, sizeof(timing));
 
+	memset(&master_cookie, 0, sizeof(master_cookie));
+	master_cookie.run_mode = FZ_RUN_EVERYTHING;
+
 	gettime_once = 1;
 
 	// ---
@@ -2162,7 +2242,7 @@ int mudraw_main(int argc, const char **argv)
 	num_workers = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:hj:")) != -1)
 	{
 		switch (c)
 		{
@@ -2186,6 +2266,7 @@ int mudraw_main(int argc, const char **argv)
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
 		case 'I': invert++; break;
+		case 'j': parse_render_options(&master_cookie, fz_optarg); break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;
 		case 'H': layout_h = fz_atof(fz_optarg); break;
