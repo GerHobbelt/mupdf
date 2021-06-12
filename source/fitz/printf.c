@@ -888,7 +888,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			/* width */
-			w = INT_MIN;		// flag as 'unintialized'; different default for floats and strings will be applied later.
+			w = INT_MIN;		// flag as 'uninitialized'; different default for floats and strings will be applied later.
 			if (c == '*') {
 				c = *fmt++;
 				w = va_arg(args, int);
@@ -902,7 +902,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			/* precision */
-			p = INT_MAX;		// flag as 'unintialized'; different default for floats and strings' precision will be applied later.
+			p = INT_MAX;		// flag as 'uninitialized'; different default for floats and strings' precision will be applied later.
 			if (c == '.') {
 				c = *fmt++;
 				if (c == 0)
@@ -1015,7 +1015,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			case 'T':
 				{
 					int64_t tv = va_arg(args, int64_t);
-					char s[40];
+					char sbuf[40];
 					time_t secs = tv;
 #ifdef _POSIX_SOURCE
 					struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
@@ -1023,8 +1023,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					struct tm* tm = gmtime(&secs);
 #endif
 
-					str = s;
-					if (tv < 0 || !tm || !strftime(s, nelem(s), "D:%Y-%m-%d %H:%M:%S UTC", tm))
+					str = sbuf;
+					if (tv < 0 || !tm || !strftime(sbuf, nelem(sbuf), "D:%Y-%m-%d %H:%M:%S UTC", tm))
 						str = "(invalid)";
 					if (j)
 						fmtquote(&out, str, strlen(str), '"', '"', 0, 0);
