@@ -5165,7 +5165,7 @@ static void ffi_PDFPage_createAnnotation(js_State *J)
 	pdf_page *page = js_touserdata(J, 0, "pdf_page");
 	const char *name = js_tostring(J, 1);
 	pdf_annot *annot = NULL;
-	int subtype;
+	enum pdf_annot_type subtype;
 
 	fz_try(ctx)
 	{
