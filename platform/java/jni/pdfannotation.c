@@ -17,7 +17,7 @@ FUN(PDFAnnotation_run)(JNIEnv *env, jobject self, jobject jdev, jobject jctm, jo
 	pdf_annot *annot = from_PDFAnnotation(env, self);
 	fz_device *dev = from_Device(env, jdev);
 	fz_matrix ctm = from_Matrix(env, jctm);
-	fz_cookie *cookie= from_Cookie(env, jcookie);
+	fz_cookie *cookie = from_Cookie(env, jcookie);
 	NativeDeviceInfo *info;
 	int err;
 

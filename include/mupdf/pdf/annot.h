@@ -259,7 +259,7 @@ fz_link *pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const ch
 pdf_annot *pdf_create_annot(fz_context *ctx, pdf_page *page, enum pdf_annot_type type);
 
 /*
-	Delete an annoation from the page.
+	Delete an annotation from the page.
 
 	This unlinks the annotation from the page structure and drops
 	the pages reference to it. Any reference held by the caller
