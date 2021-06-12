@@ -30,6 +30,11 @@ const buildDirs = [
 	"reader_Win32_Release",
 	"build",
 	"obj",
+	"v16/ipch",
+];
+
+const buildFiles = [
+	"/Browse.VC.db",
 ];
 
 let src = fs.readFileSync(input, 'utf8');
@@ -49,6 +54,16 @@ let b = a
 		if (l.includes(dirstr)) {
 			has_build_dir = true;
 			l = l.replace(new RegExp(`${dirstr}.*$`), dirstr);
+		}
+	}
+
+	if (!has_build_dir) {
+		for (let i = 0; i < buildFiles.length; i++) {
+			let dirstr = buildFiles[i];
+			if (l.endsWith(dirstr)) {
+				has_build_dir = true;
+				l = l.replace(/[^/]+$/, "");  // strip off the filename at the end.
+			}
 		}
 	}
 	
