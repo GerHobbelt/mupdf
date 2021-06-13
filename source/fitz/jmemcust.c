@@ -16,6 +16,8 @@
 
 #if !defined(SHARE_JPEG) || SHARE_JPEG==0
 
+#include "mupdf/fitz.h"
+
 #include "jinclude.h"
 #include "jpeglib.h"
 #include "jmemsys.h"
@@ -27,7 +29,11 @@ jpeg_get_small (j_common_ptr cinfo, size_t sizeofobject)
 {
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
-	return (void *) (cmem->j_mem_get_small)(cinfo, sizeofobject);
+	if (cmem && cmem->j_mem_get_small)
+		return (void *) (cmem->j_mem_get_small)(cinfo, sizeofobject);
+
+	fz_context* ctx = fz_get_global_context();
+	return Memento_label(fz_malloc_no_throw(ctx, sizeofobject), "jpgcust_small_alloc");
 }
 
 GLOBAL(void)
@@ -35,7 +41,11 @@ jpeg_free_small (j_common_ptr cinfo, void * object, size_t sizeofobject)
 {
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
-	(cmem->j_mem_free_small)(cinfo, object, sizeofobject);
+	if (cmem && cmem->j_mem_free_small)
+		(cmem->j_mem_free_small)(cinfo, object, sizeofobject);
+
+	fz_context* ctx = fz_get_global_context();
+	fz_free(ctx, object);
 }
 
 /*
@@ -50,7 +60,11 @@ jpeg_get_large (j_common_ptr cinfo, size_t sizeofobject)
 {
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
-	return (void *) (cmem->j_mem_get_large)(cinfo, sizeofobject);
+	if (cmem && cmem->j_mem_get_large)
+		return (void *) (cmem->j_mem_get_large)(cinfo, sizeofobject);
+
+	fz_context* ctx = fz_get_global_context();
+	return Memento_label(fz_malloc_no_throw(ctx, sizeofobject), "jpgcust_large_alloc");
 }
 
 GLOBAL(void)
@@ -58,7 +72,11 @@ jpeg_free_large (j_common_ptr cinfo, void FAR * object, size_t sizeofobject)
 {
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
-	(cmem->j_mem_free_large)(cinfo, object, sizeofobject);
+	if (cmem && cmem->j_mem_free_large)
+		(cmem->j_mem_free_large)(cinfo, object, sizeofobject);
+
+	fz_context* ctx = fz_get_global_context();
+	fz_free(ctx, object);
 }
 
 /*
@@ -73,7 +91,7 @@ jpeg_mem_available (j_common_ptr cinfo, long min_bytes_needed,
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 	long ret = max_bytes_needed;
 
-	if (cmem->j_mem_avail)
+	if (cmem && cmem->j_mem_avail)
 		ret = (cmem->j_mem_avail)(cinfo);
 
 	return ret;
@@ -91,7 +109,7 @@ jpeg_open_backing_store (j_common_ptr cinfo, backing_store_ptr info,
 {
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
-	if (cmem->j_mem_open_backing_store) {
+	if (cmem && cmem->j_mem_open_backing_store) {
 		(cmem->j_mem_open_backing_store)(cinfo, info, total_bytes_needed);
 	}
 	else
@@ -109,7 +127,7 @@ jpeg_mem_init (j_common_ptr cinfo)
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 	long ret = 0;
 
-	if (cmem->j_mem_init)
+	if (cmem && cmem->j_mem_init)
 		ret = (cmem->j_mem_init)(cinfo);
 
 	return ret;
@@ -120,7 +138,7 @@ jpeg_mem_term (j_common_ptr cinfo)
 {
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
-	if (cmem->j_mem_term)
+	if (cmem && cmem->j_mem_term)
 		(cmem->j_mem_term)(cinfo);
 }
 
