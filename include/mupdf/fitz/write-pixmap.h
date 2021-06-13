@@ -226,6 +226,36 @@ fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pi
 void fz_default_png_compression_level(int level);
 
 /**
+		Save a (Greyscale or RGB) pixmap as a MURAW.
+*/
+void fz_save_pixmap_as_muraw(fz_context* ctx, const fz_pixmap* pixmap, const char* filename);
+
+/**
+		Write a (Greyscale or RGB) pixmap as a MURAW.
+*/
+void fz_write_pixmap_as_muraw(fz_context* ctx, fz_output* out, const fz_pixmap* pixmap);
+
+/**
+		Create a new MURAW band writer (greyscale or RGB, with or without
+		alpha).
+*/
+fz_band_writer* fz_new_muraw_band_writer(fz_context* ctx, fz_output* out);
+
+/**
+		Re-encode a given image as a MURAW into a buffer.
+
+		Ownership of the buffer is returned.
+*/
+fz_buffer* fz_new_buffer_from_image_as_muraw(fz_context* ctx, const fz_image* image, fz_color_params color_params);
+
+/**
+		Re-encode a given pixmap as a MURAW into a buffer.
+
+		Ownership of the buffer is returned.
+*/
+fz_buffer* fz_new_buffer_from_pixmap_as_muraw(fz_context* ctx, const fz_pixmap* pixmap, fz_color_params color_params);
+
+/**
 	Save a pixmap as a pnm (greyscale or rgb, no alpha).
 */
 void fz_save_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);

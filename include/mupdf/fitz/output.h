@@ -163,6 +163,7 @@ fz_output *fz_stddbg(fz_context *ctx);
 /**
 	Format and write data to an output stream.
 	See fz_format_string for formatting details.
+	Does not write zero terminator.
 */
 void fz_write_printf(fz_context *ctx, fz_output *out, const char* fmt, ...);
 

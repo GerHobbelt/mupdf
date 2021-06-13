@@ -77,6 +77,7 @@ enum {
 	OUT_PGM,
 	OUT_PKM,
 	OUT_PNG,
+	OUT_MURAW,
 	OUT_PNM,
 	OUT_PPM,
 	OUT_PS,
@@ -122,6 +123,7 @@ static const suffix_t suffix_table[] =
 
 	/* And the 'single extension' ones go last. */
 	{ ".png", OUT_PNG, 0 },
+	{ ".muraw", OUT_MURAW, 0 },
 	{ ".pgm", OUT_PGM, 0 },
 	{ ".ppm", OUT_PPM, 0 },
 	{ ".pnm", OUT_PNM, 0 },
@@ -176,12 +178,13 @@ typedef struct
 {
 	int format;
 	int default_cs;
-	int permitted_cs[7];
+	int permitted_cs[8];
 } format_cs_table_t;
 
 static const format_cs_table_t format_cs_table[] =
 {
 	{ OUT_PNG, CS_RGB, { CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_ICC } },
+	{ OUT_MURAW, CS_RGB_ALPHA, { CS_MONO, CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA, CS_ICC } },
 	{ OUT_PPM, CS_RGB, { CS_GRAY, CS_RGB } },
 	{ OUT_PNM, CS_GRAY, { CS_GRAY, CS_RGB } },
 	{ OUT_PAM, CS_RGB_ALPHA, { CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA } },
@@ -437,7 +440,7 @@ static int usage(void)
 		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
-		"    raster: png, pnm, pam, pbm, pkm, pwg, pcl, ps\n"
+		"    raster: png, pnm, pam, pbm, pkm, pwg, pcl, ps, muraw\n"
 		"    vector: svg, pdf, trace, ocr.trace\n"
 		"    text: txt, html, xhtml, stext, stext.json\n"
 #ifndef OCR_DISABLED
@@ -460,7 +463,7 @@ static int usage(void)
 		"  -w -  page width (in pixels) (maximum width if -r is specified)\n"
 		"  -h -  page height (in pixels) (maximum height if -r is specified)\n"
 		"  -f    fit file to page if too large\n"
-		"  -B -  maximum band height (pXm, pcl, pclm, ocr.pdf, ps, psd and png output\n"
+		"  -B -  maximum band height (pXm, pcl, pclm, ocr.pdf, ps, psd, muraw and png output\n"
 		"        only)\n"
 #ifndef DISABLE_MUTHREADS
 		"  -T -  number of threads to use for rendering (banded mode only)\n"
@@ -1156,6 +1159,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				bander = fz_new_pam_band_writer(ctx, out);
 			else if (output_format == OUT_PNG)
 				bander = fz_new_png_band_writer(ctx, out);
+			else if (output_format == OUT_MURAW)
+				bander = fz_new_muraw_band_writer(ctx, out);
 			else if (output_format == OUT_PBM)
 				bander = fz_new_pbm_band_writer(ctx, out);
 			else if (output_format == OUT_PKM)
@@ -2581,6 +2586,7 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PPM &&
 				output_format != OUT_PNM &&
 				output_format != OUT_PNG &&
+				output_format != OUT_MURAW &&
 				output_format != OUT_PBM &&
 				output_format != OUT_PKM &&
 				output_format != OUT_PCL &&
@@ -2589,7 +2595,7 @@ int mudraw_main(int argc, const char **argv)
 				output_format != OUT_PSD &&
 				output_format != OUT_OCR_PDF)
 			{
-				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, and PNG outputs");
+				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, MURAW and PNG outputs");
 				band_height = 0;
 			}
 			if (showmd5 && band_height)
@@ -2704,7 +2710,7 @@ int mudraw_main(int argc, const char **argv)
 			}
 		}
 
-		if (output_format == OUT_SVG || output_format == OUT_PNG || output_format == OUT_PSD)
+		if (output_format == OUT_SVG || output_format == OUT_PNG || output_format == OUT_MURAW || output_format == OUT_PSD)
 		{
 			/* SVG files are always opened for each page. */
 			output_file_per_page = 1;
