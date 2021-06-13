@@ -484,6 +484,146 @@ Mode 6 might look like another viable candidate, but we pick level 5 as level 6 
 
 ## Quick check with another PDF?
 
+(TBD)
+
+
+
+# Investigating further
+
+## Taking out the PNG file format: minimizing costs
+
+Next we go and check how much the PNG format *costs* when writing to disk: we introduce the bare-metal MURAW format, which should otherwise be quite similar to `-J 0` ~ *no compression* PNG output re file size on disk:
+
+```
+./mutool.exe draw -J 5 -j content -T0 -stmf -w 3600 -h 3600 -r 0 -F muraw -o page.muraw  1905.07689.pdf ; ls -lsk page.0*.muraw
+```
+
+delivers this result:
+
+```
+Output format: muraw (DeviceRGB, Alpha)
+page 1905.07689.pdf 1 grayscale
+ 382ms (total)
+Glyph Cache Size: 726229
+page 1905.07689.pdf 2 grayscale
+ 339ms (total)
+Glyph Cache Size: 1048542
+page 1905.07689.pdf 3 color
+ 413ms (total)
+Glyph Cache Size: 1048472
+page 1905.07689.pdf 4 grayscale
+ 314ms (total)
+Glyph Cache Size: 1048560
+page 1905.07689.pdf 5 grayscale
+ 339ms (total)
+Glyph Cache Size: 1048550
+page 1905.07689.pdf 6 grayscale
+ 358ms (total)
+Glyph Cache Size: 1048343
+page 1905.07689.pdf 7 grayscale
+ 345ms (total)
+Glyph Cache Size: 1048471
+page 1905.07689.pdf 8 grayscale
+ 466ms (total)
+Glyph Cache Size: 1048466
+page 1905.07689.pdf 9 color
+ 469ms (total)
+Glyph Cache Size: 1048523
+page 1905.07689.pdf 10 grayscale
+ 441ms (total)
+Glyph Cache Size: 1048565
+total 3866ms (1ms layout) / 10 pages for an average of 386ms
+fastest page 4: 314ms
+slowest page 9: 469ms
+14568 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0001.muraw
+ 9484 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0002.muraw
+10532 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0003.muraw
+12064 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0004.muraw
+13076 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0005.muraw
+13408 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0006.muraw
+16004 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0007.muraw
+15980 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0008.muraw
+17320 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0009.muraw
+16432 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0010.muraw
+```
+
+which takes 25% more disk space than *no compression* PNG, *probably* because we dump the raw C `struct`ures directly to disk, with some header info for each chunk, without any regard for disk space savings.
+
+Remarkable though is the time this takes: while it's taking up a *lot* of disk space per file, there's some obvious gains we should look into as the time this takes (which I/O to the same fast SSD as before) is less than *any* of the PNG modes: the quick conclusion there would be that we apparently have some significant costs in the PNG format itself -- or more probably in the unmultiplying and related work done on the image data in the PNG output driver in MuPDF?
+
+Next up would be running this again **without any disk I/O cost at all** for the output: write this to `/dev/null`:
+
+
+
+### Taking out the disk I/O cost too: writing to `/dev/null`: minimizing costs
+
+The command
+
+```
+./mutool.exe draw -J 5 -j content -T0 -stmf -w 3600 -h 3600 -r 0 -F muraw -o /dev/null  1905.07689.pdf
+```
+
+produces this result:
+
+```
+Output format: muraw (DeviceRGB, Alpha)
+page 1905.07689.pdf 1 grayscale
+ 348ms (total)
+Glyph Cache Size: 726229
+page 1905.07689.pdf 2 grayscale
+ 352ms (total)
+Glyph Cache Size: 1048542
+page 1905.07689.pdf 3 color
+ 401ms (total)
+Glyph Cache Size: 1048472
+page 1905.07689.pdf 4 grayscale
+ 334ms (total)
+Glyph Cache Size: 1048560
+page 1905.07689.pdf 5 grayscale
+ 350ms (total)
+Glyph Cache Size: 1048550
+page 1905.07689.pdf 6 grayscale
+ 408ms (total)
+Glyph Cache Size: 1048343
+page 1905.07689.pdf 7 grayscale
+ 379ms (total)
+Glyph Cache Size: 1048471
+page 1905.07689.pdf 8 grayscale
+ 391ms (total)
+Glyph Cache Size: 1048466
+page 1905.07689.pdf 9 color
+ 504ms (total)
+Glyph Cache Size: 1048523
+page 1905.07689.pdf 10 grayscale
+ 414ms (total)
+Glyph Cache Size: 1048565
+total 3881ms (1ms layout) / 10 pages for an average of 388ms
+fastest page 4: 334ms
+slowest page 9: 504ms
+```
+
+which means the actual disk I/O cost (to fast SSD) is negligible as the timing is on par with the write-to-disk version of this command.
+
+
+### Another instrumented profile run then...
+
+While the instrumented profiler does not suffer from the instabilities of the regular sample-based MSVC profiler (see git commits for links about this trouble) it significantly loads the binary and thus will produce skewed results with very high probability: a single page render now takes roughly 4..8 **seconds** which is a factor of 10(ten!) slow-down compared to the regular binary run.
+
+Meanwhile, given that caveat, the results are enlightening still: while previously the PNG output module was hogging the charts, it's now time for `do_ft_render_glyph()` to bath in the spotlights, clocking in 43% of the CPU costs.
+
+While this call is (much higher up the call tree) a child of `do_draw_page()`, which takes 75% all around, that call still shown the same cost ratio to `fz_run_page()`, which now clocks in at near 20% cost.
+Meanwhile the start of the sharp drop-off in cost percentages now happens inside `do_page_page()` (obviously!) at the next call depth level: `drawband()` vs `fz_write_band()` split up at 62%/13%. Digging down to the `do_ft_render_glyph()` level, there's another split (obvious when you consider what we're feeding the machine: a PDF containing a published paper) at `fz_fill_text()` vs `fz_stroke_path()`-plus-others at 53% / 8% (making up the total cost of `fz_run_display_list()` at little over 61%.
+
+Meanwhile, `do_ft_render_glyph()` splits up into `FT_Load_Glyph()` and `FT_Render_Glyph_Internal()` at 28% / 16% (both rounded up), where the latter, upon closer inspection, unravels into `FT_Outline_Decompose()` via `ft_smooth_render()`, spending almost all it's 16% of CPU cost in there. Not a good place to go looking for speed improvements, I believe.
+
+Then we look at the other branch, `fz_write_band()`, which unravels into `fz_write_data()` taking all the cake (13% --> 11%), while the `file_write()` internal to that one only takes nearly 4%, so apparently `fz_write_data()` is still doing some things that cost, if only a little less than 10% of total application costs. Code inspection shows this must be all in `memcpy()` buffer manipulation then, as that's the only thing I can see that could getting us a cost like that (if the amount of data shuffled is significant, as it is in our case, handling near 40MByte per page image).
+
+Conclusion: we might have a wee gain if we come up with an output driver that does not need/use the `fz_write_data()` and related APIs **and also does not rely on anything else with similar behaviour, replacing this.** Tough call for a measly 10%-or-less gain perspective...
+
+
+
+
+
 
 
 
