@@ -306,6 +306,15 @@ static void null_write(fz_context *ctx, void *opaque, const void *buffer, size_t
 {
 }
 
+static void null_seek(fz_context* ctx, void* state, int64_t offset, int whence)
+{
+}
+
+static void null_truncate(fz_context* ctx, void* state)
+{
+}
+
+
 fz_output *
 fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 {
@@ -316,7 +325,12 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "no output to write to");
 
 	if (!strcmp(filename, "/dev/null") || !fz_strcasecmp(filename, "nul:"))
-		return fz_new_output(ctx, 0, NULL, null_write, NULL, NULL);
+	{
+		out = fz_new_output(ctx, 0, NULL, null_write, NULL, NULL);
+		out->seek = null_seek;
+		out->truncate = null_truncate;
+		return out;
+	}
 
 	if (!strcmp(filename, "/dev/stdout"))
 	{
