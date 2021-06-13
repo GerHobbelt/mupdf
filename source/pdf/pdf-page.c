@@ -155,7 +155,8 @@ pdf_lookup_page_loc_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int *
 				// sanity checking, before we go in. Some buggy PDFs can cause a hefty cost due to repeated error reports and exception handling otherwise.
 				if (pdf_is_indirect(ctx, kid))
 				{
-					pdf_document* doc = pdf_get_indirect_document(ctx, kid);
+					pdf_document* doc_ind = pdf_get_indirect_document(ctx, kid);
+					assert(doc == doc_ind);
 					int num = pdf_to_num(ctx, kid);
 					if (num <= 0 || num >= pdf_xref_len(ctx, doc))
 					{
@@ -185,7 +186,8 @@ pdf_lookup_page_loc_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int *
 
 							if (pdf_is_indirect(ctx, kid))
 							{
-								pdf_document* doc = pdf_get_indirect_document(ctx, kid);
+								pdf_document* doc_ind2 = pdf_get_indirect_document(ctx, kid);
+								assert(doc == doc_ind2);
 								int num = pdf_to_num(ctx, kid);
 								if (num <= 0 || num >= pdf_xref_len(ctx, doc))
 								{
@@ -212,7 +214,7 @@ pdf_lookup_page_loc_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int *
 							// this out-of-bounds kid is NOT a proper page reference and thus any dereferencing from it will FAIL too.
 							// Better to report a missing page, therefor!
 							//
-							// Also make sure to break the outer while(...) for otherwisee we'll get an (incorrect) "cycle in page tree"
+							// Also make sure to break the outer while(...) for otherwise we'll get an (incorrect) "cycle in page tree"
 							// report after this. There's corruption all right, but not a cycle!
 							i = len;
 							break;
@@ -237,7 +239,7 @@ pdf_lookup_page_loc_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int *
 						// this out-of-bounds kid is NOT a proper page reference and thus any dereferencing from it will FAIL too.
 						// Better to report a missing page, therefor!
 						//
-						// Also make sure to break the outer while(...) for otherwisee we'll get an (incorrect) "cycle in page tree"
+						// Also make sure to break the outer while(...) for otherwise we'll get an (incorrect) "cycle in page tree"
 						// report after this. There's corruption all right, but not a cycle!
 						i = len;
 						break;
