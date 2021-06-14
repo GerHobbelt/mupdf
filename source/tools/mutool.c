@@ -8,6 +8,8 @@
 #include "../../thirdparty/owemdjee/libwebp/extras/tools.h"
 #include "../../thirdparty/owemdjee/pmt-png-tools/pngtools-monolithic.h"
 
+#include "../../scripts/MuPDFLib/versions-api.h"
+
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
 #endif
@@ -18,6 +20,8 @@
 #ifdef _MSC_VER
 #define main main_utf8
 #endif
+
+static int report_version(int argc, const char* argv[]);
 
 static struct {
 	int (*func)(int argc, const char *argv[]);
@@ -110,14 +114,81 @@ static struct {
 	{ pngiend_main, "pngiend", "pngiend tool" },
 	{ pngihdr_main, "pngihdr", "pngihdr tool" },
 
+	{ report_version, "version", "report version of this build / tools" },
 };
 
 static int
 namematch(const char *end, const char *start, const char *match)
 {
+	if (!start)
+		return 0;
 	size_t len = strlen(match);
 	const char* p = end - len;
 	return ((p >= start) && (strncmp(p, match, len) == 0));
+}
+
+static int
+report_version(int argc, const char* argv[])
+{
+	const char* opt = (argc == 2 ? argv[1] : NULL);
+	const char* end = (opt ? opt + strlen(opt) : NULL);
+
+	const char* bn = FZ_VERSION_BUILD;
+
+	if (namematch(end, opt, "-h"))
+	{
+		printf("version [option]\n"
+			"\n"
+			"Option:\n"
+			"-f         full version, including 'Qiqqa-PDF-Tooling' bundle name as prefix\n"
+			"-0         full version sans prefixes, e.g. " FZ_VERSION "\n"
+			"-1         major (1st) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_MAJOR) "\n"
+			"-2         minor (2nd) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_MINOR) "\n"
+			"-3         patch level (3rd) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_PATCH) "\n"
+			"-4         build sequence part, i.e. 4th version part only (sans 'GHO' prefix), e.g. %s\n"
+			"-a         also list all bundled libraries and their versions, one per line.\n"
+			"\n"
+			"No option? Default behaviour is identical to `-f` mode.\n",
+			bn + 3);
+	}
+	else if (namematch(end, opt, "-f"))
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_FULL_PACKAGE));
+	}
+	else if (namematch(end, opt, "-0"))
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_FULL));
+	}
+	else if (namematch(end, opt, "-1"))
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_MAJOR));
+	}
+	else if (namematch(end, opt, "-2"))
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_MINOR));
+	}
+	else if (namematch(end, opt, "-3"))
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_PATCH));
+	}
+	else if (namematch(end, opt, "-4"))
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_BUILD));
+	}
+	else if (namematch(end, opt, "-a"))
+	{
+		const char **arr = muq_report_bundled_software();
+
+		for (; *arr; arr++)
+		{
+			printf("%s\n", *arr);
+		}
+	}
+	else
+	{
+		printf("%s\n", muq_report_version(MUQ_VERSION_FULL_PACKAGE));
+	}
+	return EXIT_SUCCESS;
 }
 
 /*
