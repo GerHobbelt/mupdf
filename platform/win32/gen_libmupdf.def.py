@@ -215,6 +215,8 @@ EXPORTS
 
 	fz_dump_lock_times
 
+%(mupdfdll_exports)s
+
 """
 
 def main():
@@ -250,6 +252,7 @@ def main():
 	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc"])
 	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "DWORD", "pthread_win32_set_terminate_np"])
 	zlib_exports = generateExports("thirdparty/zlib/zlib-ng.h", ["zng_deflateInit", "zng_inflateInit", "zng_deflateInit2", "zng_inflateInit2", "zng_inflateBackInit"])
+	mupdfdll_exports = generateExports("scripts/MuPDFLib/versions-api.h")
 
 	list = LIBMUPDF_DEF % locals()
 	# remove duplicate entries
