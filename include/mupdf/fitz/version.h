@@ -10,7 +10,8 @@
 
 // construct the version number:
 
-#define FZ_VERSION_ELEMENT_STR(part)	#part
+#define FZ_VERSION_ELEMENT_STR__(part)	#part
+#define FZ_VERSION_ELEMENT_STR(part)	FZ_VERSION_ELEMENT_STR__(part)
 
 #define FZ_VERSION										\
 	FZ_VERSION_ELEMENT_STR(FZ_VERSION_MAJOR) "."		\
