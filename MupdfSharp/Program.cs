@@ -12,6 +12,7 @@ namespace MupdfSharp
 		static void Main(string[] args)
 		{
 			Console.WriteLine($"Working directory: {Directory.GetCurrentDirectory()}");
+			Console.WriteLine($"Using monolithic { NativeMethods.muq_report_version(muq_version_mode.MUQ_VERSION_FULL_PACKAGE) }");
 
 			IntPtr ctx = NativeMethods.NewContext(); // Creates the context
 			IntPtr stm = NativeMethods.OpenFile(ctx, "test.pdf"); // opens file test.pdf as a stream
@@ -120,12 +121,33 @@ namespace MupdfSharp
 			Gray
 		}
 
+		public enum muq_version_mode
+		{
+			MUQ_VERSION_FULL,
+			MUQ_VERSION_MAJOR, // = 1
+			MUQ_VERSION_MINOR, // = 2
+			MUQ_VERSION_PATCH, // = 3
+			MUQ_VERSION_BUILD, // = 4
+			MUQ_VERSION_FULL_PACKAGE,  // full version number with package name/bundle name as prefix
+		};
+
+
 		static class NativeMethods
 		{
 			const uint FZ_STORE_DEFAULT = 256 << 20;
 			const string DLL = "MuPDFLib.dll";
 			// note: modify the version number to match the FZ_VERSION definition in "fitz\version.h" file
-			const string FZ_VERSION = "1.18.0.GHO21061401";
+			const string FZ_VERSION = "1.18.0.GHO2021061401";
+
+			[DllImport(DLL, CallingConvention = CC.Cdecl, EntryPoint = "muq_report_version", BestFitMapping = false)]
+			static extern IntPtr muq_report_version__(muq_version_mode mode);
+			public static string muq_report_version(muq_version_mode mode)
+			{
+				// https://stackoverflow.com/questions/370079/pinvoke-for-c-function-that-returns-char/370519#370519
+				IntPtr ptr = muq_report_version__(mode);
+				string str = Marshal.PtrToStringAnsi(ptr);
+				return str;
+			}
 
 			[DllImport(DLL, CallingConvention = CC.Cdecl, EntryPoint = "fz_new_context_imp", BestFitMapping = false)]
 			static extern IntPtr NewContext(IntPtr alloc, IntPtr locks, uint max_store, [MarshalAs(UnmanagedType.LPStr)] string fz_version);

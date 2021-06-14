@@ -135,23 +135,7 @@ report_version(int argc, const char* argv[])
 
 	const char* bn = FZ_VERSION_BUILD;
 
-	if (namematch(end, opt, "-h"))
-	{
-		printf("version [option]\n"
-			"\n"
-			"Option:\n"
-			"-f         full version, including 'Qiqqa-PDF-Tooling' bundle name as prefix\n"
-			"-0         full version sans prefixes, e.g. " FZ_VERSION "\n"
-			"-1         major (1st) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_MAJOR) "\n"
-			"-2         minor (2nd) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_MINOR) "\n"
-			"-3         patch level (3rd) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_PATCH) "\n"
-			"-4         build sequence part, i.e. 4th version part only (sans 'GHO' prefix), e.g. %s\n"
-			"-a         also list all bundled libraries and their versions, one per line.\n"
-			"\n"
-			"No option? Default behaviour is identical to `-f` mode.\n",
-			bn + 3);
-	}
-	else if (namematch(end, opt, "-f"))
+	if (namematch(end, opt, "-f"))
 	{
 		printf("%s\n", muq_report_version(MUQ_VERSION_FULL_PACKAGE));
 	}
@@ -184,9 +168,25 @@ report_version(int argc, const char* argv[])
 			printf("%s\n", *arr);
 		}
 	}
-	else
+	else if (!opt)
 	{
 		printf("%s\n", muq_report_version(MUQ_VERSION_FULL_PACKAGE));
+	}
+	else
+	{
+		printf("version [option]\n"
+			"\n"
+			"Option:\n"
+			"-f         full version, including 'Qiqqa-PDF-Tooling' bundle name as prefix\n"
+			"-0         full version sans prefixes, e.g. " FZ_VERSION "\n"
+			"-1         major (1st) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_MAJOR) "\n"
+			"-2         minor (2nd) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_MINOR) "\n"
+			"-3         patch level (3rd) version part only, e.g. " FZ_VERSION_ELEMENT_STR(FZ_VERSION_PATCH) "\n"
+			"-4         build sequence part, i.e. 4th version part only (sans 'GHO' prefix), e.g. %s\n"
+			"-a         also list all bundled libraries and their versions, one per line.\n"
+			"\n"
+			"No option? Default behaviour is identical to `-f` mode.\n",
+			bn + 3);
 	}
 	return EXIT_SUCCESS;
 }
