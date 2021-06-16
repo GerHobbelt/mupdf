@@ -21,7 +21,11 @@ const char* muq_report_version(enum muq_version_mode mode);
 
 // Report each bundled library / tool, one per entry.
 // The returned array is terminated by a NULL entry.
-const char** muq_report_bundled_software(void);
+//
+// When array_buffer arg is NULL, function returns required number of entries.
+// When array_element_count is too small, the array will be truncated, ensuring there's always
+// a NULL sentinel at the end (at index array_element_count-1 then).
+size_t muq_report_bundled_software(const char** array_buffer, size_t array_element_count);
 
 #ifdef __cplusplus
 }

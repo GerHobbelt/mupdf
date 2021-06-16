@@ -161,7 +161,9 @@ report_version(int argc, const char* argv[])
 	}
 	else if (namematch(end, opt, "-a"))
 	{
-		const char **arr = muq_report_bundled_software();
+		const char* buf[64];
+		const char** arr = buf;
+		muq_report_bundled_software(buf, 64);
 
 		for (; *arr; arr++)
 		{

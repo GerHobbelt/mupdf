@@ -1,20 +1,18 @@
-/* CONFIG_VERSION - QuickJS version */
-#define CONFIG_VERSION "2021-03-27"
 
 /* CONFIG_ALL_UNICODE - Define this if you want all-Unicode support */
-/* #undef CONFIG_ALL_UNICODE */
+#define CONFIG_ALL_UNICODE 1
 
 /* CONFIG_ATOMICS - Define this if you want 'Atomics' object [https://tc39.es/ecma262/#sec-atomics-object] */
-/* #undef CONFIG_ATOMICS */
+#define CONFIG_ATOMICS 1
 
 /* CONFIG_BIGNUM - Define this if you want BigNum support */
-#define CONFIG_BIGNUM 1
+#undef CONFIG_BIGNUM 
 
 /* CONFIG_PRINTF_RNDN - define it if printf uses the RNDN rounding mode instead of RNDNA */
-/* #undef CONFIG_PRINTF_RNDN */
+#define CONFIG_PRINTF_RNDN 1
 
 /* CONFIG_CHECK_JSVALUE - define it if printf uses the RNDN rounding mode instead of RNDNA */
-/* #undef CONFIG_PRINTF_RNDN */
+#define CONFIG_CHECK_JSVALUE 1
 
 /* CONFIG_DEBUGGER - define it if you want debug protocol support */
 #define CONFIG_DEBUGGER 1
@@ -23,46 +21,46 @@
 /* #undef HAVE_MALLOC_USABLE_SIZE */
 
 /* PROFILE - Define this if you want to profile the code */
-/* #undef PROFILE */
+#define PROFILE 1
 
 /* USE_WORKER - Define this if you want to add support for a worker thread */
-/* #undef USE_WORKER */
+#define USE_WORKER 1
 
 /* USE_BIGNUM - Enable BigFloat, BigDecimal by default */
-/* #undef USE_BIGNUM */
+#define USE_BIGNUM 1
 
 /* DUMP_ATOMS - Define this if you want to dump atoms when freeing context */
-/* #undef DUMP_ATOMS */
+#define DUMP_ATOMS 1
 
 /* DUMP_SHAPES - Define this if you want to dump shapes when freeing context */
-/* #undef DUMP_SHAPES */
+#define DUMP_SHAPES 1
 
 /* DUMP_OBJECTS - Define this if you want to dump objects when freeing context */
-/* #undef DUMP_OBJECTS */
+#define DUMP_OBJECTS 1
 
 /* DUMP_MEM - Define this if you want to dump memory when freeing context */
-/* #undef DUMP_MEM */
+#define DUMP_MEM 1
 
 /* DUMP_BYTECODE - Define this if you want to be able to dump bytecode */
-/* #undef DUMP_BYTECODE */
+#define DUMP_BYTECODE 1
 
 /* DUMP_FREE - Define this if you want to dump a message on freeing objects */
-/* #undef DUMP_FREE */
+#define DUMP_FREE 1
 
 /* DUMP_GC - Define this if you want to dump a message on garbage collection */
-/* #undef DUMP_GC */
+#define DUMP_GC 1
 
 /* DUMP_GC_FREE - Define this if you want to dump a message when the garbage collector free's a resource */
-/* #undef DUMP_GC_FREE */
+#define DUMP_GC_FREE 1
 
 /* DUMP_LEAKS - Define this if you want to dump memory leaks */
-/* #undef DUMP_LEAKS */
+#define DUMP_LEAKS 1
 
 /* DUMP_MODULE_RESOLVE - Define this if you want to debug module resolution */
-/* #undef DUMP_MODULE_RESOLVE */
+#define DUMP_MODULE_RESOLVE 1
 
 /* DUMP_PROMISE - Define this if you want to debug promises */
-/* #undef DUMP_PROMISE */
+#define DUMP_PROMISE 1
 
 /* DUMP_READ_OBJECT - Define this if you want to debug binary object reader */
-/* #undef DUMP_READ_OBJECT */
+#define DUMP_READ_OBJECT 1
