@@ -64,6 +64,10 @@ LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(TESSERACT_CFLA
 LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(LEPTONICA_CFLAGS)))
 endif
 
+ifdef USE_EXTRACT
+LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(EXTRACT_CFLAGS)))
+endif
+
 LOCAL_CFLAGS += $(filter-out -I%,$(FREETYPE_CFLAGS))
 LOCAL_CFLAGS += $(filter-out -I%,$(GUMBO_CFLAGS))
 LOCAL_CFLAGS += $(filter-out -I%,$(HARFBUZZ_CFLAGS))
@@ -77,6 +81,11 @@ ifdef USE_TESSERACT
 LOCAL_CFLAGS += -DHAVE_LEPTONICA -DHAVE_TESSERACT
 LOCAL_CFLAGS += $(filter-out -I%,$(TESSERACT_CFLAGS))
 LOCAL_CFLAGS += $(filter-out -I%,$(LEPTONICA_CFLAGS))
+endif
+
+ifdef USE_EXTRACT
+LOCAL_CFLAGS += -DHAVE_EXTRACT
+LOCAL_CFLAGS += $(filter-out -I%,$(EXTRACT_CFLAGS))
 endif
 
 LOCAL_SRC_FILES += $(wildcard $(MUPDF_PATH)/source/fitz/*.c)
@@ -198,7 +207,6 @@ LOCAL_SRC_FILES += $(patsubst %,$(MUPDF_PATH)/%,$(EXTRACT_SRC))
 LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(EXTRACT_CFLAGS) $(EXTRACT_BUILD_CFLAGS)))
 LOCAL_CFLAGS += $(filter-out -I%,$(EXTRACT_CFLAGS) $(EXTRACT_BUILD_CFLAGS))
 LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS)
-LOCAL_CFLAGS += -DHAVE_EXTRACT
 include $(BUILD_STATIC_LIBRARY)
 endif
 
