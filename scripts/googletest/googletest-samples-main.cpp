@@ -28,23 +28,10 @@ public:
 		expected_failure_count(n), expected_failure_remain(0)
 	{}
 
-	void OnTestStart(const testing::TestInfo& test_info) override {
-		test_suite_name = test_info.test_suite_name();
-		test_name = test_info.name();
-		type_param = test_info.type_param();
-		value_param = test_info.value_param();
-	}
-
 	testing::TestPartResult OnTestPartResult(const testing::TestPartResult& result) override {
-		//if (result.type() == testing::TestPartResult::kFatalFailure) {
-		rv = result.type();
-		file_name = result.file_name();
-		line_number = result.line_number();
-		summary = result.summary();
-		message = result.message();
-
 		testing::TestPartResult r = result;
-		if (rv != testing::TestPartResult::kSuccess && expected_failure_remain > 0)
+
+		if (r.type() != testing::TestPartResult::kSuccess && expected_failure_remain > 0)
 		{
 			expected_failure_remain--;
 			r.change_type(testing::TestPartResult::kSuccess);
@@ -52,31 +39,7 @@ public:
 		return r;
 	}
 
-	void OnTestEnd(const testing::TestInfo& test_info) override {
-		test_suite_name = NULL;
-		test_name = NULL;
-		type_param = NULL;
-		value_param = NULL;
-	}
-
-#if 0
-	void OnTestSuiteEnd(const testing::TestSuite& test_suite) override {
-		test_suite_name = NULL;
-	}
-
-	void OnEnvironmentsTearDownStart(const testing::UnitTest& unit_test) override {
-		test_name = NULL;
-	}
-
-	void OnEnvironmentsTearDownEnd(const testing::UnitTest& unit_test) override {
-		type_param = NULL;
-	}
-#endif
-
 	void OnTestIterationStart(const testing::UnitTest& unit_test, int iteration) override {
-		test_name = NULL;
-		value_param = NULL;
-
 		expected_failure_remain = expected_failure_count;
 	}
 
@@ -91,32 +54,11 @@ public:
 
 			throw std::runtime_error(os.str());
 		}
-		value_param = NULL;
-	}
-
-	void OnTestProgramStart(const testing::UnitTest& unit_test) override {
-		test_suite_name = NULL;
-	}
-
-	void OnTestProgramEnd(const testing::UnitTest& unit_test) override {
-		test_suite_name = NULL;
-		test_name = NULL;
 	}
 
 private:
 	int expected_failure_count;
 	int expected_failure_remain;
-
-	const char* test_suite_name;
-	const char* test_name;
-	const char* type_param;
-	const char* value_param;
-
-	const char* file_name;
-	int line_number;
-	const char* summary;
-	const char* message;
-	testing::TestPartResult::Type rv;
 };
 
 int main(int argc, const char** argv)
