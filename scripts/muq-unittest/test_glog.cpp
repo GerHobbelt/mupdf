@@ -16,21 +16,6 @@ static void init_test_argv(int& argc, const char**& argv)
 }
 
 
-
-TEST(LibGoogleLog, demangle) {
-	int lcl_argc;
-	const char** lcl_argv;
-	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_demangle_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
-}
-
-TEST(LibGoogleLog, logging_custom_prefix) {
-	int lcl_argc;
-	const char** lcl_argv;
-	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_logging_custom_prefix_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
-}
-
 TEST(LibGoogleLog, logging_stripped1) {
 	int lcl_argc;
 	const char** lcl_argv;
@@ -50,20 +35,6 @@ TEST(LibGoogleLog, logging_stripped10) {
 	const char** lcl_argv;
 	init_test_argv(lcl_argc, lcl_argv);
 	EXPECT_EQ(glog_logging_striptest10_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
-}
-
-TEST(LibGoogleLog, logging) {
-	int lcl_argc;
-	const char** lcl_argv;
-	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_logging_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
-}
-
-TEST(LibGoogleLog, mock_log) {
-	int lcl_argc;
-	const char** lcl_argv;
-	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_mock_log_test_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
 }
 
 TEST(LibGoogleLog, signalhandler) {
@@ -87,17 +58,26 @@ TEST(LibGoogleLog, stl_logging) {
 	EXPECT_EQ(glog_stl_logging_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
 }
 
-TEST(LibGoogleLog, symbolize) {
-	int lcl_argc;
-	const char** lcl_argv;
-	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_symbolize_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
-}
 
-TEST(LibGoogleLog, utilities) {
+int run_all_tests_glog(void)
+{
+	int rv = 0;
+
 	int lcl_argc;
 	const char** lcl_argv;
 	init_test_argv(lcl_argc, lcl_argv);
-	EXPECT_EQ(glog_utilities_unittest_main(lcl_argc, lcl_argv), EXIT_SUCCESS);
+	rv |= glog_demangle_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_logging_custom_prefix_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_logging_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_mock_log_test_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_symbolize_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_utilities_unittest_main(lcl_argc, lcl_argv);
+
+	return rv;
 }
 

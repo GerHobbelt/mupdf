@@ -1,6 +1,7 @@
 #include "pch.h"
 
-#include "../../thirdparty/owemdjee/clipp/test/testing.h"
+#define BUILD_MONOLITHIC 1
+#include "../../thirdparty/owemdjee/clipp/test/monolithic_tests.h"
 
 
 TEST(LibClipp, actions) {
