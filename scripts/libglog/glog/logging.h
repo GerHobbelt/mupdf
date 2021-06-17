@@ -1449,6 +1449,8 @@ public:
   // A special constructor used for check failures
   LogMessage(const char* file, int line, const CheckOpString& result);
 
+  __declspec(nothrow) void __FlushAndFailAtEnd() throw();
+
   ~LogMessage();
 
   // Flush a buffered message to the sink set in the constructor.  Always
@@ -1514,7 +1516,8 @@ class GOOGLE_GLOG_DLL_DECL LogMessageFatal : public LogMessage {
  public:
   LogMessageFatal(const char* file, int line);
   LogMessageFatal(const char* file, int line, const CheckOpString& result);
-  __declspec(noreturn) ~LogMessageFatal();
+  /* __declspec(noreturn) */ ~LogMessageFatal();
+  __declspec(nothrow) void __FlushAndFailAtEnd() throw();
 };
 
 // A non-macro interface to the log facility; (useful
@@ -1763,6 +1766,9 @@ GOOGLE_GLOG_DLL_DECL void TruncateStdoutStderr();
 // Thread-safe.
 GOOGLE_GLOG_DLL_DECL const char* GetLogSeverityName(LogSeverity severity);
 
+GOOGLE_GLOG_DLL_DECL [[noreturn]] void logging_fail();
+
+
 // ---------------------------------------------------------------------
 // Implementation details that are not useful to most clients
 // ---------------------------------------------------------------------
@@ -1866,7 +1872,13 @@ class GOOGLE_GLOG_DLL_DECL NullStreamFatal : public NullStream {
   NullStreamFatal() { }
   NullStreamFatal(const char* file, int line, const CheckOpString& result) :
       NullStream(file, line, result) { }
-  __declspec(noreturn) ~NullStreamFatal() throw () { _exit(1); }
+  ~NullStreamFatal() {
+#if 0
+	  _exit(1);
+#else
+	  //throw std::runtime_error("NullStreamFatal: aborting");
+#endif
+  }
 };
 
 // Install a signal handler that will dump signal information and a stack
