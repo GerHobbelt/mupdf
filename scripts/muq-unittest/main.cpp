@@ -28,13 +28,6 @@ GTEST_API_ int main(int argc, const char** argv) {
 
 	int rv = 0;
 
-	// HACK: don't execute the tests until we say they should. This prevents the monolithic build resulting in executing all the tests many times.
-	::testing::internal::g_help_flag = true;
-
-	rv |= run_all_tests_glog();  // call this one to ensure all google-log tests are included in this monolithic test executable.
-
-	::testing::internal::g_help_flag = false;
-
 	rv |= RUN_ALL_TESTS();
 
 	return rv;

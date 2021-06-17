@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{fc63588d-259e-4e61-998a-08569c1091b9}</ProjectGuid>
+    <ProjectGuid>{90C2D402-786E-4635-AC77-72A3C5CFF450}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ConfigurationType>Application</ConfigurationType>
@@ -56,21 +56,20 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
-    <ClInclude Include="../../scripts/muq-unittest/pch.h" />
+    <ClInclude Include="../../scripts/googlelog-unittest/pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../scripts/muq-unittest/test.cpp" />
-    <ClCompile Include="../../scripts/muq-unittest/pch.cpp">
+    <ClCompile Include="../../scripts/googlelog-unittest/pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\scripts\muq-unittest\main.cpp" />
-    <ClCompile Include="..\..\scripts\muq-unittest\test_libclipp.cpp" />
+    <ClCompile Include="..\..\scripts\googlelog-unittest\main.cpp" />
+    <ClCompile Include="..\..\scripts\googlelog-unittest\test_glog.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="../../scripts/muq-unittest/packages.config" />
+    <None Include="../../scripts/googlelog-unittest/packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="libclipp_examples.vcxproj">

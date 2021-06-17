@@ -7,3 +7,5 @@
 
 #include "gtest/gtest.h"
 
+int run_all_tests_glog(void);
+
