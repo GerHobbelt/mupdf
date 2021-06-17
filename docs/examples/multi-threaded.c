@@ -46,6 +46,7 @@ void
 fail(char *msg)
 {
 	fprintf(stderr, "%s\n", msg);
+	fflush(stderr);
 	abort();
 }
 
