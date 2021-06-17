@@ -79,7 +79,7 @@ int main(int argc, const char** argv)
 	InitGoogleTest(&argc, argv);
 
 	TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
-	listeners.Append(new ExpectNFailuresListener(1));
+	listeners.Append(new ExpectNFailuresListener(100));
 
 	rv |= gtest_api_test_main(argc, argv);
 	rv |= gtest_assert_ex_test_main(argc, argv);
