@@ -37,6 +37,27 @@ const buildFiles = [
 	"/Browse.VC.db",
 ];
 
+const specialRejectFiles = [
+	".git",
+	".gitignore",
+	".gitmodules",
+	".gitattributes",
+	"README",
+	"README.txt",
+	"README.md",
+	"index.html",
+	"Makefile",
+	"Makefile.am",
+	"Makefile.in",
+	"configure",
+	"configure.ac",
+	"App.config",
+	"CHANGES",
+	"LICENSE",
+	"LICENSE.txt",
+	"LICENSE.md",
+];
+
 let src = fs.readFileSync(input, 'utf8');
 // split in lines, one line per file
 let a = src.split('\n');
@@ -69,7 +90,21 @@ let b = a
 	
 	if (!has_build_dir) {
 		console.error('Could not deduce a build directory for this object/target file:', l);
-		return null;
+
+		// special directories: assume it's the first containing directory,
+		// UNLESS there's a .git* file in there:
+		let dirstr = l.replace(/[^/]+$/, "");
+		// now check for .git, .gitignore, .gitattributes and .gitmodules files:
+		has_build_dir = true;  
+		for (let i = 0; i < specialRejectFiles.length; i++) {
+			let matchpath = dirstr + specialRejectFiles[i];
+			if (fs.existsSync(matchpath)) {
+				has_build_dir = false;  
+				console.error('Found ', matchpath, ' in the same directory: SKIPPING!');
+				return null;
+			}
+		}
+		l = dirstr;
 	}
 
 	// make sure we log each entry only once:
