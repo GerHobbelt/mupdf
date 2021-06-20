@@ -21,6 +21,20 @@
 #define main main_utf8
 #endif
 
+
+extern int charter_svg_main(int argc, const char* argv[]);
+extern int charter_tex_main(int argc, const char* argv[]);
+extern int tiny_expr_repl_main(int argc, const char* argv[]);
+
+extern int smartypants_main(int argc, const char* argv[]);
+extern int upskirt_main(int argc, const char* argv[]);
+
+extern int qjscompress_main(int argc, const char* argv[]);
+extern int qjs_main(int argc, const char* argv[]);
+extern int qjsc_main(int argc, const char* argv[]);
+extern int qjs_unicode_gen_main(int argc, const char* argv[]);
+
+
 static int report_version(int argc, const char* argv[]);
 
 static struct {
@@ -113,6 +127,18 @@ static struct {
 	{ pngidat_main, "pngidat", "pngidat tool" },
 	{ pngiend_main, "pngiend", "pngiend tool" },
 	{ pngihdr_main, "pngihdr", "pngihdr tool" },
+
+	{ charter_svg_main, "charter_svg", "charter_svg tool" },
+	{ charter_tex_main, "charter_tex", "charter_tex tool" },
+	{ tiny_expr_repl_main, "tiny_expr_repl", "tiny_expr_repl tool" },
+
+	{ smartypants_main, "smartypants", "smartypants tool" },
+	{ upskirt_main, "upskirt", "upskirt tool" },
+
+	{ qjscompress_main, "qjscompress", "qjscompress tool" },
+	{ qjs_main, "qjs", "qjs (QuickJS) tool" },
+	{ qjsc_main, "qjsc", "qjsc (QuickJS Compiler) tool" },
+	{ qjs_unicode_gen_main, "qjs_unicode_gen", "qjs_unicode_gen tool" },
 
 	{ report_version, "version", "report version of this build / tools" },
 };
