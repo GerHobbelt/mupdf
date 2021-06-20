@@ -203,10 +203,10 @@
 #define VERSION "4.2.0"
 
 /* Support WEBP compression */
-/* #undef WEBP_SUPPORT */
+#define WEBP_SUPPORT 1
 
 /* Support ZSTD compression */
-/* #undef ZSTD_SUPPORT */
+#define ZSTD_SUPPORT 1
 
 
 /* Set the native cpu bit order */
