@@ -86,4 +86,22 @@ rebuild: clean build
 clean:
 	-del "$(TARGET_PACKAGE_EXE)"
 
-.PHONY: clean rebuild
+
+
+# =============================================================================================================
+#
+# Recursive calls to build all release flavours all at once.
+#
+# =============================================================================================================
+
+build-all:
+
+rebuild-all: 
+
+clean-all:
+	nmake /help
+
+
+
+.PHONY: clean rebuild misc
+
