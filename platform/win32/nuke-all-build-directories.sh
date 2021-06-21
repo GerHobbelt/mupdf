@@ -8,7 +8,19 @@
 # 
 
 # find all build files and list them for processing, i.e. deducing 'root dev build output directory detection':
-find ../../../../../ -type f -name '*.obj' -o -name '*.sbr' -o -name '*.tlog' -o -name '*.ipch' -o -name 'Browse.VC.db' > tmp.list
+dir="$1"
+if test -z "$dir" ; then
+	dir=. 
+fi
+dir=$( realpath "$dir" )
+cat <<EOT
+Looking for build directories in the directory tree:
+
+    $dir
+
+----------------------------------------------------
+EOT
+find "$dir" -type f -name '*.obj' -o -name '*.sbr' -o -name '*.tlog' -o -name '*.ipch' -o -name 'Browse.VC.db' > tmp.list
 node nuke-all-build-directories.js tmp.list nuke-all-build-directories-exec.sh
 rm tmp.list
 ./nuke-all-build-directories-exec.sh

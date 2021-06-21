@@ -116,8 +116,8 @@ let b = a
 .filter((l) => l && l.length);
 
 let dstcontent = b.map((l) => {
-	return `echo ${l}
-rm -rf ${l}`;
+	return `echo "${l}"
+rm -rf "${l}"`;
 })
 
 fs.writeFileSync(output, `#! /bin/bash

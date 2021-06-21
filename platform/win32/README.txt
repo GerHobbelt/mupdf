@@ -52,23 +52,43 @@ Another set of (shell+NodeJS) scripts have been provided for **project area clea
 
 - `nuke-all-build-directories.sh`
 
-  **WARNING: check the shell script before running -- this one has not been properly parameterized yet re base directory and will attack A LOT OF STUFF outside the current MuPDF/Qiqqa dev tree by default!**
+  **NOTE: the scripts accepts a directory as single parameter; when none is provided the current directory is assumed.**
 
   Go through all the development project directories, find any GCC and MSVC output directories that can be safely erased and then `rm -rf` those directories in bulk.
+
+  Sample usage:
+
+  ```
+  # make this directory the current directory; 
+  # (this is its path in my own dev environment, change it to suit yours)
+  cd /z/lib/tooling/qiqqa/MuPDF/platform/win32
+  # nuke anything in the /z/lib/tooling/qiqqa/MuPDF/ tree:
+  ./nuke-all-build-directories.sh ../../
+  ```
 
   **Notes**:
 
   - the accompanying `nuke-all-build-directories.js` script is there to analyze the directories located by the shell script, filter the results using some basic heuristics and produce the bulk erase script `nuke-all-build-directories-exec.sh`. This one *should* be cleaned up afterwards, *but* we don't do that yet for reasons of debugging/inspection. 
   
-    It truns out it's easier to keep that generated script around after the fact for that rare occasion where things go pearshaped: you then have a good chance to investigate the culprit after damage done and thus an easier option to decide how much damage has been done; no uncertainty about whether a certain directory has been hit by `rm -rf` or not.
+    It turns out it's easier to keep that generated script around after the fact for that rare occasion where things go pearshaped: you then have a good chance to investigate the culprit after damage done and thus an easier option to decide how much damage has been done; no uncertainty about whether a certain directory has been hit by `rm -rf` or not.
 
-- `nuke-all-npm-node_modules-directories-exec.sh` :: **nuke all the installed node npm packages everywhere**
+- `nuke-all-npm-node_modules-directories.sh` :: **nuke all the installed node npm packages everywhere**
 
-  **WARNING: check the shell script before running -- this one has not been properly parameterized yet re base directory and will attack A LOT OF STUFF outside the current MuPDF/Qiqqa dev tree by default!**
+  **NOTE: the scripts accepts a directory as single parameter; when none is provided the current directory is assumed.**
 
-  **TODO**: move this one into the generic tools/utility directory / repo as this is more relevant for other projects.
+  **NOTE**: this (and the other nuke script) are now also available in the genric tools/utility directory / repo https://github.com/GerHobbelt/developer-utility-commands as this is more relevant for other projects.
 
   Go through all the development project directories, find any `npm` installed packages that can be safely erased and then `rm -rf` those `node_modules` directories in bulk.
+
+  Sample usage:
+
+  ```
+  # make this directory the current directory; 
+  # (this is its path in my own dev environment, change it to suit yours)
+  cd /z/lib/tooling/qiqqa/MuPDF/platform/win32
+  # nuke anything in the /z/lib/tooling/qiqqa/ tree:
+  ./nuke-all-npm-node_modules-directories.sh ../../../
+  ```
 
   **Notes**:
 
