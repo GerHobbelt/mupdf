@@ -2,6 +2,7 @@
 
 #include "mupdf/fitz.h"
 
+#include "../../thirdparty/tesseract/include/tesseract/export.h"       // for TESS_API
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
 
 #include <string.h>
@@ -9,11 +10,13 @@
 
 
 
+#if !defined(TESSERACT_STANDALONE) || defined(BUILD_MONOLITHIC)
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if !defined(DISABLED_LEGACY_ENGINE)
+#if defined(DISABLED_LEGACY_ENGINE)
 
 TESS_API int tesseract_ambiguous_words_main(int argc, const char** argv) {
 	fz_error(NULL, "tess_ambiguous_words is not available in this build.\n");
@@ -79,3 +82,4 @@ TESS_API int tesseract_text2image_main(int argc, const char** argv) {
 }
 #endif
 
+#endif

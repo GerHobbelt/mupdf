@@ -27,65 +27,27 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
-    
-    
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
-    
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
-    
-    
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
-    
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -102,18 +64,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -143,30 +94,14 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -175,34 +110,19 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      
-      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -210,18 +130,11 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      
-      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg;..\..\thirdparty\jbig2dec;..\..\thirdparty\libjpeg;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -548,9 +461,12 @@
     <ClCompile Include="..\..\thirdparty\zlib\crc32_comb.c" />
     <ClCompile Include="..\..\thirdparty\zlib\deflate.c" />
     <ClCompile Include="..\..\thirdparty\zlib\deflate_fast.c" />
+    <ClCompile Include="..\..\thirdparty\zlib\deflate_huff.c" />
     <ClCompile Include="..\..\thirdparty\zlib\deflate_medium.c" />
     <ClCompile Include="..\..\thirdparty\zlib\deflate_quick.c" />
+    <ClCompile Include="..\..\thirdparty\zlib\deflate_rle.c" />
     <ClCompile Include="..\..\thirdparty\zlib\deflate_slow.c" />
+    <ClCompile Include="..\..\thirdparty\zlib\deflate_stored.c" />
     <ClCompile Include="..\..\thirdparty\zlib\functable.c" />
     <ClCompile Include="..\..\thirdparty\zlib\gzlib.c" />
     <ClCompile Include="..\..\thirdparty\zlib\gzread.c" />
@@ -977,15 +893,31 @@
     <None Include="..\..\thirdparty\mujs\docs\reference.html" />
     <None Include="..\..\thirdparty\mujs\docs\style.css" />
     <None Include="..\..\thirdparty\mujs\README" />
+    <None Include="..\..\thirdparty\zlib\FAQ.zlib" />
+    <None Include="..\..\thirdparty\zlib\INDEX.md" />
+    <None Include="..\..\thirdparty\zlib\PORTING.md" />
+    <None Include="..\..\thirdparty\zlib\README.md" />
+    <None Include="..\..\thirdparty\zlib\zconf-ng.h.in" />
+    <None Include="..\..\thirdparty\zlib\zconf.h.in" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\thirdparty\libpng\CMakeLists.txt" />
     <Text Include="..\..\thirdparty\libpng\libpng-manual.txt" />
     <Text Include="..\..\thirdparty\libtiff\libtiff\CMakeLists.txt" />
+    <Text Include="..\..\thirdparty\zlib\win32\DLL_FAQ.txt" />
+    <Text Include="..\..\thirdparty\zlib\win32\README-WIN32.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\thirdparty\mujs\docs\artifex-logo.png" />
     <Image Include="..\..\thirdparty\mujs\docs\mujs-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

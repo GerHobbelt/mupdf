@@ -30,7 +30,7 @@ int pdfmetadump_main(int argc, const char* argv[]);
 
 int cmapdump_main(int argc, const char* argv[]);
 
-#ifndef TESSERACT_STANDALONE
+#if !defined(TESSERACT_STANDALONE) || defined(BUILD_MONOLITHIC)
 int tesseract_main(int argc, const char** argv);
 #endif
 

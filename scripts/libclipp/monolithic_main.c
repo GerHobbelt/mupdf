@@ -10,6 +10,7 @@
 #endif
 #include <errno.h>
 
+#define BUILD_MONOLITHIC 1
 #include "examples/monolithic_examples.h"
 
 

@@ -1,7 +1,7 @@
 #include "pch.h"
 
+#define BUILD_MONOLITHIC 1
 #include "../../thirdparty/owemdjee/glog/src/testing.h"
-
 
 
 

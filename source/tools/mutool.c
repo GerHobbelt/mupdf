@@ -4,9 +4,15 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+
+#define BUILD_MONOLITHIC 1
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
 #include "../../thirdparty/owemdjee/libwebp/extras/tools.h"
 #include "../../thirdparty/owemdjee/pmt-png-tools/pngtools-monolithic.h"
+#include "../../thirdparty/owemdjee/upskirt-markdown/bin/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libxml2/include/libxml/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/QuickJS/monolithic_examples.h"
+#undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
 
@@ -20,19 +26,6 @@
 #ifdef _MSC_VER
 #define main main_utf8
 #endif
-
-
-extern int charter_svg_main(int argc, const char* argv[]);
-extern int charter_tex_main(int argc, const char* argv[]);
-extern int tiny_expr_repl_main(int argc, const char* argv[]);
-
-extern int smartypants_main(int argc, const char* argv[]);
-extern int upskirt_main(int argc, const char* argv[]);
-
-extern int qjscompress_main(int argc, const char* argv[]);
-extern int qjs_main(int argc, const char* argv[]);
-extern int qjsc_main(int argc, const char* argv[]);
-extern int qjs_unicode_gen_main(int argc, const char* argv[]);
 
 
 static int report_version(int argc, const char* argv[]);

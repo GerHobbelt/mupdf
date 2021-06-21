@@ -36,6 +36,13 @@ def generateExports(header, exclude=[]):
 	functions = collectExports(header)
 	return "\n".join(["\t" + name for name in functions if name not in exclude])
 
+def generateQuickJSExports(header, exclude=[]):
+	if os.path.isdir(header):
+		return "\n".join([generateExports(os.path.join(header, file), exclude) for file in os.listdir(header) if re.match(r'quickjs[a-z-]*?[.][hH]', file)])
+
+	functions = collectExports(header)
+	return "\n".join(["\t" + name for name in functions if name not in exclude])
+
 def collectFunctions(file):
 	data = open(file, "r", encoding='utf8').read()
 	return sorted(re.findall(r"(?sm)^\w+(?: \*\n|\n| \*| )((?:fz_|pdf_|xps_)\w+) *\(", data))
@@ -189,6 +196,18 @@ EXPORTS
 
 %(zlib_exports)s
 
+; QuickJS exports
+
+%(quickjs_exports)s
+
+; Zstd exports
+
+%(zstd_exports)s
+
+; MarkDown exports
+
+%(markdown_exports)s
+
 ; monolithic tool exports
 
 	dwebp_main
@@ -249,9 +268,12 @@ def main():
 	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
 	mujs_exports = generateExports("thirdparty/mujs/mujs.h")
 	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
-	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc"])
+	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc", "xml_test_xmlreader_main"])
 	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "DWORD", "pthread_win32_set_terminate_np"])
 	zlib_exports = generateExports("thirdparty/zlib/zlib-ng.h", ["zng_deflateInit", "zng_inflateInit", "zng_deflateInit2", "zng_inflateInit2", "zng_inflateBackInit"])
+	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["JS_AddIntrinsicBigDecimal", "JS_AddIntrinsicBigFloat", "JS_AddIntrinsicBigInt", "JS_AddIntrinsicOperators", "JS_EnableBignumExt", "__js_printf_like"])
+	markdown_exports = generateExports("thirdparty/owemdjee/upskirt-markdown/bin")
+	zstd_exports = generateExports("thirdparty/owemdjee/zstd/programs", ["zstd_fitblk_example_main", "zstd_mini_gzip_main", "zstd_zwrapbench_main"])
 	mupdfdll_exports = generateExports("scripts/MuPDFLib/versions-api.h")
 
 	list = LIBMUPDF_DEF % locals()
