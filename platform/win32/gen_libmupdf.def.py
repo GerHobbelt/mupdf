@@ -271,7 +271,7 @@ def main():
 	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc", "xml_test_xmlreader_main"])
 	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "DWORD", "pthread_win32_set_terminate_np"])
 	zlib_exports = generateExports("thirdparty/zlib/zlib-ng.h", ["zng_deflateInit", "zng_inflateInit", "zng_deflateInit2", "zng_inflateInit2", "zng_inflateBackInit"])
-	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["JS_AddIntrinsicBigDecimal", "JS_AddIntrinsicBigFloat", "JS_AddIntrinsicBigInt", "JS_AddIntrinsicOperators", "JS_EnableBignumExt", "__js_printf_like"])
+	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["JS_AddIntrinsicBigDecimal", "JS_AddIntrinsicBigFloat", "JS_AddIntrinsicBigInt", "JS_AddIntrinsicOperators", "JS_EnableBignumExt", "__js_printf_like", "JS_FreeValue", "JS_FreeValueRT", "qjs_port_malloc", "qjs_port_realloc", "qjs_port_free", "qjs_port_malloc_usable_size"])
 	markdown_exports = generateExports("thirdparty/owemdjee/upskirt-markdown/bin")
 	zstd_exports = generateExports("thirdparty/owemdjee/zstd/programs", ["zstd_fitblk_example_main", "zstd_mini_gzip_main", "zstd_zwrapbench_main"])
 	mupdfdll_exports = generateExports("scripts/MuPDFLib/versions-api.h")

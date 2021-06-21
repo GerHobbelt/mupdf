@@ -47,11 +47,6 @@ TESS_API int tesseract_shape_clustering_main(int argc, const char** argv) {
 
 #if !defined(HAS_LIBICU)
 
-TESS_API int tesseract_merge_unicharsets_main(int argc, const char** argv) {
-	fz_error(NULL, "tess_merge_unicharsets is not available in this build.\n");
-	return EXIT_FAILURE;
-}
-
 TESS_API int tesseract_set_unicharset_properties_main(int argc, const char** argv) {
 	fz_error(NULL, "tess_set_unicharset_properties is not available in this build.\n");
 	return EXIT_FAILURE;
