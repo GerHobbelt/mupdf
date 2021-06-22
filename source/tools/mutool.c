@@ -143,7 +143,7 @@ namematch(const char *end, const char *start, const char *match)
 		return 0;
 	size_t len = strlen(match);
 	const char* p = end - len;
-	return ((p >= start) && (strncmp(p, match, len) == 0));
+	return ((p == start) && (strncmp(p, match, len) == 0));
 }
 
 static int
@@ -359,7 +359,7 @@ int mutool_main(int argc, const char** argv)
 	if (argc > 0)
 	{
 		start = fz_path_basename(argv[0]);
-		end = start + strlen(argv[0]);
+		end = start + strlen(start);
 		if ((end-4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
 			end = end-4;
 		for (i = 0; i < (int)nelem(tools); i++)
