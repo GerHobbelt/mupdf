@@ -29,6 +29,11 @@
 /* USE_BIGNUM - Enable BigFloat, BigDecimal by default */
 #define USE_BIGNUM 1
 
+
+// ------------------------- configuration -------------------------------------
+
+#if !defined(QJS_NO_DUMP)
+
 /* DUMP_ATOMS - Define this if you want to dump atoms when freeing context */
 #define DUMP_ATOMS 1
 
@@ -45,19 +50,27 @@
 #define DUMP_CLOSURE 1
 
 /* DUMP_BYTECODE - Define this if you want to be able to dump bytecode */
+/* dump the bytecode of the compiled functions: combination of bits
+   1: dump pass 3 final byte code
+   2: dump pass 2 code
+   4: dump pass 1 code
+   8: dump stdlib functions
+  16: dump bytecode in hex
+  32: dump line number table
+ */
 #define DUMP_BYTECODE 0xFF
 
-/* DUMP_FREE - Define this if you want to dump a message on freeing objects */
+ /* DUMP_FREE - Define this if you want to dump a message on freeing objects */
 #define DUMP_FREE 1
 
 /* DUMP_GC - Define this if you want to dump a message on garbage collection */
 #define DUMP_GC 1
 
-/* DUMP_GC_FREE - Define this if you want to dump a message when the garbage collector free's a resource */
+/* DUMP_GC_FREE - Define this if you want to dump a message when the garbage collector frees a resource */
 #define DUMP_GC_FREE 1
 
-/* DUMP_LEAKS - Define this if you want to dump memory leaks */
-#define DUMP_LEAKS 1
+/* DUMP_LEAKS - Define this if you want to dump memory leaks; set to compile-time DUMP_LEAKS to 2 for more dumping */
+#define DUMP_LEAKS 2
 
 /* DUMP_MODULE_RESOLVE - Define this if you want to debug module resolution */
 #define DUMP_MODULE_RESOLVE 1
@@ -94,3 +107,5 @@
 //#define DUMP_MODULE_RESOLVE
 //#define DUMP_PROMISE
 //#define DUMP_READ_OBJECT
+
+#endif

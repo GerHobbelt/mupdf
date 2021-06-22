@@ -46,36 +46,51 @@ if (fs.existsSync(calcCfile)) {
 	fs.unlinkSync(calcCfile);
 }
 
+let bootstrap_repl = false;
+let bootstrap_calc = false;
 try {
 	if (fs.existsSync(mutoolExe)) {
-		const stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-c', '-o', replCfile, replJSfile]);
+		let stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-m', '-c', '-o', replCfile, replJSfile]);
 		console.log(stdout);
 		if (fs.existsSync(replCfile)) {
 			console.log("Successfully generated the repl C source file from repl.js");
 		}
-		bootstrap(true);
-	}
-	else {
-		bootstrap();
 	}
 } catch (ex) {
 	//console.log("COMPILE FAILED:", ex);
 	let errmsg = `COMPILE FAILED: ${ex}`;
 	console.log(errmsg.replace(/Error/ig, 'Warning'));
-	bootstrap(true);
+	bootstrap_repl = true;
 }
+
+try {
+	if (fs.existsSync(mutoolExe)) {
+		stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
+		console.log(stdout);
+		if (fs.existsSync(calcCfile)) {
+			console.log("Successfully generated the calc C source file from calc.js");
+		}
+	}
+} catch (ex) {
+	//console.log("COMPILE FAILED:", ex);
+	let errmsg = `COMPILE FAILED: ${ex}`;
+	console.log(errmsg.replace(/Error/ig, 'Warning'));
+	bootstrap_calc = true;
+}
+
+bootstrap(bootstrap_repl, bootstrap_calc);
 
 
 
 
 // now the bootstrap bit: fake it when the compiler did not deliver!
 
-function bootstrap(forced) {
-	if (forced) {
-		forced = "FORCED";
+function bootstrap(forced_repl, forced_calc) {
+	if (forced_repl) {
+		forced_repl = "FORCED";
 	}
-	if (!fs.existsSync(replCfile) || forced) {
-		console.log(`BOOSTRAPPING ${ forced }: faking an empty repl C source file`);
+	if (!fs.existsSync(replCfile) || forced_repl) {
+		console.log(`BOOSTRAPPING ${ forced_repl }: faking an empty repl C source file`);
 		fs.writeFileSync(replCfile, `
 
 #include <stdint.h>
@@ -86,8 +101,11 @@ const uint32_t qjsc_repl_size = 1;
 `, 'utf8');
 	}
 
-	if (!fs.existsSync(calcCfile) || forced) {
-		console.log(`BOOSTRAPPING ${ forced }: faking an empty calc C source file`);
+	if (forced_calc) {
+		forced_calc = "FORCED";
+	}
+	if (!fs.existsSync(calcCfile) || forced_calc) {
+		console.log(`BOOSTRAPPING ${ forced_calc }: faking an empty calc C source file`);
 		fs.writeFileSync(calcCfile, `
 
 #include <stdint.h>
