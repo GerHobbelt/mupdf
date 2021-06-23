@@ -10,6 +10,8 @@
 #endif
 #include <errno.h>
 
+#include "zlib-ng.h"
+
 #define BUILD_MONOLITHIC 1
 #include "libxml/monolithic_examples.h"
 
@@ -120,6 +122,8 @@ static int parse(const char* source, int argc, const char** argv)
 
 int main(int argc, const char** argv)
 {
+	zng_lib_init();
+
 	return parse(argv[1], argc - 1, argv + 1);
 }
 
