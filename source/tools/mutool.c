@@ -410,8 +410,20 @@ int mutool_main(int argc, const char** argv)
 
 	fz_info(ctx, "usage: mutool <command> [options]");
 
+	size_t max_tool_name_len = 0;
 	for (i = 0; i < (int)nelem(tools); i++)
-		fz_info(ctx, "\t%s\t-- %s", tools[i].name, tools[i].desc);
+		max_tool_name_len = fz_maxi(max_tool_name_len, strlen(tools[i].name));
+	const char* leaderdots = " . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+	for (i = 0; i < (int)nelem(tools); i++) {
+		const char* name = tools[i].name;
+		size_t name_len = strlen(tools[i].name);
+		size_t lead = (max_tool_name_len - name_len - 4) & ~1; // print even number of leaderdots characters
+		// ^^^ unsigned arithmetic so negative numbers are *huge* positive numbers instead!
+		if (lead > max_tool_name_len)
+			lead = 0;
+		size_t width = 1 + max_tool_name_len - name_len - lead;
+		fz_info(ctx, "\t%s%.*s%.*s -- %s", name, (int)width, "", (int)lead, leaderdots, tools[i].desc);
+	}
 
 	return EXIT_FAILURE;
 }
