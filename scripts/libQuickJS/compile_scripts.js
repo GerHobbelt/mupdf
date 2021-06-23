@@ -20,7 +20,7 @@ let binDir2 = argv[4];		// TargetDir
 
 const mutoolExe = binDir + 'mutool.exe';
 const replJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/repl.js';
-const calcJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/calc.js';
+const calcJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/qjscalc.js';
 const replCfile = targetDir + 'qjsrepl.c';
 const calcCfile = targetDir + 'qjscalc.c';
 
@@ -38,22 +38,43 @@ console.log({
 	existCalcC: fs.existsSync(calcCfile),
 });
 
+// check if source is younger than target; if not, don't do anything.
+function check_file_mtime(path) {
+	let st = fs.statSync(path);
+	return st.mtime.getTime();
+}
 
 if (fs.existsSync(replCfile)) {
-	fs.unlinkSync(replCfile);
+	let mk_replCfile = true;
+	if (fs.existsSync(replJSfile)) {
+		// do NOT run build command when C is younger than JS, i.e. JS is older than C:
+		// in that case, we assume the C file has already been generated from that JS file version before!
+		mk_replCfile = (check_file_mtime(replJSfile) >= check_file_mtime(replCfile));
+	}
+	if (mk_replCfile) {
+		fs.unlinkSync(replCfile);
+	}
 }
 if (fs.existsSync(calcCfile)) {
-	fs.unlinkSync(calcCfile);
+	let mk_calcCfile = true;
+	if (fs.existsSync(calcJSfile)) {
+		mk_calcCfile = (check_file_mtime(calcJSfile) >= check_file_mtime(calcCfile));
+	}
+	if (mk_calcCfile) {
+		fs.unlinkSync(calcCfile);
+	}
 }
 
 let bootstrap_repl = false;
 let bootstrap_calc = false;
 try {
-	if (fs.existsSync(mutoolExe)) {
-		let stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-m', '-c', '-o', replCfile, replJSfile]);
-		console.log(stdout);
-		if (fs.existsSync(replCfile)) {
-			console.log("Successfully generated the repl C source file from repl.js");
+	if (!fs.existsSync(replCfile)) {
+		if (fs.existsSync(mutoolExe)) {
+			let stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-m', '-c', '-o', replCfile, replJSfile]);
+			console.log(stdout);
+			if (fs.existsSync(replCfile)) {
+				console.log("Successfully generated the repl C source file from repl.js");
+			}
 		}
 	}
 } catch (ex) {
@@ -64,11 +85,13 @@ try {
 }
 
 try {
-	if (fs.existsSync(mutoolExe)) {
-		stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
-		console.log(stdout);
-		if (fs.existsSync(calcCfile)) {
-			console.log("Successfully generated the calc C source file from calc.js");
+	if (!fs.existsSync(calcCfile)) {
+		if (fs.existsSync(mutoolExe)) {
+			stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
+			console.log(stdout);
+			if (fs.existsSync(calcCfile)) {
+				console.log("Successfully generated the calc C source file from calc.js");
+			}
 		}
 	}
 } catch (ex) {
