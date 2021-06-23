@@ -1184,11 +1184,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				else {
 					if (!str) {
 						str = "(null)";
-						p = INT_MAX;			// don't care about the clipping length, a.k.a. 'precision', now.
+						// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
+						if (p < 6) {
+							p = 6;			
+						}
 					}
-					if (p == INT_MAX)
-						p = -1;
-					size_t cliplen = (p > 0 ? p : strlen(str));
+					size_t slen = strlen(str);
+					size_t cliplen = (p != INT_MAX ? p : slen);
+					while (cliplen > slen) {
+						fmtputc(&out, ' ');
+						cliplen--;
+					}
+					// only need to print string when it's not an empty string.
+					// Edge case example:   fz_printf("%.*s", 7, "")
 					while (cliplen-- > 0) {
 						fmtputc(&out, *str++);
 					}
@@ -1203,9 +1211,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE | FPBO_VERBATIM_UNICODE);
 				}
 				else {
-					if (p == INT_MAX)
-						p = -1;
-					fmtquote(&out, str, (p > 0 ? p : strlen(str)), '"', '"', 1, j);
+					fmtquote(&out, str, (p != INT_MAX ? p : strlen(str)), '"', '"', 1, j);
 				}
 				break;
 			case 'q': /* quoted string */
