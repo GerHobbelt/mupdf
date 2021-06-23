@@ -1,6 +1,26 @@
 //
-// update/clean vcxproj for an existing project
+// update vcxproj for an existing project 
+// (clean up the CONFIGURATION SETTINGS to ensure all your projects have the same settings)
 // 
+// usage:
+//
+//     node ./update-vcxproj.js project-A.vcxproj
+//
+// or (using [bash for windows] from your [git for windows] rig:
+//
+//     for f in *.vcxproj ; do node ./patch-vcxproj.js $f ; done
+//
+// when you want to synchronize all your projects to have the same compiler/librarian/linker
+// settings throughout the entire Visual Studio solution.
+//
+// Aside: use the `patch-vcxproj.js` script to clean up any NEW `vcxproj` project
+// file that you cloned/copied from another project. Use `patch-vcxproj.js` to set up
+// an empty, FRESH project.
+//
+// Use `update-vcxprroj.js` to UPDATE/UPGRADE your existing project(s) WITHOUT altering
+// the source files set listed in these projects.
+//
+
 
 let fs = require('fs');
 let path = require('path');
