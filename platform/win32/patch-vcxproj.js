@@ -1,6 +1,23 @@
 //
 // prep vcxproj for a new project
 // 
+// usage: run as
+//
+//     node ./patch-vcxproj.js your_project.vcxproj
+//
+// WARNING: this script REMOVES all source files listed in the project, 
+// giving you a clean, EMPTY project to start with.
+//
+// This allows workflows like these to create a new additional project in a large
+// devtree:
+//
+//     cp project-A.vcxproj project-NEW.vcxproj
+//     node ./patch-vcxproj.js project-NEW.vcxproj
+// 
+// use the update-vcxproj.js script instead when you want to synchronize 
+// the settings in many projects WITHOUT ERASING any source files in there:
+// update-vcxproj.js is the UPDATE script of this family.
+//
 
 let fs = require('fs');
 let path = require('path');
