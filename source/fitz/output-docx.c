@@ -212,6 +212,266 @@ static void dev_fill_image(fz_context *ctx, fz_device *dev_, fz_image *img, fz_m
 }
 
 
+typedef struct
+{
+	fz_path_walker	walker;
+	enum
+	{
+		pathinfo_type_NONE,
+		pathinfo_type_VERTICAL_LINE,
+		pathinfo_type_HORIONTAL_LINE,
+		pathinfo_type_OTHER
+	} type;
+	fz_point	points[4];
+	int			n;
+	fz_rect	rect;
+} pathinfo_t;
+
+static void moveto(fz_context *ctx, void *arg, float x, float y);
+static void lineto(fz_context *ctx, void *arg, float x, float y);
+void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3);
+void closepath(fz_context *ctx, void *arg);
+
+void pathinfo_construct(pathinfo_t* pathinfo)
+{
+	int i;
+	pathinfo->walker.moveto = moveto;
+	pathinfo->walker.lineto = lineto;
+	pathinfo->walker.curveto = curveto;
+	pathinfo->walker.closepath = closepath;
+	pathinfo->walker.quadto = NULL;
+	pathinfo->walker.curvetov = NULL;
+	pathinfo->walker.curvetoy = NULL;
+	pathinfo->walker.rectto = NULL;
+	pathinfo->type = pathinfo_type_NONE;
+	for (i=0; i<4; ++i)
+	{
+		pathinfo->points[i].x = 0;
+		pathinfo->points[i].y = 0;
+	}
+	pathinfo->n = 0;
+}
+
+static void pathinfo_show(pathinfo_t* pathinfo)
+{
+	fprintf(stderr, "%s:%i:%s: type=%s, n=%i: (%f %f) (%f %f) (%f %f) (%f %f)\n",
+			__FILE__, __LINE__, __FUNCTION__,
+			(
+				pathinfo->type == pathinfo_type_NONE ? "NONE"
+				: pathinfo->type == pathinfo_type_VERTICAL_LINE ? "VERTICAL_LINE"
+				: pathinfo->type == pathinfo_type_HORIONTAL_LINE ? "HORIONTAL_LINE"
+				: pathinfo->type == pathinfo_type_OTHER ? "OTHER"
+				: "???"
+			),
+			pathinfo->n,
+			pathinfo->points[0].x,
+			pathinfo->points[0].y,
+			pathinfo->points[1].x,
+			pathinfo->points[1].y,
+			pathinfo->points[2].x,
+			pathinfo->points[2].y,
+			pathinfo->points[3].x,
+			pathinfo->points[3].y
+			);
+}
+
+static void moveto(fz_context *ctx, void *arg, float x, float y)
+{
+	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s:%i:%s: %f %f\n", __FILE__, __LINE__, __FUNCTION__, x, y);
+	//pathinfo_show(pathinfo);
+	if (pathinfo->type == pathinfo_type_OTHER) return;
+	if (pathinfo->n != 0)
+	{
+		pathinfo->type = pathinfo_type_OTHER;
+		return;
+	}
+	pathinfo->points[pathinfo->n].x = x;
+	pathinfo->points[pathinfo->n].y = y;
+	pathinfo->n += 1;
+}
+
+static void lineto(fz_context *ctx, void *arg, float x, float y)
+{
+	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s:%i:%s: %f %f\n", __FILE__, __LINE__, __FUNCTION__, x, y);
+	//pathinfo_show(pathinfo);
+	if (pathinfo->type == pathinfo_type_OTHER) return;
+	if (pathinfo->n == 0 || pathinfo->n >= 4)
+	{
+		pathinfo->type = pathinfo_type_OTHER;
+		return;
+	}
+	if (x == pathinfo->points[pathinfo->n-1].x)
+	{
+		if (pathinfo->n >= 2 && pathinfo->points[pathinfo->n-1].x == pathinfo->points[pathinfo->n-2].x)
+		{
+			/* Two segments in same direction; for now we treat this as failure. */
+			pathinfo->type = pathinfo_type_OTHER;
+			return;
+		}
+	}
+	else if (y == pathinfo->points[pathinfo->n-1].y)
+	{
+		if (pathinfo->n >= 2 && pathinfo->points[pathinfo->n-1].y == pathinfo->points[pathinfo->n-2].y)
+		{
+			/* Two segments in same direction; for now we treat this as failure. */
+			pathinfo->type = pathinfo_type_OTHER;
+			return;
+		}
+	}
+	else
+	{
+		pathinfo->type = pathinfo_type_OTHER;
+		return;
+	}
+
+	pathinfo->points[pathinfo->n].x = x;
+	pathinfo->points[pathinfo->n].y = y;
+	pathinfo->n += 1;
+}
+
+void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s:%i:%s: (%f %f) (%f %f) (%f %f)\n", __FILE__, __LINE__, __FUNCTION__, x1, y1, x2, y2, x3, y3);
+	//pathinfo_show(pathinfo);
+	pathinfo->type = pathinfo_type_OTHER;
+	return;
+}
+
+void closepath(fz_context *ctx, void *arg)
+{
+	pathinfo_t *pathinfo = arg;
+	int i;
+	float y0;
+	float y1;
+	//fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
+	//pathinfo_show(pathinfo);
+	if (pathinfo->type != pathinfo_type_NONE | pathinfo->n != 4)
+	{
+		pathinfo->type = pathinfo_type_OTHER;
+	}
+	/* Find step that has dx>0 and dy==0. */
+	for (i=0; i!=4; ++i)
+	{
+		if (pathinfo->points[(i+1) % 4].x > pathinfo->points[i].x)
+			break;
+	}
+	if (i == 4)
+	{
+		//fprintf(stderr, "%s:%i:%s: failed to find dx>0.\n", __FILE__, __LINE__, __FUNCTION__);
+		return;
+	}
+	//fprintf(stderr, "%s:%i:%s: i=%i\n", __FILE__, __LINE__, __FUNCTION__, i);
+
+	pathinfo->rect.x0 = pathinfo->points[i].x;
+	pathinfo->rect.x1 = pathinfo->points[(i+1) % 4].x;
+	if (pathinfo->points[(i+2) % 4].x != pathinfo->rect.x1)
+	{
+		//fprintf(stderr, "%s:%i:%s: failed\n", __FILE__, __LINE__, __FUNCTION__);
+		return;
+	}
+	if (pathinfo->points[(i+3) % 4].x != pathinfo->rect.x0)
+	{
+		//fprintf(stderr, "%s:%i:%s: failed\n", __FILE__, __LINE__, __FUNCTION__);
+		return;
+	}
+
+	y0 = pathinfo->points[(i+1) % 4].y;
+	y1 = pathinfo->points[(i+2) % 4].y;
+	if (pathinfo->points[(i+3) % 4].y != y1)
+	{
+		//fprintf(stderr, "%s:%i:%s: failed\n", __FILE__, __LINE__, __FUNCTION__);
+		return;
+	}
+	if (pathinfo->points[(i+4) % 4].y != y0)
+	{
+		//fprintf(stderr, "%s:%i:%s: failed\n", __FILE__, __LINE__, __FUNCTION__);
+		return;
+	}
+	pathinfo->rect.y0 = (y1 > y0) ? y0 : y1;
+	pathinfo->rect.y1 = (y1 > y0) ? y1 : y0;
+	if (pathinfo->rect.x1 - pathinfo->rect.x0 > pathinfo->rect.y1 - pathinfo->rect.y0)
+		pathinfo->type = pathinfo_type_HORIONTAL_LINE;
+	else
+		pathinfo->type = pathinfo_type_VERTICAL_LINE;
+	/*fprintf(stderr, "%s:%i:%s: (%f %f)(%f %f)\n", __FILE__, __LINE__, __FUNCTION__,
+			pathinfo->rect.x0, pathinfo->rect.y0, pathinfo->rect.x1, pathinfo->rect.y1
+			);
+	fprintf(stderr, "%s:%i:%s: *** success ***\n", __FILE__, __LINE__, __FUNCTION__);
+	*/
+	/*
+	if (pathinfo->type == pathinfo_type_HORIONTAL_LINE)
+		fprintf(stderr, "%s:%i:%s: horizontal x=%f..%f y=%f\n", __FILE__, __LINE__, __FUNCTION__,
+				pathinfo->rect.x0,
+				pathinfo->rect.x1,
+				pathinfo->rect.y0
+				);
+	else
+		fprintf(stderr, "%s:%i:%s: vertical x=%f y=%f..%f\n", __FILE__, __LINE__, __FUNCTION__,
+				pathinfo->rect.x0,
+				pathinfo->rect.y0,
+				pathinfo->rect.y1
+				);
+	*/
+}
+
+void dev_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int even_odd, fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha, fz_color_params color_params)
+{
+	/*fprintf(stderr, "%s:%i:%s:"
+			"\n",
+			__FILE__, __LINE__, __FUNCTION__
+			);*/
+	pathinfo_t pathinfo;
+	pathinfo_construct(&pathinfo);
+	fz_walk_path(ctx, path, &pathinfo.walker, &pathinfo /*arg*/);
+
+	if (pathinfo.type == pathinfo_type_HORIONTAL_LINE)
+		fprintf(stderr, "%s:%i:%s: horizontal x=%f..+%f y=%f\n", __FILE__, __LINE__, __FUNCTION__,
+				pathinfo.rect.x0,
+				pathinfo.rect.x1 - pathinfo.rect.x0,
+				pathinfo.rect.y0
+				);
+	else
+		fprintf(stderr, "%s:%i:%s:   vertical x=%f y=%f..+%f\n", __FILE__, __LINE__, __FUNCTION__,
+				pathinfo.rect.x0,
+				pathinfo.rect.y0,
+				pathinfo.rect.y1 - pathinfo.rect.y0
+				);
+}
+
+static void
+dev_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
+		fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
+{
+	fprintf(stderr, "%s:%i:%s:"
+			" stroke(start_cap=%i dash_cap=%i end_cap=%i linejoin=%i linewidth=%f miterlimit=%f dash_phase=%f dash_len=%i"
+			"\n",
+			__FILE__, __LINE__, __FUNCTION__,
+			stroke->start_cap,
+			stroke->dash_cap,
+			stroke->end_cap,
+			stroke->linejoin,
+			stroke->linewidth,
+			stroke->miterlimit,
+			stroke->dash_phase,
+			stroke->dash_len
+			);
+	fz_path_walker walker =
+	{
+		moveto,
+		lineto,
+		curveto,
+		closepath,
+		NULL,
+		NULL,
+		NULL,
+		NULL
+	};
+	fz_walk_path(ctx, path, &walker, NULL /*arg*/);
+}
+
 static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_, fz_rect mediabox)
 {
 	fz_docx_writer *writer = (fz_docx_writer*) writer_;
@@ -231,6 +491,8 @@ static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_
 		dev->super.clip_stroke_text = dev_clip_stroke_text;
 		dev->super.ignore_text = dev_ignore_text;
 		dev->super.fill_image = dev_fill_image;
+		dev->super.fill_path = dev_fill_path;
+		dev->super.stroke_path = dev_stroke_path;
 		dev->writer = writer;
 	}
 	fz_always(ctx)
