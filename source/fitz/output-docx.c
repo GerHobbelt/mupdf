@@ -216,15 +216,8 @@ sides. */
 typedef struct
 {
 	fz_path_walker	walker;
-	enum
-	{
-		pathinfo_type_NONE,
-		pathinfo_type_RECT,
-		pathinfo_type_FAIL
-	} type;
-	fz_point	points[4];
+	fz_point*	points;	/* Points to array of 4. */
 	int			n;
-	fz_rect	rect;
 } pathinfo_t;
 
 static void moveto(fz_context *ctx, void *arg, float x, float y);
@@ -232,7 +225,7 @@ static void lineto(fz_context *ctx, void *arg, float x, float y);
 void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3);
 void closepath(fz_context *ctx, void *arg);
 
-void pathinfo_construct(pathinfo_t* pathinfo)
+void pathinfo_construct(pathinfo_t* pathinfo, fz_point* points)
 {
 	int i;
 	pathinfo->walker.moveto = moveto;
@@ -243,7 +236,7 @@ void pathinfo_construct(pathinfo_t* pathinfo)
 	pathinfo->walker.curvetov = NULL;
 	pathinfo->walker.curvetoy = NULL;
 	pathinfo->walker.rectto = NULL;
-	pathinfo->type = pathinfo_type_NONE;
+	pathinfo->points = points;
 	for (i=0; i<4; ++i)
 	{
 		pathinfo->points[i].x = 0;
@@ -252,6 +245,7 @@ void pathinfo_construct(pathinfo_t* pathinfo)
 	pathinfo->n = 0;
 }
 
+/*
 static void pathinfo_show(pathinfo_t* pathinfo)
 {
 	fprintf(stderr, "%s:%i:%s: type=%s, n=%i: (%f %f) (%f %f) (%f %f) (%f %f)\n",
@@ -272,14 +266,15 @@ static void pathinfo_show(pathinfo_t* pathinfo)
 			pathinfo->points[3].y
 			);
 }
+*/
 
 static void moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	pathinfo_t *pathinfo = arg;
-	if (pathinfo->type == pathinfo_type_FAIL) return;
+	if (pathinfo->n == -1)	return;
 	if (pathinfo->n != 0)
 	{
-		pathinfo->type = pathinfo_type_FAIL;
+		pathinfo->n = -1;
 		return;
 	}
 	pathinfo->points[pathinfo->n].x = x;
@@ -290,10 +285,10 @@ static void moveto(fz_context *ctx, void *arg, float x, float y)
 static void lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	pathinfo_t *pathinfo = arg;
-	if (pathinfo->type == pathinfo_type_FAIL) return;
+	if (pathinfo->n == -1)	return;
 	if (pathinfo->n == 0 || pathinfo->n >= 4)
 	{
-		pathinfo->type = pathinfo_type_FAIL;
+		pathinfo->n = -1;
 		return;
 	}
 	pathinfo->points[pathinfo->n].x = x;
@@ -304,92 +299,63 @@ static void lineto(fz_context *ctx, void *arg, float x, float y)
 void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
 {
 	pathinfo_t *pathinfo = arg;
-	pathinfo->type = pathinfo_type_FAIL;
+	pathinfo->n = -1;
 	return;
 }
 
 void closepath(fz_context *ctx, void *arg)
 {
 	pathinfo_t *pathinfo = arg;
-	int i;
-	float y0;
-	float y1;
-	if (pathinfo->type == pathinfo_type_FAIL)
+	if (pathinfo->n == -1)
 		return;
 	if (pathinfo->n != 4)
 	{
-		pathinfo->type = pathinfo_type_FAIL;
+		pathinfo->n = -1;
 		return;
 	}
-	/* Find step that has dx>0. */
-	for (i=0; i!=4; ++i)
-	{
-		if (pathinfo->points[(i+1) % 4].x > pathinfo->points[i].x)
-			break;
-	}
-	if (i == 4)
-		return;
-
-	pathinfo->rect.x0 = pathinfo->points[i].x;
-	pathinfo->rect.x1 = pathinfo->points[(i+1) % 4].x;
-	if (pathinfo->points[(i+2) % 4].x != pathinfo->rect.x1)
-		return;
-	if (pathinfo->points[(i+3) % 4].x != pathinfo->rect.x0)
-		return;
-
-	y0 = pathinfo->points[(i+1) % 4].y;
-	y1 = pathinfo->points[(i+2) % 4].y;
-	if (pathinfo->points[(i+3) % 4].y != y1)
-		return;
-	if (pathinfo->points[(i+4) % 4].y != y0)
-		return;
-	if (y1 == y0)
-		return;
-	pathinfo->rect.y0 = (y1 > y0) ? y0 : y1;
-	pathinfo->rect.y1 = (y1 > y0) ? y1 : y0;
-	pathinfo->type = pathinfo_type_RECT;
+	pathinfo->n += 1;
 }
 
-/* Returns +1 and sets *rect. */
-int path_is_simple_rect(fz_context *ctx, const fz_path *path, fz_rect *rect)
+/*  */
+int path_is_4(fz_context *ctx, const fz_path *path, fz_point* points)
 {
 	pathinfo_t pathinfo;
-	pathinfo_construct(&pathinfo);
+	pathinfo_construct(&pathinfo, points);
 	fz_walk_path(ctx, path, &pathinfo.walker, &pathinfo /*arg*/);
 
-	if (pathinfo.type == pathinfo_type_RECT)
-	{
-		float dx = pathinfo.rect.x1 - pathinfo.rect.x0;
-		float dy = pathinfo.rect.y1 - pathinfo.rect.y0;
-		assert(dx && dy);
-		if (dx / dy > 5 || dy / dx > 5)
-		{
-			*rect = pathinfo.rect;
-			return +1;
-		}
-	}
+	if (pathinfo.n == 5)
+		return 1;
 	return 0;
 }
 
-void dev_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int even_odd, fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha, fz_color_params color_params)
+void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd, fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha, fz_color_params color_params)
 {
-	fz_rect rect;
-	if (path_is_simple_rect(ctx, path, &rect))
+	fz_docx_device *dev = (fz_docx_device*) dev_;
+	fz_point	points[4];
+	if (path_is_4(ctx, path, points) == 1)
 	{
-		if (rect.x1 - rect.x0 > rect.y1 - rect.y0)
-			fprintf(stderr, "%s:%i:%s: horizontal x=%f..%f (+%f) y=%f\n", __FILE__, __LINE__, __FUNCTION__,
-					rect.x0,
-					rect.x1,
-					rect.x1 - rect.x0,
-					rect.y0
-					);
-		else
-			fprintf(stderr, "%s:%i:%s:   vertical x=%f y=%f..%f (+%f)\n", __FILE__, __LINE__, __FUNCTION__,
-					rect.x0,
-					rect.y0,
-					rect.y1,
-					rect.y1 - rect.y0
-					);
+		int e;
+		dev->writer->ctx = ctx;
+		e = extract_add_path4(
+				dev->writer->extract,
+				matrix.a,
+				matrix.b,
+				matrix.c,
+				matrix.d,
+				matrix.e,
+				matrix.f,
+				points[0].x,
+				points[0].y,
+				points[1].x,
+				points[1].y,
+				points[2].x,
+				points[2].y,
+				points[3].x,
+				points[3].y
+				);
+		dev->writer->ctx = NULL;
+		if (e)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process line");
 	}
 }
 
