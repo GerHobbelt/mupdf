@@ -11,7 +11,8 @@
  * Baseline TIFF 6.0 plus CMYK, LZW, Flate and JPEG support.
  * Limited bit depths (1,2,4,8).
  * Limited planar configurations (1=chunky).
- * TODO: RGBPal images
+ * Incorrect extrasample handling.
+ * Limited to same bit depth for all channels.
  */
 
 struct tiff
