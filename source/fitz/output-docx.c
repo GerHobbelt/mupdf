@@ -379,34 +379,36 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 }
 
 static void
-dev_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
+dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
 		fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
 {
-	fprintf(stderr, "%s:%i:%s:"
-			" stroke(start_cap=%i dash_cap=%i end_cap=%i linejoin=%i linewidth=%f miterlimit=%f dash_phase=%f dash_len=%i"
-			"\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			stroke->start_cap,
-			stroke->dash_cap,
-			stroke->end_cap,
-			stroke->linejoin,
-			stroke->linewidth,
-			stroke->miterlimit,
-			stroke->dash_phase,
-			stroke->dash_len
-			);
-	fz_path_walker walker =
+	fz_docx_device *dev = (fz_docx_device*) dev_;
+	fz_point	points[4];
+	if (path_is_4(ctx, path, points) == 1)
 	{
-		moveto,
-		lineto,
-		curveto,
-		closepath,
-		NULL,
-		NULL,
-		NULL,
-		NULL
-	};
-	fz_walk_path(ctx, path, &walker, NULL /*arg*/);
+		int e;
+		dev->writer->ctx = ctx;
+		e = extract_add_path4(
+				dev->writer->extract,
+				in_ctm.a,
+				in_ctm.b,
+				in_ctm.c,
+				in_ctm.d,
+				in_ctm.e,
+				in_ctm.f,
+				points[0].x,
+				points[0].y,
+				points[1].x,
+				points[1].y,
+				points[2].x,
+				points[2].y,
+				points[3].x,
+				points[3].y
+				);
+		dev->writer->ctx = NULL;
+		if (e)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process line");
+	}
 }
 
 static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_, fz_rect mediabox)
