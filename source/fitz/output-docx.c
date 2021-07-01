@@ -582,6 +582,7 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 	fz_try(ctx)
 	{
 		writer->ctx = ctx;
+		if (get_bool_option(ctx, options, "html", 0)) format = extract_format_HTML;
 		if (extract_alloc_create(s_realloc_fn, writer, &writer->alloc))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to create extract_alloc instance");
 		if (extract_begin(writer->alloc, format, &writer->extract))
