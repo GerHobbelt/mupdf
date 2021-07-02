@@ -614,6 +614,20 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 		writer->rotation = get_bool_option(ctx, options, "rotation", 1);
 		writer->images = get_bool_option(ctx, options, "images", 1);
 		writer->mediabox_clip = get_bool_option(ctx, options, "mediabox-clip", 1);
+		{
+			const char* v;
+			if (fz_has_option(ctx, options, "tables-csv-format", &v))
+			{
+				fprintf(stderr, "tables-csv-format: v=%s\n", v);
+				size_t len = strlen(v) + 1; /* Might include trailing options. */
+				char* format = fz_malloc(ctx, len);
+				fz_copy_option(ctx, v, format, len);
+				fprintf(stderr, "tables-csv-format: %s\n", format);
+				if (extract_tables_csv_format(writer->extract, format))
+					fz_throw(ctx, FZ_ERROR_GENERIC, "extract_tables_csv_format() failed.");
+				fz_free(ctx, format);
+			}
+		}
 		writer->ctx = NULL;
 	}
 	fz_catch(ctx)
