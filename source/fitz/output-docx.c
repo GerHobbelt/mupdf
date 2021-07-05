@@ -271,6 +271,7 @@ static void pathinfo_show(pathinfo_t* pathinfo)
 static void moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
 	if (pathinfo->n == -1)	return;
 	if (pathinfo->n != 0)
 	{
@@ -285,6 +286,7 @@ static void moveto(fz_context *ctx, void *arg, float x, float y)
 static void lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
 	if (pathinfo->n == -1)	return;
 	if (pathinfo->n == 0 || pathinfo->n >= 4)
 	{
@@ -299,6 +301,7 @@ static void lineto(fz_context *ctx, void *arg, float x, float y)
 void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
 {
 	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s(): (%f %f) (%f %f) (%f %f)\n", __FUNCTION__, x1, y1, x2, y2, x3, y3);
 	pathinfo->n = -1;
 	return;
 }
@@ -306,6 +309,7 @@ void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2,
 void closepath(fz_context *ctx, void *arg)
 {
 	pathinfo_t *pathinfo = arg;
+	//fprintf(stderr, "%s():\n", __FUNCTION__);
 	if (pathinfo->n == -1)
 		return;
 	if (pathinfo->n != 4)
@@ -316,10 +320,12 @@ void closepath(fz_context *ctx, void *arg)
 	pathinfo->n += 1;
 }
 
-/*  */
+/* Returns 1 with points[0..3] set if <path> has four elements that define a
+rectangle with vertical and horizontal lines. */
 int path_is_4(fz_context *ctx, const fz_path *path, fz_point* points)
 {
 	pathinfo_t pathinfo;
+	//fprintf(stderr, "%s():\n", __FUNCTION__);
 	pathinfo_construct(&pathinfo, points);
 	fz_walk_path(ctx, path, &pathinfo.walker, &pathinfo /*arg*/);
 
@@ -332,7 +338,7 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
 	fz_point	points[4];
-	if (path_is_4(ctx, path, points) == 1)
+	if (path_is_4(ctx, path, points))
 	{
 		int e;
 		dev->writer->ctx = ctx;
@@ -359,36 +365,135 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 	}
 }
 
+
+
+typedef struct
+{
+	fz_path_walker          walker;
+	extract_t               *extract;
+	const fz_stroke_state   *stroke_state;
+	fz_matrix               *ctm;
+	fz_point                point0;
+	int                     point0_set;
+	fz_point                point;
+	int                     point_set;
+} stroke_info_t;
+
+static void stroke_info_moveto(fz_context *ctx, void *arg, float x, float y)
+{
+	stroke_info_t *stroke_info = arg;
+	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
+	stroke_info->point.x = x;
+	stroke_info->point.y = y;
+	stroke_info->point_set = 1;
+	if (!stroke_info->point0_set)
+	{
+		stroke_info->point0 = stroke_info->point;
+		stroke_info->point0_set = 1;
+	}
+}
+
+static void stroke_info_lineto(fz_context *ctx, void *arg, float x, float y)
+{
+	stroke_info_t *stroke_info = arg;
+	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
+	if (stroke_info->point_set)
+	{
+		if (extract_add_line(
+				stroke_info->extract,
+				stroke_info->ctm->a,
+				stroke_info->ctm->b,
+				stroke_info->ctm->c,
+				stroke_info->ctm->d,
+				stroke_info->ctm->e,
+				stroke_info->ctm->f,
+				stroke_info->point.x,
+				stroke_info->point.y,
+				x,
+				y
+				))
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process stroke line");
+		}
+	}
+	stroke_info->point.x = x;
+	stroke_info->point.y = y;
+	stroke_info->point_set = 1;
+	if (!stroke_info->point0_set)
+	{
+		stroke_info->point0 = stroke_info->point;
+		stroke_info->point0_set = 1;
+	}
+}
+
+void stroke_info_curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	stroke_info_t *stroke_info = arg;
+	//fprintf(stderr, "%s(): (%f %f) (%f %f) (%f %f)\n", __FUNCTION__, x1, y1, x2, y2, x3, y3);
+	stroke_info->point_set = 0;
+	return;
+}
+
+void stroke_info_closepath(fz_context *ctx, void *arg)
+{
+	stroke_info_t *stroke_info = arg;
+	//fprintf(stderr, "%s():\n", __FUNCTION__);
+	if (stroke_info->point0_set && stroke_info->point_set)
+	{
+		if (extract_add_line(
+				stroke_info->extract,
+				stroke_info->ctm->a,
+				stroke_info->ctm->b,
+				stroke_info->ctm->c,
+				stroke_info->ctm->d,
+				stroke_info->ctm->e,
+				stroke_info->ctm->f,
+				stroke_info->point.x,
+				stroke_info->point.y,
+				stroke_info->point0.x,
+				stroke_info->point0.y
+				))
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process stroke line");
+		}
+	}
+	stroke_info->point = stroke_info->point0;
+}
+
+
 static void
 dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
 		fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
-	fz_point	points[4];
-	if (path_is_4(ctx, path, points) == 1)
+	stroke_info_t	stroke_info;
+
+	//fprintf(stderr, "%s():\n", __FUNCTION__);
+
+	stroke_info.walker.moveto = stroke_info_moveto;
+	stroke_info.walker.lineto = stroke_info_lineto;
+	stroke_info.walker.curveto = stroke_info_curveto;
+	stroke_info.walker.closepath = stroke_info_closepath;
+	stroke_info.walker.quadto = NULL;
+	stroke_info.walker.curvetov = NULL;
+	stroke_info.walker.curvetoy = NULL;
+	stroke_info.walker.rectto = NULL;
+	stroke_info.extract = dev->writer->extract;
+	stroke_info.stroke_state = stroke;
+	stroke_info.ctm = &in_ctm;
+	stroke_info.point0_set = 0;
+	stroke_info.point_set = 0;
+
+	dev->writer->ctx = ctx;
+	fz_try(ctx)
 	{
-		int e;
-		dev->writer->ctx = ctx;
-		e = extract_add_path4(
-				dev->writer->extract,
-				in_ctm.a,
-				in_ctm.b,
-				in_ctm.c,
-				in_ctm.d,
-				in_ctm.e,
-				in_ctm.f,
-				points[0].x,
-				points[0].y,
-				points[1].x,
-				points[1].y,
-				points[2].x,
-				points[2].y,
-				points[3].x,
-				points[3].y
-				);
+		fz_walk_path(ctx, path, &stroke_info.walker, &stroke_info /*arg*/);
 		dev->writer->ctx = NULL;
-		if (e)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process line");
+	}
+	fz_catch(ctx)
+	{
+		dev->writer->ctx = NULL;
+		fz_rethrow(ctx);
 	}
 }
 
