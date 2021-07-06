@@ -272,7 +272,7 @@ fz_lookup_noto_font(fz_context *ctx, int script, int language, int *size, int *s
 	case UCDN_SCRIPT_GEORGIAN: RETURN(noto,NotoSerifGeorgian_Regular_otf);
 	case UCDN_SCRIPT_GLAGOLITIC: RETURN(noto,NotoSansGlagolitic_Regular_otf);
 	case UCDN_SCRIPT_GOTHIC: RETURN(noto,NotoSansGothic_Regular_otf);
-	case UCDN_SCRIPT_GRANTHA: RETURN(noto,NotoSansGrantha_Regular_otf);
+	case UCDN_SCRIPT_GRANTHA: RETURN(noto,NotoSerifGrantha_Regular_otf);
 	case UCDN_SCRIPT_GUJARATI: RETURN(noto,NotoSerifGujarati_Regular_otf);
 	case UCDN_SCRIPT_GUNJALA_GONDI: RETURN(noto,NotoSansGunjalaGondi_Regular_otf);
 	case UCDN_SCRIPT_GURMUKHI: RETURN(noto,NotoSerifGurmukhi_Regular_otf);
@@ -290,7 +290,7 @@ fz_lookup_noto_font(fz_context *ctx, int script, int language, int *size, int *s
 	case UCDN_SCRIPT_KHAROSHTHI: RETURN(noto,NotoSansKharoshthi_Regular_otf);
 	case UCDN_SCRIPT_KHMER: RETURN(noto,NotoSerifKhmer_Regular_otf);
 	case UCDN_SCRIPT_KHITAN_SMALL_SCRIPT: break;
-	case UCDN_SCRIPT_KHOJKI: RETURN(noto,NotoSansKhojki_Regular_otf);;
+	case UCDN_SCRIPT_KHOJKI: RETURN(noto,NotoSerifKhojki_Regular_otf);;
 	case UCDN_SCRIPT_KHUDAWADI: RETURN(noto,NotoSansKhudawadi_Regular_otf);
 	case UCDN_SCRIPT_LAO: RETURN(noto,NotoSerifLao_Regular_otf);
 	case UCDN_SCRIPT_LEPCHA: RETURN(noto,NotoSansLepcha_Regular_otf);
