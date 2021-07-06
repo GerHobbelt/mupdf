@@ -376,7 +376,7 @@ fz_lookup_noto_font(fz_context *ctx, int script, int language, int *size, int *s
 	case UCDN_SCRIPT_VAI: RETURN(noto,NotoSansVai_Regular_otf);
 	case UCDN_SCRIPT_WANCHO: RETURN(noto,NotoSansWancho_Regular_otf);
 	case UCDN_SCRIPT_WARANG_CITI: RETURN(noto,NotoSansWarangCiti_Regular_otf);
-	case UCDN_SCRIPT_YEZIDI: break;
+	case UCDN_SCRIPT_YEZIDI: RETURN(noto,NotoSerifYezidi_Regular_otf);
 	case UCDN_SCRIPT_YI: RETURN(noto,NotoSansYi_Regular_otf);
 	case UCDN_SCRIPT_ZANABAZAR_SQUARE: RETURN(noto,NotoSansZanabazarSquare_Regular_otf);
 
