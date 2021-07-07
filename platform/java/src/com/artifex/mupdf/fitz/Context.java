@@ -45,6 +45,8 @@ public class Context
 	public native static void enableICC();
 	public native static void disableICC();
 	public native static void setAntiAliasLevel(int level);
+	public native static void setUserCSS(String css);
+	public native static void useDocumentCSS(boolean state);
 
 	public native static Version getVersion();
 
