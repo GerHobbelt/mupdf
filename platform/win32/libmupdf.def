@@ -218,6 +218,7 @@ EXPORTS
 	fz_is_document_reflowable
 	fz_keep_document
 	fz_keep_page
+	fz_keep_page_locked
 	fz_last_page
 	fz_layout_document
 	fz_load_chapter_page
@@ -675,6 +676,7 @@ EXPORTS
 	fz_is_point_inside_quad
 	fz_is_point_inside_rect
 	fz_is_quad_inside_quad
+	fz_is_quad_inside_rect
 	fz_is_quad_intersecting_quad
 	fz_is_rectilinear
 	fz_matrix_expansion
@@ -900,6 +902,7 @@ EXPORTS
 	fz_set_separation_behavior
 	fz_bound_shade
 	fz_drop_shade
+	fz_drop_shade_color_cache
 	fz_drop_shade_imp
 	fz_keep_shade
 	fz_paint_shade
@@ -995,6 +998,7 @@ EXPORTS
 	fz_new_ocr_device
 	fz_new_stext_device
 	fz_new_stext_page
+	fz_open_reflowed_document
 	fz_parse_stext_options
 	fz_print_stext_header_as_html
 	fz_print_stext_header_as_xhtml
@@ -1045,6 +1049,7 @@ EXPORTS
 	fz_new_pixmap_from_page_number
 	fz_new_pixmap_from_page_number_with_separations
 	fz_new_pixmap_from_page_with_separations
+	fz_new_stext_page_from_chapter_page_number
 	fz_new_stext_page_from_display_list
 	fz_new_stext_page_from_page
 	fz_new_stext_page_from_page_number
@@ -3547,9 +3552,12 @@ EXPORTS
 	UTIL_getSpanTimeNano
 	UTIL_getTime
 	UTIL_waitForNextTick
+	CountSetBits
 	UTIL_allocateFileNamesTable
 	UTIL_chmod
 	UTIL_compareStr
+	UTIL_countCores
+	UTIL_countLogicalCores
 	UTIL_countPhysicalCores
 	UTIL_createMirroredDestDirName
 	UTIL_expandFNT
