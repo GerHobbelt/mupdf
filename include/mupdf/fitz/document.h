@@ -224,20 +224,6 @@ typedef fz_link *(fz_page_load_links_fn)(fz_context *ctx, fz_page *page);
 typedef fz_transition *(fz_page_page_presentation_fn)(fz_context *ctx, fz_page *page, fz_transition *transition, float *duration);
 
 /**
-	Type for a function to enable/
-	disable separations on a page. See fz_control_separation for
-	more information.
-*/
-typedef void (fz_page_control_separation_fn)(fz_context *ctx, fz_page *page, int separation, int disable);
-
-/**
-	Type for a function to detect
-	whether a given separation is enabled or disabled on a page.
-	See FZ_SEPARATION_DISABLED for more information.
-*/
-typedef int (fz_page_separation_disabled_fn)(fz_context *ctx, fz_page *page, int separation);
-
-/**
 	Type for a function to retrieve
 	details of separations on a page. See fz_get_separations
 	for more information.
@@ -785,8 +771,6 @@ struct fz_page
 	fz_page_run_page_fn *run_page_widgets;
 	fz_page_load_links_fn *load_links;
 	fz_page_page_presentation_fn *page_presentation;
-	fz_page_control_separation_fn *control_separation;
-	fz_page_separation_disabled_fn *separation_disabled;
 	fz_page_separations_fn *separations;
 	fz_page_uses_overprint_fn *overprint;
 	fz_page_create_link_fn *create_link;
