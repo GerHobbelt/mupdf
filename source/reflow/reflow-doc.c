@@ -147,7 +147,7 @@ reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum
 		fz_print_stext_header_as_xhtml(ctx, out);
 
 		text = fz_new_stext_page_from_chapter_page_number(ctx, doc->underdoc, chapter, pagenum, &default_opts);
-		fz_print_stext_page_as_xhtml(ctx, out, text, pagenum+1); /* pagenum is not right w.r.t chapter. */
+		fz_print_stext_page_as_xhtml(ctx, out, text, pagenum+1, fz_identity, &default_opts); /* pagenum is not right w.r.t chapter. */
 		fz_drop_stext_page(ctx, text);
 		text = NULL;
 
