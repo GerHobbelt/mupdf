@@ -235,6 +235,22 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Context_setAntiAliasLevel
 
 /*
  * Class:     com_artifex_mupdf_fitz_Context
+ * Method:    setUserCSS
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Context_setUserCSS
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Context
+ * Method:    useDocumentCSS
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Context_useDocumentCSS
+  (JNIEnv *, jclass, jboolean);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Context
  * Method:    getVersion
  * Signature: ()Lcom/artifex/mupdf/fitz/Context/Version;
  */
@@ -521,6 +537,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Document_openNativeWithPat
  */
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Document_recognize
   (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Document
+ * Method:    supportsAccelerator
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Document_supportsAccelerator
+  (JNIEnv *, jobject);
 
 /*
  * Class:     com_artifex_mupdf_fitz_Document
@@ -2440,6 +2464,22 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_beginImplicitOper
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_endOperation
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    isRedacted
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_isRedacted
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    countSignatures
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_countSignatures
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
@@ -3237,6 +3277,14 @@ JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_PDFWidget_getValue
  */
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFWidget_setValue
   (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFWidget
+ * Method:    getLabel
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_PDFWidget_getLabel
+  (JNIEnv *, jobject);
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFWidget

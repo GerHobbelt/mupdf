@@ -99,7 +99,7 @@ static fz_link *load_link_flow(fz_context *ctx, fz_html_flow *flow, fz_link *hea
 				dest = href;
 			}
 
-			link = fz_new_link(ctx, bbox, dest);
+			link = fz_new_link(ctx, bbox, 0, NULL, dest);
 			link->next = head;
 			head = link;
 		}
@@ -126,6 +126,8 @@ fz_load_html_links(fz_context *ctx, fz_html *html, int page, const char *file)
 {
 	fz_link *link, *head;
 	char dir[2048];
+	int i;
+
 	fz_dirname(dir, file, sizeof dir);
 
 	head = load_link_box(ctx, html->root, NULL, page, html->page_h, dir, file);
@@ -133,10 +135,16 @@ fz_load_html_links(fz_context *ctx, fz_html *html, int page, const char *file)
 	for (link = head; link; link = link->next)
 	{
 		/* Adjust for page margins */
-		link->rect.x0 += html->page_margin[L];
-		link->rect.x1 += html->page_margin[L];
-		link->rect.y0 += html->page_margin[T];
-		link->rect.y1 += html->page_margin[T];
+		for (i = 0; i < link->count; i++) {
+			link->quads[i].ul.x += html->page_margin[L];
+			link->quads[i].ur.x += html->page_margin[L];
+			link->quads[i].ll.x += html->page_margin[L];
+			link->quads[i].lr.x += html->page_margin[L];
+			link->quads[i].ul.y += html->page_margin[T];
+			link->quads[i].ur.y += html->page_margin[T];
+			link->quads[i].ll.y += html->page_margin[T];
+			link->quads[i].lr.y += html->page_margin[T];
+		}
 	}
 
 	return head;

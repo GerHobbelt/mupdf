@@ -569,9 +569,13 @@ void ui_end(void)
 
 int ui_mouse_inside(fz_irect area)
 {
-	if (ui.x >= area.x0 && ui.x < area.x1 && ui.y >= area.y0 && ui.y < area.y1)
-		return 1;
-	return 0;
+	return fz_is_point_inside_irect(ui.x, ui.y, area);
+}
+
+int ui_mouse_inside_quad(fz_quad area)
+{
+	fz_point pt = { ui.x, ui.y };
+	return fz_is_point_inside_quad(pt, area);
 }
 
 fz_irect ui_pack_layout(int slave_w, int slave_h, enum side side, enum fill fill, enum anchor anchor, int padx, int pady)

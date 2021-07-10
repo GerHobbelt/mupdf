@@ -709,6 +709,15 @@ int fz_is_quad_inside_quad(fz_quad needle, fz_quad haystack)
 		fz_is_point_inside_quad(needle.lr, haystack);
 }
 
+int fz_is_quad_inside_rect(fz_quad needle, fz_rect haystack)
+{
+	return
+		fz_is_point_inside_rect(needle.ul, haystack) &&
+		fz_is_point_inside_rect(needle.ur, haystack) &&
+		fz_is_point_inside_rect(needle.ll, haystack) &&
+		fz_is_point_inside_rect(needle.lr, haystack);
+}
+
 int fz_is_quad_intersecting_quad(fz_quad a, fz_quad b)
 {
 	fz_rect ar = fz_rect_from_quad(a);

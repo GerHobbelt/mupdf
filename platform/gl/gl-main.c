@@ -1306,8 +1306,6 @@ static void do_undo(void)
 
 static void do_links(fz_link *link)
 {
-	fz_rect bounds;
-	fz_irect area;
 	float link_x, link_y;
 
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -1315,16 +1313,19 @@ static void do_links(fz_link *link)
 
 	while (link)
 	{
-		bounds = link->rect;
-		bounds = fz_transform_rect(link->rect, view_page_ctm);
-		area = fz_irect_from_rect(bounds);
+		int i;
 
-		if (ui_mouse_inside(area))
+		for (i = 0; i < link->count; i++)
 		{
-			tooltip = link->uri;
-			ui.hot = link;
-			if (!ui.active && ui.down)
-				ui.active = link;
+			fz_quad area = fz_transform_quad(link->quads[i], view_page_ctm);
+			if (ui_mouse_inside_quad(area))
+			{
+				tooltip = link->uri;
+				ui.hot = link;
+				if (!ui.active && ui.down)
+					ui.active = link;
+				break;
+			}
 		}
 
 		if (ui.hot == link || showlinks)
@@ -1335,7 +1336,16 @@ static void do_links(fz_link *link)
 				glColor4f(0, 0, 1, 0.2f);
 			else
 				glColor4f(0, 0, 1, 0.1f);
-			glRectf(area.x0, area.y0, area.x1, area.y1);
+			glBegin(GL_QUADS);
+			for (i = 0; i < link->count; i++)
+			{
+				fz_quad area = fz_transform_quad(link->quads[i], view_page_ctm);
+				glVertex2f(area.ul.x, area.ul.y);
+				glVertex2f(area.ur.x, area.ur.y);
+				glVertex2f(area.lr.x, area.lr.y);
+				glVertex2f(area.ll.x, area.ll.y);
+			}
+			glEnd();
 		}
 
 		if (ui.active == link && !ui.down)

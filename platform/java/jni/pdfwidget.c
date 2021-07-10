@@ -531,3 +531,20 @@ FUN(PDFWidget_previewSignatureNative)(JNIEnv *env, jclass cls, jint width, jint 
 
 	return to_Pixmap_safe_own(ctx, env, pixmap);
 }
+
+JNIEXPORT jstring JNICALL
+FUN(PDFWidget_getLabel)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_widget *widget = from_PDFWidget_safe(env, self);
+	const char *text = NULL;
+
+	if (!ctx || !widget) return NULL;
+
+	fz_try(ctx)
+		text = pdf_annot_field_label(ctx, widget);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return (*env)->NewStringUTF(env, text);
+}
