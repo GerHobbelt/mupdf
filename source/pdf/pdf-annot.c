@@ -2748,7 +2748,7 @@ pdf_set_annot_appearance(fz_context *ctx, pdf_annot *annot, const char *appearan
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
-	pdf_set_annot_resynthesised(ctx, annot);
+	pdf_set_annot_has_changed(ctx, annot);
 }
 
 void
@@ -2788,6 +2788,4 @@ pdf_set_annot_appearance_from_display_list(fz_context *ctx, pdf_annot *annot, co
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
-
-	pdf_dirty_annot(ctx, annot);
 }
