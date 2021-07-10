@@ -36,6 +36,10 @@
 #ifndef _LOGGING_H_
 #define _LOGGING_H_
 
+#if 1
+#include <chrono>
+#endif
+
 #include <cerrno>
 #include <cstddef>
 #include <cstring>
@@ -985,6 +989,17 @@ PLOG_IF(FATAL, GOOGLE_PREDICT_BRANCH_NOT_TAKEN((invocation) == -1))    \
 #define LOG_OCCURRENCES LOG_EVERY_N_VARNAME(occurrences_, __LINE__)
 #define LOG_OCCURRENCES_MOD_N LOG_EVERY_N_VARNAME(occurrences_mod_n_, __LINE__)
 
+#if 1
+#define GLOG_CONSTEXPR constexpr
+#else
+#define GLOG_CONSTEXPR const
+#endif
+
+#define LOG_TIME_PERIOD LOG_EVERY_N_VARNAME(timePeriod_, __LINE__)
+#define LOG_PREVIOUS_TIME_RAW LOG_EVERY_N_VARNAME(previousTimeRaw_, __LINE__)
+#define LOG_TIME_DELTA LOG_EVERY_N_VARNAME(deltaTime_, __LINE__)
+#define LOG_CURRENT_TIME LOG_EVERY_N_VARNAME(currentTime_, __LINE__)
+#define LOG_PREVIOUS_TIME LOG_EVERY_N_VARNAME(previousTime_, __LINE__)
 
 #if defined(__has_feature)
 #define _GLOG_HAS_FEATURE(...) __has_feature(__VA_ARGS__)
@@ -1015,6 +1030,51 @@ extern "C" void AnnotateBenignRaceSized(
   const char *description);
 
 namespace google {
+#endif
+
+#if 1 && defined(HAVE_CXX11_ATOMIC) // Have <chrono> and <atomic>
+#define SOME_KIND_OF_LOG_EVERY_T(severity, seconds) \
+  GLOG_CONSTEXPR std::chrono::duration<double, std::ratio<1, 1>> LOG_TIME_PERIOD(seconds); \
+  static std::atomic<int64> LOG_PREVIOUS_TIME_RAW; \
+  _GLOG_IFDEF_THREAD_SANITIZER( \
+          AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_TIME_PERIOD, sizeof(int64), "")); \
+  _GLOG_IFDEF_THREAD_SANITIZER( \
+          AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_PREVIOUS_TIME_RAW, sizeof(int64), "")); \
+  const auto LOG_CURRENT_TIME = std::chrono::steady_clock::now().time_since_epoch(); \
+  const decltype(LOG_CURRENT_TIME) LOG_PREVIOUS_TIME(LOG_PREVIOUS_TIME_RAW.load(std::memory_order_relaxed)); \
+  const auto LOG_TIME_DELTA = LOG_CURRENT_TIME - LOG_PREVIOUS_TIME; \
+  if (LOG_TIME_DELTA > LOG_TIME_PERIOD) \
+    LOG_PREVIOUS_TIME_RAW.store(LOG_CURRENT_TIME.count(), std::memory_order_relaxed); \
+  if (LOG_TIME_DELTA > LOG_TIME_PERIOD) google::LogMessage( \
+        __FILE__, __LINE__, google::GLOG_ ## severity).stream()
+#elif defined(OS_WINDOWS)
+#define SOME_KIND_OF_LOG_EVERY_T(severity, seconds) \
+  GLOG_CONSTEXPR int64 LOG_TIME_PERIOD(seconds * 1000000000.0); \
+  static int64 LOG_PREVIOUS_TIME = 0; \
+  int64 LOG_TIME_DELTA = 0; \
+  { \
+    LARGE_INTEGER currTime; \
+    LARGE_INTEGER freq; \
+    QueryPerformanceCounter(&currTime); \
+    QueryPerformanceFrequency(&freq); \
+    LOG_TIME_DELTA = (currTime.QuadPart * 1000000000.0 / freq.QuadPart) - LOG_PREVIOUS_TIME; \
+  } \
+  if (LOG_TIME_DELTA > LOG_TIME_PERIOD) InterlockedExchangeAdd64(&LOG_PREVIOUS_TIME, LOG_TIME_DELTA); \
+  if (LOG_TIME_DELTA > LOG_TIME_PERIOD) google::LogMessage( \
+        __FILE__, __LINE__, google::GLOG_ ## severity).stream()
+#else
+#define SOME_KIND_OF_LOG_EVERY_T(severity, seconds) \
+  GLOG_CONSTEXPR int64 LOG_TIME_PERIOD(seconds * 1000000000.0); \
+  static int64 LOG_PREVIOUS_TIME; \
+  int64 LOG_TIME_DELTA = 0; \
+  { \
+    timespec currentTime{}; \
+    clock_gettime(CLOCK_MONOTONIC, &currentTime); \
+    LOG_TIME_DELTA = (currentTime.tv_sec * 1000000000 + currentTime.tv_nsec) - LOG_PREVIOUS_TIME; \
+  } \
+  if (LOG_TIME_DELTA > LOG_TIME_PERIOD) __sync_add_and_fetch(&LOG_PREVIOUS_TIME, LOG_TIME_DELTA); \
+  if (LOG_TIME_DELTA > LOG_TIME_PERIOD) google::LogMessage( \
+        __FILE__, __LINE__, google::GLOG_ ## severity).stream()
 #endif
 
 #ifdef HAVE_CXX11_ATOMIC
@@ -1159,6 +1219,8 @@ GOOGLE_GLOG_DLL_DECL bool IsFailureSignalHandlerInstalled();
 
 #define LOG_EVERY_N(severity, n)                                        \
   SOME_KIND_OF_LOG_EVERY_N(severity, (n), google::LogMessage::SendToLog)
+
+#define LOG_EVERY_T(severity, T) SOME_KIND_OF_LOG_EVERY_T(severity, (T))
 
 #define SYSLOG_EVERY_N(severity, n) \
   SOME_KIND_OF_LOG_EVERY_N(severity, (n), google::LogMessage::SendToSyslogAndLog)
