@@ -48,7 +48,7 @@ pdf_annot_ap(fz_context *ctx, pdf_annot *annot)
 	else
 		ap = ap_n;
 
-	/* AP/N, AP/R and AP/D may be streams, or a dictionaries of streams. */
+	/* AP/N, AP/R and AP/D may be streams, or dictionaries of streams. */
 
 	/* If it's a stream, we have a winner! */
 	if (pdf_is_indirect(ctx, ap) && pdf_obj_num_is_stream(ctx, annot->page->doc, pdf_to_num(ctx, ap)))

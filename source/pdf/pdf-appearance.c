@@ -2610,28 +2610,6 @@ void pdf_annot_pop_and_discard_local_xref(fz_context *ctx, pdf_annot *annot)
 	doc->local_xref = NULL;
 }
 
-static pdf_obj *pdf_current_appearance_stream(fz_context *ctx, pdf_annot *annot)
-{
-	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
-	int readonly = flags & PDF_ANNOT_IS_READ_ONLY;
-	pdf_obj *as = pdf_dict_get(ctx, annot->obj, PDF_NAME(AS));
-	pdf_obj *ap = pdf_dict_get(ctx, annot->obj, PDF_NAME(AP));
-	pdf_obj *ap_n = pdf_dict_get(ctx, ap, PDF_NAME(N));
-	pdf_obj *ap_r = pdf_dict_get(ctx, ap, PDF_NAME(R));
-	pdf_obj *ap_d = pdf_dict_get(ctx, ap, PDF_NAME(D));
-
-	if (!readonly && annot->is_hot && annot->is_active && ap_d)
-		ap = ap_d;
-	else if (!readonly && annot->is_hot && ap_r)
-		ap = ap_r;
-	else
-		ap = ap_n;
-
-	if (!pdf_is_stream(ctx, ap))
-		ap = pdf_dict_get(ctx, ap, as);
-	return ap;
-}
-
 void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *subtype;
@@ -2673,7 +2651,7 @@ void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
 			pdf_annot_request_resynthesis(ctx, annot);
 
 		/* Find the current appearance stream, if one exists. */
-		ap_n = pdf_current_appearance_stream(ctx, annot);
+		ap_n = pdf_annot_ap(ctx, annot);
 
 		/* If there is no appearance stream, we need to create a local one for display purposes. */
 		if (!ap_n)
@@ -2727,7 +2705,7 @@ void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
 				pdf_annot_pop_and_discard_local_xref(ctx, annot);
 				/* Binning the xref may leave us holding pointers
 				 * to the wrong versions of ap_n. */
-				ap_n = pdf_current_appearance_stream(ctx, annot);
+				ap_n = pdf_annot_ap(ctx, annot);
 				pop_local_xref = 0;
 			}
 
