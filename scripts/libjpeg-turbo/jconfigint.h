@@ -38,3 +38,20 @@
 #define HAVE_BITSCANFORWARD
 #endif
 #endif
+
+#if defined(__clang__) && __cplusplus >= 201103L
+   /* clang's fallthrough annotations are only available starting in C++11. */
+#  define FALLTHROUGH [[clang::fallthrough]]
+#elif defined(__GNUC__) && (__GNUC__ >= 7)
+   /* GNU fallthrough attribute is available from GCC7 */
+#  define FALLTHROUGH __attribute__((fallthrough))
+#elif defined(_MSC_VER)
+   /*
+    * MSVC's __fallthrough annotations are checked by /analyze (Code Analysis):
+    * https://msdn.microsoft.com/en-us/library/ms235402%28VS.80%29.aspx
+    */
+#  include <sal.h>
+#  define FALLTHROUGH __fallthrough
+#else
+#  define FALLTHROUGH /* FALLTHROUGH */
+#endif
