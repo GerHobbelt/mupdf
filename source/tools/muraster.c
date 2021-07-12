@@ -1626,11 +1626,11 @@ static void mu_drop_context(void)
 	}
 }
 
-#ifdef MURASTER_STANDALONE
-int main(int argc, const char **argv)
-#else
-int muraster_main(int argc, const char *argv[])
+#if !defined(MURASTER_STANDALONE) && defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      muraster_main(cnt, arr)
 #endif
+
+int main(int argc, const char** argv)
 {
 	const char *password = "";
 	fz_document *doc = NULL;

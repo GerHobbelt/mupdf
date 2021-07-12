@@ -20,21 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\fitz\tessocr.h" />
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\apitypes.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\baseapi.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\capi.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\capi_training_tools.h" />
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\genericvector.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\ltrresultiterator.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\ocrclass.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\osdetect.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\pageiterator.h" />
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\platform.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\publictypes.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\renderer.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\resultiterator.h" />
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\serialis.h" />
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\thresholder.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\unichar.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\api\pdf_ttf.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\arch\dotproduct.h" />
@@ -53,6 +48,7 @@
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccmain\reject.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccmain\tesseractclass.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccmain\tessvars.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\ccmain\thresholder.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccmain\werdit.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccstruct\blamer.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccstruct\blobbox.h" />
@@ -297,23 +293,34 @@
     <ClCompile Include="..\..\thirdparty\tesseract\src\arch\intsimdmatrixneon.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\arch\intsimdmatrixsse.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\arch\simddetect.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\adaptions.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\applybox.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\control.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\docqual.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\equationdetect.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\fixspace.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\fixxht.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\linerec.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\ltrresultiterator.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\mutableiterator.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\osdetect.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\output.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\pageiterator.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\pagesegmain.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\pagewalk.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\paragraphs.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\paramsd.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\par_control.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\pgedit.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\recogtraining.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\reject.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\resultiterator.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\superscript.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tessbox.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tessedit.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tesseractclass.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tessvars.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tfacepp.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\thresholder.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\werdit.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccstruct\blamer.cpp" />
@@ -371,7 +378,34 @@
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccutil\unicharmap.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccutil\unicharset.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\ccutil\universalambigs.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\adaptive.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\adaptmatch.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\blobclass.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\classify\classify.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\cluster.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\clusttool.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\cutoffs.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\featdefs.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\float2int.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\fpoint.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intfeaturespace.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intfx.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intmatcher.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intproto.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\kdtree.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\mf.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\mfoutline.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\mfx.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\normfeat.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\normmatch.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\ocrfeatures.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\outfeat.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\picofeat.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\protos.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\shapeclassifier.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\shapetable.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\tessclassifier.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\trainingsample.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\cutil\oldlist.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\dict\context.cpp" />
     <ClCompile Include="..\..\thirdparty\tesseract\src\dict\dawg.cpp" />
@@ -498,11 +532,6 @@
   <ItemGroup>
     <Text Include="..\..\thirdparty\tesseract\src\training\CMakeLists.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\tesseract\src\training\language-specific.sh" />
-    <None Include="..\..\thirdparty\tesseract\src\training\tesstrain.sh" />
-    <None Include="..\..\thirdparty\tesseract\src\training\tesstrain_utils.sh" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -602,12 +631,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;WIN32;DEBUG;HAVE_AVX;HAVE_AVX2;HAVE_SSE4_1;HAVE_FMA;__AVX__;__AVX2__;__FMA__;__SSE4_1__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED</UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -642,12 +670,11 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;NDEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED</UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -677,12 +704,11 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
     <ClCompile>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED</UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -712,12 +738,11 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TIFFIO_H;HAVE_LIBCURL;HAVE_AVX;HAVE_AVX2;HAVE_FMA;__FMA__;HAVE_SSE4_1;__SSE4_1__;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_LEPTONICA;HAVE_TESSERACT;TESSERACT_IMAGEDATA_AS_PIX;TESSERACT_DISABLE_DEBUG_FONTS;GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;NDEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED</UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

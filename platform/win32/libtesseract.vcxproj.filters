@@ -108,16 +108,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\apitypes.h">
-      <Filter>Header Files\tesseract</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\baseapi.h">
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\capi.h">
-      <Filter>Header Files\tesseract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\genericvector.h">
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\ltrresultiterator.h">
@@ -132,9 +126,6 @@
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\pageiterator.h">
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\platform.h">
-      <Filter>Header Files\tesseract</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\publictypes.h">
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
@@ -142,12 +133,6 @@
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\resultiterator.h">
-      <Filter>Header Files\tesseract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\serialis.h">
-      <Filter>Header Files\tesseract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\thresholder.h">
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\unichar.h">
@@ -879,6 +864,9 @@
     <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\tfloat.h">
       <Filter>Header Files\tesseract</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\thirdparty\tesseract\src\ccmain\thresholder.h">
+      <Filter>Header Files\tesseract\ccmain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\thirdparty\tesseract\src\arch\dotproduct.cpp">
@@ -1514,21 +1502,124 @@
     <ClCompile Include="..\..\source\dll\tesseract_missing_apis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\adaptive.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\adaptmatch.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\blobclass.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\cluster.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\clusttool.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\cutoffs.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\featdefs.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\float2int.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\fpoint.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intfeaturespace.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intfx.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intmatcher.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\intproto.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\kdtree.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\mf.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\mfoutline.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\mfx.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\normfeat.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\normmatch.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\ocrfeatures.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\outfeat.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\picofeat.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\protos.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\shapeclassifier.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\shapetable.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\tessclassifier.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\classify\trainingsample.cpp">
+      <Filter>Source Files\tesseract\classify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\adaptions.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\docqual.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\equationdetect.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\fixspace.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\fixxht.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\osdetect.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\par_control.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\recogtraining.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\superscript.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tessbox.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccmain\tfacepp.cpp">
+      <Filter>Source Files\tesseract\ccmain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\thirdparty\tesseract\src\training\CMakeLists.txt">
       <Filter>Source Files\tesseract\training</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\tesseract\src\training\language-specific.sh">
-      <Filter>Source Files\tesseract\training</Filter>
-    </None>
-    <None Include="..\..\thirdparty\tesseract\src\training\tesstrain.sh">
-      <Filter>Source Files\tesseract\training</Filter>
-    </None>
-    <None Include="..\..\thirdparty\tesseract\src\training\tesstrain_utils.sh">
-      <Filter>Source Files\tesseract\training</Filter>
-    </None>
   </ItemGroup>
 </Project>

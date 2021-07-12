@@ -2145,11 +2145,11 @@ static void mu_drop_context(void)
 	}
 }
 
-#ifdef MUDRAW_STANDALONE
-int main(int argc, const char **argv)
-#else
-int mudraw_main(int argc, const char **argv)
+#if !defined(MUDRAW_STANDALONE) && defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      mudraw_main(cnt, arr)
 #endif
+
+int main(int argc, const char** argv)
 {
 	const char *password = "";
 	const char* txtdraw_options = "";

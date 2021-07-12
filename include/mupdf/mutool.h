@@ -8,10 +8,10 @@ extern "C" {
 #endif
 
 int muconvert_main(int argc, const char* argv[]);
-#ifndef MUDRAW_STANDALONE
+#if !defined(MUDRAW_STANDALONE)
 int mudraw_main(int argc, const char* argv[]);
 #endif
-#ifndef MURASTER_STANDALONE
+#if !defined(MURASTER_STANDALONE)
 int muraster_main(int argc, const char* argv[]);
 #endif
 int mutrace_main(int argc, const char* argv[]);
