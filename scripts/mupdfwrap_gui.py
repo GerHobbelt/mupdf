@@ -20,7 +20,7 @@ class Label(PyQt5.QtWidgets.QLabel):
         super().__init__()
         self.window = window
     def resizeEvent(self, event):
-        print(f'Label: resizeEvent(): {event}')
+        #print(f'Label: resizeEvent(): {event}')
         self.window.resize_central_widget(event)
 
 class MainWindow(PyQt5.QtWidgets.QMainWindow):
@@ -50,7 +50,7 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.goto_page(self.page_number, self.zoom)
 
     def keyPressEvent(self, event):
-        print(f'event.key()={event.key()}')
+        #print(f'event.key()={event.key()}')
         if self.page_number is not None:
             if 0:
                 pass
@@ -66,7 +66,9 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
                 self.goto_page(self.page_number, 0)
 
     def resizeEvent(self, event):
-        print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
+        pass
+        #print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
+        #print(f'minimumSize()={self.minimumSize()}')
 
     def open_(self):
         path = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self, 'Open', filter='*.pdf')[0]
@@ -105,6 +107,10 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.centralWidget().setPixmap(qpixmap)
         self.page_number = page_number
         self.zoom = zoom
+        # It seems that minimum size defaults to show all of central widget,
+        # which prevents resizing by the user to a smaller size.
+        #
+        self.setMinimumSize(10, 10)
 
     def open_path(self, path):
         try:
