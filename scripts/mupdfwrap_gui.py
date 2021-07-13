@@ -35,6 +35,8 @@ def open_pdf(path):
     colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
     alpha = 0
     pixmap = page.new_pixmap_from_page_contents(ctm, colorspace, alpha)
+    # Need to preserve <pixmap> after we return because <image> will refer to
+    # it.
     g_pixmaps.append(pixmap)
     image = PyQt5.QtGui.QImage(
             int(pixmap.pixmap_samples()),
@@ -44,7 +46,7 @@ def open_pdf(path):
             );
     return image
 
-open_pdf('zlib.clean.pdf')
+#open_pdf('zlib.clean.pdf')
 
 class MainWindow(PyQt5.QtWidgets.QMainWindow):
     pass
@@ -60,26 +62,20 @@ window = MainWindow()
 menu = window.menuBar().addMenu("&File")
 open_ = PyQt5.QtWidgets.QAction("&Open")
 
+def open_path(path):
+    image = open_pdf(path)
+    qpixmap = PyQt5.QtGui.QPixmap.fromImage(image)
+    print(f'calling label.setImage')
+    label.setPixmap(qpixmap)
+
 def open_fn():
     path = PyQt5.QtWidgets.QFileDialog.getOpenFileName(window, "Open", filter="*.pdf")[0]
-    if 0 and path:
-        document = mupdf.Document(path)
-        #output = mupdf.Output()
-        #writer = mupdf.DocumentWriter(output, '', mupdf.DocumentWriter.
-        page = mupdf.Page(document, 0)
-        ctm = mupdf.Matrix(1, 0, 0, 1, 0, 0)
-        colorspace = mupdf.Colorspace()
-        alpha = 0
-        pixmap = page.new_pixmap_from_page_contents(ctm, colorspace, alpha)
-    if 1:
-        image = open_pdf(path)
-        #label = PyQt5.QtWidgets.QLabel(path)
-        qpixmap = PyQt5.QtGui.QPixmap.fromImage(image)
-        print(f'calling label.setImage')
-        label.setPixmap(qpixmap)
+    open_path(path)
 
 open_.triggered.connect(open_fn)
 menu.addAction(open_)
+
+open_path('zlib.clean.pdf')
 
 window.show()
 app.exec_()
