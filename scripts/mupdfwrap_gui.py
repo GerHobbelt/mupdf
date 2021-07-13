@@ -15,6 +15,14 @@ import PyQt5.QtWidgets
 import PyQt5.Qt
 
 
+class Label(PyQt5.QtWidgets.QLabel):
+    def __init__(self, window):
+        super().__init__()
+        self.window = window
+    def resizeEvent(self, event):
+        print(f'Label: resizeEvent(): {event}')
+        self.window.resize_central_widget(event)
+
 class MainWindow(PyQt5.QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -22,7 +30,8 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.page_number = None
         self.zoom_multiple = 4
         self.zoom = 0
-        self.setCentralWidget(PyQt5.QtWidgets.QLabel(''))
+        #self.setCentralWidget(PyQt5.QtWidgets.QLabel(''))
+        self.setCentralWidget(Label(self))
 
         # Need to preserve menu_file_open, otherwise it doesn't appear in the
         # menu.
@@ -37,10 +46,15 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         menu_file.addAction(self.menu_file_open)
         menu_file.addAction(self.menu_file_quit)
 
+    def resize_central_widget(self, event):
+        self.goto_page(self.page_number, self.zoom)
+
     def keyPressEvent(self, event):
         print(f'event.key()={event.key()}')
         if self.page_number is not None:
-            if event.key() == PyQt5.Qt.Qt.Key_PageUp:
+            if 0:
+                pass
+            elif event.key() == PyQt5.Qt.Qt.Key_PageUp:
                 self.goto_page(self.page_number - 1)
             elif event.key() == PyQt5.Qt.Qt.Key_PageDown:
                 self.goto_page(self.page_number + 1)
@@ -50,6 +64,9 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
                 self.goto_page(self.page_number, self.zoom - 1)
             elif event.key() == (ord('0')):
                 self.goto_page(self.page_number, 0)
+
+    def resizeEvent(self, event):
+        print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
 
     def open_(self):
         path = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self, 'Open', filter='*.pdf')[0]
@@ -67,20 +84,21 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         except Exception as e:
             print(f'Cannot go to page {page_number}: {e}')
             return
+        page_rect = page.bound_page()
         z = 2**(zoom / self.zoom_multiple)
+        z *= self.centralWidget().size().width() / (page_rect.x1 - page_rect.x0)
         ctm = mupdf.Matrix(z, 0, 0, z, 0, 0)
         colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
         alpha = 0
-        pixmap = page.new_pixmap_from_page_contents(ctm, colorspace, alpha)
+        self.pixmap = page.new_pixmap_from_page_contents(ctm, colorspace, alpha)
         # Need to preserve <pixmap> after we return because <image> will refer to
         # it.
-        self.pixmap = pixmap
-        print(f'pixmap.pixmap_width()={pixmap.pixmap_width()} pixmap.pixmap_height()={pixmap.pixmap_height()} pixmap.pixmap_stride()={pixmap.pixmap_stride()}')
+        #print(f'pixmap.pixmap_width()={pixmap.pixmap_width()} pixmap.pixmap_height()={pixmap.pixmap_height()} pixmap.pixmap_stride()={pixmap.pixmap_stride()}')
         image = PyQt5.QtGui.QImage(
-                int(pixmap.pixmap_samples()),
-                pixmap.pixmap_width(),
-                pixmap.pixmap_height(),
-                pixmap.pixmap_stride(),
+                int(self.pixmap.pixmap_samples()),
+                self.pixmap.pixmap_width(),
+                self.pixmap.pixmap_height(),
+                self.pixmap.pixmap_stride(),
                 PyQt5.QtGui.QImage.Format_RGB888,
                 );
         qpixmap = PyQt5.QtGui.QPixmap.fromImage(image)
