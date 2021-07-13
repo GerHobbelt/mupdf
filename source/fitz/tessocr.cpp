@@ -1,6 +1,9 @@
 #if defined(HAVE_LEPTONICA) && defined(HAVE_TESSERACT)
 
 #include <climits>
+#if defined(_MSC_VER)
+#  include <crtdbg.h>
+#endif
 #include "tesseract/baseapi.h"
 #include "tesseract/capi.h"          // for ETEXT_DESC
 
@@ -162,7 +165,11 @@ void *ocr_init(fz_context *ctx, const char *language)
 
 	set_leptonica_mem(ctx);
 	setPixMemoryManager(my_leptonica_malloc, my_leptonica_free);
+#if defined(_DEBUG) && defined(_CRTDBG_REPORT_FLAG)
+	api = new (_CLIENT_BLOCK, __FILE__, __LINE__) tesseract::TessBaseAPI();
+#else
 	api = new tesseract::TessBaseAPI();
+#endif  // _DEBUG
 
 	if (api == NULL)
 	{

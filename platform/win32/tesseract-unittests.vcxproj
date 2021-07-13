@@ -33,6 +33,7 @@
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\commandlineflags_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\dawg_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\denorm_test.cc" />
+    <ClCompile Include="..\..\thirdparty\tesseract\unittest\dotproduct_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\equationdetect_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\heap_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\indexmapbidi_test.cc" />
@@ -69,6 +70,8 @@
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\tabvector_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\tatweel_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\tfile_test.cc" />
+    <ClCompile Include="..\..\thirdparty\tesseract\unittest\tfloat_benchmark.cc" />
+    <ClCompile Include="..\..\thirdparty\tesseract\unittest\tfloat_matrix_benchmark.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\unicharcompress_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\unicharset_test.cc" />
     <ClCompile Include="..\..\thirdparty\tesseract\unittest\unichar_test.cc" />
@@ -185,7 +188,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <FloatingPointExceptions>false</FloatingPointExceptions>
@@ -195,7 +198,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -206,9 +209,9 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /openmp:experimental %(AdditionalOptions)</AdditionalOptions>
       <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <ResourceCompile>
@@ -237,7 +240,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -246,14 +249,14 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /openmp:experimental %(AdditionalOptions)</AdditionalOptions>
       <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -279,7 +282,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -290,13 +293,13 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /openmp:experimental %(AdditionalOptions)</AdditionalOptions>
       <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -321,7 +324,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -330,14 +333,14 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;DISABLED_LEGACY_ENGINE;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /openmp:experimental %(AdditionalOptions)</AdditionalOptions>
       <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
