@@ -15,14 +15,6 @@ import PyQt5.QtWidgets
 import PyQt5.Qt
 
 
-class Label(PyQt5.QtWidgets.QLabel):
-    def __init__(self, window):
-        super().__init__()
-        self.window = window
-    def resizeEvent(self, event):
-        #print(f'Label: resizeEvent(): {event}')
-        self.window.resize_central_widget(event)
-
 class MainWindow(PyQt5.QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -30,8 +22,11 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.page_number = None
         self.zoom_multiple = 4
         self.zoom = 0
-        #self.setCentralWidget(PyQt5.QtWidgets.QLabel(''))
-        self.setCentralWidget(Label(self))
+        self.central_widget = PyQt5.QtWidgets.QLabel(self)
+        self.scroll_area = PyQt5.QtWidgets.QScrollArea()
+        self.scroll_area.setWidget(self.central_widget)
+        self.scroll_area.setWidgetResizable(True)
+        self.setCentralWidget(self.scroll_area)
 
         # Need to preserve menu_file_open, otherwise it doesn't appear in the
         # menu.
@@ -45,9 +40,6 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         menu_file = self.menuBar().addMenu('&File')
         menu_file.addAction(self.menu_file_open)
         menu_file.addAction(self.menu_file_quit)
-
-    def resize_central_widget(self, event):
-        self.goto_page(self.page_number, self.zoom)
 
     def keyPressEvent(self, event):
         #print(f'event.key()={event.key()}')
@@ -66,7 +58,7 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
                 self.goto_page(self.page_number, 0)
 
     def resizeEvent(self, event):
-        pass
+        self.goto_page(self.page_number, self.zoom)
         #print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
         #print(f'minimumSize()={self.minimumSize()}')
 
@@ -104,7 +96,7 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
                 PyQt5.QtGui.QImage.Format_RGB888,
                 );
         qpixmap = PyQt5.QtGui.QPixmap.fromImage(image)
-        self.centralWidget().setPixmap(qpixmap)
+        self.central_widget.setPixmap(qpixmap)
         self.page_number = page_number
         self.zoom = zoom
         # It seems that minimum size defaults to show all of central widget,
