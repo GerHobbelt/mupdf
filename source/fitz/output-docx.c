@@ -216,8 +216,10 @@ sides. */
 typedef struct
 {
 	fz_path_walker	walker;
+	fz_matrix		matrix;
 	fz_point*	points;	/* Points to array of 4. */
 	int			n;
+	fz_docx_device *dev;
 } pathinfo_t;
 
 static void moveto(fz_context *ctx, void *arg, float x, float y);
@@ -225,7 +227,7 @@ static void lineto(fz_context *ctx, void *arg, float x, float y);
 void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3);
 void closepath(fz_context *ctx, void *arg);
 
-void pathinfo_construct(pathinfo_t* pathinfo, fz_point* points)
+void pathinfo_construct(pathinfo_t* pathinfo, fz_docx_device *dev, fz_matrix matrix, fz_point* points)
 {
 	int i;
 	pathinfo->walker.moveto = moveto;
@@ -243,6 +245,8 @@ void pathinfo_construct(pathinfo_t* pathinfo, fz_point* points)
 		pathinfo->points[i].y = 0;
 	}
 	pathinfo->n = 0;
+	pathinfo->matrix = matrix;
+	pathinfo->dev = dev;
 }
 
 /*
@@ -271,7 +275,7 @@ static void pathinfo_show(pathinfo_t* pathinfo)
 static void moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	pathinfo_t *pathinfo = arg;
-	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
+	fprintf(stderr, "%s:%i:%s(): pathinfo->n=%i (%f %f)\n", __FILE__, __LINE__, __FUNCTION__, pathinfo->n, x, y);
 	if (pathinfo->n == -1)	return;
 	if (pathinfo->n != 0)
 	{
@@ -286,7 +290,7 @@ static void moveto(fz_context *ctx, void *arg, float x, float y)
 static void lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	pathinfo_t *pathinfo = arg;
-	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
+	fprintf(stderr, "%s:%i:%s(): pathinfo->n=%i (%f %f)\n", __FILE__, __LINE__, __FUNCTION__, pathinfo->n, x, y);
 	if (pathinfo->n == -1)	return;
 	if (pathinfo->n == 0 || pathinfo->n >= 4)
 	{
@@ -301,7 +305,7 @@ static void lineto(fz_context *ctx, void *arg, float x, float y)
 void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
 {
 	pathinfo_t *pathinfo = arg;
-	//fprintf(stderr, "%s(): (%f %f) (%f %f) (%f %f)\n", __FUNCTION__, x1, y1, x2, y2, x3, y3);
+	fprintf(stderr, "%s:%i:%s(): (%f %f) (%f %f) (%f %f)\n", __FILE__, __LINE__, __FUNCTION__, x1, y1, x2, y2, x3, y3);
 	pathinfo->n = -1;
 	return;
 }
@@ -309,26 +313,54 @@ void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2,
 void closepath(fz_context *ctx, void *arg)
 {
 	pathinfo_t *pathinfo = arg;
-	//fprintf(stderr, "%s():\n", __FUNCTION__);
+	fprintf(stderr, "%s:%i:%s(): pathinfo->n=%i\n", __FILE__, __LINE__, __FUNCTION__, pathinfo->n);
 	if (pathinfo->n == -1)
 		return;
-	if (pathinfo->n != 4)
+	if (pathinfo->n == 4)
+	{
+		int e;
+		pathinfo->dev->writer->ctx = ctx;
+		fprintf(stderr, "%s:%i:%s(): calling extract_add_path4()\n", __FILE__, __LINE__, __FUNCTION__);
+		e = extract_add_path4(
+				pathinfo->dev->writer->extract,
+				pathinfo->matrix.a,
+				pathinfo->matrix.b,
+				pathinfo->matrix.c,
+				pathinfo->matrix.d,
+				pathinfo->matrix.e,
+				pathinfo->matrix.f,
+				pathinfo->points[0].x,
+				pathinfo->points[0].y,
+				pathinfo->points[1].x,
+				pathinfo->points[1].y,
+				pathinfo->points[2].x,
+				pathinfo->points[2].y,
+				pathinfo->points[3].x,
+				pathinfo->points[3].y
+				);
+		pathinfo->dev->writer->ctx = NULL;
+		if (e)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process line");
+		pathinfo->n = 0;
+	}
+	else
 	{
 		pathinfo->n = -1;
 		return;
 	}
-	pathinfo->n += 1;
+	//pathinfo->n += 1;
 }
 
 /* Returns 1 with points[0..3] set if <path> has four elements that define a
 rectangle with vertical and horizontal lines. */
-int path_is_4(fz_context *ctx, const fz_path *path, fz_point* points)
+int path_is_4(fz_context *ctx, fz_docx_device *dev, const fz_path *path, fz_matrix matrix, fz_point* points)
 {
 	pathinfo_t pathinfo;
-	//fprintf(stderr, "%s():\n", __FUNCTION__);
-	pathinfo_construct(&pathinfo, points);
+	fprintf(stderr, "%s:%i:%s():\n", __FILE__, __LINE__, __FUNCTION__);
+	pathinfo_construct(&pathinfo, dev, matrix, points);
 	fz_walk_path(ctx, path, &pathinfo.walker, &pathinfo /*arg*/);
 
+	fprintf(stderr, "%s:%i:%s(): pathinfo.n=%i\n", __FILE__, __LINE__, __FUNCTION__, pathinfo.n);
 	if (pathinfo.n == 5)
 		return 1;
 	return 0;
@@ -338,10 +370,12 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
 	fz_point	points[4];
-	if (path_is_4(ctx, path, points))
+	path_is_4(ctx, dev, path, matrix, points);
+	/*
 	{
 		int e;
 		dev->writer->ctx = ctx;
+		fprintf(stderr, "%s:%i:%s(): calling extract_add_path4()\n", __FILE__, __LINE__, __FUNCTION__);
 		e = extract_add_path4(
 				dev->writer->extract,
 				matrix.a,
@@ -362,7 +396,7 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 		dev->writer->ctx = NULL;
 		if (e)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process line");
-	}
+	}*/
 }
 
 
@@ -382,7 +416,7 @@ typedef struct
 static void stroke_info_moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	stroke_info_t *stroke_info = arg;
-	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
+	fprintf(stderr, "%s:%i:%s(): (%f %f)\n", __FILE__, __LINE__, __FUNCTION__, x, y);
 	stroke_info->point.x = x;
 	stroke_info->point.y = y;
 	stroke_info->point_set = 1;
@@ -396,7 +430,7 @@ static void stroke_info_moveto(fz_context *ctx, void *arg, float x, float y)
 static void stroke_info_lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	stroke_info_t *stroke_info = arg;
-	//fprintf(stderr, "%s(): (%f %f)\n", __FUNCTION__, x, y);
+	fprintf(stderr, "%s:%i:%s(): (%f %f)\n", __FILE__, __LINE__, __FUNCTION__, x, y);
 	if (stroke_info->point_set)
 	{
 		if (extract_add_line(
@@ -430,7 +464,7 @@ static void stroke_info_lineto(fz_context *ctx, void *arg, float x, float y)
 void stroke_info_curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
 {
 	stroke_info_t *stroke_info = arg;
-	//fprintf(stderr, "%s(): (%f %f) (%f %f) (%f %f)\n", __FUNCTION__, x1, y1, x2, y2, x3, y3);
+	fprintf(stderr, "%s:%i:%s(): (%f %f) (%f %f) (%f %f\n", __FILE__, __LINE__, __FUNCTION__, x1, y1, x2, y2, x3, y3);
 	stroke_info->point_set = 0;
 	return;
 }
@@ -438,7 +472,7 @@ void stroke_info_curveto(fz_context *ctx, void *arg, float x1, float y1, float x
 void stroke_info_closepath(fz_context *ctx, void *arg)
 {
 	stroke_info_t *stroke_info = arg;
-	//fprintf(stderr, "%s():\n", __FUNCTION__);
+	fprintf(stderr, "%s:%i:%s():\n", __FILE__, __LINE__, __FUNCTION__);
 	if (stroke_info->point0_set && stroke_info->point_set)
 	{
 		if (extract_add_line(
@@ -470,7 +504,7 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path, const fz_
 	fz_docx_device *dev = (fz_docx_device*) dev_;
 	stroke_info_t	stroke_info;
 
-	//fprintf(stderr, "%s():\n", __FUNCTION__);
+	fprintf(stderr, "%s:%i:%s():\n", __FILE__, __LINE__, __FUNCTION__);
 
 	stroke_info.walker.moveto = stroke_info_moveto;
 	stroke_info.walker.lineto = stroke_info_lineto;
