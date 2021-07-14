@@ -64,11 +64,10 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
     def resizeEvent(self, event):
         self.goto_page(self.page_number, self.zoom)
         #print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
-        #print(f'minimumSize()={self.minimumSize()}')
 
     def show_html(self):
         if 1:
-            buffer_ = self.page.document_data_from_page("docx", "html", mupdf.Matrix(1, 0, 0, 1, 0, 0), mupdf.Cookie())
+            buffer_ = self.page.new_buffer_from_page_with_format("docx", "html", mupdf.Matrix(1, 0, 0, 1, 0, 0), mupdf.Cookie())
         else:
             buffer_ = mupdf.Buffer(0)
             output = mupdf.Output(buffer_)
@@ -79,7 +78,6 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
             docx_writer.close_document_writer()
 
         html_content = buffer_.buffer_extract().decode('utf8')
-        #print(f'buffer_.buffer_extract() => {html_content}')
         self.webview = PyQt5.QtWebKitWidgets.QWebView()
         self.webview.setHtml(html_content)
         self.webview.show()
@@ -157,9 +155,6 @@ while 1:
             raise Exception(f'Unrecognised arg: {arg}')
     else:
         main_window.open_path(arg)
-
-#main_window.open_path('zlib.clean.pdf')
-#main_window.show_html()
 
 main_window.show()
 app.exec_()
