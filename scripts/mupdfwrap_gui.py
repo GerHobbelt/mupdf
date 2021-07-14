@@ -47,15 +47,15 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
             if 0:
                 pass
             elif event.key() == PyQt5.Qt.Qt.Key_PageUp:
-                self.goto_page(self.page_number - 1)
+                self.goto_page(page_number=self.page_number - 1)
             elif event.key() == PyQt5.Qt.Qt.Key_PageDown:
-                self.goto_page(self.page_number + 1)
+                self.goto_page(page_number=self.page_number + 1)
             elif event.key() in (ord('='), ord('+')):
-                self.goto_page(self.page_number, self.zoom + 1)
+                self.goto_page(zoom=self.zoom + 1)
             elif event.key() in (ord('-'), ord('_')):
-                self.goto_page(self.page_number, self.zoom - 1)
+                self.goto_page(zoom=self.zoom - 1)
             elif event.key() == (ord('0')):
-                self.goto_page(self.page_number, 0)
+                self.goto_page(zoom=0)
 
     def resizeEvent(self, event):
         self.goto_page(self.page_number, self.zoom)
@@ -70,7 +70,9 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
     def quit(self):
         sys.exit()
 
-    def goto_page(self, page_number, zoom=None):
+    def goto_page(self, page_number=None, zoom=None):
+        if page_number is None:
+            page_number = self.page_number
         if zoom is None:
             zoom = self.zoom
         try:
@@ -80,11 +82,14 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
             return
         page_rect = page.bound_page()
         z = 2**(zoom / self.zoom_multiple)
-        z *= self.centralWidget().size().width() / (page_rect.x1 - page_rect.x0)
-        ctm = mupdf.Matrix(z, 0, 0, z, 0, 0)
-        colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
-        alpha = 0
-        self.pixmap = page.new_pixmap_from_page_contents(ctm, colorspace, alpha)
+        # Using -2 here avoids always-present horizontal scrollbar; not sure
+        # why...
+        z *= (self.centralWidget().size().width() - 2) / (page_rect.x1 - page_rect.x0)
+        self.pixmap = page.new_pixmap_from_page_contents(
+                ctm=mupdf.Matrix(z, 0, 0, z, 0, 0),
+                cs=mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB),
+                alpha=0,
+                )
         # Need to preserve <pixmap> after we return because <image> will refer to
         # it.
         #print(f'pixmap.pixmap_width()={pixmap.pixmap_width()} pixmap.pixmap_height()={pixmap.pixmap_height()} pixmap.pixmap_stride()={pixmap.pixmap_stride()}')
@@ -110,7 +115,7 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         except Exception:
             print(f'Failed to open path={path!r}')
             return
-        self.goto_page(0)
+        self.goto_page(page_number=0, zoom=0)
 
 
 app = PyQt5.QtWidgets.QApplication([])
