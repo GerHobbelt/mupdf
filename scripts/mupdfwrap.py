@@ -464,22 +464,19 @@ Usage:
         --dir-so <directory>
             Set directory containing shared libraries.
 
-            Supported values for <directory>:
-                <mupdf>/build/shared-release/ [default]
-                <mupdf>/build/shared-debug/
-                <mupdf>/build/shared-memento/
-
-            We use different C++ compile flags depending on release or debug builds
-            (specifically definition of NDEBUG is important because it must match
-            what was used when libmupdf.so was built).
+            We use different C++ compile flags depending on release or debug
+            builds (specifically, the definition of NDEBUG is important because
+            it must match what was used when libmupdf.so was built).
 
             Examples:
                 -d build/shared-debug
+                -d build/shared-debug-extract
                 -d build/shared-release
+                -d build/shared-release-extract [default]
 
-            On Windows one can specify the CPU and Python version; we then
-            use 'py -0f' to find the matching installed Python along with its
-            Python.h and python.lib. For example:
+            On Windows, all builds include extract. One can specify the CPU and
+            Python version; we then use 'py -0f' to find the matching installed
+            Python along with its Python.h and python.lib. For example:
 
                 -d build/shared-release-x32-py3.8
                 -d build/shared-release-x64-py3.9
@@ -541,8 +538,8 @@ Usage:
                 * Creates a Python virtual environment.
                 * Activates the Python environment.
                 * Runs setup.py install.
-                    * Builds C, C++ and Python librariess in build/shared-release.
-                    * Copies build/shared-release/*.so into virtual envionment.
+                    * Builds C, C++ and Python librariess in build/shared-release-extract.
+                    * Copies build/shared-release-extract/*.so into virtual envionment.
                 * Runs scripts/mupdfwrap_test.py.
                     * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
@@ -6333,7 +6330,7 @@ class BuildDirs:
             #
             self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-{cpu_name()}-py{python_version()}')
         else:
-            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
+            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-extract')
 
     def set_dir_so( self, dir_so):
         '''
