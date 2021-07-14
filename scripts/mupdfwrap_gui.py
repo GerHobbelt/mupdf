@@ -3,9 +3,22 @@
 '''
 Basic PDF viewer using PyQt and MuPDF.
 
+Command-line usage:
+
+    -h
+    --help
+        Show this help.
+    -f <path>
+        Show specified PDF file.
+    --html
+        Also show HTML version of most recent PDF file.
+
 Example usage:
-    PYTHONPATH=build/shared-debug-extract ./scripts/mupdfwrap_gui.py
+
+    ./scripts/mupdfwrap.py -b all
+    PYTHONPATH=build/shared-release-extract ./scripts/mupdfwrap_gui.py
 '''
+
 import sys
 
 import mupdf
@@ -32,15 +45,19 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         # menu.
         #
         self.menu_file_open = PyQt5.QtWidgets.QAction('&Open')
+        self.menu_file_open.setToolTip('Open a new PDF.')
         self.menu_file_open.triggered.connect(self.open_)
 
         self.menu_file_show_html = PyQt5.QtWidgets.QAction('&Show html')
+        self.menu_file_show_html.setToolTip('Convert to HTML and show in separate window.')
         self.menu_file_show_html.triggered.connect(self.show_html)
 
         self.menu_file_quit = PyQt5.QtWidgets.QAction('&Quit')
+        self.menu_file_quit.setToolTip('Exit the application.')
         self.menu_file_quit.triggered.connect(self.quit)
 
         menu_file = self.menuBar().addMenu('&File')
+        menu_file.setToolTipsVisible(True)
         menu_file.addAction(self.menu_file_open)
         menu_file.addAction(self.menu_file_show_html)
         menu_file.addAction(self.menu_file_quit)
@@ -132,29 +149,36 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
     def open_path(self, path):
         try:
             self.document = mupdf.Document(path)
-        except Exception:
-            print(f'Failed to open path={path!r}')
+        except Exception as e:
+            print(f'Failed to open path={path!r}: {e}')
             return
         self.goto_page(page_number=0, zoom=0)
 
 
-app = PyQt5.QtWidgets.QApplication([])
+def main():
 
-main_window = MainWindow()
+    app = PyQt5.QtWidgets.QApplication([])
+    main_window = MainWindow()
 
-args = iter(sys.argv[1:])
-while 1:
-    try:
-        arg = next(args)
-    except StopIteration:
-        break
-    if arg.startswith('-'):
-        if arg == '--html':
+    args = iter(sys.argv[1:])
+    while 1:
+        try:
+            arg = next(args)
+        except StopIteration:
+            break
+        if arg in ('-h', '--help'):
+            print(__doc__)
+            return
+        elif arg == '--html':
             main_window.show_html()
+        elif arg == '-f':
+            path = next(args)
+            main_window.open_path(path)
         else:
-            raise Exception(f'Unrecognised arg: {arg}')
-    else:
-        main_window.open_path(arg)
+            raise Exception(f'Unrecognised arg: {arg!r}')
 
-main_window.show()
-app.exec_()
+    main_window.show()
+    app.exec_()
+
+if __name__ == '__main__':
+    main()
