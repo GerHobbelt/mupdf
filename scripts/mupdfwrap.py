@@ -53,17 +53,21 @@ C++ wrapping:
 
     Classes:
 
-        For each fz_* and pdf_* struct we provide a wrapper class. These
-        wrapper classes generally have a <m_internal> member that is a pointer
-        to an instance of the underlying struct.
+        For each fz_* and pdf_* struct, we provide a wrapper class with
+        a CamelCase version of the struct name, e.g. the wrapper for
+        fz_display_list is called mupdf::DisplayList.
+
+        These wrapper classes generally have a member <m_internal> that is a
+        pointer to an instance of the underlying struct.
 
         Member functions:
 
             Member functions are provided which wrap all relevant fz_*() and
-            pdf_*() functions. These methods generally take args that are
-            references to wrapper classes instead of pointers to fz_* and pdf_*
-            structs, and similarly return wrapper classes by value instead of
-            returning a pointer to a fz_* or pdf_* struct.
+            pdf_*() functions. These methods have the same name as the wrapped
+            function but without the initial fz_ or pdf_. They generally take
+            args that are references to wrapper classes instead of pointers to
+            fz_* and pdf_* structs, and similarly return wrapper classes by
+            value instead of returning a pointer to a fz_* or pdf_* struct.
 
         Reference counting:
 
