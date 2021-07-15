@@ -3,6 +3,12 @@
 '''
 Basic PDF viewer using PyQt and MuPDF.
 
+    Hot-keys in main window:
+        +=  zooms in
+        -_  zoom out
+        0   reset zoom.
+        Page-up/down    Move to next/prev page.
+
 Command-line usage:
 
     -h
@@ -32,15 +38,23 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
+
+        # Set up default state.
+        #
         self.page_number = None
         self.zoom_multiple = 4
         self.zoom = 0
+
+        # Create Qt widgets.
+        #
         self.central_widget = PyQt5.QtWidgets.QLabel(self)
         self.scroll_area = PyQt5.QtWidgets.QScrollArea()
         self.scroll_area.setWidget(self.central_widget)
         self.scroll_area.setWidgetResizable(True)
         self.setCentralWidget(self.scroll_area)
 
+        # Create menus.
+        #
         # Need to preserve menu_file_open, otherwise it doesn't appear in the
         # menu.
         #
@@ -83,24 +97,19 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         #print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
 
     def show_html(self):
-        if 1:
-            buffer_ = self.page.new_buffer_from_page_with_format("docx", "html", mupdf.Matrix(1, 0, 0, 1, 0, 0), mupdf.Cookie())
-        else:
-            buffer_ = mupdf.Buffer(0)
-            output = mupdf.Output(buffer_)
-            docx_writer = mupdf.DocumentWriter(output, "docx", "html")
-            device = docx_writer.begin_page(self.page.bound_page())
-            self.page.run_page(device, mupdf.Matrix(1, 0, 0, 1, 0, 0), mupdf.Cookie())
-            docx_writer.end_page()
-            docx_writer.close_document_writer()
-
+        # Convert to HTML using Extract, and show in new window using
+        # PyQt5.QtWebKitWidgets.QWebView.
+        buffer_ = self.page.new_buffer_from_page_with_format("docx", "html",
+                mupdf.Matrix(1, 0, 0, 1, 0, 0), mupdf.Cookie())
         html_content = buffer_.buffer_extract().decode('utf8')
+        #print(f'html_content:\n{html_content}')
+        sys.stdout.flush()
         self.webview = PyQt5.QtWebKitWidgets.QWebView()
         self.webview.setHtml(html_content)
         self.webview.show()
 
     def open_(self):
-        path = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self, 'Open', filter='*.pdf')[0]
+        path, _ = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self, 'Open', filter='*.pdf')
         if path:
             self.open_path(path)
 
@@ -108,6 +117,14 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         sys.exit()
 
     def goto_page(self, page_number=None, zoom=None):
+        # Recreate the bitmap that we are displaying. We should probably use a
+        # mupdf.DisplayList to avoid processing the page each time we need to
+        # change zoom etc.
+        #
+        # We can run out of memory for large zoom values; should probably only
+        # create bitmap for the visible region (or maybe slightly larger than
+        # the visible region to allow for some limited scrolling?).
+        #
         if page_number is None:
             page_number = self.page_number
         if zoom is None:
@@ -119,9 +136,15 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
             return
         page_rect = self.page.bound_page()
         z = 2**(zoom / self.zoom_multiple)
+
+        # For now we always use 'fit width' view semantics.
+        #
         # Using -2 here avoids always-present horizontal scrollbar; not sure
         # why...
         z *= (self.centralWidget().size().width() - 2) / (page_rect.x1 - page_rect.x0)
+
+        # Need to preserve the pixmap after we return because the Qt image will
+        # refer to it, se we use self.pixmap.
         try:
             self.pixmap = self.page.new_pixmap_from_page_contents(
                     ctm=mupdf.Matrix(z, 0, 0, z, 0, 0),
@@ -131,8 +154,6 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         except Exception as e:
             print(f'self.page.new_pixmap_from_page_contents() failed: {e}')
             return
-        # Need to preserve <pixmap> after we return because <image> will refer to
-        # it.
         #print(f'pixmap.pixmap_width()={pixmap.pixmap_width()} pixmap.pixmap_height()={pixmap.pixmap_height()} pixmap.pixmap_stride()={pixmap.pixmap_stride()}')
         image = PyQt5.QtGui.QImage(
                 int(self.pixmap.pixmap_samples()),
