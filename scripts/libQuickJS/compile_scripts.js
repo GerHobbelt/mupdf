@@ -90,7 +90,7 @@ try {
 			stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
 			console.log(stdout);
 			if (fs.existsSync(calcCfile)) {
-				console.log("Successfully generated the calc C source file from calc.js");
+				console.log("Successfully generated the calc C source file from qjscalc.js");
 			}
 		}
 	}
