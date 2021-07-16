@@ -7090,7 +7090,7 @@ static void ffi_PDFWidget_getFieldFlags(js_State *J)
 	pdf_annot *widget = js_touserdata(J, 0, "pdf_widget");
 	int flags;
 	fz_try(ctx)
-		flags = pdf_field_flags(ctx, pdf_annot_obj(ctx, widget));
+		flags = pdf_annot_field_flags(ctx, widget);
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushnumber(J, flags);

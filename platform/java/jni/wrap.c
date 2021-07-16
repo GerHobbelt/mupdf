@@ -515,7 +515,7 @@ static inline jobject to_PDFWidget_safe(fz_context *ctx, JNIEnv *env, pdf_annot 
 	fz_try(ctx)
 	{
 		int fieldType = pdf_widget_type(ctx, widget);
-		int fieldFlags = pdf_field_flags(ctx, pdf_annot_obj(ctx, widget));
+		int fieldFlags = pdf_annot_field_flags(ctx, widget);
 		(*env)->SetIntField(env, jwidget, fid_PDFWidget_fieldType, fieldType);
 		(*env)->SetIntField(env, jwidget, fid_PDFWidget_fieldFlags, fieldFlags);
 		if (fieldType == PDF_WIDGET_TYPE_TEXT)

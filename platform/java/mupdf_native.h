@@ -3498,6 +3498,14 @@ extern "C" {
 #define com_artifex_mupdf_fitz_PDFWidget_PDF_SIGNATURE_DEFAULT_APPEARANCE 63L
 /*
  * Class:     com_artifex_mupdf_fitz_PDFWidget
+ * Method:    getLabel
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_PDFWidget_getLabel
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFWidget
  * Method:    getValue
  * Signature: ()Ljava/lang/String;
  */

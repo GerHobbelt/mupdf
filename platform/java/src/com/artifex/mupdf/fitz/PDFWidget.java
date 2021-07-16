@@ -96,6 +96,7 @@ public class PDFWidget extends PDFAnnotation
 	public boolean isReadOnly() {
 		return (getFieldFlags() & PDF_FIELD_IS_READ_ONLY) != 0;
 	}
+	public native String getLabel();
 	public native String getValue();
 	public native boolean setValue(String val);
 	public native String getLabel();

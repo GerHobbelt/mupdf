@@ -23,6 +23,23 @@
 /* PDFWidget interface */
 
 JNIEXPORT jstring JNICALL
+FUN(PDFWidget_getLabel)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_widget *widget = from_PDFWidget_safe(env, self);
+	const char *text = NULL;
+
+	if (!ctx || !widget) return NULL;
+
+	fz_try(ctx)
+		text = pdf_annot_field_label(ctx, widget);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return (*env)->NewStringUTF(env, text);
+}
+
+JNIEXPORT jstring JNICALL
 FUN(PDFWidget_getValue)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
@@ -32,7 +49,7 @@ FUN(PDFWidget_getValue)(JNIEnv *env, jobject self)
 	if (!ctx || !widget) return NULL;
 
 	fz_try(ctx)
-		text = pdf_field_value(ctx, pdf_annot_obj(ctx, widget));
+		text = pdf_annot_field_value(ctx, widget);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
