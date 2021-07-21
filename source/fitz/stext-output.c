@@ -76,7 +76,7 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, fz_stext_options* options)
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, const fz_stext_options* options)
 {
 	float x = block->bbox.x0;
 	float y = block->bbox.y0;
@@ -154,7 +154,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 }
 
 void
-fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, fz_stext_options *options)
+fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, const fz_stext_options *options)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
@@ -344,7 +344,7 @@ static void fz_print_stext_block_as_xhtml(fz_context *ctx, fz_output *out, fz_st
 }
 
 void
-fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, fz_stext_options *options)
+fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, const fz_stext_options *options)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
