@@ -3461,7 +3461,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		ensure_initial_incremental_contents(ctx, doc->file, opts->out, doc->file_size);
 
 		/* If no changes, nothing more to write */
-		if (doc->num_incremental_sections == 0)
+		if (!pdf_has_unsaved_changes(ctx, doc))
 		{
 			doc->save_in_progress = 0;
 			return;
@@ -3662,7 +3662,6 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		if (!in_opts->do_snapshot)
 		{
 			complete_signatures(ctx, doc, opts);
-			doc->dirty = 0;
 		}
 	}
 	fz_always(ctx)

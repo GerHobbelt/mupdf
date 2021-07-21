@@ -1329,6 +1329,7 @@ void pdfapp_onkey(pdfapp_t *app, int c, int modifiers)
 		app->number[app->numberlen] = '\0';
 	}
 
+key_rewritten:
 	switch (c)
 	{
 	case 'q':
@@ -1471,6 +1472,13 @@ void pdfapp_onkey(pdfapp_t *app, int c, int modifiers)
 		break;
 
 	case 'h':
+		if (modifiers & 8)
+		{
+			/* Alt pressed. Treat this as 't'. (i.e. ALT-Left) */
+			modifiers &= ~8;
+			c = 't';
+			goto key_rewritten;
+		}
 		app->panx += app->imgw / 10;
 		pdfapp_showpage(app, 0, 0, 1, 0, 0);
 		break;
