@@ -347,9 +347,9 @@ fz_device *fz_new_bbox_device(fz_context *ctx, fz_rect *rectp);
 	Currently only tests for the presence of non-grayscale colors.
 
 	is_color: Possible values returned:
-		0: Definitely greyscale
-		1: Probably color (all colors were grey, but there
-		were images or shadings in a non grey colorspace).
+		0: Definitely grayscale
+		1: Probably color (all colors were gray, but there
+		were images or shadings in a non gray colorspace).
 		2: Definitely color
 
 	threshold: The difference from grayscale that will be tolerated.
