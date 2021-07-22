@@ -1059,19 +1059,49 @@ int pdf_text_widget_format(fz_context *ctx, pdf_widget *tw)
 	return type;
 }
 
+static char *
+merge_changes(fz_context *ctx, const char *value, int start, int end, const char *change)
+{
+	int changelen = change ? strlen(change) : 0;
+	int valuelen = value ? strlen(value) : 0;
+	int prelen = (start >= 0 ? start : 0);
+	int postlen = (end >= 0 && end <= valuelen ? valuelen - end : 0);
+	int newlen =  prelen + changelen + postlen + 1;
+	char *merged = fz_malloc(ctx, newlen);
+	char *m = merged;
+
+	if (prelen)
+	{
+		memcpy(m, value, prelen);
+		m += prelen;
+	}
+	if (changelen)
+	{
+		memcpy(m, change, changelen);
+		m += changelen;
+	}
+	if (postlen)
+	{
+		memcpy(m, &value[end], postlen);
+		m += postlen;
+	}
+	*m = 0;
+
+	return merged;
+}
+
 int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *new_value)
 {
 	pdf_document *doc = widget->page->doc;
-	pdf_keystroke_event event;
+	pdf_keystroke_event event = { 0 };
 	char *newChange = NULL;
+	char *newValue = NULL;
 	int rc = 1;
-
-	event.newChange = NULL;
 
 	pdf_begin_operation(ctx, doc, "Edit text field");
 
+	fz_var(newValue);
 	fz_var(newChange);
-	fz_var(event.newChange);
 	fz_try(ctx)
 	{
 		if (!widget->ignore_trigger_events)
@@ -1082,20 +1112,20 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 			event.selEnd = (int)strlen(event.value);
 			event.willCommit = 0;
 			rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &event);
+			newChange = event.newChange;
+			newValue = event.newValue;
+			event.newValue = NULL;
+			event.newChange = NULL;
 			if (rc)
 			{
-				if (event.newChange)
-					event.value = newChange = event.newChange;
-				else
-					event.value = new_value;
+				event.value = merge_changes(ctx, newValue, event.selStart, event.selEnd, newChange);
 				event.change = "";
 				event.selStart = -1;
 				event.selEnd = -1;
 				event.willCommit = 1;
-				event.newChange = NULL;
 				rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &event);
 				if (rc)
-					rc = pdf_set_annot_field_value(ctx, doc, widget, event.value, 0);
+					rc = pdf_set_annot_field_value(ctx, doc, widget, event.newValue, 0);
 			}
 		}
 		else
@@ -1106,6 +1136,8 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 	fz_always(ctx)
 	{
 		pdf_end_operation(ctx, doc);
+		fz_free(ctx, newValue);
+		fz_free(ctx, event.newValue);
 		fz_free(ctx, newChange);
 		fz_free(ctx, event.newChange);
 	}
