@@ -431,7 +431,9 @@ static int usage(void)
 		dst += nlen;
 		buflen -= nlen;
 	}
+	assert(dst > annot_type_list);
 	dst[-1] = 0;   // nuke that last ','
+	assert(strlen(annot_type_list) <= sizeof(annot_type_list));
 
 	fz_info(ctx,
 		"mudraw version " FZ_VERSION "\n"
@@ -574,33 +576,33 @@ file_level_headers(fz_context *ctx)
 		fz_write_printf(ctx, out, "<?xml version=\"1.0\"?>\n");
 	}
 
-	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
+	else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 		fz_print_stext_header_as_html(ctx, out);
-	if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
+	else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 		fz_print_stext_header_as_xhtml(ctx, out);
 
-	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
+	else if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
 		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX)
 	{
 		fz_write_printf(ctx, out, "<document name=\"%s\">\n", filename);
 	}
-	if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+	else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "{%q:%q,%q:[", "file", filename, "pages");
 
-	if (output_format == OUT_PS)
+	else if (output_format == OUT_PS)
 		fz_write_ps_file_header(ctx, out);
 
-	if (output_format == OUT_PWG)
+	else if (output_format == OUT_PWG)
 		fz_write_pwg_file_header(ctx, out);
 
-	if (output_format == OUT_PCLM)
+	else if (output_format == OUT_PCLM)
 	{
 		fz_pclm_options opts = { 0 };
 		fz_parse_pclm_options(ctx, &opts, "compression=flate");
 		bander = fz_new_pclm_band_writer(ctx, out, &opts);
 	}
 
-	if (output_format == OUT_OCR_PDF)
+	else if (output_format == OUT_OCR_PDF)
 	{
 		char options[300];
 		fz_pdfocr_options opts = { 0 };
@@ -850,7 +852,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	if (output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
+	else if (output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
 	{
 		fz_device* pre_ocr_dev = NULL;
 
@@ -1183,6 +1185,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				else
 					bander = fz_new_color_pcl_band_writer(ctx, out, NULL);
 			}
+			else
+			{
+				fz_throw(ctx, FZ_ERROR_ABORT, "Internal error: Unhandled output format %d.", output_format);
+			}
+
 			if (bander)
 			{
 				fz_write_header(ctx, bander, pix->w, totalheight, pix->n, pix->alpha, pix->xres, pix->yres, output_pagenum++, pix->colorspace, pix->seps);
@@ -1282,7 +1289,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				}
 			}
 			else
+			{
 				fz_drop_pixmap(ctx, pix);
+			}
 		}
 		fz_catch(ctx)
 		{
