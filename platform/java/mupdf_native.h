@@ -1877,14 +1877,6 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_eventBlur
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
- * Method:    updateAppearance
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_updateAppearance
-  (JNIEnv *, jobject);
-
-/*
- * Class:     com_artifex_mupdf_fitz_PDFAnnotation
  * Method:    update
  * Signature: ()Z
  */
