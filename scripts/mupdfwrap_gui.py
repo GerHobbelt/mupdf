@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 '''
-Basic PDF viewer using PyQt and MuPDF.
+Basic PDF viewer using PyQt and MuPDF's Python bindings.
 
     Hot-keys in main window:
         +=  zooms in
@@ -17,7 +17,7 @@ Command-line usage:
     -f <path>
         Show specified PDF file.
     --html
-        Also show HTML version of most recent PDF file.
+        Also show HTML version of PDF file.
 
 Example usage:
 
@@ -25,6 +25,7 @@ Example usage:
     PYTHONPATH=build/shared-release-extract ./scripts/mupdfwrap_gui.py
 '''
 
+import os
 import sys
 
 import mupdf
@@ -39,7 +40,8 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # Set up default state.
+        # Set up default state. Zooming works by incrementing self.zoom by +/-
+        # 1 then using magnification = 2**(self.zoom/self.zoom_multiple).
         #
         self.page_number = None
         self.zoom_multiple = 4
@@ -78,19 +80,18 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
 
     def keyPressEvent(self, event):
         #print(f'event.key()={event.key()}')
-        if self.page_number is not None:
-            if 0:
-                pass
-            elif event.key() == PyQt5.Qt.Qt.Key_PageUp:
-                self.goto_page(page_number=self.page_number - 1)
-            elif event.key() == PyQt5.Qt.Qt.Key_PageDown:
-                self.goto_page(page_number=self.page_number + 1)
-            elif event.key() in (ord('='), ord('+')):
-                self.goto_page(zoom=self.zoom + 1)
-            elif event.key() in (ord('-'), ord('_')):
-                self.goto_page(zoom=self.zoom - 1)
-            elif event.key() == (ord('0')):
-                self.goto_page(zoom=0)
+        if self.page_number is None:
+            return
+        elif event.key() == PyQt5.Qt.Qt.Key_PageUp:
+            self.goto_page(page_number=self.page_number - 1)
+        elif event.key() == PyQt5.Qt.Qt.Key_PageDown:
+            self.goto_page(page_number=self.page_number + 1)
+        elif event.key() in (ord('='), ord('+')):
+            self.goto_page(zoom=self.zoom + 1)
+        elif event.key() in (ord('-'), ord('_')):
+            self.goto_page(zoom=self.zoom - 1)
+        elif event.key() == (ord('0')):
+            self.goto_page(zoom=0)
 
     def resizeEvent(self, event):
         self.goto_page(self.page_number, self.zoom)
@@ -99,16 +100,24 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
     def show_html(self):
         # Convert to HTML using Extract, and show in new window using
         # PyQt5.QtWebKitWidgets.QWebView.
-        buffer_ = self.page.new_buffer_from_page_with_format("docx", "html",
-                mupdf.Matrix(1, 0, 0, 1, 0, 0), mupdf.Cookie())
+        buffer_ = self.page.new_buffer_from_page_with_format(
+                format="docx",
+                options="html",
+                transform=mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                cookie=mupdf.Cookie(),
+                )
         html_content = buffer_.buffer_extract().decode('utf8')
         #print(f'html_content:\n{html_content}')
-        sys.stdout.flush()
+        #sys.stdout.flush()
+        # Show in a new window using Qt's QWebView.
         self.webview = PyQt5.QtWebKitWidgets.QWebView()
         self.webview.setHtml(html_content)
         self.webview.show()
 
     def open_(self):
+        '''
+        Opens new PDF file, using Qt file-chooser dialogue.
+        '''
         path, _ = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self, 'Open', filter='*.pdf')
         if path:
             self.open_path(path)
@@ -117,6 +126,12 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         sys.exit()
 
     def goto_page(self, page_number=None, zoom=None):
+        '''
+        Updates display to show specified page number and zoom level,
+        defaulting to current values if None.
+
+        Updates self.page_number and self.zoom if we are successful.
+        '''
         # Recreate the bitmap that we are displaying. We should probably use a
         # mupdf.DisplayList to avoid processing the page each time we need to
         # change zoom etc.
@@ -144,7 +159,7 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         z *= (self.centralWidget().size().width() - 2) / (page_rect.x1 - page_rect.x0)
 
         # Need to preserve the pixmap after we return because the Qt image will
-        # refer to it, se we use self.pixmap.
+        # refer to it, so we use self.pixmap.
         try:
             self.pixmap = self.page.new_pixmap_from_page_contents(
                     ctm=mupdf.Matrix(z, 0, 0, z, 0, 0),
@@ -168,11 +183,13 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.zoom = zoom
 
     def open_path(self, path):
+        path = os.path.abspath(path)
         try:
             self.document = mupdf.Document(path)
         except Exception as e:
             print(f'Failed to open path={path!r}: {e}')
             return
+        self.setWindowTitle(path)
         self.goto_page(page_number=0, zoom=0)
 
 
