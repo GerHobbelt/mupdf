@@ -600,9 +600,18 @@ push_group_for_separations(fz_context *ctx, fz_draw_device *dev, fz_color_params
 }
 
 static void
+fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
+	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params);
+
+static void
 fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int even_odd, fz_matrix in_ctm,
 	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
 {
+	if (color[0] == 1)
+	{
+		fprintf(stderr, "%s:%i:%s: *** color[0]=%f\n", __FILE__, __LINE__, __FUNCTION__, color[0]);
+		return;
+	}
 	fz_draw_device *dev = (fz_draw_device*)devp;
 	fz_matrix ctm = fz_concat(in_ctm, dev->transform);
 	fz_rasterizer *rast = dev->rast;
@@ -614,6 +623,75 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	fz_draw_state *state = &dev->stack[dev->top];
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
+	//((float*)color)[0] = 0;
+
+	//fprintf(stderr, "%s:%i:%s: colorspace_in=%p\n", __FILE__, __LINE__, __FUNCTION__, colorspace_in);
+	if (0 && colorspace_in)
+	{
+		fprintf(stderr, "%s:%i:%s: color[0]=%f\n", __FILE__, __LINE__, __FUNCTION__, color[0]);
+	}
+	if (0 && colorspace_in)
+	{
+		static float local_color[FZ_MAX_COLORS] = { 0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5 };
+		int i;
+		for (i = 0; i < colorspace_in->n; i++)
+			if (color[i] != 1.0f)
+				break;
+		if (i == colorspace_in->n)
+		{
+			fprintf(stderr, "%s:%i:%s: replacing color\n",
+					__FILE__, __LINE__, __FUNCTION__
+					);
+			color = local_color;
+		}
+	}
+	if (0)
+	{
+		if (colorspace_in)
+		{
+			static int it = 0;
+			float* colors = fz_malloc(ctx, sizeof(float) * 3);
+			it += 1;
+			float scale = 257.0 / 256.0 / 256.0;
+			colors[0] = ((it * 17) % 256) * scale;
+			colors[1] = ((it * 243) % 256) * scale;
+			colors[2] = ((it * 63) % 256) * scale;
+			colorspace_in->type = FZ_COLORSPACE_RGB;
+			colorspace_in->n = 3;
+			color = colors;
+			alpha = 0.5;
+		}
+	}
+	if (0)
+	{
+		fz_stroke_state stroke_state;
+		stroke_state.start_cap = FZ_LINECAP_BUTT;
+		stroke_state.dash_cap = FZ_LINECAP_BUTT;
+		stroke_state.end_cap = FZ_LINECAP_BUTT;
+		stroke_state.linejoin = FZ_LINEJOIN_MITER;
+		stroke_state.linewidth = 3;
+		stroke_state.miterlimit = 5;
+		stroke_state.dash_phase = 0;
+		stroke_state.dash_len = 0;
+
+		if (colorspace_in)
+		{
+			static int it = 0;
+			float* colors = fz_malloc(ctx, sizeof(float) * 3);
+			it += 1;
+			float scale = 257.0 / 256.0 / 256.0;
+			colors[0] = ((it * 17) % 256) * scale;
+			colors[1] = ((it * 243) % 256) * scale;
+			colors[2] = ((it * 63) % 256) * scale;
+			colorspace_in->type = FZ_COLORSPACE_RGB;
+			colorspace_in->n = 3;
+			color = colors;
+		}
+		alpha = 0.25;
+
+		fz_draw_stroke_path(ctx, devp, path, &stroke_state, in_ctm, colorspace_in, color, alpha, color_params);
+		return;
+	}
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
