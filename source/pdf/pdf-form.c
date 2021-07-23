@@ -1093,7 +1093,7 @@ merge_changes(fz_context *ctx, const char *value, int start, int end, const char
 int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *new_value)
 {
 	pdf_document *doc = widget->page->doc;
-	pdf_keystroke_event event = { 0 };
+	pdf_keystroke_event evt = { 0 };
 	char *newChange = NULL;
 	char *newValue = NULL;
 	int rc = 1;
@@ -1106,26 +1106,26 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 	{
 		if (!widget->ignore_trigger_events)
 		{
-			event.value = pdf_annot_field_value(ctx, widget);
-			event.change = new_value;
-			event.selStart = 0;
-			event.selEnd = (int)strlen(event.value);
-			event.willCommit = 0;
-			rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &event);
-			newChange = event.newChange;
-			newValue = event.newValue;
-			event.newValue = NULL;
-			event.newChange = NULL;
+			evt.value = pdf_annot_field_value(ctx, widget);
+			evt.change = new_value;
+			evt.selStart = 0;
+			evt.selEnd = (int)strlen(evt.value);
+			evt.willCommit = 0;
+			rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &evt);
+			newChange = evt.newChange;
+			newValue = evt.newValue;
+			evt.newValue = NULL;
+			evt.newChange = NULL;
 			if (rc)
 			{
-				event.value = merge_changes(ctx, newValue, event.selStart, event.selEnd, newChange);
-				event.change = "";
-				event.selStart = -1;
-				event.selEnd = -1;
-				event.willCommit = 1;
-				rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &event);
+				evt.value = merge_changes(ctx, newValue, evt.selStart, evt.selEnd, newChange);
+				evt.change = "";
+				evt.selStart = -1;
+				evt.selEnd = -1;
+				evt.willCommit = 1;
+				rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &evt);
 				if (rc)
-					rc = pdf_set_annot_field_value(ctx, doc, widget, event.newValue, 0);
+					rc = pdf_set_annot_field_value(ctx, doc, widget, evt.newValue, 0);
 			}
 		}
 		else
@@ -1137,9 +1137,9 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 	{
 		pdf_end_operation(ctx, doc);
 		fz_free(ctx, newValue);
-		fz_free(ctx, event.newValue);
+		fz_free(ctx, evt.newValue);
 		fz_free(ctx, newChange);
-		fz_free(ctx, event.newChange);
+		fz_free(ctx, evt.newChange);
 	}
 	fz_catch(ctx)
 	{
