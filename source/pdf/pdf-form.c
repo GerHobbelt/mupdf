@@ -1050,9 +1050,9 @@ int pdf_text_widget_format(fz_context *ctx, pdf_widget *tw)
 		else if (strstr(code, "AFSpecial_Format"))
 			type = PDF_WIDGET_TX_FORMAT_SPECIAL;
 		else if (strstr(code, "AFDate_FormatEx"))
-			type = PDF_WIDGET_TX_FORMAT_DATE;
+type = PDF_WIDGET_TX_FORMAT_DATE;
 		else if (strstr(code, "AFTime_FormatEx"))
-			type = PDF_WIDGET_TX_FORMAT_TIME;
+		type = PDF_WIDGET_TX_FORMAT_TIME;
 		fz_free(ctx, code);
 	}
 
@@ -1093,7 +1093,7 @@ merge_changes(fz_context *ctx, const char *value, int start, int end, const char
 int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *new_value)
 {
 	pdf_document *doc = widget->page->doc;
-	pdf_keystroke_event evt = { 0 };
+	pdf_keystroke_event evt ={0};
 	char *newChange = NULL;
 	char *newValue = NULL;
 	int rc = 1;
@@ -1127,8 +1127,7 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 				if (rc)
 					rc = pdf_set_annot_field_value(ctx, doc, widget, evt.newValue, 0);
 			}
-		}
-		else
+		} else
 		{
 			rc = pdf_set_annot_field_value(ctx, doc, widget, new_value, 1);
 		}
@@ -1144,6 +1143,56 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 	fz_catch(ctx)
 	{
 		fz_warn(ctx, "could not set widget text");
+		rc = 0;
+	}
+	return rc;
+}
+
+int pdf_edit_text_field_value(fz_context *ctx, pdf_widget *widget, const char *value, const char *change, int *selStart, int *selEnd, char **result)
+{
+	pdf_document *doc = widget->page->doc;
+	pdf_keystroke_event evt ={0};
+	char *newChange = NULL;
+	char *newValue = NULL;
+	int rc = 1;
+
+	pdf_begin_operation(ctx, doc, "Text field keystroke");
+
+	fz_var(newValue);
+	fz_var(newChange);
+	fz_try(ctx)
+	{
+		if (!widget->ignore_trigger_events)
+		{
+			evt.value = value;
+			evt.change = change;
+			evt.selStart = *selStart;
+			evt.selEnd = *selEnd;
+			evt.willCommit = 0;
+			rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &evt);
+			if (rc)
+			{
+				*result = merge_changes(ctx, evt.newValue, evt.selStart, evt.selEnd, evt.newChange);
+				*selStart = evt.selStart + strlen(evt.newChange);
+				*selEnd = *selStart;
+			}
+		}
+		else
+		{
+			*result = merge_changes(ctx, value, *selStart, *selEnd, change);
+			*selStart = evt.selStart + strlen(change);
+			*selEnd = *selStart;
+		}
+	}
+	fz_always(ctx)
+	{
+		pdf_end_operation(ctx, doc);
+		fz_free(ctx, evt.newValue);
+		fz_free(ctx, evt.newChange);
+	}
+	fz_catch(ctx)
+	{
+		fz_warn(ctx, "could not process text widget keystroke");
 		rc = 0;
 	}
 	return rc;
