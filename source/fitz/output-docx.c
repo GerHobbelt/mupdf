@@ -500,7 +500,7 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 	stroke_path_info.point0_set = 0;
 	stroke_path_info.point_set = 0;
 
-	fprintf(stderr,
+	if (0) fprintf(stderr,
 			"%s:%i:%s: colorspace_in->type=%i colorspace_in->name=%s color[0]=%f alpha=%f\n",
 			__FILE__, __LINE__, __FUNCTION__,
 			colorspace_in->type, colorspace_in->name, color[0], alpha
