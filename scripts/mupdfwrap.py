@@ -468,6 +468,8 @@ Usage:
         --dir-so <directory>
             Set directory containing shared libraries.
 
+            Default is: build/shared-release-extract
+
             We use different C++ compile flags depending on release or debug
             builds (specifically, the definition of NDEBUG is important because
             it must match what was used when libmupdf.so was built).
