@@ -53,17 +53,21 @@ C++ wrapping:
 
     Classes:
 
-        For each fz_* and pdf_* struct we provide a wrapper class. These
-        wrapper classes generally have a <m_internal> member that is a pointer
-        to an instance of the underlying struct.
+        For each fz_* and pdf_* struct, we provide a wrapper class with
+        a CamelCase version of the struct name, e.g. the wrapper for
+        fz_display_list is called mupdf::DisplayList.
+
+        These wrapper classes generally have a member <m_internal> that is a
+        pointer to an instance of the underlying struct.
 
         Member functions:
 
             Member functions are provided which wrap all relevant fz_*() and
-            pdf_*() functions. These methods generally take args that are
-            references to wrapper classes instead of pointers to fz_* and pdf_*
-            structs, and similarly return wrapper classes by value instead of
-            returning a pointer to a fz_* or pdf_* struct.
+            pdf_*() functions. These methods have the same name as the wrapped
+            function but without the initial fz_ or pdf_. They generally take
+            args that are references to wrapper classes instead of pointers to
+            fz_* and pdf_* structs, and similarly return wrapper classes by
+            value instead of returning a pointer to a fz_* or pdf_* struct.
 
         Reference counting:
 
@@ -464,22 +468,21 @@ Usage:
         --dir-so <directory>
             Set directory containing shared libraries.
 
-            Supported values for <directory>:
-                <mupdf>/build/shared-release/ [default]
-                <mupdf>/build/shared-debug/
-                <mupdf>/build/shared-memento/
+            Default is: build/shared-release-extract
 
-            We use different C++ compile flags depending on release or debug builds
-            (specifically definition of NDEBUG is important because it must match
-            what was used when libmupdf.so was built).
+            We use different C++ compile flags depending on release or debug
+            builds (specifically, the definition of NDEBUG is important because
+            it must match what was used when libmupdf.so was built).
 
             Examples:
                 -d build/shared-debug
+                -d build/shared-debug-extract
                 -d build/shared-release
+                -d build/shared-release-extract [default]
 
-            On Windows one can specify the CPU and Python version; we then
-            use 'py -0f' to find the matching installed Python along with its
-            Python.h and python.lib. For example:
+            On Windows, all builds include extract. One can specify the CPU and
+            Python version; we then use 'py -0f' to find the matching installed
+            Python along with its Python.h and python.lib. For example:
 
                 -d build/shared-release-x32-py3.8
                 -d build/shared-release-x64-py3.9
@@ -541,8 +544,8 @@ Usage:
                 * Creates a Python virtual environment.
                 * Activates the Python environment.
                 * Runs setup.py install.
-                    * Builds C, C++ and Python librariess in build/shared-release.
-                    * Copies build/shared-release/*.so into virtual envionment.
+                    * Builds C, C++ and Python librariess in build/shared-release-extract.
+                    * Copies build/shared-release-extract/*.so into virtual envionment.
                 * Runs scripts/mupdfwrap_test.py.
                     * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
@@ -1420,7 +1423,20 @@ classextras = ClassExtras(
                             dev = {rename.function_call('fz_keep_device')}(dev);
                             return Device(dev);
                         }}
+                        ''',
+                        textwrap.dedent(f'''
+                        /*
+                        Custom wrapper for fz_begin_page().
+
+                        Called to start the process of writing a page to
+                        a document.
+
+                        mediabox: page size rectangle in points.
+
+                        Returns a {rename.class_('fz_device')} to write page contents to.
+                        */
                         '''),
+                        ),
                         ],
                 constructors_extra = [
                     ExtraConstructor(
@@ -6320,7 +6336,7 @@ class BuildDirs:
             #
             self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-{cpu_name()}-py{python_version()}')
         else:
-            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
+            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-extract')
 
     def set_dir_so( self, dir_so):
         '''

@@ -196,11 +196,11 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 #ifdef HAVE_EXTRACT
 		if (is_extension(format, "odt"))
 		{
-			return fz_new_odt_writer(ctx, format, path, options);
+			return fz_new_odt_writer(ctx, path, options);
 		}
 		if (is_extension(format, "docx"))
 		{
-			return fz_new_docx_writer(ctx, format, path, options);
+			return fz_new_docx_writer(ctx, path, options);
 		}
 #else
 		if (is_extension(format, "odt"))
@@ -251,6 +251,26 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 		return fz_new_text_writer_with_output(ctx, "stext.xml", out, options);
 	if (is_extension(format, "stext.json"))
 		return fz_new_text_writer_with_output(ctx, "stext.json", out, options);
+
+#ifdef HAVE_EXTRACT
+	if (is_extension(format, "odt"))
+	{
+		return fz_new_odt_writer_with_output(ctx, out, options);
+	}
+	if (is_extension(format, "docx"))
+	{
+		return fz_new_docx_writer_with_output(ctx, out, options);
+	}
+#else
+	if (is_extension(format, "odt"))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "odt output not available in this build.");
+	}
+	if (is_extension(format, "docx"))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "docx output not available in this build.");
+	}
+#endif
 
 	fz_throw(ctx, FZ_ERROR_GENERIC, "unknown output document format: %s", format);
 }
