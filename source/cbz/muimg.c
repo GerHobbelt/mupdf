@@ -241,6 +241,7 @@ static const char *img_extensions[] =
 	"tif",
 	"tiff",
 	"wdp",
+	"webp",
 	NULL
 };
 
@@ -256,6 +257,7 @@ static const char *img_mimetypes[] =
 	"image/png",
 	"image/tiff",
 	"image/vnd.ms-photo",
+	"image/webp",
 	"image/x-jb2",
 	"image/x-jbig2",
 	"image/x-portable-anymap",
