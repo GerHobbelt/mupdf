@@ -162,6 +162,7 @@ int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, cons
 */
 int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *value);
 int pdf_set_choice_field_value(fz_context *ctx, pdf_widget *widget, const char *value);
+int pdf_edit_text_field_value(fz_context *ctx, pdf_widget *widget, const char *value, const char *change, int *selStart, int *selEnd, char **newvalue);
 
 typedef struct
 {
@@ -322,6 +323,7 @@ typedef struct
 	int selStart, selEnd;
 	int willCommit;
 	char *newChange;
+	char *newValue;
 } pdf_keystroke_event;
 
 int pdf_field_event_keystroke(fz_context *ctx, pdf_document *doc, pdf_obj *field, pdf_keystroke_event *evt);
