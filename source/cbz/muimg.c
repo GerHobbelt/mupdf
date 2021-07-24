@@ -228,6 +228,7 @@ static const char *img_extensions[] =
 	"jpeg",
 	"jpg",
 	"jpx",
+	"jxl",
 	"jxr",
 	"pam",
 	"pbm",
