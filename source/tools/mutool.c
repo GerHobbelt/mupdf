@@ -12,6 +12,8 @@
 #include "../../thirdparty/owemdjee/upskirt-markdown/bin/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libxml2/include/libxml/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/QuickJS/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/brotli/c/include/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/jpeg-xl/lib/include/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -132,6 +134,23 @@ static struct {
 	{ qjs_main, "qjs", "qjs (QuickJS) tool" },
 	{ qjsc_main, "qjsc", "qjsc (QuickJS Compiler) tool" },
 	{ qjs_unicode_gen_main, "qjs_unicode_gen", "qjs_unicode_gen tool" },
+
+	{ brotli_main, "brotli", "brotli tool" },
+
+	{ jpegXL_decode_oneshot_main, "jxl_decode_oneshot", "jxl_decode_oneshot tool" },
+	{ jpegXL_encode_oneshot_main, "jxl_encode_oneshot", "jxl_encode_oneshot tool" },
+	{ jpegXL_info_main, "jxl_info", "jxl_info: jpegXL tool" },
+	{ jpegXL_box_list_main, "jxl_box_list", "jxl_box_list tool" },
+	{ jpegXL_butteraugli_main, "jxl_butteraugli", "jxl_butteraugli tool" },
+	{ jpegXL_compress_main, "jxl_compress", "jxl_compress tool" },
+	{ jpegXL_conformance_main, "jxl_conformance", "jxl_conformance tool" },
+	{ jpegXL_decompress_main, "jxl_decompress", "jxl_decompress tool" },
+	{ jpegXL_dec_enc_main, "jxl_dec_enc", "jxl_dec_enc tool" },
+	{ jpegXL_epf_main, "jxl_epf", "jxl_epf tool" },
+	{ jpegXL_from_tree_main, "jxl_from_tree", "jxl_from_tree tool" },
+	{ jpegXL_ssimulacra_main, "jxl_ssimulacra tool" },
+//	{ jpegXL_ssimulacra_openCV_main, "jxl_ssimulacra_openCV", "jxl_ssimulacra_openCV tool" },
+	{ jpegXL_xyb_range_main, "jxl_xyb_range", "jxl_xyb_range tool" },
 
 	{ report_version, "version", "report version of this build / tools" },
 };

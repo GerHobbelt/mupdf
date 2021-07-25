@@ -243,6 +243,7 @@ EXPORTS
 	fz_page_separations
 	fz_page_uses_overprint
 	fz_previous_page
+	fz_process_opened_pages
 	fz_recognize_document
 	fz_register_document_handler
 	fz_register_document_handlers
@@ -1033,6 +1034,7 @@ EXPORTS
 	fz_new_buffer_from_display_list
 	fz_new_buffer_from_page
 	fz_new_buffer_from_page_number
+	fz_new_buffer_from_page_with_format
 	fz_new_buffer_from_stext_page
 	fz_new_display_list_from_page
 	fz_new_display_list_from_page_contents
@@ -1503,6 +1505,7 @@ EXPORTS
 	pdf_drop_signer
 	pdf_drop_verifier
 	pdf_drop_widget
+	pdf_edit_text_field_value
 	pdf_field_border_style
 	pdf_field_display
 	pdf_field_event_calculate
@@ -1818,6 +1821,7 @@ EXPORTS
 	pdf_load_shading
 	pdf_new_xobject
 	pdf_purge_local_font_resources
+	pdf_purge_locals_from_store
 	pdf_remove_item
 	pdf_store_item
 	pdf_update_xobject
@@ -1840,6 +1844,7 @@ EXPORTS
 	pdf_count_unsaved_versions
 	pdf_count_versions
 	pdf_create_object
+	pdf_debug_doc_changes
 	pdf_delete_object
 	pdf_doc_was_linearized
 	pdf_drop_local_xref
@@ -1849,6 +1854,7 @@ EXPORTS
 	pdf_find_locked_fields_for_sig
 	pdf_find_version_for_obj
 	pdf_forget_xref
+	pdf_get_incremental_xref_entry
 	pdf_get_populating_xref_entry
 	pdf_get_xref_entry
 	pdf_is_field_locked
@@ -1950,6 +1956,22 @@ EXPORTS
 	jpeg_write_scanlines
 	jpeg_write_tables
 	jpeg_cust_mem_init
+
+; libJPEGXL exports
+
+	jpegXL_box_list_main
+	jpegXL_butteraugli_main
+	jpegXL_compress_main
+	jpegXL_conformance_main
+	jpegXL_dec_enc_main
+	jpegXL_decode_oneshot_main
+	jpegXL_decompress_main
+	jpegXL_encode_oneshot_main
+	jpegXL_epf_main
+	jpegXL_from_tree_main
+	jpegXL_info_main
+	jpegXL_ssimulacra_main
+	jpegXL_xyb_range_main
 
 ; libGIF exports
 
@@ -2141,6 +2163,10 @@ EXPORTS
 	WebPFree
 	WebPMalloc
 
+; libbrotli exports
+
+	brotli_main
+
 ; libSQLite3 exports
 
 	sqlite3_aggregate_context
@@ -2289,6 +2315,7 @@ EXPORTS
 	sqlite3_prepare16_v3
 	sqlite3_prepare_v2
 	sqlite3_prepare_v3
+	sqlite3_preupdate_blobwrite
 	sqlite3_preupdate_count
 	sqlite3_preupdate_depth
 	sqlite3_preupdate_hook
@@ -2445,6 +2472,7 @@ EXPORTS
 	sqlite3rebaser_rebase_strm
 	sqlite3session_attach
 	sqlite3session_changeset
+	sqlite3session_changeset_size
 	sqlite3session_changeset_strm
 	sqlite3session_config
 	sqlite3session_create
@@ -2454,6 +2482,7 @@ EXPORTS
 	sqlite3session_indirect
 	sqlite3session_isempty
 	sqlite3session_memory_used
+	sqlite3session_object_config
 	sqlite3session_patchset
 	sqlite3session_patchset_strm
 	sqlite3session_table_filter
