@@ -565,6 +565,8 @@ void pdf_annot_pop_local_xref(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_ensure_local_xref(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_pop_and_discard_local_xref(fz_context *ctx, pdf_annot *annot);
 
+void pdf_update_appearance(fz_context* ctx, pdf_annot* annot);
+
 /*
 	Regenerate any appearance streams that are out of date and check for
 	cases where a different appearance stream should be selected because of

@@ -2629,7 +2629,7 @@ void pdf_annot_pop_and_discard_local_xref(fz_context *ctx, pdf_annot *annot)
 	doc->local_xref = NULL;
 }
 
-static void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
+void pdf_update_appearance(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *subtype;
 	pdf_obj *ft = NULL;
