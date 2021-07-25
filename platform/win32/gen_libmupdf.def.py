@@ -168,6 +168,8 @@ EXPORTS
 
 %(libjpegXL_exports)s
 
+%(libjpegXL2_exports)s
+
 ; libGIF exports
 
 %(libgif_exports)s
@@ -179,6 +181,8 @@ EXPORTS
 ; libbrotli exports
 
 %(libbrotli_exports)s
+
+%(libbrotli2_exports)s
 
 ; libSQLite3 exports
 
@@ -274,7 +278,9 @@ def main():
 	libgif_exports = generateExports("thirdparty/owemdjee/libgif/gif_lib.h")
 	libwebp_exports = generateExports("thirdparty/owemdjee/libwebp/src/webp")
 	libjpegXL_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include", ["jpegXL_ssimulacra_openCV_main"])
+	libjpegXL2_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include/jxl")
 	libbrotli_exports = generateExports("thirdparty/owemdjee/brotli/c/include")
+	libbrotli2_exports = generateExports("thirdparty/owemdjee/brotli/c/include/brotli")
 	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
 	mujs_exports = generateExports("thirdparty/mujs/mujs.h")
 	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
