@@ -18,11 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>libjpeg-xl</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC2E212}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA838C1}</ProjectGuid>
     <RootNamespace>libjpeg-xl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -30,70 +28,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -106,18 +66,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -147,38 +96,22 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -186,11 +119,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -198,30 +129,16 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -229,11 +146,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -241,33 +156,17 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -275,11 +174,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -287,30 +184,16 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -318,1552 +201,403 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
-  
-
-  
-
   <ItemGroup>
-  	
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/examples/encode_oneshot.cc" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/examples/decode_oneshot.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/ImageMagick/ImageMagick.version.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/examples/encode_oneshot.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/examples/jxlinfo.c" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/dirent.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/args.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/dirent.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/butteraugli_main.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_main.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/decode_and_encode.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/decode_basic_info_fuzzer.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/color_encoding_fuzzer.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/epf.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/fuzzer_corpus.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/epf_main.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_fuzzer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_main.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jxl_emcc.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/fields_fuzzer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/libjxl_test.c" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/epf.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/fuzzer_stub.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jxl_from_tree.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_codec_fuzzer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/rans_fuzzer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/set_from_bytes_fuzzer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra_main.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/speed_stats.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.cpp" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/xyb_range.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/speed_stats.cc" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_exr.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_apng.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_gif.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_exr.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_apng.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_exr.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_gif.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pgx.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pgx.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_jpg.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_png.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_psd.cc" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_jpg.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pnm.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pgx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_png.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pnm.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_png.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_psd.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_psd.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/time.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/time.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/profiler/tsc_timer.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/profiler/profiler.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping_gbench.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/profiler/profiler.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_context.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_strategy_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_internal.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/adaptive_reconstruction_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/resizable_parallel_runner.cc" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_strategy.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_common.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/alpha.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/alpha_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_strategy.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_common.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/alpha.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/aux_out.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/aux_out_fwd.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_common_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_params.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_test.cc" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_common.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/aux_out.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/blending.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/blending_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/blending.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/bit_reader_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/bits_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/chroma_from_luma.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/chroma_from_luma.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli_wrapper.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/codec_in_out.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/byte_order_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_encoding_internal.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_encoding_internal_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_encoding_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order_fwd.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/common.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_management_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_management.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/compressed_dc.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/compressed_dc.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_management.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/data_parallel_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_block-inl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_for_test.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/compressed_image_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct-inl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_scales.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_scales.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_util.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_ans.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode_to_jpeg.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_bit_reader.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_context_map.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode_to_jpeg.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_cache.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_ans.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_cache.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_context_map.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_frame.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_file.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image_gbench.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group_border.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_frame.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_file.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_huffman.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group_border.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_params.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_huffman.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_modular.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_modular.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_patch_dictionary.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_reconstruct.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_patch_dictionary.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms-inl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_noise.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms_testonly.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_render_pipeline.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_noise.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_upsample.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_reconstruct.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms_testonly.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_upsample.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ac_strategy.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/encode.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/descriptive_statistics_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_adaptive_quantization.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/encode_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ac_strategy.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ans.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/encode_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ans_params.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ans.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_adaptive_quantization.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ar_control_field.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_bit_writer.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_bit_writer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ar_control_field.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cache.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_comparator.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_comparator.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cache.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_pnorm.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_pnorm.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_coeff_order.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_chroma_from_luma.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_chroma_from_luma.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cluster.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_color_management.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_coeff_order.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cluster.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_context_map.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_comparator.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_detect_dots.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_comparator.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_color_management.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_dot_dictionary.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_dot_dictionary.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_entropy_coder.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_context_map.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_entropy_coder.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image_gbench.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_file.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_fast_heuristics.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_frame.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_detect_dots.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_frame.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_heuristics.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_group.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_file.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_group.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_gamma_correct.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_icc_codec.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_huffman.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_heuristics.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_icc_codec.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_image_bundle.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_huffman.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_image_bundle.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_modular.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_params.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_noise.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_modular.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_patch_dictionary.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_noise.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_photon_noise.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_splines.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_photon_noise.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_quant_weights.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_patch_dictionary.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_photon_noise_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_splines.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_transforms.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_quant_weights.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_toc.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_transforms-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_transforms.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_toc.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_xyb.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_xyb.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fields.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/epf.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/epf.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_math_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fields.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fields_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_math-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/field_encodings.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters_internal_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/frame_header.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/frame_header.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gaborish_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gaborish.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gauss_blur.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gaborish.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gamma_correct_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_table.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gradient_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_table.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gauss_blur.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gauss_blur_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/headers.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_tree.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_tree.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/iaca_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/headers.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec_common.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_bundle.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec_common.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_ops.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_bundle.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_bundle_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_metadata.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_metadata.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_test_utils.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_ops_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jxl_inspection.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jxl_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/lehmer_code_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/lehmer_code.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/linalg.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/linalg_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/linalg.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/luminance.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/memory_manager_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/luminance.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/noise.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/memory_manager_internal.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/loop_filter.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/noise_distributions.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/opsin_image_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/opsin_params.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/optimize.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/opsin_params.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/loop_filter.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/passes_state.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/opsin_inverse_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/optimize.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/padded_bytes_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/optimize_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/patch_dictionary_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer-inl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/patch_dictionary_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/preview_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/passes_state.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/passes_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/progressive_split.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/progressive_split.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quant_weights.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quant_weights.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/roundtrip_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/rational_polynomial_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quant_weights_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/robust_statistics_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/rational_polynomial-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/sanitizers.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/speed_tier_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines_gbench.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/toc.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/toc_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/transfer_functions-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/testdata.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/xorshift128plus_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/test_utils.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/tf_gbench.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gdk-pixbuf/pixbufloader-jxl.c" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/transpose-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/toc.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/common.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/xorshift128plus-inl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl-load.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gdk-pixbuf/pixbufloader_test.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl-save.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl-load.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_args.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl-save.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_args.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_avif.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_custom.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_avif.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_jxl.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_jpeg.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_custom.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_jxl.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_jpeg.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_webp.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_png.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_stats.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_webp.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_file_io.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_file_io.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_utils.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_codec_png.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_xl.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box_list_main.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_stats.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/codec_comparison_window.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/compare_codecs.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/benchmark/benchmark_utils.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box_test.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/compare_images.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/codec_comparison_window.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/image_loading.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/settings.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/settings.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/split_image_renderer.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/image_loading.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/split_image_renderer.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/split_image_view.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/comparison_viewer/split_image_view.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/conformance/djxl_conformance.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/os_specific.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/cpu.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/cpu.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/os_specific.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/setup.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/setup.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/parameters.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/main.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/parameters.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect_empty.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/test_window.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/test_window.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/split_view.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect_win32.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect_x11.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/flicker_test/split_view.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/viewer/main.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/viewer/load_jxl.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/viewer/load_jxl.h" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/viewer/viewer_window.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/viewer/viewer_window.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/color_encoding.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/encode.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/codestream_header.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/butteraugli.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/decode.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/decode_cxx.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/encode_cxx.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/butteraugli_cxx.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/jxl_threads_export.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/resizable_parallel_runner.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/cache_aligned.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/memory_manager.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/parallel_runner.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/jxl_export.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/thread_parallel_runner.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/arch_macros.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/types.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/thread_parallel_runner_cxx.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/data_parallel.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/bits.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/byte_order.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/resizable_parallel_runner_cxx.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/compiler_specific.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/cache_aligned.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/file_io.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/descriptive_statistics.cc" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/padded_bytes.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/iaca.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/os_macros.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/data_parallel.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/override.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/descriptive_statistics.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/robust_statistics.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/padded_bytes.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/span.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/thread_pool_internal.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/profiler.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli/butteraugli.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/status.cc" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/blending.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli/butteraugli.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data_writer.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/status.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_output_chunk.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/chroma_from_luma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_encoding_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_management.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/compressed_dc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_scales.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_ans.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_context_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_frame.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group_border.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_huffman.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_modular.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_noise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_patch_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_reconstruct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms_testonly.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_upsample.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode_to_jpeg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ac_strategy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_adaptive_quantization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ans.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ar_control_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_bit_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_comparator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_pnorm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_chroma_from_luma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cluster.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_coeff_order.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_color_management.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_comparator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_context_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_detect_dots.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_dot_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_entropy_coder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_fast_heuristics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_frame.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_group.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_heuristics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_huffman.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_icc_codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_image_bundle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_modular.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_noise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_patch_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_photon_noise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_quant_weights.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_splines.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_toc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_transforms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_xyb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/epf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fields.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/frame_header.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gaborish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gauss_blur.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/headers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_bundle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_metadata.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_data_reader.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_data.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_serialization_state.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_data.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_huffman_decode.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_huffman_decode.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data_writer.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_data_reader.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/modular_image.cc" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_huffman_decode.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/jpeg_data.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/jpeg_data.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/options.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/modular_image.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/linalg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/loop_filter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/luminance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/memory_manager_internal.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/dec_ma.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/encoding.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/dec_ma.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/context_predict.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/encoding.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/enc_ma.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/enc_encoding.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_palette.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/enc_encoding.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_palette.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/ma_common.h" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/enc_ma.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_transform.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_squeeze.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_rct.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/encoding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/modular_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_palette.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_rct.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/squeeze.cc" />
-    	
-
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_squeeze.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/rct.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/squeeze.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/transform.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/palette.h" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_transform.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/squeeze.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/transform.cc" />
-    	
-
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jni/org/jpeg/jpegxl/wrapper/decoder_jni_onload.cc" />
-    	
-
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/jni/org/jpeg/jpegxl/wrapper/decoder_jni.h" />
-    	
-
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/opsin_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/optimize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/passes_state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/progressive_split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quant_weights.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/toc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/profiler/profiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/resizable_parallel_runner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gdk-pixbuf/pixbufloader-jxl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/dirent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box_list_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/butteraugli_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/conformance/djxl_conformance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/cpu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/os_specific.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/decode_and_encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_main.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\tools\epf_run.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/epf_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect_empty.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect_win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect_x11.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jni/org/jpeg/jpegxl/wrapper/decoder_jni.cc" />
-    	
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jni/org/jpeg/jpegxl/wrapper/decoder_jni_onload.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jxl_emcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jxl_from_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/speed_stats.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/xyb_range.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/ImageMagick/ImageMagick.version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_apng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_exr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_gif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_jpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pgx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_pnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_psd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/butteraugli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/butteraugli_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/codestream_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/color_encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/decode_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/encode_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/jxl_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/jxl_threads_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/memory_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/parallel_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/resizable_parallel_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/resizable_parallel_runner_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/thread_parallel_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/thread_parallel_runner_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/alpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ans_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/aux_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/aux_out_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/arch_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/byte_order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/cache_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/compiler_specific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/data_parallel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/descriptive_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/file_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/iaca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/os_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/override.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/padded_bytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/robust_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/thread_pool_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/blending.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli/butteraugli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/chroma_from_luma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/codec_in_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_encoding_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_management.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/compressed_dc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_block-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_for_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_scales.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_ans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_bit_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_context_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group_border.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_huffman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_modular.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_noise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_patch_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_reconstruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_render_pipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms_testonly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_upsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode_to_jpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ac_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_adaptive_quantization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ans_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_ar_control_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_bit_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_butteraugli_pnorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_chroma_from_luma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_cluster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_coeff_order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_color_management.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_context_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_detect_dots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_dot_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_entropy_coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_gamma_correct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_heuristics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_huffman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_icc_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_image_bundle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_modular.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_noise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_patch_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_photon_noise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_quant_weights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_splines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_toc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_transforms-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_transforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_xyb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/encode_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/epf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_math-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/field_encodings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fields.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/filters_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/frame_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gaborish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/gauss_blur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/headers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/huffman_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/icc_codec_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_bundle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_output_chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_serialization_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_data_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/enc_jpeg_huffman_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/jpeg_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jxl_inspection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/lehmer_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/linalg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/loop_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/luminance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/memory_manager_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/context_predict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/dec_ma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/enc_encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/enc_ma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/encoding/ma_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/modular_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_palette.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_rct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_squeeze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/enc_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/palette.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/rct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/squeeze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/modular/transform/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/noise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/noise_distributions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/opsin_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/optimize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/passes_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/patch_dictionary_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/progressive_split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quant_weights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/quantizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/rational_polynomial-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/sanitizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/testdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/toc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/transfer_functions-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/transpose-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/xorshift128plus-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/profiler/profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/profiler/tsc_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cpu/os_specific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/epf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/icc_detect/icc_detect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/jni/org/jpeg/jpegxl/wrapper/decoder_jni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/speed_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\aligned_allocator.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\base.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\cache_control.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\foreach_target.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\highway.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\nanobenchmark.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\targets.h" />
   </ItemGroup>
 </Project>
-	
-	
-	
