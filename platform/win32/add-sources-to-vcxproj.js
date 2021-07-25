@@ -268,13 +268,17 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 </Project>
 	`;
   
-  console.error({files, a, sourcesPath, extraFilters, filesToAdd, fsrc1, fsrc2});
+  //console.error({files, a, sourcesPath, extraFilters, filesToAdd, fsrc1, fsrc2});
 
-  filterSrc = filterSrc.replace(/<\/Project>/, fsrc2);
-  src = src.replace(/<\/Project>/, fsrc1);
+  filterSrc = filterSrc.replace(/<\/Project>/, fsrc2)
+  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
+  src = src.replace(/<\/Project>/, fsrc1)
+  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
 
   fs.writeFileSync(filepath, src, 'utf8');
   fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
+
+  console.log("Added", a.length, "entries.");
 });
 
 
