@@ -55,13 +55,16 @@ src = src
 	p1 = p1
 	.replace(/[A-Z]+_DISABLE_LDAP;/g, '')	
 	.replace(/_USRDLL;/g, '')	
-	.replace(/BUILDING_[A-Z_]+;/g, '')	
-	.replace(/[A-Z]+_STATICLIB;/g, '')	
-	.replace(/[A-Z_]*MONOLITHIC;/g, '')	
+	.replace(/BUILDING_[A-Z_-]+;/g, '')	
+	.replace(/[A-Z_-]+_STATICLIB;/g, '')	
+	.replace(/[A-Z_-]*MONOLITHIC;/g, '')	
+	.replace(/[A-Z_-]+-NDEBUG;/g, 'NDEBUG;')	
+	.replace(/[A-Z_-]+-_DEBUG;/g, '_DEBUG;')	
+	.replace(/[A-Z_-]+-_CRT_/g, '_CRT_')	
 	.replace(/USE_SCHANNEL;/g, '')	
 	.replace(/USE_WINDOWS_SSPI;/g, '')	
 
-	let pnu = projectName.toUpperCase();
+	let pnu = projectName.toUpperCase().replace(/-/g, '_');
 	p1 = `BUILD_MONOLITHIC;BUILDING_${pnu};${ pnu.replace(/LIB/, '')}_STATICLIB;${p1}`;
 	return `<PreprocessorDefinitions>${p1}</PreprocessorDefinitions>`;
 })
@@ -70,8 +73,94 @@ src = src
 	 let r = Math.random().toString(16).toUpperCase().replace(/0\./, '');
 	 p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
 	 return `<ProjectGuid>${p1}</ProjectGuid>`;
-});
+})
+.replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
 
 fs.writeFileSync(filepath, src, 'utf8');
+
+
+// also patch the FILTERS file:
+
+let filterSrc = '';
+let filterFilepath = filepath + '.filters';
+if (fs.existsSync(filterFilepath)) {
+	filterSrc = fs.readFileSync(filterFilepath, 'utf8');
+}
+
+if (!filterSrc.match(/<\?xml/)) {
+	filterSrc = `<?xml version="1.0" encoding="utf-8"?>
+	` + filterSrc; 
+}
+
+if (!filterSrc.match(/<Project /)) {
+	filterSrc += `
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03fd328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files">
+      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
+	`;
+}
+
+if (!filterSrc.match(/<Filter Include="Source Files">/)) {
+	filterSrc = filterSrc.replace(/<\/Project>/, `
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03fd328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files">
+      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
+	`);
+}
+
+
+/*
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03fd328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files">
+      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\scripts\libclipp\monolithic_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\thirdparty\owemdjee\clipp\examples\monolithic_examples.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
+*/
+
+filterSrc = filterSrc
+.replace(/<ClCompile[^]+?<\/ClCompile>/g, '')
+.replace(/<ClInclude[^]+?<\/ClInclude>/g, '')
+.replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
+
+fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
 
 
