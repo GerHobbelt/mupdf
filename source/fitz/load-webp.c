@@ -1,5 +1,7 @@
 #include "mupdf/fitz.h"
 
+#ifdef HAVE_WEBP
+
 #include <webp/decode.h>
 
 fz_pixmap *
@@ -44,3 +46,5 @@ fz_load_webp_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen,
 	if (yresp) *yresp = 96;
 	if (cspacep) *cspacep = fz_device_rgb(ctx);
 }
+
+#endif
