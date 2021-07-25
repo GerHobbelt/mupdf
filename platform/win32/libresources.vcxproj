@@ -19,34 +19,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
-    
-    
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
-    
-    
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -63,18 +43,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,70 +73,46 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
       <OmitDefaultLibName>true</OmitDefaultLibName>
-      
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      
-      
-      
-      
-      
     </ClCompile>
     <Lib>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-			<Optimization>MaxSpeed</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
       <OmitDefaultLibName>true</OmitDefaultLibName>
-      
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      
-      
-      
-      
-      
     </ClCompile>
     <Lib>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <bin2coff__ttf_ Include="..\..\resources\fonts\droid\DroidSansFallback.ttf" />
     <bin2coff__ttf_ Include="..\..\resources\fonts\droid\DroidSansFallbackFull.ttf" />
     <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoEmoji-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoKufiArabic-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoNaskhArabic-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoSansOriya-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoSansTaiTham-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoSerifBengali-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoSerifDevanagari-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoSerifMalayalam-Regular.ttf" />
-    <bin2coff__ttf_ Include="..\..\resources\fonts\noto\NotoSerifTelugu-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <bin2coff__ttc_ Include="..\..\resources\fonts\han\SourceHanSerif-Regular.ttc" />
   </ItemGroup>
   <ItemGroup>
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoKufiArabic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoMusic-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoNaskhArabic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoNastaliqUrdu-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSans-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansAdlam-Regular.otf" />
@@ -194,9 +139,11 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansDuployan-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansEgyptianHieroglyphs-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansElbasan-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansElymaic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansGlagolitic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansGothic-Regular.otf" />
-    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansGrantha-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansGunjalaGondi-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansHanifiRohingya-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansHanunoo-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansHatran-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansImperialAramaic-Regular.otf" />
@@ -206,7 +153,6 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansKaithi-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansKayahLi-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansKharoshthi-Regular.otf" />
-    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansKhojki-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansKhudawadi-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansLepcha-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansLimbu-Regular.otf" />
@@ -219,7 +165,9 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMandaic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansManichaean-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMarchen-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMasaramGondi-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMath-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMedefaidrin-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMeeteiMayek-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMendeKikakui-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansMeroitic-Regular.otf" />
@@ -232,6 +180,7 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansNewa-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansNewTaiLue-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansNKo-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansNushu-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOgham-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOlChiki-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldHungarian-Regular.otf" />
@@ -239,8 +188,10 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldNorthArabian-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldPermic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldPersian-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldSogdian-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldSouthArabian-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOldTurkic-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOriya-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOsage-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansOsmanya-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansPahawhHmong-Regular.otf" />
@@ -256,7 +207,9 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSharada-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansShavian-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSiddham-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSogdian-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSoraSompeng-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSoyombo-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSundanese-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSylotiNagri-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansSymbols-Regular.otf" />
@@ -265,6 +218,7 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTagalog-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTagbanwa-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTaiLe-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTaiTham-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTaiViet-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTakri-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansThaana-Regular.otf" />
@@ -272,26 +226,37 @@
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansTirhuta-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansUgaritic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansVai-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansWancho-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansWarangCiti-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansYi-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSansZanabazarSquare-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerif-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifAhom-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifArmenian-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifBalinese-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifBengali-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifDevanagari-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifDogra-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifEthiopic-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifGeorgian-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifGrantha-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifGujarati-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifGurmukhi-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifHebrew-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifKannada-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifKhmer-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifKhojki-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifLao-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifMalayalam-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifMyanmar-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifNyiakengPuachueHmong-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifSinhala-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifTamil-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifTangut-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifTelugu-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifThai-Regular.otf" />
     <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifTibetan-Regular.otf" />
+    <bin2coff__otf_ Include="..\..\resources\fonts\noto\NotoSerifYezidi-Regular.otf" />
   </ItemGroup>
   <ItemGroup>
     <bin2coff__cff_ Include="..\..\resources\fonts\sil\CharisSIL-Bold.cff" />
