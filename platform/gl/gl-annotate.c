@@ -530,6 +530,7 @@ static void new_annot(int type)
 	fz_snprintf(msg, sizeof msg, "Create %s Annotation", pdf_string_from_annot_type(ctx, type));
 	pdf_begin_operation(ctx, pdf, msg);
 
+	pdf_drop_annot(ctx, selected_annot);
 	selected_annot = pdf_create_annot(ctx, page, type);
 
 	pdf_set_annot_modification_date(ctx, selected_annot, time(NULL));
@@ -948,7 +949,8 @@ void do_annotate_panel(void)
 		if (ui_list_item(&annot_list, pdf_annot_obj(ctx, annot), buf, selected_annot == annot))
 		{
 			trace_action("annot = page.getAnnotations()[%d];\n", idx);
-			selected_annot = annot;
+			pdf_drop_annot(ctx, selected_annot);
+			selected_annot = pdf_keep_annot(ctx, annot);
 		}
 	}
 	ui_list_end(&annot_list);
@@ -1234,6 +1236,7 @@ void do_annotate_panel(void)
 			trace_action("page.deleteAnnotation(annot);\n");
 			pdf_delete_annot(ctx, page, selected_annot);
 			page_annots_changed = 1;
+			pdf_drop_annot(ctx, selected_annot);
 			selected_annot = NULL;
 			return;
 		}
@@ -1253,19 +1256,26 @@ static void new_redaction(pdf_page *page, fz_quad q)
 
 	annot = pdf_create_annot(ctx, page, PDF_ANNOT_REDACT);
 
-	pdf_set_annot_modification_date(ctx, annot, time(NULL));
-	if (pdf_annot_has_author(ctx, annot))
-		pdf_set_annot_author(ctx, annot, getuser());
-	pdf_add_annot_quad_point(ctx, annot, q);
-	pdf_set_annot_contents(ctx, annot, search_needle);
+	fz_try(ctx)
+	{
+		pdf_set_annot_modification_date(ctx, annot, time(NULL));
+		if (pdf_annot_has_author(ctx, annot))
+			pdf_set_annot_author(ctx, annot, getuser());
+		pdf_add_annot_quad_point(ctx, annot, q);
+		pdf_set_annot_contents(ctx, annot, search_needle);
 
-	trace_action("annot = page.createAnnotation(%q);\n", "Redact");
-	trace_action("annot.addQuadPoint([%g, %g, %g, %g, %g, %g, %g, %g]);\n",
-		q.ul.x, q.ul.y,
-		q.ur.x, q.ur.y,
-		q.ll.x, q.ll.y,
-		q.lr.x, q.lr.y);
-	trace_action("annot.setContents(%q);\n", search_needle);
+		trace_action("annot = page.createAnnotation(%q);\n", "Redact");
+		trace_action("annot.addQuadPoint([%g, %g, %g, %g, %g, %g, %g, %g]);\n",
+			q.ul.x, q.ul.y,
+			q.ur.x, q.ur.y,
+			q.ll.x, q.ll.y,
+			q.lr.x, q.lr.y);
+		trace_action("annot.setContents(%q);\n", search_needle);
+	}
+	fz_always(ctx)
+		pdf_drop_annot(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 
 	pdf_has_redactions_doc = pdf;
 	pdf_has_redactions = 1;
@@ -1346,12 +1356,14 @@ void do_redact_panel(void)
 		for (i = 0; i < search_hit_count; i++)
 			new_redaction(page, search_hit_quads[i]);
 		search_hit_count = 0;
+		pdf_drop_annot(ctx, selected_annot);
 		selected_annot = NULL;
 	}
 	if (ui_button_aux("Mark search in document", search_needle == NULL))
 	{
 		mark_all_search_results();
 		search_hit_count = 0;
+		pdf_drop_annot(ctx, selected_annot);
 		selected_annot = NULL;
 	}
 
@@ -1367,6 +1379,7 @@ void do_redact_panel(void)
 
 	if (ui_button_aux("Redact Page", num_redact == 0))
 	{
+		pdf_drop_annot(ctx, selected_annot);
 		selected_annot = NULL;
 		trace_action("page.applyRedactions(%s, %d);\n",
 			redact_opts.black_boxes ? "true" : "false",
@@ -1378,6 +1391,7 @@ void do_redact_panel(void)
 
 	if (ui_button_aux("Redact Document", !pdf_has_redactions))
 	{
+		pdf_drop_annot(ctx, selected_annot);
 		selected_annot = NULL;
 		redact_all_pages(&redact_opts);
 	}
@@ -1397,7 +1411,8 @@ void do_redact_panel(void)
 			if (ui_list_item(&annot_list, pdf_annot_obj(ctx, annot), buf, selected_annot == annot))
 			{
 				trace_action("annot = page.getAnnotations()[%d];\n", idx);
-				selected_annot = annot;
+				pdf_drop_annot(ctx, selected_annot);
+				selected_annot = pdf_keep_annot(ctx, annot);
 			}
 		}
 	}
@@ -1439,6 +1454,7 @@ void do_redact_panel(void)
 			trace_action("page.deleteAnnotation(annot);\n");
 			pdf_delete_annot(ctx, page, selected_annot);
 			page_annots_changed = 1;
+			pdf_drop_annot(ctx, selected_annot);
 			selected_annot = NULL;
 			return;
 		}
@@ -1897,6 +1913,7 @@ void do_annotate_canvas(fz_irect canvas_area)
 					if (!selected_annot && !showannotate)
 						toggle_annotate(ANNOTATE_MODE_NORMAL);
 					ui.active = annot;
+					pdf_drop_annot(ctx, selected_annot);
 					selected_annot = annot;
 				}
 			}
@@ -1986,7 +2003,10 @@ void do_annotate_canvas(fz_irect canvas_area)
 	if (ui_mouse_inside(canvas_area) && ui.down)
 	{
 		if (!ui.active && ui.hot == nothing)
+		{
+			pdf_drop_annot(ctx, selected_annot);
 			selected_annot = NULL;
+		}
 	}
 
 	if (ui.right)
