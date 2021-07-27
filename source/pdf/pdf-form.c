@@ -681,13 +681,17 @@ pdf_string_from_widget_tx_format(fz_context* ctx, enum pdf_widget_tx_format tx_f
 
 static int set_validated_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int ignore_trigger_events)
 {
+	char *newtext = NULL;
+
 	if (!ignore_trigger_events)
 	{
-		if (!pdf_field_event_validate(ctx, doc, field, text))
+		if (!pdf_field_event_validate(ctx, doc, field, text, &newtext))
 			return 0;
 	}
 
-	update_field_value(ctx, doc, field, text);
+	update_field_value(ctx, doc, field, newtext ? newtext : text);
+
+	fz_free(ctx, newtext);
 
 	return 1;
 }
@@ -1133,35 +1137,35 @@ merge_changes(fz_context *ctx, const char *value, int start, int end, const char
 	return merged;
 }
 
-int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *new_value)
+int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *update)
 {
 	pdf_document *doc = widget->page->doc;
-	pdf_keystroke_event evt ={0};
-	char *newChange = NULL;
-	char *newValue = NULL;
+	pdf_keystroke_event evt = { 0 };
+	char *new_change = NULL;
+	char *new_value = NULL;
 	int rc = 1;
 
 	pdf_begin_operation(ctx, doc, "Edit text field");
 
-	fz_var(newValue);
-	fz_var(newChange);
+	fz_var(new_value);
+	fz_var(new_change);
 	fz_try(ctx)
 	{
 		if (!widget->ignore_trigger_events)
 		{
 			evt.value = pdf_annot_field_value(ctx, widget);
-			evt.change = new_value;
+			evt.change = update;
 			evt.selStart = 0;
 			evt.selEnd = (int)strlen(evt.value);
 			evt.willCommit = 0;
 			rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &evt);
-			newChange = evt.newChange;
-			newValue = evt.newValue;
+			new_change = evt.newChange;
+			new_value = evt.newValue;
 			evt.newValue = NULL;
 			evt.newChange = NULL;
 			if (rc)
 			{
-				evt.value = merge_changes(ctx, newValue, evt.selStart, evt.selEnd, newChange);
+				evt.value = merge_changes(ctx, new_value, evt.selStart, evt.selEnd, new_change);
 				evt.change = "";
 				evt.selStart = -1;
 				evt.selEnd = -1;
@@ -1178,9 +1182,9 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 	fz_always(ctx)
 	{
 		pdf_end_operation(ctx, doc);
-		fz_free(ctx, newValue);
+		fz_free(ctx, new_value);
 		fz_free(ctx, evt.newValue);
-		fz_free(ctx, newChange);
+		fz_free(ctx, new_change);
 		fz_free(ctx, evt.newChange);
 	}
 	fz_catch(ctx)
@@ -1194,15 +1198,11 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *ne
 int pdf_edit_text_field_value(fz_context *ctx, pdf_widget *widget, const char *value, const char *change, int *selStart, int *selEnd, char **result)
 {
 	pdf_document *doc = widget->page->doc;
-	pdf_keystroke_event evt ={0};
-	char *newChange = NULL;
-	char *newValue = NULL;
+	pdf_keystroke_event evt = {0};
 	int rc = 1;
 
 	pdf_begin_operation(ctx, doc, "Text field keystroke");
 
-	fz_var(newValue);
-	fz_var(newChange);
 	fz_try(ctx)
 	{
 		if (!widget->ignore_trigger_events)
@@ -2271,6 +2271,8 @@ int pdf_field_event_keystroke(fz_context *ctx, pdf_document *doc, pdf_obj *field
 			return pdf_js_event_result_keystroke(js, evt);
 		}
 	}
+	evt->newChange = fz_strdup(ctx, evt->change);
+	evt->newValue = fz_strdup(ctx, evt->value);
 	return 1;
 }
 
@@ -2307,9 +2309,11 @@ char *pdf_field_event_format(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 	return NULL;
 }
 
-int pdf_field_event_validate(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *value)
+int pdf_field_event_validate(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *value, char **newvalue)
 {
 	pdf_js *js = doc->js;
+
+	*newvalue = NULL;
 	if (js)
 	{
 		pdf_obj *action = pdf_dict_getp_inheritable(ctx, field, "AA/V/JS");
@@ -2317,7 +2321,7 @@ int pdf_field_event_validate(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 		{
 			pdf_js_event_init(js, field, value, 1);
 			pdf_execute_js_action(ctx, doc, field, "AA/V/JS", action);
-			return pdf_js_event_result(js);
+			return pdf_js_event_result_validate(js, newvalue);
 		}
 	}
 	return 1;

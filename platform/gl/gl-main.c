@@ -1611,7 +1611,7 @@ static void event_cb(fz_context *ctx, pdf_document *doc, pdf_doc_event *evt, voi
 			pdf_alert_event *alert = pdf_access_alert_event(ctx, evt);
 			alert_box("%s", alert->message);
 		}
-	break;
+		break;
 
 	default:
 		fz_throw(ctx, FZ_ERROR_GENERIC, "event not yet implemented");

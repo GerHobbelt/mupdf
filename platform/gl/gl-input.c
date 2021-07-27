@@ -132,11 +132,15 @@ static void ui_input_paste(struct input *input, const char *buf)
 		int selEnd = input->q - input->text;
 		if (pdf_edit_text_field_value(ctx, input->widget, input->text, buf, &selStart, &selEnd, &newtext))
 		{
-			strcpy(input->text, newtext);
+			size_t len = strlen(newtext);
+			if (len > sizeof(input->text)-1)
+				len = sizeof(input->text)-1;
+			memcpy(input->text, newtext, len);
+			input->text[len] = 0;
 			fz_free(ctx, newtext);
 			input->p = input->text + selStart;
 			input->q = input->p;
-			input->end = input->text + strlen(newtext);
+			input->end = input->text + len;
 		}
 		return;
 	}
