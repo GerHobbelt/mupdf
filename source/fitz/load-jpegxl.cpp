@@ -43,8 +43,8 @@ fz_load_jpegxl(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 	size_t profile_size;
 
 	mem_mgr.opaque = ctx;
-	mem_mgr.alloc = my_alloc;
-	mem_mgr.free = my_free;
+	mem_mgr._alloc = my_alloc;
+	mem_mgr._free = my_free;
 
 	decoder = JxlDecoderCreate(&mem_mgr);
 	if (decoder == NULL)
@@ -155,8 +155,8 @@ fz_load_jpegxl_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen, int
 	size_t profile_size;
 
 	mem_mgr.opaque = ctx;
-	mem_mgr.alloc = my_alloc;
-	mem_mgr.free = my_free;
+	mem_mgr._alloc = my_alloc;
+	mem_mgr._free = my_free;
 
 	decoder = JxlDecoderCreate(&mem_mgr);
 	if (decoder == NULL)
