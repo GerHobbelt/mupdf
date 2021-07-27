@@ -188,6 +188,8 @@ EXPORTS
 
 %(sqlite3_exports)s
 
+%(sqlite3_exports2)s
+
 ; MuJS exports
 
 %(mujs_exports)s
@@ -281,7 +283,8 @@ def main():
 	libjpegXL2_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include/jxl")
 	libbrotli_exports = generateExports("thirdparty/owemdjee/brotli/c/include")
 	libbrotli2_exports = generateExports("thirdparty/owemdjee/brotli/c/include/brotli")
-	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod", "sqlite3_enable_shared_cache"])
+	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod"])
+	sqlite3_exports2 = generateExports("thirdparty/owemdjee/sqlite/monolithic_examples.h")
 	mujs_exports = generateExports("thirdparty/mujs/mujs.h")
 	freeglut_exports = generateExports("thirdparty/freeglut/include/GL")
 	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc", "xml_test_xmlreader_main"])

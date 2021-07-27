@@ -21,11 +21,55 @@
   <ItemGroup>
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\shell.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\user_code.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_multiplex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_osinst.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\kvtest.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\speedtest1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\startup.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest2.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest3.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest4.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest5.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\monolithic_examples.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\src\hwtime.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\src\test_multiplex.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\test\tt3_checkpoint.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\test\tt3_index.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\test\tt3_lookaside1.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\test\tt3_shared.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\test\tt3_stress.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\test\tt3_vacuum.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\wordcount.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\dbhash.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\dbtotxt.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\enlargedb.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\fast_vacuum.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\getlock.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\index_usage.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\libvers.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\logest.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\max-limits.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\offsets.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\pagesig.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showdb.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showjournal.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showlocks.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showshm.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showstat4.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showwal.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\speedtest16.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\speedtest8.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\sqldiff.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\varint.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\scripts\sqlite\sqlite3_config.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3ext.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3rc.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3session.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\CMakeLists.txt" />
@@ -33,6 +77,11 @@
   <ItemGroup>
     <None Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\README.md" />
     <None Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_config.h.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="pthread_lib.2019.vcxproj">
+      <Project>{a063dfad-6995-4e1a-afff-e43dc11e95b1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libsqlite</ProjectName>
@@ -44,70 +93,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -120,18 +131,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -161,38 +161,22 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MONOLITHIC_TOOLSET;_HAVE_SQLITE_CONFIG_H;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -200,11 +184,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -212,39 +194,16 @@
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MONOLITHIC_TOOLSET;_HAVE_SQLITE_CONFIG_H;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -252,11 +211,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -264,33 +221,17 @@
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MONOLITHIC_TOOLSET;_HAVE_SQLITE_CONFIG_H;WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -298,11 +239,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -310,30 +249,16 @@
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MONOLITHIC_TOOLSET;_HAVE_SQLITE_CONFIG_H;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -341,11 +266,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>

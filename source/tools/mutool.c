@@ -14,6 +14,7 @@
 #include "../../thirdparty/owemdjee/QuickJS/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/brotli/c/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/jpeg-xl/lib/include/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/sqlite/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -96,6 +97,39 @@ static struct {
 	{ qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
 
 	{ sqlite_main, "sqlite", "SQLite3 tool" },
+	{ sqlite_dbhash_main, "sqlite_dbhash", "SQLite3 dbhash tool" },
+	{ sqlite_dbtotxt_main, "sqlite_dbtotxt", "SQLite3 dbtotxt tool" },
+	{ sqlite_diff_main, "sqlite_diff", "SQLite3 diff tool" },
+	{ sqlite_enlargedb_main, "sqlite_enlargedb", "SQLite3 enlargedb tool" },
+	{ sqlite_fast_vacuum_main, "sqlite_fast_vacuum", "SQLite3 fast_vacuum tool" },
+	{ sqlite_getlock_main, "sqlite_getlock", "SQLite3 getlock tool" },
+	{ sqlite_index_usage_main, "sqlite_index_usage", "SQLite3 index_usage tool" },
+	{ sqlite_libvers_main, "sqlite_libvers", "SQLite3 libvers tool" },
+	{ sqlite_max_limits_main, "sqlite_max_limits", "SQLite3 max_limits tool" },
+	{ sqlite_offsets_main, "sqlite_offsets", "SQLite3 offsets tool" },
+	{ sqlite_pagesig_main, "sqlite_pagesig", "SQLite3 pagesig tool" },
+	{ sqlite_showdb_main, "sqlite_showdb", "SQLite3 showdb tool" },
+	{ sqlite_showjournal_main, "sqlite_showjournal", "SQLite3 showjournal tool" },
+	{ sqlite_showlocks_main, "sqlite_showlocks", "SQLite3 showlocks tool" },
+	{ sqlite_showshm_main, "sqlite_showshm", "SQLite3 showshm tool" },
+	{ sqlite_showstat4_main, "sqlite_showstat4", "SQLite3 showstat4 tool" },
+	{ sqlite_showwal_main, "sqlite_showwal", "SQLite3 showwal tool" },
+
+	{ sqlite_logest_main, "sqlite_logest", "SQLite3 logest tool" },
+	{ sqlite_varint_main, "sqlite_varint", "SQLite3 varint tool" },
+
+	{ sqlite_kvtest_main, "sqlite_kvtest", "SQLite3 kvtest tool" },
+//	{ sqlite_loadfts_main, "sqlite_loadfts", "SQLite3 loadfts tool" },
+	{ sqlite_speedtest1_main, "sqlite_speedtest1", "SQLite3 speedtest1 tool" },
+	{ sqlite_speedtest8_main, "sqlite_speedtest8", "SQLite3 speedtest8 tool" },
+//	{ sqlite_speedtest8inst1_main, "sqlite_speedtest8inst1", "SQLite3 speedtest8i1 tool" },
+	{ sqlite_test_startup_main, "sqlite_test_startup", "SQLite3 test_startup tool" },
+	{ sqlite_threadtest1_main, "sqlite_threadtest1", "SQLite3 threadtest1 tool" },
+	{ sqlite_threadtest2_main, "sqlite_threadtest2", "SQLite3 threadtest2 tool" },
+	{ sqlite_threadtest3_main, "sqlite_threadtest3", "SQLite3 threadtest3 tool" },
+	{ sqlite_threadtest4_main, "sqlite_threadtest4", "SQLite3 threadtest4 tool" },
+	{ sqlite_threadtest5_main, "sqlite_threadtest5", "SQLite3 threadtest5 tool" },
+	{ sqlite_wordcount_main, "sqlite_wordcount", "SQLite3 wordcount test tool" },
 
 	{ jpegtran_main, "jpegtran", "jpegtran tool" },
 	{ rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
