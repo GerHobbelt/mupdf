@@ -442,13 +442,17 @@ static int usage(void)
 		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
-		"    raster: png, pnm, pam, pbm, pkm, pwg, pcl, ps, muraw\n"
-		"    vector: svg, pdf, trace, ocr.trace\n"
-		"    text: txt, html, xhtml, stext, stext.json\n"
+		"    raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw\n"
 #ifndef OCR_DISABLED
-		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.stext, ocr.stext.json\n"
+		"    vector: svg, pdf, trace, ocr.trace\n"
 #else
-		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.stext, ocr.stext.json (disabled)\n"
+		"    vector: svg, pdf, trace\n"
+#endif
+		"    text: txt, html, xhtml, xml, stext, stext.json, bbox\n"
+#ifndef OCR_DISABLED
+		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.xml, ocr.stext, ocr.stext.json\n"
+#else
+		"    (ocr'd text is disabled in this build)\n"
 #endif
 		"    bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
 		"\n"
@@ -537,7 +541,7 @@ static int usage(void)
 		"  pages  comma separated list of page numbers and ranges\n",
 		annot_type_list
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
