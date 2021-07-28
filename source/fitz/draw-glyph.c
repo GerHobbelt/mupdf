@@ -321,7 +321,7 @@ fz_render_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix *ctm, fz_colo
 			locked = 0;
 			val = fz_render_t3_glyph(ctx, font, gid, subpix_ctm, model, scissor, aa);
 			fz_lock(ctx, FZ_LOCK_GLYPHCACHE);
-			locked = 1;
+			locked = 1; //-V519
 		}
 		else
 		{
@@ -386,7 +386,7 @@ unlock_and_return_val:
 	}
 	fz_always(ctx)
 	{
-		if (locked)
+		if (locked) //-V547
 			fz_unlock(ctx, FZ_LOCK_GLYPHCACHE);
 	}
 	fz_catch(ctx)
@@ -397,7 +397,7 @@ unlock_and_return_val:
 			fz_rethrow(ctx);
 	}
 
-	return val;
+	return val; //-V1020
 }
 
 fz_pixmap *
