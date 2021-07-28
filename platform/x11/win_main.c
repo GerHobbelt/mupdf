@@ -1351,7 +1351,8 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
 	if (fz_optind < argc)
 	{
-		strcpy(filename, argv[fz_optind++]);
+		strncpy(filename, argv[fz_optind++], sizeof(filename));
+		filename[sizeof(filename) - 1] = 0;
 	}
 	else
 	{
