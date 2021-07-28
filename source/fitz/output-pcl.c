@@ -1198,7 +1198,7 @@ mono_pcl_write_band(fz_context *ctx, fz_band_writer *writer_, int ss, int band_s
 		return;
 
 	num_blank_lines = writer->num_blank_lines;
-	rmask = ~0 << (-w & 7);
+	rmask = ~0u << (-w & 7);
 	line_size = (w + 7)/8;
 	prev = writer->prev;
 	mode2buf = writer->mode2buf;
