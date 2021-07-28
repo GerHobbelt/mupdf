@@ -698,6 +698,11 @@ char_callback(fz_context *ctx, void *arg, int unicode,
 		int y = char_bbox[1] + char_bbox[3] - oy;
 		int ax = x < 0 ? -x : x;
 		int ay = y < 0 ? -y : y;
+		// TODO: check this heuristic section below for very short words, such as 'a'
+		// as in 'a house', or 'I' in 'I can't wait': I expect x<y but it's L2R, not
+		// T2B, then, so this heuristic should probably adjust for character count?
+		// And when we do *that*, there's the obvious next stage: how about wide
+		// characters a la 'w' and/or cursive print, resulting in probably larger bboxes?
 		if (ax > ay)
 		{
 			if (x > 0)
@@ -705,7 +710,7 @@ char_callback(fz_context *ctx, void *arg, int unicode,
 			else if (x < 0)
 				cb->word_dirn |= WORD_CONTAINS_R2L;
 		}
-		else if (ay < ax)
+		else if (ay > ax)
 		{
 			if (y > 0)
 				cb->word_dirn |= WORD_CONTAINS_T2B;
