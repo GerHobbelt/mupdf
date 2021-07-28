@@ -683,7 +683,7 @@ fz_page_presentation(fz_context *ctx, fz_page *page, fz_transition *transition, 
 		*duration = 0;
 	else
 		duration = &dummy;
-	if (page && page->page_presentation && page)
+	if (page && page->page_presentation)
 		return page->page_presentation(ctx, page, transition, duration);
 	return NULL;
 }
