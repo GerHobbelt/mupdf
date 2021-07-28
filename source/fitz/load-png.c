@@ -660,7 +660,7 @@ fz_load_png(fz_context *ctx, const unsigned char *p, size_t total)
 void
 fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
 {
-	struct info png;
+	struct info png = { 0 };
 
 	fz_try(ctx)
 		png_read_image(ctx, &png, p, total, 1);
