@@ -197,6 +197,9 @@ fz_knockout_begin(fz_context *ctx, fz_draw_device *dev)
 	fz_draw_state *state = &dev->stack[dev->top];
 	int isolated = state->blendmode & FZ_BLEND_ISOLATED;
 
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) == 0)
+		return state;
+
 	state = push_stack(ctx, dev, "knockout");
 
 	bbox = fz_pixmap_bbox(ctx, state->dest);
