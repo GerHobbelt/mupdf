@@ -656,7 +656,7 @@ fz_keep_page_locked(fz_context *ctx, fz_page *page)
 void
 fz_drop_page(fz_context *ctx, fz_page *page)
 {
-	if (fz_drop_imp(ctx, page, &page->refs))
+	if (page && fz_drop_imp(ctx, page, &page->refs))
 	{
 		/* Remove page from the list of open pages */
 		fz_lock(ctx, FZ_LOCK_ALLOC);
