@@ -2,6 +2,12 @@
 
 #include <string.h>
 #include <assert.h>
+#include <float.h>
+
+#ifndef NAN
+#define NAN (0.0f/0.0f)
+#endif
+
 
 // Thoughts for further optimisations:
 // All paths start with MoveTo. We could probably avoid most cases where
@@ -624,7 +630,7 @@ static inline void bound_expand(fz_rect *r, fz_point p)
 void fz_walk_path(fz_context *ctx, const fz_path *path, const fz_path_walker *proc, void *arg)
 {
 	int i, k, cmd_len;
-	float x, y, sx, sy;
+	float x = NAN, y = NAN, sx = NAN, sy = NAN;
 	uint8_t *cmds;
 	float *coords;
 
