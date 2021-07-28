@@ -34,11 +34,11 @@ fz_load_jpegxl(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 	JxlDecoder *decoder;
 	JxlMemoryManager mem_mgr;
 	JxlDecoderStatus err;
-	JxlBasicInfo info;
+	JxlBasicInfo info = { 0 };
 	fz_pixmap *pix = NULL;
 	fz_colorspace *colorspace = NULL;
 	JxlPixelFormat format;
-	int alpha;
+	int alpha = 0;
 	fz_buffer *profile = NULL;
 	size_t profile_size;
 
