@@ -192,7 +192,7 @@ static void fz_opj_error_callback(const char *msg, void *client_data)
 	size_t n;
 	fz_strlcpy(buf, msg, sizeof buf);
 	n = strlen(buf);
-	if (buf[n-1] == '\n')
+	if (n > 0 && buf[n-1] == '\n')
 		buf[n-1] = 0;
 	fz_warn(ctx, "openjpeg error: %s", buf);
 }
@@ -204,7 +204,7 @@ static void fz_opj_warning_callback(const char *msg, void *client_data)
 	size_t n;
 	fz_strlcpy(buf, msg, sizeof buf);
 	n = strlen(buf);
-	if (buf[n-1] == '\n')
+	if (n > 0 && buf[n-1] == '\n')
 		buf[n-1] = 0;
 	fz_warn(ctx, "openjpeg warning: %s", buf);
 }
