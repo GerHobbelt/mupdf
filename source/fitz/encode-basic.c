@@ -327,6 +327,8 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 		if (state->z.avail_out > 0)
 			fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 	} while (state->z.avail_out > 0);
+	state->z.next_out = NULL;
+	state->z.avail_out = 0;
 }
 
 static void deflate_close(fz_context *ctx, void *opaque)
@@ -345,6 +347,8 @@ static void deflate_close(fz_context *ctx, void *opaque)
 		if (state->z.avail_out > 0)
 			fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 	} while (err == Z_OK);
+	state->z.next_out = NULL;
+	state->z.avail_out = 0;
 
 	if (err != Z_STREAM_END)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "zlib compression failed: %d", err);
