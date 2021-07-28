@@ -20,7 +20,7 @@ next_leech(fz_context *ctx, fz_stream *stm, size_t max)
 
 	while (buffer->cap < buffer->len + n)
 	{
-		fz_grow_buffer(ctx, state->buffer);
+		fz_grow_buffer(ctx, buffer);
 	}
 	memcpy(buffer->data + buffer->len, state->chain->rp, n);
 	stm->rp = buffer->data + buffer->len;
