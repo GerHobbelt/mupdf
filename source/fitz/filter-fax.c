@@ -816,7 +816,9 @@ fz_open_faxd(fz_context *ctx, fz_stream *chain,
 		fax->end_of_block = end_of_block;
 		fax->black_is_1 = black_is_1;
 
-		fax->stride = ((fax->columns - 1) >> 3) + 1;
+		if (columns == 0)
+			columns = 1;
+		fax->stride = ((columns - 1) >> 3) + 1;
 		fax->ridx = 0;
 		fax->bidx = 32;
 		fax->word = 0;
