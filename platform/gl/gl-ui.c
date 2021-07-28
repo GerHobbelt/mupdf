@@ -482,6 +482,7 @@ void ui_init(int w, int h, const char *title)
 
 void ui_finish(void)
 {
+	pdf_drop_annot(ctx, ui.selected_annot);
 	glDeleteLists(ui.overlay_list, 1);
 	ui_finish_fonts();
 	glutExit();
@@ -1310,4 +1311,10 @@ int ui_select_aux(const void *id, const char *current, const char *options[], in
 		ui_popup_end();
 	}
 	return choice;
+}
+
+void ui_select_annot(pdf_annot *annot)
+{
+	pdf_drop_annot(ctx, ui.selected_annot);
+	ui.selected_annot = annot;
 }

@@ -557,7 +557,7 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 		fz_rethrow(ctx);
 	}
 
-	return link;
+	return fz_keep_link(ctx, link);
 }
 
 static pdf_obj *

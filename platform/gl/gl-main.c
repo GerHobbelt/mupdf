@@ -51,7 +51,6 @@ stat_mtime(const char *path)
 fz_context *ctx = NULL;
 pdf_document *pdf = NULL;
 pdf_page *page = NULL;
-pdf_annot *selected_annot = NULL;
 fz_stext_page *page_text = NULL;
 fz_matrix draw_page_ctm, view_page_ctm, view_page_inv_ctm;
 fz_rect page_bounds, draw_page_bounds, view_page_bounds;
@@ -817,9 +816,9 @@ void transform_page(void)
 static void clear_selected_annot(void)
 {
 	/* clear all editor selections */
-	if (selected_annot && pdf_annot_type(ctx, selected_annot) == PDF_ANNOT_WIDGET)
-		pdf_annot_event_blur(ctx, selected_annot);
-	selected_annot = NULL;
+	if (ui.selected_annot && pdf_annot_type(ctx, ui.selected_annot) == PDF_ANNOT_WIDGET)
+		pdf_annot_event_blur(ctx, ui.selected_annot);
+	ui_select_annot(NULL);
 }
 
 void load_page(void)
@@ -1291,11 +1290,13 @@ static void do_undo(void)
 		page_contents_changed = 1;
 		while (pos > desired)
 		{
+			trace_action("doc.undo();\n");
 			pdf_undo(ctx, pdf);
 			pos--;
 		}
 		while (pos < desired)
 		{
+			trace_action("doc.redo();\n");
 			pdf_redo(ctx, pdf);
 			pos++;
 		}
@@ -1589,6 +1590,7 @@ reload_or_start_journalling(fz_context *ctx, pdf_document *pdf)
 	{
 		/* Ignore any failures here. */
 	}
+	trace_action("doc.enableJournal();\n");
 	pdf_enable_journal(ctx, pdf);
 }
 
@@ -1768,7 +1770,7 @@ static void load_document(void)
 	oldpage = currentpage = fz_clamp_location(ctx, doc, currentpage);
 
 	if (pdf)
-		pdf_set_doc_event_callback(ctx, pdf, event_cb, NULL);
+		pdf_set_doc_event_callback(ctx, pdf, event_cb, NULL, NULL);
 }
 
 static void reflow_document(void)
@@ -1970,7 +1972,7 @@ static void do_app(void)
 	{
 		switch (ui.key)
 		{
-		case KEY_ESCAPE: clear_search(); selected_annot = NULL; break;
+		case KEY_ESCAPE: clear_search(); ui_select_annot(NULL); break;
 		case KEY_F1: ui.dialog = help_dialog; break;
 		case 'a': toggle_annotate(ANNOTATE_MODE_NORMAL); break;
 		case 'R': toggle_annotate(ANNOTATE_MODE_REDACT); break;
@@ -2635,6 +2637,8 @@ static void cleanup(void)
 
 	ui_finish();
 
+	fz_drop_pixmap(ctx, page_contents);
+	page_contents = NULL;
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_STORE")))
 		fz_debug_store(ctx, fz_stdout(ctx));

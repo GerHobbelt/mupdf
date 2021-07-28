@@ -124,6 +124,8 @@ struct ui
 	GLuint overlay_list;
 
 	void (*dialog)(void);
+
+	pdf_annot *selected_annot;
 };
 
 extern struct ui ui;
@@ -246,6 +248,8 @@ void ui_show_error_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(
 void ui_show_non_fatal_dialog(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 
 
+void ui_select_annot(pdf_annot *annot);
+
 /* Theming */
 
 extern struct ui_color_theme ui_light_theme;
@@ -263,7 +267,6 @@ extern fz_context *ctx;
 extern pdf_document *pdf;
 extern pdf_page *page;
 extern fz_stext_page *page_text;
-extern pdf_annot *selected_annot;
 extern fz_matrix draw_page_ctm, view_page_ctm, view_page_inv_ctm;
 extern fz_rect page_bounds, draw_page_bounds, view_page_bounds;
 extern fz_irect view_page_area;
