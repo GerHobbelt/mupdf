@@ -43,6 +43,8 @@ typedef struct
 fz_image *
 fz_keep_image(fz_context *ctx, fz_image *image)
 {
+	if (!image)
+		return NULL;
 	return fz_keep_key_storable(ctx, &image->key_storable);
 }
 
