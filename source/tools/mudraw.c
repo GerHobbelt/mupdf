@@ -580,7 +580,7 @@ file_level_headers(fz_context *ctx)
 		fz_write_printf(ctx, out, "<?xml version=\"1.0\"?>\n");
 	}
 
-	else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
+	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 		fz_print_stext_header_as_html(ctx, out);
 	else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 		fz_print_stext_header_as_xhtml(ctx, out);
@@ -2133,6 +2133,13 @@ static void mu_drop_context(void)
 		}
 	}
 
+	// NOTE: this assert fires when you run `mutool draw` (and probably other tools as well) and hit Ctrl+C
+	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
+	// and the assert fires due to (ctx->error.top != ctx->error.stack).
+	//
+	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
+	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
+	// is obvious, I suppose...
 	assert(!ctx || (ctx->error.top == ctx->error.stack));
 
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.

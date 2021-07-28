@@ -321,8 +321,8 @@ fz_irect_height(fz_irect r)
 	 * if it does, it's pretty likely an indication of a severe
 	 * problem. */
 	h = (unsigned int)(r.y1 - r.y0);
-	assert((int)h >= 0);
-	if ((int)h < 0)
+	assert(((int)h) >= 0);
+	if (((int)h) < 0)
 		return 0;
 	return (int)h;
 }
