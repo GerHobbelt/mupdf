@@ -206,7 +206,7 @@ int page_contents_changed = 0;
 int page_annots_changed = 0;
 
 static fz_output *trace_file = NULL;
-static char *reflow_options = NULL;
+static const char *reflow_options = NULL;
 static int isfullscreen = 0;
 static int showoutline = 0;
 static int showundo = 0;
