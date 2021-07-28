@@ -433,7 +433,6 @@ fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n
 		}
 
 	dst_stride = w * (n + !!pad);
-	state = fz_malloc(ctx, sizeof(unpack_state) + dst_stride + src_stride);
 
 	if (n == 1 && depth == 1 && scale == 1 && !pad && !skip)
 		unpack_line = fz_unpack_mono_line_unscaled;
