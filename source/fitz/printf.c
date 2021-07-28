@@ -654,13 +654,13 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 					while (datalen) {
 						int n = fz_chartorune(&c, data, datalen);
 						if (n == 1) {
-							// grab byte/character again for hexdumping, as `c` can be Runeerror and we don't wanna see that one.
+							// grab byte/character again for hexdumping, as `c` can be RuneError and we don't wanna see that one.
 							int b = *data;
 							fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
 							fmtputc(fmt, fz_hex_digits[(b) & 0x0F]);
 
 							// show character itself when it's in ASCII printable range
-							if (b >= 32 || b < 127) {
+							if (b >= 32 && b < 127) {
 								fmtputc(fmt, '(');
 								switch (b)
 								{
@@ -1186,7 +1186,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						str = "(null)";
 						// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
 						if (p < 6) {
-							p = 6;			
+							p = 6;
 						}
 					}
 					size_t slen = strlen(str);
