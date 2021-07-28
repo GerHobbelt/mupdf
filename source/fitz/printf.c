@@ -851,7 +851,6 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 	struct fmtbuf out;
 	int c, s, z, p, w, l, j, hexprefix;
 	const char *comma;
-	const char *str;
 	size_t bits;
 
 	out.ctx = ctx;
@@ -1023,7 +1022,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					struct tm* tm = gmtime(&secs);
 #endif
 
-					str = sbuf;
+					const char *str = sbuf;
 					if (tv < 0 || !tm || !strftime(sbuf, nelem(sbuf), "D:%Y-%m-%d %H:%M:%S UTC", tm))
 						str = "(invalid)";
 					if (j)
@@ -1175,7 +1174,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			break;
 
 			case 's':
-				str = va_arg(args, const char*);
+			{
+				const char* str = va_arg(args, const char*);
 				// when precision has been specified, but is NEGATIVE, than this is a special mode:
 				// discover how to best print the data buffer:
 				if (p < 0 && str && *str) {
@@ -1201,9 +1201,11 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						fmtputc(&out, *str++);
 					}
 				}
+			}
 				break;
 			case 'Q': /* quoted string (with verbatim unicode) */
-				str = va_arg(args, const char*);
+			{
+				const char* str = va_arg(args, const char*);
 				if (!str) str = "";
 				// when precision has been specified, but is NEGATIVE, than this is a special mode:
 				// discover how to best print the data buffer:
@@ -1213,9 +1215,11 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				else {
 					fmtquote(&out, str, (p != INT_MAX ? p : strlen(str)), '"', '"', 1, j);
 				}
+			}
 				break;
 			case 'q': /* quoted string */
-				str = va_arg(args, const char*);
+			{
+				const char* str = va_arg(args, const char*);
 				if (!str) str = "";
 				// when precision has been specified, but is NEGATIVE, than this is a special mode:
 				// discover how to best print the data buffer:
@@ -1227,20 +1231,25 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						p = -1;
 					fmtquote(&out, str, (p > 0 ? p : strlen(str)), '"', '"', 0, j);
 				}
+			}
 				break;
 			case '(': /* pdf string */
-				str = va_arg(args, const char*);
+			{
+				const char* str = va_arg(args, const char*);
 				if (!str) str = "";
 				fmtquote_pdf(&out, str, '(', ')');
+			}
 				break;
 			case 'n': /* pdf name */
-				str = va_arg(args, const char*);
+			{
+				const char* str = va_arg(args, const char*);
 				if (j)
 					fmtputc(&out, '"');
 				if (!str) str = "";
 				fmtname(&out, str);
 				if (j)
 					fmtputc(&out, '"');
+			}
 				break;
 			}
 		}

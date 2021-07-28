@@ -3,10 +3,7 @@
 #include <string.h>
 #include <assert.h>
 #include <float.h>
-
-#ifndef NAN
-#define NAN (0.0f/0.0f)
-#endif
+#include <math.h>
 
 
 // Thoughts for further optimisations:
