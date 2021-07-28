@@ -24,7 +24,7 @@ const calcJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/qjscalc.js';
 const replCfile = targetDir + 'qjsrepl.c';
 const calcCfile = targetDir + 'qjscalc.c';
 
-console.log({
+console.log("#### COMPILE QUICKJS REPL AND CALC SOURCES\n\n", {
 	argv,
 	argc,
 	targetDir,
@@ -36,7 +36,7 @@ console.log({
 	existCalcJS: fs.existsSync(calcJSfile),
 	existReplC: fs.existsSync(replCfile),
 	existCalcC: fs.existsSync(calcCfile),
-});
+}, "#########################################################");
 
 // check if source is younger than target; if not, don't do anything.
 function check_file_mtime(path) {
@@ -44,12 +44,21 @@ function check_file_mtime(path) {
 	return st.mtime.getTime();
 }
 
+function check_file_size(fpath) {
+	const { size } = fs.statSync(fpath);
+	return size;
+}
+
 if (fs.existsSync(replCfile)) {
 	let mk_replCfile = true;
-	if (fs.existsSync(replJSfile)) {
+	if (fs.existsSync(replJSfile) && fs.existsSync(mutoolExe)) {
 		// do NOT run build command when C is younger than JS, i.e. JS is older than C:
 		// in that case, we assume the C file has already been generated from that JS file version before!
-		mk_replCfile = (check_file_mtime(replJSfile) >= check_file_mtime(replCfile));
+		//
+		// Also check the relative filesizes to fix the bootstrap situation
+		// where the generated C file would be nearly empty on an initial run.
+		mk_replCfile = (check_file_mtime(replJSfile) >= check_file_mtime(replCfile) ||
+						check_file_size(replJSfile) >= check_file_size(replCfile));
 	}
 	if (mk_replCfile) {
 		fs.unlinkSync(replCfile);
@@ -57,8 +66,9 @@ if (fs.existsSync(replCfile)) {
 }
 if (fs.existsSync(calcCfile)) {
 	let mk_calcCfile = true;
-	if (fs.existsSync(calcJSfile)) {
-		mk_calcCfile = (check_file_mtime(calcJSfile) >= check_file_mtime(calcCfile));
+	if (fs.existsSync(calcJSfile) && fs.existsSync(mutoolExe)) {
+		mk_calcCfile = (check_file_mtime(calcJSfile) >= check_file_mtime(calcCfile) ||
+			            check_file_size(calcJSfile) >= check_file_size(calcCfile));
 	}
 	if (mk_calcCfile) {
 		fs.unlinkSync(calcCfile);
@@ -71,7 +81,7 @@ try {
 	if (!fs.existsSync(replCfile)) {
 		if (fs.existsSync(mutoolExe)) {
 			let stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-m', '-c', '-o', replCfile, replJSfile]);
-			console.log(stdout);
+			console.log("REPL compile:", stdout);
 			if (fs.existsSync(replCfile)) {
 				console.log("Successfully generated the repl C source file from repl.js");
 			}
@@ -88,7 +98,7 @@ try {
 	if (!fs.existsSync(calcCfile)) {
 		if (fs.existsSync(mutoolExe)) {
 			stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
-			console.log(stdout);
+			console.log("CALC compile:", stdout);
 			if (fs.existsSync(calcCfile)) {
 				console.log("Successfully generated the calc C source file from qjscalc.js");
 			}

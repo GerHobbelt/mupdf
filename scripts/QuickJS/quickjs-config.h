@@ -6,7 +6,7 @@
 #define CONFIG_ATOMICS 1
 
 /* CONFIG_BIGNUM - Define this if you want BigNum support */
-#undef CONFIG_BIGNUM 
+#define CONFIG_BIGNUM 1
 
 /* CONFIG_PRINTF_RNDN - define it if printf uses the RNDN rounding mode instead of RNDNA */
 #define CONFIG_PRINTF_RNDN 1
