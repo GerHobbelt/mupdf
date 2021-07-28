@@ -195,7 +195,7 @@ char *pdfapp_usage(pdfapp_t *app)
 		"f\t\t-- fullscreen\n"
 		"r\t\t-- reload file\n"
 		". pgdn space\t-- next page\n"
-		", pgup b\t\t-- previous page\n"
+		", pgup b    \t-- previous page\n"
 		"m\t\t-- mark page for snap back\n"
 		"t\t\t-- pop back to latest mark\n"
 		"1m\t\t-- mark page in register 1\n"
@@ -1807,7 +1807,6 @@ void pdfapp_onmouse(pdfapp_t *app, int x, int y, int btn, int modifiers, int sta
 	fz_link *link;
 	fz_matrix ctm;
 	fz_point p;
-	int processed = 0;
 	int i;
 
 	if (app->image)
@@ -1832,7 +1831,7 @@ void pdfapp_onmouse(pdfapp_t *app, int x, int y, int btn, int modifiers, int sta
 	if (link)
 	{
 		wincursor(app, HAND);
-		if (btn == 1 && state == 1 && !processed)
+		if (btn == 1 && state == 1)
 		{
 			if (fz_is_external_link(ctx, link->uri))
 				pdfapp_gotouri(app, link->uri);
@@ -1849,7 +1848,7 @@ void pdfapp_onmouse(pdfapp_t *app, int x, int y, int btn, int modifiers, int sta
 		wincursor(app, ARROW);
 	}
 
-	if (state == 1 && !processed)
+	if (state == 1)
 	{
 		if (btn == 1 && !app->iscopying)
 		{
