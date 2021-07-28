@@ -24,7 +24,7 @@ static int usage(void)
 		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -50,8 +50,8 @@ static void runpage(fz_context *ctx, fz_document *doc, fz_output *out, int numbe
 	{
 		page = fz_load_page(ctx, doc, number - 1);
 		mediabox = fz_bound_page(ctx, page);
-		fz_write_printf(ctx, out, "<page number=\"%d\" mediabox=\"%g %g %g %g\">\n",
-				number, mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1);
+		fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n",
+				number, &mediabox);
 		dev = fz_new_trace_device(ctx, out);
 		if (use_display_list)
 		{

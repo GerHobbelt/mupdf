@@ -823,7 +823,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			fz_rect mb = fz_transform_rect(mediabox, ctm);
 
-			fz_write_printf(ctx, out, "<page mediabox=\"%R\">\n", &mb);
+			fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n", pagenum, &mb);
 			dev = fz_new_trace_device(ctx, out);
 			if (output_format == OUT_OCR_TRACE)
 			{
@@ -870,7 +870,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			fz_rect mb = fz_transform_rect(mediabox, ctm);
 
-			fz_write_printf(ctx, out, "<page mediabox=\"%R\">\n", &mb);
+			fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n", pagenum, &mb);
 			dev = fz_new_xmltext_device(ctx, out);
 			if (output_format == OUT_OCR_XMLTEXT)
 			{
@@ -914,7 +914,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else
 				fz_run_page(ctx, page, dev, fz_identity, cookie);
 			fz_close_device(ctx, dev);
-			fz_write_printf(ctx, out, "<page bbox=\"%R\" mediabox=\"%R\" />\n", &bbox, &mediabox);
+			fz_write_printf(ctx, out, "<page pagenum=\"%d\" bbox=\"%R\" mediabox=\"%R\" />\n", pagenum, &bbox, &mediabox);
 		}
 		fz_always(ctx)
 		{

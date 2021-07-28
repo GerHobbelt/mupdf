@@ -133,7 +133,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 			switch (ch->c)
 			{
 			default:
-				if (ch->c >= 32 && ch->c <= 127)
+				if (ch->c >= 32 && ch->c < 127)
 					fz_write_byte(ctx, out, ch->c);
 				else
 					fz_write_printf(ctx, out, "&#x%x;", ch->c);
@@ -162,9 +162,9 @@ fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page
 	float w = mediabox.x1 - mediabox.x0;
 	float h = mediabox.y1 - mediabox.y0;
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%gpt;height:%gpt;background-color:white;\" data-mediabox=\"%R\">\n", 
-		id, 
-		w, h, 
+	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%gpt;height:%gpt;background-color:white;\" data-mediabox=\"%R\">\n",
+		id,
+		w, h,
 		&page->mediabox);
 
 	for (block = page->first_block; block; block = block->next)
@@ -324,7 +324,7 @@ static void fz_print_stext_block_as_xhtml(fz_context *ctx, fz_output *out, fz_st
 			switch (ch->c)
 			{
 			default:
-				if (ch->c >= 32 && ch->c <= 127)
+				if (ch->c >= 32 && ch->c < 127)
 					fz_write_byte(ctx, out, ch->c);
 				else
 					fz_write_printf(ctx, out, "&#x%x;", ch->c);
@@ -349,7 +349,7 @@ fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *pag
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\">\n", 
+	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\">\n",
 		id,
 		mediabox.x1 - mediabox.x0,
 		mediabox.y1 - mediabox.y0,
@@ -399,7 +399,7 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 	fz_stext_char *ch;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 
-	fz_write_printf(ctx, out, "<page id=\"page%d\" width=\"%g\" height=\"%g\" mediabox=\"%R\">\n", id,
+	fz_write_printf(ctx, out, "<page id=\"page%d\" pagenum=\"%d\" width=\"%g\" height=\"%g\" mediabox=\"%R\">\n", id, id,
 		mediabox.x1 - mediabox.x0,
 		mediabox.y1 - mediabox.y0,
 		&page->mediabox);
@@ -455,10 +455,10 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 					case '"': fz_write_string(ctx, out, "&quot;"); break;
 					case '\'': fz_write_string(ctx, out, "&apos;"); break;
 					default:
-						   if (ch->c >= 32 && ch->c <= 127)
+						   if (ch->c >= 32 && ch->c < 127)
 							   fz_write_printf(ctx, out, "%c", ch->c);
 						   else
-							   fz_write_printf(ctx, out, "&#x%x;", ch->c);
+							   fz_write_printf(ctx, out, "&#x%x;", ch->c);  // XML NCR: Numeric Character Reference
 						   break;
 					}
 					fz_write_string(ctx, out, "\"/>\n");
