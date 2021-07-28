@@ -1309,7 +1309,7 @@ fz_convert_slow_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap 
 					if (*s == *sold && memcmp(sold,s,srcn+sa) == 0)
 					{
 						sold = s;
-						memcpy(d, dold, dstn+da);
+						memcpy(d, dold, dstn+da); //-V614
 					}
 					else
 					{

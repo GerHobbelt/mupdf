@@ -115,7 +115,7 @@ png_write_icc(fz_context *ctx, png_band_writer *writer, fz_colorspace *cs)
 		{
 			chunk = fz_calloc(ctx, size, 1);
 			pos = chunk;
-			memcpy(chunk, name, strlen(name));
+			memcpy(chunk, name, strlen(name)); //-V575
 			pos += strlen(name) + 2;
 			memcpy(pos, cbuffer->data, cbuffer->len);
 			putchunk(ctx, out, "iCCP", chunk, size);

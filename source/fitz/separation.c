@@ -1012,7 +1012,7 @@ fz_convert_separation_colors(fz_context *ctx,
 			if (dname && !strcmp(name, dname))
 				goto found_process;
 		}
-		if (0) {
+		if (0) { //-V517
 found_sep:
 			dst_color[j+dc] = src_color[i];
 			pred = j+1;

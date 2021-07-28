@@ -258,7 +258,7 @@ fz_xml *fz_xml_down(fz_xml *item)
 
 char *fz_xml_text(fz_xml *item)
 {
-	return (item && FZ_TEXT_ITEM(item)) ? item->u.text : NULL;
+	return (item && FZ_TEXT_ITEM(item)) ? item->u.text : NULL; //-V501
 }
 
 char *fz_xml_tag(fz_xml *item)
