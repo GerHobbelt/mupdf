@@ -439,7 +439,7 @@ FZ_NORETURN void fz_throw(fz_context *ctx, int code, const char *fmt, ...)
 FZ_NORETURN void fz_rethrow(fz_context *ctx)
 {
 	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
-	if (ctx && ctx->error.errcode == FZ_ERROR_NONE)
+	if (ctx->error.errcode == FZ_ERROR_NONE)
 	{
 		// See pdf-xref.c for one occasion where this is relevant:
 		//
