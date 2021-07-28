@@ -186,7 +186,8 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	// Sanitize the *entire* path, including the Windows Drive/Share part:
 	for (e = dstpath; *e; e++) {
 		int c = *e;
-		if (c > 0x7F) {
+		if (c > 0x7F || c < 0) {
+			// 0x80 and higher character codes: UTF8
 			int u;
 			int l = fz_chartorune_unsafe(&u, e);
 			e += l - 1;
