@@ -1255,6 +1255,7 @@ get_system_dpi(void)
 	desktopDC = GetDC(NULL);
 	hdpi = GetDeviceCaps(desktopDC, LOGPIXELSX);
 	vdpi = GetDeviceCaps(desktopDC, LOGPIXELSY);
+	ReleaseDC(NULL, desktopDC);
 	/* hdpi,vdpi = 100 means 96dpi. */
 	return ((hdpi + vdpi) * 96 + 0.5f) / 200;
 }
