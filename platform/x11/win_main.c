@@ -677,7 +677,6 @@ static void winopen()
 	dibinf->bmiHeader.biYPelsPerMeter = 2834;
 	dibinf->bmiHeader.biClrUsed = 0;
 	dibinf->bmiHeader.biClrImportant = 0;
-	dibinf->bmiHeader.biClrUsed = 0;
 
 	/* Create window */
 	hwndframe = CreateWindowW(L"FrameWindow", // window class name
