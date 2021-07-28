@@ -925,9 +925,9 @@ void do_annotate_panel(void)
 		if (ui_popup_item("FileAttachment")) new_annot(PDF_ANNOT_FILE_ATTACHMENT);
 		if (ui_popup_item("Redact")) new_annot(PDF_ANNOT_REDACT);
 		if (ui_popup_item("Signature")) {
-			selected_annot = pdf_create_signature_widget(ctx, page, "Unknown");
+			ui_select_annot(pdf_create_signature_widget(ctx, page, "Unknown"));
 
-			pdf_update_appearance(ctx, selected_annot);
+			pdf_update_appearance(ctx, ui.selected_annot);
 			is_draw_mode = 1;
 			render_page();
 		}
