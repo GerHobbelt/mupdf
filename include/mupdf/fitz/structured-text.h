@@ -174,7 +174,7 @@ struct fz_stext_line
 };
 
 /**
-	A text char is a unicode character, the style in which is
+	A text char is a unicode character, the style in which it
 	appears, and the point at which it is positioned.
 */
 struct fz_stext_char

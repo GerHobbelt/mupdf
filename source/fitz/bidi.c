@@ -244,7 +244,7 @@ classify_characters(fz_context* ctx, const uint32_t *text,
 			 * value from 0-9, making non-english characters appear
 			 * as numbers
 			 */
-			fz_info(ctx, "%c", (text[i] <= 127 && text[i] >= 32) ?
+			fz_info(ctx, "%c", (text[i] < 127 && text[i] >= 32) ?
 					text[i] : text[i] % 9 + '0');
 		}
 		fz_info(ctx, "\nTypes: ");

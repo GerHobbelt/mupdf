@@ -1688,7 +1688,7 @@ static inline int isbinary(int c)
 {
 	if (c == '\n' || c == '\r' || c == '\t')
 		return 0;
-	return c < 32 || c > 127;
+	return c < 32 || c >= 127;
 }
 
 static int isbinarystream(fz_context *ctx, const unsigned char *data, size_t len)

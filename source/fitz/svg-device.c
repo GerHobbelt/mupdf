@@ -398,7 +398,7 @@ svg_dev_text_span(fz_context *ctx, svg_device *sdev, fz_matrix ctm, const fz_tex
 			if (it->ucs >= 0)
 			{
 				int c = it->ucs;
-				if (c >= 32 && c <= 127 && c != '<' && c != '&' && c != '>')
+				if (c >= 32 && c < 127 && c != '<' && c != '&' && c != '>')
 					fz_write_byte(ctx, out, c);
 				else
 					fz_write_printf(ctx, out, "&#x%04x;", c);

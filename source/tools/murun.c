@@ -1651,7 +1651,7 @@ static void push_byte_string(js_State *J, unsigned char *str, size_t len)
 {
 	size_t i, is_ascii = 1;
 	for (i = 0; i < len; ++i)
-		if (str[i] == 0 || str[i] > 127)
+		if (str[i] == 0 || str[i] >= 127)
 			is_ascii = 0;
 	if (is_ascii)
 		js_pushstring(J, (char*)str);
