@@ -469,7 +469,7 @@ fz_colorspace *fz_new_cal_gray_colorspace(fz_context *ctx, float wp[3], float bp
 		fz_drop_buffer(ctx, buf);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
-	return cs;
+	return cs; //-V614
 #else
 	return fz_keep_colorspace(ctx, fz_device_gray(ctx));
 #endif
@@ -486,7 +486,7 @@ fz_colorspace *fz_new_cal_rgb_colorspace(fz_context *ctx, float wp[3], float bp[
 		fz_drop_buffer(ctx, buf);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
-	return cs;
+	return cs; //-V614
 #else
 	return fz_keep_colorspace(ctx, fz_device_rgb(ctx));
 #endif

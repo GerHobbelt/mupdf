@@ -27,7 +27,7 @@ fz_open_image_decomp_stream_from_buffer(fz_context *ctx, fz_compressed_buffer *b
 		fz_drop_stream(ctx, tail);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
-	return head;
+	return head; //-V614
 }
 
 fz_stream *

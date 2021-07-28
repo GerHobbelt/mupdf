@@ -394,7 +394,7 @@ fz_new_icc_data_from_cal(fz_context *ctx,
 
 	/* Header */
 	header->size = (icUInt32Number)profile_size;
-	copy_header(ctx, profile, header);
+	copy_header(ctx, profile, header); //-V614
 
 	/* Tag table */
 	copy_tagtable(ctx, profile, tag_list, num_tags);

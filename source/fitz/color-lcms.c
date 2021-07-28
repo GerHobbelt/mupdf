@@ -288,7 +288,7 @@ fz_new_icc_link(fz_context *ctx,
 		cmsDeleteTransform(GLO transform);
 		fz_rethrow(ctx);
 	}
-	return link;
+	return link; //-V614
 }
 
 void
