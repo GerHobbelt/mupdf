@@ -955,7 +955,6 @@ static void render_page(void)
 	{
 		dev = fz_new_draw_device(ctx, draw_page_ctm, pix);
 		fz_run_page_annots(ctx, fzpage, dev, fz_identity, NULL);
-		fz_run_page_widgets(ctx, fzpage, dev, fz_identity, NULL);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 	}

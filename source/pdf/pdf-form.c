@@ -573,7 +573,6 @@ int
 pdf_update_page(fz_context *ctx, pdf_page *page)
 {
 	pdf_annot *annot;
-	pdf_annot *widget;
 	int changed = 0;
 
 	fz_try(ctx)
@@ -585,9 +584,6 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 		for (annot = page->annots; annot; annot = annot->next)
 			if (pdf_update_annot(ctx, annot))
 				changed = 1;
-		for (widget = page->widgets; widget; widget = widget->next)
-			if (pdf_update_annot(ctx, widget))
-				changed = 1;
 	}
 	fz_always(ctx)
 	{
@@ -597,16 +593,6 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 		fz_rethrow(ctx);
 
 	return changed;
-}
-
-pdf_annot *pdf_first_widget(fz_context *ctx, pdf_page *page)
-{
-	return page->widgets;
-}
-
-pdf_annot *pdf_next_widget(fz_context *ctx, pdf_annot *widget)
-{
-	return widget->next;
 }
 
 enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *widget)

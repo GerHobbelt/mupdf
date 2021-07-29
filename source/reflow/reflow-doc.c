@@ -110,14 +110,6 @@ reflow_run_page_annots(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matri
 	fz_run_page_annots(ctx, page->html_page, dev, transform, cookie);
 }
 
-static void
-reflow_run_page_widgets(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
-{
-	reflow_page *page = (reflow_page *)page_;
-
-	fz_run_page_widgets(ctx, page->html_page, dev, transform, cookie);
-}
-
 static fz_page *
 reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum)
 {
@@ -133,7 +125,6 @@ reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum
 	page->base.drop_page = reflow_drop_page;
 	page->base.run_page_contents = reflow_run_page_contents;
 	page->base.run_page_annots = reflow_run_page_annots;
-	page->base.run_page_widgets = reflow_run_page_widgets;
 
 	fz_var(buf);
 	fz_var(out);

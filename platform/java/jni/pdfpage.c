@@ -156,13 +156,8 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 	widget = widgets;
 	for (i = 0; widget && i < count; i++)
 	{
-		jobject jwidget = NULL;
-
-		if (widget)
-		{
-			jwidget = to_PDFWidget_safe(ctx, env, widget);
-			if (!jwidget) return NULL;
-		}
+		jobject jwidget = to_PDFWidget_safe(ctx, env, widget);
+		if (!jwidget) return NULL;
 
 		(*env)->SetObjectArrayElement(env, jwidgets, i, jwidget);
 		if ((*env)->ExceptionCheck(env)) return NULL;

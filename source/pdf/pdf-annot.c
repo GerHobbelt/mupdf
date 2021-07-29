@@ -159,16 +159,8 @@ pdf_load_annots(fz_context *ctx, pdf_page *page, pdf_obj *annots)
 				continue;
 
 			annot = pdf_new_annot(ctx, page, obj);
-			if (pdf_name_eq(ctx, subtype, PDF_NAME(Widget)))
-			{
-				*page->widget_tailp = annot;
-				page->widget_tailp = &annot->next;
-			}
-			else
-			{
-				*page->annot_tailp = annot;
-				page->annot_tailp = &annot->next;
-			}
+			*page->annot_tailp = annot;
+			page->annot_tailp = &annot->next;
 		}
 	}
 
@@ -181,15 +173,68 @@ pdf_load_annots(fz_context *ctx, pdf_page *page, pdf_obj *annots)
 }
 
 pdf_annot *
+pdf_first_raw_annot(fz_context *ctx, pdf_page *page)
+{
+	if (!page)
+		return NULL;
+
+	return page->annots;
+}
+
+pdf_annot *
+pdf_next_raw_annot(fz_context *ctx, pdf_annot *annot)
+{
+	return annot->next;
+}
+
+pdf_annot *
 pdf_first_annot(fz_context *ctx, pdf_page *page)
 {
-	return page ? page->annots : NULL;
+	pdf_annot *annot;
+
+	if (!page)
+		return NULL;
+
+	for (annot = page->annots;
+		annot != NULL && pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
 }
 
 pdf_annot *
 pdf_next_annot(fz_context *ctx, pdf_annot *annot)
 {
-	return annot ? annot->next : NULL;
+	for (annot = annot->next;
+		annot != NULL && pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
+}
+
+pdf_annot *
+pdf_first_widget(fz_context *ctx, pdf_page *page)
+{
+	pdf_annot *annot;
+
+	if (!page)
+		return NULL;
+
+	for (annot = page->annots;
+		annot != NULL && pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
+}
+
+pdf_annot *
+pdf_next_widget(fz_context *ctx, pdf_annot *annot)
+{
+	for (annot = annot->next;
+		annot != NULL && pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
 }
 
 pdf_obj *pdf_annot_obj(fz_context *ctx, pdf_annot *annot)
@@ -459,16 +504,8 @@ pdf_create_annot_raw(fz_context *ctx, pdf_page *page, enum pdf_annot_type type)
 			pdf_drop_annots below actually frees a list. Put the new annot
 			at the end of the list, so that it will be drawn last.
 		*/
-		if (type == PDF_ANNOT_WIDGET)
-		{
-			*page->widget_tailp = annot;
-			page->widget_tailp = &annot->next;
-		}
-		else
-		{
-			*page->annot_tailp = annot;
-			page->annot_tailp = &annot->next;
-		}
+		*page->annot_tailp = annot;
+		page->annot_tailp = &annot->next;
 	}
 	fz_always(ctx)
 	{
@@ -799,33 +836,18 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 			break;
 	}
 
-	if (*annotptr == NULL)
-	{
-		is_widget = 1;
-
-		/* Look also in the widget list*/
-		for (annotptr = &page->widgets; *annotptr; annotptr = &(*annotptr)->next)
-		{
-			if (*annotptr == annot)
-				break;
-		}
-	}
-
 	/* Check the passed annotation was of this page */
 	if (*annotptr == NULL)
 		return;
+
+	is_widget = (pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET);
 
 	/* Remove annot from page's list */
 	*annotptr = annot->next;
 
 	/* If the removed annotation was the last in the list adjust the end pointer */
 	if (*annotptr == NULL)
-	{
-		if (is_widget)
-			page->widget_tailp = annotptr;
-		else
-			page->annot_tailp = annotptr;
-	}
+		page->annot_tailp = annotptr;
 
 	pdf_begin_operation(ctx, page->doc, "Delete Annotation");
 

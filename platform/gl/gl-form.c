@@ -589,7 +589,7 @@ void do_widget_canvas(fz_irect canvas_area)
 
 	for (idx = 0, widget = pdf_first_widget(ctx, page); widget; ++idx, widget = pdf_next_widget(ctx, widget))
 	{
-		bounds = pdf_bound_widget(ctx, widget);
+		bounds = pdf_bound_annot(ctx, widget);
 		bounds = fz_transform_rect(bounds, view_page_ctm);
 		area = fz_irect_from_rect(bounds);
 
