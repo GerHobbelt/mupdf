@@ -203,33 +203,6 @@ void pdf_run_annot(fz_context *ctx, pdf_annot *annot, fz_device *dev, fz_matrix 
 }
 
 static void
-pdf_run_page_widgets_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie)
-{
-	pdf_widget *widget;
-
-	if (cookie && cookie->progress_max != (size_t)-1)
-	{
-		int count = 1;
-		for (widget = page->widgets; widget; widget = widget->next)
-			count++;
-		cookie->progress_max += count;
-	}
-
-	for (widget = page->widgets; widget; widget = widget->next)
-	{
-		/* Check the cookie for aborting */
-		if (cookie)
-		{
-			if (cookie->abort)
-				break;
-			cookie->progress++;
-		}
-
-		pdf_run_annot_with_usage(ctx, doc, page, widget, dev, ctm, usage, cookie);
-	}
-}
-
-static void
 pdf_run_page_annots_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie)
 {
 	pdf_annot *annot;
@@ -285,35 +258,6 @@ void pdf_run_page_annots(fz_context *ctx, pdf_page *page, fz_device *dev, fz_mat
 	pdf_run_page_annots_with_usage(ctx, page, dev, ctm, "View", cookie);
 }
 
-void pdf_run_page_widgets_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie)
-{
-	pdf_document *doc = page->doc;
-	int nocache;
-
-	nocache = !!(dev->hints & FZ_NO_CACHE);
-	if (nocache)
-		pdf_mark_xref(ctx, doc);
-
-	fz_try(ctx)
-	{
-		pdf_run_page_widgets_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
-	}
-	fz_always(ctx)
-	{
-		if (nocache)
-			pdf_clear_xref_to_mark(ctx, doc);
-	}
-	fz_catch(ctx)
-	{
-		fz_rethrow(ctx);
-	}
-}
-
-void pdf_run_page_widgets(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
-{
-	pdf_run_page_widgets_with_usage(ctx, page, dev, ctm, "View", cookie);
-}
-
 void
 pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie)
 {
@@ -326,7 +270,6 @@ pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matr
 	{
 		pdf_run_page_contents_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
 		pdf_run_page_annots_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
-		pdf_run_page_widgets_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
 	}
 	fz_always(ctx)
 	{

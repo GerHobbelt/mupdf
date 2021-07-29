@@ -164,6 +164,9 @@ pdf_page *pdf_annot_page(fz_context *ctx, pdf_annot *annot);
 */
 fz_rect pdf_bound_annot(fz_context *ctx, pdf_annot *annot);
 
+/*
+	Return the type of an annotation.
+*/
 enum pdf_annot_type pdf_annot_type(fz_context *ctx, pdf_annot *annot);
 
 /*
@@ -548,9 +551,9 @@ void pdf_dirty_annot(fz_context *ctx, pdf_annot *annot);
 
 int pdf_annot_field_flags(fz_context *ctx, pdf_annot *annot);
 const char *pdf_annot_field_value(fz_context *ctx, pdf_annot *annot);
-const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *widget);
+const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *annot);
 
-int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_widget *widget, const char *text, int ignore_trigger_events);
+int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *annot, const char *text, int ignore_trigger_events);
 
 /*
 	Recreate the appearance stream for an annotation, if necessary.
@@ -606,15 +609,15 @@ int pdf_update_page(fz_context *ctx, pdf_page *page);
 	characters typed into it. The state should be reverted at the end of
 	the edit sequence and the text newly updated.
 */
-void pdf_set_widget_editing_state(fz_context *ctx, pdf_widget *widget, int editing);
+void pdf_set_widget_editing_state(fz_context *ctx, pdf_annot *widget, int editing);
 
-int pdf_get_widget_editing_state(fz_context *ctx, pdf_widget *widget);
+int pdf_get_widget_editing_state(fz_context *ctx, pdf_annot *widget);
 
 /*
 	Toggle the state of a specified annotation. Applies only to check-box
 	and radio-button widgets.
 */
-int pdf_toggle_widget(fz_context *ctx, pdf_widget *widget);
+int pdf_toggle_widget(fz_context *ctx, pdf_annot *widget);
 
 fz_display_list *pdf_new_display_list_from_annot(fz_context *ctx, pdf_annot *annot);
 

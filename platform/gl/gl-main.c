@@ -827,10 +827,12 @@ void load_page(void)
 
 	if (trace_file)
 	{
-		pdf_widget *w;
+		pdf_annot *w;
 		int i, s;
 
-		for (i = 0, s = 0, w = pdf_first_widget(ctx, page); w != NULL; i++, w = pdf_next_widget(ctx, w))
+		for (i = 0, s = 0, w = pdf_first_annot(ctx, page); w != NULL; i++, w = pdf_next_annot(ctx, w))
+			if (pdf_annot_type(ctx, w) != PDF_ANNOT_WIDGET)
+				continue;
 			if (pdf_widget_type(ctx, w) == PDF_WIDGET_TYPE_SIGNATURE)
 			{
 				int is_signed;
@@ -840,7 +842,7 @@ void load_page(void)
 				trace_action("widgetstr = 'Signature %d on page %d';\n",
 					s, fz_page_number_from_location(ctx, doc, currentpage));
 
-				is_signed = pdf_widget_is_signed(ctx, w);
+				is_signed = pdf_annot_is_signed(ctx, w);
 				trace_action("tmp = widget.isSigned();\n");
 				trace_action("if (tmp != %d)\n", is_signed);
 				trace_action("  throw new RegressionError(widgetstr, 'is signed:', tmp|0, 'expected:', %d);\n", is_signed);
@@ -855,7 +857,7 @@ void load_page(void)
 					char buf[500];
 
 					valid_until = pdf_validate_signature(ctx, w);
-					is_readonly = pdf_widget_is_readonly(ctx, w);
+					is_readonly = pdf_annot_is_readonly(ctx, w);
 					verifier = pkcs7_openssl_new_verifier(ctx);
 					cert_error = pdf_signature_error_description(pdf_check_widget_certificate(ctx, verifier, w));
 					digest_error = pdf_signature_error_description(pdf_check_widget_digest(ctx, verifier, w));
@@ -955,7 +957,6 @@ static void render_page(void)
 	{
 		dev = fz_new_draw_device(ctx, draw_page_ctm, pix);
 		fz_run_page_annots(ctx, fzpage, dev, fz_identity, NULL);
-		fz_run_page_widgets(ctx, fzpage, dev, fz_identity, NULL);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 	}
