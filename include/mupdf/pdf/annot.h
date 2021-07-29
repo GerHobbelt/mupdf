@@ -125,7 +125,27 @@ void pdf_drop_annot(fz_context *ctx, pdf_annot *annot);
 
 /*
 	Returns a borrowed reference to the first annotation on
-	a page, or NULL if none.
+	a page, or NULL if none. (This includes both annotations
+	and widgets).
+
+	The caller should fz_keep this if it intends to hold the
+	pointer. Unless it fz_keeps it, it must not fz_drop it.
+*/
+pdf_annot *pdf_first_raw_annot(fz_context *ctx, pdf_page *page);
+
+/*
+	Returns a borrowed reference to the next annotation
+	on a page, or NULL if none. (This includes both
+	annotations and widgets).
+
+	The caller should fz_keep this if it intends to hold the
+	pointer. Unless it fz_keeps it, it must not fz_drop it.
+*/
+pdf_annot *pdf_next_raw_annot(fz_context *ctx, pdf_annot *annot);
+
+/*
+	Returns a borrowed reference to the first (non-widget)
+	annotation on a page, or NULL if none.
 
 	The caller should fz_keep this if it intends to hold the
 	pointer. Unless it fz_keeps it, it must not fz_drop it.
@@ -133,13 +153,31 @@ void pdf_drop_annot(fz_context *ctx, pdf_annot *annot);
 pdf_annot *pdf_first_annot(fz_context *ctx, pdf_page *page);
 
 /*
-	Returns a borrowed reference to the next annotation
-	on a page, or NULL if none.
+	Returns a borrowed reference to the next (non-widget)
+	annotation on a page, or NULL if none.
 
 	The caller should fz_keep this if it intends to hold the
 	pointer. Unless it fz_keeps it, it must not fz_drop it.
 */
 pdf_annot *pdf_next_annot(fz_context *ctx, pdf_annot *annot);
+
+/*
+	Returns a borrowed reference to the first widget annotation
+	on a page, or NULL if none.
+
+	The caller should fz_keep this if it intends to hold the
+	pointer. Unless it fz_keeps it, it must not fz_drop it.
+*/
+pdf_annot *pdf_first_widget(fz_context *ctx, pdf_page *page);
+
+/*
+	Returns a borrowed reference to the next widget annotation
+	on a page, or NULL if none.
+
+	The caller should fz_keep this if it intends to hold the
+	pointer. Unless it fz_keeps it, it must not fz_drop it.
+*/
+pdf_annot *pdf_next_widget(fz_context *ctx, pdf_annot *annot);
 
 /*
 	Returns a borrowed reference to the object underlying

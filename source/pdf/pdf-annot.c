@@ -173,15 +173,68 @@ pdf_load_annots(fz_context *ctx, pdf_page *page, pdf_obj *annots)
 }
 
 pdf_annot *
+pdf_first_raw_annot(fz_context *ctx, pdf_page *page)
+{
+	if (!page)
+		return NULL;
+
+	return page->annots;
+}
+
+pdf_annot *
+pdf_next_raw_annot(fz_context *ctx, pdf_annot *annot)
+{
+	return annot->next;
+}
+
+pdf_annot *
 pdf_first_annot(fz_context *ctx, pdf_page *page)
 {
-	return page ? page->annots : NULL;
+	pdf_annot *annot;
+
+	if (!page)
+		return NULL;
+
+	for (annot = page->annots;
+		annot != NULL && pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
 }
 
 pdf_annot *
 pdf_next_annot(fz_context *ctx, pdf_annot *annot)
 {
-	return annot ? annot->next : NULL;
+	for (annot = annot->next;
+		annot != NULL && pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
+}
+
+pdf_annot *
+pdf_first_widget(fz_context *ctx, pdf_page *page)
+{
+	pdf_annot *annot;
+
+	if (!page)
+		return NULL;
+
+	for (annot = page->annots;
+		annot != NULL && pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
+}
+
+pdf_annot *
+pdf_next_widget(fz_context *ctx, pdf_annot *annot)
+{
+	for (annot = annot->next;
+		annot != NULL && pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET;
+		annot = annot->next);
+
+	return annot;
 }
 
 pdf_obj *pdf_annot_obj(fz_context *ctx, pdf_annot *annot)

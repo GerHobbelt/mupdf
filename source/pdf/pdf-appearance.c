@@ -2792,7 +2792,7 @@ update_appearances(fz_context *ctx, fz_page *page_, void *state)
 	pdf_page *page = (pdf_page *)page_;
 	pdf_annot *annot;
 
-	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
+	for (annot = pdf_first_raw_annot(ctx, page); annot; annot = pdf_next_raw_annot(ctx, annot))
 		pdf_update_appearance(ctx, annot);
 
 	return NULL;

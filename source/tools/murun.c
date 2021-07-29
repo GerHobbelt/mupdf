@@ -5307,22 +5307,19 @@ static void ffi_PDFPage_getWidgets(js_State *J)
 	int i = 0;
 
 	fz_try(ctx)
-		widget = pdf_first_annot(ctx, page);
+		widget = pdf_first_widget(ctx, page);
 	fz_catch(ctx)
 		rethrow(J);
 
 	js_newarray(J);
 
 	while (widget) {
-		if (pdf_annot_type(ctx, widget) == PDF_ANNOT_WIDGET)
-		{
-			js_getregistry(J, "pdf_widget");
-			js_newuserdata(J, "pdf_widget", pdf_keep_annot(ctx, widget), ffi_gc_pdf_annot);
-			js_setindex(J, -2, i++);
-		}
+		js_getregistry(J, "pdf_widget");
+		js_newuserdata(J, "pdf_widget", pdf_keep_annot(ctx, widget), ffi_gc_pdf_annot);
+		js_setindex(J, -2, i++);
 
 		fz_try(ctx)
-			widget = pdf_next_annot(ctx, widget);
+			widget = pdf_next_widget(ctx, widget);
 		fz_catch(ctx)
 			rethrow(J);
 	}
