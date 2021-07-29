@@ -5247,7 +5247,7 @@ static void ffi_PDFPage_getWidgets(js_State *J)
 
 	while (widget) {
 		js_getregistry(J, "pdf_widget");
-		js_newuserdata(J, "pdf_widget", pdf_keep_widget(ctx, widget), ffi_gc_pdf_annot);
+		js_newuserdata(J, "pdf_widget", pdf_keep_annot(ctx, widget), ffi_gc_pdf_annot);
 		js_setindex(J, -2, i++);
 
 		fz_try(ctx)
@@ -6489,7 +6489,7 @@ static void ffi_PDFWidget_update(js_State *J)
 	pdf_annot *widget = js_touserdata(J, 0, "pdf_widget");
 	int changed = 0;
 	fz_try(ctx)
-		changed = pdf_update_widget(ctx, widget);
+		changed = pdf_update_annot(ctx, widget);
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushboolean(J, changed);

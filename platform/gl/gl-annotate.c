@@ -1308,7 +1308,6 @@ void mark_all_search_results(void)
 void do_redact_panel(void)
 {
 	static struct list annot_list;
-	enum pdf_annot_type subtype;
 	pdf_annot *annot;
 	int idx;
 	int im_choice;
@@ -1381,11 +1380,10 @@ void do_redact_panel(void)
 	ui_list_begin(&annot_list, num_redact, 0, ui.lineheight * 10 + 4);
 	for (idx=0, annot = pdf_first_annot(ctx, page); annot; ++idx, annot = pdf_next_annot(ctx, annot))
 	{
-		char buf[50];
-		int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
-		subtype = pdf_annot_type(ctx, annot);
-		if (subtype == PDF_ANNOT_REDACT)
+		if (pdf_annot_type(ctx, annot) == PDF_ANNOT_REDACT)
 		{
+			char buf[50];
+			int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
 			const char *contents = pdf_annot_contents(ctx, annot);
 			fz_snprintf(buf, sizeof buf, "%d: %s", num, contents[0] ? contents : "Redact");
 			if (ui_list_item(&annot_list, pdf_annot_obj(ctx, annot), buf, ui.selected_annot == annot))
@@ -1399,7 +1397,7 @@ void do_redact_panel(void)
 
 	ui_spacer();
 
-	if (ui.selected_annot && (subtype = pdf_annot_type(ctx, ui.selected_annot)) == PDF_ANNOT_REDACT)
+	if (ui.selected_annot && pdf_annot_type(ctx, ui.selected_annot) == PDF_ANNOT_REDACT)
 	{
 		int n;
 

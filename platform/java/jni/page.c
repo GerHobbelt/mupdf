@@ -126,31 +126,6 @@ FUN(Page_runPageAnnots)(JNIEnv *env, jobject self, jobject jdev, jobject jctm, j
 		jni_rethrow_void(env, ctx);
 }
 
-JNIEXPORT void JNICALL
-FUN(Page_runPageWidgets)(JNIEnv *env, jobject self, jobject jdev, jobject jctm, jobject jcookie)
-{
-	fz_context *ctx = get_context(env);
-	fz_page *page = from_Page(env, self);
-	fz_device *dev = from_Device(env, jdev);
-	fz_matrix ctm = from_Matrix(env, jctm);
-	fz_cookie *cookie = from_Cookie(env, jcookie);
-	NativeDeviceInfo *info;
-	int err;
-
-	if (!ctx || !page) return;
-	if (!dev) jni_throw_arg_void(env, "device must not be null");
-
-	info = lockNativeDevice(env, jdev, &err);
-	if (err)
-		return;
-	fz_try(ctx)
-		fz_run_page_widgets(ctx, page, dev, ctm, cookie);
-	fz_always(ctx)
-		unlockNativeDevice(env, info);
-	fz_catch(ctx)
-		jni_rethrow_void(env, ctx);
-}
-
 JNIEXPORT jobject JNICALL
 FUN(Page_getLinks)(JNIEnv *env, jobject self)
 {

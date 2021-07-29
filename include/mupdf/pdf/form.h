@@ -24,12 +24,6 @@ enum pdf_widget_tx_format
 	PDF_WIDGET_TX_FORMAT_TIME
 };
 
-pdf_annot *pdf_keep_widget(fz_context *ctx, pdf_annot *widget);
-void pdf_drop_widget(fz_context *ctx, pdf_annot *widget);
-pdf_annot *pdf_first_widget(fz_context *ctx, pdf_page *page);
-pdf_annot *pdf_next_widget(fz_context *ctx, pdf_annot *previous);
-int pdf_update_widget(fz_context *ctx, pdf_annot *widget);
-
 /*
 	create a new signature widget on the specified page, with the
 	specified name.
@@ -42,8 +36,6 @@ int pdf_update_widget(fz_context *ctx, pdf_annot *widget);
 pdf_annot *pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name);
 
 enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *widget);
-
-fz_rect pdf_bound_widget(fz_context *ctx, pdf_annot *widget);
 
 /*
 	get the maximum number of
