@@ -219,39 +219,14 @@ typedef struct
 {
 	fz_path_walker walker;
 	fz_matrix matrix;
-
-	fz_colorspace           *colorspace;
-	const float             *color;
-	float                   alpha;
-	fz_color_params         color_params;
-
+	fz_colorspace *colorspace;
+	const float *color;
+	float alpha;
+	fz_color_params color_params;
 	fz_point points[4];
 	int n;
 	fz_docx_device *dev;
 } fill_path_info_t;
-
-/*
-static void fill_path_info_show(fillpath_info_t* fill_path_info)
-{
-	fprintf(stderr, "%s:%i:%s: type=%s, n=%i: (%f %f) (%f %f) (%f %f) (%f %f)\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			(
-				fill_path_info->type == fill_path_info_type_NONE ? "NONE"
-				: fill_path_info->type == fill_path_info_type_RECT ? "RECT"
-				: "???"
-			),
-			fill_path_info->n,
-			fill_path_info->points[0].x,
-			fill_path_info->points[0].y,
-			fill_path_info->points[1].x,
-			fill_path_info->points[1].y,
-			fill_path_info->points[2].x,
-			fill_path_info->points[2].y,
-			fill_path_info->points[3].x,
-			fill_path_info->points[3].y
-			);
-}
-*/
 
 static void moveto(fz_context *ctx, void *arg, float x, float y)
 {
