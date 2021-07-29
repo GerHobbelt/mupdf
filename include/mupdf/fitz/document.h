@@ -651,11 +651,6 @@ void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_mat
 void fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
 
 /**
-	Run the widgets on a page through a device.
-*/
-void fz_run_page_widgets(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
-
-/**
 	Increment the reference count for the page. Returns the same
 	pointer.
 
@@ -798,7 +793,6 @@ struct fz_page
 	fz_page_bound_page_fn *bound_page;
 	fz_page_run_page_fn *run_page_contents;
 	fz_page_run_page_fn *run_page_annots;
-	fz_page_run_page_fn *run_page_widgets;
 	fz_page_load_links_fn *load_links;
 	fz_page_page_presentation_fn *page_presentation;
 	fz_page_control_separation_fn *control_separation;

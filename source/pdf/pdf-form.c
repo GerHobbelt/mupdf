@@ -375,13 +375,15 @@ static void *find_widget_on_page(fz_context *ctx, fz_page *page_, void *state_)
 {
 	lookup_state *state = (lookup_state *) state_;
 	pdf_page *page = (pdf_page *) page_;
-	pdf_widget *widget;
+	pdf_annot *widget;
 
 	if (state->pageobj && pdf_objcmp_resolve(ctx, state->pageobj, page->obj))
 		return NULL;
 
-	for (widget = pdf_first_widget(ctx, page); widget != NULL; widget = pdf_next_widget(ctx, widget))
+	for (widget = pdf_first_annot(ctx, page); widget != NULL; widget = pdf_next_annot(ctx, widget))
 	{
+		if (pdf_annot_type(ctx, widget) != PDF_ANNOT_WIDGET)
+			continue;
 		if (!pdf_objcmp_resolve(ctx, state->chk, widget->obj))
 			return widget;
 	}
@@ -389,7 +391,7 @@ static void *find_widget_on_page(fz_context *ctx, fz_page *page_, void *state_)
 	return NULL;
 }
 
-static pdf_widget *find_widget(fz_context *ctx, pdf_document *doc, pdf_obj *chk)
+static pdf_annot *find_widget(fz_context *ctx, pdf_document *doc, pdf_obj *chk)
 {
 	lookup_state state;
 
@@ -552,7 +554,7 @@ int pdf_was_repaired(fz_context *ctx, pdf_document *doc)
 	return doc->repair_attempted;
 }
 
-int pdf_toggle_widget(fz_context *ctx, pdf_widget *widget)
+int pdf_toggle_widget(fz_context *ctx, pdf_annot *widget)
 {
 	switch (pdf_widget_type(ctx, widget))
 	{
@@ -570,7 +572,6 @@ int
 pdf_update_page(fz_context *ctx, pdf_page *page)
 {
 	pdf_annot *annot;
-	pdf_widget *widget;
 	int changed = 0;
 
 	fz_try(ctx)
@@ -581,9 +582,6 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 
 		for (annot = page->annots; annot; annot = annot->next)
 			if (pdf_update_annot(ctx, annot))
-				changed = 1;
-		for (widget = page->widgets; widget; widget = widget->next)
-			if (pdf_update_annot(ctx, widget))
 				changed = 1;
 	}
 	fz_always(ctx)
@@ -596,19 +594,9 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 	return changed;
 }
 
-pdf_widget *pdf_first_widget(fz_context *ctx, pdf_page *page)
+enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *widget)
 {
-	return page->widgets;
-}
-
-pdf_widget *pdf_next_widget(fz_context *ctx, pdf_widget *widget)
-{
-	return widget->next;
-}
-
-enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_widget *widget)
-{
-	enum pdf_widget_type ret = PDF_WIDGET_TYPE_BUTTON;
+	enum pdf_annot_type ret = PDF_WIDGET_TYPE_BUTTON;
 
 	pdf_annot_push_local_xref(ctx, widget);
 
@@ -952,30 +940,30 @@ void pdf_field_set_text_color(fz_context *ctx, pdf_obj *field, pdf_obj *col)
 	pdf_field_mark_dirty(ctx, field);
 }
 
-pdf_widget *
-pdf_keep_widget(fz_context *ctx, pdf_widget *widget)
+pdf_annot *
+pdf_keep_widget(fz_context *ctx, pdf_annot *widget)
 {
 	return pdf_keep_annot(ctx, widget);
 }
 
 void
-pdf_drop_widget(fz_context *ctx, pdf_widget *widget)
+pdf_drop_widget(fz_context *ctx, pdf_annot *widget)
 {
 	pdf_drop_annot(ctx, widget);
 }
 
 void
-pdf_drop_widgets(fz_context *ctx, pdf_widget *widget)
+pdf_drop_widgets(fz_context *ctx, pdf_annot *widget)
 {
 	while (widget)
 	{
-		pdf_widget *next = widget->next;
+		pdf_annot *next = widget->next;
 		pdf_drop_widget(ctx, widget);
 		widget = next;
 	}
 }
 
-pdf_widget *
+pdf_annot *
 pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 {
 	fz_rect rect = { 12, 12, 12+100, 12+50 };
@@ -1010,28 +998,28 @@ pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 	{
 		pdf_delete_annot(ctx, page, annot);
 	}
-	return (pdf_widget *)annot;
+	return (pdf_annot *)annot;
 }
 
 fz_rect
-pdf_bound_widget(fz_context *ctx, pdf_widget *widget)
+pdf_bound_widget(fz_context *ctx, pdf_annot *widget)
 {
 	return pdf_bound_annot(ctx, widget);
 }
 
 int
-pdf_update_widget(fz_context *ctx, pdf_widget *widget)
+pdf_update_widget(fz_context *ctx, pdf_annot *widget)
 {
 	return pdf_update_annot(ctx, widget);
 }
 
-int pdf_text_widget_max_len(fz_context *ctx, pdf_widget *tw)
+int pdf_text_widget_max_len(fz_context *ctx, pdf_annot *tw)
 {
 	pdf_annot *annot = (pdf_annot *)tw;
 	return pdf_to_int(ctx, pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(MaxLen)));
 }
 
-int pdf_text_widget_format(fz_context *ctx, pdf_widget *tw)
+int pdf_text_widget_format(fz_context *ctx, pdf_annot *tw)
 {
 	pdf_annot *annot = (pdf_annot *)tw;
 	int type = PDF_WIDGET_TX_FORMAT_NONE;
@@ -1084,7 +1072,7 @@ merge_changes(fz_context *ctx, const char *value, int start, int end, const char
 	return merged;
 }
 
-int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *update)
+int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *update)
 {
 	pdf_document *doc = widget->page->doc;
 	pdf_keystroke_event evt = { 0 };
@@ -1147,7 +1135,7 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_widget *widget, const char *up
 	return rc;
 }
 
-int pdf_edit_text_field_value(fz_context *ctx, pdf_widget *widget, const char *value, const char *change, int *selStart, int *selEnd, char **result)
+int pdf_edit_text_field_value(fz_context *ctx, pdf_annot *widget, const char *value, const char *change, int *selStart, int *selEnd, char **result)
 {
 	pdf_document *doc = widget->page->doc;
 	pdf_keystroke_event evt = {0};
@@ -1193,13 +1181,13 @@ int pdf_edit_text_field_value(fz_context *ctx, pdf_widget *widget, const char *v
 	return rc;
 }
 
-int pdf_set_choice_field_value(fz_context *ctx, pdf_widget *widget, const char *new_value)
+int pdf_set_choice_field_value(fz_context *ctx, pdf_annot *widget, const char *new_value)
 {
 	/* Choice widgets use almost the same keystroke processing as text fields. */
 	return pdf_set_text_field_value(ctx, widget, new_value);
 }
 
-int pdf_choice_widget_options(fz_context *ctx, pdf_widget *tw, int exportval, const char *opts[])
+int pdf_choice_widget_options(fz_context *ctx, pdf_annot *tw, int exportval, const char *opts[])
 {
 	pdf_annot *annot = (pdf_annot *)tw;
 	pdf_obj *optarr;
@@ -1242,7 +1230,7 @@ const char *pdf_choice_field_option(fz_context *ctx, pdf_obj *field, int export,
 		return pdf_to_text_string(ctx, ent);
 }
 
-int pdf_choice_widget_is_multiselect(fz_context *ctx, pdf_widget *tw)
+int pdf_choice_widget_is_multiselect(fz_context *ctx, pdf_annot *tw)
 {
 	pdf_annot *annot = (pdf_annot *)tw;
 
@@ -1257,7 +1245,7 @@ int pdf_choice_widget_is_multiselect(fz_context *ctx, pdf_widget *tw)
 	}
 }
 
-int pdf_choice_widget_value(fz_context *ctx, pdf_widget *tw, const char *opts[])
+int pdf_choice_widget_value(fz_context *ctx, pdf_annot *tw, const char *opts[])
 {
 	pdf_annot *annot = (pdf_annot *)tw;
 	pdf_obj *optarr;
@@ -1291,7 +1279,7 @@ int pdf_choice_widget_value(fz_context *ctx, pdf_widget *tw, const char *opts[])
 	}
 }
 
-void pdf_choice_widget_set_value(fz_context *ctx, pdf_widget *tw, int n, const char *opts[])
+void pdf_choice_widget_set_value(fz_context *ctx, pdf_annot *tw, int n, const char *opts[])
 {
 	pdf_annot *annot = (pdf_annot *)tw;
 	pdf_obj *optarr = NULL, *opt;
@@ -1537,14 +1525,14 @@ int pdf_signature_is_signed(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 	return pdf_is_dict(ctx, v) && (vtype ? pdf_name_eq(ctx, vtype, PDF_NAME(Sig)) : 1);
 }
 
-int pdf_widget_is_signed(fz_context *ctx, pdf_widget *widget)
+int pdf_annot_is_signed(fz_context *ctx, pdf_annot *widget)
 {
 	if (widget == NULL)
 		return 0;
 	return pdf_signature_is_signed(ctx, widget->page->doc, widget->obj);
 }
 
-int pdf_widget_is_readonly(fz_context *ctx, pdf_widget *widget)
+int pdf_annot_is_readonly(fz_context *ctx, pdf_annot *widget)
 {
 	int fflags;
 	if (widget == NULL)
@@ -1943,12 +1931,12 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 	}
 }
 
-void pdf_set_widget_editing_state(fz_context *ctx, pdf_widget *widget, int editing)
+void pdf_set_widget_editing_state(fz_context *ctx, pdf_annot *widget, int editing)
 {
 	widget->ignore_trigger_events = editing;
 }
 
-int pdf_get_widget_editing_state(fz_context *ctx, pdf_widget *widget)
+int pdf_get_widget_editing_state(fz_context *ctx, pdf_annot *widget)
 {
 	return widget->ignore_trigger_events;
 }

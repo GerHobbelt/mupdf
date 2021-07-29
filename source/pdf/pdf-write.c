@@ -1001,8 +1001,6 @@ renumber_pages(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 
 		for (annot = ppage->annots; annot != NULL; annot = annot->next)
 			swap_indirect_obj(ctx, doc, opts, &annot->obj);
-		for (annot = ppage->widgets; annot != NULL; annot = annot->next)
-			swap_indirect_obj(ctx, doc, opts, &annot->obj);
 	}
 }
 
@@ -3785,8 +3783,6 @@ void pdf_save_document(fz_context *ctx, pdf_document *doc, const char *filename,
 				{
 					pdf_annot *annot;
 					for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
-						pdf_annot_request_resynthesis(ctx, annot);
-					for (annot = pdf_first_widget(ctx, page); annot; annot = pdf_next_widget(ctx, annot))
 						pdf_annot_request_resynthesis(ctx, annot);
 				}
 				pdf_update_page(ctx, page);

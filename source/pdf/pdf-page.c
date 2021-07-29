@@ -926,7 +926,6 @@ pdf_drop_page_imp(fz_context *ctx, pdf_page *page)
 {
 	fz_drop_link(ctx, page->links);
 	pdf_drop_annots(ctx, page->annots);
-	pdf_drop_widgets(ctx, page->widgets);
 	pdf_drop_obj(ctx, page->obj);
 }
 
@@ -942,7 +941,6 @@ pdf_new_page(fz_context *ctx, pdf_document *doc)
 	page->super.bound_page = (fz_page_bound_page_fn*)pdf_bound_page;
 	page->super.run_page_contents = (fz_page_run_page_fn*)pdf_run_page_contents;
 	page->super.run_page_annots = (fz_page_run_page_fn*)pdf_run_page_annots;
-	page->super.run_page_widgets = (fz_page_run_page_fn*)pdf_run_page_widgets;
 	page->super.page_presentation = (fz_page_page_presentation_fn*)pdf_page_presentation;
 	page->super.separations = (fz_page_separations_fn *)pdf_page_separations;
 	page->super.overprint = (fz_page_uses_overprint_fn *)pdf_page_uses_overprint;
@@ -954,8 +952,6 @@ pdf_new_page(fz_context *ctx, pdf_document *doc)
 	page->links = NULL;
 	page->annots = NULL;
 	page->annot_tailp = &page->annots;
-	page->widgets = NULL;
-	page->widget_tailp = &page->widgets;
 
 	return page;
 }

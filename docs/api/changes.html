@@ -46,6 +46,11 @@ functions, in that sometimes they returned a borrowed reference, rather
 than a reference that the caller had to drop. We now always return a
 reference that the caller owns and must drop.</p>
 
+<p>We have removed pdf_first_widget/pdf_next_widget and the pdf_widget
+type. Widgets are now returned as part of the pdf_first_annot/pdf_next_annot
+enumeration, and callers can identify them by checking pdf_annot_type to
+see if returns PDF_ANNOT_WIDGET.</p>
+
 <h2>Changes from 1.17 to 1.18</h2>
 
 <p>None worth mentioning.</p>
