@@ -52,6 +52,11 @@ namespace google {
 # endif
 #endif
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wvariadic-macros"
+#endif
+
 // This is similar to LOG(severity) << format... and VLOG(level) << format..,
 // but
 // * it is to be used ONLY by low-level modules that can't use normal LOG()
@@ -88,7 +93,7 @@ namespace google {
 
 // The following STRIP_LOG testing is performed in the header file so that it's
 // possible to completely compile out the logging code and the log messages.
-#if STRIP_LOG == 0
+#if !defined(STRIP_LOG) || STRIP_LOG == 0
 #define RAW_VLOG(verboselevel, ...) \
   do { \
     if (VLOG_IS_ON(verboselevel)) { \
@@ -99,28 +104,28 @@ namespace google {
 #define RAW_VLOG(verboselevel, ...) RawLogStub__(0, __VA_ARGS__)
 #endif // STRIP_LOG == 0
 
-#if STRIP_LOG == 0
+#if !defined(STRIP_LOG) || STRIP_LOG == 0
 #define RAW_LOG_INFO(...) google::RawLog__(google::GLOG_INFO, \
                                    __FILE__, __LINE__, __VA_ARGS__)
 #else
 #define RAW_LOG_INFO(...) google::RawLogStub__(0, __VA_ARGS__)
 #endif // STRIP_LOG == 0
 
-#if STRIP_LOG <= 1
+#if !defined(STRIP_LOG) || STRIP_LOG <= 1
 #define RAW_LOG_WARNING(...) google::RawLog__(google::GLOG_WARNING,   \
                                       __FILE__, __LINE__, __VA_ARGS__)
 #else
 #define RAW_LOG_WARNING(...) google::RawLogStub__(0, __VA_ARGS__)
 #endif // STRIP_LOG <= 1
 
-#if STRIP_LOG <= 2
+#if !defined(STRIP_LOG) || STRIP_LOG <= 2
 #define RAW_LOG_ERROR(...) google::RawLog__(google::GLOG_ERROR,       \
                                     __FILE__, __LINE__, __VA_ARGS__)
 #else
 #define RAW_LOG_ERROR(...) google::RawLogStub__(0, __VA_ARGS__)
 #endif // STRIP_LOG <= 2
 
-#if STRIP_LOG <= 3
+#if !defined(STRIP_LOG) || STRIP_LOG <= 3
 #define RAW_LOG_FATAL(...) google::RawLog__(google::GLOG_FATAL,       \
                                     __FILE__, __LINE__, __VA_ARGS__)
 #else
@@ -159,6 +164,10 @@ namespace google {
     RAW_CHECK(condition, message)
 
 #endif  // NDEBUG
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 // Stub log function used to work around for unused variable warnings when
 // building with STRIP_LOG > 0.

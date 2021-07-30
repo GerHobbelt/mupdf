@@ -89,8 +89,10 @@ static struct {
 	{ tesseract_text2image_main, "tess_text2image", "OCR training helper utility" },
 
 	{ curl_main, "curl", "access/fetch a given URI" },
+
 	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
+
 	{ pdfmetadump_main, "metadump", "multitool shows information about pdf in JSON format" },
 
 	{ qiqqa_fingerprint0_main, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
