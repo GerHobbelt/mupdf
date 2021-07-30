@@ -91,7 +91,7 @@ static int next_file(fz_context *ctx, fz_stream *stm, size_t n)
 	fz_file_stream *state = stm->state;
 
 	/* n is only a hint, that we can safely ignore */
-	n = fread(state->buffer, 1, sizeof(state->buffer), state->file);
+	n = fread(state->buffer, 1, sizeof(state->buffer), state->file); //-V763
 	if (n < sizeof(state->buffer) && ferror(state->file))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", strerror(errno));
 	stm->rp = state->buffer;
