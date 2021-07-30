@@ -2794,8 +2794,6 @@ update_appearances(fz_context *ctx, fz_page *page_, void *state)
 
 	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
 		pdf_update_appearance(ctx, annot);
-	for (annot = pdf_first_widget(ctx, page); annot; annot = pdf_next_widget(ctx, annot))
-		pdf_update_appearance(ctx, annot);
 
 	return NULL;
 }

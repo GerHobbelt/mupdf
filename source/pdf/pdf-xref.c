@@ -2424,6 +2424,9 @@ pdf_create_object(fz_context *ctx, pdf_document *doc)
 	entry->stm_ofs = 0;
 	entry->stm_buf = NULL;
 	entry->obj = NULL;
+
+	pdf_add_journal_fragment(ctx, doc, num, NULL, NULL, 1);
+
 	return num;
 }
 
@@ -4557,7 +4560,7 @@ int pdf_find_version_for_obj(fz_context *ctx, pdf_document *doc, pdf_obj *obj)
 	return v;
 }
 
-int pdf_validate_signature(fz_context *ctx, pdf_widget *widget)
+int pdf_validate_signature(fz_context *ctx, pdf_annot *widget)
 {
 	pdf_document *doc = widget->page->doc;
 	int unsaved_versions = pdf_count_unsaved_versions(ctx, doc);

@@ -607,29 +607,10 @@ fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix tra
 }
 
 void
-fz_run_page_widgets(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
-{
-	if (page && page->run_page_widgets)
-	{
-		fz_try(ctx)
-		{
-			page->run_page_widgets(ctx, page, dev, transform, cookie);
-		}
-		fz_catch(ctx)
-		{
-			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
-			if (fz_caught(ctx) != FZ_ERROR_ABORT)
-				fz_rethrow(ctx);
-		}
-	}
-}
-
-void
 fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
 {
 	fz_run_page_contents(ctx, page, dev, transform, cookie);
 	fz_run_page_annots(ctx, page, dev, transform, cookie);
-	fz_run_page_widgets(ctx, page, dev, transform, cookie);
 }
 
 fz_page *

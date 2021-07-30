@@ -9,7 +9,7 @@
 
 #include "mupdf/helpers/pkcs7-openssl.h"
 
-static pdf_widget *sig_widget;
+static pdf_annot *sig_widget;
 static char *sig_distinguished_name = NULL;
 static pdf_signature_error sig_cert_error;
 static pdf_signature_error sig_digest_error;
@@ -459,7 +459,7 @@ static void sig_verify_dialog(void)
 	ui_dialog_end();
 }
 
-static void show_sig_dialog(pdf_widget *widget)
+static void show_sig_dialog(pdf_annot *widget)
 {
 	fz_try(ctx)
 	{
@@ -470,7 +470,7 @@ static void show_sig_dialog(pdf_widget *widget)
 			pdf_pkcs7_verifier *verifier;
 			pdf_pkcs7_distinguished_name *dn;
 
-			sig_readonly = pdf_widget_is_readonly(ctx, widget);
+			sig_readonly = pdf_annot_is_readonly(ctx, widget);
 
 			sig_valid_until = pdf_validate_signature(ctx, widget);
 
@@ -500,7 +500,7 @@ static void show_sig_dialog(pdf_widget *widget)
 		ui_show_warning_dialog("%s", fz_caught_message(ctx));
 }
 
-static pdf_widget *tx_widget;
+static pdf_annot *tx_widget;
 static struct input tx_input;
 
 static void tx_dialog(void)
@@ -538,7 +538,7 @@ static void tx_dialog(void)
 	ui_dialog_end();
 }
 
-void show_tx_dialog(pdf_widget *widget)
+void show_tx_dialog(pdf_annot *widget)
 {
 	ui_input_init(&tx_input, pdf_annot_field_value(ctx, widget));
 	ui.focus = &tx_input;
@@ -546,7 +546,7 @@ void show_tx_dialog(pdf_widget *widget)
 	tx_widget = widget;
 }
 
-static pdf_widget *ch_widget;
+static pdf_annot *ch_widget;
 static void ch_dialog(void)
 {
 	const char *label;
@@ -596,7 +596,7 @@ static void ch_dialog(void)
 
 void do_widget_canvas(fz_irect canvas_area)
 {
-	pdf_widget *widget;
+	pdf_annot *widget;
 	fz_rect bounds;
 	fz_irect area;
 	int idx;
@@ -604,9 +604,11 @@ void do_widget_canvas(fz_irect canvas_area)
 	if (!pdf)
 		return;
 
-	for (idx = 0, widget = pdf_first_widget(ctx, page); widget; ++idx, widget = pdf_next_widget(ctx, widget))
+	for (idx = 0, widget = pdf_first_annot(ctx, page); widget; ++idx, widget = pdf_next_annot(ctx, widget))
 	{
-		bounds = pdf_bound_widget(ctx, widget);
+		if (pdf_annot_type(ctx, widget) != PDF_ANNOT_WIDGET)
+			continue;
+		bounds = pdf_bound_annot(ctx, widget);
 		bounds = fz_transform_rect(bounds, view_page_ctm);
 		area = fz_irect_from_rect(bounds);
 

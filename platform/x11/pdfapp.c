@@ -862,7 +862,6 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		app->annotations_list = fz_new_display_list(app->ctx, fz_infinite_rect);
 		mdev = fz_new_list_device(app->ctx, app->annotations_list);
 		fz_run_page_annots(app->ctx, app->page, mdev, fz_identity, &cookie);
-		fz_run_page_widgets(app->ctx, app->page, mdev, fz_identity, &cookie);
 		if (cookie.incomplete)
 		{
 			app->incomplete = 1;
