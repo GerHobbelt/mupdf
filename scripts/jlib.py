@@ -1542,8 +1542,6 @@ class ArgResult:
         a = self._dict_to_text(self._attr)
         d = self._dict_to_text(self._dict)
         l = [str(i) for i in self._list]
-        #return f'namespace({a})'
-        #return f'namespace((attr={a}) (dict={d}))'
         return f'namespace(attr={a} dict={d} list={l})'
 
     def __repr__(self):

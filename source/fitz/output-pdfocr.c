@@ -314,7 +314,7 @@ pdfocr_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 	fz_write_printf(ctx, out, "%d 0 obj\n<</Type/Page/Parent 2 0 R/Resources<</XObject<<", new_obj(ctx, writer));
 	for (i = 0; i < strips; i++)
 		fz_write_printf(ctx, out, "/I%d %d 0 R", i, writer->obj_num + i);
-		fz_write_printf(ctx, out, ">>/Font<</F0 3 0 R>>>>/MediaBox[0 0 %g %g]/Contents %d 0 R>>\nendobj\n",
+	fz_write_printf(ctx, out, ">>/Font<</F0 3 0 R>>>>/MediaBox[0 0 %g %g]/Contents %d 0 R>>\nendobj\n",
 		w * 72.0f / xres, h * 72.0f / yres, writer->obj_num + strips);
 }
 

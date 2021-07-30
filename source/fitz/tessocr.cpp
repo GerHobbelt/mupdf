@@ -102,6 +102,30 @@ tess_file_reader(const char *fname, std::vector<char> *out)
 #else
 
 static bool
+load_file(const char* filename, GenericVector<char>* data)
+{
+	bool result = false;
+	FILE *fp = fopen(filename, "rb");
+	if (fp == NULL)
+		return false;
+
+	fseek(fp, 0, SEEK_END);
+	long size = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	// Trying to open a directory on Linux sets size to LONG_MAX. Catch it here.
+	if (size > 0 && size < LONG_MAX)
+	{
+		// reserve an extra byte in case caller wants to append a '\0' character
+		data->reserve(size + 1);
+		data->resize_no_init(size);
+		result = static_cast<long>(fread(&(*data)[0], 1, size, fp)) == size;
+	}
+	fclose(fp);
+	return result;
+}
+
+static bool
 tess_file_reader(const STRING& fname, GenericVector<char> *out)
 {
 	/* FIXME: Look for inbuilt ones. */
@@ -110,6 +134,7 @@ tess_file_reader(const STRING& fname, GenericVector<char> *out)
 	fz_info(leptonica_mem, "tesseract %d.%d.%d used by mupdf as tesseract <= 4\n", TESSERACT_MAJOR_VERSION, TESSERACT_MINOR_VERSION, TESSERACT_MICRO_VERSION);
 	return load_file(fname.c_str(), out);
 }
+
 #endif
 
 static void
