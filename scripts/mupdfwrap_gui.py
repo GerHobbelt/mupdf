@@ -7,22 +7,53 @@ Basic PDF viewer using PyQt and MuPDF's Python bindings.
         +=  zooms in
         -_  zoom out
         0   reset zoom.
-        Page-up/down    Move to next/prev page.
+        Up/down, page-up/down   Scroll current page.
+        Shift page-up/down      Move to next/prev page.
 
 Command-line usage:
 
     -h
     --help
         Show this help.
-    -f <path>
+    <path>
         Show specified PDF file.
-    --html
-        Also show HTML version of PDF file.
 
 Example usage:
 
-    ./scripts/mupdfwrap.py -b all
-    PYTHONPATH=build/shared-release-extract ./scripts/mupdfwrap_gui.py
+    These examples build+install the MuPDF Python bindings into a Python
+    virtual environment, which enables this script's 'import mupdf' to work
+    without having to set PYTHONPATH.
+
+    Linux:
+        > python3 -m venv pylocal
+        > . pylocal/bin/activate
+        (pylocal) > pip install libclang pyqt5
+        (pylocal) > cd .../mupdf
+        (pylocal) > python setup.py install
+
+        (pylocal) > python scripts/mupdfwrap_gui.py
+
+    Windows (in a Cmd terminal):
+        > py -m venv pylocal
+        > pylocal\Scripts\activate
+        (pylocal) > pip install libclang pyqt5
+        (pylocal) > cd ...\mupdf
+        (pylocal) > python setup.py install
+
+        (pylocal) > python scripts\mupdfwrap_gui.py
+
+    OpenBSD:
+        # It seems that pip can't install py1t5 or libclang so instead we
+        # install system packages and use --system-site-packages.]
+
+        > sudo pkg_add py3-llvm py3-qt5
+        > python3 -m venv --system-site-packages pylocal
+        > . pylocal/bin/activate
+        (pylocal) > cd .../mupdf
+        (pylocal) > python setup.py install
+
+        (pylocal) > python scripts/mupdfwrap_gui.py
+
 '''
 
 import os
@@ -31,8 +62,9 @@ import sys
 import mupdf
 
 import PyQt5
-import PyQt5.QtWidgets
 import PyQt5.Qt
+import PyQt5.QtCore
+import PyQt5.QtWidgets
 
 
 class MainWindow(PyQt5.QtWidgets.QMainWindow):
@@ -54,37 +86,54 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.scroll_area.setWidget(self.central_widget)
         self.scroll_area.setWidgetResizable(True)
         self.setCentralWidget(self.scroll_area)
+        self.central_widget.setToolTip(
+                '+=  zoom in.\n'
+                '-_  zoom out.\n'
+                'Shift-page-up  prev page.\n'
+                'Shift-page-down  next page.\n'
+                )
 
         # Create menus.
         #
-        # Need to preserve menu_file_open, otherwise it doesn't appear in the
-        # menu.
+        # Need to store menu actions in self, otherwise they appear to get
+        # destructed and so don't appear in the menu.
         #
-        self.menu_file_open = PyQt5.QtWidgets.QAction('&Open')
+        self.menu_file_open = PyQt5.QtWidgets.QAction('&Open...')
         self.menu_file_open.setToolTip('Open a new PDF.')
         self.menu_file_open.triggered.connect(self.open_)
+        self.menu_file_open.setShortcut(PyQt5.QtGui.QKeySequence("Ctrl+O"))
 
-        self.menu_file_show_html = PyQt5.QtWidgets.QAction('&Show html')
-        self.menu_file_show_html.setToolTip('Convert to HTML and show in separate window.')
-        self.menu_file_show_html.triggered.connect(self.show_html)
+        if 0:
+            # Disabled because requires wip extract.
+            self.menu_file_show_html = PyQt5.QtWidgets.QAction('&Show html')
+            self.menu_file_show_html.setToolTip('Convert to HTML and show in separate window.')
+            self.menu_file_show_html.triggered.connect(self.show_html)
 
         self.menu_file_quit = PyQt5.QtWidgets.QAction('&Quit')
         self.menu_file_quit.setToolTip('Exit the application.')
         self.menu_file_quit.triggered.connect(self.quit)
+        self.menu_file_quit.setShortcut(PyQt5.QtGui.QKeySequence("Ctrl+Q"))
 
         menu_file = self.menuBar().addMenu('&File')
         menu_file.setToolTipsVisible(True)
         menu_file.addAction(self.menu_file_open)
-        menu_file.addAction(self.menu_file_show_html)
+        #menu_file.addAction(self.menu_file_show_html)
         menu_file.addAction(self.menu_file_quit)
 
     def keyPressEvent(self, event):
-        #print(f'event.key()={event.key()}')
         if self.page_number is None:
+            #print(f'self.page_number is None')
             return
-        elif event.key() == PyQt5.Qt.Qt.Key_PageUp:
+        #print(f'event.key()={event.key()}')
+        # Qt Seems to intercept up/down and page-up/down itself.
+        modifiers = PyQt5.QtWidgets.QApplication.keyboardModifiers()
+        #print(f'modifiers={modifiers}')
+        shift = (modifiers == PyQt5.QtCore.Qt.ShiftModifier)
+        if 0:
+            pass
+        elif shift and event.key() == PyQt5.Qt.Qt.Key_PageUp:
             self.goto_page(page_number=self.page_number - 1)
-        elif event.key() == PyQt5.Qt.Qt.Key_PageDown:
+        elif shift and event.key() == PyQt5.Qt.Qt.Key_PageDown:
             self.goto_page(page_number=self.page_number + 1)
         elif event.key() in (ord('='), ord('+')):
             self.goto_page(zoom=self.zoom + 1)
@@ -95,11 +144,12 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
 
     def resizeEvent(self, event):
         self.goto_page(self.page_number, self.zoom)
-        #print(f'resizeEvent(): oldSize={event.oldSize()} size={event.size()}')
 
     def show_html(self):
-        # Convert to HTML using Extract, and show in new window using
-        # PyQt5.QtWebKitWidgets.QWebView.
+        '''
+        Convert to HTML using Extract, and show in new window using
+        PyQt5.QtWebKitWidgets.QWebView.
+        '''
         buffer_ = self.page.new_buffer_from_page_with_format(
                 format="docx",
                 options="html",
@@ -107,8 +157,6 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
                 cookie=mupdf.Cookie(),
                 )
         html_content = buffer_.buffer_extract().decode('utf8')
-        #print(f'html_content:\n{html_content}')
-        #sys.stdout.flush()
         # Show in a new window using Qt's QWebView.
         self.webview = PyQt5.QtWebKitWidgets.QWebView()
         self.webview.setHtml(html_content)
@@ -122,7 +170,18 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         if path:
             self.open_path(path)
 
+    def open_path(self, path):
+        path = os.path.abspath(path)
+        try:
+            self.document = mupdf.Document(path)
+        except Exception as e:
+            print(f'Failed to open path={path!r}: {e}')
+            return
+        self.setWindowTitle(path)
+        self.goto_page(page_number=0, zoom=0)
+
     def quit(self):
+        # fixme: should probably use qt to exit?
         sys.exit()
 
     def goto_page(self, page_number=None, zoom=None):
@@ -144,11 +203,9 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
             page_number = self.page_number
         if zoom is None:
             zoom = self.zoom
-        try:
-            self.page = mupdf.Page(self.document, page_number)
-        except Exception as e:
-            print(f'Cannot go to page {page_number}: {e}')
+        if page_number is None or page_number < 0 or page_number >= self.document.count_pages():
             return
+        self.page = mupdf.Page(self.document, page_number)
         page_rect = self.page.bound_page()
         z = 2**(zoom / self.zoom_multiple)
 
@@ -169,7 +226,6 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         except Exception as e:
             print(f'self.page.new_pixmap_from_page_contents() failed: {e}')
             return
-        #print(f'pixmap.pixmap_width()={pixmap.pixmap_width()} pixmap.pixmap_height()={pixmap.pixmap_height()} pixmap.pixmap_stride()={pixmap.pixmap_stride()}')
         image = PyQt5.QtGui.QImage(
                 int(self.pixmap.pixmap_samples()),
                 self.pixmap.pixmap_width(),
@@ -181,16 +237,6 @@ class MainWindow(PyQt5.QtWidgets.QMainWindow):
         self.central_widget.setPixmap(qpixmap)
         self.page_number = page_number
         self.zoom = zoom
-
-    def open_path(self, path):
-        path = os.path.abspath(path)
-        try:
-            self.document = mupdf.Document(path)
-        except Exception as e:
-            print(f'Failed to open path={path!r}: {e}')
-            return
-        self.setWindowTitle(path)
-        self.goto_page(page_number=0, zoom=0)
 
 
 def main():
@@ -204,16 +250,17 @@ def main():
             arg = next(args)
         except StopIteration:
             break
-        if arg in ('-h', '--help'):
-            print(__doc__)
-            return
-        elif arg == '--html':
-            main_window.show_html()
-        elif arg == '-f':
-            path = next(args)
-            main_window.open_path(path)
+        if arg.startswith('-'):
+            if arg in ('-h', '--help'):
+                print(__doc__)
+                return
+            elif 0 and arg == '--html':
+                # Disabled because requires wip extract support.
+                main_window.show_html()
+            else:
+                raise Exception(f'Unrecognised option {arg!r}')
         else:
-            raise Exception(f'Unrecognised arg: {arg!r}')
+            main_window.open_path(arg)
 
     main_window.show()
     app.exec_()
