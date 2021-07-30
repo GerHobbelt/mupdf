@@ -565,7 +565,6 @@ int pdf_toggle_widget(fz_context *ctx, pdf_annot *widget)
 		toggle_check_box(ctx, widget);
 		return 1;
 	}
-	return 0;
 }
 
 int
@@ -605,6 +604,8 @@ enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *widget)
 		pdf_obj *subtype = pdf_dict_get(ctx, widget->obj, PDF_NAME(Subtype));
 		if (pdf_name_eq(ctx, subtype, PDF_NAME(Widget)))
 			ret = pdf_field_type(ctx, widget->obj);
+		else if (pdf_annot_type(ctx, widget) != PDF_ANNOT_WIDGET)
+			ret = PDF_WIDGET_TYPE_ANNOTATION;
 	}
 	fz_always(ctx)
 		pdf_annot_pop_local_xref(ctx, widget);
@@ -626,11 +627,12 @@ pdf_string_from_widget_type(fz_context* ctx, enum pdf_widget_type type)
 	case PDF_WIDGET_TYPE_RADIOBUTTON: return "Radiobutton";
 	case PDF_WIDGET_TYPE_SIGNATURE: return "Signature";
 	case PDF_WIDGET_TYPE_TEXT: return "Text";
+	case PDF_WIDGET_TYPE_ANNOTATION: return "(Annotation Is Not A Widget)";
 	default: return "UNKNOWN";
 	}
 }
 
-int
+enum pdf_widget_type
 pdf_widget_type_from_string(fz_context* ctx, const char* subtype)
 {
 	if (!subtype) return PDF_WIDGET_TYPE_UNKNOWN;
@@ -1042,18 +1044,6 @@ pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 		pdf_delete_annot(ctx, page, annot);
 	}
 	return (pdf_annot *)annot;
-}
-
-fz_rect
-pdf_bound_widget(fz_context *ctx, pdf_annot *widget)
-{
-	return pdf_bound_annot(ctx, widget);
-}
-
-int
-pdf_update_widget(fz_context *ctx, pdf_annot *widget)
-{
-	return pdf_update_annot(ctx, widget);
 }
 
 int pdf_text_widget_max_len(fz_context *ctx, pdf_annot *tw)
@@ -2020,7 +2010,7 @@ static void pdf_execute_js_action(fz_context *ctx, pdf_document *doc, pdf_obj *t
 static void pdf_execute_hide_action_imp(fz_context *ctx, pdf_document *doc, int hide, pdf_obj *target)
 {
 	pdf_obj *form = pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(Fields), NULL);
-	pdf_widget *widget;
+	pdf_annot *widget;
 	pdf_page *page;
 	pdf_obj *pobj;
 	int nbr;
@@ -2038,9 +2028,9 @@ static void pdf_execute_hide_action_imp(fz_context *ctx, pdf_document *doc, int 
 
 	fz_try(ctx)
 	{
-		for (widget = pdf_first_widget(ctx, page);
+		for (widget = pdf_first_annot(ctx, page);
 			widget != NULL;
-			widget = pdf_next_widget(ctx, widget))
+			widget = pdf_next_annot(ctx, widget))
 		{
 			if (!pdf_objcmp_resolve(ctx, widget->obj, target))
 			{

@@ -38,13 +38,11 @@ pdf_annot *pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *na
 
 enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *annot);
 
-fz_rect pdf_bound_widget(fz_context *ctx, pdf_widget *widget);
-
 const char* pdf_string_from_widget_tx_format(fz_context* ctx, enum pdf_widget_tx_format tx_format);
 
 const char* pdf_string_from_widget_type(fz_context* ctx, enum pdf_widget_type type);
 
-int pdf_widget_type_from_string(fz_context* ctx, const char* subtype);
+enum pdf_widget_type pdf_widget_type_from_string(fz_context* ctx, const char* subtype);
 
 /*
 	get the maximum number of

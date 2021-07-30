@@ -426,7 +426,7 @@ JNIEXPORT jboolean JNICALL
 FUN(PDFWidget_signWithAppearance)(JNIEnv *env, jobject self, jobject signer, jobject jdlist, jboolean useDate)
 {
 	fz_context *ctx = get_context(env);
-	pdf_widget *widget = from_PDFWidget_safe(env, self);
+	pdf_annot *widget = from_PDFWidget_safe(env, self);
 	pdf_pkcs7_signer *pkcs7signer = from_PKCS7Signer_safe(env, signer);
 	fz_display_list *dlist = from_DisplayList_safe(env, jdlist);
     int64_t signTime = 0;
@@ -455,7 +455,7 @@ JNIEXPORT jobject JNICALL
 FUN(PDFWidget_signatureAppearance)(JNIEnv *env, jobject self, jobject jrect, jobject jimage, jstring jleft, jstring jright, jboolean logo)
 {
     fz_context *ctx = get_context(env);
-    pdf_widget *widget = from_PDFWidget_safe(env, self);
+    pdf_annot *widget = from_PDFWidget_safe(env, self);
     fz_rect rect;
     fz_image *image = NULL;
     const char *left = NULL;
@@ -536,7 +536,7 @@ JNIEXPORT jstring JNICALL
 FUN(PDFWidget_getLabel)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
-	pdf_widget *widget = from_PDFWidget_safe(env, self);
+	pdf_annot *widget = from_PDFWidget_safe(env, self);
 	const char *text = NULL;
 
 	if (!ctx || !widget) return NULL;

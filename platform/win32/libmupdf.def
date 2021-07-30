@@ -251,7 +251,6 @@ EXPORTS
 	fz_run_page
 	fz_run_page_annots
 	fz_run_page_contents
-	fz_run_page_widgets
 	fz_save_accelerator
 
 ; Fitz exports
@@ -1479,7 +1478,8 @@ EXPORTS
 	pdf_annot_event_page_visible
 	pdf_annot_event_up
 	pdf_annot_field_event_keystroke
-	pdf_bound_widget
+	pdf_annot_is_readonly
+	pdf_annot_is_signed
 	pdf_button_field_on_state
 	pdf_calculate_form
 	pdf_check_certificate
@@ -1504,7 +1504,6 @@ EXPORTS
 	pdf_document_event_will_save
 	pdf_drop_signer
 	pdf_drop_verifier
-	pdf_drop_widget
 	pdf_edit_text_field_value
 	pdf_field_border_style
 	pdf_field_display
@@ -1523,10 +1522,7 @@ EXPORTS
 	pdf_field_set_text_color
 	pdf_field_type
 	pdf_field_value
-	pdf_first_widget
-	pdf_keep_widget
 	pdf_lookup_field
-	pdf_next_widget
 	pdf_page_event_close
 	pdf_page_event_open
 	pdf_preview_signature_as_display_list
@@ -1551,9 +1547,6 @@ EXPORTS
 	pdf_string_from_widget_type
 	pdf_text_widget_format
 	pdf_text_widget_max_len
-	pdf_update_widget
-	pdf_widget_is_readonly
-	pdf_widget_is_signed
 	pdf_widget_type
 	pdf_widget_type_from_string
 	pdf_close_processor
@@ -1583,10 +1576,12 @@ EXPORTS
 	pdf_js_event_init_keystroke
 	pdf_js_event_result
 	pdf_js_event_result_keystroke
+	pdf_js_event_result_validate
 	pdf_js_event_value
 	pdf_js_execute
 	pdf_js_supported
 
+	pdf_add_journal_fragment
 	pdf_array_contains
 	pdf_array_delete
 	pdf_array_find
@@ -1783,8 +1778,6 @@ EXPORTS
 	pdf_run_page_annots_with_usage
 	pdf_run_page_contents
 	pdf_run_page_contents_with_usage
-	pdf_run_page_widgets
-	pdf_run_page_widgets_with_usage
 	pdf_run_page_with_usage
 	pdf_update_default_colorspaces
 	pdf_append_token
@@ -1946,6 +1939,7 @@ EXPORTS
 	jpeg_start_decompress
 	jpeg_start_output
 	jpeg_std_error
+	jpeg_std_huff_table
 	jpeg_stdio_dest
 	jpeg_stdio_src
 	jpeg_suppress_tables

@@ -84,7 +84,6 @@ static int skip_images_dump = 0;
 static int skip_forms_dump = 0;
 static int skip_psobjects_dump = 0;
 static int skip_annotations_dump = 0;
-static int skip_pagewidgets_dump = 0;
 static int skip_uri_links_dump = 0;
 static int skip_separations_dump = 0;
 
@@ -161,7 +160,6 @@ usage(void)
 		"\t  q \t- forms ('questionaires')\n"
 		"\t  x \t- PostScript XObjects\n"
 		"\t  a \t- annotations\n"
-		"\t  w \t- widgets\n"
 		"\t  u \t- (uri) links\n"
 		"\t  s \t- separations\n"
 		"\t  i \t- images\n"
@@ -1511,6 +1509,19 @@ show_annot_info(fz_context* ctx, fz_output* out, fz_matrix ctm, pdf_annot* annot
 
 		write_item(ctx, out, "Contents", contents);
 	}
+
+	if (pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET)
+	{
+		enum pdf_widget_type subtype = pdf_widget_type(ctx, annot);
+		write_item(ctx, out, "WidgetType", pdf_string_from_widget_type(ctx, subtype));
+
+		if (subtype == PDF_WIDGET_TYPE_TEXT)
+		{
+			write_item_int(ctx, out, "WidgetTextMaximumLength", pdf_text_widget_max_len(ctx, annot));
+			enum pdf_widget_tx_format txf = pdf_text_widget_format(ctx, annot);
+			write_item(ctx, out, "WidgetTextFormat", pdf_string_from_widget_tx_format(ctx, txf));
+		}
+	}
 }
 
 static void
@@ -1561,46 +1572,6 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 					write_item(ctx, out, "AnnotType", pdf_string_from_annot_type(ctx, subtype));
 
 					show_annot_info(ctx, out, ctm, annot);
-
-					write_level_end(ctx, out, '}');
-				}
-
-				write_level_end(ctx, out, ']');
-			}
-		}
-
-		if (!skip_pagewidgets_dump)
-		{
-			pdf_widget* widget;
-
-			int n = 0;
-			for (widget = pdf_first_widget(ctx, page_obj); widget; widget = pdf_next_widget(ctx, widget))
-				++n;
-
-			if (n > 0)
-			{
-				write_item_int(ctx, out, "PageWidgetsCount", n);
-				write_item_starter_block(ctx, out, "PageWidgets", '[');
-
-				int idx;
-				for (idx = 0, widget = pdf_first_widget(ctx, page_obj); widget; ++idx, widget = pdf_next_widget(ctx, widget))
-				{
-					write_sep(ctx, out);
-					write_level_start(ctx, out, '{');
-
-					int num = pdf_to_num(ctx, pdf_annot_obj(ctx, widget));
-					enum pdf_widget_type subtype = pdf_widget_type(ctx, widget);
-					write_item_int(ctx, out, "WidgetNumber", num);
-					write_item(ctx, out, "WidgetType", pdf_string_from_widget_type(ctx, subtype));
-
-					if (subtype == PDF_WIDGET_TYPE_TEXT)
-					{
-						write_item_int(ctx, out, "WidgetTextMaximumLength", pdf_text_widget_max_len(ctx, widget));
-						enum pdf_widget_tx_format txf = pdf_text_widget_format(ctx, widget);
-						write_item(ctx, out, "WidgetTextFormat", pdf_string_from_widget_tx_format(ctx, txf));
-					}
-
-					show_annot_info(ctx, out, ctm, widget);
 
 					write_level_end(ctx, out, '}');
 				}
@@ -2343,7 +2314,6 @@ int pdfmetadump_main(int argc, const char** argv)
 	skip_forms_dump = 0;
 	skip_psobjects_dump = 0;
 	skip_annotations_dump = 0;
-	skip_pagewidgets_dump = 0;
 	skip_uri_links_dump = 0;
 	skip_separations_dump = 0;
 
@@ -2400,10 +2370,6 @@ int pdfmetadump_main(int argc, const char** argv)
 
 				case 'a':
 					++skip_annotations_dump;
-					break;
-
-				case 'w':
-					++skip_pagewidgets_dump;
 					break;
 
 				case 'u':
