@@ -1310,7 +1310,7 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 	if (!digests_match)
 		return;
 
-	if (doc->file_size < file_size)
+	if (doc->file_size < file_size) //-V614
 		return;
 
 	doc->journal = fz_malloc_struct(ctx, pdf_journal);
@@ -1362,7 +1362,7 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 	}
 
 	doc->file_size = file_size;
-	doc->num_incremental_sections = nis;
+	doc->num_incremental_sections = nis; //-V614
 
 	if (nis > 0)
 	{
@@ -3715,7 +3715,7 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				if (pdf_is_array(ctx, arr))
 				{
 					int arrlen = pdf_array_len(ctx, arr);
-					if (arrlen % 1 == 0)
+					if (arrlen % 2 == 0)
 					{
 						// see if first slot of each pair is string:
 						sane_name_value_pairs = 1;
