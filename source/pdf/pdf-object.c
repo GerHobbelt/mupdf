@@ -536,7 +536,7 @@ pdf_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 	if (a < PDF_LIMIT)
 	{
 		if (b < PDF_LIMIT)
-			return a != b;
+			return (int)a - (int)b;
 		if (b->kind != PDF_NAME)
 			return 1;
 		return strcmp(PDF_NAME_LIST[(intptr_t)a], NAME(b)->n);
@@ -1323,7 +1323,7 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 		if (fz_skip_string(ctx, stm, "entry\n") == 0)
 		{
 			/* Read the fragment title. */
-			pdf_token tok = pdf_lex(ctx, stm, &doc->lexbuf.base);
+			tok = pdf_lex(ctx, stm, &doc->lexbuf.base);
 			char *title;
 
 			if (tok != PDF_TOK_STRING)
