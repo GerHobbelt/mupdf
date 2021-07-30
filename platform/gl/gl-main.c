@@ -831,6 +831,7 @@ void load_page(void)
 		int i, s;
 
 		for (i = 0, s = 0, w = pdf_first_annot(ctx, page); w != NULL; i++, w = pdf_next_annot(ctx, w))
+		{
 			if (pdf_annot_type(ctx, w) != PDF_ANNOT_WIDGET)
 				continue;
 			if (pdf_widget_type(ctx, w) == PDF_WIDGET_TYPE_SIGNATURE)
@@ -892,6 +893,7 @@ void load_page(void)
 					trace_action("  throw new RegressionError(widgetstr, 'signatory:', '[', tmp, ']', 'expected:', '[', %q, ']');\n", signatory);
 				}
 			}
+		}
 	}
 
 	links = fz_load_links(ctx, fzpage);
