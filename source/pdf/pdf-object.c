@@ -246,23 +246,23 @@ pdf_new_indirect(fz_context *ctx, pdf_document *doc, int num, int gen)
 	return &obj->super;
 }
 
-#define OBJ_IS_NULL(obj) (obj == PDF_NULL)
-#define OBJ_IS_BOOL(obj) (obj == PDF_TRUE || obj == PDF_FALSE)
-#define OBJ_IS_NAME(obj) ((obj > PDF_FALSE && obj < PDF_LIMIT) || (obj >= PDF_LIMIT && obj->kind == PDF_NAME))
+#define OBJ_IS_NULL(obj) ((obj) == PDF_NULL)
+#define OBJ_IS_BOOL(obj) ((obj) == PDF_TRUE || (obj) == PDF_FALSE)
+#define OBJ_IS_NAME(obj) (((obj) > PDF_FALSE && (obj) < PDF_LIMIT) || ((obj) >= PDF_LIMIT && (obj)->kind == PDF_NAME))
 #define OBJ_IS_INT(obj) \
-	(obj >= PDF_LIMIT && obj->kind == PDF_INT)
+	((obj) >= PDF_LIMIT && (obj)->kind == PDF_INT)
 #define OBJ_IS_REAL(obj) \
-	(obj >= PDF_LIMIT && obj->kind == PDF_REAL)
+	((obj) >= PDF_LIMIT && (obj)->kind == PDF_REAL)
 #define OBJ_IS_NUMBER(obj) \
-	(obj >= PDF_LIMIT && (obj->kind == PDF_REAL || obj->kind == PDF_INT))
+	((obj) >= PDF_LIMIT && ((obj)->kind == PDF_REAL || (obj)->kind == PDF_INT))
 #define OBJ_IS_STRING(obj) \
-	(obj >= PDF_LIMIT && obj->kind == PDF_STRING)
+	((obj) >= PDF_LIMIT && (obj)->kind == PDF_STRING)
 #define OBJ_IS_ARRAY(obj) \
-	(obj >= PDF_LIMIT && obj->kind == PDF_ARRAY)
+	((obj) >= PDF_LIMIT && (obj)->kind == PDF_ARRAY)
 #define OBJ_IS_DICT(obj) \
-	(obj >= PDF_LIMIT && obj->kind == PDF_DICT)
+	((obj) >= PDF_LIMIT && (obj)->kind == PDF_DICT)
 #define OBJ_IS_INDIRECT(obj) \
-	(obj >= PDF_LIMIT && obj->kind == PDF_INDIRECT)
+	((obj) >= PDF_LIMIT && (obj)->kind == PDF_INDIRECT)
 
 #define RESOLVE(obj) \
 	if (OBJ_IS_INDIRECT(obj)) \
