@@ -1730,6 +1730,7 @@ class Arg:
             >>> parser.parse('-i foo -i bar', exit_=0)
             Failed at argv[2]='-i', only one instance of -i <in> allowed, expected one of:
                 <command>  (value must not start with "-")
+                -o <out>
 
         Args can be marked as required:
 
@@ -1782,11 +1783,9 @@ class Arg:
             <BLANKLINE>
             Usage:
                 foo  (required, multi)
-                                Do foo
-                    -f <file>   Input file
+                    -f <file>
                     -o <file>  (required)
-                                Output file
-                bar <qwerty>    Do bar
+                bar <qwerty>
             <BLANKLINE>
             Use --help to see full information.
 
