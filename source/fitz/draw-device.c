@@ -626,7 +626,6 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	fz_overprint *eop;
 	//((float*)color)[0] = 0;
 
-	//fprintf(stderr, "%s:%i:%s: colorspace_in=%p\n", __FILE__, __LINE__, __FUNCTION__, colorspace_in);
 	if (0 && colorspace_in)
 	{
 		fprintf(stderr, "%s:%i:%s: color[0]=%f\n", __FILE__, __LINE__, __FUNCTION__, color[0]);
