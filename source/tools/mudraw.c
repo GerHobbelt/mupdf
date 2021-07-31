@@ -498,7 +498,7 @@ static int usage(void)
 		"  -l -  minimum stroked line width (in pixels)\n"
 		"  -D    disable use of display list\n"
 		"  -j -  render only selected types of content. Use a comma-separated list\n"
-		"        to combine types (everything,content,annotations,widgets,Unknown,\n"
+		"        to combine types (everything,content,annotations,Unknown,\n"
 		"        %s)\n"
 		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"  -i    ignore errors\n"
@@ -2096,8 +2096,6 @@ parse_render_options(fz_cookie* cookie, const char* arg)
 			cookie->run_mode |= FZ_RUN_CONTENT;
 		else if (fz_strnieq(arg, wlen, "annotations"))
 			cookie->run_mode |= FZ_RUN_ANNOTATIONS;
-		else if (fz_strnieq(arg, wlen, "widgets"))
-			cookie->run_mode |= FZ_RUN_WIDGETS;
 		else if (fz_strnieq(arg, wlen, "unknown"))
 			cookie->run_annotations_reject_mask[PDF_ANNOT_UNKNOWN + 1] = 1;
 		else

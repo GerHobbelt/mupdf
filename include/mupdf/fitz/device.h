@@ -257,7 +257,6 @@ enum fz_run_flags
 	FZ_RUN_EVERYTHING				= 0,
 	FZ_RUN_CONTENT					= 0x0001,
 	FZ_RUN_ANNOTATIONS				= 0x0002,
-	FZ_RUN_WIDGETS					= 0x0004,
 };
 
 /**

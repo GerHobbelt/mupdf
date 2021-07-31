@@ -309,7 +309,7 @@ pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matr
 		enum fz_run_flags mode = FZ_RUN_EVERYTHING;
 		if (cookie)
 		{
-			enum fz_run_flags mode = cookie->run_mode;
+			mode = cookie->run_mode;
 		}
 		if (mode == FZ_RUN_EVERYTHING || (mode & FZ_RUN_CONTENT))
 		{
@@ -320,7 +320,6 @@ pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matr
 		{
 			pdf_run_page_annots_with_usage_imp(ctx, doc, page, dev, ctm, usage, cookie);
 		}
-
 	}
 	fz_always(ctx)
 	{
