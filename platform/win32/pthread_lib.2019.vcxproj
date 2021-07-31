@@ -28,70 +28,30 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    
-    
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    
-    
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    
-    
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    
-    
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -126,18 +86,7 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -167,45 +116,31 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
       <Command>
       </Command>
-      <Inputs>%(Inputs)</Inputs>
-      <Outputs>%(Outputs)</Outputs>
+      <Inputs>
+      </Inputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      
-      
-      
       <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;__CLEANUP_SEH;WIN32;NDEBUG;_WINDOWS;PTW32_STATIC_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;PTW32_RC_MSC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -214,52 +149,36 @@
     </ResourceCompile>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      
       <TargetMachine>MachineX86</TargetMachine>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
     <Bscmake>
-      
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
       <Command>
       </Command>
-      <Inputs>%(Inputs)</Inputs>
-      <Outputs>%(Outputs)</Outputs>
+      <Inputs>
+      </Inputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>X64</TargetEnvironment>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      
-      
-      
       <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;WIN64;_WIN64;__CLEANUP_SEH;WIN32;NDEBUG;_WINDOWS;PTW32_STATIC_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;PTW32_RC_MSC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -268,25 +187,24 @@
     </ResourceCompile>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      
       <TargetMachine>MachineX64</TargetMachine>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
     <Bscmake>
-      
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CustomBuildStep>
       <Command>
       </Command>
-      <Inputs>%(Inputs)</Inputs>
-      <Outputs>%(Outputs)</Outputs>
+      <Inputs>
+      </Inputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName>
@@ -294,27 +212,10 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      
       <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;__CLEANUP_SEH;WIN32;_DEBUG;_WINDOWS;PTW32_STATIC_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
-      
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;PTW32_RC_MSC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -323,48 +224,34 @@
     </ResourceCompile>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      
       <TargetMachine>MachineX86</TargetMachine>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
     <Bscmake>
-      
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CustomBuildStep>
       <Command>
       </Command>
-      <Inputs>%(Inputs)</Inputs>
-      <Outputs>%(Outputs)</Outputs>
+      <Inputs>
+      </Inputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>X64</TargetEnvironment>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      
       <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;WIN64;_WIN64;__CLEANUP_SEH;WIN32;_DEBUG;_WINDOWS;PTW32_STATIC_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
-      
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;PTW32_RC_MSC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -373,12 +260,10 @@
     </ResourceCompile>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      
       <TargetMachine>MachineX64</TargetMachine>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
     <Bscmake>
-      
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>

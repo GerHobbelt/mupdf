@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\scripts\tesseract\config_auto.h" />
+    <ClInclude Include="..\..\scripts\tesseract\endianness.h" />
     <ClInclude Include="..\..\source\fitz\tessocr.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\baseapi.h" />
     <ClInclude Include="..\..\thirdparty\tesseract\include\tesseract\capi.h" />
@@ -553,7 +555,12 @@
     <Text Include="..\..\thirdparty\tesseract\src\training\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\scripts\tesseract\copy-training-databases.cmd" />
+    <None Include="..\..\thirdparty\tesseract\ChangeLog" />
     <None Include="..\..\thirdparty\tesseract\include\tesseract\version.h.in" />
+    <None Include="..\..\thirdparty\tesseract\INSTALL.GIT.md" />
+    <None Include="..\..\thirdparty\tesseract\README.md" />
+    <None Include="..\..\thirdparty\tesseract\VERSION" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -604,21 +611,29 @@
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -658,11 +673,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE</UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -679,29 +695,40 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <CustomBuildStep>
-      <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
-robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
-</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Copying tesseract model data to [output]/tessdata/</Message>
+      <Message>
+      </Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDirFullPath)tessdata\eng.traineddata</Outputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <TreatOutputAsContent>true</TreatOutputAsContent>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;NDEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;NDEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE</UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -713,29 +740,40 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <CustomBuildStep>
-      <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
-robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
-</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Copying tesseract model data to [output]/tessdata/</Message>
+      <Message>
+      </Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDirFullPath)tessdata\eng.traineddata</Outputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <TreatOutputAsContent>true</TreatOutputAsContent>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE</UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -747,29 +785,40 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <CustomBuildStep>
-      <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
-robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
-</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Copying tesseract model data to [output]/tessdata/</Message>
+      <Message>
+      </Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDirFullPath)tessdata\eng.traineddata</Outputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <TreatOutputAsContent>true</TreatOutputAsContent>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;NDEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;NDEBUG</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\..\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica\src;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\scripts\libtiff;../../thirdparty/owemdjee/libarchive/libarchive</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>GRAPHICS_DISABLED;DISABLED_LEGACY_ENGINE</UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -781,19 +830,29 @@ robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirF
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <CustomBuildStep>
-      <Command>rem robocopy /S /XO /XJF /R:0 ..\..\thirdparty\tessdata_best\ Debug-64\tessdata\ *.* /XF .git*
-robocopy /S /XO /XJF /R:0 $(ProjectDir)..\..\thirdparty\tessdata_best\ $(OutDirFullPath)tessdata\ *.* /XF .git*
-</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Copying tesseract model data to [output]/tessdata/</Message>
+      <Message>
+      </Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDirFullPath)tessdata\eng.traineddata</Outputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <TreatOutputAsContent>true</TreatOutputAsContent>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
