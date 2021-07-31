@@ -58,7 +58,7 @@ void *leptonica_realloc(void *ptr, size_t blocksize)
 	fz_error("%d LEPTONICA_REALLOC %p,%d -> %p\n", event++, ptr, (int)blocksize, ret);
 	fflush(stderr);
 #endif
-	return NULL;
+	return ret;
 }
 
 #if TESSERACT_MAJOR_VERSION >= 5
