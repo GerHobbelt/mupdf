@@ -202,7 +202,7 @@ fz_print_stext_trailer_as_html(fz_context *ctx, fz_output *out)
 /* XHTML output (semantic, little layout, suitable for reflow) */
 
 static void
-fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, fz_stext_options *options)
+fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, const fz_stext_options *options)
 {
 	float w = block->bbox.x1 - block->bbox.x0;
 	float h = block->bbox.y1 - block->bbox.y0;
