@@ -15,6 +15,7 @@
 #include "../../thirdparty/owemdjee/brotli/c/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/jpeg-xl/lib/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/sqlite/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -94,6 +95,9 @@ static struct {
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
 
 	{ pdfmetadump_main, "metadump", "multitool shows information about pdf in JSON format" },
+
+	{ qiqqa_muannot_main, "muannot", "Qiqqa annotation processing utility to help extract and inject (import/export) PDF annotations" },
+	{ qiqqa_muserver_main, "muserver", "Qiqqa/MuPDF local web server: the Qiqqa database and file management backend" },
 
 	{ qiqqa_fingerprint0_main, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
 	{ qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
@@ -184,9 +188,22 @@ static struct {
 	{ jpegXL_dec_enc_main, "jxl_dec_enc", "jxl_dec_enc tool" },
 	{ jpegXL_epf_main, "jxl_epf", "jxl_epf tool" },
 	{ jpegXL_from_tree_main, "jxl_from_tree", "jxl_from_tree tool" },
-	{ jpegXL_ssimulacra_main, "jxl_ssimulacra tool" },
+	{ jpegXL_ssimulacra_main, "jxl_ssimulacra tool", "jxl_ssimulacra tool" },
 //	{ jpegXL_ssimulacra_openCV_main, "jxl_ssimulacra_openCV", "jxl_ssimulacra_openCV tool" },
 	{ jpegXL_xyb_range_main, "jxl_xyb_range", "jxl_xyb_range tool" },
+
+	{ crow_example_basic_main, "crow_basic", "crow basic example tool" },
+	{ crow_example_catch_all_main, "crow_catch_all", "crow catch-all example tool" },
+	{ crow_example_chat_main, "crow_chat", "crow chat example tool" },
+	{ crow_example_compression_main, "crow_compression", "crow compression example tool" },
+	{ crow_example_json_map_main, "crow_json_map", "crow json map example tool" },
+	{ crow_example_static_file_main, "crow_static_file", "crow static file example tool" },
+	{ crow_example_vs_main, "crow_vs", "crow vs example tool" },
+	{ crow_example_with_all_main, "crow_w_all", "crow 'with all features' example tool" },
+	{ crow_hello_world_main, "crow_hello", "crow hello example tool" },
+	{ crow_example_ssl_main, "crow_ssl", "crow ssl example tool" },
+	{ crow_example_ws_main, "crow_ws", "crow ws example tool" },
+	{ crow_mustache_main, "crow_mustache", "crow mustache example tool" },
 
 	{ report_version, "version", "report version of this build / tools" },
 };

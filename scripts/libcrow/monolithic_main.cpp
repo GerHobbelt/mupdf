@@ -10,19 +10,8 @@
 #endif
 #include <errno.h>
 
+#include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
 
-int crow_example_basic_main();
-int crow_example_catch_all_main();
-int crow_example_chat_main();
-int crow_example_compression_main();
-int crow_example_json_map_main();
-int crow_example_static_file_main();
-int crow_example_vs_main();
-int crow_example_with_all_main();
-int crow_hello_world_main();
-int crow_example_ssl_main();
-int crow_example_ws_main();
-int crow_mustache_main();
 
 typedef int tool_f();
 

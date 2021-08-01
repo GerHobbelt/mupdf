@@ -218,6 +218,10 @@ EXPORTS
 
 %(zstd_exports)s
 
+; crow exports
+
+%(crow_exports)s
+
 ; MarkDown exports
 
 %(markdown_exports)s
@@ -293,6 +297,7 @@ def main():
 	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["JS_AddIntrinsicBigDecimal", "JS_AddIntrinsicBigFloat", "JS_AddIntrinsicBigInt", "JS_AddIntrinsicOperators", "JS_EnableBignumExt", "__js_printf_like", "JS_FreeValue", "JS_FreeValueRT", "qjs_port_malloc", "qjs_port_realloc", "qjs_port_free", "qjs_port_malloc_usable_size"])
 	markdown_exports = generateExports("thirdparty/owemdjee/upskirt-markdown/bin")
 	zstd_exports = generateExports("thirdparty/owemdjee/zstd/programs", ["zstd_fitblk_example_main", "zstd_mini_gzip_main", "zstd_zwrapbench_main"])
+	crow_exports = generateExports("thirdparty/owemdjee/crow/include/crow/monolithic_examples.h")
 	mupdfdll_exports = generateExports("scripts/MuPDFLib/versions-api.h")
 
 	list = LIBMUPDF_DEF % locals()
