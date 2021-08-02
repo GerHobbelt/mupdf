@@ -161,17 +161,13 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 	if (!jwidgets || (*env)->ExceptionCheck(env)) jni_throw_null(env, "cannot wrap page widgets in object array");
 
 	widget = widgets;
-	for (i = 0; widget && i < count;)
+	for (i = 0, count = 0; widget; widget = pdf_next_annot(ctx, widget))
 	{
 		if (pdf_annot_type(ctx, widget) == PDF_ANNOT_WIDGET)
 		{
-			jobject jwidget = NULL;
-
-			if (widget)
-			{
-				jwidget = to_PDFWidget_safe(ctx, env, widget);
-				if (!jwidget) return NULL;
-			}
+			assert(i < count);
+			jobject jwidget = to_PDFWidget_safe(ctx, env, widget);
+			if (!jwidget) return NULL;
 
 			(*env)->SetObjectArrayElement(env, jwidgets, i, jwidget);
 			if ((*env)->ExceptionCheck(env)) return NULL;
@@ -180,11 +176,6 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 
 			i++;
 		}
-
-		fz_try(ctx)
-			widget = pdf_next_annot(ctx, widget);
-		fz_catch(ctx)
-			jni_rethrow(env, ctx);
 	}
 
 	return jwidgets;

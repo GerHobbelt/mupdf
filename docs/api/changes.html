@@ -46,10 +46,14 @@ functions, in that sometimes they returned a borrowed reference, rather
 than a reference that the caller had to drop. We now always return a
 reference that the caller owns and must drop.</p>
 
-<p>We have removed pdf_first_widget/pdf_next_widget and the pdf_widget
-type. Widgets are now returned as part of the pdf_first_annot/pdf_next_annot
-enumeration, and callers can identify them by checking pdf_annot_type to
-see if returns PDF_ANNOT_WIDGET.</p>
+<p>We have removed the differentiation between annots and widgets at the
+fitz level. Accordingly, fz_run_page_widgets has disappeared, and they
+are rendered as part of fz_run_page_annots (and fz_run_page as usual).
+At the PDF level, pdf_first_raw_annot/pdf_next_raw_annot enumerate all
+both non-widget and widget annotations together, and callers can tell
+the difference by checking pdf_annot_type to see if returns
+PDF_ANNOT_WIDGET. This resolves issues with rendering annots and widgets
+in the wrong order.</p>
 
 <h2>Changes from 1.17 to 1.18</h2>
 
