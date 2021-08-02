@@ -46,12 +46,6 @@ ifeq ($(USE_TESSERACT),yes)
   endif
 endif
 
-# Use of Extract is optional:
-ifeq ($(USE_EXTRACT),yes)
-  ifneq ($(wildcard thirdparty/extract/src/*),)
-    HAVE_EXTRACT := yes
-  endif
-endif
 
 # Use of jpeg-xl is optional:
 ifeq ($(USE_JPEGXL),yes)
@@ -59,7 +53,6 @@ ifeq ($(USE_JPEGXL),yes)
     HAVE_JPEGXL := yes
   endif
 endif
-
 
 # --- Include source file lists ---
 
@@ -327,15 +320,9 @@ endif
 
 # --- EXTRACT ---
 
-ifeq ($(HAVE_EXTRACT),yes)
-  THIRD_CFLAGS += -DHAVE_EXTRACT
-ifeq ($(USE_SYSTEM_EXTRACT),yes)
-  THIRD_CFLAGS += $(SYS_EXTRACT_CFLAGS)
-  THIRD_LIBS += $(SYS_EXTRACT_LIBS)
-else
-  THIRD_CFLAGS += $(EXTRACT_CFLAGS)
-  THIRD_LIBS += $(EXTRACT_LIBS)
-  THIRD_SRC += $(EXTRACT_SRC)
+THIRD_CFLAGS += $(EXTRACT_CFLAGS)
+THIRD_LIBS += $(EXTRACT_LIBS)
+THIRD_SRC += $(EXTRACT_SRC)
 $(OUT)/thirdparty/extract/%.o: thirdparty/extract/%.c
 	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(EXTRACT_CFLAGS) $(EXTRACT_BUILD_CFLAGS)
 
@@ -352,9 +339,6 @@ thirdparty/extract/src/odt_template.c: thirdparty/extract/src/template.odt third
 		-o thirdparty/extract/src/odt_template
 
 generate: thirdparty/extract/src/docx_template.c
-
-endif
-endif
 
 # --- JPEGXL ---
 
