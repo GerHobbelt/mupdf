@@ -239,7 +239,6 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 	if (is_extension(format, "stext.json"))
 		return fz_new_text_writer_with_output(ctx, "stext.json", out, options);
 
-#ifdef HAVE_EXTRACT
 	if (is_extension(format, "odt"))
 	{
 		return fz_new_odt_writer_with_output(ctx, out, options);
@@ -248,16 +247,6 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 	{
 		return fz_new_docx_writer_with_output(ctx, out, options);
 	}
-#else
-	if (is_extension(format, "odt"))
-	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "odt output not available in this build.");
-	}
-	if (is_extension(format, "docx"))
-	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "docx output not available in this build.");
-	}
-#endif
 
 	fz_throw(ctx, FZ_ERROR_GENERIC, "unknown output document format: %s", format);
 }
