@@ -325,7 +325,9 @@ static int write_level_end(fz_context* ctx, fz_output* out, const char bracket_c
 
 static size_t write_level_guarantee_level(fz_context* ctx, fz_output* out, int target_stack_level)
 {
-	size_t stack_offset = strlen(json_stack);
+	int stack_offset = (int)strlen(json_stack);
+
+	assert(target_stack_level >= 0);
 
 	// see if we need to pop off elements off the stack:
 	if (target_stack_level < stack_offset) {

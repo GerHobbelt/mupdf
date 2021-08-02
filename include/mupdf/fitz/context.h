@@ -290,8 +290,10 @@ void fz_default_info_callback(void* user, const char* message);
 */
 void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info);
 
+void fz_enable_dbg_output(int severity);
+
 /**
- * The protoype of the error/warning/info callback.
+ * The prototype of the error/warning/info callback.
  */
 typedef void fz_error_print_callback(void* user, const char* message);
 

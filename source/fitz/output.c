@@ -109,8 +109,6 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 			}
 			else if (clock() - tick >= 15 * CLOCKS_PER_SEC)
 			{
-				extern void fz_enable_dbg_output(int severity);
-
 				caller_is_aborted = 1;
 				fz_enable_dbg_output(1);
 				fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to STDOUT: timeout (15 seconds) while waiting for FileWrite() API to accept a byte to write (written %zu of %zu bytes)", count - n, count);
