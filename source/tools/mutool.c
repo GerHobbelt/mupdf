@@ -97,6 +97,7 @@ static struct {
 	{ pdfmetadump_main, "metadump", "multitool shows information about pdf in JSON format" },
 
 	{ qiqqa_muannot_main, "muannot", "Qiqqa annotation processing utility to help extract and inject (import/export) PDF annotations" },
+	{ qiqqa_mucontent_main, "mucontent", "Qiqqa PDF content extraction / injection utility to help extract and inject (import/export) PDF content in text and hOCR formats" },
 	{ qiqqa_muserver_main, "muserver", "Qiqqa/MuPDF local web server: the Qiqqa database and file management backend" },
 
 	{ qiqqa_fingerprint0_main, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },

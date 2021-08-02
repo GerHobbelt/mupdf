@@ -43,6 +43,7 @@ int qiqqa_fingerprint0_main(int argc, const char* argv[]);
 int qiqqa_fingerprint1_main(int argc, const char* argv[]);
 
 int qiqqa_muannot_main(int argc, const char* argv[]);
+int qiqqa_mucontent_main(int argc, const char* argv[]);
 int qiqqa_muserver_main(int argc, const char* argv[]);
 
 int sqlite_main(int argc, const char** argv);
