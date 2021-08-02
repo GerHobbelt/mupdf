@@ -2638,7 +2638,7 @@ pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *b
 	if (!strcmp(key, FZ_META_FORMAT))
 	{
 		int version = pdf_version(ctx, doc);
-		return 1 + (int)fz_snprintf(buf, size, "PDF %d.%d", version/10, version % 10);
+		return 1 + (int)fz_snprintf(buf, size, "PDF %d.%d", version / 10, version % 10);
 	}
 
 	if (!strcmp(key, FZ_META_ENCRYPTION))
