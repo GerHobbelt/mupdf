@@ -512,12 +512,7 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 		}
 
 		app->docpath = fz_strdup(ctx, filename);
-		app->doctitle = filename;
-		if (strrchr(app->doctitle, '\\'))
-			app->doctitle = strrchr(app->doctitle, '\\') + 1;
-		if (strrchr(app->doctitle, '/'))
-			app->doctitle = strrchr(app->doctitle, '/') + 1;
-		app->doctitle = fz_strdup(ctx, app->doctitle);
+		app->doctitle = fz_strdup(ctx, fz_path_basename(filename));
 
 		fz_layout_document(app->ctx, app->doc, app->layout_w, app->layout_h, app->layout_em);
 
@@ -632,20 +627,14 @@ void pdfapp_close(pdfapp_t *app)
 static int gen_tmp_file(char *buf, int len)
 {
 	int i;
-	char *name = strrchr(buf, '/');
-
-	if (name == NULL)
-		name = strrchr(buf, '\\');
-
-	if (name != NULL)
-		name++;
-	else
-		name = buf;
+	char *name = (char *)fz_path_basename(buf);
+	len -= name - buf;
 
 	for (i = 0; i < 10000; i++)
 	{
 		FILE *f;
-		sprintf(name, "tmp%04d", i);
+		fz_snprintf(name, len, "tmp%04d", i);
+		assert(strlen(name) < len);
 		f = fopen(buf, "r");
 		if (f == NULL)
 			return 1;

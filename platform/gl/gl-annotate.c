@@ -470,13 +470,7 @@ static void open_attachment_dialog(void)
 				char *filename;
 				pdf_obj *fs;
 
-				filename = strrchr(attach_filename, '/');
-				if (!filename)
-					filename = strrchr(attach_filename, '\\');
-				if (filename)
-					++filename;
-				else
-					filename = attach_filename;
+				filename = fz_path_basename(attach_filename);
 
 				contents = fz_read_file(ctx, attach_filename);
 				fs = pdf_add_embedded_file(ctx, pdf, filename, NULL, contents);
