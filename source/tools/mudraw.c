@@ -571,7 +571,7 @@ static void reset_page_counter(void) {
 
 /* Output file level (as opposed to page level) headers */
 static void
-file_level_headers(fz_context *ctx)
+file_level_headers(fz_context *ctx, const char *filename)
 {
 	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
 		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
@@ -588,7 +588,7 @@ file_level_headers(fz_context *ctx)
 	else if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
 		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX)
 	{
-		fz_write_printf(ctx, out, "<document name=\"%s\">\n", filename);
+		fz_write_printf(ctx, out, "<document name=\"%s\">\n", fz_path_basename(filename));
 	}
 	else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "{%q:%q,%q:[", "file", filename, "pages");
@@ -798,7 +798,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	fz_var(dev);
 
 	if (output_file_per_page)
-		file_level_headers(ctx);
+		file_level_headers(ctx, fname);
 
 	if (list)
 		mediabox = fz_bound_display_list(ctx, list);
@@ -2811,7 +2811,7 @@ int main(int argc, const char** argv)
 			}
 		}
 
-		// report output format in verbode mode:
+		// report output format in verbose mode:
 		if (!quiet)
 		{
 			int i;
@@ -2849,7 +2849,7 @@ int main(int argc, const char** argv)
 		fz_try(ctx)
 		{
 			if (!output_file_per_page)
-				file_level_headers(ctx);
+				file_level_headers(ctx, fz_optind < argc ? argv[fz_optind] : "-");
 			fz_register_document_handlers(ctx);
 
 			while (fz_optind < argc)
