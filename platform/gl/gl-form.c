@@ -140,7 +140,6 @@ static void signature_appearance_dialog(void)
 
 		{
 			fz_pixmap *pix;
-			static struct texture preview_tex = { 0 };
 			pdf_pkcs7_signer *signer;
 
 			ui_panel_begin(0, ui.gridsize * 6, 0, 0, 0);
