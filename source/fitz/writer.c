@@ -147,8 +147,10 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 		format = strrchr(path, '.');
 	while (format)
 	{
+#ifdef FZ_ENABLE_OCR_OUTPUT
 		if (is_extension(format, "ocr"))
 			return fz_new_pdfocr_writer(ctx, path, options);
+#endif
 #if FZ_ENABLE_PDF
 		if (is_extension(format, "pdf"))
 			return fz_new_pdf_writer(ctx, path, options);
@@ -195,11 +197,14 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 		if (is_extension(format, "stext.json"))
 			return fz_new_text_writer(ctx, "stext.json", path, options);
 
+#ifdef FZ_ENABLE_ODT_OUTPUT
 		if (is_extension(format, "odt"))
 			return fz_new_odt_writer(ctx, path, options);
+#endif
+#ifdef FZ_ENABLE_DOCX_OUTPUT
 		if (is_extension(format, "docx"))
 			return fz_new_docx_writer(ctx, path, options);
-
+#endif
 		if (format != explicit_format)
 			format = prev_period(path, format);
 		else
