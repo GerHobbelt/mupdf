@@ -81,14 +81,18 @@ typedef struct
 
 const char *fz_stext_options_usage =
 	"Text output options:\n"
-	"\tinhibit-spaces: don't add spaces between gaps in the text\n"
-	"\tpreserve-images: keep images in output\n"
-	"\tpreserve-ligatures: do not expand ligatures into constituent characters\n"
-	"\tpreserve-whitespace: do not convert all whitespace into space characters\n"
-	"\tpreserve-spans: do not merge spans on the same line\n"
-	"\tdehyphenate: attempt to join up hyphenated words\n"
-	"\tmediabox-clip=no: include characters outside mediabox\n"
-	"\n";
+	"\tinhibit-spaces:       don't add spaces between gaps in the text\n"
+	"\tpreserve-images:      keep images in output\n"
+	"\tpreserve-ligatures:   do not expand ligatures into constituent characters\n"
+	"\tpreserve-whitespace:  do not convert all whitespace into space characters\n"
+	"\tpreserve-spans:       do not merge spans on the same line\n"
+	"\treference-images=no:  (default) output images as data URIs\n"
+	"\t                =yes: output image reference URI only\n"
+	"\treuse-images:        duplicate images share the same URI\n"
+	"\tdehyphenate:         attempt to join up hyphenated words\n"
+	"\tmediabox-clip=no:    include characters outside mediabox\n"
+	"\ttext-as-path:        (SVG: default) output text as curves\n"
+    "\n";
 
 fz_stext_page *
 fz_new_stext_page(fz_context *ctx, fz_rect mediabox)
@@ -818,17 +822,20 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags |= FZ_STEXT_PRESERVE_IMAGES;
 	if (fz_has_option(ctx, string, "reference-images", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_REFERENCE_IMAGES;
+	if (fz_has_option(ctx, string, "reuse-images", &val) && fz_option_eq(val, "no"))
+		opts->flags |= FZ_STEXT_NO_REUSE_IMAGES;
 	if (fz_has_option(ctx, string, "inhibit-spaces", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_INHIBIT_SPACES;
 	if (fz_has_option(ctx, string, "dehyphenate", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_DEHYPHENATE;
 	if (fz_has_option(ctx, string, "preserve-spans", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_PRESERVE_SPANS;
-
+	// default: enable MEDIABOX-CLIP:
 	opts->flags |= FZ_STEXT_MEDIABOX_CLIP;
 	if (fz_has_option(ctx, string, "mediabox-clip", &val) && fz_option_eq(val, "no"))
-		opts->flags ^= FZ_STEXT_MEDIABOX_CLIP;
-
+		opts->flags &= ~FZ_STEXT_MEDIABOX_CLIP;
+	if (fz_has_option(ctx, string, "text-as-path", &val) && fz_option_eq(val, "no"))
+		opts->flags |= FZ_STEXT_NO_TEXT_AS_PATH;
 	return opts;
 }
 
