@@ -767,7 +767,7 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 
 				bp[k] = ra - rc;
 			}
-			break;
+			break; //-V612
 		}
 
 		sp += n1 + sal;

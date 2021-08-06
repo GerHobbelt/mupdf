@@ -70,8 +70,6 @@ fz_account_colorspace(fz_context* ctx, fz_stats_device* writer, fz_colorspace* c
 	}
 	else
 	{
-		int n = fz_colorspace_n(ctx, colorspace);
-
 		writer->stats.colorspaces.indexed++;
 		MINIMIZE(writer->stats.colorspaces.indexed_smallest, writer->stats.colorspaces.indexed);
 		MAXIMIZE(writer->stats.colorspaces.indexed_largest, writer->stats.colorspaces.indexed);
@@ -159,8 +157,6 @@ fz_stats_clip_path(fz_context* ctx, fz_device* dev, const fz_path* path, int eve
 {
 	fz_rect rect = fz_bound_path(ctx, path, NULL, ctm);
 	rect = fz_intersect_rect(rect, scissor);
-
-	int flags = even_odd; /* flags */
 
 	fz_stats_device* writer = (fz_stats_device*)dev;
 

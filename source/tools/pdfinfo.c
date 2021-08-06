@@ -226,7 +226,6 @@ showglobalinfo(fz_context *ctx, globals *glo)
 			if (is_xml_metadata(ctx, obj))
 			{
 				char* data = NULL;
-				fz_xml_doc* container_xml = NULL;
 				size_t datalen = 0;
 
 				fz_try(ctx)

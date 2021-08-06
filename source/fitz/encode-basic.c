@@ -319,7 +319,7 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 	state->z.avail_in = (uInt)n;
 	do
 	{
-		state->z.next_out = buffer;
+		state->z.next_out = buffer; //-V507
 		state->z.avail_out = sizeof buffer;
 		err = zng_deflate(&state->z, Z_NO_FLUSH);
 		if (err != Z_OK)
@@ -327,6 +327,7 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 		if (state->z.avail_out > 0)
 			fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 	} while (state->z.avail_out > 0);
+	// making sure that the local `buffer[]` reference doesn't make it outside this scope.
 	state->z.next_out = NULL;
 	state->z.avail_out = 0;
 }
@@ -341,12 +342,13 @@ static void deflate_close(fz_context *ctx, void *opaque)
 	state->z.avail_in = 0;
 	do
 	{
-		state->z.next_out = buffer;
+		state->z.next_out = buffer; //-V507
 		state->z.avail_out = sizeof buffer;
 		err = zng_deflate(&state->z, Z_FINISH);
 		if (state->z.avail_out > 0)
 			fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 	} while (err == Z_OK);
+	// making sure that the local `buffer[]` reference doesn't make it outside this scope.
 	state->z.next_out = NULL;
 	state->z.avail_out = 0;
 
