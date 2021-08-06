@@ -5340,12 +5340,9 @@ static void ffi_PDFPage_getAnnotations(js_State *J)
 	js_newarray(J);
 
 	while (annot) {
-		if (pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET)
-		{
-			js_getregistry(J, "pdf_annot");
-			js_newuserdata(J, "pdf_annot", pdf_keep_annot(ctx, annot), ffi_gc_pdf_annot);
-			js_setindex(J, -2, i++);
-		}
+		js_getregistry(J, "pdf_annot");
+		js_newuserdata(J, "pdf_annot", pdf_keep_annot(ctx, annot), ffi_gc_pdf_annot);
+		js_setindex(J, -2, i++);
 
 		fz_try(ctx)
 			annot = pdf_next_annot(ctx, annot);

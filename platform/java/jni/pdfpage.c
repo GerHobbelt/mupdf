@@ -87,8 +87,7 @@ FUN(PDFPage_getAnnotations)(JNIEnv *env, jobject self)
 
 		count = 0;
 		for (annot = annots; annot; annot = pdf_next_annot(ctx, annot))
-			if (pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET)
-				count++;
+			count++;
 	}
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
@@ -104,18 +103,15 @@ FUN(PDFPage_getAnnotations)(JNIEnv *env, jobject self)
 	annot = annots;
 	for (i = 0; annot && i < count; )
 	{
-		if (pdf_annot_type(ctx, annot) != PDF_ANNOT_WIDGET)
-		{
-			jobject jannot = to_PDFAnnotation_safe(ctx, env, annot);
-			if (!jannot) return NULL;
+		jobject jannot = to_PDFAnnotation_safe(ctx, env, annot);
+		if (!jannot) return NULL;
 
-			(*env)->SetObjectArrayElement(env, jannots, i, jannot);
-			if ((*env)->ExceptionCheck(env)) return NULL;
+		(*env)->SetObjectArrayElement(env, jannots, i, jannot);
+		if ((*env)->ExceptionCheck(env)) return NULL;
 
-			(*env)->DeleteLocalRef(env, jannot);
+		(*env)->DeleteLocalRef(env, jannot);
 
-			i++;
-		}
+		i++;
 
 		fz_try(ctx)
 			annot = pdf_next_annot(ctx, annot);
@@ -142,12 +138,11 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 	/* count the widgets */
 	fz_try(ctx)
 	{
-		widgets = pdf_first_annot(ctx, page);
+		widgets = pdf_first_widget(ctx, page);
 
 		widget = widgets;
-		for (count = 0; widget; widget = pdf_next_annot(ctx, widget))
-			if (pdf_annot_type(ctx, widget) == PDF_ANNOT_WIDGET)
-				count++;
+		for (count = 0; widget; widget = pdf_next_widget(ctx, widget))
+			count++;
 	}
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
@@ -161,21 +156,18 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 	if (!jwidgets || (*env)->ExceptionCheck(env)) jni_throw_null(env, "cannot wrap page widgets in object array");
 
 	widget = widgets;
-	for (i = 0, count = 0; widget; widget = pdf_next_annot(ctx, widget))
+	for (i = 0, count = 0; widget; widget = pdf_next_widget(ctx, widget))
 	{
-		if (pdf_annot_type(ctx, widget) == PDF_ANNOT_WIDGET)
-		{
-			assert(i < count);
-			jobject jwidget = to_PDFWidget_safe(ctx, env, widget);
-			if (!jwidget) return NULL;
+		assert(i < count);
+		jobject jwidget = to_PDFWidget_safe(ctx, env, widget);
+		if (!jwidget) return NULL;
 
-			(*env)->SetObjectArrayElement(env, jwidgets, i, jwidget);
-			if ((*env)->ExceptionCheck(env)) return NULL;
+		(*env)->SetObjectArrayElement(env, jwidgets, i, jwidget);
+		if ((*env)->ExceptionCheck(env)) return NULL;
 
-			(*env)->DeleteLocalRef(env, jwidget);
+		(*env)->DeleteLocalRef(env, jwidget);
 
-			i++;
-		}
+		i++;
 	}
 
 	return jwidgets;

@@ -383,10 +383,8 @@ static void *find_widget_on_page(fz_context *ctx, fz_page *page_, void *state_)
 	if (state->pageobj && pdf_objcmp_resolve(ctx, state->pageobj, page->obj))
 		return NULL;
 
-	for (widget = pdf_first_annot(ctx, page); widget != NULL; widget = pdf_next_annot(ctx, widget))
+	for (widget = pdf_first_widget(ctx, page); widget != NULL; widget = pdf_next_widget(ctx, widget))
 	{
-		if (pdf_annot_type(ctx, widget) != PDF_ANNOT_WIDGET)
-			continue;
 		if (!pdf_objcmp_resolve(ctx, state->chk, widget->obj))
 			return widget;
 	}

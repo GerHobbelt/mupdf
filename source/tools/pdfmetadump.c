@@ -1553,17 +1553,45 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 		{
 			pdf_annot* annot;
 
-			int n = 0;
+			int an = 0;
+			int wn = 0;
 			for (annot = pdf_first_annot(ctx, page_obj); annot; annot = pdf_next_annot(ctx, annot))
-				++n;
+				++an;
+			for (annot = pdf_first_widget(ctx, page_obj); annot; annot = pdf_next_widget(ctx, annot))
+				++wn;
 
-			if (n > 0)
+			write_item_int(ctx, out, "AnnotationCount", an);
+			write_item_int(ctx, out, "WidgetCount", wn);
+
+			if (an > 0)
 			{
-				write_item_int(ctx, out, "AnnotationsCount", n);
 				write_item_starter_block(ctx, out, "Annotations", '[');
 
 				int idx;
 				for (idx = 0, annot = pdf_first_annot(ctx, page_obj); annot; ++idx, annot = pdf_next_annot(ctx, annot))
+				{
+					write_sep(ctx, out);
+					write_level_start(ctx, out, '{');
+
+					int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
+					enum pdf_annot_type subtype = pdf_annot_type(ctx, annot);
+					write_item_int(ctx, out, "AnnotNumber", num);
+					write_item(ctx, out, "AnnotType", pdf_string_from_annot_type(ctx, subtype));
+
+					show_annot_info(ctx, out, ctm, annot);
+
+					write_level_end(ctx, out, '}');
+				}
+
+				write_level_end(ctx, out, ']');
+			}
+
+			if (wn > 0)
+			{
+				write_item_starter_block(ctx, out, "Widgets", '[');
+
+				int idx;
+				for (idx = 0, annot = pdf_first_widget(ctx, page_obj); annot; ++idx, annot = pdf_next_widget(ctx, annot))
 				{
 					write_sep(ctx, out);
 					write_level_start(ctx, out, '{');

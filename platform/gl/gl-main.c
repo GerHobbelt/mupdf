@@ -845,10 +845,8 @@ void load_page(void)
 		pdf_annot *w;
 		int i, s;
 
-		for (i = 0, s = 0, w = pdf_first_annot(ctx, page); w != NULL; i++, w = pdf_next_annot(ctx, w))
+		for (i = 0, s = 0, w = pdf_first_widget(ctx, page); w != NULL; i++, w = pdf_next_widget(ctx, w))
 		{
-			if (pdf_annot_type(ctx, w) != PDF_ANNOT_WIDGET)
-				continue;
 			if (pdf_widget_type(ctx, w) == PDF_WIDGET_TYPE_SIGNATURE)
 			{
 				int is_signed;

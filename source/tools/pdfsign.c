@@ -108,10 +108,8 @@ static void clear_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatu
 		parent = pdf_dict_get(ctx, signature, PDF_NAME(P));
 		pageno = pdf_lookup_page_number(ctx, doc, parent);
 		page = pdf_load_page(ctx, doc, pageno);
-		for (widget = pdf_first_annot(ctx, page); widget; widget = pdf_next_annot(ctx, widget))
+		for (widget = pdf_first_widget(ctx, page); widget; widget = pdf_next_widget(ctx, widget))
 		{
-			if (pdf_annot_type(ctx, widget) != PDF_ANNOT_WIDGET)
-				continue;
 			if (pdf_widget_type(ctx, widget) == PDF_WIDGET_TYPE_SIGNATURE && !pdf_objcmp_resolve(ctx, pdf_annot_obj(ctx, widget), signature))
 				pdf_clear_signature(ctx, widget);
 		}
@@ -142,10 +140,8 @@ static void sign_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signatur
 		parent = pdf_dict_get(ctx, signature, PDF_NAME(P));
 		pageno = pdf_lookup_page_number(ctx, doc, parent);
 		page = pdf_load_page(ctx, doc, pageno);
-		for (widget = pdf_first_annot(ctx, page); widget; widget = pdf_next_annot(ctx, widget))
+		for (widget = pdf_first_widget(ctx, page); widget; widget = pdf_next_widget(ctx, widget))
 		{
-			if (pdf_annot_type(ctx, widget) != PDF_ANNOT_WIDGET)
-				continue;
 			if (pdf_widget_type(ctx, widget) == PDF_WIDGET_TYPE_SIGNATURE && !pdf_objcmp_resolve(ctx, pdf_annot_obj(ctx, widget), signature))
 				pdf_sign_signature(ctx, widget, signer,
 					PDF_SIGNATURE_DEFAULT_APPEARANCE,
