@@ -1,4 +1,4 @@
-#include "mupdf/fitz.h"
+﻿#include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
 
 #include "glyphbox.h"
@@ -498,6 +498,164 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	dev->trm = trm;
 }
 
+static const struct liga {
+	int unicode;
+	const char* expansion;
+} ligatures[] = {
+	// table taken from https://en.wikipedia.org/wiki/Ligature_(writing)
+	//{ 0x0057, /* W */ "UU" },
+	//{ 0x0077, /* w */ "uu" },
+	{ 0x00C6, /* Æ */ "AE" },
+	{ 0x00DF, /* ß */ "ſz" },
+	{ 0x00E6, /* æ */ "ae" },
+	{ 0x0152, /* Œ */ "OE" },
+	{ 0x0153, /* œ */ "oe" },
+	{ 0x0195, /* ƕ */ "hv" },
+	{ 0x01F6, /* Ƕ */ "Hv" },
+	{ 0x0238, /* ȸ */ "db" },
+	{ 0x0239, /* ȹ */ "qp" },
+	{ 0x026E, /* ɮ */ "lʒ" },
+	{ 0x026F, /* ɯ */ "uu" },
+	{ 0x02A3, /* ʣ */ "dz" },
+	{ 0x02A4, /* ʤ */ "dʒ" },
+	{ 0x02A5, /* ʥ */ "dʑ" },
+	{ 0x02A6, /* ʦ */ "ts" },
+	{ 0x02A7, /* ʧ */ "tʃ" },
+	{ 0x02A8, /* ʨ */ "tɕ" },
+	{ 0x02A9, /* ʩ */ "fŋ" },
+	{ 0x02AA, /* ʪ */ "ls" },
+	{ 0x02AB, /* ʫ */ "lz" },
+	{ 0x1D6B, /* ᵫ */ "ue" },
+	{ 0x1E9E, /* ẞ */ "ſs" },
+	{ 0x1EFA, /* Ỻ */ "lL" },
+	{ 0x1EFB, /* ỻ */ "ll" },
+	{ 0x2114, /* ℔ */ "lb" },
+	{ 0xA728, /* Ꜩ */ "TZ" },
+	{ 0xA729, /* ꜩ */ "tz" },
+	{ 0xA732, /* Ꜳ */ "AA" },
+	{ 0xA733, /* ꜳ */ "aa" },
+	{ 0xA734, /* Ꜵ */ "AO" },
+	{ 0xA735, /* ꜵ */ "ao" },
+	{ 0xA736, /* Ꜷ */ "AU" },
+	{ 0xA737, /* ꜷ */ "au" },
+	{ 0xA738, /* Ꜹ */ "AV" },
+	{ 0xA739, /* ꜹ */ "av" },
+	{ 0xA73A, /* Ꜻ */ "AV" },
+	{ 0xA73B, /* ꜻ (with bar) */ "av" },
+	{ 0xA73C, /* Ꜽ */ "AY" },
+	{ 0xA73D, /* ꜽ */ "ay" },
+	{ 0xA74E, /* Ꝏ */ "OO" },
+	{ 0xA74F, /* ꝏ */ "oo" },
+	{ 0xA760, /* Ꝡ */ "VY" },
+	{ 0xA761, /* ꝡ */ "vy" },
+	{ 0xAB31, /* ꬱ */ "aə" },
+	{ 0xAB41, /* ꭁ */ "əø" },
+	{ 0xAB50, /* ꭐ */ "ui" },
+	{ 0xAB51, /* ꭑ (turned) */ "ui" },
+	{ 0xAB62, /* ꭢ */ "ɔe" },
+	{ 0xAB63, /* ꭣ */ "uo" },
+	{ 0xAB66, /* ꭦ */ "dʐ" },
+	{ 0xAB67, /* ꭧ */ "tʂ" },
+	{ 0xFB00, /* ﬀ */ "ff" },
+	{ 0xFB01, /* ﬁ */ "fi" },
+	{ 0xFB02, /* ﬂ */ "fl" },
+	{ 0xFB03, /* ﬃ */ "ffi" },
+	{ 0xFB04, /* ﬄ */ "ffl" },
+	{ 0xFB05, /* ﬅ */ "ſt" },
+	{ 0xFB06, /* ﬆ */ "st" },
+	{ 0x1F670, /* 🙰 */ "et" },
+};
+static const int ligature_count = sizeof(ligatures) / sizeof(ligatures[0]);
+
+
+static inline const char* get_ligature_replacement(int c)
+{
+	int i = c / ligature_count;   // initial index guess
+	const struct liga* el = NULL;
+
+	for (;;)
+	{
+		el = &ligatures[i];
+		if (el->unicode == c)
+			break;
+		if (el->unicode > c)
+		{
+			// did we hit the left edge? if we did, it's quitting time
+			if (i == 0)
+			{
+				el = NULL;
+				break;
+			}
+
+			// next guess: below
+			i /= 2;
+		}
+		else
+		{
+			// did we hit the right edge? if we did, it's quitting time
+			if (i == ligature_count - 1)
+			{
+				el = NULL;
+				break;
+			}
+
+			// next guess: above
+			int d = ligature_count - i;
+			i += d / 2;
+		}
+	}
+
+	if (el)
+	{
+		return el->expansion;
+	}
+	return NULL;
+}
+
+
+const char* fz_get_ligature_replacement(int c)
+{
+	return get_ligature_replacement(c);
+}
+
+
+static inline int is_whitespace(int c)
+{
+	switch (c)
+	{
+	case 0x0009: /* tab */
+	case 0x0020: /* space */
+	case 0x00A0: /* no-break space */
+	case 0x1680: /* ogham space mark */
+	case 0x180E: /* mongolian vowel separator */
+	case 0x2000: /* en quad */
+	case 0x2001: /* em quad */
+	case 0x2002: /* en space */
+	case 0x2003: /* em space */
+	case 0x2004: /* three-per-em space */
+	case 0x2005: /* four-per-em space */
+	case 0x2006: /* six-per-em space */
+	case 0x2007: /* figure space */
+	case 0x2008: /* punctuation space */
+	case 0x2009: /* thin space */
+	case 0x200A: /* hair space */
+	case 0x202F: /* narrow no-break space */
+	case 0x205F: /* medium mathematical space */
+	case 0x3000: /* ideographic space */
+		return 1;
+
+	default:
+		return 0;
+	}
+}
+
+
+int fz_is_whitespace(int c)
+{
+	return is_whitespace(c);
+}
+
+
 static void
 fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int force_new_line)
 {
@@ -507,61 +665,23 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 
 	if (!(dev->flags & FZ_STEXT_PRESERVE_LIGATURES))
 	{
-		switch (c)
+		const char* replacement = get_ligature_replacement(c);
+
+		if (replacement)
 		{
-		case 0xFB00: /* ff */
-			fz_add_stext_char_imp(ctx, dev, font, 'f', glyph, trm, adv, wmode, force_new_line);
-			fz_add_stext_char_imp(ctx, dev, font, 'f', -1, trm, 0, wmode, 0);
-			return;
-		case 0xFB01: /* fi */
-			fz_add_stext_char_imp(ctx, dev, font, 'f', glyph, trm, adv, wmode, force_new_line);
-			fz_add_stext_char_imp(ctx, dev, font, 'i', -1, trm, 0, wmode, 0);
-			return;
-		case 0xFB02: /* fl */
-			fz_add_stext_char_imp(ctx, dev, font, 'f', glyph, trm, adv, wmode, force_new_line);
-			fz_add_stext_char_imp(ctx, dev, font, 'l', -1, trm, 0, wmode, 0);
-			return;
-		case 0xFB03: /* ffi */
-			fz_add_stext_char_imp(ctx, dev, font, 'f', glyph, trm, adv, wmode, force_new_line);
-			fz_add_stext_char_imp(ctx, dev, font, 'f', -1, trm, 0, wmode, 0);
-			fz_add_stext_char_imp(ctx, dev, font, 'i', -1, trm, 0, wmode, 0);
-			return;
-		case 0xFB04: /* ffl */
-			fz_add_stext_char_imp(ctx, dev, font, 'f', glyph, trm, adv, wmode, force_new_line);
-			fz_add_stext_char_imp(ctx, dev, font, 'f', -1, trm, 0, wmode, 0);
-			fz_add_stext_char_imp(ctx, dev, font, 'l', -1, trm, 0, wmode, 0);
-			return;
-		case 0xFB05: /* long st */
-		case 0xFB06: /* st */
-			fz_add_stext_char_imp(ctx, dev, font, 's', glyph, trm, adv, wmode, force_new_line);
-			fz_add_stext_char_imp(ctx, dev, font, 't', -1, trm, 0, wmode, 0);
+			fz_add_stext_char_imp(ctx, dev, font, *replacement++, glyph, trm, adv, wmode, force_new_line);
+			while (*replacement)
+			{
+				fz_add_stext_char_imp(ctx, dev, font, *replacement++, -1, trm, 0, wmode, 0);
+			}
 			return;
 		}
 	}
 
 	if (!(dev->flags & FZ_STEXT_PRESERVE_WHITESPACE))
 	{
-		switch (c)
+		if (is_whitespace(c))
 		{
-		case 0x0009: /* tab */
-		case 0x0020: /* space */
-		case 0x00A0: /* no-break space */
-		case 0x1680: /* ogham space mark */
-		case 0x180E: /* mongolian vowel separator */
-		case 0x2000: /* en quad */
-		case 0x2001: /* em quad */
-		case 0x2002: /* en space */
-		case 0x2003: /* em space */
-		case 0x2004: /* three-per-em space */
-		case 0x2005: /* four-per-em space */
-		case 0x2006: /* six-per-em space */
-		case 0x2007: /* figure space */
-		case 0x2008: /* punctuation space */
-		case 0x2009: /* thin space */
-		case 0x200A: /* hair space */
-		case 0x202F: /* narrow no-break space */
-		case 0x205F: /* medium mathematical space */
-		case 0x3000: /* ideographic space */
 			c = ' ';
 		}
 	}

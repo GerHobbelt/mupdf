@@ -289,6 +289,25 @@ char *fz_copy_rectangle(fz_context *ctx, fz_stext_page *page, fz_rect area, int 
 fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *string);
 
 /**
+	Return the replacement (expansion) string for the given ligature glyph.
+	Return NULL when the glyph is not a ligature.
+
+	This API is related to the `preserve-ligatures` option: this very same API is used
+	to expand ligatures in PDF content when that option is OFF.
+*/
+const char* fz_get_ligature_replacement(int c);
+
+/**
+	Return TRUE when the given Unicode glyph is a whitespace character.
+	Return FALSE otherwise.
+
+	This API is related to the `preserve-whitespace` option: this very same API is used
+	to check for any whitespace in PDF content and replace it with a regular SPACE character
+	when that option is OFF.
+*/
+int fz_is_whitespace(int c);
+
+/**
 	Create a device to extract the text on a page.
 
 	Gather the text on a page into blocks and lines.
