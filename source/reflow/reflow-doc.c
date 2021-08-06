@@ -119,6 +119,10 @@ reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum
 	reflow_page *page = NULL;
 	fz_stream *stm = NULL;
 	fz_output *out = NULL;
+	const fz_stext_options* opts = NULL;
+
+	if (!opts)
+		opts = &default_opts;
 
 	page = fz_new_derived_page(ctx, reflow_page, (fz_document *)doc);
 	page->base.bound_page = reflow_bound_page;
@@ -137,8 +141,8 @@ reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum
 		out = fz_new_output_with_buffer(ctx, buf);
 		fz_print_stext_header_as_xhtml(ctx, out);
 
-		text = fz_new_stext_page_from_chapter_page_number(ctx, doc->underdoc, chapter, pagenum, &default_opts);
-		fz_print_stext_page_as_xhtml(ctx, out, text, pagenum+1, fz_identity, &default_opts); /* pagenum is not right w.r.t chapter. */
+		text = fz_new_stext_page_from_chapter_page_number(ctx, doc->underdoc, chapter, pagenum, opts);
+		fz_print_stext_page_as_xhtml(ctx, out, text, pagenum+1, fz_identity, opts); /* pagenum is not right w.r.t chapter. */
 		fz_drop_stext_page(ctx, text);
 		text = NULL;
 
