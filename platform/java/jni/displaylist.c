@@ -98,7 +98,7 @@ FUN(DisplayList_toStructuredText)(JNIEnv *env, jobject self, jstring joptions)
 
 	fz_try(ctx)
 	{
-		fz_parse_stext_options(ctx, &opts, options);
+		fz_parse_stext_options(ctx, &opts, NULL, options);
 		text = fz_new_stext_page_from_display_list(ctx, list, &opts);
 	}
 	fz_always(ctx)

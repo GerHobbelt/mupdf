@@ -285,8 +285,16 @@ char *fz_copy_rectangle(fz_context *ctx, fz_stext_page *page, fz_rect area, int 
 /**
 	Parse stext device options from a comma separated key-value
 	string.
+
+	Modify the flags in the `opts` struct and return its reference.
+
+	Also set the option bit in `opt_overrides.flags` for every flag which was specified.
+	This can be used to decide whether to apply specific default values, while allowing option
+	'overrides' that way.
+
+	`opt_overrides` may be NULL.
 */
-fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *string);
+fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, fz_stext_options* opt_overrides, const char *string);
 
 /**
 	Return the replacement (expansion) string for the given ligature glyph.

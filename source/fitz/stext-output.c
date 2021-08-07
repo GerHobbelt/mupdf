@@ -725,7 +725,7 @@ fz_new_text_writer_with_output(fz_context *ctx, const char *format, fz_output *o
 	fz_try(ctx)
 	{
 		wri = fz_new_derived_document_writer(ctx, fz_text_writer, text_begin_page, text_end_page, text_close_writer, text_drop_writer);
-		fz_parse_stext_options(ctx, &wri->opts, options);
+		fz_parse_stext_options(ctx, &wri->opts, NULL, options);
 
 		wri->format = FZ_FORMAT_TEXT;
 		if (!strcmp(format, "text"))

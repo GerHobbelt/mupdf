@@ -973,7 +973,7 @@ FUN(Document_toReflowedDocument)(JNIEnv *env, jobject self, jstring joptions)
 
 	fz_try(ctx)
 	{
-		fz_parse_stext_options(ctx, &opts, options);
+		fz_parse_stext_options(ctx, &opts, NULL, options);
 		newdoc = fz_new_xhtml_document_from_document(ctx, doc, &opts);
 	}
 	fz_always(ctx)

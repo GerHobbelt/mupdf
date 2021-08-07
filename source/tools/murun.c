@@ -2790,7 +2790,7 @@ static void ffi_Page_toStructuredText(js_State *J)
 	fz_stext_page *text = NULL;
 
 	fz_try(ctx) {
-		fz_parse_stext_options(ctx, &so, options);
+		fz_parse_stext_options(ctx, &so, NULL, options);
 		text = fz_new_stext_page_from_page(ctx, page, &so);
 	}
 	fz_catch(ctx)
@@ -3660,7 +3660,7 @@ static void ffi_DisplayList_toStructuredText(js_State *J)
 	fz_stext_page *text = NULL;
 
 	fz_try(ctx) {
-		fz_parse_stext_options(ctx, &so, options);
+		fz_parse_stext_options(ctx, &so, NULL, options);
 		text = fz_new_stext_page_from_display_list(ctx, list, &so);
 	}
 	fz_catch(ctx)

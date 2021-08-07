@@ -219,6 +219,7 @@ static const format_cs_table_t format_cs_table[] =
 };
 
 static fz_stext_options stext_options = { 0 };
+static fz_stext_options stext_option_overrides = { 0 };
 
 static fz_cookie master_cookie = { 0 };
 
@@ -947,18 +948,27 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			// hence we should *postpone* bubbling up the OCR error, if one occurs.
 			fz_stext_options page_stext_options = stext_options;
 
-			// override the preserve_images flag:
-			if (output_format == OUT_HTML ||
-				output_format == OUT_XHTML ||
-				output_format == OUT_OCR_HTML ||
-				output_format == OUT_OCR_XHTML
-				)
-				page_stext_options.flags |= FZ_STEXT_PRESERVE_IMAGES;
-			else
-				page_stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
-			page_stext_options.flags |= FZ_STEXT_MEDIABOX_CLIP;
-			if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
-				page_stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
+			if (!(stext_option_overrides.flags & FZ_STEXT_PRESERVE_IMAGES))
+			{
+				// set the preserve_images flag when not set up explicitly by the commandline argument.
+				if (output_format == OUT_HTML ||
+					output_format == OUT_XHTML ||
+					output_format == OUT_OCR_HTML ||
+					output_format == OUT_OCR_XHTML
+					)
+					page_stext_options.flags |= FZ_STEXT_PRESERVE_IMAGES;
+				else
+					page_stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
+			}
+			if (!(stext_option_overrides.flags & FZ_STEXT_MEDIABOX_CLIP))
+			{
+				page_stext_options.flags |= FZ_STEXT_MEDIABOX_CLIP;
+			}
+			if (!(stext_option_overrides.flags & FZ_STEXT_PRESERVE_SPANS))
+			{
+				if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+					page_stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
+			}
 			text = fz_new_stext_page(ctx, mediabox);
 			dev = fz_new_stext_device(ctx, text, &page_stext_options);
 			if (lowmemory)
@@ -1074,7 +1084,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			int text_format = (stext_options.flags & FZ_STEXT_NO_TEXT_AS_PATH ? FZ_SVG_TEXT_AS_TEXT : FZ_SVG_TEXT_AS_PATH);
+			int text_format = ((stext_options.flags & FZ_STEXT_NO_TEXT_AS_PATH) ? FZ_SVG_TEXT_AS_TEXT : FZ_SVG_TEXT_AS_PATH);
 			int reuse_images = !(stext_options.flags & FZ_STEXT_NO_REUSE_IMAGES);
 			dev = fz_new_svg_device(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, text_format, reuse_images);
 			if (lowmemory)
@@ -2472,7 +2482,7 @@ int main(int argc, const char** argv)
 			fz_drop_buffer(ctx, proof_buffer);
 		}
 
-		fz_parse_stext_options(ctx, &stext_options, txtdraw_options);
+		fz_parse_stext_options(ctx, &stext_options, &stext_option_overrides, txtdraw_options);
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
