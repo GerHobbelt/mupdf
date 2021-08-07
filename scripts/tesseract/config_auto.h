@@ -25,6 +25,10 @@
 #define HAVE_TESSERACT                   1
 #define HAVE_TIFFIO_H                    1
 
+#if defined(__arm__) || defined(__aarch64__) || defined(_M_ARM) || defined(_M_ARM64)
+#define HAVE_NEON                        1
+#endif
+
 #define TESSERACT_DISABLE_DEBUG_FONTS    1
 #define TESSERACT_IMAGEDATA_AS_PIX       1
 

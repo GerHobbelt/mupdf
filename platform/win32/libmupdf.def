@@ -997,7 +997,9 @@ EXPORTS
 	fz_copy_selection
 	fz_drop_layout
 	fz_drop_stext_page
+	fz_get_ligature_replacement
 	fz_highlight_selection
+	fz_is_whitespace
 	fz_new_layout
 	fz_new_ocr_device
 	fz_new_stext_device
@@ -1452,6 +1454,7 @@ EXPORTS
 	pdf_add_cjk_font
 	pdf_add_hmtx
 	pdf_add_simple_font
+	pdf_add_substitute_font
 	pdf_add_vmtx
 	pdf_clean_font_name
 	pdf_drop_font
@@ -1881,6 +1884,7 @@ EXPORTS
 	pdf_progressive_advance
 	pdf_repair_obj
 	pdf_repair_obj_stms
+	pdf_repair_trailer
 	pdf_repair_xref
 	pdf_replace_xref
 	pdf_resolve_indirect
@@ -2237,6 +2241,7 @@ EXPORTS
 
 	brotli_main
 
+	BrotliDecoderAttachDictionary
 	BrotliDecoderCreateInstance
 	BrotliDecoderDecompress
 	BrotliDecoderDecompressStream
@@ -2249,16 +2254,22 @@ EXPORTS
 	BrotliDecoderSetParameter
 	BrotliDecoderTakeOutput
 	BrotliDecoderVersion
+	BrotliEncoderAttachPreparedDictionary
 	BrotliEncoderCompress
 	BrotliEncoderCompressStream
 	BrotliEncoderCreateInstance
 	BrotliEncoderDestroyInstance
+	BrotliEncoderDestroyPreparedDictionary
 	BrotliEncoderHasMoreOutput
 	BrotliEncoderIsFinished
 	BrotliEncoderMaxCompressedSize
 	BrotliEncoderSetParameter
 	BrotliEncoderTakeOutput
 	BrotliEncoderVersion
+
+	BrotliSharedDictionaryAttach
+	BrotliSharedDictionaryCreateInstance
+	BrotliSharedDictionaryDestroyInstance
 
 ; libSQLite3 exports
 
@@ -3737,6 +3748,7 @@ EXPORTS
 	UTIL_requireUserConfirmation
 	UTIL_setFileStat
 	UTIL_stat
+	UTIL_utime
 	TRACE_enable
 	TRACE_finish
 
