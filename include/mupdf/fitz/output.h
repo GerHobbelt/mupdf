@@ -77,6 +77,38 @@ typedef fz_stream *(fz_stream_from_output_fn)(fz_context *ctx, void *state);
 */
 typedef void (fz_truncate_fn)(fz_context *ctx, void *state);
 
+/**
+* Secondary outputs are files (or buffers, or ...) which are generated while
+* the fz_output is written.
+*
+* This happens, for instance, when writing STEXT or HTML output and you want
+* to write image data to a separate file (reference-images) instead of in-line
+* as 'data URI'.
+*
+* Other scenarios include writing HTML pages, including their CSS, images and JavaScript
+* files into an SHTML file (SMIME/HTML): the CSS, images, etc. should be *delayed*
+* until the HTML content itself has been written completely: this can be accomplished
+* by buffering these 'secondary' files until the end of the primary write action
+* and then appending them to the output file (finalize).
+*/
+
+typedef void (fz_mk_filename_fn)(fz_context* ctx, char* pathbuf, size_t pathbufsize, fz_secondary_outputs* sec_out);
+typedef fz_output* (fz_mk_output_fn)(fz_context* ctx, fz_secondary_outputs* sec_out);
+typedef void (fz_finalize_secondary_fn)(fz_context* ctx, fz_secondary_outputs* sec_out, fz_output *primary_out);
+typedef void (fz_drop_secondary_fn)(fz_context* ctx, fz_secondary_outputs* sec_out);
+
+struct fz_secondary_outputs
+{
+	void *state;
+	const char* path_template;
+	int counter;					// used to produce filename sequences
+	int unique_counter;	        	// used to produce unique filenames
+	fz_mk_filename_fn* mk_filename;
+	fz_mk_output_fn* mk_output;
+	fz_finalize_secondary_fn* finalize;
+	fz_drop_secondary_fn* drop;
+};
+
 struct fz_output
 {
 	void *state;
@@ -88,6 +120,7 @@ struct fz_output
 	fz_stream_from_output_fn *as_stream;
 	fz_truncate_fn *truncate;
 	char *bp, *wp, *ep;
+	struct fz_secondary_outputs secondary;
 };
 
 /**
@@ -302,7 +335,7 @@ extern const char* fz_hex_digits;
 	The 'j' modifier for %q/%Q signals to print control characters
 	in JSON-compliant format as \u00NN escapes instead of \xNN
 	hex escapes.
-	The 'j' modifier for %T/%H signals to print quotes surrounding 
+	The 'j' modifier for %T/%H signals to print quotes surrounding
 	the output (thus producing a JSON-compliant string).
 	%l{d,u,x} indicates that the values are int64_t.
 	%ll{d,u,x} is treated as synonymous to %l{d,u,x}.

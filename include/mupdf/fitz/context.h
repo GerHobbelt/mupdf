@@ -12,6 +12,7 @@ typedef struct fz_tuning_context fz_tuning_context;
 typedef struct fz_store fz_store;
 typedef struct fz_glyph_cache fz_glyph_cache;
 typedef struct fz_document_handler_context fz_document_handler_context;
+typedef struct fz_secondary_outputs fz_secondary_outputs;
 typedef struct fz_output fz_output;
 typedef struct fz_context fz_context;
 

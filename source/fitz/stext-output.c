@@ -1,5 +1,9 @@
 #include "mupdf/fitz.h"
 
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
 #define SUBSCRIPT_OFFSET 0.2f
 #define SUPERSCRIPT_OFFSET -0.2f
 
@@ -76,7 +80,7 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, const fz_stext_options* options)
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, const fz_stext_options* options)
 {
 	float x = block->bbox.x0;
 	float y = block->bbox.y0;
@@ -86,6 +90,21 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 	fz_write_printf(ctx, out, "<img style=\"position:absolute;top:%gpt;left:%gpt;width:%gpt;height:%gpt\" data-mediabox=\"%R\" src=\"", y, x, w, h, &block->bbox);
 	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
 	{
+#if 0
+		if (!misc_info || !misc_info->fname_template)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "No image filepath template specified. Cannot write image in 'reference-images' mode.");
+		const char* dir_end = strrchr(misc_info->fname_template, '/');
+		if (!dir_end)
+			dir_end = misc_info->fname_template;
+		else
+			dir_end++;
+		const char* fname_base_end = strchr(dir_end, '.');
+		if (!fname_base_end)
+			fname_base_end = dir_end;
+		char fnamebuf[PATH_MAX];
+		fz_snprintf(fnamebuf, sizeof(fnamebuf), "%.*simg_p%04d_at_%04d_%04d.")
+#endif
+
 		// TBD
 		fz_write_string(ctx, out, "IMAGE_URL_TODO");
 	}
@@ -170,9 +189,13 @@ fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page
 	for (block = page->first_block; block; block = block->next)
 	{
 		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
-			fz_print_stext_image_as_html(ctx, out, block, options);
+		{
+			fz_print_stext_image_as_html(ctx, out, block, id, options);
+		}
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
+		{
 			fz_print_stext_block_as_html(ctx, out, block);
+		}
 	}
 
 	fz_write_string(ctx, out, "</div>\n");
@@ -776,6 +799,12 @@ fz_new_text_writer_with_output(fz_context *ctx, const char *format, fz_output *o
 fz_document_writer *
 fz_new_text_writer(fz_context *ctx, const char *format, const char *path, const char *options)
 {
-	fz_output *out = fz_new_output_with_path(ctx, path ? path : "out.txt", 0);
+	// make sure we provide a 'sane' output path.
+	char dfltpath[64];
+	fz_snprintf(dfltpath, sizeof(dfltpath), "out.%s", format ? format : "text");
+	if (!path || !*path)
+		path = dfltpath;
+
+	fz_output *out = fz_new_output_with_path(ctx, path, 0);
 	return fz_new_text_writer_with_output(ctx, format, out, options);
 }
