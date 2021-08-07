@@ -44,7 +44,7 @@ static int isfontdesc(pdf_obj *obj)
 	return pdf_name_eq(ctx, type, PDF_NAME(FontDescriptor));
 }
 
-static void writepixmap(fz_pixmap *pix, char *file)
+static void writepixmap(fz_pixmap *pix, const char *file)
 {
 	char buf[PATH_SIZE];
 	fz_pixmap *rgb = NULL;
