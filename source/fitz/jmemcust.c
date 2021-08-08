@@ -30,7 +30,9 @@ jpeg_get_small (j_common_ptr cinfo, size_t sizeofobject)
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
 	if (cmem && cmem->j_mem_get_small)
-		return (void *) (cmem->j_mem_get_small)(cinfo, sizeofobject);
+	{
+		return (void*)(cmem->j_mem_get_small)(cinfo, sizeofobject);
+	}
 
 	fz_context* ctx = fz_get_global_context();
 	return Memento_label(fz_malloc_no_throw(ctx, sizeofobject), "jpgcust_small_alloc");
@@ -42,7 +44,10 @@ jpeg_free_small (j_common_ptr cinfo, void * object, size_t sizeofobject)
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
 	if (cmem && cmem->j_mem_free_small)
+	{
 		(cmem->j_mem_free_small)(cinfo, object, sizeofobject);
+		return;
+	}
 
 	fz_context* ctx = fz_get_global_context();
 	fz_free(ctx, object);
@@ -61,7 +66,9 @@ jpeg_get_large (j_common_ptr cinfo, size_t sizeofobject)
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
 	if (cmem && cmem->j_mem_get_large)
-		return (void *) (cmem->j_mem_get_large)(cinfo, sizeofobject);
+	{
+		return (void*)(cmem->j_mem_get_large)(cinfo, sizeofobject);
+	}
 
 	fz_context* ctx = fz_get_global_context();
 	return Memento_label(fz_malloc_no_throw(ctx, sizeofobject), "jpgcust_large_alloc");
@@ -73,7 +80,10 @@ jpeg_free_large (j_common_ptr cinfo, void FAR * object, size_t sizeofobject)
 	jpeg_cust_mem_data *cmem = GET_CUST_MEM_DATA(cinfo);
 
 	if (cmem && cmem->j_mem_free_large)
+	{
 		(cmem->j_mem_free_large)(cinfo, object, sizeofobject);
+		return;
+	}
 
 	fz_context* ctx = fz_get_global_context();
 	fz_free(ctx, object);
