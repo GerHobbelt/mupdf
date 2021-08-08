@@ -320,8 +320,18 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 				break;
 			}
 
-			if (type && 0)
+			if (type)
 			{
+				s_write_attribute_int(ctx, dev->out, "raw_width", img->w);
+				s_write_attribute_int(ctx, dev->out, "raw_height", img->h);
+				s_write_attribute_int(ctx, dev->out, "n", img->n);
+				s_write_attribute_float(ctx, dev->out, "alpha", alpha);
+				s_write_attribute_int(ctx, dev->out, "orientation", img->orientation);
+				s_write_attribute_int(ctx, dev->out, "xres", img->xres);
+				s_write_attribute_int(ctx, dev->out, "yres", img->yres);
+				s_write_attribute_int(ctx, dev->out, "has_mask", !!img->mask);
+				s_write_attribute_matrix(ctx, dev->out, "ctm", &ctm);
+
 				/* Write out raw data. */
 				unsigned char *data;
 				size_t datasize = fz_buffer_storage(ctx, compressed->buffer, &data);
@@ -338,10 +348,9 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 			}
 		}
 
-		if (type)
+		if (!type)
 		{
 			/* Compressed data not available, so write out raw pixel values. */
-			int l2factor = 0;
 			int y;
 			int pw = img->w;
 			int ph = img->h;
@@ -357,11 +366,14 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 				s_write_attribute_int(ctx, dev->out, "h", pixmap->h);
 				s_write_attribute_int(ctx, dev->out, "n", pixmap->n);
 				s_write_attribute_int(ctx, dev->out, "s", pixmap->s);
-				s_write_attribute_int(ctx, dev->out, "alpha", pixmap->alpha);
+				s_write_attribute_int(ctx, dev->out, "has_alpha", pixmap->alpha);
 				s_write_attribute_int(ctx, dev->out, "flags", pixmap->flags);
 				s_write_attribute_int(ctx, dev->out, "xres", pixmap->xres);
 				s_write_attribute_int(ctx, dev->out, "yres", pixmap->yres);
 			}
+			s_write_attribute_float(ctx, dev->out, "alpha", alpha);
+			s_write_attribute_int(ctx, dev->out, "orientation", img->orientation);
+			s_write_attribute_int(ctx, dev->out, "has_mask", !!img->mask);
 			s_write_attribute_matrix(ctx, dev->out, "ctm", &ctm);
 			s_xml_starttag_end(ctx, dev->out);
 			if (pixmap)
