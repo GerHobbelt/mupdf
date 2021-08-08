@@ -825,7 +825,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			fz_rect mb = fz_transform_rect(mediabox, ctm);
 
-			fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n", pagenum, &mb);
+			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &mb);
 			dev = fz_new_trace_device(ctx, out);
 			if (output_format == OUT_OCR_TRACE)
 			{
@@ -872,7 +872,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			fz_rect mb = fz_transform_rect(mediabox, ctm);
 
-			fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n", pagenum, &mb);
+			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &mb);
 			dev = fz_new_xmltext_device(ctx, out);
 			if (output_format == OUT_OCR_XMLTEXT)
 			{
@@ -969,6 +969,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 					page_stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 			}
+
+			// override the default options when these have been explicitly set in the commandline:
+			page_stext_options.flags &= ~stext_option_overrides.flags;                           // mask
+			page_stext_options.flags |= (stext_options.flags & stext_option_overrides.flags);    // commandline overrules
+
 			text = fz_new_stext_page(ctx, mediabox);
 			dev = fz_new_stext_device(ctx, text, &page_stext_options);
 			if (lowmemory)
