@@ -971,6 +971,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			case 'M':
+				if (j)
+					fmtputc(&out, '"');
 				{
 					fz_matrix *matrix = va_arg(args, fz_matrix*);
 					fmtfloat(&out, matrix->a); fmtputs(&out, comma);
@@ -980,8 +982,12 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtfloat(&out, matrix->e); fmtputs(&out, comma);
 					fmtfloat(&out, matrix->f);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'R':
+				if (j)
+					fmtputc(&out, '"');
 				{
 					fz_rect *rect = va_arg(args, fz_rect*);
 					fmtfloat(&out, rect->x0); fmtputs(&out, comma);
@@ -989,15 +995,23 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtfloat(&out, rect->x1); fmtputs(&out, comma);
 					fmtfloat(&out, rect->y1);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'P':
+				if (j)
+					fmtputc(&out, '"');
 				{
 					fz_point *point = va_arg(args, fz_point*);
 					fmtfloat(&out, point->x); fmtputs(&out, comma);
 					fmtfloat(&out, point->y);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 			case 'Z':
+				if (j)
+					fmtputc(&out, '"');
 				{
 					fz_quad *quad = va_arg(args, fz_quad*);
 					fmtfloat(&out, quad->ul.x); fmtputs(&out, comma);
@@ -1009,6 +1023,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtfloat(&out, quad->lr.x); fmtputs(&out, comma);
 					fmtfloat(&out, quad->lr.y);
 				}
+				if (j)
+					fmtputc(&out, '"');
 				break;
 
 			case 'T':
@@ -1155,7 +1171,6 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			case 'B':
-			{
 				if (j)
 					fmtputc(&out, '"');
 				if (bits == 64)
@@ -1170,8 +1185,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				if (j)
 					fmtputc(&out, '"');
-			}
-			break;
+				break;
 
 			case 's':
 			{

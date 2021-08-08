@@ -205,14 +205,14 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 #define PDF_PRINT_JSON_STRING_OBJECTS_AS_BLOB           0x0200
 // restrict array dumps to a limit number of entries.
 #define PDF_PRINT_LIMITED_ARRAY_DUMP                    0x0400
-// INTERNAL USE: marks thatPDF_PRINT_LIMITED_ARRAY_DUMP is currently activee.
+// INTERNAL USE: marks that PDF_PRINT_LIMITED_ARRAY_DUMP is currently active.
 #define PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE          0x0800
 
 // The way the next few bits resolve is:
 // - there's really three(3) modes: HEX_PLUS_RAW, ILLEGAL_UNICODE_AS_HEX and 'regular'.
 // - HEX_PLUS_RAW has precedence over ILLEGAL_UNICODE_AS_HEX and 'regular'
 // - ILLEGAL_UNICODE_AS_HEX has precedence over 'regular'
-// - PURE_HEX *modsifies* both ILLEGAL_UNICODE_AS_HEX and HEX_PLUS_RAW behaviour: when there's
+// - PURE_HEX *modifies* both ILLEGAL_UNICODE_AS_HEX and HEX_PLUS_RAW behaviour: when there's
 //   enough 'bad shite' in the input data, the data is considered to be 'very probably binary data';
 //   PURE_HEX then results in an unadorned hexdump. This makes for a cleaner display of 'binary content'
 //   then the alternative in this situation, which is a hexdump adorned with any legible characters

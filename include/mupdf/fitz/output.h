@@ -311,36 +311,134 @@ extern const char* fz_hex_digits;
 
 /**
 	Our customised 'printf'-like string formatter.
-	Takes %c, %d, %s, %u, %x as usual.
-	Modifiers are not supported except for zero-padding ints (e.g.
-	%02d, %03u, %04x, etc) and integer sign formatting flags (e.g.
-	%+d, % d).
-	%g output in "as short as possible hopefully lossless
-	non-exponent" form, see fz_ftoa for specifics.
-	%f and %e output as usual.
-	%C outputs a utf8 encoded int.
-	%p output as usual: a '0x'-prefixed hex representation of the void* pointer.
-	%M outputs a fz_matrix*.
-	%R outputs a fz_rect*.
-	%P outputs a fz_point*.
-	%Z outputs a fz_quad*.
-	The ',' comma modifier for %M/%R/%P/%Z will print a comma+space separator
+	Takes `%c`, `%d`, `%i`, `%s`, `%u`, `%x` as usual.
+
+	Most usual modifiers are supported:
+	zero-padding integers (e.g.	`%02d`, `%03u`, `%04x`, etc),
+	integer sign formatting flags (e.g.	`%+d`, `% d`),
+	left justification (e.g. `%-5s`, `%-8d`) and
+	width, both static width (e.g. `%5d`) and dynamic width (e.g. `%*d`).
+	The `*` modifier expects an extra `int` type argument, as usual.
+
+	The 'precision' modifier is also supported, both static precision
+	(e.g. `%.2f`) and dynamic precision (e.g. `%.*f`), where the latter
+	expects an extra `int` type argument, as usual.
+
+	Precision is applied to floating point values (`%e` and `%f`), strings (`%s`)
+	(e.g. `%.3s`, `%.*s`) and `%H`, `%Q`, `%q`.
+
+	*Negative* values for precision can be specified using the dynamic modifier (e.g. `%.*s`)
+	and have special meaning for `%s` and when using the `j` (JSON) modifier:
+	when the `j` (JSON) modifier is used, then a *negative precision* will be interpreted
+	as the *negate* of the `PDF_PRINT_JSON_***` flags, including `PDF_PRINT_JSON_DEPTH_LEVEL`.
+	This allows for a powerful shorthand where we use `fz_format_string()` as a powerful
+	means to produce JSON-compliant output. (See also:
+	`PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW`, `PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX`,
+	`PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX`, `PDF_PRINT_JSON_DEPTH_LEVEL(n)`.)
+
+	These modifiers may be mixed (e.g. `%-+*.*f`).
+
+	`%g` output in "as short as possible hopefully lossless
+	non-exponent" form, see `fz_ftoa` for specifics.
+	`%g` ignores all size/sign/precision modifiers.
+
+	`%f` and `%e` output as usual.
+
+	`%x` prints an integer number as hexadecimal value, as usual.
+
+	`%d` and `%i` print a signed integer number as decimal value, as usual.
+
+	`%u` prints an unsigned integer number as decimal value, as usual.
+
+	`%B` prints an unsigned integer number as *binary* value, e.g. `%B` of `13` will print `1101`.
+
+	`%C` outputs a utf8 encoded int, i.e. output a Unicode codepoint verbatim.
+
+	`%c` outputs a character encoded in a single byte. (Argument type is `int`, though).
+
+	`%p` output as usual: a '0x'-prefixed hex representation of the `void*` pointer.
+
+	`%s` prints a `const char*` string value, as usual.
+	When the string value is `NULL`, it is printed as `(null)`, while any clipping precision
+	value (smaller than 6) will be disabled to ensure the entire string `(null)` makes it
+	into the output, e.g. `%2.2s` of `"foobar"` will print `"fo"`, but given the value `NULL`,
+	it will print `"(null)"`, disregarding the size & precision `2` values in that format spec.
+	When precision has been specified, but is NEGATIVE, than this is a special mode:
+	the code will discover how to best print the data buffer, using the `-p` negated value
+	as a `PDF_PRINT_JSON_***` flags value (see above), while Unicode codepoints in the byte buffer
+	will be output verbatim (i.e. no `\uXXXX` Unicode escapes, not even in JSON mode!). Also
+	the 'usual whitespace' (`\r`, `\n`, `\t`, `\f`, `\b`) will be printed verbatim.
+	When non-negative, the precision value is treated as usual for `%s`, hence it serves as
+	a length limiting ("clipping") value.
+	A note about the `j` modifier: when the precision is not negative, i.e. we're using `%s`
+	as usual and *not* as a fancy (hex)dumper of arbitrary string content, then the `j`
+	modifier is *ignored*: you should use `%q` and `%Q` instead to print JSON strings, as those
+	will include the required escaping of some characters. Do note that printing a `NULL`
+	string value using `%q` or `%Q` will render as an empty string instead of `null`: if you need
+	to print `null` values, you must do so explicitly.
+
+	`%M` outputs a `fz_matrix*` as a series of `%g` values.
+
+	`%R` outputs a `fz_rect*` as a series of `%g` values.
+
+	`%P` outputs a `fz_point*` as a series of `%g` values.
+
+	`%Z` outputs a `fz_quad*` as a series of `%g` values.
+
+	The `,` comma modifier for `%M`/`%R`/`%P`/`%Z` will print a comma+space separator
 	between the values instead of only a space.
-	%T outputs a in64_t as time (time_t, UTC).
-	%H outputs a byte buffer in hex. (argument passed as void* pointer + size_t length).
-	%n outputs a PDF name (with appropriate escaping).
-	%q, %Q and %( output escaped strings in C/PDF syntax.
-	%Q outputs unicode codepoints verbatim (UTF8 encoded), while
-	%q outputs unicode codepoints as \uNNNN/\uNNNNNN escapes.
-	The 'j' modifier for %q/%Q signals to print control characters
+
+	`%T` outputs an `in64_t` as time (`time_t`, UTC).
+	Invalid/unparseable timestamps will print as `(invalid)`.
+
+	`%H` outputs a byte buffer in hex. (argument passed as `void*` pointer + `size_t` length).
+	When precision has been specified, but is NEGATIVE, than this is a special mode:
+	the code will discover how to best print the data buffer, using the `-p` negated value
+	as a `PDF_PRINT_JSON_***` flags value (see above), while Unicode Codepoints in the byte buffer
+	will be output verbatim (i.e. no `\uXXXX` Unicode escapes, not even in JSON mode!).
+	When non-negative, the precision value is treated as a `PDF_PRINT_JSON_***` flags value
+	WITHOUT the verbatim copying of any Unicode Codepoints in the byte buffer.
+
+	`%n` outputs a `const char *` string value as a PDF name (with appropriate escaping).
+
+	`%(` outputs escaped strings in C/PDF syntax.
+	Printing a `NULL` string value using `%(` will render as an empty string instead of `(null)`.
+
+	`%Q` outputs a string value as a loosely JSON-compliant quoted string
+	with all Unicode codepoints output verbatim (UTF8 encoded).
+	Do note that printing a `NULL` string value using `%Q` will render as an empty string instead of `null`:
+	if you need	to print `null` values, you must do so explicitly.
+	Illegal Unicode UTF8 sequences in the input string value will be output as a set of the INVALID CHARACTER `\uFFFD` plus a
+	single illegal byte escaped as hex `\xNN` or Unicode `\u00NN` value.
+	The `j` modifier specifies that `%Q` will never output `\xNN` hex escape codes but always use `\u00NN` Unicode escapes
+	instead for full JSON-compliance as some JSON parsers don't accept `\xNN` encodings, only `\u00NN`.
+
+	`%q` outputs a string value as a fully JSON-compliant quoted string
+	with all non-ASCII-printable Unicode codepoints output as `\uNNNN`/`\uNNNNNN` escapes.
+	Do note that printing a `NULL` string value using `%q` will render as an empty string instead of `null`:
+	if you need	to print `null` values, you must do so explicitly.
+	Illegal Unicode UTF8 sequences in the input string value will be output as a set of the INVALID CHARACTER `\uFFFD` plus a
+	single illegal byte escaped as hex `\xNN` or Unicode `\u00NN` value.
+	The `j` modifier specifies that `%q` will never output `\xNN` hex escape codes but always use `\u00NN` Unicode escapes
+	instead for full JSON-compliance as some JSON parsers don't accept `\xNN` encodings, only `\u00NN`.
+
+	The `j` modifier ("JSON mode") signals to print control characters
 	in JSON-compliant format as \u00NN escapes instead of \xNN
 	hex escapes.
-	The 'j' modifier for %T/%H signals to print quotes surrounding
-	the output (thus producing a JSON-compliant string).
-	%l{d,u,x} indicates that the values are int64_t.
-	%ll{d,u,x} is treated as synonymous to %l{d,u,x}.
-	%t{d,u,x} indicates that the value is a ptrdiff_t.
-	%z{d,u,x} indicates that the value is a size_t.
+	The `j` modifier signals all commands (exceptions listed below) to print
+	quotes surrounding the output (thus producing a JSON-compliant
+	string). This includes the numeric and array types `%e`, `%f`, `%g`, `%d`, `%i`, `%u`, `%x`, `%B`, `%R`, `%Z`, `%P`, `%M`. 
+	E.g. `%jd` of `5` will produce the quoted string `"5"`, `%,jP` will produce the string value `"12, 42"` for value `{12, 42}`.
+	Exceptions to this rule are `%(`, which ignores the `j` modifier entirely, and `%s`, which only uses
+	the `j` modifier when printing non-`NULL`-input under *negative* precision conditions: see `%s` above.
+
+	`%l{d,i,u,x,B}` indicates that the values are `int64_t`.
+	`%ll{d,i,u,x,B}` is treated as synonymous to %l{d,i,u,x,B}.
+	`%t{d,i,u,x,B}` indicates that the value is a `ptrdiff_t`.
+	`%z{d,i,u,x,B}` indicates that the value is a `size_t`.
+
+	Unrecognized `%` commands will be copied verbatim, *but without
+	any recognized modifiers*. E.g. `%5K` will print `%K`.
 
 	user: An opaque pointer that is passed to the emit function.
 
@@ -351,11 +449,17 @@ void fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx,
 
 /**
 	A vsnprintf work-alike, using our custom formatter.
+
+	fz_vsnprintf is guaranteed to NUL-terminate the output buffer.
+	fz_vsnprintf can cope with a zero-length output buffer.
 */
 size_t fz_vsnprintf(char *buffer, size_t space, const char *fmt, va_list args);
 
 /**
 	The non va_list equivalent of fz_vsnprintf.
+
+	fz_snprintf is guaranteed to NUL-terminate the output buffer.
+	fz_snprintf can cope with a zero-length output buffer.
 */
 size_t fz_snprintf(char *buffer, size_t space, const char* fmt, ...);
 
