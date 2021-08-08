@@ -6,11 +6,6 @@
 #include <assert.h>
 #include <string.h>
 
-enum
-{
-	FZ_SEPARATION_DISABLED_RENDER = 3
-};
-
 struct fz_separations
 {
 	int refs;
@@ -106,7 +101,7 @@ void fz_set_separation_behavior(fz_context *ctx, fz_separations *sep, int separa
 
 	old = (sep->state[separation]>>shift) & 3;
 
-	if (old == (fz_separation_behavior)FZ_SEPARATION_DISABLED_RENDER)
+	if (old == FZ_SEPARATION_DISABLED_RENDER)
 		old = FZ_SEPARATION_DISABLED;
 
 	/* If no change, great */
@@ -136,7 +131,7 @@ fz_separation_behavior fz_separation_current_behavior_internal(fz_context *ctx, 
 
 fz_separation_behavior fz_separation_current_behavior(fz_context *ctx, const fz_separations *sep, int separation)
 {
-	int beh = fz_separation_current_behavior_internal(ctx, sep, separation);
+	fz_separation_behavior beh = fz_separation_current_behavior_internal(ctx, sep, separation);
 
 	if (beh == FZ_SEPARATION_DISABLED_RENDER)
 		return FZ_SEPARATION_DISABLED;

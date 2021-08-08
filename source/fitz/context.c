@@ -29,7 +29,7 @@ static fz_style_context *fz_keep_style_context(fz_context *ctx)
 {
 	if (!ctx)
 		return NULL;
-	return fz_keep_imp(ctx, ctx->style, &ctx->style->refs);
+	return (fz_style_context *)fz_keep_imp(ctx, ctx->style, &ctx->style->refs);
 }
 
 static void fz_drop_style_context(fz_context *ctx)
@@ -79,7 +79,7 @@ static fz_tuning_context *fz_keep_tuning_context(fz_context *ctx)
 {
 	if (!ctx)
 		return NULL;
-	return fz_keep_imp(ctx, ctx->tuning, &ctx->tuning->refs);
+	return (fz_tuning_context *)fz_keep_imp(ctx, ctx->tuning, &ctx->tuning->refs);
 }
 
 static void fz_drop_tuning_context(fz_context *ctx)
@@ -186,7 +186,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	if (!locks)
 		locks = global_default_ctx ? &global_default_ctx->locks : &fz_locks_default;
 
-	ctx = Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
+	ctx = (fz_context *)Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
 	if (!ctx)
 	{
 		fz_error(NULL, "cannot create context (phase 1)");
@@ -250,7 +250,7 @@ fz_clone_context(fz_context *ctx)
 	if (ctx == NULL || (ctx->locks.lock == fz_locks_default.lock && ctx->locks.unlock == fz_locks_default.unlock))
 		return NULL;
 
-	new_ctx = ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context));
+	new_ctx = (fz_context *)ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context));
 	if (!new_ctx)
 		return NULL;
 
@@ -318,7 +318,7 @@ int fz_has_global_context(void)
 	return global_ctx != NULL;
 }
 
-void fz_drop_global_context(void)
+void __cdecl fz_drop_global_context(void)
 {
 	//fz_drop_context_locks(ctx);
 	fz_drop_context(global_ctx);

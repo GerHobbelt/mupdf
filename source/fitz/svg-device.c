@@ -246,11 +246,11 @@ static void
 svg_font_family(fz_context *ctx, char buf[], int size, const char *name)
 {
 	/* Remove "ABCDEF+" prefix and "-Bold" suffix. */
-	char *p = strchr(name, '+');
+	const char *p = strchr(name, '+');
 	if (p) fz_strlcpy(buf, p+1, size);
 	else fz_strlcpy(buf, name, size);
-	p = strrchr(buf, '-');
-	if (p) *p = 0;
+	char *q = strrchr(buf, '-');
+	if (q) *q = 0;
 }
 
 static int
@@ -1031,7 +1031,7 @@ svg_dev_begin_group(fz_context *ctx, fz_device *dev, fz_rect bbox, fz_colorspace
 	/* SVG only supports normal/multiply/screen/darken/lighten,
 	 * but we'll send them all, as the spec says that unrecognised
 	 * ones are treated as normal. */
-	static char *blend_names[] = {
+	static const char *blend_names[] = {
 		"normal",	/* FZ_BLEND_NORMAL */
 		"multiply",	/* FZ_BLEND_MULTIPLY */
 		"screen",	/* FZ_BLEND_SCREEN */

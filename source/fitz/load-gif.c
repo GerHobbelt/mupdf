@@ -423,7 +423,7 @@ ZGAVECTI5 ZGAALPHAI5 ZGATITLE4.0 ZGATEXTI4.0
 static const unsigned char *
 gif_read_ae(fz_context *ctx, struct info *info, const unsigned char *p, const unsigned char *end)
 {
-	static char *ignorable[] = {
+	static const char *ignorable[] = {
 		"NETSACPE2.0", "ANIMEXTS1.0", "XMP DataXMP",
 		"ZGATEXTI5\0\0", "ZGATILEI5\0\0", "ZGANPIMGI5\0", "ZGACTRLI5\0\0",
 		"ZGAVECTI5\0\0", "ZGAALPHAI5\0", "ZGATITLE4.0", "ZGATEXTI4.0",

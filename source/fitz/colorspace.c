@@ -262,7 +262,7 @@ int fz_is_valid_blend_colorspace(fz_context *ctx, fz_colorspace *cs)
 fz_colorspace *
 fz_keep_colorspace(fz_context *ctx, fz_colorspace *cs)
 {
-	return fz_keep_key_storable(ctx, &cs->key_storable);
+	return (fz_colorspace *)fz_keep_key_storable(ctx, &cs->key_storable);
 }
 
 void
@@ -274,7 +274,7 @@ fz_drop_colorspace(fz_context *ctx, fz_colorspace *cs)
 fz_colorspace *
 fz_keep_colorspace_store_key(fz_context *ctx, fz_colorspace *cs)
 {
-	return fz_keep_key_storable_key(ctx, &cs->key_storable);
+	return (fz_colorspace *)fz_keep_key_storable_key(ctx, &cs->key_storable);
 }
 
 void
@@ -598,7 +598,7 @@ fz_default_colorspaces *fz_clone_default_colorspaces(fz_context *ctx, fz_default
 
 fz_default_colorspaces *fz_keep_default_colorspaces(fz_context *ctx, fz_default_colorspaces *default_cs)
 {
-	return fz_keep_imp(ctx, default_cs, &default_cs->refs);
+	return (fz_default_colorspaces *)fz_keep_imp(ctx, default_cs, &default_cs->refs);
 }
 
 void

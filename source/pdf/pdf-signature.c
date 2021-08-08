@@ -435,7 +435,7 @@ void pdf_drop_verifier(fz_context *ctx, pdf_pkcs7_verifier *verifier)
 		verifier->drop(ctx, verifier);
 }
 
-char *pdf_signature_error_description(pdf_signature_error err)
+const char *pdf_signature_error_description(pdf_signature_error err)
 {
 	switch (err)
 	{

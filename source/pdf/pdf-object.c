@@ -2759,7 +2759,7 @@ static inline void fmt_indent(fz_context *ctx, struct fmt *fmt)
 	}
 }
 
-static inline void fmt_puts(fz_context *ctx, struct fmt *fmt, char *s)
+static inline void fmt_puts(fz_context *ctx, struct fmt *fmt, const char *s)
 {
 	while (*s)
 		fmt_putc(ctx, fmt, *s++);

@@ -64,6 +64,7 @@ FUNCTION_NAME(NAME,N,NAME2,NAME3)(const unsigned char * FZ_RESTRICT colorbv,
 	while (h--)
 	{
 		int skip_xx, ww, len, extend;
+		int v = 0;
 		const unsigned char *runp;
 		unsigned char *ddp = dp;
 		int offset = ((int *)(glyph->data))[skip_y++];
@@ -76,7 +77,7 @@ FUNCTION_NAME(NAME,N,NAME2,NAME3)(const unsigned char * FZ_RESTRICT colorbv,
 			skip_xx = skip_x;
 			while (skip_xx)
 			{
-				int v = *runp++;
+				v = *runp++;
 				switch (v & 3)
 				{
 				case 0: /* Extend */
@@ -124,7 +125,7 @@ FUNCTION_NAME(NAME,N,NAME2,NAME3)(const unsigned char * FZ_RESTRICT colorbv,
 			}
 			while (ww > 0)
 			{
-				int v = *runp++;
+				v = *runp++;
 				switch(v & 3)
 				{
 				case 0: /* Extend */

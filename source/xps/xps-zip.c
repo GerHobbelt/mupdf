@@ -168,7 +168,7 @@ fz_document *
 xps_open_document(fz_context *ctx, const char *filename)
 {
 	fz_stream *file;
-	char *p;
+	const char *p;
 	fz_document *doc = NULL;
 
 	p = strstr(filename, "/_rels/.rels");
@@ -177,7 +177,7 @@ xps_open_document(fz_context *ctx, const char *filename)
 	if (p)
 	{
 		char *buf = fz_strdup(ctx, filename);
-		buf[p-filename] = 0;
+		buf[p - filename] = 0;
 		fz_try(ctx)
 			doc = xps_open_document_with_directory(ctx, buf);
 		fz_always(ctx)

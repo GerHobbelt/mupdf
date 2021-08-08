@@ -28,7 +28,7 @@ int
 getopt(int argc, const char * const *argv, const char *optstring)
 {
 	char c;
-	char *place;
+	const char *place;
 
 	optarg = NULL;
 

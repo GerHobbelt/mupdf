@@ -12,7 +12,7 @@ static inline void big32(unsigned char *buf, unsigned int v)
 	buf[3] = (v) & 0xff;
 }
 
-static void putchunk(fz_context *ctx, fz_output *out, char *tag, unsigned char *data, size_t size)
+static void putchunk(fz_context *ctx, fz_output *out, const char *tag, unsigned char *data, size_t size)
 {
 	unsigned int sum;
 
@@ -23,7 +23,7 @@ static void putchunk(fz_context *ctx, fz_output *out, char *tag, unsigned char *
 	fz_write_data(ctx, out, tag, 4);
 	fz_write_data(ctx, out, data, size);
 	sum = zng_crc32(0, NULL, 0);
-	sum = zng_crc32(sum, (unsigned char*)tag, 4);
+	sum = zng_crc32(sum, (const uint8_t *)tag, 4);
 	sum = zng_crc32(sum, data, (unsigned int)size);
 	fz_write_int32_be(ctx, out, sum);
 }

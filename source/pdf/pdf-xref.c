@@ -3530,9 +3530,11 @@ check_unchanged_between(fz_context *ctx, pdf_document *doc, pdf_changes *changes
 
 	fz_try(ctx)
 	{
+		int n, i;
+
 		if (pdf_is_dict(ctx, nobj))
 		{
-			int i, n = pdf_dict_len(ctx, nobj);
+			n = pdf_dict_len(ctx, nobj);
 
 			if (!pdf_is_dict(ctx, oobj) || n != pdf_dict_len(ctx, oobj))
 			{
@@ -3553,7 +3555,7 @@ change_found:
 		}
 		else if (pdf_is_array(ctx, nobj))
 		{
-			int i, n = pdf_array_len(ctx, nobj);
+			n = pdf_array_len(ctx, nobj);
 
 			if (!pdf_is_array(ctx, oobj) || n != pdf_array_len(ctx, oobj))
 				goto change_found;

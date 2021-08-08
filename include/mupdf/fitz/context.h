@@ -245,7 +245,7 @@ void fz_set_global_context(fz_context* ctx);
 */
 int fz_has_global_context(void);
 
-void fz_drop_global_context(void);
+void __cdecl fz_drop_global_context(void);
 
 /**
 	Return TRUE when the provided context includes locking support.

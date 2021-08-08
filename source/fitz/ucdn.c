@@ -91,7 +91,7 @@ static const unsigned short *get_decomp_record(uint32_t code)
 	return &decomp_data[index];
 }
 
-static int compare_reindex(const void *a, const void *b)
+static int __cdecl compare_reindex(const void *a, const void *b)
 {
 	Reindex *ra = (Reindex *)a;
 	Reindex *rb = (Reindex *)b;
@@ -117,14 +117,14 @@ static int get_comp_index(uint32_t code, const Reindex *idx, size_t len)
 		return -1;
 }
 
-static int compare_mp(const void *a, const void *b)
+static int __cdecl compare_mp(const void *a, const void *b)
 {
 	MirrorPair *mpa = (MirrorPair *)a;
 	MirrorPair *mpb = (MirrorPair *)b;
 	return mpa->from - mpb->from;
 }
 
-static int compare_bp(const void *a, const void *b)
+static int __cdecl compare_bp(const void *a, const void *b)
 {
 	BracketPair *bpa = (BracketPair *)a;
 	BracketPair *bpb = (BracketPair *)b;

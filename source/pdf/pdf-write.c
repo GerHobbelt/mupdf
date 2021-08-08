@@ -1424,7 +1424,7 @@ lpr_inherit_res(fz_context *ctx, pdf_obj *node, int depth, pdf_obj *dict)
 }
 
 static pdf_obj *
-lpr_inherit(fz_context *ctx, pdf_obj *node, char *text, int depth)
+lpr_inherit(fz_context *ctx, pdf_obj *node, const char *text, int depth)
 {
 	do
 	{

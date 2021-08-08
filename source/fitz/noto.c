@@ -55,17 +55,18 @@
 	do { \
 	extern unsigned char _binary_resources_fonts_##FORGE##_##NAME##_start; \
 	extern unsigned char _binary_resources_fonts_##FORGE##_##NAME##_end; \
-	return *size = \
+	*size = \
 		&_binary_resources_fonts_##FORGE##_##NAME##_end - \
-		&_binary_resources_fonts_##FORGE##_##NAME##_start, \
 		&_binary_resources_fonts_##FORGE##_##NAME##_start; \
+	return &_binary_resources_fonts_##FORGE##_##NAME##_start; \
 	} while (0)
 #else
 #define RETURN(FORGE,NAME) \
 	do { \
 	extern unsigned char _binary_##NAME[]; \
 	extern unsigned int _binary_##NAME##_size; \
-	return *size = _binary_##NAME##_size, _binary_##NAME; \
+	*size = _binary_##NAME##_size; \
+	return _binary_##NAME; \
 	} while (0)
 #endif
 
@@ -88,7 +89,8 @@ fz_lookup_base14_font(fz_context *ctx, const char *name, int *size)
 	if (!strcmp(name, "Symbol")) RETURN(urw,StandardSymbolsPS_cff);
 	if (!strcmp(name, "ZapfDingbats")) RETURN(urw,Dingbats_cff);
 #endif
-	return *size = 0, NULL;
+	*size = 0;
+	return NULL;
 }
 
 #define FAMILY(F, R, I, B, BI) \

@@ -6,7 +6,7 @@
 
 struct fz_tree
 {
-	char *key;
+	const char *key;
 	void *value;
 	fz_tree *left, *right;
 	int level;

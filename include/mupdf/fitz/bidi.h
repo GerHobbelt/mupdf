@@ -84,6 +84,6 @@ void fz_bidi_fragment_text(fz_context *ctx,
 			fz_bidi_direction *baseDir,
 			fz_bidi_fragment_fn *callback,
 			void *arg,
-			int flags);
+	        fz_bidi_flags flags);
 
 #endif

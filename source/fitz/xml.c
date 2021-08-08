@@ -603,7 +603,7 @@ static int close_tag(fz_context *ctx, struct parser *parser, const char *mark, c
 	return 1;
 }
 
-static char *xml_parse_document_imp(fz_context *ctx, struct parser *parser, const char *p)
+static const char *xml_parse_document_imp(fz_context *ctx, struct parser *parser, const char *p)
 {
 	const char *mark;
 	int quote;
@@ -842,7 +842,7 @@ fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white)
 	fz_xml_doc *xml = NULL;
 	fz_xml root, *node;
 	char *p = NULL;
-	char *error;
+	const char *error;
 	int dofree = 0;
 	unsigned char *s;
 	size_t n;

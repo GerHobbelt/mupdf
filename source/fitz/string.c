@@ -26,7 +26,7 @@ fz_tolower(int c)
 size_t
 fz_strnlen(const char *s, size_t n)
 {
-	const char *p = memchr(s, 0, n);
+	const char *p = (const char *)memchr(s, 0, n);
 	return p ? (size_t) (p - s) : n;
 }
 
@@ -65,9 +65,9 @@ fz_strsep(char **stringp, const char *delim)
 size_t
 fz_strlcpy(char *dst, const char *src, size_t siz)
 {
-	register char *d = dst;
-	register const char *s = src;
-	register size_t n = siz;
+	char *d = dst;
+	const char *s = src;
+	size_t n = siz;
 
 	/* Copy as many bytes as will fit */
 	if (n != 0 && --n != 0) {
@@ -91,9 +91,9 @@ fz_strlcpy(char *dst, const char *src, size_t siz)
 size_t
 fz_strlcat(char *dst, const char *src, size_t siz)
 {
-	register char *d = dst;
-	register const char *s = src;
-	register size_t n = siz;
+	char *d = dst;
+	const char *s = src;
+	size_t n = siz;
 	size_t dlen;
 
 	/* Find the end of dst and adjust bytes left but don't go past end */
@@ -352,9 +352,9 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 
 			// bingo: workable/legal #### particle:
 			l = q2 - q;
-			char fmt[10];
-			fz_snprintf(fmt, sizeof(fmt), "%%0%zud", l);
-			l = fz_snprintf(d, w, fmt, page);
+			char partfmt[10];
+			fz_snprintf(partfmt, sizeof(partfmt), "%%0%zud", l);
+			l = fz_snprintf(d, w, partfmt, page);
 			if (l >= w)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
 			w -= l;

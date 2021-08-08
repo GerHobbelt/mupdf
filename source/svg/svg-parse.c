@@ -245,7 +245,8 @@ svg_parse_number_from_style(fz_context *ctx, svg_document *doc, const char *styl
 {
 	if (style)
 	{
-		char *end, *p = strstr(style, att);
+		char* end;
+		const char* p = strstr(style, att);
 		if (p)
 		{
 			size_t n = strlen(att);
@@ -269,7 +270,9 @@ int
 svg_parse_enum_from_style(fz_context *ctx, svg_document *doc, const char *style, const char *att,
 	int ecount, const char *etable[], int value)
 {
-	char buf[100], *end, *p;
+	char buf[100];
+	char* end;
+	const char* p;
 	int i;
 	if (style)
 	{
@@ -299,7 +302,9 @@ char *
 svg_parse_string_from_style(fz_context *ctx, svg_document *doc, const char *style, const char *att,
 	char *buf, int buf_size, const char *value)
 {
-	char *end, *p, quote;
+	char* end;
+	const char* p;
+	char quote;
 	if (style)
 	{
 		p = strstr(style, att);

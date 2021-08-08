@@ -647,7 +647,7 @@ epub_parse_ncx(fz_context *ctx, epub_document *doc, const char *path)
 }
 
 static char *
-find_metadata(fz_context *ctx, fz_xml *metadata, char *key)
+find_metadata(fz_context *ctx, fz_xml *metadata, const char *key)
 {
 	char *text = fz_xml_text(fz_xml_down(fz_xml_find_down(metadata, key)));
 	if (text)

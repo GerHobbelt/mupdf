@@ -266,7 +266,7 @@ fz_insert_gel_rect(fz_context *ctx, fz_rasterizer *ras, float fx0, float fy0, fl
 	fz_insert_gel_raw(ctx, ras, x0, y1, x0, y0);
 }
 
-static int
+static int __cdecl
 cmpedge(const void *va, const void *vb)
 {
 	const fz_edge *a = va;

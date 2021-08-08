@@ -87,7 +87,7 @@ cbz_strnatcmp(const char *a, const char *b)
 	return 0;
 }
 
-static int
+static int __cdecl
 cbz_compare_page_names(const void *a, const void *b)
 {
 	return cbz_strnatcmp(*(const char **)a, *(const char **)b);

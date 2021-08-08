@@ -163,11 +163,11 @@ int pdf_edit_text_field_value(fz_context *ctx, pdf_annot *widget, const char *va
 
 typedef struct
 {
-	char *cn;
-	char *o;
-	char *ou;
-	char *email;
-	char *c;
+	const char *cn;
+	const char *o;
+	const char *ou;
+	const char *email;
+	const char *c;
 }
 pdf_pkcs7_distinguished_name;
 
@@ -227,7 +227,7 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 
 int pdf_count_signatures(fz_context *ctx, pdf_document *doc);
 
-char *pdf_signature_error_description(pdf_signature_error err);
+const char *pdf_signature_error_description(pdf_signature_error err);
 
 pdf_pkcs7_distinguished_name *pdf_signature_get_signatory(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_document *doc, pdf_obj *signature);
 pdf_pkcs7_distinguished_name *pdf_signature_get_widget_signatory(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_annot *widget);

@@ -442,7 +442,7 @@ flush_word(fz_context *ctx, fz_ocr_device *ocr)
 			trm.f = char_bbox.y0;
 			fz_show_glyph(ctx, text, ocr->font, trm,
 				ocr->chars[i], ocr->chars[i],
-					0, 0, FZ_BIDI_LTR, 0);
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
 		}
 
 		fz_fill_text(ctx, ocr->target, text, fz_identity,
@@ -960,7 +960,7 @@ rewrite_close(fz_context *ctx, fz_device *dev)
 				trm.f = char_bbox.y0;
 				fz_show_glyph(ctx, text, font, trm,
 					word->unicode[j], word->unicode[j],
-					0, 0, FZ_BIDI_LTR, 0);
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
 			}
 		}
 

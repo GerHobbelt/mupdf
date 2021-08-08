@@ -15,7 +15,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "buffer is too large to deflate");
 
 	output_n = zng_compressBound(input_n);
-	output_p = Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
+	output_p = (unsigned char *)Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
 	result = zng_compress(output_p, &output_n, input_p, input_n);
 	if (result != Z_OK)
 	{
@@ -24,7 +24,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 	}
 
 	fz_try(ctx)
-		output_p = fz_realloc(ctx, output_p, output_n);
+		output_p = (unsigned char *)fz_realloc(ctx, output_p, output_n);
 	fz_catch(ctx)
 	{
 		fz_free(ctx, output_p);

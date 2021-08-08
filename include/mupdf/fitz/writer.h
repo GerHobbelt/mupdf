@@ -189,7 +189,7 @@ void fz_drop_document_writer(fz_context *ctx, fz_document_writer *wri);
 #define FZ_DW_COLORSPACE_CMYK 4
 
 fz_document_writer *fz_new_pixmap_writer(fz_context *ctx, const char *path, const char *options, const char *default_path, int n,
-	void (*save)(fz_context *ctx, fz_pixmap *pix, const char *filename));
+	void (*save)(fz_context *ctx, const fz_pixmap *pix, const char *filename));
 
 FZ_DATA extern const char *fz_pdf_write_options_usage;
 FZ_DATA extern const char *fz_svg_write_options_usage;

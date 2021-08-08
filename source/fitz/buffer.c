@@ -14,7 +14,7 @@ fz_new_buffer(fz_context *ctx, size_t size)
 	b->refs = 1;
 	fz_try(ctx)
 	{
-		b->data = Memento_label(fz_malloc(ctx, size), "fz_buffer_data");
+		b->data = (unsigned char *)Memento_label(fz_malloc(ctx, size), "fz_buffer_data");
 	}
 	fz_catch(ctx)
 	{
@@ -110,7 +110,7 @@ fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size)
 fz_buffer *
 fz_keep_buffer(fz_context *ctx, fz_buffer *buf)
 {
-	return fz_keep_imp(ctx, buf, &buf->refs);
+	return (fz_buffer *)fz_keep_imp(ctx, buf, &buf->refs);
 }
 
 void
@@ -129,7 +129,7 @@ fz_resize_buffer(fz_context *ctx, fz_buffer *buf, size_t size)
 {
 	if (buf->shared)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot resize a buffer with shared storage");
-	buf->data = fz_realloc(ctx, buf->data, size);
+	buf->data = (unsigned char *)fz_realloc(ctx, buf->data, size);
 	buf->cap = size;
 	if (buf->len > buf->cap)
 		buf->len = buf->cap;
@@ -215,7 +215,7 @@ fz_append_buffer(fz_context *ctx, fz_buffer *buf, fz_buffer *extra)
 {
 	if (buf->cap - buf->len < extra->len)
 	{
-		buf->data = fz_realloc(ctx, buf->data, buf->len + extra->len);
+		buf->data = (unsigned char *)fz_realloc(ctx, buf->data, buf->len + extra->len);
 		buf->cap = buf->len + extra->len;
 	}
 
@@ -367,7 +367,7 @@ fz_append_bits_pad(fz_context *ctx, fz_buffer *buf)
 
 static void fz_append_emit(fz_context *ctx, void *buffer, int c)
 {
-	fz_append_byte(ctx, buffer, c);
+	fz_append_byte(ctx, (fz_buffer *)buffer, c);
 }
 
 void

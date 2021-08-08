@@ -28,7 +28,8 @@ typedef enum
 	FZ_SEPARATION_SPOT = 1,
 	/* Disabled colors are not rendered at all in the final
 	 * output. */
-	FZ_SEPARATION_DISABLED = 2
+	FZ_SEPARATION_DISABLED = 2,
+	FZ_SEPARATION_DISABLED_RENDER = 3
 } fz_separation_behavior;
 
 /**

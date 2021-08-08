@@ -211,7 +211,7 @@ static void fmtint64(struct fmtbuf *out, int64_t value, int s, int z, int w, int
 	fmtuint64(out, a, s, z, w, base);
 }
 
-static void fmtquote(struct fmtbuf *out, const unsigned char *s, size_t slen, int sq, int eq, int verbatim, int no_hex_unicode_only)
+static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int eq, int verbatim, int no_hex_unicode_only)
 {
 	int i, n, c;
 	fmtputc(out, sq);
@@ -241,7 +241,7 @@ static void fmtquote(struct fmtbuf *out, const unsigned char *s, size_t slen, in
 					for (i = 0; i < l; ++i)
 						fmtputc(out, buf[i]);
 
-					c = s[0];
+					c = ((const unsigned char*)s)[0];
 					if (!no_hex_unicode_only) {
 						fmtputc(out, '\\');
 						fmtputc(out, 'x');
@@ -258,7 +258,7 @@ static void fmtquote(struct fmtbuf *out, const unsigned char *s, size_t slen, in
 				if (verbatim)
 				{
 					for (i = 0; i < n; ++i)
-						fmtputc(out, s[i]);
+						fmtputc(out, ((const unsigned char*)s)[i]);
 				}
 				else if (c < 0x10000)
 				{
@@ -356,7 +356,7 @@ static void fmtname(struct fmtbuf *out, const char *s)
 #define FPBO_VERBATIM_UNICODE		0x0002
 #define FPBO_NO_CONTROL_ESCAPES		0x0004
 
-static void fmt_print_buffer_as_hex(struct fmtbuf* out, const unsigned char* data, size_t datalen, int p, int mode)
+static void fmt_print_buffer_as_hex(struct fmtbuf* out, const char* data, size_t datalen, int p, int mode)
 {
 	if (!data)
 		fmtputs(out, "(null)");
@@ -375,7 +375,7 @@ static void fmt_print_buffer_as_hex(struct fmtbuf* out, const unsigned char* dat
 		p = 1;
 	int segging = p;
 	while (datalen-- > 0) {
-		int c = *data++;
+		int c = (unsigned char)*data++;
 		fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
 		fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 		--segging;
@@ -395,7 +395,7 @@ static void fmt_print_buffer_as_hex(struct fmtbuf* out, const unsigned char* dat
 
 	The results from that analysis will determine how the data is printed exactly: as a HEX DUMP or a more-or-less sane STRING.
 */
-static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, const unsigned char* data, size_t datalen, int flags, int mode)
+static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, const char* data, size_t datalen, int flags, int mode)
 {
 	// Step 1: Content Analysis
 	//
@@ -417,7 +417,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 
 	for (i = 0; i < datalen; i++)
 	{
-		c = data[i];
+		c = ((const unsigned char*)data)[i];
 		switch (c)
 		{
 		case 0:
@@ -460,7 +460,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 			}
 			else if (c >= 127)
 			{
-				// decode UTF8 to unicode
+				// decode UTF8 to Unicode
 				int u;
 				int l = fz_chartorune(&u, data + i, datalen - i);
 				i += l - 1;
@@ -580,7 +580,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 							else if (mode & FPBO_VERBATIM_UNICODE)
 							{
 								for (i = 0; i < n; ++i)
-									fmtputc(fmt, data[i]);
+									fmtputc(fmt, ((const unsigned char*)data)[i]);
 							}
 							else if (c < 0x10000)
 							{
@@ -655,7 +655,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 						int n = fz_chartorune(&c, data, datalen);
 						if (n == 1) {
 							// grab byte/character again for hexdumping, as `c` can be RuneError and we don't wanna see that one.
-							int b = *data;
+							int b = ((const unsigned char*))data)[0];
 							fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
 							fmtputc(fmt, fz_hex_digits[(b) & 0x0F]);
 
@@ -698,7 +698,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 						}
 						else {
 							for (i = 0; i < n; ++i) {
-								int b = data[i];
+								int b = ((const unsigned char*)data)[i];
 								if (i > 0)
 									fmtputc(fmt, '.');
 								fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
@@ -767,7 +767,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 					for (i = 0; i < l; ++i)
 						fmtputc(fmt, buf[i]);
 
-					c = data[0];
+					c = ((const unsigned char*)data)[0];
 					if ((mode & FPBO_JSON_MODE) || !(flags & PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX)) {
 						// some JSON parsers don't accept \xNN encodings, only \u00XX
 						fmtputs(fmt, "\\u00");
@@ -784,7 +784,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 				else if (mode & FPBO_VERBATIM_UNICODE)
 				{
 					for (i = 0; i < n; ++i)
-						fmtputc(fmt, data[i]);
+						fmtputc(fmt, ((const unsigned char*)data)[i]);
 				}
 				else if (c < 0x10000)
 				{
@@ -1282,7 +1282,7 @@ struct snprintf_buffer
 
 static void snprintf_emit(fz_context *ctx, void *out_, int c)
 {
-	struct snprintf_buffer *out = out_;
+	struct snprintf_buffer *out = (struct snprintf_buffer *)out_;
 	if (out->n < out->s)
 		out->p[out->n] = c;
 	++(out->n);

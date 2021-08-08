@@ -552,7 +552,7 @@ fz_append_display_node(
 	if (path_off)
 	{
 		my_path = (void *)(&node_ptr[path_off]);
-		(void)fz_pack_path(ctx, (void *)my_path, path_size * sizeof(fz_display_node), path);
+		(void)fz_pack_path(ctx, (uint8_t *)my_path, path_size * sizeof(fz_display_node), path);
 	}
 
 	if (stroke_off)
@@ -1511,7 +1511,7 @@ fz_new_display_list(fz_context *ctx, fz_rect mediabox)
 fz_display_list *
 fz_keep_display_list(fz_context *ctx, fz_display_list *list)
 {
-	return fz_keep_storable(ctx, &list->storable);
+	return (fz_display_list *)fz_keep_storable(ctx, &list->storable);
 }
 
 void

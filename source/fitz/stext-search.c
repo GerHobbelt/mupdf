@@ -462,10 +462,14 @@ static const char *find_string(const char *s, const char *needle, const char **e
 	{
 		end = match_string(s, needle);
 		if (end)
-			return *endp = end, s;
+		{
+			*endp = end;
+			return s;
+		}
 		++s;
 	}
-	return *endp = NULL, NULL;
+	*endp = NULL;
+	return NULL;
 }
 
 int

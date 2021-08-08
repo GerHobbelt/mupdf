@@ -414,7 +414,7 @@ create_levels(fz_context *ctx,
 		size_t len,
 		fz_bidi_direction *baseDir,
 		int resolveWhiteSpace,
-		int flags)
+	    fz_bidi_flags flags)
 {
 	fz_bidi_level *levels, *plevels;
 	fz_bidi_chartype *types = NULL;
@@ -423,13 +423,13 @@ create_levels(fz_context *ctx,
 	const uint32_t *ptext;
 	size_t plen, remaining;
 
-	levels = Memento_label(fz_malloc(ctx, len * sizeof(*levels)), "bidi_levels");
+	levels = (fz_bidi_level *)Memento_label(fz_malloc(ctx, len * sizeof(*levels)), "bidi_levels");
 
 	fz_var(types);
 
 	fz_try(ctx)
 	{
-		types = fz_malloc(ctx, len * sizeof(fz_bidi_chartype));
+		types = (fz_bidi_chartype *)fz_malloc(ctx, len * sizeof(fz_bidi_chartype));
 
 		classify_characters(ctx, text, types, len, flags);
 
@@ -533,7 +533,7 @@ void fz_bidi_fragment_text(fz_context *ctx,
 		fz_bidi_direction *baseDir,
 		fz_bidi_fragment_fn *callback,
 		void *arg,
-		int flags)
+	    fz_bidi_flags flags)
 {
 	size_t startOfFragment;
 	size_t i;

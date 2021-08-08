@@ -556,9 +556,9 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 				if (line->first_char)
 				{
 					fz_font *font = line->first_char->font;
-					char *font_family = "sans-serif";
-					char *font_weight = "normal";
-					char *font_style = "normal";
+					const char *font_family = "sans-serif";
+					const char *font_weight = "normal";
+					const char *font_style = "normal";
 					if (fz_font_is_monospaced(ctx, font)) font_family = "monospace";
 					else if (fz_font_is_serif(ctx, font)) font_family = "serif";
 					if (fz_font_is_bold(ctx, font)) font_weight = "bold";

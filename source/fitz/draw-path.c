@@ -318,7 +318,7 @@ typedef struct sctx
 	float flatness;
 	const fz_stroke_state *stroke;
 
-	int linejoin;
+	fz_linejoin linejoin;
 	float linewidth;
 	float miterlimit;
 	fz_point beg[2];
@@ -333,7 +333,8 @@ typedef struct sctx
 	float dash_phase;
 	int dash_len;
 	float dash_total;
-	int toggle, cap;
+	int toggle;
+	fz_linecap cap;
 	int offset;
 	float phase;
 	fz_point dash_cur;
@@ -1028,7 +1029,7 @@ fz_dash_lineto(fz_context *ctx, struct sctx *s, float bx, float by, int from_bez
 	float mx, my;
 	float old_bx, old_by;
 	int n;
-	int dash_cap = s->stroke->dash_cap;
+	fz_linecap dash_cap = s->stroke->dash_cap;
 
 	ax = s->dash_cur.x;
 	ay = s->dash_cur.y;

@@ -264,7 +264,7 @@ pnm_read_real(fz_context *ctx, const unsigned char *p, const unsigned char *e, f
 static const unsigned char *
 pnm_read_tupletype(fz_context *ctx, const unsigned char *p, const unsigned char *e, int *tupletype)
 {
-	const struct { int len; char *str; int type; } tupletypes[] =
+	const struct { int len; const char *str; int type; } tupletypes[] =
 	{
 		{13, "BLACKANDWHITE", PAM_BW},
 		{19, "BLACKANDWHITE_ALPHA", PAM_BWA},

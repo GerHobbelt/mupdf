@@ -313,7 +313,7 @@ void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, voi
  *             catch region entered with state = 1.
  */
 
-FZ_NORETURN static void throw(fz_context *ctx, int code)
+FZ_NORETURN static void _throw(fz_context *ctx, int code)
 {
 	if (ctx->error.top > ctx->error.stack)
 	{
@@ -422,7 +422,7 @@ FZ_NORETURN void fz_vthrow(fz_context *ctx, int code, const char *fmt, va_list a
 			ctx->error.print(ctx->error.print_user, ctx->error.message);
 	}
 
-	throw(ctx, code);
+	_throw(ctx, code);
 }
 
 /* coverity[+kill] */
@@ -456,7 +456,7 @@ FZ_NORETURN void fz_rethrow(fz_context *ctx)
 		assert(ctx->error.last_nonzero_errcode > FZ_ERROR_NONE);
 		ctx->error.errcode = ctx->error.last_nonzero_errcode;
 	}
-	throw(ctx, ctx->error.errcode);
+	_throw(ctx, ctx->error.errcode);
 }
 
 void fz_rethrow_if(fz_context *ctx, int err)

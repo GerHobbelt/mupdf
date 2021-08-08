@@ -208,7 +208,7 @@ fz_open_jbig2d(fz_context *ctx, fz_stream *chain, fz_jbig2_globals *globals, int
 	state->alloc.alloc.free_ = fz_jbig2_free;
 	state->alloc.alloc.realloc_ = fz_jbig2_realloc;
 
-	options = 0;
+	options = JBIG2_OPTIONS_NONE;
 	if (embedded)
 		options |= JBIG2_OPTIONS_EMBEDDED;
 

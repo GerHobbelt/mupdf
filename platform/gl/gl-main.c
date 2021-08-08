@@ -864,7 +864,7 @@ void load_page(void)
 				if (is_signed)
 				{
 					int valid_until, is_readonly;
-					char *cert_error, *digest_error;
+					const char *cert_error, *digest_error;
 					pdf_pkcs7_distinguished_name *dn;
 					pdf_pkcs7_verifier *verifier;
 					char *signatory = NULL;

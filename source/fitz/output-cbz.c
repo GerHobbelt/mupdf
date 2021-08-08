@@ -111,7 +111,7 @@ typedef struct
 	fz_document_writer super;
 	fz_draw_options options;
 	fz_pixmap *pixmap;
-	void (*save)(fz_context *ctx, fz_pixmap *pix, const char *filename);
+	void (*save)(fz_context *ctx, const fz_pixmap *pix, const char *filename);
 	int count;
 	char *path;
 } fz_pixmap_writer;
@@ -157,7 +157,7 @@ pixmap_drop_writer(fz_context *ctx, fz_document_writer *wri_)
 fz_document_writer *
 fz_new_pixmap_writer(fz_context *ctx, const char *path, const char *options,
 	const char *default_path, int n,
-	void (*save)(fz_context *ctx, fz_pixmap *pix, const char *filename))
+	void (*save)(fz_context *ctx, const fz_pixmap *pix, const char *filename))
 {
 	fz_pixmap_writer *wri = fz_new_derived_document_writer(ctx, fz_pixmap_writer, pixmap_begin_page, pixmap_end_page, NULL, pixmap_drop_writer);
 

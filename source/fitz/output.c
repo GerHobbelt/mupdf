@@ -22,7 +22,7 @@
 static void
 file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
-	FILE *file = opaque;
+	FILE *file = (FILE *)opaque;
 	size_t n;
 
 	if (count == 0)
@@ -208,7 +208,7 @@ void fz_set_stddbg(fz_context *ctx, fz_output *out)
 static void
 file_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
 {
-	FILE *file = opaque;
+	FILE *file = (FILE *)opaque;
 #ifdef _WIN32
 	int n = _fseeki64(file, off, whence);
 #else
@@ -221,7 +221,7 @@ file_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
 static int64_t
 file_tell(fz_context *ctx, void *opaque)
 {
-	FILE *file = opaque;
+	FILE *file = (FILE *)opaque;
 #ifdef _WIN32
 	int64_t off = _ftelli64(file);
 #else
@@ -235,7 +235,7 @@ file_tell(fz_context *ctx, void *opaque)
 static void
 file_drop(fz_context *ctx, void *opaque)
 {
-	FILE *file = opaque;
+	FILE *file = (FILE *)opaque;
 	int n = fclose(file);
 	if (n < 0)
 		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
@@ -244,7 +244,7 @@ file_drop(fz_context *ctx, void *opaque)
 static fz_stream *
 file_as_stream(fz_context *ctx, void *opaque)
 {
-	FILE *file = opaque;
+	FILE *file = (FILE *)opaque;
 	fflush(file);
 	return fz_open_file_ptr_no_close(ctx, file);
 }
@@ -495,7 +495,7 @@ fz_truncate_output(fz_context *ctx, fz_output *out)
 static void
 fz_write_emit(fz_context *ctx, void *out, int c)
 {
-	fz_write_byte(ctx, out, c);
+	fz_write_byte(ctx, (fz_output *)out, c);
 }
 
 void
@@ -550,7 +550,7 @@ fz_write_char(fz_context *ctx, fz_output *out, char x)
 void
 fz_write_data(fz_context *ctx, fz_output *out, const void *data_, size_t size)
 {
-	const char *data = data_;
+	const char *data = (const char *)data_;
 
 	if (out->bp)
 	{
@@ -687,7 +687,7 @@ fz_write_rune(fz_context *ctx, fz_output *out, int rune)
 void
 fz_write_base64(fz_context *ctx, fz_output *out, const unsigned char *data, size_t size, int newline)
 {
-	static const char set[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	static const char set[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	size_t i;
 	for (i = 0; i + 3 <= size; i += 3)
 	{

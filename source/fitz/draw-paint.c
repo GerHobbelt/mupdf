@@ -2410,6 +2410,7 @@ fz_paint_glyph_mask(int span, unsigned char *dp, int da, const fz_glyph *glyph, 
 	while (h--)
 	{
 		int skip_xx, ww, len, extend;
+		int v = 0;
 		const unsigned char *runp;
 		unsigned char *ddp = dp;
 		int offset = ((const int *)(glyph->data))[skip_y++];
@@ -2422,7 +2423,7 @@ fz_paint_glyph_mask(int span, unsigned char *dp, int da, const fz_glyph *glyph, 
 			skip_xx = skip_x;
 			while (skip_xx)
 			{
-				int v = *runp++;
+				v = *runp++;
 				switch (v & 3)
 				{
 				case 0: /* Extend */
@@ -2470,7 +2471,7 @@ fz_paint_glyph_mask(int span, unsigned char *dp, int da, const fz_glyph *glyph, 
 			}
 			while (ww > 0)
 			{
-				int v = *runp++;
+				v = *runp++;
 				switch(v & 3)
 				{
 				case 0: /* Extend */

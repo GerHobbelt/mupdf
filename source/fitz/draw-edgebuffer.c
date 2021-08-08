@@ -1227,7 +1227,9 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			cursor_left(eb, rev, ex);
 			cr->y += phase3_y_steps;
 		}
-	} else {
+	}
+	else {
+		{
 		/* So lines decreasing in y. */
 		/* We want to change from sy to ey, which are guaranteed to be on
 		 * different scanlines. We do this in 3 phases.
@@ -1243,8 +1245,8 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 		if (y_steps < 0)
 		{
 			int mx, my;
-			mx = sx + ((ex-sx)>>1);
-			my = sy + ((ey-sy)>>1);
+			mx = sx + ((ex - sx) >> 1);
+			my = sy + ((ey - sy) >> 1);
 			do_mark_line_app(ctx, eb, sx, sy, mx, my, rev);
 			do_mark_line_app(ctx, eb, mx, my, ex, ey, rev);
 			return;
@@ -1288,7 +1290,8 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				cursor_step(eb, rev, -phase3_y_steps, sx);
 				assert(cr->left == sx && cr->right == sx);
 			}
-		} else if (sx < ex) {
+		}
+		else if (sx < ex) {
 			/* Lines increasing in x. (Rightwards, falling) */
 			int phase1_x_steps, phase3_x_steps;
 			fixed x_steps = ex - sx;
@@ -1296,7 +1299,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			/* Phase 1: */
 			cursor_left_merge(eb, rev, sx);
 			if (phase1_y_steps) {
-				phase1_x_steps = (int)(((int64_t)x_steps * phase1_y_steps + y_steps/2) / y_steps);
+				phase1_x_steps = (int)(((int64_t)x_steps * phase1_y_steps + y_steps / 2) / y_steps);
 				x_steps -= phase1_x_steps;
 				sx += phase1_x_steps;
 				/* Phase 1 in a falling line never moves us into a new scanline. */
@@ -1305,11 +1308,12 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				y_steps -= phase1_y_steps;
 				if (y_steps == 0)
 					goto endFalling;
-			} else
+			}
+			else
 				cursor_right_merge(eb, rev, sx);
 
 			/* Phase 3: precalculation */
-			phase3_x_steps = (int)(((int64_t)x_steps * phase3_y_steps + y_steps/2) / y_steps);
+			phase3_x_steps = (int)(((int64_t)x_steps * phase3_y_steps + y_steps / 2) / y_steps);
 			x_steps -= phase3_x_steps;
 			y_steps -= phase3_y_steps;
 			assert((y_steps & (fixed_1 - 1)) == 0);
@@ -1320,9 +1324,9 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			if (y_steps) {
 				/* We want to change sx by x_steps in y_steps steps.
 				 * So each step, we add x_steps/y_steps to sx. That's x_inc + n_inc/ey. */
-				int x_inc = x_steps/y_steps;
+				int x_inc = x_steps / y_steps;
 				int n_inc = x_steps - (x_inc * y_steps);
-				int f = y_steps/2;
+				int f = y_steps / 2;
 				int d = y_steps;
 
 				cursor_always_step(eb, rev, -fixed_1, sx);
@@ -1350,7 +1354,8 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				cursor_right(eb, rev, ex);
 				assert(cr->left == sx && cr->right == ex);
 			}
-		} else {
+		}
+		else {
 			/* Lines decreasing in x. (Falling) */
 			int phase1_x_steps, phase3_x_steps;
 			fixed x_steps = sx - ex;
@@ -1358,7 +1363,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			/* Phase 1: */
 			cursor_right_merge(eb, rev, sx);
 			if (phase1_y_steps) {
-				phase1_x_steps = (int)(((int64_t)x_steps * phase1_y_steps + y_steps/2) / y_steps);
+				phase1_x_steps = (int)(((int64_t)x_steps * phase1_y_steps + y_steps / 2) / y_steps);
 				x_steps -= phase1_x_steps;
 				sx -= phase1_x_steps;
 				/* Phase 1 in a falling line never moves us into a new scanline. */
@@ -1367,11 +1372,12 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				y_steps -= phase1_y_steps;
 				if (y_steps == 0)
 					goto endFalling;
-			} else
+			}
+			else
 				cursor_left_merge(eb, rev, sx);
 
 			/* Phase 3: precalculation */
-			phase3_x_steps = (int)(((int64_t)x_steps * phase3_y_steps + y_steps/2) / y_steps);
+			phase3_x_steps = (int)(((int64_t)x_steps * phase3_y_steps + y_steps / 2) / y_steps);
 			x_steps -= phase3_x_steps;
 			y_steps -= phase3_y_steps;
 			assert((y_steps & (fixed_1 - 1)) == 0);
@@ -1382,9 +1388,9 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			if (y_steps) {
 				/* We want to change sx by x_steps in y_steps steps.
 				 * So each step, we sub x_steps/y_steps from sx. That's x_inc + n_inc/ey. */
-				int x_inc = x_steps/y_steps;
+				int x_inc = x_steps / y_steps;
 				int n_inc = x_steps - (x_inc * y_steps);
-				int f = y_steps/2;
+				int f = y_steps / 2;
 				int d = y_steps;
 
 				cursor_always_step(eb, rev, -fixed_1, sx);
@@ -1412,6 +1418,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				cursor_left(eb, rev, ex);
 				assert(cr->left == ex && cr->right == sx);
 			}
+		}
 		}
 endFalling:
 		if (truncated)
@@ -1469,7 +1476,7 @@ static void fz_insert_edgebuffer_app(fz_context *ctx, fz_rasterizer *ras, float 
 	mark_line_app(ctx, eb, sx, sy, ex, ey, rev);
 }
 
-static int intcmp(const void *a, const void *b)
+static int __cdecl intcmp(const void *a, const void *b)
 {
 	return *((int*)a) - *((int *)b);
 }
@@ -1620,7 +1627,7 @@ static void fz_convert_edgebuffer(fz_context *ctx, fz_rasterizer *ras, int eofil
 	}
 }
 
-static int edgecmp(const void *a, const void *b)
+static int __cdecl edgecmp(const void *a, const void *b)
 {
 	int left  = ((int*)a)[0];
 	int right = ((int*)b)[0];

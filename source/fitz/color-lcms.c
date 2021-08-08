@@ -9,7 +9,7 @@
 #endif
 
 #ifdef HAVE_LCMS2MT
-#define GLOINIT cmsContext glo = ctx->colorspace->icc_instance;
+#define GLOINIT cmsContext glo = (cmsContext)ctx->colorspace->icc_instance;
 #define GLO glo,
 #include "lcms2mt.h"
 #include "lcms2mt_plugin.h"
@@ -35,19 +35,19 @@ static void fz_lcms_log_error(cmsContext id, cmsUInt32Number error_code, const c
 
 static void *fz_lcms_malloc(cmsContext id, unsigned int size)
 {
-	fz_context *ctx = cmsGetContextUserData(id);
+	fz_context *ctx = (fz_context *)cmsGetContextUserData(id);
 	return Memento_label(fz_malloc_no_throw(ctx, size), "lcms");
 }
 
 static void *fz_lcms_realloc(cmsContext id, void *ptr, unsigned int size)
 {
-	fz_context *ctx = cmsGetContextUserData(id);
+	fz_context *ctx = (fz_context*)cmsGetContextUserData(id);
 	return Memento_label(fz_realloc_no_throw(ctx, ptr, size), "lcms");
 }
 
 static void fz_lcms_free(cmsContext id, void *ptr)
 {
-	fz_context *ctx = cmsGetContextUserData(id);
+	fz_context *ctx = (fz_context*)cmsGetContextUserData(id);
 	fz_free(ctx, ptr);
 }
 
@@ -78,7 +78,7 @@ void fz_new_icc_context(fz_context *ctx)
 
 void fz_drop_icc_context(fz_context *ctx)
 {
-	cmsContext glo = ctx->colorspace->icc_instance;
+	cmsContext glo = (cmsContext)ctx->colorspace->icc_instance;
 	if (glo)
 		cmsDeleteContext(glo);
 	ctx->colorspace->icc_instance = NULL;
@@ -113,7 +113,7 @@ fz_icc_profile *fz_new_icc_profile(fz_context *ctx, unsigned char *data, size_t 
 {
 	GLOINIT
 	fz_icc_profile *profile;
-	profile = cmsOpenProfileFromMem(GLO data, (cmsUInt32Number)size);
+	profile = (fz_icc_profile *)cmsOpenProfileFromMem(GLO data, (cmsUInt32Number)size);
 	if (profile == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cmsOpenProfileFromMem failed");
 	return profile;

@@ -8,7 +8,7 @@
 fz_output *fz_new_log_for_module(fz_context *ctx, const char *module)
 {
 	char text[256];
-	char *s = NULL;
+	const char *s = NULL;
 
 	if (module)
 	{
