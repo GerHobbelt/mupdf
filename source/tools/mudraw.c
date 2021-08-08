@@ -588,7 +588,8 @@ file_level_headers(fz_context *ctx, const char *filename)
 		fz_print_stext_header_as_xhtml(ctx, out);
 
 	else if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
-		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX)
+		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
+		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
 	{
 		fz_write_printf(ctx, out, "<document name=\"%s\">\n", fz_path_basename(filename));
 	}
@@ -622,7 +623,8 @@ static void
 file_level_trailers(fz_context *ctx)
 {
 	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
-		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX)
+		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
+		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
 	{
 		fz_write_printf(ctx, out, "</document>\n");
 	}
