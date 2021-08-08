@@ -49,10 +49,32 @@ static int s_write_attribute_string(fz_context *ctx, fz_output *out, const char 
 	return 0;
 }
 
-static int s_write_attribute_char(fz_context *ctx, fz_output *out, const char *id, char value)
+static int s_write_attribute_char(fz_context *ctx, fz_output *out, const char *id, int value)
 {
-	if (value == '"') fz_write_printf(ctx, out, " %s=\"\\%c\"", id, value);
-	else fz_write_printf(ctx, out, " %s=\"%c\"", id, value);
+	// https://stackoverflow.com/questions/866706/which-characters-are-invalid-unless-encoded-in-an-xml-attribute
+	// --> https://www.w3.org/TR/xml/#NT-AttValue
+	/*
+	* Firefox complains if we put special characters here; it's only for debugging
+	* so this isn't really a problem.
+	*/
+	switch (value)
+	{
+	default:
+		if (value >= 32 && value < 127)
+		{
+			fz_write_printf(ctx, out, " %s=\"%c\"", id, (char)value);
+		}
+		else
+		{
+			fz_write_printf(ctx, out, " %s=\"&#x%x;\"", id, value);
+		}
+		break;
+	case '<': fz_write_printf(ctx, out, " %s=\"%s\"", id, "&lt;"); break;
+	//case '>': fz_write_printf(ctx, out, " %s=\"%s\"", id, "&gt;"); break;
+	case '&': fz_write_printf(ctx, out, " %s=\"%s\"", id, "&amp;"); break;
+	case '"': fz_write_printf(ctx, out, " %s='\"'", id); break;
+	//case '\'': fz_write_printf(ctx, out, " %s=\"'\"", id); break;
+	}
 	return 0;
 }
 
@@ -126,14 +148,8 @@ fz_xmltext_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_matrix
 			s_write_attribute_int(ctx, dev->out, "gid", item->gid);
 			s_write_attribute_int(ctx, dev->out, "ucs", item->ucs);
 
-			/*
-			 * Firefox complains if we put special characters here; it's only for debugging
-			 * so this isn't really a problem.
-			 */
-			s_write_attribute_char(ctx, dev->out, "debug_char",
-				(item->ucs >= 32 && item->ucs < 128 && item->ucs != '"')
-					? item->ucs : ' '
-				);
+			s_write_attribute_char(ctx, dev->out, "debug_char", item->ucs);
+
 			s_write_attribute_float(ctx, dev->out, "adv", adv);
 			s_xml_starttag_empty_end(ctx, dev->out);
 		}
@@ -193,17 +209,20 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 		compressed = fz_compressed_image_buffer(ctx, img);
 		if (compressed)
 		{
-			if (compressed->params.type == FZ_IMAGE_UNKNOWN)
+			switch (compressed->params.type)
 			{
+			default:
+			case FZ_IMAGE_UNKNOWN:
+				fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image type %d", compressed->params.type);
 				/* unknown image type. */
-			}
-			else if (compressed->params.type == FZ_IMAGE_RAW)
-			{
+				break;
+			
+			case FZ_IMAGE_RAW:
 				type = "raw";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else if (compressed->params.type == FZ_IMAGE_FAX)
-			{
+				break;
+			
+			case FZ_IMAGE_FAX:
 				type = "fax";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				s_write_attribute_int(ctx, dev->out, "columns", compressed->params.u.fax.columns);
@@ -214,18 +233,18 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 				s_write_attribute_int(ctx, dev->out, "end_of_block", compressed->params.u.fax.end_of_block);
 				s_write_attribute_int(ctx, dev->out, "black_is_1", compressed->params.u.fax.black_is_1);
 				s_write_attribute_int(ctx, dev->out, "damaged_rows_before_error", compressed->params.u.fax.damaged_rows_before_error);
-			}
-			else if (compressed->params.type == FZ_IMAGE_FLATE)
-			{
+				break;
+
+			case FZ_IMAGE_FLATE:
 				type = "flate";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				s_write_attribute_int(ctx, dev->out, "columns", compressed->params.u.flate.columns);
 				s_write_attribute_int(ctx, dev->out, "colors", compressed->params.u.flate.colors);
 				s_write_attribute_int(ctx, dev->out, "predictor", compressed->params.u.flate.predictor);
 				s_write_attribute_int(ctx, dev->out, "bpc", compressed->params.u.flate.bpc);
-			}
-			else if (compressed->params.type == FZ_IMAGE_LZW)
-			{
+				break;
+			
+			case FZ_IMAGE_LZW:
 				type = "lzw";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				s_write_attribute_int(ctx, dev->out, "columns", compressed->params.u.lzw.columns);
@@ -233,58 +252,70 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 				s_write_attribute_int(ctx, dev->out, "predictor", compressed->params.u.lzw.predictor);
 				s_write_attribute_int(ctx, dev->out, "bpc", compressed->params.u.lzw.bpc);
 				s_write_attribute_int(ctx, dev->out, "early_change", compressed->params.u.lzw.early_change);
-			}
-			else if (compressed->params.type == FZ_IMAGE_BMP)
-			{
+				break;
+			
+			case FZ_IMAGE_BMP:
 				type = "bmp";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else if (compressed->params.type == FZ_IMAGE_GIF)
-			{
+				break;
+			
+			case FZ_IMAGE_GIF:
 				type = "gif";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else if (compressed->params.type == FZ_IMAGE_JBIG2)
-			{
+				break;
+			
+			case FZ_IMAGE_JBIG2:
 				type = "jbig2";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				/* do we need to write out *compressed->params.globals somehow? */
-			}
-			else if (compressed->params.type == FZ_IMAGE_JPEG)
-			{
+				break;
+			
+			case FZ_IMAGE_JPEG:
 				type = "jpeg";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				s_write_attribute_int(ctx, dev->out, "color_transform", compressed->params.u.jpeg.color_transform);
-			}
-			else if (compressed->params.type == FZ_IMAGE_JPX)
-			{
+				break;
+			
+			case FZ_IMAGE_JPX:
 				type = "jpx";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				s_write_attribute_int(ctx, dev->out, "smask_in_data", compressed->params.u.jpx.smask_in_data);
-			}
-			else if (compressed->params.type == FZ_IMAGE_JXR)
-			{
+				break;
+			
+			case FZ_IMAGE_JXR:
 				type = "jxr";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else if (compressed->params.type == FZ_IMAGE_PNG)
-			{
+				break;
+			
+			case FZ_IMAGE_PNG:
 				type = "png";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else if (compressed->params.type == FZ_IMAGE_PNM)
-			{
+				break;
+			
+			case FZ_IMAGE_PNM:
 				type = "pnm";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else if (compressed->params.type == FZ_IMAGE_TIFF)
-			{
+				break;
+			
+			case FZ_IMAGE_TIFF:
 				type = "tiff";
 				s_write_attribute_string(ctx, dev->out, "type", type);
-			}
-			else
-			{
-				/* Unrecognised. */
+				break;
+
+			case FZ_IMAGE_RLD:
+				type = "rld";
+				s_write_attribute_string(ctx, dev->out, "type", type);
+				break;
+
+			case FZ_IMAGE_JPEGXL:
+				type = "jpegxl";
+				s_write_attribute_string(ctx, dev->out, "type", type);
+				break;
+
+			case FZ_IMAGE_WEBP:
+				type = "webp";
+				s_write_attribute_string(ctx, dev->out, "type", type);
+				break;
 			}
 
 			if (type)
