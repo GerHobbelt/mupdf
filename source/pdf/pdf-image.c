@@ -616,7 +616,6 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 		else
 		{
 unknown_compression:
-
 			pixmap = fz_get_pixmap_from_image(ctx, image, NULL, NULL, NULL, NULL);
 			n = pixmap->n - pixmap->alpha - pixmap->s; /* number of colorants */
 			if (n == 0)

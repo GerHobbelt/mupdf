@@ -761,7 +761,6 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 		{
 			fz_invert_pixmap(ctx, tile);
 		}
-
 		break;
 	}
 
