@@ -200,6 +200,8 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 {
 	fz_xmltext_device *dev = (fz_xmltext_device*) dev_;
 	fz_pixmap *pixmap = NULL;
+
+	fz_var(pixmap);
 	fz_try(ctx)
 	{
 		const char *type = NULL;
@@ -318,11 +320,11 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 				break;
 			}
 
-			if (type)
+			if (type && 0)
 			{
 				/* Write out raw data. */
 				unsigned char *data;
-				size_t	datasize = fz_buffer_storage(ctx, compressed->buffer, &data);
+				size_t datasize = fz_buffer_storage(ctx, compressed->buffer, &data);
 				size_t i;
 				s_write_attribute_size(ctx, dev->out, "datasize", datasize);
 				s_xml_starttag_end(ctx, dev->out);
@@ -336,42 +338,51 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 			}
 		}
 
-		if (!type)
+		if (type)
 		{
 			/* Compressed data not available, so write out raw pixel values. */
 			int l2factor = 0;
 			int y;
+			int pw = img->w;
+			int ph = img->h;
 			s_write_attribute_string(ctx, dev->out, "type", "pixmap");
-			s_xml_starttag_end(ctx, dev->out);
-			pixmap = img->get_pixmap(ctx, img, NULL /*subarea*/, img->w, img->h, &l2factor);
-			s_write_attribute_int(ctx, dev->out, "x", pixmap->x);
-			s_write_attribute_int(ctx, dev->out, "y", pixmap->y);
-			s_write_attribute_int(ctx, dev->out, "w", pixmap->w);
-			s_write_attribute_int(ctx, dev->out, "h", pixmap->h);
-			s_write_attribute_int(ctx, dev->out, "n", pixmap->n);
-			s_write_attribute_int(ctx, dev->out, "s", pixmap->s);
-			s_write_attribute_int(ctx, dev->out, "alpha", pixmap->alpha);
-			s_write_attribute_int(ctx, dev->out, "flags", pixmap->flags);
-			s_write_attribute_int(ctx, dev->out, "xres", pixmap->xres);
-			s_write_attribute_int(ctx, dev->out, "yres", pixmap->yres);
+			pixmap = fz_get_pixmap_from_image(ctx, img, NULL /*subarea*/, NULL /* &ctm */, &pw, &ph);
+			if (pixmap)
+			{
+				s_write_attribute_int(ctx, dev->out, "raw_width", pw);
+				s_write_attribute_int(ctx, dev->out, "raw_height", ph);
+				s_write_attribute_int(ctx, dev->out, "x", pixmap->x);
+				s_write_attribute_int(ctx, dev->out, "y", pixmap->y);
+				s_write_attribute_int(ctx, dev->out, "w", pixmap->w);
+				s_write_attribute_int(ctx, dev->out, "h", pixmap->h);
+				s_write_attribute_int(ctx, dev->out, "n", pixmap->n);
+				s_write_attribute_int(ctx, dev->out, "s", pixmap->s);
+				s_write_attribute_int(ctx, dev->out, "alpha", pixmap->alpha);
+				s_write_attribute_int(ctx, dev->out, "flags", pixmap->flags);
+				s_write_attribute_int(ctx, dev->out, "xres", pixmap->xres);
+				s_write_attribute_int(ctx, dev->out, "yres", pixmap->yres);
+			}
 			s_write_attribute_matrix(ctx, dev->out, "ctm", &ctm);
 			s_xml_starttag_end(ctx, dev->out);
-			for (y=0; y<pixmap->h; ++y)
+			if (pixmap)
 			{
-				int x;
-				s_xml_starttag_begin(ctx, dev->out, "line");
-				s_write_attribute_int(ctx, dev->out, "y", y);
-				s_xml_starttag_end(ctx, dev->out);
-				for (x=0; x<pixmap->w; ++x)
+				for (y = 0; y < pixmap->h; ++y)
 				{
-					int b;
-					fz_write_printf(ctx, dev->out, " ");
-					for (b=0; b<pixmap->n; ++b)
+					int x;
+					s_xml_starttag_begin(ctx, dev->out, "line");
+					s_write_attribute_int(ctx, dev->out, "y", y);
+					s_xml_starttag_end(ctx, dev->out);
+					for (x = 0; x < pixmap->w; ++x)
 					{
-						fz_write_printf(ctx, dev->out, "%02x", pixmap->samples[y*(size_t)pixmap->stride + x*(size_t)pixmap->n + b]);
+						int b;
+						fz_write_printf(ctx, dev->out, " ");
+						for (b = 0; b < pixmap->n; ++b)
+						{
+							fz_write_printf(ctx, dev->out, "%02x", pixmap->samples[y * (size_t)pixmap->stride + x * (size_t)pixmap->n + b]);
+						}
 					}
+					s_xml_endtag(ctx, dev->out, "line");
 				}
-				s_xml_endtag(ctx, dev->out, "line");
 			}
 		}
 		s_xml_endtag(ctx, dev->out, "image");
