@@ -1,2 +1,0 @@
-
-Pick a target; build.

@@ -1,3 +1,4 @@
+# Having a look at others' work
 
 Watch the `bash` console output of `gpp -L` or `gpp -f`: any updates there are a sign that somebody pushed some new work in git.
 

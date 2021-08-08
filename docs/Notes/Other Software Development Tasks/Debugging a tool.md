@@ -1,5 +1,6 @@
+# Debugging a tool
 
-Pick the application by **Set as Activee Project** in t he IDE.
+Pick the application by **Set as Active Project** in the IDE.
 
 Hit F5 key to (build and) run in the debugger.
 

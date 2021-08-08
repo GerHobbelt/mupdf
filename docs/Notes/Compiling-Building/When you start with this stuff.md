@@ -1,3 +1,4 @@
+# When you start with this stuff
 
 Start with loading the Visual Studio `mupdf.sln` solution.
 

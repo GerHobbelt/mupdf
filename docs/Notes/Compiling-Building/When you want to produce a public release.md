@@ -1,3 +1,4 @@
+# When you want to produce a public release
 
 Pick a Release build and make sure the Build Configuration includes the setup project.
 
