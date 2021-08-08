@@ -451,7 +451,7 @@ FZ_NORETURN void fz_rethrow(fz_context *ctx)
 		//
 		// Hence we need to 'stow away' the error code for re-use by the fz_rethrow() call.
 		// For our 'hacky' solution to this conundrum, see the fz_rethrow() implementation:
-		// so as not having to wade to a zillion lines of code to patch all relevant try/catch/rethrow
+		// so as not having to wade through a zillion lines of code to patch all relevant try/catch/rethrow
 		// blocks, we simply remember the last non-zero error code and use that iff the
 		// rethrow would otherwise rethrow a zero=okay exception.
 		assert(ctx->error.last_nonzero_errcode > FZ_ERROR_NONE);

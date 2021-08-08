@@ -156,7 +156,7 @@ typedef size_t (fz_image_get_size_fn)(fz_context *, fz_image *);
 	size: The size of the required allocated structure (the size of
 	the derived structure).
 
-	get: The function to be called to obtain a decoded pixmap.
+	get_pixmap: The function to be called to obtain a decoded pixmap.
 
 	get_size: The function to be called to return the storage size
 	used by this image.
