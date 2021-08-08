@@ -413,8 +413,7 @@ const char *fz_caught_message(fz_context *ctx)
 /* coverity[+kill] */
 FZ_NORETURN void fz_vthrow(fz_context *ctx, int code, const char *fmt, va_list ap)
 {
-	fz_vsnprintf(ctx->error.message, sizeof ctx->error.message, fmt, ap);
-	ctx->error.message[sizeof(ctx->error.message) - 1] = 0;
+	fz_vsnprintf(ctx->error.message, sizeof(ctx->error.message), fmt, ap);
 
 	if (code != FZ_ERROR_ABORT && code != FZ_ERROR_TRYLATER)
 	{

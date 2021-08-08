@@ -152,7 +152,6 @@ void pdfapp_warn(pdfapp_t *app, const char *fmt, ...)
 	va_start(ap, fmt);
 	fz_vsnprintf(buf, sizeof(buf), fmt, ap);
 	va_end(ap);
-	buf[sizeof(buf)-1] = 0;
 	winwarn(app, buf);
 }
 
@@ -163,7 +162,6 @@ void pdfapp_error(pdfapp_t *app, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRIN
 	va_start(ap, fmt);
 	fz_vsnprintf(buf, sizeof(buf), fmt, ap);
 	va_end(ap);
-	buf[sizeof(buf) - 1] = 0;
 	winerror(app, buf);
 }
 
