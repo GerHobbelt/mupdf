@@ -148,7 +148,7 @@ fz_xmltext_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_matrix
 			s_write_attribute_int(ctx, dev->out, "gid", item->gid);
 			s_write_attribute_int(ctx, dev->out, "ucs", item->ucs);
 
-			s_write_attribute_char(ctx, dev->out, "debug_char", item->ucs);
+			s_write_attribute_char(ctx, dev->out, "char", item->ucs);
 
 			s_write_attribute_float(ctx, dev->out, "adv", adv);
 			s_xml_starttag_empty_end(ctx, dev->out);
