@@ -598,7 +598,7 @@ pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colo
 	switch (cbuf->params.type)
 	{
 	default:
-		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown compressed buffer type");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown compressed buffer type %d", cbuf->params.type);
 		break;
 
 	case FZ_IMAGE_JPEG:
