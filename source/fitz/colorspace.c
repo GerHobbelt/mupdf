@@ -1057,6 +1057,11 @@ static void fz_cached_color_convert(fz_context *ctx, fz_color_converter *cc_, co
 	}
 }
 
+static void fz_free_as_void(fz_context* ctx, void* obj)
+{
+	fz_free(ctx, obj);
+}
+
 void fz_init_cached_color_converter(fz_context *ctx, fz_color_converter *cc, fz_colorspace *ss, fz_colorspace *ds, fz_colorspace *is, fz_color_params params)
 {
 	int n = ss->n;
@@ -1074,7 +1079,7 @@ void fz_init_cached_color_converter(fz_context *ctx, fz_color_converter *cc, fz_
 	{
 		fz_find_color_converter(ctx, &cached->base, ss, ds, is, params);
 		if (n * sizeof(float) <= FZ_HASH_TABLE_KEY_LENGTH)
-			cached->hash = fz_new_hash_table(ctx, 256, n * sizeof(float), -1, fz_free);
+			cached->hash = fz_new_hash_table(ctx, 256, n * sizeof(float), -1, fz_free_as_void);
 		else
 			fz_warn(ctx, "colorspace has too many components to be cached");
 	}

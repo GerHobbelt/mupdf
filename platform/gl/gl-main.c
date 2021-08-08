@@ -768,8 +768,8 @@ static int document_shown_as_dirty = 0;
 void update_title(void)
 {
 	char buf[256];
-	char *title;
-	char *extra = "";
+	const char *title;
+	const char *extra = "";
 	size_t n;
 
 	int nc = fz_count_chapters(ctx, doc);

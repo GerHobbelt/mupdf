@@ -26,7 +26,7 @@ typedef struct fz_hash_table fz_hash_table;
 
 	Only used when the entire hash table is dropped.
 */
-typedef void (fz_hash_table_drop_fn)(fz_context *ctx, const void *val);
+typedef void (fz_hash_table_drop_fn)(fz_context *ctx, void *val);
 
 /**
 	Create a new hash table.
