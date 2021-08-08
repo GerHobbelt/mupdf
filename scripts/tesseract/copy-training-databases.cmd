@@ -12,10 +12,16 @@ IF NOT EXIST "%2" goto fail
 cd %2
 
 echo "Unlinking existing links, if any exist..."
-rd tessdata
-rd tessdata_best
-rd tessdata_fast
-rd tessdata_regular
+rmdir tessdata
+rmdir tessdata_best
+rmdir tessdata_fast
+rmdir tessdata_regular
+rem when these paths were COPIES instead of SYMLINKS/HARDLINKS, then they still exist
+rem and a `rm -rf` is in order:
+rmdir /S tessdata
+rmdir /S tessdata_best
+rmdir /S tessdata_fast
+rmdir /S tessdata_regular
 
 echo "Create hardlinks..."
 rem robocopy /S /XO /XJF /R:0 /NP %1\..\..\thirdparty\tessdata_best\ %2\tessdata_best\ *.* /XF .git*
