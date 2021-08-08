@@ -4027,7 +4027,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 		{
 			// This will attempt to 'decode' the content into UTF8 format, with trailing NUL bytes stripped off.
 			size_t datalen = 0;
-			const unsigned char* data = pdf_to_text_string(ctx, obj, &datalen);
+			const char* data = pdf_to_text_string(ctx, obj, &datalen);
 			int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 			if (smart_mod)
 				smart_mod = -smart_mod;

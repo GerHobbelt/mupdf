@@ -241,7 +241,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 					for (i = 0; i < l; ++i)
 						fmtputc(out, buf[i]);
 
-					c = ((const unsigned char*)s)[0];
+					c = (unsigned char)s[0];
 					if (!no_hex_unicode_only) {
 						fmtputc(out, '\\');
 						fmtputc(out, 'x');
@@ -258,7 +258,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 				if (verbatim)
 				{
 					for (i = 0; i < n; ++i)
-						fmtputc(out, ((const unsigned char*)s)[i]);
+						fmtputc(out, (unsigned char)s[i]);
 				}
 				else if (c < 0x10000)
 				{
@@ -417,7 +417,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 
 	for (i = 0; i < datalen; i++)
 	{
-		c = ((const unsigned char*)data)[i];
+		c = (unsigned char)data[i];
 		switch (c)
 		{
 		case 0:
@@ -580,7 +580,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 							else if (mode & FPBO_VERBATIM_UNICODE)
 							{
 								for (i = 0; i < n; ++i)
-									fmtputc(fmt, ((const unsigned char*)data)[i]);
+									fmtputc(fmt, (unsigned char)data[i]);
 							}
 							else if (c < 0x10000)
 							{
@@ -655,7 +655,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 						int n = fz_chartorune(&c, data, datalen);
 						if (n == 1) {
 							// grab byte/character again for hexdumping, as `c` can be RuneError and we don't wanna see that one.
-							int b = ((const unsigned char*))data)[0];
+							int b = (unsigned char)data[0];
 							fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
 							fmtputc(fmt, fz_hex_digits[(b) & 0x0F]);
 
@@ -698,7 +698,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 						}
 						else {
 							for (i = 0; i < n; ++i) {
-								int b = ((const unsigned char*)data)[i];
+								int b = (unsigned char)data[i];
 								if (i > 0)
 									fmtputc(fmt, '.');
 								fmtputc(fmt, fz_hex_digits[(b >> 4) & 0x0F]);
@@ -767,7 +767,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 					for (i = 0; i < l; ++i)
 						fmtputc(fmt, buf[i]);
 
-					c = ((const unsigned char*)data)[0];
+					c = (unsigned char)data[0];
 					if ((mode & FPBO_JSON_MODE) || !(flags & PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX)) {
 						// some JSON parsers don't accept \xNN encodings, only \u00XX
 						fmtputs(fmt, "\\u00");
@@ -784,7 +784,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 				else if (mode & FPBO_VERBATIM_UNICODE)
 				{
 					for (i = 0; i < n; ++i)
-						fmtputc(fmt, ((const unsigned char*)data)[i]);
+						fmtputc(fmt, (unsigned char)data[i]);
 				}
 				else if (c < 0x10000)
 				{
@@ -1051,7 +1051,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 
 			case 'H':
 			{
-				uint8_t *ptr = (uint8_t*)va_arg(args, void*);
+				const char *ptr = (const char *)va_arg(args, void*);
 				size_t seglen = va_arg(args, size_t);
 				// when precision has been specified, but is NEGATIVE, than this is a special mode:
 				// discover how to best print the data buffer:
