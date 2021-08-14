@@ -332,8 +332,6 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 
 	fz_warn(ctx, "repairing PDF document");
 
-	pdf_discard_journal(ctx, doc->journal);
-
 	if (doc->repair_attempted & 0x01)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Repair failed already - not trying again");
 	doc->repair_attempted |= 0x01;
@@ -684,8 +682,13 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 		pdf_drop_obj(ctx, id);
 		pdf_drop_obj(ctx, obj);
 		pdf_drop_obj(ctx, info);
+		if (ctx->throw_on_repair)
+			fz_throw(ctx, FZ_ERROR_REPAIRED, "Error during repair attempt");
 		fz_rethrow(ctx);
 	}
+
+	if (ctx->throw_on_repair)
+		fz_throw(ctx, FZ_ERROR_REPAIRED, "File repaired");
 }
 
 void
