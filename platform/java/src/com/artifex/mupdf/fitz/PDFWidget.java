@@ -228,4 +228,28 @@ public class PDFWidget extends PDFAnnotation
 
 	//  sign with an appearance
 	public native boolean signWithAppearance(PKCS7Signer signer, DisplayList dlist, boolean useDate);
+
+	public native TextWidgetLayout layoutTextWidget();
+
+	public class TextWidgetLayout {
+		public Matrix matrix;
+		public Matrix invMatrix;
+		public TextWidgetLineLayout[] lines;
+	}
+
+	public class TextWidgetLineLayout {
+		public float x;
+		public float y;
+		public float fontSize;
+		public int index;
+		public Rect rect;
+		public TextWidgetCharLayout[] chars;
+	}
+
+	public class TextWidgetCharLayout {
+		public float x;
+		public float advance;
+		public int index;
+		public Rect rect;
+	}
 }

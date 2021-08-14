@@ -4227,6 +4227,61 @@ static void ffi_PDFDocument_addRawStream(js_State *J)
 	ffi_PDFDocument_addStream_imp(J, 1);
 }
 
+static void ffi_PDFDocument_addEmbeddedFile(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	const char *filename = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	const char *mimetype = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
+	fz_buffer *contents = ffi_tobuffer(J, 3);
+	pdf_obj *ind = NULL;
+	fz_try(ctx)
+		ind = pdf_add_embedded_file(ctx, pdf, filename, mimetype, contents);
+	fz_always(ctx)
+		fz_drop_buffer(ctx, contents);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pushobj(J, ind);
+}
+
+static void ffi_PDFDocument_loadEmbeddedFile(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	pdf_obj *obj = ffi_toobj(J, pdf, 1);
+	const char *mimetype = NULL;
+	const char *filename = NULL;
+	fz_buffer *contents = NULL;
+
+	fz_try(ctx) {
+		if (pdf_is_embedded_file(ctx, obj)) {
+			filename = pdf_embedded_file_name(ctx, obj);
+			mimetype = pdf_embedded_file_type(ctx, obj);
+			contents = pdf_load_embedded_file(ctx, obj);
+		}
+	}
+	fz_catch (ctx)
+		rethrow(J);
+
+	if (!contents) {
+		js_pushnull(J);
+		return;
+	}
+
+	if (js_try(J)) {
+		fz_drop_buffer(ctx, contents);
+		js_throw(J);
+	}
+	js_newobject(J);
+	js_pushstring(J, filename);
+	js_setproperty(J, -2, "filename");
+	js_pushstring(J, mimetype);
+	js_setproperty(J, -2, "mimetype");
+	ffi_pushbuffer(J, contents);
+	js_setproperty(J, -2, "contents");
+	js_endtry(J);
+}
+
 static void ffi_PDFDocument_addImage(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -6878,6 +6933,89 @@ static void ffi_PDFWidget_getLabel(js_State *J)
 	js_pushstring(J, label);
 }
 
+static void ffi_PDFWidget_layoutTextWidget(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *widget = js_touserdata(J, 0, "pdf_widget");
+	fz_layout_block *layout = NULL;
+	fz_layout_line *line = NULL;
+	fz_layout_char *chr = NULL;
+	fz_rect bounds;
+	fz_matrix mat;
+	const char *s;
+	int i, k;
+
+	fz_try(ctx)
+	{
+		bounds = pdf_bound_widget(ctx, widget);
+		layout = pdf_layout_text_widget(ctx, widget);
+		mat = fz_concat(layout->inv_matrix, fz_translate(-bounds.x0, -bounds.y0));
+	}
+	fz_catch(ctx)
+		rethrow(J);
+
+	if (js_try(J)) {
+		fz_drop_layout(ctx, layout);
+		js_throw(J);
+	}
+
+	js_newobject(J);
+	ffi_pushmatrix(J, layout->matrix);
+	js_setproperty(J, -2, "matrix");
+	ffi_pushmatrix(J, layout->inv_matrix);
+	js_setproperty(J, -2, "invMatrix");
+
+	s = layout->head->p;
+
+	js_newarray(J);
+	for (line = layout->head, i = 0; line; line = line->next, i++)
+	{
+		float y = line->y - line->font_size * 0.2f;
+		float b = line->y + line->font_size;
+		fz_rect lrect = fz_make_rect(line->x, y, line->x, b);
+		lrect = fz_transform_rect(lrect, mat);
+
+		js_newobject(J);
+		js_pushnumber(J, line->x);
+		js_setproperty(J, -2, "x");
+		js_pushnumber(J, line->y);
+		js_setproperty(J, -2, "y");
+		js_pushnumber(J, line->font_size);
+		js_setproperty(J, -2, "fontSize");
+		js_pushnumber(J, fz_runeidx(s, line->p));
+		js_setproperty(J, -2, "index");
+
+		js_newarray(J);
+		for (chr = line->text, k = 0; chr; chr = chr->next, k++)
+		{
+			fz_rect crect = fz_make_rect(chr->x, y, chr->x + chr->advance, b);
+			crect = fz_transform_rect(crect, mat);
+			lrect = fz_union_rect(lrect, crect);
+
+			js_newobject(J);
+			js_pushnumber(J, chr->x);
+			js_setproperty(J, -2, "x");
+			js_pushnumber(J, chr->advance);
+			js_setproperty(J, -2, "advance");
+			js_pushnumber(J, fz_runeidx(s, chr->p));
+			js_setproperty(J, -2, "index");
+			ffi_pushrect(J, crect);
+			js_setproperty(J, -2, "rect");
+			js_setindex(J, -2, k);
+		}
+		js_setproperty(J, -2, "chars");
+
+		ffi_pushrect(J, lrect);
+		js_setproperty(J, -2, "rect");
+
+		js_setindex(J, -2, i);
+	}
+	js_setproperty(J, -2, "lines");
+
+	js_endtry(J);
+	fz_drop_layout(ctx, layout);
+}
+
 static void ffi_new_PDFPKCS7Signer(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -7224,6 +7362,8 @@ int murun_main(int argc, const char **argv)
 		jsB_propfun(J, "PDFDocument.addFont", ffi_PDFDocument_addFont, 1);
 		jsB_propfun(J, "PDFDocument.addImage", ffi_PDFDocument_addImage, 1);
 		jsB_propfun(J, "PDFDocument.loadImage", ffi_PDFDocument_loadImage, 1);
+		jsB_propfun(J, "PDFDocument.addEmbeddedFile", ffi_PDFDocument_addEmbeddedFile, 3);
+		jsB_propfun(J, "PDFDocument.loadEmbeddedFile", ffi_PDFDocument_loadEmbeddedFile, 1);
 		jsB_propfun(J, "PDFDocument.addPage", ffi_PDFDocument_addPage, 4);
 		jsB_propfun(J, "PDFDocument.insertPage", ffi_PDFDocument_insertPage, 2);
 		jsB_propfun(J, "PDFDocument.deletePage", ffi_PDFDocument_deletePage, 1);
@@ -7376,6 +7516,7 @@ int murun_main(int argc, const char **argv)
 		jsB_propfun(J, "PDFWidget.toggle", ffi_PDFWidget_toggle, 0);
 		jsB_propfun(J, "PDFWidget.getMaxLen", ffi_PDFWidget_getMaxLen, 0);
 		jsB_propfun(J, "PDFWidget.getOptions", ffi_PDFWidget_getOptions, 1);
+		jsB_propfun(J, "PDFWidget.layoutTextWidget", ffi_PDFWidget_layoutTextWidget, 0);
 
 		jsB_propfun(J, "PDFWidget.update", ffi_PDFWidget_update, 0);
 
