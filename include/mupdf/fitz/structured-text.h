@@ -127,6 +127,7 @@ enum
 	FZ_STEXT_PRESERVE_SPANS = 128,
 	FZ_STEXT_MEDIABOX_CLIP = 256,
 	FZ_STEXT_NO_TEXT_AS_PATH = 512,
+	FZ_STEXT_EXTERNAL_STYLES = 1024,
 };
 
 /**
@@ -190,12 +191,25 @@ struct fz_stext_char
 
 FZ_DATA extern const char *fz_stext_options_usage;
 
+typedef void fz_process_stext_referenced_image_f(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options);
+typedef void fz_process_stext_styles_f(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, const fz_stext_options* options);
+
 /**
 	Options for creating a pixmap and draw device.
 */
 typedef struct
 {
-	int flags;
+	unsigned int flags;
+	unsigned int flags_conf_mask;  // mask: each bit is set for each explicitly set option flag. See also fz_parse_stext_options()
+
+	// customizable stuff for FZ_STEXT_REFERENCE_IMAGES:
+	const char* reference_image_path_template;
+	void* user_state;
+	fz_process_stext_referenced_image_f* print_image_object;
+
+	// customizable stuff for FZ_STEXT_EXTERNAL_STYLES
+	const char* external_styles_path_template;
+	fz_process_stext_styles_f* print_styles;
 } fz_stext_options;
 
 /**
@@ -288,13 +302,27 @@ char *fz_copy_rectangle(fz_context *ctx, fz_stext_page *page, fz_rect area, int 
 
 	Modify the flags in the `opts` struct and return its reference.
 
-	Also set the option bit in `opt_overrides.flags` for every flag which was specified.
+	Also set the option bit in `opts.flags_conf_mask` for every flag which was specified.
 	This can be used to decide whether to apply specific default values, while allowing option
 	'overrides' that way.
 
-	`opt_overrides` may be NULL.
+	Note that the `opts` struct is cleared before parsing `string`.
+
+	`string` may be NULL, in which case the parse will be nil, i.e. all flags are off(=zero).
 */
-fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, fz_stext_options* opt_overrides, const char *string);
+fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *string);
+
+/**
+    Set up advanced stext device options, used when the options flag
+	FZ_STEXT_REFERENCE_IMAGES has been set.
+
+	`opts` is modified and returned as result.
+
+	`user_state` is a reference to userland data that may be required by the
+	referenced handler functions(): the reference is stored in `opts->user_state`
+	and can be accessed there.
+*/
+fz_stext_options* fz_set_stext_options_images_handler(fz_context* ctx, fz_stext_options* opts, fz_process_stext_referenced_image_f *print_img, void *user_state);
 
 /**
 	Return the replacement (expansion) string for the given ligature glyph.

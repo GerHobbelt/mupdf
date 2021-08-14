@@ -1776,7 +1776,7 @@ static void reflow_document(void)
 
 	fz_drop_outline(ctx, outline);
 
-	fz_parse_stext_options(ctx, &opts, NULL, reflow_options);
+	fz_parse_stext_options(ctx, &opts, reflow_options);
 
 	new_doc = fz_open_reflowed_document(ctx, doc, &opts);
 	fz_drop_document(ctx, doc);

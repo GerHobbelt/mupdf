@@ -99,7 +99,7 @@ typedef void (fz_drop_secondary_fn)(fz_context* ctx, fz_secondary_outputs* sec_o
 
 struct fz_secondary_outputs
 {
-	void *state;
+	void *secondary_state;
 	const char* path_template;
 	int counter;					// used to produce filename sequences
 	int unique_counter;	        	// used to produce unique filenames
@@ -427,7 +427,7 @@ extern const char* fz_hex_digits;
 	hex escapes.
 	The `j` modifier signals all commands (exceptions listed below) to print
 	quotes surrounding the output (thus producing a JSON-compliant
-	string). This includes the numeric and array types `%e`, `%f`, `%g`, `%d`, `%i`, `%u`, `%x`, `%B`, `%R`, `%Z`, `%P`, `%M`. 
+	string). This includes the numeric and array types `%e`, `%f`, `%g`, `%d`, `%i`, `%u`, `%x`, `%B`, `%R`, `%Z`, `%P`, `%M`.
 	E.g. `%jd` of `5` will produce the quoted string `"5"`, `%,jP` will produce the string value `"12, 42"` for value `{12, 42}`.
 	Exceptions to this rule are `%(`, which ignores the `j` modifier entirely, and `%s`, which only uses
 	the `j` modifier when printing non-`NULL`-input under *negative* precision conditions: see `%s` above.

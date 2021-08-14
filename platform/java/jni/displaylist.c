@@ -85,7 +85,7 @@ FUN(DisplayList_toStructuredText)(JNIEnv *env, jobject self, jstring joptions)
 	fz_context *ctx = get_context(env);
 	fz_display_list *list = from_DisplayList(env, self);
 	fz_stext_page *text = NULL;
-	const char *options= NULL;
+	const char *options = NULL;
 	fz_stext_options opts;
 
 	if (!ctx || !list) return NULL;
@@ -98,11 +98,12 @@ FUN(DisplayList_toStructuredText)(JNIEnv *env, jobject self, jstring joptions)
 
 	fz_try(ctx)
 	{
-		fz_parse_stext_options(ctx, &opts, NULL, options);
+		fz_parse_stext_options(ctx, &opts, options);
 		text = fz_new_stext_page_from_display_list(ctx, list, &opts);
 	}
 	fz_always(ctx)
 	{
+		fz_drop_stext_options(ctx, &opts);
 		if (options)
 			(*env)->ReleaseStringUTFChars(env, joptions, options);
 	}

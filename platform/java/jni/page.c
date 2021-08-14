@@ -288,11 +288,12 @@ FUN(Page_toStructuredText)(JNIEnv *env, jobject self, jstring joptions)
 
 	fz_try(ctx)
 	{
-		fz_parse_stext_options(ctx, &opts, NULL, options);
+		fz_parse_stext_options(ctx, &opts, options);
 		text = fz_new_stext_page_from_page(ctx, page, &opts);
 	}
 	fz_always(ctx)
 	{
+		fz_drop_stext_options(ctx, &opts);
 		if (options)
 			(*env)->ReleaseStringUTFChars(env, joptions, options);
 	}

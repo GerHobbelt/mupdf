@@ -74,7 +74,7 @@ typedef struct
 	int new_obj;
 	int curdir;
 	int lastchar;
-	int flags;
+	unsigned int flags;
 	int color;
 	const fz_text *lasttext;
 } fz_stext_device;
@@ -928,62 +928,63 @@ fz_stext_drop_device(fz_context *ctx, fz_device *dev)
 }
 
 fz_stext_options *
-fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, fz_stext_options* opt_overrides, const char *string)
+fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *string)
 {
 	const char *val;
-	fz_stext_options opt_overrides_local;
-
-	if (!opt_overrides)
-		opt_overrides = &opt_overrides_local;
 
 	memset(opts, 0, sizeof(*opts));
-	memset(opt_overrides, 0, sizeof(*opt_overrides));
 
 	if (fz_has_option(ctx, string, "preserve-ligatures", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_PRESERVE_LIGATURES;
+		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_LIGATURES;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PRESERVE_LIGATURES;
 	}
 	if (fz_has_option(ctx, string, "preserve-whitespace", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_PRESERVE_WHITESPACE;
+		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_WHITESPACE;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PRESERVE_WHITESPACE;
 	}
 	if (fz_has_option(ctx, string, "preserve-images", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_PRESERVE_IMAGES;
+		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_IMAGES;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PRESERVE_IMAGES;
 	}
 	if (fz_has_option(ctx, string, "reference-images", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_REFERENCE_IMAGES;
-		if (fz_option_eq(val, "yes"))
+		opts->flags_conf_mask |= FZ_STEXT_REFERENCE_IMAGES;
+		if (!fz_option_eq(val, "no"))
+		{
 			opts->flags |= FZ_STEXT_REFERENCE_IMAGES;
+			if (!fz_option_eq(val, "yes"))
+			{
+				opts->reference_image_path_template = fz_strdup(ctx, val);
+			}
+		}
 	}
 	if (fz_has_option(ctx, string, "reuse-images", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_NO_REUSE_IMAGES;
+		opts->flags_conf_mask |= FZ_STEXT_NO_REUSE_IMAGES;
 		if (fz_option_eq(val, "no"))
 			opts->flags |= FZ_STEXT_NO_REUSE_IMAGES;
 	}
 	if (fz_has_option(ctx, string, "inhibit-spaces", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_INHIBIT_SPACES;
+		opts->flags_conf_mask |= FZ_STEXT_INHIBIT_SPACES;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_INHIBIT_SPACES;
 	}
 	if (fz_has_option(ctx, string, "dehyphenate", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_DEHYPHENATE;
+		opts->flags_conf_mask |= FZ_STEXT_DEHYPHENATE;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_DEHYPHENATE;
 	}
 	if (fz_has_option(ctx, string, "preserve-spans", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_PRESERVE_SPANS;
+		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_SPANS;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PRESERVE_SPANS;
 	}
@@ -991,16 +992,36 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, fz_stext_options
 	opts->flags |= FZ_STEXT_MEDIABOX_CLIP;
 	if (fz_has_option(ctx, string, "mediabox-clip", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_MEDIABOX_CLIP;
+		opts->flags_conf_mask |= FZ_STEXT_MEDIABOX_CLIP;
 		if (fz_option_eq(val, "no"))
 			opts->flags &= ~FZ_STEXT_MEDIABOX_CLIP;
 	}
 	if (fz_has_option(ctx, string, "text-as-path", &val))
 	{
-		opt_overrides->flags |= FZ_STEXT_NO_TEXT_AS_PATH;
+		opts->flags_conf_mask |= FZ_STEXT_NO_TEXT_AS_PATH;
 		if (fz_option_eq(val, "no"))
 			opts->flags |= FZ_STEXT_NO_TEXT_AS_PATH;
 	}
+	if (fz_has_option(ctx, string, "external-styles", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_EXTERNAL_STYLES;
+		if (!fz_option_eq(val, "no"))
+		{
+			opts->flags |= FZ_STEXT_EXTERNAL_STYLES;
+			if (!fz_option_eq(val, "yes"))
+			{
+				opts->external_styles_path_template = fz_strdup(ctx, val);
+			}
+		}
+	}
+	return opts;
+}
+
+fz_stext_options *
+fz_set_stext_options_images_handler(fz_context* ctx, fz_stext_options* opts, fz_process_stext_referenced_image_f* print_img, void* user_state)
+{
+	opts->user_state = user_state;
+	opts->print_image_object = print_img;
 	return opts;
 }
 
@@ -1026,7 +1047,7 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 	}
 
 	if (opts)
-		dev->flags = opts->flags;
+		dev->flags = *opts;
 	dev->page = page;
 	dev->pen.x = 0;
 	dev->pen.y = 0;

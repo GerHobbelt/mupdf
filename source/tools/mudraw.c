@@ -219,7 +219,6 @@ static const format_cs_table_t format_cs_table[] =
 };
 
 static fz_stext_options stext_options = { 0 };
-static fz_stext_options stext_option_overrides = { 0 };
 
 static fz_cookie master_cookie = { 0 };
 
@@ -974,7 +973,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			// override the default options when these have been explicitly set in the commandline:
 			page_stext_options.flags &= ~stext_option_overrides.flags;                           // mask
-			page_stext_options.flags |= (stext_options.flags & stext_option_overrides.flags);    // commandline overrules
+			page_stext_options.flags |= (stext_options.flags & stext_option.flags_conf_mask);    // commandline overrules
 
 			text = fz_new_stext_page(ctx, mediabox);
 			dev = fz_new_stext_device(ctx, text, &page_stext_options);
@@ -2489,7 +2488,7 @@ int main(int argc, const char** argv)
 			fz_drop_buffer(ctx, proof_buffer);
 		}
 
-		fz_parse_stext_options(ctx, &stext_options, &stext_option_overrides, txtdraw_options);
+		fz_parse_stext_options(ctx, &stext_options, txtdraw_options);
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);

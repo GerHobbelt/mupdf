@@ -80,33 +80,25 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, const fz_stext_options* options)
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
 {
 	float x = block->bbox.x0;
 	float y = block->bbox.y0;
 	float w = block->bbox.x1 - block->bbox.x0;
 	float h = block->bbox.y1 - block->bbox.y0;
+	fz_rect mediabox = fz_transform_rect(block->bbox, ctm);
 
-	fz_write_printf(ctx, out, "<img style=\"position:absolute;top:%gpt;left:%gpt;width:%gpt;height:%gpt\" data-mediabox=\"%R\" src=\"", y, x, w, h, &block->bbox);
+	fz_write_printf(ctx, out, "<img style=\"position:absolute;top:%gpt;left:%gpt;width:%gpt;height:%gpt\" data-mediabox=\"%R\" data-dimensions=\"%R\" src=\"", y, x, w, h, &block->bbox, &mediabox);
 	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
 	{
-#if 0
-		if (!misc_info || !misc_info->fname_template)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "No image filepath template specified. Cannot write image in 'reference-images' mode.");
-		const char* dir_end = strrchr(misc_info->fname_template, '/');
-		if (!dir_end)
-			dir_end = misc_info->fname_template;
+		if (options->print_image_object)
+		{
+			(*options->print_image_object)(ctx, out, block, pagenum, object_index, ctm, options);
+		}
 		else
-			dir_end++;
-		const char* fname_base_end = strchr(dir_end, '.');
-		if (!fname_base_end)
-			fname_base_end = dir_end;
-		char fnamebuf[PATH_MAX];
-		fz_snprintf(fnamebuf, sizeof(fnamebuf), "%.*simg_p%04d_at_%04d_%04d.")
-#endif
-
-		// TBD
-		fz_write_string(ctx, out, "IMAGE_URL_TODO");
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "stext reference-images option used but no image handler has been provided.");
+		}
 	}
 	else
 	{
@@ -173,29 +165,32 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 }
 
 void
-fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, const fz_stext_options *options)
+fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int pagenum, fz_matrix ctm, const fz_stext_options *options)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
+	int index;
 
 	float w = mediabox.x1 - mediabox.x0;
 	float h = mediabox.y1 - mediabox.y0;
 
 	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"position:relative;width:%gpt;height:%gpt;background-color:white;\" data-mediabox=\"%R\">\n",
-		id,
+		pagenum,
 		w, h,
 		&page->mediabox);
 
+	index = 0;
 	for (block = page->first_block; block; block = block->next)
 	{
 		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
 		{
-			fz_print_stext_image_as_html(ctx, out, block, id, options);
+			fz_print_stext_image_as_html(ctx, out, block, pagenum, index, ctm, options);
 		}
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
 		{
 			fz_print_stext_block_as_html(ctx, out, block);
 		}
+		index++;
 	}
 
 	fz_write_string(ctx, out, "</div>\n");
@@ -225,16 +220,23 @@ fz_print_stext_trailer_as_html(fz_context *ctx, fz_output *out)
 /* XHTML output (semantic, little layout, suitable for reflow) */
 
 static void
-fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, const fz_stext_options *options)
+fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options *options)
 {
 	float w = block->bbox.x1 - block->bbox.x0;
 	float h = block->bbox.y1 - block->bbox.y0;
+	fz_rect mediabox = fz_transform_rect(block->bbox, ctm);
 
-	fz_write_printf(ctx, out, "<p><img width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\" src=\"", w, h, &block->bbox);
+	fz_write_printf(ctx, out, "<p><img width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\" data-dimensions=\"%R\" src=\"", w, h, &block->bbox, &mediabox);
 	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
 	{
-		// TBD
-		fz_write_string(ctx, out, "IMAGE_URL_TODO");
+		if (options->print_image_object)
+		{
+			(*options->print_image_object)(ctx, out, block, pagenum, object_index, ctm, options);
+		}
+		else
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "stext reference-images option used but no image handler has been provided.");
+		}
 	}
 	else
 	{
@@ -367,23 +369,26 @@ static void fz_print_stext_block_as_xhtml(fz_context *ctx, fz_output *out, fz_st
 }
 
 void
-fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, const fz_stext_options *options)
+fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int pagenum, fz_matrix ctm, const fz_stext_options *options)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
+	int index;
 
 	fz_write_printf(ctx, out, "<div id=\"page%d\" width=\"%gpt\" height=\"%gpt\" data-mediabox=\"%R\">\n",
-		id,
+		pagenum,
 		mediabox.x1 - mediabox.x0,
 		mediabox.y1 - mediabox.y0,
 		&page->mediabox);
 
+	index = 0;
 	for (block = page->first_block; block; block = block->next)
 	{
 		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
-			fz_print_stext_image_as_xhtml(ctx, out, block, options);
+			fz_print_stext_image_as_xhtml(ctx, out, block, pagenum, index, ctm, options);
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
 			fz_print_stext_block_as_xhtml(ctx, out, block);
+		index++;
 	}
 
 	fz_write_string(ctx, out, "</div>\n");
@@ -748,7 +753,7 @@ fz_new_text_writer_with_output(fz_context *ctx, const char *format, fz_output *o
 	fz_try(ctx)
 	{
 		wri = fz_new_derived_document_writer(ctx, fz_text_writer, text_begin_page, text_end_page, text_close_writer, text_drop_writer);
-		fz_parse_stext_options(ctx, &wri->opts, NULL, options);
+		fz_parse_stext_options(ctx, &wri->opts, options);
 
 		wri->format = FZ_FORMAT_TEXT;
 		if (!strcmp(format, "text"))
