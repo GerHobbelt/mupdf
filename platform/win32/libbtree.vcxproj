@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libtoml</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE7B52D}</ProjectGuid>
-    <RootNamespace>libtoml</RootNamespace>
+    <ProjectName>libbtree</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAF7303}</ProjectGuid>
+    <RootNamespace>libbtree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -109,12 +109,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpp-btree/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -127,7 +127,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -135,13 +135,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpp-btree/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -154,7 +154,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -164,12 +164,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpp-btree/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -182,7 +182,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -190,13 +190,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpp-btree/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTOML;TOML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBTREE;BTREE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -211,69 +211,19 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/error_printer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/simple_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/toml_generator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/toml_to_json_transcoder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_burntsushi_invalid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_burntsushi_valid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_iarna_invalid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_iarna_valid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/impl_catch2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/impl_toml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_arrays.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_parse_result.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_tables.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_values.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_arrays.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_booleans.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_comments.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_dates_and_times.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_floats.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_integers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_key_value_pairs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_spec_example.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_strings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_tables.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/unicode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/user_feedback.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/using_iterators.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/windows_compat.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/examples/examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_array.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_array.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_date_time.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_default_formatter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_default_formatter.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_formatter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_instantiations.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_json_formatter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_json_formatter.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_node.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_node.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_node_view.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_parse_error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_parse_result.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_parser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_parser.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_preprocessor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_print_to_stream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_table.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_table.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_utf8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_utf8_streams.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_utf8_streams.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_value.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml_version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/catch2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/leakproof.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/settings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/tests.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/tloptional.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/unicode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/toml.hpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-btree/cpp_btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-btree/test/src/btree_bench.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-btree/test/src/btree_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-btree/test/src/btree_test_flags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-btree/test/src/safe_btree_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/btree_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/btree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/btree_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/safe_btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/safe_btree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/include/btree/safe_btree_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/test/src/btree_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-btree/test/src/std_add.h" />
   </ItemGroup>
 </Project>
