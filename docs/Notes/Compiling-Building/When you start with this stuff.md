@@ -1,6 +1,6 @@
 # When you start with this stuff
 
-Start with loading the Visual Studio `mupdf.sln` solution.
+Start with loading the Visual Studio `q-mupdf.sln` solution.
 
 In the top toolbar, select the build target: 'Debug' and 'x64'. This tells MSVC you want a 'debug build' 64-bit set of binaries. These should work on all relatively modern hardware.
 
