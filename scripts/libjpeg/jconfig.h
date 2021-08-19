@@ -8,6 +8,7 @@
 /* #define void char */
 /* #define const */
 #undef CHAR_IS_UNSIGNED
+#undef HAVE_LOCALE_H
 #define HAVE_STDDEF_H
 #define HAVE_STDLIB_H 1
 #undef NEED_BSD_STRINGS

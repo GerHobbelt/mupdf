@@ -183,6 +183,58 @@ LIBJPEG_SRC += thirdparty/libjpeg/jquant1.c
 LIBJPEG_SRC += thirdparty/libjpeg/jquant2.c
 LIBJPEG_SRC += thirdparty/libjpeg/jutils.c
 
+ifeq ($(HAVE_LIBJPEG_TURBO),yes)
+
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/jdphuff.c
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/jidctred.c
+
+AS = nasm
+ASFLAGS += -Ithirdparty/libjpeg/simd/nasm
+ASFLAGS += -DPIC -DELF -f elf64
+
+LIBJPEG_TURBO_CFLAGS = -DLIBJPEG_TURBO -DJPEG_LIB_VERSION=80 -DBITS_IN_JSAMPLE=8
+LIBJPEG_TURBO_BUILD_CFLAGS += -DLIBJPEG_TURBO -DJPEG_LIB_VERSION=80 -DBITS_IN_JSAMPLE=8 -DWITH_SIMD
+
+ifeq ($(HAVE_SSE4_1),yes)
+ASFLAGS += -D__x86_64__ -f elf64
+ASFLAGS += -Ithirdparty/libjpeg/simd/x86_64
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jsimd.c
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jsimdcpu.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jfdctflt-sse.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jccolor-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jcgray-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jchuff-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jcphuff-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jcsample-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jdcolor-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jdmerge-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jdsample-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jfdctfst-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jfdctint-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jidctflt-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jidctfst-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jidctint-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jidctred-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jquantf-sse2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jquanti-sse2.asm
+endif
+
+ifeq ($(HAVE_AVX2),yes)
+ASFLAGS += -D__x86_64__ -f elf64
+ASFLAGS += -Ithirdparty/libjpeg/simd/x86_64
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jccolor-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jcgray-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jcsample-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jdcolor-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jdmerge-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jdsample-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jfdctint-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jidctint-avx2.asm
+LIBJPEG_TURBO_SRC += thirdparty/libjpeg/simd/x86_64/jquanti-avx2.asm
+endif
+
+endif
+
 # --- LCMS2 (multi-threaded fork) ---
 
 LCMS2_CFLAGS += -Ithirdparty/lcms2/include

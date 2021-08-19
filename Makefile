@@ -40,6 +40,7 @@ endif
 
 ifneq ($(verbose),yes)
   QUIET_AR = @ echo "    AR $@" ;
+  QUIET_AS = @ echo "    AS $@" ;
   QUIET_RANLIB = @ echo "    RANLIB $@" ;
   QUIET_CC = @ echo "    CC $@" ;
   QUIET_CXX = @ echo "    CXX $@" ;
@@ -56,6 +57,7 @@ endif
 MKTGTDIR = mkdir -p $(dir $@)
 CC_CMD = $(QUIET_CC) $(MKTGTDIR) ; $(CC) $(CFLAGS) -MMD -MP -o $@ -c $<
 CXX_CMD = $(QUIET_CXX) $(MKTGTDIR) ; $(CXX) $(CFLAGS) $(XCXXFLAGS) -MMD -MP -o $@ -c $<
+AS_CMD = $(QUIET_AS) $(MKTGTDIR) ; $(AS) $(ASFLAGS) -o $@ $<
 AR_CMD = $(QUIET_AR) $(MKTGTDIR) ; $(AR) cr $@ $^
 ifdef RANLIB
   RANLIB_CMD = $(QUIET_RANLIB) $(RANLIB) $@
@@ -142,6 +144,7 @@ $(OUT)/%.o: %.rc
 THIRD_OBJ := $(THIRD_SRC:%.c=$(OUT)/%.o)
 THIRD_OBJ := $(THIRD_OBJ:%.cc=$(OUT)/%.o)
 THIRD_OBJ := $(THIRD_OBJ:%.cpp=$(OUT)/%.o)
+THIRD_OBJ := $(THIRD_OBJ:%.asm=$(OUT)/%.o)
 
 THIRD_GLUT_OBJ := $(THIRD_GLUT_SRC:%.c=$(OUT)/%.o)
 
