@@ -8,6 +8,10 @@ import java.awt.image.*;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
 import java.util.Vector;
 
@@ -865,7 +869,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			"L - highlight links",
 			//"F - highlight form fields",
 			"r - reload file",
-			//"S - save file (only for PDF)",
+			"S - save file",
 			"q - quit",
 			"",
 			"< - decrease E-book font size",
@@ -1417,17 +1421,20 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 	public void windowOpened(WindowEvent event) { }
 	public void windowClosed(WindowEvent event) { }
 
+
 	public void save() {
 		SaveOptionsDialog dialog = new SaveOptionsDialog(this);
 		dialog.populate();
+		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
-		String options = dialog.getOptions();
 		dialog.dispose();
 
+		String options = dialog.getOptions();
 		if (options == null)
+		{
+			pageCanvas.requestFocusInWindow();
 			return;
-
-		System.out.println(options);
+		}
 
 		FileDialog fileDialog = new FileDialog(this, "MuPDF Save File", FileDialog.SAVE);
 		fileDialog.setDirectory(System.getProperty("user.dir"));
@@ -1436,48 +1443,81 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 				return Document.recognize(name);
 			}
 		});
+		fileDialog.setFile(documentPath);
 		fileDialog.setVisible(true);
 		fileDialog.dispose();
 
 		if (fileDialog.getFile() == null)
+		{
+			pageCanvas.requestFocusInWindow();
 			return;
+		}
 
 		String selectedPath = new StringBuffer(fileDialog.getDirectory()).append(File.separatorChar).append(fileDialog.getFile()).toString();
 
 		PDFDocument pdf = (PDFDocument) doc;
-		if (options.indexOf("ocr-language=") >= 0)
-			pdf.redactSaveSecure(selectedPath, options);
-		else
+		if (options.indexOf("ocr-language=") < 0)
 			pdf.save(selectedPath, options);
+		else
+		{
+			int pages = pdf.countPages();
+			Progressmeter meter = new Progressmeter(this, "High Security Saving...", pages);
+			meter.setLocationRelativeTo(this);
+			meter.setVisible(true);
+			meter.setModal(true);
+
+			try {
+				DocumentWriter wri = new DocumentWriter(new MyStream(selectedPath), "ocr", "");
+				wri.addOCRListener(meter);
+
+				for (int i = 0; i < pages; i++)
+				{
+					meter.setPage(i);
+					Page page = pdf.loadPage(i);
+					Rect bounds = page.getBounds();
+					Device dev = wri.beginPage(bounds);
+					page.run(dev, new Matrix());
+					wri.endPage();
+				}
+
+				wri.close();
+			} catch (FileNotFoundException e) {
+				System.out.println(e);
+			} finally {
+				meter.dispose();
+			}
+		}
+
+		pageCanvas.requestFocusInWindow();
 	}
 
-	protected class SaveOptionsDialog extends Dialog implements ActionListener, ItemListener, KeyListener {
-		protected Checkbox snapShot = new Checkbox("Snapshot", false);
-		protected Checkbox highSecurity = new Checkbox("High security", false);
-		protected Choice resolution = new Choice();
-		protected TextField language = new TextField("eng");
-		protected Checkbox incremental = new Checkbox("Incremental", false);
+	class SaveOptionsDialog extends Dialog implements ActionListener, ItemListener, KeyListener {
+		Checkbox snapShot = new Checkbox("Snapshot", false);
+		Checkbox highSecurity = new Checkbox("High security", false);
+		Choice resolution = new Choice();
+		TextField language = new TextField("eng");
+		Checkbox incremental = new Checkbox("Incremental", false);
 
-		protected Checkbox prettyPrint = new Checkbox("Pretty print", false);
-		protected Checkbox ascii = new Checkbox("Ascii", false);
-		protected Checkbox decompress = new Checkbox("Decompress", false);
-		protected Checkbox compress = new Checkbox("Compress", true);
-		protected Checkbox compressImages = new Checkbox("Compress images", true);
-		protected Checkbox compressFonts = new Checkbox("Compress fonts", true);
+		Checkbox prettyPrint = new Checkbox("Pretty print", false);
+		Checkbox ascii = new Checkbox("Ascii", false);
+		Checkbox decompress = new Checkbox("Decompress", false);
+		Checkbox compress = new Checkbox("Compress", true);
+		Checkbox compressImages = new Checkbox("Compress images", true);
+		Checkbox compressFonts = new Checkbox("Compress fonts", true);
 
-		protected Checkbox linearize = new Checkbox("Linearize", false);
-		protected Checkbox garbageCollect = new Checkbox("Garbage collect", false);
-		protected Checkbox cleanSyntax = new Checkbox("Clean syntax", false);
-		protected Checkbox sanitizeSyntax = new Checkbox("Sanitize syntax", false);
+		Checkbox linearize = new Checkbox("Linearize", false);
+		Checkbox garbageCollect = new Checkbox("Garbage collect", false);
+		Checkbox cleanSyntax = new Checkbox("Clean syntax", false);
+		Checkbox sanitizeSyntax = new Checkbox("Sanitize syntax", false);
 
-		protected Choice encryption = new Choice();
-		protected TextField userPassword = new TextField();
-		protected TextField ownerPassword = new TextField();
+		Choice encryption = new Choice();
+		TextField userPassword = new TextField();
+		TextField ownerPassword = new TextField();
 
-		protected Button cancel = new Button("Cancel");
-		protected Button save = new Button("Save");
+		Button cancel = new Button("Cancel");
+		Button save = new Button("Save");
 
-		protected String options = null;
+		String options = null;
 
 		public SaveOptionsDialog(Frame parent) {
 			super(parent, "MuPDF Save Options", true);
@@ -1516,17 +1556,18 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 
 			cancel.addActionListener(this);
 			save.addActionListener(this);
+			save.addKeyListener(this);
 
 			calculateOptions();
 		}
 
-		protected void populate(Container container, GridBagConstraints c, Component component) {
+		void populate(Container container, GridBagConstraints c, Component component) {
 			GridBagLayout gbl = (GridBagLayout) container.getLayout();
 			gbl.setConstraints(component, c);
 			container.add(component);
 		}
 
-		protected void populate() {
+		void populate() {
 			GridBagConstraints c = new GridBagConstraints();
 
 			c.fill = GridBagConstraints.BOTH;
@@ -1593,38 +1634,40 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			populate(this, c, save);
 
 			pack();
-
-			Container parent = getParent();
-			if (parent != null) {
-				Dimension dd = getSize();
-				Dimension pd = parent.getSize();
-				setLocation(
-					parent.getLocation().x + pd.width / 2 - dd.width / 2,
-					parent.getLocation().y + pd.height / 2 - dd.width / 2);
-			}
+			save.requestFocusInWindow();
 		}
 
 		public void keyPressed(KeyEvent e) { }
 		public void keyReleased(KeyEvent e) { }
 
 		public void keyTyped(KeyEvent e) {
-			System.out.println();
+			if (e.getKeyChar() == '\u001b')
+				cancel();
+			else if (e.getKeyChar() == '\n')
+				save();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == cancel)
+				cancel();
+			else if (e.getSource() == save)
+				save();
+		}
+
+		void cancel() {
+			options = null;
+			setVisible(false);
+		}
+
+		void save() {
+			setVisible(false);
 		}
 
 		public void itemStateChanged(ItemEvent e) {
 			calculateOptions();
 		}
 
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == cancel) {
-				options = null;
-				setVisible(false);
-			} else if (e.getSource() == save) {
-				setVisible(false);
-			}
-		}
-
-		protected void calculateOptions() {
+		void calculateOptions() {
 			PDFDocument pdf = doc.isPDF() ? (PDFDocument) doc : null;
 
 			if (pdf != null && !pdf.canBeSavedIncrementally())
@@ -1727,8 +1770,87 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			options = opts.toString();
 		}
 
-		protected String getOptions() {
+		String getOptions() {
 			return options;
+		}
+	}
+
+	class Progressmeter extends Dialog implements DocumentWriter.OCRListener {
+		Label info = new Label("", Label.CENTER);
+		int page = -1;
+		int pages = -1;
+		int percent = 0;
+
+		public Progressmeter(Frame parent, String title, int pages_) {
+			super(parent, title, false);
+
+			info.setText("Progress: Page 65535/65535: 100%");
+			add(info);
+			pack();
+
+			pages = pages_;
+			updateInfo();
+		}
+
+		void updateInfo() {
+			StringBuilder text = new StringBuilder();
+
+			if (page >= 0 || pages >= 0) {
+				text.append("Page ");
+				if (page >= 0)
+					text.append(page);
+				else
+					text.append("?");
+			}
+			if (pages >= 0) {
+				text.append("/");
+				text.append(pages);
+				text.append(": ");
+			}
+
+			text.append(percent);
+			text.append("%");
+
+			info.setText(text.toString());
+		}
+
+		public void setPage(int i) {
+			page = i + 1;
+			updateInfo();
+		}
+
+		public boolean progress(int percent_) {
+			percent = percent_;
+			updateInfo();
+			return false;
+		}
+	}
+
+	class MyStream implements SeekableOutputStream {
+		File f;
+		FileOutputStream s;
+
+		public MyStream(String filename) throws FileNotFoundException {
+			f = new File(filename);
+			s = new FileOutputStream(f);
+		}
+
+		public long seek(long offset, int whence) throws IOException {
+			throw new IOException("seek not supported");
+		}
+
+		public long position() throws IOException {
+			return f.length();
+		}
+
+		public void write(byte[] b, int off, int len) throws IOException {
+			s.write(b, off,len);
+		}
+
+		public void truncate() throws IOException {
+			RandomAccessFile raf = new RandomAccessFile(f, "rw");
+			raf.setLength(f.length());
+			raf.close();
 		}
 	}
 
