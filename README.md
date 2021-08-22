@@ -24,7 +24,7 @@ See also: https://github.com/jimmejardine/qiqqa-open-source/blob/master/DEVELOPE
 - [**git**](https://git-scm.com/downloads) or [**git for Windows**](https://gitforwindows.org/)
 - `bash` (comes as part of git packages)
 - `node` (NodeJS) & `npm` (NodeJS Package Manager) —— preferrably installed via [**nvm for windows**](https://github.com/coreybutler/nvm-windows)
-
+- `python` (Python 3)
 
 ### Suggested tools
 
@@ -39,7 +39,7 @@ When you intend to check this out in relation to Qiqqa, then please grab the Qiq
 
 If you are, however, interested in this augmented mupdf material *per sé*, then do fork this repository itself and load the *submodules* we use in here to build the pdf/document tools.
 
-To fetch the repository find `Git Bash` from Windows' start menu  and run:
+To fetch the repository find `Git Bash` from Windows' start menu and run:
 
     git clone https://github.com/GerHobbelt/mupdf.git
     cd mupdf
@@ -79,7 +79,7 @@ Install/unpack the entire set using:
 
 - Open `/platform/win32/mupdf.sln` file to open the project with Visual Studio 2019.
 
-- Choose the Debug/Relase 32/64-bit platform target as you like.
+- Choose the Debug/Release 32/64-bit platform target as you like.
 
 - In the `Build` menu click on `Build Solution` or `Rebuild Solution`. This should take a while.
 
