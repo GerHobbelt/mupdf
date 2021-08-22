@@ -2266,6 +2266,14 @@ JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_canBeSavedInc
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    isRedacted
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_isRedacted
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
  * Method:    save
  * Signature: (Ljava/lang/String;Ljava/lang/String;)V
  */

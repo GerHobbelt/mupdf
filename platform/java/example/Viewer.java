@@ -8,6 +8,7 @@ import java.awt.image.*;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -456,6 +457,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 	protected void searchFieldKeyTyped(KeyEvent e) {
 		if (e.getExtendedKeyCodeForChar(e.getKeyChar()) == java.awt.event.KeyEvent.VK_ESCAPE)
 			clearSearch();
+
 	}
 
 	class Progressmeter implements DocumentWriter.OCRListener {
@@ -1117,7 +1119,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			"L - highlight links",
 			//"F - highlight form fields",
 			"r - reload file",
-			//"S - save file (only for PDF)",
+			"S - save file",
 			"q - quit",
 			"",
 			"< - decrease E-book font size",
@@ -1668,6 +1670,439 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 	public void windowDeiconified(WindowEvent event) { }
 	public void windowOpened(WindowEvent event) { }
 	public void windowClosed(WindowEvent event) { }
+
+
+	public void save() {
+		SaveOptionsDialog dialog = new SaveOptionsDialog(this);
+		dialog.populate();
+		dialog.setLocationRelativeTo(this);
+		dialog.setVisible(true);
+		dialog.dispose();
+
+		String options = dialog.getOptions();
+		if (options == null)
+		{
+			pageCanvas.requestFocusInWindow();
+			return;
+		}
+
+		FileDialog fileDialog = new FileDialog(this, "MuPDF Save File", FileDialog.SAVE);
+		fileDialog.setDirectory(System.getProperty("user.dir"));
+		fileDialog.setFilenameFilter(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return Document.recognize(name);
+			}
+		});
+		fileDialog.setFile(documentPath);
+		fileDialog.setVisible(true);
+		fileDialog.dispose();
+
+		if (fileDialog.getFile() == null)
+		{
+			pageCanvas.requestFocusInWindow();
+			return;
+		}
+
+		String selectedPath = new StringBuffer(fileDialog.getDirectory()).append(File.separatorChar).append(fileDialog.getFile()).toString();
+
+		PDFDocument pdf = (PDFDocument) doc;
+		if (options.indexOf("ocr-language=") < 0)
+			pdf.save(selectedPath, options);
+		else
+		{
+			int pages = pdf.countPages();
+			Progressmeter meter = new Progressmeter(this, "High Security Saving...", pages);
+			meter.setLocationRelativeTo(this);
+			meter.setVisible(true);
+			meter.setModal(true);
+
+			try {
+				DocumentWriter wri = new DocumentWriter(new MyStream(selectedPath), "ocr", "");
+				wri.addOCRListener(meter);
+
+				for (int i = 0; i < pages; i++)
+				{
+					meter.setPage(i);
+					Page page = pdf.loadPage(i);
+					Rect bounds = page.getBounds();
+					Device dev = wri.beginPage(bounds);
+					page.run(dev, new Matrix());
+					wri.endPage();
+				}
+
+				wri.close();
+			} catch (FileNotFoundException e) {
+				System.out.println(e);
+			} finally {
+				meter.dispose();
+			}
+		}
+
+		pageCanvas.requestFocusInWindow();
+	}
+
+	class SaveOptionsDialog extends Dialog implements ActionListener, ItemListener, KeyListener {
+		Checkbox snapShot = new Checkbox("Snapshot", false);
+		Checkbox highSecurity = new Checkbox("High security", false);
+		Choice resolution = new Choice();
+		TextField language = new TextField("eng");
+		Checkbox incremental = new Checkbox("Incremental", false);
+
+		Checkbox prettyPrint = new Checkbox("Pretty print", false);
+		Checkbox ascii = new Checkbox("Ascii", false);
+		Checkbox decompress = new Checkbox("Decompress", false);
+		Checkbox compress = new Checkbox("Compress", true);
+		Checkbox compressImages = new Checkbox("Compress images", true);
+		Checkbox compressFonts = new Checkbox("Compress fonts", true);
+
+		Checkbox linearize = new Checkbox("Linearize", false);
+		Checkbox garbageCollect = new Checkbox("Garbage collect", false);
+		Checkbox cleanSyntax = new Checkbox("Clean syntax", false);
+		Checkbox sanitizeSyntax = new Checkbox("Sanitize syntax", false);
+
+		Choice encryption = new Choice();
+		TextField userPassword = new TextField();
+		TextField ownerPassword = new TextField();
+
+		Button cancel = new Button("Cancel");
+		Button save = new Button("Save");
+
+		String options = null;
+
+		public SaveOptionsDialog(Frame parent) {
+			super(parent, "MuPDF Save Options", true);
+
+			resolution.add("200dpi");
+			resolution.add("300dpi");
+			resolution.add("600dpi");
+			resolution.add("1200dpi");
+
+			encryption.add("Keep");
+			encryption.add("None");
+			encryption.add("RC4, 40bit");
+			encryption.add("RC4, 128bit");
+			encryption.add("AES, 128bit");
+			encryption.add("AES, 256bit");
+
+			snapShot.addItemListener(this);
+			highSecurity.addItemListener(this);
+			resolution.addItemListener(this);
+			language.addActionListener(this);
+			incremental.addItemListener(this);
+			prettyPrint.addItemListener(this);
+			ascii.addItemListener(this);
+			decompress.addItemListener(this);
+			compress.addItemListener(this);
+			compressImages.addItemListener(this);
+			compressFonts.addItemListener(this);
+			linearize.addItemListener(this);
+			garbageCollect.addItemListener(this);
+			cleanSyntax.addItemListener(this);
+			sanitizeSyntax.addItemListener(this);
+
+			encryption.addItemListener(this);
+			userPassword.addActionListener(this);
+			ownerPassword.addActionListener(this);
+
+			cancel.addActionListener(this);
+			save.addActionListener(this);
+			save.addKeyListener(this);
+
+			calculateOptions();
+		}
+
+		void populate(Container container, GridBagConstraints c, Component component) {
+			GridBagLayout gbl = (GridBagLayout) container.getLayout();
+			gbl.setConstraints(component, c);
+			container.add(component);
+		}
+
+		void populate() {
+			GridBagConstraints c = new GridBagConstraints();
+
+			c.fill = GridBagConstraints.BOTH;
+			c.weightx = 1.0;
+			c.gridwidth = GridBagConstraints.REMAINDER;
+
+			GridBagLayout gbl = new GridBagLayout();
+			setLayout(gbl);
+
+			Panel left = new Panel();
+			Panel right = new Panel();
+			GridBagLayout lgbl = new GridBagLayout();
+			GridBagLayout rgbl = new GridBagLayout();
+			left.setLayout(lgbl);
+			right.setLayout(rgbl);
+
+			populate(left, c, snapShot);
+			populate(left, c, highSecurity);
+			populate(left, c, resolution);
+			populate(left, c, language);
+			populate(left, c, incremental);
+
+			c.weighty = 1.5;
+			populate(left, c, new Panel());
+			c.weighty = 0.0;
+
+			populate(left, c, prettyPrint);
+			populate(left, c, ascii);
+			populate(left, c, decompress);
+			populate(left, c, compress);
+			populate(left, c, compressImages);
+			populate(left, c, compressFonts);
+
+			populate(right, c, linearize);
+			populate(right, c, garbageCollect);
+			populate(right, c, cleanSyntax);
+			populate(right, c, sanitizeSyntax);
+
+			c.weighty = 1.5;
+			populate(right, c, new Panel());
+			c.weighty = 0.0;
+
+			populate(right, c, new Label("Encryption"));
+			populate(right, c, encryption);
+			populate(right, c, new Label("User password"));
+			populate(right, c, userPassword);
+			populate(right, c, new Label("Owner password"));
+			populate(right, c, ownerPassword);
+
+			c.gridwidth = GridBagConstraints.REMAINDER;
+			populate(this, c, new Panel());
+
+			c.gridwidth = 1;
+			populate(this, c, left);
+			c.gridwidth = GridBagConstraints.REMAINDER;
+			populate(this, c, right);
+
+			c.gridwidth = GridBagConstraints.REMAINDER;
+			populate(this, c, new Panel());
+
+			c.gridwidth = 1;
+			populate(this, c, cancel);
+			c.gridwidth = GridBagConstraints.REMAINDER;
+			populate(this, c, save);
+
+			pack();
+			save.requestFocusInWindow();
+		}
+
+		public void keyPressed(KeyEvent e) { }
+		public void keyReleased(KeyEvent e) { }
+
+		public void keyTyped(KeyEvent e) {
+			if (e.getKeyChar() == '\u001b')
+				cancel();
+			else if (e.getKeyChar() == '\n')
+				save();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == cancel)
+				cancel();
+			else if (e.getSource() == save)
+				save();
+		}
+
+		void cancel() {
+			options = null;
+			setVisible(false);
+		}
+
+		void save() {
+			setVisible(false);
+		}
+
+		public void itemStateChanged(ItemEvent e) {
+			calculateOptions();
+		}
+
+		void calculateOptions() {
+			PDFDocument pdf = doc.isPDF() ? (PDFDocument) doc : null;
+
+			if (pdf != null && !pdf.canBeSavedIncrementally())
+				incremental.setState(false);
+
+			if (highSecurity.getState()) {
+				incremental.setState(false);
+				prettyPrint.setState(false);
+				ascii.setState(false);
+				decompress.setState(false);
+				compress.setState(true);
+				compressImages.setState(false);
+				compressFonts.setState(false);
+				linearize.setState(false);
+				garbageCollect.setState(false);
+				cleanSyntax.setState(false);
+				sanitizeSyntax.setState(false);
+				encryption.select("None");
+				userPassword.setText("");
+				ownerPassword.setText("");
+			} else if (incremental.getState()) {
+				linearize.setState(false);
+				garbageCollect.setState(false);
+				cleanSyntax.setState(false);
+				sanitizeSyntax.setState(false);
+				encryption.select("Keep");
+				userPassword.setText("");
+				ownerPassword.setText("");
+			}
+
+			highSecurity.setEnabled(snapShot.getState() == false);
+			resolution.setEnabled(snapShot.getState() == false && highSecurity.getState() == true);
+			language.setEnabled(snapShot.getState() == false && highSecurity.getState() == true);
+			incremental.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && pdf != null && pdf.canBeSavedIncrementally());
+			prettyPrint.setEnabled(snapShot.getState() == false && highSecurity.getState() == false);
+			ascii.setEnabled(snapShot.getState() == false && highSecurity.getState() == false);
+			decompress.setEnabled(snapShot.getState() == false && highSecurity.getState() == false);
+			compress.setEnabled(snapShot.getState() == false && highSecurity.getState() == false);
+			compressImages.setEnabled(snapShot.getState() == false && highSecurity.getState() == false);
+			compressFonts.setEnabled(snapShot.getState() == false && highSecurity.getState() == false);
+			linearize.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false);
+			garbageCollect.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false);
+			cleanSyntax.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false);
+			sanitizeSyntax.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false);
+			encryption.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false);
+			userPassword.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false && encryption.getSelectedItem() != "Keep" && encryption.getSelectedItem() != "None");
+			ownerPassword.setEnabled(snapShot.getState() == false && highSecurity.getState() == false && incremental.getState() == false && encryption.getSelectedItem() != "Keep" && encryption.getSelectedItem() != "None");
+
+			if (incremental.getState()) {
+				garbageCollect.setState(false);
+				linearize.setState(false);
+				cleanSyntax.setState(false);
+				sanitizeSyntax.setState(false);
+				encryption.select("Keep");
+			}
+
+			StringBuilder opts = new StringBuilder();
+			if (highSecurity.getState()) {
+				opts.append(",compression=flate");
+				opts.append(",resolution=");
+				opts.append(resolution.getSelectedItem());
+				opts.append(",ocr-language=");
+				opts.append(language.getText());
+			} else {
+				if (decompress.getState()) opts.append(",decompress=yes");
+				if (compress.getState()) opts.append(",compress=yes");
+				if (compressFonts.getState()) opts.append(",compress-fonts=yes");
+				if (compressImages.getState()) opts.append(",compress-images=yes");
+				if (ascii.getState()) opts.append(",ascii=yes");
+				if (prettyPrint.getState()) opts.append(",pretty=yes");
+				if (linearize.getState()) opts.append(",linearize=yes");
+				if (cleanSyntax.getState()) opts.append(",clean=yes");
+				if (sanitizeSyntax.getState()) opts.append(",sanitize=yes");
+				if (encryption.getSelectedItem() == "None") opts.append(",decrypt=yes");
+				if (encryption.getSelectedItem() == "Keep") opts.append(",decrypt=no");
+				if (encryption.getSelectedItem() == "None") opts.append(",encrypt=no");
+				if (encryption.getSelectedItem() == "Keep") opts.append(",encrypt=keep");
+				if (encryption.getSelectedItem() == "RC4, 40bit") opts.append(",encrypt=rc4-40");
+				if (encryption.getSelectedItem() == "RC4, 128bit") opts.append(",encrypt=rc4-128");
+				if (encryption.getSelectedItem() == "AES, 128bit") opts.append(",encrypt=aes-128");
+				if (encryption.getSelectedItem() == "AES, 256bit") opts.append(",encrypt=aes-256");
+				if (userPassword.getText().length() > 0) {
+					opts.append(",user-password=");
+					opts.append(userPassword.getText());
+				}
+				if (ownerPassword.getText().length() > 0) {
+					opts.append(",owner-password=");
+					opts.append(ownerPassword.getText());
+				}
+				opts.append(",permissions=-1");
+				if (garbageCollect.getState() && pdf != null && pdf.isRedacted())
+					opts.append(",garbage=yes");
+				else
+					opts.append(",garbage=compact");
+			}
+
+			if (opts.charAt(0) == ',')
+				opts.deleteCharAt(0);
+
+			options = opts.toString();
+		}
+
+		String getOptions() {
+			return options;
+		}
+	}
+
+	class Progressmeter extends Dialog implements DocumentWriter.OCRListener {
+		Label info = new Label("", Label.CENTER);
+		int page = -1;
+		int pages = -1;
+		int percent = 0;
+
+		public Progressmeter(Frame parent, String title, int pages_) {
+			super(parent, title, false);
+
+			info.setText("Progress: Page 65535/65535: 100%");
+			add(info);
+			pack();
+
+			pages = pages_;
+			updateInfo();
+		}
+
+		void updateInfo() {
+			StringBuilder text = new StringBuilder();
+
+			if (page >= 0 || pages >= 0) {
+				text.append("Page ");
+				if (page >= 0)
+					text.append(page);
+				else
+					text.append("?");
+			}
+			if (pages >= 0) {
+				text.append("/");
+				text.append(pages);
+				text.append(": ");
+			}
+
+			text.append(percent);
+			text.append("%");
+
+			info.setText(text.toString());
+		}
+
+		public void setPage(int i) {
+			page = i + 1;
+			updateInfo();
+		}
+
+		public boolean progress(int percent_) {
+			percent = percent_;
+			updateInfo();
+			return false;
+		}
+	}
+
+	class MyStream implements SeekableOutputStream {
+		File f;
+		FileOutputStream s;
+
+		public MyStream(String filename) throws FileNotFoundException {
+			f = new File(filename);
+			s = new FileOutputStream(f);
+		}
+
+		public long seek(long offset, int whence) throws IOException {
+			throw new IOException("seek not supported");
+		}
+
+		public long position() throws IOException {
+			return f.length();
+		}
+
+		public void write(byte[] b, int off, int len) throws IOException {
+			s.write(b, off,len);
+		}
+
+		public void truncate() throws IOException {
+			RandomAccessFile raf = new RandomAccessFile(f, "rw");
+			raf.setLength(f.length());
+			raf.close();
+		}
+	}
 
 	protected static String getAcceleratorPath(String documentPath) {
 		String acceleratorName = documentPath.substring(1);
