@@ -698,6 +698,14 @@ void fz_write_band(fz_context *ctx, fz_band_writer *writer, int stride, int band
 	}
 }
 
+void fz_close_band_writer(fz_context *ctx, fz_band_writer *writer)
+{
+	if (writer == NULL)
+		return;
+	if (writer->close != NULL)
+		writer->close(ctx, writer);
+}
+
 void fz_drop_band_writer(fz_context *ctx, fz_band_writer *writer)
 {
 	if (writer == NULL)
