@@ -1,3 +1,25 @@
+// Copyright (C) 2004-2021 Artifex Software, Inc.
+//
+// This file is part of MuPDF.
+//
+// MuPDF is free software: you can redistribute it and/or modify it under the
+// terms of the GNU Affero General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
+//
+// MuPDF is distributed in the hope that it will be useful, but WITHOUT ANY
+// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with MuPDF. If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>
+//
+// Alternative licensing terms are available from the licensor.
+// For commercial licensing, see <https://www.artifex.com/> or contact
+// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
+// CA 94945, U.S.A., +1(415)492-9861, for further information.
+
 package example;
 
 import com.artifex.mupdf.fitz.*;
@@ -16,7 +38,7 @@ import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
 import java.util.Vector;
 
-public class Viewer extends Frame implements WindowListener, ActionListener, ItemListener, KeyListener, MouseWheelListener
+public class Viewer extends Frame implements WindowListener, ActionListener, ItemListener, KeyListener, MouseWheelListener, Context.Log
 {
 	protected String documentPath;
 	protected Document doc;
@@ -250,6 +272,50 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		public Dimension getMinimumSize() { return getPreferredSize(); }
 		public Dimension getMaximumSize() { return getPreferredSize(); }
 		public void update(Graphics g) { paint(g); }
+	}
+
+	public class LogDialog extends Dialog implements ActionListener, KeyListener{
+		Label info = new Label("", Label.CENTER);
+		Button okay = new Button("Okay");
+
+		public LogDialog(Frame parent, String title, String message) {
+			super(parent, title, true);
+
+			setLayout(new GridLayout(2, 1));
+			info.setText(message);
+			add(info);
+
+			okay.addActionListener(this);
+			okay.addKeyListener(this);
+			add(okay);
+
+			pack();
+			setResizable(false);
+			okay.requestFocusInWindow();
+			setLocationRelativeTo(parent);
+			setVisible(true);
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == okay)
+				dispose();
+		}
+
+		public void keyPressed(KeyEvent e) { }
+		public void keyReleased(KeyEvent e) { }
+
+		public void keyTyped(KeyEvent e) {
+			if (e.getKeyChar() == '\u001b')
+				dispose();
+		}
+	}
+
+	public void error(String message) {
+		LogDialog ld = new LogDialog(this, "Error!", "Error: " + message);
+	}
+
+	public void warning(String message) {
+		LogDialog ld = new LogDialog(this, "Warning!", "Warning: " + message);
 	}
 
 	public Viewer(String documentPath) {
@@ -1679,7 +1745,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		dialog.setVisible(true);
 		dialog.dispose();
 
-		String options = dialog.getOptions();
+		final String options = dialog.getOptions();
 		if (options == null)
 		{
 			pageCanvas.requestFocusInWindow();
@@ -1703,41 +1769,49 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			return;
 		}
 
-		String selectedPath = new StringBuffer(fileDialog.getDirectory()).append(File.separatorChar).append(fileDialog.getFile()).toString();
+		final String selectedPath = new StringBuffer(fileDialog.getDirectory()).append(File.separatorChar).append(fileDialog.getFile()).toString();
+		final PDFDocument pdf = (PDFDocument) doc;
+		final int pages = pdf.countPages();
+		final Progressmeter meter = new Progressmeter(this, "Saving...", pages);
+		meter.setLocationRelativeTo(this);
 
-		PDFDocument pdf = (PDFDocument) doc;
-		if (options.indexOf("ocr-language=") < 0)
-			pdf.save(selectedPath, options);
-		else
-		{
-			int pages = pdf.countPages();
-			Progressmeter meter = new Progressmeter(this, "High Security Saving...", pages);
-			meter.setLocationRelativeTo(this);
-			meter.setVisible(true);
-			meter.setModal(true);
+		new Thread(new Runnable() {
+			public void run() {
+				DocumentWriter wri = null;
+				try {
+					if (options.indexOf("ocr-language=") < 0)
+					{
+						pdf.save(selectedPath, options);
+					}
+					else
+					{
+						wri = new DocumentWriter(new FileStream(selectedPath, "rw"), "ocr", "");
+						wri.addOCRListener(meter);
 
-			try {
-				DocumentWriter wri = new DocumentWriter(new MyStream(selectedPath), "ocr", "");
-				wri.addOCRListener(meter);
+						for (int i = 0; i < pages; i++)
+						{
+							Page page = pdf.loadPage(i);
+							Rect bounds = page.getBounds();
+							Device dev = wri.beginPage(bounds);
+							page.run(dev, new Matrix());
+							wri.endPage();
+						}
 
-				for (int i = 0; i < pages; i++)
-				{
-					meter.setPage(i);
-					Page page = pdf.loadPage(i);
-					Rect bounds = page.getBounds();
-					Device dev = wri.beginPage(bounds);
-					page.run(dev, new Matrix());
-					wri.endPage();
+						wri.close();
+					}
+				} catch (IOException e) {
+					error(e.getMessage());
+				} catch (RuntimeException e) {
+					if (!meter.cancelled)
+						error(e.getMessage());
+				} finally {
+					meter.dispose();
+					if (wri != null) wri.destroy();
 				}
-
-				wri.close();
-			} catch (FileNotFoundException e) {
-				System.out.println(e);
-			} finally {
-				meter.dispose();
 			}
-		}
+		}).start();
 
+		meter.setVisible(true);
 		pageCanvas.requestFocusInWindow();
 	}
 
@@ -1884,6 +1958,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			populate(this, c, save);
 
 			pack();
+			setResizable(false);
 			save.requestFocusInWindow();
 		}
 
@@ -2025,30 +2100,52 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		}
 	}
 
-	class Progressmeter extends Dialog implements DocumentWriter.OCRListener {
+	class Progressmeter extends Dialog implements DocumentWriter.OCRListener, ActionListener, KeyListener {
 		Label info = new Label("", Label.CENTER);
-		int page = -1;
-		int pages = -1;
-		int percent = 0;
+		Button cancel = new Button("Cancel");
+		boolean cancelled = false;
+		int pages;
 
-		public Progressmeter(Frame parent, String title, int pages_) {
-			super(parent, title, false);
+		public Progressmeter(Frame parent, String title, int pages) {
+			super(parent, title, true);
+
+			setLayout(new GridLayout(2, 1));
 
 			info.setText("Progress: Page 65535/65535: 100%");
 			add(info);
-			pack();
 
-			pages = pages_;
-			updateInfo();
+			cancel.addActionListener(this);
+			cancel.addKeyListener(this);
+			add(cancel);
+
+			pack();
+			setResizable(false);
+			cancel.requestFocusInWindow();
+
+			this.pages = pages;
+			progress(-1, 0);
 		}
 
-		void updateInfo() {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == cancel)
+				cancelled = true;
+		}
+
+		public void keyPressed(KeyEvent e) { }
+		public void keyReleased(KeyEvent e) { }
+
+		public void keyTyped(KeyEvent e) {
+			if (e.getKeyChar() == '\u001b')
+				cancelled = true;
+		}
+
+		public boolean progress(int page, int percent) {
 			StringBuilder text = new StringBuilder();
 
 			if (page >= 0 || pages >= 0) {
 				text.append("Page ");
 				if (page >= 0)
-					text.append(page);
+					text.append(page + 1);
 				else
 					text.append("?");
 			}
@@ -2062,17 +2159,8 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			text.append("%");
 
 			info.setText(text.toString());
-		}
 
-		public void setPage(int i) {
-			page = i + 1;
-			updateInfo();
-		}
-
-		public boolean progress(int percent_) {
-			percent = percent_;
-			updateInfo();
-			return false;
+			return cancelled;
 		}
 	}
 

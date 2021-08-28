@@ -1,3 +1,25 @@
+// Copyright (C) 2004-2021 Artifex Software, Inc.
+//
+// This file is part of MuPDF.
+//
+// MuPDF is free software: you can redistribute it and/or modify it under the
+// terms of the GNU Affero General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
+//
+// MuPDF is distributed in the hope that it will be useful, but WITHOUT ANY
+// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with MuPDF. If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>
+//
+// Alternative licensing terms are available from the licensor.
+// For commercial licensing, see <https://www.artifex.com/> or contact
+// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
+// CA 94945, U.S.A., +1(415)492-9861, for further information.
+
 #include "mupdf/fitz.h"
 
 #include <zlib-ng.h> /* for compressBound() and compress() */
@@ -205,7 +227,7 @@ typedef struct pdfocr_band_writer_s
 	void *tessapi;
 	fz_pixmap *ocrbitmap;
 
-	int (*progress)(fz_context *, void *, int);
+	fz_pdfocr_progress_fn *progress;
 	void *progress_arg;
 } pdfocr_band_writer;
 
@@ -734,7 +756,7 @@ pdfocr_progress(fz_context *ctx, void *arg, int prog)
 	if (writer->progress == NULL)
 		return 0;
 
-	return writer->progress(ctx, writer->progress_arg, prog);
+	return writer->progress(ctx, writer->progress_arg, writer->pages - 1, prog);
 }
 
 static void
@@ -898,7 +920,7 @@ fz_band_writer *fz_new_pdfocr_band_writer(fz_context *ctx, fz_output *out, const
 }
 
 void
-fz_pdfocr_band_writer_set_progress(fz_context *ctx, fz_band_writer *writer_, int (*progress)(fz_context *, void *, int), void *progress_arg)
+fz_pdfocr_band_writer_set_progress(fz_context *ctx, fz_band_writer *writer_, fz_pdfocr_progress_fn *progress, void *progress_arg)
 {
 #ifdef OCR_DISABLED
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
@@ -1039,7 +1061,7 @@ fz_new_pdfocr_writer(fz_context *ctx, const char *path, const char *options)
 }
 
 void
-fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, int (*progress)(fz_context *, void *, int), void *progress_arg)
+fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, fz_pdfocr_progress_fn *progress, void *progress_arg)
 {
 #ifdef OCR_DISABLED
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");

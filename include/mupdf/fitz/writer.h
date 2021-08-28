@@ -1,3 +1,25 @@
+// Copyright (C) 2004-2021 Artifex Software, Inc.
+//
+// This file is part of MuPDF.
+//
+// MuPDF is free software: you can redistribute it and/or modify it under the
+// terms of the GNU Affero General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
+//
+// MuPDF is distributed in the hope that it will be useful, but WITHOUT ANY
+// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with MuPDF. If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>
+//
+// Alternative licensing terms are available from the licensor.
+// For commercial licensing, see <https://www.artifex.com/> or contact
+// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
+// CA 94945, U.S.A., +1(415)492-9861, for further information.
+
 #ifndef MUPDF_FITZ_WRITER_H
 #define MUPDF_FITZ_WRITER_H
 
@@ -128,9 +150,23 @@ fz_document_writer *fz_new_pwg_writer_with_output(fz_context *ctx, fz_output *ou
 fz_document_writer *fz_new_cbz_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_cbz_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
 
+/**
+	Used to report progress of the OCR operation.
+
+	page: Current page being processed.
+
+	percent: Progress of the OCR operation for the
+	current page in percent. Whether it reaches 100
+	once a page is finished, depends on the OCR engine.
+
+	Return 0 to continue progress, return 1 to cancel the
+	operation.
+*/
+typedef int (fz_pdfocr_progress_fn)(fz_context *ctx, void *progress_arg, int page, int percent);
+
 fz_document_writer *fz_new_pdfocr_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_pdfocr_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
-void fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, int (*progress)(fz_context *, void *, int), void *);
+void fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, fz_pdfocr_progress_fn *progress, void *);
 
 fz_document_writer *fz_new_png_pixmap_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_pam_pixmap_writer(fz_context *ctx, const char *path, const char *options);

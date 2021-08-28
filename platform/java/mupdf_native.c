@@ -1,3 +1,25 @@
+// Copyright (C) 2004-2021 Artifex Software, Inc.
+//
+// This file is part of MuPDF.
+//
+// MuPDF is free software: you can redistribute it and/or modify it under the
+// terms of the GNU Affero General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
+//
+// MuPDF is distributed in the hope that it will be useful, but WITHOUT ANY
+// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with MuPDF. If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>
+//
+// Alternative licensing terms are available from the licensor.
+// For commercial licensing, see <https://www.artifex.com/> or contact
+// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
+// CA 94945, U.S.A., +1(415)492-9861, for further information.
+
 /*
 NOTE!
 	The JNI specification states that New<PrimitiveType>Array() do not
@@ -67,6 +89,8 @@ static JavaVM *jvm = NULL;
 
 static jclass cls_Buffer;
 static jclass cls_ColorSpace;
+static jclass cls_Context;
+static jclass cls_Context_Log;
 static jclass cls_Context_Version;
 static jclass cls_Cookie;
 static jclass cls_DefaultAppearance;
@@ -130,6 +154,8 @@ static jclass cls_UnsupportedOperationException;
 
 static jfieldID fid_Buffer_pointer;
 static jfieldID fid_ColorSpace_pointer;
+static jfieldID fid_Context_log;
+static jfieldID fid_Context_lock;
 static jfieldID fid_Context_Version_major;
 static jfieldID fid_Context_Version_minor;
 static jfieldID fid_Context_Version_patch;
@@ -219,6 +245,8 @@ static jfieldID fid_Text_pointer;
 static jmethodID mid_ColorSpace_fromPointer;
 static jmethodID mid_ColorSpace_init;
 static jmethodID mid_Context_Version_init;
+static jmethodID mid_Context_Log_error;
+static jmethodID mid_Context_Log_warning;
 static jmethodID mid_DefaultAppearance_init;
 static jmethodID mid_Device_beginGroup;
 static jmethodID mid_Device_beginLayer;
@@ -701,6 +729,14 @@ static int find_fids(JNIEnv *env)
 	mid_ColorSpace_init = get_method(&err, env, "<init>", "(J)V");
 	mid_ColorSpace_fromPointer = get_static_method(&err, env, "fromPointer", "(J)L"PKG"ColorSpace;");
 
+	cls_Context = get_class(&err, env, PKG"Context");
+	fid_Context_log = get_static_field(&err, env, "log", "L"PKG"Context$Log;");
+	fid_Context_lock = get_static_field(&err, env, "lock", "Ljava/lang/Object;");
+
+	cls_Context_Log = get_class(&err, env, PKG"Context$Log");
+	mid_Context_Log_error = get_method(&err, env, "error", "(Ljava/lang/String;)V");
+	mid_Context_Log_warning = get_method(&err, env, "warning", "(Ljava/lang/String;)V");
+
 	cls_Context_Version = get_class(&err, env, PKG"Context$Version");
 	fid_Context_Version_major = get_field(&err, env, "major", "I");
 	fid_Context_Version_minor = get_field(&err, env, "minor", "I");
@@ -756,7 +792,7 @@ static int find_fids(JNIEnv *env)
 	fid_DocumentWriter_ocrlistener = get_field(&err, env, "ocrlistener", "J");
 
 	cls_DocumentWriter_OCRListener = get_class(&err, env, PKG"DocumentWriter$OCRListener");
-	mid_DocumentWriter_OCRListener_progress = get_method(&err, env, "progress", "(I)Z");
+	mid_DocumentWriter_OCRListener_progress = get_method(&err, env, "progress", "(II)Z");
 
 	cls_FitzInputStream = get_class(&err, env, PKG"FitzInputStream");
 	fid_FitzInputStream_pointer = get_field(&err, env, "pointer", "J");
@@ -1007,7 +1043,7 @@ static int find_fids(JNIEnv *env)
 /* When making callbacks from C to java, we may be called on threads
  * other than the foreground. As such, we have no JNIEnv. This function
  * handles getting us the required environment */
-static JNIEnv *jni_attach_thread(fz_context *ctx, jboolean *detach)
+static JNIEnv *jni_attach_thread(jboolean *detach)
 {
 	JNIEnv *env = NULL;
 	int state;
@@ -1035,6 +1071,8 @@ static void lose_fids(JNIEnv *env)
 {
 	(*env)->DeleteGlobalRef(env, cls_Buffer);
 	(*env)->DeleteGlobalRef(env, cls_ColorSpace);
+	(*env)->DeleteGlobalRef(env, cls_Context);
+	(*env)->DeleteGlobalRef(env, cls_Context_Log);
 	(*env)->DeleteGlobalRef(env, cls_Context_Version);
 	(*env)->DeleteGlobalRef(env, cls_Cookie);
 	(*env)->DeleteGlobalRef(env, cls_DefaultAppearance);
