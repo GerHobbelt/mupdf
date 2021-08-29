@@ -104,10 +104,13 @@ extern "C"
  */
 #if GCC_VERSION_AT_LEAST(3,1)
 # define G_GNUC_DEPRECATED __attribute__((deprecated))
+# define MSVC_DEPRECATED  /* empty */
 #elif defined(_MSC_VER)
-# define G_GNUC_DEPRECATED __declspec(deprecated)
+# define G_GNUC_DEPRECATED /* empty */
+# define MSVC_DEPRECATED  __declspec(deprecated)
 #else
 # define G_GNUC_DEPRECATED /* empty */
+# define MSVC_DEPRECATED  /* empty */
 #endif
 
 /**
@@ -129,7 +132,7 @@ extern "C"
  * version number.  Used together with idn2_check_version() to verify
  * header file and run-time library consistency.
  */
-#define IDN2_VERSION "@VERSION@"
+#define IDN2_VERSION "2.3.3"
 
 /**
  * IDN2_VERSION_NUMBER
@@ -140,7 +143,7 @@ extern "C"
  * digits are used to enumerate development snapshots, but for all
  * public releases they will be 0000.
  */
-#define IDN2_VERSION_NUMBER @NUMBER_VERSION@
+#define IDN2_VERSION_NUMBER 0x02030003
 
 /**
  * IDN2_VERSION_MAJOR
@@ -148,7 +151,7 @@ extern "C"
  * Pre-processor symbol for the major version number (decimal).
  * The version scheme is major.minor.patchlevel.
  */
-#define IDN2_VERSION_MAJOR @MAJOR_VERSION@
+#define IDN2_VERSION_MAJOR 2
 
 /**
  * IDN2_VERSION_MINOR
@@ -156,7 +159,7 @@ extern "C"
  * Pre-processor symbol for the minor version number (decimal).
  * The version scheme is major.minor.patchlevel.
  */
-#define IDN2_VERSION_MINOR @MINOR_VERSION@
+#define IDN2_VERSION_MINOR 3
 
 /**
  * IDN2_VERSION_PATCH
@@ -164,7 +167,7 @@ extern "C"
  * Pre-processor symbol for the patch level number (decimal).
  * The version scheme is major.minor.patchlevel.
  */
-#define IDN2_VERSION_PATCH @PATCH_VERSION@
+#define IDN2_VERSION_PATCH 3
 
 /**
  * IDN2_LABEL_MAX_LENGTH
@@ -305,7 +308,7 @@ extern "C"
 
 /* Auxiliary functions. */
 
-  extern _IDN2_API int
+  extern _IDN2_API MSVC_DEPRECATED int
     idn2_to_ascii_4i (const uint32_t * input, size_t inlen, char * output, int flags) G_GNUC_DEPRECATED;
   extern _IDN2_API int
     idn2_to_ascii_4i2 (const uint32_t * input, size_t inlen, char ** output, int flags);
