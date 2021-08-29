@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>libxtl</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFDD160}</ProjectGuid>
+    <RootNamespace>libxtl</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  
+
+
+
+
+
+
+
+
+
+
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXTL;XTL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xbase64.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xbasic_fixed_string.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xclosure.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xcomplex.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xcomplex_sequence.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xdynamic_bitset.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xfunctional.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xhalf_float.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xhash.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xhierarchy_generator.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xiterator_base.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xmasked_value.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xmeta_utils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xmultimethods.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xoptional.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xplatform.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xproxy_wrapper.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xsequence.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xsystem.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xtype_traits.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xvariant.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/xtl/test/test_xvisitor.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xany.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xbase64.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xbasic_fixed_string.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xclosure.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xcomplex.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xcomplex_sequence.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xdynamic_bitset.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xfunctional.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xhalf_float.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xhalf_float_impl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xhash.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xhierarchy_generator.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xiterator_base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xjson.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xmasked_value.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xmasked_value_meta.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xmeta_utils.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xmultimethods.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xoptional.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xoptional_meta.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xoptional_sequence.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xplatform.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xproxy_wrapper.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xsequence.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xspan.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xspan_impl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xsystem.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xtl_config.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xtype_traits.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xvariant.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xvariant_impl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/include/xtl/xvisitor.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/xtl/test/test_common_macros.hpp" />
+        
+  </ItemGroup>
+</Project>
+    
