@@ -20,6 +20,10 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
+#if defined(_MSC_VER)
+#pragma execution_character_set("utf-8")
+#endif
+
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
 
