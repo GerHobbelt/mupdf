@@ -197,7 +197,7 @@ struct fz_stext_line
 };
 
 /**
-	A text char is a unicode character, the style in which it
+	A text char is a Unicode character, the style in which it
 	appears, and the point at which it is positioned.
 */
 struct fz_stext_char
@@ -213,13 +213,15 @@ struct fz_stext_char
 
 FZ_DATA extern const char *fz_stext_options_usage;
 
+typedef struct fz_stext_options fz_stext_options;
+
 typedef void fz_process_stext_referenced_image_f(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options);
 typedef void fz_process_stext_styles_f(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, const fz_stext_options* options);
 
 /**
 	Options for creating a pixmap and draw device.
 */
-typedef struct
+struct fz_stext_options
 {
 	unsigned int flags;
 	unsigned int flags_conf_mask;  // mask: each bit is set for each explicitly set option flag. See also fz_parse_stext_options()
@@ -232,7 +234,7 @@ typedef struct
 	// customizable stuff for FZ_STEXT_EXTERNAL_STYLES
 	const char* external_styles_path_template;
 	fz_process_stext_styles_f* print_styles;
-} fz_stext_options;
+};
 
 /**
 	Create an empty text page.
