@@ -97,10 +97,11 @@ typedef struct
 	fz_stext_page *page;
 	fz_point pen, start;
 	fz_matrix trm;
+	fz_stext_options opts;
 	int new_obj;
 	int curdir;
 	int lastchar;
-	unsigned int flags;
+	//unsigned int flags;
 	int color;
 	const fz_text *lasttext;
 } fz_stext_device;
@@ -499,7 +500,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		cur_line = cur_block->u.t.last_line;
 	}
 
-	if (new_line && (dev->flags & FZ_STEXT_DEHYPHENATE) && is_hyphen(dev->lastchar))
+	if (new_line && (dev->opts.flags & FZ_STEXT_DEHYPHENATE) && is_hyphen(dev->lastchar))
 	{
 		remove_last_char(ctx, cur_line);
 		new_line = 0;
@@ -513,7 +514,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	}
 
 	/* Add synthetic space */
-	if (add_space && !(dev->flags & FZ_STEXT_INHIBIT_SPACES))
+	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
 		add_char_to_line(ctx, page, cur_line, trm, font, size, ' ', &dev->pen, &p, dev->color);
 
 	add_char_to_line(ctx, page, cur_line, trm, font, size, c, &p, &q, dev->color);
@@ -689,7 +690,7 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 	if (c == -1)
 		return;
 
-	if (!(dev->flags & FZ_STEXT_PRESERVE_LIGATURES))
+	if (!(dev->opts.flags & FZ_STEXT_PRESERVE_LIGATURES))
 	{
 		const char* replacement = get_ligature_replacement(c);
 
@@ -704,7 +705,7 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 		}
 	}
 
-	if (!(dev->flags & FZ_STEXT_PRESERVE_WHITESPACE))
+	if (!(dev->opts.flags & FZ_STEXT_PRESERVE_WHITESPACE))
 	{
 		if (is_whitespace(c))
 		{
@@ -734,7 +735,7 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 		tm.f = span->items[i].y;
 		trm = fz_concat(tm, ctm);
 
-		if (dev->flags & FZ_STEXT_MEDIABOX_CLIP)
+		if (dev->opts.flags & FZ_STEXT_MEDIABOX_CLIP)
 			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &dev->page->mediabox))
 				continue;
 
@@ -750,7 +751,7 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 			trm,
 			adv,
 			span->wmode,
-			(i == 0) && (dev->flags & FZ_STEXT_PRESERVE_SPANS));
+			(i == 0) && (dev->opts.flags & FZ_STEXT_PRESERVE_SPANS));
 	}
 }
 
@@ -1073,7 +1074,7 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 	}
 
 	if (opts)
-		dev->flags = *opts;
+		dev->opts = *opts;
 	dev->page = page;
 	dev->pen.x = 0;
 	dev->pen.y = 0;
