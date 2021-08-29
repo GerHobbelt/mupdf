@@ -973,7 +973,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			// hence we should *postpone* bubbling up the OCR error, if one occurs.
 			fz_stext_options page_stext_options = stext_options;
 
-			if (!(stext_option_overrides.flags & FZ_STEXT_PRESERVE_IMAGES))
+			if (!(stext_options.flags_conf_mask & FZ_STEXT_PRESERVE_IMAGES))
 			{
 				// set the preserve_images flag when not set up explicitly by the commandline argument.
 				if (output_format == OUT_HTML ||
@@ -985,19 +985,21 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				else
 					page_stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
 			}
-			if (!(stext_option_overrides.flags & FZ_STEXT_MEDIABOX_CLIP))
+			if (!(stext_options.flags_conf_mask & FZ_STEXT_MEDIABOX_CLIP))
 			{
 				page_stext_options.flags |= FZ_STEXT_MEDIABOX_CLIP;
 			}
-			if (!(stext_option_overrides.flags & FZ_STEXT_PRESERVE_SPANS))
+			if (!(stext_options.flags_conf_mask & FZ_STEXT_PRESERVE_SPANS))
 			{
 				if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+				{
 					page_stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
+				}
 			}
 
 			// override the default options when these have been explicitly set in the commandline:
-			page_stext_options.flags &= ~stext_option_overrides.flags;                           // mask
-			page_stext_options.flags |= (stext_options.flags & stext_option.flags_conf_mask);    // commandline overrules
+			page_stext_options.flags &= ~stext_options.flags_conf_mask;                          // mask
+			page_stext_options.flags |= (stext_options.flags & stext_options.flags_conf_mask);   // commandline overrules
 
 			text = fz_new_stext_page(ctx, mediabox);
 			dev = fz_new_stext_device(ctx, text, &page_stext_options);
