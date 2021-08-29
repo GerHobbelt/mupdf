@@ -681,7 +681,7 @@ fz_runeidx(const char *s, const char *p)
 		if (*(unsigned char *)s < Runeself)
 			++s;
 		else
-			s += fz_chartorune(&rune, s);
+			s += fz_chartorune_unsafe(&rune, s);
 		++i;
 	}
 	return i;
@@ -698,7 +698,7 @@ fz_runeptr(const char *s, int i)
 				return NULL;
 			++s;
 		} else
-			s += fz_chartorune(&rune, s);
+			s += fz_chartorune_unsafe(&rune, s);
 	}
 	return s;
 }
