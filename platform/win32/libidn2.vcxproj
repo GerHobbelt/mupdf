@@ -109,8 +109,8 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../scripts/libidn2/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IDN2_STATIC;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libidn2/lib;../../scripts/libidn2/lib;../../scripts/libidn2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -135,8 +135,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../scripts/libidn2/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IDN2_STATIC;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libidn2/lib;../../scripts/libidn2/lib;../../scripts/libidn2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -164,8 +164,8 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../scripts/libidn2/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IDN2_STATIC;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libidn2/lib;../../scripts/libidn2/lib;../../scripts/libidn2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -190,8 +190,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../scripts/libidn2/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IDN2_STATIC;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libidn2/lib;../../scripts/libidn2/lib;../../scripts/libidn2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -239,7 +239,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libidn2/tests/test-register.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libidn2/tests/test-strerror.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libidn2/tests/test-tounicode.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libidn2/fuzz/fuzzer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libidn2/lib/bidi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libidn2/lib/context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libidn2/lib/data.h" />
@@ -248,5 +247,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/libidn2/lib/tables.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libidn2/lib/tr46map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libidn2/src/blurbs.h" />
+    <ClInclude Include="..\..\scripts\libidn2\config.h" />
+    <ClInclude Include="..\..\scripts\libidn2\lib\idn2.h" />
+    <ClInclude Include="..\..\scripts\libidn2\uniconv.h" />
+    <ClInclude Include="..\..\scripts\libidn2\unictype.h" />
+    <ClInclude Include="..\..\scripts\libidn2\uninorm.h" />
+    <ClInclude Include="..\..\scripts\libidn2\unistr.h" />
+    <ClInclude Include="..\..\scripts\libidn2\unitypes.h" />
   </ItemGroup>
 </Project>
