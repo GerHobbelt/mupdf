@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>libtre</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF371D1A}</ProjectGuid>
@@ -31,70 +28,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
-	
-	
-	
-	
-	
-	
-	
-	
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>false</UseOfMfc>
-    
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -107,18 +66,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -148,38 +96,22 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tre/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -187,11 +119,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -199,39 +129,16 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tre/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -239,11 +146,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -251,33 +156,17 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tre/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -285,11 +174,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -297,30 +184,16 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tre/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRE;TRE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -328,121 +201,48 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
   <ItemGroup>
-    
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regcomp.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regerror.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regexec.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-ast.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-compile.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-filter.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-approx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-backtrack.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-parallel.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-mem.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-parse.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-stack.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/lib/xmalloc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/python/tre-python.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/src/agrep.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/tests/bench.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/tests/randtest.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/tests/retest.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/tre/tests/test-str-source.c" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/include/tre/tre-config.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/include/tre/tre.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/regex.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-ast.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-compile.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-filter.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-internal.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-match-utils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-mem.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-parse.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-stack.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/lib/xmalloc.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/win32/config.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/tre/win32/tre-config.h" />
-        
   </ItemGroup>
 </Project>
-    

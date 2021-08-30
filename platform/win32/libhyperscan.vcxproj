@@ -1,0 +1,2581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>libhyperscan</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF48858F}</ProjectGuid>
+    <RootNamespace>libhyperscan</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+	<WholeProgramOptimization>true</WholeProgramOptimization>
+	
+	
+	
+	
+	
+	
+	
+	
+    <UseOfMfc>false</UseOfMfc>
+    
+    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  
+
+
+
+
+
+
+
+
+
+
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERSCAN;HYPERSCAN_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    
+	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+	</Lib>
+    <Bscmake>
+      
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_alloc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_database.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_runtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_scratch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/examples/patbench.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/examples/pcapscan.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/examples/simplegrep.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/alloc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/compiler/asserts.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/compiler/compiler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/compiler/error.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/crc32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/database.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/dispatcher.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/engine_description.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_compile_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_confirm_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_engine_description.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/flood_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_avx2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_engine_description.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/grey.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hs.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hs_valid_platform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hs_version.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_build.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_literal.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_build.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_engine.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_engine_avx2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_engine_avx512.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_engine_sse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accel_dfa_build_strat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accel_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accelcompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castle.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castle_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castlecompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/dfa_build_strat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/dfa_min.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/gough.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile_accel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile_reg.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughdump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/lbr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/lbr_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_accel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_native.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_simd128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_simd256.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_simd384.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_simd512.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellan.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellancompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellancompile_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellandump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng_data.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpv_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpvcompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_api_dispatch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_build_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_dump_dispatch.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_dump_internal.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/rdfa.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/rdfa_graph.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/rdfa_merge.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/repeat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/repeatcompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/sheng.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shengcompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shengdump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shufti.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shufticompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamarama.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamarama_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamaramacompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/truffle.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfa/trufflecompile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_anchored_acyclic.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_anchored_dots.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_asserts.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_builder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_calc_components.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_cyclic_redundancy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_depth.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_dominators.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_edge_redundancy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_equivalence.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_execute.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_expr_info.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_extparam.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_fixed_width.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_fuzzy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_haig.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_holder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_is_equal.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_lbr.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_limex.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_limex_accel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_literal_analysis.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_literal_component.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_literal_decorated.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_mcclellan.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_misc_opt.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_netflow.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_prefilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_prune.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_puff.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_redundancy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_region.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_region_redundancy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_repeat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_reports.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_restructuring.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_revacc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_sep.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_small_literal_set.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_som.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_som_add_redundancy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_som_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_split.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_squash.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_stop.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_uncalc_components.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_utf8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_vacuous.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_violet.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_width.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/AsciiComponentClass.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/Component.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentAlternation.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentAssertion.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentAtomicGroup.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentBackReference.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentBoundary.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentByte.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentClass.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentCondReference.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentEUS.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentEmpty.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentRepeat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentSequence.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentVisitor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentWordBoundary.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ConstComponentVisitor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/Utf8ComponentClass.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/buildstate.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/check_refs.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/logical_combination.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/parse_error.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/parser_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/prefilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/shortcut_literal.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/ucp_table.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/unsupported.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/parser/utf8_validate.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/block.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/catchup.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/init.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/match.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/program_runtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_add.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_add_mask.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_anchored.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_bytecode.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_castle.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_convert.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_dedupe.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_engine_blob.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_exclusive.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_groups.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_infix.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_instructions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_lit_accel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_long_lit.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_lookaround.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_matchers.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_merge.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_misc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_program.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_role_aliasing.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_scatter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_width.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_in_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_in_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/rose/stream.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/runtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/scratch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/scratch_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/smallwrite/smallwrite_build.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/smallwrite/smallwrite_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/som/slot_manager.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/som/slot_manager_dump.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/som/som_runtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/som/som_stream.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/stream_compress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/alloc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/arm/cpuid_flags.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/cpuid_flags.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/masked_move.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/charreach.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/clique.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/compile_context.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/compile_error.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/depth.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/dump_charclass.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/dump_mask.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/dump_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/fatbit_build.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/multibit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/multibit_build.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/report_manager.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/simd_utils.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/state_compress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/target_info.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/src/util/ue2string.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/data_corpus.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine_chimera.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine_hyperscan.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine_pcre.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/heapstats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/huge.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/sqldb.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscheck/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/Corpora.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/FileCorpora.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/GraphTruth.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/GroundTruth.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/NfaGeneratedCorpora.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/Thread.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/UltimateTruth.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/args.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/limit.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/pcre_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/sig.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/tools/hsdump/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/chimera/allocators.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/chimera/arg_checks.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/chimera/bad_patterns.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/chimera/compat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/chimera/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/chimera/scan.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/gtest/gtest-all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/allocators.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/arg_checks.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/bad_patterns.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/behaviour.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/expr_info.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/extparam.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/identical.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/literals.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/logical_combination.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/multi.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/order.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/scratch_in_use.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/scratch_op.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/serialize.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/single.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/som.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/stream_op.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/test_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/bitfield.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/bitutils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/charreach.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/compare.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/database.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/depth.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/fdr.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/fdr_flood.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/fdr_loadval.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/flat_map.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/flat_set.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/graph.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/graph_undirected.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/insertion_ordered.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/lbr.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/limex_nfa.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/masked_move.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/multi_bit.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/multi_bit_compress.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_comp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_equivalence.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_find_matches.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_literal_analysis.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_redundancy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_repeat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_width.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/noodle.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/pack_bits.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/parser.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/partial.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/pqueue.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/repeat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/rose_build_merge.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/rose_mask.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/rose_mask_32.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/rvermicelli.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/shuffle.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/shufti.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/simd_utils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/state_compress.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/truffle.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/unaligned.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/unicode_set.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/uniform_ops.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/utf8_validate.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/util_string.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/unit/internal/vermicelli.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/cross_compile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/database_util.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/expressions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/ng_corpus_editor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/ng_corpus_generator.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/ng_corpus_properties.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/hyperscan/util/ng_find_matches.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_alloc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_database.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/chimera/ch_scratch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/include/boost-patched/graph/dominator_tree.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/include/boost-patched/graph/reverse_graph.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/allocator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/compiler/asserts.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/compiler/compiler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/compiler/error.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/compiler/expression_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/crc32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/database.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/engine_description.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_compile_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_confirm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_confirm_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_engine_description.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/fdr_loadval.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/flood_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_engine_description.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/fdr/teddy_runtime_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/grey.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hs_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hs_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hs_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hs_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_build.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/hwlm_literal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_build.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_engine.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/hwlm/noodle_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accel_dfa_build_strat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accel_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/accelcompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/callback.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castle_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castle_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/castlecompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/dfa_build_strat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/dfa_min.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/gough.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/gough_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughcompile_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/goughdump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/lbr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/lbr_common_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/lbr_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/lbr_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_accel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_common_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_context.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_exceptional.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_limits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_ring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_runtime_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_shuffle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/limex_state_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellan_common_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellan_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellancompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellancompile_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcclellandump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mcsheng_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpv.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpv_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpv_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/mpvcompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_api.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_api_queue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_api_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_build_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_dump_api.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_dump_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_kind.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/nfa_rev_api.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/rdfa.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/rdfa_graph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/rdfa_merge.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/repeat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/repeat_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/repeatcompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/sheng.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/sheng_defs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/sheng_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/sheng_impl4.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/sheng_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shengcompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shengdump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shufti.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/shufticompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamarama.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamarama_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamarama_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/tamaramacompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/truffle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/trufflecompile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/vermicelli.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/vermicelli_run.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfa/vermicelli_sse.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_anchored_acyclic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_anchored_dots.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_asserts.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_builder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_calc_components.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_cyclic_redundancy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_depth.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_dominators.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_edge_redundancy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_equivalence.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_execute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_expr_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_extparam.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_fixed_width.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_fuzzy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_haig.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_holder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_is_equal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_lbr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_limex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_limex_accel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_literal_analysis.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_literal_component.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_literal_decorated.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_mcclellan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_mcclellan_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_misc_opt.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_netflow.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_prefilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_prune.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_puff.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_redundancy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_region.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_region_redundancy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_repeat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_reports.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_restructuring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_revacc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_sep.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_small_literal_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_som.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_som_add_redundancy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_som_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_split.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_squash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_stop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_uncalc_components.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_utf8.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_vacuous.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_violet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/nfagraph/ng_width.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/AsciiComponentClass.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/Component.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentAlternation.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentAssertion.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentAtomicGroup.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentBackReference.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentBoundary.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentByte.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentClass.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentCondReference.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentEUS.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentEmpty.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentRepeat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentSequence.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentVisitor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ComponentWordBoundary.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ConstComponentVisitor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/Parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/Utf8ComponentClass.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/buildstate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/check_refs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/control_verbs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/logical_combination.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/parse_error.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/position.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/position_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/position_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/prefilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/shortcut_literal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/ucp_table.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/unsupported.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/parser/utf8_validate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/report.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/catchup.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/counting_miracle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/infix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/init.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/match.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/miracle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/program_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_add_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_anchored.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_castle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_convert.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_engine_blob.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_exclusive.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_groups.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_infix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_instructions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_lit_accel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_long_lit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_lookaround.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_matchers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_merge.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_misc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_program.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_resources.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_role_aliasing.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_scatter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_build_width.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_graph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_in_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_in_graph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_in_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_program.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/rose_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/stream_long_lit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/stream_long_lit_hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/validate_mask.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/rose/validate_shufti.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/scratch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/scratch_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/smallwrite/smallwrite_build.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/smallwrite/smallwrite_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/smallwrite/smallwrite_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/slot_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/slot_manager_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/slot_manager_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/som.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/som_operation.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/som_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/som/som_stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/state.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/stream_compress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/stream_compress_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/ue2common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/accel_scheme.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/alloc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/arm/arm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/arm/bitutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/arm/simd_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/arm/simd_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/common/bitutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/common/cpuid_flags.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/common/simd_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/bitutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/cpuid_inline.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/crc32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/masked_move.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/simd_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/simd_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/arch/x86/x86.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/bitfield.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/bitutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/boundary_reports.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/bytecode_ptr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/charreach.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/charreach_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/clique.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/compare.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/compile_context.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/compile_error.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/container.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/copybytes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/depth.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/determinise.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/dump_charclass.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/dump_mask.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/dump_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/exhaust.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/fatbit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/fatbit_build.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/flat_containers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/graph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/graph_range.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/graph_small_color_map.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/graph_undirected.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/hash_dynamic_bitset.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/insertion_ordered.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/intrinsics.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/join.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/logical.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/make_unique.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/math.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/multibit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/multibit_build.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/multibit_compress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/multibit_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/noncopyable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/operators.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/order_check.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/pack_bits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/partial_store.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/partitioned_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/popcount.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/pqueue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/queue_index_factory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/report.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/report_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/scatter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/scatter_runtime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/simd_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/simd_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/small_vector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/state_compress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/target_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/ue2_graph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/ue2string.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/unaligned.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/unicode_def.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/unicode_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/uniform_ops.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/unordered.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/src/util/verify_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/data_corpus.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine_chimera.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine_hyperscan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/engine_pcre.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/heapstats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/huge.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/sqldb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/sqldb_bind.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/thread_barrier.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hsbench/timer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/BoundedQueue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/ColliderCorporaParser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/Corpora.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/DatabaseProxy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/FileCorpora.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/GraphTruth.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/GroundTruth.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/NfaGeneratedCorpora.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/ResultSet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/Thread.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/UltimateTruth.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/args.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/limit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/pcre_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/sig.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/tools/hscollider/simple_timer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/unit/gtest/gtest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/unit/hyperscan/test_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/unit/internal/nfagraph_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/ExpressionParser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/cross_compile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/database_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/expression_path.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/expressions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/ng_corpus_editor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/ng_corpus_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/ng_corpus_properties.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/ng_find_matches.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/string_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/hyperscan/util/win_getopt.h" />
+        
+  </ItemGroup>
+</Project>
+    
