@@ -35,6 +35,7 @@ This Visual Studio solution includes all submodules / projects requires to build
 
 ## Developer FAQ
 
+- [[What are the Visual Studio solution files for|What are the various Microsoft Visual Studio `.sln` solution files for?]]
 - [[Updating the Contributors list]]
 - [[Why was this set up the way it is]]
 - [[The MuPDFLib.dll project does not export the latest work I did|The `MuPDFLib.dll` project doesn't export the latest work I did / `MuPDFLib.def` is out of date and does not update properly]]
