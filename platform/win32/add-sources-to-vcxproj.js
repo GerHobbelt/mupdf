@@ -263,6 +263,35 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
           base = '';
         }
         if (base.length > 0) {
+            base = 'Misc Files/' + base;
+        }
+        else {
+            base = 'Misc Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <ClCompile Include="${f}">
+      <Filter>${base}</Filter>
+    </ClCompile>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <ClCompile Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.c':
+    case '.cc':
+    case '.c++':
+    case '.cpp':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
             base = 'Source Files/' + base;
         }
         else {
@@ -285,6 +314,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
     case '.h':
     case '.hh':
+    case '.h++':
     case '.hpp':
         base = path.dirname(item);
         if (base === '.') {
