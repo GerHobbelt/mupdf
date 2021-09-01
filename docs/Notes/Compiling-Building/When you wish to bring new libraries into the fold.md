@@ -1,6 +1,6 @@
 # When you wish to bring new libraries into the fold
 
-Use `q-dev.sln` to have a lean Visual Studio solution where you can iron out the initial grave bugs and screaming compiler errors (such as header files that cannot be located, due to missing include paths, etc.)
+Use `m-single.sln` to have a lean Visual Studio solution where you can iron out the initial grave bugs and screaming compiler errors (such as header files that cannot be located, due to missing include paths, etc.)
 
 When you have a new lib / codebase, we'll assume you've added it as a submodule to `thirdparty/owemdjee/` in its own directory.
 
