@@ -489,7 +489,7 @@ static void open_attachment_dialog(void)
 			fz_try(ctx)
 			{
 				fz_buffer *contents;
-				char *filename;
+				const char *filename;
 				pdf_obj *fs;
 
 				filename = fz_path_basename(attach_filename);
