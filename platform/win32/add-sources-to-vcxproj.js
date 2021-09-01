@@ -134,6 +134,33 @@ if (!filterSrc.match(/<Filter Include="Source Files">/)) {
 </Project>
 */
 
+const specialFilenames = [
+  "README", "README.md", "README.txt", 
+  "NEWS", 
+  "CHANGES", "CHANGES.md", "CHANGES.txt", 
+  "ChangeLog", 
+  "Contributors.md", "Contributors.txt", "Contributors"
+];
+let specialFilenameRes = [];
+
+function isSpecialMiscFile(f) {
+
+  let name = path.basename(f);
+  if (specialFilenameRes.length === 0) {
+    for (let i = 0, len = specialFilenames.length; i < len; i++) {
+      let mre = new RegExp(`${ specialFilenames[i] }$`, 'i');
+      specialFilenameRes[i] = mre;
+    }
+  }
+
+  for (let re of specialFilenameRes) {
+    if (re.test(name))
+      return true;
+  }
+  return false;
+}
+
+
 let pathWithWildCards = '*.*';
 glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   if (err) {
@@ -149,6 +176,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     switch (path.extname(f).toLowerCase()) {
     case '.c':
     case '.cc':
+    case '.c++':
     case '.cpp':
         base = path.dirname(f);
         if (base === '.') {
@@ -162,6 +190,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
     case '.h':
     case '.hh':
+    case '.h++':
     case '.hpp':
         base = path.dirname(f);
         if (base === '.') {
@@ -174,7 +203,18 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         return true;
 
     default:
-        return false;
+        if (!isSpecialMiscFile(f))
+          return false;
+
+        base = path.dirname(f);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Misc Files/' + base;
+            filterDirs.add(base);
+        }
+        return true;
     }
   });
 
