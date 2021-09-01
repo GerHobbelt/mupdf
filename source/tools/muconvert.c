@@ -248,18 +248,20 @@ int muconvert_main(int argc, const char **argv)
 			fz_drop_document(ctx, doc);
 			doc = NULL;
     	}
+        fz_close_document_writer(ctx, out);
+
+	}
+	fz_always(ctx)
+	{
+		fz_drop_document(ctx, doc);
+		fz_drop_document_writer(ctx, out);
 	}
 	fz_catch(ctx)
 	{
 		fz_error(ctx, "cannot load document: %s", fz_caught_message(ctx));
-		fz_drop_document(ctx, doc);
-		doc = NULL;
 		retval = EXIT_FAILURE;
 	}
 
-	fz_close_document_writer(ctx, out);
-
-	fz_drop_document_writer(ctx, out);
 	fz_drop_context(ctx);
 
 	// and delete incomplete/damaged output file:
