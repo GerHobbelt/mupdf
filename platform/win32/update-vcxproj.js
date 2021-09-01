@@ -45,7 +45,7 @@ src = src
 //    <ProjectName>libcurl</ProjectName>
 //    <RootNamespace>libcurl</RootNamespace>
 .replace(/<ProjectName>[^]*?<\/ProjectName>/g, (m) => `<ProjectName>${projectName}</ProjectName>`)
-.replace(/<RootNamespace>[^]*?<\/RootNamespace>/g, (m) => `<RootNamespace>mupdf</RootNamespace>`)
+.replace(/<RootNamespace>[^]*?<\/RootNamespace>/g, (m) => `<RootNamespace>${projectName}</RootNamespace>`)
 //      <TypeLibraryName>.\Release/libcurl.tlb</TypeLibraryName>
 .replace(/<TypeLibraryName>[^]*?<\/TypeLibraryName>/g, "<TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>")
 //       <PreprocessorDefinitions>BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -87,8 +87,7 @@ src = src
 .replace(/<CharacterSet>[^]*?<\/CharacterSet>/g, '')
 .replace(/<WholeProgramOptimization>[^]*?<\/WholeProgramOptimization>/g, '')
 .replace(/<PlatformToolset>[^]*?<\/PlatformToolset>/g, `<PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>`)
+	<CharacterSet>Unicode</CharacterSet>`)
 /*
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -146,6 +145,12 @@ src = src
 
 	return `<Link>${p1}</Link>`;
 })
+.replace(/<ItemDefinitionGroup\s*\/>/g, '')
+.replace(/<Import[^>]+common-project\.props" \/>/g, '')
+.replace(/<ImportGroup\s+Label="PropertySheets"\s*\/>/g, '')
+.replace(/<ImportGroup\s+Label="PropertySheets"[^]*?<\/ImportGroup>/g, '')
+.replace(/<EnableUnitySupport>[^<]*<\/EnableUnitySupport>/g, '')
+
 
 /*
     <ClCompile>
@@ -194,7 +199,7 @@ let compiler_settings = `
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -209,6 +214,7 @@ let compiler_settings = `
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
 </ItemDefinitionGroup>
 `;
@@ -277,7 +283,41 @@ src = src
 src = src
 .replace(/<ItemDefinitionGroup/, (m) => {
 	return `${compiler_settings}${m}`;
-});
+})
+// append this next bit near the start of the project file:
+.replace(/<Import Project="[^>]+Microsoft\.Cpp\.props"\s+\/>/, (m) => {
+  return `${m}
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  `;
+})
+// and append this bit near the very end to ensure that 
+// the 'last seen is the winner' rule of Visual Studio property parsing 
+// makes this bunch the ultimate winners, just in case we need it:
+.replace(/<\/Project>[\s\r\n]*$/, (m) => {
+  return `
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+${m}
+  `;
+})
 
 fs.writeFileSync(filepath, src, 'utf8');
 
