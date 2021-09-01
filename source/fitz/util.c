@@ -377,7 +377,6 @@ fz_search_page(fz_context *ctx, fz_page *page, const char *needle, fz_quad *hit_
 	fz_always(ctx)
 	{
 		fz_drop_stext_page(ctx, text);
-		fz_drop_stext_options(ctx, &opts);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);

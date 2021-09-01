@@ -999,10 +999,15 @@ FUN(Document_toReflowedDocument)(JNIEnv *env, jobject self, jstring joptions)
 		newdoc = fz_new_xhtml_document_from_document(ctx, doc, &opts);
 	}
 	fz_always(ctx)
+	{
+		fz_drop_stext_options(ctx, &opts);
 		if (joptions)
 			(*env)->ReleaseStringUTFChars(env, joptions, options);
+	}
 	fz_catch(ctx)
+	{
 		jni_rethrow(env, ctx);
+	}
 
 	return to_Document_safe_own(ctx, env, newdoc);
 }

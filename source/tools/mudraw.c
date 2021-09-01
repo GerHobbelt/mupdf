@@ -240,7 +240,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_OCR_TRACE, CS_GRAY, { CS_GRAY } },
 };
 
-static fz_stext_options stext_options = { 0 };
+static fz_stext_options stext_options;
 
 static fz_cookie master_cookie = { 0 };
 
@@ -2309,6 +2309,8 @@ int main(int argc, const char** argv)
 	memset(&master_cookie, 0, sizeof(master_cookie));
 	master_cookie.run_mode = FZ_RUN_EVERYTHING;
 
+	memset(&stext_options, 0, sizeof(stext_options));
+
 	gettime_once = 1;
 
 	// ---
@@ -3115,6 +3117,7 @@ int main(int argc, const char** argv)
 
 		fz_drop_colorspace(ctx, colorspace);
 		fz_drop_colorspace(ctx, proof_cs);
+		fz_drop_stext_options(ctx, &stext_options);
 	}
 	fz_catch(ctx)
 	{

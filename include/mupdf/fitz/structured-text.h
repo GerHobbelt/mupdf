@@ -332,15 +332,46 @@ char *fz_copy_rectangle(fz_context *ctx, fz_stext_page *page, fz_rect area, int 
 
 	Note that the `opts` struct is cleared before parsing `string`.
 
+	When done using the resulting options instance, clean up the strings allocated in
+	the fz_stext_options instance by invoking fz_drop_stext_options().
+
 	`string` may be NULL, in which case the parse will be nil, i.e. all flags are off(=zero).
+
+	Notes:
+	- Every `fz_parse_stext_options()` call should be matched by a `fz_drop_stext_options()` call.
+	- See also the notes at `fz_drop_stext_options()`.
 */
 fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *string);
+
+/**
+	Copy the options from `src` to `dst`. Duplicates the allocated template strings, etc. so clean up
+	is simple: every fz_stext_options instance (as produced by fz_parse_stext_options()) must be
+	cleaned up individually by invoking fz_drop_stext_options() once you're done using it.
+
+	See also the notes at `fz_drop_stext_options()`.
+*/
+fz_stext_options* fz_copy_stext_options(fz_context* ctx, fz_stext_options* dst, const fz_stext_options* src);
+
+/**
+	Clean up all space, used by `options`' elements, allocated on the heap.
+	
+	Note: `fz_new_stext_device()` stores a copy (through invoking `fz_copy_stext_options()` on the `options` reference
+	passed), which is cleaned up automatically once the device is closed (through an internal call to
+	`fz_drop_stext_options()`. This is all taken care of in the `fz_drop_device()` call which matches the
+	`fz_new_stext_device()` call before.
+
+	In short:
+	- Every `fz_parse_stext_options()` call should be matched by a `fz_drop_stext_options()` call.
+	- Ditto for every `fz_copy_stext_options()` call you see/write: `dst` should be passed to `fz_drop_stext_options()`
+      once you're done.
+*/
+void fz_drop_stext_options(fz_context* ctx, fz_stext_options* options);
 
 /**
     Set up advanced stext device options, used when the options flag
 	FZ_STEXT_REFERENCE_IMAGES has been set.
 
-	`opts` is modified and returned as result.
+	`opts` is modified and the reference returned as result.
 
 	`user_state` is a reference to userland data that may be required by the
 	referenced handler functions(): the reference is stored in `opts->user_state`

@@ -1801,6 +1801,7 @@ static void reflow_document(void)
 	fz_parse_stext_options(ctx, &opts, reflow_options);
 
 	new_doc = fz_open_reflowed_document(ctx, doc, &opts);
+	fz_drop_stext_options(ctx, &opts);
 	fz_drop_document(ctx, doc);
 	doc = new_doc;
 	pdf = NULL;

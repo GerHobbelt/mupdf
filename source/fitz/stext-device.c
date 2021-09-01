@@ -952,6 +952,7 @@ fz_stext_drop_device(fz_context *ctx, fz_device *dev)
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_drop_text(ctx, tdev->lasttext);
+	fz_drop_stext_options(ctx, &tdev->opts);
 }
 
 fz_stext_options *
@@ -1052,6 +1053,39 @@ fz_set_stext_options_images_handler(fz_context* ctx, fz_stext_options* opts, fz_
 	return opts;
 }
 
+fz_stext_options *
+fz_copy_stext_options(fz_context* ctx, fz_stext_options* dst, const fz_stext_options* src)
+{
+	assert(dst != NULL);
+	if (!src)
+	{
+		memset(dst, 0, sizeof(*dst));
+	}
+	else
+	{
+		*dst = *src;
+		if (src->external_styles_path_template)
+			dst->external_styles_path_template = fz_strdup(ctx, src->external_styles_path_template);
+		if (src->reference_image_path_template)
+			dst->reference_image_path_template = fz_strdup(ctx, src->reference_image_path_template);
+	}
+	return dst;
+}	
+
+void
+fz_drop_stext_options(fz_context* ctx, fz_stext_options* options)
+{
+	if (options)
+	{
+		if (options->external_styles_path_template)
+			fz_free(ctx, options->external_styles_path_template);
+		if (options->reference_image_path_template)
+			fz_free(ctx, options->reference_image_path_template);
+		options->external_styles_path_template = NULL;
+		options->reference_image_path_template = NULL;
+	}
+}
+
 fz_device *
 fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options *opts)
 {
@@ -1066,15 +1100,17 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 	dev->super.clip_stroke_text = fz_stext_clip_stroke_text;
 	dev->super.ignore_text = fz_stext_ignore_text;
 
-	if (opts && (opts->flags & FZ_STEXT_PRESERVE_IMAGES))
-	{
-		dev->super.fill_shade = fz_stext_fill_shade;
-		dev->super.fill_image = fz_stext_fill_image;
-		dev->super.fill_image_mask = fz_stext_fill_image_mask;
-	}
-
 	if (opts)
-		dev->opts = *opts;
+	{
+		if (opts->flags & FZ_STEXT_PRESERVE_IMAGES)
+		{
+			dev->super.fill_shade = fz_stext_fill_shade;
+			dev->super.fill_image = fz_stext_fill_image;
+			dev->super.fill_image_mask = fz_stext_fill_image_mask;
+		}
+
+		fz_copy_stext_options(ctx, &dev->opts, opts);
+	}
 	dev->page = page;
 	dev->pen.x = 0;
 	dev->pen.y = 0;

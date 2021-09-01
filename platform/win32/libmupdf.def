@@ -331,6 +331,7 @@ EXPORTS
 	fz_open_zip_archive_with_stream
 	fz_read_archive_entry
 	fz_write_zip_entry
+	fz_close_band_writer
 	fz_drop_band_writer
 	fz_new_band_writer_of_size
 	fz_write_band
@@ -453,6 +454,7 @@ EXPORTS
 	fz_drop_global_context
 	fz_enable_dbg_output
 	fz_enable_icc
+	fz_end_throw_on_repair
 	fz_error
 	fz_flush_warnings
 	fz_free
@@ -485,6 +487,7 @@ EXPORTS
 	fz_set_user_context
 	fz_set_user_css
 	fz_set_warning_callback
+	fz_start_throw_on_repair
 	fz_strdup
 	fz_text_aa_level
 	fz_throw
@@ -980,7 +983,9 @@ EXPORTS
 	fz_parse_page_range
 	fz_path_basename
 	fz_realpath
+	fz_runeidx
 	fz_runelen
+	fz_runeptr
 	fz_runetochar
 	fz_strcasecmp
 	fz_strlcat
@@ -995,7 +1000,9 @@ EXPORTS
 	fz_add_layout_line
 	fz_copy_rectangle
 	fz_copy_selection
+	fz_copy_stext_options
 	fz_drop_layout
+	fz_drop_stext_options
 	fz_drop_stext_page
 	fz_get_ligature_replacement
 	fz_highlight_selection
@@ -1016,6 +1023,7 @@ EXPORTS
 	fz_print_stext_trailer_as_html
 	fz_print_stext_trailer_as_xhtml
 	fz_search_stext_page
+	fz_set_stext_options_images_handler
 	fz_snap_selection
 	fz_argv_from_wargv
 	fz_fopen_utf8

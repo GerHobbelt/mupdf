@@ -130,7 +130,9 @@ FUN(DisplayList_toStructuredText)(JNIEnv *env, jobject self, jstring joptions)
 			(*env)->ReleaseStringUTFChars(env, joptions, options);
 	}
 	fz_catch(ctx)
+	{
 		jni_rethrow(env, ctx);
+	}
 
 	return to_StructuredText_safe_own(ctx, env, text);
 }

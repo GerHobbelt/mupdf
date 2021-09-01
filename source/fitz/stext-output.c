@@ -763,6 +763,7 @@ text_drop_writer(fz_context *ctx, fz_document_writer *wri_)
 	fz_text_writer *wri = (fz_text_writer*)wri_;
 	fz_drop_stext_page(ctx, wri->page);
 	fz_drop_output(ctx, wri->out);
+	fz_drop_stext_options(ctx, &wri->opts);
 }
 
 fz_document_writer *
@@ -816,6 +817,10 @@ fz_new_text_writer_with_output(fz_context *ctx, const char *format, fz_output *o
 	fz_catch(ctx)
 	{
 		fz_drop_output(ctx, out);
+		if (wri)
+		{
+			fz_drop_stext_options(ctx, &wri->opts);
+		}
 		fz_free(ctx, wri);
 		fz_rethrow(ctx);
 	}

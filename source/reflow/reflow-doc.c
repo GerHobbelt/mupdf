@@ -235,7 +235,7 @@ fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext
 	doc->base.layout = (fz_document_layout_fn *)reflow_layout;
 
 	doc->underdoc = fz_keep_document(ctx, underdoc);
-	doc->opts = *opts;
+	fz_copy_stext_options(ctx, &doc->opts, opts);
 
 	doc->w = DEF_WIDTH;
 	doc->h = DEF_HEIGHT;
