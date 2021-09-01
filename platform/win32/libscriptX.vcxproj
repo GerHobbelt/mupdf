@@ -18,8 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>libscriptX</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF11452D}</ProjectGuid>
@@ -31,71 +29,82 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -106,15 +115,9 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   
-
-
-
-
-
-
-
-
+  
 
 
 <ItemDefinitionGroup>
@@ -131,7 +134,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -146,39 +149,24 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -186,11 +174,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -198,7 +184,6 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
@@ -207,21 +192,8 @@
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -229,11 +201,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -241,33 +211,17 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -275,11 +229,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -287,7 +239,6 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
@@ -296,21 +247,8 @@
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -318,577 +256,207 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
-  
-
-  
-
-  
-
   <ItemGroup>
-    
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscEngine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscException.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscHelper.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscLocalReference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscNative.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscScope.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscUtils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscValue.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscWeakRef.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaByteBufferImpl.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaEngine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaException.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaHelper.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaLocalReference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaNative.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaScope.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaUtils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaValue.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsEngine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsException.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsHelper.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsLocalReference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsNative.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsScope.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsUtils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsValue.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateEngine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateException.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateLocalReference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateNative.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateUtils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateValue.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Engine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Exception.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Helper.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Inspector.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8LocalReference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Native.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Platform.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Scope.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Utils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Value.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmEngine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmException.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmHelper.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmLocalReference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmNative.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmScope.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmUtils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmValue.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/Engine.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/Reference.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/Scope.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/Utils.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/utils/Helper.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/utils/MessageQueue.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/src/utils/ThreadPool.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/node_addon/src/addon.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/BookKeepingTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ByteBufferTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/CustomConverterTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/Demo.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/EngineTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ExceptionTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/InspectorTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/InteroperateTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ManagedObjectTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/MessageQueueTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/NativeTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/PressureTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ReferenceTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ScopeTests.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ThreadPoolTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/UtilsTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/ValueTest.cc" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/ScriptX/test/src/gtest_main.cc" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscEngine.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscHelper.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscHelper.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscNative.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscReference.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/JscWeakRef.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitException.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitIncludes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitNative.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitReference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/JavaScriptCore/trait/TraitUtils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaByteBufferImpl.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaEngine.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaHelper.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaHelper.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaNative.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaReference.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/LuaScope.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitException.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitIncludes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitNative.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitReference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Lua/trait/TraitUtils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsEngine.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsHelper.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsHelper.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsNative.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/QjsReference.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitException.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitIncludes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitNative.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitReference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/QuickJs/trait/TraitUtils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateNative.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/TemplateReference.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitException.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitIncludes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitNative.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitReference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/Template/trait/TraitUtils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Engine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Engine.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Helper.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Helper.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Native.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Platform.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Reference.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Scope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/V8Scope.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/thirdparty/utfcpp/utf8-min.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitException.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitIncludes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitNative.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitReference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/V8/trait/TraitUtils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmEngine.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmHelper.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmNative.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmReference.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/WasmScope.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitEngine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitException.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitIncludes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitNative.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitReference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitScope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/backend/WebAssembly/trait/TraitUtils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Engine.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Engine.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Exception.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Includes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Inspector.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Native.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Native.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/NativeConverter.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Reference.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Scope.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Utils.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/Value.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/foundation.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/include/ScriptX/ScriptX.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/GlobalWeakBookkeeping.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/Helper.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/MemoryPool.hpp" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/MessageQueue.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/ThreadLocal.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/ThreadPool.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/utils/TypeInformation.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/src/version.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/ScriptX/test/src/test.h" />
-        
   </ItemGroup>
+  
+
+  
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
 </Project>
-    
-    
-    
-    
+  
+  

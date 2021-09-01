@@ -18,8 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>libjemalloc</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3EF2C8}</ProjectGuid>
@@ -31,71 +29,82 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
+    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	<WholeProgramOptimization>true</WholeProgramOptimization>
 	
 	
-	
-	
-	
-	
-	
-	
-    <UseOfMfc>false</UseOfMfc>
     
+    
+    <UseOfMfc>false</UseOfMfc>
     
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -106,15 +115,9 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   
-
-
-
-
-
-
-
-
+  
 
 
 <ItemDefinitionGroup>
@@ -131,7 +134,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -146,39 +149,24 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -186,11 +174,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -198,7 +184,6 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
@@ -207,21 +192,8 @@
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -229,11 +201,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -241,33 +211,17 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
     <ClCompile>
-			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -275,11 +229,9 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
@@ -287,7 +239,6 @@
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
-      
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName />
@@ -296,21 +247,8 @@
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJEMALLOC;JEMALLOC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -318,1057 +256,367 @@
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    
-	  		<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-	</Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
     <Bscmake>
-      
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
-  
-
-  
-
-  
-
   <ItemGroup>
-    
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/msvc/test_threads/test_threads.cpp" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/msvc/test_threads/test_threads_main.cpp" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/arena.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/background_thread.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/base.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bin.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bin_info.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bitmap.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/buf_writer.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/cache_bin.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ckh.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/counter.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ctl.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/decay.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/div.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ecache.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/edata.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/edata_cache.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ehooks.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/emap.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/eset.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/exp_grow.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/extent.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/extent_dss.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/extent_mmap.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/fxp.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hook.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_hooks.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpdata.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/inspect.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/jemalloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/jemalloc_cpp.cpp" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/large.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/log.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/malloc_io.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/mutex.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/nstime.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pa.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pa_extra.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pac.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pages.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pai.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/peak_event.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_data.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_log.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_recent.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_stats.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_sys.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/psset.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/rtree.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/safety_check.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/sc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/sec.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/stats.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/sz.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/tcache.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/test_hooks.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/thread_event.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ticker.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/tsd.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/witness.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/zone.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/analyze/prof_bias.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/analyze/rand.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/analyze/sizes.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/MALLOCX_ARENA.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/aligned_alloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/allocated.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/cpp/basic.cpp" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/cpp/infallible_new_false.cpp" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/cpp/infallible_new_true.cpp" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/extent.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/malloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/mallocx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/overflow.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/posix_memalign.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/rallocx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/sdallocx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/slab_sizes.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/smallocx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/thread_arena.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/thread_tcache_enabled.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/integration/xallocx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/SFMT.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/btalloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/btalloc_0.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/btalloc_1.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/math.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/mtx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/sleep.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/test.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/thd.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/src/timer.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/stress/batch_alloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/stress/fill_flush.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/stress/hookbench.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/stress/large_microbench.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/stress/mallctl.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/stress/microbench.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/SFMT.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/a0.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/arena_decay.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/arena_reset.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/arena_reset_prof.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/atomic.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/background_thread.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/background_thread_enable.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/base.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/batch_alloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/batch_alloc_prof.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/binshard.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/bit_util.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/bitmap.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/buf_writer.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/cache_bin.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/ckh.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/counter.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/decay.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/div.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/double_free.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/edata_cache.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/emitter.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/extent_quantize.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/fb.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/fork.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/fxp.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hash.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hook.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa_background_thread.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpdata.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/huge.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/inspect.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/junk.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/junk_alloc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/junk_free.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/log.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/mallctl.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/malloc_conf_2.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/malloc_io.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/math.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/mpsc_queue.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/mq.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/mtx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/nstime.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/oversize_threshold.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/pa.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/pack.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/pages.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/peak.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/ph.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prng.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_accum.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_active.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_gdump.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_idump.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_log.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_mdump.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_recent.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_reset.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_stats.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_sys_thread_name.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_tctx.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_thread_name.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/psset.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/ql.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/qr.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/rb.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/retained.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/rtree.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/safety_check.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/sc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/sec.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/seq.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/size_check.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/size_classes.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/slab.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/smoothstep.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/spin.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/stats.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/stats_print.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/tcache_max.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/test_hooks.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/thread_event.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/ticker.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/tsd.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/witness.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/zero.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/zero_realloc_abort.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/zero_realloc_free.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/zero_realloc_strict.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/zero_reallocs.c" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/activity_callback.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/arena_externs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/arena_inlines_a.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/arena_inlines_b.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/arena_stats.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/arena_structs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/arena_types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/assert.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/atomic.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/atomic_c11.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/atomic_gcc_atomic.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/atomic_gcc_sync.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/atomic_msvc.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/background_thread_externs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/background_thread_inlines.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/background_thread_structs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/base.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/base_structs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_info.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_stats.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bit_util.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bitmap.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/buf_writer.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/cache_bin.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ckh.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/counter.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ctl.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/decay.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/div.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ecache.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/edata.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/edata_cache.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ehooks.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/emap.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/emitter.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/eset.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/exp_grow.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/extent.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/extent_dss.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/extent_mmap.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/fb.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/fxp.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hash.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hook.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_hooks.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_opts.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpdata.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/inspect.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_decls.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_externs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_includes.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_inlines_a.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_inlines_b.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_inlines_c.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_macros.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/large_externs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/lockedint.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/log.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/malloc_io.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/mpsc_queue.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/mutex.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/mutex_prof.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/nstime.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/pa.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/pac.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/pages.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/pai.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/peak.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/peak_event.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ph.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prng.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_data.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_externs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_inlines.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_log.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_recent.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_stats.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_structs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_sys.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/psset.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ql.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/qr.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/quantum.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/rb.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/rtree.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/rtree_tsd.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/safety_check.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/sc.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/sec.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/sec_opts.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/seq.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/slab_data.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/smoothstep.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/spin.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/stats.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/sz.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tcache_externs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tcache_inlines.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tcache_structs.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tcache_types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/test_hooks.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/thread_event.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ticker.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_generic.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_malloc_thread_cleanup.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_tls.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_types.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_win.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/typed_list.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/util.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/witness.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/msvc_compat/C99/stdbool.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/msvc_compat/C99/stdint.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/msvc_compat/strings.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/msvc_compat/windows_extra.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/msvc/test_threads/test_threads.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-alti.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params11213.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params1279.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params132049.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params19937.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params216091.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params2281.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params4253.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params44497.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params607.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-params86243.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT-sse2.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/SFMT.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/bench.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/bgthd.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/btalloc.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/extent_hooks.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/math.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/mq.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/mtx.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/nbits.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/sleep.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/test.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/thd.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/include/test/timer.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/test/unit/double_free.h" />
-        
   </ItemGroup>
+  
+
+  
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
 </Project>
-    
-    
-    
-    
+  
+  
