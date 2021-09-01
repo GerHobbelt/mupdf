@@ -6969,7 +6969,7 @@ static void ffi_PDFWidget_layoutTextWidget(js_State *J)
 
 	fz_try(ctx)
 	{
-		bounds = pdf_bound_widget(ctx, widget);
+		bounds = pdf_bound_annot(ctx, widget);
 		layout = pdf_layout_text_widget(ctx, widget);
 		mat = fz_concat(layout->inv_matrix, fz_translate(-bounds.x0, -bounds.y0));
 	}
