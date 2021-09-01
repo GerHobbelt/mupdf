@@ -297,7 +297,7 @@ FUN(Page_toStructuredText)(JNIEnv *env, jobject self, jstring joptions)
 	fz_context *ctx = get_context(env);
 	fz_page *page = from_Page(env, self);
 	fz_stext_page *text = NULL;
-	const char *options= NULL;
+	const char *options = NULL;
 	fz_stext_options opts;
 
 	if (!ctx || !page) return NULL;
