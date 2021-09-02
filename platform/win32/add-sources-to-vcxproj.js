@@ -271,14 +271,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <ClCompile Include="${f}">
+    <Text Include="${f}">
       <Filter>${base}</Filter>
-    </ClCompile>
+    </Text>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <ClCompile Include="${f}" />
+    <Text Include="${f}" />
         `;
         filesToAddToProj.push(slot);
         break;
