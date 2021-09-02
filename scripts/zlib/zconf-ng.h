@@ -174,4 +174,94 @@ typedef PTRDIFF_TYPE ptrdiff_t;
 #  endif
 #endif
 
+
+
+// build configuration:
+
+#undef DUMP_BL_TREE
+
+#undef NO_GZIP
+//GUNZIP
+//GZIP
+#undef NO_GZCOMPRESS
+
+//#define HAVE_BUILTIN_CTZ    1    // via fallback_builtins.h
+
+#undef HAVE_POSIX_MEMALIGN
+#undef HAVE_SYS_SDT_H      // s390
+#undef HAVE_UNISTD_H       // UNIX
+
+#undef INFLATE_ALLOW_INVALID_DISTANCE_TOOFAR_ARRR
+
+#define INFLATE_STRICT      1
+
+
+#undef NO_MEDIUM_STRATEGY
+#undef NO_QUICK_STRATEGY
+
+#define NOT_TWEAK_COMPILER   1    // gcc (4.8.*) tweak
+
+#define PKZIP_BUG_WORKAROUND   1
+
+
+//POWER8_VSX_ADLER32
+//POWER8_VSX_CHUNKSET
+//POWER8_VSX_SLIDEHASH
+//POWER_FEATURES
+//PPC_FEATURES
+//PPC_VMX_ADLER32
+//PPC_VMX_SLIDEHASH
+//S390_CRC32_VX
+//S390_DFLTCC_DEFLATE
+//S390_DFLTCC_INFLATE
+//ARM_NEON_ADLER32
+//ARM_NEON_CHUNKSET
+//ARM_ACLE_CRC_HASH
+
+
+#define UNALIGNED64_OK   1
+#define UNALIGNED_OK     1
+
+#define UNROLL_MORE    1
+
+#undef USE_MMAP
+
+#define WITH_GZFILEOP    1
+
+#ifdef __AVX2__
+#define X86_AVX2            1
+#define X86_AVX2_ADLER32    1
+#endif
+#ifdef __AVX__
+#define X86_AVX_CHUNKSET    1
+#endif
+
+#define X86_FEATURES        1
+
+#define X86_PCLMULQDQ_CRC   1
+
+#if _M_IX86_FP > 0
+#define X86_SSE2            1
+#define X86_SSE2_CHUNKSET   1
+#define X86_SSE42_CMP_STR   1
+#define X86_SSE42_CRC_HASH  1
+#define X86_SSE42_CRC_INTRIN 1
+#define X86_SSSE3_ADLER32  1
+#endif
+
+#undef ZLIB_COMPAT
+
+#undef ZLIB_DEBUG              // define this one to collect run-time statistics for analysis/debugging
+
+
+
+#define __vector /* no-op */
+
+
+
+// provide the ctz intrinsics a la GCC:
+#include "fallback_builtins.h"
+
+
+
 #endif /* ZCONFNG_H */
