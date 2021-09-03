@@ -212,8 +212,9 @@ static struct {
 	{ jpegXL_epf_main, "jxl_epf", "jxl_epf tool" },
 	{ jpegXL_from_tree_main, "jxl_from_tree", "jxl_from_tree tool" },
 	{ jpegXL_ssimulacra_main, "jxl_ssimulacra tool", "jxl_ssimulacra tool" },
-//	{ jpegXL_ssimulacra_openCV_main, "jxl_ssimulacra_openCV", "jxl_ssimulacra_openCV tool" },
+	{ jpegXL_ssimulacra_openCV_main, "jxl_ssimulacra_openCV", "jxl_ssimulacra_openCV tool" },
 	{ jpegXL_xyb_range_main, "jxl_xyb_range", "jxl_xyb_range tool" },
+	{ jpegXL_C_test_main, "jxl_test", "jxl_C_test tool" },
 
 	{ report_version, "version", "report version of this build / tools" },
 };
