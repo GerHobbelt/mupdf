@@ -81,7 +81,18 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -127,7 +138,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JPEGXL_MAJOR_VERSION=0;JPEGXL_MINOR_VERSION=5;JPEGXL_PATCH_VERSION=0;JPEGXL_LIBRARY_VERSION="0.5.0";JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JPEGXL_VERSION_FROM_GIT;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -141,6 +152,14 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>node ./patch-all-library-version-numbers.js   jpeg-xl</Command>
+      <Outputs>always-exec-this-step</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -153,7 +172,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JPEGXL_MAJOR_VERSION=0;JPEGXL_MINOR_VERSION=5;JPEGXL_PATCH_VERSION=0;JPEGXL_LIBRARY_VERSION="0.5.0";JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JPEGXL_VERSION_FROM_GIT;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -168,6 +187,14 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>node ./patch-all-library-version-numbers.js   jpeg-xl</Command>
+      <Outputs>always-exec-this-step</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -182,7 +209,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JPEGXL_MAJOR_VERSION=0;JPEGXL_MINOR_VERSION=5;JPEGXL_PATCH_VERSION=0;JPEGXL_LIBRARY_VERSION="0.5.0";JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JPEGXL_VERSION_FROM_GIT;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -196,6 +223,14 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>node ./patch-all-library-version-numbers.js   jpeg-xl</Command>
+      <Outputs>always-exec-this-step</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -208,7 +243,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JPEGXL_MAJOR_VERSION=0;JPEGXL_MINOR_VERSION=5;JPEGXL_PATCH_VERSION=0;JPEGXL_LIBRARY_VERSION="0.5.0";JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JPEGXL_VERSION_FROM_GIT;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -223,6 +258,14 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>node ./patch-all-library-version-numbers.js   jpeg-xl</Command>
+      <Outputs>always-exec-this-step</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -233,6 +276,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/examples/jxlinfo.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_apng.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\tools\tool_version.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_exr.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_gif.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_jpg.cc" />
@@ -389,6 +433,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/jxl_from_tree.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/speed_stats.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\tools\libjxl_test.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\tools\ssimulacra_opencv_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/xyb_range.cc" />
@@ -621,6 +666,7 @@
     <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\targets.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\lodepng\lodepng.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\lodepng\lodepng_util.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\jpeg-xl\tools\tool_version.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\thirdparty\owemdjee\jpeg-xl\lib\extras\README.md" />
