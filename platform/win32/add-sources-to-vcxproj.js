@@ -366,9 +366,9 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   
   //console.error({files, a, sourcesPath, extraFilters, filesToAdd, fsrc1, fsrc2});
 
-  filterSrc = filterSrc.replace(/<\/Project>/, fsrc2)
+  filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2)
   .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
-  src = src.replace(/<\/Project>/, fsrc1)
+  src = src.replace(/<\/Project>[\s\r\n]*$/, fsrc1)
   .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
 
   fs.writeFileSync(filepath, src, 'utf8');
