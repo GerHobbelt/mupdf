@@ -283,7 +283,7 @@ def main():
 	libjpeg_exports = generateExportsJpeg("thirdparty/libjpeg/jpeglib.h", [], ["jpeg_cust_mem_init"])
 	libgif_exports = generateExports("thirdparty/owemdjee/libgif/gif_lib.h")
 	libwebp_exports = generateExports("thirdparty/owemdjee/libwebp/src/webp")
-	libjpegXL_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include", ["jpegXL_ssimulacra_openCV_main"])
+	libjpegXL_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include")
 	libjpegXL2_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include/jxl")
 	libbrotli_exports = generateExports("thirdparty/owemdjee/brotli/c/include")
 	libbrotli2_exports = generateExports("thirdparty/owemdjee/brotli/c/include/brotli")
