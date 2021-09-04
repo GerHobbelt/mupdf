@@ -246,7 +246,7 @@ int
 #ifdef DDKBUILD
 __cdecl
 #endif
-main (int argc, char *argv[])
+main (int argc, const char** argv)
 {
 	const uint16_t endian_test = 0xBE00;
 	int x86_32, short_label, short_size, last_arg;
@@ -299,13 +299,14 @@ main (int argc, char *argv[])
 
 	/* Label setup */
 	if (argc < last_arg) {
-		for (i=(int)strlen(argv[1])-1; i>=0; i--) {
-			if (argv[1][i] == '.') {
-				argv[1][i] = 0;
+		char* s = strdup(argv[1]);
+		for (i=(int)strlen(s)-1; i>=0; i--) {
+			if (s[i] == '.') {
+				s[i] = 0;
 				break;
 			}
 		}
-		label = argv[1];
+		label = s;
 	} else {
 		label = argv[3];
 	}
