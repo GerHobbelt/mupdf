@@ -54,7 +54,7 @@ static int usage(void)
 		"\t-P -\tcertificate password\n"
 		"\t-o -\toutput file name\n"
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -257,7 +257,7 @@ static void process_acro_form(fz_context *ctx, pdf_document *doc)
 		process_field_hierarchy(ctx, doc, pdf_array_get(ctx, fields, i));
 }
 
-int pdfsign_main(int argc, const char **argv)
+int pdfsign_main(int argc, const char** argv)
 {
 	pdf_document *doc;
 	const char *password = "";

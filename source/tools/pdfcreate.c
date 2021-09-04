@@ -250,7 +250,7 @@ static void create_page(const char *input)
 		fz_rethrow(ctx);
 }
 
-int pdfcreate_main(int argc, const char **argv)
+int pdfcreate_main(int argc, const char** argv)
 {
 	pdf_write_options opts = pdf_default_write_options;
 	const char *output = "out.pdf";

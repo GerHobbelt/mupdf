@@ -155,7 +155,7 @@ fz_argv_from_wargv(int argc, const wchar_t **wargv)
 }
 
 void
-fz_free_argv(int argc, const char **argv)
+fz_free_argv(int argc, const char** argv)
 {
 	int i;
 	for (i = 0; i < argc; i++)

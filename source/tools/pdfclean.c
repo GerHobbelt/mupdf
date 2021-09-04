@@ -67,7 +67,7 @@ static int usage(void)
 		"\t-AA\trecreate appearance streams for annotations\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -80,7 +80,7 @@ static int encrypt_method_from_string(const char *name)
 	return PDF_ENCRYPT_UNKNOWN;
 }
 
-int pdfclean_main(int argc, const char **argv)
+int pdfclean_main(int argc, const char** argv)
 {
 	const char *infile;
 	const char *outfile = "out.pdf";

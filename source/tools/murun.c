@@ -7053,7 +7053,7 @@ static void usage(void)
 	);
 }
 
-int murun_main(int argc, const char **argv)
+int murun_main(int argc, const char** argv)
 {
 	fz_context *ctx;
 	js_State *J;

@@ -14,7 +14,7 @@
 #define main main_utf8
 #endif
 
-int main(int argc, const char **argv)
+int main(int argc, const char** argv)
 {
 	fz_context* ctx = NULL;
 

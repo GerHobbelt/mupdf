@@ -21,7 +21,7 @@ gcc -I/usr/local/include -o example \
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv)
+int main(int argc, const char** argv)
 {
 	char *input;
 	float zoom, rotate;

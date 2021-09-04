@@ -2675,9 +2675,9 @@ static void signal_handler(int signal)
 #endif
 
 #ifdef _MSC_VER
-int main_utf8(int argc, const char **argv)
+int main_utf8(int argc, const char** argv)
 #else
-int main(int argc, const char **argv)
+int main(int argc, const char** argv)
 #endif
 {
 	const char *trace_file_name = NULL;

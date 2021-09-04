@@ -54,7 +54,7 @@
 #endif
 
 
-static int report_version(int argc, const char* argv[]);
+static int report_version(int argc, const char** argv);
 
 static struct {
 	int (*func)(int argc, const char *argv[]);
@@ -230,7 +230,7 @@ namematch(const char *end, const char *start, const char *match)
 }
 
 static int
-report_version(int argc, const char* argv[])
+report_version(int argc, const char** argv)
 {
 	const char* opt = (argc == 2 ? argv[1] : NULL);
 	const char* end = (opt ? opt + strlen(opt) : NULL);
@@ -375,9 +375,9 @@ static void mu_drop_context(void)
 #ifdef GPERF
 #include "gperftools/profiler.h"
 
-static int profiled_main(int argc, const char **argv);
+static int profiled_main(int argc, const char** argv);
 
-int main(int argc, const char **argv)
+int main(int argc, const char** argv)
 {
 	int ret;
 	ProfilerStart("mutool.prof");
@@ -386,10 +386,10 @@ int main(int argc, const char **argv)
 	return ret;
 }
 
-static int profiled_main(int argc, const char **argv)
+static int profiled_main(int argc, const char** argv)
 #else
 #ifndef MUTOOL_AS_BULKTEST_CMD
-int main(int argc, const char **argv)
+int main(int argc, const char** argv)
 #else
 int mutool_main(int argc, const char** argv)
 #endif

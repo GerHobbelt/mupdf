@@ -1426,7 +1426,7 @@ bulktest_main(int argc, const char *argv[])
 }
 
 int
-main(int argc, const char* argv[])
+main(int argc, const char** argv)
 {
 	return bulktest_main(argc, argv);
 }

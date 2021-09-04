@@ -281,7 +281,7 @@ static void extractobject(int num)
 		fz_warn(ctx, "ignoring object %d", num);
 }
 
-int pdfextract_main(int argc, const char **argv)
+int pdfextract_main(int argc, const char** argv)
 {
 	const char *infile;
 	const char *password = "";

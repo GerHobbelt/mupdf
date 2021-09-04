@@ -139,7 +139,7 @@ void unlock_mutex(void *user, int lock)
 	mu_unlock_mutex(&mutex[lock]);
 }
 
-int main(int argc, char **argv)
+int main(int argc, const char** argv)
 {
 	char *filename = argc >= 2 ? argv[1] : "";
 	mu_thread *thread = NULL;

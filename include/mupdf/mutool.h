@@ -7,44 +7,44 @@
 extern "C" {
 #endif
 
-int muconvert_main(int argc, const char* argv[]);
+int muconvert_main(int argc, const char** argv);
 #if !defined(MUDRAW_STANDALONE)
-int mudraw_main(int argc, const char* argv[]);
+int mudraw_main(int argc, const char** argv);
 #endif
 #if !defined(MURASTER_STANDALONE)
-int muraster_main(int argc, const char* argv[]);
+int muraster_main(int argc, const char** argv);
 #endif
-int mutrace_main(int argc, const char* argv[]);
-int murun_main(int argc, const char* argv[]);
+int mutrace_main(int argc, const char** argv);
+int murun_main(int argc, const char** argv);
 
-int pdfclean_main(int argc, const char* argv[]);
-int pdfextract_main(int argc, const char* argv[]);
-int pdfinfo_main(int argc, const char* argv[]);
-int pdfposter_main(int argc, const char* argv[]);
-int pdfshow_main(int argc, const char* argv[]);
-int pdfpages_main(int argc, const char* argv[]);
-int pdfcreate_main(int argc, const char* argv[]);
-int pdfmerge_main(int argc, const char* argv[]);
-int pdfsign_main(int argc, const char* argv[]);
-int pdfmetadump_main(int argc, const char* argv[]);
+int pdfclean_main(int argc, const char** argv);
+int pdfextract_main(int argc, const char** argv);
+int pdfinfo_main(int argc, const char** argv);
+int pdfposter_main(int argc, const char** argv);
+int pdfshow_main(int argc, const char** argv);
+int pdfpages_main(int argc, const char** argv);
+int pdfcreate_main(int argc, const char** argv);
+int pdfmerge_main(int argc, const char** argv);
+int pdfsign_main(int argc, const char** argv);
+int pdfmetadump_main(int argc, const char** argv);
 
-int cmapdump_main(int argc, const char* argv[]);
+int cmapdump_main(int argc, const char** argv);
 
 #if !defined(TESSERACT_STANDALONE) || defined(BUILD_MONOLITHIC)
 int tesseract_main(int argc, const char** argv);
 #endif
 
-int curl_main(int argc, const char* argv[]);
+int curl_main(int argc, const char** argv);
 
-int mujs_main(int argc, const char* argv[]);				// MUJS_MAIN
-int mujs_prettyprint_main(int argc, const char* argv[]);    // MUJS_PRETTYPRINT_MAIN
+int mujs_main(int argc, const char** argv);				// MUJS_MAIN
+int mujs_prettyprint_main(int argc, const char** argv);    // MUJS_PRETTYPRINT_MAIN
 
-int qiqqa_fingerprint0_main(int argc, const char* argv[]);
-int qiqqa_fingerprint1_main(int argc, const char* argv[]);
+int qiqqa_fingerprint0_main(int argc, const char** argv);
+int qiqqa_fingerprint1_main(int argc, const char** argv);
 
-int qiqqa_muannot_main(int argc, const char* argv[]);
-int qiqqa_mucontent_main(int argc, const char* argv[]);
-int qiqqa_muserver_main(int argc, const char* argv[]);
+int qiqqa_muannot_main(int argc, const char** argv);
+int qiqqa_mucontent_main(int argc, const char** argv);
+int qiqqa_muserver_main(int argc, const char** argv);
 
 int sqlite_main(int argc, const char** argv);
 

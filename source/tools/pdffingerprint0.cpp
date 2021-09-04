@@ -75,7 +75,7 @@ static void mu_drop_context(void)
 
 
 extern "C" int
-qiqqa_fingerprint0_main(int argc, const char* argv[])
+qiqqa_fingerprint0_main(int argc, const char** argv)
 {
 	int verbosity = 0;
 	int c;

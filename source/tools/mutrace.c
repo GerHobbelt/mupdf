@@ -112,7 +112,7 @@ static void runrange(fz_context *ctx, fz_document *doc, int count, fz_output *ou
 	}
 }
 
-int mutrace_main(int argc, const char **argv)
+int mutrace_main(int argc, const char** argv)
 {
 	fz_document *doc = NULL;
 	fz_output* out = NULL;

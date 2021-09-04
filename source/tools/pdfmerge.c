@@ -47,7 +47,7 @@ static int usage(void)
 		"\tpages\tcomma separated list of page numbers and ranges\n\n"
 	);
 	fz_info(ctx, "%s", fz_pdf_write_options_usage);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -86,7 +86,7 @@ static void merge_range(const char *range)
 	}
 }
 
-int pdfmerge_main(int argc, const char **argv)
+int pdfmerge_main(int argc, const char** argv)
 {
 	pdf_write_options opts = pdf_default_write_options;
 	const char *output = "out.pdf";

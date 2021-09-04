@@ -207,7 +207,7 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 	pdf_dict_put_drop(ctx, pages, PDF_NAME(Kids), kids);
 }
 
-int pdfposter_main(int argc, const char **argv)
+int pdfposter_main(int argc, const char** argv)
 {
 	const char *infile;
 	const char *outfile = "out.pdf";

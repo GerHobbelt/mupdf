@@ -45,7 +45,7 @@ static struct cmd_info
 
 static const char* xoptarg; /* Global argument pointer. */
 static int xoptind = 0; /* Global argv index. */
-static int xgetopt(int argc, const char* argv[], const char* optstring)
+static int xgetopt(int argc, const char** argv, const char* optstring)
 {
 	static const char* scan = NULL; /* Private scan pointer. */
 

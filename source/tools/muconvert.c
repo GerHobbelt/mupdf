@@ -84,7 +84,7 @@ static int usage(void)
 	fz_info(ctx, "%s", fz_pdf_write_options_usage);
 #endif
 	fz_info(ctx, "%s", fz_svg_write_options_usage);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -128,7 +128,7 @@ static void runrange(const char *range)
 	}
 }
 
-int muconvert_main(int argc, const char **argv)
+int muconvert_main(int argc, const char** argv)
 {
 	int i, c;
 	int retval = EXIT_SUCCESS;

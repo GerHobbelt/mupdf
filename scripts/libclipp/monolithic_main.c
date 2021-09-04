@@ -15,7 +15,7 @@
 
 
 typedef int tool_f();
-typedef int tool_fa(int argc, const char **argv);
+typedef int tool_fa(int argc, const char** argv);
 
 static int usage();
 
@@ -92,7 +92,7 @@ static int usage()
 }
 
 
-static int parse(const char* source, int argc, const char **argv)
+static int parse(const char* source, int argc, const char** argv)
 {
 	if (source)
 	{

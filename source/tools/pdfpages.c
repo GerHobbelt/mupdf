@@ -44,7 +44,7 @@ usage(void)
 		"\t-p -\tpassword for decryption\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -203,7 +203,7 @@ pdfpages_pages(fz_context *ctx, fz_output *out, const char *filename, const char
 	return ret;
 }
 
-int pdfpages_main(int argc, const char **argv)
+int pdfpages_main(int argc, const char** argv)
 {
 	const char *filename = "";
 	const char *password = "";

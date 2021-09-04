@@ -26,7 +26,7 @@ static void usage(void)
 }
 
 int
-cmapdump_main(int argc, const char **argv)
+cmapdump_main(int argc, const char** argv)
 {
 	pdf_cmap *cmap;
 	fz_stream *fi;
