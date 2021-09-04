@@ -31,6 +31,7 @@ int gtest_stress_test_main(int argc, const char** argv);
 int gtest_macro_stack_footprint_test_main(int argc, const char** argv);
 int gtest_throw_on_fail_ex_test_main(int argc, const char** argv);
 int gtest_xml_output_test_main(int argc, const char** argv);
+int gtest_user_exception_test_main(int argc, const char** argv);
 
 
 class ExpectNFailuresListener : public testing::EmptyTestEventListener {
@@ -93,6 +94,7 @@ int main(int argc, const char** argv)
 	rv |= gtest_macro_stack_footprint_test_main(argc, argv);
 	rv |= gtest_throw_on_fail_ex_test_main(argc, argv);
 	rv |= gtest_xml_output_test_main(argc, argv);
+	rv |= gtest_user_exception_test_main(argc, argv);
 
 	rv |= gtest_main(argc, argv);
 	return rv;

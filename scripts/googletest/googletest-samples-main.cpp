@@ -17,6 +17,7 @@ using ::testing::Test;
 using ::testing::Values;
 
 
+int gtest_sample11_main(int argc, const char** argv);
 int gtest_sample10_main(int argc, const char** argv);
 int gtest_sample9_main(int argc, const char** argv);
 
@@ -70,9 +71,10 @@ int main(int argc, const char** argv)
 	TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
 	listeners.Append(new ExpectNFailuresListener(1));
 
+	rv |= gtest_sample11_main(argc, argv);
 	rv |= gtest_sample10_main(argc, argv);
 	rv |= gtest_sample9_main(argc, argv);
-	
+
 	rv |= gtest_main(argc, argv);
 	return rv;
 }
