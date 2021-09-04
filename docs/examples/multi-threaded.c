@@ -141,7 +141,7 @@ void unlock_mutex(void *user, int lock)
 
 int main(int argc, const char** argv)
 {
-	char *filename = argc >= 2 ? argv[1] : "";
+	const char *filename = argc >= 2 ? argv[1] : "";
 	mu_thread *thread = NULL;
 	fz_locks_context locks;
 	mu_mutex mutex[FZ_LOCK_MAX];
