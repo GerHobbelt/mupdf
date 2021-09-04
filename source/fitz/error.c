@@ -359,8 +359,15 @@ fz_jmp_buf *fz_push_try(fz_context *ctx)
 	/* If we would overflow the exception stack, throw an exception instead
 	 * of entering the try block. We assume that we always have room for
 	 * 1 extra level on the stack here - i.e. we throw the error on us
-	 * starting to use the last level. */
-	if (ctx->error.top + 2 >= ctx->error.stack_base + nelem(ctx->error.stack))
+	 * starting to use the last level.
+	 *
+	 * Also take the FZ_JMPBUF_ALIGNment into consideration: we have active struct
+	 * members immediately after the stack, so any alignment correction *will*
+	 * have reduced the usable stack size. Use a compile-time worst-case estimate
+	 * instead of the run-time pointers `__stack` vs. `stack_base`, to ensure we
+	 * have the lightest & fastest boundary check here.
+	 */
+	if (ctx->error.top + 2 >= ctx->error.stack_base + nelem(ctx->error.__stack) - (FZ_JMPBUF_ALIGN + sizeof(ctx->error.stack_base[0]) - 1) / sizeof(ctx->error.stack_base[0]))
 	{
 		fz_strlcpy(ctx->error.message, "exception stack overflow!", sizeof ctx->error.message);
 

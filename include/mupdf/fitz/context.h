@@ -644,7 +644,7 @@ typedef struct
 typedef struct
 {
 	fz_error_stack_slot *top;
-	fz_error_stack_slot stack[512];
+	fz_error_stack_slot __stack[512];
 	fz_error_stack_slot padding;
 	fz_error_stack_slot *stack_base;
 	int errcode;

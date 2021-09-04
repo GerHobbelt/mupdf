@@ -585,7 +585,7 @@ static int usage(void)
 		"\n"
 		"  pages  comma separated list of page numbers and ranges\n"
 	);
-	
+
 	return EXIT_FAILURE;
 }
 
@@ -1625,7 +1625,7 @@ static void mu_drop_context(void)
 		}
 	}
 
-	assert(!ctx || (ctx->error.top == ctx->error.stack));
+	assert(!ctx || (ctx->error.top == ctx->error.stack_base));
 
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;

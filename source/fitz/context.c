@@ -147,7 +147,7 @@ fz_drop_context_locks(fz_context *ctx)
 {
 	if (!ctx)
 		return;
-		
+
 	ctx->locks = fz_locks_default;
 }
 
@@ -177,7 +177,7 @@ fz_drop_context(fz_context *ctx)
 static void
 fz_init_error_context(fz_context *ctx)
 {
-	ctx->error.stack_base = (fz_error_stack_slot *)((((intptr_t)ctx->error.stack) + FZ_JMPBUF_ALIGN-1)&~(FZ_JMPBUF_ALIGN-1));
+	ctx->error.stack_base = (fz_error_stack_slot *)((((intptr_t)ctx->error.__stack) + FZ_JMPBUF_ALIGN-1)&~(FZ_JMPBUF_ALIGN-1));
 	ctx->error.top = ctx->error.stack_base;
 	ctx->error.errcode = FZ_ERROR_NONE;
 	ctx->error.message[0] = 0;

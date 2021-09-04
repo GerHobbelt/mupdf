@@ -2189,7 +2189,7 @@ static void mu_drop_context(void)
 	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
 	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
 	// is obvious, I suppose...
-	assert(!ctx || (ctx->error.top == ctx->error.stack));
+	assert(!ctx || (ctx->error.top == ctx->error.stack_base));
 
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;
