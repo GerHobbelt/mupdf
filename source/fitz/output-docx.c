@@ -666,6 +666,7 @@ static void writer_drop(fz_context *ctx, fz_document_writer *writer_)
 	writer->output = NULL;
 	assert(!writer->ctx);
 	writer->ctx = ctx;
+	extract_end(&writer->extract);
 	extract_alloc_destroy(&writer->alloc);
 	writer->ctx = NULL;
 }
@@ -737,8 +738,11 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 	}
 	fz_catch(ctx)
 	{
-		if (writer)
+		if (writer) {
+			writer->ctx = ctx;
 			fz_drop_document_writer(ctx, &writer->super);
+			writer->ctx = NULL;
+		}
 		else
 			fz_drop_output(ctx, out);
 		fz_rethrow(ctx);
@@ -765,5 +769,14 @@ fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *o
 fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *path, const char *options)
 {
 	fz_output *out = fz_new_output_with_path(ctx, path, 0 /*append*/);
-	return fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
+	fz_document_writer *ret;
+	fz_var(ret);
+	fz_try(ctx) {
+		ret = fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
+	}
+	fz_catch(ctx) {
+		fz_drop_output(ctx, out);
+		fz_rethrow(ctx);
+	}
+	return ret;
 }
