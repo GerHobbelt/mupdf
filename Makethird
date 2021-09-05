@@ -249,7 +249,7 @@ THIRD_SRC += $(EXTRACT_SRC)
 $(OUT)/thirdparty/extract/%.o: thirdparty/extract/%.c
 	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(EXTRACT_CFLAGS) $(ZLIB_CFLAGS) $(EXTRACT_BUILD_CFLAGS)
 $(OUT)/thirdparty/extract/%.o: thirdparty/extract/%.cpp
-	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(EXTRACT_CFLAGS) $(ZLIB_CFLAGS) $(EXTRACT_BUILD_CFLAGS) -I /usr/local/include/opencv4
+	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(EXTRACT_CFLAGS) $(ZLIB_CFLAGS) $(EXTRACT_BUILD_CFLAGS) -I /usr/local/include/opencv4 -I /usr/include/opencv4
 
 # The first python3 command in the next two rules returns 0 (success) iff
 # python3 exists and is version 3.6 or later.
