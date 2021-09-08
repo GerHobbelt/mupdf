@@ -250,6 +250,10 @@ typedef struct
 static void moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	fill_path_info_t *fill_path_info = arg;
+	fill_path_info->dev->writer->ctx = ctx;
+	extract_moveto(fill_path_info->dev->writer->extract, x, y);
+	fill_path_info->dev->writer->ctx = NULL;
+	/*
 	if (fill_path_info->n == -1)	return;
 	if (fill_path_info->n != 0)
 	{
@@ -258,12 +262,16 @@ static void moveto(fz_context *ctx, void *arg, float x, float y)
 	}
 	fill_path_info->points[fill_path_info->n].x = x;
 	fill_path_info->points[fill_path_info->n].y = y;
-	fill_path_info->n += 1;
+	fill_path_info->n += 1;*/
 }
 
 static void lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	fill_path_info_t *fill_path_info = arg;
+	fill_path_info->dev->writer->ctx = ctx;
+	extract_lineto(fill_path_info->dev->writer->extract, x, y);
+	fill_path_info->dev->writer->ctx = NULL;
+	/*
 	if (fill_path_info->n == -1)	return;
 	if (fill_path_info->n == 0 || fill_path_info->n >= 4)
 	{
@@ -272,19 +280,23 @@ static void lineto(fz_context *ctx, void *arg, float x, float y)
 	}
 	fill_path_info->points[fill_path_info->n].x = x;
 	fill_path_info->points[fill_path_info->n].y = y;
-	fill_path_info->n += 1;
+	fill_path_info->n += 1;*/
 }
 
 static void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
 {
-	fill_path_info_t *fill_path_info = arg;
+	/*fill_path_info_t *fill_path_info = arg;
 	fill_path_info->n = -1;
-	return;
+	return;*/
 }
 
 static void closepath(fz_context *ctx, void *arg)
 {
 	fill_path_info_t *fill_path_info = arg;
+	fill_path_info->dev->writer->ctx = ctx;
+	extract_closepath(fill_path_info->dev->writer->extract);
+	fill_path_info->dev->writer->ctx = NULL;
+	#if 0
 	if (fill_path_info->n == 4)
 	{
 		/* We are closing a four-element path, so this could be a thin
@@ -314,13 +326,14 @@ static void closepath(fz_context *ctx, void *arg)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to process line");
 	}
 	fill_path_info->n = 0;
+	#endif
 }
 
 void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd, fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha, fz_color_params color_params)
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
 	fill_path_info_t fill_path_info;
-	int i;
+	//int i;
 	if (0) fprintf(stderr,
 			"%s:%i:%s: colorspace->type=%i colorspace->name=%s color[0]=%f alpha=%f\n",
 			__FILE__, __LINE__, __FUNCTION__,
@@ -343,25 +356,37 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 	fill_path_info.walker.curvetov = NULL;
 	fill_path_info.walker.curvetoy = NULL;
 	fill_path_info.walker.rectto = NULL;
+	/*
 	for (i=0; i<4; ++i)
 	{
 		fill_path_info.points[i].x = 0;
 		fill_path_info.points[i].y = 0;
 	}
 	fill_path_info.n = 0;
-	fill_path_info.matrix = matrix;
+	fill_path_info.matrix = matrix;*/
 	fill_path_info.dev = dev;
-
+	/*
 	fill_path_info.colorspace = colorspace;
 	fill_path_info.color = color;
 	fill_path_info.alpha = alpha;
 	fill_path_info.color_params = color_params;
-
+	*/
+	extract_fill_begin(
+			dev->writer->extract,
+			matrix.a,
+			matrix.b,
+			matrix.c,
+			matrix.d,
+			matrix.e,
+			matrix.f,
+			color[0]
+			);
 	fz_walk_path(ctx, path, &fill_path_info.walker, &fill_path_info /*arg*/);
 	if (0) fprintf(stderr,
 			"%s:%i:%s: finished\n",
 			__FILE__, __LINE__, __FUNCTION__
 			);
+	extract_fill_end(dev->writer->extract);
 }
 
 
