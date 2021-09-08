@@ -726,16 +726,18 @@ endif
 
 # --- EXTRACT ---
 
-EXTRACT_CFLAGS += -Ithirdparty/extract/include
+EXTRACT_CFLAGS += -Ithirdparty/extract/include -DEXTRACT_CV=0
 
 EXTRACT_SRC += thirdparty/extract/src/alloc.c
 EXTRACT_SRC += thirdparty/extract/src/astring.c
 EXTRACT_SRC += thirdparty/extract/src/buffer.c
+EXTRACT_SRC += thirdparty/extract/src/document.c
 EXTRACT_SRC += thirdparty/extract/src/docx.c
 EXTRACT_SRC += thirdparty/extract/src/docx_template.c
 EXTRACT_SRC += thirdparty/extract/src/extract.c
 EXTRACT_SRC += thirdparty/extract/src/join.c
 EXTRACT_SRC += thirdparty/extract/src/mem.c
+EXTRACT_SRC += thirdparty/extract/src/html.c
 EXTRACT_SRC += thirdparty/extract/src/odt.c
 EXTRACT_SRC += thirdparty/extract/src/odt_template.c
 EXTRACT_SRC += thirdparty/extract/src/outf.c
@@ -743,3 +745,4 @@ EXTRACT_SRC += thirdparty/extract/src/sys.c
 EXTRACT_SRC += thirdparty/extract/src/text.c
 EXTRACT_SRC += thirdparty/extract/src/xml.c
 EXTRACT_SRC += thirdparty/extract/src/zip.c
+#EXTRACT_SRC += thirdparty/extract/src/tables_cv.cpp

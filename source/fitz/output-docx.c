@@ -230,6 +230,170 @@ static void dev_fill_image(fz_context *ctx, fz_device *dev_, fz_image *img, fz_m
 	}
 }
 
+/*
+ * Support for sending information to Extract when walking stroke/fill path
+ * with fz_walk_path().
+ */
+typedef struct
+{
+	fz_path_walker walker;
+	extract_t *extract;
+} walker_info_t;
+
+
+static void fill_moveto(fz_context *ctx, void *arg, float x, float y)
+{
+	extract_t* extract = arg;
+	if (extract_moveto(extract, x, y))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in fill");
+}
+
+static void fill_lineto(fz_context *ctx, void *arg, float x, float y)
+{
+	extract_t* extract = arg;
+	if (extract_lineto(extract, x, y))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_lineto() failed in fill");
+}
+
+static void fill_curveto(fz_context *ctx, void *arg, float x1, float y1,
+		float x2, float y2, float x3, float y3)
+{
+	extract_t* extract = arg;
+	if (extract_moveto(extract, x3, y3))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in fill");
+}
+
+static void fill_closepath(fz_context *ctx, void *arg)
+{
+	extract_t* extract = arg;
+	if (extract_closepath(extract))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_closepath() failed in fill");
+}
+
+void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd,
+		fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha,
+		fz_color_params color_params)
+{
+	fz_docx_device *dev = (fz_docx_device*) dev_;
+	extract_t* extract = dev->writer->extract;
+	fz_path_walker walker;
+
+	walker.moveto = fill_moveto;
+	walker.lineto = fill_lineto;
+	walker.curveto = fill_curveto;
+	walker.closepath = fill_closepath;
+	walker.quadto = NULL;
+	walker.curvetov = NULL;
+	walker.curvetoy = NULL;
+	walker.rectto = NULL;
+
+	dev->writer->ctx = ctx;
+	if (extract_fill_begin(
+			extract,
+			matrix.a,
+			matrix.b,
+			matrix.c,
+			matrix.d,
+			matrix.e,
+			matrix.f,
+			color[0]
+			))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin fill");
+
+	fz_try(ctx)
+	{
+		fz_walk_path(ctx, path, &walker, extract /*arg*/);
+		if (extract_fill_end(extract))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_fill_end() failed");
+	}
+	fz_always(ctx)
+	{
+		dev->writer->ctx = NULL;
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
+}
+
+
+static void stroke_moveto(fz_context *ctx, void *arg, float x, float y)
+{
+	extract_t* extract = arg;
+	if (extract_moveto(extract, x, y))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in stroke");
+}
+
+static void stroke_lineto(fz_context *ctx, void *arg, float x, float y)
+{
+	extract_t* extract = arg;
+	if (extract_lineto(extract, x, y))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_lineto() failed in stroke");
+}
+
+void stroke_curveto(fz_context *ctx, void *arg, float x1, float y1, float x2,
+		float y2, float x3, float y3)
+{
+	extract_t* extract = arg;
+	if (extract_moveto(extract, x3, y3))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in stroke");
+}
+
+void stroke_closepath(fz_context *ctx, void *arg)
+{
+	extract_t* extract = arg;
+	if (extract_closepath(extract))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_closepath() failed in stroke");
+}
+
+static void
+dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
+		const fz_stroke_state *stroke, fz_matrix in_ctm,
+		fz_colorspace *colorspace_in, const float *color, float alpha,
+		fz_color_params color_params)
+{
+	fz_docx_device *dev = (fz_docx_device*) dev_;
+	extract_t* extract = dev->writer->extract;
+	fz_path_walker walker;
+
+	walker.moveto = stroke_moveto;
+	walker.lineto = stroke_lineto;
+	walker.curveto = stroke_curveto;
+	walker.closepath = stroke_closepath;
+	walker.quadto = NULL;
+	walker.curvetov = NULL;
+	walker.curvetoy = NULL;
+	walker.rectto = NULL;
+
+	dev->writer->ctx = ctx;
+	if (extract_stroke_begin(
+			extract,
+			in_ctm.a,
+			in_ctm.b,
+			in_ctm.c,
+			in_ctm.d,
+			in_ctm.e,
+			in_ctm.f,
+			stroke->linewidth,
+			color[0]
+			))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin stroke");
+
+	fz_try(ctx)
+	{
+		fz_walk_path(ctx, path, &walker, extract /*arg*/);
+		if (extract_stroke_end(extract))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_stroke_end() failed");
+	}
+	fz_always(ctx)
+	{
+		dev->writer->ctx = NULL;
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
+}
 
 static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_, fz_rect mediabox)
 {
@@ -250,6 +414,8 @@ static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_
 		dev->super.clip_stroke_text = dev_clip_stroke_text;
 		dev->super.ignore_text = dev_ignore_text;
 		dev->super.fill_image = dev_fill_image;
+		dev->super.fill_path = dev_fill_path;
+		dev->super.stroke_path = dev_stroke_path;
 		dev->writer = writer;
 	}
 	fz_always(ctx)
@@ -379,6 +545,7 @@ static void writer_drop(fz_context *ctx, fz_document_writer *writer_)
 	writer->output = NULL;
 	assert(!writer->ctx);
 	writer->ctx = ctx;
+	extract_end(&writer->extract);
 	extract_alloc_destroy(&writer->alloc);
 	writer->ctx = NULL;
 }
@@ -423,6 +590,7 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 				);
 		writer->ctx = ctx;
 		writer->output = out;
+		if (get_bool_option(ctx, options, "html", 0)) format = extract_format_HTML;
 		if (extract_alloc_create(s_realloc_fn, writer, &writer->alloc))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to create extract_alloc instance");
 		if (extract_begin(writer->alloc, format, &writer->extract))
@@ -431,12 +599,30 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 		writer->rotation = get_bool_option(ctx, options, "rotation", 1);
 		writer->images = get_bool_option(ctx, options, "images", 1);
 		writer->mediabox_clip = get_bool_option(ctx, options, "mediabox-clip", 1);
+		{
+			const char* v;
+			if (fz_has_option(ctx, options, "tables-csv-format", &v))
+			{
+				fprintf(stderr, "tables-csv-format: v=%s\n", v);
+				size_t len = strlen(v) + 1; /* Might include trailing options. */
+				char* format = fz_malloc(ctx, len);
+				fz_copy_option(ctx, v, format, len);
+				fprintf(stderr, "tables-csv-format: %s\n", format);
+				if (extract_tables_csv_format(writer->extract, format))
+					fz_throw(ctx, FZ_ERROR_GENERIC, "extract_tables_csv_format() failed.");
+				fz_free(ctx, format);
+			}
+		}
 		writer->ctx = NULL;
 	}
 	fz_catch(ctx)
 	{
 		if (writer)
+		{
+			writer->ctx = ctx;
 			fz_drop_document_writer(ctx, &writer->super);
+			writer->ctx = NULL;
+		}
 		else
 			fz_drop_output(ctx, out);
 		fz_rethrow(ctx);
@@ -463,5 +649,16 @@ fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *o
 fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *path, const char *options)
 {
 	fz_output *out = fz_new_output_with_path(ctx, path, 0 /*append*/);
-	return fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
+	fz_document_writer *ret;
+	fz_var(ret);
+	fz_try(ctx)
+	{
+		ret = fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_output(ctx, out);
+		fz_rethrow(ctx);
+	}
+	return ret;
 }
