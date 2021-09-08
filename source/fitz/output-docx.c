@@ -231,25 +231,25 @@ static void dev_fill_image(fz_context *ctx, fz_device *dev_, fz_image *img, fz_m
 }
 
 /*
- * Support for calling extract_add_path4() when walking fill path with
+ * Support for sending fill information to Extract when walking fill path with
  * fz_walk_path().
  */
 typedef struct
 {
 	fz_path_walker walker;
-	fz_docx_device *dev;
+	extract_t* extract;
 } fill_path_info_t;
 
 static void moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	fill_path_info_t *fill_path_info = arg;
-	extract_moveto(fill_path_info->dev->writer->extract, x, y);
+	extract_moveto(fill_path_info->extract, x, y);
 }
 
 static void lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	fill_path_info_t *fill_path_info = arg;
-	extract_lineto(fill_path_info->dev->writer->extract, x, y);
+	extract_lineto(fill_path_info->extract, x, y);
 }
 
 static void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
@@ -259,7 +259,7 @@ static void curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, fl
 static void closepath(fz_context *ctx, void *arg)
 {
 	fill_path_info_t *fill_path_info = arg;
-	extract_closepath(fill_path_info->dev->writer->extract);
+	extract_closepath(fill_path_info->extract);
 }
 
 void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd, fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha, fz_color_params color_params)
@@ -288,7 +288,7 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 	fill_path_info.walker.curvetov = NULL;
 	fill_path_info.walker.curvetoy = NULL;
 	fill_path_info.walker.rectto = NULL;
-	fill_path_info.dev = dev;
+	fill_path_info.extract = dev->writer->extract;
 	dev->writer->ctx = ctx;
 	extract_fill_begin(
 			dev->writer->extract,
@@ -311,25 +311,13 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 
 
 /*
- * Support for calling extract_add_line() when walking stroke path with
- * fz_walk_path().
+ * Support for sending stroke path information to Extract when walking stroke
+ * path with fz_walk_path().
  */
 typedef struct
 {
-	fz_path_walker          walker;
-	extract_t               *extract;
-	const fz_stroke_state   *stroke_state;
-	fz_matrix               *ctm;
-
-	fz_colorspace           *colorspace_in;
-	const float             *color;
-	float                   alpha;
-	fz_color_params         color_params;
-
-	fz_point                point0; /* First point in path, used with closepath. */
-	int                     point0_set;
-	fz_point                point; /* Most recent point in path. */
-	int                     point_set;
+	fz_path_walker walker;
+	extract_t *extract;
 } stroke_path_info_t;
 
 static void stroke_path_info_moveto(fz_context *ctx, void *arg, float x, float y)
@@ -346,6 +334,8 @@ static void stroke_path_info_lineto(fz_context *ctx, void *arg, float x, float y
 
 void stroke_path_info_curveto(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
 {
+	stroke_path_info_t *stroke_path_info = arg;
+	extract_moveto(stroke_path_info->extract, x3, y3);
 }
 
 void stroke_path_info_closepath(fz_context *ctx, void *arg)
@@ -361,6 +351,18 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 		fz_color_params color_params)
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
+	stroke_path_info_t	stroke_path_info;
+	stroke_path_info.walker.moveto = stroke_path_info_moveto;
+	stroke_path_info.walker.lineto = stroke_path_info_lineto;
+	stroke_path_info.walker.curveto = stroke_path_info_curveto;
+	stroke_path_info.walker.closepath = stroke_path_info_closepath;
+	stroke_path_info.walker.quadto = NULL;
+	stroke_path_info.walker.curvetov = NULL;
+	stroke_path_info.walker.curvetoy = NULL;
+	stroke_path_info.walker.rectto = NULL;
+	stroke_path_info.extract = dev->writer->extract;
+	dev->writer->ctx = ctx;
+
 	extract_stroke_begin(
 			dev->writer->extract,
 			in_ctm.a,
@@ -373,17 +375,6 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 			color[0]
 			);
 
-	stroke_path_info_t	stroke_path_info;
-	stroke_path_info.walker.moveto = stroke_path_info_moveto;
-	stroke_path_info.walker.lineto = stroke_path_info_lineto;
-	stroke_path_info.walker.curveto = stroke_path_info_curveto;
-	stroke_path_info.walker.closepath = stroke_path_info_closepath;
-	stroke_path_info.walker.quadto = NULL;
-	stroke_path_info.walker.curvetov = NULL;
-	stroke_path_info.walker.curvetoy = NULL;
-	stroke_path_info.walker.rectto = NULL;
-	stroke_path_info.extract = dev->writer->extract;
-	dev->writer->ctx = ctx;
 	fz_try(ctx)
 	{
 		fz_walk_path(ctx, path, &stroke_path_info.walker, &stroke_path_info /*arg*/);
