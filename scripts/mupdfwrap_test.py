@@ -254,7 +254,6 @@ def test(path):
     log(f'{type(stdout)} {stdout.m_internal.state}')
 
     mediabox = page.bound_page()
-<<<<<<< HEAD
     out = mupdf.DocumentWriter(filename, 'png', '', mupdf.DocumentWriter.FormatPathType_DOCUMENT)
     dev = out.begin_page(mediabox)
     page.run_page(dev, mupdf.Matrix(mupdf.fz_identity), mupdf.Cookie())
