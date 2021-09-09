@@ -81,6 +81,7 @@ int main(int argc, const char** argv)
 {
 	int rv = 0;
 
+#if !defined(GTEST_DEMO_INV_NAME1) && !defined(GTEST_DEMO_INV_NAME2)
 	InitGoogleTest(&argc, argv);
 
 	TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
@@ -95,8 +96,6 @@ int main(int argc, const char** argv)
 	rv |= gtest_list_test_main(argc, argv);
 	rv |= gtest_listener_test_main(argc, argv);
 	rv |= gtest_output_test_main(argc, argv);
-	rv |= gtest_param_inv_name1_test_main(argc, argv);
-	rv |= gtest_param_inv_name2_test_main(argc, argv);
 	rv |= gtest_param_test_main(argc, argv);
 	rv |= gtest_shuffle_test_main(argc, argv);
 	rv |= gtest_throw_on_fail_test_main(argc, argv);
@@ -105,5 +104,11 @@ int main(int argc, const char** argv)
 	rv |= gtest_break_on_failure_test_main(argc, argv);
 
 	rv |= gtest_main(argc, argv);
+#elif defined(GTEST_DEMO_INV_NAME1)
+	rv |= gtest_param_inv_name1_test_main(argc, argv);
+#else
+	rv |= gtest_param_inv_name2_test_main(argc, argv);
+#endif
+
 	return rv;
 }

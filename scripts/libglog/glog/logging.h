@@ -100,7 +100,7 @@
 
 #define GFLAGS_DLL_DECLARE_FLAG GOOGLE_GLOG_DLL_DECL
 
-#if 0
+#if defined(HAVE_LIB_GFLAGS)
 #include <gflags/gflags.h>
 #endif
 
@@ -1033,7 +1033,7 @@ extern "C" void AnnotateBenignRaceSized(
   const char *file,
   int line,
   const volatile void *mem,
-  long size,
+  size_t size,
   const char *description);
 
 namespace google {
@@ -1443,15 +1443,15 @@ public:
     kNoLogPrefix = -1
   };
 
-  // LogStream inherit from non-DLL-exported class (std::ostrstream)
+  // LogStream inherits from non-DLL-exported class (std::ostrstream)
   // and VC++ produces a warning for this situation.
   // However, MSDN says "C4275 can be ignored in Microsoft Visual C++
   // 2005 if you are deriving from a type in the Standard C++ Library"
   // http://msdn.microsoft.com/en-us/library/3tdb471s(VS.80).aspx
   // Let's just ignore the warning.
-GLOG_MSVC_PUSH_DISABLE_WARNING(4275)
+//GLOG_MSVC_PUSH_DISABLE_WARNING(4275)
   class GOOGLE_GLOG_DLL_DECL LogStream : public std::ostream {
-GLOG_MSVC_POP_WARNING()
+//GLOG_MSVC_POP_WARNING()
   public:
     LogStream(char *buf, int len, uint64 ctr)
         : std::ostream(NULL),
@@ -1591,7 +1591,7 @@ class GOOGLE_GLOG_DLL_DECL LogMessageFatal : public LogMessage {
   LogMessageFatal(const char* file, int line);
   LogMessageFatal(const char* file, int line, const CheckOpString& result);
   /* __declspec(noreturn) */ ~LogMessageFatal();
-  __declspec(nothrow) void __FlushAndFailAtEnd() throw();
+  __declspec(nothrow) void __FlushAndFailAtEnd();
 };
 
 // A non-macro interface to the log facility; (useful

@@ -94,6 +94,9 @@
       <Project>{a60d8644-5a1c-4d29-8970-7518ff983822}
   </Project>
     </ProjectReference>
+    <ProjectReference Include="libgflags.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc19ff8}</Project>
+    </ProjectReference>
     <ProjectReference Include="libglog.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffbe90d}</Project>
     </ProjectReference>
@@ -140,11 +143,11 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <Optimization>Custom</Optimization>
+      <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
@@ -153,17 +156,18 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <Optimization>Custom</Optimization>
+      <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>X64;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
@@ -172,6 +176,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -191,6 +196,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -210,6 +216,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

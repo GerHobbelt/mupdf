@@ -54,31 +54,8 @@
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/include/gtest/internal/gtest-string.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/include/gtest/internal/gtest-type-util.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/src/gtest-internal-inl.h" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-break-on-failure-unittest_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-catch-exceptions-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-color-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-death-test-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-death-test_ex_test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-env-var-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-failfast-unittest_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-filepath-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-filter-unittest_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-global-environment-unittest_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-list-tests-unittest_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-listener-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-message-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-options-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-output-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-param-test-test.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-param-test-invalid-name2-test_.cc" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-param-test-test.h" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-param-test2-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-port-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-printers-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-setuptestsuite-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-shuffle-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-test-part-test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-throw-on-failure-test_.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-uninitialized-test_.cc" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/test/gtest-typed-test_test.h" />
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +65,9 @@
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>googletest-demos</ProjectName>
-    <ProjectGuid>{258B1715-61F6-4B4A-8F91-B549A0993740}</ProjectGuid>
-    <RootNamespace>googletest-demos</RootNamespace>
+    <ProjectName>googletest-demo-invalid-param-name2</ProjectName>
+    <ProjectGuid>{09A41323-5CA2-4890-9158-16B8D532FC2E}</ProjectGuid>
+    <RootNamespace>googletest-demo-invalid-param-name2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -196,7 +173,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GTEST_DEMO_INV_NAME2;BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -235,7 +212,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GTEST_DEMO_INV_NAME2;BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -278,7 +255,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GTEST_DEMO_INV_NAME2;BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -317,7 +294,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GTEST_DEMO_INV_NAME2;BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
