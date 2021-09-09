@@ -1,6 +1,29 @@
 
 #include "pch.h"
 
+TEST(muqCoreBelief, ThrownCpluplusExceptionIsCaught) {
+	throw std::exception("aborting");
+}
+
+TEST(muqCoreBelief, ThrownCpluplusExceptionPointerIsCaught) {
+	throw new std::exception("aborting");
+}
+
+TEST(muqCoreBelief, ThrownCpluplusArbitraryExceptionIsCaught) {
+	throw 42;
+}
+
+TEST(muqCoreBelief, ThrownCpluplusArbitraryExceptionPointerIsCaught) {
+	throw NULL;
+}
+
+TEST(muqCoreBelief, MemoryAccessFailureCaughtBySEH) {
+	volatile int* pInt = 0x00000000;
+	*pInt = 20;
+}
+
+
+
 
 class ExpectNFailuresListener : public testing::EmptyTestEventListener {
 public:
@@ -48,10 +71,14 @@ int main(int argc, const char** argv)
 	int rv = 0;
 
 	fprintf(stderr, "Running main() from %s\n", __FILE__);
+#if 0
+	for (int i = 0; i < argc; i++)
+		fprintf(stderr, "argv[%d] = %s\n", i, argv[i]);
+#endif
 	InitGoogleTest(&argc, argv);
 
 	TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
-	listeners.Append(new ExpectNFailuresListener(2));
+	listeners.Append(new ExpectNFailuresListener(5));
 
 	rv |= RUN_ALL_TESTS();
 
