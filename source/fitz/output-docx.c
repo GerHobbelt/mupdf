@@ -240,34 +240,55 @@ typedef struct
 	extract_t *extract;
 } walker_info_t;
 
-
-static void fill_moveto(fz_context *ctx, void *arg, float x, float y)
+static void s_moveto(fz_context *ctx, void *arg, float x, float y)
 {
 	extract_t* extract = arg;
 	if (extract_moveto(extract, x, y))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in fill");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed");
 }
 
-static void fill_lineto(fz_context *ctx, void *arg, float x, float y)
+static void s_lineto(fz_context *ctx, void *arg, float x, float y)
 {
 	extract_t* extract = arg;
 	if (extract_lineto(extract, x, y))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_lineto() failed in fill");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_lineto() failed");
 }
 
-static void fill_curveto(fz_context *ctx, void *arg, float x1, float y1,
+static void s_curveto(fz_context *ctx, void *arg, float x1, float y1,
 		float x2, float y2, float x3, float y3)
 {
+	/* We simply move to the end point of the curve so that subsequent
+	(straight) lines will be handled correctly. */
 	extract_t* extract = arg;
 	if (extract_moveto(extract, x3, y3))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in fill");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed");
 }
 
-static void fill_closepath(fz_context *ctx, void *arg)
+static void s_closepath(fz_context *ctx, void *arg)
 {
 	extract_t* extract = arg;
 	if (extract_closepath(extract))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_closepath() failed in fill");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_closepath() failed");
+}
+
+/*
+ * Calls extract_*() path functions on <path> using fz_walk_path() and the
+ * above callbacks.
+ */
+static void s_walk_path(fz_context *ctx, fz_docx_device *dev, extract_t *extract, const fz_path *path)
+{
+	fz_path_walker walker;
+	walker.moveto = s_moveto;
+	walker.lineto = s_lineto;
+	walker.curveto = s_curveto;
+	walker.closepath = s_closepath;
+	walker.quadto = NULL;
+	walker.curvetov = NULL;
+	walker.curvetoy = NULL;
+	walker.rectto = NULL;
+
+	assert(dev->writer->ctx = ctx);
+	fz_walk_path(ctx, path, &walker, extract /*arg*/);
 }
 
 void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd,
@@ -275,34 +296,25 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 		fz_color_params color_params)
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
-	extract_t* extract = dev->writer->extract;
-	fz_path_walker walker;
+	extract_t *extract = dev->writer->extract;
 
-	walker.moveto = fill_moveto;
-	walker.lineto = fill_lineto;
-	walker.curveto = fill_curveto;
-	walker.closepath = fill_closepath;
-	walker.quadto = NULL;
-	walker.curvetov = NULL;
-	walker.curvetoy = NULL;
-	walker.rectto = NULL;
-
+	assert(!dev->writer->ctx);
 	dev->writer->ctx = ctx;
-	if (extract_fill_begin(
-			extract,
-			matrix.a,
-			matrix.b,
-			matrix.c,
-			matrix.d,
-			matrix.e,
-			matrix.f,
-			color[0]
-			))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin fill");
 
 	fz_try(ctx)
 	{
-		fz_walk_path(ctx, path, &walker, extract /*arg*/);
+		if (extract_fill_begin(
+				extract,
+				matrix.a,
+				matrix.b,
+				matrix.c,
+				matrix.d,
+				matrix.e,
+				matrix.f,
+				color[0]
+				))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin fill");
+		s_walk_path(ctx, dev, extract, path);
 		if (extract_fill_end(extract))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_fill_end() failed");
 	}
@@ -317,35 +329,6 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 }
 
 
-static void stroke_moveto(fz_context *ctx, void *arg, float x, float y)
-{
-	extract_t* extract = arg;
-	if (extract_moveto(extract, x, y))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in stroke");
-}
-
-static void stroke_lineto(fz_context *ctx, void *arg, float x, float y)
-{
-	extract_t* extract = arg;
-	if (extract_lineto(extract, x, y))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_lineto() failed in stroke");
-}
-
-void stroke_curveto(fz_context *ctx, void *arg, float x1, float y1, float x2,
-		float y2, float x3, float y3)
-{
-	extract_t* extract = arg;
-	if (extract_moveto(extract, x3, y3))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_moveto() failed in stroke");
-}
-
-void stroke_closepath(fz_context *ctx, void *arg)
-{
-	extract_t* extract = arg;
-	if (extract_closepath(extract))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "extract_closepath() failed in stroke");
-}
-
 static void
 dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 		const fz_stroke_state *stroke, fz_matrix in_ctm,
@@ -353,35 +336,25 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 		fz_color_params color_params)
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
-	extract_t* extract = dev->writer->extract;
-	fz_path_walker walker;
+	extract_t *extract = dev->writer->extract;
 
-	walker.moveto = stroke_moveto;
-	walker.lineto = stroke_lineto;
-	walker.curveto = stroke_curveto;
-	walker.closepath = stroke_closepath;
-	walker.quadto = NULL;
-	walker.curvetov = NULL;
-	walker.curvetoy = NULL;
-	walker.rectto = NULL;
-
+	assert(!dev->writer->ctx);
 	dev->writer->ctx = ctx;
-	if (extract_stroke_begin(
-			extract,
-			in_ctm.a,
-			in_ctm.b,
-			in_ctm.c,
-			in_ctm.d,
-			in_ctm.e,
-			in_ctm.f,
-			stroke->linewidth,
-			color[0]
-			))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin stroke");
-
 	fz_try(ctx)
 	{
-		fz_walk_path(ctx, path, &walker, extract /*arg*/);
+		if (extract_stroke_begin(
+				extract,
+				in_ctm.a,
+				in_ctm.b,
+				in_ctm.c,
+				in_ctm.d,
+				in_ctm.e,
+				in_ctm.f,
+				stroke->linewidth,
+				color[0]
+				))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin stroke");
+		s_walk_path(ctx, dev, extract, path);
 		if (extract_stroke_end(extract))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_stroke_end() failed");
 	}
