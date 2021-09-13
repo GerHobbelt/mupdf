@@ -1478,7 +1478,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		final String selectedPath = new StringBuffer(fileDialog.getDirectory()).append(File.separatorChar).append(fileDialog.getFile()).toString();
 		final PDFDocument pdf = (PDFDocument) doc;
 		final int pages = pdf.countPages();
-		final Progressmeter meter = new Progressmeter(this, "Saving...", pages);
+		final Progressmeter meter = new Progressmeter(this, "Saving...");
 		meter.setLocationRelativeTo(this);
 
 		new Thread(new Runnable() {
@@ -1810,14 +1810,13 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		Label info = new Label("", Label.CENTER);
 		Button cancel = new Button("Cancel");
 		boolean cancelled = false;
-		int pages;
 
-		public Progressmeter(Frame parent, String title, int pages) {
+		public Progressmeter(Frame parent, String title) {
 			super(parent, title, true);
 
 			setLayout(new GridLayout(2, 1));
 
-			info.setText("Progress: Page 65535/65535: 100%");
+			info.setText("Progress: 100%");
 			add(info);
 
 			cancel.addActionListener(this);
@@ -1828,8 +1827,7 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 			setResizable(false);
 			cancel.requestFocusInWindow();
 
-			this.pages = pages;
-			progress(-1, 0);
+			progress(0);
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -1845,21 +1843,8 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 				cancelled = true;
 		}
 
-		public boolean progress(int page, int percent) {
+		public boolean progress(int percent) {
 			StringBuilder text = new StringBuilder();
-
-			if (page >= 0 || pages >= 0) {
-				text.append("Page ");
-				if (page >= 0)
-					text.append(page + 1);
-				else
-					text.append("?");
-			}
-			if (pages >= 0) {
-				text.append("/");
-				text.append(pages);
-				text.append(": ");
-			}
 
 			text.append(percent);
 			text.append("%");
