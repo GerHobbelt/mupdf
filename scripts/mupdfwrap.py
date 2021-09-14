@@ -7739,6 +7739,15 @@ def main():
                 log( 'Tests ran ok.')
 
             elif arg == '--test-csharp':
+                # On linux requires:
+                #   sudo apt install mono-devel
+                #
+                # OpenBSD:
+                #   pkg_add mono
+                # but we get runtime error:
+                #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
+                # which moght be because of mixing gcc and clang?
+                #
                 with open('test-csharp.cs', 'w') as f:
                     def p(t):
                         print(t, file=f)
