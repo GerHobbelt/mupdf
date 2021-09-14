@@ -6582,7 +6582,7 @@ def build_swig(
                 "{swig}"
                     -Wall
                     -c++
-                    {" -doxygen" if swig_major >= 4 else ""}
+                    {" -doxygen" if swig_major >= 5 else ""}
                     -csharp
                     -module mupdf
                     -namespace mupdf
@@ -7031,7 +7031,7 @@ def main():
                                     header_git,
                                     swig_c,
                                     swig_python,
-                                    swig_sharp,
+                                    swig_csharp,
                                     )
 
                             to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle')
@@ -7794,11 +7794,11 @@ def main():
                                 {
                                     Console.WriteLine("Hello Mono World");
                                     mupdf.Document document = new mupdf.Document("zlib.clean.pdf");
-                                    document.count_chapters();
+                                    Console.WriteLine("num chapters: " + document.count_chapters());
                                 }
                             }
                             '''))
-                jlib.system('csc test-csharp.cs platform/csharp/mupdf.cs', verbose=1)
+                jlib.system(f'{"csc" if g_openbsd else "mono-csc"} test-csharp.cs platform/csharp/mupdf.cs', verbose=1)
                 jlib.system('LD_LIBRARY_PATH=build/shared-release mono test-csharp.exe', verbose=1)
 
             elif arg == '--test-setup.py':
