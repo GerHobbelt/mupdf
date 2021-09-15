@@ -6262,7 +6262,7 @@ def build_swig(
             %include carrays.i
             %include cdata.i
             %include std_vector.i
-            {"%include argcargv.i" if language=="Python" else ""}
+            {"%include argcargv.i" if language=="python" else ""}
 
             namespace std
             {{
