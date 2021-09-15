@@ -2994,7 +2994,15 @@ def make_fncall( tu, cursor, return_type, fncall, out):
 
 
 class Generated:
+    '''
+    Stores information generated when we parse headers using clang.
+    '''
     def __init__( self, dirpath=None):
+        '''
+        dirpath:
+            If specified we load .pickle files from this location. Otherwise we
+            initialise empty state.
+        '''
         if dirpath:
             self.container_classnames   = from_pickle( f'{dirpath}/container_classnames.pickle')
             self.to_string_structnames  = from_pickle( f'{dirpath}/to_string_structnames.pickle')
@@ -3020,7 +3028,9 @@ class Generated:
             self.swig_csharp = io.StringIO()
 
     def save( self, dirpath):
-        assert isinstance(self.swig_cpp_python.getvalue(), str)
+        '''
+        Saves state to .pickle files, to be loaded later via __init__().
+        '''
         to_pickle( self.container_classnames,          f'{dirpath}/container_classnames.pickle')
         to_pickle( self.to_string_structnames,         f'{dirpath}/to_string_structnames.pickle')
         to_pickle( self.swig_cpp_python.getvalue(),    f'{dirpath}/swig_cpp_python.pickle')
@@ -3238,7 +3248,8 @@ def make_function_wrapper(
     out_cpp:
         Stream to which we write cpp output.
     generated:
-        .
+        A Generated instance.
+
     Example generated function:
 
         fz_band_writer * mupdf_new_band_writer_of_size(fz_context *ctx, size_t size, fz_output *out)
@@ -5282,7 +5293,7 @@ def class_wrapper(
         if is_begin_end:
             is_container += 1
 
-    assert is_container==0 or is_container==2   # Should be begin()+end() or neither.
+    assert is_container==0 or is_container==2, f'structname={structname} is_container={is_container}'   # Should be begin()+end() or neither.
     if is_container:
         pass
         #jlib.log( 'Generated class has begin() and end(): {classname=}')
@@ -5849,9 +5860,6 @@ def cpp_source(
         out_hs.classes.write( f'struct {classname};\n')
     out_hs.classes.write( '\n')
 
-    generated.container_classnames = []
-    generated.to_string_structnames = []
-
     # Create each class.
     #
     for classname, struct, structname in classes:
@@ -6089,13 +6097,6 @@ def compare_fz_usage(
 def build_swig(
         build_dirs,
         generated,
-        #container_classnames,
-        #to_string_structnames,
-        #swig_cpp_python,
-        #swig_cpp_csharp,
-        #swig_extra,
-        #c_functions,
-        #c_globals,
         language='python',
         swig='swig'
         ):
@@ -6103,23 +6104,16 @@ def build_swig(
     Builds python wrapper for all mupdf_* functions and classes.
 
     build_dirs
-    container_classnames
-    to_string_structnames
-    swig_c
-        Extra C code to include in temporary .i file, e.g. helpers for
-        out-params.
-    swig_extra
-        Extra code to include in temporary .i file, e.g. Python wrappers that
-        return out-params as tuple.
-    c_functions
-        C functions to ignore.
-    c_globals
-        List of global variables to wrap.
+        A BuildDirs instance.
+    generated.
+        A Generated instance.
     language
         Output language, 'python' or 'csharp'.
     swig
         Location of swig binary.
     '''
+    assert isinstance(build_dirs, BuildDirs)
+    assert isinstance(generated, Generated)
     assert language in ('python', 'csharp')
     # Find version of swig. (We use quotes around <swig> to make things work on
     # Windows.)
@@ -6157,7 +6151,6 @@ def build_swig(
                 '''
 
     if language == 'python':
-        assert isinstance(generated.swig_cpp_python, str), f'generated.swig_cpp_python={generated.swig_cpp_python}'
         common += generated.swig_cpp_python
     if language == 'csharp':
         common += generated.swig_cpp_csharp
@@ -6165,13 +6158,6 @@ def build_swig(
     text = ''
     for fnname in generated.c_functions:
         text += f'%ignore {fnname};\n'
-    if 0 and g_windows:
-        # Haven't yet figured out how to export global data from a DLL on
-        # Windows. Probably needs mupdf_DATA in header only, but that's a
-        # little tricky to do because we are using the raw mupdf headers.
-        #
-        for name in c_globals:
-            text += f'%ignore {name};\n'
 
     text += textwrap.dedent(f'''
             %ignore fz_append_vprintf;
@@ -6306,8 +6292,6 @@ def build_swig(
                 Document.lookup_metadata = Document_lookup_metadata
 
                 ''')
-
-    #text += generated.c_functions
 
     if language == 'python':
         # Make some additions to the generated Python module.
