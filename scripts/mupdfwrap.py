@@ -3039,7 +3039,8 @@ def make_python_outparam_helpers(
         fnname,
         out_h,
         out_cpp,
-        out_swig_c,
+        out_swig_cpp_python,
+        out_swig_cpp_csharp,
         out_swig_python,
         out_swig_csharp
         ):
@@ -3051,12 +3052,12 @@ def make_python_outparam_helpers(
     '''
     verbose = False
     main_name = rename.function(cursor.mangled_name)
-    out_swig_c.write( '\n')
+    out_swig_cpp_python.write( '\n')
 
     # Write struct.
-    out_swig_c.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
-    out_swig_c.write(f'typedef struct\n')
-    out_swig_c.write( '{\n')
+    out_swig_cpp_python.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
+    out_swig_cpp_python.write(f'typedef struct\n')
+    out_swig_cpp_python.write( '{\n')
     for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
@@ -3065,11 +3066,9 @@ def make_python_outparam_helpers(
             log( '{decl=}')
         assert arg.cursor.type.kind == clang.cindex.TypeKind.POINTER
         pointee = arg.cursor.type.get_pointee() #.get_canonical()
-        out_swig_c.write(f'    {declaration_text( pointee, arg.name)};\n')
-    out_swig_c.write(f'}} {main_name}_outparams;\n')
-    out_swig_c.write('\n')
-
-    # Write C wrapper fn.
+        out_swig_cpp_python.write(f'    {declaration_text( pointee, arg.name)};\n')
+    out_swig_cpp_python.write(f'}} {main_name}_outparams;\n')
+    out_swig_cpp_python.write('\n')
 
     # decl.
     name_args = f'{main_name}_outparams_fn('
@@ -3082,30 +3081,30 @@ def make_python_outparam_helpers(
         sep = ', '
     name_args += f'{sep}{main_name}_outparams* outparams'
     name_args += ')'
-    out_swig_c.write(declaration_text( cursor.result_type, name_args))
-    out_swig_c.write('\n')
+    out_swig_cpp_python.write(declaration_text( cursor.result_type, name_args))
+    out_swig_cpp_python.write('\n')
 
     # body.
-    out_swig_c.write('{\n')
+    out_swig_cpp_python.write('{\n')
     # Set all pointer fields to NULL.
     for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
         if arg.cursor.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
-            out_swig_c.write(f'    outparams->{arg.name} = NULL;\n')
+            out_swig_cpp_python.write(f'    outparams->{arg.name} = NULL;\n')
     # Make call.
-    out_swig_c.write(f'    return {rename.function_call(cursor.mangled_name)}(')
+    out_swig_cpp_python.write(f'    return {rename.function_call(cursor.mangled_name)}(')
     sep = ''
     for arg in get_args( tu, cursor):
-        out_swig_c.write(sep)
+        out_swig_cpp_python.write(sep)
         if arg.out_param:
-            out_swig_c.write(f'&outparams->{arg.name}')
+            out_swig_cpp_python.write(f'&outparams->{arg.name}')
         else:
-            out_swig_c.write(f'{arg.name}')
+            out_swig_cpp_python.write(f'{arg.name}')
         sep = ', '
-    out_swig_c.write(');\n')
-    out_swig_c.write('}\n')
-    out_swig_c.write('\n')
+    out_swig_cpp_python.write(');\n')
+    out_swig_cpp_python.write('}\n')
+    out_swig_cpp_python.write('\n')
 
     # Write python wrapper.
     out_swig_python.write('')
@@ -3230,7 +3229,8 @@ def make_function_wrapper(
         fnname,
         out_h,
         out_cpp,
-        out_swig_c,
+        out_swig_cpp_python,
+        out_swig_cpp_csharp,
         out_swig_python,
         out_swig_csharp
         ):
@@ -3333,7 +3333,8 @@ def make_function_wrapper(
                 fnname,
                 out_h,
                 out_cpp,
-                out_swig_c,
+                out_swig_cpp_python,
+                out_swig_cpp_csharp,
                 out_swig_python,
                 out_swig_csharp,
                 )
@@ -3706,7 +3707,8 @@ def make_function_wrappers(
         out_functions_cpp,
         out_internal_h,
         out_internal_cpp,
-        out_swig_c,
+        out_swig_cpp_python,
+        out_swig_cpp_csharp,
         out_swig_python,
         out_swig_csharp,
         ):
@@ -3891,7 +3893,8 @@ def make_function_wrappers(
                     fnname_wrapper,
                     temp_out_h,
                     temp_out_cpp,
-                    out_swig_c,
+                    out_swig_cpp_python,
+                    out_swig_cpp_csharp,
                     out_swig_python,
                     out_swig_csharp,
                     )
@@ -5473,7 +5476,8 @@ def cpp_source(
         namespace,
         base,
         header_git,
-        out_swig_c,
+        out_swig_cpp_python,
+        out_swig_cpp_csharp,
         out_swig_python,
         out_swig_csharp,
         doit=True
@@ -5781,7 +5785,8 @@ def cpp_source(
             out_cpps.functions,
             out_hs.internal,
             out_cpps.internal,
-            out_swig_c,
+            out_swig_cpp_python,
+            out_swig_cpp_csharp,
             out_swig_python,
             out_swig_csharp,
             )
@@ -6130,7 +6135,8 @@ def build_swig(
         build_dirs,
         container_classnames,
         to_string_structnames,
-        swig_c,
+        swig_cpp_python,
+        swig_cpp_csharp,
         swig_extra,
         c_functions,
         c_globals,
@@ -6194,7 +6200,10 @@ def build_swig(
                 }}
                 '''
 
-    common += swig_c
+    if language == 'python':
+        common += swig_cpp_python
+    if language == 'csharp':
+        common += swig_cpp_csharp
 
     text = ''
     for fnname in c_functions:
@@ -6504,7 +6513,7 @@ def build_swig(
     swig_i      = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.i'
     include1    = f'{build_dirs.dir_mupdf}/include/'
     include2    = f'{build_dirs.dir_mupdf}/platform/c++/include'
-    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.cpp'
+    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig_{language}.cpp'
     swig_py     = f'{build_dirs.dir_so}/mupdf.py'
 
     os.makedirs( f'{build_dirs.dir_mupdf}/platform/{language}', exist_ok=True)
@@ -6919,22 +6928,32 @@ def main():
                         f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/functions.h',
                         f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/internal.h',
                         ]
+                build_python = True
+                build_csharp = False
+
                 container_classnames = None
                 output_param_fns = None
                 force_rebuild = False
                 header_git = False
-                swig_c = None
+                swig_cpp_python = None
+                swig_cpp_csharp = None
                 swig_python = None
                 g_show_details = lambda name: False
                 jlib.log('{build_dirs.dir_so=}')
 
                 while 1:
                     actions = args.next()
-                    if actions == '-f':
+                    if 0:
+                        pass
+                    elif actions == '-f':
                         force_rebuild = True
                     elif actions == '-d':
                         d = args.next()
                         g_show_details = lambda name: d in name
+                    elif actions == '--python':
+                        build_python = int(args.next())
+                    elif actions == '--csharp':
+                        build_csharp = int(args.next())
                     elif actions.startswith( '-'):
                         raise Exception( f'Unrecognised --build flag: {actions}')
                     else:
@@ -7007,7 +7026,8 @@ def main():
                             if not clang:
                                 raise Exception('Cannot do "-b 0" because failed to import clang.')
                             namespace = 'mupdf'
-                            swig_c = io.StringIO()
+                            swig_cpp_python = io.StringIO()
+                            swig_cpp_csharp = io.StringIO()
                             swig_python = io.StringIO()
                             swig_csharp = io.StringIO()
 
@@ -7029,14 +7049,16 @@ def main():
                                     namespace,
                                     f'{build_dirs.dir_mupdf}/platform/c++',
                                     header_git,
-                                    swig_c,
+                                    swig_cpp_python,
+                                    swig_cpp_csharp,
                                     swig_python,
                                     swig_csharp,
                                     )
 
                             to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle')
                             to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle')
-                            to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle')
+                            to_pickle( swig_cpp_python.getvalue(),f'{build_dirs.dir_mupdf}/platform/c++/swig_cpp_python.pickle')
+                            to_pickle( swig_cpp_csharp.getvalue(),f'{build_dirs.dir_mupdf}/platform/c++/swig_cpp_csharp.pickle')
                             to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle')
                             to_pickle( swig_csharp.getvalue(),  f'{build_dirs.dir_mupdf}/platform/c++/swig_csharp.pickle')
                             to_pickle( c_functions,             f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle')
@@ -7146,44 +7168,47 @@ def main():
                                         )
 
                         elif action == '2':
-                            jlib.log( 'Generating {language=} module source code using SWIG ...')
-                            if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
-                                raise Exception( 'action "0" required')
-                            with jlib.LogPrefixScope( f'swig Python: '):
-                                # Generate C++ code for python module using SWIG.
-                                build_swig(
-                                        build_dirs,
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle'),
-                                        language='python',
-                                        swig=swig,
-                                        )
+                            if build_python:
+                                jlib.log( 'Generating python module source code using SWIG ...')
+                                if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
+                                    raise Exception( 'action "0" required')
+                                with jlib.LogPrefixScope( f'swig Python: '):
+                                    # Generate C++ code for python module using SWIG.
+                                    build_swig(
+                                            build_dirs,
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_cpp_python.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_cpp_csharp.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle'),
+                                            language='python',
+                                            swig=swig,
+                                            )
+
+                            if build_csharp:
+                                # Generate C# using SWIG.
+                                jlib.log( 'Generating C# module source code using SWIG ...')
+                                if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
+                                    raise Exception( 'action "0" required')
+                                with jlib.LogPrefixScope( f'swig C#: '):
+                                    build_swig(
+                                            build_dirs,
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_cpp_python.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_cpp_csharp.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_csharp.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle'),
+                                            from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle'),
+                                            language='csharp',
+                                            swig=swig,
+                                            )
 
                         elif action == 'j':
                             # Just experimenting.
                             build_swig_java()
-
-                        elif action == 's':
-                            # Generate C# using SWIG.
-                            jlib.log( 'Generating C# module source code using SWIG ...')
-                            if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
-                                raise Exception( 'action "0" required')
-                            with jlib.LogPrefixScope( f'swig C#: '):
-                                build_swig(
-                                        build_dirs,
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle'),
-                                        '',
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle'),
-                                        language='csharp',
-                                        swig=swig,
-                                        )
 
 
                         elif action == '3':
@@ -7386,17 +7411,27 @@ def main():
 
                                 # These are the input files to our g++ command:
                                 #
-                                swig_cpp_python     = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
-                                swig_cpp_csharp     = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
+                                swig_cpp_python     = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig_python.cpp'
+                                swig_cpp_csharp     = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig_csharp.cpp'
                                 include1            = f'{build_dirs.dir_mupdf}/include'
                                 include2            = f'{build_dirs.dir_mupdf}/platform/c++/include'
 
                                 mupdf_so            = f'{build_dirs.dir_so}/libmupdf.so'
                                 mupdfcpp_so         = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
+                                out_so = f'{build_dirs.dir_so}/_mupdf.so'
+                                '''
                                 # Python expects _mupdf.so to be in same directory as mupdf.py.
                                 #
-                                out_so              = f'{build_dirs.dir_so}/_mupdf.so'
+                                if language == 'python':
+                                    # This name appears to be hard-coded into
+                                    # swig's generated python.
+                                    out_so = f'{build_dirs.dir_so}/_mupdf.so'
+                                if language == 'csharp':
+                                    # This name is set by calling 'swig -csharp
+                                    # -dllimport _mupdf_csharp.so'.
+                                    out_so = f'{build_dirs.dir_so}/_mupdf_csharp.so'
+                                '''
 
                                 # We use jlib.link_l_flags() to add -L options
                                 # to search parent directories of each .so that
@@ -7415,21 +7450,25 @@ def main():
                                             -I {include1}
                                             -I {include2}
                                             {python_includes}
-                                            {swig_cpp_csharp}
+                                            {swig_cpp_csharp if build_csharp else ""}
+                                            {swig_cpp_python if build_python else ""}
                                             {jlib.link_l_flags( [mupdf_so, mupdfcpp_so, libpython_so])}
                                             {python_link}
                                         ''').strip().replace( '\n', ' \\\n').strip()
                                         )
+                                infiles = [
+                                        include1,
+                                        include2,
+                                        mupdf_so,
+                                        mupdfcpp_so,
+                                        ]
+                                if build_python:
+                                    infiles.append(swig_cpp_python)
+                                if build_csharp:
+                                    infiles.append(swig_cpp_csharp)
                                 jlib.build(
-                                        (
-                                            include1,
-                                            include2,
-                                            #swig_cpp_python,
-                                            swig_cpp_csharp,
-                                            mupdf_so,
-                                            mupdfcpp_so,
-                                            ),
-                                        ( out_so,),
+                                        infiles,
+                                        out_so,
                                         command,
                                         force_rebuild,
                                         )
@@ -7723,7 +7762,7 @@ def main():
 
                 jlib.system( f'rsync -aiRz {" ".join( files)} {destination}', verbose=1, out='log')
 
-            elif arg == '--test' or arg == '-t':
+            elif arg == '--test-python' or arg == '-t':
 
                 # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
                 # test .py programme can load mupdf.py and _mupdf.so.
@@ -7786,7 +7825,7 @@ def main():
                 #
                 # OpenBSD:
                 #   pkg_add mono
-                # but we get runtime error:
+                # but we get runtime error when exiting:
                 #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
                 # which moght be because of mixing gcc and clang?
                 #
@@ -7807,8 +7846,12 @@ def main():
                                 }
                             }
                             '''))
-                jlib.system(f'{"csc" if g_openbsd else "mono-csc"} test-csharp.cs platform/csharp/mupdf.cs', verbose=1)
-                jlib.system('LD_LIBRARY_PATH=build/shared-release mono test-csharp.exe', verbose=1)
+                jlib.build(
+                        ('test-csharp.cs', 'platform/csharp/mupdf.cs'),
+                        'test-csharp.exe',
+                        f'{"csc" if g_openbsd else "mono-csc"} -out:test-csharp.exe test-csharp.cs platform/csharp/mupdf.cs',
+                        )
+                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono test-csharp.exe', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
