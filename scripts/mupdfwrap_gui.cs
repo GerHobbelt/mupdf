@@ -20,25 +20,23 @@ public class HelloWorld
                 colorspace,
                 0
                 );
-        /*System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(
-                pixmap.pixmap_width(),
-                pixmap.pixmap_height(),
-                System.Drawing.Imaging.PixelFormat.Format24bppRgb
-                );*/
-        //Bitmap^ bmp = gcnew System.Drawing.Bitmap(pixmap.pixmap_width(), pixmap.pixmap_height(), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-        //System.Drawing.Rectangle rect2 = new System.Drawing.Rectangle(0, 0, pixmap.pixmap_width(), pixmap.pixmap_height());
-        //System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(
-        //        rect2,
-        //        System.Drawing.Imaging.ImageLockMode.ReadWrite,
-        //        bmp.PixelFormat
-        //        );
 
-        System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(
+        System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(
                 pixmap.pixmap_width(),
                 pixmap.pixmap_height(),
                 pixmap.pixmap_stride(),
                 System.Drawing.Imaging.PixelFormat.Format24bppRgb,
                 (System.IntPtr) pixmap.pixmap_samples_int()
                 );
+
+        System.Windows.Forms.PictureBox P = new System.Windows.Forms.PictureBox();
+        System.Windows.Forms.Form form = new System.Windows.Forms.Form
+        {
+            Name = "Screenshot Displayer", Size = new System.Drawing.Size(800, 800), Location = new System.Drawing.Point(140, 170), Visible = true
+        };
+        P.Image = bitmap;
+        //P.Dock = DockStyle.Fill;
+        form.Controls.Add(P);
+        form.Show();
     }
 }
