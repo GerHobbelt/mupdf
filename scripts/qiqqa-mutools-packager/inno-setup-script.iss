@@ -50,15 +50,8 @@ Source: "..\..\LICENSES.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\bulktest.exe";             DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\curl.exe";                 DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\example1.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\example2.exe";             DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\glob.exe";                 DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\google-gtest-demos.exe";   DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\googlemock-demos.exe";     DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\googletest-demos.exe";     DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\googletest-samples.exe";   DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\jpeginfo.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\misctests.exe";            DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\misctools.exe";            DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mudraw.exe";               DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mupdf-curl.exe";           DestDir: "{app}"; Flags: ignoreversion
@@ -66,9 +59,8 @@ Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mupdf.exe";                DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\MuPDFLib.dll";             DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\MupdfSharp.exe";           DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\muq-unittest.exe";         DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\muraster.exe";             DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\murepl.exe";               DestDir: "{app}"; Flags: ignoreversion
+Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mucrow.exe";               DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\mutool.exe";               DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\sync_nas_filelock.exe";    DestDir: "{app}"; Flags: ignoreversion
 Source: "Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Release-Unicode-32bit-x86\tesseract.exe";            DestDir: "{app}"; Flags: ignoreversion
