@@ -29,14 +29,24 @@ public class HelloWorld
                 (System.IntPtr) pixmap.pixmap_samples_int()
                 );
 
-        System.Windows.Forms.PictureBox P = new System.Windows.Forms.PictureBox();
-        System.Windows.Forms.Form form = new System.Windows.Forms.Form
+        using (System.Windows.Forms.Form form = new System.Windows.Forms.Form())
+        {
+            form.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            form.Size = bitmap.Size;
+            System.Console.WriteLine("form.Size=" + form.Size);
+            System.Windows.Forms.PictureBox picturebox = new System.Windows.Forms.PictureBox();
+            picturebox.Dock = System.Windows.Forms.DockStyle.Fill;
+            picturebox.Image = bitmap;
+            form.Controls.Add( picturebox);
+            form.ShowDialog();
+        }
+        /*
         {
             Name = "Screenshot Displayer", Size = new System.Drawing.Size(800, 800), Location = new System.Drawing.Point(140, 170), Visible = true
         };
         P.Image = bitmap;
         //P.Dock = DockStyle.Fill;
         form.Controls.Add(P);
-        form.Show();
+        form.Show();*/
     }
 }
