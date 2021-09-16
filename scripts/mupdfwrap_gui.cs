@@ -29,6 +29,26 @@ public class HelloWorld
                 (System.IntPtr) pixmap.pixmap_samples_int()
                 );
 
+        int x;
+        int c = 0;
+        for (x=0; x<bitmap.Width; x+=1)
+        {
+            int y;
+            for (y=0; y<bitmap.Height; y+=1)
+            {
+                if (c == 0)
+                {
+                    System.Drawing.Color color = bitmap.GetPixel(x, y);
+                    //System.Console.WriteLine(" color=" + color);
+                    color = System.Drawing.Color.FromArgb(255, 0, 1);
+                    bitmap.SetPixel(x, y, color);
+                    //System.Console.WriteLine("*color=" + bitmap.GetPixel(x, y));
+                }
+                c += 1;
+                if (c == 3) c = 0;
+            }
+        }
+
         using (System.Windows.Forms.Form form = new System.Windows.Forms.Form())
         {
             form.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -37,6 +57,7 @@ public class HelloWorld
             System.Windows.Forms.PictureBox picturebox = new System.Windows.Forms.PictureBox();
             picturebox.Dock = System.Windows.Forms.DockStyle.Fill;
             picturebox.Image = bitmap;
+            picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             form.Controls.Add( picturebox);
             form.ShowDialog();
         }
