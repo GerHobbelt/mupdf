@@ -359,8 +359,10 @@ Generated files:
             c_functions.pickle
             c_globals.pickle
             container_classnames.pickle
-            swig_c.pickle
+            swig_cpp_python.pickle
+            swig_cpp_csharp.pickle
             swig_python.pickle
+            swig_csharp.pickle
             to_string_structnames.pickle
             windows_mupdf.def   [List of MuPDF public global data, used when linking mupdfcpp.dll.]
 
@@ -450,11 +452,21 @@ Usage:
             rebuilds if commands change.
 
             args:
-                -d <details>:
+                -d <details>
                     If specified, we show extra diagnostics when wrapping
                     functions whose name contains <details>.
-                -f:
+                -f
                     Force rebuilds.
+
+                --python 0|1
+                --csharp 0|1
+                    Whether to generated bindings for python and/or C#. Note
+                    that specifying both results in a _mupdf.so containing
+                    support for both Python and C# but it appears to not work
+                    with C#.
+
+                    Default is python only so to build for C# use "--python 0
+                    --csharp 1'.
 
             <actions> is list of single-character actions which are processed in
             order. If <actions> is 'all', it is replaced by m0123.
@@ -593,8 +605,10 @@ Usage:
 
             As of 2020-03-09 requires patched mupdf/ checkout.
 
-        -t
-        --test
+        --test-csharp
+            Tests the experimental C# API.
+
+        --test-python
             Tests the python API.
 
         --test-setup.py <arg>
@@ -2735,6 +2749,8 @@ def show_ast( filename):
 
 class Arg:
     '''
+    Information about a function argument.
+
         .cursor:
             Cursor for the argument.
         .name:
@@ -2992,22 +3008,77 @@ def make_fncall( tu, cursor, return_type, fncall, out):
         out.write(  f'    return ret;\n')
 
 
+class Generated:
+    '''
+    Stores information generated when we parse headers using clang.
+    '''
+    def __init__( self, dirpath=None):
+        '''
+        dirpath:
+            If specified we load .pickle files from this location. Otherwise we
+            initialise empty state.
+        '''
+        if dirpath:
+            self.container_classnames   = from_pickle( f'{dirpath}/container_classnames.pickle')
+            self.to_string_structnames  = from_pickle( f'{dirpath}/to_string_structnames.pickle')
+            self.swig_cpp_python        = from_pickle( f'{dirpath}/swig_cpp_python.pickle')
+            self.swig_cpp_csharp        = from_pickle( f'{dirpath}/swig_cpp_csharp.pickle')
+            self.swig_python            = from_pickle( f'{dirpath}/swig_python.pickle')
+            self.swig_csharp            = from_pickle( f'{dirpath}/swig_csharp.pickle')
+            self.c_functions            = from_pickle( f'{dirpath}/c_functions.pickle')
+            self.c_globals              = from_pickle( f'{dirpath}/c_globals.pickle')
+        else:
+            self.h_files = []
+            self.cpp_files = []
+            self.fn_usage_filename = None
+            self.container_classnames = []
+            self.to_string_structnames = []
+            self.fn_usage = dict()
+            self.output_param_fns = []
+            self.c_functions = []
+            self.globals = []
+            self.swig_cpp_python = io.StringIO()
+            self.swig_cpp_csharp = io.StringIO()
+            self.swig_python = io.StringIO()
+            self.swig_csharp = io.StringIO()
 
-def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_swig_python):
+    def save( self, dirpath):
+        '''
+        Saves state to .pickle files, to be loaded later via __init__().
+        '''
+        to_pickle( self.container_classnames,          f'{dirpath}/container_classnames.pickle')
+        to_pickle( self.to_string_structnames,         f'{dirpath}/to_string_structnames.pickle')
+        to_pickle( self.swig_cpp_python.getvalue(),    f'{dirpath}/swig_cpp_python.pickle')
+        to_pickle( self.swig_cpp_csharp.getvalue(),    f'{dirpath}/swig_cpp_csharp.pickle')
+        to_pickle( self.swig_python.getvalue(),        f'{dirpath}/swig_python.pickle')
+        to_pickle( self.swig_csharp.getvalue(),        f'{dirpath}/swig_csharp.pickle')
+        to_pickle( self.c_functions,                   f'{dirpath}/c_functions.pickle')
+        to_pickle( self.globals,                       f'{dirpath}/c_globals.pickle')
+
+
+def make_python_outparam_helpers(
+        tu,
+        cursor,
+        fnname,
+        out_h,
+        out_cpp,
+        generated,
+        ):
     '''
     Create extra C++ and Python code to make tuple-returning wrapper of
     specified function.
 
-    We write to out_swig_c and out_swig_python.
+    We write Python code to generated.swig_python and C++ code to
+    generated.swig_cpp_python.
     '''
     verbose = False
     main_name = rename.function(cursor.mangled_name)
-    out_swig_c.write( '\n')
+    generated.swig_cpp_python.write( '\n')
 
     # Write struct.
-    out_swig_c.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
-    out_swig_c.write(f'typedef struct\n')
-    out_swig_c.write( '{\n')
+    generated.swig_cpp_python.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
+    generated.swig_cpp_python.write(f'typedef struct\n')
+    generated.swig_cpp_python.write( '{\n')
     for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
@@ -3016,11 +3087,9 @@ def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c
             log( '{decl=}')
         assert arg.cursor.type.kind == clang.cindex.TypeKind.POINTER
         pointee = arg.cursor.type.get_pointee() #.get_canonical()
-        out_swig_c.write(f'    {declaration_text( pointee, arg.name)};\n')
-    out_swig_c.write(f'}} {main_name}_outparams;\n')
-    out_swig_c.write('\n')
-
-    # Write C wrapper fn.
+        generated.swig_cpp_python.write(f'    {declaration_text( pointee, arg.name)};\n')
+    generated.swig_cpp_python.write(f'}} {main_name}_outparams;\n')
+    generated.swig_cpp_python.write('\n')
 
     # decl.
     name_args = f'{main_name}_outparams_fn('
@@ -3033,76 +3102,76 @@ def make_python_outparam_helpers( tu, cursor, fnname, out_h, out_cpp, out_swig_c
         sep = ', '
     name_args += f'{sep}{main_name}_outparams* outparams'
     name_args += ')'
-    out_swig_c.write(declaration_text( cursor.result_type, name_args))
-    out_swig_c.write('\n')
+    generated.swig_cpp_python.write(declaration_text( cursor.result_type, name_args))
+    generated.swig_cpp_python.write('\n')
 
     # body.
-    out_swig_c.write('{\n')
+    generated.swig_cpp_python.write('{\n')
     # Set all pointer fields to NULL.
     for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
         if arg.cursor.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
-            out_swig_c.write(f'    outparams->{arg.name} = NULL;\n')
+            generated.swig_cpp_python.write(f'    outparams->{arg.name} = NULL;\n')
     # Make call.
-    out_swig_c.write(f'    return {rename.function_call(cursor.mangled_name)}(')
+    generated.swig_cpp_python.write(f'    return {rename.function_call(cursor.mangled_name)}(')
     sep = ''
     for arg in get_args( tu, cursor):
-        out_swig_c.write(sep)
+        generated.swig_cpp_python.write(sep)
         if arg.out_param:
-            out_swig_c.write(f'&outparams->{arg.name}')
+            generated.swig_cpp_python.write(f'&outparams->{arg.name}')
         else:
-            out_swig_c.write(f'{arg.name}')
+            generated.swig_cpp_python.write(f'{arg.name}')
         sep = ', '
-    out_swig_c.write(');\n')
-    out_swig_c.write('}\n')
-    out_swig_c.write('\n')
+    generated.swig_cpp_python.write(');\n')
+    generated.swig_cpp_python.write('}\n')
+    generated.swig_cpp_python.write('\n')
 
     # Write python wrapper.
-    out_swig_python.write('')
-    out_swig_python.write(f'def {main_name}(')
+    generated.swig_python.write('')
+    generated.swig_python.write(f'def {main_name}(')
     sep = ''
     for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
-        out_swig_python.write(f'{sep}{arg.name_python}')
+        generated.swig_python.write(f'{sep}{arg.name_python}')
         sep = ', '
-    out_swig_python.write('):\n')
-    out_swig_python.write(f'    """\n')
-    out_swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
+    generated.swig_python.write('):\n')
+    generated.swig_python.write(f'    """\n')
+    generated.swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
     sep = ''
-    out_swig_python.write(f'    Returns: ')
+    generated.swig_python.write(f'    Returns: ')
     return_void = cursor.result_type.spelling == 'void'
     sep = ''
     if not return_void:
-        out_swig_python.write( f'{cursor.result_type.spelling}')
+        generated.swig_python.write( f'{cursor.result_type.spelling}')
         sep = ', '
     for arg in get_args( tu, cursor):
         if arg.out_param:
-            out_swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
+            generated.swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
             sep = ', '
-    out_swig_python.write(f'\n')
-    out_swig_python.write(f'    """\n')
-    out_swig_python.write(f'    outparams = {main_name}_outparams()\n')
-    out_swig_python.write(f'    ret = {main_name}_outparams_fn(')
+    generated.swig_python.write(f'\n')
+    generated.swig_python.write(f'    """\n')
+    generated.swig_python.write(f'    outparams = {main_name}_outparams()\n')
+    generated.swig_python.write(f'    ret = {main_name}_outparams_fn(')
     sep = ''
     for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
-        out_swig_python.write(f'{sep}{arg.name_python}')
+        generated.swig_python.write(f'{sep}{arg.name_python}')
         sep = ', '
-    out_swig_python.write(f'{sep}outparams)\n')
-    out_swig_python.write(f'    return ')
+    generated.swig_python.write(f'{sep}outparams)\n')
+    generated.swig_python.write(f'    return ')
     sep = ''
     if not return_void:
-        out_swig_python.write(f'ret')
+        generated.swig_python.write(f'ret')
         sep = ', '
     for arg in get_args( tu, cursor):
         if arg.out_param:
-            out_swig_python.write(f'{sep}outparams.{arg.name_python}')
+            generated.swig_python.write(f'{sep}outparams.{arg.name_python}')
             sep = ', '
-    out_swig_python.write('\n')
-    out_swig_python.write('\n')
+    generated.swig_python.write('\n')
+    generated.swig_python.write('\n')
 
 
 def make_python_class_method_outparam_override(
@@ -3114,7 +3183,15 @@ def make_python_class_method_outparam_override(
         classname,
         return_type,
         ):
+    '''
+    Writes Python code to <out> that monkey-patches a class method to make it
+    call the underlying MuPDF function's Python wrapper, which will return
+    out-params in a tuple.
+    '''
     main_name = rename.function(cursor.mangled_name)
+
+    # Define an internal Python function that will become the class method.
+    #
     out.write( f'def {classname}_{main_name}_outparams_fn( self')
     for arg in get_args( tu, cursor):
         if arg.out_param:
@@ -3127,7 +3204,7 @@ def make_python_class_method_outparam_override(
     out.write(f'    Helper for out-params of {structname}::{main_name}() [{cursor.mangled_name}()].\n')
     out.write( '    """\n')
 
-    # ret, a, b, ...
+    # ret, a, b, ... = foo::bar(self.m_internal, p, q, r, ...)
     out.write(f'    ')
     sep = ''
     if cursor.result_type.spelling != 'void':
@@ -3138,7 +3215,6 @@ def make_python_class_method_outparam_override(
             continue
         out.write( f'{sep}{arg.name_python}')
         sep = ', '
-    # = foo::bar(self.m_internal, p, q, r, ...)
     out.write( f' = {main_name}( self.m_internal')
     for arg in get_args( tu, cursor):
         if arg.out_param:
@@ -3149,7 +3225,10 @@ def make_python_class_method_outparam_override(
         write_call_arg(arg, classname, False, out, python=True)
     out.write( ')\n')
 
-    # return ret, a, b
+    # return ret, a, b.
+    #
+    # We convert returned items to wrapping classes if they are MuPDF types.
+    #
     out.write( '    return ')
     sep = ''
     if cursor.result_type.spelling != 'void':
@@ -3175,10 +3254,17 @@ def make_python_class_method_outparam_override(
     out.write('\n')
 
 
-def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_swig_python):
+def make_function_wrapper(
+        tu,
+        cursor,
+        fnname,
+        out_h,
+        out_cpp,
+        generated,
+        ):
     '''
     Writes simple C++ wrapper fn, converting any fz_try..fz_catch exception
-    into a C++ exception and getting internal context.
+    into a C++ exception.
 
     cursor:
         Clang cursor for function to wrap.
@@ -3188,10 +3274,8 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
         Stream to which we write header output.
     out_cpp:
         Stream to which we write cpp output.
-    out_swig_c:
-        Stream to which we write extra C++ code for SWIG .i file.
-    out_swig_python:
-        Stream to which we write extra Python code for SWIG .i file.
+    generated:
+        A Generated instance.
 
     Example generated function:
 
@@ -3273,8 +3357,7 @@ def make_function_wrapper( tu, cursor, fnname, out_h, out_cpp, out_swig_c, out_s
                 fnname,
                 out_h,
                 out_cpp,
-                out_swig_c,
-                out_swig_python,
+                generated,
                 )
 
 
@@ -3291,15 +3374,14 @@ def make_namespace_close( namespace, out):
         out.write( f'}} /* End of namespace {namespace}. */\n')
 
 
-
 def make_internal_functions( namespace, out_h, out_cpp):
     '''
     Writes internal support functions.
 
     out_h:
-        Stream to which we write header output.
+        Stream to which we write C++ header text.
     out_cpp:
-        Stream to which we write cpp output.
+        Stream to which we write C++ text.
     '''
     out_h.write(
             textwrap.dedent(
@@ -3409,6 +3491,8 @@ def make_internal_functions( namespace, out_h, out_cpp):
 
 # Maps from <tu> to dict of fnname: cursor.
 g_functions_cache = dict()
+
+# Maps from <tu> to dict of dataname: cursor.
 g_global_data = dict()
 
 def functions_cache_populate( tu):
@@ -3430,13 +3514,14 @@ def functions_cache_populate( tu):
                 global_data[ cursor.mangled_name] = cursor
 
     g_functions_cache[ tu] = fns
-    g_global_data[tu] = global_data
+    g_global_data[ tu] = global_data
 
 
 def find_functions_starting_with( tu, name_prefix, method):
     '''
     Yields (name, cursor) for all functions in <tu> whose names start with
-    name_prefix.
+    <name_prefix>.
+
     method:
         If true, we omit names that are in omit_methods
     '''
@@ -3494,7 +3579,9 @@ find_wrappable_function_with_arg0_type_cache = None
 find_wrappable_function_with_arg0_type_excluded_cache = None
 
 def find_wrappable_function_with_arg0_type_cache_populate( tu):
-
+    '''
+    Populates caches with wrappable functions.
+    '''
     global find_wrappable_function_with_arg0_type_cache
     global find_wrappable_function_with_arg0_type_excluded_cache
 
@@ -3645,8 +3732,7 @@ def make_function_wrappers(
         out_functions_cpp,
         out_internal_h,
         out_internal_cpp,
-        out_swig_c,
-        out_swig_python,
+        generated,
         ):
     '''
     Generates C++ source code containing wrappers for all fz_*() functions.
@@ -3654,16 +3740,17 @@ def make_function_wrappers(
     We also create a function throw_exception(fz_context* ctx) that throws a
     C++ exception appropriate for the error in ctx.
 
-    Wrappers for functions that have first arg fz_context*, convert
-    fz_try..fz_catch exceptions into C++ exceptions by calling
-    throw_exception(). Others are just plain wrappers.
+    If a function has first arg fz_context*, extra code is generated that
+    converts fz_try..fz_catch exceptions into C++ exceptions by calling
+    throw_exception().
 
-    We remove any fz_context* argument and make implementation call
-    internal_get_context() to get the fz_context* to use.
+    We remove any fz_context* argument and the implementation calls
+    internal_get_context() to get a suitable thread-specific fz_context* to
+    use.
 
     We generate a class for each exception type.
 
-    Returned source is just the raw fucntions, e.g. it does not contain
+    Returned source is just the raw functions text, e.g. it does not contain
     required #include's.
 
     Args:
@@ -3677,8 +3764,9 @@ def make_function_wrappers(
             Stream to which we write function declarations.
         out_functions_cpp:
             Stream to which we write function definitions.
+        generated:
+            A Generated instance.
     '''
-
     # Look for FZ_ERROR_* enums. We generate an exception class for each of
     # these.
     #
@@ -3829,8 +3917,7 @@ def make_function_wrappers(
                     fnname_wrapper,
                     temp_out_h,
                     temp_out_cpp,
-                    out_swig_c,
-                    out_swig_python,
+                    generated,
                     )
         except Clang6FnArgsBug as e:
             #log( jlib.exception_info())
@@ -3880,12 +3967,12 @@ def make_function_wrappers(
 find_struct_cache = None
 def find_struct( tu, structname, require_definition=True):
     '''
-    Finds definition of structure.
+    Finds definition of struct.
     Args:
         tu:
             Translation unit.
         structname:
-            Name of structure to find.
+            Name of struct to find.
         require_definition:
             Only return cursor if it is for definition of structure.
 
@@ -4073,9 +4160,14 @@ def class_add_iterator( struct, structname, classname, extras):
 
             '''
 
+
 def class_find_constructor_fns( tu, classname, structname, base_name, extras):
     '''
-    Returns list of functions that could be used by constructor.
+    Returns list of functions that could be used as constructors of the
+    specified wrapper class.
+
+    For example we look for functions that return a pointer to <structname> or
+    return a POD <structname> by value.
 
     tu:
         .
@@ -4125,8 +4217,10 @@ def class_find_constructor_fns( tu, classname, structname, base_name, extras):
             elif fnname in extras.constructor_excludes:
                 pass
             elif extras.pod and cursor.result_type.get_canonical().spelling == f'{structname}':
+                # Returns POD struct by value.
                 ok = True
             elif not extras.pod and is_pointer_to( cursor.result_type, f'{structname}'):
+                # Returns pointer to struct.
                 ok = True
 
             if ok:
@@ -4276,6 +4370,10 @@ def class_write_method_body(
         return_cursor,
         return_type,
         ):
+    '''
+    Writes method body to <out_cpp> that calls a generated C++ wrapper
+    function.
+    '''
     out_cpp.write( f'{{\n')
 
     # Write function call.
@@ -4319,6 +4417,10 @@ def class_write_method_body(
     out_cpp.write( f');\n')
 
     if fnname in functions_that_return_non_kept:
+        # This function returns a borrowed reference so we need to call
+        # fz_keep_*() in order to allow the wrapping class to work (for example
+        # its destructor will call fz_drop_*()).
+        #
         return_type_base = clip( return_cursor.spelling, ('fz_', 'pdf_'))
         keep_fn = f'{prefix(structname)}keep_{return_type_base}'
         out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
@@ -4330,6 +4432,7 @@ def class_write_method_body(
 
     out_cpp.write( f'}}\n')
     out_cpp.write( f'\n')
+
 
 def class_write_method(
         tu,
@@ -4344,13 +4447,14 @@ def class_write_method(
         extras=None,
         struct=None,
         duplicate_type=None,
-        out_swig_python=None,
+        generated=None,
         debug=None,
         ):
     '''
     Writes a method that calls <fnname>.
 
-    Also appends python code to <out_swig_python> if specified.
+    Also appends python and C# code to generated.swig_python and
+    generated.swig_csharp if <generated> is not None.
 
         tu
             .
@@ -4379,10 +4483,10 @@ def class_write_method(
         struct
             None or cursor for the struct definition.
             Only used if <constructor> is true.
-        out_swig_python
-            If specified and there are one or more out-params, we write python
-            code to overwride the default SWIG-generated method, to call our
-            *_outparams_fn() alternative.
+        generated:
+            If not None and there are one or more out-params, we write
+            python code to generated.swig_python that overwrides the default
+            SWIG-generated method to call our *_outparams_fn() alternative.
         debug
             Show extra diagnostics.
     '''
@@ -4572,12 +4676,12 @@ def class_write_method(
     if duplicate_type:
         out_cpp.write( f'*/\n')
 
-    if out_swig_python and num_out_params:
+    if generated and num_out_params:
         make_python_class_method_outparam_override(
                 tu,
                 fn_cursor,
                 fnname,
-                out_swig_python,
+                generated.swig_python,
                 structname,
                 classname,
                 return_type,
@@ -4656,9 +4760,9 @@ def class_raw_constructor(
         out_cpp,
         ):
     '''
-    Create a raw constructor - a constructor taking pointer to underlying
-    struct. If constructor_fns includes a fz_keep_*-style fn, we use
-    that, otherwise we generate a constructor that simply copies the arg.
+    Create a raw constructor - a constructor taking a pointer to underlying
+    struct. This raw constructor assumes that it already owns the pointer so it
+    does not call fz_keep_*(); the class's destructor will call fz_drop_*().
     '''
     #jlib.log( 'Creating raw constructor {classname=} {structname=} {extras.pod=} {extras.constructor_raw=} {fnname=}')
     comment = f'/* Constructor using raw copy of pre-existing {structname}. */'
@@ -4946,8 +5050,8 @@ def struct_to_string_streaming_fns(
         ):
     '''
     Writes operator<< functions for streaming text representation of C struct
-    members. Should be called at top-level (i.e. not inside 'namespace mupdf
-    {...}') in out_h and out_cpp.
+    members. We should be at top-level in out_h and out_cpp, i.e. not inside
+    'namespace mupdf {...}'.
     '''
     out_h.write( f'\n')
     out_h.write( f'/* Writes {structname}\'s members, labelled and inside (...), to a stream. */\n')
@@ -5013,7 +5117,7 @@ def class_wrapper(
         out_h,
         out_cpp,
         out_h_end,
-        out_swig_python,
+        generated,
         ):
     '''
     Creates source for a class called <classname> that wraps <struct>, with
@@ -5038,9 +5142,12 @@ def class_wrapper(
         out_h_end:
             Stream for text that should be put at the end of the generated
             header text.
+        generated:
+            We write extra python and C# code to generated.out_swig_python and
+            generated.out_swig_csharp for use in the swig .i file.
 
-    Returns (is_container, has_to_string). is_container is true if generated
-    class has custom begin() and end() methods; has_to_string is true if we
+    Returns (is_container, has_to_string). <is_container> is true if generated
+    class has custom begin() and end() methods; <has_to_string> is true if we
     have created a to_string() method.
     '''
     assert extras, f'extras is None for {structname}'
@@ -5190,7 +5297,7 @@ def class_wrapper(
                 out_cpp,
                 static=True,
                 struct=struct,
-                out_swig_python=out_swig_python,
+                generated=generated,
                 )
 
     # Extra methods that wrap fz_*() fns.
@@ -5210,7 +5317,7 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 struct=struct,
-                out_swig_python=out_swig_python,
+                generated=generated,
                 debug=g_show_details(fnname),
                 )
 
@@ -5233,7 +5340,7 @@ def class_wrapper(
         if is_begin_end:
             is_container += 1
 
-    assert is_container==0 or is_container==2   # Should be begin()+end() or neither.
+    assert is_container==0 or is_container==2, f'structname={structname} is_container={is_container}'   # Should be begin()+end() or neither.
     if is_container:
         pass
         #jlib.log( 'Generated class has begin() and end(): {classname=}')
@@ -5364,6 +5471,7 @@ def header_guard( name, out):
     out.write( f'#define {m}\n')
     out.write( '\n')
 
+
 def tabify( filename, text):
     '''
     Returns <text> with leading multiples of 4 spaces converted to tab
@@ -5395,45 +5503,36 @@ def tabify( filename, text):
     return ret[:-1]
 
 
-def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_python, doit=True):
+def cpp_source(
+        dir_mupdf,
+        namespace,
+        base,
+        header_git,
+        generated,
+        doit=True
+        ):
     '''
     Generates all .h and .cpp files.
 
-    dir_mupdf:
-        Location of mupdf checkout.
-    namespace:
-        C++ namespace to use.
-    base:
-        Directory in which all generated files are placed.
-    doit:
-        For debugging only. If false, we don't actually write to any files.
+    Args:
 
-    Returns (tu, hs, cpps, fn_usage_filename, container_classnames, to_string_structnames, fn_usage, output_param_fns, c_functions).
-        tu:
-            From clang.
-        hs:
-            List of generated .h files.
-        cpps:
-            List of generated .cpp files.
-        fn_usage_filename:
-            Name of output file containing information on function usage.
-        container_classnames:
-            List of generated classnames that have begin() and end() methods.
-        to_string_structnames:
-            List of generated structnames that have to_string() method.
-        fn_usage:
-            Dict mapping fz_* function names to number of usages in generated
-            class code.
-            Name of output file containing information on function usage.
-        windows_def_filename:
-            Name of created .def filename.
-        output_param_fns:
-            .
-        c_functions:
-            List of C function names.
-        c_globals:
-            List of global variables.
+        dir_mupdf:
+            Location of mupdf checkout.
+        namespace:
+            C++ namespace to use.
+        base:
+            Directory in which all generated files are placed.
+        header_git:
+            If true we include git info in the file comment that is written
+            into all generated files.
+        generated:
+            A Generated instance.
+        doit:
+            For debugging only. If false, we don't actually write to any files.
+
+    Updates <generated> and returns <tu> from clang..
     '''
+    assert isinstance(generated, Generated)
     assert not dir_mupdf.endswith( '/')
     assert not base.endswith( '/')
     clang_info()    # Ensure we have set up clang-python.
@@ -5656,7 +5755,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             continue
         make_namespace_open( namespace, file)
 
-    # Write declataion and definition for metadata_keys.
+    # Write declataion and definition for metadata_keys global.
     #
     out_hs.functions.write(
             textwrap.dedent(
@@ -5699,8 +5798,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
             out_cpps.functions,
             out_hs.internal,
             out_cpps.internal,
-            out_swig_c,
-            out_swig_python,
+            generated,
             )
 
     fn_usage = dict()
@@ -5793,9 +5891,6 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
         out_hs.classes.write( f'struct {classname};\n')
     out_hs.classes.write( '\n')
 
-    container_classnames = []
-    to_string_structnames = []
-
     # Create each class.
     #
     for classname, struct, structname in classes:
@@ -5822,12 +5917,12 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
                     out_hs.classes,
                     out_cpps.classes,
                     out_h_classes_end,
-                    out_swig_python,
+                    generated,
                     )
         if is_container:
-            container_classnames.append( classname)
+            generated.container_classnames.append( classname)
         if has_to_string:
-            to_string_structnames.append( structname)
+            generated.to_string_structnames.append( structname)
 
     # Write close of namespace.
     out_hs.classes.write( out_h_classes_end.get())
@@ -5859,8 +5954,8 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
     out_hs.close()
     out_cpps.close()
 
-    filenames_h = [filename for _, filename, _ in out_hs.get()]
-    filenames_cpp = [filename for _, filename, _ in out_cpps.get()]
+    generated.h_files = [filename for _, filename, _ in out_hs.get()]
+    generated.cpp_files = [filename for _, filename, _ in out_cpps.get()]
     if 0:   # lgtm [py/unreachable-statement]
         log( 'Have created:')
         for filename in filenames_h + filenames_cpp:
@@ -5932,19 +6027,7 @@ def cpp_source( dir_mupdf, namespace, base, header_git, out_swig_c, out_swig_pyt
 
     out_fn_usage.close()
 
-    return (
-            tu,
-            base,
-            filenames_h,
-            filenames_cpp,
-            fn_usage_filename,
-            container_classnames,
-            to_string_structnames,
-            fn_usage,
-            output_param_fns,
-            c_functions,
-            c_globals,
-            )
+    return tu
 
 
 def compare_fz_usage(
@@ -6044,19 +6127,25 @@ def compare_fz_usage(
 
 def build_swig(
         build_dirs,
-        container_classnames,
-        to_string_structnames,
-        swig_c,
-        swig_python,
-        c_functions,
-        c_globals,
+        generated,
         language='python',
         swig='swig'
         ):
     '''
-    Builds python wrapper for all mupdf_* functions and classes.
-    '''
+    Builds python/C# wrappers for all mupdf_* functions and classes.
 
+    build_dirs
+        A BuildDirs instance.
+    generated.
+        A Generated instance.
+    language
+        The output language, must be 'python' or 'csharp'.
+    swig
+        Location of swig binary.
+    '''
+    assert isinstance(build_dirs, BuildDirs)
+    assert isinstance(generated, Generated)
+    assert language in ('python', 'csharp')
     # Find version of swig. (We use quotes around <swig> to make things work on
     # Windows.)
     t = jlib.system( f'"{swig}" -version', out='return')
@@ -6066,42 +6155,39 @@ def build_swig(
 
     # Create a .i file for SWIG.
     #
-
     common = f'''
             #include <stdexcept>
             #include "mupdf/functions.h"
 
             #include "mupdf/classes.h"
-
-            /* Support for extracting buffer data into a Python bytes. */
-
-            PyObject* buffer_extract_bytes(fz_buffer* buffer)
-            {{
-                unsigned char* c = NULL;
-                /* We mimic the affects of fz_buffer_extract(), which leaves
-                the buffer with zero capacity. */
-                size_t len = mupdf::buffer_storage(buffer, &c);
-                PyObject* ret = PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
-                if (ret) {{
-                    mupdf::clear_buffer(buffer);
-                    mupdf::trim_buffer(buffer);
-                }}
-                return ret;
-            }}
             '''
+    if language == 'python':
+        common += f'''
+                /* Support for extracting buffer data into a Python bytes. */
 
-    common += swig_c
+                PyObject* buffer_extract_bytes(fz_buffer* buffer)
+                {{
+                    unsigned char* c = NULL;
+                    /* We mimic the affects of fz_buffer_extract(), which leaves
+                    the buffer with zero capacity. */
+                    size_t len = mupdf::buffer_storage(buffer, &c);
+                    PyObject* ret = PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+                    if (ret) {{
+                        mupdf::clear_buffer(buffer);
+                        mupdf::trim_buffer(buffer);
+                    }}
+                    return ret;
+                }}
+                '''
+
+    if language == 'python':
+        common += generated.swig_cpp_python
+    if language == 'csharp':
+        common += generated.swig_cpp_csharp
 
     text = ''
-    for fnname in c_functions:
+    for fnname in generated.c_functions:
         text += f'%ignore {fnname};\n'
-    if 0 and g_windows:
-        # Haven't yet figured out how to export global data from a DLL on
-        # Windows. Probably needs mupdf_DATA in header only, but that's a
-        # little tricky to do because we are using the raw mupdf headers.
-        #
-        for name in c_globals:
-            text += f'%ignore {name};\n'
 
     text += textwrap.dedent(f'''
             %ignore fz_append_vprintf;
@@ -6158,7 +6244,7 @@ def build_swig(
             %include carrays.i
             %include cdata.i
             %include std_vector.i
-            %include argcargv.i
+            {"%include argcargv.i" if language=="python" else ""}
 
             namespace std
             {{
@@ -6214,162 +6300,166 @@ def build_swig(
 
     text += common
 
-    text += textwrap.dedent(f'''
-            %pointer_functions(int, pint);
+    if language == 'python':
+        text += textwrap.dedent(f'''
+                %pointer_functions(int, pint);
 
-            %pythoncode %{{
+                %pythoncode %{{
 
-            def Document_lookup_metadata(self, key):
-                """
-                Python implementation override of Document.lookup_metadata().
+                def Document_lookup_metadata(self, key):
+                    """
+                    Python implementation override of Document.lookup_metadata().
 
-                Returns string or None if not found.
-                """
-                e = new_pint()
-                ret = lookup_metadata(self.m_internal, key, e)
-                e = pint_value(e)
-                if e < 0:
-                    return None
-                return ret
+                    Returns string or None if not found.
+                    """
+                    e = new_pint()
+                    ret = lookup_metadata(self.m_internal, key, e)
+                    e = pint_value(e)
+                    if e < 0:
+                        return None
+                    return ret
 
-            Document.lookup_metadata = Document_lookup_metadata
+                Document.lookup_metadata = Document_lookup_metadata
 
-            ''')
+                ''')
 
-    text += swig_python
+    if language == 'python':
+        # Make some additions to the generated Python module.
+        #
+        # E.g. python wrappers for functions that take out-params should return
+        # tuples.
+        #
+        text += generated.swig_python
+        text += textwrap.dedent('''
 
-    # Make some additions to the generated Python module.
-    #
-    # E.g. python wrappers for functions that take out-params should return
-    # tuples.
-    #
-    text += textwrap.dedent('''
+                import re
 
-            import re
-
-            # Wrap parse_page_range() to fix SWIG bug where a NULL return
-            # value seems to mess up the returned list - we end up with ret
-            # containing two elements rather than three, e.g. [0, 2]. This
-            # occurs with SWIG-3.0; maybe fixed in SWIG-4?
-            #
-            w_parse_page_range = parse_page_range
-            def parse_page_range(s, n):
-                ret = w_parse_page_range(s, n)
-                if len(ret) == 2:
-                    return None, 0, 0
-                else:
-                    return ret[0], ret[1], ret[2]
-
-            # Provide native python implementation of format_output_path() (->
-            # fz_format_output_path).
-            #
-            def format_output_path( format, page):
-                m = re.search( '(%[0-9]*d)', format)
-                if m:
-                    ret = format[ :m.start(1)] + str(page) + format[ m.end(1):]
-                else:
-                    dot = format.rfind( '.')
-                    if dot < 0:
-                        dot = len( format)
-                    ret = format[:dot] + str(page) + format[dot:]
-                return ret
-
-            class IteratorWrap:
-                """
-                This is a Python iterator for containers that have C++-style
-                begin() and end() methods that return iterators.
-
-                Iterators must have the following methods:
-
-                    __increment__(): move to next item in the container.
-                    __ref__(): return reference to item in the container.
-
-                Must also be able to compare two iterators for equality.
-
-                """
-                def __init__( self, container):
-                    self.container = container
-                    self.pos = None
-                    self.end = container.end()
-                def __iter__( self):
-                    return self
-                def __next__( self):    # for python2.
-                    if self.pos is None:
-                        self.pos = self.container.begin()
+                # Wrap parse_page_range() to fix SWIG bug where a NULL return
+                # value seems to mess up the returned list - we end up with ret
+                # containing two elements rather than three, e.g. [0, 2]. This
+                # occurs with SWIG-3.0; maybe fixed in SWIG-4?
+                #
+                w_parse_page_range = parse_page_range
+                def parse_page_range(s, n):
+                    ret = w_parse_page_range(s, n)
+                    if len(ret) == 2:
+                        return None, 0, 0
                     else:
-                        self.pos.__increment__()
-                    if self.pos == self.end:
-                        raise StopIteration()
-                    return self.pos.__ref__()
-                def next( self):    # for python3.
-                    return self.__next__()
+                        return ret[0], ret[1], ret[2]
 
-            # The auto-generated Python class methd Buffer.buffer_extract()
-            # returns (size, data).
-            #
-            # But these raw values aren't particularly useful to Python code so
-            # we change the method to return a Python bytes instance instead,
-            # using the special C function buffer_storage_bytes() defined
-            # above.
-            #
-            # We make the original method available as
-            # Buffer.buffer_extract_raw(); this can be used to create a
-            # mupdf.Stream by passing the raw values back to C++ with:
-            #
-            #   data, size = buffer_.buffer_extract_raw()
-            #   stream = mupdf.Stream(data, size))
-            #
-            # We don't provide a similar wrapper for Buffer.buffer_storage()
-            # because we can't create a Python bytes object that
-            # points into the buffer'a storage. We still provide
-            # Buffer.buffer_storage_raw() just in case there is a need for
-            # Python code that can pass the raw (data, size) back in to C.
-            #
+                # Provide native python implementation of format_output_path() (->
+                # fz_format_output_path).
+                #
+                def format_output_path( format, page):
+                    m = re.search( '(%[0-9]*d)', format)
+                    if m:
+                        ret = format[ :m.start(1)] + str(page) + format[ m.end(1):]
+                    else:
+                        dot = format.rfind( '.')
+                        if dot < 0:
+                            dot = len( format)
+                        ret = format[:dot] + str(page) + format[dot:]
+                    return ret
 
-            Buffer.buffer_extract_raw = Buffer.buffer_extract
+                class IteratorWrap:
+                    """
+                    This is a Python iterator for containers that have C++-style
+                    begin() and end() methods that return iterators.
 
-            def Buffer_buffer_extract(self):
-                """
-                Returns buffer data as a Python bytes instance, leaving the
-                buffer empty. Note that this will make a copy of the underlying
-                data.
-                """
-                return buffer_extract_bytes(self.m_internal)
+                    Iterators must have the following methods:
 
-            Buffer.buffer_extract = Buffer_buffer_extract
+                        __increment__(): move to next item in the container.
+                        __ref__(): return reference to item in the container.
 
-            Buffer.buffer_storage_raw = Buffer.buffer_storage
-            delattr(Buffer, 'buffer_storage')
+                    Must also be able to compare two iterators for equality.
+
+                    """
+                    def __init__( self, container):
+                        self.container = container
+                        self.pos = None
+                        self.end = container.end()
+                    def __iter__( self):
+                        return self
+                    def __next__( self):    # for python2.
+                        if self.pos is None:
+                            self.pos = self.container.begin()
+                        else:
+                            self.pos.__increment__()
+                        if self.pos == self.end:
+                            raise StopIteration()
+                        return self.pos.__ref__()
+                    def next( self):    # for python3.
+                        return self.__next__()
+
+                # The auto-generated Python class methd Buffer.buffer_extract()
+                # returns (size, data).
+                #
+                # But these raw values aren't particularly useful to Python code so
+                # we change the method to return a Python bytes instance instead,
+                # using the special C function buffer_storage_bytes() defined
+                # above.
+                #
+                # We make the original method available as
+                # Buffer.buffer_extract_raw(); this can be used to create a
+                # mupdf.Stream by passing the raw values back to C++ with:
+                #
+                #   data, size = buffer_.buffer_extract_raw()
+                #   stream = mupdf.Stream(data, size))
+                #
+                # We don't provide a similar wrapper for Buffer.buffer_storage()
+                # because we can't create a Python bytes object that
+                # points into the buffer'a storage. We still provide
+                # Buffer.buffer_storage_raw() just in case there is a need for
+                # Python code that can pass the raw (data, size) back in to C.
+                #
+
+                Buffer.buffer_extract_raw = Buffer.buffer_extract
+
+                def Buffer_buffer_extract(self):
+                    """
+                    Returns buffer data as a Python bytes instance, leaving the
+                    buffer empty. Note that this will make a copy of the underlying
+                    data.
+                    """
+                    return buffer_extract_bytes(self.m_internal)
+
+                Buffer.buffer_extract = Buffer_buffer_extract
+
+                Buffer.buffer_storage_raw = Buffer.buffer_storage
+                delattr(Buffer, 'buffer_storage')
 
 
-            ''')
+                ''')
 
-    # Add __iter__() methods for all classes with begin() and end() methods.
-    #
-    for classname in container_classnames:
-        text += f'{classname}.__iter__ = lambda self: IteratorWrap( self)\n'
+        # Add __iter__() methods for all classes with begin() and end() methods.
+        #
+        for classname in generated.container_classnames:
+            text += f'{classname}.__iter__ = lambda self: IteratorWrap( self)\n'
 
-    # For all wrapper classes with a to_string() method, add a __str__()
-    # method to the underlying struct's Python class, which calls
-    # to_string_<structname>().
-    #
-    # E.g. this allows Python code to print a mupdf.fz_rect instance.
-    #
-    # [We could instead call our generated to_string() and rely on overloading,
-    # but this will end up switching on the type in the SWIG code.]
-    #
-    for structname in to_string_structnames:
-        text += f'{structname}.__str__ = lambda s: to_string_{structname}(s)\n'
+        # For all wrapper classes with a to_string() method, add a __str__()
+        # method to the underlying struct's Python class, which calls
+        # to_string_<structname>().
+        #
+        # E.g. this allows Python code to print a mupdf.fz_rect instance.
+        #
+        # [We could instead call our generated to_string() and rely on overloading,
+        # but this will end up switching on the type in the SWIG code.]
+        #
+        for structname in generated.to_string_structnames:
+            text += f'{structname}.__str__ = lambda s: to_string_{structname}(s)\n'
 
-    # For all wrapper classes with a to_string() method, add a __str__() method
-    # to the Python wrapper class, which calls the class's to_string() method.
-    #
-    # E.g. this allows Python code to print a mupdf.Rect instance.
-    #
-    for structname in to_string_structnames:
-        text += f'{rename.class_(structname)}.__str__ = lambda self: self.to_string()\n'
+        # For all wrapper classes with a to_string() method, add a __str__() method
+        # to the Python wrapper class, which calls the class's to_string() method.
+        #
+        # E.g. this allows Python code to print a mupdf.Rect instance.
+        #
+        for structname in generated.to_string_structnames:
+            text += f'{rename.class_(structname)}.__str__ = lambda self: self.to_string()\n'
 
-    text += '%}\n'
+        text += '%}\n'
+
+    if language == 'csharp':
+        text += generated.swig_csharp
 
     if 1:   # lgtm [py/constant-conditional-expression]
         # This is a horrible hack to avoid swig failing because
@@ -6395,78 +6485,117 @@ def build_swig(
         assert oo != o
         jlib.update_file( oo, f'{build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf/object.h')
 
-    swig_i      = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.i'
+    swig_i      = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.i'
     include1    = f'{build_dirs.dir_mupdf}/include/'
     include2    = f'{build_dirs.dir_mupdf}/platform/c++/include'
-    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
+    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig_{language}.cpp'
     swig_py     = f'{build_dirs.dir_so}/mupdf.py'
 
-    os.makedirs( f'{build_dirs.dir_mupdf}/platform/python', exist_ok=True)
+    os.makedirs( f'{build_dirs.dir_mupdf}/platform/{language}', exist_ok=True)
     os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
     jlib.update_file( text, swig_i)
 
     line_end = '^' if g_windows else '\\'
-    command = (
-            textwrap.dedent(
-            f'''
-            "{swig}"
-                -Wall
-                -c++
-                {" -doxygen" if swig_major >= 4 else ""}
-                -{language}
-                -module mupdf
-                -outdir {os.path.relpath(build_dirs.dir_so)}
-                -o {os.path.relpath(swig_cpp)}
-                -includeall
-                -I{os.path.relpath(build_dirs.dir_mupdf)}/platform/python/include
-                -I{os.path.relpath(include1)}
-                -I{os.path.relpath(include2)}
-                -ignoremissing
-                {os.path.relpath(swig_i)}
-            ''').strip().replace( '\n', "" if g_windows else "\\\n")
-            )
+    if language == 'python':
+        command = (
+                textwrap.dedent(
+                f'''
+                "{swig}"
+                    -Wall
+                    -c++
+                    {" -doxygen" if swig_major >= 4 else ""}
+                    -python
+                    -module mupdf
+                    -outdir {os.path.relpath(build_dirs.dir_so)}
+                    -o {os.path.relpath(swig_cpp)}
+                    -includeall
+                    -I{os.path.relpath(build_dirs.dir_mupdf)}/platform/python/include
+                    -I{os.path.relpath(include1)}
+                    -I{os.path.relpath(include2)}
+                    -ignoremissing
+                    {os.path.relpath(swig_i)}
+                ''').strip().replace( '\n', "" if g_windows else "\\\n")
+                )
+        rebuilt = jlib.build(
+                (swig_i, include1, include2),
+                (swig_cpp, swig_py),
+                command,
+                )
+        jlib.log('{rebuilt=}')
+        if rebuilt:
+            if g_openbsd:
+                mupdf_py_prefix = textwrap.dedent(
+                        f'''
+                        # Explicitly load required .so's using absolute paths, so that we
+                        # work without needing LD_LIBRARY_PATH to be defined.
+                        #
+                        import ctypes
+                        import os
+                        import importlib
+                        for leaf in ('libmupdf.so', 'libmupdfcpp.so', '_mupdf.so'):
+                            path = os.path.abspath(f'{{__file__}}/../{{leaf}}')
+                            #print(f'path={{path}}')
+                            #print(f'exists={{os.path.exists(path)}}')
+                            ctypes.cdll.LoadLibrary( path)
+                            #print(f'have loaded {{path}}')
+                        ''')
+                with open( swig_py) as f:
+                    mupdf_py_content = mupdf_py_prefix + f.read()
+                with open( swig_py, 'w') as f:
+                    f.write( mupdf_py_content)
+
+            elif g_windows:
+                jlib.log('Adding prefix to {swig_cpp=}')
+                prefix = ''
+                postfix = ''
+                with open( swig_cpp) as f:
+                    mupdf_py_content = prefix + f.read() + postfix
+                with open( swig_cpp, 'w') as f:
+                    f.write( mupdf_py_content)
+
+    elif language == 'csharp':
+        outdir = f'{build_dirs.dir_mupdf}/platform/csharp'
+        os.makedirs(outdir, exist_ok=True)
+        # Looks like swig comes up with 'mupdfcpp_swig_wrap.cxx' leafname.
+        #
+        # We include platform/python/include in order to pick up the modified
+        # include/mupdf/pdf/object.h that we generate elsewhere.
+        command = (
+                textwrap.dedent(
+                f'''
+                "{swig}"
+                    -Wall
+                    -c++
+                    {" -doxygen" if swig_major >= 5 else ""}
+                    -csharp
+                    -module mupdf
+                    -namespace mupdf
+                    -dllimport _mupdf.so
+                    -outdir {outdir}
+                    -outfile mupdf.cs
+                    -o {swig_cpp}
+                    -includeall
+                    -I{os.path.relpath(build_dirs.dir_mupdf)}/platform/python/include
+                    -I{os.path.relpath(include1)}
+                    -I{os.path.relpath(include2)}
+                    -ignoremissing
+                    {os.path.relpath(swig_i)}
+                ''').strip().replace( '\n', "" if g_windows else "\\\n")
+                )
+        rebuilt = jlib.build(
+                (swig_i, include1, include2),
+                (f'{outdir}/mupdf.cs', swig_cpp),
+                command,
+                )
+        jlib.log('{rebuilt=}')
+
+    else:
+        assert 0
 
     swig_cpp_old = None
     if os.path.isfile(swig_cpp):
         swig_cpp_old = swig_cpp + '-0'
         shutil.copy2(swig_cpp, swig_cpp_old)
-
-    rebuilt = jlib.build(
-            (swig_i, include1, include2),
-            (swig_cpp, swig_py),
-            command,
-            )
-    jlib.log('{rebuilt=}')
-    if rebuilt:
-        if g_openbsd:
-            mupdf_py_prefix = textwrap.dedent(
-                    f'''
-                    # Explicitly load required .so's using absolute paths, so that we
-                    # work without needing LD_LIBRARY_PATH to be defined.
-                    #
-                    import ctypes
-                    import os
-                    import importlib
-                    for leaf in ('libmupdf.so', 'libmupdfcpp.so', '_mupdf.so'):
-                        path = os.path.abspath(f'{{__file__}}/../{{leaf}}')
-                        #print(f'path={{path}}')
-                        #print(f'exists={{os.path.exists(path)}}')
-                        ctypes.cdll.LoadLibrary( path)
-                        #print(f'have loaded {{path}}')
-                    ''')
-            with open( swig_py) as f:
-                mupdf_py_content = mupdf_py_prefix + f.read()
-            with open( swig_py, 'w') as f:
-                f.write( mupdf_py_content)
-
-        elif g_windows:
-            jlib.log('Adding prefix to {swig_cpp=}')
-            prefix = ''
-            postfix = ''
-            with open( swig_cpp) as f:
-                mupdf_py_content = prefix + f.read() + postfix
-            with open( swig_cpp, 'w') as f:
-                f.write( mupdf_py_content)
 
     if swig_cpp_old:
         def read_all(path):
@@ -6909,26 +7038,38 @@ def main():
                         f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/functions.h',
                         f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/internal.h',
                         ]
-                container_classnames = None
-                output_param_fns = None
+                build_python = True
+                build_csharp = False
+
                 force_rebuild = False
                 header_git = False
-                swig_c = None
+                swig_cpp_python = None
+                swig_cpp_csharp = None
                 swig_python = None
                 g_show_details = lambda name: False
                 jlib.log('{build_dirs.dir_so=}')
 
                 while 1:
                     actions = args.next()
-                    if actions == '-f':
+                    if 0:
+                        pass
+                    elif actions == '-f':
                         force_rebuild = True
                     elif actions == '-d':
                         d = args.next()
                         g_show_details = lambda name: d in name
+                    elif actions == '--python':
+                        build_python = int(args.next())
+                    elif actions == '--csharp':
+                        build_csharp = int(args.next())
                     elif actions.startswith( '-'):
                         raise Exception( f'Unrecognised --build flag: {actions}')
                     else:
                         break
+
+                if swig_cpp_python and swig_cpp_csharp:
+                    log('Warning: building a _mupdf.so containing both Python and C# wrapping code does not seem to work with C#.')
+                    log('For example use "-b --python 0 --csharp 1 ..." to get a C#-compatible _mupdf.so.')
 
                 if actions == 'all':
                     actions = '0123' if g_windows else 'm0123'
@@ -6997,37 +7138,17 @@ def main():
                             if not clang:
                                 raise Exception('Cannot do "-b 0" because failed to import clang.')
                             namespace = 'mupdf'
-                            swig_c = io.StringIO()
-                            swig_python = io.StringIO()
+                            generated = Generated()
 
-                            (
-                                    tu,
-                                    base,
-                                    h_files_actual,
-                                    cpp_files_actual,
-                                    fn_usage_filename,
-                                    container_classnames,
-                                    to_string_structnames,
-                                    fn_usage,
-                                    output_param_fns,
-                                    c_functions,
-                                    c_globals,
-
-                            ) = cpp_source(
+                            tu = cpp_source(
                                     build_dirs.dir_mupdf,
                                     namespace,
                                     f'{build_dirs.dir_mupdf}/platform/c++',
                                     header_git,
-                                    swig_c,
-                                    swig_python,
+                                    generated,
                                     )
 
-                            to_pickle( container_classnames,    f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle')
-                            to_pickle( to_string_structnames,   f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle')
-                            to_pickle( swig_c.getvalue(),       f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle')
-                            to_pickle( swig_python.getvalue(),  f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle')
-                            to_pickle( c_functions,             f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle')
-                            to_pickle( c_globals,               f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle')
+                            generated.save(f'{build_dirs.dir_mupdf}/platform/c++')
 
                             def check_lists_equal(name, expected, actual):
                                 expected.sort()
@@ -7041,8 +7162,8 @@ def main():
                                     for i in actual:
                                         text += f'        {i}\n'
                                     raise Exception(text)
-                            check_lists_equal('C++ source', cpp_files, cpp_files_actual)
-                            check_lists_equal('C++ headers', h_files, h_files_actual)
+                            check_lists_equal('C++ source', cpp_files, generated.cpp_files)
+                            check_lists_equal('C++ headers', h_files, generated.h_files)
 
                             for dir_ in (
                                     f'{build_dirs.dir_mupdf}/platform/c++/implementation/',
@@ -7058,7 +7179,7 @@ def main():
                                     log( 'Removing unknown C++ file: {path}')
                                     os.remove( path)
 
-                            jlib.log( 'Wrapper classes that are containers: {container_classnames=}')
+                            jlib.log( 'Wrapper classes that are containers: {generated.container_classnames=}')
 
                             # Output info about fz_*() functions that we don't make use
                             # of in class methods.
@@ -7133,25 +7254,37 @@ def main():
                                         )
 
                         elif action == '2':
-                            # Generate C++ code for python module using SWIG.
-                            jlib.log( 'Generating Python module source code using SWIG ...')
-                            if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
-                                raise Exception( 'action "0" required')
-                            with jlib.LogPrefixScope( f'swig: '):
-                                build_swig(
-                                        build_dirs,
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/to_string_structnames.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_c.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/swig_python.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_functions.pickle'),
-                                        from_pickle( f'{build_dirs.dir_mupdf}/platform/c++/c_globals.pickle'),
-                                        swig=swig,
-                                        )
+                            generated = Generated(f'{build_dirs.dir_mupdf}/platform/c++')
+                            if build_python:
+                                jlib.log( 'Generating python module source code using SWIG ...')
+                                if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
+                                    raise Exception( 'action "0" required')
+                                with jlib.LogPrefixScope( f'swig Python: '):
+                                    # Generate C++ code for python module using SWIG.
+                                    build_swig(
+                                            build_dirs,
+                                            generated,
+                                            language='python',
+                                            swig=swig,
+                                            )
+
+                            if build_csharp:
+                                # Generate C# using SWIG.
+                                jlib.log( 'Generating C# module source code using SWIG ...')
+                                if not os.path.isfile(f'{build_dirs.dir_mupdf}/platform/c++/container_classnames.pickle'):
+                                    raise Exception( 'action "0" required')
+                                with jlib.LogPrefixScope( f'swig C#: '):
+                                    build_swig(
+                                            build_dirs,
+                                            generated,
+                                            language='csharp',
+                                            swig=swig,
+                                            )
 
                         elif action == 'j':
                             # Just experimenting.
                             build_swig_java()
+
 
                         elif action == '3':
                             # Compile and link mupdfcpp_swig.cpp to create _mupdf.so.
@@ -7210,111 +7343,6 @@ def main():
                                         f'{build_dirs.dir_so}/_mupdf.pyd',
                                         verbose=1,
                                         )
-
-                            elif g_windows:
-                                # We run Windows compiler and linker manually;
-                                # could probably add a project to mupdf.sln
-                                # instead and build it with devenv.exe, but
-                                # would have to hack things to pass in the
-                                # appropriate python directory.
-                                #
-                                python_path, python_version, python_root, cpu = find_python(
-                                        build_dirs.cpu,
-                                        build_dirs.python_version,
-                                        )
-                                log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
-
-                                vcvars = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvars{build_dirs.cpu.bits}.bat'
-                                vs_root = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29910/bin/Hostx64/{build_dirs.cpu.windows_name}'
-
-                                command = (
-                                        f'"{vs_root}/cl.exe"'
-                                        #f' /nologo'
-                                        f' /D "FZ_DLL_CLIENT"'  # Activates __declspec() in headers.
-                                        f' /D "NDEBUG"'
-                                        f' /D "UNICODE"'
-                                        f' /D "WIN{build_dirs.cpu.bits}"'
-                                        f' /D "_UNICODE"'
-                                        f' /EHsc'               # Enable C++ exceptions.
-                                        f' /FC'                 # Display full path of source code files passed to cl.exe in diagnostic text.
-                                        f' /Faplatform/win32/{build_dirs.cpu.windows_subdir}Release/'       # Sets the listing file name.
-                                        f' /Fdplatform/win32/{build_dirs.cpu.windows_subdir}Release/'       # Specifies a file name for the program database (PDB) file
-                                        f' /Fo"platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp_swig.obj"'        # Name of generated object file.
-                                        f' /Fp"Release/_mupdf.pch"' # Specifies a precompiled header file name.
-                                        f' /GL'                 # Enables whole program optimization.
-                                        f' /GS'                 # Buffers security check.
-                                        f' /Gd'                 # Uses the __cdecl calling convention (x86 only).
-                                        f' /Gm-'                # Deprecated. Enables minimal rebuild.
-                                        f' /Gy'                 # Enables function-level linking.
-                                        f' /MD'                 # Creates a multithreaded DLL using MSVCRT.lib.
-                                        f' /O2'
-                                        f' /Oi'
-                                        f' /Oy-'                # Omits frame pointer (x86 only).
-                                        f' /W3'                 # Sets which warning level to output.
-                                        f' /WX-'                # Treats all warnings as errors.
-                                        f' /Zc:forScope'
-                                        f' /Zc:inline'
-                                        f' /Zc:wchar_t'
-                                        f' /Zi'
-                                        f' /analyze-'           # Enable code analysis.
-                                        f' /c'                  # Compiles without linking.
-                                        f' /diagnostics:column' # Controls the format of diagnostic messages.
-                                        f' /errorReport:prompt' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                        f' /fp:precise'         # Specify floating-point behavior.
-                                        f' /permissive-'        # Set standard-conformance mode.
-                                        f' /sdl'                # Enables additional security features and warnings.
-                                        rf' /I"{python_root}/include"'
-                                        rf' /I"include"'
-                                        rf' /I"platform/c++/include"'
-                                        f' platform/python/mupdfcpp_swig.cpp'
-                                        )
-                                log('Compiling SWIG-generated code.')
-                                cmd_run_multiple( [f'"{vcvars}"', command], prefix='cl.exe: ')
-
-                                # Link.
-                                command = (
-                                        f'"{vs_root}/link.exe"'
-                                        #f' /NOLOGO'
-                                        f' /DLL'
-                                        f' /DYNAMICBASE'        # Specifies whether to generate an executable image that's rebased at load time by using the address space layout randomization (ASLR) feature.
-                                        f' /ERRORREPORT:PROMPT' # Deprecated. Error reporting is controlled by Windows Error Reporting (WER) settings.
-                                        f' /IMPLIB:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.lib"'
-                                        f' /INCREMENTAL:NO'     # Controls incremental linking.
-                                        f' /LIBPATH:"platform/win32/{build_dirs.cpu.windows_subdir}Release"'
-                                        f' /LIBPATH:"{python_root}/libs"'
-                                        f' /LTCG:incremental'
-                                        f' /LTCGOUT:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.iobj"'
-                                        f' /MACHINE:{build_dirs.cpu.windows_name.upper()}'   # Specifies the target platform.
-                                        f' /MANIFEST'           # Creates a side-by-side manifest file and optionally embeds it in the binary.
-                                        f' /MANIFESTUAC:NO'     # Specifies whether User Account Control (UAC) information is embedded in the program manifest.
-                                        f' /ManifestFile:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll.intermediate.manifest"'
-                                        f' /NXCOMPAT'           # Marks an executable as verified to be compatible with the Windows Data Execution Prevention feature.
-                                        f' /OPT:ICF'
-                                        f' /OPT:REF'
-                                        f' /OUT:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll"'
-                                        f' /PDB:"platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.pdb"'
-                                        f' {"/SAFESEH" if build_dirs.cpu.bits==32 else ""}'    # Not supported on x64.
-                                        f' /SUBSYSTEM:WINDOWS'  # Tells the operating system how to run the .exe file.
-                                        f' /TLBID:1'            # A user-specified value for a linker-created type library. It overrides the default resource ID of 1.
-                                        f' "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib"'
-                                        f' "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
-                                        #f' python3.lib'         # not needed because on Windows Python.h has info about library.
-                                        f' platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcpp_swig.obj'
-                                        f' mupdfcpp.lib'
-                                        )
-                                log('Linking SWIG-generated code.')
-                                cmd_run_multiple( [f'"{vcvars}"', command], prefix='link.exe: ')
-
-                                # To be found at runtime, we need to rename _mupdf.dll to _mupdf.pyd. As usual, totally
-                                # undocumented. Discovered this at:
-                                # https://blog.schuetze.link/2018/07/21/a-dive-into-packaging-native-python-extensions.html
-                                #
-                                jlib.copy(
-                                        f'platform/win32/{build_dirs.cpu.windows_subdir}Release/_mupdf.dll',
-                                        f'{build_dirs.dir_so}/_mupdf.pyd',
-                                        verbose=1,
-                                        )
-
                             else:
                                 # We use g++ debug/release flags as implied by
                                 # --dir-so, but all builds output the same file
@@ -7359,16 +7387,15 @@ def main():
 
                                 # These are the input files to our g++ command:
                                 #
-                                mupdfcpp_swig_cpp   = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
+                                swig_cpp_python     = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig_python.cpp'
+                                swig_cpp_csharp     = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig_csharp.cpp'
                                 include1            = f'{build_dirs.dir_mupdf}/include'
                                 include2            = f'{build_dirs.dir_mupdf}/platform/c++/include'
 
                                 mupdf_so            = f'{build_dirs.dir_so}/libmupdf.so'
                                 mupdfcpp_so         = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
-                                # Python expects _mupdf.so to be in same directory as mupdf.py.
-                                #
-                                out_so              = f'{build_dirs.dir_so}/_mupdf.so'
+                                out_so = f'{build_dirs.dir_so}/_mupdf.so'
 
                                 # We use jlib.link_l_flags() to add -L options
                                 # to search parent directories of each .so that
@@ -7387,14 +7414,25 @@ def main():
                                             -I {include1}
                                             -I {include2}
                                             {python_includes}
-                                            {mupdfcpp_swig_cpp}
+                                            {swig_cpp_csharp if build_csharp else ""}
+                                            {swig_cpp_python if build_python else ""}
                                             {jlib.link_l_flags( [mupdf_so, mupdfcpp_so, libpython_so])}
                                             {python_link}
                                         ''').strip().replace( '\n', ' \\\n').strip()
                                         )
+                                infiles = [
+                                        include1,
+                                        include2,
+                                        mupdf_so,
+                                        mupdfcpp_so,
+                                        ]
+                                if build_python:
+                                    infiles.append(swig_cpp_python)
+                                if build_csharp:
+                                    infiles.append(swig_cpp_csharp)
                                 jlib.build(
-                                        ( include1, include2, mupdfcpp_swig_cpp, mupdf_so, mupdfcpp_so,),
-                                        ( out_so,),
+                                        infiles,
+                                        out_so,
                                         command,
                                         force_rebuild,
                                         )
@@ -7696,7 +7734,7 @@ def main():
 
                 jlib.system( f'rsync -aiRz {" ".join( files)} {destination}', verbose=1, out='log')
 
-            elif arg == '--test' or arg == '-t':
+            elif arg == '--test-python' or arg == '-t':
 
                 # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
                 # test .py programme can load mupdf.py and _mupdf.so.
@@ -7752,6 +7790,40 @@ def main():
                     jlib.system( f'{command}', env_extra=env_extra, out='log', verbose=1)
 
                 log( 'Tests ran ok.')
+
+            elif arg == '--test-csharp':
+                # On linux requires:
+                #   sudo apt install mono-devel
+                #
+                # OpenBSD:
+                #   pkg_add mono
+                # but we get runtime error when exiting:
+                #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
+                # which moght be because of mixing gcc and clang?
+                #
+                with open('test-csharp.cs', 'w') as f:
+                    def p(t):
+                        print(t, file=f)
+                    p(textwrap.dedent('''
+                            using System;
+                            using mupdf;
+
+                            public class HelloWorld
+                            {
+                                public static void Main(string[] args)
+                                {
+                                    Console.WriteLine("Hello Mono World");
+                                    mupdf.Document document = new mupdf.Document("zlib.clean.pdf");
+                                    Console.WriteLine("num chapters: " + document.count_chapters());
+                                }
+                            }
+                            '''))
+                jlib.build(
+                        ('test-csharp.cs', 'platform/csharp/mupdf.cs'),
+                        'test-csharp.exe',
+                        f'{"csc" if g_openbsd else "mono-csc"} -out:test-csharp.exe test-csharp.cs platform/csharp/mupdf.cs',
+                        )
+                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono test-csharp.exe', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
