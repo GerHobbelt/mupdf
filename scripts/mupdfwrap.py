@@ -6987,8 +6987,9 @@ def build( build_dirs, swig, args):
     for action in actions:
         with jlib.LogPrefixScope( f'{action}: '):
             jlib.log( '{action=}')
-            if 0:
-                pass
+            if action == '.':
+                log('Ignoring build actions after "." in {actions!r}')
+                break
 
             elif action == 'm':
                 # Build libmupdf.so.
@@ -7771,12 +7772,13 @@ def main():
                                 {
                                     public static void Main(string[] args)
                                     {
-                                        Console.WriteLine("Hello Mono World");
+                                        Console.WriteLine("MuPDF C# test starting.");
                                         mupdf.Document document = new mupdf.Document("zlib.3.pdf");
                                         Console.WriteLine("num chapters: " + document.count_chapters());
                                         mupdf.Page page = document.load_page(0);
                                         mupdf.Rect rect = page.bound_page();
                                         Console.WriteLine("rect: " + rect.to_string());
+                                        Console.WriteLine("MuPDF C# test finished.");
                                     }
                                 }
                                 '''),
