@@ -2,22 +2,24 @@
 
 namespace System.Windows.Forms {
 
-    public class PictureBoxDemo : System.Windows.Forms.Form {
-
-        public PictureBoxDemo()
+    public class MuPDFGui : System.Windows.Forms.Form
+    {
+        public MuPDFGui()
         {
-            System.Windows.Forms.PictureBox box = new System.Windows.Forms.PictureBox();
-            box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            System.Windows.Forms.PictureBox picture_box = new System.Windows.Forms.PictureBox();
+            picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 
+            // Load pdf document using mupdf.
             mupdf.Document document = new mupdf.Document("zlib.3.pdf");
             mupdf.Page page = document.load_page(0);
+
             mupdf.Rect rect = page.bound_page();
             System.Console.WriteLine("rect: " + rect.to_string());
-            mupdf.Matrix matrix = new mupdf.Matrix(1, 0, 0, 1, 0, 0);
-            mupdf.Colorspace colorspace = new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB);
+
+            // Convert into a pixmap.
             mupdf.Pixmap pixmap = page.new_pixmap_from_page_contents(
-                    matrix,
-                    colorspace,
+                    new mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                    new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
                     0
                     );
 
@@ -59,16 +61,18 @@ namespace System.Windows.Forms {
                 }
             }
 
-            box.Image = bitmap;
-            Controls.Add(box);
-            Width = box.Right;
-            Height = box.Bottom;
+            picture_box.Image = bitmap;
+            Controls.Add(picture_box);
+            Width = picture_box.Right;
+            Height = picture_box.Bottom;
         }
 
         public static void Main()
         {
-            System.Threading.Thread.CurrentThread.Name = "Main Thread";
-            Application.Run (new PictureBoxDemo());
+            Console.WriteLine("MuPDF C# gui test starting.");
+            System.Threading.Thread.CurrentThread.Name = "Main thread";
+            Application.Run(new MuPDFGui());
+            Console.WriteLine("MuPDF C# gui test finished.");
         }
     }
 }
