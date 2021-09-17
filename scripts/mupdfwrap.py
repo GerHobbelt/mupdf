@@ -2057,6 +2057,15 @@ classextras = ClassExtras(
                         ''',
                         f'/* Wrapper for fz_md5_pixmap(). */',
                         ),
+                    ExtraMethod( 'long long', 'pixmap_samples_int()',
+                        f'''
+                        {{
+                            long long ret = (intptr_t) samples();
+                            return ret;
+                        }}
+                        ''',
+                        f'/* Alternative to pixmap_samples() that returns pointer as integer. */',
+                        ),
                     ],
                 constructor_raw = True,
                 accessors = True,
@@ -3075,7 +3084,7 @@ class Generated:
             self.fn_usage = dict()
             self.output_param_fns = []
             self.c_functions = []
-            self.globals = []
+            self.c_globals = []
             self.swig_cpp_python = io.StringIO()
             self.swig_cpp_csharp = io.StringIO()
             self.swig_python = io.StringIO()
@@ -3092,7 +3101,7 @@ class Generated:
         to_pickle( self.swig_python.getvalue(),        f'{dirpath}/swig_python.pickle')
         to_pickle( self.swig_csharp.getvalue(),        f'{dirpath}/swig_csharp.pickle')
         to_pickle( self.c_functions,                   f'{dirpath}/c_functions.pickle')
-        to_pickle( self.globals,                       f'{dirpath}/c_globals.pickle')
+        to_pickle( self.c_globals,                     f'{dirpath}/c_globals.pickle')
 
 
 def make_python_outparam_helpers(
@@ -5842,20 +5851,18 @@ def cpp_source(
 
     fn_usage = dict()
     functions_unrecognised = set()
-    c_functions = []
 
     for fnname, cursor in find_functions_starting_with( tu, '', method=True):
         fn_usage[ fnname] = [0, cursor]
-        c_functions.append(fnname)
+        generated.c_functions.append(fnname)
 
-    c_globals = []
     windows_def = ''
     #windows_def += 'LIBRARY mupdfcpp\n'    # This breaks things.
     windows_def += 'EXPORTS\n'
     for name, cursor in find_global_data_starting_with( tu, ('fz_', 'pdf_')):
         if g_show_details(name):
             log('global: {name=}')
-        c_globals.append(name)
+        generated.c_globals.append(name)
         windows_def += f'    {name} DATA\n'
 
     jlib.update_file( windows_def, f'{base}/windows_mupdf.def')
@@ -6527,7 +6534,7 @@ def build_swig(
     swig_i      = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.i'
     include1    = f'{build_dirs.dir_mupdf}/include/'
     include2    = f'{build_dirs.dir_mupdf}/platform/c++/include'
-    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig_{language}.cpp'
+    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.cpp'
     swig_py     = f'{build_dirs.dir_so}/mupdf.py'
 
     os.makedirs( f'{build_dirs.dir_mupdf}/platform/{language}', exist_ok=True)
@@ -6593,7 +6600,7 @@ def build_swig(
                     f.write( mupdf_py_content)
 
     elif language == 'csharp':
-        outdir = f'{build_dirs.dir_mupdf}/platform/csharp'
+        outdir = os.path.relpath(f'{build_dirs.dir_mupdf}/platform/csharp')
         os.makedirs(outdir, exist_ok=True)
         # Looks like swig comes up with 'mupdfcpp_swig_wrap.cxx' leafname.
         #
@@ -6612,7 +6619,7 @@ def build_swig(
                     -dllimport _mupdf.so
                     -outdir {outdir}
                     -outfile mupdf.cs
-                    -o {swig_cpp}
+                    -o {os.path.relpath(swig_cpp)}
                     -includeall
                     -I{os.path.relpath(build_dirs.dir_mupdf)}/platform/python/include
                     -I{os.path.relpath(include1)}
@@ -6623,7 +6630,7 @@ def build_swig(
                 )
         rebuilt = jlib.build(
                 (swig_i, include1, include2),
-                (f'{outdir}/mupdf.cs', swig_cpp),
+                (f'{outdir}/mupdf.cs', os.path.relpath(swig_cpp)),
                 command,
                 )
         jlib.log('{rebuilt=}')
@@ -7136,6 +7143,7 @@ def build( build_dirs, swig, args):
                             )
 
             elif action == '2':
+                # Use SWIG to generate source code for python/C# bindings.
                 generated = Generated(f'{build_dirs.dir_mupdf}/platform/c++')
                 if build_python:
                     jlib.log( 'Generating python module source code using SWIG ...')
@@ -7169,7 +7177,7 @@ def build( build_dirs, swig, args):
 
 
             elif action == '3':
-                # Compile and link mupdfcpp_swig.cpp to create _mupdf.so.
+                # Compile code from action=='2' to create Python/C# binary.
                 #
                 jlib.log( 'Compiling/linking generated Python module source code to create _mupdf.so ...')
 
@@ -7263,8 +7271,8 @@ def build( build_dirs, swig, args):
 
                     # These are the input files to our g++ command:
                     #
-                    swig_cpp_python     = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig_python.cpp'
-                    swig_cpp_csharp     = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig_csharp.cpp'
+                    swig_cpp_python     = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
+                    swig_cpp_csharp     = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
                     include1            = f'{build_dirs.dir_mupdf}/include'
                     include2            = f'{build_dirs.dir_mupdf}/platform/c++/include'
 
@@ -7698,29 +7706,47 @@ def main():
                 #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
                 # which moght be because of mixing gcc and clang?
                 #
-                with open('test-csharp.cs', 'w') as f:
-                    def p(t):
-                        print(t, file=f)
-                    p(textwrap.dedent('''
-                            using System;
-                            using mupdf;
+                jlib.update_file(
+                        textwrap.dedent('''
+                                using System;
+                                using mupdf;
 
-                            public class HelloWorld
-                            {
-                                public static void Main(string[] args)
+                                public class HelloWorld
                                 {
-                                    Console.WriteLine("Hello Mono World");
-                                    mupdf.Document document = new mupdf.Document("zlib.clean.pdf");
-                                    Console.WriteLine("num chapters: " + document.count_chapters());
+                                    public static void Main(string[] args)
+                                    {
+                                        Console.WriteLine("Hello Mono World");
+                                        mupdf.Document document = new mupdf.Document("zlib.clean.pdf");
+                                        Console.WriteLine("num chapters: " + document.count_chapters());
+                                        mupdf.Page page = document.load_page(0);
+                                        mupdf.Rect rect = page.bound_page();
+                                        Console.WriteLine("rect: " + rect.to_string());
+                                    }
                                 }
-                            }
-                            '''))
+                                '''),
+                        'test-csharp.cs',
+                        )
                 jlib.build(
                         ('test-csharp.cs', 'platform/csharp/mupdf.cs'),
                         'test-csharp.exe',
                         f'{"csc" if g_openbsd else "mono-csc"} -out:test-csharp.exe test-csharp.cs platform/csharp/mupdf.cs',
                         )
                 jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono test-csharp.exe', verbose=1)
+
+                in_ = ('scripts/mupdfwrap_gui.cs', 'platform/csharp/mupdf.cs')
+                out = 'mupdfwrap_gui.cs.exe'
+                jlib.build(
+                        in_,
+                        out,
+                        f'{"csc" if g_openbsd else "mono-csc"}'
+                            f' -unsafe'
+                            f' -r:System.Drawing'
+                            f' -r:System.Windows.Forms'
+                            #f' -r:System.Drawing.Imaging'
+                            f' -out:{out}'
+                            f' {" ".join(in_)}',
+                        )
+                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono {out}', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
