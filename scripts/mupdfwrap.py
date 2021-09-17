@@ -422,16 +422,16 @@ Windows builds:
         script.
 
         Building _mupdf.pyd is tricky because it needs to be built with a
-        specific Pyhthon.h and linked with a specific python.lib. This is
-        done by setting environmental variables MUPDF_PYTHON_INCLUDE_PATH and
+        specific Python.h and linked with a specific python.lib. This is done
+        by setting environmental variables MUPDF_PYTHON_INCLUDE_PATH and
         MUPDF_PYTHON_LIBRARY_PATH when running devenv.com, which are referenced
         by platform/win32/mupdfpyswig.vcxproj. Thus one cannot easily build
         _mupdf.pyd directly from the Visual Studio GUI.
 
-        [There is some older code that builds _mupdf.pyd by running the Windows
-        compiler and linker cl.exe and link.exe directly, which avoids the
-        complications of going via devenv, at the expense of needing to know
-        where cl.exe and link.exe are.]
+        [In the git history there is code that builds _mupdf.pyd by running the
+        Windows compiler and linker cl.exe and link.exe directly, which avoids
+        the complications of going via devenv, at the expense of needing to
+        know where cl.exe and link.exe are.]
 
 Usage:
 
@@ -7182,51 +7182,75 @@ def build( build_dirs, swig, args):
                 jlib.log( 'Compiling/linking generated Python module source code to create _mupdf.so ...')
 
                 if g_windows:
-                    python_path, python_version, python_root, cpu = find_python(
-                            build_dirs.cpu,
-                            build_dirs.python_version,
-                            )
-                    log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
+                    if build_python:
+                        python_path, python_version, python_root, cpu = find_python(
+                                build_dirs.cpu,
+                                build_dirs.python_version,
+                                )
+                        log( 'best python for {build_dirs.cpu=}: {python_path=} {python_version=}')
 
-                    py_root = python_root.replace('\\', '/')
-                    env_extra = {
-                            'MUPDF_PYTHON_INCLUDE_PATH': f'{py_root}/include',
-                            'MUPDF_PYTHON_LIBRARY_PATH': f'{py_root}/libs',
-                            }
-                    jlib.log('{env_extra=}')
+                        py_root = python_root.replace('\\', '/')
+                        env_extra = {
+                                'MUPDF_PYTHON_INCLUDE_PATH': f'{py_root}/include',
+                                'MUPDF_PYTHON_LIBRARY_PATH': f'{py_root}/libs',
+                                }
+                        jlib.log('{env_extra=}')
 
-                    # The swig-generated .cpp file must exist at
-                    # this point.
-                    #
-                    cpp_path = 'platform/python/mupdfcpp_swig.cpp'
-                    assert os.path.exists(cpp_path), f'SWIG-generated file does not exist: {cpp_path}'
+                        # The swig-generated .cpp file must exist at
+                        # this point.
+                        #
+                        cpp_path = 'platform/python/mupdfcpp_swig.cpp'
+                        assert os.path.exists(cpp_path), f'SWIG-generated file does not exist: {cpp_path}'
 
-                    # We need to update mtime of the .cpp file to
-                    # force recompile and link, because we run
-                    # devenv with different environmental variables
-                    # depending on the Python for which we are
-                    # building.
-                    #
-                    # [Using /Rebuild or /Clean appears to clean
-                    # the entire solution even if we specify
-                    # /Project.]
-                    #
-                    os.utime(cpp_path)
+                        # We need to update mtime of the .cpp file to
+                        # force recompile and link, because we run
+                        # devenv with different environmental variables
+                        # depending on the Python for which we are
+                        # building.
+                        #
+                        # [Using /Rebuild or /Clean appears to clean
+                        # the entire solution even if we specify
+                        # /Project.]
+                        #
+                        os.utime(cpp_path)
 
-                    jlib.log('Building mupdfpyswig project')
-                    command = (
-                            f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
-                            f' platform/win32/mupdfpyswig.sln'
-                            f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
-                            f' /Project mupdfpyswig'
-                            )
-                    jlib.system(command, verbose=1, out='log', env_extra=env_extra)
+                        jlib.log('Building mupdfpyswig project')
+                        command = (
+                                f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                f' platform/win32/mupdfpyswig.sln'
+                                f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
+                                f' /Project mupdfpyswig'
+                                )
+                        jlib.system(command, verbose=1, out='log', env_extra=env_extra)
 
-                    jlib.copy(
-                            f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfpyswig.dll',
-                            f'{build_dirs.dir_so}/_mupdf.pyd',
-                            verbose=1,
-                            )
+                        jlib.copy(
+                                f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfpyswig.dll',
+                                f'{build_dirs.dir_so}/_mupdf.pyd',
+                                verbose=1,
+                                )
+
+                    if build_csharp:
+                        # The swig-generated .cpp file must exist at
+                        # this point.
+                        #
+                        cpp_path = 'platform/csharp/mupdfcpp_swig.cpp'
+                        assert os.path.exists(cpp_path), f'SWIG-generated file does not exist: {cpp_path}'
+
+                        jlib.log('Building mupdfcsharpswig project')
+                        command = (
+                                f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                f' platform/win32/mupdfcsharpswig.sln'
+                                f' /Build "ReleaseCsharp|{build_dirs.cpu.windows_config}"'
+                                f' /Project mupdfcsharpswig'
+                                )
+                        jlib.system(command, verbose=1, out='log')
+
+                        jlib.copy(
+                                f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcsharpswig.dll',
+                                f'{build_dirs.dir_so}/mupdf.dll',
+                                verbose=1,
+                                )
+
                 else:
                     # We use g++ debug/release flags as implied by
                     # --dir-so, but all builds output the same file
