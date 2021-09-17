@@ -7786,24 +7786,27 @@ def main():
                 out = 'test-csharp.exe'
                 jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
                 if g_windows:
-                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}')
+                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                 else:
                     jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
                 # Build and run gui test.
                 in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
                 out = 'mupdfwrap_gui.cs.exe'
+                # Don't know why Unix/Windows differ in what -r: args are
+                # required...
+                #
+                references = '' if g_windows else '-r:System.Drawing -r:System.Windows.Forms'
                 jlib.build(
                         in_,
                         out,
-                        f'{csc}'
-                            f' -unsafe'
-                            f' -r:System.Drawing'
-                            f' -r:System.Windows.Forms'
-                            #f' -r:System.Drawing.Imaging'
+                        f'{csc} -unsafe {references}'
                             ' -out:{OUT} {IN}'
                         )
-                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+                if g_windows:
+                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                else:
+                    jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
