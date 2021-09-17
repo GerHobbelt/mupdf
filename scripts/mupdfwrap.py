@@ -6606,6 +6606,9 @@ def build_swig(
         #
         # We include platform/python/include in order to pick up the modified
         # include/mupdf/pdf/object.h that we generate elsewhere.
+        dllimport = '_mupdf.so'
+        if g_windows:
+            dllimport = os.path.relpath( f'{build_dirs.dir_so}/_mupdf.dll').replace('/', '\\')
         command = (
                 textwrap.dedent(
                 f'''
@@ -6616,7 +6619,7 @@ def build_swig(
                     -csharp
                     -module mupdf
                     -namespace mupdf
-                    -dllimport _mupdf.so
+                    -dllimport {dllimport}
                     -outdir {outdir}
                     -outfile mupdf.cs
                     -o {os.path.relpath(swig_cpp)}
@@ -7247,7 +7250,12 @@ def build( build_dirs, swig, args):
 
                         jlib.copy(
                                 f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcsharpswig.dll',
-                                f'{build_dirs.dir_so}/mupdf.dll',
+                                f'{build_dirs.dir_so}/_mupdf.dll',
+                                verbose=1,
+                                )
+                        jlib.copy(
+                                f'platform/csharp/mupdf.cs',
+                                f'{build_dirs.dir_so}/mupdf.cs',
                                 verbose=1,
                                 )
 
@@ -7750,27 +7758,42 @@ def main():
                                 '''),
                         'test-csharp.cs',
                         )
-                jlib.build(
-                        ('test-csharp.cs', 'platform/csharp/mupdf.cs'),
-                        'test-csharp.exe',
-                        f'{"csc" if g_openbsd else "mono-csc"} -out:test-csharp.exe test-csharp.cs platform/csharp/mupdf.cs',
-                        )
-                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono test-csharp.exe', verbose=1)
 
-                in_ = ('scripts/mupdfwrap_gui.cs', 'platform/csharp/mupdf.cs')
+                if g_windows:
+                    csc = glob.glob('C:/Windows/Microsoft.NET/Framework/v4.*/csc.exe')
+                    assert len(csc) == 1
+                    csc = csc[0]
+                    mono = ''
+                elif g_linux:
+                    csc = 'mono-csc'
+                    mono = 'mono'
+                elif g_openbsd:
+                    csc = 'csc'
+                    mono = 'mono'
+
+                #mupdf_cs = 'platform/csharp/mupdf.cs'
+                mupdf_cs = os.path.relpath(f'{build_dirs.dir_so}/mupdf.cs')
+
+                # Build and run simple test.
+                in_ = 'test-csharp.cs', mupdf_cs
+                out = 'test-csharp.exe'
+                jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
+                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+
+                # Build and run gui test.
+                in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
                 out = 'mupdfwrap_gui.cs.exe'
                 jlib.build(
                         in_,
                         out,
-                        f'{"csc" if g_openbsd else "mono-csc"}'
+                        f'{csc}'
                             f' -unsafe'
                             f' -r:System.Drawing'
                             f' -r:System.Windows.Forms'
                             #f' -r:System.Drawing.Imaging'
-                            f' -out:{out}'
-                            f' {" ".join(in_)}',
+                            ' -out:{OUT} {IN}'
                         )
-                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono {out}', verbose=1)
+                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
