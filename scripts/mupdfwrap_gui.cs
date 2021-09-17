@@ -1,10 +1,10 @@
-// https://www.mono-project.com/docs/gui/winforms/
+// Loosely based on https://www.mono-project.com/docs/gui/winforms/.
 
 namespace System.Windows.Forms
 {
-
     public class MuPDFGui : System.Windows.Forms.Form
     {
+        // We use static pixmap to ensure it isn't garbage-collected.
         static mupdf.Pixmap pixmap;
 
         public MuPDFGui()
@@ -20,55 +20,52 @@ namespace System.Windows.Forms
             System.Console.WriteLine("rect: " + rect.to_string());
 
             // Convert into a pixmap.
-            /*mupdf.Pixmap*/ pixmap = page.new_pixmap_from_page_contents(
+            pixmap = page.new_pixmap_from_page_contents(
                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                     new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
                     1 /*alpha*/
                     );
 
-            /* this doesn't seem to work... presuambly the samples are not accessible? */
-
             System.Console.WriteLine("pixmap.pixmap_stride()=" + pixmap.pixmap_stride());
+
+            System.Drawing.Bitmap bitmap;
+
             if (true)
             {
-                unsafe
+                /* Use pixmap data without copying.
+
+                It looks like it's important to use MuPDF Fixed_RGB with
+                alpha=1, and C#'s Format32bppRgb. Other combinations,
+                e.g. (Fixed_RGB with alpha=0) and Format24bppRgb, result in a
+                blank display. */
+                bitmap = new System.Drawing.Bitmap(
+                        pixmap.pixmap_width(),
+                        pixmap.pixmap_height(),
+                        pixmap.pixmap_stride(),
+                        System.Drawing.Imaging.PixelFormat.Format32bppRgb,
+                        (System.IntPtr) pixmap.pixmap_samples_int()
+                        );
+
+                if (false)
                 {
-                    System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(
-                            pixmap.pixmap_width(),
-                            pixmap.pixmap_height(),
-                            pixmap.pixmap_stride(),
-                            System.Drawing.Imaging.PixelFormat.Format32bppRgb,
-                            (System.IntPtr) pixmap.pixmap_samples_int()
-                            );
-                    picture_box.Image = bitmap;
-                    Controls.Add(picture_box);
-
-                    Width = picture_box.Right;
-                    Height = picture_box.Bottom;
-
-                    if (true)
+                    /* Check for differences. */
+                    long samples = pixmap.pixmap_samples_int();
+                    int x;
+                    for (x=0; x<bitmap.Width; x+=1)
                     {
-                        long samples = pixmap.pixmap_samples_int();
-                        int x;
-                        for (x=0; x<bitmap.Width; x+=1)
+                        int y;
+                        for (y=0; y<bitmap.Height; y+=1)
                         {
-                            int y;
-                            for (y=0; y<bitmap.Height; y+=1)
+                            unsafe
                             {
-                                unsafe
+                                byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 4 * x;
+                                System.Drawing.Color color = bitmap.GetPixel( x, y);
+                                if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
                                 {
-                                    byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 4 * x;
-                                    System.Drawing.Color color = bitmap.GetPixel( x, y);
-                                    if (color.R != sample[0]
-                                            || color.G != sample[1]
-                                            || color.B != sample[2]
-                                            )
-                                    {
-                                        System.Console.WriteLine("(" + x + " " + y + "):"
-                                                + " pixmap: " + sample[0] + " " + sample[1] + " " + sample[2] + " " + sample[3]
-                                                + " bitmap: " + bitmap.GetPixel( x, y)
-                                                );
-                                    }
+                                    System.Console.WriteLine("(" + x + " " + y + "):"
+                                            + " pixmap: " + sample[0] + " " + sample[1] + " " + sample[2] + " " + sample[3]
+                                            + " bitmap: " + bitmap.GetPixel( x, y)
+                                            );
                                 }
                             }
                         }
@@ -77,14 +74,13 @@ namespace System.Windows.Forms
             }
             else
             {
-                // Create bitmap same size as pixmap.
-                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(
+                // Copy pixmap's pixels into bitmap.
+                //
+                bitmap = new System.Drawing.Bitmap(
                         pixmap.pixmap_width(),
                         pixmap.pixmap_height(),
                         System.Drawing.Imaging.PixelFormat.Format32bppRgb
                         );
-
-                // Copy pixmap data into bitmap.
                 long samples = pixmap.pixmap_samples_int();
                 int x;
                 for (x=0; x<bitmap.Width; x+=1)
@@ -105,23 +101,21 @@ namespace System.Windows.Forms
                         }
                     }
                 }
-
-                picture_box.Image = bitmap;
-                Controls.Add(picture_box);
-                Width = picture_box.Right;
-                Height = picture_box.Bottom;
             }
+
+            // Show bitmap in our window.
+            picture_box.Image = bitmap;
+            Controls.Add(picture_box);
+            Width = picture_box.Right;
+            Height = picture_box.Bottom;
         }
 
         public static void Main()
         {
-            unsafe
-            {
-                Console.WriteLine("MuPDF C# gui test starting.");
-                System.Threading.Thread.CurrentThread.Name = "Main thread";
-                Application.Run(new MuPDFGui());
-                Console.WriteLine("MuPDF C# gui test finished. pixmap=" + pixmap);
-            }
+            Console.WriteLine("MuPDF C# gui test starting.");
+            System.Threading.Thread.CurrentThread.Name = "Main thread";
+            Application.Run(new MuPDFGui());
+            Console.WriteLine("MuPDF C# gui test finished.");
         }
     }
 }
