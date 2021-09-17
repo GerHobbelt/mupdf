@@ -396,6 +396,7 @@ static const char *layer_config = NULL;
 
 static const char ocr_language_default[] = "eng";
 static const char *ocr_language = ocr_language_default;
+static const char *ocr_datadir = NULL;
 
 static struct {
 	int active;
@@ -544,8 +545,10 @@ static int usage(void)
 #endif
 #ifndef OCR_DISABLED
 		"  -t -  Specify language/script for OCR (default: eng)\n"
+		"  -d -\tSpecify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
 #else
 		"  -t -  Specify language/script for OCR (default: eng) (disabled)\n"
+		"  -d -\tSpecify path for OCR files (default: rely on TESSDATA_PREFIX environment variable) (disabled)\n"
 #endif
 		"\n"
 		"  -y l  List the layer configs to stderr\n"
@@ -635,6 +638,11 @@ file_level_headers(fz_context *ctx, const char *filename)
 		char options[300];
 		fz_pdfocr_options opts = { 0 };
 		fz_snprintf(options, sizeof(options), "compression=flate,ocr-language=%s", ocr_language);
+		if (ocr_datadir)
+		{
+			fz_strlcat(options, ",ocr-datadir=", sizeof (options));
+			fz_strlcat(options, ocr_datadir, sizeof (options));
+		}
 		fz_parse_pdfocr_options(ctx, &opts, options);
 		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
 	}
@@ -856,7 +864,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
-				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, NULL, NULL);
+				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, ocr_datadir, NULL, NULL);
 			}
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
@@ -1014,7 +1022,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
-				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, NULL, NULL);
+				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, ocr_datadir, NULL, NULL);
 			}
 			if (list)
 				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
@@ -2302,6 +2310,7 @@ int main(int argc, const char** argv)
 	layer_config = NULL;
 
 	ocr_language = ocr_language_default;
+	ocr_datadir = NULL;
 
 	memset(&bgprint, 0, sizeof(bgprint));
 	memset(&timing, 0, sizeof(timing));
@@ -2319,7 +2328,7 @@ int main(int argc, const char** argv)
 	num_workers = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:U:XLvPl:y:NO:am:x:hj:J:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:NO:am:x:hj:J:")) != -1)
 	{
 		switch (c)
 		{
@@ -2387,6 +2396,13 @@ int main(int argc, const char** argv)
 			num_workers = atoi(fz_optarg); break;
 #else
 			fz_warn(ctx, "Threads not enabled in this build");
+			break;
+#endif
+		case 'd':
+#ifndef OCR_DISABLED
+			ocr_datadir = fz_optarg; break;
+#else
+			fz_warn(ctx, "OCR functionality not enabled in this build\n");
 			break;
 #endif
 		case 't':
