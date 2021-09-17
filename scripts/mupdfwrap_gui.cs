@@ -19,15 +19,6 @@ namespace System.Windows.Forms
             mupdf.Rect rect = page.bound_page();
             System.Console.WriteLine("rect: " + rect.to_string());
 
-            // Convert into a pixmap.
-            pixmap = page.new_pixmap_from_page_contents(
-                    new mupdf.Matrix(1, 0, 0, 1, 0, 0),
-                    new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
-                    1 /*alpha*/
-                    );
-
-            System.Console.WriteLine("pixmap.pixmap_stride()=" + pixmap.pixmap_stride());
-
             System.Drawing.Bitmap bitmap;
 
             if (true)
@@ -38,6 +29,12 @@ namespace System.Windows.Forms
                 alpha=1, and C#'s Format32bppRgb. Other combinations,
                 e.g. (Fixed_RGB with alpha=0) and Format24bppRgb, result in a
                 blank display. */
+                pixmap = page.new_pixmap_from_page_contents(
+                        new mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                        new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
+                        1 /*alpha*/
+                        );
+
                 bitmap = new System.Drawing.Bitmap(
                         pixmap.pixmap_width(),
                         pixmap.pixmap_height(),
@@ -46,7 +43,7 @@ namespace System.Windows.Forms
                         (System.IntPtr) pixmap.pixmap_samples_int()
                         );
 
-                if (false)
+                if (true)
                 {
                     /* Check for differences. */
                     long samples = pixmap.pixmap_samples_int();
@@ -74,30 +71,67 @@ namespace System.Windows.Forms
             }
             else
             {
-                // Copy pixmap's pixels into bitmap.
-                //
+                /* Copy pixmap's pixels into bitmap.
+
+                Unlike above, it seems that we need to use MuPDF Fixed_RGB with
+                alpha=0, and C#'s Format32bppRgb. Other combinations give a
+                blank display (possibly with alpha=0 for each pixel). */
+                pixmap = page.new_pixmap_from_page_contents(
+                        new mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                        new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
+                        0 /*alpha*/
+                        );
+
                 bitmap = new System.Drawing.Bitmap(
                         pixmap.pixmap_width(),
                         pixmap.pixmap_height(),
                         System.Drawing.Imaging.PixelFormat.Format32bppRgb
                         );
-                long samples = pixmap.pixmap_samples_int();
-                int x;
-                for (x=0; x<bitmap.Width; x+=1)
                 {
-                    int y;
-                    for (y=0; y<bitmap.Height; y+=1)
+                    long samples = pixmap.pixmap_samples_int();
+                    int x;
+                    for (x=0; x<bitmap.Width; x+=1)
                     {
-                        unsafe
+                        int y;
+                        for (y=0; y<bitmap.Height; y+=1)
                         {
-                            byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 3 * x;
-                            bitmap.SetPixel( x, y,
-                                    System.Drawing.Color.FromArgb(
-                                            sample[0],
-                                            sample[1],
-                                            sample[2]
-                                            )
-                                    );
+                            unsafe
+                            {
+                                byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 3 * x;
+                                bitmap.SetPixel( x, y,
+                                        System.Drawing.Color.FromArgb(
+                                                sample[0],
+                                                sample[1],
+                                                sample[2]
+                                                )
+                                        );
+                            }
+                        }
+                    }
+                }
+
+                if (true)
+                {
+                    /* Check for differences. */
+                    long samples = pixmap.pixmap_samples_int();
+                    int x;
+                    for (x=0; x<bitmap.Width; x+=1)
+                    {
+                        int y;
+                        for (y=0; y<bitmap.Height; y+=1)
+                        {
+                            unsafe
+                            {
+                                byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 3 * x;
+                                System.Drawing.Color color = bitmap.GetPixel( x, y);
+                                if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
+                                {
+                                    System.Console.WriteLine("(" + x + " " + y + "):"
+                                            + " pixmap: " + sample[0] + " " + sample[1] + " " + sample[2] + " " + sample[3]
+                                            + " bitmap: " + bitmap.GetPixel( x, y)
+                                            );
+                                }
+                            }
                         }
                     }
                 }
