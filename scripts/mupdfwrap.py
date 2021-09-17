@@ -6619,7 +6619,7 @@ def build_swig(
                 textwrap.dedent(
                 f'''
                 "{swig}"
-                     Wall
+                    -Wall
                     -c++
                     {" -doxygen" if swig_major >= 5 else ""}
                     -csharp
@@ -6642,6 +6642,7 @@ def build_swig(
                 (f'{outdir}/mupdf.cs', os.path.relpath(swig_cpp)),
                 command,
                 )
+        jlib.copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
         jlib.log('{rebuilt=}')
 
     else:
@@ -7769,10 +7770,13 @@ def main():
                     csc = glob.glob('C:/Windows/Microsoft.NET/Framework/v4.*/csc.exe')
                     assert len(csc) == 1
                     csc = csc[0]
-                elif g_linux:
-                    csc = 'mono-csc'
-                elif g_openbsd:
-                    csc = 'csc'
+                    mono = ''
+                else:
+                    mono = 'mono'
+                    if g_linux:
+                        csc = 'mono-csc'
+                    elif g_openbsd:
+                        csc = 'csc'
 
                 #mupdf_cs = 'platform/csharp/mupdf.cs'
                 mupdf_cs = os.path.relpath(f'{build_dirs.dir_so}/mupdf.cs')
@@ -7782,9 +7786,9 @@ def main():
                 out = 'test-csharp.exe'
                 jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
                 if g_windows:
-                    jlib.system(f'cd {build_dirs.dir_so} && ../../{out}')
+                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}')
                 else:
-                    jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono ./{out}', verbose=1)
+                    jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
                 # Build and run gui test.
                 in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
