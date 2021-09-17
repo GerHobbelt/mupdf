@@ -911,7 +911,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
-				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, NULL, NULL);
+				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, ocr_datadir, NULL, NULL);
 			}
 			if (list)
 				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
@@ -2849,7 +2849,7 @@ int main(int argc, const char** argv)
 
 			fz_try(ctx)
 			{
-				tess_api = ocr_init(ctx, ocr_language);
+				tess_api = ocr_init(ctx, ocr_language, ocr_datadir);
 			}
 			fz_always(ctx)
 			{
