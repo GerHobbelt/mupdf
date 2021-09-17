@@ -6608,12 +6608,18 @@ def build_swig(
         # include/mupdf/pdf/object.h that we generate elsewhere.
         dllimport = '_mupdf.so'
         if g_windows:
-            dllimport = os.path.relpath( f'{build_dirs.dir_so}/_mupdf.dll').replace('/', '\\')
+            # Would like to specify relative path to .dll with:
+            #   dllimport = os.path.relpath( f'{build_dirs.dir_so}/mupdfcsharpswig.dll')
+            # but Windows/.NET doesn't seem to support this, despite
+            # https://stackoverflow.com/questions/31807289 "how can i add a
+            # swig generated c dll reference to a c sharp project".
+            #
+            dllimport = 'mupdfcsharpswig.dll'
         command = (
                 textwrap.dedent(
                 f'''
                 "{swig}"
-                    -Wall
+                     Wall
                     -c++
                     {" -doxygen" if swig_major >= 5 else ""}
                     -csharp
@@ -7250,7 +7256,7 @@ def build( build_dirs, swig, args):
 
                         jlib.copy(
                                 f'platform/win32/{build_dirs.cpu.windows_subdir}Release/mupdfcsharpswig.dll',
-                                f'{build_dirs.dir_so}/_mupdf.dll',
+                                f'{build_dirs.dir_so}/mupdfcsharpswig.dll',
                                 verbose=1,
                                 )
                         jlib.copy(
@@ -7763,13 +7769,10 @@ def main():
                     csc = glob.glob('C:/Windows/Microsoft.NET/Framework/v4.*/csc.exe')
                     assert len(csc) == 1
                     csc = csc[0]
-                    mono = ''
                 elif g_linux:
                     csc = 'mono-csc'
-                    mono = 'mono'
                 elif g_openbsd:
                     csc = 'csc'
-                    mono = 'mono'
 
                 #mupdf_cs = 'platform/csharp/mupdf.cs'
                 mupdf_cs = os.path.relpath(f'{build_dirs.dir_so}/mupdf.cs')
@@ -7778,7 +7781,10 @@ def main():
                 in_ = 'test-csharp.cs', mupdf_cs
                 out = 'test-csharp.exe'
                 jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
-                jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+                if g_windows:
+                    jlib.system(f'cd {build_dirs.dir_so} && ../../{out}')
+                else:
+                    jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} mono ./{out}', verbose=1)
 
                 # Build and run gui test.
                 in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
