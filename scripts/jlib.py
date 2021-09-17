@@ -1288,7 +1288,9 @@ def copy(src, dest, verbose=False):
     '''
     if verbose:
         log('Copying {src} to {dest}')
-    os.makedirs( os.path.dirname(dest), exist_ok=True)
+    dirname = os.path.dirname(dest)
+    if dirname:
+        os.makedirs( dirname, exist_ok=True)
     shutil.copy2( src, dest)
 
 # Things for figuring out whether files need updating, using mtimes.
