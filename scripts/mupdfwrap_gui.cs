@@ -21,9 +21,10 @@ namespace System.Windows.Forms
 
             System.Drawing.Bitmap bitmap;
 
-            if (true)
+            if (false)
             {
-                /* Use pixmap data without copying.
+                /* Use pixmap data without copying. This does not work on
+                Windows.
 
                 It looks like it's important to use MuPDF Fixed_RGB with
                 alpha=1, and C#'s Format32bppRgb. Other combinations,
@@ -71,7 +72,8 @@ namespace System.Windows.Forms
             }
             else
             {
-                /* Copy pixmap's pixels into bitmap.
+                /* Copy pixmap's pixels into bitmap. This works on both Linux
+                (Mono) and Windows.
 
                 Unlike above, it seems that we need to use MuPDF Fixed_RGB with
                 alpha=0, and C#'s Format32bppRgb. Other combinations give a
