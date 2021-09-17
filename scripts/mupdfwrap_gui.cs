@@ -9,7 +9,7 @@ namespace System.Windows.Forms {
             System.Windows.Forms.PictureBox box = new System.Windows.Forms.PictureBox();
             box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 
-            mupdf.Document document = new mupdf.Document("zlib.clean.pdf");
+            mupdf.Document document = new mupdf.Document("zlib.3.pdf");
             mupdf.Page page = document.load_page(0);
             mupdf.Rect rect = page.bound_page();
             System.Console.WriteLine("rect: " + rect.to_string());
