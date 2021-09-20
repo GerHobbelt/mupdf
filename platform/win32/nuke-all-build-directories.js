@@ -28,13 +28,21 @@ const buildDirs = [
 	"ReleaseUWP",
 	"reader_Win32_Debug",
 	"reader_Win32_Release",
-	"build",
 	"obj",
 	"v16/ipch",
 ];
 
 const buildFiles = [
 	"/Browse.VC.db",
+];
+
+const CMakeTargetDirs = [
+	"build",
+	"b",
+]
+
+const CMakeTargetFiles = [
+	"CMakeCache.txt",
 ];
 
 const specialRejectFiles = [
@@ -56,6 +64,7 @@ const specialRejectFiles = [
 	"LICENSE",
 	"LICENSE.txt",
 	"LICENSE.md",
+	"autogen.mk",
 ];
 
 let src = fs.readFileSync(input, 'utf8');
@@ -66,7 +75,9 @@ let uniq = {};
 let b = a
 .filter((l) => l && l.length)
 .map((l) => {
-	l = l.replace(/[\\/]/g, '/');
+	l = l
+	.replace(/[\\/]/g, '/')
+	.replace(/^\/([a-z])\//g, '$1:/');    // UNIX-path-on-Windows to Windows path
 
 	// see if directory tree includes a CMake 'build' dir or other obvious build destination directory:
 	let has_build_dir = false;
@@ -78,6 +89,31 @@ let b = a
 		}
 	}
 
+	if (!has_build_dir) {
+		for (let i = 0; i < CMakeTargetDirs.length; i++) {
+			let dirstr = `/${CMakeTargetDirs[i]}/`;
+			if (l.includes(dirstr)) {
+				// but only accept this CMake build directory
+				// when it does contain the listed CMake target files!
+				// (Counter-example: wxWindows /build/ directory; there, the CMake target was chosen to be 'b' instead.)
+				let ap = l.replace(new RegExp(`${dirstr}.*$`), dirstr);
+				for (let j = 0; j < CMakeTargetFiles.length; j++) {
+					let matchpath = ap + CMakeTargetFiles[j];
+					if (fs.existsSync(matchpath)) {
+						has_build_dir = true;  
+						l = ap;
+						break;
+					}
+				}
+				
+				// if (!has_build_dir) {
+				// 	console.error('Did not find expected CMake cache/output files in ', l, ': SKIPPING!');
+				// 	return null;
+				// }
+			}
+		}
+	}
+	
 	if (!has_build_dir) {
 		for (let i = 0; i < buildFiles.length; i++) {
 			let dirstr = buildFiles[i];
@@ -106,6 +142,10 @@ let b = a
 		}
 		l = dirstr;
 	}
+
+	// and convert Windows path back to UNIX-on-Windows:
+	l = l 
+	.replace(/^([a-z]):\//g, '/$1/');
 
 	// make sure we log each entry only once:
 	if (uniq[l])
