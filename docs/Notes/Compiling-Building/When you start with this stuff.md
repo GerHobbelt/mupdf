@@ -10,4 +10,6 @@ Build by hitting Control+Shift+B.
 
 That takes a long time; monitor progress in the bottom section of the IDE in the 'Output' tab.
 
-### Tip: when the build produces weird errors, [[DEVELOPERS-README#Developer FAQ|check our FAQ]]
+### Tip
+
+When the build produces weird errors, see if your issue sounds like any of the [[Known Issues when compiling,building]]. Also do [[DEVELOPERS-README#Developer FAQ|check our FAQ]].
