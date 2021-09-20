@@ -21,7 +21,7 @@ namespace System.Windows.Forms
 
             System.Drawing.Bitmap bitmap;
 
-            if (false)
+            if (Type.GetType("Mono.Runtime") != null)
             {
                 /* Use pixmap data without copying. This does not work on
                 Windows.
