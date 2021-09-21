@@ -6652,7 +6652,19 @@ def build_swig(
                 (f'{outdir}/mupdf.cs', os.path.relpath(swig_cpp)),
                 command,
                 )
-        jlib.copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
+        # Add toString() methods which simply call to_string().
+        with open(f'{outdir}/mupdf.cs') as f:
+            cs = f.read()
+        cs2 = re.sub(
+                '(( *)public string to_string[(][)])',
+                '\\2public string toString() { return to_string(); }\n\\1',
+                cs,
+                )
+        jlib.log('{len(cs)=}')
+        jlib.log('{len(cs2)=}')
+        assert cs2 != cs, f'Failed to add toString() methods.'
+        jlib.update_file(cs2, f'{build_dirs.dir_so}/mupdf.cs')
+        #jlib.copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
         jlib.log('{rebuilt=}')
 
     else:
@@ -7763,28 +7775,6 @@ def main():
                 #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
                 # which moght be because of mixing gcc and clang?
                 #
-                jlib.update_file(
-                        textwrap.dedent('''
-                                using System;
-                                using mupdf;
-
-                                public class HelloWorld
-                                {
-                                    public static void Main(string[] args)
-                                    {
-                                        Console.WriteLine("MuPDF C# test starting.");
-                                        mupdf.Document document = new mupdf.Document("zlib.3.pdf");
-                                        Console.WriteLine("num chapters: " + document.count_chapters());
-                                        mupdf.Page page = document.load_page(0);
-                                        mupdf.Rect rect = page.bound_page();
-                                        Console.WriteLine("rect: " + rect.to_string());
-                                        Console.WriteLine("MuPDF C# test finished.");
-                                    }
-                                }
-                                '''),
-                        'test-csharp.cs',
-                        )
-
                 if g_windows:
                     csc = glob.glob('C:/Windows/Microsoft.NET/Framework/v4.*/csc.exe')
                     assert len(csc) == 1
@@ -7797,7 +7787,6 @@ def main():
                     elif g_openbsd:
                         csc = 'csc'
 
-                #mupdf_cs = 'platform/csharp/mupdf.cs'
                 mupdf_cs = os.path.relpath(f'{build_dirs.dir_so}/mupdf.cs')
 
                 # Our tests look for zlib.3.pdf in their current directory.
@@ -7806,34 +7795,60 @@ def main():
                         f'{build_dirs.dir_so}/zlib.3.pdf' if g_windows else 'zlib.3.pdf'
                         )
 
-                # Build and run simple test.
-                in_ = 'test-csharp.cs', mupdf_cs
-                out = 'test-csharp.exe'
-                jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
-                if g_windows:
-                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
-                else:
-                    jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+                if 1:
+                    # Build and run simple test.
+                    jlib.update_file(
+                            textwrap.dedent('''
+                                    using System;
+                                    using mupdf;
 
-                # Build and run gui test.
-                in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
-                out = 'mupdfwrap_gui.cs.exe'
-                # Don't know why Unix/Windows differ in what -r: args are
-                # required...
-                #
-                references = '' if g_windows else '-r:System.Drawing -r:System.Windows.Forms'
-                jlib.build(
-                        in_,
-                        out,
-                        f'{csc} -unsafe {references}'
-                            ' -out:{OUT} {IN}'
-                        )
-                if g_windows:
-                    jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
-                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
-                else:
-                    jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
-                    jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+                                    public class HelloWorld
+                                    {
+                                        public static void Main(string[] args)
+                                        {
+                                            Console.WriteLine("MuPDF C# test starting.");
+                                            mupdf.Document document = new mupdf.Document("zlib.3.pdf");
+                                            Console.WriteLine("document: " + document);
+                                            Console.WriteLine("num chapters: " + document.count_chapters());
+                                            mupdf.Page page = document.load_page(0);
+                                            mupdf.Rect rect = page.bound_page();
+                                            Console.WriteLine("rect: " + rect.to_string());
+                                            Console.WriteLine("rect: " + rect);
+                                            Console.WriteLine("MuPDF C# test finished.");
+                                        }
+                                    }
+                                    '''),
+                            'test-csharp.cs',
+                            )
+
+                    in_ = 'test-csharp.cs', mupdf_cs
+                    out = 'test-csharp.exe'
+                    jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
+                    if g_windows:
+                        jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                    else:
+                        jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+
+                if 1:
+                    # Build and run gui test.
+                    in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
+                    out = 'mupdfwrap_gui.cs.exe'
+                    # Don't know why Unix/Windows differ in what -r: args are
+                    # required...
+                    #
+                    references = '' if g_windows else '-r:System.Drawing -r:System.Windows.Forms'
+                    jlib.build(
+                            in_,
+                            out,
+                            f'{csc} -unsafe {references}'
+                                ' -out:{OUT} {IN}'
+                            )
+                    if g_windows:
+                        jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
+                        jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                    else:
+                        jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
+                        jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
