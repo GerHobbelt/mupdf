@@ -15,7 +15,7 @@ public class MuPDFGui : System.Windows.Forms.Form
         mupdf.Page page = document.load_page(0);
 
         mupdf.Rect rect = page.bound_page();
-        System.Console.WriteLine("rect: " + rect.to_string());
+        System.Console.WriteLine("rect: " + rect);
 
         System.Drawing.Bitmap bitmap;
 
