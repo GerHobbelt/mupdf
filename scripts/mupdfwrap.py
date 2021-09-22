@@ -6246,6 +6246,7 @@ def build_swig(
         common += generated.swig_cpp_csharp
 
     text = ''
+
     for fnname in generated.c_functions:
         text += f'%ignore {fnname};\n'
 
@@ -6656,12 +6657,13 @@ def build_swig(
                 (f'{outdir}/mupdf.cs', os.path.relpath(swig_cpp)),
                 command,
                 )
-        # Add toString() methods which simply call to_string().
+        # For classes that have our to_string() method, override C#'s
+        # ToString() to call to_string().
         with open(f'{outdir}/mupdf.cs') as f:
             cs = f.read()
         cs2 = re.sub(
                 '(( *)public string to_string[(][)])',
-                '\\2public string toString() { return to_string(); }\n\\1',
+                '\\2public override string ToString() { return to_string(); }\n\\1',
                 cs,
                 )
         jlib.log('{len(cs)=}')
