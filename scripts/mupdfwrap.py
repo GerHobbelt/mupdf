@@ -7827,9 +7827,13 @@ def main():
                             'test-csharp.cs',
                             )
 
-                    in_ = 'test-csharp.cs', mupdf_cs
                     out = 'test-csharp.exe'
-                    jlib.build( in_, out, f'{csc} -out:{{OUT}} {{IN}}', force_rebuild=1)
+                    jlib.build(
+                            ('test-csharp.cs', mupdf_cs),
+                            out,
+                            f'{csc} -out:{{OUT}} {{IN}}',
+                            force_rebuild=1,
+                            )
                     if g_windows:
                         jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                     else:
@@ -7837,17 +7841,16 @@ def main():
 
                 if 1:
                     # Build and run gui test.
-                    in_ = 'scripts/mupdfwrap_gui.cs', mupdf_cs
-                    out = 'mupdfwrap_gui.cs.exe'
+                    #
                     # Don't know why Unix/Windows differ in what -r: args are
                     # required...
                     #
                     references = '' if g_windows else '-r:System.Drawing -r:System.Windows.Forms'
+                    out = 'mupdfwrap_gui.cs.exe'
                     jlib.build(
-                            in_,
+                            ('scripts/mupdfwrap_gui.cs', mupdf_cs),
                             out,
-                            f'{csc} -unsafe {references}'
-                                ' -out:{OUT} {IN}'
+                            f'{csc} -unsafe {references}  -out:{{OUT}} {{IN}}'
                             )
                     if g_windows:
                         jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
