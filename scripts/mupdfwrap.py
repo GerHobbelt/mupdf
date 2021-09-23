@@ -7293,11 +7293,6 @@ def build( build_dirs, swig, args):
                                 f'{build_dirs.dir_so}/mupdfcsharp.dll',
                                 verbose=1,
                                 )
-                        jlib.copy(
-                                f'platform/csharp/mupdf.cs',
-                                f'{build_dirs.dir_so}/mupdf.cs',
-                                verbose=1,
-                                )
 
                 else:
                     # We use g++ debug/release flags as implied by
@@ -7821,7 +7816,7 @@ def main():
                                             Console.WriteLine("rect: " + rect);
                                             if ("" + rect != rect.to_string())
                                             {
-                                                throw new System.Exception("rect ToString() is broken");
+                                                throw new System.Exception("rect ToString() is broken: '" + rect + "' != '" + rect.to_string() + "'");
                                             }
                                             Console.WriteLine("MuPDF C# test finished.");
                                         }

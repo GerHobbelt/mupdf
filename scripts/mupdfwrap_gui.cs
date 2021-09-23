@@ -7,7 +7,7 @@ public class MuPDFGui : System.Windows.Forms.Form
     static mupdf.Pixmap pixmap;
 
     private System.Windows.Forms.MainMenu menu;
-    private System.Windows.Forms.MenuItem menu_item_foo;
+    private System.Windows.Forms.MenuItem menu_item_file;
 
     // Throws exception if pixmap and bitmap differ.
     void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
@@ -49,8 +49,15 @@ public class MuPDFGui : System.Windows.Forms.Form
     public MuPDFGui()
     {
 
-        menu_item_foo = new System.Windows.Forms.MenuItem("Foo");
-        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_foo});
+        menu_item_file = new System.Windows.Forms.MenuItem("File",
+                new System.Windows.Forms.MenuItem[]
+                {
+                    new System.Windows.Forms.MenuItem("&Open..."),
+                    new System.Windows.Forms.MenuItem("&Show html"),
+                    new System.Windows.Forms.MenuItem("&Quit"),
+                }
+                );
+        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
         this.Menu = menu;
 
         System.Windows.Forms.PictureBox picture_box = new System.Windows.Forms.PictureBox();
