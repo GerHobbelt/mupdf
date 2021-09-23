@@ -46,15 +46,31 @@ public class MuPDFGui : System.Windows.Forms.Form
         }
     }
 
+    public void Open(System.Object sender, System.EventArgs e)
+    {
+        System.Console.WriteLine("Open() called");
+    }
+
+    public void ShowHtml(System.Object sender, System.EventArgs e)
+    {
+        System.Console.WriteLine("ShowHtml() called");
+    }
+
+    public void Quit(System.Object sender, System.EventArgs e)
+    {
+        System.Console.WriteLine("Quit() called");
+        throw new System.Exception("Exiting");
+    }
+
     public MuPDFGui()
     {
 
         menu_item_file = new System.Windows.Forms.MenuItem("File",
                 new System.Windows.Forms.MenuItem[]
                 {
-                    new System.Windows.Forms.MenuItem("&Open..."),
-                    new System.Windows.Forms.MenuItem("&Show html"),
-                    new System.Windows.Forms.MenuItem("&Quit"),
+                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.Open)),
+                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.ShowHtml)),
+                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.Quit))
                 }
                 );
         menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
