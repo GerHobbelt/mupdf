@@ -7818,8 +7818,11 @@ def main():
                                             Console.WriteLine("num chapters: " + document.count_chapters());
                                             mupdf.Page page = document.load_page(0);
                                             mupdf.Rect rect = page.bound_page();
-                                            Console.WriteLine("rect: " + rect.to_string());
                                             Console.WriteLine("rect: " + rect);
+                                            if ("" + rect != rect.to_string())
+                                            {
+                                                throw new System.Exception("rect ToString() is broken");
+                                            }
                                             Console.WriteLine("MuPDF C# test finished.");
                                         }
                                     }
