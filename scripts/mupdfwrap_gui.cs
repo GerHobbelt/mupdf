@@ -46,11 +46,9 @@ public class MuPDFGui : System.Windows.Forms.Form
             {
                 /* Check for differences. */
                 long samples = pixmap.pixmap_samples_int();
-                int x;
-                for (x=0; x<bitmap.Width; x+=1)
+                for (int x=0; x<bitmap.Width; x+=1)
                 {
-                    int y;
-                    for (y=0; y<bitmap.Height; y+=1)
+                    for (int y=0; y<bitmap.Height; y+=1)
                     {
                         unsafe
                         {
@@ -90,11 +88,9 @@ public class MuPDFGui : System.Windows.Forms.Form
             int stride = pixmap.pixmap_stride();
             {
                 long samples = pixmap.pixmap_samples_int();
-                int x;
-                for (x=0; x<bitmap.Width; x+=1)
+                for (int x=0; x<bitmap.Width; x+=1)
                 {
-                    int y;
-                    for (y=0; y<bitmap.Height; y+=1)
+                    for (int y=0; y<bitmap.Height; y+=1)
                     {
                         unsafe
                         {
@@ -110,11 +106,9 @@ public class MuPDFGui : System.Windows.Forms.Form
             {
                 /* Check for differences. */
                 long samples = pixmap.pixmap_samples_int();
-                int x;
-                for (x=0; x<bitmap.Width; x+=1)
+                for (int x=0; x<bitmap.Width; x+=1)
                 {
-                    int y;
-                    for (y=0; y<bitmap.Height; y+=1)
+                    for (int y=0; y<bitmap.Height; y+=1)
                     {
                         unsafe
                         {
