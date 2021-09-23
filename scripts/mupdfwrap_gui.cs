@@ -1,9 +1,47 @@
-// Loosely based on https://www.mono-project.com/docs/gui/winforms/.
+// Basic PDF viewer using MuPDF C# bindings.
+//
 
 public class MuPDFGui : System.Windows.Forms.Form
 {
     // We use static pixmap to ensure it isn't garbage-collected.
     static mupdf.Pixmap pixmap;
+
+    // Throws exception if pixmap and bitmap differ.
+    void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
+    {
+        long samples = pixmap.pixmap_samples_int();
+        if (pixmap.pixmap_width() != bitmap.Width || pixmap.pixmap_height() != bitmap.Height)
+        {
+            throw new System.Exception("Inconsistent sizes:"
+                    + " pixmap=(" + pixmap.pixmap_width() + " " + pixmap.pixmap_height()
+                    + " bitmap=(" + bitmap.Width + " " + bitmap.Height
+                    );
+        }
+        int stride = pixmap.pixmap_stride();
+        for (int x=0; x<bitmap.Width; x+=1)
+        {
+            for (int y=0; y<bitmap.Height; y+=1)
+            {
+                unsafe
+                {
+                    byte* sample = (byte*) samples + stride * y + pixmap_bytes_per_pixel * x;
+                    System.Drawing.Color color = bitmap.GetPixel( x, y);
+                    if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
+                    {
+                        string pixmap_pixel_text = "";
+                        for (int i=0; i<pixmap_bytes_per_pixel; ++i)
+                        {
+                            if (i > 0) pixmap_pixel_text += " ";
+                            pixmap_pixel_text += sample[i];
+                        }
+                        throw new System.Exception("Pixels differ: (" + x + " " + y + "):"
+                                + " pixmap: (" + pixmap_pixel_text + ")"
+                                + " bitmap: " + color);
+                    }
+                }
+            }
+        }
+    }
 
     public MuPDFGui()
     {
@@ -44,26 +82,7 @@ public class MuPDFGui : System.Windows.Forms.Form
 
             if (true)
             {
-                /* Check for differences. */
-                long samples = pixmap.pixmap_samples_int();
-                for (int x=0; x<bitmap.Width; x+=1)
-                {
-                    for (int y=0; y<bitmap.Height; y+=1)
-                    {
-                        unsafe
-                        {
-                            byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 4 * x;
-                            System.Drawing.Color color = bitmap.GetPixel( x, y);
-                            if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
-                            {
-                                System.Console.WriteLine("(" + x + " " + y + "):"
-                                        + " pixmap: " + sample[0] + " " + sample[1] + " " + sample[2] + " " + sample[3]
-                                        + " bitmap: " + bitmap.GetPixel( x, y)
-                                        );
-                            }
-                        }
-                    }
-                }
+                Check(pixmap, bitmap, 4);
             }
         }
         else
@@ -85,45 +104,24 @@ public class MuPDFGui : System.Windows.Forms.Form
                     pixmap.pixmap_height(),
                     System.Drawing.Imaging.PixelFormat.Format32bppRgb
                     );
+            long samples = pixmap.pixmap_samples_int();
             int stride = pixmap.pixmap_stride();
+            for (int x=0; x<bitmap.Width; x+=1)
             {
-                long samples = pixmap.pixmap_samples_int();
-                for (int x=0; x<bitmap.Width; x+=1)
+                for (int y=0; y<bitmap.Height; y+=1)
                 {
-                    for (int y=0; y<bitmap.Height; y+=1)
+                    unsafe
                     {
-                        unsafe
-                        {
-                            byte* sample = (byte*) samples + stride * y + 3 * x;
-                            var color = System.Drawing.Color.FromArgb(sample[0], sample[1], sample[2]);
-                            bitmap.SetPixel( x, y, color);
-                        }
+                        byte* sample = (byte*) samples + stride * y + 3 * x;
+                        var color = System.Drawing.Color.FromArgb(sample[0], sample[1], sample[2]);
+                        bitmap.SetPixel( x, y, color);
                     }
                 }
             }
 
             if (true)
             {
-                /* Check for differences. */
-                long samples = pixmap.pixmap_samples_int();
-                for (int x=0; x<bitmap.Width; x+=1)
-                {
-                    for (int y=0; y<bitmap.Height; y+=1)
-                    {
-                        unsafe
-                        {
-                            byte* sample = (byte*) samples + pixmap.pixmap_stride() * y + 3 * x;
-                            System.Drawing.Color color = bitmap.GetPixel( x, y);
-                            if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
-                            {
-                                System.Console.WriteLine("(" + x + " " + y + "):"
-                                        + " pixmap: " + sample[0] + " " + sample[1] + " " + sample[2] + " " + sample[3]
-                                        + " bitmap: " + bitmap.GetPixel( x, y)
-                                        );
-                            }
-                        }
-                    }
-                }
+                Check(pixmap, bitmap, 3);
             }
         }
 
