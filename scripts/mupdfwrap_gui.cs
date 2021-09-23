@@ -6,6 +6,9 @@ public class MuPDFGui : System.Windows.Forms.Form
     // We use static pixmap to ensure it isn't garbage-collected.
     static mupdf.Pixmap pixmap;
 
+    private System.Windows.Forms.MainMenu menu;
+    private System.Windows.Forms.MenuItem menu_item_foo;
+
     // Throws exception if pixmap and bitmap differ.
     void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
     {
@@ -45,6 +48,11 @@ public class MuPDFGui : System.Windows.Forms.Form
 
     public MuPDFGui()
     {
+
+        menu_item_foo = new System.Windows.Forms.MenuItem("Foo");
+        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_foo});
+        this.Menu = menu;
+
         System.Windows.Forms.PictureBox picture_box = new System.Windows.Forms.PictureBox();
         picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 
