@@ -44,17 +44,36 @@ public class MuPDFGui : System.Windows.Forms.Form
 
         picture_box = new System.Windows.Forms.PictureBox();
         picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+        Controls.Add(picture_box);
 
         // Load pdf document using mupdf.
-        document = new mupdf.Document("zlib.3.pdf");
-
-        Controls.Add(picture_box);
-        GotoPage(0, 0);
+        //document = new mupdf.Document("zlib.3.pdf");
+        this.OpenFile("zlib.3.pdf");
     }
 
     public void Open(System.Object sender, System.EventArgs e)
     {
         System.Console.WriteLine("Open() called");
+        var dialog = new System.Windows.Forms.OpenFileDialog();
+        var result = dialog.ShowDialog();
+        if (result == System.Windows.Forms.DialogResult.OK)
+        {
+            this.OpenFile(dialog.FileName);
+        }
+    }
+
+    void OpenFile(string path)
+    {
+        try
+        {
+            this.document = new mupdf.Document(path);
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine("Failed to open: " + path);
+            return;
+        }
+        this.GotoPage(0, 0);
     }
 
     public void ShowHtml(System.Object sender, System.EventArgs e)
