@@ -69,7 +69,7 @@ public class MuPDFGui : System.Windows.Forms.Form
         System.Windows.Forms.Application.Exit();
     }
 
-    public void GotoPage(int page_number=0, double zoom=0)
+    public void GotoPage(int width=0, int height=0, int page_number=0, double zoom=0)
     {
         if (page_number == 0)   page_number = this.page_number;
         if (zoom == 0)  zoom = this.zoom;
@@ -77,8 +77,10 @@ public class MuPDFGui : System.Windows.Forms.Form
         page = document.load_page(page_number);
         var page_rect = page.bound_page();
         double z = System.Math.Pow(2, zoom / zoom_multiple);
+        if (width == 0)     width = picture_box.Right;
+        if (height == 0)    height = picture_box.Bottom;
         /* For now we always use 'fit width' view semantics. */
-        z *= picture_box.Right / (page_rect.x1 - page_rect.x0);
+        z *= width / (page_rect.x1 - page_rect.x0);
 
         mupdf.Rect rect = page.bound_page();
         System.Console.WriteLine("rect: " + rect);
@@ -153,6 +155,14 @@ public class MuPDFGui : System.Windows.Forms.Form
         picture_box.Image = bitmap;
     }
 
+    private void HandleResize(object sender, System.EventArgs e)
+    {
+        var control = (System.Windows.Forms.Control) sender;
+        System.Console.WriteLine("resize: control:     (" + control.Size.Width + " " + control.Size.Height + ")");
+        System.Console.WriteLine("        picture_box: (" + picture_box.Right + " " + picture_box.Height + ")");
+        GotoPage(control.Size.Width, control.Size.Height);
+    }
+
     public MuPDFGui()
     {
 
@@ -166,6 +176,8 @@ public class MuPDFGui : System.Windows.Forms.Form
                 );
         menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
         this.Menu = menu;
+
+        Resize += HandleResize;
 
         picture_box = new System.Windows.Forms.PictureBox();
         picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
