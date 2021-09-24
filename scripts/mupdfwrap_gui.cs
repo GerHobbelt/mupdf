@@ -4,7 +4,7 @@
 public class MuPDFGui : System.Windows.Forms.Form
 {
     // We use static pixmap to ensure it isn't garbage-collected.
-    static mupdf.Pixmap pixmap;
+    mupdf.Pixmap pixmap;
 
     private System.Windows.Forms.MainMenu menu;
     private System.Windows.Forms.MenuItem menu_item_file;
@@ -31,38 +31,37 @@ public class MuPDFGui : System.Windows.Forms.Form
         menu_item_file = new System.Windows.Forms.MenuItem("File",
                 new System.Windows.Forms.MenuItem[]
                 {
-                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.Open)),
-                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.ShowHtml)),
-                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.Quit))
+                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.open)),
+                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.show_html)),
+                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.quit))
                 }
                 );
         menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
         this.Menu = menu;
 
-        Resize += HandleResize;
-        KeyDown += HandleKeyDown;
+        Resize += handle_resize;
+        KeyDown += handle_key_down;
 
-        picture_box = new System.Windows.Forms.PictureBox();
-        picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+        this.picture_box = new System.Windows.Forms.PictureBox();
+        this.picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+
         Controls.Add(picture_box);
 
-        // Load pdf document using mupdf.
-        //document = new mupdf.Document("zlib.3.pdf");
-        this.OpenFile("zlib.3.pdf");
+        this.open_file("zlib.3.pdf");
     }
 
-    public void Open(System.Object sender, System.EventArgs e)
+    public void open(System.Object sender, System.EventArgs e)
     {
         System.Console.WriteLine("Open() called");
         var dialog = new System.Windows.Forms.OpenFileDialog();
         var result = dialog.ShowDialog();
         if (result == System.Windows.Forms.DialogResult.OK)
         {
-            this.OpenFile(dialog.FileName);
+            this.open_file(dialog.FileName);
         }
     }
 
-    void OpenFile(string path)
+    void open_file(string path)
     {
         try
         {
@@ -73,15 +72,15 @@ public class MuPDFGui : System.Windows.Forms.Form
             System.Console.WriteLine("Failed to open: " + path);
             return;
         }
-        this.GotoPage(0, 0);
+        this.goto_page(0, 0);
     }
 
-    public void ShowHtml(System.Object sender, System.EventArgs e)
+    public void show_html(System.Object sender, System.EventArgs e)
     {
         System.Console.WriteLine("ShowHtml() called");
     }
 
-    public void Quit(System.Object sender, System.EventArgs e)
+    public void quit(System.Object sender, System.EventArgs e)
     {
         System.Console.WriteLine("Quit() called");
         System.Windows.Forms.Application.Exit();
@@ -91,7 +90,7 @@ public class MuPDFGui : System.Windows.Forms.Form
     //
     // To preserve current page and/or zoom, use .page_number and/or .zoom.
     //
-    public void GotoPage(int page_number, double zoom)
+    public void goto_page(int page_number, double zoom)
     {
         if (page_number < 0 || page_number >= document.count_pages())
         {
@@ -102,10 +101,10 @@ public class MuPDFGui : System.Windows.Forms.Form
         this.page_number = page_number;
         this.page = document.load_page(page_number);
 
-        var page_rect = page.bound_page();
-        var z = System.Math.Pow(2, zoom / zoom_multiple);
+        var z = System.Math.Pow(2, this.zoom / this.zoom_multiple);
 
         /* For now we always use 'fit width' view semantics. */
+        var page_rect = this.page.bound_page();
         z *= this.Width / (page_rect.x1 - page_rect.x0);
 
         if (System.Type.GetType("Mono.Runtime") != null)
@@ -120,7 +119,7 @@ public class MuPDFGui : System.Windows.Forms.Form
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Reset();
             stopwatch.Start();
-            pixmap = page.new_pixmap_from_page_contents(
+            this.pixmap = this.page.new_pixmap_from_page_contents(
                     new mupdf.Matrix((float) z, 0, 0, (float) z, 0, 0),
                     new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
                     1 /*alpha*/
@@ -130,12 +129,12 @@ public class MuPDFGui : System.Windows.Forms.Form
 
             stopwatch.Reset();
             stopwatch.Start();
-            bitmap = new System.Drawing.Bitmap(
-                    pixmap.pixmap_width(),
-                    pixmap.pixmap_height(),
-                    pixmap.pixmap_stride(),
+            this.bitmap = new System.Drawing.Bitmap(
+                    this.pixmap.pixmap_width(),
+                    this.pixmap.pixmap_height(),
+                    this.pixmap.pixmap_stride(),
                     System.Drawing.Imaging.PixelFormat.Format32bppRgb,
-                    (System.IntPtr) pixmap.pixmap_samples_int()
+                    (System.IntPtr) this.pixmap.pixmap_samples_int()
                     );
             stopwatch.Stop();
             var t_bitmap = stopwatch.Elapsed;
@@ -143,7 +142,7 @@ public class MuPDFGui : System.Windows.Forms.Form
             stopwatch.Reset();
             stopwatch.Start();
             // This is slow for large pixmaps/bitmaps.
-            //Check(pixmap, bitmap, 4);
+            //check(pixmap, bitmap, 4);
             stopwatch.Stop();
             var t_check = stopwatch.Elapsed;
 
@@ -161,15 +160,15 @@ public class MuPDFGui : System.Windows.Forms.Form
             Unlike above, it seems that we need to use MuPDF Fixed_RGB with
             alpha=0, and C#'s Format32bppRgb. Other combinations give a
             blank display (possibly with alpha=0 for each pixel). */
-            pixmap = page.new_pixmap_from_page_contents(
+            this.pixmap = this.page.new_pixmap_from_page_contents(
                     new mupdf.Matrix((float) z, 0, 0, (float) z, 0, 0),
                     new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
                     0 /*alpha*/
                     );
 
-            bitmap = new System.Drawing.Bitmap(
-                    pixmap.pixmap_width(),
-                    pixmap.pixmap_height(),
+            this.bitmap = new System.Drawing.Bitmap(
+                    this.pixmap.pixmap_width(),
+                    this.pixmap.pixmap_height(),
                     System.Drawing.Imaging.PixelFormat.Format32bppRgb
                     );
             long samples = pixmap.pixmap_samples_int();
@@ -182,50 +181,50 @@ public class MuPDFGui : System.Windows.Forms.Form
                     {
                         byte* sample = (byte*) samples + stride * y + 3 * x;
                         var color = System.Drawing.Color.FromArgb(sample[0], sample[1], sample[2]);
-                        bitmap.SetPixel( x, y, color);
+                        this.bitmap.SetPixel( x, y, color);
                     }
                 }
             }
-            //Check(pixmap, bitmap, 3);
+            //check(pixmap, bitmap, 3);
         }
-        picture_box.Image = bitmap;
+        this.picture_box.Image = this.bitmap;
     }
 
-    private void HandleKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+    private void handle_key_down(object sender, System.Windows.Forms.KeyEventArgs e)
     {
         //System.Console.WriteLine("HandleKeyDown: " + e.KeyCode);
         if (e.Shift && e.KeyCode == System.Windows.Forms.Keys.PageUp)
         {
-            GotoPage(this.page_number - 1, this.zoom);
+            goto_page(this.page_number - 1, this.zoom);
         }
         else if (e.Shift && e.KeyCode == System.Windows.Forms.Keys.PageDown)
         {
-            GotoPage(this.page_number + 1, this.zoom);
+            goto_page(this.page_number + 1, this.zoom);
         }
         else if (e.KeyCode == System.Windows.Forms.Keys.D0)
         {
-            GotoPage(this.page_number, 0);
+            goto_page(this.page_number, 0);
         }
         else if (e.KeyCode == System.Windows.Forms.Keys.Add
                 || e.KeyCode == System.Windows.Forms.Keys.Oemplus
                 )
         {
-            GotoPage(this.page_number, this.zoom + 1);
+            goto_page(this.page_number, this.zoom + 1);
         }
         else if (e.KeyCode == System.Windows.Forms.Keys.Subtract
                 || e.KeyCode == System.Windows.Forms.Keys.OemMinus)
         {
-            GotoPage(this.page_number, this.zoom - 1);
+            goto_page(this.page_number, this.zoom - 1);
         }
     }
 
-    private void HandleResize(object sender, System.EventArgs e)
+    private void handle_resize(object sender, System.EventArgs e)
     {
-        GotoPage(page_number, zoom);
+        goto_page(page_number, zoom);
     }
 
     // Throws exception if pixmap and bitmap differ.
-    void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
+    void check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
     {
         long samples = pixmap.pixmap_samples_int();
         if (pixmap.pixmap_width() != bitmap.Width || pixmap.pixmap_height() != bitmap.Height)
