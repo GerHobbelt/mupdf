@@ -20,6 +20,7 @@ public class MuPDFGui : System.Windows.Forms.Form
     System.Drawing.Bitmap           bitmap;
     System.Windows.Forms.PictureBox picture_box;
 
+    [System.STAThread]
     public static void Main()
     {
         System.Windows.Forms.Application.Run(new MuPDFGui());
@@ -73,7 +74,7 @@ public class MuPDFGui : System.Windows.Forms.Form
         }
         catch (System.Exception e)
         {
-            System.Console.WriteLine("Failed to open: " + path);
+            System.Console.WriteLine("Failed to open: " + path + " becase: " + e);
             return;
         }
         this.goto_page(0, 0);
