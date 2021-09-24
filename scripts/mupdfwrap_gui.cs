@@ -44,6 +44,7 @@ public class MuPDFGui : System.Windows.Forms.Form
 
         this.picture_box = new System.Windows.Forms.PictureBox();
         this.picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+        this.AutoScroll = true;
 
         Controls.Add(picture_box);
 
@@ -55,9 +56,12 @@ public class MuPDFGui : System.Windows.Forms.Form
         System.Console.WriteLine("Open() called");
         var dialog = new System.Windows.Forms.OpenFileDialog();
         var result = dialog.ShowDialog();
+        System.Console.WriteLine("result=" + result);
         if (result == System.Windows.Forms.DialogResult.OK)
         {
+            System.Console.WriteLine("dialog.FileName=" + dialog.FileName);
             this.open_file(dialog.FileName);
+            System.Console.WriteLine("called open_file()");
         }
     }
 
@@ -105,7 +109,8 @@ public class MuPDFGui : System.Windows.Forms.Form
 
         /* For now we always use 'fit width' view semantics. */
         var page_rect = this.page.bound_page();
-        z *= this.Width / (page_rect.x1 - page_rect.x0);
+        var vscroll_width = System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+        z *= (this.ClientSize.Width - vscroll_width) / (page_rect.x1 - page_rect.x0);
 
         if (System.Type.GetType("Mono.Runtime") != null)
         {
