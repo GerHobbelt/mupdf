@@ -20,6 +20,7 @@ public class MuPDFGui : System.Windows.Forms.Form
     System.Drawing.Bitmap           bitmap;
     System.Windows.Forms.PictureBox picture_box;
 
+    // Need STAThread here otherwise OpenFileDialog hangs.
     [System.STAThread]
     public static void Main()
     {
@@ -54,15 +55,11 @@ public class MuPDFGui : System.Windows.Forms.Form
 
     public void open(System.Object sender, System.EventArgs e)
     {
-        System.Console.WriteLine("Open() called");
         var dialog = new System.Windows.Forms.OpenFileDialog();
         var result = dialog.ShowDialog();
-        System.Console.WriteLine("result=" + result);
         if (result == System.Windows.Forms.DialogResult.OK)
         {
-            System.Console.WriteLine("dialog.FileName=" + dialog.FileName);
             this.open_file(dialog.FileName);
-            System.Console.WriteLine("called open_file()");
         }
     }
 
