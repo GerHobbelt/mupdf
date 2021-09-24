@@ -9,6 +9,7 @@ public class MuPDFGui : System.Windows.Forms.Form
     private System.Windows.Forms.MainMenu menu;
     private System.Windows.Forms.MenuItem menu_item_file;
     private int page_number = 0;
+    int zoom_scale = 0;
     private double zoom = 0;
     int zoom_multiple = 4;
     mupdf.Document  document;
@@ -69,21 +70,25 @@ public class MuPDFGui : System.Windows.Forms.Form
         System.Windows.Forms.Application.Exit();
     }
 
-    public void GotoPage(int width=0, int height=0, int page_number=0, double zoom=0)
+    public void GotoPage(int width=0, int height=0, int page_number=0, double zoom_delta=0)
     {
+        System.Console.WriteLine("GotoPage(): zoom=" + zoom + " zoom_delta=" + zoom_delta);
         if (page_number == 0)   page_number = this.page_number;
-        if (zoom == 0)  zoom = this.zoom;
         if (page_number < 0 || page_number >= document.count_pages()) return;
+        zoom += zoom_delta;
+        System.Console.WriteLine("GotoPage(): zoom=" + zoom);
+        //if (zoom == 0)  zoom = this.zoom;
         page = document.load_page(page_number);
         var page_rect = page.bound_page();
         double z = System.Math.Pow(2, zoom / zoom_multiple);
-        if (width == 0)     width = picture_box.Right;
-        if (height == 0)    height = picture_box.Bottom;
+        if (width == 0)     width = Width;
+        if (height == 0)    height = Height;
         /* For now we always use 'fit width' view semantics. */
-        z *= width / (page_rect.x1 - page_rect.x0);
+        var zz = z * width / (page_rect.x1 - page_rect.x0);
+        System.Console.WriteLine("GotoPage(): width=" + width + " height=" + height + " zoom=" + zoom + " z=" + z + " zz=" + zz);
 
-        mupdf.Rect rect = page.bound_page();
-        System.Console.WriteLine("rect: " + rect);
+        //mupdf.Rect rect = page.bound_page();
+        //System.Console.WriteLine("rect: " + rect);
 
         if (System.Type.GetType("Mono.Runtime") != null)
         {
@@ -94,12 +99,24 @@ public class MuPDFGui : System.Windows.Forms.Form
             alpha=1, and C#'s Format32bppRgb. Other combinations,
             e.g. (Fixed_RGB with alpha=0) and Format24bppRgb, result in a
             blank display. */
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Reset();
+            stopwatch.Start();
             pixmap = page.new_pixmap_from_page_contents(
-                    new mupdf.Matrix((float) z, 0, 0, (float) z, 0, 0),
+                    new mupdf.Matrix((float) zz, 0, 0, (float) zz, 0, 0),
                     new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
                     1 /*alpha*/
                     );
+            stopwatch.Stop();
+            var t_pixmap = stopwatch.Elapsed;
 
+            stopwatch.Reset();
+            stopwatch.Start();
+            stopwatch.Stop();
+            var t_test = stopwatch.Elapsed;
+
+            stopwatch.Reset();
+            stopwatch.Start();
             bitmap = new System.Drawing.Bitmap(
                     pixmap.pixmap_width(),
                     pixmap.pixmap_height(),
@@ -107,11 +124,25 @@ public class MuPDFGui : System.Windows.Forms.Form
                     System.Drawing.Imaging.PixelFormat.Format32bppRgb,
                     (System.IntPtr) pixmap.pixmap_samples_int()
                     );
+            stopwatch.Stop();
+            var t_bitmap = stopwatch.Elapsed;
 
-            if (true)
+            stopwatch.Reset();
+            stopwatch.Start();
+            if (false)
             {
+                // This is slow for large pixmaps/bitmaps.
                 Check(pixmap, bitmap, 4);
             }
+            stopwatch.Stop();
+            var t_check = stopwatch.Elapsed;
+
+            System.Console.WriteLine(""
+                    + " t_pixmap=" + t_pixmap
+                    + " t_test=" + t_test
+                    + " t_bitmap=" + t_bitmap
+                    + " t_check=" + t_check
+                    );
         }
         else
         {
@@ -158,10 +189,50 @@ public class MuPDFGui : System.Windows.Forms.Form
     private void HandleResize(object sender, System.EventArgs e)
     {
         var control = (System.Windows.Forms.Control) sender;
-        System.Console.WriteLine("resize: control:     (" + control.Size.Width + " " + control.Size.Height + ")");
+        /*System.Console.WriteLine("resize: control:     (" + control.Size.Width + " " + control.Size.Height + ")");
         System.Console.WriteLine("        picture_box: (" + picture_box.Right + " " + picture_box.Height + ")");
+        */
         GotoPage(control.Size.Width, control.Size.Height);
     }
+
+    private void HandleKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+    {
+        System.Console.WriteLine("HandleKeyDown: " + e.KeyCode);
+        if (e.Shift && e.KeyCode == System.Windows.Forms.Keys.PageUp)
+        {
+            System.Console.WriteLine("HandleKeyDown: shift-pageup");
+            GotoPage(0, 0, page_number - 1);
+        }
+        else if (e.Shift && e.KeyCode == System.Windows.Forms.Keys.PageDown)
+        {
+            System.Console.WriteLine("HandleKeyDown: shift-pagedown");
+            GotoPage(0, 0, page_number + 1);
+        }
+        else if (e.KeyCode == System.Windows.Forms.Keys.D0)
+        {
+            System.Console.WriteLine("HandleKeyDown: 0: zoom=" + zoom);
+            GotoPage(0, 0, page_number, -zoom);
+        }
+        else if (e.KeyCode == System.Windows.Forms.Keys.Add
+                || e.KeyCode == System.Windows.Forms.Keys.Oemplus
+                )
+        {
+            System.Console.WriteLine("HandleKeyDown: +");
+            GotoPage(0, 0, page_number, +1);
+        }
+        else if (e.KeyCode == System.Windows.Forms.Keys.Subtract
+                || e.KeyCode == System.Windows.Forms.Keys.OemMinus)
+        {
+            System.Console.WriteLine("HandleKeyDown: -");
+            GotoPage(0, 0, page_number, -1);
+        }
+        //GotoPage(control.Size.Width, control.Size.Height);
+    }
+
+    /*private void HandleKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+    {
+        System.Console.WriteLine("HandleKeyPress: " + e.KeyChar);
+    }*/
 
     public MuPDFGui()
     {
@@ -178,6 +249,7 @@ public class MuPDFGui : System.Windows.Forms.Form
         this.Menu = menu;
 
         Resize += HandleResize;
+        KeyDown += HandleKeyDown;
 
         picture_box = new System.Windows.Forms.PictureBox();
         picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
