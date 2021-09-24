@@ -9,7 +9,8 @@ public class MuPDFGui : System.Windows.Forms.Form
     private System.Windows.Forms.MainMenu menu;
     private System.Windows.Forms.MenuItem menu_item_file;
     private int page_number = 0;
-    private float zoom = 1;
+    private double zoom = 0;
+    int zoom_multiple = 4;
     mupdf.Document  document;
     mupdf.Page page;
     System.Drawing.Bitmap bitmap;
@@ -68,16 +69,19 @@ public class MuPDFGui : System.Windows.Forms.Form
         System.Windows.Forms.Application.Exit();
     }
 
-    public void GotoPage(int page_number=0, float zoom=0)
+    public void GotoPage(int page_number=0, double zoom=0)
     {
         if (page_number == 0)   page_number = this.page_number;
         if (zoom == 0)  zoom = this.zoom;
-
+        if (page_number < 0 || page_number >= document.count_pages()) return;
         page = document.load_page(page_number);
+        var page_rect = page.bound_page();
+        double z = System.Math.Pow(2, zoom / zoom_multiple);
+        /* For now we always use 'fit width' view semantics. */
+        z *= picture_box.Right / (page_rect.x1 - page_rect.x0);
 
         mupdf.Rect rect = page.bound_page();
         System.Console.WriteLine("rect: " + rect);
-
 
         if (System.Type.GetType("Mono.Runtime") != null)
         {
@@ -89,7 +93,7 @@ public class MuPDFGui : System.Windows.Forms.Form
             e.g. (Fixed_RGB with alpha=0) and Format24bppRgb, result in a
             blank display. */
             pixmap = page.new_pixmap_from_page_contents(
-                    new mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                    new mupdf.Matrix((float) z, 0, 0, (float) z, 0, 0),
                     new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
                     1 /*alpha*/
                     );
