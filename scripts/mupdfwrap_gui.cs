@@ -59,7 +59,7 @@ public class MuPDFGui : System.Windows.Forms.Form
     public void Quit(System.Object sender, System.EventArgs e)
     {
         System.Console.WriteLine("Quit() called");
-        throw new System.Exception("Exiting");
+        System.Windows.Forms.Application.Exit();
     }
 
     public MuPDFGui()
