@@ -8,50 +8,48 @@ public class MuPDFGui : System.Windows.Forms.Form
 
     private System.Windows.Forms.MainMenu menu;
     private System.Windows.Forms.MenuItem menu_item_file;
-    private int page_number = 0;
-    int zoom_scale = 0;
-    private double zoom = 0;
-    int zoom_multiple = 4;
-    mupdf.Document  document;
-    mupdf.Page page;
-    System.Drawing.Bitmap bitmap;
+
+    /* Zooming works by incrementing self.zoom by +/- 1 then using
+    magnification = 2**(self.zoom/self.zoom_multiple). */
+    private int     zoom_multiple = 4;
+    private double  zoom = 0;
+    private int     page_number = 0;
+
+    mupdf.Document                  document;
+    mupdf.Page                      page;
+    System.Drawing.Bitmap           bitmap;
     System.Windows.Forms.PictureBox picture_box;
 
-    // Throws exception if pixmap and bitmap differ.
-    void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
+    public static void Main()
     {
-        long samples = pixmap.pixmap_samples_int();
-        if (pixmap.pixmap_width() != bitmap.Width || pixmap.pixmap_height() != bitmap.Height)
-        {
-            throw new System.Exception("Inconsistent sizes:"
-                    + " pixmap=(" + pixmap.pixmap_width() + " " + pixmap.pixmap_height()
-                    + " bitmap=(" + bitmap.Width + " " + bitmap.Height
-                    );
-        }
-        int stride = pixmap.pixmap_stride();
-        for (int x=0; x<bitmap.Width; x+=1)
-        {
-            for (int y=0; y<bitmap.Height; y+=1)
-            {
-                unsafe
+        System.Windows.Forms.Application.Run(new MuPDFGui());
+    }
+
+    public MuPDFGui()
+    {
+
+        menu_item_file = new System.Windows.Forms.MenuItem("File",
+                new System.Windows.Forms.MenuItem[]
                 {
-                    byte* sample = (byte*) samples + stride * y + pixmap_bytes_per_pixel * x;
-                    System.Drawing.Color color = bitmap.GetPixel( x, y);
-                    if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
-                    {
-                        string pixmap_pixel_text = "";
-                        for (int i=0; i<pixmap_bytes_per_pixel; ++i)
-                        {
-                            if (i > 0) pixmap_pixel_text += " ";
-                            pixmap_pixel_text += sample[i];
-                        }
-                        throw new System.Exception("Pixels differ: (" + x + " " + y + "):"
-                                + " pixmap: (" + pixmap_pixel_text + ")"
-                                + " bitmap: " + color);
-                    }
+                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.Open)),
+                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.ShowHtml)),
+                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.Quit))
                 }
-            }
-        }
+                );
+        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
+        this.Menu = menu;
+
+        Resize += HandleResize;
+        KeyDown += HandleKeyDown;
+
+        picture_box = new System.Windows.Forms.PictureBox();
+        picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+
+        // Load pdf document using mupdf.
+        document = new mupdf.Document("zlib.3.pdf");
+
+        Controls.Add(picture_box);
+        GotoPage(0, 0);
     }
 
     public void Open(System.Object sender, System.EventArgs e)
@@ -207,38 +205,40 @@ public class MuPDFGui : System.Windows.Forms.Form
         GotoPage(page_number, zoom);
     }
 
-    public MuPDFGui()
+    // Throws exception if pixmap and bitmap differ.
+    void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
     {
-
-        menu_item_file = new System.Windows.Forms.MenuItem("File",
-                new System.Windows.Forms.MenuItem[]
+        long samples = pixmap.pixmap_samples_int();
+        if (pixmap.pixmap_width() != bitmap.Width || pixmap.pixmap_height() != bitmap.Height)
+        {
+            throw new System.Exception("Inconsistent sizes:"
+                    + " pixmap=(" + pixmap.pixmap_width() + " " + pixmap.pixmap_height()
+                    + " bitmap=(" + bitmap.Width + " " + bitmap.Height
+                    );
+        }
+        int stride = pixmap.pixmap_stride();
+        for (int x=0; x<bitmap.Width; x+=1)
+        {
+            for (int y=0; y<bitmap.Height; y+=1)
+            {
+                unsafe
                 {
-                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.Open)),
-                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.ShowHtml)),
-                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.Quit))
+                    byte* sample = (byte*) samples + stride * y + pixmap_bytes_per_pixel * x;
+                    System.Drawing.Color color = bitmap.GetPixel( x, y);
+                    if (color.R != sample[0] || color.G != sample[1] || color.B != sample[2])
+                    {
+                        string pixmap_pixel_text = "";
+                        for (int i=0; i<pixmap_bytes_per_pixel; ++i)
+                        {
+                            if (i > 0) pixmap_pixel_text += " ";
+                            pixmap_pixel_text += sample[i];
+                        }
+                        throw new System.Exception("Pixels differ: (" + x + " " + y + "):"
+                                + " pixmap: (" + pixmap_pixel_text + ")"
+                                + " bitmap: " + color);
+                    }
                 }
-                );
-        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
-        this.Menu = menu;
-
-        Resize += HandleResize;
-        KeyDown += HandleKeyDown;
-
-        picture_box = new System.Windows.Forms.PictureBox();
-        picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-
-        // Load pdf document using mupdf.
-        document = new mupdf.Document("zlib.3.pdf");
-
-        Controls.Add(picture_box);
-        GotoPage(0, 0);
-    }
-
-    public static void Main()
-    {
-        System.Console.WriteLine("MuPDF C# gui test starting.");
-        System.Threading.Thread.CurrentThread.Name = "Main thread";
-        System.Windows.Forms.Application.Run(new MuPDFGui());
-        System.Console.WriteLine("MuPDF C# gui test finished.");
+            }
+        }
     }
 }
