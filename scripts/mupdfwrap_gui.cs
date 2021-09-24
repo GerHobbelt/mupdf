@@ -74,15 +74,12 @@ public class MuPDFGui : System.Windows.Forms.Form
     //
     // To preserve current page and/or zoom, use .page_number and/or .zoom.
     //
-    public void GotoPage(int page_number, double zoom, int width=0, int height=0)
+    public void GotoPage(int page_number, double zoom)
     {
         if (page_number < 0 || page_number >= document.count_pages())
         {
             return;
         }
-
-        if (width == 0)     width = Width;
-        if (height == 0)    height = Height;
 
         this.zoom = zoom;
         this.page_number = page_number;
@@ -92,7 +89,7 @@ public class MuPDFGui : System.Windows.Forms.Form
         var z = System.Math.Pow(2, zoom / zoom_multiple);
 
         /* For now we always use 'fit width' view semantics. */
-        z *= width / (page_rect.x1 - page_rect.x0);
+        z *= this.Width / (page_rect.x1 - page_rect.x0);
 
         if (System.Type.GetType("Mono.Runtime") != null)
         {
@@ -182,33 +179,31 @@ public class MuPDFGui : System.Windows.Forms.Form
         //System.Console.WriteLine("HandleKeyDown: " + e.KeyCode);
         if (e.Shift && e.KeyCode == System.Windows.Forms.Keys.PageUp)
         {
-            GotoPage(page_number - 1, zoom);
+            GotoPage(this.page_number - 1, this.zoom);
         }
         else if (e.Shift && e.KeyCode == System.Windows.Forms.Keys.PageDown)
         {
-            GotoPage(page_number + 1, zoom);
+            GotoPage(this.page_number + 1, this.zoom);
         }
         else if (e.KeyCode == System.Windows.Forms.Keys.D0)
         {
-            GotoPage(0, 0, page_number, 0);
+            GotoPage(this.page_number, 0);
         }
         else if (e.KeyCode == System.Windows.Forms.Keys.Add
                 || e.KeyCode == System.Windows.Forms.Keys.Oemplus
                 )
         {
-            GotoPage(page_number, zoom + 1);
+            GotoPage(this.page_number, this.zoom + 1);
         }
         else if (e.KeyCode == System.Windows.Forms.Keys.Subtract
                 || e.KeyCode == System.Windows.Forms.Keys.OemMinus)
         {
-            GotoPage(page_number, zoom - 1);
+            GotoPage(this.page_number, this.zoom - 1);
         }
     }
 
     private void HandleResize(object sender, System.EventArgs e)
     {
-        //var control = (System.Windows.Forms.Control) sender;
-        //System.Console.WriteLine("control.Size.Width=" + control.Size.Width + " Width=" + Width);
         GotoPage(page_number, zoom);
     }
 
