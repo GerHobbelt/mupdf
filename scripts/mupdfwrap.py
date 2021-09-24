@@ -7830,7 +7830,6 @@ def main():
                             ('test-csharp.cs', mupdf_cs),
                             out,
                             f'{csc} -out:{{OUT}} {{IN}}',
-                            force_rebuild=1,
                             )
                     if g_windows:
                         jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
