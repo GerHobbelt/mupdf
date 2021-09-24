@@ -8,6 +8,12 @@ public class MuPDFGui : System.Windows.Forms.Form
 
     private System.Windows.Forms.MainMenu menu;
     private System.Windows.Forms.MenuItem menu_item_file;
+    private int page_number = 0;
+    private float zoom = 1;
+    mupdf.Document  document;
+    mupdf.Page page;
+    System.Drawing.Bitmap bitmap;
+    System.Windows.Forms.PictureBox picture_box;
 
     // Throws exception if pixmap and bitmap differ.
     void Check(mupdf.Pixmap pixmap, System.Drawing.Bitmap bitmap, int pixmap_bytes_per_pixel)
@@ -62,31 +68,16 @@ public class MuPDFGui : System.Windows.Forms.Form
         System.Windows.Forms.Application.Exit();
     }
 
-    public MuPDFGui()
+    public void GotoPage(int page_number=0, float zoom=0)
     {
+        if (page_number == 0)   page_number = this.page_number;
+        if (zoom == 0)  zoom = this.zoom;
 
-        menu_item_file = new System.Windows.Forms.MenuItem("File",
-                new System.Windows.Forms.MenuItem[]
-                {
-                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.Open)),
-                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.ShowHtml)),
-                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.Quit))
-                }
-                );
-        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
-        this.Menu = menu;
-
-        System.Windows.Forms.PictureBox picture_box = new System.Windows.Forms.PictureBox();
-        picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-
-        // Load pdf document using mupdf.
-        mupdf.Document document = new mupdf.Document("zlib.3.pdf");
-        mupdf.Page page = document.load_page(0);
+        page = document.load_page(page_number);
 
         mupdf.Rect rect = page.bound_page();
         System.Console.WriteLine("rect: " + rect);
 
-        System.Drawing.Bitmap bitmap;
 
         if (System.Type.GetType("Mono.Runtime") != null)
         {
@@ -155,12 +146,34 @@ public class MuPDFGui : System.Windows.Forms.Form
                 Check(pixmap, bitmap, 3);
             }
         }
-
-        // Show bitmap in our window.
         picture_box.Image = bitmap;
+    }
+
+    public MuPDFGui()
+    {
+
+        menu_item_file = new System.Windows.Forms.MenuItem("File",
+                new System.Windows.Forms.MenuItem[]
+                {
+                    new System.Windows.Forms.MenuItem("&Open...", new System.EventHandler(this.Open)),
+                    new System.Windows.Forms.MenuItem("&Show html", new System.EventHandler(this.ShowHtml)),
+                    new System.Windows.Forms.MenuItem("&Quit", new System.EventHandler(this.Quit))
+                }
+                );
+        menu = new System.Windows.Forms.MainMenu(new System.Windows.Forms.MenuItem [] {menu_item_file});
+        this.Menu = menu;
+
+        picture_box = new System.Windows.Forms.PictureBox();
+        picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+
+        // Load pdf document using mupdf.
+        document = new mupdf.Document("zlib.3.pdf");
+        // Show bitmap in our window.
         Controls.Add(picture_box);
         Width = picture_box.Right;
         Height = picture_box.Bottom;
+
+        GotoPage();
     }
 
     public static void Main()
