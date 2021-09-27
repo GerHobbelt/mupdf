@@ -3084,6 +3084,7 @@ class Generated:
             self.c_functions            = from_pickle( f'{dirpath}/c_functions.pickle')
             self.c_globals              = from_pickle( f'{dirpath}/c_globals.pickle')
             self.container_classnames   = from_pickle( f'{dirpath}/container_classnames.pickle')
+            self.swig_cpp               = from_pickle( f'{dirpath}/swig_cpp.pickle')
             self.swig_cpp_csharp        = from_pickle( f'{dirpath}/swig_cpp_csharp.pickle')
             self.swig_cpp_python        = from_pickle( f'{dirpath}/swig_cpp_python.pickle')
             self.swig_csharp            = from_pickle( f'{dirpath}/swig_csharp.pickle')
@@ -3099,6 +3100,7 @@ class Generated:
             self.output_param_fns = []
             self.c_functions = []
             self.c_globals = []
+            self.swig_cpp = io.StringIO()
             self.swig_cpp_python = io.StringIO()
             self.swig_cpp_csharp = io.StringIO()
             self.swig_python = io.StringIO()
@@ -3108,17 +3110,18 @@ class Generated:
         '''
         Saves state to .pickle files, to be loaded later via __init__().
         '''
-        to_pickle( self.c_functions,                   f'{dirpath}/c_functions.pickle')
-        to_pickle( self.c_globals,                     f'{dirpath}/c_globals.pickle')
-        to_pickle( self.container_classnames,          f'{dirpath}/container_classnames.pickle')
-        to_pickle( self.swig_cpp_csharp.getvalue(),    f'{dirpath}/swig_cpp_csharp.pickle')
-        to_pickle( self.swig_cpp_python.getvalue(),    f'{dirpath}/swig_cpp_python.pickle')
-        to_pickle( self.swig_csharp.getvalue(),        f'{dirpath}/swig_csharp.pickle')
-        to_pickle( self.swig_python.getvalue(),        f'{dirpath}/swig_python.pickle')
-        to_pickle( self.to_string_structnames,         f'{dirpath}/to_string_structnames.pickle')
+        to_pickle( self.c_functions,                f'{dirpath}/c_functions.pickle')
+        to_pickle( self.c_globals,                  f'{dirpath}/c_globals.pickle')
+        to_pickle( self.container_classnames,       f'{dirpath}/container_classnames.pickle')
+        to_pickle( self.swig_cpp.getvalue(),        f'{dirpath}/swig_cpp.pickle')
+        to_pickle( self.swig_cpp_csharp.getvalue(), f'{dirpath}/swig_cpp_csharp.pickle')
+        to_pickle( self.swig_cpp_python.getvalue(), f'{dirpath}/swig_cpp_python.pickle')
+        to_pickle( self.swig_csharp.getvalue(),     f'{dirpath}/swig_csharp.pickle')
+        to_pickle( self.swig_python.getvalue(),     f'{dirpath}/swig_python.pickle')
+        to_pickle( self.to_string_structnames,      f'{dirpath}/to_string_structnames.pickle')
 
 
-def make_python_outparam_helpers(
+def make_outparam_helpers(
         tu,
         cursor,
         fnname,
@@ -3127,20 +3130,20 @@ def make_python_outparam_helpers(
         generated,
         ):
     '''
-    Create extra C++ and Python code to make tuple-returning wrapper of
+    Create extra C++, Python and C# code to make tuple-returning wrapper of
     specified function.
 
-    We write Python code to generated.swig_python and C++ code to
-    generated.swig_cpp_python.
+    We write the code to Python code to generated.swig_python and C++ code to
+    generated.swig_cpp.
     '''
     verbose = False
     main_name = rename.function(cursor.mangled_name)
-    generated.swig_cpp_python.write( '\n')
+    generated.swig_cpp.write( '\n')
 
     # Write struct.
-    generated.swig_cpp_python.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
-    generated.swig_cpp_python.write(f'typedef struct\n')
-    generated.swig_cpp_python.write( '{\n')
+    generated.swig_cpp.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
+    generated.swig_cpp.write(f'struct {main_name}_outparams\n')
+    generated.swig_cpp.write(f'{{\n')
     for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
@@ -3149,11 +3152,11 @@ def make_python_outparam_helpers(
             log( '{decl=}')
         assert arg.cursor.type.kind == clang.cindex.TypeKind.POINTER
         pointee = arg.cursor.type.get_pointee() #.get_canonical()
-        generated.swig_cpp_python.write(f'    {declaration_text( pointee, arg.name)};\n')
-    generated.swig_cpp_python.write(f'}} {main_name}_outparams;\n')
-    generated.swig_cpp_python.write('\n')
+        generated.swig_cpp.write(f'    {declaration_text( pointee, arg.name)};\n')
+    generated.swig_cpp.write(f'}};\n')
+    generated.swig_cpp.write('\n')
 
-    # decl.
+    # Write function definition.
     name_args = f'{main_name}_outparams_fn('
     sep = ''
     for arg in get_args( tu, cursor):
@@ -3164,30 +3167,28 @@ def make_python_outparam_helpers(
         sep = ', '
     name_args += f'{sep}{main_name}_outparams* outparams'
     name_args += ')'
-    generated.swig_cpp_python.write(declaration_text( cursor.result_type, name_args))
-    generated.swig_cpp_python.write('\n')
-
-    # body.
-    generated.swig_cpp_python.write('{\n')
+    generated.swig_cpp.write(declaration_text( cursor.result_type, name_args))
+    generated.swig_cpp.write('\n')
+    generated.swig_cpp.write('{\n')
     # Set all pointer fields to NULL.
     for arg in get_args( tu, cursor):
         if not arg.out_param:
             continue
         if arg.cursor.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
-            generated.swig_cpp_python.write(f'    outparams->{arg.name} = NULL;\n')
+            generated.swig_cpp.write(f'    outparams->{arg.name} = NULL;\n')
     # Make call.
-    generated.swig_cpp_python.write(f'    return {rename.function_call(cursor.mangled_name)}(')
+    generated.swig_cpp.write(f'    return {rename.function_call(cursor.mangled_name)}(')
     sep = ''
     for arg in get_args( tu, cursor):
-        generated.swig_cpp_python.write(sep)
+        generated.swig_cpp.write(sep)
         if arg.out_param:
-            generated.swig_cpp_python.write(f'&outparams->{arg.name}')
+            generated.swig_cpp.write(f'&outparams->{arg.name}')
         else:
-            generated.swig_cpp_python.write(f'{arg.name}')
+            generated.swig_cpp.write(f'{arg.name}')
         sep = ', '
-    generated.swig_cpp_python.write(');\n')
-    generated.swig_cpp_python.write('}\n')
-    generated.swig_cpp_python.write('\n')
+    generated.swig_cpp.write(');\n')
+    generated.swig_cpp.write('}\n')
+    generated.swig_cpp.write('\n')
 
     # Write python wrapper.
     generated.swig_python.write('')
@@ -3413,7 +3414,7 @@ def make_function_wrapper(
     out_cpp.write( '\n')
 
     if num_out_params:
-        make_python_outparam_helpers(
+        make_outparam_helpers(
                 tu,
                 cursor,
                 fnname,
@@ -6240,8 +6241,7 @@ def build_swig(
                 }}
                 '''
 
-    if language == 'python':
-        common += generated.swig_cpp_python
+    common += generated.swig_cpp
     if language == 'csharp':
         common += generated.swig_cpp_csharp
 
@@ -7338,13 +7338,13 @@ def build( build_dirs, swig, args):
 
                     # These are the input files to our g++ command:
                     #
-                    swig_cpp_python     = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
-                    swig_cpp_csharp     = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
-                    include1            = f'{build_dirs.dir_mupdf}/include'
-                    include2            = f'{build_dirs.dir_mupdf}/platform/c++/include'
+                    swig_cpp_python = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
+                    swig_cpp_csharp = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
+                    include1        = f'{build_dirs.dir_mupdf}/include'
+                    include2        = f'{build_dirs.dir_mupdf}/platform/c++/include'
 
-                    mupdf_so            = f'{build_dirs.dir_so}/libmupdf.so'
-                    mupdfcpp_so         = f'{build_dirs.dir_so}/libmupdfcpp.so'
+                    mupdf_so        = f'{build_dirs.dir_so}/libmupdf.so'
+                    mupdfcpp_so     = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
                     if build_python:
                         out_so = f'{build_dirs.dir_so}/_mupdf.so'
