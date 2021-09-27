@@ -2999,6 +2999,8 @@ def is_pointer_to( type_, destination, verbose=False):
         assert isinstance( type_, clang.cindex.Type)
         ret = None
         destination = clip( destination, 'struct ')
+        if verbose:
+            jlib.log('{type_.kind=}')
         if type_.kind == clang.cindex.TypeKind.POINTER:
             pointee = type_.get_pointee().get_canonical()
 
@@ -3007,6 +3009,8 @@ def is_pointer_to( type_, destination, verbose=False):
             d = declaration_text( pointee, '')
             d = clip( d, 'const ')
             d = clip( d, 'struct ')
+            if verbose:
+                jlib.log('{d=}')
             ret = d == f'{destination} ' or d == f'const {destination} '
         is_pointer_to_cache[ key] = ret
 
@@ -3190,51 +3194,127 @@ def make_outparam_helpers(
     generated.swig_cpp.write('}\n')
     generated.swig_cpp.write('\n')
 
-    # Write python wrapper.
-    generated.swig_python.write('')
-    generated.swig_python.write(f'def {main_name}(')
-    sep = ''
-    for arg in get_args( tu, cursor):
-        if arg.out_param:
-            continue
-        generated.swig_python.write(f'{sep}{arg.name_python}')
-        sep = ', '
-    generated.swig_python.write('):\n')
-    generated.swig_python.write(f'    """\n')
-    generated.swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
-    sep = ''
-    generated.swig_python.write(f'    Returns: ')
     return_void = cursor.result_type.spelling == 'void'
-    sep = ''
-    if not return_void:
-        generated.swig_python.write( f'{cursor.result_type.spelling}')
-        sep = ', '
-    for arg in get_args( tu, cursor):
-        if arg.out_param:
-            generated.swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
+
+    if 1:
+        # Write python wrapper.
+        generated.swig_python.write('')
+        generated.swig_python.write(f'def {main_name}(')
+        sep = ''
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                continue
+            generated.swig_python.write(f'{sep}{arg.name_python}')
             sep = ', '
-    generated.swig_python.write(f'\n')
-    generated.swig_python.write(f'    """\n')
-    generated.swig_python.write(f'    outparams = {main_name}_outparams()\n')
-    generated.swig_python.write(f'    ret = {main_name}_outparams_fn(')
-    sep = ''
-    for arg in get_args( tu, cursor):
-        if arg.out_param:
-            continue
-        generated.swig_python.write(f'{sep}{arg.name_python}')
-        sep = ', '
-    generated.swig_python.write(f'{sep}outparams)\n')
-    generated.swig_python.write(f'    return ')
-    sep = ''
-    if not return_void:
-        generated.swig_python.write(f'ret')
-        sep = ', '
-    for arg in get_args( tu, cursor):
-        if arg.out_param:
-            generated.swig_python.write(f'{sep}outparams.{arg.name_python}')
+        generated.swig_python.write('):\n')
+        generated.swig_python.write(f'    """\n')
+        generated.swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
+        sep = ''
+        generated.swig_python.write(f'    Returns: ')
+        sep = ''
+        if not return_void:
+            generated.swig_python.write( f'{cursor.result_type.spelling}')
             sep = ', '
-    generated.swig_python.write('\n')
-    generated.swig_python.write('\n')
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                generated.swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
+                sep = ', '
+        generated.swig_python.write(f'\n')
+        generated.swig_python.write(f'    """\n')
+        generated.swig_python.write(f'    outparams = {main_name}_outparams()\n')
+        generated.swig_python.write(f'    ret = {main_name}_outparams_fn(')
+        sep = ''
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                continue
+            generated.swig_python.write(f'{sep}{arg.name_python}')
+            sep = ', '
+        generated.swig_python.write(f'{sep}outparams)\n')
+        generated.swig_python.write(f'    return ')
+        sep = ''
+        if not return_void:
+            generated.swig_python.write(f'ret')
+            sep = ', '
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                generated.swig_python.write(f'{sep}outparams.{arg.name_python}')
+                sep = ', '
+        generated.swig_python.write('\n')
+        generated.swig_python.write('\n')
+
+    if 1:
+        # Write C# wrapper.
+        def write(text):
+            generated.swig_csharp.write(text)
+        write(f'// C# helper for {fnname} wrapper outparams.\n')
+        num_return_values = 0 if return_void else 1
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                num_return_values += 1
+        assert num_return_values
+        def csharp_declaration_text(type_, name):
+            if ( is_pointer_to(type_, 'char')
+                    or is_pointer_to(type_, 'unsigned char')
+                    or is_pointer_to(type_, 'signed char')
+                    ):
+                return f'string {name}'
+            return declaration_text(type_, name);
+        if num_return_values == 1:
+            if return_void:
+                for arg in get_args( tu, cursor):
+                    if arg.out_param:
+                        write( csharp_declaration_text( arg.cursor.type.get_pointee(), ""))
+            else:
+                write(f'{declaration_text(cursor.result_type, "")}')
+        else:
+            write('(')
+            sep = ''
+            if not return_void:
+                write(f'{csharp_declaration_text(cursor.result_type, "")}')
+                sep = ', '
+            for arg in get_args( tu, cursor):
+                if arg.out_param:
+                    jlib.log('{fnname=} {arg.cursor.type.spelling=}')
+                    jlib.log('{fnname=} {arg.cursor.type.get_pointee().spelling=}')
+                    write( f'{sep}{csharp_declaration_text( arg.cursor.type.get_pointee(), "")}')
+                    sep = ', '
+            write(f')')
+        write(f' {main_name}(')
+        sep = ''
+        for arg in get_args( tu, cursor):
+            if not arg.out_param:
+                write(f'{sep}{csharp_declaration_text( arg.cursor.type, arg.name)}')
+                sep = ', '
+        write(f')\n')
+        write(f'{{\n')
+        write(f'    outparams = {main_name}_outparams();\n')
+        write(f'    ')
+        if not return_void:
+            write(f'var ret = ')
+        write(f'{main_name}_outparams_fn(')
+        sep = ''
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                continue
+            write(f'{sep}{arg.name_python}')
+            sep = ', '
+        write(f'{sep} outparams);\n')
+        write(f'    return ')
+        if num_return_values > 1:
+            write(f'(')
+        sep = ''
+        if not return_void:
+            write(f'ret')
+            sep = ', '
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                write(f'{sep}outparams.{arg.name_python}')
+                sep = ', '
+        if num_return_values > 1:
+            write(')')
+        write(';\n')
+        write(f'}}\n')
+        write('\n')
 
 
 def make_python_class_method_outparam_override(
@@ -6519,8 +6599,12 @@ def build_swig(
 
         text += '%}\n'
 
-    if language == 'csharp':
+    if 0 and language == 'csharp':
+        text += textwrap.dedent(f'''
+                %csharpcode %{{
+                ''')
         text += generated.swig_csharp
+        text += f'%}}\n'
 
     if 1:   # lgtm [py/constant-conditional-expression]
         # This is a horrible hack to avoid swig failing because
@@ -6669,6 +6753,8 @@ def build_swig(
         jlib.log('{len(cs)=}')
         jlib.log('{len(cs2)=}')
         assert cs2 != cs, f'Failed to add toString() methods.'
+        jlib.log('{len(generated.swig_csharp)=}')
+        cs2 += generated.swig_csharp
         jlib.update_file(cs2, f'{build_dirs.dir_so}/mupdf.cs')
         #jlib.copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
         jlib.log('{rebuilt=}')
