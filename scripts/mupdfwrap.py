@@ -3287,7 +3287,7 @@ def make_outparam_helpers(
         #
         make_csharp_wrapper = False
 
-    if 0 and make_csharp_wrapper:
+    if 1 and make_csharp_wrapper:
         # Write C# wrapper.
         def write(text):
             generated.swig_csharp.write(text)
@@ -3317,18 +3317,17 @@ def make_outparam_helpers(
                     ):
                 return f'string {name}'
             ret = clip(declaration_text(arg.cursor.type, name), 'const ');
-            ret = ret.replace('size_t', 'int')
+            ret = ret.replace('size_t', 'uint')
             return ret
         write(f'        public static ')
         if 1:
-            # We return a tuple.
+            # Generate the returned tuple.
             if num_return_values > 1:
                 write('(')
             sep = ''
             if not return_void:
-
                 # dulicates some code in get_args().
-                alt = None
+                return_alt = None
                 base_type = get_base_type( cursor.result_type)
                 base_type_cursor = base_type.get_declaration()
                 base_typename = get_base_typename( base_type)
@@ -3338,14 +3337,14 @@ def make_outparam_helpers(
                         # E.g. we don't have access to defintion of fz_separation,
                         # but it is marked in classextras with opaque=true, so
                         # there will be a wrapper class.
-                        alt = base_type_cursor
+                        return_alt = base_type_cursor
                     elif (1
                             and base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL
                             #and base_type_cursor.is_definition()
                             ):
-                        alt = base_type_cursor
-                if alt:
-                       write(f'{rename.class_(alt.type.spelling)}')
+                        return_alt = base_type_cursor
+                if return_alt:
+                       write(f'{rename.class_(return_alt.type.spelling)}')
                 else:
                     if (is_pointer_to(cursor.result_type, 'char')
                             or is_pointer_to(cursor.result_type, 'unsigned char')
@@ -3354,8 +3353,10 @@ def make_outparam_helpers(
                         text = 'string'
                     else:
                         text = declaration_text(cursor.result_type, '').strip()
-                        if text in ('size_t', 'int16_t', 'int64_t'):
+                        if text in ('int16_t', 'int64_t'):
                             text = 'int'
+                        if text in ('size_t',):
+                            text = 'uint'
                     write(f'{text}')
                 sep = ', '
             for arg in get_args( tu, cursor):
@@ -3381,6 +3382,7 @@ def make_outparam_helpers(
                     sep = ', '
             if num_return_values > 1:
                 write(')')
+        # Generate function name and params.
         write(f' fn(')
         sep = ''
         for arg in get_args( tu, cursor):
@@ -3397,13 +3399,16 @@ def make_outparam_helpers(
             else:
                 text = declaration_text(arg.cursor.type, arg.name_csharp).strip()
                 text = clip(text, 'const ')
-                text = text.replace('size_t ', 'int ')
+                text = text.replace('size_t ', 'uint ')
                 write(text)
             sep = ', '
         write(f')\n')
+        # Function body.
         write(f'        {{\n')
+        # Create local outparams struct.
         write(f'            var outparams = new {main_name}_outparams();\n')
         write(f'            ')
+        # Generate function call.
         if not return_void:
             write(f'var ret = ')
         write(f'mupdf.{main_name}_outparams_fn(')
@@ -3417,12 +3422,16 @@ def make_outparam_helpers(
                 write('.internal_()' if extras.pod else '.m_internal')
             sep = ', '
         write(f'{sep}outparams);\n')
+        # Generate return statement. fixme: need to construct wrapping classes for the raw fz_* ptrs.
         write(f'            return ')
         if num_return_values > 1:
             write(f'(')
         sep = ''
         if not return_void:
-            write(f'ret')
+            if return_alt:
+                write(f'new {rename.class_(return_alt.type.spelling)}(ret)')
+            else:
+                write(f'ret')
             sep = ', '
         for arg in get_args( tu, cursor):
             if arg.out_param:
@@ -3434,7 +3443,10 @@ def make_outparam_helpers(
                         ):
                     write(f'new string(outparams.{arg.name_csharp})')
                 else:
-                    write(f'outparams.{arg.name_csharp}')
+                    if arg.alt:
+                        write(f'{rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
+                    else:
+                        write(f'outparams.{arg.name_csharp}')
                 sep = ', '
         if num_return_values > 1:
             write(')')
@@ -8067,6 +8079,8 @@ def main():
                                                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                                                     new mupdf.Cookie()
                                                     );
+                                            var data = buffer.buffer_extract();
+                                            Console.WriteLine("mupdf.buffer_extract() returned: " + data);
                                             //var outparams = new mupdf.buffer_extract_outparams();
                                             //var n = mupdf.buffer_extract_outparams_fn(buffer, outparams);
                                             //Console.WriteLine("buffer_extract_outparams_fn() returned n=" + n + " outparams=" + outparams);
