@@ -3592,11 +3592,12 @@ def make_function_wrapper(
         if arg.out_param:
             decl = ''
             decl += '\n'
-            decl += '#ifdef SWIG\n'
-            decl += '    ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
-            decl += '#else\n'
-            decl += '    ' + declaration_text( arg.cursor.type, arg.name) + '\n'
-            decl += '#endif\n'
+            decl += '        #ifdef SWIG\n'
+            decl += '            ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
+            decl += '        #else\n'
+            decl += '            ' + declaration_text( arg.cursor.type, arg.name) + '\n'
+            decl += '        #endif\n'
+            decl += '        '
         else:
             decl = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
         if verbose:
@@ -4828,7 +4829,16 @@ def class_write_method(
             decl_cpp += f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
         else:
             logx( '{arg.spelling=}')
-            decl_h += declaration_text( arg.cursor.type, arg.name)
+            if arg.out_param:
+                decl_h += '\n'
+                decl_h += '            #ifdef SWIG\n'
+                decl_h += '                ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
+                decl_h += '            #else\n'
+                decl_h += '                ' + declaration_text( arg.cursor.type, arg.name) + '\n'
+                decl_h += '            #endif\n'
+                decl_h += '            '
+            else:
+                decl_h += declaration_text( arg.cursor.type, arg.name)
             decl_cpp += declaration_text( arg.cursor.type, arg.name)
         comma = ', '
 
@@ -6515,6 +6525,8 @@ def build_swig(
 
             %include "typemaps.i"
             %include "cpointer.i"
+            //%include "cstrings.i"
+            //%cstring_output_allocate(char **OUTPUT, free($1));
 
             %{{
             {common}
@@ -6526,6 +6538,9 @@ def build_swig(
             %include cdata.i
             %include std_vector.i
             {"%include argcargv.i" if language=="python" else ""}
+
+            %include <cstring.i>
+            %cstring_output_allocate(char **OUTPUT, free($1));
 
             namespace std
             {{
