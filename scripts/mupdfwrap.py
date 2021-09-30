@@ -3287,10 +3287,21 @@ def make_outparam_helpers(
         #
         make_csharp_wrapper = False
 
-    if make_csharp_wrapper:
+    if 0 and make_csharp_wrapper:
         # Write C# wrapper.
         def write(text):
             generated.swig_csharp.write(text)
+        def special_declaration_text(type_, name):
+            if (is_pointer_to(cursor.result_type, 'char')
+                    or is_pointer_to(cursor.result_type, 'unsigned char')
+                    or is_pointer_to(cursor.result_type, 'signed char')
+                    ):
+                return 'string'
+            if text in ('int16_t', 'int64_t'):
+                return 'int'
+            if text in ('size_t',):
+                return 'uint'
+
         write(f'// C# helper for {fnname} wrapper outparams.\n')
         write(f'namespace mupdf {{\n')
         write(f'    public class {main_name}_outparams_helper {{\n')
@@ -3361,8 +3372,10 @@ def make_outparam_helpers(
                             write( f'string')
                         else:
                             text = declaration_text(type_, '').strip()
-                            if text in ('size_t', 'int16_t', 'int64_t'):
+                            if text in ('int16_t', 'int64_t'):
                                 text = 'int'
+                            if text in ('size_t',):
+                                text = 'uint'
                             write( text)
                             #write( f'/*arg.alt false*/')
                     sep = ', '
@@ -3576,7 +3589,16 @@ def make_function_wrapper(
             continue
         if arg.out_param:
             num_out_params += 1
-        decl = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
+        if arg.out_param:
+            decl = ''
+            decl += '\n'
+            decl += '#ifdef SWIG\n'
+            decl += '    ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
+            decl += '#else\n'
+            decl += '    ' + declaration_text( arg.cursor.type, arg.name) + '\n'
+            decl += '#endif\n'
+        else:
+            decl = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
         if verbose:
             log( '{decl=}')
         name_args_h += f'{comma}{decl}'
@@ -6413,6 +6435,9 @@ def build_swig(
     #
     common = f'''
             #include <stdexcept>
+            //#ifndef SWIG
+            //    #define SWIG
+            //#endif
             #include "mupdf/functions.h"
 
             #include "mupdf/classes.h"
@@ -8027,9 +8052,9 @@ def main():
                                                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                                                     new mupdf.Cookie()
                                                     );
-                                            var outparams = new mupdf.buffer_extract_outparams();
-                                            var n = mupdf.buffer_extract_outparams_fn(buffer, outparams);
-                                            Console.WriteLine("buffer_extract_outparams_fn() returned n=" + n + " outparams=" + outparams);
+                                            //var outparams = new mupdf.buffer_extract_outparams();
+                                            //var n = mupdf.buffer_extract_outparams_fn(buffer, outparams);
+                                            //Console.WriteLine("buffer_extract_outparams_fn() returned n=" + n + " outparams=" + outparams);
 
                                             Console.WriteLine("MuPDF C# test finished.");
                                         }
