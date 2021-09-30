@@ -3444,9 +3444,13 @@ def make_outparam_helpers(
                     write(f'new string(outparams.{arg.name_csharp})')
                 else:
                     if arg.alt:
-                        write(f'{rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
+                        write(f'new {rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
                     else:
-                        write(f'outparams.{arg.name_csharp}')
+                        pointee = arg.cursor.type.get_pointee().spelling
+                        if pointee == 'int64_t':
+                            write(f'(int) outparams.{arg.name_csharp}')
+                        else:
+                            write(f'outparams.{arg.name_csharp}')
                 sep = ', '
         if num_return_values > 1:
             write(')')
