@@ -3309,13 +3309,6 @@ def make_outparam_helpers(
             ret = ret.replace('size_t', 'int')
             return ret
         write(f'        public static ')
-        #if num_return_values == 1:
-        #    if return_void:
-        #        for arg in get_args( tu, cursor):
-        #            if arg.out_param:
-        #                write( csharp_declaration_text( arg, ''))
-        #    else:
-        #        write(f'{declaration_text(cursor.result_type, "")}')
         if 1:
             # We return a tuple.
             if num_return_values > 1:
@@ -3375,8 +3368,6 @@ def make_outparam_helpers(
                     sep = ', '
             if num_return_values > 1:
                 write(')')
-            #write(f')')
-        # Write fn(...).
         write(f' fn(')
         sep = ''
         for arg in get_args( tu, cursor):
@@ -3402,14 +3393,17 @@ def make_outparam_helpers(
         write(f'            ')
         if not return_void:
             write(f'var ret = ')
-        write(f'{main_name}_outparams_fn(')
+        write(f'mupdf.{main_name}_outparams_fn(')
         sep = ''
         for arg in get_args( tu, cursor):
             if arg.out_param:
                 continue
             write(f'{sep}{arg.name_csharp}')
+            if arg.alt:
+                extras = get_fz_extras(arg.alt.type.spelling)
+                write('.internal_()' if extras.pod else '.m_internal')
             sep = ', '
-        write(f'{sep} outparams);\n')
+        write(f'{sep}outparams);\n')
         write(f'            return ')
         if num_return_values > 1:
             write(f'(')
@@ -3419,7 +3413,15 @@ def make_outparam_helpers(
             sep = ', '
         for arg in get_args( tu, cursor):
             if arg.out_param:
-                write(f'{sep}outparams.{arg.name_csharp}')
+                write(f'{sep}')
+                type_ = arg.cursor.type.get_pointee()
+                if (is_pointer_to(type_, 'char')
+                        or is_pointer_to(type_, 'unsigned char')
+                        or is_pointer_to(type_, 'signed char')
+                        ):
+                    write(f'new string(outparams.{arg.name_csharp})')
+                else:
+                    write(f'outparams.{arg.name_csharp}')
                 sep = ', '
         if num_return_values > 1:
             write(')')
