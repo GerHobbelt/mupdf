@@ -2711,6 +2711,8 @@ def declaration_text( type_, name, nest=0, name_is_simple=True, arg_names=False,
         for internal diagnostics.
     name_is_simple:
         true iff <name> is an identifier.
+    arg_names:
+        fixme: looks to be unused...?
 
     If name_is_simple is false, we surround <name> with (...) if type is a
     function.
@@ -2829,6 +2831,8 @@ class Arg:
             double pointer, or arg is pointer other than to char.
         .name_python:
             Same as .name or .name+'_' if .name is a Python keyword.
+        .name_csharp:
+            Same as .name or .name+'_' if .name is a C# keyword.
     '''
     def __init__(self, cursor, name, separator, alt, out_param):
         self.cursor = cursor
@@ -2840,6 +2844,7 @@ class Arg:
             self.name_python = f'{name}_'
         else:
             self.name_python = name
+        self.name_csharp = f'{name}_' if name in ('out', 'is', 'in') else name
 
     def __str__(self):
         return f'Arg(cursor={self.cursor} name={self.name} alt={self.alt} out_param={self.out_param})'
@@ -3003,14 +3008,11 @@ def is_pointer_to( type_, destination, verbose=False):
             jlib.log('{type_.kind=}')
         if type_.kind == clang.cindex.TypeKind.POINTER:
             pointee = type_.get_pointee().get_canonical()
-
-            if verbose:
-                jlib.log( "{declaration_text( pointee, '')!r=} {destination + ' '!r=}")
             d = declaration_text( pointee, '')
             d = clip( d, 'const ')
             d = clip( d, 'struct ')
             if verbose:
-                jlib.log('{d=}')
+                jlib.log( '{destination!r=} {d!r=}')
             ret = d == f'{destination} ' or d == f'const {destination} '
         is_pointer_to_cache[ key] = ret
 
@@ -3242,53 +3244,162 @@ def make_outparam_helpers(
         generated.swig_python.write('\n')
         generated.swig_python.write('\n')
 
-    if 1:
+    make_csharp_wrapper = True
+    if fnname in (
+            'clamp_color_outparams_helper',
+            'convert_color',
+            'convert_color_outparams_helper',
+            'convert_separation_colors',
+            'convert_separation_colors_outparams_helper',
+            'ppdf_annot_MK_BC',
+            'ppdf_annot_MK_BG',
+            'ppdf_annot_color',
+            'ppdf_annot_default_appearance',
+            'ppdf_annot_interior_color',
+            'ppdf_annot_line_ending_styles',
+            'ppdf_decode_cmap',
+            'ppdf_eval_function',
+            'ppdf_lookup_cmap_full',
+            'ppdf_map_one_to_many',
+            'ppdf_map_one_to_many_outparams_helper',
+            'ppdf_parse_default_appearance',
+            'ppdf_walk_tree',
+            'clamp_color',
+            'deflate',
+            'new_image_of_size',
+            'open_file_ptr_no_close',
+            ):
+        make_csharp_wrapper = False
+    if fnname.startswith('drop_'):
+        make_csharp_wrapper = False
+    if fnname.startswith('keep_'):
+        make_csharp_wrapper = False
+
+    num_return_values = 0 if return_void else 1
+    for arg in get_args( tu, cursor):
+        if arg.out_param:
+            num_return_values += 1
+    assert num_return_values
+
+    if num_return_values > 7:
+        # On linux, mono-csc can fail with:
+        #   System.NotImplementedException: tuples > 7
+        #
+        make_csharp_wrapper = False
+
+    if make_csharp_wrapper:
         # Write C# wrapper.
         def write(text):
             generated.swig_csharp.write(text)
         write(f'// C# helper for {fnname} wrapper outparams.\n')
-        num_return_values = 0 if return_void else 1
-        for arg in get_args( tu, cursor):
-            if arg.out_param:
-                num_return_values += 1
-        assert num_return_values
-        def csharp_declaration_text(type_, name):
-            if ( is_pointer_to(type_, 'char')
-                    or is_pointer_to(type_, 'unsigned char')
-                    or is_pointer_to(type_, 'signed char')
+        write(f'namespace mupdf {{\n')
+        write(f'    public class {main_name}_outparams_helper {{\n')
+        def csharp_declaration_text(arg, name=None):
+            assert isinstance(arg, Arg)
+            if name is None:
+                name = arg.name_csharp
+            if arg.alt:
+                return f'{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}'
+            elif ( is_pointer_to(arg.cursor.type, 'char')
+                    or is_pointer_to(arg.cursor.type, 'unsigned char')
+                    or is_pointer_to(arg.cursor.type, 'signed char')
                     ):
                 return f'string {name}'
-            return declaration_text(type_, name);
-        if num_return_values == 1:
-            if return_void:
-                for arg in get_args( tu, cursor):
-                    if arg.out_param:
-                        write( csharp_declaration_text( arg.cursor.type.get_pointee(), ""))
-            else:
-                write(f'{declaration_text(cursor.result_type, "")}')
-        else:
-            write('(')
+            ret = clip(declaration_text(arg.cursor.type, name), 'const ');
+            ret = ret.replace('size_t', 'int')
+            return ret
+        write(f'        public static ')
+        #if num_return_values == 1:
+        #    if return_void:
+        #        for arg in get_args( tu, cursor):
+        #            if arg.out_param:
+        #                write( csharp_declaration_text( arg, ''))
+        #    else:
+        #        write(f'{declaration_text(cursor.result_type, "")}')
+        if 1:
+            # We return a tuple.
+            if num_return_values > 1:
+                write('(')
             sep = ''
             if not return_void:
-                write(f'{csharp_declaration_text(cursor.result_type, "")}')
+
+                # dulicates some code in get_args().
+                alt = None
+                base_type = get_base_type( cursor.result_type)
+                base_type_cursor = base_type.get_declaration()
+                base_typename = get_base_typename( base_type)
+                extras = classextras.get( base_typename)
+                if extras:
+                    if extras.opaque:
+                        # E.g. we don't have access to defintion of fz_separation,
+                        # but it is marked in classextras with opaque=true, so
+                        # there will be a wrapper class.
+                        alt = base_type_cursor
+                    elif (1
+                            and base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL
+                            #and base_type_cursor.is_definition()
+                            ):
+                        alt = base_type_cursor
+                if alt:
+                       write(f'{rename.class_(alt.type.spelling)}')
+                else:
+                    if (is_pointer_to(cursor.result_type, 'char')
+                            or is_pointer_to(cursor.result_type, 'unsigned char')
+                            or is_pointer_to(cursor.result_type, 'signed char')
+                            ):
+                        text = 'string'
+                    else:
+                        text = declaration_text(cursor.result_type, '').strip()
+                        if text in ('size_t', 'int16_t', 'int64_t'):
+                            text = 'int'
+                    write(f'{text}')
                 sep = ', '
             for arg in get_args( tu, cursor):
                 if arg.out_param:
-                    jlib.log('{fnname=} {arg.cursor.type.spelling=}')
-                    jlib.log('{fnname=} {arg.cursor.type.get_pointee().spelling=}')
-                    write( f'{sep}{csharp_declaration_text( arg.cursor.type.get_pointee(), "")}')
+                    write(sep)
+                    if arg.alt:
+                        write(f'{rename.class_(arg.alt.type.spelling)}')
+                    else:
+                        type_ = arg.cursor.type.get_pointee()
+                        if ( is_pointer_to(type_, 'char')
+                                or is_pointer_to(type_, 'unsigned char')
+                                or is_pointer_to(type_, 'signed char')
+                                ):
+                            write( f'string')
+                        else:
+                            text = declaration_text(type_, '').strip()
+                            if text in ('size_t', 'int16_t', 'int64_t'):
+                                text = 'int'
+                            write( text)
+                            #write( f'/*arg.alt false*/')
                     sep = ', '
-            write(f')')
-        write(f' {main_name}(')
+            if num_return_values > 1:
+                write(')')
+            #write(f')')
+        # Write fn(...).
+        write(f' fn(')
         sep = ''
         for arg in get_args( tu, cursor):
-            if not arg.out_param:
-                write(f'{sep}{csharp_declaration_text( arg.cursor.type, arg.name)}')
-                sep = ', '
+            if arg.out_param:
+                continue
+            write(sep)
+            if arg.alt:
+                write(f'{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}')
+            elif ( is_pointer_to(arg.cursor.type, 'char')
+                    or is_pointer_to(arg.cursor.type, 'unsigned char')
+                    or is_pointer_to(arg.cursor.type, 'signed char')
+                    ):
+                write(f'string {arg.name_csharp}')
+            else:
+                text = declaration_text(arg.cursor.type, arg.name_csharp).strip()
+                text = clip(text, 'const ')
+                text = text.replace('size_t ', 'int ')
+                write(text)
+            sep = ', '
         write(f')\n')
-        write(f'{{\n')
-        write(f'    outparams = {main_name}_outparams();\n')
-        write(f'    ')
+        write(f'        {{\n')
+        write(f'            var outparams = new {main_name}_outparams();\n')
+        write(f'            ')
         if not return_void:
             write(f'var ret = ')
         write(f'{main_name}_outparams_fn(')
@@ -3296,10 +3407,10 @@ def make_outparam_helpers(
         for arg in get_args( tu, cursor):
             if arg.out_param:
                 continue
-            write(f'{sep}{arg.name_python}')
+            write(f'{sep}{arg.name_csharp}')
             sep = ', '
         write(f'{sep} outparams);\n')
-        write(f'    return ')
+        write(f'            return ')
         if num_return_values > 1:
             write(f'(')
         sep = ''
@@ -3308,11 +3419,13 @@ def make_outparam_helpers(
             sep = ', '
         for arg in get_args( tu, cursor):
             if arg.out_param:
-                write(f'{sep}outparams.{arg.name_python}')
+                write(f'{sep}outparams.{arg.name_csharp}')
                 sep = ', '
         if num_return_values > 1:
             write(')')
         write(';\n')
+        write(f'        }}\n')
+        write(f'    }}\n')
         write(f'}}\n')
         write('\n')
 
@@ -7904,6 +8017,18 @@ def main():
                                             {
                                                 throw new System.Exception("rect ToString() is broken: '" + rect + "' != '" + rect.to_string() + "'");
                                             }
+
+                                            // Test fz_buffer_extract().
+                                            var buffer = page.new_buffer_from_page_with_format(
+                                                    "docx",
+                                                    "html",
+                                                    new mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                                                    new mupdf.Cookie()
+                                                    );
+                                            var outparams = new mupdf.buffer_extract_outparams();
+                                            var n = mupdf.buffer_extract_outparams_fn(buffer, outparams);
+                                            Console.WriteLine("buffer_extract_outparams_fn() returned n=" + n + " outparams=" + outparams);
+
                                             Console.WriteLine("MuPDF C# test finished.");
                                         }
                                     }
