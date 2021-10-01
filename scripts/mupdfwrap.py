@@ -3329,13 +3329,6 @@ def make_outparam_helpers(
             if num_return_values > 1:
                 write('(')
             sep = ''
-            def typename_translate(typename):
-                if typename == 'int16_t': return 'short'
-                elif typename == 'int64_t': return 'long'
-                elif typename == 'size_t': return 'uint'
-                elif typename == 'unsigned int': return 'uint'
-                return typename
-
             def write_type(alt, type_):
                 if alt:
                     write(f'{rename.class_(alt.type.spelling)}')
@@ -3343,7 +3336,10 @@ def make_outparam_helpers(
                     write( f'string')
                 else:
                     text = declaration_text(type_, '').strip()
-                    text = typename_translate(text)
+                    if text == 'int16_t':           text = 'short'
+                    elif text == 'int64_t':         text = 'long'
+                    elif text == 'size_t':          text = 'uint'
+                    elif text == 'unsigned int':    text = 'uint'
                     write(f'{text}')
 
             if not return_void:
