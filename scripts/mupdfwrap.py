@@ -2495,7 +2495,7 @@ def get_field0( type_):
 get_base_type_cache = dict()
 def get_base_type( type_):
     '''
-    Follows pointer to get ultimate type.
+    Repeatedly dereferences pointer and returns the ultimate type.
     '''
     # Caching reduces time from to 0.24s to 0.1s.
     key = type_.spelling
@@ -2849,6 +2849,19 @@ class Arg:
     def __str__(self):
         return f'Arg(cursor={self.cursor} name={self.name} alt={self.alt} out_param={self.out_param})'
 
+def get_extras(type_):
+    '''
+    Returns (cursor, typename, extras):
+        cursor: for base type.
+        typename:
+        extras: None or from classextras.
+    '''
+    base_type = get_base_type( type_)
+    base_type_cursor = base_type.get_declaration()
+    base_typename = get_base_typename( base_type)
+    extras = classextras.get( base_typename)
+    return base_type_cursor, base_typename, extras
+
 get_args_cache = dict()
 
 def get_args( tu, cursor, include_fz_context=False, verbose=False):
@@ -2887,11 +2900,7 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                 verbose = True
             alt = None
             out_param = False
-            # Set <alt> to wrapping class if possible.
-            base_type = get_base_type( arg_cursor.type)
-            base_type_cursor = base_type.get_declaration()
-            base_typename = get_base_typename( base_type)
-            extras = classextras.get( base_typename)
+            base_type_cursor, base_typename, extras = get_extras(arg_cursor.type)
             if verbose:
                 log( '{extras=}')
             if extras:
@@ -3308,18 +3317,6 @@ def make_outparam_helpers(
         # Write C# wrapper.
         def write(text):
             generated.swig_csharp.write(text)
-        def special_declaration_text(type_, name):
-            if (is_pointer_to(cursor.result_type, 'char')
-                    or is_pointer_to(cursor.result_type, 'unsigned char')
-                    or is_pointer_to(cursor.result_type, 'signed char')
-                    ):
-                return 'string'
-            if text in ('int16_t', 'int64_t'):
-                return 'int'
-            if text in ('size_t',):
-                return 'uint'
-            if text in ('unsigned int',):
-                return 'uint'
 
         write(f'// C# helper for {cursor.mangled_name} wrapper outparams.\n')
         write(f'namespace mupdf\n')
@@ -3333,12 +3330,8 @@ def make_outparam_helpers(
                 write('(')
             sep = ''
             if not return_void:
-                # dulicates some code in get_args().
                 return_alt = None
-                base_type = get_base_type( cursor.result_type)
-                base_type_cursor = base_type.get_declaration()
-                base_typename = get_base_typename( base_type)
-                extras = classextras.get( base_typename)
+                base_type_cursor, base_typename, extras = get_extras( cursor.result_type)
                 if extras:
                     if extras.opaque:
                         # E.g. we don't have access to defintion of fz_separation,
@@ -3389,6 +3382,7 @@ def make_outparam_helpers(
                     sep = ', '
             if num_return_values > 1:
                 write(')')
+
         # Generate function name and params.
         write(f' fn(')
         sep = ''
