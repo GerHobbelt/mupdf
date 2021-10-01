@@ -3346,10 +3346,7 @@ def make_outparam_helpers(
                 if return_alt:
                        write(f'{rename.class_(return_alt.type.spelling)}')
                 else:
-                    if (is_pointer_to(cursor.result_type, 'char')
-                            or is_pointer_to(cursor.result_type, 'unsigned char')
-                            or is_pointer_to(cursor.result_type, 'signed char')
-                            ):
+                    if is_pointer_to(cursor.result_type, 'char'):
                         text = 'string'
                     else:
                         text = declaration_text(cursor.result_type, '').strip()
@@ -3366,10 +3363,7 @@ def make_outparam_helpers(
                         write(f'{rename.class_(arg.alt.type.spelling)}')
                     else:
                         type_ = arg.cursor.type.get_pointee()
-                        if ( is_pointer_to(type_, 'char')
-                                or is_pointer_to(type_, 'unsigned char')
-                                or is_pointer_to(type_, 'signed char')
-                                ):
+                        if is_pointer_to(type_, 'char'):
                             write( f'string')
                         else:
                             text = declaration_text(type_, '').strip()
@@ -3392,10 +3386,7 @@ def make_outparam_helpers(
             write(sep)
             if arg.alt:
                 write(f'{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}')
-            elif ( is_pointer_to(arg.cursor.type, 'char')
-                    or is_pointer_to(arg.cursor.type, 'unsigned char')
-                    or is_pointer_to(arg.cursor.type, 'signed char')
-                    ):
+            elif is_pointer_to(arg.cursor.type, 'char'):
                 write(f'string {arg.name_csharp}')
             else:
                 text = declaration_text(arg.cursor.type, arg.name_csharp).strip()
@@ -3441,20 +3432,13 @@ def make_outparam_helpers(
             if arg.out_param:
                 write(f'{sep}')
                 type_ = arg.cursor.type.get_pointee()
-                if (is_pointer_to(type_, 'char')
-                        or is_pointer_to(type_, 'unsigned char')
-                        or is_pointer_to(type_, 'signed char')
-                        ):
+                if arg.alt:
+                        write(f'new {rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
+                elif is_pointer_to(type_, 'char'):
                     write(f'new string(outparams.{arg.name_csharp})')
                 else:
-                    if arg.alt:
-                        write(f'new {rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
-                    else:
-                        pointee = arg.cursor.type.get_pointee().spelling
-                        if pointee == 'int64_t':
-                            write(f'(long)(System.IntPtr) outparams.{arg.name_csharp}')
-                        else:
-                            write(f'outparams.{arg.name_csharp}')
+                    pointee = arg.cursor.type.get_pointee().spelling
+                    write(f'outparams.{arg.name_csharp}')
                 sep = ', '
         if num_return_values > 1:
             write(')')
