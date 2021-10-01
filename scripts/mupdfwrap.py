@@ -3157,7 +3157,13 @@ def make_outparam_helpers(
         if verbose:
             log( '{decl=}')
         assert arg.cursor.type.kind == clang.cindex.TypeKind.POINTER
-        pointee = arg.cursor.type.get_pointee() #.get_canonical()
+
+        # We use .get_canonical() here because, for example, it converts
+        # int64_t to 'long long', which seems to be handled better by swig -
+        # swig maps int64_t to mupdf.SWIGTYPE_p_int64_t which can't be treated
+        # or converted to an integer.
+        #
+        pointee = arg.cursor.type.get_pointee().get_canonical()
         generated.swig_cpp.write(f'    {declaration_text( pointee, arg.name)};\n')
     generated.swig_cpp.write(f'}};\n')
     generated.swig_cpp.write('\n')
@@ -3302,23 +3308,9 @@ def make_outparam_helpers(
             if text in ('size_t',):
                 return 'uint'
 
-        write(f'// C# helper for {fnname} wrapper outparams.\n')
+        write(f'// C# helper for {cursor.mangled_name} wrapper outparams.\n')
         write(f'namespace mupdf {{\n')
         write(f'    public class {main_name}_outparams_helper {{\n')
-        def csharp_declaration_text(arg, name=None):
-            assert isinstance(arg, Arg)
-            if name is None:
-                name = arg.name_csharp
-            if arg.alt:
-                return f'{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}'
-            elif ( is_pointer_to(arg.cursor.type, 'char')
-                    or is_pointer_to(arg.cursor.type, 'unsigned char')
-                    or is_pointer_to(arg.cursor.type, 'signed char')
-                    ):
-                return f'string {name}'
-            ret = clip(declaration_text(arg.cursor.type, name), 'const ');
-            ret = ret.replace('size_t', 'uint')
-            return ret
         write(f'        public static ')
         if 1:
             # Generate the returned tuple.
@@ -3353,10 +3345,9 @@ def make_outparam_helpers(
                         text = 'string'
                     else:
                         text = declaration_text(cursor.result_type, '').strip()
-                        if text in ('int16_t', 'int64_t'):
-                            text = 'int'
-                        if text in ('size_t',):
-                            text = 'uint'
+                        if text == 'int16_t': text = 'short'
+                        elif text == 'int64_t': text = 'long'
+                        elif text == 'size_t': text = 'uint'
                     write(f'{text}')
                 sep = ', '
             for arg in get_args( tu, cursor):
@@ -3373,10 +3364,9 @@ def make_outparam_helpers(
                             write( f'string')
                         else:
                             text = declaration_text(type_, '').strip()
-                            if text in ('int16_t', 'int64_t'):
-                                text = 'int'
-                            if text in ('size_t',):
-                                text = 'uint'
+                            if text == 'int16_t': text = 'short'
+                            elif text == 'int64_t': text = 'long'
+                            elif text == 'size_t': text = 'uint'
                             write( text)
                             #write( f'/*arg.alt false*/')
                     sep = ', '
@@ -3399,6 +3389,8 @@ def make_outparam_helpers(
             else:
                 text = declaration_text(arg.cursor.type, arg.name_csharp).strip()
                 text = clip(text, 'const ')
+                text = text.replace('int16_t ', 'short ')
+                text = text.replace('int64_t ', 'long ')
                 text = text.replace('size_t ', 'uint ')
                 write(text)
             sep = ', '
@@ -3448,7 +3440,7 @@ def make_outparam_helpers(
                     else:
                         pointee = arg.cursor.type.get_pointee().spelling
                         if pointee == 'int64_t':
-                            write(f'(int) outparams.{arg.name_csharp}')
+                            write(f'(long)(System.IntPtr) outparams.{arg.name_csharp}')
                         else:
                             write(f'outparams.{arg.name_csharp}')
                 sep = ', '
