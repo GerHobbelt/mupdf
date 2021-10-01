@@ -3329,6 +3329,13 @@ def make_outparam_helpers(
             if num_return_values > 1:
                 write('(')
             sep = ''
+            def typename_translate(typename):
+                if typename == 'int16_t': return 'short'
+                elif typename == 'int64_t': return 'long'
+                elif typename == 'size_t': return 'uint'
+                elif typename == 'unsigned int': return 'uint'
+                return typename
+
             if not return_void:
                 return_alt = None
                 base_type_cursor, base_typename, extras = get_extras( cursor.result_type)
@@ -3338,10 +3345,7 @@ def make_outparam_helpers(
                         # but it is marked in classextras with opaque=true, so
                         # there will be a wrapper class.
                         return_alt = base_type_cursor
-                    elif (1
-                            and base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL
-                            #and base_type_cursor.is_definition()
-                            ):
+                    elif base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL:
                         return_alt = base_type_cursor
                 if return_alt:
                        write(f'{rename.class_(return_alt.type.spelling)}')
@@ -3350,10 +3354,7 @@ def make_outparam_helpers(
                         text = 'string'
                     else:
                         text = declaration_text(cursor.result_type, '').strip()
-                        if text == 'int16_t': text = 'short'
-                        elif text == 'int64_t': text = 'long'
-                        elif text == 'size_t': text = 'uint'
-                        elif text == 'unsigned int': text = 'uint'
+                        text = typename_translate(text)
                     write(f'{text}')
                 sep = ', '
             for arg in get_args( tu, cursor):
@@ -3367,12 +3368,8 @@ def make_outparam_helpers(
                             write( f'string')
                         else:
                             text = declaration_text(type_, '').strip()
-                            if text == 'int16_t': text = 'short'
-                            elif text == 'int64_t': text = 'long'
-                            elif text == 'size_t': text = 'uint'
-                            elif text == 'unsigned int': text = 'uint'
+                            text = typename_translate(text)
                             write( text)
-                            #write( f'/*arg.alt false*/')
                     sep = ', '
             if num_return_values > 1:
                 write(')')
@@ -3417,7 +3414,7 @@ def make_outparam_helpers(
                 write('.internal_()' if extras.pod else '.m_internal')
             sep = ', '
         write(f'{sep}outparams);\n')
-        # Generate return statement. fixme: need to construct wrapping classes for the raw fz_* ptrs.
+        # Generate return statement.
         write(f'            return ')
         if num_return_values > 1:
             write(f'(')
