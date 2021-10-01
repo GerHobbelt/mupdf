@@ -86,7 +86,7 @@ public class MuPDFGui : System.Windows.Forms.Form
                 new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                 new mupdf.Cookie()
                 );
-        System.Console.WriteLine("buffer.m_internal=" + (System.IntPtr) (buffer.m_internal));
+        System.Console.WriteLine("buffer.m_internal=" + buffer.m_internal);
         string html_content;
         unsafe
         {
