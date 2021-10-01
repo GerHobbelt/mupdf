@@ -8093,8 +8093,8 @@ def main():
                                                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                                                     new mupdf.Cookie()
                                                     );
-                                            var data = buffer.buffer_extract();
-                                            Console.WriteLine("mupdf.buffer_extract() returned: " + data);
+                                            //var data = buffer.buffer_extract();
+                                            //Console.WriteLine("mupdf.buffer_extract() returned: " + data);
                                             //var outparams = new mupdf.buffer_extract_outparams();
                                             //var n = mupdf.buffer_extract_outparams_fn(buffer, outparams);
                                             //Console.WriteLine("buffer_extract_outparams_fn() returned n=" + n + " outparams=" + outparams);
@@ -8132,10 +8132,10 @@ def main():
                             )
                     if g_windows:
                         jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
-                        jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                        #jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                     else:
                         jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
-                        jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+                        #jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
