@@ -2844,7 +2844,7 @@ class Arg:
             self.name_python = f'{name}_'
         else:
             self.name_python = name
-        self.name_csharp = f'{name}_' if name in ('out', 'is', 'in') else name
+        self.name_csharp = f'{name}_' if name in ('out', 'is', 'in', 'params') else name
 
     def __str__(self):
         return f'Arg(cursor={self.cursor} name={self.name} alt={self.alt} out_param={self.out_param})'
@@ -3018,6 +3018,10 @@ def is_pointer_to( type_, destination, verbose=False):
 
     return ret
 
+def is_pointer_to_pointer_to( type_, destination):
+    if type_.kind != clang.cindex.TypeKind.POINTER:
+        return False
+    return is_pointer_to( type_.get_pointee().get_canonical(), destination)
 
 def make_fncall( tu, cursor, return_type, fncall, out):
     '''
@@ -3251,7 +3255,44 @@ def make_outparam_helpers(
         generated.swig_python.write('\n')
 
     make_csharp_wrapper = True
-    if fnname in (
+
+    # We don't attempt to generate wrappers for fns that take or return
+    # 'unsigned char*' - swig cannot cope.
+    if is_pointer_to(cursor.result_type, 'unsigned char'):
+        jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because it returns unsigned char*.')
+        make_csharp_wrapper = False
+    for arg in get_args( tu, cursor):
+        if is_pointer_to(arg.cursor.type, 'unsigned char'):
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char* arg.')
+            make_csharp_wrapper = False
+        if is_pointer_to_pointer_to(arg.cursor.type, 'unsigned char'):
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char** arg.')
+            make_csharp_wrapper = False
+        if arg.cursor.type.get_array_size() >= 0:
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has array arg.')
+            make_csharp_wrapper = False
+        if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
+            pointee = arg.cursor.type.get_pointee().get_canonical()
+            if pointee.kind==clang.cindex.TypeKind.ENUM:
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has enum out-param arg.')
+                make_csharp_wrapper = False
+            if pointee.kind == clang.cindex.TypeKind.FUNCTIONPROTO:
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has fn-ptr arg.')
+                make_csharp_wrapper = False
+            if pointee.is_const_qualified():
+                # Not an out-param.
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has pointer-to-const arg.')
+                make_csharp_wrapper = False
+            if arg.cursor.type.get_pointee().spelling == 'FILE':
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has FILE* arg.')
+                make_csharp_wrapper = False
+            if pointee.spelling == 'void':
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has void* arg.')
+                make_csharp_wrapper = False
+
+    if not make_csharp_wrapper:
+        pass
+    elif 0 and make_csharp_wrapper and fnname in (
             'clamp_color_outparams_helper',
             'convert_color',
             'convert_color_outparams_helper',
@@ -3274,11 +3315,20 @@ def make_outparam_helpers(
             'deflate',
             'new_image_of_size',
             'open_file_ptr_no_close',
+            'pdf_lookup_substitute_font',
             ):
+        jlib.log('Not out-param wrapping {cursor.mangled_name}')
         make_csharp_wrapper = False
-    if fnname.startswith('drop_'):
+    elif fnname.startswith('drop_'):
+        jlib.log('Not out-param wrapping {cursor.mangled_name}')
         make_csharp_wrapper = False
-    if fnname.startswith('keep_'):
+    elif fnname.startswith('keep_'):
+        jlib.log('Not out-param wrapping {cursor.mangled_name}')
+        make_csharp_wrapper = False
+    elif fnname.startswith('lookup_noto_'):
+        # These fns return (possibly by out-param) 'unsigned char*', which is
+        # not intended to be a string so doesn't work directly with swig.
+        jlib.log('Not out-param wrapping {cursor.mangled_name}')
         make_csharp_wrapper = False
 
     num_return_values = 0 if return_void else 1
@@ -3293,7 +3343,7 @@ def make_outparam_helpers(
         #
         make_csharp_wrapper = False
 
-    if 1 and make_csharp_wrapper:
+    if make_csharp_wrapper:
         # Write C# wrapper.
         def write(text):
             generated.swig_csharp.write(text)
@@ -3307,10 +3357,14 @@ def make_outparam_helpers(
                 return 'int'
             if text in ('size_t',):
                 return 'uint'
+            if text in ('unsigned int',):
+                return 'uint'
 
         write(f'// C# helper for {cursor.mangled_name} wrapper outparams.\n')
-        write(f'namespace mupdf {{\n')
-        write(f'    public class {main_name}_outparams_helper {{\n')
+        write(f'namespace mupdf\n')
+        write(f'{{\n')
+        write(f'    public class {main_name}_outparams_helper\n')
+        write(f'    {{\n')
         write(f'        public static ')
         if 1:
             # Generate the returned tuple.
@@ -3348,6 +3402,7 @@ def make_outparam_helpers(
                         if text == 'int16_t': text = 'short'
                         elif text == 'int64_t': text = 'long'
                         elif text == 'size_t': text = 'uint'
+                        elif text == 'unsigned int': text = 'uint'
                     write(f'{text}')
                 sep = ', '
             for arg in get_args( tu, cursor):
@@ -3367,6 +3422,7 @@ def make_outparam_helpers(
                             if text == 'int16_t': text = 'short'
                             elif text == 'int64_t': text = 'long'
                             elif text == 'size_t': text = 'uint'
+                            elif text == 'unsigned int': text = 'uint'
                             write( text)
                             #write( f'/*arg.alt false*/')
                     sep = ', '
@@ -3392,6 +3448,7 @@ def make_outparam_helpers(
                 text = text.replace('int16_t ', 'short ')
                 text = text.replace('int64_t ', 'long ')
                 text = text.replace('size_t ', 'uint ')
+                text = text.replace('unsigned int ', 'uint ')
                 write(text)
             sep = ', '
         write(f')\n')
