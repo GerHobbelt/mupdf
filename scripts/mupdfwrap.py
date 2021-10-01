@@ -3336,6 +3336,16 @@ def make_outparam_helpers(
                 elif typename == 'unsigned int': return 'uint'
                 return typename
 
+            def write_type(alt, type_):
+                if alt:
+                    write(f'{rename.class_(alt.type.spelling)}')
+                elif is_pointer_to(type_, 'char'):
+                    write( f'string')
+                else:
+                    text = declaration_text(type_, '').strip()
+                    text = typename_translate(text)
+                    write(f'{text}')
+
             if not return_void:
                 return_alt = None
                 base_type_cursor, base_typename, extras = get_extras( cursor.result_type)
@@ -3347,29 +3357,12 @@ def make_outparam_helpers(
                         return_alt = base_type_cursor
                     elif base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL:
                         return_alt = base_type_cursor
-                if return_alt:
-                       write(f'{rename.class_(return_alt.type.spelling)}')
-                else:
-                    if is_pointer_to(cursor.result_type, 'char'):
-                        text = 'string'
-                    else:
-                        text = declaration_text(cursor.result_type, '').strip()
-                        text = typename_translate(text)
-                    write(f'{text}')
+                write_type(return_alt, cursor.result_type)
                 sep = ', '
             for arg in get_args( tu, cursor):
                 if arg.out_param:
                     write(sep)
-                    if arg.alt:
-                        write(f'{rename.class_(arg.alt.type.spelling)}')
-                    else:
-                        type_ = arg.cursor.type.get_pointee()
-                        if is_pointer_to(type_, 'char'):
-                            write( f'string')
-                        else:
-                            text = declaration_text(type_, '').strip()
-                            text = typename_translate(text)
-                            write( text)
+                    write_type(arg.alt, arg.cursor.type.get_pointee())
                     sep = ', '
             if num_return_values > 1:
                 write(')')
