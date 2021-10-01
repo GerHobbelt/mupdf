@@ -3290,58 +3290,19 @@ def make_outparam_helpers(
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has void* arg.')
                 make_csharp_wrapper = False
 
-    if not make_csharp_wrapper:
-        pass
-    elif 0 and make_csharp_wrapper and fnname in (
-            'clamp_color_outparams_helper',
-            'convert_color',
-            'convert_color_outparams_helper',
-            'convert_separation_colors',
-            'convert_separation_colors_outparams_helper',
-            'ppdf_annot_MK_BC',
-            'ppdf_annot_MK_BG',
-            'ppdf_annot_color',
-            'ppdf_annot_default_appearance',
-            'ppdf_annot_interior_color',
-            'ppdf_annot_line_ending_styles',
-            'ppdf_decode_cmap',
-            'ppdf_eval_function',
-            'ppdf_lookup_cmap_full',
-            'ppdf_map_one_to_many',
-            'ppdf_map_one_to_many_outparams_helper',
-            'ppdf_parse_default_appearance',
-            'ppdf_walk_tree',
-            'clamp_color',
-            'deflate',
-            'new_image_of_size',
-            'open_file_ptr_no_close',
-            'pdf_lookup_substitute_font',
-            ):
-        jlib.log('Not out-param wrapping {cursor.mangled_name}')
-        make_csharp_wrapper = False
-    elif fnname.startswith('drop_'):
-        jlib.log('Not out-param wrapping {cursor.mangled_name}')
-        make_csharp_wrapper = False
-    elif fnname.startswith('keep_'):
-        jlib.log('Not out-param wrapping {cursor.mangled_name}')
-        make_csharp_wrapper = False
-    elif fnname.startswith('lookup_noto_'):
-        # These fns return (possibly by out-param) 'unsigned char*', which is
-        # not intended to be a string so doesn't work directly with swig.
-        jlib.log('Not out-param wrapping {cursor.mangled_name}')
-        make_csharp_wrapper = False
+    if make_csharp_wrapper:
+        num_return_values = 0 if return_void else 1
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                num_return_values += 1
+        assert num_return_values
 
-    num_return_values = 0 if return_void else 1
-    for arg in get_args( tu, cursor):
-        if arg.out_param:
-            num_return_values += 1
-    assert num_return_values
-
-    if num_return_values > 7:
-        # On linux, mono-csc can fail with:
-        #   System.NotImplementedException: tuples > 7
-        #
-        make_csharp_wrapper = False
+        if num_return_values > 7:
+            # On linux, mono-csc can fail with:
+            #   System.NotImplementedException: tuples > 7
+            #
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because would require > 7-tuple.')
+            make_csharp_wrapper = False
 
     if make_csharp_wrapper:
         # Write C# wrapper.
