@@ -3324,44 +3324,50 @@ def make_outparam_helpers(
         write(f'    public class {main_name}_outparams_helper\n')
         write(f'    {{\n')
         write(f'        public static ')
-        if 1:
-            # Generate the returned tuple.
-            if num_return_values > 1:
-                write('(')
-            sep = ''
-            def write_type(alt, type_):
-                if alt:
-                    write(f'{rename.class_(alt.type.spelling)}')
-                elif is_pointer_to(type_, 'char'):
-                    write( f'string')
-                else:
-                    text = declaration_text(type_, '').strip()
-                    if text == 'int16_t':           text = 'short'
-                    elif text == 'int64_t':         text = 'long'
-                    elif text == 'size_t':          text = 'uint'
-                    elif text == 'unsigned int':    text = 'uint'
-                    write(f'{text}')
 
-            if not return_void:
-                return_alt = None
-                base_type_cursor, base_typename, extras = get_extras( cursor.result_type)
-                if extras:
-                    if extras.opaque:
-                        # E.g. we don't have access to defintion of fz_separation,
-                        # but it is marked in classextras with opaque=true, so
-                        # there will be a wrapper class.
-                        return_alt = base_type_cursor
-                    elif base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL:
-                        return_alt = base_type_cursor
-                write_type(return_alt, cursor.result_type)
+        # Generate the returned tuple.
+        if num_return_values > 1:
+            write('(')
+
+        def write_type(alt, type_):
+            if alt:
+                write(f'{rename.class_(alt.type.spelling)}')
+            elif is_pointer_to(type_, 'char'):
+                write( f'string')
+            else:
+                text = declaration_text(type_, '').strip()
+                if text == 'int16_t':           text = 'short'
+                elif text == 'int64_t':         text = 'long'
+                elif text == 'size_t':          text = 'uint'
+                elif text == 'unsigned int':    text = 'uint'
+                write(f'{text}')
+
+        sep = ''
+
+        # Returned param, if any.
+        if not return_void:
+            return_alt = None
+            base_type_cursor, base_typename, extras = get_extras( cursor.result_type)
+            if extras:
+                if extras.opaque:
+                    # E.g. we don't have access to defintion of fz_separation,
+                    # but it is marked in classextras with opaque=true, so
+                    # there will be a wrapper class.
+                    return_alt = base_type_cursor
+                elif base_type_cursor.kind == clang.cindex.CursorKind.STRUCT_DECL:
+                    return_alt = base_type_cursor
+            write_type(return_alt, cursor.result_type)
+            sep = ', '
+
+        # Out-params.
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                write(sep)
+                write_type(arg.alt, arg.cursor.type.get_pointee())
                 sep = ', '
-            for arg in get_args( tu, cursor):
-                if arg.out_param:
-                    write(sep)
-                    write_type(arg.alt, arg.cursor.type.get_pointee())
-                    sep = ', '
-            if num_return_values > 1:
-                write(')')
+
+        if num_return_values > 1:
+            write(')')
 
         # Generate function name and params.
         write(f' fn(')
@@ -3371,6 +3377,7 @@ def make_outparam_helpers(
                 continue
             write(sep)
             if arg.alt:
+                # E.g. 'Document doc'.
                 write(f'{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}')
             elif is_pointer_to(arg.cursor.type, 'char'):
                 write(f'string {arg.name_csharp}')
@@ -3384,11 +3391,14 @@ def make_outparam_helpers(
                 write(text)
             sep = ', '
         write(f')\n')
+
         # Function body.
         write(f'        {{\n')
+
         # Create local outparams struct.
         write(f'            var outparams = new {main_name}_outparams();\n')
         write(f'            ')
+
         # Generate function call.
         if not return_void:
             write(f'var ret = ')
@@ -3403,7 +3413,8 @@ def make_outparam_helpers(
                 write('.internal_()' if extras.pod else '.m_internal')
             sep = ', '
         write(f'{sep}outparams);\n')
-        # Generate return statement.
+
+        # Generate return of tuple.
         write(f'            return ')
         if num_return_values > 1:
             write(f'(')
