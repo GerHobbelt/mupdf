@@ -3166,9 +3166,11 @@ def make_outparam_helper_csharp(
         # Write custom wrapper that returns the binary data.
         # We use C# fn buffer_extract_outparams_fn(fz_buffer buf, buffer_extract_outparams outparams).
         #
+        write('// Custom C# helper for fz_buffer_extract().\n')
         write('namespace mupdf\n')
         write('{\n')
-        write('    public class Buffer_extract\n')
+        write('    // Wrapper for fz_buffer_extract().\n')
+        write('    public static class Buffer_extract\n')
         write('    {\n')
         write('        public static byte[] fn(Buffer buffer)\n')
         write('        {\n')
@@ -3177,7 +3179,7 @@ def make_outparam_helper_csharp(
         write('            var raw1 = SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);\n')
         write('            System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);\n')
         write('            byte[] ret = new byte[n];\n')
-        write('            // Marshal.Copy() raises exception if raw2 is null even if n is zero.\n')
+        write('            // Marshal.Copy() raises exception if <raw2> is null even if <n> is zero.\n')
         write('            if (n == 0) return ret;\n')
         write('            System.Runtime.InteropServices.Marshal.Copy(raw2, ret, 0, (int) n);\n')
         write('            buffer.clear_buffer();\n')
@@ -3186,6 +3188,7 @@ def make_outparam_helper_csharp(
         write('        }\n')
         write('    }\n')
         write('}\n')
+        write('\n')
 
     # We don't attempt to generate wrappers for fns that take or return
     # 'unsigned char*' - swig does not treat these as zero-terminated strings,
@@ -3243,7 +3246,7 @@ def make_outparam_helper_csharp(
         write(f'// C# helper for {cursor.mangled_name} wrapper outparams.\n')
         write(f'namespace mupdf\n')
         write(f'{{\n')
-        write(f'    public class {main_name}_outparams_helper\n')
+        write(f'    public static class {main_name}_outparams_helper\n')
         write(f'    {{\n')
         write(f'        public static ')
 
