@@ -3371,7 +3371,7 @@ def make_outparam_helper_csharp(
                 type_ = arg.cursor.type.get_pointee()
                 if arg.alt:
                         write(f'new {rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
-                elif is_pointer_to(type_, 'char'):
+                elif 0 and is_pointer_to(type_, 'char'):
                     write(f'new string(outparams.{arg.name_csharp})')
                 else:
                     pointee = arg.cursor.type.get_pointee().spelling
@@ -8114,9 +8114,12 @@ def main():
                 # which moght be because of mixing gcc and clang?
                 #
                 if g_windows:
-                    csc = glob.glob('C:/Windows/Microsoft.NET/Framework/v4.*/csc.exe')
-                    assert len(csc) == 1
-                    csc = csc[0]
+                    if 0:
+                        csc = glob.glob('C:/Windows/Microsoft.NET/Framework/v4.*/csc.exe')
+                        assert len(csc) == 1
+                        csc = csc[0]
+                    else:
+                        csc = '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"'
                     mono = ''
                 else:
                     mono = 'mono'
@@ -8195,7 +8198,7 @@ def main():
                     else:
                         jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
-                if 1:
+                if 0:
                     # Build and run gui test.
                     #
                     # Don't know why Unix/Windows differ in what -r: args are
