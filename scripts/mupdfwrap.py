@@ -151,6 +151,52 @@ C++ wrapping:
             fz_lookup_metadata() and its wrappers, mupdf::fz_lookup_metadata()
             and mupdf::Document::lookup_metadata().
 
+        Output params:
+
+            We provide two different ways of wrapping functions with
+            out-params.
+
+            Using SWIG OUTPUT markers:
+
+                First, in generated C++ prototypes, we use OUTPUT as the
+                name of out-params, which tells SWIG to treat them as
+                out-params. This works for basic types so SWIG will generate
+                Python code that returns a tuple and C# code that takes args
+                marked with 'out'.
+
+            Unfortunately SWIG doesn't appear to handle out-params that
+            are zero terminated strings (char**) and cannot generically
+            handle binary data out-params (often indicated with unsigned
+            char**). Also, SWIG-generated C# out-params are a little
+            inconvenient compared to returning a C# tuple (note that C# tuples
+            require C# 7 or later).
+
+            So we provide an additional mechanism in the generated C++.
+
+            Out-params in a struct:
+
+                For each function with out-params, we provide a class
+                containing just the out-params and a function taking just the
+                non-out-param args, plus a pointer to the class. This function
+                fills in the members of this class instead of returning
+                individual out-params. We can then then generate Python or C#
+                code that uses these special functions to get the out-params in
+                a class object and return them as a tuple in both Python and
+                C#.
+
+            Binary out-param data:
+
+                Some MuPDF functions return binary data, typically with an
+                'unsigned char**' out-param. It is not possible to generically
+                handle these in Python or C# because the size of the returned
+                buffer can be in a different out-param or in the return
+                value. So we generate custom Python and C# code to give a
+                convenient interface, e.g. copying the returned data into a
+                Python bytes object or a C# byte array.
+
+
+
+
 
 Python wrapping:
 
@@ -3166,8 +3212,9 @@ def make_outparam_helper_csharp(
     make_csharp_wrapper = True
 
     if fnname == 'fz_buffer_extract':
-        # Write custom wrapper that returns the binary data.
-        # We use C# fn buffer_extract_outparams_fn(fz_buffer buf, buffer_extract_outparams outparams).
+        # Write custom wrapper that returns the binary data as a C# bytes
+        # array, using the C# wrapper for buffer_extract_outparams_fn(fz_buffer
+        # buf, buffer_extract_outparams outparams).
         #
         write('// Custom C# helper for fz_buffer_extract().\n')
         write('namespace mupdf\n')
@@ -3372,6 +3419,10 @@ def make_outparam_helper_csharp(
                 if arg.alt:
                         write(f'new {rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
                 elif 0 and is_pointer_to(type_, 'char'):
+                    # This was intended to convert char* to string, but swig
+                    # will have already done that when making a C# version of
+                    # the C++ struct, and modern csc on Windows doesn't like
+                    # creating a string from a string for some reason.
                     write(f'new string(outparams.{arg.name_csharp})')
                 else:
                     pointee = arg.cursor.type.get_pointee().spelling
