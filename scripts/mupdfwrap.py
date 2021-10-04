@@ -8123,34 +8123,19 @@ def main():
                                                     new mupdf.Cookie()
                                                     );
 
-                                            var data0 = mupdf.Buffer_extract.fn(buffer);
-                                            var s0 = System.Text.Encoding.UTF8.GetString(data0, 0, data0.Length);
-                                            Console.WriteLine("s0=" + s0);
-
-                                            var data1 = mupdf.Buffer_extract.fn(buffer);
-                                            var s1 = System.Text.Encoding.UTF8.GetString(data1, 0, data1.Length);
-                                            Console.WriteLine("s1=" + s1);
-
-                                            /*
-                                            var outparams = new buffer_storage_outparams();
-                                            uint n = mupdf.mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);
-
-                                            Console.WriteLine("buffer_storage_outparams_fn():"
-                                                    + " outparams.datap=" + outparams.datap
-                                                    + " n=" + n
-                                                    );
-                                            var raw1 = mupdf.SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);
-                                            System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);
-                                            Console.WriteLine("raw1=" + raw1 + " raw2=" + raw2);
-
-                                            byte[] data = new byte[n];
-                                            System.Runtime.InteropServices.Marshal.Copy(raw2, data, 0, (int) n);
-                                            Console.WriteLine("data=" + data);
-                                            buffer.clear_buffer();
-                                            buffer.trim_buffer();
-                                            string s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
+                                            var data = mupdf.Buffer_extract.fn(buffer);
+                                            var s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
+                                            if (s.Length < 100) {
+                                                throw new System.Exception("HTML text is too short");
+                                            }
                                             Console.WriteLine("s=" + s);
-                                            */
+
+                                            data = mupdf.Buffer_extract.fn(buffer);
+                                            s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
+                                            if (s.Length > 0) {
+                                                throw new System.Exception("Buffer was not cleared.");
+                                            }
+
                                             Console.WriteLine("MuPDF C# test finished.");
                                         }
                                     }
