@@ -3139,134 +3139,20 @@ class Generated:
         to_pickle( self.swig_python.getvalue(),     f'{dirpath}/swig_python.pickle')
         to_pickle( self.to_string_structnames,      f'{dirpath}/to_string_structnames.pickle')
 
-
-def make_outparam_helpers(
+def make_outparam_helpers_csharp(
         tu,
         cursor,
         fnname,
-        out_h,
-        out_cpp,
         generated,
         ):
-    '''
-    Create extra C++, Python and C# code to make tuple-returning wrapper of
-    specified function.
-
-    We write the code to Python code to generated.swig_python and C++ code to
-    generated.swig_cpp.
-    '''
-    verbose = False
     main_name = rename.function(cursor.mangled_name)
-    generated.swig_cpp.write( '\n')
-
-    # Write struct.
-    generated.swig_cpp.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
-    generated.swig_cpp.write(f'struct {main_name}_outparams\n')
-    generated.swig_cpp.write(f'{{\n')
-    for arg in get_args( tu, cursor):
-        if not arg.out_param:
-            continue
-        decl = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
-        if verbose:
-            log( '{decl=}')
-        assert arg.cursor.type.kind == clang.cindex.TypeKind.POINTER
-
-        # We use .get_canonical() here because, for example, it converts
-        # int64_t to 'long long', which seems to be handled better by swig -
-        # swig maps int64_t to mupdf.SWIGTYPE_p_int64_t which can't be treated
-        # or converted to an integer.
-        #
-        pointee = arg.cursor.type.get_pointee().get_canonical()
-        generated.swig_cpp.write(f'    {declaration_text( pointee, arg.name)};\n')
-    generated.swig_cpp.write(f'}};\n')
-    generated.swig_cpp.write('\n')
-
-    # Write function definition.
-    name_args = f'{main_name}_outparams_fn('
-    sep = ''
-    for arg in get_args( tu, cursor):
-        if arg.out_param:
-            continue
-        name_args += sep
-        name_args += declaration_text( arg.cursor.type, arg.name, verbose=verbose)
-        sep = ', '
-    name_args += f'{sep}{main_name}_outparams* outparams'
-    name_args += ')'
-    generated.swig_cpp.write(declaration_text( cursor.result_type, name_args))
-    generated.swig_cpp.write('\n')
-    generated.swig_cpp.write('{\n')
-    # Set all pointer fields to NULL.
-    for arg in get_args( tu, cursor):
-        if not arg.out_param:
-            continue
-        if arg.cursor.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
-            generated.swig_cpp.write(f'    outparams->{arg.name} = NULL;\n')
-    # Make call.
-    generated.swig_cpp.write(f'    return {rename.function_call(cursor.mangled_name)}(')
-    sep = ''
-    for arg in get_args( tu, cursor):
-        generated.swig_cpp.write(sep)
-        if arg.out_param:
-            generated.swig_cpp.write(f'&outparams->{arg.name}')
-        else:
-            generated.swig_cpp.write(f'{arg.name}')
-        sep = ', '
-    generated.swig_cpp.write(');\n')
-    generated.swig_cpp.write('}\n')
-    generated.swig_cpp.write('\n')
-
     return_void = cursor.result_type.spelling == 'void'
-
-    if 1:
-        # Write python wrapper.
-        generated.swig_python.write('')
-        generated.swig_python.write(f'def {main_name}(')
-        sep = ''
-        for arg in get_args( tu, cursor):
-            if arg.out_param:
-                continue
-            generated.swig_python.write(f'{sep}{arg.name_python}')
-            sep = ', '
-        generated.swig_python.write('):\n')
-        generated.swig_python.write(f'    """\n')
-        generated.swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
-        sep = ''
-        generated.swig_python.write(f'    Returns: ')
-        sep = ''
-        if not return_void:
-            generated.swig_python.write( f'{cursor.result_type.spelling}')
-            sep = ', '
-        for arg in get_args( tu, cursor):
-            if arg.out_param:
-                generated.swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
-                sep = ', '
-        generated.swig_python.write(f'\n')
-        generated.swig_python.write(f'    """\n')
-        generated.swig_python.write(f'    outparams = {main_name}_outparams()\n')
-        generated.swig_python.write(f'    ret = {main_name}_outparams_fn(')
-        sep = ''
-        for arg in get_args( tu, cursor):
-            if arg.out_param:
-                continue
-            generated.swig_python.write(f'{sep}{arg.name_python}')
-            sep = ', '
-        generated.swig_python.write(f'{sep}outparams)\n')
-        generated.swig_python.write(f'    return ')
-        sep = ''
-        if not return_void:
-            generated.swig_python.write(f'ret')
-            sep = ', '
-        for arg in get_args( tu, cursor):
-            if arg.out_param:
-                generated.swig_python.write(f'{sep}outparams.{arg.name_python}')
-                sep = ', '
-        generated.swig_python.write('\n')
-        generated.swig_python.write('\n')
-
     make_csharp_wrapper = True
 
     # We don't attempt to generate wrappers for fns that take or return
-    # 'unsigned char*' - swig cannot cope.
+    # 'unsigned char*' - swig does not treat these as zero-terminated strings,
+    # and they are generally binary data so cannot be handled generically.
+    #
     if is_pointer_to(cursor.result_type, 'unsigned char'):
         jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because it returns unsigned char*.')
         make_csharp_wrapper = False
@@ -3444,6 +3330,132 @@ def make_outparam_helpers(
         write(f'    }}\n')
         write(f'}}\n')
         write('\n')
+
+
+
+
+
+def make_outparam_helpers(
+        tu,
+        cursor,
+        fnname,
+        generated,
+        ):
+    '''
+    Create extra C++, Python and C# code to make tuple-returning wrapper of
+    specified function.
+
+    We write the code to Python code to generated.swig_python and C++ code to
+    generated.swig_cpp.
+    '''
+    verbose = False
+    main_name = rename.function(cursor.mangled_name)
+    generated.swig_cpp.write( '\n')
+
+    # Write struct.
+    generated.swig_cpp.write(f'/* Helper for out-params of {cursor.mangled_name}(). */\n')
+    generated.swig_cpp.write(f'struct {main_name}_outparams\n')
+    generated.swig_cpp.write(f'{{\n')
+    for arg in get_args( tu, cursor):
+        if not arg.out_param:
+            continue
+        decl = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
+        if verbose:
+            log( '{decl=}')
+        assert arg.cursor.type.kind == clang.cindex.TypeKind.POINTER
+
+        # We use .get_canonical() here because, for example, it converts
+        # int64_t to 'long long', which seems to be handled better by swig -
+        # swig maps int64_t to mupdf.SWIGTYPE_p_int64_t which can't be treated
+        # or converted to an integer.
+        #
+        pointee = arg.cursor.type.get_pointee().get_canonical()
+        generated.swig_cpp.write(f'    {declaration_text( pointee, arg.name)};\n')
+    generated.swig_cpp.write(f'}};\n')
+    generated.swig_cpp.write('\n')
+
+    # Write function definition.
+    name_args = f'{main_name}_outparams_fn('
+    sep = ''
+    for arg in get_args( tu, cursor):
+        if arg.out_param:
+            continue
+        name_args += sep
+        name_args += declaration_text( arg.cursor.type, arg.name, verbose=verbose)
+        sep = ', '
+    name_args += f'{sep}{main_name}_outparams* outparams'
+    name_args += ')'
+    generated.swig_cpp.write(declaration_text( cursor.result_type, name_args))
+    generated.swig_cpp.write('\n')
+    generated.swig_cpp.write('{\n')
+    # Set all pointer fields to NULL.
+    for arg in get_args( tu, cursor):
+        if not arg.out_param:
+            continue
+        if arg.cursor.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
+            generated.swig_cpp.write(f'    outparams->{arg.name} = NULL;\n')
+    # Make call.
+    generated.swig_cpp.write(f'    return {rename.function_call(cursor.mangled_name)}(')
+    sep = ''
+    for arg in get_args( tu, cursor):
+        generated.swig_cpp.write(sep)
+        if arg.out_param:
+            generated.swig_cpp.write(f'&outparams->{arg.name}')
+        else:
+            generated.swig_cpp.write(f'{arg.name}')
+        sep = ', '
+    generated.swig_cpp.write(');\n')
+    generated.swig_cpp.write('}\n')
+    generated.swig_cpp.write('\n')
+
+    if 1:
+        # Write python wrapper.
+        return_void = cursor.result_type.spelling == 'void'
+        generated.swig_python.write('')
+        generated.swig_python.write(f'def {main_name}(')
+        sep = ''
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                continue
+            generated.swig_python.write(f'{sep}{arg.name_python}')
+            sep = ', '
+        generated.swig_python.write('):\n')
+        generated.swig_python.write(f'    """\n')
+        generated.swig_python.write(f'    Wrapper for out-params of {cursor.mangled_name}().\n')
+        sep = ''
+        generated.swig_python.write(f'    Returns: ')
+        sep = ''
+        if not return_void:
+            generated.swig_python.write( f'{cursor.result_type.spelling}')
+            sep = ', '
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                generated.swig_python.write(f'{sep}{declaration_text(arg.cursor.type.get_pointee(), arg.name_python)}')
+                sep = ', '
+        generated.swig_python.write(f'\n')
+        generated.swig_python.write(f'    """\n')
+        generated.swig_python.write(f'    outparams = {main_name}_outparams()\n')
+        generated.swig_python.write(f'    ret = {main_name}_outparams_fn(')
+        sep = ''
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                continue
+            generated.swig_python.write(f'{sep}{arg.name_python}')
+            sep = ', '
+        generated.swig_python.write(f'{sep}outparams)\n')
+        generated.swig_python.write(f'    return ')
+        sep = ''
+        if not return_void:
+            generated.swig_python.write(f'ret')
+            sep = ', '
+        for arg in get_args( tu, cursor):
+            if arg.out_param:
+                generated.swig_python.write(f'{sep}outparams.{arg.name_python}')
+                sep = ', '
+        generated.swig_python.write('\n')
+        generated.swig_python.write('\n')
+
+    make_outparam_helpers_csharp(tu, cursor, fnname, generated)
 
 
 def make_python_class_method_outparam_override(
@@ -3637,8 +3649,6 @@ def make_function_wrapper(
                 tu,
                 cursor,
                 fnname,
-                out_h,
-                out_cpp,
                 generated,
                 )
 
@@ -7231,6 +7241,8 @@ def build( build_dirs, swig, args):
             build_python = int(args.next())
         elif actions == '--csharp':
             build_csharp = int(args.next())
+            if build_csharp:
+                build_python = 0
         elif actions.startswith( '-'):
             raise Exception( f'Unrecognised --build flag: {actions}')
         else:
