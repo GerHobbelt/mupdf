@@ -3155,6 +3155,9 @@ def make_outparam_helper_csharp(
     because these generally indicate sized binary data and cannot be handled
     generically.
     '''
+    def write(text):
+        generated.swig_csharp.write(text)
+
     main_name = rename.function(cursor.mangled_name)
     return_void = cursor.result_type.spelling == 'void'
     make_csharp_wrapper = True
@@ -3163,8 +3166,26 @@ def make_outparam_helper_csharp(
         # Write custom wrapper that returns the binary data.
         # We use C# fn buffer_extract_outparams_fn(fz_buffer buf, buffer_extract_outparams outparams).
         #
-        #
-        pass
+        write('namespace mupdf\n')
+        write('{\n')
+        write('    public class Buffer_extract\n')
+        write('    {\n')
+        write('        public static byte[] fn(Buffer buffer)\n')
+        write('        {\n')
+        write('            var outparams = new buffer_storage_outparams();\n')
+        write('            uint n = mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);\n')
+        write('            var raw1 = SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);\n')
+        write('            System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);\n')
+        write('            byte[] ret = new byte[n];\n')
+        write('            // Marshal.Copy() raises exception if raw2 is null even if n is zero.\n')
+        write('            if (n == 0) return ret;\n')
+        write('            System.Runtime.InteropServices.Marshal.Copy(raw2, ret, 0, (int) n);\n')
+        write('            buffer.clear_buffer();\n')
+        write('            buffer.trim_buffer();\n')
+        write('            return ret;\n')
+        write('        }\n')
+        write('    }\n')
+        write('}\n')
 
     # We don't attempt to generate wrappers for fns that take or return
     # 'unsigned char*' - swig does not treat these as zero-terminated strings,
@@ -3218,8 +3239,6 @@ def make_outparam_helper_csharp(
 
     if make_csharp_wrapper:
         # Write C# wrapper.
-        def write(text):
-            generated.swig_csharp.write(text)
 
         write(f'// C# helper for {cursor.mangled_name} wrapper outparams.\n')
         write(f'namespace mupdf\n')
@@ -8104,33 +8123,34 @@ def main():
                                                     new mupdf.Cookie()
                                                     );
 
+                                            var data0 = mupdf.Buffer_extract.fn(buffer);
+                                            var s0 = System.Text.Encoding.UTF8.GetString(data0, 0, data0.Length);
+                                            Console.WriteLine("s0=" + s0);
+
+                                            var data1 = mupdf.Buffer_extract.fn(buffer);
+                                            var s1 = System.Text.Encoding.UTF8.GetString(data1, 0, data1.Length);
+                                            Console.WriteLine("s1=" + s1);
+
+                                            /*
                                             var outparams = new buffer_storage_outparams();
-                                            //outparams.datap = (System.IntPtr) 0;
-                                            //outparams.datap = (mupdf.SWIGTYPE_p_unsigned_char) 0;
-                                            //outparams.datap = (mupdf.SWIGTYPE_p_unsigned_char) 0;
                                             uint n = mupdf.mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);
+
                                             Console.WriteLine("buffer_storage_outparams_fn():"
                                                     + " outparams.datap=" + outparams.datap
                                                     + " n=" + n
                                                     );
                                             var raw1 = mupdf.SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);
-                                            Console.WriteLine("raw1=" + raw1);
-
                                             System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);
-                                            Console.WriteLine("raw2=" + raw2);
+                                            Console.WriteLine("raw1=" + raw1 + " raw2=" + raw2);
 
                                             byte[] data = new byte[n];
-
                                             System.Runtime.InteropServices.Marshal.Copy(raw2, data, 0, (int) n);
                                             Console.WriteLine("data=" + data);
-
-
-                                            //var data = buffer.buffer_extract();
-                                            //Console.WriteLine("mupdf.buffer_extract() returned: " + data);
-                                            //var outparams = new mupdf.buffer_extract_outparams();
-                                            //var n = mupdf.buffer_extract_outparams_fn(buffer, outparams);
-                                            //Console.WriteLine("buffer_extract_outparams_fn() returned n=" + n + " outparams=" + outparams);
-
+                                            buffer.clear_buffer();
+                                            buffer.trim_buffer();
+                                            string s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
+                                            Console.WriteLine("s=" + s);
+                                            */
                                             Console.WriteLine("MuPDF C# test finished.");
                                         }
                                     }
