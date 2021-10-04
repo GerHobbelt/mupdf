@@ -3159,7 +3159,12 @@ def make_outparam_helper_csharp(
     return_void = cursor.result_type.spelling == 'void'
     make_csharp_wrapper = True
 
-    #if fnname = 'fz_buffer_extract'
+    if fnname == 'fz_buffer_extract':
+        # Write custom wrapper that returns the binary data.
+        # We use C# fn buffer_extract_outparams_fn(fz_buffer buf, buffer_extract_outparams outparams).
+        #
+        #
+        pass
 
     # We don't attempt to generate wrappers for fns that take or return
     # 'unsigned char*' - swig does not treat these as zero-terminated strings,
@@ -8098,6 +8103,28 @@ def main():
                                                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                                                     new mupdf.Cookie()
                                                     );
+
+                                            var outparams = new buffer_storage_outparams();
+                                            //outparams.datap = (System.IntPtr) 0;
+                                            //outparams.datap = (mupdf.SWIGTYPE_p_unsigned_char) 0;
+                                            //outparams.datap = (mupdf.SWIGTYPE_p_unsigned_char) 0;
+                                            uint n = mupdf.mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);
+                                            Console.WriteLine("buffer_storage_outparams_fn():"
+                                                    + " outparams.datap=" + outparams.datap
+                                                    + " n=" + n
+                                                    );
+                                            var raw1 = mupdf.SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);
+                                            Console.WriteLine("raw1=" + raw1);
+
+                                            System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);
+                                            Console.WriteLine("raw2=" + raw2);
+
+                                            byte[] data = new byte[n];
+
+                                            //System.Runtime.InteropServices.Marshal.Copy(raw2, data, 0, n);
+                                            Console.WriteLine("data=" + data);
+
+
                                             //var data = buffer.buffer_extract();
                                             //Console.WriteLine("mupdf.buffer_extract() returned: " + data);
                                             //var outparams = new mupdf.buffer_extract_outparams();
