@@ -8121,7 +8121,7 @@ def main():
 
                                             byte[] data = new byte[n];
 
-                                            //System.Runtime.InteropServices.Marshal.Copy(raw2, data, 0, n);
+                                            System.Runtime.InteropServices.Marshal.Copy(raw2, data, 0, (int) n);
                                             Console.WriteLine("data=" + data);
 
 
