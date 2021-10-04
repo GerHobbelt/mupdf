@@ -86,36 +86,10 @@ public class MuPDFGui : System.Windows.Forms.Form
                 new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                 new mupdf.Cookie()
                 );
-        System.Console.WriteLine("buffer.m_internal=" + buffer.m_internal);
-        string html_content;
-        unsafe
-        {
-            System.IntPtr   p = (System.IntPtr) 0;
-            System.Console.WriteLine("p=" + p);
-            var pp = new mupdf.SWIGTYPE_p_p_unsigned_char(p, false);
-            System.Console.WriteLine("pp=" + pp);
-            var l = buffer.buffer_extract(pp);
-            System.Console.WriteLine("l=" + l);
-            System.Console.WriteLine("pp=" + pp);
-
-            byte* ppp = (byte*) p;
-            //System.Console.WriteLine("ppp=" + ppp);
-            var len = 0;
-            while (ppp[len] != 0) len += 1;
-            html_content = System.Text.Encoding.UTF8.GetString(ppp, len);
-            //html_content = System.Text.Encoding.UTF8.GetString((byte*) p);
-            //html_content = new string((char*) p);
-            //byte* up;
-            //buffer.buffer_extract( (mupdf.SWIGTYPE_p_p_unsigned_char) (&up));
-            /*buffer.buffer_extract( (mupdf.SWIGTYPE_p_p_unsigned_char) &p);
-            mupdf.SWIGTYPE_p_unsigned_char html_raw;
-            mupdf.SWIGTYPE_p_p_unsigned_char p_html_raw = (mupdf.SWIGTYPE_p_p_unsigned_char) &html_raw;
-            buffer.buffer_extract(p_html_raw);
-            html_content = new string(html_raw);*/
-        }
-        //.decode("utf8");
+        var html_bytes = mupdf.Buffer_extract.fn(buffer);
+        var html_string = System.Text.Encoding.UTF8.GetString(html_bytes, 0, html_bytes.Length);
         var web_browser = new System.Windows.Forms.WebBrowser();
-        web_browser.DocumentText = html_content;
+        web_browser.DocumentText = html_string;
         web_browser.Show();
     }
 
