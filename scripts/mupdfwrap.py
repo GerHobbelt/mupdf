@@ -2917,7 +2917,7 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                         ):
                     alt = base_type_cursor
             if verbose:
-                log( '{arg_cursor.type.spelling=} {base_type.spelling=} {arg_cursor.type.kind=}')
+                log( '{arg_cursor.type.spelling=} {base_type.spelling=} {arg_cursor.type.kind=} {get_base_typename(arg_cursor.type)=}')
             if alt:
                 if is_double_pointer( arg_cursor.type):
                     out_param = True
@@ -2935,15 +2935,18 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                 # Pointer to fz_ struct is not usually an out-param.
                 if verbose: log( 'not out-param because arg is: {arg_cursor.displayname=} {base_type.spelling=} {extras}')
             elif arg_cursor.type.kind == clang.cindex.TypeKind.POINTER:
+                pointee = arg_cursor.type.get_pointee()
                 if verbose:
                     log( 'clang.cindex.TypeKind.POINTER')
-                if arg_cursor.type.get_pointee().get_canonical().kind == clang.cindex.TypeKind.FUNCTIONPROTO:
+                if pointee.get_canonical().kind == clang.cindex.TypeKind.FUNCTIONPROTO:
                     # Don't mark function-pointer args as out-params.
                     if verbose:
                         log( 'clang.cindex.TypeKind.FUNCTIONPROTO')
-                elif arg_cursor.type.get_pointee().is_const_qualified():
+                elif pointee.is_const_qualified():
                     if verbose:
                         log( 'is_const_qualified()')
+                elif pointee.spelling == 'FILE':
+                    pass
                 else:
                     if verbose:
                         log( 'setting out_param = True')
@@ -3190,41 +3193,51 @@ def make_outparam_helper_csharp(
         write('}\n')
         write('\n')
 
+        return
+
+    if fnname == 'fz_open_file_ptr_no_close':
+        for arg in get_args( tu, cursor):
+            jlib.log('{arg=}')
+            jlib.log('{arg.cursor.type.kind=}')
+            if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
+                jlib.log('{arg.cursor.type.get_pointee().spelling=}')
+        sys.exit(1)
+
     # We don't attempt to generate wrappers for fns that take or return
     # 'unsigned char*' - swig does not treat these as zero-terminated strings,
     # and they are generally binary data so cannot be handled generically.
     #
     if is_pointer_to(cursor.result_type, 'unsigned char'):
         jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because it returns unsigned char*.')
-        make_csharp_wrapper = False
+        return
     for arg in get_args( tu, cursor):
         if is_pointer_to(arg.cursor.type, 'unsigned char'):
             jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char* arg.')
-            make_csharp_wrapper = False
+            return
         if is_pointer_to_pointer_to(arg.cursor.type, 'unsigned char'):
             jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char** arg.')
-            make_csharp_wrapper = False
+            return
         if arg.cursor.type.get_array_size() >= 0:
             jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has array arg.')
-            make_csharp_wrapper = False
+            return
         if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
             pointee = arg.cursor.type.get_pointee().get_canonical()
             if pointee.kind==clang.cindex.TypeKind.ENUM:
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has enum out-param arg.')
-                make_csharp_wrapper = False
+                return
             if pointee.kind == clang.cindex.TypeKind.FUNCTIONPROTO:
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has fn-ptr arg.')
-                make_csharp_wrapper = False
+                return
             if pointee.is_const_qualified():
                 # Not an out-param.
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has pointer-to-const arg.')
-                make_csharp_wrapper = False
+                return
             if arg.cursor.type.get_pointee().spelling == 'FILE':
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has FILE* arg.')
-                make_csharp_wrapper = False
+                return
             if pointee.spelling == 'void':
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has void* arg.')
-                make_csharp_wrapper = False
+                return
 
     if make_csharp_wrapper:
         num_return_values = 0 if return_void else 1
@@ -3238,7 +3251,7 @@ def make_outparam_helper_csharp(
             #   System.NotImplementedException: tuples > 7
             #
             jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because would require > 7-tuple.')
-            make_csharp_wrapper = False
+            return
 
     if make_csharp_wrapper:
         # Write C# wrapper.
@@ -3387,6 +3400,14 @@ def make_outparam_helper(
     We write the code to Python code to generated.swig_python and C++ code to
     generated.swig_cpp.
     '''
+    if fnname == 'fz_open_file_ptr_no_close':
+        for arg in get_args( tu, cursor, verbose=True):
+            jlib.log('{arg=}')
+            jlib.log('{arg.cursor.type.kind=}')
+            if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
+                jlib.log('{arg.cursor.type.get_pointee().spelling=}')
+        sys.exit(1)
+
     verbose = False
     main_name = rename.function(cursor.mangled_name)
     generated.swig_cpp.write( '\n')
@@ -3433,17 +3454,34 @@ def make_outparam_helper(
             continue
         if arg.cursor.type.get_pointee().kind == clang.cindex.TypeKind.POINTER:
             generated.swig_cpp.write(f'    outparams->{arg.name} = NULL;\n')
-    # Make call.
-    generated.swig_cpp.write(f'    return {rename.function_call(cursor.mangled_name)}(')
+    # Make call. Note that *_outparams will have changed size_t to unsigned long or similar so
+    # that SWIG can handle it. Would like to cast the addresses of the struct members to
+    # things like (size_t*) but this cause problems with const so we use temporaries.
+    for arg in get_args( tu, cursor):
+        if not arg.out_param:
+            continue
+        generated.swig_cpp.write(f'    {declaration_text(arg.cursor.type.get_pointee(), arg.name)};\n')
+    return_void = (cursor.result_type.spelling == 'void')
+    generated.swig_cpp.write(f'    ')
+    if not return_void:
+        generated.swig_cpp.write(f'{declaration_text(cursor.result_type, "ret")} = ')
+    generated.swig_cpp.write(f'{rename.function_call(cursor.mangled_name)}(')
     sep = ''
     for arg in get_args( tu, cursor):
         generated.swig_cpp.write(sep)
         if arg.out_param:
-            generated.swig_cpp.write(f'&outparams->{arg.name}')
+            #generated.swig_cpp.write(f'&outparams->{arg.name}')
+            generated.swig_cpp.write(f'&{arg.name}')
         else:
             generated.swig_cpp.write(f'{arg.name}')
         sep = ', '
     generated.swig_cpp.write(');\n')
+    for arg in get_args( tu, cursor):
+        if not arg.out_param:
+            continue
+        generated.swig_cpp.write(f'    outparams->{arg.name} = {arg.name};\n')
+    if not return_void:
+        generated.swig_cpp.write('    return ret;\n')
     generated.swig_cpp.write('}\n')
     generated.swig_cpp.write('\n')
 
@@ -8172,10 +8210,10 @@ def main():
                             )
                     if g_windows:
                         jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
-                        #jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                        jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                     else:
                         jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
-                        #jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+                        jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
