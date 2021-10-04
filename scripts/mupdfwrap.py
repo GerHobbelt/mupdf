@@ -3139,15 +3139,27 @@ class Generated:
         to_pickle( self.swig_python.getvalue(),     f'{dirpath}/swig_python.pickle')
         to_pickle( self.to_string_structnames,      f'{dirpath}/to_string_structnames.pickle')
 
-def make_outparam_helpers_csharp(
+def make_outparam_helper_csharp(
         tu,
         cursor,
         fnname,
+        fnname_wrapper,
         generated,
         ):
+    '''
+    Write C# code for a convenient tuple-returning wrapper for MuPDF
+    function that has out-params. We use the C# wrapper for our generated
+    {main_name}_outparams() function.
+
+    We don't attempt to handle functions that take unsigned char* args
+    because these generally indicate sized binary data and cannot be handled
+    generically.
+    '''
     main_name = rename.function(cursor.mangled_name)
     return_void = cursor.result_type.spelling == 'void'
     make_csharp_wrapper = True
+
+    #if fnname = 'fz_buffer_extract'
 
     # We don't attempt to generate wrappers for fns that take or return
     # 'unsigned char*' - swig does not treat these as zero-terminated strings,
@@ -3212,6 +3224,7 @@ def make_outparam_helpers_csharp(
         write(f'        public static ')
 
         # Generate the returned tuple.
+        #
         if num_return_values > 1:
             write('(')
 
@@ -3279,6 +3292,7 @@ def make_outparam_helpers_csharp(
         write(f')\n')
 
         # Function body.
+        #
         write(f'        {{\n')
 
         # Create local outparams struct.
@@ -3332,13 +3346,11 @@ def make_outparam_helpers_csharp(
         write('\n')
 
 
-
-
-
-def make_outparam_helpers(
+def make_outparam_helper(
         tu,
         cursor,
         fnname,
+        fnname_wrapper,
         generated,
         ):
     '''
@@ -3455,7 +3467,8 @@ def make_outparam_helpers(
         generated.swig_python.write('\n')
         generated.swig_python.write('\n')
 
-    make_outparam_helpers_csharp(tu, cursor, fnname, generated)
+    # Write C# wrapper.
+    make_outparam_helper_csharp(tu, cursor, fnname, fnname_wrapper, generated)
 
 
 def make_python_class_method_outparam_override(
@@ -3542,6 +3555,7 @@ def make_function_wrapper(
         tu,
         cursor,
         fnname,
+        fnname_wrapper,
         out_h,
         out_cpp,
         generated,
@@ -3553,6 +3567,8 @@ def make_function_wrapper(
     cursor:
         Clang cursor for function to wrap.
     fnname:
+        Name of wrapped function.
+    fnname_wrapper:
         Name of function to create.
     out_h:
         Stream to which we write header output.
@@ -3578,9 +3594,9 @@ def make_function_wrapper(
     '''
     assert cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL
 
-    verbose = fnname == 'pdf_add_annot_ink_list'
+    verbose = fnname_wrapper == 'pdf_add_annot_ink_list'
 
-    # Write first line: <result_type> <fnname> (<args>...)
+    # Write first line: <result_type> <fnname_wrapper> (<args>...)
     #
     for out in out_h, out_cpp:
         out.write( f'/* Wrapper for {cursor.mangled_name}(). */\n')
@@ -3591,8 +3607,8 @@ def make_function_wrapper(
         if not cursor.raw_comment.endswith( '\n'):
             out_h.write( '\n')
 
-    name_args_h = f'{fnname}('
-    name_args_cpp = f'{fnname}('
+    name_args_h = f'{fnname_wrapper}('
+    name_args_cpp = f'{fnname_wrapper}('
     comma = ''
     num_out_params = 0
     for arg in get_args( tu, cursor, include_fz_context=True):
@@ -3645,10 +3661,11 @@ def make_function_wrapper(
     out_cpp.write( '\n')
 
     if num_out_params:
-        make_outparam_helpers(
+        make_outparam_helper(
                 tu,
                 cursor,
                 fnname,
+                fnname_wrapper,
                 generated,
                 )
 
@@ -4206,6 +4223,7 @@ def make_function_wrappers(
             make_function_wrapper(
                     tu,
                     cursor,
+                    fnname,
                     fnname_wrapper,
                     temp_out_h,
                     temp_out_cpp,
