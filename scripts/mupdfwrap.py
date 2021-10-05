@@ -3222,7 +3222,7 @@ def make_outparam_helper_csharp(
         write('    // Wrapper for fz_buffer_extract().\n')
         write('    public static class Buffer_extract\n')
         write('    {\n')
-        write('        public static byte[] fn(Buffer buffer)\n')
+        write('        public static byte[] buffer_extract(this Buffer buffer)\n')
         write('        {\n')
         write('            var outparams = new buffer_storage_outparams();\n')
         write('            uint n = mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);\n')
@@ -3302,18 +3302,16 @@ def make_outparam_helper_csharp(
 
     if make_csharp_wrapper:
         # Write C# wrapper.
-
-        write(f'// C# helper for {cursor.mangled_name} wrapper outparams.\n')
+        arg0, _ = get_first_arg( tu, cursor)
+        write(f'// C# helper for {cursor.mangled_name}() wrapper outparams.\n')
         write(f'namespace mupdf\n')
         write(f'{{\n')
         write(f'    public static class {main_name}_outparams_helper\n')
         write(f'    {{\n')
+        if arg0.alt:
+            write(f'        // Out-params extension method {fnname_wrapper}() (wrapper for {fnname}())\n')
+            write(f'        // for class {rename.class_(arg0.alt.type.spelling)} (wrapper for {arg0.alt.type.spelling}).\n')
         write(f'        public static ')
-
-        # Generate the returned tuple.
-        #
-        if num_return_values > 1:
-            write('(')
 
         def write_type(alt, type_):
             if alt:
@@ -3327,6 +3325,11 @@ def make_outparam_helper_csharp(
                 elif text == 'size_t':          text = 'uint'
                 elif text == 'unsigned int':    text = 'uint'
                 write(f'{text}')
+
+        # Generate the returned tuple.
+        #
+        if num_return_values > 1:
+            write('(')
 
         sep = ''
 
@@ -3350,13 +3353,21 @@ def make_outparam_helper_csharp(
             if arg.out_param:
                 write(sep)
                 write_type(arg.alt, arg.cursor.type.get_pointee())
+                if num_return_values > 1:
+                    write(f' {arg.name_csharp}')
                 sep = ', '
 
         if num_return_values > 1:
             write(')')
 
-        # Generate function name and params.
-        write(f' fn(')
+        # Generate function name and params. If first arg is a wrapper class we
+        # use C#'s 'this' keyword to make this a member function of the wrapper
+        # class.
+        #jlib.log('outputs fn {fnname=}: is member: {"yes" if arg0.alt else "no"}')
+        write(f' ')
+        write(fnname_wrapper if arg0.alt else 'fn')
+        write(f'(')
+        if arg0.alt: write('this ')
         sep = ''
         for arg in get_args( tu, cursor):
             if arg.out_param:
@@ -8218,14 +8229,14 @@ def main():
                                                     new mupdf.Cookie()
                                                     );
 
-                                            var data = mupdf.Buffer_extract.fn(buffer);
+                                            var data = buffer.buffer_extract();
                                             var s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
                                             if (s.Length < 100) {
                                                 throw new System.Exception("HTML text is too short");
                                             }
                                             Console.WriteLine("s=" + s);
 
-                                            data = mupdf.Buffer_extract.fn(buffer);
+                                            data = buffer.buffer_extract();
                                             s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
                                             if (s.Length > 0) {
                                                 throw new System.Exception("Buffer was not cleared.");
