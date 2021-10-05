@@ -3678,6 +3678,62 @@ def make_python_class_method_outparam_override(
     out.write('\n')
 
 
+def make_wrapper_comment(
+        tu,
+        cursor,
+        fnname,
+        fnname_wrapper,
+        indent,
+        is_method
+        ):
+    ret = io.StringIO()
+    def write(text):
+        text = text.replace('\n', f'\n{indent}')
+        ret.write( text)
+
+    num_out_params = 0
+    for arg in get_args( tu, cursor, include_fz_context=True):
+        if is_pointer_to(arg.cursor.type, 'fz_context'):
+            continue
+        if arg.out_param:
+            num_out_params += 1
+
+    write( f'/* Wrapper for {cursor.mangled_name}().')
+    if num_out_params:
+        write( f'\n')
+        write( f'\n')
+        write( f'This function has out-params. Python/C# wrappers look like:\n')
+        write( f'    {fnname_wrapper}(')
+        sep = ''
+        for arg in get_args( tu, cursor, include_fz_context=True):
+            if is_pointer_to(arg.cursor.type, 'fz_context'):
+                continue
+            if not arg.out_param:
+                write( f'{sep}{declaration_text( arg.cursor.type, arg.name)}')
+                sep = ', '
+        write(') => ')
+        if num_out_params > 1:
+            write( '(')
+        sep = ''
+        if cursor.result_type.spelling != 'void':
+            write( f'{cursor.result_type.spelling}')
+            sep = ', '
+        for arg in get_args( tu, cursor, include_fz_context=True):
+            if is_pointer_to(arg.cursor.type, 'fz_context'):
+                continue
+            if arg.out_param:
+                write( f'{sep}{declaration_text( arg.cursor.type.get_pointee(), arg.name)}')
+                sep = ', '
+        if num_out_params > 1:
+            write( ')')
+        write( f'\n')
+    else:
+        write( ' ')
+
+    ret.write('*/\n')
+    return ret.getvalue()
+
+
 def make_function_wrapper(
         tu,
         cursor,
@@ -3723,10 +3779,18 @@ def make_function_wrapper(
 
     verbose = fnname_wrapper == 'pdf_add_annot_ink_list'
 
+    num_out_params = 0
+    for arg in get_args( tu, cursor, include_fz_context=True):
+        if is_pointer_to(arg.cursor.type, 'fz_context'):
+            continue
+        if arg.out_param:
+            num_out_params += 1
+
     # Write first line: <result_type> <fnname_wrapper> (<args>...)
     #
+    comment = make_wrapper_comment( tu, cursor, fnname, fnname_wrapper, indent='', is_method=False)
     for out in out_h, out_cpp:
-        out.write( f'/* Wrapper for {cursor.mangled_name}(). */\n')
+        out.write( comment)
 
     # Copy any comment into .h file before declaration.
     if cursor.raw_comment:
@@ -3737,14 +3801,11 @@ def make_function_wrapper(
     name_args_h = f'{fnname_wrapper}('
     name_args_cpp = f'{fnname_wrapper}('
     comma = ''
-    num_out_params = 0
     for arg in get_args( tu, cursor, include_fz_context=True):
         if verbose:
             log( '{arg.cursor=} {arg.name=} {arg.separator=} {arg.alt=} {arg.out_param=}')
         if is_pointer_to(arg.cursor.type, 'fz_context'):
             continue
-        if arg.out_param:
-            num_out_params += 1
         if arg.out_param:
             decl = ''
             decl += '\n'
@@ -7065,6 +7126,7 @@ def build_swig(
         jlib.log('{len(cs2)=}')
         assert cs2 != cs, f'Failed to add toString() methods.'
         jlib.log('{len(generated.swig_csharp)=}')
+        assert len(generated.swig_csharp)
         cs2 += generated.swig_csharp
         jlib.update_file(cs2, f'{build_dirs.dir_so}/mupdf.cs')
         #jlib.copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
