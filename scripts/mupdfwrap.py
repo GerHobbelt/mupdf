@@ -519,15 +519,10 @@ Usage:
                 -f
                     Force rebuilds.
 
-                --python 0|1
-                --csharp 0|1
-                    Whether to generated bindings for python and/or C#. Note
-                    that specifying both results in a _mupdf.so containing
-                    support for both Python and C# but it appears to not work
-                    with C#.
-
-                    Default is python only so to build for C# use "--python 0
-                    --csharp 1'.
+                --python
+                --csharp
+                    Whether to generated bindings for python or C#. Default is
+                    --python. If specified multiple times, the last wins.
 
             <actions> is list of single-character actions which are processed in
             order. If <actions> is 'all', it is replaced by m0123.
@@ -1025,6 +1020,8 @@ class ExtraMethod:
         self.comment = comment
         self.overload = overload
         assert '\t' not in body
+    def __str__(self):
+        return f'{self.name_args} => {self.return_}'
 
 
 class ExtraConstructor:
@@ -7400,11 +7397,11 @@ def build( build_dirs, swig, args):
             d = args.next()
             g_show_details = lambda name: d in name
         elif actions == '--python':
-            build_python = int(args.next())
+            build_python = True
+            build_csharp = False
         elif actions == '--csharp':
-            build_csharp = int(args.next())
-            if build_csharp:
-                build_python = 0
+            build_python = False
+            build_csharp = True
         elif actions.startswith( '-'):
             raise Exception( f'Unrecognised --build flag: {actions}')
         else:
@@ -7495,10 +7492,10 @@ def build( build_dirs, swig, args):
                     actual.sort()
                     if expected != actual:
                         text = f'Generated {name} filenames differ from expected:\n'
-                        text += '    expected ({len(expected)}:\n'
+                        text += f'    expected {len(expected)}:\n'
                         for i in expected:
                             text += f'        {i}\n'
-                        text += '    generated ({len(actual)}:\n'
+                        text += f'    generated {len(actual)}:\n'
                         for i in actual:
                             text += f'        {i}\n'
                         raise Exception(text)
@@ -7717,8 +7714,8 @@ def build( build_dirs, swig, args):
                     # like _mupdf.so does not require a matching
                     # libmupdfcpp.so and libmupdf.sp.]
                     #
-
-                    if 1:
+                    include3 = ''
+                    if build_python:
                         # We use python-config which appears to
                         # work better than pkg-config because
                         # it copes with multiple installed
@@ -7737,15 +7734,7 @@ def build( build_dirs, swig, args):
                         # --cflags gives things like
                         # -Wno-unused-result -g etc, so we just use
                         # --includes.
-                        python_includes = jlib.system( f'{python_config} --includes', out='return')
-                        #python_link     = jlib.system( f'{python_config} --ldflags', out='return')
-                        python_link = ''
-                        libpython_so    = None
-                    else:
-                        # Use pkg-config to find compile/link flags for building with python.
-                        python_includes = jlib.system( 'pkg-config --cflags python3', out='return')
-                        python_link     = jlib.system( 'pkg-config --libs python3', out='return')
-                        libpython_so    = None
+                        include3 = jlib.system( f'{python_config} --includes', out='return')
 
                     # These are the input files to our g++ command:
                     #
@@ -7778,10 +7767,9 @@ def build( build_dirs, swig, args):
                                 --shared
                                 -I {include1}
                                 -I {include2}
-                                {python_includes}
+                                {include3}
                                 {cpp_path}
-                                {jlib.link_l_flags( [mupdf_so, mupdfcpp_so, libpython_so])}
-                                {python_link}
+                                {jlib.link_l_flags( [mupdf_so, mupdfcpp_so])}
                             ''').strip().replace( '\n', ' \\\n').strip()
                             )
                     infiles = [
@@ -7812,6 +7800,7 @@ def main():
     # Set default swig.
     #
     swig = 'swig'
+    have_seen_build_arg = False
 
     args = jlib.Args( sys.argv[1:])
     while 1:
@@ -7827,6 +7816,8 @@ def main():
                 print( __doc__)
 
             elif arg == '--build' or arg == '-b':
+                assert not have_seen_build_arg, 'Cannot run --build/-b more than once'
+                have_seen_build_arg = True
                 build( build_dirs, swig, args)
 
             elif arg == '--compare-fz_usage':
