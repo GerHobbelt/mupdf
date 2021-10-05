@@ -8276,6 +8276,8 @@ def main():
                                         public static void Main(string[] args)
                                         {
                                             Console.WriteLine("MuPDF C# test starting.");
+
+                                            // Check we can load a document.
                                             mupdf.Document document = new mupdf.Document("zlib.3.pdf");
                                             Console.WriteLine("document: " + document);
                                             Console.WriteLine("num chapters: " + document.count_chapters());
@@ -8287,14 +8289,13 @@ def main():
                                                 throw new System.Exception("rect ToString() is broken: '" + rect + "' != '" + rect.to_string() + "'");
                                             }
 
-                                            // Test fz_buffer_extract().
+                                            // Test conversion to html using docx device.
                                             var buffer = page.new_buffer_from_page_with_format(
                                                     "docx",
                                                     "html",
                                                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                                                     new mupdf.Cookie()
                                                     );
-
                                             var data = buffer.buffer_extract();
                                             var s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
                                             if (s.Length < 100) {
@@ -8302,10 +8303,32 @@ def main():
                                             }
                                             Console.WriteLine("s=" + s);
 
+                                            // Check that previous buffer.buffer_extract() cleared the buffer.
                                             data = buffer.buffer_extract();
                                             s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
                                             if (s.Length > 0) {
                                                 throw new System.Exception("Buffer was not cleared.");
+                                            }
+
+                                            // Check we can create pixmap from page.
+                                            var pixmap = page.new_pixmap_from_page_contents(
+                                                    new mupdf.Matrix(1, 0, 0, 1, 0, 0),
+                                                    new mupdf.Colorspace(mupdf.Colorspace.Fixed.Fixed_RGB),
+                                                    0 /*alpha*/
+                                                    );
+
+                                            // Check returned tuple from bitmap.bitmap_details().
+                                            var w = 100;
+                                            var h = 200;
+                                            var n = 4;
+                                            var xres = 300;
+                                            var yres = 300;
+                                            var bitmap = new mupdf.Bitmap(w, h, n, xres, yres);
+                                            (var w2, var h2, var n2, var stride) = bitmap.bitmap_details();
+                                            Console.WriteLine("bitmap.bitmap_details() returned:"
+                                                    + " " + w2 + " " + h2 + " " + n2 + " " + stride);
+                                            if (w2 != w || h2 != h) {
+                                                throw new System.Exception("Unexpected tuple values from bitmap.bitmap_details().");
                                             }
 
                                             Console.WriteLine("MuPDF C# test finished.");
