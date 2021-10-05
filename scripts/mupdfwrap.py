@@ -2910,7 +2910,7 @@ def get_extras(type_):
 
 get_args_cache = dict()
 
-def get_args( tu, cursor, include_fz_context=False, verbose=False):
+def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbose=False):
     '''
     Yields Arg instance for each arg of the function at <cursor>.
 
@@ -2921,6 +2921,8 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
             Clang cursor for the function.
         include_fz_context:
             If false, we skip args that are 'struct fz_context*'
+        skip_first_alt:]
+            If true, we skip the first arg with .alt set.
         verbose:
             .
     '''
@@ -2928,12 +2930,13 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
     # are slow, so we cache the returned items. E.g. this reduces total time of
     # --build 0 from 3.5s to 2.1s.
     #
-    key = tu, cursor.location.file, cursor.location.line, include_fz_context
+    key = tu, cursor.location.file, cursor.location.line, include_fz_context, skip_first_alt
     ret = get_args_cache.get( key)
 
     if ret is None:
         ret = []
         i = 0
+        i_alt = 0
         separator = ''
         for arg_cursor in cursor.get_arguments():
             assert arg_cursor.kind == clang.cindex.CursorKind.PARM_DECL
@@ -2997,10 +3000,14 @@ def get_args( tu, cursor, include_fz_context=False, verbose=False):
                     if verbose:
                         log( 'setting out_param = True')
                     out_param = True
+            if alt:
+                i_alt += 1
+            i += 1
+            if alt and skip_first_alt and i_alt == 1:
+                continue
             if verbose:
                 log( '*** returning {(arg_cursor.displayname, name, separator, alt, out_param)}')
             ret.append( Arg(arg_cursor, name, separator, alt, out_param))
-            i += 1
             separator = ', '
 
         get_args_cache[ key] = ret
@@ -3692,41 +3699,36 @@ def make_wrapper_comment(
         ret.write( text)
 
     num_out_params = 0
-    for arg in get_args( tu, cursor, include_fz_context=True):
-        if is_pointer_to(arg.cursor.type, 'fz_context'):
-            continue
+    for arg in get_args( tu, cursor, include_fz_context=False, skip_first_alt=is_method):
         if arg.out_param:
             num_out_params += 1
 
     write( f'Wrapper for {cursor.mangled_name}().')
     if num_out_params:
+        tuple_size = num_out_params
+        if cursor.result_type.spelling != 'void':
+            tuple_size += 1
         write( f'\n')
         write( f'\n')
         write( f'This {"method" if is_method else "function"} has out-params. Python/C# wrappers look like:\n')
         write( f'    {fnname_wrapper}(')
         sep = ''
-        i = 0
-        for arg in get_args( tu, cursor):
-            i += 1
-            if i == 1 and is_method:
-                continue    # Skip first arg.
+        for arg in get_args( tu, cursor, include_fz_context=False, skip_first_alt=is_method):
             if not arg.out_param:
                 write( f'{sep}{declaration_text( arg.cursor.type, arg.name)}')
                 sep = ', '
         write(') => ')
-        if num_out_params > 1:
+        if tuple_size > 1:
             write( '(')
         sep = ''
         if cursor.result_type.spelling != 'void':
             write( f'{cursor.result_type.spelling}')
             sep = ', '
-        for arg in get_args( tu, cursor, include_fz_context=True):
-            if is_pointer_to(arg.cursor.type, 'fz_context'):
-                continue
+        for arg in get_args( tu, cursor, include_fz_context=False, skip_first_alt=is_method):
             if arg.out_param:
                 write( f'{sep}{declaration_text( arg.cursor.type.get_pointee(), arg.name)}')
                 sep = ', '
-        if num_out_params > 1:
+        if tuple_size > 1:
             write( ')')
         write( f'\n')
     else:
