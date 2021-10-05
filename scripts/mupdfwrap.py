@@ -151,7 +151,7 @@ C++ wrapping:
             fz_lookup_metadata() and its wrappers, mupdf::fz_lookup_metadata()
             and mupdf::Document::lookup_metadata().
 
-        Output params:
+        Output parameters:
 
             We provide two different ways of wrapping functions with
             out-params.
@@ -160,16 +160,16 @@ C++ wrapping:
 
                 First, in generated C++ prototypes, we use OUTPUT as the
                 name of out-params, which tells SWIG to treat them as
-                out-params. This works for basic types so SWIG will generate
-                Python code that returns a tuple and C# code that takes args
-                marked with 'out'.
+                out-params. This works for basic out-params such as int*, so
+                SWIG will generate Python code that returns a tuple and C# code
+                that takes args marked with the C# keyword 'out'.
 
             Unfortunately SWIG doesn't appear to handle out-params that
             are zero terminated strings (char**) and cannot generically
             handle binary data out-params (often indicated with unsigned
             char**). Also, SWIG-generated C# out-params are a little
-            inconvenient compared to returning a C# tuple (note that C# tuples
-            require C# 7 or later).
+            inconvenient compared to returning a C# tuple (requires C# 7 or
+            later).
 
             So we provide an additional mechanism in the generated C++.
 
@@ -179,20 +179,20 @@ C++ wrapping:
                 containing just the out-params and a function taking just the
                 non-out-param args, plus a pointer to the class. This function
                 fills in the members of this class instead of returning
-                individual out-params. We can then then generate Python or C#
-                code that uses these special functions to get the out-params in
-                a class object and return them as a tuple in both Python and
-                C#.
+                individual out-params. We can then then generate extra Python
+                or C# code that uses these special functions to get the
+                out-params in a class object and return them as a tuple in both
+                Python and C#.
 
             Binary out-param data:
 
                 Some MuPDF functions return binary data, typically with an
                 'unsigned char**' out-param. It is not possible to generically
                 handle these in Python or C# because the size of the returned
-                buffer can be in a different out-param or in the return
-                value. So we generate custom Python and C# code to give a
-                convenient interface, e.g. copying the returned data into a
-                Python bytes object or a C# byte array.
+                buffer is specified elsewhere (in a different out-param or in
+                the return value). So we generate custom Python and C# code to
+                give a convenient interface, e.g. copying the returned data
+                into a Python bytes object or a C# byte array.
 
 
 
