@@ -416,8 +416,7 @@ Generated files:
             c_functions.pickle
             c_globals.pickle
             container_classnames.pickle
-            swig_cpp_csharp.pickle
-            swig_cpp_python.pickle
+            swig_cpp.pickle
             swig_csharp.pickle
             swig_python.pickle
             to_string_structnames.pickle
@@ -3154,8 +3153,6 @@ class Generated:
             self.c_globals              = from_pickle( f'{dirpath}/c_globals.pickle')
             self.container_classnames   = from_pickle( f'{dirpath}/container_classnames.pickle')
             self.swig_cpp               = from_pickle( f'{dirpath}/swig_cpp.pickle')
-            self.swig_cpp_csharp        = from_pickle( f'{dirpath}/swig_cpp_csharp.pickle')
-            self.swig_cpp_python        = from_pickle( f'{dirpath}/swig_cpp_python.pickle')
             self.swig_csharp            = from_pickle( f'{dirpath}/swig_csharp.pickle')
             self.swig_python            = from_pickle( f'{dirpath}/swig_python.pickle')
             self.to_string_structnames  = from_pickle( f'{dirpath}/to_string_structnames.pickle')
@@ -3171,7 +3168,6 @@ class Generated:
             self.c_globals = []
             self.swig_cpp = io.StringIO()
             self.swig_cpp_python = io.StringIO()
-            self.swig_cpp_csharp = io.StringIO()
             self.swig_python = io.StringIO()
             self.swig_csharp = io.StringIO()
 
@@ -3183,8 +3179,6 @@ class Generated:
         to_pickle( self.c_globals,                  f'{dirpath}/c_globals.pickle')
         to_pickle( self.container_classnames,       f'{dirpath}/container_classnames.pickle')
         to_pickle( self.swig_cpp.getvalue(),        f'{dirpath}/swig_cpp.pickle')
-        to_pickle( self.swig_cpp_csharp.getvalue(), f'{dirpath}/swig_cpp_csharp.pickle')
-        to_pickle( self.swig_cpp_python.getvalue(), f'{dirpath}/swig_cpp_python.pickle')
         to_pickle( self.swig_csharp.getvalue(),     f'{dirpath}/swig_csharp.pickle')
         to_pickle( self.swig_python.getvalue(),     f'{dirpath}/swig_python.pickle')
         to_pickle( self.to_string_structnames,      f'{dirpath}/to_string_structnames.pickle')
@@ -6663,8 +6657,6 @@ def build_swig(
                 '''
 
     common += generated.swig_cpp
-    if language == 'csharp':
-        common += generated.swig_cpp_csharp
 
     text = ''
 
@@ -7394,8 +7386,6 @@ def build( build_dirs, swig, args):
 
     force_rebuild = False
     header_git = False
-    swig_cpp_python = None
-    swig_cpp_csharp = None
     swig_python = None
     g_show_details = lambda name: False
     jlib.log('{build_dirs.dir_so=}')
@@ -7419,11 +7409,6 @@ def build( build_dirs, swig, args):
             raise Exception( f'Unrecognised --build flag: {actions}')
         else:
             break
-
-    if swig_cpp_python and swig_cpp_csharp:
-        log('Building a _mupdf.so containing both Python and C# wrapping code does not seem to work with C#.')
-        log('For example use "-b --python 0 --csharp 1 ..." to get a C#-compatible _mupdf.so.')
-        assert 0
 
     if actions == 'all':
         actions = '0123' if g_windows else 'm0123'
@@ -7764,8 +7749,6 @@ def build( build_dirs, swig, args):
 
                     # These are the input files to our g++ command:
                     #
-                    swig_cpp_python = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
-                    swig_cpp_csharp = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
                     include1        = f'{build_dirs.dir_mupdf}/include'
                     include2        = f'{build_dirs.dir_mupdf}/platform/c++/include'
 
@@ -7773,8 +7756,10 @@ def build( build_dirs, swig, args):
                     mupdfcpp_so     = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
                     if build_python:
+                        cpp_path = 'platform/python/mupdfcpp_swig.cpp'
                         out_so = f'{build_dirs.dir_so}/_mupdf.so'
                     elif build_csharp:
+                        cpp_path = 'platform/csharp/mupdfcpp_swig.cpp'
                         out_so = f'{build_dirs.dir_so}/mupdfcsharp.so'
 
                     # We use jlib.link_l_flags() to add -L options
@@ -7794,22 +7779,18 @@ def build( build_dirs, swig, args):
                                 -I {include1}
                                 -I {include2}
                                 {python_includes}
-                                {swig_cpp_csharp if build_csharp else ""}
-                                {swig_cpp_python if build_python else ""}
+                                {cpp_path}
                                 {jlib.link_l_flags( [mupdf_so, mupdfcpp_so, libpython_so])}
                                 {python_link}
                             ''').strip().replace( '\n', ' \\\n').strip()
                             )
                     infiles = [
+                            cpp_path,
                             include1,
                             include2,
                             mupdf_so,
                             mupdfcpp_so,
                             ]
-                    if build_python:
-                        infiles.append(swig_cpp_python)
-                    if build_csharp:
-                        infiles.append(swig_cpp_csharp)
                     jlib.build(
                             infiles,
                             out_so,
