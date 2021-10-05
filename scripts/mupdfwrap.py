@@ -3698,16 +3698,18 @@ def make_wrapper_comment(
         if arg.out_param:
             num_out_params += 1
 
-    write( f'/* Wrapper for {cursor.mangled_name}().')
+    write( f'Wrapper for {cursor.mangled_name}().')
     if num_out_params:
         write( f'\n')
         write( f'\n')
-        write( f'This function has out-params. Python/C# wrappers look like:\n')
+        write( f'This {"method" if is_method else "function"} has out-params. Python/C# wrappers look like:\n')
         write( f'    {fnname_wrapper}(')
         sep = ''
-        for arg in get_args( tu, cursor, include_fz_context=True):
-            if is_pointer_to(arg.cursor.type, 'fz_context'):
-                continue
+        i = 0
+        for arg in get_args( tu, cursor):
+            i += 1
+            if i == 1 and is_method:
+                continue    # Skip first arg.
             if not arg.out_param:
                 write( f'{sep}{declaration_text( arg.cursor.type, arg.name)}')
                 sep = ', '
@@ -3730,7 +3732,6 @@ def make_wrapper_comment(
     else:
         write( ' ')
 
-    ret.write('*/\n')
     return ret.getvalue()
 
 
@@ -3789,6 +3790,7 @@ def make_function_wrapper(
     # Write first line: <result_type> <fnname_wrapper> (<args>...)
     #
     comment = make_wrapper_comment( tu, cursor, fnname, fnname_wrapper, indent='', is_method=False)
+    comment = f'/* {comment}*/\n'
     for out in out_h, out_cpp:
         out.write( comment)
 
@@ -5066,7 +5068,7 @@ def class_write_method(
     if constructor:
         comment = f'Constructor using {fnname}().'
     else:
-        comment = f'Wrapper for {fnname}().'
+        comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True)
 
     if not static and not constructor:
         assert have_used_this, f'error: wrapper for {structname}: {fnname}() is not useful - does not have a {structname} arg.'
