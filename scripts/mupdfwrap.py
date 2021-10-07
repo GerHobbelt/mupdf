@@ -3209,16 +3209,16 @@ def make_outparam_helper_csharp(
         # buf, buffer_extract_outparams outparams).
         #
         write('// Custom C# helper for fz_buffer_extract().\n')
-        write('namespace mupdf\n')
-        write('{\n')
+        #write('namespace mupdf\n')
+        #write('{\n')
         write('    // Wrapper for fz_buffer_extract().\n')
-        write('    public static class Buffer_extract\n')
+        write('    public static class mupdf_Buffer_extract\n')
         write('    {\n')
-        write('        public static byte[] buffer_extract(this Buffer buffer)\n')
+        write('        public static byte[] buffer_extract(this mupdf.Buffer buffer)\n')
         write('        {\n')
-        write('            var outparams = new buffer_storage_outparams();\n')
-        write('            uint n = mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);\n')
-        write('            var raw1 = SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);\n')
+        write('            var outparams = new mupdf.buffer_storage_outparams();\n')
+        write('            uint n = mupdf.mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);\n')
+        write('            var raw1 = mupdf.SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);\n')
         write('            System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);\n')
         write('            byte[] ret = new byte[n];\n')
         write('            // Marshal.Copy() raises exception if <raw2> is null even if <n> is zero.\n')
@@ -3229,7 +3229,7 @@ def make_outparam_helper_csharp(
         write('            return ret;\n')
         write('        }\n')
         write('    }\n')
-        write('}\n')
+        #write('}\n')
         write('\n')
 
         return
@@ -3288,9 +3288,9 @@ def make_outparam_helper_csharp(
         # Write C# wrapper.
         arg0, _ = get_first_arg( tu, cursor)
         write(f'// C# helper for {cursor.mangled_name}() wrapper outparams.\n')
-        write(f'namespace mupdf\n')
-        write(f'{{\n')
-        write(f'    public static class {main_name}_outparams_helper\n')
+        #write(f'namespace mupdf\n')
+        #write(f'{{\n')
+        write(f'    public static class mupdf_{main_name}_outparams_helper\n')
         write(f'    {{\n')
         if arg0.alt:
             write(f'        // Out-params extension method {fnname_wrapper}() (wrapper for {fnname}())\n')
@@ -3299,7 +3299,7 @@ def make_outparam_helper_csharp(
 
         def write_type(alt, type_):
             if alt:
-                write(f'{rename.class_(alt.type.spelling)}')
+                write(f'mupdf.{rename.class_(alt.type.spelling)}')
             elif is_pointer_to(type_, 'char'):
                 write( f'string')
             else:
@@ -3359,7 +3359,7 @@ def make_outparam_helper_csharp(
             write(sep)
             if arg.alt:
                 # E.g. 'Document doc'.
-                write(f'{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}')
+                write(f'mupdf.{rename.class_(arg.alt.type.spelling)} {arg.name_csharp}')
             elif is_pointer_to(arg.cursor.type, 'char'):
                 write(f'string {arg.name_csharp}')
             else:
@@ -3378,13 +3378,13 @@ def make_outparam_helper_csharp(
         write(f'        {{\n')
 
         # Create local outparams struct.
-        write(f'            var outparams = new {main_name}_outparams();\n')
+        write(f'            var outparams = new mupdf.{main_name}_outparams();\n')
         write(f'            ')
 
         # Generate function call.
         if not return_void:
             write(f'var ret = ')
-        write(f'mupdf.{main_name}_outparams_fn(')
+        write(f'mupdf.mupdf.{main_name}_outparams_fn(')
         sep = ''
         for arg in get_args( tu, cursor):
             if arg.out_param:
@@ -3403,7 +3403,7 @@ def make_outparam_helper_csharp(
         sep = ''
         if not return_void:
             if return_alt:
-                write(f'new {rename.class_(return_alt.type.spelling)}(ret)')
+                write(f'new mupdf.{rename.class_(return_alt.type.spelling)}(ret)')
             else:
                 write(f'ret')
             sep = ', '
@@ -3412,7 +3412,7 @@ def make_outparam_helper_csharp(
                 write(f'{sep}')
                 type_ = arg.cursor.type.get_pointee()
                 if arg.alt:
-                        write(f'new {rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
+                        write(f'new mupdf.{rename.class_(arg.alt.type.spelling)}(outparams.{arg.name_csharp})')
                 elif 0 and is_pointer_to(type_, 'char'):
                     # This was intended to convert char* to string, but swig
                     # will have already done that when making a C# version of
@@ -3428,7 +3428,7 @@ def make_outparam_helper_csharp(
         write(';\n')
         write(f'        }}\n')
         write(f'    }}\n')
-        write(f'}}\n')
+        #write(f'}}\n')
         write('\n')
 
 
@@ -8196,22 +8196,23 @@ def main():
                     # Build and run simple test.
                     jlib.update_file(
                             textwrap.dedent('''
-                                    using System;
-                                    using mupdf;
+                                    // currently required for buffer.buffer_extract() to work.
+                                    //using mupdf;
 
                                     public class HelloWorld
                                     {
+                                        [System.STAThread]
                                         public static void Main(string[] args)
                                         {
-                                            Console.WriteLine("MuPDF C# test starting.");
+                                            System.Console.WriteLine("MuPDF C# test starting.");
 
                                             // Check we can load a document.
                                             mupdf.Document document = new mupdf.Document("zlib.3.pdf");
-                                            Console.WriteLine("document: " + document);
-                                            Console.WriteLine("num chapters: " + document.count_chapters());
+                                            System.Console.WriteLine("document: " + document);
+                                            System.Console.WriteLine("num chapters: " + document.count_chapters());
                                             mupdf.Page page = document.load_page(0);
                                             mupdf.Rect rect = page.bound_page();
-                                            Console.WriteLine("rect: " + rect);
+                                            System.Console.WriteLine("rect: " + rect);
                                             if ("" + rect != rect.to_string())
                                             {
                                                 throw new System.Exception("rect ToString() is broken: '" + rect + "' != '" + rect.to_string() + "'");
@@ -8224,12 +8225,14 @@ def main():
                                                     new mupdf.Matrix(1, 0, 0, 1, 0, 0),
                                                     new mupdf.Cookie()
                                                     );
+                                            System.Console.WriteLine("buffer=" + buffer);
                                             var data = buffer.buffer_extract();
+                                            System.Console.WriteLine("data=" + data);
                                             var s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
                                             if (s.Length < 100) {
                                                 throw new System.Exception("HTML text is too short");
                                             }
-                                            Console.WriteLine("s=" + s);
+                                            System.Console.WriteLine("s=" + s);
 
                                             // Check that previous buffer.buffer_extract() cleared the buffer.
                                             data = buffer.buffer_extract();
@@ -8253,31 +8256,31 @@ def main():
                                             var yres = 300;
                                             var bitmap = new mupdf.Bitmap(w, h, n, xres, yres);
                                             (var w2, var h2, var n2, var stride) = bitmap.bitmap_details();
-                                            Console.WriteLine("bitmap.bitmap_details() returned:"
+                                            System.Console.WriteLine("bitmap.bitmap_details() returned:"
                                                     + " " + w2 + " " + h2 + " " + n2 + " " + stride);
                                             if (w2 != w || h2 != h) {
                                                 throw new System.Exception("Unexpected tuple values from bitmap.bitmap_details().");
                                             }
-
-                                            Console.WriteLine("MuPDF C# test finished.");
+                                            System.Console.WriteLine("MuPDF C# test finished.");
                                         }
                                     }
                                     '''),
                             'test-csharp.cs',
                             )
 
+                    references = '' if g_windows else '-r:System.Drawing -r:System.Windows.Forms'
                     out = 'test-csharp.exe'
                     jlib.build(
                             ('test-csharp.cs', mupdf_cs),
                             out,
-                            f'{csc} -out:{{OUT}} {{IN}}',
+                            f'{csc} -unsafe {references} -out:{{OUT}} {{IN}}',
                             )
                     if g_windows:
                         jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                     else:
                         jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
-                if 0:
+                if 1:
                     # Build and run gui test.
                     #
                     # Don't know why Unix/Windows differ in what -r: args are
