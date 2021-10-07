@@ -3208,28 +3208,24 @@ def make_outparam_helper_csharp(
         # array, using the C# wrapper for buffer_extract_outparams_fn(fz_buffer
         # buf, buffer_extract_outparams outparams).
         #
-        write('// Custom C# helper for fz_buffer_extract().\n')
-        #write('namespace mupdf\n')
-        #write('{\n')
-        write('    // Wrapper for fz_buffer_extract().\n')
-        write('    public static class mupdf_Buffer_extract\n')
+        write('// Custom C# wrapper for fz_buffer_extract().\n')
+        write('public static class mupdf_Buffer_extract\n')
+        write('{\n')
+        write('    public static byte[] buffer_extract(this mupdf.Buffer buffer)\n')
         write('    {\n')
-        write('        public static byte[] buffer_extract(this mupdf.Buffer buffer)\n')
-        write('        {\n')
-        write('            var outparams = new mupdf.buffer_storage_outparams();\n')
-        write('            uint n = mupdf.mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);\n')
-        write('            var raw1 = mupdf.SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);\n')
-        write('            System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);\n')
-        write('            byte[] ret = new byte[n];\n')
-        write('            // Marshal.Copy() raises exception if <raw2> is null even if <n> is zero.\n')
-        write('            if (n == 0) return ret;\n')
-        write('            System.Runtime.InteropServices.Marshal.Copy(raw2, ret, 0, (int) n);\n')
-        write('            buffer.clear_buffer();\n')
-        write('            buffer.trim_buffer();\n')
-        write('            return ret;\n')
-        write('        }\n')
+        write('        var outparams = new mupdf.buffer_storage_outparams();\n')
+        write('        uint n = mupdf.mupdf.buffer_storage_outparams_fn(buffer.m_internal, outparams);\n')
+        write('        var raw1 = mupdf.SWIGTYPE_p_unsigned_char.getCPtr(outparams.datap);\n')
+        write('        System.IntPtr raw2 = System.Runtime.InteropServices.HandleRef.ToIntPtr(raw1);\n')
+        write('        byte[] ret = new byte[n];\n')
+        write('        // Marshal.Copy() raises exception if <raw2> is null even if <n> is zero.\n')
+        write('        if (n == 0) return ret;\n')
+        write('        System.Runtime.InteropServices.Marshal.Copy(raw2, ret, 0, (int) n);\n')
+        write('        buffer.clear_buffer();\n')
+        write('        buffer.trim_buffer();\n')
+        write('        return ret;\n')
         write('    }\n')
-        #write('}\n')
+        write('}\n')
         write('\n')
 
         return
@@ -3288,14 +3284,12 @@ def make_outparam_helper_csharp(
         # Write C# wrapper.
         arg0, _ = get_first_arg( tu, cursor)
         write(f'// C# helper for {cursor.mangled_name}() wrapper outparams.\n')
-        #write(f'namespace mupdf\n')
-        #write(f'{{\n')
-        write(f'    public static class mupdf_{main_name}_outparams_helper\n')
-        write(f'    {{\n')
+        write(f'public static class mupdf_{main_name}_outparams_helper\n')
+        write(f'{{\n')
         if arg0.alt:
-            write(f'        // Out-params extension method {fnname_wrapper}() (wrapper for {fnname}())\n')
-            write(f'        // for class {rename.class_(arg0.alt.type.spelling)} (wrapper for {arg0.alt.type.spelling}).\n')
-        write(f'        public static ')
+            write(f'    // Out-params extension method {fnname_wrapper}() (wrapper for {fnname}())\n')
+            write(f'    // for class {rename.class_(arg0.alt.type.spelling)} (wrapper for {arg0.alt.type.spelling}).\n')
+        write(f'    public static ')
 
         def write_type(alt, type_):
             if alt:
@@ -3375,11 +3369,11 @@ def make_outparam_helper_csharp(
 
         # Function body.
         #
-        write(f'        {{\n')
+        write(f'    {{\n')
 
         # Create local outparams struct.
-        write(f'            var outparams = new mupdf.{main_name}_outparams();\n')
-        write(f'            ')
+        write(f'        var outparams = new mupdf.{main_name}_outparams();\n')
+        write(f'        ')
 
         # Generate function call.
         if not return_void:
@@ -3397,7 +3391,7 @@ def make_outparam_helper_csharp(
         write(f'{sep}outparams);\n')
 
         # Generate return of tuple.
-        write(f'            return ')
+        write(f'        return ')
         if num_return_values > 1:
             write(f'(')
         sep = ''
@@ -3426,9 +3420,8 @@ def make_outparam_helper_csharp(
         if num_return_values > 1:
             write(')')
         write(';\n')
-        write(f'        }}\n')
         write(f'    }}\n')
-        #write(f'}}\n')
+        write(f'}}\n')
         write('\n')
 
 
