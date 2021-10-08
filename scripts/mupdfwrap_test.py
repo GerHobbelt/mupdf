@@ -210,13 +210,32 @@ def test(path):
     # Check iteration over Outlines.
     #
     log(f'Outlines.')
-    outline = mupdf.Outline(document)
-    log(f'outline.m_internal={outline.m_internal}')
-    if outline.m_internal:
-        log(f'{outline.uri()} {outline.page()} {outline.x()} {outline.y()} {outline.is_open()} {outline.title()}')
-        log(f'items in outline tree are:')
-    for o in outline:
-        log(f'    {o.uri()} {o.page()} {o.x()} {o.y()} {o.is_open()} {o.title()}')
+    it = mupdf.OutlineIterator(document)
+    depth = 0
+    while 1:
+        item = it.outline_iterator_item()
+        if item.valid():
+            log(f'{" "*depth*4}uri={item.m_internal.uri} is_open={item.m_internal.is_open} title={item.m_internal.title}')
+        else:
+            log(f'{" "*depth*4}null')
+        r = it.outline_iterator_down()
+        #log(f'outline_iterator_down() => r={r}')
+        if r >= 0:
+            depth += 1
+        if r:
+            r = it.outline_iterator_next()
+            #log(f'outline_iterator_next => r={r}')
+            if r:
+                end = 0
+                while 1:
+                    if it.outline_iterator_up() < 0:
+                        end = 1
+                        break
+                    depth -= 1
+                    if it.outline_iterator_next() == 0:
+                        break
+                if end:
+                    break
 
     # Check iteration over StextPage.
     #
