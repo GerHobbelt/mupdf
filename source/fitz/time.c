@@ -209,6 +209,8 @@ fz_stat_mtime(const char *path)
 
 #else
 
+#include <sys/stat.h>
+
 int64_t
 fz_stat_mtime(const char *path)
 {
