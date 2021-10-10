@@ -44,7 +44,6 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <sys/stat.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -243,17 +242,6 @@ static const format_cs_table_t format_cs_table[] =
 static fz_stext_options stext_options;
 
 static fz_cookie master_cookie = { 0 };
-
-static time_t
-stat_mtime(const char *path)
-{
-	struct_stat info;
-
-	if (stat(path, &info) < 0)
-		return 0;
-
-	return info.st_mtime;
-}
 
 /*
 	In the presence of pthreads or Windows threads, we can offer
@@ -2941,8 +2929,8 @@ int main(int argc, const char** argv)
 					{
 						/* Check whether that file exists, and isn't older than
 						 * the document. */
-						atime = stat_mtime(accelpath);
-						dtime = stat_mtime(filename);
+						atime = fz_stat_mtime(accelpath);
+						dtime = fz_stat_mtime(filename);
 						if (atime == 0)
 						{
 							/* No accelerator */

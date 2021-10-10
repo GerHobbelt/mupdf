@@ -6,11 +6,6 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <sys/stat.h>
-
-#ifdef _MSC_VER
-#define stat _stat
-#endif
 
 #ifdef _WIN32
 #include <windows.h>
@@ -31,17 +26,6 @@
 #ifndef MAX
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #endif
-
-static time_t
-stat_mtime(const char *path)
-{
-	struct stat info;
-
-	if (stat(path, &info) < 0)
-		return 0;
-
-	return info.st_mtime;
-}
 
 static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len)
 {
@@ -453,8 +437,8 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 			{
 				/* Check whether that file exists, and isn't older than
 				 * the document. */
-				atime = stat_mtime(accelpath);
-				dtime = stat_mtime(filename);
+				atime = fz_stat_mtime(accelpath);
+				dtime = fz_stat_mtime(filename);
 				if (atime == 0)
 				{
 					/* No accelerator */
