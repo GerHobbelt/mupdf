@@ -324,6 +324,7 @@ int do_sign(void);
 void trace_action(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2);
 void trace_page_update(void);
 void trace_save_snapshot(void);
+const char *format_date(int64_t secs);
 int search_results(const fz_quad **quads, const char **needle);
 void render_page(void);
 
