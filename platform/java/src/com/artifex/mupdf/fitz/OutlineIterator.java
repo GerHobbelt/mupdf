@@ -20,26 +20,50 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#ifndef MUPDF_FITZ_VERSION_H
-#define MUPDF_FITZ_VERSION_H
-#ifndef FZ_VERSION
+package com.artifex.mupdf.fitz;
 
-#define FZ_VERSION_MAJOR 1
-#define FZ_VERSION_MINOR 19
-#define FZ_VERSION_PATCH 0
-// build number: YYYY MM DD NNN, where NN is the sequence number within the given day / date
-#define FZ_VERSION_BUILD "GHO2021101001"
+public class OutlineIterator
+{
+	protected long pointer;
 
-// construct the version number:
+	protected native void finalize();
 
-#define FZ_VERSION_ELEMENT_STR__(part)	#part
-#define FZ_VERSION_ELEMENT_STR(part)	FZ_VERSION_ELEMENT_STR__(part)
+	public void destroy() {
+		finalize();
+	}
 
-#define FZ_VERSION										\
-	FZ_VERSION_ELEMENT_STR(FZ_VERSION_MAJOR) "."		\
-	FZ_VERSION_ELEMENT_STR(FZ_VERSION_MINOR) "."		\
-	FZ_VERSION_ELEMENT_STR(FZ_VERSION_PATCH) "."		\
-	FZ_VERSION_BUILD
+	protected OutlineIterator(long p) {
+		pointer = p;
+	}
 
-#endif
-#endif
+	public native int next();
+	public native int prev();
+	public native int up();
+	public native int down();
+
+	public int insert(OutlineItem item)
+	{
+		return insert(item.title, item.uri, item.is_open);
+	}
+	public native int insert(String title, String uri, boolean is_open);
+	public void update(OutlineItem item)
+	{
+		update(item.title, item.uri, item.is_open);
+	}
+	public native void update(String title, String uri, boolean is_open);
+	public native OutlineItem item();
+	public native int delete();
+
+	public static class OutlineItem {
+		public String title;
+		public String uri;
+		public boolean is_open;
+
+		public OutlineItem(String title, String uri, boolean is_open)
+		{
+			this.title = title;
+			this.uri = uri;
+			this.is_open = is_open;
+		}
+	}
+}

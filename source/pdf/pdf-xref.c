@@ -2812,7 +2812,7 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	doc->super.needs_password = __pdf_needs_password;
 	doc->super.authenticate_password = __pdf_authenticate_password;
 	doc->super.has_permission = __pdf_has_permission;
-	doc->super.load_outline = __pdf_load_outline;
+	doc->super.outline_iterator = pdf_new_outline_iterator;
 	doc->super.resolve_link = pdf_resolve_link_imp;
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;

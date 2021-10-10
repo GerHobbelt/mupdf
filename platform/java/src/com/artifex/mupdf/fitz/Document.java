@@ -203,6 +203,7 @@ public class Document
 	}
 
 	public native Outline[] loadOutline();
+	public native OutlineIterator outlineIterator();
 	public native String getMetaData(String key);
 	public native void setMetaData(String key, String value);
 	public native boolean isReflowable();
