@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#include <sys/stat.h>
+
 #ifdef _WIN32
 
 #include <stdio.h>
