@@ -625,7 +625,7 @@ static int close_tag(fz_context *ctx, struct parser *parser, const char *mark, c
 	return 1;
 }
 
-static const char *xml_parse_document_imp(fz_context *ctx, struct parser *parser, const char *p)
+static const char *xml_parse_document_imp(fz_context *ctx, struct parser *parser, const char *p) /* lgtm [cpp/use-of-goto] */
 {
 	const char *mark;
 	int quote;

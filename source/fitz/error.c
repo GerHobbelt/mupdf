@@ -366,6 +366,8 @@ fz_jmp_buf *fz_push_try(fz_context *ctx)
 	 * have reduced the usable stack size. Use a compile-time worst-case estimate
 	 * instead of the run-time pointers `__stack` vs. `stack_base`, to ensure we
 	 * have the lightest & fastest boundary check here.
+	 * (Technically, we round UP `FZ_JMPBUF_ALIGN`, expressed as number of stack
+	 * elements, and subtract that number from the *raw* `nelem(...)` stack size.)
 	 */
 	if (ctx->error.top + 2 >= ctx->error.stack_base + nelem(ctx->error.__stack) - (FZ_JMPBUF_ALIGN + sizeof(ctx->error.stack_base[0]) - 1) / sizeof(ctx->error.stack_base[0]))
 	{
