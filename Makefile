@@ -128,7 +128,12 @@ $(OUT)/source/%.o : source/%.c
 	$(CC_CMD) $(WARNING_CFLAGS) -Wdeclaration-after-statement $(LIB_CFLAGS) $(THIRD_CFLAGS)
 
 $(OUT)/source/%.o : source/%.cpp
-	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(TESSERACT_BUILD_CFLAGS) -std=c++17
+	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS)
+
+ifeq ($(HAVE_TESSERACT),yes)
+$(OUT)/source/fitz/tessocr.o : source/fitz/tessocr.cpp
+	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(TESSERACT_CFLAGS)
+endif
 
 $(OUT)/platform/%.o : platform/%.c
 	$(CC_CMD) $(WARNING_CFLAGS)
