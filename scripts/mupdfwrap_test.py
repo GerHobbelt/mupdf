@@ -207,25 +207,30 @@ def test(path):
     for i in link:
         log(f'    {i.m_internal.refs} {i.m_internal.uri}')
 
-    # Check iteration over Outlines.
+    # Check iteration over Outlines. We do depth-first iteration.
     #
     log(f'Outlines.')
-    it = mupdf.OutlineIterator(document)
+    def olog(text):
+        if 0:
+            log(text)
+    num_outline_items = 0
     depth = 0
+    it = mupdf.OutlineIterator(document)
     while 1:
         item = it.outline_iterator_item()
-        log(f'depth={depth} valid={item.valid()}')
+        olog(f'depth={depth} valid={item.valid()}')
         if item.valid():
-            log(f'{" "*depth*4}uri={item.m_internal.uri} is_open={item.m_internal.is_open} title={item.m_internal.title}')
+            log(f'{" "*depth*4}uri={item.uri()} is_open={item.is_open()} title={item.title()}')
+            num_outline_items += 1
         else:
-            log(f'{" "*depth*4}null')
+            olog(f'{" "*depth*4}<null>')
         r = it.outline_iterator_down()
-        log(f'depth={depth} down => {r}')
+        olog(f'depth={depth} down => {r}')
         if r >= 0:
             depth += 1
-        if r:
+        if r < 0:
             r = it.outline_iterator_next()
-            log(f'depth={depth} next => {r}')
+            olog(f'depth={depth} next => {r}')
             assert r
             if r:
                 # No more items at current depth, so repeatedly go up until we
@@ -233,19 +238,20 @@ def test(path):
                 end = 0
                 while 1:
                     r = it.outline_iterator_up()
-                    log(f'depth={depth} up => {r}')
+                    olog(f'depth={depth} up => {r}')
                     if r < 0:
                         # We are at EOF. Need to break out of top-level loop.
                         end = 1
                         break
                     depth -= 1
                     r = it.outline_iterator_next()
-                    log(f'depth={depth} next => {r}')
+                    olog(f'depth={depth} next => {r}')
                     if r == 0:
                         # There are items at this level.
                         break
                 if end:
                     break
+    log(f'num_outline_items={num_outline_items}')
 
     # Check iteration over StextPage.
     #
@@ -297,6 +303,7 @@ def test(path):
     log(f'{bitmap_details}')
     assert list(bitmap_details) == [10, 20, 8, 12], f'bitmap_details={bitmap_details!r}'
 
+    del document2
     log(f'finished test of %s' % path)
 
 
