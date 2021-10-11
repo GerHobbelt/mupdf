@@ -2903,7 +2903,9 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
     #
     key = tu, cursor.location.file, cursor.location.line, include_fz_context, skip_first_alt
     ret = get_args_cache.get( key)
-
+    if not verbose and g_show_details(cursor.spelling):
+        verbose = True
+        jlib.log('Verbose because {cursor.spelling=}')
     if ret is None:
         ret = []
         i = 0
@@ -2922,7 +2924,7 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
             out_param = False
             base_type_cursor, base_typename, extras = get_extras(arg_cursor.type)
             if verbose:
-                log( '{extras=}')
+                log( 'Looking at arg. {extras=}')
             if extras:
                 if verbose:
                     log( '{extras.opaque=} {base_type_cursor.kind=} {base_type_cursor.is_definition()=}')
@@ -2937,19 +2939,22 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
                         ):
                     alt = base_type_cursor
             if verbose:
-                log( '{arg_cursor.type.spelling=} {base_type.spelling=} {arg_cursor.type.kind=} {get_base_typename(arg_cursor.type)=}')
+                log( '{arg_cursor.type.spelling=} {base_typename=} {arg_cursor.type.kind=} {get_base_typename(arg_cursor.type)=}')
             if alt:
                 if is_double_pointer( arg_cursor.type):
                     out_param = True
             elif get_base_typename( arg_cursor.type) in ('char', 'unsigned char', 'signed char', 'void', 'FILE'):
                 if is_double_pointer( arg_cursor.type):
-                    #log( 'setting outparam: {cursor.spelling=} {arg_cursor.type=}')
+                    if verbose:
+                        log( 'setting outparam: {cursor.spelling=} {arg_cursor.type=}')
                     if cursor.spelling == 'pdf_clean_file':
                         # Don't mark char** argv as out-param, which will also
                         # allow us to tell swig to convert python lists into
                         # (argc,char**) pair.
                         pass
                     else:
+                        if verbose:
+                            jlib.log('setting out_param to true')
                         out_param = True
             elif base_typename.startswith( ('fz_', 'pdf_')):
                 # Pointer to fz_ struct is not usually an out-param.
@@ -2976,9 +2981,10 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
             i += 1
             if alt and skip_first_alt and i_alt == 1:
                 continue
+            arg =  Arg(arg_cursor, name, separator, alt, out_param)
+            ret.append(arg)
             if verbose:
-                log( '*** returning {(arg_cursor.displayname, name, separator, alt, out_param)}')
-            ret.append( Arg(arg_cursor, name, separator, alt, out_param))
+                log( '*** appending {arg=}')
             separator = ', '
 
         get_args_cache[ key] = ret
@@ -3077,31 +3083,41 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     out.write(      f'    fz_context* auto_ctx = {icg}();\n')
     out.write(      f'    fz_var(auto_ctx);\n')
 
+    # Output code that writes diagnostics to std::cerr if $MUPDF_trace is set.
+    #
     out.write( '    if (s_trace) {\n')
     out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": calling {cursor.mangled_name}():"')
     for arg in get_args( tu, cursor, include_fz_context=True):
         if is_pointer_to( arg.cursor.type, 'fz_context'):
             out.write( f' << " auto_ctx=" << auto_ctx')
-        else:
-            use_address = False
-            if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
-                pass
-            elif arg.alt:
-                # If not a pod, there will not be an operator<<, so just show
-                # the address of this arg.
-                #
-                extras = get_fz_extras(arg.alt.type.spelling)
-                assert extras.pod != 'none' \
-                        'Cannot pass wrapper for {type_.spelling} as arg because pod is "none" so we cannot recover struct.'
-                if not extras.pod:
-                    use_address = True
-            if use_address:
-                out.write( f' << " &{arg.name}=" << &{arg.name}')
-            else:
+        elif arg.out_param:
+            out.write( f' << " {arg.name}=" << (void*) {arg.name}')
+        elif arg.alt:
+            # If not a pod, there will not be an operator<<, so just show
+            # the address of this arg.
+            #
+            extras = get_fz_extras(arg.alt.type.spelling)
+            assert extras.pod != 'none' \
+                    'Cannot pass wrapper for {type_.spelling} as arg because pod is "none" so we cannot recover struct.'
+            if extras.pod:
                 out.write( f' << " {arg.name}=" << {arg.name}')
+            elif arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
+                out.write( f' << " {arg.name}=" << {arg.name}')
+            else:
+                out.write( f' << " &{arg.name}=" << &{arg.name}')
+        elif is_pointer_to(arg.cursor.type, 'char') and arg.cursor.type.get_pointee().get_canonical().is_const_qualified():
+            # 'const char*' is assumed to be zero-terminated string.
+            out.write( f' << " {arg.name}=" << {arg.name}')
+        elif arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
+            # Don't assume 'char*' is a zero-terminated string.
+            out.write( f' << " {arg.name}=" << (void*) {arg.name}')
+        else:
+            out.write( f' << " {arg.name}=" << {arg.name}')
     out.write( f' << "\\n";\n')
     out.write( '    }\n')
 
+    # Now output the function call.
+    #
     if return_type != 'void':
         out.write(  f'    {return_type} ret;\n')
         out.write(  f'    fz_var(ret);\n')
