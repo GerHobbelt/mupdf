@@ -8134,9 +8134,15 @@ def main():
                     #command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
 
                 log( 'running mupdf_test.py...')
-                command = f'{command_prefix} ./scripts/mupdfwrap_test.py'
+                command = f'MUPDF_trace=1 {command_prefix} ./scripts/mupdfwrap_test.py'
                 with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
                     jlib.system( command, env_extra=env_extra, out='log', verbose=1)
+                    # Repeat with pdf_reference17.pdf if it exists.
+                    path = '../pdf_reference17.pdf'
+                    if os.path.exists(path):
+                        jlib.log('Running mupdfwrap_test.py on {path}')
+                        command += f' {path}'
+                        jlib.system( command, env_extra=env_extra, out='log', verbose=1)
 
                 # Run mutool.py.
                 #
