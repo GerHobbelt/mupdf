@@ -7093,21 +7093,6 @@ def build_swig(
     else:
         assert 0
 
-    swig_cpp_old = None
-    if os.path.isfile(swig_cpp):
-        swig_cpp_old = swig_cpp + '-0'
-        shutil.copy2(swig_cpp, swig_cpp_old)
-
-    if swig_cpp_old:
-        def read_all(path):
-            with open(path) as f:
-                return f.read()
-        swig_cpp_old_text = read_all(swig_cpp_old)
-        swig_cpp_text = read_all(swig_cpp)
-        if swig_cpp_text == swig_cpp_old_text:
-            jlib.log('Preserving old file mtime etc because unchanged: {swig_cpp=}')
-            jlib.rename(swig_cpp_old, swig_cpp)
-
 
 def build_swig_java( container_classnames):
     return build_swig( container_classnames, 'java')
