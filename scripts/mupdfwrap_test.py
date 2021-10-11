@@ -214,32 +214,35 @@ def test(path):
     depth = 0
     while 1:
         item = it.outline_iterator_item()
+        log(f'depth={depth} valid={item.valid()}')
         if item.valid():
             log(f'{" "*depth*4}uri={item.m_internal.uri} is_open={item.m_internal.is_open} title={item.m_internal.title}')
         else:
             log(f'{" "*depth*4}null')
         r = it.outline_iterator_down()
+        log(f'depth={depth} down => {r}')
         if r >= 0:
             depth += 1
         if r:
-            log(f'depth={depth} calling next')
             r = it.outline_iterator_next()
-            log(f'depth={depth} called next')
+            log(f'depth={depth} next => {r}')
             assert r
             if r:
                 # No more items at current depth, so repeatedly go up until we
                 # can go right.
                 end = 0
                 while 1:
-                    log(f'depth={depth} calling up')
-                    if it.outline_iterator_up() < 0:
+                    r = it.outline_iterator_up()
+                    log(f'depth={depth} up => {r}')
+                    if r < 0:
                         # We are at EOF. Need to break out of top-level loop.
                         end = 1
                         break
                     depth -= 1
-                    log(f'depth={depth} calling next')
-                    if it.outline_iterator_next() == 0:
-                        # No more items at this level.
+                    r = it.outline_iterator_next()
+                    log(f'depth={depth} next => {r}')
+                    if r == 0:
+                        # There are items at this level.
                         break
                 if end:
                     break
