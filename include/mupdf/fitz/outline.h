@@ -210,7 +210,7 @@ fz_outline_iterator *fz_new_outline_iterator_of_size(fz_context *ctx, size_t siz
 
 fz_outline_iterator *fz_outline_iterator_from_outline(fz_context *ctx, fz_outline *outline);
 
-fz_outline *fz_outline_from_iterator(fz_context *ctx, fz_outline_iterator *iter);
+//fz_outline *fz_outline_from_iterator(fz_context *ctx, fz_outline_iterator *iter);
 
 struct fz_outline_iterator {
 	/* Functions */
