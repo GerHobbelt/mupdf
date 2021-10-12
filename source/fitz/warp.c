@@ -162,23 +162,23 @@ step_ip2(fz_ipoint2_bresenham *b)
 }
 
 static inline fz_ipoint
-start_ip(const fz_ipoint2_bresenham b)
+start_ip(const fz_ipoint2_bresenham *b)
 {
 	fz_ipoint ip;
 
-	ip.x = b.sx.i;
-	ip.y = b.sy.i;
+	ip.x = b->sx.i;
+	ip.y = b->sy.i;
 
 	return ip;
 }
 
-static inline fz_ipoint
-end_ip(const fz_ipoint2_bresenham b)
+static fz_forceinline fz_ipoint
+end_ip(const fz_ipoint2_bresenham *b)
 {
 	fz_ipoint ip;
 
-	ip.x = b.ex.i;
-	ip.y = b.ey.i;
+	ip.x = b->ex.i;
+	ip.y = b->ey.i;
 
 	return ip;
 }
@@ -284,8 +284,8 @@ warp_core(unsigned char *d, int n, int width, int height, int stride,
 		/* We have a bresenham for how to move the
 		 * current pixel across the row. */
 		fz_ipoint_bresenham pix_bres;
-			pix_bres = init_ip_bresenham(start_ip(row_bres),
-					end_ip(row_bres),
+			pix_bres = init_ip_bresenham(start_ip(&row_bres),
+					end_ip(&row_bres),
 					width);
 		for (x = width; x > 0; x--)
 		{
