@@ -202,109 +202,121 @@ def test(path):
 
     # Check we can iterate over Link's, by creating one manually.
     #
-    link = mupdf.Link(mupdf.Rect(0, 0, 1, 1), "hello")
-    log(f'items in <link> are:')
-    for i in link:
-        log(f'    {i.m_internal.refs} {i.m_internal.uri}')
+    if 0:
+        link = mupdf.Link(mupdf.Rect(0, 0, 1, 1), "hello")
+        log(f'items in <link> are:')
+        for i in link:
+            log(f'    {i.m_internal.refs} {i.m_internal.uri}')
 
     # Check iteration over Outlines. We do depth-first iteration.
     #
-    log(f'Outlines.')
-    def olog(text):
-        if 0:
-            log(text)
-    num_outline_items = 0
-    depth = 0
-    it = mupdf.OutlineIterator(document)
-    while 1:
-        item = it.outline_iterator_item()
-        olog(f'depth={depth} valid={item.valid()}')
-        if item.valid():
-            log(f'{" "*depth*4}uri={item.uri()} is_open={item.is_open()} title={item.title()}')
-            num_outline_items += 1
-        else:
-            olog(f'{" "*depth*4}<null>')
-        r = it.outline_iterator_down()
-        olog(f'depth={depth} down => {r}')
-        if r >= 0:
-            depth += 1
-        if r < 0:
-            r = it.outline_iterator_next()
-            olog(f'depth={depth} next => {r}')
-            assert r
-            if r:
-                # No more items at current depth, so repeatedly go up until we
-                # can go right.
-                end = 0
-                while 1:
-                    r = it.outline_iterator_up()
-                    olog(f'depth={depth} up => {r}')
-                    if r < 0:
-                        # We are at EOF. Need to break out of top-level loop.
-                        end = 1
+    if 1:
+        log(f'Outlines.')
+        def olog(text):
+            if 0:
+                log(text)
+        num_outline_items = 0
+        depth = 0
+
+        log(f'document.m_internal.refs={document.m_internal.refs}')
+        log(f'creating outline iterator')
+        it = mupdf.OutlineIterator(document)
+        log(f'document.m_internal.refs={document.m_internal.refs}')
+        while 1:
+            #break
+            item = it.outline_iterator_item()
+            olog(f'depth={depth} valid={item.valid()}')
+            if item.valid():
+                log(f'{" "*depth*4}uri={item.uri()} is_open={item.is_open()} title={item.title()}')
+                num_outline_items += 1
+            else:
+                olog(f'{" "*depth*4}<null>')
+            r = it.outline_iterator_down()
+            olog(f'depth={depth} down => {r}')
+            if r >= 0:
+                depth += 1
+            if r < 0:
+                r = it.outline_iterator_next()
+                olog(f'depth={depth} next => {r}')
+                assert r
+                if r:
+                    # No more items at current depth, so repeatedly go up until we
+                    # can go right.
+                    end = 0
+                    while 1:
+                        r = it.outline_iterator_up()
+                        olog(f'depth={depth} up => {r}')
+                        if r < 0:
+                            # We are at EOF. Need to break out of top-level loop.
+                            end = 1
+                            break
+                        depth -= 1
+                        r = it.outline_iterator_next()
+                        olog(f'depth={depth} next => {r}')
+                        if r == 0:
+                            # There are items at this level.
+                            break
+                    if end:
                         break
-                    depth -= 1
-                    r = it.outline_iterator_next()
-                    olog(f'depth={depth} next => {r}')
-                    if r == 0:
-                        # There are items at this level.
-                        break
-                if end:
-                    break
-    log(f'num_outline_items={num_outline_items}')
+        #log(f'num_outline_items={num_outline_items}')
+    log(f'document.m_internal.refs={document.m_internal.refs}')
 
     # Check iteration over StextPage.
     #
-    log(f'StextPage.')
-    stext_options = mupdf.StextOptions(0)
-    page_num = 40
-    try:
-        stext_page = mupdf.StextPage(document, page_num, stext_options)
-    except Exception:
-        log(f'no page_num={page_num}')
-    else:
-        device_stext = mupdf.Device(stext_page, stext_options)
-        matrix = mupdf.Matrix()
-        page = mupdf.Page(document, 0)
-        cookie = mupdf.Cookie()
-        page.run_page(device_stext, matrix, cookie)
-        log(f'    stext_page is:')
-        for block in stext_page:
-            log(f'        block:')
-            for line in block:
-                line_text = ''
-                for char in line:
-                    line_text += chr(char.m_internal.c)
-                log(f'            {line_text}')
+    if 1:
+        log(f'StextPage.')
+        stext_options = mupdf.StextOptions(0)
+        page_num = 40
+        try:
+            stext_page = mupdf.StextPage(document, page_num, stext_options)
+        except Exception:
+            log(f'no page_num={page_num}')
+        else:
+            device_stext = mupdf.Device(stext_page, stext_options)
+            matrix = mupdf.Matrix()
+            page = mupdf.Page(document, 0)
+            cookie = mupdf.Cookie()
+            page.run_page(device_stext, matrix, cookie)
+            log(f'    stext_page is:')
+            for block in stext_page:
+                log(f'        block:')
+                for line in block:
+                    line_text = ''
+                    for char in line:
+                        line_text += chr(char.m_internal.c)
+                    log(f'            {line_text}')
 
-        device_stext.close_device()
+            device_stext.close_device()
 
     # Check copy-constructor.
-    log(f'Checking copy-constructor')
-    document2 = mupdf.Document(document)
-    del document
-    page = mupdf.Page(document2, 0)
-    scale = mupdf.Matrix()
-    pixmap = mupdf.Pixmap(page, scale, colorspace, 0)
-    pixmap.save_pixmap_as_png('mupdf_test-out3.png')
+    if 1:
+        log(f'Checking copy-constructor')
+        document2 = mupdf.Document(document)
+        del document
+        page = mupdf.Page(document2, 0)
+        scale = mupdf.Matrix()
+        pixmap = mupdf.Pixmap(page, scale, colorspace, 0)
+        pixmap.save_pixmap_as_png('mupdf_test-out3.png')
 
-    stdout = mupdf.Output(mupdf.Output.Fixed_STDOUT)
-    log(f'{type(stdout)} {stdout.m_internal.state}')
+        stdout = mupdf.Output(mupdf.Output.Fixed_STDOUT)
+        log(f'{type(stdout)} {stdout.m_internal.state}')
 
-    mediabox = page.bound_page()
-    out = mupdf.DocumentWriter(filename, 'png', '', mupdf.DocumentWriter.FormatPathType_DOCUMENT)
-    dev = out.begin_page(mediabox)
-    page.run_page(dev, mupdf.Matrix(mupdf.fz_identity), mupdf.Cookie())
-    out.end_page()
+        mediabox = page.bound_page()
+        out = mupdf.DocumentWriter(filename, 'png', '', mupdf.DocumentWriter.FormatPathType_DOCUMENT)
+        dev = out.begin_page(mediabox)
+        page.run_page(dev, mupdf.Matrix(mupdf.fz_identity), mupdf.Cookie())
+        out.end_page()
 
-    # Check out-params are converted into python return value.
-    bitmap = mupdf.Bitmap(10, 20, 8, 72, 72)
-    bitmap_details = bitmap.bitmap_details()
-    log(f'{bitmap_details}')
-    assert list(bitmap_details) == [10, 20, 8, 12], f'bitmap_details={bitmap_details!r}'
+        # Check out-params are converted into python return value.
+        bitmap = mupdf.Bitmap(10, 20, 8, 72, 72)
+        bitmap_details = bitmap.bitmap_details()
+        log(f'{bitmap_details}')
+        assert list(bitmap_details) == [10, 20, 8, 12], f'bitmap_details={bitmap_details!r}'
 
-    del document2
+        del document2
+
     log(f'finished test of %s' % path)
+    #log(f'document.m_internal.refs={document.m_internal.refs}')
 
 
 if __name__ == '__main__':
