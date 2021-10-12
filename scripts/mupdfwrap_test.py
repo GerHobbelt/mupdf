@@ -202,7 +202,7 @@ def test(path):
 
     # Check we can iterate over Link's, by creating one manually.
     #
-    if 0:
+    if 1:
         link = mupdf.Link(mupdf.Rect(0, 0, 1, 1), "hello")
         log(f'items in <link> are:')
         for i in link:
@@ -316,7 +316,6 @@ def test(path):
         del document2
 
     log(f'finished test of %s' % path)
-    #log(f'document.m_internal.refs={document.m_internal.refs}')
 
 
 if __name__ == '__main__':
