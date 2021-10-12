@@ -42,7 +42,9 @@
 #endif
 
 #ifndef _WIN32
-#include <unistd.h> /* for fork, exec, and getcwd */
+#include <unistd.h> /* for getcwd */
+#include <spawn.h> /* for posix_spawn */
+extern char **environ; /* see environ (7) */
 #else
 #include <direct.h> /* for getcwd */
 #endif
@@ -72,7 +74,7 @@ enum
 	SCREEN_FURNITURE_H = 40,
 };
 
-static void open_browser(const char* uri)
+static void open_browser(const char *uri)
 {
 	char buf[PATH_MAX];
 
@@ -95,7 +97,10 @@ static void open_browser(const char* uri)
 #else
 	{
 		pid_t pid;
-		const char* browser = getenv("BROWSER");
+		char *argv[3];
+		int err;
+		
+		const char *browser = getenv("BROWSER");
 		if (!browser)
 		{
 #ifdef __APPLE__
@@ -104,23 +109,15 @@ static void open_browser(const char* uri)
 			browser = "xdg-open";
 #endif
 		}
-		/* Fork once to start a child process that we wait on. This
-		 * child process forks again and immediately exits. The
-		 * grandchild process continues in the background. The purpose
-		 * of this strange two-step is to avoid zombie processes. See
-		 * bug 695701 for an explanation. */
-		pid = fork();
-		if (pid == 0)
-		{
-			if (fork() == 0)
-			{
-				execlp(browser, browser, uri, (char*)0);
-				fz_error(ctx, "cannot exec '%s'", browser);
-			}
-			_exit(0);
-		}
-		waitpid(pid, NULL, 0);
-}
+
+		argv[0] = (char*) browser;
+		argv[1] = (char*) uri;
+		argv[2] = NULL;
+		err = posix_spawn(&pid, browser, NULL, NULL, argv, environ);
+		if (err)
+			fz_warn(ctx, "cannot spawn browser '%s': %s", browser, strerror(err));
+
+	}
 #endif
 }
 
@@ -2730,6 +2727,14 @@ int main(int argc, const char** argv)
 	int c;
 
 #ifndef _WIN32
+
+	/* Never wait for termination of child processes. */
+	struct sigaction arg = {
+		.sa_handler=SIG_IGN,
+		.sa_flags=SA_NOCLDWAIT
+	};
+	sigaction(SIGCHLD, &arg, NULL);
+
 	signal(SIGHUP, signal_handler);
 #endif
 
