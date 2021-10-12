@@ -81,6 +81,7 @@ static void open_browser(const char *uri)
 
 #ifndef _WIN32
 	pid_t pid;
+	int err;
 #endif
 
 	/* Relative file:// URI, make it absolute! */
@@ -113,7 +114,9 @@ static void open_browser(const char *uri)
 	argv[0] = (char*) browser;
 	argv[1] = (char*) uri;
 	argv[2] = NULL;
-	posix_spawn(&pid, browser, NULL, NULL, argv, environ);
+	err = posix_spawn(&pid, browser, NULL, NULL, argv, environ);
+	if (err)
+		fz_warn(ctx, "cannot spawn browser '%s': %s", browser, strerror(err));
 
 #endif
 }
