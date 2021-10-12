@@ -1895,7 +1895,6 @@ classextras = ClassExtras(
                 extra_cpp = f'''
                         {rename.class_("fz_outline_item")}::{rename.class_("fz_outline_item")}(const fz_outline_item* item)
                         {{
-                            //std::cerr << __FILE__ << ":" << __LINE__ << ": item=" << item << "\\n";
                             if (item)
                             {{
                                 m_valid = true;
@@ -1914,9 +1913,7 @@ classextras = ClassExtras(
                         }}
                         const std::string& {rename.class_("fz_outline_item")}::title() const
                         {{
-                            //std::cerr << __FILE__ << ":" << __LINE__ << ": m_valid=" << m_valid << "\\n";
                             if (!m_valid) throw ErrorGeneric("fz_outline_item is invalid");
-                            //std::cerr << __FILE__ << ":" << __LINE__ << ": returning m_title=" << m_title << "\\n";
                             return m_title;
                         }}
                         const std::string& {rename.class_("fz_outline_item")}::uri() const
@@ -3086,7 +3083,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     # Output code that writes diagnostics to std::cerr if $MUPDF_trace is set.
     #
     out.write( '    if (s_trace) {\n')
-    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << " calling {cursor.mangled_name}():"')
+    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {cursor.mangled_name}():"')
     for arg in get_args( tu, cursor, include_fz_context=True):
         if is_pointer_to( arg.cursor.type, 'fz_context'):
             out.write( f' << " auto_ctx=" << auto_ctx')
@@ -4545,8 +4542,6 @@ def class_add_iterator( struct, structname, classname, extras):
             ExtraMethod( f'{classname}Iterator', 'begin()',
                     f'''
                     {{
-                        std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
-                        //return {classname}Iterator(m_internal{'->'+it_begin if it_begin else ''});
                         return {classname}Iterator({'m_internal->'+it_begin if it_begin else '*this'});
                     }}
                     ''',
@@ -4557,7 +4552,6 @@ def class_add_iterator( struct, structname, classname, extras):
             ExtraMethod( f'{classname}Iterator', 'end()',
                     f'''
                     {{
-                        std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
                         return {classname}Iterator(NULL);
                     }}
                     ''',
@@ -4604,33 +4598,27 @@ def class_add_iterator( struct, structname, classname, extras):
             FZ_FUNCTION {classname}Iterator::{classname}Iterator(const {it_type}& item)
             : m_item( item)
             {{
-                std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
             }}
             FZ_FUNCTION {classname}Iterator& {classname}Iterator::operator++()
             {{
-                std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
                 {keep_text}
                 m_item = {it_type}(m_item.m_internal->next);
                 return *this;
             }}
             FZ_FUNCTION bool {classname}Iterator::operator==( const {classname}Iterator& rhs)
             {{
-                std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
                 return m_item.m_internal == rhs.m_item.m_internal;
             }}
             FZ_FUNCTION bool {classname}Iterator::operator!=( const {classname}Iterator& rhs)
             {{
-                std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
                 return m_item.m_internal != rhs.m_item.m_internal;
             }}
             FZ_FUNCTION {it_type} {classname}Iterator::operator*()
             {{
-                std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
                 return m_item;
             }}
             FZ_FUNCTION {it_type}* {classname}Iterator::operator->()
             {{
-                std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << "\\n";
                 return &m_item;
             }}
 
@@ -4822,8 +4810,6 @@ def class_copy_constructor(
         out_cpp.write( f'FZ_FUNCTION {classname}::{classname}(const {classname}& rhs)\n')
         out_cpp.write( f': m_internal({cast}{rename.function_call(keep_name)}(rhs.m_internal))\n')
         out_cpp.write( '{\n')
-        if structname == 'fz_link':
-            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): copy constructor from &rhs=" << &rhs << " rhs.m_internal=" << rhs.m_internal << " rhs.m_internal->refs=" << (rhs.m_internal ? rhs.m_internal->refs : -99) << " to this=" << this << "\\n";\n')
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
@@ -4836,12 +4822,9 @@ def class_copy_constructor(
     out_cpp.write( f'/* {comment} */\n')
     out_cpp.write( f'FZ_FUNCTION {classname}& {classname}::operator=(const {classname}& rhs)\n')
     out_cpp.write(  '{\n')
-    out_cpp.write( f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): {classname}::operator=() &rhs=" << &rhs << " this=" << this << " this->m_internal=" << this->m_internal << " rhs.m_internal=" << rhs.m_internal << "\\n";\n')
     out_cpp.write( f'    {rename.function_call(drop_name)}(this->m_internal);\n')
     out_cpp.write( f'    {rename.function_call(keep_name)}(rhs.m_internal);\n')
     out_cpp.write( f'    this->m_internal = {cast}rhs.m_internal;\n')
-    if structname == 'fz_list':
-        out_cpp.write( f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): returning. this=" << this << " this->m_internal=" << this->m_internal << " this->m_internal.refs=" << (this->m_internal ? this->m_internal.refs : -99) << " rhs.m_internal=" << rhs.m_internal << " rhs.m_internal->refs=" << (rhs.m_internal ? rhs.m_internal->refs : -99) << "\\n";\n')
     out_cpp.write( f'    return *this;\n')
     out_cpp.write(  '}\n')
     out_cpp.write(  '\n')
@@ -4908,8 +4891,6 @@ def class_write_method_body(
                 )
         sep = ', '
     out_cpp.write( f');\n')
-    if structname == 'fz_link':
-        out_cpp.write( f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): have constructed using mupdf::{fnname2}() this=" << this << " m_internal=" << m_internal << " m_internal->refs=" << m_internal->refs << "\\n";\n')
 
     if fnname in functions_that_return_non_kept:
         # This function returns a borrowed reference so we need to call
@@ -5299,10 +5280,6 @@ def class_raw_constructor(
                     out_cpp.write( f'    memcpy(this->{c.spelling}, internal->{c.spelling}, sizeof(this->{c.spelling}));\n')
                 else:
                     out_cpp.write( f'    this->{c.spelling} = internal->{c.spelling};\n')
-        out_cpp.write(f'    std::cerr << "\\n" << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": have constructed from raw internal=" << internal << " this=" << this;\n')
-        if structname == 'fz_link':
-            out_cpp.write(f'    if (internal) std::cerr << " internal->refs=" << internal->refs;\n')
-        out_cpp.write(f'    std::cerr << "\\n";\n')
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
@@ -5484,8 +5461,6 @@ def class_destructor(
 
         out_cpp.write( f'FZ_FUNCTION {classname}::~{classname}()\n')
         out_cpp.write(  '{\n')
-        if classname == 'Link':
-            out_cpp.write( f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): this=" << this << " m_internal=" << m_internal << " m_internal->refs=" << (m_internal ? m_internal->refs : -99) << " calling {rename.function_call(fnname)}\\n";\n')
         out_cpp.write( f'    {rename.function_call(fnname)}(m_internal);\n')
         out_cpp.write(  '}\n')
         out_cpp.write( '\n')
