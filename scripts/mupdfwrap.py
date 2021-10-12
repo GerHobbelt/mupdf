@@ -7576,6 +7576,9 @@ def build( build_dirs, swig, args):
 
                     include1 = f'{build_dirs.dir_mupdf}/include'
                     include2 = f'{build_dirs.dir_mupdf}/platform/c++/include'
+                    cpp_files_text = ''
+                    for i in cpp_files:
+                        cpp_files_text += ' ' + os.path.relpath(i)
                     command = ( textwrap.dedent(
                             f'''
                             c++
@@ -7585,7 +7588,7 @@ def build( build_dirs, swig, args):
                                 -shared
                                 -I {include1}
                                 -I {include2}
-                                {" ".join(cpp_files)}
+                                {cpp_files_text}
                                 {jlib.link_l_flags(mupdf_so)}
                             ''').strip().replace( '\n', ' \\\n')
                             )
