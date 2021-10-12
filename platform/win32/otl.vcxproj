@@ -1,0 +1,2550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>otl</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFAF060}</ProjectGuid>
+    <RootNamespace>otl</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  
+  
+  
+  
+  
+  
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  
+  
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OTL;OTL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  
+  
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/otl/build/otl_common_main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/build/otl_datetime_conversion.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex01_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex02_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex03_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex04_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex05_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex06_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex07_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex08_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex09_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex100_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex101_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex102_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex103_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex104_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex105_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex106_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex107_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex108_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex109_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex10_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex110_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex111_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex112_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex113_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex114_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex115_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex116_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex117_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex118_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex119_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex11_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex120_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex121_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex122_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex123_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex124_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex125_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex126_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex127_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex128_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex129_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex12_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex130_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex131_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex132_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex133_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex134_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex135_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex136_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex137_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex138_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex139_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex13_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex140_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex141_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex142_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex143_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex144_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex145_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex146_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex147_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex148_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex149_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex14_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex150_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex151_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex152_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex153_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex154_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex155_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex156_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex157_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex158_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex159_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex15_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex160_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex161_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex162_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex163_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex164_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex165_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex166_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex167_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex168_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex169_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex16_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex170_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex171_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex172_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex173_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex174_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex175_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex176_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex177_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex178_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex179_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex17_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex180_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex181_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex182_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex183_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex184_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex185_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex186_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex187_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex188_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex189_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex18_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex190_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex191_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex192_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex193_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex194_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex195_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex196_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex197_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex198_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex199_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex19_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex200_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex201_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex202_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex203_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex204_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex205_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex206_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex207_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex208_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex209_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex20_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex210_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex211_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex212_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex213_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex214_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex215_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex216_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex217_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex218_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex219_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex21_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex220_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex221_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex222_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex223_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex224_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex225_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex226_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex227_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex228_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex229_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex22_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex230_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex231_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex232_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex233_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex234_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex235_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex236_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex237_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex238_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex239_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex23_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex240_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex241_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex242_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex243_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex244_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex245_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex246_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex247_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex248_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex249_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex24_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex250_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex251_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex252_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex253_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex254_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex255_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex256_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex257_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex258_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex259_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex25_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex260_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex261_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex262_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex263_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex264_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex265_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex266_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex267_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex268_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex269_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex26_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex270_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex271_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex272_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex273_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex274_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex275_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex276_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex277_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex278_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex279_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex27_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex280_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex281_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex282_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex283_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex284_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex285_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex286_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex287_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex288_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex289_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex289_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex28_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex290_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex291_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex292_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex293_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex294_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex295_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex296_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex297_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex298_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex299_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex29_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex300_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex301_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex302_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex303_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex304_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex305_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex306_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex307_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex308_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex309_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex309_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex30_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex310_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex311_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex312_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex313_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex314_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex315_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex316_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex317_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex318_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex319_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex31_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex320_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex321_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex322_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex323_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex324_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex325_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex326_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex327_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex328_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex329_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex32_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex330_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex331_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex332_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex333_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex334_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex335_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex336_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex337_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex338_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex339_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex33_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex340_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex341_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex342_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex343_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex344_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex345_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex346_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex347_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex348_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex349_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex34_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex350_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex351_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex352_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex353_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex354_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex355_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex356_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex357_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex358_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex359_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex35_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex360_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex361_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex362_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex363_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex364_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex365_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex366_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex367_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex368_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex369_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex36_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex370_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex371_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex372_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex373_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex374_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex375_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex376_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex377_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex378_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex379_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex37_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex380_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex381_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex382_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex383_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex384_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex385_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex386_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex387_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex388_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex389_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex38_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex390_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex391_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex392_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex393_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex394_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex395_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex396_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex397_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex398_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex399_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex39_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex400_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex401_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex402_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex403_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex404_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex405_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex406_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex407_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex409_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex40_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex410_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex411_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex412_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex413_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex414_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex415_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex416_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex417_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex418_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex419_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex41_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex420_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex421_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex422_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex423_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex424_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex425_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex426_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex427_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex428_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex429_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex42_oci8_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex430_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex431_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex432_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex433_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex434_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex435_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex436_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex437_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex438_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex439_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex43_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex440_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex441_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex442_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex443_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex444_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex445_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex446_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex447_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex448_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex449_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex44_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex450_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex451_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex452_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex453_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex454_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex455_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex456_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex457_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex458_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex459_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex45_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex460_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex461_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex462_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex463_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex464_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex465_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex466_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex467_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex468_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex469_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex46_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex470_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex471_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex472_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex473_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex474_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex475_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex476_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex477_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex478_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex479_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex47_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex480_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex481_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex482_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex483_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex484_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex485_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex486_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex487_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex488_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex489_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex48_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex490_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex491_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex492_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex493_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex494_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex495_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex496_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex497_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex498_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex499_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex49_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex500_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex501_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex502_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex503_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex504_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex505_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex506_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex507_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex508_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex509_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex50_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex510_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex511_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex512_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex513_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex514_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex515_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex516_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex517_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex518_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex519_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex51_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex520_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex521_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex522_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex523_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex524_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex525_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex526_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex527_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex528_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex529_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex52_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex530_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex531_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex532_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex533_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex534_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex535_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex536_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex537_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex538_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex539_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex53_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex540_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex541_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex542_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex543_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex544_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex545_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex546_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex547_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex548_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex549_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex54_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex550_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex551_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex552_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex553_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex554_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex555_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex556_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex557_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex558_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex559_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex55_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex560_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex561_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex562_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex563_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex564_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex565_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex566_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex567_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex568_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex569_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex56_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex570_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex571_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex572_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex573_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex574_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex575_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex576_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex577_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex578_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex579_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex57_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex580_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex581_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex582_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex583_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex584_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex585_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex586_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex587_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex588_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex589_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex590_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex591_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex592_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex593_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex594_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex595_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex596_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex597_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex598_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex599_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex600_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex601_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex602_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex603_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex604_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex605_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex606_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex607_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex608_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex609_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex60_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex610_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex611_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex612_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex613_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex614_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex615_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex616_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex617_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex618_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex619_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex61_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex620_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex621_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex622_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex623_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex624_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex625_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex626_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex627_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex628_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex629_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex62_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex630_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex631_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex632_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex633_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex634_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex635_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex636_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex637_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex638_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex639_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex63_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex640_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex641_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex642_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex643_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex644_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex645_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex646_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex647_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex648_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex649_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex64_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex650_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex651_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex652_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex653_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex654_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex655_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex656_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex657_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex658_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex659_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex65_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex660_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex661_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex662_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex663_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex664_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex665_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex666_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex667_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex668_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex669_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex66_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex670_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex671_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex672_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex673_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex674_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex675_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex676_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex678_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex679_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex67_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex680_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex681_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex682_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex683_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex684_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex685_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex686_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex687_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex688_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex689_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex68_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex690_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex691_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex692_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex693_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex694_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex695_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex696_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex697_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex698_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex699_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex69_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex700_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex701_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex702_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex703_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex704_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex705_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex706_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex707_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex708_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex709_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex70_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex710_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex711_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex712_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex713_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex714_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex715_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex716_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex717_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex718_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex719_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex71_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex720_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex721_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex722_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex723_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex724_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex725_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex726_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex727_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex728_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex729_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex72_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex730_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex731_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex732_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex733_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex734_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex735_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex736_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex737_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex738_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex739_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex73_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex740_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex741_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex742_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex743_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex744_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex745_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex746_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex747_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex748_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex749_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex74_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex750_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex751_oci9.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex752_generic.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex753_generic.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex754_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex755_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex756_generic.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex757_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex75_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex76_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex77_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex78_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex79_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex80_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex81_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex82_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex83_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex84_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex85_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex86_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex87_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex88_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex89_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex90_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex91_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex92_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex93_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex94_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex95_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex96_db2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex97_oci7.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex98_oci8.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ex99_odbc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/otl/otl4_examples/ww.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/otl/build/oci.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/otl/build/ociapr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/otl/build/otl_include_0.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/otl/build/sqlcli1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/otl/build/timesten.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/otl/otlv4_h/otlv4.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/otl/README.md" />
+        
+  </ItemGroup>
+</Project>
+    
