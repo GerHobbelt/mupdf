@@ -1895,7 +1895,6 @@ classextras = ClassExtras(
                 extra_cpp = f'''
                         {rename.class_("fz_outline_item")}::{rename.class_("fz_outline_item")}(const fz_outline_item* item)
                         {{
-                            std::cerr << __FILE__ << ":" << __LINE__ << ": item=" << item << "\\n";
                             if (item)
                             {{
                                 m_valid = true;
@@ -1914,9 +1913,7 @@ classextras = ClassExtras(
                         }}
                         const std::string& {rename.class_("fz_outline_item")}::title() const
                         {{
-                            std::cerr << __FILE__ << ":" << __LINE__ << ": m_valid=" << m_valid << "\\n";
                             if (!m_valid) throw ErrorGeneric("fz_outline_item is invalid");
-                            std::cerr << __FILE__ << ":" << __LINE__ << ": returning m_title=" << m_title << "\\n";
                             return m_title;
                         }}
                         const std::string& {rename.class_("fz_outline_item")}::uri() const
@@ -3086,7 +3083,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     # Output code that writes diagnostics to std::cerr if $MUPDF_trace is set.
     #
     out.write( '    if (s_trace) {\n')
-    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": calling {cursor.mangled_name}():"')
+    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {cursor.mangled_name}():"')
     for arg in get_args( tu, cursor, include_fz_context=True):
         if is_pointer_to( arg.cursor.type, 'fz_context'):
             out.write( f' << " auto_ctx=" << auto_ctx')
