@@ -4682,16 +4682,6 @@ def class_add_iterator( struct, structname, classname, extras):
                 return &m_item;
             }}
 
-            void test({classname}& item)
-            {{
-                for( {classname}Iterator it = item.begin(); it != item.end(); ++it) {{
-                    (void) *it;
-                }}
-                for ( auto i: item) {{
-                    (void) i;
-                }}
-            }}
-
             '''
 
 
@@ -8026,6 +8016,37 @@ def build( build_dirs, swig, args):
                 raise Exception( 'unrecognised --build action %r' % action)
 
 
+def csharp_settings(build_dirs):
+    '''
+    Returns (csc, mono, mupdf_cs).
+
+    csc: C# compiler.
+    mono: C# interpreter ("" on Windows).
+    mupdf_cs: MuPDF C# code.
+    '''
+    # On linux requires:
+    #   sudo apt install mono-devel
+    #
+    # OpenBSD:
+    #   pkg_add mono
+    # but we get runtime error when exiting:
+    #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
+    # which moght be because of mixing gcc and clang?
+    #
+    if g_windows:
+        csc = '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"'
+        mono = ''
+    else:
+        mono = 'mono'
+        if g_linux:
+            csc = 'mono-csc'
+        elif g_openbsd:
+            csc = 'csc'
+
+    mupdf_cs = os.path.relpath(f'{build_dirs.dir_so}/mupdf.cs')
+    return csc, mono, mupdf_cs
+
+
 def main():
 
     # Set default build directory. Can br overridden by '-d'.
@@ -8411,26 +8432,7 @@ def main():
                     log( 'Tests ran ok.')
 
             elif arg == '--test-csharp':
-                # On linux requires:
-                #   sudo apt install mono-devel
-                #
-                # OpenBSD:
-                #   pkg_add mono
-                # but we get runtime error when exiting:
-                #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
-                # which moght be because of mixing gcc and clang?
-                #
-                if g_windows:
-                    csc = '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"'
-                    mono = ''
-                else:
-                    mono = 'mono'
-                    if g_linux:
-                        csc = 'mono-csc'
-                    elif g_openbsd:
-                        csc = 'csc'
-
-                mupdf_cs = os.path.relpath(f'{build_dirs.dir_so}/mupdf.cs')
+                csc, mono, mupdf_cs = csharp_settings(build_dirs)
 
                 # Our tests look for zlib.3.pdf in their current directory.
                 jlib.copy(
@@ -8520,6 +8522,8 @@ def main():
                         jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-csharp-gui':
+                csc, mono, mupdf_cs = csharp_settings(build_dirs)
+
                 # Build and run gui test.
                 #
                 # Don't know why Unix/Windows differ in what -r: args are
@@ -8527,7 +8531,7 @@ def main():
                 #
                 # We need -unsafe for copying bitmap data from mupdf.
                 #
-                references = '' if g_windows else '-r:System.Drawing -r:System.Windows.Forms'
+                references = '-r:System.Drawing -r:System.Windows.Forms' if g_linux else ''
                 out = 'mupdfwrap_gui.cs.exe'
                 jlib.build(
                         ('scripts/mupdfwrap_gui.cs', mupdf_cs),
@@ -8535,6 +8539,9 @@ def main():
                         f'{csc} -unsafe {references}  -out:{{OUT}} {{IN}}'
                         )
                 if g_windows:
+                    # Don't know how to mimin Unix's LD_LIBRARY_PATH, so for
+                    # now we cd into the directory containing our generated
+                    # libraries.
                     jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
                     jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                 else:
