@@ -1898,10 +1898,10 @@ classextras = ClassExtras(
 
         fz_outline_item = ClassExtra(
                 class_top = f'''
-                        bool valid() const;
-                        const std::string& title() const;   /* Will throw if valid() is not true. */
-                        const std::string& uri() const;     /* Will throw if valid() is not true. */
-                        int is_open() const;                /* Will throw if valid() is not true. */
+                        FZ_FUNCTION bool valid() const;
+                        FZ_FUNCTION const std::string& title() const;   /* Will throw if valid() is not true. */
+                        FZ_FUNCTION const std::string& uri() const;     /* Will throw if valid() is not true. */
+                        FZ_FUNCTION int is_open() const;                /* Will throw if valid() is not true. */
                         ''',
                 class_bottom = f'''
                         private:
@@ -1916,7 +1916,7 @@ classextras = ClassExtras(
                 copyable = 'default',
                 pod = 'none',
                 extra_cpp = f'''
-                        {rename.class_("fz_outline_item")}::{rename.class_("fz_outline_item")}(const fz_outline_item* item)
+                        FZ_FUNCTION {rename.class_("fz_outline_item")}::{rename.class_("fz_outline_item")}(const fz_outline_item* item)
                         {{
                             if (item)
                             {{
@@ -1930,21 +1930,21 @@ classextras = ClassExtras(
                                 m_valid = false;
                             }}
                         }}
-                        bool {rename.class_("fz_outline_item")}::valid() const
+                        FZ_FUNCTION bool {rename.class_("fz_outline_item")}::valid() const
                         {{
                             return m_valid;
                         }}
-                        const std::string& {rename.class_("fz_outline_item")}::title() const
+                        FZ_FUNCTION const std::string& {rename.class_("fz_outline_item")}::title() const
                         {{
                             if (!m_valid) throw ErrorGeneric("fz_outline_item is invalid");
                             return m_title;
                         }}
-                        const std::string& {rename.class_("fz_outline_item")}::uri() const
+                        FZ_FUNCTION const std::string& {rename.class_("fz_outline_item")}::uri() const
                         {{
                             if (!m_valid) throw ErrorGeneric("fz_outline_item is invalid");
                             return m_uri;
                         }}
-                        int {rename.class_("fz_outline_item")}::is_open() const
+                        FZ_FUNCTION int {rename.class_("fz_outline_item")}::is_open() const
                         {{
                             if (!m_valid) throw ErrorGeneric("fz_outline_item is invalid");
                             return m_is_open;
