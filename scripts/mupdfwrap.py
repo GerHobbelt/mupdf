@@ -8016,6 +8016,40 @@ def build( build_dirs, swig, args):
                 raise Exception( 'unrecognised --build action %r' % action)
 
 
+def python_settings(build_dirs):
+    # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
+    # test .py programme can load mupdf.py and _mupdf.so.
+    env_extra = {}
+    command_prefix = ''
+    log('{build_dirs=}')
+    if g_windows:
+        # On Windows, it seems that 'py' runs the default
+        # python. Also, Windows appears to be able to find
+        # _mupdf.pyd in same directory as mupdf.py.
+        #
+        python_path, python_version, python_root, cpu = find_python( build_dirs.cpu, build_dirs.python_version)
+        python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
+        env_extra = {
+                'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                }
+        command_prefix = f'"{python_path}"'
+    elif g_openbsd:
+        # We have special support to not require LD_LIBRARY_PATH.
+        #command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+        env_extra = {
+                'PYTHONPATH': os.path.relpath(build_dirs.dir_so)
+                }
+    else:
+        # On Linux it looks like we need to specify
+        # LD_LIBRARY_PATH. fixme: revisit this because these days
+        # jlib.y uses rpath when constructing link commands.
+        #
+        env_extra = {
+                'LD_LIBRARY_PATH': os.path.abspath(build_dirs.dir_so),
+                'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                }
+    return env_extra, command_prefix
+
 def csharp_settings(build_dirs):
     '''
     Returns (csc, mono, mupdf_cs).
@@ -8365,38 +8399,7 @@ def main():
 
             elif arg in ('--test-python', '-t', '--test-python-gui'):
 
-                # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
-                # test .py programme can load mupdf.py and _mupdf.so.
-                env_extra = {}
-                command_prefix = ''
-                log('{build_dirs=}')
-                if g_windows:
-                    # On Windows, it seems that 'py' runs the default
-                    # python. Also, Windows appears to be able to find
-                    # _mupdf.pyd in same directory as mupdf.py.
-                    #
-                    python_path, python_version, python_root, cpu = find_python( build_dirs.cpu, build_dirs.python_version)
-                    python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
-                    env_extra = {
-                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
-                            }
-                    command_prefix = f'"{python_path}"'
-                elif g_openbsd:
-                    # We have special support to not require LD_LIBRARY_PATH.
-                    #command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
-                    env_extra = {
-                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so)
-                            }
-                else:
-                    # On Linux it looks like we need to specify
-                    # LD_LIBRARY_PATH. fixme: revisit this because these days
-                    # jlib.y uses rpath when constructing link commands.
-                    #
-                    env_extra = {
-                            'LD_LIBRARY_PATH': os.path.abspath(build_dirs.dir_so),
-                            'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
-                            }
-                    #command_prefix = f'LD_LIBRARY_PATH={os.path.abspath(build_dirs.dir_so)} PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
+                env_extra, command_prefix = python_settings(build_dirs)
 
                 if arg == '--test-python-gui':
                     command = f'MUPDF_trace=0 MUPDF_check_refs=1 {command_prefix} ./scripts/mupdfwrap_gui.py'
@@ -8543,10 +8546,16 @@ def main():
                     # now we cd into the directory containing our generated
                     # libraries.
                     jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
-                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                    #jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                 else:
                     jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
                     jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
+
+            elif arg == '--test-python-fitz':
+
+                env_extra, command_prefix = python_settings(build_dirs)
+                env_extra['PYTHONPATH'] += ':.'
+                jlib.system( f'python3 ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
