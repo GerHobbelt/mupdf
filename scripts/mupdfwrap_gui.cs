@@ -1,6 +1,7 @@
 // Basic PDF viewer using MuPDF C# bindings.
 //
 
+[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
 public class MuPDFGui : System.Windows.Forms.Form
 {
     // We use static pixmap to ensure it isn't garbage-collected.
@@ -14,6 +15,8 @@ public class MuPDFGui : System.Windows.Forms.Form
     private int     zoom_multiple = 4;
     private double  zoom = 0;
     private int     page_number = 0;
+
+    private System.Windows.Forms.WebBrowser web_browser;
 
     mupdf.Document                  document;
     mupdf.Page                      page;
@@ -29,7 +32,6 @@ public class MuPDFGui : System.Windows.Forms.Form
 
     public MuPDFGui()
     {
-
         menu_item_file = new System.Windows.Forms.MenuItem("File",
                 new System.Windows.Forms.MenuItem[]
                 {
@@ -48,7 +50,11 @@ public class MuPDFGui : System.Windows.Forms.Form
         this.picture_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
         this.AutoScroll = true;
 
+        //web_browser = new System.Windows.Forms.WebBrowser();
+
+
         Controls.Add(picture_box);
+        //Controls.Add(web_browser);
 
         this.open_file("zlib.3.pdf");
     }
@@ -89,9 +95,14 @@ public class MuPDFGui : System.Windows.Forms.Form
         System.Console.WriteLine("buffer=" + buffer);
         var html_bytes = buffer.buffer_extract();
         var html_string = System.Text.Encoding.UTF8.GetString(html_bytes, 0, html_bytes.Length);
-        var web_browser = new System.Windows.Forms.WebBrowser();
+        web_browser = new System.Windows.Forms.WebBrowser();
         web_browser.DocumentText = html_string;
-        web_browser.Show();
+        Controls.Add(web_browser);
+        //web_browser.Show();
+        // Unfortunately this doesn't show the WebBrowser instance that we have
+        // created - it seems that the only way to show a WebBrowser is to make
+        // it the only window. E.g. we can create it on startup and it will
+        // show, but then our PictureBox window does not appear.
     }
 
     public void quit(System.Object sender, System.EventArgs e)
