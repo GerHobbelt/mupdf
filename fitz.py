@@ -42,6 +42,27 @@ class TOOLS:
 def DUMMY(*args, **kw):
     return
 
+
+def JM_get_annot_xref_list(pdf_page):
+    pdf_obj = mupdf.PdfObj(pdf_page.m_internal.obj)
+    annots = pdf_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+    if not annots.m_internal:
+        return []
+    n = annots.array_len()
+    for i in range(n):
+        annot_obj = annots.array_get(i)
+        xref = annot_obj.to_num()
+        subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+        type_ = mupdf.PDF_ANNOT_UNKNOWN
+        if subtype:
+            name = subtype.to_name()
+            type_ = ppdf_annot_type_from_string(name)
+        id_ = annot_obj.dict_gets('NM')
+        names.append( (xref, type_, pdf_to_text_string(id_)))
+    return names
+
+
+
 class Document:
     def __init__(self, filename=None, stream=None, filetype=None, rect=None, width=0, height=0, fontsize=11):
         """Creates a document. Use 'open' as a synonym.
@@ -106,14 +127,17 @@ class Document:
 
             if stream:
                 this = mupdf.Document(filename if filename else filetype, stream)
+                print(f'mupdf.Document() => this={this}')
             else:
                 if filename:
                     if not filetype:
                         doc = mupdf.Document(filename)
+                        print(f'mupdf.Document(filename) => doc={doc}')
                     else:
                         assert 0, 'recognize_document() not yet supported'
                 else:
                     doc = mupdf.PdfDocument()
+                    print(f'mupdf.PdfDocument() => doc={doc}')
                     doc.dirty = 1
             if w > 0 and h > 0:
                 if isinstance(doc, mupdf.PdfDocument):
@@ -131,12 +155,14 @@ class Document:
                     else:
                         doc.layout_document(400, 600, 11)
             this = doc
+            print( f'doc={doc} this={this}')
 
         #try:
         #    self.this.append(this)
         #except __builtin__.Exception:
         #    self.this = this
         self.this = this
+        print( f'self.this={self.this}')
 
         # fixme: not sure where self.thisown gets initialised in PyMuPDF.
         #
@@ -402,8 +428,7 @@ class Document:
         """Number of pages."""
         if self.isClosed:
             raise ValueError("document closed")
-
-        return _fitz.Document_pageCount(self)
+        return self.this.count_pages()
 
     @property
 
@@ -1468,6 +1493,44 @@ class Document:
 
     def __exit__(self, *args):
         self.close()
+
+    def page_annot_xrefs(self, n):
+        page_count = self.this.count_pages()
+        while n < 0:
+            n += page_count
+        print(f'self.this is: {self.this}')
+        print(f'self.this.m_internal={self.this.m_internal}')
+        print(f'dir(self.this):')
+        for i in dir(self.this):
+            print(f'    {i}')
+        print(f'self.this.pdf_specifics is: {self.this.pdf_specifics}')
+        if isinstance(self.this, mupdf.PdfDocument):
+            print(f'self.this is a mupdf.PdfDocument')
+            pdf_document = self.this
+        else:
+            print(f'self.this is not a mupdf.PdfDocument: {self.this}')
+            print(f'self.this.m_internal={self.this.m_internal}')
+            pdf_document = self.this.pdf_specifics()
+        page = pdf_document.lookup_page_obj(n)
+        annots = JM_get_annot_xref_list(page)
+        return annots
+
+
+    def has_links(self):
+        """Check whether there are links on any page."""
+        print('has_links()')
+        if self.isClosed:
+            raise ValueError("document closed")
+        #if not self.this.is_pdf:
+        #    raise ValueError("not a PDF")
+        for i in range(self.pageCount):
+            for item in self.page_annot_xrefs(i):
+                if item[1] == PDF_ANNOT_LINK:
+                    print('Returning true')
+                    return True
+        print('Returning false')
+        return False
+
 
 open = Document
 
