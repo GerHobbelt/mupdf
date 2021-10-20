@@ -1,5 +1,11 @@
 # Import Auto-generated MuPDF python bindings
 #
+
+import sys
+
+sys.path.append('scripts')
+import jlib
+
 import mupdf
 
 import weakref
@@ -52,19 +58,19 @@ def JM_get_annot_xref_list(page_obj):
         PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
     '''
     names = []
-    print(f'page_obj={page_obj}')
-    print(f'mupdf.PDF_ENUM_NAME_Annots={mupdf.PDF_ENUM_NAME_Annots}')
-    print(f'calling page_obj.dict_get()')
+    jlib.log('{page_obj=}')
+    jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
+    jlib.log('calling page_obj.dict_get()')
     annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-    print(f'annots={annots}')
+    jlib.log('{annots=}')
     if not annots:
         return names
     n = annots.array_len()
-    print(f'n={n}')
+    jlib.log('{n=}')
     for i in range(n):
         annot_obj = mupdf.ppdf_array_get(annots, i)
         xref = mupdf.ppdf_to_num(annot_obj)
-        print(f'mupdf.PDF_ENUM_NAME_Subtype={mupdf.PDF_ENUM_NAME_Subtype}')
+        jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
         subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
         type_ = mupdf.PDF_ANNOT_UNKNOWN
         if (subtype):
@@ -144,17 +150,17 @@ class Document:
 
             if stream:
                 this = mupdf.Document(filename if filename else filetype, stream)
-                print(f'mupdf.Document() => this={this}')
+                jlib.log('mupdf.Document() => {this=}')
             else:
                 if filename:
                     if not filetype:
                         doc = mupdf.Document(filename)
-                        print(f'mupdf.Document(filename) => doc={doc}')
+                        jlib.log('mupdf.Document(filename) => {doc=}')
                     else:
                         assert 0, 'recognize_document() not yet supported'
                 else:
                     doc = mupdf.PdfDocument()
-                    print(f'mupdf.PdfDocument() => doc={doc}')
+                    jlib.log('mupdf.PdfDocument() => {doc=}')
                     doc.dirty = 1
             if w > 0 and h > 0:
                 if isinstance(doc, mupdf.PdfDocument):
@@ -172,14 +178,14 @@ class Document:
                     else:
                         doc.layout_document(400, 600, 11)
             this = doc
-            print( f'doc={doc} this={this}')
+            print(f'{doc=} {this=}')
 
         #try:
         #    self.this.append(this)
         #except __builtin__.Exception:
         #    self.this = this
         self.this = this
-        print( f'self.this={self.this}')
+        jlib.log('{self.this=}')
 
         # fixme: not sure where self.thisown gets initialised in PyMuPDF.
         #
@@ -445,6 +451,10 @@ class Document:
         """Number of pages."""
         if self.isClosed:
             raise ValueError("document closed")
+        jlib.log('{self.this=}')
+        jlib.log('{self.this.count_pages=}')
+        jlib.log('{self.this.m_internal=}')
+        jlib.log('{self.this.m_internal.refs=}')
         return self.this.count_pages()
 
     @property
@@ -637,13 +647,24 @@ class Document:
         return _fitz.Document__getPDFfileid(self)
 
     @property
-
     def isPDF(self):
         """Check for PDF."""
+        jlib.log('isPDF')
         if self.isClosed:
             raise ValueError("document closed")
-
-        return _fitz.Document_isPDF(self)
+        jlib.log('calling self.this.specifics()')
+        jlib.log('calling self.this.specifics() {self.this=}')
+        p = self.this.specifics()
+        jlib.log('{p=}')
+        jlib.log('{self.this=}')
+        pp = self.this.specifics()
+        jlib.log('{pp=}')
+        jlib.log('{pp.m_internal=}')
+        if pp.m_internal:
+            jlib.log(f'Returning true')
+            return True
+        jlib.log(f'Returning false')
+        return False
 
     @property
 
@@ -1515,41 +1536,57 @@ class Document:
         page_count = self.this.count_pages()
         while n < 0:
             n += page_count
-        print(f'self.this is: {self.this}')
-        print(f'self.this.m_internal={self.this.m_internal}')
+        jlib.log('self.this is: {self.this}')
+        jlib.log('{self.this.m_internal=}')
         if 0:
-            print(f'dir(self.this):')
+            jlib.log('dir(self.this):')
             for i in dir(self.this):
-                print(f'    {i}')
-        print(f'self.this.specifics is: {self.this.specifics}')
+                jlib.log('    {i}')
+        jlib.log('self.this.specifics is: {self.this.specifics}')
         if isinstance(self.this, mupdf.PdfDocument):
-            print(f'self.this is a mupdf.PdfDocument')
+            jlib.log('self.this is a mupdf.PdfDocument')
             pdf_document = self.this
         else:
-            print(f'self.this is not a mupdf.PdfDocument: {self.this}')
-            print(f'self.this.m_internal={self.this.m_internal}')
+            jlib.log('self.this is not a mupdf.PdfDocument: {self.this}')
+            jlib.log('{self.this.m_internal=}')
             pdf_document = self.this.specifics()
-            print(f'self.this.specifics() => pdf_document={pdf_document}')
+            jlib.log('self.this.specifics() => {pdf_document=}')
         page_obj = pdf_document.lookup_page_obj(n)
-        #print(f'page_obj: {dir_str(page_obj)}')
-        #print(f'page_obj.m_internal: {dir_str(page_obj.m_internal)}')
+        #jlib.log('page_obj: {dir_str(page_obj)}')
+        #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
         annots = JM_get_annot_xref_list(page_obj)
         return annots
 
 
     def has_links(self):
         """Check whether there are links on any page."""
-        print('has_links()')
+        jlib.log('has_links()')
         if self.isClosed:
             raise ValueError("document closed")
-        #if not self.this.is_pdf:
-        #    raise ValueError("not a PDF")
+        if not self.isPDF:
+            raise ValueError("not a PDF")
+        jlib.log('{self.pageCount=}')
+        jlib.log('calling self.pageCount')
         for i in range(self.pageCount):
+            jlib.log('{i=}')
             for item in self.page_annot_xrefs(i):
                 if item[1] == PDF_ANNOT_LINK:
-                    print('Returning true')
+                    jlib.log('Returning true')
                     return True
-        print('Returning false')
+        jlib.log('Returning false')
+        return False
+
+    def has_annots(self):
+        """Check whether there are annotations on any page."""
+        jlib.log('has_annots()')
+        if self.isClosed():
+            raise ValueError("document closed")
+        if not doc.is_pdf:
+            raise ValueError("not a PDF")
+        for i in range(doc.page_count):
+            for item in doc.page_annot_xrefs(i):
+                if not (item[1] == PDF_ANNOT_LINK or item[1] == PDF_ANNOT_WIDGET):
+                    return True
         return False
 
 
