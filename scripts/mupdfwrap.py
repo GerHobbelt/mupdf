@@ -2474,6 +2474,22 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        pdf_obj = ClassExtra(
+                methods_extra = [
+                    ExtraMethod(
+                        'PdfObj',
+                        'dict_get(int key)',
+                        f'''
+                        {{
+                            pdf_obj* temp = mupdf::ppdf_dict_get(this->m_internal, (pdf_obj *) key);
+                            auto ret = PdfObj(temp);
+                            return ret;
+                        }}
+                        ''',
+                        comment = '/* Typesafe wrapper for looking up things such as PDF_ENUM_NAME_Annots.*/',
+                        ),
+                    ]
+                ),
         pdf_write_options = ClassExtra(
                 constructors_extra = [
                     ExtraConstructor( '()',
