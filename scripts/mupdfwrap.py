@@ -2592,22 +2592,27 @@ def is_double_pointer( type_):
 has_refs_cache = dict()
 def has_refs( type_):
     '''
-    Returns true if <type_> has an 'int refs;' member.
+    Returns true if <type_> has an 'int refs;' member, or 'foo.refs' if
+    <type_> has a member .foo.refs' (the latter is currently hard-coded for
+    pdf_document only).
     '''
     type_ = type_.get_canonical()
     key = type_.spelling
     ret = has_refs_cache.get( key, None)
     if ret is None:
         ret = False
-        for cursor in type_.get_fields():
-            name = cursor.spelling
-            type2 = cursor.type.get_canonical()
-            if name == 'refs' and type2.spelling == 'int':
-                #jlib.log( '{type_.spelling=} returning true')
-                ret = True
-                break
+        if type_.spelling == 'struct pdf_document':
+            ret = 'super'
         else:
-            jlib.log( '{type_.spelling=} returning False')
+            for cursor in type_.get_fields():
+                name = cursor.spelling
+                type2 = cursor.type.get_canonical()
+                if name == 'refs' and type2.spelling == 'int':
+                    #jlib.log( '{type_.spelling=} returning true')
+                    ret = True
+                    break
+            else:
+                jlib.log( '{type_.spelling=} returning False')
         has_refs_cache[ key] = ret
     return ret
 
@@ -5786,8 +5791,12 @@ def class_wrapper(
     out_cpp.write( '\n')
     out_cpp.write( f'/* Implementation of methods for {classname} (wrapper for {structname}). */\n')
     out_cpp.write( '\n')
-    if has_refs(struct.type):
-        out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check;\n')
+    refs = has_refs(struct.type)
+    if refs:
+        if refs is True:
+            out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check;\n')
+        else:
+            out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check(offsetof({structname}, {refs}.refs));\n')
         out_cpp.write( '\n')
 
     # Trailing text in header, e.g. typedef for iterator.
@@ -6408,7 +6417,13 @@ def cpp_source(
             struct RefsCheck
             {
                 std::mutex              m_mutex;
+                int                     m_offset;
                 std::map<Struct*, int>  m_this_to_num;
+
+                RefsCheck(int offset=0)
+                : m_offset(offset)
+                {
+                }
 
                 void change( const ClassWrapper* this_, const char* file, int line, const char* fn, int delta)
                 {
@@ -6420,7 +6435,8 @@ def cpp_source(
                     could be modifying it via fz_keep_<Struct>() or
                     fz_drop_<Struct>(). But hopefully our read will be atomic
                     in practise anyway? */
-                    int refs = this_->m_internal->refs;
+                    //int refs = this_->m_internal->refs;
+                    int refs = *(int*)((char*) this_->m_internal + m_offset);
                     int& n = m_this_to_num[ this_->m_internal];
                     int n_prev = n;
                     assert( n >= 0);
@@ -8572,6 +8588,10 @@ def main():
                 env_extra, command_prefix = python_settings(build_dirs)
                 env_extra['PYTHONPATH'] += ':.'
                 jlib.system( f'python3 ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
+
+                # Requires 'pkg_add py3-test' or similar.
+                #
+                jlib.system( f'py.test-3 -x -s ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
