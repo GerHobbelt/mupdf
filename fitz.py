@@ -45,6 +45,10 @@ class TOOLS:
         TOOLS_JM_UNIQUE_ID += 1
         return TOOLS_JM_UNIQUE_ID
 
+    @staticmethod
+    def mupdf_warnings(reset=1):
+        pass
+
 def DUMMY(*args, **kw):
     return
 
