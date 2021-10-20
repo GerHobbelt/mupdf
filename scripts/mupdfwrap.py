@@ -1294,6 +1294,7 @@ functions_that_return_non_kept = [
         'fz_default_cmyk',
         'fz_default_output_intent',
         'fz_document_output_intent',
+        'pdf_specifics',
         ]
 
 
@@ -4988,8 +4989,12 @@ def class_write_method_body(
         # fz_keep_*() in order to allow the wrapping class to work (for example
         # its destructor will call fz_drop_*()).
         #
-        return_type_base = clip( return_cursor.spelling, ('fz_', 'pdf_'))
-        keep_fn = f'{prefix(structname)}keep_{return_type_base}'
+        if return_cursor.spelling.startswith( 'fz_'):
+            keep_fn = f'fz_keep_{return_cursor.spelling[3:]}'
+        elif return_cursor.spelling.startswith( 'pdf_'):
+            keep_fn = f'pdf_keep_{return_cursor.spelling[4:]}'
+        else:
+            assert 0
         out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
 
     if construct_from_temp == 'address_of_value':
