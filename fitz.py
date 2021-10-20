@@ -43,25 +43,42 @@ def DUMMY(*args, **kw):
     return
 
 
-def JM_get_annot_xref_list(pdf_page):
-    pdf_obj = mupdf.PdfObj(pdf_page.m_internal.obj)
-    annots = pdf_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-    if not annots.m_internal:
-        return []
+def JM_get_annot_xref_list(page_obj):
+    '''
+    Wrapper for PyMuPDF/fitz/helper-annot.i:
+        PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
+
+    Not PyMuPDF/fitz/fitz_wrap.c:
+        PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
+    '''
+    names = []
+    print(f'page_obj={page_obj}')
+    print(f'mupdf.PDF_ENUM_NAME_Annots={mupdf.PDF_ENUM_NAME_Annots}')
+    print(f'calling page_obj.dict_get()')
+    annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+    print(f'annots={annots}')
+    if not annots:
+        return names
     n = annots.array_len()
+    print(f'n={n}')
     for i in range(n):
-        annot_obj = annots.array_get(i)
-        xref = annot_obj.to_num()
-        subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+        annot_obj = mupdf.ppdf_array_get(annots, i)
+        xref = mupdf.ppdf_to_num(annot_obj)
+        print(f'mupdf.PDF_ENUM_NAME_Subtype={mupdf.PDF_ENUM_NAME_Subtype}')
+        subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
         type_ = mupdf.PDF_ANNOT_UNKNOWN
-        if subtype:
-            name = subtype.to_name()
-            type_ = ppdf_annot_type_from_string(name)
-        id_ = annot_obj.dict_gets('NM')
-        names.append( (xref, type_, pdf_to_text_string(id_)))
+        if (subtype):
+            name = mupdf.ppdf_to_name(subtype)
+            type_ = mupdf.ppdf_annot_type_from_string(name)
+        id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
+        names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
     return names
 
-
+def dir_str(x):
+    ret = f'{x} {type(x)} ({len(dir(x))}):\n'
+    for i in dir(x):
+        ret += f'    {i}\n'
+    return ret
 
 class Document:
     def __init__(self, filename=None, stream=None, filetype=None, rect=None, width=0, height=0, fontsize=11):
@@ -1500,19 +1517,23 @@ class Document:
             n += page_count
         print(f'self.this is: {self.this}')
         print(f'self.this.m_internal={self.this.m_internal}')
-        print(f'dir(self.this):')
-        for i in dir(self.this):
-            print(f'    {i}')
-        print(f'self.this.pdf_specifics is: {self.this.pdf_specifics}')
+        if 0:
+            print(f'dir(self.this):')
+            for i in dir(self.this):
+                print(f'    {i}')
+        print(f'self.this.specifics is: {self.this.specifics}')
         if isinstance(self.this, mupdf.PdfDocument):
             print(f'self.this is a mupdf.PdfDocument')
             pdf_document = self.this
         else:
             print(f'self.this is not a mupdf.PdfDocument: {self.this}')
             print(f'self.this.m_internal={self.this.m_internal}')
-            pdf_document = self.this.pdf_specifics()
-        page = pdf_document.lookup_page_obj(n)
-        annots = JM_get_annot_xref_list(page)
+            pdf_document = self.this.specifics()
+            print(f'self.this.specifics() => pdf_document={pdf_document}')
+        page_obj = pdf_document.lookup_page_obj(n)
+        #print(f'page_obj: {dir_str(page_obj)}')
+        #print(f'page_obj.m_internal: {dir_str(page_obj.m_internal)}')
+        annots = JM_get_annot_xref_list(page_obj)
         return annots
 
 
