@@ -1579,12 +1579,12 @@ class Document:
     def has_annots(self):
         """Check whether there are annotations on any page."""
         jlib.log('has_annots()')
-        if self.isClosed():
+        if self.isClosed:
             raise ValueError("document closed")
-        if not doc.is_pdf:
+        if not self.isPDF:
             raise ValueError("not a PDF")
-        for i in range(doc.page_count):
-            for item in doc.page_annot_xrefs(i):
+        for i in range(self.pageCount):
+            for item in self.page_annot_xrefs(i):
                 if not (item[1] == PDF_ANNOT_LINK or item[1] == PDF_ANNOT_WIDGET):
                     return True
         return False
