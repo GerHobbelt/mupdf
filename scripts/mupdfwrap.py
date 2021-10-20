@@ -991,13 +991,13 @@ class Rename:
         return f'internal_{name}'
     def method( self, structname, fnname):
         if structname.startswith( 'fz_'):
-            ret = clip( fnname, "fz_")
+            ret = clip( fnname, ('fz_', 'pdf_'))
             if ret in ('stdin', 'stdout', 'stderr'):
                 log( 'appending underscore to {ret=}')
                 ret += '_'
             return ret
         if structname.startswith( 'pdf_'):
-            return clip( fnname, "pdf_")
+            return clip( fnname, ('fz_', 'pdf_'))
         assert 0, f'unrecognised structname={structname}'
 
 rename = Rename()
