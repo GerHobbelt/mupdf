@@ -1618,6 +1618,20 @@ class Document:
             return count
         return False
 
+    @property
+    def is_repaired(self):
+        """Check whether PDF was repaired."""
+        pdf = self.this.document_from_fz_document()
+        if not pdf.m_internal:
+            return False
+        r = pdf.was_repaired()
+        jlib.log('{r=}')
+        if r:
+            jlib.log('returning true')
+            return True
+        jlib.log('returning false')
+        return False
+
 
 open = Document
 
