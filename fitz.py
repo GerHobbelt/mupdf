@@ -80,6 +80,13 @@ def JM_get_annot_xref_list(page_obj):
         names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
     return names
 
+def pdf_dict_getl(obj, *keys):
+    for i in range(len(keys)):
+        if not obj:
+            break
+        obj = obj.dict_get(keys[i])
+    return obj
+
 def dir_str(x):
     ret = f'{x} {type(x)} ({len(dir(x))}):\n'
     for i in dir(x):
@@ -1587,6 +1594,28 @@ class Document:
             for item in self.page_annot_xrefs(i):
                 if not (item[1] == PDF_ANNOT_LINK or item[1] == PDF_ANNOT_WIDGET):
                     return True
+        return False
+
+    @property
+    def is_form_pdf(self):
+        """Either False or PDF field count."""
+        pdf = self.this.specifics()
+        if not pdf.m_internal:
+            return False
+        count = -1;
+        try:
+            fields = pdf_dict_getl(pdf.trailer(),
+                    mupdf.PDF_ENUM_NAME_Root,
+                    mupdf.PDF_ENUM_NAME_AcroForm,
+                    mupdf.PDF_ENUM_NAME_Fields,
+                    )
+            if fields.is_array():
+                count = fields.array_len()
+        except Exception:
+            return False
+        jlib.log('{count=}')
+        if count >= 0:
+            return count
         return False
 
 
