@@ -1295,6 +1295,7 @@ functions_that_return_non_kept = [
         'fz_default_output_intent',
         'fz_document_output_intent',
         'pdf_specifics',
+        'pdf_document_from_fz_document',
         ]
 
 
