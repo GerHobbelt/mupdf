@@ -1296,6 +1296,19 @@ functions_that_return_non_kept = [
         'fz_document_output_intent',
         'pdf_specifics',
         'pdf_document_from_fz_document',
+        'pdf_array_get',
+        'pdf_dict_get_key',
+        'pdf_dict_get_val',
+        'pdf_dict_get',
+        'pdf_dict_getp',
+        'pdf_dict_getl',
+        'pdf_dict_geta',
+        'pdf_dict_gets',
+        'pdf_dict_getsa',
+        'pdf_dict_get_inheritable',
+        'pdf_dict_getp_inheritable',
+        'pdf_lookup_page_obj',
+        'pdf_lookup_page_loc',
         ]
 
 
@@ -2604,14 +2617,16 @@ def has_refs( type_):
     if ret is None:
         ret = False
         if type_.spelling == 'struct pdf_document':
-            ret = 'super'
+            ret = 'super.refs', 32
+        elif type_.spelling == 'struct pdf_obj':
+            ret = 0, 16
         else:
             for cursor in type_.get_fields():
                 name = cursor.spelling
                 type2 = cursor.type.get_canonical()
                 if name == 'refs' and type2.spelling == 'int':
                     #jlib.log( '{type_.spelling=} returning true')
-                    ret = True
+                    ret = 'refs', 32
                     break
             else:
                 jlib.log( '{type_.spelling=} returning False')
@@ -5799,10 +5814,13 @@ def class_wrapper(
     out_cpp.write( '\n')
     refs = has_refs(struct.type)
     if refs:
-        if refs is True:
+        refs_name, refs_size = refs
+        if 0 and refs is True:
             out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check;\n')
+        elif isinstance(refs_name, int):
+            out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check({refs_name}, {refs_size});\n')
         else:
-            out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check(offsetof({structname}, {refs}.refs));\n')
+            out_cpp.write( f'static RefsCheck<{structname}, {classname}> s_{classname}_refs_check(offsetof({structname}, {refs_name}), {refs_size});\n')
         out_cpp.write( '\n')
 
     # Trailing text in header, e.g. typedef for iterator.
@@ -6424,11 +6442,13 @@ def cpp_source(
             {
                 std::mutex              m_mutex;
                 int                     m_offset;
+                int                     m_size;
                 std::map<Struct*, int>  m_this_to_num;
 
-                RefsCheck(int offset=0)
-                : m_offset(offset)
+                RefsCheck(int offset, int size)
+                : m_offset(offset), m_size(size)
                 {
+                    assert(m_size == 16 || m_size == 32);
                 }
 
                 void change( const ClassWrapper* this_, const char* file, int line, const char* fn, int delta)
@@ -6442,7 +6462,9 @@ def cpp_source(
                     fz_drop_<Struct>(). But hopefully our read will be atomic
                     in practise anyway? */
                     //int refs = this_->m_internal->refs;
-                    int refs = *(int*)((char*) this_->m_internal + m_offset);
+                    void* refs_ptr = (char*) this_->m_internal + m_offset;
+                    int refs = (m_size == 16) ? (*(int16_t*) refs_ptr) : (*(int32_t*) refs_ptr);
+                    //int refs = *(int*)((char*) this_->m_internal + m_offset);
                     int& n = m_this_to_num[ this_->m_internal];
                     int n_prev = n;
                     assert( n >= 0);
@@ -8597,7 +8619,9 @@ def main():
 
                 # Requires 'pkg_add py3-test' or similar.
                 #
-                jlib.system( f'py.test-3 -x -s ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
+                # -x: stop at first error.
+                # -s: show stdout/err.
+                jlib.system( f'MUPDF_check_refs=1 py.test-3 -x -s ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
