@@ -6498,7 +6498,7 @@ def cpp_source(
                                 << "\\n";
                         abort();
                     }
-                    if (n && abs( refs - n) > 1000)
+                    if (n && ::abs( refs - n) > 1000)
                     {
                         /* This traps case where n > 0 but underlying struct is
                         freed and .ref is set to bogus value by fz_free() or
