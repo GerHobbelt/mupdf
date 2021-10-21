@@ -15,7 +15,7 @@
 
 /* Set the following if you're only looking for leaks, not memory overwrites
  * to speed the operation */
-/* #define MEMENTO_LEAKONLY */
+#define MEMENTO_LEAKONLY
 
 /* Set the following to keep extra details about the history of blocks */
 #define MEMENTO_DETAILS
