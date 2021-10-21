@@ -84,11 +84,15 @@ def JM_get_annot_xref_list(page_obj):
         names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
     return names
 
-def pdf_dict_getl(obj, *keys):
+def pdf_dict_getl(doc, obj, *keys):
+    jlib.log('{obj=} {len(keys)=}: {keys}')
+    jlib.log('{doc.this.count_pages()=}')
     for i in range(len(keys)):
         if not obj:
             break
         obj = obj.dict_get(keys[i])
+        jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
+    jlib.log('{obj=} {doc.this.count_pages()=}')
     return obj
 
 def dir_str(x):
@@ -466,7 +470,9 @@ class Document:
         jlib.log('{self.this.count_pages=}')
         jlib.log('{self.this.m_internal=}')
         jlib.log('{self.this.m_internal.refs=}')
-        return self.this.count_pages()
+        ret = self.this.count_pages()
+        jlib.log('{ret=}')
+        return ret
 
     @property
 
@@ -1456,6 +1462,8 @@ class Document:
 
 
     def __contains__(self, loc) -> bool:
+        page_count = self.this.count_pages()
+        jlib.log('{loc=} {self.pageCount=} {page_count=}')
         if type(loc) is int:
             if loc < self.pageCount:
                 return True
@@ -1548,6 +1556,7 @@ class Document:
 
     def page_annot_xrefs(self, n):
         page_count = self.this.count_pages()
+        jlib.log('*** {page_count=}')
         while n < 0:
             n += page_count
         jlib.log('self.this is: {self.this}')
@@ -1569,6 +1578,7 @@ class Document:
         #jlib.log('page_obj: {dir_str(page_obj)}')
         #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
         annots = JM_get_annot_xref_list(page_obj)
+        jlib.log('{self.this.count_pages()=} {self.pageCount=}')
         return annots
 
 
@@ -1606,21 +1616,27 @@ class Document:
     @property
     def is_form_pdf(self):
         """Either False or PDF field count."""
+        jlib.log('{self.this.count_pages()=}')
         pdf = self.this.specifics()
         if not pdf.m_internal:
             return False
+        jlib.log('{self.this.count_pages()=}')
         count = -1;
         try:
-            fields = pdf_dict_getl(pdf.trailer(),
+            jlib.log('{self.this.count_pages()=}')
+            fields = pdf_dict_getl(self, pdf.trailer(),
                     mupdf.PDF_ENUM_NAME_Root,
                     mupdf.PDF_ENUM_NAME_AcroForm,
                     mupdf.PDF_ENUM_NAME_Fields,
                     )
+            jlib.log('{fields=} {fields.is_array()=} {self.this.count_pages()=}')
             if fields.is_array():
                 count = fields.array_len()
+            jlib.log('{self.this.count_pages()=}')
         except Exception:
             return False
         jlib.log('{count=}')
+        jlib.log('{self.this.count_pages()=}')
         if count >= 0:
             return count
         return False
@@ -1628,6 +1644,7 @@ class Document:
     @property
     def is_repaired(self):
         """Check whether PDF was repaired."""
+        jlib.log('{self.this.count_pages()=}')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
@@ -1641,7 +1658,7 @@ class Document:
 
     @property
     def is_dirty(self):
-        # This seems flakey - pdf.m_internal usually non-zero, but sometimes 0.
+        jlib.log('{self.this.count_pages()=}')
         pdf = self.this.specifics()
         jlib.log('{pdf.m_internal=}')
         if not pdf.m_internal:
