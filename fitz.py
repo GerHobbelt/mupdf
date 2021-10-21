@@ -710,7 +710,10 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
 
-        return _fitz.Document_can_save_incrementally(self)
+        pdf = self.this.document_from_fz_document()
+        if not pdf.m_internal:
+            return False
+        return pdf.can_be_saved_incrementally()
 
 
     def authenticate(self, password):
@@ -1477,7 +1480,7 @@ class Document:
 
     def __getitem__(self, i: int =0):
         if i not in self:
-            raise IndexError("page not in document")
+            raise IndexError(f"page {i} not in document")
         return self.loadPage(i)
 
     def pages(self, start: OptInt =None, stop: OptInt =None, step: OptInt =None) -> "struct Page *":
@@ -1635,6 +1638,17 @@ class Document:
             return True
         jlib.log('returning false')
         return False
+
+    @property
+    def is_dirty(self):
+        # This seems flakey - pdf.m_internal usually non-zero, but sometimes 0.
+        pdf = self.this.specifics()
+        jlib.log('{pdf.m_internal=}')
+        if not pdf.m_internal:
+            return False
+        r = pdf.has_unsaved_changes()
+        jlib.log('{r=}')
+        return True if r else False
 
 
 open = Document
