@@ -1290,25 +1290,26 @@ class ClassExtras:
 #
 functions_that_return_non_kept = [
         'fz_default_cmyk',
-        'fz_default_rgb',
         'fz_default_cmyk',
         'fz_default_output_intent',
+        'fz_default_rgb',
         'fz_document_output_intent',
-        'pdf_specifics',
-        'pdf_document_from_fz_document',
         'pdf_array_get',
+        'pdf_dict_get',
+        'pdf_dict_get_inheritable',
         'pdf_dict_get_key',
         'pdf_dict_get_val',
-        'pdf_dict_get',
-        'pdf_dict_getp',
-        'pdf_dict_getl',
         'pdf_dict_geta',
+        'pdf_dict_getl',
+        'pdf_dict_getp',
+        'pdf_dict_getp_inheritable',
         'pdf_dict_gets',
         'pdf_dict_getsa',
-        'pdf_dict_get_inheritable',
-        'pdf_dict_getp_inheritable',
-        'pdf_lookup_page_obj',
+        'pdf_document_from_fz_document',
         'pdf_lookup_page_loc',
+        'pdf_lookup_page_obj',
+        'pdf_specifics',
+        'pdf_xobject_resources',
         ]
 
 
@@ -2497,6 +2498,7 @@ classextras = ClassExtras(
                         f'''
                         {{
                             pdf_obj* temp = mupdf::ppdf_dict_get(this->m_internal, (pdf_obj *) key);
+                            {rename.function_call('pdf_keep_obj')}(temp);
                             auto ret = PdfObj(temp);
                             return ret;
                         }}
@@ -5000,7 +5002,35 @@ def class_write_method_body(
         sep = ', '
     out_cpp.write( f');\n')
 
-    if fnname in functions_that_return_non_kept:
+    if (1
+            and return_cursor
+            and fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER
+            and has_refs(return_cursor.type)
+            ):
+        jlib.log('@@@ fn returns pointer to {return_cursor=}')
+        return_structname = clip(return_cursor.spelling, 'struct ')
+        if return_structname.startswith('fz_'):
+            prefix = 'fz_'
+        elif return_structname.startswith('pdf_'):
+            prefix = 'pdf_'
+        else:
+            prefix = None
+        jlib.log('@@@ {prefix=}')
+        if prefix:
+            for i in ('new', 'create', 'find', 'load', 'open', 'keep'):
+                if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
+                    break
+            else:
+                # This function returns a borrowed reference so we need to call
+                # fz_keep_*() in order to allow the wrapping class to work (for
+                # example its destructor will call fz_drop_*()).
+                #
+                suffix = return_structname[ len(prefix):]
+                keep_fn = f'{prefix}keep_{suffix}'
+                jlib.log('@@@ Function assumed to return borrowed reference: {fnname=} => {return_structname=} {keep_fn=}')
+                out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
+
+    if 0 and fnname in functions_that_return_non_kept:
         # This function returns a borrowed reference so we need to call
         # fz_keep_*() in order to allow the wrapping class to work (for example
         # its destructor will call fz_drop_*()).
@@ -8615,13 +8645,14 @@ def main():
 
                 env_extra, command_prefix = python_settings(build_dirs)
                 env_extra['PYTHONPATH'] += ':.'
-                jlib.system( f'python3 ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
-
+                #env_extra['PYTHONMALLOC'] = 'malloc'
+                #jlib.system( f'python3 ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
+                #
                 # Requires 'pkg_add py3-test' or similar.
                 #
                 # -x: stop at first error.
                 # -s: show stdout/err.
-                jlib.system( f'MUPDF_check_refs=1 py.test-3 -x -s ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
+                jlib.system( f'MUPDF_trace=1 MUPDF_check_refs=1 py.test-3 -x -s ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
