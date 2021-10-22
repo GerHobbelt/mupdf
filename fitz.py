@@ -148,6 +148,21 @@ def JM_get_annot_xref_list(page_obj):
         names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
     return names
 
+
+def JM_BufferFromBytes(stream):
+    '''
+    Make fz_buffer from a PyBytes, PyByteArray, io.BytesIO object.
+    '''
+    if isinstance(stream, bytes):
+        return mupdf.Buffer.new_buffer_from_copied_data(stream, len(stream))
+    if isinstance(stream, bytearray):
+        return mupdf.Buffer.new_buffer_from_copied_data(stream, len(stream))
+    if instance(stream, io.BytesIO):
+        b = stream.getvalue()
+        return mupdf.Buffer.new_buffer_from_copied_data(b, len(b))
+    return mupdf.Buffer(None)
+
+
 def pdf_dict_getl(doc, obj, *keys):
     jlib.log('{obj=} {len(keys)=}: {keys}')
     jlib.log('{doc.this.count_pages()=}')
@@ -4255,7 +4270,19 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
 
-        return _fitz.Document_update_stream(self, xref, stream, new)
+        #return _fitz.Document_update_stream(self, xref, stream, new)
+        pdf = self.this.specifics()
+        xreflen = pdf.xref_len()
+        if xref < 1 or xref > xreflen:
+            raise Exception(f'bad xref={xref} xreflen={xreflen}')
+        obj = pdf.new_indirect(xref, 0)
+        if not new and not obj.is_stream():
+            raise Exception(f'no stream object at xref={xref}')
+        res = JM_BufferFromBytes(stream)
+        if not res:
+            raise Exception('bad type: "stream"')
+        JM_update_stream(pdf, obj, res, 1)
+        pdf.dirty = 1
 
 
     def _setMetadata(self, text):
@@ -5823,7 +5850,21 @@ class Page:
         """Get xrefs of /Contents objects."""
         CheckParent(self)
 
-        return _fitz.Page_get_contents(self)
+        #return _fitz.Page_get_contents(self)
+        ret = []
+        page = self.this.page_from_fz_page()
+        obj = page.obj()
+        contents = obj.dict_get(mupdf.PDF_ENUM_NAME_Contents)
+        if contents.is_array():
+            n = contents.array_len()
+            for i in range(n):
+                icont = contents.array_get(i)
+                xref = icont.to_num()
+                ret.append(xref)
+        elif contents.m_internal:
+            xref = contents.to_num()
+            ret.append( xref)
+        return ret
 
 
     def set_contents(self, xref):
