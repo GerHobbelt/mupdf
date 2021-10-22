@@ -1286,7 +1286,7 @@ class ClassExtras:
         return self.items.get( name)
 
 
-# Customisation information for our wrapper classes.
+# Customisation information for selected wrapper classes.
 #
 # We use MuPDF struct names as keys.
 #
@@ -2521,7 +2521,7 @@ classextras = ClassExtras(
 def get_fz_extras( fzname):
     '''
     Finds ClassExtra for <fzname>, coping if <fzname> starts with 'const ' or
-    'struct '.
+    'struct '. Returns None if not found.
     '''
     fzname = clip( fzname, 'const ')
     fzname = clip( fzname, 'struct ')
@@ -2580,9 +2580,12 @@ def is_double_pointer( type_):
 has_refs_cache = dict()
 def has_refs( type_):
     '''
-    Returns true if <type_> has an 'int refs;' member, or 'foo.refs' if
-    <type_> has a member .foo.refs' (the latter is currently hard-coded for
-    pdf_document only).
+    Returns False or (offset, bits) if <type_> has a 'refs' member:
+        offset:
+            Byte offset of 'refs' or name of 'refs' for use with offsetof(),
+            e.g. 'super.refs'.
+        bits:
+            Size of 'refs' in bits.
     '''
     type_ = type_.get_canonical()
     key = type_.spelling
@@ -2592,6 +2595,9 @@ def has_refs( type_):
         if type_.spelling == 'struct pdf_document':
             ret = 'super.refs', 32
         elif type_.spelling == 'struct pdf_obj':
+            # Only a forward-declaration is available, but as of 2021-10-22 the
+            # definition in source/pdf/pdf-object.c has 'short refs;' as first
+            # member.
             ret = 0, 16
         else:
             for cursor in type_.get_fields():
@@ -2619,13 +2625,11 @@ def write_call_arg(
     Write an arg of a function call, translating between raw and wrapping
     classes as appropriate.
 
-    If the required type is a fz_ struct that we wrap, we assume that the
-    <name> is a reference to an instance of the wrapping class. If the wrapping
-    class is the same as <classname>, we use 'this->' instead of <name>. We
-    also generate slightly different code depending on whether the wrapping
-    class is pod or inline pod.
-
-    (cursor, name, separator, alt) should be as if from get_args().
+    If the required type is a fz_ struct that we wrap, we assume that arg.name
+    is a reference to an instance of the wrapping class. If the wrapping class
+    is the same as <classname>, we use 'this->' instead of <name>. We also
+    generate slightly different code depending on whether the wrapping class is
+    pod or inline pod.
 
     arg:
         Arg from get_args().
@@ -5825,9 +5829,7 @@ def class_wrapper(
     refs = has_refs(struct_cursor.type)
     if refs:
         refs_name, refs_size = refs
-        if 0 and refs is True:
-            out_cpp.write( f'static RefsCheck<{struct_name}, {classname}> s_{classname}_refs_check;\n')
-        elif isinstance(refs_name, int):
+        if isinstance(refs_name, int):
             out_cpp.write( f'static RefsCheck<{struct_name}, {classname}> s_{classname}_refs_check({refs_name}, {refs_size});\n')
         else:
             out_cpp.write( f'static RefsCheck<{struct_name}, {classname}> s_{classname}_refs_check(offsetof({struct_name}, {refs_name}), {refs_size});\n')
