@@ -1286,38 +1286,10 @@ class ClassExtras:
         return self.items.get( name)
 
 
-# These functions are known to return a pointer to a fz_* struct that must not
-# be dropped.
+# Customisation information for our wrapper classes.
 #
-# This matters if we wrap in a class method, because this will return class
-# wrapper for the struct, whose destructor will call fz_drop_*(). In this case,
-# we need to call fz_keep_*() before returning the class wrapper.
+# We use MuPDF struct names as keys.
 #
-functions_that_return_non_kept = [
-        'fz_default_cmyk',
-        'fz_default_cmyk',
-        'fz_default_output_intent',
-        'fz_default_rgb',
-        'fz_document_output_intent',
-        'pdf_array_get',
-        'pdf_dict_get',
-        'pdf_dict_get_inheritable',
-        'pdf_dict_get_key',
-        'pdf_dict_get_val',
-        'pdf_dict_geta',
-        'pdf_dict_getl',
-        'pdf_dict_getp',
-        'pdf_dict_getp_inheritable',
-        'pdf_dict_gets',
-        'pdf_dict_getsa',
-        'pdf_document_from_fz_document',
-        'pdf_lookup_page_loc',
-        'pdf_lookup_page_obj',
-        'pdf_specifics',
-        'pdf_xobject_resources',
-        ]
-
-
 classextras = ClassExtras(
 
         fz_aa_context = ClassExtra(
@@ -1507,9 +1479,6 @@ classextras = ClassExtras(
                         comment = '/* Sets m_internal = NULL. */',
                         ),
                     ]
-                ),
-
-        fz_display_list = ClassExtra(
                 ),
 
         fz_document = ClassExtra(
@@ -1835,9 +1804,6 @@ classextras = ClassExtras(
                     ],
                 copyable=False,
                 pod='inline',
-                ),
-
-        fz_font = ClassExtra(
                 ),
 
         fz_glyph = ClassExtra(
@@ -6241,8 +6207,9 @@ def cpp_source(
             into all generated files.
         generated:
             A Generated instance.
-        doit:
-            For debugging only. If false, we don't actually write to any files.
+        check_regress:
+            If true, we raise exception if generated content differs from what
+            is in existing files.
 
     Updates <generated> and returns <tu> from clang..
     '''
