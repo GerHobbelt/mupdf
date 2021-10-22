@@ -4950,17 +4950,40 @@ def class_write_method_body(
         extras,
         struct,
         fn_cursor,
-        construct_from_temp,
-        fnname2,
-        return_cursor,  # Cursor for struct.
-        return_type,    # Name of wrapper class.
+        return_cursor,
+        wrap_return,
         ):
     '''
     Writes method body to <out_cpp> that calls a generated C++ wrapper
     function.
+
+    structname:
+    classname:
+    fnname:
+    out_cpp:
+    static:
+        If true, this is a static class method.
+    constructor:
+        If true, this is a constructor.
+    extras:
+        .
+    struct:
+        .
+    fn_cursor:
+        Cursor for the underlying MuPDF function.
+    return_cursor:
+        If not None, the cursor for definition of returned type.
+    wrap_return:
+        If 'pointer', the underlying function returns a pointer to a struct
+        that we wrap.
+
+        If 'value' the underlying function returns, by value, a
+        struct that we wrap, so we need to construct our wrapper from the
+        address of this value.
+
+        Otherwise we don't wrap the returned value.
     '''
     out_cpp.write( f'{{\n')
-
     return_void = (fn_cursor.result_type.spelling == 'void')
 
     # Write function call.
@@ -4980,14 +5003,14 @@ def class_write_method_body(
                 assert 0, 'cannot handle underlying fn returning by value when not pod.'
         out_cpp.write( f'{rename.function_call(fnname)}(')
 
-    elif construct_from_temp == 'address_of_value':
-        out_cpp.write( f'    {return_cursor.spelling} temp = mupdf::{fnname2}(')
-    elif construct_from_temp == 'pointer':
-        out_cpp.write( f'    {return_cursor.spelling}* temp = mupdf::{fnname2}(')
+    elif wrap_return == 'value':
+        out_cpp.write( f'    {return_cursor.spelling} temp = mupdf::{rename.function(fnname)}(')
+    elif wrap_return == 'pointer':
+        out_cpp.write( f'    {return_cursor.spelling}* temp = mupdf::{rename.function(fnname)}(')
     elif return_void:
-        out_cpp.write( f'    mupdf::{fnname2}(')
+        out_cpp.write( f'    mupdf::{rename.function(fnname)}(')
     else:
-        out_cpp.write( f'    auto ret = mupdf::{fnname2}(')
+        out_cpp.write( f'    auto ret = mupdf::{rename.function(fnname)}(')
 
     have_used_this = False
     sep = ''
@@ -5005,12 +5028,13 @@ def class_write_method_body(
         sep = ', '
     out_cpp.write( f');\n')
 
-    if (1
-            and return_cursor
-            and fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER
-            and has_refs(return_cursor.type)
-            ):
-        #jlib.log('@@@ fn returns pointer to {return_cursor=}')
+    if wrap_return == 'pointer' and has_refs( return_cursor.type):
+        # This MuPDF function returns pointer to a struct which uses reference
+        # counting. If the function returns a borrowed reference, we need
+        # to increment its reference count before passing it to our wrapper
+        # class's constructor.
+        #
+        #jlib.log('Function returns pointer to {return_cursor=}')
         return_structname = clip(return_cursor.spelling, 'struct ')
         if return_structname.startswith('fz_'):
             prefix = 'fz_'
@@ -5023,35 +5047,20 @@ def class_write_method_body(
                 if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
                     break
             else:
-                # This function returns a borrowed reference so we need to call
-                # fz_keep_*() in order to allow the wrapping class to work (for
-                # example its destructor will call fz_drop_*()).
-                #
+                # This function returns a borrowed reference.
                 suffix = return_structname[ len(prefix):]
                 keep_fn = f'{prefix}keep_{suffix}'
-                #jlib.log('@@@ Function assumed to return borrowed reference: {fnname=} => {return_structname=} {keep_fn=}')
+                #jlib.log('Function assumed to return borrowed reference: {fnname=} => {return_structname=} {keep_fn=}')
                 out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
 
-    if 0 and fnname in functions_that_return_non_kept:
-        # This function returns a borrowed reference so we need to call
-        # fz_keep_*() in order to allow the wrapping class to work (for example
-        # its destructor will call fz_drop_*()).
-        #
-        if return_cursor.spelling.startswith( 'fz_'):
-            keep_fn = f'fz_keep_{return_cursor.spelling[3:]}'
-        elif return_cursor.spelling.startswith( 'pdf_'):
-            keep_fn = f'pdf_keep_{return_cursor.spelling[4:]}'
-        else:
-            assert 0
-        out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
-
-    if construct_from_temp == 'address_of_value':
-        out_cpp.write( f'    auto ret = {return_type}(&temp);\n')
-    elif construct_from_temp == 'pointer':
-        out_cpp.write( f'    auto ret = {return_type}(temp);\n')
+    if wrap_return == 'value':
+        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(&temp);\n')
+    elif wrap_return == 'pointer':
+        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
 
     if not static:
         if has_refs(struct.type):
+            # Write code that does runtime checking of reference counts.
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write( f'    {{\n')
             if constructor:
@@ -5116,9 +5125,12 @@ def class_write_method(
         struct
             None or cursor for the struct definition.
             Only used if <constructor> is true.
+        duplicate_type:
+            If true, we have already generated a method with the same args, so
+            this generated method will be commented-out.
         generated:
             If not None and there are one or more out-params, we write
-            python code to generated.swig_python that overwrides the default
+            python code to generated.swig_python that overrides the default
             SWIG-generated method to call our *_outparams_fn() alternative.
         debug
             Show extra diagnostics.
@@ -5197,7 +5209,6 @@ def class_write_method(
     decl_h += ')'
     decl_cpp += ')'
 
-    fnname2 = rename.function( fnname)
     if constructor:
         comment = f'Constructor using {fnname}().'
     else:
@@ -5212,7 +5223,7 @@ def class_write_method(
     # If this is true, we explicitly construct a temporary from what the
     # wrapped function returns.
     #
-    construct_from_temp = None
+    wrap_return = None
 
     warning_not_copyable = False
     warning_no_raw_constructor = False
@@ -5242,7 +5253,7 @@ def class_write_method(
                     if return_extras.copyable and return_extras.constructor_raw:
                         fn_h = f'{return_type} {decl_h}'
                         fn_cpp = f'{return_type} {classname}::{decl_cpp}'
-                        construct_from_temp = 'pointer'
+                        wrap_return = 'pointer'
                     else:
                         if not return_extras.copyable:
                             warning_not_copyable = True
@@ -5271,7 +5282,7 @@ def class_write_method(
                     return_type = rename.class_(return_cursor.type.spelling)
                     fn_h = f'{return_type} {decl_h}'
                     fn_cpp = f'{return_type} {classname}::{decl_cpp}'
-                    construct_from_temp = 'address_of_value'
+                    wrap_return = 'value'
 
     if warning_not_copyable:
         log( '*** warning: {structname=} {g_show_details(structname)=} {classname}::{decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} is not copyable.')
@@ -5311,10 +5322,8 @@ def class_write_method(
             extras,
             struct,
             fn_cursor,
-            construct_from_temp,
-            fnname2,
             return_cursor,
-            return_type,
+            wrap_return,
             )
 
     if duplicate_type:
