@@ -2631,7 +2631,7 @@ def has_refs( type_):
                     ret = 'refs', 32
                     break
             else:
-                jlib.log( '{type_.spelling=} returning False')
+                jlib.log2( '{type_.spelling=} returning False')
         has_refs_cache[ key] = ret
     return ret
 
@@ -4864,7 +4864,7 @@ def class_copy_constructor(
         if not cursor:
             classextra = classextras.get( structname)
             if classextra.copyable:
-                log( 'changing to non-copyable because no function {name}(): {structname}')
+                jlib.log2( 'changing to non-copyable because no function {name}(): {structname}')
                 classextra.copyable = False
             return
         if name == keep_name:
@@ -5007,7 +5007,7 @@ def class_write_method_body(
             and fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER
             and has_refs(return_cursor.type)
             ):
-        jlib.log('@@@ fn returns pointer to {return_cursor=}')
+        #jlib.log('@@@ fn returns pointer to {return_cursor=}')
         return_structname = clip(return_cursor.spelling, 'struct ')
         if return_structname.startswith('fz_'):
             prefix = 'fz_'
@@ -5015,7 +5015,6 @@ def class_write_method_body(
             prefix = 'pdf_'
         else:
             prefix = None
-        jlib.log('@@@ {prefix=}')
         if prefix:
             for i in ('new', 'create', 'find', 'load', 'open', 'keep'):
                 if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
@@ -5027,7 +5026,7 @@ def class_write_method_body(
                 #
                 suffix = return_structname[ len(prefix):]
                 keep_fn = f'{prefix}keep_{suffix}'
-                jlib.log('@@@ Function assumed to return borrowed reference: {fnname=} => {return_structname=} {keep_fn=}')
+                #jlib.log('@@@ Function assumed to return borrowed reference: {fnname=} => {return_structname=} {keep_fn=}')
                 out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
 
     if 0 and fnname in functions_that_return_non_kept:
@@ -8645,14 +8644,20 @@ def main():
 
                 env_extra, command_prefix = python_settings(build_dirs)
                 env_extra['PYTHONPATH'] += ':.'
-                #env_extra['PYTHONMALLOC'] = 'malloc'
-                #jlib.system( f'python3 ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
-                #
                 # Requires 'pkg_add py3-test' or similar.
                 #
                 # -x: stop at first error.
                 # -s: show stdout/err.
-                jlib.system( f'MUPDF_trace=1 MUPDF_check_refs=1 py.test-3 -x -s ../PyMuPDF/tests/test_general.py', env_extra=env_extra, out='log', verbose=1)
+                #
+
+                env_extra['PYTHONPATH'] += ':.'
+                #env_extra['PYTHONMALLOC'] = 'malloc'
+                jlib.system(
+                        f'MUPDF_trace=0 MUPDF_check_refs=0 py.test-3 -x -s ../PyMuPDF/tests/test_general.py',
+                        env_extra=env_extra,
+                        out='log',
+                        verbose=1,
+                        )
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
