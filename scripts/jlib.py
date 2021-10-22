@@ -1216,9 +1216,7 @@ def update_file( text, filename, return_different=False):
             text0 = f.read()
     except OSError:
         text0 = None
-    if text == text0:
-        log( 'Unchanged: ' + filename)
-    else:
+    if text != text0:
         if return_different and text0 is not None:
             return text
         log( 'Updating:  ' + filename)
