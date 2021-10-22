@@ -537,10 +537,12 @@ Usage:
                     functions whose name contains <details>.
                 -f
                     Force rebuilds.
-                --0-regress
-                    Checks for regressions in generated C++ code (action=0). If
-                    a generated C++ file already exists and its content differs
-                    from our generated C++, show diff and exit with an error.
+                --regress
+                    Checks for regressions in generated C++ code and SWIG .i
+                    file (actions 0 and 2 below). If a generated file already
+                    exists and its content differs from our generated content,
+                    show diff and exit with an error. This can be used to check
+                    for regressions when modifying this script.
                 --python
                 --csharp
                     Whether to generated bindings for python or C#. Default is
@@ -2977,7 +2979,7 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
             Clang cursor for the function.
         include_fz_context:
             If false, we skip args that are 'struct fz_context*'
-        skip_first_alt:]
+        skip_first_alt:
             If true, we skip the first arg with .alt set.
         verbose:
             .
@@ -6196,6 +6198,24 @@ def tabify( filename, text):
     #
     return ret[:-1]
 
+def update_file_regress( text, filename, check_regression):
+    '''
+    Behaves like jlib.update_file(), but if check_regression is true and
+    <filename> already exists with different content from <text>, we show a
+    diff and raise and exception.
+    '''
+    text_old = jlib.update_file( text, filename, check_regression)
+    if check_regression:
+        if text_old is not None:
+            # Existing content differs and <check_regression> is true.
+            with open( f'{filename}-2', 'w') as f:
+                f.write( text)
+            jlib.log( 'Output would have changed: {filename}')
+            jlib.system( f'diff -u {filename} {filename}-2', verbose=True, raise_errors=False, prefix='diff: ', out='log')
+            raise Exception( f'Output would have changed: {filename}')
+        else:
+            jlib.log( 'Generated file unchanged: {filename}')
+
 
 def cpp_source(
         dir_mupdf,
@@ -6289,16 +6309,7 @@ def cpp_source(
                     text = self.get()
                     if self.tabify:
                         text = tabify( self.filename, text)
-                    diff = jlib.update_file( text, self.filename, check_regress)
-                    if check_regress:
-                        if diff is not None:
-                            with open( f'{self.filename}-2', 'w') as f:
-                                f.write( text)
-                            jlib.log( 'Output would have changed: {self.filename}')
-                            jlib.system( f'diff -u {self.filename} {self.filename}-2', verbose=True, raise_errors=False, prefix='diff: ', out='log')
-                            raise Exception( f'Output would have changed: {self.filename}')
-                    else:
-                        jlib.log( 'Generated file unchanged: {self.filename}')
+                    update_file_regress( text, self.filename, check_regress)
             def get( self):
                 return self.file.getvalue()
     else:
@@ -6949,7 +6960,8 @@ def build_swig(
         build_dirs,
         generated,
         language='python',
-        swig='swig'
+        swig='swig',
+        check_regress=False,
         ):
     '''
     Builds python/C# wrappers for all mupdf_* functions and classes.
@@ -6962,6 +6974,9 @@ def build_swig(
         The output language, must be 'python' or 'csharp'.
     swig
         Location of swig binary.
+    check_regress
+        If true, we fail with error if generated .i file already exists and
+        differs from our new content.
     '''
     assert isinstance(build_dirs, BuildDirs)
     assert isinstance(generated, Generated)
@@ -7311,7 +7326,7 @@ def build_swig(
 
     os.makedirs( f'{build_dirs.dir_mupdf}/platform/{language}', exist_ok=True)
     os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
-    jlib.update_file( text, swig_i)
+    update_file_regress( text, swig_i, check_regress)
 
     line_end = '^' if g_windows else '\\'
     if language == 'python':
@@ -7713,7 +7728,7 @@ def build( build_dirs, swig, args):
             ]
     build_python = True
     build_csharp = False
-    zero_check_regress = False
+    check_regress = False
 
     force_rebuild = False
     header_git = False
@@ -7739,8 +7754,8 @@ def build( build_dirs, swig, args):
         elif actions == '--csharp':
             build_python = False
             build_csharp = True
-        elif actions == '--0-regress':
-            zero_check_regress = True
+        elif actions == '--regress':
+            check_regress = True
         elif actions.startswith( '-'):
             raise Exception( f'Unrecognised --build flag: {actions}')
         else:
@@ -7822,7 +7837,7 @@ def build( build_dirs, swig, args):
                         f'{build_dirs.dir_mupdf}/platform/c++',
                         header_git,
                         generated,
-                        zero_check_regress,
+                        check_regress,
                         )
 
                 generated.save(f'{build_dirs.dir_mupdf}/platform/c++')
@@ -7947,6 +7962,7 @@ def build( build_dirs, swig, args):
                                 generated,
                                 language='python',
                                 swig=swig,
+                                check_regress=check_regress,
                                 )
 
                 if build_csharp:
@@ -7960,6 +7976,7 @@ def build( build_dirs, swig, args):
                                 generated,
                                 language='csharp',
                                 swig=swig,
+                                check_regress=check_regress,
                                 )
 
             elif action == 'j':
