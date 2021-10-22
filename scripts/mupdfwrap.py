@@ -2474,6 +2474,21 @@ classextras = ClassExtras(
                         ),
                     ]
                 ),
+        pdf_page = ClassExtra(
+                methods_extra = [
+                    ExtraMethod(
+                        f'{rename.class_("pdf_obj")}',
+                        'obj()',
+                        f'''
+                        {{
+                            return {rename.class_("pdf_obj")}( {rename.function_call('pdf_keep_obj')}( m_internal->obj));
+                        }}
+                        ''',
+                        f'/* Returns wrapper for .obj member. */',
+                        ),
+                    ],
+                copyable = 'default',
+                ),
         pdf_write_options = ClassExtra(
                 constructors_extra = [
                     ExtraConstructor( '()',
