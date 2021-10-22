@@ -1271,14 +1271,10 @@ class ClassExtras:
             self.items[ name] = value
     def get( self, name):
         '''
-        If <name> is in omit_class_names0, returns None.
-
-        Otherwise searches for <name>; if found, returns ClassExtra instance,
-        else empty ClassExtra instance.
+        Searches for <name>; if found, returns ClassExtra instance, else empty
+        ClassExtra instance.
         '''
         name = clip( name, 'struct ')
-        if name in omit_class_names0:
-            return
         if not name.startswith( ('fz_', 'pdf_')):
             return
         return self.items.get( name, ClassExtra())
@@ -2720,21 +2716,6 @@ omit_methods = [
         'fz_new_draw_device_with_options',      # Has 'fz_pixmap **pixmap' arg.
         ]
 
-# Be able to exclude some structs from being wrapped.
-omit_class_names0 = []
-omit_class_names = omit_class_names0[:]
-
-def omit_class( fzname):
-    '''
-    Returns true if we ommit <fzname> *and* we haven't been called for <fzname>
-    before.
-    '''
-    try:
-        omit_class_names.remove( fzname)
-    except Exception:
-        return False
-    return True
-
 def get_value( item, name):
     '''
     Enhanced wrapper for getattr().
@@ -3056,11 +3037,7 @@ def fn_has_struct_args( tu, cursor):
     '''
     for arg in get_args( tu, cursor):
         if arg.alt:
-            if arg.alt.spelling in omit_class_names0:
-                pass
-                #log( '*** omitting {alt.spelling=}')
-            else:
-                return True
+            return True
 
 def get_first_arg( tu, cursor):
     '''
@@ -4148,12 +4125,6 @@ def find_wrappable_function_with_arg0_type_cache_populate( tu):
         if result_type.kind == clang.cindex.TypeKind.POINTER:
             result_type = result_type.get_pointee().get_canonical()
         result_type = clip( result_type.spelling, 'struct ')
-        if result_type in omit_class_names0:
-            exclude_reasons.append(
-                    (
-                    MethodExcludeReason_OMIT_CLASS,
-                    f'result_type={result_type} is in omit_class_names0',
-                    ))
         if result_type.startswith( ('fz_', 'pdf_')):
             result_type_extras = get_fz_extras( result_type)
             if not result_type_extras:
@@ -4237,10 +4208,6 @@ def find_wrappable_function_with_arg0_type( tu, structname):
     The functions whose names we return, satisfy all of the following:
 
         First non-context param is <structname> (by reference, pointer or value).
-
-        No arg type (by reference, pointer or value) is in omit_class_names0.
-
-        Return type (by reference, pointer or value) is not in omit_class_names0.
 
         If return type is a fz_* struc (by reference, pointer or value), the
         corresponding wrapper class has a raw constructor.
@@ -6659,10 +6626,6 @@ def cpp_source(
 
         struct_name = type_.spelling
         struct_name = clip( struct_name, 'struct ')
-        if omit_class( struct_name):
-            continue
-        if struct_name in omit_class_names0:
-            continue
         classname = rename.class_( struct_name)
         #log( 'Creating class wrapper. {classname=} {cursor.spelling=} {struct_name=}')
 
@@ -6682,10 +6645,6 @@ def cpp_source(
             classes.append( (classname, cursor, struct_name))
 
     classes.sort()
-
-    if omit_class_names:
-        log( '*** Some names to omit were left over: {omit_class_names=}')
-        #assert 0
 
     # Write forward declarations - this is required because some class
     # methods take pointers to other classes.
@@ -7851,8 +7810,6 @@ def build( build_dirs, swig, args):
                     log( 'functions that take struct args and are not used exactly once in methods:')
                     num = 0
                     for name in sorted( fn_usage.keys()):
-                        if name in omit_class_names:
-                            continue
                         n, cursor = fn_usage[ name]
                         if n == 1:
                             continue
