@@ -537,7 +537,10 @@ Usage:
                     functions whose name contains <details>.
                 -f
                     Force rebuilds.
-
+                --0-regress
+                    Checks for regressions in generated C++ code (action=0). If
+                    a generated C++ file already exists and its content differs
+                    from our generated C++, show diff and exit with an error.
                 --python
                 --csharp
                     Whether to generated bindings for python or C#. Default is
@@ -6190,7 +6193,7 @@ def cpp_source(
         base,
         header_git,
         generated,
-        doit=True
+        check_regress,
         ):
     '''
     Generates all .h and .cpp files.
@@ -6251,6 +6254,7 @@ def cpp_source(
     os.makedirs( f'{base}/include/mupdf', exist_ok=True)
     os.makedirs( f'{base}/implementation', exist_ok=True)
 
+    doit = True
     if doit:
         class File:
             def __init__( self, filename, tabify=True):
@@ -6275,7 +6279,16 @@ def cpp_source(
                     text = self.get()
                     if self.tabify:
                         text = tabify( self.filename, text)
-                    jlib.update_file( text, self.filename)
+                    diff = jlib.update_file( text, self.filename, check_regress)
+                    if check_regress:
+                        if diff is not None:
+                            with open( f'{self.filename}-2', 'w') as f:
+                                f.write( text)
+                            jlib.log( 'Output would have changed: {self.filename}')
+                            jlib.system( f'diff -u {self.filename} {self.filename}-2', verbose=True, raise_errors=False, prefix='diff: ', out='log')
+                            raise Exception( f'Output would have changed: {self.filename}')
+                    else:
+                        jlib.log( 'Generated file unchanged: {self.filename}')
             def get( self):
                 return self.file.getvalue()
     else:
@@ -7690,6 +7703,7 @@ def build( build_dirs, swig, args):
             ]
     build_python = True
     build_csharp = False
+    zero_check_regress = False
 
     force_rebuild = False
     header_git = False
@@ -7715,6 +7729,8 @@ def build( build_dirs, swig, args):
         elif actions == '--csharp':
             build_python = False
             build_csharp = True
+        elif actions == '--0-regress':
+            zero_check_regress = True
         elif actions.startswith( '-'):
             raise Exception( f'Unrecognised --build flag: {actions}')
         else:
@@ -7796,6 +7812,7 @@ def build( build_dirs, swig, args):
                         f'{build_dirs.dir_mupdf}/platform/c++',
                         header_git,
                         generated,
+                        zero_check_regress,
                         )
 
                 generated.save(f'{build_dirs.dir_mupdf}/platform/c++')
