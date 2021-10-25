@@ -48,7 +48,7 @@ int qiqqa_muserver_main(int argc, const char** argv);
 
 int sqlite_main(int argc, const char** argv);
 
-int jpeginfo_main(int argc, const char** argv);
+//int jpeginfo_main(int argc, const char** argv);
 
 int jpegtran_main(int argc, const char** argv);
 int rdjpegcom_main(int argc, const char** argv);
