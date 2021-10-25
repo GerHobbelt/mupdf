@@ -167,7 +167,7 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 {
 	int nc;
 	pdf_obj *first;
-	pdf_obj *last;
+	pdf_obj *last = NULL;
 
 	if (outlines == NULL)
 		return 0;
