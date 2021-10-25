@@ -69,6 +69,8 @@ int run_all_tests_glog(void)
 	int lcl_argc;
 	const char** lcl_argv;
 	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_package_config_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_demangle_unittest_main(lcl_argc, lcl_argv);
 	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_logging_custom_prefix_unittest_main(lcl_argc, lcl_argv);

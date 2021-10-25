@@ -66,6 +66,7 @@
 #if 0
 #include "glog/export.h"
 #endif
+#include "glog/platform.h"
 
 // Annoying stuff for windows -- makes sure clients can import these functions
 #ifndef GOOGLE_GLOG_DLL_DECL
@@ -106,7 +107,7 @@
 
 #ifdef HAVE_CXX11_ATOMIC
 #include <atomic>
-#elif defined(OS_WINDOWS)
+#elif defined(GLOG_OS_WINDOWS)
 #include <Windows.h>
 #endif
 
@@ -1054,7 +1055,7 @@ namespace google {
     LOG_PREVIOUS_TIME_RAW.store(std::chrono::duration_cast<std::chrono::nanoseconds>(LOG_CURRENT_TIME).count(), std::memory_order_relaxed); \
   if (LOG_TIME_DELTA > LOG_TIME_PERIOD) google::LogMessage( \
         __FILE__, __LINE__, google::GLOG_ ## severity).stream()
-#elif defined(OS_WINDOWS)
+#elif defined(GLOG_OS_WINDOWS)
 #define SOME_KIND_OF_LOG_EVERY_T(severity, seconds) \
   GLOG_CONSTEXPR LONGLONG LOG_TIME_PERIOD = (seconds) * LONGLONG(1000000000); \
   static LARGE_INTEGER LOG_PREVIOUS_TIME; \
@@ -1130,7 +1131,7 @@ namespace google {
         __FILE__, __LINE__, google::GLOG_ ## severity, LOG_OCCURRENCES, \
         &what_to_do).stream()
 
-#elif defined(OS_WINDOWS)
+#elif defined(GLOG_OS_WINDOWS)
 
 #define SOME_KIND_OF_LOG_EVERY_N(severity, n, what_to_do) \
   static volatile unsigned LOG_OCCURRENCES = 0; \

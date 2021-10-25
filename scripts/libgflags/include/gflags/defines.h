@@ -39,10 +39,10 @@
 /* #undef HAVE_STRTOQ */
 
 // Define if you have the <pthread.h> header file.
-/* #undef HAVE_PTHREAD */
+#define HAVE_PTHREAD 
 
 // Define if your pthread library defines the type pthread_rwlock_t
-/* #undef HAVE_RWLOCK */
+#define HAVE_RWLOCK
 
 
 #endif // GFLAGS_DEFINES_H_
