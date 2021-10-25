@@ -202,6 +202,7 @@ static struct {
 	{ jpegXL_decode_oneshot_main, "jxl_decode_oneshot", "jxl_decode_oneshot tool" },
 	{ jpegXL_encode_oneshot_main, "jxl_encode_oneshot", "jxl_encode_oneshot tool" },
 	{ jpegXL_info_main, "jxl_info", "jxl_info: jpegXL tool" },
+	{ jpegXL_decode_EXIF_metadata_main, "jpegXL_decode_EXIF_metadata", "jpegXL_decode_EXIF_metadata: jpegXL tool" },
 	{ jpegXL_box_list_main, "jxl_box_list", "jxl_box_list tool" },
 	{ jpegXL_butteraugli_main, "jxl_butteraugli", "jxl_butteraugli tool" },
 	{ jpegXL_compress_main, "jxl_compress", "jxl_compress tool" },
@@ -214,6 +215,12 @@ static struct {
 	{ jpegXL_ssimulacra_openCV_main, "jxl_ssimulacra_openCV", "jxl_ssimulacra_openCV tool" },
 	{ jpegXL_xyb_range_main, "jxl_xyb_range", "jxl_xyb_range tool" },
 	{ jpegXL_C_test_main, "jxl_test", "jxl_C_test tool" },
+	{ jpegXL_tone_map_main, "jpegXL_tone_map", "jpegXL_tone_map tool" },
+	{ jpegXL_generate_LUT_template_main, "jpegXL_generate_LUT_template", "jpegXL_generate_LUT_template tool" },
+	{ jpegXL_pq_to_hlg_main, "jpegXL_pq_to_hlg", "jpegXL_pq_to_hlg tool" },
+	{ jpegXL_render_hlg_main, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
+	{ jpegXL_texture_to_cube_main, "jpegXL_texture_to_cube", "jpegXL_texture_to_cube tool" },
+	{ jpegXL_add_noise_main, "jpegXL_add_noise", "jpegXL_add_noise tool" },
 
 	{ report_version, "version", "report version of this build / tools" },
 };
