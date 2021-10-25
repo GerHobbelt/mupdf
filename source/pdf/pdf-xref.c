@@ -2784,7 +2784,11 @@ static int __pdf_has_permission(fz_context* ctx, fz_document* doc, fz_permission
 }
 static fz_outline* __pdf_load_outline(fz_context* ctx, fz_document* doc)
 {
-	return pdf_load_outline(ctx, pdf_document_from_fz_document(ctx, doc), NULL);
+	return pdf_load_outline(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+static fz_outline_iterator* __pdf_new_outline_iterator(fz_context* ctx, fz_document* doc)
+{
+	return pdf_new_outline_iterator(ctx, pdf_document_from_fz_document(ctx, doc));
 }
 static int __pdf_lookup_metadata(fz_context* ctx, fz_document* doc, const char* key, char* buf, int size)
 {
@@ -2812,7 +2816,7 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	doc->super.needs_password = __pdf_needs_password;
 	doc->super.authenticate_password = __pdf_authenticate_password;
 	doc->super.has_permission = __pdf_has_permission;
-	doc->super.outline_iterator = pdf_new_outline_iterator;
+	doc->super.outline_iterator = __pdf_new_outline_iterator;
 	doc->super.resolve_link = pdf_resolve_link_imp;
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;

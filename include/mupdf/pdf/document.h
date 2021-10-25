@@ -150,6 +150,11 @@ int pdf_authenticate_password(fz_context *ctx, pdf_document *doc, const char *pw
 int pdf_has_permission(fz_context *ctx, pdf_document *doc, fz_permission p);
 int pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *ptr, int size);
 
+#if 0
+// TODO: re-introduce this one.
+// See also commit: 7459f6fc444e23e0708ba9752516e1745c9c8f5e / tag: tag last_with_outline_repair_summary
+// (last commit that carries the outline code that also collects an outline_summary report listing the number of items and number of(outline) repairs, if any.)
+
 typedef struct fz_outline_summry
 {
 	int hierarchy_levels;
@@ -159,8 +164,9 @@ typedef struct fz_outline_summry
 
 	unsigned int is_repaired : 1;
 } fz_outline_summary;
+#endif
 
-fz_outline *pdf_load_outline(fz_context *ctx, pdf_document *doc, fz_outline_summary *outline_summary);
+fz_outline *pdf_load_outline(fz_context *ctx, pdf_document *doc);
 
 fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc);
 

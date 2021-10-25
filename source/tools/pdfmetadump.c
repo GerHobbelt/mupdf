@@ -447,28 +447,15 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			}
 
 			fz_outline* outlines = NULL;
-			fz_outline_summary outline_summary = { 0 };
 			int json_stack_outlines_level = -1;
 
 			fz_try(ctx)
 			{
-				outlines = pdf_load_outline(ctx, doc, &outline_summary);
+				outlines = pdf_load_outline(ctx, doc);
 
 				if (outlines)
 				{
-					// print these summary statistics in a way that we can easily `grep` sample PDFs with certain features.
-					// e.g.: only print a summary, when the document *has* outlines.
-					write_item_int(ctx, out, "DocumentOutlinesMaxHierarchyDepth", outline_summary.hierarchy_levels);
-					write_item_int(ctx, out, "DocumentOutlinesItemCount", outline_summary.total_item_count);
-					if (outline_summary.is_repaired)
-					{
-						write_item_bool(ctx, out, "DocumentOutlinesDamagedHierarchy", outline_summary.is_repaired);
-						write_item_int(ctx, out, "DocumentOutlinesRepairedMaxHierarchyDepth", outline_summary.hierarchy_levels_after_repair);
-						write_item_int(ctx, out, "DocumentOutlinesRepairedItemCount", outline_summary.total_item_count_after_repair);
-					}
-
 					json_stack_outlines_level = write_item_starter_block(ctx, out, "DocumentOutlines", '[');
-
 
 					fz_outline* outline_parents[500];
 					int parents_index = 0;
@@ -1861,9 +1848,9 @@ printtail(fz_context* ctx, globals* glo, const fz_gathered_statistics* stats)
 			write_item(ctx, out, "Subject", buf);
 		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_KEYWORDS, buf, sizeof buf) > 0)
 			write_item(ctx, out, "Keywords", buf);
-		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATION_DATE, buf, sizeof buf) > 0)
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_CREATIONDATE, buf, sizeof buf) > 0)
 			write_item(ctx, out, "Creation_Date", buf);
-		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_MODIFICATION_DATE, buf, sizeof buf) > 0)
+		if (fz_lookup_metadata(ctx, pdf, FZ_META_INFO_MODIFICATIONDATE, buf, sizeof buf) > 0)
 			write_item(ctx, out, "Modification_Date", buf);
 
 		{
