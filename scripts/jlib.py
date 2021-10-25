@@ -1203,19 +1203,22 @@ class Args:
         except StopIteration:
             return None
 
-def update_file( text, filename):
+def update_file( text, filename, return_different=False):
     '''
     Writes <text> to <filename>. Does nothing if contents of <filename> are
     already <text>.
+
+    If <return_different> is true, we return existing contents if <filename>
+    already exists and differs from <text>.
     '''
     try:
         with open( filename) as f:
             text0 = f.read()
     except OSError:
         text0 = None
-    if text == text0:
-        log( 'Unchanged: ' + filename)
-    else:
+    if text != text0:
+        if return_different and text0 is not None:
+            return text
         log( 'Updating:  ' + filename)
         # Write to temp file and rename, to ensure we are atomic.
         filename_temp = f'{filename}-jlib-temp'
