@@ -481,9 +481,11 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 						if (!fz_is_external_link(ctx, outline->uri))
 						{
-							int target_page = outline->page + 1;
+							int target_chapter = outline->page.chapter + 1;
+							int target_page = outline->page.page + 1;
 
 							write_item(ctx, out, "InternalLink", outline->uri);
+							write_item_int(ctx, out, "TargetChapterNumber", target_chapter);
 							write_item_int(ctx, out, "TargetPageNumber", target_page);
 							write_item_coord(ctx, out, "TargetCoordinates", outline->x, outline->y);
 						}

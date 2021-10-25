@@ -178,7 +178,7 @@ static void
 fz_init_error_context(fz_context *ctx)
 {
 #define ALIGN(addr, align)  ((((intptr_t)(addr)) + ((align) - 1)) & ~((align) - 1))
-	ctx->error.stack_base = (fz_error_stack_slot *)ALIGN(ctx->error.stack, FZ_JMPBUF_ALIGN);
+	ctx->error.stack_base = (fz_error_stack_slot *)ALIGN(ctx->error.__stack, FZ_JMPBUF_ALIGN);
 	ctx->error.top = ctx->error.stack_base;
 	ctx->error.errcode = FZ_ERROR_NONE;
 	ctx->error.message[0] = 0;

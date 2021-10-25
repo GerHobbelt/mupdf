@@ -560,7 +560,7 @@ pdf_outline_iterator_item(fz_context *ctx, fz_outline_iterator *iter_)
 
 	obj = pdf_dict_get(ctx, iter->current, PDF_NAME(Title));
 	if (obj)
-		iter->item.title = Memento_label(fz_strdup(ctx, pdf_to_text_string(ctx, obj)), "outline_title");
+		iter->item.title = Memento_label(fz_strdup(ctx, pdf_to_text_string(ctx, obj, NULL)), "outline_title");
 	obj = pdf_dict_get(ctx, iter->current, PDF_NAME(Dest));
 	if (obj)
 		iter->item.uri = Memento_label(pdf_parse_link_dest(ctx, doc, obj), "outline_uri");
