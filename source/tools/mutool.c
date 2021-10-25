@@ -158,6 +158,8 @@ static struct {
 	{ sqlite_threadtest5_main, "sqlite_threadtest5", "SQLite3 threadtest5 tool" },
 	{ sqlite_wordcount_main, "sqlite_wordcount", "SQLite3 wordcount test tool" },
 
+	{ jpeginfo_main, "jpeginfo", "jpeginfo tool" },
+
 	{ jpegtran_main, "jpegtran", "jpegtran tool" },
 	{ rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
 	{ wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
