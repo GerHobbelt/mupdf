@@ -10,6 +10,7 @@ EXPORTS
 	cmapdump_main
 	curl_main
 	djpeg_main
+	jpeginfo_main
 	jpegtran_main
 	muconvert_main
 	mudraw_main
@@ -169,6 +170,7 @@ EXPORTS
 	curl_url_dup
 	curl_url_get
 	curl_url_set
+	curl_url_strerror
 
 	Curl_now
 	Curl_timediff
@@ -234,6 +236,7 @@ EXPORTS
 	fz_make_bookmark
 	fz_needs_password
 	fz_new_document_of_size
+	fz_new_outline_iterator
 	fz_new_page_of_size
 	fz_next_page
 	fz_open_accelerated_document
@@ -255,6 +258,7 @@ EXPORTS
 	fz_run_page_annots
 	fz_run_page_contents
 	fz_save_accelerator
+	fz_set_metadata
 
 ; Fitz exports
 
@@ -775,8 +779,19 @@ EXPORTS
 	fz_log_module
 	fz_new_log_for_module
 	fz_drop_outline
+	fz_drop_outline_iterator
 	fz_keep_outline
 	fz_new_outline
+	fz_new_outline_iterator_of_size
+	fz_outline_iterator_delete
+	fz_outline_iterator_down
+	fz_outline_iterator_from_outline
+	fz_outline_iterator_insert
+	fz_outline_iterator_item
+	fz_outline_iterator_next
+	fz_outline_iterator_prev
+	fz_outline_iterator_up
+	fz_outline_iterator_update
 	fz_new_svg_device
 	fz_new_svg_device_with_id
 	fz_asprintf
@@ -863,6 +878,7 @@ EXPORTS
 	fz_fill_pixmap_with_color
 	fz_gamma_pixmap
 	fz_invert_pixmap
+	fz_invert_pixmap_alpha
 	fz_invert_pixmap_luminance
 	fz_invert_pixmap_rect
 	fz_is_pixmap_monochrome
@@ -1029,6 +1045,7 @@ EXPORTS
 	fz_fopen_utf8
 	fz_free_argv
 	fz_remove_utf8
+	fz_stat_mtime
 	fz_utf8_from_wchar
 	fz_wchar_from_utf8
 	fz_bound_text
@@ -1044,6 +1061,7 @@ EXPORTS
 	fz_drop_tree
 	fz_tree_insert
 	fz_tree_lookup
+
 	fz_new_buffer_from_display_list
 	fz_new_buffer_from_page
 	fz_new_buffer_from_page_number
@@ -1427,6 +1445,7 @@ EXPORTS
 	pdf_lookup_metadata
 	pdf_needs_password
 	pdf_new_graft_map
+	pdf_new_outline_iterator
 	pdf_new_pdf_device
 	pdf_open_document
 	pdf_open_document_with_stream
@@ -1690,6 +1709,7 @@ EXPORTS
 	pdf_drop_obj
 	pdf_enable_journal
 	pdf_end_operation
+	pdf_format_date
 	pdf_get_bound_document
 	pdf_get_indirect_document
 	pdf_is_array
@@ -1705,6 +1725,10 @@ EXPORTS
 	pdf_is_string
 	pdf_keep_obj
 	pdf_load_stream_or_string_as_utf8
+	pdf_mark_list_free
+	pdf_mark_list_init
+	pdf_mark_list_pop
+	pdf_mark_list_push
 	pdf_mark_obj
 	pdf_name_eq
 	pdf_new_array
@@ -1730,6 +1754,7 @@ EXPORTS
 	pdf_objcmp
 	pdf_objcmp_resolve
 	pdf_objkindstr
+	pdf_parse_date
 	pdf_print_encrypted_obj
 	pdf_print_obj
 	pdf_print_obj_to_json
@@ -1882,6 +1907,7 @@ EXPORTS
 	pdf_load_stream_number
 	pdf_load_unencrypted_object
 	pdf_mark_xref
+	pdf_metadata
 	pdf_new_local_xref
 	pdf_open_contents_stream
 	pdf_open_inline_stream
@@ -1976,27 +2002,27 @@ EXPORTS
 ; libJPEGXL exports
 
 	jpegXL_C_test_main
+	jpegXL_add_noise_main
 	jpegXL_box_list_main
 	jpegXL_butteraugli_main
 	jpegXL_compress_main
 	jpegXL_conformance_main
 	jpegXL_dec_enc_main
+	jpegXL_decode_EXIF_metadata_main
 	jpegXL_decode_oneshot_main
 	jpegXL_decompress_main
 	jpegXL_encode_oneshot_main
 	jpegXL_epf_main
 	jpegXL_from_tree_main
-	jpegXL_info_main
-	jpegXL_decode_EXIF_metadata_main
-	jpegXL_ssimulacra_main
-	jpegXL_ssimulacra_openCV_main
-	jpegXL_xyb_range_main
-	jpegXL_tone_map_main
 	jpegXL_generate_LUT_template_main
+	jpegXL_info_main
 	jpegXL_pq_to_hlg_main
 	jpegXL_render_hlg_main
+	jpegXL_ssimulacra_main
+	jpegXL_ssimulacra_openCV_main
 	jpegXL_texture_to_cube_main
-	jpegXL_add_noise_main
+	jpegXL_tone_map_main
+	jpegXL_xyb_range_main
 
 	JxlButteraugliApiCreate
 	JxlButteraugliApiDestroy
@@ -2015,6 +2041,8 @@ EXPORTS
 	JxlDecoderExtraChannelBufferSize
 	JxlDecoderFlushImage
 	JxlDecoderGetBasicInfo
+	JxlDecoderGetBoxSizeRaw
+	JxlDecoderGetBoxType
 	JxlDecoderGetColorAsEncodedProfile
 	JxlDecoderGetColorAsICCProfile
 	JxlDecoderGetExtraChannelInfo
@@ -2024,11 +2052,14 @@ EXPORTS
 	JxlDecoderImageOutBufferSize
 	JxlDecoderPreviewOutBufferSize
 	JxlDecoderProcessInput
+	JxlDecoderReleaseBoxBuffer
 	JxlDecoderReleaseInput
 	JxlDecoderReleaseJPEGBuffer
 	JxlDecoderReset
 	JxlDecoderRewind
+	JxlDecoderSetBoxBuffer
 	JxlDecoderSetDCOutBuffer
+	JxlDecoderSetDecompressBoxes
 	JxlDecoderSetImageOutBuffer
 	JxlDecoderSetInput
 	JxlDecoderSetJPEGBuffer
@@ -2047,7 +2078,9 @@ EXPORTS
 	JxlEncoderCloseInput
 	JxlEncoderCreate
 	JxlEncoderDestroy
+	JxlEncoderInitBasicInfo
 	JxlEncoderOptionsCreate
+	JxlEncoderOptionsSetAsInteger
 	JxlEncoderProcessOutput
 	JxlEncoderReset
 	JxlEncoderSetBasicInfo
