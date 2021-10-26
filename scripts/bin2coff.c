@@ -308,7 +308,7 @@ main (int argc, const char** argv)
 		}
 		label = s;
 	} else {
-		label = argv[3];
+		label = strdup(argv[3]);
 	}
 
 	{
