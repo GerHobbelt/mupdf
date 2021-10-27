@@ -6236,6 +6236,7 @@ def cpp_source(
     os.makedirs( f'{base}/implementation', exist_ok=True)
 
     doit = True
+    num_regressions = 0
     if doit:
         class File:
             def __init__( self, filename, tabify=True):
@@ -6260,7 +6261,10 @@ def cpp_source(
                     text = self.get()
                     if self.tabify:
                         text = tabify( self.filename, text)
-                    update_file_regress( text, self.filename, check_regress)
+                    try:
+                        update_file_regress( text, self.filename, check_regress)
+                    except Exception:
+                        num_regressions += 1
             def get( self):
                 return self.file.getvalue()
     else:
@@ -6800,7 +6804,8 @@ def cpp_source(
     out_fn_usage.write( f'Number of wrapped functions not used by wrapper classes: {functions_unused}\n')
 
     out_fn_usage.close()
-
+    if num_regressions:
+        raise Exception( f'There were {num_regressions} regressions')
     return tu
 
 
@@ -6956,6 +6961,38 @@ def build_swig(
                     }}
                     return ret;
                 }}
+
+                #if 0
+                /* Wrapper for fz_new_buffer_from_copied_data() that takes a Python bytes. */
+                PyObject* new_buffer_from_copied_data2(PyObject* self, PyObject *args)
+                {{
+                    std::cerr << __FILE__ << ":" << __LINE__ << ": new_buffer_from_copied_data() called"
+                            << " self=" << self << " args=" << args
+                            << "\\n";
+                    Py_INCREF(Py_None);
+                    return Py_None;
+                    /*PyObject* swig_obj[1];
+                    swig_obj[0] = args;
+
+
+                    if (PyBytes_Check(obj))
+                    {{
+                        char*       cstr;
+                        Py_ssize_t  len;
+                        PyBytes_AsStringAndSize(obj, &cstr, &len);
+                        mupdf::new_buffer_from_copied_data(cstr, len);
+                    }}*/
+                }}
+                #endif
+                size_t python_bytes_data(const unsigned char* DATA, size_t SIZE)
+                {{
+                    fprintf(stderr, "python_bytes_data(): DATA=%p SIZE=%zi\\n", DATA, SIZE);
+                    return (size_t) DATA;
+                }}
+                size_t python_bytes_size(const unsigned char* DATA, size_t SIZE)
+                {{
+                    return SIZE;
+                }}
                 '''
 
     common += generated.swig_cpp
@@ -7076,6 +7113,32 @@ def build_swig(
             // Get swig about pdf_clean_file()'s (int,argv)-style args:
             %apply (int ARGC, char **ARGV) {{ (int retainlen, char *retainlist[]) }}
             ''')
+    if language == 'python':
+        text += textwrap.dedent( '''
+
+                %include pybuffer.i
+                %pybuffer_binary(const unsigned char* DATA, size_t SIZE);
+                #if 0
+                // Patched version of pybuffer.i:pybuffer_binary with
+                // s/size/size1.
+                //
+                %define %pybuffer_binary(TYPEMAP, SIZE)
+                %typemap(in) (TYPEMAP, SIZE)
+                  (int res, Py_ssize_t size = 0, const void *buf = 0) {
+                  res = PyObject_AsReadBuffer($input, &buf, &size);
+                  if (res<0) {
+                    PyErr_Clear();
+                    %argument_fail(res, "(TYPEMAP, SIZE)", $symname, $argnum);
+                  }
+                  $1 = ($1_ltype) buf;
+                  $2 = ($2_ltype) (size1 / sizeof($*1_type));
+                }
+                %enddef
+
+                %pybuffer_binary(const unsigned char *data, size_t size);
+                #endif
+                '''
+                )
 
     text += common
 
