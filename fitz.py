@@ -146,6 +146,35 @@ class TOOLS:
         result = JM_BinFromBuffer( res)
         return result
 
+    fitz_config = {
+                "plotter-g": True,
+                "plotter-rgb": True,
+                "plotter-cmyk": True,
+                "plotter-n": True,
+                "pdf": True,
+                "xps": True,
+                "svg": True,
+                "cbz": True,
+                "img": True,
+                "html": True,
+                "epub": True,
+                "jpx": True,
+                "js": True,
+                "tofu": True,
+                "tofu-cjk": True,
+                "tofu-cjk-ext": True,
+                "tofu-cjk-lang": True,
+                "tofu-emoji": True,
+                "tofu-historic": True,
+                "tofu-symbol": True,
+                "tofu-sil": True,
+                "icc": True,
+                "base14": True,
+                "py-memory": True,
+                }
+    """PyMuPDF configuration parameters."""
+
+
 def DUMMY(*args, **kw):
     return
 
@@ -7900,7 +7929,7 @@ class Font:
         if type(self) is not Font:
             return None
 
-class Tools:
+class _unused_Tools:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Tools, name, value)
     __swig_getmethods__ = {}
