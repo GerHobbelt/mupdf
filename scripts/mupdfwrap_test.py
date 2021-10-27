@@ -43,6 +43,11 @@ if 1:
     log(f'b0={b0} b1={b1} b2={b2}')
     assert(b2 == b0)
 
+if 1:
+    o1 = mupdf.PDF_ENUM_NAME_Filter
+    o2 = mupdf.obj_enum_to_obj(o1)
+    log(f'o1={o1} o2={o2}')
+
 def show_stext(document):
     '''
     Shows all available information about Stext blocks, lines and characters.
@@ -94,7 +99,7 @@ def test(path):
     # buffer_storage().
     #
     assert getattr(mupdf.Buffer, 'buffer_storage_raw')
-    assert getattr(mupdf.Buffer, 'buffer_storage', None) is None
+    assert getattr(mupdf.Buffer, 'buffer_storage')
 
     assert getattr(mupdf.Buffer, 'buffer_extract_raw')
     assert getattr(mupdf.Buffer, 'buffer_extract')
