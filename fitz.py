@@ -175,6 +175,20 @@ class TOOLS:
     """PyMuPDF configuration parameters."""
 
 
+    JM_annot_id_stem = 'fitz'
+
+    @staticmethod
+    def set_annot_stem( stem=None):
+        if stem is None:
+            return JM_annot_id_stem
+        len_ = len(stem) + 1
+        if len_ > 50:
+            len_ = 50
+        JM_annot_id_stem = stem[:50]
+        return JM_annot_id_stem
+
+
+
 def DUMMY(*args, **kw):
     return
 
@@ -3945,8 +3959,10 @@ class Document:
             raise ValueError("document closed")
 
         # return self.this _fitz.Document__getMetadata(self, key)
-        if 1:
-            return self.this.lookup_metadata(key)
+        jlib.log('{key!r=}')
+        jlib.log('{self=}')
+        jlib.log('{self.this=}')
+        return self.this.lookup_metadata(key)
 
     @property
     def needsPass(self):
