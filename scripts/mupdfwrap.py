@@ -6947,7 +6947,6 @@ def build_swig(
     if language == 'python':
         common += f'''
                 /* Support for extracting buffer data into a Python bytes. */
-
                 PyObject* buffer_extract_bytes(fz_buffer* buffer)
                 {{
                     unsigned char* c = NULL;
@@ -6962,36 +6961,21 @@ def build_swig(
                     return ret;
                 }}
 
-                #if 0
-                /* Wrapper for fz_new_buffer_from_copied_data() that takes a Python bytes. */
-                PyObject* new_buffer_from_copied_data2(PyObject* self, PyObject *args)
+                /* Provide raw data and size of a python bytes. */
+                size_t python_bytes_data(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
                 {{
-                    std::cerr << __FILE__ << ":" << __LINE__ << ": new_buffer_from_copied_data() called"
-                            << " self=" << self << " args=" << args
-                            << "\\n";
-                    Py_INCREF(Py_None);
-                    return Py_None;
-                    /*PyObject* swig_obj[1];
-                    swig_obj[0] = args;
-
-
-                    if (PyBytes_Check(obj))
-                    {{
-                        char*       cstr;
-                        Py_ssize_t  len;
-                        PyBytes_AsStringAndSize(obj, &cstr, &len);
-                        mupdf::new_buffer_from_copied_data(cstr, len);
-                    }}*/
+                    fprintf(stderr, "python_bytes_data(): PYTHON_BYTES_DATA=%p PYTHON_BYTES_SIZE=%zi\\n", PYTHON_BYTES_DATA, PYTHON_BYTES_SIZE);
+                    //*(char*) PYTHON_BYTES_DATA = 'Q'; // Brutal test that things are working.
+                    return (size_t) PYTHON_BYTES_DATA;
                 }}
-                #endif
-                size_t python_bytes_data(const unsigned char* DATA, size_t SIZE)
+                const unsigned char* python_bytes_data2(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
                 {{
-                    fprintf(stderr, "python_bytes_data(): DATA=%p SIZE=%zi\\n", DATA, SIZE);
-                    return (size_t) DATA;
+                    fprintf(stderr, "python_bytes_data(): PYTHON_BYTES_DATA=%p PYTHON_BYTES_SIZE=%zi\\n", PYTHON_BYTES_DATA, PYTHON_BYTES_SIZE);
+                    return PYTHON_BYTES_DATA;
                 }}
-                size_t python_bytes_size(const unsigned char* DATA, size_t SIZE)
+                size_t python_bytes_size(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
                 {{
-                    return SIZE;
+                    return PYTHON_BYTES_SIZE;
                 }}
                 '''
 
@@ -7117,26 +7101,7 @@ def build_swig(
         text += textwrap.dedent( '''
 
                 %include pybuffer.i
-                %pybuffer_binary(const unsigned char* DATA, size_t SIZE);
-                #if 0
-                // Patched version of pybuffer.i:pybuffer_binary with
-                // s/size/size1.
-                //
-                %define %pybuffer_binary(TYPEMAP, SIZE)
-                %typemap(in) (TYPEMAP, SIZE)
-                  (int res, Py_ssize_t size = 0, const void *buf = 0) {
-                  res = PyObject_AsReadBuffer($input, &buf, &size);
-                  if (res<0) {
-                    PyErr_Clear();
-                    %argument_fail(res, "(TYPEMAP, SIZE)", $symname, $argnum);
-                  }
-                  $1 = ($1_ltype) buf;
-                  $2 = ($2_ltype) (size1 / sizeof($*1_type));
-                }
-                %enddef
-
-                %pybuffer_binary(const unsigned char *data, size_t size);
-                #endif
+                %pybuffer_binary(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE);
                 '''
                 )
 
