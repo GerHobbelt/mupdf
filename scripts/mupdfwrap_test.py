@@ -36,6 +36,16 @@ g_test_n = 0
 
 g_mupdf_root = os.path.abspath('%s/../..' % __file__)
 
+if 1:
+    #b = mupdf.new_buffer_from_copied_data2(b'qwerty')
+    bs = b'qwerty'
+    data = mupdf.python_bytes_data(bs)
+    data2 = mupdf.python_bytes_data2(bs)
+    size = mupdf.python_bytes_size(bs)
+    log(f'bs={bs} len(bs)={len(bs)} data={data}=0x{data:x} data2={data2} size={size}')
+    #sys.exit(0)
+    buffer_ = mupdf.new_buffer_from_copied_data(data2, size)
+    log('buffer={buffer}')
 
 def show_stext(document):
     '''
