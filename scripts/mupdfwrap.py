@@ -1513,7 +1513,7 @@ classextras = ClassExtras(
                             'lookup_metadata(const char* key, int* o_out=NULL)',
                             f'''
                             {{
-                                return {rename.function_call("lookup_metadata")}(m_internal, key, o_out);
+                                return {rename.function_call("fz_lookup_metadata")}(m_internal, key, o_out);
                             }}
                             ''',
                            textwrap.dedent('''
@@ -2464,6 +2464,29 @@ classextras = ClassExtras(
                 constructor_prefixes = [
                     'pdf_open_document',
                     'pdf_create_document',
+                    ],
+                methods_extra = [
+                    # This duplicates our creation of extra lookup_metadata()
+                    # function in make_function_wrappers(). Maybe we could
+                    # parse the generated functions.h instead of fitz.h so that
+                    # we pick up extra C++ wrappers automatically, but this
+                    # would be a fairly major change.
+                    #
+                    ExtraMethod(
+                            'std::string',
+                            'lookup_metadata(const char* key, int* o_out=NULL)',
+                            f'''
+                            {{
+                                return {rename.function_call("pdf_lookup_metadata")}(m_internal, key, o_out);
+                            }}
+                            ''',
+                           textwrap.dedent('''
+                            /* Wrapper for pdf_lookup_metadata() that returns a std::string and sets
+                            *o_out to length of string plus one. If <key> is not found, returns empty
+                            string with *o_out=-1. <o_out> can be NULL if caller is not interested in
+                            error information. */
+                            ''')
+                            ),
                     ],
                 ),
 
@@ -4462,26 +4485,29 @@ def make_function_wrappers(
 
         out_functions_h.write( temp_out_h.getvalue())
         out_functions_cpp.write( temp_out_cpp.getvalue())
-        if fnname == 'fz_lookup_metadata':
-            # Output convenience wrapper for fz_lookup_metadata() that is
-            # easily SWIG-able - it returns a std::string by value, and uses an
-            # out-param for the integer error/length value.
+        if fnname in ('fz_lookup_metadata', 'pdf_lookup_metadata'):
+            # Output convenience wrapper for fz_lookup_metadata() and
+            # pdf_lookup_metadata() that are easily SWIG-able - return a
+            # std::string by value, and uses an out-param for the integer
+            # error/length value.
+            structname = 'fz_document' if fnname == 'fz_lookup_metadata' else 'pdf_document'
             out_functions_h.write(
                     textwrap.dedent(
                     f'''
-                    /* Extra wrapper for fz_lookup_metadata() that returns a std::string and sets
+                    /* Extra wrapper for {fnname}() that returns a std::string and sets
                     *o_out to length of string plus one. If <key> is not found, returns empty
                     string with *o_out=-1. <o_out> can be NULL if caller is not interested in
                     error information. */
-                    FZ_FUNCTION std::string lookup_metadata(fz_document *doc, const char *key, int* o_out=NULL);
+                    FZ_FUNCTION std::string {rename.function(fnname)}({structname} *doc, const char *key, int* o_out=NULL);
 
                     '''))
             out_functions_cpp.write(
                     textwrap.dedent(
                     f'''
-                    FZ_FUNCTION std::string lookup_metadata(fz_document *doc, const char *key, int* o_out)
+                    FZ_FUNCTION std::string {rename.function(fnname)}({structname} *doc, const char *key, int* o_out)
                     {{
-                        int e = lookup_metadata(doc, key, NULL /*buf*/, 0 /*size*/);
+                        /* Find length first. */
+                        int e = {rename.function(fnname)}(doc, key, NULL /*buf*/, 0 /*size*/);
                         if (e < 0) {{
                             // Not found.
                             if (o_out)  *o_out = e;
@@ -4490,7 +4516,7 @@ def make_function_wrappers(
                         assert(e != 0);
                         char* buf = (char*) malloc(e);
                         assert(buf);    // mupdf::malloc() throws on error.
-                        int e2 = lookup_metadata(doc, key, buf, e);
+                        int e2 = {rename.function(fnname)}(doc, key, buf, e);
                         assert(e2 = e);
                         std::string ret = buf;
                         free(buf);
@@ -7155,6 +7181,21 @@ def build_swig(
                     return ret
 
                 Document.lookup_metadata = Document_lookup_metadata
+
+                def PdfDocument_lookup_metadata(self, key):
+                    """
+                    Python implementation override of PdfDocument.lookup_metadata().
+
+                    Returns string or None if not found.
+                    """
+                    e = new_pint()
+                    ret = ppdf_lookup_metadata(self.m_internal, key, e)
+                    e = pint_value(e)
+                    if e < 0:
+                        return None
+                    return ret
+
+                PdfDocument.lookup_metadata = PdfDocument_lookup_metadata
 
                 ''')
 
