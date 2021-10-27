@@ -286,6 +286,16 @@ Python wrapping:
             which returns (size, data) from the underlying fz_buffer_extract()
             function.
 
+        Wrappers for fz_new_buffer_from_copied_data():
+
+            One can create an MuPDF buffer that contains a copy of a Python
+            bytes by using the special mupdf.python_bytes_data() function. This
+            returns an SWIG proxy for an unsigned char*' that points to the
+            bytes instance's data:
+
+                bs = b'qwerty'
+                buffer_ = mupdf.new_buffer_from_copied_data(mupdf.python_bytes_data(bs), len(bs))
+
     Functions taking a va_list arg:
 
         We do not provide Python wrappers for functions such as fz_vsnprintf().
@@ -6961,21 +6971,19 @@ def build_swig(
                     return ret;
                 }}
 
-                /* Provide raw data and size of a python bytes. */
-                size_t python_bytes_data(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
+                /* The SWIG wrapper for this function returns a SWIG proxy for
+                a 'const unsigned char*' pointing to the raw data of a python
+                bytes. This proxy can then be passed from Python to functions
+                that take a 'const unsigned char*'.
+
+                For example to create a MuPDF fz_buffer* from a copy of a
+                Python bytes instance:
+                    bs = b'qwerty'
+                    buffer_ = mupdf.new_buffer_from_copied_data(mupdf.python_bytes_data(bs), len(bs))
+                */
+                const unsigned char* python_bytes_data(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
                 {{
-                    fprintf(stderr, "python_bytes_data(): PYTHON_BYTES_DATA=%p PYTHON_BYTES_SIZE=%zi\\n", PYTHON_BYTES_DATA, PYTHON_BYTES_SIZE);
-                    //*(char*) PYTHON_BYTES_DATA = 'Q'; // Brutal test that things are working.
-                    return (size_t) PYTHON_BYTES_DATA;
-                }}
-                const unsigned char* python_bytes_data2(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
-                {{
-                    fprintf(stderr, "python_bytes_data(): PYTHON_BYTES_DATA=%p PYTHON_BYTES_SIZE=%zi\\n", PYTHON_BYTES_DATA, PYTHON_BYTES_SIZE);
                     return PYTHON_BYTES_DATA;
-                }}
-                size_t python_bytes_size(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE)
-                {{
-                    return PYTHON_BYTES_SIZE;
                 }}
                 '''
 
@@ -7101,6 +7109,9 @@ def build_swig(
         text += textwrap.dedent( '''
 
                 %include pybuffer.i
+
+                /* Convert Python bytes to (const unsigned char*, size_t) pair
+                for python_bytes_data(). */
                 %pybuffer_binary(const unsigned char* PYTHON_BYTES_DATA, size_t PYTHON_BYTES_SIZE);
                 '''
                 )
@@ -7235,7 +7246,12 @@ def build_swig(
                 Buffer.buffer_storage_raw = Buffer.buffer_storage
                 delattr(Buffer, 'buffer_storage')
 
-
+                # Overwrite Buffer.new_buffer_from_copied_data() to take Python Bytes instance.
+                #
+                def Buffer_new_buffer_from_copied_data(bytes_):
+                    buffer_ = new_buffer_from_copied_data(python_bytes_data(bytes_), len(bytes_))
+                    return Buffer(buffer_)
+                Buffer.new_buffer_from_copied_data = Buffer_new_buffer_from_copied_data
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
