@@ -2487,6 +2487,16 @@ classextras = ClassExtras(
         pdf_page = ClassExtra(
                 methods_extra = [
                     ExtraMethod(
+                        f'{rename.class_("pdf_document")}',
+                        'doc()',
+                        f'''
+                        {{
+                            return {rename.class_("pdf_document")}( {rename.function_call('pdf_keep_document')}( m_internal->doc));
+                        }}
+                        ''',
+                        f'/* Returns wrapper for .doc member. */',
+                        ),
+                    ExtraMethod(
                         f'{rename.class_("pdf_obj")}',
                         'obj()',
                         f'''
@@ -6985,6 +6995,13 @@ def build_swig(
                 {{
                     return PYTHON_BYTES_DATA;
                 }}
+
+                /**/
+                pdf_obj* obj_enum_to_obj(int n)
+                {{
+                    return (pdf_obj*) n;
+                }}
+
                 '''
 
     common += generated.swig_cpp
@@ -7244,7 +7261,11 @@ def build_swig(
                 Buffer.buffer_extract = Buffer_buffer_extract
 
                 Buffer.buffer_storage_raw = Buffer.buffer_storage
-                delattr(Buffer, 'buffer_storage')
+                #delattr(Buffer, 'buffer_storage')
+                def Buffer_buffer_storage(self):
+                    raise Exception("Buffer.buffer_storage() is not available; use Buffer.buffer_storage_raw() to get (size, data) where <data> is SWIG wrapper for buffer's 'unsigned char*' storage")
+                Buffer.buffer_storage = Buffer_buffer_storage
+
 
                 # Overwrite Buffer.new_buffer_from_copied_data() to take Python Bytes instance.
                 #
