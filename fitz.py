@@ -94,6 +94,39 @@ def JM_BinFromBuffer(buffer_):
     return buffer_.buffer_extract()
 
 
+# compress char* into a new buffer
+def JM_compress_buffer(inbuffer):
+    data, compressed_length = mupdf.new_deflated_data_from_buffer(
+            inbuffer.m_internal,
+            mupdf.FZ_DEFLATE_BEST,
+            )
+    jlib.log('{data=} {compressed_length=}')
+    if not data or compressed_length == 0:
+        return None
+    buf = mupdf.Buffer(mupdf.new_buffer_from_data(data, compressed_length))
+    buf.resize_buffer(compressed_length)
+    return buf;
+
+def JM_update_stream(doc, obj, buffer_, compress):
+    jlib.log('{dir(buffer_)}')
+    len_, _ = buffer_.buffer_storage_raw()
+    nlen = len_
+
+    if len_ > 30:   # ignore small stuff
+        nres = JM_compress_buffer(buffer_)
+        assert isinstance(nres, mupdf.Buffer)
+        nlen, _ = nres.buffer_storage_raw()
+
+    if nlen < len_ and nres and compress==1:   # was it worth the effort?
+        obj.dict_put(
+                mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_Filter)),
+                mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_FlateDecode)),
+                )
+        doc.update_stream(obj, nres, 1)
+    else:
+        doc.update_stream(obj, buffer_, 0);
+
+
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
@@ -116,6 +149,48 @@ class TOOLS:
 def DUMMY(*args, **kw):
     return
 
+def INRANGE(v, low, high):
+    return low <= v and v <= high
+
+
+def Page_set_contents(page0, xref):
+    assert isinstance(page0, Page)
+    page = page0.this.page_from_fz_page()
+    assert isinstance(page, mupdf.PdfPage)
+    #jlib.log(f'{page.doc=}')
+    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
+        raise Exception('bad xref')
+    contents = page.doc().new_indirect(xref, 0)
+    if not contents.is_stream():
+        raise Exception('xref is no stream')
+    page.obj().dict_put_drop(
+            mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_Contents)),
+            contents,
+            )
+    # fixme: page.this.dirty = 1
+    return
+
+def Page_clean_contents(self, sanitize):
+    assert isinstance(self, Page)
+    page = self.this.page_from_fz_page()
+    if not page:
+        return
+    assert isinstance(page, mupdf.PdfPage)
+    filter_ = mupdf.pdf_filter_options()
+    filter_.opaque = None
+    filter_.image_filter = None
+    filter_.text_filter = None
+    filter_.after_text_object = None
+    filter_.end_page = None
+    filter_.recurse = 1
+    filter_.instance_forms = 1
+    filter_.sanitize = 1
+    filter_.ascii = 0
+
+    filter_.sanitize = sanitize
+    filter2 = mupdf.PdfFilterOptions(filter_)
+    page.doc().filter_page_contents(page, filter2)
+    # fixme: page->doc->dirty = 1;
 
 def JM_get_annot_xref_list(page_obj):
     '''
@@ -154,7 +229,8 @@ def JM_BufferFromBytes(stream):
     Make fz_buffer from a PyBytes, PyByteArray, io.BytesIO object.
     '''
     if isinstance(stream, bytes):
-        return mupdf.Buffer.new_buffer_from_copied_data(stream, len(stream))
+        return mupdf.Buffer.new_buffer_from_copied_data(stream)
+    assert 0, 'Only bytes supported at the moment.'
     if isinstance(stream, bytearray):
         return mupdf.Buffer.new_buffer_from_copied_data(stream, len(stream))
     if instance(stream, io.BytesIO):
@@ -5745,7 +5821,7 @@ class Page:
         if not sanitize and not self.is_wrapped:
             self.wrap_contents()
 
-        return _fitz.Page_clean_contents(self, sanitize)
+        return Page_clean_contents(self, sanitize)
 
 
     def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
@@ -5871,7 +5947,7 @@ class Page:
         """Set an xref as the (only) /Contents object."""
         CheckParent(self)
 
-        return _fitz.Page_set_contents(self, xref)
+        return Page_set_contents(self, xref)
 
 
     @property
