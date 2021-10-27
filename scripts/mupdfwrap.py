@@ -8702,12 +8702,13 @@ def main():
 
                 env_extra['PYTHONPATH'] += ':.'
                 #env_extra['PYTHONMALLOC'] = 'malloc'
-                jlib.system(
-                        f'MUPDF_trace=0 MUPDF_check_refs=0 py.test-3 -x -s ../PyMuPDF/tests/test_general.py',
-                        env_extra=env_extra,
-                        out='log',
-                        verbose=1,
-                        )
+                for script in sorted(glob.glob( '../PyMuPDF/tests/test_*.py')):
+                    jlib.system(
+                            f'MUPDF_trace=0 MUPDF_check_refs=0 py.test-3 -x -s {script}',
+                            env_extra=env_extra,
+                            out='log',
+                            verbose=1,
+                            )
 
             elif arg == '--test-setup.py':
                 # We use the '.' command to run pylocal/bin/activate rather than 'source',
