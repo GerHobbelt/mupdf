@@ -127,6 +127,29 @@ def JM_update_stream(doc, obj, buffer_, compress):
         doc.update_stream(obj, buffer_, 0);
 
 
+# return a PDF page's /Rotate value: one of (0, 90, 180, 270)
+def JM_page_rotation(page):
+    rotate = 0
+
+    obj = page.obj().dict_get_inheritable(
+            mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_Rotate))
+            )
+    rotate = obj.to_int()
+    rotate = JM_norm_rotation(rotate)
+    return rotate
+
+
+# return normalized /Rotate value
+def JM_norm_rotation(rotate):
+    while rotate < 0:
+        rotate += 360
+    while rotate >= 360:
+        rotate -= 360
+    if rotate % 90 != 0:
+        return 0
+    return rotate
+
+
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
@@ -3605,6 +3628,49 @@ class Document:
                 self.initData()
 
 
+    def new_page(
+            self,
+            pno: int = -1,
+            width: float = 595,
+            height: float = 842,
+            ):# -> Page:
+        """Create and return a new page object.
+
+        Args:
+            pno: (int) insert before this page. Default: after last page.
+            width: (float) page width in points. Default: 595 (ISO A4 width).
+            height: (float) page height in points. Default 842 (ISO A4 height).
+        Returns:
+            A Page object.
+        """
+        #doc._newPage(pno, width=width, height=height)
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+
+        #val = _fitz.Document__newPage(self, pno, width, height)
+        if isinstance(self.this, mupdf.PdfDocument):
+            pdf = self.this
+        else:
+            pdf = self.this.specifics()
+        assert isinstance(pdf, mupdf.PdfDocument)
+        mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+        mediabox.x1 = width
+        mediabox.y1 = height
+        #pdf_obj *resources = NULL, *page_obj = NULL;
+        #fz_buffer *contents = NULL;
+        contents = mupdf.Buffer(0)
+        #fz_try(gctx) {
+        if pno < -1:
+            raise Exception("bad page number(s)")
+        # create /Resources and /Contents objects
+        resources = pdf.add_object_drop(pdf.new_dict(1))
+        page_obj = pdf.add_page(mediabox, 0, resources, contents)
+        pdf.insert_page(pno, page_obj)
+        # fixme: pdf->dirty = 1;
+
+        self._reset_page_refs()
+        return self[pno]
+
 
 
     def close(self):
@@ -3959,9 +4025,9 @@ class Document:
             raise ValueError("document closed")
 
         # return self.this _fitz.Document__getMetadata(self, key)
-        jlib.log('{key!r=}')
-        jlib.log('{self=}')
-        jlib.log('{self.this=}')
+        #jlib.log('{key!r=}')
+        #jlib.log('{self=}')
+        #jlib.log('{self.this=}')
         return self.this.lookup_metadata(key)
 
     @property
@@ -4070,6 +4136,8 @@ class Document:
             raise ValueError("document closed")
         jlib.log('calling self.this.specifics()')
         jlib.log('calling self.this.specifics() {self.this=}')
+        if isinstance(self.this, mupdf.PdfDocument):
+            return True
         p = self.this.specifics()
         jlib.log('{p=}')
         jlib.log('{self.this=}')
@@ -5092,7 +5160,7 @@ class Page:
     #__getattr__ = lambda self, name: _swig_getattr(self, Page, name)
 
     def __init__(self, page):
-        assert isinstance(page, mupdf.Page)
+        assert isinstance(page, (mupdf.Page, mupdf.PdfPage)), f'page is: {page}'
         self.this = page
         self.thisown = True
 
@@ -5106,6 +5174,17 @@ class Page:
         return val
 
     rect = property(bound, doc="page rectangle")
+
+    def add_caret_annot(self, point: point_like) -> "struct Annot *":
+        """Add a 'Caret' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_caret_annot(point)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
 
     def getImageBbox(self, name):
 
@@ -5937,7 +6016,13 @@ class Page:
         """Page rotation."""
         CheckParent(self)
 
-        return _fitz.Page_rotation(self)
+        #return _fitz.Page_rotation(self)
+        #pdf_page *page = pdf_page_from_fz_page(gctx, (fz_page *) self);
+        page = self.this if isinstance(self.this, mupdf.PdfPage) else self.this.page_from_fz_page()
+        if not page:
+            return 0
+        return JM_page_rotation(page);
+
 
 
     def setRotation(self, rotation):
