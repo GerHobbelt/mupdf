@@ -274,6 +274,35 @@ class TOOLS:
         JM_annot_id_stem = stem[:50]
         return JM_annot_id_stem
 
+    @staticmethod
+    def _invert_matrix(matrix):
+        jlib.log('{matrix=}')
+        try:
+            src = mupdf.Matrix(
+                    matrix[0],
+                    matrix[1],
+                    matrix[2],
+                    matrix[3],
+                    matrix[4],
+                    matrix[5],
+                    )
+        except Exception:
+            src = matrix
+        a = src.a
+        det = a * src.d - src.b * src.c;
+        if det < -sys.float_info.epsilon or det > sys.float_info.epsilon:
+            dst = mupdf.Matrix()
+            rdet = 1 / det
+            dst.a = src.d * rdet
+            dst.b = -src.b * rdet
+            dst.c = -src.c * rdet
+            dst.d = a * rdet
+            a = -src.e * dst.a - src.f * dst.c
+            dst.f = -src.e * dst.b - src.f * dst.d
+            dst.e = a
+            return 0, (dst.a, dst.b, dst.c, dst.d, dst.e, dst.f)
+
+        return 1, ()
 
 
 def DUMMY(*args, **kw):
@@ -2753,6 +2782,35 @@ def JM_TUPLE(o: typing.Sequence) -> tuple:
 
 def JM_py_from_matrix(m):
     return m.a, m.b, m.c, m.d, m.e, m.f
+
+def JM_color_FromSequence(color, col):
+    #assert isinstance( col, list)
+    if not color or (not isinstance(color, list) and not isinstance(color, float)):
+        return 1
+    if isinstance(color, float):    # maybe just a single float
+        c = color
+        if not INRANGE(c, 0, 1):
+            return 1
+        col[0] = c
+        return 1
+
+    len_ = len(color)
+    if not INRANGE(len_, 1, 4) or len_ == 2:
+        return 1
+
+    mcol = [0,0,0,0]    # local color storage
+    for i in range(len_):
+        if i < len(mcol):
+            mcol[i] = color[i]
+            rc = 0
+        else:
+            rc = 1
+        if not INRANGE(mcol[i], 0, 1) or rc == 1:
+            mcol[i] = 1;
+
+    for i in range(len_):
+        col[i] = mcol[i]
+    return len_
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -6334,7 +6392,14 @@ class Page:
         """Page transformation matrix."""
         CheckParent(self)
 
-        val = _fitz.Page_transformationMatrix(self)
+        #val = _fitz.Page_transformationMatrix(self)
+        ctm = mupdf.Matrix()
+        page = self._pdf_page()
+        if not page.m_internal:
+            return JM_py_from_matrix(ctm)
+        mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)    # fixme: original code passed mediabox=NULL.
+        page.page_transform(mediabox, ctm)
+        val = JM_py_from_matrix(ctm)
 
         if self.rotation % 360 == 0:
             val = Matrix(val)
@@ -7231,7 +7296,84 @@ class Annot:
 
 
     def _update_appearance(self, opacity=-1, blend_mode=None, fill_color=None, rotate=-1):
-        return _fitz.Annot__update_appearance(self, opacity, blend_mode, fill_color, rotate)
+        #return _fitz.Annot__update_appearance(self, opacity, blend_mode, fill_color, rotate)
+        annot = self.this
+        type_ = annot.annot_type()
+        fcol = [1, 1, 1, 1] # std fill color: white
+        nfcol = 0   # number of color components
+        nfcol = JM_color_FromSequence(fill_color, fcol);
+
+        annot.dirty_annot() # enforce MuPDF /AP formatting
+        if type_ == mupdf.PDF_ANNOT_FREE_TEXT:
+            if fill_color:
+                annot.set_annot_color(nfcol, fcol)
+            else:
+                annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
+        else:
+            if fill_color:
+                annot.set_annot_interior_color(nfcol, fcol)
+            elif fill_color is not None:
+                annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
+
+        insert_rot = 1 if rotate >= 0 else 0
+        if type not in (
+                mupdf.PDF_ANNOT_CARET,
+                mupdf.PDF_ANNOT_CIRCLE,
+                mupdf.PDF_ANNOT_FREE_TEXT,
+                mupdf.PDF_ANNOT_FILE_ATTACHMENT,
+                mupdf.PDF_ANNOT_INK,
+                mupdf.PDF_ANNOT_LINE,
+                mupdf.PDF_ANNOT_POLY_LINE,
+                mupdf.PDF_ANNOT_POLYGON,
+                mupdf.PDF_ANNOT_SQUARE,
+                mupdf.PDF_ANNOT_STAMP,
+                mupdf.PDF_ANNOT_TEXT,
+                ):
+            insert_rot = 0
+
+        if insert_rot:
+            annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
+        self.needs_new_ap = 1   # re-create appearance stream
+        annot.update_annot()    # update the annotation
+
+        if (opacity < 0 or opacity >= 1) and not blend_mode:    # no opacity, no blend_mode
+            return True
+
+        try:    # create or update /ExtGState
+            ap = mupdf.pdf_dict_getl(
+                    annot.annot.obj(),
+                    mupdf.PDF_ENUM_NAME_AP,
+                    mupdf.PDF_ENUM_NAME_N
+                    )
+            if not ap.m_internal:   # should never happen
+                raise Exception("annot has no /AP object")
+
+            resources = ap.dict_get(mupdf.PDF_ENUM_NAME_Resources)
+
+            if not resources.m_internal:    # no Resources yet: make one
+                resources = ap.dict_put_dict(mupdf.PDF_ENUM_NAME_Resources, 2)
+            alp0 = annot.page().doc().new_dict(3)
+            if opacity >= 0 and opacity < 1:
+                alp0.dict_put_real(mupdf.PDF_ENUM_NAME_CA, opacity)
+                alp0.dict_put_real(mupdf.PDF_ENUM_NAME_ca, opacity)
+                annot.annot_obj().dict_put_real(mupdf.PDF_ENUM_NAME_CA, opacity)
+
+            if blend_mode:
+                alp0.dict_put_name(mupdf.PDF_ENUM_NAME_BM, blend_mode)
+                annot.annot_obj().dict_put_name(mupdf.PDF_ENUM_NAME_BM, blend_mode)
+
+            extg = resources.dict_get(mupdf.PDF_ENUM_NAME_ExtGState)
+            if not extg.m_internal: # no ExtGState yet: make one
+                extg = resources.dict_put_dict(mupdf.PDF_ENUM_NAME_ExtGState, 2)
+
+            extg.dict_put_drop(mupdf.PDF_ENUM_NAME_H, alp0)
+
+        except Exception:
+            PySys_WriteStderr("could not set opacity or blend mode\n");
+            return False
+
+        return True
+
 
     def update(self,
                blend_mode: OptStr =None,
@@ -7569,7 +7711,14 @@ class Annot:
         """Opacity."""
         CheckParent(self)
 
-        return _fitz.Annot_opacity(self)
+        #return _fitz.Annot_opacity(self)
+        annot = self.this
+        opy = -1
+        ca = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_CA)
+        if ca.is_number():
+            opy = ca.to_real()
+        return opy
+
 
 
     def set_opacity(self, opacity):
