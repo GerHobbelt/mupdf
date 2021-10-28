@@ -3239,6 +3239,7 @@ class Generated:
         if dirpath:
             self.c_functions            = from_pickle( f'{dirpath}/c_functions.pickle')
             self.c_globals              = from_pickle( f'{dirpath}/c_globals.pickle')
+            self.c_enums                = from_pickle( f'{dirpath}/c_enums.pickle')
             self.container_classnames   = from_pickle( f'{dirpath}/container_classnames.pickle')
             self.swig_cpp               = from_pickle( f'{dirpath}/swig_cpp.pickle')
             self.swig_csharp            = from_pickle( f'{dirpath}/swig_csharp.pickle')
@@ -3254,6 +3255,7 @@ class Generated:
             self.output_param_fns = []
             self.c_functions = []
             self.c_globals = []
+            self.c_enums = []
             self.swig_cpp = io.StringIO()
             self.swig_cpp_python = io.StringIO()
             self.swig_python = io.StringIO()
@@ -3265,6 +3267,7 @@ class Generated:
         '''
         to_pickle( self.c_functions,                f'{dirpath}/c_functions.pickle')
         to_pickle( self.c_globals,                  f'{dirpath}/c_globals.pickle')
+        to_pickle( self.c_enums,                    f'{dirpath}/c_enums.pickle')
         to_pickle( self.container_classnames,       f'{dirpath}/container_classnames.pickle')
         to_pickle( self.swig_cpp.getvalue(),        f'{dirpath}/swig_cpp.pickle')
         to_pickle( self.swig_csharp.getvalue(),     f'{dirpath}/swig_csharp.pickle')
@@ -4063,13 +4066,23 @@ g_functions_cache = dict()
 # Maps from <tu> to dict of dataname: cursor.
 g_global_data = dict()
 
+g_enums = dict()
+
 def functions_cache_populate( tu):
     if tu in g_functions_cache:
         return
     fns = dict()
     global_data = dict()
+    enums = list()
 
     for cursor in tu.cursor.get_children():
+        if cursor.kind==clang.cindex.CursorKind.ENUM_DECL:
+            #jlib.log('ENUM_DECL: {cursor.spelling=}')
+            for cursor2 in cursor.get_children():
+                #jlib.log('    {cursor2.spelling=}')
+                name = cursor2.spelling
+                #if name.startswith('PDF_ENUM_NAME_'):
+                enums.append(name)
         if (cursor.linkage == clang.cindex.LinkageKind.EXTERNAL
                 or cursor.is_definition()  # Picks up static inline functions.
                 ):
@@ -4083,6 +4096,8 @@ def functions_cache_populate( tu):
 
     g_functions_cache[ tu] = fns
     g_global_data[ tu] = global_data
+    g_enums[ tu] = enums
+    jlib.log('Have populated fns and global_data. {len(enums)=}')
 
 
 def find_functions_starting_with( tu, name_prefix, method):
@@ -6850,6 +6865,9 @@ def cpp_source(
     out_fn_usage.write( f'Number of wrapped functions not used by wrapper classes: {functions_unused}\n')
 
     out_fn_usage.close()
+
+    generated.c_enums = g_enums[ tu]
+
     if num_regressions:
         raise Exception( f'There were {num_regressions} regressions')
     return tu
@@ -7035,7 +7053,14 @@ def build_swig(
     text = ''
 
     for fnname in generated.c_functions:
-        text += f'%ignore {fnname};\n'
+        if fnname == 'pdf_annot_type':
+            # This is also an enum which we don't want to ignore. SWIGing the
+            # function is hopefully harmless.
+            pass
+        elif fnname == 'pdf_string_from_annot_type':
+            pass
+        else:
+            text += f'%ignore {fnname};\n'
 
     text += textwrap.dedent(f'''
             %ignore fz_append_vprintf;
@@ -7314,6 +7339,20 @@ def build_swig(
                     buffer_ = new_buffer_from_copied_data(python_bytes_data(bytes_), len(bytes_))
                     return Buffer(buffer_)
                 Buffer.new_buffer_from_copied_data = Buffer_new_buffer_from_copied_data
+
+
+                def ppdf_dict_getl(obj, *tail):
+                    """
+                    Python implementation of pdf_dict_getl(fz_context *ctx,
+                    pdf_obj *obj, ...), because SWIG doesn't handle variadic
+                    args?
+                    """
+                    for key in tail:
+                        if not obj.m_internal:
+                            break
+                        obj = obj.dict_get(key)
+                    return obj
+                PdfObj.dict_getl = ppdf_dict_getl
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
@@ -7434,6 +7473,19 @@ def build_swig(
                     mupdf_py_content = prefix + f.read() + postfix
                 with open( swig_cpp, 'w') as f:
                     f.write( mupdf_py_content)
+
+            # Change all our PDF_ENUM_NAME_* enums so that they are actually
+            # PdfObj instances so that they can be used like any other PdfObj.
+            #
+            with open( swig_py) as f:
+                mupdf_py_content = f.read()
+            jlib.log('{len(generated.c_enums)=}')
+            for enum in generated.c_enums:
+                if enum.startswith( 'PDF_ENUM_NAME_'):
+                    mupdf_py_content += f'print("{enum}=%s" % {enum})\n'
+                    mupdf_py_content += f'{enum} = PdfObj( obj_enum_to_obj( {enum}))\n'
+            with open( swig_py, 'w') as f:
+                f.write( mupdf_py_content)
 
     elif language == 'csharp':
         outdir = os.path.relpath(f'{build_dirs.dir_mupdf}/platform/csharp')
