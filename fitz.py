@@ -12,6 +12,57 @@ import weakref
 import hashlib
 import typing
 
+dictkey_align = "align"
+dictkey_align = "ascender"
+dictkey_bbox = "bbox"
+dictkey_blocks = "blocks"
+dictkey_bpc = "bpc"
+dictkey_c = "c"
+dictkey_chars = "chars"
+dictkey_color = "color"
+dictkey_colorspace = "colorspace"
+dictkey_content = "content"
+dictkey_creationDate = "creationDate"
+dictkey_cs_name = "cs-name"
+dictkey_da = "da"
+dictkey_dashes = "dashes"
+dictkey_desc = "desc"
+dictkey_desc = "descender"
+dictkey_dir = "dir"
+dictkey_effect = "effect"
+dictkey_ext = "ext"
+dictkey_filename = "filename"
+dictkey_fill = "fill"
+dictkey_flags = "flags"
+dictkey_font = "font"
+dictkey_height = "height"
+dictkey_id = "id"
+dictkey_image = "image"
+dictkey_items = "items"
+dictkey_length = "length"
+dictkey_lines = "lines"
+dictkey_matrix = "transform"
+dictkey_modDate = "modDate"
+dictkey_name = "name"
+dictkey_number = "number"
+dictkey_origin = "origin"
+dictkey_rect = "rect"
+dictkey_size = "size"
+dictkey_smask = "smask"
+dictkey_spans = "spans"
+dictkey_stroke = "stroke"
+dictkey_style = "style"
+dictkey_subject = "subject"
+dictkey_text = "text"
+dictkey_title = "title"
+dictkey_type = "type"
+dictkey_ufilename = "ufilename"
+dictkey_width = "width"
+dictkey_wmode = "wmode"
+dictkey_xref = "xref"
+dictkey_xres = "xres"
+dictkey_yres = "yres"
+
 
 def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     if name == "thisown":
@@ -119,8 +170,8 @@ def JM_update_stream(doc, obj, buffer_, compress):
 
     if nlen < len_ and nres and compress==1:   # was it worth the effort?
         obj.dict_put(
-                mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_Filter)),
-                mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_FlateDecode)),
+                mupdf.PDF_ENUM_NAME_Filter,
+                mupdf.PDF_ENUM_NAME_FlateDecode,
                 )
         doc.update_stream(obj, nres, 1)
     else:
@@ -131,9 +182,7 @@ def JM_update_stream(doc, obj, buffer_, compress):
 def JM_page_rotation(page):
     rotate = 0
 
-    obj = page.obj().dict_get_inheritable(
-            mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_Rotate))
-            )
+    obj = page.obj().dict_get_inheritable( mupdf.PDF_ENUM_NAME_Rotate)
     rotate = obj.to_int()
     rotate = JM_norm_rotation(rotate)
     return rotate
@@ -149,6 +198,21 @@ def JM_norm_rotation(rotate):
         return 0
     return rotate
 
+def JM_FLOAT_ITEM(obj, idx):
+    if idx < 0 or idx >= len(obj):
+        return None
+    ret = obj[idx]
+    assert isinstance(ret, float)
+    return ret
+
+
+def JM_point_from_py(p):
+    p0 = mupdf.Point(0, 0)
+    x = JM_FLOAT_ITEM(p, 0)
+    y = JM_FLOAT_ITEM(p, 1)
+    if x is None or y is None:
+        return p0
+    return mupdf.Point(x, y)
 
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
@@ -229,10 +293,7 @@ def Page_set_contents(page0, xref):
     contents = page.doc().new_indirect(xref, 0)
     if not contents.is_stream():
         raise Exception('xref is no stream')
-    page.obj().dict_put_drop(
-            mupdf.PdfObj(mupdf.obj_enum_to_obj(mupdf.PDF_ENUM_NAME_Contents)),
-            contents,
-            )
+    page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
     # fixme: page.this.dirty = 1
     return
 
@@ -303,6 +364,121 @@ def JM_BufferFromBytes(stream):
         b = stream.getvalue()
         return mupdf.Buffer.new_buffer_from_copied_data(b, len(b))
     return mupdf.Buffer(None)
+
+
+def JM_get_annot_id_list(page):
+    names = []
+    annots = page.obj().dict_get( mupdf.PDF_ENUM_NAME_Annots)
+    if not annots.m_internal:
+        return names
+    for i in range( annots.array_len()):
+        annot_obj =annots.array_get(i)
+        name = annot_obj.dict_gets("NM")
+        if name.m_internal:
+            names.append(
+                name.to_text_string()
+                )
+    return names
+
+JM_annot_id_stem = "fitz"
+
+def JM_add_annot_id(annot, stem):
+    assert isinstance(annot, mupdf.PdfAnnot)
+    names = JM_get_annot_id_list(annot.annot_page())
+    i = 0
+    while 1:
+        stem_id = f'{JM_annot_id_stem}-{stem}{i}'
+        if stem_id not in names:
+            break
+        i += 1
+
+    response = stem_id
+    name = mupdf.PdfObj(response)
+    annot.annot_obj().dict_puts_drop("NM", name)
+    # fixme: pymupdf's JM_add_annot_id() appears be able to compile this code:
+    #
+    #   pdf_annot *annot;
+    #   annot->obj;
+    #   annot->page;
+    #
+    # Even though mumpdf headers only forward-declare pdf_annot.  Full
+    # definition of pdf_annot is in mupdf/source/pdf/pdf-annot-imp.h, which is
+    # not included by any .h files.
+
+
+def JM_annot_border(annot_obj):
+    jlib.log('JM_annot_border {annot_obj=}')
+    assert isinstance(annot_obj, mupdf.PdfObj), f'{annot_obj}'
+
+    res = {}
+    dash_py   = []
+    effect_py = []
+    width = -1.0
+    effect1 = -1
+    effect2 = None
+    style = None
+    o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Border)
+    if o.is_array():
+        width = pdf_to_real(ctx, o.array_get(2))
+        if o.array_len() == 4:
+            dash = o.array_get(3)
+            for i in range(dash.array_len()):
+                val = mupdf.ppdf_to_int(ctx, dash.array_get(i))
+                dash_py.append(val)
+
+    bs_o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_BS)
+    if bs_o.m_internal:
+        o = bs_o.dict_get(PDF_ENUM_NAME_W)
+        if o.m_internal:
+            width = o.to_real()
+        o = bs_o.dict_get(PDF_ENUM_NAME_S)
+        if o.m_internal:
+            style = o.to_name()
+        o = bs_o.dict_get(PDF_ENUM_NAMED)
+        if o.m_internal:
+            for i in range(o.array_len()):
+                val = o.array_get(i).to_int()
+                dash_py.append(val)
+
+    be_o = annot_obj.dict_gets("BE")
+    if be_o.m_internal:
+        o = be_o.dict_get(PDF_ENUM_NAME_S)
+        if o.m_internal:
+            effect2 = o.to_name()
+        o = be_o.dict_get(PDF_ENUM_NAME_I)
+        if o.m_internal:
+            effect1 = o.to_int()
+
+    effect_py.append(effect1)
+    effect_py.append(effect2)
+    res[dictkey_width] = width
+    res[dictkey_dashes] = dash_py
+    res[dictkey_style] = style
+    if effect1 > -1:
+        res[dictkey_effect] = effect_py
+    return res;
+
+def JM_annot_colors(annot_obj):
+    res = dict()
+    bc = list() # stroke colors
+    fc =list()  # fill colors
+    o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_C)
+    if o.is_array:
+        n = o.array_len()
+        for i in range(n):
+            col = o.array_get(i).to_real()
+            bc.append(col)
+    res[dictkey_stroke] = bc
+
+    o = annot_obj.dict_gets("IC")
+    if o.is_array():
+        n = o.array_len()
+        for i in range(n):
+            col = o.array_get(i).to_real()
+            fc.append(col)
+
+    res[dictkey_fill] = fc
+    return res;
 
 
 def pdf_dict_getl(doc, obj, *keys):
@@ -2574,6 +2750,9 @@ def ColorCode(c: typing.Union[list, tuple, float, None], f: str) -> str:
 
 def JM_TUPLE(o: typing.Sequence) -> tuple:
     return tuple(map(lambda x: round(x, 5) if abs(x) >= 1e-4 else 0, o))
+
+def JM_py_from_matrix(m):
+    return m.a, m.b, m.c, m.d, m.e, m.f
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -5184,7 +5363,9 @@ class Page:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
         annot_postprocess(self, annot)
-        return annot
+        print(f'annot={annot}')
+        print(f'Annot={Annot}')
+        return Annot(self, annot)
 
     def getImageBbox(self, name):
 
@@ -5290,9 +5471,27 @@ class Page:
 
         return _fitz.Page__set_opacity(self, gstate, CA, ca)
 
+    def _pdf_page(self):
+        '''
+        Returns a mupdf.PdfPage.
+        '''
+        if isinstance(self.this, mupdf.PdfPage):
+            return self.this
+        return self.this.page_from_fz_page()
 
     def _add_caret_annot(self, point):
-        return _fitz.Page__add_caret_annot(self, point)
+        #return _fitz.Page__add_caret_annot(self, point)
+        page = self._pdf_page()
+        annot = page.create_annot(mupdf.PDF_ANNOT_CARET)
+        if point:
+            p = JM_point_from_py(point)
+            r = annot.annot_rect()
+            r = mupdf.Rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            annot.set_annot_rect(r)
+        JM_add_annot_id(annot, "A")
+        annot.update_annot()
+        return annot;
+
 
     def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
         return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
@@ -6745,10 +6944,15 @@ class Annot:
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
 
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
-    @property
+    #def __init__(self, *args, **kwargs):
+    #    raise AttributeError("No constructor defined")
+    def __init__(self, page, annot):
+        assert isinstance(annot, mupdf.PdfAnnot)
+        assert isinstance(page, Page)
+        self.this = annot
+        self.parent = page
 
+    @property
     def rect(self):
         """annotation rectangle"""
         CheckParent(self)
@@ -6773,12 +6977,24 @@ class Annot:
 
     def apn_matrix(self):
         """annotation appearance matrix"""
-        CheckParent(self)
+        try:
+            CheckParent(self)
 
-        val = _fitz.Annot_apn_matrix(self)
-        val = Matrix(val)
+            #val = _fitz.Annot_apn_matrix(self)
+            annot = self.this
+            assert isinstance(annot, mupdf.PdfAnnot)
+            ap = annot.annot_obj().dict_getl(mupdf.PDF_ENUM_NAME_AP, mupdf.PDF_ENUM_NAME_N);
+            if not ap.m_internal:
+                return JM_py_from_matrix(mupdf.Matrix())
+            mat = ap.dict_get_matrix(mupdf.PDF_ENUM_NAME_Matrix)
+            val = JM_py_from_matrix(mat)
 
-        return val
+            val = Matrix(val)
+
+            return val
+        except Exception:
+            jlib.log(jlib.exception_info())
+            raise
 
     @property
 
@@ -6819,7 +7035,36 @@ class Annot:
         """annotation BlendMode"""
         CheckParent(self)
 
-        return _fitz.Annot_blendMode(self)
+        #return _fitz.Annot_blendMode(self)
+        blend_mode = None
+        annot = self.this
+        #pdf_obj *obj, *obj1, *obj2;
+        obj = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_BM)
+        if obj.m_internal:
+            blend_mode = obj.to_name()
+            return blend_mode
+
+        # loop through the /AP/N/Resources/ExtGState objects
+        obj = annot.annot_obj().dict_getl(
+                mupdf.PDF_ENUM_NAME_AP,
+                mupdf.PDF_ENUM_NAME_N,
+                mupdf.PDF_ENUM_NAME_Resources,
+                mupdf.PDF_ENUM_NAME_ExtGState,
+                )
+
+        if obj.is_dict():
+            n = obj.dict_len()
+            for i in range(n):
+                obj1 = obj.dict_get_val(i)
+                if obj1.is_dict():
+                    m = obj1.dict_len()
+                    for j in range(m):
+                        obj2 = obj1.dict_get_key(j)
+                        if obj2.objcmp(mupdf.PDF_ENUM_NAME_BM) == 0:
+                            blend_mode = obj1.dict_get_val(j).to_name()
+                            return blend_mode
+
+        return blend_mode;
 
 
     def set_blendmode(self, blend_mode):
@@ -6973,9 +7218,16 @@ class Annot:
 
     def colors(self):
         """Color definitions."""
-        CheckParent(self)
+        try:
+            CheckParent(self)
 
-        return _fitz.Annot_colors(self)
+            #return _fitz.Annot_colors(self)
+            annot = self.this
+            assert isinstance(annot, mupdf.PdfAnnot)
+            return JM_annot_colors(annot.annot_obj())
+        except Exception as e:
+            jlib.log(jlib.exception_info())
+            raise
 
 
     def _update_appearance(self, opacity=-1, blend_mode=None, fill_color=None, rotate=-1):
@@ -7048,7 +7300,7 @@ class Annot:
                 rotate += 360
             while rotate >= 360:
                 rotate -= 360
-            if type == PDF_ANNOT_FREE_TEXT and rotate % 90 != 0:
+            if type == mupdf.PDF_ANNOT_FREE_TEXT and rotate % 90 != 0:
                 rotate = 0
 
     #------------------------------------------------------------------
@@ -7302,7 +7554,14 @@ class Annot:
         """annotation type"""
         CheckParent(self)
 
-        return _fitz.Annot_type(self)
+        #return _fitz.Annot_type(self)
+        type_ = self.this.annot_type()
+        c = mupdf.ppdf_string_from_annot_type(type_)
+        o = self.this.annot_obj().dict_gets("IT")
+        if not o.m_internal or o.is_name():
+            return (type_, c)
+        it = o.to_name()
+        return (type_, c, it)
 
     @property
 
@@ -7375,9 +7634,15 @@ class Annot:
 
     def border(self):
         """Border information."""
+        jlib.log("border() {self=}")
         CheckParent(self)
-
-        return _fitz.Annot_border(self)
+        jlib.log("border()")
+        #return _fitz.Annot_border(self)
+        ao = self.this.annot_obj()
+        jlib.log("border() {ao=}")
+        ret = JM_annot_border(ao)
+        jlib.log("border() {ret=}")
+        return ret
 
 
     def set_border(self, border=None, width=0, style=None, dashes=None):
