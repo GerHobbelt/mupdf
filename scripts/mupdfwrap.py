@@ -284,7 +284,8 @@ Python wrapping:
 
             An extra method mupdf.Buffer.buffer_extract_raw() is provided
             which returns (size, data) from the underlying fz_buffer_extract()
-            function.
+            function. And one can then call mupdf.raw_to_python_bytes(data,
+            size) to get a Python bytes object containing a copy of this data.
 
         Wrappers for fz_new_buffer_from_copied_data():
 
@@ -5873,7 +5874,8 @@ def class_wrapper(
     if refs:
         refs_name, refs_size = refs
         if isinstance(refs_name, int):
-            out_cpp.write( f'static RefsCheck<{struct_name}, {classname}> s_{classname}_refs_check({refs_name}, {refs_size});\n')
+            allow_int_this = ', true /*allow_int_this*/' if struct_name == 'pdf_obj' else ''
+            out_cpp.write( f'static RefsCheck<{struct_name}, {classname}{allow_int_this}> s_{classname}_refs_check({refs_name}, {refs_size});\n')
         else:
             out_cpp.write( f'static RefsCheck<{struct_name}, {classname}> s_{classname}_refs_check(offsetof({struct_name}, {refs_name}), {refs_size});\n')
         out_cpp.write( '\n')
@@ -6515,8 +6517,15 @@ def cpp_source(
             .add(), the destructor calls .remove() and other class functions
             call .check(). This ensures that we check reference counting after
             each class operation.
+
+            If <allow_int_this> is true, we allow _this->m_internal to be
+            an invalid pointer less than 4096, in which case we don't try
+            to check refs. This is used for_pdf_obj because in Python the
+            enums PDF_ENUM_NAME_* are converted to mupdf.PdfObj's containg
+            .m_internal's which are the enum values cast to (for_pdf_obj*), so
+            that they can be used directly.
             */
-            template<typename Struct, typename ClassWrapper>
+            template<typename Struct, typename ClassWrapper, bool allow_int_this=false>
             struct RefsCheck
             {
                 std::mutex              m_mutex;
@@ -6534,16 +6543,23 @@ def cpp_source(
                 {
                     assert( s_check_refs);
                     if (!this_->m_internal) return;
+                    if (allow_int_this)
+                    {
+                        std::cerr << __FILE__ << ":" << __LINE__ << ": this_->m_internal=" << this_->m_internal << "\\n";
+                        if ((intptr_t) this_->m_internal < 4096)
+                        {
+                            std::cerr << __FILE__ << ":" << __LINE__ << ": Ignoring this_->m_internal=" << this_->m_internal << "\\n";
+                            return;
+                        }
+                    }
                     std::lock_guard< std::mutex> lock( m_mutex);
                     /* Our lock doesn't make our access to
                     this_->m_internal->refs thead-safe - other threads
                     could be modifying it via fz_keep_<Struct>() or
                     fz_drop_<Struct>(). But hopefully our read will be atomic
                     in practise anyway? */
-                    //int refs = this_->m_internal->refs;
                     void* refs_ptr = (char*) this_->m_internal + m_offset;
                     int refs = (m_size == 16) ? (*(int16_t*) refs_ptr) : (*(int32_t*) refs_ptr);
-                    //int refs = *(int*)((char*) this_->m_internal + m_offset);
                     int& n = m_this_to_num[ this_->m_internal];
                     int n_prev = n;
                     assert( n >= 0);
@@ -7025,6 +7041,12 @@ def build_swig(
                     return ret;
                 }}
 
+                /* Creates Python bytes from copy of raw data. */
+                PyObject* raw_to_python_bytes(const unsigned char* c, size_t len)
+                {{
+                    return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+                }}
+
                 /* The SWIG wrapper for this function returns a SWIG proxy for
                 a 'const unsigned char*' pointing to the raw data of a python
                 bytes. This proxy can then be passed from Python to functions
@@ -7040,7 +7062,8 @@ def build_swig(
                     return PYTHON_BYTES_DATA;
                 }}
 
-                /**/
+                /* Casts an integer to a pdf_obj*. Used to convert SWIG's int
+                values for PDF_ENUM_NAME_* into PdfObj's. */
                 pdf_obj* obj_enum_to_obj(int n)
                 {{
                     return (pdf_obj*) n;
@@ -8638,7 +8661,7 @@ def main():
                     jlib.system( command, env_extra=env_extra, out='log', verbose=1)
 
                 else:
-                    log( 'running mupdf_test.py...')
+                    log( 'running scripts/mupdfwrap_test.py ...')
                     command = f'MUPDF_trace=0 MUPDF_check_refs=1 {command_prefix} ./scripts/mupdfwrap_test.py'
                     with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
                         jlib.system( command, env_extra=env_extra, out='log', verbose=1)
