@@ -565,7 +565,8 @@ def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
         buf.append_string(f'{col[0]} {col[1]} {col[2]} rg ')
     else:
         buf.append_string(f'{col[0]} {col[1]} {col[2]} {col[3]} k ')
-    fz_append_printf(ctx, buf, '/{JM_expand_fname(fontname)} {fontsize} Tf')
+
+    buf.append_string(f'/{JM_expand_fname(fontname)} {fontsize} Tf')
     len_, da = buf.buffer_storage_raw()
     buf_bytes = mupdf.raw_to_python_bytes(da, len_)
     buf_string = buf_bytes.decode('utf-8')
@@ -2886,6 +2887,66 @@ def JM_expand_fname(name):
     if name.startswith("Za"):   return "ZaDb"
     if name.startswith("za"):   return "ZaDb"
     return "Helv"
+
+def JM_annot_set_border(border, doc, annot_obj):
+    assert isinstance(border, dict)
+
+    nwidth = border.get(dictkey_width)  # new width
+    ndashes = border.get(dictkey_dashes)# new dashes
+    nstyle  = border.get(dictkey_style) # new style
+
+    # first get old border properties
+    oborder = JM_annot_border(annot_obj)
+    owidth = oborder.get(dictkey_width)     # old width
+    odashes = oborder.get(dictkey_dashes)   # old dashes
+    ostyle = oborder(dictkey_style)         # old style
+
+    # then delete any relevant entries
+    annot_obj.dict_del(mupdf.PDF_ENUM_NAME_BS)
+    annot_obj.dict_del(mupdf.PDF_ENUM_NAME_BE)
+    annot_obj.dict_del(mupdf.PDF_ENUM_NAME_Border)
+
+    # populate new border array
+    if nwidth < 0:
+        nwidth = owidth # no new width: take current
+    if nwidth < 0:
+        nwidth = 0.0    # default if no width given
+    if ndashes is None:
+        ndashes = odashes   # no new dashes: take old
+    if nstyle is None:
+        nstyle  = ostyle;   # no new style: take old
+
+    if ndashes and isinstance(ndashes, (tuple, list)) and len(ndashes) > 0:
+        n = len(ndashes)
+        darr = doc.new_array(n);
+        for i in range(n):
+            d = ndashes[i]
+            darr.array_push_int(d)
+        annot_obj.dict_putl_drop(darr, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_D)
+        nstyle = "D"
+
+    annot_obj.dict_putl(
+            mudf.PdfObj(nwidth),
+            mupdf.PDF_ENUM_NAME_BS,
+            mupdf.PDF_ENUM_NAME_W,
+            )
+
+    val = JM_get_border_style(nstyle)
+
+    annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
+
+
+# return pdf_obj "border style" from Python str
+def JM_get_border_style(style):
+    val = mupdf.PDF_ENUM_NAME_S
+    if style is None:
+        return val
+    s = style
+    if   s.startswith("b") or s.startswith("B"):    val = mupdf.PDF_ENUM_NAME_B
+    elif s.startswith("d") or s.startswith("D"):    val = mupdf.PDF_ENUM_NAME_D
+    elif s.startswith("i") or s.startswith("I"):    val = mupdf.PDF_ENUM_NAME_I
+    elif s.startswith("u") or s.startswith("U"):    val = mupdf.PDF_ENUM_NAME_U
+    return val
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -5686,13 +5747,13 @@ class Page:
         annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Q, align)
 
         if fill_color:
-            annot.set_annot_color(nfcol, fcol)
+            annot.set_annot_color(fcol[:nfcol])
 
         # insert the default appearance string
-        JM_make_annot_DA(gctx, annot, ntcol, tcol, fontname, fontsize)
-        JM_add_annot_id(gctx, annot, "A")
-        pdf_update_annot(gctx, annot)
-        return annot
+        JM_make_annot_DA(annot, ntcol, tcol, fontname, fontsize)
+        JM_add_annot_id(annot, "A")
+        annot.update_annot()
+        return Annot(self, annot)
 
     def add_freetext_annot(self, rect: rect_like, text: str, fontsize: float =11,
                          fontname: OptStr =None, text_color: OptSeq =None,
@@ -7129,16 +7190,16 @@ class Outline:
 
 
 class Annot:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Annot, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Annot, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
 
     #def __init__(self, *args, **kwargs):
     #    raise AttributeError("No constructor defined")
     def __init__(self, page, annot):
         assert isinstance(annot, mupdf.PdfAnnot)
-        assert isinstance(page, Page)
+        assert isinstance(page, Page), f'page is: {page}'
         self.this = annot
         self.parent = page
 
@@ -7957,7 +8018,9 @@ class Annot:
             border = {"width": width, "style": style, "dashes": dashes}
 
 
-        return _fitz.Annot_set_border(self, border, width, style, dashes)
+        #return _fitz.Annot_set_border(self, border, width, style, dashes)
+        annot = self.this
+        return JM_annot_set_border(border, annot.page().doc(), annot.annot_obj())
 
     @property
 
