@@ -7131,6 +7131,9 @@ def build_swig(
             %include "typemaps.i"
             %include "cpointer.i"
 
+            // This appears to allow python to call fns taking an int64_t.
+            %include "stdint.i"
+
             %{{
             {common}
             %}}
