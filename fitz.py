@@ -2949,6 +2949,85 @@ def JM_get_border_style(style):
     return val
 
 
+# Step through /Resources, looking up image, xobject or font information
+def JM_scan_resources(pdf, rsrc, liste, what, stream_xref, tracer):
+    if rsrc.mark_obj():
+        # fixme: not implemented yet: fz_warn(ctx, "Circular dependencies! Consider page cleaning.");
+        print(f'Circular dependencies! Consider page cleaning.')
+        return  # Circular dependencies!
+    try:
+        xobj = rsrc.dict_get(mupdf.PDF_ENUM_NAME_XObject)
+
+        if what == 1:   # lookup fonts
+            font = rsrc.dict_get(mupdf.PDF_ENUM_NAME_Font)
+            JM_gather_fonts(pdf, font, liste, stream_xref)
+        elif what == 2: # look up images
+            JM_gather_images(pdf, xobj, liste, stream_xref)
+        elif what == 3: # look up form xobjects
+            JM_gather_forms(pdf, xobj, liste, stream_xref)
+        else:   # should never happen
+            return
+
+        # check if we need to recurse into Form XObjects
+        n = xobj.dict_len()
+        for i in range(n):
+            obj = xobj.dict_get_val(i)
+            if obj.is_stream():
+                sxref = obj.to_num()
+            else:
+                sxref = 0
+            subrsrc = obj.dict_get(mupdf.PDF_ENUM_NAME_Resources)
+            if subrsrc.m_internal:
+                sxref_t = sxref
+                if sxref_t not in tracer:
+                    tracer.append(sxref_t)
+                    JM_scan_resources( pdf, subrsrc, liste, what, sxref, tracer)
+                else:
+                    #fz_warn(ctx, "Circular dependencies! Consider page cleaning.");
+                    print(f'Circular dependencies! Consider page cleaning.')
+                    return
+    finally:
+        rsrc.unmark_obj()
+
+
+def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
+    rc = 1
+    n = dict_.dict_len()
+    for i in range(n):
+
+        refname = dict_.dict_get_key(i)
+        fontdict = dict_.dict_get_val(i)
+        if not fontdict.is_dict():
+            #fz_warn(ctx, "'%s' is no font dict (%d 0 R)", pdf_to_name(ctx, refname), pdf_to_num(ctx, fontdict));
+            print(f'{refname.to_name()} is no font dict ({fontdict.to_num()} 0 R)')
+            continue
+
+        subtype = fontdict.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+        basefont = fontdict.dict_get(mupdf.PDF_ENUM_NAME_BaseFont)
+        if not basefont.m_internal or basefont.is_null():
+            name = fontdict.dict_get(mupdf.PDF_ENUM_NAME_Name)
+        else:
+            name = basefont
+        encoding = fontdict.dict_get(mupdf.PDF_ENUM_NAME_Encoding)
+        if encoding.is_dict():
+            encoding = encoding.dict_get(mupdf.PDF_ENUM_NAME_BaseEncoding)
+        xref = fontdict.to_num()
+        ext = "n/a"
+        if xref:
+            ext = JM_get_fontextension(pdf, xref)
+        entry = (
+                xref,
+                ext,
+                subtype.to_name(),
+                JM_EscapeStrFromStr(name.to_name()),
+                refname.to_name(),
+                encoding.to_name(),
+                stream_xref,
+                )
+        fontlist.append(entry)
+    return rc
+
+
 def CheckRect(r: typing.Any) -> bool:
     """Check whether an object is non-degenerate rect-like.
 
@@ -4741,7 +4820,27 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
 
-        return _fitz.Document__getPageInfo(self, pno, what)
+        #return _fitz.Document__getPageInfo(self, pno, what)
+        doc = self.this
+        pdf = doc.specifics()
+        #pdf_obj *pageref, *rsrc;
+        #PyObject *liste = NULL, *tracer = NULL;
+        #fz_var(liste);
+        #fz_var(tracer);
+        pageCount = doc.count_pages()
+        n = pno;  # pno < 0 is allowed
+        while n < 0:
+            n += pageCount  # make it non-negative
+        if n >= pageCount:
+            raise Exception("bad page number(s)")
+        pageref = pdf.lookup_page_obj(n)
+        rsrc = pageref.dict_get_inheritable(mupdf.PDF_ENUM_NAME_Resources)
+        liste = []
+        tracer = []
+        if rsrc.m_internal:
+            JM_scan_resources(pdf, rsrc, liste, what, 0, tracer)
+        return liste
+
 
 
     def extractFont(self, xref=0, info_only=0):
