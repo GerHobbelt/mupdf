@@ -7066,7 +7066,14 @@ def build_swig(
                 values for PDF_ENUM_NAME_* into PdfObj's. */
                 pdf_obj* obj_enum_to_obj(int n)
                 {{
-                    return (pdf_obj*) n;
+                    return (pdf_obj*) (intptr_t) n;
+                }}
+
+                /* SWIG-friendly alternative to ppdf_set_annot_color(). */
+                void ppdf_set_annot_color2(pdf_annot *annot, int n, float color0, float color1, float color2, float color3)
+                {{
+                    float color[] = {{ color0, color1, color2, color3 }};
+                    return mupdf::ppdf_set_annot_color(annot, n, color);
                 }}
 
                 '''
@@ -7379,6 +7386,29 @@ def build_swig(
                         obj = obj.dict_get(key)
                     return obj
                 PdfObj.dict_getl = ppdf_dict_getl
+
+                def pdf_set_annot_color(annot, color):
+                    """
+                    Python version of pdf_set_annot_color() using
+                    ppdf_set_annot_color2().
+                    """
+                    if isinstance(color, float):
+                        ppdf_set_annot_color2(annot, 1, color, 0, 0, 0)
+                    elif len(color) == 1:
+                        ppdf_set_annot_color2(annot, 1, color[0], 0, 0, 0)
+                    elif len(color) == 2:
+                        ppdf_set_annot_color2(annot, 2, color[0], color[1], 0, 0)
+                    elif len(color) == 3:
+                        ppdf_set_annot_color2(annot, 3, color[0], color[1], color[2], 0)
+                    elif len(color) == 4:
+                        ppdf_set_annot_color2(annot, 4, color[0], color[1], color[2], color[3])
+                    else:
+                        raise Exception( f'Unexpected color should be float or list of 1-4 floats: {color}')
+
+                # Override PdfAnnot.set_annot_color() to use the above.
+                def PdfAnnot_set_annot_color(self, color):
+                    return pdf_set_annot_color(self.m_internal, color)
+                PdfAnnot.set_annot_color = PdfAnnot_set_annot_color
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
