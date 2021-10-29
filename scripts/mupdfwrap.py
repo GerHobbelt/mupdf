@@ -5816,6 +5816,8 @@ def class_wrapper(
         out_h,
         out_cpp,
         out_h_end,
+        out_cpp2,
+        out_h2,
         generated,
         ):
     '''
@@ -6380,6 +6382,7 @@ def cpp_source(
     out_hs = Outputs()
     for name in (
             'classes',
+            'classes2',
             'exceptions',
             'functions',
             'internal',
@@ -6457,6 +6460,12 @@ def cpp_source(
 
             '''))
 
+    out_hs.classes2.write( textwrap.dedent(
+            '''
+            #include "classes.h"
+
+            '''))
+
     # Write required #includes into .cpp files:
     #
     out_cpps.exceptions.write( textwrap.dedent(
@@ -6482,6 +6491,27 @@ def cpp_source(
     out_cpps.classes.write(
             textwrap.dedent(
             '''
+            #include "mupdf/classes.h"
+            #include "mupdf/exceptions.h"
+            #include "mupdf/internal.h"
+
+            #include "mupdf/fitz/geometry.h"
+
+            #include <map>
+            #include <mutex>
+            #include <sstream>
+            #include <string.h>
+            #include <thread>
+
+            #include <string.h>
+
+            '''))
+
+    out_cpps.classes2.write(
+            textwrap.dedent(
+            '''
+            #include "classes2.h"
+
             #include "mupdf/classes.h"
             #include "mupdf/exceptions.h"
             #include "mupdf/internal.h"
@@ -6786,6 +6816,8 @@ def cpp_source(
                     out_hs.classes,
                     out_cpps.classes,
                     out_h_classes_end,
+                    out_cpps.classes2,
+                    out_hs.classes2,
                     generated,
                     )
         if is_container:
@@ -7909,12 +7941,14 @@ def build( build_dirs, swig, args):
     global g_show_details
     cpp_files   = [
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/classes.cpp',
+            f'{build_dirs.dir_mupdf}/platform/c++/implementation/classes2.cpp',
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/exceptions.cpp',
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/functions.cpp',
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/internal.cpp',
             ]
     h_files = [
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/classes.h',
+            f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/classes2.h',
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/exceptions.h',
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/functions.h',
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/internal.h',
