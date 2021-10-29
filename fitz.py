@@ -348,7 +348,7 @@ def Page_clean_contents(self, sanitize):
     page.doc().filter_page_contents(page, filter2)
     # fixme: page->doc->dirty = 1;
 
-def JM_get_annot_xref_list(page_obj):
+def JM_get_annot_xref_list(page_or_page_obj):
     '''
     Wrapper for PyMuPDF/fitz/helper-annot.i:
         PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
@@ -356,29 +356,76 @@ def JM_get_annot_xref_list(page_obj):
     Not PyMuPDF/fitz/fitz_wrap.c:
         PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
     '''
-    names = []
-    jlib.log('{page_obj=}')
-    jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
-    jlib.log('calling page_obj.dict_get()')
-    annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-    jlib.log('{annots=}')
-    if not annots:
+    if 0 and isinstance(page_or_page_obj, mupdf.PdfObj):
+        # Wrapper for PyMuPDF/fitz/helper-annot.i:
+        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
+        page_obj = page_or_page_obj
+        names = []
+        jlib.log('{page_obj=}')
+        jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
+        jlib.log('calling page_obj.dict_get()')
+        annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        jlib.log('{annots=}')
+        if not annots:
+            return names
+        n = annots.array_len()
+        jlib.log('{n=}')
+        for i in range(n):
+            annot_obj = mupdf.ppdf_array_get(annots, i)
+            xref = mupdf.ppdf_to_num(annot_obj)
+            jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
+            subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if (subtype):
+                name = mupdf.ppdf_to_name(subtype)
+                type_ = mupdf.ppdf_annot_type_from_string(name)
+            id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
+            names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
         return names
-    n = annots.array_len()
-    jlib.log('{n=}')
-    for i in range(n):
-        annot_obj = mupdf.ppdf_array_get(annots, i)
-        xref = mupdf.ppdf_to_num(annot_obj)
-        jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
-        subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
-        type_ = mupdf.PDF_ANNOT_UNKNOWN
-        if (subtype):
-            name = mupdf.ppdf_to_name(subtype)
-            type_ = mupdf.ppdf_annot_type_from_string(name)
-        id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
-        names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
-    return names
+    elif 0 and isinstance(page_or_page_obj, mupdf.PdfPage):
+        # Not PyMuPDF/fitz/fitz_wrap.c:
+        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
+        page = page_or_page_obj
+        names = []
+        annots = page.obj().dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        if not annots.m_internal:
+            return names
+        n = annots.array_len()
+        for i in range(n):
+            annot_obj = annots.array_get(i)
+            xref = annot_obj.to_num()
+            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if subtype.m_internal:
+                name = subtype.to_name()
+                type_ = name.annot_type_from_string()
+            id_ = annot_obj.dict_gets("NM")
+            names.append( (xref, type_, id_.to_text_string()))
+        return names
 
+    else:
+        if isinstance(page_or_page_obj, mupdf.PdfPage):
+            obj = page_or_page_obj.obj()
+        elif isinstance(page_or_page_obj, mupdf.PdfObj):
+            obj = page_or_page_obj
+        else:
+            assert 0
+        names = []
+        annots = obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        if not annots.m_internal:
+            return names
+        n = annots.array_len()
+        for i in range(n):
+            annot_obj = annots.array_get(i)
+            xref = annot_obj.to_num()
+            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if subtype.m_internal:
+                name = subtype.to_name()
+                type_ = mupdf.ppdf_annot_type_from_string(name)
+            id_ = annot_obj.dict_gets("NM")
+            names.append( (xref, type_, id_.to_text_string()))
+        return names
 
 def JM_BufferFromBytes(stream):
     '''
@@ -508,6 +555,21 @@ def JM_annot_colors(annot_obj):
 
     res[dictkey_fill] = fc
     return res;
+
+
+def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
+    buf = mupdf.Buffer(50)
+    if ncol == 1:
+        buf.append_string(f'{col[0]} g ');
+    elif ncol == 3:
+        buf.append_string(f'{col[0]} {col[1]} {col[2]} rg ')
+    else:
+        buf.append_string(f'{col[0]} {col[1]} {col[2]} {col[3]} k ')
+    fz_append_printf(ctx, buf, '/{JM_expand_fname(fontname)} {fontsize} Tf')
+    len_, da = buf.buffer_storage_raw()
+    buf_bytes = mupdf.raw_to_python_bytes(da, len_)
+    buf_string = buf_bytes.decode('utf-8')
+    annot.annot_obj().dict_put_text_string(mupdf.PDF_ENUM_NAME_DA, buf_string)
 
 
 def pdf_dict_getl(doc, obj, *keys):
@@ -2811,6 +2873,19 @@ def JM_color_FromSequence(color, col):
     for i in range(len_):
         col[i] = mcol[i]
     return len_
+
+# Make /DA string of annotation
+def JM_expand_fname(name):
+    if not name:    return "Helv"
+    if name.startswith("Co"):   return "Cour"
+    if name.startswith("co"):   return "Cour"
+    if name.startswith("Ti"):   return "TiRo"
+    if name.startswith("ti"):   return "TiRo"
+    if name.startswith("Sy"):   return "Symb"
+    if name.startswith("sy"):   return "Symb"
+    if name.startswith("Za"):   return "ZaDb"
+    if name.startswith("za"):   return "ZaDb"
+    return "Helv"
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -5309,7 +5384,7 @@ class Document:
         for i in range(self.pageCount):
             jlib.log('{i=}')
             for item in self.page_annot_xrefs(i):
-                if item[1] == PDF_ANNOT_LINK:
+                if item[1] == mupdf.PDF_ANNOT_LINK:
                     jlib.log('Returning true')
                     return True
         jlib.log('Returning false')
@@ -5324,7 +5399,7 @@ class Document:
             raise ValueError("not a PDF")
         for i in range(self.pageCount):
             for item in self.page_annot_xrefs(i):
-                if not (item[1] == PDF_ANNOT_LINK or item[1] == PDF_ANNOT_WIDGET):
+                if not (item[1] == mupdf.PDF_ANNOT_LINK or item[1] == mupdf.PDF_ANNOT_WIDGET):
                     return True
         return False
 
@@ -5592,7 +5667,49 @@ class Page:
         return _fitz.Page__add_multiline(self, points, annot_type)
 
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
-        return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
+        jlib.log('_add_freetext_annot')
+        #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
+        page = self._pdf_page()
+        fcol = [1, 1, 1, 1] # fill color: white
+        nfcol = JM_color_FromSequence(fill_color, fcol)
+        tcol = [0, 0, 0, 0]  # std. text color: black
+        ntcol = JM_color_FromSequence(text_color, tcol)
+        r = JM_rect_from_py(rect)
+
+        if r.is_infinite_rect() or r.is_empty_rect():
+            raise Exception("rect must be finite and not empty")
+        annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
+        annot.set_annot_contents(text)
+        annot.set_annot_rect(r)
+        jlib.log('{rotate=}')
+        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
+        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Q, align)
+
+        if fill_color:
+            annot.set_annot_color(nfcol, fcol)
+
+        # insert the default appearance string
+        JM_make_annot_DA(gctx, annot, ntcol, tcol, fontname, fontsize)
+        JM_add_annot_id(gctx, annot, "A")
+        pdf_update_annot(gctx, annot)
+        return annot
+
+    def add_freetext_annot(self, rect: rect_like, text: str, fontsize: float =11,
+                         fontname: OptStr =None, text_color: OptSeq =None,
+                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
+        """Add a 'FreeText' annotation."""
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
+                    fontname=fontname, text_color=text_color,
+                    fill_color=fill_color, align=align, rotate=rotate)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
 
     @property
     def rotationMatrix(self) -> Matrix:
@@ -5622,7 +5739,7 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_STRIKE_OUT)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
 
 
     def addUnderlineAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
@@ -5631,7 +5748,7 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_UNDERLINE)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
 
 
     def addSquigglyAnnot(self, quads=None, start=None,
@@ -5641,7 +5758,7 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_SQUIGGLY)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
 
 
     def addHighlightAnnot(self, quads=None, start=None,
@@ -5651,14 +5768,14 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_HIGHLIGHT)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
 
 
     def addRectAnnot(self, rect: rect_like) -> "struct Annot *":
         """Add a 'Square' (rectangle) annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_square_or_circle(rect, PDF_ANNOT_SQUARE)
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5670,7 +5787,7 @@ class Page:
         """Add a 'Circle' (ellipse, oval) annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_square_or_circle(rect, PDF_ANNOT_CIRCLE)
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5706,7 +5823,7 @@ class Page:
         """Add a 'PolyLine' annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5718,7 +5835,7 @@ class Page:
         """Add a 'Polygon' annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_multiline(points, PDF_ANNOT_POLYGON)
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5899,14 +6016,22 @@ class Page:
         """List of names of annotations, fields and links."""
         CheckParent(self)
 
-        return _fitz.Page_annot_names(self)
+        #return _fitz.Page_annot_names(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return
+        return JM_get_annot_id_list(page)
 
 
     def annot_xrefs(self):
         """List of xref numbers of annotations, fields and links."""
         CheckParent(self)
 
-        return _fitz.Page_annot_xrefs(self)
+        #return _fitz.Page_annot_xrefs(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return
+        return JM_get_annot_xref_list(page);
 
 
     def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
@@ -6159,7 +6284,7 @@ class Page:
             val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
             if self.parent.isPDF:
-                link_id = [x for x in self.annot_xrefs() if x[1] == PDF_ANNOT_LINK][0]
+                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
                 val.xref = link_id[0]
                 val.id = link_id[2]
             else:
@@ -7213,7 +7338,20 @@ class Annot:
 
 
     def _getAP(self):
-        return _fitz.Annot__getAP(self)
+        #return _fitz.Annot__getAP(self)
+        r = None
+        res = None
+        annot = self.this
+        ap = annot.annot_obj().dict_getl(
+                mupdf.PDF_ENUM_NAME_AP,
+                mupdf.PDF_ENUM_NAME_N,
+                )
+
+        if ap.is_stream():
+            res = ap.load_stream()
+        if not res or res.m_internal:
+            r = JM_BinFromBuffer(res)
+        return r
 
     def _setAP(self, ap, rect=0):
         return _fitz.Annot__setAP(self, ap, rect)
@@ -7269,7 +7407,13 @@ class Annot:
         """annotation rotation"""
         CheckParent(self)
 
-        return _fitz.Annot_rotation(self)
+        #return _fitz.Annot_rotation(self)
+        annot = self.this
+        rotation = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_Rotate)
+        if not rotation.m_internal:
+            return -1
+        return rotation.to_int(g)
+
 
     @property
 
@@ -7492,7 +7636,7 @@ class Annot:
         ap_tab = ap.splitlines()  # split in single lines
         ap_updated = False  # assume we did nothing
 
-        if type == PDF_ANNOT_REDACT:
+        if type == mupdf.PDF_ANNOT_REDACT:
             if cross_out:  # create crossed-out rect
                 ap_updated = True
                 ap_tab = ap_tab[:-1]
@@ -7517,7 +7661,7 @@ class Annot:
 
             ap = b"\n".join(ap_tab)
 
-        if type == PDF_ANNOT_FREE_TEXT:
+        if type == mupdf.PDF_ANNOT_FREE_TEXT:
             CheckColor(border_color)
             CheckColor(text_color)
             tcol, fname, fsize = TOOLS._parse_da(self)
@@ -7567,18 +7711,18 @@ class Annot:
             ap = b"\n".join(ap_tab)         # updated AP stream
             ap_updated = True
 
-        if type in (PDF_ANNOT_POLYGON, PDF_ANNOT_POLY_LINE):
+        if type in (mupdf.PDF_ANNOT_POLYGON, mupdf.PDF_ANNOT_POLY_LINE):
             ap = b"\n".join(ap_tab[:-1]) + b"\n"
             ap_updated = True
             if bfill != b"":
-                if type == PDF_ANNOT_POLYGON:
+                if type == mupdf.PDF_ANNOT_POLYGON:
                     ap = ap + bfill + b"b"  # close, fill, and stroke
-                elif type == PDF_ANNOT_POLY_LINE:
+                elif type == mupdf.PDF_ANNOT_POLY_LINE:
                     ap = ap + b"S"  # stroke
             else:
-                if type == PDF_ANNOT_POLYGON:
+                if type == mupdf.PDF_ANNOT_POLYGON:
                     ap = ap + b"s"  # close and stroke
-                elif type == PDF_ANNOT_POLY_LINE:
+                elif type == mupdf.PDF_ANNOT_POLY_LINE:
                     ap = ap + b"S"  # stroke
 
         if dashes is not None:  # handle dashes
@@ -7595,7 +7739,7 @@ class Annot:
     #----------------------------------------------------------------------
     # the following handles line end symbols for 'Polygon' and 'Polyline'
     #----------------------------------------------------------------------
-        if line_end_le + line_end_ri > 0 and type in (PDF_ANNOT_POLYGON, PDF_ANNOT_POLY_LINE):
+        if line_end_le + line_end_ri > 0 and type in (mupdf.PDF_ANNOT_POLYGON, mupdf.PDF_ANNOT_POLY_LINE):
 
             le_funcs = (None, TOOLS._le_square, TOOLS._le_circle,
                         TOOLS._le_diamond, TOOLS._le_openarrow,
@@ -7629,16 +7773,16 @@ class Annot:
     # handle annotation rotations
     #-------------------------------
         if type not in (  # only these types are supported
-            PDF_ANNOT_CARET,
-            PDF_ANNOT_CIRCLE,
-            PDF_ANNOT_FILE_ATTACHMENT,
-            PDF_ANNOT_INK,
-            PDF_ANNOT_LINE,
-            PDF_ANNOT_POLY_LINE,
-            PDF_ANNOT_POLYGON,
-            PDF_ANNOT_SQUARE,
-            PDF_ANNOT_STAMP,
-            PDF_ANNOT_TEXT,
+            mupdf.PDF_ANNOT_CARET,
+            mupdf.PDF_ANNOT_CIRCLE,
+            mupdf.PDF_ANNOT_FILE_ATTACHMENT,
+            mupdf.PDF_ANNOT_INK,
+            mupdf.PDF_ANNOT_LINE,
+            mupdf.PDF_ANNOT_POLY_LINE,
+            mupdf.PDF_ANNOT_POLYGON,
+            mupdf.PDF_ANNOT_SQUARE,
+            mupdf.PDF_ANNOT_STAMP,
+            mupdf.PDF_ANNOT_TEXT,
             ):
             return
 
@@ -7681,7 +7825,16 @@ class Annot:
         """Line end codes."""
         CheckParent(self)
 
-        return _fitz.Annot_line_ends(self)
+        #return _fitz.Annot_line_ends(self)
+        annot = self.this
+        # return nothing for invalid annot types
+        if not annot.annot_has_line_ending_styles():
+            return
+
+        lstart = annot.annot_line_start_style()
+        lend = annot.annot_line_end_style()
+        return lstart, lend
+
 
 
     def set_line_ends(self, start, end):
@@ -7849,7 +8002,7 @@ class Annot:
         val.parent = self.parent  # copy owning page object from previous annot
         val.parent._annot_refs[id(val)] = val
 
-        if val.type[0] == PDF_ANNOT_WIDGET:
+        if val.type[0] == mupdf.PDF_ANNOT_WIDGET:
             widget = Widget()
             TOOLS._fill_widget(val, widget)
             val = widget
@@ -8008,8 +8161,8 @@ class Link:
             val.parent = self.parent  # copy owning page from prev link
             val.parent._annot_refs[id(val)] = val
             if self.xref > 0:  # prev link has an xref
-                link_xrefs = [x[0] for x in self.parent.annot_xrefs() if x[1] == PDF_ANNOT_LINK]
-                link_ids = [x[2] for x in self.parent.annot_xrefs() if x[1] == PDF_ANNOT_LINK]
+                link_xrefs = [x[0] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
+                link_ids = [x[2] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
                 idx = link_xrefs.index(self.xref)
                 val.xref = link_xrefs[idx + 1]
                 val.id = link_ids[idx + 1]
