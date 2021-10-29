@@ -44,9 +44,14 @@ if 1:
     assert(b2 == b0)
 
 if 1:
-    o1 = mupdf.PDF_ENUM_NAME_Filter
-    o2 = mupdf.obj_enum_to_obj(o1)
-    log(f'o1={o1} o2={o2}')
+    b0 = b'asdfg'
+    b1 = mupdf.Buffer.new_buffer_from_copied_data(b0)
+    size, data = b1.buffer_storage_raw()
+    log(f'size={size} data={data}')
+    b2 = mupdf.raw_to_python_bytes( data, size)
+    assert b2 == b0
+    log(f'b1={b1}')
+
 
 def show_stext(document):
     '''
