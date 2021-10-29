@@ -702,6 +702,15 @@ Usage:
         --test-python
             Tests the python API.
 
+        --test-python-fitz all|iter|<script-name>
+            Tests fitz.py with PyMuPDF. Requires 'pkg_add py3-test' or similar.
+            all:
+                Runs all tests with py.test-3
+            iter:
+                Runs each test in turn until one fails.
+            <script-name>:
+                Runs a single test, e.g.: test_general.py
+
         --test-setup.py <arg>
             Tests that setup.py installs a usable Python mupdf module.
 
@@ -8331,7 +8340,7 @@ def build( build_dirs, swig, args):
                 raise Exception( 'unrecognised --build action %r' % action)
 
 
-def python_settings(build_dirs):
+def python_settings(build_dirs, startdir=None):
     # We need to set LD_LIBRARY_PATH and PYTHONPATH so that our
     # test .py programme can load mupdf.py and _mupdf.so.
     env_extra = {}
@@ -8345,14 +8354,14 @@ def python_settings(build_dirs):
         python_path, python_version, python_root, cpu = find_python( build_dirs.cpu, build_dirs.python_version)
         python_path = python_path.replace('\\', '/')    # Allows use on Cygwin.
         env_extra = {
-                'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                'PYTHONPATH': os.path.relpath(build_dirs.dir_so, startdir),
                 }
         command_prefix = f'"{python_path}"'
     elif g_openbsd:
         # We have special support to not require LD_LIBRARY_PATH.
         #command_prefix = f'PYTHONPATH={os.path.relpath(build_dirs.dir_so)}'
         env_extra = {
-                'PYTHONPATH': os.path.relpath(build_dirs.dir_so)
+                'PYTHONPATH': os.path.relpath(build_dirs.dir_so, startdir)
                 }
     else:
         # On Linux it looks like we need to specify
@@ -8361,7 +8370,7 @@ def python_settings(build_dirs):
         #
         env_extra = {
                 'LD_LIBRARY_PATH': os.path.abspath(build_dirs.dir_so),
-                'PYTHONPATH': os.path.relpath(build_dirs.dir_so),
+                'PYTHONPATH': os.path.relpath(build_dirs.dir_so, startdir),
                 }
     return env_extra, command_prefix
 
@@ -8867,20 +8876,39 @@ def main():
                     jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-python-fitz':
+                tests = args.next()
+                startdir = os.path.abspath('../PyMuPDF/tests')
+                env_extra, command_prefix = python_settings(build_dirs, startdir)
 
-                env_extra, command_prefix = python_settings(build_dirs)
-                env_extra['PYTHONPATH'] += ':.'
-                # Requires 'pkg_add py3-test' or similar.
-                #
+                env_extra['PYTHONPATH'] += f':{os.path.relpath(".", startdir)}'
+                env_extra['PYTHONPATH'] += f':{os.path.relpath("./scripts", startdir)}'
+
+                #env_extra['PYTHONMALLOC'] = 'malloc'
+                #env_extra['MUPDF_trace'] = '1'
+                #env_extra['MUPDF_check_refs'] = '1'
+
                 # -x: stop at first error.
                 # -s: show stdout/err.
                 #
-
-                env_extra['PYTHONPATH'] += ':.'
-                #env_extra['PYTHONMALLOC'] = 'malloc'
-                for script in sorted(glob.glob( '../PyMuPDF/tests/test_*.py')):
+                if tests == 'all':
                     jlib.system(
-                            f'MUPDF_trace=0 MUPDF_check_refs=0 py.test-3 -x -s {script}',
+                            f'cd ../PyMuPDF/tests && py.test-3',
+                            env_extra=env_extra,
+                            out='log',
+                            verbose=1,
+                            )
+                elif tests == 'iter':
+                    for script in sorted(glob.glob( '../PyMuPDF/tests/test_*.py')):
+                        script = os.path.basename(script)
+                        jlib.system(
+                                f'cd ../PyMuPDF/tests && py.test-3 -x -s {script}',
+                                env_extra=env_extra,
+                                out='log',
+                                verbose=1,
+                                )
+                else:
+                    jlib.system(
+                            f'cd ../PyMuPDF/tests && py.test-3 {tests}',
                             env_extra=env_extra,
                             out='log',
                             verbose=1,
