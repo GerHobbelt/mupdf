@@ -504,13 +504,13 @@ def JM_annot_border(annot_obj):
 
     bs_o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_BS)
     if bs_o.m_internal:
-        o = bs_o.dict_get(PDF_ENUM_NAME_W)
+        o = bs_o.dict_get(mupdf.PDF_ENUM_NAME_W)
         if o.m_internal:
             width = o.to_real()
-        o = bs_o.dict_get(PDF_ENUM_NAME_S)
+        o = bs_o.dict_get(mupdf.PDF_ENUM_NAME_S)
         if o.m_internal:
             style = o.to_name()
-        o = bs_o.dict_get(PDF_ENUM_NAMED)
+        o = bs_o.dict_get(mupdf.PDF_ENUM_NAME_D)
         if o.m_internal:
             for i in range(o.array_len()):
                 val = o.array_get(i).to_int()
@@ -518,10 +518,10 @@ def JM_annot_border(annot_obj):
 
     be_o = annot_obj.dict_gets("BE")
     if be_o.m_internal:
-        o = be_o.dict_get(PDF_ENUM_NAME_S)
+        o = be_o.dict_get(mupdf.PDF_ENUM_NAME_S)
         if o.m_internal:
             effect2 = o.to_name()
-        o = be_o.dict_get(PDF_ENUM_NAME_I)
+        o = be_o.dict_get(mupdf.PDF_ENUM_NAME_I)
         if o.m_internal:
             effect1 = o.to_int()
 
@@ -2899,7 +2899,7 @@ def JM_annot_set_border(border, doc, annot_obj):
     oborder = JM_annot_border(annot_obj)
     owidth = oborder.get(dictkey_width)     # old width
     odashes = oborder.get(dictkey_dashes)   # old dashes
-    ostyle = oborder(dictkey_style)         # old style
+    ostyle = oborder.get(dictkey_style)     # old style
 
     # then delete any relevant entries
     annot_obj.dict_del(mupdf.PDF_ENUM_NAME_BS)
@@ -2922,7 +2922,7 @@ def JM_annot_set_border(border, doc, annot_obj):
         for i in range(n):
             d = ndashes[i]
             darr.array_push_int(d)
-        annot_obj.dict_putl_drop(darr, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_D)
+        annot_obj.dict_putl(darr, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_D)
         nstyle = "D"
 
     annot_obj.dict_putl(
@@ -8020,7 +8020,7 @@ class Annot:
 
         #return _fitz.Annot_set_border(self, border, width, style, dashes)
         annot = self.this
-        return JM_annot_set_border(border, annot.page().doc(), annot.annot_obj())
+        return JM_annot_set_border(border, annot.annot_page().doc(), annot.annot_obj())
 
     @property
 
