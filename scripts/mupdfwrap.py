@@ -7387,6 +7387,33 @@ def build_swig(
                     return obj
                 PdfObj.dict_getl = ppdf_dict_getl
 
+                def ppdf_dict_putl(obj, *tail):
+                    """
+                    Python implementation of pdf_dict_putl(fz_context
+                    *ctx, pdf_obj *obj, pdf_obj *val, ...)
+                    """
+                    if obj.is_indirect():
+                        obj = obj.resolve_indirect_chain()
+                    if not obj.is_dict():
+                        raise Exception(f'not a dict {obj.obj}')
+                    if not tail:
+                        return
+                    doc = obj.get_bound_document()
+                    for key in tail[:-1]:
+                        next_obj = obj.dict_get(key)
+                        if not next_obj.m_internal:
+                            # We have to create entries
+                            next_obj = doc.new_dict(1)
+                            obj.dict_put(key, next_obj)
+                        obj = next_obj
+                    key = tail[-1]
+                    obj.dict_put(key, val)
+                PdfObj.dict_putl = ppdf_dict_putl
+
+                def ppdf_dict_putl_drop(obj, *tail):
+                    raise Exception('mupdf.PdfObj.dict_putl_drop() is unsupported and unnecessary in Python because reference counting is automatic. Instead use mupdf.PdfObj.dict_putl()')
+                PdfObj.dict_putl_drop = ppdf_dict_putl_drop
+
                 def pdf_set_annot_color(annot, color):
                     """
                     Python version of pdf_set_annot_color() using
