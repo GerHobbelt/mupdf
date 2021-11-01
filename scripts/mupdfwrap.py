@@ -3794,7 +3794,7 @@ def make_wrapper_comment(
         write( f'    {fnname_wrapper}(')
         sep = ''
         for arg in get_args( tu, cursor, include_fz_context=False, skip_first_alt=is_method):
-            if not arg.out_param:
+            if arg.alt or not arg.out_param:
                 write( f'{sep}{declaration_text( arg.cursor.type, arg.name)}')
                 sep = ', '
         write(') => ')
@@ -3805,7 +3805,7 @@ def make_wrapper_comment(
             write( f'{cursor.result_type.spelling}')
             sep = ', '
         for arg in get_args( tu, cursor, include_fz_context=False, skip_first_alt=is_method):
-            if arg.out_param:
+            if not arg.alt and arg.out_param:
                 write( f'{sep}{declaration_text( arg.cursor.type.get_pointee(), arg.name)}')
                 sep = ', '
         if tuple_size > 1:
@@ -3941,208 +3941,6 @@ def make_function_wrapper(
                 generated,
                 )
 
-"""
-def make_function_wrapper_class_aware(
-        tu,
-        fn_cursor,
-        fnname,
-        fnname_wrapper,
-        out_h,
-        out_cpp,
-        generated,
-        ):
-    '''
-    Writes wrapper function that uses our core wrapper but receives and returns our
-    class wrappers instead of the underlying MuPDF structs.
-    '''
-    assert fn_cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL
-
-    verbose = fnname_wrapper == 'pdf_add_annot_ink_list'
-
-    num_out_params = 0
-    for arg in get_args( tu, fn_cursor, include_fz_context=False):
-        num_out_params += 1
-
-    # Write first line: <result_type> <fnname_wrapper> (<args>...)
-    #
-    comment = make_wrapper_comment( tu, fn_cursor, fnname, fnname_wrapper, indent='', is_method=False)
-    out_h.write( f'/* {comment}*/')
-    out_cpp.write( f'/* {comment}*/')
-
-    # Copy any comment into .h file before declaration.
-    if fn_cursor.raw_comment:
-        out_h.write( f'{fn_cursor.raw_comment}')
-        if not fn_cursor.raw_comment.endswith( '\n'):
-            out_h.write( '\n')
-
-    name_args_h = f'{fnname}('
-    name_args_cpp = f'{fnname}('
-    comma = ''
-    for arg in get_args( tu, fn_cursor, include_fz_context=False):
-        if verbose:
-            log( '{arg.cursor=} {arg.name=} {arg.separator=} {arg.alt=} {arg.out_param=}')
-        if arg.alt:
-            # This parameter is something like 'fz_foo* arg',
-            # which we convert to 'mupdf_foo_s& arg' so that the caller can
-            # use C++ class mupdf_foo_s.
-            const = ''
-            if not arg.out_param:
-                extras2 = classextras.get( arg.alt.type.spelling)
-                if not extras2:
-                    log('cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
-            if not arg.out_param and not classextras.get( arg.alt.type.spelling).pod:
-                const = 'const '
-            decl_h = f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
-
-        elif arg.out_param:
-            decl_h = ''
-            decl_h += '\n'
-            decl_h += '        #ifdef SWIG\n'
-            decl_h += '            ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
-            decl_h += '        #else\n'
-            decl_h += '            ' + declaration_text( arg.cursor.type, arg.name) + '\n'
-            decl_h += '        #endif\n'
-            decl_h += '        '
-        else:
-            decl_h = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
-        if verbose:
-            log( '{decl_h=}')
-        name_args_h += f'{comma}{decl_h}'
-        decl_cpp = declaration_text( arg.cursor.type, arg.name)
-        name_args_cpp += f'{comma}{decl_cpp}'
-        comma = ', '
-
-    name_args_h += ')'
-    name_args_cpp += ')'
-
-    warning_not_copyable = False
-    warning_no_raw_constructor = False
-
-    return_cursor = None
-    return_type = None
-
-    fn_h = declaration_text( fn_cursor.result_type, name_args_h)
-    fn_cpp = declaration_text( fn_cursor.result_type, name_args_cpp)
-
-    # See whether we can convert return type to an instance of a wrapper
-    # class.
-    #
-    if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
-        t = fn_cursor.result_type.get_pointee().get_canonical()
-        return_cursor = find_struct( tu, t.spelling, require_definition=False)
-        if return_cursor:
-            return_extras = classextras.get( return_cursor.spelling)
-            if return_extras:
-                # Change return type to be instance of class wrapper.
-                return_type = rename.class_(return_cursor.spelling)
-                if g_show_details(return_cursor.type.spelling):
-                    log('{return_cursor.type.spelling=}'
-                            ' {return_cursor.spelling=}'
-                            ' {struct_name=}'
-                            ' {return_extras.copyable=}'
-                            ' {return_extras.constructor_raw=}'
-                            )
-                if return_extras.copyable and return_extras.constructor_raw:
-                    fn_h = f'{return_type} {name_args_h}'
-                    fn_cpp = f'{return_type} {name_args_cpp}'
-                    wrap_return = 'pointer'
-                else:
-                    if not return_extras.copyable:
-                        warning_not_copyable = True
-                    if not return_extras.constructor_raw:
-                        warning_no_raw_constructor = True
-    else:
-        # The fz_*() function returns by value. See whether we can convert its
-        # return type to an instance of a wrapping class.
-        #
-        # If so, we will use constructor that takes pointer to the fz_
-        # struct. C++ doesn't allow us to use address of temporary, so we
-        # generate code like this:
-        #
-        #   fz_quad_s ret = mupdf_snap_selection(...);
-        #   return Quad(&ret);
-        #
-        t = fn_cursor.result_type.get_canonical()
-        return_cursor = find_struct( tu, t.spelling)
-        if return_cursor:
-            tt = return_cursor.type.get_canonical()
-            if tt.kind == clang.cindex.TypeKind.ENUM:
-                # For now, we return this type directly with no wrapping.
-                pass
-            else:
-                return_extras = classextras.get( return_cursor.type.spelling)
-                return_type = rename.class_(return_cursor.type.spelling)
-                fn_h = f'{return_type} {decl_h}'
-                fn_cpp = f'{return_type} {decl_cpp}'
-                wrap_return = 'value'
-
-    if warning_not_copyable:
-        log( '*** warning: {decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} is not copyable.')
-    if warning_no_raw_constructor:
-        log( '*** warning: {decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} has no raw constructor.')
-
-    out_h.write( '\n')
-    out_h.write( f'    /* {comment} */\n')
-
-    # Copy any comment (indented) into class definition above method
-    # declaration.
-    if fn_cursor.raw_comment:
-        out_h.write( fn_cursor.raw_comment)
-
-    out_h.write( f'    FZ_FUNCTION {fn_h};\n')
-    out_cpp.write( f'/* {comment} */\n')
-
-    out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
-
-    # Write function body.
-
-
-
-
-
-
-    declaration_h = declaration_text( fn_cursor.result_type, name_args_h)
-    declaration_cpp = declaration_text( fn_cursor.result_type, name_args_cpp)
-    out_h.write( f'FZ_FUNCTION {declaration_h};\n')
-    out_h.write( '\n')
-
-    # Write function definition.
-    #
-    out_cpp.write( f'FZ_FUNCTION {declaration_cpp}\n')
-    out_cpp.write( '{\n')
-    return_type = fn_cursor.result_type.spelling
-    fncall = ''
-    fncall += f'{rename.function_raw(fn_cursor.mangled_name)}('
-    comma = ''
-    for arg in get_args( tu, fn_cursor, include_fz_context=False):
-        if arg.alt:
-            extras = get_fz_extras(arg.alt.type.spelling)
-            if extras.pod == 'inline':
-                fncall += f'{comma}{arg.name_python}.internal()'
-            elif extras.pod == 'none':
-                pass
-            elif extras.pod:
-                fncall += f'{comma}&{arg.name_python}.m_internal'
-            else:
-                fncall += f'{comma}{arg.name_python}.m_internal'
-        else:
-            fncall += f'{comma}{arg.name}'
-        comma = ', '
-    fncall += ')'
-    out_cpp.write( f'    {fncall}\n')
-    out_cpp.write( '}\n')
-    out_cpp.write( '\n')
-
-    if 0 and num_out_params:
-        make_outparam_helper_class_aware(
-                tu,
-                fn_cursor,
-                fnname,
-                fnname_wrapper,
-                generated,
-                )
-
-"""
 
 def make_function_wrapper_class_aware(
         tu,
@@ -4220,12 +4018,16 @@ def make_function_wrapper_class_aware(
             # use C++ class mupdf_foo_s.
             #
             const = ''
+            extras = classextras.get( arg.alt.type.spelling)
             if not arg.out_param:
-                extras2 = classextras.get( arg.alt.type.spelling)
-                if not extras2:
+                if not extras:
                     log('cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
-            if not arg.out_param and not classextras.get( arg.alt.type.spelling).pod:
+                    assert 0
+            if not arg.out_param and not extras.pod:
                 const = 'const '
+            if extras.pod == 'none':
+                jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}')
+                return
             decl_h +=   f'{const}{rename.class_(arg.alt.type.spelling)}& '
             decl_h += f'{arg.name}'
             decl_cpp += f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
@@ -4338,6 +4140,7 @@ def make_function_wrapper_class_aware(
 
     out_h.write( f'    FZ_FUNCTION {fn_h};\n')
 
+    out_cpp.write( f'\n')
     out_cpp.write( f'/* {comment} */\n')
 
     out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
@@ -6791,9 +6594,8 @@ def update_file_regress( text, filename, check_regression):
     '''
     Behaves like jlib.update_file(), but if check_regression is true and
     <filename> already exists with different content from <text>, we show a
-    diff and raise and exception.
+    diff and raise an exception.
     '''
-    assert 0
     text_old = jlib.update_file( text, filename, check_regression)
     if text_old:
         jlib.log( 'jlib.update_file() => {len(text_old)=}. {filename=} {check_regression}')
@@ -6806,7 +6608,7 @@ def update_file_regress( text, filename, check_regression):
                 f.write( text)
             jlib.log( 'Output would have changed: {filename}')
             jlib.system( f'diff -u {filename} {filename}-2', verbose=True, raise_errors=False, prefix=f'diff {os.path.relpath(filename)}: ', out='log')
-            raise Exception( f'Output would have changed: {filename}')
+            return Exception( f'Output would have changed: {filename}')
         else:
             jlib.log( 'Generated file unchanged: {filename}')
 
@@ -6906,16 +6708,17 @@ def cpp_source(
                     text = self.get()
                     if self.tabify:
                         text = tabify( self.filename, text)
-                    try:
-                        cr = check_regress
-                        if self.filename in (
-                                os.path.abspath( 'platform/c++/include/mupdf/classes2.h'),
-                                os.path.abspath( 'platform/c++/implementation/classes2.cpp'),
-                                ):
-                            cr = False
-                        jlib.log('calling update_file_regress() check_regress={cr}: {self.filename}')
-                        update_file_regress( text, self.filename, check_regress=cr)
-                    except Exception:
+                    cr = check_regress
+                    if self.filename in (
+                            os.path.abspath( 'platform/c++/include/mupdf/classes2.h'),
+                            os.path.abspath( 'platform/c++/implementation/classes2.cpp'),
+                            ):
+                        cr = False
+                    jlib.log('calling update_file_regress() check_regress={cr}: {self.filename=}')
+                    e = update_file_regress( text, self.filename, check_regression=cr)
+                    jlib.log('update_file_regress() returned => {e}')
+                    if e:
+                        jlib.log('update_file_regress() => {e=}')
                         self.regressions = True
             def get( self):
                 return self.file.getvalue()
@@ -7088,9 +6891,7 @@ def cpp_source(
     out_cpps.classes2.write(
             textwrap.dedent(
             '''
-            #include "classes2.h"
-
-            #include "mupdf/classes.h"
+            #include "mupdf/classes2.h"
             #include "mupdf/exceptions.h"
             #include "mupdf/internal.h"
 
