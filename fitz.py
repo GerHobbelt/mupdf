@@ -5,7 +5,12 @@
 # the SWIG interface file instead.
 
 
-
+from fitz_helper_defines import *
+from fitz_helper_python_i import *
+from fitz_i.py import *
+from fitz_init.py import *
+from fitz_utils.py import *
+from fitz_wrap_c.py import *
 
 
 from sys import version_info as _swig_python_version_info
@@ -3565,7 +3570,7 @@ class Document(_object):
         self.InsertedImages  = {}
         self._page_refs  = weakref.WeakValueDictionary()
 
-        this = _fitz.new_Document(filename, stream, filetype, rect, width, height, fontsize)
+        this = new_Document(filename, stream, filetype, rect, width, height, fontsize)
         try:
             self.this.append(this)
         except __builtin__.Exception:
@@ -3600,8 +3605,6 @@ class Document(_object):
         self.ShownPages = {}
         self.InsertedImages  = {}
 
-
-        val = _fitz.Document_close(self)
         self.thisown = False
 
         return val
