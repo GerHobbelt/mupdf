@@ -3941,6 +3941,527 @@ def make_function_wrapper(
                 generated,
                 )
 
+"""
+def make_function_wrapper_class_aware(
+        tu,
+        fn_cursor,
+        fnname,
+        fnname_wrapper,
+        out_h,
+        out_cpp,
+        generated,
+        ):
+    '''
+    Writes wrapper function that uses our core wrapper but receives and returns our
+    class wrappers instead of the underlying MuPDF structs.
+    '''
+    assert fn_cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL
+
+    verbose = fnname_wrapper == 'pdf_add_annot_ink_list'
+
+    num_out_params = 0
+    for arg in get_args( tu, fn_cursor, include_fz_context=False):
+        num_out_params += 1
+
+    # Write first line: <result_type> <fnname_wrapper> (<args>...)
+    #
+    comment = make_wrapper_comment( tu, fn_cursor, fnname, fnname_wrapper, indent='', is_method=False)
+    out_h.write( f'/* {comment}*/')
+    out_cpp.write( f'/* {comment}*/')
+
+    # Copy any comment into .h file before declaration.
+    if fn_cursor.raw_comment:
+        out_h.write( f'{fn_cursor.raw_comment}')
+        if not fn_cursor.raw_comment.endswith( '\n'):
+            out_h.write( '\n')
+
+    name_args_h = f'{fnname}('
+    name_args_cpp = f'{fnname}('
+    comma = ''
+    for arg in get_args( tu, fn_cursor, include_fz_context=False):
+        if verbose:
+            log( '{arg.cursor=} {arg.name=} {arg.separator=} {arg.alt=} {arg.out_param=}')
+        if arg.alt:
+            # This parameter is something like 'fz_foo* arg',
+            # which we convert to 'mupdf_foo_s& arg' so that the caller can
+            # use C++ class mupdf_foo_s.
+            const = ''
+            if not arg.out_param:
+                extras2 = classextras.get( arg.alt.type.spelling)
+                if not extras2:
+                    log('cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
+            if not arg.out_param and not classextras.get( arg.alt.type.spelling).pod:
+                const = 'const '
+            decl_h = f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
+
+        elif arg.out_param:
+            decl_h = ''
+            decl_h += '\n'
+            decl_h += '        #ifdef SWIG\n'
+            decl_h += '            ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
+            decl_h += '        #else\n'
+            decl_h += '            ' + declaration_text( arg.cursor.type, arg.name) + '\n'
+            decl_h += '        #endif\n'
+            decl_h += '        '
+        else:
+            decl_h = declaration_text( arg.cursor.type, arg.name, verbose=verbose)
+        if verbose:
+            log( '{decl_h=}')
+        name_args_h += f'{comma}{decl_h}'
+        decl_cpp = declaration_text( arg.cursor.type, arg.name)
+        name_args_cpp += f'{comma}{decl_cpp}'
+        comma = ', '
+
+    name_args_h += ')'
+    name_args_cpp += ')'
+
+    warning_not_copyable = False
+    warning_no_raw_constructor = False
+
+    return_cursor = None
+    return_type = None
+
+    fn_h = declaration_text( fn_cursor.result_type, name_args_h)
+    fn_cpp = declaration_text( fn_cursor.result_type, name_args_cpp)
+
+    # See whether we can convert return type to an instance of a wrapper
+    # class.
+    #
+    if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
+        t = fn_cursor.result_type.get_pointee().get_canonical()
+        return_cursor = find_struct( tu, t.spelling, require_definition=False)
+        if return_cursor:
+            return_extras = classextras.get( return_cursor.spelling)
+            if return_extras:
+                # Change return type to be instance of class wrapper.
+                return_type = rename.class_(return_cursor.spelling)
+                if g_show_details(return_cursor.type.spelling):
+                    log('{return_cursor.type.spelling=}'
+                            ' {return_cursor.spelling=}'
+                            ' {struct_name=}'
+                            ' {return_extras.copyable=}'
+                            ' {return_extras.constructor_raw=}'
+                            )
+                if return_extras.copyable and return_extras.constructor_raw:
+                    fn_h = f'{return_type} {name_args_h}'
+                    fn_cpp = f'{return_type} {name_args_cpp}'
+                    wrap_return = 'pointer'
+                else:
+                    if not return_extras.copyable:
+                        warning_not_copyable = True
+                    if not return_extras.constructor_raw:
+                        warning_no_raw_constructor = True
+    else:
+        # The fz_*() function returns by value. See whether we can convert its
+        # return type to an instance of a wrapping class.
+        #
+        # If so, we will use constructor that takes pointer to the fz_
+        # struct. C++ doesn't allow us to use address of temporary, so we
+        # generate code like this:
+        #
+        #   fz_quad_s ret = mupdf_snap_selection(...);
+        #   return Quad(&ret);
+        #
+        t = fn_cursor.result_type.get_canonical()
+        return_cursor = find_struct( tu, t.spelling)
+        if return_cursor:
+            tt = return_cursor.type.get_canonical()
+            if tt.kind == clang.cindex.TypeKind.ENUM:
+                # For now, we return this type directly with no wrapping.
+                pass
+            else:
+                return_extras = classextras.get( return_cursor.type.spelling)
+                return_type = rename.class_(return_cursor.type.spelling)
+                fn_h = f'{return_type} {decl_h}'
+                fn_cpp = f'{return_type} {decl_cpp}'
+                wrap_return = 'value'
+
+    if warning_not_copyable:
+        log( '*** warning: {decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} is not copyable.')
+    if warning_no_raw_constructor:
+        log( '*** warning: {decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} has no raw constructor.')
+
+    out_h.write( '\n')
+    out_h.write( f'    /* {comment} */\n')
+
+    # Copy any comment (indented) into class definition above method
+    # declaration.
+    if fn_cursor.raw_comment:
+        out_h.write( fn_cursor.raw_comment)
+
+    out_h.write( f'    FZ_FUNCTION {fn_h};\n')
+    out_cpp.write( f'/* {comment} */\n')
+
+    out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
+
+    # Write function body.
+
+
+
+
+
+
+    declaration_h = declaration_text( fn_cursor.result_type, name_args_h)
+    declaration_cpp = declaration_text( fn_cursor.result_type, name_args_cpp)
+    out_h.write( f'FZ_FUNCTION {declaration_h};\n')
+    out_h.write( '\n')
+
+    # Write function definition.
+    #
+    out_cpp.write( f'FZ_FUNCTION {declaration_cpp}\n')
+    out_cpp.write( '{\n')
+    return_type = fn_cursor.result_type.spelling
+    fncall = ''
+    fncall += f'{rename.function_raw(fn_cursor.mangled_name)}('
+    comma = ''
+    for arg in get_args( tu, fn_cursor, include_fz_context=False):
+        if arg.alt:
+            extras = get_fz_extras(arg.alt.type.spelling)
+            if extras.pod == 'inline':
+                fncall += f'{comma}{arg.name_python}.internal()'
+            elif extras.pod == 'none':
+                pass
+            elif extras.pod:
+                fncall += f'{comma}&{arg.name_python}.m_internal'
+            else:
+                fncall += f'{comma}{arg.name_python}.m_internal'
+        else:
+            fncall += f'{comma}{arg.name}'
+        comma = ', '
+    fncall += ')'
+    out_cpp.write( f'    {fncall}\n')
+    out_cpp.write( '}\n')
+    out_cpp.write( '\n')
+
+    if 0 and num_out_params:
+        make_outparam_helper_class_aware(
+                tu,
+                fn_cursor,
+                fnname,
+                fnname_wrapper,
+                generated,
+                )
+
+"""
+
+def make_function_wrapper_class_aware(
+        tu,
+        fn_cursor,
+        fnname,
+        fnname_wrapper,
+        out_h,
+        out_cpp,
+        generated,
+        ):
+    '''
+    Writes a function that calls <fnname>, translating args and return to
+    wrapper classes as possible.
+
+    Also appends python and C# code to generated.swig_python and
+    generated.swig_csharp if <generated> is not None.
+
+        tu
+            .
+        register_fn_use
+            Callback to keep track of what fz_*() fns have been used.
+        struct_name
+            E.g. fz_rect.
+        classname
+            E.g. Rect.
+        fnname
+            Name of fz_*() fn to wrap, e.g. fz_concat.
+        out_h
+        out_cpp
+            Where to write generated code.
+        static
+            If true, we generate a static method.
+
+            Otherwise we generate a normal class method, where first arg that
+            is type <struct_name> is omitted from the generated method's
+            prototype; in the implementation we use <this>.
+        constructor
+            If true, we write a constructor.
+        extras
+            None or ClassExtras instance.
+            Only used if <constructor> is true.
+        struct_cursor
+            None or cursor for the struct definition.
+            Only used if <constructor> is true.
+        duplicate_type:
+            If true, we have already generated a method with the same args, so
+            this generated method will be commented-out.
+        generated:
+            If not None and there are one or more out-params, we write
+            python code to generated.swig_python that overrides the default
+            SWIG-generated method to call our *_outparams_fn() alternative.
+        debug
+            Show extra diagnostics.
+    '''
+    assert fnname.startswith( ('fz_', 'pdf_'))
+
+    # Construct prototype fnname(args).
+    #
+    methodname = fnname
+    decl_h = f'{methodname}('
+    decl_cpp = f'{methodname}('
+    num_out_params = 0
+    comma = ''
+    debug = (fnname == 'pdf_page_write')
+    for arg in get_args( tu, fn_cursor):
+        if debug:
+            log( 'Looking at {struct_name=} {fnname=} {arg=}')
+        decl_h += comma
+        decl_cpp += comma
+        if arg.out_param:
+            num_out_params += 1
+        if arg.alt:
+            # This parameter is something like 'fz_foo* arg',
+            # which we convert to 'mupdf_foo_s& arg' so that the caller can
+            # use C++ class mupdf_foo_s.
+            #
+            const = ''
+            if not arg.out_param:
+                extras2 = classextras.get( arg.alt.type.spelling)
+                if not extras2:
+                    log('cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
+            if not arg.out_param and not classextras.get( arg.alt.type.spelling).pod:
+                const = 'const '
+            decl_h +=   f'{const}{rename.class_(arg.alt.type.spelling)}& '
+            decl_h += f'{arg.name}'
+            decl_cpp += f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
+        else:
+            logx( '{arg.spelling=}')
+            if arg.out_param:
+                decl_h += '\n'
+                decl_h += '            #ifdef SWIG\n'
+                decl_h += '                ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
+                decl_h += '            #else\n'
+                decl_h += '                ' + declaration_text( arg.cursor.type, arg.name) + '\n'
+                decl_h += '            #endif\n'
+                decl_h += '            '
+            else:
+                decl_h += declaration_text( arg.cursor.type, arg.name)
+            decl_cpp += declaration_text( arg.cursor.type, arg.name)
+        comma = ', '
+
+    decl_h += ')'
+    decl_cpp += ')'
+
+    comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True)
+
+    # If this is true, we explicitly construct a temporary from what the
+    # wrapped function returns.
+    #
+    wrap_return = None
+
+    warning_not_copyable = False
+    warning_no_raw_constructor = False
+
+    return_cursor = None
+    return_type = None
+    if 0:
+        fn_h = f'{decl_h}'
+        fn_cpp = f'{classname}::{decl_cpp}'
+    else:
+        fn_h = declaration_text( fn_cursor.result_type, decl_h)
+        fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
+
+        # See whether we can convert return type to an instance of a wrapper
+        # class.
+        #
+        if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
+            t = fn_cursor.result_type.get_pointee().get_canonical()
+            return_cursor = find_struct( tu, t.spelling, require_definition=False)
+            if return_cursor:
+                return_extras = classextras.get( return_cursor.spelling)
+                if return_extras:
+                    # Change return type to be instance of class wrapper.
+                    return_type = rename.class_(return_cursor.spelling)
+                    if g_show_details(return_cursor.type.spelling):
+                        log('{return_cursor.type.spelling=}'
+                                ' {return_cursor.spelling=}'
+                                ' {struct_name=} {return_extras.copyable=}'
+                                ' {return_extras.constructor_raw=}'
+                                )
+                    if return_extras.copyable and return_extras.constructor_raw:
+                        fn_h = f'{return_type} {decl_h}'
+                        fn_cpp = f'{return_type} {decl_cpp}'
+                        wrap_return = 'pointer'
+                    else:
+                        if not return_extras.copyable:
+                            warning_not_copyable = True
+                        if not return_extras.constructor_raw:
+                            warning_no_raw_constructor = True
+        else:
+            # The fz_*() function returns by value. See whether we can convert its
+            # return type to an instance of a wrapping class.
+            #
+            # If so, we will use constructor that takes pointer to the fz_
+            # struct. C++ doesn't allow us to use address of temporary, so we
+            # generate code like this:
+            #
+            #   fz_quad_s ret = mupdf_snap_selection(...);
+            #   return Quad(&ret);
+            #
+            t = fn_cursor.result_type.get_canonical()
+            return_cursor = find_struct( tu, t.spelling)
+            if return_cursor:
+                tt = return_cursor.type.get_canonical()
+                if tt.kind == clang.cindex.TypeKind.ENUM:
+                    # For now, we return this type directly with no wrapping.
+                    pass
+                else:
+                    return_extras = classextras.get( return_cursor.type.spelling)
+                    return_type = rename.class_(return_cursor.type.spelling)
+                    fn_h = f'{return_type} {decl_h}'
+                    fn_cpp = f'{return_type} {decl_cpp}'
+                    wrap_return = 'value'
+
+    if warning_not_copyable:
+        log( '*** warning: {decl_h}: Not able to return wrapping class {return_type}'
+                ' from {return_cursor.spelling}'
+                ' because {return_type} is not copyable.'
+                )
+    if warning_no_raw_constructor:
+        log( '*** warning: {decl_h}: Not able to return wrapping class {return_type}'
+                ' from {return_cursor.spelling}'
+                ' because {return_type} has no raw constructor.')
+
+    out_h.write( '\n')
+    out_h.write( f'    /* {comment} */\n')
+
+    # Copy any comment (indented) into class definition above method
+    # declaration.
+    if fn_cursor.raw_comment:
+        for line in fn_cursor.raw_comment.split( '\n'):
+            out_h.write( f'    {line}\n')
+
+    out_h.write( f'    FZ_FUNCTION {fn_h};\n')
+
+    out_cpp.write( f'/* {comment} */\n')
+
+    out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
+
+    if 0:
+        class_write_method_body(
+                tu,
+                struct_name,
+                classname,
+                fnname,
+                out_cpp,
+                extras,
+                struct_cursor,
+                fn_cursor,
+                return_cursor,
+                wrap_return,
+                )
+
+
+
+    out_cpp.write( f'{{\n')
+    return_void = (fn_cursor.result_type.spelling == 'void')
+
+    # Write function call.
+    if 0 and constructor:
+        if extras.pod:
+            if extras.pod == 'inline':
+                out_cpp.write( f'    *({struct_name}*) &this->{get_field0(struct_cursor.type).spelling} = ')
+            else:
+                out_cpp.write( f'    this->m_internal = ')
+            if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
+                out_cpp.write( f'*')
+        else:
+            out_cpp.write( f'    this->m_internal = ')
+            if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
+                pass
+            else:
+                assert 0, 'cannot handle underlying fn returning by value when not pod.'
+        out_cpp.write( f'{rename.function_call(fnname)}(')
+
+    elif wrap_return == 'value':
+        out_cpp.write( f'    {return_cursor.spelling} temp = mupdf::{rename.function(fnname)}(')
+    elif wrap_return == 'pointer':
+        out_cpp.write( f'    {return_cursor.spelling}* temp = mupdf::{rename.function(fnname)}(')
+    elif return_void:
+        out_cpp.write( f'    mupdf::{rename.function(fnname)}(')
+    else:
+        out_cpp.write( f'    auto ret = mupdf::{rename.function(fnname)}(')
+
+    sep = ''
+    for arg in get_args( tu, fn_cursor):
+        out_cpp.write( sep)
+        have_used_this = write_call_arg(
+                arg,
+                None,#arg_classname,
+                have_used_this=True,    # A hack to force write_call_arg() to not attempt to use 'this'.
+                out_cpp=out_cpp,
+                )
+        sep = ', '
+    out_cpp.write( f');\n')
+
+    if wrap_return == 'pointer' and has_refs( return_cursor.type):
+        # This MuPDF function returns pointer to a struct which uses reference
+        # counting. If the function returns a borrowed reference, we need
+        # to increment its reference count before passing it to our wrapper
+        # class's constructor.
+        #
+        #jlib.log('Function returns pointer to {return_cursor=}')
+        return_struct_name = clip(return_cursor.spelling, 'struct ')
+        if return_struct_name.startswith('fz_'):
+            prefix = 'fz_'
+        elif return_struct_name.startswith('pdf_'):
+            prefix = 'pdf_'
+        else:
+            prefix = None
+        if prefix:
+            for i in ('new', 'create', 'find', 'load', 'open', 'keep'):
+                if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
+                    break
+            else:
+                # This function returns a borrowed reference.
+                suffix = return_struct_name[ len(prefix):]
+                keep_fn = f'{prefix}keep_{suffix}'
+                #jlib.log('Function assumed to return borrowed reference: {fnname=} => {return_struct_name=} {keep_fn=}')
+                out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
+
+    if wrap_return == 'value':
+        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(&temp);\n')
+    elif wrap_return == 'pointer':
+        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
+
+    if 0:
+        if has_refs(struct_cursor.type):
+            # Write code that does runtime checking of reference counts.
+            out_cpp.write( f'    if (s_check_refs)\n')
+            out_cpp.write( f'    {{\n')
+            if constructor:
+                out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
+            else:
+                out_cpp.write( f'        s_{classname}_refs_check.check( this, __FILE__, __LINE__, __FUNCTION__);\n')
+            out_cpp.write( f'    }}\n')
+
+    if not return_void:
+        out_cpp.write( f'    return ret;\n')
+
+    out_cpp.write( f'}}\n')
+    out_cpp.write( f'\n')
+
+
+
+
+
+    if 0 and generated and num_out_params:
+        make_python_class_method_outparam_override(
+                tu,
+                fn_cursor,
+                fnname,
+                generated.swig_python,
+                struct_name,
+                classname,
+                return_type,
+                )
+
+
 
 def make_namespace_open( namespace, out):
     if namespace:
@@ -4315,6 +4836,8 @@ def make_function_wrappers(
         out_functions_cpp,
         out_internal_h,
         out_internal_cpp,
+        out_functions_h2,
+        out_functions_cpp2,
         generated,
         ):
     '''
@@ -4493,6 +5016,8 @@ def make_function_wrappers(
         #
         temp_out_h = io.StringIO()
         temp_out_cpp = io.StringIO()
+        temp_out_h2 = io.StringIO()
+        temp_out_cpp2 = io.StringIO()
         try:
             make_function_wrapper(
                     tu,
@@ -4503,6 +5028,15 @@ def make_function_wrappers(
                     temp_out_cpp,
                     generated,
                     )
+            make_function_wrapper_class_aware(
+                    tu,
+                    cursor,
+                    fnname,
+                    fnname,
+                    temp_out_h2,
+                    temp_out_cpp2,
+                    generated,
+                    )
         except Clang6FnArgsBug as e:
             #log( jlib.exception_info())
             log( 'Unable to wrap function {cursor.spelling} becase: {e}')
@@ -4510,6 +5044,9 @@ def make_function_wrappers(
 
         out_functions_h.write( temp_out_h.getvalue())
         out_functions_cpp.write( temp_out_cpp.getvalue())
+        out_functions_h2.write( temp_out_h2.getvalue())
+        out_functions_cpp2.write( temp_out_cpp2.getvalue())
+
         if fnname in ('fz_lookup_metadata', 'pdf_lookup_metadata'):
             # Output convenience wrapper for fz_lookup_metadata() and
             # pdf_lookup_metadata() that are easily SWIG-able - return a
@@ -4549,6 +5086,7 @@ def make_function_wrappers(
                         return ret;
                     }}
                     '''))
+
 
 
 find_struct_cache = None
@@ -5806,6 +6344,22 @@ def class_to_string_fns(
     out_cpp.write( f'}}\n')
 
 
+def class_write_function(
+        tu,
+        register_fn_use,
+        struct_name,
+        classname,
+        fnname,
+        temp_out_h,
+        temp_out_cpp,
+        extras,
+        struct_cursor,
+        ):
+    '''
+    '''
+    pass
+
+
 def class_wrapper(
         tu,
         register_fn_use,
@@ -5929,6 +6483,17 @@ def class_wrapper(
                     extras=extras,
                     struct_cursor=struct_cursor,
                     duplicate_type=duplicate_type,
+                    )
+            class_write_function(
+                    tu,
+                    register_fn_use,
+                    struct_name,
+                    classname,
+                    fnname,
+                    temp_out_h,
+                    temp_out_cpp,
+                    extras,
+                    struct_cursor,
                     )
         except Clang6FnArgsBug as e:
             log( 'Unable to wrap function {fnname} becase: {e}')
@@ -6228,14 +6793,19 @@ def update_file_regress( text, filename, check_regression):
     <filename> already exists with different content from <text>, we show a
     diff and raise and exception.
     '''
+    assert 0
     text_old = jlib.update_file( text, filename, check_regression)
+    if text_old:
+        jlib.log( 'jlib.update_file() => {len(text_old)=}. {filename=} {check_regression}')
+    else:
+        jlib.log( 'jlib.update_file() => {text_old)=}. {filename=} {check_regression}')
     if check_regression:
         if text_old is not None:
             # Existing content differs and <check_regression> is true.
             with open( f'{filename}-2', 'w') as f:
                 f.write( text)
             jlib.log( 'Output would have changed: {filename}')
-            jlib.system( f'diff -u {filename} {filename}-2', verbose=True, raise_errors=False, prefix='diff: ', out='log')
+            jlib.system( f'diff -u {filename} {filename}-2', verbose=True, raise_errors=False, prefix=f'diff {os.path.relpath(filename)}: ', out='log')
             raise Exception( f'Output would have changed: {filename}')
         else:
             jlib.log( 'Generated file unchanged: {filename}')
@@ -6318,6 +6888,7 @@ def cpp_source(
                 self.tabify = tabify
                 self.file = io.StringIO()
                 self.line_begin = True
+                self.regressions = True
             def write( self, text, fileline=False):
                 if fileline:
                     # Generate #line <line> "<filename>" for our caller's
@@ -6336,9 +6907,16 @@ def cpp_source(
                     if self.tabify:
                         text = tabify( self.filename, text)
                     try:
-                        update_file_regress( text, self.filename, check_regress)
+                        cr = check_regress
+                        if self.filename in (
+                                os.path.abspath( 'platform/c++/include/mupdf/classes2.h'),
+                                os.path.abspath( 'platform/c++/implementation/classes2.cpp'),
+                                ):
+                            cr = False
+                        jlib.log('calling update_file_regress() check_regress={cr}: {self.filename}')
+                        update_file_regress( text, self.filename, check_regress=cr)
                     except Exception:
-                        num_regressions += 1
+                        self.regressions = True
             def get( self):
                 return self.file.getvalue()
     else:
@@ -6707,6 +7285,8 @@ def cpp_source(
             out_cpps.functions,
             out_hs.internal,
             out_cpps.internal,
+            out_hs.classes2,
+            out_cpps.classes2,
             generated,
             )
 
