@@ -3968,6 +3968,8 @@ def make_function_wrapper_class_aware(
             E.g. Rect.
         fnname
             Name of fz_*() fn to wrap, e.g. fz_concat.
+        fnname_wrapper
+            Name of generated function.
         out_h
         out_cpp
             Where to write generated code.
@@ -3999,9 +4001,8 @@ def make_function_wrapper_class_aware(
 
     # Construct prototype fnname(args).
     #
-    methodname = fnname
-    decl_h = f'{methodname}('
-    decl_cpp = f'{methodname}('
+    decl_h = f'{fnname_wrapper}('
+    decl_cpp = f'{fnname_wrapper}('
     num_out_params = 0
     comma = ''
     debug = (fnname == 'pdf_page_write')
@@ -4049,7 +4050,7 @@ def make_function_wrapper_class_aware(
     decl_h += ')'
     decl_cpp += ')'
 
-    comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True)
+    comment = make_wrapper_comment( tu, fn_cursor, fnname, fnname_wrapper, indent='    ', is_method=True)
 
     # If this is true, we explicitly construct a temporary from what the
     # wrapped function returns.
@@ -4835,7 +4836,7 @@ def make_function_wrappers(
                     tu,
                     cursor,
                     fnname,
-                    fnname,
+                    f'm{fnname}',
                     temp_out_h2,
                     temp_out_cpp2,
                     generated,
@@ -6599,8 +6600,6 @@ def update_file_regress( text, filename, check_regression):
     text_old = jlib.update_file( text, filename, check_regression)
     if text_old:
         jlib.log( 'jlib.update_file() => {len(text_old)=}. {filename=} {check_regression}')
-    else:
-        jlib.log( 'jlib.update_file() => {text_old)=}. {filename=} {check_regression}')
     if check_regression:
         if text_old is not None:
             # Existing content differs and <check_regression> is true.
@@ -7442,9 +7441,10 @@ def build_swig(
     #
     common = f'''
             #include <stdexcept>
-            #include "mupdf/functions.h"
 
+            #include "mupdf/functions.h"
             #include "mupdf/classes.h"
+            #include "mupdf/classes2.h"
             '''
     if language == 'python':
         common += f'''
@@ -7509,19 +7509,24 @@ def build_swig(
             # This is also an enum which we don't want to ignore. SWIGing the
             # function is hopefully harmless.
             pass
-        elif fnname == 'pdf_string_from_annot_type':
+        elif 0 and fnname == 'pdf_string_from_annot_type':  # causes duplicate symbol with classes2.cpp and python.
             pass
         else:
             text += f'%ignore {fnname};\n'
 
+    for i in (
+            'fz_append_vprintf',
+            'fz_error_stack_slot',
+            'fz_format_string',
+            'fz_vsnprintf',
+            'fz_vthrow',
+            'fz_vwarn',
+            'fz_write_vprintf',
+            ):
+        text += f'%ignore {i};\n'
+        text += f'%ignore m{i};\n'
+
     text += textwrap.dedent(f'''
-            %ignore fz_append_vprintf;
-            %ignore fz_error_stack_slot;
-            %ignore fz_format_string;
-            %ignore fz_vsnprintf;
-            %ignore fz_vthrow;
-            %ignore fz_vwarn;
-            %ignore fz_write_vprintf;
 
             // Not implemented in mupdf.so: fz_colorspace_name_process_colorants
             %ignore fz_colorspace_name_process_colorants;
