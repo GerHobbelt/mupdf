@@ -3590,22 +3590,25 @@ PyObject *dictkey_yres;
 
 
 
-//-----------------------------------------------------------------------------
-// Functions converting betwenn PySequences and fitz geometry objects
-//-----------------------------------------------------------------------------
-static int
-JM_INT_ITEM(PyObject *obj, Py_ssize_t idx, int *result)
-{
-    PyObject *temp = PySequence_ITEM(obj, idx);
-    if (!temp) return 1;
-    *result = (int) PyLong_AsLong(temp);
-    Py_DECREF(temp);
-    if (PyErr_Occurred()) {
-        PyErr_Clear();
-        return 1;
-    }
-    return 0;
-}
+#-----------------------------------------------------------------------------
+# Functions converting betwenn PySequences and fitz geometry objects
+#-----------------------------------------------------------------------------
+def JM_INT_ITEM(obj, idx):
+    '''
+    Unlike original C version, this returns the item and raises an exception if
+    <idx> is out of range.
+
+    So code liks this:
+        if (JM_INT_ITEM(page_id, 1, &pno) == 1) {
+            THROWMSG(gctx, "bad page id");
+        }
+
+    becomes:
+        pno = JM_INT_ITEM(page_id, 1)
+    '''
+    if idx > len(obj):
+        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}'
+    return int(obj[idx])
 
 static int
 JM_FLOAT_ITEM(PyObject *obj, Py_ssize_t idx, float *result)
@@ -7564,84 +7567,67 @@ void retainpages(fz_context *ctx, globals *glo, PyObject *liste)
     pdf_drop_obj(ctx, root);
 }
 
-PyObject *remove_dest_range(fz_context *ctx, pdf_document *pdf, int first, int last)
-{
-    int i, pno, pagecount = pdf_count_pages(ctx, pdf);
-    if (!INRANGE(first, 0, pagecount-1) ||
-        !INRANGE(last, 0, pagecount-1) ||
-        (first > last))
-        Py_RETURN_NONE;
-    fz_try(ctx) {
-        for (i = 0; i < pagecount; i++) {
-            if (INRANGE(i, first, last)) continue;
+def remove_dest_range(pdf, first, last):
 
-            pdf_obj *pageref = pdf_lookup_page_obj(ctx, pdf, i);
-            pdf_obj *annots = pdf_dict_get(ctx, pageref, PDF_NAME(Annots));
-            pdf_obj *target;
-            if (!annots) continue;
-            int len = pdf_array_len(ctx, annots);
-            int j;
-            for (j = len - 1; j >= 0; j -= 1) {
-                pdf_obj *o = pdf_array_get(ctx, annots, j);
-                if (!pdf_name_eq(ctx, pdf_dict_get(ctx, o, PDF_NAME(Subtype)), PDF_NAME(Link)))
-                    continue;
-                pdf_obj *action = pdf_dict_get(ctx, o, PDF_NAME(A));
-                pdf_obj *dest =  pdf_dict_get(ctx, o, PDF_NAME(Dest));
-                if (action) {
-                    if (!pdf_name_eq(ctx, pdf_dict_get(ctx, action,
-                        PDF_NAME(S)), PDF_NAME(GoTo)))
-                        continue;
-                    dest = pdf_dict_get(ctx, action, PDF_NAME(D));
+    pagecount = mpdf_count_pages(pdf)
+    if (not INRANGE(first, 0, pagecount-1)
+            or not INRANGE(last, 0, pagecount-1)
+            or first > last
+            ):
+        return
+    try:
+        for i in range(pagecount):
+            if INRANGE(i, first, last):
+                continue
+
+            pageref = mpdf_lookup_page_obj(pdf, i)
+            annots = mpdf_dict_get(pageref, PDF_NAME(Annots))
+            if not annots.m_internal:
+                continue
+            len_ = mpdf_array_len(annots)
+            for j in range(len - 1, -1, -1):
+                o = mpdf_array_get(annots, j)
+                if not mpdf_name_eq(mpdf_dict_get(o, PDF_NAME(Subtype)), PDF_NAME(Link)):
+                    continue
+                action = mpdf_dict_get(o, PDF_NAME(A))
+                dest =  mpdf_dict_get(o, PDF_NAME(Dest))
+                action.m_internal:
+                    if not mpdf_name_eq(mpdf_dict_get(action, PDF_NAME(S)), PDF_NAME(GoTo)):
+                        continue
+                    dest = mpdf_dict_get(action, PDF_NAME(D))
                 }
-                pno = -1;
-                if (pdf_is_array(ctx, dest)) {
-                    target = pdf_array_get(ctx, dest, 0);
-                    pno = pdf_lookup_page_number(ctx, pdf, target);
+                pno = -1
+                if mpdf_is_array(dest):
+                    target = mpdf_array_get(dest, 0)
+                    pno = mpdf_lookup_page_number(pdf, target)
                 }
-                else if (pdf_is_string(ctx, dest)) {
-                    pno = pdf_lookup_anchor(ctx, pdf,
-                                            pdf_to_text_string(ctx, dest),
-                                            NULL, NULL);
+                elif mpdf_is_string(dest):
+                    pno = mpdf_lookup_anchor(pdf, pdf_to_text_string(ctx, dest), None, None)
                 }
-                if (INRANGE(pno, first, last)) {
-                    pdf_array_delete(ctx, annots, j);
-                }
-            }
-        }
-    }
-    fz_catch(ctx) {
-        return NULL;
-    }
-    Py_RETURN_NONE;
-}
+                if INRANGE(pno, first, last):
+                    mpdf_array_delete(annots, j)
+    except Exception:
+        pass
 
 
-//-----------------------------------------------------------------------------
-// Read and concatenate a PDF page's /Conents object(s) in a buffer
-//-----------------------------------------------------------------------------
-fz_buffer *JM_read_contents(fz_context * ctx, pdf_obj * pageref)
-{
+#-----------------------------------------------------------------------------
+# Read and concatenate a PDF page's /Conents object(s) in a buffer
+#-----------------------------------------------------------------------------
+def JM_read_contents(pageref):
     fz_buffer *res = NULL, *nres = NULL;
     int i;
-    fz_try(ctx) {
-        pdf_obj *contents = pdf_dict_get(ctx, pageref, PDF_NAME(Contents));
-        if (pdf_is_array(ctx, contents)) {
-            res = fz_new_buffer(ctx, 1024);
-            for (i = 0; i < pdf_array_len(ctx, contents); i++) {
-                nres = pdf_load_stream(ctx, pdf_array_get(ctx, contents, i));
-                fz_append_buffer(ctx, res, nres);
-                fz_drop_buffer(ctx, nres);
-            }
-        }
-        else if (contents) {
-            res = pdf_load_stream(ctx, contents);
-        }
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-    return res;
-}
+    try:
+        contents = mpdf_dict_get(pageref, PDF_NAME(Contents))
+        if mpdf_is_array(, contents):
+            res = mfz_new_buffer(1024)
+            for i in range(mpdf_array_len(contents)):
+                nres = mpdf_load_stream(mpdf_array_get(contents, i))
+                mfz_append_buffer(res, nres)
+        elif contents.m_internal:
+            res = mpdf_load_stream(contents)
+    except Exception:
+        raise
+    return res
 
 //-----------------------------------------------------------------------------
 // Make an XObject from a PDF page
