@@ -63,6 +63,7 @@
 # endif
 #endif
 
+ HEAD
 #ifndef SWIGUNUSEDPARM
 # ifdef __cplusplus
 #   define SWIGUNUSEDPARM(p)
@@ -70,6 +71,10 @@
 #   define SWIGUNUSEDPARM(p) p SWIGUNUSED
 # endif
 #endif
+
+def SWIG_From_int(value):
+    return int(value)
+ 9a7db4fe6 (fitz*.py)
 
 /* internal SWIG method */
 #ifndef SWIGINTERN
@@ -90,6 +95,7 @@
 #  endif
 #endif
 
+ HEAD
 #ifndef SWIGEXPORT
 # if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)
 #   if defined(STATIC_LINKED)
@@ -140,9 +146,17 @@
 # pragma warning disable 592
 #endif
 
+    becomes:
+        pno = JM_INT_ITEM(page_id, 1)
+    '''
+    if idx > len(obj):
+        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}')
+    return int(obj[idx])
+ 9a7db4fe6 (fitz*.py)
+
 def JM_FLOAT_ITEM(obj, idx):
     if idx > len(obj):
-        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}'
+        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}')
     return float(obj[idx])
  3dbfc3b81 (fitz*.py: wip)
 
@@ -183,8 +197,8 @@ def JM_FLOAT_ITEM(obj, idx):
 def JM_rect_from_py(r):
     if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
         return fz_infinite_rect;
-    Py_ssize_t i;
     f = [0, 0, 0, 0]
+ HEAD
  3dbfc3b81 (fitz*.py: wip)
 
 /*
@@ -195,6 +209,10 @@ def JM_rect_from_py(r):
   But only do this if strictly necessary, ie, if you have problems
   with your compiler or suchlike.
 */
+
+    for i in range(4):
+        f[i] = JM_FLOAT_ITEM(r, i)
+ 9a7db4fe6 (fitz*.py)
 
  HEAD
 #ifndef SWIGRUNTIME
@@ -250,15 +268,25 @@ def JM_py_from_irect(r):
 def JM_point_from_py(p):
  3dbfc3b81 (fitz*.py: wip)
 
+ HEAD
 /*
    Flags/methods for returning states.
+
+    p0 = mfz_make_point(0, 0)
+    if not p or not PySequence_Check(p) or PySequence_Size(p) != 2:
+        return p0
+ 9a7db4fe6 (fitz*.py)
 
    The SWIG conversion methods, as ConvertPtr, return an integer
    that tells if the conversion was successful or not. And if not,
    an error code can be returned (see swigerrors.swg for the codes).
 
+ HEAD
    Use the following macros/flags to set or process the returning
    states.
+
+    return mfz_make_point(x, y)
+ 9a7db4fe6 (fitz*.py)
 
    In old versions of SWIG, code such as the following was usually written:
 
@@ -268,7 +296,17 @@ def JM_point_from_py(p):
        //fail code
      }
 
+ HEAD
    Now you can be more explicit:
+
+#-----------------------------------------------------------------------------
+# PySequence to fz_matrix. Default: fz_identity
+#-----------------------------------------------------------------------------
+def JM_matrix_from_py(m):
+    if not m or not PySequence_Check(m) or PySequence_Size(m) != 6:
+        return fz_identity;
+    return mfz_make_matrix(m[0], m[1], m[2], m[3], m[4], m[5])
+ 9a7db4fe6 (fitz*.py)
 
     int res = SWIG_ConvertPtr(obj,vptr,ty.flags);
     if (SWIG_IsOK(res)) {
@@ -299,9 +337,14 @@ def JM_point_from_py(p):
 # Else must be four pairs of floats.
 #-----------------------------------------------------------------------------
 def JM_quad_from_py(r):
+ HEAD
     fz_quad q = mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
     fz_point p = [0, 0, 0, 0]
  3dbfc3b81 (fitz*.py: wip)
+
+    q = mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
+    p = [0, 0, 0, 0]
+ 9a7db4fe6 (fitz*.py)
 
    I.e., now SWIG_ConvertPtr can return new objects and you can
    identify the case and take care of the deallocation. Of course that
@@ -321,6 +364,7 @@ def JM_quad_from_py(r):
         }
       }
 
+ HEAD
    Of course, returning the plain '0(success)/-1(fail)' still works, but you can be
    more explicit by returning SWIG_BADOBJ, SWIG_ERROR or any of the
    SWIG errors code.
@@ -385,6 +429,23 @@ SWIGINTERNINLINE int SWIG_CheckState(int r) {
 #  define SWIG_CheckState(r) (SWIG_IsOK(r) ? 1 : 0)
 #endif
 
+
+    for i in range(4):
+        obj = PySequence_ITEM(r, i);  # next point item
+        if not obj or not PySequence_Check(obj) or PySequence_Size(obj) != 2:
+            return q  # invalid: cancel the rest
+
+        try:
+            p[i].x = JM_FLOAT_ITEM(obj, 0)
+            p[i].y = JM_FLOAT_ITEM(obj, 1)
+        except Exception:
+            return q
+    q.ul = p[0];
+    q.ur = p[1];
+    q.ll = p[2];
+    q.lr = p[3];
+    return q
+ 9a7db4fe6 (fitz*.py)
 
 #-----------------------------------------------------------------------------
 # PySequence from fz_quad.
@@ -795,11 +856,8 @@ SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 '''
 
 # redirect MuPDF warnings
-void JM_mupdf_warning(user, message)
-{
+def JM_mupdf_warning(user, message):
     LIST_APPEND_DROP(JM_mupdf_warnings_store, JM_EscapeStrFromStr(message))
-}
-
 
 def PySys_WriteStderr(text):
     sys.stderr.write(text)
@@ -816,7 +874,7 @@ def JM_mupdf_error(user, message):
 
 
 # a simple tracer
-void JM_TRACE(id)
+def JM_TRACE(id):
     PySys_WriteStdout("%s\n", id);
  3dbfc3b81 (fitz*.py: wip)
 
@@ -29459,7 +29517,7 @@ SWIG_init(void) {
 # Update a color float array with values from a Python sequence.
 # Any error condition is treated as a no-op.
 #----------------------------------------------------------------------------
-def JM_color_FromSequence(color, col[4]):
+def JM_color_FromSequence(color, col):
     if not color or (not PySequence_Check(color) and not PyFloat_Check(color)):
         return 1
 
@@ -29475,7 +29533,7 @@ def JM_color_FromSequence(color, col[4]):
         return 1
 
 
-    for i inrange(len_):
+    for i in range(len_):
         col[i] = color[i]
     return len_
 
@@ -29533,7 +29591,6 @@ def JM_compress_buffer(inbuffer):
 #void JM_update_stream(fz_context *ctx, pdf_document *doc, pdf_obj *obj, fz_buffer *buffer, int compress)
 def JM_update_stream(doc, obj, buffer_, compress):
 
-    fz_buffer *nres = NULL;
     len_, _ = mfz_buffer_storage(buffer_)
     nlen = len_
 
@@ -29541,7 +29598,7 @@ def JM_update_stream(doc, obj, buffer_, compress):
         nres = JM_compress_buffer(buffer_)
         nlen, _ = mfz_buffer_storage(nres)
 
-    if (nlen < len_ and compress==1:    # was it worth the effort?
+    if nlen < len_ and compress==1:    # was it worth the effort?
         mpdf_dict_put(obj, PDF_NAME(Filter), PDF_NAME(FlateDecode))
         mpdf_update_stream(doc, obj, nres, 1)
     else:
