@@ -448,4 +448,6 @@ Built for Python %i.%i on %s (%i-bit).
     64 if sys.maxsize > 2 ** 32 else 32,
 )
 
-restore_aliases()
+# fixme - enable this?
+if 0:
+    restore_aliases()

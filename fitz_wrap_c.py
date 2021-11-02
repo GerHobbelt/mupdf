@@ -29,7 +29,7 @@ TEXT_FONT_MONOSPACED = 8
 TEXT_FONT_BOLD = 16
 
 
-def SWIG_From_int(int value):
+def SWIG_From_int(value):
     return int(value)
 
 
@@ -50,12 +50,12 @@ def JM_INT_ITEM(obj, idx):
         pno = JM_INT_ITEM(page_id, 1)
     '''
     if idx > len(obj):
-        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}'
+        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}')
     return int(obj[idx])
 
 def JM_FLOAT_ITEM(obj, idx):
     if idx > len(obj):
-        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}'
+        raise Exception(f'Bad idx={idx}, len(obj)={len(obj)}')
     return float(obj[idx])
 
 def PySequence_Check(r):
@@ -70,9 +70,7 @@ def PySequence_Size(r):
 def JM_rect_from_py(r):
     if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
         return fz_infinite_rect;
-    Py_ssize_t i;
     f = [0, 0, 0, 0]
-
     for i in range(4):
         f[i] = JM_FLOAT_ITEM(r, i)
 
@@ -108,7 +106,7 @@ def JM_py_from_irect(r):
 #-----------------------------------------------------------------------------
 def JM_point_from_py(p):
 
-    fz_point p0 = mfz_make_point(0, 0)
+    p0 = mfz_make_point(0, 0)
     if not p or not PySequence_Check(p) or PySequence_Size(p) != 2:
         return p0
 
@@ -116,7 +114,6 @@ def JM_point_from_py(p):
     y = JM_FLOAT_ITEM(p, 1)
 
     return mfz_make_point(x, y)
-}
 
 #-----------------------------------------------------------------------------
 # PySequence from fz_point
@@ -129,7 +126,7 @@ def JM_py_from_point(p):
 # PySequence to fz_matrix. Default: fz_identity
 #-----------------------------------------------------------------------------
 def JM_matrix_from_py(m):
-    if (!m or !PySequence_Check(m) or PySequence_Size(m) != 6)
+    if not m or not PySequence_Check(m) or PySequence_Size(m) != 6:
         return fz_identity;
     return mfz_make_matrix(m[0], m[1], m[2], m[3], m[4], m[5])
 
@@ -144,8 +141,8 @@ def JM_py_from_matrix(m):
 # Else must be four pairs of floats.
 #-----------------------------------------------------------------------------
 def JM_quad_from_py(r):
-    fz_quad q = mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
-    fz_point p = [0, 0, 0, 0]
+    q = mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
+    p = [0, 0, 0, 0]
 
     if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
         return q
@@ -170,7 +167,6 @@ def JM_quad_from_py(r):
     q.ll = p[2];
     q.lr = p[3];
     return q
-}
 
 #-----------------------------------------------------------------------------
 # PySequence from fz_quad.
@@ -250,11 +246,8 @@ def JM_valid_chars(font, arr):
 '''
 
 # redirect MuPDF warnings
-void JM_mupdf_warning(user, message)
-{
+def JM_mupdf_warning(user, message):
     LIST_APPEND_DROP(JM_mupdf_warnings_store, JM_EscapeStrFromStr(message))
-}
-
 
 def PySys_WriteStderr(text):
     sys.stderr.write(text)
@@ -271,7 +264,7 @@ def JM_mupdf_error(user, message):
 
 
 # a simple tracer
-void JM_TRACE(id)
+def JM_TRACE(id):
     PySys_WriteStdout("%s\n", id);
 
 
@@ -402,7 +395,7 @@ PyObject *JM_fitz_config()
 # Update a color float array with values from a Python sequence.
 # Any error condition is treated as a no-op.
 #----------------------------------------------------------------------------
-def JM_color_FromSequence(color, col[4]):
+def JM_color_FromSequence(color, col):
     if not color or (not PySequence_Check(color) and not PyFloat_Check(color)):
         return 1
 
@@ -418,7 +411,7 @@ def JM_color_FromSequence(color, col[4]):
         return 1
 
 
-    for i inrange(len_):
+    for i in range(len_):
         col[i] = color[i]
     return len_
 
@@ -476,7 +469,6 @@ def JM_compress_buffer(inbuffer):
 #void JM_update_stream(fz_context *ctx, pdf_document *doc, pdf_obj *obj, fz_buffer *buffer, int compress)
 def JM_update_stream(doc, obj, buffer_, compress):
 
-    fz_buffer *nres = NULL;
     len_, _ = mfz_buffer_storage(buffer_)
     nlen = len_
 
@@ -484,7 +476,7 @@ def JM_update_stream(doc, obj, buffer_, compress):
         nres = JM_compress_buffer(buffer_)
         nlen, _ = mfz_buffer_storage(nres)
 
-    if (nlen < len_ and compress==1:    # was it worth the effort?
+    if nlen < len_ and compress==1:    # was it worth the effort?
         mpdf_dict_put(obj, PDF_NAME(Filter), PDF_NAME(FlateDecode))
         mpdf_update_stream(doc, obj, nres, 1)
     else:
