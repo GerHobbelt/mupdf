@@ -1,5 +1,3 @@
-%inline %{
-/*
 # ------------------------------------------------------------------------
 # Copyright 2020-2021, Harald Lieder, mailto:harald.lieder@outlook.com
 # License: GNU AFFERO GPL 3.0, https://www.gnu.org/licenses/agpl-3.0.html
@@ -8,15 +6,15 @@
 # lightweight PDF, XPS, and E-book viewer, renderer and toolkit which is
 # maintained and developed by Artifex Software, Inc. https://artifex.com.
 # ------------------------------------------------------------------------
-*/
-//----------------------------------------------------------------------------
-// general
-//----------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------
+# general
+#----------------------------------------------------------------------------
 #define EPSILON 1e-5
 
-//----------------------------------------------------------------------------
-// annotation types
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# annotation types
+#----------------------------------------------------------------------------
 #define PDF_ANNOT_TEXT 0
 #define PDF_ANNOT_LINK 1
 #define PDF_ANNOT_FREE_TEXT 2
@@ -47,16 +45,16 @@
 #define PDF_ANNOT_PROJECTION 27
 #define PDF_ANNOT_UNKNOWN -1
 
-//------------------------
-// redaction annot options
-//------------------------
+#------------------------
+# redaction annot options
+#------------------------
 #define PDF_REDACT_IMAGE_NONE 0
 #define PDF_REDACT_IMAGE_REMOVE 1
 #define PDF_REDACT_IMAGE_PIXELS 2
 
-//----------------------------------------------------------------------------
-// annotation flag bits
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# annotation flag bits
+#----------------------------------------------------------------------------
 #define PDF_ANNOT_IS_INVISIBLE 1 << (1-1)
 #define PDF_ANNOT_IS_HIDDEN 1 << (2-1)
 #define PDF_ANNOT_IS_PRINT 1 << (3-1)
@@ -69,9 +67,9 @@
 #define PDF_ANNOT_IS_LOCKED_CONTENTS 1 << (10-1)
 
 
-//----------------------------------------------------------------------------
-// annotation line ending styles
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# annotation line ending styles
+#----------------------------------------------------------------------------
 #define PDF_ANNOT_LE_NONE 0
 #define PDF_ANNOT_LE_SQUARE 1
 #define PDF_ANNOT_LE_CIRCLE 2
@@ -84,9 +82,9 @@
 #define PDF_ANNOT_LE_SLASH 9
 
 
-//----------------------------------------------------------------------------
-// annotation field (widget) types
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# annotation field (widget) types
+#----------------------------------------------------------------------------
 #define PDF_WIDGET_TYPE_UNKNOWN 0
 #define PDF_WIDGET_TYPE_BUTTON 1
 #define PDF_WIDGET_TYPE_CHECKBOX 2
@@ -97,9 +95,9 @@
 #define PDF_WIDGET_TYPE_TEXT 7
 
 
-//----------------------------------------------------------------------------
-// annotation text widget subtypes
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# annotation text widget subtypes
+#----------------------------------------------------------------------------
 #define PDF_WIDGET_TX_FORMAT_NONE 0
 #define PDF_WIDGET_TX_FORMAT_NUMBER 1
 #define PDF_WIDGET_TX_FORMAT_SPECIAL 2
@@ -107,16 +105,16 @@
 #define PDF_WIDGET_TX_FORMAT_TIME 4
 
 
-//----------------------------------------------------------------------------
-// annotation widget flags
-//----------------------------------------------------------------------------
-// Common to all field types
+#----------------------------------------------------------------------------
+# annotation widget flags
+#----------------------------------------------------------------------------
+# Common to all field types
 #define PDF_FIELD_IS_READ_ONLY 1
 #define PDF_FIELD_IS_REQUIRED 1 << 1
 #define PDF_FIELD_IS_NO_EXPORT 1 << 2
 
 
-// Text fields
+# Text fields
 #define PDF_TX_FIELD_IS_MULTILINE  1 << 12
 #define PDF_TX_FIELD_IS_PASSWORD  1 << 13
 #define PDF_TX_FIELD_IS_FILE_SELECT  1 << 20
@@ -126,14 +124,14 @@
 #define PDF_TX_FIELD_IS_RICH_TEXT  1 << 25
 
 
-// Button fields
+# Button fields
 #define PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF  1 << 14
 #define PDF_BTN_FIELD_IS_RADIO  1 << 15
 #define PDF_BTN_FIELD_IS_PUSHBUTTON  1 << 16
 #define PDF_BTN_FIELD_IS_RADIOS_IN_UNISON  1 << 25
 
 
-// Choice fields
+# Choice fields
 #define PDF_CH_FIELD_IS_COMBO  1 << 17
 #define PDF_CH_FIELD_IS_EDIT  1 << 18
 #define PDF_CH_FIELD_IS_SORT  1 << 19
@@ -142,7 +140,7 @@
 #define PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE  1 << 26
 
 
-// Signature fields errors
+# Signature fields errors
 #define PDF_SIGNATURE_ERROR_OKAY 0
 #define PDF_SIGNATURE_ERROR_NO_SIGNATURES 1
 #define PDF_SIGNATURE_ERROR_NO_CERTIFICATE 2
@@ -153,16 +151,16 @@
 #define PDF_SIGNATURE_ERROR_UNKNOWN 7
 
 
-//----------------------------------------------------------------------------
-// colorspace identifiers
-//----------------------------------------------------------------------------
-#define CS_RGB  1
-#define CS_GRAY 2
-#define CS_CMYK 3
+#----------------------------------------------------------------------------
+# colorspace identifiers
+#----------------------------------------------------------------------------
+CS_RGB = 1
+CS_GRAY = 2
+CS_CMYK = 3
 
-//----------------------------------------------------------------------------
-// PDF encryption algorithms
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# PDF encryption algorithms
+#----------------------------------------------------------------------------
 #define PDF_ENCRYPT_KEEP 0
 #define PDF_ENCRYPT_NONE 1
 #define PDF_ENCRYPT_RC4_40 2
@@ -171,9 +169,9 @@
 #define PDF_ENCRYPT_AES_256 5
 #define PDF_ENCRYPT_UNKNOWN 6
 
-//----------------------------------------------------------------------------
-// PDF permission codes
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# PDF permission codes
+#----------------------------------------------------------------------------
 #define PDF_PERM_PRINT 1 << 2
 #define PDF_PERM_MODIFY 1 << 3
 #define PDF_PERM_COPY 1 << 4
@@ -183,9 +181,9 @@
 #define PDF_PERM_ASSEMBLE 1 << 10
 #define PDF_PERM_PRINT_HQ 1 << 11
 
-//----------------------------------------------------------------------------
-// PDF Blend Modes
-//----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# PDF Blend Modes
+#----------------------------------------------------------------------------
 #define PDF_BM_Color "Color"
 #define PDF_BM_ColorBurn "ColorBurn"
 #define PDF_BM_ColorDodge "ColorDodge"
@@ -204,14 +202,14 @@
 #define PDF_BM_SoftLight "Softlight"
 
 
-// General text flags
+# General text flags
 #define TEXT_FONT_SUPERSCRIPT 1
 #define TEXT_FONT_ITALIC 2
 #define TEXT_FONT_SERIFED 4
 #define TEXT_FONT_MONOSPACED 8
 #define TEXT_FONT_BOLD 16
 
-// UCDN Script codes
+# UCDN Script codes
 #define UCDN_SCRIPT_COMMON 0
 #define UCDN_SCRIPT_LATIN 1
 #define UCDN_SCRIPT_GREEK 2
@@ -365,60 +363,3 @@
 #define UCDN_SCRIPT_NANDINAGARI 150
 #define UCDN_SCRIPT_NYIAKENG_PUACHUE_HMONG 151
 #define UCDN_SCRIPT_WANCHO 152
-
-%}
-
-%{
-// Global Constants - Python dictionary keys
-PyObject *dictkey_align;
-PyObject *dictkey_ascender;
-PyObject *dictkey_bbox;
-PyObject *dictkey_blocks;
-PyObject *dictkey_bpc;
-PyObject *dictkey_c;
-PyObject *dictkey_chars;
-PyObject *dictkey_color;
-PyObject *dictkey_colorspace;
-PyObject *dictkey_content;
-PyObject *dictkey_creationDate;
-PyObject *dictkey_cs_name;
-PyObject *dictkey_da;
-PyObject *dictkey_dashes;
-PyObject *dictkey_desc;
-PyObject *dictkey_descender;
-PyObject *dictkey_dir;
-PyObject *dictkey_effect;
-PyObject *dictkey_ext;
-PyObject *dictkey_filename;
-PyObject *dictkey_fill;
-PyObject *dictkey_flags;
-PyObject *dictkey_font;
-PyObject *dictkey_height;
-PyObject *dictkey_id;
-PyObject *dictkey_image;
-PyObject *dictkey_items;
-PyObject *dictkey_length;
-PyObject *dictkey_lines;
-PyObject *dictkey_matrix;
-PyObject *dictkey_modDate;
-PyObject *dictkey_name;
-PyObject *dictkey_number;
-PyObject *dictkey_origin;
-PyObject *dictkey_rect;
-PyObject *dictkey_size;
-PyObject *dictkey_smask;
-PyObject *dictkey_spans;
-PyObject *dictkey_stroke;
-PyObject *dictkey_style;
-PyObject *dictkey_subject;
-PyObject *dictkey_text;
-PyObject *dictkey_title;
-PyObject *dictkey_type;
-PyObject *dictkey_ufilename;
-PyObject *dictkey_width;
-PyObject *dictkey_wmode;
-PyObject *dictkey_xref;
-PyObject *dictkey_xres;
-PyObject *dictkey_yres;
-
-%}

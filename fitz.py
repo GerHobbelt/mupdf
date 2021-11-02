@@ -4,15 +4,16 @@
 # Do not make changes to this file unless you know what you are doing--modify
 # the SWIG interface file instead.
 
+from mupdf import *
 
-from fitz_helper_defines import *
-from fitz_helper_python_i import *
-from fitz_i.py import *
-from fitz_init.py import *
-from fitz_utils.py import *
-from fitz_wrap_c.py import *
+#from fitz_helper_defines import *
+#from fitz_helper_python_i import *
+from fitz_i import *
+#from fitz_init import *
+#from fitz_utils import *
+#from fitz_wrap_c import *
 
-
+'''
 from sys import version_info as _swig_python_version_info
 if _swig_python_version_info >= (2, 7, 0):
     def swig_import_helper():
@@ -51,7 +52,7 @@ try:
     _swig_property = property
 except NameError:
     pass  # Python < 2.2 doesn't have 'property'.
-
+'''
 try:
     import builtins as __builtin__
 except ImportError:
@@ -138,292 +139,8 @@ VersionBind = "1.18.6"
 VersionDate = "2021-01-07 07:10:59"
 version = (VersionBind, VersionFitz, "20210107071059")
 
-EPSILON = _fitz.EPSILON
-PDF_ANNOT_TEXT = _fitz.PDF_ANNOT_TEXT
-PDF_ANNOT_LINK = _fitz.PDF_ANNOT_LINK
-PDF_ANNOT_FREE_TEXT = _fitz.PDF_ANNOT_FREE_TEXT
-PDF_ANNOT_LINE = _fitz.PDF_ANNOT_LINE
-PDF_ANNOT_SQUARE = _fitz.PDF_ANNOT_SQUARE
-PDF_ANNOT_CIRCLE = _fitz.PDF_ANNOT_CIRCLE
-PDF_ANNOT_POLYGON = _fitz.PDF_ANNOT_POLYGON
-PDF_ANNOT_POLY_LINE = _fitz.PDF_ANNOT_POLY_LINE
-PDF_ANNOT_HIGHLIGHT = _fitz.PDF_ANNOT_HIGHLIGHT
-PDF_ANNOT_UNDERLINE = _fitz.PDF_ANNOT_UNDERLINE
-PDF_ANNOT_SQUIGGLY = _fitz.PDF_ANNOT_SQUIGGLY
-PDF_ANNOT_STRIKE_OUT = _fitz.PDF_ANNOT_STRIKE_OUT
-PDF_ANNOT_REDACT = _fitz.PDF_ANNOT_REDACT
-PDF_ANNOT_STAMP = _fitz.PDF_ANNOT_STAMP
-PDF_ANNOT_CARET = _fitz.PDF_ANNOT_CARET
-PDF_ANNOT_INK = _fitz.PDF_ANNOT_INK
-PDF_ANNOT_POPUP = _fitz.PDF_ANNOT_POPUP
-PDF_ANNOT_FILE_ATTACHMENT = _fitz.PDF_ANNOT_FILE_ATTACHMENT
-PDF_ANNOT_SOUND = _fitz.PDF_ANNOT_SOUND
-PDF_ANNOT_MOVIE = _fitz.PDF_ANNOT_MOVIE
-PDF_ANNOT_RICH_MEDIA = _fitz.PDF_ANNOT_RICH_MEDIA
-PDF_ANNOT_WIDGET = _fitz.PDF_ANNOT_WIDGET
-PDF_ANNOT_SCREEN = _fitz.PDF_ANNOT_SCREEN
-PDF_ANNOT_PRINTER_MARK = _fitz.PDF_ANNOT_PRINTER_MARK
-PDF_ANNOT_TRAP_NET = _fitz.PDF_ANNOT_TRAP_NET
-PDF_ANNOT_WATERMARK = _fitz.PDF_ANNOT_WATERMARK
-PDF_ANNOT_3D = _fitz.PDF_ANNOT_3D
-PDF_ANNOT_PROJECTION = _fitz.PDF_ANNOT_PROJECTION
-PDF_ANNOT_UNKNOWN = _fitz.PDF_ANNOT_UNKNOWN
-PDF_REDACT_IMAGE_NONE = _fitz.PDF_REDACT_IMAGE_NONE
-PDF_REDACT_IMAGE_REMOVE = _fitz.PDF_REDACT_IMAGE_REMOVE
-PDF_REDACT_IMAGE_PIXELS = _fitz.PDF_REDACT_IMAGE_PIXELS
-PDF_ANNOT_IS_INVISIBLE = _fitz.PDF_ANNOT_IS_INVISIBLE
-PDF_ANNOT_IS_HIDDEN = _fitz.PDF_ANNOT_IS_HIDDEN
-PDF_ANNOT_IS_PRINT = _fitz.PDF_ANNOT_IS_PRINT
-PDF_ANNOT_IS_NO_ZOOM = _fitz.PDF_ANNOT_IS_NO_ZOOM
-PDF_ANNOT_IS_NO_ROTATE = _fitz.PDF_ANNOT_IS_NO_ROTATE
-PDF_ANNOT_IS_NO_VIEW = _fitz.PDF_ANNOT_IS_NO_VIEW
-PDF_ANNOT_IS_READ_ONLY = _fitz.PDF_ANNOT_IS_READ_ONLY
-PDF_ANNOT_IS_LOCKED = _fitz.PDF_ANNOT_IS_LOCKED
-PDF_ANNOT_IS_TOGGLE_NO_VIEW = _fitz.PDF_ANNOT_IS_TOGGLE_NO_VIEW
-PDF_ANNOT_IS_LOCKED_CONTENTS = _fitz.PDF_ANNOT_IS_LOCKED_CONTENTS
-PDF_ANNOT_LE_NONE = _fitz.PDF_ANNOT_LE_NONE
-PDF_ANNOT_LE_SQUARE = _fitz.PDF_ANNOT_LE_SQUARE
-PDF_ANNOT_LE_CIRCLE = _fitz.PDF_ANNOT_LE_CIRCLE
-PDF_ANNOT_LE_DIAMOND = _fitz.PDF_ANNOT_LE_DIAMOND
-PDF_ANNOT_LE_OPEN_ARROW = _fitz.PDF_ANNOT_LE_OPEN_ARROW
-PDF_ANNOT_LE_CLOSED_ARROW = _fitz.PDF_ANNOT_LE_CLOSED_ARROW
-PDF_ANNOT_LE_BUTT = _fitz.PDF_ANNOT_LE_BUTT
-PDF_ANNOT_LE_R_OPEN_ARROW = _fitz.PDF_ANNOT_LE_R_OPEN_ARROW
-PDF_ANNOT_LE_R_CLOSED_ARROW = _fitz.PDF_ANNOT_LE_R_CLOSED_ARROW
-PDF_ANNOT_LE_SLASH = _fitz.PDF_ANNOT_LE_SLASH
-PDF_WIDGET_TYPE_UNKNOWN = _fitz.PDF_WIDGET_TYPE_UNKNOWN
-PDF_WIDGET_TYPE_BUTTON = _fitz.PDF_WIDGET_TYPE_BUTTON
-PDF_WIDGET_TYPE_CHECKBOX = _fitz.PDF_WIDGET_TYPE_CHECKBOX
-PDF_WIDGET_TYPE_COMBOBOX = _fitz.PDF_WIDGET_TYPE_COMBOBOX
-PDF_WIDGET_TYPE_LISTBOX = _fitz.PDF_WIDGET_TYPE_LISTBOX
-PDF_WIDGET_TYPE_RADIOBUTTON = _fitz.PDF_WIDGET_TYPE_RADIOBUTTON
-PDF_WIDGET_TYPE_SIGNATURE = _fitz.PDF_WIDGET_TYPE_SIGNATURE
-PDF_WIDGET_TYPE_TEXT = _fitz.PDF_WIDGET_TYPE_TEXT
-PDF_WIDGET_TX_FORMAT_NONE = _fitz.PDF_WIDGET_TX_FORMAT_NONE
-PDF_WIDGET_TX_FORMAT_NUMBER = _fitz.PDF_WIDGET_TX_FORMAT_NUMBER
-PDF_WIDGET_TX_FORMAT_SPECIAL = _fitz.PDF_WIDGET_TX_FORMAT_SPECIAL
-PDF_WIDGET_TX_FORMAT_DATE = _fitz.PDF_WIDGET_TX_FORMAT_DATE
-PDF_WIDGET_TX_FORMAT_TIME = _fitz.PDF_WIDGET_TX_FORMAT_TIME
-PDF_FIELD_IS_READ_ONLY = _fitz.PDF_FIELD_IS_READ_ONLY
-PDF_FIELD_IS_REQUIRED = _fitz.PDF_FIELD_IS_REQUIRED
-PDF_FIELD_IS_NO_EXPORT = _fitz.PDF_FIELD_IS_NO_EXPORT
-PDF_TX_FIELD_IS_MULTILINE = _fitz.PDF_TX_FIELD_IS_MULTILINE
-PDF_TX_FIELD_IS_PASSWORD = _fitz.PDF_TX_FIELD_IS_PASSWORD
-PDF_TX_FIELD_IS_FILE_SELECT = _fitz.PDF_TX_FIELD_IS_FILE_SELECT
-PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK = _fitz.PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK
-PDF_TX_FIELD_IS_DO_NOT_SCROLL = _fitz.PDF_TX_FIELD_IS_DO_NOT_SCROLL
-PDF_TX_FIELD_IS_COMB = _fitz.PDF_TX_FIELD_IS_COMB
-PDF_TX_FIELD_IS_RICH_TEXT = _fitz.PDF_TX_FIELD_IS_RICH_TEXT
-PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF = _fitz.PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF
-PDF_BTN_FIELD_IS_RADIO = _fitz.PDF_BTN_FIELD_IS_RADIO
-PDF_BTN_FIELD_IS_PUSHBUTTON = _fitz.PDF_BTN_FIELD_IS_PUSHBUTTON
-PDF_BTN_FIELD_IS_RADIOS_IN_UNISON = _fitz.PDF_BTN_FIELD_IS_RADIOS_IN_UNISON
-PDF_CH_FIELD_IS_COMBO = _fitz.PDF_CH_FIELD_IS_COMBO
-PDF_CH_FIELD_IS_EDIT = _fitz.PDF_CH_FIELD_IS_EDIT
-PDF_CH_FIELD_IS_SORT = _fitz.PDF_CH_FIELD_IS_SORT
-PDF_CH_FIELD_IS_MULTI_SELECT = _fitz.PDF_CH_FIELD_IS_MULTI_SELECT
-PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK = _fitz.PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK
-PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE = _fitz.PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE
-PDF_SIGNATURE_ERROR_OKAY = _fitz.PDF_SIGNATURE_ERROR_OKAY
-PDF_SIGNATURE_ERROR_NO_SIGNATURES = _fitz.PDF_SIGNATURE_ERROR_NO_SIGNATURES
-PDF_SIGNATURE_ERROR_NO_CERTIFICATE = _fitz.PDF_SIGNATURE_ERROR_NO_CERTIFICATE
-PDF_SIGNATURE_ERROR_DIGEST_FAILURE = _fitz.PDF_SIGNATURE_ERROR_DIGEST_FAILURE
-PDF_SIGNATURE_ERROR_SELF_SIGNED = _fitz.PDF_SIGNATURE_ERROR_SELF_SIGNED
-PDF_SIGNATURE_ERROR_SELF_SIGNED_IN_CHAIN = _fitz.PDF_SIGNATURE_ERROR_SELF_SIGNED_IN_CHAIN
-PDF_SIGNATURE_ERROR_NOT_TRUSTED = _fitz.PDF_SIGNATURE_ERROR_NOT_TRUSTED
-PDF_SIGNATURE_ERROR_UNKNOWN = _fitz.PDF_SIGNATURE_ERROR_UNKNOWN
-CS_RGB = _fitz.CS_RGB
-CS_GRAY = _fitz.CS_GRAY
-CS_CMYK = _fitz.CS_CMYK
-PDF_ENCRYPT_KEEP = _fitz.PDF_ENCRYPT_KEEP
-PDF_ENCRYPT_NONE = _fitz.PDF_ENCRYPT_NONE
-PDF_ENCRYPT_RC4_40 = _fitz.PDF_ENCRYPT_RC4_40
-PDF_ENCRYPT_RC4_128 = _fitz.PDF_ENCRYPT_RC4_128
-PDF_ENCRYPT_AES_128 = _fitz.PDF_ENCRYPT_AES_128
-PDF_ENCRYPT_AES_256 = _fitz.PDF_ENCRYPT_AES_256
-PDF_ENCRYPT_UNKNOWN = _fitz.PDF_ENCRYPT_UNKNOWN
-PDF_PERM_PRINT = _fitz.PDF_PERM_PRINT
-PDF_PERM_MODIFY = _fitz.PDF_PERM_MODIFY
-PDF_PERM_COPY = _fitz.PDF_PERM_COPY
-PDF_PERM_ANNOTATE = _fitz.PDF_PERM_ANNOTATE
-PDF_PERM_FORM = _fitz.PDF_PERM_FORM
-PDF_PERM_ACCESSIBILITY = _fitz.PDF_PERM_ACCESSIBILITY
-PDF_PERM_ASSEMBLE = _fitz.PDF_PERM_ASSEMBLE
-PDF_PERM_PRINT_HQ = _fitz.PDF_PERM_PRINT_HQ
-PDF_BM_Color = _fitz.PDF_BM_Color
-PDF_BM_ColorBurn = _fitz.PDF_BM_ColorBurn
-PDF_BM_ColorDodge = _fitz.PDF_BM_ColorDodge
-PDF_BM_Darken = _fitz.PDF_BM_Darken
-PDF_BM_Difference = _fitz.PDF_BM_Difference
-PDF_BM_Exclusion = _fitz.PDF_BM_Exclusion
-PDF_BM_HardLight = _fitz.PDF_BM_HardLight
-PDF_BM_Hue = _fitz.PDF_BM_Hue
-PDF_BM_Lighten = _fitz.PDF_BM_Lighten
-PDF_BM_Luminosity = _fitz.PDF_BM_Luminosity
-PDF_BM_Multiply = _fitz.PDF_BM_Multiply
-PDF_BM_Normal = _fitz.PDF_BM_Normal
-PDF_BM_Overlay = _fitz.PDF_BM_Overlay
-PDF_BM_Saturation = _fitz.PDF_BM_Saturation
-PDF_BM_Screen = _fitz.PDF_BM_Screen
-PDF_BM_SoftLight = _fitz.PDF_BM_SoftLight
-TEXT_FONT_SUPERSCRIPT = _fitz.TEXT_FONT_SUPERSCRIPT
-TEXT_FONT_ITALIC = _fitz.TEXT_FONT_ITALIC
-TEXT_FONT_SERIFED = _fitz.TEXT_FONT_SERIFED
-TEXT_FONT_MONOSPACED = _fitz.TEXT_FONT_MONOSPACED
-TEXT_FONT_BOLD = _fitz.TEXT_FONT_BOLD
-UCDN_SCRIPT_COMMON = _fitz.UCDN_SCRIPT_COMMON
-UCDN_SCRIPT_LATIN = _fitz.UCDN_SCRIPT_LATIN
-UCDN_SCRIPT_GREEK = _fitz.UCDN_SCRIPT_GREEK
-UCDN_SCRIPT_CYRILLIC = _fitz.UCDN_SCRIPT_CYRILLIC
-UCDN_SCRIPT_ARMENIAN = _fitz.UCDN_SCRIPT_ARMENIAN
-UCDN_SCRIPT_HEBREW = _fitz.UCDN_SCRIPT_HEBREW
-UCDN_SCRIPT_ARABIC = _fitz.UCDN_SCRIPT_ARABIC
-UCDN_SCRIPT_SYRIAC = _fitz.UCDN_SCRIPT_SYRIAC
-UCDN_SCRIPT_THAANA = _fitz.UCDN_SCRIPT_THAANA
-UCDN_SCRIPT_DEVANAGARI = _fitz.UCDN_SCRIPT_DEVANAGARI
-UCDN_SCRIPT_BENGALI = _fitz.UCDN_SCRIPT_BENGALI
-UCDN_SCRIPT_GURMUKHI = _fitz.UCDN_SCRIPT_GURMUKHI
-UCDN_SCRIPT_GUJARATI = _fitz.UCDN_SCRIPT_GUJARATI
-UCDN_SCRIPT_ORIYA = _fitz.UCDN_SCRIPT_ORIYA
-UCDN_SCRIPT_TAMIL = _fitz.UCDN_SCRIPT_TAMIL
-UCDN_SCRIPT_TELUGU = _fitz.UCDN_SCRIPT_TELUGU
-UCDN_SCRIPT_KANNADA = _fitz.UCDN_SCRIPT_KANNADA
-UCDN_SCRIPT_MALAYALAM = _fitz.UCDN_SCRIPT_MALAYALAM
-UCDN_SCRIPT_SINHALA = _fitz.UCDN_SCRIPT_SINHALA
-UCDN_SCRIPT_THAI = _fitz.UCDN_SCRIPT_THAI
-UCDN_SCRIPT_LAO = _fitz.UCDN_SCRIPT_LAO
-UCDN_SCRIPT_TIBETAN = _fitz.UCDN_SCRIPT_TIBETAN
-UCDN_SCRIPT_MYANMAR = _fitz.UCDN_SCRIPT_MYANMAR
-UCDN_SCRIPT_GEORGIAN = _fitz.UCDN_SCRIPT_GEORGIAN
-UCDN_SCRIPT_HANGUL = _fitz.UCDN_SCRIPT_HANGUL
-UCDN_SCRIPT_ETHIOPIC = _fitz.UCDN_SCRIPT_ETHIOPIC
-UCDN_SCRIPT_CHEROKEE = _fitz.UCDN_SCRIPT_CHEROKEE
-UCDN_SCRIPT_CANADIAN_ABORIGINAL = _fitz.UCDN_SCRIPT_CANADIAN_ABORIGINAL
-UCDN_SCRIPT_OGHAM = _fitz.UCDN_SCRIPT_OGHAM
-UCDN_SCRIPT_RUNIC = _fitz.UCDN_SCRIPT_RUNIC
-UCDN_SCRIPT_KHMER = _fitz.UCDN_SCRIPT_KHMER
-UCDN_SCRIPT_MONGOLIAN = _fitz.UCDN_SCRIPT_MONGOLIAN
-UCDN_SCRIPT_HIRAGANA = _fitz.UCDN_SCRIPT_HIRAGANA
-UCDN_SCRIPT_KATAKANA = _fitz.UCDN_SCRIPT_KATAKANA
-UCDN_SCRIPT_BOPOMOFO = _fitz.UCDN_SCRIPT_BOPOMOFO
-UCDN_SCRIPT_HAN = _fitz.UCDN_SCRIPT_HAN
-UCDN_SCRIPT_YI = _fitz.UCDN_SCRIPT_YI
-UCDN_SCRIPT_OLD_ITALIC = _fitz.UCDN_SCRIPT_OLD_ITALIC
-UCDN_SCRIPT_GOTHIC = _fitz.UCDN_SCRIPT_GOTHIC
-UCDN_SCRIPT_DESERET = _fitz.UCDN_SCRIPT_DESERET
-UCDN_SCRIPT_INHERITED = _fitz.UCDN_SCRIPT_INHERITED
-UCDN_SCRIPT_TAGALOG = _fitz.UCDN_SCRIPT_TAGALOG
-UCDN_SCRIPT_HANUNOO = _fitz.UCDN_SCRIPT_HANUNOO
-UCDN_SCRIPT_BUHID = _fitz.UCDN_SCRIPT_BUHID
-UCDN_SCRIPT_TAGBANWA = _fitz.UCDN_SCRIPT_TAGBANWA
-UCDN_SCRIPT_LIMBU = _fitz.UCDN_SCRIPT_LIMBU
-UCDN_SCRIPT_TAI_LE = _fitz.UCDN_SCRIPT_TAI_LE
-UCDN_SCRIPT_LINEAR_B = _fitz.UCDN_SCRIPT_LINEAR_B
-UCDN_SCRIPT_UGARITIC = _fitz.UCDN_SCRIPT_UGARITIC
-UCDN_SCRIPT_SHAVIAN = _fitz.UCDN_SCRIPT_SHAVIAN
-UCDN_SCRIPT_OSMANYA = _fitz.UCDN_SCRIPT_OSMANYA
-UCDN_SCRIPT_CYPRIOT = _fitz.UCDN_SCRIPT_CYPRIOT
-UCDN_SCRIPT_BRAILLE = _fitz.UCDN_SCRIPT_BRAILLE
-UCDN_SCRIPT_BUGINESE = _fitz.UCDN_SCRIPT_BUGINESE
-UCDN_SCRIPT_COPTIC = _fitz.UCDN_SCRIPT_COPTIC
-UCDN_SCRIPT_NEW_TAI_LUE = _fitz.UCDN_SCRIPT_NEW_TAI_LUE
-UCDN_SCRIPT_GLAGOLITIC = _fitz.UCDN_SCRIPT_GLAGOLITIC
-UCDN_SCRIPT_TIFINAGH = _fitz.UCDN_SCRIPT_TIFINAGH
-UCDN_SCRIPT_SYLOTI_NAGRI = _fitz.UCDN_SCRIPT_SYLOTI_NAGRI
-UCDN_SCRIPT_OLD_PERSIAN = _fitz.UCDN_SCRIPT_OLD_PERSIAN
-UCDN_SCRIPT_KHAROSHTHI = _fitz.UCDN_SCRIPT_KHAROSHTHI
-UCDN_SCRIPT_BALINESE = _fitz.UCDN_SCRIPT_BALINESE
-UCDN_SCRIPT_CUNEIFORM = _fitz.UCDN_SCRIPT_CUNEIFORM
-UCDN_SCRIPT_PHOENICIAN = _fitz.UCDN_SCRIPT_PHOENICIAN
-UCDN_SCRIPT_PHAGS_PA = _fitz.UCDN_SCRIPT_PHAGS_PA
-UCDN_SCRIPT_NKO = _fitz.UCDN_SCRIPT_NKO
-UCDN_SCRIPT_SUNDANESE = _fitz.UCDN_SCRIPT_SUNDANESE
-UCDN_SCRIPT_LEPCHA = _fitz.UCDN_SCRIPT_LEPCHA
-UCDN_SCRIPT_OL_CHIKI = _fitz.UCDN_SCRIPT_OL_CHIKI
-UCDN_SCRIPT_VAI = _fitz.UCDN_SCRIPT_VAI
-UCDN_SCRIPT_SAURASHTRA = _fitz.UCDN_SCRIPT_SAURASHTRA
-UCDN_SCRIPT_KAYAH_LI = _fitz.UCDN_SCRIPT_KAYAH_LI
-UCDN_SCRIPT_REJANG = _fitz.UCDN_SCRIPT_REJANG
-UCDN_SCRIPT_LYCIAN = _fitz.UCDN_SCRIPT_LYCIAN
-UCDN_SCRIPT_CARIAN = _fitz.UCDN_SCRIPT_CARIAN
-UCDN_SCRIPT_LYDIAN = _fitz.UCDN_SCRIPT_LYDIAN
-UCDN_SCRIPT_CHAM = _fitz.UCDN_SCRIPT_CHAM
-UCDN_SCRIPT_TAI_THAM = _fitz.UCDN_SCRIPT_TAI_THAM
-UCDN_SCRIPT_TAI_VIET = _fitz.UCDN_SCRIPT_TAI_VIET
-UCDN_SCRIPT_AVESTAN = _fitz.UCDN_SCRIPT_AVESTAN
-UCDN_SCRIPT_EGYPTIAN_HIEROGLYPHS = _fitz.UCDN_SCRIPT_EGYPTIAN_HIEROGLYPHS
-UCDN_SCRIPT_SAMARITAN = _fitz.UCDN_SCRIPT_SAMARITAN
-UCDN_SCRIPT_LISU = _fitz.UCDN_SCRIPT_LISU
-UCDN_SCRIPT_BAMUM = _fitz.UCDN_SCRIPT_BAMUM
-UCDN_SCRIPT_JAVANESE = _fitz.UCDN_SCRIPT_JAVANESE
-UCDN_SCRIPT_MEETEI_MAYEK = _fitz.UCDN_SCRIPT_MEETEI_MAYEK
-UCDN_SCRIPT_IMPERIAL_ARAMAIC = _fitz.UCDN_SCRIPT_IMPERIAL_ARAMAIC
-UCDN_SCRIPT_OLD_SOUTH_ARABIAN = _fitz.UCDN_SCRIPT_OLD_SOUTH_ARABIAN
-UCDN_SCRIPT_INSCRIPTIONAL_PARTHIAN = _fitz.UCDN_SCRIPT_INSCRIPTIONAL_PARTHIAN
-UCDN_SCRIPT_INSCRIPTIONAL_PAHLAVI = _fitz.UCDN_SCRIPT_INSCRIPTIONAL_PAHLAVI
-UCDN_SCRIPT_OLD_TURKIC = _fitz.UCDN_SCRIPT_OLD_TURKIC
-UCDN_SCRIPT_KAITHI = _fitz.UCDN_SCRIPT_KAITHI
-UCDN_SCRIPT_BATAK = _fitz.UCDN_SCRIPT_BATAK
-UCDN_SCRIPT_BRAHMI = _fitz.UCDN_SCRIPT_BRAHMI
-UCDN_SCRIPT_MANDAIC = _fitz.UCDN_SCRIPT_MANDAIC
-UCDN_SCRIPT_CHAKMA = _fitz.UCDN_SCRIPT_CHAKMA
-UCDN_SCRIPT_MEROITIC_CURSIVE = _fitz.UCDN_SCRIPT_MEROITIC_CURSIVE
-UCDN_SCRIPT_MEROITIC_HIEROGLYPHS = _fitz.UCDN_SCRIPT_MEROITIC_HIEROGLYPHS
-UCDN_SCRIPT_MIAO = _fitz.UCDN_SCRIPT_MIAO
-UCDN_SCRIPT_SHARADA = _fitz.UCDN_SCRIPT_SHARADA
-UCDN_SCRIPT_SORA_SOMPENG = _fitz.UCDN_SCRIPT_SORA_SOMPENG
-UCDN_SCRIPT_TAKRI = _fitz.UCDN_SCRIPT_TAKRI
-UCDN_SCRIPT_UNKNOWN = _fitz.UCDN_SCRIPT_UNKNOWN
-UCDN_SCRIPT_BASSA_VAH = _fitz.UCDN_SCRIPT_BASSA_VAH
-UCDN_SCRIPT_CAUCASIAN_ALBANIAN = _fitz.UCDN_SCRIPT_CAUCASIAN_ALBANIAN
-UCDN_SCRIPT_DUPLOYAN = _fitz.UCDN_SCRIPT_DUPLOYAN
-UCDN_SCRIPT_ELBASAN = _fitz.UCDN_SCRIPT_ELBASAN
-UCDN_SCRIPT_GRANTHA = _fitz.UCDN_SCRIPT_GRANTHA
-UCDN_SCRIPT_KHOJKI = _fitz.UCDN_SCRIPT_KHOJKI
-UCDN_SCRIPT_KHUDAWADI = _fitz.UCDN_SCRIPT_KHUDAWADI
-UCDN_SCRIPT_LINEAR_A = _fitz.UCDN_SCRIPT_LINEAR_A
-UCDN_SCRIPT_MAHAJANI = _fitz.UCDN_SCRIPT_MAHAJANI
-UCDN_SCRIPT_MANICHAEAN = _fitz.UCDN_SCRIPT_MANICHAEAN
-UCDN_SCRIPT_MENDE_KIKAKUI = _fitz.UCDN_SCRIPT_MENDE_KIKAKUI
-UCDN_SCRIPT_MODI = _fitz.UCDN_SCRIPT_MODI
-UCDN_SCRIPT_MRO = _fitz.UCDN_SCRIPT_MRO
-UCDN_SCRIPT_NABATAEAN = _fitz.UCDN_SCRIPT_NABATAEAN
-UCDN_SCRIPT_OLD_NORTH_ARABIAN = _fitz.UCDN_SCRIPT_OLD_NORTH_ARABIAN
-UCDN_SCRIPT_OLD_PERMIC = _fitz.UCDN_SCRIPT_OLD_PERMIC
-UCDN_SCRIPT_PAHAWH_HMONG = _fitz.UCDN_SCRIPT_PAHAWH_HMONG
-UCDN_SCRIPT_PALMYRENE = _fitz.UCDN_SCRIPT_PALMYRENE
-UCDN_SCRIPT_PAU_CIN_HAU = _fitz.UCDN_SCRIPT_PAU_CIN_HAU
-UCDN_SCRIPT_PSALTER_PAHLAVI = _fitz.UCDN_SCRIPT_PSALTER_PAHLAVI
-UCDN_SCRIPT_SIDDHAM = _fitz.UCDN_SCRIPT_SIDDHAM
-UCDN_SCRIPT_TIRHUTA = _fitz.UCDN_SCRIPT_TIRHUTA
-UCDN_SCRIPT_WARANG_CITI = _fitz.UCDN_SCRIPT_WARANG_CITI
-UCDN_SCRIPT_AHOM = _fitz.UCDN_SCRIPT_AHOM
-UCDN_SCRIPT_ANATOLIAN_HIEROGLYPHS = _fitz.UCDN_SCRIPT_ANATOLIAN_HIEROGLYPHS
-UCDN_SCRIPT_HATRAN = _fitz.UCDN_SCRIPT_HATRAN
-UCDN_SCRIPT_MULTANI = _fitz.UCDN_SCRIPT_MULTANI
-UCDN_SCRIPT_OLD_HUNGARIAN = _fitz.UCDN_SCRIPT_OLD_HUNGARIAN
-UCDN_SCRIPT_SIGNWRITING = _fitz.UCDN_SCRIPT_SIGNWRITING
-UCDN_SCRIPT_ADLAM = _fitz.UCDN_SCRIPT_ADLAM
-UCDN_SCRIPT_BHAIKSUKI = _fitz.UCDN_SCRIPT_BHAIKSUKI
-UCDN_SCRIPT_MARCHEN = _fitz.UCDN_SCRIPT_MARCHEN
-UCDN_SCRIPT_NEWA = _fitz.UCDN_SCRIPT_NEWA
-UCDN_SCRIPT_OSAGE = _fitz.UCDN_SCRIPT_OSAGE
-UCDN_SCRIPT_TANGUT = _fitz.UCDN_SCRIPT_TANGUT
-UCDN_SCRIPT_MASARAM_GONDI = _fitz.UCDN_SCRIPT_MASARAM_GONDI
-UCDN_SCRIPT_NUSHU = _fitz.UCDN_SCRIPT_NUSHU
-UCDN_SCRIPT_SOYOMBO = _fitz.UCDN_SCRIPT_SOYOMBO
-UCDN_SCRIPT_ZANABAZAR_SQUARE = _fitz.UCDN_SCRIPT_ZANABAZAR_SQUARE
-UCDN_SCRIPT_DOGRA = _fitz.UCDN_SCRIPT_DOGRA
-UCDN_SCRIPT_GUNJALA_GONDI = _fitz.UCDN_SCRIPT_GUNJALA_GONDI
-UCDN_SCRIPT_HANIFI_ROHINGYA = _fitz.UCDN_SCRIPT_HANIFI_ROHINGYA
-UCDN_SCRIPT_MAKASAR = _fitz.UCDN_SCRIPT_MAKASAR
-UCDN_SCRIPT_MEDEFAIDRIN = _fitz.UCDN_SCRIPT_MEDEFAIDRIN
-UCDN_SCRIPT_OLD_SOGDIAN = _fitz.UCDN_SCRIPT_OLD_SOGDIAN
-UCDN_SCRIPT_SOGDIAN = _fitz.UCDN_SCRIPT_SOGDIAN
-UCDN_SCRIPT_ELYMAIC = _fitz.UCDN_SCRIPT_ELYMAIC
-UCDN_SCRIPT_NANDINAGARI = _fitz.UCDN_SCRIPT_NANDINAGARI
-UCDN_SCRIPT_NYIAKENG_PUACHUE_HMONG = _fitz.UCDN_SCRIPT_NYIAKENG_PUACHUE_HMONG
-UCDN_SCRIPT_WANCHO = _fitz.UCDN_SCRIPT_WANCHO
+EPSILON = 1e-5
+
 
 class Matrix(object):
     """Matrix() - all zeros
@@ -3511,13 +3228,13 @@ def _get_glyph_text() -> bytes:
 
 
 class Document(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Document, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Document, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Document
-    __del__ = lambda self: None
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Document, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Document, name)
+    #__repr__ = _swig_repr
+    #__swig_destroy__ = _fitz.delete_Document
+    #__del__ = lambda self: None
 
     def __init__(self, filename=None, stream=None, filetype=None, rect=None, width=0, height=0, fontsize=11):
 
@@ -4911,20 +4628,9 @@ class Document(_object):
     def __exit__(self, *args):
         self.close()
 
-Document_swigregister = _fitz.Document_swigregister
-Document_swigregister(Document)
-
 class Page(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Page, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Page, name)
-
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Page
-    __del__ = lambda self: None
 
     def bound(self):
         """Get page rectangle."""
@@ -6058,17 +5764,7 @@ class Page(_object):
     cleanContents = clean_contents
     getContents = get_contents
 
-Page_swigregister = _fitz.Page_swigregister
-Page_swigregister(Page)
-
 class Pixmap(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Pixmap, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Pixmap, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Pixmap
-    __del__ = lambda self: None
 
     def __init__(self, *args):
         """Pixmap(colorspace, irect, alpha) - empty pixmap.
@@ -6377,17 +6073,8 @@ class Pixmap(_object):
         if not type(self) is Pixmap: return
         self.__swig_destroy__(self)
 
-Pixmap_swigregister = _fitz.Pixmap_swigregister
-Pixmap_swigregister(Pixmap)
 
 class Colorspace(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Colorspace, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Colorspace, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Colorspace
-    __del__ = lambda self: None
 
     def __init__(self, type):
         """Supported are GRAY, RGB and CMYK."""
@@ -6424,15 +6111,7 @@ class Colorspace(_object):
         x = ("", "GRAY", "", "RGB", "CMYK")[self.n]
         return "Colorspace(CS_%s) - %s" % (x, self.name)
 
-Colorspace_swigregister = _fitz.Colorspace_swigregister
-Colorspace_swigregister(Colorspace)
-
 class Device(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Device, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Device, name)
-    __repr__ = _swig_repr
 
     def __init__(self, *args):
         this = _fitz.new_Device(*args)
@@ -6440,20 +6119,11 @@ class Device(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _fitz.delete_Device
-    __del__ = lambda self: None
-Device_swigregister = _fitz.Device_swigregister
-Device_swigregister(Device)
 
 class Outline(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Outline, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
 
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
-    __repr__ = _swig_repr
     @property
 
     def uri(self):
@@ -6497,22 +6167,11 @@ class Outline(_object):
         '''outline destination details'''
         return linkDest(self, None)
 
-    __swig_destroy__ = _fitz.delete_Outline
-    __del__ = lambda self: None
-Outline_swigregister = _fitz.Outline_swigregister
-Outline_swigregister(Outline)
 
 class Annot(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Annot, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
 
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Annot
-    __del__ = lambda self: None
     @property
 
     def rect(self):
@@ -7263,20 +6922,11 @@ class Annot(_object):
         if self.parent is None:
             return
         self._erase()
-Annot_swigregister = _fitz.Annot_swigregister
-Annot_swigregister(Annot)
 
 class Link(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Link, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Link, name)
 
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Link
-    __del__ = lambda self: None
 
     def _border(self, doc, xref):
         return _fitz.Link__border(self, doc, xref)
@@ -7399,17 +7049,8 @@ class Link(_object):
 
     def __del__(self):
         self._erase()
-Link_swigregister = _fitz.Link_swigregister
-Link_swigregister(Link)
 
 class DisplayList(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, DisplayList, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, DisplayList, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_DisplayList
-    __del__ = lambda self: None
 
     def __init__(self, mediabox):
         this = _fitz.new_DisplayList(mediabox)
@@ -7452,17 +7093,8 @@ class DisplayList(_object):
             self.__swig_destroy__(self)
         self.thisown = False
 
-DisplayList_swigregister = _fitz.DisplayList_swigregister
-DisplayList_swigregister(DisplayList)
 
 class TextPage(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TextPage, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TextPage, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_TextPage
-    __del__ = lambda self: None
 
     def __init__(self, mediabox):
         this = _fitz.new_TextPage(mediabox)
@@ -7600,17 +7232,8 @@ class TextPage(_object):
             self.__swig_destroy__(self)
         self.thisown = False
 
-TextPage_swigregister = _fitz.TextPage_swigregister
-TextPage_swigregister(TextPage)
 
 class Graftmap(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Graftmap, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Graftmap, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Graftmap
-    __del__ = lambda self: None
 
     def __init__(self, doc):
         this = _fitz.new_Graftmap(doc)
@@ -7629,17 +7252,8 @@ class Graftmap(_object):
             self.__swig_destroy__(self)
         self.thisown = False
 
-Graftmap_swigregister = _fitz.Graftmap_swigregister
-Graftmap_swigregister(Graftmap)
 
 class TextWriter(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TextWriter, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TextWriter, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_TextWriter
-    __del__ = lambda self: None
 
     def __init__(self, page_rect, opacity=1, color=None):
         """Stores text spans for later output on compatible PDF pages."""
@@ -7799,17 +7413,8 @@ class TextWriter(_object):
             return
         self.__swig_destroy__(self)
 
-TextWriter_swigregister = _fitz.TextWriter_swigregister
-TextWriter_swigregister(TextWriter)
 
 class Font(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Font, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Font, name)
-    __repr__ = _swig_repr
-    __swig_destroy__ = _fitz.delete_Font
-    __del__ = lambda self: None
 
     def __init__(self, fontname=None, fontfile=None, fontbuffer=None, script=0, language=None, ordering=-1, is_bold=0, is_italic=0, is_serif=0):
 
@@ -7931,15 +7536,8 @@ class Font(_object):
             return None
         self.__swig_destroy__(self)
 
-Font_swigregister = _fitz.Font_swigregister
-Font_swigregister(Font)
 
 class Tools(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Tools, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Tools, name)
-    __repr__ = _swig_repr
 
     def gen_id(self):
         """Return a unique positive integer."""
@@ -8409,9 +8007,9 @@ class Tools(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _fitz.delete_Tools
-    __del__ = lambda self: None
-Tools_swigregister = _fitz.Tools_swigregister
-Tools_swigregister(Tools)
 
 # This file is compatible with both classic and new-style classes.
+
+from fitz_init import *
+from fitz_utils import *
+from fitz_wrap_c import *
