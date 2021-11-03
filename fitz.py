@@ -382,6 +382,10 @@ def DUMMY(*args, **kw):
 def INRANGE(v, low, high):
     return low <= v and v <= high
 
+def ASSERT_PDF(page):
+    assert isinstance(page, mupdf.PdfPage)
+    if not page.m_internal:
+        raise Exception('not a PDF')
 
 def Page_set_contents(page0, xref):
     assert isinstance(page0, Page)
@@ -5867,7 +5871,44 @@ class Page:
         return _fitz.Page__add_line_annot(self, p1, p2)
 
     def _add_text_annot(self, point, text, icon=None):
-        return _fitz.Page__add_text_annot(self, point, text, icon)
+        #return _fitz.Page__add_text_annot(self, point, text, icon)
+        jlib.log('{self.this=}')
+        #page = mupdf.mpdf_page_from_fz_page(self.this)
+        page = self._pdf_page()
+        #fz_point p = JM_point_from_py(point);
+        p = point
+        try:
+            ASSERT_PDF(page)
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT
+            mupdf.mpdf_set_annot_flags(annot, flags)
+            mupdf.mpdf_set_annot_contents(annot, text)
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}. Returning None')
+            return
+        return Annot(self, annot)
+
+    def add_text_annot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
+        """Add a 'Text' (sticky note) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_text_annot(point, text, icon=icon)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        jlib.log('{annot=}')
+        annot_postprocess(self, annot)
+        return annot
+
 
     def _add_ink_annot(self, list):
         return _fitz.Page__add_ink_annot(self, list)
