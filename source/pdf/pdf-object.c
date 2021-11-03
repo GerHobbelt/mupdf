@@ -2214,14 +2214,24 @@ pdf_dict_vputl(fz_context *ctx, pdf_obj *obj, pdf_obj *val, va_list keys)
 	{
 		next_obj = pdf_dict_get(ctx, obj, key);
 		if (next_obj == NULL)
-		{
-			/* We have to create entries */
-			next_obj = pdf_new_dict(ctx, doc, 1);
-			pdf_dict_put_drop(ctx, obj, key, next_obj);
-		}
+			goto new_obj;
 		obj = next_obj;
 		key = next_key;
 	}
+
+	pdf_dict_put(ctx, obj, key, val);
+	return;
+
+new_obj:
+	/* We have to create entries */
+	do
+	{
+		next_obj = pdf_new_dict(ctx, doc, 1);
+		pdf_dict_put_drop(ctx, obj, key, next_obj);
+		obj = next_obj;
+		key = next_key;
+	}
+	while ((next_key = va_arg(keys, pdf_obj *)) != NULL);
 
 	pdf_dict_put(ctx, obj, key, val);
 	return;
