@@ -1853,11 +1853,13 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 	pdf_xref_entry *ret_entry = NULL;
 	int xref_len;
 	int found;
+	fz_stream *sub = NULL;
 
 	fz_var(numbuf);
 	fz_var(ofsbuf);
 	fz_var(objstm);
 	fz_var(stm);
+	fz_var(sub);
 
 	fz_try(ctx)
 	{
@@ -1915,10 +1917,19 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 		for (i = 0; i < found; i++)
 		{
 			pdf_xref_entry *entry;
+			fz_range range;
 
-			fz_seek(ctx, stm, first + ofsbuf[i], SEEK_SET);
+			range.offset = first + ofsbuf[i];
+			if (i+1 < found)
+				range.length = ofsbuf[i+1] - ofsbuf[i];
+			else
+				range.length = SIZE_MAX;
 
-			obj = pdf_parse_stm_obj(ctx, doc, stm, buf);
+			sub = fz_open_range_filter(ctx, stm, &range, 1);
+
+			obj = pdf_parse_stm_obj(ctx, doc, sub, buf);
+			fz_drop_stream(ctx, sub);
+			sub = NULL;
 
 			entry = pdf_get_xref_entry(ctx, doc, numbuf[i]);
 
@@ -1956,6 +1967,7 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 	fz_always(ctx)
 	{
 		fz_drop_stream(ctx, stm);
+		fz_drop_stream(ctx, sub);
 		fz_free(ctx, ofsbuf);
 		fz_free(ctx, numbuf);
 		pdf_unmark_obj(ctx, objstm);
