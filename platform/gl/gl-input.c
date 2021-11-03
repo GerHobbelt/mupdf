@@ -48,7 +48,7 @@ static char *find_input_location(struct line *lines, int n, float left, float to
 	return find_string_location(lines[i].a, lines[i].b, left, x);
 }
 
-static inline int myisalnum(char *s)
+static inline int myisalnum(const char *s)
 {
 	int cat, c;
 	fz_chartorune_unsafe(&c, s);
