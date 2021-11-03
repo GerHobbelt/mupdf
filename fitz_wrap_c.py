@@ -196,7 +196,7 @@ def JM_FLOAT_ITEM(obj, idx):
 #-----------------------------------------------------------------------------
 def JM_rect_from_py(r):
     if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
-        return fz_infinite_rect;
+        return Rect(Rect.Fixed_INFINITE)
     f = [0, 0, 0, 0]
  HEAD
  3dbfc3b81 (fitz*.py: wip)

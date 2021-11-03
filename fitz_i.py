@@ -1,3 +1,5 @@
+import jlib
+
 from mupdf import *
 
 from fitz_wrap_c import *
@@ -201,7 +203,7 @@ def new_Document(filename, stream, filetype, rect, width, height, fontsize):
     w = width
     h = height
     r = JM_rect_from_py(rect)
-    print(f'r={r}')
+    jlib.log('{rect=} {r=}')
     if not mfz_is_infinite_rect(r):
         w = r.x1 - r.x0
         h = r.y1 - r.y0
@@ -219,18 +221,19 @@ def new_Document(filename, stream, filetype, rect, width, height, fontsize):
         else:
             if filename:
                 if not filetype or len(filetype) == 0:
-                    doc = fz_open_document(gctx, filename);
+                    doc = mfz_open_document(filename);
                 else:
-                    handler = fz_recognize_document(filetype)
+                    handler = mfz_recognize_document(filetype)
                     if handler and handler.open:
                         doc = handler.open(filename)
                     else:
                         THROWMSG("unrecognized file type")
             else:
-                pdf = pdf_create_document()
+                pdf = mpdf_create_document()
                 pdf.dirty = 1
                 doc = pdf
-    except Exception:
+    except Exception as e:
+        jlib.log('{e=}')
         return
     if w > 0 and h > 0:
         mfz_layout_document(doc, w, h, fontsize)
@@ -245,7 +248,7 @@ def Document_loadPage(self, page_id):
             if PySequence_Check(page_id):
                 chapter = JM_INT_ITEM(page_id, 0)
                 pno = JM_INT_ITEM(page_id, 1)
-                page = fz_load_chapter_page(gctx, doc, chapter, pno);
+                page = mfz_load_chapter_page(doc, chapter, pno)
             else:
                 pno = int(page_id)
                 page = mfz_load_page(doc, pno)
