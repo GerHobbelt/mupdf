@@ -702,8 +702,12 @@ Usage:
         --test-python
             Tests the python API.
 
-        --test-python-fitz all|iter|<script-name>
+        --test-python-fitz [<options>] all|iter|<script-name>
             Tests fitz.py with PyMuPDF. Requires 'pkg_add py3-test' or similar.
+            options:
+                Passed to py.test-3.
+                    -x: stop at first error.
+                    -s: show stdout/err.
             all:
                 Runs all tests with py.test-3
             iter:
@@ -7814,7 +7818,7 @@ def build_swig(
                     return obj
                 PdfObj.dict_getl = ppdf_dict_getl
 
-                def ppdf_dict_putl(obj, *tail):
+                def ppdf_dict_putl(obj, val, *tail):
                     """
                     Python implementation of pdf_dict_putl(fz_context
                     *ctx, pdf_obj *obj, pdf_obj *val, ...)
@@ -7992,7 +7996,7 @@ def build_swig(
             jlib.log('{len(generated.c_enums)=}')
             for enum in generated.c_enums:
                 if enum.startswith( 'PDF_ENUM_NAME_'):
-                    mupdf_py_content += f'print("{enum}=%s" % {enum})\n'
+                    #mupdf_py_content += f'print("{enum}=%s" % {enum})\n'
                     mupdf_py_content += f'{enum} = PdfObj( obj_enum_to_obj( {enum}))\n'
             with open( swig_py, 'w') as f:
                 f.write( mupdf_py_content)
@@ -9296,7 +9300,14 @@ def main():
                     jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
 
             elif arg == '--test-python-fitz':
-                tests = args.next()
+                opts = ''
+                while 1:
+                    arg = args.next()
+                    if arg.startswith('-'):
+                        opts += f' {arg}'
+                    else:
+                        tests = arg
+                        break
                 startdir = os.path.abspath('../PyMuPDF/tests')
                 env_extra, command_prefix = python_settings(build_dirs, startdir)
 
@@ -9312,7 +9323,7 @@ def main():
                 #
                 if tests == 'all':
                     jlib.system(
-                            f'cd ../PyMuPDF/tests && py.test-3',
+                            f'cd ../PyMuPDF/tests && py.test-3 {opts}',
                             env_extra=env_extra,
                             out='log',
                             verbose=1,
@@ -9321,14 +9332,14 @@ def main():
                     for script in sorted(glob.glob( '../PyMuPDF/tests/test_*.py')):
                         script = os.path.basename(script)
                         jlib.system(
-                                f'cd ../PyMuPDF/tests && py.test-3 -x -s {script}',
+                                f'cd ../PyMuPDF/tests && py.test-3 {opts} {script}',
                                 env_extra=env_extra,
                                 out='log',
                                 verbose=1,
                                 )
                 else:
                     jlib.system(
-                            f'cd ../PyMuPDF/tests && py.test-3 {tests}',
+                            f'cd ../PyMuPDF/tests && py.test-3 {opts} {tests}',
                             env_extra=env_extra,
                             out='log',
                             verbose=1,
