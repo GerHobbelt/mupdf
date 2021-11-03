@@ -115,6 +115,14 @@ import hashlib
 import typing
 
 
+JM_mupdf_warnings_store = []
+def Tools_mupdf_warnings(self, reset):
+    return JM_mupdf_warnings_store
+
+def Tools_reset_mupdf_warnings(self):
+    global JM_mupdf_warnings_store
+    JM_mupdf_warnings_store = []
+
 def PDF_NAME(x):
     assert isinstance(x, str)
     return getattr(mupdf, f'PDF_ENUM_NAME_{x}')
@@ -3311,7 +3319,9 @@ class Document(_object):
             else: # we won't init until doc is decrypted
                 self.initData()
 
-
+    @property
+    def is_closed(self):
+        return self.isClosed
 
 
     def close(self):
@@ -3569,7 +3579,8 @@ class Document(_object):
         if self.isClosed:
             raise ValueError("document closed")
 
-        return _fitz.Document_pageCount(self)
+        #return _fitz.Document_pageCount(self)
+        return mfz_count_pages(self.this)
 
     @property
 
@@ -3670,7 +3681,9 @@ class Document(_object):
 
         #return _fitz.Document_needsPass(self)
         jlib.log('{self.this=}')
-        return mfz_needs_password(self.this)
+        ret = mfz_needs_password(self.this)
+        jlib.log('{ret=}')
+        return ret
 
     @property
 
@@ -3696,7 +3709,7 @@ class Document(_object):
             (page_id, x, y) where x, y are point coordinates on the page.
             page_id is either page number (if chapters=0), or (chapter, pno).
         """
-
+        assert 0
 
         return _fitz.Document_resolveLink(self, uri, chapters)
 
@@ -4348,13 +4361,33 @@ class Document(_object):
         return _fitz.Document_getSigFlags(self)
 
     @property
-
     def is_form_pdf(self):
-        """Check if PDF Form document."""
-        if self.isClosed:
-            raise ValueError("document closed")
+        """Either False or PDF field count."""
+        jlib.log('{self.this.count_pages()=}')
+        pdf = self.this.specifics()
+        if not pdf.m_internal:
+            return False
+        jlib.log('{self.this.count_pages()=}')
+        count = -1;
+        try:
+            jlib.log('{self.this.count_pages()=}')
+            fields = pdf_dict_getl(self, pdf.trailer(),
+                    mupdf.PDF_ENUM_NAME_Root,
+                    mupdf.PDF_ENUM_NAME_AcroForm,
+                    mupdf.PDF_ENUM_NAME_Fields,
+                    )
+            jlib.log('{fields=} {fields.is_array()=} {self.this.count_pages()=}')
+            if fields.is_array():
+                count = fields.array_len()
+            jlib.log('{self.this.count_pages()=}')
+        except Exception:
+            return False
+        jlib.log('{count=}')
+        jlib.log('{self.this.count_pages()=}')
+        if count >= 0:
+            return count
+        return False
 
-        return _fitz.Document_isFormPDF(self)
 
     @property
 
@@ -6000,6 +6033,7 @@ class Document(_object):
 #        PyObject *resolve_link(char *uri=NULL, int chapters=0)
 #        {
     def resolve_link(uri, chapters):
+        jlib.log('{uri=} {chapters=}')
         if not uri:
             if chapters:
                 return (-1, -1), 0, 0
@@ -6196,8 +6230,10 @@ class Document(_object):
 #
 #        CLOSECHECK0(is_repaired, """Check whether PDF was repaired.""")
 #        %pythoncode%{@property%}
+    @property
     def is_repaired(self):
         pdf = mpdf_document_from_fz_document(self.this)
+        jlib.log('{pdf.m_internal=}')
         if not pdf.m_internal:
             return False    # gracefully handle non-PDF
         return JM_BOOL(mpdf_was_repaired(pdf))
@@ -7920,6 +7956,34 @@ class Document(_object):
 #            }
 #            return rc;
 #        }
+
+
+    def page_annot_xrefs(self, n):
+        page_count = self.this.count_pages()
+        jlib.log('*** {page_count=}')
+        while n < 0:
+            n += page_count
+        jlib.log('self.this is: {self.this}')
+        jlib.log('{self.this.m_internal=}')
+        if 0:
+            jlib.log('dir(self.this):')
+            for i in dir(self.this):
+                jlib.log('    {i}')
+        jlib.log('self.this.specifics is: {self.this.specifics}')
+        if isinstance(self.this, mupdf.PdfDocument):
+            jlib.log('self.this is a mupdf.PdfDocument')
+            pdf_document = self.this
+        else:
+            jlib.log('self.this is not a mupdf.PdfDocument: {self.this}')
+            jlib.log('{self.this.m_internal=}')
+            pdf_document = self.this.specifics()
+            jlib.log('self.this.specifics() => {pdf_document=}')
+        page_obj = pdf_document.lookup_page_obj(n)
+        #jlib.log('page_obj: {dir_str(page_obj)}')
+        #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
+        annots = JM_get_annot_xref_list(page_obj)
+        jlib.log('{self.this.count_pages()=} {self.pageCount=}')
+        return annots
 
 
 
@@ -11076,7 +11140,7 @@ class Tools(_object):
     def mupdf_warnings(self, reset=1):
         """Get the MuPDF warnings/errors with optional reset (default)."""
 
-        val = _fitz.Tools_mupdf_warnings(self, reset)
+        val = Tools_mupdf_warnings(self, reset)
 
         val = "\n".join(val)
         if reset:
@@ -11091,7 +11155,7 @@ class Tools(_object):
     def reset_mupdf_warnings(self):
         """Empty the MuPDF warnings/errors store."""
 
-        return _fitz.Tools_reset_mupdf_warnings(self)
+        return Tools_reset_mupdf_warnings(self)
 
 
     def mupdf_display_errors(self, value=None):

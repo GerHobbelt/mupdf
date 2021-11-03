@@ -4691,12 +4691,16 @@ def set_page_labels(doc, labels):
 
 def has_links(doc: Document) -> bool:
     """Check whether there are links on any page."""
-    if doc.is_closed:
+    if doc.isClosed:
         raise ValueError("document closed")
     if not doc.is_pdf:
         raise ValueError("not a PDF")
+    jlib.log('{self.pageCount=}')
+    jlib.log('calling self.pageCount')
     for i in range(doc.page_count):
+        jlib.log('{i=}')
         for item in doc.page_annot_xrefs(i):
+            jlib.log('{item=}')
             if item[1] == PDF_ANNOT_LINK:
                 return True
     return False

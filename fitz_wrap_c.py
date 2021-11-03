@@ -10,7 +10,7 @@
 
 from fitz_i import *
 
-
+import mupdf
 
 
 #----------------------------------------------------------------------------
@@ -1697,6 +1697,85 @@ def JM_BufferFromBytes(stream):
 #        return names;
 #    }
 #    return names;
+def JM_get_annot_xref_list(page_or_page_obj):
+    '''
+    Wrapper for PyMuPDF/fitz/helper-annot.i:
+        PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
+
+    Not PyMuPDF/fitz/fitz_wrap.c:
+        PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
+    '''
+    if 0 and isinstance(page_or_page_obj, mupdf.PdfObj):
+        # Wrapper for PyMuPDF/fitz/helper-annot.i:
+        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
+        page_obj = page_or_page_obj
+        names = []
+        jlib.log('{page_obj=}')
+        jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
+        jlib.log('calling page_obj.dict_get()')
+        annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        jlib.log('{annots=}')
+        if not annots:
+            return names
+        n = annots.array_len()
+        jlib.log('{n=}')
+        for i in range(n):
+            annot_obj = mupdf.ppdf_array_get(annots, i)
+            xref = mupdf.ppdf_to_num(annot_obj)
+            jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
+            subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if (subtype):
+                name = mupdf.ppdf_to_name(subtype)
+                type_ = mupdf.ppdf_annot_type_from_string(name)
+            id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
+            names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
+        return names
+    elif 0 and isinstance(page_or_page_obj, mupdf.PdfPage):
+        # Not PyMuPDF/fitz/fitz_wrap.c:
+        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
+        page = page_or_page_obj
+        names = []
+        annots = page.obj().dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        if not annots.m_internal:
+            return names
+        n = annots.array_len()
+        for i in range(n):
+            annot_obj = annots.array_get(i)
+            xref = annot_obj.to_num()
+            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if subtype.m_internal:
+                name = subtype.to_name()
+                type_ = name.annot_type_from_string()
+            id_ = annot_obj.dict_gets("NM")
+            names.append( (xref, type_, id_.to_text_string()))
+        return names
+
+    else:
+        if isinstance(page_or_page_obj, mupdf.PdfPage):
+            obj = page_or_page_obj.obj()
+        elif isinstance(page_or_page_obj, mupdf.PdfObj):
+            obj = page_or_page_obj
+        else:
+            assert 0
+        names = []
+        annots = obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        if not annots.m_internal:
+            return names
+        n = annots.array_len()
+        for i in range(n):
+            annot_obj = annots.array_get(i)
+            xref = annot_obj.to_num()
+            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if subtype.m_internal:
+                name = subtype.to_name()
+                type_ = mupdf.ppdf_annot_type_from_string(name)
+            id_ = annot_obj.dict_gets("NM")
+            names.append( (xref, type_, id_.to_text_string()))
+        return names
+
 #}
 #
 #
