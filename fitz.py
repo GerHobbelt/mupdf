@@ -12,6 +12,13 @@ import weakref
 import hashlib
 import typing
 
+
+def PDF_NAME(x):
+    assert isinstance(x, str)
+    return getattr(mupdf, f'PDF_ENUM_NAME_{x}')
+
+
+
 dictkey_align = "align"
 dictkey_align = "ascender"
 dictkey_bbox = "bbox"
@@ -303,6 +310,70 @@ class TOOLS:
             return 0, (dst.a, dst.b, dst.c, dst.d, dst.e, dst.f)
 
         return 1, ()
+
+    @staticmethod
+    def _parse_da(annot):
+        def Tools__parse_da(annot):
+            this_annot = annot.this
+            assert isinstance(this_annot, mupdf.PdfAnnot)
+            try:
+                da = mupdf.mpdf_dict_get_inheritable(this_annot.obj(), PDF_NAME('DA'))
+                if not da.m_internal:
+                    trailer = mupdf.mpdf_trailer(this_annot.page().doc())
+                    da = mupdf.ppdf_dict_getl(trailer,
+                            PDF_NAME('Root'),
+                            PDF_NAME('AcroForm'),
+                            PDF_NAME('DA'),
+                            )
+                da_str = mupdf.mpdf_to_text_string(da)
+            except Exception:
+                return
+            #return JM_UnicodeFromStr(da_str);
+            return da_str
+
+        val = Tools__parse_da(annot)
+
+        if not val:
+            return ((0,), "", 0)
+        font = "Helv"
+        fsize = 12
+        col = (0, 0, 0)
+        dat = val.split()  # split on any whitespace
+        for i, item in enumerate(dat):
+            if item == "Tf":
+                font = dat[i - 2][1:]
+                fsize = float(dat[i - 1])
+                dat[i] = dat[i-1] = dat[i-2] = ""
+                continue
+            if item == "g":            # unicolor text
+                col = [(float(dat[i - 1]))]
+                dat[i] = dat[i-1] = ""
+                continue
+            if item == "rg":           # RGB colored text
+                col = [float(f) for f in dat[i - 3:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
+                continue
+            if item == "k":           # CMYK colored text
+                col = [float(f) for f in dat[i - 4:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = dat[i-4] = ""
+                continue
+
+        val = (col, font, fsize)
+        return val
+
+    @staticmethod
+    def _update_da(annot, da_str):
+        #return _fitz.Tools__update_da(self, annot, da_str)
+        try:
+            this_annot = annot.this
+            assert isinstance(this_annot, mupdf.PdfAnnot)
+            mupdf.mpdf_dict_put_text_string(this_annot.obj(), PDF_NAME('DA'), da_str)
+            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('DS'))    # /* not supported */
+            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('RC'))    # /* not supported */
+            mupdf.mpdf_dirty_annot(this_annot)
+        except Exception:
+            return
+        return
 
 
 def DUMMY(*args, **kw):
@@ -7517,7 +7588,25 @@ class Annot:
         return r
 
     def _setAP(self, ap, rect=0):
-        return _fitz.Annot__setAP(self, ap, rect)
+        #return _fitz.Annot__setAP(self, ap, rect)
+        try:
+            annot = self.this
+            apobj = mupdf.mpdf_dict_getl(annot.obj(), PDF_NAME('AP'), PDF_NAME('N'))
+            if not apobj.m_internal:
+                THROWMSG("annot has no AP/N object")
+            if not mupdf.mpdf_is_stream(apobj):
+                THROWMSG("AP/N object is no stream")
+            res = JM_BufferFromBytes(ap)
+            if not res.m_internal:
+                THROWMSG("invalid /AP stream argument")
+            JM_update_stream(annot.page().doc(), apobj, res, 1)
+            if rect:
+                bbox = mupdf.mpdf_dict_get_rect(annot.obj(), PDF_NAME('Rect'))
+                mupdf.mpdf_dict_put_rect(apobj, PDF_NAME('BBox'), bbox)
+                #annot->ap = NULL;
+        except Exception:
+            return
+        return
 
     def _get_redact_values(self):
         val = _fitz.Annot__get_redact_values(self)
