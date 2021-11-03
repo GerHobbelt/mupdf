@@ -258,6 +258,7 @@ def restore_aliases():
     _alias(fitz.Document, "xrefStreamRaw", "xref_stream_raw")
 
     # deprecated Page aliases
+    assert 0
     _alias(fitz.Page, "_isWrapped", "is_wrapped")
     _alias(fitz.Page, "addCaretAnnot", "add_caret_annot")
     _alias(fitz.Page, "addCircleAnnot", "add_circle_annot")
