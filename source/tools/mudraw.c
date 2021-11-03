@@ -38,6 +38,8 @@
 #include "mupdf/helpers/cpu.h"
 #endif
 
+#include "mupdf/helpers/dir.h"
+
 #include "../fitz/tessocr.h"
 
 #include <string.h>
@@ -1228,6 +1230,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				else
 					bander = fz_new_color_pcl_band_writer(ctx, out, NULL);
 			}
+			else if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
+			{
+				assert(bander != NULL); // must've been set up already at document level!
+			}
 			else
 			{
 				fz_throw(ctx, FZ_ERROR_ABORT, "Internal error: Unhandled output format %d.", output_format);
@@ -1281,7 +1287,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 
 			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
+			{
 				fz_close_band_writer(ctx, bander);
+				bander = NULL;
+			}
 
 			/* FIXME */
 			if (showmd5 && pix)
@@ -1337,6 +1346,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else
 			{
 				fz_drop_pixmap(ctx, pix);
+				pix = NULL;
 			}
 		}
 		fz_catch(ctx)
@@ -2046,6 +2056,70 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 #endif
 }
 
+static int img_seqnum = 1;
+
+static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
+{
+	char image_path[PATH_MAX];
+
+	fz_image* image = block->u.i.image;
+
+	fz_compressed_buffer* cbuf;
+	fz_buffer* buf;
+
+	cbuf = fz_compressed_image_buffer(ctx, image);
+
+	if (cbuf && cbuf->params.type == FZ_IMAGE_JPEG)
+	{
+		int type = fz_colorspace_type(ctx, image->colorspace);
+		if (type == FZ_COLORSPACE_GRAY || type == FZ_COLORSPACE_RGB)
+		{
+			// make sure we produce a unique, non-existing image file path:
+			do
+			{
+				fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "jpg");
+				img_seqnum++;
+			} while (fz_file_exists(ctx, image_path));
+
+			fz_write_string(ctx, out, image_path);
+			fz_save_buffer(ctx, cbuf->buffer, image_path);
+			return;
+		}
+	}
+	if (cbuf && cbuf->params.type == FZ_IMAGE_PNG)
+	{
+		// make sure we produce a unique, non-existing image file path:
+		do
+		{
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "png");
+			img_seqnum++;
+		} while (fz_file_exists(ctx, image_path));
+
+		fz_write_string(ctx, out, image_path);
+		fz_save_buffer(ctx, cbuf->buffer, image_path);
+		return;
+	}
+
+	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
+	fz_try(ctx)
+	{
+		// make sure we produce a unique, non-existing image file path:
+		do
+		{
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "png");
+			img_seqnum++;
+		} while (fz_file_exists(ctx, image_path));
+
+		fz_write_string(ctx, out, image_path);
+		fz_save_buffer(ctx, buf, image_path);
+	}
+	fz_always(ctx)
+		fz_drop_buffer(ctx, buf);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+
 static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len)
 {
 	char *tmpdir;
@@ -2310,6 +2384,8 @@ int main(int argc, const char** argv)
 
 	gettime_once = 1;
 
+	img_seqnum = 1;
+
 	// ---
 
 	bgprint.active = 0;			/* set by -P */
@@ -2529,6 +2605,18 @@ int main(int argc, const char** argv)
 		}
 
 		fz_parse_stext_options(ctx, &stext_options, txtdraw_options);
+		// set up a default graphics output file path template when none has been provided by the CLI/user already:
+		if (!stext_options.reference_image_path_template)
+		{
+			// produce a path template which has the filename extension already stripped off:
+			size_t l = fz_strrcspn(output, "./\\:");
+			char* tpl = fz_asprintf(ctx, "%.*s", (int)l, output);
+			// and any `%d` regular page format specifiers removed (replaced!) as well!
+			tpl = fz_sanitize_path_ex(tpl, "f%#^$!", "_", 0);
+			stext_options.reference_image_path_template = tpl;
+
+			fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);
+		}
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
@@ -2610,7 +2698,7 @@ int main(int argc, const char** argv)
 
 			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
-				if (!strcmp(format, suffix_table[i].suffix+1))
+				if (!stricmp(format, suffix_table[i].suffix+1))
 				{
 					output_format = suffix_table[i].format;
 					if (spots == SPOTS_FULL && suffix_table[i].spots == 0)
@@ -2628,28 +2716,22 @@ int main(int argc, const char** argv)
 		}
 		else
 		{
-			const char *suffix = output;
 			int i;
 
 			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
-				char *s = strstr(suffix, suffix_table[i].suffix);
+				const char* suffix_ref = suffix_table[i].suffix;
+				const char* s = output + fz_maxi(0, (int)strlen(output) - (int)strlen(suffix_ref));
 
-				if (s != NULL)
+				if (!stricmp(s, suffix_ref))
 				{
-					suffix = s+strlen(suffix_table[i].suffix);
 					output_format = suffix_table[i].format;
 					if (spots == SPOTS_FULL && suffix_table[i].spots == 0)
 					{
-						fz_error(ctx, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.", suffix_table[i].suffix+1);
+						fz_error(ctx, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.", suffix_ref+1);
 						spots = SPOTS_OVERPRINT_SIM;
 					}
-					// match the tail (= file extension) with the output format;
-					// when there's still a tail left after this round, we need to look again:
-					if (*suffix)
-						i = -1;
-					else
-						break;
+					break;
 				}
 			}
 		}

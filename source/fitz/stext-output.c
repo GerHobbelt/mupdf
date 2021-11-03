@@ -119,6 +119,7 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 		}
 		else
 		{
+			fz_write_string(ctx, out, "(undefined-reference-images-handler)\">\n");
 			fz_throw(ctx, FZ_ERROR_GENERIC, "stext reference-images option used but no image handler has been provided.");
 		}
 	}
@@ -257,6 +258,7 @@ fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *b
 		}
 		else
 		{
+			fz_write_string(ctx, out, "(undefined-reference-images-handler)\"/></p>\n");
 			fz_throw(ctx, FZ_ERROR_GENERIC, "stext reference-images option used but no image handler has been provided.");
 		}
 	}

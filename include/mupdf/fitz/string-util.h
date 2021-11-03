@@ -114,6 +114,66 @@ char *fz_urldecode(char *url);
 void fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *fmt, int page);
 
 /**
+	create output file name using a template.
+
+	Same as `fz_format_output_path()`, with these additions:
+
+	(IFF the specified chapter number is non-zero, otherwise the next rule is skipped!)
+
+	- if the path contains `$`, every such pattern will be
+	  replaced with the chapter number. If the template does not
+	  contain any `$`, the chapter number will be inserted before the
+	  filename extension, preceded by a `-` dash.
+	  If the template does not have a filename extension,
+	  the chapter number will be added to the end.
+
+	  When a chapter number is inserted like that, i.e. when not replacing a `$` marker,
+	  then it will be separated from the page number by an extra `-` dash.
+
+	(IFF the specified sequence number is non-zero, otherwise the next rule is skipped!)
+
+	- if the path contains `^`, every such pattern will be
+	  replaced with the sequence number. If the template does not
+	  contain any `^`, the sequence number will be inserted before the
+	  filename extension, preceded by a `-` dash.
+	  If the template does not have a filename extension,
+	  the sequence number will be added to the end.
+
+	(IFF the specified label is non-empty/NULL, otherwise the next rule is skipped!)
+
+	- if the path contains `!`, every such pattern will be
+	  replaced with the label text. If the template does not
+	  contain any `!`, the label text will be inserted before the
+	  filename extension, preceded by a `-` dash.
+	  If the template does not have a filename extension,
+	  the label text will be added to the end.
+
+	(IFF the specified extension is non-empty/NULL, otherwise the next rule is skipped!)
+
+	- The specified extension will be appended to the template.
+	  The code will make sure the extension is always preceded by a `.`, unless
+	  the template ends with a directory separator, in which case the filename `____`
+	  will be assumed and appended first: this is done to prevent creating
+	  'UNIX dot files' *inadvertently*.
+	  If the template already includes a file extension, than that extension is
+	  kept as-is, but its leading dot will be replaced by a `-` dash.
+	  We keep the existing template extension like that to help applications which
+	  output many templated files for various source file templates which *may*
+	  only differ in their source extension part. In other words: if the user wants
+	  to *replace* the template extension, than they should have removed it from
+	  the template string beforehand.
+
+	Also note that a zero(0) page number will be treated as yet another part to skip.
+	This allows application code to re-use this API to apply arbitrary non-zero numbers,
+	e.g. coordinates, to the filename template instead.
+
+	Hence, when appending all these parts, the filename will look like this:
+
+	    TEMPLATEFILENAME-<CHAPTER>-<PAGE>-<SEQUENCENUMBER>.<EXTENSION>
+*/
+void fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char *label, const char *extension);
+
+/**
     Skip directory/(Windows)drive separators.
 
     Returns pointer to basename part in the input string.
@@ -139,6 +199,14 @@ char *fz_realpath(const char *path, char *resolved_path);
 */
 int fz_strcasecmp(const char *a, const char *b);
 int fz_strncasecmp(const char *a, const char *b, size_t n);
+
+/**
+	Return the length of the string until the last occurrence of any of the characters in the set.
+	Consequently, this API returns the length of the string when none of the characters in the set were found.
+
+	Hence this is the `strr*` scan-from-the-right-towards-the-left variant of `strcspn()`.
+*/
+size_t fz_strrcspn(const char *str, const char *set);
 
 /**
 	Return TRUE when the given string contains a `%d` format specifier.

@@ -49,6 +49,30 @@ void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, c
  */
 void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path);
 
+/**
+	Replace any path-invalid characters from the input path.
+	This API assumes a rather strict rule set for file naming to ensure resulting paths
+	are valid on UNIX, Windows and Mac OSX platforms' default file systems (ext2, HFS, NTFS).
+
+	You may additionally specify a set of characters, which should be replaced as well,
+	and a replacement string for each occurrence or run of occurrences.
+
+	When `f` is specified as part of the replacement sequence, this implies any `printf`/`fz_format_output_path`
+	format string, e.g. `%[+-][0-9]*d`, in its entirety. You may want to specify `%` in the set if you only
+	wish to replace/'nuke' the leading `%` in each such format specifier. Use `f` to strip out all `printf`-like
+	format parts from a filename/path to make it generically safe to use.
+
+	These additional arguments, `set` and `replace_single` and `replace_sequence`, may be NULL
+	or NUL(0), in which case they are not active.
+
+	The `replacement_single` string is used as a map: each character in the `set` is replaced by its corresponding
+	character in `replacement_single`. When `replacement_single` is shorter than `set`, any of the later `set` members
+	will be replaced by the last `replacement_single` character.
+
+	Overwrites the `path` string in place.
+*/
+char* fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence);
+
 #ifdef __cplusplus
 }
 #endif
