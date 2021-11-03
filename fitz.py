@@ -3573,17 +3573,18 @@ class Document(_object):
         return _fitz.Document_set_oc(self, xref, oc)
 
     @property
-
     def page_count(self):
         """Number of pages."""
         if self.isClosed:
             raise ValueError("document closed")
-
-        #return _fitz.Document_pageCount(self)
-        return mfz_count_pages(self.this)
+        ret = self.this.count_pages()
+        return ret
 
     @property
+    def pageCount(self):
+        return self.page_count
 
+    @property
     def chapter_count(self):
         """Number of chapters."""
         if self.isClosed:
@@ -3802,22 +3803,15 @@ class Document(_object):
 
         return _fitz.Document__hasXrefOldStyle(self)
 
-    @property
-
-    def isDirty(self):
-        """True if PDF has unsaved changes."""
-        if self.isClosed:
-            raise ValueError("document closed")
-
-        return _fitz.Document_isDirty(self)
-
-
     def can_save_incrementally(self):
         """Check whether incremental saves are possible."""
         if self.isClosed:
             raise ValueError("document closed")
 
-        return _fitz.Document_can_save_incrementally(self)
+        pdf = self.this.document_from_fz_document()
+        if not pdf.m_internal:
+            return False
+        return pdf.can_be_saved_incrementally()
 
 
     def authenticate(self, password):
@@ -4843,6 +4837,42 @@ class Document(_object):
     def saveIncr(self):
         """ Save PDF incrementally"""
         return self.save(self.name, incremental=True, encryption=PDF_ENCRYPT_KEEP)
+
+
+    def loadPage(self, page_id):
+
+        """Load a page.
+
+        'page_id' is either a 0-based page number or a tuple (chapter, pno),
+        with chapter number and page number within that chapter.
+        """
+
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        if page_id is None:
+            page_id = 0
+        if page_id not in self:
+            raise ValueError("page not in document")
+        if type(page_id) is int and page_id < 0:
+            np = self.pageCount
+            while page_id < 0:
+                page_id += np
+
+        #val = _fitz.this.load_page(page_id)
+        if isinstance(page_id, int):
+            page = self.this.load_page(page_id)
+        else:
+            chapter, pagenum = page_id
+            page = self.this.load_chapter_page(chapter, pagenum)
+        val = Page(page)
+
+        val.thisown = True
+        val.parent = weakref.proxy(self)
+        self._page_refs[id(val)] = val
+        val._annot_refs = weakref.WeakValueDictionary()
+        val.number = page_id
+
+        return val
 
 
     def reload_page(self, page: "struct Page *") -> "struct Page *":
@@ -6189,6 +6219,7 @@ class Document(_object):
 #
 #        CLOSECHECK0(is_pdf, """Check for PDF.""")
 #        %pythoncode%{@property%}
+    @property
     def is_pdf(self):
         if mpdf_specifics(self.this): return True
         return False
@@ -6215,9 +6246,13 @@ class Document(_object):
 #
 #        CLOSECHECK0(is_dirty, """True if PDF has unsaved changes.""")
 #        %pythoncode%{@property%}
-    def is_dirty():
+    @property
+    def is_dirty(self):
         pdf = mpdf_specifics(self.this)
-        if not pdf: return
+        if not pdf.m_internal:
+            return False
+        r = mpdf_has_unsaved_changes(pdf)
+        jlib.log('{r=}')
         return JM_BOOL(mpdf_has_unsaved_changes(pdf))
 #
 #        CLOSECHECK0(can_save_incrementally, """Check whether incremental saves are possible.""")
