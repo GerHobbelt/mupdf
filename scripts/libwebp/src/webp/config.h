@@ -72,6 +72,11 @@
 /* TODO: handle properly in CMake */
 #define LT_OBJDIR ".libs/"
 
+
+/* Prevent clash with other libs loaded in monolithic builds... */
+#if !defined(PACKAGE) && !defined(VERSION)
+
+
 /* Name of package */
 #define PACKAGE "WebP"
 
@@ -93,11 +98,15 @@
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.2.0"
 
-/* Define to 1 if you have the ANSI C header files. */
-#define STDC_HEADERS 1
-
 /* Version number of package */
 #define VERSION "1.2.0"
+
+
+#endif
+
+
+/* Define to 1 if you have the ANSI C header files. */
+#define STDC_HEADERS 1
 
 /* Set to 1 if GIF library is installed */
 #define WEBP_HAVE_GIF 1
