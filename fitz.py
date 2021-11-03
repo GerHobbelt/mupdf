@@ -2928,11 +2928,8 @@ def JM_annot_set_border(border, doc, annot_obj):
         nstyle = "D"
 
     jlib.log('Creating key from {nwidth=}')
-    key = mudf.PdfObj(float(nwidth))
-    jlib.log('{key=}')
     annot_obj.dict_putl(
-            key,
-            #mupdf.mpdf_new_real(float(nwidth)),
+            mupdf.mpdf_new_real(float(nwidth)),
             mupdf.PDF_ENUM_NAME_BS,
             mupdf.PDF_ENUM_NAME_W,
             )
@@ -7616,7 +7613,9 @@ class Annot:
         annot.dirty_annot() # enforce MuPDF /AP formatting
         if type_ == mupdf.PDF_ANNOT_FREE_TEXT:
             if fill_color:
-                annot.set_annot_color(nfcol, fcol)
+                # Use mupdf python custom fn. fixme: make this available as a
+                # class method and as mpdf_set_annot_color().
+                mupdf.pdf_set_annot_color(annot.m_internal, fcol[:nfcol])
             else:
                 annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
         else:
