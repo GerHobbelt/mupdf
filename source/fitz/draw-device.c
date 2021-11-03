@@ -2596,11 +2596,13 @@ tile_mod(float a, float m)
 
 	if (m < 0)
 		m = -m;
+	a = fmod(a, m);
+	if (a < 0)
+		a += m;
 
-	i = a/m;
-	a -= i*m;
+	i = (int)(256.0f*a + 0.5f);
 
-	return a;
+	return i/256.0f;
 }
 
 static void
