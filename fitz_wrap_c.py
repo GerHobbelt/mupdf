@@ -69,7 +69,7 @@ def PySequence_Size(r):
 #-----------------------------------------------------------------------------
 def JM_rect_from_py(r):
     if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
-        return fz_infinite_rect;
+        return Rect(Rect.Fixed_INFINITE)
     f = [0, 0, 0, 0]
     for i in range(4):
         f[i] = JM_FLOAT_ITEM(r, i)

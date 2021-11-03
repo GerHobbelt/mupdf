@@ -5,6 +5,7 @@
 # the SWIG interface file instead.
 
 import mupdf
+import jlib
 
 #from fitz_helper_defines import *
 #from fitz_helper_python_i import *
@@ -3294,10 +3295,14 @@ class Document(_object):
         self._page_refs  = weakref.WeakValueDictionary()
 
         this = new_Document(filename, stream, filetype, rect, width, height, fontsize)
+        jlib.log('{this=}')
         try:
             self.this.append(this)
         except __builtin__.Exception:
+            jlib.log('')
             self.this = this
+        jlib.log('{self.this=}')
+        self.thisown = True # fixme?
 
         if self.thisown:
             self._graft_id = TOOLS.gen_id()
@@ -3372,8 +3377,11 @@ class Document(_object):
         """Load first outline."""
         if self.isClosed:
             raise ValueError("document closed")
-
-        return _fitz.Document__loadOutline(self)
+        #return _fitz.Document__loadOutline(self)
+        try:
+            return mfz_load_outline(self.this);
+        except Exception:
+            return
 
 
     def _dropOutline(self, ol):
@@ -3650,7 +3658,8 @@ class Document(_object):
         if self.isClosed:
             raise ValueError("document closed")
 
-        return _fitz.Document__getMetadata(self, key)
+        #return _fitz.Document__getMetadata(self, key)
+        return self.this.lookup_metadata(key)
 
     @property
 
@@ -3659,7 +3668,9 @@ class Document(_object):
         if self.isClosed:
             raise ValueError("document closed")
 
-        return _fitz.Document_needsPass(self)
+        #return _fitz.Document_needsPass(self)
+        jlib.log('{self.this=}')
+        return mfz_needs_password(self.this)
 
     @property
 
@@ -4922,7 +4933,6 @@ class Document(_object):
             for k in self.Graftmaps.keys():
                 self.Graftmaps[k] = None
         if hasattr(self, "this") and self.thisown:
-            self.__swig_destroy__(self)
             self.thisown = False
 
         self.Graftmaps = {}
@@ -10882,12 +10892,16 @@ class Font(_object):
         self.__swig_destroy__(self)
 
 
+Tools_gen_id_state = 0
+
 class Tools(_object):
 
     def gen_id(self):
         """Return a unique positive integer."""
-
-        return _fitz.Tools_gen_id(self)
+        #return _fitz.Tools_gen_id(self)
+        global Tools_gen_id_state
+        Tools_gen_id_state += 1
+        return Tools_gen_id_state
 
 
     def set_icc(self, on=0):
