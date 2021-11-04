@@ -257,6 +257,36 @@ def JM_quad_from_py(r):
     return q
 
 
+def JM_find_annot_irt(annot):
+    '''
+    Return the first annotation whose /IRT key ("In Response To") points to
+    annot. Used to remove the response chain of a given annotation.
+    '''
+    assert isinstance(annot, mupdf.PdfAnnot)
+    found = 0;
+    try:    # loop thru MuPDF's internal annots array
+        jlib.log('{annot=}')
+        jlib.log('{annot.m_internal=}')
+        page = annot.m_internal.page
+        jlib.log('{page=}')
+        annotptr = page.m_internal.annots
+        while 1:
+            jlib.log('{annotptr=}')
+            assert isinstance(annotptr, mupdf.ppdf_annot)
+            if not annotptr:
+                break
+            o = mupdf.ppdf_dict_gets(annotptr.obj, 'IRT')
+            if o:
+                if not mupdf.ppdf_objcmp(o, annot.m_internal.obj):
+                    found = 1
+                    break
+            annotptr = annotptr.next
+    except Exception as e:
+        jlib.log('{e=}')
+    return irt_annot if found else None
+
+
+
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
@@ -4274,7 +4304,7 @@ class Document:
                         assert 0, 'recognize_document() not yet supported'
                 else:
                     doc = mupdf.PdfDocument()
-                    doc.dirty = 1
+                    # fixme: doc.dirty = 1
             if w > 0 and h > 0:
                 if isinstance(doc, mupdf.PdfDocument):
                     mupdf.layout_document(doc.m_internal.super, w, h, fontsize)
@@ -5860,6 +5890,62 @@ class Page:
 
     rect = property(bound, doc="page rectangle")
 
+    def delete_annot(self, annot):
+        """Delete annot and return next one."""
+        CheckParent(self)
+        CheckParent(annot)
+
+        page = self._pdf_page()
+        while 1:
+            # first loop through all /IRT annots and remove them
+            irt_annot = JM_find_annot_irt(annot.this)
+            if not irt_annot.m_internal:    # no more there
+                break
+            JM_delete_annot(page, irt_annot)
+        nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
+        JM_delete_annot(page, annot.this)
+        #fixme: page->doc->dirty = 1;
+        val = Annot(nextannot)
+
+        if val:
+            val.thisown = True
+            val.parent = weakref.proxy(self) # owning page object
+            val.parent._annot_refs[id(val)] = val
+        annot._erase()
+
+        return val
+
+
+
+
+    def add_strikeout_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'StrikeOut' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
+
+
+    def add_underline_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Underline' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
+
+
+    def add_squiggly_annot(self, quads=None, start=None,
+                         stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Squiggly' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
+
+
     def add_highlight_annot(self, quads=None, start=None,
                           stop=None, clip=None) -> "struct Annot *":
         """Add a 'Highlight' annotation."""
@@ -5989,7 +6075,8 @@ class Page:
 
     def _pdf_page(self):
         '''
-        Returns a mupdf.PdfPage.
+        Returns self.this as a mupdf.PdfPage using page_from_fz_page() if
+        required.
         '''
         if isinstance(self.this, mupdf.PdfPage):
             return self.this
