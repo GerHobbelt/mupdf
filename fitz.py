@@ -3773,7 +3773,9 @@ def JM_embed_file(
     return val
 
 
-
+def JM_UnicodeFromStr(s):
+    assert isinstance(s, str)
+    return s
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -6494,7 +6496,6 @@ class Page:
 
 
 
-
     def add_rect_annot(self, rect: rect_like) -> "struct Annot *":
         """Add a 'Square' (rectangle) annotation."""
         old_rotation = annot_preprocess(self)
@@ -6529,6 +6530,18 @@ class Page:
                 self.set_rotation(old_rotation)
         annot_postprocess(self, annot)
         return annot
+
+    def add_stamp_annot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
+        """Add a ('rubber') 'Stamp' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_stamp_annot(rect, stamp)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
 
 
 
@@ -6899,7 +6912,47 @@ class Page:
         return _fitz.Page__add_ink_annot(self, list)
 
     def _add_stamp_annot(self, rect, stamp=0):
-        return _fitz.Page__add_stamp_annot(self, rect, stamp)
+        #return _fitz.Page__add_stamp_annot(self, rect, stamp)
+        page = self._pdf_page()
+        #pdf_annot *annot = NULL;
+        stamp_id = [
+                PDF_NAME('Approved'),
+                PDF_NAME('AsIs'),
+                PDF_NAME('Confidential'),
+                PDF_NAME('Departmental'),
+                PDF_NAME('Experimental'),
+                PDF_NAME('Expired'),
+                PDF_NAME('Final'),
+                PDF_NAME('ForComment'),
+                PDF_NAME('ForPublicRelease'),
+                PDF_NAME('NotApproved'),
+                PDF_NAME('NotForPublicRelease'),
+                PDF_NAME('Sold'),
+                PDF_NAME('TopSecret'),
+                PDF_NAME('Draft'),
+                ]
+        n = len(stamp_id)
+        name = stamp_id[0]
+        try:
+            ASSERT_PDF(page)
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            if INRANGE(stamp, 0, n-1):
+                name = stamp_id[stamp]
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
+            mupdf.mpdf_set_annot_contents(
+                    annot,
+                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
+                    )
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=} {jlib.exception_info()=}')
+            return
+        return Annot(self, annot)
 
     def _add_file_annot(self, point, buffer_, filename, ufilename=None, desc=None, icon=None):
         #return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
@@ -7292,7 +7345,19 @@ class Page:
 
 
     def _load_annot(self, name, xref):
-        return _fitz.Page__load_annot(self, name, xref)
+        #return _fitz.Page__load_annot(self, name, xref)
+        #pdf_annot *annot = NULL;
+        page = self._pdf_page
+        try:
+            ASSERT_PDF(page)
+            if xref == 0:
+                annot = JM_get_annot_by_name(page, name)
+            else:
+                annot = JM_get_annot_by_xref(page, xref)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        return Annot(self, annot)
 
     def _get_resource_properties(self):
         return _fitz.Page__get_resource_properties(self)
@@ -8483,15 +8548,14 @@ class Annot:
         return val
 
     @property
-
     def xref(self):
         """annotation xref"""
         CheckParent(self)
-
-        return _fitz.Annot_xref(self)
+        #return _fitz.Annot_xref(self)
+        annot = self.this
+        return mupdf.mpdf_to_num(annot.annot_obj())
 
     @property
-
     def apn_matrix(self):
         """annotation appearance matrix"""
         try:
@@ -9318,12 +9382,40 @@ class Annot:
         return _fitz.Annot_update_file(self, buffer, filename, ufilename, desc)
 
     @property
-
     def info(self):
         """Various information details."""
         CheckParent(self)
 
-        return _fitz.Annot_info(self)
+        #return _fitz.Annot_info(self)
+        annot = self.this
+        res = dict()
+
+        res[dictkey_content] = JM_UnicodeFromStr(mupdf.mpdf_annot_contents(annot))
+
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Name'))
+        res[dictkey_name] = JM_UnicodeFromStr(mupdf.mpdf_to_name(o))
+
+        # Title (= author)
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('T'))
+        res[dictkey_title] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        # CreationDate
+        o = mupdf.mpdf_dict_gets(annot.annot_obj(), "CreationDate")
+        res[dictkey_creationDate] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        # ModDate
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('M'))
+        res[dictkey_modDate] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        # Subj
+        o = mupdf.mpdf_dict_gets(annot.annot_obj(), "Subj")
+        res[dictkey_subject] = mupdf.mpdf_to_text_string(o)
+
+        # Identification (PDF key /NM)
+        o = mupdf.mpdf_dict_gets(annot.annot_obj(), "NM")
+        res[dictkey_id] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        return res
 
 
     def set_info(self, info=None, content=None, title=None, creationDate=None, modDate=None, subject=None):
