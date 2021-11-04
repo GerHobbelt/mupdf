@@ -3731,6 +3731,51 @@ def JM_matrix_from_py(m):
     return mupdf.Matrix(a[0], a[1], a[2], a[3], a[4], a[5])
 
 
+def JM_embed_file(
+        pdf,
+        buf,
+        filename,
+        ufilename,
+        desc,
+        compress,
+        ):
+    '''
+    embed a new file in a PDF (not only /EmbeddedFiles entries)
+    '''
+    len_ = 0;
+    #pdf_obj *ef, *f, *params, *val = NULL;
+    #fz_var(val);
+    try:
+        val = mupdf.mpdf_new_dict(pdf, 6)
+        mupdf.mpdf_dict_put_dict(val, PDF_NAME('CI'), 4)
+        ef = mupdf.mpdf_dict_put_dict(val, PDF_NAME('EF'), 4)
+        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('F'), filename)
+        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('UF'), ufilename)
+        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('Desc'), desc)
+        mupdf.mpdf_dict_put(val, PDF_NAME('Type'), PDF_NAME('Filespec'))
+        bs = b'  '
+        f = mupdf.mpdf_add_stream(
+                pdf,
+                mupdf.mfz_new_buffer_from_copied_data(mupdf.python_bytes_data(bs), len(bs)),
+                mupdf.PdfObj(),
+                0,
+                )
+        mupdf.mpdf_dict_put(ef, PDF_NAME('F'), f)
+        JM_update_stream(pdf, f, buf, compress)
+        len_, _ = buf.buffer_storage_raw()
+        mupdf.mpdf_dict_put_int(f, PDF_NAME('DL'), len_)
+        mupdf.mpdf_dict_put_int(f, PDF_NAME('Length'), len_)
+        params = mupdf.mpdf_dict_put_dict(f, PDF_NAME('Params'), 4)
+        mupdf.mpdf_dict_put_int(params, PDF_NAME('Size'), len_)
+    except Exception as e:
+        jlib.log('{e=} {jlib.exception_info()=}')
+        raise
+    return val
+
+
+
+
+
 def CheckRect(r: typing.Any) -> bool:
     """Check whether an object is non-degenerate rect-like.
 
@@ -6524,6 +6569,7 @@ class Page:
         finally:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
+        jlib.log('{type(annot)=} {annot=}')
         annot_postprocess(self, annot)
         return annot
 
@@ -6855,8 +6901,40 @@ class Page:
     def _add_stamp_annot(self, rect, stamp=0):
         return _fitz.Page__add_stamp_annot(self, rect, stamp)
 
-    def _add_file_annot(self, point, buffer, filename, ufilename=None, desc=None, icon=None):
-        return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
+    def _add_file_annot(self, point, buffer_, filename, ufilename=None, desc=None, icon=None):
+        #return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
+        page = self._pdf_page()
+        uf = ufilename if ufilename else filename
+        d = desc if desc else filename
+        #fz_buffer *filebuf = NULL;
+        #fz_rect r;
+        p = JM_point_from_py(point)
+        try:
+            ASSERT_PDF(page);
+            filebuf = JM_BufferFromBytes(buffer_)
+            if not filebuf.m_internal:
+                THROWMSG("bad type: 'buffer'")
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_FILE_ATTACHMENT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT;
+            mupdf.mpdf_set_annot_flags(annot, flags)
+
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+
+            val = JM_embed_file(page.doc(), filebuf, filename, uf, d, 1)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('FS'), val)
+            mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('Contents'), filename)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        return Annot(self, annot)
 
     def _add_text_marker(self, quads, annot_type):
 
