@@ -70,6 +70,7 @@ dictkey_xref = "xref"
 dictkey_xres = "xres"
 dictkey_yres = "yres"
 
+EPSILON = 1e-5
 
 def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     if name == "thisown":
@@ -148,7 +149,6 @@ def JM_read_contents(pageref):
 
 def JM_BinFromBuffer(buffer_):
     assert isinstance(buffer_, mupdf.Buffer)
-    print('JM_BinFromBuffer', file=sys.stderr)
     return buffer_.buffer_extract()
 
 
@@ -221,6 +221,42 @@ def JM_point_from_py(p):
         return p0
     return mupdf.Point(x, y)
 
+def PySequence_Check(s):
+    return isinstance(s, (tuple, list))
+
+def PySequence_Size(s):
+    return len(s)
+
+def JM_FLOAT_ITEM(obj, idx):
+    if not PySequence_Check(obj):
+        return None
+    return float(obj[idx])
+
+def JM_quad_from_py(r):
+    q = mupdf.mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
+    p = [0,0,0,0]
+    if not r or not isinstance(r, (tuple, list)) or len(r) != 4:
+        return q
+
+    if JM_FLOAT_ITEM(r, 0) is None:
+        return mupdf.mfz_quad_from_rect(JM_rect_from_py(r))
+
+    for i in range(4):
+        obj = r[i]  # next point item
+        if not obj.m_internal or not PySequence_Check(obj) or PySequence_Size(obj) != 2:
+            return q    # invalid: cancel the rest
+
+        p[i].x = JM_FLOAT_ITEM(obj, 0)
+        p[i].y = JM_FLOAT_ITEM(obj, 1)
+        if p[i].x is None or p[i].y is None:
+            return q
+    q.ul = p[0]
+    q.ur = p[1]
+    q.ll = p[2]
+    q.lr = p[3]
+    return q
+
+
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
@@ -283,7 +319,6 @@ class TOOLS:
 
     @staticmethod
     def _invert_matrix(matrix):
-        jlib.log('{matrix=}')
         try:
             src = mupdf.Matrix(
                     matrix[0],
@@ -375,6 +410,20 @@ class TOOLS:
             return
         return
 
+    @staticmethod
+    def _sine_between(C, P, Q):
+        # for points C, P, Q compute the sine between lines CP and QP
+        c = JM_point_from_py(C)
+        p = JM_point_from_py(P)
+        q = JM_point_from_py(Q)
+        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(q.x - p.x, q.y - p.y))
+        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -p.x, -p.y)
+        m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
+        m1 = mupdf.mfz_concat(m1, m2)
+        c = mupdf.mfz_transform_point(c, m1)
+        c = mupdf.mfz_normalize_vector(c)
+        return c.y
+
 
 def DUMMY(*args, **kw):
     return
@@ -401,6 +450,38 @@ def Page_set_contents(page0, xref):
     # fixme: page.this.dirty = 1
     return
 
+def Page__add_text_marker(self, quads, annot_type):
+    jlib.log('{self.this=}')
+    pdfpage = self._pdf_page()
+    #pdf_annot *annot = NULL;
+    #PyObject *item = NULL;
+    rotation = JM_page_rotation(pdfpage)
+    #fz_quad q;
+    #fz_var(annot);
+    #fz_var(item);
+    def final():
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
+    try:
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), 0)
+        annot = mupdf.mpdf_create_annot(pdfpage, annot_type)
+        len_ = len(quads)
+        for item in quads:
+            q = JM_quad_from_py(item);
+            mupdf.mpdf_add_annot_quad_point(annot, q)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        final()
+        return
+    final()
+    annot = mupdf.mpdf_keep_annot(annot)
+    return Annot(self, annot)
+
+
+
 def Page_clean_contents(self, sanitize):
     assert isinstance(self, Page)
     page = self.this.page_from_fz_page()
@@ -422,6 +503,84 @@ def Page_clean_contents(self, sanitize):
     filter2 = mupdf.PdfFilterOptions(filter_)
     page.doc().filter_page_contents(page, filter2)
     # fixme: page->doc->dirty = 1;
+
+def CheckRect(r: typing.Any) -> bool:
+    """Check whether an object is non-degenerate rect-like.
+
+    It must be a sequence of 4 numbers.
+    """
+    try:
+        r = Rect(r)
+    except:
+        return False
+    return not (r.isEmpty or r.isInfinite)
+
+
+def CheckQuad(q: typing.Any) -> bool:
+    """Check whether an object is convex, not empty  quad-like.
+
+    It must be a sequence of 4 number pairs.
+    """
+    try:
+        q0 = Quad(q)
+    except:
+        return False
+    return q0.isConvex
+
+
+def CheckMarkerArg(quads: typing.Any) -> tuple:
+    if CheckRect(quads):
+        r = Rect(quads)
+        return (r.quad,)
+    if CheckQuad(quads):
+        return (quads,)
+    for q in quads:
+        if not (CheckRect(q) or CheckQuad(q)):
+            raise ValueError("bad quads entry")
+    return quads
+
+
+def CheckMorph(o: typing.Any) -> bool:
+    if not bool(o):
+        return False
+    if not (type(o) in (list, tuple) and len(o) == 2):
+        raise ValueError("morph must be a sequence of length 2")
+    if not (len(o[0]) == 2 and len(o[1]) == 6):
+        raise ValueError("invalid morph parm 0")
+    if not o[1][4] == o[1][5] == 0:
+        raise ValueError("invalid morph parm 1")
+    return True
+
+
+def CheckFont(page: "struct Page *", fontname: str) -> tuple:
+    """Return an entry in the page's font list if reference name matches.
+    """
+    for f in page.get_fonts():
+        if f[4] == fontname:
+            return f
+        if f[3].lower() == fontname.lower():
+            return f
+
+
+def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
+    """Return a font info if present in the document.
+    """
+    for f in doc.FontInfos:
+        if xref == f[0]:
+            return f
+
+
+def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
+    xref = info[0]
+    found = False
+    for i, fi in enumerate(doc.FontInfos):
+        if fi[0] == xref:
+            found = True
+            break
+    if found:
+        doc.FontInfos[i] = info
+    else:
+        doc.FontInfos.append(info)
 
 def JM_get_annot_xref_list(page_or_page_obj):
     '''
@@ -558,7 +717,6 @@ def JM_add_annot_id(annot, stem):
 
 
 def JM_annot_border(annot_obj):
-    jlib.log('JM_annot_border {annot_obj=}')
     assert isinstance(annot_obj, mupdf.PdfObj), f'{annot_obj}'
 
     res = {}
@@ -2994,15 +3152,12 @@ def JM_annot_set_border(border, doc, annot_obj):
     if ndashes and isinstance(ndashes, (tuple, list)) and len(ndashes) > 0:
         n = len(ndashes)
         darr = doc.new_array(n);
-        jlib.log('{ndashes=} {darr=}')
         for i in range(n):
             d = ndashes[i]
             darr.array_push_int(d)
-            jlib.log('{darr=}')
         annot_obj.dict_putl(darr, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_D)
         nstyle = "D"
 
-    jlib.log('Creating key from {nwidth=}')
     annot_obj.dict_putl(
             mupdf.mpdf_new_real(float(nwidth)),
             mupdf.PDF_ENUM_NAME_BS,
@@ -4119,7 +4274,6 @@ class Document:
                         assert 0, 'recognize_document() not yet supported'
                 else:
                     doc = mupdf.PdfDocument()
-                    jlib.log('mupdf.PdfDocument() => {doc=}')
                     doc.dirty = 1
             if w > 0 and h > 0:
                 if isinstance(doc, mupdf.PdfDocument):
@@ -4137,14 +4291,12 @@ class Document:
                     else:
                         doc.layout_document(400, 600, 11)
             this = doc
-            print(f'{doc=} {this=}')
 
         #try:
         #    self.this.append(this)
         #except __builtin__.Exception:
         #    self.this = this
         self.this = this
-        jlib.log('{self.this=}')
 
         # fixme: not sure where self.thisown gets initialised in PyMuPDF.
         #
@@ -4459,12 +4611,7 @@ class Document:
         """Number of pages."""
         if self.isClosed:
             raise ValueError("document closed")
-        jlib.log('{self.this=}')
-        jlib.log('{self.this.count_pages=}')
-        jlib.log('{self.this.m_internal=}')
-        jlib.log('{self.this.m_internal.refs=}')
         ret = self.this.count_pages()
-        jlib.log('{ret=}')
         return ret
 
     @property
@@ -4661,24 +4808,13 @@ class Document:
     @property
     def isPDF(self):
         """Check for PDF."""
-        jlib.log('isPDF')
         if self.isClosed:
             raise ValueError("document closed")
-        jlib.log('calling self.this.specifics()')
-        jlib.log('calling self.this.specifics() {self.this=}')
         if isinstance(self.this, mupdf.PdfDocument):
             return True
         p = self.this.specifics()
-        jlib.log('{p=}')
-        jlib.log('{self.this=}')
         pp = self.this.specifics()
-        jlib.log('{pp=}')
-        jlib.log('{pp.m_internal=}')
-        if pp.m_internal:
-            jlib.log(f'Returning true')
-            return True
-        jlib.log(f'Returning false')
-        return False
+        return True if pp.m_internal else False
 
     @property
 
@@ -5492,7 +5628,6 @@ class Document:
 
     def __contains__(self, loc) -> bool:
         page_count = self.this.count_pages()
-        jlib.log('{loc=} {self.pageCount=} {page_count=}')
         if type(loc) is int:
             if loc < self.pageCount:
                 return True
@@ -5725,6 +5860,18 @@ class Page:
 
     rect = property(bound, doc="page rectangle")
 
+    def add_highlight_annot(self, quads=None, start=None,
+                          stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Highlight' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        ret = self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
+        jlib.log('{q=} {ret=}')
+        return ret
+
+
     def add_caret_annot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
         old_rotation = annot_preprocess(self)
@@ -5734,8 +5881,6 @@ class Page:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
         annot_postprocess(self, annot)
-        print(f'annot={annot}')
-        print(f'Annot={Annot}')
         return Annot(self, annot)
 
     def getImageBbox(self, name):
@@ -5905,7 +6050,6 @@ class Page:
         finally:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
-        jlib.log('{annot=}')
         annot_postprocess(self, annot)
         return annot
 
@@ -5925,8 +6069,8 @@ class Page:
         if not self.parent.isPDF:
             raise ValueError("not a PDF")
 
-        val = _fitz.Page__add_text_marker(self, quads, annot_type)
-
+        val = Page__add_text_marker(self, quads, annot_type)
+        jlib.log('{val=}')
         if not val:
             return None
         val.parent = weakref.proxy(self)
@@ -5942,7 +6086,6 @@ class Page:
         return _fitz.Page__add_multiline(self, points, annot_type)
 
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
-        jlib.log('_add_freetext_annot')
         #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
         page = self._pdf_page()
         fcol = [1, 1, 1, 1] # fill color: white
@@ -5956,7 +6099,6 @@ class Page:
         annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
         annot.set_annot_contents(text)
         annot.set_annot_rect(r)
-        jlib.log('{rotate=}')
         annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
         annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Q, align)
 
@@ -8231,14 +8373,10 @@ class Annot:
 
     def border(self):
         """Border information."""
-        jlib.log("border() {self=}")
         CheckParent(self)
-        jlib.log("border()")
         #return _fitz.Annot_border(self)
         ao = self.this.annot_obj()
-        jlib.log("border() {ao=}")
         ret = JM_annot_border(ao)
-        jlib.log("border() {ret=}")
         return ret
 
 
