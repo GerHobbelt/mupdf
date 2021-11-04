@@ -6874,7 +6874,21 @@ class Page:
 
 
     def _add_square_or_circle(self, rect, annot_type):
-        return _fitz.Page__add_square_or_circle(self, rect, annot_type)
+        #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
+        page = self._pdf_page()
+        try:
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(self, annot)
 
     def _add_multiline(self, points, annot_type):
         #return _fitz.Page__add_multiline(self, points, annot_type)
