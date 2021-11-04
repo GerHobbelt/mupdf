@@ -509,10 +509,32 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 		TEMPLATEFILENAME-<CHAPTER>-<PAGE>-<SEQUENCENUMBER>.<EXTENSION>
 */
 void
-fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
+fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
 {
+	// hacky first run, not cf. spec:
+	fz_snprintf(dstpath, size, "%s", fmt);
+	size_t dstlen = size - strlen(dstpath);
+	char* dst = dstpath + strlen(dstpath);
+	if (chapter)
+	{
+		fz_snprintf(dst, dstlen, "-%02d", chapter);
+		dstlen -= strlen(dst);
+		dst += strlen(dst);
+	}
+	fz_snprintf(dst, dstlen, "-%04d-%02d", page, sequence_number);
+	dstlen -= strlen(dst);
+	dst += strlen(dst);
+	if (label)
+	{
+		fz_snprintf(dst, dstlen, "-%s", label);
+		dstlen -= strlen(dst);
+		dst += strlen(dst);
+	}
+	fz_snprintf(dst, dstlen, ".%s", extension);
+	dstlen -= strlen(dst);
+	dst += strlen(dst);
 	// TODO
-	fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: TODO!");
+	//fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: TODO!");
 }
 
 #define SEP(x) ((x)=='/' || (x) == 0)
