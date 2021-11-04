@@ -174,6 +174,8 @@ ps_drop_band_writer(fz_context *ctx, fz_band_writer *writer_)
 
 	fz_free(ctx, writer->input);
 	fz_free(ctx, writer->output);
+	writer->input = NULL;
+	writer->output = NULL;
 }
 
 void fz_write_pixmap_as_ps(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap)
@@ -188,10 +190,10 @@ void fz_write_pixmap_as_ps(fz_context *ctx, fz_output *out, const fz_pixmap *pix
 	{
 		fz_write_header(ctx, writer, pixmap->w, pixmap->h, pixmap->n, pixmap->alpha, pixmap->xres, pixmap->yres, 0, pixmap->colorspace, pixmap->seps);
 		fz_write_band(ctx, writer, pixmap->stride, pixmap->h, pixmap->samples);
-		fz_close_band_writer(ctx, writer);
 	}
 	fz_always(ctx)
 	{
+		fz_close_band_writer(ctx, writer);
 		fz_drop_band_writer(ctx, writer);
 	}
 	fz_catch(ctx)
@@ -313,7 +315,7 @@ ps_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 {
 	fz_ps_writer *wri = (fz_ps_writer*)wri_;
 	fz_pixmap *pix = wri->pixmap;
-	fz_band_writer *bw;
+	fz_band_writer *bw = NULL;
 
 	fz_try(ctx)
 	{
@@ -321,10 +323,10 @@ ps_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 		bw = fz_new_ps_band_writer(ctx, wri->out);
 		fz_write_header(ctx, bw, pix->w, pix->h, pix->n, pix->alpha, pix->xres, pix->yres, 0, pix->colorspace, pix->seps);
 		fz_write_band(ctx, bw, pix->stride, pix->h, pix->samples);
-		fz_close_band_writer(ctx, bw);
 	}
 	fz_always(ctx)
 	{
+		fz_close_band_writer(ctx, bw);
 		fz_drop_device(ctx, dev);
 		fz_drop_band_writer(ctx, bw);
 		fz_drop_pixmap(ctx, wri->pixmap);

@@ -364,9 +364,9 @@ pkm_write_header(fz_context *ctx, fz_band_writer *writer, fz_colorspace *cs)
 }
 
 void
-fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap)
+fz_write_bitmap_as_pbm(fz_context* ctx, fz_output* out, const fz_bitmap* bitmap)
 {
-	fz_band_writer *writer;
+	fz_band_writer* writer;
 
 	if (bitmap->n != 1)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "bitmap must be monochrome to save as PBM");
@@ -376,10 +376,12 @@ fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap)
 	{
 		fz_write_header(ctx, writer, bitmap->w, bitmap->h, 1, 0, 0, 0, 0, NULL, NULL);
 		fz_write_band(ctx, writer, bitmap->stride, bitmap->h, bitmap->samples);
-		fz_close_band_writer(ctx, writer);
 	}
 	fz_always(ctx)
+	{
+		fz_close_band_writer(ctx, writer);
 		fz_drop_band_writer(ctx, writer);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
@@ -397,10 +399,12 @@ fz_write_bitmap_as_pkm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap)
 	{
 		fz_write_header(ctx, writer, bitmap->w, bitmap->h, 4, 0, 0, 0, 0, NULL, NULL);
 		fz_write_band(ctx, writer, bitmap->stride, bitmap->h, bitmap->samples);
-		fz_close_band_writer(ctx, writer);
 	}
 	fz_always(ctx)
+	{
+		fz_close_band_writer(ctx, writer);
 		fz_drop_band_writer(ctx, writer);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }

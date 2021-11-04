@@ -40,6 +40,7 @@ fz_save_pixmap_as_muraw(fz_context *ctx, const fz_pixmap *pixmap, const char *fi
 	}
 	fz_always(ctx)
 	{
+		fz_close_band_writer(ctx, writer);
 		fz_drop_band_writer(ctx, writer);
 		fz_drop_output(ctx, out);
 	}
@@ -66,6 +67,7 @@ fz_write_pixmap_as_muraw(fz_context *ctx, fz_output *out, const fz_pixmap *pixma
 	}
 	fz_always(ctx)
 	{
+		fz_close_band_writer(ctx, writer);
 		fz_drop_band_writer(ctx, writer);
 	}
 	fz_catch(ctx)
