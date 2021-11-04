@@ -129,10 +129,10 @@ try:
 except ImportError:
     fitz_fontdescriptors = {}
 
-def JM_rect_from_py(r):
-    if not r or len(r) != 4:
-        return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
-    return mupdf.Rect(r[0], r[1], r[2], r[3])
+#def JM_rect_from_py(r):
+#    if not r or len(r) != 4:
+#        return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+#    return mupdf.Rect(r[0], r[1], r[2], r[3])
 
 def JM_read_contents(pageref):
     assert isinstance(pageref, mupdf.PdfObj), f'{type(pageref)}'
@@ -194,6 +194,30 @@ def JM_page_rotation(page):
     rotate = JM_norm_rotation(rotate)
     return rotate
 
+def JM_derotate_page_matrix(page):
+    '''
+    just the inverse of rotation
+    '''
+    mp = JM_rotate_page_matrix(page)
+    jlib.log('{type(mp)=}')
+    return mupdf.mfz_invert_matrix(mp)
+
+def JM_rotate_page_matrix(page):
+    if not page.m_internal:
+        return mupdf.Matrix()  # no valid pdf page given
+    rotation = JM_page_rotation(page)
+    if rotation == 0:
+        return mupdf.Matrix()  # no rotation
+    cb_size = JM_cropbox_size(page.obj())
+    w = cb_size.x
+    h = cb_size.y
+    if rotation == 90:
+        m = mupdf.mfz_make_matrix(0, 1, -1, 0, h, 0)
+    elif rotation == 180:
+        m = mupdf.mfz_make_matrix(-1, 0, 0, -1, w, h)
+    else:
+        m = mupdf.mfz_make_matrix(0, -1, 1, 0, 0, w)
+    return m
 
 # return normalized /Rotate value
 def JM_norm_rotation(rotate):
@@ -267,23 +291,32 @@ def JM_find_annot_irt(annot):
     try:    # loop thru MuPDF's internal annots array
         jlib.log('{annot=}')
         jlib.log('{annot.m_internal=}')
-        page = annot.m_internal.annot_page()
+        page = annot.annot_page()
         jlib.log('{page=}')
-        annotptr = page.m_internal.annots
+        annotptr = page.first_annot()
         while 1:
             jlib.log('{annotptr=}')
-            assert isinstance(annotptr, mupdf.ppdf_annot)
-            if not annotptr:
+            assert isinstance(annotptr, mupdf.PdfAnnot)
+            if not annotptr.m_internal:
                 break
-            o = mupdf.ppdf_dict_gets(annotptr.obj, 'IRT')
+            o = mupdf.mpdf_dict_gets(annotptr.annot_obj(), 'IRT')
             if o:
-                if not mupdf.ppdf_objcmp(o, annot.m_internal.obj):
+                if not mupdf.mpdf_objcmp(o, annot.annot_obj()):
                     found = 1
                     break
-            annotptr = annotptr.next
+            annotptr = annotptr.next_annot()
     except Exception as e:
         jlib.log('{e=}')
     return irt_annot if found else None
+
+def annot_postprocess(page: "Page", annot: "Annot") -> None:
+    """Clean up after annotation inertion.
+
+    Set ownership flag and store annotation in page annotation dictionary.
+    """
+    annot.parent = weakref.proxy(page)
+    page._annot_refs[id(annot)] = annot
+    annot.thisown = True
 
 
 
@@ -453,6 +486,353 @@ class TOOLS:
         c = mupdf.mfz_transform_point(c, m1)
         c = mupdf.mfz_normalize_vector(c)
         return c.y
+
+    @staticmethod
+    def _le_annot_parms(annot, p1, p2, fill_color):
+        """Get common parameters for making annot line end symbols.
+
+        Returns:
+            m: matrix that maps p1, p2 to points L, P on the x-axis
+            im: its inverse
+            L, P: transformed p1, p2
+            w: line width
+            scol: stroke color string
+            fcol: fill color store_shrink
+            opacity: opacity string (gs command)
+        """
+        w = annot.border["width"]  # line width
+        sc = annot.colors["stroke"]  # stroke color
+        if not sc:  # black if missing
+            sc = (0,0,0)
+        scol = " ".join(map(str, sc)) + " RG\n"
+        if fill_color:
+            fc = fill_color
+        else:
+            fc = annot.colors["fill"]  # fill color
+        if not fc:
+            fc = (1,1,1)  # white if missing
+        fcol = " ".join(map(str, fc)) + " rg\n"
+    # nr = annot.rect
+        np1 = p1                   # point coord relative to annot rect
+        np2 = p2                   # point coord relative to annot rect
+        m = Matrix(self._hor_matrix(np1, np2))  # matrix makes the line horizontal
+        im = ~m                            # inverted matrix
+        L = np1 * m                        # converted start (left) point
+        R = np2 * m                        # converted end (right) point
+        if 0 <= annot.opacity < 1:
+            opacity = "/H gs\n"
+        else:
+            opacity = ""
+        return m, im, L, R, w, scol, fcol, opacity
+
+    @staticmethod
+    def _oval_string(p1, p2, p3, p4):
+        """Return /AP string defining an oval within a 4-polygon provided as points
+        """
+        def bezier(p, q, r):
+            f = "%f %f %f %f %f %f c\n"
+            return f % (p.x, p.y, q.x, q.y, r.x, r.y)
+
+        kappa = 0.55228474983              # magic number
+        ml = p1 + (p4 - p1) * 0.5          # middle points ...
+        mo = p1 + (p2 - p1) * 0.5          # for each ...
+        mr = p2 + (p3 - p2) * 0.5          # polygon ...
+        mu = p4 + (p3 - p4) * 0.5          # side
+        ol1 = ml + (p1 - ml) * kappa       # the 8 bezier
+        ol2 = mo + (p1 - mo) * kappa       # helper points
+        or1 = mo + (p2 - mo) * kappa
+        or2 = mr + (p2 - mr) * kappa
+        ur1 = mr + (p3 - mr) * kappa
+        ur2 = mu + (p3 - mu) * kappa
+        ul1 = mu + (p4 - mu) * kappa
+        ul2 = ml + (p4 - ml) * kappa
+    # now draw, starting from middle point of left side
+        ap = "%f %f m\n" % (ml.x, ml.y)
+        ap += bezier(ol1, ol2, mo)
+        ap += bezier(or1, or2, mr)
+        ap += bezier(ur1, ur2, mu)
+        ap += bezier(ul1, ul2, ml)
+        return ap
+
+    @staticmethod
+    def _le_diamond(annot, p1, p2, lr, fill_color):
+        """Make stream commands for diamond line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5             # 2*shift*width = length of square edge
+        d = shift * max(1, w)
+        M = R - (d/2., 0) if lr else L + (d/2., 0)
+        r = Rect(M, M) + (-d, -d, d, d)         # the square
+    # the square makes line longer by (2*shift - 1)*width
+        p = (r.tl + (r.bl - r.tl) * 0.5) * im
+        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
+        p = (r.tl + (r.tr - r.tl) * 0.5) * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = (r.tr + (r.br - r.tr) * 0.5) * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = (r.br + (r.bl - r.br) * 0.5) * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_square(annot, p1, p2, lr, fill_color):
+        """Make stream commands for square line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5             # 2*shift*width = length of square edge
+        d = shift * max(1, w)
+        M = R - (d/2., 0) if lr else L + (d/2., 0)
+        r = Rect(M, M) + (-d, -d, d, d)         # the square
+    # the square makes line longer by (2*shift - 1)*width
+        p = r.tl * im
+        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
+        p = r.tr * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = r.br * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = r.bl * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_circle(annot, p1, p2, lr, fill_color):
+        """Make stream commands for circle line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5             # 2*shift*width = length of square edge
+        d = shift * max(1, w)
+        M = R - (d/2., 0) if lr else L + (d/2., 0)
+        r = Rect(M, M) + (-d, -d, d, d)         # the square
+        ap = "q\n" + opacity + self._oval_string(r.tl * im, r.tr * im, r.br * im, r.bl * im)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_butt(annot, p1, p2, lr, fill_color):
+        """Make stream commands for butt line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 3
+        d = shift * max(1, w)
+        M = R if lr else L
+        top = (M + (0, -d/2.)) * im
+        bot = (M + (0, d/2.)) * im
+        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
+        ap += "%f %f l\n" % (bot.x, bot.y)
+        ap += "%g w\n" % w
+        ap += scol + "s\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_slash(annot, p1, p2, lr, fill_color):
+        """Make stream commands for slash line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        rw = 1.1547 * max(1, w) * 1.0         # makes rect diagonal a 30 deg inclination
+        M = R if lr else L
+        r = Rect(M.x - rw, M.y - 2 * w, M.x + rw, M.y + 2 * w)
+        top = r.tl * im
+        bot = r.br * im
+        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
+        ap += "%f %f l\n" % (bot.x, bot.y)
+        ap += "%g w\n" % w
+        ap += scol + "s\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_openarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for open arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
+        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
+        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + "S\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_closedarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for closed arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
+        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
+        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_ropenarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for right open arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R - (d/3., 0) if lr else L + (d/3., 0)
+        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
+        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "S\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_rclosedarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for right closed arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R - (2*d, 0) if lr else L + (2*d, 0)
+        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
+        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+
+    def _transform_rect(rect, matrix):
+        #return _fitz.Tools__transform_rect(self, rect, matrix)
+        return JM_py_from_rect(
+                mupdf.mfz_transform_rect(
+                    JM_rect_from_py(rect),
+                    JM_matrix_from_py(matrix),
+                    )
+                )
+
+    def _intersect_rect(r1, r2):
+        #return _fitz.Tools__intersect_rect(self, r1, r2)
+        return JM_py_from_rect(
+                mupdf.mfz_intersect_rect(
+                    JM_rect_from_py(r1),
+                    JM_rect_from_py(r2),
+                    )
+                )
+
+    def _include_point_in_rect(r, p):
+        #return _fitz.Tools__include_point_in_rect(self, r, p)
+        return JM_py_from_rect(
+                mupdf.mfz_include_point_in_rect(
+                    JM_rect_from_py(r),
+                    JM_point_from_py(p),
+                    )
+                )
+
+    def _transform_point(point, matrix):
+        #return _fitz.Tools__transform_point(self, point, matrix)
+        return JM_py_from_point(
+                mupdf.mfz_transform_point(
+                    JM_point_from_py(point),
+                    JM_matrix_from_py(matrix),
+                    )
+                )
+
+    def _union_rect(r1, r2):
+        #return _fitz.Tools__union_rect(self, r1, r2)
+        return JM_py_from_rect(
+                mupdf.mfz_union_rect(
+                    JM_rect_from_py(r1),
+                    JM_rect_from_py(r2),
+                    )
+                )
+
+    def _concat_matrix(m1, m2):
+        #return _fitz.Tools__concat_matrix(self, m1, m2)
+        return JM_py_from_matrix(
+                mupdf.mfz_concat(
+                    JM_matrix_from_py(m1),
+                    JM_matrix_from_py(m2)
+                    )
+                )
+
+    def _measure_string(text, fontname, fontsize, encoding=0):
+        #return _fitz.Tools__measure_string(self, text, fontname, fontsize, encoding)
+        font = mupdf.mfz_new_base14_font(fontname)
+        w = 0;
+        pos = 0
+        while pos < len(text):
+            t, c = mupdf.mfz_chartorune(text)
+            pos += t
+            if encoding == mupdf.PDF_SIMPLE_ENCODING_GREEK:
+                c = mupdf.mfz_iso8859_7_from_unicode(c)
+            elif encoding == mupdf.PDF_SIMPLE_ENCODING_CYRILLIC:
+                c = mupdf.mfz_windows_1251_from_unicode(c)
+            else:
+                c = mupdf.mfz_windows_1252_from_unicode(c)
+            if c < 0:
+                c = 0xB7
+            g = mupdf.mfz_encode_character(font, c)
+            w += mupdf.mfz_advance_glyph(font, g, 0)
+        return w * fontsize
+
+    def _hor_matrix(C, P):
+        #return _fitz.Tools__hor_matrix(self, C, P)
+        # calculate matrix m that maps line CP to the x-axis,
+        # such that C * m = (0, 0), and target line has same length.
+        c = JM_point_from_py(C)
+        p = JM_point_from_py(P)
+        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(p.x - c.x, p.y - c.y))
+        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -c.x, -c.y)
+        m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
+        return JM_py_from_matrix(mupdf.mfz_concat(m1, m2))
+
+    def set_font_width(doc, xref, width):
+        #return _fitz.Tools_set_font_width(self, doc, xref, width)
+        pdf = doc._pdf_page()
+        if not pdf.m_internal:
+            return False
+        try:
+            font = mupdf.mpdf_load_object(pdf, xref)
+            dfonts = mupdf.mpdf_dict_get(font, PDF_NAME('DescendantFonts'))
+            if mupdf.mpdf_is_array(dfonts):
+                n = mupdf.mpdf_array_len(dfonts)
+                for i in range(n):
+                    dfont = mupdf.mpdf_array_get(dfonts, i)
+                    warray = mupdf.mpdf_new_array(pdf, 3)
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 0))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 65535))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, width))
+                    mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        return True
+
+
 
 
 def DUMMY(*args, **kw):
@@ -850,7 +1230,7 @@ def JM_delete_annot(page, annot):
         # next delete the /Popup and /AP entries from annot dictionary
         mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
 
-        annots = mupdf.mpdf_dict_get(page.annot_obj(), PDF_NAME('Annots'))
+        annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
         assert annots.m_internal
         n = mupdf.mpdf_array_len(annots)
         for i in range(n - 1, -1, -1):
@@ -868,6 +1248,7 @@ def JM_delete_annot(page, annot):
     except Exception as e:
         jlib.log('{e=}')
         jlib.log('could not delete annotation')
+        jlib.log('{jlib.exception_info()=}')
         # fixme: mupdf.mfz_warn("could not delete annotation")
     return;
 
@@ -1426,6 +1807,7 @@ class Point(object):
 class Rect(object):
     """Rect() - all zeros\nRect(x0, y0, x1, y1)\nRect(top-left, x1, y1)\nRect(x0, y0, bottom-right)\nRect(top-left, bottom-right)\nRect(Rect or IRect) - new copy\nRect(sequence) - from 'sequence'"""
     def __init__(self, *args):
+        jlib.log('args={args}')
         if not args:
             self.x0 = self.y0 = self.x1 = self.y1 = 0.0
             return None
@@ -1437,6 +1819,12 @@ class Rect(object):
             return None
         if len(args) == 1:
             l = args[0]
+            if isinstance(l, mupdf.Rect):
+                self.x0 = l.x0
+                self.y0 = l.y0
+                self.x1 = l.x1
+                self.y1 = l.y1
+                return
             if hasattr(l, "__getitem__") is False:
                 raise ValueError("bad Rect constructor")
             if len(l) != 4:
@@ -3145,6 +3533,9 @@ def JM_TUPLE(o: typing.Sequence) -> tuple:
 def JM_py_from_matrix(m):
     return m.a, m.b, m.c, m.d, m.e, m.f
 
+def JM_py_from_rect(m):
+    return r.x0, r.y0, r.x1, r.y1
+
 def JM_color_FromSequence(color, col):
     #assert isinstance( col, list)
     if not color or (not isinstance(color, list) and not isinstance(color, float)):
@@ -3325,6 +3716,24 @@ def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
                 )
         fontlist.append(entry)
     return rc
+
+
+def JM_rect_from_py(r):
+    if isinstance(r, mupdf.Rect):
+        return r
+    if isinstance(r, Rect):
+        return mupdf.mfz_make_rect(r.x0, r.y0, r.x1, r.y1)
+    if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
+        jlib.log('{type(r)=} {r=} {PySequence_Check(r)=} {PySequence_Size(r)=}')
+        return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+    f = [0, 0, 0, 0]
+    for i in range(4):
+        f[i] = JM_FLOAT_ITEM(r, i)
+        if f[i] is None:
+            jlib.log('{r=} {i=}')
+            return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+
+    return mupdf.mfz_make_rect(f[0], f[1], f[2], f[3])
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -5920,11 +6329,23 @@ class Page:
         CheckParent(self)
 
         val = self.this.bound_page()
+        jlib.log('{type(val)=}')
         val = Rect(val)
 
         return val
 
     rect = property(bound, doc="page rectangle")
+
+    def add_polyline_annot(self, points: list) -> "struct Annot *":
+        """Add a 'PolyLine' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
 
     def delete_annot(self, annot):
         """Delete annot and return next one."""
@@ -5950,6 +6371,37 @@ class Page:
         annot._erase()
 
         return val
+
+
+        def add_polyline_annot(self, points: list) -> "struct Annot *":
+            """Add a 'PolyLine' annotation."""
+            old_rotation = annot_preprocess(self)
+            try:
+                #annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
+                #Page__add_multiline(points, PDF_ANNOT_POLY_LINE)
+                page = self._pdf_page()
+                try:
+                    n = PySequence_Size(points)
+                    if n < 2:
+                        THROWMSG("bad list of points")
+                    annot = mupdf.mpdf_create_annot( page, annot_type)
+                    for p in points:
+                        if PySequence_Size(p) != 2:
+                            THROWMSG("bad list of points")
+                        point = JM_point_from_py(p)
+                        mupdf.mpdf_add_annot_vertex(annot, point)
+
+                    JM_add_annot_id(annot, "A")
+                    mupdf.mpdf_update_annot(annot)
+                except Exception as e:
+                    jlib.log('{e=}')
+                    return
+                return Annot(self, annot)
+            finally:
+                if old_rotation != 0:
+                    self.set_rotation(old_rotation)
+            annot_postprocess(self, annot)
+            return annot
 
 
 
@@ -6206,7 +6658,26 @@ class Page:
         return _fitz.Page__add_square_or_circle(self, rect, annot_type)
 
     def _add_multiline(self, points, annot_type):
-        return _fitz.Page__add_multiline(self, points, annot_type)
+        #return _fitz.Page__add_multiline(self, points, annot_type)
+        page = self._pdf_page()
+        try:
+            if len(points) < 2:
+                THROWMSG(gctx, "bad list of points")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            for p in points:
+                if (PySequence_Size(p) != 2):
+                    THROWMSG("bad list of points")
+                point = JM_point_from_py(p)
+                mupdf.mpdf_add_annot_vertex(annot, point)
+
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return;
+        return Annot(self, annot)
+
+
 
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
         #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
@@ -6216,8 +6687,8 @@ class Page:
         tcol = [0, 0, 0, 0]  # std. text color: black
         ntcol = JM_color_FromSequence(text_color, tcol)
         r = JM_rect_from_py(rect)
-
         if r.is_infinite_rect() or r.is_empty_rect():
+            jlib.log('{rect=} {r=}')
             raise Exception("rect must be finite and not empty")
         annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
         annot.set_annot_contents(text)
@@ -6259,7 +6730,13 @@ class Page:
     @property
     def derotationMatrix(self) -> Matrix:
         """Reflects page de-rotation."""
-        return Matrix(TOOLS._derotate_matrix(self))
+        #return Matrix(TOOLS._derotate_matrix(self))
+        pdfpage = self._pdf_page()
+        if not pdfpage.m_internal:
+            #return JM_py_from_matrix(fz_identity);
+            return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
+        return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
+
 
     def addCaretAnnot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
@@ -7687,8 +8164,8 @@ class Annot:
         """annotation rectangle"""
         CheckParent(self)
 
-        val = _fitz.Annot_rect(self)
-
+        #val = _fitz.Annot_rect(self)
+        val = mupdf.mpdf_bound_annot(self.this)
         val = Rect(val)
         val *= self.parent.derotationMatrix
 
@@ -8400,8 +8877,13 @@ class Annot:
     def set_line_ends(self, start, end):
         """Set line end codes."""
         CheckParent(self)
+        #return _fitz.Annot_set_line_ends(self, start, end)
+        annot = self.this
+        if mupdf.mpdf_annot_has_line_ending_styles(annot):
+            mupdf.mpdf_set_annot_line_ending_styles(annot, start, end)
+        else:
+            JM_Warning("bad annot type for line ends")
 
-        return _fitz.Annot_set_line_ends(self, start, end)
 
     @property
 
@@ -9248,490 +9730,6 @@ class Font:
     def __del__(self):
         if type(self) is not Font:
             return None
-
-class _unused_Tools:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Tools, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Tools, name)
-
-    def gen_id(self):
-        """Return a unique positive integer."""
-
-        return _fitz.Tools_gen_id(self)
-
-
-    def set_icc(self, on=0):
-        """Set ICC color handling on or off."""
-
-        return _fitz.Tools_set_icc(self, on)
-
-
-    def set_annot_stem(self, stem=None):
-        """Get / set id prefix for annotations."""
-
-        return _fitz.Tools_set_annot_stem(self, stem)
-
-
-    def set_small_glyph_heights(self, on=None):
-        """Set / unset small glyph heights."""
-
-        return _fitz.Tools_set_small_glyph_heights(self, on)
-
-
-    def store_shrink(self, percent):
-        """Free 'percent' of current store size."""
-
-        return _fitz.Tools_store_shrink(self, percent)
-
-    @property
-
-    def store_size(self):
-        """MuPDF current store size."""
-
-        return _fitz.Tools_store_size(self)
-
-    @property
-
-    def store_maxsize(self):
-        """MuPDF store size limit."""
-
-        return _fitz.Tools_store_maxsize(self)
-
-
-    def show_aa_level(self):
-        """Show anti-aliasing values."""
-
-        val = _fitz.Tools_show_aa_level(self)
-
-        temp = {"graphics": val[0], "text": val[1], "graphics_min_line_width": val[2]}
-        val = temp
-
-        return val
-
-
-    def set_aa_level(self, level):
-        """Set anti-aliasing level."""
-
-        return _fitz.Tools_set_aa_level(self, level)
-
-
-    def set_graphics_min_line_width(self, min_line_width):
-        """Set the graphics minimum line width."""
-
-        return _fitz.Tools_set_graphics_min_line_width(self, min_line_width)
-
-
-    def image_profile(self, stream, keep_image=0):
-        """Metadata of an image binary stream."""
-
-        return _fitz.Tools_image_profile(self, stream, keep_image)
-
-
-    def _rotate_matrix(self, page):
-        return _fitz.Tools__rotate_matrix(self, page)
-
-    def _derotate_matrix(self, page):
-        return _fitz.Tools__derotate_matrix(self, page)
-    @property
-
-    def fitz_config(self):
-        """PyMuPDF configuration parameters."""
-
-        return _fitz.Tools_fitz_config(self)
-
-
-    def glyph_cache_empty(self):
-        """Empty the glyph cache."""
-
-        return _fitz.Tools_glyph_cache_empty(self)
-
-
-    def _fill_widget(self, annot, widget):
-        val = _fitz.Tools__fill_widget(self, annot, widget)
-
-        widget.rect = Rect(annot.rect)
-        widget.xref = annot.xref
-        widget.parent = annot.parent
-        widget._annot = annot  # backpointer to annot object
-        if not widget.script:
-            widget.script = None
-        if not widget.script_stroke:
-            widget.script_stroke = None
-        if not widget.script_format:
-            widget.script_format = None
-        if not widget.script_change:
-            widget.script_change = None
-        if not widget.script_calc:
-            widget.script_calc = None
-
-
-        return val
-
-
-    def _save_widget(self, annot, widget):
-        return _fitz.Tools__save_widget(self, annot, widget)
-
-    def _reset_widget(self, annot):
-        return _fitz.Tools__reset_widget(self, annot)
-
-    def _parse_da(self, annot):
-        val = _fitz.Tools__parse_da(self, annot)
-
-        if not val:
-            return ((0,), "", 0)
-        font = "Helv"
-        fsize = 12
-        col = (0, 0, 0)
-        dat = val.split()  # split on any whitespace
-        for i, item in enumerate(dat):
-            if item == "Tf":
-                font = dat[i - 2][1:]
-                fsize = float(dat[i - 1])
-                dat[i] = dat[i-1] = dat[i-2] = ""
-                continue
-            if item == "g":            # unicolor text
-                col = [(float(dat[i - 1]))]
-                dat[i] = dat[i-1] = ""
-                continue
-            if item == "rg":           # RGB colored text
-                col = [float(f) for f in dat[i - 3:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
-                continue
-            if item == "k":           # CMYK colored text
-                col = [float(f) for f in dat[i - 4:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = dat[i-4] = ""
-                continue
-
-        val = (col, font, fsize)
-
-
-        return val
-
-
-    def _update_da(self, annot, da_str):
-        return _fitz.Tools__update_da(self, annot, da_str)
-
-    def _get_all_contents(self, fzpage):
-        """Concatenate all /Contents objects of a page into a bytes object."""
-
-        return _fitz.Tools__get_all_contents(self, fzpage)
-
-
-    def _insert_contents(self, page, newcont, overlay=1):
-        """Add bytes as a new /Contents object for a page, and return its xref."""
-
-        return _fitz.Tools__insert_contents(self, page, newcont, overlay)
-
-
-    def mupdf_version(self):
-        """Get version of MuPDF binary build."""
-
-        return _fitz.Tools_mupdf_version(self)
-
-
-    def mupdf_warnings(self, reset=1):
-        """Get the MuPDF warnings/errors with optional reset (default)."""
-
-        val = _fitz.Tools_mupdf_warnings(self, reset)
-
-        val = "\n".join(val)
-        if reset:
-            self.reset_mupdf_warnings()
-
-        return val
-
-
-    def _int_from_language(self, language):
-        return _fitz.Tools__int_from_language(self, language)
-
-    def reset_mupdf_warnings(self):
-        """Empty the MuPDF warnings/errors store."""
-
-        return _fitz.Tools_reset_mupdf_warnings(self)
-
-
-    def mupdf_display_errors(self, value=None):
-        """Set MuPDF error display to True or False."""
-
-        return _fitz.Tools_mupdf_display_errors(self, value)
-
-
-    def _transform_rect(self, rect, matrix):
-        return _fitz.Tools__transform_rect(self, rect, matrix)
-
-    def _intersect_rect(self, r1, r2):
-        return _fitz.Tools__intersect_rect(self, r1, r2)
-
-    def _include_point_in_rect(self, r, p):
-        return _fitz.Tools__include_point_in_rect(self, r, p)
-
-    def _transform_point(self, point, matrix):
-        return _fitz.Tools__transform_point(self, point, matrix)
-
-    def _union_rect(self, r1, r2):
-        return _fitz.Tools__union_rect(self, r1, r2)
-
-    def _concat_matrix(self, m1, m2):
-        return _fitz.Tools__concat_matrix(self, m1, m2)
-
-    def _invert_matrix(self, matrix):
-        return _fitz.Tools__invert_matrix(self, matrix)
-
-    def _measure_string(self, text, fontname, fontsize, encoding=0):
-        return _fitz.Tools__measure_string(self, text, fontname, fontsize, encoding)
-
-    def _sine_between(self, C, P, Q):
-        return _fitz.Tools__sine_between(self, C, P, Q)
-
-    def _hor_matrix(self, C, P):
-        return _fitz.Tools__hor_matrix(self, C, P)
-
-    def set_font_width(self, doc, xref, width):
-        return _fitz.Tools_set_font_width(self, doc, xref, width)
-
-    def _le_annot_parms(self, annot, p1, p2, fill_color):
-        """Get common parameters for making annot line end symbols.
-
-        Returns:
-            m: matrix that maps p1, p2 to points L, P on the x-axis
-            im: its inverse
-            L, P: transformed p1, p2
-            w: line width
-            scol: stroke color string
-            fcol: fill color store_shrink
-            opacity: opacity string (gs command)
-        """
-        w = annot.border["width"]  # line width
-        sc = annot.colors["stroke"]  # stroke color
-        if not sc:  # black if missing
-            sc = (0,0,0)
-        scol = " ".join(map(str, sc)) + " RG\n"
-        if fill_color:
-            fc = fill_color
-        else:
-            fc = annot.colors["fill"]  # fill color
-        if not fc:
-            fc = (1,1,1)  # white if missing
-        fcol = " ".join(map(str, fc)) + " rg\n"
-    # nr = annot.rect
-        np1 = p1                   # point coord relative to annot rect
-        np2 = p2                   # point coord relative to annot rect
-        m = Matrix(self._hor_matrix(np1, np2))  # matrix makes the line horizontal
-        im = ~m                            # inverted matrix
-        L = np1 * m                        # converted start (left) point
-        R = np2 * m                        # converted end (right) point
-        if 0 <= annot.opacity < 1:
-            opacity = "/H gs\n"
-        else:
-            opacity = ""
-        return m, im, L, R, w, scol, fcol, opacity
-
-    def _oval_string(self, p1, p2, p3, p4):
-        """Return /AP string defining an oval within a 4-polygon provided as points
-        """
-        def bezier(p, q, r):
-            f = "%f %f %f %f %f %f c\n"
-            return f % (p.x, p.y, q.x, q.y, r.x, r.y)
-
-        kappa = 0.55228474983              # magic number
-        ml = p1 + (p4 - p1) * 0.5          # middle points ...
-        mo = p1 + (p2 - p1) * 0.5          # for each ...
-        mr = p2 + (p3 - p2) * 0.5          # polygon ...
-        mu = p4 + (p3 - p4) * 0.5          # side
-        ol1 = ml + (p1 - ml) * kappa       # the 8 bezier
-        ol2 = mo + (p1 - mo) * kappa       # helper points
-        or1 = mo + (p2 - mo) * kappa
-        or2 = mr + (p2 - mr) * kappa
-        ur1 = mr + (p3 - mr) * kappa
-        ur2 = mu + (p3 - mu) * kappa
-        ul1 = mu + (p4 - mu) * kappa
-        ul2 = ml + (p4 - ml) * kappa
-    # now draw, starting from middle point of left side
-        ap = "%f %f m\n" % (ml.x, ml.y)
-        ap += bezier(ol1, ol2, mo)
-        ap += bezier(or1, or2, mr)
-        ap += bezier(ur1, ur2, mu)
-        ap += bezier(ul1, ul2, ml)
-        return ap
-
-    def _le_diamond(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for diamond line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5             # 2*shift*width = length of square edge
-        d = shift * max(1, w)
-        M = R - (d/2., 0) if lr else L + (d/2., 0)
-        r = Rect(M, M) + (-d, -d, d, d)         # the square
-    # the square makes line longer by (2*shift - 1)*width
-        p = (r.tl + (r.bl - r.tl) * 0.5) * im
-        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
-        p = (r.tl + (r.tr - r.tl) * 0.5) * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = (r.tr + (r.br - r.tr) * 0.5) * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = (r.br + (r.bl - r.br) * 0.5) * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
-
-    def _le_square(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for square line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5             # 2*shift*width = length of square edge
-        d = shift * max(1, w)
-        M = R - (d/2., 0) if lr else L + (d/2., 0)
-        r = Rect(M, M) + (-d, -d, d, d)         # the square
-    # the square makes line longer by (2*shift - 1)*width
-        p = r.tl * im
-        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
-        p = r.tr * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = r.br * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = r.bl * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
-
-    def _le_circle(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for circle line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5             # 2*shift*width = length of square edge
-        d = shift * max(1, w)
-        M = R - (d/2., 0) if lr else L + (d/2., 0)
-        r = Rect(M, M) + (-d, -d, d, d)         # the square
-        ap = "q\n" + opacity + self._oval_string(r.tl * im, r.tr * im, r.br * im, r.bl * im)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
-
-    def _le_butt(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for butt line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 3
-        d = shift * max(1, w)
-        M = R if lr else L
-        top = (M + (0, -d/2.)) * im
-        bot = (M + (0, d/2.)) * im
-        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
-        ap += "%f %f l\n" % (bot.x, bot.y)
-        ap += "%g w\n" % w
-        ap += scol + "s\nQ\n"
-        return ap
-
-    def _le_slash(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for slash line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        rw = 1.1547 * max(1, w) * 1.0         # makes rect diagonal a 30 deg inclination
-        M = R if lr else L
-        r = Rect(M.x - rw, M.y - 2 * w, M.x + rw, M.y + 2 * w)
-        top = r.tl * im
-        bot = r.br * im
-        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
-        ap += "%f %f l\n" % (bot.x, bot.y)
-        ap += "%g w\n" % w
-        ap += scol + "s\nQ\n"
-        return ap
-
-    def _le_openarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for open arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
-        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
-        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + "S\nQ\n"
-        return ap
-
-    def _le_closedarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for closed arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
-        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
-        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
-
-    def _le_ropenarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for right open arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R - (d/3., 0) if lr else L + (d/3., 0)
-        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
-        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "S\nQ\n"
-        return ap
-
-    def _le_rclosedarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for right closed arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R - (2*d, 0) if lr else L + (2*d, 0)
-        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
-        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
-
-
-    def __init__(self):
-        this = _fitz.new_Tools()
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-
-
-
-
-
-
-
-
-
 
 
 
