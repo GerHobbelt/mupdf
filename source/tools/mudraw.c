@@ -1289,6 +1289,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
 			{
 				fz_close_band_writer(ctx, bander);
+				fz_drop_band_writer(ctx, bander);
 				bander = NULL;
 			}
 
@@ -1312,6 +1313,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
 			{
+				fz_close_band_writer(ctx, bander);
 				fz_drop_band_writer(ctx, bander);
 				/* bander must be set to NULL to avoid use-after-frees. A use-after-free
 				 * would occur when a valid page was followed by a page with invalid
@@ -1353,6 +1355,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
 			{
+				fz_close_band_writer(ctx, bander);
 				fz_drop_band_writer(ctx, bander);
 				bander = NULL;
 			}
