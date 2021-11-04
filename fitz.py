@@ -267,7 +267,7 @@ def JM_find_annot_irt(annot):
     try:    # loop thru MuPDF's internal annots array
         jlib.log('{annot=}')
         jlib.log('{annot.m_internal=}')
-        page = annot.m_internal.page
+        page = annot.m_internal.annot_page()
         jlib.log('{page=}')
         annotptr = page.m_internal.annots
         while 1:
@@ -834,6 +834,42 @@ def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
     buf_bytes = mupdf.raw_to_python_bytes(da, len_)
     buf_string = buf_bytes.decode('utf-8')
     annot.annot_obj().dict_put_text_string(mupdf.PDF_ENUM_NAME_DA, buf_string)
+
+
+def JM_delete_annot(page, annot):
+    '''
+    delete an annotation using mupdf functions, but first delete the /AP
+    dict key in annot->obj.
+    '''
+    if not annot or not annot.m_internal:
+        return
+    try:
+        # first get any existing popup for the annotation
+        popup = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+
+        # next delete the /Popup and /AP entries from annot dictionary
+        mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
+
+        annots = mupdf.mpdf_dict_get(page.annot_obj(), PDF_NAME('Annots'))
+        assert annots.m_internal
+        n = mupdf.mpdf_array_len(annots)
+        for i in range(n - 1, -1, -1):
+            o = mupdf.mpdf_array_get(annots, i)
+            p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
+            if not p.m_internal:
+                continue;
+            if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
+                mupdf.mpdf_array_delete(annots, i)
+        type_ = mupdf.mpdf_annot_type(annot)
+        if type_ != mupdf.PDF_ANNOT_WIDGET:
+            mupdf.mpdf_delete_annot(page, annot)
+        else:
+            JM_delete_widget(page, annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        jlib.log('could not delete annotation')
+        # fixme: mupdf.mfz_warn("could not delete annotation")
+    return;
 
 
 def pdf_dict_getl(doc, obj, *keys):
@@ -5899,13 +5935,13 @@ class Page:
         while 1:
             # first loop through all /IRT annots and remove them
             irt_annot = JM_find_annot_irt(annot.this)
-            if not irt_annot.m_internal:    # no more there
+            if not irt_annot:    # no more there
                 break
             JM_delete_annot(page, irt_annot)
         nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
         JM_delete_annot(page, annot.this)
         #fixme: page->doc->dirty = 1;
-        val = Annot(nextannot)
+        val = Annot(self, nextannot)
 
         if val:
             val.thisown = True
