@@ -194,7 +194,6 @@ def JM_derotate_page_matrix(page):
     just the inverse of rotation
     '''
     mp = JM_rotate_page_matrix(page)
-    jlib.log('{type(mp)=}')
     return mupdf.mfz_invert_matrix(mp)
 
 def JM_rotate_page_matrix(page):
@@ -284,13 +283,9 @@ def JM_find_annot_irt(annot):
     assert isinstance(annot, mupdf.PdfAnnot)
     found = 0;
     try:    # loop thru MuPDF's internal annots array
-        jlib.log('{annot=}')
-        jlib.log('{annot.m_internal=}')
         page = annot.annot_page()
-        jlib.log('{page=}')
         annotptr = page.first_annot()
         while 1:
-            jlib.log('{annotptr=}')
             assert isinstance(annotptr, mupdf.PdfAnnot)
             if not annotptr.m_internal:
                 break
@@ -856,14 +851,8 @@ def Page_set_contents(page0, xref):
     return
 
 def Page__add_text_marker(self, quads, annot_type):
-    jlib.log('{self.this=}')
     pdfpage = self._pdf_page()
-    #pdf_annot *annot = NULL;
-    #PyObject *item = NULL;
     rotation = JM_page_rotation(pdfpage)
-    #fz_quad q;
-    #fz_var(annot);
-    #fz_var(item);
     def final():
         if rotation != 0:
             mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
@@ -1803,7 +1792,6 @@ class Point(object):
 class Rect(object):
     """Rect() - all zeros\nRect(x0, y0, x1, y1)\nRect(top-left, x1, y1)\nRect(x0, y0, bottom-right)\nRect(top-left, bottom-right)\nRect(Rect or IRect) - new copy\nRect(sequence) - from 'sequence'"""
     def __init__(self, *args):
-        jlib.log('args={args}')
         if not args:
             self.x0 = self.y0 = self.x1 = self.y1 = 0.0
             return None
@@ -3723,16 +3711,14 @@ def JM_rect_from_py(r):
     if isinstance(r, Rect):
         return mupdf.mfz_make_rect(r.x0, r.y0, r.x1, r.y1)
     if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
-        jlib.log('{type(r)=} {r=} {PySequence_Check(r)=} {PySequence_Size(r)=}')
         return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
     f = [0, 0, 0, 0]
     for i in range(4):
         f[i] = JM_FLOAT_ITEM(r, i)
         if f[i] is None:
-            jlib.log('{r=} {i=}')
             return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
-
     return mupdf.mfz_make_rect(f[0], f[1], f[2], f[3])
+
 
 def JM_matrix_from_py(m):
     a = [0, 0, 0, 0, 0, 0]
@@ -6336,9 +6322,7 @@ class Page:
     def bound(self):
         """Get page rectangle."""
         CheckParent(self)
-
         val = self.this.bound_page()
-        jlib.log('{type(val)=}')
         val = Rect(val)
 
         return val
@@ -6451,8 +6435,183 @@ class Page:
         else:
             q = CheckMarkerArg(quads)
         ret = self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
-        jlib.log('{q=} {ret=}')
         return ret
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def add_rect_annot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Square' (rectangle) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_circle_annot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Circle' (ellipse, oval) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_polygon_annot(self, points: list) -> "struct Annot *":
+        """Add a 'Polygon' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+
+    def add_ink_annot(self, handwriting: list) -> "struct Annot *":
+        """Add a 'Ink' ('handwriting') annotation.
+
+        The argument must be a list of lists of point_likes.
+        """
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_ink_annot(handwriting)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_file_annot(
+            self,
+            point: point_like,
+            buffer_: typing.ByteString,
+            filename: str,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            icon: OptStr =None
+            ) -> "struct Annot *":
+        """Add a 'FileAttachment' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_file_annot(point,
+                    buffer_,
+                    filename,
+                    ufilename=ufilename,
+                    desc=desc,
+                    icon=icon,
+                    )
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_redact_annot(
+            self,
+            quad,
+            text: OptStr =None,
+            fontname: OptStr =None,
+            fontsize: float =11,
+            align: int =0,
+            fill: OptSeq =None,
+            text_color: OptSeq =None,
+            cross_out: bool =True,
+            ) -> "struct Annot *":
+        """Add a 'Redact' annotation."""
+        da_str = None
+        if text:
+            CheckColor(fill)
+            CheckColor(text_color)
+            if not fontname:
+                fontname = "Helv"
+            if not fontsize:
+                fontsize = 11
+            if not text_color:
+                text_color = (0, 0, 0)
+            if hasattr(text_color, "__float__"):
+                text_color = (text_color, text_color, text_color)
+            if len(text_color) > 3:
+                text_color = text_color[:3]
+            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
+            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
+            if fill is None:
+                fill = (1, 1, 1)
+            if fill:
+                if hasattr(fill, "__float__"):
+                    fill = (fill, fill, fill)
+                if len(fill) > 3:
+                    fill = fill[:3]
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
+                       align=align, fill=fill)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        #-------------------------------------------------------------
+        # change appearance to show a crossed-out rectangle
+        #-------------------------------------------------------------
+        if cross_out:
+            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
+            _, LL, LR, UR, UL = ap_tab
+            ap_tab.append(LR)
+            ap_tab.append(LL)
+            ap_tab.append(UR)
+            ap_tab.append(LL)
+            ap_tab.append(UL)
+            ap_tab.append(b"S")
+            ap = b"\n".join(ap_tab)
+            annot._setAP(ap, 0)
+        return annot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     def add_caret_annot(self, point: point_like) -> "struct Annot *":
@@ -6465,6 +6624,33 @@ class Page:
                 self.set_rotation(old_rotation)
         annot_postprocess(self, annot)
         return Annot(self, annot)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def getImageBbox(self, name):
 
@@ -6601,10 +6787,7 @@ class Page:
 
     def _add_text_annot(self, point, text, icon=None):
         #return _fitz.Page__add_text_annot(self, point, text, icon)
-        jlib.log('{self.this=}')
-        #page = mupdf.mpdf_page_from_fz_page(self.this)
         page = self._pdf_page()
-        #fz_point p = JM_point_from_py(point);
         p = point
         try:
             ASSERT_PDF(page)
@@ -6654,7 +6837,6 @@ class Page:
             raise ValueError("not a PDF")
 
         val = Page__add_text_marker(self, quads, annot_type)
-        jlib.log('{val=}')
         if not val:
             return None
         val.parent = weakref.proxy(self)
