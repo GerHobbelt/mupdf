@@ -2505,6 +2505,7 @@ classextras = ClassExtras(
                 ),
 
         pdf_obj = ClassExtra(
+                constructor_raw = 'default',
                 methods_extra = [
                     ExtraMethod(
                         'PdfObj',
