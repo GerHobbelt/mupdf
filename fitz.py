@@ -129,11 +129,6 @@ try:
 except ImportError:
     fitz_fontdescriptors = {}
 
-#def JM_rect_from_py(r):
-#    if not r or len(r) != 4:
-#        return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
-#    return mupdf.Rect(r[0], r[1], r[2], r[3])
-
 def JM_read_contents(pageref):
     assert isinstance(pageref, mupdf.PdfObj), f'{type(pageref)}'
     contents = pageref.dict_get(mupdf.PDF_ENUM_NAME_Contents)
@@ -515,7 +510,7 @@ class TOOLS:
     # nr = annot.rect
         np1 = p1                   # point coord relative to annot rect
         np2 = p2                   # point coord relative to annot rect
-        m = Matrix(self._hor_matrix(np1, np2))  # matrix makes the line horizontal
+        m = Matrix(TOOLS._hor_matrix(np1, np2))  # matrix makes the line horizontal
         im = ~m                            # inverted matrix
         L = np1 * m                        # converted start (left) point
         R = np2 * m                        # converted end (right) point
@@ -558,7 +553,7 @@ class TOOLS:
     def _le_diamond(annot, p1, p2, lr, fill_color):
         """Make stream commands for diamond line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5             # 2*shift*width = length of square edge
         d = shift * max(1, w)
         M = R - (d/2., 0) if lr else L + (d/2., 0)
@@ -580,7 +575,7 @@ class TOOLS:
     def _le_square(annot, p1, p2, lr, fill_color):
         """Make stream commands for square line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5             # 2*shift*width = length of square edge
         d = shift * max(1, w)
         M = R - (d/2., 0) if lr else L + (d/2., 0)
@@ -602,12 +597,12 @@ class TOOLS:
     def _le_circle(annot, p1, p2, lr, fill_color):
         """Make stream commands for circle line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5             # 2*shift*width = length of square edge
         d = shift * max(1, w)
         M = R - (d/2., 0) if lr else L + (d/2., 0)
         r = Rect(M, M) + (-d, -d, d, d)         # the square
-        ap = "q\n" + opacity + self._oval_string(r.tl * im, r.tr * im, r.br * im, r.bl * im)
+        ap = "q\n" + opacity + TOOLS._oval_string(r.tl * im, r.tr * im, r.br * im, r.bl * im)
         ap += "%g w\n" % w
         ap += scol + fcol + "b\nQ\n"
         return ap
@@ -616,7 +611,7 @@ class TOOLS:
     def _le_butt(annot, p1, p2, lr, fill_color):
         """Make stream commands for butt line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 3
         d = shift * max(1, w)
         M = R if lr else L
@@ -632,7 +627,7 @@ class TOOLS:
     def _le_slash(annot, p1, p2, lr, fill_color):
         """Make stream commands for slash line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         rw = 1.1547 * max(1, w) * 1.0         # makes rect diagonal a 30 deg inclination
         M = R if lr else L
         r = Rect(M.x - rw, M.y - 2 * w, M.x + rw, M.y + 2 * w)
@@ -648,7 +643,7 @@ class TOOLS:
     def _le_openarrow(annot, p1, p2, lr, fill_color):
         """Make stream commands for open arrow line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5
         d = shift * max(1, w)
         p2 = R + (d/2., 0) if lr else L - (d/2., 0)
@@ -668,7 +663,7 @@ class TOOLS:
     def _le_closedarrow(annot, p1, p2, lr, fill_color):
         """Make stream commands for closed arrow line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5
         d = shift * max(1, w)
         p2 = R + (d/2., 0) if lr else L - (d/2., 0)
@@ -688,7 +683,7 @@ class TOOLS:
     def _le_ropenarrow(annot, p1, p2, lr, fill_color):
         """Make stream commands for right open arrow line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5
         d = shift * max(1, w)
         p2 = R - (d/3., 0) if lr else L + (d/3., 0)
@@ -708,7 +703,7 @@ class TOOLS:
     def _le_rclosedarrow(annot, p1, p2, lr, fill_color):
         """Make stream commands for right closed arrow line end symbol. "lr" denotes left (False) or right point.
         """
-        m, im, L, R, w, scol, fcol, opacity = _le_annot_parms(annot, p1, p2, fill_color)
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
         shift = 2.5
         d = shift * max(1, w)
         p2 = R - (2*d, 0) if lr else L + (2*d, 0)
@@ -1240,6 +1235,7 @@ def JM_delete_annot(page, annot):
                 continue;
             if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
                 mupdf.mpdf_array_delete(annots, i)
+        assert annot.m_internal
         type_ = mupdf.mpdf_annot_type(annot)
         if type_ != mupdf.PDF_ANNOT_WIDGET:
             mupdf.mpdf_delete_annot(page, annot)
@@ -3533,8 +3529,11 @@ def JM_TUPLE(o: typing.Sequence) -> tuple:
 def JM_py_from_matrix(m):
     return m.a, m.b, m.c, m.d, m.e, m.f
 
-def JM_py_from_rect(m):
+def JM_py_from_rect(r):
     return r.x0, r.y0, r.x1, r.y1
+
+def JM_py_from_point(p):
+    return p.x, p.y
 
 def JM_color_FromSequence(color, col):
     #assert isinstance( col, list)
@@ -3734,6 +3733,16 @@ def JM_rect_from_py(r):
             return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
 
     return mupdf.mfz_make_rect(f[0], f[1], f[2], f[3])
+
+def JM_matrix_from_py(m):
+    a = [0, 0, 0, 0, 0, 0]
+    if not m or not PySequence_Check(m) or PySequence_Size(m) != 6:
+        return mupdf.Matrix()
+    for i in range(6):
+        a[i] = JM_FLOAT_ITEM(m, i)
+        if a[i] is None:
+            return mupdf.Rect()
+    return mupdf.Matrix(a[0], a[1], a[2], a[3], a[4], a[5])
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -7312,24 +7321,23 @@ class Page:
         return val
 
     firstLink = property(loadLinks, doc="First link on page")
-    @property
 
+    @property
     def firstAnnot(self):
         """First annotation."""
         CheckParent(self)
-
-        val = _fitz.Page_firstAnnot(self)
-
+        #val = _fitz.Page_firstAnnot(self)
+        page = self._pdf_page()
+        if page:
+            annot = mupdf.mpdf_first_annot(page)
+        val = Annot(self, annot) if annot else None
         if val:
             val.thisown = True
             val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
-
-
         return val
 
     @property
-
     def firstWidget(self):
         """First widget/field."""
         CheckParent(self)
@@ -8426,8 +8434,15 @@ class Annot:
     def set_rect(self, rect):
         """Set annotation rectangle."""
         CheckParent(self)
-
-        return _fitz.Annot_set_rect(self, rect)
+        #return _fitz.Annot_set_rect(self, rect)
+        try:
+            annot = self.this
+            pdfpage = annot.annot_page()
+            rot = JM_rotate_page_matrix(pdfpage)
+            r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+        except Exception as e:
+            jlib.log('{e=}')
 
 
     def set_rotation(self, rotate=0):
@@ -8455,8 +8470,57 @@ class Annot:
     def vertices(self):
         """annotation vertex points"""
         CheckParent(self)
+        #return _fitz.Annot_vertices(self)
+        #PyObject *res = NULL, *res1 = NULL;
+        #pdf_obj *o, *o1;
+        annot = self.this
+        assert isinstance(annot, mupdf.PdfAnnot)
+        #fz_point point;  # point object to work with
+        page_ctm = mupdf.Matrix()   # page transformation matrix
+        dummy = mupdf.Rect(0)   # Will have .m_internal=NULL.
+        mupdf.mpdf_page_transform(annot.annot_page(), dummy, page_ctm);
+        derot = JM_derotate_page_matrix(annot.annot_page())
+        page_ctm = mupdf.mfz_concat(page_ctm, derot)
 
-        return _fitz.Annot_vertices(self)
+        #----------------------------------------------------------------
+        # The following objects occur in different annotation types.
+        # So we are sure that (!o) occurs at most once.
+        # Every pair of floats is one point, that needs to be separately
+        # transformed with the page transformation matrix.
+        #----------------------------------------------------------------
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Vertices'))
+        if not o.m_internal:    o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('L'))
+        if not o.m_internal:    o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('QuadPoints'))
+        if not o.m_internal:    o = mupdf.mpdf_dict_gets(annot.annot_obj(), "CL")
+
+        if o.m_internal:
+            # handle lists with 1-level depth --------------------------------
+            #weiter:;
+            res = []
+            for i in range(0, mupdf.mpdf_array_len(o), 2):
+                x = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o, i))
+                y = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o, i+1))
+                point = mupdf.Point(x, y)
+                point = mupdf.mfz_transform_point(point, page_ctm)
+                res.append( (point.x, point.y))
+            return res
+
+        else:
+            # InkList has 2-level lists --------------------------------------
+            #inklist:;
+            res = []
+            for i in range(mupdf.mpdf_array_len(o)):
+                res1 = []
+                o1 = mupdf.mpdf_array_get(o, i)
+                for j in range(0, mupdf.mpdf_array_len(o1), 2):
+                    x = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o1, j))
+                    y = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o1, j+1))
+                    point = mupdf.Point(x, y)
+                    point = mupdf.mfz_transform_point(point, page_ctm)
+                    res1.append( (point.x, point.y))
+                res.append(res1)
+            return res;
+
 
     @property
 
@@ -8477,6 +8541,7 @@ class Annot:
     def _update_appearance(self, opacity=-1, blend_mode=None, fill_color=None, rotate=-1):
         #return _fitz.Annot__update_appearance(self, opacity, blend_mode, fill_color, rotate)
         annot = self.this
+        assert annot.m_internal
         type_ = annot.annot_type()
         fcol = [1, 1, 1, 1] # std fill color: white
         nfcol = 0   # number of color components
@@ -8890,8 +8955,8 @@ class Annot:
     def type(self):
         """annotation type"""
         CheckParent(self)
-
         #return _fitz.Annot_type(self)
+        assert self.this.m_internal, f'self.this={self.this} self.this.m_internal={self.this.m_internal}'
         type_ = self.this.annot_type()
         c = mupdf.ppdf_string_from_annot_type(type_)
         o = self.this.annot_obj().dict_gets("IT")
@@ -9034,20 +9099,31 @@ class Annot:
         """Next annotation."""
         CheckParent(self)
 
-        val = _fitz.Annot_next(self)
+        #val = _fitz.Annot_next(self)
+        this_annot = self.this
+        assert isinstance(this_annot, mupdf.PdfAnnot)
+        assert(this_annot.m_internal)
+        type_ = mupdf.mpdf_annot_type(this_annot)
+        if type_ != mupdf.PDF_ANNOT_WIDGET:
+            annot = mupdf.mpdf_next_annot(this_annot)
+        else:
+            #annot = (pdf_widget *) pdf_next_widget(gctx, (pdf_widget *) this_annot);
+            annot = mupdf.mpdf_next_widget(this_annot)
+
+        val = Annot(self.parent, annot) if annot.m_internal else None
 
         if not val:
             return None
         val.thisown = True
-        val.parent = self.parent  # copy owning page object from previous annot
+
+        assert val.parent == self.parent
+        #val.parent = self.parent  # copy owning page object from previous annot
         val.parent._annot_refs[id(val)] = val
 
         if val.type[0] == mupdf.PDF_ANNOT_WIDGET:
             widget = Widget()
             TOOLS._fill_widget(val, widget)
             val = widget
-
-
         return val
 
 
