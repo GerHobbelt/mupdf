@@ -6783,7 +6783,21 @@ class Page:
         return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
 
     def _add_line_annot(self, p1, p2):
-        return _fitz.Page__add_line_annot(self, p1, p2)
+        #return _fitz.Page__add_line_annot(self, p1, p2)
+        page = self._pdf_page()
+        try:
+            ASSERT_PDF(page);
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_LINE)
+            a = JM_point_from_py(p1)
+            b = JM_point_from_py(p2)
+            mupdf.mpdf_set_annot_line(annot, a, b)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(self, annot)
 
     def _add_text_annot(self, point, text, icon=None):
         #return _fitz.Page__add_text_annot(self, point, text, icon)
@@ -6820,6 +6834,20 @@ class Page:
         annot_postprocess(self, annot)
         return annot
 
+    def add_line_annot(self, p1: point_like, p2: point_like) -> "struct Annot *":
+        """Add a 'Line' annotation."""
+        try:
+            old_rotation = annot_preprocess(self)
+            try:
+                annot = self._add_line_annot(p1, p2)
+            finally:
+                if old_rotation != 0:
+                    self.set_rotation(old_rotation)
+            annot_postprocess(self, annot)
+            return annot
+        except Exception as e:
+            jlib.log('{jlib.exception_info()}')
+            assert 0
 
     def _add_ink_annot(self, list):
         return _fitz.Page__add_ink_annot(self, list)
