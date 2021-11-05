@@ -836,6 +836,10 @@ def ASSERT_PDF(page):
     if not page.m_internal:
         raise Exception('not a PDF')
 
+def THROWMSG(msg):
+    raise Exception(msg)
+
+
 def Page_set_contents(page0, xref):
     assert isinstance(page0, Page)
     page = page0.this.page_from_fz_page()
@@ -1061,13 +1065,23 @@ def JM_BufferFromBytes(stream):
     '''
     if isinstance(stream, bytes):
         return mupdf.Buffer.new_buffer_from_copied_data(stream)
-    assert 0, 'Only bytes supported at the moment.'
     if isinstance(stream, bytearray):
-        return mupdf.Buffer.new_buffer_from_copied_data(stream, len(stream))
-    if instance(stream, io.BytesIO):
-        b = stream.getvalue()
-        return mupdf.Buffer.new_buffer_from_copied_data(b, len(b))
-    return mupdf.Buffer(None)
+        return mupdf.Buffer.new_buffer_from_copied_data(stream)
+    if hasattr(stream, 'getvalue'):
+        data = stream.getvalue()
+        if isinstance(data, bytes):
+            pass
+        elif isinstance(data, str):
+            data = data.encode('utf-8')
+        else:
+            raise Exception(f'.getvalue() returned unexpected type: {type(data)}')
+        return mupdf.Buffer.new_buffer_from_copied_data(data)
+    #if instance(stream, io.BytesIO):
+    #    b = stream.getvalue()
+    #    return mupdf.Buffer.new_buffer_from_copied_data(b)
+    #if
+    jlib.log('Unrecognised {type(stream)=}')
+    return mupdf.Buffer()
 
 
 def JM_get_annot_id_list(page):
@@ -3756,7 +3770,8 @@ def JM_embed_file(
         bs = b'  '
         f = mupdf.mpdf_add_stream(
                 pdf,
-                mupdf.mfz_new_buffer_from_copied_data(mupdf.python_bytes_data(bs), len(bs)),
+                #mupdf.mfz_new_buffer_from_copied_data(bs),
+                mupdf.Buffer.new_buffer_from_copied_data(bs),
                 mupdf.PdfObj(),
                 0,
                 )
@@ -7069,6 +7084,7 @@ class Page:
             mupdf.mpdf_set_annot_flags(annot, flags)
         except Exception as e:
             jlib.log('{e=}')
+            raise
             return
         return Annot(self, annot)
 
@@ -8187,10 +8203,10 @@ class Page:
     getContents = get_contents
 
 class Pixmap:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Pixmap, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Pixmap, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Pixmap, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Pixmap, name)
 
     def __init__(self, *args):
         """Pixmap(colorspace, irect, alpha) - empty pixmap.
@@ -8202,12 +8218,222 @@ class Pixmap:
         Pixmap(colorspace, width, height, samples, alpha) - from samples data.
         Pixmap(PDFdoc, xref) - from an image at xref in a PDF document.
         """
+        # From PyMuPDF/fitz/fitz.i:struct Pixmap {...}.
+        #
+        def args_match(*types):
+            #if len(args) != len(types):
+            #    return False
+            #jlib.log('{args=} {types=}')
+            for i in range(len(types)):
+                type_ = types[i]
+                #jlib.log('{type_=}')
+                if i >= len(args):
+                    if isinstance(type_, tuple) and None in type_:
+                        # arg is missing but has default value.
+                        continue
+                    else:
+                        #jlib.log('returning false: {type=} {i=}>{len(args)=}')
+                        return False
+                if type_ is not None and not isinstance(args[i], type_):
+                    #jlib.log('returning false: {type=} does not match {type(args[i])=}')
+                    return False
+            #jlib.log('returning true: {args=} match {types=}')
+            return True
+        if 0:
+            pass
+        elif args_match(mupdf.Colorspace, mupdf.Rect, int):
+            # create empty pixmap with colorspace and IRect
+            pm = mupdf.mfz_new_pixmap_with_bbox(args[0], JM_irect_from_py(args[1]), mupdf.Separations(0), args[2])
+            self.this = pm
+            return
+        elif args_match(mupdf.Colorspace, mupdf.Pixmap):
+            # copy pixmap, converting colorspace
+            if not mupdf.mfz_pixmap_colorspace(args[1]):
+                THROWMSG("cannot copy pixmap without colorspace");
+            pm = mupdf.mfz_convert_pixmap(
+                    args[1],
+                    args[0],
+                    mupdf.Colorspace(0),
+                    mupdf.ColorParams(),
+                    1,
+                    )
+            self.this = pm
+            return
+        elif args_match(mupdf.Pixmap, mupdf.Pixmap):
+            # add mask to a non-transparent pixmap
+            color, mask = args
+            w = color.w
+            h = color.h
+            n = color.n
+            if color.alpha:
+                THROWMSG("color pixmap must not have an alpha channel")
+            if mask.n != 1:
+                THROWMSG("mask pixmap must have exactly one channel")
+            if mask.w != color.w or mask.h != color.h:
+                THROWMSG("color and mask pixmaps must be the same size")
 
-        this = _fitz.new_Pixmap(*args)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+            dst = mupdf.mfz_new_pixmap_with_bbox(color.colorspace(), mupdf.mfz_pixmap_bbox(color), mupdf.Separations(0), 1)
+            for y in range(h):
+                cs = y * color.m_internal.stride
+                ms = y * mask.m_internal.stride
+                ds = y * dst.m_internal.stride
+                for x in range(w):
+                    a = mask.samples_get(ms)
+                    ms += 1
+                    for k in range(n):
+                        dst.samples_set(ds, mupdf.mfz_mul255(color.samples.get(cs), a))
+                        ds += 1
+                        cs += 1
+                    dst.samples.set(ds, a)
+                    ds += 1
+            self.this = dst
+            return
+        elif args_match(mupdf.Pixmap, (float, int), (float, int), None):
+            # create pixmap as scaled copy of another one
+            assert 0, f'Cannot handle args={args} because fz_scale_pixmap() and fz_scale_pixmap_cached() are not declared in MuPDF headers'
+            spix, w, h, clip = args
+            src_pix = spix.this
+            bbox = JM_irect_from_py(clip)
+            if not mupdf.mfz_is_infinite_irect(bbox):
+                pm = mupdf.mfz_scale_pixmap_cached(src_pix, src_pix.x, src_pix.y, w, h, bbox)
+            else:
+                pm = mupdf.mfz_scale_pixmap(gctx, src_pix, src_pix.x, src_pix.y, w, h, NULL);
+            self.this = pm
+            return
+        elif args_match(mupdf.Pixmap, (int, None)):
+            # copy pixmap & add / drop the alpha channel
+            jlib.log('{args=}')
+            spix = args[0]
+            alpha = args[1] if len(args) == 2 else 1
+            src_pix = spix
+            if not INRANGE(alpha, 0, 1):
+                THROWMSG("bad alpha value")
+            cs = mupdf.mfz_pixmap_colorspace(src_pix)
+            if not cs.m_internal and not alpha:
+                THROWMSG("cannot drop alpha for 'NULL' colorspace")
+            seps = mupdf.Separations()
+            n = mupdf.mfz_pixmap_colorants(src_pix)
+            w = mupdf.mfz_pixmap_width(src_pix)
+            h = mupdf.mfz_pixmap_height(src_pix)
+            pm = mupdf.mfz_new_pixmap(cs, w, h, seps, alpha)
+            jlib.log('{pm=} {src_pix=}')
+            pm.m_internal.x = src_pix.m_internal.x
+            pm.m_internal.y = src_pix.m_internal.y
+            pm.m_internal.xres = src_pix.m_internal.xres
+            pm.m_internal.yres = src_pix.m_internal.yres
+
+            # copy samples data ------------------------------------------
+            #unsigned char *sptr = src_pix->samples;
+            #unsigned char *tptr = pm->samples;
+            if src_pix.alpha() == pm.alpha():   # identical samples
+                #memcpy(tptr, sptr, w * h * (n + alpha));
+                # fixme: inefficient.
+                for i in range(w * h * (n + alpha)):
+                    pm.samples_set(i, src_pix.samples_get(i))
+            else:
+                tptr = 0
+                sptr = 0
+                for i in range(w * h):
+                    #memcpy(tptr, sptr, n);
+                    # fixme: inefficient.
+                    for j in range(n):
+                        pm.samples_set(tptr + j, src_pix.samples.get(sptr + j))
+                    tptr += n
+                    if pm.alpha():
+                        pm.samples_set(tptr, 255)
+                        tptr += 1
+                    sptr += n + src_pix.alpha()
+            self.this = pm
+            return
+        elif args_match(mupdf.Colorspace, int, int, None, int):
+            # create pixmap from samples data
+            cs, w, h, samples, alpha = args
+            n = mupdf.mfz_colorspace_n(cs)
+            stride = (n + alpha)*w
+            #fz_separations *seps = NULL;
+            #fz_buffer *res = NULL;
+            #fz_pixmap *pm = NULL;
+            size = 0;
+            res = JM_BufferFromBytes(samples);
+            if not res.m_internal:
+                THROWMSG("bad samples data")
+            size, c = mupdf.mfz_buffer_storage_raw(res)
+            if stride * h != size:
+                THROWMSG("bad samples length")
+            pm = mupdf.mfz_new_pixmap(cs, w, h, seps, alpha)
+            assert 0, 'cannot memcpy from buffer to pixmap samples.'
+            # do we need one of these?:
+            #   fz_pixmap *fz_new_pixmap_from_buffer(fz_buffer* buffer,
+            #           fz_colorspace *cs, int w, int h, fz_separations *seps, int alpha
+            #           );
+            #   fz_pixmap *fz_new_pixmap_from_samples(const unsigned char* samples,
+            #           fz_colorspace *cs, int w, int h, fz_separations *seps, int alpha
+            #           );
+            #
+
+            #memcpy(pm->samples, c, size);
+            self.this = pm
+            return
+
+        elif args_match(None):
+            # create pixmap from filename, file object, pathlib.Path or memory
+            imagedata, = args
+            #fz_buffer *res = NULL;
+            #fz_image *img = NULL;
+            #fz_pixmap *pm = NULL;
+            #PyObject *fname = NULL;
+            name = 'name'
+            if hasattr(imagedata, "resolve"):
+                fname = imagedata.__str__()
+                if fname:
+                    img = mupdf.mfz_new_image_from_file(fname)
+            elif hasattr(imagedata, name):
+                fname = imagedata.name
+                if fname:
+                    img = mupdf.mfz_new_image_from_file(fname)
+            elif isinstance(imagedata, str):
+                img = mupdf.mfz_new_image_from_file(imagedata)
+            else:
+                res = JM_BufferFromBytes(imagedata)
+                if not res.m_internal:
+                    THROWMSG("bad image data")
+                size, data = res.buffer_storage()
+                if not size:
+                    THROWMSG(gctx, "bad image data")
+                img = mupdf.mfz_new_image_from_buffer(res)
+            pm, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
+            xres, yres = img.image_resolution()
+            pm.xres = xres
+            pm.yres = yres
+            self.this = pm
+            return
+
+        elif args_match(mupdf.Document, int):
+            # Create pixmap from PDF image identified by XREF number
+            doc, xref = args
+            #fz_image *img = NULL;
+            #fz_pixmap *pix = NULL;
+            #pdf_obj *ref = NULL;
+            #pdf_obj *type;
+            pdf = mupdf.mpdf_specifics(doc)
+            ASSERT_PDF(pdf)
+            xreflen = mupdf.mpdf_xref_len(pdf)
+            if not INRANGE(xref, 1, xreflen-1):
+                THROWMSG("bad xref")
+            ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
+            type_ = mupdf.mpdf_dict_get(ref, PDF_NAME('Subtype'))
+            if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
+                THROWMSG(gctx, "not an image");
+            img = mupdf.mpdf_load_image(pdf, ref)
+            pix, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
+            self.this = pix
+            return
+
+        else:
+            raise Exception(f'Unrecognised args for constructing Pixmap: {args}')
+
+
+
 
     def shrink(self, factor):
         """Divide width and height by 2**factor.
@@ -8765,7 +8991,22 @@ class Annot:
         """Check if annotation has a Popup."""
         CheckParent(self)
 
-        return _fitz.Annot_has_popup(self)
+        #return _fitz.Annot_has_popup(self)
+        annot = self.this
+        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+        return True if obj.m_internal else False
+
+    def set_popup(self, rect):
+        '''
+        Create annotation 'Popup' or update rectangle.
+        '''
+        CheckParent(self)
+        annot = self.this
+        pdfpage = annot.annot_page()
+        rot = JM_rotate_page_matrix(pdfpage)
+        r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
+        mupdf.mpdf_set_annot_popup(annot, r)
+
 
     @property
 
@@ -8773,7 +9014,13 @@ class Annot:
         """annotation 'Popup' rectangle"""
         CheckParent(self)
 
-        val = _fitz.Annot_popup_rect(self)
+        #val = _fitz.Annot_popup_rect(self)
+        rect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+        annot = self.this
+        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+        if obj.m_internal:
+            rect = mupdf.mpdf_dict_get_rect(obj, PDF_NAME('Rect'))
+        val = JM_py_from_rect(rect)
 
         val = Rect(val) * self.parent.transformationMatrix
         val *= self.parent.derotationMatrix
@@ -8849,7 +9096,36 @@ class Annot:
         return
 
     def _get_redact_values(self):
-        val = _fitz.Annot__get_redact_values(self)
+        jlib.log('')
+        #val = _fitz.Annot__get_redact_values(self)
+        annot = self.this
+        if mupdf.mpdf_annot_type(annot) != mupdf.PDF_ANNOT_REDACT:
+            return
+
+        values = dict()
+        #pdf_obj *obj = NULL;
+        #const char *text = NULL;
+        try:
+            obj = mupdf.mpdf_dict_gets(annot.annot_obj(), "RO")
+            if obj.m_internal:
+                JM_Warning("Ignoring redaction key '/RO'.")
+                xref = mupdf.mpdf_to_num(obj)
+                values[dictkey_xref] = xref
+            obj = mupdf.mpdf_dict_gets(annot.annot_obj(), "OverlayText")
+            if obj.m_internal:
+                text = mupdf.mpdf_to_text_string(obj)
+                values[dictkey_text] = JM_UnicodeFromStr(text)
+            else:
+                values[dictkey_text] = ''
+            obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Q'))
+            align = 0;
+            if obj.m_internal:
+                align = mupdf.mpdf_to_int(obj)
+            values[dictkey_align] = align
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        val = values
 
         if not val:
             return val
@@ -9514,7 +9790,27 @@ class Annot:
             info = None
 
 
-        return _fitz.Annot_set_info(self, info, content, title, creationDate, modDate, subject)
+        #return _fitz.Annot_set_info(self, info, content, title, creationDate, modDate, subject)
+        annot = self.this
+        # use this to indicate a 'markup' annot type
+        is_markup = mupdf.mpdf_annot_has_author(annot)
+        # contents
+        if content:
+            mupdf.mpdf_set_annot_contents(annot, content)
+
+        if is_markup:
+            # title (= author)
+            if title:
+                mupdf.mpdf_set_annot_author(annot, title)
+            # creation date
+            if creationDate:
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('CreationDate'), creationDate)
+            # mod date
+            if modDate:
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('M'), modDate)
+            # subject
+            if subject:
+                mupdf.mpdf_dict_puts(annot.annot_obj(), "Subj", mupdf.mpdf_new_text_string(subject))
 
     @property
 
@@ -9608,12 +9904,28 @@ class Annot:
         """annotation Pixmap"""
 
         CheckParent(self)
-        cspaces = {"gray": csGRAY, "rgb": csRGB, "cmyk": csCMYK}
-        if type(colorspace) is str:
-            colorspace = cspaces.get(colorspace.lower(), None)
+        #cspaces = {"gray": mupdf.csGRAY, "rgb": mupdf.csRGB, "cmyk": mupdf.csCMYK}
+        #if type(colorspace) is str:
+        #    colorspace = cspaces.get(colorspace.lower(), None)
 
 
-        return _fitz.Annot_get_pixmap(self, matrix, colorspace, alpha)
+        #return _fitz.Annot_get_pixmap(self, matrix, colorspace, alpha)
+        ctm = JM_matrix_from_py(matrix)
+        cs = None
+        if isinstance(colorspace, str):
+            colorspace = colorspace.toupper()
+            f = getattr(f'mupdf.Colorspace.Fixed_{colorspace}', None)
+            if f:
+                cs = mupdf.Colorspace(f)
+        if cs is None:
+            cs = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
+        try:
+            pix = mupdf.mpdf_new_pixmap_from_annot(self.this, ctm, cs, mupdf.Separations(0), alpha)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        jlib.log('{pix=}')
+        return Pixmap(pix)
 
 
     blendmode = property(blendMode, doc="annotation BlendMode")
