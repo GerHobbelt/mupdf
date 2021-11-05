@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>cmph-hasher</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6B99FD}</ProjectGuid>
+    <RootNamespace>cmph-hasher</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  
+  
+  
+  
+  
+  
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  
+  
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  
+  
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/MurmurHash3.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/benchmark.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_common.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_map.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/cxxmph.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dense_hash_map_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/hollow_iterator_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_bits.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_bits_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_index.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_index_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_map_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/seeded_hash_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/string_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/string_util_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/test_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/trigraph.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/trigraph_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/examples/file_adapter_ex2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/examples/struct_vector_adapter_ex3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/examples/vector_adapter_ex1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz_ph.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bm_numbers.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/brz.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/buffer_entry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/buffer_manager.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/chd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/chd_ph.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/chm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_benchmark.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_structs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/compressed_rank.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/compressed_seq.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/fch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/fch_buckets.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/graph.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/jenkins_hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/linear_string_map.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/miller_rabin.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/select.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/vqueue.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/vstack.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/wingetopt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/cmph_benchmark_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/compressed_rank_tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/compressed_seq_tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/graph_tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/mphf_tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/packed_mphf_tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/select_tests.c" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/MurmurHash3.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/benchmark.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/hollow_iterator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_bits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_index.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_map.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/seeded_hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/string_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/stringpiece.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/trigraph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz_ph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz_structs_ph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bitbool.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz8.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz8_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/brz.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/brz_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/buffer_entry.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/buffer_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/chd.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/chd_ph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/chd_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/chd_structs_ph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/chm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/chm_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_benchmark.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_time.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/compressed_rank.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/compressed_seq.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/debug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/fch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/fch_buckets.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/fch_structs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/graph.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/hash_state.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/jenkins_hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/linear_string_map.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/miller_rabin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/select.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/select_lookup_tables.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/vqueue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/vstack.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/src/wingetopt.h" />
+        
+  </ItemGroup>
+</Project>
+    

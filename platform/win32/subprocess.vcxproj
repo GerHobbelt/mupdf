@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>subprocess</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF27C32D}</ProjectGuid>
+    <RootNamespace>subprocess</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  
+  
+  
+  
+  
+  
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  
+  
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  
+  
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/b/CMakeFiles/3.22.0-rc1/CompilerIdC/CMakeCCompilerId.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/b/CMakeFiles/3.22.0-rc1/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/b/test/basic_test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/CowData.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/PipeVar.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/ProcessBuilder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/ProcessBuilder_posix.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/ProcessBuilder_windows.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/environ.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/pipe.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/shell_utils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/utf8_to_utf16.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/basic_test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/cat_child.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Descriptions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/DummyDescriptions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/GlobalFixture.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/LinkedList.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/RealDescriptions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Root.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestSuite.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestTracker.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/ValueTraits.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/echo_main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/examples.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/printenv_main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/sleep_main.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/b/test/include/test_config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/CowData.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/PipeVar.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/ProcessBuilder.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/basic_types.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/environ.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/pipe.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/shell_utils.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/src/cpp/subprocess/utf8_to_utf16.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Descriptions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/DummyDescriptions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/ErrorFormatter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/ErrorPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Flags.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/GlobalFixture.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Gui.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/LinkedList.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/MSVCErrorPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Mock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/ParenPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/QtGui.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/RealDescriptions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/SelfTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/StdHeaders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/StdTestSuite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/StdValueTraits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/StdioFilePrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/StdioPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TeeListener.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestListener.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestMain.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestRunner.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestSuite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/TestTracker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/ValueTraits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/Win32Gui.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/X11Gui.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/XUnitPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/XmlFormatter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/XmlPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/YesNoRunner.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/cxxtest/unix.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/subprocess/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/README.txt" />
+        
+  </ItemGroup>
+</Project>
+    

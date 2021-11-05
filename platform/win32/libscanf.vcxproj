@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libscanf</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD0174E}</ProjectGuid>
+    <RootNamespace>libscanf</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+	<CharacterSet>Unicode</CharacterSet>
+    
+    <UseOfMfc>false</UseOfMfc>
+    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+
+  
+  
+  
+  
+  
+  
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  
+  
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  
+  
+
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/bloat/control-template.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/bloat/iostream-template.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/bloat/scanf-template.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/bloat/scnlib-template.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/bloat/scnlib-value-template.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/buildtime/cstdio.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/buildtime/empty.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/buildtime/iostream.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/buildtime/scnlib.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/float/list.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/float/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/float/repeated.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/float/single.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/integer/list.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/integer/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/integer/repeated.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/integer/single.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/word/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/word/repeated.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-1.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-2.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-3.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-getline.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-json.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-positional.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-readme.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/examples/example-tuple-return.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/src/file.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/src/locale.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/src/reader.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/src/vscan.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/boolean.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/buffer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/char.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/each/char_each.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/each/integer_each.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/empty.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/file/file.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/floating.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/fuzz/fuzz.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/fwd.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/integer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/istream.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/list.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/locale.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/pmr_string.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/range.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/reader.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/result.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/scan_localized.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/small_vector.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/std_string_view.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/string.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/string_view.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/tuple_return.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/usertype.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/test/util.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/benchmark.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/float/bench_float.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/integer/bench_int.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/benchmark/runtime/word/bench_word.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/all.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/args.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/context.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/fwd.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/istream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/locale.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/parse_context.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/range.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/ranges/custom_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/ranges/ranges.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/ranges/std_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/ranges/util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/reader.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/result.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/scan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/small_vector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/span.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/string_view.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/tuple_return.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/util_min.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/visitor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/detail/vscan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/fwd.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/istream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/scn.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/tuple_return.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/test/test.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/libscanf/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/libscanf/licenses/README.md" />
+        
+  </ItemGroup>
+</Project>
+    
