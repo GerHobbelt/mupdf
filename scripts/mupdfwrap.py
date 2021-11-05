@@ -1390,6 +1390,7 @@ classextras = ClassExtras(
                 ),
 
         fz_buffer = ClassExtra(
+                constructor_raw = 'default',
                 constructors_wrappers = [
                     'fz_read_file',
                     ],
@@ -1397,6 +1398,19 @@ classextras = ClassExtras(
 
         fz_color_params = ClassExtra(
                 pod='inline',
+                constructors_extra = [
+                    ExtraConstructor('()',
+                        f'''
+                        {{
+                            this->ri = fz_default_color_params.ri;
+                            this->bp = fz_default_color_params.bp;
+                            this->op = fz_default_color_params.op;
+                            this->opm = fz_default_color_params.opm;
+                        }}
+                        ''',
+                        comment = '/* Equivalent to fz_default_color_params. */',
+                        ),
+                    ],
                 ),
 
         fz_colorspace = ClassExtra(
@@ -2130,6 +2144,22 @@ classextras = ClassExtras(
                         ''',
                         f'/* Alternative to pixmap_samples() that returns pointer as integer. */',
                         ),
+                    ExtraMethod( 'int', 'samples_get(int offset)',
+                        f'''
+                        {{
+                            return m_internal->samples[offset];
+                        }}
+                        ''',
+                        f'/* Returns m_internal->samples[offset]. */',
+                        ),
+                    ExtraMethod( 'void', 'samples_set(int offset, int value)',
+                        f'''
+                        {{
+                            m_internal->samples[offset] = value;
+                        }}
+                        ''',
+                        f'/* Sets m_internal->samples[offset] to value. */',
+                        ),
                     ],
                 constructor_raw = True,
                 accessors = True,
@@ -2311,7 +2341,7 @@ classextras = ClassExtras(
                 ),
 
         fz_separations = ClassExtra(
-                constructor_raw = True,
+                constructor_raw = 'default',
                 opaque = True,
                 ),
 
@@ -7503,6 +7533,14 @@ def build_swig(
                     return mupdf::ppdf_set_annot_color(annot, n, color);
                 }}
 
+
+                /* SWIG-friendly alternative to ppdf_set_annot_color(). */
+                void ppdf_set_annot_interior_color2(pdf_annot *annot, int n, float color0, float color1, float color2, float color3)
+                {{
+                    float color[] = {{ color0, color1, color2, color3 }};
+                    return mupdf::ppdf_set_annot_color(annot, n, color);
+                }}
+
                 '''
 
     common += generated.swig_cpp
@@ -7868,6 +7906,29 @@ def build_swig(
                 def PdfAnnot_set_annot_color(self, color):
                     return pdf_set_annot_color(self.m_internal, color)
                 PdfAnnot.set_annot_color = PdfAnnot_set_annot_color
+
+                def pdf_set_annot_interior_color(annot, color):
+                    """
+                    Python version of pdf_set_annot_color() using
+                    ppdf_set_annot_color2().
+                    """
+                    if isinstance(color, float):
+                        ppdf_set_annot_interior_color2(annot, 1, color, 0, 0, 0)
+                    elif len(color) == 1:
+                        ppdf_set_annot_interior_color2(annot, 1, color[0], 0, 0, 0)
+                    elif len(color) == 2:
+                        ppdf_set_annot_interior_color2(annot, 2, color[0], color[1], 0, 0)
+                    elif len(color) == 3:
+                        ppdf_set_annot_interior_color2(annot, 3, color[0], color[1], color[2], 0)
+                    elif len(color) == 4:
+                        ppdf_set_annot_interior_color2(annot, 4, color[0], color[1], color[2], color[3])
+                    else:
+                        raise Exception( f'Unexpected color should be float or list of 1-4 floats: {color}')
+
+                # Override PdfAnnot.set_interiorannot_color() to use the above.
+                def PdfAnnot_set_annot_interior_color(self, color):
+                    return pdf_set_annot_interior_color(self.m_internal, color)
+                PdfAnnot.set_annot_interior_color = PdfAnnot_set_annot_interior_color
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
