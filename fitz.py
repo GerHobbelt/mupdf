@@ -832,7 +832,7 @@ def INRANGE(v, low, high):
     return low <= v and v <= high
 
 def ASSERT_PDF(page):
-    assert isinstance(page, mupdf.PdfPage)
+    assert isinstance(page, mupdf.PdfPage), f'type(page)={type(page)} page={page}'
     if not page.m_internal:
         raise Exception('not a PDF')
 
@@ -3776,6 +3776,58 @@ def JM_embed_file(
 def JM_UnicodeFromStr(s):
     assert isinstance(s, str)
     return s
+
+
+def JM_get_annot_by_name(page, name):
+    '''
+    retrieve annot by name (/NM key)
+    '''
+    assert isinstance(page, mupdf.PdfPage)
+    if not name:
+        return
+    #pdf_annot **annotptr = NULL;
+    #pdf_annot *annot = NULL;
+    found = 0
+
+    try:    # loop thru MuPDF's internal annots and widget arrays
+        annot = page.first_annot()
+        while 1:
+            if not annot.m_internal:
+                break
+
+            response, len_ = mupdf.mpdf_to_string(mupdf.mpdf_dict_gets(annot.annot_obj(), "NM"))
+            if name == response:
+                found = 1
+                break
+            annot = annot.next_annot()
+        if not found:
+            raise Exception("'%s' is not an annot of this page" % name)
+    except Exception as e:
+        jlib.log('{e=}')
+        raise
+    return annot
+
+
+def JM_get_annot_by_xref(page, xref):
+    '''
+    retrieve annot by its xref
+    '''
+    assert isinstance(page, mupdf.PdfPage)
+    found = 0
+    try:    # loop thru MuPDF's internal annots array
+        annot = page.first_annot()
+        while 1:
+            if not annot.m_internal:
+                break
+            if xref == mupdf.mpdf_to_num(annot.annot_obj()):
+                found = 1
+                break
+        if not found:
+            raise Exception("xref %d is not an annot of this page" % xref)
+    except Exception as e:
+        jlib.log('{e=}')
+        raise
+    return annot
 
 
 def CheckRect(r: typing.Any) -> bool:
@@ -6839,7 +6891,38 @@ class Page:
 
 
     def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
-        return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
+        #return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
+        page = self._pdf_page()
+        fcol = [ 1, 1, 1, 0]
+        nfcol = 0
+        try:
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_REDACT)
+            q = JM_quad_from_py(quad)
+            r = mupdf.mfz_rect_from_quad(q)
+
+            # TODO calculate de-rotated rect
+            mupdf.mpdf_set_annot_rect(annot, r)
+            if fill:
+                nfcol = JM_color_FromSequence(fill, fcol)
+                arr = mupdf.mpdf_new_array(page.doc(), nfcol)
+                for i in range(nfcol):
+                    mupdf.mpdf_array_push_real(arr, fcol[i])
+                mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('IC'), arr)
+            if text:
+                mupdf.mpdf_dict_puts(
+                        annot.annot_obj(),
+                        "OverlayText",
+                        mupdf.mpdf_new_text_string(text),
+                        )
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('DA'), da_str)
+                mupdf.mpdf_dict_put_int(annot.annot_obj(), PDF_NAME('Q'), align)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        annot = mupdf.mpdf_keep_annot(annot)
+        return Annot(self, annot)
 
     def _add_line_annot(self, p1, p2):
         #return _fitz.Page__add_line_annot(self, p1, p2)
@@ -7347,7 +7430,7 @@ class Page:
     def _load_annot(self, name, xref):
         #return _fitz.Page__load_annot(self, name, xref)
         #pdf_annot *annot = NULL;
-        page = self._pdf_page
+        page = self._pdf_page()
         try:
             ASSERT_PDF(page)
             if xref == 0:
@@ -7355,9 +7438,9 @@ class Page:
             else:
                 annot = JM_get_annot_by_xref(page, xref)
         except Exception as e:
-            jlib.log('{e=}')
+            jlib.log('{e=} {jlib.exception_info()=}')
             return
-        return Annot(self, annot)
+        return Annot(self, annot) if annot else None
 
     def _get_resource_properties(self):
         return _fitz.Page__get_resource_properties(self)
@@ -8529,7 +8612,7 @@ class Annot:
     #def __init__(self, *args, **kwargs):
     #    raise AttributeError("No constructor defined")
     def __init__(self, page, annot):
-        assert isinstance(annot, mupdf.PdfAnnot)
+        assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
         assert isinstance(page, Page), f'page is: {page}'
         self.this = annot
         self.parent = page
@@ -8923,7 +9006,7 @@ class Annot:
                 annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
         else:
             if fill_color:
-                annot.set_annot_interior_color(nfcol, fcol)
+                annot.set_annot_interior_color(fcol[:nfcol])
             elif fill_color is not None:
                 annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
 
