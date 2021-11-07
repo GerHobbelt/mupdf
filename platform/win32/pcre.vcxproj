@@ -26,64 +26,47 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-    
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-    
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-    
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
-    
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -95,9 +78,7 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -128,8 +109,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCRE;PCRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -242,227 +223,37 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
   <ItemGroup>
-    
     <ClCompile Include="../../thirdparty/owemdjee/pcre/maint/ucptest.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/maint/utf8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_auto_possess.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_chartables.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_compile.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_config.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_context.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_convert.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_dfa_match.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_dftables.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_error.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_extuni.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_find_bracket.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_fuzzsupport.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_compile.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_match.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_misc.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_test.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_maketables.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_match.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_match_data.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_newline.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_ord2utf.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_pattern_info.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_printint.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_script_run.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_serialize.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_string_utils.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_study.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_substitute.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_substring.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_tables.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_ucd.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_valid_utf.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_xclass.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2demo.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2grep.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2posix.c" />
-        
-
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2test.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitExecAllocator.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitLir.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_T2_32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeS390X.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeSPARC_32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeSPARC_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitProtExecAllocator.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitUtils.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitWXExecAllocator.c" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_internal.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_intmodedep.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_neon_inc.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_simd_inc.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_ucp.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2posix.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitConfig.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitConfigInternal.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitLir.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/wx/config.h" />
-        
-
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/wx/pcre2.h" />
-        
-
     <Text Include="../../thirdparty/owemdjee/pcre/doc/html/README.txt" />
-        
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libpcre.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518f174b2ba}</Project>
+    </ProjectReference>
   </ItemGroup>
 </Project>
-    
