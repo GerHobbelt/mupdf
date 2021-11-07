@@ -208,12 +208,6 @@
 #include "../../thirdparty/owemdjee/wxWidgets/src/univ/spinbutt.cpp"
 
 //------------------------------------------------------------------------
-// stackwalk.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/msw/stackwalk.cpp"
-#include "../../thirdparty/owemdjee/wxWidgets/src/unix/stackwalk.cpp"
-
-//------------------------------------------------------------------------
 // statbmp.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/msw/statbmp.cpp"
@@ -230,12 +224,6 @@
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/msw/stattext.cpp"
 #include "../../thirdparty/owemdjee/wxWidgets/src/univ/stattext.cpp"
-
-//------------------------------------------------------------------------
-// stdpaths.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/msw/stdpaths.cpp"
-#include "../../thirdparty/owemdjee/wxWidgets/src/unix/stdpaths.cpp"
 
 //------------------------------------------------------------------------
 // textctrl.cpp
