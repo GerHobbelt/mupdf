@@ -10,7 +10,9 @@
 #define BITS_IN_JSAMPLE  8      /* use 8 or 12 */
 
 #define HAVE_STDDEF_H
+#ifndef HAVE_STDLIB_H
 #define HAVE_STDLIB_H
+#endif
 #undef NEED_SYS_TYPES_H
 #undef NEED_BSD_STRINGS
 
