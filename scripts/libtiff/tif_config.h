@@ -219,10 +219,18 @@
 #define SIZEOF_SIGNED_SHORT 2
 
 /* The size of `size_t', as computed by sizeof. */
+#if defined(WIN64) || defined(_WIN64)
 #define SIZEOF_SIZE_T 8
+#else
+#define SIZEOF_SIZE_T 4
+#endif
 
 /* The size of `unsigned char *', as computed by sizeof. */
+#if defined(WIN64) || defined(_WIN64)
 #define SIZEOF_UNSIGNED_CHAR_P 8
+#else
+#define SIZEOF_UNSIGNED_CHAR_P 4
+#endif
 
 /* The size of `unsigned int', as computed by sizeof. */
 #define SIZEOF_UNSIGNED_INT 4
@@ -291,14 +299,14 @@
 #define TIFF_UINT64_T unsigned __int64
 
 /* Signed size type */
-#if defined(_WIN64)
+#if defined(WIN64) || defined(_WIN64)
 #define TIFF_SSIZE_T signed __int64
 #else
 #define TIFF_SSIZE_T signed long int
 #endif
 
 /* Signed size type formatter */
-#if defined(_WIN64)
+#if defined(WIN64) || defined(_WIN64)
 #define TIFF_SSIZE_FORMAT "%I64d"
 #else
 #define TIFF_SSIZE_FORMAT "%ld"
