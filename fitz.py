@@ -816,7 +816,8 @@ class TOOLS:
                     mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 0))
                     mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 65535))
                     mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, width))
-                    mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+                    #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+                    mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
         except Exception as e:
             jlib.log('{e=}')
             return
@@ -861,7 +862,8 @@ def Page_set_contents(page0, xref):
     contents = page.doc().new_indirect(xref, 0)
     if not contents.is_stream():
         raise Exception('xref is no stream')
-    page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
+    #page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
+    page.obj().dict_put( mupdf.PDF_ENUM_NAME_Contents, contents)
     # fixme: page.this.dirty = 1
     return
 
@@ -1123,7 +1125,8 @@ def JM_add_annot_id(annot, stem):
 
     response = stem_id
     name = mupdf.PdfObj(response)
-    annot.annot_obj().dict_puts_drop("NM", name)
+    #annot.annot_obj().dict_puts_drop("NM", name)
+    annot.annot_obj().dict_puts("NM", name)
     # fixme: pymupdf's JM_add_annot_id() appears be able to compile this code:
     #
     #   pdf_annot *annot;
@@ -3928,7 +3931,8 @@ def JM_insert_contents(pdf, pageref, newcont, overlay):
                 mupdf.mpdf_array_push(carr, contents)
             mupdf.mpdf_array_push(carr, newconts)
         else:
-            mupdf.mpdf_array_push_drop(carr, newconts)
+            #mupdf.mpdf_array_push_drop(carr, newconts)
+            mupdf.mpdf_array_push(carr, newconts)
             if contents.m_internal:
                 mupdf.mpdf_array_push(carr, contents)
         mupdf.mpdf_dict_put(pageref, PDF_NAME('Contents'), carr)
@@ -3980,6 +3984,13 @@ def JM_get_fontextension(doc, xref):
             PySys_WriteStdout("unhandled font type '%s'", mupdf.mpdf_to_name(obj))
 
     return "n/a"
+
+
+def JM_EscapeStrFromStr(c):
+    # fixme: need to make this handle escape sequences.
+    return c
+
+
 
 def CheckRect(r: typing.Any) -> bool:
     """Check whether an object is non-degenerate rect-like.
@@ -5076,7 +5087,8 @@ class Document:
         if pno < -1:
             raise Exception("bad page number(s)")
         # create /Resources and /Contents objects
-        resources = pdf.add_object_drop(pdf.new_dict(1))
+        #resources = pdf.add_object_drop(pdf.new_dict(1))
+        resources = pdf.add_object(pdf.new_dict(1))
         page_obj = pdf.add_page(mediabox, 0, resources, contents)
         pdf.insert_page(pno, page_obj)
         # fixme: pdf->dirty = 1;
@@ -5767,11 +5779,7 @@ class Document:
 
         #return _fitz.Document__getPageInfo(self, pno, what)
         doc = self.this
-        pdf = doc.specifics()
-        #pdf_obj *pageref, *rsrc;
-        #PyObject *liste = NULL, *tracer = NULL;
-        #fz_var(liste);
-        #fz_var(tracer);
+        pdf = self._pdf_document()
         pageCount = doc.count_pages()
         n = pno;  # pno < 0 is allowed
         while n < 0:
@@ -6597,6 +6605,123 @@ class Page:
         return val
 
     rect = property(bound, doc="page rectangle")
+
+    def insert_text(
+            page,
+            point: point_like,
+            text: typing.Union[str, list],
+            fontsize: float = 11,
+            lineheight: OptFloat = None,
+            fontname: str = "helv",
+            fontfile: OptStr = None,
+            set_simple: int = 0,
+            encoding: int = 0,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            border_width: float = 1,
+            render_mode: int = 0,
+            rotate: int = 0,
+            morph: OptSeq = None,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ):
+        img = page.new_shape()
+        rc = img.insert_text(
+                point,
+                text,
+                fontsize=fontsize,
+                lineheight=lineheight,
+                fontname=fontname,
+                fontfile=fontfile,
+                set_simple=set_simple,
+                encoding=encoding,
+                color=color,
+                fill=fill,
+                border_width=border_width,
+                render_mode=render_mode,
+                rotate=rotate,
+                morph=morph,
+                stroke_opacity=stroke_opacity,
+                fill_opacity=fill_opacity,
+                oc=oc,
+                )
+        if rc >= 0:
+            img.commit(overlay)
+        return rc
+
+
+
+
+    def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
+                   set_simple=False, wmode=0, encoding=0):
+        doc = self.parent
+        if doc is None:
+            raise ValueError("orphaned object: parent is None")
+        idx = 0
+
+        if fontname.startswith("/"):
+            fontname = fontname[1:]
+
+        font = CheckFont(self, fontname)
+        if font is not None:                    # font already in font list of page
+            xref = font[0]                      # this is the xref
+            if CheckFontInfo(doc, xref):        # also in our document font list?
+                return xref                     # yes: we are done
+            # need to build the doc FontInfo entry - done via get_char_widths
+            doc.get_char_widths(xref)
+            return xref
+
+        #--------------------------------------------------------------------------
+        # the font is not present for this page
+        #--------------------------------------------------------------------------
+
+        bfname = Base14_fontdict.get(fontname.lower(), None) # BaseFont if Base-14 font
+
+        serif = 0
+        CJK_number = -1
+        CJK_list_n = ["china-t", "china-s", "japan", "korea"]
+        CJK_list_s = ["china-ts", "china-ss", "japan-s", "korea-s"]
+
+        try:
+            CJK_number = CJK_list_n.index(fontname)
+            serif = 0
+        except:
+            pass
+
+        if CJK_number < 0:
+            try:
+                CJK_number = CJK_list_s.index(fontname)
+                serif = 1
+            except:
+                pass
+
+        if fontname.lower() in fitz_fontdescriptors.keys():
+            import pymupdf_fonts
+            fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
+            del pymupdf_fonts
+
+        # install the font for the page
+        jlib.log('{fontname=} {bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {CJK_number=}')
+        val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
+                               wmode, serif, encoding, CJK_number)
+
+        if not val:                   # did not work, error return
+            return val
+
+        xref = val[0]                 # xref of installed font
+        fontdict = val[1]
+
+        if CheckFontInfo(doc, xref):  # check again: document already has this font
+            return xref               # we are done
+
+        # need to create document font info
+        doc.get_char_widths(xref, fontdict=fontdict)
+        return xref
+
+
+
 
     def add_polyline_annot(self, points: list) -> "struct Annot *":
         """Add a 'PolyLine' annotation."""
@@ -8265,9 +8390,129 @@ class Page:
 
 
     def _insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
-        return _fitz.Page__insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
-    @property
+        #return _fitz.Page__insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
+        page = self._pdf_page()
+        #pdf_document *pdf;
+        #pdf_obj *resources, *fonts, *font_obj;
+        #fz_font *font = NULL;
+        #fz_buffer *res = NULL;
+        #const unsigned char *data = NULL;
+        #int size, ixref = 0, index = 0, simple = 0;
+        #PyObject *value;
+        #PyObject *exto = NULL;
+    #fz_try(gctx) {
+        try:
+            ASSERT_PDF(page)
+            pdf = page.doc()
+            # get the objects /Resources, /Resources/Font
+            import sys
+            sys.stdout = sys.stderr
+            resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+            fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
+            if not fonts.m_internal:    # page has no fonts yet
+                fonts = mupdf.mpdf_new_dict(pdf, 10)
+                jlib.log('{fonts=}')
+                d = page.obj()
+                jlib.log('{d=}')
+                jlib.log('{d.is_indirect()=}')
+                jlib.log('{d.is_dict()=}')
+                if d.is_indirect():
+                    dd = d.resolve_indirect_chain()
+                    jlib.log('{dd=}')
+                    jlib.log('{dd.is_indirect()=}')
+                    jlib.log('{dd.is_dict()=}')
+                jlib.log('{d.is_dict()=}')
+                d.dict_putl(fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
+                #mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'));
 
+            # check for CJK font
+            if ordering > -1:
+                data, size, index = ordering.lookup_cjk_font()
+            if data:
+                font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
+                font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
+                exto = JM_UnicodeFromStr("n/a")
+                simple = 0
+                #goto weiter;
+
+            else:
+                # check for PDF Base-14 font
+                if bfname:
+                    data, size = mupdf.mfz_lookup_base14_font(bfname)
+                if data is not None:
+                    font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
+                    font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+                    exto = JM_UnicodeFromStr("n/a")
+                    simple = 1
+                    #goto weiter;
+
+                else:
+                    if fontfile:
+                        font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
+                    else:
+                        res = JM_BufferFromBytes(fontbuffer)
+                        if not res.m_internal:
+                            THROWMSG("need one of fontfile, fontbuffer")
+                        font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
+
+                    if not set_simple:
+                        font_obj = mupdf.mpdf_add_cid_font(pdf, font)
+                        simple = 0
+                    else:
+                        font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+                        simple = 2
+
+            #weiter: ;
+            ixref = mupdf.mpdf_to_num(font_obj)
+            if mupdf.mfz_font_is_monospaced(font):
+                adv = mupdf.mfz_advance_glyph(font, fz_encode_character(font, 32), 0)
+                width = math.floor(adv * 1000.0 + 0.5)
+                dfonts = mupdf.mpdf_dict_get(font_obj, PDF_NAME('DescendantFonts'))
+                if mupdf.mpdf_is_array(dfonts):
+                    n = mupdf.mpdf_array_len(dfonts)
+                    for i in range(n):
+                        dfont = mupdf.mpdf_array_get(dfonts, i)
+                        warray = mupdf.mpdf_new_array(pdf, 3)
+                        mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
+                        mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
+                        mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
+                        #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+                        mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
+
+            name = JM_EscapeStrFromStr(
+                    pdf_to_name(
+                        mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))
+                        )
+                    )
+            subt = JM_UnicodeFromStr(
+                    mupdf.mpdf_to_name(
+                        pdf_dict_get(font_obj, PDF_NAME(Subtype))
+                        )
+                    )
+            if not exto:
+                exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
+
+            value = [
+                    ixref,
+                    {
+                        "name": name,   # base font name
+                        "type": subt,   # subtype
+                        "ext": exto,    # file extension
+                        "simple": (True if simple else False),  # simple font?
+                        "ordering": ordering,   # CJK font?
+                    },
+                    ]
+            # store font in resources and fonts objects will contain named reference to font
+            #mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
+            mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
+            # fixme: pdf->dirty = 1;
+            return value
+        except Exception as e:
+            jlib.log('{e=}: {jlib.exception_info()=}')
+            return
+
+
+    @property
     def transformationMatrix(self):
         """Page transformation matrix."""
         CheckParent(self)
@@ -9620,7 +9865,8 @@ class Annot:
             if not extg.m_internal: # no ExtGState yet: make one
                 extg = resources.dict_put_dict(mupdf.PDF_ENUM_NAME_ExtGState, 2)
 
-            extg.dict_put_drop(mupdf.PDF_ENUM_NAME_H, alp0)
+            #extg.dict_put_drop(mupdf.PDF_ENUM_NAME_H, alp0)
+            extg.dict_put(mupdf.PDF_ENUM_NAME_H, alp0)
 
         except Exception:
             PySys_WriteStderr("could not set opacity or blend mode\n");
@@ -11248,7 +11494,9 @@ class Shape(object):
         xref = self.page.insert_font(
             fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
         )
+        jlib.log('self.page.insert_font() => {xref=}')
         fontinfo = CheckFontInfo(self.doc, xref)
+        jlib.log('{fontinfo=}')
 
         fontdict = fontinfo[1]
         ordering = fontdict["ordering"]
@@ -11818,6 +12066,18 @@ class Shape(object):
     insertText = insert_text
     insertTextbox = insert_textbox
 
+from mupdf import (
+    PDF_PERM_PRINT,
+    PDF_PERM_MODIFY,
+    PDF_PERM_COPY,
+    PDF_PERM_ANNOTATE,
+    PDF_PERM_FORM,
+    PDF_PERM_ACCESSIBILITY,
+    PDF_PERM_ASSEMBLE,
+    PDF_PERM_PRINT_HQ,
+
+    PDF_ENCRYPT_AES_256,
+    )
 
 
 
