@@ -7013,10 +7013,16 @@ def cpp_source(
                     if (!this_->m_internal) return;
                     if (allow_int_this)
                     {
-                        std::cerr << __FILE__ << ":" << __LINE__ << ": this_->m_internal=" << this_->m_internal << "\\n";
+                        std::cerr << __FILE__ << ":" << __LINE__
+                                << " " << file << ":" << line << ":" << fn << ":"
+                                << " this_->m_internal=" << this_->m_internal
+                                << "\\n";
                         if ((intptr_t) this_->m_internal < 4096)
                         {
-                            std::cerr << __FILE__ << ":" << __LINE__ << ": Ignoring this_->m_internal=" << this_->m_internal << "\\n";
+                            std::cerr << __FILE__ << ":" << __LINE__
+                                    << " " << file << ":" << line << ":" << fn << ":"
+                                    << " Ignoring this_->m_internal=" << this_->m_internal
+                                    << "\\n";
                             return;
                         }
                     }
@@ -7881,7 +7887,7 @@ def build_swig(
                     if obj.is_indirect():
                         obj = obj.resolve_indirect_chain()
                     if not obj.is_dict():
-                        raise Exception(f'not a dict {obj.obj}')
+                        raise Exception(f'not a dict: {obj}')
                     if not tail:
                         return
                     doc = obj.get_bound_document()
