@@ -2577,6 +2577,22 @@ classextras = ClassExtras(
                     ],
                 copyable = 'default',
                 ),
+
+        pdf_redact_options = ClassExtra(
+                pod = 'inline',
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        f'''
+                        {{
+                            this->black_boxes = 0;
+                            this->image_method = 0;
+                        }}
+                        ''',
+                        comment = '/* Default constructor initialises .black_boxes=0 and .image_method=0. */',
+                        ),
+                    ],
+                ),
+
         pdf_write_options = ClassExtra(
                 constructors_extra = [
                     ExtraConstructor( '()',
