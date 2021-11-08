@@ -21,7 +21,7 @@ Looking for build directories in the directory tree:
 ----------------------------------------------------
 EOT
 P=$( dirname "$0" )
-find "$dir" -type f -name '*.obj' -o -name '*.sbr' -o -name '*.tlog' -o -name '*.ipch' -o -name 'Browse.VC.db' > tmp.list
+find "$dir" -type f -name '*.obj' -o -name '*.sbr' -o -name '*.pdb' -o -name '*.tlog' -o -name '*.ipch' -o -name 'Browse.VC.db' > tmp.list
 node "$P/nuke-all-build-directories.js" tmp.list ./nuke-all-build-directories-exec.sh
 ./nuke-all-build-directories-exec.sh
 rm tmp.list ./nuke-all-build-directories-exec.sh

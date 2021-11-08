@@ -29,7 +29,39 @@ const buildDirs = [
 	"reader_Win32_Debug",
 	"reader_Win32_Release",
 	"obj",
+	"packages",
 	"v16/ipch",
+];
+
+const buildDirsPlusOne = [
+	"bin/debug",
+	"bin/release",
+	"lib/net20",
+	"lib/net30",
+	"lib/net35",
+	"lib/net40",
+	"lib/net45",
+	"lib/net46",
+	"lib/net47",
+	"lib/net48",
+	"lib/net50",
+	"lib/net472",
+	"lib/net462",
+	"lib/net452",
+	"lib/netcoreapp1.0",
+	"lib/netcoreapp2.0",
+	"lib/netcoreapp2.1",
+	"lib/netcoreapp3.0",
+	"lib/netcoreapp3.1",
+	"lib/netstandard1.0",
+	"lib/netstandard1.3",
+	"lib/netstandard1.6",
+	"lib/netstandard2.0",
+	"lib/netstandard2.1",
+	"lib/sl4",
+	"lib/sl5",
+	"lib/wp8",
+	"lib/wpa81",
 ];
 
 const buildFiles = [
@@ -86,6 +118,14 @@ let b = a
 		if (l.includes(dirstr)) {
 			has_build_dir = true;
 			l = l.replace(new RegExp(`${dirstr}.*$`), dirstr);
+		}
+	}
+
+	for (let i = 0; i < buildDirsPlusOne.length; i++) {
+		let dirstr = `/${buildDirsPlusOne[i]}/`;
+		if (l.includes(dirstr)) {
+			has_build_dir = true;
+			l = path.dirname(l.replace(new RegExp(`${dirstr}.*$`), dirstr));
 		}
 	}
 
