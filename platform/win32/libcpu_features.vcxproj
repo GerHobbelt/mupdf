@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>frozen</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA9C6A7}</ProjectGuid>
-    <RootNamespace>frozen</RootNamespace>
+    <ProjectName>libcpu_features</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF828F32}</ProjectGuid>
+    <RootNamespace>libcpu_features</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -112,7 +112,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -122,12 +122,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/frozen/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;../../thirdparty/owemdjee/pthread-win32;../../scripts/__system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -148,13 +148,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/frozen/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;../../thirdparty/owemdjee/pthread-win32;../../scripts/__system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -167,7 +167,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -177,12 +177,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/frozen/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;../../thirdparty/owemdjee/pthread-win32;../../scripts/__system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -195,7 +195,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -203,13 +203,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/frozen/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;../../thirdparty/owemdjee/pthread-win32;../../scripts/__system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FROZEN;FROZEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
@@ -227,50 +227,38 @@
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_int_set.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_str_search.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_str_set.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/examples/enum_to_string.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/examples/enum_to_string_hash.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/examples/html_entities_map.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/examples/pixel_art.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/examples/static_assert.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/examples/value_modification.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/no_exceptions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_algorithms.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_map.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_rand.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_set.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_str.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_str_set.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_unordered_map.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_unordered_map_str.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_unordered_set.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_unordered_str_set.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/algorithm.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/algorithms.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/basic_types.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/constexpr_assert.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/defines.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/elsa.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/exceptions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/pmh.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/type_traits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/map.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/random.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/set.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/unordered_map.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/unordered_set.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/tests/bench.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/tests/catch.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\frozen\AUTHORS" />
-    <None Include="..\..\thirdparty\owemdjee\frozen\LICENSE" />
-    <None Include="..\..\thirdparty\owemdjee\frozen\README.rst" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/ndk_compat/cpu-features.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/ndk_compat/ndk-compat-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/filesystem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/hwcaps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_aarch64_linux_or_android.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_arm_linux_or_android.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_mips_linux_or_android.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_ppc_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_x86_freebsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_x86_linux_or_android.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_x86_macos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/impl_x86_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/stack_line_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/string_view.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/src/utils/list_cpu_features.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpu_features_cache_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpu_features_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_aarch64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_mips.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_ppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/bit_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/cpuid_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/hwcaps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/stack_line_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/ndk_compat/cpu-features.h" />
+    <Text Include="../../thirdparty/owemdjee/cpu_features/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpu_features/ci/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpu_features/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpu_features/ndk_compat/README.md" />
   </ItemGroup>
 </Project>
