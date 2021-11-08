@@ -13,6 +13,65 @@ import hashlib
 import typing
 
 
+def PDF_NAME(x):
+    assert isinstance(x, str)
+    return getattr(mupdf, f'PDF_ENUM_NAME_{x}')
+
+
+
+dictkey_align = "align"
+dictkey_align = "ascender"
+dictkey_bbox = "bbox"
+dictkey_blocks = "blocks"
+dictkey_bpc = "bpc"
+dictkey_c = "c"
+dictkey_chars = "chars"
+dictkey_color = "color"
+dictkey_colorspace = "colorspace"
+dictkey_content = "content"
+dictkey_creationDate = "creationDate"
+dictkey_cs_name = "cs-name"
+dictkey_da = "da"
+dictkey_dashes = "dashes"
+dictkey_desc = "desc"
+dictkey_desc = "descender"
+dictkey_dir = "dir"
+dictkey_effect = "effect"
+dictkey_ext = "ext"
+dictkey_filename = "filename"
+dictkey_fill = "fill"
+dictkey_flags = "flags"
+dictkey_font = "font"
+dictkey_height = "height"
+dictkey_id = "id"
+dictkey_image = "image"
+dictkey_items = "items"
+dictkey_length = "length"
+dictkey_lines = "lines"
+dictkey_matrix = "transform"
+dictkey_modDate = "modDate"
+dictkey_name = "name"
+dictkey_number = "number"
+dictkey_origin = "origin"
+dictkey_rect = "rect"
+dictkey_size = "size"
+dictkey_smask = "smask"
+dictkey_spans = "spans"
+dictkey_stroke = "stroke"
+dictkey_style = "style"
+dictkey_subject = "subject"
+dictkey_text = "text"
+dictkey_title = "title"
+dictkey_type = "type"
+dictkey_ufilename = "ufilename"
+dictkey_width = "width"
+dictkey_wmode = "wmode"
+dictkey_xref = "xref"
+dictkey_xres = "xres"
+dictkey_yres = "yres"
+
+EPSILON = 1e-5
+
 def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     if name == "thisown":
         return self.this.own(value)
@@ -70,11 +129,6 @@ try:
 except ImportError:
     fitz_fontdescriptors = {}
 
-def JM_rect_from_py(r):
-    if not r or len(r) != 4:
-        return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
-    return mupdf.Rect(r[0], r[1], r[2], r[3])
-
 def JM_read_contents(pageref):
     assert isinstance(pageref, mupdf.PdfObj), f'{type(pageref)}'
     contents = pageref.dict_get(mupdf.PDF_ENUM_NAME_Contents)
@@ -90,8 +144,170 @@ def JM_read_contents(pageref):
 
 def JM_BinFromBuffer(buffer_):
     assert isinstance(buffer_, mupdf.Buffer)
-    print('JM_BinFromBuffer', file=sys.stderr)
     return buffer_.buffer_extract()
+
+
+# compress char* into a new buffer
+def JM_compress_buffer(inbuffer):
+    data, compressed_length = mupdf.new_deflated_data_from_buffer(
+            inbuffer.m_internal,
+            mupdf.FZ_DEFLATE_BEST,
+            )
+    jlib.log('{data=} {compressed_length=}')
+    if not data or compressed_length == 0:
+        return None
+    buf = mupdf.Buffer(mupdf.new_buffer_from_data(data, compressed_length))
+    buf.resize_buffer(compressed_length)
+    return buf;
+
+def JM_update_stream(doc, obj, buffer_, compress):
+    jlib.log('{dir(buffer_)}')
+    len_, _ = buffer_.buffer_storage_raw()
+    nlen = len_
+
+    if len_ > 30:   # ignore small stuff
+        nres = JM_compress_buffer(buffer_)
+        assert isinstance(nres, mupdf.Buffer)
+        nlen, _ = nres.buffer_storage_raw()
+
+    if nlen < len_ and nres and compress==1:   # was it worth the effort?
+        obj.dict_put(
+                mupdf.PDF_ENUM_NAME_Filter,
+                mupdf.PDF_ENUM_NAME_FlateDecode,
+                )
+        doc.update_stream(obj, nres, 1)
+    else:
+        doc.update_stream(obj, buffer_, 0);
+
+
+# return a PDF page's /Rotate value: one of (0, 90, 180, 270)
+def JM_page_rotation(page):
+    rotate = 0
+
+    obj = page.obj().dict_get_inheritable( mupdf.PDF_ENUM_NAME_Rotate)
+    rotate = obj.to_int()
+    rotate = JM_norm_rotation(rotate)
+    return rotate
+
+def JM_derotate_page_matrix(page):
+    '''
+    just the inverse of rotation
+    '''
+    mp = JM_rotate_page_matrix(page)
+    return mupdf.mfz_invert_matrix(mp)
+
+def JM_rotate_page_matrix(page):
+    if not page.m_internal:
+        return mupdf.Matrix()  # no valid pdf page given
+    rotation = JM_page_rotation(page)
+    if rotation == 0:
+        return mupdf.Matrix()  # no rotation
+    cb_size = JM_cropbox_size(page.obj())
+    w = cb_size.x
+    h = cb_size.y
+    if rotation == 90:
+        m = mupdf.mfz_make_matrix(0, 1, -1, 0, h, 0)
+    elif rotation == 180:
+        m = mupdf.mfz_make_matrix(-1, 0, 0, -1, w, h)
+    else:
+        m = mupdf.mfz_make_matrix(0, -1, 1, 0, 0, w)
+    return m
+
+# return normalized /Rotate value
+def JM_norm_rotation(rotate):
+    while rotate < 0:
+        rotate += 360
+    while rotate >= 360:
+        rotate -= 360
+    if rotate % 90 != 0:
+        return 0
+    return rotate
+
+def JM_FLOAT_ITEM(obj, idx):
+    if idx < 0 or idx >= len(obj):
+        return None
+    ret = obj[idx]
+    assert isinstance(ret, float)
+    return ret
+
+
+def JM_point_from_py(p):
+    p0 = mupdf.Point(0, 0)
+    x = JM_FLOAT_ITEM(p, 0)
+    y = JM_FLOAT_ITEM(p, 1)
+    if x is None or y is None:
+        return p0
+    return mupdf.Point(x, y)
+
+def PySequence_Check(s):
+    return isinstance(s, (tuple, list))
+
+def PySequence_Size(s):
+    return len(s)
+
+def JM_FLOAT_ITEM(obj, idx):
+    if not PySequence_Check(obj):
+        return None
+    return float(obj[idx])
+
+def JM_quad_from_py(r):
+    q = mupdf.mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
+    p = [0,0,0,0]
+    if not r or not isinstance(r, (tuple, list)) or len(r) != 4:
+        return q
+
+    if JM_FLOAT_ITEM(r, 0) is None:
+        return mupdf.mfz_quad_from_rect(JM_rect_from_py(r))
+
+    for i in range(4):
+        obj = r[i]  # next point item
+        if not obj.m_internal or not PySequence_Check(obj) or PySequence_Size(obj) != 2:
+            return q    # invalid: cancel the rest
+
+        p[i].x = JM_FLOAT_ITEM(obj, 0)
+        p[i].y = JM_FLOAT_ITEM(obj, 1)
+        if p[i].x is None or p[i].y is None:
+            return q
+    q.ul = p[0]
+    q.ur = p[1]
+    q.ll = p[2]
+    q.lr = p[3]
+    return q
+
+
+def JM_find_annot_irt(annot):
+    '''
+    Return the first annotation whose /IRT key ("In Response To") points to
+    annot. Used to remove the response chain of a given annotation.
+    '''
+    assert isinstance(annot, mupdf.PdfAnnot)
+    found = 0;
+    try:    # loop thru MuPDF's internal annots array
+        page = annot.annot_page()
+        annotptr = page.first_annot()
+        while 1:
+            assert isinstance(annotptr, mupdf.PdfAnnot)
+            if not annotptr.m_internal:
+                break
+            o = mupdf.mpdf_dict_gets(annotptr.annot_obj(), 'IRT')
+            if o:
+                if not mupdf.mpdf_objcmp(o, annot.annot_obj()):
+                    found = 1
+                    break
+            annotptr = annotptr.next_annot()
+    except Exception as e:
+        jlib.log('{e=}')
+    return irt_annot if found else None
+
+def annot_postprocess(page: "Page", annot: "Annot") -> None:
+    """Clean up after annotation inertion.
+
+    Set ownership flag and store annotation in page annotation dictionary.
+    """
+    annot.parent = weakref.proxy(page)
+    page._annot_refs[id(annot)] = annot
+    annot.thisown = True
+
 
 
 TOOLS_JM_UNIQUE_ID = 0
@@ -113,11 +329,669 @@ class TOOLS:
         result = JM_BinFromBuffer( res)
         return result
 
+    fitz_config = {
+                "plotter-g": True,
+                "plotter-rgb": True,
+                "plotter-cmyk": True,
+                "plotter-n": True,
+                "pdf": True,
+                "xps": True,
+                "svg": True,
+                "cbz": True,
+                "img": True,
+                "html": True,
+                "epub": True,
+                "jpx": True,
+                "js": True,
+                "tofu": True,
+                "tofu-cjk": True,
+                "tofu-cjk-ext": True,
+                "tofu-cjk-lang": True,
+                "tofu-emoji": True,
+                "tofu-historic": True,
+                "tofu-symbol": True,
+                "tofu-sil": True,
+                "icc": True,
+                "base14": True,
+                "py-memory": True,
+                }
+    """PyMuPDF configuration parameters."""
+
+
+    JM_annot_id_stem = 'fitz'
+
+    @staticmethod
+    def set_annot_stem( stem=None):
+        if stem is None:
+            return JM_annot_id_stem
+        len_ = len(stem) + 1
+        if len_ > 50:
+            len_ = 50
+        JM_annot_id_stem = stem[:50]
+        return JM_annot_id_stem
+
+    @staticmethod
+    def _invert_matrix(matrix):
+        try:
+            src = mupdf.Matrix(
+                    matrix[0],
+                    matrix[1],
+                    matrix[2],
+                    matrix[3],
+                    matrix[4],
+                    matrix[5],
+                    )
+        except Exception:
+            src = matrix
+        a = src.a
+        det = a * src.d - src.b * src.c;
+        if det < -sys.float_info.epsilon or det > sys.float_info.epsilon:
+            dst = mupdf.Matrix()
+            rdet = 1 / det
+            dst.a = src.d * rdet
+            dst.b = -src.b * rdet
+            dst.c = -src.c * rdet
+            dst.d = a * rdet
+            a = -src.e * dst.a - src.f * dst.c
+            dst.f = -src.e * dst.b - src.f * dst.d
+            dst.e = a
+            return 0, (dst.a, dst.b, dst.c, dst.d, dst.e, dst.f)
+
+        return 1, ()
+
+    @staticmethod
+    def _parse_da(annot):
+        def Tools__parse_da(annot):
+            this_annot = annot.this
+            assert isinstance(this_annot, mupdf.PdfAnnot)
+            try:
+                da = mupdf.mpdf_dict_get_inheritable(this_annot.obj(), PDF_NAME('DA'))
+                if not da.m_internal:
+                    trailer = mupdf.mpdf_trailer(this_annot.page().doc())
+                    da = mupdf.ppdf_dict_getl(trailer,
+                            PDF_NAME('Root'),
+                            PDF_NAME('AcroForm'),
+                            PDF_NAME('DA'),
+                            )
+                da_str = mupdf.mpdf_to_text_string(da)
+            except Exception:
+                return
+            #return JM_UnicodeFromStr(da_str);
+            return da_str
+
+        val = Tools__parse_da(annot)
+
+        if not val:
+            return ((0,), "", 0)
+        font = "Helv"
+        fsize = 12
+        col = (0, 0, 0)
+        dat = val.split()  # split on any whitespace
+        for i, item in enumerate(dat):
+            if item == "Tf":
+                font = dat[i - 2][1:]
+                fsize = float(dat[i - 1])
+                dat[i] = dat[i-1] = dat[i-2] = ""
+                continue
+            if item == "g":            # unicolor text
+                col = [(float(dat[i - 1]))]
+                dat[i] = dat[i-1] = ""
+                continue
+            if item == "rg":           # RGB colored text
+                col = [float(f) for f in dat[i - 3:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
+                continue
+            if item == "k":           # CMYK colored text
+                col = [float(f) for f in dat[i - 4:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = dat[i-4] = ""
+                continue
+
+        val = (col, font, fsize)
+        return val
+
+    @staticmethod
+    def _update_da(annot, da_str):
+        #return _fitz.Tools__update_da(self, annot, da_str)
+        try:
+            this_annot = annot.this
+            assert isinstance(this_annot, mupdf.PdfAnnot)
+            mupdf.mpdf_dict_put_text_string(this_annot.obj(), PDF_NAME('DA'), da_str)
+            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('DS'))    # /* not supported */
+            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('RC'))    # /* not supported */
+            mupdf.mpdf_dirty_annot(this_annot)
+        except Exception:
+            return
+        return
+
+    @staticmethod
+    def _sine_between(C, P, Q):
+        # for points C, P, Q compute the sine between lines CP and QP
+        c = JM_point_from_py(C)
+        p = JM_point_from_py(P)
+        q = JM_point_from_py(Q)
+        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(q.x - p.x, q.y - p.y))
+        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -p.x, -p.y)
+        m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
+        m1 = mupdf.mfz_concat(m1, m2)
+        c = mupdf.mfz_transform_point(c, m1)
+        c = mupdf.mfz_normalize_vector(c)
+        return c.y
+
+    @staticmethod
+    def _le_annot_parms(annot, p1, p2, fill_color):
+        """Get common parameters for making annot line end symbols.
+
+        Returns:
+            m: matrix that maps p1, p2 to points L, P on the x-axis
+            im: its inverse
+            L, P: transformed p1, p2
+            w: line width
+            scol: stroke color string
+            fcol: fill color store_shrink
+            opacity: opacity string (gs command)
+        """
+        w = annot.border["width"]  # line width
+        sc = annot.colors["stroke"]  # stroke color
+        if not sc:  # black if missing
+            sc = (0,0,0)
+        scol = " ".join(map(str, sc)) + " RG\n"
+        if fill_color:
+            fc = fill_color
+        else:
+            fc = annot.colors["fill"]  # fill color
+        if not fc:
+            fc = (1,1,1)  # white if missing
+        fcol = " ".join(map(str, fc)) + " rg\n"
+    # nr = annot.rect
+        np1 = p1                   # point coord relative to annot rect
+        np2 = p2                   # point coord relative to annot rect
+        m = Matrix(TOOLS._hor_matrix(np1, np2))  # matrix makes the line horizontal
+        im = ~m                            # inverted matrix
+        L = np1 * m                        # converted start (left) point
+        R = np2 * m                        # converted end (right) point
+        if 0 <= annot.opacity < 1:
+            opacity = "/H gs\n"
+        else:
+            opacity = ""
+        return m, im, L, R, w, scol, fcol, opacity
+
+    @staticmethod
+    def _oval_string(p1, p2, p3, p4):
+        """Return /AP string defining an oval within a 4-polygon provided as points
+        """
+        def bezier(p, q, r):
+            f = "%f %f %f %f %f %f c\n"
+            return f % (p.x, p.y, q.x, q.y, r.x, r.y)
+
+        kappa = 0.55228474983              # magic number
+        ml = p1 + (p4 - p1) * 0.5          # middle points ...
+        mo = p1 + (p2 - p1) * 0.5          # for each ...
+        mr = p2 + (p3 - p2) * 0.5          # polygon ...
+        mu = p4 + (p3 - p4) * 0.5          # side
+        ol1 = ml + (p1 - ml) * kappa       # the 8 bezier
+        ol2 = mo + (p1 - mo) * kappa       # helper points
+        or1 = mo + (p2 - mo) * kappa
+        or2 = mr + (p2 - mr) * kappa
+        ur1 = mr + (p3 - mr) * kappa
+        ur2 = mu + (p3 - mu) * kappa
+        ul1 = mu + (p4 - mu) * kappa
+        ul2 = ml + (p4 - ml) * kappa
+    # now draw, starting from middle point of left side
+        ap = "%f %f m\n" % (ml.x, ml.y)
+        ap += bezier(ol1, ol2, mo)
+        ap += bezier(or1, or2, mr)
+        ap += bezier(ur1, ur2, mu)
+        ap += bezier(ul1, ul2, ml)
+        return ap
+
+    @staticmethod
+    def _le_diamond(annot, p1, p2, lr, fill_color):
+        """Make stream commands for diamond line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5             # 2*shift*width = length of square edge
+        d = shift * max(1, w)
+        M = R - (d/2., 0) if lr else L + (d/2., 0)
+        r = Rect(M, M) + (-d, -d, d, d)         # the square
+    # the square makes line longer by (2*shift - 1)*width
+        p = (r.tl + (r.bl - r.tl) * 0.5) * im
+        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
+        p = (r.tl + (r.tr - r.tl) * 0.5) * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = (r.tr + (r.br - r.tr) * 0.5) * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = (r.br + (r.bl - r.br) * 0.5) * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_square(annot, p1, p2, lr, fill_color):
+        """Make stream commands for square line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5             # 2*shift*width = length of square edge
+        d = shift * max(1, w)
+        M = R - (d/2., 0) if lr else L + (d/2., 0)
+        r = Rect(M, M) + (-d, -d, d, d)         # the square
+    # the square makes line longer by (2*shift - 1)*width
+        p = r.tl * im
+        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
+        p = r.tr * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = r.br * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        p = r.bl * im
+        ap += "%f %f l\n"   % (p.x, p.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_circle(annot, p1, p2, lr, fill_color):
+        """Make stream commands for circle line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5             # 2*shift*width = length of square edge
+        d = shift * max(1, w)
+        M = R - (d/2., 0) if lr else L + (d/2., 0)
+        r = Rect(M, M) + (-d, -d, d, d)         # the square
+        ap = "q\n" + opacity + TOOLS._oval_string(r.tl * im, r.tr * im, r.br * im, r.bl * im)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_butt(annot, p1, p2, lr, fill_color):
+        """Make stream commands for butt line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 3
+        d = shift * max(1, w)
+        M = R if lr else L
+        top = (M + (0, -d/2.)) * im
+        bot = (M + (0, d/2.)) * im
+        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
+        ap += "%f %f l\n" % (bot.x, bot.y)
+        ap += "%g w\n" % w
+        ap += scol + "s\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_slash(annot, p1, p2, lr, fill_color):
+        """Make stream commands for slash line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        rw = 1.1547 * max(1, w) * 1.0         # makes rect diagonal a 30 deg inclination
+        M = R if lr else L
+        r = Rect(M.x - rw, M.y - 2 * w, M.x + rw, M.y + 2 * w)
+        top = r.tl * im
+        bot = r.br * im
+        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
+        ap += "%f %f l\n" % (bot.x, bot.y)
+        ap += "%g w\n" % w
+        ap += scol + "s\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_openarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for open arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
+        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
+        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + "S\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_closedarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for closed arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
+        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
+        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_ropenarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for right open arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R - (d/3., 0) if lr else L + (d/3., 0)
+        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
+        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "S\nQ\n"
+        return ap
+
+    @staticmethod
+    def _le_rclosedarrow(annot, p1, p2, lr, fill_color):
+        """Make stream commands for right closed arrow line end symbol. "lr" denotes left (False) or right point.
+        """
+        m, im, L, R, w, scol, fcol, opacity = TOOLS._le_annot_parms(annot, p1, p2, fill_color)
+        shift = 2.5
+        d = shift * max(1, w)
+        p2 = R - (2*d, 0) if lr else L + (2*d, 0)
+        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
+        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
+        p1 *= im
+        p2 *= im
+        p3 *= im
+        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
+        ap += "%f %f l\n" % (p2.x, p2.y)
+        ap += "%f %f l\n" % (p3.x, p3.y)
+        ap += "%g w\n" % w
+        ap += scol + fcol + "b\nQ\n"
+        return ap
+
+
+    def _transform_rect(rect, matrix):
+        #return _fitz.Tools__transform_rect(self, rect, matrix)
+        return JM_py_from_rect(
+                mupdf.mfz_transform_rect(
+                    JM_rect_from_py(rect),
+                    JM_matrix_from_py(matrix),
+                    )
+                )
+
+    def _intersect_rect(r1, r2):
+        #return _fitz.Tools__intersect_rect(self, r1, r2)
+        return JM_py_from_rect(
+                mupdf.mfz_intersect_rect(
+                    JM_rect_from_py(r1),
+                    JM_rect_from_py(r2),
+                    )
+                )
+
+    def _include_point_in_rect(r, p):
+        #return _fitz.Tools__include_point_in_rect(self, r, p)
+        return JM_py_from_rect(
+                mupdf.mfz_include_point_in_rect(
+                    JM_rect_from_py(r),
+                    JM_point_from_py(p),
+                    )
+                )
+
+    def _transform_point(point, matrix):
+        #return _fitz.Tools__transform_point(self, point, matrix)
+        return JM_py_from_point(
+                mupdf.mfz_transform_point(
+                    JM_point_from_py(point),
+                    JM_matrix_from_py(matrix),
+                    )
+                )
+
+    def _union_rect(r1, r2):
+        #return _fitz.Tools__union_rect(self, r1, r2)
+        return JM_py_from_rect(
+                mupdf.mfz_union_rect(
+                    JM_rect_from_py(r1),
+                    JM_rect_from_py(r2),
+                    )
+                )
+
+    def _concat_matrix(m1, m2):
+        #return _fitz.Tools__concat_matrix(self, m1, m2)
+        return JM_py_from_matrix(
+                mupdf.mfz_concat(
+                    JM_matrix_from_py(m1),
+                    JM_matrix_from_py(m2)
+                    )
+                )
+
+    def _measure_string(text, fontname, fontsize, encoding=0):
+        #return _fitz.Tools__measure_string(self, text, fontname, fontsize, encoding)
+        font = mupdf.mfz_new_base14_font(fontname)
+        w = 0;
+        pos = 0
+        while pos < len(text):
+            t, c = mupdf.mfz_chartorune(text)
+            pos += t
+            if encoding == mupdf.PDF_SIMPLE_ENCODING_GREEK:
+                c = mupdf.mfz_iso8859_7_from_unicode(c)
+            elif encoding == mupdf.PDF_SIMPLE_ENCODING_CYRILLIC:
+                c = mupdf.mfz_windows_1251_from_unicode(c)
+            else:
+                c = mupdf.mfz_windows_1252_from_unicode(c)
+            if c < 0:
+                c = 0xB7
+            g = mupdf.mfz_encode_character(font, c)
+            w += mupdf.mfz_advance_glyph(font, g, 0)
+        return w * fontsize
+
+    def _hor_matrix(C, P):
+        #return _fitz.Tools__hor_matrix(self, C, P)
+        # calculate matrix m that maps line CP to the x-axis,
+        # such that C * m = (0, 0), and target line has same length.
+        c = JM_point_from_py(C)
+        p = JM_point_from_py(P)
+        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(p.x - c.x, p.y - c.y))
+        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -c.x, -c.y)
+        m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
+        return JM_py_from_matrix(mupdf.mfz_concat(m1, m2))
+
+    def set_font_width(doc, xref, width):
+        #return _fitz.Tools_set_font_width(self, doc, xref, width)
+        pdf = doc._pdf_page()
+        if not pdf.m_internal:
+            return False
+        try:
+            font = mupdf.mpdf_load_object(pdf, xref)
+            dfonts = mupdf.mpdf_dict_get(font, PDF_NAME('DescendantFonts'))
+            if mupdf.mpdf_is_array(dfonts):
+                n = mupdf.mpdf_array_len(dfonts)
+                for i in range(n):
+                    dfont = mupdf.mpdf_array_get(dfonts, i)
+                    warray = mupdf.mpdf_new_array(pdf, 3)
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 0))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 65535))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, width))
+                    mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        return True
+
+    @staticmethod
+    def _insert_contents(page, newcont, overlay=1):
+        """Add bytes as a new /Contents object for a page, and return its xref."""
+        #return _fitz.Tools__insert_contents(self, page, newcont, overlay)
+        #fz_buffer *contbuf = NULL;
+        #int xref = 0;
+        pdfpage = page._pdf_page()
+        ASSERT_PDF(pdfpage)
+        contbuf = JM_BufferFromBytes(newcont)
+        xref = JM_insert_contents(pdfpage.doc(), pdfpage.obj(), contbuf, overlay)
+        #fixme: pdfpage->doc->dirty = 1;
+        return xref
+
+
 def DUMMY(*args, **kw):
     return
 
+def INRANGE(v, low, high):
+    return low <= v and v <= high
 
-def JM_get_annot_xref_list(page_obj):
+def ASSERT_PDF(page):
+    assert isinstance(page, mupdf.PdfPage), f'type(page)={type(page)} page={page}'
+    if not page.m_internal:
+        raise Exception('not a PDF')
+
+def THROWMSG(msg):
+    raise Exception(msg)
+
+
+def Page_set_contents(page0, xref):
+    assert isinstance(page0, Page)
+    page = page0.this.page_from_fz_page()
+    assert isinstance(page, mupdf.PdfPage)
+    #jlib.log(f'{page.doc=}')
+    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
+        raise Exception('bad xref')
+    contents = page.doc().new_indirect(xref, 0)
+    if not contents.is_stream():
+        raise Exception('xref is no stream')
+    page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
+    # fixme: page.this.dirty = 1
+    return
+
+def Page__add_text_marker(self, quads, annot_type):
+    pdfpage = self._pdf_page()
+    rotation = JM_page_rotation(pdfpage)
+    def final():
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
+    try:
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), 0)
+        annot = mupdf.mpdf_create_annot(pdfpage, annot_type)
+        len_ = len(quads)
+        for item in quads:
+            q = JM_quad_from_py(item);
+            mupdf.mpdf_add_annot_quad_point(annot, q)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        final()
+        return
+    final()
+    annot = mupdf.mpdf_keep_annot(annot)
+    return Annot(self, annot)
+
+
+
+def Page_clean_contents(self, sanitize):
+    assert isinstance(self, Page)
+    page = self.this.page_from_fz_page()
+    if not page:
+        return
+    assert isinstance(page, mupdf.PdfPage)
+    filter_ = mupdf.pdf_filter_options()
+    filter_.opaque = None
+    filter_.image_filter = None
+    filter_.text_filter = None
+    filter_.after_text_object = None
+    filter_.end_page = None
+    filter_.recurse = 1
+    filter_.instance_forms = 1
+    filter_.sanitize = 1
+    filter_.ascii = 0
+
+    filter_.sanitize = sanitize
+    filter2 = mupdf.PdfFilterOptions(filter_)
+    page.doc().filter_page_contents(page, filter2)
+    # fixme: page->doc->dirty = 1;
+
+def CheckRect(r: typing.Any) -> bool:
+    """Check whether an object is non-degenerate rect-like.
+
+    It must be a sequence of 4 numbers.
+    """
+    try:
+        r = Rect(r)
+    except:
+        return False
+    return not (r.isEmpty or r.isInfinite)
+
+
+def CheckQuad(q: typing.Any) -> bool:
+    """Check whether an object is convex, not empty  quad-like.
+
+    It must be a sequence of 4 number pairs.
+    """
+    try:
+        q0 = Quad(q)
+    except:
+        return False
+    return q0.isConvex
+
+
+def CheckMarkerArg(quads: typing.Any) -> tuple:
+    if CheckRect(quads):
+        r = Rect(quads)
+        return (r.quad,)
+    if CheckQuad(quads):
+        return (quads,)
+    for q in quads:
+        if not (CheckRect(q) or CheckQuad(q)):
+            raise ValueError("bad quads entry")
+    return quads
+
+
+def CheckMorph(o: typing.Any) -> bool:
+    if not bool(o):
+        return False
+    if not (type(o) in (list, tuple) and len(o) == 2):
+        raise ValueError("morph must be a sequence of length 2")
+    if not (len(o[0]) == 2 and len(o[1]) == 6):
+        raise ValueError("invalid morph parm 0")
+    if not o[1][4] == o[1][5] == 0:
+        raise ValueError("invalid morph parm 1")
+    return True
+
+
+def CheckFont(page: "struct Page *", fontname: str) -> tuple:
+    """Return an entry in the page's font list if reference name matches.
+    """
+    for f in page.get_fonts():
+        if f[4] == fontname:
+            return f
+        if f[3].lower() == fontname.lower():
+            return f
+
+
+def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
+    """Return a font info if present in the document.
+    """
+    for f in doc.FontInfos:
+        if xref == f[0]:
+            return f
+
+
+def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
+    xref = info[0]
+    found = False
+    for i, fi in enumerate(doc.FontInfos):
+        if fi[0] == xref:
+            found = True
+            break
+    if found:
+        doc.FontInfos[i] = info
+    else:
+        doc.FontInfos.append(info)
+
+def JM_get_annot_xref_list(page_or_page_obj):
     '''
     Wrapper for PyMuPDF/fitz/helper-annot.i:
         PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
@@ -125,28 +999,269 @@ def JM_get_annot_xref_list(page_obj):
     Not PyMuPDF/fitz/fitz_wrap.c:
         PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
     '''
-    names = []
-    jlib.log('{page_obj=}')
-    jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
-    jlib.log('calling page_obj.dict_get()')
-    annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-    jlib.log('{annots=}')
-    if not annots:
+    if 0 and isinstance(page_or_page_obj, mupdf.PdfObj):
+        # Wrapper for PyMuPDF/fitz/helper-annot.i:
+        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
+        page_obj = page_or_page_obj
+        names = []
+        jlib.log('{page_obj=}')
+        jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
+        jlib.log('calling page_obj.dict_get()')
+        annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        jlib.log('{annots=}')
+        if not annots:
+            return names
+        n = annots.array_len()
+        jlib.log('{n=}')
+        for i in range(n):
+            annot_obj = mupdf.ppdf_array_get(annots, i)
+            xref = mupdf.ppdf_to_num(annot_obj)
+            jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
+            subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if (subtype):
+                name = mupdf.ppdf_to_name(subtype)
+                type_ = mupdf.ppdf_annot_type_from_string(name)
+            id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
+            names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
         return names
-    n = annots.array_len()
-    jlib.log('{n=}')
-    for i in range(n):
-        annot_obj = mupdf.ppdf_array_get(annots, i)
-        xref = mupdf.ppdf_to_num(annot_obj)
-        jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
-        subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
-        type_ = mupdf.PDF_ANNOT_UNKNOWN
-        if (subtype):
-            name = mupdf.ppdf_to_name(subtype)
-            type_ = mupdf.ppdf_annot_type_from_string(name)
-        id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
-        names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
+    elif 0 and isinstance(page_or_page_obj, mupdf.PdfPage):
+        # Not PyMuPDF/fitz/fitz_wrap.c:
+        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
+        page = page_or_page_obj
+        names = []
+        annots = page.obj().dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        if not annots.m_internal:
+            return names
+        n = annots.array_len()
+        for i in range(n):
+            annot_obj = annots.array_get(i)
+            xref = annot_obj.to_num()
+            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if subtype.m_internal:
+                name = subtype.to_name()
+                type_ = name.annot_type_from_string()
+            id_ = annot_obj.dict_gets("NM")
+            names.append( (xref, type_, id_.to_text_string()))
+        return names
+
+    else:
+        if isinstance(page_or_page_obj, mupdf.PdfPage):
+            obj = page_or_page_obj.obj()
+        elif isinstance(page_or_page_obj, mupdf.PdfObj):
+            obj = page_or_page_obj
+        else:
+            assert 0
+        names = []
+        annots = obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+        if not annots.m_internal:
+            return names
+        n = annots.array_len()
+        for i in range(n):
+            annot_obj = annots.array_get(i)
+            xref = annot_obj.to_num()
+            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+            type_ = mupdf.PDF_ANNOT_UNKNOWN
+            if subtype.m_internal:
+                name = subtype.to_name()
+                type_ = mupdf.ppdf_annot_type_from_string(name)
+            id_ = annot_obj.dict_gets("NM")
+            names.append( (xref, type_, id_.to_text_string()))
+        return names
+
+def JM_BufferFromBytes(stream):
+    '''
+    Make fz_buffer from a PyBytes, PyByteArray, io.BytesIO object.
+    '''
+    if isinstance(stream, bytes):
+        return mupdf.Buffer.new_buffer_from_copied_data(stream)
+    if isinstance(stream, bytearray):
+        return mupdf.Buffer.new_buffer_from_copied_data(stream)
+    if hasattr(stream, 'getvalue'):
+        data = stream.getvalue()
+        if isinstance(data, bytes):
+            pass
+        elif isinstance(data, str):
+            data = data.encode('utf-8')
+        else:
+            raise Exception(f'.getvalue() returned unexpected type: {type(data)}')
+        return mupdf.Buffer.new_buffer_from_copied_data(data)
+    #if instance(stream, io.BytesIO):
+    #    b = stream.getvalue()
+    #    return mupdf.Buffer.new_buffer_from_copied_data(b)
+    #if
+    jlib.log('Unrecognised {type(stream)=}')
+    return mupdf.Buffer()
+
+
+def JM_get_annot_id_list(page):
+    names = []
+    annots = page.obj().dict_get( mupdf.PDF_ENUM_NAME_Annots)
+    if not annots.m_internal:
+        return names
+    for i in range( annots.array_len()):
+        annot_obj =annots.array_get(i)
+        name = annot_obj.dict_gets("NM")
+        if name.m_internal:
+            names.append(
+                name.to_text_string()
+                )
     return names
+
+JM_annot_id_stem = "fitz"
+
+def JM_add_annot_id(annot, stem):
+    assert isinstance(annot, mupdf.PdfAnnot)
+    names = JM_get_annot_id_list(annot.annot_page())
+    i = 0
+    while 1:
+        stem_id = f'{JM_annot_id_stem}-{stem}{i}'
+        if stem_id not in names:
+            break
+        i += 1
+
+    response = stem_id
+    name = mupdf.PdfObj(response)
+    annot.annot_obj().dict_puts_drop("NM", name)
+    # fixme: pymupdf's JM_add_annot_id() appears be able to compile this code:
+    #
+    #   pdf_annot *annot;
+    #   annot->obj;
+    #   annot->page;
+    #
+    # Even though mumpdf headers only forward-declare pdf_annot.  Full
+    # definition of pdf_annot is in mupdf/source/pdf/pdf-annot-imp.h, which is
+    # not included by any .h files.
+
+
+def JM_annot_border(annot_obj):
+    assert isinstance(annot_obj, mupdf.PdfObj), f'{annot_obj}'
+
+    res = {}
+    dash_py   = []
+    effect_py = []
+    width = -1.0
+    effect1 = -1
+    effect2 = None
+    style = None
+    o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Border)
+    if o.is_array():
+        width = pdf_to_real(ctx, o.array_get(2))
+        if o.array_len() == 4:
+            dash = o.array_get(3)
+            for i in range(dash.array_len()):
+                val = mupdf.ppdf_to_int(ctx, dash.array_get(i))
+                dash_py.append(val)
+
+    bs_o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_BS)
+    if bs_o.m_internal:
+        o = bs_o.dict_get(mupdf.PDF_ENUM_NAME_W)
+        if o.m_internal:
+            width = o.to_real()
+        o = bs_o.dict_get(mupdf.PDF_ENUM_NAME_S)
+        if o.m_internal:
+            style = o.to_name()
+        o = bs_o.dict_get(mupdf.PDF_ENUM_NAME_D)
+        if o.m_internal:
+            for i in range(o.array_len()):
+                val = o.array_get(i).to_int()
+                dash_py.append(val)
+
+    be_o = annot_obj.dict_gets("BE")
+    if be_o.m_internal:
+        o = be_o.dict_get(mupdf.PDF_ENUM_NAME_S)
+        if o.m_internal:
+            effect2 = o.to_name()
+        o = be_o.dict_get(mupdf.PDF_ENUM_NAME_I)
+        if o.m_internal:
+            effect1 = o.to_int()
+
+    effect_py.append(effect1)
+    effect_py.append(effect2)
+    res[dictkey_width] = width
+    res[dictkey_dashes] = dash_py
+    res[dictkey_style] = style
+    if effect1 > -1:
+        res[dictkey_effect] = effect_py
+    return res;
+
+def JM_annot_colors(annot_obj):
+    res = dict()
+    bc = list() # stroke colors
+    fc =list()  # fill colors
+    o = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_C)
+    if o.is_array:
+        n = o.array_len()
+        for i in range(n):
+            col = o.array_get(i).to_real()
+            bc.append(col)
+    res[dictkey_stroke] = bc
+
+    o = annot_obj.dict_gets("IC")
+    if o.is_array():
+        n = o.array_len()
+        for i in range(n):
+            col = o.array_get(i).to_real()
+            fc.append(col)
+
+    res[dictkey_fill] = fc
+    return res;
+
+
+def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
+    buf = mupdf.Buffer(50)
+    if ncol == 1:
+        buf.append_string(f'{col[0]} g ');
+    elif ncol == 3:
+        buf.append_string(f'{col[0]} {col[1]} {col[2]} rg ')
+    else:
+        buf.append_string(f'{col[0]} {col[1]} {col[2]} {col[3]} k ')
+
+    buf.append_string(f'/{JM_expand_fname(fontname)} {fontsize} Tf')
+    len_, da = buf.buffer_storage_raw()
+    buf_bytes = mupdf.raw_to_python_bytes(da, len_)
+    buf_string = buf_bytes.decode('utf-8')
+    annot.annot_obj().dict_put_text_string(mupdf.PDF_ENUM_NAME_DA, buf_string)
+
+
+def JM_delete_annot(page, annot):
+    '''
+    delete an annotation using mupdf functions, but first delete the /AP
+    dict key in annot->obj.
+    '''
+    if not annot or not annot.m_internal:
+        return
+    try:
+        # first get any existing popup for the annotation
+        popup = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+
+        # next delete the /Popup and /AP entries from annot dictionary
+        mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
+
+        annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
+        assert annots.m_internal
+        n = mupdf.mpdf_array_len(annots)
+        for i in range(n - 1, -1, -1):
+            o = mupdf.mpdf_array_get(annots, i)
+            p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
+            if not p.m_internal:
+                continue;
+            if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
+                mupdf.mpdf_array_delete(annots, i)
+        assert annot.m_internal
+        type_ = mupdf.mpdf_annot_type(annot)
+        if type_ != mupdf.PDF_ANNOT_WIDGET:
+            mupdf.mpdf_delete_annot(page, annot)
+        else:
+            JM_delete_widget(page, annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        jlib.log('could not delete annotation')
+        jlib.log('{jlib.exception_info()=}')
+        # fixme: mupdf.mfz_warn("could not delete annotation")
+    return;
+
 
 def pdf_dict_getl(doc, obj, *keys):
     jlib.log('{obj=} {len(keys)=}: {keys}')
@@ -166,9 +1281,103 @@ def dir_str(x):
     return ret
 
 
+def get_pdf_now():
+    return getPDFnow()
 
 
+def get_pdf_str(s: str) -> str:
+    """ Return a PDF string depending on its coding.
 
+    Notes:
+        Returns a string bracketed with either "()" or "<>" for hex values.
+        If only ascii then "(original)" is returned, else if only 8 bit chars
+        then "(original)" with interspersed octal strings \nnn is returned,
+        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
+        UTF-16BE encoding of the original.
+    """
+    if not bool(s):
+        return "()"
+
+    def make_utf16be(s):
+        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
+        return "<" + r.hex() + ">"  # brackets indicate hex
+
+    # The following either returns the original string with mixed-in
+    # octal numbers \nnn for chars outside the ASCII range, or returns
+    # the UTF-16BE BOM version of the string.
+    r = ""
+    for c in s:
+        oc = ord(c)
+        if oc > 255:  # shortcut if beyond 8-bit code range
+            return make_utf16be(s)
+
+        if oc > 31 and oc < 127:  # in ASCII range
+            if c in ("(", ")", "\\"):  # these need to be escaped
+                r += "\\"
+            r += c
+            continue
+
+        if oc > 127:  # beyond ASCII
+            r += "\\%03o" % oc
+            continue
+
+        # now the white spaces
+        if oc == 8:  # backspace
+            r += "\\b"
+        elif oc == 9:  # tab
+            r += "\\t"
+        elif oc == 10:  # line feed
+            r += "\\n"
+        elif oc == 12:  # form feed
+            r += "\\f"
+        elif oc == 13:  # carriage return
+            r += "\\r"
+        else:
+            r += "\\267"  # unsupported: replace by 0xB7
+
+    return "(" + r + ")"
+
+
+def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
+    """Calculate length of a string for a built-in font.
+
+    Args:
+        fontname: name of the font.
+        fontsize: font size points.
+        encoding: encoding to use, 0=Latin (default), 1=Greek, 2=Cyrillic.
+    Returns:
+        (float) length of text.
+    """
+    fontname = fontname.lower()
+    basename = Base14_fontdict.get(fontname, None)
+
+    glyphs = None
+    if basename == "Symbol":
+        glyphs = symbol_glyphs
+    if basename == "ZapfDingbats":
+        glyphs = zapf_glyphs
+    if glyphs is not None:
+        w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
+        return w * fontsize
+
+    if fontname in Base14_fontdict.keys():
+        return TOOLS._measure_string(
+            text, Base14_fontdict[fontname], fontsize, encoding
+        )
+
+    if fontname in (
+        "china-t",
+        "china-s",
+        "china-ts",
+        "china-ss",
+        "japan",
+        "japan-s",
+        "korea",
+        "korea-s",
+    ):
+        return len(text) * fontsize
+
+    raise ValueError("Font '%s' is unsupported" % fontname)
 
 
 
@@ -619,6 +1828,12 @@ class Rect(object):
             return None
         if len(args) == 1:
             l = args[0]
+            if isinstance(l, mupdf.Rect):
+                self.x0 = l.x0
+                self.y0 = l.y0
+                self.x1 = l.x1
+                self.y1 = l.y1
+                return
             if hasattr(l, "__getitem__") is False:
                 raise ValueError("bad Rect constructor")
             if len(l) != 4:
@@ -2324,6 +3539,447 @@ def ColorCode(c: typing.Union[list, tuple, float, None], f: str) -> str:
 def JM_TUPLE(o: typing.Sequence) -> tuple:
     return tuple(map(lambda x: round(x, 5) if abs(x) >= 1e-4 else 0, o))
 
+def JM_py_from_matrix(m):
+    return m.a, m.b, m.c, m.d, m.e, m.f
+
+def JM_py_from_rect(r):
+    return r.x0, r.y0, r.x1, r.y1
+
+def JM_py_from_point(p):
+    return p.x, p.y
+
+def JM_color_FromSequence(color, col):
+    #assert isinstance( col, list)
+    if not color or (not isinstance(color, list) and not isinstance(color, float)):
+        return 1
+    if isinstance(color, float):    # maybe just a single float
+        c = color
+        if not INRANGE(c, 0, 1):
+            return 1
+        col[0] = c
+        return 1
+
+    len_ = len(color)
+    if not INRANGE(len_, 1, 4) or len_ == 2:
+        return 1
+
+    mcol = [0,0,0,0]    # local color storage
+    for i in range(len_):
+        if i < len(mcol):
+            mcol[i] = color[i]
+            rc = 0
+        else:
+            rc = 1
+        if not INRANGE(mcol[i], 0, 1) or rc == 1:
+            mcol[i] = 1;
+
+    for i in range(len_):
+        col[i] = mcol[i]
+    return len_
+
+# Make /DA string of annotation
+def JM_expand_fname(name):
+    if not name:    return "Helv"
+    if name.startswith("Co"):   return "Cour"
+    if name.startswith("co"):   return "Cour"
+    if name.startswith("Ti"):   return "TiRo"
+    if name.startswith("ti"):   return "TiRo"
+    if name.startswith("Sy"):   return "Symb"
+    if name.startswith("sy"):   return "Symb"
+    if name.startswith("Za"):   return "ZaDb"
+    if name.startswith("za"):   return "ZaDb"
+    return "Helv"
+
+def JM_annot_set_border(border, doc, annot_obj):
+    assert isinstance(border, dict)
+
+    nwidth = border.get(dictkey_width)  # new width
+    ndashes = border.get(dictkey_dashes)# new dashes
+    nstyle  = border.get(dictkey_style) # new style
+
+    # first get old border properties
+    oborder = JM_annot_border(annot_obj)
+    owidth = oborder.get(dictkey_width)     # old width
+    odashes = oborder.get(dictkey_dashes)   # old dashes
+    ostyle = oborder.get(dictkey_style)     # old style
+
+    # then delete any relevant entries
+    annot_obj.dict_del(mupdf.PDF_ENUM_NAME_BS)
+    annot_obj.dict_del(mupdf.PDF_ENUM_NAME_BE)
+    annot_obj.dict_del(mupdf.PDF_ENUM_NAME_Border)
+
+    # populate new border array
+    if nwidth < 0:
+        nwidth = owidth # no new width: take current
+    if nwidth < 0:
+        nwidth = 0.0    # default if no width given
+    if ndashes is None:
+        ndashes = odashes   # no new dashes: take old
+    if nstyle is None:
+        nstyle  = ostyle;   # no new style: take old
+
+    if ndashes and isinstance(ndashes, (tuple, list)) and len(ndashes) > 0:
+        n = len(ndashes)
+        darr = doc.new_array(n);
+        for i in range(n):
+            d = ndashes[i]
+            darr.array_push_int(d)
+        annot_obj.dict_putl(darr, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_D)
+        nstyle = "D"
+
+    annot_obj.dict_putl(
+            mupdf.mpdf_new_real(float(nwidth)),
+            mupdf.PDF_ENUM_NAME_BS,
+            mupdf.PDF_ENUM_NAME_W,
+            )
+
+    val = JM_get_border_style(nstyle)
+
+    annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
+
+
+# return pdf_obj "border style" from Python str
+def JM_get_border_style(style):
+    val = mupdf.PDF_ENUM_NAME_S
+    if style is None:
+        return val
+    s = style
+    if   s.startswith("b") or s.startswith("B"):    val = mupdf.PDF_ENUM_NAME_B
+    elif s.startswith("d") or s.startswith("D"):    val = mupdf.PDF_ENUM_NAME_D
+    elif s.startswith("i") or s.startswith("I"):    val = mupdf.PDF_ENUM_NAME_I
+    elif s.startswith("u") or s.startswith("U"):    val = mupdf.PDF_ENUM_NAME_U
+    return val
+
+
+# Step through /Resources, looking up image, xobject or font information
+def JM_scan_resources(pdf, rsrc, liste, what, stream_xref, tracer):
+    if rsrc.mark_obj():
+        # fixme: not implemented yet: fz_warn(ctx, "Circular dependencies! Consider page cleaning.");
+        print(f'Circular dependencies! Consider page cleaning.')
+        return  # Circular dependencies!
+    try:
+        xobj = rsrc.dict_get(mupdf.PDF_ENUM_NAME_XObject)
+
+        if what == 1:   # lookup fonts
+            font = rsrc.dict_get(mupdf.PDF_ENUM_NAME_Font)
+            JM_gather_fonts(pdf, font, liste, stream_xref)
+        elif what == 2: # look up images
+            JM_gather_images(pdf, xobj, liste, stream_xref)
+        elif what == 3: # look up form xobjects
+            JM_gather_forms(pdf, xobj, liste, stream_xref)
+        else:   # should never happen
+            return
+
+        # check if we need to recurse into Form XObjects
+        n = xobj.dict_len()
+        for i in range(n):
+            obj = xobj.dict_get_val(i)
+            if obj.is_stream():
+                sxref = obj.to_num()
+            else:
+                sxref = 0
+            subrsrc = obj.dict_get(mupdf.PDF_ENUM_NAME_Resources)
+            if subrsrc.m_internal:
+                sxref_t = sxref
+                if sxref_t not in tracer:
+                    tracer.append(sxref_t)
+                    JM_scan_resources( pdf, subrsrc, liste, what, sxref, tracer)
+                else:
+                    #fz_warn(ctx, "Circular dependencies! Consider page cleaning.");
+                    print(f'Circular dependencies! Consider page cleaning.')
+                    return
+    finally:
+        rsrc.unmark_obj()
+
+
+def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
+    rc = 1
+    n = dict_.dict_len()
+    for i in range(n):
+
+        refname = dict_.dict_get_key(i)
+        fontdict = dict_.dict_get_val(i)
+        if not fontdict.is_dict():
+            #fz_warn(ctx, "'%s' is no font dict (%d 0 R)", pdf_to_name(ctx, refname), pdf_to_num(ctx, fontdict));
+            print(f'{refname.to_name()} is no font dict ({fontdict.to_num()} 0 R)')
+            continue
+
+        subtype = fontdict.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+        basefont = fontdict.dict_get(mupdf.PDF_ENUM_NAME_BaseFont)
+        if not basefont.m_internal or basefont.is_null():
+            name = fontdict.dict_get(mupdf.PDF_ENUM_NAME_Name)
+        else:
+            name = basefont
+        encoding = fontdict.dict_get(mupdf.PDF_ENUM_NAME_Encoding)
+        if encoding.is_dict():
+            encoding = encoding.dict_get(mupdf.PDF_ENUM_NAME_BaseEncoding)
+        xref = fontdict.to_num()
+        ext = "n/a"
+        if xref:
+            ext = JM_get_fontextension(pdf, xref)
+        entry = (
+                xref,
+                ext,
+                subtype.to_name(),
+                JM_EscapeStrFromStr(name.to_name()),
+                refname.to_name(),
+                encoding.to_name(),
+                stream_xref,
+                )
+        fontlist.append(entry)
+    return rc
+
+
+def JM_rect_from_py(r):
+    if isinstance(r, mupdf.Rect):
+        return r
+    if isinstance(r, Rect):
+        return mupdf.mfz_make_rect(r.x0, r.y0, r.x1, r.y1)
+    if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
+        return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+    f = [0, 0, 0, 0]
+    for i in range(4):
+        f[i] = JM_FLOAT_ITEM(r, i)
+        if f[i] is None:
+            return mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+    return mupdf.mfz_make_rect(f[0], f[1], f[2], f[3])
+
+
+def JM_matrix_from_py(m):
+    a = [0, 0, 0, 0, 0, 0]
+    if not m or not PySequence_Check(m) or PySequence_Size(m) != 6:
+        return mupdf.Matrix()
+    for i in range(6):
+        a[i] = JM_FLOAT_ITEM(m, i)
+        if a[i] is None:
+            return mupdf.Rect()
+    return mupdf.Matrix(a[0], a[1], a[2], a[3], a[4], a[5])
+
+
+def JM_embed_file(
+        pdf,
+        buf,
+        filename,
+        ufilename,
+        desc,
+        compress,
+        ):
+    '''
+    embed a new file in a PDF (not only /EmbeddedFiles entries)
+    '''
+    len_ = 0;
+    #pdf_obj *ef, *f, *params, *val = NULL;
+    #fz_var(val);
+    try:
+        val = mupdf.mpdf_new_dict(pdf, 6)
+        mupdf.mpdf_dict_put_dict(val, PDF_NAME('CI'), 4)
+        ef = mupdf.mpdf_dict_put_dict(val, PDF_NAME('EF'), 4)
+        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('F'), filename)
+        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('UF'), ufilename)
+        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('Desc'), desc)
+        mupdf.mpdf_dict_put(val, PDF_NAME('Type'), PDF_NAME('Filespec'))
+        bs = b'  '
+        f = mupdf.mpdf_add_stream(
+                pdf,
+                #mupdf.mfz_new_buffer_from_copied_data(bs),
+                mupdf.Buffer.new_buffer_from_copied_data(bs),
+                mupdf.PdfObj(),
+                0,
+                )
+        mupdf.mpdf_dict_put(ef, PDF_NAME('F'), f)
+        JM_update_stream(pdf, f, buf, compress)
+        len_, _ = buf.buffer_storage_raw()
+        mupdf.mpdf_dict_put_int(f, PDF_NAME('DL'), len_)
+        mupdf.mpdf_dict_put_int(f, PDF_NAME('Length'), len_)
+        params = mupdf.mpdf_dict_put_dict(f, PDF_NAME('Params'), 4)
+        mupdf.mpdf_dict_put_int(params, PDF_NAME('Size'), len_)
+    except Exception as e:
+        jlib.log('{e=} {jlib.exception_info()=}')
+        raise
+    return val
+
+
+def JM_UnicodeFromStr(s):
+    assert isinstance(s, str)
+    return s
+
+
+def JM_get_annot_by_name(page, name):
+    '''
+    retrieve annot by name (/NM key)
+    '''
+    assert isinstance(page, mupdf.PdfPage)
+    if not name:
+        return
+    #pdf_annot **annotptr = NULL;
+    #pdf_annot *annot = NULL;
+    found = 0
+
+    try:    # loop thru MuPDF's internal annots and widget arrays
+        annot = page.first_annot()
+        while 1:
+            if not annot.m_internal:
+                break
+
+            response, len_ = mupdf.mpdf_to_string(mupdf.mpdf_dict_gets(annot.annot_obj(), "NM"))
+            if name == response:
+                found = 1
+                break
+            annot = annot.next_annot()
+        if not found:
+            raise Exception("'%s' is not an annot of this page" % name)
+    except Exception as e:
+        jlib.log('{e=}')
+        raise
+    return annot
+
+
+def JM_get_annot_by_xref(page, xref):
+    '''
+    retrieve annot by its xref
+    '''
+    assert isinstance(page, mupdf.PdfPage)
+    found = 0
+    try:    # loop thru MuPDF's internal annots array
+        annot = page.first_annot()
+        while 1:
+            if not annot.m_internal:
+                break
+            if xref == mupdf.mpdf_to_num(annot.annot_obj()):
+                found = 1
+                break
+        if not found:
+            raise Exception("xref %d is not an annot of this page" % xref)
+    except Exception as e:
+        jlib.log('{e=}')
+        raise
+    return annot
+
+
+def JM_mediabox(page_obj):
+    '''
+    return a PDF page's MediaBox
+    '''
+    page_mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+    #fz_rect mediabox, page_mediabox;
+    mediabox = mupdf.mpdf_to_rect(
+            mupdf.mpdf_dict_get_inheritable(page_obj, PDF_NAME('MediaBox'))
+            );
+    if mupdf.mfz_is_empty_rect(mediabox) or mupdf.mfz_is_infinite_rect(mediabox):
+        mediabox.x0 = 0
+        mediabox.y0 = 0
+        mediabox.x1 = 612
+        mediabox.y1 = 792
+
+    page_mediabox = mupdf.Rect(
+            mupdf.mfz_min(mediabox.x0, mediabox.x1),
+            mupdf.mfz_min(mediabox.y0, mediabox.y1),
+            mupdf.mfz_max(mediabox.x0, mediabox.x1),
+            mupdf.mfz_max(mediabox.y0, mediabox.y1),
+            )
+
+    if (page_mediabox.x1 - page_mediabox.x0 < 1
+            or page_mediabox.y1 - page_mediabox.y0 < 1
+            ):
+        page_mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+
+    return page_mediabox
+
+
+
+def JM_cropbox(page_obj):
+    '''
+    return a PDF page's CropBox
+    '''
+    mediabox = JM_mediabox(page_obj)
+    cropbox = mupdf.mpdf_to_rect(
+                mupdf.mpdf_dict_get_inheritable(page_obj, PDF_NAME('CropBox'))
+                )
+    if mupdf.mfz_is_infinite_rect(cropbox) or mupdf.mfz_is_empty_rect(cropbox):
+        return mediabox
+    y0 = mediabox.y1 - cropbox.y1
+    y1 = mediabox.y1 - cropbox.y0
+    cropbox.y0 = y0
+    cropbox.y1 = y1
+    return cropbox
+
+
+
+def JM_insert_contents(pdf, pageref, newcont, overlay):
+    '''
+    Insert a buffer as a new separate /Contents object of a page.
+    1. Create a new stream object from buffer 'newcont'
+    2. If /Contents already is an array, then just prepend or append this object
+    3. Else, create new array and put old content obj and this object into it.
+       If the page had no /Contents before, just create a 1-item array.
+    '''
+    contents = mupdf.mpdf_dict_get(pageref, PDF_NAME('Contents'))
+    newconts = mupdf.mpdf_add_stream(pdf, newcont, mupdf.PdfObj(), 0)
+    xref = mupdf.mpdf_to_num(newconts)
+    if mupdf.mpdf_is_array(contents):
+        if overlay.m_internal:  # append new object
+            mupdf.mpdf_array_push(contents, newconts)
+        else:   # prepend new object
+            mupdf.mpdf_array_insert(contents, newconts, 0)
+    else:
+        carr = mupdf.mpdf_new_array(pdf, 5)
+        if overlay:
+            if contents.m_internal:
+                mupdf.mpdf_array_push(carr, contents)
+            mupdf.mpdf_array_push(carr, newconts)
+        else:
+            mupdf.mpdf_array_push_drop(carr, newconts)
+            if contents.m_internal:
+                mupdf.mpdf_array_push(carr, contents)
+        mupdf.mpdf_dict_put(pageref, PDF_NAME('Contents'), carr)
+    return xref
+
+
+
+
+
+def JM_get_fontextension(doc, xref):
+    '''
+    Return the file extension of a font file, identified by xref
+    '''
+    if xref < 1:
+        return "n/a"
+    o = mupdf.mpdf_load_object(doc, xref)
+    desft = mupdf.mpdf_dict_get(o, PDF_NAME('DescendantFonts'))
+    if desft.m_internal:
+        obj = mupdf.mpdf_resolve_indirect(mupdf.mpdf_array_get(desft, 0))
+        obj = mupdf.mpdf_dict_get(obj, PDF_NAME('FontDescriptor'))
+    else:
+        obj = mupdf.mpdf_dict_get(o, PDF_NAME('FontDescriptor'))
+    if not obj.m_internal:
+        return "n/a"    # this is a base-14 font
+
+    o = obj # we have the FontDescriptor
+
+    obj = mupdf.mpdf_dict_get(o, PDF_NAME('FontFile'))
+    if obj.m_internal:
+        return "pfa"
+
+    obj = mupdf.mpdf_dict_get(o, PDF_NAME('FontFile2'))
+    if obj.m_internal:
+        return "ttf"
+
+    obj = mupdf.mpdf_dict_get(o, PDF_NAME('FontFile3'))
+    if obj.m_internal:
+        obj = mupdf.mpdf_dict_get(obj, PDF_NAME('Subtype'))
+        if obj.m_internal and not mupdf.mpdf_is_name(obj):
+            PySys_WriteStdout("invalid font descriptor subtype")
+            return "n/a"
+        if mupdf.mpdf_name_eq(obj, PDF_NAME('Type1C')):
+            return "cff"
+        elif mupdf.mpdf_name_eq(obj, PDF_NAME('CIDFontType0C')):
+            return "cid"
+        elif mupdf.mpdf_name_eq(obj, PDF_NAME('OpenType')):
+            return "otf"
+        else:
+            PySys_WriteStdout("unhandled font type '%s'", mupdf.mpdf_to_name(obj))
+
+    return "n/a"
 
 def CheckRect(r: typing.Any) -> bool:
     """Check whether an object is non-degenerate rect-like.
@@ -3338,8 +4994,7 @@ class Document:
                         assert 0, 'recognize_document() not yet supported'
                 else:
                     doc = mupdf.PdfDocument()
-                    jlib.log('mupdf.PdfDocument() => {doc=}')
-                    doc.dirty = 1
+                    # fixme: doc.dirty = 1
             if w > 0 and h > 0:
                 if isinstance(doc, mupdf.PdfDocument):
                     mupdf.layout_document(doc.m_internal.super, w, h, fontsize)
@@ -3356,14 +5011,12 @@ class Document:
                     else:
                         doc.layout_document(400, 600, 11)
             this = doc
-            print(f'{doc=} {this=}')
 
         #try:
         #    self.this.append(this)
         #except __builtin__.Exception:
         #    self.this = this
         self.this = this
-        jlib.log('{self.this=}')
 
         # fixme: not sure where self.thisown gets initialised in PyMuPDF.
         #
@@ -3376,6 +5029,60 @@ class Document:
             else: # we won't init until doc is decrypted
                 self.initData()
 
+    @property
+    def is_encrypted(self):
+        return self.isEncrypted
+
+    @property
+    def is_closed(self):
+        return self.isClosed
+
+    @property
+    def is_pdf(self):
+        return self.isPDF
+
+    def new_page(
+            self,
+            pno: int = -1,
+            width: float = 595,
+            height: float = 842,
+            ):# -> Page:
+        """Create and return a new page object.
+
+        Args:
+            pno: (int) insert before this page. Default: after last page.
+            width: (float) page width in points. Default: 595 (ISO A4 width).
+            height: (float) page height in points. Default 842 (ISO A4 height).
+        Returns:
+            A Page object.
+        """
+        #doc._newPage(pno, width=width, height=height)
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+
+        #val = _fitz.Document__newPage(self, pno, width, height)
+        if isinstance(self.this, mupdf.PdfDocument):
+            pdf = self.this
+        else:
+            pdf = self.this.specifics()
+        assert isinstance(pdf, mupdf.PdfDocument)
+        mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+        mediabox.x1 = width
+        mediabox.y1 = height
+        #pdf_obj *resources = NULL, *page_obj = NULL;
+        #fz_buffer *contents = NULL;
+        contents = mupdf.Buffer(0)
+        #fz_try(gctx) {
+        if pno < -1:
+            raise Exception("bad page number(s)")
+        # create /Resources and /Contents objects
+        resources = pdf.add_object_drop(pdf.new_dict(1))
+        page_obj = pdf.add_page(mediabox, 0, resources, contents)
+        pdf.insert_page(pno, page_obj)
+        # fixme: pdf->dirty = 1;
+
+        self._reset_page_refs()
+        return self[pno]
 
 
 
@@ -3635,12 +5342,7 @@ class Document:
         """Number of pages."""
         if self.isClosed:
             raise ValueError("document closed")
-        jlib.log('{self.this=}')
-        jlib.log('{self.this.count_pages=}')
-        jlib.log('{self.this.m_internal=}')
-        jlib.log('{self.this.m_internal.refs=}')
         ret = self.this.count_pages()
-        jlib.log('{ret=}')
         return ret
 
     @property
@@ -3731,8 +5433,10 @@ class Document:
             raise ValueError("document closed")
 
         # return self.this _fitz.Document__getMetadata(self, key)
-        if 1:
-            return self.this.lookup_metadata(key)
+        #jlib.log('{key!r=}')
+        #jlib.log('{self=}')
+        #jlib.log('{self.this=}')
+        return self.this.lookup_metadata(key)
 
     @property
     def needsPass(self):
@@ -3835,22 +5539,13 @@ class Document:
     @property
     def isPDF(self):
         """Check for PDF."""
-        jlib.log('isPDF')
         if self.isClosed:
             raise ValueError("document closed")
-        jlib.log('calling self.this.specifics()')
-        jlib.log('calling self.this.specifics() {self.this=}')
-        p = self.this.specifics()
-        jlib.log('{p=}')
-        jlib.log('{self.this=}')
-        pp = self.this.specifics()
-        jlib.log('{pp=}')
-        jlib.log('{pp.m_internal=}')
-        if pp.m_internal:
-            jlib.log(f'Returning true')
+        if isinstance(self.this, mupdf.PdfDocument):
             return True
-        jlib.log(f'Returning false')
-        return False
+        p = self.this.specifics()
+        pp = self.this.specifics()
+        return True if pp.m_internal else False
 
     @property
 
@@ -4070,7 +5765,27 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
 
-        return _fitz.Document__getPageInfo(self, pno, what)
+        #return _fitz.Document__getPageInfo(self, pno, what)
+        doc = self.this
+        pdf = doc.specifics()
+        #pdf_obj *pageref, *rsrc;
+        #PyObject *liste = NULL, *tracer = NULL;
+        #fz_var(liste);
+        #fz_var(tracer);
+        pageCount = doc.count_pages()
+        n = pno;  # pno < 0 is allowed
+        while n < 0:
+            n += pageCount  # make it non-negative
+        if n >= pageCount:
+            raise Exception("bad page number(s)")
+        pageref = pdf.lookup_page_obj(n)
+        rsrc = pageref.dict_get_inheritable(mupdf.PDF_ENUM_NAME_Resources)
+        liste = []
+        tracer = []
+        if rsrc.m_internal:
+            JM_scan_resources(pdf, rsrc, liste, what, 0, tracer)
+        return liste
+
 
 
     def extractFont(self, xref=0, info_only=0):
@@ -4249,13 +5964,33 @@ class Document:
 
         return _fitz.Document_update_object(self, xref, text, page)
 
+    def _pdf_document(self):
+        '''
+        Returns self.this as a mupdf.PdfDocument using pdf_specifics() as
+        requireds.
+        '''
+        if isinstance(self.this, mupdf.PdfDocument):
+            return self.this
+        return self.this.specifics()
 
     def update_stream(self, xref=0, stream=None, new=0):
         """Replace xref stream part."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
 
-        return _fitz.Document_update_stream(self, xref, stream, new)
+        #return _fitz.Document_update_stream(self, xref, stream, new)
+        pdf = self._pdf_document()
+        xreflen = pdf.xref_len()
+        if xref < 1 or xref > xreflen:
+            raise Exception(f'bad xref={xref} xreflen={xreflen}')
+        obj = pdf.new_indirect(xref, 0)
+        if not new and not obj.is_stream():
+            raise Exception(f'no stream object at xref={xref}')
+        res = JM_BufferFromBytes(stream)
+        if not res:
+            raise Exception('bad type: "stream"')
+        JM_update_stream(pdf, obj, res, 1)
+        pdf.dirty = 1
 
 
     def _setMetadata(self, text):
@@ -4632,7 +6367,6 @@ class Document:
 
     def __contains__(self, loc) -> bool:
         page_count = self.this.count_pages()
-        jlib.log('{loc=} {self.pageCount=} {page_count=}')
         if type(loc) is int:
             if loc < self.pageCount:
                 return True
@@ -4762,7 +6496,7 @@ class Document:
         for i in range(self.pageCount):
             jlib.log('{i=}')
             for item in self.page_annot_xrefs(i):
-                if item[1] == PDF_ANNOT_LINK:
+                if item[1] == mupdf.PDF_ANNOT_LINK:
                     jlib.log('Returning true')
                     return True
         jlib.log('Returning false')
@@ -4777,7 +6511,7 @@ class Document:
             raise ValueError("not a PDF")
         for i in range(self.pageCount):
             for item in self.page_annot_xrefs(i):
-                if not (item[1] == PDF_ANNOT_LINK or item[1] == PDF_ANNOT_WIDGET):
+                if not (item[1] == mupdf.PDF_ANNOT_LINK or item[1] == mupdf.PDF_ANNOT_WIDGET):
                     return True
         return False
 
@@ -4850,20 +6584,443 @@ class Page:
     #__getattr__ = lambda self, name: _swig_getattr(self, Page, name)
 
     def __init__(self, page):
-        assert isinstance(page, mupdf.Page)
+        assert isinstance(page, (mupdf.Page, mupdf.PdfPage)), f'page is: {page}'
         self.this = page
         self.thisown = True
 
     def bound(self):
         """Get page rectangle."""
         CheckParent(self)
-
         val = self.this.bound_page()
         val = Rect(val)
 
         return val
 
     rect = property(bound, doc="page rectangle")
+
+    def add_polyline_annot(self, points: list) -> "struct Annot *":
+        """Add a 'PolyLine' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def new_shape(self):
+        return Shape(self)
+
+    def delete_annot(self, annot):
+        """Delete annot and return next one."""
+        CheckParent(self)
+        CheckParent(annot)
+
+        page = self._pdf_page()
+        while 1:
+            # first loop through all /IRT annots and remove them
+            irt_annot = JM_find_annot_irt(annot.this)
+            if not irt_annot:    # no more there
+                break
+            JM_delete_annot(page, irt_annot)
+        nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
+        JM_delete_annot(page, annot.this)
+        #fixme: page->doc->dirty = 1;
+        val = Annot(self, nextannot)
+
+        if val:
+            val.thisown = True
+            val.parent = weakref.proxy(self) # owning page object
+            val.parent._annot_refs[id(val)] = val
+        annot._erase()
+
+        return val
+
+
+        def add_polyline_annot(self, points: list) -> "struct Annot *":
+            """Add a 'PolyLine' annotation."""
+            old_rotation = annot_preprocess(self)
+            try:
+                #annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
+                #Page__add_multiline(points, PDF_ANNOT_POLY_LINE)
+                page = self._pdf_page()
+                try:
+                    n = PySequence_Size(points)
+                    if n < 2:
+                        THROWMSG("bad list of points")
+                    annot = mupdf.mpdf_create_annot( page, annot_type)
+                    for p in points:
+                        if PySequence_Size(p) != 2:
+                            THROWMSG("bad list of points")
+                        point = JM_point_from_py(p)
+                        mupdf.mpdf_add_annot_vertex(annot, point)
+
+                    JM_add_annot_id(annot, "A")
+                    mupdf.mpdf_update_annot(annot)
+                except Exception as e:
+                    jlib.log('{e=}')
+                    return
+                return Annot(self, annot)
+            finally:
+                if old_rotation != 0:
+                    self.set_rotation(old_rotation)
+            annot_postprocess(self, annot)
+            return annot
+
+    def apply_redactions(self, images: int = 2) -> bool:
+        """Apply the redaction annotations of the page.
+
+        Args:
+            page: the PDF page.
+            images: 0 - ignore images, 1 - remove complete overlapping image,
+                    2 - blank out overlapping image parts.
+        """
+        page = self
+        def center_rect(annot_rect, text, font, fsize):
+            """Calculate minimal sub-rectangle for the overlay text.
+
+            Notes:
+                Because 'insert_textbox' supports no vertical text centering,
+                we calculate an approximate number of lines here and return a
+                sub-rect with smaller height, which should still be sufficient.
+            Args:
+                annot_rect: the annotation rectangle
+                text: the text to insert.
+                font: the fontname. Must be one of the CJK or Base-14 set, else
+                    the rectangle is returned unchanged.
+                fsize: the fontsize
+            Returns:
+                A rectangle to use instead of the annot rectangle.
+            """
+            if not text:
+                return annot_rect
+            try:
+                text_width = get_text_length(text, font, fsize)
+            except ValueError:  # unsupported font
+                return annot_rect
+            line_height = fsize * 1.2
+            limit = annot_rect.width
+            h = math.ceil(text_width / limit) * line_height  # estimate rect height
+            if h >= annot_rect.height:
+                return annot_rect
+            r = annot_rect
+            y = (annot_rect.tl.y + annot_rect.bl.y - h) * 0.5
+            r.y0 = y
+            return r
+
+        CheckParent(page)
+        doc = page.parent
+        if doc.is_encrypted or doc.is_closed:
+            raise ValueError("document closed or encrypted")
+        if not doc.is_pdf:
+            raise ValueError("not a PDF")
+
+        redact_annots = []  # storage of annot values
+        for annot in page.annots(types=(mupdf.PDF_ANNOT_REDACT,)):  # loop redactions
+            redact_annots.append(annot._get_redact_values())  # save annot values
+
+        if redact_annots == []:  # any redactions on this page?
+            return False  # no redactions
+
+        rc = page._apply_redactions(images)  # call MuPDF redaction process step
+        if not rc:  # should not happen really
+            raise ValueError("Error applying redactions.")
+
+        # now write replacement text in old redact rectangles
+        shape = page.new_shape()
+        for redact in redact_annots:
+            annot_rect = redact["rect"]
+            fill = redact["fill"]
+            if fill:
+                shape.draw_rect(annot_rect)  # colorize the rect background
+                shape.finish(fill=fill, color=fill)
+            if "text" in redact.keys():  # if we also have text
+                trect = center_rect(  # try finding vertical centered sub-rect
+                    annot_rect, redact["text"], redact["fontname"], redact["fontsize"]
+                )
+                fsize = redact["fontsize"]  # start with stored fontsize
+                rc = -1
+                while rc < 0 and fsize >= 4:  # while not enough room
+                    rc = shape.insert_textbox(  # (re-) try insertion
+                        trect,
+                        redact["text"],
+                        fontname=redact["fontname"],
+                        fontsize=fsize,
+                        color=redact["text_color"],
+                        align=redact.get("align", TEXT_ALIGN_LEFT),
+                    )
+                    fsize -= 0.5  # reduce font if unsuccessful
+        shape.commit()  # append new contents object
+        return True
+
+
+
+
+    def add_strikeout_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'StrikeOut' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
+
+
+    def add_underline_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Underline' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
+
+
+    def add_squiggly_annot(self, quads=None, start=None,
+                         stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Squiggly' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
+
+
+    def add_highlight_annot(self, quads=None, start=None,
+                          stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Highlight' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        ret = self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
+        return ret
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def add_rect_annot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Square' (rectangle) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_circle_annot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Circle' (ellipse, oval) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_polygon_annot(self, points: list) -> "struct Annot *":
+        """Add a 'Polygon' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_stamp_annot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
+        """Add a ('rubber') 'Stamp' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_stamp_annot(rect, stamp)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+
+
+    def add_ink_annot(self, handwriting: list) -> "struct Annot *":
+        """Add a 'Ink' ('handwriting') annotation.
+
+        The argument must be a list of lists of point_likes.
+        """
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_ink_annot(handwriting)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_file_annot(
+            self,
+            point: point_like,
+            buffer_: typing.ByteString,
+            filename: str,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            icon: OptStr =None
+            ) -> "struct Annot *":
+        """Add a 'FileAttachment' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_file_annot(point,
+                    buffer_,
+                    filename,
+                    ufilename=ufilename,
+                    desc=desc,
+                    icon=icon,
+                    )
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        jlib.log('{type(annot)=} {annot=}')
+        annot_postprocess(self, annot)
+        return annot
+
+
+    def add_redact_annot(
+            self,
+            quad,
+            text: OptStr =None,
+            fontname: OptStr =None,
+            fontsize: float =11,
+            align: int =0,
+            fill: OptSeq =None,
+            text_color: OptSeq =None,
+            cross_out: bool =True,
+            ) -> "struct Annot *":
+        """Add a 'Redact' annotation."""
+        da_str = None
+        if text:
+            CheckColor(fill)
+            CheckColor(text_color)
+            if not fontname:
+                fontname = "Helv"
+            if not fontsize:
+                fontsize = 11
+            if not text_color:
+                text_color = (0, 0, 0)
+            if hasattr(text_color, "__float__"):
+                text_color = (text_color, text_color, text_color)
+            if len(text_color) > 3:
+                text_color = text_color[:3]
+            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
+            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
+            if fill is None:
+                fill = (1, 1, 1)
+            if fill:
+                if hasattr(fill, "__float__"):
+                    fill = (fill, fill, fill)
+                if len(fill) > 3:
+                    fill = fill[:3]
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
+                       align=align, fill=fill)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        #-------------------------------------------------------------
+        # change appearance to show a crossed-out rectangle
+        #-------------------------------------------------------------
+        if cross_out:
+            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
+            _, LL, LR, UR, UL = ap_tab
+            ap_tab.append(LR)
+            ap_tab.append(LL)
+            ap_tab.append(UR)
+            ap_tab.append(LL)
+            ap_tab.append(UL)
+            ap_tab.append(b"S")
+            ap = b"\n".join(ap_tab)
+            annot._setAP(ap, 0)
+        return annot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def add_caret_annot(self, point: point_like) -> "struct Annot *":
+        """Add a 'Caret' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_caret_annot(point)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return Annot(self, annot)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def getImageBbox(self, name):
 
@@ -4969,27 +7126,211 @@ class Page:
 
         return _fitz.Page__set_opacity(self, gstate, CA, ca)
 
+    def _pdf_page(self):
+        '''
+        Returns self.this as a mupdf.PdfPage using page_from_fz_page() if
+        required.
+        '''
+        if isinstance(self.this, mupdf.PdfPage):
+            return self.this
+        return self.this.page_from_fz_page()
 
     def _add_caret_annot(self, point):
-        return _fitz.Page__add_caret_annot(self, point)
+        #return _fitz.Page__add_caret_annot(self, point)
+        page = self._pdf_page()
+        annot = page.create_annot(mupdf.PDF_ANNOT_CARET)
+        if point:
+            p = JM_point_from_py(point)
+            r = annot.annot_rect()
+            r = mupdf.Rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            annot.set_annot_rect(r)
+        JM_add_annot_id(annot, "A")
+        annot.update_annot()
+        return annot;
+
 
     def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
-        return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
+        #return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
+        page = self._pdf_page()
+        fcol = [ 1, 1, 1, 0]
+        nfcol = 0
+        try:
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_REDACT)
+            q = JM_quad_from_py(quad)
+            r = mupdf.mfz_rect_from_quad(q)
+
+            # TODO calculate de-rotated rect
+            mupdf.mpdf_set_annot_rect(annot, r)
+            if fill:
+                nfcol = JM_color_FromSequence(fill, fcol)
+                arr = mupdf.mpdf_new_array(page.doc(), nfcol)
+                for i in range(nfcol):
+                    mupdf.mpdf_array_push_real(arr, fcol[i])
+                mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('IC'), arr)
+            if text:
+                mupdf.mpdf_dict_puts(
+                        annot.annot_obj(),
+                        "OverlayText",
+                        mupdf.mpdf_new_text_string(text),
+                        )
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('DA'), da_str)
+                mupdf.mpdf_dict_put_int(annot.annot_obj(), PDF_NAME('Q'), align)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        annot = mupdf.mpdf_keep_annot(annot)
+        return Annot(self, annot)
 
     def _add_line_annot(self, p1, p2):
-        return _fitz.Page__add_line_annot(self, p1, p2)
+        #return _fitz.Page__add_line_annot(self, p1, p2)
+        page = self._pdf_page()
+        try:
+            ASSERT_PDF(page);
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_LINE)
+            a = JM_point_from_py(p1)
+            b = JM_point_from_py(p2)
+            mupdf.mpdf_set_annot_line(annot, a, b)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(self, annot)
 
     def _add_text_annot(self, point, text, icon=None):
-        return _fitz.Page__add_text_annot(self, point, text, icon)
+        #return _fitz.Page__add_text_annot(self, point, text, icon)
+        page = self._pdf_page()
+        p = point
+        try:
+            ASSERT_PDF(page)
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT
+            mupdf.mpdf_set_annot_flags(annot, flags)
+            mupdf.mpdf_set_annot_contents(annot, text)
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}. Returning None')
+            return
+        return Annot(self, annot)
+
+    def add_text_annot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
+        """Add a 'Text' (sticky note) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_text_annot(point, text, icon=icon)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_line_annot(self, p1: point_like, p2: point_like) -> "struct Annot *":
+        """Add a 'Line' annotation."""
+        try:
+            old_rotation = annot_preprocess(self)
+            try:
+                annot = self._add_line_annot(p1, p2)
+            finally:
+                if old_rotation != 0:
+                    self.set_rotation(old_rotation)
+            annot_postprocess(self, annot)
+            return annot
+        except Exception as e:
+            jlib.log('{jlib.exception_info()}')
+            assert 0
 
     def _add_ink_annot(self, list):
         return _fitz.Page__add_ink_annot(self, list)
 
     def _add_stamp_annot(self, rect, stamp=0):
-        return _fitz.Page__add_stamp_annot(self, rect, stamp)
+        #return _fitz.Page__add_stamp_annot(self, rect, stamp)
+        page = self._pdf_page()
+        #pdf_annot *annot = NULL;
+        stamp_id = [
+                PDF_NAME('Approved'),
+                PDF_NAME('AsIs'),
+                PDF_NAME('Confidential'),
+                PDF_NAME('Departmental'),
+                PDF_NAME('Experimental'),
+                PDF_NAME('Expired'),
+                PDF_NAME('Final'),
+                PDF_NAME('ForComment'),
+                PDF_NAME('ForPublicRelease'),
+                PDF_NAME('NotApproved'),
+                PDF_NAME('NotForPublicRelease'),
+                PDF_NAME('Sold'),
+                PDF_NAME('TopSecret'),
+                PDF_NAME('Draft'),
+                ]
+        n = len(stamp_id)
+        name = stamp_id[0]
+        try:
+            ASSERT_PDF(page)
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            if INRANGE(stamp, 0, n-1):
+                name = stamp_id[stamp]
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
+            mupdf.mpdf_set_annot_contents(
+                    annot,
+                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
+                    )
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=} {jlib.exception_info()=}')
+            return
+        return Annot(self, annot)
 
-    def _add_file_annot(self, point, buffer, filename, ufilename=None, desc=None, icon=None):
-        return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
+    def _add_file_annot(self, point, buffer_, filename, ufilename=None, desc=None, icon=None):
+        #return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
+        page = self._pdf_page()
+        uf = ufilename if ufilename else filename
+        d = desc if desc else filename
+        #fz_buffer *filebuf = NULL;
+        #fz_rect r;
+        p = JM_point_from_py(point)
+        try:
+            ASSERT_PDF(page);
+            filebuf = JM_BufferFromBytes(buffer_)
+            if not filebuf.m_internal:
+                THROWMSG("bad type: 'buffer'")
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_FILE_ATTACHMENT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT;
+            mupdf.mpdf_set_annot_flags(annot, flags)
+
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+
+            val = JM_embed_file(page.doc(), filebuf, filename, uf, d, 1)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('FS'), val)
+            mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('Contents'), filename)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}')
+            raise
+            return
+        return Annot(self, annot)
 
     def _add_text_marker(self, quads, annot_type):
 
@@ -4997,8 +7338,7 @@ class Page:
         if not self.parent.isPDF:
             raise ValueError("not a PDF")
 
-        val = _fitz.Page__add_text_marker(self, quads, annot_type)
-
+        val = Page__add_text_marker(self, quads, annot_type)
         if not val:
             return None
         val.parent = weakref.proxy(self)
@@ -5008,13 +7348,86 @@ class Page:
 
 
     def _add_square_or_circle(self, rect, annot_type):
-        return _fitz.Page__add_square_or_circle(self, rect, annot_type)
+        #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
+        page = self._pdf_page()
+        try:
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(self, annot)
 
     def _add_multiline(self, points, annot_type):
-        return _fitz.Page__add_multiline(self, points, annot_type)
+        #return _fitz.Page__add_multiline(self, points, annot_type)
+        page = self._pdf_page()
+        try:
+            if len(points) < 2:
+                THROWMSG(gctx, "bad list of points")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            for p in points:
+                if (PySequence_Size(p) != 2):
+                    THROWMSG("bad list of points")
+                point = JM_point_from_py(p)
+                mupdf.mpdf_add_annot_vertex(annot, point)
+
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return;
+        return Annot(self, annot)
+
+
 
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
-        return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
+        #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
+        page = self._pdf_page()
+        fcol = [1, 1, 1, 1] # fill color: white
+        nfcol = JM_color_FromSequence(fill_color, fcol)
+        tcol = [0, 0, 0, 0]  # std. text color: black
+        ntcol = JM_color_FromSequence(text_color, tcol)
+        r = JM_rect_from_py(rect)
+        if r.is_infinite_rect() or r.is_empty_rect():
+            jlib.log('{rect=} {r=}')
+            raise Exception("rect must be finite and not empty")
+        annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
+        annot.set_annot_contents(text)
+        annot.set_annot_rect(r)
+        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
+        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Q, align)
+
+        if fill_color:
+            annot.set_annot_color(fcol[:nfcol])
+
+        # insert the default appearance string
+        JM_make_annot_DA(annot, ntcol, tcol, fontname, fontsize)
+        JM_add_annot_id(annot, "A")
+        annot.update_annot()
+        return Annot(self, annot)
+
+    def add_freetext_annot(self, rect: rect_like, text: str, fontsize: float =11,
+                         fontname: OptStr =None, text_color: OptSeq =None,
+                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
+        """Add a 'FreeText' annotation."""
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
+                    fontname=fontname, text_color=text_color,
+                    fill_color=fill_color, align=align, rotate=rotate)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
 
     @property
     def rotationMatrix(self) -> Matrix:
@@ -5024,7 +7437,13 @@ class Page:
     @property
     def derotationMatrix(self) -> Matrix:
         """Reflects page de-rotation."""
-        return Matrix(TOOLS._derotate_matrix(self))
+        #return Matrix(TOOLS._derotate_matrix(self))
+        pdfpage = self._pdf_page()
+        if not pdfpage.m_internal:
+            #return JM_py_from_matrix(fz_identity);
+            return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
+        return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
+
 
     def addCaretAnnot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
@@ -5044,7 +7463,7 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_STRIKE_OUT)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
 
 
     def addUnderlineAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
@@ -5053,7 +7472,7 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_UNDERLINE)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
 
 
     def addSquigglyAnnot(self, quads=None, start=None,
@@ -5063,7 +7482,7 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_SQUIGGLY)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
 
 
     def addHighlightAnnot(self, quads=None, start=None,
@@ -5073,14 +7492,14 @@ class Page:
             q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
         else:
             q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, PDF_ANNOT_HIGHLIGHT)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
 
 
     def addRectAnnot(self, rect: rect_like) -> "struct Annot *":
         """Add a 'Square' (rectangle) annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_square_or_circle(rect, PDF_ANNOT_SQUARE)
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5092,7 +7511,7 @@ class Page:
         """Add a 'Circle' (ellipse, oval) annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_square_or_circle(rect, PDF_ANNOT_CIRCLE)
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5128,7 +7547,7 @@ class Page:
         """Add a 'PolyLine' annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5140,7 +7559,7 @@ class Page:
         """Add a 'Polygon' annotation."""
         old_rotation = annot_preprocess(self)
         try:
-            annot = self._add_multiline(points, PDF_ANNOT_POLYGON)
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
         finally:
             if old_rotation != 0:
                 self.setRotation(old_rotation)
@@ -5269,7 +7688,19 @@ class Page:
 
 
     def _load_annot(self, name, xref):
-        return _fitz.Page__load_annot(self, name, xref)
+        #return _fitz.Page__load_annot(self, name, xref)
+        #pdf_annot *annot = NULL;
+        page = self._pdf_page()
+        try:
+            ASSERT_PDF(page)
+            if xref == 0:
+                annot = JM_get_annot_by_name(page, name)
+            else:
+                annot = JM_get_annot_by_xref(page, xref)
+        except Exception as e:
+            jlib.log('{e=} {jlib.exception_info()=}')
+            return
+        return Annot(self, annot) if annot else None
 
     def _get_resource_properties(self):
         return _fitz.Page__get_resource_properties(self)
@@ -5321,14 +7752,22 @@ class Page:
         """List of names of annotations, fields and links."""
         CheckParent(self)
 
-        return _fitz.Page_annot_names(self)
+        #return _fitz.Page_annot_names(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return
+        return JM_get_annot_id_list(page)
 
 
     def annot_xrefs(self):
         """List of xref numbers of annotations, fields and links."""
         CheckParent(self)
 
-        return _fitz.Page_annot_xrefs(self)
+        #return _fitz.Page_annot_xrefs(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return
+        return JM_get_annot_xref_list(page);
 
 
     def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
@@ -5550,8 +7989,16 @@ class Page:
     def _getDrawings(self):
         return _fitz.Page__getDrawings(self)
 
-    def _apply_redactions(self, *args):
-        return _fitz.Page__apply_redactions(self, *args)
+    def _apply_redactions(self, images):
+        #return _fitz.Page__apply_redactions(self, *args)
+        page = self._pdf_page()
+        opts = mupdf.PdfRedactOptions()
+        #pdf_redact_options opts;
+        opts.black_boxes = 0  # no black boxes
+        opts.image_method = images  # how to treat images
+        ASSERT_PDF(page)
+        success = mupdf.mpdf_redact_page(page.doc(), page, opts)
+        return success
 
     def _makePixmap(self, doc, ctm, cs, alpha=0, annots=1, clip=None):
         return _fitz.Page__makePixmap(self, doc, ctm, cs, alpha, annots, clip)
@@ -5581,7 +8028,7 @@ class Page:
             val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
             if self.parent.isPDF:
-                link_id = [x for x in self.annot_xrefs() if x[1] == PDF_ANNOT_LINK][0]
+                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
                 val.xref = link_id[0]
                 val.id = link_id[2]
             else:
@@ -5592,24 +8039,23 @@ class Page:
         return val
 
     firstLink = property(loadLinks, doc="First link on page")
-    @property
 
+    @property
     def firstAnnot(self):
         """First annotation."""
         CheckParent(self)
-
-        val = _fitz.Page_firstAnnot(self)
-
+        #val = _fitz.Page_firstAnnot(self)
+        page = self._pdf_page()
+        if page:
+            annot = mupdf.mpdf_first_annot(page)
+        val = Annot(self, annot) if annot else None
         if val:
             val.thisown = True
             val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
-
-
         return val
 
     @property
-
     def firstWidget(self):
         """First widget/field."""
         CheckParent(self)
@@ -5668,7 +8114,11 @@ class Page:
         """The MediaBox."""
         CheckParent(self)
 
-        val = _fitz.Page_MediaBox(self)
+        #val = _fitz.Page_MediaBox(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
+        val = JM_py_from_rect(JM_mediabox(page.obj()))
         val = Rect(val)
 
         return val
@@ -5679,7 +8129,11 @@ class Page:
         """The CropBox."""
         CheckParent(self)
 
-        val = _fitz.Page_CropBox(self)
+        #val = _fitz.Page_CropBox(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
+        val = JM_py_from_rect(JM_cropbox(page.obj()))
         val = Rect(val)
 
         return val
@@ -5690,12 +8144,22 @@ class Page:
         return self.CropBox.tl
 
     @property
+    def cropbox_position(self):
+        return self.CropBoxPosition
+
+    @property
 
     def rotation(self):
         """Page rotation."""
         CheckParent(self)
 
-        return _fitz.Page_rotation(self)
+        #return _fitz.Page_rotation(self)
+        #pdf_page *page = pdf_page_from_fz_page(gctx, (fz_page *) self);
+        page = self.this if isinstance(self.this, mupdf.PdfPage) else self.this.page_from_fz_page()
+        if not page:
+            return 0
+        return JM_page_rotation(page);
+
 
 
     def setRotation(self, rotation):
@@ -5718,7 +8182,7 @@ class Page:
         if not sanitize and not self.is_wrapped:
             self.wrap_contents()
 
-        return _fitz.Page_clean_contents(self, sanitize)
+        return Page_clean_contents(self, sanitize)
 
 
     def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
@@ -5808,7 +8272,14 @@ class Page:
         """Page transformation matrix."""
         CheckParent(self)
 
-        val = _fitz.Page_transformationMatrix(self)
+        #val = _fitz.Page_transformationMatrix(self)
+        ctm = mupdf.Matrix()
+        page = self._pdf_page()
+        if not page.m_internal:
+            return JM_py_from_matrix(ctm)
+        mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)    # fixme: original code passed mediabox=NULL.
+        page.page_transform(mediabox, ctm)
+        val = JM_py_from_matrix(ctm)
 
         if self.rotation % 360 == 0:
             val = Matrix(val)
@@ -5818,19 +8289,36 @@ class Page:
 
         return val
 
+    @property
+    def transformation_matrix(self):
+        return self.transformationMatrix
 
     def get_contents(self):
         """Get xrefs of /Contents objects."""
         CheckParent(self)
 
-        return _fitz.Page_get_contents(self)
+        #return _fitz.Page_get_contents(self)
+        ret = []
+        page = self.this.page_from_fz_page()
+        obj = page.obj()
+        contents = obj.dict_get(mupdf.PDF_ENUM_NAME_Contents)
+        if contents.is_array():
+            n = contents.array_len()
+            for i in range(n):
+                icont = contents.array_get(i)
+                xref = icont.to_num()
+                ret.append(xref)
+        elif contents.m_internal:
+            xref = contents.to_num()
+            ret.append( xref)
+        return ret
 
 
     def set_contents(self, xref):
         """Set an xref as the (only) /Contents object."""
         CheckParent(self)
 
-        return _fitz.Page_set_contents(self, xref)
+        return Page_set_contents(self, xref)
 
 
     @property
@@ -5978,14 +8466,18 @@ class Page:
     def MediaBoxSize(self):
         return Point(self.MediaBox.width, self.MediaBox.height)
 
+    @property
+    def mediabox_size(self):
+        return self.MediaBoxSize
+
     cleanContents = clean_contents
     getContents = get_contents
 
 class Pixmap:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Pixmap, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Pixmap, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Pixmap, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Pixmap, name)
 
     def __init__(self, *args):
         """Pixmap(colorspace, irect, alpha) - empty pixmap.
@@ -5997,12 +8489,222 @@ class Pixmap:
         Pixmap(colorspace, width, height, samples, alpha) - from samples data.
         Pixmap(PDFdoc, xref) - from an image at xref in a PDF document.
         """
+        # From PyMuPDF/fitz/fitz.i:struct Pixmap {...}.
+        #
+        def args_match(*types):
+            #if len(args) != len(types):
+            #    return False
+            #jlib.log('{args=} {types=}')
+            for i in range(len(types)):
+                type_ = types[i]
+                #jlib.log('{type_=}')
+                if i >= len(args):
+                    if isinstance(type_, tuple) and None in type_:
+                        # arg is missing but has default value.
+                        continue
+                    else:
+                        #jlib.log('returning false: {type=} {i=}>{len(args)=}')
+                        return False
+                if type_ is not None and not isinstance(args[i], type_):
+                    #jlib.log('returning false: {type=} does not match {type(args[i])=}')
+                    return False
+            #jlib.log('returning true: {args=} match {types=}')
+            return True
+        if 0:
+            pass
+        elif args_match(mupdf.Colorspace, mupdf.Rect, int):
+            # create empty pixmap with colorspace and IRect
+            pm = mupdf.mfz_new_pixmap_with_bbox(args[0], JM_irect_from_py(args[1]), mupdf.Separations(0), args[2])
+            self.this = pm
+            return
+        elif args_match(mupdf.Colorspace, mupdf.Pixmap):
+            # copy pixmap, converting colorspace
+            if not mupdf.mfz_pixmap_colorspace(args[1]):
+                THROWMSG("cannot copy pixmap without colorspace");
+            pm = mupdf.mfz_convert_pixmap(
+                    args[1],
+                    args[0],
+                    mupdf.Colorspace(0),
+                    mupdf.ColorParams(),
+                    1,
+                    )
+            self.this = pm
+            return
+        elif args_match(mupdf.Pixmap, mupdf.Pixmap):
+            # add mask to a non-transparent pixmap
+            color, mask = args
+            w = color.w
+            h = color.h
+            n = color.n
+            if color.alpha:
+                THROWMSG("color pixmap must not have an alpha channel")
+            if mask.n != 1:
+                THROWMSG("mask pixmap must have exactly one channel")
+            if mask.w != color.w or mask.h != color.h:
+                THROWMSG("color and mask pixmaps must be the same size")
 
-        this = _fitz.new_Pixmap(*args)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+            dst = mupdf.mfz_new_pixmap_with_bbox(color.colorspace(), mupdf.mfz_pixmap_bbox(color), mupdf.Separations(0), 1)
+            for y in range(h):
+                cs = y * color.m_internal.stride
+                ms = y * mask.m_internal.stride
+                ds = y * dst.m_internal.stride
+                for x in range(w):
+                    a = mask.samples_get(ms)
+                    ms += 1
+                    for k in range(n):
+                        dst.samples_set(ds, mupdf.mfz_mul255(color.samples.get(cs), a))
+                        ds += 1
+                        cs += 1
+                    dst.samples.set(ds, a)
+                    ds += 1
+            self.this = dst
+            return
+        elif args_match(mupdf.Pixmap, (float, int), (float, int), None):
+            # create pixmap as scaled copy of another one
+            assert 0, f'Cannot handle args={args} because fz_scale_pixmap() and fz_scale_pixmap_cached() are not declared in MuPDF headers'
+            spix, w, h, clip = args
+            src_pix = spix.this
+            bbox = JM_irect_from_py(clip)
+            if not mupdf.mfz_is_infinite_irect(bbox):
+                pm = mupdf.mfz_scale_pixmap_cached(src_pix, src_pix.x, src_pix.y, w, h, bbox)
+            else:
+                pm = mupdf.mfz_scale_pixmap(gctx, src_pix, src_pix.x, src_pix.y, w, h, NULL);
+            self.this = pm
+            return
+        elif args_match(mupdf.Pixmap, (int, None)):
+            # copy pixmap & add / drop the alpha channel
+            jlib.log('{args=}')
+            spix = args[0]
+            alpha = args[1] if len(args) == 2 else 1
+            src_pix = spix
+            if not INRANGE(alpha, 0, 1):
+                THROWMSG("bad alpha value")
+            cs = mupdf.mfz_pixmap_colorspace(src_pix)
+            if not cs.m_internal and not alpha:
+                THROWMSG("cannot drop alpha for 'NULL' colorspace")
+            seps = mupdf.Separations()
+            n = mupdf.mfz_pixmap_colorants(src_pix)
+            w = mupdf.mfz_pixmap_width(src_pix)
+            h = mupdf.mfz_pixmap_height(src_pix)
+            pm = mupdf.mfz_new_pixmap(cs, w, h, seps, alpha)
+            jlib.log('{pm=} {src_pix=}')
+            pm.m_internal.x = src_pix.m_internal.x
+            pm.m_internal.y = src_pix.m_internal.y
+            pm.m_internal.xres = src_pix.m_internal.xres
+            pm.m_internal.yres = src_pix.m_internal.yres
+
+            # copy samples data ------------------------------------------
+            #unsigned char *sptr = src_pix->samples;
+            #unsigned char *tptr = pm->samples;
+            if src_pix.alpha() == pm.alpha():   # identical samples
+                #memcpy(tptr, sptr, w * h * (n + alpha));
+                # fixme: inefficient.
+                for i in range(w * h * (n + alpha)):
+                    pm.samples_set(i, src_pix.samples_get(i))
+            else:
+                tptr = 0
+                sptr = 0
+                for i in range(w * h):
+                    #memcpy(tptr, sptr, n);
+                    # fixme: inefficient.
+                    for j in range(n):
+                        pm.samples_set(tptr + j, src_pix.samples.get(sptr + j))
+                    tptr += n
+                    if pm.alpha():
+                        pm.samples_set(tptr, 255)
+                        tptr += 1
+                    sptr += n + src_pix.alpha()
+            self.this = pm
+            return
+        elif args_match(mupdf.Colorspace, int, int, None, int):
+            # create pixmap from samples data
+            cs, w, h, samples, alpha = args
+            n = mupdf.mfz_colorspace_n(cs)
+            stride = (n + alpha)*w
+            #fz_separations *seps = NULL;
+            #fz_buffer *res = NULL;
+            #fz_pixmap *pm = NULL;
+            size = 0;
+            res = JM_BufferFromBytes(samples);
+            if not res.m_internal:
+                THROWMSG("bad samples data")
+            size, c = mupdf.mfz_buffer_storage_raw(res)
+            if stride * h != size:
+                THROWMSG("bad samples length")
+            pm = mupdf.mfz_new_pixmap(cs, w, h, seps, alpha)
+            assert 0, 'cannot memcpy from buffer to pixmap samples.'
+            # do we need one of these?:
+            #   fz_pixmap *fz_new_pixmap_from_buffer(fz_buffer* buffer,
+            #           fz_colorspace *cs, int w, int h, fz_separations *seps, int alpha
+            #           );
+            #   fz_pixmap *fz_new_pixmap_from_samples(const unsigned char* samples,
+            #           fz_colorspace *cs, int w, int h, fz_separations *seps, int alpha
+            #           );
+            #
+
+            #memcpy(pm->samples, c, size);
+            self.this = pm
+            return
+
+        elif args_match(None):
+            # create pixmap from filename, file object, pathlib.Path or memory
+            imagedata, = args
+            #fz_buffer *res = NULL;
+            #fz_image *img = NULL;
+            #fz_pixmap *pm = NULL;
+            #PyObject *fname = NULL;
+            name = 'name'
+            if hasattr(imagedata, "resolve"):
+                fname = imagedata.__str__()
+                if fname:
+                    img = mupdf.mfz_new_image_from_file(fname)
+            elif hasattr(imagedata, name):
+                fname = imagedata.name
+                if fname:
+                    img = mupdf.mfz_new_image_from_file(fname)
+            elif isinstance(imagedata, str):
+                img = mupdf.mfz_new_image_from_file(imagedata)
+            else:
+                res = JM_BufferFromBytes(imagedata)
+                if not res.m_internal:
+                    THROWMSG("bad image data")
+                size, data = res.buffer_storage()
+                if not size:
+                    THROWMSG(gctx, "bad image data")
+                img = mupdf.mfz_new_image_from_buffer(res)
+            pm, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
+            xres, yres = img.image_resolution()
+            pm.xres = xres
+            pm.yres = yres
+            self.this = pm
+            return
+
+        elif args_match(mupdf.Document, int):
+            # Create pixmap from PDF image identified by XREF number
+            doc, xref = args
+            #fz_image *img = NULL;
+            #fz_pixmap *pix = NULL;
+            #pdf_obj *ref = NULL;
+            #pdf_obj *type;
+            pdf = mupdf.mpdf_specifics(doc)
+            ASSERT_PDF(pdf)
+            xreflen = mupdf.mpdf_xref_len(pdf)
+            if not INRANGE(xref, 1, xreflen-1):
+                THROWMSG("bad xref")
+            ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
+            type_ = mupdf.mpdf_dict_get(ref, PDF_NAME('Subtype'))
+            if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
+                THROWMSG(gctx, "not an image");
+            img = mupdf.mpdf_load_image(pdf, ref)
+            pix, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
+            self.this = pix
+            return
+
+        else:
+            raise Exception(f'Unrecognised args for constructing Pixmap: {args}')
+
+
+
 
     def shrink(self, factor):
         """Divide width and height by 2**factor.
@@ -6399,21 +9101,26 @@ class Outline:
 
 
 class Annot:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Annot, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Annot, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
 
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
+    #def __init__(self, *args, **kwargs):
+    #    raise AttributeError("No constructor defined")
+    def __init__(self, page, annot):
+        assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
+        assert isinstance(page, Page), f'page is: {page}'
+        self.this = annot
+        self.parent = page
+
     @property
-
     def rect(self):
         """annotation rectangle"""
         CheckParent(self)
 
-        val = _fitz.Annot_rect(self)
-
+        #val = _fitz.Annot_rect(self)
+        val = mupdf.mpdf_bound_annot(self.this)
         val = Rect(val)
         val *= self.parent.derotationMatrix
 
@@ -6421,23 +9128,34 @@ class Annot:
         return val
 
     @property
-
     def xref(self):
         """annotation xref"""
         CheckParent(self)
-
-        return _fitz.Annot_xref(self)
+        #return _fitz.Annot_xref(self)
+        annot = self.this
+        return mupdf.mpdf_to_num(annot.annot_obj())
 
     @property
-
     def apn_matrix(self):
         """annotation appearance matrix"""
-        CheckParent(self)
+        try:
+            CheckParent(self)
 
-        val = _fitz.Annot_apn_matrix(self)
-        val = Matrix(val)
+            #val = _fitz.Annot_apn_matrix(self)
+            annot = self.this
+            assert isinstance(annot, mupdf.PdfAnnot)
+            ap = annot.annot_obj().dict_getl(mupdf.PDF_ENUM_NAME_AP, mupdf.PDF_ENUM_NAME_N);
+            if not ap.m_internal:
+                return JM_py_from_matrix(mupdf.Matrix())
+            mat = ap.dict_get_matrix(mupdf.PDF_ENUM_NAME_Matrix)
+            val = JM_py_from_matrix(mat)
 
-        return val
+            val = Matrix(val)
+
+            return val
+        except Exception:
+            jlib.log(jlib.exception_info())
+            raise
 
     @property
 
@@ -6478,7 +9196,36 @@ class Annot:
         """annotation BlendMode"""
         CheckParent(self)
 
-        return _fitz.Annot_blendMode(self)
+        #return _fitz.Annot_blendMode(self)
+        blend_mode = None
+        annot = self.this
+        #pdf_obj *obj, *obj1, *obj2;
+        obj = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_BM)
+        if obj.m_internal:
+            blend_mode = obj.to_name()
+            return blend_mode
+
+        # loop through the /AP/N/Resources/ExtGState objects
+        obj = annot.annot_obj().dict_getl(
+                mupdf.PDF_ENUM_NAME_AP,
+                mupdf.PDF_ENUM_NAME_N,
+                mupdf.PDF_ENUM_NAME_Resources,
+                mupdf.PDF_ENUM_NAME_ExtGState,
+                )
+
+        if obj.is_dict():
+            n = obj.dict_len()
+            for i in range(n):
+                obj1 = obj.dict_get_val(i)
+                if obj1.is_dict():
+                    m = obj1.dict_len()
+                    for j in range(m):
+                        obj2 = obj1.dict_get_key(j)
+                        if obj2.objcmp(mupdf.PDF_ENUM_NAME_BM) == 0:
+                            blend_mode = obj1.dict_get_val(j).to_name()
+                            return blend_mode
+
+        return blend_mode;
 
 
     def set_blendmode(self, blend_mode):
@@ -6515,7 +9262,25 @@ class Annot:
         """Check if annotation has a Popup."""
         CheckParent(self)
 
-        return _fitz.Annot_has_popup(self)
+        #return _fitz.Annot_has_popup(self)
+        annot = self.this
+        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+        return True if obj.m_internal else False
+
+    def set_popup(self, rect):
+        '''
+        Create annotation 'Popup' or update rectangle.
+        '''
+        CheckParent(self)
+        jlib.log('{rect=}')
+        annot = self.this
+        pdfpage = annot.annot_page()
+        rot = JM_rotate_page_matrix(pdfpage)
+        jlib.log('{rot=}')
+        r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
+        jlib.log('{r=}')
+        mupdf.mpdf_set_annot_popup(annot, r)
+
 
     @property
 
@@ -6523,10 +9288,25 @@ class Annot:
         """annotation 'Popup' rectangle"""
         CheckParent(self)
 
-        val = _fitz.Annot_popup_rect(self)
-
+        #val = _fitz.Annot_popup_rect(self)
+        rect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+        jlib.log('{rect=}')
+        annot = self.this
+        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+        jlib.log('{obj.m_internal=}')
+        if obj.m_internal:
+            if 0:
+                rect = mupdf.mpdf_dict_get_rect(obj, PDF_NAME('Rect'))
+            else:
+                # fixme, this fixes assert in PyMuPDF/tests/test_annots.py:test_redact().
+                rect = mupdf.mpdf_annot_popup(annot)
+            jlib.log('{rect=}')
+        val = JM_py_from_rect(rect)
+        jlib.log('{val=}')
         val = Rect(val) * self.parent.transformationMatrix
+        jlib.log('{val=}')
         val *= self.parent.derotationMatrix
+        jlib.log('{val=}')
 
         return val
 
@@ -6562,13 +9342,73 @@ class Annot:
 
 
     def _getAP(self):
-        return _fitz.Annot__getAP(self)
+        #return _fitz.Annot__getAP(self)
+        r = None
+        res = None
+        annot = self.this
+        ap = annot.annot_obj().dict_getl(
+                mupdf.PDF_ENUM_NAME_AP,
+                mupdf.PDF_ENUM_NAME_N,
+                )
+
+        if ap.is_stream():
+            res = ap.load_stream()
+        if not res or res.m_internal:
+            r = JM_BinFromBuffer(res)
+        return r
 
     def _setAP(self, ap, rect=0):
-        return _fitz.Annot__setAP(self, ap, rect)
+        #return _fitz.Annot__setAP(self, ap, rect)
+        try:
+            annot = self.this
+            apobj = mupdf.mpdf_dict_getl(annot.obj(), PDF_NAME('AP'), PDF_NAME('N'))
+            if not apobj.m_internal:
+                THROWMSG("annot has no AP/N object")
+            if not mupdf.mpdf_is_stream(apobj):
+                THROWMSG("AP/N object is no stream")
+            res = JM_BufferFromBytes(ap)
+            if not res.m_internal:
+                THROWMSG("invalid /AP stream argument")
+            JM_update_stream(annot.page().doc(), apobj, res, 1)
+            if rect:
+                bbox = mupdf.mpdf_dict_get_rect(annot.obj(), PDF_NAME('Rect'))
+                mupdf.mpdf_dict_put_rect(apobj, PDF_NAME('BBox'), bbox)
+                #annot->ap = NULL;
+        except Exception:
+            return
+        return
 
     def _get_redact_values(self):
-        val = _fitz.Annot__get_redact_values(self)
+        jlib.log('')
+        #val = _fitz.Annot__get_redact_values(self)
+        annot = self.this
+        if mupdf.mpdf_annot_type(annot) != mupdf.PDF_ANNOT_REDACT:
+            return
+
+        values = dict()
+        #pdf_obj *obj = NULL;
+        #const char *text = NULL;
+        try:
+            obj = mupdf.mpdf_dict_gets(annot.annot_obj(), "RO")
+            if obj.m_internal:
+                JM_Warning("Ignoring redaction key '/RO'.")
+                xref = mupdf.mpdf_to_num(obj)
+                values[dictkey_xref] = xref
+            obj = mupdf.mpdf_dict_gets(annot.annot_obj(), "OverlayText")
+            if obj.m_internal:
+                text = mupdf.mpdf_to_text_string(obj)
+                values[dictkey_text] = JM_UnicodeFromStr(text)
+            else:
+                values[dictkey_text] = ''
+            obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Q'))
+            align = 0;
+            if obj.m_internal:
+                align = mupdf.mpdf_to_int(obj)
+            values[dictkey_align] = align
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        val = values
 
         if not val:
             return val
@@ -6602,8 +9442,15 @@ class Annot:
     def set_rect(self, rect):
         """Set annotation rectangle."""
         CheckParent(self)
-
-        return _fitz.Annot_set_rect(self, rect)
+        #return _fitz.Annot_set_rect(self, rect)
+        try:
+            annot = self.this
+            pdfpage = annot.annot_page()
+            rot = JM_rotate_page_matrix(pdfpage)
+            r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+        except Exception as e:
+            jlib.log('{e=}')
 
 
     def set_rotation(self, rotate=0):
@@ -6618,27 +9465,169 @@ class Annot:
         """annotation rotation"""
         CheckParent(self)
 
-        return _fitz.Annot_rotation(self)
+        #return _fitz.Annot_rotation(self)
+        annot = self.this
+        rotation = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_Rotate)
+        if not rotation.m_internal:
+            return -1
+        return rotation.to_int(g)
+
 
     @property
 
     def vertices(self):
         """annotation vertex points"""
         CheckParent(self)
+        #return _fitz.Annot_vertices(self)
+        #PyObject *res = NULL, *res1 = NULL;
+        #pdf_obj *o, *o1;
+        annot = self.this
+        assert isinstance(annot, mupdf.PdfAnnot)
+        #fz_point point;  # point object to work with
+        page_ctm = mupdf.Matrix()   # page transformation matrix
+        dummy = mupdf.Rect(0)   # Will have .m_internal=NULL.
+        mupdf.mpdf_page_transform(annot.annot_page(), dummy, page_ctm);
+        derot = JM_derotate_page_matrix(annot.annot_page())
+        page_ctm = mupdf.mfz_concat(page_ctm, derot)
 
-        return _fitz.Annot_vertices(self)
+        #----------------------------------------------------------------
+        # The following objects occur in different annotation types.
+        # So we are sure that (!o) occurs at most once.
+        # Every pair of floats is one point, that needs to be separately
+        # transformed with the page transformation matrix.
+        #----------------------------------------------------------------
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Vertices'))
+        if not o.m_internal:    o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('L'))
+        if not o.m_internal:    o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('QuadPoints'))
+        if not o.m_internal:    o = mupdf.mpdf_dict_gets(annot.annot_obj(), "CL")
+
+        if o.m_internal:
+            # handle lists with 1-level depth --------------------------------
+            #weiter:;
+            res = []
+            for i in range(0, mupdf.mpdf_array_len(o), 2):
+                x = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o, i))
+                y = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o, i+1))
+                point = mupdf.Point(x, y)
+                point = mupdf.mfz_transform_point(point, page_ctm)
+                res.append( (point.x, point.y))
+            return res
+
+        else:
+            # InkList has 2-level lists --------------------------------------
+            #inklist:;
+            res = []
+            for i in range(mupdf.mpdf_array_len(o)):
+                res1 = []
+                o1 = mupdf.mpdf_array_get(o, i)
+                for j in range(0, mupdf.mpdf_array_len(o1), 2):
+                    x = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o1, j))
+                    y = mupdf.mpdf_to_real(mupdf.mpdf_array_get(o1, j+1))
+                    point = mupdf.Point(x, y)
+                    point = mupdf.mfz_transform_point(point, page_ctm)
+                    res1.append( (point.x, point.y))
+                res.append(res1)
+            return res;
+
 
     @property
 
     def colors(self):
         """Color definitions."""
-        CheckParent(self)
+        try:
+            CheckParent(self)
 
-        return _fitz.Annot_colors(self)
+            #return _fitz.Annot_colors(self)
+            annot = self.this
+            assert isinstance(annot, mupdf.PdfAnnot)
+            return JM_annot_colors(annot.annot_obj())
+        except Exception as e:
+            jlib.log(jlib.exception_info())
+            raise
 
 
     def _update_appearance(self, opacity=-1, blend_mode=None, fill_color=None, rotate=-1):
-        return _fitz.Annot__update_appearance(self, opacity, blend_mode, fill_color, rotate)
+        #return _fitz.Annot__update_appearance(self, opacity, blend_mode, fill_color, rotate)
+        annot = self.this
+        assert annot.m_internal
+        type_ = annot.annot_type()
+        fcol = [1, 1, 1, 1] # std fill color: white
+        nfcol = 0   # number of color components
+        nfcol = JM_color_FromSequence(fill_color, fcol);
+
+        annot.dirty_annot() # enforce MuPDF /AP formatting
+        if type_ == mupdf.PDF_ANNOT_FREE_TEXT:
+            if fill_color:
+                # Use mupdf python custom fn. fixme: make this available as a
+                # class method and as mpdf_set_annot_color().
+                mupdf.pdf_set_annot_color(annot.m_internal, fcol[:nfcol])
+            else:
+                annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
+        else:
+            if fill_color:
+                annot.set_annot_interior_color(fcol[:nfcol])
+            elif fill_color is not None:
+                annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
+
+        insert_rot = 1 if rotate >= 0 else 0
+        if type not in (
+                mupdf.PDF_ANNOT_CARET,
+                mupdf.PDF_ANNOT_CIRCLE,
+                mupdf.PDF_ANNOT_FREE_TEXT,
+                mupdf.PDF_ANNOT_FILE_ATTACHMENT,
+                mupdf.PDF_ANNOT_INK,
+                mupdf.PDF_ANNOT_LINE,
+                mupdf.PDF_ANNOT_POLY_LINE,
+                mupdf.PDF_ANNOT_POLYGON,
+                mupdf.PDF_ANNOT_SQUARE,
+                mupdf.PDF_ANNOT_STAMP,
+                mupdf.PDF_ANNOT_TEXT,
+                ):
+            insert_rot = 0
+
+        if insert_rot:
+            annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
+        self.needs_new_ap = 1   # re-create appearance stream
+        annot.update_annot()    # update the annotation
+
+        if (opacity < 0 or opacity >= 1) and not blend_mode:    # no opacity, no blend_mode
+            return True
+
+        try:    # create or update /ExtGState
+            ap = mupdf.pdf_dict_getl(
+                    annot.annot.obj(),
+                    mupdf.PDF_ENUM_NAME_AP,
+                    mupdf.PDF_ENUM_NAME_N
+                    )
+            if not ap.m_internal:   # should never happen
+                raise Exception("annot has no /AP object")
+
+            resources = ap.dict_get(mupdf.PDF_ENUM_NAME_Resources)
+
+            if not resources.m_internal:    # no Resources yet: make one
+                resources = ap.dict_put_dict(mupdf.PDF_ENUM_NAME_Resources, 2)
+            alp0 = annot.page().doc().new_dict(3)
+            if opacity >= 0 and opacity < 1:
+                alp0.dict_put_real(mupdf.PDF_ENUM_NAME_CA, opacity)
+                alp0.dict_put_real(mupdf.PDF_ENUM_NAME_ca, opacity)
+                annot.annot_obj().dict_put_real(mupdf.PDF_ENUM_NAME_CA, opacity)
+
+            if blend_mode:
+                alp0.dict_put_name(mupdf.PDF_ENUM_NAME_BM, blend_mode)
+                annot.annot_obj().dict_put_name(mupdf.PDF_ENUM_NAME_BM, blend_mode)
+
+            extg = resources.dict_get(mupdf.PDF_ENUM_NAME_ExtGState)
+            if not extg.m_internal: # no ExtGState yet: make one
+                extg = resources.dict_put_dict(mupdf.PDF_ENUM_NAME_ExtGState, 2)
+
+            extg.dict_put_drop(mupdf.PDF_ENUM_NAME_H, alp0)
+
+        except Exception:
+            PySys_WriteStderr("could not set opacity or blend mode\n");
+            return False
+
+        return True
+
 
     def update(self,
                blend_mode: OptStr =None,
@@ -6707,7 +9696,7 @@ class Annot:
                 rotate += 360
             while rotate >= 360:
                 rotate -= 360
-            if type == PDF_ANNOT_FREE_TEXT and rotate % 90 != 0:
+            if type == mupdf.PDF_ANNOT_FREE_TEXT and rotate % 90 != 0:
                 rotate = 0
 
     #------------------------------------------------------------------
@@ -6757,7 +9746,7 @@ class Annot:
         ap_tab = ap.splitlines()  # split in single lines
         ap_updated = False  # assume we did nothing
 
-        if type == PDF_ANNOT_REDACT:
+        if type == mupdf.PDF_ANNOT_REDACT:
             if cross_out:  # create crossed-out rect
                 ap_updated = True
                 ap_tab = ap_tab[:-1]
@@ -6782,7 +9771,7 @@ class Annot:
 
             ap = b"\n".join(ap_tab)
 
-        if type == PDF_ANNOT_FREE_TEXT:
+        if type == mupdf.PDF_ANNOT_FREE_TEXT:
             CheckColor(border_color)
             CheckColor(text_color)
             tcol, fname, fsize = TOOLS._parse_da(self)
@@ -6832,18 +9821,18 @@ class Annot:
             ap = b"\n".join(ap_tab)         # updated AP stream
             ap_updated = True
 
-        if type in (PDF_ANNOT_POLYGON, PDF_ANNOT_POLY_LINE):
+        if type in (mupdf.PDF_ANNOT_POLYGON, mupdf.PDF_ANNOT_POLY_LINE):
             ap = b"\n".join(ap_tab[:-1]) + b"\n"
             ap_updated = True
             if bfill != b"":
-                if type == PDF_ANNOT_POLYGON:
+                if type == mupdf.PDF_ANNOT_POLYGON:
                     ap = ap + bfill + b"b"  # close, fill, and stroke
-                elif type == PDF_ANNOT_POLY_LINE:
+                elif type == mupdf.PDF_ANNOT_POLY_LINE:
                     ap = ap + b"S"  # stroke
             else:
-                if type == PDF_ANNOT_POLYGON:
+                if type == mupdf.PDF_ANNOT_POLYGON:
                     ap = ap + b"s"  # close and stroke
-                elif type == PDF_ANNOT_POLY_LINE:
+                elif type == mupdf.PDF_ANNOT_POLY_LINE:
                     ap = ap + b"S"  # stroke
 
         if dashes is not None:  # handle dashes
@@ -6860,7 +9849,7 @@ class Annot:
     #----------------------------------------------------------------------
     # the following handles line end symbols for 'Polygon' and 'Polyline'
     #----------------------------------------------------------------------
-        if line_end_le + line_end_ri > 0 and type in (PDF_ANNOT_POLYGON, PDF_ANNOT_POLY_LINE):
+        if line_end_le + line_end_ri > 0 and type in (mupdf.PDF_ANNOT_POLYGON, mupdf.PDF_ANNOT_POLY_LINE):
 
             le_funcs = (None, TOOLS._le_square, TOOLS._le_circle,
                         TOOLS._le_diamond, TOOLS._le_openarrow,
@@ -6894,16 +9883,16 @@ class Annot:
     # handle annotation rotations
     #-------------------------------
         if type not in (  # only these types are supported
-            PDF_ANNOT_CARET,
-            PDF_ANNOT_CIRCLE,
-            PDF_ANNOT_FILE_ATTACHMENT,
-            PDF_ANNOT_INK,
-            PDF_ANNOT_LINE,
-            PDF_ANNOT_POLY_LINE,
-            PDF_ANNOT_POLYGON,
-            PDF_ANNOT_SQUARE,
-            PDF_ANNOT_STAMP,
-            PDF_ANNOT_TEXT,
+            mupdf.PDF_ANNOT_CARET,
+            mupdf.PDF_ANNOT_CIRCLE,
+            mupdf.PDF_ANNOT_FILE_ATTACHMENT,
+            mupdf.PDF_ANNOT_INK,
+            mupdf.PDF_ANNOT_LINE,
+            mupdf.PDF_ANNOT_POLY_LINE,
+            mupdf.PDF_ANNOT_POLYGON,
+            mupdf.PDF_ANNOT_SQUARE,
+            mupdf.PDF_ANNOT_STAMP,
+            mupdf.PDF_ANNOT_TEXT,
             ):
             return
 
@@ -6946,22 +9935,43 @@ class Annot:
         """Line end codes."""
         CheckParent(self)
 
-        return _fitz.Annot_line_ends(self)
+        #return _fitz.Annot_line_ends(self)
+        annot = self.this
+        # return nothing for invalid annot types
+        if not annot.annot_has_line_ending_styles():
+            return
+
+        lstart = annot.annot_line_start_style()
+        lend = annot.annot_line_end_style()
+        return lstart, lend
+
 
 
     def set_line_ends(self, start, end):
         """Set line end codes."""
         CheckParent(self)
+        #return _fitz.Annot_set_line_ends(self, start, end)
+        annot = self.this
+        if mupdf.mpdf_annot_has_line_ending_styles(annot):
+            mupdf.mpdf_set_annot_line_ending_styles(annot, start, end)
+        else:
+            JM_Warning("bad annot type for line ends")
 
-        return _fitz.Annot_set_line_ends(self, start, end)
 
     @property
 
     def type(self):
         """annotation type"""
         CheckParent(self)
-
-        return _fitz.Annot_type(self)
+        #return _fitz.Annot_type(self)
+        assert self.this.m_internal, f'self.this={self.this} self.this.m_internal={self.this.m_internal}'
+        type_ = self.this.annot_type()
+        c = mupdf.ppdf_string_from_annot_type(type_)
+        o = self.this.annot_obj().dict_gets("IT")
+        if not o.m_internal or o.is_name():
+            return (type_, c)
+        it = o.to_name()
+        return (type_, c, it)
 
     @property
 
@@ -6969,7 +9979,14 @@ class Annot:
         """Opacity."""
         CheckParent(self)
 
-        return _fitz.Annot_opacity(self)
+        #return _fitz.Annot_opacity(self)
+        annot = self.this
+        opy = -1
+        ca = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_CA)
+        if ca.is_number():
+            opy = ca.to_real()
+        return opy
+
 
 
     def set_opacity(self, opacity):
@@ -7007,12 +10024,40 @@ class Annot:
         return _fitz.Annot_update_file(self, buffer, filename, ufilename, desc)
 
     @property
-
     def info(self):
         """Various information details."""
         CheckParent(self)
 
-        return _fitz.Annot_info(self)
+        #return _fitz.Annot_info(self)
+        annot = self.this
+        res = dict()
+
+        res[dictkey_content] = JM_UnicodeFromStr(mupdf.mpdf_annot_contents(annot))
+
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Name'))
+        res[dictkey_name] = JM_UnicodeFromStr(mupdf.mpdf_to_name(o))
+
+        # Title (= author)
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('T'))
+        res[dictkey_title] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        # CreationDate
+        o = mupdf.mpdf_dict_gets(annot.annot_obj(), "CreationDate")
+        res[dictkey_creationDate] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        # ModDate
+        o = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('M'))
+        res[dictkey_modDate] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        # Subj
+        o = mupdf.mpdf_dict_gets(annot.annot_obj(), "Subj")
+        res[dictkey_subject] = mupdf.mpdf_to_text_string(o)
+
+        # Identification (PDF key /NM)
+        o = mupdf.mpdf_dict_gets(annot.annot_obj(), "NM")
+        res[dictkey_id] = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(o))
+
+        return res
 
 
     def set_info(self, info=None, content=None, title=None, creationDate=None, modDate=None, subject=None):
@@ -7028,15 +10073,37 @@ class Annot:
             info = None
 
 
-        return _fitz.Annot_set_info(self, info, content, title, creationDate, modDate, subject)
+        #return _fitz.Annot_set_info(self, info, content, title, creationDate, modDate, subject)
+        annot = self.this
+        # use this to indicate a 'markup' annot type
+        is_markup = mupdf.mpdf_annot_has_author(annot)
+        # contents
+        if content:
+            mupdf.mpdf_set_annot_contents(annot, content)
+
+        if is_markup:
+            # title (= author)
+            if title:
+                mupdf.mpdf_set_annot_author(annot, title)
+            # creation date
+            if creationDate:
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('CreationDate'), creationDate)
+            # mod date
+            if modDate:
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('M'), modDate)
+            # subject
+            if subject:
+                mupdf.mpdf_dict_puts(annot.annot_obj(), "Subj", mupdf.mpdf_new_text_string(subject))
 
     @property
 
     def border(self):
         """Border information."""
         CheckParent(self)
-
-        return _fitz.Annot_border(self)
+        #return _fitz.Annot_border(self)
+        ao = self.this.annot_obj()
+        ret = JM_annot_border(ao)
+        return ret
 
 
     def set_border(self, border=None, width=0, style=None, dashes=None):
@@ -7049,7 +10116,9 @@ class Annot:
             border = {"width": width, "style": style, "dashes": dashes}
 
 
-        return _fitz.Annot_set_border(self, border, width, style, dashes)
+        #return _fitz.Annot_set_border(self, border, width, style, dashes)
+        annot = self.this
+        return JM_annot_set_border(border, annot.annot_page().doc(), annot.annot_obj())
 
     @property
 
@@ -7086,20 +10155,31 @@ class Annot:
         """Next annotation."""
         CheckParent(self)
 
-        val = _fitz.Annot_next(self)
+        #val = _fitz.Annot_next(self)
+        this_annot = self.this
+        assert isinstance(this_annot, mupdf.PdfAnnot)
+        assert(this_annot.m_internal)
+        type_ = mupdf.mpdf_annot_type(this_annot)
+        if type_ != mupdf.PDF_ANNOT_WIDGET:
+            annot = mupdf.mpdf_next_annot(this_annot)
+        else:
+            #annot = (pdf_widget *) pdf_next_widget(gctx, (pdf_widget *) this_annot);
+            annot = mupdf.mpdf_next_widget(this_annot)
+
+        val = Annot(self.parent, annot) if annot.m_internal else None
 
         if not val:
             return None
         val.thisown = True
-        val.parent = self.parent  # copy owning page object from previous annot
+
+        assert val.parent == self.parent
+        #val.parent = self.parent  # copy owning page object from previous annot
         val.parent._annot_refs[id(val)] = val
 
-        if val.type[0] == PDF_ANNOT_WIDGET:
+        if val.type[0] == mupdf.PDF_ANNOT_WIDGET:
             widget = Widget()
             TOOLS._fill_widget(val, widget)
             val = widget
-
-
         return val
 
 
@@ -7107,12 +10187,28 @@ class Annot:
         """annotation Pixmap"""
 
         CheckParent(self)
-        cspaces = {"gray": csGRAY, "rgb": csRGB, "cmyk": csCMYK}
-        if type(colorspace) is str:
-            colorspace = cspaces.get(colorspace.lower(), None)
+        #cspaces = {"gray": mupdf.csGRAY, "rgb": mupdf.csRGB, "cmyk": mupdf.csCMYK}
+        #if type(colorspace) is str:
+        #    colorspace = cspaces.get(colorspace.lower(), None)
 
 
-        return _fitz.Annot_get_pixmap(self, matrix, colorspace, alpha)
+        #return _fitz.Annot_get_pixmap(self, matrix, colorspace, alpha)
+        ctm = JM_matrix_from_py(matrix)
+        cs = None
+        if isinstance(colorspace, str):
+            colorspace = colorspace.toupper()
+            f = getattr(f'mupdf.Colorspace.Fixed_{colorspace}', None)
+            if f:
+                cs = mupdf.Colorspace(f)
+        if cs is None:
+            cs = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
+        try:
+            pix = mupdf.mpdf_new_pixmap_from_annot(self.this, ctm, cs, mupdf.Separations(0), alpha)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        jlib.log('{pix=}')
+        return Pixmap(pix)
 
 
     blendmode = property(blendMode, doc="annotation BlendMode")
@@ -7253,8 +10349,8 @@ class Link:
             val.parent = self.parent  # copy owning page from prev link
             val.parent._annot_refs[id(val)] = val
             if self.xref > 0:  # prev link has an xref
-                link_xrefs = [x[0] for x in self.parent.annot_xrefs() if x[1] == PDF_ANNOT_LINK]
-                link_ids = [x[2] for x in self.parent.annot_xrefs() if x[1] == PDF_ANNOT_LINK]
+                link_xrefs = [x[0] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
+                link_ids = [x[2] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
                 idx = link_xrefs.index(self.xref)
                 val.xref = link_xrefs[idx + 1]
                 val.id = link_ids[idx + 1]
@@ -7783,491 +10879,944 @@ class Font:
         if type(self) is not Font:
             return None
 
-class Tools:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Tools, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Tools, name)
 
-    def gen_id(self):
-        """Return a unique positive integer."""
-
-        return _fitz.Tools_gen_id(self)
-
-
-    def set_icc(self, on=0):
-        """Set ICC color handling on or off."""
-
-        return _fitz.Tools_set_icc(self, on)
-
-
-    def set_annot_stem(self, stem=None):
-        """Get / set id prefix for annotations."""
-
-        return _fitz.Tools_set_annot_stem(self, stem)
-
-
-    def set_small_glyph_heights(self, on=None):
-        """Set / unset small glyph heights."""
-
-        return _fitz.Tools_set_small_glyph_heights(self, on)
-
-
-    def store_shrink(self, percent):
-        """Free 'percent' of current store size."""
-
-        return _fitz.Tools_store_shrink(self, percent)
-
-    @property
-
-    def store_size(self):
-        """MuPDF current store size."""
-
-        return _fitz.Tools_store_size(self)
-
-    @property
-
-    def store_maxsize(self):
-        """MuPDF store size limit."""
-
-        return _fitz.Tools_store_maxsize(self)
-
-
-    def show_aa_level(self):
-        """Show anti-aliasing values."""
-
-        val = _fitz.Tools_show_aa_level(self)
-
-        temp = {"graphics": val[0], "text": val[1], "graphics_min_line_width": val[2]}
-        val = temp
-
-        return val
-
-
-    def set_aa_level(self, level):
-        """Set anti-aliasing level."""
-
-        return _fitz.Tools_set_aa_level(self, level)
-
-
-    def set_graphics_min_line_width(self, min_line_width):
-        """Set the graphics minimum line width."""
-
-        return _fitz.Tools_set_graphics_min_line_width(self, min_line_width)
-
-
-    def image_profile(self, stream, keep_image=0):
-        """Metadata of an image binary stream."""
-
-        return _fitz.Tools_image_profile(self, stream, keep_image)
-
-
-    def _rotate_matrix(self, page):
-        return _fitz.Tools__rotate_matrix(self, page)
-
-    def _derotate_matrix(self, page):
-        return _fitz.Tools__derotate_matrix(self, page)
-    @property
-
-    def fitz_config(self):
-        """PyMuPDF configuration parameters."""
-
-        return _fitz.Tools_fitz_config(self)
-
-
-    def glyph_cache_empty(self):
-        """Empty the glyph cache."""
-
-        return _fitz.Tools_glyph_cache_empty(self)
-
-
-    def _fill_widget(self, annot, widget):
-        val = _fitz.Tools__fill_widget(self, annot, widget)
-
-        widget.rect = Rect(annot.rect)
-        widget.xref = annot.xref
-        widget.parent = annot.parent
-        widget._annot = annot  # backpointer to annot object
-        if not widget.script:
-            widget.script = None
-        if not widget.script_stroke:
-            widget.script_stroke = None
-        if not widget.script_format:
-            widget.script_format = None
-        if not widget.script_change:
-            widget.script_change = None
-        if not widget.script_calc:
-            widget.script_calc = None
-
-
-        return val
-
-
-    def _save_widget(self, annot, widget):
-        return _fitz.Tools__save_widget(self, annot, widget)
-
-    def _reset_widget(self, annot):
-        return _fitz.Tools__reset_widget(self, annot)
-
-    def _parse_da(self, annot):
-        val = _fitz.Tools__parse_da(self, annot)
-
-        if not val:
-            return ((0,), "", 0)
-        font = "Helv"
-        fsize = 12
-        col = (0, 0, 0)
-        dat = val.split()  # split on any whitespace
-        for i, item in enumerate(dat):
-            if item == "Tf":
-                font = dat[i - 2][1:]
-                fsize = float(dat[i - 1])
-                dat[i] = dat[i-1] = dat[i-2] = ""
-                continue
-            if item == "g":            # unicolor text
-                col = [(float(dat[i - 1]))]
-                dat[i] = dat[i-1] = ""
-                continue
-            if item == "rg":           # RGB colored text
-                col = [float(f) for f in dat[i - 3:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
-                continue
-            if item == "k":           # CMYK colored text
-                col = [float(f) for f in dat[i - 4:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = dat[i-4] = ""
-                continue
-
-        val = (col, font, fsize)
-
-
-        return val
-
-
-    def _update_da(self, annot, da_str):
-        return _fitz.Tools__update_da(self, annot, da_str)
-
-    def _get_all_contents(self, fzpage):
-        """Concatenate all /Contents objects of a page into a bytes object."""
-
-        return _fitz.Tools__get_all_contents(self, fzpage)
-
-
-    def _insert_contents(self, page, newcont, overlay=1):
-        """Add bytes as a new /Contents object for a page, and return its xref."""
-
-        return _fitz.Tools__insert_contents(self, page, newcont, overlay)
-
-
-    def mupdf_version(self):
-        """Get version of MuPDF binary build."""
-
-        return _fitz.Tools_mupdf_version(self)
-
-
-    def mupdf_warnings(self, reset=1):
-        """Get the MuPDF warnings/errors with optional reset (default)."""
-
-        val = _fitz.Tools_mupdf_warnings(self, reset)
-
-        val = "\n".join(val)
-        if reset:
-            self.reset_mupdf_warnings()
-
-        return val
-
-
-    def _int_from_language(self, language):
-        return _fitz.Tools__int_from_language(self, language)
-
-    def reset_mupdf_warnings(self):
-        """Empty the MuPDF warnings/errors store."""
-
-        return _fitz.Tools_reset_mupdf_warnings(self)
-
-
-    def mupdf_display_errors(self, value=None):
-        """Set MuPDF error display to True or False."""
-
-        return _fitz.Tools_mupdf_display_errors(self, value)
-
-
-    def _transform_rect(self, rect, matrix):
-        return _fitz.Tools__transform_rect(self, rect, matrix)
-
-    def _intersect_rect(self, r1, r2):
-        return _fitz.Tools__intersect_rect(self, r1, r2)
-
-    def _include_point_in_rect(self, r, p):
-        return _fitz.Tools__include_point_in_rect(self, r, p)
-
-    def _transform_point(self, point, matrix):
-        return _fitz.Tools__transform_point(self, point, matrix)
-
-    def _union_rect(self, r1, r2):
-        return _fitz.Tools__union_rect(self, r1, r2)
-
-    def _concat_matrix(self, m1, m2):
-        return _fitz.Tools__concat_matrix(self, m1, m2)
-
-    def _invert_matrix(self, matrix):
-        return _fitz.Tools__invert_matrix(self, matrix)
-
-    def _measure_string(self, text, fontname, fontsize, encoding=0):
-        return _fitz.Tools__measure_string(self, text, fontname, fontsize, encoding)
-
-    def _sine_between(self, C, P, Q):
-        return _fitz.Tools__sine_between(self, C, P, Q)
-
-    def _hor_matrix(self, C, P):
-        return _fitz.Tools__hor_matrix(self, C, P)
-
-    def set_font_width(self, doc, xref, width):
-        return _fitz.Tools_set_font_width(self, doc, xref, width)
-
-    def _le_annot_parms(self, annot, p1, p2, fill_color):
-        """Get common parameters for making annot line end symbols.
-
-        Returns:
-            m: matrix that maps p1, p2 to points L, P on the x-axis
-            im: its inverse
-            L, P: transformed p1, p2
-            w: line width
-            scol: stroke color string
-            fcol: fill color store_shrink
-            opacity: opacity string (gs command)
+class Shape(object):
+    """Create a new shape."""
+
+    @staticmethod
+    def horizontal_angle(C, P):
+        """Return the angle to the horizontal for the connection from C to P.
+        This uses the arcus sine function and resolves its inherent ambiguity by
+        looking up in which quadrant vector S = P - C is located.
         """
-        w = annot.border["width"]  # line width
-        sc = annot.colors["stroke"]  # stroke color
-        if not sc:  # black if missing
-            sc = (0,0,0)
-        scol = " ".join(map(str, sc)) + " RG\n"
-        if fill_color:
-            fc = fill_color
+        S = Point(P - C).unit  # unit vector 'C' -> 'P'
+        alfa = math.asin(abs(S.y))  # absolute angle from horizontal
+        if S.x < 0:  # make arcsin result unique
+            if S.y <= 0:  # bottom-left
+                alfa = -(math.pi - alfa)
+            else:  # top-left
+                alfa = math.pi - alfa
         else:
-            fc = annot.colors["fill"]  # fill color
-        if not fc:
-            fc = (1,1,1)  # white if missing
-        fcol = " ".join(map(str, fc)) + " rg\n"
-    # nr = annot.rect
-        np1 = p1                   # point coord relative to annot rect
-        np2 = p2                   # point coord relative to annot rect
-        m = Matrix(self._hor_matrix(np1, np2))  # matrix makes the line horizontal
-        im = ~m                            # inverted matrix
-        L = np1 * m                        # converted start (left) point
-        R = np2 * m                        # converted end (right) point
-        if 0 <= annot.opacity < 1:
-            opacity = "/H gs\n"
+            if S.y >= 0:  # top-right
+                pass
+            else:  # bottom-right
+                alfa = -alfa
+        return alfa
+
+    def __init__(self, page: Page):
+        CheckParent(page)
+        self.page = page
+        self.doc = page.parent
+        if not self.doc.is_pdf:
+            raise ValueError("not a PDF")
+        self.height = page.mediabox_size.y
+        self.width = page.mediabox_size.x
+        self.x = page.cropbox_position.x
+        self.y = page.cropbox_position.y
+
+        self.pctm = page.transformation_matrix  # page transf. matrix
+        self.ipctm = ~self.pctm  # inverted transf. matrix
+
+        self.draw_cont = ""
+        self.text_cont = ""
+        self.totalcont = ""
+        self.lastPoint = None
+        self.rect = None
+
+    def updateRect(self, x):
+        if self.rect is None:
+            if len(x) == 2:
+                self.rect = Rect(x, x)
+            else:
+                self.rect = Rect(x)
+
         else:
-            opacity = ""
-        return m, im, L, R, w, scol, fcol, opacity
+            if len(x) == 2:
+                x = Point(x)
+                self.rect.x0 = min(self.rect.x0, x.x)
+                self.rect.y0 = min(self.rect.y0, x.y)
+                self.rect.x1 = max(self.rect.x1, x.x)
+                self.rect.y1 = max(self.rect.y1, x.y)
+            else:
+                x = Rect(x)
+                self.rect.x0 = min(self.rect.x0, x.x0)
+                self.rect.y0 = min(self.rect.y0, x.y0)
+                self.rect.x1 = max(self.rect.x1, x.x1)
+                self.rect.y1 = max(self.rect.y1, x.y1)
 
-    def _oval_string(self, p1, p2, p3, p4):
-        """Return /AP string defining an oval within a 4-polygon provided as points
-        """
-        def bezier(p, q, r):
-            f = "%f %f %f %f %f %f c\n"
-            return f % (p.x, p.y, q.x, q.y, r.x, r.y)
+    def draw_line(self, p1: point_like, p2: point_like) -> Point:
+        """Draw a line between two points."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        if not (self.lastPoint == p1):
+            self.draw_cont += "%g %g m\n" % JM_TUPLE(p1 * self.ipctm)
+            self.lastPoint = p1
+            self.updateRect(p1)
 
-        kappa = 0.55228474983              # magic number
-        ml = p1 + (p4 - p1) * 0.5          # middle points ...
-        mo = p1 + (p2 - p1) * 0.5          # for each ...
-        mr = p2 + (p3 - p2) * 0.5          # polygon ...
-        mu = p4 + (p3 - p4) * 0.5          # side
-        ol1 = ml + (p1 - ml) * kappa       # the 8 bezier
-        ol2 = mo + (p1 - mo) * kappa       # helper points
-        or1 = mo + (p2 - mo) * kappa
-        or2 = mr + (p2 - mr) * kappa
-        ur1 = mr + (p3 - mr) * kappa
-        ur2 = mu + (p3 - mu) * kappa
-        ul1 = mu + (p4 - mu) * kappa
-        ul2 = ml + (p4 - ml) * kappa
-    # now draw, starting from middle point of left side
-        ap = "%f %f m\n" % (ml.x, ml.y)
-        ap += bezier(ol1, ol2, mo)
-        ap += bezier(or1, or2, mr)
-        ap += bezier(ur1, ur2, mu)
-        ap += bezier(ul1, ul2, ml)
-        return ap
+        self.draw_cont += "%g %g l\n" % JM_TUPLE(p2 * self.ipctm)
+        self.updateRect(p2)
+        self.lastPoint = p2
+        return self.lastPoint
 
-    def _le_diamond(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for diamond line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5             # 2*shift*width = length of square edge
-        d = shift * max(1, w)
-        M = R - (d/2., 0) if lr else L + (d/2., 0)
-        r = Rect(M, M) + (-d, -d, d, d)         # the square
-    # the square makes line longer by (2*shift - 1)*width
-        p = (r.tl + (r.bl - r.tl) * 0.5) * im
-        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
-        p = (r.tl + (r.tr - r.tl) * 0.5) * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = (r.tr + (r.br - r.tr) * 0.5) * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = (r.br + (r.bl - r.br) * 0.5) * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
+    def draw_polyline(self, points: list) -> Point:
+        """Draw several connected line segments."""
+        for i, p in enumerate(points):
+            if i == 0:
+                if not (self.lastPoint == Point(p)):
+                    self.draw_cont += "%g %g m\n" % JM_TUPLE(Point(p) * self.ipctm)
+                    self.lastPoint = Point(p)
+            else:
+                self.draw_cont += "%g %g l\n" % JM_TUPLE(Point(p) * self.ipctm)
+            self.updateRect(p)
 
-    def _le_square(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for square line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5             # 2*shift*width = length of square edge
-        d = shift * max(1, w)
-        M = R - (d/2., 0) if lr else L + (d/2., 0)
-        r = Rect(M, M) + (-d, -d, d, d)         # the square
-    # the square makes line longer by (2*shift - 1)*width
-        p = r.tl * im
-        ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
-        p = r.tr * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = r.br * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        p = r.bl * im
-        ap += "%f %f l\n"   % (p.x, p.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
+        self.lastPoint = Point(points[-1])
+        return self.lastPoint
 
-    def _le_circle(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for circle line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5             # 2*shift*width = length of square edge
-        d = shift * max(1, w)
-        M = R - (d/2., 0) if lr else L + (d/2., 0)
-        r = Rect(M, M) + (-d, -d, d, d)         # the square
-        ap = "q\n" + opacity + self._oval_string(r.tl * im, r.tr * im, r.br * im, r.bl * im)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
+    def draw_bezier(
+        self,
+        p1: point_like,
+        p2: point_like,
+        p3: point_like,
+        p4: point_like,
+    ) -> Point:
+        """Draw a standard cubic Bezier curve."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        p3 = Point(p3)
+        p4 = Point(p4)
+        if not (self.lastPoint == p1):
+            self.draw_cont += "%g %g m\n" % JM_TUPLE(p1 * self.ipctm)
+        self.draw_cont += "%g %g %g %g %g %g c\n" % JM_TUPLE(
+            list(p2 * self.ipctm) + list(p3 * self.ipctm) + list(p4 * self.ipctm)
+        )
+        self.updateRect(p1)
+        self.updateRect(p2)
+        self.updateRect(p3)
+        self.updateRect(p4)
+        self.lastPoint = p4
+        return self.lastPoint
 
-    def _le_butt(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for butt line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 3
-        d = shift * max(1, w)
-        M = R if lr else L
-        top = (M + (0, -d/2.)) * im
-        bot = (M + (0, d/2.)) * im
-        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
-        ap += "%f %f l\n" % (bot.x, bot.y)
-        ap += "%g w\n" % w
-        ap += scol + "s\nQ\n"
-        return ap
+    def draw_oval(self, tetra: typing.Union[quad_like, rect_like]) -> Point:
+        """Draw an ellipse inside a tetrapod."""
+        if len(tetra) != 4:
+            raise ValueError("invalid arg length")
+        if hasattr(tetra[0], "__float__"):
+            q = Rect(tetra).quad
+        else:
+            q = Quad(tetra)
 
-    def _le_slash(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for slash line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        rw = 1.1547 * max(1, w) * 1.0         # makes rect diagonal a 30 deg inclination
-        M = R if lr else L
-        r = Rect(M.x - rw, M.y - 2 * w, M.x + rw, M.y + 2 * w)
-        top = r.tl * im
-        bot = r.br * im
-        ap = "\nq\n%s%f %f m\n" % (opacity, top.x, top.y)
-        ap += "%f %f l\n" % (bot.x, bot.y)
-        ap += "%g w\n" % w
-        ap += scol + "s\nQ\n"
-        return ap
+        mt = q.ul + (q.ur - q.ul) * 0.5
+        mr = q.ur + (q.lr - q.ur) * 0.5
+        mb = q.ll + (q.lr - q.ll) * 0.5
+        ml = q.ul + (q.ll - q.ul) * 0.5
+        if not (self.lastPoint == ml):
+            self.draw_cont += "%g %g m\n" % JM_TUPLE(ml * self.ipctm)
+            self.lastPoint = ml
+        self.draw_curve(ml, q.ll, mb)
+        self.draw_curve(mb, q.lr, mr)
+        self.draw_curve(mr, q.ur, mt)
+        self.draw_curve(mt, q.ul, ml)
+        self.updateRect(q.rect)
+        self.lastPoint = ml
+        return self.lastPoint
 
-    def _le_openarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for open arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
-        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
-        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + "S\nQ\n"
-        return ap
+    def draw_circle(self, center: point_like, radius: float) -> Point:
+        """Draw a circle given its center and radius."""
+        if not radius > EPSILON:
+            raise ValueError("radius must be postive")
+        center = Point(center)
+        p1 = center - (radius, 0)
+        return self.draw_sector(center, p1, 360, fullSector=False)
 
-    def _le_closedarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for closed arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R + (d/2., 0) if lr else L - (d/2., 0)
-        p1 = p2 + (-2*d, -d) if lr else p2 + (2*d, -d)
-        p3 = p2 + (-2*d, d) if lr else p2 + (2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
+    def draw_curve(
+        self,
+        p1: point_like,
+        p2: point_like,
+        p3: point_like,
+    ) -> Point:
+        """Draw a curve between points using one control point."""
+        kappa = 0.55228474983
+        p1 = Point(p1)
+        p2 = Point(p2)
+        p3 = Point(p3)
+        k1 = p1 + (p2 - p1) * kappa
+        k2 = p3 + (p2 - p3) * kappa
+        return self.draw_bezier(p1, k1, k2, p3)
 
-    def _le_ropenarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for right open arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R - (d/3., 0) if lr else L + (d/3., 0)
-        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
-        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "S\nQ\n"
-        return ap
+    def draw_sector(
+        self,
+        center: point_like,
+        point: point_like,
+        beta: float,
+        fullSector: bool = True,
+    ) -> Point:
+        """Draw a circle sector."""
+        center = Point(center)
+        point = Point(point)
+        l3 = "%g %g m\n"
+        l4 = "%g %g %g %g %g %g c\n"
+        l5 = "%g %g l\n"
+        betar = math.radians(-beta)
+        w360 = math.radians(math.copysign(360, betar)) * (-1)
+        w90 = math.radians(math.copysign(90, betar))
+        w45 = w90 / 2
+        while abs(betar) > 2 * math.pi:
+            betar += w360  # bring angle below 360 degrees
+        if not (self.lastPoint == point):
+            self.draw_cont += l3 % JM_TUPLE(point * self.ipctm)
+            self.lastPoint = point
+        Q = Point(0, 0)  # just make sure it exists
+        C = center
+        P = point
+        S = P - C  # vector 'center' -> 'point'
+        rad = abs(S)  # circle radius
 
-    def _le_rclosedarrow(self, annot, p1, p2, lr, fill_color):
-        """Make stream commands for right closed arrow line end symbol. "lr" denotes left (False) or right point.
-        """
-        m, im, L, R, w, scol, fcol, opacity = self._le_annot_parms(annot, p1, p2, fill_color)
-        shift = 2.5
-        d = shift * max(1, w)
-        p2 = R - (2*d, 0) if lr else L + (2*d, 0)
-        p1 = p2 + (2*d, -d) if lr else p2 + (-2*d, -d)
-        p3 = p2 + (2*d, d) if lr else p2 + (-2*d, d)
-        p1 *= im
-        p2 *= im
-        p3 *= im
-        ap = "\nq\n%s%f %f m\n" % (opacity, p1.x, p1.y)
-        ap += "%f %f l\n" % (p2.x, p2.y)
-        ap += "%f %f l\n" % (p3.x, p3.y)
-        ap += "%g w\n" % w
-        ap += scol + fcol + "b\nQ\n"
-        return ap
+        if not rad > EPSILON:
+            raise ValueError("radius must be positive")
 
+        alfa = self.horizontal_angle(center, point)
+        while abs(betar) > abs(w90):  # draw 90 degree arcs
+            q1 = C.x + math.cos(alfa + w90) * rad
+            q2 = C.y + math.sin(alfa + w90) * rad
+            Q = Point(q1, q2)  # the arc's end point
+            r1 = C.x + math.cos(alfa + w45) * rad / math.cos(w45)
+            r2 = C.y + math.sin(alfa + w45) * rad / math.cos(w45)
+            R = Point(r1, r2)  # crossing point of tangents
+            kappah = (1 - math.cos(w45)) * 4 / 3 / abs(R - Q)
+            kappa = kappah * abs(P - Q)
+            cp1 = P + (R - P) * kappa  # control point 1
+            cp2 = Q + (R - Q) * kappa  # control point 2
+            self.draw_cont += l4 % JM_TUPLE(
+                list(cp1 * self.ipctm) + list(cp2 * self.ipctm) + list(Q * self.ipctm)
+            )
 
-    def __init__(self):
-        this = _fitz.new_Tools()
+            betar -= w90  # reduce parm angle by 90 deg
+            alfa += w90  # advance start angle by 90 deg
+            P = Q  # advance to arc end point
+        # draw (remaining) arc
+        if abs(betar) > 1e-3:  # significant degrees left?
+            beta2 = betar / 2
+            q1 = C.x + math.cos(alfa + betar) * rad
+            q2 = C.y + math.sin(alfa + betar) * rad
+            Q = Point(q1, q2)  # the arc's end point
+            r1 = C.x + math.cos(alfa + beta2) * rad / math.cos(beta2)
+            r2 = C.y + math.sin(alfa + beta2) * rad / math.cos(beta2)
+            R = Point(r1, r2)  # crossing point of tangents
+            # kappa height is 4/3 of segment height
+            kappah = (1 - math.cos(beta2)) * 4 / 3 / abs(R - Q)  # kappa height
+            kappa = kappah * abs(P - Q) / (1 - math.cos(betar))
+            cp1 = P + (R - P) * kappa  # control point 1
+            cp2 = Q + (R - Q) * kappa  # control point 2
+            self.draw_cont += l4 % JM_TUPLE(
+                list(cp1 * self.ipctm) + list(cp2 * self.ipctm) + list(Q * self.ipctm)
+            )
+        if fullSector:
+            self.draw_cont += l3 % JM_TUPLE(point * self.ipctm)
+            self.draw_cont += l5 % JM_TUPLE(center * self.ipctm)
+            self.draw_cont += l5 % JM_TUPLE(Q * self.ipctm)
+        self.lastPoint = Q
+        return self.lastPoint
+
+    def draw_rect(self, rect: rect_like) -> Point:
+        """Draw a rectangle."""
+        r = Rect(rect)
+        self.draw_cont += "%g %g %g %g re\n" % JM_TUPLE(
+            list(r.bl * self.ipctm) + [r.width, r.height]
+        )
+        self.updateRect(r)
+        self.lastPoint = r.tl
+        return self.lastPoint
+
+    def draw_quad(self, quad: quad_like) -> Point:
+        """Draw a Quad."""
+        q = Quad(quad)
+        return self.draw_polyline([q.ul, q.ll, q.lr, q.ur, q.ul])
+
+    def draw_zigzag(
+        self,
+        p1: point_like,
+        p2: point_like,
+        breadth: float = 2,
+    ) -> Point:
+        """Draw a zig-zagged line from p1 to p2."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        S = p2 - p1  # vector start - end
+        rad = abs(S)  # distance of points
+        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
+        if cnt < 4:
+            raise ValueError("points too close")
+        mb = rad / cnt  # revised breadth
+        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
+        i_mat = ~matrix  # get original position
+        points = []  # stores edges
+        for i in range(1, cnt):
+            if i % 4 == 1:  # point "above" connection
+                p = Point(i, -1) * mb
+            elif i % 4 == 3:  # point "below" connection
+                p = Point(i, 1) * mb
+            else:  # ignore others
+                continue
+            points.append(p * i_mat)
+        self.draw_polyline([p1] + points + [p2])  # add start and end points
+        return p2
+
+    def draw_squiggle(
+        self,
+        p1: point_like,
+        p2: point_like,
+        breadth=2,
+    ) -> Point:
+        """Draw a squiggly line from p1 to p2."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        S = p2 - p1  # vector start - end
+        rad = abs(S)  # distance of points
+        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
+        if cnt < 4:
+            raise ValueError("points too close")
+        mb = rad / cnt  # revised breadth
+        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
+        i_mat = ~matrix  # get original position
+        k = 2.4142135623765633  # y of draw_curve helper point
+
+        points = []  # stores edges
+        for i in range(1, cnt):
+            if i % 4 == 1:  # point "above" connection
+                p = Point(i, -k) * mb
+            elif i % 4 == 3:  # point "below" connection
+                p = Point(i, k) * mb
+            else:  # else on connection line
+                p = Point(i, 0) * mb
+            points.append(p * i_mat)
+
+        points = [p1] + points + [p2]
+        cnt = len(points)
+        i = 0
+        while i + 2 < cnt:
+            self.draw_curve(points[i], points[i + 1], points[i + 2])
+            i += 2
+        return p2
+
+    # ==============================================================================
+    # Shape.insert_text
+    # ==============================================================================
+    def insert_text(
+        self,
+        point: point_like,
+        buffer: typing.Union[str, list],
+        fontsize: float = 11,
+        lineheight: OptFloat = None,
+        fontname: str = "helv",
+        fontfile: OptStr = None,
+        set_simple: bool = 0,
+        encoding: int = 0,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        render_mode: int = 0,
+        border_width: float = 1,
+        rotate: int = 0,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> int:
+
+        # ensure 'text' is a list of strings, worth dealing with
+        if not bool(buffer):
+            return 0
+
+        if type(buffer) not in (list, tuple):
+            text = buffer.splitlines()
+        else:
+            text = buffer
+
+        if not len(text) > 0:
+            return 0
+
+        point = Point(point)
         try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+            maxcode = max([ord(c) for c in " ".join(text)])
+        except:
+            return 0
 
+        # ensure valid 'fontname'
+        fname = fontname
+        if fname.startswith("/"):
+            fname = fname[1:]
 
+        xref = self.page.insert_font(
+            fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
+        )
+        fontinfo = CheckFontInfo(self.doc, xref)
 
+        fontdict = fontinfo[1]
+        ordering = fontdict["ordering"]
+        simple = fontdict["simple"]
+        bfname = fontdict["name"]
+        ascender = fontdict["ascender"]
+        descender = fontdict["descender"]
+        if lineheight:
+            lheight = fontsize * lineheight
+        elif ascender - descender <= 1:
+            lheight = fontsize * 1.2
+        else:
+            lheight = fontsize * (ascender - descender)
 
+        if maxcode > 255:
+            glyphs = self.doc.get_char_widths(xref, maxcode + 1)
+        else:
+            glyphs = fontdict["glyphs"]
 
+        tab = []
+        for t in text:
+            if simple and bfname not in ("Symbol", "ZapfDingbats"):
+                g = None
+            else:
+                g = glyphs
+            tab.append(getTJstr(t, g, simple, ordering))
+        text = tab
 
+        color_str = ColorCode(color, "c")
+        fill_str = ColorCode(fill, "f")
+        if not fill and render_mode == 0:  # ensure fill color when 0 Tr
+            fill = color
+            fill_str = ColorCode(color, "f")
 
+        morphing = CheckMorph(morph)
+        rot = rotate
+        if rot % 90 != 0:
+            raise ValueError("bad rotate value")
 
+        while rot < 0:
+            rot += 360
+        rot = rot % 360  # text rotate = 0, 90, 270, 180
 
+        templ1 = "\nq\n%s%sBT\n%s1 0 0 1 %g %g Tm\n/%s %g Tf "
+        templ2 = "TJ\n0 -%g TD\n"
+        cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates 90 deg counter-clockwise
+        cmm90 = "0 -1 1 0 0 0 cm\n"  # rotates 90 deg clockwise
+        cm180 = "-1 0 0 -1 0 0 cm\n"  # rotates by 180 deg.
+        height = self.height
+        width = self.width
 
+        # setting up for standard rotation directions
+        # case rotate = 0
+        if morphing:
+            m1 = Matrix(1, 0, 0, 1, morph[0].x + self.x, height - morph[0].y - self.y)
+            mat = ~m1 * morph[1] * m1
+            cm = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat)
+        else:
+            cm = ""
+        top = height - point.y - self.y  # start of 1st char
+        left = point.x + self.x  # start of 1. char
+        space = top  # space available
+        headroom = point.y + self.y  # distance to page border
+        if rot == 90:
+            left = height - point.y - self.y
+            top = -point.x - self.x
+            cm += cmp90
+            space = width - abs(top)
+            headroom = point.x + self.x
 
+        elif rot == 270:
+            left = -height + point.y + self.y
+            top = point.x + self.x
+            cm += cmm90
+            space = abs(top)
+            headroom = width - point.x - self.x
+
+        elif rot == 180:
+            left = -point.x - self.x
+            top = -height + point.y + self.y
+            cm += cm180
+            space = abs(point.y + self.y)
+            headroom = height - point.y - self.y
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont != None:
+            bdc = "/OC /%s BDC\n" % optcont
+            emc = "EMC\n"
+        else:
+            bdc = emc = ""
+
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha == None:
+            alpha = ""
+        else:
+            alpha = "/%s gs\n" % alpha
+        nres = templ1 % (bdc, alpha, cm, left, top, fname, fontsize)
+        if render_mode > 0:
+            nres += "%i Tr " % render_mode
+        if border_width != 1:
+            nres += "%g w " % border_width
+        if color is not None:
+            nres += color_str
+        if fill is not None:
+            nres += fill_str
+
+        # =========================================================================
+        #   start text insertion
+        # =========================================================================
+        nres += text[0]
+        nlines = 1  # set output line counter
+        if len(text) > 1:
+            nres += templ2 % lheight  # line 1
+        else:
+            nres += templ2[:2]
+        for i in range(1, len(text)):
+            if space < lheight:
+                break  # no space left on page
+            if i > 1:
+                nres += "\nT* "
+            nres += text[i] + templ2[:2]
+            space -= lheight
+            nlines += 1
+
+        nres += "\nET\n%sQ\n" % emc
+
+        # =========================================================================
+        #   end of text insertion
+        # =========================================================================
+        # update the /Contents object
+        self.text_cont += nres
+        return nlines
+
+    # ==============================================================================
+    # Shape.insert_textbox
+    # ==============================================================================
+    def insert_textbox(
+        self,
+        rect: rect_like,
+        buffer: typing.Union[str, list],
+        fontname: OptStr = "helv",
+        fontfile: OptStr = None,
+        fontsize: float = 11,
+        lineheight: OptFloat = None,
+        set_simple: bool = 0,
+        encoding: int = 0,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        expandtabs: int = 1,
+        border_width: float = 1,
+        align: int = 0,
+        render_mode: int = 0,
+        rotate: int = 0,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> float:
+        """Insert text into a given rectangle.
+
+        Args:
+            rect -- the textbox to fill
+            buffer -- text to be inserted
+            fontname -- a Base-14 font, font name or '/name'
+            fontfile -- name of a font file
+            fontsize -- font size
+            lineheight -- overwrite the font property
+            color -- RGB stroke color triple
+            fill -- RGB fill color triple
+            render_mode -- text rendering control
+            border_width -- thickness of glyph borders
+            expandtabs -- handles tabulators with string function
+            align -- left, center, right, justified
+            rotate -- 0, 90, 180, or 270 degrees
+            morph -- morph box with a matrix and a fixpoint
+        Returns:
+            unused or deficit rectangle area (float)
+        """
+        rect = Rect(rect)
+        if rect.is_empty or rect.is_infinite:
+            raise ValueError("text box must be finite and not empty")
+
+        color_str = ColorCode(color, "c")
+        fill_str = ColorCode(fill, "f")
+        if fill is None and render_mode == 0:  # ensure fill color for 0 Tr
+            fill = color
+            fill_str = ColorCode(color, "f")
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont != None:
+            bdc = "/OC /%s BDC\n" % optcont
+            emc = "EMC\n"
+        else:
+            bdc = emc = ""
+
+        # determine opacity / transparency
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha == None:
+            alpha = ""
+        else:
+            alpha = "/%s gs\n" % alpha
+
+        if rotate % 90 != 0:
+            raise ValueError("rotate must be multiple of 90")
+
+        rot = rotate
+        while rot < 0:
+            rot += 360
+        rot = rot % 360
+
+        # is buffer worth of dealing with?
+        if not bool(buffer):
+            return rect.height if rot in (0, 180) else rect.width
+
+        cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates counter-clockwise
+        cmm90 = "0 -1 1 0 0 0 cm\n"  # rotates clockwise
+        cm180 = "-1 0 0 -1 0 0 cm\n"  # rotates by 180 deg.
+        height = self.height
+
+        fname = fontname
+        if fname.startswith("/"):
+            fname = fname[1:]
+
+        xref = self.page.insert_font(
+            fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
+        )
+        fontinfo = CheckFontInfo(self.doc, xref)
+
+        fontdict = fontinfo[1]
+        ordering = fontdict["ordering"]
+        simple = fontdict["simple"]
+        glyphs = fontdict["glyphs"]
+        bfname = fontdict["name"]
+        ascender = fontdict["ascender"]
+        descender = fontdict["descender"]
+
+        if lineheight:
+            lheight_factor = lineheight
+        elif ascender - descender <= 1:
+            lheight_factor = 1.2
+        else:
+            lheight_factor = ascender - descender
+        lheight = fontsize * lheight_factor
+
+        # create a list from buffer, split into its lines
+        if type(buffer) in (list, tuple):
+            t0 = "\n".join(buffer)
+        else:
+            t0 = buffer
+
+        maxcode = max([ord(c) for c in t0])
+        # replace invalid char codes for simple fonts
+        if simple and maxcode > 255:
+            t0 = "".join([c if ord(c) < 256 else "?" for c in t0])
+
+        t0 = t0.splitlines()
+
+        glyphs = self.doc.get_char_widths(xref, maxcode + 1)
+        if simple and bfname not in ("Symbol", "ZapfDingbats"):
+            tj_glyphs = None
+        else:
+            tj_glyphs = glyphs
+
+        # ----------------------------------------------------------------------
+        # calculate pixel length of a string
+        # ----------------------------------------------------------------------
+        def pixlen(x):
+            """Calculate pixel length of x."""
+            if ordering < 0:
+                return sum([glyphs[ord(c)][1] for c in x]) * fontsize
+            else:
+                return len(x) * fontsize
+
+        # ----------------------------------------------------------------------
+
+        if ordering < 0:
+            blen = glyphs[32][1] * fontsize  # pixel size of space character
+        else:
+            blen = fontsize
+
+        text = ""  # output buffer
+
+        if CheckMorph(morph):
+            m1 = Matrix(
+                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
+            )
+            mat = ~m1 * morph[1] * m1
+            cm = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat)
+        else:
+            cm = ""
+
+        # ---------------------------------------------------------------------------
+        # adjust for text orientation / rotation
+        # ---------------------------------------------------------------------------
+        progr = 1  # direction of line progress
+        c_pnt = Point(0, fontsize * ascender)  # used for line progress
+        if rot == 0:  # normal orientation
+            point = rect.tl + c_pnt  # line 1 is 'lheight' below top
+            pos = point.y + self.y  # y of first line
+            maxwidth = rect.width  # pixels available in one line
+            maxpos = rect.y1 + self.y  # lines must not be below this
+
+        elif rot == 90:  # rotate counter clockwise
+            c_pnt = Point(fontsize * ascender, 0)  # progress in x-direction
+            point = rect.bl + c_pnt  # line 1 'lheight' away from left
+            pos = point.x + self.x  # position of first line
+            maxwidth = rect.height  # pixels available in one line
+            maxpos = rect.x1 + self.x  # lines must not be right of this
+            cm += cmp90
+
+        elif rot == 180:  # text upside down
+            # progress upwards in y direction
+            c_pnt = -Point(0, fontsize * ascender)
+            point = rect.br + c_pnt  # line 1 'lheight' above bottom
+            pos = point.y + self.y  # position of first line
+            maxwidth = rect.width  # pixels available in one line
+            progr = -1  # subtract lheight for next line
+            maxpos = rect.y0 + self.y  # lines must not be above this
+            cm += cm180
+
+        else:  # rotate clockwise (270 or -90)
+            # progress from right to left
+            c_pnt = -Point(fontsize * ascender, 0)
+            point = rect.tr + c_pnt  # line 1 'lheight' left of right
+            pos = point.x + self.x  # position of first line
+            maxwidth = rect.height  # pixels available in one line
+            progr = -1  # subtract lheight for next line
+            maxpos = rect.x0 + self.x  # lines must not left of this
+            cm += cmm90
+
+        # =======================================================================
+        # line loop
+        # =======================================================================
+        just_tab = []  # 'justify' indicators per line
+
+        for i, line in enumerate(t0):
+            line_t = line.expandtabs(expandtabs).split(" ")  # split into words
+            lbuff = ""  # init line buffer
+            rest = maxwidth  # available line pixels
+            # ===================================================================
+            # word loop
+            # ===================================================================
+            for word in line_t:
+                pl_w = pixlen(word)  # pixel len of word
+                if rest >= pl_w:  # will it fit on the line?
+                    lbuff += word + " "  # yes, and append word
+                    rest -= pl_w + blen  # update available line space
+                    continue
+                # word won't fit - output line (if not empty)
+                if len(lbuff) > 0:
+                    lbuff = lbuff.rstrip() + "\n"  # line full, append line break
+                    text += lbuff  # append to total text
+                    pos += lheight * progr  # increase line position
+                    just_tab.append(True)  # line is justify candidate
+                    lbuff = ""  # re-init line buffer
+                rest = maxwidth  # re-init avail. space
+                if pl_w <= maxwidth:  # word shorter than 1 line?
+                    lbuff = word + " "  # start the line with it
+                    rest = maxwidth - pl_w - blen  # update free space
+                    continue
+                # long word: split across multiple lines - char by char ...
+                if len(just_tab) > 0:
+                    just_tab[-1] = False  # reset justify indicator
+                for c in word:
+                    if pixlen(lbuff) <= maxwidth - pixlen(c):
+                        lbuff += c
+                    else:  # line full
+                        lbuff += "\n"  # close line
+                        text += lbuff  # append to text
+                        pos += lheight * progr  # increase line position
+                        just_tab.append(False)  # do not justify line
+                        lbuff = c  # start new line with this char
+                lbuff += " "  # finish long word
+                rest = maxwidth - pixlen(lbuff)  # long word stored
+
+            if lbuff != "":  # unprocessed line content?
+                text += lbuff.rstrip()  # append to text
+                just_tab.append(False)  # do not justify line
+            if i < len(t0) - 1:  # not the last line?
+                text += "\n"  # insert line break
+                pos += lheight * progr  # increase line position
+
+        more = (pos - maxpos) * progr  # difference to rect size limit
+
+        if more > EPSILON:  # landed too much outside rect
+            return (-1) * more  # return deficit, don't output
+
+        more = abs(more)
+        if more < EPSILON:
+            more = 0  # don't bother with epsilons
+        nres = "\nq\n%s%sBT\n" % (bdc, alpha) + cm  # initialize output buffer
+        templ = "1 0 0 1 %g %g Tm /%s %g Tf "
+        # center, right, justify: output each line with its own specifics
+        spacing = 0
+        text_t = text.splitlines()  # split text in lines again
+        for i, t in enumerate(text_t):
+            pl = maxwidth - pixlen(t)  # length of empty line part
+            pnt = point + c_pnt * (i * lheight_factor)  # text start of line
+            if align == 1:  # center: right shift by half width
+                if rot in (0, 180):
+                    pnt = pnt + Point(pl / 2, 0) * progr
+                else:
+                    pnt = pnt - Point(0, pl / 2) * progr
+            elif align == 2:  # right: right shift by full width
+                if rot in (0, 180):
+                    pnt = pnt + Point(pl, 0) * progr
+                else:
+                    pnt = pnt - Point(0, pl) * progr
+            elif align == 3:  # justify
+                spaces = t.count(" ")  # number of spaces in line
+                if spaces > 0 and just_tab[i]:  # if any, and we may justify
+                    spacing = pl / spaces  # make every space this much larger
+                else:
+                    spacing = 0  # keep normal space length
+            top = height - pnt.y - self.y
+            left = pnt.x + self.x
+            if rot == 90:
+                left = height - pnt.y - self.y
+                top = -pnt.x - self.x
+            elif rot == 270:
+                left = -height + pnt.y + self.y
+                top = pnt.x + self.x
+            elif rot == 180:
+                left = -pnt.x - self.x
+                top = -height + pnt.y + self.y
+
+            nres += templ % (left, top, fname, fontsize)
+            if render_mode > 0:
+                nres += "%i Tr " % render_mode
+            if spacing != 0:
+                nres += "%g Tw " % spacing
+            if color is not None:
+                nres += color_str
+            if fill is not None:
+                nres += fill_str
+            if border_width != 1:
+                nres += "%g w " % border_width
+            nres += "%sTJ\n" % getTJstr(t, tj_glyphs, simple, ordering)
+
+        nres += "ET\n%sQ\n" % emc
+
+        self.text_cont += nres
+        self.updateRect(rect)
+        return more
+
+    def finish(
+        self,
+        width: float = 1,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        dashes: OptStr = None,
+        even_odd: bool = False,
+        morph: OptSeq = None,
+        closePath: bool = True,
+        fill_opacity: float = 1,
+        stroke_opacity: float = 1,
+        oc: int = 0,
+    ) -> None:
+        """Finish the current drawing segment.
+
+        Notes:
+            Apply colors, opacity, dashes, line style and width, or
+            morphing. Also whether to close the path
+            by connecting last to first point.
+        """
+        if self.draw_cont == "":  # treat empty contents as no-op
+            return
+
+        if width == 0:  # border color makes no sense then
+            color = None
+        elif color is None:  # vice versa
+            width = 0
+        color_str = ColorCode(color, "c")  # ensure proper color string
+        fill_str = ColorCode(fill, "f")  # ensure proper fill string
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont is not None:
+            self.draw_cont = "/OC /%s BDC\n" % optcont + self.draw_cont
+            emc = "EMC\n"
+        else:
+            emc = ""
+
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha != None:
+            self.draw_cont = "/%s gs\n" % alpha + self.draw_cont
+
+        if width != 1:
+            self.draw_cont += "%g w\n" % width
+
+        if lineCap != 0:
+            self.draw_cont = "%i J\n" % lineCap + self.draw_cont
+        if lineJoin != 0:
+            self.draw_cont = "%i j\n" % lineJoin + self.draw_cont
+
+        if dashes not in (None, "", "[] 0"):
+            self.draw_cont = "%s d\n" % dashes + self.draw_cont
+
+        if closePath:
+            self.draw_cont += "h\n"
+            self.lastPoint = None
+
+        if color is not None:
+            self.draw_cont += color_str
+
+        if fill is not None:
+            self.draw_cont += fill_str
+            if color is not None:
+                if not even_odd:
+                    self.draw_cont += "B\n"
+                else:
+                    self.draw_cont += "B*\n"
+            else:
+                if not even_odd:
+                    self.draw_cont += "f\n"
+                else:
+                    self.draw_cont += "f*\n"
+        else:
+            self.draw_cont += "S\n"
+
+        self.draw_cont += emc
+        if CheckMorph(morph):
+            m1 = Matrix(
+                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
+            )
+            mat = ~m1 * morph[1] * m1
+            self.draw_cont = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat) + self.draw_cont
+
+        self.totalcont += "\nq\n" + self.draw_cont + "Q\n"
+        self.draw_cont = ""
+        self.lastPoint = None
+        return
+
+    def commit(self, overlay: bool = True) -> None:
+        """Update the page's /Contents object with Shape data. The argument controls whether data appear in foreground (default) or background."""
+        CheckParent(self.page)  # doc may have died meanwhile
+        self.totalcont += self.text_cont
+
+        self.totalcont = self.totalcont.encode()
+
+        if self.totalcont != b"":
+            # make /Contents object with dummy stream
+            xref = TOOLS._insert_contents(self.page, b" ", overlay)
+            # update it with potential compression
+            self.doc.update_stream(xref, self.totalcont)
+
+        self.lastPoint = None  # clean up ...
+        self.rect = None  #
+        self.draw_cont = ""  # for potential ...
+        self.text_cont = ""  # ...
+        self.totalcont = ""  # re-use
+        return
+
+    # define deprecated aliases ------------------------------------------
+    drawBezier = draw_bezier
+    drawCircle = draw_circle
+    drawCurve = draw_curve
+    drawLine = draw_line
+    drawOval = draw_oval
+    drawPolyline = draw_polyline
+    drawQuad = draw_quad
+    drawRect = draw_rect
+    drawSector = draw_sector
+    drawSquiggle = draw_squiggle
+    drawZigzag = draw_zigzag
+    insertText = insert_text
+    insertTextbox = insert_textbox
 
 
 
