@@ -1,16 +1,17 @@
 # Import Auto-generated MuPDF python bindings
 #
 
+import hashlib
+import math
 import sys
+import typing
+import weakref
 
 sys.path.append('scripts')
 import jlib
 
 import mupdf
 
-import weakref
-import hashlib
-import typing
 
 
 def PDF_NAME(x):
@@ -1820,6 +1821,7 @@ class Point(object):
 class Rect(object):
     """Rect() - all zeros\nRect(x0, y0, x1, y1)\nRect(top-left, x1, y1)\nRect(x0, y0, bottom-right)\nRect(top-left, bottom-right)\nRect(Rect or IRect) - new copy\nRect(sequence) - from 'sequence'"""
     def __init__(self, *args):
+        jlib.log('{args=}')
         if not args:
             self.x0 = self.y0 = self.x1 = self.y1 = 0.0
             return None
@@ -1831,7 +1833,8 @@ class Rect(object):
             return None
         if len(args) == 1:
             l = args[0]
-            if isinstance(l, mupdf.Rect):
+            jlib.log('{l=} {type(l)=}')
+            if isinstance(l, (mupdf.Rect, mupdf.Irect)):
                 self.x0 = l.x0
                 self.y0 = l.y0
                 self.x1 = l.x1
@@ -3989,6 +3992,57 @@ def JM_get_fontextension(doc, xref):
 def JM_EscapeStrFromStr(c):
     # fixme: need to make this handle escape sequences.
     return c
+
+
+
+def JM_pixmap_from_display_list(
+        list_,
+        ctm,
+        cs,
+        alpha,
+        clip,
+        seps,
+        ):
+    '''
+    Version of fz_new_pixmap_from_display_list (util.c) to also support
+    rendering of only the 'clip' part of the displaylist rectangle
+    '''
+    assert isinstance(list_, mupdf.DisplayList)
+    if seps is None:
+        seps = mupdf.Separations()
+    assert seps is None or isinstance(seps, mupdf.Separations), f'type={type(seps)}: {seps}'
+
+    rect = mupdf.mfz_bound_display_list(list_)
+    matrix = JM_matrix_from_py(ctm)
+    #fz_pixmap *pix = NULL;
+    #fz_var(pix);
+    #fz_device *dev = NULL;
+    #fz_var(dev);
+    rclip = JM_rect_from_py(clip)
+    rect = mupdf.mfz_intersect_rect(rect, rclip)    # no-op if clip is not given
+
+    rect = mupdf.mfz_transform_rect(rect, matrix)
+    irect = mupdf.mfz_round_rect(rect)
+
+    pix = mupdf.mfz_new_pixmap_with_bbox(cs, irect, seps, alpha)
+    if alpha:
+        mupdf.mfz_clear_pixmap(pix)
+    else:
+        mupdf.mfz_clear_pixmap_with_value(pix, 0xFF)
+
+    if not mupdf.mfz_is_infinite_rect(rclip):
+        dev = mupdf.mfz_new_draw_device_with_bbox(matrix, pix, irect)
+        mupdf.mfz_run_display_list(list_, dev, fz_identity, rclip, None)
+    else:
+        dev = mupdf.mfz_new_draw_device(matrix, pix)
+        mupdf.mfz_run_display_list(list_, dev, mupdf.Matrix(), mupdf.Rect(mupdf.Rect.Fixed_INFINITE), mupdf.Cookie())
+
+    mupdf.mfz_close_device(dev)
+    return Pixmap(pix)
+
+
+
+
 
 
 
@@ -6754,6 +6808,54 @@ class Page:
 
     rect = property(bound, doc="page rectangle")
 
+
+    def get_displaylist(self, annots=1):
+        '''
+        Make a DisplayList from the page for Pixmap generation.
+
+        Include (default) or exclude annotations.
+        '''
+        CheckParent(self)
+        if annots:
+            dl = mupdf.mfz_new_display_list_from_page(self.this)
+        else:
+            dl = mupdf.mfz_new_display_list_from_page_contents(self.this)
+        return DisplayList(dl)
+
+
+    def get_pixmap(page, **kw): # -> Pixmap:
+        """Create pixmap of page.
+
+        Args:
+            matrix: Matrix for transformation (default: Identity).
+            colorspace: (str/Colorspace) cmyk, rgb, gray - case ignored, default csRGB.
+            clip: (irect-like) restrict rendering to this area.
+            alpha: (bool) whether to include alpha channel
+            annots: (bool) whether to also render annotations
+        """
+        CheckParent(page)
+        matrix = kw.get("matrix", Identity)
+        colorspace = kw.get("colorspace", csRGB)
+        clip = kw.get("clip")
+        alpha = bool(kw.get("alpha", False))
+        annots = bool(kw.get("annots", True))
+
+        if type(colorspace) is str:
+            if colorspace.upper() == "GRAY":
+                colorspace = csGRAY
+            elif colorspace.upper() == "CMYK":
+                colorspace = csCMYK
+            else:
+                colorspace = csRGB
+        if colorspace.n not in (1, 3, 4):
+            raise ValueError("unsupported colorspace")
+
+        dl = page.get_displaylist(annots=annots)
+        pix = dl.get_pixmap(matrix=matrix, colorspace=colorspace, alpha=alpha, clip=clip)
+        dl = None
+        return Pixmap(pix)
+
+
     def insert_text(
             page,
             point: point_like,
@@ -8997,7 +9099,7 @@ class Pixmap:
                     #memcpy(tptr, sptr, n);
                     # fixme: inefficient.
                     for j in range(n):
-                        pm.samples_set(tptr + j, src_pix.samples.get(sptr + j))
+                        pm.samples_set(tptr + j, src_pix.samples_get(sptr + j))
                     tptr += n
                     if pm.alpha():
                         pm.samples_set(tptr, 255)
@@ -9264,7 +9366,6 @@ class Pixmap:
         """Set resolution in both dimensions.
 
         Use pillowWrite to reflect this in output image."""
-
         return _fitz.Pixmap_setResolution(self, xres, yres)
 
 
@@ -9274,81 +9375,72 @@ class Pixmap:
         return _fitz.Pixmap_setRect(self, bbox, color)
 
     @property
-
     def stride(self):
         """Length of one image line (width * n)."""
-
-        return _fitz.Pixmap_stride(self)
+        #return _fitz.Pixmap_stride(self)
+        return self.this.stride()
 
     @property
-
     def xres(self):
         """Resolution in x direction."""
-
-        return _fitz.Pixmap_xres(self)
+        #return _fitz.Pixmap_xres(self)
+        return self.this.xres()
 
     @property
-
     def yres(self):
         """Resolution in y direction."""
-
-        return _fitz.Pixmap_yres(self)
+        #return _fitz.Pixmap_yres(self)
+        return mupdf.mfz_pixmap_width(self.this)
 
     @property
-
     def w(self):
         """The width."""
-
-        return _fitz.Pixmap_w(self)
+        #return _fitz.Pixmap_w(self)
+        return mupdf.mfz_pixmap_width(self.this)
 
     @property
-
     def h(self):
         """The height."""
-
-        return _fitz.Pixmap_h(self)
+        #return _fitz.Pixmap_h(self)
+        return mupdf.mfz_pixmap_height(self.this)
 
     @property
-
     def x(self):
         """x component of Pixmap origin."""
-
-        return _fitz.Pixmap_x(self)
+        #return _fitz.Pixmap_x(self)
+        return mupdf.mfz_pixmap_x(self.this)
 
     @property
-
     def y(self):
         """y component of Pixmap origin."""
-
-        return _fitz.Pixmap_y(self)
+        #return _fitz.Pixmap_y(self)
+        return mupdf.mfz_pixmap_y(self.this)
 
     @property
-
     def n(self):
         """The size of one pixel."""
-
-        return _fitz.Pixmap_n(self)
+        #return _fitz.Pixmap_n(self)
+        return mupdf.mfz_pixmap_components(self.this)
 
     @property
-
     def alpha(self):
         """Indicates presence of alpha channel."""
 
-        return _fitz.Pixmap_alpha(self)
+        #return _fitz.Pixmap_alpha(self)
+        return mupdf.mfz_pixmap_alpha(self.this)
 
     @property
-
     def colorspace(self):
         """Pixmap Colorspace."""
-
-        return _fitz.Pixmap_colorspace(self)
+        #return _fitz.Pixmap_colorspace(self)
+        return mupdf.mfz_pixmap_colorspace(self.this)
 
     @property
-
     def irect(self):
         """Pixmap bbox - an IRect object."""
 
-        val = _fitz.Pixmap_irect(self)
+        #val = _fitz.Pixmap_irect(self)
+        val = mupdf.mfz_pixmap_bbox(self.this)
         val = IRect(val)
 
         return val
@@ -9383,41 +9475,39 @@ class Pixmap:
 
 
 class Colorspace:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Colorspace, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Colorspace, name)
-    __del__ = lambda self: None
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Colorspace, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Colorspace, name)
+    #__del__ = lambda self: None
 
-    def __init__(self, type):
+    def __init__(self, type_):
         """Supported are GRAY, RGB and CMYK."""
 
-        this = _fitz.new_Colorspace(type)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-    @property
+        #this = _fitz.new_Colorspace(type)
+        this = mupdf.Colorspace(type_)
+        self.this = this
 
+    @property
     def n(self):
         """Size of one pixel."""
-
-        return _fitz.Colorspace_n(self)
+        #return _fitz.Colorspace_n(self)
+        return self.this.colorspace_n()
 
 
     def _name(self):
-        return _fitz.Colorspace__name(self)
+        #return _fitz.Colorspace__name(self)
+        return self.this.colorspace_name()
 
     @property
     def name(self):
         """Name of the Colorspace."""
-
-        if self.n == 1:
-            return csGRAY._name()
-        elif self.n == 3:
-            return csRGB._name()
-        elif self.n == 4:
-            return csCMYK._name()
+        #if self.n == 1:
+        #    return csGRAY._name()
+        #elif self.n == 3:
+        #    return csRGB._name()
+        #elif self.n == 4:
+        #    return csCMYK._name()
         return self._name()
 
     def __repr__(self):
@@ -10772,19 +10862,18 @@ class Link:
         self._erase()
 
 class DisplayList:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, DisplayList, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, DisplayList, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, DisplayList, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, DisplayList, name)
 
-    def __init__(self, mediabox):
-        this = _fitz.new_DisplayList(mediabox)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-        self.thisown = True
-
+    def __init__(self, *args):
+        if len(args) == 1 and isinstance(args[0], mupdf.Rect):
+            self.this = mupdf.DisplayList(args[0])
+        elif len(args) == 1 and isinstance(args[0], mupdf.DisplayList):
+            self.this = args[0]
+        else:
+            assert 0, f'Unrecognised args={args}'
 
 
     def run(self, dw, m, area):
@@ -10798,8 +10887,12 @@ class DisplayList:
         return val
 
 
-    def getPixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
-        val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
+    def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
+        #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
+        if not colorspace:
+            colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
+
+        val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
         val.thisown = True
 
         return val
@@ -11612,6 +11705,7 @@ class Shape(object):
         oc: int = 0,
     ) -> int:
 
+        jlib.log('{self=} {point=} {buffer=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
         # ensure 'text' is a list of strings, worth dealing with
         if not bool(buffer):
             return 0
@@ -11635,6 +11729,7 @@ class Shape(object):
         if fname.startswith("/"):
             fname = fname[1:]
 
+        jlib.log('{fname=} {fontfile=} {encoding=} {set_simple=}')
         xref = self.page.insert_font(
             fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
         )
@@ -12223,7 +12318,17 @@ from mupdf import (
     PDF_ENCRYPT_AES_256,
     )
 
+# colorspace identifiers
+CS_GRAY = mupdf.Colorspace.Fixed_GRAY
+CS_RGB = mupdf.Colorspace.Fixed_RGB
+CS_BGR = mupdf.Colorspace.Fixed_BGR
+CS_CMYK = mupdf.Colorspace.Fixed_CMYK
+CS_LAB = mupdf.Colorspace.Fixed_LAB
 
+
+csRGB = Colorspace(CS_RGB)
+csGRAY = Colorspace(CS_GRAY)
+csCMYK = Colorspace(CS_CMYK)
 
 if __name__ == '__main__':
     pass
