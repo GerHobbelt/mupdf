@@ -843,9 +843,9 @@ def DUMMY(*args, **kw):
 def INRANGE(v, low, high):
     return low <= v and v <= high
 
-def ASSERT_PDF(page):
-    assert isinstance(page, mupdf.PdfPage), f'type(page)={type(page)} page={page}'
-    if not page.m_internal:
+def ASSERT_PDF(cond):
+    assert isinstance(cond, (mupdf.PdfPage, mupdf.PdfDocument)), f'type(cond)={type(cond)} cond={cond}'
+    if not cond.m_internal:
         raise Exception('not a PDF')
 
 def THROWMSG(msg):
@@ -5052,6 +5052,154 @@ class Document:
     def is_pdf(self):
         return self.isPDF
 
+
+    def _get_char_widths(self, xref: int, bfname: str, ext: str, ordering: int, limit: int, idx: int = 0):
+        pdf = self._pdf_document()
+        #PyObject *wlist = NULL;
+        #int i, glyph, mylimit;
+        mylimit = limit;
+        if mylimit < 256:
+            mylimit = 256
+        #cwlen = 0;
+        #lang = 0;
+        #const unsigned char *data;
+        #int size, index;
+        #fz_font *font = NULL, *fb_font= NULL;
+        #fz_buffer *buf = NULL;
+
+        ASSERT_PDF(pdf), f'pdf={pdf}'
+        if ordering >= 0:
+            data, size, index = mupdf.mfz_lookup_cjk_font(ordering);
+            font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0);
+        else:
+            data, size = mupdf.mfz_lookup_base14_font(bfname)
+            if data:
+                font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
+            else:
+                buf = JM_get_fontbuffer(pdf, xref)
+                if not buffer.m_internal:
+                    raise Exception("font at xref %d is not supported" % xref)
+
+                font = mupdf.mfz_new_font_from_buffer(NULL, buf, idx, 0)
+        wlist = []
+        for i in range(mylimit):
+            glyph = mupdf.mfz_encode_character(font, i)
+            adv = mupdf.mfz_advance_glyph(font, glyph, 0)
+            if ordering >= 0:
+                glyph = i
+            if glyph > 0:
+                wlist.append( (glyph, adv))
+            else:
+                wlist.append( (glyph, 0.0))
+        return wlist
+
+
+    def get_char_widths(doc, xref: int, limit: int = 256, idx: int = 0, fontdict: OptDict = None
+            ) -> list:
+        """Get list of glyph information of a font.
+
+        Notes:
+            Must be provided by its XREF number. If we already dealt with the
+            font, it will be recorded in doc.FontInfos. Otherwise we insert an
+            entry there.
+            Finally we return the glyphs for the font. This is a list of
+            (glyph, width) where glyph is an integer controlling the char
+            appearance, and width is a float controlling the char's spacing:
+            width * fontsize is the actual space.
+            For 'simple' fonts, glyph == ord(char) will usually be true.
+            Exceptions are 'Symbol' and 'ZapfDingbats'. We are providing data for these directly here.
+        """
+        fontinfo = CheckFontInfo(doc, xref)
+        if fontinfo is None:  # not recorded yet: create it
+            if fontdict is None:
+                name, ext, stype, asc, dsc = _get_font_properties(doc, xref)
+                fontdict = {
+                    "name": name,
+                    "type": stype,
+                    "ext": ext,
+                    "ascender": asc,
+                    "descender": dsc,
+                }
+            else:
+                name = fontdict["name"]
+                ext = fontdict["ext"]
+                stype = fontdict["type"]
+                ordering = fontdict["ordering"]
+                simple = fontdict["simple"]
+
+            if ext == "":
+                raise ValueError("xref is not a font")
+
+            # check for 'simple' fonts
+            if stype in ("Type1", "MMType1", "TrueType"):
+                simple = True
+            else:
+                simple = False
+
+            # check for CJK fonts
+            if name in ("Fangti", "Ming"):
+                ordering = 0
+            elif name in ("Heiti", "Song"):
+                ordering = 1
+            elif name in ("Gothic", "Mincho"):
+                ordering = 2
+            elif name in ("Dotum", "Batang"):
+                ordering = 3
+            else:
+                ordering = -1
+
+            fontdict["simple"] = simple
+
+            if name == "ZapfDingbats":
+                glyphs = zapf_glyphs
+            elif name == "Symbol":
+                glyphs = symbol_glyphs
+            else:
+                glyphs = None
+
+            fontdict["glyphs"] = glyphs
+            fontdict["ordering"] = ordering
+            fontinfo = [xref, fontdict]
+            doc.FontInfos.append(fontinfo)
+        else:
+            fontdict = fontinfo[1]
+            glyphs = fontdict["glyphs"]
+            simple = fontdict["simple"]
+            ordering = fontdict["ordering"]
+
+        if glyphs is None:
+            oldlimit = 0
+        else:
+            oldlimit = len(glyphs)
+
+        mylimit = max(256, limit)
+
+        if mylimit <= oldlimit:
+            return glyphs
+
+        if ordering < 0:  # not a CJK font
+            glyphs = doc._get_char_widths(
+                xref, fontdict["name"], fontdict["ext"], fontdict["ordering"], mylimit, idx
+            )
+        else:  # CJK fonts use char codes and width = 1
+            glyphs = None
+
+        fontdict["glyphs"] = glyphs
+        fontinfo[1] = fontdict
+        UpdateFontInfo(doc, fontinfo)
+
+        return glyphs
+
+
+
+
+
+
+
+
+
+
+
     def new_page(
             self,
             pno: int = -1,
@@ -7345,7 +7493,7 @@ class Page:
             mupdf.mpdf_set_annot_rect(annot, r)
             mupdf.mpdf_set_annot_flags(annot, flags)
         except Exception as e:
-            jlib.log('{e=}. Returning None')
+            jlib.log('{e=}: {jlib.exception_info()=}')
             return
         return Annot(self, annot)
 
@@ -8400,116 +8548,112 @@ class Page:
         #int size, ixref = 0, index = 0, simple = 0;
         #PyObject *value;
         #PyObject *exto = NULL;
-    #fz_try(gctx) {
-        try:
-            ASSERT_PDF(page)
-            pdf = page.doc()
-            # get the objects /Resources, /Resources/Font
-            import sys
-            sys.stdout = sys.stderr
-            resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
-            fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
-            if not fonts.m_internal:    # page has no fonts yet
-                fonts = mupdf.mpdf_new_dict(pdf, 10)
-                jlib.log('{fonts=}')
-                d = page.obj()
-                jlib.log('{d=}')
-                jlib.log('{d.is_indirect()=}')
-                jlib.log('{d.is_dict()=}')
-                if d.is_indirect():
-                    dd = d.resolve_indirect_chain()
-                    jlib.log('{dd=}')
-                    jlib.log('{dd.is_indirect()=}')
-                    jlib.log('{dd.is_dict()=}')
-                jlib.log('{d.is_dict()=}')
-                d.dict_putl(fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
-                #mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'));
+        ASSERT_PDF(page)
+        pdf = page.doc()
+        # get the objects /Resources, /Resources/Font
+        import sys
+        sys.stdout = sys.stderr
+        resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+        fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
+        if not fonts.m_internal:    # page has no fonts yet
+            fonts = mupdf.mpdf_new_dict(pdf, 10)
+            jlib.log('{fonts=}')
+            d = page.obj()
+            jlib.log('{d=}')
+            jlib.log('{d.is_indirect()=}')
+            jlib.log('{d.is_dict()=}')
+            if d.is_indirect():
+                dd = d.resolve_indirect_chain()
+                jlib.log('{dd=}')
+                jlib.log('{dd.is_indirect()=}')
+                jlib.log('{dd.is_dict()=}')
+            jlib.log('{d.is_dict()=}')
+            d.dict_putl(fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
+            #mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'));
 
-            # check for CJK font
-            if ordering > -1:
-                data, size, index = ordering.lookup_cjk_font()
-            if data:
-                font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
-                font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
+        # check for CJK font
+        data = None
+        if ordering > -1:
+            data, size, index = ordering.lookup_cjk_font()
+        if data:
+            font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
+            font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
+            exto = JM_UnicodeFromStr("n/a")
+            simple = 0
+            #goto weiter;
+
+        else:
+            # check for PDF Base-14 font
+            if bfname:
+                data, size = mupdf.mfz_lookup_base14_font(bfname)
+            if data is not None:
+                font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
+                font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
                 exto = JM_UnicodeFromStr("n/a")
-                simple = 0
+                simple = 1
                 #goto weiter;
 
             else:
-                # check for PDF Base-14 font
-                if bfname:
-                    data, size = mupdf.mfz_lookup_base14_font(bfname)
-                if data is not None:
-                    font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
-                    font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
-                    exto = JM_UnicodeFromStr("n/a")
-                    simple = 1
-                    #goto weiter;
-
+                if fontfile:
+                    font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
                 else:
-                    if fontfile:
-                        font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
-                    else:
-                        res = JM_BufferFromBytes(fontbuffer)
-                        if not res.m_internal:
-                            THROWMSG("need one of fontfile, fontbuffer")
-                        font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
+                    res = JM_BufferFromBytes(fontbuffer)
+                    if not res.m_internal:
+                        THROWMSG("need one of fontfile, fontbuffer")
+                    font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
 
-                    if not set_simple:
-                        font_obj = mupdf.mpdf_add_cid_font(pdf, font)
-                        simple = 0
-                    else:
-                        font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
-                        simple = 2
+                if not set_simple:
+                    font_obj = mupdf.mpdf_add_cid_font(pdf, font)
+                    simple = 0
+                else:
+                    font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+                    simple = 2
 
-            #weiter: ;
-            ixref = mupdf.mpdf_to_num(font_obj)
-            if mupdf.mfz_font_is_monospaced(font):
-                adv = mupdf.mfz_advance_glyph(font, fz_encode_character(font, 32), 0)
-                width = math.floor(adv * 1000.0 + 0.5)
-                dfonts = mupdf.mpdf_dict_get(font_obj, PDF_NAME('DescendantFonts'))
-                if mupdf.mpdf_is_array(dfonts):
-                    n = mupdf.mpdf_array_len(dfonts)
-                    for i in range(n):
-                        dfont = mupdf.mpdf_array_get(dfonts, i)
-                        warray = mupdf.mpdf_new_array(pdf, 3)
-                        mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
-                        mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
-                        mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
-                        #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
-                        mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
+        #weiter: ;
+        ixref = mupdf.mpdf_to_num(font_obj)
+        if mupdf.mfz_font_is_monospaced(font):
+            adv = mupdf.mfz_advance_glyph(font, fz_encode_character(font, 32), 0)
+            width = math.floor(adv * 1000.0 + 0.5)
+            dfonts = mupdf.mpdf_dict_get(font_obj, PDF_NAME('DescendantFonts'))
+            if mupdf.mpdf_is_array(dfonts):
+                n = mupdf.mpdf_array_len(dfonts)
+                for i in range(n):
+                    dfont = mupdf.mpdf_array_get(dfonts, i)
+                    warray = mupdf.mpdf_new_array(pdf, 3)
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
+                    #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+                    mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
 
-            name = JM_EscapeStrFromStr(
-                    pdf_to_name(
-                        mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))
-                        )
+        name = JM_EscapeStrFromStr(
+                mupdf.mpdf_to_name(
+                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))
                     )
-            subt = JM_UnicodeFromStr(
-                    mupdf.mpdf_to_name(
-                        pdf_dict_get(font_obj, PDF_NAME(Subtype))
-                        )
+                )
+        subt = JM_UnicodeFromStr(
+                mupdf.mpdf_to_name(
+                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('Subtype'))
                     )
-            if not exto:
-                exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
+                )
+        if not exto:
+            exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
 
-            value = [
-                    ixref,
-                    {
-                        "name": name,   # base font name
-                        "type": subt,   # subtype
-                        "ext": exto,    # file extension
-                        "simple": (True if simple else False),  # simple font?
-                        "ordering": ordering,   # CJK font?
-                    },
-                    ]
-            # store font in resources and fonts objects will contain named reference to font
-            #mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
-            mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
-            # fixme: pdf->dirty = 1;
-            return value
-        except Exception as e:
-            jlib.log('{e=}: {jlib.exception_info()=}')
-            return
+        value = [
+                ixref,
+                {
+                    "name": name,   # base font name
+                    "type": subt,   # subtype
+                    "ext": exto,    # file extension
+                    "simple": (True if simple else False),  # simple font?
+                    "ordering": ordering,   # CJK font?
+                },
+                ]
+        # store font in resources and fonts objects will contain named reference to font
+        #mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
+        mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
+        # fixme: pdf->dirty = 1;
+        return value
 
 
     @property
