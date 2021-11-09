@@ -1238,6 +1238,55 @@ class Device:
             self.this = this
 
 
+class DisplayList:
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, DisplayList, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, DisplayList, name)
+
+    def __init__(self, *args):
+        if len(args) == 1 and isinstance(args[0], mupdf.Rect):
+            self.this = mupdf.DisplayList(args[0])
+        elif len(args) == 1 and isinstance(args[0], mupdf.DisplayList):
+            self.this = args[0]
+        else:
+            assert 0, f'Unrecognised args={args}'
+
+
+    def run(self, dw, m, area):
+        return _fitz.DisplayList_run(self, dw, m, area)
+    @property
+
+    def rect(self):
+        val = _fitz.DisplayList_rect(self)
+        val = Rect(val)
+
+        return val
+
+
+    def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
+        #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
+        if not colorspace:
+            colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
+
+        val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
+        val.thisown = True
+
+        return val
+
+
+    def getTextPage(self, flags=3):
+        val = _fitz.DisplayList_getTextPage(self, flags)
+        val.thisown = True
+
+        return val
+
+
+    def __del__(self):
+        if not type(self) is DisplayList: return
+        self.thisown = False
+
+
 class Document:
     def __init__(self, filename=None, stream=None, filetype=None, rect=None, width=0, height=0, fontsize=11):
         """Creates a document. Use 'open' as a synonym.
@@ -3036,7 +3085,283 @@ class Document:
 open = Document
 
 
+class Font:
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Font, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Font, name)
 
+    def __init__(self, fontname=None, fontfile=None, fontbuffer=None, script=0, language=None, ordering=-1, is_bold=0, is_italic=0, is_serif=0):
+
+        if fontname:
+            if "/" in fontname or "\\" in fontname or "." in fontname:
+                print("Warning: did you mean a fontfile?")
+
+            if fontname.lower() in ("china-t", "china-s", "japan", "korea","china-ts", "china-ss", "japan-s", "korea-s", "cjk"):
+                ordering = 0
+
+            elif fontname.lower() in fitz_fontdescriptors.keys():
+                import pymupdf_fonts  # optional fonts
+                fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
+                fontname = None  # ensure using fontbuffer only
+                del pymupdf_fonts  # remove package again
+
+            elif ordering < 0:
+                fontname = Base14_fontdict.get(fontname.lower(), fontname)
+
+
+        this = _fitz.new_Font(fontname, fontfile, fontbuffer, script, language, ordering, is_bold, is_italic, is_serif)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def glyph_advance(self, chr, language=None, script=0, wmode=0):
+        """Return the glyph width of a unicode (font size 1)."""
+
+        return _fitz.Font_glyph_advance(self, chr, language, script, wmode)
+
+
+    def glyph_bbox(self, chr, language=None, script=0):
+        """Return the glyph bbox of a unicode (font size 1)."""
+
+        val = _fitz.Font_glyph_bbox(self, chr, language, script)
+        val = Rect(val)
+
+        return val
+
+
+    def has_glyph(self, chr, language=None, script=0, fallback=0):
+        """Check whether font has a glyph for this unicode."""
+
+        return _fitz.Font_has_glyph(self, chr, language, script, fallback)
+
+
+    def valid_codepoints(self):
+        from array import array
+        gc = self.glyph_count
+        cp = array("l", (0,) * gc)
+        arr = cp.buffer_info()
+        self._valid_unicodes(arr)
+        return array("l", sorted(set(cp))[1:])
+
+
+    def _valid_unicodes(self, arr):
+        return _fitz.Font__valid_unicodes(self, arr)
+    @property
+
+    def flags(self):
+        return _fitz.Font_flags(self)
+    @property
+
+    def isWritable(self):
+        return _fitz.Font_isWritable(self)
+    @property
+
+    def name(self):
+        return _fitz.Font_name(self)
+    @property
+
+    def glyph_count(self):
+        return _fitz.Font_glyph_count(self)
+    @property
+
+    def buffer(self):
+        return _fitz.Font_buffer(self)
+    @property
+
+    def bbox(self):
+        val = _fitz.Font_bbox(self)
+        val = Rect(val)
+
+        return val
+
+    @property
+
+    def ascender(self):
+        """Return the glyph ascender value."""
+
+        return _fitz.Font_ascender(self)
+
+    @property
+
+    def descender(self):
+        """Return the glyph descender value."""
+
+        return _fitz.Font_descender(self)
+
+
+    def glyph_name_to_unicode(self, name):
+        """Return the unicode for a glyph name."""
+        return glyph_name_to_unicode(name)
+
+    def unicode_to_glyph_name(self, ch):
+        """Return the glyph name for a unicode."""
+        return unicode_to_glyph_name(ch)
+
+    def text_length(self, text, fontsize=11, wmode=0):
+        """Calculate the length of a string for this font."""
+        return fontsize * sum([self.glyph_advance(ord(c), wmode=wmode) for c in text])
+
+    def __repr__(self):
+        return "Font('%s')" % self.name
+
+    def __del__(self):
+        if type(self) is not Font:
+            return None
+
+
+class Graftmap:
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Graftmap, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Graftmap, name)
+
+    def __init__(self, doc):
+        this = _fitz.new_Graftmap(doc)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+        self.thisown = True
+
+
+
+    def __del__(self):
+        if not type(self) is Graftmap:
+            return
+        self.thisown = False
+
+
+
+class Link:
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Link, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Link, name)
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
+
+    def _border(self, doc, xref):
+        return _fitz.Link__border(self, doc, xref)
+
+    def _setBorder(self, border, doc, xref):
+        return _fitz.Link__setBorder(self, border, doc, xref)
+
+    def _colors(self, doc, xref):
+        return _fitz.Link__colors(self, doc, xref)
+
+    def _setColors(self, colors, doc, xref):
+        return _fitz.Link__setColors(self, colors, doc, xref)
+
+    @property
+    def border(self):
+        return self._border(self.parent.parent.this, self.xref)
+
+    def setBorder(self, border=None, width=0, dashes=None, style=None):
+        if type(border) is not dict:
+            border = {"width": width, "style": style, "dashes": dashes}
+        return self._setBorder(border, self.parent.parent.this, self.xref)
+
+    @property
+    def colors(self):
+        return self._colors(self.parent.parent.this, self.xref)
+
+    def setColors(self, colors=None, stroke=None, fill=None):
+        if type(colors) is not dict:
+            colors = {"fill": fill, "stroke": stroke}
+        return self._setColors(colors, self.parent.parent.this, self.xref)
+
+    @property
+
+    def uri(self):
+        """Uri string."""
+        CheckParent(self)
+
+        return _fitz.Link_uri(self)
+
+    @property
+
+    def isExternal(self):
+        """External indicator."""
+        CheckParent(self)
+
+        return _fitz.Link_isExternal(self)
+
+
+    page = -1
+    @property
+    def dest(self):
+        """Create link destination details."""
+        if hasattr(self, "parent") and self.parent is None:
+            raise ValueError("orphaned object: parent is None")
+        if self.parent.parent.isClosed or self.parent.parent.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        doc = self.parent.parent
+
+        if self.isExternal or self.uri.startswith("#"):
+            uri = None
+        else:
+            uri = doc.resolveLink(self.uri)
+
+        return linkDest(self, uri)
+
+    @property
+
+    def rect(self):
+        """Rectangle ('hot area')."""
+        CheckParent(self)
+
+        val = _fitz.Link_rect(self)
+        val = Rect(val)
+
+        return val
+
+    @property
+
+    def next(self):
+        """Next link."""
+        CheckParent(self)
+
+        val = _fitz.Link_next(self)
+
+        if val:
+            val.thisown = True
+            val.parent = self.parent  # copy owning page from prev link
+            val.parent._annot_refs[id(val)] = val
+            if self.xref > 0:  # prev link has an xref
+                link_xrefs = [x[0] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
+                link_ids = [x[2] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
+                idx = link_xrefs.index(self.xref)
+                val.xref = link_xrefs[idx + 1]
+                val.id = link_ids[idx + 1]
+            else:
+                val.xref = 0
+                val.id = ""
+
+
+        return val
+
+
+    def _erase(self):
+        try:
+            self.parent._forget_annot(self)
+        except:
+            pass
+        self.parent = None
+        self.thisown = False
+
+    def __str__(self):
+        CheckParent(self)
+        return "link on " + str(self.parent)
+
+    def __repr__(self):
+        CheckParent(self)
+        return "link on " + str(self.parent)
+
+    def __del__(self):
+        self._erase()
 
 
 class Matrix(object):
@@ -3551,6 +3876,58 @@ class Widget(object):
     @property
     def next(self):
         return self._annot.next
+
+
+class Outline:
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Outline, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
+    @property
+
+    def uri(self):
+        return _fitz.Outline_uri(self)
+    @property
+
+    def next(self):
+        return _fitz.Outline_next(self)
+    @property
+
+    def down(self):
+        return _fitz.Outline_down(self)
+    @property
+
+    def isExternal(self):
+        return _fitz.Outline_isExternal(self)
+    @property
+
+    def page(self):
+        return _fitz.Outline_page(self)
+    @property
+
+    def x(self):
+        return _fitz.Outline_x(self)
+    @property
+
+    def y(self):
+        return _fitz.Outline_y(self)
+    @property
+
+    def title(self):
+        return _fitz.Outline_title(self)
+    @property
+
+    def is_open(self):
+        return _fitz.Outline_is_open(self)
+    isOpen = is_open
+
+    @property
+    def dest(self):
+        '''outline destination details'''
+        return linkDest(self, None)
 
 
 class Page:
@@ -6902,6 +7279,1255 @@ class Rect(object):
 
     def __hash__(self):
         return hash(tuple(self))
+
+
+class Shape(object):
+    """Create a new shape."""
+
+    @staticmethod
+    def horizontal_angle(C, P):
+        """Return the angle to the horizontal for the connection from C to P.
+        This uses the arcus sine function and resolves its inherent ambiguity by
+        looking up in which quadrant vector S = P - C is located.
+        """
+        S = Point(P - C).unit  # unit vector 'C' -> 'P'
+        alfa = math.asin(abs(S.y))  # absolute angle from horizontal
+        if S.x < 0:  # make arcsin result unique
+            if S.y <= 0:  # bottom-left
+                alfa = -(math.pi - alfa)
+            else:  # top-left
+                alfa = math.pi - alfa
+        else:
+            if S.y >= 0:  # top-right
+                pass
+            else:  # bottom-right
+                alfa = -alfa
+        return alfa
+
+    def __init__(self, page: Page):
+        CheckParent(page)
+        self.page = page
+        self.doc = page.parent
+        if not self.doc.is_pdf:
+            raise ValueError("not a PDF")
+        self.height = page.mediabox_size.y
+        self.width = page.mediabox_size.x
+        self.x = page.cropbox_position.x
+        self.y = page.cropbox_position.y
+
+        self.pctm = page.transformation_matrix  # page transf. matrix
+        self.ipctm = ~self.pctm  # inverted transf. matrix
+
+        self.draw_cont = ""
+        self.text_cont = ""
+        self.totalcont = ""
+        self.lastPoint = None
+        self.rect = None
+
+    def updateRect(self, x):
+        if self.rect is None:
+            if len(x) == 2:
+                self.rect = Rect(x, x)
+            else:
+                self.rect = Rect(x)
+
+        else:
+            if len(x) == 2:
+                x = Point(x)
+                self.rect.x0 = min(self.rect.x0, x.x)
+                self.rect.y0 = min(self.rect.y0, x.y)
+                self.rect.x1 = max(self.rect.x1, x.x)
+                self.rect.y1 = max(self.rect.y1, x.y)
+            else:
+                x = Rect(x)
+                self.rect.x0 = min(self.rect.x0, x.x0)
+                self.rect.y0 = min(self.rect.y0, x.y0)
+                self.rect.x1 = max(self.rect.x1, x.x1)
+                self.rect.y1 = max(self.rect.y1, x.y1)
+
+    def draw_line(self, p1: point_like, p2: point_like) -> Point:
+        """Draw a line between two points."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        if not (self.lastPoint == p1):
+            self.draw_cont += "%g %g m\n" % JM_TUPLE(p1 * self.ipctm)
+            self.lastPoint = p1
+            self.updateRect(p1)
+
+        self.draw_cont += "%g %g l\n" % JM_TUPLE(p2 * self.ipctm)
+        self.updateRect(p2)
+        self.lastPoint = p2
+        return self.lastPoint
+
+    def draw_polyline(self, points: list) -> Point:
+        """Draw several connected line segments."""
+        for i, p in enumerate(points):
+            if i == 0:
+                if not (self.lastPoint == Point(p)):
+                    self.draw_cont += "%g %g m\n" % JM_TUPLE(Point(p) * self.ipctm)
+                    self.lastPoint = Point(p)
+            else:
+                self.draw_cont += "%g %g l\n" % JM_TUPLE(Point(p) * self.ipctm)
+            self.updateRect(p)
+
+        self.lastPoint = Point(points[-1])
+        return self.lastPoint
+
+    def draw_bezier(
+        self,
+        p1: point_like,
+        p2: point_like,
+        p3: point_like,
+        p4: point_like,
+    ) -> Point:
+        """Draw a standard cubic Bezier curve."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        p3 = Point(p3)
+        p4 = Point(p4)
+        if not (self.lastPoint == p1):
+            self.draw_cont += "%g %g m\n" % JM_TUPLE(p1 * self.ipctm)
+        self.draw_cont += "%g %g %g %g %g %g c\n" % JM_TUPLE(
+            list(p2 * self.ipctm) + list(p3 * self.ipctm) + list(p4 * self.ipctm)
+        )
+        self.updateRect(p1)
+        self.updateRect(p2)
+        self.updateRect(p3)
+        self.updateRect(p4)
+        self.lastPoint = p4
+        return self.lastPoint
+
+    def draw_oval(self, tetra: typing.Union[quad_like, rect_like]) -> Point:
+        """Draw an ellipse inside a tetrapod."""
+        if len(tetra) != 4:
+            raise ValueError("invalid arg length")
+        if hasattr(tetra[0], "__float__"):
+            q = Rect(tetra).quad
+        else:
+            q = Quad(tetra)
+
+        mt = q.ul + (q.ur - q.ul) * 0.5
+        mr = q.ur + (q.lr - q.ur) * 0.5
+        mb = q.ll + (q.lr - q.ll) * 0.5
+        ml = q.ul + (q.ll - q.ul) * 0.5
+        if not (self.lastPoint == ml):
+            self.draw_cont += "%g %g m\n" % JM_TUPLE(ml * self.ipctm)
+            self.lastPoint = ml
+        self.draw_curve(ml, q.ll, mb)
+        self.draw_curve(mb, q.lr, mr)
+        self.draw_curve(mr, q.ur, mt)
+        self.draw_curve(mt, q.ul, ml)
+        self.updateRect(q.rect)
+        self.lastPoint = ml
+        return self.lastPoint
+
+    def draw_circle(self, center: point_like, radius: float) -> Point:
+        """Draw a circle given its center and radius."""
+        if not radius > EPSILON:
+            raise ValueError("radius must be postive")
+        center = Point(center)
+        p1 = center - (radius, 0)
+        return self.draw_sector(center, p1, 360, fullSector=False)
+
+    def draw_curve(
+        self,
+        p1: point_like,
+        p2: point_like,
+        p3: point_like,
+    ) -> Point:
+        """Draw a curve between points using one control point."""
+        kappa = 0.55228474983
+        p1 = Point(p1)
+        p2 = Point(p2)
+        p3 = Point(p3)
+        k1 = p1 + (p2 - p1) * kappa
+        k2 = p3 + (p2 - p3) * kappa
+        return self.draw_bezier(p1, k1, k2, p3)
+
+    def draw_sector(
+        self,
+        center: point_like,
+        point: point_like,
+        beta: float,
+        fullSector: bool = True,
+    ) -> Point:
+        """Draw a circle sector."""
+        center = Point(center)
+        point = Point(point)
+        l3 = "%g %g m\n"
+        l4 = "%g %g %g %g %g %g c\n"
+        l5 = "%g %g l\n"
+        betar = math.radians(-beta)
+        w360 = math.radians(math.copysign(360, betar)) * (-1)
+        w90 = math.radians(math.copysign(90, betar))
+        w45 = w90 / 2
+        while abs(betar) > 2 * math.pi:
+            betar += w360  # bring angle below 360 degrees
+        if not (self.lastPoint == point):
+            self.draw_cont += l3 % JM_TUPLE(point * self.ipctm)
+            self.lastPoint = point
+        Q = Point(0, 0)  # just make sure it exists
+        C = center
+        P = point
+        S = P - C  # vector 'center' -> 'point'
+        rad = abs(S)  # circle radius
+
+        if not rad > EPSILON:
+            raise ValueError("radius must be positive")
+
+        alfa = self.horizontal_angle(center, point)
+        while abs(betar) > abs(w90):  # draw 90 degree arcs
+            q1 = C.x + math.cos(alfa + w90) * rad
+            q2 = C.y + math.sin(alfa + w90) * rad
+            Q = Point(q1, q2)  # the arc's end point
+            r1 = C.x + math.cos(alfa + w45) * rad / math.cos(w45)
+            r2 = C.y + math.sin(alfa + w45) * rad / math.cos(w45)
+            R = Point(r1, r2)  # crossing point of tangents
+            kappah = (1 - math.cos(w45)) * 4 / 3 / abs(R - Q)
+            kappa = kappah * abs(P - Q)
+            cp1 = P + (R - P) * kappa  # control point 1
+            cp2 = Q + (R - Q) * kappa  # control point 2
+            self.draw_cont += l4 % JM_TUPLE(
+                list(cp1 * self.ipctm) + list(cp2 * self.ipctm) + list(Q * self.ipctm)
+            )
+
+            betar -= w90  # reduce parm angle by 90 deg
+            alfa += w90  # advance start angle by 90 deg
+            P = Q  # advance to arc end point
+        # draw (remaining) arc
+        if abs(betar) > 1e-3:  # significant degrees left?
+            beta2 = betar / 2
+            q1 = C.x + math.cos(alfa + betar) * rad
+            q2 = C.y + math.sin(alfa + betar) * rad
+            Q = Point(q1, q2)  # the arc's end point
+            r1 = C.x + math.cos(alfa + beta2) * rad / math.cos(beta2)
+            r2 = C.y + math.sin(alfa + beta2) * rad / math.cos(beta2)
+            R = Point(r1, r2)  # crossing point of tangents
+            # kappa height is 4/3 of segment height
+            kappah = (1 - math.cos(beta2)) * 4 / 3 / abs(R - Q)  # kappa height
+            kappa = kappah * abs(P - Q) / (1 - math.cos(betar))
+            cp1 = P + (R - P) * kappa  # control point 1
+            cp2 = Q + (R - Q) * kappa  # control point 2
+            self.draw_cont += l4 % JM_TUPLE(
+                list(cp1 * self.ipctm) + list(cp2 * self.ipctm) + list(Q * self.ipctm)
+            )
+        if fullSector:
+            self.draw_cont += l3 % JM_TUPLE(point * self.ipctm)
+            self.draw_cont += l5 % JM_TUPLE(center * self.ipctm)
+            self.draw_cont += l5 % JM_TUPLE(Q * self.ipctm)
+        self.lastPoint = Q
+        return self.lastPoint
+
+    def draw_rect(self, rect: rect_like) -> Point:
+        """Draw a rectangle."""
+        r = Rect(rect)
+        self.draw_cont += "%g %g %g %g re\n" % JM_TUPLE(
+            list(r.bl * self.ipctm) + [r.width, r.height]
+        )
+        self.updateRect(r)
+        self.lastPoint = r.tl
+        return self.lastPoint
+
+    def draw_quad(self, quad: quad_like) -> Point:
+        """Draw a Quad."""
+        q = Quad(quad)
+        return self.draw_polyline([q.ul, q.ll, q.lr, q.ur, q.ul])
+
+    def draw_zigzag(
+        self,
+        p1: point_like,
+        p2: point_like,
+        breadth: float = 2,
+    ) -> Point:
+        """Draw a zig-zagged line from p1 to p2."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        S = p2 - p1  # vector start - end
+        rad = abs(S)  # distance of points
+        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
+        if cnt < 4:
+            raise ValueError("points too close")
+        mb = rad / cnt  # revised breadth
+        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
+        i_mat = ~matrix  # get original position
+        points = []  # stores edges
+        for i in range(1, cnt):
+            if i % 4 == 1:  # point "above" connection
+                p = Point(i, -1) * mb
+            elif i % 4 == 3:  # point "below" connection
+                p = Point(i, 1) * mb
+            else:  # ignore others
+                continue
+            points.append(p * i_mat)
+        self.draw_polyline([p1] + points + [p2])  # add start and end points
+        return p2
+
+    def draw_squiggle(
+        self,
+        p1: point_like,
+        p2: point_like,
+        breadth=2,
+    ) -> Point:
+        """Draw a squiggly line from p1 to p2."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        S = p2 - p1  # vector start - end
+        rad = abs(S)  # distance of points
+        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
+        if cnt < 4:
+            raise ValueError("points too close")
+        mb = rad / cnt  # revised breadth
+        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
+        i_mat = ~matrix  # get original position
+        k = 2.4142135623765633  # y of draw_curve helper point
+
+        points = []  # stores edges
+        for i in range(1, cnt):
+            if i % 4 == 1:  # point "above" connection
+                p = Point(i, -k) * mb
+            elif i % 4 == 3:  # point "below" connection
+                p = Point(i, k) * mb
+            else:  # else on connection line
+                p = Point(i, 0) * mb
+            points.append(p * i_mat)
+
+        points = [p1] + points + [p2]
+        cnt = len(points)
+        i = 0
+        while i + 2 < cnt:
+            self.draw_curve(points[i], points[i + 1], points[i + 2])
+            i += 2
+        return p2
+
+    # ==============================================================================
+    # Shape.insert_text
+    # ==============================================================================
+    def insert_text(
+        self,
+        point: point_like,
+        buffer: typing.Union[str, list],
+        fontsize: float = 11,
+        lineheight: OptFloat = None,
+        fontname: str = "helv",
+        fontfile: OptStr = None,
+        set_simple: bool = 0,
+        encoding: int = 0,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        render_mode: int = 0,
+        border_width: float = 1,
+        rotate: int = 0,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> int:
+
+        jlib.log('{self=} {point=} {buffer=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
+        # ensure 'text' is a list of strings, worth dealing with
+        if not bool(buffer):
+            return 0
+
+        if type(buffer) not in (list, tuple):
+            text = buffer.splitlines()
+        else:
+            text = buffer
+
+        if not len(text) > 0:
+            return 0
+
+        point = Point(point)
+        try:
+            maxcode = max([ord(c) for c in " ".join(text)])
+        except:
+            return 0
+
+        # ensure valid 'fontname'
+        fname = fontname
+        if fname.startswith("/"):
+            fname = fname[1:]
+
+        jlib.log('{fname=} {fontfile=} {encoding=} {set_simple=}')
+        xref = self.page.insert_font(
+            fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
+        )
+        jlib.log('self.page.insert_font() => {xref=}')
+        fontinfo = CheckFontInfo(self.doc, xref)
+        jlib.log('{fontinfo=}')
+
+        fontdict = fontinfo[1]
+        ordering = fontdict["ordering"]
+        simple = fontdict["simple"]
+        bfname = fontdict["name"]
+        ascender = fontdict["ascender"]
+        descender = fontdict["descender"]
+        if lineheight:
+            lheight = fontsize * lineheight
+        elif ascender - descender <= 1:
+            lheight = fontsize * 1.2
+        else:
+            lheight = fontsize * (ascender - descender)
+
+        if maxcode > 255:
+            glyphs = self.doc.get_char_widths(xref, maxcode + 1)
+        else:
+            glyphs = fontdict["glyphs"]
+
+        tab = []
+        for t in text:
+            if simple and bfname not in ("Symbol", "ZapfDingbats"):
+                g = None
+            else:
+                g = glyphs
+            tab.append(getTJstr(t, g, simple, ordering))
+        text = tab
+
+        color_str = ColorCode(color, "c")
+        fill_str = ColorCode(fill, "f")
+        if not fill and render_mode == 0:  # ensure fill color when 0 Tr
+            fill = color
+            fill_str = ColorCode(color, "f")
+
+        morphing = CheckMorph(morph)
+        rot = rotate
+        if rot % 90 != 0:
+            raise ValueError("bad rotate value")
+
+        while rot < 0:
+            rot += 360
+        rot = rot % 360  # text rotate = 0, 90, 270, 180
+
+        templ1 = "\nq\n%s%sBT\n%s1 0 0 1 %g %g Tm\n/%s %g Tf "
+        templ2 = "TJ\n0 -%g TD\n"
+        cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates 90 deg counter-clockwise
+        cmm90 = "0 -1 1 0 0 0 cm\n"  # rotates 90 deg clockwise
+        cm180 = "-1 0 0 -1 0 0 cm\n"  # rotates by 180 deg.
+        height = self.height
+        width = self.width
+
+        # setting up for standard rotation directions
+        # case rotate = 0
+        if morphing:
+            m1 = Matrix(1, 0, 0, 1, morph[0].x + self.x, height - morph[0].y - self.y)
+            mat = ~m1 * morph[1] * m1
+            cm = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat)
+        else:
+            cm = ""
+        top = height - point.y - self.y  # start of 1st char
+        left = point.x + self.x  # start of 1. char
+        space = top  # space available
+        headroom = point.y + self.y  # distance to page border
+        if rot == 90:
+            left = height - point.y - self.y
+            top = -point.x - self.x
+            cm += cmp90
+            space = width - abs(top)
+            headroom = point.x + self.x
+
+        elif rot == 270:
+            left = -height + point.y + self.y
+            top = point.x + self.x
+            cm += cmm90
+            space = abs(top)
+            headroom = width - point.x - self.x
+
+        elif rot == 180:
+            left = -point.x - self.x
+            top = -height + point.y + self.y
+            cm += cm180
+            space = abs(point.y + self.y)
+            headroom = height - point.y - self.y
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont != None:
+            bdc = "/OC /%s BDC\n" % optcont
+            emc = "EMC\n"
+        else:
+            bdc = emc = ""
+
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha == None:
+            alpha = ""
+        else:
+            alpha = "/%s gs\n" % alpha
+        nres = templ1 % (bdc, alpha, cm, left, top, fname, fontsize)
+        if render_mode > 0:
+            nres += "%i Tr " % render_mode
+        if border_width != 1:
+            nres += "%g w " % border_width
+        if color is not None:
+            nres += color_str
+        if fill is not None:
+            nres += fill_str
+
+        # =========================================================================
+        #   start text insertion
+        # =========================================================================
+        nres += text[0]
+        nlines = 1  # set output line counter
+        if len(text) > 1:
+            nres += templ2 % lheight  # line 1
+        else:
+            nres += templ2[:2]
+        for i in range(1, len(text)):
+            if space < lheight:
+                break  # no space left on page
+            if i > 1:
+                nres += "\nT* "
+            nres += text[i] + templ2[:2]
+            space -= lheight
+            nlines += 1
+
+        nres += "\nET\n%sQ\n" % emc
+
+        # =========================================================================
+        #   end of text insertion
+        # =========================================================================
+        # update the /Contents object
+        self.text_cont += nres
+        return nlines
+
+    # ==============================================================================
+    # Shape.insert_textbox
+    # ==============================================================================
+    def insert_textbox(
+        self,
+        rect: rect_like,
+        buffer: typing.Union[str, list],
+        fontname: OptStr = "helv",
+        fontfile: OptStr = None,
+        fontsize: float = 11,
+        lineheight: OptFloat = None,
+        set_simple: bool = 0,
+        encoding: int = 0,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        expandtabs: int = 1,
+        border_width: float = 1,
+        align: int = 0,
+        render_mode: int = 0,
+        rotate: int = 0,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> float:
+        """Insert text into a given rectangle.
+
+        Args:
+            rect -- the textbox to fill
+            buffer -- text to be inserted
+            fontname -- a Base-14 font, font name or '/name'
+            fontfile -- name of a font file
+            fontsize -- font size
+            lineheight -- overwrite the font property
+            color -- RGB stroke color triple
+            fill -- RGB fill color triple
+            render_mode -- text rendering control
+            border_width -- thickness of glyph borders
+            expandtabs -- handles tabulators with string function
+            align -- left, center, right, justified
+            rotate -- 0, 90, 180, or 270 degrees
+            morph -- morph box with a matrix and a fixpoint
+        Returns:
+            unused or deficit rectangle area (float)
+        """
+        rect = Rect(rect)
+        if rect.is_empty or rect.is_infinite:
+            raise ValueError("text box must be finite and not empty")
+
+        color_str = ColorCode(color, "c")
+        fill_str = ColorCode(fill, "f")
+        if fill is None and render_mode == 0:  # ensure fill color for 0 Tr
+            fill = color
+            fill_str = ColorCode(color, "f")
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont != None:
+            bdc = "/OC /%s BDC\n" % optcont
+            emc = "EMC\n"
+        else:
+            bdc = emc = ""
+
+        # determine opacity / transparency
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha == None:
+            alpha = ""
+        else:
+            alpha = "/%s gs\n" % alpha
+
+        if rotate % 90 != 0:
+            raise ValueError("rotate must be multiple of 90")
+
+        rot = rotate
+        while rot < 0:
+            rot += 360
+        rot = rot % 360
+
+        # is buffer worth of dealing with?
+        if not bool(buffer):
+            return rect.height if rot in (0, 180) else rect.width
+
+        cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates counter-clockwise
+        cmm90 = "0 -1 1 0 0 0 cm\n"  # rotates clockwise
+        cm180 = "-1 0 0 -1 0 0 cm\n"  # rotates by 180 deg.
+        height = self.height
+
+        fname = fontname
+        if fname.startswith("/"):
+            fname = fname[1:]
+
+        xref = self.page.insert_font(
+            fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
+        )
+        fontinfo = CheckFontInfo(self.doc, xref)
+
+        fontdict = fontinfo[1]
+        ordering = fontdict["ordering"]
+        simple = fontdict["simple"]
+        glyphs = fontdict["glyphs"]
+        bfname = fontdict["name"]
+        ascender = fontdict["ascender"]
+        descender = fontdict["descender"]
+
+        if lineheight:
+            lheight_factor = lineheight
+        elif ascender - descender <= 1:
+            lheight_factor = 1.2
+        else:
+            lheight_factor = ascender - descender
+        lheight = fontsize * lheight_factor
+
+        # create a list from buffer, split into its lines
+        if type(buffer) in (list, tuple):
+            t0 = "\n".join(buffer)
+        else:
+            t0 = buffer
+
+        maxcode = max([ord(c) for c in t0])
+        # replace invalid char codes for simple fonts
+        if simple and maxcode > 255:
+            t0 = "".join([c if ord(c) < 256 else "?" for c in t0])
+
+        t0 = t0.splitlines()
+
+        glyphs = self.doc.get_char_widths(xref, maxcode + 1)
+        if simple and bfname not in ("Symbol", "ZapfDingbats"):
+            tj_glyphs = None
+        else:
+            tj_glyphs = glyphs
+
+        # ----------------------------------------------------------------------
+        # calculate pixel length of a string
+        # ----------------------------------------------------------------------
+        def pixlen(x):
+            """Calculate pixel length of x."""
+            if ordering < 0:
+                return sum([glyphs[ord(c)][1] for c in x]) * fontsize
+            else:
+                return len(x) * fontsize
+
+        # ----------------------------------------------------------------------
+
+        if ordering < 0:
+            blen = glyphs[32][1] * fontsize  # pixel size of space character
+        else:
+            blen = fontsize
+
+        text = ""  # output buffer
+
+        if CheckMorph(morph):
+            m1 = Matrix(
+                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
+            )
+            mat = ~m1 * morph[1] * m1
+            cm = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat)
+        else:
+            cm = ""
+
+        # ---------------------------------------------------------------------------
+        # adjust for text orientation / rotation
+        # ---------------------------------------------------------------------------
+        progr = 1  # direction of line progress
+        c_pnt = Point(0, fontsize * ascender)  # used for line progress
+        if rot == 0:  # normal orientation
+            point = rect.tl + c_pnt  # line 1 is 'lheight' below top
+            pos = point.y + self.y  # y of first line
+            maxwidth = rect.width  # pixels available in one line
+            maxpos = rect.y1 + self.y  # lines must not be below this
+
+        elif rot == 90:  # rotate counter clockwise
+            c_pnt = Point(fontsize * ascender, 0)  # progress in x-direction
+            point = rect.bl + c_pnt  # line 1 'lheight' away from left
+            pos = point.x + self.x  # position of first line
+            maxwidth = rect.height  # pixels available in one line
+            maxpos = rect.x1 + self.x  # lines must not be right of this
+            cm += cmp90
+
+        elif rot == 180:  # text upside down
+            # progress upwards in y direction
+            c_pnt = -Point(0, fontsize * ascender)
+            point = rect.br + c_pnt  # line 1 'lheight' above bottom
+            pos = point.y + self.y  # position of first line
+            maxwidth = rect.width  # pixels available in one line
+            progr = -1  # subtract lheight for next line
+            maxpos = rect.y0 + self.y  # lines must not be above this
+            cm += cm180
+
+        else:  # rotate clockwise (270 or -90)
+            # progress from right to left
+            c_pnt = -Point(fontsize * ascender, 0)
+            point = rect.tr + c_pnt  # line 1 'lheight' left of right
+            pos = point.x + self.x  # position of first line
+            maxwidth = rect.height  # pixels available in one line
+            progr = -1  # subtract lheight for next line
+            maxpos = rect.x0 + self.x  # lines must not left of this
+            cm += cmm90
+
+        # =======================================================================
+        # line loop
+        # =======================================================================
+        just_tab = []  # 'justify' indicators per line
+
+        for i, line in enumerate(t0):
+            line_t = line.expandtabs(expandtabs).split(" ")  # split into words
+            lbuff = ""  # init line buffer
+            rest = maxwidth  # available line pixels
+            # ===================================================================
+            # word loop
+            # ===================================================================
+            for word in line_t:
+                pl_w = pixlen(word)  # pixel len of word
+                if rest >= pl_w:  # will it fit on the line?
+                    lbuff += word + " "  # yes, and append word
+                    rest -= pl_w + blen  # update available line space
+                    continue
+                # word won't fit - output line (if not empty)
+                if len(lbuff) > 0:
+                    lbuff = lbuff.rstrip() + "\n"  # line full, append line break
+                    text += lbuff  # append to total text
+                    pos += lheight * progr  # increase line position
+                    just_tab.append(True)  # line is justify candidate
+                    lbuff = ""  # re-init line buffer
+                rest = maxwidth  # re-init avail. space
+                if pl_w <= maxwidth:  # word shorter than 1 line?
+                    lbuff = word + " "  # start the line with it
+                    rest = maxwidth - pl_w - blen  # update free space
+                    continue
+                # long word: split across multiple lines - char by char ...
+                if len(just_tab) > 0:
+                    just_tab[-1] = False  # reset justify indicator
+                for c in word:
+                    if pixlen(lbuff) <= maxwidth - pixlen(c):
+                        lbuff += c
+                    else:  # line full
+                        lbuff += "\n"  # close line
+                        text += lbuff  # append to text
+                        pos += lheight * progr  # increase line position
+                        just_tab.append(False)  # do not justify line
+                        lbuff = c  # start new line with this char
+                lbuff += " "  # finish long word
+                rest = maxwidth - pixlen(lbuff)  # long word stored
+
+            if lbuff != "":  # unprocessed line content?
+                text += lbuff.rstrip()  # append to text
+                just_tab.append(False)  # do not justify line
+            if i < len(t0) - 1:  # not the last line?
+                text += "\n"  # insert line break
+                pos += lheight * progr  # increase line position
+
+        more = (pos - maxpos) * progr  # difference to rect size limit
+
+        if more > EPSILON:  # landed too much outside rect
+            return (-1) * more  # return deficit, don't output
+
+        more = abs(more)
+        if more < EPSILON:
+            more = 0  # don't bother with epsilons
+        nres = "\nq\n%s%sBT\n" % (bdc, alpha) + cm  # initialize output buffer
+        templ = "1 0 0 1 %g %g Tm /%s %g Tf "
+        # center, right, justify: output each line with its own specifics
+        spacing = 0
+        text_t = text.splitlines()  # split text in lines again
+        for i, t in enumerate(text_t):
+            pl = maxwidth - pixlen(t)  # length of empty line part
+            pnt = point + c_pnt * (i * lheight_factor)  # text start of line
+            if align == 1:  # center: right shift by half width
+                if rot in (0, 180):
+                    pnt = pnt + Point(pl / 2, 0) * progr
+                else:
+                    pnt = pnt - Point(0, pl / 2) * progr
+            elif align == 2:  # right: right shift by full width
+                if rot in (0, 180):
+                    pnt = pnt + Point(pl, 0) * progr
+                else:
+                    pnt = pnt - Point(0, pl) * progr
+            elif align == 3:  # justify
+                spaces = t.count(" ")  # number of spaces in line
+                if spaces > 0 and just_tab[i]:  # if any, and we may justify
+                    spacing = pl / spaces  # make every space this much larger
+                else:
+                    spacing = 0  # keep normal space length
+            top = height - pnt.y - self.y
+            left = pnt.x + self.x
+            if rot == 90:
+                left = height - pnt.y - self.y
+                top = -pnt.x - self.x
+            elif rot == 270:
+                left = -height + pnt.y + self.y
+                top = pnt.x + self.x
+            elif rot == 180:
+                left = -pnt.x - self.x
+                top = -height + pnt.y + self.y
+
+            nres += templ % (left, top, fname, fontsize)
+            if render_mode > 0:
+                nres += "%i Tr " % render_mode
+            if spacing != 0:
+                nres += "%g Tw " % spacing
+            if color is not None:
+                nres += color_str
+            if fill is not None:
+                nres += fill_str
+            if border_width != 1:
+                nres += "%g w " % border_width
+            nres += "%sTJ\n" % getTJstr(t, tj_glyphs, simple, ordering)
+
+        nres += "ET\n%sQ\n" % emc
+
+        self.text_cont += nres
+        self.updateRect(rect)
+        return more
+
+    def finish(
+        self,
+        width: float = 1,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        dashes: OptStr = None,
+        even_odd: bool = False,
+        morph: OptSeq = None,
+        closePath: bool = True,
+        fill_opacity: float = 1,
+        stroke_opacity: float = 1,
+        oc: int = 0,
+    ) -> None:
+        """Finish the current drawing segment.
+
+        Notes:
+            Apply colors, opacity, dashes, line style and width, or
+            morphing. Also whether to close the path
+            by connecting last to first point.
+        """
+        if self.draw_cont == "":  # treat empty contents as no-op
+            return
+
+        if width == 0:  # border color makes no sense then
+            color = None
+        elif color is None:  # vice versa
+            width = 0
+        color_str = ColorCode(color, "c")  # ensure proper color string
+        fill_str = ColorCode(fill, "f")  # ensure proper fill string
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont is not None:
+            self.draw_cont = "/OC /%s BDC\n" % optcont + self.draw_cont
+            emc = "EMC\n"
+        else:
+            emc = ""
+
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha != None:
+            self.draw_cont = "/%s gs\n" % alpha + self.draw_cont
+
+        if width != 1:
+            self.draw_cont += "%g w\n" % width
+
+        if lineCap != 0:
+            self.draw_cont = "%i J\n" % lineCap + self.draw_cont
+        if lineJoin != 0:
+            self.draw_cont = "%i j\n" % lineJoin + self.draw_cont
+
+        if dashes not in (None, "", "[] 0"):
+            self.draw_cont = "%s d\n" % dashes + self.draw_cont
+
+        if closePath:
+            self.draw_cont += "h\n"
+            self.lastPoint = None
+
+        if color is not None:
+            self.draw_cont += color_str
+
+        if fill is not None:
+            self.draw_cont += fill_str
+            if color is not None:
+                if not even_odd:
+                    self.draw_cont += "B\n"
+                else:
+                    self.draw_cont += "B*\n"
+            else:
+                if not even_odd:
+                    self.draw_cont += "f\n"
+                else:
+                    self.draw_cont += "f*\n"
+        else:
+            self.draw_cont += "S\n"
+
+        self.draw_cont += emc
+        if CheckMorph(morph):
+            m1 = Matrix(
+                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
+            )
+            mat = ~m1 * morph[1] * m1
+            self.draw_cont = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat) + self.draw_cont
+
+        self.totalcont += "\nq\n" + self.draw_cont + "Q\n"
+        self.draw_cont = ""
+        self.lastPoint = None
+        return
+
+    def commit(self, overlay: bool = True) -> None:
+        """Update the page's /Contents object with Shape data. The argument controls whether data appear in foreground (default) or background."""
+        CheckParent(self.page)  # doc may have died meanwhile
+        self.totalcont += self.text_cont
+
+        self.totalcont = self.totalcont.encode()
+
+        if self.totalcont != b"":
+            # make /Contents object with dummy stream
+            xref = TOOLS._insert_contents(self.page, b" ", overlay)
+            # update it with potential compression
+            self.doc.update_stream(xref, self.totalcont)
+
+        self.lastPoint = None  # clean up ...
+        self.rect = None  #
+        self.draw_cont = ""  # for potential ...
+        self.text_cont = ""  # ...
+        self.totalcont = ""  # re-use
+        return
+
+    # define deprecated aliases ------------------------------------------
+    drawBezier = draw_bezier
+    drawCircle = draw_circle
+    drawCurve = draw_curve
+    drawLine = draw_line
+    drawOval = draw_oval
+    drawPolyline = draw_polyline
+    drawQuad = draw_quad
+    drawRect = draw_rect
+    drawSector = draw_sector
+    drawSquiggle = draw_squiggle
+    drawZigzag = draw_zigzag
+    insertText = insert_text
+    insertTextbox = insert_textbox
+
+
+class TextPage:
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, TextPage, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, TextPage, name)
+
+    def __init__(self, mediabox):
+        this = _fitz.new_TextPage(mediabox)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+        self.thisown = True
+
+
+
+    def search(self, needle, hit_max=0, quads=1):
+        """Locate 'needle' returning rects or quads."""
+
+        val = _fitz.TextPage_search(self, needle, hit_max, quads)
+
+        if not val:
+            return val
+        items = len(val)
+        for i in range(items):  # change entries to quads or rects
+            q = Quad(val[i])
+            if quads:
+                val[i] = q
+            else:
+                val[i] = q.rect
+        if quads:
+            return val
+        i = 0  # join overlapping rects on the same line
+        while i < items - 1:
+            v1 = val[i]
+            v2 = val[i + 1]
+            if v1.y1 != v2.y1 or (v1 & v2).isEmpty:
+                i += 1
+                continue  # no overlap on same line
+            val[i] = v1 | v2  # join rectangles
+            del val[i + 1]  # remove v2
+            items -= 1  # reduce item count
+
+
+        return val
+
+
+    def _getNewBlockList(self, page_dict, raw):
+        return _fitz.TextPage__getNewBlockList(self, page_dict, raw)
+
+    def _textpage_dict(self, raw=False):
+        page_dict = {"width": self.rect.width, "height": self.rect.height}
+        self._getNewBlockList(page_dict, raw)
+        return page_dict
+
+
+    def extractBLOCKS(self):
+        """Return a list with text block information."""
+
+        return _fitz.TextPage_extractBLOCKS(self)
+
+
+    def extractWORDS(self):
+        """Return a list with text word information."""
+
+        return _fitz.TextPage_extractWORDS(self)
+
+    @property
+
+    def rect(self):
+        """Page rectangle."""
+
+        val = _fitz.TextPage_rect(self)
+        val = Rect(val)
+
+        return val
+
+
+    def _extractText(self, format):
+        return _fitz.TextPage__extractText(self, format)
+
+    def extractSelection(self, pointa, pointb):
+        return _fitz.TextPage_extractSelection(self, pointa, pointb)
+
+    def extractText(self) -> str:
+        """Return simple, bare text on the page."""
+        return self._extractText(0)
+
+    extractTEXT = extractText
+
+    def extractHTML(self) -> str:
+        """Return page content as a HTML string."""
+        return self._extractText(1)
+
+    def extractJSON(self) -> str:
+        """Return 'extractDICT' converted to JSON format."""
+        import base64, json
+        val = self._textpage_dict(raw=False)
+
+        class b64encode(json.JSONEncoder):
+            def default(self, s):
+                if type(s) in (bytes, bytearray):
+                    return base64.b64encode(s).decode()
+
+        val = json.dumps(val, separators=(",", ":"), cls=b64encode, indent=1)
+        return val
+
+    def extractRAWJSON(self) -> str:
+        """Return 'extractRAWDICT' converted to JSON format."""
+        import base64, json
+        val = self._textpage_dict(raw=True)
+
+        class b64encode(json.JSONEncoder):
+            def default(self,s):
+                if type(s) in (bytes, bytearray):
+                    return base64.b64encode(s).decode()
+
+        val = json.dumps(val, separators=(",", ":"), cls=b64encode, indent=1)
+        return val
+
+    def extractXML(self) -> str:
+        """Return page content as a XML string."""
+        return self._extractText(3)
+
+    def extractXHTML(self) -> str:
+        """Return page content as a XHTML string."""
+        return self._extractText(4)
+
+    def extractDICT(self) -> dict:
+        """Return page content as a Python dict of images and text spans."""
+        return self._textpage_dict(raw=False)
+
+    def extractRAWDICT(self) -> dict:
+        """Return page content as a Python dict of images and text characters."""
+        return self._textpage_dict(raw=True)
+
+    def __del__(self):
+        if not type(self) is TextPage: return
+        self.thisown = False
+
+
+class TextWriter:
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, TextWriter, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, TextWriter, name)
+
+    def __init__(self, page_rect, opacity=1, color=None):
+        """Stores text spans for later output on compatible PDF pages."""
+
+        this = _fitz.new_TextWriter(page_rect, opacity, color)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+        self.opacity = opacity
+        self.color = color
+        self.rect = Rect(page_rect)
+        self.ctm = Matrix(1, 0, 0, -1, 0, self.rect.height)
+        self.ictm = ~self.ctm
+        self.lastPoint = Point()
+        self.lastPoint.__doc__ = "Position following last text insertion."
+        self.textRect = Rect(0, 0, -1, -1)
+        self.textRect.__doc__ = "Accumulated area of text spans."
+        self.used_fonts = set()
+
+
+
+
+    def append(self, pos, text, font=None, fontsize=11, language=None):
+
+        """Store 'text' at point 'pos' using 'font' and 'fontsize'."""
+
+        pos = Point(pos) * self.ictm
+        if font is None:
+            font = Font("helv")
+        if not font.isWritable:
+            raise ValueError("Unsupported font '%s'." % font.name)
+
+        val = _fitz.TextWriter_append(self, pos, text, font, fontsize, language)
+
+        self.lastPoint = Point(val[-2:]) * self.ctm
+        self.textRect = self._bbox * self.ctm
+        val = self.textRect, self.lastPoint
+        if font.flags["mono"] == 1:
+            self.used_fonts.add(font)
+
+
+        return val
+
+
+    def appendv(self, pos, text, font=None, fontsize=11,
+        language=None):
+        lheight = fontsize * 1.2
+        for c in text:
+            self.append(pos, c, font=font, fontsize=fontsize,
+                language=language)
+            pos.y += lheight
+        return self.textRect, self.lastPoint
+
+    @property
+
+    def _bbox(self):
+        val = _fitz.TextWriter__bbox(self)
+        val = Rect(val)
+
+        return val
+
+
+    def writeText(self, page, color=None, opacity=-1, overlay=1, morph=None, render_mode=0, oc=0):
+
+        """Write the text to a PDF page having the TextWriter's page size.
+
+        Args:
+            page: a PDF page having same size.
+            color: override text color.
+            opacity: override transparency.
+            overlay: put in foreground or background.
+            morph: tuple(Point, Matrix), apply Matrix with fixpoint Point.
+            render_mode: (int) PDF render mode operator 'Tr'.
+        """
+
+        CheckParent(page)
+        if abs(self.rect - page.rect) > 1e-3:
+            raise ValueError("incompatible page rect")
+        if morph != None:
+            if (type(morph) not in (tuple, list)
+                or type(morph[0]) is not Point
+                or type(morph[1]) is not Matrix
+                ):
+                raise ValueError("morph must be (Point, Matrix) or None")
+        if getattr(opacity, "__float__", None) is None or opacity == -1:
+            opacity = self.opacity
+        if color is None:
+            color = self.color
+
+
+        val = _fitz.TextWriter_writeText(self, page, color, opacity, overlay, morph, render_mode, oc)
+
+        max_nums = val[0]
+        content = val[1]
+        max_alp, max_font = max_nums
+        old_cont_lines = content.splitlines()
+
+        optcont = page._get_optional_content(oc)
+        if optcont != None:
+            bdc = "/OC /%s BDC" % optcont
+            emc = "EMC"
+        else:
+            bdc = emc = ""
+
+        new_cont_lines = ["q"]
+        if bdc:
+            new_cont_lines.append(bdc)
+
+        cb = page.CropBoxPosition
+        if bool(cb):
+            new_cont_lines.append("1 0 0 1 %g %g cm" % (cb.x, cb.y))
+
+        if morph:
+            p = morph[0] * self.ictm
+            delta = Matrix(1, 1).preTranslate(p.x, p.y)
+            matrix = ~delta * morph[1] * delta
+            new_cont_lines.append("%g %g %g %g %g %g cm" % JM_TUPLE(matrix))
+
+        for line in old_cont_lines:
+            if line.endswith(" cm"):
+                continue
+            if line == "BT":
+                new_cont_lines.append(line)
+                new_cont_lines.append("%i Tr" % render_mode)
+                continue
+            if line.endswith(" gs"):
+                alp = int(line.split()[0][4:]) + max_alp
+                line = "/Alp%i gs" % alp
+            elif line.endswith(" Tf"):
+                temp = line.split()
+                font = int(temp[0][2:]) + max_font
+                line = " ".join(["/F%i" % font] + temp[1:])
+            elif line.endswith(" rg"):
+                new_cont_lines.append(line.replace("rg", "RG"))
+            elif line.endswith(" g"):
+                new_cont_lines.append(line.replace(" g", " G"))
+            elif line.endswith(" k"):
+                new_cont_lines.append(line.replace(" k", " K"))
+            new_cont_lines.append(line)
+        if emc:
+            new_cont_lines.append(emc)
+        new_cont_lines.append("Q\n")
+        content = "\n".join(new_cont_lines).encode("utf-8")
+        TOOLS._insert_contents(page, content, overlay=overlay)
+        val = None
+        for font in self.used_fonts:
+            repair_mono_font(page, font)
+
+
+        return val
+
+
+    def __del__(self):
+        if not type(self) is TextWriter:
+            return
+
 
 class IRect(Rect):
     """IRect() - all zeros\nIRect(x0, y0, x1, y1)\nIRect(Rect or IRect) - new copy\nIRect(sequence) - from 'sequence'"""
@@ -10699,1633 +12325,6 @@ def _get_glyph_text() -> bytes:
 
 
 
-
-
-
-class Outline:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Outline, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
-    @property
-
-    def uri(self):
-        return _fitz.Outline_uri(self)
-    @property
-
-    def next(self):
-        return _fitz.Outline_next(self)
-    @property
-
-    def down(self):
-        return _fitz.Outline_down(self)
-    @property
-
-    def isExternal(self):
-        return _fitz.Outline_isExternal(self)
-    @property
-
-    def page(self):
-        return _fitz.Outline_page(self)
-    @property
-
-    def x(self):
-        return _fitz.Outline_x(self)
-    @property
-
-    def y(self):
-        return _fitz.Outline_y(self)
-    @property
-
-    def title(self):
-        return _fitz.Outline_title(self)
-    @property
-
-    def is_open(self):
-        return _fitz.Outline_is_open(self)
-    isOpen = is_open
-
-    @property
-    def dest(self):
-        '''outline destination details'''
-        return linkDest(self, None)
-
-
-class Link:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Link, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Link, name)
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
-
-    def _border(self, doc, xref):
-        return _fitz.Link__border(self, doc, xref)
-
-    def _setBorder(self, border, doc, xref):
-        return _fitz.Link__setBorder(self, border, doc, xref)
-
-    def _colors(self, doc, xref):
-        return _fitz.Link__colors(self, doc, xref)
-
-    def _setColors(self, colors, doc, xref):
-        return _fitz.Link__setColors(self, colors, doc, xref)
-
-    @property
-    def border(self):
-        return self._border(self.parent.parent.this, self.xref)
-
-    def setBorder(self, border=None, width=0, dashes=None, style=None):
-        if type(border) is not dict:
-            border = {"width": width, "style": style, "dashes": dashes}
-        return self._setBorder(border, self.parent.parent.this, self.xref)
-
-    @property
-    def colors(self):
-        return self._colors(self.parent.parent.this, self.xref)
-
-    def setColors(self, colors=None, stroke=None, fill=None):
-        if type(colors) is not dict:
-            colors = {"fill": fill, "stroke": stroke}
-        return self._setColors(colors, self.parent.parent.this, self.xref)
-
-    @property
-
-    def uri(self):
-        """Uri string."""
-        CheckParent(self)
-
-        return _fitz.Link_uri(self)
-
-    @property
-
-    def isExternal(self):
-        """External indicator."""
-        CheckParent(self)
-
-        return _fitz.Link_isExternal(self)
-
-
-    page = -1
-    @property
-    def dest(self):
-        """Create link destination details."""
-        if hasattr(self, "parent") and self.parent is None:
-            raise ValueError("orphaned object: parent is None")
-        if self.parent.parent.isClosed or self.parent.parent.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        doc = self.parent.parent
-
-        if self.isExternal or self.uri.startswith("#"):
-            uri = None
-        else:
-            uri = doc.resolveLink(self.uri)
-
-        return linkDest(self, uri)
-
-    @property
-
-    def rect(self):
-        """Rectangle ('hot area')."""
-        CheckParent(self)
-
-        val = _fitz.Link_rect(self)
-        val = Rect(val)
-
-        return val
-
-    @property
-
-    def next(self):
-        """Next link."""
-        CheckParent(self)
-
-        val = _fitz.Link_next(self)
-
-        if val:
-            val.thisown = True
-            val.parent = self.parent  # copy owning page from prev link
-            val.parent._annot_refs[id(val)] = val
-            if self.xref > 0:  # prev link has an xref
-                link_xrefs = [x[0] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
-                link_ids = [x[2] for x in self.parent.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK]
-                idx = link_xrefs.index(self.xref)
-                val.xref = link_xrefs[idx + 1]
-                val.id = link_ids[idx + 1]
-            else:
-                val.xref = 0
-                val.id = ""
-
-
-        return val
-
-
-    def _erase(self):
-        try:
-            self.parent._forget_annot(self)
-        except:
-            pass
-        self.parent = None
-        self.thisown = False
-
-    def __str__(self):
-        CheckParent(self)
-        return "link on " + str(self.parent)
-
-    def __repr__(self):
-        CheckParent(self)
-        return "link on " + str(self.parent)
-
-    def __del__(self):
-        self._erase()
-
-class DisplayList:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, DisplayList, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, DisplayList, name)
-
-    def __init__(self, *args):
-        if len(args) == 1 and isinstance(args[0], mupdf.Rect):
-            self.this = mupdf.DisplayList(args[0])
-        elif len(args) == 1 and isinstance(args[0], mupdf.DisplayList):
-            self.this = args[0]
-        else:
-            assert 0, f'Unrecognised args={args}'
-
-
-    def run(self, dw, m, area):
-        return _fitz.DisplayList_run(self, dw, m, area)
-    @property
-
-    def rect(self):
-        val = _fitz.DisplayList_rect(self)
-        val = Rect(val)
-
-        return val
-
-
-    def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
-        #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
-        if not colorspace:
-            colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
-
-        val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
-        val.thisown = True
-
-        return val
-
-
-    def getTextPage(self, flags=3):
-        val = _fitz.DisplayList_getTextPage(self, flags)
-        val.thisown = True
-
-        return val
-
-
-    def __del__(self):
-        if not type(self) is DisplayList: return
-        self.thisown = False
-
-
-class TextPage:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TextPage, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TextPage, name)
-
-    def __init__(self, mediabox):
-        this = _fitz.new_TextPage(mediabox)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-        self.thisown = True
-
-
-
-    def search(self, needle, hit_max=0, quads=1):
-        """Locate 'needle' returning rects or quads."""
-
-        val = _fitz.TextPage_search(self, needle, hit_max, quads)
-
-        if not val:
-            return val
-        items = len(val)
-        for i in range(items):  # change entries to quads or rects
-            q = Quad(val[i])
-            if quads:
-                val[i] = q
-            else:
-                val[i] = q.rect
-        if quads:
-            return val
-        i = 0  # join overlapping rects on the same line
-        while i < items - 1:
-            v1 = val[i]
-            v2 = val[i + 1]
-            if v1.y1 != v2.y1 or (v1 & v2).isEmpty:
-                i += 1
-                continue  # no overlap on same line
-            val[i] = v1 | v2  # join rectangles
-            del val[i + 1]  # remove v2
-            items -= 1  # reduce item count
-
-
-        return val
-
-
-    def _getNewBlockList(self, page_dict, raw):
-        return _fitz.TextPage__getNewBlockList(self, page_dict, raw)
-
-    def _textpage_dict(self, raw=False):
-        page_dict = {"width": self.rect.width, "height": self.rect.height}
-        self._getNewBlockList(page_dict, raw)
-        return page_dict
-
-
-    def extractBLOCKS(self):
-        """Return a list with text block information."""
-
-        return _fitz.TextPage_extractBLOCKS(self)
-
-
-    def extractWORDS(self):
-        """Return a list with text word information."""
-
-        return _fitz.TextPage_extractWORDS(self)
-
-    @property
-
-    def rect(self):
-        """Page rectangle."""
-
-        val = _fitz.TextPage_rect(self)
-        val = Rect(val)
-
-        return val
-
-
-    def _extractText(self, format):
-        return _fitz.TextPage__extractText(self, format)
-
-    def extractSelection(self, pointa, pointb):
-        return _fitz.TextPage_extractSelection(self, pointa, pointb)
-
-    def extractText(self) -> str:
-        """Return simple, bare text on the page."""
-        return self._extractText(0)
-
-    extractTEXT = extractText
-
-    def extractHTML(self) -> str:
-        """Return page content as a HTML string."""
-        return self._extractText(1)
-
-    def extractJSON(self) -> str:
-        """Return 'extractDICT' converted to JSON format."""
-        import base64, json
-        val = self._textpage_dict(raw=False)
-
-        class b64encode(json.JSONEncoder):
-            def default(self, s):
-                if type(s) in (bytes, bytearray):
-                    return base64.b64encode(s).decode()
-
-        val = json.dumps(val, separators=(",", ":"), cls=b64encode, indent=1)
-        return val
-
-    def extractRAWJSON(self) -> str:
-        """Return 'extractRAWDICT' converted to JSON format."""
-        import base64, json
-        val = self._textpage_dict(raw=True)
-
-        class b64encode(json.JSONEncoder):
-            def default(self,s):
-                if type(s) in (bytes, bytearray):
-                    return base64.b64encode(s).decode()
-
-        val = json.dumps(val, separators=(",", ":"), cls=b64encode, indent=1)
-        return val
-
-    def extractXML(self) -> str:
-        """Return page content as a XML string."""
-        return self._extractText(3)
-
-    def extractXHTML(self) -> str:
-        """Return page content as a XHTML string."""
-        return self._extractText(4)
-
-    def extractDICT(self) -> dict:
-        """Return page content as a Python dict of images and text spans."""
-        return self._textpage_dict(raw=False)
-
-    def extractRAWDICT(self) -> dict:
-        """Return page content as a Python dict of images and text characters."""
-        return self._textpage_dict(raw=True)
-
-    def __del__(self):
-        if not type(self) is TextPage: return
-        self.thisown = False
-
-
-class Graftmap:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Graftmap, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Graftmap, name)
-
-    def __init__(self, doc):
-        this = _fitz.new_Graftmap(doc)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-        self.thisown = True
-
-
-
-    def __del__(self):
-        if not type(self) is Graftmap:
-            return
-        self.thisown = False
-
-
-class TextWriter:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TextWriter, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TextWriter, name)
-
-    def __init__(self, page_rect, opacity=1, color=None):
-        """Stores text spans for later output on compatible PDF pages."""
-
-        this = _fitz.new_TextWriter(page_rect, opacity, color)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-
-        self.opacity = opacity
-        self.color = color
-        self.rect = Rect(page_rect)
-        self.ctm = Matrix(1, 0, 0, -1, 0, self.rect.height)
-        self.ictm = ~self.ctm
-        self.lastPoint = Point()
-        self.lastPoint.__doc__ = "Position following last text insertion."
-        self.textRect = Rect(0, 0, -1, -1)
-        self.textRect.__doc__ = "Accumulated area of text spans."
-        self.used_fonts = set()
-
-
-
-
-    def append(self, pos, text, font=None, fontsize=11, language=None):
-
-        """Store 'text' at point 'pos' using 'font' and 'fontsize'."""
-
-        pos = Point(pos) * self.ictm
-        if font is None:
-            font = Font("helv")
-        if not font.isWritable:
-            raise ValueError("Unsupported font '%s'." % font.name)
-
-        val = _fitz.TextWriter_append(self, pos, text, font, fontsize, language)
-
-        self.lastPoint = Point(val[-2:]) * self.ctm
-        self.textRect = self._bbox * self.ctm
-        val = self.textRect, self.lastPoint
-        if font.flags["mono"] == 1:
-            self.used_fonts.add(font)
-
-
-        return val
-
-
-    def appendv(self, pos, text, font=None, fontsize=11,
-        language=None):
-        lheight = fontsize * 1.2
-        for c in text:
-            self.append(pos, c, font=font, fontsize=fontsize,
-                language=language)
-            pos.y += lheight
-        return self.textRect, self.lastPoint
-
-    @property
-
-    def _bbox(self):
-        val = _fitz.TextWriter__bbox(self)
-        val = Rect(val)
-
-        return val
-
-
-    def writeText(self, page, color=None, opacity=-1, overlay=1, morph=None, render_mode=0, oc=0):
-
-        """Write the text to a PDF page having the TextWriter's page size.
-
-        Args:
-            page: a PDF page having same size.
-            color: override text color.
-            opacity: override transparency.
-            overlay: put in foreground or background.
-            morph: tuple(Point, Matrix), apply Matrix with fixpoint Point.
-            render_mode: (int) PDF render mode operator 'Tr'.
-        """
-
-        CheckParent(page)
-        if abs(self.rect - page.rect) > 1e-3:
-            raise ValueError("incompatible page rect")
-        if morph != None:
-            if (type(morph) not in (tuple, list)
-                or type(morph[0]) is not Point
-                or type(morph[1]) is not Matrix
-                ):
-                raise ValueError("morph must be (Point, Matrix) or None")
-        if getattr(opacity, "__float__", None) is None or opacity == -1:
-            opacity = self.opacity
-        if color is None:
-            color = self.color
-
-
-        val = _fitz.TextWriter_writeText(self, page, color, opacity, overlay, morph, render_mode, oc)
-
-        max_nums = val[0]
-        content = val[1]
-        max_alp, max_font = max_nums
-        old_cont_lines = content.splitlines()
-
-        optcont = page._get_optional_content(oc)
-        if optcont != None:
-            bdc = "/OC /%s BDC" % optcont
-            emc = "EMC"
-        else:
-            bdc = emc = ""
-
-        new_cont_lines = ["q"]
-        if bdc:
-            new_cont_lines.append(bdc)
-
-        cb = page.CropBoxPosition
-        if bool(cb):
-            new_cont_lines.append("1 0 0 1 %g %g cm" % (cb.x, cb.y))
-
-        if morph:
-            p = morph[0] * self.ictm
-            delta = Matrix(1, 1).preTranslate(p.x, p.y)
-            matrix = ~delta * morph[1] * delta
-            new_cont_lines.append("%g %g %g %g %g %g cm" % JM_TUPLE(matrix))
-
-        for line in old_cont_lines:
-            if line.endswith(" cm"):
-                continue
-            if line == "BT":
-                new_cont_lines.append(line)
-                new_cont_lines.append("%i Tr" % render_mode)
-                continue
-            if line.endswith(" gs"):
-                alp = int(line.split()[0][4:]) + max_alp
-                line = "/Alp%i gs" % alp
-            elif line.endswith(" Tf"):
-                temp = line.split()
-                font = int(temp[0][2:]) + max_font
-                line = " ".join(["/F%i" % font] + temp[1:])
-            elif line.endswith(" rg"):
-                new_cont_lines.append(line.replace("rg", "RG"))
-            elif line.endswith(" g"):
-                new_cont_lines.append(line.replace(" g", " G"))
-            elif line.endswith(" k"):
-                new_cont_lines.append(line.replace(" k", " K"))
-            new_cont_lines.append(line)
-        if emc:
-            new_cont_lines.append(emc)
-        new_cont_lines.append("Q\n")
-        content = "\n".join(new_cont_lines).encode("utf-8")
-        TOOLS._insert_contents(page, content, overlay=overlay)
-        val = None
-        for font in self.used_fonts:
-            repair_mono_font(page, font)
-
-
-        return val
-
-
-    def __del__(self):
-        if not type(self) is TextWriter:
-            return
-
-
-class Font:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Font, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Font, name)
-
-    def __init__(self, fontname=None, fontfile=None, fontbuffer=None, script=0, language=None, ordering=-1, is_bold=0, is_italic=0, is_serif=0):
-
-        if fontname:
-            if "/" in fontname or "\\" in fontname or "." in fontname:
-                print("Warning: did you mean a fontfile?")
-
-            if fontname.lower() in ("china-t", "china-s", "japan", "korea","china-ts", "china-ss", "japan-s", "korea-s", "cjk"):
-                ordering = 0
-
-            elif fontname.lower() in fitz_fontdescriptors.keys():
-                import pymupdf_fonts  # optional fonts
-                fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
-                fontname = None  # ensure using fontbuffer only
-                del pymupdf_fonts  # remove package again
-
-            elif ordering < 0:
-                fontname = Base14_fontdict.get(fontname.lower(), fontname)
-
-
-        this = _fitz.new_Font(fontname, fontfile, fontbuffer, script, language, ordering, is_bold, is_italic, is_serif)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-
-    def glyph_advance(self, chr, language=None, script=0, wmode=0):
-        """Return the glyph width of a unicode (font size 1)."""
-
-        return _fitz.Font_glyph_advance(self, chr, language, script, wmode)
-
-
-    def glyph_bbox(self, chr, language=None, script=0):
-        """Return the glyph bbox of a unicode (font size 1)."""
-
-        val = _fitz.Font_glyph_bbox(self, chr, language, script)
-        val = Rect(val)
-
-        return val
-
-
-    def has_glyph(self, chr, language=None, script=0, fallback=0):
-        """Check whether font has a glyph for this unicode."""
-
-        return _fitz.Font_has_glyph(self, chr, language, script, fallback)
-
-
-    def valid_codepoints(self):
-        from array import array
-        gc = self.glyph_count
-        cp = array("l", (0,) * gc)
-        arr = cp.buffer_info()
-        self._valid_unicodes(arr)
-        return array("l", sorted(set(cp))[1:])
-
-
-    def _valid_unicodes(self, arr):
-        return _fitz.Font__valid_unicodes(self, arr)
-    @property
-
-    def flags(self):
-        return _fitz.Font_flags(self)
-    @property
-
-    def isWritable(self):
-        return _fitz.Font_isWritable(self)
-    @property
-
-    def name(self):
-        return _fitz.Font_name(self)
-    @property
-
-    def glyph_count(self):
-        return _fitz.Font_glyph_count(self)
-    @property
-
-    def buffer(self):
-        return _fitz.Font_buffer(self)
-    @property
-
-    def bbox(self):
-        val = _fitz.Font_bbox(self)
-        val = Rect(val)
-
-        return val
-
-    @property
-
-    def ascender(self):
-        """Return the glyph ascender value."""
-
-        return _fitz.Font_ascender(self)
-
-    @property
-
-    def descender(self):
-        """Return the glyph descender value."""
-
-        return _fitz.Font_descender(self)
-
-
-    def glyph_name_to_unicode(self, name):
-        """Return the unicode for a glyph name."""
-        return glyph_name_to_unicode(name)
-
-    def unicode_to_glyph_name(self, ch):
-        """Return the glyph name for a unicode."""
-        return unicode_to_glyph_name(ch)
-
-    def text_length(self, text, fontsize=11, wmode=0):
-        """Calculate the length of a string for this font."""
-        return fontsize * sum([self.glyph_advance(ord(c), wmode=wmode) for c in text])
-
-    def __repr__(self):
-        return "Font('%s')" % self.name
-
-    def __del__(self):
-        if type(self) is not Font:
-            return None
-
-
-class Shape(object):
-    """Create a new shape."""
-
-    @staticmethod
-    def horizontal_angle(C, P):
-        """Return the angle to the horizontal for the connection from C to P.
-        This uses the arcus sine function and resolves its inherent ambiguity by
-        looking up in which quadrant vector S = P - C is located.
-        """
-        S = Point(P - C).unit  # unit vector 'C' -> 'P'
-        alfa = math.asin(abs(S.y))  # absolute angle from horizontal
-        if S.x < 0:  # make arcsin result unique
-            if S.y <= 0:  # bottom-left
-                alfa = -(math.pi - alfa)
-            else:  # top-left
-                alfa = math.pi - alfa
-        else:
-            if S.y >= 0:  # top-right
-                pass
-            else:  # bottom-right
-                alfa = -alfa
-        return alfa
-
-    def __init__(self, page: Page):
-        CheckParent(page)
-        self.page = page
-        self.doc = page.parent
-        if not self.doc.is_pdf:
-            raise ValueError("not a PDF")
-        self.height = page.mediabox_size.y
-        self.width = page.mediabox_size.x
-        self.x = page.cropbox_position.x
-        self.y = page.cropbox_position.y
-
-        self.pctm = page.transformation_matrix  # page transf. matrix
-        self.ipctm = ~self.pctm  # inverted transf. matrix
-
-        self.draw_cont = ""
-        self.text_cont = ""
-        self.totalcont = ""
-        self.lastPoint = None
-        self.rect = None
-
-    def updateRect(self, x):
-        if self.rect is None:
-            if len(x) == 2:
-                self.rect = Rect(x, x)
-            else:
-                self.rect = Rect(x)
-
-        else:
-            if len(x) == 2:
-                x = Point(x)
-                self.rect.x0 = min(self.rect.x0, x.x)
-                self.rect.y0 = min(self.rect.y0, x.y)
-                self.rect.x1 = max(self.rect.x1, x.x)
-                self.rect.y1 = max(self.rect.y1, x.y)
-            else:
-                x = Rect(x)
-                self.rect.x0 = min(self.rect.x0, x.x0)
-                self.rect.y0 = min(self.rect.y0, x.y0)
-                self.rect.x1 = max(self.rect.x1, x.x1)
-                self.rect.y1 = max(self.rect.y1, x.y1)
-
-    def draw_line(self, p1: point_like, p2: point_like) -> Point:
-        """Draw a line between two points."""
-        p1 = Point(p1)
-        p2 = Point(p2)
-        if not (self.lastPoint == p1):
-            self.draw_cont += "%g %g m\n" % JM_TUPLE(p1 * self.ipctm)
-            self.lastPoint = p1
-            self.updateRect(p1)
-
-        self.draw_cont += "%g %g l\n" % JM_TUPLE(p2 * self.ipctm)
-        self.updateRect(p2)
-        self.lastPoint = p2
-        return self.lastPoint
-
-    def draw_polyline(self, points: list) -> Point:
-        """Draw several connected line segments."""
-        for i, p in enumerate(points):
-            if i == 0:
-                if not (self.lastPoint == Point(p)):
-                    self.draw_cont += "%g %g m\n" % JM_TUPLE(Point(p) * self.ipctm)
-                    self.lastPoint = Point(p)
-            else:
-                self.draw_cont += "%g %g l\n" % JM_TUPLE(Point(p) * self.ipctm)
-            self.updateRect(p)
-
-        self.lastPoint = Point(points[-1])
-        return self.lastPoint
-
-    def draw_bezier(
-        self,
-        p1: point_like,
-        p2: point_like,
-        p3: point_like,
-        p4: point_like,
-    ) -> Point:
-        """Draw a standard cubic Bezier curve."""
-        p1 = Point(p1)
-        p2 = Point(p2)
-        p3 = Point(p3)
-        p4 = Point(p4)
-        if not (self.lastPoint == p1):
-            self.draw_cont += "%g %g m\n" % JM_TUPLE(p1 * self.ipctm)
-        self.draw_cont += "%g %g %g %g %g %g c\n" % JM_TUPLE(
-            list(p2 * self.ipctm) + list(p3 * self.ipctm) + list(p4 * self.ipctm)
-        )
-        self.updateRect(p1)
-        self.updateRect(p2)
-        self.updateRect(p3)
-        self.updateRect(p4)
-        self.lastPoint = p4
-        return self.lastPoint
-
-    def draw_oval(self, tetra: typing.Union[quad_like, rect_like]) -> Point:
-        """Draw an ellipse inside a tetrapod."""
-        if len(tetra) != 4:
-            raise ValueError("invalid arg length")
-        if hasattr(tetra[0], "__float__"):
-            q = Rect(tetra).quad
-        else:
-            q = Quad(tetra)
-
-        mt = q.ul + (q.ur - q.ul) * 0.5
-        mr = q.ur + (q.lr - q.ur) * 0.5
-        mb = q.ll + (q.lr - q.ll) * 0.5
-        ml = q.ul + (q.ll - q.ul) * 0.5
-        if not (self.lastPoint == ml):
-            self.draw_cont += "%g %g m\n" % JM_TUPLE(ml * self.ipctm)
-            self.lastPoint = ml
-        self.draw_curve(ml, q.ll, mb)
-        self.draw_curve(mb, q.lr, mr)
-        self.draw_curve(mr, q.ur, mt)
-        self.draw_curve(mt, q.ul, ml)
-        self.updateRect(q.rect)
-        self.lastPoint = ml
-        return self.lastPoint
-
-    def draw_circle(self, center: point_like, radius: float) -> Point:
-        """Draw a circle given its center and radius."""
-        if not radius > EPSILON:
-            raise ValueError("radius must be postive")
-        center = Point(center)
-        p1 = center - (radius, 0)
-        return self.draw_sector(center, p1, 360, fullSector=False)
-
-    def draw_curve(
-        self,
-        p1: point_like,
-        p2: point_like,
-        p3: point_like,
-    ) -> Point:
-        """Draw a curve between points using one control point."""
-        kappa = 0.55228474983
-        p1 = Point(p1)
-        p2 = Point(p2)
-        p3 = Point(p3)
-        k1 = p1 + (p2 - p1) * kappa
-        k2 = p3 + (p2 - p3) * kappa
-        return self.draw_bezier(p1, k1, k2, p3)
-
-    def draw_sector(
-        self,
-        center: point_like,
-        point: point_like,
-        beta: float,
-        fullSector: bool = True,
-    ) -> Point:
-        """Draw a circle sector."""
-        center = Point(center)
-        point = Point(point)
-        l3 = "%g %g m\n"
-        l4 = "%g %g %g %g %g %g c\n"
-        l5 = "%g %g l\n"
-        betar = math.radians(-beta)
-        w360 = math.radians(math.copysign(360, betar)) * (-1)
-        w90 = math.radians(math.copysign(90, betar))
-        w45 = w90 / 2
-        while abs(betar) > 2 * math.pi:
-            betar += w360  # bring angle below 360 degrees
-        if not (self.lastPoint == point):
-            self.draw_cont += l3 % JM_TUPLE(point * self.ipctm)
-            self.lastPoint = point
-        Q = Point(0, 0)  # just make sure it exists
-        C = center
-        P = point
-        S = P - C  # vector 'center' -> 'point'
-        rad = abs(S)  # circle radius
-
-        if not rad > EPSILON:
-            raise ValueError("radius must be positive")
-
-        alfa = self.horizontal_angle(center, point)
-        while abs(betar) > abs(w90):  # draw 90 degree arcs
-            q1 = C.x + math.cos(alfa + w90) * rad
-            q2 = C.y + math.sin(alfa + w90) * rad
-            Q = Point(q1, q2)  # the arc's end point
-            r1 = C.x + math.cos(alfa + w45) * rad / math.cos(w45)
-            r2 = C.y + math.sin(alfa + w45) * rad / math.cos(w45)
-            R = Point(r1, r2)  # crossing point of tangents
-            kappah = (1 - math.cos(w45)) * 4 / 3 / abs(R - Q)
-            kappa = kappah * abs(P - Q)
-            cp1 = P + (R - P) * kappa  # control point 1
-            cp2 = Q + (R - Q) * kappa  # control point 2
-            self.draw_cont += l4 % JM_TUPLE(
-                list(cp1 * self.ipctm) + list(cp2 * self.ipctm) + list(Q * self.ipctm)
-            )
-
-            betar -= w90  # reduce parm angle by 90 deg
-            alfa += w90  # advance start angle by 90 deg
-            P = Q  # advance to arc end point
-        # draw (remaining) arc
-        if abs(betar) > 1e-3:  # significant degrees left?
-            beta2 = betar / 2
-            q1 = C.x + math.cos(alfa + betar) * rad
-            q2 = C.y + math.sin(alfa + betar) * rad
-            Q = Point(q1, q2)  # the arc's end point
-            r1 = C.x + math.cos(alfa + beta2) * rad / math.cos(beta2)
-            r2 = C.y + math.sin(alfa + beta2) * rad / math.cos(beta2)
-            R = Point(r1, r2)  # crossing point of tangents
-            # kappa height is 4/3 of segment height
-            kappah = (1 - math.cos(beta2)) * 4 / 3 / abs(R - Q)  # kappa height
-            kappa = kappah * abs(P - Q) / (1 - math.cos(betar))
-            cp1 = P + (R - P) * kappa  # control point 1
-            cp2 = Q + (R - Q) * kappa  # control point 2
-            self.draw_cont += l4 % JM_TUPLE(
-                list(cp1 * self.ipctm) + list(cp2 * self.ipctm) + list(Q * self.ipctm)
-            )
-        if fullSector:
-            self.draw_cont += l3 % JM_TUPLE(point * self.ipctm)
-            self.draw_cont += l5 % JM_TUPLE(center * self.ipctm)
-            self.draw_cont += l5 % JM_TUPLE(Q * self.ipctm)
-        self.lastPoint = Q
-        return self.lastPoint
-
-    def draw_rect(self, rect: rect_like) -> Point:
-        """Draw a rectangle."""
-        r = Rect(rect)
-        self.draw_cont += "%g %g %g %g re\n" % JM_TUPLE(
-            list(r.bl * self.ipctm) + [r.width, r.height]
-        )
-        self.updateRect(r)
-        self.lastPoint = r.tl
-        return self.lastPoint
-
-    def draw_quad(self, quad: quad_like) -> Point:
-        """Draw a Quad."""
-        q = Quad(quad)
-        return self.draw_polyline([q.ul, q.ll, q.lr, q.ur, q.ul])
-
-    def draw_zigzag(
-        self,
-        p1: point_like,
-        p2: point_like,
-        breadth: float = 2,
-    ) -> Point:
-        """Draw a zig-zagged line from p1 to p2."""
-        p1 = Point(p1)
-        p2 = Point(p2)
-        S = p2 - p1  # vector start - end
-        rad = abs(S)  # distance of points
-        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
-        if cnt < 4:
-            raise ValueError("points too close")
-        mb = rad / cnt  # revised breadth
-        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
-        i_mat = ~matrix  # get original position
-        points = []  # stores edges
-        for i in range(1, cnt):
-            if i % 4 == 1:  # point "above" connection
-                p = Point(i, -1) * mb
-            elif i % 4 == 3:  # point "below" connection
-                p = Point(i, 1) * mb
-            else:  # ignore others
-                continue
-            points.append(p * i_mat)
-        self.draw_polyline([p1] + points + [p2])  # add start and end points
-        return p2
-
-    def draw_squiggle(
-        self,
-        p1: point_like,
-        p2: point_like,
-        breadth=2,
-    ) -> Point:
-        """Draw a squiggly line from p1 to p2."""
-        p1 = Point(p1)
-        p2 = Point(p2)
-        S = p2 - p1  # vector start - end
-        rad = abs(S)  # distance of points
-        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
-        if cnt < 4:
-            raise ValueError("points too close")
-        mb = rad / cnt  # revised breadth
-        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
-        i_mat = ~matrix  # get original position
-        k = 2.4142135623765633  # y of draw_curve helper point
-
-        points = []  # stores edges
-        for i in range(1, cnt):
-            if i % 4 == 1:  # point "above" connection
-                p = Point(i, -k) * mb
-            elif i % 4 == 3:  # point "below" connection
-                p = Point(i, k) * mb
-            else:  # else on connection line
-                p = Point(i, 0) * mb
-            points.append(p * i_mat)
-
-        points = [p1] + points + [p2]
-        cnt = len(points)
-        i = 0
-        while i + 2 < cnt:
-            self.draw_curve(points[i], points[i + 1], points[i + 2])
-            i += 2
-        return p2
-
-    # ==============================================================================
-    # Shape.insert_text
-    # ==============================================================================
-    def insert_text(
-        self,
-        point: point_like,
-        buffer: typing.Union[str, list],
-        fontsize: float = 11,
-        lineheight: OptFloat = None,
-        fontname: str = "helv",
-        fontfile: OptStr = None,
-        set_simple: bool = 0,
-        encoding: int = 0,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        render_mode: int = 0,
-        border_width: float = 1,
-        rotate: int = 0,
-        morph: OptSeq = None,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> int:
-
-        jlib.log('{self=} {point=} {buffer=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
-        # ensure 'text' is a list of strings, worth dealing with
-        if not bool(buffer):
-            return 0
-
-        if type(buffer) not in (list, tuple):
-            text = buffer.splitlines()
-        else:
-            text = buffer
-
-        if not len(text) > 0:
-            return 0
-
-        point = Point(point)
-        try:
-            maxcode = max([ord(c) for c in " ".join(text)])
-        except:
-            return 0
-
-        # ensure valid 'fontname'
-        fname = fontname
-        if fname.startswith("/"):
-            fname = fname[1:]
-
-        jlib.log('{fname=} {fontfile=} {encoding=} {set_simple=}')
-        xref = self.page.insert_font(
-            fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
-        )
-        jlib.log('self.page.insert_font() => {xref=}')
-        fontinfo = CheckFontInfo(self.doc, xref)
-        jlib.log('{fontinfo=}')
-
-        fontdict = fontinfo[1]
-        ordering = fontdict["ordering"]
-        simple = fontdict["simple"]
-        bfname = fontdict["name"]
-        ascender = fontdict["ascender"]
-        descender = fontdict["descender"]
-        if lineheight:
-            lheight = fontsize * lineheight
-        elif ascender - descender <= 1:
-            lheight = fontsize * 1.2
-        else:
-            lheight = fontsize * (ascender - descender)
-
-        if maxcode > 255:
-            glyphs = self.doc.get_char_widths(xref, maxcode + 1)
-        else:
-            glyphs = fontdict["glyphs"]
-
-        tab = []
-        for t in text:
-            if simple and bfname not in ("Symbol", "ZapfDingbats"):
-                g = None
-            else:
-                g = glyphs
-            tab.append(getTJstr(t, g, simple, ordering))
-        text = tab
-
-        color_str = ColorCode(color, "c")
-        fill_str = ColorCode(fill, "f")
-        if not fill and render_mode == 0:  # ensure fill color when 0 Tr
-            fill = color
-            fill_str = ColorCode(color, "f")
-
-        morphing = CheckMorph(morph)
-        rot = rotate
-        if rot % 90 != 0:
-            raise ValueError("bad rotate value")
-
-        while rot < 0:
-            rot += 360
-        rot = rot % 360  # text rotate = 0, 90, 270, 180
-
-        templ1 = "\nq\n%s%sBT\n%s1 0 0 1 %g %g Tm\n/%s %g Tf "
-        templ2 = "TJ\n0 -%g TD\n"
-        cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates 90 deg counter-clockwise
-        cmm90 = "0 -1 1 0 0 0 cm\n"  # rotates 90 deg clockwise
-        cm180 = "-1 0 0 -1 0 0 cm\n"  # rotates by 180 deg.
-        height = self.height
-        width = self.width
-
-        # setting up for standard rotation directions
-        # case rotate = 0
-        if morphing:
-            m1 = Matrix(1, 0, 0, 1, morph[0].x + self.x, height - morph[0].y - self.y)
-            mat = ~m1 * morph[1] * m1
-            cm = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat)
-        else:
-            cm = ""
-        top = height - point.y - self.y  # start of 1st char
-        left = point.x + self.x  # start of 1. char
-        space = top  # space available
-        headroom = point.y + self.y  # distance to page border
-        if rot == 90:
-            left = height - point.y - self.y
-            top = -point.x - self.x
-            cm += cmp90
-            space = width - abs(top)
-            headroom = point.x + self.x
-
-        elif rot == 270:
-            left = -height + point.y + self.y
-            top = point.x + self.x
-            cm += cmm90
-            space = abs(top)
-            headroom = width - point.x - self.x
-
-        elif rot == 180:
-            left = -point.x - self.x
-            top = -height + point.y + self.y
-            cm += cm180
-            space = abs(point.y + self.y)
-            headroom = height - point.y - self.y
-
-        optcont = self.page._get_optional_content(oc)
-        if optcont != None:
-            bdc = "/OC /%s BDC\n" % optcont
-            emc = "EMC\n"
-        else:
-            bdc = emc = ""
-
-        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
-        if alpha == None:
-            alpha = ""
-        else:
-            alpha = "/%s gs\n" % alpha
-        nres = templ1 % (bdc, alpha, cm, left, top, fname, fontsize)
-        if render_mode > 0:
-            nres += "%i Tr " % render_mode
-        if border_width != 1:
-            nres += "%g w " % border_width
-        if color is not None:
-            nres += color_str
-        if fill is not None:
-            nres += fill_str
-
-        # =========================================================================
-        #   start text insertion
-        # =========================================================================
-        nres += text[0]
-        nlines = 1  # set output line counter
-        if len(text) > 1:
-            nres += templ2 % lheight  # line 1
-        else:
-            nres += templ2[:2]
-        for i in range(1, len(text)):
-            if space < lheight:
-                break  # no space left on page
-            if i > 1:
-                nres += "\nT* "
-            nres += text[i] + templ2[:2]
-            space -= lheight
-            nlines += 1
-
-        nres += "\nET\n%sQ\n" % emc
-
-        # =========================================================================
-        #   end of text insertion
-        # =========================================================================
-        # update the /Contents object
-        self.text_cont += nres
-        return nlines
-
-    # ==============================================================================
-    # Shape.insert_textbox
-    # ==============================================================================
-    def insert_textbox(
-        self,
-        rect: rect_like,
-        buffer: typing.Union[str, list],
-        fontname: OptStr = "helv",
-        fontfile: OptStr = None,
-        fontsize: float = 11,
-        lineheight: OptFloat = None,
-        set_simple: bool = 0,
-        encoding: int = 0,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        expandtabs: int = 1,
-        border_width: float = 1,
-        align: int = 0,
-        render_mode: int = 0,
-        rotate: int = 0,
-        morph: OptSeq = None,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> float:
-        """Insert text into a given rectangle.
-
-        Args:
-            rect -- the textbox to fill
-            buffer -- text to be inserted
-            fontname -- a Base-14 font, font name or '/name'
-            fontfile -- name of a font file
-            fontsize -- font size
-            lineheight -- overwrite the font property
-            color -- RGB stroke color triple
-            fill -- RGB fill color triple
-            render_mode -- text rendering control
-            border_width -- thickness of glyph borders
-            expandtabs -- handles tabulators with string function
-            align -- left, center, right, justified
-            rotate -- 0, 90, 180, or 270 degrees
-            morph -- morph box with a matrix and a fixpoint
-        Returns:
-            unused or deficit rectangle area (float)
-        """
-        rect = Rect(rect)
-        if rect.is_empty or rect.is_infinite:
-            raise ValueError("text box must be finite and not empty")
-
-        color_str = ColorCode(color, "c")
-        fill_str = ColorCode(fill, "f")
-        if fill is None and render_mode == 0:  # ensure fill color for 0 Tr
-            fill = color
-            fill_str = ColorCode(color, "f")
-
-        optcont = self.page._get_optional_content(oc)
-        if optcont != None:
-            bdc = "/OC /%s BDC\n" % optcont
-            emc = "EMC\n"
-        else:
-            bdc = emc = ""
-
-        # determine opacity / transparency
-        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
-        if alpha == None:
-            alpha = ""
-        else:
-            alpha = "/%s gs\n" % alpha
-
-        if rotate % 90 != 0:
-            raise ValueError("rotate must be multiple of 90")
-
-        rot = rotate
-        while rot < 0:
-            rot += 360
-        rot = rot % 360
-
-        # is buffer worth of dealing with?
-        if not bool(buffer):
-            return rect.height if rot in (0, 180) else rect.width
-
-        cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates counter-clockwise
-        cmm90 = "0 -1 1 0 0 0 cm\n"  # rotates clockwise
-        cm180 = "-1 0 0 -1 0 0 cm\n"  # rotates by 180 deg.
-        height = self.height
-
-        fname = fontname
-        if fname.startswith("/"):
-            fname = fname[1:]
-
-        xref = self.page.insert_font(
-            fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
-        )
-        fontinfo = CheckFontInfo(self.doc, xref)
-
-        fontdict = fontinfo[1]
-        ordering = fontdict["ordering"]
-        simple = fontdict["simple"]
-        glyphs = fontdict["glyphs"]
-        bfname = fontdict["name"]
-        ascender = fontdict["ascender"]
-        descender = fontdict["descender"]
-
-        if lineheight:
-            lheight_factor = lineheight
-        elif ascender - descender <= 1:
-            lheight_factor = 1.2
-        else:
-            lheight_factor = ascender - descender
-        lheight = fontsize * lheight_factor
-
-        # create a list from buffer, split into its lines
-        if type(buffer) in (list, tuple):
-            t0 = "\n".join(buffer)
-        else:
-            t0 = buffer
-
-        maxcode = max([ord(c) for c in t0])
-        # replace invalid char codes for simple fonts
-        if simple and maxcode > 255:
-            t0 = "".join([c if ord(c) < 256 else "?" for c in t0])
-
-        t0 = t0.splitlines()
-
-        glyphs = self.doc.get_char_widths(xref, maxcode + 1)
-        if simple and bfname not in ("Symbol", "ZapfDingbats"):
-            tj_glyphs = None
-        else:
-            tj_glyphs = glyphs
-
-        # ----------------------------------------------------------------------
-        # calculate pixel length of a string
-        # ----------------------------------------------------------------------
-        def pixlen(x):
-            """Calculate pixel length of x."""
-            if ordering < 0:
-                return sum([glyphs[ord(c)][1] for c in x]) * fontsize
-            else:
-                return len(x) * fontsize
-
-        # ----------------------------------------------------------------------
-
-        if ordering < 0:
-            blen = glyphs[32][1] * fontsize  # pixel size of space character
-        else:
-            blen = fontsize
-
-        text = ""  # output buffer
-
-        if CheckMorph(morph):
-            m1 = Matrix(
-                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
-            )
-            mat = ~m1 * morph[1] * m1
-            cm = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat)
-        else:
-            cm = ""
-
-        # ---------------------------------------------------------------------------
-        # adjust for text orientation / rotation
-        # ---------------------------------------------------------------------------
-        progr = 1  # direction of line progress
-        c_pnt = Point(0, fontsize * ascender)  # used for line progress
-        if rot == 0:  # normal orientation
-            point = rect.tl + c_pnt  # line 1 is 'lheight' below top
-            pos = point.y + self.y  # y of first line
-            maxwidth = rect.width  # pixels available in one line
-            maxpos = rect.y1 + self.y  # lines must not be below this
-
-        elif rot == 90:  # rotate counter clockwise
-            c_pnt = Point(fontsize * ascender, 0)  # progress in x-direction
-            point = rect.bl + c_pnt  # line 1 'lheight' away from left
-            pos = point.x + self.x  # position of first line
-            maxwidth = rect.height  # pixels available in one line
-            maxpos = rect.x1 + self.x  # lines must not be right of this
-            cm += cmp90
-
-        elif rot == 180:  # text upside down
-            # progress upwards in y direction
-            c_pnt = -Point(0, fontsize * ascender)
-            point = rect.br + c_pnt  # line 1 'lheight' above bottom
-            pos = point.y + self.y  # position of first line
-            maxwidth = rect.width  # pixels available in one line
-            progr = -1  # subtract lheight for next line
-            maxpos = rect.y0 + self.y  # lines must not be above this
-            cm += cm180
-
-        else:  # rotate clockwise (270 or -90)
-            # progress from right to left
-            c_pnt = -Point(fontsize * ascender, 0)
-            point = rect.tr + c_pnt  # line 1 'lheight' left of right
-            pos = point.x + self.x  # position of first line
-            maxwidth = rect.height  # pixels available in one line
-            progr = -1  # subtract lheight for next line
-            maxpos = rect.x0 + self.x  # lines must not left of this
-            cm += cmm90
-
-        # =======================================================================
-        # line loop
-        # =======================================================================
-        just_tab = []  # 'justify' indicators per line
-
-        for i, line in enumerate(t0):
-            line_t = line.expandtabs(expandtabs).split(" ")  # split into words
-            lbuff = ""  # init line buffer
-            rest = maxwidth  # available line pixels
-            # ===================================================================
-            # word loop
-            # ===================================================================
-            for word in line_t:
-                pl_w = pixlen(word)  # pixel len of word
-                if rest >= pl_w:  # will it fit on the line?
-                    lbuff += word + " "  # yes, and append word
-                    rest -= pl_w + blen  # update available line space
-                    continue
-                # word won't fit - output line (if not empty)
-                if len(lbuff) > 0:
-                    lbuff = lbuff.rstrip() + "\n"  # line full, append line break
-                    text += lbuff  # append to total text
-                    pos += lheight * progr  # increase line position
-                    just_tab.append(True)  # line is justify candidate
-                    lbuff = ""  # re-init line buffer
-                rest = maxwidth  # re-init avail. space
-                if pl_w <= maxwidth:  # word shorter than 1 line?
-                    lbuff = word + " "  # start the line with it
-                    rest = maxwidth - pl_w - blen  # update free space
-                    continue
-                # long word: split across multiple lines - char by char ...
-                if len(just_tab) > 0:
-                    just_tab[-1] = False  # reset justify indicator
-                for c in word:
-                    if pixlen(lbuff) <= maxwidth - pixlen(c):
-                        lbuff += c
-                    else:  # line full
-                        lbuff += "\n"  # close line
-                        text += lbuff  # append to text
-                        pos += lheight * progr  # increase line position
-                        just_tab.append(False)  # do not justify line
-                        lbuff = c  # start new line with this char
-                lbuff += " "  # finish long word
-                rest = maxwidth - pixlen(lbuff)  # long word stored
-
-            if lbuff != "":  # unprocessed line content?
-                text += lbuff.rstrip()  # append to text
-                just_tab.append(False)  # do not justify line
-            if i < len(t0) - 1:  # not the last line?
-                text += "\n"  # insert line break
-                pos += lheight * progr  # increase line position
-
-        more = (pos - maxpos) * progr  # difference to rect size limit
-
-        if more > EPSILON:  # landed too much outside rect
-            return (-1) * more  # return deficit, don't output
-
-        more = abs(more)
-        if more < EPSILON:
-            more = 0  # don't bother with epsilons
-        nres = "\nq\n%s%sBT\n" % (bdc, alpha) + cm  # initialize output buffer
-        templ = "1 0 0 1 %g %g Tm /%s %g Tf "
-        # center, right, justify: output each line with its own specifics
-        spacing = 0
-        text_t = text.splitlines()  # split text in lines again
-        for i, t in enumerate(text_t):
-            pl = maxwidth - pixlen(t)  # length of empty line part
-            pnt = point + c_pnt * (i * lheight_factor)  # text start of line
-            if align == 1:  # center: right shift by half width
-                if rot in (0, 180):
-                    pnt = pnt + Point(pl / 2, 0) * progr
-                else:
-                    pnt = pnt - Point(0, pl / 2) * progr
-            elif align == 2:  # right: right shift by full width
-                if rot in (0, 180):
-                    pnt = pnt + Point(pl, 0) * progr
-                else:
-                    pnt = pnt - Point(0, pl) * progr
-            elif align == 3:  # justify
-                spaces = t.count(" ")  # number of spaces in line
-                if spaces > 0 and just_tab[i]:  # if any, and we may justify
-                    spacing = pl / spaces  # make every space this much larger
-                else:
-                    spacing = 0  # keep normal space length
-            top = height - pnt.y - self.y
-            left = pnt.x + self.x
-            if rot == 90:
-                left = height - pnt.y - self.y
-                top = -pnt.x - self.x
-            elif rot == 270:
-                left = -height + pnt.y + self.y
-                top = pnt.x + self.x
-            elif rot == 180:
-                left = -pnt.x - self.x
-                top = -height + pnt.y + self.y
-
-            nres += templ % (left, top, fname, fontsize)
-            if render_mode > 0:
-                nres += "%i Tr " % render_mode
-            if spacing != 0:
-                nres += "%g Tw " % spacing
-            if color is not None:
-                nres += color_str
-            if fill is not None:
-                nres += fill_str
-            if border_width != 1:
-                nres += "%g w " % border_width
-            nres += "%sTJ\n" % getTJstr(t, tj_glyphs, simple, ordering)
-
-        nres += "ET\n%sQ\n" % emc
-
-        self.text_cont += nres
-        self.updateRect(rect)
-        return more
-
-    def finish(
-        self,
-        width: float = 1,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        dashes: OptStr = None,
-        even_odd: bool = False,
-        morph: OptSeq = None,
-        closePath: bool = True,
-        fill_opacity: float = 1,
-        stroke_opacity: float = 1,
-        oc: int = 0,
-    ) -> None:
-        """Finish the current drawing segment.
-
-        Notes:
-            Apply colors, opacity, dashes, line style and width, or
-            morphing. Also whether to close the path
-            by connecting last to first point.
-        """
-        if self.draw_cont == "":  # treat empty contents as no-op
-            return
-
-        if width == 0:  # border color makes no sense then
-            color = None
-        elif color is None:  # vice versa
-            width = 0
-        color_str = ColorCode(color, "c")  # ensure proper color string
-        fill_str = ColorCode(fill, "f")  # ensure proper fill string
-
-        optcont = self.page._get_optional_content(oc)
-        if optcont is not None:
-            self.draw_cont = "/OC /%s BDC\n" % optcont + self.draw_cont
-            emc = "EMC\n"
-        else:
-            emc = ""
-
-        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
-        if alpha != None:
-            self.draw_cont = "/%s gs\n" % alpha + self.draw_cont
-
-        if width != 1:
-            self.draw_cont += "%g w\n" % width
-
-        if lineCap != 0:
-            self.draw_cont = "%i J\n" % lineCap + self.draw_cont
-        if lineJoin != 0:
-            self.draw_cont = "%i j\n" % lineJoin + self.draw_cont
-
-        if dashes not in (None, "", "[] 0"):
-            self.draw_cont = "%s d\n" % dashes + self.draw_cont
-
-        if closePath:
-            self.draw_cont += "h\n"
-            self.lastPoint = None
-
-        if color is not None:
-            self.draw_cont += color_str
-
-        if fill is not None:
-            self.draw_cont += fill_str
-            if color is not None:
-                if not even_odd:
-                    self.draw_cont += "B\n"
-                else:
-                    self.draw_cont += "B*\n"
-            else:
-                if not even_odd:
-                    self.draw_cont += "f\n"
-                else:
-                    self.draw_cont += "f*\n"
-        else:
-            self.draw_cont += "S\n"
-
-        self.draw_cont += emc
-        if CheckMorph(morph):
-            m1 = Matrix(
-                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
-            )
-            mat = ~m1 * morph[1] * m1
-            self.draw_cont = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat) + self.draw_cont
-
-        self.totalcont += "\nq\n" + self.draw_cont + "Q\n"
-        self.draw_cont = ""
-        self.lastPoint = None
-        return
-
-    def commit(self, overlay: bool = True) -> None:
-        """Update the page's /Contents object with Shape data. The argument controls whether data appear in foreground (default) or background."""
-        CheckParent(self.page)  # doc may have died meanwhile
-        self.totalcont += self.text_cont
-
-        self.totalcont = self.totalcont.encode()
-
-        if self.totalcont != b"":
-            # make /Contents object with dummy stream
-            xref = TOOLS._insert_contents(self.page, b" ", overlay)
-            # update it with potential compression
-            self.doc.update_stream(xref, self.totalcont)
-
-        self.lastPoint = None  # clean up ...
-        self.rect = None  #
-        self.draw_cont = ""  # for potential ...
-        self.text_cont = ""  # ...
-        self.totalcont = ""  # re-use
-        return
-
-    # define deprecated aliases ------------------------------------------
-    drawBezier = draw_bezier
-    drawCircle = draw_circle
-    drawCurve = draw_curve
-    drawLine = draw_line
-    drawOval = draw_oval
-    drawPolyline = draw_polyline
-    drawQuad = draw_quad
-    drawRect = draw_rect
-    drawSector = draw_sector
-    drawSquiggle = draw_squiggle
-    drawZigzag = draw_zigzag
-    insertText = insert_text
-    insertTextbox = insert_textbox
 
 
 
