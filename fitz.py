@@ -1922,8 +1922,24 @@ class Document:
             self.thisown = True
         return val
 
-    def save(self, filename, garbage=0, clean=0, deflate=0, deflate_images=0, deflate_fonts=0, incremental=0, ascii=0, expand=0, linear=0, pretty=0, encryption=1, permissions=-1, owner_pw=None, user_pw=None):
-
+    def save(
+            self,
+            filename,
+            garbage=0,
+            clean=0,
+            deflate=0,
+            deflate_images=0,
+            deflate_fonts=0,
+            incremental=0,
+            ascii=0,
+            expand=0,
+            linear=0,
+            pretty=0,
+            encryption=1,
+            permissions=-1,
+            owner_pw=None,
+            user_pw=None,
+            ):
         """Save PDF to filename."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
@@ -1940,13 +1956,40 @@ class Document:
         if incremental:
             if self.name != filename or self.stream:
                 raise ValueError("incremental needs original file")
+        return _fitz.Document_save(
+                self,
+                filename,
+                garbage,
+                clean,
+                deflate,
+                deflate_images,
+                deflate_fonts,
+                incremental,
+                ascii,
+                expand,
+                linear,
+                pretty,
+                encryption,
+                permissions,
+                owner_pw,
+                user_pw,
+                )
 
-
-        return _fitz.Document_save(self, filename, garbage, clean, deflate, deflate_images, deflate_fonts, incremental, ascii, expand, linear, pretty, encryption, permissions, owner_pw, user_pw)
-
-
-    def write(self, garbage=0, clean=0, deflate=0, deflate_images=0, deflate_fonts=0, ascii=0, expand=0, pretty=0, encryption=1, permissions=-1, owner_pw=None, user_pw=None):
-
+    def write(
+            self,
+            garbage=0,
+            clean=0,
+            deflate=0,
+            deflate_images=0,
+            deflate_fonts=0,
+            ascii=0,
+            expand=0,
+            pretty=0,
+            encryption=1,
+            permissions=-1,
+            owner_pw=None,
+            user_pw=None,
+            ):
         """Write the PDF to a bytes object."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
@@ -1955,9 +1998,19 @@ class Document:
 
         return _fitz.Document_write(self, garbage, clean, deflate, deflate_images, deflate_fonts, ascii, expand, pretty, encryption, permissions, owner_pw, user_pw)
 
-
-    def insertPDF(self, docsrc, from_page=-1, to_page=-1, start_at=-1, rotate=-1, links=1, annots=1, show_progress=0, final=1, _gmap=None):
-
+    def insertPDF(
+            self,
+            docsrc,
+            from_page=-1,
+            to_page=-1,
+            start_at=-1,
+            rotate=-1,
+            links=1,
+            annots=1,
+            show_progress=0,
+            final=1,
+            _gmap=None,
+            ):
         """Insert a page range from another PDF.
 
         Args:
@@ -1996,8 +2049,6 @@ class Document:
         if _gmap is None:
             _gmap = Graftmap(self)
             self.Graftmaps[isrt] = _gmap
-
-
         val = _fitz.Document_insertPDF(self, docsrc, from_page, to_page, start_at, rotate, links, annots, show_progress, final, _gmap)
 
         self._reset_page_refs()
@@ -2009,7 +2060,6 @@ class Document:
 
         return val
 
-
     def _newPage(self, pno=-1, width=595, height=842):
         """Make a new PDF page."""
         if self.isClosed or self.isEncrypted:
@@ -2017,9 +2067,7 @@ class Document:
 
         val = _fitz.Document__newPage(self, pno, width, height)
         self._reset_page_refs()
-
         return val
-
 
     def select(self, pyliste):
         """Build sub-pdf with page numbers in the list."""
@@ -2034,57 +2082,42 @@ class Document:
 
         val = _fitz.Document_select(self, pyliste)
         self._reset_page_refs()
-
         return val
-
 
     def _deletePage(self, pno):
         return _fitz.Document__deletePage(self, pno)
+
     @property
-
     def permissions(self):
-
         """Document permissions."""
-
         if self.isEncrypted:
             return 0
-
-
         return _fitz.Document_permissions(self)
-
 
     def _getCharWidths(self, xref, bfname, ext, ordering, limit, idx=0):
         """Return list of glyphs and glyph widths of a font."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document__getCharWidths(self, xref, bfname, ext, ordering, limit, idx)
-
 
     def page_xref(self, pno):
         """Get xref of page number."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_page_xref(self, pno)
-
 
     def pageCropBox(self, pno):
         """Get CropBox of page number (without loading page)."""
         if self.isClosed:
             raise ValueError("document closed")
-
         val = _fitz.Document_pageCropBox(self, pno)
         val = Rect(val)
-
         return val
-
 
     def _getPageInfo(self, pno, what):
         """List fonts, images, XObjects used on a page."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         #return _fitz.Document__getPageInfo(self, pno, what)
         doc = self.this
         pdf = self._pdf_document()
@@ -2102,34 +2135,25 @@ class Document:
             JM_scan_resources(pdf, rsrc, liste, what, 0, tracer)
         return liste
 
-
-
     def extractFont(self, xref=0, info_only=0):
         """Get a font by xref."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_extractFont(self, xref, info_only)
-
 
     def extractImage(self, xref):
         """Get image by xref. Returns a dictionary."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_extractImage(self, xref)
-
 
     def _delToC(self):
         """Delete the TOC."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         val = _fitz.Document__delToC(self)
         self.initData()
-
         return val
-
 
     def isStream(self, xref=0):
         """Check if xref is a stream object."""
@@ -2145,98 +2169,74 @@ class Document:
             raise ValueError("document closed")
         if not self.isFormPDF:
             return None
-
-
         return _fitz.Document_need_appearances(self, value)
-
 
     def getSigFlags(self):
         """Get the /SigFlags value."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_getSigFlags(self)
 
     @property
-
     def isFormPDF(self):
         """Check if PDF Form document."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_isFormPDF(self)
 
     @property
-
     def FormFonts(self):
         """Get list of field font resource names."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_FormFonts(self)
-
 
     def _addFormFont(self, name, font):
         """Add new form font."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document__addFormFont(self, name, font)
-
 
     def _getOLRootNumber(self):
         """Get xref of Outline Root, create it if missing."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document__getOLRootNumber(self)
-
 
     def get_new_xref(self):
         """Make new xref."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_get_new_xref(self)
-
 
     def xref_length(self):
         """Get length of xref table."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_xref_length(self)
-
 
     def getXmlMetadata(self):
         """Get document XML metadata."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_getXmlMetadata(self)
-
 
     def xref_xml_metadata(self):
         """Get xref of document XML metadata."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_xref_xml_metadata(self)
-
 
     def del_xml_metadata(self):
         """Delete XML metadata."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_del_xml_metadata(self)
-
 
     def set_xml_metadata(self, metadata):
         """Store XML document level metadata."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_set_xml_metadata(self, metadata)
 
     setXmlMetadata = set_xml_metadata
@@ -2245,17 +2245,13 @@ class Document:
         """Get xref object source as a string."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_xref_object(self, xref, compressed, ascii)
-
 
     def pdf_trailer(self, compressed=0, ascii=0):
         """Get PDF trailer as a string."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_pdf_trailer(self, compressed, ascii)
-
 
     def xref_stream_raw(self, xref):
         """Get xref stream without decompression."""
@@ -2264,20 +2260,16 @@ class Document:
 
         return _fitz.Document_xref_stream_raw(self, xref)
 
-
     def xref_stream(self, xref):
         """Get decompressed xref stream."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_xref_stream(self, xref)
-
 
     def update_object(self, xref, text, page=None):
         """Replace object definition source."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_update_object(self, xref, text, page)
 
     def _pdf_document(self):
@@ -2293,7 +2285,6 @@ class Document:
         """Replace xref stream part."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         #return _fitz.Document_update_stream(self, xref, stream, new)
         pdf = self._pdf_document()
         xreflen = pdf.xref_len()
@@ -2308,44 +2299,33 @@ class Document:
         JM_update_stream(pdf, obj, res, 1)
         pdf.dirty = 1
 
-
     def _setMetadata(self, text):
         """Set old style metadata."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document__setMetadata(self, text)
-
 
     def _make_page_map(self):
         """Make an array page number -> page object."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__make_page_map(self)
-
 
     def fullcopyPage(self, pno, to=-1):
         """Make full page duplication."""
         if self.isClosed:
             raise ValueError("document closed")
-
         val = _fitz.Document_fullcopyPage(self, pno, to)
         self._reset_page_refs()
-
         return val
-
 
     def _move_copy_page(self, pno, nb, before, copy):
         """Move or copy a PDF page reference."""
         if self.isClosed:
             raise ValueError("document closed")
-
         val = _fitz.Document__move_copy_page(self, pno, nb, before, copy)
         self._reset_page_refs()
-
         return val
-
 
     def _remove_toc_item(self, xref):
         return _fitz.Document__remove_toc_item(self, xref)
@@ -2358,38 +2338,29 @@ class Document:
 
     def _set_page_labels(self, labels):
         val = _fitz.Document__set_page_labels(self, labels)
-
         xref = self.pdf_catalog()
         text = self.xref_object(xref, compressed=True)
         text = text.replace("/Nums[]", "/Nums[%s]" % labels)
         self.update_object(xref, text)
-
         return val
-
 
     def get_layers(self):
         """Show optional OC layers."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_get_layers(self)
-
 
     def switch_layer(self, config, as_default=0):
         """Activate an OC layer."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_switch_layer(self, config, as_default)
-
 
     def get_layer(self, config=-1):
         """Content of ON, OFF, RBGroups of an OC layer."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_get_layer(self, config)
-
 
     def set_layer(self, config, basestate=None, on=None, off=None, rbgroups=None):
         """Set the PDF keys /ON, /OFF, /RBGroups of an OC layer."""
@@ -2429,40 +2400,30 @@ class Document:
                 basestate = "Unchanged"
             if basestate not in ("ON", "OFF", "Unchanged"):
                 raise ValueError("bad 'basestate'")
-
-
         return _fitz.Document_set_layer(self, config, basestate, on, off, rbgroups)
-
 
     def add_layer(self, name, creator=None, on=None):
         """Add a new OC layer."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_add_layer(self, name, creator, on)
-
 
     def layer_ui_configs(self):
         """Show OC visibility status modifyable by user."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_layer_ui_configs(self)
-
 
     def set_layer_ui_config(self, number, action=0):
         """Set / unset OC intent configuration."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_set_layer_ui_config(self, number, action)
-
 
     def get_ocgs(self):
         """Show existing optional content groups."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_get_ocgs(self)
 
     getOCGs = get_ocgs
@@ -2471,7 +2432,6 @@ class Document:
         """Add new optional content group."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_add_ocg(self, name, config, on, intent, usage)
 
     addOCG = add_ocg
@@ -2480,14 +2440,27 @@ class Document:
         if self.isEncrypted:
             raise ValueError("cannot initData - document still encrypted")
         self._outline = self._loadOutline()
-        self.metadata = dict([(k,self._getMetadata(v)) for k,v in {'format':'format', 'title':'info:Title', 'author':'info:Author','subject':'info:Subject', 'keywords':'info:Keywords','creator':'info:Creator', 'producer':'info:Producer', 'creationDate':'info:CreationDate', 'modDate':'info:ModDate', 'trapped':'info:Trapped'}.items()])
+        self.metadata = dict(
+                [(k, self._getMetadata(v))
+                    for k,v in {
+                        'format':'format',
+                        'title':'info:Title',
+                        'author':'info:Author',
+                        'subject':'info:Subject',
+                        'keywords':'info:Keywords',
+                        'creator':'info:Creator',
+                        'producer':'info:Producer',
+                        'creationDate':'info:CreationDate',
+                        'modDate':'info:ModDate',
+                        'trapped':'info:Trapped',
+                        }.items()
+                    ]
+                )
         self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
 
     outline = property(lambda self: self._outline)
     _getPageXref = page_xref
     pageXref = page_xref
-
-
 
     def get_page_fonts(self, pno: int, full: bool =False) -> list:
         """Retrieve a list of fonts used on a page.
@@ -2592,7 +2565,7 @@ class Document:
         if not pno in range(pageCount):
             raise ValueError("bad page number(s)")
 
-    # remove TOC bookmarks pointing to deleted page
+        # remove TOC bookmarks pointing to deleted page
         old_toc = self.getToC()
         for i, item in enumerate(old_toc):
             if item[2] == pno + 1:
@@ -2602,8 +2575,6 @@ class Document:
         self._remove_links_to(pno, pno)
         self._deletePage(pno)
         self._reset_page_refs()
-
-
 
     def deletePageRange(self, from_page: int =-1, to_page: int =-1):
         """Delete pages from a PDF.
@@ -2636,11 +2607,9 @@ class Document:
 
         self._reset_page_refs()
 
-
     def saveIncr(self):
         """ Save PDF incrementally"""
         return self.save(self.name, incremental=True, encryption=PDF_ENCRYPT_KEEP)
-
 
     def reload_page(self, page: "struct Page *") -> "struct Page *":
         """Make a fresh copy of a page."""
@@ -2652,14 +2621,13 @@ class Document:
         page = None
         page = self.loadPage(pno)  # reload the page
 
-    # copy annot refs over to the new dictionary
+        # copy annot refs over to the new dictionary
         page_proxy = weakref.proxy(page)
         for k, v in old_annots.items():
             annot = old_annots[k]
             annot.parent = page_proxy  # refresh parent to new page
             page._annot_refs[k] = annot
         return page
-
 
     updateObject = update_object
     updateStream = update_stream
@@ -2671,7 +2639,6 @@ class Document:
     PDFCatalog = pdf_catalog
     metadataXML = xref_xml_metadata
 
-
     def __repr__(self) -> str:
         m = "closed " if self.isClosed else ""
         if self.stream is None:
@@ -2679,7 +2646,6 @@ class Document:
                 return m + "Document(<new PDF, doc# %i>)" % self._graft_id
             return m + "Document('%s')" % (self.name,)
         return m + "Document('%s', <memory, doc# %i>)" % (self.name, self._graft_id)
-
 
     def __contains__(self, loc) -> bool:
         page_count = self.this.count_pages()
@@ -2701,9 +2667,7 @@ class Document:
             pno >= self.chapterPageCount(chapter)
             ):
             return False
-
         return True
-
 
     def __getitem__(self, i: int =0):
         if i not in self:
@@ -2715,17 +2679,17 @@ class Document:
 
         Arguments have the same meaning as for the range() built-in.
         """
-    # set the start value
+        # set the start value
         start = start or 0
         while start < 0:
             start += self.pageCount
         if start not in range(self.pageCount):
             raise ValueError("bad start page number")
 
-    # set the stop value
+        # set the stop value
         stop = stop if stop is not None and stop <= self.pageCount else self.pageCount
 
-    # set the step value
+        # set the step value
         if step == 0:
             raise ValueError("arg 3 must not be zero")
         if step is None:
@@ -2736,7 +2700,6 @@ class Document:
 
         for pno in range(start, stop, step):
             yield (self.loadPage(pno))
-
 
     def __len__(self) -> int:
         return self.pageCount
@@ -2798,7 +2761,6 @@ class Document:
         annots = JM_get_annot_xref_list(page_obj)
         jlib.log('{self.this.count_pages()=} {self.pageCount=}')
         return annots
-
 
     def has_links(self):
         """Check whether there are links on any page."""
@@ -2884,7 +2846,6 @@ class Document:
         r = pdf.has_unsaved_changes()
         jlib.log('{r=}')
         return True if r else False
-
 
 open = Document
 
