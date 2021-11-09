@@ -9413,14 +9413,18 @@ def main():
                             verbose=1,
                             )
                 elif tests == 'iter':
+                    e = 0
                     for script in sorted(glob.glob( '../PyMuPDF/tests/test_*.py')):
                         script = os.path.basename(script)
-                        jlib.system(
+                        ee = jlib.system(
                                 f'cd ../PyMuPDF/tests && py.test-3 {opts} {script}',
                                 env_extra=env_extra,
                                 out='log',
                                 verbose=1,
+                                raise_errors=0,
                                 )
+                        if not e:
+                            e = ee
                 else:
                     jlib.system(
                             f'cd ../PyMuPDF/tests && py.test-3 {opts} {tests}',
