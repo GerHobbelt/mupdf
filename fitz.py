@@ -30,13 +30,7 @@ rect_like = "rect_like"
 
 
 class Annot:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Annot, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Annot, name)
 
-    #def __init__(self, *args, **kwargs):
-    #    raise AttributeError("No constructor defined")
     def __init__(self, page, annot):
         assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
         assert isinstance(page, Page), f'page is: {page}'
@@ -52,8 +46,6 @@ class Annot:
         val = mupdf.mpdf_bound_annot(self.this)
         val = Rect(val)
         val *= self.parent.derotationMatrix
-
-
         return val
 
     @property
@@ -87,39 +79,31 @@ class Annot:
             raise
 
     @property
-
     def apn_bbox(self):
         """annotation appearance bbox"""
         CheckParent(self)
 
         val = _fitz.Annot_apn_bbox(self)
-
         val = Rect(val) * self.parent.transformationMatrix
         val *= self.parent.derotationMatrix
-
         return val
-
 
     def set_apn_matrix(self, matrix):
         """Set annotation appearance matrix."""
         CheckParent(self)
-
         return _fitz.Annot_set_apn_matrix(self, matrix)
 
-
     def set_apn_bbox(self, bbox):
-
-        """Set annotation appearance bbox."""
-
+        """
+        Set annotation appearance bbox.
+        """
         CheckParent(self)
         page = self.parent
         rot = page.rotationMatrix
         mat = page.transformationMatrix
         bbox *= rot * ~mat
 
-
         return _fitz.Annot_set_apn_bbox(self, bbox)
-
 
     def blendMode(self):
         """annotation BlendMode"""
@@ -141,7 +125,6 @@ class Annot:
                 mupdf.PDF_ENUM_NAME_Resources,
                 mupdf.PDF_ENUM_NAME_ExtGState,
                 )
-
         if obj.is_dict():
             n = obj.dict_len()
             for i in range(n):
@@ -153,16 +136,13 @@ class Annot:
                         if obj2.objcmp(mupdf.PDF_ENUM_NAME_BM) == 0:
                             blend_mode = obj1.dict_get_val(j).to_name()
                             return blend_mode
-
         return blend_mode;
 
 
     def set_blendmode(self, blend_mode):
         """Set annotation BlendMode."""
         CheckParent(self)
-
         return _fitz.Annot_set_blendmode(self, blend_mode)
-
 
     def get_oc(self):
         """Get annotation optional content reference."""
@@ -170,23 +150,18 @@ class Annot:
 
         return _fitz.Annot_get_oc(self)
 
-
     def set_open(self, is_open):
         """Set 'open' status of annotation or its Popup."""
         CheckParent(self)
-
         return _fitz.Annot_set_open(self, is_open)
 
     @property
-
     def is_open(self):
         """Get 'open' status of annotation or its Popup."""
         CheckParent(self)
-
         return _fitz.Annot_is_open(self)
 
     @property
-
     def has_popup(self):
         """Check if annotation has a Popup."""
         CheckParent(self)
@@ -212,7 +187,6 @@ class Annot:
 
 
     @property
-
     def popup_rect(self):
         """annotation 'Popup' rectangle"""
         CheckParent(self)
@@ -240,13 +214,11 @@ class Annot:
         return val
 
     @property
-
     def popup_xref(self):
         """annotation 'Popup' xref"""
         CheckParent(self)
 
         return _fitz.Annot_popup_xref(self)
-
 
     def set_oc(self, oc=0):
         """Set / remove annotation OC xref."""
@@ -255,20 +227,18 @@ class Annot:
         return _fitz.Annot_set_oc(self, oc)
 
     setOC = set_oc
-    @property
 
+    @property
     def language(self):
         """annotation language"""
 
         return _fitz.Annot_language(self)
-
 
     def set_language(self, language=None):
         """Set annotation language."""
         CheckParent(self)
 
         return _fitz.Annot_set_language(self, language)
-
 
     def _getAP(self):
         #return _fitz.Annot__getAP(self)
@@ -348,16 +318,11 @@ class Annot:
         val["fontsize"] = fontsize
         fill = self.colors["fill"]
         val["fill"] = fill
-
-
-
         return val
-
 
     def get_textpage(self, clip=None, flags=0):
         """Make annotation TextPage."""
         CheckParent(self)
-
         return _fitz.Annot_get_textpage(self, clip, flags)
 
 
@@ -366,7 +331,6 @@ class Annot:
         CheckParent(self)
 
         return _fitz.Annot_set_name(self, name)
-
 
     def set_rect(self, rect):
         """Set annotation rectangle."""
@@ -381,15 +345,12 @@ class Annot:
         except Exception as e:
             jlib.log('{e=}')
 
-
     def set_rotation(self, rotate=0):
         """Set annotation rotation."""
         CheckParent(self)
-
         return _fitz.Annot_set_rotation(self, rotate)
 
     @property
-
     def rotation(self):
         """annotation rotation"""
         CheckParent(self)
@@ -403,13 +364,9 @@ class Annot:
 
 
     @property
-
     def vertices(self):
         """annotation vertex points"""
         CheckParent(self)
-        #return _fitz.Annot_vertices(self)
-        #PyObject *res = NULL, *res1 = NULL;
-        #pdf_obj *o, *o1;
         annot = self.this
         assert isinstance(annot, mupdf.PdfAnnot)
         #fz_point point;  # point object to work with
@@ -458,9 +415,7 @@ class Annot:
                 res.append(res1)
             return res;
 
-
     @property
-
     def colors(self):
         """Color definitions."""
         try:
@@ -558,7 +513,6 @@ class Annot:
 
         return True
 
-
     def update(self,
                blend_mode: OptStr =None,
                opacity: OptFloat =None,
@@ -570,7 +524,6 @@ class Annot:
                cross_out: bool =True,
                rotate: int =-1,
                ):
-
         """Update annot appearance.
 
         Notes:
@@ -629,9 +582,9 @@ class Annot:
             if type == mupdf.PDF_ANNOT_FREE_TEXT and rotate % 90 != 0:
                 rotate = 0
 
-    #------------------------------------------------------------------
-    # handle opacity and blend mode
-    #------------------------------------------------------------------
+        #------------------------------------------------------------------
+        # handle opacity and blend mode
+        #------------------------------------------------------------------
         if blend_mode is None:
             blend_mode = self.blendmode
         if not hasattr(opacity, "__float__"):
@@ -642,9 +595,9 @@ class Annot:
         else:
             opa_code = ""
 
-    #------------------------------------------------------------------
-    # now invoke MuPDF to update the annot appearance
-    #------------------------------------------------------------------
+        #------------------------------------------------------------------
+        # now invoke MuPDF to update the annot appearance
+        #------------------------------------------------------------------
         val = self._update_appearance(
             opacity=opacity,
             blend_mode=blend_mode,
@@ -671,7 +624,7 @@ class Annot:
         else:
             line_end_le, line_end_ri = 0, 0  # init line end codes
 
-    # read contents as created by MuPDF
+        # read contents as created by MuPDF
         ap = self._getAP()
         ap_tab = ap.splitlines()  # split in single lines
         ap_updated = False  # assume we did nothing
@@ -706,7 +659,7 @@ class Annot:
             CheckColor(text_color)
             tcol, fname, fsize = TOOLS._parse_da(self)
 
-    # read and update default appearance as necessary
+            # read and update default appearance as necessary
             update_default_appearance = False
             if fsize <= 0:
                 fsize = 12
@@ -767,7 +720,7 @@ class Annot:
 
         if dashes is not None:  # handle dashes
             ap = dashes + ap
-    # reset dashing - only applies for LINE annots with line ends given
+            # reset dashing - only applies for LINE annots with line ends given
             ap = ap.replace(b"\nS\n", b"\nS\n[] 0 d\n", 1)
             ap_updated = True
 
@@ -776,9 +729,9 @@ class Annot:
             ap_updated = True
 
         ap = b"q\n" + ap + b"\nQ\n"
-    #----------------------------------------------------------------------
-    # the following handles line end symbols for 'Polygon' and 'Polyline'
-    #----------------------------------------------------------------------
+        #----------------------------------------------------------------------
+        # the following handles line end symbols for 'Polygon' and 'Polyline'
+        #----------------------------------------------------------------------
         if line_end_le + line_end_ri > 0 and type in (mupdf.PDF_ANNOT_POLYGON, mupdf.PDF_ANNOT_POLY_LINE):
 
             le_funcs = (None, TOOLS._le_square, TOOLS._le_circle,
@@ -809,9 +762,9 @@ class Annot:
             else:
                 self._setAP(ap, rect=0)
 
-    #-------------------------------
-    # handle annotation rotations
-    #-------------------------------
+        #-------------------------------
+        # handle annotation rotations
+        #-------------------------------
         if type not in (  # only these types are supported
             mupdf.PDF_ANNOT_CARET,
             mupdf.PDF_ANNOT_CIRCLE,
@@ -845,7 +798,6 @@ class Annot:
         self.set_rect(quad.rect)
         self.set_apn_matrix(apnmat * mat)
 
-
     def set_colors(self, colors=None, fill=None, stroke=None):
 
         """Set 'stroke' and 'fill' colors.
@@ -855,12 +807,9 @@ class Annot:
         CheckParent(self)
         if type(colors) is not dict:
             colors = {"fill": fill, "stroke": stroke}
-
-
         return _fitz.Annot_set_colors(self, colors, fill, stroke)
 
     @property
-
     def line_ends(self):
         """Line end codes."""
         CheckParent(self)
@@ -875,8 +824,6 @@ class Annot:
         lend = annot.annot_line_end_style()
         return lstart, lend
 
-
-
     def set_line_ends(self, start, end):
         """Set line end codes."""
         CheckParent(self)
@@ -889,7 +836,6 @@ class Annot:
 
 
     @property
-
     def type(self):
         """annotation type"""
         CheckParent(self)
@@ -904,7 +850,6 @@ class Annot:
         return (type_, c, it)
 
     @property
-
     def opacity(self):
         """Opacity."""
         CheckParent(self)
@@ -917,14 +862,10 @@ class Annot:
             opy = ca.to_real()
         return opy
 
-
-
     def set_opacity(self, opacity):
         """Set opacity."""
         CheckParent(self)
-
         return _fitz.Annot_set_opacity(self, opacity)
-
 
     def fileInfo(self):
         """Attached file information."""
@@ -932,20 +873,17 @@ class Annot:
 
         return _fitz.Annot_fileInfo(self)
 
-
     def get_file(self):
         """Retrieve attached file content."""
         CheckParent(self)
 
         return _fitz.Annot_get_file(self)
 
-
     def get_sound(self):
         """Retrieve sound stream."""
         CheckParent(self)
 
         return _fitz.Annot_get_sound(self)
-
 
     def update_file(self, buffer=None, filename=None, ufilename=None, desc=None):
         """Update attached file."""
@@ -989,7 +927,6 @@ class Annot:
 
         return res
 
-
     def set_info(self, info=None, content=None, title=None, creationDate=None, modDate=None, subject=None):
 
         """Set various properties."""
@@ -1001,7 +938,6 @@ class Annot:
             modDate = info.get("modDate", None)
             subject = info.get("subject", None)
             info = None
-
 
         #return _fitz.Annot_set_info(self, info, content, title, creationDate, modDate, subject)
         annot = self.this
@@ -1026,7 +962,6 @@ class Annot:
                 mupdf.mpdf_dict_puts(annot.annot_obj(), "Subj", mupdf.mpdf_new_text_string(subject))
 
     @property
-
     def border(self):
         """Border information."""
         CheckParent(self)
@@ -1035,9 +970,7 @@ class Annot:
         ret = JM_annot_border(ao)
         return ret
 
-
     def set_border(self, border=None, width=0, style=None, dashes=None):
-
         """Set border properties.
 
         Either a dict, or direct arguments width, style and dashes."""
@@ -1051,36 +984,27 @@ class Annot:
         return JM_annot_set_border(border, annot.annot_page().doc(), annot.annot_obj())
 
     @property
-
     def flags(self):
         """Flags field."""
         CheckParent(self)
-
         return _fitz.Annot_flags(self)
-
 
     def clean_contents(self, sanitize=1):
         """Clean appearance contents stream."""
         CheckParent(self)
-
         return _fitz.Annot_clean_contents(self, sanitize)
-
 
     def set_flags(self, flags):
         """Set annotation flags."""
         CheckParent(self)
-
         return _fitz.Annot_set_flags(self, flags)
-
 
     def delete_responses(self):
         """Delete 'Popup' and responding annotations."""
         CheckParent(self)
-
         return _fitz.Annot_delete_responses(self)
 
     @property
-
     def next(self):
         """Next annotation."""
         CheckParent(self)
@@ -1121,7 +1045,6 @@ class Annot:
         #if type(colorspace) is str:
         #    colorspace = cspaces.get(colorspace.lower(), None)
 
-
         #return _fitz.Annot_get_pixmap(self, matrix, colorspace, alpha)
         ctm = JM_matrix_from_py(matrix)
         cs = None
@@ -1139,7 +1062,6 @@ class Annot:
             return
         jlib.log('{pix=}')
         return Pixmap(pix)
-
 
     blendmode = property(blendMode, doc="annotation BlendMode")
     file_info = property(fileInfo, doc="Attached file information")
@@ -1184,15 +1106,8 @@ class Annot:
 
 
 class Colorspace:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Colorspace, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Colorspace, name)
-    #__del__ = lambda self: None
-
     def __init__(self, type_):
         """Supported are GRAY, RGB and CMYK."""
-
         #this = _fitz.new_Colorspace(type)
         this = mupdf.Colorspace(type_)
         self.this = this
@@ -1203,7 +1118,6 @@ class Colorspace:
         #return _fitz.Colorspace_n(self)
         return self.this.colorspace_n()
 
-
     def _name(self):
         #return _fitz.Colorspace__name(self)
         return self.this.colorspace_name()
@@ -1211,12 +1125,6 @@ class Colorspace:
     @property
     def name(self):
         """Name of the Colorspace."""
-        #if self.n == 1:
-        #    return csGRAY._name()
-        #elif self.n == 3:
-        #    return csRGB._name()
-        #elif self.n == 4:
-        #    return csCMYK._name()
         return self._name()
 
     def __repr__(self):
@@ -1225,11 +1133,6 @@ class Colorspace:
 
 
 class Device:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Device, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Device, name)
-
     def __init__(self, *args):
         this = _fitz.new_Device(*args)
         try:
@@ -1239,11 +1142,6 @@ class Device:
 
 
 class DisplayList:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, DisplayList, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, DisplayList, name)
-
     def __init__(self, *args):
         if len(args) == 1 and isinstance(args[0], mupdf.Rect):
             self.this = mupdf.DisplayList(args[0])
@@ -1252,35 +1150,29 @@ class DisplayList:
         else:
             assert 0, f'Unrecognised args={args}'
 
-
     def run(self, dw, m, area):
         return _fitz.DisplayList_run(self, dw, m, area)
-    @property
 
+    @property
     def rect(self):
         val = _fitz.DisplayList_rect(self)
         val = Rect(val)
 
         return val
 
-
     def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
         #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
         if not colorspace:
             colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
-
         val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
         val.thisown = True
-
         return val
-
 
     def getTextPage(self, flags=3):
         val = _fitz.DisplayList_getTextPage(self, flags)
         val.thisown = True
 
         return val
-
 
     def __del__(self):
         if not type(self) is DisplayList: return
@@ -1302,7 +1194,6 @@ class Document:
             rect, width, height, fontsize: layout reflowable document
             on open (e.g. EPUB). Ignored if n/a.
         """
-
         if not filename or type(filename) is str:
             pass
         else:
@@ -1379,10 +1270,6 @@ class Document:
                         doc.layout_document(400, 600, 11)
             this = doc
 
-        #try:
-        #    self.this.append(this)
-        #except __builtin__.Exception:
-        #    self.this = this
         self.this = this
 
         # fixme: not sure where self.thisown gets initialised in PyMuPDF.
@@ -1408,20 +1295,11 @@ class Document:
     def is_pdf(self):
         return self.isPDF
 
-
     def _get_char_widths(self, xref: int, bfname: str, ext: str, ordering: int, limit: int, idx: int = 0):
         pdf = self._pdf_document()
-        #PyObject *wlist = NULL;
-        #int i, glyph, mylimit;
         mylimit = limit;
         if mylimit < 256:
             mylimit = 256
-        #cwlen = 0;
-        #lang = 0;
-        #const unsigned char *data;
-        #int size, index;
-        #fz_font *font = NULL, *fb_font= NULL;
-        #fz_buffer *buf = NULL;
 
         ASSERT_PDF(pdf), f'pdf={pdf}'
         if ordering >= 0:
@@ -1546,16 +1424,6 @@ class Document:
 
         return glyphs
 
-
-
-
-
-
-
-
-
-
-
     def new_page(
             self,
             pno: int = -1,
@@ -1584,14 +1452,10 @@ class Document:
         mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
         mediabox.x1 = width
         mediabox.y1 = height
-        #pdf_obj *resources = NULL, *page_obj = NULL;
-        #fz_buffer *contents = NULL;
         contents = mupdf.Buffer(0)
-        #fz_try(gctx) {
         if pno < -1:
             raise Exception("bad page number(s)")
         # create /Resources and /Contents objects
-        #resources = pdf.add_object_drop(pdf.new_dict(1))
         resources = pdf.add_object(pdf.new_dict(1))
         page_obj = pdf.add_page(mediabox, 0, resources, contents)
         pdf.insert_page(pno, page_obj)
@@ -1600,10 +1464,7 @@ class Document:
         self._reset_page_refs()
         return self[pno]
 
-
-
     def close(self):
-
         """Close document."""
         if self.isClosed:
             raise ValueError("document closed")
@@ -1619,15 +1480,8 @@ class Document:
         self.InsertedImages  = {}
 
         self.this = None
-        #val = self.this.document_close()
-        #val = _fitz.Document_close(self)
-        #self.thisown = False
-        #
-        #return val
-
 
     def loadPage(self, page_id):
-
         """Load a page.
 
         'page_id' is either a 0-based page number or a tuple (chapter, pno),
@@ -1658,10 +1512,7 @@ class Document:
         self._page_refs[id(val)] = val
         val._annot_refs = weakref.WeakValueDictionary()
         val.number = page_id
-
-
         return val
-
 
     def _remove_links_to(self, first, last):
         return _fitz.Document__remove_links_to(self, first, last)
@@ -1673,7 +1524,6 @@ class Document:
 
         return self.this.load_outline()
 
-
     def _dropOutline(self, ol):
         return _fitz.Document__dropOutline(self, ol)
 
@@ -1684,22 +1534,17 @@ class Document:
 
         return _fitz.Document_get_outline_xrefs(self)
 
-
     def _extend_toc_items(self, items):
         """Add color info to all items of an extended TOC list."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__extend_toc_items(self, items)
-
 
     def _embeddedFileNames(self, namelist):
         """Get list of embedded file names."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__embeddedFileNames(self, namelist)
-
 
     def _embeddedFileDel(self, idx):
         return _fitz.Document__embeddedFileDel(self, idx)
@@ -1776,11 +1621,14 @@ class Document:
         idx = self._embeddedFileIndex(item)
         return self._embeddedFileGet(idx)
 
-    def embeddedFileUpd(self, item: typing.Union[int, str],
-                             buffer: OptBytes =None,
-                             filename: OptStr =None,
-                             ufilename: OptStr =None,
-                             desc: OptStr =None,) -> None:
+    def embeddedFileUpd(
+            self,
+            item: typing.Union[int, str],
+            buffer: OptBytes =None,
+            filename: OptStr =None,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            ) -> None:
         """Change an item of the EmbeddedFiles array.
 
         Notes:
@@ -1794,15 +1642,22 @@ class Document:
             desc: (str) the new description.
         """
         idx = self._embeddedFileIndex(item)
-        return self._embeddedFileUpd(idx, buffer=buffer,
-                                     filename=filename,
-                                     ufilename=ufilename,
-                                     desc=desc)
+        return self._embeddedFileUpd(
+                idx,
+                buffer=buffer,
+                filename=filename,
+                ufilename=ufilename,
+                desc=desc,
+                )
 
-    def embeddedFileAdd(self, name: str, buffer: typing.ByteString,
-                              filename: OptStr =None,
-                              ufilename: OptStr =None,
-                              desc: OptStr =None,) -> None:
+    def embeddedFileAdd(
+            self,
+            name: str,
+            buffer: typing.ByteString,
+            filename: OptStr =None,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            ) -> None:
         """Add an item to the EmbeddedFiles array.
 
         Args:
@@ -1823,11 +1678,13 @@ class Document:
             ufilename = unicode(filename, "utf8") if str is bytes else filename
         if desc is None:
             desc = name
-        return self._embeddedFileAdd(name, buffer=buffer,
-                                     filename=filename,
-                                     ufilename=ufilename,
-                                     desc=desc)
-
+        return self._embeddedFileAdd(
+                name,
+                buffer=buffer,
+                filename=filename,
+                ufilename=ufilename,
+                desc=desc,
+                )
 
     def convertToPDF(self, from_page=0, to_page=-1, rotate=0):
         """Convert document to a PDF, selecting page range and optional rotation. Output bytes object."""
@@ -1836,14 +1693,12 @@ class Document:
 
         return _fitz.Document_convertToPDF(self, from_page, to_page, rotate)
 
-
     def get_oc(self, xref):
         """Get xref of optional content object."""
         if self.isClosed:
             raise ValueError("document closed")
 
         return _fitz.Document_get_oc(self, xref)
-
 
     def set_oc(self, xref, oc):
         """Attach optional content object to image or form xobject."""
@@ -1853,7 +1708,6 @@ class Document:
         return _fitz.Document_set_oc(self, xref, oc)
 
     @property
-
     def pageCount(self):
         """Number of pages."""
         if self.isClosed:
@@ -1862,7 +1716,6 @@ class Document:
         return ret
 
     @property
-
     def chapterCount(self):
         """Number of chapters."""
         if self.isClosed:
@@ -1871,14 +1724,12 @@ class Document:
         return _fitz.Document_chapterCount(self)
 
     @property
-
     def lastLocation(self):
         """Id (chapter, page) of last page."""
         if self.isClosed:
             raise ValueError("document closed")
 
         return _fitz.Document_lastLocation(self)
-
 
     def chapterPageCount(self, chapter):
         """Page count of chapter."""
@@ -1887,9 +1738,7 @@ class Document:
 
         return _fitz.Document_chapterPageCount(self, chapter)
 
-
     def previousLocation(self, page_id):
-
         """Get (chapter, page) of previous page."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
@@ -1899,13 +1748,9 @@ class Document:
             raise ValueError("page id not in document")
         if page_id  == (0, 0):
             return ()
-
-
         return _fitz.Document_previousLocation(self, page_id)
 
-
     def nextLocation(self, page_id):
-
         """Get (chapter, page) of next page."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
@@ -1915,8 +1760,6 @@ class Document:
             raise ValueError("page id not in document")
         if tuple(page_id)  == self.lastLocation:
             return ()
-
-
         return _fitz.Document_nextLocation(self, page_id)
 
 
@@ -1924,12 +1767,9 @@ class Document:
         """Convert pno to (chapter, page)."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_location_from_page_number(self, pno)
 
-
     def page_number_from_location(self, page_id):
-
         """Convert (chapter, pno) to page number."""
         if type(page_id) is int:
             np = self.pageCount
@@ -1938,20 +1778,13 @@ class Document:
             page_id = (0, page_id)
         if page_id not in self:
             raise ValueError("page id not in document")
-
-
         return _fitz.Document_page_number_from_location(self, page_id)
-
 
     def _getMetadata(self, key):
         """Get metadata."""
         if self.isClosed:
             raise ValueError("document closed")
-
         # return self.this _fitz.Document__getMetadata(self, key)
-        #jlib.log('{key!r=}')
-        #jlib.log('{self=}')
-        #jlib.log('{self.this=}')
         return self.this.lookup_metadata(key)
 
     @property
@@ -1959,11 +1792,9 @@ class Document:
         """Indicate password required."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return self.this.needs_password()
 
     @property
-
     def language(self):
         """Document language."""
         if self.isClosed:
@@ -1971,12 +1802,10 @@ class Document:
 
         return _fitz.Document_language(self)
 
-
     def setLanguage(self, language=None):
         return _fitz.Document_setLanguage(self, language)
 
     def resolveLink(self, uri=None, chapters=0):
-
         """Calculate internal link destination.
 
         Args:
@@ -1986,10 +1815,7 @@ class Document:
             (page_id, x, y) where x, y are point coordinates on the page.
             page_id is either page number (if chapters=0), or (chapter, pno).
         """
-
-
         return _fitz.Document_resolveLink(self, uri, chapters)
-
 
     def layout(self, rect=None, width=0, height=0, fontsize=11):
         """Re-layout a reflowable document."""
@@ -2003,7 +1829,6 @@ class Document:
 
         return val
 
-
     def makeBookmark(self, loc):
         """Make a page pointer before layouting document."""
         if self.isClosed or self.isEncrypted:
@@ -2011,45 +1836,35 @@ class Document:
 
         return _fitz.Document_makeBookmark(self, loc)
 
-
     def findBookmark(self, bm):
         """Find new location after layouting a document."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_findBookmark(self, bm)
 
     @property
-
     def isReflowable(self):
         """Check if document is layoutable."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_isReflowable(self)
-
 
     def _deleteObject(self, xref):
         """Delete object."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__deleteObject(self, xref)
-
 
     def pdf_catalog(self):
         """Get xref of PDF catalog."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_pdf_catalog(self)
-
 
     def _getPDFfileid(self):
         """Get PDF file id."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__getPDFfileid(self)
 
     @property
@@ -2064,16 +1879,13 @@ class Document:
         return True if pp.m_internal else False
 
     @property
-
     def _hasXrefStream(self):
         """Check if xref table is a stream."""
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__hasXrefStream(self)
 
     @property
-
     def _hasXrefOldStyle(self):
         """Check if xref table is old style."""
         if self.isClosed:
@@ -2082,14 +1894,12 @@ class Document:
         return _fitz.Document__hasXrefOldStyle(self)
 
     @property
-
     def isDirty(self):
         """True if PDF has unsaved changes."""
         if self.isClosed:
             raise ValueError("document closed")
 
         return _fitz.Document_isDirty(self)
-
 
     def can_save_incrementally(self):
         """Check whether incremental saves are possible."""
@@ -2101,22 +1911,16 @@ class Document:
             return False
         return pdf.can_be_saved_incrementally()
 
-
     def authenticate(self, password):
         """Decrypt document."""
         if self.isClosed:
             raise ValueError("document closed")
-
         val = _fitz.Document_authenticate(self, password)
-
         if val:  # the doc is decrypted successfully and we init the outline
             self.isEncrypted = False
             self.initData()
             self.thisown = True
-
-
         return val
-
 
     def save(self, filename, garbage=0, clean=0, deflate=0, deflate_images=0, deflate_fonts=0, incremental=0, ascii=0, expand=0, linear=0, pretty=0, encryption=1, permissions=-1, owner_pw=None, user_pw=None):
 
