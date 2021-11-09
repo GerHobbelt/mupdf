@@ -25,7 +25,64 @@ def PDF_NAME(x):
 
 AnyType = typing.Any
 
+# ------------------------------------------------------------------------------
+# Base 14 font names and dictionary
+# ------------------------------------------------------------------------------
+Base14_fontnames = (
+    "Courier",
+    "Courier-Oblique",
+    "Courier-Bold",
+    "Courier-BoldOblique",
+    "Helvetica",
+    "Helvetica-Oblique",
+    "Helvetica-Bold",
+    "Helvetica-BoldOblique",
+    "Times-Roman",
+    "Times-Italic",
+    "Times-Bold",
+    "Times-BoldItalic",
+    "Symbol",
+    "ZapfDingbats",
+)
+
+Base14_fontdict = {}
+for f in Base14_fontnames:
+    Base14_fontdict[f.lower()] = f
+    del f
+Base14_fontdict["helv"] = "Helvetica"
+Base14_fontdict["heit"] = "Helvetica-Oblique"
+Base14_fontdict["hebo"] = "Helvetica-Bold"
+Base14_fontdict["hebi"] = "Helvetica-BoldOblique"
+Base14_fontdict["cour"] = "Courier"
+Base14_fontdict["coit"] = "Courier-Oblique"
+Base14_fontdict["cobo"] = "Courier-Bold"
+Base14_fontdict["cobi"] = "Courier-BoldOblique"
+Base14_fontdict["tiro"] = "Times-Roman"
+Base14_fontdict["tibo"] = "Times-Bold"
+Base14_fontdict["tiit"] = "Times-Italic"
+Base14_fontdict["tibi"] = "Times-BoldItalic"
+Base14_fontdict["symb"] = "Symbol"
+Base14_fontdict["zadb"] = "ZapfDingbats"
+
 EPSILON = 1e-5
+
+
+# ------------------------------------------------------------------------------
+# link kinds and link flags
+# ------------------------------------------------------------------------------
+LINK_NONE = 0
+LINK_GOTO = 1
+LINK_URI = 2
+LINK_LAUNCH = 3
+LINK_NAMED = 4
+LINK_GOTOR = 5
+LINK_FLAG_L_VALID = 1
+LINK_FLAG_T_VALID = 2
+LINK_FLAG_R_VALID = 4
+LINK_FLAG_B_VALID = 8
+LINK_FLAG_FIT_H = 16
+LINK_FLAG_FIT_V = 32
+LINK_FLAG_R_IS_ZOOM = 64
 
 OptBytes = typing.Optional[typing.ByteString]
 OptDict = typing.Optional[dict]
@@ -33,6 +90,66 @@ OptFloat = typing.Optional[float]
 OptInt = typing.Union[int, None]
 OptSeq = typing.Optional[typing.Sequence]
 OptStr = typing.Optional[str]
+
+
+# ------------------------------------------------------------------------------
+# Stamp annotation icon numbers
+# ------------------------------------------------------------------------------
+STAMP_Approved = 0
+STAMP_AsIs = 1
+STAMP_Confidential = 2
+STAMP_Departmental = 3
+STAMP_Experimental = 4
+STAMP_Expired = 5
+STAMP_Final = 6
+STAMP_ForComment = 7
+STAMP_ForPublicRelease = 8
+STAMP_NotApproved = 9
+STAMP_NotForPublicRelease = 10
+STAMP_Sold = 11
+STAMP_TopSecret = 12
+STAMP_Draft = 13
+
+
+# ------------------------------------------------------------------------------
+# Text handling flags
+# ------------------------------------------------------------------------------
+TEXT_ALIGN_LEFT = 0
+TEXT_ALIGN_CENTER = 1
+TEXT_ALIGN_RIGHT = 2
+TEXT_ALIGN_JUSTIFY = 3
+
+TEXT_OUTPUT_TEXT = 0
+TEXT_OUTPUT_HTML = 1
+TEXT_OUTPUT_JSON = 2
+TEXT_OUTPUT_XML = 3
+TEXT_OUTPUT_XHTML = 4
+
+TEXT_PRESERVE_LIGATURES = 1
+TEXT_PRESERVE_WHITESPACE = 2
+TEXT_PRESERVE_IMAGES = 4
+TEXT_INHIBIT_SPACES = 8
+TEXT_DEHYPHENATE = 16
+TEXT_PRESERVE_SPANS = 32
+
+# ------------------------------------------------------------------------------
+# Simple text encoding options
+# ------------------------------------------------------------------------------
+TEXT_ENCODING_LATIN = 0
+TEXT_ENCODING_GREEK = 1
+TEXT_ENCODING_CYRILLIC = 2
+
+
+annot_skel = {
+    "goto1": "<</A<</S/GoTo/D[%i 0 R/XYZ %g %g 0]>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+    "goto2": "<</A<</S/GoTo/D%s>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+    "gotor1": "<</A<</S/GoToR/D[%i /XYZ %g %g 0]/F<</F(%s)/UF(%s)/Type/Filespec>>>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+    "gotor2": "<</A<</S/GoToR/D%s/F(%s)>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+    "launch": "<</A<</S/Launch/F<</F(%s)/UF(%s)/Type/Filespec>>>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+    "uri": "<</A<</S/URI/URI(%s)>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+    "named": "<</A<</S/Named/N/%s/Type/Action>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
+}
+
 
 dictkey_align = "align"
 dictkey_align = "ascender"
@@ -89,6 +206,531 @@ point_like = "point_like"
 quad_like = "quad_like"
 rect_like = "rect_like"
 
+
+# ------------------------------------------------------------------------------
+# Glyph list for the built-in font 'Symbol'
+# ------------------------------------------------------------------------------
+symbol_glyphs = (
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (32, 0.25),
+    (33, 0.333),
+    (34, 0.713),
+    (35, 0.5),
+    (36, 0.549),
+    (37, 0.833),
+    (38, 0.778),
+    (39, 0.439),
+    (40, 0.333),
+    (41, 0.333),
+    (42, 0.5),
+    (43, 0.549),
+    (44, 0.25),
+    (45, 0.549),
+    (46, 0.25),
+    (47, 0.278),
+    (48, 0.5),
+    (49, 0.5),
+    (50, 0.5),
+    (51, 0.5),
+    (52, 0.5),
+    (53, 0.5),
+    (54, 0.5),
+    (55, 0.5),
+    (56, 0.5),
+    (57, 0.5),
+    (58, 0.278),
+    (59, 0.278),
+    (60, 0.549),
+    (61, 0.549),
+    (62, 0.549),
+    (63, 0.444),
+    (64, 0.549),
+    (65, 0.722),
+    (66, 0.667),
+    (67, 0.722),
+    (68, 0.612),
+    (69, 0.611),
+    (70, 0.763),
+    (71, 0.603),
+    (72, 0.722),
+    (73, 0.333),
+    (74, 0.631),
+    (75, 0.722),
+    (76, 0.686),
+    (77, 0.889),
+    (78, 0.722),
+    (79, 0.722),
+    (80, 0.768),
+    (81, 0.741),
+    (82, 0.556),
+    (83, 0.592),
+    (84, 0.611),
+    (85, 0.69),
+    (86, 0.439),
+    (87, 0.768),
+    (88, 0.645),
+    (89, 0.795),
+    (90, 0.611),
+    (91, 0.333),
+    (92, 0.863),
+    (93, 0.333),
+    (94, 0.658),
+    (95, 0.5),
+    (96, 0.5),
+    (97, 0.631),
+    (98, 0.549),
+    (99, 0.549),
+    (100, 0.494),
+    (101, 0.439),
+    (102, 0.521),
+    (103, 0.411),
+    (104, 0.603),
+    (105, 0.329),
+    (106, 0.603),
+    (107, 0.549),
+    (108, 0.549),
+    (109, 0.576),
+    (110, 0.521),
+    (111, 0.549),
+    (112, 0.549),
+    (113, 0.521),
+    (114, 0.549),
+    (115, 0.603),
+    (116, 0.439),
+    (117, 0.576),
+    (118, 0.713),
+    (119, 0.686),
+    (120, 0.493),
+    (121, 0.686),
+    (122, 0.494),
+    (123, 0.48),
+    (124, 0.2),
+    (125, 0.48),
+    (126, 0.549),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (183, 0.46),
+    (160, 0.25),
+    (161, 0.62),
+    (162, 0.247),
+    (163, 0.549),
+    (164, 0.167),
+    (165, 0.713),
+    (166, 0.5),
+    (167, 0.753),
+    (168, 0.753),
+    (169, 0.753),
+    (170, 0.753),
+    (171, 1.042),
+    (172, 0.713),
+    (173, 0.603),
+    (174, 0.987),
+    (175, 0.603),
+    (176, 0.4),
+    (177, 0.549),
+    (178, 0.411),
+    (179, 0.549),
+    (180, 0.549),
+    (181, 0.576),
+    (182, 0.494),
+    (183, 0.46),
+    (184, 0.549),
+    (185, 0.549),
+    (186, 0.549),
+    (187, 0.549),
+    (188, 1),
+    (189, 0.603),
+    (190, 1),
+    (191, 0.658),
+    (192, 0.823),
+    (193, 0.686),
+    (194, 0.795),
+    (195, 0.987),
+    (196, 0.768),
+    (197, 0.768),
+    (198, 0.823),
+    (199, 0.768),
+    (200, 0.768),
+    (201, 0.713),
+    (202, 0.713),
+    (203, 0.713),
+    (204, 0.713),
+    (205, 0.713),
+    (206, 0.713),
+    (207, 0.713),
+    (208, 0.768),
+    (209, 0.713),
+    (210, 0.79),
+    (211, 0.79),
+    (212, 0.89),
+    (213, 0.823),
+    (214, 0.549),
+    (215, 0.549),
+    (216, 0.713),
+    (217, 0.603),
+    (218, 0.603),
+    (219, 1.042),
+    (220, 0.987),
+    (221, 0.603),
+    (222, 0.987),
+    (223, 0.603),
+    (224, 0.494),
+    (225, 0.329),
+    (226, 0.79),
+    (227, 0.79),
+    (228, 0.786),
+    (229, 0.713),
+    (230, 0.384),
+    (231, 0.384),
+    (232, 0.384),
+    (233, 0.384),
+    (234, 0.384),
+    (235, 0.384),
+    (236, 0.494),
+    (237, 0.494),
+    (238, 0.494),
+    (239, 0.494),
+    (183, 0.46),
+    (241, 0.329),
+    (242, 0.274),
+    (243, 0.686),
+    (244, 0.686),
+    (245, 0.686),
+    (246, 0.384),
+    (247, 0.549),
+    (248, 0.384),
+    (249, 0.384),
+    (250, 0.384),
+    (251, 0.384),
+    (252, 0.494),
+    (253, 0.494),
+    (254, 0.494),
+    (183, 0.46),
+)
+
+
+# ------------------------------------------------------------------------------
+# Glyph list for the built-in font 'ZapfDingbats'
+# ------------------------------------------------------------------------------
+zapf_glyphs = (
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (32, 0.278),
+    (33, 0.974),
+    (34, 0.961),
+    (35, 0.974),
+    (36, 0.98),
+    (37, 0.719),
+    (38, 0.789),
+    (39, 0.79),
+    (40, 0.791),
+    (41, 0.69),
+    (42, 0.96),
+    (43, 0.939),
+    (44, 0.549),
+    (45, 0.855),
+    (46, 0.911),
+    (47, 0.933),
+    (48, 0.911),
+    (49, 0.945),
+    (50, 0.974),
+    (51, 0.755),
+    (52, 0.846),
+    (53, 0.762),
+    (54, 0.761),
+    (55, 0.571),
+    (56, 0.677),
+    (57, 0.763),
+    (58, 0.76),
+    (59, 0.759),
+    (60, 0.754),
+    (61, 0.494),
+    (62, 0.552),
+    (63, 0.537),
+    (64, 0.577),
+    (65, 0.692),
+    (66, 0.786),
+    (67, 0.788),
+    (68, 0.788),
+    (69, 0.79),
+    (70, 0.793),
+    (71, 0.794),
+    (72, 0.816),
+    (73, 0.823),
+    (74, 0.789),
+    (75, 0.841),
+    (76, 0.823),
+    (77, 0.833),
+    (78, 0.816),
+    (79, 0.831),
+    (80, 0.923),
+    (81, 0.744),
+    (82, 0.723),
+    (83, 0.749),
+    (84, 0.79),
+    (85, 0.792),
+    (86, 0.695),
+    (87, 0.776),
+    (88, 0.768),
+    (89, 0.792),
+    (90, 0.759),
+    (91, 0.707),
+    (92, 0.708),
+    (93, 0.682),
+    (94, 0.701),
+    (95, 0.826),
+    (96, 0.815),
+    (97, 0.789),
+    (98, 0.789),
+    (99, 0.707),
+    (100, 0.687),
+    (101, 0.696),
+    (102, 0.689),
+    (103, 0.786),
+    (104, 0.787),
+    (105, 0.713),
+    (106, 0.791),
+    (107, 0.785),
+    (108, 0.791),
+    (109, 0.873),
+    (110, 0.761),
+    (111, 0.762),
+    (112, 0.762),
+    (113, 0.759),
+    (114, 0.759),
+    (115, 0.892),
+    (116, 0.892),
+    (117, 0.788),
+    (118, 0.784),
+    (119, 0.438),
+    (120, 0.138),
+    (121, 0.277),
+    (122, 0.415),
+    (123, 0.392),
+    (124, 0.392),
+    (125, 0.668),
+    (126, 0.668),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (183, 0.788),
+    (161, 0.732),
+    (162, 0.544),
+    (163, 0.544),
+    (164, 0.91),
+    (165, 0.667),
+    (166, 0.76),
+    (167, 0.76),
+    (168, 0.776),
+    (169, 0.595),
+    (170, 0.694),
+    (171, 0.626),
+    (172, 0.788),
+    (173, 0.788),
+    (174, 0.788),
+    (175, 0.788),
+    (176, 0.788),
+    (177, 0.788),
+    (178, 0.788),
+    (179, 0.788),
+    (180, 0.788),
+    (181, 0.788),
+    (182, 0.788),
+    (183, 0.788),
+    (184, 0.788),
+    (185, 0.788),
+    (186, 0.788),
+    (187, 0.788),
+    (188, 0.788),
+    (189, 0.788),
+    (190, 0.788),
+    (191, 0.788),
+    (192, 0.788),
+    (193, 0.788),
+    (194, 0.788),
+    (195, 0.788),
+    (196, 0.788),
+    (197, 0.788),
+    (198, 0.788),
+    (199, 0.788),
+    (200, 0.788),
+    (201, 0.788),
+    (202, 0.788),
+    (203, 0.788),
+    (204, 0.788),
+    (205, 0.788),
+    (206, 0.788),
+    (207, 0.788),
+    (208, 0.788),
+    (209, 0.788),
+    (210, 0.788),
+    (211, 0.788),
+    (212, 0.894),
+    (213, 0.838),
+    (214, 1.016),
+    (215, 0.458),
+    (216, 0.748),
+    (217, 0.924),
+    (218, 0.748),
+    (219, 0.918),
+    (220, 0.927),
+    (221, 0.928),
+    (222, 0.928),
+    (223, 0.834),
+    (224, 0.873),
+    (225, 0.828),
+    (226, 0.924),
+    (227, 0.924),
+    (228, 0.917),
+    (229, 0.93),
+    (230, 0.931),
+    (231, 0.463),
+    (232, 0.883),
+    (233, 0.836),
+    (234, 0.836),
+    (235, 0.867),
+    (236, 0.867),
+    (237, 0.696),
+    (238, 0.696),
+    (239, 0.874),
+    (183, 0.788),
+    (241, 0.874),
+    (242, 0.76),
+    (243, 0.946),
+    (244, 0.771),
+    (245, 0.865),
+    (246, 0.771),
+    (247, 0.888),
+    (248, 0.967),
+    (249, 0.888),
+    (250, 0.831),
+    (251, 0.873),
+    (252, 0.927),
+    (253, 0.97),
+    (183, 0.788),
+    (183, 0.788),
+)
 
 #try:
 #    from pymupdf_fonts import fontdescriptors
@@ -1121,6 +1763,309 @@ def THROWMSG(msg):
     raise Exception(msg)
 
 
+def CheckFont(page: "struct Page *", fontname: str) -> tuple:
+    """Return an entry in the page's font list if reference name matches.
+    """
+    for f in page.get_fonts():
+        if f[4] == fontname:
+            return f
+        if f[3].lower() == fontname.lower():
+            return f
+
+
+def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
+    """Return a font info if present in the document.
+    """
+    for f in doc.FontInfos:
+        if xref == f[0]:
+            return f
+
+
+def CheckMarkerArg(quads: typing.Any) -> tuple:
+    if CheckRect(quads):
+        r = Rect(quads)
+        return (r.quad,)
+    if CheckQuad(quads):
+        return (quads,)
+    for q in quads:
+        if not (CheckRect(q) or CheckQuad(q)):
+            raise ValueError("bad quads entry")
+    return quads
+
+
+def CheckMorph(o: typing.Any) -> bool:
+    if not bool(o):
+        return False
+    if not (type(o) in (list, tuple) and len(o) == 2):
+        raise ValueError("morph must be a sequence of length 2")
+    if not (len(o[0]) == 2 and len(o[1]) == 6):
+        raise ValueError("invalid morph parm 0")
+    if not o[1][4] == o[1][5] == 0:
+        raise ValueError("invalid morph parm 1")
+    return True
+
+
+def CheckQuad(q: typing.Any) -> bool:
+    """Check whether an object is convex, not empty  quad-like.
+
+    It must be a sequence of 4 number pairs.
+    """
+    try:
+        q0 = Quad(q)
+    except:
+        return False
+    return q0.isConvex
+
+
+def CheckRect(r: typing.Any) -> bool:
+    """Check whether an object is non-degenerate rect-like.
+
+    It must be a sequence of 4 numbers.
+    """
+    try:
+        r = Rect(r)
+    except:
+        return False
+    return not (r.isEmpty or r.isInfinite)
+
+
+def Page__add_text_marker(self, quads, annot_type):
+    pdfpage = self._pdf_page()
+    rotation = JM_page_rotation(pdfpage)
+    def final():
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
+    try:
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), 0)
+        annot = mupdf.mpdf_create_annot(pdfpage, annot_type)
+        len_ = len(quads)
+        for item in quads:
+            q = JM_quad_from_py(item);
+            mupdf.mpdf_add_annot_quad_point(annot, q)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        final()
+        return
+    final()
+    annot = mupdf.mpdf_keep_annot(annot)
+    return Annot(self, annot)
+
+
+def Page_clean_contents(self, sanitize):
+    assert isinstance(self, Page)
+    page = self.this.page_from_fz_page()
+    if not page:
+        return
+    assert isinstance(page, mupdf.PdfPage)
+    filter_ = mupdf.pdf_filter_options()
+    filter_.opaque = None
+    filter_.image_filter = None
+    filter_.text_filter = None
+    filter_.after_text_object = None
+    filter_.end_page = None
+    filter_.recurse = 1
+    filter_.instance_forms = 1
+    filter_.sanitize = 1
+    filter_.ascii = 0
+
+    filter_.sanitize = sanitize
+    filter2 = mupdf.PdfFilterOptions(filter_)
+    page.doc().filter_page_contents(page, filter2)
+    # fixme: page->doc->dirty = 1;
+
+
+def Page_set_contents(page0, xref):
+    assert isinstance(page0, Page)
+    page = page0.this.page_from_fz_page()
+    assert isinstance(page, mupdf.PdfPage)
+    #jlib.log(f'{page.doc=}')
+    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
+        raise Exception('bad xref')
+    contents = page.doc().new_indirect(xref, 0)
+    if not contents.is_stream():
+        raise Exception('xref is no stream')
+    #page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
+    page.obj().dict_put( mupdf.PDF_ENUM_NAME_Contents, contents)
+    # fixme: page.this.dirty = 1
+    return
+
+
+def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
+    xref = info[0]
+    found = False
+    for i, fi in enumerate(doc.FontInfos):
+        if fi[0] == xref:
+            found = True
+            break
+    if found:
+        doc.FontInfos[i] = info
+    else:
+        doc.FontInfos.append(info)
+
+
+def dir_str(x):
+    ret = f'{x} {type(x)} ({len(dir(x))}):\n'
+    for i in dir(x):
+        ret += f'    {i}\n'
+    return ret
+
+
+def getTextlength(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
+    """Calculate length of a string for a given built-in font.
+
+    Args:
+        fontname: name of the font.
+        fontsize: size of font in points.
+        encoding: encoding to use (0=Latin, 1=Greek, 2=Cyrillic).
+    Returns:
+        (float) length of text.
+    """
+    fontname = fontname.lower()
+    basename = Base14_fontdict.get(fontname, None)
+
+    glyphs = None
+    if basename == "Symbol":
+        glyphs = symbol_glyphs
+    if basename == "ZapfDingbats":
+        glyphs = zapf_glyphs
+    if glyphs is not None:
+        w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
+        return w * fontsize
+
+    if fontname in Base14_fontdict.keys():
+        return TOOLS._measure_string(
+            text, Base14_fontdict[fontname], fontsize, encoding
+        )
+
+    if fontname in (
+        "china-t",
+        "china-s",
+        "china-ts",
+        "china-ss",
+        "japan",
+        "japan-s",
+        "korea",
+        "korea-s",
+    ):
+        return len(text) * fontsize
+
+    raise ValueError("Font '%s' is unsupported" % fontname)
+
+
+def get_pdf_now():
+    return getPDFnow()
+
+
+def get_pdf_str(s: str) -> str:
+    """ Return a PDF string depending on its coding.
+
+    Notes:
+        Returns a string bracketed with either "()" or "<>" for hex values.
+        If only ascii then "(original)" is returned, else if only 8 bit chars
+        then "(original)" with interspersed octal strings \nnn is returned,
+        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
+        UTF-16BE encoding of the original.
+    """
+    if not bool(s):
+        return "()"
+
+    def make_utf16be(s):
+        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
+        return "<" + r.hex() + ">"  # brackets indicate hex
+
+    # The following either returns the original string with mixed-in
+    # octal numbers \nnn for chars outside the ASCII range, or returns
+    # the UTF-16BE BOM version of the string.
+    r = ""
+    for c in s:
+        oc = ord(c)
+        if oc > 255:  # shortcut if beyond 8-bit code range
+            return make_utf16be(s)
+
+        if oc > 31 and oc < 127:  # in ASCII range
+            if c in ("(", ")", "\\"):  # these need to be escaped
+                r += "\\"
+            r += c
+            continue
+
+        if oc > 127:  # beyond ASCII
+            r += "\\%03o" % oc
+            continue
+
+        # now the white spaces
+        if oc == 8:  # backspace
+            r += "\\b"
+        elif oc == 9:  # tab
+            r += "\\t"
+        elif oc == 10:  # line feed
+            r += "\\n"
+        elif oc == 12:  # form feed
+            r += "\\f"
+        elif oc == 13:  # carriage return
+            r += "\\r"
+        else:
+            r += "\\267"  # unsupported: replace by 0xB7
+
+    return "(" + r + ")"
+
+
+def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
+    """Calculate length of a string for a built-in font.
+
+    Args:
+        fontname: name of the font.
+        fontsize: font size points.
+        encoding: encoding to use, 0=Latin (default), 1=Greek, 2=Cyrillic.
+    Returns:
+        (float) length of text.
+    """
+    fontname = fontname.lower()
+    basename = Base14_fontdict.get(fontname, None)
+
+    glyphs = None
+    if basename == "Symbol":
+        glyphs = symbol_glyphs
+    if basename == "ZapfDingbats":
+        glyphs = zapf_glyphs
+    if glyphs is not None:
+        w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
+        return w * fontsize
+
+    if fontname in Base14_fontdict.keys():
+        return TOOLS._measure_string(
+            text, Base14_fontdict[fontname], fontsize, encoding
+        )
+
+    if fontname in (
+        "china-t",
+        "china-s",
+        "china-ts",
+        "china-ss",
+        "japan",
+        "japan-s",
+        "korea",
+        "korea-s",
+    ):
+        return len(text) * fontsize
+
+    raise ValueError("Font '%s' is unsupported" % fontname)
+
+
+def pdf_dict_getl(doc, obj, *keys):
+    jlib.log('{obj=} {len(keys)=}: {keys}')
+    jlib.log('{doc.this.count_pages()=}')
+    for i in range(len(keys)):
+        if not obj:
+            break
+        obj = obj.dict_get(keys[i])
+        jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
+    jlib.log('{obj=} {doc.this.count_pages()=}')
+    return obj
+
+
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
@@ -1648,270 +2593,6 @@ class TOOLS:
         return xref
 
 
-def CheckFont(page: "struct Page *", fontname: str) -> tuple:
-    """Return an entry in the page's font list if reference name matches.
-    """
-    for f in page.get_fonts():
-        if f[4] == fontname:
-            return f
-        if f[3].lower() == fontname.lower():
-            return f
-
-
-def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
-    """Return a font info if present in the document.
-    """
-    for f in doc.FontInfos:
-        if xref == f[0]:
-            return f
-
-
-def CheckMarkerArg(quads: typing.Any) -> tuple:
-    if CheckRect(quads):
-        r = Rect(quads)
-        return (r.quad,)
-    if CheckQuad(quads):
-        return (quads,)
-    for q in quads:
-        if not (CheckRect(q) or CheckQuad(q)):
-            raise ValueError("bad quads entry")
-    return quads
-
-
-def CheckMorph(o: typing.Any) -> bool:
-    if not bool(o):
-        return False
-    if not (type(o) in (list, tuple) and len(o) == 2):
-        raise ValueError("morph must be a sequence of length 2")
-    if not (len(o[0]) == 2 and len(o[1]) == 6):
-        raise ValueError("invalid morph parm 0")
-    if not o[1][4] == o[1][5] == 0:
-        raise ValueError("invalid morph parm 1")
-    return True
-
-
-def CheckQuad(q: typing.Any) -> bool:
-    """Check whether an object is convex, not empty  quad-like.
-
-    It must be a sequence of 4 number pairs.
-    """
-    try:
-        q0 = Quad(q)
-    except:
-        return False
-    return q0.isConvex
-
-
-def CheckRect(r: typing.Any) -> bool:
-    """Check whether an object is non-degenerate rect-like.
-
-    It must be a sequence of 4 numbers.
-    """
-    try:
-        r = Rect(r)
-    except:
-        return False
-    return not (r.isEmpty or r.isInfinite)
-
-
-def Page__add_text_marker(self, quads, annot_type):
-    pdfpage = self._pdf_page()
-    rotation = JM_page_rotation(pdfpage)
-    def final():
-        if rotation != 0:
-            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
-    try:
-        if rotation != 0:
-            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), 0)
-        annot = mupdf.mpdf_create_annot(pdfpage, annot_type)
-        len_ = len(quads)
-        for item in quads:
-            q = JM_quad_from_py(item);
-            mupdf.mpdf_add_annot_quad_point(annot, q)
-        JM_add_annot_id(annot, "A")
-        mupdf.mpdf_update_annot(annot)
-    except Exception as e:
-        jlib.log('{e=}')
-        final()
-        return
-    final()
-    annot = mupdf.mpdf_keep_annot(annot)
-    return Annot(self, annot)
-
-
-def Page_clean_contents(self, sanitize):
-    assert isinstance(self, Page)
-    page = self.this.page_from_fz_page()
-    if not page:
-        return
-    assert isinstance(page, mupdf.PdfPage)
-    filter_ = mupdf.pdf_filter_options()
-    filter_.opaque = None
-    filter_.image_filter = None
-    filter_.text_filter = None
-    filter_.after_text_object = None
-    filter_.end_page = None
-    filter_.recurse = 1
-    filter_.instance_forms = 1
-    filter_.sanitize = 1
-    filter_.ascii = 0
-
-    filter_.sanitize = sanitize
-    filter2 = mupdf.PdfFilterOptions(filter_)
-    page.doc().filter_page_contents(page, filter2)
-    # fixme: page->doc->dirty = 1;
-
-
-def Page_set_contents(page0, xref):
-    assert isinstance(page0, Page)
-    page = page0.this.page_from_fz_page()
-    assert isinstance(page, mupdf.PdfPage)
-    #jlib.log(f'{page.doc=}')
-    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
-        raise Exception('bad xref')
-    contents = page.doc().new_indirect(xref, 0)
-    if not contents.is_stream():
-        raise Exception('xref is no stream')
-    #page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
-    page.obj().dict_put( mupdf.PDF_ENUM_NAME_Contents, contents)
-    # fixme: page.this.dirty = 1
-    return
-
-
-def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
-    xref = info[0]
-    found = False
-    for i, fi in enumerate(doc.FontInfos):
-        if fi[0] == xref:
-            found = True
-            break
-    if found:
-        doc.FontInfos[i] = info
-    else:
-        doc.FontInfos.append(info)
-
-
-def pdf_dict_getl(doc, obj, *keys):
-    jlib.log('{obj=} {len(keys)=}: {keys}')
-    jlib.log('{doc.this.count_pages()=}')
-    for i in range(len(keys)):
-        if not obj:
-            break
-        obj = obj.dict_get(keys[i])
-        jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
-    jlib.log('{obj=} {doc.this.count_pages()=}')
-    return obj
-
-def dir_str(x):
-    ret = f'{x} {type(x)} ({len(dir(x))}):\n'
-    for i in dir(x):
-        ret += f'    {i}\n'
-    return ret
-
-
-def get_pdf_now():
-    return getPDFnow()
-
-
-def get_pdf_str(s: str) -> str:
-    """ Return a PDF string depending on its coding.
-
-    Notes:
-        Returns a string bracketed with either "()" or "<>" for hex values.
-        If only ascii then "(original)" is returned, else if only 8 bit chars
-        then "(original)" with interspersed octal strings \nnn is returned,
-        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
-        UTF-16BE encoding of the original.
-    """
-    if not bool(s):
-        return "()"
-
-    def make_utf16be(s):
-        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
-        return "<" + r.hex() + ">"  # brackets indicate hex
-
-    # The following either returns the original string with mixed-in
-    # octal numbers \nnn for chars outside the ASCII range, or returns
-    # the UTF-16BE BOM version of the string.
-    r = ""
-    for c in s:
-        oc = ord(c)
-        if oc > 255:  # shortcut if beyond 8-bit code range
-            return make_utf16be(s)
-
-        if oc > 31 and oc < 127:  # in ASCII range
-            if c in ("(", ")", "\\"):  # these need to be escaped
-                r += "\\"
-            r += c
-            continue
-
-        if oc > 127:  # beyond ASCII
-            r += "\\%03o" % oc
-            continue
-
-        # now the white spaces
-        if oc == 8:  # backspace
-            r += "\\b"
-        elif oc == 9:  # tab
-            r += "\\t"
-        elif oc == 10:  # line feed
-            r += "\\n"
-        elif oc == 12:  # form feed
-            r += "\\f"
-        elif oc == 13:  # carriage return
-            r += "\\r"
-        else:
-            r += "\\267"  # unsupported: replace by 0xB7
-
-    return "(" + r + ")"
-
-
-def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
-    """Calculate length of a string for a built-in font.
-
-    Args:
-        fontname: name of the font.
-        fontsize: font size points.
-        encoding: encoding to use, 0=Latin (default), 1=Greek, 2=Cyrillic.
-    Returns:
-        (float) length of text.
-    """
-    fontname = fontname.lower()
-    basename = Base14_fontdict.get(fontname, None)
-
-    glyphs = None
-    if basename == "Symbol":
-        glyphs = symbol_glyphs
-    if basename == "ZapfDingbats":
-        glyphs = zapf_glyphs
-    if glyphs is not None:
-        w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
-        return w * fontsize
-
-    if fontname in Base14_fontdict.keys():
-        return TOOLS._measure_string(
-            text, Base14_fontdict[fontname], fontsize, encoding
-        )
-
-    if fontname in (
-        "china-t",
-        "china-s",
-        "china-ts",
-        "china-ss",
-        "japan",
-        "japan-s",
-        "korea",
-        "korea-s",
-    ):
-        return len(text) * fontsize
-
-    raise ValueError("Font '%s' is unsupported" % fontname)
-
-
-
-
-
-
 
 class Matrix(object):
     """Matrix() - all zeros
@@ -2342,6 +3023,217 @@ class Point(object):
     def __hash__(self):
         return hash(tuple(self))
 
+class Quad(object):
+    """Quad() - all zero points\nQuad(ul, ur, ll, lr)\nQuad(quad) - new copy\nQuad(sequence) - from 'sequence'"""
+    def __init__(self, *args):
+        if not args:
+            self.ul = self.ur = self.ll = self.lr = Point()
+            return None
+
+        if len(args) > 4:
+            raise ValueError("bad Quad: sequ. length")
+        if len(args) == 4:
+            self.ul, self.ur, self.ll, self.lr = map(Point, args)
+            return None
+        if len(args) == 1:
+            l = args[0]
+            if hasattr(l, "__getitem__") is False:
+                raise ValueError("bad Quad constructor")
+            if len(l) != 4:
+                raise ValueError("bad Quad: sequ. length")
+            self.ul, self.ur, self.ll, self.lr = map(Point, l)
+            return None
+        raise ValueError("bad Quad constructor")
+
+    @property
+    def isRectangular(self):
+        """Check if quad is rectangular.
+
+        Notes:
+            Some rotation matrix can thus transform it into a rectangle.
+            This is equivalent to three corners enclose 90 degrees.
+        Returns:
+            True or False.
+        """
+
+        sine = TOOLS._sine_between(self.ul, self.ur, self.lr)
+        if abs(sine - 1) > EPSILON:  # the sine of the angle
+            return False
+
+        sine = TOOLS._sine_between(self.ur, self.lr, self.ll)
+        if abs(sine - 1) > EPSILON:
+            return False
+
+        sine = TOOLS._sine_between(self.lr, self.ll, self.ul)
+        if abs(sine - 1) > EPSILON:
+            return False
+
+        return True
+
+
+    @property
+    def isConvex(self):
+        """Check if quad is convex and not degenerate.
+
+        Notes:
+            For convexity, every line connecting two points of the quad must be
+            inside the quad. This is equivalent to that every corner encloses
+            an angle with 0 < angle < 180 degrees.
+            Excluding the "degenerate" case (all points on the same line),
+            it suffices to check that the sines of three angles are > 0.
+        Returns:
+            True or False.
+        """
+        count = 0
+        sine = TOOLS._sine_between(self.ul, self.ur, self.lr)
+        if sine > 0:
+            count += 1
+        elif sine < 0:
+            return False
+
+        sine = TOOLS._sine_between(self.ur, self.lr, self.ll)
+        if sine > 0:
+            count += 1
+        elif sine < 0:
+            return False
+
+        sine = TOOLS._sine_between(self.lr, self.ll, self.ul)
+        if sine > 0:
+            count += 1
+        elif sine < 0:
+            return False
+
+        sine = TOOLS._sine_between(self.ll, self.ul, self.ur)
+        if sine > 0:
+            count += 1
+        elif sine < 0:
+            return False
+
+        if count >= 2:
+            return True
+
+        return False
+
+
+    @property
+    def isEmpty(self):
+        """Check whether all quad corners are on the same line.
+
+        The is the case exactly if more than one corner angle is zero.
+        """
+        count = 0
+        if abs(TOOLS._sine_between(self.ul, self.ur, self.lr)) < EPSILON:
+            count += 1
+        if abs(TOOLS._sine_between(self.ur, self.lr, self.ll)) < EPSILON:
+            count += 1
+        if abs(TOOLS._sine_between(self.lr, self.ll, self.ul)) < EPSILON:
+            count += 1
+        if abs(TOOLS._sine_between(self.ll, self.ul, self.ur)) < EPSILON:
+            count += 1
+        if count <= 2:
+            return False
+        return True
+
+    width  = property(lambda self: max(abs(self.ul - self.ur), abs(self.ll - self.lr)))
+    height = property(lambda self: max(abs(self.ul - self.ll), abs(self.ur - self.lr)))
+
+    @property
+    def rect(self):
+        r = Rect()
+        r.x0 = min(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
+        r.y0 = min(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
+        r.x1 = max(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
+        r.y1 = max(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
+        return r
+
+    def __getitem__(self, i):
+        return (self.ul, self.ur, self.ll, self.lr)[i]
+
+    def __len__(self):
+        return 4
+
+    def __setitem__(self, i, v):
+        if   i == 0: self.ul = Point(v)
+        elif i == 1: self.ur = Point(v)
+        elif i == 2: self.ll = Point(v)
+        elif i == 3: self.lr = Point(v)
+        else:
+            raise IndexError("index out of range")
+        return None
+
+    def __repr__(self):
+        return "Quad" + str(tuple(self))
+
+    def __pos__(self):
+        return Quad(self)
+
+    def __neg__(self):
+        return Quad(-self.ul, -self.ur, -self.ll, -self.lr)
+
+    def __bool__(self):
+        return not self.isEmpty
+
+    def __nonzero__(self):
+        return not self.isEmpty
+
+    def __eq__(self, quad):
+        if not hasattr(quad, "__len__"):
+            return False
+        return len(quad) == 4 and (
+            self.ul == quad[0] and
+            self.ur == quad[1] and
+            self.ll == quad[2] and
+            self.lr == quad[3]
+        )
+
+    def __abs__(self):
+        if self.isEmpty:
+            return 0.0
+        return abs(self.ul - self.ur) * abs(self.ul - self.ll)
+
+
+    def morph(self, p, m):
+        """Morph the quad with matrix-like 'm' and point-like 'p'.
+
+        Return a new quad."""
+
+        delta = Matrix(1, 1).preTranslate(p.x, p.y)
+        q = self * ~delta * m * delta
+        return q
+
+
+    def transform(self, m):
+        """Replace quad by its transformation with matrix m."""
+        if len(m) != 6:
+            raise ValueError("bad Matrix: sequ. length")
+        self.ul *= m
+        self.ur *= m
+        self.ll *= m
+        self.lr *= m
+        return self
+
+    def __mul__(self, m):
+        r = Quad(self)
+        r = r.transform(m)
+        return r
+
+    def __truediv__(self, m):
+        if hasattr(m, "__float__"):
+            im = 1. / m
+        else:
+            im = TOOLS._invert_matrix(m)[1]
+            if not im:
+                raise ZeroDivisionError("matrix not invertible")
+        r = Quad(self)
+        r = r.transform(im)
+        return r
+
+    __div__ = __truediv__
+
+    def __hash__(self):
+        return hash(tuple(self))
+
+
 class Rect(object):
     """Rect() - all zeros\nRect(x0, y0, x1, y1)\nRect(top-left, x1, y1)\nRect(x0, y0, bottom-right)\nRect(top-left, bottom-right)\nRect(Rect or IRect) - new copy\nRect(sequence) - from 'sequence'"""
     def __init__(self, *args):
@@ -2692,216 +3584,6 @@ class IRect(Rect):
     def __and__(self, x):
         return Rect.__and__(self, x).round()
 
-class Quad(object):
-    """Quad() - all zero points\nQuad(ul, ur, ll, lr)\nQuad(quad) - new copy\nQuad(sequence) - from 'sequence'"""
-    def __init__(self, *args):
-        if not args:
-            self.ul = self.ur = self.ll = self.lr = Point()
-            return None
-
-        if len(args) > 4:
-            raise ValueError("bad Quad: sequ. length")
-        if len(args) == 4:
-            self.ul, self.ur, self.ll, self.lr = map(Point, args)
-            return None
-        if len(args) == 1:
-            l = args[0]
-            if hasattr(l, "__getitem__") is False:
-                raise ValueError("bad Quad constructor")
-            if len(l) != 4:
-                raise ValueError("bad Quad: sequ. length")
-            self.ul, self.ur, self.ll, self.lr = map(Point, l)
-            return None
-        raise ValueError("bad Quad constructor")
-
-    @property
-    def isRectangular(self):
-        """Check if quad is rectangular.
-
-        Notes:
-            Some rotation matrix can thus transform it into a rectangle.
-            This is equivalent to three corners enclose 90 degrees.
-        Returns:
-            True or False.
-        """
-
-        sine = TOOLS._sine_between(self.ul, self.ur, self.lr)
-        if abs(sine - 1) > EPSILON:  # the sine of the angle
-            return False
-
-        sine = TOOLS._sine_between(self.ur, self.lr, self.ll)
-        if abs(sine - 1) > EPSILON:
-            return False
-
-        sine = TOOLS._sine_between(self.lr, self.ll, self.ul)
-        if abs(sine - 1) > EPSILON:
-            return False
-
-        return True
-
-
-    @property
-    def isConvex(self):
-        """Check if quad is convex and not degenerate.
-
-        Notes:
-            For convexity, every line connecting two points of the quad must be
-            inside the quad. This is equivalent to that every corner encloses
-            an angle with 0 < angle < 180 degrees.
-            Excluding the "degenerate" case (all points on the same line),
-            it suffices to check that the sines of three angles are > 0.
-        Returns:
-            True or False.
-        """
-        count = 0
-        sine = TOOLS._sine_between(self.ul, self.ur, self.lr)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
-            return False
-
-        sine = TOOLS._sine_between(self.ur, self.lr, self.ll)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
-            return False
-
-        sine = TOOLS._sine_between(self.lr, self.ll, self.ul)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
-            return False
-
-        sine = TOOLS._sine_between(self.ll, self.ul, self.ur)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
-            return False
-
-        if count >= 2:
-            return True
-
-        return False
-
-
-    @property
-    def isEmpty(self):
-        """Check whether all quad corners are on the same line.
-
-        The is the case exactly if more than one corner angle is zero.
-        """
-        count = 0
-        if abs(TOOLS._sine_between(self.ul, self.ur, self.lr)) < EPSILON:
-            count += 1
-        if abs(TOOLS._sine_between(self.ur, self.lr, self.ll)) < EPSILON:
-            count += 1
-        if abs(TOOLS._sine_between(self.lr, self.ll, self.ul)) < EPSILON:
-            count += 1
-        if abs(TOOLS._sine_between(self.ll, self.ul, self.ur)) < EPSILON:
-            count += 1
-        if count <= 2:
-            return False
-        return True
-
-    width  = property(lambda self: max(abs(self.ul - self.ur), abs(self.ll - self.lr)))
-    height = property(lambda self: max(abs(self.ul - self.ll), abs(self.ur - self.lr)))
-
-    @property
-    def rect(self):
-        r = Rect()
-        r.x0 = min(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
-        r.y0 = min(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
-        r.x1 = max(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
-        r.y1 = max(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
-        return r
-
-    def __getitem__(self, i):
-        return (self.ul, self.ur, self.ll, self.lr)[i]
-
-    def __len__(self):
-        return 4
-
-    def __setitem__(self, i, v):
-        if   i == 0: self.ul = Point(v)
-        elif i == 1: self.ur = Point(v)
-        elif i == 2: self.ll = Point(v)
-        elif i == 3: self.lr = Point(v)
-        else:
-            raise IndexError("index out of range")
-        return None
-
-    def __repr__(self):
-        return "Quad" + str(tuple(self))
-
-    def __pos__(self):
-        return Quad(self)
-
-    def __neg__(self):
-        return Quad(-self.ul, -self.ur, -self.ll, -self.lr)
-
-    def __bool__(self):
-        return not self.isEmpty
-
-    def __nonzero__(self):
-        return not self.isEmpty
-
-    def __eq__(self, quad):
-        if not hasattr(quad, "__len__"):
-            return False
-        return len(quad) == 4 and (
-            self.ul == quad[0] and
-            self.ur == quad[1] and
-            self.ll == quad[2] and
-            self.lr == quad[3]
-        )
-
-    def __abs__(self):
-        if self.isEmpty:
-            return 0.0
-        return abs(self.ul - self.ur) * abs(self.ul - self.ll)
-
-
-    def morph(self, p, m):
-        """Morph the quad with matrix-like 'm' and point-like 'p'.
-
-        Return a new quad."""
-
-        delta = Matrix(1, 1).preTranslate(p.x, p.y)
-        q = self * ~delta * m * delta
-        return q
-
-
-    def transform(self, m):
-        """Replace quad by its transformation with matrix m."""
-        if len(m) != 6:
-            raise ValueError("bad Matrix: sequ. length")
-        self.ul *= m
-        self.ur *= m
-        self.ll *= m
-        self.lr *= m
-        return self
-
-    def __mul__(self, m):
-        r = Quad(self)
-        r = r.transform(m)
-        return r
-
-    def __truediv__(self, m):
-        if hasattr(m, "__float__"):
-            im = 1. / m
-        else:
-            im = TOOLS._invert_matrix(m)[1]
-            if not im:
-                raise ZeroDivisionError("matrix not invertible")
-        r = Quad(self)
-        r = r.transform(im)
-        return r
-
-    __div__ = __truediv__
-
-    def __hash__(self):
-        return hash(tuple(self))
-
 
 class Widget(object):
     '''
@@ -3097,685 +3779,6 @@ class Widget(object):
         return self._annot.next
 
 
-# ------------------------------------------------------------------------------
-# link kinds and link flags
-# ------------------------------------------------------------------------------
-LINK_NONE = 0
-LINK_GOTO = 1
-LINK_URI = 2
-LINK_LAUNCH = 3
-LINK_NAMED = 4
-LINK_GOTOR = 5
-LINK_FLAG_L_VALID = 1
-LINK_FLAG_T_VALID = 2
-LINK_FLAG_R_VALID = 4
-LINK_FLAG_B_VALID = 8
-LINK_FLAG_FIT_H = 16
-LINK_FLAG_FIT_V = 32
-LINK_FLAG_R_IS_ZOOM = 64
-
-# ------------------------------------------------------------------------------
-# Text handling flags
-# ------------------------------------------------------------------------------
-TEXT_ALIGN_LEFT = 0
-TEXT_ALIGN_CENTER = 1
-TEXT_ALIGN_RIGHT = 2
-TEXT_ALIGN_JUSTIFY = 3
-
-TEXT_OUTPUT_TEXT = 0
-TEXT_OUTPUT_HTML = 1
-TEXT_OUTPUT_JSON = 2
-TEXT_OUTPUT_XML = 3
-TEXT_OUTPUT_XHTML = 4
-
-TEXT_PRESERVE_LIGATURES = 1
-TEXT_PRESERVE_WHITESPACE = 2
-TEXT_PRESERVE_IMAGES = 4
-TEXT_INHIBIT_SPACES = 8
-TEXT_DEHYPHENATE = 16
-TEXT_PRESERVE_SPANS = 32
-
-# ------------------------------------------------------------------------------
-# Simple text encoding options
-# ------------------------------------------------------------------------------
-TEXT_ENCODING_LATIN = 0
-TEXT_ENCODING_GREEK = 1
-TEXT_ENCODING_CYRILLIC = 2
-# ------------------------------------------------------------------------------
-# Stamp annotation icon numbers
-# ------------------------------------------------------------------------------
-STAMP_Approved = 0
-STAMP_AsIs = 1
-STAMP_Confidential = 2
-STAMP_Departmental = 3
-STAMP_Experimental = 4
-STAMP_Expired = 5
-STAMP_Final = 6
-STAMP_ForComment = 7
-STAMP_ForPublicRelease = 8
-STAMP_NotApproved = 9
-STAMP_NotForPublicRelease = 10
-STAMP_Sold = 11
-STAMP_TopSecret = 12
-STAMP_Draft = 13
-
-# ------------------------------------------------------------------------------
-# Base 14 font names and dictionary
-# ------------------------------------------------------------------------------
-Base14_fontnames = (
-    "Courier",
-    "Courier-Oblique",
-    "Courier-Bold",
-    "Courier-BoldOblique",
-    "Helvetica",
-    "Helvetica-Oblique",
-    "Helvetica-Bold",
-    "Helvetica-BoldOblique",
-    "Times-Roman",
-    "Times-Italic",
-    "Times-Bold",
-    "Times-BoldItalic",
-    "Symbol",
-    "ZapfDingbats",
-)
-
-Base14_fontdict = {}
-for f in Base14_fontnames:
-    Base14_fontdict[f.lower()] = f
-    del f
-Base14_fontdict["helv"] = "Helvetica"
-Base14_fontdict["heit"] = "Helvetica-Oblique"
-Base14_fontdict["hebo"] = "Helvetica-Bold"
-Base14_fontdict["hebi"] = "Helvetica-BoldOblique"
-Base14_fontdict["cour"] = "Courier"
-Base14_fontdict["coit"] = "Courier-Oblique"
-Base14_fontdict["cobo"] = "Courier-Bold"
-Base14_fontdict["cobi"] = "Courier-BoldOblique"
-Base14_fontdict["tiro"] = "Times-Roman"
-Base14_fontdict["tibo"] = "Times-Bold"
-Base14_fontdict["tiit"] = "Times-Italic"
-Base14_fontdict["tibi"] = "Times-BoldItalic"
-Base14_fontdict["symb"] = "Symbol"
-Base14_fontdict["zadb"] = "ZapfDingbats"
-
-annot_skel = {
-    "goto1": "<</A<</S/GoTo/D[%i 0 R/XYZ %g %g 0]>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-    "goto2": "<</A<</S/GoTo/D%s>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-    "gotor1": "<</A<</S/GoToR/D[%i /XYZ %g %g 0]/F<</F(%s)/UF(%s)/Type/Filespec>>>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-    "gotor2": "<</A<</S/GoToR/D%s/F(%s)>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-    "launch": "<</A<</S/Launch/F<</F(%s)/UF(%s)/Type/Filespec>>>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-    "uri": "<</A<</S/URI/URI(%s)>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-    "named": "<</A<</S/Named/N/%s/Type/Action>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
-}
-
-
-def getTextlength(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
-    """Calculate length of a string for a given built-in font.
-
-    Args:
-        fontname: name of the font.
-        fontsize: size of font in points.
-        encoding: encoding to use (0=Latin, 1=Greek, 2=Cyrillic).
-    Returns:
-        (float) length of text.
-    """
-    fontname = fontname.lower()
-    basename = Base14_fontdict.get(fontname, None)
-
-    glyphs = None
-    if basename == "Symbol":
-        glyphs = symbol_glyphs
-    if basename == "ZapfDingbats":
-        glyphs = zapf_glyphs
-    if glyphs is not None:
-        w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
-        return w * fontsize
-
-    if fontname in Base14_fontdict.keys():
-        return TOOLS._measure_string(
-            text, Base14_fontdict[fontname], fontsize, encoding
-        )
-
-    if fontname in (
-        "china-t",
-        "china-s",
-        "china-ts",
-        "china-ss",
-        "japan",
-        "japan-s",
-        "korea",
-        "korea-s",
-    ):
-        return len(text) * fontsize
-
-    raise ValueError("Font '%s' is unsupported" % fontname)
-
-
-# ------------------------------------------------------------------------------
-# Glyph list for the built-in font 'ZapfDingbats'
-# ------------------------------------------------------------------------------
-zapf_glyphs = (
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (32, 0.278),
-    (33, 0.974),
-    (34, 0.961),
-    (35, 0.974),
-    (36, 0.98),
-    (37, 0.719),
-    (38, 0.789),
-    (39, 0.79),
-    (40, 0.791),
-    (41, 0.69),
-    (42, 0.96),
-    (43, 0.939),
-    (44, 0.549),
-    (45, 0.855),
-    (46, 0.911),
-    (47, 0.933),
-    (48, 0.911),
-    (49, 0.945),
-    (50, 0.974),
-    (51, 0.755),
-    (52, 0.846),
-    (53, 0.762),
-    (54, 0.761),
-    (55, 0.571),
-    (56, 0.677),
-    (57, 0.763),
-    (58, 0.76),
-    (59, 0.759),
-    (60, 0.754),
-    (61, 0.494),
-    (62, 0.552),
-    (63, 0.537),
-    (64, 0.577),
-    (65, 0.692),
-    (66, 0.786),
-    (67, 0.788),
-    (68, 0.788),
-    (69, 0.79),
-    (70, 0.793),
-    (71, 0.794),
-    (72, 0.816),
-    (73, 0.823),
-    (74, 0.789),
-    (75, 0.841),
-    (76, 0.823),
-    (77, 0.833),
-    (78, 0.816),
-    (79, 0.831),
-    (80, 0.923),
-    (81, 0.744),
-    (82, 0.723),
-    (83, 0.749),
-    (84, 0.79),
-    (85, 0.792),
-    (86, 0.695),
-    (87, 0.776),
-    (88, 0.768),
-    (89, 0.792),
-    (90, 0.759),
-    (91, 0.707),
-    (92, 0.708),
-    (93, 0.682),
-    (94, 0.701),
-    (95, 0.826),
-    (96, 0.815),
-    (97, 0.789),
-    (98, 0.789),
-    (99, 0.707),
-    (100, 0.687),
-    (101, 0.696),
-    (102, 0.689),
-    (103, 0.786),
-    (104, 0.787),
-    (105, 0.713),
-    (106, 0.791),
-    (107, 0.785),
-    (108, 0.791),
-    (109, 0.873),
-    (110, 0.761),
-    (111, 0.762),
-    (112, 0.762),
-    (113, 0.759),
-    (114, 0.759),
-    (115, 0.892),
-    (116, 0.892),
-    (117, 0.788),
-    (118, 0.784),
-    (119, 0.438),
-    (120, 0.138),
-    (121, 0.277),
-    (122, 0.415),
-    (123, 0.392),
-    (124, 0.392),
-    (125, 0.668),
-    (126, 0.668),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (183, 0.788),
-    (161, 0.732),
-    (162, 0.544),
-    (163, 0.544),
-    (164, 0.91),
-    (165, 0.667),
-    (166, 0.76),
-    (167, 0.76),
-    (168, 0.776),
-    (169, 0.595),
-    (170, 0.694),
-    (171, 0.626),
-    (172, 0.788),
-    (173, 0.788),
-    (174, 0.788),
-    (175, 0.788),
-    (176, 0.788),
-    (177, 0.788),
-    (178, 0.788),
-    (179, 0.788),
-    (180, 0.788),
-    (181, 0.788),
-    (182, 0.788),
-    (183, 0.788),
-    (184, 0.788),
-    (185, 0.788),
-    (186, 0.788),
-    (187, 0.788),
-    (188, 0.788),
-    (189, 0.788),
-    (190, 0.788),
-    (191, 0.788),
-    (192, 0.788),
-    (193, 0.788),
-    (194, 0.788),
-    (195, 0.788),
-    (196, 0.788),
-    (197, 0.788),
-    (198, 0.788),
-    (199, 0.788),
-    (200, 0.788),
-    (201, 0.788),
-    (202, 0.788),
-    (203, 0.788),
-    (204, 0.788),
-    (205, 0.788),
-    (206, 0.788),
-    (207, 0.788),
-    (208, 0.788),
-    (209, 0.788),
-    (210, 0.788),
-    (211, 0.788),
-    (212, 0.894),
-    (213, 0.838),
-    (214, 1.016),
-    (215, 0.458),
-    (216, 0.748),
-    (217, 0.924),
-    (218, 0.748),
-    (219, 0.918),
-    (220, 0.927),
-    (221, 0.928),
-    (222, 0.928),
-    (223, 0.834),
-    (224, 0.873),
-    (225, 0.828),
-    (226, 0.924),
-    (227, 0.924),
-    (228, 0.917),
-    (229, 0.93),
-    (230, 0.931),
-    (231, 0.463),
-    (232, 0.883),
-    (233, 0.836),
-    (234, 0.836),
-    (235, 0.867),
-    (236, 0.867),
-    (237, 0.696),
-    (238, 0.696),
-    (239, 0.874),
-    (183, 0.788),
-    (241, 0.874),
-    (242, 0.76),
-    (243, 0.946),
-    (244, 0.771),
-    (245, 0.865),
-    (246, 0.771),
-    (247, 0.888),
-    (248, 0.967),
-    (249, 0.888),
-    (250, 0.831),
-    (251, 0.873),
-    (252, 0.927),
-    (253, 0.97),
-    (183, 0.788),
-    (183, 0.788),
-)
-
-# ------------------------------------------------------------------------------
-# Glyph list for the built-in font 'Symbol'
-# ------------------------------------------------------------------------------
-symbol_glyphs = (
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (32, 0.25),
-    (33, 0.333),
-    (34, 0.713),
-    (35, 0.5),
-    (36, 0.549),
-    (37, 0.833),
-    (38, 0.778),
-    (39, 0.439),
-    (40, 0.333),
-    (41, 0.333),
-    (42, 0.5),
-    (43, 0.549),
-    (44, 0.25),
-    (45, 0.549),
-    (46, 0.25),
-    (47, 0.278),
-    (48, 0.5),
-    (49, 0.5),
-    (50, 0.5),
-    (51, 0.5),
-    (52, 0.5),
-    (53, 0.5),
-    (54, 0.5),
-    (55, 0.5),
-    (56, 0.5),
-    (57, 0.5),
-    (58, 0.278),
-    (59, 0.278),
-    (60, 0.549),
-    (61, 0.549),
-    (62, 0.549),
-    (63, 0.444),
-    (64, 0.549),
-    (65, 0.722),
-    (66, 0.667),
-    (67, 0.722),
-    (68, 0.612),
-    (69, 0.611),
-    (70, 0.763),
-    (71, 0.603),
-    (72, 0.722),
-    (73, 0.333),
-    (74, 0.631),
-    (75, 0.722),
-    (76, 0.686),
-    (77, 0.889),
-    (78, 0.722),
-    (79, 0.722),
-    (80, 0.768),
-    (81, 0.741),
-    (82, 0.556),
-    (83, 0.592),
-    (84, 0.611),
-    (85, 0.69),
-    (86, 0.439),
-    (87, 0.768),
-    (88, 0.645),
-    (89, 0.795),
-    (90, 0.611),
-    (91, 0.333),
-    (92, 0.863),
-    (93, 0.333),
-    (94, 0.658),
-    (95, 0.5),
-    (96, 0.5),
-    (97, 0.631),
-    (98, 0.549),
-    (99, 0.549),
-    (100, 0.494),
-    (101, 0.439),
-    (102, 0.521),
-    (103, 0.411),
-    (104, 0.603),
-    (105, 0.329),
-    (106, 0.603),
-    (107, 0.549),
-    (108, 0.549),
-    (109, 0.576),
-    (110, 0.521),
-    (111, 0.549),
-    (112, 0.549),
-    (113, 0.521),
-    (114, 0.549),
-    (115, 0.603),
-    (116, 0.439),
-    (117, 0.576),
-    (118, 0.713),
-    (119, 0.686),
-    (120, 0.493),
-    (121, 0.686),
-    (122, 0.494),
-    (123, 0.48),
-    (124, 0.2),
-    (125, 0.48),
-    (126, 0.549),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (183, 0.46),
-    (160, 0.25),
-    (161, 0.62),
-    (162, 0.247),
-    (163, 0.549),
-    (164, 0.167),
-    (165, 0.713),
-    (166, 0.5),
-    (167, 0.753),
-    (168, 0.753),
-    (169, 0.753),
-    (170, 0.753),
-    (171, 1.042),
-    (172, 0.713),
-    (173, 0.603),
-    (174, 0.987),
-    (175, 0.603),
-    (176, 0.4),
-    (177, 0.549),
-    (178, 0.411),
-    (179, 0.549),
-    (180, 0.549),
-    (181, 0.576),
-    (182, 0.494),
-    (183, 0.46),
-    (184, 0.549),
-    (185, 0.549),
-    (186, 0.549),
-    (187, 0.549),
-    (188, 1),
-    (189, 0.603),
-    (190, 1),
-    (191, 0.658),
-    (192, 0.823),
-    (193, 0.686),
-    (194, 0.795),
-    (195, 0.987),
-    (196, 0.768),
-    (197, 0.768),
-    (198, 0.823),
-    (199, 0.768),
-    (200, 0.768),
-    (201, 0.713),
-    (202, 0.713),
-    (203, 0.713),
-    (204, 0.713),
-    (205, 0.713),
-    (206, 0.713),
-    (207, 0.713),
-    (208, 0.768),
-    (209, 0.713),
-    (210, 0.79),
-    (211, 0.79),
-    (212, 0.89),
-    (213, 0.823),
-    (214, 0.549),
-    (215, 0.549),
-    (216, 0.713),
-    (217, 0.603),
-    (218, 0.603),
-    (219, 1.042),
-    (220, 0.987),
-    (221, 0.603),
-    (222, 0.987),
-    (223, 0.603),
-    (224, 0.494),
-    (225, 0.329),
-    (226, 0.79),
-    (227, 0.79),
-    (228, 0.786),
-    (229, 0.713),
-    (230, 0.384),
-    (231, 0.384),
-    (232, 0.384),
-    (233, 0.384),
-    (234, 0.384),
-    (235, 0.384),
-    (236, 0.494),
-    (237, 0.494),
-    (238, 0.494),
-    (239, 0.494),
-    (183, 0.46),
-    (241, 0.329),
-    (242, 0.274),
-    (243, 0.686),
-    (244, 0.686),
-    (245, 0.686),
-    (246, 0.384),
-    (247, 0.549),
-    (248, 0.384),
-    (249, 0.384),
-    (250, 0.384),
-    (251, 0.384),
-    (252, 0.494),
-    (253, 0.494),
-    (254, 0.494),
-    (183, 0.46),
-)
-
-
 class linkDest(object):
     """link or outline destination details"""
 
@@ -3838,79 +3841,6 @@ class linkDest(object):
             else:
                 self.isUri = True
                 self.kind = LINK_LAUNCH
-
-
-# -------------------------------------------------------------------------------
-# "Now" timestamp in PDF Format
-# -------------------------------------------------------------------------------
-def getPDFnow() -> str:
-    import time
-
-    tz = "%s'%s'" % (
-        str(abs(time.altzone // 3600)).rjust(2, "0"),
-        str((abs(time.altzone // 60) % 60)).rjust(2, "0"),
-    )
-    tstamp = time.strftime("D:%Y%m%d%H%M%S", time.localtime())
-    if time.altzone > 0:
-        tstamp += "-" + tz
-    elif time.altzone < 0:
-        tstamp += "+" + tz
-    else:
-        pass
-    return tstamp
-
-
-def getPDFstr(s: str) -> str:
-    """ Return a PDF string depending on its coding.
-
-    Notes:
-        Returns a string bracketed with either "()" or "<>" for hex values.
-        If only ascii then "(original)" is returned, else if only 8 bit chars
-        then "(original)" with interspersed octal strings \nnn is returned,
-        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
-        UTF-16BE encoding of the original.
-    """
-    if not bool(s):
-        return "()"
-
-    def make_utf16be(s):
-        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
-        return "<" + r.hex() + ">"  # brackets indicate hex
-
-# The following either returns the original string with mixed-in
-# octal numbers \nnn for chars outside the ASCII range, or returns
-# the UTF-16BE BOM version of the string.
-    r = ""
-    for c in s:
-        oc = ord(c)
-        if oc > 255:  # shortcut if beyond 8-bit code range
-            return make_utf16be(s)
-
-        if oc > 31 and oc < 127:  # in ASCII range
-            if c in ("(", ")", "\\"):  # these need to be escaped
-                r += "\\"
-            r += c
-            continue
-
-        if oc > 127:  # beyond ASCII
-            r += "\\%03o" % oc
-            continue
-
-# now the white spaces
-        if oc == 8:  # backspace
-            r += "\\b"
-        elif oc == 9:  # tab
-            r += "\\t"
-        elif oc == 10:  # line feed
-            r += "\\n"
-        elif oc == 12:  # form feed
-            r += "\\f"
-        elif oc == 13:  # carriage return
-            r += "\\r"
-        else:
-            r += "\\267"  # unsupported: replace by 0xB7
-
-    return "(" + r + ")"
 
 
 def getTJstr(text: str, glyphs: typing.Union[list, tuple, None], simple: bool, ordering: int) -> str:
@@ -4296,6 +4226,104 @@ def DerotateRect(cropbox: rect_like, rect: rect_like, deg: float) -> Rect:
     return r
 
 
+def annot_preprocess(page: "Page") -> int:
+    """Prepare for annotation insertion on the page.
+
+    Returns:
+        Old page rotation value. Temporarily sets rotation to 0 when required.
+    """
+    CheckParent(page)
+    if not page.parent.isPDF:
+        raise ValueError("not a PDF")
+    old_rotation = page.rotation
+    if old_rotation != 0:
+        page.setRotation(0)
+    return old_rotation
+
+
+def annot_postprocess(page: "Page", annot: "Annot") -> None:
+    """Clean up after annotation inertion.
+
+    Set ownership flag and store annotation in page annotation dictionary.
+    """
+    annot.parent = weakref.proxy(page)
+    page._annot_refs[id(annot)] = annot
+    annot.thisown = True
+
+
+def getPDFnow() -> str:
+    '''
+    "Now" timestamp in PDF Format
+    '''
+    import time
+
+    tz = "%s'%s'" % (
+        str(abs(time.altzone // 3600)).rjust(2, "0"),
+        str((abs(time.altzone // 60) % 60)).rjust(2, "0"),
+    )
+    tstamp = time.strftime("D:%Y%m%d%H%M%S", time.localtime())
+    if time.altzone > 0:
+        tstamp += "-" + tz
+    elif time.altzone < 0:
+        tstamp += "+" + tz
+    else:
+        pass
+    return tstamp
+
+
+def getPDFstr(s: str) -> str:
+    """ Return a PDF string depending on its coding.
+
+    Notes:
+        Returns a string bracketed with either "()" or "<>" for hex values.
+        If only ascii then "(original)" is returned, else if only 8 bit chars
+        then "(original)" with interspersed octal strings \nnn is returned,
+        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
+        UTF-16BE encoding of the original.
+    """
+    if not bool(s):
+        return "()"
+
+    def make_utf16be(s):
+        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
+        return "<" + r.hex() + ">"  # brackets indicate hex
+
+    # The following either returns the original string with mixed-in
+    # octal numbers \nnn for chars outside the ASCII range, or returns
+    # the UTF-16BE BOM version of the string.
+    r = ""
+    for c in s:
+        oc = ord(c)
+        if oc > 255:  # shortcut if beyond 8-bit code range
+            return make_utf16be(s)
+
+        if oc > 31 and oc < 127:  # in ASCII range
+            if c in ("(", ")", "\\"):  # these need to be escaped
+                r += "\\"
+            r += c
+            continue
+
+        if oc > 127:  # beyond ASCII
+            r += "\\%03o" % oc
+            continue
+
+        # now the white spaces
+        if oc == 8:  # backspace
+            r += "\\b"
+        elif oc == 9:  # tab
+            r += "\\t"
+        elif oc == 10:  # line feed
+            r += "\\n"
+        elif oc == 12:  # form feed
+            r += "\\f"
+        elif oc == 13:  # carriage return
+            r += "\\r"
+        else:
+            r += "\\267"  # unsupported: replace by 0xB7
+
+    return "(" + r + ")"
+
+
 def get_highlight_selection(page, start: point_like =None, stop: point_like =None, clip: rect_like =None) -> list:
     """Return rectangles of text lines between two points.
 
@@ -4363,61 +4391,6 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     return lines
 
 
-def annot_preprocess(page: "Page") -> int:
-    """Prepare for annotation insertion on the page.
-
-    Returns:
-        Old page rotation value. Temporarily sets rotation to 0 when required.
-    """
-    CheckParent(page)
-    if not page.parent.isPDF:
-        raise ValueError("not a PDF")
-    old_rotation = page.rotation
-    if old_rotation != 0:
-        page.setRotation(0)
-    return old_rotation
-
-
-def annot_postprocess(page: "Page", annot: "Annot") -> None:
-    """Clean up after annotation inertion.
-
-    Set ownership flag and store annotation in page annotation dictionary.
-    """
-    annot.parent = weakref.proxy(page)
-    page._annot_refs[id(annot)] = annot
-    annot.thisown = True
-
-
-def sRGB_to_rgb(srgb: int) -> tuple:
-    """Convert sRGB color code to an RGB color triple.
-
-    There is **no error checking** for performance reasons!
-
-    Args:
-        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
-    Returns:
-        Tuple (red, green, blue) each item in intervall 0 <= item <= 255.
-    """
-    r = srgb >> 16
-    g = (srgb - (r << 16)) >> 8
-    b = srgb - (r << 16) - (g << 8)
-    return (r, g, b)
-
-
-def sRGB_to_pdf(srgb: int) -> tuple:
-    """Convert sRGB color code to a PDF color triple.
-
-    There is **no error checking** for performance reasons!
-
-    Args:
-        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
-    Returns:
-        Tuple (red, green, blue) each item in intervall 0 <= item <= 1.
-    """
-    t = sRGB_to_rgb(srgb)
-    return t[0] / 255.0, t[1] / 255.0, t[2] / 255.0
-
-
 def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> list:
     """Return a list of (rows x cols) equal sized rectangles.
 
@@ -4459,6 +4432,36 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
         rects.append(nrow)  # append new row to result
 
     return rects
+
+
+def sRGB_to_rgb(srgb: int) -> tuple:
+    """Convert sRGB color code to an RGB color triple.
+
+    There is **no error checking** for performance reasons!
+
+    Args:
+        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
+    Returns:
+        Tuple (red, green, blue) each item in intervall 0 <= item <= 255.
+    """
+    r = srgb >> 16
+    g = (srgb - (r << 16)) >> 8
+    b = srgb - (r << 16) - (g << 8)
+    return (r, g, b)
+
+
+def sRGB_to_pdf(srgb: int) -> tuple:
+    """Convert sRGB color code to a PDF color triple.
+
+    There is **no error checking** for performance reasons!
+
+    Args:
+        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
+    Returns:
+        Tuple (red, green, blue) each item in intervall 0 <= item <= 1.
+    """
+    t = sRGB_to_rgb(srgb)
+    return t[0] / 255.0, t[1] / 255.0, t[2] / 255.0
 
 
 def repair_mono_font(page: "Page", font: "Font") -> None:
