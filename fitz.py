@@ -1,9 +1,12 @@
 # Import Auto-generated MuPDF python bindings
 #
 
+import base64
+import gzip
 import hashlib
 import math
 import sys
+import textwrap
 import typing
 import weakref
 
@@ -95,6 +98,21 @@ rect_like = "rect_like"
 #except ImportError:
 #    fitz_fontdescriptors = {}
 
+
+def ASSERT_PDF(cond):
+    assert isinstance(cond, (mupdf.PdfPage, mupdf.PdfDocument)), f'type(cond)={type(cond)} cond={cond}'
+    if not cond.m_internal:
+        raise Exception('not a PDF')
+
+def DUMMY(*args, **kw):
+    return
+
+
+def INRANGE(v, low, high):
+    return low <= v and v <= high
+
+
+JM_annot_id_stem = "fitz"
 
 
 def JM_BinFromBuffer(buffer_):
@@ -304,9 +322,6 @@ def JM_annot_set_border(border, doc, annot_obj):
     annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
 
 
-JM_annot_id_stem = "fitz"
-
-
 def JM_color_FromSequence(color, col):
     #assert isinstance( col, list)
     if not color or (not isinstance(color, list) and not isinstance(color, float)):
@@ -376,6 +391,44 @@ def JM_derotate_page_matrix(page):
     '''
     mp = JM_rotate_page_matrix(page)
     return mupdf.mfz_invert_matrix(mp)
+
+
+def JM_delete_annot(page, annot):
+    '''
+    delete an annotation using mupdf functions, but first delete the /AP
+    dict key in annot->obj.
+    '''
+    if not annot or not annot.m_internal:
+        return
+    try:
+        # first get any existing popup for the annotation
+        popup = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+
+        # next delete the /Popup and /AP entries from annot dictionary
+        mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
+
+        annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
+        assert annots.m_internal
+        n = mupdf.mpdf_array_len(annots)
+        for i in range(n - 1, -1, -1):
+            o = mupdf.mpdf_array_get(annots, i)
+            p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
+            if not p.m_internal:
+                continue;
+            if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
+                mupdf.mpdf_array_delete(annots, i)
+        assert annot.m_internal
+        type_ = mupdf.mpdf_annot_type(annot)
+        if type_ != mupdf.PDF_ANNOT_WIDGET:
+            mupdf.mpdf_delete_annot(page, annot)
+        else:
+            JM_delete_widget(page, annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        jlib.log('could not delete annotation')
+        jlib.log('{jlib.exception_info()=}')
+        # fixme: mupdf.mfz_warn("could not delete annotation")
+    return;
 
 
 def JM_embed_file(
@@ -1064,6 +1117,10 @@ def PySequence_Size(s):
     return len(s)
 
 
+def THROWMSG(msg):
+    raise Exception(msg)
+
+
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
@@ -1591,106 +1648,22 @@ class TOOLS:
         return xref
 
 
-def DUMMY(*args, **kw):
-    return
-
-def INRANGE(v, low, high):
-    return low <= v and v <= high
-
-def ASSERT_PDF(cond):
-    assert isinstance(cond, (mupdf.PdfPage, mupdf.PdfDocument)), f'type(cond)={type(cond)} cond={cond}'
-    if not cond.m_internal:
-        raise Exception('not a PDF')
-
-def THROWMSG(msg):
-    raise Exception(msg)
-
-
-def Page_set_contents(page0, xref):
-    assert isinstance(page0, Page)
-    page = page0.this.page_from_fz_page()
-    assert isinstance(page, mupdf.PdfPage)
-    #jlib.log(f'{page.doc=}')
-    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
-        raise Exception('bad xref')
-    contents = page.doc().new_indirect(xref, 0)
-    if not contents.is_stream():
-        raise Exception('xref is no stream')
-    #page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
-    page.obj().dict_put( mupdf.PDF_ENUM_NAME_Contents, contents)
-    # fixme: page.this.dirty = 1
-    return
-
-def Page__add_text_marker(self, quads, annot_type):
-    pdfpage = self._pdf_page()
-    rotation = JM_page_rotation(pdfpage)
-    def final():
-        if rotation != 0:
-            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
-    try:
-        if rotation != 0:
-            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), 0)
-        annot = mupdf.mpdf_create_annot(pdfpage, annot_type)
-        len_ = len(quads)
-        for item in quads:
-            q = JM_quad_from_py(item);
-            mupdf.mpdf_add_annot_quad_point(annot, q)
-        JM_add_annot_id(annot, "A")
-        mupdf.mpdf_update_annot(annot)
-    except Exception as e:
-        jlib.log('{e=}')
-        final()
-        return
-    final()
-    annot = mupdf.mpdf_keep_annot(annot)
-    return Annot(self, annot)
-
-
-
-def Page_clean_contents(self, sanitize):
-    assert isinstance(self, Page)
-    page = self.this.page_from_fz_page()
-    if not page:
-        return
-    assert isinstance(page, mupdf.PdfPage)
-    filter_ = mupdf.pdf_filter_options()
-    filter_.opaque = None
-    filter_.image_filter = None
-    filter_.text_filter = None
-    filter_.after_text_object = None
-    filter_.end_page = None
-    filter_.recurse = 1
-    filter_.instance_forms = 1
-    filter_.sanitize = 1
-    filter_.ascii = 0
-
-    filter_.sanitize = sanitize
-    filter2 = mupdf.PdfFilterOptions(filter_)
-    page.doc().filter_page_contents(page, filter2)
-    # fixme: page->doc->dirty = 1;
-
-def CheckRect(r: typing.Any) -> bool:
-    """Check whether an object is non-degenerate rect-like.
-
-    It must be a sequence of 4 numbers.
+def CheckFont(page: "struct Page *", fontname: str) -> tuple:
+    """Return an entry in the page's font list if reference name matches.
     """
-    try:
-        r = Rect(r)
-    except:
-        return False
-    return not (r.isEmpty or r.isInfinite)
+    for f in page.get_fonts():
+        if f[4] == fontname:
+            return f
+        if f[3].lower() == fontname.lower():
+            return f
 
 
-def CheckQuad(q: typing.Any) -> bool:
-    """Check whether an object is convex, not empty  quad-like.
-
-    It must be a sequence of 4 number pairs.
+def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
+    """Return a font info if present in the document.
     """
-    try:
-        q0 = Quad(q)
-    except:
-        return False
-    return q0.isConvex
+    for f in doc.FontInfos:
+        if xref == f[0]:
+            return f
 
 
 def CheckMarkerArg(quads: typing.Any) -> tuple:
@@ -1717,22 +1690,92 @@ def CheckMorph(o: typing.Any) -> bool:
     return True
 
 
-def CheckFont(page: "struct Page *", fontname: str) -> tuple:
-    """Return an entry in the page's font list if reference name matches.
+def CheckQuad(q: typing.Any) -> bool:
+    """Check whether an object is convex, not empty  quad-like.
+
+    It must be a sequence of 4 number pairs.
     """
-    for f in page.get_fonts():
-        if f[4] == fontname:
-            return f
-        if f[3].lower() == fontname.lower():
-            return f
+    try:
+        q0 = Quad(q)
+    except:
+        return False
+    return q0.isConvex
 
 
-def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
-    """Return a font info if present in the document.
+def CheckRect(r: typing.Any) -> bool:
+    """Check whether an object is non-degenerate rect-like.
+
+    It must be a sequence of 4 numbers.
     """
-    for f in doc.FontInfos:
-        if xref == f[0]:
-            return f
+    try:
+        r = Rect(r)
+    except:
+        return False
+    return not (r.isEmpty or r.isInfinite)
+
+
+def Page__add_text_marker(self, quads, annot_type):
+    pdfpage = self._pdf_page()
+    rotation = JM_page_rotation(pdfpage)
+    def final():
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), rotation)
+    try:
+        if rotation != 0:
+            mupdf.mpdf_dict_put_int(pdfpage.obj(), PDF_NAME('Rotate'), 0)
+        annot = mupdf.mpdf_create_annot(pdfpage, annot_type)
+        len_ = len(quads)
+        for item in quads:
+            q = JM_quad_from_py(item);
+            mupdf.mpdf_add_annot_quad_point(annot, q)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+    except Exception as e:
+        jlib.log('{e=}')
+        final()
+        return
+    final()
+    annot = mupdf.mpdf_keep_annot(annot)
+    return Annot(self, annot)
+
+
+def Page_clean_contents(self, sanitize):
+    assert isinstance(self, Page)
+    page = self.this.page_from_fz_page()
+    if not page:
+        return
+    assert isinstance(page, mupdf.PdfPage)
+    filter_ = mupdf.pdf_filter_options()
+    filter_.opaque = None
+    filter_.image_filter = None
+    filter_.text_filter = None
+    filter_.after_text_object = None
+    filter_.end_page = None
+    filter_.recurse = 1
+    filter_.instance_forms = 1
+    filter_.sanitize = 1
+    filter_.ascii = 0
+
+    filter_.sanitize = sanitize
+    filter2 = mupdf.PdfFilterOptions(filter_)
+    page.doc().filter_page_contents(page, filter2)
+    # fixme: page->doc->dirty = 1;
+
+
+def Page_set_contents(page0, xref):
+    assert isinstance(page0, Page)
+    page = page0.this.page_from_fz_page()
+    assert isinstance(page, mupdf.PdfPage)
+    #jlib.log(f'{page.doc=}')
+    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
+        raise Exception('bad xref')
+    contents = page.doc().new_indirect(xref, 0)
+    if not contents.is_stream():
+        raise Exception('xref is no stream')
+    #page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
+    page.obj().dict_put( mupdf.PDF_ENUM_NAME_Contents, contents)
+    # fixme: page.this.dirty = 1
+    return
 
 
 def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
@@ -1746,43 +1789,6 @@ def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
         doc.FontInfos[i] = info
     else:
         doc.FontInfos.append(info)
-
-def JM_delete_annot(page, annot):
-    '''
-    delete an annotation using mupdf functions, but first delete the /AP
-    dict key in annot->obj.
-    '''
-    if not annot or not annot.m_internal:
-        return
-    try:
-        # first get any existing popup for the annotation
-        popup = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
-
-        # next delete the /Popup and /AP entries from annot dictionary
-        mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
-
-        annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
-        assert annots.m_internal
-        n = mupdf.mpdf_array_len(annots)
-        for i in range(n - 1, -1, -1):
-            o = mupdf.mpdf_array_get(annots, i)
-            p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
-            if not p.m_internal:
-                continue;
-            if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
-                mupdf.mpdf_array_delete(annots, i)
-        assert annot.m_internal
-        type_ = mupdf.mpdf_annot_type(annot)
-        if type_ != mupdf.PDF_ANNOT_WIDGET:
-            mupdf.mpdf_delete_annot(page, annot)
-        else:
-            JM_delete_widget(page, annot)
-    except Exception as e:
-        jlib.log('{e=}')
-        jlib.log('could not delete annotation')
-        jlib.log('{jlib.exception_info()=}')
-        # fixme: mupdf.mfz_warn("could not delete annotation")
-    return;
 
 
 def pdf_dict_getl(doc, obj, *keys):
@@ -2237,8 +2243,8 @@ class Point(object):
         if type(x) is Point:
             return abs(self - x) * f
 
-# from here on, x is a rectangle
-# as a safeguard, make a finite copy of it
+        # from here on, x is a rectangle
+        # as a safeguard, make a finite copy of it
         r = Rect(x.top_left, x.top_left)
         r = r | x.bottom_right
         if self in r:
@@ -2897,11 +2903,10 @@ class Quad(object):
         return hash(tuple(self))
 
 
-
-#------------------------------------------------------------------------------
-# Class describing a PDF form field ("widget")
-#------------------------------------------------------------------------------
 class Widget(object):
+    '''
+    Class describing a PDF form field ("widget")
+    '''
     def __init__(self):
         self.border_color = None
         self.border_style = "S"
@@ -2964,7 +2969,7 @@ class Widget(object):
 
         self.border_style = self.border_style.upper()[0:1]
 
-# standardize content of JavaScript entries
+        # standardize content of JavaScript entries
         btn_type = self.field_type in (
             PDF_WIDGET_TYPE_BUTTON,
             PDF_WIDGET_TYPE_CHECKBOX,
@@ -2975,7 +2980,7 @@ class Widget(object):
         elif type(self.script) is not str:
             raise ValueError("script content must be string")
 
-# buttons cannot have the following script actions
+        # buttons cannot have the following script actions
         if btn_type or not self.script_calc:
             self.script_calc = None
         elif type(self.script_calc) is not str:
@@ -3061,7 +3066,7 @@ class Widget(object):
 
         self._adjust_font()  # ensure valid text_font name
 
-# now create the /DA string
+        # now create the /DA string
         self._text_da = ""
         if   len(self.text_color) == 3:
             fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf" + self._text_da
@@ -3071,7 +3076,7 @@ class Widget(object):
             fmt = "{:g} {:g} {:g} {:g} k /{f:s} {s:g} Tf" + self._text_da
         self._text_da = fmt.format(*self.text_color, f=self.text_font,
                                     s=self.text_fontsize)
-# finally update the widget
+        # finally update the widget
 
         TOOLS._save_widget(self._annot, self)
         self._text_da = ""
@@ -3936,7 +3941,7 @@ def getTJstr(text: str, glyphs: typing.Union[list, tuple, None], simple: bool, o
             )
         return "[<" + otxt + ">]"
 
-# non-simple fonts: each char or its glyph is coded as 4-byte hex
+    # non-simple fonts: each char or its glyph is coded as 4-byte hex
     if ordering < 0:  # not a CJK font: use the glyphs
         otxt = "".join(["%04x" % glyphs[ord(c)][0] for c in text])
     else:  # CJK: use the char codes
@@ -4185,35 +4190,40 @@ def ImageProperties(img: typing.ByteString) -> dict:
 
 def ConversionHeader(i: str, filename: OptStr ="unknown"):
     t = i.lower()
-    html = """<!DOCTYPE html>
-<html>
-<head>
-<style>
-body{background-color:gray}
-div{position:relative;background-color:white;margin:1em auto}
-p{position:absolute;margin:0}
-img{position:absolute}
-</style>
-</head>
-<body>\n"""
+    html = textwrap.dedent("""
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <style>
+            body{background-color:gray}
+            div{position:relative;background-color:white;margin:1em auto}
+            p{position:absolute;margin:0}
+            img{position:absolute}
+            </style>
+            </head>
+            <body>
+            """)
 
-    xml = (
-        """<?xml version="1.0"?>
-<document name="%s">\n"""
-        % filename
-    )
+    xml = textwrap.dedent("""
+            <?xml version="1.0"?>
+            <document name="%s">
+            """
+            % filename
+            )
 
-    xhtml = """<?xml version="1.0"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<style>
-body{background-color:gray}
-div{background-color:white;margin:1em;padding:1em}
-p{white-space:pre-wrap}
-</style>
-</head>
-<body>\n"""
+    xhtml = textwrap.dedent("""
+            <?xml version="1.0"?>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+            <style>
+            body{background-color:gray}
+            div{background-color:white;margin:1em;padding:1em}
+            p{white-space:pre-wrap}
+            </style>
+            </head>
+            <body>
+            """)
 
     text = ""
     json = '{"document": "%s", "pages": [\n' % filename
@@ -4301,7 +4311,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
         List of line bbox intersections with the area established by the
         parameters.
     """
-# validate and normalize arguments
+    # validate and normalize arguments
     if clip is None:
         clip = page.rect
     clip = Rect(clip)
@@ -4314,7 +4324,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     if clip.isEmpty or clip.isInfinite:
         return []
 
-# extract text of page, clip only, no images, expand ligatures
+    # extract text of page, clip only, no images, expand ligatures
     blocks = page.getText(
         "dict", flags=0, clip=clip,
     )["blocks"]
@@ -4329,7 +4339,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
 
     lines.sort(key=lambda bbox: bbox.y1)  # sort by vertical positions
 
-# cut off prefix from first line if start point is close to its top
+    # cut off prefix from first line if start point is close to its top
     bboxf = lines.pop(0)
     if bboxf.y0 - start.y <= 0.1 * bboxf.height:  # close enough?
         r = Rect(start.x, bboxf.y0, bboxf.br)  # intersection rectangle
@@ -4341,7 +4351,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     if lines == []:  # the list might have been emptied
         return lines
 
-# cut off suffix from last line if stop point is close to its bottom
+    # cut off suffix from last line if stop point is close to its bottom
     bboxl = lines.pop()
     if stop.y - bboxl.y1 <= 0.1 * bboxl.height:  # close enough?
         r = Rect(bboxl.tl, stop.x, bboxl.y1)  # intersection rectangle
@@ -4433,13 +4443,13 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
 
     r = Rect(tl, tl.x + width, tl.y + height)  # first rectangle
 
-# make the first row
+    # make the first row
     row = [r]
     for i in range(1, cols):
         r += delta_h  # build next rect to the right
         row.append(r)
 
-# make result, starts with first row
+    # make result, starts with first row
     rects = [row]
     for i in range(1, rows):
         row = rects[i - 1]  # take previously appended row
@@ -4484,7 +4494,6 @@ def repair_mono_font(page: "Page", font: "Font") -> None:
 
 
 # Adobe Glyph List functions
-import base64, gzip
 
 _adobe_glyphs = {}
 _adobe_unicodes = {}
@@ -12322,18 +12331,18 @@ class Shape(object):
     insertText = insert_text
     insertTextbox = insert_textbox
 
-from mupdf import (
-    PDF_PERM_PRINT,
-    PDF_PERM_MODIFY,
-    PDF_PERM_COPY,
-    PDF_PERM_ANNOTATE,
-    PDF_PERM_FORM,
-    PDF_PERM_ACCESSIBILITY,
-    PDF_PERM_ASSEMBLE,
-    PDF_PERM_PRINT_HQ,
 
-    PDF_ENCRYPT_AES_256,
-    )
+
+PDF_PERM_PRINT = mupdf.PDF_PERM_PRINT
+PDF_PERM_MODIFY = mupdf.PDF_PERM_MODIFY
+PDF_PERM_COPY = mupdf.PDF_PERM_COPY
+PDF_PERM_ANNOTATE = mupdf.PDF_PERM_ANNOTATE
+PDF_PERM_FORM = mupdf.PDF_PERM_FORM
+PDF_PERM_ACCESSIBILITY = mupdf.PDF_PERM_ACCESSIBILITY
+PDF_PERM_ASSEMBLE = mupdf.PDF_PERM_ASSEMBLE
+PDF_PERM_PRINT_HQ = mupdf.PDF_PERM_PRINT_HQ
+
+PDF_ENCRYPT_AES_256 = mupdf.PDF_ENCRYPT_AES_256
 
 # colorspace identifiers
 CS_GRAY = mupdf.Colorspace.Fixed_GRAY
@@ -12346,6 +12355,3 @@ CS_LAB = mupdf.Colorspace.Fixed_LAB
 csRGB = Colorspace(CS_RGB)
 csGRAY = Colorspace(CS_GRAY)
 csCMYK = Colorspace(CS_CMYK)
-
-if __name__ == '__main__':
-    pass
