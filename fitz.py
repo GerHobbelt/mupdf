@@ -20,6 +20,17 @@ def PDF_NAME(x):
 
 
 
+AnyType = typing.Any
+
+EPSILON = 1e-5
+
+OptBytes = typing.Optional[typing.ByteString]
+OptDict = typing.Optional[dict]
+OptFloat = typing.Optional[float]
+OptInt = typing.Union[int, None]
+OptSeq = typing.Optional[typing.Sequence]
+OptStr = typing.Optional[str]
+
 dictkey_align = "align"
 dictkey_align = "ascender"
 dictkey_bbox = "bbox"
@@ -70,67 +81,47 @@ dictkey_wmode = "wmode"
 dictkey_xref = "xref"
 dictkey_xres = "xres"
 dictkey_yres = "yres"
-
-EPSILON = 1e-5
-
-def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
-    if name == "thisown":
-        return self.this.own(value)
-    if name == "this":
-        if type(value).__name__ == 'SwigPyObject':
-            self.__dict__[name] = value
-            return
-    method = class_type.__swig_setmethods__.get(name, None)
-    if method:
-        return method(self, value)
-    if not static:
-        object.__setattr__(self, name, value)
-    else:
-        raise AttributeError("You cannot add attributes to %s" % self)
-
-
-def _swig_setattr(self, class_type, name, value):
-    return _swig_setattr_nondynamic(self, class_type, name, value, 0)
-
-
-def _swig_getattr(self, class_type, name):
-    if (name == "thisown"):
-        return self.this.own()
-    method = class_type.__swig_getmethods__.get(name, None)
-    if method:
-        return method(self)
-    raise AttributeError("'%s' object has no attribute '%s'" % (class_type.__name__, name))
-
-
-def _swig_repr(self):
-    try:
-        strthis = "proxy of " + self.this.__repr__()
-    except __builtin__.Exception:
-        strthis = ""
-    return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
-
-
-point_like = "point_like"
-rect_like = "rect_like"
 matrix_like = "matrix_like"
+point_like = "point_like"
 quad_like = "quad_like"
-AnyType = typing.Any
-OptInt = typing.Union[int, None]
-OptFloat = typing.Optional[float]
-OptStr = typing.Optional[str]
-OptDict = typing.Optional[dict]
-OptBytes = typing.Optional[typing.ByteString]
-OptSeq = typing.Optional[typing.Sequence]
+rect_like = "rect_like"
 
-try:
-    from pymupdf_fonts import fontdescriptors
 
-    fitz_fontdescriptors = fontdescriptors.copy()
-    del fontdescriptors
-except ImportError:
-    fitz_fontdescriptors = {}
+#try:
+#    from pymupdf_fonts import fontdescriptors
+#
+##    fitz_fontdescriptors = fontdescriptors.copy()
+#    del fontdescriptors
+#except ImportError:
+#    fitz_fontdescriptors = {}
+
+
+
+def JM_FLOAT_ITEM(obj, idx):
+    if idx < 0 or idx >= len(obj):
+        return None
+    ret = obj[idx]
+    assert isinstance(ret, float)
+    return ret
+
+
+def JM_FLOAT_ITEM(obj, idx):
+    if not PySequence_Check(obj):
+        return None
+    return float(obj[idx])
+
+def JM_BinFromBuffer(buffer_):
+    '''
+    Turn fz_buffer into a Python bytes object
+    '''
+    assert isinstance(buffer_, mupdf.Buffer)
+    return buffer_.buffer_extract()
+
 
 def JM_read_contents(pageref):
+    '''
+    Read and concatenate a PDF page's /Conents object(s) in a buffer
+    '''
     assert isinstance(pageref, mupdf.PdfObj), f'{type(pageref)}'
     contents = pageref.dict_get(mupdf.PDF_ENUM_NAME_Contents)
     if contents.is_array():
@@ -143,13 +134,11 @@ def JM_read_contents(pageref):
         res = contents.load_stream()
     return res
 
-def JM_BinFromBuffer(buffer_):
-    assert isinstance(buffer_, mupdf.Buffer)
-    return buffer_.buffer_extract()
 
-
-# compress char* into a new buffer
 def JM_compress_buffer(inbuffer):
+    '''
+    compress char* into a new buffer
+    '''
     data, compressed_length = mupdf.new_deflated_data_from_buffer(
             inbuffer.m_internal,
             mupdf.FZ_DEFLATE_BEST,
@@ -161,7 +150,78 @@ def JM_compress_buffer(inbuffer):
     buf.resize_buffer(compressed_length)
     return buf;
 
+
+def JM_derotate_page_matrix(page):
+    '''
+    just the inverse of rotation
+    '''
+    mp = JM_rotate_page_matrix(page)
+    return mupdf.mfz_invert_matrix(mp)
+
+
+def JM_norm_rotation(rotate):
+    '''
+    # return normalized /Rotate value
+    '''
+    while rotate < 0:
+        rotate += 360
+    while rotate >= 360:
+        rotate -= 360
+    if rotate % 90 != 0:
+        return 0
+    return rotate
+
+
+def JM_page_rotation(page):
+    '''
+    return a PDF page's /Rotate value: one of (0, 90, 180, 270)
+    '''
+    rotate = 0
+
+    obj = page.obj().dict_get_inheritable( mupdf.PDF_ENUM_NAME_Rotate)
+    rotate = obj.to_int()
+    rotate = JM_norm_rotation(rotate)
+    return rotate
+
+
+def JM_point_from_py(p):
+    '''
+    PySequence to fz_point. Default: (FZ_MIN_INF_RECT, FZ_MIN_INF_RECT)
+    '''
+    p0 = mupdf.Point(0, 0)
+    x = JM_FLOAT_ITEM(p, 0)
+    y = JM_FLOAT_ITEM(p, 1)
+    if x is None or y is None:
+        return p0
+    return mupdf.Point(x, y)
+
+
+def JM_rotate_page_matrix(page):
+    '''
+    calculate page rotation matrices
+    '''
+    if not page.m_internal:
+        return mupdf.Matrix()  # no valid pdf page given
+    rotation = JM_page_rotation(page)
+    if rotation == 0:
+        return mupdf.Matrix()  # no rotation
+    cb_size = JM_cropbox_size(page.obj())
+    w = cb_size.x
+    h = cb_size.y
+    if rotation == 90:
+        m = mupdf.mfz_make_matrix(0, 1, -1, 0, h, 0)
+    elif rotation == 180:
+        m = mupdf.mfz_make_matrix(-1, 0, 0, -1, w, h)
+    else:
+        m = mupdf.mfz_make_matrix(0, -1, 1, 0, 0, w)
+    return m
+
+
 def JM_update_stream(doc, obj, buffer_, compress):
+    '''
+    update a stream object
+    compress stream when beneficial
+    '''
     jlib.log('{dir(buffer_)}')
     len_, _ = buffer_.buffer_storage_raw()
     nlen = len_
@@ -180,76 +240,6 @@ def JM_update_stream(doc, obj, buffer_, compress):
     else:
         doc.update_stream(obj, buffer_, 0);
 
-
-# return a PDF page's /Rotate value: one of (0, 90, 180, 270)
-def JM_page_rotation(page):
-    rotate = 0
-
-    obj = page.obj().dict_get_inheritable( mupdf.PDF_ENUM_NAME_Rotate)
-    rotate = obj.to_int()
-    rotate = JM_norm_rotation(rotate)
-    return rotate
-
-def JM_derotate_page_matrix(page):
-    '''
-    just the inverse of rotation
-    '''
-    mp = JM_rotate_page_matrix(page)
-    return mupdf.mfz_invert_matrix(mp)
-
-def JM_rotate_page_matrix(page):
-    if not page.m_internal:
-        return mupdf.Matrix()  # no valid pdf page given
-    rotation = JM_page_rotation(page)
-    if rotation == 0:
-        return mupdf.Matrix()  # no rotation
-    cb_size = JM_cropbox_size(page.obj())
-    w = cb_size.x
-    h = cb_size.y
-    if rotation == 90:
-        m = mupdf.mfz_make_matrix(0, 1, -1, 0, h, 0)
-    elif rotation == 180:
-        m = mupdf.mfz_make_matrix(-1, 0, 0, -1, w, h)
-    else:
-        m = mupdf.mfz_make_matrix(0, -1, 1, 0, 0, w)
-    return m
-
-# return normalized /Rotate value
-def JM_norm_rotation(rotate):
-    while rotate < 0:
-        rotate += 360
-    while rotate >= 360:
-        rotate -= 360
-    if rotate % 90 != 0:
-        return 0
-    return rotate
-
-def JM_FLOAT_ITEM(obj, idx):
-    if idx < 0 or idx >= len(obj):
-        return None
-    ret = obj[idx]
-    assert isinstance(ret, float)
-    return ret
-
-
-def JM_point_from_py(p):
-    p0 = mupdf.Point(0, 0)
-    x = JM_FLOAT_ITEM(p, 0)
-    y = JM_FLOAT_ITEM(p, 1)
-    if x is None or y is None:
-        return p0
-    return mupdf.Point(x, y)
-
-def PySequence_Check(s):
-    return isinstance(s, (tuple, list))
-
-def PySequence_Size(s):
-    return len(s)
-
-def JM_FLOAT_ITEM(obj, idx):
-    if not PySequence_Check(obj):
-        return None
-    return float(obj[idx])
 
 def JM_quad_from_py(r):
     q = mupdf.mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
@@ -300,15 +290,13 @@ def JM_find_annot_irt(annot):
         jlib.log('{e=}')
     return irt_annot if found else None
 
-def annot_postprocess(page: "Page", annot: "Annot") -> None:
-    """Clean up after annotation inertion.
 
-    Set ownership flag and store annotation in page annotation dictionary.
-    """
-    annot.parent = weakref.proxy(page)
-    page._annot_refs[id(annot)] = annot
-    annot.thisown = True
+def PySequence_Check(s):
+    return isinstance(s, (tuple, list))
 
+
+def PySequence_Size(s):
+    return len(s)
 
 
 TOOLS_JM_UNIQUE_ID = 0
