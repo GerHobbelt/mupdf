@@ -8,7 +8,11 @@ import sys
 path = sys.argv[1]
 document = mupdf.Document(path)
 
-if document.pdf_specifics().m_internal:
+print(f'dir(document):')
+for i in dir(document):
+    print(f'    {i}')
+
+if document.specifics().m_internal:
     raise Exception('document is PDF already')
 path_out = f'{path}.pdf'
 print(f'Converting {path!r} to {path_out!r}')
@@ -70,7 +74,7 @@ document2 = mupdf.Document("pdf", stream)
 
 # Fixme: we don't yet copy links.
 
-document3 = document2.pdf_specifics()
+document3 = document2.specifics()
 opts = mupdf.PdfWriteOptions()
 opts.do_garbage = 4
 opts.do_compress = 1
