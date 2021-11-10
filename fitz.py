@@ -227,7 +227,16 @@ class Annot:
         """annotation appearance bbox"""
         CheckParent(self)
 
-        val = _fitz.Annot_apn_bbox(self)
+        #val = _fitz.Annot_apn_bbox(self)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        ap = mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('AP'), PDF_NAME('N'))
+        if not ap.m_internal:
+            val = JM_py_from_rect(mupdf.Rect(mupdf.Rect.Fixed_INFINITE))
+        else:
+            rect = mupdf.mpdf_dict_get_rect(ap, PDF_NAME('BBox'))
+            val = JM_py_from_rect(rect)
+
         val = Rect(val) * self.parent.transformationMatrix
         val *= self.parent.derotationMatrix
         return val
@@ -299,7 +308,16 @@ class Annot:
     def clean_contents(self, sanitize=1):
         """Clean appearance contents stream."""
         CheckParent(self)
-        return _fitz.Annot_clean_contents(self, sanitize)
+        #return _fitz.Annot_clean_contents(self, sanitize)
+        annot = self.this
+        pdf = mupdf.mpdf_get_bound_document(mupdf.mpdf_annot_obj(annot))
+        filter = mupdf.PdfFilterOptions()
+        filter.recurse = 1
+        filter.instance_forms = 1
+        filter.sanitize = sanitize
+        filter.ascii = 0
+        mupdf.mpdf_filter_annot_contents(pdf, annot, filter)
+        mupdf.mpdf_dirty_annot(annot)
 
     @property
     def colors(self):
@@ -318,25 +336,66 @@ class Annot:
     def delete_responses(self):
         """Delete 'Popup' and responding annotations."""
         CheckParent(self)
-        return _fitz.Annot_delete_responses(self)
+        #return _fitz.Annot_delete_responses(self)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        page = mupdf.mpdf_annot_page(annot)
+        #pdf_annot *irt_annot = NULL;
+        while 1:
+            irt_annot = JM_find_annot_irt(annot)
+            if not irt_annot.m_internal:
+                break
+            mupdf.mpdf_delete_annot(page, irt_annot)
+        mupdf.mpdf_dict_del(annot_obj, PDF_NAME('Popup'));
+
+        annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
+        n = mupdf.mpdf_array_len(annots)
+        found = 0
+        for i in range(n-1, -1, -1):
+            o = mupdf.mpdf_array_get(annots, i)
+            p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
+            if not o.m_internal:
+                continue
+            if not mupdf.mpdf_objcmp(p, annot_obj):
+                mupdf.mpdf_array_delete(annots, i)
+                found = 1
+        if found:
+            mupdf.mpdf_dict_put(page.obj(), PDF_NAME('Annots'), annots)
+        mupdf.mpdf_dirty_annot(annot)
 
     def fileInfo(self):
         """Attached file information."""
         CheckParent(self)
 
+        # fixme: no Annot_fileInfo() in PyMuPDF?
         return _fitz.Annot_fileInfo(self)
 
     @property
     def flags(self):
         """Flags field."""
         CheckParent(self)
-        return _fitz.Annot_flags(self)
+        #return _fitz.Annot_flags(self)
+        annot = self.this
+        return mupdf.mpdf_annot_flags(annot)
 
     def get_file(self):
         """Retrieve attached file content."""
         CheckParent(self)
-
-        return _fitz.Annot_get_file(self)
+        #return _fitz.Annot_get_file(self)
+        #PyObject *res = NULL;
+        #pdf_obj *stream = NULL;
+        #fz_buffer *buf = NULL;
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        type = mupdf.mpdf_annot_type(annot)
+        if type != mupdf.PDF_ANNOT_FILE_ATTACHMENT:
+            THROWMSG("bad annot type")
+        stream = annot_obj.dict_getl(PDF_NAME('FS'), PDF_NAME('EF'), PDF_NAME('F'))
+        if not stream.m_internal:
+            THROWMSG("bad PDF: file entry not found")
+        buf = mupdf.mpdf_load_stream(stream)
+        res = JM_BinFromBuffer(buf)
+        return res
 
     def get_oc(self):
         """Get annotation optional content reference."""
