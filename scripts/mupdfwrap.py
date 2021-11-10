@@ -7887,7 +7887,7 @@ def build_swig(
                 Buffer.new_buffer_from_copied_data = Buffer_new_buffer_from_copied_data
 
 
-                def ppdf_dict_getl(obj, *tail):
+                def mpdf_dict_getl(obj, *tail):
                     """
                     Python implementation of pdf_dict_getl(fz_context *ctx,
                     pdf_obj *obj, ...), because SWIG doesn't handle variadic
@@ -7897,10 +7897,10 @@ def build_swig(
                         if not obj.m_internal:
                             break
                         obj = obj.dict_get(key)
-                    return obj
-                PdfObj.dict_getl = ppdf_dict_getl
+                    return PdfObj(obj)
+                PdfObj.dict_getl = mpdf_dict_getl
 
-                def ppdf_dict_putl(obj, val, *tail):
+                def mpdf_dict_putl(obj, val, *tail):
                     """
                     Python implementation of pdf_dict_putl(fz_context
                     *ctx, pdf_obj *obj, pdf_obj *val, ...)
@@ -7921,13 +7921,13 @@ def build_swig(
                         obj = next_obj
                     key = tail[-1]
                     obj.dict_put(key, val)
-                PdfObj.dict_putl = ppdf_dict_putl
+                PdfObj.dict_putl = mpdf_dict_putl
 
-                def ppdf_dict_putl_drop(obj, *tail):
+                def mpdf_dict_putl_drop(obj, *tail):
                     raise Exception('mupdf.PdfObj.dict_putl_drop() is unsupported and unnecessary in Python because reference counting is automatic. Instead use mupdf.PdfObj.dict_putl()')
-                PdfObj.dict_putl_drop = ppdf_dict_putl_drop
+                PdfObj.dict_putl_drop = mpdf_dict_putl_drop
 
-                def pdf_set_annot_color(annot, color):
+                def ppdf_set_annot_color(annot, color):
                     """
                     Python version of pdf_set_annot_color() using
                     ppdf_set_annot_color2().
@@ -7946,11 +7946,11 @@ def build_swig(
                         raise Exception( f'Unexpected color should be float or list of 1-4 floats: {color}')
 
                 # Override PdfAnnot.set_annot_color() to use the above.
-                def PdfAnnot_set_annot_color(self, color):
-                    return pdf_set_annot_color(self.m_internal, color)
-                PdfAnnot.set_annot_color = PdfAnnot_set_annot_color
+                def mpdf_set_annot_color(self, color):
+                    return ppdf_set_annot_color(self.m_internal, color)
+                PdfAnnot.set_annot_color = mpdf_set_annot_color
 
-                def pdf_set_annot_interior_color(annot, color):
+                def ppdf_set_annot_interior_color(annot, color):
                     """
                     Python version of pdf_set_annot_color() using
                     ppdf_set_annot_color2().
@@ -7969,9 +7969,9 @@ def build_swig(
                         raise Exception( f'Unexpected color should be float or list of 1-4 floats: {color}')
 
                 # Override PdfAnnot.set_interiorannot_color() to use the above.
-                def PdfAnnot_set_annot_interior_color(self, color):
-                    return pdf_set_annot_interior_color(self.m_internal, color)
-                PdfAnnot.set_annot_interior_color = PdfAnnot_set_annot_interior_color
+                def mpdf_set_annot_interior_color(self, color):
+                    return ppdf_set_annot_interior_color(self.m_internal, color)
+                PdfAnnot.set_annot_interior_color = mpdf_set_annot_interior_color
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
