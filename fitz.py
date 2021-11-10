@@ -172,7 +172,7 @@ class Annot:
             if fill_color:
                 # Use mupdf python custom fn. fixme: make this available as a
                 # class method and as mpdf_set_annot_color().
-                mupdf.pdf_set_annot_color(annot.m_internal, fcol[:nfcol])
+                mupdf.mpdf_set_annot_color(annot, fcol[:nfcol])
             else:
                 annot.annot_obj().dict_del(mupdf.PDF_ENUM_NAME_IC)
         else:
@@ -548,13 +548,19 @@ class Annot:
     def is_open(self):
         """Get 'open' status of annotation or its Popup."""
         CheckParent(self)
-        return _fitz.Annot_is_open(self)
+        #return _fitz.Annot_is_open(self)
+        return mupdf.mpdf_annot_is_open(self.this)
 
     @property
     def language(self):
         """annotation language"""
-
-        return _fitz.Annot_language(self)
+        #return _fitz.Annot_language(self)
+        assert 0, 'Not implemented yet'
+        this_annot = self.this
+        lang = mupdf.mpdf_annot_language(this_annot)
+        if not lang:
+            return
+        #return Py_BuildValue("s", fz_string_from_text_language(buf, lang));
 
     @property
     def line_ends(self):
@@ -647,8 +653,14 @@ class Annot:
     def popup_xref(self):
         """annotation 'Popup' xref"""
         CheckParent(self)
-
-        return _fitz.Annot_popup_xref(self)
+        #return _fitz.Annot_popup_xref(self)
+        xref = 0
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        obj = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('Popup'))
+        if obj.m_internal:
+            xref = mupdf.mpdf_to_num(obj)
+        return xref
 
     @property
     def rect(self):
@@ -683,17 +695,34 @@ class Annot:
         mat = page.transformationMatrix
         bbox *= rot * ~mat
 
-        return _fitz.Annot_set_apn_bbox(self, bbox)
+        #return _fitz.Annot_set_apn_bbox(self, bbox)
+        pannot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        ap = annot_obj.dict_getl(PDF_NAME('AP'), PDF_NAME('N'))
+        if not ap.m_internal:
+            THROWMSG("annot has no appearance stream")
+        rect = JM_rect_from_py(bbox)
+        mupdf.mpdf_dict_put_rect(ap, PDF_NAME('BBox'), rect)
 
     def set_apn_matrix(self, matrix):
         """Set annotation appearance matrix."""
         CheckParent(self)
-        return _fitz.Annot_set_apn_matrix(self, matrix)
+        #return _fitz.Annot_set_apn_matrix(self, matrix)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        ap = annot_obj.dict_getl(PDF_NAME('AP'), PDF_NAME('N'))
+        if not ap.m_internal:
+            THROWMSG("annot has no appearance stream")
+        mat = JM_matrix_from_py(matrix)
+        mupdf.mpdf_dict_put_matrix(ap, PDF_NAME('Matrix'), mat)
 
     def set_blendmode(self, blend_mode):
         """Set annotation BlendMode."""
         CheckParent(self)
-        return _fitz.Annot_set_blendmode(self, blend_mode)
+        #return _fitz.Annot_set_blendmode(self, blend_mode)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        mupdf.mpdf_dict_put_name(annot_obj, PDF_NAME('BM'), blend_mode)
 
     def set_border(self, border=None, width=0, style=None, dashes=None):
         """Set border properties.
@@ -717,12 +746,15 @@ class Annot:
         CheckParent(self)
         if type(colors) is not dict:
             colors = {"fill": fill, "stroke": stroke}
+        # no Annot_set_colors() in PyMuPDF?
         return _fitz.Annot_set_colors(self, colors, fill, stroke)
 
     def set_flags(self, flags):
         """Set annotation flags."""
         CheckParent(self)
-        return _fitz.Annot_set_flags(self, flags)
+        #return _fitz.Annot_set_flags(self, flags)
+        annot = self.this
+        mupdf.mpdf_set_annot_flags(annot, flags)
 
     def set_info(self, info=None, content=None, title=None, creationDate=None, modDate=None, subject=None):
 
@@ -761,8 +793,13 @@ class Annot:
     def set_language(self, language=None):
         """Set annotation language."""
         CheckParent(self)
-
-        return _fitz.Annot_set_language(self, language)
+        #return _fitz.Annot_set_language(self, language)
+        this_annot = self.this
+        if not language:
+            lang = mupdf.FZ_LANG_UNSET;
+        else:
+            lang = mupdf.mfz_text_language_from_string(language);
+        mupdf.mpdf_set_annot_language(this_annot, lang)
 
     def set_line_ends(self, start, end):
         """Set line end codes."""
@@ -777,24 +814,42 @@ class Annot:
     def set_name(self, name):
         """Set /Name (icon) of annotation."""
         CheckParent(self)
-
-        return _fitz.Annot_set_name(self, name)
+        #return _fitz.Annot_set_name(self, name)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        mupdf.mpdf_dict_put_name(annot_obj, PDF_NAME('Name'), name)
+        mupdf.mpdf_dirty_annot(annot)
 
     def set_oc(self, oc=0):
         """Set / remove annotation OC xref."""
         CheckParent(self)
-
         return _fitz.Annot_set_oc(self, oc)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        if not oc:
+            mupdf.mpdf_dict_del(annot_obj, PDF_NAME('OC'))
+        else:
+            JM_add_oc_object(mupdf.mpdf_get_bound_document(annot_obj), annot_obj, oc)
 
     def set_opacity(self, opacity):
         """Set opacity."""
         CheckParent(self)
         return _fitz.Annot_set_opacity(self, opacity)
+        annot = self.this
+        if not INRANGE(opacity, 0.0, 1.0):
+            mupdf.mpdf_set_annot_opacity(annot, 1)
+            return;
+        mupdf.mpdf_set_annot_opacity(annot, opacity)
+        if opacity < 1.0:
+            page = mupdf.mpdf_annot_page(annot)
+            page.transparency = 1
 
     def set_open(self, is_open):
         """Set 'open' status of annotation or its Popup."""
         CheckParent(self)
-        return _fitz.Annot_set_open(self, is_open)
+        #return _fitz.Annot_set_open(self, is_open)
+        annot = self.this
+        mupdf.mpdf_set_annot_is_open(annot, is_open)
 
     def set_popup(self, rect):
         '''
@@ -9243,7 +9298,6 @@ def JM_UnicodeFromStr(s):
     assert isinstance(s, str)
     return s
 
-
 def JM_add_annot_id(annot, stem):
     assert isinstance(annot, mupdf.PdfAnnot)
     names = JM_get_annot_id_list(annot.annot_page())
@@ -9268,6 +9322,20 @@ def JM_add_annot_id(annot, stem):
     # definition of pdf_annot is in mupdf/source/pdf/pdf-annot-imp.h, which is
     # not included by any .h files.
 
+def JM_add_oc_object(pdf, ref, xref):
+    '''
+    Add OC object reference to a dictionary
+    '''
+    indobj = mupdf.mpdf_new_indirect(pdf, xref, 0)
+    if not mupdf.mpdf_is_dict(indobj):
+        THROWMSG("bad 'oc' reference")
+    type = mupdf.mpdf_dict_get(indobj, PDF_NAME('Type'))
+    if (mupdf.mpdf_objcmp(type, PDF_NAME('OCG')) == 0
+            or mupdf.mpdf_objcmp(type, PDF_NAME('OCMD')) == 0
+            ):
+        mupdf.mpdf_dict_put(ref, PDF_NAME('OC'), indobj)
+    else:
+        THROWMSG("bad 'oc' type")
 
 def JM_annot_border(annot_obj):
     assert isinstance(annot_obj, mupdf.PdfObj), f'{annot_obj}'
