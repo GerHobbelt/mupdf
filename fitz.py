@@ -881,7 +881,32 @@ class Annot:
     def set_rotation(self, rotate=0):
         """Set annotation rotation."""
         CheckParent(self)
-        return _fitz.Annot_set_rotation(self, rotate)
+        #return _fitz.Annot_set_rotation(self, rotate)
+        annot = self.this
+        type = mupdf.mpdf_annot_type(annot)
+        if type not in (
+                mupdf.PDF_ANNOT_CARET,
+                mupdf.PDF_ANNOT_CIRCLE,
+                mupdf.PDF_ANNOT_FREE_TEXT,
+                mupdf.PDF_ANNOT_FILE_ATTACHMENT,
+                mupdf.PDF_ANNOT_INK,
+                mupdf.PDF_ANNOT_LINE,
+                mupdf.PDF_ANNOT_POLY_LINE,
+                mupdf.PDF_ANNOT_POLYGON,
+                mupdf.PDF_ANNOT_SQUARE,
+                mupdf.PDF_ANNOT_STAMP,
+                mupdf.PDF_ANNOT_TEXT,
+                ):
+            return
+        rot = rotate
+        while rot < 0:
+            rot += 360
+        while rot >= 360:
+            rot -= 360
+        if type == mupdf.PDF_ANNOT_FREE_TEXT and rot % 90 != 0:
+            rot = 0
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        mupdf.mpdf_dict_put_int(annot_obj, PDF_NAME('Rotate'), rot)
 
     @property
     def type(self):
@@ -1186,7 +1211,51 @@ class Annot:
         """Update attached file."""
         CheckParent(self)
 
-        return _fitz.Annot_update_file(self, buffer, filename, ufilename, desc)
+        #return _fitz.Annot_update_file(self, buffer, filename, ufilename, desc)
+        #pdf_document *pdf = NULL;       // to be filled in
+        #char *data = NULL;              // for new file content
+        #fz_buffer *res = NULL;          // for compressed content
+        #pdf_obj *stream = NULL, *fs = NULL;
+        #int64_t size = 0;
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        pdf = mupdf.mpdf_get_bound_document(annot_obj)  # the owning PDF
+        type = mupdf.mpdf_annot_type(annot)
+        if type != mupdf.PDF_ANNOT_FILE_ATTACHMENT:
+            THROWMSG("bad annot type")
+        stream = mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('FS'), PDF_NAME('EF'), PDF_NAME('F'))
+        # the object for file content
+        if not stream.m_internal:
+            THROWMSG("bad PDF: no /EF object")
+
+        fs = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('FS'))
+
+        # file content given
+        res = JM_BufferFromBytes(buffer)
+        if buffer and not res.m_internal:
+            THROWMSG("bad type: 'buffer'")
+        if res:
+            JM_update_stream(pdf, stream, res, 1)
+            # adjust /DL and /Size parameters
+            len, _ = mupdf.mfz_buffer_storage(res, NULL)
+            l = mupdf.mpdf_new_int(len)
+            mupdf.mpdf_dict_put(stream, PDF_NAME('DL'), l)
+            mupdf.mpdf_dict_putl(stream, l, PDF_NAME('Params'), PDF_NAME('Size'))
+
+        if filename:
+            mupdf.mpdf_dict_put_text_string(stream, PDF_NAME('F'), filename)
+            mupdf.mpdf_dict_put_text_string(fs, PDF_NAME('F'), filename)
+            mupdf.mpdf_dict_put_text_string(stream, PDF_NAME('UF'), filename)
+            mupdf.mpdf_dict_put_text_string(fs, PDF_NAME('UF'), filename)
+            mupdf.mpdf_dict_put_text_string(annot_obj, PDF_NAME('Contents'), filename)
+
+        if ufilename:
+            mupdf.mpdf_dict_put_text_string(stream, PDF_NAME('UF'), ufilename)
+            mupdf.mpdf_dict_put_text_string(fs, PDF_NAME('UF'), ufilename)
+
+        if desc:
+            mupdf.mpdf_dict_put_text_string(stream, PDF_NAME('Desc'), desc)
+            mupdf.mpdf_dict_put_text_string(fs, PDF_NAME('Desc'), desc)
 
     @property
     def vertices(self):
