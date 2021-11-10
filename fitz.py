@@ -1212,11 +1212,6 @@ class Annot:
         CheckParent(self)
 
         #return _fitz.Annot_update_file(self, buffer, filename, ufilename, desc)
-        #pdf_document *pdf = NULL;       // to be filled in
-        #char *data = NULL;              // for new file content
-        #fz_buffer *res = NULL;          // for compressed content
-        #pdf_obj *stream = NULL, *fs = NULL;
-        #int64_t size = 0;
         annot = self.this
         annot_obj = mupdf.mpdf_annot_obj(annot)
         pdf = mupdf.mpdf_get_bound_document(annot_obj)  # the owning PDF
@@ -1367,6 +1362,7 @@ class Colorspace:
 
 class Device:
     def __init__(self, *args):
+        assert 0, '_fitz.new_Device() not found?'
         this = _fitz.new_Device(*args)
         try:
             self.this.append(this)
@@ -1385,13 +1381,20 @@ class DisplayList:
 
     @property
     def rect(self):
-        val = _fitz.DisplayList_rect(self)
+        #val = _fitz.DisplayList_rect(self)
+        val = JM_py_from_rect(mupdf.mfz_bound_display_list(self.this))
         val = Rect(val)
-
         return val
 
     def run(self, dw, m, area):
-        return _fitz.DisplayList_run(self, dw, m, area)
+        #return _fitz.DisplayList_run(self, dw, m, area)
+        mupdf.mfz_run_display_list(
+                self.this,
+                dw.device,
+                JM_matrix_from_py(m),
+                JM_rect_from_py(area),
+                mupdf.Cookie(),
+                )
 
     def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
         #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
@@ -1402,6 +1405,7 @@ class DisplayList:
         return val
 
     def getTextPage(self, flags=3):
+        assert 0, '_fitz.DisplayList_getTextPage not found'
         val = _fitz.DisplayList_getTextPage(self, flags)
         val.thisown = True
 
@@ -1520,20 +1524,57 @@ class Document:
         """Delete object."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document__deleteObject(self, xref)
+        #return _fitz.Document__deleteObject(self, xref)
+        doc = self.this
+        pdf = mupdf.mpdf_specifics(doc)
+        ASSERT_PDF(pdf)
+        if not INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
+            THROWMSG("bad xref")
+        mupdf.pdf_delete_object(pdf, xref)
 
     def _deletePage(self, pno):
+        assert 0, '_fitz.Document__deletePage not found.'
         return _fitz.Document__deletePage(self, pno)
 
     def _delToC(self):
         """Delete the TOC."""
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-        val = _fitz.Document__delToC(self)
+        #val = _fitz.Document__delToC(self)
+        xrefs = []  # create Python list
+        pdf = mupdf.mpdf_specifics(self.this)
+        if not pdf.m_internal:
+            return xrefs    # not a pdf
+
+        #pdf_obj *root, *olroot, *first;
+        #int xref_count, olroot_xref, i, xref;
+
+        # get the main root
+        root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+        # get the outline root
+        olroot = mupdf.mpdf_dict_get(root, PDF_NAME('Outlines'))
+        if not olroot.m_internal:
+            return xrefs    # no outlines or some problem
+
+        first = mupdf.mpdf_dict_get(olroot, PDF_NAME('First'))  # first outline
+
+        xrefs = JM_outline_xrefs(first, xrefs)
+        xref_count = len(xrefs)
+
+        olroot_xref = mupdf.mpdf_to_num(olroot) # delete OL root
+        mupdf.mpdf_delete_object(pdf, olroot_xref)  # delete OL root
+        mupdf.mpdf_dict_del(root, PDF_NAME('Outlines')) # delete OL root
+
+        for i in range(xref_count):
+            _, xref = JM_INT_ITEM(xrefs, i)
+            mupdf.mpdf_delete_object(pdf, xref) # delete outline item
+        xrefs.append(olroot_xref)
+        val = xrefs
         self.initData()
         return val
 
     def _dropOutline(self, ol):
+        assert 0, 'Unnecessary'
         return _fitz.Document__dropOutline(self, ol)
 
     def _embeddedFileAdd(self, name, buffer, filename=None, ufilename=None, desc=None):
@@ -9360,6 +9401,13 @@ def JM_FLOAT_ITEM(obj, idx):
         return None
     return float(obj[idx])
 
+def JM_INT_ITEM(obj, idx):
+    if idx < len(obj):
+        temp = obj[idx]
+        if isinstance(temp, (int, float)):
+            return 0, temp
+    return 1, None
+
 def JM_TUPLE(o: typing.Sequence) -> tuple:
     return tuple(map(lambda x: round(x, 5) if abs(x) >= 1e-4 else 0, o))
 
@@ -10064,6 +10112,26 @@ def JM_norm_rotation(rotate):
     if rotate % 90 != 0:
         return 0
     return rotate
+
+def JM_outline_xrefs(obj, xrefs):
+    '''
+    Return list of outline xref numbers. Recursive function. Arguments:
+    'obj' first OL item
+    'xrefs' empty Python list
+    '''
+    if not obj._internal:
+        return xrefs
+    thisobj = obj
+    while thisobj.m_internal:
+        xrefs.append( mupdf.mpdf_to_num(thisobj))
+        first = mupdf.mpdf_dict_get(thisobj, PDF_NAME('First')) # try go down
+        if first.m_internal:
+            xrefs = JM_outline_xrefs(first, xrefs)
+        thisobj = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Next'))    # try go next
+        parent = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Parent'))   # get parent
+        if not thisobj.m_internal:
+            thisobj = parent    # goto parent if no next
+    return xrefs
 
 
 def JM_page_rotation(page):
