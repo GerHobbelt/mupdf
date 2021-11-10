@@ -1578,13 +1578,29 @@ class Document:
         return _fitz.Document__dropOutline(self, ol)
 
     def _embeddedFileAdd(self, name, buffer, filename=None, ufilename=None, desc=None):
+        assert 0, 'deprecated'
         return _fitz.Document__embeddedFileAdd(self, name, buffer, filename, ufilename, desc)
 
     def _embeddedFileDel(self, idx):
+        assert 0, 'deprecated'
         return _fitz.Document__embeddedFileDel(self, idx)
 
     def _embeddedFileGet(self, idx):
         return _fitz.Document__embeddedFileGet(self, idx)
+        doc = self.this
+        pdf = mupdf.mpdf_document_from_fz_document(doc)
+        names = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
+                )
+        entry = mupdf.mpdf_array_get(names, 2*idx+1)
+        filespec = mupdf.mpdf_dict_getl(entry, PDF_NAME('EF'), PDF_NAME('F'))
+        buf = mupdf.mpdf_load_stream(filespec)
+        cont = JM_BinFromBuffer(buf)
+        return cont
 
     def _embeddedFileIndex(self, item: typing.Union[int, str]) -> int:
         filenames = self.embeddedFileNames()
@@ -1598,22 +1614,86 @@ class Document:
         return idx
 
     def _embeddedFileInfo(self, idx, infodict):
+        assert 0, 'no Document__embeddedFileInfo'
         return _fitz.Document__embeddedFileInfo(self, idx, infodict)
 
     def _embeddedFileNames(self, namelist):
         """Get list of embedded file names."""
+        assert 0, 'no Document__embeddedFileNames'
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document__embeddedFileNames(self, namelist)
 
     def _embeddedFileUpd(self, idx, buffer=None, filename=None, ufilename=None, desc=None):
+        assert 0, 'no Document__embeddedFileUpd'
         return _fitz.Document__embeddedFileUpd(self, idx, buffer, filename, ufilename, desc)
 
     def _extend_toc_items(self, items):
         """Add color info to all items of an extended TOC list."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document__extend_toc_items(self, items)
+        #return _fitz.Document__extend_toc_items(self, items)
+        pdf = mupdf.mpdf_specifics(self.this)
+        #PyObject *item=NULL, *itemdict=NULL, *xrefs, *bold, *italic, *collapse, *zoom;
+        zoom = "zoom"
+        bold = "bold"
+        italic = "italic"
+        collapse = "collapse"
+
+        root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+        if not root.m_internal:
+            return
+        olroot = mupdf.mpdf_dict_get(root, PDF_NAME('Outlines'))
+        if not olroot.m_internal:
+            return
+        first = mupdf.mpdf_dict_get(olroot, PDF_NAME('First'))
+        if not first.m_internal:
+            return
+        xrefs = []
+        xrefs = JM_outline_xrefs(first, xrefs)
+        n = len(xrefs)
+        if not n:
+            return
+
+        # update all TOC item dictionaries
+        for i in range(n):
+            xrefs[i] = xref
+            item = items[i]
+            itemdict = item[3]
+            if not itemdict.m_internal or not isinstance(itemdict, dict):
+                THROWMSG("need non-simple TOC format")
+            itemdict[dictkey_xref] = xrefs[i]
+            bm = mupdf.mpdf_load_object(pdf, xref)
+            flags = mupdf.mpdf_to_int( mupdf.mpdf_dict_get(bm, PDF_NAME('F')))
+            if flags == 1:
+                itemdict[italic] = True
+            elif flags == 2:
+                itemdict[bold] = True
+            elif flags == 3:
+                itemdict[italic] = True
+                itemdict[bold] = True
+            count = mupdf.mpdf_to_int( mupdf.mpdf_dict_get(bm, PDF_NAME('Count')))
+            if count < 0:
+                itemdict[collapse] = True
+            elif count > 0:
+                itemdict[collapse] = False
+            col = mupdf.mpdf_dict_get(bm, PDF_NAME('C'))
+            if mupdf.mpdf_is_array(col) and mupdf.mpdf_array_len(col) == 3:
+                color = (
+                        mupdf.mpdf_to_real(mupdf.mpdf_array_get(col, 0)),
+                        mupdf.mpdf_to_real(mupdf.mpdf_array_get(col, 1)),
+                        mupdf.mpdf_to_real(mupdf.mpdf_array_get(col, 2)),
+                        )
+                itemdict[dictkey_color] = color
+            z=0
+            obj = mupdf.mpdf_dict_get(bm, PDF_NAME('Dest'))
+            if not obj.m_internal or not mupdf.mpdf_is_array(obj):
+                obj = mupdf.mpdf_dict_getl(bm, PDF_NAME('A'), PDF_NAME('D'))
+            if mupdf.mpdf_is_array(obj) and mupdf.mpdf_array_len(obj) == 5:
+                z = mupdf.mpdf_to_real(mupdf.mpdf_array_get(obj, 4))
+            itemdict[zoom] = z
+            item[3] = itemdict
+            items[i] = item
 
     def _get_char_widths(self, xref: int, bfname: str, ext: str, ordering: int, limit: int, idx: int = 0):
         pdf = self._pdf_document()
