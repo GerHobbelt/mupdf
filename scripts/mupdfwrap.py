@@ -2534,6 +2534,27 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        pdf_filter_options = ClassExtra(
+                pod = 'inline',
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        f'''
+                        {{
+                            this->image_filter = nullptr;
+                            this->text_filter = nullptr;
+                            this->after_text_object = nullptr;
+                            this->end_page = nullptr;
+                            this->recurse = 0;
+                            this->instance_forms = 0;
+                            this->sanitize = 0;
+                            this->ascii = 0;
+                        }}
+                        ''',
+                        comment = '/* Default constructor initialises all fields to null/zero. */',
+                    )
+                    ],
+                ),
+
         pdf_obj = ClassExtra(
                 constructor_raw = 'default',
                 methods_extra = [
