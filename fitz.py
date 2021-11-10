@@ -37,246 +37,6 @@ class Annot:
         self.this = annot
         self.parent = page
 
-    @property
-    def rect(self):
-        """annotation rectangle"""
-        CheckParent(self)
-
-        #val = _fitz.Annot_rect(self)
-        val = mupdf.mpdf_bound_annot(self.this)
-        val = Rect(val)
-        val *= self.parent.derotationMatrix
-        return val
-
-    @property
-    def xref(self):
-        """annotation xref"""
-        CheckParent(self)
-        #return _fitz.Annot_xref(self)
-        annot = self.this
-        return mupdf.mpdf_to_num(annot.annot_obj())
-
-    @property
-    def apn_matrix(self):
-        """annotation appearance matrix"""
-        try:
-            CheckParent(self)
-
-            #val = _fitz.Annot_apn_matrix(self)
-            annot = self.this
-            assert isinstance(annot, mupdf.PdfAnnot)
-            ap = annot.annot_obj().dict_getl(mupdf.PDF_ENUM_NAME_AP, mupdf.PDF_ENUM_NAME_N);
-            if not ap.m_internal:
-                return JM_py_from_matrix(mupdf.Matrix())
-            mat = ap.dict_get_matrix(mupdf.PDF_ENUM_NAME_Matrix)
-            val = JM_py_from_matrix(mat)
-
-            val = Matrix(val)
-
-            return val
-        except Exception:
-            jlib.log(jlib.exception_info())
-            raise
-
-    @property
-    def apn_bbox(self):
-        """annotation appearance bbox"""
-        CheckParent(self)
-
-        val = _fitz.Annot_apn_bbox(self)
-        val = Rect(val) * self.parent.transformationMatrix
-        val *= self.parent.derotationMatrix
-        return val
-
-    def set_apn_matrix(self, matrix):
-        """Set annotation appearance matrix."""
-        CheckParent(self)
-        return _fitz.Annot_set_apn_matrix(self, matrix)
-
-    def set_apn_bbox(self, bbox):
-        """
-        Set annotation appearance bbox.
-        """
-        CheckParent(self)
-        page = self.parent
-        rot = page.rotationMatrix
-        mat = page.transformationMatrix
-        bbox *= rot * ~mat
-
-        return _fitz.Annot_set_apn_bbox(self, bbox)
-
-    def blendMode(self):
-        """annotation BlendMode"""
-        CheckParent(self)
-
-        #return _fitz.Annot_blendMode(self)
-        blend_mode = None
-        annot = self.this
-        #pdf_obj *obj, *obj1, *obj2;
-        obj = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_BM)
-        if obj.m_internal:
-            blend_mode = obj.to_name()
-            return blend_mode
-
-        # loop through the /AP/N/Resources/ExtGState objects
-        obj = annot.annot_obj().dict_getl(
-                mupdf.PDF_ENUM_NAME_AP,
-                mupdf.PDF_ENUM_NAME_N,
-                mupdf.PDF_ENUM_NAME_Resources,
-                mupdf.PDF_ENUM_NAME_ExtGState,
-                )
-        if obj.is_dict():
-            n = obj.dict_len()
-            for i in range(n):
-                obj1 = obj.dict_get_val(i)
-                if obj1.is_dict():
-                    m = obj1.dict_len()
-                    for j in range(m):
-                        obj2 = obj1.dict_get_key(j)
-                        if obj2.objcmp(mupdf.PDF_ENUM_NAME_BM) == 0:
-                            blend_mode = obj1.dict_get_val(j).to_name()
-                            return blend_mode
-        return blend_mode;
-
-
-    def set_blendmode(self, blend_mode):
-        """Set annotation BlendMode."""
-        CheckParent(self)
-        return _fitz.Annot_set_blendmode(self, blend_mode)
-
-    def get_oc(self):
-        """Get annotation optional content reference."""
-        CheckParent(self)
-
-        return _fitz.Annot_get_oc(self)
-
-    def set_open(self, is_open):
-        """Set 'open' status of annotation or its Popup."""
-        CheckParent(self)
-        return _fitz.Annot_set_open(self, is_open)
-
-    @property
-    def is_open(self):
-        """Get 'open' status of annotation or its Popup."""
-        CheckParent(self)
-        return _fitz.Annot_is_open(self)
-
-    @property
-    def has_popup(self):
-        """Check if annotation has a Popup."""
-        CheckParent(self)
-
-        #return _fitz.Annot_has_popup(self)
-        annot = self.this
-        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
-        return True if obj.m_internal else False
-
-    def set_popup(self, rect):
-        '''
-        Create annotation 'Popup' or update rectangle.
-        '''
-        CheckParent(self)
-        jlib.log('{rect=}')
-        annot = self.this
-        pdfpage = annot.annot_page()
-        rot = JM_rotate_page_matrix(pdfpage)
-        jlib.log('{rot=}')
-        r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
-        jlib.log('{r=}')
-        mupdf.mpdf_set_annot_popup(annot, r)
-
-
-    @property
-    def popup_rect(self):
-        """annotation 'Popup' rectangle"""
-        CheckParent(self)
-
-        #val = _fitz.Annot_popup_rect(self)
-        rect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
-        jlib.log('{rect=}')
-        annot = self.this
-        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
-        jlib.log('{obj.m_internal=}')
-        if obj.m_internal:
-            if 0:
-                rect = mupdf.mpdf_dict_get_rect(obj, PDF_NAME('Rect'))
-            else:
-                # fixme, this fixes assert in PyMuPDF/tests/test_annots.py:test_redact().
-                rect = mupdf.mpdf_annot_popup(annot)
-            jlib.log('{rect=}')
-        val = JM_py_from_rect(rect)
-        jlib.log('{val=}')
-        val = Rect(val) * self.parent.transformationMatrix
-        jlib.log('{val=}')
-        val *= self.parent.derotationMatrix
-        jlib.log('{val=}')
-
-        return val
-
-    @property
-    def popup_xref(self):
-        """annotation 'Popup' xref"""
-        CheckParent(self)
-
-        return _fitz.Annot_popup_xref(self)
-
-    def set_oc(self, oc=0):
-        """Set / remove annotation OC xref."""
-        CheckParent(self)
-
-        return _fitz.Annot_set_oc(self, oc)
-
-    setOC = set_oc
-
-    @property
-    def language(self):
-        """annotation language"""
-
-        return _fitz.Annot_language(self)
-
-    def set_language(self, language=None):
-        """Set annotation language."""
-        CheckParent(self)
-
-        return _fitz.Annot_set_language(self, language)
-
-    def _getAP(self):
-        #return _fitz.Annot__getAP(self)
-        r = None
-        res = None
-        annot = self.this
-        ap = annot.annot_obj().dict_getl(
-                mupdf.PDF_ENUM_NAME_AP,
-                mupdf.PDF_ENUM_NAME_N,
-                )
-
-        if ap.is_stream():
-            res = ap.load_stream()
-        if not res or res.m_internal:
-            r = JM_BinFromBuffer(res)
-        return r
-
-    def _setAP(self, ap, rect=0):
-        #return _fitz.Annot__setAP(self, ap, rect)
-        try:
-            annot = self.this
-            apobj = mupdf.mpdf_dict_getl(annot.obj(), PDF_NAME('AP'), PDF_NAME('N'))
-            if not apobj.m_internal:
-                THROWMSG("annot has no AP/N object")
-            if not mupdf.mpdf_is_stream(apobj):
-                THROWMSG("AP/N object is no stream")
-            res = JM_BufferFromBytes(ap)
-            if not res.m_internal:
-                THROWMSG("invalid /AP stream argument")
-            JM_update_stream(annot.page().doc(), apobj, res, 1)
-            if rect:
-                bbox = mupdf.mpdf_dict_get_rect(annot.obj(), PDF_NAME('Rect'))
-                mupdf.mpdf_dict_put_rect(apobj, PDF_NAME('BBox'), bbox)
-                #annot->ap = NULL;
-        except Exception:
-            return
-        return
-
     def _get_redact_values(self):
         jlib.log('')
         #val = _fitz.Annot__get_redact_values(self)
@@ -319,6 +79,244 @@ class Annot:
         fill = self.colors["fill"]
         val["fill"] = fill
         return val
+
+    def _getAP(self):
+        #return _fitz.Annot__getAP(self)
+        r = None
+        res = None
+        annot = self.this
+        ap = annot.annot_obj().dict_getl(
+                mupdf.PDF_ENUM_NAME_AP,
+                mupdf.PDF_ENUM_NAME_N,
+                )
+
+        if ap.is_stream():
+            res = ap.load_stream()
+        if not res or res.m_internal:
+            r = JM_BinFromBuffer(res)
+        return r
+
+    def _setAP(self, ap, rect=0):
+        #return _fitz.Annot__setAP(self, ap, rect)
+        try:
+            annot = self.this
+            apobj = mupdf.mpdf_dict_getl(annot.obj(), PDF_NAME('AP'), PDF_NAME('N'))
+            if not apobj.m_internal:
+                THROWMSG("annot has no AP/N object")
+            if not mupdf.mpdf_is_stream(apobj):
+                THROWMSG("AP/N object is no stream")
+            res = JM_BufferFromBytes(ap)
+            if not res.m_internal:
+                THROWMSG("invalid /AP stream argument")
+            JM_update_stream(annot.page().doc(), apobj, res, 1)
+            if rect:
+                bbox = mupdf.mpdf_dict_get_rect(annot.obj(), PDF_NAME('Rect'))
+                mupdf.mpdf_dict_put_rect(apobj, PDF_NAME('BBox'), bbox)
+                #annot->ap = NULL;
+        except Exception:
+            return
+        return
+
+    @property
+    def apn_bbox(self):
+        """annotation appearance bbox"""
+        CheckParent(self)
+
+        val = _fitz.Annot_apn_bbox(self)
+        val = Rect(val) * self.parent.transformationMatrix
+        val *= self.parent.derotationMatrix
+        return val
+
+    @property
+    def apn_matrix(self):
+        """annotation appearance matrix"""
+        try:
+            CheckParent(self)
+
+            #val = _fitz.Annot_apn_matrix(self)
+            annot = self.this
+            assert isinstance(annot, mupdf.PdfAnnot)
+            ap = annot.annot_obj().dict_getl(mupdf.PDF_ENUM_NAME_AP, mupdf.PDF_ENUM_NAME_N);
+            if not ap.m_internal:
+                return JM_py_from_matrix(mupdf.Matrix())
+            mat = ap.dict_get_matrix(mupdf.PDF_ENUM_NAME_Matrix)
+            val = JM_py_from_matrix(mat)
+
+            val = Matrix(val)
+
+            return val
+        except Exception:
+            jlib.log(jlib.exception_info())
+            raise
+
+    def blendMode(self):
+        """annotation BlendMode"""
+        CheckParent(self)
+
+        #return _fitz.Annot_blendMode(self)
+        blend_mode = None
+        annot = self.this
+        #pdf_obj *obj, *obj1, *obj2;
+        obj = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_BM)
+        if obj.m_internal:
+            blend_mode = obj.to_name()
+            return blend_mode
+
+        # loop through the /AP/N/Resources/ExtGState objects
+        obj = annot.annot_obj().dict_getl(
+                mupdf.PDF_ENUM_NAME_AP,
+                mupdf.PDF_ENUM_NAME_N,
+                mupdf.PDF_ENUM_NAME_Resources,
+                mupdf.PDF_ENUM_NAME_ExtGState,
+                )
+        if obj.is_dict():
+            n = obj.dict_len()
+            for i in range(n):
+                obj1 = obj.dict_get_val(i)
+                if obj1.is_dict():
+                    m = obj1.dict_len()
+                    for j in range(m):
+                        obj2 = obj1.dict_get_key(j)
+                        if obj2.objcmp(mupdf.PDF_ENUM_NAME_BM) == 0:
+                            blend_mode = obj1.dict_get_val(j).to_name()
+                            return blend_mode
+        return blend_mode;
+
+    def get_oc(self):
+        """Get annotation optional content reference."""
+        CheckParent(self)
+
+        return _fitz.Annot_get_oc(self)
+
+    @property
+    def has_popup(self):
+        """Check if annotation has a Popup."""
+        CheckParent(self)
+
+        #return _fitz.Annot_has_popup(self)
+        annot = self.this
+        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+        return True if obj.m_internal else False
+
+    @property
+    def is_open(self):
+        """Get 'open' status of annotation or its Popup."""
+        CheckParent(self)
+        return _fitz.Annot_is_open(self)
+
+    @property
+    def language(self):
+        """annotation language"""
+
+        return _fitz.Annot_language(self)
+
+    @property
+    def popup_rect(self):
+        """annotation 'Popup' rectangle"""
+        CheckParent(self)
+
+        #val = _fitz.Annot_popup_rect(self)
+        rect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+        jlib.log('{rect=}')
+        annot = self.this
+        obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+        jlib.log('{obj.m_internal=}')
+        if obj.m_internal:
+            if 0:
+                rect = mupdf.mpdf_dict_get_rect(obj, PDF_NAME('Rect'))
+            else:
+                # fixme, this fixes assert in PyMuPDF/tests/test_annots.py:test_redact().
+                rect = mupdf.mpdf_annot_popup(annot)
+            jlib.log('{rect=}')
+        val = JM_py_from_rect(rect)
+        jlib.log('{val=}')
+        val = Rect(val) * self.parent.transformationMatrix
+        jlib.log('{val=}')
+        val *= self.parent.derotationMatrix
+        jlib.log('{val=}')
+
+        return val
+
+    @property
+    def popup_xref(self):
+        """annotation 'Popup' xref"""
+        CheckParent(self)
+
+        return _fitz.Annot_popup_xref(self)
+
+    @property
+    def rect(self):
+        """annotation rectangle"""
+        CheckParent(self)
+
+        #val = _fitz.Annot_rect(self)
+        val = mupdf.mpdf_bound_annot(self.this)
+        val = Rect(val)
+        val *= self.parent.derotationMatrix
+        return val
+
+    def set_apn_bbox(self, bbox):
+        """
+        Set annotation appearance bbox.
+        """
+        CheckParent(self)
+        page = self.parent
+        rot = page.rotationMatrix
+        mat = page.transformationMatrix
+        bbox *= rot * ~mat
+
+        return _fitz.Annot_set_apn_bbox(self, bbox)
+
+    def set_apn_matrix(self, matrix):
+        """Set annotation appearance matrix."""
+        CheckParent(self)
+        return _fitz.Annot_set_apn_matrix(self, matrix)
+
+    def set_blendmode(self, blend_mode):
+        """Set annotation BlendMode."""
+        CheckParent(self)
+        return _fitz.Annot_set_blendmode(self, blend_mode)
+
+    def set_language(self, language=None):
+        """Set annotation language."""
+        CheckParent(self)
+
+        return _fitz.Annot_set_language(self, language)
+
+    def set_oc(self, oc=0):
+        """Set / remove annotation OC xref."""
+        CheckParent(self)
+
+        return _fitz.Annot_set_oc(self, oc)
+
+    setOC = set_oc
+
+    def set_open(self, is_open):
+        """Set 'open' status of annotation or its Popup."""
+        CheckParent(self)
+        return _fitz.Annot_set_open(self, is_open)
+
+    def set_popup(self, rect):
+        '''
+        Create annotation 'Popup' or update rectangle.
+        '''
+        CheckParent(self)
+        jlib.log('{rect=}')
+        annot = self.this
+        pdfpage = annot.annot_page()
+        rot = JM_rotate_page_matrix(pdfpage)
+        jlib.log('{rot=}')
+        r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
+        jlib.log('{r=}')
+        mupdf.mpdf_set_annot_popup(annot, r)
+
+    @property
+    def xref(self):
+        """annotation xref"""
+        CheckParent(self)
+        #return _fitz.Annot_xref(self)
+        annot = self.this
+        return mupdf.mpdf_to_num(annot.annot_obj())
 
     def get_textpage(self, clip=None, flags=0):
         """Make annotation TextPage."""
