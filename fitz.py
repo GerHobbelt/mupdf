@@ -2,6 +2,7 @@
 #
 
 import base64
+import binascii
 import gzip
 import hashlib
 import math
@@ -1729,6 +1730,7 @@ class Document:
 
     def _getCharWidths(self, xref, bfname, ext, ordering, limit, idx=0):
         """Return list of glyphs and glyph widths of a font."""
+        assert 0, 'no Document__getCharWidths'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         return _fitz.Document__getCharWidths(self, xref, bfname, ext, ordering, limit, idx)
@@ -1765,19 +1767,34 @@ class Document:
         """Get PDF file id."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document__getPDFfileid(self)
+        #return _fitz.Document__getPDFfileid(self)
+        doc = self.this
+        pdf = mupdf.mpdf_specifics(doc)
+        if not pdf.m_internal:
+            return
+        idlist = []
+        identity = mupdf.mpdf_dict_get(gctx, mupdf.mpdf_trailer(pdf), PDF_NAME('ID'));
+        if identity.m_internal:
+            n = mupdf.mpdf_array_len(identity)
+            for i in range(n):
+                o = mupdf.mpdf_array_get(identity, i)
+                text = mupdf.mpdf_to_text_string(o)
+                hex_ = binascii.hexlify(text)
+                idlist.append(hex_)
+        return idlist
 
     @property
     def _hasXrefOldStyle(self):
         """Check if xref table is old style."""
+        assert 0, 'no Document__hasXrefOldStyle'
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document__hasXrefOldStyle(self)
 
     @property
     def _hasXrefStream(self):
         """Check if xref table is a stream."""
+        assert 0, 'no Document__hasXrefStream'
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document__hasXrefStream(self)
@@ -1791,14 +1808,15 @@ class Document:
 
     def _newPage(self, pno=-1, width=595, height=842):
         """Make a new PDF page."""
+        assert 0, 'deprecated'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         val = _fitz.Document__newPage(self, pno, width, height)
         self._reset_page_refs()
         return val
 
     def _remove_links_to(self, first, last):
+        assert 0, 'no Document__remove_links_to'
         return _fitz.Document__remove_links_to(self, first, last)
 
     def authenticate(self, password):
@@ -1806,6 +1824,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         val = _fitz.Document_authenticate(self, password)
+        val = mupdf.mfz_authenticate_password(self.this, password)
         if val:  # the doc is decrypted successfully and we init the outline
             self.isEncrypted = False
             self.initData()
@@ -1825,16 +1844,16 @@ class Document:
     @property
     def chapterCount(self):
         """Number of chapters."""
+        assert 0, 'no Document_chapterCount'
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_chapterCount(self)
 
     def chapterPageCount(self, chapter):
         """Page count of chapter."""
+        assert 0, 'no Document_chapterPageCount'
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_chapterPageCount(self, chapter)
 
     def close(self):
@@ -1856,6 +1875,7 @@ class Document:
 
     def convertToPDF(self, from_page=0, to_page=-1, rotate=0):
         """Convert document to a PDF, selecting page range and optional rotation. Output bytes object."""
+        assert 0, 'no Document_convertToPDF'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
 
@@ -1961,8 +1981,22 @@ class Document:
         """Get list of outline xref numbers."""
         if self.isClosed:
             raise ValueError("document closed")
-
-        return _fitz.Document_get_outline_xrefs(self)
+        #return _fitz.Document_get_outline_xrefs(self)
+            xrefs = []
+            pdf = mupdf.mpdf_specifics(self.this)
+            if not pdf.m_internal:
+                return xrefs
+            root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+            if not root.m_internal:
+                return xrefs
+            olroot = mupdf.mpdf_dict_get(root, PDF_NAME('Outlines'))
+            if not olroot.m_internal:
+                return xrefs
+            first = mupdf.mpdf_dict_get(olroot, PDF_NAME('First'))
+            if not first.m_internal:
+                return xrefs
+            xrefs = JM_outline_xrefs(first, xrefs)
+            return xrefs
 
     @property
     def is_closed(self):
@@ -1979,6 +2013,7 @@ class Document:
     @property
     def isReflowable(self):
         """Check if document is layoutable."""
+        assert 0, 'no Document_isReflowable'
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document_isReflowable(self)
@@ -2172,12 +2207,14 @@ class Document:
 
     def extractFont(self, xref=0, info_only=0):
         """Get a font by xref."""
+        assert 0, 'no Document_extractFont'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_extractFont(self, xref, info_only)
 
     def extractImage(self, xref):
         """Get image by xref. Returns a dictionary."""
+        assert 0, 'no Document_extractImage'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_extractImage(self, xref)
@@ -2266,9 +2303,9 @@ class Document:
     @property
     def isDirty(self):
         """True if PDF has unsaved changes."""
+        assert 0, 'no Document_isDirty'
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_isDirty(self)
 
     @property
@@ -2276,20 +2313,29 @@ class Document:
         """Document language."""
         if self.isClosed:
             raise ValueError("document closed")
-
-        return _fitz.Document_language(self)
+        #return _fitz.Document_language(self)
+        pdf = mupdf.mpdf_specifics(self.this)
+        if not pdf.m_internal:
+            return
+        lang = mupdf.mpdf_document_language(pdf)
+        if lang == mupdf.FZ_LANG_UNSET:
+            return
+        assert 0, 'not implemented yet'
+        #char buf[8];
+        #return PyUnicode_FromString(fz_string_from_text_language(buf, lang));
 
     def findBookmark(self, bm):
         """Find new location after layouting a document."""
+        assert 0, 'no Document_findBookmark'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_findBookmark(self, bm)
 
     def get_oc(self, xref):
         """Get xref of optional content object."""
+        assert 0, 'no Document_get_oc'
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_get_oc(self, xref)
 
     @property
@@ -2306,9 +2352,9 @@ class Document:
     @property
     def lastLocation(self):
         """Id (chapter, page) of last page."""
+        assert 0, 'no Document_lastLocation'
         if self.isClosed:
             raise ValueError("document closed")
-
         return _fitz.Document_lastLocation(self)
 
     def layout(self, rect=None, width=0, height=0, fontsize=11):
@@ -2317,17 +2363,36 @@ class Document:
             raise ValueError("document closed or encrypted")
 
         val = _fitz.Document_layout(self, rect, width, height, fontsize)
-
+        doc = self.this
+        if not mupdf.mfz_is_document_reflowable(doc):
+            return
+        w = width
+        h = height
+        r = JM_rect_from_py(rect)
+        if not mupdf.mfz_is_infinite_rect(r):
+            w = r.x1 - r.x0
+            h = r.y1 - r.y0
+        if w <= 0.0 or h <= 0.0:
+            THROWMSG("invalid page size")
+        mupdf.mfz_layout_document(doc, w, h, fontsize)
         self._reset_page_refs()
         self.initData()
-
-        return val
+        return
 
     def location_from_page_number(self, pno):
         """Convert pno to (chapter, page)."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_location_from_page_number(self, pno)
+        #return _fitz.Document_location_from_page_number(self, pno)
+        this_doc = self.this
+        loc = mupdf.mfz_make_location(-1, -1)
+        ipage_count = mupdf.mfz_count_pages(this_doc)
+        while pno < 0:
+            pno += page_count
+        if pno >= page_count:
+            THROWMSG("bad page number(s)")
+        loc = mupdf.mfz_location_from_page_number(this_doc, pno)
+        return loc.chapter, loc.page
 
     def makeBookmark(self, loc):
         """Make a page pointer before layouting document."""
