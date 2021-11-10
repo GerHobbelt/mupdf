@@ -28,6 +28,25 @@ point_like = "point_like"
 quad_like = "quad_like"
 rect_like = "rect_like"
 
+def args_match(args, *types):
+    '''
+    Returns true if <args> matches <types>.
+    '''
+    for i in range(len(types)):
+        type_ = types[i]
+        #jlib.log('{type_=}')
+        if i >= len(args):
+            if isinstance(type_, tuple) and None in type_:
+                # arg is missing but has default value.
+                continue
+            else:
+                #jlib.log('returning false: {type=} {i=}>{len(args)=}')
+                return False
+        if type_ is not None and not isinstance(args[i], type_):
+            #jlib.log('returning false: {type=} does not match {type(args[i])=}')
+            return False
+    #jlib.log('returning true: {args=} match {types=}')
+    return True
 
 class Annot:
 
@@ -400,8 +419,14 @@ class Annot:
     def get_oc(self):
         """Get annotation optional content reference."""
         CheckParent(self)
-
-        return _fitz.Annot_get_oc(self)
+        #return _fitz.Annot_get_oc(self)
+        oc = 0
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        obj = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('OC'))
+        if obj.m_internal:
+            oc = mupdf.mpdf_to_num(obj)
+        return oc
 
     def get_pixmap(self, matrix=None, colorspace=None, alpha=0):
         """annotation Pixmap"""
@@ -433,12 +458,45 @@ class Annot:
         """Retrieve sound stream."""
         CheckParent(self)
 
-        return _fitz.Annot_get_sound(self)
+        #return _fitz.Annot_get_sound(self)
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        type = mupdf.mpdf_annot_type(annot)
+        sound = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('Sound'))
+        if type != mupdf.PDF_ANNOT_SOUND or not sound.m_internal:
+            THROWMSG("bad annot type")
+        if pdf_dict_get(gctx, sound, PDF_NAME(F)).m_internal:
+            THROWMSG("unsupported sound stream")
+        res = dict()
+        obj = mupdf.mpdf_dict_get(sound, PDF_NAME('R'))
+        if obj.m_internal:
+            res['rate'] = mupdf.mpdf_to_real(obj)
+        obj = mupdf.mpdf_dict_get(sound, PDF_NAME('C'))
+        if obj.m_internal:
+            res['channels'] = mupdf.mpdf_to_int(obj)
+        obj = mupdf.mpdf_dict_get(sound, PDF_NAME('B'))
+        if obj.m_internal:
+            res['bps'] = mupdf.mpdf_to_int(obj)
+        obj = mupdf.mpdf_dict_get(sound, PDF_NAME('E'))
+        if obj.m_internal:
+            res['encoding'] = mupdf.mpdf_to_name(obj)
+        obj = mupdf.mpdf_dict_gets(gctx, sound, "CO");
+        if obj.m_internal:
+            res['compression'] = mupdf.mpdf_to_name(obj)
+        buf = mupdf.mpdf_load_stream(sound)
+        stream = JM_BinFromBuffer(buf)
+        res['stream'] = stream
+        return res
 
     def get_textpage(self, clip=None, flags=0):
         """Make annotation TextPage."""
         CheckParent(self)
-        return _fitz.Annot_get_textpage(self, clip, flags)
+        #return _fitz.Annot_get_textpage(self, clip, flags)
+        options = mupdf.StextOptions()
+        options.flags = flags
+        annot = self.this
+        stextpage = mupdf.mpdf_new_stext_page_from_annot(annot, options)
+        return TextPage(stextpage)
 
     @property
     def has_popup(self):
@@ -5940,33 +5998,14 @@ class Pixmap:
         """
         # From PyMuPDF/fitz/fitz.i:struct Pixmap {...}.
         #
-        def args_match(*types):
-            #if len(args) != len(types):
-            #    return False
-            #jlib.log('{args=} {types=}')
-            for i in range(len(types)):
-                type_ = types[i]
-                #jlib.log('{type_=}')
-                if i >= len(args):
-                    if isinstance(type_, tuple) and None in type_:
-                        # arg is missing but has default value.
-                        continue
-                    else:
-                        #jlib.log('returning false: {type=} {i=}>{len(args)=}')
-                        return False
-                if type_ is not None and not isinstance(args[i], type_):
-                    #jlib.log('returning false: {type=} does not match {type(args[i])=}')
-                    return False
-            #jlib.log('returning true: {args=} match {types=}')
-            return True
         if 0:
             pass
-        elif args_match(mupdf.Colorspace, mupdf.Rect, int):
+        elif args_match(args, mupdf.Colorspace, mupdf.Rect, int):
             # create empty pixmap with colorspace and IRect
             pm = mupdf.mfz_new_pixmap_with_bbox(args[0], JM_irect_from_py(args[1]), mupdf.Separations(0), args[2])
             self.this = pm
             return
-        elif args_match(mupdf.Colorspace, mupdf.Pixmap):
+        elif args_match(args, mupdf.Colorspace, mupdf.Pixmap):
             # copy pixmap, converting colorspace
             if not mupdf.mfz_pixmap_colorspace(args[1]):
                 THROWMSG("cannot copy pixmap without colorspace");
@@ -5979,7 +6018,7 @@ class Pixmap:
                     )
             self.this = pm
             return
-        elif args_match(mupdf.Pixmap, mupdf.Pixmap):
+        elif args_match(args, mupdf.Pixmap, mupdf.Pixmap):
             # add mask to a non-transparent pixmap
             color, mask = args
             w = color.w
@@ -6008,7 +6047,7 @@ class Pixmap:
                     ds += 1
             self.this = dst
             return
-        elif args_match(mupdf.Pixmap, (float, int), (float, int), None):
+        elif args_match(args, mupdf.Pixmap, (float, int), (float, int), None):
             # create pixmap as scaled copy of another one
             assert 0, f'Cannot handle args={args} because fz_scale_pixmap() and fz_scale_pixmap_cached() are not declared in MuPDF headers'
             spix, w, h, clip = args
@@ -6020,7 +6059,7 @@ class Pixmap:
                 pm = mupdf.mfz_scale_pixmap(gctx, src_pix, src_pix.x, src_pix.y, w, h, NULL);
             self.this = pm
             return
-        elif args_match(mupdf.Pixmap, (int, None)):
+        elif args_match(args, mupdf.Pixmap, (int, None)):
             # copy pixmap & add / drop the alpha channel
             jlib.log('{args=}')
             spix = args[0]
@@ -6065,7 +6104,7 @@ class Pixmap:
                     sptr += n + src_pix.alpha()
             self.this = pm
             return
-        elif args_match(mupdf.Colorspace, int, int, None, int):
+        elif args_match(args, mupdf.Colorspace, int, int, None, int):
             # create pixmap from samples data
             cs, w, h, samples, alpha = args
             n = mupdf.mfz_colorspace_n(cs)
@@ -6095,7 +6134,7 @@ class Pixmap:
             self.this = pm
             return
 
-        elif args_match(None):
+        elif args_match(args, None):
             # create pixmap from filename, file object, pathlib.Path or memory
             imagedata, = args
             #fz_buffer *res = NULL;
@@ -6128,7 +6167,7 @@ class Pixmap:
             self.this = pm
             return
 
-        elif args_match(mupdf.Document, int):
+        elif args_match(args, mupdf.Document, int):
             # Create pixmap from PDF image identified by XREF number
             doc, xref = args
             #fz_image *img = NULL;
@@ -8039,17 +8078,19 @@ class Shape(object):
 
 
 class TextPage:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TextPage, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TextPage, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, TextPage, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, TextPage, name)
 
-    def __init__(self, mediabox):
-        this = _fitz.new_TextPage(mediabox)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+    def __init__(self, *args):
+        if args_match(args, mupdf.Rect):
+            #self.this = _fitz.new_TextPage(args[0])
+            self.this = mupdf.StextPage(args[0])
+        elif args_match(args, mupdf.StextPage):
+            self.this = args[0]
+        else:
+            raise Exception(f'Unrecognised args: {args}')
         self.thisown = True
 
 
