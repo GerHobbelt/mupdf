@@ -452,7 +452,7 @@ class Annot:
         except Exception as e:
             jlib.log('{e=}')
             return
-        jlib.log('{pix=}')
+        #jlib.log('{pix=}')
         return Pixmap(pix)
 
     def get_sound(self):
@@ -630,23 +630,23 @@ class Annot:
 
         #val = _fitz.Annot_popup_rect(self)
         rect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
-        jlib.log('{rect=}')
+        #jlib.log('{rect=}')
         annot = self.this
         obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
-        jlib.log('{obj.m_internal=}')
+        #jlib.log('{obj.m_internal=}')
         if obj.m_internal:
             if 0:
                 rect = mupdf.mpdf_dict_get_rect(obj, PDF_NAME('Rect'))
             else:
                 # fixme, this fixes assert in PyMuPDF/tests/test_annots.py:test_redact().
                 rect = mupdf.mpdf_annot_popup(annot)
-            jlib.log('{rect=}')
+            #jlib.log('{rect=}')
         val = JM_py_from_rect(rect)
-        jlib.log('{val=}')
+        #jlib.log('{val=}')
         val = Rect(val) * self.parent.transformationMatrix
-        jlib.log('{val=}')
+        #jlib.log('{val=}')
         val *= self.parent.derotationMatrix
-        jlib.log('{val=}')
+        #jlib.log('{val=}')
 
         return val
 
@@ -857,13 +857,13 @@ class Annot:
         Create annotation 'Popup' or update rectangle.
         '''
         CheckParent(self)
-        jlib.log('{rect=}')
+        #jlib.log('{rect=}')
         annot = self.this
         pdfpage = annot.annot_page()
         rot = JM_rotate_page_matrix(pdfpage)
-        jlib.log('{rot=}')
+        #jlib.log('{rot=}')
         r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
-        jlib.log('{r=}')
+        #jlib.log('{r=}')
         mupdf.mpdf_set_annot_popup(annot, r)
 
     def set_rect(self, rect):
@@ -1485,7 +1485,7 @@ class Document:
                 if filename:
                     if not filetype:
                         doc = mupdf.Document(filename)
-                        jlib.log('mupdf.Document(filename) => {doc=}')
+                        #jlib.log('mupdf.Document(filename) => {doc=}')
                     else:
                         assert 0, 'recognize_document() not yet supported'
                 else:
@@ -2396,9 +2396,9 @@ class Document:
 
     def makeBookmark(self, loc):
         """Make a page pointer before layouting document."""
+        assert 0, 'no Document_makeBookmark'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_makeBookmark(self, loc)
 
     def page_number_from_location(self, page_id):
@@ -2410,13 +2410,30 @@ class Document:
             page_id = (0, page_id)
         if page_id not in self:
             raise ValueError("page id not in document")
-        return _fitz.Document_page_number_from_location(self, page_id)
+        #return _fitz.Document_page_number_from_location(self, page_id)
+        this_doc = self.this
+        page_n = -1
+        loc = mupdf.mfz_make_location(page_id[0], page_id[1])
+        page_n = mupdf.mfz_page_number_from_location(this_doc, loc)
+        return page_n
 
     def page_xref(self, pno):
         """Get xref of page number."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_page_xref(self, pno)
+        #return _fitz.Document_page_xref(self, pno)
+        this_doc = self.this
+        page_count = mupdf.mfz_count_pages(this_doc)
+        n = pno;
+        while n < 0:
+            n += page_count
+        pdf = mupdf.mpdf_specifics(this_doc)
+        xref = 0
+        if n >= page_count:
+            THROWMSG("bad page number(s)")
+        ASSERT_PDF(pdf)
+        xref = mupdf.mpdf_to_num(mupdf.mpdf_lookup_page_obj(pdf, n))
+        return xref
 
     @property
     def pageCount(self):
@@ -2428,6 +2445,7 @@ class Document:
 
     def pageCropBox(self, pno):
         """Get CropBox of page number (without loading page)."""
+        assert 0, 'no Document_pageCropBox'
         if self.isClosed:
             raise ValueError("document closed")
         val = _fitz.Document_pageCropBox(self, pno)
@@ -2438,17 +2456,45 @@ class Document:
         """Get xref of PDF catalog."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_pdf_catalog(self)
+        #return _fitz.Document_pdf_catalog(self)
+        doc = self.this
+        pdf = mupdf.mpdf_specifics(doc)
+        xref = 0
+        if not pdf.m_internal:
+            return xref
+        root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+        xref = mupdf.mpdf_to_num(root)
+        return xref
 
     @property
     def permissions(self):
         """Document permissions."""
         if self.isEncrypted:
             return 0
-        return _fitz.Document_permissions(self)
+        #return _fitz.Document_permissions(self)
+        doc =self.this
+        pdf = mupdf.mpdf_document_from_fz_document(doc)
+
+        # for PDF return result of standard function
+        if pdf.m_internal:
+            return mupdf.mpdf_document_permissions(pdf)
+
+        # otherwise simulate the PDF return value
+        perm = 0xFFFFFFFC   # all permissions granted
+        # now switch off where needed
+        if not mupdf.mfz_has_permission(doc, mupdf.FZ_PERMISSION_PRINT):
+            perm = perm ^ mupdf.PDF_PERM_PRINT
+        if not mupdf.mfz_has_permission(doc, mupdf.FZ_PERMISSION_EDIT):
+            perm = perm ^ mupdf.PDF_PERM_MODIFY;
+        if not mupdf.mfz_has_permission(doc, mupdf.FZ_PERMISSION_COPY):
+            perm = perm ^ mupdf.PDF_PERM_COPY
+        if not mupdf.mfz_has_permission(doc, mupdf.FZ_PERMISSION_ANNOTATE):
+            perm = perm ^ mupdf.PDF_PERM_ANNOTATE;
+        return perm
 
     def previousLocation(self, page_id):
         """Get (chapter, page) of previous page."""
+        assert 0, 'no Document_previousLocation'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         if type(page_id) is int:
@@ -2469,6 +2515,7 @@ class Document:
             (page_id, x, y) where x, y are point coordinates on the page.
             page_id is either page number (if chapters=0), or (chapter, pno).
         """
+        assert 0, 'no Document_resolveLink'
         return _fitz.Document_resolveLink(self, uri, chapters)
 
     def save(
@@ -2535,7 +2582,18 @@ class Document:
         if len(pyliste) == 0 or min(pyliste) not in range(len(self)) or max(pyliste) not in range(len(self)):
             raise ValueError("bad page number(s)")
 
-        val = _fitz.Document_select(self, pyliste)
+        #val = _fitz.Document_select(self, pyliste)
+        # preparatory stuff:
+        # (1) get underlying pdf document,
+        # (2) transform Python list into integer array
+
+        pdf = mupdf.mpdf_specifics(self.this)
+        # call retainpages (code copy of fz_clean_file.c)
+        retainpages(pdf, pyliste);
+        if pdf.m_internal.rev_page_map:
+            mupdf.mpdf_drop_page_tree(pdf)
+
+        Py_RETURN_NONE;
         self._reset_page_refs()
         return val
 
@@ -3154,52 +3212,53 @@ class Document:
 
     def page_annot_xrefs(self, n):
         page_count = self.this.count_pages()
-        jlib.log('*** {page_count=}')
+        #jlib.log('*** {page_count=}')
         while n < 0:
             n += page_count
-        jlib.log('self.this is: {self.this}')
-        jlib.log('{self.this.m_internal=}')
+        #jlib.log('self.this is: {self.this}')
+        #jlib.log('{self.this.m_internal=}')
         if 0:
-            jlib.log('dir(self.this):')
+            #jlib.log('dir(self.this):')
             for i in dir(self.this):
-                jlib.log('    {i}')
-        jlib.log('self.this.specifics is: {self.this.specifics}')
+                pass
+                #jlib.log('    {i}')
+        #jlib.log('self.this.specifics is: {self.this.specifics}')
         if isinstance(self.this, mupdf.PdfDocument):
-            jlib.log('self.this is a mupdf.PdfDocument')
+            #jlib.log('self.this is a mupdf.PdfDocument')
             pdf_document = self.this
         else:
-            jlib.log('self.this is not a mupdf.PdfDocument: {self.this}')
-            jlib.log('{self.this.m_internal=}')
+            #jlib.log('self.this is not a mupdf.PdfDocument: {self.this}')
+            #jlib.log('{self.this.m_internal=}')
             pdf_document = self.this.specifics()
-            jlib.log('self.this.specifics() => {pdf_document=}')
+            #jlib.log('self.this.specifics() => {pdf_document=}')
         page_obj = pdf_document.lookup_page_obj(n)
         #jlib.log('page_obj: {dir_str(page_obj)}')
         #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
         annots = JM_get_annot_xref_list(page_obj)
-        jlib.log('{self.this.count_pages()=} {self.pageCount=}')
+        #jlib.log('{self.this.count_pages()=} {self.pageCount=}')
         return annots
 
     def has_links(self):
         """Check whether there are links on any page."""
-        jlib.log('has_links()')
+        #jlib.log('has_links()')
         if self.isClosed:
             raise ValueError("document closed")
         if not self.isPDF:
             raise ValueError("not a PDF")
-        jlib.log('{self.pageCount=}')
-        jlib.log('calling self.pageCount')
+        #jlib.log('{self.pageCount=}')
+        #jlib.log('calling self.pageCount')
         for i in range(self.pageCount):
-            jlib.log('{i=}')
+            #jlib.log('{i=}')
             for item in self.page_annot_xrefs(i):
                 if item[1] == mupdf.PDF_ANNOT_LINK:
                     jlib.log('Returning true')
                     return True
-        jlib.log('Returning false')
+        #jlib.log('Returning false')
         return False
 
     def has_annots(self):
         """Check whether there are annotations on any page."""
-        jlib.log('has_annots()')
+        #jlib.log('has_annots()')
         if self.isClosed:
             raise ValueError("document closed")
         if not self.isPDF:
@@ -3213,27 +3272,27 @@ class Document:
     @property
     def is_form_pdf(self):
         """Either False or PDF field count."""
-        jlib.log('{self.this.count_pages()=}')
+        #jlib.log('{self.this.count_pages()=}')
         pdf = self.this.specifics()
         if not pdf.m_internal:
             return False
-        jlib.log('{self.this.count_pages()=}')
+        #jlib.log('{self.this.count_pages()=}')
         count = -1;
         try:
-            jlib.log('{self.this.count_pages()=}')
+            #jlib.log('{self.this.count_pages()=}')
             fields = pdf_dict_getl(self, pdf.trailer(),
                     mupdf.PDF_ENUM_NAME_Root,
                     mupdf.PDF_ENUM_NAME_AcroForm,
                     mupdf.PDF_ENUM_NAME_Fields,
                     )
-            jlib.log('{fields=} {fields.is_array()=} {self.this.count_pages()=}')
+            #jlib.log('{fields=} {fields.is_array()=} {self.this.count_pages()=}')
             if fields.is_array():
                 count = fields.array_len()
-            jlib.log('{self.this.count_pages()=}')
+            #jlib.log('{self.this.count_pages()=}')
         except Exception:
             return False
-        jlib.log('{count=}')
-        jlib.log('{self.this.count_pages()=}')
+        #jlib.log('{count=}')
+        #jlib.log('{self.this.count_pages()=}')
         if count >= 0:
             return count
         return False
@@ -3241,27 +3300,27 @@ class Document:
     @property
     def is_repaired(self):
         """Check whether PDF was repaired."""
-        jlib.log('{self.this.count_pages()=}')
+        #jlib.log('{self.this.count_pages()=}')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
         r = pdf.was_repaired()
-        jlib.log('{r=}')
+        #jlib.log('{r=}')
         if r:
             jlib.log('returning true')
             return True
-        jlib.log('returning false')
+        #jlib.log('returning false')
         return False
 
     @property
     def is_dirty(self):
-        jlib.log('{self.this.count_pages()=}')
+        #jlib.log('{self.this.count_pages()=}')
         pdf = self.this.specifics()
-        jlib.log('{pdf.m_internal=}')
+        #jlib.log('{pdf.m_internal=}')
         if not pdf.m_internal:
             return False
         r = pdf.has_unsaved_changes()
-        jlib.log('{r=}')
+        #jlib.log('{r=}')
         return True if r else False
 
 open = Document
@@ -4593,7 +4652,7 @@ class Page:
         finally:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
-        jlib.log('{type(annot)=} {annot=}')
+        #jlib.log('{type(annot)=} {annot=}')
         annot_postprocess(self, annot)
         return annot
 
@@ -6371,7 +6430,7 @@ class Pixmap:
             return
         elif args_match(args, mupdf.Pixmap, (int, None)):
             # copy pixmap & add / drop the alpha channel
-            jlib.log('{args=}')
+            #jlib.log('{args=}')
             spix = args[0]
             alpha = args[1] if len(args) == 2 else 1
             src_pix = spix
@@ -6385,7 +6444,7 @@ class Pixmap:
             w = mupdf.mfz_pixmap_width(src_pix)
             h = mupdf.mfz_pixmap_height(src_pix)
             pm = mupdf.mfz_new_pixmap(cs, w, h, seps, alpha)
-            jlib.log('{pm=} {src_pix=}')
+            #jlib.log('{pm=} {src_pix=}')
             pm.m_internal.x = src_pix.m_internal.x
             pm.m_internal.y = src_pix.m_internal.y
             pm.m_internal.xres = src_pix.m_internal.xres
@@ -7168,7 +7227,7 @@ class Quad(object):
 class Rect(object):
     """Rect() - all zeros\nRect(x0, y0, x1, y1)\nRect(top-left, x1, y1)\nRect(x0, y0, bottom-right)\nRect(top-left, bottom-right)\nRect(Rect or IRect) - new copy\nRect(sequence) - from 'sequence'"""
     def __init__(self, *args):
-        jlib.log('{args=}')
+        #jlib.log('{args=}')
         if not args:
             self.x0 = self.y0 = self.x1 = self.y1 = 0.0
             return None
@@ -7180,7 +7239,7 @@ class Rect(object):
             return None
         if len(args) == 1:
             l = args[0]
-            jlib.log('{l=} {type(l)=}')
+            #jlib.log('{l=} {type(l)=}')
             if isinstance(l, (mupdf.Rect, mupdf.Irect)):
                 self.x0 = l.x0
                 self.y0 = l.y0
@@ -10487,7 +10546,7 @@ def JM_update_stream(doc, obj, buffer_, compress):
     update a stream object
     compress stream when beneficial
     '''
-    jlib.log('{dir(buffer_)}')
+    #jlib.log('{dir(buffer_)}')
     len_, _ = buffer_.buffer_storage_raw()
     nlen = len_
 
@@ -10931,14 +10990,14 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
 
 
 def pdf_dict_getl(doc, obj, *keys):
-    jlib.log('{obj=} {len(keys)=}: {keys}')
-    jlib.log('{doc.this.count_pages()=}')
+    #jlib.log('{obj=} {len(keys)=}: {keys}')
+    #jlib.log('{doc.this.count_pages()=}')
     for i in range(len(keys)):
         if not obj:
             break
         obj = obj.dict_get(keys[i])
-        jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
-    jlib.log('{obj=} {doc.this.count_pages()=}')
+        #jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
+    #jlib.log('{obj=} {doc.this.count_pages()=}')
     return obj
 
 
@@ -11769,6 +11828,17 @@ def annot_postprocess(page: "Page", annot: "Annot") -> None:
     annot.thisown = True
 
 
+def dest_is_valid_page(obj, page_object_nums, pagecount):
+    num = mupdf.mpdf_to_num(obj)
+
+    if num == 0:
+        return 0
+    for i in range(pagecount):
+        if mupdf.mpage_object_nums[i] == num:
+            return 1
+    return 0
+
+
 def getPDFnow() -> str:
     '''
     "Now" timestamp in PDF Format
@@ -12012,6 +12082,186 @@ def repair_mono_font(page: "Page", font: "Font") -> None:
     for xref in xrefs:
         if not TOOLS.set_font_width(doc, xref, width):
             print("Cannot set width for '%s' in xref %i" % (font.name, xref))
+
+def retainpage(doc, parent, kids, page):
+    '''
+    Recreate page tree to only retain specified pages.
+    '''
+    pageref = mupdf.mpdf_lookup_page_obj(doc, page)
+    mupdf.mpdf_flatten_inheritable_page_items(pageref)
+    mupdf.mpdf_dict_put(pageref, PDF_NAME('Parent'), parent)
+    # Store page object in new kids array
+    mupdf.mpdf_array_push(kids, pageref)
+
+
+def retainpages(doc, liste):
+    '''
+    This is called by PyMuPDF:
+    liste = page numbers to retain
+    '''
+    #pdf_obj *oldroot, *root, *pages, *kids, *countobj, *olddests;
+    argc = len(liste)
+    #pdf_obj *names_list = NULL;
+    #pdf_obj *outlines;
+    #pdf_obj *ocproperties;
+    pagecount = mupdf.mpdf_count_pages(doc)
+
+    # Keep only pages/type and (reduced) dest entries to avoid
+    # references to dropped pages
+    oldroot = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(doc), PDF_NAME('Root'))
+    pages = mupdf.mpdf_dict_get(oldroot, PDF_NAME('Pages'))
+    olddests = mupdf.mpdf_load_name_tree(doc, PDF_NAME('Dests'))
+    outlines = mupdf.mpdf_dict_get(oldroot, PDF_NAME('Outlines'))
+    ocproperties = mupdf.mpdf_dict_get(oldroot, PDF_NAME('OCProperties'))
+
+    root = mupdf.mpdf_new_dict(doc, 3)
+    mupdf.mpdf_dict_put(root, PDF_NAME('Type'), mupdf.mpdf_dict_get(oldroot, PDF_NAME('Type')))
+    mupdf.mpdf_dict_put(root, PDF_NAME('Pages'), mupdf.mpdf_dict_get(oldroot, PDF_NAME('Pages')))
+    if outlines.m_internal:
+        mupdf.mpdf_dict_put(root, PDF_NAME('Outlines'), outlines)
+    if ocproperties.m_internal:
+        mupdf.mpdf_dict_put(root, PDF_NAME('OCProperties'), ocproperties)
+
+    mupdf.mpdf_update_object(doc, mupdf.mpdf_to_num(oldroot), root)
+
+    # Create a new kids array with only the pages we want to keep
+    kids = mupdf.mpdf_new_array(doc, 1)
+
+    # Retain pages specified
+    for page in range(argc):
+        i = liste[page]
+        if i < 0 or i >= pagecount:
+            THROWMSG("invalid page number(s)")
+        retainpage(doc, pages, kids, i)
+
+    # Update page count and kids array
+    countobj = mupdf.mpdf_new_int(mupdf.mpdf_array_len(kids))
+    mupdf.mpdf_dict_put_drop(pages, PDF_NAME('Count'), countobj)
+    mupdf.mpdf_dict_put_drop(pages, PDF_NAME('Kids'), kids)
+
+    pagecount = mupdf.mpdf_count_pages(doc)
+    #page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums));
+    page_object_nums = []
+    for i in range(pagecount):
+        pageref = mupdf.mpdf_lookup_page_obj(doc, i)
+        page_object_nums.append(mupdf.mpdf_to_num(pageref))
+
+    # If we had an old Dests tree (now reformed as an olddests dictionary),
+    # keep any entries in there that point to valid pages.
+    # This may mean we keep more than we need, but it is safe at least.
+    if olddests:
+        names = mupdf.mpdf_new_dict(doc, 1)
+        dests = mupdf.mpdf_new_dict(doc, 1)
+        len = mupdf.mpdf_dict_len(olddests)
+
+        names_list = mupdf.mpdf_new_array(doc, 32)
+
+        for i in range(len):
+            key = mupdf.mpdf_dict_get_key(olddests, i)
+            val = mupdf.mpdf_dict_get_val(olddests, i)
+            dest = mupdf.mpdf_dict_get(val, PDF_NAME('D'))
+
+            dest = mupdf.mpdf_array_get(dest if dest.m_internal else val, 0)
+            # fixme: need dest_is_valid_page.
+            if dest_is_valid_page(dest, page_object_nums, pagecount):
+                key_str = mupdf.mpdf_new_string(mupdf.mpdf_to_name(key), len(mupdf.mpdf_to_name(key)))
+                mupdf.mpdf_array_push(names_list, key_str)
+                mupdf.mpdf_array_push(names_list, val)
+
+        mupdf.mpdf_dict_put(dests, PDF_NAME('Names'), names_list)
+        mupdf.mpdf_dict_put(names, PDF_NAME('Dests'), dests)
+        mupdf.mpdf_dict_put(root, PDF_NAME('Names'), names)
+
+        mupdf.mpdf_drop_obj(names)
+        mupdf.mpdf_drop_obj(dests)
+        mupdf.mpdf_drop_obj(olddests)
+
+    # Edit each pages /Annot list to remove any links pointing to nowhere.
+    for i in range(pagecount):
+        pageref = mupdf.mpdf_lookup_page_obj(doc, i)
+        annots = mupdf.mpdf_dict_get(pageref, PDF_NAME('Annots'))
+        len = mupdf.mpdf_array_len(annots)
+        j = 0
+        while 1:
+            if j >= len:
+                break
+            o = mupdf.mpdf_array_get(annots, j)
+
+            if not mupdf.mpdf_name_eq(mupdf.mpdf_dict_get(o, PDF_NAME('Subtype')), PDF_NAME('Link')):
+                continue
+
+            if not dest_is_valid(o, pagecount, page_object_nums, names_list):
+                # Remove this annotation
+                mupdf.mpdf_array_delete(annots, j)
+                len -= 1
+                j -= 1
+            j += 1
+
+    if (strip_outlines(ctx, doc, outlines, pagecount, page_object_nums, names_list) == 0):
+        mupdf.mpdf_dict_del(root, PDF_NAME('Outlines'))
+
+
+def strip_outline(doc, outlines, page_count, page_object_nums, names_list):
+    '''
+    Returns (count, first, prev).
+    '''
+    current = outlines
+    while current.m_internal:
+        # Strip any children to start with. This takes care of
+        # First / Last / Count for us.
+        nc = strip_outlines(doc, current, page_count, page_object_nums, names_list)
+
+        if not dest_is_valid(current, page_count, page_object_nums, names_list):
+            if nc == 0:
+                # Outline with invalid dest and no children. Drop it by
+                # pulling the next one in here.
+                next = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
+                if not next.m_internal:
+                    # There is no next one to pull in
+                    if prev.m_internal:
+                        mupdf.mpdf_dict_del(prev, PDF_NAME('Next'))
+                elif prev.m_internal:
+                    mupdf.mpdf_dict_put(prev, PDF_NAME('Next'), next)
+                    mupdf.mpdf_dict_put(next, PDF_NAME('Prev'), prev)
+                else:
+                    mupdf.mpdf_dict_del(next, PDF_NAME('Prev'))
+                current = next
+            else:
+                # Outline with invalid dest, but children. Just drop the dest.
+                mupdf.mpdf_dict_del(current, PDF_NAME('Dest'));
+                mupdf.mpdf_dict_del(current, PDF_NAME('A'));
+                current = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
+        else:
+            # Keep this one
+            if not first.m_internal:
+                first = current
+            prev = current
+            current = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
+            count += 1
+
+    return count, first, prev
+
+
+def strip_outlines(pdoc, outlines, page_count, page_object_nums, names_list):
+    if not outlines.m_internal:
+        return 0
+
+    first = mupdf.mpdf_dict_get(outlines, PDF_NAME('First'))
+    if not first.m_internal:
+        nc = 0
+    else:
+        nc, first, last = strip_outline(doc, first, page_count, page_object_nums, names_list)
+
+    if nc == 0:
+        mupdf.mpdf_dict_del(outlines, PDF_NAME('First'))
+        mupdf.mpdf_dict_del(outlines, PDF_NAME('Last'))
+        mupdf.mpdf_dict_del(outlines, PDF_NAME('Count'))
+    else:
+        old_count = mupdf.mpdf_to_int(mupdf.mpdf_dict_get(outlines, PDF_NAME('Count')))
+        mupdf.mpdf_dict_put(outlines, PDF_NAME('First'), first);
+        mupdf.mpdf_dict_put(outlines, PDF_NAME('Last'), last);
+        mupdf.mpdf_dict_put(outlines, PDF_NAME('Count'), nc if mupdf.mpdf_new_int(old_count) > 0 else -nc)
+    return nc
 
 
 # Adobe Glyph List functions
