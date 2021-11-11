@@ -747,7 +747,7 @@ class Annot:
         CheckParent(self)
         if type(colors) is not dict:
             colors = {"fill": fill, "stroke": stroke}
-        # no Annot_set_colors() in PyMuPDF?
+        assert 0, 'no Annot_set_colors'
         return _fitz.Annot_set_colors(self, colors, fill, stroke)
 
     def set_flags(self, flags):
@@ -824,7 +824,7 @@ class Annot:
     def set_oc(self, oc=0):
         """Set / remove annotation OC xref."""
         CheckParent(self)
-        return _fitz.Annot_set_oc(self, oc)
+        #return _fitz.Annot_set_oc(self, oc)
         annot = self.this
         annot_obj = mupdf.mpdf_annot_obj(annot)
         if not oc:
@@ -835,7 +835,7 @@ class Annot:
     def set_opacity(self, opacity):
         """Set opacity."""
         CheckParent(self)
-        return _fitz.Annot_set_opacity(self, opacity)
+        #return _fitz.Annot_set_opacity(self, opacity)
         annot = self.this
         if not INRANGE(opacity, 0.0, 1.0):
             mupdf.mpdf_set_annot_opacity(annot, 1)
@@ -1587,7 +1587,7 @@ class Document:
         return _fitz.Document__embeddedFileDel(self, idx)
 
     def _embeddedFileGet(self, idx):
-        return _fitz.Document__embeddedFileGet(self, idx)
+        #return _fitz.Document__embeddedFileGet(self, idx)
         doc = self.this
         pdf = mupdf.mpdf_document_from_fz_document(doc)
         names = mupdf.mpdf_dict_getl(
@@ -1823,7 +1823,7 @@ class Document:
         """Decrypt document."""
         if self.isClosed:
             raise ValueError("document closed")
-        val = _fitz.Document_authenticate(self, password)
+        #val = _fitz.Document_authenticate(self, password)
         val = mupdf.mfz_authenticate_password(self.this, password)
         if val:  # the doc is decrypted successfully and we init the outline
             self.isEncrypted = False
@@ -1878,7 +1878,6 @@ class Document:
         assert 0, 'no Document_convertToPDF'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-
         return _fitz.Document_convertToPDF(self, from_page, to_page, rotate)
 
     def get_char_widths(doc, xref: int, limit: int = 256, idx: int = 0, fontdict: OptDict = None
@@ -2210,14 +2209,14 @@ class Document:
         assert 0, 'no Document_extractFont'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-        return _fitz.Document_extractFont(self, xref, info_only)
+        #return _fitz.Document_extractFont(self, xref, info_only)
 
     def extractImage(self, xref):
         """Get image by xref. Returns a dictionary."""
         assert 0, 'no Document_extractImage'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-        return _fitz.Document_extractImage(self, xref)
+        #return _fitz.Document_extractImage(self, xref)
 
     @property
     def needsPass(self):
@@ -2236,9 +2235,10 @@ class Document:
             raise ValueError("page id not in document")
         if tuple(page_id)  == self.lastLocation:
             return ()
-        return _fitz.Document_nextLocation(self, page_id)
+        #return _fitz.Document_nextLocation(self, page_id)
+        assert 0, 'no Document_nextLocation'
 
-    def insertPDF(
+    def insert_pdf(
             self,
             docsrc,
             from_page=-1,
@@ -2267,13 +2267,16 @@ class Document:
 
         Copy sequence reversed if from_page > to_page."""
 
-        if self.isClosed or self.isEncrypted:
+        # Insert pages from a source PDF into this PDF.
+        # For reconstructing the links (_do_links method), we must save the
+        # insertion point (start_at) if it was specified as -1.
+        if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
         if self._graft_id == docsrc._graft_id:
             raise ValueError("source and target cannot be same object")
         sa = start_at
         if sa < 0:
-            sa = self.pageCount
+            sa = self.page_count
         if len(docsrc) > show_progress > 0:
             inname = os.path.basename(docsrc.name)
             if not inname:
@@ -2289,16 +2292,41 @@ class Document:
         if _gmap is None:
             _gmap = Graftmap(self)
             self.Graftmaps[isrt] = _gmap
-        val = _fitz.Document_insertPDF(self, docsrc, from_page, to_page, start_at, rotate, links, annots, show_progress, final, _gmap)
+
+        doc = self.this
+        pdfout = mupdf.mpdf_specifics(doc)
+        pdfsrc = mupdf.mpdf_specifics(docsrc.this)
+        outCount = mupdf.mfz_count_pages(doc)
+        srcCount = mupdf.mfz_count_pages(docsrc.this)
+
+        # local copies of page numbers
+        fp = from_page
+        tp = to_page
+        sa = start_at
+
+        # normalize page numbers
+        fp = max(fp, 0) # -1 = first page
+        fp = min(fp, srcCount - 1)  # but do not exceed last page
+
+        if tp < 0:
+            tp = srcCount - 1   # -1 = last page
+        tp = min(tp, srcCount - 1)  # but do not exceed last page
+
+        if sa < 0:
+            sa = outCount   # -1 = behind last page
+        sa = min(sa, outCount)  # but that is also the limit
+
+        if not pdfout.m_internal or not pdfsrc.m_internal:
+            THROWMSG("source or target not a PDF")
+        ENSURE_OPERATION(pdfout)
+        JM_merge_range(gctx, pdfout, pdfsrc, fp, tp, sa, rotate, links, annots, show_progress, _gmap)
 
         self._reset_page_refs()
         if links:
-            self._do_links(docsrc, from_page = from_page, to_page = to_page,
-                        start_at = sa)
+            self._do_links(docsrc, from_page = from_page, to_page = to_page, start_at = sa)
         if final == 1:
             self.Graftmaps[isrt] = None
 
-        return val
 
     @property
     def isDirty(self):
@@ -10303,6 +10331,46 @@ def JM_mediabox(page_obj):
         page_mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
 
     return page_mediabox
+
+def JM_merge_range(
+        doc_des,
+        doc_src,
+        spage,
+        epage,
+        apage,
+        rotate,
+        links,
+        nnots,
+        show_progress,
+        graft_map,
+        ):
+    '''
+    Copy a range of pages (spage, epage) from a source PDF to a specified
+    location (apage) of the target PDF.
+    If spage > epage, the sequence of source pages is reversed.
+    '''
+    afterpage = apage;
+    counter = 0;  # copied pages counter
+    total = mupdf.mfz_absi(epage - spage) + 1   # total pages to copy
+
+    if spage < epage:
+        page = spage
+        while page <= epage:
+            page_merge(doc_des, doc_src, page, afterpage, rotate, links, annots, graft_map)
+            counter += 1
+            if show_progress > 0 and counter % show_progress == 0:
+                sys.stdout.write("Inserted %i of %i pages.\n", counter, total)
+            page += 1
+            afterpage += 1
+    else:
+        page = spage
+        while page >= epage:
+            page_merge(doc_des, doc_src, page, afterpage, rotate, links, annots, graft_map)
+            counter += 1
+            if show_progress > 0 and counter % show_progress == 0:
+                sys.stdout.write("Inserted %i of %i pages.\n", counter, total)
+            page -= 1
+            afterpage += 1
 
 
 def JM_norm_rotation(rotate):
