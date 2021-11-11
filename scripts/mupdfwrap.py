@@ -8874,7 +8874,7 @@ def python_settings(build_dirs, startdir=None):
     # test .py programme can load mupdf.py and _mupdf.so.
     env_extra = {}
     command_prefix = ''
-    log('{build_dirs=}')
+    #log('{build_dirs=}')
     if g_windows:
         # On Windows, it seems that 'py' runs the default
         # python. Also, Windows appears to be able to find
