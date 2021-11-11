@@ -1406,8 +1406,8 @@ class DisplayList:
         return val
 
     def getTextPage(self, flags=3):
+        #val = _fitz.DisplayList_getTextPage(self, flags)
         assert 0, '_fitz.DisplayList_getTextPage not found'
-        val = _fitz.DisplayList_getTextPage(self, flags)
         val.thisown = True
 
         return val
@@ -2327,14 +2327,13 @@ class Document:
         if final == 1:
             self.Graftmaps[isrt] = None
 
-
     @property
     def isDirty(self):
         """True if PDF has unsaved changes."""
-        assert 0, 'no Document_isDirty'
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_isDirty(self)
+        #return _fitz.Document_isDirty(self)
+        assert 0, 'no Document_isDirty'
 
     @property
     def language(self):
@@ -4153,45 +4152,68 @@ class Outline:
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
 
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
-    @property
+    def __init__(self, ol):
+        self.this = ol
 
+    @property
     def uri(self):
-        return _fitz.Outline_uri(self)
-    @property
+        #return _fitz.Outline_uri(self)
+        ol = self.this
+        return JM_UnicodeFromStr(ol.uri())
 
+    @property
     def next(self):
-        return _fitz.Outline_next(self)
-    @property
+        #return _fitz.Outline_next(self)
+        ol = self.this
+        next_ol = ol.next();
+        if not next_ol.m_internal:
+            return
+        next_ol = mupdf.mfz_keep_outline(next_ol)
+        return Outline(next_ol)
 
+    @property
     def down(self):
-        return _fitz.Outline_down(self)
-    @property
+        #return _fitz.Outline_down(self)
+        ol = self.this
+        down_ol = ol.down()
+        if not down_ol.m_internal:
+            return
+        down_ol = mupdf.mfz_keep_outline(down_ol)
+        return Outline (down_ol)
 
-    def isExternal(self):
-        return _fitz.Outline_isExternal(self)
     @property
+    def is_external(self):
+        #return _fitz.Outline_isExternal(self)
+        ol = self.this
+        if not ol.m_internal:
+            return False
+        uri = ol.uri()
+        return mupdf.mfz_is_external_link(uri)
 
+    @property
     def page(self):
-        return _fitz.Outline_page(self)
-    @property
+        #return _fitz.Outline_page(self)
+        return self.this.page().page;
 
+    @property
     def x(self):
-        return _fitz.Outline_x(self)
-    @property
+        #return _fitz.Outline_x(self)
+        return self.this.x();
 
+    @property
     def y(self):
-        return _fitz.Outline_y(self)
-    @property
+        #return _fitz.Outline_x(self)
+        return self.this.y();
 
+    @property
     def title(self):
-        return _fitz.Outline_title(self)
-    @property
+        #return _fitz.Outline_title(self)
+        return self.this.title()
 
+    @property
     def is_open(self):
-        return _fitz.Outline_is_open(self)
-    isOpen = is_open
+        #return _fitz.Outline_is_open(self)
+        return self.this.is_open()
 
     @property
     def dest(self):
@@ -4200,10 +4222,6 @@ class Outline:
 
 
 class Page:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Page, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Page, name)
 
     def __init__(self, page):
         assert isinstance(page, (mupdf.Page, mupdf.PdfPage)), f'page is: {page}'
@@ -4809,49 +4827,79 @@ class Page:
 
 
 
-    def getImageBbox(self, name):
-
+    def get_image_bbox(self, name, transform=0):
         """Get rectangle occupied by image 'name'.
 
         'name' is either an item of the image full list, or the referencing
-        name string - elem[7] of the resp. item."""
+        name string - elem[7] of the resp. item.
+        Option 'transform' also returns the image transformation matrix.
+        """
         CheckParent(self)
         doc = self.parent
-        if doc.isClosed or doc.isEncrypted:
+        if doc.is_closed or doc.is_encrypted:
             raise ValueError("document closed or encrypted")
+
         inf_rect = Rect(1, 1, -1, -1)
+        null_mat = Matrix()
+        if transform:
+            rc = (inf_rect, null_mat)
+        else:
+            rc = inf_rect
+
         if type(name) in (list, tuple):
             if not type(name[-1]) is int:
-                raise ValueError("need a full page image list item")
+                raise ValueError("need item of full page image list")
             item = name
         else:
-            imglist = [i for i in doc.getPageImageList(self.number, True) if name == i[-3]]
+            imglist = [i for i in doc.get_page_images(self.number, True) if name == i[7]]
             if len(imglist) == 1:
                 item = imglist[0]
             elif imglist == []:
-                raise ValueError("no valid image found")
+                raise ValueError("bad image name")
             else:
-                raise ValueError("found more than one image of that name.")
+                raise ValueError("found multiple images named '%s'." % name)
+        xref = item[-1]
+        if xref != 0 or transform == True:
+            try:
+                return self.get_image_rects(item, transform=transform)[0]
+            except:
+                return inf_rect
 
-        val = _fitz.Page_getImageBbox(self, name)
+
+        val = _fitz.Page_get_image_bbox(self, name, transform)
 
         if not bool(val):
-            return inf_rect
-        rc = inf_rect
+            return rc
+
         for v in val:
-            if v[0] == item[-3]:
-                rc = Quad(v[1]).rect
+            if v[0] != item[-3]:
+                continue
+            q = Quad(v[1])
+            bbox = q.rect
+            if transform == 0:
+                rc = bbox
                 break
-        val = rc * self.transformationMatrix
+
+            hm = Matrix(TOOLS._hor_matrix(q.ll, q.lr))
+            h = abs(q.ll - q.ul)
+            w = abs(q.ur - q.ul)
+            m0 = Matrix(1 / w, 0, 0, 1 / h, 0, 0)
+            m = ~(hm * m0)
+            rc = (bbox, m)
+            break
+        val = rc
 
         return val
 
 
-    def run(self, dw, m):
-        """Run page through a device."""
-        CheckParent(self)
 
-        return _fitz.Page_run(self, dw, m)
+    def run(self, dw, m):
+        """Run page through a device.
+        dw: DeviceWrapper
+        """
+        CheckParent(self)
+        #return _fitz.Page_run(self, dw, m)
+        mupdf.mfz_run_page(self.this, dw.device, JM_matrix_from_py(m), mupdf.Cookie());
 
 
     def _get_text_page(self, clip=None, flags=0):
@@ -4861,41 +4909,79 @@ class Page:
         return val
 
 
-    def getTextPage(self, clip: rect_like =None, flags: int =0) -> "TextPage":
+    def get_textpage(self, clip: rect_like = None, flags: int = 0, matrix=None) -> "TextPage":
         CheckParent(self)
+        if matrix is None:
+            matrix = Matrix(1, 1)
         old_rotation = self.rotation
         if old_rotation != 0:
-            self.setRotation(0)
+            self.set_rotation(0)
         try:
-    #if clip is None:
-    #    clip = self.rect
-            textpage = self._get_text_page(clip, flags=flags)
-
+            textpage = self._get_textpage(clip, flags=flags, matrix=matrix)
         finally:
             if old_rotation != 0:
-                self.setRotation(old_rotation)
+                self.set_rotation(old_rotation)
+        textpage.parent = weakref.proxy(self)
         return textpage
 
     @property
-
     def language(self):
         """Page language."""
+        #return _fitz.Page_language(self)
+        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
+        if not pdfpage.m_internal:
+            return
+        lang = mupdf.mpdf_dict_get_inheritable(pdfpage.obj(), PDF_NAME('Lang'))
+        if not lang.m_internal:
+            return
+        return mupdf.mpdf_to_str_buf(lang)
 
-        return _fitz.Page_language(self)
 
-
-    def setLanguage(self, language=None):
+    def set_language(self, language=None):
         """Set PDF page default language."""
         CheckParent(self)
+        #return _fitz.Page_set_language(self, language)
+        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
+        ASSERT_PDF(pdfpage)
+        if not language:
+            pdf_dict_del(pdfpage.obj(), PDF_NAME('Lang'))
+        else:
+            lang = mupdf.mfz_text_language_from_string(language)
+            mupdf.mpdf_dict_put_text_string(
+                    pdfpage.obj,
+                    PDF_NAME(Lang),
+                    mupdf.mfz_string_from_text_language(buf, lang)  # fixme: needs wrapper to handle char buf[8].
+                    )
 
-        return _fitz.Page_setLanguage(self, language)
 
-
-    def getSVGimage(self, matrix=None, text_as_path=1):
+    def get_svg_image(self, matrix=None, text_as_path=1):
         """Make SVG image from page."""
         CheckParent(self)
+        #return _fitz.Page_get_svg_image(self, matrix, text_as_path)
+        mediabox = mupdf.mfz_bound_page(self.this)
+        #fz_device *dev = NULL;
+        #fz_buffer *res = NULL;
+        #PyObject *text = NULL;
+        ctm = JM_matrix_from_py(matrix)
+        #fz_output *out = NULL;
+        #fz_separations *seps = NULL;
+        tbounds = mediabox
+        text_option = mupdf.FZ_SVG_TEXT_AS_PATH if text_as_path == 1 else muodf.FZ_SVG_TEXT_AS_TEXT
+        tbounds = mupdf.mfz_transform_rect(tbounds, ctm)
 
-        return _fitz.Page_getSVGimage(self, matrix, text_as_path)
+        res = mupdf.mfz_new_buffer(1024)
+        out = mupdf.mfz_new_output_with_buffer(res)
+        dev = mupdf.mfz_new_svg_device(
+                out,
+                tbounds.x1-tbounds.x0,  # width
+                tbounds.y1-tbounds.y0,  # height
+                text_option,
+                1,
+                )
+        mupdf.mfz_run_page(self.this, dev, ctm, mupdf.Cookie())
+        mupdf.mfz_close_device(dev)
+        text = JM_EscapeStrFromBuffer(res)
+        return text
 
 
     def _set_opacity(self, gstate=None, CA=1, ca=1):
@@ -4910,8 +4996,28 @@ class Page:
             tca = 99
         gstate = "fitzca%02i%02i" % (tCA, tca)
 
-
-        return _fitz.Page__set_opacity(self, gstate, CA, ca)
+        #return _fitz.Page__set_opacity(self, gstate, CA, ca)
+        if not gstate:
+            return
+        page = mupdf.mpdf_page_from_fz_page(self.this)
+        ASSERT_PDF(page)
+        resources = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Resources'))
+        if not resources.m_internal:
+            resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
+        extg = mupdf.mpdf_dict_get(resources, PDF_NAME('ExtGState'))
+        if not extg.m_internal:
+            extg = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('ExtGState'), 2)
+        n = mupdf.mpdf_dict_len(extg)
+        for i in range(m):
+            o1 = mupdf.mpdf_dict_get_key(extg, i)
+            name = mupdf.mpdf_to_name(o1)
+            if name == gstate:
+                return gstate
+        opa = mupdf.mpdf_new_dict(page.doc(), 3)
+        mupdf.mpdf_dict_put_real(opa, PDF_NAME('CA'), CA)
+        mupdf.mpdf_dict_put_real(opa, PDF_NAME('ca'), ca)
+        mupdf.mpdf_dict_puts(extg, gstate, opa)
+        return gstate
 
     def _pdf_page(self):
         '''
