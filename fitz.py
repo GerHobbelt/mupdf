@@ -4139,9 +4139,6 @@ class Widget(object):
     def __repr__(self):
         return "'%s' widget on %s" % (self.field_type_string, str(self.parent))
 
-    def __del__(self):
-        self._annot.__del__()
-
     @property
     def next(self):
         return self._annot.next
@@ -4611,6 +4608,24 @@ class Page:
             q = CheckMarkerArg(quads)
         return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
 
+    def add_widget(self, widget: Widget) -> "struct Annot *":
+        """Add a 'Widget' (form field)."""
+        CheckParent(self)
+        doc = self.parent
+        if not doc.is_pdf:
+            raise ValueError("not a PDF")
+        widget._validate()
+        annot = self._addWidget(widget.field_type, widget.field_name)
+        if not annot:
+            return None
+        annot.thisown = True
+        annot.parent = weakref.proxy(self) # owning page object
+        self._annot_refs[id(annot)] = annot
+        widget.parent = annot.parent
+        widget._annot = annot
+        widget.update()
+        return annot
+
     def addCaretAnnot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
         old_rotation = annot_preprocess(self)
@@ -5040,6 +5055,27 @@ class Page:
             #return JM_py_from_matrix(fz_identity);
             return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
         return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
+
+    def get_cdrawings(self):
+        """Extract drawing paths from the page."""
+        CheckParent(self)
+        old_rotation = self.rotation
+        if old_rotation != 0:
+            self.set_rotation(0)
+        #val = _fitz.Page_get_cdrawings(self)
+        page = self.this
+        rc = []
+        trace_device_Linewidth = 0
+        prect = mupdf.mfz_bound_page(page)
+        trace_device_ptm = mupdf.mfz_make_matrix(1, 0, 0, -1, 0, prect.y1)
+        dev = JM_new_tracedraw_device(rc)
+        mupdf.mfz_run_page(page, dev, fz_identity, mupdf.Cookie())
+        mupdf.mfz_close_device(dev)
+        val = rc
+
+        if old_rotation != 0:
+            self.set_rotation(old_rotation)
+        return val
 
     def get_displaylist(self, annots=1):
         '''
@@ -5811,9 +5847,14 @@ class Page:
 
 
     def _addWidget(self, field_type, field_name):
-        return _fitz.Page__addWidget(self, field_type, field_name)
-
-
+        #return _fitz.Page__addWidget(self, field_type, field_name)
+        page = mupdf.mpdf_page_from_fz_page(self.this)
+        pdf = page.doc()
+        annot = JM_create_widget(pdf, page, field_type, field_name)
+        if not annot.m_internal:
+            THROWMSG("could not create widget")
+        JM_add_annot_id(annot, "W")
+        return Annot(annot)
 
     def _getDrawings(self):
         return _fitz.Page__getDrawings(self)
@@ -6365,9 +6406,6 @@ class Page:
         self.parent = None
         self.thisown = False
         self.number = None
-
-    #def __del__(self):
-    #    self._erase()
 
     def get_fonts(self, full=False):
         """List of fonts defined in the page object."""
@@ -8640,10 +8678,6 @@ class TextPage:
         """Return page content as a Python dict of images and text characters."""
         return self._textpage_dict(raw=True)
 
-    def __del__(self):
-        if not type(self) is TextPage: return
-        self.thisown = False
-
 
 class TextWriter:
     __swig_setmethods__ = {}
@@ -8802,11 +8836,6 @@ class TextWriter:
 
 
         return val
-
-
-    def __del__(self):
-        if not type(self) is TextWriter:
-            return
 
 
 class IRect(Rect):
@@ -9883,6 +9912,54 @@ def JM_compress_buffer(inbuffer):
     return buf;
 
 
+# Copied from MuPDF v1.14
+# Create widget
+def JM_create_widget(doc, page, type, fieldname):
+    old_sigflags = mupdf.mpdf_to_int(mupdf.mpdf_dict_getp(mupdf.mpdf_trailer(doc), "Root/AcroForm/SigFlags"))
+    annot = mupdf.mpdf_create_annot_raw(page, mupdf.PDF_ANNOT_WIDGET)
+    annot_obj = mupdf.mpdf_annot_obj(annot)
+    try:
+        JM_set_field_type(doc, annot_obj, type)
+        mupdf.mpdf_dict_put_text_string(annot_obj, PDF_NAME('T'), fieldname)
+
+        if type == mupdf.PDF_WIDGET_TYPE_SIGNATURE:
+            sigflags = old_sigflags | (SigFlag_SignaturesExist|SigFlag_AppendOnly)
+            mupdf.mpdf_dict_putl(
+                    mupdf.mpdf_trailer(doc),
+                    mupdf.mpdf_new_nt(sigflags),
+                    PDF_NAME('Root'),
+                    PDF_NAME('AcroForm'),
+                    PDF_NAME('SigFlags'),
+                    )
+        # pdf_create_annot will have linked the new widget into the page's
+        # annot array. We also need it linked into the document's form
+        form = mupdf.mpdf_dict_getp(mupdf.mpdf_trailer(doc), "Root/AcroForm/Fields")
+        if form.m_internal:
+            form = mupdf.mpdf_new_array(doc, 1)
+            mupdf.mpdf_dict_putl(
+                    mupdf.mpdf_trailer(doc),
+                    form,
+                    PDF_NAME('Root'),
+                    PDF_NAME('AcroForm'),
+                    PDF_NAME('Fields'),
+                    )
+        mupdf.mpdf_array_push(form, annot_obj)  # Cleanup relies on this statement being last
+    except Exception:
+        mupdf.mpdf_delete_annot(page, annot)
+
+        if type == mupdf.PDF_WIDGET_TYPE_SIGNATURE:
+            mupdf.mpdf_dict_putl(
+                    mupdf.mpdf_trailer(doc),
+                    mupdf.mpdf_new_int(old_sigflags),
+                    PDF_NAME('Root'),
+                    PDF_NAME('AcroForm'),
+                    PDF_NAME('SigFlags'),
+                    )
+        raise
+
+    return annot;
+
+
 def JM_cropbox(page_obj):
     '''
     return a PDF page's CropBox
@@ -10401,6 +10478,93 @@ def JM_merge_range(
             afterpage += 1
 
 
+def JM_new_tracedraw_device(out):
+    assert 0, 'derived devices not yet supported'
+    dev = mupdf.mfz_new_derived_device(jm_tracedraw_device)
+
+    dev.m_internal.fill_path = jm_tracedraw_fill_path
+    dev.m_internal.stroke_path = jm_tracedraw_stroke_path
+    dev.m_internal.clip_path = 0
+    dev.m_internal.clip_stroke_path = 0
+
+    dev.m_internal.fill_text = jm_increase_seqno
+    dev.m_internal.stroke_text = jm_increase_seqno
+    dev.m_internal.clip_text = 0
+    dev.m_internal.clip_stroke_text = 0
+    dev.m_internal.ignore_text = jm_increase_seqno
+
+    dev.m_internal.fill_shade = jm_increase_seqno
+    dev.m_internal.fill_image = jm_increase_seqno
+    dev.m_internal.fill_image_mask = jm_increase_seqno
+    dev.m_internal.clip_image_mask = 0
+
+    dev.m_internal.pop_clip = 0
+
+    dev.m_internal.begin_mask = 0
+    dev.m_internal.end_mask = 0
+    dev.m_internal.begin_group = 0
+    dev.m_internal.end_group = 0
+
+    dev.m_internal.begin_tile = 0
+    dev.m_internal.end_tile = 0
+
+    dev.m_internal.begin_layer = 0
+    dev.m_internal.end_layer = 0
+
+    dev.m_internal.render_flags = 0
+    dev.m_internal.set_default_colorspaces = 0
+
+    dev.out = out
+    dev.seqno = 0
+    return dev
+
+def JM_new_tracetext_device(out):
+    assert 0, 'derived devices not yet supported'
+    dev = mupdf.mfz_new_derived_device(jm_tracedraw_device)
+
+    dev.m_internal.fill_path = jm_increase_seqno
+    dev.m_internal.stroke_path = jm_trace_device_Linewidth
+    dev.m_internal.clip_path = 0
+    dev.m_internal.clip_stroke_path = 0
+
+    dev.m_internal.fill_text = jm_tracedraw_fill_text
+    dev.m_internal.stroke_text = jm_tracedraw_stroke_text
+    dev.m_internal.clip_text = 0
+    dev.m_internal.clip_stroke_text = 0
+    dev.m_internal.ignore_text = jm_tracedraw_ignore_text
+
+    dev.m_internal.fill_shade = jm_increase_seqno
+    dev.m_internal.fill_image = jm_increase_seqno
+    dev.m_internal.fill_image_mask = jm_increase_seqno
+    dev.m_internal.clip_image_mask = 0
+
+    dev.m_internal.pop_clip = 0
+
+    dev.m_internal.begin_mask = 0
+    dev.m_internal.end_mask = 0
+    dev.m_internal.begin_group = 0
+    dev.m_internal.end_group = 0
+
+    dev.m_internal.begin_tile = 0
+    dev.m_internal.end_tile = 0
+
+    dev.m_internal.begin_layer = 0
+    dev.m_internal.end_layer = 0
+
+    dev.m_internal.render_flags = 0
+    dev.m_internal.set_default_colorspaces = 0
+
+    dev.out = out
+    dev.seqno = 0
+    return dev
+
+#typedef struct jm_bbox_device_s
+#{
+#    fz_device super;
+#    PyObject *result;
+#} jm_bbox_device;
+
+
 def JM_norm_rotation(rotate):
     '''
     # return normalized /Rotate value
@@ -10635,6 +10799,41 @@ def JM_scan_resources(pdf, rsrc, liste, what, stream_xref, tracer):
                     return
     finally:
         rsrc.unmark_obj()
+
+# Set the field type
+def JM_set_field_type(doc, obj, type):
+    setbits = 0;
+    clearbits = 0;
+    typename = None
+    if type == mupdf.PDF_WIDGET_TYPE_BUTTON:
+        typename = PDF_NAME('Btn')
+        setbits = PDF_BTN_FIELD_IS_PUSHBUTTON
+    elif type == mupdf.PDF_WIDGET_TYPE_RADIOBUTTON:
+        typename = PDF_NAME('Btn')
+        clearbits = PDF_BTN_FIELD_IS_PUSHBUTTON
+        setbits = PDF_BTN_FIELD_IS_RADIO
+    elif type == mupdf.PDF_WIDGET_TYPE_CHECKBOX:
+        typename = PDF_NAME('Btn')
+        clearbits = (PDF_BTN_FIELD_IS_PUSHBUTTON|PDF_BTN_FIELD_IS_RADIO)
+    elif type == mupdf.PDF_WIDGET_TYPE_TEXT:
+        typename = PDF_NAME('Tx')
+    elif type == mupdf.PDF_WIDGET_TYPE_LISTBOX:
+        typename = PDF_NAME('Ch')
+        clearbits = PDF_CH_FIELD_IS_COMBO
+    elif type == mupdf.PDF_WIDGET_TYPE_COMBOBOX:
+        typename = PDF_NAME('Ch')
+        setbits = PDF_CH_FIELD_IS_COMBO
+    elif type == mupdf.PDF_WIDGET_TYPE_SIGNATURE:
+        typename = PDF_NAME('Sig')
+
+    if typename:
+        mupdf.mpdf_dict_put_drop(obj, PDF_NAME('FT'), typename)
+
+    if setbits != 0 or clearbits != 0:
+        bits = mupdf.mpdf_dict_get_int(obj, PDF_NAME('Ff'))
+        bits &= ~clearbits
+        bits |= setbits
+        mupdf.mpdf_dict_put_int(obj, PDF_NAME('Ff'), bits)
 
 
 def JM_update_stream(doc, obj, buffer_, compress):
@@ -12877,43 +13076,17 @@ def _get_glyph_text() -> bytes:
 
 
 
-def get_mupdf_items():
+if 1:
     self = sys.modules[__name__]
-    setattr(self, 'foobartest', 42)
-    assert foobartest == 42
-    n = 0
-    #items = inspect.getmembers(mupdf)
-    #jlib.log('{len(items)=}')
     for name, value in inspect.getmembers(mupdf):
-        #print(f'n={n} Setting {name}')
-        #jlib.log(f'n={n} Setting {name}')
-        continue
         if name.startswith('PDF_'):
             assert not inspect.isroutine(value)
-            #jlib.log('n={n} Setting {name}')
-            n = 0
             setattr(self, name, value)
-        else:
-            #jlib.log('n={n} {name}')
-            n += 1
+    del self
 
-get_mupdf_items()
+assert PDF_TX_FIELD_IS_MULTILINE == mupdf.PDF_TX_FIELD_IS_MULTILINE
 
 fitz_fontdescriptors = dict()
-
-jlib.log('{foobartest=}')
-
-if 0:
-    PDF_PERM_PRINT = mupdf.PDF_PERM_PRINT
-    PDF_PERM_MODIFY = mupdf.PDF_PERM_MODIFY
-    PDF_PERM_COPY = mupdf.PDF_PERM_COPY
-    PDF_PERM_ANNOTATE = mupdf.PDF_PERM_ANNOTATE
-    PDF_PERM_FORM = mupdf.PDF_PERM_FORM
-    PDF_PERM_ACCESSIBILITY = mupdf.PDF_PERM_ACCESSIBILITY
-    PDF_PERM_ASSEMBLE = mupdf.PDF_PERM_ASSEMBLE
-    PDF_PERM_PRINT_HQ = mupdf.PDF_PERM_PRINT_HQ
-
-    PDF_ENCRYPT_AES_256 = mupdf.PDF_ENCRYPT_AES_256
 
 # colorspace identifiers
 CS_GRAY = mupdf.Colorspace.Fixed_GRAY
