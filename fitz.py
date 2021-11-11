@@ -5144,7 +5144,44 @@ class Page:
             assert 0
 
     def _add_ink_annot(self, list):
-        return _fitz.Page__add_ink_annot(self, list)
+        #return _fitz.Page__add_ink_annot(self, list)
+        page = mupdf.mpdf_page_from_fz_page(self.this)
+        #pdf_annot *annot = NULL;
+        #PyObject *p = NULL, *sublist = NULL;
+        #pdf_obj *inklist = NULL, *stroke = NULL;
+        #fz_matrix ctm, inv_ctm;
+        #fz_point point;
+        #fz_var(annot);
+        ASSERT_PDF(page);
+        if not PySequence_Check(list):
+            THROWMSG("arg must be a sequence")
+        mupdf.mpdf_page_transform(page, mupdf.Rect(0), ctm)
+        inv_ctm = mupdf.mfz_invert_matrix(ctm)
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_INK)
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        n0 = len(list)
+        inklist = mupdf.mpdf_new_array(page.doc(), n0)
+
+        for j in range(n0):
+            sublist = list[j]
+            n1 = len(sublist)
+            stroke = mupdf.mpdf_new_array(page.doc(), 2 * n1)
+
+            for i in range(n1):
+                p = sublist[i]
+                if not PySequence_Check(p) or PySequence_Size(p) != 2:
+                    THROWMSG("3rd level entries must be pairs of floats")
+                point = mupdf.mfz_transform_point(JM_point_from_py(p), inv_ctm)
+                mupdf.mpdf_array_push_real(stroke, point.x)
+                mupdf.mpdf_array_push_real(stroke, point.y)
+
+            mupdf.mpdf_array_push(inklist, stroke)
+
+        mupdf.mpdf_dict_put(annot_obj, PDF_NAME('InkList'), inklist)
+        mupdf.mpdf_dirty_annot(annot)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+        return Annot(annot)
 
     def _add_stamp_annot(self, rect, stamp=0):
         #return _fitz.Page__add_stamp_annot(self, rect, stamp)
