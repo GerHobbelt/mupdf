@@ -5,6 +5,7 @@ import base64
 import binascii
 import gzip
 import hashlib
+import inspect
 import math
 import sys
 import textwrap
@@ -4228,180 +4229,258 @@ class Page:
         self.this = page
         self.thisown = True
 
-    def bound(self):
-        """Get page rectangle."""
-        CheckParent(self)
-        val = self.this.bound_page()
-        val = Rect(val)
+    def _add_caret_annot(self, point):
+        #return _fitz.Page__add_caret_annot(self, point)
+        page = self._pdf_page()
+        annot = page.create_annot(mupdf.PDF_ANNOT_CARET)
+        if point:
+            p = JM_point_from_py(point)
+            r = annot.annot_rect()
+            r = mupdf.Rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            annot.set_annot_rect(r)
+        JM_add_annot_id(annot, "A")
+        annot.update_annot()
+        return annot;
+
+
+    def _add_line_annot(self, p1, p2):
+        #return _fitz.Page__add_line_annot(self, p1, p2)
+        page = self._pdf_page()
+        try:
+            ASSERT_PDF(page);
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_LINE)
+            a = JM_point_from_py(p1)
+            b = JM_point_from_py(p2)
+            mupdf.mpdf_set_annot_line(annot, a, b)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(self, annot)
+
+    def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
+        #return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
+        page = self._pdf_page()
+        fcol = [ 1, 1, 1, 0]
+        nfcol = 0
+        try:
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_REDACT)
+            q = JM_quad_from_py(quad)
+            r = mupdf.mfz_rect_from_quad(q)
+
+            # TODO calculate de-rotated rect
+            mupdf.mpdf_set_annot_rect(annot, r)
+            if fill:
+                nfcol = JM_color_FromSequence(fill, fcol)
+                arr = mupdf.mpdf_new_array(page.doc(), nfcol)
+                for i in range(nfcol):
+                    mupdf.mpdf_array_push_real(arr, fcol[i])
+                mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('IC'), arr)
+            if text:
+                mupdf.mpdf_dict_puts(
+                        annot.annot_obj(),
+                        "OverlayText",
+                        mupdf.mpdf_new_text_string(text),
+                        )
+                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('DA'), da_str)
+                mupdf.mpdf_dict_put_int(annot.annot_obj(), PDF_NAME('Q'), align)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        annot = mupdf.mpdf_keep_annot(annot)
+        return Annot(self, annot)
+
+    def _add_text_annot(self, point, text, icon=None):
+        #return _fitz.Page__add_text_annot(self, point, text, icon)
+        page = self._pdf_page()
+        p = point
+        try:
+            ASSERT_PDF(page)
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT
+            mupdf.mpdf_set_annot_flags(annot, flags)
+            mupdf.mpdf_set_annot_contents(annot, text)
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}: {jlib.exception_info()=}')
+            return
+        return Annot(self, annot)
+
+    def _get_text_page(self, clip=None, flags=0):
+        val = _fitz.Page__get_text_page(self, clip, flags)
+        val.thisown = True
 
         return val
 
-    rect = property(bound, doc="page rectangle")
-
-
-    def get_displaylist(self, annots=1):
+    def _pdf_page(self):
         '''
-        Make a DisplayList from the page for Pixmap generation.
-
-        Include (default) or exclude annotations.
+        Returns self.this as a mupdf.PdfPage using page_from_fz_page() if
+        required.
         '''
-        CheckParent(self)
-        if annots:
-            dl = mupdf.mfz_new_display_list_from_page(self.this)
-        else:
-            dl = mupdf.mfz_new_display_list_from_page_contents(self.this)
-        return DisplayList(dl)
+        if isinstance(self.this, mupdf.PdfPage):
+            return self.this
+        return self.this.page_from_fz_page()
 
+    def _set_opacity(self, gstate=None, CA=1, ca=1):
 
-    def get_pixmap(page, **kw): # -> Pixmap:
-        """Create pixmap of page.
+        if min(CA, ca) >= 1:
+            return
+        tCA = int(round(max(CA , 0) * 100))
+        if tCA >= 100:
+            tCA = 99
+        tca = int(round(max(ca, 0) * 100))
+        if tca >= 100:
+            tca = 99
+        gstate = "fitzca%02i%02i" % (tCA, tca)
 
-        Args:
-            matrix: Matrix for transformation (default: Identity).
-            colorspace: (str/Colorspace) cmyk, rgb, gray - case ignored, default csRGB.
-            clip: (irect-like) restrict rendering to this area.
-            alpha: (bool) whether to include alpha channel
-            annots: (bool) whether to also render annotations
-        """
-        CheckParent(page)
-        matrix = kw.get("matrix", Identity)
-        colorspace = kw.get("colorspace", csRGB)
-        clip = kw.get("clip")
-        alpha = bool(kw.get("alpha", False))
-        annots = bool(kw.get("annots", True))
+        #return _fitz.Page__set_opacity(self, gstate, CA, ca)
+        if not gstate:
+            return
+        page = mupdf.mpdf_page_from_fz_page(self.this)
+        ASSERT_PDF(page)
+        resources = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Resources'))
+        if not resources.m_internal:
+            resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
+        extg = mupdf.mpdf_dict_get(resources, PDF_NAME('ExtGState'))
+        if not extg.m_internal:
+            extg = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('ExtGState'), 2)
+        n = mupdf.mpdf_dict_len(extg)
+        for i in range(m):
+            o1 = mupdf.mpdf_dict_get_key(extg, i)
+            name = mupdf.mpdf_to_name(o1)
+            if name == gstate:
+                return gstate
+        opa = mupdf.mpdf_new_dict(page.doc(), 3)
+        mupdf.mpdf_dict_put_real(opa, PDF_NAME('CA'), CA)
+        mupdf.mpdf_dict_put_real(opa, PDF_NAME('ca'), ca)
+        mupdf.mpdf_dict_puts(extg, gstate, opa)
+        return gstate
 
-        if type(colorspace) is str:
-            if colorspace.upper() == "GRAY":
-                colorspace = csGRAY
-            elif colorspace.upper() == "CMYK":
-                colorspace = csCMYK
-            else:
-                colorspace = csRGB
-        if colorspace.n not in (1, 3, 4):
-            raise ValueError("unsupported colorspace")
-
-        dl = page.get_displaylist(annots=annots)
-        pix = dl.get_pixmap(matrix=matrix, colorspace=colorspace, alpha=alpha, clip=clip)
-        dl = None
-        return Pixmap(pix)
-
-
-    def insert_text(
-            page,
-            point: point_like,
-            text: typing.Union[str, list],
-            fontsize: float = 11,
-            lineheight: OptFloat = None,
-            fontname: str = "helv",
-            fontfile: OptStr = None,
-            set_simple: int = 0,
-            encoding: int = 0,
-            color: OptSeq = None,
-            fill: OptSeq = None,
-            border_width: float = 1,
-            render_mode: int = 0,
-            rotate: int = 0,
-            morph: OptSeq = None,
-            overlay: bool = True,
-            stroke_opacity: float = 1,
-            fill_opacity: float = 1,
-            oc: int = 0,
-            ):
-        img = page.new_shape()
-        rc = img.insert_text(
-                point,
-                text,
-                fontsize=fontsize,
-                lineheight=lineheight,
-                fontname=fontname,
-                fontfile=fontfile,
-                set_simple=set_simple,
-                encoding=encoding,
-                color=color,
-                fill=fill,
-                border_width=border_width,
-                render_mode=render_mode,
-                rotate=rotate,
-                morph=morph,
-                stroke_opacity=stroke_opacity,
-                fill_opacity=fill_opacity,
-                oc=oc,
-                )
-        if rc >= 0:
-            img.commit(overlay)
-        return rc
-
-
-
-
-    def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
-                   set_simple=False, wmode=0, encoding=0):
-        doc = self.parent
-        if doc is None:
-            raise ValueError("orphaned object: parent is None")
-        idx = 0
-
-        if fontname.startswith("/"):
-            fontname = fontname[1:]
-
-        font = CheckFont(self, fontname)
-        if font is not None:                    # font already in font list of page
-            xref = font[0]                      # this is the xref
-            if CheckFontInfo(doc, xref):        # also in our document font list?
-                return xref                     # yes: we are done
-            # need to build the doc FontInfo entry - done via get_char_widths
-            doc.get_char_widths(xref)
-            return xref
-
-        #--------------------------------------------------------------------------
-        # the font is not present for this page
-        #--------------------------------------------------------------------------
-
-        bfname = Base14_fontdict.get(fontname.lower(), None) # BaseFont if Base-14 font
-
-        serif = 0
-        CJK_number = -1
-        CJK_list_n = ["china-t", "china-s", "japan", "korea"]
-        CJK_list_s = ["china-ts", "china-ss", "japan-s", "korea-s"]
-
+    def add_caret_annot(self, point: point_like) -> "struct Annot *":
+        """Add a 'Caret' annotation."""
+        old_rotation = annot_preprocess(self)
         try:
-            CJK_number = CJK_list_n.index(fontname)
-            serif = 0
-        except:
-            pass
+            annot = self._add_caret_annot(point)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return Annot(self, annot)
 
-        if CJK_number < 0:
+    def add_circle_annot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Circle' (ellipse, oval) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_file_annot(
+            self,
+            point: point_like,
+            buffer_: typing.ByteString,
+            filename: str,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            icon: OptStr =None
+            ) -> "struct Annot *":
+        """Add a 'FileAttachment' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_file_annot(point,
+                    buffer_,
+                    filename,
+                    ufilename=ufilename,
+                    desc=desc,
+                    icon=icon,
+                    )
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        #jlib.log('{type(annot)=} {annot=}')
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_freetext_annot(self, rect: rect_like, text: str, fontsize: float =11,
+                         fontname: OptStr =None, text_color: OptSeq =None,
+                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
+        """Add a 'FreeText' annotation."""
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
+                    fontname=fontname, text_color=text_color,
+                    fill_color=fill_color, align=align, rotate=rotate)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_highlight_annot(self, quads=None, start=None,
+                          stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Highlight' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        ret = self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
+        return ret
+
+    def add_ink_annot(self, handwriting: list) -> "struct Annot *":
+        """Add a 'Ink' ('handwriting') annotation.
+
+        The argument must be a list of lists of point_likes.
+        """
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_ink_annot(handwriting)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_line_annot(self, p1: point_like, p2: point_like) -> "struct Annot *":
+        """Add a 'Line' annotation."""
+        try:
+            old_rotation = annot_preprocess(self)
             try:
-                CJK_number = CJK_list_s.index(fontname)
-                serif = 1
-            except:
-                pass
+                annot = self._add_line_annot(p1, p2)
+            finally:
+                if old_rotation != 0:
+                    self.set_rotation(old_rotation)
+            annot_postprocess(self, annot)
+            return annot
+        except Exception as e:
+            jlib.log('{jlib.exception_info()}')
+            assert 0
 
-        if fontname.lower() in fitz_fontdescriptors.keys():
-            import pymupdf_fonts
-            fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
-            del pymupdf_fonts
-
-        # install the font for the page
-        jlib.log('{fontname=} {bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {CJK_number=}')
-        val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
-                               wmode, serif, encoding, CJK_number)
-
-        if not val:                   # did not work, error return
-            return val
-
-        xref = val[0]                 # xref of installed font
-        fontdict = val[1]
-
-        if CheckFontInfo(doc, xref):  # check again: document already has this font
-            return xref               # we are done
-
-        # need to create document font info
-        doc.get_char_widths(xref, fontdict=fontdict)
-        return xref
-
-
-
+    def add_polygon_annot(self, points: list) -> "struct Annot *":
+        """Add a 'Polygon' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
 
     def add_polyline_annot(self, points: list) -> "struct Annot *":
         """Add a 'PolyLine' annotation."""
@@ -4414,64 +4493,390 @@ class Page:
         annot_postprocess(self, annot)
         return annot
 
-    def new_shape(self):
-        return Shape(self)
+    def add_rect_annot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Square' (rectangle) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
 
-    def delete_annot(self, annot):
-        """Delete annot and return next one."""
+    def add_redact_annot(
+            self,
+            quad,
+            text: OptStr =None,
+            fontname: OptStr =None,
+            fontsize: float =11,
+            align: int =0,
+            fill: OptSeq =None,
+            text_color: OptSeq =None,
+            cross_out: bool =True,
+            ) -> "struct Annot *":
+        """Add a 'Redact' annotation."""
+        da_str = None
+        if text:
+            CheckColor(fill)
+            CheckColor(text_color)
+            if not fontname:
+                fontname = "Helv"
+            if not fontsize:
+                fontsize = 11
+            if not text_color:
+                text_color = (0, 0, 0)
+            if hasattr(text_color, "__float__"):
+                text_color = (text_color, text_color, text_color)
+            if len(text_color) > 3:
+                text_color = text_color[:3]
+            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
+            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
+            if fill is None:
+                fill = (1, 1, 1)
+            if fill:
+                if hasattr(fill, "__float__"):
+                    fill = (fill, fill, fill)
+                if len(fill) > 3:
+                    fill = fill[:3]
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
+                       align=align, fill=fill)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        #-------------------------------------------------------------
+        # change appearance to show a crossed-out rectangle
+        #-------------------------------------------------------------
+        if cross_out:
+            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
+            _, LL, LR, UR, UL = ap_tab
+            ap_tab.append(LR)
+            ap_tab.append(LL)
+            ap_tab.append(UR)
+            ap_tab.append(LL)
+            ap_tab.append(UL)
+            ap_tab.append(b"S")
+            ap = b"\n".join(ap_tab)
+            annot._setAP(ap, 0)
+        return annot
+
+    def add_squiggly_annot(self, quads=None, start=None,
+                         stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Squiggly' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
+
+    def add_stamp_annot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
+        """Add a ('rubber') 'Stamp' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_stamp_annot(rect, stamp)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_strikeout_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'StrikeOut' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
+
+    def add_text_annot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
+        """Add a 'Text' (sticky note) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_text_annot(point, text, icon=icon)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def add_underline_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Underline' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
+
+    def addCaretAnnot(self, point: point_like) -> "struct Annot *":
+        """Add a 'Caret' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_caret_annot(point)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addCircleAnnot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Circle' (ellipse, oval) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addFileAnnot(self, point: point_like,
+        buffer: typing.ByteString,
+        filename: str,
+        ufilename: OptStr =None,
+        desc: OptStr =None,
+        icon: OptStr =None) -> "struct Annot *":
+        """Add a 'FileAttachment' annotation."""
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_file_annot(point,
+                        buffer,
+                        filename,
+                        ufilename=ufilename,
+                        desc=desc,
+                        icon=icon)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addFreetextAnnot(self, rect: rect_like, text: str, fontsize: float =11,
+                         fontname: OptStr =None, text_color: OptSeq =None,
+                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
+        """Add a 'FreeText' annotation."""
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
+                    fontname=fontname, text_color=text_color,
+                    fill_color=fill_color, align=align, rotate=rotate)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addHighlightAnnot(self, quads=None, start=None,
+                          stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Highlight' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
+
+    def addInkAnnot(self, handwriting: list) -> "struct Annot *":
+        """Add a 'Ink' ('handwriting') annotation.
+
+        The argument must be a list of lists of point_likes.
+        """
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_ink_annot(handwriting)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addLineAnnot(self, p1: point_like, p2: point_like) -> "struct Annot *":
+        """Add a 'Line' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_line_annot(p1, p2)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addPolygonAnnot(self, points: list) -> "struct Annot *":
+        """Add a 'Polygon' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addPolylineAnnot(self, points: list) -> "struct Annot *":
+        """Add a 'PolyLine' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addRectAnnot(self, rect: rect_like) -> "struct Annot *":
+        """Add a 'Square' (rectangle) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addSquigglyAnnot(self, quads=None, start=None,
+                         stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Squiggly' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
+
+    def addStampAnnot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
+        """Add a ('rubber') 'Stamp' annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_stamp_annot(rect, stamp)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addStrikeoutAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'StrikeOut' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
+
+    def addRedactAnnot(self, quad, text: OptStr =None, fontname: OptStr =None,
+                       fontsize: float =11, align: int =0, fill: OptSeq =None, text_color: OptSeq =None,
+                       cross_out: bool =True) -> "struct Annot *":
+        """Add a 'Redact' annotation."""
+        da_str = None
+        if text:
+            CheckColor(fill)
+            CheckColor(text_color)
+            if not fontname:
+                fontname = "Helv"
+            if not fontsize:
+                fontsize = 11
+            if not text_color:
+                text_color = (0, 0, 0)
+            if hasattr(text_color, "__float__"):
+                text_color = (text_color, text_color, text_color)
+            if len(text_color) > 3:
+                text_color = text_color[:3]
+            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
+            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
+            if fill is None:
+                fill = (1, 1, 1)
+            if fill:
+                if hasattr(fill, "__float__"):
+                    fill = (fill, fill, fill)
+                if len(fill) > 3:
+                    fill = fill[:3]
+
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
+                       align=align, fill=fill)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        #-------------------------------------------------------------
+        # change appearance to show a crossed-out rectangle
+        #-------------------------------------------------------------
+        if cross_out:
+            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
+            _, LL, LR, UR, UL = ap_tab
+            ap_tab.append(LR)
+            ap_tab.append(LL)
+            ap_tab.append(UR)
+            ap_tab.append(LL)
+            ap_tab.append(UL)
+            ap_tab.append(b"S")
+            ap = b"\n".join(ap_tab)
+            annot._setAP(ap, 0)
+        return annot
+
+    def addTextAnnot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
+        """Add a 'Text' (sticky note) annotation."""
+        old_rotation = annot_preprocess(self)
+        try:
+            annot = self._add_text_annot(point, text, icon=icon)
+        finally:
+            if old_rotation != 0:
+                self.setRotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
+
+    def addUnderlineAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
+        """Add a 'Underline' annotation."""
+        if quads is None:
+            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        else:
+            q = CheckMarkerArg(quads)
+        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
+
+    #---------------------------------------------------------------------
+    # page addWidget
+    #---------------------------------------------------------------------
+    def addWidget(self, widget: Widget) -> "struct Annot *":
+        """Add a 'Widget' (form field)."""
         CheckParent(self)
-        CheckParent(annot)
+        doc = self.parent
+        if not doc.isPDF:
+            raise ValueError("not a PDF")
+        widget._validate()
+        annot = self._addWidget(widget.field_type, widget.field_name)
+        if not annot:
+            return None
+        annot.thisown = True
+        annot.parent = weakref.proxy(self) # owning page object
+        self._annot_refs[id(annot)] = annot
+        widget.parent = annot.parent
+        widget._annot = annot
+        widget.update()
+        return annot
 
+    def annot_names(self):
+        """List of names of annotations, fields and links."""
+        CheckParent(self)
+
+        #return _fitz.Page_annot_names(self)
         page = self._pdf_page()
-        while 1:
-            # first loop through all /IRT annots and remove them
-            irt_annot = JM_find_annot_irt(annot.this)
-            if not irt_annot:    # no more there
-                break
-            JM_delete_annot(page, irt_annot)
-        nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
-        JM_delete_annot(page, annot.this)
-        #fixme: page->doc->dirty = 1;
-        val = Annot(self, nextannot)
+        if not page.m_internal:
+            return
+        return JM_get_annot_id_list(page)
 
-        if val:
-            val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
-            val.parent._annot_refs[id(val)] = val
-        annot._erase()
+    def annot_xrefs(self):
+        """List of xref numbers of annotations, fields and links."""
+        CheckParent(self)
 
-        return val
-
-
-        def add_polyline_annot(self, points: list) -> "struct Annot *":
-            """Add a 'PolyLine' annotation."""
-            old_rotation = annot_preprocess(self)
-            try:
-                #annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
-                #Page__add_multiline(points, PDF_ANNOT_POLY_LINE)
-                page = self._pdf_page()
-                try:
-                    n = PySequence_Size(points)
-                    if n < 2:
-                        THROWMSG("bad list of points")
-                    annot = mupdf.mpdf_create_annot( page, annot_type)
-                    for p in points:
-                        if PySequence_Size(p) != 2:
-                            THROWMSG("bad list of points")
-                        point = JM_point_from_py(p)
-                        mupdf.mpdf_add_annot_vertex(annot, point)
-
-                    JM_add_annot_id(annot, "A")
-                    mupdf.mpdf_update_annot(annot)
-                except Exception as e:
-                    jlib.log('{e=}')
-                    return
-                return Annot(self, annot)
-            finally:
-                if old_rotation != 0:
-                    self.set_rotation(old_rotation)
-            annot_postprocess(self, annot)
-            return annot
+        #return _fitz.Page_annot_xrefs(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return
+        return JM_get_annot_xref_list(page);
 
     def apply_redactions(self, images: int = 2) -> bool:
         """Apply the redaction annotations of the page.
@@ -4559,273 +4964,95 @@ class Page:
         shape.commit()  # append new contents object
         return True
 
+    def bound(self):
+        """Get page rectangle."""
+        CheckParent(self)
+        val = self.this.bound_page()
+        val = Rect(val)
+
+        return val
+
+    rect = property(bound, doc="page rectangle")
 
 
+    def delete_annot(self, annot):
+        """Delete annot and return next one."""
+        CheckParent(self)
+        CheckParent(annot)
 
-    def add_strikeout_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
-        """Add a 'StrikeOut' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
+        page = self._pdf_page()
+        while 1:
+            # first loop through all /IRT annots and remove them
+            irt_annot = JM_find_annot_irt(annot.this)
+            if not irt_annot:    # no more there
+                break
+            JM_delete_annot(page, irt_annot)
+        nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
+        JM_delete_annot(page, annot.this)
+        #fixme: page->doc->dirty = 1;
+        val = Annot(self, nextannot)
+
+        if val:
+            val.thisown = True
+            val.parent = weakref.proxy(self) # owning page object
+            val.parent._annot_refs[id(val)] = val
+        annot._erase()
+
+        return val
+
+
+        def add_polyline_annot(self, points: list) -> "struct Annot *":
+            """Add a 'PolyLine' annotation."""
+            old_rotation = annot_preprocess(self)
+            try:
+                #annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
+                #Page__add_multiline(points, PDF_ANNOT_POLY_LINE)
+                page = self._pdf_page()
+                try:
+                    n = PySequence_Size(points)
+                    if n < 2:
+                        THROWMSG("bad list of points")
+                    annot = mupdf.mpdf_create_annot( page, annot_type)
+                    for p in points:
+                        if PySequence_Size(p) != 2:
+                            THROWMSG("bad list of points")
+                        point = JM_point_from_py(p)
+                        mupdf.mpdf_add_annot_vertex(annot, point)
+
+                    JM_add_annot_id(annot, "A")
+                    mupdf.mpdf_update_annot(annot)
+                except Exception as e:
+                    jlib.log('{e=}')
+                    return
+                return Annot(self, annot)
+            finally:
+                if old_rotation != 0:
+                    self.set_rotation(old_rotation)
+            annot_postprocess(self, annot)
+            return annot
+
+    @property
+    def derotationMatrix(self) -> Matrix:
+        """Reflects page de-rotation."""
+        #return Matrix(TOOLS._derotate_matrix(self))
+        pdfpage = self._pdf_page()
+        if not pdfpage.m_internal:
+            #return JM_py_from_matrix(fz_identity);
+            return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
+        return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
+
+    def get_displaylist(self, annots=1):
+        '''
+        Make a DisplayList from the page for Pixmap generation.
+
+        Include (default) or exclude annotations.
+        '''
+        CheckParent(self)
+        if annots:
+            dl = mupdf.mfz_new_display_list_from_page(self.this)
         else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
-
-
-    def add_underline_annot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Underline' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
-
-
-    def add_squiggly_annot(self, quads=None, start=None,
-                         stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Squiggly' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
-
-
-    def add_highlight_annot(self, quads=None, start=None,
-                          stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Highlight' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        ret = self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
-        return ret
-
-
-
-
-
-
-
-
-
-
-
-
-
-    def add_rect_annot(self, rect: rect_like) -> "struct Annot *":
-        """Add a 'Square' (rectangle) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def add_circle_annot(self, rect: rect_like) -> "struct Annot *":
-        """Add a 'Circle' (ellipse, oval) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def add_polygon_annot(self, points: list) -> "struct Annot *":
-        """Add a 'Polygon' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def add_stamp_annot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
-        """Add a ('rubber') 'Stamp' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_stamp_annot(rect, stamp)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-
-
-    def add_ink_annot(self, handwriting: list) -> "struct Annot *":
-        """Add a 'Ink' ('handwriting') annotation.
-
-        The argument must be a list of lists of point_likes.
-        """
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_ink_annot(handwriting)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def add_file_annot(
-            self,
-            point: point_like,
-            buffer_: typing.ByteString,
-            filename: str,
-            ufilename: OptStr =None,
-            desc: OptStr =None,
-            icon: OptStr =None
-            ) -> "struct Annot *":
-        """Add a 'FileAttachment' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_file_annot(point,
-                    buffer_,
-                    filename,
-                    ufilename=ufilename,
-                    desc=desc,
-                    icon=icon,
-                    )
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        #jlib.log('{type(annot)=} {annot=}')
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def add_redact_annot(
-            self,
-            quad,
-            text: OptStr =None,
-            fontname: OptStr =None,
-            fontsize: float =11,
-            align: int =0,
-            fill: OptSeq =None,
-            text_color: OptSeq =None,
-            cross_out: bool =True,
-            ) -> "struct Annot *":
-        """Add a 'Redact' annotation."""
-        da_str = None
-        if text:
-            CheckColor(fill)
-            CheckColor(text_color)
-            if not fontname:
-                fontname = "Helv"
-            if not fontsize:
-                fontsize = 11
-            if not text_color:
-                text_color = (0, 0, 0)
-            if hasattr(text_color, "__float__"):
-                text_color = (text_color, text_color, text_color)
-            if len(text_color) > 3:
-                text_color = text_color[:3]
-            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
-            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
-            if fill is None:
-                fill = (1, 1, 1)
-            if fill:
-                if hasattr(fill, "__float__"):
-                    fill = (fill, fill, fill)
-                if len(fill) > 3:
-                    fill = fill[:3]
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
-                       align=align, fill=fill)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        #-------------------------------------------------------------
-        # change appearance to show a crossed-out rectangle
-        #-------------------------------------------------------------
-        if cross_out:
-            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
-            _, LL, LR, UR, UL = ap_tab
-            ap_tab.append(LR)
-            ap_tab.append(LL)
-            ap_tab.append(UR)
-            ap_tab.append(LL)
-            ap_tab.append(UL)
-            ap_tab.append(b"S")
-            ap = b"\n".join(ap_tab)
-            annot._setAP(ap, 0)
-        return annot
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    def add_caret_annot(self, point: point_like) -> "struct Annot *":
-        """Add a 'Caret' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_caret_annot(point)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return Annot(self, annot)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            dl = mupdf.mfz_new_display_list_from_page_contents(self.this)
+        return DisplayList(dl)
 
     def get_image_bbox(self, name, transform=0):
         """Get rectangle occupied by image 'name'.
@@ -4891,68 +5118,56 @@ class Page:
 
         return val
 
+    def get_oc_items(self) -> list:
+        """Get OCGs and OCMDs used in the page's contents.
 
-
-    def run(self, dw, m):
-        """Run page through a device.
-        dw: DeviceWrapper
+        Returns:
+            List of items (name, xref, type), where type is one of "ocg" / "ocmd",
+            and name is the property name.
         """
-        CheckParent(self)
-        #return _fitz.Page_run(self, dw, m)
-        mupdf.mfz_run_page(self.this, dw.device, JM_matrix_from_py(m), mupdf.Cookie());
+        rc = []
+        for pname, xref in self._get_resource_properties():
+            text = self.parent.xrefObject(xref, compressed=True)
+            if "/Type/OCG" in text:
+                octype = "ocg"
+            elif "/Type/OCMD" in text:
+                octype = "ocmd"
+            else:
+                continue
+            rc.append((pname, xref, octype))
+        return rc
 
+    def get_pixmap(page, **kw): # -> Pixmap:
+        """Create pixmap of page.
 
-    def _get_text_page(self, clip=None, flags=0):
-        val = _fitz.Page__get_text_page(self, clip, flags)
-        val.thisown = True
+        Args:
+            matrix: Matrix for transformation (default: Identity).
+            colorspace: (str/Colorspace) cmyk, rgb, gray - case ignored, default csRGB.
+            clip: (irect-like) restrict rendering to this area.
+            alpha: (bool) whether to include alpha channel
+            annots: (bool) whether to also render annotations
+        """
+        CheckParent(page)
+        matrix = kw.get("matrix", Identity)
+        colorspace = kw.get("colorspace", csRGB)
+        clip = kw.get("clip")
+        alpha = bool(kw.get("alpha", False))
+        annots = bool(kw.get("annots", True))
 
-        return val
+        if type(colorspace) is str:
+            if colorspace.upper() == "GRAY":
+                colorspace = csGRAY
+            elif colorspace.upper() == "CMYK":
+                colorspace = csCMYK
+            else:
+                colorspace = csRGB
+        if colorspace.n not in (1, 3, 4):
+            raise ValueError("unsupported colorspace")
 
-
-    def get_textpage(self, clip: rect_like = None, flags: int = 0, matrix=None) -> "TextPage":
-        CheckParent(self)
-        if matrix is None:
-            matrix = Matrix(1, 1)
-        old_rotation = self.rotation
-        if old_rotation != 0:
-            self.set_rotation(0)
-        try:
-            textpage = self._get_textpage(clip, flags=flags, matrix=matrix)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        textpage.parent = weakref.proxy(self)
-        return textpage
-
-    @property
-    def language(self):
-        """Page language."""
-        #return _fitz.Page_language(self)
-        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
-        if not pdfpage.m_internal:
-            return
-        lang = mupdf.mpdf_dict_get_inheritable(pdfpage.obj(), PDF_NAME('Lang'))
-        if not lang.m_internal:
-            return
-        return mupdf.mpdf_to_str_buf(lang)
-
-
-    def set_language(self, language=None):
-        """Set PDF page default language."""
-        CheckParent(self)
-        #return _fitz.Page_set_language(self, language)
-        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
-        ASSERT_PDF(pdfpage)
-        if not language:
-            pdf_dict_del(pdfpage.obj(), PDF_NAME('Lang'))
-        else:
-            lang = mupdf.mfz_text_language_from_string(language)
-            mupdf.mpdf_dict_put_text_string(
-                    pdfpage.obj,
-                    PDF_NAME(Lang),
-                    mupdf.mfz_string_from_text_language(buf, lang)  # fixme: needs wrapper to handle char buf[8].
-                    )
-
+        dl = page.get_displaylist(annots=annots)
+        pix = dl.get_pixmap(matrix=matrix, colorspace=colorspace, alpha=alpha, clip=clip)
+        dl = None
+        return Pixmap(pix)
 
     def get_svg_image(self, matrix=None, text_as_path=1):
         """Make SVG image from page."""
@@ -4983,165 +5198,375 @@ class Page:
         text = JM_EscapeStrFromBuffer(res)
         return text
 
-
-    def _set_opacity(self, gstate=None, CA=1, ca=1):
-
-        if min(CA, ca) >= 1:
-            return
-        tCA = int(round(max(CA , 0) * 100))
-        if tCA >= 100:
-            tCA = 99
-        tca = int(round(max(ca, 0) * 100))
-        if tca >= 100:
-            tca = 99
-        gstate = "fitzca%02i%02i" % (tCA, tca)
-
-        #return _fitz.Page__set_opacity(self, gstate, CA, ca)
-        if not gstate:
-            return
-        page = mupdf.mpdf_page_from_fz_page(self.this)
-        ASSERT_PDF(page)
-        resources = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Resources'))
-        if not resources.m_internal:
-            resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
-        extg = mupdf.mpdf_dict_get(resources, PDF_NAME('ExtGState'))
-        if not extg.m_internal:
-            extg = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('ExtGState'), 2)
-        n = mupdf.mpdf_dict_len(extg)
-        for i in range(m):
-            o1 = mupdf.mpdf_dict_get_key(extg, i)
-            name = mupdf.mpdf_to_name(o1)
-            if name == gstate:
-                return gstate
-        opa = mupdf.mpdf_new_dict(page.doc(), 3)
-        mupdf.mpdf_dict_put_real(opa, PDF_NAME('CA'), CA)
-        mupdf.mpdf_dict_put_real(opa, PDF_NAME('ca'), ca)
-        mupdf.mpdf_dict_puts(extg, gstate, opa)
-        return gstate
-
-    def _pdf_page(self):
-        '''
-        Returns self.this as a mupdf.PdfPage using page_from_fz_page() if
-        required.
-        '''
-        if isinstance(self.this, mupdf.PdfPage):
-            return self.this
-        return self.this.page_from_fz_page()
-
-    def _add_caret_annot(self, point):
-        #return _fitz.Page__add_caret_annot(self, point)
-        page = self._pdf_page()
-        annot = page.create_annot(mupdf.PDF_ANNOT_CARET)
-        if point:
-            p = JM_point_from_py(point)
-            r = annot.annot_rect()
-            r = mupdf.Rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
-            annot.set_annot_rect(r)
-        JM_add_annot_id(annot, "A")
-        annot.update_annot()
-        return annot;
-
-
-    def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
-        #return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
-        page = self._pdf_page()
-        fcol = [ 1, 1, 1, 0]
-        nfcol = 0
+    def get_textpage(self, clip: rect_like = None, flags: int = 0, matrix=None) -> "TextPage":
+        CheckParent(self)
+        if matrix is None:
+            matrix = Matrix(1, 1)
+        old_rotation = self.rotation
+        if old_rotation != 0:
+            self.set_rotation(0)
         try:
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_REDACT)
-            q = JM_quad_from_py(quad)
-            r = mupdf.mfz_rect_from_quad(q)
-
-            # TODO calculate de-rotated rect
-            mupdf.mpdf_set_annot_rect(annot, r)
-            if fill:
-                nfcol = JM_color_FromSequence(fill, fcol)
-                arr = mupdf.mpdf_new_array(page.doc(), nfcol)
-                for i in range(nfcol):
-                    mupdf.mpdf_array_push_real(arr, fcol[i])
-                mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('IC'), arr)
-            if text:
-                mupdf.mpdf_dict_puts(
-                        annot.annot_obj(),
-                        "OverlayText",
-                        mupdf.mpdf_new_text_string(text),
-                        )
-                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('DA'), da_str)
-                mupdf.mpdf_dict_put_int(annot.annot_obj(), PDF_NAME('Q'), align)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
-        annot = mupdf.mpdf_keep_annot(annot)
-        return Annot(self, annot)
-
-    def _add_line_annot(self, p1, p2):
-        #return _fitz.Page__add_line_annot(self, p1, p2)
-        page = self._pdf_page()
-        try:
-            ASSERT_PDF(page);
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_LINE)
-            a = JM_point_from_py(p1)
-            b = JM_point_from_py(p2)
-            mupdf.mpdf_set_annot_line(annot, a, b)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
-        assert annot.m_internal
-        return Annot(self, annot)
-
-    def _add_text_annot(self, point, text, icon=None):
-        #return _fitz.Page__add_text_annot(self, point, text, icon)
-        page = self._pdf_page()
-        p = point
-        try:
-            ASSERT_PDF(page)
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
-            r = mupdf.mpdf_annot_rect(annot)
-            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            flags = mupdf.PDF_ANNOT_IS_PRINT
-            mupdf.mpdf_set_annot_flags(annot, flags)
-            mupdf.mpdf_set_annot_contents(annot, text)
-            if icon:
-                mupdf.mpdf_set_annot_icon_name(annot, icon)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_set_annot_flags(annot, flags)
-        except Exception as e:
-            jlib.log('{e=}: {jlib.exception_info()=}')
-            return
-        return Annot(self, annot)
-
-    def add_text_annot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
-        """Add a 'Text' (sticky note) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_text_annot(point, text, icon=icon)
+            textpage = self._get_textpage(clip, flags=flags, matrix=matrix)
         finally:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
+        textpage.parent = weakref.proxy(self)
+        return textpage
 
-    def add_line_annot(self, p1: point_like, p2: point_like) -> "struct Annot *":
-        """Add a 'Line' annotation."""
+    def getDisplayList(self, annots=1):
+
+        """Make a DisplayList from the page for Pixmap generation.
+
+        Include (default) or exclude annotations."""
+
+        CheckParent(self)
+
+
+        val = _fitz.Page_getDisplayList(self, annots)
+        val.thisown = True
+
+        return val
+
+    def getDrawings(self):
+        """Get page draw paths."""
+
+        CheckParent(self)
+        val = self._getDrawings()  # read raw list from trace device
+        paths = []
+
+        def new_path():
+            """Return empty path dict to use as template."""
+            return {
+                "color": None,
+                "fill": None,
+                "width": 1.0,
+                "lineJoin": 0,
+                "lineCap": (0, 0, 0),
+                "dashes": "[] 0",
+                "closePath": False,
+                "even_odd": False,
+                "rect": Rect(),
+                "items": [],
+                "opacity": 1.0,
+            }
+
+        def is_rectangle(path):
+            """Check if path represents a rectangle.
+
+            For this, it must be exactly three connected lines, of which
+            the first and the last one must be horizontal and line two
+            must be vertical.
+            """
+            if not path["closePath"]:
+                return False
+            if [item[0] for item in path["items"]] != ["l", "l", "l"]:
+                return False
+            p1, p2 = path["items"][0][1:]  # first line
+            p3, p4 = path["items"][1][1:]  # second line
+            p5, p6 = path["items"][2][1:]  # third line
+            if p2 != p3 or p4 != p5:  # must be connected
+                return False
+            if p1.y != p2.y or p3.x != p4.x or p5.y != p6.y:
+                return False
+            return True
+
+        def check_and_merge(this, prev):
+            """Check if "this" is the "stroke" version of "prev".
+
+            If so, update "prev" with appropriate values and return True,
+            else do nothing and return False.
+            """
+            if prev is None:
+                return False
+            if this["items"] != prev["items"]:  # must have same items
+                return False
+            if this["closePath"] != prev["closePath"]:
+                return False
+            if this["color"] is not None:
+                prev["color"] = this["color"]
+            if this["width"] != 1:
+                prev["width"] = this["width"]
+            if this["dashes"] != "[] 0":
+                prev["dashes"] = this["dashes"]
+            if this["lineCap"] != (0, 0, 0):
+                prev["lineCap"] = this["lineCap"]
+            if this["lineJoin"] != 0:
+                prev["lineJoin"] = this["lineJoin"]
+            return True
+
+        for item in val:
+            if type(item) is list:
+                if item[0] in ("fill", "stroke", "clip", "clip-stroke"):
+    # this begins a new path
+                    path = new_path()
+                    ctm = Matrix(1, 1)
+                    factor = 1  # modify width and dash length
+                    current = None  # the current point
+                    for x in item[1:]:  # loop through path parms that follow
+                        if x == "non-zero":
+                            path["even_odd"] = False
+                        elif x == "even-odd":
+                            path["even_odd"] = True
+                        elif x[0] == "matrix":
+                            ctm = Matrix(x[1])
+                            if abs(ctm.a) == abs(ctm.d):
+                                factor = abs(ctm.a)
+                        elif x[0] == "w":
+                            path["width"] = x[1] * factor
+                        elif x[0] == "lineCap":
+                            path["lineCap"] = x[1:]
+                        elif x[0] == "lineJoin":
+                            path["lineJoin"] = x[1]
+                        elif x[0] == "color":
+                            if item[0] == "fill":
+                                path["fill"] = x[1:]
+                            else:
+                                path["color"] = x[1:]
+                        elif x[0] == "dashPhase":
+                            dashPhase = x[1] * factor
+                        elif x[0] == "dashes":
+                            dashes = x[1:]
+                            l = list(map(lambda y: float(y) * factor, dashes))
+                            l = list(map(str, l))
+                            path["dashes"] = "[%s] %g" % (" ".join(l), dashPhase)
+                        elif x[0] == "alpha":
+                            path["opacity"] = round(x[1], 2)
+
+                if item[0] == "m":
+                    p = Point(item[1]) * ctm
+                    current = p
+                    path["rect"] = Rect(p, p)
+                elif item[0] == "l":
+                    p2 = Point(item[1]) * ctm
+                    path["items"].append(("l", current, p2))
+                    current = p2
+                    path["rect"] |= p2
+                elif item[0] == "c":
+                    p2 = Point(item[1]) * ctm
+                    p3 = Point(item[2]) * ctm
+                    p4 = Point(item[3]) * ctm
+                    path["items"].append(("c", current, p2, p3, p4))
+                    current = p4
+                    path["rect"] |= p2
+                    path["rect"] |= p3
+                    path["rect"] |= p4
+            elif item == "closePath":
+                path["closePath"] = True
+            elif item in ("estroke", "efill", "eclip", "eclip-stroke"):
+                if is_rectangle(path):
+                    path["items"] = [("re", path["rect"])]
+                    path["closePath"] = False
+
+                try:  # check if path is "stroke" duplicate of previous
+                    prev = paths.pop()  # get previous path in list
+                except IndexError:
+                    prev = None  # we are the first
+                if prev is None:
+                    paths.append(path)
+                elif check_and_merge(path, prev) is False:  # no duplicates
+                    paths.append(prev)  # re-append old one
+                    paths.append(path)  # append new one
+                else:
+                    paths.append(prev)  # append modified old one
+
+                path = None
+            else:
+                print("unexpected item:", item)
+
+        return paths
+
+    def insert_text(
+            page,
+            point: point_like,
+            text: typing.Union[str, list],
+            fontsize: float = 11,
+            lineheight: OptFloat = None,
+            fontname: str = "helv",
+            fontfile: OptStr = None,
+            set_simple: int = 0,
+            encoding: int = 0,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            border_width: float = 1,
+            render_mode: int = 0,
+            rotate: int = 0,
+            morph: OptSeq = None,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ):
+        img = page.new_shape()
+        rc = img.insert_text(
+                point,
+                text,
+                fontsize=fontsize,
+                lineheight=lineheight,
+                fontname=fontname,
+                fontfile=fontfile,
+                set_simple=set_simple,
+                encoding=encoding,
+                color=color,
+                fill=fill,
+                border_width=border_width,
+                render_mode=render_mode,
+                rotate=rotate,
+                morph=morph,
+                stroke_opacity=stroke_opacity,
+                fill_opacity=fill_opacity,
+                oc=oc,
+                )
+        if rc >= 0:
+            img.commit(overlay)
+        return rc
+
+    def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
+                   set_simple=False, wmode=0, encoding=0):
+        doc = self.parent
+        if doc is None:
+            raise ValueError("orphaned object: parent is None")
+        idx = 0
+
+        if fontname.startswith("/"):
+            fontname = fontname[1:]
+
+        font = CheckFont(self, fontname)
+        if font is not None:                    # font already in font list of page
+            xref = font[0]                      # this is the xref
+            if CheckFontInfo(doc, xref):        # also in our document font list?
+                return xref                     # yes: we are done
+            # need to build the doc FontInfo entry - done via get_char_widths
+            doc.get_char_widths(xref)
+            return xref
+
+        #--------------------------------------------------------------------------
+        # the font is not present for this page
+        #--------------------------------------------------------------------------
+
+        bfname = Base14_fontdict.get(fontname.lower(), None) # BaseFont if Base-14 font
+
+        serif = 0
+        CJK_number = -1
+        CJK_list_n = ["china-t", "china-s", "japan", "korea"]
+        CJK_list_s = ["china-ts", "china-ss", "japan-s", "korea-s"]
+
         try:
-            old_rotation = annot_preprocess(self)
+            CJK_number = CJK_list_n.index(fontname)
+            serif = 0
+        except:
+            pass
+
+        if CJK_number < 0:
             try:
-                annot = self._add_line_annot(p1, p2)
-            finally:
-                if old_rotation != 0:
-                    self.set_rotation(old_rotation)
-            annot_postprocess(self, annot)
-            return annot
-        except Exception as e:
-            jlib.log('{jlib.exception_info()}')
-            assert 0
+                CJK_number = CJK_list_s.index(fontname)
+                serif = 1
+            except:
+                pass
+
+        if fontname.lower() in fitz_fontdescriptors.keys():
+            import pymupdf_fonts
+            fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
+            del pymupdf_fonts
+
+        # install the font for the page
+        jlib.log('{fontname=} {bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {CJK_number=}')
+        val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
+                               wmode, serif, encoding, CJK_number)
+
+        if not val:                   # did not work, error return
+            return val
+
+        xref = val[0]                 # xref of installed font
+        fontdict = val[1]
+
+        if CheckFontInfo(doc, xref):  # check again: document already has this font
+            return xref               # we are done
+
+        # need to create document font info
+        doc.get_char_widths(xref, fontdict=fontdict)
+        return xref
+
+    def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
+        """Load an annot by name (/NM key) or xref.
+
+        Args:
+            ident: identifier, either name (str) or xref (int).
+        """
+
+        CheckParent(self)
+        if type(ident) is str:
+            xref = 0
+            name = ident
+        elif type(ident) is int:
+            xref = ident
+            name = None
+        else:
+            raise ValueError("identifier must be string or integer")
+        val = self._load_annot(name, xref)
+        if not val:
+            return val
+        val.thisown = True
+        val.parent = weakref.proxy(self)
+        self._annot_refs[id(val)] = val
+        return val
+
+    load_annot = loadAnnot
+
+    @property
+    def language(self):
+        """Page language."""
+        #return _fitz.Page_language(self)
+        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
+        if not pdfpage.m_internal:
+            return
+        lang = mupdf.mpdf_dict_get_inheritable(pdfpage.obj(), PDF_NAME('Lang'))
+        if not lang.m_internal:
+            return
+        return mupdf.mpdf_to_str_buf(lang)
+
+    def new_shape(self):
+        return Shape(self)
+
+    @property
+    def rotationMatrix(self) -> Matrix:
+        """Reflects page rotation."""
+        return Matrix(TOOLS._rotate_matrix(self))
+
+    def run(self, dw, m):
+        """Run page through a device.
+        dw: DeviceWrapper
+        """
+        CheckParent(self)
+        #return _fitz.Page_run(self, dw, m)
+        mupdf.mfz_run_page(self.this, dw.device, JM_matrix_from_py(m), mupdf.Cookie());
+
+    def set_language(self, language=None):
+        """Set PDF page default language."""
+        CheckParent(self)
+        #return _fitz.Page_set_language(self, language)
+        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
+        ASSERT_PDF(pdfpage)
+        if not language:
+            pdf_dict_del(pdfpage.obj(), PDF_NAME('Lang'))
+        else:
+            lang = mupdf.mfz_text_language_from_string(language)
+            mupdf.mpdf_dict_put_text_string(
+                    pdfpage.obj,
+                    PDF_NAME(Lang),
+                    mupdf.mfz_string_from_text_language(buf, lang)  # fixme: needs wrapper to handle char buf[8].
+                    )
+
+    def setCropBox(self, rect):
+        """Set the CropBox."""
+        CheckParent(self)
+
+        return _fitz.Page_setCropBox(self, rect)
+
+    def setMediaBox(self, rect):
+        """Set the MediaBox."""
+        CheckParent(self)
+
+        return _fitz.Page_setMediaBox(self, rect)
 
     def _add_ink_annot(self, list):
         #return _fitz.Page__add_ink_annot(self, list)
@@ -5314,8 +5739,6 @@ class Page:
             return;
         return Annot(self, annot)
 
-
-
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
         #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
         page = self._pdf_page()
@@ -5341,281 +5764,6 @@ class Page:
         JM_add_annot_id(annot, "A")
         annot.update_annot()
         return Annot(self, annot)
-
-    def add_freetext_annot(self, rect: rect_like, text: str, fontsize: float =11,
-                         fontname: OptStr =None, text_color: OptSeq =None,
-                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
-        """Add a 'FreeText' annotation."""
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
-                    fontname=fontname, text_color=text_color,
-                    fill_color=fill_color, align=align, rotate=rotate)
-        finally:
-            if old_rotation != 0:
-                self.set_rotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    @property
-    def rotationMatrix(self) -> Matrix:
-        """Reflects page rotation."""
-        return Matrix(TOOLS._rotate_matrix(self))
-
-    @property
-    def derotationMatrix(self) -> Matrix:
-        """Reflects page de-rotation."""
-        #return Matrix(TOOLS._derotate_matrix(self))
-        pdfpage = self._pdf_page()
-        if not pdfpage.m_internal:
-            #return JM_py_from_matrix(fz_identity);
-            return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
-        return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
-
-
-    def addCaretAnnot(self, point: point_like) -> "struct Annot *":
-        """Add a 'Caret' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_caret_annot(point)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addStrikeoutAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
-        """Add a 'StrikeOut' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
-
-
-    def addUnderlineAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Underline' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
-
-
-    def addSquigglyAnnot(self, quads=None, start=None,
-                         stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Squiggly' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
-
-
-    def addHighlightAnnot(self, quads=None, start=None,
-                          stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Highlight' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
-
-
-    def addRectAnnot(self, rect: rect_like) -> "struct Annot *":
-        """Add a 'Square' (rectangle) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addCircleAnnot(self, rect: rect_like) -> "struct Annot *":
-        """Add a 'Circle' (ellipse, oval) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addTextAnnot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
-        """Add a 'Text' (sticky note) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_text_annot(point, text, icon=icon)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addLineAnnot(self, p1: point_like, p2: point_like) -> "struct Annot *":
-        """Add a 'Line' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_line_annot(p1, p2)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addPolylineAnnot(self, points: list) -> "struct Annot *":
-        """Add a 'PolyLine' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addPolygonAnnot(self, points: list) -> "struct Annot *":
-        """Add a 'Polygon' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addStampAnnot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
-        """Add a ('rubber') 'Stamp' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_stamp_annot(rect, stamp)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addInkAnnot(self, handwriting: list) -> "struct Annot *":
-        """Add a 'Ink' ('handwriting') annotation.
-
-        The argument must be a list of lists of point_likes.
-        """
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_ink_annot(handwriting)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addFileAnnot(self, point: point_like,
-        buffer: typing.ByteString,
-        filename: str,
-        ufilename: OptStr =None,
-        desc: OptStr =None,
-        icon: OptStr =None) -> "struct Annot *":
-        """Add a 'FileAttachment' annotation."""
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_file_annot(point,
-                        buffer,
-                        filename,
-                        ufilename=ufilename,
-                        desc=desc,
-                        icon=icon)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addFreetextAnnot(self, rect: rect_like, text: str, fontsize: float =11,
-                         fontname: OptStr =None, text_color: OptSeq =None,
-                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
-        """Add a 'FreeText' annotation."""
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
-                    fontname=fontname, text_color=text_color,
-                    fill_color=fill_color, align=align, rotate=rotate)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-
-    def addRedactAnnot(self, quad, text: OptStr =None, fontname: OptStr =None,
-                       fontsize: float =11, align: int =0, fill: OptSeq =None, text_color: OptSeq =None,
-                       cross_out: bool =True) -> "struct Annot *":
-        """Add a 'Redact' annotation."""
-        da_str = None
-        if text:
-            CheckColor(fill)
-            CheckColor(text_color)
-            if not fontname:
-                fontname = "Helv"
-            if not fontsize:
-                fontsize = 11
-            if not text_color:
-                text_color = (0, 0, 0)
-            if hasattr(text_color, "__float__"):
-                text_color = (text_color, text_color, text_color)
-            if len(text_color) > 3:
-                text_color = text_color[:3]
-            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
-            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
-            if fill is None:
-                fill = (1, 1, 1)
-            if fill:
-                if hasattr(fill, "__float__"):
-                    fill = (fill, fill, fill)
-                if len(fill) > 3:
-                    fill = fill[:3]
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
-                       align=align, fill=fill)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-    #-------------------------------------------------------------
-    # change appearance to show a crossed-out rectangle
-    #-------------------------------------------------------------
-        if cross_out:
-            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
-            _, LL, LR, UR, UL = ap_tab
-            ap_tab.append(LR)
-            ap_tab.append(LL)
-            ap_tab.append(UR)
-            ap_tab.append(LL)
-            ap_tab.append(UL)
-            ap_tab.append(b"S")
-            ap = b"\n".join(ap_tab)
-            annot._setAP(ap, 0)
-        return annot
-
 
     def _load_annot(self, name, xref):
         #return _fitz.Page__load_annot(self, name, xref)
@@ -5658,262 +5806,13 @@ class Page:
         self._set_resource_property(mc, oc)
         return mc
 
-    def get_oc_items(self) -> list:
-        """Get OCGs and OCMDs used in the page's contents.
-
-        Returns:
-            List of items (name, xref, type), where type is one of "ocg" / "ocmd",
-            and name is the property name.
-        """
-        rc = []
-        for pname, xref in self._get_resource_properties():
-            text = self.parent.xrefObject(xref, compressed=True)
-            if "/Type/OCG" in text:
-                octype = "ocg"
-            elif "/Type/OCMD" in text:
-                octype = "ocmd"
-            else:
-                continue
-            rc.append((pname, xref, octype))
-        return rc
 
 
-    def annot_names(self):
-        """List of names of annotations, fields and links."""
-        CheckParent(self)
-
-        #return _fitz.Page_annot_names(self)
-        page = self._pdf_page()
-        if not page.m_internal:
-            return
-        return JM_get_annot_id_list(page)
-
-
-    def annot_xrefs(self):
-        """List of xref numbers of annotations, fields and links."""
-        CheckParent(self)
-
-        #return _fitz.Page_annot_xrefs(self)
-        page = self._pdf_page()
-        if not page.m_internal:
-            return
-        return JM_get_annot_xref_list(page);
-
-
-    def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
-        """Load an annot by name (/NM key) or xref.
-
-        Args:
-            ident: identifier, either name (str) or xref (int).
-        """
-
-        CheckParent(self)
-        if type(ident) is str:
-            xref = 0
-            name = ident
-        elif type(ident) is int:
-            xref = ident
-            name = None
-        else:
-            raise ValueError("identifier must be string or integer")
-        val = self._load_annot(name, xref)
-        if not val:
-            return val
-        val.thisown = True
-        val.parent = weakref.proxy(self)
-        self._annot_refs[id(val)] = val
-        return val
-
-    load_annot = loadAnnot
-
-
-    #---------------------------------------------------------------------
-    # page addWidget
-    #---------------------------------------------------------------------
-    def addWidget(self, widget: Widget) -> "struct Annot *":
-        """Add a 'Widget' (form field)."""
-        CheckParent(self)
-        doc = self.parent
-        if not doc.isPDF:
-            raise ValueError("not a PDF")
-        widget._validate()
-        annot = self._addWidget(widget.field_type, widget.field_name)
-        if not annot:
-            return None
-        annot.thisown = True
-        annot.parent = weakref.proxy(self) # owning page object
-        self._annot_refs[id(annot)] = annot
-        widget.parent = annot.parent
-        widget._annot = annot
-        widget.update()
-        return annot
 
 
     def _addWidget(self, field_type, field_name):
         return _fitz.Page__addWidget(self, field_type, field_name)
 
-    def getDisplayList(self, annots=1):
-
-        """Make a DisplayList from the page for Pixmap generation.
-
-        Include (default) or exclude annotations."""
-
-        CheckParent(self)
-
-
-        val = _fitz.Page_getDisplayList(self, annots)
-        val.thisown = True
-
-        return val
-
-
-    def getDrawings(self):
-        """Get page draw paths."""
-
-        CheckParent(self)
-        val = self._getDrawings()  # read raw list from trace device
-        paths = []
-
-        def new_path():
-            """Return empty path dict to use as template."""
-            return {
-                "color": None,
-                "fill": None,
-                "width": 1.0,
-                "lineJoin": 0,
-                "lineCap": (0, 0, 0),
-                "dashes": "[] 0",
-                "closePath": False,
-                "even_odd": False,
-                "rect": Rect(),
-                "items": [],
-                "opacity": 1.0,
-            }
-
-        def is_rectangle(path):
-            """Check if path represents a rectangle.
-
-            For this, it must be exactly three connected lines, of which
-            the first and the last one must be horizontal and line two
-            must be vertical.
-            """
-            if not path["closePath"]:
-                return False
-            if [item[0] for item in path["items"]] != ["l", "l", "l"]:
-                return False
-            p1, p2 = path["items"][0][1:]  # first line
-            p3, p4 = path["items"][1][1:]  # second line
-            p5, p6 = path["items"][2][1:]  # third line
-            if p2 != p3 or p4 != p5:  # must be connected
-                return False
-            if p1.y != p2.y or p3.x != p4.x or p5.y != p6.y:
-                return False
-            return True
-
-        def check_and_merge(this, prev):
-            """Check if "this" is the "stroke" version of "prev".
-
-            If so, update "prev" with appropriate values and return True,
-            else do nothing and return False.
-            """
-            if prev is None:
-                return False
-            if this["items"] != prev["items"]:  # must have same items
-                return False
-            if this["closePath"] != prev["closePath"]:
-                return False
-            if this["color"] is not None:
-                prev["color"] = this["color"]
-            if this["width"] != 1:
-                prev["width"] = this["width"]
-            if this["dashes"] != "[] 0":
-                prev["dashes"] = this["dashes"]
-            if this["lineCap"] != (0, 0, 0):
-                prev["lineCap"] = this["lineCap"]
-            if this["lineJoin"] != 0:
-                prev["lineJoin"] = this["lineJoin"]
-            return True
-
-        for item in val:
-            if type(item) is list:
-                if item[0] in ("fill", "stroke", "clip", "clip-stroke"):
-    # this begins a new path
-                    path = new_path()
-                    ctm = Matrix(1, 1)
-                    factor = 1  # modify width and dash length
-                    current = None  # the current point
-                    for x in item[1:]:  # loop through path parms that follow
-                        if x == "non-zero":
-                            path["even_odd"] = False
-                        elif x == "even-odd":
-                            path["even_odd"] = True
-                        elif x[0] == "matrix":
-                            ctm = Matrix(x[1])
-                            if abs(ctm.a) == abs(ctm.d):
-                                factor = abs(ctm.a)
-                        elif x[0] == "w":
-                            path["width"] = x[1] * factor
-                        elif x[0] == "lineCap":
-                            path["lineCap"] = x[1:]
-                        elif x[0] == "lineJoin":
-                            path["lineJoin"] = x[1]
-                        elif x[0] == "color":
-                            if item[0] == "fill":
-                                path["fill"] = x[1:]
-                            else:
-                                path["color"] = x[1:]
-                        elif x[0] == "dashPhase":
-                            dashPhase = x[1] * factor
-                        elif x[0] == "dashes":
-                            dashes = x[1:]
-                            l = list(map(lambda y: float(y) * factor, dashes))
-                            l = list(map(str, l))
-                            path["dashes"] = "[%s] %g" % (" ".join(l), dashPhase)
-                        elif x[0] == "alpha":
-                            path["opacity"] = round(x[1], 2)
-
-                if item[0] == "m":
-                    p = Point(item[1]) * ctm
-                    current = p
-                    path["rect"] = Rect(p, p)
-                elif item[0] == "l":
-                    p2 = Point(item[1]) * ctm
-                    path["items"].append(("l", current, p2))
-                    current = p2
-                    path["rect"] |= p2
-                elif item[0] == "c":
-                    p2 = Point(item[1]) * ctm
-                    p3 = Point(item[2]) * ctm
-                    p4 = Point(item[3]) * ctm
-                    path["items"].append(("c", current, p2, p3, p4))
-                    current = p4
-                    path["rect"] |= p2
-                    path["rect"] |= p3
-                    path["rect"] |= p4
-            elif item == "closePath":
-                path["closePath"] = True
-            elif item in ("estroke", "efill", "eclip", "eclip-stroke"):
-                if is_rectangle(path):
-                    path["items"] = [("re", path["rect"])]
-                    path["closePath"] = False
-
-                try:  # check if path is "stroke" duplicate of previous
-                    prev = paths.pop()  # get previous path in list
-                except IndexError:
-                    prev = None  # we are the first
-                if prev is None:
-                    paths.append(path)
-                elif check_and_merge(path, prev) is False:  # no duplicates
-                    paths.append(prev)  # re-append old one
-                    paths.append(path)  # append new one
-                else:
-                    paths.append(prev)  # append modified old one
-
-                path = None
-            else:
-                print("unexpected item:", item)
-
-        return paths
 
 
     def _getDrawings(self):
@@ -5932,43 +5831,6 @@ class Page:
 
     def _makePixmap(self, doc, ctm, cs, alpha=0, annots=1, clip=None):
         return _fitz.Page__makePixmap(self, doc, ctm, cs, alpha, annots, clip)
-
-    def setMediaBox(self, rect):
-        """Set the MediaBox."""
-        CheckParent(self)
-
-        return _fitz.Page_setMediaBox(self, rect)
-
-
-    def setCropBox(self, rect):
-        """Set the CropBox."""
-        CheckParent(self)
-
-        return _fitz.Page_setCropBox(self, rect)
-
-
-    def loadLinks(self):
-        """Get first Link."""
-        CheckParent(self)
-
-        val = _fitz.Page_loadLinks(self)
-
-        if val:
-            val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
-            self._annot_refs[id(val)] = val
-            if self.parent.isPDF:
-                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
-                val.xref = link_id[0]
-                val.id = link_id[2]
-            else:
-                val.xref = 0
-                val.id = ""
-
-
-        return val
-
-    firstLink = property(loadLinks, doc="First link on page")
 
     @property
     def firstAnnot(self):
@@ -6002,6 +5864,29 @@ class Page:
 
 
         return val
+
+    def loadLinks(self):
+        """Get first Link."""
+        CheckParent(self)
+
+        val = _fitz.Page_loadLinks(self)
+
+        if val:
+            val.thisown = True
+            val.parent = weakref.proxy(self) # owning page object
+            self._annot_refs[id(val)] = val
+            if self.parent.isPDF:
+                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
+                val.xref = link_id[0]
+                val.id = link_id[2]
+            else:
+                val.xref = 0
+                val.id = ""
+
+
+        return val
+
+    firstLink = property(loadLinks, doc="First link on page")
 
 
     def deleteLink(self, linkdict):
@@ -12992,18 +12877,43 @@ def _get_glyph_text() -> bytes:
 
 
 
+def get_mupdf_items():
+    self = sys.modules[__name__]
+    setattr(self, 'foobartest', 42)
+    assert foobartest == 42
+    n = 0
+    #items = inspect.getmembers(mupdf)
+    #jlib.log('{len(items)=}')
+    for name, value in inspect.getmembers(mupdf):
+        #print(f'n={n} Setting {name}')
+        #jlib.log(f'n={n} Setting {name}')
+        continue
+        if name.startswith('PDF_'):
+            assert not inspect.isroutine(value)
+            #jlib.log('n={n} Setting {name}')
+            n = 0
+            setattr(self, name, value)
+        else:
+            #jlib.log('n={n} {name}')
+            n += 1
 
+get_mupdf_items()
 
-PDF_PERM_PRINT = mupdf.PDF_PERM_PRINT
-PDF_PERM_MODIFY = mupdf.PDF_PERM_MODIFY
-PDF_PERM_COPY = mupdf.PDF_PERM_COPY
-PDF_PERM_ANNOTATE = mupdf.PDF_PERM_ANNOTATE
-PDF_PERM_FORM = mupdf.PDF_PERM_FORM
-PDF_PERM_ACCESSIBILITY = mupdf.PDF_PERM_ACCESSIBILITY
-PDF_PERM_ASSEMBLE = mupdf.PDF_PERM_ASSEMBLE
-PDF_PERM_PRINT_HQ = mupdf.PDF_PERM_PRINT_HQ
+fitz_fontdescriptors = dict()
 
-PDF_ENCRYPT_AES_256 = mupdf.PDF_ENCRYPT_AES_256
+jlib.log('{foobartest=}')
+
+if 0:
+    PDF_PERM_PRINT = mupdf.PDF_PERM_PRINT
+    PDF_PERM_MODIFY = mupdf.PDF_PERM_MODIFY
+    PDF_PERM_COPY = mupdf.PDF_PERM_COPY
+    PDF_PERM_ANNOTATE = mupdf.PDF_PERM_ANNOTATE
+    PDF_PERM_FORM = mupdf.PDF_PERM_FORM
+    PDF_PERM_ACCESSIBILITY = mupdf.PDF_PERM_ACCESSIBILITY
+    PDF_PERM_ASSEMBLE = mupdf.PDF_PERM_ASSEMBLE
+    PDF_PERM_PRINT_HQ = mupdf.PDF_PERM_PRINT_HQ
+
+    PDF_ENCRYPT_AES_256 = mupdf.PDF_ENCRYPT_AES_256
 
 # colorspace identifiers
 CS_GRAY = mupdf.Colorspace.Fixed_GRAY
