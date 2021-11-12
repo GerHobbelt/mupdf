@@ -2007,6 +2007,7 @@ EXPORTS
 	jpegXL_add_noise_main
 	jpegXL_box_list_main
 	jpegXL_butteraugli_main
+	jpegXL_cjpeg_hdr_main
 	jpegXL_compress_main
 	jpegXL_conformance_main
 	jpegXL_dec_enc_main
@@ -2037,6 +2038,7 @@ EXPORTS
 	JxlButteraugliResultGetDistmap
 	JxlButteraugliResultGetMaxDistance
 
+	JxlDecoderCloseInput
 	JxlDecoderCreate
 	JxlDecoderDCOutBufferSize
 	JxlDecoderDestroy
@@ -2081,11 +2083,15 @@ EXPORTS
 	JxlEncoderCreate
 	JxlEncoderDestroy
 	JxlEncoderInitBasicInfo
+	JxlEncoderInitExtraChannelInfo
 	JxlEncoderOptionsCreate
-	JxlEncoderOptionsSetAsInteger
+	JxlEncoderOptionsSetInteger
 	JxlEncoderProcessOutput
 	JxlEncoderReset
 	JxlEncoderSetBasicInfo
+	JxlEncoderSetCodestreamLevel
+	JxlEncoderSetExtraChannelInfo
+	JxlEncoderSetExtraChannelName
 	JxlEncoderSetICCProfile
 	JxlEncoderUseContainer
 	JxlEncoderVersion
@@ -2313,6 +2319,8 @@ EXPORTS
 	BrotliEncoderCreateInstance
 	BrotliEncoderDestroyInstance
 	BrotliEncoderDestroyPreparedDictionary
+	BrotliEncoderEstimatePeakMemoryUsage
+	BrotliEncoderGetPreparedDictionarySize
 	BrotliEncoderHasMoreOutput
 	BrotliEncoderIsFinished
 	BrotliEncoderMaxCompressedSize
@@ -2328,6 +2336,7 @@ EXPORTS
 
 	sqlite3_aggregate_context
 	sqlite3_auto_extension
+	sqlite3_autovacuum_pages
 	sqlite3_backup_finish
 	sqlite3_backup_init
 	sqlite3_backup_pagecount

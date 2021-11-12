@@ -208,6 +208,7 @@ static struct {
 	{ jpegXL_box_list_main, "jxl_box_list", "jxl_box_list tool" },
 	{ jpegXL_butteraugli_main, "jxl_butteraugli", "jxl_butteraugli tool" },
 	{ jpegXL_compress_main, "jxl_compress", "jxl_compress tool" },
+	{ jpegXL_cjpeg_hdr_main, "jxl_cjpeg_hdr", "jxl_cjpeg_hdr tool" },
 	{ jpegXL_conformance_main, "jxl_conformance", "jxl_conformance tool" },
 	{ jpegXL_decompress_main, "jxl_decompress", "jxl_decompress tool" },
 	{ jpegXL_dec_enc_main, "jxl_dec_enc", "jxl_dec_enc tool" },
