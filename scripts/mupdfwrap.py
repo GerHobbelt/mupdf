@@ -7591,9 +7591,9 @@ def build_swig(
     text = ''
 
     for fnname in generated.c_functions:
-        if fnname == 'pdf_annot_type':
-            # This is also an enum which we don't want to ignore. SWIGing the
-            # function is hopefully harmless.
+        if fnname in ('pdf_annot_type', 'pdf_widget_type'):
+            # These are also enums which we don't want to ignore. SWIGing the
+            # functions is hopefully harmless.
             pass
         elif 0 and fnname == 'pdf_string_from_annot_type':  # causes duplicate symbol with classes2.cpp and python.
             pass
@@ -9446,6 +9446,10 @@ def main():
                                 )
                         if not e:
                             e = ee
+                elif not os.path.isfile(f'../PyMuPDF/tests/{tests}'):
+                    ts = glob.glob("../PyMuPDF/tests/*.py")
+                    ts = [os.path.basename(t) for t in ts]
+                    raise Exception(f'Unrecognised tests={tests}. Should be "all", "iter" or one of {ts}')
                 else:
                     jlib.system(
                             f'cd ../PyMuPDF/tests && py.test-3 {opts} {tests}',
