@@ -23,7 +23,7 @@ gcc -I/usr/local/include -o example \
 
 int main(int argc, const char** argv)
 {
-	char *input;
+	const char *input;
 	float zoom, rotate;
 	int page_number, page_count;
 	fz_context *ctx;
