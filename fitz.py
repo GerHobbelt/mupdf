@@ -29,6 +29,8 @@ matrix_like = "matrix_like"
 point_like = "point_like"
 quad_like = "quad_like"
 rect_like = "rect_like"
+Page = 'Page_forward_decl'
+Point = 'Point_forward_decl'
 
 def args_match(args, *types):
     '''
@@ -4225,6 +4227,8 @@ class Page:
         assert isinstance(page, (mupdf.Page, mupdf.PdfPage)), f'page is: {page}'
         self.this = page
         self.thisown = True
+        self.lastPoint = None
+        self.draw_cont = ''
 
     def _add_caret_annot(self, point):
         #return _fitz.Page__add_caret_annot(self, point)
@@ -5056,6 +5060,405 @@ class Page:
             return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
         return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
 
+    def draw_line(
+        page: Page,
+        p1: point_like,
+        p2: point_like,
+        color: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc=0,
+    ) -> Point:
+        """Draw a line from point p1 to point p2."""
+        img = page.new_shape()
+        p = img.draw_line(Point(p1), Point(p2))
+        img.finish(
+            color=color,
+            dashes=dashes,
+            width=width,
+            closePath=False,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return p
+
+    def draw_squiggle(
+        page: Page,
+        p1: point_like,
+        p2: point_like,
+        breadth: float = 2,
+        color: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a squiggly line from point p1 to point p2."""
+        img = page.new_shape()
+        p = img.draw_squiggle(Point(p1), Point(p2), breadth=breadth)
+        img.finish(
+            color=color,
+            dashes=dashes,
+            width=width,
+            closePath=False,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return p
+
+    def draw_zigzag(
+        page: Page,
+        p1: point_like,
+        p2: point_like,
+        breadth: float = 2,
+        color: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        morph: OptSeq = None,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a zigzag line from point p1 to point p2."""
+        img = page.new_shape()
+        p = img.draw_zigzag(Point(p1), Point(p2), breadth=breadth)
+        img.finish(
+            color=color,
+            dashes=dashes,
+            width=width,
+            closePath=False,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return p
+
+    def draw_rect(
+        page: Page,
+        rect: rect_like,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        morph: OptSeq = None,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a rectangle."""
+        img = page.new_shape()
+        Q = img.draw_rect(Rect(rect))
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_quad(
+        page: Page,
+        quad: quad_like,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        morph: OptSeq = None,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a quadrilateral."""
+        img = page.new_shape()
+        Q = img.draw_quad(Quad(quad))
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_polyline(
+        page: Page,
+        points: list,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        morph: OptSeq = None,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        closePath: bool = False,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw multiple connected line segments."""
+        img = page.new_shape()
+        Q = img.draw_polyline(points)
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            closePath=closePath,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_circle(
+        page: Page,
+        center: point_like,
+        radius: float,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        morph: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a circle given its center and radius."""
+        img = page.new_shape()
+        Q = img.draw_circle(Point(center), radius)
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+        return Q
+
+    def draw_oval(
+        page: Page,
+        rect: typing.Union[rect_like, quad_like],
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        morph: OptSeq = None,
+        width: float = 1,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw an oval given its containing rectangle or quad."""
+        img = page.new_shape()
+        Q = img.draw_oval(rect)
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_curve(
+        page: Page,
+        p1: point_like,
+        p2: point_like,
+        p3: point_like,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        morph: OptSeq = None,
+        closePath: bool = False,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a special Bezier curve from p1 to p3, generating control points on lines p1 to p2 and p2 to p3."""
+        img = page.new_shape()
+        Q = img.draw_curve(Point(p1), Point(p2), Point(p3))
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            closePath=closePath,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_bezier(
+        page: Page,
+        p1: point_like,
+        p2: point_like,
+        p3: point_like,
+        p4: point_like,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        width: float = 1,
+        morph: OptStr = None,
+        closePath: bool = False,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a general cubic Bezier curve from p1 to p4 using control points p2 and p3."""
+        img = page.new_shape()
+        Q = img.draw_bezier(Point(p1), Point(p2), Point(p3), Point(p4))
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            closePath=closePath,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_sector(
+        page: Page,
+        center: point_like,
+        point: point_like,
+        beta: float,
+        color: OptSeq = None,
+        fill: OptSeq = None,
+        dashes: OptStr = None,
+        fullSector: bool = True,
+        morph: OptSeq = None,
+        width: float = 1,
+        closePath: bool = False,
+        lineCap: int = 0,
+        lineJoin: int = 0,
+        overlay: bool = True,
+        stroke_opacity: float = 1,
+        fill_opacity: float = 1,
+        oc: int = 0,
+    ) -> Point:
+        """Draw a circle sector given circle center, one arc end point and the angle of the arc.
+
+        Parameters:
+            center -- center of circle
+            point -- arc end point
+            beta -- angle of arc (degrees)
+            fullSector -- connect arc ends with center
+        """
+        img = page.new_shape()
+        Q = img.draw_sector(Point(center), Point(point), beta, fullSector=fullSector)
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            closePath=closePath,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
     def get_cdrawings(self):
         """Extract drawing paths from the page."""
         CheckParent(self)
@@ -5064,6 +5467,10 @@ class Page:
             self.set_rotation(0)
         #val = _fitz.Page_get_cdrawings(self)
         page = self.this
+        if isinstance(page, mupdf.PdfPage):
+            # Downcast pdf_page to fz_page.
+            page = mupdf.Page(page)
+        assert isinstance(page, mupdf.Page), f'self.this={self.this}'
         rc = []
         trace_device_Linewidth = 0
         prect = mupdf.mfz_bound_page(page)
@@ -7661,7 +8068,7 @@ class Shape(object):
                 self.rect.x1 = max(self.rect.x1, x.x1)
                 self.rect.y1 = max(self.rect.y1, x.y1)
 
-    def draw_line(self, p1: point_like, p2: point_like) -> Point:
+    def draw_line(self, p1: point_like, p2: point_like):# -> Point:
         """Draw a line between two points."""
         p1 = Point(p1)
         p2 = Point(p2)
@@ -7675,7 +8082,7 @@ class Shape(object):
         self.lastPoint = p2
         return self.lastPoint
 
-    def draw_polyline(self, points: list) -> Point:
+    def draw_polyline(self, points: list):# -> Point:
         """Draw several connected line segments."""
         for i, p in enumerate(points):
             if i == 0:
@@ -7690,12 +8097,12 @@ class Shape(object):
         return self.lastPoint
 
     def draw_bezier(
-        self,
-        p1: point_like,
-        p2: point_like,
-        p3: point_like,
-        p4: point_like,
-    ) -> Point:
+            self,
+            p1: point_like,
+            p2: point_like,
+            p3: point_like,
+            p4: point_like,
+            ):# -> Point:
         """Draw a standard cubic Bezier curve."""
         p1 = Point(p1)
         p2 = Point(p2)
@@ -7713,7 +8120,7 @@ class Shape(object):
         self.lastPoint = p4
         return self.lastPoint
 
-    def draw_oval(self, tetra: typing.Union[quad_like, rect_like]) -> Point:
+    def draw_oval(self, tetra: typing.Union[quad_like, rect_like]):# -> Point:
         """Draw an ellipse inside a tetrapod."""
         if len(tetra) != 4:
             raise ValueError("invalid arg length")
@@ -7737,7 +8144,7 @@ class Shape(object):
         self.lastPoint = ml
         return self.lastPoint
 
-    def draw_circle(self, center: point_like, radius: float) -> Point:
+    def draw_circle(self, center: point_like, radius: float):# -> Point:
         """Draw a circle given its center and radius."""
         if not radius > EPSILON:
             raise ValueError("radius must be postive")
@@ -7746,11 +8153,11 @@ class Shape(object):
         return self.draw_sector(center, p1, 360, fullSector=False)
 
     def draw_curve(
-        self,
-        p1: point_like,
-        p2: point_like,
-        p3: point_like,
-    ) -> Point:
+            self,
+            p1: point_like,
+            p2: point_like,
+            p3: point_like,
+            ):# -> Point:
         """Draw a curve between points using one control point."""
         kappa = 0.55228474983
         p1 = Point(p1)
@@ -7761,12 +8168,12 @@ class Shape(object):
         return self.draw_bezier(p1, k1, k2, p3)
 
     def draw_sector(
-        self,
-        center: point_like,
-        point: point_like,
-        beta: float,
-        fullSector: bool = True,
-    ) -> Point:
+            self,
+            center: point_like,
+            point: point_like,
+            beta: float,
+            fullSector: bool = True,
+            ):# -> Point:
         """Draw a circle sector."""
         center = Point(center)
         point = Point(point)
@@ -7834,7 +8241,7 @@ class Shape(object):
         self.lastPoint = Q
         return self.lastPoint
 
-    def draw_rect(self, rect: rect_like) -> Point:
+    def draw_rect(self, rect: rect_like):# -> Point:
         """Draw a rectangle."""
         r = Rect(rect)
         self.draw_cont += "%g %g %g %g re\n" % JM_TUPLE(
@@ -7844,17 +8251,17 @@ class Shape(object):
         self.lastPoint = r.tl
         return self.lastPoint
 
-    def draw_quad(self, quad: quad_like) -> Point:
+    def draw_quad(self, quad: quad_like):# -> Point:
         """Draw a Quad."""
         q = Quad(quad)
         return self.draw_polyline([q.ul, q.ll, q.lr, q.ur, q.ul])
 
     def draw_zigzag(
-        self,
-        p1: point_like,
-        p2: point_like,
-        breadth: float = 2,
-    ) -> Point:
+            self,
+            p1: point_like,
+            p2: point_like,
+            breadth: float = 2,
+            ):# -> Point:
         """Draw a zig-zagged line from p1 to p2."""
         p1 = Point(p1)
         p2 = Point(p2)
@@ -7879,11 +8286,11 @@ class Shape(object):
         return p2
 
     def draw_squiggle(
-        self,
-        p1: point_like,
-        p2: point_like,
-        breadth=2,
-    ) -> Point:
+            self,
+            p1: point_like,
+            p2: point_like,
+            breadth=2,
+            ):# -> Point:
         """Draw a squiggly line from p1 to p2."""
         p1 = Point(p1)
         p2 = Point(p2)
@@ -9904,7 +10311,7 @@ def JM_compress_buffer(inbuffer):
             inbuffer.m_internal,
             mupdf.FZ_DEFLATE_BEST,
             )
-    jlib.log('{data=} {compressed_length=}')
+    #jlib.log('{data=} {compressed_length=}')
     if not data or compressed_length == 0:
         return None
     buf = mupdf.Buffer(mupdf.new_buffer_from_data(data, compressed_length))
@@ -10362,7 +10769,7 @@ def JM_insert_contents(pdf, pageref, newcont, overlay):
     newconts = mupdf.mpdf_add_stream(pdf, newcont, mupdf.PdfObj(), 0)
     xref = mupdf.mpdf_to_num(newconts)
     if mupdf.mpdf_is_array(contents):
-        if overlay.m_internal:  # append new object
+        if overlay:  # append new object
             mupdf.mpdf_array_push(contents, newconts)
         else:   # prepend new object
             mupdf.mpdf_array_insert(contents, newconts, 0)
@@ -11934,19 +12341,6 @@ def CheckRect(r: typing.Any) -> bool:
     except:
         return False
     return not (r.isEmpty or r.isInfinite)
-
-
-def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
-    xref = info[0]
-    found = False
-    for i, fi in enumerate(doc.FontInfos):
-        if fi[0] == xref:
-            found = True
-            break
-    if found:
-        doc.FontInfos[i] = info
-    else:
-        doc.FontInfos.append(info)
 
 
 def DUMMY(*args, **kw):
