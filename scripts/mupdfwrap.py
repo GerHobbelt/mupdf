@@ -2080,6 +2080,16 @@ classextras = ClassExtras(
                     'fz_load_page',
                     'fz_load_chapter_page',
                     ],
+                constructors_extra = [
+                    ExtraConstructor( f'({rename.class_("pdf_page")}& pdfpage)',
+                        f'''
+                        {{
+                            m_internal = {rename.function_call('fz_keep_page')}(&pdfpage.m_internal->super);
+                        }}
+                        ''',
+                        f'/* Return {rename.class_("fz_page")} for pdfpage.m_internal.super. */',
+                        ),
+                    ],
                 methods_extra = [
                     ExtraMethod(
                         f'std::vector<{rename.class_("fz_quad")}>',
