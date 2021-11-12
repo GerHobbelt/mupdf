@@ -1632,6 +1632,137 @@ class Document:
         assert 0, 'no Document__embeddedFileUpd'
         return _fitz.Document__embeddedFileUpd(self, idx, buffer, filename, ufilename, desc)
 
+    def _embfile_del(self, idx):
+        #return _fitz.Document__embfile_del(self, idx)
+        doc = self.this
+        pdf = mupdf.mpdf_document_from_fz_document(doc)
+        names = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
+                )
+        mupdf.mpdf_array_delete(names, idx + 1)
+        mupdf.mpdf_array_delete(names, idx)
+
+    def _embfile_info(self, idx, infodict):
+        #return _fitz.Document__embfile_info(self, idx, infodict)
+        doc = self.this
+        pdf = mupdf.mpdf_document_from_fz_document(doc)
+        char *name;
+        xref = 0
+        ci_xref=0
+        names = pdf_dict_getl(gctx, pdf_trailer(gctx, pdf),
+                PDF_NAME(Root),
+                PDF_NAME(Names),
+                PDF_NAME(EmbeddedFiles),
+                PDF_NAME(Names),
+                )
+
+        o = mupdf.mpdf_array_get(names, 2*idx+1)
+        ci = mupdf.mpdf_dict_get(o, PDF_NAME('CI'))
+        if ci.m_internal:
+            ci_xref = mupdf.mpdf_to_num(ci)
+        infodict["collection"] = ci_xref
+        name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('F')))
+        infodict[dictkey_filename] = JM_EscapeStrFromStr(name)
+
+        name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('UF')))
+        infodict[dictkey_ufilename] = JM_EscapeStrFromStr(name)
+
+        name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('Desc')))
+        infodict[dictkey_desc] = JM_UnicodeFromStr(name)
+
+        len = -1
+        DL = -1
+        fileentry = mupdf.mpdf_dict_getl(o, PDF_NAME('EF'), PDF_NAME('F'))
+        xref = mupdf.mpdf_to_num(fileentry)
+        o = mupdf.mpdf_dict_get(fileentry, PDF_NAME('Length'))
+        if o.m_internal:
+            len = mupdf.mpdf_to_int(o)
+
+        o = mupdf.mpdf_dict_get(fileentry, PDF_NAME('DL'))
+        if o.m_internal:
+            DL = mupdf.mpdf_to_int(o)
+        else:
+            o = mupdf.mpdf_dict_getl(fileentry, PDF_NAME('Params'), PDF_NAME('Size'))
+            if o.m_internal:
+                DL = mupdf.mpdf_to_int(o)
+        infodict[dictkey_size] = DL
+        infodict[dictkey_length] = len
+        return xref
+
+    def _embfile_upd(self, idx, buffer=None, filename=None, ufilename=None, desc=None):
+        return _fitz.Document__embfile_upd(self, idx, buffer, filename, ufilename, desc)
+
+    def _embeddedFileGet(self, idx):
+        return _fitz.Document__embeddedFileGet(self, idx)
+
+    def _embfile_add(self, name, buffer, filename=None, ufilename=None, desc=None):
+        #return _fitz.Document__embfile_add(self, name, buffer, filename, ufilename, desc)
+        doc = self.this
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        data = JM_BufferFromBytes(buffer)
+        if not data.m_internal:
+            THROWMSG("bad type: 'buffer'")
+        size, buffdata = data.buffer_storage_raw()
+
+        names = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
+                )
+        if not mupdf.mpdf_is_array(names):
+            root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+            names = mupdf.mpdf_new_array(pdf, 6)    # an even number!
+            mupdf.mpdf_dict_putl(
+                    root,
+                    names,
+                    PDF_NAME('Names'),
+                    PDF_NAME('EmbeddedFiles'),
+                    PDF_NAME('Names'),
+                    )
+
+        fileentry = JM_embed_file(pdf, data, filename, ufilename, desc, 1)
+        xref = mupdf.mpdf_to_num(
+                mupdf.mpdf_dict_getl(fileentry, PDF_NAME('EF'), PDF_NAME('F'))
+                )
+        mupdf.mpdf_array_push(names, mupdf.mpdf_new_text_string(name))
+        mupdf.mpdf_array_push(names, fileentry)
+        return xref
+
+    def _embfile_names(self, namelist):
+        """Get list of embedded file names."""
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        #return _fitz.Document__embfile_names(self, namelist)
+        doc = self.this
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        names = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
+                )
+        if mupdf.mpdf_is_array(names):
+            n = mupdf.mpdf_array_len(names)
+            jlib.log('{n=}')
+            for i in range(0, n, 2):
+                val = JM_EscapeStrFromStr(
+                        mupdf.mpdf_to_text_string(
+                            mupdf.mpdf_array_get(names, i)
+                            )
+                        )
+                jlib.log('{val!r=}')
+                namelist.append(val)
+
     def _extend_toc_items(self, items):
         """Add color info to all items of an extended TOC list."""
         if self.isClosed:
@@ -1882,6 +2013,124 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_convertToPDF(self, from_page, to_page, rotate)
+
+    def embfile_add(self, name: str, buffer: typing.ByteString,
+                              filename: OptStr =None,
+                              ufilename: OptStr =None,
+                              desc: OptStr =None,) -> None:
+        """Add an item to the EmbeddedFiles array.
+
+        Args:
+            name: name of the new item, must not already exist.
+            buffer: (binary data) the file content.
+            filename: (str) the file name, default: the name
+            ufilename: (unicode) the file name, default: filename
+            desc: (str) the description.
+        """
+        filenames = self.embfile_names()
+        msg = "Name '%s' already exists." % str(name)
+        if name in filenames:
+            raise ValueError(msg)
+
+        if filename is None:
+            filename = name
+        if ufilename is None:
+            ufilename = unicode(filename, "utf8") if str is bytes else filename
+        if desc is None:
+            desc = name
+        xref = self._embfile_add(name, buffer=buffer,
+                                     filename=filename,
+                                     ufilename=ufilename,
+                                     desc=desc)
+        date = get_pdf_now()
+        self.xref_set_key(xref, "Type", "/EmbeddedFile")
+        self.xref_set_key(xref, "Params/CreationDate", get_pdf_str(date))
+        self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
+        return xref
+
+    def embfile_count(self) -> int:
+        """Get number of EmbeddedFiles."""
+        return len(self.embfile_names())
+
+    def embfile_del(self, item: typing.Union[int, str]):
+        """Delete an entry from EmbeddedFiles.
+
+        Notes:
+            The argument must be name or index of an EmbeddedFiles item.
+            Physical deletion of data will happen on save to a new
+            file with appropriate garbage option.
+        Args:
+            item: name or number of item.
+        Returns:
+            None
+        """
+        idx = self._embeddedFileIndex(item)
+        return self._embfile_del(idx)
+
+    def embfile_get(self, item: typing.Union[int, str]) -> bytes:
+        """Get the content of an item in the EmbeddedFiles array.
+
+        Args:
+            item: number or name of item.
+        Returns:
+            (bytes) The file content.
+        """
+        idx = self._embeddedFileIndex(item)
+        return self._embeddedFileGet(idx)
+
+    def embfile_info(self, item: typing.Union[int, str]) -> dict:
+        """Get information of an item in the EmbeddedFiles array.
+
+        Args:
+            item: number or name of item.
+        Returns:
+            Information dictionary.
+        """
+        idx = self._embeddedFileIndex(item)
+        infodict = {"name": self.embfile_names()[idx]}
+        xref = self._embfile_info(idx, infodict)
+        t, date = self.xref_get_key(xref, "Params/CreationDate")
+        if t != "null":
+            infodict["creationDate"] = date
+        t, date = self.xref_get_key(xref, "Params/ModDate")
+        if t != "null":
+            infodict["modDate"] = date
+        t, md5 = self.xref_get_key(xref, "Params/CheckSum")
+        if t != "null":
+            infodict["checksum"] = binascii.hexlify(md5.encode()).decode()
+        return infodict
+
+    def embfile_names(self) -> list:
+        """Get list of names of EmbeddedFiles."""
+        filenames = []
+        self._embfile_names(filenames)
+        return filenames
+
+    def embfile_upd(self, item: typing.Union[int, str],
+                             buffer: OptBytes =None,
+                             filename: OptStr =None,
+                             ufilename: OptStr =None,
+                             desc: OptStr =None,) -> None:
+        """Change an item of the EmbeddedFiles array.
+
+        Notes:
+            Only provided parameters are changed. If all are omitted,
+            the method is a no-op.
+        Args:
+            item: number or name of item.
+            buffer: (binary data) the new file content.
+            filename: (str) the new file name.
+            ufilename: (unicode) the new filen ame.
+            desc: (str) the new description.
+        """
+        idx = self._embeddedFileIndex(item)
+        xref = self._embfile_upd(idx, buffer=buffer,
+                                     filename=filename,
+                                     ufilename=ufilename,
+                                     desc=desc)
+        date = get_pdf_now()
+        self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
+        return xref
 
     def get_char_widths(doc, xref: int, limit: int = 256, idx: int = 0, fontdict: OptDict = None
             ) -> list:
@@ -2714,23 +2963,86 @@ class Document:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_get_new_xref(self)
 
+    @property
+    def xref(self):
+        """PDF xref number of page."""
+        CheckParent(self)
+        return self.parent.page_xref(self.number)
+
     def xref_length(self):
         """Get length of xref table."""
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document_xref_length(self)
 
-    def getXmlMetadata(self):
-        """Get document XML metadata."""
+    def xref_object(self, xref, compressed=0, ascii=0):
+        """Get xref object source as a string."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_getXmlMetadata(self)
+        return _fitz.Document_xref_object(self, xref, compressed, ascii)
+
+    def xref_set_key(self, xref, key, value):
+        """Set the value of a PDF dictionary key."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_xref_set_key(self, xref, key, value)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        if not key:
+            THROWMSG("bad 'key'")
+        if not value:
+            THROWMSG("bad 'value'")
+        xreflen = mupdf.mpdf_xref_len(pdf)
+        if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+            THROWMSG("bad xref")
+        if len(value) == 0:
+            THROWMSG("bad 'value'")
+        if len(key) == 0:
+            THROWMSG("bad 'key'")
+        if xref != -1:
+            obj = mupdf.mpdf_load_object(pdf, xref)
+        else:
+            obj = mupdf.mpdf_trailer(pdf)
+        new_obj = JM_set_object_value(obj, key, value)
+        if not new_obj.m_internal:
+            return  # did not work: skip update
+        if xref != -1:
+            #pdf_drop_obj(gctx, obj);
+            #obj = NULL;
+            mupdf.mpdf_update_object(pdf, xref, new_obj)
+        else:
+            n = mupdf.mpdf_dict_len(new_obj)
+            for i in range(n):
+                mupdf.mpdf_dict_put(
+                        obj,
+                        mupdf.mpdf_dict_get_key(new_obj, i),
+                        mupdf.mpdf_dict_get_val(new_obj, i),
+                        )
+
+    def xref_stream(self, xref):
+        """Get decompressed xref stream."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        return _fitz.Document_xref_stream(self, xref)
+
+    def xref_stream_raw(self, xref):
+        """Get xref stream without decompression."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+
+        return _fitz.Document_xref_stream_raw(self, xref)
 
     def xref_xml_metadata(self):
         """Get xref of document XML metadata."""
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document_xref_xml_metadata(self)
+
+    def getXmlMetadata(self):
+        """Get document XML metadata."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_getXmlMetadata(self)
 
     def del_xml_metadata(self):
         """Delete XML metadata."""
@@ -2746,30 +3058,11 @@ class Document:
 
     setXmlMetadata = set_xml_metadata
 
-    def xref_object(self, xref, compressed=0, ascii=0):
-        """Get xref object source as a string."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_xref_object(self, xref, compressed, ascii)
-
     def pdf_trailer(self, compressed=0, ascii=0):
         """Get PDF trailer as a string."""
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document_pdf_trailer(self, compressed, ascii)
-
-    def xref_stream_raw(self, xref):
-        """Get xref stream without decompression."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-
-        return _fitz.Document_xref_stream_raw(self, xref)
-
-    def xref_stream(self, xref):
-        """Get decompressed xref stream."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document_xref_stream(self, xref)
 
     def update_object(self, xref, text, page=None):
         """Replace object definition source."""
@@ -6798,12 +7091,6 @@ class Page:
         """Invalidate / delete all annots of this page."""
         self._annot_refs.clear()
 
-    @property
-    def xref(self):
-        """PDF xref number of page."""
-        CheckParent(self)
-        return self.parent.page_xref(self.number)
-
     def _erase(self):
         self._reset_annot_refs()
         try:
@@ -10104,6 +10391,11 @@ def JM_INT_ITEM(obj, idx):
             return 0, temp
     return 1, None
 
+def JM_StrAsChar(x):
+    # fixme: should encode, but swig doesn't pass bytes to C as const char*.
+    return x
+    #return x.encode('utf8')
+
 def JM_TUPLE(o: typing.Sequence) -> tuple:
     return tuple(map(lambda x: round(x, 5) if abs(x) >= 1e-4 else 0, o))
 
@@ -10471,6 +10763,14 @@ def JM_embed_file(
         jlib.log('{e=} {jlib.exception_info()=}')
         raise
     return val
+
+
+def JM_EscapeStrFromBuffer(buff):
+    if not buff.m_internal:
+         return ''
+    s = buff.buffer_extract()
+    val = PyUnicode_DecodeRawUnicodeEscape(s, errors='replace')
+    return val;
 
 
 def JM_expand_fname(name):
@@ -10984,6 +11284,14 @@ def JM_norm_rotation(rotate):
         return 0
     return rotate
 
+def JM_object_to_buffer(what, compress, ascii):
+    res = mupdf.mfz_new_buffer(512)
+    out = mupdf.Output(res)
+    jlib.log('{out=}')
+    mupdf.mpdf_print_obj(out, what, compress, ascii)
+    mupdf.mfz_terminate_buffer(res)
+    return res
+
 def JM_outline_xrefs(obj, xrefs):
     '''
     Return list of outline xref numbers. Recursive function. Arguments:
@@ -11016,6 +11324,19 @@ def JM_page_rotation(page):
     rotate = JM_norm_rotation(rotate)
     return rotate
 
+
+def JM_pdf_obj_from_str(doc, src):
+    '''
+    create PDF object from given string (new in v1.14.0: MuPDF dropped it)
+    '''
+    # fixme: seems inefficient to convert to bytes instance then make another
+    # copy inside fz_new_buffer_from_copied_data(), but no other way?
+    #
+    buffer_ = mupdf.Buffer.new_buffer_from_copied_data(bytes(src, 'utf8'))
+    stream = buffer_.open_buffer()
+    lexbuf = mupdf.PdfLexbuf(mupdf.PDF_LEXBUF_SMALL)
+    result = mupdf.mpdf_parse_stm_obj(doc, stream, lexbuf)
+    return result;
 
 def JM_pixmap_from_display_list(
         list_,
@@ -11207,8 +11528,10 @@ def JM_scan_resources(pdf, rsrc, liste, what, stream_xref, tracer):
     finally:
         rsrc.unmark_obj()
 
-# Set the field type
 def JM_set_field_type(doc, obj, type):
+    '''
+    Set the field type
+    '''
     setbits = 0;
     clearbits = 0;
     typename = None
@@ -11241,6 +11564,59 @@ def JM_set_field_type(doc, obj, type):
         bits &= ~clearbits
         bits |= setbits
         mupdf.mpdf_dict_put_int(obj, PDF_NAME('Ff'), bits)
+
+
+def JM_set_object_value(obj, key, value):
+    '''
+    Set a PDF dict key to some value
+    '''
+    #fz_buffer *res = NULL;
+    #pdf_obj *new_obj = NULL, *testkey = NULL;
+    #PyObject *skey = PyUnicode_FromString(key);  // Python version of dict key
+    #PyObject *slash = PyUnicode_FromString("/");  // PDF path separator
+    #PyObject *list = NULL, *newval=NULL, *newstr=NULL, *nullval=NULL;
+    eyecatcher = "fitz: replace me!"
+    pdf = mupdf.mpdf_get_bound_document(obj)
+    # split PDF key at path seps and take last key part
+    list_ = key.split('/')
+    len_ = len(list_);
+    i = len_ - 1;
+    skey = list_[i]
+
+    del list_[i]    # del the last sub-key
+    len_ =  len(list_)   # remaining length
+    testkey = mupdf.mpdf_dict_getp(obj, key)    # check if key already exists
+    if not testkey.m_internal:
+        #No, it will be created here. But we cannot allow this happening if
+        #indirect objects are referenced. So we check all higher level
+        #sub-paths for indirect references.
+        while len_ > 0:
+            t = '/'.join(list_) # next high level
+            if mupdf.mpdf_is_indirect(mupdf.mpdf_dict_getp(obj, JM_StrAsChar(t))):
+                raise Exception("path to '%s' has indirects", JM_StrAsChar(skey))
+            del list_[len_ - 1]   # del last sub-key
+            len_ = len(list_)   # remaining length
+    # Insert our eyecatcher. Will create all sub-paths in the chain, or
+    # respectively remove old value of key-path.
+    mupdf.mpdf_dict_putp(obj, key, mupdf.mpdf_new_text_string(eyecatcher))
+    testkey = mupdf.mpdf_dict_getp(obj, key)
+    if not mupdf.mpdf_is_string(testkey):
+        raise Exception("cannot insert value for '%s'", key)
+    temp = mupdf.mpdf_to_text_string(testkey)
+    if temp != eyecatcher:
+        raise Exception("cannot insert value for '%s'", key)
+    # read the result as a string
+    res = JM_object_to_buffer(obj, 1, 0)
+    objstr = JM_EscapeStrFromBuffer(res)
+
+    # replace 'eyecatcher' by desired 'value'
+    nullval = "/%s(%s)" % ( skey, eyecatcher)
+    newval = "/%s %s" % (skey, value)
+    newstr = objstr.replace(nullval, newval, 1)
+
+    # make PDF object from resulting string
+    new_obj = JM_pdf_obj_from_str(pdf, newstr)
+    return new_obj;
 
 
 def JM_update_stream(doc, obj, buffer_, compress):
@@ -11301,6 +11677,9 @@ def PySequence_Size(s):
 def THROWMSG(msg):
     raise Exception(msg)
 
+def PyUnicode_DecodeRawUnicodeEscape(s, errors='strict'):
+    # fixme: handle escape sequencies
+    return s.decode('utf8')
 
 def CheckColor(c: OptSeq):
     if c:
@@ -12825,8 +13204,8 @@ def retainpages(doc, liste):
 
     # Update page count and kids array
     countobj = mupdf.mpdf_new_int(mupdf.mpdf_array_len(kids))
-    mupdf.mpdf_dict_put_drop(pages, PDF_NAME('Count'), countobj)
-    mupdf.mpdf_dict_put_drop(pages, PDF_NAME('Kids'), kids)
+    mupdf.mpdf_dict_put(pages, PDF_NAME('Count'), countobj)
+    mupdf.mpdf_dict_put(pages, PDF_NAME('Kids'), kids)
 
     pagecount = mupdf.mpdf_count_pages(doc)
     #page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums));
@@ -12861,9 +13240,9 @@ def retainpages(doc, liste):
         mupdf.mpdf_dict_put(names, PDF_NAME('Dests'), dests)
         mupdf.mpdf_dict_put(root, PDF_NAME('Names'), names)
 
-        mupdf.mpdf_drop_obj(names)
-        mupdf.mpdf_drop_obj(dests)
-        mupdf.mpdf_drop_obj(olddests)
+        #mupdf.mpdf_drop_obj(names)
+        #mupdf.mpdf_drop_obj(dests)
+        #mupdf.mpdf_drop_obj(olddests)
 
     # Edit each pages /Annot list to remove any links pointing to nowhere.
     for i in range(pagecount):
