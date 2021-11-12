@@ -2565,6 +2565,33 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        pdf_lexbuf = ClassExtra(
+                constructors_extra = [
+                    ExtraConstructor( '(int size)',
+                        f'''
+                        {{
+                            m_internal = new pdf_lexbuf;
+                            {rename.function_call('pdf_lexbuf_init')}(m_internal, size);
+                        }}
+                        ''',
+                        comment = '/* Constructor that calls pdf_lexbuf_init(size) */',
+                        ),
+                    ],
+                methods_extra = [
+                    ExtraMethod(
+                        '',
+                        '~()',
+                        f'''
+                        {{
+                            {rename.function_call('pdf_lexbuf_fin')}(m_internal);
+                            delete m_internal;
+                        }}
+                        ''',
+                        comment = '/* Destructor that calls pdf_lexbuf_fin(). */',
+                        ),
+                    ],
+                ),
+
         pdf_obj = ClassExtra(
                 constructor_raw = 'default',
                 methods_extra = [
