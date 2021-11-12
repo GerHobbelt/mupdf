@@ -7877,7 +7877,7 @@ class Quad(object):
         raise ValueError("bad Quad constructor")
 
     @property
-    def isRectangular(self):
+    def is_rectangular(self):
         """Check if quad is rectangular.
 
         Notes:
@@ -8180,14 +8180,16 @@ class Rect(object):
     width  = property(lambda self: abs(self.x1 - self.x0))
     height = property(lambda self: abs(self.y1 - self.y0))
 
-    def includePoint(self, p):
+    def include_point(self, p):
         """Extend to include point-like p."""
         if len(p) != 2:
             raise ValueError("bad Point: sequ. length")
         self.x0, self.y0, self.x1, self.y1 = TOOLS._include_point_in_rect(self, p)
         return self
 
-    def includeRect(self, r):
+    includePoint = include_point
+
+    def include_rect(self, r):
         """Extend to include rect-like r."""
         if len(r) != 4:
             raise ValueError("bad Rect: sequ. length")
@@ -11441,6 +11443,11 @@ def JM_point_from_py(p):
     '''
     PySequence to fz_point. Default: (FZ_MIN_INF_RECT, FZ_MIN_INF_RECT)
     '''
+    jlib.log('{p=} {type(p)=}')
+    if isinstance(p, mupdf.Point):
+        return p
+    if isinstance(p, Point):
+        return mupdf.Point(p.x, p.y)
     p0 = mupdf.Point(0, 0)
     x = JM_FLOAT_ITEM(p, 0)
     y = JM_FLOAT_ITEM(p, 1)
@@ -12560,6 +12567,13 @@ class TOOLS:
 
     def _include_point_in_rect(r, p):
         #return _fitz.Tools__include_point_in_rect(self, r, p)
+        jlib.log('{p=} {JM_point_from_py(p)=}')
+        r2 = mupdf.mfz_include_point_in_rect(
+                JM_rect_from_py(r),
+                JM_point_from_py(p),
+                )
+        r3 = JM_py_from_rect( r2)
+        jlib.log('{r=} {p=} {r2=} {r3=}')
         return JM_py_from_rect(
                 mupdf.mfz_include_point_in_rect(
                     JM_rect_from_py(r),
