@@ -1607,7 +1607,7 @@ class Document:
         return cont
 
     def _embeddedFileIndex(self, item: typing.Union[int, str]) -> int:
-        filenames = self.embeddedFileNames()
+        filenames = self.embfile_names()
         msg = "'%s' not in EmbeddedFiles array." % str(item)
         if item in filenames:
             idx = filenames.index(item)
@@ -1648,16 +1648,15 @@ class Document:
 
     def _embfile_info(self, idx, infodict):
         #return _fitz.Document__embfile_info(self, idx, infodict)
-        doc = self.this
-        pdf = mupdf.mpdf_document_from_fz_document(doc)
-        char *name;
+        pdf = self._pdf_document()
         xref = 0
         ci_xref=0
-        names = pdf_dict_getl(gctx, pdf_trailer(gctx, pdf),
-                PDF_NAME(Root),
-                PDF_NAME(Names),
-                PDF_NAME(EmbeddedFiles),
-                PDF_NAME(Names),
+        names = pdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
                 )
 
         o = mupdf.mpdf_array_get(names, 2*idx+1)
@@ -1753,14 +1752,12 @@ class Document:
                 )
         if mupdf.mpdf_is_array(names):
             n = mupdf.mpdf_array_len(names)
-            jlib.log('{n=}')
             for i in range(0, n, 2):
                 val = JM_EscapeStrFromStr(
                         mupdf.mpdf_to_text_string(
                             mupdf.mpdf_array_get(names, i)
                             )
                         )
-                jlib.log('{val!r=}')
                 namelist.append(val)
 
     def _extend_toc_items(self, items):
@@ -2968,6 +2965,62 @@ class Document:
         """PDF xref number of page."""
         CheckParent(self)
         return self.parent.page_xref(self.number)
+
+    def xref_get_key(self, xref, key):
+        """Get PDF dict key value of object at 'xref'."""
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        #return _fitz.Document_xref_get_key(self, xref, key)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        xreflen = mupdf.mpdf_xref_len(pdf)
+        if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+            THROWMSG(f"bad xref={xref} xreflen={xreflen}")
+        if xref > 0:
+            obj = mupdf.mpdf_load_object(pdf, xref)
+        else:
+            obj = mupdf.mpdf_trailer(pdf)
+        if not obj.m_internal:
+            return ("null", "null")
+        subobj = mupdf.mpdf_dict_getp(obj, key)
+        if not subobj.m_internal:
+            return ("null", "null")
+        text = None
+        if mupdf.mpdf_is_indirect(subobj):
+            type = "xref"
+            text = "%i 0 R" % mupdf.mpdf_to_num(subobj)
+        elif mupdf.mpdf_is_array(subobj):
+            type = "array"
+        elif mupdf.mpdf_is_dict(subobj):
+            type = "dict"
+        elif mupdf.mpdf_is_int(subobj):
+            type = "int"
+            text = "%i" % mupdf.mpdf_to_int(subobj)
+        elif mupdf.mpdf_is_real(subobj):
+            type = "float"
+        elif mupdf.mpdf_is_null(subobj):
+            type = "null"
+            text = "null"
+        elif mupdf.mpdf_is_bool(subobj):
+            type = "bool"
+            if mupdf.mpdf_to_bool(subobj):
+                text = "true"
+            else:
+                text = "false"
+        elif mupdf.mpdf_is_name(subobj):
+            type = "name"
+            text = "/%s" % mupdf.mpdf_to_name(subobj)
+        elif mupdf.mpdf_is_string(subobj):
+            type = "string"
+            text = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(subobj))
+        else:
+            type = "unknown";
+        if text is None:
+            res = JM_object_to_buffer(subobj, 1, 0)
+            text = JM_UnicodeFromBuffer(res)
+        #rc = Py_BuildValue("sO", type, text);
+        return (type, text)
 
     def xref_length(self):
         """Get length of xref table."""
