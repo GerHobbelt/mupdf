@@ -3242,6 +3242,14 @@ JNIEXPORT jobjectArray JNICALL Java_com_artifex_mupdf_fitz_PDFPage_getWidgetsNat
 JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFPage_createSignature
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFPage
+ * Method:    getPageTransform
+ * Signature: ()Lcom/artifex/mupdf/fitz/Matrix;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFPage_getPageTransform
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

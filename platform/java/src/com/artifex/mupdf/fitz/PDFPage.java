@@ -65,4 +65,6 @@ public class PDFPage extends Page
 	}
 
 	public native PDFWidget createSignature();
+
+	public native Matrix getPageTransform();
 }
