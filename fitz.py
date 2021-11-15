@@ -4346,7 +4346,7 @@ class Widget(object):
         """Validate the class entries.
         """
         if (self.rect.isInfinite
-            or self.rect.isEmpty
+            or self.rect.is_empty
            ):
             raise ValueError("bad rect")
 
@@ -8004,10 +8004,10 @@ class Quad(object):
         return Quad(-self.ul, -self.ur, -self.ll, -self.lr)
 
     def __bool__(self):
-        return not self.isEmpty
+        return not self.is_empty
 
     def __nonzero__(self):
-        return not self.isEmpty
+        return not self.is_empty
 
     def __eq__(self, quad):
         if not hasattr(quad, "__len__"):
@@ -8020,7 +8020,7 @@ class Quad(object):
         )
 
     def __abs__(self):
-        if self.isEmpty:
+        if self.is_empty:
             return 0.0
         return abs(self.ul - self.ur) * abs(self.ul - self.ll)
 
@@ -8135,6 +8135,7 @@ class Rect(object):
     def is_infinite(self):
         """True if rectangle is infinite."""
         return self.x0 > self.x1 or self.y0 > self.y1
+    isInfinite = is_infinite
 
     @property
     def top_left(self):
@@ -8186,9 +8187,7 @@ class Rect(object):
         """Extend to include point-like p."""
         if len(p) != 2:
             raise ValueError("bad Point: sequ. length")
-        jlib.log('{self=} {p=}')
         self.x0, self.y0, self.x1, self.y1 = TOOLS._include_point_in_rect(self, p)
-        jlib.log('{self=}')
         return self
 
     includePoint = include_point
@@ -8197,9 +8196,7 @@ class Rect(object):
         """Extend to include rect-like r."""
         if len(r) != 4:
             raise ValueError("bad Rect: sequ. length")
-        jlib.log('{self=} {r=}')
         self.x0, self.y0, self.x1, self.y1 = TOOLS._union_rect(self, r)
-        jlib.log('{self=}')
         return self
 
     def intersect(self, r):
@@ -8257,7 +8254,7 @@ class Rect(object):
         return len(rect) == 4 and bool(self - rect) is False
 
     def __abs__(self):
-        if self.isEmpty or self.isInfinite:
+        if self.is_empty or self.isInfinite:
             return 0.0
         return (self.x1 - self.x0) * (self.y1 - self.y0)
 
@@ -8300,24 +8297,25 @@ class Rect(object):
     __div__ = __truediv__
 
     def __contains__(self, x):
+        jlib.log('{self=} {x=}')
         if hasattr(x, "__float__"):
             return x in tuple(self)
         l = len(x)
         r = Rect(self).normalize()
         if l == 4:
-            if r.isEmpty: return False
+            if r.is_empty: return False
             xr = Rect(x).normalize()
-            if xr.isEmpty: return True
-            if r.x0 <= xr.x0 and r.y0 <= xr.y0 and \
-               r.x1 >= xr.x1 and r.y1 >= xr.y1:
+            if xr.is_empty: return True
+            if r.x0 <= xr.x0 and r.y0 <= xr.y0 and r.x1 >= xr.x1 and r.y1 >= xr.y1:
                return True
             return False
         if l == 2:
-            if r.x0 <= x[0] <= r.x1 and \
-               r.y0 <= x[1] <= r.y1:
+            jlib.log('{r=} {x=}')
+            if r.x0 <= x[0] < r.x1 and r.y0 <= x[1] < r.y1:
                return True
             return False
-        return False
+        msg = "bad type or sequence: '%s'" % repr(x)
+        raise ValueError("bad type or sequence: '%s'" % repr(x))
 
     def __or__(self, x):
         if not hasattr(x, "__len__"):
@@ -8341,10 +8339,10 @@ class Rect(object):
     def intersects(self, x):
         """Check if intersection with rectangle x is not empty."""
         r1 = Rect(x)
-        if self.isEmpty or self.isInfinite or r1.isEmpty or r1.isInfinite:
+        if self.is_empty or self.isInfinite or r1.is_empty or r1.isInfinite:
             return False
         r = Rect(self)
-        if r.intersect(r1).isEmpty:
+        if r.intersect(r1).is_empty:
             return False
         return True
 
@@ -9333,7 +9331,7 @@ class TextPage:
         while i < items - 1:
             v1 = val[i]
             v2 = val[i + 1]
-            if v1.y1 != v2.y1 or (v1 & v2).isEmpty:
+            if v1.y1 != v2.y1 or (v1 & v2).is_empty:
                 i += 1
                 continue  # no overlap on same line
             val[i] = v1 | v2  # join rectangles
@@ -11167,6 +11165,10 @@ def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
 
 def JM_matrix_from_py(m):
     a = [0, 0, 0, 0, 0, 0]
+    if isinstance(m, mupdf.Matrix):
+        return m
+    if isinstance(m, Matrix):
+        return mupdf.Matrix(m.a, m.b, m.c, m.d, m.e, m.f)
     if not m or not PySequence_Check(m) or PySequence_Size(m) != 6:
         return mupdf.Matrix()
     for i in range(6):
@@ -11826,7 +11828,7 @@ def CheckRect(r: typing.Any) -> bool:
         r = Rect(r)
     except:
         return False
-    return not (r.isEmpty or r.isInfinite)
+    return not (r.is_empty or r.isInfinite)
 
 
 def ColorCode(c: typing.Union[list, tuple, float, None], f: str) -> str:
@@ -12573,13 +12575,11 @@ class TOOLS:
 
     def _include_point_in_rect(r, p):
         #return _fitz.Tools__include_point_in_rect(self, r, p)
-        jlib.log('{p=} {JM_point_from_py(p)=}')
         r2 = mupdf.mfz_include_point_in_rect(
                 JM_rect_from_py(r),
                 JM_point_from_py(p),
                 )
         r3 = JM_py_from_rect( r2)
-        jlib.log('{r=} {p=} {r2=} {r3=}')
         return JM_py_from_rect(
                 mupdf.mfz_include_point_in_rect(
                     JM_rect_from_py(r),
@@ -12611,13 +12611,11 @@ class TOOLS:
         return JM_py_from_rect(ret)
 
     def _concat_matrix(m1, m2):
-        #return _fitz.Tools__concat_matrix(self, m1, m2)
-        return JM_py_from_matrix(
-                mupdf.mfz_concat(
-                    JM_matrix_from_py(m1),
-                    JM_matrix_from_py(m2)
-                    )
-                )
+        #return _fitz.Tools__concat_matrix(m1, m2)
+        a = JM_matrix_from_py(m1)
+        b = JM_matrix_from_py(m2)
+        ret = JM_py_from_matrix(mupdf.mfz_concat(a, b))
+        return ret
 
     def _measure_string(text, fontname, fontsize, encoding=0):
         #return _fitz.Tools__measure_string(self, text, fontname, fontsize, encoding)
@@ -12797,7 +12795,7 @@ def CheckRect(r: typing.Any) -> bool:
         r = Rect(r)
     except:
         return False
-    return not (r.isEmpty or r.isInfinite)
+    return not (r.is_empty or r.isInfinite)
 
 
 def DUMMY(*args, **kw):
@@ -13083,7 +13081,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
         stop = clip.br
     clip.y0 = start.y
     clip.y1 = stop.y
-    if clip.isEmpty or clip.isInfinite:
+    if clip.is_empty or clip.isInfinite:
         return []
 
     # extract text of page, clip only, no images, expand ligatures
@@ -13105,7 +13103,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     bboxf = lines.pop(0)
     if bboxf.y0 - start.y <= 0.1 * bboxf.height:  # close enough?
         r = Rect(start.x, bboxf.y0, bboxf.br)  # intersection rectangle
-        if not (r.isEmpty or r.isInfinite):
+        if not (r.is_empty or r.isInfinite):
             lines.insert(0, r)  # insert again if not empty
     else:
         lines.insert(0, bboxf)  # insert again
@@ -13117,7 +13115,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     bboxl = lines.pop()
     if stop.y - bboxl.y1 <= 0.1 * bboxl.height:  # close enough?
         r = Rect(bboxl.tl, stop.x, bboxl.y1)  # intersection rectangle
-        if not (r.isEmpty or r.isInfinite):
+        if not (r.is_empty or r.isInfinite):
             lines.append(r)  # append if not empty
     else:
         lines.append(bboxl)  # append again
@@ -13139,7 +13137,7 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
         PyMuPDF Rect objects of equal sizes.
     """
     rect = Rect(rect)  # ensure this is a Rect
-    if rect.isEmpty or rect.isInfinite:
+    if rect.is_empty or rect.isInfinite:
         raise ValueError("rect must be finite and not empty")
     tl = rect.tl
 
