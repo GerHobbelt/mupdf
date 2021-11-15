@@ -7909,43 +7909,22 @@ class Quad(object):
         """Check if quad is convex and not degenerate.
 
         Notes:
-            For convexity, every line connecting two points of the quad must be
-            inside the quad. This is equivalent to that every corner encloses
-            an angle with 0 < angle < 180 degrees.
-            Excluding the "degenerate" case (all points on the same line),
-            it suffices to check that the sines of three angles are > 0.
+            Check that for the two diagonals, the other two corners are not
+            on the same side of the diagonal.
         Returns:
             True or False.
         """
-        count = 0
-        sine = TOOLS._sine_between(self.ul, self.ur, self.lr)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
+        m = planish_line(self.ul, self.lr)  # puts this diagonal on x-axis
+        p1 = self.ll * m  # transform the
+        p2 = self.ur * m  # other two points
+        if p1.y * p2.y > 0:
             return False
-
-        sine = TOOLS._sine_between(self.ur, self.lr, self.ll)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
+        m = planish_line(self.ll, self.ur)  # puts other diagonal on x-axis
+        p1 = self.lr * m  # tranform the
+        p2 = self.ul * m  # remaining points
+        if p1.y * p2.y > 0:
             return False
-
-        sine = TOOLS._sine_between(self.lr, self.ll, self.ul)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
-            return False
-
-        sine = TOOLS._sine_between(self.ll, self.ul, self.ur)
-        if sine > 0:
-            count += 1
-        elif sine < 0:
-            return False
-
-        if count >= 2:
-            return True
-
-        return False
+        return True
 
 
     @property
@@ -12138,6 +12117,28 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
     raise ValueError("Font '%s' is unsupported" % fontname)
 
 
+def image_properties(img: typing.ByteString) -> dict:
+    """ Return basic properties of an image.
+
+    Args:
+        img: bytes, bytearray, io.BytesIO object or an opened image file.
+    Returns:
+        A dictionary with keys width, height, colorspace.n, bpc, type, ext and size,
+        where 'type' is the MuPDF image type (0 to 14) and 'ext' the suitable
+        file extension.
+    """
+    if type(img) is io.BytesIO:
+        stream = img.getvalue()
+    elif hasattr(img, "read"):
+        stream = img.read()
+    elif type(img) in (bytes, bytearray):
+        stream = img
+    else:
+        raise ValueError("bad argument 'img'")
+
+    return TOOLS.image_profile(stream)
+
+
 def pdf_dict_getl(doc, obj, *keys):
     #jlib.log('{obj=} {len(keys)=}: {keys}')
     #jlib.log('{doc.this.count_pages()=}')
@@ -12148,6 +12149,22 @@ def pdf_dict_getl(doc, obj, *keys):
         #jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
     #jlib.log('{obj=} {doc.this.count_pages()=}')
     return obj
+
+
+def planish_line(p1: point_like, p2: point_like) -> Matrix:
+    """Compute matrix which maps line from p1 to p2 to the x-axis, such that it
+    maintains its length and p1 * matrix = Point(0, 0).
+
+    Args:
+        p1, p2: point_like
+    Returns:
+        Matrix which maps p1 to Point(0, 0) and p2 to a point on the x axis at
+        the same distance to Point(0,0). Will always combine a rotation and a
+        transformation.
+    """
+    p1 = Point(p1)
+    p2 = Point(p2)
+    return Matrix(TOOLS._hor_matrix(p1, p2))
 
 
 TOOLS_JM_UNIQUE_ID = 0
