@@ -3982,14 +3982,16 @@ class Link:
 
 
 class Matrix(object):
-    """Matrix() - all zeros
-    Matrix(a, b, c, d, e, f)
-    Matrix(zoom-x, zoom-y) - zoom
-    Matrix(shear-x, shear-y, 1) - shear
-    Matrix(degree) - rotate
-    Matrix(Matrix) - new copy
-    Matrix(sequence) - from 'sequence'"""
     def __init__(self, *args):
+        """
+        Matrix() - all zeros
+        Matrix(a, b, c, d, e, f)
+        Matrix(zoom-x, zoom-y) - zoom
+        Matrix(shear-x, shear-y, 1) - shear
+        Matrix(degree) - rotate
+        Matrix(Matrix) - new copy
+        Matrix(sequence) - from 'sequence'
+        """
         if not args:
             self.a = self.b = self.c = self.d = self.e = self.f = 0.0
             return None
@@ -4034,7 +4036,7 @@ class Matrix(object):
         self.a, self.b, self.c, self.d, self.e, self.f = dst[1]
         return 0
 
-    def preTranslate(self, tx, ty):
+    def pretranslate(self, tx, ty):
         """Calculate pre translation and replace current matrix."""
         tx = float(tx)
         ty = float(ty)
@@ -4042,7 +4044,7 @@ class Matrix(object):
         self.f += tx * self.b + ty * self.d
         return self
 
-    def preScale(self, sx, sy):
+    def prescale(self, sx, sy):
         """Calculate pre scaling and replace current matrix."""
         sx = float(sx)
         sy = float(sy)
@@ -4052,7 +4054,7 @@ class Matrix(object):
         self.d *= sy
         return self
 
-    def preShear(self, h, v):
+    def preshear(self, h, v):
         """Calculate pre shearing and replace current matrix."""
         h = float(h)
         v = float(v)
@@ -4063,7 +4065,7 @@ class Matrix(object):
         self.d += h * b
         return self
 
-    def preRotate(self, theta):
+    def prerotate(self, theta):
         """Calculate pre rotation and replace current matrix."""
         theta = float(theta)
         while theta < 0: theta += 360
@@ -4200,7 +4202,7 @@ class Matrix(object):
     norm = __abs__
 
     @property
-    def isRectilinear(self):
+    def is_rectilinear(self):
         """True if rectangles are mapped to rectangles."""
         return (abs(self.b) < EPSILON and abs(self.c) < EPSILON) or \
             (abs(self.a) < EPSILON and abs(self.d) < EPSILON);
@@ -7903,7 +7905,7 @@ class Quad(object):
 
 
     @property
-    def isConvex(self):
+    def is_convex(self):
         """Check if quad is convex and not degenerate.
 
         Notes:
@@ -7947,7 +7949,7 @@ class Quad(object):
 
 
     @property
-    def isEmpty(self):
+    def is_empty(self):
         """Check whether all quad corners are on the same line.
 
         The is the case exactly if more than one corner angle is zero.
@@ -8125,12 +8127,12 @@ class Rect(object):
         return self
 
     @property
-    def isEmpty(self):
+    def is_empty(self):
         """True if rectangle area is empty."""
         return self.x0 == self.x1 or self.y0 == self.y1
 
     @property
-    def isInfinite(self):
+    def is_infinite(self):
         """True if rectangle is infinite."""
         return self.x0 > self.x1 or self.y0 > self.y1
 
@@ -8184,7 +8186,9 @@ class Rect(object):
         """Extend to include point-like p."""
         if len(p) != 2:
             raise ValueError("bad Point: sequ. length")
+        jlib.log('{self=} {p=}')
         self.x0, self.y0, self.x1, self.y1 = TOOLS._include_point_in_rect(self, p)
+        jlib.log('{self=}')
         return self
 
     includePoint = include_point
@@ -8193,7 +8197,9 @@ class Rect(object):
         """Extend to include rect-like r."""
         if len(r) != 4:
             raise ValueError("bad Rect: sequ. length")
+        jlib.log('{self=} {r=}')
         self.x0, self.y0, self.x1, self.y1 = TOOLS._union_rect(self, r)
+        jlib.log('{self=}')
         return self
 
     def intersect(self, r):
@@ -8389,7 +8395,7 @@ class Shape(object):
         self.lastPoint = None
         self.rect = None
 
-    def updateRect(self, x):
+    def update_rect(self, x):
         if self.rect is None:
             if len(x) == 2:
                 self.rect = Rect(x, x)
@@ -11443,7 +11449,7 @@ def JM_point_from_py(p):
     '''
     PySequence to fz_point. Default: (FZ_MIN_INF_RECT, FZ_MIN_INF_RECT)
     '''
-    jlib.log('{p=} {type(p)=}')
+    #jlib.log('{p=} {type(p)=}')
     if isinstance(p, mupdf.Point):
         return p
     if isinstance(p, Point):
@@ -12592,12 +12598,17 @@ class TOOLS:
 
     def _union_rect(r1, r2):
         #return _fitz.Tools__union_rect(self, r1, r2)
-        return JM_py_from_rect(
-                mupdf.mfz_union_rect(
-                    JM_rect_from_py(r1),
-                    JM_rect_from_py(r2),
-                    )
-                )
+        # fz_union_rect() doesn't ignore empty rectangles like it says it
+        # should, so we need to do our own checks first.
+        a = JM_rect_from_py(r1)
+        b = JM_rect_from_py(r2)
+        if a.is_empty_rect():
+            ret = b
+        elif b.is_empty_rect():
+            ret = a
+        else:
+            ret = mupdf.mfz_union_rect(a, b)
+        return JM_py_from_rect(ret)
 
     def _concat_matrix(m1, m2):
         #return _fitz.Tools__concat_matrix(self, m1, m2)
