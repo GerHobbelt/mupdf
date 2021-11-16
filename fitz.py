@@ -59,11 +59,11 @@ class Annot:
             return
         self._erase()
 
-    def __init__(self, page, annot):
+    def __init__(self, annot):
         assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
-        assert isinstance(page, Page), f'page is: {page}'
+        #assert isinstance(page, Page), f'page is: {page}'
         self.this = annot
-        self.parent = page
+        #self.parent = page
 
     def __repr__(self):
         CheckParent(self)
@@ -627,6 +627,10 @@ class Annot:
         return opy
 
     @property
+    def parent(self):
+        return Page(self.this.annot_page())
+
+    @property
     def popup_rect(self):
         """annotation 'Popup' rectangle"""
         CheckParent(self)
@@ -674,7 +678,8 @@ class Annot:
         #val = _fitz.Annot_rect(self)
         val = mupdf.mpdf_bound_annot(self.this)
         val = Rect(val)
-        val *= self.parent.derotationMatrix
+        jlib.log('{val=} {self.parent=}')
+        val *= self.parent.derotation_matrix
         return val
 
     @property
@@ -4340,6 +4345,7 @@ class Widget(object):
 
         self.rect = None  # annot value
         self.xref = 0  # annot value
+        jlib.log('have created Widget, {self=} {type(self)=} {self.script=}')
 
 
     def _validate(self):
@@ -4461,7 +4467,7 @@ class Widget(object):
     def update(self):
         """Reflect Python object in the PDF.
         """
-        doc = self.parent.parent
+        doc = self.parent.this.doc()
         self._validate()
 
         self._adjust_font()  # ensure valid text_font name
@@ -4487,7 +4493,10 @@ class Widget(object):
         TOOLS._reset_widget(self._annot)
 
     def __repr__(self):
-        return "'%s' widget on %s" % (self.field_type_string, str(self.parent))
+        #return "'%s' widget on %s" % (self.field_type_string, str(self.parent))
+        # No self.parent.
+        return f'Widget:(field_type={self.field_type_string} script={self.script})'
+        return "'%s' widget" % (self.field_type_string)
 
     @property
     def next(self):
@@ -4971,7 +4980,7 @@ class Page:
         if not annot:
             return None
         annot.thisown = True
-        annot.parent = weakref.proxy(self) # owning page object
+        #annot.parent = weakref.proxy(self) # owning page object
         self._annot_refs[id(annot)] = annot
         widget.parent = annot.parent
         widget._annot = annot
@@ -5399,7 +5408,7 @@ class Page:
             return annot
 
     @property
-    def derotationMatrix(self) -> Matrix:
+    def derotation_matrix(self) -> Matrix:
         """Reflects page de-rotation."""
         #return Matrix(TOOLS._derotate_matrix(self))
         pdfpage = self._pdf_page()
@@ -5806,6 +5815,27 @@ class Page:
         img.commit(overlay)
 
         return Q
+
+    @property
+    def first_widget(self):
+        """First widget/field."""
+        CheckParent(self)
+        #val = _fitz.Page_first_widget(self)
+        #pdf_annot *annot = NULL;
+        annot = 0
+        page = self._pdf_page()
+        if page:
+            annot = mupdf.mpdf_first_widget(page)
+        val = Annot(annot)
+
+        if val.this.m_internal:
+            val.thisown = True
+            #val.parent = weakref.proxy(self) # owning page object
+            #self._annot_refs[id(val)] = val
+            widget = Widget()
+            TOOLS._fill_widget(val, widget)
+            val = widget
+        return val
 
     def get_cdrawings(self):
         """Extract drawing paths from the page."""
@@ -6603,7 +6633,8 @@ class Page:
 
     def _addWidget(self, field_type, field_name):
         #return _fitz.Page__addWidget(self, field_type, field_name)
-        page = mupdf.mpdf_page_from_fz_page(self.this)
+        jlib.log('{self.this=} {type(self.this)=}')
+        page = self._pdf_page()
         pdf = page.doc()
         annot = JM_create_widget(pdf, page, field_type, field_name)
         if not annot.m_internal:
@@ -8276,7 +8307,6 @@ class Rect(object):
     __div__ = __truediv__
 
     def __contains__(self, x):
-        jlib.log('{self=} {x=}')
         if hasattr(x, "__float__"):
             return x in tuple(self)
         l = len(x)
@@ -8289,7 +8319,6 @@ class Rect(object):
                return True
             return False
         if l == 2:
-            jlib.log('{r=} {x=}')
             if r.x0 <= x[0] < r.x1 and r.y0 <= x[1] < r.y1:
                return True
             return False
@@ -10603,6 +10632,39 @@ def JM_annot_set_border(border, doc, annot_obj):
     annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
 
 
+def JM_choice_options(annot):
+    '''
+    return list of choices for list or combo boxes
+    '''
+    annot_obj = mupdf.mpdf_annot_obj(annot)
+    pdf = mupdf.mpdf_get_bound_document(annot_obj)
+
+    # pdf_choice_widget_options() is not usable from python, so we implement it
+    # ourselves here.
+    #
+    #n = mupdf.mpdf_choice_widget_options(annot, 0, 0)
+    jlib.log('{type(annot)=}')
+    optarr = mupdf.mpdf_dict_get_inheritable(annot.this.annot_obj(), PDF_NAME('Opt'))
+    n = mupdf.mpdf_array_len(optarr)
+
+    if n == 0:
+        return  # wrong widget type
+    optarr = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('Opt'))
+    liste = []
+    for i in range(n):
+        m = mupdf.mpdf_array_len(mupdf.mpdf_array_get(optarr, i))
+        if m == 2:
+            val = (
+                    mupdf.mpdf_to_text_string(mupdf.mpdf_array_get(mupdf.mpdf_array_get(optarr, i), 0)),
+                    mupdf.mpdf_to_text_string(mupdf.mpdf_array_get(mupdf.mpdf_array_get(optarr, i), 1)),
+                    )
+            liste.append(val)
+        else:
+            val = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(mupdf.mpdf_array_get(optarr, i)));
+            liste.append(val)
+    return liste
+
+
 def JM_color_FromSequence(color, col):
     #assert isinstance( col, list)
     if not color or (not isinstance(color, list) and not isinstance(color, float)):
@@ -10671,7 +10733,7 @@ def JM_create_widget(doc, page, type, fieldname):
         # pdf_create_annot will have linked the new widget into the page's
         # annot array. We also need it linked into the document's form
         form = mupdf.mpdf_dict_getp(mupdf.mpdf_trailer(doc), "Root/AcroForm/Fields")
-        if form.m_internal:
+        if not form.m_internal:
             form = mupdf.mpdf_new_array(doc, 1)
             mupdf.mpdf_dict_putl(
                     mupdf.mpdf_trailer(doc),
@@ -10825,6 +10887,27 @@ def JM_expand_fname(name):
     if name.startswith("Za"):   return "ZaDb"
     if name.startswith("za"):   return "ZaDb"
     return "Helv"
+
+
+def JM_field_type_text(wtype):
+    '''
+    String from widget type
+    '''
+    if wtype == PDF_WIDGET_TYPE_BUTTON:
+        return "Button"
+    if wtype == PDF_WIDGET_TYPE_CHECKBOX:
+        return "CheckBox"
+    if wtype == PDF_WIDGET_TYPE_RADIOBUTTON:
+        return "RadioButton"
+    if wtype == PDF_WIDGET_TYPE_TEXT:
+        return "Text"
+    if wtype == PDF_WIDGET_TYPE_LISTBOX:
+        return "ListBox"
+    if wtype == PDF_WIDGET_TYPE_COMBOBOX:
+        return "ComboBox"
+    if wtype == PDF_WIDGET_TYPE_SIGNATURE:
+        return "Signature"
+    return "unknown"
 
 
 def JM_find_annot_irt(annot):
@@ -11051,6 +11134,133 @@ def JM_get_border_style(style):
     return val
 
 
+def JM_get_widget_properties(annot, Widget):
+    '''
+    Populate a Python Widget object with the values from a PDF form field.
+    Called by "Page.firstWidget" and "Widget.next".
+    '''
+    jlib.log('{Widget=} {type(Widget)=}')
+    annot_obj = mupdf.mpdf_annot_obj(annot)
+    page = mupdf.mpdf_annot_page(annot)
+    pdf = page.doc()
+    tw = annot
+    #obj = NULL, *js = NULL, *o = NULL;
+    #fz_buffer *res = NULL;
+    #Py_ssize_t i = 0, n = 0;
+
+    def SETATTR(key, value):
+        setattr(Widget, key, value)
+
+    def SETATTR_DROP(mod, key, value):
+        # Original C code for this function deletes if PyObject* is NULL. We
+        # don't have a representation for that in Python - e.g. None is not
+        # represented by NULL.
+        if 0 and value is None:
+            jlib.log('deleting {mod=} {key=} {value=}')
+            try:
+                delattr(mod, key)
+            except Exception:
+                pass
+        else:
+            setattr(mod, key, value)
+
+    field_type = mupdf.mpdf_widget_type(tw)
+    #Widget["field_type"] = field_type
+    Widget.field_type = field_type
+    if field_type == PDF_WIDGET_TYPE_SIGNATURE:
+        if mupdf.mpdf_signature_is_signed(pdf, annot_obj):
+            SETATTR("is_signed", True)
+        else:
+            SETATTR("is_signed",False)
+    else:
+        SETATTR("is_signed", None)
+    SETATTR_DROP(Widget, "border_style", JM_UnicodeFromStr(mupdf.mpdf_field_border_style(annot_obj)))
+    SETATTR_DROP(Widget, "field_type_string", JM_UnicodeFromStr(JM_field_type_text(field_type)))
+
+    field_name = mupdf.mpdf_field_name(annot_obj)
+    SETATTR_DROP(Widget, "field_name", field_name)
+
+    obj = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('TU'))
+    if obj.m_internal:
+        label = mupdf.mpdf_to_text_string(obj)
+    SETATTR_DROP(Widget, "field_label", label)
+
+    SETATTR_DROP(Widget, "field_value", mupdf.mpdf_field_value(annot_obj))
+
+    SETATTR_DROP(Widget, "field_display", mupdf.mpdf_field_display(annot_obj))
+
+    border_width = mupdf.mpdf_to_real(mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('BS'), PDF_NAME('W')))
+    if border_width == 0:
+        border_width = 1
+    SETATTR_DROP(Widget, "border_width", border_width)
+
+    obj = mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('BS'), PDF_NAME('D'))
+    if mupdf.mpdf_is_array(obj):
+        n = mupdf.mpdf_array_len(obj)
+        d = [0] * n
+        for i in range(n):
+            d[i] = mupdf.mpdf_to_int(mupdf.mpdf_array_get(obj, i))
+        SETATTR_DROP(Widget, "border_dashes", d)
+
+    SETATTR_DROP(Widget, "text_maxlen", mupdf.mpdf_text_widget_max_len(tw))
+
+    SETATTR_DROP(Widget, "text_format", mupdf.mpdf_text_widget_format(tw))
+
+    obj = mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('MK'), PDF_NAME('BG'))
+    if mupdf.mpdf_is_array(obj):
+        n = mupdf.mpdf_array_len(obj)
+        col = [0] * n
+        for i in range(n):
+            col[i] = mupdf.mpdf_to_real(mupdf.mpdf_array_get(obj, i))
+        SETATTR_DROP(Widget, "fill_color", col)
+
+    obj = mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('MK'), PDF_NAME('BC'))
+    if mupdf.mpdf_is_array(obj):
+        n = mupdf.mpdf_array_len(obj)
+        col = [0] * n
+        for i in range(n):
+            col[i] = mupdf.mpdf_to_real(mupdf.mpdf_array_get(obj, i))
+        SETATTR_DROP(Widget, "border_color", col)
+
+    SETATTR_DROP(Widget, "choice_values", JM_choice_options(annot))
+
+    da = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get_inheritable(annot_obj, PDF_NAME('DA')))
+    SETATTR_DROP(Widget, "_text_da", JM_UnicodeFromStr(da))
+
+    obj = mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('MK'), PDF_NAME('CA'))
+    if obj.m_internal:
+        SETATTR_DROP(Widget, "button_caption", JM_UnicodeFromStr(mupdf.mpdf_to_text_string(obj)))
+
+    SETATTR_DROP(Widget, "field_flags", mupdf.mpdf_field_flags(annot_obj))
+
+    # call Py method to reconstruct text color, font name, size
+    #call = CALLATTR("_parse_da", NULL)
+    call = Widget._parse_da()
+
+    # extract JavaScript action texts
+    s = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('A'))
+    jlib.log('{s=} {type(s)=}')
+    ss = JM_get_script(s)
+    jlib.log('{ss=} {type(ss)=}')
+    SETATTR_DROP(Widget, "script", ss)
+
+    SETATTR_DROP(Widget, "script_stroke",
+            JM_get_script(mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('AA'), PDF_NAME('K')))
+            )
+
+    SETATTR_DROP(Widget, "script_format",
+            JM_get_script(mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('AA'), PDF_NAME('F')))
+            )
+
+    SETATTR_DROP(Widget, "script_change",
+            JM_get_script(mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('AA'), PDF_NAME('V')))
+            )
+
+    SETATTR_DROP(Widget, "script_calc",
+        JM_get_script(mupdf.mpdf_dict_getl(annot_obj, PDF_NAME('AA'), PDF_NAME('C')))
+        )
+
+
 def JM_get_fontextension(doc, xref):
     '''
     Return the file extension of a font file, identified by xref
@@ -11093,6 +11303,41 @@ def JM_get_fontextension(doc, xref):
             PySys_WriteStdout("unhandled font type '%s'", mupdf.mpdf_to_name(obj))
 
     return "n/a"
+
+
+def JM_get_script(key):
+    '''
+    JavaScript extractor
+    Returns either the script source or None. Parameter is a PDF action
+    dictionary, which must have keys /S and /JS. The value of /S must be
+    '/JavaScript'. The value of /JS is returned.
+    '''
+    jlib.log('{key=} {key.m_internal=}')
+    if not key.m_internal:
+        jlib.log('returning None. {key.m_internal=}')
+        return
+
+    j = mupdf.mpdf_dict_get(key, PDF_NAME('S'))
+    jj = mupdf.mpdf_to_name(j)
+    jlib.log('{j=} {jj=}')
+    if jj == "JavaScript":
+        js = mupdf.mpdf_dict_get(key, PDF_NAME('JS'))
+        jlib.log('{js.m_internal=}')
+        if not js.m_internal:
+            return
+    else:
+        return
+
+    if mupdf.mpdf_is_string(js):
+        script = JM_UnicodeFromStr(mupdf.mpdf_to_text_string(js))
+    elif mupdf.mpdf_is_stream(js):
+        res = mupdf.mpdf_load_stream(js)
+        script = JM_EscapeStrFromBuffer(res)
+    else:
+        return
+    if script:  # do not return an empty script
+        return script
+    return
 
 
 def JM_insert_contents(pdf, pageref, newcont, overlay):
@@ -11443,6 +11688,40 @@ def JM_point_from_py(p):
     return mupdf.Point(x, y)
 
 
+def JM_put_script(annot_obj, key1, key2, value):
+    '''
+    Create a JavaScript PDF action.
+    Usable for all object types which support PDF actions, even if the
+    argument name suggests annotations. Up to 2 key values can be specified, so
+    JavaScript actions can be stored for '/A' and '/AA/?' keys.
+    '''
+    #PyObject *script = NULL;
+    key1_obj = mupdf.mpdf_dict_get(annot_obj, key1)
+    pdf = mupdf.mpdf_get_bound_document(annot_obj)  # owning PDF
+
+    # if no new script given, just delete corresponding key
+    if not value:
+        if not key2 or not key2.m_internal:
+            mupdf.mpdf_dict_del(annot_obj, key1)
+        elif key1_obj.m_internal:
+            mupdf.mpdf_dict_del(key1_obj, key2)
+        return
+
+    # read any existing script as a PyUnicode string
+    if not key2.m_internal or not key1_obj.m_internal:
+        script = JM_get_script(key1_obj)
+    else:
+        script = JM_get_script(mupdf.mpdf_dict_get(key1_obj, key2))
+
+    # replace old script, if different from new one
+    if value != script:
+        newaction = JM_new_javascript(pdf, value)
+        if not key2.m_internal:
+            mupdf.mpdf_dict_put(annot_obj, key1, newaction)
+        else:
+            mupdf.mpdf_dict_putl(annot_obj, newaction, key1, key2)
+
+
 def JM_py_from_matrix(m):
     return m.a, m.b, m.c, m.d, m.e, m.f
 
@@ -11664,6 +11943,181 @@ def JM_set_object_value(obj, key, value):
     # make PDF object from resulting string
     new_obj = JM_pdf_obj_from_str(pdf, newstr)
     return new_obj;
+
+
+def JM_set_widget_properties(annot, Widget):
+    '''
+    Update the PDF form field with the properties from a Python Widget object.
+    Called by "Page.addWidget" and "Annot.updateWidget".
+    '''
+    page = mupdf.mpdf_annot_page(annot)
+    annot_obj = mupdf.mpdf_annot_obj(annot)
+    pdf = page.doc()
+    #Py_ssize_t i, n = 0;
+    #result = 0;
+    def GETATTR(name):
+        return getattr(Widget, name, None)
+
+    value = GETATTR("field_type")
+    field_type = value
+
+    # rectangle --------------------------------------------------------------
+    value = GETATTR("rect");
+    rect = JM_rect_from_py(value);
+    rot_mat = JM_rotate_page_matrix(page)
+    rect = mupdf.mfz_transform_rect(rect, rot_mat)
+    mupdf.mpdf_set_annot_rect(annot, rect)
+
+    # fill color -------------------------------------------------------------
+    value = GETATTR("fill_color");
+    if value and PySequence_Check(value):
+        n = len(value)
+        fill_col = mupdf.mpdf_new_array(pdf, n);
+        col = 0;
+        for i in range(n):
+            col = value[i]
+            mupdf.mpdf_array_push_real(fill_col, col)
+        mupdf.mpdf_field_set_fill_color(annot_obj, fill_col)
+        mupdf.mpdf_drop_obj(fill_col)
+
+    # dashes -----------------------------------------------------------------
+    value = GETATTR("border_dashes")
+    if value and PySequence_Check(value):
+        n = len(value)
+        dashes = mupdf.mpdf_new_array(pdf, n)
+        for i in range(n):
+            mupdf.mpdf_array_push_int(dashes, value[i])
+        mupdf.mpdf_dict_putl(annot_obj, dashes, PDF_NAME('BS'), PDF_NAME('D'))
+
+    # border color -----------------------------------------------------------
+    value = GETATTR("border_color");
+    if value and PySequence_Check(value):
+        n = len(value)
+        border_col = mupdf.mpdf_new_array(pdf, n)
+        col = 0;
+        for i in range(n):
+            col = value[i]
+            mupdf.mpdf_array_push_real(border_col, col)
+        mupdf.mpdf_dict_putl(annot_obj, border_col, PDF_NAME('MK'), PDF_NAME('BC'))
+
+    # entry ignored - may be used later
+    #
+    #int text_format = (int) PyInt_AsLong(GETATTR("text_format"));
+    #
+
+    # field label -----------------------------------------------------------
+    value = GETATTR("field_label");
+    if value is not None:
+        label = JM_StrAsChar(value)
+        mupdf.mpdf_dict_put_text_string(annot_obj, PDF_NAME('TU'), label)
+
+    # field name -------------------------------------------------------------
+    value = GETATTR("field_name");
+    if value is not None:
+        name = JM_StrAsChar(value)
+        old_name = mupdf.mpdf_field_name(annot_obj)
+        if name != old_name:
+            mupdf.mpdf_dict_put_text_string(annot_obj, PDF_NAME('T'), name)
+
+    # max text len -----------------------------------------------------------
+    if field_type == PDF_WIDGET_TYPE_TEXT:
+        value = GETATTR("text_maxlen")
+        text_maxlen = value
+        if text_maxlen:
+            mupdf.mpdf_dict_put_int(annot_obj, PDF_NAME('MaxLen'), text_maxlen)
+    value = GETATTR("field_display")
+    d = value
+    mupdf.mpdf_field_set_display(annot_obj, d)
+
+    # choice values ----------------------------------------------------------
+    if field_type in (PDF_WIDGET_TYPE_LISTBOX, PDF_WIDGET_TYPE_COMBOBOX):
+        value = GETATTR("choice_values")
+        JM_set_choice_options(annot, value)
+
+    # border style -----------------------------------------------------------
+    value = GETATTR("border_style");
+    val = JM_get_border_style(value)
+    mupdf.mpdf_dict_putl(annot_obj, val, PDF_NAME('BS'), PDF_NAME('S'))
+
+    # border width -----------------------------------------------------------
+    value = GETATTR("border_width");
+    border_width = value
+    mupdf.mpdf_dict_putl(
+            annot_obj,
+            mupdf.mpdf_new_real(border_width),
+            PDF_NAME('BS'),
+            PDF_NAME('W'),
+            )
+
+    # /DA string -------------------------------------------------------------
+    value = GETATTR("_text_da");
+    da = JM_StrAsChar(value)
+    mupdf.mpdf_dict_put_text_string(annot_obj, PDF_NAME('DA'), da)
+    mupdf.mpdf_dict_del(annot_obj, PDF_NAME('DS'))  # not supported by MuPDF
+    mupdf.mpdf_dict_del(annot_obj, PDF_NAME('RC'))  # not supported by MuPDF
+
+    # field flags ------------------------------------------------------------
+    field_flags = 0
+    Ff = 0
+    if field_type not in (
+            PDF_WIDGET_TYPE_CHECKBOX,
+            PDF_WIDGET_TYPE_BUTTON,
+            PDF_WIDGET_TYPE_RADIOBUTTON,
+            ):
+        value = GETATTR("field_flags") or 0
+        field_flags = value
+        Ff = mupdf.mpdf_field_flags(annot_obj)
+        Ff |= field_flags
+    mupdf.mpdf_dict_put_int(annot_obj, PDF_NAME('Ff'), Ff)
+
+    # button caption ---------------------------------------------------------
+    value = GETATTR("button_caption")
+    ca = JM_StrAsChar(value)
+    if ca:
+        mupdf.mpdf_field_set_button_caption(annot_obj, ca)
+
+    # script (/A) -------------------------------------------------------
+    value = GETATTR("script")
+    JM_put_script(annot_obj, PDF_NAME('A'), None, value)
+
+    # script (/AA/K) -------------------------------------------------------
+    value = GETATTR("script_stroke")
+    JM_put_script(annot_obj, PDF_NAME('AA'), PDF_NAME('K'), value)
+
+    # script (/AA/F) -------------------------------------------------------
+    value = GETATTR("script_format")
+    JM_put_script(annot_obj, PDF_NAME('AA'), PDF_NAME('F'), value)
+
+    # script (/AA/V) -------------------------------------------------------
+    value = GETATTR("script_change")
+    JM_put_script(annot_obj, PDF_NAME('AA'), PDF_NAME('V'), value)
+
+    # script (/AA/C) -------------------------------------------------------
+    value = GETATTR("script_calc")
+    JM_put_script(annot_obj, PDF_NAME('AA'), PDF_NAME('C'), value)
+
+    # field value ------------------------------------------------------------
+    value = GETATTR("field_value");
+    if field_type in (PDF_WIDGET_TYPE_CHECKBOX, PDF_WIDGET_TYPE_RADIOBUTTON):
+        #if PyObject_RichCompareBool(value, Py_True, Py_EQ):
+        if value == True:
+            onstate = mupdf.mpdf_button_field_on_state(annot_obj)
+            on = mupdf.mpdf_to_name(onstate)
+            result = mupdf.mpdf_set_field_value(pdf, annot_obj, on, 1)
+            mupdf.mpdf_dict_put_name(annot_obj, PDF_NAME(V), on)
+        else:
+            result = mupdf.mpdf_set_field_value(pdf, annot_obj, "Off", 1)
+            mupdf.mpdf_dict_put(annot_obj, PDF_NAME('V'), PDF_NAME('Off'))
+    else:
+        text = JM_StrAsChar(value)
+        if text:
+            result = mupdf.mpdf_set_field_value(pdf, annot_obj, text, 1)
+            if field_type in (PDF_WIDGET_TYPE_COMBOBOX, PDF_WIDGET_TYPE_LISTBOX):
+                mupdf.mpdf_dict_del(annot_obj, PDF_NAME('I'))
+    mupdf.mpdf_dirty_annot(annot)
+    mupdf.mpdf_set_annot_hot(annot, 1)
+    mupdf.mpdf_set_annot_active(annot, 1)
+    mupdf.mpdf_update_annot(annot)
 
 
 def JM_update_stream(doc, obj, buffer_, compress):
@@ -12228,6 +12682,34 @@ class TOOLS:
         return JM_annot_id_stem
 
     @staticmethod
+    def _fill_widget(annot, widget):
+        #val = _fitz.Tools__fill_widget(self, annot, widget)
+        jlib.log('{type(widget)=}')
+        jlib.log('{widget=}')
+        val = JM_get_widget_properties(annot, widget)
+        jlib.log('{type(widget)=}')
+        jlib.log('{widget=}')
+
+        widget.rect = Rect(annot.rect)
+        jlib.log('{type(widget)=}')
+        jlib.log('{widget=}')
+        widget.xref = annot.xref
+        widget.parent = annot.parent
+        widget._annot = annot  # backpointer to annot object
+        jlib.log('{widget=} {type(widget)=}')
+        if not widget.script:
+            widget.script = None
+        if not widget.script_stroke:
+            widget.script_stroke = None
+        if not widget.script_format:
+            widget.script_format = None
+        if not widget.script_change:
+            widget.script_change = None
+        if not widget.script_calc:
+            widget.script_calc = None
+        return val
+
+    @staticmethod
     def _invert_matrix(matrix):
         try:
             src = mupdf.Matrix(
@@ -12319,6 +12801,11 @@ class TOOLS:
         except Exception:
             return
         return
+
+    @staticmethod
+    def _save_widget(annot, widget):
+        #return _fitz.Tools__save_widget(self, annot, widget)
+        JM_set_widget_properties(annot, widget);
 
     @staticmethod
     def _sine_between(C, P, Q):
