@@ -66,12 +66,12 @@ class Annot:
         #self.parent = page
 
     def __repr__(self):
-        CheckParent(self)
-        return "'%s' annotation on %s" % (self.type[1], str(self.parent))
+        #CheckParent(self)
+        parent = getattr(self, 'parent', '<>')
+        return "'%s' annotation on %s" % (self.type[1], str(parent))
 
     def __str__(self):
-        CheckParent(self)
-        return "'%s' annotation on %s" % (self.type[1], str(self.parent))
+        return self.__repr__()
 
     def _erase(self):
         try:
@@ -6681,16 +6681,19 @@ class Page:
 
         #val = _fitz.Page_first_widget(self)
         annot = None
-        page = mupdf.mpdf_page_from_fz_page(self.this)
+        jlib.log('{self.this=}')
+        page = self._pdf_page()# mupdf.mpdf_page_from_fz_page(self.this)
         if page.m_internal:
             annot = mupdf.mpdf_first_widget(page)
             if annot.m_internal:
                  mupdf.mpdf_keep_annot(annot)
         val = Annot(annot)
 
+        jlib.log('{val=}')
+        jlib.log('{type(val)=}')
         if val:
             val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
+            #val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
             widget = Widget()
             TOOLS._fill_widget(val, widget)
@@ -7157,15 +7160,27 @@ class Page:
 
 
     def __str__(self):
-        CheckParent(self)
-        x = self.parent.name
-        if self.parent.stream is not None:
-            x = "<memory, doc# %i>" % (self.parent._graft_id,)
-        if x == "":
-            x = "<new PDF, doc# %i>" % self.parent._graft_id
-        return "page %s of %s" % (self.number, x)
+        #CheckParent(self)
+        parent = getattr(self, 'parent', None)
+        #jlib.log('{self.this.m_internal=}')
+        if isinstance(self.this.m_internal, mupdf.pdf_page):
+            #jlib.log('{self.this.m_internal.super=}')
+            number = self.this.m_internal.super.number
+        else:
+            j#lib.log('{self.this.m_internal=}')
+            number = self.this.m_internal.number
+        ret = f'page {number}'
+        if parent:
+            x = self.parent.name
+            if self.parent.stream is not None:
+                x = "<memory, doc# %i>" % (self.parent._graft_id,)
+            if x == "":
+                x = "<new PDF, doc# %i>" % self.parent._graft_id
+            ret += f' of {x}'
+        return ret
 
     def __repr__(self):
+        return self.__str__()
         CheckParent(self)
         x = self.parent.name
         if self.parent.stream is not None:
@@ -12277,7 +12292,8 @@ def CheckMorph(o: typing.Any) -> bool:
 
 def CheckParent(o: typing.Any):
     if not hasattr(o, "parent") or o.parent is None:
-        raise ValueError("orphaned object: parent is None")
+        jlib.log(jlib.exception_info())
+        raise ValueError(f"orphaned object type(o)={type(o)}: parent is None")
 
 
 def CheckQuad(q: typing.Any) -> bool:
