@@ -6679,7 +6679,14 @@ class Page:
         """First widget/field."""
         CheckParent(self)
 
-        val = _fitz.Page_firstWidget(self)
+        #val = _fitz.Page_first_widget(self)
+        annot = None
+        page = mupdf.mpdf_page_from_fz_page(self.this)
+        if page.m_internal:
+            annot = mupdf.mpdf_first_widget(page)
+            if annot.m_internal:
+                 mupdf.mpdf_keep_annot(annot)
+        val = Annot(annot)
 
         if val:
             val.thisown = True
@@ -11854,6 +11861,39 @@ def JM_scan_resources(pdf, rsrc, liste, what, stream_xref, tracer):
     finally:
         rsrc.unmark_obj()
 
+
+def JM_set_choice_options(annot, liste):
+    '''
+    set ListBox / ComboBox values
+    '''
+    if not PySequence_Check(liste):
+        return
+    n = len(liste)
+    if not n:
+        return
+    tuple_ = tuple(liste)
+    annot_obj = mupdf.mpdf_annot_obj(annot)
+    pdf = mupdf.mpdf_get_bound_document(annot_obj)
+    #const char *opt = NULL, *opt1 = NULL, *opt2 = NULL;
+    optarr = mupdf.mpdf_new_array(pdf, n)
+    #pdf_obj *optarrsub = NULL;
+    #PyObject *val = NULL;
+    for i in range(n):
+        val = tuple_[i]
+        opt = val
+        if opt:
+            mupdf.mpdf_array_push_text_string(optarr, opt)
+        else:
+            opt1 = PyTuple_GetItem(val, 0)
+            opt2 = PyTuple_GetItem(val, 1)
+            if not opt1 or not opt2:
+                return
+            optarrsub = mupdf.mpdf_array_push_array(optarr, 2)
+            mupdf.mpdf_array_push_text_string(optarrsub, opt1)
+            mupdf.mpdf_array_push_text_string(optarrsub, opt2)
+    mupdf.mpdf_dict_put(annot_obj, PDF_NAME('Opt'), optarr)
+
+
 def JM_set_field_type(doc, obj, type):
     '''
     Set the field type
@@ -12104,7 +12144,7 @@ def JM_set_widget_properties(annot, Widget):
             onstate = mupdf.mpdf_button_field_on_state(annot_obj)
             on = mupdf.mpdf_to_name(onstate)
             result = mupdf.mpdf_set_field_value(pdf, annot_obj, on, 1)
-            mupdf.mpdf_dict_put_name(annot_obj, PDF_NAME(V), on)
+            mupdf.mpdf_dict_put_name(annot_obj, PDF_NAME('V'), on)
         else:
             result = mupdf.mpdf_set_field_value(pdf, annot_obj, "Off", 1)
             mupdf.mpdf_dict_put(annot_obj, PDF_NAME('V'), PDF_NAME('Off'))
