@@ -2481,10 +2481,9 @@ class Document:
         Args:
             simple: a bool to control output. Returns a list, where each entry consists of outline level, title, page number and link destination (if simple = False). For details see PyMuPDF's documentation.
         """
-
         def recurse(olItem, liste, lvl):
             """Recursively follow the outline item chain and record item information in a list."""
-            while olItem:
+            while olItem and olItem.this.m_internal:
                 if olItem.title:
                     title = olItem.title
                 else:
@@ -2492,9 +2491,7 @@ class Document:
 
                 #jlib.log('{type(olItem)=}')
                 #jlib.log('{olItem.this=}')
-                #jlib.log('{olItem.this.m_internal_value():x=}')
                 if not olItem.is_external:
-                    #jlib.log('{olItem.uri=}')
                     if olItem.uri:
                         if olItem.page == -1:
                             resolve = doc.resolve_link(olItem.uri)
@@ -2529,9 +2526,7 @@ class Document:
         liste = []
         toc = recurse(olItem, liste, lvl)
         if doc.is_pdf and simple is False:
-            jlib.log('before _extend_toc_items: {toc=}')
             doc._extend_toc_items(toc)
-            jlib.log('after  _extend_toc_items: {toc=}')
         return toc
 
     def init_doc(self):
@@ -2988,6 +2983,185 @@ class Document:
             raise ValueError("document closed")
 
         return _fitz.Document_set_oc(self, xref, oc)
+
+    def set_toc(
+            doc,#: Document,
+            toc: list,
+            collapse: int = 1,
+            ) -> int:
+        """Create new outline tree (table of contents, TOC).
+
+        Args:
+            toc: (list, tuple) each entry must contain level, title, page and
+                optionally top margin on the page. None or '()' remove the TOC.
+            collapse: (int) collapses entries beyond this level. Zero or None
+                shows all entries unfolded.
+        Returns:
+            the number of inserted items, or the number of removed items respectively.
+        """
+        if doc.is_closed or doc.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        if not doc.is_pdf:
+            raise ValueError("not a PDF")
+        if not toc:  # remove all entries
+            r = doc._delToC()
+            ret = len(r)
+            return ret
+
+        # validity checks --------------------------------------------------------
+        if type(toc) not in (list, tuple):
+            raise ValueError("'toc' must be list or tuple")
+        toclen = len(toc)
+        page_count = doc.page_count
+        t0 = toc[0]
+        if type(t0) not in (list, tuple):
+            raise ValueError("items must be sequences of 3 or 4 items")
+        if t0[0] != 1:
+            raise ValueError("hierarchy level of item 0 must be 1")
+        for i in list(range(toclen - 1)):
+            t1 = toc[i]
+            t2 = toc[i + 1]
+            if not -1 <= t1[2] <= page_count:
+                raise ValueError("row %i: page number out of range" % i)
+            if (type(t2) not in (list, tuple)) or len(t2) not in (3, 4):
+                raise ValueError("bad row %i" % (i + 1))
+            if (type(t2[0]) is not int) or t2[0] < 1:
+                raise ValueError("bad hierarchy level in row %i" % (i + 1))
+            if t2[0] > t1[0] + 1:
+                raise ValueError("bad hierarchy level in row %i" % (i + 1))
+        # no formal errors in toc --------------------------------------------------
+
+        # --------------------------------------------------------------------------
+        # make a list of xref numbers, which we can use for our TOC entries
+        # --------------------------------------------------------------------------
+        old_xrefs = doc._delToC()  # del old outlines, get their xref numbers
+
+        # prepare table of xrefs for new bookmarks
+        old_xrefs = []
+        xref = [0] + old_xrefs
+        xref[0] = doc._getOLRootNumber()  # entry zero is outline root xref number
+        if toclen > len(old_xrefs):  # too few old xrefs?
+            for i in range((toclen - len(old_xrefs))):
+                xref.append(doc.get_new_xref())  # acquire new ones
+
+        lvltab = {0: 0}  # to store last entry per hierarchy level
+
+        # ------------------------------------------------------------------------------
+        # contains new outline objects as strings - first one is the outline root
+        # ------------------------------------------------------------------------------
+        olitems = [{"count": 0, "first": -1, "last": -1, "xref": xref[0]}]
+        # ------------------------------------------------------------------------------
+        # build olitems as a list of PDF-like connnected dictionaries
+        # ------------------------------------------------------------------------------
+        for i in range(toclen):
+            o = toc[i]
+            lvl = o[0]  # level
+            title = get_pdf_str(o[1])  # title
+            pno = min(doc.page_count - 1, max(0, o[2] - 1))  # page number
+            page_xref = doc.page_xref(pno)
+            page_height = doc.page_cropbox(pno).height
+            top = Point(72, page_height - 36)
+            dest_dict = {"to": top, "kind": LINK_GOTO}  # fall back target
+            if o[2] < 0:
+                dest_dict["kind"] = LINK_NONE
+            if len(o) > 3:  # some target is specified
+                if type(o[3]) in (int, float):  # convert a number to a point
+                    dest_dict["to"] = Point(72, page_height - o[3])
+                else:  # if something else, make sure we have a dict
+                    dest_dict = o[3] if type(o[3]) is dict else dest_dict
+                    if "to" not in dest_dict:  # target point not in dict?
+                        dest_dict["to"] = top  # put default in
+                    else:  # transform target to PDF coordinates
+                        point = +dest_dict["to"]
+                        point.y = page_height - point.y
+                        dest_dict["to"] = point
+            d = {}
+            d["first"] = -1
+            d["count"] = 0
+            d["last"] = -1
+            d["prev"] = -1
+            d["next"] = -1
+            d["dest"] = getDestStr(page_xref, dest_dict)
+            d["top"] = dest_dict["to"]
+            d["title"] = title
+            d["parent"] = lvltab[lvl - 1]
+            d["xref"] = xref[i + 1]
+            d["color"] = dest_dict.get("color")
+            d["flags"] = dest_dict.get("italic", 0) + 2 * dest_dict.get("bold", 0)
+            lvltab[lvl] = i + 1
+            parent = olitems[lvltab[lvl - 1]]  # the parent entry
+
+            if (
+                dest_dict.get("collapse") or collapse and lvl > collapse
+            ):  # suppress expansion
+                parent["count"] -= 1  # make /Count negative
+            else:
+                parent["count"] += 1  # positive /Count
+
+            if parent["first"] == -1:
+                parent["first"] = i + 1
+                parent["last"] = i + 1
+            else:
+                d["prev"] = parent["last"]
+                prev = olitems[parent["last"]]
+                prev["next"] = i + 1
+                parent["last"] = i + 1
+            olitems.append(d)
+
+        # ------------------------------------------------------------------------------
+        # now create each outline item as a string and insert it in the PDF
+        # ------------------------------------------------------------------------------
+        for i, ol in enumerate(olitems):
+            txt = "<<"
+            if ol["count"] != 0:
+                txt += "/Count %i" % ol["count"]
+            try:
+                txt += ol["dest"]
+            except:
+                pass
+            try:
+                if ol["first"] > -1:
+                    txt += "/First %i 0 R" % xref[ol["first"]]
+            except:
+                pass
+            try:
+                if ol["last"] > -1:
+                    txt += "/Last %i 0 R" % xref[ol["last"]]
+            except:
+                pass
+            try:
+                if ol["next"] > -1:
+                    txt += "/Next %i 0 R" % xref[ol["next"]]
+            except:
+                pass
+            try:
+                if ol["parent"] > -1:
+                    txt += "/Parent %i 0 R" % xref[ol["parent"]]
+            except:
+                pass
+            try:
+                if ol["prev"] > -1:
+                    txt += "/Prev %i 0 R" % xref[ol["prev"]]
+            except:
+                pass
+            try:
+                txt += "/Title" + ol["title"]
+            except:
+                pass
+
+            if ol.get("color") and len(ol["color"]) == 3:
+                txt += "/C[ %g %g %g]" % tuple(ol["color"])
+            if ol.get("flags", 0) > 0:
+                txt += "/F %i" % ol["flags"]
+
+            if i == 0:  # special: this is the outline root
+                txt += "/Type/Outlines"  # so add the /Type entry
+            txt += ">>"
+            doc.update_object(xref[i], txt)  # insert the PDF object
+
+        doc.init_doc()
+        return toclen
+
 
     def setLanguage(self, language=None):
         return _fitz.Document_setLanguage(self, language)
@@ -3676,6 +3850,7 @@ class Document:
             return
         self._page_refs.clear()
 
+    '''
     def __del__(self):
         if hasattr(self, "_reset_page_refs"):
             self._reset_page_refs()
@@ -3688,7 +3863,7 @@ class Document:
         self.stream = None
         self._reset_page_refs = DUMMY
         self.isClosed = True
-
+    '''
     def __enter__(self):
         return self
 
@@ -4000,15 +4175,12 @@ class Link:
         return self._setColors(colors, self.parent.parent.this, self.xref)
 
     @property
-
     def uri(self):
         """Uri string."""
         CheckParent(self)
-
         return _fitz.Link_uri(self)
 
     @property
-
     def isExternal(self):
         """External indicator."""
         CheckParent(self)
@@ -4620,8 +4792,8 @@ class Outline:
     def uri(self):
         #return _fitz.Outline_uri(self)
         ol = self.this
-        #jlib.log('{ol=}')
-        #jlib.log('{ol.uri()=}')
+        if not ol.m_internal:
+            return None
         return JM_UnicodeFromStr(ol.uri())
 
     @property
@@ -4653,7 +4825,6 @@ class Outline:
         uri = ol.uri()
         if uri is None:
             return False
-        #jlib.log('{uri=}')
         return mupdf.mfz_is_external_link(uri)
 
     @property
@@ -12577,14 +12748,12 @@ def dir_str(x):
 
 
 def getLinkDict(ln) -> dict:
-    jlib.log('{type(ln)=} {ln=}')
     nl = {"kind": ln.dest.kind, "xref": 0}
     try:
         nl["from"] = ln.rect
     except:
         pass
     pnt = Point(0, 0)
-    jlib.log('{ln.dest.flags:x=}')
     if ln.dest.flags & LINK_FLAG_L_VALID:
         pnt.x = ln.dest.lt.x
     if ln.dest.flags & LINK_FLAG_T_VALID:
@@ -12597,7 +12766,6 @@ def getLinkDict(ln) -> dict:
         nl["page"] = ln.dest.page
         nl["to"] = pnt
         if ln.dest.flags & LINK_FLAG_R_IS_ZOOM:
-            jlib.log('{ln.dest=} {ln.dest.rb=} {ln.dest.rb.x=}')
             nl["zoom"] = ln.dest.rb.x
         else:
             nl["zoom"] = 0.0
@@ -12610,7 +12778,6 @@ def getLinkDict(ln) -> dict:
         else:
             nl["to"] = pnt
             if ln.dest.flags & LINK_FLAG_R_IS_ZOOM:
-                jlib.log('{ln.dest=} {ln.dest.rb=} {ln.dest.rb.x=}')
                 nl["zoom"] = ln.dest.rb.x
             else:
                 nl["zoom"] = 0.0
@@ -12623,7 +12790,6 @@ def getLinkDict(ln) -> dict:
 
     else:
         nl["page"] = ln.dest.page
-    jlib.log('{nl=}')
     return nl
 
 
