@@ -2784,49 +2784,44 @@ def has_refs( tu, type_):
     ret = has_refs_cache.get( key, None)
     if ret is None:
         ret = False
-        jlib.log('Analysing {type0.spelling=} {type_.spelling=} {key=}')
+        #jlib.log( 'Analysing {type0.spelling=} {type_.spelling=} {key=}')
 
         for prefix in (
                 'fz_',
                 'pdf_',
                 ):
-            jlib.log('{type_.spelling=} {prefix=}')
+            #jlib.log( '{type_.spelling=} {prefix=}')
             if key.startswith( prefix):
-                # Type is a fz_ or pdf_ struct.
-                jlib.log('is fz/pdf type: {key=}')
+                #jlib.log( 'Type is a fz_ or pdf_ struct: {key=}')
                 keep_name = f'{prefix}keep_{key[len(prefix):]}'
                 keep_fn_cursor = find_function( tu, keep_name, method=False)
-                jlib.log('{keep_name=} {keep_fn_cursor=}')
+                #jlib.log( '{keep_name=} {keep_fn_cursor=}')
                 if keep_fn_cursor:
-                    # There is a keep() fn for this type so it uses reference counting.
-                    jlib.log('keep() fn exists: {keep_name=}')
+                    #jlib.log( 'There is a keep() fn for this type so it uses reference counting: {keep_name=}')
                     base_type_cursor = get_base_type( type_).get_declaration()
                     if base_type_cursor.is_definition():
-                        # Type definition is available so we look for .refs member.
-                        jlib.log('Definition is available for {key}')
+                        #jlib.log( 'Type definition is available so we look for .refs member: {key=}')
                         for cursor in type_.get_fields():
                             name = cursor.spelling
                             type2 = cursor.type.get_canonical()
-                            jlib.log('{name=} {type2.spelling=}')
+                            #jlib.log( '{name=} {type2.spelling=}')
                             if name == 'refs' and type2.spelling == 'int':
                                 ret = 'refs', 32
                                 break
                             if name == 'storable' and type2.spelling == 'struct fz_storable':
                                 ret = 'storable.refs', 32
                                 break
-                        else:
-                            # Couldn't find .refs member.
-                            if 0: assert 0, jlib.expand_nv(
-                                    'Type has {keep_name}() fn but cannot find .refs member.'
-                                    ' {type0.spelling=} {type_.spelling=} {base_type_cursor.spelling}'
-                                    )
                     else:
-                        jlib.log('Definition is not available for {key}')
+                        #jlib.log('Definition is not available for {key=}')
+                        pass
 
                     if not ret:
-                        # Cannot find .refs member or we only have forward
-                        # declaration, so have to hard-code the size and offset
-                        # of the refs member.
+                        if 0:
+                            jlib.log(
+                                    'Cannot find .refs member or we only have forward'
+                                    ' declaration, so have to hard-code the size and offset'
+                                    ' of the refs member.'
+                                    )
                         if base_type_cursor.is_definition():
                             if key == 'pdf_document':
                                 ret = 'super.refs', 32
@@ -2840,6 +2835,7 @@ def has_refs( tu, type_):
                             elif key == 'pdf_cmap':
                                 return 'storable.refs', 32
                         else:
+                            #jlib.log( 'No defintion available, i.e. forward decl only.')
                             if key == 'pdf_obj':
                                 ret = 0, 16
                             elif key == 'fz_path':
@@ -2860,6 +2856,7 @@ def has_refs( tu, type_):
                                     ):
                                 # Forward decl, first member is 'fz_storable storable;'.
                                 return 0, 32
+
                         if ret is None:
                             # Need to hard-code info for this type.
                             assert 0, jlib.expand_nv(
@@ -2874,7 +2871,7 @@ def has_refs( tu, type_):
                 'struct fz_buffer',
                 ):
             assert ret
-        jlib.log('Populating has_refs_cache with {key=} {ret=}')
+        #jlib.log('Populating has_refs_cache with {key=} {ret=}')
         has_refs_cache[ key] = ret
     return ret
 
