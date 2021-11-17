@@ -2565,6 +2565,22 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        pdf_annot = ClassExtra(
+                #constructor_raw = False,
+                methods_extra = [
+                    ExtraMethod(
+                        'long long',
+                        'm_internal_value()',
+                        f'''
+                        {{
+                            return (uintptr_t) m_internal;
+                        }}
+                        ''',
+                        comment = '/* Provided to allow Python to see numerical value of m_internal. */'
+                        ),
+                    ],
+                ),
+
         pdf_lexbuf = ClassExtra(
                 constructors_extra = [
                     ExtraConstructor( '(int size)',
@@ -2753,7 +2769,7 @@ def is_double_pointer( type_):
 has_refs_cache = dict()
 def has_refs( type_):
     '''
-    Returns False or (offset, bits) if <type_> has a 'refs' member:
+    Returns (offset, bits) if <type_> has a 'refs' member, otherwise False.
         offset:
             Byte offset of 'refs' or name of 'refs' for use with offsetof(),
             e.g. 'super.refs'.
@@ -2767,6 +2783,11 @@ def has_refs( type_):
         ret = False
         if type_.spelling == 'struct pdf_document':
             ret = 'super.refs', 32
+        elif type_.spelling == 'struct pdf_annot':
+            # Only a forward-declaration is available, but as of 2021-11-17 the
+            # definition in source/pdf/pdf-annot-imp.h has 'int refs' as first
+            # member.
+            ret = 0, 32
         elif type_.spelling == 'struct pdf_obj':
             # Only a forward-declaration is available, but as of 2021-10-22 the
             # definition in source/pdf/pdf-object.c has 'short refs;' as first
@@ -5927,6 +5948,13 @@ def class_raw_constructor(
             out_cpp.write( f'    {{\n')
             out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write( f'    }}\n')
+        if struct_name == 'pdf_annot':
+            out_cpp.write( f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ":"\n'
+                            '            << " created PdfAnnot."\n'
+                            '            << " m_internal=" << m_internal\n'
+                            '            << " annot_refs()=" << annot_refs()\n'
+                            '            << "\\n";\n'
+                            )
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
