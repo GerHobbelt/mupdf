@@ -54,13 +54,14 @@ def args_match(args, *types):
 
 class Annot:
 
-    def __del__(self):
-        if self.parent is None:
-            return
-        self._erase()
+    #def __del__(self):
+    #    if self.parent is None:
+    #        return
+    #    self._erase()
 
     def __init__(self, annot):
-        assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
+        jlib.log('{annot=} {annot.m_internal=} {annot.annot_refs()=}')
+        #assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
         #assert isinstance(page, Page), f'page is: {page}'
         self.this = annot
         #self.parent = page
@@ -80,7 +81,7 @@ class Annot:
             return
         if getattr(self, "thisown", False):
             self.thisown = False
-        self.parent = None
+        #self.parent = None
 
     def _get_redact_values(self):
         jlib.log('')
@@ -597,13 +598,13 @@ class Annot:
             #annot = (pdf_widget *) pdf_next_widget(gctx, (pdf_widget *) this_annot);
             annot = mupdf.mpdf_next_widget(this_annot)
 
-        val = Annot(self.parent, annot) if annot.m_internal else None
+        val = Annot(annot) if annot.m_internal else None
 
         if not val:
             return None
         val.thisown = True
 
-        assert val.parent == self.parent
+        assert val.parent.this.m_internal_value() == self.parent.this.m_internal_value(), jlib.expand_nv('{val.parent.this.m_internal_value()=} {self.parent.this.m_internal_value()=}')
         #val.parent = self.parent  # copy owning page object from previous annot
         val.parent._annot_refs[id(val)] = val
 
@@ -3481,7 +3482,7 @@ class Document:
         page_proxy = weakref.proxy(page)
         for k, v in old_annots.items():
             annot = old_annots[k]
-            annot.parent = page_proxy  # refresh parent to new page
+            #annot.parent = page_proxy  # refresh parent to new page
             page._annot_refs[k] = annot
         return page
 
@@ -4586,6 +4587,7 @@ class Page:
         self.thisown = True
         self.lastPoint = None
         self.draw_cont = ''
+        self._annot_refs = dict()
 
     def _add_caret_annot(self, point):
         #return _fitz.Page__add_caret_annot(self, point)
@@ -4616,7 +4618,7 @@ class Page:
             jlib.log('{e=}')
             return
         assert annot.m_internal
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
         #return _fitz.Page__add_redact_annot(self, quad, text, da_str, align, fill, text_color)
@@ -4650,7 +4652,7 @@ class Page:
             jlib.log('{e=}')
             return
         annot = mupdf.mpdf_keep_annot(annot)
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _add_text_annot(self, point, text, icon=None):
         #return _fitz.Page__add_text_annot(self, point, text, icon)
@@ -4674,7 +4676,7 @@ class Page:
         except Exception as e:
             jlib.log('{e=}: {jlib.exception_info()=}')
             return
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _get_text_page(self, clip=None, flags=0):
         val = _fitz.Page__get_text_page(self, clip, flags)
@@ -4735,7 +4737,7 @@ class Page:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
         annot_postprocess(self, annot)
-        return Annot(self, annot)
+        return Annot(annot)
 
     def add_circle_annot(self, rect: rect_like) -> "struct Annot *":
         """Add a 'Circle' (ellipse, oval) annotation."""
@@ -5353,27 +5355,36 @@ class Page:
 
     def delete_annot(self, annot):
         """Delete annot and return next one."""
+        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         CheckParent(self)
+        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         CheckParent(annot)
+        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
 
         page = self._pdf_page()
+        jlib.log('')
         while 1:
             # first loop through all /IRT annots and remove them
             irt_annot = JM_find_annot_irt(annot.this)
             if not irt_annot:    # no more there
                 break
             JM_delete_annot(page, irt_annot)
+        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
         JM_delete_annot(page, annot.this)
         #fixme: page->doc->dirty = 1;
-        val = Annot(self, nextannot)
+        jlib.log('{annot.this.m_internal_value():x=} {annot.this.annot_refs()=}')
+        #jlib.log('{dir(annot.this.m_internal)=}')
+        val = Annot(nextannot)
 
+        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         if val:
             val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
+            #val.parent = weakref.proxy(self) # owning page object
             val.parent._annot_refs[id(val)] = val
         annot._erase()
 
+        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         return val
 
 
@@ -5400,7 +5411,7 @@ class Page:
                 except Exception as e:
                     jlib.log('{e=}')
                     return
-                return Annot(self, annot)
+                return Annot(annot)
             finally:
                 if old_rotation != 0:
                     self.set_rotation(old_rotation)
@@ -5416,6 +5427,8 @@ class Page:
             #return JM_py_from_matrix(fz_identity);
             return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
         return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
+
+    derotationMatrix = derotation_matrix
 
     def draw_line(
         page: Page,
@@ -6327,7 +6340,7 @@ class Page:
         if not val:
             return val
         val.thisown = True
-        val.parent = weakref.proxy(self)
+        #val.parent = weakref.proxy(self)
         self._annot_refs[id(val)] = val
         return val
 
@@ -6470,7 +6483,7 @@ class Page:
         except Exception as e:
             jlib.log('{e=} {jlib.exception_info()=}')
             return
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _add_file_annot(self, point, buffer_, filename, ufilename=None, desc=None, icon=None):
         #return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
@@ -6506,7 +6519,7 @@ class Page:
             jlib.log('{e=}')
             raise
             return
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _add_text_marker(self, quads, annot_type):
 
@@ -6517,7 +6530,7 @@ class Page:
         val = Page__add_text_marker(self, quads, annot_type)
         if not val:
             return None
-        val.parent = weakref.proxy(self)
+        #val.parent = weakref.proxy(self)
         self._annot_refs[id(val)] = val
 
         return val
@@ -6538,7 +6551,7 @@ class Page:
             jlib.log('{e=}')
             return
         assert annot.m_internal
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _add_multiline(self, points, annot_type):
         #return _fitz.Page__add_multiline(self, points, annot_type)
@@ -6558,7 +6571,7 @@ class Page:
         except Exception as e:
             jlib.log('{e=}')
             return;
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
         #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
@@ -6584,7 +6597,7 @@ class Page:
         JM_make_annot_DA(annot, ntcol, tcol, fontname, fontsize)
         JM_add_annot_id(annot, "A")
         annot.update_annot()
-        return Annot(self, annot)
+        return Annot(annot)
 
     def _load_annot(self, name, xref):
         #return _fitz.Page__load_annot(self, name, xref)
@@ -6599,7 +6612,7 @@ class Page:
         except Exception as e:
             jlib.log('{e=} {jlib.exception_info()=}')
             return
-        return Annot(self, annot) if annot else None
+        return Annot(annot) if annot else None
 
     def _get_resource_properties(self):
         return _fitz.Page__get_resource_properties(self)
@@ -6667,10 +6680,10 @@ class Page:
         page = self._pdf_page()
         if page:
             annot = mupdf.mpdf_first_annot(page)
-        val = Annot(self, annot) if annot else None
+        val = Annot(annot) if annot else None
         if val:
             val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
+            #val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
         return val
 
@@ -10835,6 +10848,7 @@ def JM_delete_annot(page, annot):
         if type_ != mupdf.PDF_ANNOT_WIDGET:
             mupdf.mpdf_delete_annot(page, annot)
         else:
+            jlib.log('Calling JM_delete_widget()')
             JM_delete_widget(page, annot)
     except Exception as e:
         jlib.log('{e=}')
@@ -12033,7 +12047,7 @@ def JM_set_widget_properties(annot, Widget):
             col = value[i]
             mupdf.mpdf_array_push_real(fill_col, col)
         mupdf.mpdf_field_set_fill_color(annot_obj, fill_col)
-        mupdf.mpdf_drop_obj(fill_col)
+        #mupdf.mpdf_drop_obj(fill_col)
 
     # dashes -----------------------------------------------------------------
     value = GETATTR("border_dashes")
@@ -12291,6 +12305,7 @@ def CheckMorph(o: typing.Any) -> bool:
 
 
 def CheckParent(o: typing.Any):
+    return
     if not hasattr(o, "parent") or o.parent is None:
         jlib.log(jlib.exception_info())
         raise ValueError(f"orphaned object type(o)={type(o)}: parent is None")
@@ -12359,8 +12374,8 @@ def Page__add_text_marker(self, quads, annot_type):
         final()
         return
     final()
-    annot = mupdf.mpdf_keep_annot(annot)
-    return Annot(self, annot)
+    #annot = mupdf.mpdf_keep_annot(annot)
+    return Annot(annot)
 
 
 def Page_clean_contents(self, sanitize):
@@ -13527,7 +13542,7 @@ def annot_postprocess(page: "Page", annot: "Annot") -> None:
 
     Set ownership flag and store annotation in page annotation dictionary.
     """
-    annot.parent = weakref.proxy(page)
+    #annot.parent = weakref.proxy(page)
     page._annot_refs[id(annot)] = annot
     annot.thisown = True
 
