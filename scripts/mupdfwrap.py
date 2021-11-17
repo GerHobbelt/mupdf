@@ -2767,7 +2767,7 @@ def is_double_pointer( type_):
             return True
 
 has_refs_cache = dict()
-def has_refs( type_):
+def has_refs( tu, type_):
     '''
     Returns (offset, bits) if <type_> has a 'refs' member, otherwise False.
         offset:
@@ -2776,33 +2776,102 @@ def has_refs( type_):
         bits:
             Size of 'refs' in bits.
     '''
+    type0 = type_
     type_ = type_.get_canonical()
+
     key = type_.spelling
+    key = clip(key, 'struct ')
     ret = has_refs_cache.get( key, None)
     if ret is None:
         ret = False
-        if type_.spelling == 'struct pdf_document':
-            ret = 'super.refs', 32
-        elif type_.spelling == 'struct pdf_annot':
-            # Only a forward-declaration is available, but as of 2021-11-17 the
-            # definition in source/pdf/pdf-annot-imp.h has 'int refs' as first
-            # member.
-            ret = 0, 32
-        elif type_.spelling == 'struct pdf_obj':
-            # Only a forward-declaration is available, but as of 2021-10-22 the
-            # definition in source/pdf/pdf-object.c has 'short refs;' as first
-            # member.
-            ret = 0, 16
-        else:
-            for cursor in type_.get_fields():
-                name = cursor.spelling
-                type2 = cursor.type.get_canonical()
-                if name == 'refs' and type2.spelling == 'int':
-                    #jlib.log( '{type_.spelling=} returning true')
-                    ret = 'refs', 32
-                    break
-            else:
-                jlib.log2( '{type_.spelling=} returning False')
+        jlib.log('Analysing {type0.spelling=} {type_.spelling=} {key=}')
+
+        for prefix in (
+                'fz_',
+                'pdf_',
+                ):
+            jlib.log('{type_.spelling=} {prefix=}')
+            if key.startswith( prefix):
+                # Type is a fz_ or pdf_ struct.
+                jlib.log('is fz/pdf type: {key=}')
+                keep_name = f'{prefix}keep_{key[len(prefix):]}'
+                keep_fn_cursor = find_function( tu, keep_name, method=False)
+                jlib.log('{keep_name=} {keep_fn_cursor=}')
+                if keep_fn_cursor:
+                    # There is a keep() fn for this type so it uses reference counting.
+                    jlib.log('keep() fn exists: {keep_name=}')
+                    base_type_cursor = get_base_type( type_).get_declaration()
+                    if base_type_cursor.is_definition():
+                        # Type definition is available so we look for .refs member.
+                        jlib.log('Definition is available for {key}')
+                        for cursor in type_.get_fields():
+                            name = cursor.spelling
+                            type2 = cursor.type.get_canonical()
+                            if name == 'refs' and type2.spelling == 'int':
+                                ret = 'refs', 32
+                                break
+                            if name == 'storable' and type2.spelling == 'fz_storable':
+                                ret = 'storable.refs', 32
+                                break
+                        else:
+                            # Couldn't find .refs member.
+                            if 0: assert 0, jlib.expand_nv(
+                                    'Type has {keep_name}() fn but cannot find .refs member.'
+                                    ' {type0.spelling=} {type_.spelling=} {base_type_cursor.spelling}'
+                                    )
+                    else:
+                        jlib.log('Definition is not available for {key}')
+
+                    if not ret:
+                        # Cannot find .refs member or we only have forward
+                        # declaration, so have to hard-code the size and offset
+                        # of the refs member.
+                        if base_type_cursor.is_definition():
+                            if key == 'pdf_document':
+                                ret = 'super.refs', 32
+                            elif key == 'fz_pixmap':
+                                ret = 'storable.refs', 32
+                            elif key in (
+                                    'fz_colorspace',
+                                    'fz_image',
+                                    ):
+                                return 'key_storable.storable.refs', 32
+                            elif key == 'pdf_cmap':
+                                return 'storable.refs', 32
+                        else:
+                            if key == 'pdf_obj':
+                                ret = 0, 16
+                            elif key == 'fz_path':
+                                ret = 0, 8
+                            elif key in (
+                                    'fz_separations',
+                                    'fz_halftone',
+                                    'pdf_annot',
+                                    'pdf_graft_map',
+                                    ):
+                                # Forward decl, first member is 'int regs;'.
+                                return 0, 32
+                            elif key in (
+                                    'fz_display_list',
+                                    'fz_glyph',
+                                    'fz_jbig2_globals',
+                                    'pdf_function',
+                                    ):
+                                # Forward decl, first member is 'fz_storable storable;'.
+                                return 0, 32
+                        if ret is None:
+                            # Need to hard-code info for this type.
+                            assert 0, jlib.expand_nv(
+                                    '{key=} has {keep_name}() fn but is forward decl or we cannot find .regs,'
+                                    ' and we have no hard-coded info about size and offset of .regs.'
+                                    ' {type0.spelling=} {type_.spelling=} {base_type_cursor.spelling}'
+                                    )
+        if type_.spelling in (
+                'struct fz_document',
+                'struct fz_buffer',
+                ):
+            assert ret
+        jlib.log('Populating has_refs_cache with {key=} {ret=}')
         has_refs_cache[ key] = ret
     return ret
 
@@ -4333,7 +4402,7 @@ def make_function_wrapper_class_aware(
         sep = ', '
     out_cpp.write( f');\n')
 
-    if wrap_return == 'pointer' and has_refs( return_cursor.type):
+    if wrap_return == 'pointer' and has_refs( tu, return_cursor.type):
         # This MuPDF function returns pointer to a struct which uses reference
         # counting. If the function returns a borrowed reference, we need
         # to increment its reference count before passing it to our wrapper
@@ -4364,7 +4433,7 @@ def make_function_wrapper_class_aware(
         out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
 
     if 0:
-        if has_refs(struct_cursor.type):
+        if has_refs( tu, struct_cursor.type):
             # Write code that does runtime checking of reference counts.
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write( f'    {{\n')
@@ -4589,7 +4658,7 @@ def find_global_data_starting_with( tu, prefix):
 
 def find_function( tu, fnname, method):
     '''
-    Returns cursor for function called <name> in <tu>, or None if not found.
+    Returns cursor for function called <fnname> in <tu>, or None if not found.
     '''
     assert ' ' not in fnname, f'fnname={fnname}'
     if method and fnname in omit_methods:
@@ -5096,7 +5165,7 @@ def find_name( cursor, name, nest=0):
 
 
 
-def class_add_iterator( struct_cursor, struct_name, classname, extras):
+def class_add_iterator( tu, struct_cursor, struct_name, classname, extras):
     '''
     Add begin() and end() methods so that this generated class is iterable
     from C++ with:
@@ -5123,7 +5192,7 @@ def class_add_iterator( struct_cursor, struct_name, classname, extras):
 
     # We add to extras.methods_extra().
     #
-    check_refs = 1 if has_refs(struct_cursor.type) else 0
+    check_refs = 1 if has_refs( tu, struct_cursor.type) else 0
     extras.methods_extra.append(
             ExtraMethod( f'{classname}Iterator', 'begin()',
                     f'''
@@ -5401,7 +5470,7 @@ def class_copy_constructor(
         out_cpp.write( f'FZ_FUNCTION {classname}::{classname}(const {classname}& rhs)\n')
         out_cpp.write( f': m_internal({cast}{rename.function_call(keep_name)}(rhs.m_internal))\n')
         out_cpp.write( '{\n')
-        if has_refs( struct_cursor.type):
+        if has_refs( tu, struct_cursor.type):
             out_cpp.write( '    if (s_check_refs)\n')
             out_cpp.write( '    {\n')
             out_cpp.write(f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
@@ -5420,13 +5489,13 @@ def class_copy_constructor(
     out_cpp.write(  '{\n')
     out_cpp.write( f'    {rename.function_call(drop_name)}(this->m_internal);\n')
     out_cpp.write( f'    {rename.function_call(keep_name)}(rhs.m_internal);\n')
-    if has_refs( struct_cursor.type):
+    if has_refs( tu, struct_cursor.type):
         out_cpp.write( '    if (s_check_refs)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        s_{classname}_refs_check.remove( this, __FILE__, __LINE__, __FUNCTION__);\n')
         out_cpp.write( '    }\n')
     out_cpp.write( f'    this->m_internal = {cast}rhs.m_internal;\n')
-    if has_refs( struct_cursor.type):
+    if has_refs( tu, struct_cursor.type):
         out_cpp.write( '    if (s_check_refs)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
@@ -5525,7 +5594,7 @@ def class_write_method_body(
         sep = ', '
     out_cpp.write( f');\n')
 
-    if wrap_return == 'pointer' and has_refs( return_cursor.type):
+    if wrap_return == 'pointer' and has_refs( tu, return_cursor.type):
         # This MuPDF function returns pointer to a struct which uses reference
         # counting. If the function returns a borrowed reference, we need
         # to increment its reference count before passing it to our wrapper
@@ -5556,7 +5625,7 @@ def class_write_method_body(
         out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
 
     if not static:
-        if has_refs(struct_cursor.type):
+        if has_refs( tu, struct_cursor.type):
             # Write code that does runtime checking of reference counts.
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write( f'    {{\n')
@@ -5899,6 +5968,7 @@ def class_custom_method( register_fn_use, classname, extramethod, out_h, out_cpp
 
 
 def class_raw_constructor(
+        tu,
         register_fn_use,
         classname,
         struct_cursor,
@@ -5943,7 +6013,7 @@ def class_raw_constructor(
                     out_cpp.write( f'    memcpy(this->{c.spelling}, internal->{c.spelling}, sizeof(this->{c.spelling}));\n')
                 else:
                     out_cpp.write( f'    this->{c.spelling} = internal->{c.spelling};\n')
-        if has_refs(struct_cursor.type):
+        if has_refs( tu, struct_cursor.type):
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write( f'    {{\n')
             out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
@@ -5961,7 +6031,7 @@ def class_raw_constructor(
     if extras.pod == 'inline':
         # Write second constructor that takes underlying struct by value.
         #
-        assert not has_refs(struct_cursor.type)
+        assert not has_refs( tu, struct_cursor.type)
         constructor_decl = f'{classname}(const {struct_name} internal)'
         out_h.write( '\n')
         out_h.write( f'    {comment}\n')
@@ -5991,7 +6061,7 @@ def class_raw_constructor(
                 out_cpp.write( '{\n')
                 field0 = get_field0(struct_cursor.type).spelling
                 out_cpp.write( f'    auto ret = ({const_space}{struct_name}*) &this->{field0};\n')
-                if has_refs(struct_cursor.type):
+                if has_refs( tu, struct_cursor.type):
                     out_cpp.write( f'    if (s_check_refs)\n')
                     out_cpp.write( f'    {{\n')
                     out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
@@ -6116,6 +6186,7 @@ def class_accessors(
 
 
 def class_destructor(
+        tu,
         register_fn_use,
         classname,
         extras,
@@ -6145,7 +6216,7 @@ def class_destructor(
         out_cpp.write( f'FZ_FUNCTION {classname}::~{classname}()\n')
         out_cpp.write(  '{\n')
         out_cpp.write( f'    {rename.function_call(fnname)}(m_internal);\n')
-        if has_refs( struct_cursor.type):
+        if has_refs( tu, struct_cursor.type):
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write(  '    {\n')
             out_cpp.write( f'        s_{classname}_refs_check.remove( this, __FILE__, __LINE__, __FUNCTION__);\n')
@@ -6349,7 +6420,7 @@ def class_wrapper(
     '''
     assert extras, f'extras is None for {struct_name}'
     if extras.iterator_next:
-        class_add_iterator( struct_cursor, struct_name, classname, extras)
+        class_add_iterator( tu, struct_cursor, struct_name, classname, extras)
 
     if extras.class_pre:
         out_h.write( textwrap.dedent( extras.class_pre))
@@ -6376,7 +6447,7 @@ def class_wrapper(
     out_cpp.write( '\n')
     out_cpp.write( f'/* Implementation of methods for {classname} (wrapper for {struct_name}). */\n')
     out_cpp.write( '\n')
-    refs = has_refs(struct_cursor.type)
+    refs = has_refs( tu, struct_cursor.type)
     if refs:
         refs_name, refs_size = refs
         if isinstance(refs_name, int):
@@ -6570,6 +6641,7 @@ def class_wrapper(
         if g_show_details(struct_name):
             log('calling class_raw_constructor(). {struct_name=}')
         class_raw_constructor(
+                tu,
                 register_fn_use,
                 classname,
                 struct_cursor,
@@ -6605,6 +6677,7 @@ def class_wrapper(
     if not custom_destructor:
         out_h.write( f'\n')
         class_destructor(
+                tu,
                 register_fn_use,
                 classname,
                 extras,
@@ -7090,7 +7163,7 @@ def cpp_source(
                 RefsCheck(int offset, int size)
                 : m_offset(offset), m_size(size)
                 {
-                    assert(m_size == 16 || m_size == 32);
+                    assert(m_size == 32 || m_size == 16 || m_size == 8);
                 }
 
                 void change( const ClassWrapper* this_, const char* file, int line, const char* fn, int delta)
@@ -7119,7 +7192,11 @@ def cpp_source(
                     fz_drop_<Struct>(). But hopefully our read will be atomic
                     in practise anyway? */
                     void* refs_ptr = (char*) this_->m_internal + m_offset;
-                    int refs = (m_size == 16) ? (*(int16_t*) refs_ptr) : (*(int32_t*) refs_ptr);
+                    int refs;
+                    if (m_size == 32)   refs = *(int32_t*) refs_ptr;
+                    if (m_size == 16)   refs = *(int16_t*) refs_ptr;
+                    if (m_size ==  8)   refs = *(int8_t* ) refs_ptr;
+
                     int& n = m_this_to_num[ this_->m_internal];
                     int n_prev = n;
                     assert( n >= 0);
