@@ -2616,7 +2616,7 @@ classextras = ClassExtras(
                         'dict_get(int key)',
                         f'''
                         {{
-                            pdf_obj* temp = mupdf::ppdf_dict_get(this->m_internal, (pdf_obj *) key);
+                            pdf_obj* temp = mupdf::ppdf_dict_get(this->m_internal, (pdf_obj*)(uintptr_t) key);
                             {rename.function_call('pdf_keep_obj')}(temp);
                             auto ret = PdfObj(temp);
                             return ret;
@@ -2807,10 +2807,11 @@ def has_refs( tu, type_):
                         for cursor in type_.get_fields():
                             name = cursor.spelling
                             type2 = cursor.type.get_canonical()
+                            jlib.log('{name=} {type2.spelling=}')
                             if name == 'refs' and type2.spelling == 'int':
                                 ret = 'refs', 32
                                 break
-                            if name == 'storable' and type2.spelling == 'fz_storable':
+                            if name == 'storable' and type2.spelling == 'struct fz_storable':
                                 ret = 'storable.refs', 32
                                 break
                         else:
@@ -2866,6 +2867,8 @@ def has_refs( tu, type_):
                                     ' and we have no hard-coded info about size and offset of .regs.'
                                     ' {type0.spelling=} {type_.spelling=} {base_type_cursor.spelling}'
                                     )
+                    assert ret, f'{key} has {keep_name}() but have not found size/location of .refs member.'
+
         if type_.spelling in (
                 'struct fz_document',
                 'struct fz_buffer',
