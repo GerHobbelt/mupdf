@@ -60,7 +60,7 @@ class Annot:
     #    self._erase()
 
     def __init__(self, annot):
-        jlib.log('{annot=} {annot.m_internal=} {annot.annot_refs()=}')
+        #jlib.log('{annot=} {annot.m_internal=} {annot.annot_refs()=}')
         #assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
         #assert isinstance(page, Page), f'page is: {page}'
         self.this = annot
@@ -643,7 +643,7 @@ class Annot:
         obj = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
         #jlib.log('{obj.m_internal=}')
         if obj.m_internal:
-            if 0:
+            if 1:
                 rect = mupdf.mpdf_dict_get_rect(obj, PDF_NAME('Rect'))
             else:
                 # fixme, this fixes assert in PyMuPDF/tests/test_annots.py:test_redact().
@@ -8456,6 +8456,8 @@ class Shape(object):
                 self.rect.y0 = min(self.rect.y0, x.y0)
                 self.rect.x1 = max(self.rect.x1, x.x1)
                 self.rect.y1 = max(self.rect.y1, x.y1)
+
+    updateRect = update_rect
 
     def draw_line(self, p1: point_like, p2: point_like):# -> Point:
         """Draw a line between two points."""
