@@ -1940,8 +1940,7 @@ class Document:
         """Load first outline."""
         if self.isClosed:
             raise ValueError("document closed")
-
-        return self.this.load_outline()
+        return Outline(self.this.load_outline())
 
     def _newPage(self, pno=-1, width=595, height=842):
         """Make a new PDF page."""
@@ -2472,6 +2471,108 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_extractImage(self, xref)
+
+    def get_toc(
+            doc,#: Document,
+            simple: bool = True,
+            ) -> list:
+        """Create a table of contents.
+
+        Args:
+            simple: a bool to control output. Returns a list, where each entry consists of outline level, title, page number and link destination (if simple = False). For details see PyMuPDF's documentation.
+        """
+
+        def recurse(olItem, liste, lvl):
+            """Recursively follow the outline item chain and record item information in a list."""
+            while olItem:
+                if olItem.title:
+                    title = olItem.title
+                else:
+                    title = " "
+
+                jlib.log('{type(olItem)=}')
+                jlib.log('{olItem.this=}')
+                jlib.log('{olItem.this.m_internal_value():x=}')
+                if not olItem.is_external:
+                    jlib.log('{olItem.uri=}')
+                    if olItem.uri:
+                        if olItem.page == -1:
+                            resolve = doc.resolve_link(olItem.uri)
+                            page = resolve[0] + 1
+                        else:
+                            page = olItem.page + 1
+                    else:
+                        page = -1
+                else:
+                    page = -1
+
+                if not simple:
+                    link = getLinkDict(olItem)
+                    liste.append([lvl, title, page, link])
+                else:
+                    liste.append([lvl, title, page])
+
+                if olItem.down:
+                    liste = recurse(olItem.down, liste, lvl + 1)
+                olItem = olItem.next
+            return liste
+
+        # ensure document is open
+        if doc.is_closed:
+            raise ValueError("document closed")
+        doc.init_doc()
+        olItem = doc.outline
+
+        if not olItem:
+            return []
+        lvl = 1
+        liste = []
+        toc = recurse(olItem, liste, lvl)
+        if doc.is_pdf and simple is False:
+            doc._extend_toc_items(toc)
+        return toc
+
+    def init_doc(self):
+        if self.is_encrypted:
+            raise ValueError("cannot initialize - document still encrypted")
+        self._outline = self._loadOutline()
+        self.metadata = dict(
+                    [
+                    (k,self._getMetadata(v)) for k,v in {
+                        'format':'format',
+                        'title':'info:Title',
+                        'author':'info:Author',
+                        'subject':'info:Subject',
+                        'keywords':'info:Keywords',
+                        'creator':'info:Creator',
+                        'producer':'info:Producer',
+                        'creationDate':'info:CreationDate',
+                        'modDate':'info:ModDate',
+                        'trapped':'info:Trapped'
+                        }.items()
+                    ]
+                )
+        self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
+
+    outline = property(lambda self: self._outline)
+
+
+    def get_page_fonts(self, pno: int, full: bool =False) -> list:
+        """Retrieve a list of fonts used on a page.
+        """
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        if not self.is_pdf:
+            return ()
+        if type(pno) is not int:
+            try:
+                pno = pno.number
+            except:
+                raise ValueError("need a Page or page number")
+        val = self._getPageInfo(pno, 1)
+        if full is False:
+            return [v[:-1] for v in val]
+        return val
 
     @property
     def needsPass(self):
@@ -4505,10 +4606,10 @@ class Widget(object):
 
 
 class Outline:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Outline, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Outline, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
 
     def __init__(self, ol):
         self.this = ol
@@ -4517,6 +4618,8 @@ class Outline:
     def uri(self):
         #return _fitz.Outline_uri(self)
         ol = self.this
+        jlib.log('{ol=}')
+        jlib.log('{ol.uri()=}')
         return JM_UnicodeFromStr(ol.uri())
 
     @property
@@ -4546,6 +4649,9 @@ class Outline:
         if not ol.m_internal:
             return False
         uri = ol.uri()
+        if uri is None:
+            return False
+        jlib.log('{uri=}')
         return mupdf.mfz_is_external_link(uri)
 
     @property
@@ -10504,7 +10610,9 @@ def JM_TUPLE(o: typing.Sequence) -> tuple:
     return tuple(map(lambda x: round(x, 5) if abs(x) >= 1e-4 else 0, o))
 
 def JM_UnicodeFromStr(s):
-    assert isinstance(s, str)
+    if s is None:
+        return ''
+    assert isinstance(s, str), f'type(s)={type(s)} s={s}'
     return s
 
 def JM_add_annot_id(annot, stem):
