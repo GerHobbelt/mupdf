@@ -6018,13 +6018,6 @@ def class_raw_constructor(
             out_cpp.write( f'    {{\n')
             out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write( f'    }}\n')
-        if struct_name == 'pdf_annot':
-            out_cpp.write( f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ":"\n'
-                            '            << " created PdfAnnot."\n'
-                            '            << " m_internal=" << m_internal\n'
-                            '            << " annot_refs()=" << annot_refs()\n'
-                            '            << "\\n";\n'
-                            )
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
