@@ -2565,21 +2565,21 @@ classextras = ClassExtras(
                     ],
                 ),
 
-        pdf_annot = ClassExtra(
-                #constructor_raw = False,
-                methods_extra = [
-                    ExtraMethod(
-                        'long long',
-                        'm_internal_value()',
-                        f'''
-                        {{
-                            return (uintptr_t) m_internal;
-                        }}
-                        ''',
-                        comment = '/* Provided to allow Python to see numerical value of m_internal. */'
-                        ),
-                    ],
-                ),
+        #pdf_annot = ClassExtra(
+        #        #constructor_raw = False,
+        #        methods_extra = [
+        #            ExtraMethod(
+        #                'long long',
+        #                'm_internal_value()',
+        #                f'''
+        #                {{
+        #                    return (uintptr_t) m_internal;
+        #                }}
+        #                ''',
+        #                comment = '/* Provided to allow Python to see numerical value of m_internal. */'
+        #                ),
+        #            ],
+        #        ),
 
         pdf_lexbuf = ClassExtra(
                 constructors_extra = [
@@ -6687,6 +6687,25 @@ def class_wrapper(
                 out_cpp,
                 )
 
+    # If class has '{structname}* m_internal;', provide access to m_iternal as
+    # an integer, for use by python etc.
+    if not extras.pod:
+        class_custom_method(
+                register_fn_use,
+                classname,
+                ExtraMethod(
+                    'long long',
+                    'm_internal_value()',
+                    '''
+                    {
+                        return (uintptr_t) m_internal;
+                    }
+                    ''',
+                    '/* Return numerical value of .m_internal; helps with Python debugging. */',
+                    ),
+                out_h,
+                out_cpp,
+                )
     # Class members.
     #
     out_h.write( '\n')
