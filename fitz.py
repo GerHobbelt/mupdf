@@ -1795,10 +1795,10 @@ class Document:
 
         # update all TOC item dictionaries
         for i in range(n):
-            xrefs[i] = xref
+            xref = int(xrefs[i])
             item = items[i]
             itemdict = item[3]
-            if not itemdict.m_internal or not isinstance(itemdict, dict):
+            if not isinstance(itemdict, dict):
                 THROWMSG("need non-simple TOC format")
             itemdict[dictkey_xref] = xrefs[i]
             bm = mupdf.mpdf_load_object(pdf, xref)
@@ -1829,7 +1829,7 @@ class Document:
                 obj = mupdf.mpdf_dict_getl(bm, PDF_NAME('A'), PDF_NAME('D'))
             if mupdf.mpdf_is_array(obj) and mupdf.mpdf_array_len(obj) == 5:
                 z = mupdf.mpdf_to_real(mupdf.mpdf_array_get(obj, 4))
-            itemdict[zoom] = z
+            itemdict[zoom] = float(z)
             item[3] = itemdict
             items[i] = item
 
@@ -2490,11 +2490,11 @@ class Document:
                 else:
                     title = " "
 
-                jlib.log('{type(olItem)=}')
-                jlib.log('{olItem.this=}')
-                jlib.log('{olItem.this.m_internal_value():x=}')
+                #jlib.log('{type(olItem)=}')
+                #jlib.log('{olItem.this=}')
+                #jlib.log('{olItem.this.m_internal_value():x=}')
                 if not olItem.is_external:
-                    jlib.log('{olItem.uri=}')
+                    #jlib.log('{olItem.uri=}')
                     if olItem.uri:
                         if olItem.page == -1:
                             resolve = doc.resolve_link(olItem.uri)
@@ -2529,7 +2529,9 @@ class Document:
         liste = []
         toc = recurse(olItem, liste, lvl)
         if doc.is_pdf and simple is False:
+            jlib.log('before _extend_toc_items: {toc=}')
             doc._extend_toc_items(toc)
+            jlib.log('after  _extend_toc_items: {toc=}')
         return toc
 
     def init_doc(self):
@@ -4350,7 +4352,7 @@ class linkDest(object):
     """link or outline destination details"""
 
     def __init__(self, obj, rlink):
-        isExt = obj.isExternal
+        isExt = obj.is_external
         isInt = not isExt
         self.dest = ""
         self.fileSpec = ""
@@ -4366,7 +4368,7 @@ class linkDest(object):
         self.uri = obj.uri
         if rlink and not self.uri.startswith("#"):
             self.uri = "#%i,%g,%g" % (rlink[0] + 1, rlink[1], rlink[2])
-        if obj.isExternal:
+        if obj.is_external:
             self.page = -1
             self.kind = LINK_URI
         if not self.uri:
@@ -4390,7 +4392,7 @@ class linkDest(object):
             else:
                 self.kind = LINK_NAMED
                 self.named = self.uri
-        if obj.isExternal:
+        if obj.is_external:
             if self.uri.startswith(("http://", "https://", "mailto:", "ftp://")):
                 self.isUri = True
                 self.kind = LINK_URI
@@ -4618,8 +4620,8 @@ class Outline:
     def uri(self):
         #return _fitz.Outline_uri(self)
         ol = self.this
-        jlib.log('{ol=}')
-        jlib.log('{ol.uri()=}')
+        #jlib.log('{ol=}')
+        #jlib.log('{ol.uri()=}')
         return JM_UnicodeFromStr(ol.uri())
 
     @property
@@ -4651,7 +4653,7 @@ class Outline:
         uri = ol.uri()
         if uri is None:
             return False
-        jlib.log('{uri=}')
+        #jlib.log('{uri=}')
         return mupdf.mfz_is_external_link(uri)
 
     @property
@@ -11731,7 +11733,7 @@ def JM_outline_xrefs(obj, xrefs):
     'obj' first OL item
     'xrefs' empty Python list
     '''
-    if not obj._internal:
+    if not obj.m_internal:
         return xrefs
     thisobj = obj
     while thisobj.m_internal:
@@ -12572,6 +12574,57 @@ def dir_str(x):
     for i in dir(x):
         ret += f'    {i}\n'
     return ret
+
+
+def getLinkDict(ln) -> dict:
+    jlib.log('{type(ln)=} {ln=}')
+    nl = {"kind": ln.dest.kind, "xref": 0}
+    try:
+        nl["from"] = ln.rect
+    except:
+        pass
+    pnt = Point(0, 0)
+    jlib.log('{ln.dest.flags:x=}')
+    if ln.dest.flags & LINK_FLAG_L_VALID:
+        pnt.x = ln.dest.lt.x
+    if ln.dest.flags & LINK_FLAG_T_VALID:
+        pnt.y = ln.dest.lt.y
+
+    if ln.dest.kind == LINK_URI:
+        nl["uri"] = ln.dest.uri
+
+    elif ln.dest.kind == LINK_GOTO:
+        nl["page"] = ln.dest.page
+        nl["to"] = pnt
+        if ln.dest.flags & LINK_FLAG_R_IS_ZOOM:
+            jlib.log('{ln.dest=} {ln.dest.rb=} {ln.dest.rb.x=}')
+            nl["zoom"] = ln.dest.rb.x
+        else:
+            nl["zoom"] = 0.0
+
+    elif ln.dest.kind == LINK_GOTOR:
+        nl["file"] = ln.dest.fileSpec.replace("\\", "/")
+        nl["page"] = ln.dest.page
+        if ln.dest.page < 0:
+            nl["to"] = ln.dest.dest
+        else:
+            nl["to"] = pnt
+            if ln.dest.flags & LINK_FLAG_R_IS_ZOOM:
+                jlib.log('{ln.dest=} {ln.dest.rb=} {ln.dest.rb.x=}')
+                nl["zoom"] = ln.dest.rb.x
+            else:
+                nl["zoom"] = 0.0
+
+    elif ln.dest.kind == LINK_LAUNCH:
+        nl["file"] = ln.dest.fileSpec.replace("\\", "/")
+
+    elif ln.dest.kind == LINK_NAMED:
+        nl["name"] = ln.dest.named
+
+    else:
+        nl["page"] = ln.dest.page
+    jlib.log('{nl=}')
+    return nl
 
 
 def getTextlength(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
