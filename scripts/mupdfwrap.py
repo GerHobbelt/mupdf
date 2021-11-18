@@ -8051,7 +8051,8 @@ def build_swig(
                         if not obj.m_internal:
                             break
                         obj = obj.dict_get(key)
-                    return PdfObj(obj)
+                    assert isinstance(obj, PdfObj)
+                    return obj
                 PdfObj.dict_getl = mpdf_dict_getl
 
                 def mpdf_dict_putl(obj, val, *tail):
