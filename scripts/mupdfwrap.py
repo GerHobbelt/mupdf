@@ -2482,6 +2482,19 @@ classextras = ClassExtras(
                         ''',
                         comment = f'/* Wrapper for fz_copy_rectangle(). */',
                         ),
+                    ExtraMethod(
+                        f'std::vector<{rename.class_("fz_quad")}>',
+                        f'search_stext_page(const char* needle, int max_quads)',
+                        f'''
+                        {{
+                            std::vector<{rename.class_("fz_quad")}> ret(max_quads);
+                            int n = {rename.function_call('fz_search_stext_page')}(m_internal, needle, ret[0].internal(), max_quads);
+                            ret.resize(n);
+                            return ret;
+                        }}
+                        ''',
+                        '/* Wrapper for fz_search_stext_page() that returns vector of Quads. */',
+                        )
                     ],
                 iterator_next = ('first_block', 'last_block'),
                 copyable=False,
@@ -9005,6 +9018,8 @@ def build( build_dirs, swig, args):
                                 {include3}
                                 {cpp_path}
                                 {jlib.link_l_flags( [mupdf_so, mupdfcpp_so])}
+                                -Wno-deprecated-declarations
+
                             ''').strip().replace( '\n', ' \\\n').strip()
                             )
                     infiles = [
