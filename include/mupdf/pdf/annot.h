@@ -145,6 +145,8 @@ pdf_annot *pdf_keep_annot(fz_context *ctx, pdf_annot *annot);
 */
 void pdf_drop_annot(fz_context *ctx, pdf_annot *annot);
 
+int pdf_annot_refs(fz_context *ctx, pdf_annot *annot);
+
 /*
 	Returns a borrowed reference to the first annotation on
 	a page, or NULL if none.
