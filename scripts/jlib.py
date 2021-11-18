@@ -1239,7 +1239,13 @@ def mtime( filename, default=0):
 def get_filenames( paths):
     '''
     Yields each file in <paths>, walking any directories.
+
+    If <paths> is a tuple (paths2, filter_) and <filter_> is callable, we yield
+    all files in <paths2> for which filter_(path2) returns true.
     '''
+    filter_ = lambda path: True
+    if isinstance( paths, tuple) and len( paths) == 2 and callable( paths[1]):
+        paths, filter_ = paths
     if isinstance( paths, str):
         paths = (paths,)
     for name in paths:
@@ -1247,9 +1253,11 @@ def get_filenames( paths):
             for dirpath, dirnames, filenames in os.walk( name):
                 for filename in filenames:
                     path = os.path.join( dirpath, filename)
-                    yield path
+                    if filter_( path):
+                        yield path
         else:
-            yield name
+            if filter_( name):
+                yield name
 
 def remove( path):
     '''
@@ -1372,10 +1380,11 @@ def build(
     infiles:
         Names of files that are read by <command>. Can be a single filename. If
         an item is a directory, we expand to all filenames in the directory's
-        tree.
+        tree. Can be (files2, filter_) as supported by jlib.get_filenames().
     outfiles:
-        Names of files that are written by <command>. Can also be a single
-        filename.
+        Names of files that are written by <command>. Can also be a
+        single filename. Can be (files2, filter_) as supported by
+        jlib.get_filenames().
     command:
         Command to run. {IN} and {OUT} are replaced by space-separated
         <infiles> and <outfiles> with '/' changed to '\' on Windows.
@@ -1421,6 +1430,8 @@ def build(
     os_name = platform.system()
     os_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
     def files_string(files):
+        if isinstance(files, tuple) and len(files) == 2 and callable(files[1]):
+            files = files[0],
         ret = ' '.join(files)
         if os_windows:
             # This works on Cygwyn; we might only need '\\' if running in a Cmd
@@ -1457,14 +1468,20 @@ def build(
     # fails but still creates target(s), then next time we will know target(s)
     # are not up to date.
     #
+    # We rename the command to a temporary file and then rename back again
+    # after the command finishes so that its mtime is unchanged if the command
+    # has not changed.
+    #
     ensure_parent_dir( command_filename)
-    with open( command_filename, 'w') as f:
-        pass
+    command_filename_temp = command_filename + '-'
+    remove(command_filename_temp)
+    if os.path.exists( command_filename):
+        rename(command_filename, command_filename_temp)
+    update_file( command, command_filename_temp)
 
     system( command, out=out, verbose=verbose, executable=executable, caller=2)
 
-    with open( command_filename, 'w') as f:
-        f.write( command)
+    rename( command_filename_temp, command_filename)
 
     return True
 
