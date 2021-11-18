@@ -107,9 +107,9 @@ FUN(PDFPage_getAnnotations)(JNIEnv *env, jobject self)
 	{
 		annots = pdf_first_annot(ctx, page);
 
-		count = 0;
-		for (annot = annots; annot; annot = pdf_next_annot(ctx, annot))
-			count++;
+		annot = annots;
+		for (count = 0; annot; count++)
+			annot = pdf_next_annot(ctx, annot);
 	}
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
@@ -123,7 +123,7 @@ FUN(PDFPage_getAnnotations)(JNIEnv *env, jobject self)
 	if (!jannots || (*env)->ExceptionCheck(env)) jni_throw_null(env, "cannot wrap page annotations in object array");
 
 	annot = annots;
-	for (i = 0; annot && i < count; )
+	for (i = 0; annot && i < count; i++)
 	{
 		jobject jannot = to_PDFAnnotation_safe(ctx, env, annot);
 		if (!jannot) return NULL;
@@ -132,8 +132,6 @@ FUN(PDFPage_getAnnotations)(JNIEnv *env, jobject self)
 		if ((*env)->ExceptionCheck(env)) return NULL;
 
 		(*env)->DeleteLocalRef(env, jannot);
-
-		i++;
 
 		fz_try(ctx)
 			annot = pdf_next_annot(ctx, annot);
@@ -163,13 +161,13 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 		widgets = pdf_first_widget(ctx, page);
 
 		widget = widgets;
-		for (count = 0; widget; widget = pdf_next_widget(ctx, widget))
-			count++;
+		for (count = 0; widget; count++)
+			widget = pdf_next_widget(ctx, widget);
 	}
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	/* no widgegts, return NULL instead of empty array */
+	/* no widgets, return NULL instead of empty array */
 	if (count == 0)
 		return NULL;
 
@@ -178,9 +176,8 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 	if (!jwidgets || (*env)->ExceptionCheck(env)) jni_throw_null(env, "cannot wrap page widgets in object array");
 
 	widget = widgets;
-	for (i = 0, count = 0; widget; widget = pdf_next_widget(ctx, widget))
+	for (i = 0; widget && i < count; i++)
 	{
-		assert(i < count);
 		jobject jwidget = to_PDFWidget_safe(ctx, env, widget);
 		if (!jwidget) return NULL;
 
@@ -189,7 +186,10 @@ FUN(PDFPage_getWidgets)(JNIEnv *env, jobject self)
 
 		(*env)->DeleteLocalRef(env, jwidget);
 
-		i++;
+		fz_try(ctx)
+			widget = pdf_next_widget(ctx, widget);
+		fz_catch(ctx)
+			jni_rethrow(env, ctx);
 	}
 
 	return jwidgets;
