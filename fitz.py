@@ -1652,25 +1652,58 @@ class Document:
         mupdf.mpdf_array_delete(names, idx + 1)
         mupdf.mpdf_array_delete(names, idx)
 
+    @staticmethod
+    def show_dict(o):
+        assert 0
+        o_dict_len = mupdf.mpdf_dict_len(o)
+        jlib.log( '{o_dict_len=}:')
+        for i in range(o_dict_len):
+            key = mupdf.mpdf_dict_get_key(o, i)
+            value = mupdf.mpdf_dict_get(o, key)
+            jlib.log( '    {key=}: {value=}')
+
+
     def _embfile_info(self, idx, infodict):
         #return _fitz.Document__embfile_info(self, idx, infodict)
         pdf = self._pdf_document()
         xref = 0
         ci_xref=0
-        names = pdf_dict_getl(
-                mupdf.mpdf_trailer(pdf),
+
+        trailer = mupdf.mpdf_trailer(pdf);
+        #jlib.log( 'trailer:')
+        #mupdf.mpdf_debug_obj(trailer)
+
+        names = mupdf.mpdf_dict_getl(
+                trailer,
                 PDF_NAME('Root'),
                 PDF_NAME('Names'),
                 PDF_NAME('EmbeddedFiles'),
                 PDF_NAME('Names'),
                 )
 
+        jlib.log( 'names:')
+        mupdf.mpdf_debug_obj(names)
+
+        #jlib.log( '{pdfobj_string(names)=}')
+
         o = mupdf.mpdf_array_get(names, 2*idx+1)
+        #jlib.log( '{pdfobj_string(o)=}')
+
+        if 0:
+            o_dict_len = mupdf.mpdf_dict_len(o)
+            jlib.log( '{o_dict_len=}:')
+            for i in range(o_dict_len):
+                key = mupdf.mpdf_dict_get_key(o, i)
+                value = mupdf.mpdf_dict_get(o, key)
+                jlib.log( '    {key=}: {value=}')
+
         ci = mupdf.mpdf_dict_get(o, PDF_NAME('CI'))
         if ci.m_internal:
             ci_xref = mupdf.mpdf_to_num(ci)
+            jlib.log('{ci_xref=}')
         infodict["collection"] = ci_xref
         name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('F')))
+        jlib.log('{name=}')
         infodict[dictkey_filename] = JM_EscapeStrFromStr(name)
 
         name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('UF')))
@@ -2090,7 +2123,9 @@ class Document:
         """
         idx = self._embeddedFileIndex(item)
         infodict = {"name": self.embfile_names()[idx]}
+        jlib.log('{idx=} {infodict=}')
         xref = self._embfile_info(idx, infodict)
+        jlib.log('{idx=} {xref=} {infodict=}')
         t, date = self.xref_get_key(xref, "Params/CreationDate")
         if t != "null":
             infodict["creationDate"] = date
@@ -3940,7 +3975,8 @@ class Document:
         count = -1;
         try:
             #jlib.log('{self.this.count_pages()=}')
-            fields = pdf_dict_getl(self, pdf.trailer(),
+            fields = mupdf.mpdf_dict_getl(
+                    pdf.trailer(),
                     mupdf.PDF_ENUM_NAME_Root,
                     mupdf.PDF_ENUM_NAME_AcroForm,
                     mupdf.PDF_ENUM_NAME_Fields,
@@ -11893,7 +11929,7 @@ def JM_norm_rotation(rotate):
 def JM_object_to_buffer(what, compress, ascii):
     res = mupdf.mfz_new_buffer(512)
     out = mupdf.Output(res)
-    jlib.log('{out=}')
+    #jlib.log('{out=}')
     mupdf.mpdf_print_obj(out, what, compress, ascii)
     mupdf.mfz_terminate_buffer(res)
     return res
@@ -12994,6 +13030,7 @@ def image_properties(img: typing.ByteString) -> dict:
 
 
 def pdf_dict_getl(doc, obj, *keys):
+    assert 0, 'is this fn defunct?'
     #jlib.log('{obj=} {len(keys)=}: {keys}')
     #jlib.log('{doc.this.count_pages()=}')
     for i in range(len(keys)):
@@ -14068,6 +14105,56 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
         rects.append(nrow)  # append new row to result
 
     return rects
+
+
+def pdfobj_string(o, prefix=''):
+    '''
+    Returns description of mupdf.PdfObj (wrapper for pdf_obj) <o>.
+    '''
+    assert 0, 'use mupdf.mpdf_debug_obj() ?'
+    ret = ''
+    if o.is_array:
+        l = o.array_len()
+        ret += f'array {l}\n'
+        for i in range(l):
+            oo = o.array_get(i)
+            ret += pdfobj_string(oo, prefix + '    ')
+            ret += '\n'
+    elif o.is_bool():
+        ret += f'bool: {o.array_get_bool()}\n'
+    elif o.is_dict():
+        l = o.dict_len()
+        ret += f'dict {l}\n'
+        for i in range(l):
+            key = o.dict_get_key(i)
+            value = o.dict_get( key)
+            ret += f'{prefix} {key}: '
+            ret += pdfobj_string( value, prefix + '    ')
+            ret += '\n'
+    elif o.is_embedded_file():
+        ret += f'embedded_file: {o.embedded_file_name()}\n'
+    elif o.is_indirect():
+        ret += f'indirect: ...\n'
+    elif o.is_int():
+        ret += f'int: {o.to_int()}\n'
+    elif o.is_jpx_image():
+        ret += f'jpx_image:\n'
+    elif o.is_name():
+        ret += f'name: {o.to_name()}\n'
+    elif o.is_null:
+        ret += f'null\n'
+    #elif o.is_number:
+    #    ret += f'number\n'
+    elif o.is_real:
+        ret += f'real: {o.to_real()}\n'
+    elif o.is_stream():
+        ret += f'stream\n'
+    elif o.is_string():
+        ret += f'string: {o.to_string()}\n'
+    else:
+        ret += '<>\n'
+
+    return ret
 
 
 def sRGB_to_rgb(srgb: int) -> tuple:
