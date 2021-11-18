@@ -1217,7 +1217,7 @@ class Annot:
         self.set_rect(quad.rect)
         self.set_apn_matrix(apnmat * mat)
 
-    def update_file(self, buffer=None, filename=None, ufilename=None, desc=None):
+    def update_file(self, buffer_=None, filename=None, ufilename=None, desc=None):
         """Update attached file."""
         CheckParent(self)
 
@@ -1236,8 +1236,8 @@ class Annot:
         fs = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('FS'))
 
         # file content given
-        res = JM_BufferFromBytes(buffer)
-        if buffer and not res.m_internal:
+        res = JM_BufferFromBytes(buffer_)
+        if buffer_ and not res.m_internal:
             THROWMSG("bad type: 'buffer'")
         if res:
             JM_update_stream(pdf, stream, res, 1)
@@ -1587,9 +1587,9 @@ class Document:
         assert 0, 'Unnecessary'
         return _fitz.Document__dropOutline(self, ol)
 
-    def _embeddedFileAdd(self, name, buffer, filename=None, ufilename=None, desc=None):
+    def _embeddedFileAdd(self, name, buffer_, filename=None, ufilename=None, desc=None):
         assert 0, 'deprecated'
-        return _fitz.Document__embeddedFileAdd(self, name, buffer, filename, ufilename, desc)
+        return _fitz.Document__embeddedFileAdd(self, name, buffer_, filename, ufilename, desc)
 
     def _embeddedFileDel(self, idx):
         assert 0, 'deprecated'
@@ -1634,14 +1634,13 @@ class Document:
             raise ValueError("document closed")
         return _fitz.Document__embeddedFileNames(self, namelist)
 
-    def _embeddedFileUpd(self, idx, buffer=None, filename=None, ufilename=None, desc=None):
+    def _embeddedFileUpd(self, idx, buffer_=None, filename=None, ufilename=None, desc=None):
         assert 0, 'no Document__embeddedFileUpd'
-        return _fitz.Document__embeddedFileUpd(self, idx, buffer, filename, ufilename, desc)
+        return _fitz.Document__embeddedFileUpd(self, idx, buffer_, filename, ufilename, desc)
 
     def _embfile_del(self, idx):
         #return _fitz.Document__embfile_del(self, idx)
-        doc = self.this
-        pdf = mupdf.mpdf_document_from_fz_document(doc)
+        pdf = self._pdf_document()
         names = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer(pdf),
                 PDF_NAME('Root'),
@@ -1731,18 +1730,74 @@ class Document:
         infodict[dictkey_length] = len
         return xref
 
-    def _embfile_upd(self, idx, buffer=None, filename=None, ufilename=None, desc=None):
-        return _fitz.Document__embfile_upd(self, idx, buffer, filename, ufilename, desc)
+    def _embfile_upd(self, idx, buffer_=None, filename=None, ufilename=None, desc=None):
+        #return _fitz.Document__embfile_upd(self, idx, buffer, filename, ufilename, desc)
+        pdf = self._pdf_document()
+        #fz_buffer *res = NULL;
+        #fz_var(res);
+        xref = 0
+        names = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
+                )
+
+        entry = mupdf.mpdf_array_get(names, 2*idx+1)
+
+        filespec = mupdf.mpdf_dict_getl(entry, PDF_NAME('EF'), PDF_NAME('F'))
+        if not filespec.m_internal:
+            THROWMSG("bad PDF: /EF object not found")
+        res = JM_BufferFromBytes(buffer_)
+        if buffer_ and buffer_.m_internal and not res.m_internal:
+            THROWMSG("bad type: 'buffer'")
+        if res.m_internal and buffer_ and buffer_.m_internal:
+            JM_update_stream(pdf, filespec, res, 1)
+            # adjust /DL and /Size parameters
+            len, _ = mupdf.mfz_buffer_storage(res)
+            l = mupdf.mpdf_new_int(len)
+            mupdf.mpdf_dict_put(filespec, PDF_NAME('DL'), l)
+            mupdf.mpdf_dict_putl(filespec, l, PDF_NAME('Params'), PDF_NAME('Size'))
+        xref = mupdf.mpdf_to_num(filespec)
+        if filename:
+            mupdf.mpdf_dict_put_text_string(entry, PDF_NAME('F'), filename)
+
+        if ufilename:
+            mupdf.mpdf_dict_put_text_string(entry, PDF_NAME('UF'), ufilename)
+
+        if desc:
+            mupdf.mpdf_dict_put_text_string(entry, PDF_NAME('Desc'), desc)
+        return xref
 
     def _embeddedFileGet(self, idx):
-        return _fitz.Document__embeddedFileGet(self, idx)
+        #return _fitz.Document__embeddedFileGet(self, idx)
+        #fz_document *doc = (fz_document *) self;
+        #PyObject *cont = NULL;
+        pdf = self._pdf_document()
+        #fz_buffer *buf = NULL;
+        #fz_var(buf);
+        #fz_try(gctx) {
+        names = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('Names'),
+                PDF_NAME('EmbeddedFiles'),
+                PDF_NAME('Names'),
+                )
 
-    def _embfile_add(self, name, buffer, filename=None, ufilename=None, desc=None):
+        entry = mupdf.mpdf_array_get(names, 2*idx+1)
+        filespec = mupdf.mpdf_dict_getl(entry, PDF_NAME('EF'), PDF_NAME('F'));
+        buf = mupdf.mpdf_load_stream(filespec);
+        cont = JM_BinFromBuffer(buf)
+        return cont
+
+    def _embfile_add(self, name, buffer_, filename=None, ufilename=None, desc=None):
         #return _fitz.Document__embfile_add(self, name, buffer, filename, ufilename, desc)
         doc = self.this
         pdf = self._pdf_document()
         ASSERT_PDF(pdf);
-        data = JM_BufferFromBytes(buffer)
+        data = JM_BufferFromBytes(buffer_)
         if not data.m_internal:
             THROWMSG("bad type: 'buffer'")
         size, buffdata = data.buffer_storage_raw()
@@ -2049,7 +2104,7 @@ class Document:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_convertToPDF(self, from_page, to_page, rotate)
 
-    def embfile_add(self, name: str, buffer: typing.ByteString,
+    def embfile_add(self, name: str, buffer_: typing.ByteString,
                               filename: OptStr =None,
                               ufilename: OptStr =None,
                               desc: OptStr =None,) -> None:
@@ -2057,7 +2112,7 @@ class Document:
 
         Args:
             name: name of the new item, must not already exist.
-            buffer: (binary data) the file content.
+            buffer_: (binary data) the file content.
             filename: (str) the file name, default: the name
             ufilename: (unicode) the file name, default: filename
             desc: (str) the description.
@@ -2073,7 +2128,7 @@ class Document:
             ufilename = unicode(filename, "utf8") if str is bytes else filename
         if desc is None:
             desc = name
-        xref = self._embfile_add(name, buffer=buffer,
+        xref = self._embfile_add(name, buffer_=buffer_,
                                      filename=filename,
                                      ufilename=ufilename,
                                      desc=desc)
@@ -2144,7 +2199,7 @@ class Document:
         return filenames
 
     def embfile_upd(self, item: typing.Union[int, str],
-                             buffer: OptBytes =None,
+                             buffer_: OptBytes =None,
                              filename: OptStr =None,
                              ufilename: OptStr =None,
                              desc: OptStr =None,) -> None:
@@ -2155,13 +2210,13 @@ class Document:
             the method is a no-op.
         Args:
             item: number or name of item.
-            buffer: (binary data) the new file content.
+            buffer_: (binary data) the new file content.
             filename: (str) the new file name.
             ufilename: (unicode) the new filen ame.
             desc: (str) the new description.
         """
         idx = self._embeddedFileIndex(item)
-        xref = self._embfile_upd(idx, buffer=buffer,
+        xref = self._embfile_upd(idx, buffer_=buffer_,
                                      filename=filename,
                                      ufilename=ufilename,
                                      desc=desc)
@@ -2382,7 +2437,7 @@ class Document:
     def embeddedFileAdd(
             self,
             name: str,
-            buffer: typing.ByteString,
+            buffer_: typing.ByteString,
             filename: OptStr =None,
             ufilename: OptStr =None,
             desc: OptStr =None,
@@ -2391,7 +2446,7 @@ class Document:
 
         Args:
             name: name of the new item, must not already exist.
-            buffer: (binary data) the file content.
+            buffer_: (binary data) the file content.
             filename: (str) the file name, default: the name
             ufilename: (unicode) the file name, default: filename
             desc: (str) the description.
@@ -2409,7 +2464,7 @@ class Document:
             desc = name
         return self._embeddedFileAdd(
                 name,
-                buffer=buffer,
+                buffer_=buffer_,
                 filename=filename,
                 ufilename=ufilename,
                 desc=desc,
@@ -2467,7 +2522,7 @@ class Document:
     def embeddedFileUpd(
             self,
             item: typing.Union[int, str],
-            buffer: OptBytes =None,
+            buffer_: OptBytes =None,
             filename: OptStr =None,
             ufilename: OptStr =None,
             desc: OptStr =None,
@@ -2479,7 +2534,7 @@ class Document:
             the method is a no-op.
         Args:
             item: number or name of item.
-            buffer: (binary data) the new file content.
+            buffer_: (binary data) the new file content.
             filename: (str) the new file name.
             ufilename: (unicode) the new filen ame.
             desc: (str) the new description.
@@ -2487,7 +2542,7 @@ class Document:
         idx = self._embeddedFileIndex(item)
         return self._embeddedFileUpd(
                 idx,
-                buffer=buffer,
+                buffer_=buffer_,
                 filename=filename,
                 ufilename=ufilename,
                 desc=desc,
@@ -2985,6 +3040,7 @@ class Document:
                 owner_pw,
                 user_pw,
                 )
+
 
     def select(self, pyliste):
         """Build sub-pdf with page numbers in the list."""
@@ -4996,8 +5052,24 @@ class Page:
     def _get_text_page(self, clip=None, flags=0):
         val = _fitz.Page__get_text_page(self, clip, flags)
         val.thisown = True
-
         return val
+
+    def _get_textpage(self, clip=None, flags=0, matrix=None):
+        #return _fitz.Page__get_textpage(self, clip, flags, matrix)
+        #fz_stext_page *tpage=NULL;
+        page = self.this
+        #fz_device *dev = NULL;
+        #fz_stext_options options;
+        #memset(&options, 0, sizeof options);
+        options = mupdf.StextOptions(flags)
+        rect = JM_rect_from_py(clip)
+        ctm = JM_matrix_from_py(matrix)
+        tpage = mupdf.StextPage(rect)
+        jlib.log('{type(tpage)=}')
+        dev = mupdf.mfz_new_stext_device(tpage, options)
+        mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
+        mupdf.mfz_close_device(dev)
+        return tpage
 
     def _pdf_page(self):
         '''
@@ -5327,7 +5399,7 @@ class Page:
         return annot
 
     def addFileAnnot(self, point: point_like,
-        buffer: typing.ByteString,
+        buffer_: typing.ByteString,
         filename: str,
         ufilename: OptStr =None,
         desc: OptStr =None,
@@ -5337,7 +5409,7 @@ class Page:
         old_rotation = annot_preprocess(self)
         try:
             annot = self._add_file_annot(point,
-                        buffer,
+                        buffer_,
                         filename,
                         ufilename=ufilename,
                         desc=desc,
@@ -6673,6 +6745,19 @@ class Page:
             return
         return mupdf.mpdf_to_str_buf(lang)
 
+    @property
+    def mediabox(self):
+        """The MediaBox."""
+        CheckParent(self)
+        #val = _fitz.Page_mediabox(self)
+        page = self._pdf_page()
+        if not page:
+            val = JM_py_from_rect(mupdf.mfz_bound_page(self.this))
+        else:
+            val = JM_py_from_rect(JM_mediabox(page.page_obj))
+        val = Rect(val)
+        return val
+
     def new_shape(self):
         return Shape(self)
 
@@ -6688,6 +6773,45 @@ class Page:
         CheckParent(self)
         #return _fitz.Page_run(self, dw, m)
         mupdf.mfz_run_page(self.this, dw.device, JM_matrix_from_py(m), mupdf.Cookie());
+
+
+    def search_for(*args, **kwargs) -> list:
+        """Search for a string on a page.
+
+        Args:
+            text: string to be searched for
+            clip: restrict search to this rectangle
+            quads: (bool) return quads instead of rectangles
+            flags: bit switches, default: join hyphened words
+            textpage: a pre-created TextPage
+        Returns:
+            a list of rectangles or quads, each containing one occurrence.
+        """
+        if len(args) != 2:
+            raise ValueError("bad number of positional parameters")
+        page, text = args
+        quads = kwargs.get("quads", 0)
+        clip = kwargs.get("clip")
+        textpage = kwargs.get("textpage")
+        if clip != None:
+            clip = Rect(clip)
+        flags = kwargs.get(
+            "flags", TEXT_DEHYPHENATE | TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES
+        )
+
+        CheckParent(page)
+        tp = textpage
+        if tp is None:
+            tp = page.get_textpage(clip=clip, flags=flags)  # create TextPage
+        elif getattr(tp, "parent") != page:
+            raise ValueError("not a textpage of this page")
+        jlib.log('{type(tp)=}')
+        tp = TextPage(tp)
+        rlist = tp.search(text, quads=quads)
+        if textpage is None:
+            del tp
+        return rlist
+
 
     def set_language(self, language=None):
         """Set PDF page default language."""
@@ -8251,6 +8375,10 @@ class Quad(object):
             return None
         if len(args) == 1:
             l = args[0]
+            if isinstance(l, mupdf.Quad):
+                self.this = l
+                self.ul, self.ur, self.ll, self.lr = l.ul, l.ur, l.ll, l.lr
+                return
             if hasattr(l, "__getitem__") is False:
                 raise ValueError("bad Quad constructor")
             if len(l) != 4:
@@ -9034,7 +9162,7 @@ class Shape(object):
     def insert_text(
         self,
         point: point_like,
-        buffer: typing.Union[str, list],
+        buffer_: typing.Union[str, list],
         fontsize: float = 11,
         lineheight: OptFloat = None,
         fontname: str = "helv",
@@ -9052,15 +9180,15 @@ class Shape(object):
         oc: int = 0,
     ) -> int:
 
-        jlib.log('{self=} {point=} {buffer=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
+        jlib.log('{self=} {point=} {buffer_=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
         # ensure 'text' is a list of strings, worth dealing with
-        if not bool(buffer):
+        if not bool(buffer_):
             return 0
 
-        if type(buffer) not in (list, tuple):
-            text = buffer.splitlines()
+        if type(buffer_) not in (list, tuple):
+            text = buffer_.splitlines()
         else:
-            text = buffer
+            text = buffer_
 
         if not len(text) > 0:
             return 0
@@ -9222,7 +9350,7 @@ class Shape(object):
     def insert_textbox(
         self,
         rect: rect_like,
-        buffer: typing.Union[str, list],
+        buffer_: typing.Union[str, list],
         fontname: OptStr = "helv",
         fontfile: OptStr = None,
         fontsize: float = 11,
@@ -9245,7 +9373,7 @@ class Shape(object):
 
         Args:
             rect -- the textbox to fill
-            buffer -- text to be inserted
+            buffer_ -- text to be inserted
             fontname -- a Base-14 font, font name or '/name'
             fontfile -- name of a font file
             fontsize -- font size
@@ -9293,8 +9421,8 @@ class Shape(object):
             rot += 360
         rot = rot % 360
 
-        # is buffer worth of dealing with?
-        if not bool(buffer):
+        # is buffer_ worth of dealing with?
+        if not bool(buffer_):
             return rect.height if rot in (0, 180) else rect.width
 
         cmp90 = "0 1 -1 0 0 0 cm\n"  # rotates counter-clockwise
@@ -9327,11 +9455,11 @@ class Shape(object):
             lheight_factor = ascender - descender
         lheight = fontsize * lheight_factor
 
-        # create a list from buffer, split into its lines
-        if type(buffer) in (list, tuple):
-            t0 = "\n".join(buffer)
+        # create a list from buffer_, split into its lines
+        if type(buffer_) in (list, tuple):
+            t0 = "\n".join(buffer_)
         else:
-            t0 = buffer
+            t0 = buffer_
 
         maxcode = max([ord(c) for c in t0])
         # replace invalid char codes for simple fonts
@@ -9674,7 +9802,8 @@ class TextPage:
     def search(self, needle, hit_max=0, quads=1):
         """Locate 'needle' returning rects or quads."""
 
-        val = _fitz.TextPage_search(self, needle, hit_max, quads)
+        #val = _fitz.TextPage_search(self, needle, hit_max, quads)
+        val = JM_search_stext_page(self.this, needle)
 
         if not val:
             return val
@@ -12165,6 +12294,21 @@ def JM_rotate_page_matrix(page):
     else:
         m = mupdf.mfz_make_matrix(0, -1, 1, 0, 0, w)
     return m
+
+
+def JM_search_stext_page(page, needle):
+    # fixme: this assumes that fz_search_stext_page is equivalent to pymupdf's
+    # JM_search_stext_page().
+    #
+    # Need to change fz_search_stext_page() to be able to return arbitrary
+    # number of quads?
+    #
+    #return mupdf.mfz_search_stext_page(page, needle)
+
+    # fixme: figure out a way to avoid having to pass in max_quads.
+    ret = page.search_stext_page(needle, 10)
+    jlib.log('{len(ret)=}: {ret=}')
+    return ret
 
 
 def JM_scan_resources(pdf, rsrc, liste, what, stream_xref, tracer):
