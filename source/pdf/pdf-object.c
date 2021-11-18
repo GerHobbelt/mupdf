@@ -23,6 +23,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include <ctype.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1966,11 +1967,25 @@ pdf_dict_get(fz_context *ctx, pdf_obj *obj, pdf_obj *key)
 		return NULL;
 	if (!OBJ_IS_NAME(key))
 		return NULL;
-
+	if (0) fprintf(stderr, "%s:%i:%s: key=%p\n",
+			__FILE__, __LINE__, __FUNCTION__,
+			key
+			);
 	if (key < PDF_LIMIT)
 		i = pdf_dict_find(ctx, obj, key);
 	else
+	{
+		const char* n = pdf_to_name(ctx, key);
+		if (0) fprintf(stderr, "%s:%i:%s: n=%s\n",
+				__FILE__, __LINE__, __FUNCTION__,
+				n
+				);
 		i = pdf_dict_finds(ctx, obj, pdf_to_name(ctx, key));
+	}
+	if (0) fprintf(stderr, "%s:%i:%s: i=%i\n",
+			__FILE__, __LINE__, __FUNCTION__,
+			i
+			);
 	if (i >= 0)
 		return DICT(obj)->items[i].v;
 	return NULL;
@@ -3046,9 +3061,101 @@ void pdf_print_obj(fz_context *ctx, fz_output *out, pdf_obj *obj, int tight, int
 	pdf_print_encrypted_obj(ctx, out, obj, tight, ascii, NULL, 0, 0);
 }
 
+void pdf_debug_obj_internal(fz_context *ctx, pdf_obj *obj, fz_output *out, int depth)
+{
+	int i;
+	for (i=0; i<4*depth; ++i)
+		fz_write_printf(ctx, out, " ");
+
+	if (pdf_is_array(ctx, obj))
+	{
+		int i;
+		int l = pdf_array_len(ctx, obj);
+		fz_write_printf(ctx, out, "array %i\n", l);
+		for (i=0; i<l; ++i)
+		{
+			for (int j=0; j<4*depth; ++j)
+				fz_write_printf(ctx, out, " ");
+			fz_write_printf(ctx, out, "    array[%i]:\n", i);
+			pdf_obj *obj2 = pdf_array_get(ctx, obj, i);
+			pdf_debug_obj_internal(ctx, obj2, out, depth + 2);
+		}
+	}
+	else if (pdf_is_bool(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "bool:%i\n", pdf_to_bool(ctx, obj));
+	}
+	else if (pdf_is_dict(ctx, obj))
+	{
+		int i;
+		int l = pdf_dict_len(ctx, obj);
+		fz_write_printf(ctx, out, "dict %i:\n", l);
+		for (i=0; i<l; ++i)
+		{
+			pdf_obj* key = pdf_dict_get_key(ctx, obj, i);
+			pdf_obj *obj2 = pdf_dict_get(ctx, obj, key);
+			for (int j=0; j<4*depth; ++j)
+				fz_write_printf(ctx, out, " ");
+			fz_write_printf(ctx, out, "    dict[%i]:\n", i);
+			pdf_debug_obj_internal(ctx, key, out, depth+1);
+			pdf_debug_obj_internal(ctx, obj2, out, depth + 2);
+		}
+	}
+	else if (pdf_is_embedded_file(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "embedded_file:%s\n", pdf_embedded_file_name(ctx, obj));
+	}
+	else if (pdf_is_indirect(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "indirect:...\n");
+	}
+	else if (pdf_is_int(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "int:%i\n", pdf_to_int(ctx, obj));
+	}
+	else if (pdf_is_jpx_image(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "jpx_image:...\n");
+	}
+	else if (pdf_is_name(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "name:");
+		const char* name = pdf_to_name(ctx, obj);
+		for (const char* c = name; *c; ++c)
+		{
+			if (isprint(*c))
+				fz_write_printf(ctx, out, "%c", *c);
+			else
+				fz_write_printf(ctx, out, "[%02x]", *c);
+		}
+		fz_write_printf(ctx, out, "\n");
+	}
+	else if (pdf_is_null(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "null\n");
+	}
+	else if (pdf_is_real(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "real:%f\n", pdf_to_real(ctx, obj));
+	}
+	else if (pdf_is_stream(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "stream:...\n");
+	}
+	else if (pdf_is_string(ctx, obj))
+	{
+		fz_write_printf(ctx, out, "string:%s\n", pdf_to_str_buf(ctx, obj));
+	}
+	else
+	{
+		fz_write_printf(ctx, out, "<>\n");
+	}
+}
+
 void pdf_debug_obj(fz_context *ctx, pdf_obj *obj)
 {
-	pdf_print_obj(ctx, fz_stddbg(ctx), pdf_resolve_indirect(ctx, obj), 0, 0);
+	//pdf_print_obj(ctx, fz_stddbg(ctx), pdf_resolve_indirect(ctx, obj), 0, 0);
+	pdf_debug_obj_internal(ctx, obj, fz_stddbg(ctx), 0 /*depth*/);
 }
 
 void pdf_debug_ref(fz_context *ctx, pdf_obj *obj)
