@@ -662,7 +662,7 @@ pdf_resolve_link(fz_context *ctx, pdf_document *doc, const char *uri, float *xp,
 pdf_obj *
 pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
 {
-	pdf_obj *dest = pdf_new_dict(ctx, doc, 2);
+	pdf_obj *dest = pdf_new_array(ctx, doc, 5);
 	const char *val;
 	pdf_obj *type;
 	int page;

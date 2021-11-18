@@ -1132,7 +1132,6 @@ static void fragment_cb(const uint32_t *fragment,
 			void *arg)
 {
 	bidi_data *data = (bidi_data *)arg;
-	size_t fragment_offset = fragment - data->buffer->data;
 
 	/* We are guaranteed that fragmentOffset will be at the beginning
 	 * of flow. */
@@ -1165,7 +1164,6 @@ static void fragment_cb(const uint32_t *fragment,
 		data->flow->bidi_level = bidi_level;
 		data->flow->script = script;
 		data->flow = data->flow->next;
-		fragment_offset += len;
 		fragment_len -= len;
 	}
 }
