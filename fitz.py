@@ -5063,6 +5063,7 @@ class Page:
         #memset(&options, 0, sizeof options);
         options = mupdf.StextOptions(flags)
         rect = JM_rect_from_py(clip)
+        jlib.log('{clip=} {rect=}')
         ctm = JM_matrix_from_py(matrix)
         tpage = mupdf.StextPage(rect)
         jlib.log('{type(tpage)=}')
@@ -6811,12 +6812,15 @@ class Page:
         page, text = args
         quads = kwargs.get("quads", 0)
         clip = kwargs.get("clip")
+        jlib.log('{clip=}')
         textpage = kwargs.get("textpage")
         if clip != None:
             clip = Rect(clip)
         flags = kwargs.get(
-            "flags", TEXT_DEHYPHENATE | TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES
-        )
+            "flags",
+            TEXT_DEHYPHENATE | TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES,
+            )
+        jlib.log('{flags=}')
 
         CheckParent(page)
         tp = textpage
@@ -6826,8 +6830,7 @@ class Page:
             raise ValueError("not a textpage of this page")
         jlib.log('{type(tp)=}')
         rlist = tp.search(text, quads=quads)
-        if textpage is None:
-            del tp
+        jlib.log('returning {len(rlist)=} {rlist=}')
         return rlist
 
 
@@ -8381,6 +8384,7 @@ class Point(object):
 
 class Quad(object):
     """Quad() - all zero points\nQuad(ul, ur, ll, lr)\nQuad(quad) - new copy\nQuad(sequence) - from 'sequence'"""
+
     def __init__(self, *args):
         if not args:
             self.ul = self.ur = self.ll = self.lr = Point()
@@ -8829,7 +8833,7 @@ class Rect(object):
         if len(x) == 2:
             return r.includePoint(x)
         if len(x) == 4:
-            return r.includeRect(x)
+            return r.include_rect(x)
         raise ValueError("bad operand 2")
 
     def __and__(self, x):
@@ -9821,8 +9825,9 @@ class TextPage:
 
         #val = _fitz.TextPage_search(self, needle, hit_max, quads)
         val = JM_search_stext_page(self.this, needle)
-
-        jlib.log('{quads=} {val=}')
+        nl = '\n'
+        jlib.log('{quads=}')
+        jlib.log('val:\n{nl.join([str(i) for i in val])}')
         if not val:
             return val
         items = len(val)
@@ -12121,6 +12126,30 @@ def JM_merge_range(
             afterpage += 1
 
 
+def JM_new_buffer_from_stext_page(page):
+    '''
+    make a buffer from an stext_page's text
+    '''
+    assert isinstance(page, mupdf.StextPage)
+    #fz_stext_block *block;
+    #fz_stext_line *line;
+    #fz_stext_char *ch;
+    rect = mupdf.Rect(page.m_internal.mediabox)
+    buf = mupdf.mfz_new_buffer(256)
+    for block in page:
+        if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_TEXT:
+            for line in block:
+                for ch in line:
+                    if (not mupdf.mfz_contains_rect(rect, JM_char_bbox(line, ch))
+                            and not mupdf.mfz_is_infinite_rect(rect)
+                            ):
+                        continue
+                    mupdf.mfz_append_rune(buf, ch.m_internal.c)
+                mupdf.mfz_append_byte(buf, ord('\n'))
+            mupdf.mfz_append_byte(buf, ord('\n'))
+    return buf
+
+
 def JM_new_tracedraw_device(out):
     assert 0, 'derived devices not yet supported'
     dev = mupdf.mfz_new_derived_device(jm_tracedraw_device)
@@ -12462,6 +12491,83 @@ def JM_rotate_page_matrix(page):
 
 
 def JM_search_stext_page(page, needle):
+    #struct highlight hits;
+    #fz_stext_block *block;
+    #fz_stext_line *line;
+    #fz_stext_char *ch;
+    #fz_buffer *buffer = NULL;
+    #const char *haystack, *begin, *end;
+    jlib.log('{page=} {needle=}')
+    rect = mupdf.Rect(page.m_internal.mediabox)
+    #int c, inside;
+    jlib.log('{rect=}')
+
+    if not needle:
+        return
+    quads = []
+    class Hits:
+        pass
+    hits = Hits()
+    hits.len = 0
+    hits.quads = quads
+    hits.hfuzz = 0.2    # merge kerns but not large gaps
+    hits.vfuzz = 0.1
+
+    buffer_ = JM_new_buffer_from_stext_page(page)
+    haystack_string = mupdf.mfz_string_from_buffer(buffer_)
+    jlib.log('{haystack_string=}')
+    haystack = 0
+    begin, end = find_string(haystack_string[haystack:], needle)
+    jlib.log('{begin=} {end=}')
+    if begin is None:
+        #goto no_more_matches;
+        jlib.log('returning {quads=}')
+        return quads
+
+    begin += haystack
+    end += haystack
+    inside = 0
+    for block in page:
+        if block.m_internal.type != mupdf.FZ_STEXT_BLOCK_TEXT:
+            continue
+        for line in block:
+            for ch in line:
+                if ( mupdf.mfz_is_infinite_rect(rect)
+                        or mupdf.mfz_contains_rect(rect, JM_char_bbox(line, ch))
+                        ):
+                    #try_new_match:
+                    while 1:
+                        if not inside:
+                            jlib.log('{haystack-begin=}')
+                            if haystack >= begin:
+                                inside = 1
+                        if inside:
+                            if haystack < end:
+                                on_highlight_char(hits, line, ch)
+                            else:
+                                inside = 0
+                                begin, end = find_string(haystack_string[haystack:], needle)
+                                if begin is None:
+                                    #goto no_more_matches;
+                                    return quads
+                                else:
+                                    #goto try_new_match;
+                                    begin += haystack
+                                    end += haystack
+                                    continue
+                        rune, _ = mupdf.mfz_chartorune(haystack_string[haystack:])
+                        haystack += rune
+                        jlib.log('{haystack=}')
+                        break
+                #next_char:;
+            assert haystack_string[haystack] == '\n'
+            haystack += 1
+        assert haystack_string[haystack] == '\n'
+        haystack += 1
+    #no_more_matches:;
+    return quads
+
+
     # fixme: this assumes that fz_search_stext_page is equivalent to pymupdf's
     # JM_search_stext_page().
     #
@@ -12474,7 +12580,8 @@ def JM_search_stext_page(page, needle):
     ret = page.search_stext_page(needle, 10)
     assert isinstance(ret, tuple)
     ret = list(ret)
-    jlib.log('{len(ret)=}: {ret=}')
+    nl = '\n'
+    jlib.log('{len(ret)=}:\n{nl.join([str(i) for i in ret])}\n')
     return ret
 
 
@@ -14224,6 +14331,27 @@ def annot_postprocess(page: "Page", annot: "Annot") -> None:
     annot.thisown = True
 
 
+def canon(c):
+    assert isinstance(c, int)
+    # TODO: proper unicode case folding
+    # TODO: character equivalence (a matches ä, etc)
+    if c == 0xA0 or c == 0x2028 or c == 0x2029:
+        return ord(' ')
+    if c == ord('\r') or c == ord('\n') or c == ord('\t'):
+        return ord(' ')
+    if c >= ord('A') and c <= ord('Z'):
+        return c - ord('A') + ord('a')
+    return c
+
+
+def chartocanon(s):
+    assert isinstance(s, str)
+    n, c = mupdf.mfz_chartorune(s)
+    c = canon(c);
+    #jlib.log('{s!r=} => {n=} {c=}')
+    return n, c;
+
+
 def dest_is_valid_page(obj, page_object_nums, pagecount):
     num = mupdf.mpdf_to_num(obj)
 
@@ -14233,6 +14361,16 @@ def dest_is_valid_page(obj, page_object_nums, pagecount):
         if mupdf.mpage_object_nums[i] == num:
             return 1
     return 0
+
+
+def find_string(s, needle):
+    assert isinstance(s, str)
+    for i in range(len(s)):
+        end = match_string(s[i:], needle);
+        if end is not None:
+            end += i
+            return i, end
+    return None, None
 
 
 def getPDFnow() -> str:
@@ -14375,6 +14513,12 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     return lines
 
 
+def hdist(dir, a, b):
+    dx = b.x - a.x;
+    dy = b.y - a.y;
+    return mupdf.mfz_abs(dx * dir.x + dy * dir.y)
+
+
 def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> list:
     """Return a list of (rows x cols) equal sized rectangles.
 
@@ -14416,6 +14560,66 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
         rects.append(nrow)  # append new row to result
 
     return rects
+
+
+def match_string(h0, n0):
+    h = 0
+    n = 0
+    #int hc, nc;
+    e = h
+    delta_h, hc = chartocanon(h0[h:])
+    h += delta_h
+    delta_n, nc = chartocanon(n0[n:])
+    n += delta_n
+    while hc == nc:
+        e = h
+        if hc == ord(' '):
+            while 1:
+                delta_h, hc = chartocanon(h0[h:])
+                h += delta_h
+                if hc != ord(' '):
+                    break
+        else:
+            delta_h, hc = chartocanon(h0[h:])
+            h += delta_h
+        if nc == ord(' '):
+            while 1:
+                delta_n, nc = chartocanon(n0[n:])
+                n += delta_n
+                if nc != ord(' '):
+                    break
+        else:
+            delta_n, nc = chartocanon(n0[n:])
+            n += delta_n
+    return None if nc != 0 else e
+
+
+def on_highlight_char(hits, line, ch):
+    jlib.log('{hits=}')
+    assert hits
+    assert isinstance(line, mupdf.StextLine)
+    assert isinstance(ch, mupdf.StextChar)
+    #struct highlight *hits = arg;
+    vfuzz = ch.m_internal.size * hits.vfuzz
+    hfuzz = ch.m_internal.size * hits.hfuzz
+    ch_quad = JM_char_quad(line, ch)
+    if hits.len > 0:
+        quad = hits.quads[hits.len - 1]
+        end = JM_quad_from_py(quad)
+        if ( 1
+                and hdist(line.m_internal.dir, end.lr, ch_quad.ll) < hfuzz
+                and vdist(line.m_internal.dir, end.lr, ch_quad.ll) < vfuzz
+                and hdist(line.m_internal.dir, end.ur, ch_quad.ul) < hfuzz
+                and vdist(line.m_internal.dir, end.ur, ch_quad.ul) < vfuzz
+                ):
+            end.ur = ch_quad.ur
+            end.lr = ch_quad.lr
+            quad = JM_py_from_quad(end)
+            hits.quads[hits.len - 1] = quad
+            return
+    #hits.quads.append(JM_py_from_quad(ch_quad))
+    hits.quads.append(ch_quad)
+    hits.len += 1
 
 
 def pdfobj_string(o, prefix=''):
@@ -14708,6 +14912,12 @@ def strip_outlines(pdoc, outlines, page_count, page_object_nums, names_list):
         mupdf.mpdf_dict_put(outlines, PDF_NAME('Last'), last);
         mupdf.mpdf_dict_put(outlines, PDF_NAME('Count'), nc if mupdf.mpdf_new_int(old_count) > 0 else -nc)
     return nc
+
+
+def vdist(dir, a, b):
+    dx = b.x - a.x
+    dy = b.y - a.y
+    return mupdf.mfz_abs(dx * dir.y + dy * dir.x)
 
 
 # Adobe Glyph List functions
