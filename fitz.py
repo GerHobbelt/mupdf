@@ -5069,6 +5069,7 @@ class Page:
         dev = mupdf.mfz_new_stext_device(tpage, options)
         mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
+        jlib.log('returning {tpage=}')
         return tpage
 
     def _pdf_page(self):
@@ -6419,6 +6420,21 @@ class Page:
         text = JM_EscapeStrFromBuffer(res)
         return text
 
+    def get_textbox(
+            page: Page,
+            rect: rect_like,
+            textpage=None,  #: TextPage = None,
+            ) -> str:
+        tp = textpage
+        if tp is None:
+            tp = page.get_textpage()
+        elif getattr(tp, "parent") != page:
+            raise ValueError("not a textpage of this page")
+        rc = tp.extractTextbox(rect)
+        if textpage is None:
+            del tp
+        return rc
+
     def get_textpage(self, clip: rect_like = None, flags: int = 0, matrix=None) -> "TextPage":
         CheckParent(self)
         if matrix is None:
@@ -6431,7 +6447,10 @@ class Page:
         finally:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
-        textpage.parent = weakref.proxy(self)
+        #textpage.parent = weakref.proxy(self)
+        jlib.log('{textpage=}')
+        textpage = TextPage(textpage)
+        jlib.log('{textpage=}')
         return textpage
 
     def getDisplayList(self, annots=1):
@@ -6806,7 +6825,6 @@ class Page:
         elif getattr(tp, "parent") != page:
             raise ValueError("not a textpage of this page")
         jlib.log('{type(tp)=}')
-        tp = TextPage(tp)
         rlist = tp.search(text, quads=quads)
         if textpage is None:
             del tp
@@ -9798,13 +9816,13 @@ class TextPage:
         self.thisown = True
 
 
-
     def search(self, needle, hit_max=0, quads=1):
         """Locate 'needle' returning rects or quads."""
 
         #val = _fitz.TextPage_search(self, needle, hit_max, quads)
         val = JM_search_stext_page(self.this, needle)
 
+        jlib.log('{quads=} {val=}')
         if not val:
             return val
         items = len(val)
@@ -9826,8 +9844,7 @@ class TextPage:
             val[i] = v1 | v2  # join rectangles
             del val[i + 1]  # remove v2
             items -= 1  # reduce item count
-
-
+        jlib.log('returning {val=}')
         return val
 
 
@@ -9871,6 +9888,21 @@ class TextPage:
     def extractText(self) -> str:
         """Return simple, bare text on the page."""
         return self._extractText(0)
+
+    def extractTextbox(self, rect):
+        #return _fitz.TextPage_extractTextbox(self, rect)
+        #fz_stext_page *this_tpage = (fz_stext_page *) self;
+        this_tpage = self.this
+        assert isinstance(this_tpage, mupdf.StextPage)
+        area = JM_rect_from_py(rect)
+        #PyObject *rc = NULL;
+        #char *found = NULL;
+        found = JM_copy_rectangle(this_tpage, area);
+        if (found):
+            rc = JM_UnicodeFromStr(found)
+        else:
+            rc = ''
+        return rc
 
     extractTEXT = extractText
 
@@ -10880,6 +10912,17 @@ def INRANGE(v, low, high):
 
 JM_annot_id_stem = "fitz"
 
+# Switch for computing glyph of fontsize height
+small_glyph_heights = 0
+
+# Switch for returning fontnames including subset prefix
+subset_fontnames = 0
+
+# Unset ascender / descender corrections
+skip_quad_corrections = 0
+
+FLT_EPSILON = 1e-5
+
 
 def JM_BinFromBuffer(buffer_):
     '''
@@ -10950,6 +10993,8 @@ def JM_TUPLE(o: typing.Sequence) -> tuple:
 def JM_UnicodeFromStr(s):
     if s is None:
         return ''
+    if isinstance(s, bytes):
+        s = s.decode('utf8')
     assert isinstance(s, str), f'type(s)={type(s)} s={s}'
     return s
 
@@ -11115,6 +11160,79 @@ def JM_annot_set_border(border, doc, annot_obj):
     annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
 
 
+def JM_char_bbox(line, ch):
+    '''
+    return rect of char quad
+    '''
+    r = mupdf.mfz_rect_from_quad(JM_char_quad(line, ch))
+    if not line.m_internal.wmode:
+        return r
+    if r.y1 < r.y0 + ch.m_internal.size:
+        r.y0 = r.y1 - ch.m_internal.size
+    return r
+
+
+def JM_char_quad(line, ch):
+    '''
+    re-compute char quad if ascender/descender values make no sense
+    '''
+    assert isinstance(line, mupdf.StextLine)
+    assert isinstance(ch, mupdf.StextChar)
+    if skip_quad_corrections:   # no special handling
+        return ch.quad
+    if line.m_internal.wmode:  # never touch vertical write mode
+        return ch.quad
+    font = mupdf.Font(ch.m_internal.font)
+    asc = JM_font_ascender(font)
+    dsc = JM_font_descender(font)
+    if asc - dsc >= 1 and small_glyph_heights == 0: # no problem
+       return mupdf.Quad(ch.m_internal.quad)
+
+    # Re-compute quad with adjusted ascender / descender values:
+    # Move ch->origin to (0,0) and de-rotate quad, then adjust the corners,
+    # re-rotate and move back to ch->origin location.
+    fsize = ch.m_internal.size
+    #fz_matrix trm1, trm2, xlate1, xlate2;
+    #fz_quad quad;
+    bbox = mupdf.mfz_font_bbox(font)
+    fwidth = bbox.x1 - bbox.x0
+    if asc < 1e-3:  # probably Tesseract glyphless font
+        dsc = -0.1
+
+    # Re-compute asc, dsc if there are problems.
+    # In that case, we also do not trust dsc and try correcting it.
+    if asc - dsc < 1:
+        if bbox.y0 < dsc:
+            dsc = bbox.y0
+        asc = 1 + dsc
+
+    c = line.m_internal.dir.x  # cosine
+    s = line.m_internal.dir.y  # sine
+    trm1 = mupdf.mfz_make_matrix(c, -s, s, c, 0, 0) # derotate
+    trm2 = mupdf.mfz_make_matrix(c, s, -s, c, 0, 0) # rotate
+    xlate1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -ch.m_internal.origin.x, -ch.m_internal.origin.y)
+    xlate2 = mupdf.mfz_make_matrix(1, 0, 0, 1, ch.m_internal.origin.x, ch.m_internal.origin.y)
+
+    quad = mupdf.mfz_transform_quad(mupdf.Quad(ch.m_internal.quad), xlate1)    # move origin to (0,0)
+    quad = mupdf.mfz_transform_quad(quad, trm1) # de-rotate corners
+
+    # adjust vertical coordinates if meaningful
+    if quad.ll.y - quad.ul.y > fsize:
+        quad.ll.y = -fsize * dsc / (asc - dsc)
+        quad.ul.y = quad.ll.y - fsize
+        quad.lr.y = quad.ll.y
+        quad.ur.y = quad.ul.y
+
+    # adjust crazy horizontal coordinates
+    if quad.lr.x - quad.ll.x < FLT_EPSILON:
+        quad.lr.x = quad.ll.x + fwidth * fsize
+        quad.ur.x = quad.lr.x
+
+    quad = mupdf.mfz_transform_quad(quad, trm2) # rotate back
+    quad = mupdf.mfz_transform_quad(quad, xlate2)   # translate back
+    return quad
+
+
 def JM_choice_options(annot):
     '''
     return list of choices for list or combo boxes
@@ -11192,6 +11310,33 @@ def JM_compress_buffer(inbuffer):
     buf = mupdf.Buffer(mupdf.new_buffer_from_data(data, compressed_length))
     buf.resize_buffer(compressed_length)
     return buf;
+
+
+def JM_copy_rectangle(page, area):
+    need_new_line = 0
+    buffer_ = mupdf.mfz_new_buffer(1024)
+    for block in page:
+        if block.m_internal.type != mupdf.FZ_STEXT_BLOCK_TEXT:
+            continue
+        for line in block:
+            line_had_text = 0
+            for ch in line:
+                r = JM_char_bbox(line, ch)
+                if mupdf.mfz_contains_rect(area, r):
+                    line_had_text = 1
+                    if need_new_line:
+                        mupdf.mfz_append_string(buffer_, "\n")
+                        need_new_line = 0
+                    mupdf.mfz_append_rune(
+                            buffer_,
+                            FZ_REPLACEMENT_CHARACTER if ch.m_internal.c < 32 else ch.m_internal.c,
+                            )
+            if line_had_text:
+                need_new_line = 1
+    mupdf.mfz_terminate_buffer(buffer_)
+
+    s = buffer_.buffer_extract()   # take over the data
+    return s
 
 
 # Copied from MuPDF v1.14
@@ -11417,6 +11562,26 @@ def JM_find_annot_irt(annot):
     except Exception as e:
         jlib.log('{e=}')
     return irt_annot if found else None
+
+
+def JM_font_ascender(font):
+    '''
+    need own versions of ascender / descender
+    '''
+    assert isinstance(font, mupdf.Font)
+    if skip_quad_corrections:
+        return 0.8
+    return mupdf.mfz_font_ascender(font)
+
+
+def JM_font_descender(font):
+    '''
+    need own versions of ascender / descender
+    '''
+    assert isinstance(font, mupdf.Font)
+    if skip_quad_corrections:
+        return -0.2
+    return mupdf.mfz_font_descender(font)
 
 
 def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
@@ -12307,6 +12472,8 @@ def JM_search_stext_page(page, needle):
 
     # fixme: figure out a way to avoid having to pass in max_quads.
     ret = page.search_stext_page(needle, 10)
+    assert isinstance(ret, tuple)
+    ret = list(ret)
     jlib.log('{len(ret)=}: {ret=}')
     return ret
 
