@@ -1,0 +1,105 @@
+
+// For compilers that support precompilation, includes "wx.h".
+#include "wx/wxprec.h"
+
+
+//------------------------------------------------------------------------
+// scrlwing.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/scrlwing.cpp"
+
+//------------------------------------------------------------------------
+// scrolbar.cpp
+ 
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/scrolbar.cpp"
+#endif
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/scrolbar.cpp"
+#endif
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/scrolbar.cpp"
+#endif
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/scrolbar.cpp"
+#endif
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/scrolbar.cpp"
+#endif
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/scrolbar.cpp"
+#endif
+
+//------------------------------------------------------------------------
+// scrolbarcmn.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/scrolbarcmn.cpp"
+
+//------------------------------------------------------------------------
+// scrolwin.cpp
+ 
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/scrolwin.cpp"
+#endif
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/scrolwin.cpp"
+#endif
+
+//------------------------------------------------------------------------
+// secretstore.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/secretstore.cpp"
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/secretstore.cpp"
+#endif
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/secretstore.cpp"
+#endif
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/secretstore.cpp"
+#endif
+
+//------------------------------------------------------------------------
+// selectdispatcher.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/selectdispatcher.cpp"
+
+//------------------------------------------------------------------------
+// selstore.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/selstore.cpp"
+
+//------------------------------------------------------------------------
+// settcmn.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/settcmn.cpp"
+
+//------------------------------------------------------------------------
+// settings.cpp
+ 
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/settings.cpp"
+#endif
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/settings.cpp"
+#endif
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/settings.cpp"
+#endif
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/settings.cpp"
+#endif
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/settings.cpp"
+#endif
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/settings.cpp"
+#endif
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/settings.cpp"
+#endif
+
+//------------------------------------------------------------------------
+// sizer.cpp
+ 
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sizer.cpp"
