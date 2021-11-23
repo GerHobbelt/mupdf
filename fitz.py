@@ -11165,11 +11165,13 @@ def JM_annot_set_border(border, doc, annot_obj):
     annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
 
 
-def JM_char_bbox(line, ch):
+def JM_char_bbox(line, ch, verbose=0):
     '''
     return rect of char quad
     '''
-    r = mupdf.mfz_rect_from_quad(JM_char_quad(line, ch))
+    r = mupdf.mfz_rect_from_quad(JM_char_quad(line, ch, verbose))
+    if verbose:
+        jlib.log('{ch.m_internal.size=} {line.m_internal.wmode=} {r=}')
     if not line.m_internal.wmode:
         return r
     if r.y1 < r.y0 + ch.m_internal.size:
@@ -11177,21 +11179,26 @@ def JM_char_bbox(line, ch):
     return r
 
 
-def JM_char_quad(line, ch):
+def JM_char_quad(line, ch, verbose=0):
     '''
     re-compute char quad if ascender/descender values make no sense
     '''
     assert isinstance(line, mupdf.StextLine)
     assert isinstance(ch, mupdf.StextChar)
+    if verbose: jlib.log('{skip_quad_corrections=} {small_glyph_heights=}')
     if skip_quad_corrections:   # no special handling
+        if verbose: jlib.log('skip_quad_corrections, returning {ch.quad=}')
         return ch.quad
     if line.m_internal.wmode:  # never touch vertical write mode
+        if verbose: jlib.log('wmode set, returning ch.quad')
         return ch.quad
     font = mupdf.Font(ch.m_internal.font)
     asc = JM_font_ascender(font)
-    dsc = JM_font_descender(font)
+    dsc = JM_font_descender(font, verbose)
+    if verbose: jlib.log('{asc=} {dsc=} {asc-dsc=} {small_glyph_heights=}')
     if asc - dsc >= 1 and small_glyph_heights == 0: # no problem
-       return mupdf.Quad(ch.m_internal.quad)
+        if verbose: jlib.log('{asc=} - {dsc=} >= 1: returning ch.m_internal.quad')
+        return mupdf.Quad(ch.m_internal.quad)
 
     # Re-compute quad with adjusted ascender / descender values:
     # Move ch->origin to (0,0) and de-rotate quad, then adjust the corners,
@@ -11235,6 +11242,7 @@ def JM_char_quad(line, ch):
 
     quad = mupdf.mfz_transform_quad(quad, trm2) # rotate back
     quad = mupdf.mfz_transform_quad(quad, xlate2)   # translate back
+    jlib.log('returning {quad=}')
     return quad
 
 
@@ -11579,14 +11587,21 @@ def JM_font_ascender(font):
     return mupdf.mfz_font_ascender(font)
 
 
-def JM_font_descender(font):
+def JM_font_descender(font, verbose=0):
     '''
     need own versions of ascender / descender
     '''
     assert isinstance(font, mupdf.Font)
     if skip_quad_corrections:
         return -0.2
-    return mupdf.mfz_font_descender(font)
+    ret = mupdf.mfz_font_descender(font)
+    if verbose and ret < 200:
+        jlib.log('{font.m_internal.t3procs=}')
+        if font.m_internal.t3procs:
+            jlib.log('{font.m_internal.bbox.y0=}')
+        else:
+            jlib.log('{font.m_internal.ft_face=}')
+    return ret
 
 
 def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
@@ -12506,7 +12521,8 @@ def JM_search_stext_page(page, needle):
         return
     quads = []
     class Hits:
-        pass
+        def __str__(self):
+            return f'Hits(len={self.len} quads={self.quads} hfuzz={self.hfuzz} vfuzz={self.vfuzz}'
     hits = Hits()
     hits.len = 0
     hits.quads = quads
@@ -12523,45 +12539,75 @@ def JM_search_stext_page(page, needle):
         #goto no_more_matches;
         jlib.log('returning {quads=}')
         return quads
+    jlib.log('{haystack=} {begin-haystack=}')
 
     begin += haystack
     end += haystack
     inside = 0
+    verbose = 1;
+    i = 0
     for block in page:
+        jlib.log('block')
         if block.m_internal.type != mupdf.FZ_STEXT_BLOCK_TEXT:
             continue
         for line in block:
+            jlib.log('line')
             for ch in line:
-                if ( mupdf.mfz_is_infinite_rect(rect)
-                        or mupdf.mfz_contains_rect(rect, JM_char_bbox(line, ch))
-                        ):
+                i += 1
+                verbose = i > 950 and i < 1000
+                if (verbose): jlib.log('========================================')
+                if (verbose): jlib.log('ch loop start: ch {i=} {inside=} {haystack=}')
+                if not mupdf.mfz_is_infinite_rect(rect):
+                    r = JM_char_bbox(line, ch, verbose)
+                    jlib.log('{rect=} {r=}')
+                    if not mupdf.mfz_contains_rect(rect, r):
+                        if (verbose): jlib.log('not fz_contains_rect() [goto next_char]')
+                        continue
+                while 1:
                     #try_new_match:
-                    while 1:
-                        if not inside:
-                            jlib.log('{haystack-begin=}')
-                            if haystack >= begin:
-                                inside = 1
-                        if inside:
-                            if haystack < end:
-                                on_highlight_char(hits, line, ch)
+                    if (verbose): jlib.log('[try_new_match] {inside=}')
+                    if not inside:
+                        hs = haystack_string[haystack:]
+                        #if (verbose): jlib.log('{haystack=} begin-haystack={begin-haystack}: {hs}')
+                        if haystack >= begin:
+                            inside = 1
+                    if (verbose): jlib.log('{inside=}')
+                    if inside:
+                        if (verbose): jlib.log('{haystack-end=}')
+                        if haystack < end:
+                            if (verbose): jlib.log('calling find_string()')
+                            on_highlight_char(hits, line, ch)
+
+                            break
+                        else:
+                            inside = 0
+                            if (verbose): jlib.log('calling on_highlight_char()')
+                            begin, end = find_string(haystack_string[haystack:], needle)
+                            if (verbose): jlib.log('{begin=} {end=} {haystack=}')
+                            if begin is None:
+                                #goto no_more_matches;
+                                if (verbose): jlib.log('returning, {len(quods)=}')
+                                return quads
                             else:
-                                inside = 0
-                                begin, end = find_string(haystack_string[haystack:], needle)
-                                if begin is None:
-                                    #goto no_more_matches;
-                                    return quads
-                                else:
-                                    #goto try_new_match;
-                                    begin += haystack
-                                    end += haystack
-                                    continue
-                        rune, _ = mupdf.mfz_chartorune(haystack_string[haystack:])
-                        haystack += rune
-                        jlib.log('{haystack=}')
-                        break
+                                #goto try_new_match;
+                                #begin += haystack
+                                #end += haystack
+                                if (verbose): jlib.log('[try_new_match] doing continue. {inside=}')
+                                continue
+                    break
+                #else:
+                #    if (verbose): jlib.log('skpping char')
                 #next_char:;
+                if (verbose): jlib.log('[next_char]')
+                if (verbose): jlib.log('calling fz_chartorune()')
+                rune, _ = mupdf.mfz_chartorune(haystack_string[haystack:])
+                haystack += rune
+                hs = haystack_string[haystack:]
+                if (verbose): jlib.log('{rune=} {haystack=}: {hs}')
+                #break
             assert haystack_string[haystack] == '\n'
             haystack += 1
+            if (verbose): jlib.log('{i=} incremented to {haystack=}')
         assert haystack_string[haystack] == '\n'
         haystack += 1
     #no_more_matches:;
