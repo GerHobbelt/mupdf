@@ -55,6 +55,28 @@ const globConfig = Object.assign({}, globDefaultOptions, {
   cwd: sourcesPath
 });
 
+
+// nuke the old generated files first:
+let rawDestPath = '../../scripts/wxWidgets/';
+let destPath = unixify(path.resolve(rawDestPath));
+const globNukeConfig = Object.assign({}, globDefaultOptions, {
+  nodir: true,
+  cwd: destPath
+});
+
+let nukespec = 'jumbo-*.cpp';
+glob(nukespec, globNukeConfig, function processGlobResults(err, files) {
+  if (err) {
+    throw new Error(`glob scan error: ${err}`);
+  }
+
+  files.forEach((file) => {
+    fs.unlinkSync(file);
+  });
+});
+
+// now collect all wxW source files and construct the jumbo files from the filtered set.
+
 let scanspec = '*.cpp';
 console.error({scanspec});
 glob(scanspec, globConfig, function processGlobResults(err, files) {
@@ -164,7 +186,7 @@ done
   r.forEach((name) => {
     let recs = duplimap.get(name);
 
-    if (srcCount >= 10) {
+    if (srcCount >= 50) {
       let dstname = `../../scripts/wxWidgets/jumbo-source${dstNum}.cpp`;
       fs.writeFileSync(dstname, dstCode, 'utf8');
       srcCount = 0;
