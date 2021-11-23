@@ -6,20 +6,6 @@
 
 
 //------------------------------------------------------------------------
-// settingsuniv.cpp
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/settingsuniv.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sizer.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sizer.cpp"
-
-
-//------------------------------------------------------------------------
 // slider.cpp
 
 #if defined(__WXGTK20__)
@@ -528,4 +514,18 @@
 
 #if !defined(__WINDOWS__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/unix/stdpaths.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// stdpbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stdpbase.cpp"
+
+
+//------------------------------------------------------------------------
+// stdrend.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/stdrend.cpp"
 #endif

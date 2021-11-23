@@ -151,7 +151,7 @@ done
 
   let r = a.filter((rec) => {
     let x1 = /^(?:common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix)\//.test(rec.source);
-    let x2 = /dummy\.cpp|strconv\.cpp/.test(rec.source);
+    let x2 = /(?:dummy|strconv|graphicsd2d|notifmsgrt)\.cpp/.test(rec.source);
     return x1 && !x2;
   });
 

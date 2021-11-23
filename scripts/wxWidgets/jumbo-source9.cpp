@@ -6,20 +6,6 @@
 
 
 //------------------------------------------------------------------------
-// private.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/private.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// prntbase.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/prntbase.cpp"
-
-
-//------------------------------------------------------------------------
 // prntdlgg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/prntdlgg.cpp"
@@ -479,3 +465,17 @@
 #if defined(__WXX11__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/x11/settings.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// settingsuniv.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/settingsuniv.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// sizer.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sizer.cpp"

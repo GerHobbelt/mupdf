@@ -6,14 +6,6 @@
 
 
 //------------------------------------------------------------------------
-// mono.cpp
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/themes/mono.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // mousemanager.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/mousemanager.cpp"
@@ -179,14 +171,6 @@
 // notifmsgg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/notifmsgg.cpp"
-
-
-//------------------------------------------------------------------------
-// notifmsgrt.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/rt/notifmsgrt.cpp"
-#endif
 
 
 //------------------------------------------------------------------------
@@ -475,3 +459,17 @@
 #if defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/msw/printwin.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// private.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/private.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// prntbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/prntbase.cpp"

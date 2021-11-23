@@ -6,12 +6,6 @@
 
 
 //------------------------------------------------------------------------
-// imagxpm.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagxpm.cpp"
-
-
-//------------------------------------------------------------------------
 // infobar.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/infobar.cpp"
@@ -483,3 +477,11 @@
 // module.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/module.cpp"
+
+
+//------------------------------------------------------------------------
+// mono.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/themes/mono.cpp"
+#endif

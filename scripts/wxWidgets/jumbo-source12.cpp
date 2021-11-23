@@ -6,42 +6,6 @@
 
 
 //------------------------------------------------------------------------
-// toolbar.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/toolbar.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/toolbar.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/toolbar.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/toolbar.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/toolbar.cpp"
-#endif
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/toolbar.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// toolbar_osx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/toolbar_osx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // toolbkg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/toolbkg.cpp"
@@ -449,3 +413,17 @@
 // webrequest.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/webrequest.cpp"
+
+
+//------------------------------------------------------------------------
+// webrequest_curl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/webrequest_curl.cpp"
+
+
+//------------------------------------------------------------------------
+// webrequest_winhttp.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webrequest_winhttp.cpp"
+#endif

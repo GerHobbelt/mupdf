@@ -88,14 +88,6 @@
 
 
 //------------------------------------------------------------------------
-// graphicsd2d.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphicsd2d.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // grid.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/grid.cpp"
@@ -375,3 +367,9 @@
 // imagtiff.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/imagtiff.cpp"
+
+
+//------------------------------------------------------------------------
+// imagxpm.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagxpm.cpp"

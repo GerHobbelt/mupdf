@@ -6,20 +6,6 @@
 
 
 //------------------------------------------------------------------------
-// webrequest_curl.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webrequest_curl.cpp"
-
-
-//------------------------------------------------------------------------
-// webrequest_winhttp.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webrequest_winhttp.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // webview.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/webview.cpp"
