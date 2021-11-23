@@ -8639,7 +8639,7 @@ class Rect(object):
     @property
     def is_empty(self):
         """True if rectangle area is empty."""
-        return self.x0 == self.x1 or self.y0 == self.y1
+        return self.x0 >= self.x1 or self.y0 >= self.y1
 
     @property
     def is_infinite(self):
@@ -9839,13 +9839,18 @@ class TextPage:
                 val[i] = q.rect
         if quads:
             return val
+        for v in val:
+            jlib.log('{type(v)=} {v=}')
         i = 0  # join overlapping rects on the same line
         while i < items - 1:
             v1 = val[i]
             v2 = val[i + 1]
+            jlib.log('{v1.y1=} {v2.y1=} {v1 & v2=} {(v1 & v2).is_empty=}')
             if v1.y1 != v2.y1 or (v1 & v2).is_empty:
                 i += 1
+                jlib.log('not joining')
                 continue  # no overlap on same line
+            jlib.log('joining {v1=} {v2=}')
             val[i] = v1 | v2  # join rectangles
             del val[i + 1]  # remove v2
             items -= 1  # reduce item count
@@ -12434,6 +12439,8 @@ def JM_py_from_rect(r):
 
 
 def JM_quad_from_py(r):
+    if isinstance(r, mupdf.Quad):
+        return r
     q = mupdf.mfz_make_quad(0, 0, 0, 0, 0, 0, 0, 0)
     p = [0,0,0,0]
     if not r or not isinstance(r, (tuple, list)) or len(r) != 4:
@@ -12561,11 +12568,12 @@ def JM_search_stext_page(page, needle):
             for ch in line:
                 i += 1
                 verbose = i > 950 and i < 1000
+                verbose = 0
                 if (verbose): jlib.log('========================================')
                 if (verbose): jlib.log('ch loop start: ch {i=} {inside=} {haystack=}')
                 if not mupdf.mfz_is_infinite_rect(rect):
                     r = JM_char_bbox(line, ch, verbose)
-                    jlib.log('{rect=} {r=}')
+                    #jlib.log('{rect=} {r=}')
                     if not mupdf.mfz_contains_rect(rect, r):
                         if (verbose): jlib.log('not fz_contains_rect() [goto next_char]')
                         continue
@@ -14648,7 +14656,7 @@ def match_string(h0, n0):
 
 
 def on_highlight_char(hits, line, ch):
-    jlib.log('{hits=}')
+    #jlib.log('{hits=}')
     assert hits
     assert isinstance(line, mupdf.StextLine)
     assert isinstance(ch, mupdf.StextChar)
@@ -14656,19 +14664,24 @@ def on_highlight_char(hits, line, ch):
     vfuzz = ch.m_internal.size * hits.vfuzz
     hfuzz = ch.m_internal.size * hits.hfuzz
     ch_quad = JM_char_quad(line, ch)
+    jlib.log('{hits.len=} {len(hits.quads)=} {vfuzz=} {hfuzz=} {ch_quad=}')
     if hits.len > 0:
+        # fixme: end = hits.quads[-1]
         quad = hits.quads[hits.len - 1]
         end = JM_quad_from_py(quad)
+        jlib.log('{line.m_internal.dir=} {quad=} {end=} {ch_quad=}')
         if ( 1
                 and hdist(line.m_internal.dir, end.lr, ch_quad.ll) < hfuzz
                 and vdist(line.m_internal.dir, end.lr, ch_quad.ll) < vfuzz
                 and hdist(line.m_internal.dir, end.ur, ch_quad.ul) < hfuzz
                 and vdist(line.m_internal.dir, end.ur, ch_quad.ul) < vfuzz
                 ):
+            jlib.log('extending')
             end.ur = ch_quad.ur
             end.lr = ch_quad.lr
-            quad = JM_py_from_quad(end)
-            hits.quads[hits.len - 1] = quad
+            #quad = JM_py_from_quad(end)
+            #hits.quads[hits.len - 1] = quad
+            assert hits.quads[-1] == end
             return
     #hits.quads.append(JM_py_from_quad(ch_quad))
     hits.quads.append(ch_quad)
