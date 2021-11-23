@@ -11169,7 +11169,12 @@ def JM_char_bbox(line, ch, verbose=0):
     '''
     return rect of char quad
     '''
-    r = mupdf.mfz_rect_from_quad(JM_char_quad(line, ch, verbose))
+    q = JM_char_quad(line, ch, verbose)
+    if verbose:
+        jlib.log('q={q}')
+    r = mupdf.mfz_rect_from_quad(q)
+    if verbose:
+        jlib.log('q={q} r={r}')
     if verbose:
         jlib.log('{ch.m_internal.size=} {line.m_internal.wmode=} {r=}')
     if not line.m_internal.wmode:
@@ -11192,7 +11197,8 @@ def JM_char_quad(line, ch, verbose=0):
     if line.m_internal.wmode:  # never touch vertical write mode
         if verbose: jlib.log('wmode set, returning ch.quad')
         return ch.quad
-    font = mupdf.Font(ch.m_internal.font)
+    #font = mupdf.Font(ch.m_internal.font)
+    font = mupdf.Font(mupdf.keep_font(ch.m_internal.font))
     asc = JM_font_ascender(font)
     dsc = JM_font_descender(font, verbose)
     if verbose: jlib.log('{asc=} {dsc=} {asc-dsc=} {small_glyph_heights=}')
@@ -11595,7 +11601,7 @@ def JM_font_descender(font, verbose=0):
     if skip_quad_corrections:
         return -0.2
     ret = mupdf.mfz_font_descender(font)
-    if verbose and ret < 200:
+    if verbose and abs(ret) > 200:
         jlib.log('{font.m_internal.t3procs=}')
         if font.m_internal.t3procs:
             jlib.log('{font.m_internal.bbox.y0=}')
@@ -12568,20 +12574,21 @@ def JM_search_stext_page(page, needle):
                     if (verbose): jlib.log('[try_new_match] {inside=}')
                     if not inside:
                         hs = haystack_string[haystack:]
-                        #if (verbose): jlib.log('{haystack=} begin-haystack={begin-haystack}: {hs}')
+                        if (verbose): jlib.log('{haystack=} {begin=} {haystack-begin=}')
                         if haystack >= begin:
+                            if (verbose): jlib.log('setting inside to 1')
                             inside = 1
                     if (verbose): jlib.log('{inside=}')
                     if inside:
                         if (verbose): jlib.log('{haystack-end=}')
                         if haystack < end:
-                            if (verbose): jlib.log('calling find_string()')
+                            if (verbose): jlib.log('calling on_highlight_char()')
                             on_highlight_char(hits, line, ch)
 
                             break
                         else:
                             inside = 0
-                            if (verbose): jlib.log('calling on_highlight_char()')
+                            if (verbose): jlib.log('calling find_string()')
                             begin, end = find_string(haystack_string[haystack:], needle)
                             if (verbose): jlib.log('{begin=} {end=} {haystack=}')
                             if begin is None:
@@ -12590,8 +12597,8 @@ def JM_search_stext_page(page, needle):
                                 return quads
                             else:
                                 #goto try_new_match;
-                                #begin += haystack
-                                #end += haystack
+                                begin += haystack
+                                end += haystack
                                 if (verbose): jlib.log('[try_new_match] doing continue. {inside=}')
                                 continue
                     break
