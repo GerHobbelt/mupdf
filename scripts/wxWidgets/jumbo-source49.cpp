@@ -1,64 +1,121 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// toplvcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/toplvcmn.cpp"
 
 //------------------------------------------------------------------------
-// translation.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/translation.cpp"
+// stackwalk.cpp
 
-//------------------------------------------------------------------------
-// treebase.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/treebase.cpp"
-
-//------------------------------------------------------------------------
-// treebkg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/treebkg.cpp"
-
-//------------------------------------------------------------------------
-// treectlg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/treectlg.cpp"
-
-//------------------------------------------------------------------------
-// treectrl.cpp
- 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/treectrl.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/treectrl.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/stackwalk.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// treelist.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/treelist.cpp"
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/stackwalk.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// txtstrm.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/txtstrm.cpp"
+// statbar.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/statbar.cpp"
+
 
 //------------------------------------------------------------------------
-// uiaction.cpp
- 
+// statbmp.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/statbmp.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/statbmp.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/statbmp.cpp"
+#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/uiaction.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/uiaction.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/statbmp.cpp"
 #endif
 
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/statbmp.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/statbmp.cpp"
+#endif
+
+
 //------------------------------------------------------------------------
-// uiactioncmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/uiactioncmn.cpp"
+// statbmp_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/statbmp_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// statbmpcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/statbmpcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// statbmpg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/statbmpg.cpp"
+
+
+//------------------------------------------------------------------------
+// statbox.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/statbox.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/statbox.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/statbox.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/statbox.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/statbox.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/statbox.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// statbox_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/statbox_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// statboxcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/statboxcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// statbrma.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/statbrma.cpp"
+#endif

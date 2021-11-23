@@ -1,86 +1,85 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// fontcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontcmn.cpp"
 
 //------------------------------------------------------------------------
-// fontdata.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontdata.cpp"
+// ffile.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/ffile.cpp"
+
 
 //------------------------------------------------------------------------
-// fontdlg.cpp
- 
+// file.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/file.cpp"
+
+
+//------------------------------------------------------------------------
+// fileback.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fileback.cpp"
+
+
+//------------------------------------------------------------------------
+// fileconf.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fileconf.cpp"
+
+
+//------------------------------------------------------------------------
+// filectrl.cpp
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/fontdlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filectrl.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// filectrlcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filectrlcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// filectrlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filectrlg.cpp"
+
+
+//------------------------------------------------------------------------
+// filedlg.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filedlg.cpp"
+#endif
+
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/fontdlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/filedlg.cpp"
 #endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/filedlg.cpp"
+#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/fontdlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/filedlg.cpp"
 #endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/fontdlg.cpp"
-#endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/fontdlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/filedlg.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// fontdlgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/fontdlgg.cpp"
 
 //------------------------------------------------------------------------
-// fontenum.cpp
- 
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/fontenum.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/fontenum.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/fontenum.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/fontenum.cpp"
-#endif
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/fontenum.cpp"
-#endif
+// filedlgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filedlgg.cpp"
+
 
 //------------------------------------------------------------------------
-// fontenumcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontenumcmn.cpp"
+// filefn.cpp
 
-//------------------------------------------------------------------------
-// fontmap.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontmap.cpp"
-
-//------------------------------------------------------------------------
-// fontmgr.cpp
- 
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/fontmgr.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// fontmgrcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontmgrcmn.cpp"
-
-//------------------------------------------------------------------------
-// fontpicker.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/fontpicker.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filefn.cpp"

@@ -1,72 +1,113 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// dlgcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/dlgcmn.cpp"
 
 //------------------------------------------------------------------------
-// dlmsw.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/dlmsw.cpp"
-#endif
+// debugrpt.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/debugrpt.cpp"
+
 
 //------------------------------------------------------------------------
-// dnd.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/dnd.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/dnd.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/dnd.cpp"
-#endif
+// defs.cpp
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/dnd.cpp"
-#endif
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/dnd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/defs.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// dndcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/dndcmn.cpp"
 
 //------------------------------------------------------------------------
-// dobjcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/dobjcmn.cpp"
+// desktopenv.cpp
 
-//------------------------------------------------------------------------
-// docmdi.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/docmdi.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/desktopenv.cpp"
 
-//------------------------------------------------------------------------
-// docview.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/docview.cpp"
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/desktopenv.cpp"
+#endif
 
-//------------------------------------------------------------------------
-// dpycmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/dpycmn.cpp"
-
-//------------------------------------------------------------------------
-// dragimag.cpp
- 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/dragimag.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/desktopenv.cpp"
 #endif
 
+
 //------------------------------------------------------------------------
-// dragimgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/dragimgg.cpp"
+// desktopenvcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/desktopenvcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// dialog.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/dialog.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/dialog.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/dialog.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/dialog.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/dialog.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/dialog.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// dialog_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/dialog_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// dialup.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/dialup.cpp"
+#endif
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/dialup.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// dib.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/dib.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// dir.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/dir.cpp"
+#endif
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/dir.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// dircmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/dircmn.cpp"

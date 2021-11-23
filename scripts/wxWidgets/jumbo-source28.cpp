@@ -1,59 +1,75 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// init.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/init.cpp"
 
 //------------------------------------------------------------------------
-// intl.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/intl.cpp"
+// headerctrlcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/headerctrlcmn.cpp"
+
 
 //------------------------------------------------------------------------
-// ipcbase.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/ipcbase.cpp"
+// headerctrlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/headerctrlg.cpp"
+
 
 //------------------------------------------------------------------------
-// joystick.cpp
- 
+// helpbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/helpbase.cpp"
+
+
+//------------------------------------------------------------------------
+// helpbest.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/joystick.cpp"
-#endif
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/joystick.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpbest.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// languageinfo.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/languageinfo.cpp"
 
 //------------------------------------------------------------------------
-// layout.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/layout.cpp"
+// helpchm.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpchm.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// laywin.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/laywin.cpp"
+// helpext.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/helpext.cpp"
+
 
 //------------------------------------------------------------------------
-// lboxcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/lboxcmn.cpp"
+// helpwin.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpwin.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// list.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/list.cpp"
+// hid.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/hid.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// listbkg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/listbkg.cpp"
+// hidjoystick.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/hidjoystick.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// htmllbox.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/htmllbox.cpp"

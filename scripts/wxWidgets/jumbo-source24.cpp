@@ -1,58 +1,73 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// gridcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/gridcmn.cpp"
 
 //------------------------------------------------------------------------
-// gridctrl.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/gridctrl.cpp"
+// fs_filter.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fs_filter.cpp"
+
 
 //------------------------------------------------------------------------
-// grideditors.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grideditors.cpp"
+// fs_inet.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fs_inet.cpp"
+
 
 //------------------------------------------------------------------------
-// gridsel.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/gridsel.cpp"
+// fs_mem.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fs_mem.cpp"
+
 
 //------------------------------------------------------------------------
-// gvfs.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/gnome/gvfs.cpp"
-#endif
+// fswatcher.cpp
 
-//------------------------------------------------------------------------
-// hash.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/hash.cpp"
-
-//------------------------------------------------------------------------
-// hashmap.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/hashmap.cpp"
-
-//------------------------------------------------------------------------
-// headercolcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/headercolcmn.cpp"
-
-//------------------------------------------------------------------------
-// headerctrl.cpp
- 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/headerctrl.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/fswatcher.cpp"
 #endif
 
+
 //------------------------------------------------------------------------
-// headerctrlcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/headerctrlcmn.cpp"
+// fswatcher_fsevents.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/fswatcher_fsevents.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// fswatcher_inotify.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/fswatcher_inotify.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// fswatcher_kqueue.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/fswatcher_kqueue.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// fswatchercmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fswatchercmn.cpp"
+
+
+//------------------------------------------------------------------------
+// fswatcherg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/fswatcherg.cpp"
+
+
+//------------------------------------------------------------------------
+// ftp.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/ftp.cpp"

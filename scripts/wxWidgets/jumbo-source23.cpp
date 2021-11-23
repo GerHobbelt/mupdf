@@ -1,80 +1,105 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// gdiplus.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/gdiplus.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// geometry.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/geometry.cpp"
+// fontmgrcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontmgrcmn.cpp"
+
 
 //------------------------------------------------------------------------
-// gifdecod.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/gifdecod.cpp"
+// fontpicker.cpp
 
-//------------------------------------------------------------------------
-// glcanvas.cpp
- 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/fontpicker.cpp"
 #endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/glcanvas.cpp"
-#endif
+
+
+//------------------------------------------------------------------------
+// fontpickercmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontpickercmn.cpp"
+
+
+//------------------------------------------------------------------------
+// fontpickerg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/fontpickerg.cpp"
+
+
+//------------------------------------------------------------------------
+// fontutil.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/glcanvas.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/glcanvas.cpp"
-#endif
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/fontutil.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// glcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/glcmn.cpp"
-
-//------------------------------------------------------------------------
-// graphcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/graphcmn.cpp"
-
-//------------------------------------------------------------------------
-// graphicc.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/graphicc.cpp"
-
-//------------------------------------------------------------------------
-// graphics.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphics.cpp"
-#endif
 #if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/graphics.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/fontutil.cpp"
 #endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/graphics.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/fontutil.cpp"
 #endif
 
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/fontutil.cpp"
+#endif
+
+
 //------------------------------------------------------------------------
-// graphicsd2d.cpp
- 
+// fontutilcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fontutilcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// frame.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/frame.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/frame.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/frame.cpp"
+#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphicsd2d.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/frame.cpp"
 #endif
 
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/frame.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/frame.cpp"
+#endif
+
+
 //------------------------------------------------------------------------
-// grid.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grid.cpp"
+// framecmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/framecmn.cpp"
+
+
+//------------------------------------------------------------------------
+// framuniv.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/framuniv.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// fs_arc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fs_arc.cpp"

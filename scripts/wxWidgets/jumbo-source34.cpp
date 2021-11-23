@@ -1,94 +1,103 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// overlay.cpp
- 
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/overlay.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/overlay.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// overlaycmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/overlaycmn.cpp"
+// mediactrl.cpp
 
-//------------------------------------------------------------------------
-// ownerdrw.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ownerdrw.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// ownerdrwcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/ownerdrwcmn.cpp"
-
-//------------------------------------------------------------------------
-// palette.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/palette.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/palette.cpp"
-#endif
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/palette.cpp"
-#endif
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/palette.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/mediactrl.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// paletteg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/paletteg.cpp"
-
-//------------------------------------------------------------------------
-// panelcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/panelcmn.cpp"
-
-//------------------------------------------------------------------------
-// pango_x.cpp
- 
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/pango_x.cpp"
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/mediactrl.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// paper.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/paper.cpp"
 
 //------------------------------------------------------------------------
-// pen.cpp
- 
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/pen.cpp"
+// mediactrl_am.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/mediactrl_am.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// mediactrl_gstplayer.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/mediactrl_gstplayer.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// mediactrl_qt.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/mediactrl_qt.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// mediactrl_wmp10.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/mediactrl_wmp10.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// mediactrlcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/mediactrlcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// memory.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/memory.cpp"
+
+
+//------------------------------------------------------------------------
+// menu.cpp
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/pen.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/menu.cpp"
 #endif
+
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/pen.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/menu.cpp"
 #endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/menu.cpp"
+#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/pen.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/menu.cpp"
 #endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/pen.cpp"
-#endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/pen.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/menu.cpp"
 #endif
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/pen.cpp"
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/menu.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// menu_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/menu_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// menucmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/menucmn.cpp"

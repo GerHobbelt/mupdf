@@ -1,67 +1,95 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// printdlg.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/printdlg.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/printdlg.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// printps.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/printps.cpp"
+// mono.cpp
 
-//------------------------------------------------------------------------
-// printqt.cpp
- 
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/printqt.cpp"
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/themes/mono.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// printwin.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/printwin.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// private.cpp
- 
+// mousemanager.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/mousemanager.cpp"
+
+
+//------------------------------------------------------------------------
+// msgdlg.cpp
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/private.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/msgdlg.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// prntbase.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/prntbase.cpp"
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/msgdlg.cpp"
+#endif
 
-//------------------------------------------------------------------------
-// prntdlgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/prntdlgg.cpp"
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/msgdlg.cpp"
+#endif
 
-//------------------------------------------------------------------------
-// process.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/process.cpp"
-
-//------------------------------------------------------------------------
-// progdlg.cpp
- 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/progdlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/msgdlg.cpp"
 #endif
 
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/msgdlg.cpp"
+#endif
+
+
 //------------------------------------------------------------------------
-// progdlgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/progdlgg.cpp"
+// msgdlgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/msgdlgg.cpp"
+
+
+//------------------------------------------------------------------------
+// msgout.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/msgout.cpp"
+
+
+//------------------------------------------------------------------------
+// mstream.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/mstream.cpp"
+
+
+//------------------------------------------------------------------------
+// nativdlg.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/nativdlg.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// nativewin.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/nativewin.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/nativewin.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// nbkbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/nbkbase.cpp"
+
+
+//------------------------------------------------------------------------
+// net.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/net.cpp"
+#endif

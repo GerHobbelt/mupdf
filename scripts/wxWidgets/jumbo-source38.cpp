@@ -1,91 +1,89 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
+
 //------------------------------------------------------------------------
-// region.cpp
- 
+// object.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/object.cpp"
+
+
+//------------------------------------------------------------------------
+// odcombo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/odcombo.cpp"
+
+
+//------------------------------------------------------------------------
+// odcombocmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/odcombocmn.cpp"
+
+
+//------------------------------------------------------------------------
+// oleutils.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ole/oleutils.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// overlay.cpp
+
 #if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/region.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/overlay.cpp"
 #endif
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/region.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/region.cpp"
-#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/region.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/overlay.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// overlaycmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/overlaycmn.cpp"
+
+
+//------------------------------------------------------------------------
+// ownerdrw.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ownerdrw.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// ownerdrwcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/ownerdrwcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// palette.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/palette.cpp"
+#endif
+
 #if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/region.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/palette.cpp"
 #endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/region.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/palette.cpp"
 #endif
+
 #if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/region.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/palette.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// regiong.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/regiong.cpp"
 
 //------------------------------------------------------------------------
-// registry.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/registry.cpp"
-#endif
+// paletteg.cpp
 
-//------------------------------------------------------------------------
-// rendcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/rendcmn.cpp"
-
-//------------------------------------------------------------------------
-// renderer.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/renderer.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/renderer.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/renderer.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/renderer.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// renderg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/renderg.cpp"
-
-//------------------------------------------------------------------------
-// reparent.cpp
- 
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/reparent.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// rgncmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/rgncmn.cpp"
-
-//------------------------------------------------------------------------
-// richmsgdlg.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/richmsgdlg.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// richmsgdlgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/richmsgdlgg.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/paletteg.cpp"

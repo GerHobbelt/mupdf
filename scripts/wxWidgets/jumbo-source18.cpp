@@ -1,72 +1,73 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// fileback.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fileback.cpp"
 
 //------------------------------------------------------------------------
-// fileconf.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/fileconf.cpp"
+// dseldlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/dseldlg.cpp"
+
 
 //------------------------------------------------------------------------
-// filectrl.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filectrl.cpp"
-#endif
+// dvrenderer.cpp
 
-//------------------------------------------------------------------------
-// filectrlcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/filectrlcmn.cpp"
-
-//------------------------------------------------------------------------
-// filectrlg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filectrlg.cpp"
-
-//------------------------------------------------------------------------
-// filedlg.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filedlg.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/filedlg.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/filedlg.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/filedlg.cpp"
-#endif
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/filedlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/dvrenderer.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// filedlgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filedlgg.cpp"
 
 //------------------------------------------------------------------------
-// filefn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/filefn.cpp"
+// dvrenderers.cpp
 
-//------------------------------------------------------------------------
-// filehistory.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filehistory.cpp"
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/dvrenderers.cpp"
 #endif
 
+
 //------------------------------------------------------------------------
-// filehistorycmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/filehistorycmn.cpp"
+// dynlib.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/dynlib.cpp"
+
+
+//------------------------------------------------------------------------
+// dynload.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/dynload.cpp"
+
+
+//------------------------------------------------------------------------
+// editlbox.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/editlbox.cpp"
+
+
+//------------------------------------------------------------------------
+// effects.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/effects.cpp"
+
+
+//------------------------------------------------------------------------
+// encconv.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/encconv.cpp"
+
+
+//------------------------------------------------------------------------
+// enhmeta.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/enhmeta.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// epolldispatcher.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/epolldispatcher.cpp"
+#endif

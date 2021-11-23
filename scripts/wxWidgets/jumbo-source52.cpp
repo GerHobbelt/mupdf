@@ -1,60 +1,85 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// valtext.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/valtext.cpp"
 
 //------------------------------------------------------------------------
-// variant.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/variant.cpp"
+// strvararg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/strvararg.cpp"
+
 
 //------------------------------------------------------------------------
-// vlbox.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/vlbox.cpp"
+// sysopt.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sysopt.cpp"
+
 
 //------------------------------------------------------------------------
-// volume.cpp
- 
+// systhemectrl.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/volume.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/systhemectrl.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// vscroll.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/vscroll.cpp"
 
 //------------------------------------------------------------------------
-// webrequest.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webrequest.cpp"
+// tabg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/tabg.cpp"
+
 
 //------------------------------------------------------------------------
-// webrequest_curl.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webrequest_curl.cpp"
+// tarstrm.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/tarstrm.cpp"
+
 
 //------------------------------------------------------------------------
-// webrequest_winhttp.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webrequest_winhttp.cpp"
+// taskbar.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/taskbar.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// webview.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webview.cpp"
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/taskbar.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/taskbar.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/taskbar.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// webview_edge.cpp
- 
+// taskbarbutton.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webview_edge.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/taskbarbutton.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// taskbarcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/taskbarcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// taskbarx11.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/taskbarx11.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// tbarbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/tbarbase.cpp"

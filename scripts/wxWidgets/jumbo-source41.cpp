@@ -1,98 +1,91 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
+
 //------------------------------------------------------------------------
-// slider.cpp
- 
+// private.cpp
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/slider.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/private.cpp"
 #endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/slider.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/slider.cpp"
-#endif
+
+
+//------------------------------------------------------------------------
+// prntbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/prntbase.cpp"
+
+
+//------------------------------------------------------------------------
+// prntdlgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/prntdlgg.cpp"
+
+
+//------------------------------------------------------------------------
+// process.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/process.cpp"
+
+
+//------------------------------------------------------------------------
+// progdlg.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/slider.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/progdlg.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// progdlgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/progdlgg.cpp"
+
+
+//------------------------------------------------------------------------
+// propdlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/propdlg.cpp"
+
+
+//------------------------------------------------------------------------
+// protocol.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/protocol.cpp"
+
+
+//------------------------------------------------------------------------
+// quantize.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/quantize.cpp"
+
+
+//------------------------------------------------------------------------
+// radiobox.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/radiobox.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/radiobox.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/radiobox.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/radiobox.cpp"
+#endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/slider.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/radiobox.cpp"
 #endif
+
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/slider.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// slidercmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/slidercmn.cpp"
-
-//------------------------------------------------------------------------
-// snglinst.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/snglinst.cpp"
-#endif
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/snglinst.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// socket.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/socket.cpp"
-
-//------------------------------------------------------------------------
-// socketiohandler.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/socketiohandler.cpp"
-
-//------------------------------------------------------------------------
-// sockgtk.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/sockgtk.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/sockgtk.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// sockmot.cpp
- 
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/sockmot.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// sockmsw.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/sockmsw.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// sockqt.cpp
- 
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/sockqt.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// sound.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/sound.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/sound.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/sound.cpp"
-#endif
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/sound.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/radiobox.cpp"
 #endif

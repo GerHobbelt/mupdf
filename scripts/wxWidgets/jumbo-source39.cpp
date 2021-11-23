@@ -1,58 +1,121 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
+
 //------------------------------------------------------------------------
-// richtooltip.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/richtooltip.cpp"
+// panelcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/panelcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// pango_x.cpp
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/pango_x.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// richtooltipcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/richtooltipcmn.cpp"
 
 //------------------------------------------------------------------------
-// richtooltipg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/richtooltipg.cpp"
+// paper.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/paper.cpp"
+
 
 //------------------------------------------------------------------------
-// rowheightcache.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/rowheightcache.cpp"
+// pen.cpp
 
-//------------------------------------------------------------------------
-// safearray.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ole/safearray.cpp"
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/pen.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// sashwin.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/sashwin.cpp"
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/pen.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/pen.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/pen.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/pen.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/pen.cpp"
+#endif
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/pen.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// sckaddr.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckaddr.cpp"
+// persist.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/persist.cpp"
+
 
 //------------------------------------------------------------------------
-// sckfile.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckfile.cpp"
+// pickerbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/pickerbase.cpp"
+
 
 //------------------------------------------------------------------------
-// sckipc.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckipc.cpp"
+// platinfo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/platinfo.cpp"
+
 
 //------------------------------------------------------------------------
-// sckstrm.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckstrm.cpp"
+// popupcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/popupcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// popupwin.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/popupwin.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/popupwin.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/popupwin.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/popupwin.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/popupwin.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/popupwin.cpp"
+#endif
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/popupwin.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// power.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/power.cpp"
+#endif

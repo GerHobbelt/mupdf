@@ -1,65 +1,99 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// headerctrlg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/headerctrlg.cpp"
 
 //------------------------------------------------------------------------
-// helpbase.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/helpbase.cpp"
+// gauge.cpp
 
-//------------------------------------------------------------------------
-// helpbest.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpbest.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// helpchm.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpchm.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// helpext.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/helpext.cpp"
-
-//------------------------------------------------------------------------
-// helpwin.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpwin.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// htmllbox.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/htmllbox.cpp"
-
-//------------------------------------------------------------------------
-// http.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/http.cpp"
-
-//------------------------------------------------------------------------
-// hyperlink.cpp
- 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/hyperlink.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/hyperlink.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/gauge.cpp"
 #endif
 
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/gauge.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/gauge.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/gauge.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/gauge.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/gauge.cpp"
+#endif
+
+
 //------------------------------------------------------------------------
-// hyperlinkg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/hyperlinkg.cpp"
+// gauge_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/gauge_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// gaugecmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/gaugecmn.cpp"
+
+
+//------------------------------------------------------------------------
+// gbsizer.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/gbsizer.cpp"
+
+
+//------------------------------------------------------------------------
+// gdicmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/gdicmn.cpp"
+
+
+//------------------------------------------------------------------------
+// gdiimage.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/gdiimage.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// gdiobj.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/gdiobj.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/gdiobj.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// gdiplus.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/gdiplus.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// geometry.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/geometry.cpp"
+
+
+//------------------------------------------------------------------------
+// gifdecod.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/gifdecod.cpp"

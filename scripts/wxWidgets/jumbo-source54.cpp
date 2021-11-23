@@ -1,56 +1,95 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// windowid.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/windowid.cpp"
 
 //------------------------------------------------------------------------
-// wizard.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/wizard.cpp"
+// textmeasurecmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/textmeasurecmn.cpp"
+
 
 //------------------------------------------------------------------------
-// wrapdfb.cpp
- 
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/wrapdfb.cpp"
+// tglbtn.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/tglbtn.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// wrapsizer.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wrapsizer.cpp"
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/tglbtn.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/tglbtn.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/tglbtn.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/tglbtn.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// wxcrt.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxcrt.cpp"
+// tglbtn_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/tglbtn_osx.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// wxprintf.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxprintf.cpp"
+// theme.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/theme.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// xlocale.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xlocale.cpp"
+// thread.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/thread.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// xpmdecod.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xpmdecod.cpp"
+// threadinfo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/threadinfo.cpp"
+
 
 //------------------------------------------------------------------------
-// xti.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xti.cpp"
+// threadno.cpp
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/threadno.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// xtistrm.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtistrm.cpp"
+// threadpsx.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/threadpsx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// threadsgi.cpp
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/threadsgi.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// time.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/time.cpp"

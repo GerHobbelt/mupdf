@@ -1,90 +1,111 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// propdlg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/propdlg.cpp"
 
 //------------------------------------------------------------------------
-// protocol.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/protocol.cpp"
+// nonownedwnd.cpp
 
-//------------------------------------------------------------------------
-// quantize.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/quantize.cpp"
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/nonownedwnd.cpp"
+#endif
 
-//------------------------------------------------------------------------
-// radiobox.cpp
- 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/radiobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/nonownedwnd.cpp"
 #endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/radiobox.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/radiobox.cpp"
-#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/radiobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/nonownedwnd.cpp"
 #endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/radiobox.cpp"
-#endif
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/radiobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/nonownedwnd.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// radiobtncmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/radiobtncmn.cpp"
 
 //------------------------------------------------------------------------
-// radiobut.cpp
- 
+// nonownedwnd_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/nonownedwnd_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// notebook.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/notebook.cpp"
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/radiobut.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/notebook.cpp"
 #endif
+
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/radiobut.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/notebook.cpp"
 #endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/radiobut.cpp"
-#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/radiobut.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/notebook.cpp"
 #endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/radiobut.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/notebook.cpp"
 #endif
+
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/radiobut.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/notebook.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// radiocmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/radiocmn.cpp"
 
 //------------------------------------------------------------------------
-// rearrangectrl.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/rearrangectrl.cpp"
+// notebook_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/notebook_osx.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// regconf.cpp
- 
+// notifmsg.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/notifmsg.cpp"
+#endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/regconf.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/notifmsg.cpp"
 #endif
 
+
 //------------------------------------------------------------------------
-// regex.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/regex.cpp"
+// notifmsgcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/notifmsgcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// notifmsgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/notifmsgg.cpp"
+
+
+//------------------------------------------------------------------------
+// notifmsgrt.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/rt/notifmsgrt.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// numdlgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/numdlgg.cpp"
+
+
+//------------------------------------------------------------------------
+// numformatter.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/numformatter.cpp"

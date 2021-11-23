@@ -1,84 +1,119 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// spinbtncmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/spinbtncmn.cpp"
 
 //------------------------------------------------------------------------
-// spinbutt.cpp
- 
+// radiobox_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/radiobox_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// radiobtncmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/radiobtncmn.cpp"
+
+
+//------------------------------------------------------------------------
+// radiobut.cpp
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/spinbutt.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/radiobut.cpp"
 #endif
+
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/spinbutt.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/radiobut.cpp"
 #endif
+
 #if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/spinbutt.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/radiobut.cpp"
 #endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/spinbutt.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/radiobut.cpp"
 #endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/spinbutt.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/radiobut.cpp"
 #endif
+
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/spinbutt.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/radiobut.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// spinctlg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/spinctlg.cpp"
 
 //------------------------------------------------------------------------
-// spinctrl.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/spinctrl.cpp"
+// radiobut_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/radiobut_osx.cpp"
 #endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/spinctrl.cpp"
-#endif
+
+
+//------------------------------------------------------------------------
+// radiocmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/radiocmn.cpp"
+
+
+//------------------------------------------------------------------------
+// rearrangectrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/rearrangectrl.cpp"
+
+
+//------------------------------------------------------------------------
+// regconf.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/spinctrl.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/spinctrl.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/regconf.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// spinctrlcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/spinctrlcmn.cpp"
 
 //------------------------------------------------------------------------
-// splash.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/splash.cpp"
+// regex.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/regex.cpp"
+
 
 //------------------------------------------------------------------------
-// splitter.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/splitter.cpp"
+// region.cpp
 
-//------------------------------------------------------------------------
-// srchcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/srchcmn.cpp"
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/region.cpp"
+#endif
 
-//------------------------------------------------------------------------
-// srchctlg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/srchctlg.cpp"
-
-//------------------------------------------------------------------------
-// srchctrl.cpp
- 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/srchctrl.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/region.cpp"
 #endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/region.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/region.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/region.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/region.cpp"
+#endif
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/region.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// regiong.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/regiong.cpp"

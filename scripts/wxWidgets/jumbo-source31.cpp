@@ -1,120 +1,81 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
+
 //------------------------------------------------------------------------
-// menu.cpp
- 
+// imagxpm.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagxpm.cpp"
+
+
+//------------------------------------------------------------------------
+// infobar.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/infobar.cpp"
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/menu.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/infobar.cpp"
 #endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/menu.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/menu.cpp"
-#endif
+
+
+//------------------------------------------------------------------------
+// iniconf.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/menu.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/iniconf.cpp"
 #endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/menu.cpp"
-#endif
+
+
+//------------------------------------------------------------------------
+// init.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/init.cpp"
+
+
+//------------------------------------------------------------------------
+// inpcons.cpp
+
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/menu.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/inpcons.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// menucmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/menucmn.cpp"
 
 //------------------------------------------------------------------------
-// menuitem.cpp
- 
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/menuitem.cpp"
+// inphand.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/inphand.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// intl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/intl.cpp"
+
+
+//------------------------------------------------------------------------
+// ipcbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/ipcbase.cpp"
+
+
+//------------------------------------------------------------------------
+// joystick.cpp
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/menuitem.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/menuitem.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/joystick.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// metafile.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/metafile.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/metafile.cpp"
-#endif
-
-//------------------------------------------------------------------------
-// mimecmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/mimecmn.cpp"
-
-//------------------------------------------------------------------------
-// mimetype.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/mimetype.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/mimetype.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/mimetype.cpp"
-#endif
 #if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/mimetype.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/joystick.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// minifram.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/minifram.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/minifram.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/minifram.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/minifram.cpp"
-#endif
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/minifram.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/minifram.cpp"
-#endif
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/minifram.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// mnemonics.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/mnemonics.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/mnemonics.cpp"
-#endif
+// languageinfo.cpp
 
-//------------------------------------------------------------------------
-// modalhook.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/modalhook.cpp"
-
-//------------------------------------------------------------------------
-// module.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/module.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/languageinfo.cpp"

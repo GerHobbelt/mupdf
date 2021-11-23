@@ -1,87 +1,105 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// taskbarbutton.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/taskbarbutton.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// taskbarcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/taskbarcmn.cpp"
+// settingsuniv.cpp
 
-//------------------------------------------------------------------------
-// tbarbase.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/tbarbase.cpp"
-
-//------------------------------------------------------------------------
-// textbuf.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/textbuf.cpp"
-
-//------------------------------------------------------------------------
-// textcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/textcmn.cpp"
-
-//------------------------------------------------------------------------
-// textctrl.cpp
- 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/textctrl.cpp"
-#endif
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/textctrl.cpp"
-#endif
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/textctrl.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/textctrl.cpp"
-#endif
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/textctrl.cpp"
-#endif
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/textctrl.cpp"
-#endif
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/textctrl.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/settingsuniv.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// textdlgg.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/textdlgg.cpp"
 
 //------------------------------------------------------------------------
-// textentry.cpp
- 
+// sizer.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sizer.cpp"
+
+
+//------------------------------------------------------------------------
+// slider.cpp
+
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/textentry.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/slider.cpp"
 #endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/slider.cpp"
+#endif
+
 #if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/textentry.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/slider.cpp"
 #endif
+
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/textentry.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/slider.cpp"
 #endif
+
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/textentry.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/slider.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// textentrycmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/textentrycmn.cpp"
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/slider.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// textfile.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/textfile.cpp"
+// slider_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/slider_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// slidercmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/slidercmn.cpp"
+
+
+//------------------------------------------------------------------------
+// snglinst.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/snglinst.cpp"
+#endif
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/snglinst.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// socket.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/socket.cpp"
+
+
+//------------------------------------------------------------------------
+// socketiohandler.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/socketiohandler.cpp"
+
+
+//------------------------------------------------------------------------
+// sockgtk.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/sockgtk.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/sockgtk.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// sockmot.cpp
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/sockmot.cpp"
+#endif

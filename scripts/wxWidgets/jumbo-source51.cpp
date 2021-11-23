@@ -1,68 +1,69 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
+
 //------------------------------------------------------------------------
-// utilsgui.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/utilsgui.cpp"
+// stdpbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stdpbase.cpp"
+
+
+//------------------------------------------------------------------------
+// stdrend.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/stdrend.cpp"
 #endif
 
+
 //------------------------------------------------------------------------
-// utilsres.cpp
- 
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/utilsres.cpp"
+// stdstream.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stdstream.cpp"
+
+
+//------------------------------------------------------------------------
+// stockitem.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stockitem.cpp"
+
+
+//------------------------------------------------------------------------
+// stopwatch.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stopwatch.cpp"
+
+
+//------------------------------------------------------------------------
+// strconv_cf.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/strconv_cf.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// utilsrt.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/rt/utilsrt.cpp"
-#endif
 
 //------------------------------------------------------------------------
-// utilswin.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/utilswin.cpp"
-#endif
+// stream.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stream.cpp"
+
 
 //------------------------------------------------------------------------
-// utilsx.cpp
- 
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/utilsx.cpp"
-#endif
+// string.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/string.cpp"
+
 
 //------------------------------------------------------------------------
-// uuid.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ole/uuid.cpp"
-#endif
+// stringimpl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stringimpl.cpp"
+
 
 //------------------------------------------------------------------------
-// uxtheme.cpp
- 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/uxtheme.cpp"
-#endif
+// stringops.cpp
 
-//------------------------------------------------------------------------
-// valgen.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/valgen.cpp"
-
-//------------------------------------------------------------------------
-// validate.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/validate.cpp"
-
-//------------------------------------------------------------------------
-// valnum.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/valnum.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stringops.cpp"

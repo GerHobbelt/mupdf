@@ -1,62 +1,101 @@
 
+
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
-//------------------------------------------------------------------------
-// hyperlnkcmn.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/hyperlnkcmn.cpp"
 
 //------------------------------------------------------------------------
-// icon.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/icon.cpp"
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/icon.cpp"
-#endif
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/icon.cpp"
-#endif
+// glcanvas.cpp
 
-//------------------------------------------------------------------------
-// iconbndl.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/iconbndl.cpp"
-
-//------------------------------------------------------------------------
-// imagall.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagall.cpp"
-
-//------------------------------------------------------------------------
-// imagbmp.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagbmp.cpp"
-
-//------------------------------------------------------------------------
-// image.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/image.cpp"
-
-//------------------------------------------------------------------------
-// image_gtk.cpp
- 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/image_gtk.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/glcanvas.cpp"
 #endif
 
-//------------------------------------------------------------------------
-// imagfill.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagfill.cpp"
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/glcanvas.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/glcanvas.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/glcanvas.cpp"
+#endif
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/glcanvas.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// imaggif.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imaggif.cpp"
+// glcanvas_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/glcanvas_osx.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
-// imagiff.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagiff.cpp"
+// glcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/glcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// glegl.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/glegl.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// glx11.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/glx11.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// graphcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/graphcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// graphicc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/graphicc.cpp"
+
+
+//------------------------------------------------------------------------
+// graphics.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphics.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/graphics.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/graphics.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// graphicsd2d.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphicsd2d.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// grid.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grid.cpp"
