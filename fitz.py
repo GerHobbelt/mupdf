@@ -5063,14 +5063,14 @@ class Page:
         #memset(&options, 0, sizeof options);
         options = mupdf.StextOptions(flags)
         rect = JM_rect_from_py(clip)
-        jlib.log('{clip=} {rect=}')
+        #jlib.log('{clip=} {rect=}')
         ctm = JM_matrix_from_py(matrix)
         tpage = mupdf.StextPage(rect)
-        jlib.log('{type(tpage)=}')
+        #jlib.log('{type(tpage)=}')
         dev = mupdf.mfz_new_stext_device(tpage, options)
         mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
-        jlib.log('returning {tpage=}')
+        #jlib.log('returning {tpage=}')
         return tpage
 
     def _pdf_page(self):
@@ -6449,9 +6449,9 @@ class Page:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
         #textpage.parent = weakref.proxy(self)
-        jlib.log('{textpage=}')
+        #jlib.log('{textpage=}')
         textpage = TextPage(textpage)
-        jlib.log('{textpage=}')
+        #jlib.log('{textpage=}')
         return textpage
 
     def getDisplayList(self, annots=1):
@@ -6812,7 +6812,7 @@ class Page:
         page, text = args
         quads = kwargs.get("quads", 0)
         clip = kwargs.get("clip")
-        jlib.log('{clip=}')
+        #jlib.log('{clip=}')
         textpage = kwargs.get("textpage")
         if clip != None:
             clip = Rect(clip)
@@ -6820,7 +6820,7 @@ class Page:
             "flags",
             TEXT_DEHYPHENATE | TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES,
             )
-        jlib.log('{flags=}')
+        #jlib.log('{flags=}')
 
         CheckParent(page)
         tp = textpage
@@ -6828,9 +6828,9 @@ class Page:
             tp = page.get_textpage(clip=clip, flags=flags)  # create TextPage
         elif getattr(tp, "parent") != page:
             raise ValueError("not a textpage of this page")
-        jlib.log('{type(tp)=}')
+        #jlib.log('{type(tp)=}')
         rlist = tp.search(text, quads=quads)
-        jlib.log('returning {len(rlist)=} {rlist=}')
+        #jlib.log('returning {len(rlist)=} {rlist=}')
         return rlist
 
 
@@ -9826,8 +9826,8 @@ class TextPage:
         #val = _fitz.TextPage_search(self, needle, hit_max, quads)
         val = JM_search_stext_page(self.this, needle)
         nl = '\n'
-        jlib.log('{quads=}')
-        jlib.log('val:\n{nl.join([str(i) for i in val])}')
+        #jlib.log('{quads=}')
+        #jlib.log('val:\n{nl.join([str(i) for i in val])}')
         if not val:
             return val
         items = len(val)
@@ -9839,22 +9839,22 @@ class TextPage:
                 val[i] = q.rect
         if quads:
             return val
-        for v in val:
-            jlib.log('{type(v)=} {v=}')
+        #for v in val:
+        #    jlib.log('{type(v)=} {v=}')
         i = 0  # join overlapping rects on the same line
         while i < items - 1:
             v1 = val[i]
             v2 = val[i + 1]
-            jlib.log('{v1.y1=} {v2.y1=} {v1 & v2=} {(v1 & v2).is_empty=}')
+            #jlib.log('{v1.y1=} {v2.y1=} {v1 & v2=} {(v1 & v2).is_empty=}')
             if v1.y1 != v2.y1 or (v1 & v2).is_empty:
                 i += 1
-                jlib.log('not joining')
+                #jlib.log('not joining')
                 continue  # no overlap on same line
-            jlib.log('joining {v1=} {v2=}')
+            #jlib.log('joining {v1=} {v2=}')
             val[i] = v1 | v2  # join rectangles
             del val[i + 1]  # remove v2
             items -= 1  # reduce item count
-        jlib.log('returning {val=}')
+        #jlib.log('returning {val=}')
         return val
 
 
@@ -12525,10 +12525,10 @@ def JM_search_stext_page(page, needle):
     #fz_stext_char *ch;
     #fz_buffer *buffer = NULL;
     #const char *haystack, *begin, *end;
-    jlib.log('{page=} {needle=}')
+    #jlib.log('{page=} {needle=}')
     rect = mupdf.Rect(page.m_internal.mediabox)
     #int c, inside;
-    jlib.log('{rect=}')
+    #jlib.log('{rect=}')
 
     if not needle:
         return
@@ -12544,31 +12544,30 @@ def JM_search_stext_page(page, needle):
 
     buffer_ = JM_new_buffer_from_stext_page(page)
     haystack_string = mupdf.mfz_string_from_buffer(buffer_)
-    jlib.log('{haystack_string=}')
+    #jlib.log('{haystack_string=}')
     haystack = 0
     begin, end = find_string(haystack_string[haystack:], needle)
-    jlib.log('{begin=} {end=}')
+    #jlib.log('{begin=} {end=}')
     if begin is None:
         #goto no_more_matches;
         jlib.log('returning {quads=}')
         return quads
-    jlib.log('{haystack=} {begin-haystack=}')
+    #jlib.log('{haystack=} {begin-haystack=}')
 
     begin += haystack
     end += haystack
     inside = 0
-    verbose = 1;
+    verbose = 0
     i = 0
     for block in page:
-        jlib.log('block')
+        #jlib.log('block')
         if block.m_internal.type != mupdf.FZ_STEXT_BLOCK_TEXT:
             continue
         for line in block:
-            jlib.log('line')
+            #jlib.log('line')
             for ch in line:
                 i += 1
-                verbose = i > 950 and i < 1000
-                verbose = 0
+                #verbose = i > 950 and i < 1000
                 if (verbose): jlib.log('========================================')
                 if (verbose): jlib.log('ch loop start: ch {i=} {inside=} {haystack=}')
                 if not mupdf.mfz_is_infinite_rect(rect):
@@ -14664,19 +14663,19 @@ def on_highlight_char(hits, line, ch):
     vfuzz = ch.m_internal.size * hits.vfuzz
     hfuzz = ch.m_internal.size * hits.hfuzz
     ch_quad = JM_char_quad(line, ch)
-    jlib.log('{hits.len=} {len(hits.quads)=} {vfuzz=} {hfuzz=} {ch_quad=}')
+    #jlib.log('{hits.len=} {len(hits.quads)=} {vfuzz=} {hfuzz=} {ch_quad=}')
     if hits.len > 0:
         # fixme: end = hits.quads[-1]
         quad = hits.quads[hits.len - 1]
         end = JM_quad_from_py(quad)
-        jlib.log('{line.m_internal.dir=} {quad=} {end=} {ch_quad=}')
+        #jlib.log('{line.m_internal.dir=} {quad=} {end=} {ch_quad=}')
         if ( 1
                 and hdist(line.m_internal.dir, end.lr, ch_quad.ll) < hfuzz
                 and vdist(line.m_internal.dir, end.lr, ch_quad.ll) < vfuzz
                 and hdist(line.m_internal.dir, end.ur, ch_quad.ul) < hfuzz
                 and vdist(line.m_internal.dir, end.ur, ch_quad.ul) < vfuzz
                 ):
-            jlib.log('extending')
+            #jlib.log('extending')
             end.ur = ch_quad.ur
             end.lr = ch_quad.lr
             #quad = JM_py_from_quad(end)
