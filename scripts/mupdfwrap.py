@@ -4375,7 +4375,7 @@ def make_function_wrapper_class_aware(
         if arg.alt and arg.out_param:
             if has_refs(tu, arg.alt.type):
                 keep_fn, drop_fn = get_keep_drop(arg)
-                out_cpp.write( f'    /* This out-param .m_internal will be overwritten. */\n')
+                out_cpp.write( f'    /* Out-param {arg.name}.m_internal will be overwritten. */\n')
                 out_cpp.write( f'    {drop_fn}({arg.name}.m_internal);\n')
                 out_cpp.write( f'    {arg.name}.m_internal = nullptr;\n')
 
@@ -4439,7 +4439,7 @@ def make_function_wrapper_class_aware(
             if has_refs(tu, arg.alt.type):
                 # Assume out-param is a borrowed reference.
                 keep_fn, drop_fn = get_keep_drop(arg)
-                out_cpp.write( f'    /* We assume that this out-param is a borrowed reference. */\n')
+                out_cpp.write( f'    /* We assume that out-param {arg.name}.m_internal is a borrowed reference. */\n')
                 out_cpp.write( f'    {keep_fn}({arg.name}.m_internal);\n')
 
     if not return_void:
