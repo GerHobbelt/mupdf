@@ -3400,7 +3400,14 @@ class Document:
         """Get length of xref table."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_xref_length(self)
+        #return _fitz.Document_xref_length(self)
+        xreflen = 0
+        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
+        pdf = self._pdf_document()
+        if pdf:
+            xreflen = muodf.mpdf_xref_len(pdf)
+        return xreflen
+
 
     def xref_object(self, xref, compressed=0, ascii=0):
         """Get xref object source as a string."""
@@ -4079,10 +4086,10 @@ open = Document
 
 
 class Font:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Font, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Font, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Font, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Font, name)
 
     def __init__(self, fontname=None, fontfile=None, fontbuffer=None, script=0, language=None, ordering=-1, is_bold=0, is_italic=0, is_serif=0):
 
@@ -4103,16 +4110,56 @@ class Font:
                 fontname = Base14_fontdict.get(fontname.lower(), fontname)
 
 
-        this = _fitz.new_Font(fontname, fontfile, fontbuffer, script, language, ordering, is_bold, is_italic, is_serif)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+        #this = _fitz.new_Font(fontname, fontfile, fontbuffer, script, language, ordering, is_bold, is_italic, is_serif)
+        lang = mupdf.mfz_text_language_from_string(language)
+        font = JM_get_font(fontname, fontfile,
+                   fontbuffer, script, lang, ordering,
+                   is_bold, is_italic, is_serif)
 
-    def glyph_advance(self, chr, language=None, script=0, wmode=0):
+        self.this = font
+        #try:
+        #    self.this.append(this)
+        #except __builtin__.Exception:
+        #    self.this = this
+
+    def char_lengths(self, text, fontsize=11, language=None, script=0, wmode=0, small_caps=0):
+        """Return tuple of char lengths of unicode 'text' under a fontsize."""
+        #return _fitz.Font_char_lengths(self, text, fontsize, language, script, wmode, small_caps)
+        #fz_font *font, *thisfont = (fz_font *) self;
+        lang = mupdf.mfz_text_language_from_string(language)
+        #if not PyUnicode_Check(text) or PyUnicode_READY(text) != 0:
+        #    THROWMSG("bad type: text")
+        #len_ = PyUnicode_GET_LENGTH(text)
+        #kind = PyUnicode_KIND(text)
+        #data = PyUnicode_DATA(text)
+        rc = []
+        for ch in text:
+            c = ord(ch)
+            if small_caps:
+                gid = mupdf.mfz_encode_character_sc(thisfont, c)
+                if gid >= 0:
+                    font = self.this
+            else:
+                font = mupdf.Font(0)
+                gid = mupdf.mfz_encode_character_with_fallback(self.this, c, script, lang, font)
+            rc.append(fontsize * mupdf.mfz_advance_glyph(font, gid, wmode))
+        return rc
+
+    def glyph_advance(self, chr_, language=None, script=0, wmode=0, small_caps=0):
         """Return the glyph width of a unicode (font size 1)."""
 
-        return _fitz.Font_glyph_advance(self, chr, language, script, wmode)
+        #return _fitz.Font_glyph_advance(self, chr, language, script, wmode)
+        #fz_font *font, *thisfont = (fz_font *) self;
+        #int gid;
+        lang = mupdf.mfz_text_language_from_string(language)
+        if small_caps:
+            gid = mupdf.mfz_encode_character_sc(thisfont, chr_)
+            if gid >= 0:
+                font = self.this
+        else:
+            font = mupdf.Font(0)
+            gid = mupdf.mfz_encode_character_with_fallback(self.this, chr_, script, lang, font)
+        return mupdf.mfz_advance_glyph(font, gid, wmode)
 
 
     def glyph_bbox(self, chr, language=None, script=0):
@@ -4131,6 +4178,15 @@ class Font:
 
 
     def valid_codepoints(self):
+        '''
+        list of valid unicodes of a fz_font
+        '''
+        # fixme: not currently implemented. Only use cases within PyMuPDF
+        # are in PyMuPDF/tests/test_font.py:test_font1() and _fitz.py:repair_mono_font().
+        # The latter can be implemented using fz_glyph_count().
+        return []
+    '''
+    def valid_codepoints(self):
         from array import array
         gc = self.glyph_count
         cp = array("l", (0,) * gc)
@@ -4140,29 +4196,40 @@ class Font:
 
 
     def _valid_unicodes(self, arr):
-        return _fitz.Font__valid_unicodes(self, arr)
-    @property
+        #return _fitz.Font__valid_unicodes(self, arr)
+        temp = arr[0]
+        void *ptr = PyLong_AsVoidPtr(temp);
+        JM_valid_chars(gctx, font, ptr);
+        Py_DECREF(temp);
+    '''
 
+    @property
     def flags(self):
         return _fitz.Font_flags(self)
     @property
 
     def isWritable(self):
         return _fitz.Font_isWritable(self)
-    @property
 
+    @property
     def name(self):
-        return _fitz.Font_name(self)
-    @property
+        #return _fitz.Font_name(self)
+        return mupdf.mfz_font_name(self.this)
 
+    @property
     def glyph_count(self):
-        return _fitz.Font_glyph_count(self)
+        #return _fitz.Font_glyph_count(self)
+        return self.this.m_internal.glyph_count
+
     @property
 
     def buffer(self):
-        return _fitz.Font_buffer(self)
-    @property
+        #return _fitz.Font_buffer(self)
+        buffer_ = mupdf.Buffer( mupdf.keep_buffer( self.this.m_internal.buffer))
+        size, data = buffer_.buffer_extract_raw()
+        return mupdf.raw_to_python_bytes( data, size)
 
+    @property
     def bbox(self):
         val = _fitz.Font_bbox(self)
         val = Rect(val)
@@ -9232,7 +9299,7 @@ class Shape(object):
         )
         jlib.log('self.page.insert_font() => {xref=}')
         fontinfo = CheckFontInfo(self.doc, xref)
-        jlib.log('{fontinfo=}')
+        #jlib.log('{fontinfo=}')
 
         fontdict = fontinfo[1]
         ordering = fontdict["ordering"]
@@ -11008,6 +11075,26 @@ def JM_UnicodeFromStr(s):
     assert isinstance(s, str), f'type(s)={type(s)} s={s}'
     return s
 
+
+#def JM_valid_chars(font):
+#    '''
+#    list of valid unicodes of a fz_font
+#    '''
+	#FT_Face face = font->ft_face;
+	#FT_ULong ucs;
+	#FT_UInt gid;
+	#long *table = (long *)arr;
+	#fz_lock(ctx, FZ_LOCK_FREETYPE);
+	#ucs = FT_Get_First_Char(face, &gid);
+	#while (gid > 0)
+	#{
+	#	if (gid < (FT_ULong)face->num_glyphs && face->num_glyphs > 0)
+	#		table[gid] = (long)ucs;
+	#	ucs = FT_Get_Next_Char(face, ucs, &gid);
+	#}
+	#fz_unlock(ctx, FZ_LOCK_FREETYPE);
+	#return;
+
 def JM_add_annot_id(annot, stem):
     assert isinstance(annot, mupdf.PdfAnnot)
     names = JM_get_annot_id_list(annot.annot_page())
@@ -11812,6 +11899,62 @@ def JM_get_border_style(style):
     elif s.startswith("i") or s.startswith("I"):    val = mupdf.PDF_ENUM_NAME_I
     elif s.startswith("u") or s.startswith("U"):    val = mupdf.PDF_ENUM_NAME_U
     return val
+
+
+def JM_get_font(
+        fontname,
+        fontfile,
+        fontbuffer,
+        script,
+        lang,
+        ordering,
+        is_bold,
+        is_italic,
+        is_serif,
+        ):
+    '''
+    return a fz_font from a number of parameters
+    '''
+    index = 0
+    font = None
+    if fontfile:
+        #goto have_file;
+        font = mupdf.mfz_new_font_from_file(None, fontfile, index, 0)
+        if not font.m_internal:
+            THROWMSG(ctx, "could not create font")
+        return font
+
+    if fontbuffer:
+        #goto have_buffer;
+        res = JM_BufferFromBytes(fontbuffer)
+        font = mupdf.mfz_new_font_from_buffer(None, res, index, 0)
+        if not font.m_internal:
+            THROWMSG(ctx, "could not create font");
+        return font
+
+    if ordering > -1:
+        # goto have_cjk;
+        data, size, index = mupdf.mfz_lookup_cjk_font(ordering);
+        if data:
+            font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0);
+        if not font.m_internal:
+            THROWMSG(ctx, "could not create font");
+        return font
+
+    if fontname:
+        # goto have_base14;
+        data, size = mupdf.mfz_lookup_base14_font(fontname)
+        if data:
+            font = mupdf.mfz_new_font_from_memory(fontname, data, size, 0, 0)
+        if font.m_internal:
+            return font
+
+        data, size = mupdf.mfz_lookup_builtin_font(fontname, is_bold, is_italic)
+        if data:
+            font = mupdf.mfz_new_font_from_memory(fontname, data, size, 0, 0)
+        if not font.m_internal:
+            THROWMSG(ctx, "could not create font");
+        return font
 
 
 def JM_get_widget_properties(annot, Widget):
