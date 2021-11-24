@@ -4274,63 +4274,59 @@ def make_function_wrapper_class_aware(
 
     return_cursor = None
     return_type = None
-    if 0:
-        fn_h = f'{decl_h}'
-        fn_cpp = f'{classname}::{decl_cpp}'
-    else:
-        fn_h = declaration_text( fn_cursor.result_type, decl_h)
-        fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
+    fn_h = declaration_text( fn_cursor.result_type, decl_h)
+    fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
 
-        # See whether we can convert return type to an instance of a wrapper
-        # class.
-        #
-        if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
-            t = fn_cursor.result_type.get_pointee().get_canonical()
-            return_cursor = find_struct( tu, t.spelling, require_definition=False)
-            if return_cursor:
-                return_extras = classextras.get( return_cursor.spelling)
-                if return_extras:
-                    # Change return type to be instance of class wrapper.
-                    return_type = rename.class_(return_cursor.spelling)
-                    if g_show_details(return_cursor.type.spelling):
-                        log('{return_cursor.type.spelling=}'
-                                ' {return_cursor.spelling=}'
-                                ' {struct_name=} {return_extras.copyable=}'
-                                ' {return_extras.constructor_raw=}'
-                                )
-                    if return_extras.copyable and return_extras.constructor_raw:
-                        fn_h = f'{return_type} {decl_h}'
-                        fn_cpp = f'{return_type} {decl_cpp}'
-                        wrap_return = 'pointer'
-                    else:
-                        if not return_extras.copyable:
-                            warning_not_copyable = True
-                        if not return_extras.constructor_raw:
-                            warning_no_raw_constructor = True
-        else:
-            # The fz_*() function returns by value. See whether we can convert its
-            # return type to an instance of a wrapping class.
-            #
-            # If so, we will use constructor that takes pointer to the fz_
-            # struct. C++ doesn't allow us to use address of temporary, so we
-            # generate code like this:
-            #
-            #   fz_quad_s ret = mupdf_snap_selection(...);
-            #   return Quad(&ret);
-            #
-            t = fn_cursor.result_type.get_canonical()
-            return_cursor = find_struct( tu, t.spelling)
-            if return_cursor:
-                tt = return_cursor.type.get_canonical()
-                if tt.kind == clang.cindex.TypeKind.ENUM:
-                    # For now, we return this type directly with no wrapping.
-                    pass
-                else:
-                    return_extras = classextras.get( return_cursor.type.spelling)
-                    return_type = rename.class_(return_cursor.type.spelling)
+    # See whether we can convert return type to an instance of a wrapper
+    # class.
+    #
+    if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
+        t = fn_cursor.result_type.get_pointee().get_canonical()
+        return_cursor = find_struct( tu, t.spelling, require_definition=False)
+        if return_cursor:
+            return_extras = classextras.get( return_cursor.spelling)
+            if return_extras:
+                # Change return type to be instance of class wrapper.
+                return_type = rename.class_(return_cursor.spelling)
+                if g_show_details(return_cursor.type.spelling):
+                    log('{return_cursor.type.spelling=}'
+                            ' {return_cursor.spelling=}'
+                            ' {struct_name=} {return_extras.copyable=}'
+                            ' {return_extras.constructor_raw=}'
+                            )
+                if return_extras.copyable and return_extras.constructor_raw:
                     fn_h = f'{return_type} {decl_h}'
                     fn_cpp = f'{return_type} {decl_cpp}'
-                    wrap_return = 'value'
+                    wrap_return = 'pointer'
+                else:
+                    if not return_extras.copyable:
+                        warning_not_copyable = True
+                    if not return_extras.constructor_raw:
+                        warning_no_raw_constructor = True
+    else:
+        # The fz_*() function returns by value. See whether we can convert its
+        # return type to an instance of a wrapping class.
+        #
+        # If so, we will use constructor that takes pointer to the fz_
+        # struct. C++ doesn't allow us to use address of temporary, so we
+        # generate code like this:
+        #
+        #   fz_quad_s ret = mupdf_snap_selection(...);
+        #   return Quad(&ret);
+        #
+        t = fn_cursor.result_type.get_canonical()
+        return_cursor = find_struct( tu, t.spelling)
+        if return_cursor:
+            tt = return_cursor.type.get_canonical()
+            if tt.kind == clang.cindex.TypeKind.ENUM:
+                # For now, we return this type directly with no wrapping.
+                pass
+            else:
+                return_extras = classextras.get( return_cursor.type.spelling)
+                return_type = rename.class_(return_cursor.type.spelling)
+                fn_h = f'{return_type} {decl_h}'
+                fn_cpp = f'{return_type} {decl_cpp}'
+                wrap_return = 'value'
 
     if warning_not_copyable:
         log( '*** warning: {decl_h}: Not able to return wrapping class {return_type}'
@@ -4358,42 +4354,33 @@ def make_function_wrapper_class_aware(
 
     out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
 
-    if 0:
-        class_write_method_body(
-                tu,
-                struct_name,
-                classname,
-                fnname,
-                out_cpp,
-                extras,
-                struct_cursor,
-                fn_cursor,
-                return_cursor,
-                wrap_return,
-                )
-
-
-
     out_cpp.write( f'{{\n')
     return_void = (fn_cursor.result_type.spelling == 'void')
 
-    # Write function call.
-    if 0 and constructor:
-        if extras.pod:
-            if extras.pod == 'inline':
-                out_cpp.write( f'    *({struct_name}*) &this->{get_field0(struct_cursor.type).spelling} = ')
-            else:
-                out_cpp.write( f'    this->m_internal = ')
-            if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
-                out_cpp.write( f'*')
+    def get_keep_drop(arg):
+        name = clip( arg.alt.type.spelling, 'struct ')
+        if name.startswith('fz_'):
+            prefix = 'fz'
+            name = name[3:]
+        elif name.startswith('pdf_'):
+            prefix = 'pdf'
+            name = name[4:]
         else:
-            out_cpp.write( f'    this->m_internal = ')
-            if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
-                pass
-            else:
-                assert 0, 'cannot handle underlying fn returning by value when not pod.'
-        out_cpp.write( f'{rename.function_call(fnname)}(')
+            assert 0
+        return rename.function(f'{prefix}_keep_{name}'), rename.function(f'{prefix}_drop_{name}')
 
+    # Handle wrapper-class out-params - need to drop .m_internal and set to
+    # null.
+    for arg in get_args( tu, fn_cursor):
+        if arg.alt and arg.out_param:
+            if has_refs(tu, arg.alt.type):
+                keep_fn, drop_fn = get_keep_drop(arg)
+                out_cpp.write( f'    /* This out-param .m_internal will be overwritten. */\n')
+                out_cpp.write( f'    {drop_fn}({arg.name}.m_internal);\n')
+                out_cpp.write( f'    {arg.name}.m_internal = nullptr;\n')
+
+    if 0:
+        pass
     elif wrap_return == 'value':
         out_cpp.write( f'    {return_cursor.spelling} temp = mupdf::{rename.function(fnname)}(')
     elif wrap_return == 'pointer':
@@ -4445,38 +4432,21 @@ def make_function_wrapper_class_aware(
     elif wrap_return == 'pointer':
         out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
 
-    if 0:
-        if has_refs( tu, struct_cursor.type):
-            # Write code that does runtime checking of reference counts.
-            out_cpp.write( f'    if (s_check_refs)\n')
-            out_cpp.write( f'    {{\n')
-            if constructor:
-                out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
-            else:
-                out_cpp.write( f'        s_{classname}_refs_check.check( this, __FILE__, __LINE__, __FUNCTION__);\n')
-            out_cpp.write( f'    }}\n')
+    # Handle wrapper-class out-params - need to keep arg.m_internal and set to
+    # null.
+    for arg in get_args( tu, fn_cursor):
+        if arg.alt and arg.out_param:
+            if has_refs(tu, arg.alt.type):
+                # Assume out-param is a borrowed reference.
+                keep_fn, drop_fn = get_keep_drop(arg)
+                out_cpp.write( f'    /* We assume that this out-param is a borrowed reference. */\n')
+                out_cpp.write( f'    {keep_fn}({arg.name}.m_internal);\n')
 
     if not return_void:
         out_cpp.write( f'    return ret;\n')
 
     out_cpp.write( f'}}\n')
     out_cpp.write( f'\n')
-
-
-
-
-
-    if 0 and generated and num_out_params:
-        make_python_class_method_outparam_override(
-                tu,
-                fn_cursor,
-                fnname,
-                generated.swig_python,
-                struct_name,
-                classname,
-                return_type,
-                )
-
 
 
 def make_namespace_open( namespace, out):
