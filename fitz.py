@@ -8368,7 +8368,35 @@ class Pixmap:
 
 
 class Point(object):
-    """Point() - all zeros\nPoint(x, y)\nPoint(Point) - new copy\nPoint(sequence) - from 'sequence'"""
+    """Point() - all zeros
+    Point(x, y)
+    Point(Point) - new copy
+    Point(sequence) - from 'sequence'
+    """
+    def __abs__(self):
+        return math.sqrt(self.x * self.x + self.y * self.y)
+
+    def __add__(self, p):
+        if hasattr(p, "__float__"):
+            return Point(self.x + p, self.y + p)
+        if len(p) != 2:
+            raise ValueError("bad Point: sequ. length")
+        return Point(self.x + p[0], self.y + p[1])
+
+    def __bool__(self):
+        return not (max(self) == min(self) == 0)
+
+    def __eq__(self, p):
+        if not hasattr(p, "__len__"):
+            return False
+        return len(p) == 2 and bool(self - p) is False
+
+    def __getitem__(self, i):
+        return (self.x, self.y)[i]
+
+    def __hash__(self):
+        return hash(tuple(self))
+
     def __init__(self, *args):
         if not args:
             self.x = 0.0
@@ -8392,21 +8420,50 @@ class Point(object):
             return None
         raise ValueError("bad Point constructor")
 
-    def transform(self, m):
-        """Replace point by its transformation with matrix-like m."""
-        if len(m) != 6:
-            raise ValueError("bad Matrix: sequ. length")
-        self.x, self.y = TOOLS._transform_point(self, m)
-        return self
+    def __len__(self):
+        return 2
 
-    @property
-    def unit(self):
-        """Unit vector of the point."""
-        s = self.x * self.x + self.y * self.y
-        if s < EPSILON:
-            return Point(0,0)
-        s = math.sqrt(s)
-        return Point(self.x / s, self.y / s)
+    def __mul__(self, m):
+        if hasattr(m, "__float__"):
+            return Point(self.x * m, self.y * m)
+        p = Point(self)
+        return p.transform(m)
+
+    def __neg__(self):
+        return Point(-self.x, -self.y)
+
+    def __nonzero__(self):
+        return not (max(self) == min(self) == 0)
+
+    def __pos__(self):
+        return Point(self)
+
+    def __repr__(self):
+        return "Point" + str(tuple(self))
+
+    def __setitem__(self, i, v):
+        v = float(v)
+        if   i == 0: self.x = v
+        elif i == 1: self.y = v
+        else:
+            raise IndexError("index out of range")
+        return None
+
+    def __sub__(self, p):
+        if hasattr(p, "__float__"):
+            return Point(self.x - p, self.y - p)
+        if len(p) != 2:
+            raise ValueError("bad Point: sequ. length")
+        return Point(self.x - p[0], self.y - p[1])
+
+    def __truediv__(self, m):
+        if hasattr(m, "__float__"):
+            return Point(self.x * 1./m, self.y * 1./m)
+        m1 = TOOLS._invert_matrix(m)[1]
+        if not m1:
+            raise ZeroDivisionError("matrix not invertible")
+        p = Point(self)
+        return p.transform(m1)
 
     @property
     def abs_unit(self):
@@ -8467,81 +8524,52 @@ class Point(object):
             else:
                 return (r.x0 - self.x) * f
 
-    def __getitem__(self, i):
-        return (self.x, self.y)[i]
+    def transform(self, m):
+        """Replace point by its transformation with matrix-like m."""
+        if len(m) != 6:
+            raise ValueError("bad Matrix: sequ. length")
+        self.x, self.y = TOOLS._transform_point(self, m)
+        return self
 
-    def __len__(self):
-        return 2
-
-    def __setitem__(self, i, v):
-        v = float(v)
-        if   i == 0: self.x = v
-        elif i == 1: self.y = v
-        else:
-            raise IndexError("index out of range")
-        return None
-
-    def __repr__(self):
-        return "Point" + str(tuple(self))
-
-    def __pos__(self):
-        return Point(self)
-
-    def __neg__(self):
-        return Point(-self.x, -self.y)
-
-    def __bool__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __nonzero__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __eq__(self, p):
-        if not hasattr(p, "__len__"):
-            return False
-        return len(p) == 2 and bool(self - p) is False
-
-    def __abs__(self):
-        return math.sqrt(self.x * self.x + self.y * self.y)
-
-    norm = __abs__
-
-    def __add__(self, p):
-        if hasattr(p, "__float__"):
-            return Point(self.x + p, self.y + p)
-        if len(p) != 2:
-            raise ValueError("bad Point: sequ. length")
-        return Point(self.x + p[0], self.y + p[1])
-
-    def __sub__(self, p):
-        if hasattr(p, "__float__"):
-            return Point(self.x - p, self.y - p)
-        if len(p) != 2:
-            raise ValueError("bad Point: sequ. length")
-        return Point(self.x - p[0], self.y - p[1])
-
-    def __mul__(self, m):
-        if hasattr(m, "__float__"):
-            return Point(self.x * m, self.y * m)
-        p = Point(self)
-        return p.transform(m)
-
-    def __truediv__(self, m):
-        if hasattr(m, "__float__"):
-            return Point(self.x * 1./m, self.y * 1./m)
-        m1 = TOOLS._invert_matrix(m)[1]
-        if not m1:
-            raise ZeroDivisionError("matrix not invertible")
-        p = Point(self)
-        return p.transform(m1)
+    @property
+    def unit(self):
+        """Unit vector of the point."""
+        s = self.x * self.x + self.y * self.y
+        if s < EPSILON:
+            return Point(0,0)
+        s = math.sqrt(s)
+        return Point(self.x / s, self.y / s)
 
     __div__ = __truediv__
+    norm = __abs__
 
-    def __hash__(self):
-        return hash(tuple(self))
 
 class Quad(object):
     """Quad() - all zero points\nQuad(ul, ur, ll, lr)\nQuad(quad) - new copy\nQuad(sequence) - from 'sequence'"""
+
+    def __abs__(self):
+        if self.is_empty:
+            return 0.0
+        return abs(self.ul - self.ur) * abs(self.ul - self.ll)
+
+    def __bool__(self):
+        return not self.is_empty
+
+    def __eq__(self, quad):
+        if not hasattr(quad, "__len__"):
+            return False
+        return len(quad) == 4 and (
+            self.ul == quad[0] and
+            self.ur == quad[1] and
+            self.ll == quad[2] and
+            self.lr == quad[3]
+        )
+
+    def __getitem__(self, i):
+        return (self.ul, self.ur, self.ll, self.lr)[i]
+
+    def __hash__(self):
+        return hash(tuple(self))
 
     def __init__(self, *args):
         if not args:
@@ -8566,6 +8594,87 @@ class Quad(object):
             self.ul, self.ur, self.ll, self.lr = map(Point, l)
             return None
         raise ValueError("bad Quad constructor")
+
+    def __len__(self):
+        return 4
+
+    def __mul__(self, m):
+        r = Quad(self)
+        r = r.transform(m)
+        return r
+
+    def __neg__(self):
+        return Quad(-self.ul, -self.ur, -self.ll, -self.lr)
+
+    def __nonzero__(self):
+        return not self.is_empty
+
+    def __pos__(self):
+        return Quad(self)
+
+    def __repr__(self):
+        return "Quad" + str(tuple(self))
+
+    def __setitem__(self, i, v):
+        if   i == 0: self.ul = Point(v)
+        elif i == 1: self.ur = Point(v)
+        elif i == 2: self.ll = Point(v)
+        elif i == 3: self.lr = Point(v)
+        else:
+            raise IndexError("index out of range")
+        return None
+
+    def __truediv__(self, m):
+        if hasattr(m, "__float__"):
+            im = 1. / m
+        else:
+            im = TOOLS._invert_matrix(m)[1]
+            if not im:
+                raise ZeroDivisionError("matrix not invertible")
+        r = Quad(self)
+        r = r.transform(im)
+        return r
+
+    @property
+    def is_convex(self):
+        """Check if quad is convex and not degenerate.
+
+        Notes:
+            Check that for the two diagonals, the other two corners are not
+            on the same side of the diagonal.
+        Returns:
+            True or False.
+        """
+        m = planish_line(self.ul, self.lr)  # puts this diagonal on x-axis
+        p1 = self.ll * m  # transform the
+        p2 = self.ur * m  # other two points
+        if p1.y * p2.y > 0:
+            return False
+        m = planish_line(self.ll, self.ur)  # puts other diagonal on x-axis
+        p1 = self.lr * m  # tranform the
+        p2 = self.ul * m  # remaining points
+        if p1.y * p2.y > 0:
+            return False
+        return True
+
+    @property
+    def is_empty(self):
+        """Check whether all quad corners are on the same line.
+
+        The is the case exactly if more than one corner angle is zero.
+        """
+        count = 0
+        if abs(TOOLS._sine_between(self.ul, self.ur, self.lr)) < EPSILON:
+            count += 1
+        if abs(TOOLS._sine_between(self.ur, self.lr, self.ll)) < EPSILON:
+            count += 1
+        if abs(TOOLS._sine_between(self.lr, self.ll, self.ul)) < EPSILON:
+            count += 1
+        if abs(TOOLS._sine_between(self.ll, self.ul, self.ur)) < EPSILON:
+            count += 1
+        if count <= 2:
+            return False
+        return True
 
     @property
     def is_rectangular(self):
@@ -8592,107 +8701,6 @@ class Quad(object):
 
         return True
 
-
-    @property
-    def is_convex(self):
-        """Check if quad is convex and not degenerate.
-
-        Notes:
-            Check that for the two diagonals, the other two corners are not
-            on the same side of the diagonal.
-        Returns:
-            True or False.
-        """
-        m = planish_line(self.ul, self.lr)  # puts this diagonal on x-axis
-        p1 = self.ll * m  # transform the
-        p2 = self.ur * m  # other two points
-        if p1.y * p2.y > 0:
-            return False
-        m = planish_line(self.ll, self.ur)  # puts other diagonal on x-axis
-        p1 = self.lr * m  # tranform the
-        p2 = self.ul * m  # remaining points
-        if p1.y * p2.y > 0:
-            return False
-        return True
-
-
-    @property
-    def is_empty(self):
-        """Check whether all quad corners are on the same line.
-
-        The is the case exactly if more than one corner angle is zero.
-        """
-        count = 0
-        if abs(TOOLS._sine_between(self.ul, self.ur, self.lr)) < EPSILON:
-            count += 1
-        if abs(TOOLS._sine_between(self.ur, self.lr, self.ll)) < EPSILON:
-            count += 1
-        if abs(TOOLS._sine_between(self.lr, self.ll, self.ul)) < EPSILON:
-            count += 1
-        if abs(TOOLS._sine_between(self.ll, self.ul, self.ur)) < EPSILON:
-            count += 1
-        if count <= 2:
-            return False
-        return True
-
-    width  = property(lambda self: max(abs(self.ul - self.ur), abs(self.ll - self.lr)))
-    height = property(lambda self: max(abs(self.ul - self.ll), abs(self.ur - self.lr)))
-
-    @property
-    def rect(self):
-        r = Rect()
-        r.x0 = min(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
-        r.y0 = min(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
-        r.x1 = max(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
-        r.y1 = max(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
-        return r
-
-    def __getitem__(self, i):
-        return (self.ul, self.ur, self.ll, self.lr)[i]
-
-    def __len__(self):
-        return 4
-
-    def __setitem__(self, i, v):
-        if   i == 0: self.ul = Point(v)
-        elif i == 1: self.ur = Point(v)
-        elif i == 2: self.ll = Point(v)
-        elif i == 3: self.lr = Point(v)
-        else:
-            raise IndexError("index out of range")
-        return None
-
-    def __repr__(self):
-        return "Quad" + str(tuple(self))
-
-    def __pos__(self):
-        return Quad(self)
-
-    def __neg__(self):
-        return Quad(-self.ul, -self.ur, -self.ll, -self.lr)
-
-    def __bool__(self):
-        return not self.is_empty
-
-    def __nonzero__(self):
-        return not self.is_empty
-
-    def __eq__(self, quad):
-        if not hasattr(quad, "__len__"):
-            return False
-        return len(quad) == 4 and (
-            self.ul == quad[0] and
-            self.ur == quad[1] and
-            self.ll == quad[2] and
-            self.lr == quad[3]
-        )
-
-    def __abs__(self):
-        if self.is_empty:
-            return 0.0
-        return abs(self.ul - self.ur) * abs(self.ul - self.ll)
-
-
     def morph(self, p, m):
         """Morph the quad with matrix-like 'm' and point-like 'p'.
 
@@ -8702,6 +8710,14 @@ class Quad(object):
         q = self * ~delta * m * delta
         return q
 
+    @property
+    def rect(self):
+        r = Rect()
+        r.x0 = min(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
+        r.y0 = min(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
+        r.x1 = max(self.ul.x, self.ur.x, self.lr.x, self.ll.x)
+        r.y1 = max(self.ul.y, self.ur.y, self.lr.y, self.ll.y)
+        return r
 
     def transform(self, m):
         """Replace quad by its transformation with matrix m."""
@@ -8713,26 +8729,9 @@ class Quad(object):
         self.lr *= m
         return self
 
-    def __mul__(self, m):
-        r = Quad(self)
-        r = r.transform(m)
-        return r
-
-    def __truediv__(self, m):
-        if hasattr(m, "__float__"):
-            im = 1. / m
-        else:
-            im = TOOLS._invert_matrix(m)[1]
-            if not im:
-                raise ZeroDivisionError("matrix not invertible")
-        r = Quad(self)
-        r = r.transform(im)
-        return r
-
     __div__ = __truediv__
-
-    def __hash__(self):
-        return hash(tuple(self))
+    width  = property(lambda self: max(abs(self.ul - self.ur), abs(self.ll - self.lr)))
+    height = property(lambda self: max(abs(self.ul - self.ll), abs(self.ur - self.lr)))
 
 
 class Rect(object):
