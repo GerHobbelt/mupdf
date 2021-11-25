@@ -2883,6 +2883,11 @@ static void ffi_Page_getLinks(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 
+	if (js_try(J)) {
+		fz_drop_link(ctx, links);
+		js_throw(J);
+	}
+
 	js_newarray(J);
 	for (link = links; link; link = link->next) {
 		js_newobject(J);
@@ -2903,6 +2908,7 @@ static void ffi_Page_getLinks(js_State *J)
 		js_setindex(J, -2, i++);
 	}
 
+	js_endtry(J);
 	fz_drop_link(ctx, links);
 }
 
