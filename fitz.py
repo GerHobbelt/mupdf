@@ -9962,10 +9962,6 @@ class Shape(object):
 
 
 class TextPage:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, TextPage, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, TextPage, name)
 
     def __init__(self, *args):
         if args_match(args, mupdf.Rect):
@@ -9977,44 +9973,26 @@ class TextPage:
             raise Exception(f'Unrecognised args: {args}')
         self.thisown = True
 
-
-    def search(self, needle, hit_max=0, quads=1):
-        """Locate 'needle' returning rects or quads."""
-
-        #val = _fitz.TextPage_search(self, needle, hit_max, quads)
-        val = JM_search_stext_page(self.this, needle)
-        nl = '\n'
-        #jlib.log('{quads=}')
-        #jlib.log('val:\n{nl.join([str(i) for i in val])}')
-        if not val:
-            return val
-        items = len(val)
-        for i in range(items):  # change entries to quads or rects
-            q = Quad(val[i])
-            if quads:
-                val[i] = q
-            else:
-                val[i] = q.rect
-        if quads:
-            return val
-        #for v in val:
-        #    jlib.log('{type(v)=} {v=}')
-        i = 0  # join overlapping rects on the same line
-        while i < items - 1:
-            v1 = val[i]
-            v2 = val[i + 1]
-            #jlib.log('{v1.y1=} {v2.y1=} {v1 & v2=} {(v1 & v2).is_empty=}')
-            if v1.y1 != v2.y1 or (v1 & v2).is_empty:
-                i += 1
-                #jlib.log('not joining')
-                continue  # no overlap on same line
-            #jlib.log('joining {v1=} {v2=}')
-            val[i] = v1 | v2  # join rectangles
-            del val[i + 1]  # remove v2
-            items -= 1  # reduce item count
-        #jlib.log('returning {val=}')
-        return val
-
+    def _extractText(self, format_):
+        #return _fitz.TextPage__extractText(self, format)
+        this_tpage = self.this
+        res = mupdf.mfz_new_buffer(1024)
+        out = mupdf.mfz_new_output_with_buffer(res)
+        # fixme: mupdfwrap.py thinks fz_output is not copyable, possibly
+        # because there is no .refs member visible and no fz_keep_output() fn,
+        # although there is an fz_drop_output(). So mupdf.mfz_new_output_with_buffer()
+        # doesn't convert the returnd fz_output* into a mupdf.Output.
+        out = mupdf.Output(out)
+        if format_ == 1:
+            mupdf.mfz_print_stext_page_as_html(out, this_tpage, 0)
+        elif format_ == 3:
+            mupdf.mfz_print_stext_page_as_xml(out, this_tpage, 0)
+        elif format_ == 4:
+            mupdf.mfz_print_stext_page_as_xhtml(out, this_tpage, 0)
+        else:
+            JM_print_stext_page_as_text(out, this_tpage)
+        text = JM_UnicodeFromBuffer(res)
+        return text
 
     def _getNewBlockList(self, page_dict, raw):
         #return _fitz.TextPage__getNewBlockList(self, page_dict, raw)
@@ -10025,23 +10003,13 @@ class TextPage:
         self._getNewBlockList(page_dict, raw)
         return page_dict
 
-
     def extractBLOCKS(self):
         """Return a list with text block information."""
-        #return _fitz.TextPage_extractBLOCKS(self)
-        #fz_stext_block *block;
-        #fz_stext_line *line;
-        #fz_stext_char *ch;
         block_n = -1
-        #PyObject *text = NULL, *litem;
-        #fz_buffer *res = NULL;
-        #fz_var(res);
-        #fz_stext_page *this_tpage = (fz_stext_page *) self;
         jlib.log('{type(self)=}')
         this_tpage = self.this
         jlib.log('{type(self)=} {type(self.this)=}')
         tp_rect = mupdf.Rect(this_tpage.m_internal.mediabox)
-        #PyObject *lines = NULL;
         res = mupdf.mfz_new_buffer(1024);
         lines = []
         for block in this_tpage:
@@ -10091,10 +10059,64 @@ class TextPage:
                 lines.append(litem)
         return lines
 
+    def extractDICT(self, cb=None, sort=False) -> dict:
+        """Return page content as a Python dict of images and text spans."""
+        #val = self._textpage_dict(raw=False)
+        raw=False
+        page_dict = {"width": self.rect.width, "height": self.rect.height}
+        self._getNewBlockList(page_dict, raw)
+        val = page_dict
+        if cb is not None:
+            val["width"] = cb.width
+            val["height"] = cb.height
+        if sort is True:
+            blocks = val["blocks"]
+            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
+            val["blocks"] = blocks
+        return val
+
+    def extractRAWDICT(self, cb=None, sort=False) -> dict:
+        """Return page content as a Python dict of images and text characters."""
+        val =  self._textpage_dict(raw=True)
+        if cb is not None:
+            val["width"] = cb.width
+            val["height"] = cb.height
+        if sort is True:
+            blocks = val["blocks"]
+            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
+            val["blocks"] = blocks
+        return val
+
+    def extractSelection(self, pointa, pointb):
+        return _fitz.TextPage_extractSelection(self, pointa, pointb)
+
+    def extractText(self, sort=False) -> str:
+        """Return simple, bare text on the page."""
+        if sort is False:
+            return self._extractText(0)
+        blocks = self.extractBLOCKS()[:]
+        blocks.sort(key=lambda b: (b[3], b[0]))
+        return "".join([b[4] for b in blocks])
+
+    def extractTextbox(self, rect):
+        #return _fitz.TextPage_extractTextbox(self, rect)
+        #fz_stext_page *this_tpage = (fz_stext_page *) self;
+        this_tpage = self.this
+        assert isinstance(this_tpage, mupdf.StextPage)
+        area = JM_rect_from_py(rect)
+        #PyObject *rc = NULL;
+        #char *found = NULL;
+        found = JM_copy_rectangle(this_tpage, area);
+        if (found):
+            rc = JM_UnicodeFromStr(found)
+        else:
+            rc = ''
+        return rc
+
+    extractTEXT = extractText
 
     def extractWORDS(self):
         """Return a list with text word information."""
-
         #return _fitz.TextPage_extractWORDS(self)
         buflen = 0
         block_n = -1
@@ -10144,7 +10166,6 @@ class TextPage:
         return lines
 
     @property
-
     def rect(self):
         """Page rectangle."""
 
@@ -10155,55 +10176,6 @@ class TextPage:
         val = Rect(val)
 
         return val
-
-    def _extractText(self, format_):
-        #return _fitz.TextPage__extractText(self, format)
-        this_tpage = self.this
-        res = mupdf.mfz_new_buffer(1024)
-        out = mupdf.mfz_new_output_with_buffer(res)
-        # fixme: mupdfwrap.py thinks fz_output is not copyable, possibly
-        # because there is no .refs member visible and no fz_keep_output() fn,
-        # although there is an fz_drop_output(). So mupdf.mfz_new_output_with_buffer()
-        # doesn't convert the returnd fz_output* into a mupdf.Output.
-        out = mupdf.Output(out)
-        if format_ == 1:
-            mupdf.mfz_print_stext_page_as_html(out, this_tpage, 0)
-        elif format_ == 3:
-            mupdf.mfz_print_stext_page_as_xml(out, this_tpage, 0)
-        elif format_ == 4:
-            mupdf.mfz_print_stext_page_as_xhtml(out, this_tpage, 0)
-        else:
-            JM_print_stext_page_as_text(out, this_tpage)
-        text = JM_UnicodeFromBuffer(res)
-        return text
-
-    def extractSelection(self, pointa, pointb):
-        return _fitz.TextPage_extractSelection(self, pointa, pointb)
-
-    def extractText(self, sort=False) -> str:
-        """Return simple, bare text on the page."""
-        if sort is False:
-            return self._extractText(0)
-        blocks = self.extractBLOCKS()[:]
-        blocks.sort(key=lambda b: (b[3], b[0]))
-        return "".join([b[4] for b in blocks])
-
-    def extractTextbox(self, rect):
-        #return _fitz.TextPage_extractTextbox(self, rect)
-        #fz_stext_page *this_tpage = (fz_stext_page *) self;
-        this_tpage = self.this
-        assert isinstance(this_tpage, mupdf.StextPage)
-        area = JM_rect_from_py(rect)
-        #PyObject *rc = NULL;
-        #char *found = NULL;
-        found = JM_copy_rectangle(this_tpage, area);
-        if (found):
-            rc = JM_UnicodeFromStr(found)
-        else:
-            rc = ''
-        return rc
-
-    extractTEXT = extractText
 
     def extractHTML(self) -> str:
         """Return page content as a HTML string."""
@@ -10257,40 +10229,36 @@ class TextPage:
         """Return page content as a XHTML string."""
         return self._extractText(4)
 
-    def extractDICT(self, cb=None, sort=False) -> dict:
-        """Return page content as a Python dict of images and text spans."""
-        #val = self._textpage_dict(raw=False)
-        raw=False
-        page_dict = {"width": self.rect.width, "height": self.rect.height}
-        self._getNewBlockList(page_dict, raw)
-        val = page_dict
-        if cb is not None:
-            val["width"] = cb.width
-            val["height"] = cb.height
-        if sort is True:
-            blocks = val["blocks"]
-            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
-            val["blocks"] = blocks
-        return val
-
-    def extractRAWDICT(self, cb=None, sort=False) -> dict:
-        """Return page content as a Python dict of images and text characters."""
-        val =  self._textpage_dict(raw=True)
-        if cb is not None:
-            val["width"] = cb.width
-            val["height"] = cb.height
-        if sort is True:
-            blocks = val["blocks"]
-            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
-            val["blocks"] = blocks
+    def search(self, needle, hit_max=0, quads=1):
+        """Locate 'needle' returning rects or quads."""
+        #val = _fitz.TextPage_search(self, needle, hit_max, quads)
+        val = JM_search_stext_page(self.this, needle)
+        nl = '\n'
+        if not val:
+            return val
+        items = len(val)
+        for i in range(items):  # change entries to quads or rects
+            q = Quad(val[i])
+            if quads:
+                val[i] = q
+            else:
+                val[i] = q.rect
+        if quads:
+            return val
+        i = 0  # join overlapping rects on the same line
+        while i < items - 1:
+            v1 = val[i]
+            v2 = val[i + 1]
+            if v1.y1 != v2.y1 or (v1 & v2).is_empty:
+                i += 1
+                continue  # no overlap on same line
+            val[i] = v1 | v2  # join rectangles
+            del val[i + 1]  # remove v2
+            items -= 1  # reduce item count
         return val
 
 
 class TextWriter:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TextWriter, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TextWriter, name)
 
     def __init__(self, page_rect, opacity=1, color=None):
         """Stores text spans for later output on compatible PDF pages."""
@@ -10312,13 +10280,13 @@ class TextWriter:
         self.textRect.__doc__ = "Accumulated area of text spans."
         self.used_fonts = set()
 
-
-
+    def _bbox(self):
+        val = _fitz.TextWriter__bbox(self)
+        val = Rect(val)
+        return val
 
     def append(self, pos, text, font=None, fontsize=11, language=None):
-
         """Store 'text' at point 'pos' using 'font' and 'fontsize'."""
-
         pos = Point(pos) * self.ictm
         if font is None:
             font = Font("helv")
@@ -10332,10 +10300,7 @@ class TextWriter:
         val = self.textRect, self.lastPoint
         if font.flags["mono"] == 1:
             self.used_fonts.add(font)
-
-
         return val
-
 
     def appendv(self, pos, text, font=None, fontsize=11,
         language=None):
@@ -10347,14 +10312,6 @@ class TextWriter:
         return self.textRect, self.lastPoint
 
     @property
-
-    def _bbox(self):
-        val = _fitz.TextWriter__bbox(self)
-        val = Rect(val)
-
-        return val
-
-
     def writeText(self, page, color=None, opacity=-1, overlay=1, morph=None, render_mode=0, oc=0):
 
         """Write the text to a PDF page having the TextWriter's page size.
@@ -10367,7 +10324,6 @@ class TextWriter:
             morph: tuple(Point, Matrix), apply Matrix with fixpoint Point.
             render_mode: (int) PDF render mode operator 'Tr'.
         """
-
         CheckParent(page)
         if abs(self.rect - page.rect) > 1e-3:
             raise ValueError("incompatible page rect")
@@ -10381,7 +10337,6 @@ class TextWriter:
             opacity = self.opacity
         if color is None:
             color = self.color
-
 
         val = _fitz.TextWriter_writeText(self, page, color, opacity, overlay, morph, render_mode, oc)
 
@@ -10440,13 +10395,17 @@ class TextWriter:
         val = None
         for font in self.used_fonts:
             repair_mono_font(page, font)
-
-
         return val
 
 
 class IRect(Rect):
     """IRect() - all zeros\nIRect(x0, y0, x1, y1)\nIRect(Rect or IRect) - new copy\nIRect(sequence) - from 'sequence'"""
+    def __add__(self, p):
+        return Rect.__add__(self, p).round()
+
+    def __and__(self, x):
+        return Rect.__and__(self, x).round()
+
     def __init__(self, *args):
         Rect.__init__(self, *args)
         self.x0 = math.floor(self.x0 + 0.001)
@@ -10455,18 +10414,36 @@ class IRect(Rect):
         self.y1 = math.ceil(self.y1 - 0.001)
         return None
 
-    @property
-    def round(self):
-        pass
+    def __mul__(self, m):
+        return Rect.__mul__(self, m).round()
 
-    irect = round
+    def __neg__(self):
+        return IRect(-self.x0, -self.y0, -self.x1, -self.y1)
 
-    @property
-    def rect(self):
-        return Rect(self)
+    def __or__(self, x):
+        return Rect.__or__(self, x).round()
+
+    def __pos__(self):
+        return IRect(self)
 
     def __repr__(self):
         return "IRect" + str(tuple(self))
+
+    def __setitem__(self, i, v):
+        v = int(v)
+        if   i == 0: self.x0 = v
+        elif i == 1: self.y0 = v
+        elif i == 2: self.x1 = v
+        elif i == 3: self.y1 = v
+        else:
+            raise IndexError("index out of range")
+        return None
+
+    def __sub__(self, p):
+        return Rect.__sub__(self, p).round()
+
+    def __truediv__(self, m):
+        return Rect.__truediv__(self, m).round()
 
     def includePoint(self, p):
         """Extend rectangle to include point p."""
@@ -10480,42 +10457,18 @@ class IRect(Rect):
         """Restrict rectangle to intersection with rectangle r."""
         return Rect.intersect(self, r).round()
 
-    def __setitem__(self, i, v):
-        v = int(v)
-        if   i == 0: self.x0 = v
-        elif i == 1: self.y0 = v
-        elif i == 2: self.x1 = v
-        elif i == 3: self.y1 = v
-        else:
-            raise IndexError("index out of range")
-        return None
+    irect = round
 
-    def __pos__(self):
-        return IRect(self)
+    @property
+    def rect(self):
+        return Rect(self)
 
-    def __neg__(self):
-        return IRect(-self.x0, -self.y0, -self.x1, -self.y1)
-
-    def __add__(self, p):
-        return Rect.__add__(self, p).round()
-
-    def __sub__(self, p):
-        return Rect.__sub__(self, p).round()
+    @property
+    def round(self):
+        pass
 
     def transform(self, m):
         return Rect.transform(self, m).round()
-
-    def __mul__(self, m):
-        return Rect.__mul__(self, m).round()
-
-    def __truediv__(self, m):
-        return Rect.__truediv__(self, m).round()
-
-    def __or__(self, x):
-        return Rect.__or__(self, x).round()
-
-    def __and__(self, x):
-        return Rect.__and__(self, x).round()
 
 
 # Data
