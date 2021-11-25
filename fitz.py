@@ -5808,6 +5808,20 @@ class Page:
 
     rect = property(bound, doc="page rectangle")
 
+    @property
+    def cropbox(self):
+        """The CropBox."""
+        CheckParent(self)
+
+        #val = _fitz.Page_cropbox(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            val = mupdf.mfz_bound_page(self.this)
+        else:
+            val = JM_cropbox(page.obj())
+        val = Rect(val)
+
+        return val
 
     def delete_annot(self, annot):
         """Delete annot and return next one."""
@@ -6487,6 +6501,97 @@ class Page:
         mupdf.mfz_close_device(dev)
         text = JM_EscapeStrFromBuffer(res)
         return text
+
+    def get_text(
+            page: Page,
+            option: str = "text",
+            clip: rect_like = None,
+            flags: OptInt = None,
+            textpage = None,#: TextPage = None,
+            sort: bool = False,
+            ):
+        """Extract text from a page or an annotation.
+
+        This is a unifying wrapper for various methods of the TextPage class.
+
+        Args:
+            option: (str) text, words, blocks, html, dict, json, rawdict, xhtml or xml.
+            clip: (rect-like) restrict output to this area.
+            flags: bit switches to e.g. exclude images or decompose ligatures.
+            textpage: reuse this TextPage and make no new one. If specified,
+                'flags' and 'clip' are ignored.
+
+        Returns:
+            the output of methods get_text_words / get_text_blocks or TextPage
+            methods extractText, extractHTML, extractDICT, extractJSON, extractRAWDICT,
+            extractXHTML or etractXML respectively.
+            Default and misspelling choice is "text".
+        """
+        formats = {
+            "text": 0,
+            "html": 1,
+            "json": 1,
+            "rawjson": 1,
+            "xml": 0,
+            "xhtml": 1,
+            "dict": 1,
+            "rawdict": 1,
+            "words": 0,
+            "blocks": 1,
+        }
+        option = option.lower()
+        if option not in formats:
+            option = "text"
+        if flags is None:
+            flags = TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES
+            if formats[option] == 1:
+                flags |= TEXT_PRESERVE_IMAGES
+
+        if option == "words":
+            return get_text_words(
+                page, clip=clip, flags=flags, textpage=textpage, sort=sort
+            )
+        if option == "blocks":
+            return get_text_blocks(
+                page, clip=clip, flags=flags, textpage=textpage, sort=sort
+            )
+        CheckParent(page)
+        cb = None
+        if option in ("html", "xml", "xhtml"):  # no clipping for MuPDF functions
+            clip = page.cropbox
+        if clip != None:
+            clip = Rect(clip)
+            cb = None
+        elif type(page) is Page:
+            cb = page.cropbox
+        # TextPage with or without images
+        tp = textpage
+        if tp is None:
+            tp = page.get_textpage(clip=clip, flags=flags)
+        elif getattr(tp, "parent") != page:
+            raise ValueError("not a textpage of this page")
+
+        if option == "json":
+            t = tp.extractJSON(cb=cb, sort=sort)
+        elif option == "rawjson":
+            t = tp.extractRAWJSON(cb=cb, sort=sort)
+        elif option == "dict":
+            t = tp.extractDICT(cb=cb, sort=sort)
+        elif option == "rawdict":
+            t = tp.extractRAWDICT(cb=cb, sort=sort)
+        elif option == "html":
+            t = tp.extractHTML()
+        elif option == "xml":
+            t = tp.extractXML()
+        elif option == "xhtml":
+            t = tp.extractXHTML()
+        else:
+            t = tp.extractText(sort=sort)
+
+        if textpage is None:
+            del tp
+        return t
+
 
     def get_textbox(
             page: Page,
@@ -9926,7 +10031,8 @@ class TextPage:
 
 
     def _getNewBlockList(self, page_dict, raw):
-        return _fitz.TextPage__getNewBlockList(self, page_dict, raw)
+        #return _fitz.TextPage__getNewBlockList(self, page_dict, raw)
+        JM_make_textpage_dict(self.this, page_dict, raw)
 
     def _textpage_dict(self, raw=False):
         page_dict = {"width": self.rect.width, "height": self.rect.height}
@@ -9936,35 +10042,165 @@ class TextPage:
 
     def extractBLOCKS(self):
         """Return a list with text block information."""
-
-        return _fitz.TextPage_extractBLOCKS(self)
+        #return _fitz.TextPage_extractBLOCKS(self)
+        #fz_stext_block *block;
+        #fz_stext_line *line;
+        #fz_stext_char *ch;
+        block_n = -1
+        #PyObject *text = NULL, *litem;
+        #fz_buffer *res = NULL;
+        #fz_var(res);
+        #fz_stext_page *this_tpage = (fz_stext_page *) self;
+        jlib.log('{type(self)=}')
+        this_tpage = self.this
+        jlib.log('{type(self)=} {type(self.this)=}')
+        tp_rect = mupdf.Rect(this_tpage.m_internal.mediabox)
+        #PyObject *lines = NULL;
+        res = mupdf.mfz_new_buffer(1024);
+        lines = []
+        for block in this_tpage:
+            block_n += 1
+            blockrect = mupdf.Rect(mupdf.Rect.Fixed_EMPTY)
+            if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_TEXT:
+                mupdf.mfz_clear_buffer(res) # set text buffer to empty
+                line_n = -1
+                last_y0 = 0.0
+                last_char = 0
+                for line in block:
+                    line_n += 1
+                    linerect = mupdf.Rect(mupdf.Rect.Fixed_EMPTY)
+                    for ch in line:
+                        cbbox = JM_char_bbox(line, ch)
+                        if (not mupdf.mfz_contains_rect(tp_rect, cbbox)
+                                and not mupdf.mfz_is_infinite_rect(tp_rect)
+                                ):
+                            continue
+                        JM_append_rune(res, ch.m_internal.c)
+                        last_char = ch.m_internal.c
+                        linerect = mupdf.mfz_union_rect(linerect, cbbox)
+                    if last_char != 10 and not mupdf.mfz_is_empty_rect(linerect):
+                        mupdf.mfz_append_byte(res, 10)
+                    blockrect = mupdf.mfz_union_rect(blockrect, linerect)
+                text = JM_EscapeStrFromBuffer(res)
+            elif (mupdf.mfz_contains_rect(tp_rect, block.bbox)
+                    or mupdf.mfz_is_infinite_rect(tp_rect)
+                    ):
+                img = mupdf.Image( mupdf.keep_image(block.m_internal.u.i.image))
+                cs = img.colorspace()
+                text = "<image: %s, width: %d, height: %d, bpc: %d>" % (
+                        mupdf.mfz_colorspace_name(cs),
+                        img.w(), img.h(), img.bpc
+                        )
+                blockrect = mupdf.mfz_union_rect(blockrect, block.bbox)
+            if not mupdf.mfz_is_empty_rect(blockrect):
+                litem = (
+                        blockrect.x0,
+                        blockrect.y0,
+                        blockrect.x1,
+                        blockrect.y1,
+                        text,
+                        block_n,
+                        block.m_internal.type,
+                        )
+                lines.append(litem)
+        return lines
 
 
     def extractWORDS(self):
         """Return a list with text word information."""
 
-        return _fitz.TextPage_extractWORDS(self)
+        #return _fitz.TextPage_extractWORDS(self)
+        buflen = 0
+        block_n = -1
+        wbbox = mupdf.Rect(mupdf.Rect.Fixed_EMPTY)  # word bbox
+        this_tpage = self.this
+        tp_rect = mupdf.Rect(this_tpage.m_internal.mediabox)
+
+        lines = None
+        buff = mupdf.mfz_new_buffer(64)
+        lines = []
+        for block in this_tpage:
+            block_n += 1
+            if block.m_internal.type != mupdf.FZ_STEXT_BLOCK_TEXT:
+                continue
+            line_n = 0
+            for line in block:
+                word_n = 0                        # word counter per line
+                mupdf.mfz_clear_buffer(buff)      # reset word buffer
+                buflen = 0                        # reset char counter
+                for ch in line:
+                    cbbox = JM_char_bbox(line, ch)
+                    if mupdf.mfz_is_empty_rect(cbbox):
+                        continue
+                    #jlib.log('{type(tp_rect)=} {type(cbbox)=}')
+                    if (not mupdf.mfz_contains_rect(tp_rect, cbbox)
+                            and not mupdf.mfz_is_infinite_rect(tp_rect)
+                            ):
+                        continue
+                    if ch.m_internal.c == 32 and buflen == 0:
+                        continue    # skip spaces at line start
+                    if ch.m_internal.c == 32:
+                        if not mupdf.mfz_is_empty_rect(wbbox):
+                            word_n, wbbox = JM_append_word(lines, buff, wbbox, block_n, line_n, word_n)
+                        mupdf.mfz_clear_buffer(buff)
+                        buflen = 0  # reset char counter
+                        continue
+                    # append one unicode character to the word
+                    JM_append_rune(buff, ch.m_internal.c)
+                    buflen += 1
+                    # enlarge word bbox
+                    wbbox = mupdf.mfz_union_rect(wbbox, JM_char_bbox(line, ch))
+                if buflen:
+                    word_n, wbbox = JM_append_word(lines, buff, wbbox, block_n, line_n, word_n)
+                    mupdf.mfz_clear_buffer(buff)
+                buflen = 0
+                line_n += 1
+        return lines
 
     @property
 
     def rect(self):
         """Page rectangle."""
 
-        val = _fitz.TextPage_rect(self)
+        #val = _fitz.TextPage_rect(self)
+        this_tpage = self.this
+        mediabox = this_tpage.m_internal.mediabox
+        val = JM_py_from_rect(mediabox)
         val = Rect(val)
 
         return val
 
-
-    def _extractText(self, format):
-        return _fitz.TextPage__extractText(self, format)
+    def _extractText(self, format_):
+        #return _fitz.TextPage__extractText(self, format)
+        this_tpage = self.this
+        res = mupdf.mfz_new_buffer(1024)
+        out = mupdf.mfz_new_output_with_buffer(res)
+        # fixme: mupdfwrap.py thinks fz_output is not copyable, possibly
+        # because there is no .refs member visible and no fz_keep_output() fn,
+        # although there is an fz_drop_output(). So mupdf.mfz_new_output_with_buffer()
+        # doesn't convert the returnd fz_output* into a mupdf.Output.
+        out = mupdf.Output(out)
+        if format_ == 1:
+            mupdf.mfz_print_stext_page_as_html(out, this_tpage, 0)
+        elif format_ == 3:
+            mupdf.mfz_print_stext_page_as_xml(out, this_tpage, 0)
+        elif format_ == 4:
+            mupdf.mfz_print_stext_page_as_xhtml(out, this_tpage, 0)
+        else:
+            JM_print_stext_page_as_text(out, this_tpage)
+        text = JM_UnicodeFromBuffer(res)
+        return text
 
     def extractSelection(self, pointa, pointb):
         return _fitz.TextPage_extractSelection(self, pointa, pointb)
 
-    def extractText(self) -> str:
+    def extractText(self, sort=False) -> str:
         """Return simple, bare text on the page."""
-        return self._extractText(0)
+        if sort is False:
+            return self._extractText(0)
+        blocks = self.extractBLOCKS()[:]
+        blocks.sort(key=lambda b: (b[3], b[0]))
+        return "".join([b[4] for b in blocks])
 
     def extractTextbox(self, rect):
         #return _fitz.TextPage_extractTextbox(self, rect)
@@ -9987,7 +10223,7 @@ class TextPage:
         """Return page content as a HTML string."""
         return self._extractText(1)
 
-    def extractJSON(self) -> str:
+    def extractJSON(self, cb=None, sort=False) -> str:
         """Return 'extractDICT' converted to JSON format."""
         import base64, json
         val = self._textpage_dict(raw=False)
@@ -9997,10 +10233,17 @@ class TextPage:
                 if type(s) in (bytes, bytearray):
                     return base64.b64encode(s).decode()
 
+        if cb is not None:
+            val["width"] = cb.width
+            val["height"] = cb.height
+        if sort is True:
+            blocks = val["blocks"]
+            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
+            val["blocks"] = blocks
         val = json.dumps(val, separators=(",", ":"), cls=b64encode, indent=1)
         return val
 
-    def extractRAWJSON(self) -> str:
+    def extractRAWJSON(self, cb=None, sort=False) -> str:
         """Return 'extractRAWDICT' converted to JSON format."""
         import base64, json
         val = self._textpage_dict(raw=True)
@@ -10010,6 +10253,13 @@ class TextPage:
                 if type(s) in (bytes, bytearray):
                     return base64.b64encode(s).decode()
 
+        if cb is not None:
+            val["width"] = cb.width
+            val["height"] = cb.height
+        if sort is True:
+            blocks = val["blocks"]
+            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
+            val["blocks"] = blocks
         val = json.dumps(val, separators=(",", ":"), cls=b64encode, indent=1)
         return val
 
@@ -10021,13 +10271,33 @@ class TextPage:
         """Return page content as a XHTML string."""
         return self._extractText(4)
 
-    def extractDICT(self) -> dict:
+    def extractDICT(self, cb=None, sort=False) -> dict:
         """Return page content as a Python dict of images and text spans."""
-        return self._textpage_dict(raw=False)
+        #val = self._textpage_dict(raw=False)
+        raw=False
+        page_dict = {"width": self.rect.width, "height": self.rect.height}
+        self._getNewBlockList(page_dict, raw)
+        val = page_dict
+        if cb is not None:
+            val["width"] = cb.width
+            val["height"] = cb.height
+        if sort is True:
+            blocks = val["blocks"]
+            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
+            val["blocks"] = blocks
+        return val
 
-    def extractRAWDICT(self) -> dict:
+    def extractRAWDICT(self, cb=None, sort=False) -> dict:
         """Return page content as a Python dict of images and text characters."""
-        return self._textpage_dict(raw=True)
+        val =  self._textpage_dict(raw=True)
+        if cb is not None:
+            val["width"] = cb.width
+            val["height"] = cb.height
+        if sort is True:
+            blocks = val["blocks"]
+            blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
+            val["blocks"] = blocks
+        return val
 
 
 class TextWriter:
@@ -10355,6 +10625,12 @@ TEXT_ALIGN_LEFT = 0
 TEXT_ALIGN_CENTER = 1
 TEXT_ALIGN_RIGHT = 2
 TEXT_ALIGN_JUSTIFY = 3
+
+TEXT_FONT_SUPERSCRIPT = 1
+TEXT_FONT_ITALIC = 2
+TEXT_FONT_SERIFED = 4
+TEXT_FONT_MONOSPACED = 8
+TEXT_FONT_BOLD = 16
 
 TEXT_OUTPUT_TEXT = 0
 TEXT_OUTPUT_HTML = 1
@@ -11257,6 +11533,37 @@ def JM_annot_set_border(border, doc, annot_obj):
     annot_obj.dict_putl(val, mupdf.PDF_ENUM_NAME_BS, mupdf.PDF_ENUM_NAME_S)
 
 
+def JM_append_rune(buff, ch):
+    '''
+    APPEND non-ascii runes in unicode escape format to fz_buffer
+    '''
+    if (ch >= 32 and ch <= 127) or ch == 10:
+        mupdf.mfz_append_byte(buff, ch)
+    elif ch <= 0xffff:  # 4 hex digits
+        mupdf.mfz_append_printf(buff, "\\u%04x", ch)
+    else:   # 8 hex digits
+        mupdf.mfz_append_printf(buff, "\\U%08x", ch)
+
+
+def JM_append_word(lines, buff, wbbox, block_n, line_n, word_n):
+    '''
+    Functions for wordlist output
+    '''
+    s = JM_EscapeStrFromBuffer(buff)
+    litem = (
+            wbbox.x0,
+            wbbox.y0,
+            wbbox.x1,
+            wbbox.y1,
+            s,
+            block_n,
+            line_n,
+            word_n,
+            )
+    lines.append(litem)
+    return word_n + 1, mupdf.Rect(mupdf.Rect.Fixed_EMPTY)   # word counter
+
+
 def JM_char_bbox(line, ch, verbose=0):
     '''
     return rect of char quad
@@ -11274,6 +11581,15 @@ def JM_char_bbox(line, ch, verbose=0):
     if r.y1 < r.y0 + ch.m_internal.size:
         r.y0 = r.y1 - ch.m_internal.size
     return r
+
+
+def JM_char_font_flags(font, line, ch):
+    flags = detect_super_script(line, ch)
+    flags += mupdf.mfz_font_is_italic(font) * TEXT_FONT_ITALIC
+    flags += mupdf.mfz_font_is_serif(font) * TEXT_FONT_SERIFED
+    flags += mupdf.mfz_font_is_monospaced(font) * TEXT_FONT_MONOSPACED
+    flags += mupdf.mfz_font_is_bold(font) * TEXT_FONT_BOLD
+    return flags
 
 
 def JM_char_quad(line, ch, verbose=0):
@@ -11700,6 +12016,15 @@ def JM_font_descender(font, verbose=0):
         else:
             jlib.log('{font.m_internal.ft_face=}')
     return ret
+
+
+def JM_font_name(font):
+    assert isinstance(font, mupdf.Font)
+    name = mupdf.mfz_font_name(font)
+    s = name.find('+')
+    if subset_fontnames or s == -1 or s-name != 6:
+        return name
+    return name[s + 1:]
 
 
 def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
@@ -12210,6 +12535,174 @@ def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
     annot.annot_obj().dict_put_text_string(mupdf.PDF_ENUM_NAME_DA, buf_string)
 
 
+def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
+    char_list = None
+    span_list = []
+    mupdf.mfz_clear_buffer(buff)
+    line_rect = mupdf.Rect(mupdf.Rect.Fixed_EMPTY)
+
+    class char_style:
+        pass
+    old_style = char_style()
+    old_style.size = -1
+    old_style.flags = -1
+    old_style.font = ''
+    old_style.color = -1
+    old_style.asc = 0
+    old_style.desc = 0
+
+    style = char_style()
+
+    for ch in line:
+        # start-trace
+        r = JM_char_bbox(line, ch)
+        if (not mupdf.mfz_contains_rect(tp_rect, r)
+                and not mupdf.mfz_is_infinite_rect(tp_rect)
+                ):
+            continue
+
+        flags = JM_char_font_flags(mupdf.Font(mupdf.keep_font(ch.m_internal.font)), line, ch)
+        origin = mupdf.Point(ch.m_internal.origin)
+        style.size = ch.m_internal.size
+        style.flags = flags
+        style.font = JM_font_name(mupdf.Font(mupdf.keep_font(ch.m_internal.font)))
+        style.asc = JM_font_ascender(mupdf.Font(mupdf.keep_font(ch.m_internal.font)))
+        style.desc = JM_font_descender(mupdf.Font(mupdf.keep_font(ch.m_internal.font)))
+        style.color = ch.m_internal.color
+
+        if (style.size != old_style.size
+                or style.flags != old_style.flags
+                or style.color != old_style.color
+                or style.font != old_style.font
+                ):
+            # style changed -> make new span
+
+            if old_style.size >= 0:
+                # not first one, output previous
+                if raw:
+                    # put character list in the span
+                    span[dictkey_chars] = char_list
+                    char_list = None
+                else:
+                    # put text string in the span
+                    span[dictkey_text] = JM_EscapeStrFromBuffer( buff)
+                    mupdf.mfz_clear_buffer(buff)
+
+                span[dictkey_origin] = JM_py_from_point(span_origin)
+                span[dictkey_bbox] = JM_py_from_rect(span_rect)
+                line_rect = mupdf.mfz_union_rect(line_rect, span_rect)
+                if not mupdf.mfz_is_empty_rect(span_rect):
+                    span_list.append(span)
+                span = None
+
+            span = dict()
+            asc = style.asc
+            desc = style.desc
+            if style.asc < 1e-3:
+                asc = 0.9;
+                desc = -0.1
+
+            span[dictkey_size] = style.size
+            span[dictkey_flags] = style.flags
+            span[dictkey_font] = JM_EscapeStrFromStr(style.font)
+            span[dictkey_color] = style.color
+            span["ascender"] = asc
+            span["descender"] = desc
+
+            old_style = style
+            span_rect = r
+            span_origin = origin
+
+        span_rect = mupdf.mfz_union_rect(span_rect, r)
+        if origin.y > span_origin.y:
+            span_origin.y = origin.y
+
+        if raw: # make and append a char dict
+            char_dict = dict()
+
+            char_dict[dictkey_origin] = ch.m_internal.origin
+            char_dict[dictkey_bbox] = JM_py_from_rect(r)
+
+            char_dict[dictkey_c] = ch.m_internal.c
+
+            if char_list is None:
+                char_list = []
+            char_list.append(char_dict)
+        else:   # add character byte to buffer
+            JM_append_rune(buff, ch.m_internal.c)
+
+    # all characters processed, now flush remaining span
+    if span:
+        if raw:
+            span[dictkey_chars] = char_list
+            char_list = None
+        else:
+            span[dictkey_text] = JM_EscapeStrFromBuffer(buff)
+            mupdf.mfz_clear_buffer(buff)
+        span[dictkey_origin] = JM_py_from_point(span_origin)
+        span[dictkey_bbox] = JM_py_from_rect(span_rect)
+
+        if not mupdf.mfz_is_empty_rect(span_rect):
+            span_list.append(span)
+            line_rect = mupdf.mfz_union_rect(line_rect, span_rect)
+        span = None
+    if not mupdf.mfz_is_empty_rect(line_rect):
+        line_dict[dictkey_spans] = span_list
+    else:
+        line_dict[dictkey_spans] = span_list
+    # stop-trace
+    return line_rect
+
+
+def JM_make_text_block(block, block_dict, raw, buff, tp_rect):
+    line_list = []
+    block_rect = mupdf.Rect(mupdf.Rect.Fixed_EMPTY)
+    for line in block:
+        if (mupdf.mfz_is_empty_rect(mupdf.mfz_intersect_rect(tp_rect, mupdf.Rect(line.m_internal.bbox)))
+                and not mupdf.mfz_is_infinite_rect(tp_rect)
+                ):
+            continue
+        line_dict = dict()
+        line_rect = JM_make_spanlist(line_dict, line, raw, buff, tp_rect)
+        block_rect = mupdf.mfz_union_rect(block_rect, line_rect)
+        line_dict[dictkey_wmode] = line.m_internal.wmode
+        line_dict[dictkey_dir] = JM_py_from_point(line.m_internal.dir)
+        line_dict[dictkey_bbox] = JM_py_from_rect(line_rect)
+        line_list.append(line_dict)
+    block_dict[dictkey_bbox] = block_rect
+    block_dict[dictkey_lines] = line_list
+
+
+def JM_make_textpage_dict(tp, page_dict, raw):
+    text_buffer = mupdf.mfz_new_buffer(128)
+    block_list = []
+    tp_rect = mupdf.Rect(tp.m_internal.mediabox)
+    block_n = -1
+    for block in tp:
+        block_n += 1
+        if (not mupdf.mfz_contains_rect(tp_rect, mupdf.Rect(block.m_internal.bbox))
+                and not mupdf.mfz_is_infinite_rect(tp_rect)
+                and block.m_internal.type == mupdf.FZ_STEXT_BLOCK_IMAGE
+                ):
+            continue
+        if (not mupdf.mfz_is_infinite_rect(tp_rect)
+                and mupdf.mfz_is_empty_rect(mupdf.mfz_intersect_rect(tp_rect, mupdf.Rect(block.m_internal.bbox)))
+                ):
+            continue
+
+        block_dict = dict()
+        block_dict[dictkey_number] = block_n
+        block_dict[dictkey_type] = block.m_internal.type
+        if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_IMAGE:
+            block_dict[dictkey_bbox] = JM_py_from_rect(block.m_internal.bbox)
+            JM_make_image_block(block, block_dict)
+        else:
+            JM_make_text_block(block, block_dict, raw, text_buffer, tp_rect)
+
+        block_list.append(block_dict)
+    page_dict[dictkey_blocks] = block_list
+
+
 def JM_matrix_from_py(m):
     a = [0, 0, 0, 0, 0, 0]
     if isinstance(m, mupdf.Matrix):
@@ -12533,6 +13026,40 @@ def JM_point_from_py(p):
     if x is None or y is None:
         return p0
     return mupdf.Point(x, y)
+
+
+def JM_print_stext_page_as_text(out, page):
+    '''
+    Plain text output. An identical copy of fz_print_stext_page_as_text,
+    but lines within a block are concatenated by space instead a new-line
+    character (which else leads to 2 new-lines).
+    '''
+    jlib.log('{type(out)=}')
+    assert isinstance(out, mupdf.Output)
+    assert isinstance(page, mupdf.StextPage)
+    rect = mupdf.Rect(page.m_internal.mediabox)
+    last_char = 0
+
+    for block in page:
+        if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_TEXT:
+            for line in block:
+                last_char = 0
+                for ch in line:
+                    chbbox = JM_char_bbox(line, ch)
+                    if mupdf.mfz_is_empty_rect(chbbox):
+                        continue
+                    if (mupdf.mfz_is_infinite_rect(rect)
+                            or fz_contains_rect(rect, chbbox)
+                            ):
+                        last_char = ch.m_internal.c
+                        utf = mupdf.runetochar2(last_char)
+                        for c in utf:
+                            #jlib.log('{type(c)=} {c!r=}')
+                            cc = ord(c)
+                            assert(0 <= cc < 256)
+                            mupdf.mfz_write_byte(out, cc)
+                if last_char != 10 and last_char > 0:
+                    mupdf.mfz_write_string(out, "\n")
 
 
 def JM_put_script(annot_obj, key1, key2, value):
@@ -13129,6 +13656,12 @@ def JM_set_widget_properties(annot, Widget):
     mupdf.mpdf_update_annot(annot)
 
 
+def JM_UnicodeFromBuffer(buff):
+    buff_bytes = buff.buffer_extract()
+    val = buff_bytes.decode(errors='replace')
+    return val
+
+
 def JM_update_stream(doc, obj, buffer_, compress):
     '''
     update a stream object
@@ -13397,6 +13930,12 @@ def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
         doc.FontInfos.append(info)
 
 
+def detect_super_script(line, ch):
+    if line.m_internal.wmode == 0 and line.m_internal.dir.x == 1 and line.m_internal.dir.y == 0:
+        return ch.m_internal.origin.y < line.m_internal.first_char.origin.y - ch.m_internal.size * 0.1
+    return 0
+
+
 def dir_str(x):
     ret = f'{x} {type(x)} ({len(dir(x))}):\n'
     for i in dir(x):
@@ -13586,6 +14125,42 @@ def get_pdf_str(s: str) -> str:
     return "(" + r + ")"
 
 
+def get_text_blocks(
+        page: Page,
+        clip: rect_like = None,
+        flags: OptInt = None,
+        textpage: TextPage = None,
+        sort: bool = False,
+        ) -> list:
+    """Return the text blocks on a page.
+
+    Notes:
+        Lines in a block are concatenated with line breaks.
+    Args:
+        flags: (int) control the amount of data parsed into the textpage.
+    Returns:
+        A list of the blocks. Each item contains the containing rectangle
+        coordinates, text lines, block type and running block number.
+    """
+    CheckParent(page)
+    if flags is None:
+        flags = (
+            TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_IMAGES | TEXT_PRESERVE_LIGATURES
+        )
+    tp = textpage
+    if tp is None:
+        tp = page.get_textpage(clip=clip, flags=flags)
+    elif getattr(tp, "parent") != page:
+        raise ValueError("not a textpage of this page")
+
+    blocks = tp.extractBLOCKS()
+    if textpage is None:
+        del tp
+    if sort is True:
+        blocks.sort(key=lambda b: (b[3], b[0]))
+    return blocks
+
+
 def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
     """Calculate length of a string for a built-in font.
 
@@ -13626,6 +14201,34 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
         return len(text) * fontsize
 
     raise ValueError("Font '%s' is unsupported" % fontname)
+
+
+def get_text_words(
+        page: Page,
+        clip: rect_like = None,
+        flags: OptInt = None,
+        textpage: TextPage = None,
+        sort: bool = False,
+        ) -> list:
+    """Return the text words as a list with the bbox for each word.
+
+    Args:
+        flags: (int) control the amount of data parsed into the textpage.
+    """
+    CheckParent(page)
+    if flags is None:
+        flags = TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES
+    tp = textpage
+    if tp is None:
+        tp = page.get_textpage(clip=clip, flags=flags)
+    elif getattr(tp, "parent") != page:
+        raise ValueError("not a textpage of this page")
+    words = tp.extractWORDS()
+    if textpage is None:
+        del tp
+    if sort is True:
+        words.sort(key=lambda w: (w[3], w[0]))
+    return words
 
 
 def image_properties(img: typing.ByteString) -> dict:
@@ -14674,11 +15277,11 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
         stop = clip.br
     clip.y0 = start.y
     clip.y1 = stop.y
-    if clip.is_empty or clip.isInfinite:
+    if clip.is_empty or clip.is_infinite:
         return []
 
     # extract text of page, clip only, no images, expand ligatures
-    blocks = page.getText(
+    blocks = page.get_text(
         "dict", flags=0, clip=clip,
     )["blocks"]
 
@@ -14696,7 +15299,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     bboxf = lines.pop(0)
     if bboxf.y0 - start.y <= 0.1 * bboxf.height:  # close enough?
         r = Rect(start.x, bboxf.y0, bboxf.br)  # intersection rectangle
-        if not (r.is_empty or r.isInfinite):
+        if not (r.is_empty or r.is_infinite):
             lines.insert(0, r)  # insert again if not empty
     else:
         lines.insert(0, bboxf)  # insert again
@@ -14708,7 +15311,7 @@ def get_highlight_selection(page, start: point_like =None, stop: point_like =Non
     bboxl = lines.pop()
     if stop.y - bboxl.y1 <= 0.1 * bboxl.height:  # close enough?
         r = Rect(bboxl.tl, stop.x, bboxl.y1)  # intersection rectangle
-        if not (r.is_empty or r.isInfinite):
+        if not (r.is_empty or r.is_infinite):
             lines.append(r)  # append if not empty
     else:
         lines.append(bboxl)  # append again
