@@ -5013,6 +5013,36 @@ class Page:
         self.draw_cont = ''
         self._annot_refs = dict()
 
+    def __str__(self):
+        #CheckParent(self)
+        parent = getattr(self, 'parent', None)
+        #jlib.log('{self.this.m_internal=}')
+        if isinstance(self.this.m_internal, mupdf.pdf_page):
+            #jlib.log('{self.this.m_internal.super=}')
+            number = self.this.m_internal.super.number
+        else:
+            j#lib.log('{self.this.m_internal=}')
+            number = self.this.m_internal.number
+        ret = f'page {number}'
+        if parent:
+            x = self.parent.name
+            if self.parent.stream is not None:
+                x = "<memory, doc# %i>" % (self.parent._graft_id,)
+            if x == "":
+                x = "<new PDF, doc# %i>" % self.parent._graft_id
+            ret += f' of {x}'
+        return ret
+
+    def __repr__(self):
+        return self.__str__()
+        CheckParent(self)
+        x = self.parent.name
+        if self.parent.stream is not None:
+            x = "<memory, doc# %i>" % (self.parent._graft_id,)
+        if x == "":
+            x = "<new PDF, doc# %i>" % self.parent._graft_id
+        return "page %s of %s" % (self.number, x)
+
     def _add_caret_annot(self, point):
         #return _fitz.Page__add_caret_annot(self, point)
         page = self._pdf_page()
@@ -5026,6 +5056,108 @@ class Page:
         annot.update_annot()
         return annot;
 
+
+    def _add_file_annot(self, point, buffer_, filename, ufilename=None, desc=None, icon=None):
+        #return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
+        page = self._pdf_page()
+        uf = ufilename if ufilename else filename
+        d = desc if desc else filename
+        #fz_buffer *filebuf = NULL;
+        #fz_rect r;
+        p = JM_point_from_py(point)
+        try:
+            ASSERT_PDF(page);
+            filebuf = JM_BufferFromBytes(buffer_)
+            if not filebuf.m_internal:
+                THROWMSG("bad type: 'buffer'")
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_FILE_ATTACHMENT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT;
+            mupdf.mpdf_set_annot_flags(annot, flags)
+
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+
+            val = JM_embed_file(page.doc(), filebuf, filename, uf, d, 1)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('FS'), val)
+            mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('Contents'), filename)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}')
+            raise
+            return
+        return Annot(annot)
+
+    def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
+        #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
+        page = self._pdf_page()
+        fcol = [1, 1, 1, 1] # fill color: white
+        nfcol = JM_color_FromSequence(fill_color, fcol)
+        tcol = [0, 0, 0, 0]  # std. text color: black
+        ntcol = JM_color_FromSequence(text_color, tcol)
+        r = JM_rect_from_py(rect)
+        if r.is_infinite_rect() or r.is_empty_rect():
+            jlib.log('{rect=} {r=}')
+            raise Exception("rect must be finite and not empty")
+        annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
+        annot.set_annot_contents(text)
+        annot.set_annot_rect(r)
+        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
+        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Q, align)
+
+        if fill_color:
+            annot.set_annot_color(fcol[:nfcol])
+
+        # insert the default appearance string
+        JM_make_annot_DA(annot, ntcol, tcol, fontname, fontsize)
+        JM_add_annot_id(annot, "A")
+        annot.update_annot()
+        return Annot(annot)
+
+    def _add_ink_annot(self, list):
+        #return _fitz.Page__add_ink_annot(self, list)
+        page = mupdf.mpdf_page_from_fz_page(self.this)
+        #pdf_annot *annot = NULL;
+        #PyObject *p = NULL, *sublist = NULL;
+        #pdf_obj *inklist = NULL, *stroke = NULL;
+        #fz_matrix ctm, inv_ctm;
+        #fz_point point;
+        #fz_var(annot);
+        ASSERT_PDF(page);
+        if not PySequence_Check(list):
+            THROWMSG("arg must be a sequence")
+        mupdf.mpdf_page_transform(page, mupdf.Rect(0), ctm)
+        inv_ctm = mupdf.mfz_invert_matrix(ctm)
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_INK)
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        n0 = len(list)
+        inklist = mupdf.mpdf_new_array(page.doc(), n0)
+
+        for j in range(n0):
+            sublist = list[j]
+            n1 = len(sublist)
+            stroke = mupdf.mpdf_new_array(page.doc(), 2 * n1)
+
+            for i in range(n1):
+                p = sublist[i]
+                if not PySequence_Check(p) or PySequence_Size(p) != 2:
+                    THROWMSG("3rd level entries must be pairs of floats")
+                point = mupdf.mfz_transform_point(JM_point_from_py(p), inv_ctm)
+                mupdf.mpdf_array_push_real(stroke, point.x)
+                mupdf.mpdf_array_push_real(stroke, point.y)
+
+            mupdf.mpdf_array_push(inklist, stroke)
+
+        mupdf.mpdf_dict_put(annot_obj, PDF_NAME('InkList'), inklist)
+        mupdf.mpdf_dirty_annot(annot)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+        return Annot(annot)
 
     def _add_line_annot(self, p1, p2):
         #return _fitz.Page__add_line_annot(self, p1, p2)
@@ -5042,6 +5174,26 @@ class Page:
             jlib.log('{e=}')
             return
         assert annot.m_internal
+        return Annot(annot)
+
+    def _add_multiline(self, points, annot_type):
+        #return _fitz.Page__add_multiline(self, points, annot_type)
+        page = self._pdf_page()
+        try:
+            if len(points) < 2:
+                THROWMSG(gctx, "bad list of points")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            for p in points:
+                if (PySequence_Size(p) != 2):
+                    THROWMSG("bad list of points")
+                point = JM_point_from_py(p)
+                mupdf.mpdf_add_annot_vertex(annot, point)
+
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return;
         return Annot(annot)
 
     def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
@@ -5078,6 +5230,135 @@ class Page:
         annot = mupdf.mpdf_keep_annot(annot)
         return Annot(annot)
 
+    def _addAnnot_FromString(self, linklist):
+        """Add links from list of object sources."""
+        CheckParent(self)
+
+        return _fitz.Page__addAnnot_FromString(self, linklist)
+
+    def _addWidget(self, field_type, field_name):
+        #return _fitz.Page__addWidget(self, field_type, field_name)
+        jlib.log('{self.this=} {type(self.this)=}')
+        page = self._pdf_page()
+        pdf = page.doc()
+        annot = JM_create_widget(pdf, page, field_type, field_name)
+        if not annot.m_internal:
+            THROWMSG("could not create widget")
+        JM_add_annot_id(annot, "W")
+        return Annot(annot)
+
+    def _apply_redactions(self, images):
+        #return _fitz.Page__apply_redactions(self, *args)
+        page = self._pdf_page()
+        opts = mupdf.PdfRedactOptions()
+        opts.black_boxes = 0  # no black boxes
+        opts.image_method = images  # how to treat images
+        ASSERT_PDF(page)
+        success = mupdf.mpdf_redact_page(page.doc(), page, opts)
+        return success
+
+    def _erase(self):
+        self._reset_annot_refs()
+        try:
+            self.parent._forget_page(self)
+        except:
+            pass
+        self.parent = None
+        self.thisown = False
+        self.number = None
+
+    def _forget_annot(self, annot):
+        """Remove an annot from reference dictionary."""
+        aid = id(annot)
+        if aid in self._annot_refs:
+            self._annot_refs[aid] = None
+
+    def _get_optional_content(self, oc: OptInt) -> OptStr:
+        if oc == None or oc == 0:
+            return None
+        doc = self.parent
+        check = doc.xrefObject(oc, compressed=True)
+        if not ("/Type/OCG" in check or "/Type/OCMD" in check):
+            raise ValueError("bad optional content: 'oc'")
+        props = {}
+        for p, x in self._get_resource_properties():
+            props[x] = p
+        if oc in props.keys():
+            return props[oc]
+        i = 0
+        mc = "MC%i" % i
+        while mc in props.values():
+            i += 1
+            mc = "MC%i" % i
+        self._set_resource_property(mc, oc)
+        return mc
+
+    def _get_resource_properties(self):
+        return _fitz.Page__get_resource_properties(self)
+
+    def _getDrawings(self):
+        return _fitz.Page__getDrawings(self)
+
+    def _add_square_or_circle(self, rect, annot_type):
+        #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
+        page = self._pdf_page()
+        try:
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(annot)
+
+    def _add_stamp_annot(self, rect, stamp=0):
+        #return _fitz.Page__add_stamp_annot(self, rect, stamp)
+        page = self._pdf_page()
+        #pdf_annot *annot = NULL;
+        stamp_id = [
+                PDF_NAME('Approved'),
+                PDF_NAME('AsIs'),
+                PDF_NAME('Confidential'),
+                PDF_NAME('Departmental'),
+                PDF_NAME('Experimental'),
+                PDF_NAME('Expired'),
+                PDF_NAME('Final'),
+                PDF_NAME('ForComment'),
+                PDF_NAME('ForPublicRelease'),
+                PDF_NAME('NotApproved'),
+                PDF_NAME('NotForPublicRelease'),
+                PDF_NAME('Sold'),
+                PDF_NAME('TopSecret'),
+                PDF_NAME('Draft'),
+                ]
+        n = len(stamp_id)
+        name = stamp_id[0]
+        try:
+            ASSERT_PDF(page)
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            if INRANGE(stamp, 0, n-1):
+                name = stamp_id[stamp]
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
+            mupdf.mpdf_set_annot_contents(
+                    annot,
+                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
+                    )
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=} {jlib.exception_info()=}')
+            return
+        return Annot(annot)
+
     def _add_text_annot(self, point, text, icon=None):
         #return _fitz.Page__add_text_annot(self, point, text, icon)
         page = self._pdf_page()
@@ -5102,6 +5383,20 @@ class Page:
             return
         return Annot(annot)
 
+    def _add_text_marker(self, quads, annot_type):
+
+        CheckParent(self)
+        if not self.parent.isPDF:
+            raise ValueError("not a PDF")
+
+        val = Page__add_text_marker(self, quads, annot_type)
+        if not val:
+            return None
+        #val.parent = weakref.proxy(self)
+        self._annot_refs[id(val)] = val
+
+        return val
+
     def _get_text_page(self, clip=None, flags=0):
         val = _fitz.Page__get_text_page(self, clip, flags)
         val.thisown = True
@@ -5109,22 +5404,144 @@ class Page:
 
     def _get_textpage(self, clip=None, flags=0, matrix=None):
         #return _fitz.Page__get_textpage(self, clip, flags, matrix)
-        #fz_stext_page *tpage=NULL;
         page = self.this
-        #fz_device *dev = NULL;
-        #fz_stext_options options;
-        #memset(&options, 0, sizeof options);
         options = mupdf.StextOptions(flags)
         rect = JM_rect_from_py(clip)
-        #jlib.log('{clip=} {rect=}')
         ctm = JM_matrix_from_py(matrix)
         tpage = mupdf.StextPage(rect)
-        #jlib.log('{type(tpage)=}')
         dev = mupdf.mfz_new_stext_device(tpage, options)
         mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
-        #jlib.log('returning {tpage=}')
         return tpage
+
+    def _insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
+        #return _fitz.Page__insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
+        page = self._pdf_page()
+        ASSERT_PDF(page)
+        pdf = page.doc()
+        # get the objects /Resources, /Resources/Font
+        import sys
+        sys.stdout = sys.stderr
+        resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+        fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
+        if not fonts.m_internal:    # page has no fonts yet
+            fonts = mupdf.mpdf_new_dict(pdf, 10)
+            jlib.log('{fonts=}')
+            d = page.obj()
+            jlib.log('{d=}')
+            jlib.log('{d.is_indirect()=}')
+            jlib.log('{d.is_dict()=}')
+            if d.is_indirect():
+                dd = d.resolve_indirect_chain()
+                jlib.log('{dd=}')
+                jlib.log('{dd.is_indirect()=}')
+                jlib.log('{dd.is_dict()=}')
+            jlib.log('{d.is_dict()=}')
+            d.dict_putl(fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
+            #mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'));
+
+        # check for CJK font
+        data = None
+        if ordering > -1:
+            data, size, index = ordering.lookup_cjk_font()
+        if data:
+            font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
+            font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
+            exto = JM_UnicodeFromStr("n/a")
+            simple = 0
+            #goto weiter;
+
+        else:
+            # check for PDF Base-14 font
+            if bfname:
+                data, size = mupdf.mfz_lookup_base14_font(bfname)
+            if data is not None:
+                font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
+                font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+                exto = JM_UnicodeFromStr("n/a")
+                simple = 1
+                #goto weiter;
+
+            else:
+                if fontfile:
+                    font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
+                else:
+                    res = JM_BufferFromBytes(fontbuffer)
+                    if not res.m_internal:
+                        THROWMSG("need one of fontfile, fontbuffer")
+                    font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
+
+                if not set_simple:
+                    font_obj = mupdf.mpdf_add_cid_font(pdf, font)
+                    simple = 0
+                else:
+                    font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+                    simple = 2
+
+        #weiter: ;
+        ixref = mupdf.mpdf_to_num(font_obj)
+        if mupdf.mfz_font_is_monospaced(font):
+            adv = mupdf.mfz_advance_glyph(font, fz_encode_character(font, 32), 0)
+            width = math.floor(adv * 1000.0 + 0.5)
+            dfonts = mupdf.mpdf_dict_get(font_obj, PDF_NAME('DescendantFonts'))
+            if mupdf.mpdf_is_array(dfonts):
+                n = mupdf.mpdf_array_len(dfonts)
+                for i in range(n):
+                    dfont = mupdf.mpdf_array_get(dfonts, i)
+                    warray = mupdf.mpdf_new_array(pdf, 3)
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
+                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
+                    mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
+
+        name = JM_EscapeStrFromStr(
+                mupdf.mpdf_to_name(
+                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))
+                    )
+                )
+        subt = JM_UnicodeFromStr(
+                mupdf.mpdf_to_name(
+                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('Subtype'))
+                    )
+                )
+        if not exto:
+            exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
+
+        value = [
+                ixref,
+                {
+                    "name": name,   # base font name
+                    "type": subt,   # subtype
+                    "ext": exto,    # file extension
+                    "simple": (True if simple else False),  # simple font?
+                    "ordering": ordering,   # CJK font?
+                },
+                ]
+        # store font in resources and fonts objects will contain named reference to font
+        #mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
+        mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
+        # fixme: pdf->dirty = 1;
+        return value
+
+    def _insertImage(self, filename=None, pixmap=None, stream=None, imask=None, overlay=1, oc=0, xref=0, matrix=None, _imgname=None, _imgpointer=None):
+        return _fitz.Page__insertImage(self, filename, pixmap, stream, imask, overlay, oc, xref, matrix, _imgname, _imgpointer)
+
+    def _load_annot(self, name, xref):
+        #return _fitz.Page__load_annot(self, name, xref)
+        page = self._pdf_page()
+        try:
+            ASSERT_PDF(page)
+            if xref == 0:
+                annot = JM_get_annot_by_name(page, name)
+            else:
+                annot = JM_get_annot_by_xref(page, xref)
+        except Exception as e:
+            jlib.log('{e=} {jlib.exception_info()=}')
+            return
+        return Annot(annot) if annot else None
+
+    def _makePixmap(self, doc, ctm, cs, alpha=0, annots=1, clip=None):
+        return _fitz.Page__makePixmap(self, doc, ctm, cs, alpha, annots, clip)
 
     def _pdf_page(self):
         '''
@@ -5134,6 +5551,10 @@ class Page:
         if isinstance(self.this, mupdf.PdfPage):
             return self.this
         return self.this.page_from_fz_page()
+
+    def _reset_annot_refs(self):
+        """Invalidate / delete all annots of this page."""
+        self._annot_refs.clear()
 
     def _set_opacity(self, gstate=None, CA=1, ca=1):
 
@@ -5169,6 +5590,12 @@ class Page:
         mupdf.mpdf_dict_put_real(opa, PDF_NAME('ca'), ca)
         mupdf.mpdf_dict_puts(extg, gstate, opa)
         return gstate
+
+    def _set_resource_property(self, name, xref):
+        return _fitz.Page__set_resource_property(self, name, xref)
+
+    def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
+        return _fitz.Page__showPDFpage(self, fz_srcpage, overlay, matrix, xref, oc, clip, graftmap, _imgname)
 
     def add_caret_annot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
@@ -5886,197 +6313,28 @@ class Page:
 
     derotationMatrix = derotation_matrix
 
-    def draw_line(
-        page: Page,
-        p1: point_like,
-        p2: point_like,
-        color: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        morph: OptSeq = None,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc=0,
-    ) -> Point:
-        """Draw a line from point p1 to point p2."""
+    def draw_bezier(
+            page: Page,
+            p1: point_like,
+            p2: point_like,
+            p3: point_like,
+            p4: point_like,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            morph: OptStr = None,
+            closePath: bool = False,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw a general cubic Bezier curve from p1 to p4 using control points p2 and p3."""
         img = page.new_shape()
-        p = img.draw_line(Point(p1), Point(p2))
-        img.finish(
-            color=color,
-            dashes=dashes,
-            width=width,
-            closePath=False,
-            lineCap=lineCap,
-            lineJoin=lineJoin,
-            morph=morph,
-            stroke_opacity=stroke_opacity,
-            fill_opacity=fill_opacity,
-            oc=oc,
-        )
-        img.commit(overlay)
-
-        return p
-
-    def draw_squiggle(
-        page: Page,
-        p1: point_like,
-        p2: point_like,
-        breadth: float = 2,
-        color: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        morph: OptSeq = None,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw a squiggly line from point p1 to point p2."""
-        img = page.new_shape()
-        p = img.draw_squiggle(Point(p1), Point(p2), breadth=breadth)
-        img.finish(
-            color=color,
-            dashes=dashes,
-            width=width,
-            closePath=False,
-            lineCap=lineCap,
-            lineJoin=lineJoin,
-            morph=morph,
-            stroke_opacity=stroke_opacity,
-            fill_opacity=fill_opacity,
-            oc=oc,
-        )
-        img.commit(overlay)
-
-        return p
-
-    def draw_zigzag(
-        page: Page,
-        p1: point_like,
-        p2: point_like,
-        breadth: float = 2,
-        color: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        morph: OptSeq = None,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw a zigzag line from point p1 to point p2."""
-        img = page.new_shape()
-        p = img.draw_zigzag(Point(p1), Point(p2), breadth=breadth)
-        img.finish(
-            color=color,
-            dashes=dashes,
-            width=width,
-            closePath=False,
-            lineCap=lineCap,
-            lineJoin=lineJoin,
-            morph=morph,
-            stroke_opacity=stroke_opacity,
-            fill_opacity=fill_opacity,
-            oc=oc,
-        )
-        img.commit(overlay)
-
-        return p
-
-    def draw_rect(
-        page: Page,
-        rect: rect_like,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        morph: OptSeq = None,
-        overlay: bool = True,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw a rectangle."""
-        img = page.new_shape()
-        Q = img.draw_rect(Rect(rect))
-        img.finish(
-            color=color,
-            fill=fill,
-            dashes=dashes,
-            width=width,
-            lineCap=lineCap,
-            lineJoin=lineJoin,
-            morph=morph,
-            stroke_opacity=stroke_opacity,
-            fill_opacity=fill_opacity,
-            oc=oc,
-        )
-        img.commit(overlay)
-
-        return Q
-
-    def draw_quad(
-        page: Page,
-        quad: quad_like,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        morph: OptSeq = None,
-        overlay: bool = True,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw a quadrilateral."""
-        img = page.new_shape()
-        Q = img.draw_quad(Quad(quad))
-        img.finish(
-            color=color,
-            fill=fill,
-            dashes=dashes,
-            width=width,
-            lineCap=lineCap,
-            lineJoin=lineJoin,
-            morph=morph,
-            stroke_opacity=stroke_opacity,
-            fill_opacity=fill_opacity,
-            oc=oc,
-        )
-        img.commit(overlay)
-
-        return Q
-
-    def draw_polyline(
-        page: Page,
-        points: list,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        morph: OptSeq = None,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        closePath: bool = False,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw multiple connected line segments."""
-        img = page.new_shape()
-        Q = img.draw_polyline(points)
+        Q = img.draw_bezier(Point(p1), Point(p2), Point(p3), Point(p4))
         img.finish(
             color=color,
             fill=fill,
@@ -6095,21 +6353,21 @@ class Page:
         return Q
 
     def draw_circle(
-        page: Page,
-        center: point_like,
-        radius: float,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        morph: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
+            page: Page,
+            center: point_like,
+            radius: float,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            morph: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
         """Draw a circle given its center and radius."""
         img = page.new_shape()
         Q = img.draw_circle(Point(center), radius)
@@ -6128,58 +6386,24 @@ class Page:
         img.commit(overlay)
         return Q
 
-    def draw_oval(
-        page: Page,
-        rect: typing.Union[rect_like, quad_like],
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        dashes: OptStr = None,
-        morph: OptSeq = None,
-        width: float = 1,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw an oval given its containing rectangle or quad."""
-        img = page.new_shape()
-        Q = img.draw_oval(rect)
-        img.finish(
-            color=color,
-            fill=fill,
-            dashes=dashes,
-            width=width,
-            lineCap=lineCap,
-            lineJoin=lineJoin,
-            morph=morph,
-            stroke_opacity=stroke_opacity,
-            fill_opacity=fill_opacity,
-            oc=oc,
-        )
-        img.commit(overlay)
-
-        return Q
-
     def draw_curve(
-        page: Page,
-        p1: point_like,
-        p2: point_like,
-        p3: point_like,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        morph: OptSeq = None,
-        closePath: bool = False,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
+            page: Page,
+            p1: point_like,
+            p2: point_like,
+            p3: point_like,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            morph: OptSeq = None,
+            closePath: bool = False,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
         """Draw a special Bezier curve from p1 to p3, generating control points on lines p1 to p2 and p2 to p3."""
         img = page.new_shape()
         Q = img.draw_curve(Point(p1), Point(p2), Point(p3))
@@ -6200,28 +6424,93 @@ class Page:
 
         return Q
 
-    def draw_bezier(
-        page: Page,
-        p1: point_like,
-        p2: point_like,
-        p3: point_like,
-        p4: point_like,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        dashes: OptStr = None,
-        width: float = 1,
-        morph: OptStr = None,
-        closePath: bool = False,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        overlay: bool = True,
-        stroke_opacity: float = 1,
-        fill_opacity: float = 1,
-        oc: int = 0,
-    ) -> Point:
-        """Draw a general cubic Bezier curve from p1 to p4 using control points p2 and p3."""
+    def draw_line(
+            page: Page,
+            p1: point_like,
+            p2: point_like,
+            color: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            morph: OptSeq = None,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc=0,
+            ) -> Point:
+        """Draw a line from point p1 to point p2."""
         img = page.new_shape()
-        Q = img.draw_bezier(Point(p1), Point(p2), Point(p3), Point(p4))
+        p = img.draw_line(Point(p1), Point(p2))
+        img.finish(
+            color=color,
+            dashes=dashes,
+            width=width,
+            closePath=False,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return p
+
+    def draw_oval(
+            page: Page,
+            rect: typing.Union[rect_like, quad_like],
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            dashes: OptStr = None,
+            morph: OptSeq = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw an oval given its containing rectangle or quad."""
+        img = page.new_shape()
+        Q = img.draw_oval(rect)
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return Q
+
+    def draw_polyline(
+            page: Page,
+            points: list,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            morph: OptSeq = None,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            closePath: bool = False,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw multiple connected line segments."""
+        img = page.new_shape()
+        Q = img.draw_polyline(points)
         img.finish(
             color=color,
             fill=fill,
@@ -6231,6 +6520,72 @@ class Page:
             lineJoin=lineJoin,
             morph=morph,
             closePath=closePath,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+        return Q
+
+    def draw_quad(
+            page: Page,
+            quad: quad_like,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            morph: OptSeq = None,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw a quadrilateral."""
+        img = page.new_shape()
+        Q = img.draw_quad(Quad(quad))
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+        return Q
+
+    def draw_rect(
+            page: Page,
+            rect: rect_like,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            morph: OptSeq = None,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw a rectangle."""
+        img = page.new_shape()
+        Q = img.draw_rect(Rect(rect))
+        img.finish(
+            color=color,
+            fill=fill,
+            dashes=dashes,
+            width=width,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
             stroke_opacity=stroke_opacity,
             fill_opacity=fill_opacity,
             oc=oc,
@@ -6284,6 +6639,76 @@ class Page:
         img.commit(overlay)
 
         return Q
+
+    def draw_squiggle(
+            page: Page,
+            p1: point_like,
+            p2: point_like,
+            breadth: float = 2,
+            color: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            morph: OptSeq = None,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw a squiggly line from point p1 to point p2."""
+        img = page.new_shape()
+        p = img.draw_squiggle(Point(p1), Point(p2), breadth=breadth)
+        img.finish(
+            color=color,
+            dashes=dashes,
+            width=width,
+            closePath=False,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return p
+
+    def draw_zigzag(
+            page: Page,
+            p1: point_like,
+            p2: point_like,
+            breadth: float = 2,
+            color: OptSeq = None,
+            dashes: OptStr = None,
+            width: float = 1,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            overlay: bool = True,
+            morph: OptSeq = None,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ) -> Point:
+        """Draw a zigzag line from point p1 to point p2."""
+        img = page.new_shape()
+        p = img.draw_zigzag(Point(p1), Point(p2), breadth=breadth)
+        img.finish(
+            color=color,
+            dashes=dashes,
+            width=width,
+            closePath=False,
+            lineCap=lineCap,
+            lineJoin=lineJoin,
+            morph=morph,
+            stroke_opacity=stroke_opacity,
+            fill_opacity=fill_opacity,
+            oc=oc,
+        )
+        img.commit(overlay)
+
+        return p
 
     @property
     def first_widget(self):
@@ -6774,51 +7199,6 @@ class Page:
 
         return paths
 
-    def insert_text(
-            page,
-            point: point_like,
-            text: typing.Union[str, list],
-            fontsize: float = 11,
-            lineheight: OptFloat = None,
-            fontname: str = "helv",
-            fontfile: OptStr = None,
-            set_simple: int = 0,
-            encoding: int = 0,
-            color: OptSeq = None,
-            fill: OptSeq = None,
-            border_width: float = 1,
-            render_mode: int = 0,
-            rotate: int = 0,
-            morph: OptSeq = None,
-            overlay: bool = True,
-            stroke_opacity: float = 1,
-            fill_opacity: float = 1,
-            oc: int = 0,
-            ):
-        img = page.new_shape()
-        rc = img.insert_text(
-                point,
-                text,
-                fontsize=fontsize,
-                lineheight=lineheight,
-                fontname=fontname,
-                fontfile=fontfile,
-                set_simple=set_simple,
-                encoding=encoding,
-                color=color,
-                fill=fill,
-                border_width=border_width,
-                render_mode=render_mode,
-                rotate=rotate,
-                morph=morph,
-                stroke_opacity=stroke_opacity,
-                fill_opacity=fill_opacity,
-                oc=oc,
-                )
-        if rc >= 0:
-            img.commit(overlay)
-        return rc
-
     def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
         doc = self.parent
@@ -6885,6 +7265,63 @@ class Page:
         doc.get_char_widths(xref, fontdict=fontdict)
         return xref
 
+    def insert_text(
+            page,
+            point: point_like,
+            text: typing.Union[str, list],
+            fontsize: float = 11,
+            lineheight: OptFloat = None,
+            fontname: str = "helv",
+            fontfile: OptStr = None,
+            set_simple: int = 0,
+            encoding: int = 0,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            border_width: float = 1,
+            render_mode: int = 0,
+            rotate: int = 0,
+            morph: OptSeq = None,
+            overlay: bool = True,
+            stroke_opacity: float = 1,
+            fill_opacity: float = 1,
+            oc: int = 0,
+            ):
+        img = page.new_shape()
+        rc = img.insert_text(
+                point,
+                text,
+                fontsize=fontsize,
+                lineheight=lineheight,
+                fontname=fontname,
+                fontfile=fontfile,
+                set_simple=set_simple,
+                encoding=encoding,
+                color=color,
+                fill=fill,
+                border_width=border_width,
+                render_mode=render_mode,
+                rotate=rotate,
+                morph=morph,
+                stroke_opacity=stroke_opacity,
+                fill_opacity=fill_opacity,
+                oc=oc,
+                )
+        if rc >= 0:
+            img.commit(overlay)
+        return rc
+
+    @property
+    def language(self):
+        """Page language."""
+        #return _fitz.Page_language(self)
+        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
+        if not pdfpage.m_internal:
+            return
+        lang = mupdf.mpdf_dict_get_inheritable(pdfpage.obj(), PDF_NAME('Lang'))
+        if not lang.m_internal:
+            return
+        return mupdf.mpdf_to_str_buf(lang)
+
     def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
         """Load an annot by name (/NM key) or xref.
 
@@ -6910,18 +7347,6 @@ class Page:
         return val
 
     load_annot = loadAnnot
-
-    @property
-    def language(self):
-        """Page language."""
-        #return _fitz.Page_language(self)
-        pdfpage = mupdf.mpdf_page_from_fz_page(self.this)
-        if not pdfpage.m_internal:
-            return
-        lang = mupdf.mpdf_dict_get_inheritable(pdfpage.obj(), PDF_NAME('Lang'))
-        if not lang.m_internal:
-            return
-        return mupdf.mpdf_to_str_buf(lang)
 
     @property
     def mediabox(self):
@@ -7019,276 +7444,6 @@ class Page:
         CheckParent(self)
 
         return _fitz.Page_setMediaBox(self, rect)
-
-    def _add_ink_annot(self, list):
-        #return _fitz.Page__add_ink_annot(self, list)
-        page = mupdf.mpdf_page_from_fz_page(self.this)
-        #pdf_annot *annot = NULL;
-        #PyObject *p = NULL, *sublist = NULL;
-        #pdf_obj *inklist = NULL, *stroke = NULL;
-        #fz_matrix ctm, inv_ctm;
-        #fz_point point;
-        #fz_var(annot);
-        ASSERT_PDF(page);
-        if not PySequence_Check(list):
-            THROWMSG("arg must be a sequence")
-        mupdf.mpdf_page_transform(page, mupdf.Rect(0), ctm)
-        inv_ctm = mupdf.mfz_invert_matrix(ctm)
-        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_INK)
-        annot_obj = mupdf.mpdf_annot_obj(annot)
-        n0 = len(list)
-        inklist = mupdf.mpdf_new_array(page.doc(), n0)
-
-        for j in range(n0):
-            sublist = list[j]
-            n1 = len(sublist)
-            stroke = mupdf.mpdf_new_array(page.doc(), 2 * n1)
-
-            for i in range(n1):
-                p = sublist[i]
-                if not PySequence_Check(p) or PySequence_Size(p) != 2:
-                    THROWMSG("3rd level entries must be pairs of floats")
-                point = mupdf.mfz_transform_point(JM_point_from_py(p), inv_ctm)
-                mupdf.mpdf_array_push_real(stroke, point.x)
-                mupdf.mpdf_array_push_real(stroke, point.y)
-
-            mupdf.mpdf_array_push(inklist, stroke)
-
-        mupdf.mpdf_dict_put(annot_obj, PDF_NAME('InkList'), inklist)
-        mupdf.mpdf_dirty_annot(annot)
-        JM_add_annot_id(annot, "A")
-        mupdf.mpdf_update_annot(annot)
-        return Annot(annot)
-
-    def _add_stamp_annot(self, rect, stamp=0):
-        #return _fitz.Page__add_stamp_annot(self, rect, stamp)
-        page = self._pdf_page()
-        #pdf_annot *annot = NULL;
-        stamp_id = [
-                PDF_NAME('Approved'),
-                PDF_NAME('AsIs'),
-                PDF_NAME('Confidential'),
-                PDF_NAME('Departmental'),
-                PDF_NAME('Experimental'),
-                PDF_NAME('Expired'),
-                PDF_NAME('Final'),
-                PDF_NAME('ForComment'),
-                PDF_NAME('ForPublicRelease'),
-                PDF_NAME('NotApproved'),
-                PDF_NAME('NotForPublicRelease'),
-                PDF_NAME('Sold'),
-                PDF_NAME('TopSecret'),
-                PDF_NAME('Draft'),
-                ]
-        n = len(stamp_id)
-        name = stamp_id[0]
-        try:
-            ASSERT_PDF(page)
-            r = JM_rect_from_py(rect)
-            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
-                THROWMSG("rect must be finite and not empty")
-            if INRANGE(stamp, 0, n-1):
-                name = stamp_id[stamp]
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
-            mupdf.mpdf_set_annot_contents(
-                    annot,
-                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
-                    )
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=} {jlib.exception_info()=}')
-            return
-        return Annot(annot)
-
-    def _add_file_annot(self, point, buffer_, filename, ufilename=None, desc=None, icon=None):
-        #return _fitz.Page__add_file_annot(self, point, buffer, filename, ufilename, desc, icon)
-        page = self._pdf_page()
-        uf = ufilename if ufilename else filename
-        d = desc if desc else filename
-        #fz_buffer *filebuf = NULL;
-        #fz_rect r;
-        p = JM_point_from_py(point)
-        try:
-            ASSERT_PDF(page);
-            filebuf = JM_BufferFromBytes(buffer_)
-            if not filebuf.m_internal:
-                THROWMSG("bad type: 'buffer'")
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_FILE_ATTACHMENT)
-            r = mupdf.mpdf_annot_rect(annot)
-            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            flags = mupdf.PDF_ANNOT_IS_PRINT;
-            mupdf.mpdf_set_annot_flags(annot, flags)
-
-            if icon:
-                mupdf.mpdf_set_annot_icon_name(annot, icon)
-
-            val = JM_embed_file(page.doc(), filebuf, filename, uf, d, 1)
-            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('FS'), val)
-            mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('Contents'), filename)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_set_annot_flags(annot, flags)
-        except Exception as e:
-            jlib.log('{e=}')
-            raise
-            return
-        return Annot(annot)
-
-    def _add_text_marker(self, quads, annot_type):
-
-        CheckParent(self)
-        if not self.parent.isPDF:
-            raise ValueError("not a PDF")
-
-        val = Page__add_text_marker(self, quads, annot_type)
-        if not val:
-            return None
-        #val.parent = weakref.proxy(self)
-        self._annot_refs[id(val)] = val
-
-        return val
-
-
-    def _add_square_or_circle(self, rect, annot_type):
-        #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
-        page = self._pdf_page()
-        try:
-            r = JM_rect_from_py(rect)
-            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
-                THROWMSG("rect must be finite and not empty")
-            annot = mupdf.mpdf_create_annot(page, annot_type)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
-        assert annot.m_internal
-        return Annot(annot)
-
-    def _add_multiline(self, points, annot_type):
-        #return _fitz.Page__add_multiline(self, points, annot_type)
-        page = self._pdf_page()
-        try:
-            if len(points) < 2:
-                THROWMSG(gctx, "bad list of points")
-            annot = mupdf.mpdf_create_annot(page, annot_type)
-            for p in points:
-                if (PySequence_Size(p) != 2):
-                    THROWMSG("bad list of points")
-                point = JM_point_from_py(p)
-                mupdf.mpdf_add_annot_vertex(annot, point)
-
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return;
-        return Annot(annot)
-
-    def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
-        #return _fitz.Page__add_freetext_annot(self, rect, text, fontsize, fontname, text_color, fill_color, align, rotate)
-        page = self._pdf_page()
-        fcol = [1, 1, 1, 1] # fill color: white
-        nfcol = JM_color_FromSequence(fill_color, fcol)
-        tcol = [0, 0, 0, 0]  # std. text color: black
-        ntcol = JM_color_FromSequence(text_color, tcol)
-        r = JM_rect_from_py(rect)
-        if r.is_infinite_rect() or r.is_empty_rect():
-            jlib.log('{rect=} {r=}')
-            raise Exception("rect must be finite and not empty")
-        annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
-        annot.set_annot_contents(text)
-        annot.set_annot_rect(r)
-        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Rotate, rotate)
-        annot.annot_obj().dict_put_int(mupdf.PDF_ENUM_NAME_Q, align)
-
-        if fill_color:
-            annot.set_annot_color(fcol[:nfcol])
-
-        # insert the default appearance string
-        JM_make_annot_DA(annot, ntcol, tcol, fontname, fontsize)
-        JM_add_annot_id(annot, "A")
-        annot.update_annot()
-        return Annot(annot)
-
-    def _load_annot(self, name, xref):
-        #return _fitz.Page__load_annot(self, name, xref)
-        #pdf_annot *annot = NULL;
-        page = self._pdf_page()
-        try:
-            ASSERT_PDF(page)
-            if xref == 0:
-                annot = JM_get_annot_by_name(page, name)
-            else:
-                annot = JM_get_annot_by_xref(page, xref)
-        except Exception as e:
-            jlib.log('{e=} {jlib.exception_info()=}')
-            return
-        return Annot(annot) if annot else None
-
-    def _get_resource_properties(self):
-        return _fitz.Page__get_resource_properties(self)
-
-    def _set_resource_property(self, name, xref):
-        return _fitz.Page__set_resource_property(self, name, xref)
-
-    def _get_optional_content(self, oc: OptInt) -> OptStr:
-        if oc == None or oc == 0:
-            return None
-        doc = self.parent
-        check = doc.xrefObject(oc, compressed=True)
-        if not ("/Type/OCG" in check or "/Type/OCMD" in check):
-            raise ValueError("bad optional content: 'oc'")
-        props = {}
-        for p, x in self._get_resource_properties():
-            props[x] = p
-        if oc in props.keys():
-            return props[oc]
-        i = 0
-        mc = "MC%i" % i
-        while mc in props.values():
-            i += 1
-            mc = "MC%i" % i
-        self._set_resource_property(mc, oc)
-        return mc
-
-
-
-
-
-    def _addWidget(self, field_type, field_name):
-        #return _fitz.Page__addWidget(self, field_type, field_name)
-        jlib.log('{self.this=} {type(self.this)=}')
-        page = self._pdf_page()
-        pdf = page.doc()
-        annot = JM_create_widget(pdf, page, field_type, field_name)
-        if not annot.m_internal:
-            THROWMSG("could not create widget")
-        JM_add_annot_id(annot, "W")
-        return Annot(annot)
-
-    def _getDrawings(self):
-        return _fitz.Page__getDrawings(self)
-
-    def _apply_redactions(self, images):
-        #return _fitz.Page__apply_redactions(self, *args)
-        page = self._pdf_page()
-        opts = mupdf.PdfRedactOptions()
-        #pdf_redact_options opts;
-        opts.black_boxes = 0  # no black boxes
-        opts.image_method = images  # how to treat images
-        ASSERT_PDF(page)
-        success = mupdf.mpdf_redact_page(page.doc(), page, opts)
-        return success
-
-    def _makePixmap(self, doc, ctm, cs, alpha=0, annots=1, clip=None):
-        return _fitz.Page__makePixmap(self, doc, ctm, cs, alpha, annots, clip)
 
     @property
     def firstAnnot(self):
@@ -7407,7 +7562,6 @@ class Page:
         return val
 
     @property
-
     def CropBox(self):
         """The CropBox."""
         CheckParent(self)
@@ -7421,7 +7575,6 @@ class Page:
 
         return val
 
-
     @property
     def CropBoxPosition(self):
         return self.CropBox.tl
@@ -7431,7 +7584,6 @@ class Page:
         return self.CropBoxPosition
 
     @property
-
     def rotation(self):
         """Page rotation."""
         CheckParent(self)
@@ -7443,21 +7595,11 @@ class Page:
             return 0
         return JM_page_rotation(page);
 
-
-
     def setRotation(self, rotation):
         """Set page rotation."""
         CheckParent(self)
 
         return _fitz.Page_setRotation(self, rotation)
-
-
-    def _addAnnot_FromString(self, linklist):
-        """Add links from list of object sources."""
-        CheckParent(self)
-
-        return _fitz.Page__addAnnot_FromString(self, linklist)
-
 
     def clean_contents(self, sanitize=1):
         """Clean page /Contents into one object."""
@@ -7466,13 +7608,6 @@ class Page:
             self.wrap_contents()
 
         return Page_clean_contents(self, sanitize)
-
-
-    def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
-        return _fitz.Page__showPDFpage(self, fz_srcpage, overlay, matrix, xref, oc, clip, graftmap, _imgname)
-
-    def _insertImage(self, filename=None, pixmap=None, stream=None, imask=None, overlay=1, oc=0, xref=0, matrix=None, _imgname=None, _imgpointer=None):
-        return _fitz.Page__insertImage(self, filename, pixmap, stream, imask, overlay, oc, xref, matrix, _imgname, _imgpointer)
 
     def refresh(self):
         """Refresh page after link/annot/widget updates."""
@@ -7544,127 +7679,6 @@ class Page:
     # need to create document font info
         doc.getCharWidths(xref)
         return xref
-
-
-
-    def _insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
-        #return _fitz.Page__insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
-        page = self._pdf_page()
-        #pdf_document *pdf;
-        #pdf_obj *resources, *fonts, *font_obj;
-        #fz_font *font = NULL;
-        #fz_buffer *res = NULL;
-        #const unsigned char *data = NULL;
-        #int size, ixref = 0, index = 0, simple = 0;
-        #PyObject *value;
-        #PyObject *exto = NULL;
-        ASSERT_PDF(page)
-        pdf = page.doc()
-        # get the objects /Resources, /Resources/Font
-        import sys
-        sys.stdout = sys.stderr
-        resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
-        fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
-        if not fonts.m_internal:    # page has no fonts yet
-            fonts = mupdf.mpdf_new_dict(pdf, 10)
-            jlib.log('{fonts=}')
-            d = page.obj()
-            jlib.log('{d=}')
-            jlib.log('{d.is_indirect()=}')
-            jlib.log('{d.is_dict()=}')
-            if d.is_indirect():
-                dd = d.resolve_indirect_chain()
-                jlib.log('{dd=}')
-                jlib.log('{dd.is_indirect()=}')
-                jlib.log('{dd.is_dict()=}')
-            jlib.log('{d.is_dict()=}')
-            d.dict_putl(fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
-            #mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'));
-
-        # check for CJK font
-        data = None
-        if ordering > -1:
-            data, size, index = ordering.lookup_cjk_font()
-        if data:
-            font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
-            font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
-            exto = JM_UnicodeFromStr("n/a")
-            simple = 0
-            #goto weiter;
-
-        else:
-            # check for PDF Base-14 font
-            if bfname:
-                data, size = mupdf.mfz_lookup_base14_font(bfname)
-            if data is not None:
-                font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
-                font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
-                exto = JM_UnicodeFromStr("n/a")
-                simple = 1
-                #goto weiter;
-
-            else:
-                if fontfile:
-                    font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
-                else:
-                    res = JM_BufferFromBytes(fontbuffer)
-                    if not res.m_internal:
-                        THROWMSG("need one of fontfile, fontbuffer")
-                    font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
-
-                if not set_simple:
-                    font_obj = mupdf.mpdf_add_cid_font(pdf, font)
-                    simple = 0
-                else:
-                    font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
-                    simple = 2
-
-        #weiter: ;
-        ixref = mupdf.mpdf_to_num(font_obj)
-        if mupdf.mfz_font_is_monospaced(font):
-            adv = mupdf.mfz_advance_glyph(font, fz_encode_character(font, 32), 0)
-            width = math.floor(adv * 1000.0 + 0.5)
-            dfonts = mupdf.mpdf_dict_get(font_obj, PDF_NAME('DescendantFonts'))
-            if mupdf.mpdf_is_array(dfonts):
-                n = mupdf.mpdf_array_len(dfonts)
-                for i in range(n):
-                    dfont = mupdf.mpdf_array_get(dfonts, i)
-                    warray = mupdf.mpdf_new_array(pdf, 3)
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
-                    #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
-                    mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
-
-        name = JM_EscapeStrFromStr(
-                mupdf.mpdf_to_name(
-                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))
-                    )
-                )
-        subt = JM_UnicodeFromStr(
-                mupdf.mpdf_to_name(
-                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('Subtype'))
-                    )
-                )
-        if not exto:
-            exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
-
-        value = [
-                ixref,
-                {
-                    "name": name,   # base font name
-                    "type": subt,   # subtype
-                    "ext": exto,    # file extension
-                    "simple": (True if simple else False),  # simple font?
-                    "ordering": ordering,   # CJK font?
-                },
-                ]
-        # store font in resources and fonts objects will contain named reference to font
-        #mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
-        mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
-        # fixme: pdf->dirty = 1;
-        return value
-
 
     @property
     def transformationMatrix(self):
@@ -7788,57 +7802,6 @@ class Page:
             if types is None or widget.field_type in types:
                 yield (widget)
             widget = widget.next
-
-
-    def __str__(self):
-        #CheckParent(self)
-        parent = getattr(self, 'parent', None)
-        #jlib.log('{self.this.m_internal=}')
-        if isinstance(self.this.m_internal, mupdf.pdf_page):
-            #jlib.log('{self.this.m_internal.super=}')
-            number = self.this.m_internal.super.number
-        else:
-            j#lib.log('{self.this.m_internal=}')
-            number = self.this.m_internal.number
-        ret = f'page {number}'
-        if parent:
-            x = self.parent.name
-            if self.parent.stream is not None:
-                x = "<memory, doc# %i>" % (self.parent._graft_id,)
-            if x == "":
-                x = "<new PDF, doc# %i>" % self.parent._graft_id
-            ret += f' of {x}'
-        return ret
-
-    def __repr__(self):
-        return self.__str__()
-        CheckParent(self)
-        x = self.parent.name
-        if self.parent.stream is not None:
-            x = "<memory, doc# %i>" % (self.parent._graft_id,)
-        if x == "":
-            x = "<new PDF, doc# %i>" % self.parent._graft_id
-        return "page %s of %s" % (self.number, x)
-
-    def _forget_annot(self, annot):
-        """Remove an annot from reference dictionary."""
-        aid = id(annot)
-        if aid in self._annot_refs:
-            self._annot_refs[aid] = None
-
-    def _reset_annot_refs(self):
-        """Invalidate / delete all annots of this page."""
-        self._annot_refs.clear()
-
-    def _erase(self):
-        self._reset_annot_refs()
-        try:
-            self.parent._forget_page(self)
-        except:
-            pass
-        self.parent = None
-        self.thisown = False
-        self.number = None
 
     def get_fonts(self, full=False):
         """List of fonts defined in the page object."""
@@ -8160,6 +8123,18 @@ class Pixmap:
         """The size of one pixel."""
         #return _fitz.Pixmap_n(self)
         return mupdf.mfz_pixmap_components(self.this)
+
+    def pillowData(self, *args, **kwargs):
+        """Convert to binary image stream using pillow.
+
+        Arguments are passed to Pillow's Image.save() method.
+        Use it instead of writeImage when other output formats are needed.
+        """
+        from io import BytesIO
+        bytes_out = BytesIO()
+        self.pillowWrite(bytes_out, *args, **kwargs)
+        return bytes_out.getvalue()
+
     def pillowWrite(self, *args, **kwargs):
         """Write to image file using Pillow.
 
@@ -8189,22 +8164,16 @@ class Pixmap:
 
         img.save(*args, **kwargs)
 
-    def pillowData(self, *args, **kwargs):
-        """Convert to binary image stream using pillow.
-
-        Arguments are passed to Pillow's Image.save() method.
-        Use it instead of writeImage when other output formats are needed.
-        """
-        from io import BytesIO
-        bytes_out = BytesIO()
-        self.pillowWrite(bytes_out, *args, **kwargs)
-        return bytes_out.getvalue()
-
     def pixel(self, x, y):
         """Get color tuple of pixel (x, y).
         Last item is the alpha if Pixmap.alpha is true."""
 
         return _fitz.Pixmap_pixel(self, x, y)
+
+    @property
+    def samples(self):
+        """The area of all pixels."""
+        return _fitz.Pixmap_samples(self)
 
     def setAlpha(self, alphavalues=None, premultiply=1):
         """Set alphas to values contained in a byte array.
@@ -8212,13 +8181,13 @@ class Pixmap:
 
         return _fitz.Pixmap_setAlpha(self, alphavalues, premultiply)
 
-    def setPixel(self, x, y, color):
-        """Set color of pixel (x, y)."""
-        return _fitz.Pixmap_setPixel(self, x, y, color)
-
     def setOrigin(self, x, y):
         """Set top-left coordinates."""
         return _fitz.Pixmap_setOrigin(self, x, y)
+
+    def setPixel(self, x, y, color):
+        """Set color of pixel (x, y)."""
+        return _fitz.Pixmap_setPixel(self, x, y, color)
 
     def setRect(self, bbox, color):
         """Set color of all pixels in bbox."""
@@ -8228,11 +8197,6 @@ class Pixmap:
         """Set resolution in both dimensions.
         Use pillowWrite to reflect this in output image."""
         return _fitz.Pixmap_setResolution(self, xres, yres)
-
-    @property
-    def samples(self):
-        """The area of all pixels."""
-        return _fitz.Pixmap_samples(self)
 
     def shrink(self, factor):
         """Divide width and height by 2**factor.
