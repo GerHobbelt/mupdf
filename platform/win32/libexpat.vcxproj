@@ -126,8 +126,8 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/libexpat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -152,8 +152,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/libexpat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -181,8 +181,8 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/libexpat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -207,8 +207,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/libexpat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;BUILD_MONOLITHIC;BUILDING_LIBEXPAT;EXPAT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -230,8 +230,6 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/examples/elements.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/examples/outline.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/fuzz/xml_parse_fuzzer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/fuzz/xml_parsebuffer_fuzzer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/gennmtab/gennmtab.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/lib/xmlparse.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libexpat/expat/lib/xmlrole.c" />
@@ -276,6 +274,43 @@
     <ClInclude Include="../../thirdparty/owemdjee/libexpat/expat/xmlwf/xmlfile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libexpat/expat/xmlwf/xmlmime.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libexpat/expat/xmlwf/xmltchar.h" />
+    <ClInclude Include="..\..\scripts\libexpat\expat_config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\acinclude.m4" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\apply-clang-format.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\AUTHORS" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\buildconf.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\Changes" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\clean_coverage.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\CMake.README" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\autotools\expat-config-version.cmake.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\autotools\expat-noconfig__linux.cmake.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\autotools\expat-noconfig__macos.cmake.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\autotools\expat-noconfig__windows.cmake.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\autotools\expat-package-init.cmake" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\autotools\expat.cmake" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\expat-config.cmake.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\cmake\mingw-toolchain.cmake" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\configure-ac-style.md" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\configure.ac" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\ConfigureChecks.cmake" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\coverage.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\distribute.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\expat.pc.cmake" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\expat.pc.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\expat_config.h.cmake" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\fix-xmltest-log.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\Makefile.am" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\qa.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\README.md" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\run.sh.in" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\expat\test-driver-wrapper.sh" />
+    <None Include="..\..\thirdparty\owemdjee\libexpat\run_cmake.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\thirdparty\owemdjee\libexpat\expat\CMakeLists.txt" />
+    <Text Include="..\..\thirdparty\owemdjee\libexpat\expat\memory-sanitizer-blacklist.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
