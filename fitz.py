@@ -5597,6 +5597,38 @@ class Page:
     def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
         return _fitz.Page__showPDFpage(self, fz_srcpage, overlay, matrix, xref, oc, clip, graftmap, _imgname)
 
+    @property
+    def CropBox(self):
+        """The CropBox."""
+        CheckParent(self)
+
+        #val = _fitz.Page_CropBox(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
+        val = JM_py_from_rect(JM_cropbox(page.obj()))
+        val = Rect(val)
+
+        return val
+
+    @property
+    def CropBoxPosition(self):
+        return self.CropBox.tl
+
+    @property
+    def MediaBox(self):
+        """The MediaBox."""
+        CheckParent(self)
+
+        #val = _fitz.Page_MediaBox(self)
+        page = self._pdf_page()
+        if not page.m_internal:
+            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
+        val = JM_py_from_rect(JM_mediabox(page.obj()))
+        val = Rect(val)
+
+        return val
+
     def add_caret_annot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
         old_rotation = annot_preprocess(self)
@@ -6221,6 +6253,14 @@ class Page:
 
     rect = property(bound, doc="page rectangle")
 
+    def clean_contents(self, sanitize=1):
+        """Clean page /Contents into one object."""
+        CheckParent(self)
+        if not sanitize and not self.is_wrapped:
+            self.wrap_contents()
+
+        return Page_clean_contents(self, sanitize)
+
     @property
     def cropbox(self):
         """The CropBox."""
@@ -6235,6 +6275,10 @@ class Page:
         val = Rect(val)
 
         return val
+
+    @property
+    def cropbox_position(self):
+        return self.CropBoxPosition
 
     def delete_annot(self, annot):
         """Delete annot and return next one."""
@@ -6300,6 +6344,35 @@ class Page:
                     self.set_rotation(old_rotation)
             annot_postprocess(self, annot)
             return annot
+
+    def deleteAnnot(self, annot):
+
+        """Delete annot and return next one."""
+        CheckParent(self)
+        CheckParent(annot)
+
+        val = _fitz.Page_deleteAnnot(self, annot)
+
+        if val:
+            val.thisown = True
+            val.parent = weakref.proxy(self) # owning page object
+            val.parent._annot_refs[id(val)] = val
+        annot._erase()
+        return val
+
+    def deleteLink(self, linkdict):
+        """Delete a Link."""
+        CheckParent(self)
+
+        val = _fitz.Page_deleteLink(self, linkdict)
+        if linkdict["xref"] == 0: return
+        try:
+            linkid = linkdict["id"]
+            linkobj = self._annot_refs[linkid]
+            linkobj._erase()
+        except:
+            pass
+        return val
 
     @property
     def derotation_matrix(self) -> Matrix:
@@ -6711,6 +6784,21 @@ class Page:
         return p
 
     @property
+    def firstAnnot(self):
+        """First annotation."""
+        CheckParent(self)
+        #val = _fitz.Page_firstAnnot(self)
+        page = self._pdf_page()
+        if page:
+            annot = mupdf.mpdf_first_annot(page)
+        val = Annot(annot) if annot else None
+        if val:
+            val.thisown = True
+            #val.parent = weakref.proxy(self) # owning page object
+            self._annot_refs[id(val)] = val
+        return val
+
+    @property
     def first_widget(self):
         """First widget/field."""
         CheckParent(self)
@@ -6729,6 +6817,34 @@ class Page:
             widget = Widget()
             TOOLS._fill_widget(val, widget)
             val = widget
+        return val
+
+    @property
+    def firstWidget(self):
+        """First widget/field."""
+        CheckParent(self)
+
+        #val = _fitz.Page_first_widget(self)
+        annot = None
+        jlib.log('{self.this=}')
+        page = self._pdf_page()# mupdf.mpdf_page_from_fz_page(self.this)
+        if page.m_internal:
+            annot = mupdf.mpdf_first_widget(page)
+            if annot.m_internal:
+                 mupdf.mpdf_keep_annot(annot)
+        val = Annot(annot)
+
+        jlib.log('{val=}')
+        jlib.log('{type(val)=}')
+        if val:
+            val.thisown = True
+            #val.parent = weakref.proxy(self) # owning page object
+            self._annot_refs[id(val)] = val
+            widget = Widget()
+            TOOLS._fill_widget(val, widget)
+            val = widget
+
+
         return val
 
     def get_cdrawings(self):
@@ -6756,6 +6872,26 @@ class Page:
             self.set_rotation(old_rotation)
         return val
 
+    def get_contents(self):
+        """Get xrefs of /Contents objects."""
+        CheckParent(self)
+
+        #return _fitz.Page_get_contents(self)
+        ret = []
+        page = self.this.page_from_fz_page()
+        obj = page.obj()
+        contents = obj.dict_get(mupdf.PDF_ENUM_NAME_Contents)
+        if contents.is_array():
+            n = contents.array_len()
+            for i in range(n):
+                icont = contents.array_get(i)
+                xref = icont.to_num()
+                ret.append(xref)
+        elif contents.m_internal:
+            xref = contents.to_num()
+            ret.append( xref)
+        return ret
+
     def get_displaylist(self, annots=1):
         '''
         Make a DisplayList from the page for Pixmap generation.
@@ -6768,6 +6904,11 @@ class Page:
         else:
             dl = mupdf.mfz_new_display_list_from_page_contents(self.this)
         return DisplayList(dl)
+
+    def get_fonts(self, full=False):
+        """List of fonts defined in the page object."""
+        CheckParent(self)
+        return self.parent.get_page_fonts(self.number, full=full)
 
     def get_image_bbox(self, name, transform=0):
         """Get rectangle occupied by image 'name'.
@@ -6832,6 +6973,11 @@ class Page:
         val = rc
 
         return val
+
+    def get_images(self, full=False):
+        """List of images defined in the page object."""
+        CheckParent(self)
+        return self.parent.get_page_images(self.number, full=full)
 
     def get_oc_items(self) -> list:
         """Get OCGs and OCMDs used in the page's contents.
@@ -7310,6 +7456,70 @@ class Page:
             img.commit(overlay)
         return rc
 
+    def insertFont(self, fontname="helv", fontfile=None, fontbuffer=None,
+                   set_simple=False, wmode=0, encoding=0):
+        doc = self.parent
+        if doc is None:
+            raise ValueError("orphaned object: parent is None")
+        idx = 0
+
+        if fontname.startswith("/"):
+            fontname = fontname[1:]
+
+        font = CheckFont(self, fontname)
+        if font is not None:                    # font already in font list of page
+            xref = font[0]                      # this is the xref
+            if CheckFontInfo(doc, xref):        # also in our document font list?
+                return xref                     # yes: we are done
+            # need to build the doc FontInfo entry - done via getCharWidths
+            doc.getCharWidths(xref)
+            return xref
+
+        #--------------------------------------------------------------------------
+        # the font is not present for this page
+        #--------------------------------------------------------------------------
+
+        bfname = Base14_fontdict.get(fontname.lower(), None) # BaseFont if Base-14 font
+
+        serif = 0
+        CJK_number = -1
+        CJK_list_n = ["china-t", "china-s", "japan", "korea"]
+        CJK_list_s = ["china-ts", "china-ss", "japan-s", "korea-s"]
+
+        try:
+            CJK_number = CJK_list_n.index(fontname)
+            serif = 0
+        except:
+            pass
+
+        if CJK_number < 0:
+            try:
+                CJK_number = CJK_list_s.index(fontname)
+                serif = 1
+            except:
+                pass
+
+        if fontname.lower() in fitz_fontdescriptors.keys():
+            import pymupdf_fonts
+            fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
+            del pymupdf_fonts
+
+        # install the font for the page
+        val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
+                               wmode, serif, encoding, CJK_number)
+
+        if not val:                   # did not work, error return
+            return val
+
+        xref = val[0]                 # xref of installed font
+
+        if CheckFontInfo(doc, xref):  # check again: document already has this font
+            return xref               # we are done
+
+        # need to create document font info
+        doc.getCharWidths(xref)
+        return xref
+
     @property
     def language(self):
         """Page language."""
@@ -7348,6 +7558,25 @@ class Page:
 
     load_annot = loadAnnot
 
+    def loadLinks(self):
+        """Get first Link."""
+        CheckParent(self)
+
+        val = _fitz.Page_loadLinks(self)
+
+        if val:
+            val.thisown = True
+            val.parent = weakref.proxy(self) # owning page object
+            self._annot_refs[id(val)] = val
+            if self.parent.isPDF:
+                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
+                val.xref = link_id[0]
+                val.id = link_id[2]
+            else:
+                val.xref = 0
+                val.id = ""
+        return val
+
     @property
     def mediabox(self):
         """The MediaBox."""
@@ -7363,6 +7592,18 @@ class Page:
 
     def new_shape(self):
         return Shape(self)
+
+    @property
+    def rotation(self):
+        """Page rotation."""
+        CheckParent(self)
+
+        #return _fitz.Page_rotation(self)
+        #pdf_page *page = pdf_page_from_fz_page(gctx, (fz_page *) self);
+        page = self.this if isinstance(self.this, mupdf.PdfPage) else self.this.page_from_fz_page()
+        if not page:
+            return 0
+        return JM_page_rotation(page);
 
     @property
     def rotationMatrix(self) -> Matrix:
@@ -7416,6 +7657,11 @@ class Page:
         #jlib.log('returning {len(rlist)=} {rlist=}')
         return rlist
 
+    def set_contents(self, xref):
+        """Set an xref as the (only) /Contents object."""
+        CheckParent(self)
+
+        return Page_set_contents(self, xref)
 
     def set_language(self, language=None):
         """Set PDF page default language."""
@@ -7436,164 +7682,14 @@ class Page:
     def setCropBox(self, rect):
         """Set the CropBox."""
         CheckParent(self)
-
         return _fitz.Page_setCropBox(self, rect)
 
     def setMediaBox(self, rect):
         """Set the MediaBox."""
         CheckParent(self)
-
         return _fitz.Page_setMediaBox(self, rect)
 
-    @property
-    def firstAnnot(self):
-        """First annotation."""
-        CheckParent(self)
-        #val = _fitz.Page_firstAnnot(self)
-        page = self._pdf_page()
-        if page:
-            annot = mupdf.mpdf_first_annot(page)
-        val = Annot(annot) if annot else None
-        if val:
-            val.thisown = True
-            #val.parent = weakref.proxy(self) # owning page object
-            self._annot_refs[id(val)] = val
-        return val
-
-    @property
-    def firstWidget(self):
-        """First widget/field."""
-        CheckParent(self)
-
-        #val = _fitz.Page_first_widget(self)
-        annot = None
-        jlib.log('{self.this=}')
-        page = self._pdf_page()# mupdf.mpdf_page_from_fz_page(self.this)
-        if page.m_internal:
-            annot = mupdf.mpdf_first_widget(page)
-            if annot.m_internal:
-                 mupdf.mpdf_keep_annot(annot)
-        val = Annot(annot)
-
-        jlib.log('{val=}')
-        jlib.log('{type(val)=}')
-        if val:
-            val.thisown = True
-            #val.parent = weakref.proxy(self) # owning page object
-            self._annot_refs[id(val)] = val
-            widget = Widget()
-            TOOLS._fill_widget(val, widget)
-            val = widget
-
-
-        return val
-
-    def loadLinks(self):
-        """Get first Link."""
-        CheckParent(self)
-
-        val = _fitz.Page_loadLinks(self)
-
-        if val:
-            val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
-            self._annot_refs[id(val)] = val
-            if self.parent.isPDF:
-                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
-                val.xref = link_id[0]
-                val.id = link_id[2]
-            else:
-                val.xref = 0
-                val.id = ""
-
-
-        return val
-
     firstLink = property(loadLinks, doc="First link on page")
-
-
-    def deleteLink(self, linkdict):
-        """Delete a Link."""
-        CheckParent(self)
-
-        val = _fitz.Page_deleteLink(self, linkdict)
-        if linkdict["xref"] == 0: return
-        try:
-            linkid = linkdict["id"]
-            linkobj = self._annot_refs[linkid]
-            linkobj._erase()
-        except:
-            pass
-
-
-        return val
-
-
-    def deleteAnnot(self, annot):
-
-        """Delete annot and return next one."""
-        CheckParent(self)
-        CheckParent(annot)
-
-        val = _fitz.Page_deleteAnnot(self, annot)
-
-        if val:
-            val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
-            val.parent._annot_refs[id(val)] = val
-        annot._erase()
-
-
-        return val
-
-    @property
-
-    def MediaBox(self):
-        """The MediaBox."""
-        CheckParent(self)
-
-        #val = _fitz.Page_MediaBox(self)
-        page = self._pdf_page()
-        if not page.m_internal:
-            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
-        val = JM_py_from_rect(JM_mediabox(page.obj()))
-        val = Rect(val)
-
-        return val
-
-    @property
-    def CropBox(self):
-        """The CropBox."""
-        CheckParent(self)
-
-        #val = _fitz.Page_CropBox(self)
-        page = self._pdf_page()
-        if not page.m_internal:
-            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
-        val = JM_py_from_rect(JM_cropbox(page.obj()))
-        val = Rect(val)
-
-        return val
-
-    @property
-    def CropBoxPosition(self):
-        return self.CropBox.tl
-
-    @property
-    def cropbox_position(self):
-        return self.CropBoxPosition
-
-    @property
-    def rotation(self):
-        """Page rotation."""
-        CheckParent(self)
-
-        #return _fitz.Page_rotation(self)
-        #pdf_page *page = pdf_page_from_fz_page(gctx, (fz_page *) self);
-        page = self.this if isinstance(self.this, mupdf.PdfPage) else self.this.page_from_fz_page()
-        if not page:
-            return 0
-        return JM_page_rotation(page);
 
     def setRotation(self, rotation):
         """Set page rotation."""
@@ -7601,84 +7697,10 @@ class Page:
 
         return _fitz.Page_setRotation(self, rotation)
 
-    def clean_contents(self, sanitize=1):
-        """Clean page /Contents into one object."""
-        CheckParent(self)
-        if not sanitize and not self.is_wrapped:
-            self.wrap_contents()
-
-        return Page_clean_contents(self, sanitize)
-
     def refresh(self):
         """Refresh page after link/annot/widget updates."""
         CheckParent(self)
-
         return _fitz.Page_refresh(self)
-
-
-    def insertFont(self, fontname="helv", fontfile=None, fontbuffer=None,
-                   set_simple=False, wmode=0, encoding=0):
-        doc = self.parent
-        if doc is None:
-            raise ValueError("orphaned object: parent is None")
-        idx = 0
-
-        if fontname.startswith("/"):
-            fontname = fontname[1:]
-
-        font = CheckFont(self, fontname)
-        if font is not None:                    # font already in font list of page
-            xref = font[0]                      # this is the xref
-            if CheckFontInfo(doc, xref):        # also in our document font list?
-                return xref                     # yes: we are done
-    # need to build the doc FontInfo entry - done via getCharWidths
-            doc.getCharWidths(xref)
-            return xref
-
-    #--------------------------------------------------------------------------
-    # the font is not present for this page
-    #--------------------------------------------------------------------------
-
-        bfname = Base14_fontdict.get(fontname.lower(), None) # BaseFont if Base-14 font
-
-        serif = 0
-        CJK_number = -1
-        CJK_list_n = ["china-t", "china-s", "japan", "korea"]
-        CJK_list_s = ["china-ts", "china-ss", "japan-s", "korea-s"]
-
-        try:
-            CJK_number = CJK_list_n.index(fontname)
-            serif = 0
-        except:
-            pass
-
-        if CJK_number < 0:
-            try:
-                CJK_number = CJK_list_s.index(fontname)
-                serif = 1
-            except:
-                pass
-
-        if fontname.lower() in fitz_fontdescriptors.keys():
-            import pymupdf_fonts
-            fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
-            del pymupdf_fonts
-
-    # install the font for the page
-        val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
-                               wmode, serif, encoding, CJK_number)
-
-        if not val:                   # did not work, error return
-            return val
-
-        xref = val[0]                 # xref of installed font
-
-        if CheckFontInfo(doc, xref):  # check again: document already has this font
-            return xref               # we are done
-
-    # need to create document font info
-        doc.getCharWidths(xref)
-        return xref
 
     @property
     def transformationMatrix(self):
@@ -7698,41 +7720,11 @@ class Page:
             val = Matrix(val)
         else:
             val = Matrix(1, 0, 0, -1, 0, self.CropBox.height)
-
-
         return val
 
     @property
     def transformation_matrix(self):
         return self.transformationMatrix
-
-    def get_contents(self):
-        """Get xrefs of /Contents objects."""
-        CheckParent(self)
-
-        #return _fitz.Page_get_contents(self)
-        ret = []
-        page = self.this.page_from_fz_page()
-        obj = page.obj()
-        contents = obj.dict_get(mupdf.PDF_ENUM_NAME_Contents)
-        if contents.is_array():
-            n = contents.array_len()
-            for i in range(n):
-                icont = contents.array_get(i)
-                xref = icont.to_num()
-                ret.append(xref)
-        elif contents.m_internal:
-            xref = contents.to_num()
-            ret.append( xref)
-        return ret
-
-
-    def set_contents(self, xref):
-        """Set an xref as the (only) /Contents object."""
-        CheckParent(self)
-
-        return Page_set_contents(self, xref)
-
 
     @property
     def is_wrapped(self):
@@ -7803,17 +7795,7 @@ class Page:
                 yield (widget)
             widget = widget.next
 
-    def get_fonts(self, full=False):
-        """List of fonts defined in the page object."""
-        CheckParent(self)
-        return self.parent.get_page_fonts(self.number, full=full)
-
     getFontList = get_fonts
-
-    def get_images(self, full=False):
-        """List of images defined in the page object."""
-        CheckParent(self)
-        return self.parent.get_page_images(self.number, full=full)
 
     getImageList = get_images
 
