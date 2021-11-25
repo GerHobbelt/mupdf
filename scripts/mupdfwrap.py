@@ -7723,6 +7723,17 @@ def build_swig(
 
                 '''
 
+    common += f'''
+            /* SWIG-friendly alternative to fz_runetochar(). */
+            std::string runetochar2(int rune)
+            {{
+                char    buffer[10];
+                int n = mupdf::runetochar(buffer, rune);
+                assert(n < sizeof(buffer));
+                return std::string(buffer, n);
+            }}
+            '''
+
     common += generated.swig_cpp
 
     text = ''
