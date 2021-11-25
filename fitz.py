@@ -8736,7 +8736,17 @@ class Quad(object):
 
 
 class Rect(object):
-    """Rect() - all zeros\nRect(x0, y0, x1, y1)\nRect(top-left, x1, y1)\nRect(x0, y0, bottom-right)\nRect(top-left, bottom-right)\nRect(Rect or IRect) - new copy\nRect(sequence) - from 'sequence'"""
+    """Rect() - all zeros
+    Rect(x0, y0, x1, y1)
+    Rect(top-left, x1, y1)
+    Rect(x0, y0, bottom-right)
+    Rect(top-left, bottom-right)
+    Rect(Rect or IRect) - new copy
+    Rect(sequence) - from 'sequence'
+    """
+    def __bool__(self):
+        return not (max(self) == min(self) == 0)
+
     def __init__(self, *args):
         #jlib.log('{args=}')
         if not args:
@@ -8785,6 +8795,120 @@ class Rect(object):
             self.y1 = float(a2)
             return None
         raise ValueError("bad Rect constructor")
+
+    def __getitem__(self, i):
+        return (self.x0, self.y0, self.x1, self.y1)[i]
+
+    def __len__(self):
+        return 4
+
+    def __neg__(self):
+        return Rect(-self.x0, -self.y0, -self.x1, -self.y1)
+
+    def __pos__(self):
+        return Rect(self)
+
+    def __repr__(self):
+        return "Rect" + str(tuple(self))
+
+    def __setitem__(self, i, v):
+        v = float(v)
+        if   i == 0: self.x0 = v
+        elif i == 1: self.y0 = v
+        elif i == 2: self.x1 = v
+        elif i == 3: self.y1 = v
+        else:
+            raise IndexError("index out of range")
+        return None
+
+    def __nonzero__(self):
+        return not (max(self) == min(self) == 0)
+
+    def __eq__(self, rect):
+        if not hasattr(rect, "__len__"):
+            return False
+        return len(rect) == 4 and bool(self - rect) is False
+
+    def __abs__(self):
+        if self.is_empty or self.isInfinite:
+            return 0.0
+        return (self.x1 - self.x0) * (self.y1 - self.y0)
+
+    def norm(self):
+        return math.sqrt(sum([c*c for c in self]))
+
+    def __add__(self, p):
+        if hasattr(p, "__float__"):
+            r = Rect(self.x0 + p, self.y0 + p, self.x1 + p, self.y1 + p)
+        else:
+            if len(p) != 4:
+                raise ValueError("bad Rect: sequ. length")
+            r = Rect(self.x0 + p[0], self.y0 + p[1], self.x1 + p[2], self.y1 + p[3])
+        return r
+
+    def __sub__(self, p):
+        if hasattr(p, "__float__"):
+            return Rect(self.x0 - p, self.y0 - p, self.x1 - p, self.y1 - p)
+        if len(p) != 4:
+            raise ValueError("bad Rect: sequ. length")
+        return Rect(self.x0 - p[0], self.y0 - p[1], self.x1 - p[2], self.y1 - p[3])
+
+    def __mul__(self, m):
+        if hasattr(m, "__float__"):
+            return Rect(self.x0 * m, self.y0 * m, self.x1 * m, self.y1 * m)
+        r = Rect(self)
+        r = r.transform(m)
+        return r
+
+    def __truediv__(self, m):
+        if hasattr(m, "__float__"):
+            return Rect(self.x0 * 1./m, self.y0 * 1./m, self.x1 * 1./m, self.y1 * 1./m)
+        im = TOOLS._invert_matrix(m)[1]
+        if not im:
+            raise ZeroDivisionError("matrix not invertible")
+        r = Rect(self)
+        r = r.transform(im)
+        return r
+
+    __div__ = __truediv__
+
+    def __contains__(self, x):
+        if hasattr(x, "__float__"):
+            return x in tuple(self)
+        l = len(x)
+        r = Rect(self).normalize()
+        if l == 4:
+            if r.is_empty: return False
+            xr = Rect(x).normalize()
+            if xr.is_empty: return True
+            if r.x0 <= xr.x0 and r.y0 <= xr.y0 and r.x1 >= xr.x1 and r.y1 >= xr.y1:
+               return True
+            return False
+        if l == 2:
+            if r.x0 <= x[0] < r.x1 and r.y0 <= x[1] < r.y1:
+               return True
+            return False
+        msg = "bad type or sequence: '%s'" % repr(x)
+        raise ValueError("bad type or sequence: '%s'" % repr(x))
+
+    def __or__(self, x):
+        if not hasattr(x, "__len__"):
+            raise ValueError("bad operand 2")
+
+        r = Rect(self)
+        if len(x) == 2:
+            return r.includePoint(x)
+        if len(x) == 4:
+            return r.include_rect(x)
+        raise ValueError("bad operand 2")
+
+    def __and__(self, x):
+        if not hasattr(x, "__len__"):
+            raise ValueError("bad operand 2")
+
+        r1 = Rect(x)
+        r = Rect(self)
+        return r.intersect(r1)
 
     def normalize(self):
         """Replace rectangle with its finite version."""
@@ -8885,123 +9009,6 @@ class Rect(object):
         self.x0, self.y0, self.x1, self.y1 = TOOLS._transform_rect(self, m)
         return self
 
-    def __getitem__(self, i):
-        return (self.x0, self.y0, self.x1, self.y1)[i]
-
-    def __len__(self):
-        return 4
-
-    def __setitem__(self, i, v):
-        v = float(v)
-        if   i == 0: self.x0 = v
-        elif i == 1: self.y0 = v
-        elif i == 2: self.x1 = v
-        elif i == 3: self.y1 = v
-        else:
-            raise IndexError("index out of range")
-        return None
-
-    def __repr__(self):
-        return "Rect" + str(tuple(self))
-
-    def __pos__(self):
-        return Rect(self)
-
-    def __neg__(self):
-        return Rect(-self.x0, -self.y0, -self.x1, -self.y1)
-
-    def __bool__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __nonzero__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __eq__(self, rect):
-        if not hasattr(rect, "__len__"):
-            return False
-        return len(rect) == 4 and bool(self - rect) is False
-
-    def __abs__(self):
-        if self.is_empty or self.isInfinite:
-            return 0.0
-        return (self.x1 - self.x0) * (self.y1 - self.y0)
-
-    def norm(self):
-        return math.sqrt(sum([c*c for c in self]))
-
-    def __add__(self, p):
-        if hasattr(p, "__float__"):
-            r = Rect(self.x0 + p, self.y0 + p, self.x1 + p, self.y1 + p)
-        else:
-            if len(p) != 4:
-                raise ValueError("bad Rect: sequ. length")
-            r = Rect(self.x0 + p[0], self.y0 + p[1], self.x1 + p[2], self.y1 + p[3])
-        return r
-
-    def __sub__(self, p):
-        if hasattr(p, "__float__"):
-            return Rect(self.x0 - p, self.y0 - p, self.x1 - p, self.y1 - p)
-        if len(p) != 4:
-            raise ValueError("bad Rect: sequ. length")
-        return Rect(self.x0 - p[0], self.y0 - p[1], self.x1 - p[2], self.y1 - p[3])
-
-    def __mul__(self, m):
-        if hasattr(m, "__float__"):
-            return Rect(self.x0 * m, self.y0 * m, self.x1 * m, self.y1 * m)
-        r = Rect(self)
-        r = r.transform(m)
-        return r
-
-    def __truediv__(self, m):
-        if hasattr(m, "__float__"):
-            return Rect(self.x0 * 1./m, self.y0 * 1./m, self.x1 * 1./m, self.y1 * 1./m)
-        im = TOOLS._invert_matrix(m)[1]
-        if not im:
-            raise ZeroDivisionError("matrix not invertible")
-        r = Rect(self)
-        r = r.transform(im)
-        return r
-
-    __div__ = __truediv__
-
-    def __contains__(self, x):
-        if hasattr(x, "__float__"):
-            return x in tuple(self)
-        l = len(x)
-        r = Rect(self).normalize()
-        if l == 4:
-            if r.is_empty: return False
-            xr = Rect(x).normalize()
-            if xr.is_empty: return True
-            if r.x0 <= xr.x0 and r.y0 <= xr.y0 and r.x1 >= xr.x1 and r.y1 >= xr.y1:
-               return True
-            return False
-        if l == 2:
-            if r.x0 <= x[0] < r.x1 and r.y0 <= x[1] < r.y1:
-               return True
-            return False
-        msg = "bad type or sequence: '%s'" % repr(x)
-        raise ValueError("bad type or sequence: '%s'" % repr(x))
-
-    def __or__(self, x):
-        if not hasattr(x, "__len__"):
-            raise ValueError("bad operand 2")
-
-        r = Rect(self)
-        if len(x) == 2:
-            return r.includePoint(x)
-        if len(x) == 4:
-            return r.include_rect(x)
-        raise ValueError("bad operand 2")
-
-    def __and__(self, x):
-        if not hasattr(x, "__len__"):
-            raise ValueError("bad operand 2")
-
-        r1 = Rect(x)
-        r = Rect(self)
-        return r.intersect(r1)
-
     def intersects(self, x):
         """Check if intersection with rectangle x is not empty."""
         r1 = Rect(x)
@@ -9018,26 +9025,6 @@ class Rect(object):
 
 class Shape(object):
     """Create a new shape."""
-
-    @staticmethod
-    def horizontal_angle(C, P):
-        """Return the angle to the horizontal for the connection from C to P.
-        This uses the arcus sine function and resolves its inherent ambiguity by
-        looking up in which quadrant vector S = P - C is located.
-        """
-        S = Point(P - C).unit  # unit vector 'C' -> 'P'
-        alfa = math.asin(abs(S.y))  # absolute angle from horizontal
-        if S.x < 0:  # make arcsin result unique
-            if S.y <= 0:  # bottom-left
-                alfa = -(math.pi - alfa)
-            else:  # top-left
-                alfa = math.pi - alfa
-        else:
-            if S.y >= 0:  # top-right
-                pass
-            else:  # bottom-right
-                alfa = -alfa
-        return alfa
 
     def __init__(self, page: Page):
         CheckParent(page)
@@ -9059,28 +9046,25 @@ class Shape(object):
         self.lastPoint = None
         self.rect = None
 
-    def update_rect(self, x):
-        if self.rect is None:
-            if len(x) == 2:
-                self.rect = Rect(x, x)
-            else:
-                self.rect = Rect(x)
+    def commit(self, overlay: bool = True) -> None:
+        """Update the page's /Contents object with Shape data. The argument controls whether data appear in foreground (default) or background."""
+        CheckParent(self.page)  # doc may have died meanwhile
+        self.totalcont += self.text_cont
 
-        else:
-            if len(x) == 2:
-                x = Point(x)
-                self.rect.x0 = min(self.rect.x0, x.x)
-                self.rect.y0 = min(self.rect.y0, x.y)
-                self.rect.x1 = max(self.rect.x1, x.x)
-                self.rect.y1 = max(self.rect.y1, x.y)
-            else:
-                x = Rect(x)
-                self.rect.x0 = min(self.rect.x0, x.x0)
-                self.rect.y0 = min(self.rect.y0, x.y0)
-                self.rect.x1 = max(self.rect.x1, x.x1)
-                self.rect.y1 = max(self.rect.y1, x.y1)
+        self.totalcont = self.totalcont.encode()
 
-    updateRect = update_rect
+        if self.totalcont != b"":
+            # make /Contents object with dummy stream
+            xref = TOOLS._insert_contents(self.page, b" ", overlay)
+            # update it with potential compression
+            self.doc.update_stream(xref, self.totalcont)
+
+        self.lastPoint = None  # clean up ...
+        self.rect = None  #
+        self.draw_cont = ""  # for potential ...
+        self.text_cont = ""  # ...
+        self.totalcont = ""  # re-use
+        return
 
     def draw_line(self, p1: point_like, p2: point_like):# -> Point:
         """Draw a line between two points."""
@@ -9181,6 +9165,11 @@ class Shape(object):
         k2 = p3 + (p2 - p3) * kappa
         return self.draw_bezier(p1, k1, k2, p3)
 
+    def draw_quad(self, quad: quad_like):# -> Point:
+        """Draw a Quad."""
+        q = Quad(quad)
+        return self.draw_polyline([q.ul, q.ll, q.lr, q.ur, q.ul])
+
     def draw_sector(
             self,
             center: point_like,
@@ -9265,40 +9254,6 @@ class Shape(object):
         self.lastPoint = r.tl
         return self.lastPoint
 
-    def draw_quad(self, quad: quad_like):# -> Point:
-        """Draw a Quad."""
-        q = Quad(quad)
-        return self.draw_polyline([q.ul, q.ll, q.lr, q.ur, q.ul])
-
-    def draw_zigzag(
-            self,
-            p1: point_like,
-            p2: point_like,
-            breadth: float = 2,
-            ):# -> Point:
-        """Draw a zig-zagged line from p1 to p2."""
-        p1 = Point(p1)
-        p2 = Point(p2)
-        S = p2 - p1  # vector start - end
-        rad = abs(S)  # distance of points
-        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
-        if cnt < 4:
-            raise ValueError("points too close")
-        mb = rad / cnt  # revised breadth
-        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
-        i_mat = ~matrix  # get original position
-        points = []  # stores edges
-        for i in range(1, cnt):
-            if i % 4 == 1:  # point "above" connection
-                p = Point(i, -1) * mb
-            elif i % 4 == 3:  # point "below" connection
-                p = Point(i, 1) * mb
-            else:  # ignore others
-                continue
-            points.append(p * i_mat)
-        self.draw_polyline([p1] + points + [p2])  # add start and end points
-        return p2
-
     def draw_squiggle(
             self,
             p1: point_like,
@@ -9336,9 +9291,144 @@ class Shape(object):
             i += 2
         return p2
 
-    # ==============================================================================
-    # Shape.insert_text
-    # ==============================================================================
+    def draw_zigzag(
+            self,
+            p1: point_like,
+            p2: point_like,
+            breadth: float = 2,
+            ):# -> Point:
+        """Draw a zig-zagged line from p1 to p2."""
+        p1 = Point(p1)
+        p2 = Point(p2)
+        S = p2 - p1  # vector start - end
+        rad = abs(S)  # distance of points
+        cnt = 4 * int(round(rad / (4 * breadth), 0))  # always take full phases
+        if cnt < 4:
+            raise ValueError("points too close")
+        mb = rad / cnt  # revised breadth
+        matrix = Matrix(TOOLS._hor_matrix(p1, p2))  # normalize line to x-axis
+        i_mat = ~matrix  # get original position
+        points = []  # stores edges
+        for i in range(1, cnt):
+            if i % 4 == 1:  # point "above" connection
+                p = Point(i, -1) * mb
+            elif i % 4 == 3:  # point "below" connection
+                p = Point(i, 1) * mb
+            else:  # ignore others
+                continue
+            points.append(p * i_mat)
+        self.draw_polyline([p1] + points + [p2])  # add start and end points
+        return p2
+
+    def finish(
+            self,
+            width: float = 1,
+            color: OptSeq = None,
+            fill: OptSeq = None,
+            lineCap: int = 0,
+            lineJoin: int = 0,
+            dashes: OptStr = None,
+            even_odd: bool = False,
+            morph: OptSeq = None,
+            closePath: bool = True,
+            fill_opacity: float = 1,
+            stroke_opacity: float = 1,
+            oc: int = 0,
+            ) -> None:
+        """Finish the current drawing segment.
+
+        Notes:
+            Apply colors, opacity, dashes, line style and width, or
+            morphing. Also whether to close the path
+            by connecting last to first point.
+        """
+        if self.draw_cont == "":  # treat empty contents as no-op
+            return
+
+        if width == 0:  # border color makes no sense then
+            color = None
+        elif color is None:  # vice versa
+            width = 0
+        color_str = ColorCode(color, "c")  # ensure proper color string
+        fill_str = ColorCode(fill, "f")  # ensure proper fill string
+
+        optcont = self.page._get_optional_content(oc)
+        if optcont is not None:
+            self.draw_cont = "/OC /%s BDC\n" % optcont + self.draw_cont
+            emc = "EMC\n"
+        else:
+            emc = ""
+
+        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
+        if alpha != None:
+            self.draw_cont = "/%s gs\n" % alpha + self.draw_cont
+
+        if width != 1:
+            self.draw_cont += "%g w\n" % width
+
+        if lineCap != 0:
+            self.draw_cont = "%i J\n" % lineCap + self.draw_cont
+        if lineJoin != 0:
+            self.draw_cont = "%i j\n" % lineJoin + self.draw_cont
+
+        if dashes not in (None, "", "[] 0"):
+            self.draw_cont = "%s d\n" % dashes + self.draw_cont
+
+        if closePath:
+            self.draw_cont += "h\n"
+            self.lastPoint = None
+
+        if color is not None:
+            self.draw_cont += color_str
+
+        if fill is not None:
+            self.draw_cont += fill_str
+            if color is not None:
+                if not even_odd:
+                    self.draw_cont += "B\n"
+                else:
+                    self.draw_cont += "B*\n"
+            else:
+                if not even_odd:
+                    self.draw_cont += "f\n"
+                else:
+                    self.draw_cont += "f*\n"
+        else:
+            self.draw_cont += "S\n"
+
+        self.draw_cont += emc
+        if CheckMorph(morph):
+            m1 = Matrix(
+                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
+            )
+            mat = ~m1 * morph[1] * m1
+            self.draw_cont = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat) + self.draw_cont
+
+        self.totalcont += "\nq\n" + self.draw_cont + "Q\n"
+        self.draw_cont = ""
+        self.lastPoint = None
+        return
+
+    @staticmethod
+    def horizontal_angle(C, P):
+        """Return the angle to the horizontal for the connection from C to P.
+        This uses the arcus sine function and resolves its inherent ambiguity by
+        looking up in which quadrant vector S = P - C is located.
+        """
+        S = Point(P - C).unit  # unit vector 'C' -> 'P'
+        alfa = math.asin(abs(S.y))  # absolute angle from horizontal
+        if S.x < 0:  # make arcsin result unique
+            if S.y <= 0:  # bottom-left
+                alfa = -(math.pi - alfa)
+            else:  # top-left
+                alfa = math.pi - alfa
+        else:
+            if S.y >= 0:  # top-right
+                pass
+            else:  # bottom-right
+                alfa = -alfa
+        return alfa
+
     def insert_text(
         self,
         point: point_like,
@@ -9836,114 +9926,28 @@ class Shape(object):
         self.updateRect(rect)
         return more
 
-    def finish(
-        self,
-        width: float = 1,
-        color: OptSeq = None,
-        fill: OptSeq = None,
-        lineCap: int = 0,
-        lineJoin: int = 0,
-        dashes: OptStr = None,
-        even_odd: bool = False,
-        morph: OptSeq = None,
-        closePath: bool = True,
-        fill_opacity: float = 1,
-        stroke_opacity: float = 1,
-        oc: int = 0,
-    ) -> None:
-        """Finish the current drawing segment.
-
-        Notes:
-            Apply colors, opacity, dashes, line style and width, or
-            morphing. Also whether to close the path
-            by connecting last to first point.
-        """
-        if self.draw_cont == "":  # treat empty contents as no-op
-            return
-
-        if width == 0:  # border color makes no sense then
-            color = None
-        elif color is None:  # vice versa
-            width = 0
-        color_str = ColorCode(color, "c")  # ensure proper color string
-        fill_str = ColorCode(fill, "f")  # ensure proper fill string
-
-        optcont = self.page._get_optional_content(oc)
-        if optcont is not None:
-            self.draw_cont = "/OC /%s BDC\n" % optcont + self.draw_cont
-            emc = "EMC\n"
-        else:
-            emc = ""
-
-        alpha = self.page._set_opacity(CA=stroke_opacity, ca=fill_opacity)
-        if alpha != None:
-            self.draw_cont = "/%s gs\n" % alpha + self.draw_cont
-
-        if width != 1:
-            self.draw_cont += "%g w\n" % width
-
-        if lineCap != 0:
-            self.draw_cont = "%i J\n" % lineCap + self.draw_cont
-        if lineJoin != 0:
-            self.draw_cont = "%i j\n" % lineJoin + self.draw_cont
-
-        if dashes not in (None, "", "[] 0"):
-            self.draw_cont = "%s d\n" % dashes + self.draw_cont
-
-        if closePath:
-            self.draw_cont += "h\n"
-            self.lastPoint = None
-
-        if color is not None:
-            self.draw_cont += color_str
-
-        if fill is not None:
-            self.draw_cont += fill_str
-            if color is not None:
-                if not even_odd:
-                    self.draw_cont += "B\n"
-                else:
-                    self.draw_cont += "B*\n"
+    def update_rect(self, x):
+        if self.rect is None:
+            if len(x) == 2:
+                self.rect = Rect(x, x)
             else:
-                if not even_odd:
-                    self.draw_cont += "f\n"
-                else:
-                    self.draw_cont += "f*\n"
+                self.rect = Rect(x)
+
         else:
-            self.draw_cont += "S\n"
+            if len(x) == 2:
+                x = Point(x)
+                self.rect.x0 = min(self.rect.x0, x.x)
+                self.rect.y0 = min(self.rect.y0, x.y)
+                self.rect.x1 = max(self.rect.x1, x.x)
+                self.rect.y1 = max(self.rect.y1, x.y)
+            else:
+                x = Rect(x)
+                self.rect.x0 = min(self.rect.x0, x.x0)
+                self.rect.y0 = min(self.rect.y0, x.y0)
+                self.rect.x1 = max(self.rect.x1, x.x1)
+                self.rect.y1 = max(self.rect.y1, x.y1)
 
-        self.draw_cont += emc
-        if CheckMorph(morph):
-            m1 = Matrix(
-                1, 0, 0, 1, morph[0].x + self.x, self.height - morph[0].y - self.y
-            )
-            mat = ~m1 * morph[1] * m1
-            self.draw_cont = "%g %g %g %g %g %g cm\n" % JM_TUPLE(mat) + self.draw_cont
-
-        self.totalcont += "\nq\n" + self.draw_cont + "Q\n"
-        self.draw_cont = ""
-        self.lastPoint = None
-        return
-
-    def commit(self, overlay: bool = True) -> None:
-        """Update the page's /Contents object with Shape data. The argument controls whether data appear in foreground (default) or background."""
-        CheckParent(self.page)  # doc may have died meanwhile
-        self.totalcont += self.text_cont
-
-        self.totalcont = self.totalcont.encode()
-
-        if self.totalcont != b"":
-            # make /Contents object with dummy stream
-            xref = TOOLS._insert_contents(self.page, b" ", overlay)
-            # update it with potential compression
-            self.doc.update_stream(xref, self.totalcont)
-
-        self.lastPoint = None  # clean up ...
-        self.rect = None  #
-        self.draw_cont = ""  # for potential ...
-        self.text_cont = ""  # ...
-        self.totalcont = ""  # re-use
-        return
+    updateRect = update_rect
 
     # define deprecated aliases ------------------------------------------
     drawBezier = draw_bezier
