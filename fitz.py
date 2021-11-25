@@ -8744,8 +8744,54 @@ class Rect(object):
     Rect(Rect or IRect) - new copy
     Rect(sequence) - from 'sequence'
     """
+    def __abs__(self):
+        if self.is_empty or self.isInfinite:
+            return 0.0
+        return (self.x1 - self.x0) * (self.y1 - self.y0)
+
+    def __add__(self, p):
+        if hasattr(p, "__float__"):
+            r = Rect(self.x0 + p, self.y0 + p, self.x1 + p, self.y1 + p)
+        else:
+            if len(p) != 4:
+                raise ValueError("bad Rect: sequ. length")
+            r = Rect(self.x0 + p[0], self.y0 + p[1], self.x1 + p[2], self.y1 + p[3])
+        return r
+
+    def __and__(self, x):
+        if not hasattr(x, "__len__"):
+            raise ValueError("bad operand 2")
+
+        r1 = Rect(x)
+        r = Rect(self)
+        return r.intersect(r1)
+
     def __bool__(self):
         return not (max(self) == min(self) == 0)
+
+    def __contains__(self, x):
+        if hasattr(x, "__float__"):
+            return x in tuple(self)
+        l = len(x)
+        r = Rect(self).normalize()
+        if l == 4:
+            if r.is_empty: return False
+            xr = Rect(x).normalize()
+            if xr.is_empty: return True
+            if r.x0 <= xr.x0 and r.y0 <= xr.y0 and r.x1 >= xr.x1 and r.y1 >= xr.y1:
+               return True
+            return False
+        if l == 2:
+            if r.x0 <= x[0] < r.x1 and r.y0 <= x[1] < r.y1:
+               return True
+            return False
+        msg = "bad type or sequence: '%s'" % repr(x)
+        raise ValueError("bad type or sequence: '%s'" % repr(x))
+
+    def __eq__(self, rect):
+        if not hasattr(rect, "__len__"):
+            return False
+        return len(rect) == 4 and bool(self - rect) is False
 
     def __init__(self, *args):
         #jlib.log('{args=}')
@@ -8799,11 +8845,35 @@ class Rect(object):
     def __getitem__(self, i):
         return (self.x0, self.y0, self.x1, self.y1)[i]
 
+    def __hash__(self):
+        return hash(tuple(self))
+
     def __len__(self):
         return 4
 
+    def __mul__(self, m):
+        if hasattr(m, "__float__"):
+            return Rect(self.x0 * m, self.y0 * m, self.x1 * m, self.y1 * m)
+        r = Rect(self)
+        r = r.transform(m)
+        return r
+
     def __neg__(self):
         return Rect(-self.x0, -self.y0, -self.x1, -self.y1)
+
+    def __nonzero__(self):
+        return not (max(self) == min(self) == 0)
+
+    def __or__(self, x):
+        if not hasattr(x, "__len__"):
+            raise ValueError("bad operand 2")
+
+        r = Rect(self)
+        if len(x) == 2:
+            return r.includePoint(x)
+        if len(x) == 4:
+            return r.include_rect(x)
+        raise ValueError("bad operand 2")
 
     def __pos__(self):
         return Rect(self)
@@ -8821,44 +8891,12 @@ class Rect(object):
             raise IndexError("index out of range")
         return None
 
-    def __nonzero__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __eq__(self, rect):
-        if not hasattr(rect, "__len__"):
-            return False
-        return len(rect) == 4 and bool(self - rect) is False
-
-    def __abs__(self):
-        if self.is_empty or self.isInfinite:
-            return 0.0
-        return (self.x1 - self.x0) * (self.y1 - self.y0)
-
-    def norm(self):
-        return math.sqrt(sum([c*c for c in self]))
-
-    def __add__(self, p):
-        if hasattr(p, "__float__"):
-            r = Rect(self.x0 + p, self.y0 + p, self.x1 + p, self.y1 + p)
-        else:
-            if len(p) != 4:
-                raise ValueError("bad Rect: sequ. length")
-            r = Rect(self.x0 + p[0], self.y0 + p[1], self.x1 + p[2], self.y1 + p[3])
-        return r
-
     def __sub__(self, p):
         if hasattr(p, "__float__"):
             return Rect(self.x0 - p, self.y0 - p, self.x1 - p, self.y1 - p)
         if len(p) != 4:
             raise ValueError("bad Rect: sequ. length")
         return Rect(self.x0 - p[0], self.y0 - p[1], self.x1 - p[2], self.y1 - p[3])
-
-    def __mul__(self, m):
-        if hasattr(m, "__float__"):
-            return Rect(self.x0 * m, self.y0 * m, self.x1 * m, self.y1 * m)
-        r = Rect(self)
-        r = r.transform(m)
-        return r
 
     def __truediv__(self, m):
         if hasattr(m, "__float__"):
@@ -8871,52 +8909,6 @@ class Rect(object):
         return r
 
     __div__ = __truediv__
-
-    def __contains__(self, x):
-        if hasattr(x, "__float__"):
-            return x in tuple(self)
-        l = len(x)
-        r = Rect(self).normalize()
-        if l == 4:
-            if r.is_empty: return False
-            xr = Rect(x).normalize()
-            if xr.is_empty: return True
-            if r.x0 <= xr.x0 and r.y0 <= xr.y0 and r.x1 >= xr.x1 and r.y1 >= xr.y1:
-               return True
-            return False
-        if l == 2:
-            if r.x0 <= x[0] < r.x1 and r.y0 <= x[1] < r.y1:
-               return True
-            return False
-        msg = "bad type or sequence: '%s'" % repr(x)
-        raise ValueError("bad type or sequence: '%s'" % repr(x))
-
-    def __or__(self, x):
-        if not hasattr(x, "__len__"):
-            raise ValueError("bad operand 2")
-
-        r = Rect(self)
-        if len(x) == 2:
-            return r.includePoint(x)
-        if len(x) == 4:
-            return r.include_rect(x)
-        raise ValueError("bad operand 2")
-
-    def __and__(self, x):
-        if not hasattr(x, "__len__"):
-            raise ValueError("bad operand 2")
-
-        r1 = Rect(x)
-        r = Rect(self)
-        return r.intersect(r1)
-
-    def normalize(self):
-        """Replace rectangle with its finite version."""
-        if self.x1 < self.x0:
-            self.x0, self.x1 = self.x1, self.x0
-        if self.y1 < self.y0:
-            self.y0, self.y1 = self.y1, self.y0
-        return self
 
     @property
     def is_empty(self):
@@ -8949,31 +8941,9 @@ class Rect(object):
         """Bottom-right corner."""
         return Point(self.x1, self.y1)
 
-    tl = top_left
-    tr = top_right
-    bl = bottom_left
-    br = bottom_right
-
-    @property
-    def quad(self):
-        """Return Quad version of rectangle."""
-        return Quad(self.tl, self.tr, self.bl, self.br)
-
-    def morph(self, p, m):
-        """Morph with matrix-like m and point-like p.
-
-        Returns a new quad."""
-        return self.quad.morph(p, m)
-
-    def round(self):
-        """Return the IRect."""
-        return IRect(min(self.x0, self.x1), min(self.y0, self.y1),
-                     max(self.x0, self.x1), max(self.y0, self.y1))
-
-    irect = property(round)
-
-    width  = property(lambda self: abs(self.x1 - self.x0))
-    height = property(lambda self: abs(self.y1 - self.y0))
+    def contains(self, x):
+        """Check if containing point-like or rect-like x."""
+        return self.__contains__(x)
 
     def include_point(self, p):
         """Extend to include point-like p."""
@@ -8998,17 +8968,6 @@ class Rect(object):
         self.x0, self.y0, self.x1, self.y1 = TOOLS._intersect_rect(self, r)
         return self
 
-    def contains(self, x):
-        """Check if containing point-like or rect-like x."""
-        return self.__contains__(x)
-
-    def transform(self, m):
-        """Replace with the transformation by matrix-like m."""
-        if not len(m) == 6:
-            raise ValueError("bad Matrix: sequ. length")
-        self.x0, self.y0, self.x1, self.y1 = TOOLS._transform_rect(self, m)
-        return self
-
     def intersects(self, x):
         """Check if intersection with rectangle x is not empty."""
         r1 = Rect(x)
@@ -9019,8 +8978,47 @@ class Rect(object):
             return False
         return True
 
-    def __hash__(self):
-        return hash(tuple(self))
+    def morph(self, p, m):
+        """Morph with matrix-like m and point-like p.
+
+        Returns a new quad."""
+        return self.quad.morph(p, m)
+
+    def norm(self):
+        return math.sqrt(sum([c*c for c in self]))
+
+    def normalize(self):
+        """Replace rectangle with its finite version."""
+        if self.x1 < self.x0:
+            self.x0, self.x1 = self.x1, self.x0
+        if self.y1 < self.y0:
+            self.y0, self.y1 = self.y1, self.y0
+        return self
+
+    @property
+    def quad(self):
+        """Return Quad version of rectangle."""
+        return Quad(self.tl, self.tr, self.bl, self.br)
+
+    def round(self):
+        """Return the IRect."""
+        return IRect(min(self.x0, self.x1), min(self.y0, self.y1),
+                     max(self.x0, self.x1), max(self.y0, self.y1))
+
+    def transform(self, m):
+        """Replace with the transformation by matrix-like m."""
+        if not len(m) == 6:
+            raise ValueError("bad Matrix: sequ. length")
+        self.x0, self.y0, self.x1, self.y1 = TOOLS._transform_rect(self, m)
+        return self
+
+    bl = bottom_left
+    br = bottom_right
+    height = property(lambda self: abs(self.y1 - self.y0))
+    irect = property(round)
+    tl = top_left
+    tr = top_right
+    width  = property(lambda self: abs(self.x1 - self.x0))
 
 
 class Shape(object):
