@@ -12892,12 +12892,6 @@ def JM_new_tracetext_device(out):
     dev.seqno = 0
     return dev
 
-#typedef struct jm_bbox_device_s
-#{
-#    fz_device super;
-#    PyObject *result;
-#} jm_bbox_device;
-
 
 def JM_norm_rotation(rotate):
     '''
@@ -14285,21 +14279,13 @@ def planish_line(p1: point_like, p2: point_like) -> Matrix:
 TOOLS_JM_UNIQUE_ID = 0
 class TOOLS:
     @staticmethod
-    def gen_id():
-        global TOOLS_JM_UNIQUE_ID
-        TOOLS_JM_UNIQUE_ID += 1
-        return TOOLS_JM_UNIQUE_ID
-
-    @staticmethod
-    def mupdf_warnings(reset=1):
-        pass
-
-    @staticmethod
     def _get_all_contents(page):
         page = page.this.page_from_fz_page()
         res = JM_read_contents(page.obj())
         result = JM_BinFromBuffer( res)
         return result
+
+    JM_annot_id_stem = 'fitz'
 
     fitz_config = {
                 "plotter-g": True,
@@ -14329,8 +14315,9 @@ class TOOLS:
                 }
     """PyMuPDF configuration parameters."""
 
-
-    JM_annot_id_stem = 'fitz'
+    @staticmethod
+    def mupdf_warnings(reset=1):
+        pass
 
     @staticmethod
     def set_annot_stem( stem=None):
@@ -14341,6 +14328,14 @@ class TOOLS:
             len_ = 50
         JM_annot_id_stem = stem[:50]
         return JM_annot_id_stem
+
+    @staticmethod
+    def _concat_matrix(m1, m2):
+        #return _fitz.Tools__concat_matrix(m1, m2)
+        a = JM_matrix_from_py(m1)
+        b = JM_matrix_from_py(m2)
+        ret = JM_py_from_matrix(mupdf.mfz_concat(a, b))
+        return ret
 
     @staticmethod
     def _fill_widget(annot, widget):
@@ -14371,6 +14366,56 @@ class TOOLS:
         return val
 
     @staticmethod
+    def _hor_matrix(C, P):
+        #return _fitz.Tools__hor_matrix(self, C, P)
+        # calculate matrix m that maps line CP to the x-axis,
+        # such that C * m = (0, 0), and target line has same length.
+        c = JM_point_from_py(C)
+        p = JM_point_from_py(P)
+        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(p.x - c.x, p.y - c.y))
+        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -c.x, -c.y)
+        m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
+        return JM_py_from_matrix(mupdf.mfz_concat(m1, m2))
+
+    @staticmethod
+    def _include_point_in_rect(r, p):
+        #return _fitz.Tools__include_point_in_rect(self, r, p)
+        r2 = mupdf.mfz_include_point_in_rect(
+                JM_rect_from_py(r),
+                JM_point_from_py(p),
+                )
+        r3 = JM_py_from_rect( r2)
+        return JM_py_from_rect(
+                mupdf.mfz_include_point_in_rect(
+                    JM_rect_from_py(r),
+                    JM_point_from_py(p),
+                    )
+                )
+
+    @staticmethod
+    def _insert_contents(page, newcont, overlay=1):
+        """Add bytes as a new /Contents object for a page, and return its xref."""
+        #return _fitz.Tools__insert_contents(self, page, newcont, overlay)
+        #fz_buffer *contbuf = NULL;
+        #int xref = 0;
+        pdfpage = page._pdf_page()
+        ASSERT_PDF(pdfpage)
+        contbuf = JM_BufferFromBytes(newcont)
+        xref = JM_insert_contents(pdfpage.doc(), pdfpage.obj(), contbuf, overlay)
+        #fixme: pdfpage->doc->dirty = 1;
+        return xref
+
+    @staticmethod
+    def _intersect_rect(r1, r2):
+        #return _fitz.Tools__intersect_rect(self, r1, r2)
+        return JM_py_from_rect(
+                mupdf.mfz_intersect_rect(
+                    JM_rect_from_py(r1),
+                    JM_rect_from_py(r2),
+                    )
+                )
+
+    @staticmethod
     def _invert_matrix(matrix):
         try:
             src = mupdf.Matrix(
@@ -14398,89 +14443,6 @@ class TOOLS:
             return 0, (dst.a, dst.b, dst.c, dst.d, dst.e, dst.f)
 
         return 1, ()
-
-    @staticmethod
-    def _parse_da(annot):
-        def Tools__parse_da(annot):
-            this_annot = annot.this
-            assert isinstance(this_annot, mupdf.PdfAnnot)
-            try:
-                da = mupdf.mpdf_dict_get_inheritable(this_annot.obj(), PDF_NAME('DA'))
-                if not da.m_internal:
-                    trailer = mupdf.mpdf_trailer(this_annot.page().doc())
-                    da = mupdf.ppdf_dict_getl(trailer,
-                            PDF_NAME('Root'),
-                            PDF_NAME('AcroForm'),
-                            PDF_NAME('DA'),
-                            )
-                da_str = mupdf.mpdf_to_text_string(da)
-            except Exception:
-                return
-            #return JM_UnicodeFromStr(da_str);
-            return da_str
-
-        val = Tools__parse_da(annot)
-
-        if not val:
-            return ((0,), "", 0)
-        font = "Helv"
-        fsize = 12
-        col = (0, 0, 0)
-        dat = val.split()  # split on any whitespace
-        for i, item in enumerate(dat):
-            if item == "Tf":
-                font = dat[i - 2][1:]
-                fsize = float(dat[i - 1])
-                dat[i] = dat[i-1] = dat[i-2] = ""
-                continue
-            if item == "g":            # unicolor text
-                col = [(float(dat[i - 1]))]
-                dat[i] = dat[i-1] = ""
-                continue
-            if item == "rg":           # RGB colored text
-                col = [float(f) for f in dat[i - 3:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
-                continue
-            if item == "k":           # CMYK colored text
-                col = [float(f) for f in dat[i - 4:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = dat[i-4] = ""
-                continue
-
-        val = (col, font, fsize)
-        return val
-
-    @staticmethod
-    def _update_da(annot, da_str):
-        #return _fitz.Tools__update_da(self, annot, da_str)
-        try:
-            this_annot = annot.this
-            assert isinstance(this_annot, mupdf.PdfAnnot)
-            mupdf.mpdf_dict_put_text_string(this_annot.obj(), PDF_NAME('DA'), da_str)
-            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('DS'))    # /* not supported */
-            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('RC'))    # /* not supported */
-            mupdf.mpdf_dirty_annot(this_annot)
-        except Exception:
-            return
-        return
-
-    @staticmethod
-    def _save_widget(annot, widget):
-        #return _fitz.Tools__save_widget(self, annot, widget)
-        JM_set_widget_properties(annot, widget);
-
-    @staticmethod
-    def _sine_between(C, P, Q):
-        # for points C, P, Q compute the sine between lines CP and QP
-        c = JM_point_from_py(C)
-        p = JM_point_from_py(P)
-        q = JM_point_from_py(Q)
-        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(q.x - p.x, q.y - p.y))
-        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -p.x, -p.y)
-        m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
-        m1 = mupdf.mfz_concat(m1, m2)
-        c = mupdf.mfz_transform_point(c, m1)
-        c = mupdf.mfz_normalize_vector(c)
-        return c.y
 
     @staticmethod
     def _le_annot_parms(annot, p1, p2, fill_color):
@@ -14519,35 +14481,6 @@ class TOOLS:
         else:
             opacity = ""
         return m, im, L, R, w, scol, fcol, opacity
-
-    @staticmethod
-    def _oval_string(p1, p2, p3, p4):
-        """Return /AP string defining an oval within a 4-polygon provided as points
-        """
-        def bezier(p, q, r):
-            f = "%f %f %f %f %f %f c\n"
-            return f % (p.x, p.y, q.x, q.y, r.x, r.y)
-
-        kappa = 0.55228474983              # magic number
-        ml = p1 + (p4 - p1) * 0.5          # middle points ...
-        mo = p1 + (p2 - p1) * 0.5          # for each ...
-        mr = p2 + (p3 - p2) * 0.5          # polygon ...
-        mu = p4 + (p3 - p4) * 0.5          # side
-        ol1 = ml + (p1 - ml) * kappa       # the 8 bezier
-        ol2 = mo + (p1 - mo) * kappa       # helper points
-        or1 = mo + (p2 - mo) * kappa
-        or2 = mr + (p2 - mr) * kappa
-        ur1 = mr + (p3 - mr) * kappa
-        ur2 = mu + (p3 - mu) * kappa
-        ul1 = mu + (p4 - mu) * kappa
-        ul2 = ml + (p4 - ml) * kappa
-    # now draw, starting from middle point of left side
-        ap = "%f %f m\n" % (ml.x, ml.y)
-        ap += bezier(ol1, ol2, mo)
-        ap += bezier(or1, or2, mr)
-        ap += bezier(ur1, ur2, mu)
-        ap += bezier(ul1, ul2, ml)
-        return ap
 
     @staticmethod
     def _le_diamond(annot, p1, p2, lr, fill_color):
@@ -14719,69 +14652,7 @@ class TOOLS:
         ap += scol + fcol + "b\nQ\n"
         return ap
 
-
-    def _transform_rect(rect, matrix):
-        #return _fitz.Tools__transform_rect(self, rect, matrix)
-        return JM_py_from_rect(
-                mupdf.mfz_transform_rect(
-                    JM_rect_from_py(rect),
-                    JM_matrix_from_py(matrix),
-                    )
-                )
-
-    def _intersect_rect(r1, r2):
-        #return _fitz.Tools__intersect_rect(self, r1, r2)
-        return JM_py_from_rect(
-                mupdf.mfz_intersect_rect(
-                    JM_rect_from_py(r1),
-                    JM_rect_from_py(r2),
-                    )
-                )
-
-    def _include_point_in_rect(r, p):
-        #return _fitz.Tools__include_point_in_rect(self, r, p)
-        r2 = mupdf.mfz_include_point_in_rect(
-                JM_rect_from_py(r),
-                JM_point_from_py(p),
-                )
-        r3 = JM_py_from_rect( r2)
-        return JM_py_from_rect(
-                mupdf.mfz_include_point_in_rect(
-                    JM_rect_from_py(r),
-                    JM_point_from_py(p),
-                    )
-                )
-
-    def _transform_point(point, matrix):
-        #return _fitz.Tools__transform_point(self, point, matrix)
-        return JM_py_from_point(
-                mupdf.mfz_transform_point(
-                    JM_point_from_py(point),
-                    JM_matrix_from_py(matrix),
-                    )
-                )
-
-    def _union_rect(r1, r2):
-        #return _fitz.Tools__union_rect(self, r1, r2)
-        # fz_union_rect() doesn't ignore empty rectangles like it says it
-        # should, so we need to do our own checks first.
-        a = JM_rect_from_py(r1)
-        b = JM_rect_from_py(r2)
-        if a.is_empty_rect():
-            ret = b
-        elif b.is_empty_rect():
-            ret = a
-        else:
-            ret = mupdf.mfz_union_rect(a, b)
-        return JM_py_from_rect(ret)
-
-    def _concat_matrix(m1, m2):
-        #return _fitz.Tools__concat_matrix(m1, m2)
-        a = JM_matrix_from_py(m1)
-        b = JM_matrix_from_py(m2)
-        ret = JM_py_from_matrix(mupdf.mfz_concat(a, b))
-        return ret
-
+    @staticmethod
     def _measure_string(text, fontname, fontsize, encoding=0):
         #return _fitz.Tools__measure_string(self, text, fontname, fontsize, encoding)
         font = mupdf.mfz_new_base14_font(fontname)
@@ -14802,17 +14673,156 @@ class TOOLS:
             w += mupdf.mfz_advance_glyph(font, g, 0)
         return w * fontsize
 
-    def _hor_matrix(C, P):
-        #return _fitz.Tools__hor_matrix(self, C, P)
-        # calculate matrix m that maps line CP to the x-axis,
-        # such that C * m = (0, 0), and target line has same length.
+    @staticmethod
+    def _oval_string(p1, p2, p3, p4):
+        """Return /AP string defining an oval within a 4-polygon provided as points
+        """
+        def bezier(p, q, r):
+            f = "%f %f %f %f %f %f c\n"
+            return f % (p.x, p.y, q.x, q.y, r.x, r.y)
+
+        kappa = 0.55228474983              # magic number
+        ml = p1 + (p4 - p1) * 0.5          # middle points ...
+        mo = p1 + (p2 - p1) * 0.5          # for each ...
+        mr = p2 + (p3 - p2) * 0.5          # polygon ...
+        mu = p4 + (p3 - p4) * 0.5          # side
+        ol1 = ml + (p1 - ml) * kappa       # the 8 bezier
+        ol2 = mo + (p1 - mo) * kappa       # helper points
+        or1 = mo + (p2 - mo) * kappa
+        or2 = mr + (p2 - mr) * kappa
+        ur1 = mr + (p3 - mr) * kappa
+        ur2 = mu + (p3 - mu) * kappa
+        ul1 = mu + (p4 - mu) * kappa
+        ul2 = ml + (p4 - ml) * kappa
+        # now draw, starting from middle point of left side
+        ap = "%f %f m\n" % (ml.x, ml.y)
+        ap += bezier(ol1, ol2, mo)
+        ap += bezier(or1, or2, mr)
+        ap += bezier(ur1, ur2, mu)
+        ap += bezier(ul1, ul2, ml)
+        return ap
+
+    @staticmethod
+    def _parse_da(annot):
+        def Tools__parse_da(annot):
+            this_annot = annot.this
+            assert isinstance(this_annot, mupdf.PdfAnnot)
+            try:
+                da = mupdf.mpdf_dict_get_inheritable(this_annot.obj(), PDF_NAME('DA'))
+                if not da.m_internal:
+                    trailer = mupdf.mpdf_trailer(this_annot.page().doc())
+                    da = mupdf.ppdf_dict_getl(trailer,
+                            PDF_NAME('Root'),
+                            PDF_NAME('AcroForm'),
+                            PDF_NAME('DA'),
+                            )
+                da_str = mupdf.mpdf_to_text_string(da)
+            except Exception:
+                return
+            #return JM_UnicodeFromStr(da_str);
+            return da_str
+
+        val = Tools__parse_da(annot)
+
+        if not val:
+            return ((0,), "", 0)
+        font = "Helv"
+        fsize = 12
+        col = (0, 0, 0)
+        dat = val.split()  # split on any whitespace
+        for i, item in enumerate(dat):
+            if item == "Tf":
+                font = dat[i - 2][1:]
+                fsize = float(dat[i - 1])
+                dat[i] = dat[i-1] = dat[i-2] = ""
+                continue
+            if item == "g":            # unicolor text
+                col = [(float(dat[i - 1]))]
+                dat[i] = dat[i-1] = ""
+                continue
+            if item == "rg":           # RGB colored text
+                col = [float(f) for f in dat[i - 3:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
+                continue
+            if item == "k":           # CMYK colored text
+                col = [float(f) for f in dat[i - 4:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = dat[i-4] = ""
+                continue
+
+        val = (col, font, fsize)
+        return val
+
+    @staticmethod
+    def _save_widget(annot, widget):
+        #return _fitz.Tools__save_widget(self, annot, widget)
+        JM_set_widget_properties(annot, widget);
+
+    @staticmethod
+    def _sine_between(C, P, Q):
+        # for points C, P, Q compute the sine between lines CP and QP
         c = JM_point_from_py(C)
         p = JM_point_from_py(P)
-        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(p.x - c.x, p.y - c.y))
-        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -c.x, -c.y)
+        q = JM_point_from_py(Q)
+        s = mupdf.mfz_normalize_vector(mupdf.mfz_make_point(q.x - p.x, q.y - p.y))
+        m1 = mupdf.mfz_make_matrix(1, 0, 0, 1, -p.x, -p.y)
         m2 = mupdf.mfz_make_matrix(s.x, -s.y, s.y, s.x, 0, 0)
-        return JM_py_from_matrix(mupdf.mfz_concat(m1, m2))
+        m1 = mupdf.mfz_concat(m1, m2)
+        c = mupdf.mfz_transform_point(c, m1)
+        c = mupdf.mfz_normalize_vector(c)
+        return c.y
 
+    def _transform_point(point, matrix):
+        #return _fitz.Tools__transform_point(self, point, matrix)
+        return JM_py_from_point(
+                mupdf.mfz_transform_point(
+                    JM_point_from_py(point),
+                    JM_matrix_from_py(matrix),
+                    )
+                )
+
+    def _transform_rect(rect, matrix):
+        #return _fitz.Tools__transform_rect(self, rect, matrix)
+        return JM_py_from_rect(
+                mupdf.mfz_transform_rect(
+                    JM_rect_from_py(rect),
+                    JM_matrix_from_py(matrix),
+                    )
+                )
+
+    def _union_rect(r1, r2):
+        #return _fitz.Tools__union_rect(self, r1, r2)
+        # fz_union_rect() doesn't ignore empty rectangles like it says it
+        # should, so we need to do our own checks first.
+        a = JM_rect_from_py(r1)
+        b = JM_rect_from_py(r2)
+        if a.is_empty_rect():
+            ret = b
+        elif b.is_empty_rect():
+            ret = a
+        else:
+            ret = mupdf.mfz_union_rect(a, b)
+        return JM_py_from_rect(ret)
+
+    def _update_da(annot, da_str):
+        #return _fitz.Tools__update_da(self, annot, da_str)
+        try:
+            this_annot = annot.this
+            assert isinstance(this_annot, mupdf.PdfAnnot)
+            mupdf.mpdf_dict_put_text_string(this_annot.obj(), PDF_NAME('DA'), da_str)
+            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('DS'))    # /* not supported */
+            mupdf.mpdf_dict_del(this_annot.obj(), PDF_NAME('RC'))    # /* not supported */
+            mupdf.mpdf_dirty_annot(this_annot)
+        except Exception:
+            return
+        return
+
+    @staticmethod
+    def gen_id():
+        global TOOLS_JM_UNIQUE_ID
+        TOOLS_JM_UNIQUE_ID += 1
+        return TOOLS_JM_UNIQUE_ID
+
+    @staticmethod
     def set_font_width(doc, xref, width):
         #return _fitz.Tools_set_font_width(self, doc, xref, width)
         pdf = doc._pdf_page()
@@ -14835,19 +14845,6 @@ class TOOLS:
             jlib.log('{e=}')
             return
         return True
-
-    @staticmethod
-    def _insert_contents(page, newcont, overlay=1):
-        """Add bytes as a new /Contents object for a page, and return its xref."""
-        #return _fitz.Tools__insert_contents(self, page, newcont, overlay)
-        #fz_buffer *contbuf = NULL;
-        #int xref = 0;
-        pdfpage = page._pdf_page()
-        ASSERT_PDF(pdfpage)
-        contbuf = JM_BufferFromBytes(newcont)
-        xref = JM_insert_contents(pdfpage.doc(), pdfpage.obj(), contbuf, overlay)
-        #fixme: pdfpage->doc->dirty = 1;
-        return xref
 
 
 
@@ -14906,879 +14903,10 @@ paperSizes = {  # known paper formats @ 72 dpi
 }
 
 
-
-
-
-def CheckMarkerArg(quads: typing.Any) -> tuple:
-    if CheckRect(quads):
-        r = Rect(quads)
-        return (r.quad,)
-    if CheckQuad(quads):
-        return (quads,)
-    for q in quads:
-        if not (CheckRect(q) or CheckQuad(q)):
-            raise ValueError("bad quads entry")
-    return quads
-
-
-def CheckMorph(o: typing.Any) -> bool:
-    if not bool(o):
-        return False
-    if not (type(o) in (list, tuple) and len(o) == 2):
-        raise ValueError("morph must be a sequence of length 2")
-    if not (len(o[0]) == 2 and len(o[1]) == 6):
-        raise ValueError("invalid morph parm 0")
-    if not o[1][4] == o[1][5] == 0:
-        raise ValueError("invalid morph parm 1")
-    return True
-
-
-def CheckFont(page: "struct Page *", fontname: str) -> tuple:
-    """Return an entry in the page's font list if reference name matches.
-    """
-    for f in page.get_fonts():
-        if f[4] == fontname:
-            return f
-        if f[3].lower() == fontname.lower():
-            return f
-
-
-def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
-    """Return a font info if present in the document.
-    """
-    for f in doc.FontInfos:
-        if xref == f[0]:
-            return f
-
-
-def CheckRect(r: typing.Any) -> bool:
-    """Check whether an object is non-degenerate rect-like.
-
-    It must be a sequence of 4 numbers.
-    """
-    try:
-        r = Rect(r)
-    except:
-        return False
-    return not (r.is_empty or r.isInfinite)
-
-
-def DUMMY(*args, **kw):
-    return
-
-
-def planishLine(p1: point_like, p2: point_like) -> Matrix:
-    """Return matrix which flattens out the line from p1 to p2.
-
-    Args:
-        p1, p2: point_like
-    Returns:
-        Matrix which maps p1 to Point(0,0) and p2 to a point on the x axis at
-        the same distance to Point(0,0). Will always combine a rotation and a
-        transformation.
-    """
-    p1 = Point(p1)
-    p2 = Point(p2)
-    return Matrix(TOOLS._hor_matrix(p1, p2))
-
-
-def ImageProperties(img: typing.ByteString) -> dict:
-    """ Return basic properties of an image.
-
-    Args:
-        img: bytes, bytearray, io.BytesIO object or an opened image file.
-    Returns:
-        A dictionary with keys width, height, colorspace.n, bpc, type, ext and size,
-        where 'type' is the MuPDF image type (0 to 14) and 'ext' the suitable
-        file extension.
-    """
-    if type(img) is io.BytesIO:
-        stream = img.getvalue()
-    elif hasattr(img, "read"):
-        stream = img.read()
-    elif type(img) in (bytes, bytearray):
-        stream = img
-    else:
-        raise ValueError("bad argument 'img'")
-
-    return TOOLS.image_profile(stream)
-
-
-def ConversionHeader(i: str, filename: OptStr ="unknown"):
-    t = i.lower()
-    html = textwrap.dedent("""
-            <!DOCTYPE html>
-            <html>
-            <head>
-            <style>
-            body{background-color:gray}
-            div{position:relative;background-color:white;margin:1em auto}
-            p{position:absolute;margin:0}
-            img{position:absolute}
-            </style>
-            </head>
-            <body>
-            """)
-
-    xml = textwrap.dedent("""
-            <?xml version="1.0"?>
-            <document name="%s">
-            """
-            % filename
-            )
-
-    xhtml = textwrap.dedent("""
-            <?xml version="1.0"?>
-            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-            <html xmlns="http://www.w3.org/1999/xhtml">
-            <head>
-            <style>
-            body{background-color:gray}
-            div{background-color:white;margin:1em;padding:1em}
-            p{white-space:pre-wrap}
-            </style>
-            </head>
-            <body>
-            """)
-
-    text = ""
-    json = '{"document": "%s", "pages": [\n' % filename
-    if t == "html":
-        r = html
-    elif t == "json":
-        r = json
-    elif t == "xml":
-        r = xml
-    elif t == "xhtml":
-        r = xhtml
-    else:
-        r = text
-
-    return r
-
-
-def ConversionTrailer(i: str):
-    t = i.lower()
-    text = ""
-    json = "]\n}"
-    html = "</body>\n</html>\n"
-    xml = "</document>\n"
-    xhtml = html
-    if t == "html":
-        r = html
-    elif t == "json":
-        r = json
-    elif t == "xml":
-        r = xml
-    elif t == "xhtml":
-        r = xhtml
-    else:
-        r = text
-
-    return r
-
-
-def DerotateRect(cropbox: rect_like, rect: rect_like, deg: float) -> Rect:
-    """Calculate the non-rotated rect version.
-
-    Args:
-        cropbox: the page's /CropBox
-        rect: rectangle
-        deg: the page's /Rotate value
-    Returns:
-        Rectangle in original (/CropBox) coordinates
-    """
-    while deg < 0:
-        deg += 360
-    while deg >= 360:
-        deg -= 360
-    if deg % 90 > 0:
-        deg = 0
-    if deg == 0:  # no rotation: no-op
-        return rect
-    points = []  # store the new rect points here
-    for p in rect.quad:  # run through the rect's quad points
-        if deg == 90:
-            q = (p.y, cropbox.height - p.x)
-        elif deg == 270:
-            q = (cropbox.width - p.y, p.x)
-        else:
-            q = (cropbox.width - p.x, cropbox.height - p.y)
-        points.append(q)
-
-    r = Rect(points[0], points[0])
-    for p in points[1:]:
-        r |= p
-    return r
-
-
-def annot_preprocess(page: "Page") -> int:
-    """Prepare for annotation insertion on the page.
-
-    Returns:
-        Old page rotation value. Temporarily sets rotation to 0 when required.
-    """
-    CheckParent(page)
-    if not page.parent.isPDF:
-        raise ValueError("not a PDF")
-    old_rotation = page.rotation
-    if old_rotation != 0:
-        page.setRotation(0)
-    return old_rotation
-
-
-def annot_postprocess(page: "Page", annot: "Annot") -> None:
-    """Clean up after annotation inertion.
-
-    Set ownership flag and store annotation in page annotation dictionary.
-    """
-    #annot.parent = weakref.proxy(page)
-    page._annot_refs[id(annot)] = annot
-    annot.thisown = True
-
-
-def canon(c):
-    assert isinstance(c, int)
-    # TODO: proper unicode case folding
-    # TODO: character equivalence (a matches ä, etc)
-    if c == 0xA0 or c == 0x2028 or c == 0x2029:
-        return ord(' ')
-    if c == ord('\r') or c == ord('\n') or c == ord('\t'):
-        return ord(' ')
-    if c >= ord('A') and c <= ord('Z'):
-        return c - ord('A') + ord('a')
-    return c
-
-
-def chartocanon(s):
-    assert isinstance(s, str)
-    n, c = mupdf.mfz_chartorune(s)
-    c = canon(c);
-    #jlib.log('{s!r=} => {n=} {c=}')
-    return n, c;
-
-
-def dest_is_valid_page(obj, page_object_nums, pagecount):
-    num = mupdf.mpdf_to_num(obj)
-
-    if num == 0:
-        return 0
-    for i in range(pagecount):
-        if mupdf.mpage_object_nums[i] == num:
-            return 1
-    return 0
-
-
-def find_string(s, needle):
-    assert isinstance(s, str)
-    for i in range(len(s)):
-        end = match_string(s[i:], needle);
-        if end is not None:
-            end += i
-            return i, end
-    return None, None
-
-
-def getPDFnow() -> str:
-    '''
-    "Now" timestamp in PDF Format
-    '''
-    import time
-
-    tz = "%s'%s'" % (
-        str(abs(time.altzone // 3600)).rjust(2, "0"),
-        str((abs(time.altzone // 60) % 60)).rjust(2, "0"),
-    )
-    tstamp = time.strftime("D:%Y%m%d%H%M%S", time.localtime())
-    if time.altzone > 0:
-        tstamp += "-" + tz
-    elif time.altzone < 0:
-        tstamp += "+" + tz
-    else:
-        pass
-    return tstamp
-
-
-def getPDFstr(s: str) -> str:
-    """ Return a PDF string depending on its coding.
-
-    Notes:
-        Returns a string bracketed with either "()" or "<>" for hex values.
-        If only ascii then "(original)" is returned, else if only 8 bit chars
-        then "(original)" with interspersed octal strings \nnn is returned,
-        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
-        UTF-16BE encoding of the original.
-    """
-    if not bool(s):
-        return "()"
-
-    def make_utf16be(s):
-        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
-        return "<" + r.hex() + ">"  # brackets indicate hex
-
-    # The following either returns the original string with mixed-in
-    # octal numbers \nnn for chars outside the ASCII range, or returns
-    # the UTF-16BE BOM version of the string.
-    r = ""
-    for c in s:
-        oc = ord(c)
-        if oc > 255:  # shortcut if beyond 8-bit code range
-            return make_utf16be(s)
-
-        if oc > 31 and oc < 127:  # in ASCII range
-            if c in ("(", ")", "\\"):  # these need to be escaped
-                r += "\\"
-            r += c
-            continue
-
-        if oc > 127:  # beyond ASCII
-            r += "\\%03o" % oc
-            continue
-
-        # now the white spaces
-        if oc == 8:  # backspace
-            r += "\\b"
-        elif oc == 9:  # tab
-            r += "\\t"
-        elif oc == 10:  # line feed
-            r += "\\n"
-        elif oc == 12:  # form feed
-            r += "\\f"
-        elif oc == 13:  # carriage return
-            r += "\\r"
-        else:
-            r += "\\267"  # unsupported: replace by 0xB7
-
-    return "(" + r + ")"
-
-
-def get_highlight_selection(page, start: point_like =None, stop: point_like =None, clip: rect_like =None) -> list:
-    """Return rectangles of text lines between two points.
-
-    Notes:
-        The default of 'start' is top-left of 'clip'. The default of 'stop'
-        is bottom-reight of 'clip'.
-
-    Args:
-        start: start point_like
-        stop: end point_like, must be 'below' start
-        clip: consider this rect_like only, default is page rectangle
-    Returns:
-        List of line bbox intersections with the area established by the
-        parameters.
-    """
-    # validate and normalize arguments
-    if clip is None:
-        clip = page.rect
-    clip = Rect(clip)
-    if start is None:
-        start = clip.tl
-    if stop is None:
-        stop = clip.br
-    clip.y0 = start.y
-    clip.y1 = stop.y
-    if clip.is_empty or clip.is_infinite:
-        return []
-
-    # extract text of page, clip only, no images, expand ligatures
-    blocks = page.get_text(
-        "dict", flags=0, clip=clip,
-    )["blocks"]
-
-    lines = []  # will return this list of rectangles
-    for b in blocks:
-        for line in b["lines"]:
-            lines.append(Rect(line["bbox"]))
-
-    if lines == []:  # did not select anything
-        return lines
-
-    lines.sort(key=lambda bbox: bbox.y1)  # sort by vertical positions
-
-    # cut off prefix from first line if start point is close to its top
-    bboxf = lines.pop(0)
-    if bboxf.y0 - start.y <= 0.1 * bboxf.height:  # close enough?
-        r = Rect(start.x, bboxf.y0, bboxf.br)  # intersection rectangle
-        if not (r.is_empty or r.is_infinite):
-            lines.insert(0, r)  # insert again if not empty
-    else:
-        lines.insert(0, bboxf)  # insert again
-
-    if lines == []:  # the list might have been emptied
-        return lines
-
-    # cut off suffix from last line if stop point is close to its bottom
-    bboxl = lines.pop()
-    if stop.y - bboxl.y1 <= 0.1 * bboxl.height:  # close enough?
-        r = Rect(bboxl.tl, stop.x, bboxl.y1)  # intersection rectangle
-        if not (r.is_empty or r.is_infinite):
-            lines.append(r)  # append if not empty
-    else:
-        lines.append(bboxl)  # append again
-
-    return lines
-
-
-def hdist(dir, a, b):
-    dx = b.x - a.x;
-    dy = b.y - a.y;
-    return mupdf.mfz_abs(dx * dir.x + dy * dir.y)
-
-
-def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> list:
-    """Return a list of (rows x cols) equal sized rectangles.
-
-    Notes:
-        A utility to fill a given area with table cells of equal size.
-    Args:
-        rect: rect_like to use as the table area
-        rows: number of rows
-        cols: number of columns
-    Returns:
-        A list with <rows> items, where each item is a list of <cols>
-        PyMuPDF Rect objects of equal sizes.
-    """
-    rect = Rect(rect)  # ensure this is a Rect
-    if rect.is_empty or rect.isInfinite:
-        raise ValueError("rect must be finite and not empty")
-    tl = rect.tl
-
-    height = rect.height / rows  # height of one table cell
-    width = rect.width / cols  # width of one table cell
-    delta_h = (width, 0, width, 0)  # diff to next right rect
-    delta_v = (0, height, 0, height)  # diff to next lower rect
-
-    r = Rect(tl, tl.x + width, tl.y + height)  # first rectangle
-
-    # make the first row
-    row = [r]
-    for i in range(1, cols):
-        r += delta_h  # build next rect to the right
-        row.append(r)
-
-    # make result, starts with first row
-    rects = [row]
-    for i in range(1, rows):
-        row = rects[i - 1]  # take previously appended row
-        nrow = []  # the new row to append
-        for r in row:  # for each previous cell add its downward copy
-            nrow.append(r + delta_v)
-        rects.append(nrow)  # append new row to result
-
-    return rects
-
-
-def match_string(h0, n0):
-    h = 0
-    n = 0
-    #int hc, nc;
-    e = h
-    delta_h, hc = chartocanon(h0[h:])
-    h += delta_h
-    delta_n, nc = chartocanon(n0[n:])
-    n += delta_n
-    while hc == nc:
-        e = h
-        if hc == ord(' '):
-            while 1:
-                delta_h, hc = chartocanon(h0[h:])
-                h += delta_h
-                if hc != ord(' '):
-                    break
-        else:
-            delta_h, hc = chartocanon(h0[h:])
-            h += delta_h
-        if nc == ord(' '):
-            while 1:
-                delta_n, nc = chartocanon(n0[n:])
-                n += delta_n
-                if nc != ord(' '):
-                    break
-        else:
-            delta_n, nc = chartocanon(n0[n:])
-            n += delta_n
-    return None if nc != 0 else e
-
-
-def on_highlight_char(hits, line, ch):
-    #jlib.log('{hits=}')
-    assert hits
-    assert isinstance(line, mupdf.StextLine)
-    assert isinstance(ch, mupdf.StextChar)
-    #struct highlight *hits = arg;
-    vfuzz = ch.m_internal.size * hits.vfuzz
-    hfuzz = ch.m_internal.size * hits.hfuzz
-    ch_quad = JM_char_quad(line, ch)
-    #jlib.log('{hits.len=} {len(hits.quads)=} {vfuzz=} {hfuzz=} {ch_quad=}')
-    if hits.len > 0:
-        # fixme: end = hits.quads[-1]
-        quad = hits.quads[hits.len - 1]
-        end = JM_quad_from_py(quad)
-        #jlib.log('{line.m_internal.dir=} {quad=} {end=} {ch_quad=}')
-        if ( 1
-                and hdist(line.m_internal.dir, end.lr, ch_quad.ll) < hfuzz
-                and vdist(line.m_internal.dir, end.lr, ch_quad.ll) < vfuzz
-                and hdist(line.m_internal.dir, end.ur, ch_quad.ul) < hfuzz
-                and vdist(line.m_internal.dir, end.ur, ch_quad.ul) < vfuzz
-                ):
-            #jlib.log('extending')
-            end.ur = ch_quad.ur
-            end.lr = ch_quad.lr
-            #quad = JM_py_from_quad(end)
-            #hits.quads[hits.len - 1] = quad
-            assert hits.quads[-1] == end
-            return
-    #hits.quads.append(JM_py_from_quad(ch_quad))
-    hits.quads.append(ch_quad)
-    hits.len += 1
-
-
-def pdfobj_string(o, prefix=''):
-    '''
-    Returns description of mupdf.PdfObj (wrapper for pdf_obj) <o>.
-    '''
-    assert 0, 'use mupdf.mpdf_debug_obj() ?'
-    ret = ''
-    if o.is_array:
-        l = o.array_len()
-        ret += f'array {l}\n'
-        for i in range(l):
-            oo = o.array_get(i)
-            ret += pdfobj_string(oo, prefix + '    ')
-            ret += '\n'
-    elif o.is_bool():
-        ret += f'bool: {o.array_get_bool()}\n'
-    elif o.is_dict():
-        l = o.dict_len()
-        ret += f'dict {l}\n'
-        for i in range(l):
-            key = o.dict_get_key(i)
-            value = o.dict_get( key)
-            ret += f'{prefix} {key}: '
-            ret += pdfobj_string( value, prefix + '    ')
-            ret += '\n'
-    elif o.is_embedded_file():
-        ret += f'embedded_file: {o.embedded_file_name()}\n'
-    elif o.is_indirect():
-        ret += f'indirect: ...\n'
-    elif o.is_int():
-        ret += f'int: {o.to_int()}\n'
-    elif o.is_jpx_image():
-        ret += f'jpx_image:\n'
-    elif o.is_name():
-        ret += f'name: {o.to_name()}\n'
-    elif o.is_null:
-        ret += f'null\n'
-    #elif o.is_number:
-    #    ret += f'number\n'
-    elif o.is_real:
-        ret += f'real: {o.to_real()}\n'
-    elif o.is_stream():
-        ret += f'stream\n'
-    elif o.is_string():
-        ret += f'string: {o.to_string()}\n'
-    else:
-        ret += '<>\n'
-
-    return ret
-
-
-def sRGB_to_rgb(srgb: int) -> tuple:
-    """Convert sRGB color code to an RGB color triple.
-
-    There is **no error checking** for performance reasons!
-
-    Args:
-        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
-    Returns:
-        Tuple (red, green, blue) each item in intervall 0 <= item <= 255.
-    """
-    r = srgb >> 16
-    g = (srgb - (r << 16)) >> 8
-    b = srgb - (r << 16) - (g << 8)
-    return (r, g, b)
-
-
-def sRGB_to_pdf(srgb: int) -> tuple:
-    """Convert sRGB color code to a PDF color triple.
-
-    There is **no error checking** for performance reasons!
-
-    Args:
-        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
-    Returns:
-        Tuple (red, green, blue) each item in intervall 0 <= item <= 1.
-    """
-    t = sRGB_to_rgb(srgb)
-    return t[0] / 255.0, t[1] / 255.0, t[2] / 255.0
-
-
-def repair_mono_font(page: "Page", font: "Font") -> None:
-    """Repair character spacing for mono fonts.
-
-    Notes:
-        Some mono-spaced fonts are displayed with a too large character
-        distance, e.g. "a b c" instead of "abc". This utility adds an entry
-        "/W[0 65535 w]" to the descendent font(s) of font. The float w is
-        taken to be the width of 0x20 (space).
-        This should enforce viewers to use 'w' as the character width.
-
-    Args:
-        page: fitz.Page object.
-        font: fitz.Font object.
-    """
-    if not font.flags["mono"]:  # font not flagged as monospaced
-        return None
-    doc = page.parent  # the document
-    fontlist = page.get_fonts()  # list of fonts on page
-    xrefs = [  # list of objects referring to font
-        f[0]
-        for f in fontlist
-        if (f[3] == font.name and f[4].startswith("F") and f[5].startswith("Identity"))
-    ]
-    if xrefs == []:  # our font does not occur
-        return
-    xrefs = set(xrefs)  # drop any double counts
-    width = int(round((font.glyph_advance(32) * 1000)))
-    for xref in xrefs:
-        if not TOOLS.set_font_width(doc, xref, width):
-            print("Cannot set width for '%s' in xref %i" % (font.name, xref))
-
-def retainpage(doc, parent, kids, page):
-    '''
-    Recreate page tree to only retain specified pages.
-    '''
-    pageref = mupdf.mpdf_lookup_page_obj(doc, page)
-    mupdf.mpdf_flatten_inheritable_page_items(pageref)
-    mupdf.mpdf_dict_put(pageref, PDF_NAME('Parent'), parent)
-    # Store page object in new kids array
-    mupdf.mpdf_array_push(kids, pageref)
-
-
-def retainpages(doc, liste):
-    '''
-    This is called by PyMuPDF:
-    liste = page numbers to retain
-    '''
-    #pdf_obj *oldroot, *root, *pages, *kids, *countobj, *olddests;
-    argc = len(liste)
-    #pdf_obj *names_list = NULL;
-    #pdf_obj *outlines;
-    #pdf_obj *ocproperties;
-    pagecount = mupdf.mpdf_count_pages(doc)
-
-    # Keep only pages/type and (reduced) dest entries to avoid
-    # references to dropped pages
-    oldroot = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(doc), PDF_NAME('Root'))
-    pages = mupdf.mpdf_dict_get(oldroot, PDF_NAME('Pages'))
-    olddests = mupdf.mpdf_load_name_tree(doc, PDF_NAME('Dests'))
-    outlines = mupdf.mpdf_dict_get(oldroot, PDF_NAME('Outlines'))
-    ocproperties = mupdf.mpdf_dict_get(oldroot, PDF_NAME('OCProperties'))
-
-    root = mupdf.mpdf_new_dict(doc, 3)
-    mupdf.mpdf_dict_put(root, PDF_NAME('Type'), mupdf.mpdf_dict_get(oldroot, PDF_NAME('Type')))
-    mupdf.mpdf_dict_put(root, PDF_NAME('Pages'), mupdf.mpdf_dict_get(oldroot, PDF_NAME('Pages')))
-    if outlines.m_internal:
-        mupdf.mpdf_dict_put(root, PDF_NAME('Outlines'), outlines)
-    if ocproperties.m_internal:
-        mupdf.mpdf_dict_put(root, PDF_NAME('OCProperties'), ocproperties)
-
-    mupdf.mpdf_update_object(doc, mupdf.mpdf_to_num(oldroot), root)
-
-    # Create a new kids array with only the pages we want to keep
-    kids = mupdf.mpdf_new_array(doc, 1)
-
-    # Retain pages specified
-    for page in range(argc):
-        i = liste[page]
-        if i < 0 or i >= pagecount:
-            THROWMSG("invalid page number(s)")
-        retainpage(doc, pages, kids, i)
-
-    # Update page count and kids array
-    countobj = mupdf.mpdf_new_int(mupdf.mpdf_array_len(kids))
-    mupdf.mpdf_dict_put(pages, PDF_NAME('Count'), countobj)
-    mupdf.mpdf_dict_put(pages, PDF_NAME('Kids'), kids)
-
-    pagecount = mupdf.mpdf_count_pages(doc)
-    #page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums));
-    page_object_nums = []
-    for i in range(pagecount):
-        pageref = mupdf.mpdf_lookup_page_obj(doc, i)
-        page_object_nums.append(mupdf.mpdf_to_num(pageref))
-
-    # If we had an old Dests tree (now reformed as an olddests dictionary),
-    # keep any entries in there that point to valid pages.
-    # This may mean we keep more than we need, but it is safe at least.
-    if olddests:
-        names = mupdf.mpdf_new_dict(doc, 1)
-        dests = mupdf.mpdf_new_dict(doc, 1)
-        len = mupdf.mpdf_dict_len(olddests)
-
-        names_list = mupdf.mpdf_new_array(doc, 32)
-
-        for i in range(len):
-            key = mupdf.mpdf_dict_get_key(olddests, i)
-            val = mupdf.mpdf_dict_get_val(olddests, i)
-            dest = mupdf.mpdf_dict_get(val, PDF_NAME('D'))
-
-            dest = mupdf.mpdf_array_get(dest if dest.m_internal else val, 0)
-            # fixme: need dest_is_valid_page.
-            if dest_is_valid_page(dest, page_object_nums, pagecount):
-                key_str = mupdf.mpdf_new_string(mupdf.mpdf_to_name(key), len(mupdf.mpdf_to_name(key)))
-                mupdf.mpdf_array_push(names_list, key_str)
-                mupdf.mpdf_array_push(names_list, val)
-
-        mupdf.mpdf_dict_put(dests, PDF_NAME('Names'), names_list)
-        mupdf.mpdf_dict_put(names, PDF_NAME('Dests'), dests)
-        mupdf.mpdf_dict_put(root, PDF_NAME('Names'), names)
-
-        #mupdf.mpdf_drop_obj(names)
-        #mupdf.mpdf_drop_obj(dests)
-        #mupdf.mpdf_drop_obj(olddests)
-
-    # Edit each pages /Annot list to remove any links pointing to nowhere.
-    for i in range(pagecount):
-        pageref = mupdf.mpdf_lookup_page_obj(doc, i)
-        annots = mupdf.mpdf_dict_get(pageref, PDF_NAME('Annots'))
-        len = mupdf.mpdf_array_len(annots)
-        j = 0
-        while 1:
-            if j >= len:
-                break
-            o = mupdf.mpdf_array_get(annots, j)
-
-            if not mupdf.mpdf_name_eq(mupdf.mpdf_dict_get(o, PDF_NAME('Subtype')), PDF_NAME('Link')):
-                continue
-
-            if not dest_is_valid(o, pagecount, page_object_nums, names_list):
-                # Remove this annotation
-                mupdf.mpdf_array_delete(annots, j)
-                len -= 1
-                j -= 1
-            j += 1
-
-    if (strip_outlines(ctx, doc, outlines, pagecount, page_object_nums, names_list) == 0):
-        mupdf.mpdf_dict_del(root, PDF_NAME('Outlines'))
-
-
-def strip_outline(doc, outlines, page_count, page_object_nums, names_list):
-    '''
-    Returns (count, first, prev).
-    '''
-    current = outlines
-    while current.m_internal:
-        # Strip any children to start with. This takes care of
-        # First / Last / Count for us.
-        nc = strip_outlines(doc, current, page_count, page_object_nums, names_list)
-
-        if not dest_is_valid(current, page_count, page_object_nums, names_list):
-            if nc == 0:
-                # Outline with invalid dest and no children. Drop it by
-                # pulling the next one in here.
-                next = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
-                if not next.m_internal:
-                    # There is no next one to pull in
-                    if prev.m_internal:
-                        mupdf.mpdf_dict_del(prev, PDF_NAME('Next'))
-                elif prev.m_internal:
-                    mupdf.mpdf_dict_put(prev, PDF_NAME('Next'), next)
-                    mupdf.mpdf_dict_put(next, PDF_NAME('Prev'), prev)
-                else:
-                    mupdf.mpdf_dict_del(next, PDF_NAME('Prev'))
-                current = next
-            else:
-                # Outline with invalid dest, but children. Just drop the dest.
-                mupdf.mpdf_dict_del(current, PDF_NAME('Dest'));
-                mupdf.mpdf_dict_del(current, PDF_NAME('A'));
-                current = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
-        else:
-            # Keep this one
-            if not first.m_internal:
-                first = current
-            prev = current
-            current = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
-            count += 1
-
-    return count, first, prev
-
-
-def strip_outlines(pdoc, outlines, page_count, page_object_nums, names_list):
-    if not outlines.m_internal:
-        return 0
-
-    first = mupdf.mpdf_dict_get(outlines, PDF_NAME('First'))
-    if not first.m_internal:
-        nc = 0
-    else:
-        nc, first, last = strip_outline(doc, first, page_count, page_object_nums, names_list)
-
-    if nc == 0:
-        mupdf.mpdf_dict_del(outlines, PDF_NAME('First'))
-        mupdf.mpdf_dict_del(outlines, PDF_NAME('Last'))
-        mupdf.mpdf_dict_del(outlines, PDF_NAME('Count'))
-    else:
-        old_count = mupdf.mpdf_to_int(mupdf.mpdf_dict_get(outlines, PDF_NAME('Count')))
-        mupdf.mpdf_dict_put(outlines, PDF_NAME('First'), first);
-        mupdf.mpdf_dict_put(outlines, PDF_NAME('Last'), last);
-        mupdf.mpdf_dict_put(outlines, PDF_NAME('Count'), nc if mupdf.mpdf_new_int(old_count) > 0 else -nc)
-    return nc
-
-
-def vdist(dir, a, b):
-    dx = b.x - a.x
-    dy = b.y - a.y
-    return mupdf.mfz_abs(dx * dir.y + dy * dir.x)
-
-
-# Adobe Glyph List functions
-
-_adobe_glyphs = {}
-_adobe_unicodes = {}
-def unicode_to_glyph_name(ch: int) -> str:
-    if _adobe_glyphs == {}:
-        for line in _get_glyph_text():
-            if line.startswith("#"):
-                continue
-            name, unc = line.split(";")
-            uncl = unc.split()
-            for unc in uncl:
-                c = int(unc[:4], base=16)
-                _adobe_glyphs[c] = name
-    return _adobe_glyphs.get(ch, ".notdef")
-
-
-def glyph_name_to_unicode(name: str) -> int:
-    if _adobe_unicodes == {}:
-        for line in _get_glyph_text():
-            if line.startswith("#"):
-                continue
-            gname, unc = line.split(";")
-            c = int(unc[:4], base=16)
-            _adobe_unicodes[gname] = c
-    return _adobe_unicodes.get(name, 65533)
-
-def adobe_glyph_names() -> tuple:
-    if _adobe_unicodes == {}:
-        for line in _get_glyph_text():
-            if line.startswith("#"):
-                continue
-            gname, unc = line.split(";")
-            c = int("0x" + unc[:4], base=16)
-            _adobe_unicodes[gname] = c
-    return tuple(_adobe_unicodes.keys())
-
-def adobe_glyph_unicodes() -> tuple:
-    if _adobe_unicodes == {}:
-        for line in _get_glyph_text():
-            if line.startswith("#"):
-                continue
-            gname, unc = line.split(";")
-            c = int("0x" + unc[:4], base=16)
-            _adobe_unicodes[gname] = c
-    return tuple(_adobe_unicodes.values())
-
 def _get_glyph_text() -> bytes:
+    '''
+    Adobe Glyph List function
+    '''
     return gzip.decompress(base64.b64decode(
     b'H4sIABmRaF8C/7W9SZfjRpI1useviPP15utzqroJgBjYWhEkKGWVlKnOoapVO0YQEYSCJE'
     b'IcMhT569+9Ppibg8xevHdeSpmEXfPBfDZ3N3f/t7u//r//k/zb3WJ4eTv2T9vzXTaZZH/N'
@@ -16246,19 +15374,900 @@ def _get_glyph_text() -> bytes:
     )).decode().splitlines()
 
 
+def CheckMarkerArg(quads: typing.Any) -> tuple:
+    if CheckRect(quads):
+        r = Rect(quads)
+        return (r.quad,)
+    if CheckQuad(quads):
+        return (quads,)
+    for q in quads:
+        if not (CheckRect(q) or CheckQuad(q)):
+            raise ValueError("bad quads entry")
+    return quads
 
 
-if 1:
+def CheckMorph(o: typing.Any) -> bool:
+    if not bool(o):
+        return False
+    if not (type(o) in (list, tuple) and len(o) == 2):
+        raise ValueError("morph must be a sequence of length 2")
+    if not (len(o[0]) == 2 and len(o[1]) == 6):
+        raise ValueError("invalid morph parm 0")
+    if not o[1][4] == o[1][5] == 0:
+        raise ValueError("invalid morph parm 1")
+    return True
+
+
+def CheckFont(page: "struct Page *", fontname: str) -> tuple:
+    """Return an entry in the page's font list if reference name matches.
+    """
+    for f in page.get_fonts():
+        if f[4] == fontname:
+            return f
+        if f[3].lower() == fontname.lower():
+            return f
+
+
+def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
+    """Return a font info if present in the document.
+    """
+    for f in doc.FontInfos:
+        if xref == f[0]:
+            return f
+
+
+def CheckRect(r: typing.Any) -> bool:
+    """Check whether an object is non-degenerate rect-like.
+
+    It must be a sequence of 4 numbers.
+    """
+    try:
+        r = Rect(r)
+    except:
+        return False
+    return not (r.is_empty or r.isInfinite)
+
+
+def DUMMY(*args, **kw):
+    return
+
+
+def ImageProperties(img: typing.ByteString) -> dict:
+    """ Return basic properties of an image.
+
+    Args:
+        img: bytes, bytearray, io.BytesIO object or an opened image file.
+    Returns:
+        A dictionary with keys width, height, colorspace.n, bpc, type, ext and size,
+        where 'type' is the MuPDF image type (0 to 14) and 'ext' the suitable
+        file extension.
+    """
+    if type(img) is io.BytesIO:
+        stream = img.getvalue()
+    elif hasattr(img, "read"):
+        stream = img.read()
+    elif type(img) in (bytes, bytearray):
+        stream = img
+    else:
+        raise ValueError("bad argument 'img'")
+
+    return TOOLS.image_profile(stream)
+
+
+def ConversionHeader(i: str, filename: OptStr ="unknown"):
+    t = i.lower()
+    html = textwrap.dedent("""
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <style>
+            body{background-color:gray}
+            div{position:relative;background-color:white;margin:1em auto}
+            p{position:absolute;margin:0}
+            img{position:absolute}
+            </style>
+            </head>
+            <body>
+            """)
+
+    xml = textwrap.dedent("""
+            <?xml version="1.0"?>
+            <document name="%s">
+            """
+            % filename
+            )
+
+    xhtml = textwrap.dedent("""
+            <?xml version="1.0"?>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+            <style>
+            body{background-color:gray}
+            div{background-color:white;margin:1em;padding:1em}
+            p{white-space:pre-wrap}
+            </style>
+            </head>
+            <body>
+            """)
+
+    text = ""
+    json = '{"document": "%s", "pages": [\n' % filename
+    if t == "html":
+        r = html
+    elif t == "json":
+        r = json
+    elif t == "xml":
+        r = xml
+    elif t == "xhtml":
+        r = xhtml
+    else:
+        r = text
+
+    return r
+
+
+def ConversionTrailer(i: str):
+    t = i.lower()
+    text = ""
+    json = "]\n}"
+    html = "</body>\n</html>\n"
+    xml = "</document>\n"
+    xhtml = html
+    if t == "html":
+        r = html
+    elif t == "json":
+        r = json
+    elif t == "xml":
+        r = xml
+    elif t == "xhtml":
+        r = xhtml
+    else:
+        r = text
+
+    return r
+
+
+def DerotateRect(cropbox: rect_like, rect: rect_like, deg: float) -> Rect:
+    """Calculate the non-rotated rect version.
+
+    Args:
+        cropbox: the page's /CropBox
+        rect: rectangle
+        deg: the page's /Rotate value
+    Returns:
+        Rectangle in original (/CropBox) coordinates
+    """
+    while deg < 0:
+        deg += 360
+    while deg >= 360:
+        deg -= 360
+    if deg % 90 > 0:
+        deg = 0
+    if deg == 0:  # no rotation: no-op
+        return rect
+    points = []  # store the new rect points here
+    for p in rect.quad:  # run through the rect's quad points
+        if deg == 90:
+            q = (p.y, cropbox.height - p.x)
+        elif deg == 270:
+            q = (cropbox.width - p.y, p.x)
+        else:
+            q = (cropbox.width - p.x, cropbox.height - p.y)
+        points.append(q)
+
+    r = Rect(points[0], points[0])
+    for p in points[1:]:
+        r |= p
+    return r
+
+
+def adobe_glyph_names() -> tuple:
+    '''
+    Adobe Glyph List function
+    '''
+    if _adobe_unicodes == {}:
+        for line in _get_glyph_text():
+            if line.startswith("#"):
+                continue
+            gname, unc = line.split(";")
+            c = int("0x" + unc[:4], base=16)
+            _adobe_unicodes[gname] = c
+    return tuple(_adobe_unicodes.keys())
+
+
+def adobe_glyph_unicodes() -> tuple:
+    '''
+    Adobe Glyph List function
+    '''
+    if _adobe_unicodes == {}:
+        for line in _get_glyph_text():
+            if line.startswith("#"):
+                continue
+            gname, unc = line.split(";")
+            c = int("0x" + unc[:4], base=16)
+            _adobe_unicodes[gname] = c
+    return tuple(_adobe_unicodes.values())
+
+
+def annot_preprocess(page: "Page") -> int:
+    """Prepare for annotation insertion on the page.
+
+    Returns:
+        Old page rotation value. Temporarily sets rotation to 0 when required.
+    """
+    CheckParent(page)
+    if not page.parent.isPDF:
+        raise ValueError("not a PDF")
+    old_rotation = page.rotation
+    if old_rotation != 0:
+        page.setRotation(0)
+    return old_rotation
+
+
+def annot_postprocess(page: "Page", annot: "Annot") -> None:
+    """Clean up after annotation inertion.
+
+    Set ownership flag and store annotation in page annotation dictionary.
+    """
+    #annot.parent = weakref.proxy(page)
+    page._annot_refs[id(annot)] = annot
+    annot.thisown = True
+
+
+def canon(c):
+    assert isinstance(c, int)
+    # TODO: proper unicode case folding
+    # TODO: character equivalence (a matches ä, etc)
+    if c == 0xA0 or c == 0x2028 or c == 0x2029:
+        return ord(' ')
+    if c == ord('\r') or c == ord('\n') or c == ord('\t'):
+        return ord(' ')
+    if c >= ord('A') and c <= ord('Z'):
+        return c - ord('A') + ord('a')
+    return c
+
+
+def chartocanon(s):
+    assert isinstance(s, str)
+    n, c = mupdf.mfz_chartorune(s)
+    c = canon(c);
+    #jlib.log('{s!r=} => {n=} {c=}')
+    return n, c;
+
+
+def dest_is_valid_page(obj, page_object_nums, pagecount):
+    num = mupdf.mpdf_to_num(obj)
+
+    if num == 0:
+        return 0
+    for i in range(pagecount):
+        if mupdf.mpage_object_nums[i] == num:
+            return 1
+    return 0
+
+
+def find_string(s, needle):
+    assert isinstance(s, str)
+    for i in range(len(s)):
+        end = match_string(s[i:], needle);
+        if end is not None:
+            end += i
+            return i, end
+    return None, None
+
+
+def getPDFnow() -> str:
+    '''
+    "Now" timestamp in PDF Format
+    '''
+    import time
+
+    tz = "%s'%s'" % (
+        str(abs(time.altzone // 3600)).rjust(2, "0"),
+        str((abs(time.altzone // 60) % 60)).rjust(2, "0"),
+    )
+    tstamp = time.strftime("D:%Y%m%d%H%M%S", time.localtime())
+    if time.altzone > 0:
+        tstamp += "-" + tz
+    elif time.altzone < 0:
+        tstamp += "+" + tz
+    else:
+        pass
+    return tstamp
+
+
+def getPDFstr(s: str) -> str:
+    """ Return a PDF string depending on its coding.
+
+    Notes:
+        Returns a string bracketed with either "()" or "<>" for hex values.
+        If only ascii then "(original)" is returned, else if only 8 bit chars
+        then "(original)" with interspersed octal strings \nnn is returned,
+        else a string "<FEFF[hexstring]>" is returned, where [hexstring] is the
+        UTF-16BE encoding of the original.
+    """
+    if not bool(s):
+        return "()"
+
+    def make_utf16be(s):
+        r = bytearray([254, 255]) + bytearray(s, "UTF-16BE")
+        return "<" + r.hex() + ">"  # brackets indicate hex
+
+    # The following either returns the original string with mixed-in
+    # octal numbers \nnn for chars outside the ASCII range, or returns
+    # the UTF-16BE BOM version of the string.
+    r = ""
+    for c in s:
+        oc = ord(c)
+        if oc > 255:  # shortcut if beyond 8-bit code range
+            return make_utf16be(s)
+
+        if oc > 31 and oc < 127:  # in ASCII range
+            if c in ("(", ")", "\\"):  # these need to be escaped
+                r += "\\"
+            r += c
+            continue
+
+        if oc > 127:  # beyond ASCII
+            r += "\\%03o" % oc
+            continue
+
+        # now the white spaces
+        if oc == 8:  # backspace
+            r += "\\b"
+        elif oc == 9:  # tab
+            r += "\\t"
+        elif oc == 10:  # line feed
+            r += "\\n"
+        elif oc == 12:  # form feed
+            r += "\\f"
+        elif oc == 13:  # carriage return
+            r += "\\r"
+        else:
+            r += "\\267"  # unsupported: replace by 0xB7
+
+    return "(" + r + ")"
+
+
+def get_highlight_selection(page, start: point_like =None, stop: point_like =None, clip: rect_like =None) -> list:
+    """Return rectangles of text lines between two points.
+
+    Notes:
+        The default of 'start' is top-left of 'clip'. The default of 'stop'
+        is bottom-reight of 'clip'.
+
+    Args:
+        start: start point_like
+        stop: end point_like, must be 'below' start
+        clip: consider this rect_like only, default is page rectangle
+    Returns:
+        List of line bbox intersections with the area established by the
+        parameters.
+    """
+    # validate and normalize arguments
+    if clip is None:
+        clip = page.rect
+    clip = Rect(clip)
+    if start is None:
+        start = clip.tl
+    if stop is None:
+        stop = clip.br
+    clip.y0 = start.y
+    clip.y1 = stop.y
+    if clip.is_empty or clip.is_infinite:
+        return []
+
+    # extract text of page, clip only, no images, expand ligatures
+    blocks = page.get_text(
+        "dict", flags=0, clip=clip,
+    )["blocks"]
+
+    lines = []  # will return this list of rectangles
+    for b in blocks:
+        for line in b["lines"]:
+            lines.append(Rect(line["bbox"]))
+
+    if lines == []:  # did not select anything
+        return lines
+
+    lines.sort(key=lambda bbox: bbox.y1)  # sort by vertical positions
+
+    # cut off prefix from first line if start point is close to its top
+    bboxf = lines.pop(0)
+    if bboxf.y0 - start.y <= 0.1 * bboxf.height:  # close enough?
+        r = Rect(start.x, bboxf.y0, bboxf.br)  # intersection rectangle
+        if not (r.is_empty or r.is_infinite):
+            lines.insert(0, r)  # insert again if not empty
+    else:
+        lines.insert(0, bboxf)  # insert again
+
+    if lines == []:  # the list might have been emptied
+        return lines
+
+    # cut off suffix from last line if stop point is close to its bottom
+    bboxl = lines.pop()
+    if stop.y - bboxl.y1 <= 0.1 * bboxl.height:  # close enough?
+        r = Rect(bboxl.tl, stop.x, bboxl.y1)  # intersection rectangle
+        if not (r.is_empty or r.is_infinite):
+            lines.append(r)  # append if not empty
+    else:
+        lines.append(bboxl)  # append again
+
+    return lines
+
+
+def glyph_name_to_unicode(name: str) -> int:
+    '''
+    Adobe Glyph List function
+    '''
+    if _adobe_unicodes == {}:
+        for line in _get_glyph_text():
+            if line.startswith("#"):
+                continue
+            gname, unc = line.split(";")
+            c = int(unc[:4], base=16)
+            _adobe_unicodes[gname] = c
+    return _adobe_unicodes.get(name, 65533)
+
+
+def hdist(dir, a, b):
+    dx = b.x - a.x;
+    dy = b.y - a.y;
+    return mupdf.mfz_abs(dx * dir.x + dy * dir.y)
+
+
+def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> list:
+    """Return a list of (rows x cols) equal sized rectangles.
+
+    Notes:
+        A utility to fill a given area with table cells of equal size.
+    Args:
+        rect: rect_like to use as the table area
+        rows: number of rows
+        cols: number of columns
+    Returns:
+        A list with <rows> items, where each item is a list of <cols>
+        PyMuPDF Rect objects of equal sizes.
+    """
+    rect = Rect(rect)  # ensure this is a Rect
+    if rect.is_empty or rect.isInfinite:
+        raise ValueError("rect must be finite and not empty")
+    tl = rect.tl
+
+    height = rect.height / rows  # height of one table cell
+    width = rect.width / cols  # width of one table cell
+    delta_h = (width, 0, width, 0)  # diff to next right rect
+    delta_v = (0, height, 0, height)  # diff to next lower rect
+
+    r = Rect(tl, tl.x + width, tl.y + height)  # first rectangle
+
+    # make the first row
+    row = [r]
+    for i in range(1, cols):
+        r += delta_h  # build next rect to the right
+        row.append(r)
+
+    # make result, starts with first row
+    rects = [row]
+    for i in range(1, rows):
+        row = rects[i - 1]  # take previously appended row
+        nrow = []  # the new row to append
+        for r in row:  # for each previous cell add its downward copy
+            nrow.append(r + delta_v)
+        rects.append(nrow)  # append new row to result
+
+    return rects
+
+
+def match_string(h0, n0):
+    h = 0
+    n = 0
+    #int hc, nc;
+    e = h
+    delta_h, hc = chartocanon(h0[h:])
+    h += delta_h
+    delta_n, nc = chartocanon(n0[n:])
+    n += delta_n
+    while hc == nc:
+        e = h
+        if hc == ord(' '):
+            while 1:
+                delta_h, hc = chartocanon(h0[h:])
+                h += delta_h
+                if hc != ord(' '):
+                    break
+        else:
+            delta_h, hc = chartocanon(h0[h:])
+            h += delta_h
+        if nc == ord(' '):
+            while 1:
+                delta_n, nc = chartocanon(n0[n:])
+                n += delta_n
+                if nc != ord(' '):
+                    break
+        else:
+            delta_n, nc = chartocanon(n0[n:])
+            n += delta_n
+    return None if nc != 0 else e
+
+
+def on_highlight_char(hits, line, ch):
+    #jlib.log('{hits=}')
+    assert hits
+    assert isinstance(line, mupdf.StextLine)
+    assert isinstance(ch, mupdf.StextChar)
+    #struct highlight *hits = arg;
+    vfuzz = ch.m_internal.size * hits.vfuzz
+    hfuzz = ch.m_internal.size * hits.hfuzz
+    ch_quad = JM_char_quad(line, ch)
+    #jlib.log('{hits.len=} {len(hits.quads)=} {vfuzz=} {hfuzz=} {ch_quad=}')
+    if hits.len > 0:
+        # fixme: end = hits.quads[-1]
+        quad = hits.quads[hits.len - 1]
+        end = JM_quad_from_py(quad)
+        #jlib.log('{line.m_internal.dir=} {quad=} {end=} {ch_quad=}')
+        if ( 1
+                and hdist(line.m_internal.dir, end.lr, ch_quad.ll) < hfuzz
+                and vdist(line.m_internal.dir, end.lr, ch_quad.ll) < vfuzz
+                and hdist(line.m_internal.dir, end.ur, ch_quad.ul) < hfuzz
+                and vdist(line.m_internal.dir, end.ur, ch_quad.ul) < vfuzz
+                ):
+            #jlib.log('extending')
+            end.ur = ch_quad.ur
+            end.lr = ch_quad.lr
+            #quad = JM_py_from_quad(end)
+            #hits.quads[hits.len - 1] = quad
+            assert hits.quads[-1] == end
+            return
+    #hits.quads.append(JM_py_from_quad(ch_quad))
+    hits.quads.append(ch_quad)
+    hits.len += 1
+
+
+def pdfobj_string(o, prefix=''):
+    '''
+    Returns description of mupdf.PdfObj (wrapper for pdf_obj) <o>.
+    '''
+    assert 0, 'use mupdf.mpdf_debug_obj() ?'
+    ret = ''
+    if o.is_array:
+        l = o.array_len()
+        ret += f'array {l}\n'
+        for i in range(l):
+            oo = o.array_get(i)
+            ret += pdfobj_string(oo, prefix + '    ')
+            ret += '\n'
+    elif o.is_bool():
+        ret += f'bool: {o.array_get_bool()}\n'
+    elif o.is_dict():
+        l = o.dict_len()
+        ret += f'dict {l}\n'
+        for i in range(l):
+            key = o.dict_get_key(i)
+            value = o.dict_get( key)
+            ret += f'{prefix} {key}: '
+            ret += pdfobj_string( value, prefix + '    ')
+            ret += '\n'
+    elif o.is_embedded_file():
+        ret += f'embedded_file: {o.embedded_file_name()}\n'
+    elif o.is_indirect():
+        ret += f'indirect: ...\n'
+    elif o.is_int():
+        ret += f'int: {o.to_int()}\n'
+    elif o.is_jpx_image():
+        ret += f'jpx_image:\n'
+    elif o.is_name():
+        ret += f'name: {o.to_name()}\n'
+    elif o.is_null:
+        ret += f'null\n'
+    #elif o.is_number:
+    #    ret += f'number\n'
+    elif o.is_real:
+        ret += f'real: {o.to_real()}\n'
+    elif o.is_stream():
+        ret += f'stream\n'
+    elif o.is_string():
+        ret += f'string: {o.to_string()}\n'
+    else:
+        ret += '<>\n'
+
+    return ret
+
+
+def planishLine(p1: point_like, p2: point_like) -> Matrix:
+    """Return matrix which flattens out the line from p1 to p2.
+
+    Args:
+        p1, p2: point_like
+    Returns:
+        Matrix which maps p1 to Point(0,0) and p2 to a point on the x axis at
+        the same distance to Point(0,0). Will always combine a rotation and a
+        transformation.
+    """
+    p1 = Point(p1)
+    p2 = Point(p2)
+    return Matrix(TOOLS._hor_matrix(p1, p2))
+
+
+def repair_mono_font(page: "Page", font: "Font") -> None:
+    """Repair character spacing for mono fonts.
+
+    Notes:
+        Some mono-spaced fonts are displayed with a too large character
+        distance, e.g. "a b c" instead of "abc". This utility adds an entry
+        "/W[0 65535 w]" to the descendent font(s) of font. The float w is
+        taken to be the width of 0x20 (space).
+        This should enforce viewers to use 'w' as the character width.
+
+    Args:
+        page: fitz.Page object.
+        font: fitz.Font object.
+    """
+    if not font.flags["mono"]:  # font not flagged as monospaced
+        return None
+    doc = page.parent  # the document
+    fontlist = page.get_fonts()  # list of fonts on page
+    xrefs = [  # list of objects referring to font
+        f[0]
+        for f in fontlist
+        if (f[3] == font.name and f[4].startswith("F") and f[5].startswith("Identity"))
+    ]
+    if xrefs == []:  # our font does not occur
+        return
+    xrefs = set(xrefs)  # drop any double counts
+    width = int(round((font.glyph_advance(32) * 1000)))
+    for xref in xrefs:
+        if not TOOLS.set_font_width(doc, xref, width):
+            print("Cannot set width for '%s' in xref %i" % (font.name, xref))
+
+def retainpage(doc, parent, kids, page):
+    '''
+    Recreate page tree to only retain specified pages.
+    '''
+    pageref = mupdf.mpdf_lookup_page_obj(doc, page)
+    mupdf.mpdf_flatten_inheritable_page_items(pageref)
+    mupdf.mpdf_dict_put(pageref, PDF_NAME('Parent'), parent)
+    # Store page object in new kids array
+    mupdf.mpdf_array_push(kids, pageref)
+
+
+def retainpages(doc, liste):
+    '''
+    This is called by PyMuPDF:
+    liste = page numbers to retain
+    '''
+    #pdf_obj *oldroot, *root, *pages, *kids, *countobj, *olddests;
+    argc = len(liste)
+    #pdf_obj *names_list = NULL;
+    #pdf_obj *outlines;
+    #pdf_obj *ocproperties;
+    pagecount = mupdf.mpdf_count_pages(doc)
+
+    # Keep only pages/type and (reduced) dest entries to avoid
+    # references to dropped pages
+    oldroot = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(doc), PDF_NAME('Root'))
+    pages = mupdf.mpdf_dict_get(oldroot, PDF_NAME('Pages'))
+    olddests = mupdf.mpdf_load_name_tree(doc, PDF_NAME('Dests'))
+    outlines = mupdf.mpdf_dict_get(oldroot, PDF_NAME('Outlines'))
+    ocproperties = mupdf.mpdf_dict_get(oldroot, PDF_NAME('OCProperties'))
+
+    root = mupdf.mpdf_new_dict(doc, 3)
+    mupdf.mpdf_dict_put(root, PDF_NAME('Type'), mupdf.mpdf_dict_get(oldroot, PDF_NAME('Type')))
+    mupdf.mpdf_dict_put(root, PDF_NAME('Pages'), mupdf.mpdf_dict_get(oldroot, PDF_NAME('Pages')))
+    if outlines.m_internal:
+        mupdf.mpdf_dict_put(root, PDF_NAME('Outlines'), outlines)
+    if ocproperties.m_internal:
+        mupdf.mpdf_dict_put(root, PDF_NAME('OCProperties'), ocproperties)
+
+    mupdf.mpdf_update_object(doc, mupdf.mpdf_to_num(oldroot), root)
+
+    # Create a new kids array with only the pages we want to keep
+    kids = mupdf.mpdf_new_array(doc, 1)
+
+    # Retain pages specified
+    for page in range(argc):
+        i = liste[page]
+        if i < 0 or i >= pagecount:
+            THROWMSG("invalid page number(s)")
+        retainpage(doc, pages, kids, i)
+
+    # Update page count and kids array
+    countobj = mupdf.mpdf_new_int(mupdf.mpdf_array_len(kids))
+    mupdf.mpdf_dict_put(pages, PDF_NAME('Count'), countobj)
+    mupdf.mpdf_dict_put(pages, PDF_NAME('Kids'), kids)
+
+    pagecount = mupdf.mpdf_count_pages(doc)
+    #page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums));
+    page_object_nums = []
+    for i in range(pagecount):
+        pageref = mupdf.mpdf_lookup_page_obj(doc, i)
+        page_object_nums.append(mupdf.mpdf_to_num(pageref))
+
+    # If we had an old Dests tree (now reformed as an olddests dictionary),
+    # keep any entries in there that point to valid pages.
+    # This may mean we keep more than we need, but it is safe at least.
+    if olddests:
+        names = mupdf.mpdf_new_dict(doc, 1)
+        dests = mupdf.mpdf_new_dict(doc, 1)
+        len = mupdf.mpdf_dict_len(olddests)
+
+        names_list = mupdf.mpdf_new_array(doc, 32)
+
+        for i in range(len):
+            key = mupdf.mpdf_dict_get_key(olddests, i)
+            val = mupdf.mpdf_dict_get_val(olddests, i)
+            dest = mupdf.mpdf_dict_get(val, PDF_NAME('D'))
+
+            dest = mupdf.mpdf_array_get(dest if dest.m_internal else val, 0)
+            # fixme: need dest_is_valid_page.
+            if dest_is_valid_page(dest, page_object_nums, pagecount):
+                key_str = mupdf.mpdf_new_string(mupdf.mpdf_to_name(key), len(mupdf.mpdf_to_name(key)))
+                mupdf.mpdf_array_push(names_list, key_str)
+                mupdf.mpdf_array_push(names_list, val)
+
+        mupdf.mpdf_dict_put(dests, PDF_NAME('Names'), names_list)
+        mupdf.mpdf_dict_put(names, PDF_NAME('Dests'), dests)
+        mupdf.mpdf_dict_put(root, PDF_NAME('Names'), names)
+
+        #mupdf.mpdf_drop_obj(names)
+        #mupdf.mpdf_drop_obj(dests)
+        #mupdf.mpdf_drop_obj(olddests)
+
+    # Edit each pages /Annot list to remove any links pointing to nowhere.
+    for i in range(pagecount):
+        pageref = mupdf.mpdf_lookup_page_obj(doc, i)
+        annots = mupdf.mpdf_dict_get(pageref, PDF_NAME('Annots'))
+        len = mupdf.mpdf_array_len(annots)
+        j = 0
+        while 1:
+            if j >= len:
+                break
+            o = mupdf.mpdf_array_get(annots, j)
+
+            if not mupdf.mpdf_name_eq(mupdf.mpdf_dict_get(o, PDF_NAME('Subtype')), PDF_NAME('Link')):
+                continue
+
+            if not dest_is_valid(o, pagecount, page_object_nums, names_list):
+                # Remove this annotation
+                mupdf.mpdf_array_delete(annots, j)
+                len -= 1
+                j -= 1
+            j += 1
+
+    if (strip_outlines(ctx, doc, outlines, pagecount, page_object_nums, names_list) == 0):
+        mupdf.mpdf_dict_del(root, PDF_NAME('Outlines'))
+
+
+def sRGB_to_pdf(srgb: int) -> tuple:
+    """Convert sRGB color code to a PDF color triple.
+
+    There is **no error checking** for performance reasons!
+
+    Args:
+        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
+    Returns:
+        Tuple (red, green, blue) each item in intervall 0 <= item <= 1.
+    """
+    t = sRGB_to_rgb(srgb)
+    return t[0] / 255.0, t[1] / 255.0, t[2] / 255.0
+
+
+def sRGB_to_rgb(srgb: int) -> tuple:
+    """Convert sRGB color code to an RGB color triple.
+
+    There is **no error checking** for performance reasons!
+
+    Args:
+        srgb: (int) RRGGBB (red, green, blue), each color in range(255).
+    Returns:
+        Tuple (red, green, blue) each item in intervall 0 <= item <= 255.
+    """
+    r = srgb >> 16
+    g = (srgb - (r << 16)) >> 8
+    b = srgb - (r << 16) - (g << 8)
+    return (r, g, b)
+
+
+def strip_outline(doc, outlines, page_count, page_object_nums, names_list):
+    '''
+    Returns (count, first, prev).
+    '''
+    current = outlines
+    while current.m_internal:
+        # Strip any children to start with. This takes care of
+        # First / Last / Count for us.
+        nc = strip_outlines(doc, current, page_count, page_object_nums, names_list)
+
+        if not dest_is_valid(current, page_count, page_object_nums, names_list):
+            if nc == 0:
+                # Outline with invalid dest and no children. Drop it by
+                # pulling the next one in here.
+                next = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
+                if not next.m_internal:
+                    # There is no next one to pull in
+                    if prev.m_internal:
+                        mupdf.mpdf_dict_del(prev, PDF_NAME('Next'))
+                elif prev.m_internal:
+                    mupdf.mpdf_dict_put(prev, PDF_NAME('Next'), next)
+                    mupdf.mpdf_dict_put(next, PDF_NAME('Prev'), prev)
+                else:
+                    mupdf.mpdf_dict_del(next, PDF_NAME('Prev'))
+                current = next
+            else:
+                # Outline with invalid dest, but children. Just drop the dest.
+                mupdf.mpdf_dict_del(current, PDF_NAME('Dest'));
+                mupdf.mpdf_dict_del(current, PDF_NAME('A'));
+                current = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
+        else:
+            # Keep this one
+            if not first.m_internal:
+                first = current
+            prev = current
+            current = mupdf.mpdf_dict_get(current, PDF_NAME('Next'))
+            count += 1
+
+    return count, first, prev
+
+
+def strip_outlines(pdoc, outlines, page_count, page_object_nums, names_list):
+    if not outlines.m_internal:
+        return 0
+
+    first = mupdf.mpdf_dict_get(outlines, PDF_NAME('First'))
+    if not first.m_internal:
+        nc = 0
+    else:
+        nc, first, last = strip_outline(doc, first, page_count, page_object_nums, names_list)
+
+    if nc == 0:
+        mupdf.mpdf_dict_del(outlines, PDF_NAME('First'))
+        mupdf.mpdf_dict_del(outlines, PDF_NAME('Last'))
+        mupdf.mpdf_dict_del(outlines, PDF_NAME('Count'))
+    else:
+        old_count = mupdf.mpdf_to_int(mupdf.mpdf_dict_get(outlines, PDF_NAME('Count')))
+        mupdf.mpdf_dict_put(outlines, PDF_NAME('First'), first);
+        mupdf.mpdf_dict_put(outlines, PDF_NAME('Last'), last);
+        mupdf.mpdf_dict_put(outlines, PDF_NAME('Count'), nc if mupdf.mpdf_new_int(old_count) > 0 else -nc)
+    return nc
+
+
+def unicode_to_glyph_name(ch: int) -> str:
+    '''
+    Adobe Glyph List function
+    '''
+    if _adobe_glyphs == {}:
+        for line in _get_glyph_text():
+            if line.startswith("#"):
+                continue
+            name, unc = line.split(";")
+            uncl = unc.split()
+            for unc in uncl:
+                c = int(unc[:4], base=16)
+                _adobe_glyphs[c] = name
+    return _adobe_glyphs.get(ch, ".notdef")
+
+
+def vdist(dir, a, b):
+    dx = b.x - a.x
+    dy = b.y - a.y
+    return mupdf.mfz_abs(dx * dir.y + dy * dir.x)
+
+
+
+
+
+if 1:   # Import some mupdf constants
     self = sys.modules[__name__]
     for name, value in inspect.getmembers(mupdf):
         if name.startswith('PDF_'):
             assert not inspect.isroutine(value)
             setattr(self, name, value)
+    assert PDF_TX_FIELD_IS_MULTILINE == mupdf.PDF_TX_FIELD_IS_MULTILINE
     del self
 
-assert PDF_TX_FIELD_IS_MULTILINE == mupdf.PDF_TX_FIELD_IS_MULTILINE
-
-fitz_fontdescriptors = dict()
+_adobe_glyphs = {}
+_adobe_unicodes = {}
 
 # colorspace identifiers
 CS_GRAY = mupdf.Colorspace.Fixed_GRAY
@@ -16267,7 +16276,9 @@ CS_BGR = mupdf.Colorspace.Fixed_BGR
 CS_CMYK = mupdf.Colorspace.Fixed_CMYK
 CS_LAB = mupdf.Colorspace.Fixed_LAB
 
-
+# colorspace identifiers
 csRGB = Colorspace(CS_RGB)
 csGRAY = Colorspace(CS_GRAY)
 csCMYK = Colorspace(CS_CMYK)
+
+fitz_fontdescriptors = dict()
