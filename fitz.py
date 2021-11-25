@@ -7877,13 +7877,10 @@ class Page:
 
 
 class Pixmap:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Pixmap, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Pixmap, name)
 
     def __init__(self, *args):
-        """Pixmap(colorspace, irect, alpha) - empty pixmap.
+        """
+        Pixmap(colorspace, irect, alpha) - empty pixmap.
         Pixmap(colorspace, src) - copy changing colorspace.
         Pixmap(src, width, height,[clip]) - scaled copy, float dimensions.
         Pixmap(src, alpha=1) - copy and add or drop alpha channel.
@@ -7978,8 +7975,6 @@ class Pixmap:
             pm.m_internal.yres = src_pix.m_internal.yres
 
             # copy samples data ------------------------------------------
-            #unsigned char *sptr = src_pix->samples;
-            #unsigned char *tptr = pm->samples;
             if src_pix.alpha() == pm.alpha():   # identical samples
                 #memcpy(tptr, sptr, w * h * (n + alpha));
                 # fixme: inefficient.
@@ -8005,9 +8000,6 @@ class Pixmap:
             cs, w, h, samples, alpha = args
             n = mupdf.mfz_colorspace_n(cs)
             stride = (n + alpha)*w
-            #fz_separations *seps = NULL;
-            #fz_buffer *res = NULL;
-            #fz_pixmap *pm = NULL;
             size = 0;
             res = JM_BufferFromBytes(samples);
             if not res.m_internal:
@@ -8033,10 +8025,6 @@ class Pixmap:
         elif args_match(args, None):
             # create pixmap from filename, file object, pathlib.Path or memory
             imagedata, = args
-            #fz_buffer *res = NULL;
-            #fz_image *img = NULL;
-            #fz_pixmap *pm = NULL;
-            #PyObject *fname = NULL;
             name = 'name'
             if hasattr(imagedata, "resolve"):
                 fname = imagedata.__str__()
@@ -8066,10 +8054,6 @@ class Pixmap:
         elif args_match(args, mupdf.Document, int):
             # Create pixmap from PDF image identified by XREF number
             doc, xref = args
-            #fz_image *img = NULL;
-            #fz_pixmap *pix = NULL;
-            #pdf_obj *ref = NULL;
-            #pdf_obj *type;
             pdf = mupdf.mpdf_specifics(doc)
             ASSERT_PDF(pdf)
             xreflen = mupdf.mpdf_xref_len(pdf)
@@ -8087,40 +8071,43 @@ class Pixmap:
         else:
             raise Exception(f'Unrecognised args for constructing Pixmap: {args}')
 
+    def __len__(self):
+        return self.size
 
+    def __repr__(self):
+        if not type(self) is Pixmap: return
+        if self.colorspace:
+            return "Pixmap(%s, %s, %s)" % (self.colorspace.name, self.irect, self.alpha)
+        else:
+            return "Pixmap(%s, %s, %s)" % ('None', self.irect, self.alpha)
 
+    def _getImageData(self, format):
+        return _fitz.Pixmap__getImageData(self, format)
 
-    def shrink(self, factor):
-        """Divide width and height by 2**factor.
-        E.g. factor=1 shrinks to 25% of original size (in place)."""
+    def _writeIMG(self, filename, format):
+        return _fitz.Pixmap__writeIMG(self, filename, format)
 
-        return _fitz.Pixmap_shrink(self, factor)
-
-
-    def tintWith(self, black, white):
-        return _fitz.Pixmap_tintWith(self, black, white)
+    @property
+    def alpha(self):
+        """Indicates presence of alpha channel."""
+        #return _fitz.Pixmap_alpha(self)
+        return mupdf.mfz_pixmap_alpha(self.this)
 
     def clearWith(self, *args):
         """Fill all color components with same value."""
 
         return _fitz.Pixmap_clearWith(self, *args)
 
+    @property
+    def colorspace(self):
+        """Pixmap Colorspace."""
+        #return _fitz.Pixmap_colorspace(self)
+        return mupdf.mfz_pixmap_colorspace(self.this)
 
     def copyPixmap(self, src, bbox):
         """Copy bbox from another Pixmap."""
 
         return _fitz.Pixmap_copyPixmap(self, src, bbox)
-
-
-    def setAlpha(self, alphavalues=None, premultiply=1):
-        """Set alphas to values contained in a byte array.
-        If omitted, set alphas to 255."""
-
-        return _fitz.Pixmap_setAlpha(self, alphavalues, premultiply)
-
-
-    def _getImageData(self, format):
-        return _fitz.Pixmap__getImageData(self, format)
 
     def getImageData(self, output="png"):
         """Convert to binary image stream of desired type.
@@ -8144,50 +8131,35 @@ class Pixmap:
         barray = self._getImageData(idx)
         return barray
 
-    def getPNGdata(self):
-        """Wrapper for Pixmap.getImageData("png")."""
-        barray = self._getImageData(1)
-        return barray
-
     def getPNGData(self):
         """Wrapper for Pixmap.getImageData("png")."""
         barray = self._getImageData(1)
         return barray
 
+    @property
+    def h(self):
+        """The height."""
+        #return _fitz.Pixmap_h(self)
+        return mupdf.mfz_pixmap_height(self.this)
 
-    def _writeIMG(self, filename, format):
-        return _fitz.Pixmap__writeIMG(self, filename, format)
+    def invertIRect(self, bbox=None):
+        """Invert the colors inside a bbox."""
 
-    def writeImage(self, filename, output=None):
-        """Output as image in format determined by filename extension.
+        return _fitz.Pixmap_invertIRect(self, bbox)
 
-        Args:
-            output: (str) only use to override filename extension. Default is PNG.
-                    Others are PNM, PGM, PPM, PBM, PAM, PSD, PS.
-        Returns:
-            Bytes object.
-        """
-        valid_formats = {"png": 1, "pnm": 2, "pgm": 2, "ppm": 2, "pbm": 2,
-                         "pam": 3, "tga": 4, "tpic": 4,
-                         "psd": 5, "ps": 6}
-        if output is None:
-            _, ext = os.path.splitext(filename)
-            output = ext[1:]
+    @property
+    def irect(self):
+        """Pixmap bbox - an IRect object."""
+        #val = _fitz.Pixmap_irect(self)
+        val = mupdf.mfz_pixmap_bbox(self.this)
+        val = IRect(val)
+        return val
 
-        idx = valid_formats.get(output.lower(), 1)
-
-        if self.alpha and idx in (2, 6):
-            raise ValueError("'%s' cannot have alpha" % output)
-        if self.colorspace and self.colorspace.n > 3 and idx in (1, 2, 4):
-            raise ValueError("unsupported colorspace for '%s'" % output)
-
-        return self._writeIMG(filename, idx)
-
-    def writePNG(self, filename):
-        """Wrapper for Pixmap.writeImage(filename, "png")."""
-        return self._writeIMG(filename, 1)
-
-
+    @property
+    def n(self):
+        """The size of one pixel."""
+        #return _fitz.Pixmap_n(self)
+        return mupdf.mfz_pixmap_components(self.this)
     def pillowWrite(self, *args, **kwargs):
         """Write to image file using Pillow.
 
@@ -8228,44 +8200,49 @@ class Pixmap:
         self.pillowWrite(bytes_out, *args, **kwargs)
         return bytes_out.getvalue()
 
-
-
-    def invertIRect(self, bbox=None):
-        """Invert the colors inside a bbox."""
-
-        return _fitz.Pixmap_invertIRect(self, bbox)
-
-
     def pixel(self, x, y):
         """Get color tuple of pixel (x, y).
         Last item is the alpha if Pixmap.alpha is true."""
 
         return _fitz.Pixmap_pixel(self, x, y)
 
+    def setAlpha(self, alphavalues=None, premultiply=1):
+        """Set alphas to values contained in a byte array.
+        If omitted, set alphas to 255."""
+
+        return _fitz.Pixmap_setAlpha(self, alphavalues, premultiply)
 
     def setPixel(self, x, y, color):
         """Set color of pixel (x, y)."""
-
         return _fitz.Pixmap_setPixel(self, x, y, color)
-
 
     def setOrigin(self, x, y):
         """Set top-left coordinates."""
-
         return _fitz.Pixmap_setOrigin(self, x, y)
-
-
-    def setResolution(self, xres, yres):
-        """Set resolution in both dimensions.
-
-        Use pillowWrite to reflect this in output image."""
-        return _fitz.Pixmap_setResolution(self, xres, yres)
-
 
     def setRect(self, bbox, color):
         """Set color of all pixels in bbox."""
-
         return _fitz.Pixmap_setRect(self, bbox, color)
+
+    def setResolution(self, xres, yres):
+        """Set resolution in both dimensions.
+        Use pillowWrite to reflect this in output image."""
+        return _fitz.Pixmap_setResolution(self, xres, yres)
+
+    @property
+    def samples(self):
+        """The area of all pixels."""
+        return _fitz.Pixmap_samples(self)
+
+    def shrink(self, factor):
+        """Divide width and height by 2**factor.
+        E.g. factor=1 shrinks to 25% of original size (in place)."""
+
+        return _fitz.Pixmap_shrink(self, factor)
+
+    def size(self):
+        """Pixmap size."""
+        return _fitz.Pixmap_size(self)
 
     @property
     def stride(self):
@@ -8273,17 +8250,37 @@ class Pixmap:
         #return _fitz.Pixmap_stride(self)
         return self.this.stride()
 
-    @property
-    def xres(self):
-        """Resolution in x direction."""
-        #return _fitz.Pixmap_xres(self)
-        return self.this.xres()
+    def tintWith(self, black, white):
+        return _fitz.Pixmap_tintWith(self, black, white)
 
-    @property
-    def yres(self):
-        """Resolution in y direction."""
-        #return _fitz.Pixmap_yres(self)
-        return mupdf.mfz_pixmap_width(self.this)
+    def writeImage(self, filename, output=None):
+        """Output as image in format determined by filename extension.
+
+        Args:
+            output: (str) only use to override filename extension. Default is PNG.
+                    Others are PNM, PGM, PPM, PBM, PAM, PSD, PS.
+        Returns:
+            Bytes object.
+        """
+        valid_formats = {"png": 1, "pnm": 2, "pgm": 2, "ppm": 2, "pbm": 2,
+                         "pam": 3, "tga": 4, "tpic": 4,
+                         "psd": 5, "ps": 6}
+        if output is None:
+            _, ext = os.path.splitext(filename)
+            output = ext[1:]
+
+        idx = valid_formats.get(output.lower(), 1)
+
+        if self.alpha and idx in (2, 6):
+            raise ValueError("'%s' cannot have alpha" % output)
+        if self.colorspace and self.colorspace.n > 3 and idx in (1, 2, 4):
+            raise ValueError("unsupported colorspace for '%s'" % output)
+
+        return self._writeIMG(filename, idx)
+
+    def writePNG(self, filename):
+        """Wrapper for Pixmap.writeImage(filename, "png")."""
+        return self._writeIMG(filename, 1)
 
     @property
     def w(self):
@@ -8292,16 +8289,16 @@ class Pixmap:
         return mupdf.mfz_pixmap_width(self.this)
 
     @property
-    def h(self):
-        """The height."""
-        #return _fitz.Pixmap_h(self)
-        return mupdf.mfz_pixmap_height(self.this)
-
-    @property
     def x(self):
         """x component of Pixmap origin."""
         #return _fitz.Pixmap_x(self)
         return mupdf.mfz_pixmap_x(self.this)
+
+    @property
+    def xres(self):
+        """Resolution in x direction."""
+        #return _fitz.Pixmap_xres(self)
+        return self.this.xres()
 
     @property
     def y(self):
@@ -8310,61 +8307,13 @@ class Pixmap:
         return mupdf.mfz_pixmap_y(self.this)
 
     @property
-    def n(self):
-        """The size of one pixel."""
-        #return _fitz.Pixmap_n(self)
-        return mupdf.mfz_pixmap_components(self.this)
-
-    @property
-    def alpha(self):
-        """Indicates presence of alpha channel."""
-
-        #return _fitz.Pixmap_alpha(self)
-        return mupdf.mfz_pixmap_alpha(self.this)
-
-    @property
-    def colorspace(self):
-        """Pixmap Colorspace."""
-        #return _fitz.Pixmap_colorspace(self)
-        return mupdf.mfz_pixmap_colorspace(self.this)
-
-    @property
-    def irect(self):
-        """Pixmap bbox - an IRect object."""
-
-        #val = _fitz.Pixmap_irect(self)
-        val = mupdf.mfz_pixmap_bbox(self.this)
-        val = IRect(val)
-
-        return val
-
-    @property
-
-    def size(self):
-        """Pixmap size."""
-
-        return _fitz.Pixmap_size(self)
-
-    @property
-
-    def samples(self):
-        """The area of all pixels."""
-
-        return _fitz.Pixmap_samples(self)
-
+    def yres(self):
+        """Resolution in y direction."""
+        #return _fitz.Pixmap_yres(self)
+        return mupdf.mfz_pixmap_width(self.this)
 
     width  = w
     height = h
-
-    def __len__(self):
-        return self.size
-
-    def __repr__(self):
-        if not type(self) is Pixmap: return
-        if self.colorspace:
-            return "Pixmap(%s, %s, %s)" % (self.colorspace.name, self.irect, self.alpha)
-        else:
-            return "Pixmap(%s, %s, %s)" % ('None', self.irect, self.alpha)
 
 
 class Point(object):
