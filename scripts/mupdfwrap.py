@@ -2642,6 +2642,16 @@ classextras = ClassExtras(
         pdf_page = ClassExtra(
                 methods_extra = [
                     ExtraMethod(
+                        f'{rename.class_("fz_page")}',
+                        'super()',
+                        f'''
+                        {{
+                            return {rename.class_("fz_page")}( {rename.function_call('fz_keep_page')}( &m_internal->super));
+                        }}
+                        ''',
+                        f'/* Returns wrapper for .super member. */',
+                        ),
+                    ExtraMethod(
                         f'{rename.class_("pdf_document")}',
                         'doc()',
                         f'''
@@ -7721,6 +7731,24 @@ def build_swig(
                     return mupdf::ppdf_set_annot_color(annot, n, color);
                 }}
 
+                /* SWIG-friendly alternative to mfz_fill_text(). */
+                void mfz_fill_text2(
+                        mupdf::Device& dev,
+                        const mupdf::Text& text,
+                        mupdf::Matrix& ctm,
+                        const mupdf::Colorspace& colorspace,
+                        float color0,
+                        float color1,
+                        float color2,
+                        float color3,
+                        float alpha,
+                        mupdf::ColorParams& color_params
+                        )
+                {{
+                    float color[] = {{color0, color1, color2, color3}};
+                    return mfz_fill_text(dev, text, ctm, colorspace, color, alpha, color_params);
+                }}
+
                 '''
 
     common += f'''
@@ -8121,6 +8149,17 @@ def build_swig(
                 def mpdf_set_annot_interior_color(self, color):
                     return ppdf_set_annot_interior_color(self.m_internal, color)
                 PdfAnnot.set_annot_interior_color = mpdf_set_annot_interior_color
+
+                # Override mfz_fill_text() to handle color as a Python tuple/list.
+                def mfz_fill_text(dev, text, ctm, colorspace, color, alpha, color_params):
+                    """
+                    Python version of mfz_fill_text() using mfz_fill_text2().
+                    """
+                    color = tuple(color) + (0,) * (4-len(color))
+                    assert len(color) == 4, f'color not len 4: len={len(color)}: {color}'
+                    return mfz_fill_text2(dev, text, ctm, colorspace, *color, alpha, color_params)
+
+                Device.fill_text = mfz_fill_text
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
