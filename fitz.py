@@ -3650,7 +3650,77 @@ class Document:
         """Add new optional content group."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_add_ocg(self, name, config, on, intent, usage)
+        #return _fitz.Document_add_ocg(self, name, config, on, intent, usage)
+        xref = 0
+        #pdf_obj *obj = NULL, *cfg = NULL;
+        #pdf_obj *indocg = NULL;
+        pdf = self._pdf_document();
+        ASSERT_PDF(pdf);
+
+        # make the OCG
+        ocg = mupdf.mpdf_add_new_dict(pdf, 3)
+        mupdf.mpdf_dict_put(ocg, PDF_NAME('Type'), PDF_NAME('OCG'))
+        mupdf.mpdf_dict_put_text_string(ocg, PDF_NAME('Name'), name)
+        intents = mupdf.mpdf_dict_put_array(ocg, PDF_NAME('Intent'), 2)
+        if not intent:
+            mupdf.mpdf_array_push(intents, PDF_NAME('View'))
+        elif not isinstance(intent, str):
+            assert 0, f'fixme: intent is not a str. type(intent)={type(intent)} type={type!r}'
+            #n = len(intent)
+            #for i in range(n):
+            #    item = intent[i]
+            #    c = JM_StrAsChar(item);
+            #    if (c) {
+            #        pdf_array_push(gctx, intents, pdf_new_name(gctx, c));
+            #    }
+            #    Py_DECREF(item);
+            #}
+        else:
+            mupdf.mpdf_array_push(intents, mupdf.mpdf_new_name(intent))
+        use_for = mupdf.mpdf_dict_put_dict(ocg, PDF_NAME('Usage'), 3)
+        ci_name = mupdf.mpdf_new_name("CreatorInfo")
+        cre_info = mupdf.mpdf_dict_put_dict(use_for, ci_name, 2)
+        mupdf.mpdf_dict_put_text_string(cre_info, PDF_NAME('Creator'), "PyMuPDF")
+        if usage:
+            mupdf.mpdf_dict_put_name(cre_info, PDF_NAME('Subtype'), usage)
+        else:
+            mupdf.mpdf_dict_put_name(cre_info, PDF_NAME('Subtype'), "Artwork")
+        indocg = mupdf.mpdf_add_object(pdf, ocg)
+
+        # Insert OCG in the right config
+        ocp = JM_ensure_ocproperties(pdf)
+        obj = mupdf.mpdf_dict_get(ocp, PDF_NAME('OCGs'))
+        mupdf.mpdf_array_push(obj, indocg)
+
+        if config > -1:
+            obj = mupdf.mpdf_dict_get(ocp, PDF_NAME('Configs'))
+            if not mupdf.mpdf_is_array(obj):
+                THROWMSG("bad config number")
+            cfg = mupdf.mpdf_array_get(obj, config)
+            if not cfg.m_internal:
+                THROWMSG("bad config number")
+        else:
+            cfg = mupdf.mpdf_dict_get(ocp, PDF_NAME('D'))
+
+        obj = mupdf.mpdf_dict_get(cfg, PDF_NAME('Order'))
+        if not obj.m_internal:
+            obj = mupdf.mpdf_dict_put_array(cfg, PDF_NAME('Order'), 1)
+        mupdf.mpdf_array_push(obj, indocg)
+        if on:
+            obj = mupdf.mpdf_dict_get(cfg, PDF_NAME('ON'))
+            if not obj.m_internal:
+                obj = mupdf.mpdf_dict_put_array(cfg, PDF_NAME('ON'), 1)
+        else:
+            obj =mupdf.mpdf_dict_get(cfg, PDF_NAME('OFF'))
+            if not obj.m_internal:
+                obj =mupdf.mpdf_dict_put_array(cfg, PDF_NAME('OFF'), 1)
+        mupdf.mpdf_array_push(obj, indocg)
+
+        # let MuPDF take note: re-read OCProperties
+        mupdf.mpdf_read_ocg(pdf)
+
+        xref = mupdf.mpdf_to_num(indocg)
+        return xref
 
     addOCG = add_ocg
 
@@ -4223,14 +4293,11 @@ class Font:
         return val
 
     @property
-
     def ascender(self):
         """Return the glyph ascender value."""
-
         return _fitz.Font_ascender(self)
 
     @property
-
     def descender(self):
         """Return the glyph descender value."""
 
@@ -4245,9 +4312,31 @@ class Font:
         """Return the glyph name for a unicode."""
         return unicode_to_glyph_name(ch)
 
-    def text_length(self, text, fontsize=11, wmode=0):
-        """Calculate the length of a string for this font."""
-        return fontsize * sum([self.glyph_advance(ord(c), wmode=wmode) for c in text])
+    def text_length(self, text, fontsize=11, language=None, script=0, wmode=0, small_caps=0):
+        """Return length of unicode 'text' under a fontsize."""
+        #return _fitz.Font_text_length(self, text, fontsize, language, script, wmode, small_caps)
+        #fz_font *font=NULL, *thisfont = (fz_font *) self;
+        thisfont = self.this
+        lang = mupdf.mfz_text_language_from_string(language)
+        rc = 0
+        if not isinstance(text, str):
+            THROWMSG("bad type: text");
+        len_ = len(text)
+        #kind = PyUnicode_KIND(text);
+        #void *data = PyUnicode_DATA(text);
+        #for i in range(len_):
+        for ch in text:
+            c = ord(ch)
+            if small_caps:
+                gid = mupdf.mfz_encode_character_sc(thisfont, c)
+                if gid >= 0:
+                    font = thisfont
+            else:
+                font = mupdf.Font(0)
+                gid = mupdf.mfz_encode_character_with_fallback(thisfont, c, script, lang, font)
+            rc += mupdf.mfz_advance_glyph(font, gid, wmode)
+        rc *= fontsize
+        return rc
 
     def __repr__(self):
         return "Font('%s')" % self.name
@@ -10159,11 +10248,12 @@ class TextWriter:
     def __init__(self, page_rect, opacity=1, color=None):
         """Stores text spans for later output on compatible PDF pages."""
 
-        this = _fitz.new_TextWriter(page_rect, opacity, color)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+        #this = _fitz.new_TextWriter(page_rect, opacity, color)
+        #try:
+        #    self.this.append(this)
+        #except __builtin__.Exception:
+        #    self.this = this
+        self.this = mupdf.mfz_new_text()
 
         self.opacity = opacity
         self.color = color
@@ -10206,6 +10296,9 @@ class TextWriter:
                 language=language)
             pos.y += lheight
         return self.textRect, self.lastPoint
+
+    def fill_textbox(*args, **kwargs):
+        return utils.fill_textbox(*args, **kwargs)
 
     @property
     def writeText(self, page, color=None, opacity=-1, overlay=1, morph=None, render_mode=0, oc=0):
@@ -11729,6 +11822,24 @@ def JM_EscapeStrFromBuffer(buff):
     s = buff.buffer_extract()
     val = PyUnicode_DecodeRawUnicodeEscape(s, errors='replace')
     return val;
+
+
+def JM_ensure_ocproperties(pdf):
+    '''
+    Ensure OCProperties, return /OCProperties key
+    '''
+    ocp = mupdf.mpdf_dict_get(mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root')), PDF_NAME('OCProperties'))
+    if ocp.m_internal:
+        return ocp
+    root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+    ocp = mupdf.mpdf_dict_put_dict(root, PDF_NAME('OCProperties'), 2)
+    mupdf.mpdf_dict_put_array(ocp, PDF_NAME('OCGs'), 0)
+    D = mupdf.mpdf_dict_put_dict(ocp, PDF_NAME('D'), 5)
+    mupdf.mpdf_dict_put_array(D, PDF_NAME('ON'), 0)
+    mupdf.mpdf_dict_put_array(D, PDF_NAME('OFF'), 0)
+    mupdf.mpdf_dict_put_array(D, PDF_NAME('Order'), 0)
+    mupdf.mpdf_dict_put_array(D, PDF_NAME('RBGroups'), 0)
+    return ocp
 
 
 def JM_expand_fname(name):
@@ -16077,3 +16188,17 @@ class TOOLS:
             jlib.log('{e=}')
             return
         return True
+
+    @staticmethod
+    def set_small_glyph_heights(on=None):
+        """Set / unset small glyph heights."""
+        #return _fitz.Tools_set_small_glyph_heights(self, on)
+        if on is None:
+            return small_glyph_heights
+        if on:
+            small_glyph_heights = 1
+        else:
+            small_glyph_heights = 0
+        return small_glyph_heights
+
+import utils
