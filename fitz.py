@@ -2998,6 +2998,7 @@ class Document:
         # From %pythonprepend save
         #
         """Save PDF to file, pathlib.Path or file pointer."""
+        jlib.log('{filename=}')
         if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
         if type(filename) == str:
@@ -3065,7 +3066,8 @@ class Document:
         JM_embedded_clean(pdf)
         if no_new_id == 0:
             JM_ensure_identity(pdf)
-        if filename:
+        if isinstance(filename, str):
+            jlib.log('{filename=}')
             mupdf.mpdf_save_document(pdf, filename, opts)
         else:
             out = JM_new_output_fileptr(filename)
@@ -11550,6 +11552,107 @@ def JM_append_word(lines, buff, wbbox, block_n, line_n, word_n):
     return word_n + 1, mupdf.Rect(mupdf.Rect.Fixed_EMPTY)   # word counter
 
 
+"""
+# fz_output for Python file objects
+
+def JM_bytesio_write(opaque, data, size_t len):
+    '''
+    bio.write(bytes object)
+    '''
+    bio = opaque, *b, *name, *rc;
+    fz_try(ctx){
+        b = PyBytes_FromStringAndSize((const char *) data, (Py_ssize_t) len);
+        name = PyUnicode_FromString("write");
+        rc = PyObject_CallMethodObjArgs(bio, name, b, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not write to Py file obj");
+        }
+    }
+    fz_always(ctx) {
+        Py_XDECREF(b);
+        Py_XDECREF(name);
+        Py_XDECREF(rc);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+}
+
+static void
+JM_bytesio_truncate(fz_context *ctx, void *opaque)
+{  // bio.truncate(bio.tell()) !!!
+    PyObject *bio = opaque, *trunc = NULL, *tell = NULL, *rctell= NULL, *rc = NULL;
+    fz_try(ctx) {
+        trunc = PyUnicode_FromString("truncate");
+        tell = PyUnicode_FromString("tell");
+        rctell = PyObject_CallMethodObjArgs(bio, tell, NULL);
+        rc = PyObject_CallMethodObjArgs(bio, trunc, rctell, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not truncate Py file obj");
+        }
+    }
+    fz_always(ctx) {
+        Py_XDECREF(tell);
+        Py_XDECREF(trunc);
+        Py_XDECREF(rc);
+        Py_XDECREF(rctell);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+}
+
+static int64_t
+JM_bytesio_tell(fz_context *ctx, void *opaque)
+{  // returns bio.tell() -> int
+    PyObject *bio = opaque, *rc = NULL, *name = NULL;
+    int64_t pos = 0;
+    fz_try(ctx) {
+        name = PyUnicode_FromString("tell");
+        rc = PyObject_CallMethodObjArgs(bio, name, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not tell Py file obj");
+        }
+        pos = (int64_t) PyLong_AsUnsignedLongLong(rc);
+    }
+    fz_always(ctx) {
+        Py_XDECREF(name);
+        Py_XDECREF(rc);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+    return pos;
+}
+
+
+static void
+JM_bytesio_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
+{  // bio.seek(off, whence=0)
+    PyObject *bio = opaque, *rc = NULL, *name = NULL, *pos = NULL;
+    fz_try(ctx) {
+        name = PyUnicode_FromString("seek");
+        pos = PyLong_FromUnsignedLongLong((unsigned long long) off);
+        rc = PyObject_CallMethodObjArgs(bio, name, pos, whence, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not seek Py file obj");
+        }
+    }
+    fz_always(ctx) {
+        Py_XDECREF(rc);
+        Py_XDECREF(name);
+        Py_XDECREF(pos);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+}
+"""
+
 def JM_char_bbox(line, ch, verbose=0):
     '''
     return rect of char quad
@@ -11946,9 +12049,13 @@ def JM_ensure_identity(pdf):
     #unsigned char rnd[16];
     id_ = mupdf.mpdf_dict_get( mupdf.mpdf_trailer(pdf), PDF_NAME('ID'))
     if not id_.m_internal:
-        rnd = mupdf.mfz_memrnd2(16)
-        jlib.log('{type(rnd)=} {rnd!r=}')
-        rnd = bytes(rnd)
+        rnd0 = mupdf.mfz_memrnd2(16)
+        jlib.log('{type(rnd0)=} {rnd0!r=}')
+        # Need to convert raw bytes into a str to send to
+        # mupdf.mpdf_new_string(). chr() seems to work for this.
+        rnd = ''
+        for i in rnd0:
+            rnd += chr(i)
         jlib.log('{type(rnd)=} {rnd!r=}')
         #fz_memrnd(ctx, rnd, nelem(rnd));
         jlib.log(' ')
@@ -13014,6 +13121,14 @@ def JM_new_buffer_from_stext_page(page):
                 mupdf.mfz_append_byte(buf, ord('\n'))
             mupdf.mfz_append_byte(buf, ord('\n'))
     return buf
+
+
+def JM_new_output_fileptr(bio):
+    out = mupdf.mfz_new_output(0, bio, JM_bytesio_write, None, None)
+    out.seek = JM_bytesio_seek
+    out.tell = JM_bytesio_tell
+    out.truncate = JM_bytesio_truncate
+    return out
 
 
 def JM_new_tracedraw_device(out):
