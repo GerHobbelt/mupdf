@@ -2724,7 +2724,34 @@ classextras = ClassExtras(
                             ''',
                             comment = '/* Assignment using plain memcpy(). */',
                             ),
-                    ],
+                        ExtraMethod(
+                            # Would prefer to call this opwd_utf8_set() but
+                            # this conflicts with SWIG-generated accessor for
+                            # opwd_utf8.
+                            f'void',
+                            f'opwd_utf8_set_value(const std::string& text)',
+                            f'''
+                            {{
+                                size_t len = std::min(text.size(), sizeof(opwd_utf8) - 1);
+                                memcpy(opwd_utf8, text.c_str(), len);
+                                opwd_utf8[len] = 0;
+                            }}
+                            ''',
+                            '/* Copies <text> into opwd_utf8[]. */',
+                            ),
+                        ExtraMethod(
+                            f'void',
+                            f'upwd_utf8_set_value(const std::string& text)',
+                            f'''
+                            {{
+                                size_t len = std::min(text.size(), sizeof(upwd_utf8) - 1);
+                                memcpy(upwd_utf8, text.c_str(), len);
+                                upwd_utf8[len] = 0;
+                            }}
+                            ''',
+                            '/* Copies <text> into upwd_utf8[]. */',
+                            ),
+                        ],
                 pod = 'inline',
                 copyable = 'default',
                 )
@@ -7749,6 +7776,16 @@ def build_swig(
                     return mfz_fill_text(dev, text, ctm, colorspace, color, alpha, color_params);
                 }}
 
+                std::vector<unsigned char> mfz_memrnd2(int length)
+                {{
+                    std::cerr << "mfz_memrnd2(): length=" << length << "\\n";
+                    std::vector<unsigned char>  ret(length);
+                    std::cerr << "mfz_memrnd2():\\n";
+                    std::cerr << "mfz_memrnd2(): &ret[0]=" << (void*) (&ret[0]) << "\\n";
+                    mupdf::mfz_memrnd(&ret[0], length);
+                    std::cerr << "mfz_memrnd2(): returning\\n";
+                    return ret;
+                }}
                 '''
 
     common += f'''
@@ -7841,11 +7878,14 @@ def build_swig(
             %include std_vector.i
             {"%include argcargv.i" if language=="python" else ""}
 
+            %array_class(unsigned char, uchar_array);
+
             %include <cstring.i>
             %cstring_output_allocate(char **OUTPUT, free($1));
 
             namespace std
             {{
+                %template(vectoruc) vector<unsigned char>;
                 %template(vectori) vector<int>;
                 %template(vectors) vector<std::string>;
                 %template(vectorq) vector<mupdf::{rename.class_("fz_quad")}>;
@@ -8160,6 +8200,23 @@ def build_swig(
                     return mfz_fill_text2(dev, text, ctm, colorspace, *color, alpha, color_params)
 
                 Device.fill_text = mfz_fill_text
+
+                #def mfz_memrnd(length):
+                #    """
+                #    Returns bytes instance containing <length> bytes of data
+                #    initialised by fz_memrnd().
+                #    """
+                #    buffer_ = uchar_array( length)
+                #    memrnd(buffer_, length)
+                #    ret = cdata(buffer_, length)
+                #    #assert isinstance(ret, bytes)
+                #    return ret
+                print(f'calling mfz_memrnd2()')
+                r = mfz_memrnd2(10)
+                print(f'mfz_memrnd2() =>:')
+                print(f'    type={type(r)}')
+                print(f'    len(r)={len(r)}')
+                print(f'    r={r!r}')
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
