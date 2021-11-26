@@ -2237,6 +2237,7 @@ class Document:
                     "descender": dsc,
                 }
             else:
+                jlib.log('{type(fontdict)=}')
                 name = fontdict["name"]
                 ext = fontdict["ext"]
                 stype = fontdict["type"]
@@ -2361,7 +2362,7 @@ class Document:
         if page_id not in self:
             raise ValueError("page not in document")
         if type(page_id) is int and page_id < 0:
-            np = self.pageCount
+            np = self.page_count
             while page_id < 0:
                 page_id += np
 
@@ -2857,10 +2858,18 @@ class Document:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_makeBookmark(self, loc)
 
+    @property
+    def page_count(self):
+        """Number of pages."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        ret = self.this.count_pages()
+        return ret
+
     def page_number_from_location(self, page_id):
         """Convert (chapter, pno) to page number."""
         if type(page_id) is int:
-            np = self.pageCount
+            np = self.page_count
             while page_id < 0:
                 page_id += np
             page_id = (0, page_id)
@@ -2890,14 +2899,6 @@ class Document:
         ASSERT_PDF(pdf)
         xref = mupdf.mpdf_to_num(mupdf.mpdf_lookup_page_obj(pdf, n))
         return xref
-
-    @property
-    def pageCount(self):
-        """Number of pages."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        ret = self.this.count_pages()
-        return ret
 
     def pageCropBox(self, pno):
         """Get CropBox of page number (without loading page)."""
@@ -2986,46 +2987,89 @@ class Document:
             ascii=0,
             expand=0,
             linear=0,
+            no_new_id=0,
+            appearance=0,
             pretty=0,
             encryption=1,
-            permissions=-1,
+            permissions=4095,
             owner_pw=None,
             user_pw=None,
             ):
-        """Save PDF to filename."""
-        if self.isClosed or self.isEncrypted:
+        # From %pythonprepend save
+        #
+        """Save PDF to file, pathlib.Path or file pointer."""
+        if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
         if type(filename) == str:
             pass
-        elif str is bytes and type(filename) == unicode:
-            filename = filename.encode('utf8')
-        else:
+        elif hasattr(filename, "open"):  # assume: pathlib.Path
             filename = str(filename)
+        elif hasattr(filename, "name"):  # assume: file object
+            filename = filename.name
+        elif not hasattr(filename, "seek"):  # assume file object
+            raise ValueError("filename must be str, Path or file object")
         if filename == self.name and not incremental:
             raise ValueError("save to original must be incremental")
-        if self.pageCount < 1:
+        if self.page_count < 1:
             raise ValueError("cannot save with zero pages")
         if incremental:
             if self.name != filename or self.stream:
                 raise ValueError("incremental needs original file")
-        return _fitz.Document_save(
-                self,
-                filename,
-                garbage,
-                clean,
-                deflate,
-                deflate_images,
-                deflate_fonts,
-                incremental,
-                ascii,
-                expand,
-                linear,
-                pretty,
-                encryption,
-                permissions,
-                owner_pw,
-                user_pw,
-                )
+        #return _fitz.Document_save(
+        #        self,
+        #        filename,
+        #        garbage,
+        #        clean,
+        #        deflate,
+        #        deflate_images,
+        #        deflate_fonts,
+        #        incremental,
+        #        ascii,
+        #        expand,
+        #        linear,
+        #        pretty,
+        #        encryption,
+        #        permissions,
+        #        owner_pw,
+        #        user_pw,
+        #        )
+        opts = mupdf.PdfWriteOptions()
+        opts.do_incremental     = incremental
+        opts.do_ascii           = ascii
+        opts.do_compress        = deflate
+        opts.do_compress_images = deflate_images
+        opts.do_compress_fonts  = deflate_fonts
+        opts.do_decompress      = expand
+        opts.do_garbage         = garbage
+        opts.do_pretty          = pretty
+        opts.do_linear          = linear
+        opts.do_clean           = clean
+        opts.do_sanitize        = clean
+        opts.dont_regenerate_id = no_new_id
+        opts.do_appearance      = appearance
+        opts.do_encrypt         = encryption
+        opts.permissions        = permissions
+        if owner_pw is not None:
+            opts.opwd_utf8_set_value(owner_pw)
+            #memcpy(&opts.opwd_utf8, owner_pw, strlen(owner_pw)+1);
+        elif user_pw is not None:
+            #memcpy(&opts.opwd_utf8, user_pw, strlen(user_pw)+1);
+            opts.opwd_utf8_set_value(user_pw)
+        if user_pw is not None:
+            #memcpy(&opts.upwd_utf8, user_pw, strlen(user_pw)+1);
+            opts.upwd_utf8_set_value(user_pw)
+
+        pdf = self._pdf_document()
+        out = None
+        ASSERT_PDF(pdf)
+        JM_embedded_clean(pdf)
+        if no_new_id == 0:
+            JM_ensure_identity(pdf)
+        if filename:
+            mupdf.mpdf_save_document(pdf, filename, opts)
+        else:
+            out = JM_new_output_fileptr(filename)
+            mupdf.mpdf_write_document(pdf, out, opts)
 
 
     def select(self, pyliste):
@@ -3245,26 +3289,47 @@ class Document:
 
     def write(
             self,
-            garbage=0,
-            clean=0,
-            deflate=0,
-            deflate_images=0,
-            deflate_fonts=0,
-            ascii=0,
-            expand=0,
-            pretty=0,
+            garbage=False,
+            clean=False,
+            deflate=False,
+            deflate_images=False,
+            deflate_fonts=False,
+            incremental=False,
+            ascii=False,
+            expand=False,
+            linear=False,
+            no_new_id=False,
+            appearance=False,
+            pretty=False,
             encryption=1,
-            permissions=-1,
+            permissions=4095,
             owner_pw=None,
-            user_pw=None,
+            user_pw=None
             ):
-        """Write the PDF to a bytes object."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        if self.pageCount < 1:
-            raise ValueError("cannot write with zero pages")
+        from io import BytesIO
+        bio = BytesIO()
+        self.save(
+                bio,
+                garbage=garbage,
+                clean=clean,
+                no_new_id=no_new_id,
+                appearance=appearance,
+                deflate=deflate,
+                deflate_images=deflate_images,
+                deflate_fonts=deflate_fonts,
+                incremental=incremental,
+                ascii=ascii,
+                expand=expand,
+                linear=linear,
+                pretty=pretty,
+                encryption=encryption,
+                permissions=permissions,
+                owner_pw=owner_pw,
+                user_pw=user_pw,
+                )
+        return bio.getvalue()
 
-        return _fitz.Document_write(self, garbage, clean, deflate, deflate_images, deflate_fonts, ascii, expand, pretty, encryption, permissions, owner_pw, user_pw)
+    tobytes = write
 
     def isStream(self, xref=0):
         """Check if xref is a stream object."""
@@ -3846,7 +3911,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
 
-        pageCount = self.pageCount
+        pageCount = self.page_count
         while pno < 0:
             pno += pageCount
 
@@ -3872,7 +3937,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
 
-        pageCount = self.pageCount  # page count of document
+        pageCount = self.page_count  # page count of document
         f = from_page  # first page to delete
         t = to_page  # last page to delete
         while f < 0:
@@ -3938,7 +4003,7 @@ class Document:
     def __contains__(self, loc) -> bool:
         page_count = self.this.count_pages()
         if type(loc) is int:
-            if loc < self.pageCount:
+            if loc < self.page_count:
                 return True
             return False
         if type(loc) not in (tuple, list) or len(loc) != 2:
@@ -3970,12 +4035,12 @@ class Document:
         # set the start value
         start = start or 0
         while start < 0:
-            start += self.pageCount
-        if start not in range(self.pageCount):
+            start += self.page_count
+        if start not in range(self.page_count):
             raise ValueError("bad start page number")
 
         # set the stop value
-        stop = stop if stop is not None and stop <= self.pageCount else self.pageCount
+        stop = stop if stop is not None and stop <= self.page_count else self.page_count
 
         # set the step value
         if step == 0:
@@ -3990,7 +4055,7 @@ class Document:
             yield (self.loadPage(pno))
 
     def __len__(self) -> int:
-        return self.pageCount
+        return self.page_count
 
     def _forget_page(self, page: "struct Page *"):
         """Remove a page from document page dict."""
@@ -4049,7 +4114,7 @@ class Document:
         #jlib.log('page_obj: {dir_str(page_obj)}')
         #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
         annots = JM_get_annot_xref_list(page_obj)
-        #jlib.log('{self.this.count_pages()=} {self.pageCount=}')
+        #jlib.log('{self.this.count_pages()=} {self.page_count=}')
         return annots
 
     def has_links(self):
@@ -4059,9 +4124,9 @@ class Document:
             raise ValueError("document closed")
         if not self.isPDF:
             raise ValueError("not a PDF")
-        #jlib.log('{self.pageCount=}')
-        #jlib.log('calling self.pageCount')
-        for i in range(self.pageCount):
+        #jlib.log('{self.page_count=}')
+        #jlib.log('calling self.page_count')
+        for i in range(self.page_count):
             #jlib.log('{i=}')
             for item in self.page_annot_xrefs(i):
                 if item[1] == mupdf.PDF_ANNOT_LINK:
@@ -4077,7 +4142,7 @@ class Document:
             raise ValueError("document closed")
         if not self.isPDF:
             raise ValueError("not a PDF")
-        for i in range(self.pageCount):
+        for i in range(self.page_count):
             for item in self.page_annot_xrefs(i):
                 if not (item[1] == mupdf.PDF_ANNOT_LINK or item[1] == mupdf.PDF_ANNOT_WIDGET):
                     return True
@@ -5544,7 +5609,7 @@ class Page:
         pdf = page.doc()
 
         value = JM_insert_font(pdf, bfname, fontfile,fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
-
+        jlib.log('{value=}')
         # get the objects /Resources, /Resources/Font
         resources = mupdf.mpdf_dict_get_inheritable( page.obj(), PDF_NAME('Resources'))
         fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
@@ -7440,6 +7505,7 @@ class Page:
 
         xref = val[0]                 # xref of installed font
         fontdict = val[1]
+        jlib.log('{type(fontdict)=}')
 
         if CheckFontInfo(doc, xref):  # check again: document already has this font
             return xref               # we are done
@@ -11841,6 +11907,30 @@ def JM_embed_file(
     return val
 
 
+def JM_embedded_clean(pdf):
+    '''
+    perform some cleaning if we have /EmbeddedFiles:
+    (1) remove any /Limits if /Names exists
+    (2) remove any empty /Collection
+    (3) set /PageMode/UseAttachments
+    '''
+    root = mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root'))
+
+    # remove any empty /Collection entry
+    coll = mupdf.mpdf_dict_get(root, PDF_NAME('Collection'))
+    if coll.m_internal and mupdf.mpdf_dict_len(coll) == 0:
+        mupdf.mpdf_dict_del(root, PDF_NAME('Collection'))
+
+    efiles = mupdf.mpdf_dict_getl(
+            root,
+            PDF_NAME('Names'),
+            PDF_NAME('EmbeddedFiles'),
+            PDF_NAME('Names'),
+            )
+    if efiles.m_internal:
+        mupdf.mpdf_dict_put_name(root, PDF_NAME('PageMode'), "UseAttachments")
+
+
 def JM_EscapeStrFromBuffer(buff):
     if not buff.m_internal:
          return ''
@@ -11848,6 +11938,26 @@ def JM_EscapeStrFromBuffer(buff):
     val = PyUnicode_DecodeRawUnicodeEscape(s, errors='replace')
     return val;
 
+
+def JM_ensure_identity(pdf):
+    '''
+    Store ID in PDF trailer
+    '''
+    #unsigned char rnd[16];
+    id_ = mupdf.mpdf_dict_get( mupdf.mpdf_trailer(pdf), PDF_NAME('ID'))
+    if not id_.m_internal:
+        rnd = mupdf.mfz_memrnd2(16)
+        jlib.log('{type(rnd)=} {rnd!r=}')
+        rnd = bytes(rnd)
+        jlib.log('{type(rnd)=} {rnd!r=}')
+        #fz_memrnd(ctx, rnd, nelem(rnd));
+        jlib.log(' ')
+        id_ = mupdf.mpdf_dict_put_array( mupdf.mpdf_trailer( pdf), PDF_NAME('ID'), 2)
+        jlib.log(' ')
+        mupdf.mpdf_array_push_drop( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
+        jlib.log(' ')
+        mupdf.mpdf_array_push_drop( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
+        jlib.log(' ')
 
 def JM_ensure_ocproperties(pdf):
     '''
@@ -12534,14 +12644,14 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
     value = [
             ixref,
             {
-                "name", name,        # base font name
-                "type", subt,        # subtype
-                "ext", exto,         # file extension
-                "simple", bool(simple), # simple font?
-                "ordering", ordering, # CJK font?
-                "ascender", asc,
-                "descender", dsc
-            }
+                "name": name,        # base font name
+                "type": subt,        # subtype
+                "ext": exto,         # file extension
+                "simple": bool(simple), # simple font?
+                "ordering": ordering, # CJK font?
+                "ascender": asc,
+                "descender": dsc,
+            },
             ]
     return value
 
