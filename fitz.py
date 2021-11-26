@@ -4233,6 +4233,18 @@ class Font:
         return _fitz.Font_has_glyph(self, chr, language, script, fallback)
 
 
+    @property
+    def is_writable(self):
+        #return _fitz.Font_is_writable(self)
+        font = self.this
+        if ( mupdf.mfz_font_t3_procs(font)
+                or mupdf.mfz_font_flags(font).m_internal.ft_substitute
+                or not mupdf.mpdf_font_writing_supported(font)
+                ):
+            return False
+        return True;
+
+
     def valid_codepoints(self):
         '''
         list of valid unicodes of a fz_font
@@ -4261,9 +4273,24 @@ class Font:
 
     @property
     def flags(self):
-        return _fitz.Font_flags(self)
-    @property
+        #return _fitz.Font_flags(self)
+        f = mupdf.mfz_font_flags(self.this)
+        if not f.m_internal:
+            return
+        return {
+                "mono": f.m_internal.is_mono,
+                "serif": f.m_internal.is_serif,
+                "bold": f.m_internal.is_bold,
+                "italic": f.m_internal.is_italic,
+                "substitute": f.m_internal.ft_substitute,
+                "stretch": f.m_internal.ft_stretch,
+                "fake-bold": f.m_internal.fake_bold,
+                "fake-italic": f.m_internal.fake_italic,
+                "opentype": f.m_internal.has_opentype,
+                "invalid-bbox": f.m_internal.invalid_bbox,
+                }
 
+    @property
     def isWritable(self):
         return _fitz.Font_isWritable(self)
 
@@ -4295,14 +4322,14 @@ class Font:
     @property
     def ascender(self):
         """Return the glyph ascender value."""
-        return _fitz.Font_ascender(self)
+        #return _fitz.Font_ascender(self)
+        return mupdf.mfz_font_ascender(self.this)
 
     @property
     def descender(self):
         """Return the glyph descender value."""
-
-        return _fitz.Font_descender(self)
-
+        #return _fitz.Font_descender(self)
+        return mupdf.mfz_font_descender(self.this)
 
     def glyph_name_to_unicode(self, name):
         """Return the unicode for a glyph name."""
@@ -5499,118 +5526,33 @@ class Page:
         ctm = JM_matrix_from_py(matrix)
         tpage = mupdf.StextPage(rect)
         dev = mupdf.mfz_new_stext_device(tpage, options)
-        mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
+        jlib.log('{type(page)=}')
+        mupdf.mfz_run_page(page.super(), dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
         return tpage
 
     def _insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
         #return _fitz.Page__insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
         page = self._pdf_page()
-        ASSERT_PDF(page)
+        ASSERT_PDF(page);
         pdf = page.doc()
+
+        value = JM_insert_font(pdf, bfname, fontfile,fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
+
         # get the objects /Resources, /Resources/Font
-        import sys
-        sys.stdout = sys.stderr
-        resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+        resources = mupdf.mpdf_dict_get_inheritable( page.obj(), PDF_NAME('Resources'))
         fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
         if not fonts.m_internal:    # page has no fonts yet
-            fonts = mupdf.mpdf_new_dict(pdf, 10)
-            jlib.log('{fonts=}')
-            d = page.obj()
-            jlib.log('{d=}')
-            jlib.log('{d.is_indirect()=}')
-            jlib.log('{d.is_dict()=}')
-            if d.is_indirect():
-                dd = d.resolve_indirect_chain()
-                jlib.log('{dd=}')
-                jlib.log('{dd.is_indirect()=}')
-                jlib.log('{dd.is_dict()=}')
-            jlib.log('{d.is_dict()=}')
-            d.dict_putl(fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
-            #mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'));
-
-        # check for CJK font
-        data = None
-        if ordering > -1:
-            data, size, index = ordering.lookup_cjk_font()
-        if data:
-            font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
-            font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
-            exto = JM_UnicodeFromStr("n/a")
-            simple = 0
-            #goto weiter;
-
-        else:
-            # check for PDF Base-14 font
-            if bfname:
-                data, size = mupdf.mfz_lookup_base14_font(bfname)
-            if data is not None:
-                font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
-                font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
-                exto = JM_UnicodeFromStr("n/a")
-                simple = 1
-                #goto weiter;
-
-            else:
-                if fontfile:
-                    font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
-                else:
-                    res = JM_BufferFromBytes(fontbuffer)
-                    if not res.m_internal:
-                        THROWMSG("need one of fontfile, fontbuffer")
-                    font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
-
-                if not set_simple:
-                    font_obj = mupdf.mpdf_add_cid_font(pdf, font)
-                    simple = 0
-                else:
-                    font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
-                    simple = 2
-
-        #weiter: ;
-        ixref = mupdf.mpdf_to_num(font_obj)
-        if mupdf.mfz_font_is_monospaced(font):
-            adv = mupdf.mfz_advance_glyph(font, fz_encode_character(font, 32), 0)
-            width = math.floor(adv * 1000.0 + 0.5)
-            dfonts = mupdf.mpdf_dict_get(font_obj, PDF_NAME('DescendantFonts'))
-            if mupdf.mpdf_is_array(dfonts):
-                n = mupdf.mpdf_array_len(dfonts)
-                for i in range(n):
-                    dfont = mupdf.mpdf_array_get(dfonts, i)
-                    warray = mupdf.mpdf_new_array(pdf, 3)
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
-                    mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
-
-        name = JM_EscapeStrFromStr(
-                mupdf.mpdf_to_name(
-                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))
-                    )
-                )
-        subt = JM_UnicodeFromStr(
-                mupdf.mpdf_to_name(
-                    mupdf.mpdf_dict_get(font_obj, PDF_NAME('Subtype'))
-                    )
-                )
-        if not exto:
-            exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
-
-        value = [
-                ixref,
-                {
-                    "name": name,   # base font name
-                    "type": subt,   # subtype
-                    "ext": exto,    # file extension
-                    "simple": (True if simple else False),  # simple font?
-                    "ordering": ordering,   # CJK font?
-                },
-                ]
+            fonts = mupdf.mpdf_new_dict(pdf, 5)
+            mupdf.mpdf_dict_putl(page.obj(), fonts, PDF_NAME('Resources'), PDF_NAME('Font'))
         # store font in resources and fonts objects will contain named reference to font
-        #mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
-        mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
-        # fixme: pdf->dirty = 1;
+        _, xref = JM_INT_ITEM(value, 0)
+        if not xref:
+            THROWMSG("cannot insert font")
+        font_obj = mupdf.mpdf_new_indirect(pdf, xref, 0)
+        mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
         return value
+
 
     def _insertImage(self, filename=None, pixmap=None, stream=None, imask=None, overlay=1, oc=0, xref=0, matrix=None, _imgname=None, _imgpointer=None):
         return _fitz.Page__insertImage(self, filename, pixmap, stream, imask, overlay, oc, xref, matrix, _imgname, _imgpointer)
@@ -7545,6 +7487,9 @@ class Page:
             img.commit(overlay)
         return rc
 
+    def insert_textbox(*args, **kwargs):
+        return utils.insert_textbox(*args, **kwargs)
+
     def insertFont(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
         doc = self.parent
@@ -7908,6 +7853,10 @@ class Page:
 
     cleanContents = clean_contents
     getContents = get_contents
+
+    def write_text(self, **kwargs):
+        jlib.log('{kwargs=}')
+        return utils.write_text(self, **kwargs)
 
 
 class Pixmap:
@@ -10266,24 +10215,41 @@ class TextWriter:
         self.textRect.__doc__ = "Accumulated area of text spans."
         self.used_fonts = set()
 
+    @property
     def _bbox(self):
-        val = _fitz.TextWriter__bbox(self)
+        #val = _fitz.TextWriter__bbox(self)
+        val = JM_py_from_rect( mupdf.mfz_bound_text( self.this, mupdf.StrokeState(0), mupdf.Matrix()))
         val = Rect(val)
         return val
 
-    def append(self, pos, text, font=None, fontsize=11, language=None):
+    def append(self, pos, text, font=None, fontsize=11, language=None, right_to_left=0, small_caps=0):
         """Store 'text' at point 'pos' using 'font' and 'fontsize'."""
         pos = Point(pos) * self.ictm
         if font is None:
             font = Font("helv")
-        if not font.isWritable:
+        if not font.is_writable:
             raise ValueError("Unsupported font '%s'." % font.name)
+        if right_to_left:
+            text = self.clean_rtl(text)
+            text = "".join(reversed(text))
+            right_to_left = 0
 
-        val = _fitz.TextWriter_append(self, pos, text, font, fontsize, language)
+        #val = _fitz.TextWriter_append(self, pos, text, font, fontsize, language, right_to_left, small_caps)
+        lang = mupdf.mfz_text_language_from_string(language)
+        p = JM_point_from_py(pos)
+        trm = mupdf.mfz_make_matrix(fontsize, 0, 0, fontsize, p.x, p.y)
+        markup_dir = 0
+        wmode = 0
+        if small_caps == 0:
+            trm = mupdf.mfz_show_string( self.this, font.this, trm, text, wmode, right_to_left, markup_dir, lang)
+        else:
+            trm = JM_show_string_cs( self.this, font.this, trm, text, wmode, right_to_left, markup_dir, lang)
+        val = JM_py_from_matrix(trm)
 
-        self.lastPoint = Point(val[-2:]) * self.ctm
-        self.textRect = self._bbox * self.ctm
-        val = self.textRect, self.lastPoint
+        self.last_point = Point(val[-2:]) * self.ctm
+        self.text_rect = self._bbox * self.ctm
+        val = self.text_rect, self.last_point
+        #jlib.log('{type(font)=} {font=} {font.flags=}')
         if font.flags["mono"] == 1:
             self.used_fonts.add(font)
         return val
@@ -10300,9 +10266,7 @@ class TextWriter:
     def fill_textbox(*args, **kwargs):
         return utils.fill_textbox(*args, **kwargs)
 
-    @property
-    def writeText(self, page, color=None, opacity=-1, overlay=1, morph=None, render_mode=0, oc=0):
-
+    def write_text(self, page, color=None, opacity=-1, overlay=1, morph=None, matrix=None, render_mode=0, oc=0):
         """Write the text to a PDF page having the TextWriter's page size.
 
         Args:
@@ -10310,7 +10274,8 @@ class TextWriter:
             color: override text color.
             opacity: override transparency.
             overlay: put in foreground or background.
-            morph: tuple(Point, Matrix), apply Matrix with fixpoint Point.
+            morph: tuple(Point, Matrix), apply a matrix with a fixpoint.
+            matrix: Matrix to be used instead of 'morph' argument.
             render_mode: (int) PDF render mode operator 'Tr'.
         """
         CheckParent(page)
@@ -10322,12 +10287,56 @@ class TextWriter:
                 or type(morph[1]) is not Matrix
                 ):
                 raise ValueError("morph must be (Point, Matrix) or None")
+        if matrix != None and morph != None:
+            raise ValueError("only one of matrix, morph is allowed")
         if getattr(opacity, "__float__", None) is None or opacity == -1:
             opacity = self.opacity
         if color is None:
             color = self.color
 
-        val = _fitz.TextWriter_writeText(self, page, color, opacity, overlay, morph, render_mode, oc)
+        #val = _fitz.TextWriter_write_text(self, page, color, opacity, overlay, morph, matrix, render_mode, oc)
+        if 1:
+            pdfpage = page._pdf_page()
+            #pdf_obj *resources = NULL;
+            #fz_buffer *contents = NULL;
+            #fz_device *dev = NULL;
+            #PyObject *result = NULL, *max_nums, *cont_string;
+            alpha = 1
+            if opacity >= 0 and opacity < 1:
+                alpha = opacity
+            #fz_colorspace *colorspace;
+            ncol = 1
+            dev_color = [0, 0, 0, 0]
+            if color:
+                ncol = JM_color_FromSequence(color, dev_color)
+            if ncol == 3:
+                colorspace = mupdf.mfz_device_rgb()
+            elif ncol == 4:
+                colorspace = mupdf.mfz_device_cmyk()
+            else:
+                colorspace = mupdf.mfz_device_gray()
+
+            ASSERT_PDF(pdfpage)
+            resources = mupdf.mpdf_new_dict(pdfpage.doc(), 5)
+            contents = mupdf.mfz_new_buffer(1024)
+            dev = mupdf.mpdf_new_pdf_device( pdfpage.doc(), mupdf.Matrix(), resources, contents)
+            jlib.log('{dev_color=}')
+            mupdf.mfz_fill_text(
+                    dev,
+                    self.this,
+                    mupdf.Matrix(),
+                    colorspace,
+                    dev_color,
+                    alpha,
+                    mupdf.ColorParams(mupdf.fz_default_color_params),
+                    )
+            mupdf.mfz_close_device( dev)
+
+            # copy generated resources into the one of the page
+            max_nums = JM_merge_resources( pdfpage, resources)
+            cont_string = JM_EscapeStrFromBuffer( contents)
+            result = (max_nums, cont_string)
+            val = result
 
         max_nums = val[0]
         content = val[1]
@@ -10345,14 +10354,15 @@ class TextWriter:
         if bdc:
             new_cont_lines.append(bdc)
 
-        cb = page.CropBoxPosition
+        cb = page.cropbox_position
         if bool(cb):
             new_cont_lines.append("1 0 0 1 %g %g cm" % (cb.x, cb.y))
 
         if morph:
             p = morph[0] * self.ictm
-            delta = Matrix(1, 1).preTranslate(p.x, p.y)
+            delta = Matrix(1, 1).pretranslate(p.x, p.y)
             matrix = ~delta * morph[1] * delta
+        if morph or matrix:
             new_cont_lines.append("%g %g %g %g %g %g cm" % JM_TUPLE(matrix))
 
         for line in old_cont_lines:
@@ -10367,6 +10377,12 @@ class TextWriter:
                 line = "/Alp%i gs" % alp
             elif line.endswith(" Tf"):
                 temp = line.split()
+                fsize = float(temp[1])
+                if render_mode != 0:
+                    w = fsize * 0.05
+                else:
+                    w = 1
+                new_cont_lines.append("%g w" % w)
                 font = int(temp[0][2:]) + max_font
                 line = " ".join(["/F%i" % font] + temp[1:])
             elif line.endswith(" rg"):
@@ -11185,6 +11201,9 @@ def ASSERT_PDF(cond):
 def DUMMY(*args, **kw):
     return
 
+def ENSURE_OPERATION(pdf):
+     if not JM_have_operation(pdf):
+        raise Exception("No journalling operation started")
 
 def INRANGE(v, low, high):
     return low <= v and v <= high
@@ -12401,6 +12420,15 @@ def JM_get_script(key):
     return
 
 
+def JM_have_operation(pdf):
+    '''
+    Ensure valid journalling state
+    '''
+    if pdf.m_internal.journal and not mupdf.mpdf_undoredo_step(pdf, 0):
+        return 0
+    return 1;
+
+
 def JM_insert_contents(pdf, pageref, newcont, overlay):
     '''
     Insert a buffer as a new separate /Contents object of a page.
@@ -12430,6 +12458,86 @@ def JM_insert_contents(pdf, pageref, newcont, overlay):
                 mupdf.mpdf_array_push(carr, contents)
         mupdf.mpdf_dict_put(pageref, PDF_NAME('Contents'), carr)
     return xref
+
+
+def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
+    '''
+    Insert a font in a PDF
+    '''
+    jlib.log('{bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {ordering=}')
+    font = None
+    res = None
+    data = None
+    ixref = 0
+    index = 0
+    simple = 0
+    value=None
+    name=None
+    subt=None
+    exto = None
+
+    ENSURE_OPERATION(pdf);
+    # check for CJK font
+    if ordering > -1:
+        data, size, index = mupdf.mfz_lookup_cjk_font(ordering)
+    if data:
+        font = mupdf.mfz_new_font_from_memory(None, data, size, index, 0)
+        font_obj = mupdf.mpdf_add_cjk_font(pdf, font, ordering, wmode, serif)
+        exto = "n/a"
+        simple = 0;
+        #goto weiter;
+    else:
+
+        # check for PDF Base-14 font
+        if bfname:
+            data, size = mupdf.mfz_lookup_base14_font(bfname)
+        if data:
+            font = mupdf.mfz_new_font_from_memory(bfname, data, size, 0, 0)
+            font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+            exto = "n/a"
+            simple = 1
+            #goto weiter;
+
+        else:
+            if fontfile:
+                font = mupdf.mfz_new_font_from_file(None, fontfile, idx, 0)
+            else:
+                res = JM_BufferFromBytes(fontbuffer)
+                if not res.m_internal:
+                    THROWMSG("need one of fontfile, fontbuffer")
+                font = mupdf.mfz_new_font_from_buffer(None, res, idx, 0)
+
+            if not set_simple:
+                font_obj = mupdf.mpdf_add_cid_font(pdf, font)
+                simple = 0
+            else:
+                font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
+                simple = 2
+
+    #weiter: ;
+    ixref = mupdf.mpdf_to_num(font_obj)
+    name = JM_EscapeStrFromStr( mupdf.mpdf_to_name( mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))))
+
+    subt = JM_UnicodeFromStr( mupdf.mpdf_to_name( mupdf.mpdf_dict_get( font_obj, PDF_NAME('Subtype'))))
+
+    if not exto:
+        exto = JM_UnicodeFromStr(JM_get_fontextension(pdf, ixref))
+
+    asc = mupdf.mfz_font_ascender(font)
+    dsc = mupdf.mfz_font_descender(font)
+    value = [
+            ixref,
+            {
+                "name", name,        # base font name
+                "type", subt,        # subtype
+                "ext", exto,         # file extension
+                "simple", JM_BOOL(simple), # simple font?
+                "ordering", ordering, # CJK font?
+                "ascender", asc,
+                "descender", dsc
+            }
+            ]
+    return value
 
 
 def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
@@ -12701,6 +12809,73 @@ def JM_merge_range(
             afterpage += 1
 
 
+def JM_merge_resources( page, temp_res):
+    '''
+    Merge the /Resources object created by a text pdf device into the page.
+    The device may have created multiple /ExtGState/Alp? and /Font/F? objects.
+    These need to be renamed (renumbered) to not overwrite existing page
+    objects from previous executions.
+    Returns the next available numbers n, m for objects /Alp<n>, /F<m>.
+    '''
+    # page objects /Resources, /Resources/ExtGState, /Resources/Font
+    resources = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Resources'))
+    main_extg = mupdf.mpdf_dict_get(resources, PDF_NAME('ExtGState'))
+    main_fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
+
+    # text pdf device objects /ExtGState, /Font
+    temp_extg = mupdf.mpdf_dict_get(temp_res, PDF_NAME('ExtGState'))
+    temp_fonts = mupdf.mpdf_dict_get(temp_res, PDF_NAME('Font'))
+
+
+    max_alp = -1
+    max_fonts = -1
+    #char text[20];
+
+    # Handle /Alp objects
+    if mupdf.mpdf_is_dict(temp_extg):   # any created at all?
+        n = mupdf.mpdf_dict_len(temp_extg)
+        if mupdf.mpdf_is_dict(main_extg):   # does page have /ExtGState yet?
+            for i in range(mupdf.mpdf_dict_len(main_extg)):
+                # get highest number of objects named /Alpxxx
+                alp = mupdf.mpdf_to_name( mupdf.mpdf_dict_get_key(main_extg, i))
+                if not alp.startswith('Alp'):
+                    continue
+                j = mupdf.mfz_atoi(alp[3:])
+                if j > max_alp:
+                    max_alp = j
+        else:   # create a /ExtGState for the page
+            main_extg = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('ExtGState'), n)
+
+        max_alp += 1
+        for i in range(n):  # copy over renumbered /Alp objects
+            alp = mupdf.mpdf_to_name( mupdf.mpdf_dict_get_key( temp_extg, i))
+            j = mupdf.mfz_atoi(alp[3:]) + max_alp
+            text = f'Alp{j}'
+            val = mupdf.mpdf_dict_get_val( temp_extg, i)
+            mupdf.mpdf_dict_puts(main_extg, text, val)
+
+
+    if mupdf.mpdf_is_dict(main_fonts):  # has page any fonts yet?
+        for i in range(mupdf.mpdf_dict_len(main_fonts)):    # get max font number
+            font = mupdf.mpdf_to_name( mupdf.mpdf_dict_get_key( main_fonts, i))
+            if not font.startswith("F"):
+                continue
+            j = mupdf.mfz_atoi(font[1:])
+            if j > max_fonts:
+                max_fonts = j
+    else:   # create a Resources/Font for the page
+        main_fonts = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('Font'), 2)
+
+    max_fonts += 1
+    for i in range(mupdf.mpdf_dict_len(temp_fonts)):    # copy renumbered fonts
+        font = mupdf.mpdf_to_name( mupdf.mpdf_dict_get_key( temp_fonts, i))
+        j = mupdf.mfz_atoi(font[1:]) + max_fonts
+        text = f'F{j}'
+        val = mupdf.mpdf_dict_get_val(temp_fonts, i)
+        mupdf.mpdf_dict_puts(main_fonts, text, val)
+    return (max_alp, max_fonts) # next available numbers
+
+
 def JM_new_buffer_from_stext_page(page):
     '''
     make a buffer from an stext_page's text
@@ -12956,7 +13131,7 @@ def JM_print_stext_page_as_text(out, page):
                     if mupdf.mfz_is_empty_rect(chbbox):
                         continue
                     if (mupdf.mfz_is_infinite_rect(rect)
-                            or fz_contains_rect(rect, chbbox)
+                            or mupdf.mfz_contains_rect(rect, chbbox)
                             ):
                         last_char = ch.m_internal.c
                         utf = mupdf.runetochar2(last_char)
