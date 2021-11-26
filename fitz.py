@@ -3391,7 +3391,7 @@ class Document:
         #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
         pdf = self._pdf_document()
         if pdf:
-            xreflen = muodf.mpdf_xref_len(pdf)
+            xreflen = mupdf.mpdf_xref_len(pdf)
         return xreflen
 
 
@@ -5527,7 +5527,13 @@ class Page:
         tpage = mupdf.StextPage(rect)
         dev = mupdf.mfz_new_stext_device(tpage, options)
         jlib.log('{type(page)=}')
-        mupdf.mfz_run_page(page.super(), dev, ctm, mupdf.Cookie());
+        if isinstance(page, mupdf.Page):
+            pass
+        elif isinstance(page, mupdf.PdfPage):
+            page = page.super()
+        else:
+            assert 0, f'Unrecognised type(page)={type(page)}'
+        mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
         return tpage
 
@@ -12531,7 +12537,7 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
                 "name", name,        # base font name
                 "type", subt,        # subtype
                 "ext", exto,         # file extension
-                "simple", JM_BOOL(simple), # simple font?
+                "simple", bool(simple), # simple font?
                 "ordering", ordering, # CJK font?
                 "ascender", asc,
                 "descender", dsc
