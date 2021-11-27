@@ -52,8 +52,12 @@ def generateExportsJpeg(file, exclude=[], include=[]):
 	data = re.sub(r"(?sm)^\s*JMETHOD *\([^\)]*\)", "", data, 0)
 	data = re.sub(r"(?sm)[\s\r\n]+JPP *\([^\)]*\)", "(XXXXX)", data, 0)
 	data = re.sub(r"(?sm)\([^\)]*\)", "(XXXXX)", data, 0)
-	print(data)
 	functions = sorted(re.findall(r"(?sm)^EXTERN *\([^)]+\) +(\w+)\s*\(XXXXX\)", data))
+	return "\n".join(["\t" + name for name in functions if name not in exclude]) + "\n" + "\n".join(["\t" + name for name in include])
+
+def generateExportsPng(file, exclude=[], include=[]):
+	data = open(file, "r", encoding='utf8').read()
+	functions = sorted(re.findall(r"(?sm)^PNG_EXPORT(?:A?) *\([^),]+,[^),]+,\s*(\w+)\s*,[\s\r\n]*\([^)]+\)", data))
 	return "\n".join(["\t" + name for name in functions if name not in exclude]) + "\n" + "\n".join(["\t" + name for name in include])
 
 LIBMUPDF_DEF = """\
@@ -184,6 +188,14 @@ EXPORTS
 
 %(libgif_exports)s
 
+; libPNG exports
+
+%(libpng_exports)s
+
+; libTIFF exports
+
+%(libtiff_exports)s
+
 ; libWEBP exports
 
 %(libwebp_exports)s
@@ -283,6 +295,8 @@ def main():
 	libjpeg_exports2 = generateExportsJpeg("thirdparty/owemdjee/libjpeg-turbo/jmemsys.h")
 	libjpegturbo_exports = generateExports("thirdparty/owemdjee/libjpeg-turbo/turbojpeg.h")
 	libjpegturbo_exports2 = generateExports("thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h")
+	libpng_exports = generateExportsPng("thirdparty/libpng/png.h", ["png_set_strip_error_numbers", "png_err"])
+	libtiff_exports = generateExports("thirdparty/libtiff/libtiff/tiffio.h")
 	libgif_exports = generateExports("thirdparty/owemdjee/libgif/gif_lib.h")
 	libwebp_exports = generateExports("thirdparty/owemdjee/libwebp/src/webp")
 	libwebp_exports2 = generateExports("thirdparty/owemdjee/libwebp/extras/tools.h")
