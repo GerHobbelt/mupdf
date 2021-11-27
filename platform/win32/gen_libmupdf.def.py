@@ -51,6 +51,8 @@ def generateExportsJpeg(file, exclude=[], include=[]):
 	data = open(file, "r", encoding='utf8').read()
 	data = re.sub(r"(?sm)^\s*JMETHOD *\([^\)]*\)", "", data, 0)
 	data = re.sub(r"(?sm)[\s\r\n]+JPP *\([^\)]*\)", "(XXXXX)", data, 0)
+	data = re.sub(r"(?sm)\([^\)]*\)", "(XXXXX)", data, 0)
+	print(data)
 	functions = sorted(re.findall(r"(?sm)^EXTERN *\([^)]+\) +(\w+)\s*\(XXXXX\)", data))
 	return "\n".join(["\t" + name for name in functions if name not in exclude]) + "\n" + "\n".join(["\t" + name for name in include])
 
@@ -164,6 +166,8 @@ EXPORTS
 
 %(libjpeg_exports)s
 
+%(libjpeg_exports2)s
+
 ; libJPEG-TURBO exports
 
 %(libjpegturbo_exports)s
@@ -275,7 +279,8 @@ def main():
 	platform_exports = generateExports("platform/x11/curl_stream.h")
 	pkcs7ex_exports = generateExports("include/mupdf/helpers/pkcs7-openssl.h", pkcs7_ignores)
 	helpers_exports = generateExports("include/mupdf/helpers", office_exports + pkcs7_ignores)
-	libjpeg_exports = generateExports("thirdparty/owemdjee/libjpeg-turbo/jpeglib.h")
+	libjpeg_exports = generateExportsJpeg("thirdparty/owemdjee/libjpeg-turbo/jpeglib.h")
+	libjpeg_exports2 = generateExportsJpeg("thirdparty/owemdjee/libjpeg-turbo/jmemsys.h")
 	libjpegturbo_exports = generateExports("thirdparty/owemdjee/libjpeg-turbo/turbojpeg.h")
 	libjpegturbo_exports2 = generateExports("thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h")
 	libgif_exports = generateExports("thirdparty/owemdjee/libgif/gif_lib.h")
