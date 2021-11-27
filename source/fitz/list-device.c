@@ -2021,25 +2021,10 @@ visible:
 
 			trans_ctm = fz_scale(1, 1);
 
-				fz_path* path = fz_new_path(ctx);
-				fz_moveto(ctx, path, 10, 10);
-				fz_lineto(ctx, path, 10, -10);
-				fz_lineto(ctx, path, -10, -10);
-				fz_lineto(ctx, path, -10, 10);
-				fz_lineto(ctx, path, 10, 10);
-				fz_color_params params = { FZ_RI_PERCEPTUAL };
-
 			trans_ctm = fz_pre_translate(trans_ctm, (scissor.x1 - scissor.x0) / 2.0f, (scissor.y1 - scissor.y0) / 2.0f);
 			trans_ctm = fz_pre_rotate(trans_ctm, -45);
 
 			fz_fill_text(ctx, dev, text, trans_ctm, colorspace, color, 1.0f, fz_default_color_params);
-
-			color[0] = 0.1f;
-			color[1] = 0.8f;
-			color[2] = 0.1f;
-
-			fz_fill_path(ctx, dev, path, 1, trans_ctm, colorspace, color, 1.0f, params);
-			fz_drop_path(ctx, path);
 
 			fz_end_group(ctx, dev);
 		}
