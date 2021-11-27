@@ -135,6 +135,7 @@ pdf_outline_iterator_up(fz_context *ctx, fz_outline_iterator *iter_)
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_obj *up;
+	pdf_obj *grandparent;
 
 	if (iter->current == NULL)
 		return -1;
@@ -143,8 +144,15 @@ pdf_outline_iterator_up(fz_context *ctx, fz_outline_iterator *iter_)
 		iter->modifier = MOD_NONE;
 		return 0;
 	}
+	/* The topmost level still has a parent pointer, just one
+	 * that points to the outlines object. We never want to
+	 * allow us to move 'up' onto the outlines object. */
 	up = pdf_dict_get(ctx, iter->current, PDF_NAME(Parent));
 	if (up == NULL)
+		/* This should never happen! */
+		return -1;
+	grandparent = pdf_dict_get(ctx, up, PDF_NAME(Parent));
+	if (grandparent == NULL)
 		return -1;
 
 	iter->modifier = MOD_NONE;
@@ -311,7 +319,7 @@ do_outline_update(fz_context *ctx, pdf_obj *obj, fz_outline_item *item, int is_n
 {
 	int count;
 	int open_delta = 0;
-	pdf_obj *parent, *up;
+	pdf_obj *parent;
 
 	/* If the open/closed state changes, update. */
 	count = pdf_dict_get_int(ctx, obj, PDF_NAME(Count));
@@ -320,17 +328,19 @@ do_outline_update(fz_context *ctx, pdf_obj *obj, fz_outline_item *item, int is_n
 		pdf_dict_put_int(ctx, obj, PDF_NAME(Count), -count);
 		open_delta = -count;
 	}
-	else if (is_new_node && item->is_open)
+	else if (is_new_node)
 		open_delta = 1;
 
-	up = obj;
-	while ((parent = pdf_dict_get(ctx, up, PDF_NAME(Parent))) != NULL)
+	parent = pdf_dict_get(ctx, obj, PDF_NAME(Parent));
+	while (parent)
 	{
-		pdf_obj *cobj = pdf_dict_get(ctx, up, PDF_NAME(Count));
+		pdf_obj *cobj = pdf_dict_get(ctx, parent, PDF_NAME(Count));
 		count = pdf_to_int(ctx, cobj);
 		if (open_delta || cobj == NULL)
-			pdf_dict_put_int(ctx, up, PDF_NAME(Count), count > 0 ? count + open_delta : count - open_delta);
-		up = parent;
+			pdf_dict_put_int(ctx, parent, PDF_NAME(Count), count >= 0 ? count + open_delta : count - open_delta);
+		if (count < 0)
+			break;
+		parent = pdf_dict_get(ctx, parent, PDF_NAME(Parent));
 	}
 
 	if (item->title)
@@ -358,14 +368,19 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_document *doc = (pdf_document *)iter->super.doc;
-	pdf_obj *obj;
+	pdf_obj *obj = NULL;
 	pdf_obj *prev;
 	pdf_obj *parent;
 	int result;
 
-	obj = pdf_add_new_dict(ctx, doc, 4);
+	fz_var(obj);
+
+	pdf_begin_operation(ctx, doc, "Insert outline item");
+
 	fz_try(ctx)
 	{
+		obj = pdf_add_new_dict(ctx, doc, 4);
+
 		if (iter->modifier == MOD_BELOW)
 			parent = iter->current;
 		else if (iter->modifier == MOD_NONE && iter->current == NULL)
@@ -420,7 +435,10 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 		}
 	}
 	fz_always(ctx)
+	{
 		pdf_drop_obj(ctx, obj);
+		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
@@ -431,17 +449,26 @@ static void
 pdf_outline_iterator_update(fz_context *ctx, fz_outline_iterator *iter_, fz_outline_item *item)
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
+	pdf_document *doc = (pdf_document *)iter->super.doc;
 
 	if (iter->modifier != MOD_NONE || iter->current == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't update a non-existent outline item!");
 
-	do_outline_update(ctx, iter->current, item, 0);
+	pdf_begin_operation(ctx, doc, "Update outline item");
+
+	fz_try(ctx)
+		do_outline_update(ctx, iter->current, item, 0);
+	fz_always(ctx)
+		pdf_end_operation(ctx, doc);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static int
 pdf_outline_iterator_del(fz_context *ctx, fz_outline_iterator *iter_)
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
+	pdf_document *doc = (pdf_document *)iter->super.doc;
 	pdf_obj *next, *prev, *parent;
 	int count;
 
@@ -452,45 +479,58 @@ pdf_outline_iterator_del(fz_context *ctx, fz_outline_iterator *iter_)
 	next = pdf_dict_get(ctx, iter->current, PDF_NAME(Next));
 	parent = pdf_dict_get(ctx, iter->current, PDF_NAME(Parent));
 	count = pdf_dict_get_int(ctx, iter->current, PDF_NAME(Count));
-
+	/* How many nodes visible from above are being removed? */
 	if (count > 0)
+		count++; /* Open children, plus this node. */
+	else
+		count = 1; /* Just this node */
+
+	pdf_begin_operation(ctx, doc, "Delete outline item");
+
+	fz_try(ctx)
 	{
 		pdf_obj *up = parent;
 		while (up)
 		{
 			int c = pdf_dict_get_int(ctx, up, PDF_NAME(Count));
 			pdf_dict_put_int(ctx, up, PDF_NAME(Count), (c > 0 ? c - count : c + count));
+			if (c < 0)
+				break;
 			up = pdf_dict_get(ctx, up, PDF_NAME(Parent));
 		}
-	}
 
-	if (prev)
-	{
-		if (next)
-			pdf_dict_put(ctx, prev, PDF_NAME(Next), next);
-		else
-			pdf_dict_del(ctx, prev, PDF_NAME(Next));
-	}
-	if (next)
-	{
 		if (prev)
-			pdf_dict_put(ctx, next, PDF_NAME(Prev), prev);
+		{
+			if (next)
+				pdf_dict_put(ctx, prev, PDF_NAME(Next), next);
+			else
+				pdf_dict_del(ctx, prev, PDF_NAME(Next));
+		}
+		if (next)
+		{
+			if (prev)
+				pdf_dict_put(ctx, next, PDF_NAME(Prev), prev);
+			else
+				pdf_dict_del(ctx, next, PDF_NAME(Prev));
+			iter->current = next;
+		}
+		else if (prev)
+		{
+			iter->current = prev;
+			pdf_dict_put(ctx, parent, PDF_NAME(Last), prev);
+		}
 		else
-			pdf_dict_del(ctx, next, PDF_NAME(Prev));
-		iter->current = next;
+		{
+			iter->current = parent;
+			iter->modifier = MOD_BELOW;
+			pdf_dict_del(ctx, parent, PDF_NAME(First));
+			pdf_dict_del(ctx, parent, PDF_NAME(Last));
+		}
 	}
-	else if (prev)
-	{
-		iter->current = prev;
-		pdf_dict_put(ctx, parent, PDF_NAME(Last), prev);
-	}
-	else
-	{
-		iter->current = parent;
-		iter->modifier = MOD_BELOW;
-		pdf_dict_del(ctx, parent, PDF_NAME(First));
-		pdf_dict_del(ctx, parent, PDF_NAME(Last));
-	}
+	fz_always(ctx)
+		pdf_end_operation(ctx, doc);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 
 	return 0;
 }
