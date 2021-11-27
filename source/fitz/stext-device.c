@@ -598,39 +598,33 @@ static const int ligature_count = sizeof(ligatures) / sizeof(ligatures[0]);
 
 static inline const char* get_ligature_replacement(int c)
 {
-	int i = c / ligature_count;   // initial index guess
+	// top and bot are the boundary indexes, which still must be tested.
+	int top = ligature_count - 1;
+	int bot = 0;
+	int i = (c & 0x1FFFFF) / 0xFFFF;   // initial index guess
 	const struct liga* el = NULL;
 
-	for (;;)
+	if (i > top)
+		i = top;
+
+	while (top >= bot)
 	{
 		el = &ligatures[i];
 		if (el->unicode == c)
 			break;
 		if (el->unicode > c)
 		{
-			// did we hit the left edge? if we did, it's quitting time
-			if (i == 0)
-			{
-				el = NULL;
-				break;
-			}
-
 			// next guess: below
-			i /= 2;
+			top = i - 1;
+			i = (top + bot) / 2;
 		}
 		else
 		{
-			// did we hit the right edge? if we did, it's quitting time
-			if (i == ligature_count - 1)
-			{
-				el = NULL;
-				break;
-			}
-
 			// next guess: above
-			int d = ligature_count - i;
-			i += d / 2;
+			bot = i + 1;
+			i = (top + bot) / 2;
 		}
+		el = NULL;
 	}
 
 	if (el)
