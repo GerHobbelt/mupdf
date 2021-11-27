@@ -38,6 +38,8 @@
 #include "../../thirdparty/owemdjee/jpeg-xl/lib/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/sqlite/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/pcre/src/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -160,11 +162,11 @@ static struct {
 
 	//{ jpeginfo_main, "jpeginfo", "jpeginfo tool" },
 
-	{ jpegtran_main, "jpegtran", "jpegtran tool" },
-	{ rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
-	{ wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
-	{ djpeg_main, "djpeg", "djpeg tool" },
-	{ cjpeg_main, "cjpeg", "cjpeg tool" },
+	{ jpegturbo_jpegtran_main, "jpegtran", "jpegtran tool" },
+	{ jpegturbo_rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
+	{ jpegturbo_wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
+	{ jpegturbo_djpeg_main, "djpeg", "djpeg tool" },
+	{ jpegturbo_cjpeg_main, "cjpeg", "cjpeg tool" },
 
 	{ cwebp_main, "cwebp", "cwebp tool" },
 	{ dwebp_main, "dwebp", "dwebp tool" },

@@ -50,11 +50,11 @@ int sqlite_main(int argc, const char** argv);
 
 //int jpeginfo_main(int argc, const char** argv);
 
-int jpegtran_main(int argc, const char** argv);
-int rdjpegcom_main(int argc, const char** argv);
-int wrjpegcom_main(int argc, const char** argv);
-int cjpeg_main(int argc, const char** argv);
-int djpeg_main(int argc, const char** argv);
+int jpegturbo_jpegtran_main(int argc, const char** argv);
+int jpegturbo_rdjpegcom_main(int argc, const char** argv);
+int jpegturbo_wrjpegcom_main(int argc, const char** argv);
+int jpegturbo_cjpeg_main(int argc, const char** argv);
+int jpegturbo_djpeg_main(int argc, const char** argv);
 
 #ifdef __cplusplus
 }

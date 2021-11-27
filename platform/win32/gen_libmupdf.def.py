@@ -164,6 +164,12 @@ EXPORTS
 
 %(libjpeg_exports)s
 
+; libJPEG-TURBO exports
+
+%(libjpegturbo_exports)s
+
+%(libjpegturbo_exports2)s
+
 ; libJPEGXL exports
 
 %(libjpegXL_exports)s
@@ -177,6 +183,8 @@ EXPORTS
 ; libWEBP exports
 
 %(libwebp_exports)s
+
+%(libwebp_exports2)s
 
 ; libbrotli exports
 
@@ -228,19 +236,6 @@ EXPORTS
 
 ; monolithic tool exports
 
-	dwebp_main
-	vwebp_sdl_main
-	webp_quality_main
-	vwebp_main
-	cwebp_main
-	img2webp_main
-	webp_anim_diff_main
-	webp_get_disto_main
-	gif2webp_main
-	webp_anim_dump_main
-	webpmux_main
-	webpinfo_main
-
 	pngcrush_main
 	pngmeta_main
 	pngzop_zlib_to_idat_main
@@ -280,9 +275,12 @@ def main():
 	platform_exports = generateExports("platform/x11/curl_stream.h")
 	pkcs7ex_exports = generateExports("include/mupdf/helpers/pkcs7-openssl.h", pkcs7_ignores)
 	helpers_exports = generateExports("include/mupdf/helpers", office_exports + pkcs7_ignores)
-	libjpeg_exports = generateExportsJpeg("thirdparty/libjpeg/jpeglib.h", [], ["jpeg_cust_mem_init"])
+	libjpeg_exports = generateExportsJpeg("thirdparty/owemdjee/libjpeg-turbo/jpeglib.h", [], ["jpeg_cust_mem_init"])
+	libjpegturbo_exports = generateExportsJpeg("thirdparty/owemdjee/libjpeg-turbo/turbojpeg.h")
+	libjpegturbo_exports2 = generateExports("thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h")
 	libgif_exports = generateExports("thirdparty/owemdjee/libgif/gif_lib.h")
 	libwebp_exports = generateExports("thirdparty/owemdjee/libwebp/src/webp")
+	libwebp_exports2 = generateExports("thirdparty/owemdjee/libwebp/extras/tools.h")
 	libjpegXL_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include")
 	libjpegXL2_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include/jxl", ["JxlEncoderAddBox", "JxlEncoderSetExtraChannelBuffer"])
 	libbrotli_exports = generateExports("thirdparty/owemdjee/brotli/c/include")

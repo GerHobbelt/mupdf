@@ -6,11 +6,13 @@ EXPORTS
 
 ; MuPDF tool exports
 
-	cjpeg_main
 	cmapdump_main
 	curl_main
-	djpeg_main
-	jpegtran_main
+	jpegturbo_cjpeg_main
+	jpegturbo_djpeg_main
+	jpegturbo_jpegtran_main
+	jpegturbo_rdjpegcom_main
+	jpegturbo_wrjpegcom_main
 	muconvert_main
 	mudraw_main
 	mujs_main
@@ -33,10 +35,8 @@ EXPORTS
 	qiqqa_muannot_main
 	qiqqa_mucontent_main
 	qiqqa_muserver_main
-	rdjpegcom_main
 	sqlite_main
 	tesseract_main
-	wrjpegcom_main
 
 ; MuPDF ucdn exports
 
@@ -1315,7 +1315,10 @@ EXPORTS
 	pdf_lookup_name
 	pdf_lookup_number
 	pdf_name_from_line_ending
+	pdf_new_action_from_link
+	pdf_new_destination_from_link
 	pdf_new_display_list_from_annot
+	pdf_new_link_uri
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
 	pdf_next_annot
@@ -1945,61 +1948,9 @@ EXPORTS
 
 ; libJPEG exports
 
-	jpeg_CreateCompress
-	jpeg_CreateDecompress
-	jpeg_abort
-	jpeg_abort_compress
-	jpeg_abort_decompress
-	jpeg_add_quant_table
-	jpeg_alloc_huff_table
-	jpeg_alloc_quant_table
-	jpeg_calc_jpeg_dimensions
-	jpeg_calc_output_dimensions
-	jpeg_consume_input
-	jpeg_copy_critical_parameters
-	jpeg_core_output_dimensions
-	jpeg_default_colorspace
-	jpeg_default_qtables
-	jpeg_destroy
-	jpeg_destroy_compress
-	jpeg_destroy_decompress
-	jpeg_finish_compress
-	jpeg_finish_decompress
-	jpeg_finish_output
-	jpeg_has_multiple_scans
-	jpeg_input_complete
-	jpeg_mem_dest
-	jpeg_mem_src
-	jpeg_new_colormap
-	jpeg_quality_scaling
-	jpeg_read_coefficients
-	jpeg_read_header
-	jpeg_read_raw_data
-	jpeg_read_scanlines
-	jpeg_resync_to_restart
-	jpeg_save_markers
-	jpeg_set_colorspace
-	jpeg_set_defaults
-	jpeg_set_linear_quality
-	jpeg_set_marker_processor
-	jpeg_set_quality
-	jpeg_simple_progression
-	jpeg_start_compress
-	jpeg_start_decompress
-	jpeg_start_output
-	jpeg_std_error
-	jpeg_std_huff_table
-	jpeg_stdio_dest
-	jpeg_stdio_src
-	jpeg_suppress_tables
-	jpeg_write_coefficients
-	jpeg_write_m_byte
-	jpeg_write_m_header
-	jpeg_write_marker
-	jpeg_write_raw_data
-	jpeg_write_scanlines
-	jpeg_write_tables
 	jpeg_cust_mem_init
+
+; libJPEG-TURBO exports
 
 ; libJPEGXL exports
 
@@ -2049,6 +2000,7 @@ EXPORTS
 	JxlDecoderGetBoxType
 	JxlDecoderGetColorAsEncodedProfile
 	JxlDecoderGetColorAsICCProfile
+	JxlDecoderGetExtraChannelBlendInfo
 	JxlDecoderGetExtraChannelInfo
 	JxlDecoderGetExtraChannelName
 	JxlDecoderGetFrameHeader
@@ -2062,6 +2014,7 @@ EXPORTS
 	JxlDecoderReset
 	JxlDecoderRewind
 	JxlDecoderSetBoxBuffer
+	JxlDecoderSetCoalescing
 	JxlDecoderSetDCOutBuffer
 	JxlDecoderSetDecompressBoxes
 	JxlDecoderSetImageOutBuffer
@@ -2079,6 +2032,8 @@ EXPORTS
 	JxlColorEncodingSetToSRGB
 	JxlEncoderAddImageFrame
 	JxlEncoderAddJPEGFrame
+	JxlEncoderCloseBoxes
+	JxlEncoderCloseFrames
 	JxlEncoderCloseInput
 	JxlEncoderCreate
 	JxlEncoderDestroy
@@ -2093,6 +2048,7 @@ EXPORTS
 	JxlEncoderSetExtraChannelInfo
 	JxlEncoderSetExtraChannelName
 	JxlEncoderSetICCProfile
+	JxlEncoderUseBoxes
 	JxlEncoderUseContainer
 	JxlEncoderVersion
 
@@ -2295,6 +2251,19 @@ EXPORTS
 
 	WebPFree
 	WebPMalloc
+
+	cwebp_main
+	dwebp_main
+	gif2webp_main
+	img2webp_main
+	vwebp_main
+	vwebp_sdl_main
+	webp_anim_diff_main
+	webp_anim_dump_main
+	webp_get_disto_main
+	webp_quality_main
+	webpinfo_main
+	webpmux_main
 
 ; libbrotli exports
 
@@ -2695,6 +2664,7 @@ EXPORTS
 	js_construct
 	js_copy
 	js_currentfunction
+	js_currentfunctiondata
 	js_defaccessor
 	js_defglobal
 	js_defproperty
@@ -2746,6 +2716,7 @@ EXPORTS
 	js_newboolean
 	js_newcconstructor
 	js_newcfunction
+	js_newcfunctionx
 	js_newerror
 	js_newevalerror
 	js_newnumber
@@ -3838,19 +3809,6 @@ EXPORTS
 	upskirt_main
 
 ; monolithic tool exports
-
-	dwebp_main
-	vwebp_sdl_main
-	webp_quality_main
-	vwebp_main
-	cwebp_main
-	img2webp_main
-	webp_anim_diff_main
-	webp_get_disto_main
-	gif2webp_main
-	webp_anim_dump_main
-	webpmux_main
-	webpinfo_main
 
 	pngcrush_main
 	pngmeta_main
