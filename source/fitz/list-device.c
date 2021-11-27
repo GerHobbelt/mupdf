@@ -21,6 +21,7 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/ucdn.h"
 
 #include <assert.h>
 #include <string.h>
@@ -1260,7 +1261,7 @@ fz_list_render_flags(fz_context *ctx, fz_device *dev, int set, int clear)
 		flags = 0;
 	else
 	{
-		assert("Unsupported flags combination" == NULL);
+		assert(!"Unsupported flags combination");
 		return;
 	}
 	fz_append_display_node(
@@ -1589,9 +1590,9 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	color_params = fz_default_color_params;
 
 	clock_t start_time = clock();
+	clock_t prev_time = start_time;
 	size_t prev_progress = 0;
-	int do_not_draw = 0;
-	int dnd_modulus = list->len / 100000000;		// just a tweak: when things take too long to render, we render only about 1000 parts of the page...
+	int do_not_draw = 1;
 
 	node = list->list;
 	node_end = &list->list[list->len];
@@ -1605,28 +1606,43 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 		/* Check the cookie for aborting */
 		if (cookie)
 		{
-			if (cookie->abort)
+			if (cookie->abort || 1)
 				break;
 			cookie->progress = progress;
-			if (prev_progress + 0 <= progress && !do_not_draw)
+		}
+
+		if (prev_progress + 500 <= progress) {
+			clock_t time = clock();
+			float ms = (float)(time - prev_time) / CLOCKS_PER_SEC;
+
+			// it's time to check our progress and see if we're a long-running task or not by now:
+			if (ms >= 1000.0 && progress >= 10000)
 			{
-				// it's time to check our progress and see if we're a long-running task or not by now:
-				clock_t time = clock();
-				float ms = (float)(time - start_time) / CLOCKS_PER_SEC;
-				if (ms >= 0.0)
+				fprintf(stderr, "MS:%f DELTA:%ld PROGRESS:%ld LEVEL:%d\n", ms, (long)(progress - prev_progress), (long)progress, do_not_draw);
+
+				if (!do_not_draw)
 				{
 					//clipped++;  <-- hacking that one causes error reports  :'-(
-					//do_not_draw = 1;
+					do_not_draw = 1;
 
 					ctx->do_not_draw = do_not_draw;
 				}
+				else
+				{
+					//if (!clipped)
+					//  clipped++;
+					do_not_draw++;
+
+					if (do_not_draw >= 5)
+					{
+						// abort render!
+						break;
+					}
+
+					prev_time = time;
+				}
+
 				prev_progress = progress;
-			}
-			else if (do_not_draw)
-			{
-				//if (!clipped)
-				//  clipped++;
-				do_not_draw++;
 			}
 			progress += n.size;
 		}
@@ -1793,7 +1809,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 			empty = fz_is_empty_rect(fz_intersect_rect(trans_rect, scissor));
 		}
 
-		if (clipped || empty)
+		if (clipped || empty || do_not_draw >= 2)
 		{
 			switch (n.cmd)
 			{
@@ -1830,13 +1846,11 @@ visible:
 			{
 			case FZ_CMD_FILL_PATH:
 				fz_unpack_color_params(&color_params, n.flags);
-				if (!dnd_modulus || (do_not_draw % dnd_modulus == 0))
-					fz_fill_path(ctx, dev, path, n.flags & 1, trans_ctm, colorspace, color, alpha, color_params);
+				fz_fill_path(ctx, dev, path, n.flags & 1, trans_ctm, colorspace, color, alpha, color_params);
 				break;
 			case FZ_CMD_STROKE_PATH:
 				fz_unpack_color_params(&color_params, n.flags);
-				if (!dnd_modulus || (do_not_draw % dnd_modulus == 0))
-					fz_stroke_path(ctx, dev, path, stroke, trans_ctm, colorspace, color, alpha, color_params);
+				fz_stroke_path(ctx, dev, path, stroke, trans_ctm, colorspace, color, alpha, color_params);
 				break;
 			case FZ_CMD_CLIP_PATH:
 				fz_clip_path(ctx, dev, path, n.flags, trans_ctm, trans_rect);
@@ -1898,8 +1912,8 @@ visible:
 			case FZ_CMD_BEGIN_GROUP:
 				align_node_for_pointer(&node);
 				if (ctx->do_not_draw) {
-					// clip everything until group-end; group MAY includee blendmode settings, etc.
-					// which would otherwise end up b eing applied incorrectly or at the wrong nodes!
+					// clip everything until group-end; group MAY include blendmode settings, etc.
+					// which would otherwise end up being applied incorrectly or at the wrong nodes!
 					clipped++;
 				}
 				else {
@@ -1958,6 +1972,85 @@ visible:
 				cookie->errors++;
 		}
 	}
+
+	/*
+	  When the time limit kicked in and stopped the costly page render, we notify the user/viewer
+	  by printing a loud message over the (partially rendered) page at center stage.
+	*/
+	if (do_not_draw) {
+		const fz_color_params fz_default_color_params = { FZ_RI_RELATIVE_COLORIMETRIC, 1, 0, 0 };
+		fz_text* text = NULL;
+
+		fz_try(ctx)
+		{
+			text = fz_new_text(ctx);
+
+			fz_drop_colorspace(ctx, colorspace);
+			colorspace = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
+
+			// pick a red color that's also visible for color-blind folks: add some gray to it.
+			color[0] = 0.8f;
+			color[1] = 0.1f;
+			color[2] = 0.1f;
+
+			//dev->alpha = 1.0f;
+
+			trans_rect = fz_transform_rect(scissor, top_ctm);
+
+			fz_begin_group(ctx, dev, trans_rect, colorspace, 1 /* isolated */, 0, FZ_BLEND_NORMAL, 1.0);
+
+			fz_font* user_font = fz_load_fallback_font(ctx, UCDN_SCRIPT_COMMON, FZ_LANG_UNSET, 1, 1, 0);
+			float band_width = fz_min(scissor.x1 - scissor.x0, scissor.y1 - scissor.y0);
+			fz_matrix txtctm = fz_scale(band_width / 12, - band_width / 12);
+			txtctm = fz_pre_translate(txtctm, -5, 1.5);
+			fz_show_string(ctx, text, user_font, txtctm, "This page timed-out.",
+				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+			txtctm = fz_pre_translate(txtctm, -1, -1.5);
+			fz_show_string(ctx, text, user_font, txtctm, "The render is incomplete!",
+				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+			txtctm = fz_pre_translate(txtctm, 2.5, -1);
+			txtctm = fz_pre_scale(txtctm, 0.33, 0.33);
+			fz_show_string(ctx, text, user_font, txtctm, "Please adjust MuPDF render control settings",
+				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+			txtctm = fz_pre_translate(txtctm, 0, -1.2);
+			fz_show_string(ctx, text, user_font, txtctm, "if you want this page to render in its entirety.",
+				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+			txtctm = fz_pre_translate(txtctm, -6, -1.2);
+			fz_show_string(ctx, text, user_font, txtctm, "Contact your software's support channel if you don't know what to do.",
+				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+
+			trans_ctm = fz_scale(1, 1);
+
+				fz_path* path = fz_new_path(ctx);
+				fz_moveto(ctx, path, 10, 10);
+				fz_lineto(ctx, path, 10, -10);
+				fz_lineto(ctx, path, -10, -10);
+				fz_lineto(ctx, path, -10, 10);
+				fz_lineto(ctx, path, 10, 10);
+				fz_color_params params = { FZ_RI_PERCEPTUAL };
+
+			trans_ctm = fz_pre_translate(trans_ctm, (scissor.x1 - scissor.x0) / 2.0f, (scissor.y1 - scissor.y0) / 2.0f);
+			trans_ctm = fz_pre_rotate(trans_ctm, -45);
+
+			fz_fill_text(ctx, dev, text, trans_ctm, colorspace, color, 1.0f, fz_default_color_params);
+
+			color[0] = 0.1f;
+			color[1] = 0.8f;
+			color[2] = 0.1f;
+
+			fz_fill_path(ctx, dev, path, 1, trans_ctm, colorspace, color, 1.0f, params);
+			fz_drop_path(ctx, path);
+
+			fz_end_group(ctx, dev);
+		}
+		fz_always(ctx)
+		{
+			fz_drop_text(ctx, text);
+		}
+		fz_catch(ctx)
+			fz_rethrow(ctx);
+	}
+
 	fz_drop_colorspace(ctx, colorspace);
 	fz_drop_stroke_state(ctx, stroke);
 	fz_drop_path(ctx, path);
