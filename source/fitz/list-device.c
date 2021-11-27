@@ -1616,7 +1616,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 				if (ms >= 0.0)
 				{
 					//clipped++;  <-- hacking that one causes error reports  :'-(
-					do_not_draw = 1;
+					//do_not_draw = 1;
 
 					ctx->do_not_draw = do_not_draw;
 				}
@@ -1830,12 +1830,12 @@ visible:
 			{
 			case FZ_CMD_FILL_PATH:
 				fz_unpack_color_params(&color_params, n.flags);
-				if (!dnd_modulus || do_not_draw % dnd_modulus == 0)
+				if (!dnd_modulus || (do_not_draw % dnd_modulus == 0))
 					fz_fill_path(ctx, dev, path, n.flags & 1, trans_ctm, colorspace, color, alpha, color_params);
 				break;
 			case FZ_CMD_STROKE_PATH:
 				fz_unpack_color_params(&color_params, n.flags);
-				if (!dnd_modulus || do_not_draw % dnd_modulus == 0)
+				if (!dnd_modulus || (do_not_draw % dnd_modulus == 0))
 					fz_stroke_path(ctx, dev, path, stroke, trans_ctm, colorspace, color, alpha, color_params);
 				break;
 			case FZ_CMD_CLIP_PATH:
@@ -1897,7 +1897,14 @@ visible:
 				break;
 			case FZ_CMD_BEGIN_GROUP:
 				align_node_for_pointer(&node);
-				fz_begin_group(ctx, dev, trans_rect, *(fz_colorspace **)node, (n.flags & ISOLATED) != 0, (n.flags & KNOCKOUT) != 0, (n.flags>>2), alpha);
+				if (ctx->do_not_draw) {
+					// clip everything until group-end; group MAY includee blendmode settings, etc.
+					// which would otherwise end up b eing applied incorrectly or at the wrong nodes!
+					clipped++;
+				}
+				else {
+					fz_begin_group(ctx, dev, trans_rect, *(fz_colorspace**)node, (n.flags & ISOLATED) != 0, (n.flags & KNOCKOUT) != 0, (n.flags >> 2), alpha);
+				}
 				break;
 			case FZ_CMD_END_GROUP:
 				fz_end_group(ctx, dev);

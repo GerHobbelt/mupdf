@@ -876,7 +876,7 @@ fz_convert_gel(fz_context *ctx, fz_rasterizer *rast, int eofill, const fz_irect 
 			fn = (void *)fz_get_span_color_painter(dst->n, dst->alpha, color, eop);
 		else
 			fn = (void *)fz_get_span_painter(dst->alpha, 1, 0, 255, eop);
-		assert(fn);
+		//assert(fn);
 		if (fn == NULL)
 			return;
 		fz_scan_convert_aa(ctx, gel, eofill, clip, dst, color, fn, eop);
@@ -884,10 +884,10 @@ fz_convert_gel(fz_context *ctx, fz_rasterizer *rast, int eofill, const fz_irect 
 	else
 	{
 		fz_solid_color_painter_t *fn = fz_get_solid_color_painter(dst->n, color, dst->alpha, eop);
-		assert(fn);
+		//assert(fn);
 		if (fn == NULL)
 			return;
-		fz_scan_convert_sharp(ctx, gel, eofill, clip, dst, color, (fz_solid_color_painter_t *)fn, eop);
+		fz_scan_convert_sharp(ctx, gel, eofill, clip, dst, color, fn, eop);
 	}
 }
 
