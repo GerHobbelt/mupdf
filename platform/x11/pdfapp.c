@@ -897,6 +897,9 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 	fz_rect bounds;
 	fz_irect ibounds;
 	fz_cookie cookie = { 0 };
+	const fz_stext_options dev_opts = {
+		FZ_STEXT_PRESERVE_LIGATURES
+	};
 
 	if (!app->nowaitcursor)
 		wincursor(app, WAIT);
@@ -939,7 +942,7 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 
 		if (app->page_list || app->annotations_list)
 		{
-			tdev = fz_new_stext_device(app->ctx, app->page_text, NULL);
+			tdev = fz_new_stext_device(app->ctx, app->page_text, &dev_opts);
 			fz_try(app->ctx)
 			{
 				pdfapp_runpage(app, tdev, fz_identity, fz_infinite_rect, &cookie);
