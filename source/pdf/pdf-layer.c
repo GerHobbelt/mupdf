@@ -541,6 +541,7 @@ ocg_intents_include(fz_context *ctx, pdf_ocg_descriptor *desc, const char *name)
 
 
 int pdf_is_ocg_hidden(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usage, pdf_obj *ocg);
+
 /*
 Compute the state of a /VE entry (visibility expression).
 Recursive function: parameter ve may be an array or a dict.
@@ -760,7 +761,9 @@ pdf_is_ocg_hidden(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *
 			}
 			else
 			{
-				on = !pdf_is_ocg_hidden(ctx, doc, rdb, usage, obj);
+				on = pdf_is_ocg_hidden(ctx, doc, rdb, usage, obj);
+				if ((combine & 1) == 0)
+					on = !on;
 			}
 		}
 		fz_always(ctx)

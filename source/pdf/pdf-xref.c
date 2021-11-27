@@ -2426,7 +2426,7 @@ pdf_is_local_object(fz_context *ctx, pdf_document *doc, pdf_obj *obj)
 	if (num >= sub->start && num < sub->start + sub->len)
 	{
 		char type = sub->table[num - sub->start].type;
-		return type != 'f' && type != '\0';              // original code only checks for '\0', but did check for '\f' before jul/2021   [GHo]
+		return type != 'f' && type != '\0';              // original code only checks for '\0', but did check for 'f' before jul/2021   [GHo]
 	}
 
 	return 0;

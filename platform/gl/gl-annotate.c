@@ -944,9 +944,7 @@ void do_annotate_panel(void)
 	for (idx=0, annot = pdf_first_annot(ctx, page); annot; ++idx, annot = pdf_next_annot(ctx, annot))
 	{
 		char buf[256];
-		int num;
-
-		num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
+		int num = pdf_to_num(ctx, pdf_annot_obj(ctx, annot));
 		subtype = pdf_annot_type(ctx, annot);
 		fz_snprintf(buf, sizeof buf, "%d: %s", num, pdf_string_from_annot_type(ctx, subtype));
 		if (ui_list_item(&annot_list, pdf_annot_obj(ctx, annot), buf, ui.selected_annot == annot))

@@ -1327,6 +1327,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	if (!ctx)
 	{
 		MessageBoxA(NULL, "Cannot initialize MuPDF context.", "MuPDF: Error", MB_OK);
+        LocalFree(wargv);
 		return EXIT_FAILURE;
 	}
 
@@ -1337,8 +1338,10 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	pdfapp_init(ctx, &gapp);
 
 	argv = fz_argv_from_wargv(argc, wargv);
-	if (!argv)
+	if (!argv) {
+        LocalFree(wargv);
 		return EXIT_FAILURE;
+	}
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:")) != -1)
@@ -1360,7 +1363,10 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 		case 'b': kbps = fz_atoi(fz_optarg); break;
 		case 'U': gapp.layout_css = fz_optarg; break;
 		case 'X': gapp.layout_use_doc_css = 0; break;
-		default: usage(argv[0]);	 return EXIT_FAILURE;
+		default: 
+		    usage(argv[0]);
+            LocalFree(wargv);
+		    return EXIT_FAILURE;
 		}
 	}
 
@@ -1380,6 +1386,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 		if (!winfilename(wbuf, nelem(wbuf)))
 		{
 			fz_free_argv(argc, argv);
+            LocalFree(wargv);
 			return EXIT_FAILURE;
 		}
 		code = WideCharToMultiByte(CP_UTF8, 0, wbuf, -1, filename, sizeof filename, NULL, NULL);
