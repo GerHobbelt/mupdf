@@ -1592,7 +1592,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	clock_t start_time = clock();
 	clock_t prev_time = start_time;
 	size_t prev_progress = 0;
-	int do_not_draw = 1;
+	int do_not_draw = 0;
 
 	node = list->list;
 	node_end = &list->list[list->len];
@@ -1606,45 +1606,33 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 		/* Check the cookie for aborting */
 		if (cookie)
 		{
-			if (cookie->abort || 1)
+			if (cookie->abort)
 				break;
 			cookie->progress = progress;
-		}
 
-		if (prev_progress + 500 <= progress) {
-			clock_t time = clock();
-			float ms = (float)(time - prev_time) / CLOCKS_PER_SEC;
-
-			// it's time to check our progress and see if we're a long-running task or not by now:
-			if (ms >= 1000.0 && progress >= 10000)
+			// apply render limits when any of these have been provided in the user cookie
+			if (cookie->max_msecs_per_page_render > 0 || cookie->max_nodes_per_page_render > 0)
 			{
-				fprintf(stderr, "MS:%f DELTA:%ld PROGRESS:%ld LEVEL:%d\n", ms, (long)(progress - prev_progress), (long)progress, do_not_draw);
+				if (prev_progress + 100 <= progress) {
+					clock_t time = clock();
+					float ms = (time - prev_time) * 1000.0f / CLOCKS_PER_SEC;
 
-				if (!do_not_draw)
-				{
-					//clipped++;  <-- hacking that one causes error reports  :'-(
-					do_not_draw = 1;
-
-					ctx->do_not_draw = do_not_draw;
-				}
-				else
-				{
-					//if (!clipped)
-					//  clipped++;
-					do_not_draw++;
-
-					if (do_not_draw >= 5)
+					// it's time to check our progress and see if we're a long-running task or not by now:
+					if (ms >= cookie->max_msecs_per_page_render && progress >= cookie->max_nodes_per_page_render)
 					{
-						// abort render!
-						break;
+						if (!do_not_draw)
+						{
+							//clipped++;  <-- hacking that one causes error reports  :'-(
+							do_not_draw = 1;
+						}
+
+						prev_time = time;
 					}
 
-					prev_time = time;
+					prev_progress = progress;
 				}
-
-				prev_progress = progress;
+				progress += n.size;
 			}
-			progress += n.size;
 		}
 
 		node++;
@@ -1756,11 +1744,6 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 			fz_drop_stroke_state(ctx, stroke);
 			stroke = fz_keep_stroke_state(ctx, *(fz_stroke_state **)node);
 			node += SIZE_IN_NODES(sizeof(fz_stroke_state *));
-
-			if (do_not_draw)
-			{
-				//stroke->blendmode &= ~FZ_BLEND_KNOCKOUT;
-			}
 		}
 		if (n.path)
 		{
@@ -1809,7 +1792,9 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 			empty = fz_is_empty_rect(fz_intersect_rect(trans_rect, scissor));
 		}
 
-		if (clipped || empty || do_not_draw >= 2)
+		// clip everything until group-end; group MAY include blendmode settings, etc.
+		// which would otherwise end up being applied incorrectly or at the wrong nodes!
+		if (clipped || empty || do_not_draw)
 		{
 			switch (n.cmd)
 			{
@@ -1911,14 +1896,7 @@ visible:
 				break;
 			case FZ_CMD_BEGIN_GROUP:
 				align_node_for_pointer(&node);
-				if (ctx->do_not_draw) {
-					// clip everything until group-end; group MAY include blendmode settings, etc.
-					// which would otherwise end up being applied incorrectly or at the wrong nodes!
-					clipped++;
-				}
-				else {
-					fz_begin_group(ctx, dev, trans_rect, *(fz_colorspace**)node, (n.flags & ISOLATED) != 0, (n.flags & KNOCKOUT) != 0, (n.flags >> 2), alpha);
-				}
+				fz_begin_group(ctx, dev, trans_rect, *(fz_colorspace **)node, (n.flags & ISOLATED) != 0, (n.flags & KNOCKOUT) != 0, (n.flags>>2), alpha);
 				break;
 			case FZ_CMD_END_GROUP:
 				fz_end_group(ctx, dev);
@@ -1977,9 +1955,10 @@ visible:
 	  When the time limit kicked in and stopped the costly page render, we notify the user/viewer
 	  by printing a loud message over the (partially rendered) page at center stage.
 	*/
-	if (do_not_draw) {
+	if (do_not_draw || (cookie && cookie->abort)) {
 		const fz_color_params fz_default_color_params = { FZ_RI_RELATIVE_COLORIMETRIC, 1, 0, 0 };
 		fz_text* text = NULL;
+		int aborted = (cookie && cookie->abort);
 
 		fz_try(ctx)
 		{
@@ -2002,22 +1981,35 @@ visible:
 			fz_font* user_font = fz_load_fallback_font(ctx, UCDN_SCRIPT_COMMON, FZ_LANG_UNSET, 1, 1, 0);
 			float band_width = fz_min(scissor.x1 - scissor.x0, scissor.y1 - scissor.y0);
 			fz_matrix txtctm = fz_scale(band_width / 12, - band_width / 12);
-			txtctm = fz_pre_translate(txtctm, -5, 1.5);
-			fz_show_string(ctx, text, user_font, txtctm, "This page timed-out.",
-				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
-			txtctm = fz_pre_translate(txtctm, -1, -1.5);
-			fz_show_string(ctx, text, user_font, txtctm, "The render is incomplete!",
-				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
-			txtctm = fz_pre_translate(txtctm, 2.5, -1);
-			txtctm = fz_pre_scale(txtctm, 0.33, 0.33);
-			fz_show_string(ctx, text, user_font, txtctm, "Please adjust MuPDF render control settings",
-				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
-			txtctm = fz_pre_translate(txtctm, 0, -1.2);
-			fz_show_string(ctx, text, user_font, txtctm, "if you want this page to render in its entirety.",
-				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
-			txtctm = fz_pre_translate(txtctm, -6, -1.2);
-			fz_show_string(ctx, text, user_font, txtctm, "Contact your software's support channel if you don't know what to do.",
-				0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+
+			if (!aborted)
+			{
+				txtctm = fz_pre_translate(txtctm, -5, 1.5);
+				fz_show_string(ctx, text, user_font, txtctm, "This page timed-out.",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+				txtctm = fz_pre_translate(txtctm, -1, -1.5);
+				fz_show_string(ctx, text, user_font, txtctm, "The render is incomplete!",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+				txtctm = fz_pre_translate(txtctm, 2.5, -1);
+				txtctm = fz_pre_scale(txtctm, 0.33, 0.33);
+				fz_show_string(ctx, text, user_font, txtctm, "Please adjust MuPDF render control settings",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+				txtctm = fz_pre_translate(txtctm, 0, -1.2);
+				fz_show_string(ctx, text, user_font, txtctm, "if you want this page to render in its entirety.",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+				txtctm = fz_pre_translate(txtctm, -6, -1.2);
+				fz_show_string(ctx, text, user_font, txtctm, "Contact your software's support channel if you don't know what to do.",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+			}
+			else
+			{
+				txtctm = fz_pre_translate(txtctm, -5, 0.75);
+				fz_show_string(ctx, text, user_font, txtctm, "This page was aborted.",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+				txtctm = fz_pre_translate(txtctm, -1, -1.5);
+				fz_show_string(ctx, text, user_font, txtctm, "The render is incomplete!",
+					0, 0, FZ_BIDI_LTR, FZ_LANG_UNSET);
+			}
 
 			trans_ctm = fz_scale(1, 1);
 

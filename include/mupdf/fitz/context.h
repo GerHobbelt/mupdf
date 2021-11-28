@@ -695,7 +695,6 @@ struct fz_context
 	int icc_enabled;
 #endif
 	int throw_on_repair;
-	int do_not_draw;
 
 	/* TODO: should these be unshared? */
 	fz_document_handler_context *handler;

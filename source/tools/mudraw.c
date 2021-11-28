@@ -513,6 +513,7 @@ static int usage(void)
 		"  -D    disable use of display list\n"
 		"  -j -  render only selected types of content. Use a comma-separated list\n"
 		"        to combine types (everything,content,annotations,Unknown,\n"
+		"        max_nodes=NNN,max_time=MS,"
 		"        %s)\n"
 		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"  -i    ignore errors\n"
@@ -2205,40 +2206,79 @@ fz_strnieq(const char* arg, size_t wlen, const char* word)
 	return fz_strncasecmp(arg, word, wlen) == 0;
 }
 
+static int
+fz_strieq(const char* arg, const char* word)
+{
+	return fz_strcasecmp(arg, word) == 0;
+}
+
 static void
-parse_render_options(fz_cookie* cookie, const char* arg)
+parse_render_options(fz_context* ctx, fz_cookie* cookie, const char* spec)
 {
 	const char* SEPS = " ,;:";
+	size_t len = strlen(spec);
+	char* buf = fz_malloc(ctx, len + 2);
 
+	if (!buf)
+		return;
+
+	memcpy(buf, spec, len + 1);
+	buf[len + 2] = 0;  // second sentinel, reqd for the strcspn() loop below
+
+	char* arg = buf;
 	while (*arg)
 	{
 		size_t wlen = strcspn(arg, SEPS);
+		arg[wlen] = 0;
 
-		if (fz_strnieq(arg, wlen, "everything"))
+		if (fz_strnieq(arg, 9, "max_nodes"))
+		{
+			unsigned int v = 0;
+			if (1 == sscanf(arg + 9, "=%u", &v))
+			{
+				cookie->max_nodes_per_page_render = v;
+			}
+			else
+			{
+				fz_error(ctx, "Invalid 'max_nodes=NNN' limit specified as part of the render filter: '%s'. Treating it as NO LIMIT.\n", arg);
+			}
+		}
+		else if (fz_strnieq(arg, 8, "max_time"))
+		{
+			unsigned int v = 0;
+			if (1 == sscanf(arg + 8, "=%u", &v))
+			{
+				cookie->max_msecs_per_page_render = v;
+			}
+			else
+			{
+				fz_error(ctx, "Invalid 'max_time=NNN' millisecond time limit specified as part of the render filter: '%s'. Treating it as NO LIMIT.\n", arg);
+			}
+		}
+		else if (fz_strieq(arg, "everything"))
 			cookie->run_mode = FZ_RUN_EVERYTHING;
-		else if (fz_strnieq(arg, wlen, "content"))
+		else if (fz_strieq(arg, "content"))
 			cookie->run_mode |= FZ_RUN_CONTENT;
-		else if (fz_strnieq(arg, wlen, "annotations"))
+		else if (fz_strieq(arg, "annotations"))
 			cookie->run_mode |= FZ_RUN_ANNOTATIONS;
-		else if (fz_strnieq(arg, wlen, "unknown"))
+		else if (fz_strieq(arg, "unknown"))
 			cookie->run_annotations_reject_mask[PDF_ANNOT_UNKNOWN + 1] = 1;
 		else
 		{
 			// check if the item matches any of the annotation types:
-			char buf[64];
-			strncpy(buf, arg, wlen);
-			buf[wlen] = 0;
-			enum fz_annot_type type = pdf_annot_type_from_string(ctx, buf);
+			enum fz_annot_type type = pdf_annot_type_from_string(ctx, arg);
 			if (type == PDF_ANNOT_UNKNOWN)
 			{
-				fz_error(ctx, "Unrecognized annotation type '%s' specified as part of the render filter. Treating it as UNKNOWN annotation type.\n", buf);
+				fz_error(ctx, "Unrecognized annotation type '%s' specified as part of the render filter. Treating it as UNKNOWN annotation type.\n", arg);
 			}
 			cookie->run_annotations_reject_mask[type + 1] = 1;
 		}
 
-		arg += wlen;
+		arg += wlen + 1;    // <-- *this* is why we need TWO sentinels.
 		arg += strspn(arg, SEPS);
 	}
+
+	fz_free(ctx, buf);
 }
 
 static void mu_drop_context(void)
@@ -2419,7 +2459,7 @@ int main(int argc, const char** argv)
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
 		case 'I': invert++; break;
-		case 'j': parse_render_options(&master_cookie, fz_optarg); break;
+		case 'j': parse_render_options(ctx, &master_cookie, fz_optarg); break;
 		case 'J': fz_default_png_compression_level(fz_atoi(fz_optarg)); break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;

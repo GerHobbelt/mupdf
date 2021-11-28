@@ -431,7 +431,7 @@ fz_begin_group(fz_context *ctx, fz_device *dev, fz_rect area, fz_colorspace *cs,
 {
 	push_clip_stack(ctx, dev, area, fz_device_container_stack_is_group);
 
-	if (dev->begin_group && !ctx->do_not_draw)
+	if (dev->begin_group)
 	{
 		fz_try(ctx)
 			dev->begin_group(ctx, dev, area, cs, isolated, knockout, blendmode, alpha);
@@ -448,7 +448,7 @@ fz_end_group(fz_context *ctx, fz_device *dev)
 {
 	pop_clip_stack(ctx, dev, fz_device_container_stack_is_group);
 
-	if (dev->end_group && !ctx->do_not_draw)
+	if (dev->end_group)
 	{
 		fz_try(ctx)
 			dev->end_group(ctx, dev);
