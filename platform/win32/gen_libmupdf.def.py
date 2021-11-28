@@ -160,6 +160,8 @@ EXPORTS
 
 	sqlite3OSTrace                    DATA
 
+	jpeg_cust_mem_init
+
 %(fitz_exports)s
 
 ; MuPDF exports
