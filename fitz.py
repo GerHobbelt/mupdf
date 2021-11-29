@@ -9878,8 +9878,8 @@ class Shape(object):
         nres = "\nq\n%s%sBT\n" % (bdc, alpha) + cm  # initialize output buffer
         templ = "1 0 0 1 %g %g Tm /%s %g Tf "
         # center, right, justify: output each line with its own specifics
-        spacing = 0
         text_t = text.splitlines()  # split text in lines again
+        just_tab[-1] = False  # never justify last line
         for i, t in enumerate(text_t):
             pl = maxwidth - pixlen(t)  # length of empty line part
             pnt = point + c_pnt * (i * lheight_factor)  # text start of line
@@ -9914,8 +9914,9 @@ class Shape(object):
             nres += templ % (left, top, fname, fontsize)
             if render_mode > 0:
                 nres += "%i Tr " % render_mode
-            if spacing != 0:
+            if align == 3:
                 nres += "%g Tw " % spacing
+
             if color is not None:
                 nres += color_str
             if fill is not None:
