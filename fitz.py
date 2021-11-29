@@ -3466,7 +3466,23 @@ class Document:
         """Get xref object source as a string."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_xref_object(self, xref, compressed, ascii)
+        #return _fitz.Document_xref_object(self, xref, compressed, ascii)
+        if 1:
+            pdf = self._pdf_document()
+            #pdf_obj *obj = NULL;
+            #PyObject *text = NULL;
+            #fz_buffer *res=NULL;
+            ASSERT_PDF(pdf);
+            xreflen = mupdf.mpdf_xref_len(pdf)
+            if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+                THROWMSG("bad xref")
+            if xref > 0:
+                obj = mupdf.mpdf_load_object(pdf, xref)
+            else:
+                obj = mupdf.mpdf_trailer(pdf)
+            res = JM_object_to_buffer(mupdf.mpdf_resolve_indirect(obj), compressed, ascii)
+            text = JM_EscapeStrFromBuffer(res)
+            return text
 
     def xref_set_key(self, xref, key, value):
         """Set the value of a PDF dictionary key."""
@@ -5477,7 +5493,12 @@ class Page:
         return mc
 
     def _get_resource_properties(self):
-        return _fitz.Page__get_resource_properties(self)
+        #return _fitz.Page__get_resource_properties(self)
+        if 1:
+            page = self._pdf_page()
+            ASSERT_PDF(page);
+            rc = JM_get_resource_properties(page.obj())
+            return rc
 
     def _getDrawings(self):
         return _fitz.Page__getDrawings(self)
@@ -5696,7 +5717,10 @@ class Page:
         return gstate
 
     def _set_resource_property(self, name, xref):
-        return _fitz.Page__set_resource_property(self, name, xref)
+        #return _fitz.Page__set_resource_property(self, name, xref)
+        page = self._pdf_page()
+        ASSERT_PDF(page);
+        JM_set_resource_property(page.obj(), name, xref)
 
     def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
         return _fitz.Page__showPDFpage(self, fz_srcpage, overlay, matrix, xref, oc, clip, graftmap, _imgname)
@@ -10338,6 +10362,52 @@ class TextWriter:
             pos.y += lheight
         return self.textRect, self.lastPoint
 
+    def clean_rtl(self, text):
+        """Revert the sequence of Latin text parts.
+
+        Text with right-to-left writing direction (Arabic, Hebrew) often
+        contains Latin parts, which are written in left-to-right: numbers, names,
+        etc. For output as PDF text we need *everything* in right-to-left.
+        E.g. an input like "<arabic> ABCDE FG HIJ <arabic> KL <arabic>" will be
+        converted to "<arabic> JIH GF EDCBA <arabic> LK <arabic>". The Arabic
+        parts remain untouched.
+
+        Args:
+            text: str
+        Returns:
+            Massaged string.
+        """
+        if not text:
+            return text
+        # split into words at space boundaries
+        words = text.split(" ")
+        idx = []
+        for i in range(len(words)):
+            w = words[i]
+        # revert character sequence for Latin only words
+            if not (len(w) < 2 or max([ord(c) for c in w]) > 255):
+                words[i] = "".join(reversed(w))
+                idx.append(i)  # stored index of Latin word
+
+        # adjacent Latin words must revert their sequence, too
+        idx2 = []  # store indices of adjacent Latin words
+        for i in range(len(idx)):
+            if idx2 == []:  # empty yet?
+                idx2.append(idx[i]) # store Latin word number
+
+            elif idx[i] > idx2[-1] + 1:  # large gap to last?
+                if len(idx2) > 1:  # at least two consecutives?
+                    words[idx2[0] : idx2[-1] + 1] = reversed(
+                        words[idx2[0] : idx2[-1] + 1]
+                    )  # revert their sequence
+                idx2 = [idx[i]]  # re-initialize
+
+            elif idx[i] == idx2[-1] + 1:  # new adjacent Latin word
+                idx2.append(idx[i])
+
+        text = " ".join(words)
+        return text
+
     def fill_textbox(*args, **kwargs):
         return utils.fill_textbox(*args, **kwargs)
 
@@ -12438,6 +12508,28 @@ def JM_get_font(
         return font
 
 
+def JM_get_resource_properties(ref):
+    '''
+    Return the items of Resources/Properties (used for Marked Content)
+    Argument may be e.g. a page object or a Form XObject
+    '''
+    properties = mupdf.mpdf_dict_getl(ref, PDF_NAME('Resources'), PDF_NAME('Properties'))
+    if not properties.m_internal:
+        return ()
+    else:
+        n = mupdf.mpdf_dict_len(properties)
+        if n < 1:
+            return ()
+        rc = []
+        for i in range(n):
+            key = mupdf.mpdf_dict_get_key(properties, i)
+            val = mupdf.mpdf_dict_get_val(properties, i)
+            c = mupdf.mpdf_to_name(key)
+            xref = mupdf.mpdf_to_num(val)
+            rc.append((c, xref))
+    return rc
+
+
 def JM_get_widget_properties(annot, Widget):
     '''
     Populate a Python Widget object with the values from a PDF form field.
@@ -13370,7 +13462,7 @@ def JM_print_stext_page_as_text(out, page):
                         for c in utf:
                             #jlib.log('{type(c)=} {c!r=}')
                             cc = ord(c)
-                            assert(0 <= cc < 256)
+                            assert 0 <= cc < 256, f'utf={utf!r} cc={cc}'
                             mupdf.mfz_write_byte(out, cc)
                 if last_char != 10 and last_char > 0:
                     mupdf.mfz_write_string(out, "\n")
@@ -13793,6 +13885,27 @@ def JM_set_object_value(obj, key, value):
     # make PDF object from resulting string
     new_obj = JM_pdf_obj_from_str(pdf, newstr)
     return new_obj;
+
+
+def JM_set_resource_property(ref, name, xref):
+    '''
+    Insert an item into Resources/Properties (used for Marked Content)
+    Arguments:
+    (1) e.g. page object, Form XObject
+    (2) marked content name
+    (3) xref of the referenced object (insert as indirect reference)
+    '''
+    pdf = mupdf.mpdf_get_bound_document(ref)
+    ind = mupdf.mpdf_new_indirect(pdf, xref, 0)
+    if not ind.m_internal:
+        THROWMSG("bad xref")
+    resources = mupdf.mpdf_dict_get(ref, PDF_NAME('Resources'))
+    if not resources.m_internal:
+        resources = mupdf.mpdf_dict_put_dict(ref, PDF_NAME('Resources'), 1)
+    properties = mupdf.mpdf_dict_get(resources, PDF_NAME('Properties'))
+    if not properties.m_internal:
+        properties = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('Properties'), 1)
+    mupdf.mpdf_dict_put(properties, mupdf.mpdf_new_name(name), ind)
 
 
 def JM_set_widget_properties(annot, Widget):
