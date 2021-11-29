@@ -4325,7 +4325,7 @@ class Font:
                 or not mupdf.mpdf_font_writing_supported(font)
                 ):
             return False
-        return True;
+        return True
 
 
     def valid_codepoints(self):
@@ -13461,9 +13461,9 @@ def JM_print_stext_page_as_text(out, page):
                         utf = mupdf.runetochar2(last_char)
                         for c in utf:
                             #jlib.log('{type(c)=} {c!r=}')
-                            cc = ord(c)
-                            assert 0 <= cc < 256, f'utf={utf!r} cc={cc}'
-                            mupdf.mfz_write_byte(out, cc)
+                            assert isinstance(c, int)
+                            assert 0 <= c < 256, f'utf={utf!r} cc={c}'
+                            mupdf.mfz_write_byte(out, c)
                 if last_char != 10 and last_char > 0:
                     mupdf.mfz_write_string(out, "\n")
 
@@ -16688,7 +16688,7 @@ class TOOLS:
     @staticmethod
     def set_font_width(doc, xref, width):
         #return _fitz.Tools_set_font_width(self, doc, xref, width)
-        pdf = doc._pdf_page()
+        pdf = doc._pdf_document()
         if not pdf.m_internal:
             return False
         try:
