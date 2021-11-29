@@ -16691,22 +16691,18 @@ class TOOLS:
         pdf = doc._pdf_document()
         if not pdf.m_internal:
             return False
-        try:
-            font = mupdf.mpdf_load_object(pdf, xref)
-            dfonts = mupdf.mpdf_dict_get(font, PDF_NAME('DescendantFonts'))
-            if mupdf.mpdf_is_array(dfonts):
-                n = mupdf.mpdf_array_len(dfonts)
-                for i in range(n):
-                    dfont = mupdf.mpdf_array_get(dfonts, i)
-                    warray = mupdf.mpdf_new_array(pdf, 3)
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 0))
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, 65535))
-                    mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(gctx, width))
-                    #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
-                    mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
+        font = mupdf.mpdf_load_object(pdf, xref)
+        dfonts = mupdf.mpdf_dict_get(font, PDF_NAME('DescendantFonts'))
+        if mupdf.mpdf_is_array(dfonts):
+            n = mupdf.mpdf_array_len(dfonts)
+            for i in range(n):
+                dfont = mupdf.mpdf_array_get(dfonts, i)
+                warray = mupdf.mpdf_new_array(pdf, 3)
+                mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
+                mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
+                mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
+                #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
+                mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
         return True
 
     @staticmethod
