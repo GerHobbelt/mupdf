@@ -3,7 +3,7 @@
 // 
 // usage: run as
 //
-//     node ./add-sources-to-vcxproj.js your_project.vcxproj path-to-sources/
+//     node ./add-sources-to-vcxproj.js your_project.vcxproj path-to-sources/ [ignoreSpecFile]
 //
 
 let fs = require('fs');
@@ -42,6 +42,18 @@ const globDefaultOptions = {
 
 function unixify(path) {
   return path.replace(/\\/g, '/');
+}
+
+let ignores = [];
+let rawIgnoresPath = process.argv[4] || '';
+if (rawIgnoresPath.trim() !== '') {
+  let ignoresPath = unixify(path.resolve(rawIgnoresPath));
+  ignores = fs.readFileSync(ignoresPath, 'utf8').split('\n')
+  .map((line) => line.trim())
+  // filter out commented lines in the ignore spec
+  .filter((line) => line.length > 0 && !/^[#;]/.test(line));
+
+  console.log('Will ignore any paths which include: ', ignores);
 }
 
 let rawSourcesPath = process.argv[3];
@@ -135,11 +147,11 @@ if (!filterSrc.match(/<Filter Include="Source Files">/)) {
 */
 
 const specialFilenames = [
-  "README", "README.md", "README.txt", 
+  "README", 
   "NEWS", 
-  "CHANGES", "CHANGES.md", "CHANGES.txt", 
+  "CHANGES", 
   "ChangeLog", 
-  "Contributors.md", "Contributors.txt", "Contributors"
+  "Contributors"
 ];
 let specialFilenameRes = [];
 
@@ -148,7 +160,7 @@ function isSpecialMiscFile(f) {
   let name = path.basename(f);
   if (specialFilenameRes.length === 0) {
     for (let i = 0, len = specialFilenames.length; i < len; i++) {
-      let mre = new RegExp(`${ specialFilenames[i] }$`, 'i');
+      let mre = new RegExp(specialFilenames[i], 'i');
       specialFilenameRes[i] = mre;
     }
   }
@@ -160,6 +172,7 @@ function isSpecialMiscFile(f) {
   return false;
 }
 
+let ignoreCount = 0;
 
 let pathWithWildCards = '*.*';
 glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
@@ -171,7 +184,21 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
   let a = files.map((f) => {
     return f.replace(sourcesPath + '/', '');
-  }).filter((f) => {
+  })
+  .filter((f) => {
+    if (ignores.length > 0) {
+      for (const spec of ignores) {
+        if (f.includes(spec)) {
+          //console.log('IGNORE: testing:', f, {spec});
+          ignoreCount++;
+          return false;
+        }
+      }
+      //console.log('PASS: testing:', f);
+    }
+    return true;
+  })
+  .filter((f) => {
     let base;
     switch (path.extname(f).toLowerCase()) {
     case '.c':
@@ -192,6 +219,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.hh':
     case '.h++':
     case '.hpp':
+    case '.icc':
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -374,7 +402,11 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   fs.writeFileSync(filepath, src, 'utf8');
   fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
 
-  console.log("Added", a.length, "entries.");
+  if (ignores.length > 0) {
+    console.log("Added", a.length, "entries. (", ignoreCount, " files IGNORED due to IgnoreSpec.)");
+  } else {
+    console.log("Added", a.length, "entries.");
+  }
 });
 
 
