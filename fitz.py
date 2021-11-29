@@ -1464,44 +1464,48 @@ class Document:
 
         # this = _fitz.new_Document(filename, stream, filetype, rect, width, height, fontsize)
         #
-        if 1:
-            r = JM_rect_from_py(rect)
-            if r.is_infinite_rect():
-                w = width
-                h = height
-            else:
-                w = r.x1 - r.x0
-                h = r.y1 - r.y0
+        #char *c = NULL;
+        #fz_stream *data = NULL;
+        w = width
+        h = height
+        r = JM_rect_from_py(rect)
+        if not mupdf.mfz_is_infinite_rect(r):
+            w = r.x1 - r.x0
+            h = r.y1 - r.y0
+        if stream:  # stream given, **MUST** be bytes!
+            assert isinstance(stream, bytes)
+            c = stream
+            #len = (size_t) PyBytes_Size(stream);
 
-            if stream:
-                this = mupdf.Document(filename if filename else filetype, stream)
-                jlib.log('mupdf.Document() => {this=}')
-            else:
-                if filename:
-                    if not filetype:
-                        doc = mupdf.Document(filename)
-                        #jlib.log('mupdf.Document(filename) => {doc=}')
+            # Pass raw bytes data to mupdf.mfz_open_memory(). This assumes
+            # that the bytes string will not be modified; i think the original
+            # PyMuPDF code makes the same assumption. Presumably setting
+            # self.stream above ensures that the bytes will not be garbage
+            # collected?
+            data = mupdf.mfz_open_memory(mupdf.python_bytes_data(c), len(c))
+            magic = filename
+            if not magic:
+                magic = filetype
+            doc = mupdf.mfz_open_document_with_stream(magic, data)
+        else:
+            if filename:
+                if not filetype:
+                    doc = mupdf.mfz_open_document(filename)
+                else:
+                    handler = mupdf.mfz_recognize_document(filetype);
+                    if handler and handler.open:
+                        doc = handler.open(filename)
                     else:
-                        assert 0, 'recognize_document() not yet supported'
-                else:
-                    doc = mupdf.PdfDocument()
-                    # fixme: doc.dirty = 1
-            if w > 0 and h > 0:
-                if isinstance(doc, mupdf.PdfDocument):
-                    mupdf.layout_document(doc.m_internal.super, w, h, fontsize)
-                else:
-                    doc.layout_document(doc.m_internal.super, w, h, fontsize)
+                        THROWMSG("unrecognized file type")
             else:
-                if isinstance(doc, mupdf.PdfDocument):
-                    reflowable = mupdf.is_document_reflowable(doc.m_internal.super)
-                else:
-                    reflowable = doc.is_document_reflowable()
-                if reflowable:
-                    if isinstance(doc, mupdf.PdfDocument):
-                        mupdf.layout_document(doc.m_internal.super, 400, 600, 11)
-                    else:
-                        doc.layout_document(400, 600, 11)
-            this = doc
+                pdf = mupdf.mpdf_create_document()
+                doc = mupdf.Document(pdf)
+        jlib.log('{doc=}')
+        if w > 0 and h > 0:
+            mupdf.mfz_layout_document(doc, w, h, fontsize)
+        elif mupdf.mfz_is_document_reflowable(doc):
+           mupdf.mfz_layout_document(doc, 400, 600, 11)
+        this = doc
 
         self.this = this
 
@@ -2083,12 +2087,25 @@ class Document:
 
         self.this = None
 
-    def convertToPDF(self, from_page=0, to_page=-1, rotate=0):
+    def convert_to_pdf(self, from_page=0, to_page=-1, rotate=0):
         """Convert document to a PDF, selecting page range and optional rotation. Output bytes object."""
-        assert 0, 'no Document_convertToPDF'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-        return _fitz.Document_convertToPDF(self, from_page, to_page, rotate)
+        #return _fitz.Document_convert_to_pdf(self, from_page, to_page, rotate)
+        fz_doc = self.this
+        fp = from_page
+        tp = to_page
+        srcCount = mupdf.mfz_count_pages(fz_doc)
+        if fp < 0:
+            fp = 0
+        if fp > srcCount - 1:
+            fp = srcCount - 1
+        if tp < 0:
+            tp = srcCount - 1
+        if tp > srcCount - 1:
+            tp = srcCount - 1
+        doc = JM_convert_to_pdf(fz_doc, fp, tp, rotate)
+        return doc
 
     def embfile_add(self, name: str, buffer_: typing.ByteString,
                               filename: OptStr =None,
@@ -4457,17 +4474,18 @@ class Font:
 
 
 class Graftmap:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Graftmap, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Graftmap, name)
+    #__swig_setmethods__ = {}
+    #__setattr__ = lambda self, name, value: _swig_setattr(self, Graftmap, name, value)
+    #__swig_getmethods__ = {}
+    #__getattr__ = lambda self, name: _swig_getattr(self, Graftmap, name)
 
     def __init__(self, doc):
-        this = _fitz.new_Graftmap(doc)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+        #this = _fitz.new_Graftmap(doc)
+        dst = mupdf.mpdf_specifics(doc)
+        ASSERT_PDF(dst)
+        map_ = mupdf.mpdf_new_graft_map(dst)
+        self.this = map_
+        #return (struct Graftmap *) pdf_keep_graft_map(gctx, map_);
         self.thisown = True
 
 
@@ -5722,8 +5740,62 @@ class Page:
         ASSERT_PDF(page);
         JM_set_resource_property(page.obj(), name, xref)
 
-    def _showPDFpage(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
-        return _fitz.Page__showPDFpage(self, fz_srcpage, overlay, matrix, xref, oc, clip, graftmap, _imgname)
+    def _show_pdf_page(self, fz_srcpage, overlay=1, matrix=None, xref=0, oc=0, clip=None, graftmap=None, _imgname=None):
+        #return _fitz.Page__show_pdf_page(self, fz_srcpage, overlay, matrix, xref, oc, clip, graftmap, _imgname)
+        #fz_buffer *res=NULL, *nres=NULL;
+        cropbox = JM_rect_from_py(clip)
+        mat = JM_matrix_from_py(matrix)
+        rc_xref = xref
+        tpage = mupdf.mpdf_page_from_fz_page(self.this)
+        tpageref = tpage.obj()
+        pdfout = tpage.doc()    # target PDF
+        ENSURE_OPERATION(pdfout)
+        #-------------------------------------------------------------
+        # convert the source page to a Form XObject
+        #-------------------------------------------------------------
+        xobj1 = JM_xobject_from_page(pdfout, fz_srcpage, xref, graftmap.this)
+        if not rc_xref:
+            rc_xref = mupdf.mpdf_to_num(xobj1)
+
+        #-------------------------------------------------------------
+        # create referencing XObject (controls display on target page)
+        #-------------------------------------------------------------
+        # fill reference to xobj1 into the /Resources
+        #-------------------------------------------------------------
+        subres1 = mupdf.mpdf_new_dict(pdfout, 5)
+        mupdf.mpdf_dict_puts(subres1, "fullpage", xobj1)
+        subres = mupdf.mpdf_new_dict(pdfout, 5)
+        mupdf.mpdf_dict_put(subres, PDF_NAME('XObject'), subres1)
+
+        res = mupdf.mfz_new_buffer(20)
+        mupdf.mfz_append_string(res, "/fullpage Do")
+
+        xobj2 = mupdf.mpdf_new_xobject(pdfout, cropbox, mat, subres, res)
+        if oc > 0:
+            JM_add_oc_object(pdfout, mupdf.mpdf_resolve_indirect(xobj2), oc)
+
+        #-------------------------------------------------------------
+        # update target page with xobj2:
+        #-------------------------------------------------------------
+        # 1. insert Xobject in Resources
+        #-------------------------------------------------------------
+        resources = mupdf.mpdf_dict_get_inheritable(tpageref, PDF_NAME('Resources'))
+        subres = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
+        if not subres.m_internal:
+            subres = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('XObject'), 5)
+
+        mupdf.mpdf_dict_puts(subres, _imgname, xobj2)
+
+        #-------------------------------------------------------------
+        # 2. make and insert new Contents object
+        #-------------------------------------------------------------
+        nres = mupdf.mfz_new_buffer(50) # buffer for Do-command
+        mupdf.mfz_append_string(nres, " q /")   # Do-command
+        mupdf.mfz_append_string(nres, _imgname)
+        mupdf.mfz_append_string(nres, " Do Q ")
+
+        JM_insert_contents(pdfout, tpageref, nres, overlay)
+        return rc_xref
 
     @property
     def CropBox(self):
@@ -7102,6 +7174,10 @@ class Page:
 
         return val
 
+    def get_image_info(self: Page, hashes: bool = False, xrefs: bool = False) -> list:
+        return utils.get_image_info(self, hashes, xrefs)
+
+
     def get_images(self, full=False):
         """List of images defined in the page object."""
         CheckParent(self)
@@ -7829,6 +7905,138 @@ class Page:
 
         return _fitz.Page_setRotation(self, rotation)
 
+    def show_pdf_page(*args, **kwargs) -> int:
+        """Show page number 'pno' of PDF 'src' in rectangle 'rect'.
+
+        Args:
+            rect: (rect-like) where to place the source image
+            src: (document) source PDF
+            pno: (int) source page number
+            overlay: (bool) put in foreground
+            keep_proportion: (bool) do not change width-height-ratio
+            rotate: (int) degrees (multiple of 90)
+            clip: (rect-like) part of source page rectangle
+        Returns:
+            xref of inserted object (for reuse)
+        """
+        if len(args) not in (3, 4):
+            raise ValueError("bad number of positional parameters")
+        pno = None
+        if len(args) == 3:
+            page, rect, src = args
+        else:
+            page, rect, src, pno = args
+        if pno == None:
+            pno = int(kwargs.get("pno", 0))
+        overlay = bool(kwargs.get("overlay", True))
+        keep_proportion = bool(kwargs.get("keep_proportion", True))
+        rotate = float(kwargs.get("rotate", 0))
+        oc = int(kwargs.get("oc", 0))
+        reuse_xref = int(kwargs.get("reuse_xref", 0))
+        clip = kwargs.get("clip")
+
+        def calc_matrix(sr, tr, keep=True, rotate=0):
+            """Calculate transformation matrix from source to target rect.
+
+            Notes:
+                The product of four matrices in this sequence: (1) translate correct
+                source corner to origin, (2) rotate, (3) scale, (4) translate to
+                target's top-left corner.
+            Args:
+                sr: source rect in PDF (!) coordinate system
+                tr: target rect in PDF coordinate system
+                keep: whether to keep source ratio of width to height
+                rotate: rotation angle in degrees
+            Returns:
+                Transformation matrix.
+            """
+            # calc center point of source rect
+            smp = (sr.tl + sr.br) / 2.0
+            # calc center point of target rect
+            tmp = (tr.tl + tr.br) / 2.0
+
+            # m moves to (0, 0), then rotates
+            m = Matrix(1, 0, 0, 1, -smp.x, -smp.y) * Matrix(rotate)
+
+            sr1 = sr * m  # resulting source rect to calculate scale factors
+
+            fw = tr.width / sr1.width  # scale the width
+            fh = tr.height / sr1.height  # scale the height
+            if keep:
+                fw = fh = min(fw, fh)  # take min if keeping aspect ratio
+
+            m *= Matrix(fw, fh)  # concat scale matrix
+            m *= Matrix(1, 0, 0, 1, tmp.x, tmp.y)  # concat move to target center
+            return JM_TUPLE(m)
+
+        CheckParent(page)
+        doc = page.parent
+
+        if not doc.is_pdf or not src.is_pdf:
+            raise ValueError("not a PDF")
+
+        rect = page.rect & rect  # intersect with page rectangle
+        if rect.is_empty or rect.is_infinite:
+            raise ValueError("rect must be finite and not empty")
+
+        if reuse_xref > 0:
+            warnings.warn("ignoring 'reuse_xref'", DeprecationWarning)
+
+        while pno < 0:  # support negative page numbers
+            pno += src.page_count
+        src_page = src[pno]  # load source page
+        if src_page.get_contents() == []:
+            raise ValueError("nothing to show - source page empty")
+
+        tar_rect = rect * ~page.transformation_matrix  # target rect in PDF coordinates
+
+        src_rect = src_page.rect if not clip else src_page.rect & clip  # source rect
+        if src_rect.is_empty or src_rect.is_infinite:
+            raise ValueError("clip must be finite and not empty")
+        src_rect = src_rect * ~src_page.transformation_matrix  # ... in PDF coord
+
+        matrix = calc_matrix(src_rect, tar_rect, keep=keep_proportion, rotate=rotate)
+
+        # list of existing /Form /XObjects
+        ilst = [i[1] for i in doc.get_page_xobjects(page.number)]
+        ilst += [i[7] for i in doc.get_page_images(page.number)]
+        ilst += [i[4] for i in doc.get_page_fonts(page.number)]
+
+        # create a name not in that list
+        n = "fzFrm"
+        i = 0
+        _imgname = n + "0"
+        while _imgname in ilst:
+            i += 1
+            _imgname = n + str(i)
+
+        isrc = src._graft_id  # used as key for graftmaps
+        if doc._graft_id == isrc:
+            raise ValueError("source document must not equal target")
+
+        # retrieve / make Graftmap for source PDF
+        gmap = doc.Graftmaps.get(isrc, None)
+        if gmap is None:
+            gmap = Graftmap(doc)
+            doc.Graftmaps[isrc] = gmap
+
+        # take note of generated xref for automatic reuse
+        pno_id = (isrc, pno)  # id of src[pno]
+        xref = doc.ShownPages.get(pno_id, 0)
+
+        xref = page._show_pdf_page(
+            src_page,
+            overlay=overlay,
+            matrix=matrix,
+            xref=xref,
+            oc=oc,
+            clip=src_rect,
+            graftmap=gmap,
+            _imgname=_imgname,
+        )
+        doc.ShownPages[pno_id] = xref
+
+        return xref
     def refresh(self):
         """Refresh page after link/annot/widget updates."""
         CheckParent(self)
@@ -10072,7 +10280,7 @@ class TextPage:
             elif (mupdf.mfz_contains_rect(tp_rect, block.bbox)
                     or mupdf.mfz_is_infinite_rect(tp_rect)
                     ):
-                img = mupdf.Image( mupdf.keep_image(block.m_internal.u.i.image))
+                img = block.i_image()
                 cs = img.colorspace()
                 text = "<image: %s, width: %d, height: %d, bpc: %d>" % (
                         mupdf.mfz_colorspace_name(cs),
@@ -10107,6 +10315,44 @@ class TextPage:
             blocks.sort(key=lambda b: (b["bbox"][3], b["bbox"][0]))
             val["blocks"] = blocks
         return val
+
+    def extractIMGINFO(self, hashes=0):
+        """Return a list with image meta information."""
+
+        #return _fitz.TextPage_extractIMGINFO(self, hashes)
+        block_n = -1
+        this_tpage = self.this
+        #PyObject *rc = NULL, *block_dict = NULL;
+        #fz_pixmap *pix = NULL;
+        rc = []
+        for block in this_tpage:
+            block_n += 1
+            if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_TEXT:
+                continue
+            img = block.i_image()
+            if hashes:
+                r = mupdf.Irect(INT_MIN, INT_MIN, INT_MAX, INT_MAX)
+                assert r.is_infinite_irect()
+                m = mupdf.Matrix()
+                pix, _, _ = mupdf.mfz_get_pixmap_from_image(img, r, m)
+                digest = mupdf.mfz_md5_pixmap(pix, digest)
+            cs = mupdf.Colorspace(mupdf.keep_colorspace(img.m_internal.colorspace))
+            block_dict = dict()
+            block_dict[ dictkey_number] = block_n
+            block_dict[ dictkey_bbox] = JM_py_from_rect(block.m_internal.bbox)
+            block_dict[ dictkey_matrix] = JM_py_from_matrix(block.i_transform())
+            block_dict[ dictkey_width] = img.w()
+            block_dict[ dictkey_height] = img.h()
+            block_dict[ dictkey_colorspace] = mupdf.mfz_colorspace_n(cs)
+            block_dict[ dictkey_cs_name] = mupdf.mfz_colorspace_name(cs)
+            block_dict[ dictkey_xres] = img.xres()
+            block_dict[ dictkey_yres] = img.xres()  # fixme: shouldn't this be img.yres()?
+            block_dict[ dictkey_bpc] = img.bpc()
+            block_dict[ dictkey_size] = mupdf.mfz_image_size(img)
+            if hashes:
+                block_dict[ "digest"] = digest
+            rc.append(block_dict)
+        return rc
 
     def extractRAWDICT(self, cb=None, sort=False) -> dict:
         """Return page content as a Python dict of images and text characters."""
@@ -11926,6 +12172,71 @@ def JM_copy_rectangle(page, area):
     return s
 
 
+def JM_convert_to_pdf(doc, fp, tp, rotate):
+    '''
+    Convert any MuPDF document to a PDF
+    Returns bytes object containing the PDF, created via 'write' function.
+    '''
+    pdfout = mupdf.mpdf_create_document()   # new PDF document
+    incr = 1
+    s = fp
+    e = tp
+    if fp > tp:
+        incr = -1   # count backwards
+        s = tp      # adjust ...
+        e = fp      # ... range
+    #fz_rect mediabox;
+    rot = JM_norm_rotation(rotate)
+    #fz_device *dev = NULL;
+    #fz_buffer *contents = NULL;
+    #pdf_obj *resources = NULL;
+    #fz_page *page;
+    #for (i = fp; INRANGE(i, s, e); i += incr) {  # interpret & write document pages as PDF pages
+    i = fp
+    while 1:    # interpret & write document pages as PDF pages
+        if not INRANGE(i, s, e):
+            break
+        page = mupdf.mfz_load_page(doc, i)
+        mediabox = mupdf.mfz_bound_page(page)
+        resources = mupdf.PdfObj(0)
+        contents = mupdf.Buffer(0)
+        dev = mupdf.mpdf_page_write(pdfout, mediabox, resources, contents);
+        mupdf.mfz_run_page(page, dev, mupdf.Matrix(), mupdf.Cookie());
+        mupdf.mfz_close_device(dev)
+        dev = None
+        page_obj = mupdf.mpdf_add_page(pdfout, mediabox, rot, resources, contents)
+        mupdf.mpdf_insert_page(pdfout, -1, page_obj)
+        i += 1
+    # PDF created - now write it to Python bytearray
+    #PyObject *r = NULL;
+    #fz_output *out = NULL;
+    #fz_buffer *res = NULL;
+    # prepare write options structure
+    opts = mupdf.PdfWriteOptions()
+    opts.do_garbage         = 4
+    opts.do_compress        = 1
+    opts.do_compress_images = 1
+    opts.do_compress_fonts  = 1
+    opts.do_sanitize        = 1
+    opts.do_incremental     = 0
+    opts.do_ascii           = 0
+    opts.do_decompress      = 0
+    opts.do_linear          = 0
+    opts.do_clean           = 1
+    opts.do_pretty          = 0
+
+    res = mupdf.mfz_new_buffer(8192)
+    out = mupdf.Output(res)
+    jlib.log('{type(out)=} {out=}')
+    mupdf.mpdf_write_document(pdfout, out, opts)
+    #unsigned char *c = NULL;
+    c = res.buffer_extract()
+    assert isinstance(c, bytes)
+    return c
+    #r = PyBytes_FromStringAndSize((const char *) c, (Py_ssize_t) len);
+    #return r;
+
+
 # Copied from MuPDF v1.14
 # Create widget
 def JM_create_widget(doc, page, type, fieldname):
@@ -12288,6 +12599,115 @@ def JM_gather_fonts(pdf, dict_, fontlist, stream_xref):
                 stream_xref,
                 )
         fontlist.append(entry)
+    return rc
+
+
+def JM_gather_forms(doc, dict_: mupdf.PdfObj, imagelist, stream_xref: int):
+    '''
+    Store info of a /Form xobject in Python list
+    '''
+    assert isinstance(doc, mupdf.PdfDocument)
+    rc = 1
+    n = mupdf.mpdf_dict_len(dict_);
+    #pdf_obj *o = NULL, *m = NULL;
+    for i in range(n):
+        #pdf_obj *refname = NULL;
+
+        refname = mupdf.mpdf_dict_get_key( dict_, i)
+        imagedict = mupdf.mpdf_dict_get_val(dict_, i)
+        if not mupdf.mpdf_is_dict(imagedict):
+            mupdf.mfz_warn("'%s' is no form dict (%d 0 R)",
+                    mupdf.mpdf_to_name(refname),
+                    mupdf.mpdf_to_num(imagedict),
+                    )
+            continue
+
+        type_ = mupdf.mpdf_dict_get(imagedict, PDF_NAME('Subtype'))
+        if not mupdf.mpdf_name_eq(type_, PDF_NAME('Form')):
+            continue
+
+        o = mupdf.mpdf_dict_get(imagedict, PDF_NAME('BBox'))
+        m = mupdf.mpdf_dict_get(imagedict, PDF_NAME('Matrix'))
+        if m.m_internal:
+            mat = mupdf.mpdf_to_matrix(m)
+        else:
+            mat = mupdf.Matrix()
+        if o.m_internal:
+            bbox = mupdf.mfz_transform_rect( mupdf.mpdf_to_rect(o), mat)
+        else:
+            bbox = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+        xref = mupdf.mpdf_to_num(imagedict)
+
+        entry = (
+                xref,
+                mupdf.mpdf_to_name(ctx, refname),
+                stream_xref,
+                JM_py_from_rect(bbox),
+                entry,
+                )
+        imagelist.append(entry)
+    return rc
+
+
+def JM_gather_images(doc: mupdf.PdfDocument, dict_: mupdf.PdfObj, imagelist, stream_xref: int):
+    '''
+    Store info of an image in Python list
+    '''
+    rc = 1;
+    n = mupdf.mpdf_dict_len( dict_)
+    for i in range(n):
+        refname = mupdf.mpdf_dict_get_key(dict_, i)
+        imagedict = mupdf.mpdf_dict_get_val(dict_, i)
+        if not mupdf.mpdf_is_dict(imagedict):
+            mupdf.mfz_warn("'%s' is no image dict (%d 0 R)",
+                    mupdf.mpdf_to_name(refname),
+                    mupdf.mpdf_to_num(imagedict),
+                    )
+            continue
+
+        type_ = mupdf.mpdf_dict_get(imagedict, PDF_NAME('Subtype'))
+        if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
+            continue
+
+        xref = mupdf.mpdf_to_num(imagedict)
+        gen = 0
+        smask = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('SMask'), PDF_NAME('Mask'))
+        if smask.m_internal:
+            gen = mupdf.mpdf_to_num(smask)
+
+        filter_ = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('Filter'), PDF_NAME('F'))
+        if mupdf.mpdf_is_array(filter_):
+            filter_ = mupdf.mpdf_array_get(filter_, 0)
+
+        altcs = mupdf.PdfObj(0)
+        cs = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('ColorSpace'), PDF_NAME('CS'))
+        if mupdf.mpdf_is_array(cs):
+            cses = cs
+            cs = mupdf.mpdf_array_get(cses, 0)
+            if (mupdf.mpdf_name_eq(cs, PDF_NAME('DeviceN'))
+                    or mupdf.mpdf_name_eq(cs, PDF_NAME('Separation'))
+                    ):
+                altcs = mupdf.mpdf_array_get(cses, 2)
+                if mupdf.mpdf_is_array(altcs):
+                    altcs = mupdf.mpdf_array_get(altcs, 0)
+        width = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('Width'), PDF_NAME('W'))
+        height = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('Height'), PDF_NAME('H'))
+        bpc = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('BitsPerComponent'), PDF_NAME('BPC'))
+
+        jlib.log('{altcs=}')
+        entry = (
+                xref,
+                gen,
+                mupdf.mpdf_to_int(width),
+                mupdf.mpdf_to_int(height),
+                mupdf.mpdf_to_int(bpc),
+                JM_EscapeStrFromStr(mupdf.mpdf_to_name(cs)),
+                JM_EscapeStrFromStr(mupdf.mpdf_to_name(altcs)),
+                JM_EscapeStrFromStr(mupdf.mpdf_to_name(refname)),
+                JM_EscapeStrFromStr(mupdf.mpdf_to_name(filter_)),
+                stream_xref,
+                )
+        imagelist.append(entry)
     return rc
 
 
@@ -14134,6 +14554,42 @@ def JM_update_stream(doc, obj, buffer_, compress):
 
 
 
+def JM_xobject_from_page(pdfout, fsrcpage, xref, gmap):
+    '''
+    Make an XObject from a PDF page
+    For a positive xref assume that its object can be used instead
+    '''
+    #pdf_obj *xobj1, *resources = NULL, *o, *spageref;
+    assert isinstance(gmap, mupdf.PdfGraftMap), f'type(gmap)={type(gmap)}'
+    if xref > 0:
+        xobj1 = mupdf.mpdf_new_indirect(pdfout, xref, 0)
+    else:
+        #fz_buffer *res = NULL;
+        #fz_rect mediabox;
+        srcpage = mupdf.mpdf_page_from_fz_page(fsrcpage)
+        spageref = srcpage.obj()
+        mediabox = mupdf.mpdf_to_rect(mupdf.mpdf_dict_get_inheritable(spageref, PDF_NAME('MediaBox')))
+        # Deep-copy resources object of source page
+        o = mupdf.mpdf_dict_get_inheritable(spageref, PDF_NAME('Resources'))
+        if gmap.m_internal:
+            # use graftmap when possible
+            resources = mupdf.mpdf_graft_mapped_object(gmap, o)
+        else:
+            resources = mupdf.mpdf_graft_object(pdfout, o)
+
+        # get spgage contents source
+        res = JM_read_contents(spageref)
+
+        #-------------------------------------------------------------
+        # create XObject representing the source page
+        #-------------------------------------------------------------
+        xobj1 = mupdf.mpdf_new_xobject(pdfout, mediabox, mupdf.Matrix(), mupdf.PdfObj(0), res)
+        # store spage contents
+        JM_update_stream(pdfout, xobj1, res, 1)
+
+        # store spage resources
+        mupdf.mpdf_dict_put(xobj1, PDF_NAME('Resources'), resources)
+    return xobj1
 
 
 def PySequence_Check(s):
