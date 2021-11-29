@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>neutralinoJS</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF395686}</ProjectGuid>
+    <RootNamespace>neutralinoJS</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NEUTRALINOJS;NEUTRALINOJS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/app/app.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/computer/computer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/debug/debug.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/events/events.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/extensions/extensions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/filesystem/filesystem.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/os/os.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/storage/storage.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/api/window/window.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/auth/authbasic.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/auth/permission.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/extensions_loader.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/helpers.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/lib/easylogging/easylogging++.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/lib/platformfolders/platform_folders.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/lib/tinyprocess/process.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/lib/tinyprocess/process_unix.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/lib/tinyprocess/process_win.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/resources.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/server/neuserver.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/server/ping.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/server/router.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/neutralinoJS/settings.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/app/app.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/computer/computer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/debug/debug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/events/events.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/extensions/extensions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/filesystem/filesystem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/os/os.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/storage/storage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/api/window/window.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/auth/authbasic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/auth/permission.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/extensions_loader.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/base64/base64.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/easylogging/easylogging++.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/filedialogs/portable-file-dialogs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/json/json.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/platformfolders/platform_folders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/tinyprocess/process.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/tray/tray.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/base64/base64.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/client.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/close.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/asio.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/asio_ssl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/chrono.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/connection_hdl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/cpp11.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/functional.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/md5.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/memory.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/network.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/platforms.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/random.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/regex.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/stdint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/system_error.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/thread.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/time.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/common/type_traits.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/concurrency/basic.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/concurrency/none.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/asio.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/asio_client.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/asio_no_tls.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/asio_no_tls_client.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/boost_config.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/core.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/core_client.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/debug.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/debug_asio.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/debug_asio_no_tls.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/minimal_client.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/config/minimal_server.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/connection.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/connection_base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/endpoint_base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/error.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/extensions/extension.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/extensions/permessage_deflate/disabled.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/extensions/permessage_deflate/enabled.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/frame.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/constants.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/impl/parser.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/impl/request.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/impl/response.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/parser.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/request.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/http/response.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/impl/connection_impl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/impl/endpoint_impl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/impl/utilities_impl.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/logger/basic.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/logger/levels.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/logger/stub.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/logger/syslog.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/message_buffer/alloc.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/message_buffer/message.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/message_buffer/pool.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/processors/base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/processors/hybi00.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/processors/hybi07.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/processors/hybi08.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/processors/hybi13.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/processors/processor.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/random/none.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/random/random_device.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/roles/client_endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/roles/server_endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/server.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/sha1/sha1.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/asio/base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/asio/connection.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/asio/endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/asio/security/base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/asio/security/none.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/asio/security/tls.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/base/connection.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/base/endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/debug/base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/debug/connection.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/debug/endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/iostream/base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/iostream/connection.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/iostream/endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/stub/base.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/stub/connection.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/transport/stub/endpoint.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/uri.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/utf8_validator.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/utilities.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/websocketpp/version.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/webview/webview.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/lib/webview/windows/WebView2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/resources.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/server/neuserver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/server/ping.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/server/router.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/neutralinoJS/settings.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/neutralinoJS/CHANGELOG.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/neutralinoJS/README.md" />
+        
+  </ItemGroup>
+</Project>
+    

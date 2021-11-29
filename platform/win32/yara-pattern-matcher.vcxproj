@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>yara-pattern-matcher</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBA25FC}</ProjectGuid>
+    <RootNamespace>yara-pattern-matcher</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/args.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/common.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/threading.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/yara.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/yarac.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/ahocorasick.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/arena.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/atoms.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/base64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/bitmask.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/compiler.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/endian.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/exec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/exefiles.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/filemap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/grammar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/hex_grammar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/hex_lexer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/lexer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/libyara.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/mem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/cuckoo/cuckoo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/demo/demo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/dex/dex.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/dotnet/dotnet.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/elf/elf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/hash/hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/macho/macho.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/magic/magic.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/math/math.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pb_tests/pb_tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pb_tests/pb_tests.pb-c.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pe/pe.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pe/pe_utils.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/tests/tests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/time/time.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/notebook.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/object.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/parser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc/freebsd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc/linux.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc/mach.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc/none.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc/openbsd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/proc/windows.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/re.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/re_grammar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/re_lexer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/rules.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/scan.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/scanner.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/sizedstr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/stack.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/stopwatch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/stream.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/strutils.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/threading.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/collect_matches.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/sandboxed_yara.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/yara_entry_points.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/yara_transaction.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/yara_transaction_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/mapper.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/oss-fuzz/dex_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/oss-fuzz/dotnet_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/oss-fuzz/elf_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/oss-fuzz/macho_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/oss-fuzz/pe_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/oss-fuzz/rules_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-alignment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-api.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-arena.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-async.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-atoms.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-bitmask.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-dex.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-dotnet.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-elf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-exception.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-macho.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-math.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-pb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-pe.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-re-split.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-rules.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-stack.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/test-version.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/util.c" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/args.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/threading.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/cli/unicode.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/crypto.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/exception.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/grammar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/hex_grammar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/ahocorasick.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/arena.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/atoms.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/base64.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/bitmask.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/compiler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/dex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/dotnet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/elf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/endian.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/error.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/exec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/exefiles.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/filemap.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/globals.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/hex_lexer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/integers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/lexer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/libyara.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/limits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/macho.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/mem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/modules.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/notebook.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/object.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/pe.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/pe_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/proc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/re.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/re_lexer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/rules.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/scan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/scanner.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/sizedstr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/stack.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/stopwatch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/strutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/threading.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/include/yara/utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pb_tests/pb_tests.pb-c.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pb_tests/yara.pb-c.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/re_grammar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/collect_matches.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/yara_transaction.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/blob.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/util.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/README.md" />
+        
+  </ItemGroup>
+</Project>
+    

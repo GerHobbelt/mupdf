@@ -1,0 +1,3513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>wxFormBuilder</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA7030E}</ProjectGuid>
+    <RootNamespace>wxFormBuilder</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/additional/additional.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/common/common.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/containers/containers.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/forms/forms.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/layout/layout.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/etc/all.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/etc/min.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/etc/noparser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lauxlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lbaselib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lcode.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ldblib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ldebug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ldo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ldump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lfunc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lgc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/linit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/liolib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/llex.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lmathlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lmem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/loadlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lobject.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lopcodes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/loslib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lparser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lstate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lstring.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lstrlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ltable.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ltablib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ltm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lua.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/luac.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lundump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lvm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lzio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/print.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_chdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_copyfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_getcwd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_isdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_isfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_match.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_mkdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_pathsearch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_rmdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/os_uuid.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/path_isabsolute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/premake.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/scripts.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/string_endswith.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/example/main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/gem/gem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/auxiliar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/buffer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/compat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/except.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/inet.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/io.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/luasocket.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/mime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/options.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/select.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/serial.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/tcp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/timeout.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/udp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/unix.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/unixdgram.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/unixstream.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/usocket.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/wsocket.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/amigaos.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/asyn-ares.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/asyn-thread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/base64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/conncache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/connect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/content_encoding.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/cookie.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_addrinfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_des.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_endian.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_fnmatch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_gethostname.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_gssapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_memrchr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_multibyte.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_ntlm_core.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_ntlm_wb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_rtmp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_sasl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_sspi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_threads.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/dict.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/dotdot.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/easy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/escape.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/file.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/fileinfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/formdata.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ftp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ftplistparser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/getenv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/getinfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/gopher.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hmac.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostasyn.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostcheck.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostip4.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostip6.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostsyn.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_chunks.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_digest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_negotiate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_ntlm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_proxy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/idn_win32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/if2ip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/imap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/inet_ntop.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/inet_pton.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/krb5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ldap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/llist.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/md4.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/md5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/memdebug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/mprintf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/multi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/netrc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/non-ascii.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/nonblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/nwlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/nwos.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/openldap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/parsedate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/pingpong.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/pipeline.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/pop3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/progress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/rand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/rtsp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/security.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/select.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/sendf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/share.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/slist.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/smb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/smtp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/socks.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/socks_gssapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/socks_sspi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/speedcheck.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/splay.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ssh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strcase.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strdup.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strerror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strtok.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strtoofft.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/system_win32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/telnet.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/tftp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/timeval.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/transfer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/url.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/cleartext.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/cram.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/digest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/digest_sspi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/krb5_gssapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/krb5_sspi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/ntlm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/ntlm_sspi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/oauth2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/spnego_gssapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/spnego_sspi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/vauth.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/version.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/axtls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/cyassl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/darwinssl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/gskit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/gtls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/mbedtls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/nss.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/openssl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/polarssl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/polarssl_threadlock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/schannel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/vtls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/warnless.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/wildcard.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/x509asn1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/mkstemp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_add.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_add_dir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_add_entry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_close.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_delete.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_dir_add.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_dirent.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_discard.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_entry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_err_str.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_error.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_error_clear.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_error_get.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_error_get_sys_type.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_error_strerror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_error_to_str.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_extra_field.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_extra_field_api.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fclose.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fdopen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_add.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_error_clear.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_error_get.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_get_comment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_get_external_attributes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_get_offset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_rename.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_replace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_set_comment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_set_external_attributes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_file_strerror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_filerange_crc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fopen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fopen_encrypted.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fopen_index.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fopen_index_encrypted.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_fread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_archive_comment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_archive_flag.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_compression_implementation.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_encryption_implementation.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_file_comment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_name.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_num_entries.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_get_num_files.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_memdup.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_name_locate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_new.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_open.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_rename.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_replace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_set_archive_comment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_set_archive_flag.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_set_default_password.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_set_file_comment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_set_file_compression.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_set_name.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_buffer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_close.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_crc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_deflate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_error.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_file.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_filep.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_free.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_function.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_layered.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_open.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_pkware.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_pop.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_read.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_stat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_window.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_zip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_source_zip_new.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_stat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_stat_index.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_stat_init.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_strerror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_string.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_unchange.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_unchange_all.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_unchange_archive.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_unchange_data.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip_utf-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lauxlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lbaselib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lbitlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lcode.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lcorolib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lctype.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ldblib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ldebug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ldo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ldump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lfunc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lgc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/linit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/liolib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/llex.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lmathlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lmem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/loadlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lobject.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lopcodes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/loslib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lparser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lstate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lstring.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lstrlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ltable.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ltablib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ltm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lua.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/luac.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lundump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lutf8lib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lvm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lzio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/luashim/luashim.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/aes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/aesni.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/arc4.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/asn1parse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/asn1write.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/base64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/bignum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/blowfish.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/camellia.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ccm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/certs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/cipher.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/cipher_wrap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ctr_drbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/debug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/des.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/dhm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ecdh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ecdsa.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ecjpake.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ecp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ecp_curves.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/entropy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/entropy_poll.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/error.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/gcm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/havege.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/hmac_drbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/md.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/md2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/md4.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/md5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/md_wrap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/memory_buffer_alloc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/net.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/oid.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/padlock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pk_wrap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pkcs11.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pkcs12.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pkcs5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pkparse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/pkwrite.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/platform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ripemd160.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/rsa.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/sha1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/sha256.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/sha512.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_ciphersuites.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_cli.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_cookie.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_srv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_ticket.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/ssl_tls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/threading.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/timing.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/version.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/version_features.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509_create.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509_crl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509_crt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509_csr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509write_crt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/x509write_csr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/library/xtea.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/aes/aescrypt2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/aes/crypt_and_hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/hash/generic_sum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/hash/hello.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/dh_client.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/dh_genprime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/dh_server.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/ecdh_curve25519.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/ecdsa.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/gen_key.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/key_app.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/key_app_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/mpi_demo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/pk_decrypt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/pk_encrypt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/pk_sign.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/pk_verify.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_decrypt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_encrypt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_genkey.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_sign.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_sign_pss.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_verify.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/pkey/rsa_verify_pss.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/random/gen_entropy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/random/gen_random_ctr_drbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/random/gen_random_havege.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/dtls_client.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/dtls_server.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/mini_client.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_client1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_client2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_fork_server.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_mail_client.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_pthread_server.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_server.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/ssl/ssl_server2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/test/benchmark.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/test/selftest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/test/ssl_cert_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/test/udp_proxy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/util/pem2der.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/util/strerror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/wince_main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/x509/cert_app.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/x509/cert_req.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/x509/cert_write.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/x509/crl_app.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/programs/x509/req_app.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/entropy_hardware_poll.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-authcrypt/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-benchmark/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-hashing/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-selftest/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/adler32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/compress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/crc32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/deflate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/gzclose.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/gzlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/gzread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/gzwrite.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/infback.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inffast.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inflate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inftrees.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/trees.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/uncompr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/zutil.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/buffered_io.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/criteria_matches.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/curl_utils.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/debug_prompt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/http_download.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/http_get.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/http_post.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/lua_auxlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_chdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_chmod.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_comparefiles.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_compile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_copyfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_getWindowsRegistry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_getcwd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_getpass.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_getversion.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_host.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_is64bit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_isdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_isfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_islink.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_locate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_match.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_mkdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_pathsearch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_realpath.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_remove.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_rename.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_rmdir.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_stat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_touchfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_uuid.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/os_writefile_ifnotequal.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_getabsolute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_getrelative.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_isabsolute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_join.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_normalize.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_translate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_wildcards.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/premake.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/premake_main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/string_endswith.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/string_hash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/string_sha1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/string_startswith.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/term_textColor.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/zip_extract.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/scripts.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/forms/wizard.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/xrcconv.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lapi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lauxlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lbaselib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lcode.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldblib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldebug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lfunc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lgc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/linit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/liolib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/llex.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lmathlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lmem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/loadlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lobject.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lopcodes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/loslib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lparser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstring.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstrlib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltable.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltablib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lundump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lvm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lzio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/arg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/cb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/cb_cpp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/clean.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/codelite.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/codelite_cpp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu_cpp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu_cs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu_helpers.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/io.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/monodev.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/monodev_cs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/open_watcom/ow.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/os.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/path.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/platform_posix.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/platform_windows.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/premake.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/project.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/script.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/sharpdev.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/sharpdev_cs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/util.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2002.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2002_cs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2005.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2005_cs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2008.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2008_cs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs6.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs6_cpp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codegen.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codeparser.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codewriter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/cppcg.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/luacg.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/phpcg.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/pythoncg.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/xrccg.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/dbg_stack_trace/stack.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/maingui.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/md5/md5.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/database.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/objectbase.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/types.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/xrcfilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/about.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/appdata.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/bitmaps.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/cmdproc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/codeeditor/codeeditor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/cpppanel/cpppanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/customkeys.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/dataobject/dataobject.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/innerframe.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/menubar.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/resizablepanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/visualeditor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/visualobj.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/genericpanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/geninheritclass/geninhertclass.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/geninheritclass/geninhertclass_gui.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/inspector/objinspect.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/inspector/wxfbadvprops.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/luapanel/luapanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/mainframe.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/menueditor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/objecttree/objecttree.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/palette.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/phppanel/phppanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/pythonpanel/pythonpanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/title.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/wxfbevent.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/wxfbmanager.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/xrcpanel/xrcpanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/xrcpreview/xrcpreview.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/annoyingdialog.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/filetocarray.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/m_wxfb.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/stringutils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/typeconv.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbipc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/app.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/event_GUI.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventAdditionalPanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventCommonPanel.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventMainFrame.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventsApp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxfbTest_GUI.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/containers/bookutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/etc/lua.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lapi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lauxlib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lcode.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ldebug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ldo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lfunc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lgc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/llex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/llimits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lmem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lobject.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lopcodes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lparser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lstate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lstring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ltable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/ltm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lua.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/luaconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lualib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lundump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lvm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/src/lzio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/premake.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/auxiliar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/buffer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/compat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/except.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/inet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/io.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/luasocket.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/mime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/options.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/pierror.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/select.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/socket.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/tcp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/timeout.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/udp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/unix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/unixdgram.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/unixstream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/usocket.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/binmodules/luasocket/src/wsocket.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/curl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/curlbuild.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/curlrules.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/curlver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/easy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/mprintf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/multi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/stdcheaders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/include/curl/typecheck-gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/amigaos.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/arpa_telnet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/asyn.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-amigaos.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-dos.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-linux.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-mac.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-os400.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-osx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-riscos.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-symbian.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-tpf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-vxworks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-win32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/config-win32ce.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/conncache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/connect.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/content_encoding.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/cookie.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_addrinfo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_base64.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_des.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_endian.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_fnmatch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_gethostname.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_gssapi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_hmac.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_ldap.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_md4.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_md5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_memory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_memrchr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_multibyte.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_ntlm_core.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_ntlm_wb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_printf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_rtmp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_sasl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_sec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_setup.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_setup_once.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_sspi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curl_threads.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/curlx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/dict.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/dotdot.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/easyif.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/escape.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/fileinfo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/formdata.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ftp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ftplistparser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/getinfo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/gopher.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostcheck.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/hostip.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_chunks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_digest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_negotiate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_ntlm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/http_proxy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/if2ip.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/imap.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/inet_ntop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/inet_pton.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/llist.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/memdebug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/multihandle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/multiif.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/netrc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/non-ascii.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/nonblock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/parsedate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/pingpong.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/pipeline.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/pop3.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/progress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/rand.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/rtsp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/select.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/sendf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/setup-os400.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/setup-vms.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/share.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/sigpipe.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/slist.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/smb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/smtp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/sockaddr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/socks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/speedcheck.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/splay.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/ssh.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strcase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strdup.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strerror.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strtok.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/strtoofft.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/system_win32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/telnet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/tftp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/timeval.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/transfer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/url.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/urldata.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/digest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/ntlm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vauth/vauth.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/axtls.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/cyassl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/darwinssl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/gskit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/gtls.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/mbedtls.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/nssg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/openssl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/polarssl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/polarssl_threadlock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/schannel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/vtls/vtls.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/warnless.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/wildcard.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/curl/lib/x509asn1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/include/zconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/include/zipconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/include/zlib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zip.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zipconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zipint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/libzip/zlib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lapi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lauxlib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lcode.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lctype.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ldebug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ldo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lfunc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lgc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/llex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/llimits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lmem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lobject.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lopcodes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lparser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lprefix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lstate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lstring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ltable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/ltm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lua.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lua.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/luaconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lualib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lundump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lvm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/src/lzio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/luashim/luashim.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/configs/config-ccm-psk-tls1_2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/configs/config-mini-tls1_1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/configs/config-picocoin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/configs/config-suite-b.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/configs/config-thread.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_encdec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_hashing.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_mainpage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_rng.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_ssltls.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_tcpip.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/doxygen/input/doc_x509.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/aes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/aesni.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/arc4.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/asn1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/asn1write.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/base64.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/bignum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/blowfish.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/bn_mul.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/camellia.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ccm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/certs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/check_config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/cipher.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/cipher_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/compat-1.3.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ctr_drbg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/debug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/des.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/dhm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ecdh.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ecdsa.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ecjpake.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ecp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/entropy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/entropy_poll.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/error.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/gcm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/havege.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/hmac_drbg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/md.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/md2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/md4.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/md5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/md_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/memory_buffer_alloc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/net.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/oid.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/padlock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/pem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/pk.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/pk_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/pkcs11.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/pkcs12.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/pkcs5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/platform.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ripemd160.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/rsa.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/sha1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/sha256.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/sha512.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ssl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ssl_cache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ssl_ciphersuites.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ssl_cookie.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ssl_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/ssl_ticket.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/threading.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/timing.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/version.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/x509.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/x509_crl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/x509_crt.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/x509_csr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/include/mbedtls/xtea.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/target_config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/crc32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/deflate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/gzguts.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inffast.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inffixed.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inflate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/inftrees.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/trees.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/zconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/zlib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/zlib/zutil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/buffered_io.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/curl_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/lua_shimtable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/path_isabsolute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/premake.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/component.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/fontcontainer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/forms/wizard.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/plugin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/xrcconv.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lapi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lauxlib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lcode.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldebug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lfunc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lgc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/llex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/llimits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lmem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lobject.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lopcodes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lparser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lua.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/luaconf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lualib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lundump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lvm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lzio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/arg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/cb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/codelite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/io.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/monodev.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/open_watcom/ow.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/os.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/path.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/platform.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/premake.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/project.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/script.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/sharpdev.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2002.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2005.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2008.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs6.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codegen.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codeparser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codewriter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/cppcg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/luacg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/phpcg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/pythoncg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/xrccg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/dbg_stack_trace/stack.hpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/maingui.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/md5/md5.hh" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/database.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/objectbase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/model/xrcfilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/pch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/about.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/appdata.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/auitabart.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/bitmaps.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/cmdproc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/codeeditor/codeeditor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/cpppanel/cpppanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/customkeys.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/dataobject/dataobject.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/innerframe.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/menubar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/resizablepanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/visualeditor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/visualobj.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/designer/window_buttons.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/genericpanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/geninheritclass/geninhertclass.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/geninheritclass/geninhertclass_gui.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/inspector/objinspect.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/inspector/wxfbadvprops.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/luapanel/luapanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/mainframe.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/menueditor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/objecttree/objecttree.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/palette.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/phppanel/phppanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/pythonpanel/pythonpanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/title.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/wxfbevent.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/wxfbmanager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/xrcpanel/xrcpanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/xrcpreview/xrcpreview.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/annoyingdialog.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/debug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/filetocarray.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/stringutils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/typeconv.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbdefs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbexception.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbipc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxlogstring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/app.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/event_GUI.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/main.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventAdditionalPanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventCommonPanel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventMainFrame.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxFBEventsApp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wx_pch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/wxfbTest/wxfbTest_GUI.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/output/Changelog.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/CHANGES.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/doc/readme.html" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/CHANGES.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/CONTRIBUTORS.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/lua/doc/readme.html" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/configs/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/tests/data_files/Readme-x509.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/tests/scripts/key-exchanges.pl" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-authcrypt/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-benchmark/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-hashing/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/contrib/mbedtls/yotta/data/example-selftest/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/modules/android/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/modules/codelite/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/modules/d/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/modules/raw/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/scripts/changes.lua" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/README.TXT" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/open_watcom/readme.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/src/controls/README.txt" />
+        
+  </ItemGroup>
+</Project>
+    

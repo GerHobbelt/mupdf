@@ -1,0 +1,2856 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>lda-bigartm</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE3AAD0}</ProjectGuid>
+    <RootNamespace>lda-bigartm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LDA_BIGARTM;LDA_BIGARTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/gflags.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/gflags_completions.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/gflags_reporting.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/windows_port.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/test/gflags_declare_flags.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/test/gflags_declare_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/test/gflags_strip_flags_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/test/gflags_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/test/nc/gflags_nc.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/demangle.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/demangle_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/logging.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/logging_striptest10.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/logging_striptest2.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/logging_striptest_main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/logging_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/mock-log_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/raw_logging.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/signalhandler.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/signalhandler_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stl_logging_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/symbolize.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/symbolize_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/utilities.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/utilities_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/vlog_is_on.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/port.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gtest/fused-src/gtest/gtest-all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gtest/fused-src/gtest/gtest_main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/benchmarks/generate_datasets.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/conformance_cpp.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/conformance_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/conformance_test_runner.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/third_party/jsoncpp/jsoncpp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/examples/add_person.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/examples/list_people.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/fused-src/gmock-gtest-all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/fused-src/gmock_main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/codegear/gtest_all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/codegear/gtest_link.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/fused-src/gtest/gtest-all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/fused-src/gtest/gtest_main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample1.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample10_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample1_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample2.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample2_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample3_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample4.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample4_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample5_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample6_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample7_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample8_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample9_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-death-test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-filepath.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-port.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-printers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-test-part.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-typed-test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest_main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-death-test_ex_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-death-test_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-filepath_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-linked_ptr_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-listener_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-message_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-options_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-param-test2_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-param-test_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-port_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-printers_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-test-part_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-tuple_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-typed-test2_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-typed-test_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-unittest-api_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_all_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_break_on_failure_unittest_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_catch_exceptions_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_color_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_env_var_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_environment_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_filter_unittest_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_help_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_list_tests_unittest_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_main_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_no_test_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_output_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_pred_impl_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_premature_exit_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_prod_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_repeat_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_shuffle_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_sole_header_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_stress_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_throw_on_failure_ex_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_throw_on_failure_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_uninitialized_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_xml_outfile1_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_xml_outfile2_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest_xml_output_unittest_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/production.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/xcode/Samples/FrameworkSample/widget.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/xcode/Samples/FrameworkSample/widget_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock-all.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock-cardinalities.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock-internal-utils.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock-matchers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock-spec-builders.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/src/gmock_main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-actions_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-cardinalities_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-generated-actions_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-generated-function-mockers_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-generated-internal-utils_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-generated-matchers_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-internal-utils_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-matchers_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-more-actions_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-nice-strict_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-port_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock-spec-builders_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_all_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_ex_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_leak_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_link2_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_link_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_output_test_.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_stress_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/internal/api_implementation.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor_containers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor_database.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor_pool.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/extension_dict.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/map_container.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/message_module.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/repeated_composite_container.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/repeated_scalar_container.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/any.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/any.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/any_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/api.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arena.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arena_test_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arena_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arenastring.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arenastring_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/code_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/command_line_interface.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/command_line_interface_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_bootstrap_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_enum.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_enum_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_extension.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_file.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_map_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_plugin_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_primitive_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_service.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_string_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/metadata_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_doc_comment.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_enum.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_enum_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_field_base.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_generator_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_map_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_primitive_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_reflection_class.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_repeated_enum_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_repeated_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_repeated_primitive_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_source_generator_base.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_wrapper_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/importer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/importer_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_context.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_doc_comment.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_doc_comment_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum_field_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_extension.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_extension_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_file.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_generator_factory.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_lazy_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_lazy_message_field_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_map_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_map_field_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_builder.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_builder_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_field_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_name_resolver.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_plugin_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_primitive_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_primitive_field_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_service.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_shared_code_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_string_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_string_field_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_enum.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_enum_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_extension.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_file.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_map_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_primitive_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/js/js_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/mock_code_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_enum.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_enum_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_extension.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_file.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_helpers_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_map_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_message_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_oneof.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/parser.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/parser_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/plugin.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/plugin.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/python/python_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/python/python_plugin_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/ruby/ruby_generator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/ruby/ruby_generator_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/subprocess.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/test_plugin.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/zip_writer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor_database.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor_database_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/drop_unknown_fields_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/duration.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/dynamic_message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/dynamic_message_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/empty.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/extension_set.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/extension_set_heavy.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/extension_set_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/field_mask.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_message_reflection.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_message_reflection_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_message_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/coded_stream.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/coded_stream_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/gzip_stream.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/printer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/printer_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/strtod.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/tokenizer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/tokenizer_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream_impl.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream_impl_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/lite_arena_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/lite_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_field_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_lite_test_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_test_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/message.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/message_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/message_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/no_field_presence_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/preserve_unknown_enum_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/proto3_arena_lite_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/proto3_arena_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/proto3_lite_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/reflection_ops.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/reflection_ops_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/repeated_field.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/repeated_field_reflection_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/repeated_field_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/service.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/source_context.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/struct.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_x86_gcc.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_x86_msvc.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/bytestream.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/bytestream_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/common.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/common_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/int128.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/int128_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/mathlimits.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/once.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/once_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/status.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/status_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/statusor.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/statusor_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stringpiece.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stringpiece_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stringprintf.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stringprintf_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/structurally_valid.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/structurally_valid_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/strutil.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/strutil_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/substitute.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/template_util_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/time.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/time_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/type_traits_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/test_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/test_util_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/testing/file.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/testing/googletest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/testing/zcgunzip.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/testing/zcgzip.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/text_format.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/text_format_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/timestamp.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/type.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/unknown_field_set.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/unknown_field_set_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/field_comparator.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/field_comparator_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/field_mask_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/field_mask_util_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/datapiece.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/default_value_objectwriter.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/default_value_objectwriter_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/error_listener.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/field_mask_utility.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_escaping.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_objectwriter.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_objectwriter_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_stream_parser.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_stream_parser_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/object_writer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/proto_writer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/protostream_objectsource.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/protostream_objectsource_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/protostream_objectwriter.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/protostream_objectwriter_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/type_info.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/type_info_test_helper.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/utility.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/json_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/json_util_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/message_differencer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/message_differencer_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/time_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/time_util_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/type_resolver_util.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/type_resolver_util_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/well_known_types_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wire_format.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wire_format_lite.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wire_format_unittest.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wrappers.pb.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/c_interface.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/batch_manager.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/cache_manager.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/collection_parser.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/cooccurrence_collector.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/cuckoo_watch.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/dense_phi_matrix.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/dictionary.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/dictionary_operations.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/instance.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/master_component.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/phi_matrix_operations.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor_input.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor_transaction_helpers.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/protobuf_serialization.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/score_manager.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/token.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/transaction_type.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/transform_function.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/cpp_interface.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/biterms_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/decorrelator_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/hierarchy_sparsing_theta.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/improve_coherence_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/label_regularization_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/multilanguage_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/net_plsa_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_ptdw.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_sparse_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_sparse_theta.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_time_in_topics_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/specified_sparse_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/topic_segmentation_ptdw.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/topic_selection_theta.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer_interface.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/background_tokens_ratio.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/class_precision.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/items_processed.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/peak_memory.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/perplexity.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/sparsity_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/sparsity_theta.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/theta_snippet.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/top_tokens.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/topic_kernel.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/topic_mass_phi.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score_calculator_interface.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/utility/blas.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/api.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/batch_manager_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/blas_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/boost_thread_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/cache_manager_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/collection_parser_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/cpp_interface_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/master_model_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/multiple_classes_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/regularizers_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/repeatable_result_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/scores_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/supcry_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/template_manager_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/test_mother.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/thread_safe_holder_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/topic_seg_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/transactions_test.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/lda-bigartm/src/bigartm/srcmain.cc" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/mutex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/src/windows_port.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/base/commandlineflags.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/base/googleinit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/base/mutex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/config_for_unittests.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/demangle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/glog/log_severity.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/googletest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/mock-log.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace_generic-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace_libunwind-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace_powerpc-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace_x86-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/stacktrace_x86_64-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/symbolize.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/utilities.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/glog/log_severity.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/glog/logging.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/glog/raw_logging.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/glog/stl_logging.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/glog/vlog_is_on.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/src/windows/port.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gtest/fused-src/gtest/gtest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/conformance_test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/third_party/jsoncpp/json.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/fused-src/gmock/gmock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/fused-src/gtest/gtest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/fused-src/gtest/gtest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-death-test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-param-test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-printers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-spi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-test-part.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest-typed-test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest_pred_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/gtest_prod.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-death-test-internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-filepath.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-linked_ptr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-param-util-generated.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-param-util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-port.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-string.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-tuple.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/include/gtest/internal/gtest-type-util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/prime_tables.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample3-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/samples/sample4.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/src/gtest-internal-inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-param-test_test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/gtest-typed-test_test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/test/production.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/gtest/xcode/Samples/FrameworkSample/widget.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-actions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-cardinalities.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-generated-actions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-generated-function-mockers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-generated-matchers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-generated-nice-strict.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-matchers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-more-actions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-more-matchers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock-spec-builders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/gmock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/internal/gmock-generated-internal-utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/internal/gmock-internal-utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/include/gmock/internal/gmock-port.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/test/gmock_link_test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor_containers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor_database.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/descriptor_pool.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/extension_dict.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/map_container.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/python_protobuf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/repeated_composite_container.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/repeated_scalar_container.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/google/protobuf/pyext/scoped_pyobject_ptr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/any.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/any.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/api.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arena.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arena_test_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/arenastring.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/code_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/command_line_interface.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_enum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_enum_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_extension.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_map_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_options.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_primitive_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_service.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_string_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/cpp/cpp_unittest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_doc_comment.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_enum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_enum_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_field_base.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_map_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_names.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_options.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_primitive_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_reflection_class.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_repeated_enum_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_repeated_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_repeated_primitive_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_source_generator_base.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/csharp/csharp_wrapper_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/importer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_context.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_doc_comment.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_enum_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_extension.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_extension_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_generator_factory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_lazy_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_lazy_message_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_map_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_map_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_builder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_builder_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_message_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_name_resolver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_names.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_options.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_primitive_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_primitive_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_service.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_shared_code_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_string_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/java/java_string_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_enum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_enum_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_extension.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_map_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_params.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/javanano/javanano_primitive_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/js/js_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/mock_code_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_enum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_enum_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_extension.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_map_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_message_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_oneof.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/package_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/plugin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/plugin.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/python/python_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/ruby/ruby_generator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/subprocess.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/compiler/zip_writer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/descriptor_database.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/duration.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/dynamic_message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/empty.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/extension_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/field_mask.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_enum_reflection.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_enum_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_message_reflection.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/generated_message_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/coded_stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/coded_stream_inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/gzip_stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/package_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/printer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/strtod.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/tokenizer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/io/zero_copy_stream_impl_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_entry.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_entry_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_field_inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_field_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_lite_test_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_test_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_test_util_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/map_type_handler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/message.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/message_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/metadata.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/package_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/reflection.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/reflection_internal.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/reflection_ops.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/repeated_field.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/service.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/source_context.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/struct.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomic_sequence_num.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_arm64_gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_arm_gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_arm_qnx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_atomicword_compat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_generic_gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_macosx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_mips_gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_pnacl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_power.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_ppc_gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_solaris.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_tsan.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_x86_gcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/atomicops_internals_x86_msvc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/bytestream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/callback.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/casts.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/fastmem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/int128.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/logging.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/macros.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/map_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/mathlimits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/mathutil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/mutex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/once.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/platform_macros.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/port.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/scoped_ptr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/shared_ptr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/singleton.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/status.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/status_macros.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/statusor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stl_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stringpiece.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/stringprintf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/strutil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/substitute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/template_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/time.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/stubs/type_traits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/test_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/test_util_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/testing/file.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/testing/googletest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/text_format.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/timestamp.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/type.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/unknown_field_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/field_comparator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/field_mask_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/constants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/datapiece.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/default_value_objectwriter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/error_listener.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/expecting_objectwriter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/field_mask_utility.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_escaping.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_objectwriter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/json_stream_parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/location_tracker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/mock_error_listener.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/object_location_tracker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/object_source.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/object_writer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/proto_writer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/protostream_objectsource.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/protostream_objectwriter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/structured_objectwriter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/type_info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/type_info_test_helper.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/internal/utility.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/json_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/message_differencer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/time_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/type_resolver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/util/type_resolver_util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wire_format.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wire_format_lite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wire_format_lite_inl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/google/protobuf/wrappers.pb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/c_interface.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/batch_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/cache_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/call_on_destruction.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/check_messages.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/collection_parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/cooccurrence_collector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/cuckoo_watch.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/dense_phi_matrix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/dictionary.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/dictionary_operations.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/exceptions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/instance.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/master_component.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/phi_matrix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/phi_matrix_operations.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor_input.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/processor_transaction_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/protobuf_helpers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/protobuf_serialization.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/score_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/template_manager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/thread_safe_holder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/token.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/transaction_type.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/core/transform_function.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/cpp_interface.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/biterms_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/decorrelator_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/hierarchy_sparsing_theta.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/improve_coherence_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/label_regularization_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/multilanguage_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/net_plsa_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_ptdw.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_sparse_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_sparse_theta.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/smooth_time_in_topics_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/specified_sparse_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/topic_segmentation_ptdw.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer/topic_selection_theta.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/regularizer_interface.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/background_tokens_ratio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/class_precision.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/items_processed.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/peak_memory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/perplexity.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/sparsity_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/sparsity_theta.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/theta_snippet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/top_tokens.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/topic_kernel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score/topic_mass_phi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/score_calculator_interface.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/utility/blas.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/utility/ifstream_or_cin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/utility/memory_usage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm/utility/progress_printer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/api.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/lda-bigartm/src/artm_tests/test_mother.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/ChangeLog.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/gflags/cmake/README_runtime.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/README.antoniox" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/README.windows" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/glog/debian/README.Debian" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/CHANGES.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/CONTRIBUTORS.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/cmake/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/conformance/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/editors/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/examples/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/gmock/scripts/generator/README.cppclean" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/python/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/3rdparty/protobuf-3.0.0/src/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/lda-bigartm/csharp/README.md" />
+        
+  </ItemGroup>
+</Project>
+    

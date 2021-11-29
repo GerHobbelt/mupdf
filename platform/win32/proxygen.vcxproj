@@ -1,0 +1,1812 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>proxygen</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2F1F8E}</ProjectGuid>
+    <RootNamespace>proxygen</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PROXYGEN;PROXYGEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/CMake/fb_py_win_main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/external/http_parser/http_parser_cpp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/external/http_parser/test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/fuzzers/ProxygenHTTP1xFuzzer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpclient/samples/curl/CurlClient.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpclient/samples/curl/CurlClientMain.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpclient/samples/pricli/PriCli.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/HTTPServer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/HTTPServerAcceptor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/RequestHandlerAdaptor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/SignalHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/filters/tests/CompressionFilterTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/echo/EchoHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/echo/EchoServer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/echo/test/EchoHandlerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/FizzContext.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQClient.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQLoggerHelper.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQParams.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQServer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/SampleHandlers.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/proxy/ProxyHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/proxy/ProxyServer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/push/PushRequestHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/push/PushServer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/static/StaticHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/static/StaticServer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/tests/HTTPServerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/tests/RequestHandlerAdaptorTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/healthcheck/ServerHealthCheckerCallback.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HQConnector.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTP3ErrorCode.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPConnector.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPConnectorWithFizz.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPConstants.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPException.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPHeaders.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPMessage.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPMessageFilters.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPMethod.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPPriorityFunctions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HeaderConstants.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/ProxyStatus.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/ProxygenErrorEnum.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/RFC2616.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/StatusTypeEnum.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/SynchronizedLruQuicPskCache.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/Window.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecProtocol.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecUtil.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/DefaultHTTPCodecFactory.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/ErrorCode.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/FlowControlFilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQControlCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQFramedCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQFramer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQStreamCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQUnidirectionalCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQUtils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP1xCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP2Codec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP2Constants.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP2Framer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPChecks.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodecFactory.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodecFilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodecPrinter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPParallelCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPSettings.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HeaderDecodeInfo.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SPDYCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SPDYConstants.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/TransportDirection.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/GzipHeaderCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKContext.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKDecodeBuffer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKDecoder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKDecoderBase.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKEncodeBuffer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKEncoder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKEncoderBase.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKHeader.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HeaderIndexingStrategy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HeaderTable.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/Huffman.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/Logging.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/NoPathIndexingStrategy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKCodec.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKContext.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKDecoder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKEncoder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKHeaderTable.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKStaticHeaderTable.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/StaticHeaderTable.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/interop/QPACKInterop.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/CompressionSimulator.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/CompressionUtils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/Main.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HPACKBenchmark.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HPACKBufferTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HPACKCodecTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HPACKContextTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HPACKHeaderTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HTTPArchive.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HeaderPieceTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HeaderTableTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HuffmanTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/LoggingTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/QPACKCodecTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/QPACKContextTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/QPACKHeaderTableTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/RFCExamplesTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/TestUtil.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/CodecUtilTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/DefaultHTTPCodecFactoryTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/FilterTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HQCodecTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HQFramerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HQMultiCodecTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HTTP1xCodecTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HTTP2CodecTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HTTP2FramerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/SPDYCodecTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/TestUtils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/ServerIdleSessionController.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/SessionHolder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/SessionPool.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/ThreadIdleSessionController.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/test/SessionPoolTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/experimental/RFC1867.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/experimental/test/RFC1867Test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/ByteEventTracker.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/ByteEvents.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/CodecErrorResponseHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQByteEventTracker.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQDownstreamSession.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQSession.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQStreamBase.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQUnidirectionalCallbacks.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQUpstreamSession.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTP2PriorityQueue.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPDefaultSessionCodecFactory.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPDirectResponseHandler.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPDownstreamSession.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPErrorPage.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPEvent.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSession.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSessionAcceptor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSessionBase.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPTransaction.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPTransactionEgressSM.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPTransactionIngressSM.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPUpstreamSession.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/SecondaryAuthManager.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/SimpleController.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/ByteEventTrackerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/DownstreamTransactionTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQByteEventTrackerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQDownstreamSessionTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQSessionMocksTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQSessionTestCommon.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQStreamBaseTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQUnidirectionalCallbacksTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQUpstreamSessionTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTP2PriorityQueueBench.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTP2PriorityQueueTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPDefaultSessionCodecFactoryTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPDownstreamSessionTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPSessionAcceptorTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPTransactionSMTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPUpstreamSessionTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockCodecDownstreamTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/SecondaryAuthManagerTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/TestUtils.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ConnectionStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStatsFilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HeaderCodecStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ResponseCodeStatsMinute.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/TLResponseCodeStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ThreadLocalHTTPSessionStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersBuffer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersDecoder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersEncoder.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersUtilities.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/test/StructuredHeadersBufferTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/test/StructuredHeadersDecoderTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/test/StructuredHeadersEncoderTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/test/StructuredHeadersStandardTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/test/StructuredHeadersUtilitiesTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/HTTPCommonHeadersTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/HTTPConnectorWithFizzTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/HTTPHeadersBenchmark.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/HTTPMessageFilterTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/HTTPMessageTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/HTTPPriorityFunctionsTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/ProxyStatusTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/RFC2616Test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/WindowTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/pools/generators/FileServerListGenerator.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/pools/generators/ServerListGenerator.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/sampling/Sampling.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/sampling/test/SamplingTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/RequestWorkerThread.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/Service.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/WorkerThread.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/test/AcceptorTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/ssl/ThreadLocalSSLStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/ResourceStats.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/test/PeriodicStatsTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/test/ResourceStatsTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/test/TestAsyncTransport.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/test/TestMain.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/transport/PersistentFizzPskCache.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/transport/PersistentQuicPskCache.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/transport/test/PersistentFizzPskCacheTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/transport/test/PersistentQuicPskCacheTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/AsyncTimeoutSet.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Base64.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/CryptUtil.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Exception.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/HTTPTime.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Logging.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ParseURL.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/RendezvousHash.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Time.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/TraceEvent.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/TraceEventContext.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/WheelTimerInstance.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZlibStreamCompressor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZlibStreamDecompressor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZstdStreamCompressor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZstdStreamDecompressor.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/AsyncTimeoutSetTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/Base64Test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/ConditionalGateTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/CryptUtilTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/GenericFilterTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/HTTPTimeTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/LoggingTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/ParseURLTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/PerfectIndexMapBenchmark.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/PerfectIndexMapTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/RendezvousHashTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/TimeTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/TraceEventTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/URLTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/UtilTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/WeakRefCountedPtrTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/ZlibTests.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/ZstdTests.cpp" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/external/http_parser/http_parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpclient/samples/curl/CurlClient.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/ExMessageHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/Filters.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/HTTPServer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/HTTPServerAcceptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/HTTPServerOptions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/HTTPTransactionHandlerAdaptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/Mocks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/PushHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/RequestHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/RequestHandlerAdaptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/RequestHandlerFactory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/ResponseBuilder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/ResponseHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/ScopedHTTPServer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/SignalHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/filters/CompressionFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/filters/DirectResponseHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/filters/RejectConnectFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/echo/EchoHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/echo/EchoStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/ConnIdLogger.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/FizzContext.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQClient.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQLoggerHelper.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQParams.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/HQServer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/InsecureVerifierDangerousDoNotUseInProduction.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/hq/SampleHandlers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/proxy/ProxyHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/proxy/ProxyStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/proxy/SessionWrapper.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/push/PushRequestHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/push/PushStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/static/StaticHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/healthcheck/PoolHealthChecker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/healthcheck/ServerHealthCheckerCallback.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HQConnector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTP3ErrorCode.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPConnector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPConnectorWithFizz.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPConstants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPException.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPHeaderSize.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPHeaders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPMessage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPMessageFilters.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPMethod.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HTTPPriorityFunctions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/HeaderConstants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/ProxyStatus.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/ProxygenErrorEnum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/RFC2616.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/StatusTypeEnum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/SynchronizedLruQuicPskCache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/Window.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecDictionaries.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecProtocol.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecUtil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/ControlMessageRateLimitFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/DefaultHTTPCodecFactory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/ErrorCode.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/FlowControlFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQControlCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQFramedCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQFramer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQMultiCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQStreamCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQUnidirectionalCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HQUtils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP1xCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP2Codec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP2Constants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTP2Framer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPChecks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodecFactory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodecFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPCodecPrinter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPParallelCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPRequestVerifier.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HTTPSettings.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/HeaderDecodeInfo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/QPACKDecoderCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/QPACKEncoderCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SPDYCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SPDYConstants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SPDYVersion.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SPDYVersionSettings.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/SettingsId.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/TransportDirection.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/CompressionInfo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/GzipHeaderCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKConstants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKContext.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKDecodeBuffer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKDecoder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKDecoderBase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKEncodeBuffer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKEncoder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKEncoderBase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKHeader.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKHeaderName.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKQueue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HPACKStreamingCallback.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/Header.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HeaderCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HeaderIndexingStrategy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HeaderPiece.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/HeaderTable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/Huffman.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/Logging.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/NoPathIndexingStrategy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKContext.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKDecoder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKEncoder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKHeaderTable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/QPACKStaticHeaderTable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/StaticHeaderTable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/CompressionScheme.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/CompressionSimulator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/CompressionTypes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/CompressionUtils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/HPACKScheme.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/QMINScheme.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/QPACKScheme.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/experimental/simulator/SimStreamingCallback.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/HTTPArchive.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/TestStreamingCallback.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/compress/test/TestUtil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HQFramerTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HTTP2FramerTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/HTTPParallelCodecTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/MockHTTPCodec.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/test/TestUtils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/Endpoint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/ServerIdleSessionController.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/SessionHolder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/SessionPool.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/ThreadIdleSessionController.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/connpool/test/SessionPoolTestFixture.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/experimental/RFC1867.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/AckLatencyEvent.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/ByteEventTracker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/ByteEvents.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/CodecErrorResponseHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQByteEventTracker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQDownstreamSession.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQSession.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQStreamBase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQUnidirectionalCallbacks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HQUpstreamSession.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTP2PriorityQueue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPDefaultSessionCodecFactory.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPDirectResponseHandler.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPDownstreamSession.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPErrorPage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPEvent.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSession.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSessionAcceptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSessionBase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSessionController.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPSessionStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPTransaction.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPTransactionEgressSM.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPTransactionIngressSM.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/HTTPUpstreamSession.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/SecondaryAuthManager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/SecondaryAuthManagerBase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/ServerPushLifecycle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/SimpleController.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/TTLBAStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/TransactionByteEvents.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQDownstreamSessionTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQSessionMocks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQSessionTestCommon.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HQUpstreamSessionTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPSessionMocks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPSessionTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/HTTPTransactionMocks.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockByteEventTracker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockHTTPSessionStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockQuicSocketDriver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockSecondaryAuthManager.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/TestUtils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ConnectionStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStatsFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HeaderCodecStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ResponseCodeStatsMinute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/SPDYStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/SPDYStatsFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/TLResponseCodeStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ThreadLocalHTTPSessionStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersBuffer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersConstants.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersDecoder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersEncoder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersUtilities.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/MockHTTPHeaders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/test/MockHTTPMessageFilter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/pools/generators/FileServerListGenerator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/pools/generators/MemberGroupConfig.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/pools/generators/ServerListGenerator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/sampling/MultiSampled.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/sampling/Sampled.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/sampling/Sampling.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/sampling/SamplingFunctions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/AcceptorConfiguration.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/HTTPAcceptor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/RequestWorkerThread.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/Service.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/ServiceConfiguration.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/ServiceWorker.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/services/WorkerThread.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/ssl/ProxygenSSL.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/ssl/ThreadLocalSSLContext.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/ssl/ThreadLocalSSLStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/BaseStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/PeriodicStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/PeriodicStatsDataBase.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/ResourceData.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/ResourceStats.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/test/MockResources.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/stats/test/PeriodicStatsTestHelper.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/test/TestAsyncTransport.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/transport/PersistentFizzPskCache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/transport/PersistentQuicPskCache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/AcceptorAddress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/AsyncTimeoutSet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Base64.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/CobHelper.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ConditionalGate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ConsistentHash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/CryptUtil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Exception.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Export.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/FilterChain.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/HTTPTime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Logging.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/NullTraceEventObserver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ParseURL.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/PerfectIndexMap.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/RendezvousHash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/StateMachine.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/StreamCompressor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/StreamDecompressor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/TestUtils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/Time.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/TraceEvent.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/TraceEventContext.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/TraceEventObserver.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/URL.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/UnionBasedStatic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/UtilInl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/WeakRefCountedPtr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/WheelTimerInstance.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZlibStreamCompressor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZlibStreamDecompressor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZstdStreamCompressor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/ZstdStreamDecompressor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/perfect_hash_table_template.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/utils/test/MockTime.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/proxygen/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/README.docker" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/proxygen/proxygen/external/http_parser/README.md" />
+        
+  </ItemGroup>
+</Project>
+    

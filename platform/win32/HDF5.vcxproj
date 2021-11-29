@@ -1,0 +1,3765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>HDF5</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC9E6E5}</ProjectGuid>
+    <RootNamespace>HDF5</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HDF5;HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/chunks.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/compound.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/create.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/extend_ds.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5group.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_cmprss.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_crtatt.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_crtdat.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_crtgrp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_crtgrpar.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_crtgrpd.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_extend.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_rdwt.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/h5tutr_subset.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/readdata.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/examples/writedata.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5AbstractDs.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5ArrayType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5AtomType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Attribute.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5CommonFG.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5CompType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DaccProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DataSet.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DataSpace.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DataType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DcreatProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DxferProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5EnumType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Exception.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5FaccProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5FcreatProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5File.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5FloatType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Group.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5IdComponent.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5IntType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5LaccProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5LcreatProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Library.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Location.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Object.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5OcreatProp.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5PredType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5PropList.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5StrType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/src/H5VarLenType.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/dsets.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/h5cpputil.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tarray.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tattr.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tcompound.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tdspl.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/testhdf5.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tfile.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tfilter.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/th5s.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/titerate.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tlinks.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tobject.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/trefer.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/ttypes.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/c++/test/tvlstr.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/config/cmake/ConversionTests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/config/cmake_ext_mod/GetTimeOfDayTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/config/cmake_ext_mod/HDFTests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5A_examples.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5D_examples.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5F_examples.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Fclose.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Fcreate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Pget_metadata_read_attempts.1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Pget_metadata_read_attempts.2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Pget_metadata_read_attempts.3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Pget_object_flush_cb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Pset_metadata_read_attempts.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/H5Pset_object_flush_cb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/doxygen/examples/hello_hdf5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_attribute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_chunk_read.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_cmprss.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_compound.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_crtatt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_crtdat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_crtgrp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_crtgrpar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_crtgrpd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_debug_trace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_drivers.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_dtransform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_elink_unix2win.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_extend.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_extend_write.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_extlink.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_group.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_interm_group.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_mount.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_rdwt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_read.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_ref2reg_deprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_ref_compat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_ref_extern.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_reference_deprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_select.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_shared_mesg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_subset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-eiger.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-exc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-exclim.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-percival-unlim-maxmin.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-percival-unlim.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-percival.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds-simpleIO.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_vds.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/h5_write.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/examples/ph5example.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Af.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Df.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Ef.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Ff.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Gf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5If.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Lf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Of.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Pf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Rf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Sf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Tf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5Zf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5_f.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5f90kit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5match_types.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/fortran/test/t.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/c++/examples/ptExampleFL.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/c++/src/H5PacketTable.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/c++/test/ptableTest.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_ds1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_image1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_image2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_lite1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_lite2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_lite3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_01.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_02.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_03.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_04.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_05.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_06.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_07.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_08.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_09.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_10.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_11.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ex_table_12.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/examples/ptExampleFL.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5DSfc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5IMcc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5IMfc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5LTfc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5TBfc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5DO.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5DS.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5IM.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LD.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LT.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LTanalyze.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LTparse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5PT.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/src/H5TB.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/gen_test_ds.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/gen_test_ld.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_ds.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_dset_append.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_file_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_h5do_compat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_ld.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_lite.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_packet.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_packet_vlen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/test/test_table.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/decompress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/gif2hdf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/gif2mem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/gifread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/h52gifgentst.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/hdf2gif.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/hdfgifwr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/writehdf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/h5watch/extend_dset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/h5watch/h5watch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/h5watch/h5watchgentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/hl/tools/h5watch/swmr_check_compat_vfd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/exceptionImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5Constants.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5Imp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5aImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5dImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5eImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5fImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5gImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5iImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5lImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5oImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pACPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pDAPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pDCPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pDXPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pFAPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pFCPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pGAPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pGCPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pLAPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pLCPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pOCPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pOCpyPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pStrCPLImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5plImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5rImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5sImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5tImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5util.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5vlImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5zImp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/java/src/jni/nativeData.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5A.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5AC.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ACdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ACmpio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ACproxy_entry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Abtree2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Adense.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Adeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Aint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Atest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2dbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2hdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2int.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2internal.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2leaf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2stat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5B2test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Bcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Bdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5C.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5CS.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5CX.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Cdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Cepoch.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Cimage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Clog.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Clog_json.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Clog_trace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Cmpio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Cprefetched.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Cquery.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ctag.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ctest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5D.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dbtree.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dbtree2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dchunk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dcompact.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dcontig.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ddbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ddeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dearray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Defl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dfarray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dfill.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dlayout.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dmpio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dnone.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Doh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dscatgath.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dselect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dsingle.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Dvirtual.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5E.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EA.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAdblkpage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAdblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAhdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAiblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAsblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAstat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5EAtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ES.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ESevent.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ESint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5ESlist.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Edeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Eint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5F.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FA.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAdblkpage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAdblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAhdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAstat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FAtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FD.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDcore.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDdirect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDfamily.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDhdfs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDlog.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDmirror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDmpi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDmpio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDmulti.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDros3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDs3comms.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDsec2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDspace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDsplitter.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDstdio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FDwindows.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FL.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FO.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FS.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FScache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FSdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FSint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FSsection.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FSstat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5FStest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Faccum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fcwfs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fdeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fefc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ffake.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fmount.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fmpi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fquery.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fsfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fspace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fsuper.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Fsuper_cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ftest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5G.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gbtree2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gcompact.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gdense.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gdeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gent.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Glink.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gloc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gname.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gnode.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gobj.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Goh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Groot.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gstab.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Gtraverse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HF.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFbtree2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFdblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFdtable.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFhdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFhuge.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFiblock.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFiter.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFman.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFsection.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFspace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFstat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HFtiny.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HG.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HGcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HGdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HGquery.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HL.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HLcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HLdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HLdblk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HLint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HLprfx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5HP.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5I.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Idbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Iint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Itest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5L.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ldeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Lexternal.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Lint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5M.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MF.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MFaggr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MFdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MFsection.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MM.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MP.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5MPtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5O.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oainfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oalloc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oattr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oattribute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Obogus.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Obtreek.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ocache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ocache_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ochunk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ocont.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ocopy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ocopy_ref.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Odbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Odeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Odrvinfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Odtype.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oefl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ofill.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oflush.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ofsinfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oginfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Olayout.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Olinfo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Olink.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Omessage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Omtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oname.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Onull.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Opline.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Orefcount.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Osdspace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oshared.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Oshmesg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ostab.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Otest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ounknown.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5P.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5PB.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5PL.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5PLint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5PLpath.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5PLplugin_cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pacpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pdapl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pdcpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pdeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pdxpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pencdec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pfapl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pfcpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pfmpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pgcpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Plapl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Plcpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pmapl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pmcpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pocpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pocpypl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Pstrcpl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ptest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5R.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5RS.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Rdeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Rint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5S.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5SL.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5SM.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5SMbtree2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5SMcache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5SMmessage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5SMtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Sall.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Sdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Sdeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Shyper.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Smpio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Snone.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Spoint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Sselect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Stest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5T.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5TS.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tarray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tbit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tcommit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tcompound.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tconv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tcset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tdbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tdeprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tenum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tfields.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tfixed.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tfloat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tnative.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Toffset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Toh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Topaque.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Torder.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tpad.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tprecis.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tref.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tstrpad.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tvisit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Tvlen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5UC.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VL.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLcallback.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLdyn_ops.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_attr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_blob.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_dataset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_datatype.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_file.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_group.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_introspect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_link.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_object.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_token.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLpassthru.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VLtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5VM.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5WB.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Z.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Zdeflate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Zfletcher32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Znbit.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Zscaleoffset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Zshuffle.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Zszip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5Ztrans.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5checksum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5dbg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5detect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5make_libsettings.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5mpi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5system.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5timer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/src/H5trace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/accum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/accum_swmr_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/app_ref.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/atomic_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/atomic_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/big.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/bittests.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/btree2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cache_api.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cache_common.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cache_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cache_logging.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cache_tagging.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/chunk_info.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cmpd_dset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cmpd_dtransform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cork.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/cross_read.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/dangle.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/del_many_dense_attrs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/direct_chunk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/dsets.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/dt_arith.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/dtransform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/dtypes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/earray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/efc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/enc_dec_plist.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/enc_dec_plist_cross_platform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/enum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/err_compat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/error_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/event_set.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/evict_on_close.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/extend.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/external.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/external_common.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/external_env.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/farray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/fheap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/file_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filenotclosed.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/fillval.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filter_fail.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filter_plugin.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filter_plugin1_dsets.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filter_plugin2_dsets.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filter_plugin3_dsets.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/filter_plugin4_groups.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/flush1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/flush2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/flushrefresh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/freespace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_bad_compound.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_bad_offset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_bad_ohdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_bogus.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_bounds.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_cross.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_deflate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_file_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_filespace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_filters.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_mergemsg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_new_array.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_new_fill.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_new_group.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_new_mtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_new_super.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_noencoder.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_nullspace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_old_array.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_old_group.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_old_layout.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_old_mtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_plist.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_sizes_lheap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_specmetaread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gen_udlinks.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/genall5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/getname.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/gheap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/h5test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/hdfs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/hyperslab.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/istore.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/lheap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/links.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/links_env.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/mf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/mirror_vfd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/mount.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/mtime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ntypes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/null_vol_connector.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/objcopy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/objcopy_ref.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ohdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/page_buffer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/pool.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/reserved.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ros3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/s3comms.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/set_extent.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/space_overflow.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/stab.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_addrem_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_check_compat_vfd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_common.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_generator.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_remove_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_remove_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_sparse_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_sparse_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_start_write.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/swmr_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tarray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tattr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tcheck_version.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tchecksum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tconfig.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tcoords.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/testframe.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/testhdf5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/testmeta.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tfile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tgenprop.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/th5o.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/th5s.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/theap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/thread_id.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tid.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/timer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/titerate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tmeta.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tmisc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/trefer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/trefer_deprec.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/trefer_shutdown.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/trefstr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tselect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tskiplist.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tsohm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttsafe.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttsafe_acreate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttsafe_attr_vlen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttsafe_cancel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttsafe_dcreate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/ttsafe_error.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tunicode.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tvlstr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/tvltypes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/twriteorder.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/unlink.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/unregister.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/use_append_chunk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/use_append_chunk_mirror.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/use_append_mchunks.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/use_common.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/use_disable_mdc_flushes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vds.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vds_env.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vds_swmr_gen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vds_swmr_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vds_swmr_writer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vfd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vol.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/test/vol_plugin.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_2Gio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_bigio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_cache_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_chunk_alloc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_coll_chunk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_coll_md_read.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_dset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_file.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_file_image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_filter_read.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_filters_parallel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_init_term.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_mdset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_mpi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_pflush1.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_pflush2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_ph5basic.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_pread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_prestart.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_prop.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_pshutdown.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_shapesame.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/t_span_tree.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/testpar/testphdf5.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5diff.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5diff_array.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5diff_attr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5diff_dset.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5diff_util.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_dump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_filters.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_ref.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_str.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_type.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_utils.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5trav.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/lib/io_timer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/libtest/h5tools_test_utils.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5copy/h5copy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5diff/h5diff_common.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5diff/h5diff_main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5diff/ph5diff_main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump_ddl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump_xml.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5format_convert/h5format_convert.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5import/h5import.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5jam/h5jam.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5jam/h5unjam.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5ls/h5ls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_copy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_filters.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_main.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_opttable.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_parse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_refs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack_verify.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/h5stat/h5stat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/misc/h5clear.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/misc/h5debug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/misc/h5delete.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/misc/h5mkgrp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/src/misc/h5repart.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5copy/dynlib_copy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5copy/h5copygentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5diff/dynlib_diff.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5diff/h5diffgentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5dump/binread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5dump/dynlib_dump.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5dump/h5dumpgentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5format_convert/h5fc_chk_idx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5format_convert/h5fc_gentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5import/h5importtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5jam/getub.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5jam/h5jamgentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5jam/tellub.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5ls/dynlib_ls.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5repack/dynlib_rpk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5repack/dynlib_vrpk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5repack/h5repackgentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5repack/h5repacktst.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5repack/testh5repack_detect_szip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/h5stat/h5stat_gentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/clear_open_chk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/h5clear_gentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/h5perf_gentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/h5repart_gentest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/repart_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/talign.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_1_one_dim_gen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_2_two_dims_gen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_3_gaps_gen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_4_printf_gen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_5_stride_gen.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/chunk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/chunk_cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/direct_write_perf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/iopipe.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/overhead.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/perf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/perf_meta.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/pio_engine.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/pio_perf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/pio_standalone.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/sio_engine.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/sio_perf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/sio_standalone.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/zip_perf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/utils/mirror_vfd/mirror_remote.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/utils/mirror_vfd/mirror_server.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/utils/mirror_vfd/mirror_server_stop.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/HDF5/utils/mirror_vfd/mirror_writer.c" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5AbstractDs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Alltypes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5ArrayType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5AtomType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Attribute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Classes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5CommonFG.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5CompType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Cpp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5CppDoc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DaccProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DataSet.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DataSpace.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DataType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DcreatProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5DxferProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5EnumType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Exception.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5FaccProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5FcreatProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5File.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5FloatType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Group.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5IdComponent.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Include.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5IntType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5LaccProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5LcreatProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Library.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Location.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5Object.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5OcreatProp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5PredType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5PropList.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5StrType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/src/H5VarLenType.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/c++/test/h5cpputil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5f90.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5f90i.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/fortran/src/H5f90proto.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/fortran/test/t.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/c++/src/H5PacketTable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/c++/test/ptableTest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/examples/pal_rgb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5IMcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/fortran/src/H5LTf90proto.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5DOpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5DSprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5DSpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5HLprivate2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5IMprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5IMpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LDprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LDpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LTparse.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LTprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5LTpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5PTprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5PTpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5TBprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/H5TBpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/src/hdf5_hl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/test/h5hltest.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/test/pal_rgb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/hl/tools/gif2h5/gif.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/exceptionImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5Imp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5aImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5dImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5eImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5fImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5gImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5iImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5jni.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5lImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5oImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pACPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pDAPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pDCPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pDXPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pFAPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pFCPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pGAPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pGCPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pLAPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pLCPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pOCPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pOCpyPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5pStrCPLImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5plImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5rImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5sImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5tImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5util.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5vlImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/h5zImp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/java/src/jni/nativeData.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ACmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ACpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ACprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ACpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Amodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Apkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Aprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Apublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5B2module.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5B2pkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5B2private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Bmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Bpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Bprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5CSprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5CXmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5CXprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Clog.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Cmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Cpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Cprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Cpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Dmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Dpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Dprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Dpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5EAmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5EApkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5EAprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ESdevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ESmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ESpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ESprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5ESpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Edefin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Einit.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Emodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Epkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Eprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Epubgen.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Epublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Eterm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FAmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FApkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FAprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDcore.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDdevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDdirect.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDdrvr_module.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDfamily.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDhdfs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDlog.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDmirror.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDmirror_priv.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDmpi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDmpio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDmulti.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDros3.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDs3comms.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDsec2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDsplitter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDstdio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FDwindows.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FLmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FLprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FOprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FSmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FSpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5FSprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Fmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Fpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Fprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Fpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Gmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Gpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Gprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Gpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HFmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HFpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HFprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HGmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HGpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HGprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HLmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HLpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HLprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5HPprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Idevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Imodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Ipkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Iprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Ipublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Ldevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Lmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Lpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Lprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Lpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MFmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MFpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MFprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MMprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MMpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MPmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MPpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5MPprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Mmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Mpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Mprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Mpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Omodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Opkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Oprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Opublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Oshared.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PBmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PBpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PBprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PLextern.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PLmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PLpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PLprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5PLpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Pmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Ppkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Pprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Ppublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5RSmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5RSprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Rmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Rpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Rprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Rpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5SLmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5SLprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5SMmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5SMpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5SMprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Smodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Spkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Sprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Spublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5TSdevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5TSprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Tdevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Tmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Tpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Tprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Tpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5UCprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLconnector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLconnector_passthru.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLnative_private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLpassthru.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VLpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5VMprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5WBprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Zdevelop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Zmodule.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Zpkg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Zprivate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5Zpublic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5api_adpt.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5module.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5overflow.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5public.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5version.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/H5win32defs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/hdf5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/src/uthash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/H5srcdir.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/cache_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/external_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/external_fname.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/genall5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/h5test.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/null_vol_connector.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/swmr_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/testhdf5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/ttsafe.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/use.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/test/vds_swmr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/testpar/t_filters_parallel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/testpar/testpar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/testpar/testphdf5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5diff.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_error.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_ref.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_str.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5tools_utils.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/h5trav.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/io_timer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/lib/ph5diff.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5diff/h5diff_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump_ddl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump_defines.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump_extern.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5dump/h5dump_xml.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5import/h5import.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/src/h5repack/h5repack.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_1.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_3.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_4.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_5.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/misc/vds/UC_common.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/pio_perf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/pio_standalone.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/sio_perf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/tools/test/perform/sio_standalone.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/HDF5/utils/mirror_vfd/mirror_remote.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/HDF5/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/HDF5/bin/pkgscrpts/makeInternalREADME.pl" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/HDF5/bin/pkgscrpts/makeOuterREADME.pl" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/HDF5/config/cmake/README.txt.cmake.in" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/HDF5/config/sanitizer/README.md" />
+        
+  </ItemGroup>
+</Project>
+    

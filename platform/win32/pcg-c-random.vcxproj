@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>pcg-c-random</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCA82B5}</ProjectGuid>
+    <RootNamespace>pcg-c-random</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/extras/entropy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32-demo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32-global-demo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32x2-demo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg64-demo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-global-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-global-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-base.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg128i.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg128si.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg16i.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg16si.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32-global.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32f.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32i.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32s.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32si.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32u.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64-global.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64f.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64i.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64s.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64si.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64u.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg8i.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg8si.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-base.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-rxs-m-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsh-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsh-rs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsl-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-rxs-m-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-xsh-rr-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-xsh-rs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-rxs-m-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-xsh-rr-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-xsh-rs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-rxs-m-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsh-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsh-rs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsl-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-rxs-m-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-rxs-m-xs-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsh-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsh-rs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsl-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsl-rr-rr-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-rxs-m-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-rxs-m-xs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-xsh-rr-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-xsh-rs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-rxs-m-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-rxs-m-xs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-xsh-rr-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-xsh-rs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-rxs-m-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-rxs-m-xs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsh-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsh-rs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsl-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsl-rr-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-8-rxs-m-xs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-rxs-m-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-rxs-m-xs-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsh-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsh-rs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsl-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsl-rr-rr-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-rxs-m-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-rxs-m-xs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-xsh-rr-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-xsh-rs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-rxs-m-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-rxs-m-xs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-xsh-rr-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-xsh-rs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-rxs-m-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-rxs-m-xs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsh-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsh-rs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsl-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsl-rr-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-8-rxs-m-xs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-rxs-m-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-rxs-m-xs-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsh-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsh-rs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsl-rr-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsl-rr-rr-128.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-rxs-m-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-rxs-m-xs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-xsh-rr-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-xsh-rs-8.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-rxs-m-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-rxs-m-xs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-xsh-rr-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-xsh-rs-16.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-rxs-m-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-rxs-m-xs-64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsh-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsh-rs-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsl-rr-32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsl-rr-rr-64.c" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/extras/entropy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/extras/pcg_spinlock.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/include/pcg_variants.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/pcg-c-random/README.md" />
+        
+  </ItemGroup>
+</Project>
+    

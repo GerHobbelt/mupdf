@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>flatcc</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFF65B0}</ProjectGuid>
+    <RootNamespace>flatcc</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FLATCC;FLATCC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/grisu3/grisu3_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/grisu3/grisu3_test_dblcnv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/PMurHash.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/cmetrohash64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/hash_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/ht32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/ht32rh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/ht64.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/ht64rh.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/load_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/ptr_set.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/str_set.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/hash/token_map.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/external/lex/luthor.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/samples/bugreport/myissue.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/samples/monster/monster.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/samples/reflection/bfbs2json.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/cli/flatcc_cli.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_builder.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_json_parser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_json_printer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_reader.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_sort.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_sorter.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_verifier.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_schema.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/coerce.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/fileio.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/flatcc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/hash_tables/name_table.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/hash_tables/schema_table.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/hash_tables/scope_table.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/hash_tables/symbol_table.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/hash_tables/value_set.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/parser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/compiler/semantics.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/runtime/builder.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/runtime/emitter.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/runtime/json_parser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/runtime/json_printer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/runtime/refmap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/src/runtime/verifier.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchflatc/benchflatc.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchflatcc/benchflatcc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchflatccjson/benchflatccjson.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchraw/benchraw.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/cgen_test/cgen_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/emit_test/emit_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/flatc_compat/flatc_compat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/json_test/flatcc_golden.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/json_test/test_basic_parse.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/json_test/test_json.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/json_test/test_json_parser.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/json_test/test_json_printer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/load_test/load_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/monster_test/monster_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/monster_test_concat/monster_test_concat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/monster_test_cpp/monster_test.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/monster_test_prefix/monster_test_prefix.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/monster_test_solo/monster_test_solo.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/optional_scalars_test/optional_scalars_test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/flatcc/test/reflection_test/reflection_test.c" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/config/config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/grisu3/grisu3_math.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/grisu3/grisu3_parse.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/grisu3/grisu3_print.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/PMurHash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/cmetrohash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/hash.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/hash_table.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/hash_table_def.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/hash_table_impl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/hash_table_impl_rh.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht32rh.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht64.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht64rh.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht_hash_function.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht_portable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ht_trace.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/int_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/pstdint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/ptr_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/str_set.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/token_map.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/hash/unaligned.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/lex/luthor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/external/lex/tokens.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_accessors.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_alloc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_assert.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_builder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_emitter.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_endian.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_epilogue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_flatbuffers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_identifier.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_iov.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_json_parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_json_printer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_portable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_prologue.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_refmap.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_rtconfig.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_types.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_unaligned.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_verifier.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/flatcc_version.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/grisu3_math.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/grisu3_parse.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/grisu3_print.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/include/linux/endian.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/include/std/inttypes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/include/std/stdalign.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/include/std/stdbool.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/include/std/stdint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/paligned_alloc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pattributes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pbase64.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pcrt.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pdiagnostic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pdiagnostic_pop.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pdiagnostic_push.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pendian.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pendian_detect.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pinline.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pinttypes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/portable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/portable_basic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pparsefp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pparseint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pprintfp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pprintint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pstatic_assert.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pstatic_assert_scope.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pstdalign.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pstdbool.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pstdint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/punaligned.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pversion.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/pwarnings.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/reflection/flatbuffers_common_builder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/reflection/flatbuffers_common_reader.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/reflection/reflection_builder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/reflection/reflection_reader.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/reflection/reflection_verifier.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/support/cdump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/support/elapsed.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/support/hexdump.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/include/flatcc/support/readfile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/catalog.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/codegen_c_sort.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/coerce.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/fileio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/keywords.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/parser.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/pstrutil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/semantics.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/src/compiler/symbols.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchflatc/flatbench_generated.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchflatc/flatbuffers/flatbuffers.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/flatcc/test/benchmark/benchmain/benchmain.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/CHANGELOG.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/doc/Grammar.README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/external/grisu3/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/external/hash/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/external/lex/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/include/flatcc/portable/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/reflection/README.in" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/src/compiler/hash_tables/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/test/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/test/benchmark/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/test/flatc_compat/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/flatcc/test/monster_test_concat/README.txt" />
+        
+  </ItemGroup>
+</Project>
+    

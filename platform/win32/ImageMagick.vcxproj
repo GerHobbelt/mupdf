@@ -1,0 +1,2352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  
+  
+  
+  <PropertyGroup Label="Globals">
+    <ProjectName>ImageMagick</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6B194F}</ProjectGuid>
+    <RootNamespace>ImageMagick</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <EnableUnitySupport>false</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+
+  <ItemGroup>
+    
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/analyze.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/button.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/demo.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/detrans.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/flip.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/gravity.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/piddle.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/shapes.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/zoom.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/crop_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_gradient_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_label_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_list.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_pattern_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_plasma_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_radial-gradient_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_utils.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_xc_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/enhance_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/huffman_decode_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/main.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/ping_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/rotate_fuzzer.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/travis.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/utils.cc" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Blob.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/BlobRef.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/CoderInfo.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Color.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Drawable.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Exception.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Functions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Geometry.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Image.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/ImageRef.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Montage.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Options.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Pixels.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/ResourceLimits.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/STL.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/SecurityPolicy.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Statistic.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Thread.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/TypeMetric.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/appendImages.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/attributes.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/averageImages.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/coalesceImages.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/coderInfo.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/color.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/colorHistogram.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/exceptions.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/geometry.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/montageImages.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/morphImages.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/readWriteBlob.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/tests/readWriteImages.cpp" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/accelerate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/animate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/annotate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/artifact.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/attribute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/blob.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cache-view.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/channel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cipher.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/client.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/coder.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/color.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/colormap.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/colorspace.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/compare.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/composite.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/compress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/configure.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/constitute.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/decorate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/delegate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/deprecate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/display.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/distort.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/distribute-cache.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/draw.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/effect.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/enhance.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/exception.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/feature.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/fourier.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/fx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/gem.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/geometry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/histogram.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/identify.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/image-view.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/layer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/linked-list.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/list.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/locale.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/log.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magic.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magick.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/matrix.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/memory.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/mime.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/module.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/monitor.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/montage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/morphology.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/nt-base.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/nt-feature.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/opencl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/option.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/paint.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/pixel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/policy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/prepress.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/profile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/property.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantize.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantum-export.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantum-import.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantum.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/random.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/registry.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resample.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resize.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resource.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/segment.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/semaphore.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/shear.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/signature.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/splay-tree.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/static.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/statistic.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/stream.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/string.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/thread.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/threshold.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/timer.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/token.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/transform.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/type.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/utility.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/version.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/vision.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/visual-effects.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/vms.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/widget.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/xml-tree.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/xwindow.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/animate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/compare.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/composite.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/conjure.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/convert.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/deprecate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/display.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/drawing-wand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/identify.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/import.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-cli.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-image.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-property.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-wand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/mogrify.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/montage.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/operation.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/pixel-iterator.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/pixel-wand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/script-token.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/stream.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_first.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_first_lists.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_index.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_last.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_last_lists.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_mixed.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_mixed_lists.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_norm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/add_norm_lists.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/loop_over_lists.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/tests/script-token-test.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wand-view.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wandcli.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/api_examples/cli_operators.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/api_examples/cli_process.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/api_examples/magick_command.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/api_examples/wand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/aai.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/art.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ashlar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/avs.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/bgr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/bmp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/braille.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/cals.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/caption.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/cin.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/cip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/clip.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/clipboard.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/cmyk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/cube.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/cut.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dcm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dds.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/debug.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dib.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/djvu.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dng.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dot.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dps.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/dpx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/emf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ept.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/exr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/farbfeld.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/fax.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/fits.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/fl32.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/flif.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/fpx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/gif.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/gradient.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/gray.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/hald.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/hdr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/heic.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/histogram.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/hrz.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/html.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/icon.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/info.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/inline.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ipl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/jbig.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/jnx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/jp2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/jpeg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/json.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/jxl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/kernel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/label.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mac.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/magick.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/map.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mask.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mat.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/matte.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/meta.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/miff.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mono.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mpc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mpr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/msl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mtv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/mvg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/null.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ora.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/otb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/palm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pango.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pattern.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pcd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pcl.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pcx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pdb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pdf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pes.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pgx.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pict.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pix.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/plasma.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/png.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pnm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ps.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ps2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ps3.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/psd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/pwp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/raw.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/rgb.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/rgf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/rla.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/rle.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/scr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/screenshot.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/sct.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/sfw.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/sgi.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/sixel.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/stegano.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/sun.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/svg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/tga.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/thumbnail.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/tiff.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/tile.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/tim.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/tim2.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ttf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/txt.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/uil.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/url.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/uyvy.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/vicar.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/vid.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/video.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/viff.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/vips.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/wbmp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/webp.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/wmf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/wpg.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/x.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xbm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xc.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xcf.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xpm.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xps.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xtrn.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/xwd.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/yaml.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/ycbcr.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/coders/yuv.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/filters/analyze.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/tests/drawtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/tests/validate.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/tests/wandtest.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/utilities/magick.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/analyze.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/contrast.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/core.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/core/sigmoidal-contrast.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/mgk.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/wand.c" />
+        
+
+    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/wand/sigmoidal-contrast.c" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_format.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Blob.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/BlobRef.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/CoderInfo.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Color.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Drawable.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Exception.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Functions.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Geometry.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Image.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/ImageRef.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Include.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Montage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Options.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Pixels.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/ResourceLimits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/STL.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/SecurityPolicy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Statistic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Thread.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/TypeMetric.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/MagickCore.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/accelerate-kernels-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/accelerate-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/animate-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/animate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/annotate-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/annotate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/artifact.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/attribute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/blob-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/blob.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cache-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cache-view.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/channel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/cipher.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/client.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/coder-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/coder.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/color-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/color.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/colormap-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/colormap.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/colorspace-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/colorspace.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/compare.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/composite-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/composite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/compress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/configure-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/configure.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/constitute-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/constitute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/decorate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/delegate-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/delegate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/deprecate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/display-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/display.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/distort.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/distribute-cache-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/distribute-cache.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/draw-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/draw.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/effect.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/enhance.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/exception-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/exception.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/feature.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/fourier.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/fx-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/fx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/gem-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/gem.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/geometry.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/histogram.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/identify.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/image-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/image-view.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/image.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/layer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/linked-list.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/list.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/locale-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/locale_.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/log-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/log.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magic-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magick-config.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magick-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magick-type.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/magick.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/matrix-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/matrix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/memory-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/memory_.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/method-attribute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/methods-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/methods.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/mime-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/mime.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/module-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/module.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/monitor-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/monitor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/montage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/morphology-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/morphology.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/mutex.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/nt-base-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/nt-base.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/nt-feature.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/opencl-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/opencl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/option-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/option.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/paint.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/pixel-accessor.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/pixel-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/pixel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/policy-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/policy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/prepress.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/profile-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/profile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/property.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantize.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantum-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/quantum.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/random-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/random_.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/registry-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/registry.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resample-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resample.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resize-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resize.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resource-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/resource_.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/segment.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/semaphore-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/semaphore.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/shear.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/signature-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/signature.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/splay-tree.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/static.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/statistic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/stream-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/string-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/string_.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/studio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/thread-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/thread_.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/threshold.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/timer-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/timer.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/token-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/token.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/transform-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/transform.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/type-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/type.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/utility-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/utility.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/version-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/vision.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/visual-effects.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/vms.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/widget-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/widget.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/xml-tree-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/xml-tree.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/xwindow-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickCore/xwindow.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/MagickWand.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/animate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/compare.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/composite.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/conjure.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/convert.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/deprecate.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/display.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/drawing-wand.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/identify.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/import.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-cli.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-image.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-property.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/magick-wand-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/method-attribute.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/mogrify-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/mogrify.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/montage.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/operation-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/operation.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/pixel-iterator.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/pixel-wand-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/pixel-wand.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/script-token.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/stream.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/studio.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wand-view.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wand.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wandcli-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/MagickWand/wandcli.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/aai.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/art.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ashlar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/avs.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/bgr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/bmp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/braille.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/bytebuffer-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/cals.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/caption.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/cin.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/cip.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/clip.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/clipboard.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/cmyk.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/coders-list.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/coders-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/coders.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/cube.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/cut.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dcm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dds.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/debug.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dib.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/djvu.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dng.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dot.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dps.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/dpx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/emf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ept.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/exr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/farbfeld.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/fax.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/fits.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/fl32.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/flif.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/fpx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ghostscript-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/gif.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/gradient.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/gray.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/hald.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/hdr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/heic.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/histogram.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/hrz.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/html.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/icon.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/info.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/inline.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ipl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/jbig.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/jnx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/jp2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/jpeg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/json.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/jxl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/kernel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/label.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mac.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/magick.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/map.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mask.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mat.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/matte.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/meta.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/miff.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mono.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mpc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mpr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/msl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mtv.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/mvg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/null.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ora.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/otb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/palm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pango.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pattern.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pcd.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pcl.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pcx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pdb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pdf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pes.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pgx.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pict.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pix.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/plasma.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/png.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pnm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ps.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ps2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ps3.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/psd-private.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/psd.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/pwp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/raw.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/rgb.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/rgf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/rla.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/rle.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/scr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/screenshot.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/sct.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/sfw.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/sgi.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/sixel.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/stegano.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/sun.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/svg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/tga.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/thumbnail.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/tiff.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/tile.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/tim.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/tim2.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ttf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/txt.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/uil.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/url.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/uyvy.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/vicar.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/vid.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/video.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/viff.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/vips.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/wbmp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/webp.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/wmf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/wpg.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/x.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xbm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xc.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xcf.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xpm.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xps.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xtrn.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/xwd.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/yaml.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/ycbcr.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/coders/yuv.h" />
+        
+
+    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/tests/validate.h" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/NEWS.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/PerlMagick/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/README.md" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/www/Magick++/ChangeLog.html" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/www/Magick++/NEWS.html" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/www/Magick++/README.txt" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/www/changelog.html" />
+        
+
+    <Text Include="../../thirdparty/owemdjee/ImageMagick/www/news.html" />
+        
+  </ItemGroup>
+</Project>
+    
