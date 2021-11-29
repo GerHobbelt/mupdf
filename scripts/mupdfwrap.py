@@ -7790,12 +7790,12 @@ def build_swig(
 
     common += f'''
             /* SWIG-friendly alternative to fz_runetochar(). */
-            std::string runetochar2(int rune)
+            std::vector<unsigned char> runetochar2(int rune)
             {{
-                char    buffer[10];
-                int n = mupdf::runetochar(buffer, rune);
+                std::vector<unsigned char>  buffer(10);
+                int n = mupdf::runetochar((char*) &buffer[0], rune);
                 assert(n < sizeof(buffer));
-                return std::string(buffer, n);
+                return buffer;
             }}
             '''
 
