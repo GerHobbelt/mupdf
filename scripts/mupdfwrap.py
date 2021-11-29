@@ -1523,6 +1523,16 @@ classextras = ClassExtras(
                     'fz_open_accelerated_document',
                     'fz_open_document',
                     ],
+                constructors_extra = [
+                    ExtraConstructor( f'({rename.class_("pdf_document")}& pdfdocument)',
+                        f'''
+                        {{
+                            m_internal = {rename.function_call('fz_keep_document')}(&pdfdocument.m_internal->super);
+                        }}
+                        ''',
+                        f'/* Return {rename.class_("fz_document")} for pdfdocument.m_internal.super. */',
+                        ),
+                    ],
                 method_wrappers = [
                     'fz_load_outline',
                 ],
