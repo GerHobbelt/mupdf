@@ -17,7 +17,6 @@ import jlib
 
 import mupdf
 
-
 # Names required by class method typing annotations.
 OptBytes = typing.Optional[typing.ByteString]
 OptDict = typing.Optional[dict]
@@ -2559,12 +2558,81 @@ class Document:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_extractFont(self, xref, info_only)
 
-    def extractImage(self, xref):
+    def extract_image(self, xref):
         """Get image by xref. Returns a dictionary."""
-        assert 0, 'no Document_extractImage'
-        if self.isClosed or self.isEncrypted:
+        if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
-        #return _fitz.Document_extractImage(self, xref)
+
+        #return _fitz.Document_extract_image(self, xref)
+        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
+        pdf = self._pdf_document()
+        #pdf_obj *obj = NULL;
+        #fz_buffer *res = NULL;
+        #fz_image *img = NULL;
+        #PyObject *rc = NULL;
+        #const char *ext = NULL;
+        #const char *cs_name = NULL;
+        img_type = 0
+        smask = 0
+        #fz_compressed_buffer *cbuf = NULL;
+        #fz_var(img);
+        #fz_var(res);
+        #fz_var(obj);
+
+        ASSERT_PDF(pdf);
+        if not INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
+            THROWMSG("bad xref")
+
+        obj = mupdf.mpdf_new_indirect(pdf, xref, 0)
+        subtype = mupdf.mpdf_dict_get(obj, PDF_NAME('Subtype'))
+
+        if not mupdf.mpdf_name_eq(subtype, PDF_NAME('Image')):
+            THROWMSG("not an image")
+
+        o = mupdf.mpdf_dict_geta(obj, PDF_NAME('SMask'), PDF_NAME('Mask'))
+        if o.m_internal:
+            smask = mupdf.mpdf_to_num(o)
+
+        if mupdf.mpdf_is_jpx_image(obj):
+            img_type = mupdf.FZ_IMAGE_JPX
+            ext = "jpx"
+        if JM_is_jbig2_image(obj):
+            img_type = mupdf.FZ_IMAGE_JBIG2
+            ext = "jb2"
+        res = mupdf.mpdf_load_raw_stream(obj)
+        if img_type == mupdf.FZ_IMAGE_UNKNOWN:
+            _, c = res.buffer_storage_raw()
+            img_type = mupdf.mfz_recognize_image_format(c)
+            ext = JM_image_extension(img_type)
+        if img_type == mupdf.FZ_IMAGE_UNKNOWN:
+            #fz_drop_buffer(gctx, res);
+            res = None
+            img = mupdf.mpdf_load_image(pdf, obj)
+            res = mupdf.mfz_new_buffer_from_image_as_png(img, fz_default_color_params)
+            ext = "png"
+        #} else /*if (smask == 0)*/ {
+        else:
+            img = mupdf.mfz_new_image_from_buffer(res)
+        xres, yres = mupdf.mfz_image_resolution(img)
+        width = img.w()
+        height = img.h()
+        colorspace = img.n()
+        bpc = img.bpc()
+        cs_name = mupdf.mfz_colorspace_name(img.colorspace())
+
+        rc = dict()
+        rc[ dictkey_ext] = ext
+        rc[ dictkey_smask] = smask
+        rc[ dictkey_width] = width
+        rc[ dictkey_height] = height
+        rc[ dictkey_colorspace] = colorspace
+        rc[ dictkey_bpc] = bpc
+        rc[ dictkey_xres] = xres
+        rc[ dictkey_yres] = yres
+        rc[ dictkey_cs_name] = cs_name
+        rc[ dictkey_image] =JM_BinFromBuffer(res)
+        return rc
+
 
     def get_toc(
             doc,#: Document,
@@ -2588,6 +2656,7 @@ class Document:
                 if not olItem.is_external:
                     if olItem.uri:
                         if olItem.page == -1:
+                            jlib.log('calling doc.resolve_link {olItem.uri=}')
                             resolve = doc.resolve_link(olItem.uri)
                             page = resolve[0] + 1
                         else:
@@ -8347,12 +8416,15 @@ class Pixmap:
 
         elif args_match(args, (Document, mupdf.Document), int):
             # Create pixmap from PDF image identified by XREF number
+            jlib.log('Create pixmap from ((Document, mupdf.Document), int)')
             doc, xref = args
+            jlib.log('{doc=} {xref=}')
             if isinstance(doc, Document):
                 doc = doc.this
             pdf = mupdf.mpdf_specifics(doc)
             ASSERT_PDF(pdf)
             xreflen = mupdf.mpdf_xref_len(pdf)
+            jlib.log('{xreflen=}')
             if not INRANGE(xref, 1, xreflen-1):
                 THROWMSG("bad xref")
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
@@ -8360,13 +8432,14 @@ class Pixmap:
             if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
                 THROWMSG(gctx, "not an image");
             img = mupdf.mpdf_load_image(pdf, ref)
+            jlib.log('img: {img.w()=} {img.h()=} {img.n()=} {img.bpc()=} {img.xres()=} {img.yres()=}')
             # Original code passed null for subarea and ctm, but that's not
             # possible with MuPDF's python bindings, so instead we pass an
             # infinite rect and identify matrix.
             pix, w, h = mupdf.mfz_get_pixmap_from_image(
                     img,
                     mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
-                    mupdf.Matrix(),
+                    mupdf.Matrix(img.w(), 0, 0, img.h(), 0, 0),
                     )
             self.this = pix
 
@@ -8375,7 +8448,7 @@ class Pixmap:
 
         self.samples_ptr = self._samples_ptr()
         self.samples_mv = self._samples_mv()
-        jlib.log('{self=} {self.samples_mv=}')
+        jlib.log('{args=} {self=} {self.samples_mv=}')
 
     def __len__(self):
         return self.size
@@ -11116,6 +11189,10 @@ FZ_MIN_INF_RECT = -0x80000000
 FZ_MAX_INF_RECT = 0x7fffff80
 
 JM_annot_id_stem = "fitz"
+JM_mupdf_warnings_store = []
+JM_mupdf_show_errors = 1
+JM_mupdf_show_warnings = 0
+
 
 LINK_NONE = 0
 LINK_GOTO = 1
@@ -12880,7 +12957,7 @@ def JM_gather_images(doc: mupdf.PdfDocument, dict_: mupdf.PdfObj, imagelist, str
         height = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('Height'), PDF_NAME('H'))
         bpc = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('BitsPerComponent'), PDF_NAME('BPC'))
 
-        jlib.log('{altcs=}')
+        #jlib.log('{altcs=}')
         entry = (
                 xref,
                 gen,
@@ -13350,6 +13427,25 @@ def JM_have_operation(pdf):
         return 0
     return 1;
 
+def JM_image_extension(type_):
+    '''
+    return extension for fitz image type
+    '''
+    if type_ == mupdf.FZ_IMAGE_RAW:     return "raw"
+    if type_ == mupdf.FZ_IMAGE_FLATE:   return "flate"
+    if type_ == mupdf.FZ_IMAGE_LZW:     return "lzw"
+    if type_ == mupdf.FZ_IMAGE_RLD:     return "rld"
+    if type_ == mupdf.FZ_IMAGE_BMP:     return "bmp"
+    if type_ == mupdf.FZ_IMAGE_GIF:     return "gif"
+    if type_ == mupdf.FZ_IMAGE_JBIG2:   return "jb2"
+    if type_ == mupdf.FZ_IMAGE_JPEG:    return "jpeg"
+    if type_ == mupdf.FZ_IMAGE_JPX:     return "jpx"
+    if type_ == mupdf.FZ_IMAGE_JXR:     return "jxr"
+    if type_ == mupdf.FZ_IMAGE_PNG:     return "png"
+    if type_ == mupdf.FZ_IMAGE_PNM:     return "pnm"
+    if type_ == mupdf.FZ_IMAGE_TIFF:    return "tiff"
+    return "n/a"
+
 
 def JM_insert_contents(pdf, pageref, newcont, overlay):
     '''
@@ -13460,6 +13556,18 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
             },
             ]
     return value
+
+
+def JM_is_jbig2_image(dict_):
+	return 0
+	#filter_ = pdf_dict_get(ctx, dict_, PDF_NAME(Filter));
+	#if (pdf_name_eq(ctx, filter_, PDF_NAME(JBIG2Decode)))
+	#	return 1;
+	#n = pdf_array_len(ctx, filter_);
+	#for (i = 0; i < n; i++)
+	#	if (pdf_name_eq(ctx, pdf_array_get(ctx, filter_, i), PDF_NAME(JBIG2Decode)))
+	#		return 1;
+	#return 0;
 
 
 def JM_make_annot_DA(annot, ncol, col, fontname, fontsize):
@@ -13796,6 +13904,16 @@ def JM_merge_resources( page, temp_res):
         val = mupdf.mpdf_dict_get_val(temp_fonts, i)
         mupdf.mpdf_dict_puts(main_fonts, text, val)
     return (max_alp, max_fonts) # next available numbers
+
+
+def JM_mupdf_warning(user, message):
+    '''
+    redirect MuPDF warnings
+    '''
+    jlib.log('{user=} {message=}')
+    JM_mupdf_warnings_store.append(message)
+    if JM_mupdf_show_warnings:
+        sys.stderr.write(f'mupdf: {message}\n')
 
 
 def JM_new_buffer_from_stext_page(page):
@@ -17368,3 +17486,16 @@ class TOOLS:
         return small_glyph_heights
 
 import utils
+if 1:
+    pass
+elif 0:
+    mupdf.mfz_set_warning_callback(JM_mupdf_warning, 0)
+else:
+    import ctypes
+    ctypes_mupdf = ctypes.CDLL('libmupdf.so')
+    fn = ctypes.CFUNCTYPE(
+        ctypes.c_int,                   # return
+        ctypes.c_void_p,                # caller_handle
+        ctypes.POINTER(ctypes.c_char),  # str
+        )(JM_mupdf_warning)
+    ctypes_mupdf.fz_set_warning_callback(0, fn, 0)
