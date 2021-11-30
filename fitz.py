@@ -8345,9 +8345,11 @@ class Pixmap:
             pm.yres = yres
             self.this = pm
 
-        elif args_match(args, mupdf.Document, int):
+        elif args_match(args, (Document, mupdf.Document), int):
             # Create pixmap from PDF image identified by XREF number
             doc, xref = args
+            if isinstance(doc, Document):
+                doc = doc.this
             pdf = mupdf.mpdf_specifics(doc)
             ASSERT_PDF(pdf)
             xreflen = mupdf.mpdf_xref_len(pdf)
@@ -8358,7 +8360,14 @@ class Pixmap:
             if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
                 THROWMSG(gctx, "not an image");
             img = mupdf.mpdf_load_image(pdf, ref)
-            pix, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
+            # Original code passed null for subarea and ctm, but that's not
+            # possible with MuPDF's python bindings, so instead we pass an
+            # infinite rect and identify matrix.
+            pix, w, h = mupdf.mfz_get_pixmap_from_image(
+                    img,
+                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                    mupdf.Matrix(),
+                    )
             self.this = pix
 
         else:
@@ -8374,7 +8383,7 @@ class Pixmap:
     def __repr__(self):
         if not type(self) is Pixmap: return
         if self.colorspace:
-            return "Pixmap(%s, %s, %s)" % (self.colorspace.m_internal.name, self.irect, self.alpha)
+            return "Pixmap(%s, %s, %s)" % (self.colorspace.this.m_internal.name, self.irect, self.alpha)
         else:
             return "Pixmap(%s, %s, %s)" % ('None', self.irect, self.alpha)
 
@@ -8438,7 +8447,7 @@ class Pixmap:
     def colorspace(self):
         """Pixmap Colorspace."""
         #return _fitz.Pixmap_colorspace(self)
-        return mupdf.mfz_pixmap_colorspace(self.this)
+        return Colorspace(mupdf.mfz_pixmap_colorspace(self.this))
 
     def copyPixmap(self, src, bbox):
         """Copy bbox from another Pixmap."""
@@ -8578,7 +8587,7 @@ class Pixmap:
 
         if self.alpha and idx in (2, 6):
             raise ValueError("'%s' cannot have alpha" % output)
-        if self.colorspace and self.colorspace.m_internal.n > 3 and idx in (1, 2, 4):
+        if self.colorspace and self.colorspace.this.m_internal.n > 3 and idx in (1, 2, 4):
             raise ValueError("unsupported colorspace for '%s'" % output)
 
         return self._writeIMG(filename, idx)
@@ -8710,7 +8719,7 @@ class Pixmap:
         idx = valid_formats.get(output.lower(), 1)
         if self.alpha and idx in (2, 6):
             raise ValueError("'%s' cannot have alpha" % output)
-        if self.colorspace and self.colorspace.m_internal.n > 3 and idx in (1, 2, 4):
+        if self.colorspace and self.colorspace.this.m_internal.n > 3 and idx in (1, 2, 4):
             raise ValueError("unsupported colorspace for '%s'" % output)
         barray = self._tobytes(idx)
         return barray
