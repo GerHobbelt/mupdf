@@ -8393,8 +8393,35 @@ class Pixmap:
         raw_len = self.this.stride() * self.this.h()
         return raw_data, raw_len
 
-    def _writeIMG(self, filename, format):
-        return _fitz.Pixmap__writeIMG(self, filename, format)
+    def _tobytes(self, format_):
+        #return _fitz.Pixmap__tobytes(self, format)
+        #fz_output *out = NULL;
+        #fz_buffer *res = NULL;
+        #PyObject *barray = NULL;
+        pm = self.this
+        size = mupdf.mfz_pixmap_stride(pm) * pm.h();
+        res = mupdf.mfz_new_buffer(size)
+        out = mupdf.Output(res)
+        jlib.log('{type(out)=}')
+        if   format_ == 1:  mupdf.mfz_write_pixmap_as_png(out, pm)
+        elif format_ == 2:  mupdf.mfz_write_pixmap_as_pnm(out, pm)
+        elif format_ == 3:  mupdf.mfz_write_pixmap_as_pam(out, pm)
+        elif format_ == 5:  mupdf.mfz_write_pixmap_as_psd(out, pm)
+        elif format_ == 6:  mupdf.mfz_write_pixmap_as_ps(out, pm)
+        else:               mupdf.mfz_write_pixmap_as_png(out, pm)
+
+        barray = JM_BinFromBuffer(res)
+        return barray
+
+    def _writeIMG(self, filename, format_):
+        #return _fitz.Pixmap__writeIMG(self, filename, format)
+        pm = self.this
+        if   format_ == 1:  mupdf.mfz_save_pixmap_as_png(pm, filename)
+        elif format_ == 2:  mupdf.mfz_save_pixmap_as_pnm(pm, filename)
+        elif format_ == 3:  mupdf.mfz_save_pixmap_as_pam(pm, filename)
+        elif format_ == 5:  mupdf.mfz_save_pixmap_as_psd(pm, filename)
+        elif format_ == 6:  mupdf.mfz_save_pixmap_as_ps(pm, filename)
+        else:               mupdf.mfz_save_pixmap_as_png(pm, filename)
 
     @property
     def alpha(self):
@@ -8521,6 +8548,35 @@ class Pixmap:
         raw_data, raw_len = self.samples_mv
         return mupdf.raw_to_python_bytes( raw_data, raw_len)
 
+    def save(self, filename, output=None):
+        """Output as image in format determined by filename extension.
+
+        Args:
+            output: (str) only use to overrule filename extension. Default is PNG.
+                    Others are PNM, PGM, PPM, PBM, PAM, PSD, PS.
+        """
+        valid_formats = {"png": 1, "pnm": 2, "pgm": 2, "ppm": 2, "pbm": 2,
+                         "pam": 3, "tga": 4, "tpic": 4,
+                         "psd": 5, "ps": 6}
+        if type(filename) is str:
+            pass
+        elif hasattr(filename, "absolute"):
+            filename = str(filename)
+        elif hasattr(filename, "name"):
+            filename = filename.name
+        if output is None:
+            _, ext = os.path.splitext(filename)
+            output = ext[1:]
+
+        idx = valid_formats.get(output.lower(), 1)
+
+        if self.alpha and idx in (2, 6):
+            raise ValueError("'%s' cannot have alpha" % output)
+        if self.colorspace and self.colorspace.m_internal.n > 3 and idx in (1, 2, 4):
+            raise ValueError("unsupported colorspace for '%s'" % output)
+
+        return self._writeIMG(filename, idx)
+
     def set_alpha(self, alphavalues=None, premultiply=1, opaque=None):
         """Set alpha channel to values contained in a byte array.
         If omitted, set alphas to 255.
@@ -8630,6 +8686,28 @@ class Pixmap:
 
     def tintWith(self, black, white):
         return _fitz.Pixmap_tintWith(self, black, white)
+
+    def tobytes(self, output="png"):
+        """Convert to binary image stream of desired type.
+
+        Can be used as input to GUI packages like tkinter.
+
+        Args:
+            output: (str) image type, default is PNG. Others are PNM, PGM, PPM,
+                    PBM, PAM, PSD, PS.
+        Returns:
+            Bytes object.
+        """
+        valid_formats = {"png": 1, "pnm": 2, "pgm": 2, "ppm": 2, "pbm": 2,
+                         "pam": 3, "tga": 4, "tpic": 4,
+                         "psd": 5, "ps": 6}
+        idx = valid_formats.get(output.lower(), 1)
+        if self.alpha and idx in (2, 6):
+            raise ValueError("'%s' cannot have alpha" % output)
+        if self.colorspace and self.colorspace.m_internal.n > 3 and idx in (1, 2, 4):
+            raise ValueError("unsupported colorspace for '%s'" % output)
+        barray = self._tobytes(idx)
+        return barray
 
     def writeImage(self, filename, output=None):
         """Output as image in format determined by filename extension.
