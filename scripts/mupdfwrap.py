@@ -267,6 +267,17 @@ Python wrapping:
 
     Access to buffer data:
 
+        Generic data access
+
+            mupdf.python_bytes_data(b: bytes):
+                Returns SWIG proxy for an unsigned char*' that points to <b>'s
+                data.
+
+            mupdf.raw_to_python_bytes(data, size):
+                Returns Python bytes instance containing copy of data specified
+                by <data> (a SWIG proxy for a const unsigned char* c) and
+                <size> (the length of the data).
+
         Wrappers for fz_buffer_extract():
 
             mupdf.Buffer.buffer_extract() returns a Python bytes instance.
@@ -2145,12 +2156,12 @@ classextras = ClassExtras(
 
         fz_pixmap = ClassExtra(
                 methods_extra = [
-                    ExtraMethod( 'std::string', 'md5_pixmap()',
+                    ExtraMethod( 'std::vector<unsigned char>', 'md5_pixmap()',
                         f'''
                         {{
-                            unsigned char   digest[16];
-                            {rename.function_call( 'fz_md5_pixmap')}( m_internal, digest);
-                            return std::string( (char*) digest);
+                            std::vector<unsigned char>  ret(16);
+                            {rename.function_call( 'fz_md5_pixmap')}( m_internal, &ret[0]);
+                            return ret;
                         }}
                         ''',
                         f'/* Wrapper for fz_md5_pixmap(). */',
