@@ -8182,11 +8182,12 @@ class Pixmap:
         #
         if 0:
             pass
+
         elif args_match(args, mupdf.Colorspace, mupdf.Rect, int):
             # create empty pixmap with colorspace and IRect
             pm = mupdf.mfz_new_pixmap_with_bbox(args[0], JM_irect_from_py(args[1]), mupdf.Separations(0), args[2])
             self.this = pm
-            return
+
         elif args_match(args, mupdf.Colorspace, mupdf.Pixmap):
             # copy pixmap, converting colorspace
             if not mupdf.mfz_pixmap_colorspace(args[1]):
@@ -8199,7 +8200,7 @@ class Pixmap:
                     1,
                     )
             self.this = pm
-            return
+
         elif args_match(args, mupdf.Pixmap, mupdf.Pixmap):
             # add mask to a non-transparent pixmap
             color, mask = args
@@ -8228,25 +8229,25 @@ class Pixmap:
                     dst.samples.set(ds, a)
                     ds += 1
             self.this = dst
-            return
-        elif args_match(args, mupdf.Pixmap, (float, int), (float, int), None):
+
+        elif args_match(args, (Pixmap, mupdf.Pixmap), (float, int), (float, int), None):
             # create pixmap as scaled copy of another one
             assert 0, f'Cannot handle args={args} because fz_scale_pixmap() and fz_scale_pixmap_cached() are not declared in MuPDF headers'
             spix, w, h, clip = args
-            src_pix = spix.this
+            src_pix = spix.this if isinstance(spix, Pixmap) else spix
             bbox = JM_irect_from_py(clip)
             if not mupdf.mfz_is_infinite_irect(bbox):
                 pm = mupdf.mfz_scale_pixmap_cached(src_pix, src_pix.x, src_pix.y, w, h, bbox)
             else:
                 pm = mupdf.mfz_scale_pixmap(gctx, src_pix, src_pix.x, src_pix.y, w, h, NULL);
             self.this = pm
-            return
-        elif args_match(args, mupdf.Pixmap, (int, None)):
+
+        elif args_match(args, (Pixmap, mupdf.Pixmap), (int, None)):
             # copy pixmap & add / drop the alpha channel
             #jlib.log('{args=}')
             spix = args[0]
             alpha = args[1] if len(args) == 2 else 1
-            src_pix = spix
+            src_pix = spix.this if isinstance(spix, Pixmap) else spix
             if not INRANGE(alpha, 0, 1):
                 THROWMSG("bad alpha value")
             cs = mupdf.mfz_pixmap_colorspace(src_pix)
@@ -8283,7 +8284,7 @@ class Pixmap:
                         tptr += 1
                     sptr += n + src_pix.alpha()
             self.this = pm
-            return
+
         elif args_match(args, mupdf.Colorspace, int, int, None, int):
             # create pixmap from samples data
             cs, w, h, samples, alpha = args
@@ -8309,10 +8310,10 @@ class Pixmap:
 
             #memcpy(pm->samples, c, size);
             self.this = pm
-            return
 
         elif args_match(args, None):
             # create pixmap from filename, file object, pathlib.Path or memory
+            #jlib.log('{args=}')
             imagedata, = args
             name = 'name'
             if hasattr(imagedata, "resolve"):
@@ -8333,12 +8334,16 @@ class Pixmap:
                 if not size:
                     THROWMSG(gctx, "bad image data")
                 img = mupdf.mfz_new_image_from_buffer(res)
-            pm, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
+
+            pm, w, h = mupdf.mfz_get_pixmap_from_image(
+                    img,
+                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                    mupdf.Matrix(),
+                    )
             xres, yres = img.image_resolution()
             pm.xres = xres
             pm.yres = yres
             self.this = pm
-            return
 
         elif args_match(args, mupdf.Document, int):
             # Create pixmap from PDF image identified by XREF number
@@ -8355,10 +8360,13 @@ class Pixmap:
             img = mupdf.mpdf_load_image(pdf, ref)
             pix, w, h = mupdf.mfz_get_pixmap_from_image(img, mupdf.Irect(0), mupdf.Matrix(0))
             self.this = pix
-            return
 
         else:
             raise Exception(f'Unrecognised args for constructing Pixmap: {args}')
+
+        self.samples_ptr = self._samples_ptr()
+        self.samples_mv = self._samples_mv()
+        jlib.log('{self=} {self.samples_mv=}')
 
     def __len__(self):
         return self.size
@@ -8366,12 +8374,24 @@ class Pixmap:
     def __repr__(self):
         if not type(self) is Pixmap: return
         if self.colorspace:
-            return "Pixmap(%s, %s, %s)" % (self.colorspace.name, self.irect, self.alpha)
+            return "Pixmap(%s, %s, %s)" % (self.colorspace.m_internal.name, self.irect, self.alpha)
         else:
             return "Pixmap(%s, %s, %s)" % ('None', self.irect, self.alpha)
 
     def _getImageData(self, format):
         return _fitz.Pixmap__getImageData(self, format)
+
+    def _samples_mv(self):
+        #return _fitz.Pixmap__samples_mv(self)
+        raw_data = self.this.samples()
+        raw_len = self.this.stride() * self.this.h()
+        return raw_data, raw_len
+
+    def _samples_ptr(self):
+        #return _fitz.Pixmap__samples_ptr(self)
+        raw_data = self.this.samples()
+        raw_len = self.this.stride() * self.this.h()
+        return raw_data, raw_len
 
     def _writeIMG(self, filename, format):
         return _fitz.Pixmap__writeIMG(self, filename, format)
@@ -8497,9 +8517,77 @@ class Pixmap:
         return _fitz.Pixmap_pixel(self, x, y)
 
     @property
-    def samples(self):
-        """The area of all pixels."""
-        return _fitz.Pixmap_samples(self)
+    def samples(self)->bytes:
+        raw_data, raw_len = self.samples_mv
+        return mupdf.raw_to_python_bytes( raw_data, raw_len)
+
+    def set_alpha(self, alphavalues=None, premultiply=1, opaque=None):
+        """Set alpha channel to values contained in a byte array.
+        If omitted, set alphas to 255.
+
+        Args:
+            alphavalues: (bytes) with length (width * height) values in range(255).
+            premultiply: (bool, True) premultiply colors with alpha values.
+            opaque: (tuple) length colorspace.n, color value to set to opacity 0.
+        """
+        #return _fitz.Pixmap_set_alpha(self, alphavalues, premultiply, opaque)
+        #fz_buffer *res = NULL;
+        pix = self.this
+        divisor = 255
+        if pix.alpha() == 0:
+            THROWMSG("pixmap has no alpha")
+        n = mupdf.mfz_pixmap_colorants(pix)
+        w = mupdf.mfz_pixmap_width(pix)
+        h = mupdf.mfz_pixmap_height(pix)
+        balen = w * h * (n+1)
+        colors = [0, 0, 0, 0]
+        zero_out = 0
+        if opaque and isinstance(opaque, (list, tuple)) and len(opaque) == n:
+            for i in range(n):
+                colors[i] = opaque[i]
+            zero_out = 1
+        #unsigned char *data = NULL;
+        data_len = 0;
+
+        data_len = None
+        if alphavalues:
+            #res = JM_BufferFromBytes(alphavalues)
+            #data_len, data = mupdf.mfz_buffer_storage(res)
+            #if data_len < w * h:
+            #    THROWMSG("bad alpha values")
+            # fixme: don't seem to need to create an fz_buffer - can
+            # use <alphavalues> directly?
+            if isinstance(alphavalues, (bytes, bytearray)):
+                data = alphavalues
+                data_len = len(alphavalues)
+            else:
+                assert 0, f'unexpected type for alphavalues: {type(alphavalues)}'
+            if data_len < w * h:
+                THROWMSG("bad alpha values")
+        i = k = j = 0
+        data_fix = 255
+        while i < balen:
+            if zero_out:
+                for j in range(i, i+n):
+                    if pix.samples_get(j) != colors[j - i]:
+                        data_fix = 255
+                        break
+                    else:
+                        data_fix = 0
+            if data_len:
+                if data_fix == 0:
+                    pix.samples_set(i+n, 0)
+                else:
+                    pix.samples_set(i+n, data[k])
+                if premultiply == 1:
+                    denom = int(data[k])
+                    for j in range(i, i+n):
+                        pix.samples_set(j, pix.samples_get(j) * denom // divisor)
+            else:
+                pixsamples_set(i+n, data_fix)
+            i += n+1
+            k += 1
+
 
     def setAlpha(self, alphavalues=None, premultiply=1):
         """Set alphas to values contained in a byte array.
@@ -10928,6 +11016,11 @@ CS_LAB = mupdf.Colorspace.Fixed_LAB
 
 EPSILON = 1e-5
 FLT_EPSILON = 1e-5
+
+# largest 32bit integers surviving C float conversion roundtrips
+# used by MuPDF to define infinite rectangles
+FZ_MIN_INF_RECT = -0x80000000
+FZ_MAX_INF_RECT = 0x7fffff80
 
 JM_annot_id_stem = "fitz"
 
@@ -14821,20 +14914,28 @@ def UpdateFontInfo(doc: "struct Document *", info: typing.Sequence):
 def args_match(args, *types):
     '''
     Returns true if <args> matches <types>.
+
+    Each item in <types> is a type or tuple of types. Any of these types will
+    match an item in <args>. None will match anything in <args>.
     '''
+    j = 0
     for i in range(len(types)):
         type_ = types[i]
         #jlib.log('{type_=}')
-        if i >= len(args):
+        if j >= len(args):
             if isinstance(type_, tuple) and None in type_:
                 # arg is missing but has default value.
                 continue
             else:
                 #jlib.log('returning false: {type=} {i=}>{len(args)=}')
                 return False
-        if type_ is not None and not isinstance(args[i], type_):
+        if type_ is not None and not isinstance(args[j], type_):
             #jlib.log('returning false: {type=} does not match {type(args[i])=}')
             return False
+        j += 1
+    if j != len(args):
+        jlib.log('returning false: have only matched first {j} args in {args}')
+        return False
     #jlib.log('returning true: {args=} match {types=}')
     return True
 
