@@ -8330,7 +8330,7 @@ class Pixmap:
                 res = JM_BufferFromBytes(imagedata)
                 if not res.m_internal:
                     THROWMSG("bad image data")
-                size, data = res.buffer_storage()
+                size, data = res.buffer_storage_raw()
                 if not size:
                     THROWMSG(gctx, "bad image data")
                 img = mupdf.mfz_new_image_from_buffer(res)
@@ -8444,6 +8444,12 @@ class Pixmap:
         """Copy bbox from another Pixmap."""
 
         return _fitz.Pixmap_copyPixmap(self, src, bbox)
+
+    @property
+    def digest(self):
+        """MD5 digest of pixmap (bytes)."""
+        #return _fitz.Pixmap_digest(self)
+        return self.this.md5_pixmap()
 
     def getImageData(self, output="png"):
         """Convert to binary image stream of desired type.
