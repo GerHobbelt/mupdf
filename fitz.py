@@ -2614,7 +2614,7 @@ class Document:
             #fz_drop_buffer(gctx, res);
             res = None
             img = mupdf.mpdf_load_image(pdf, obj)
-            res = mupdf.mfz_new_buffer_from_image_as_png(img, fz_default_color_params)
+            res = mupdf.mfz_new_buffer_from_image_as_png(img, mupdf.ColorParams())
             ext = "png"
         #} else /*if (smask == 0)*/ {
         else:
@@ -5785,8 +5785,169 @@ class Page:
         return value
 
 
-    def _insertImage(self, filename=None, pixmap=None, stream=None, imask=None, overlay=1, oc=0, xref=0, matrix=None, _imgname=None, _imgpointer=None):
-        return _fitz.Page__insertImage(self, filename, pixmap, stream, imask, overlay, oc, xref, matrix, _imgname, _imgpointer)
+    def _insert_image(self, filename=None, pixmap=None, stream=None, imask=None, clip=None, overlay=1, rotate=0, keep_proportion=1, oc=0, width=0, height=0, xref=0, alpha=-1, _imgname=None, digests=None):
+        #return _fitz.Page__insert_image(self, filename, pixmap, stream, imask, clip, overlay, rotate, keep_proportion, oc, width, height, xref, alpha, _imgname, digests)
+
+
+
+        # process stream ---------------------------------
+        def have_stream():
+            state = mupdf.Md5()
+            state.init()
+            mupdf.mfz_md5_update(state, imgbuf.m_internal.data, imgbuf.m_internal.len)
+            if imask:
+                maskbuf = JM_BufferFromBytes(imask)
+                fz_md5_update(state, maskbuf.m_internal.data, maskbuf.m_internal.len)
+            mupdf.mfz_md5_final(state, digest)
+            md5_py = bytes(digest)
+            temp = digests.get(md5_py, None)
+            if temp is not None:
+                img_xref = temp
+                ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
+                w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Width'), PDF_NAME('W')))
+                h = mupdf.mdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
+                return have_xref()
+            image = mupdf.mfz_new_image_from_buffer(imgbuf)
+            w = image.w()
+            h = image.h()
+            if imask:
+                return have_imask()
+            if alpha==0:
+                return have_image()
+            pix = mupdf.mfz_get_pixmap_from_image(
+                    image,
+                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                    mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
+                    0,
+                    0,
+                    )
+            if not pix.alpha():
+                return have_image()
+            pix = mupdf.mfz_get_pixmap_from_image(
+                    image,
+                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                    mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
+                    0,
+                    0,
+                    )
+            pm = mupdf.mfz_convert_pixmap(
+                    pix,
+                    mupdf.Colorspace(0),
+                    mupdf.Colorspace(0),
+                    mupdf.DefaultColorspaces(0),
+                    fz_default_color_params,
+                    1,
+                    );
+            pm.m_internal.alpha = 0
+            pm.m_internal.colorspace = 0
+            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
+            zimg = mupdf.mfz_new_image_from_pixmap(pix, mask)
+            image = zimg
+            return have_image()
+
+        def have_imask():
+            cbuf1 = mupdf.mfz_compressed_image_buffer(image)
+            if not cbuf1.m_internal:
+                THROWMSG("cannot mask uncompressed image")
+            bpc = image.bpc()
+            colorspace = image.colorspace()
+            xres, yres = mupdf.mfz_image_resolution(image)
+            mask = mupdf.mfz_new_image_from_buffer(maskbuf)
+            zimg = mupdf.mfz_new_image_from_compressed_buffer(
+                    w, h,
+                    bpc, colorspace, xres, yres, 1, 0, NULL,
+                    NULL, cbuf1, mask
+                    )
+            freethis = image
+            image = zimg
+            return have_image()
+
+        def have_image():
+            ref =  mupdf.mpdf_add_image(pdf, image)
+            if oc:
+                JM_add_oc_object(pdf, ref, oc)
+            img_xref = mupdf.mpdf_to_num(ref)
+            digests[md5_py] = img_xref
+            rc_digest = 1
+            return have_xref()
+
+        def have_xref():
+            resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+            if not resources.m_internal:
+                resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
+            xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
+            if not xobject.m_internal:
+                xobject = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('XObject'), 2)
+            mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
+            mupdf.mpdf_dict_puts(xobject, _imgname, ref);
+            nres = mupdf.mfz_new_buffer(50)
+            mupdf.mfz_append_printf(gctx, nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
+            JM_insert_contents(pdf, page.obj(), nres, overlay)
+
+            if rc_digest:
+                return img_xref, digests
+            else:
+                return img_xref, None
+
+        page = self._pdf_page()
+        pdf = page.doc()
+        w = width
+        h = height
+        #fz_pixmap *pm = NULL;
+        #fz_pixmap *pix = NULL;
+        #fz_image *mask = NULL, *zimg = NULL, *image = NULL, *freethis = NULL;
+        #pdf_obj *resources, *xobject, *ref;
+        #fz_buffer *nres = NULL,  *imgbuf = NULL, *maskbuf = NULL;
+        #fz_compressed_buffer *cbuf1 = NULL;
+        #int xres, yres, bpc,
+        img_xref = xref
+        rc_digest = 0
+        #unsigned char digest[16];
+        #PyObject *md5_py = NULL, *temp;
+        template = "\nq\n%g %g %g %g %g %g cm\n/%s Do\nQ\n"
+
+        if xref > 0:
+            ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
+            w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(ref, PDF_NAME('Width'), PDF_NAME('W')))
+            h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(gctx, ref, PDF_NAME('Height'), PDF_NAME('H')))
+            if w + h == 0:
+                THROWMSG("xref is no image");
+            return have_xref()
+
+        if stream:
+            imgbuf = JM_BufferFromBytes(stream)
+            return have_stream()
+        if filename:
+            imgbuf = mupdf.mfz_read_file(filename)
+            return have_stream()
+
+        # process pixmap ---------------------------------
+        arg_pix = pixmap.this
+        w = arg_pix.w
+        h = arg_pix.h
+        digest = mupdf.mfz_md5_pixmap(arg_pix)
+        md5_py = digest
+        temp = digests.get(md5_py, None)
+        if temp is not None:
+            img_xref = temp
+            ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
+            return have_xref()
+        if arg_pix.alpha() == 0:
+            image = mupdf.mfz_new_image_from_pixmap(arg_pix, mupdf.Image(0))
+        else:
+            pm = mupdf.mfz_convert_pixmap(
+                    arg_pix,
+                    mupdf.Colorspace(0),
+                    mupdf.Colorspace(0),
+                    mupdf.DefaultColorspaces(0),
+                    mupdf.ColorParams(),
+                    1,
+                    )
+            pm.alpha = 0;
+            pm.colorspace = NULL;
+            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
+            image = mupdf.mfz_new_image_from_pixmap(arg_pix, mask)
+        return have_image()
 
     def _load_annot(self, name, xref):
         #return _fitz.Page__load_annot(self, name, xref)
@@ -7191,7 +7352,7 @@ class Page:
     def get_image_bbox(self, name, transform=0):
         """Get rectangle occupied by image 'name'.
 
-        'name' is either an item of the image full list, or the referencing
+        'name' is either an item of the image list, or the referencing
         name string - elem[7] of the resp. item.
         Option 'transform' also returns the image transformation matrix.
         """
@@ -7227,7 +7388,9 @@ class Page:
                 return inf_rect
 
 
-        val = _fitz.Page_get_image_bbox(self, name, transform)
+        #val = _fitz.Page_get_image_bbox(self, name, transform)
+        pdf_page = self._pdf_page()
+        val = JM_image_reporter(pdf_page)
 
         if not bool(val):
             return rc
@@ -7741,6 +7904,9 @@ class Page:
         if rc >= 0:
             img.commit(overlay)
         return rc
+
+    def insert_image(page, rect, **kwargs):
+        return utils.insert_image(page, rect, **kwargs)
 
     def insert_textbox(*args, **kwargs):
         return utils.insert_textbox(*args, **kwargs)
@@ -13454,6 +13620,44 @@ def JM_image_extension(type_):
     if type_ == mupdf.FZ_IMAGE_PNM:     return "pnm"
     if type_ == mupdf.FZ_IMAGE_TIFF:    return "tiff"
     return "n/a"
+
+
+def JM_image_reporter(page):
+    assert 0, 'not implemented - needs swig director support for fn ptrs.'
+    doc = page.doc()
+    filter_ = mupdf.PdfFilterOptions()
+    '''
+    filter_.opaque = page
+    filter_.text_filter = NULL;
+    filter_.image_filter = JM_image_filter;
+    filter_.end_page = NULL;
+    filter_.recurse = 0;
+    filter_.instance_forms = 1;
+    filter_.sanitize = 1;
+    filter_.ascii = 1;
+
+    pdf_obj *contents, *old_res;
+    pdf_obj *struct_parents_obj;
+    pdf_obj *new_res;
+    fz_buffer *buffer;
+    int struct_parents;
+    fz_matrix ctm = fz_identity;
+    pdf_page_transform(gctx, page, NULL, &ctm);
+    struct_parents_obj = pdf_dict_get(ctx, page->obj, PDF_NAME(StructParents));
+    struct_parents = -1;
+    if (pdf_is_number(ctx, struct_parents_obj))
+        struct_parents = pdf_to_int(ctx, struct_parents_obj);
+
+    contents = pdf_page_contents(ctx, page);
+    old_res = pdf_page_resources(ctx, page);
+    img_info = PyList_New(0);
+    JM_filter_content_stream(ctx, doc, contents, old_res, ctm, &filter, struct_parents, &buffer, &new_res);
+    fz_drop_buffer(ctx, buffer);
+    pdf_drop_obj(ctx, new_res);
+    PyObject *rc = PySequence_Tuple(img_info);
+    Py_CLEAR(img_info);
+    return rc;
+    '''
 
 
 def JM_insert_contents(pdf, pageref, newcont, overlay):
