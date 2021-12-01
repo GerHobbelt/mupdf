@@ -455,7 +455,7 @@ class Annot:
         sound = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('Sound'))
         if type != mupdf.PDF_ANNOT_SOUND or not sound.m_internal:
             THROWMSG("bad annot type")
-        if pdf_dict_get(gctx, sound, PDF_NAME(F)).m_internal:
+        if pdf_dict_get(sound, PDF_NAME(F)).m_internal:
             THROWMSG("unsupported sound stream")
         res = dict()
         obj = mupdf.mpdf_dict_get(sound, PDF_NAME('R'))
@@ -470,7 +470,7 @@ class Annot:
         obj = mupdf.mpdf_dict_get(sound, PDF_NAME('E'))
         if obj.m_internal:
             res['encoding'] = mupdf.mpdf_to_name(obj)
-        obj = mupdf.mpdf_dict_gets(gctx, sound, "CO");
+        obj = mupdf.mpdf_dict_gets(sound, "CO");
         if obj.m_internal:
             res['compression'] = mupdf.mpdf_to_name(obj)
         buf = mupdf.mpdf_load_stream(sound)
@@ -1499,7 +1499,7 @@ class Document:
             else:
                 pdf = mupdf.mpdf_create_document()
                 doc = mupdf.Document(pdf)
-        jlib.log('{doc=}')
+        #jlib.log('{doc=}')
         if w > 0 and h > 0:
             mupdf.mfz_layout_document(doc, w, h, fontsize)
         elif mupdf.mfz_is_document_reflowable(doc):
@@ -1987,7 +1987,7 @@ class Document:
         if not pdf.m_internal:
             return
         idlist = []
-        identity = mupdf.mpdf_dict_get(gctx, mupdf.mpdf_trailer(pdf), PDF_NAME('ID'));
+        identity = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('ID'));
         if identity.m_internal:
             n = mupdf.mpdf_array_len(identity)
             for i in range(n):
@@ -2343,6 +2343,12 @@ class Document:
                 return xrefs
             xrefs = JM_outline_xrefs(first, xrefs)
             return xrefs
+
+    def get_page_labels(doc):
+        return utils.get_page_labels(doc)
+
+    def get_page_numbers(doc, label, only_one=False):
+        return utils.get_page_numbers(doc, label, only_one)
 
     @property
     def is_closed(self):
@@ -2835,7 +2841,7 @@ class Document:
         if not pdfout.m_internal or not pdfsrc.m_internal:
             THROWMSG("source or target not a PDF")
         ENSURE_OPERATION(pdfout)
-        JM_merge_range(gctx, pdfout, pdfsrc, fp, tp, sa, rotate, links, annots, show_progress, _gmap)
+        JM_merge_range(pdfout, pdfsrc, fp, tp, sa, rotate, links, annots, show_progress, _gmap)
 
         self._reset_page_refs()
         if links:
@@ -3192,6 +3198,50 @@ class Document:
             raise ValueError("document closed")
 
         return _fitz.Document_set_oc(self, xref, oc)
+
+    def set_page_labels(doc, labels):
+        """Add / replace page label definitions in PDF document.
+
+        Args:
+            doc: PDF document (resp. 'self').
+            labels: list of label dictionaries like:
+            {'startpage': int, 'prefix': str, 'style': str, 'firstpagenum': int},
+            as returned by get_page_labels().
+        """
+        # William Chapman, 2021-01-06
+
+        def create_label_str(label):
+            """Convert Python label dict to correspnding PDF rule string.
+
+            Args:
+                label: (dict) build rule for the label.
+            Returns:
+                PDF label rule string wrapped in "<<", ">>".
+            """
+            s = "%i<<" % label["startpage"]
+            if label.get("prefix", "") != "":
+                s += "/P(%s)" % label["prefix"]
+            if label.get("style", "") != "":
+                s += "/S/%s" % label["style"]
+            if label.get("firstpagenum", 1) > 1:
+                s += "/St %i" % label["firstpagenum"]
+            s += ">>"
+            return s
+
+        def create_nums(labels):
+            """Return concatenated string of all labels rules.
+
+            Args:
+                labels: (list) dictionaries as created by function 'rule_dict'.
+            Returns:
+                PDF compatible string for page label definitions, ready to be
+                enclosed in PDF array 'Nums[...]'.
+            """
+            labels.sort(key=lambda x: x["startpage"])
+            s = "".join([create_label_str(label) for label in labels])
+            return s
+
+        doc._set_page_labels(create_nums(labels))
 
     def set_toc(
             doc,#: Document,
@@ -3655,9 +3705,20 @@ class Document:
 
     def update_object(self, xref, text, page=None):
         """Replace object definition source."""
-        if self.isClosed or self.isEncrypted:
+        if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
-        return _fitz.Document_update_object(self, xref, text, page)
+        #return _fitz.Document_update_stream(self, xref, stream, new)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        xreflen = mupdf.mpdf_xref_len(pdf)
+        if not INRANGE(xref, 1, xreflen-1):
+            THROWMSG("bad xref")
+        ENSURE_OPERATION(pdf)
+        # create new object with passed-in string
+        new_obj = JM_pdf_obj_from_str(pdf, text)
+        mupdf.mpdf_update_object(pdf, xref, new_obj)
+        if page:
+            JM_refresh_page( mupdf.mpdf_page_from_fz_page(page.super()))
 
     def _pdf_document(self):
         '''
@@ -3721,15 +3782,52 @@ class Document:
         return _fitz.Document__update_toc_item(self, xref, action, title, flags, collapse, color)
 
     def _get_page_labels(self):
-        return _fitz.Document__get_page_labels(self)
+        #return _fitz.Document__get_page_labels(self)
+        pdf = self._pdf_document()
+
+        ASSERT_PDF(pdf);
+        rc = []
+        pagelabels = mupdf.mpdf_new_name("PageLabels")
+        obj = mupdf.mpdf_dict_getl( mupdf.mpdf_trailer(pdf), PDF_NAME('Root'), pagelabels)
+        if not obj.m_internal:
+            return rc
+        # simple case: direct /Nums object
+        nums = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_get( obj, PDF_NAME('Nums')))
+        if nums.m_internal:
+            JM_get_page_labels(rc, nums)
+            return rc
+        # case: /Kids/Nums
+        nums = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_getl(obj, PDF_NAME('Kids'), PDF_NAME('Nums')))
+        if nums.m_internal:
+            JM_get_page_labels(rc, nums)
+            return rc
+        # case: /Kids is an array of multiple /Nums
+        kids = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_get( obj, PDF_NAME('Kids')))
+        if not kids.m_internal or not mupdf.mpdf_is_array(kids):
+            return rc
+        n = mupdf.mpdf_array_len(kids)
+        for i in range(n):
+            nums = mupdf.mpdf_resolve_indirect(
+                    mupdf.mpdf_dict_get( mupdf.mpdf_array_get(kids, i)),
+                    PDF_NAME('Nums'),
+                    )
+            JM_get_page_labels(rc, nums)
+        return rc
 
     def _set_page_labels(self, labels):
-        val = _fitz.Document__set_page_labels(self, labels)
+        #val = _fitz.Document__set_page_labels(self, labels)
+        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        pagelabels = mupdf.mpdf_new_name("PageLabels")
+        root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+        mupdf.mpdf_dict_del(root, pagelabels)
+        mupdf.mpdf_dict_putl(root, mupdf.mpdf_new_array(pdf, 0), pagelabels, PDF_NAME('Nums'))
+
         xref = self.pdf_catalog()
         text = self.xref_object(xref, compressed=True)
         text = text.replace("/Nums[]", "/Nums[%s]" % labels)
         self.update_object(xref, text)
-        return val
 
     def get_layers(self):
         """Show optional OC layers."""
@@ -5467,7 +5565,7 @@ class Page:
         page = self._pdf_page()
         try:
             if len(points) < 2:
-                THROWMSG(gctx, "bad list of points")
+                THROWMSG("bad list of points")
             annot = mupdf.mpdf_create_annot(page, annot_type)
             for p in points:
                 if (PySequence_Size(p) != 2):
@@ -5701,7 +5799,6 @@ class Page:
         ctm = JM_matrix_from_py(matrix)
         tpage = mupdf.StextPage(rect)
         dev = mupdf.mfz_new_stext_device(tpage, options)
-        jlib.log('{type(page)=}')
         if isinstance(page, mupdf.Page):
             pass
         elif isinstance(page, mupdf.PdfPage):
@@ -6551,68 +6648,27 @@ class Page:
 
     def delete_annot(self, annot):
         """Delete annot and return next one."""
-        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         CheckParent(self)
-        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         CheckParent(annot)
-        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
 
         page = self._pdf_page()
-        jlib.log('')
         while 1:
             # first loop through all /IRT annots and remove them
             irt_annot = JM_find_annot_irt(annot.this)
             if not irt_annot:    # no more there
                 break
             JM_delete_annot(page, irt_annot)
-        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         nextannot = mupdf.mpdf_next_annot(annot.this)   # store next
         JM_delete_annot(page, annot.this)
         #fixme: page->doc->dirty = 1;
-        jlib.log('{annot.this.m_internal_value():x=} {annot.this.annot_refs()=}')
-        #jlib.log('{dir(annot.this.m_internal)=}')
         val = Annot(nextannot)
 
-        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         if val:
             val.thisown = True
             #val.parent = weakref.proxy(self) # owning page object
             val.parent._annot_refs[id(val)] = val
         annot._erase()
-
-        jlib.log('{annot.this.m_internal=} {annot.this.annot_refs()=}')
         return val
-
-
-        def add_polyline_annot(self, points: list) -> "struct Annot *":
-            """Add a 'PolyLine' annotation."""
-            old_rotation = annot_preprocess(self)
-            try:
-                #annot = self._add_multiline(points, PDF_ANNOT_POLY_LINE)
-                #Page__add_multiline(points, PDF_ANNOT_POLY_LINE)
-                page = self._pdf_page()
-                try:
-                    n = PySequence_Size(points)
-                    if n < 2:
-                        THROWMSG("bad list of points")
-                    annot = mupdf.mpdf_create_annot( page, annot_type)
-                    for p in points:
-                        if PySequence_Size(p) != 2:
-                            THROWMSG("bad list of points")
-                        point = JM_point_from_py(p)
-                        mupdf.mpdf_add_annot_vertex(annot, point)
-
-                    JM_add_annot_id(annot, "A")
-                    mupdf.mpdf_update_annot(annot)
-                except Exception as e:
-                    jlib.log('{e=}')
-                    return
-                return Annot(annot)
-            finally:
-                if old_rotation != 0:
-                    self.set_rotation(old_rotation)
-            annot_postprocess(self, annot)
-            return annot
 
     def deleteAnnot(self, annot):
 
@@ -7251,6 +7307,9 @@ class Page:
         """List of images defined in the page object."""
         CheckParent(self)
         return self.parent.get_page_images(self.number, full=full)
+
+    def get_label(page):
+        return utils.get_label(page)
 
     def get_oc_items(self) -> list:
         """Get OCGs and OCMDs used in the page's contents.
@@ -8308,7 +8367,7 @@ class Pixmap:
             if not mupdf.mfz_is_infinite_irect(bbox):
                 pm = mupdf.mfz_scale_pixmap_cached(src_pix, src_pix.x, src_pix.y, w, h, bbox)
             else:
-                pm = mupdf.mfz_scale_pixmap(gctx, src_pix, src_pix.x, src_pix.y, w, h, NULL);
+                pm = mupdf.mfz_scale_pixmap(src_pix, src_pix.x, src_pix.y, w, h, NULL);
             self.this = pm
 
         elif args_match(args, (Pixmap, mupdf.Pixmap), (int, None)):
@@ -8401,7 +8460,7 @@ class Pixmap:
                     THROWMSG("bad image data")
                 size, data = res.buffer_storage_raw()
                 if not size:
-                    THROWMSG(gctx, "bad image data")
+                    THROWMSG("bad image data")
                 img = mupdf.mfz_new_image_from_buffer(res)
 
             pm, w, h = mupdf.mfz_get_pixmap_from_image(
@@ -8430,7 +8489,7 @@ class Pixmap:
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
             type_ = mupdf.mpdf_dict_get(ref, PDF_NAME('Subtype'))
             if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
-                THROWMSG(gctx, "not an image");
+                THROWMSG("not an image");
             img = mupdf.mpdf_load_image(pdf, ref)
             jlib.log('img: {img.w()=} {img.h()=} {img.n()=} {img.bpc()=} {img.xres()=} {img.yres()=}')
             # Original code passed null for subarea and ctm, but that's not
@@ -8448,7 +8507,6 @@ class Pixmap:
 
         self.samples_ptr = self._samples_ptr()
         self.samples_mv = self._samples_mv()
-        jlib.log('{args=} {self=} {self.samples_mv=}')
 
     def __len__(self):
         return self.size
@@ -12325,7 +12383,6 @@ def JM_char_quad(line, ch, verbose=0):
 
     quad = mupdf.mfz_transform_quad(quad, trm2) # rotate back
     quad = mupdf.mfz_transform_quad(quad, xlate2)   # translate back
-    jlib.log('returning {quad=}')
     return quad
 
 
@@ -12702,14 +12759,9 @@ def JM_ensure_identity(pdf):
         for i in rnd0:
             rnd += chr(i)
         jlib.log('{type(rnd)=} {rnd!r=}')
-        #fz_memrnd(ctx, rnd, nelem(rnd));
-        jlib.log(' ')
         id_ = mupdf.mpdf_dict_put_array( mupdf.mpdf_trailer( pdf), PDF_NAME('ID'), 2)
-        jlib.log(' ')
         mupdf.mpdf_array_push_drop( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
-        jlib.log(' ')
         mupdf.mpdf_array_push_drop( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
-        jlib.log(' ')
 
 def JM_ensure_ocproperties(pdf):
     '''
@@ -13223,9 +13275,6 @@ def JM_get_widget_properties(annot, Widget):
     page = mupdf.mpdf_annot_page(annot)
     pdf = page.doc()
     tw = annot
-    #obj = NULL, *js = NULL, *o = NULL;
-    #fz_buffer *res = NULL;
-    #Py_ssize_t i = 0, n = 0;
 
     def SETATTR(key, value):
         setattr(Widget, key, value)
@@ -13318,9 +13367,7 @@ def JM_get_widget_properties(annot, Widget):
 
     # extract JavaScript action texts
     s = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('A'))
-    jlib.log('{s=} {type(s)=}')
     ss = JM_get_script(s)
-    jlib.log('{ss=} {type(ss)=}')
     SETATTR_DROP(Widget, "script", ss)
 
     SETATTR_DROP(Widget, "script_stroke",
@@ -13384,6 +13431,19 @@ def JM_get_fontextension(doc, xref):
     return "n/a"
 
 
+def JM_get_page_labels(liste, nums):
+    n = mupdf.mpdf_array_len(nums)
+    for i in range(0, n, 2):
+        key = mupdf.mpdf_resolve_indirect( mupdf.mpdf_array_get(nums, i))
+        pno = mupdf.mpdf_to_int(key)
+        val = mupdf.mpdf_resolve_indirect( mupdf.mpdf_array_get(nums, i + 1))
+        res = JM_object_to_buffer(val, 1, 0)
+        c = res.buffer_extract()
+        assert isinstance(c, bytes)
+        c = c.decode('utf-8')
+        liste.append( (pno, c))
+
+
 def JM_get_script(key):
     '''
     JavaScript extractor
@@ -13391,17 +13451,13 @@ def JM_get_script(key):
     dictionary, which must have keys /S and /JS. The value of /S must be
     '/JavaScript'. The value of /JS is returned.
     '''
-    jlib.log('{key=} {key.m_internal=}')
     if not key.m_internal:
-        jlib.log('returning None. {key.m_internal=}')
         return
 
     j = mupdf.mpdf_dict_get(key, PDF_NAME('S'))
     jj = mupdf.mpdf_to_name(j)
-    jlib.log('{j=} {jj=}')
     if jj == "JavaScript":
         js = mupdf.mpdf_dict_get(key, PDF_NAME('JS'))
-        jlib.log('{js.m_internal=}')
         if not js.m_internal:
             return
     else:
