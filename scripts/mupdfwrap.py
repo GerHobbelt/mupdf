@@ -7799,12 +7799,8 @@ def build_swig(
 
                 std::vector<unsigned char> mfz_memrnd2(int length)
                 {{
-                    std::cerr << "mfz_memrnd2(): length=" << length << "\\n";
                     std::vector<unsigned char>  ret(length);
-                    std::cerr << "mfz_memrnd2():\\n";
-                    std::cerr << "mfz_memrnd2(): &ret[0]=" << (void*) (&ret[0]) << "\\n";
                     mupdf::mfz_memrnd(&ret[0], length);
-                    std::cerr << "mfz_memrnd2(): returning\\n";
                     return ret;
                 }}
                 '''
@@ -8222,22 +8218,6 @@ def build_swig(
 
                 Device.fill_text = mfz_fill_text
 
-                #def mfz_memrnd(length):
-                #    """
-                #    Returns bytes instance containing <length> bytes of data
-                #    initialised by fz_memrnd().
-                #    """
-                #    buffer_ = uchar_array( length)
-                #    memrnd(buffer_, length)
-                #    ret = cdata(buffer_, length)
-                #    #assert isinstance(ret, bytes)
-                #    return ret
-                print(f'calling mfz_memrnd2()')
-                r = mfz_memrnd2(10)
-                print(f'mfz_memrnd2() =>:')
-                print(f'    type={type(r)}')
-                print(f'    len(r)={len(r)}')
-                print(f'    r={r!r}')
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
