@@ -922,7 +922,7 @@ def get_toc(
 
     def recurse(olItem, liste, lvl):
         """Recursively follow the outline item chain and record item information in a list."""
-        while olItem:
+        while olItem and olItem.this.m_internal:
             if olItem.title:
                 title = olItem.title
             else:
