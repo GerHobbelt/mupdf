@@ -1929,6 +1929,21 @@ classextras = ClassExtras(
                 constructor_raw = True,
                 ),
 
+        fz_md5 = ClassExtra(
+                pod = True,
+                constructors_extra = [
+                    ExtraConstructor(
+                        '()',
+                        f'''
+                        {{
+                            md5_init();
+                        }}
+                        ''',
+                        '/* Default constructor calls md5_init(). */',
+                        )
+                    ],
+                ),
+
         fz_outline = ClassExtra(
                 # We add various methods to give depth-first iteration of outlines.
                 #
