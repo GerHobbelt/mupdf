@@ -2649,54 +2649,7 @@ class Document:
         Args:
             simple: a bool to control output. Returns a list, where each entry consists of outline level, title, page number and link destination (if simple = False). For details see PyMuPDF's documentation.
         """
-        def recurse(olItem, liste, lvl):
-            """Recursively follow the outline item chain and record item information in a list."""
-            while olItem and olItem.this.m_internal:
-                if olItem.title:
-                    title = olItem.title
-                else:
-                    title = " "
-
-                #jlib.log('{type(olItem)=}')
-                #jlib.log('{olItem.this=}')
-                if not olItem.is_external:
-                    if olItem.uri:
-                        if olItem.page == -1:
-                            jlib.log('calling doc.resolve_link {olItem.uri=}')
-                            resolve = doc.resolve_link(olItem.uri)
-                            page = resolve[0] + 1
-                        else:
-                            page = olItem.page + 1
-                    else:
-                        page = -1
-                else:
-                    page = -1
-
-                if not simple:
-                    link = getLinkDict(olItem)
-                    liste.append([lvl, title, page, link])
-                else:
-                    liste.append([lvl, title, page])
-
-                if olItem.down:
-                    liste = recurse(olItem.down, liste, lvl + 1)
-                olItem = olItem.next
-            return liste
-
-        # ensure document is open
-        if doc.is_closed:
-            raise ValueError("document closed")
-        doc.init_doc()
-        olItem = doc.outline
-
-        if not olItem:
-            return []
-        lvl = 1
-        liste = []
-        toc = recurse(olItem, liste, lvl)
-        if doc.is_pdf and simple is False:
-            doc._extend_toc_items(toc)
-        return toc
+        return utils.get_toc(doc, simple)
 
     def init_doc(self):
         if self.is_encrypted:
