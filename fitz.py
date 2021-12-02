@@ -5900,7 +5900,7 @@ class Page:
                 img_xref = temp
                 ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
                 w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Width'), PDF_NAME('W')))
-                h = mupdf.mdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
+                h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
                 #goto have_xref()
                 do_have_imask = 0
                 do_have_image = 0
@@ -5992,7 +5992,9 @@ class Page:
             mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
             mupdf.mpdf_dict_puts(xobject, _imgname, ref);
             nres = mupdf.mfz_new_buffer(50)
-            mupdf.mfz_append_printf(gctx, nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
+            #mupdf.mfz_append_printf(nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
+            # fixme: this does not use fz_append_printf()'s special handling of %g etc.
+            mupdf.mfz_append_pdf_string(nres, template % (mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname))
             JM_insert_contents(pdf, page.obj(), nres, overlay)
 
         if rc_digest:
@@ -15612,6 +15614,55 @@ def args_match(args, *types):
         return False
     #jlib.log('returning true: {args=} match {types=}')
     return True
+
+
+def calc_image_matrix(width, height, tr, rotate, keep):
+    '''
+    # compute image isnertion matrix
+    '''
+    trect = JM_rect_from_py(tr);
+    rot = mupdf.mfz_rotate(rotate)
+    trw = trect.x1 - trect.x0
+    trh = trect.y1 - trect.y0
+    w = trw
+    h = trh
+    if keep:
+        large = max(width, height)
+        fw = width / large
+        fh = height / large
+    else:
+        fw = fh = 1
+    small = min(fw, fh)
+    if rotate != 0 and rotate != 180:
+        f = fw
+        fw = fh
+        fh = f
+    if fw < 1:
+        if trw / fw > trh / fh:
+            w = trh * small
+            h = trh
+        else:
+            w = trw
+            h = trw / small
+    elif fw != fh:
+        if trw / fw > trh / fh:
+            w = trh / small
+            h = trh
+        else:
+            w = trw
+            h = trw * small
+    else:
+        w = trw
+        h = trh
+    tmp = mupdf.mfz_make_point(
+            (trect.x0 + trect.x1) / 2,
+            (trect.y0 + trect.y1) / 2,
+            )
+    mat = mupdf.mfz_make_matrix(1, 0, 0, 1, -0.5, -0.5)
+    mat = mupdf.mfz_concat(mat, rot)
+    mat = mupdf.mfz_concat(mat, mupdf.mfz_scale(w, h))
+    mat = mupdf.mfz_concat(mat, mupdf.mfz_translate(tmp.x, tmp.y))
+    return mat
 
 
 def detect_super_script(line, ch):
