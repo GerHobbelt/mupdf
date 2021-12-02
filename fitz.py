@@ -5784,111 +5784,12 @@ class Page:
         mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
         return value
 
-
     def _insert_image(self, filename=None, pixmap=None, stream=None, imask=None, clip=None, overlay=1, rotate=0, keep_proportion=1, oc=0, width=0, height=0, xref=0, alpha=-1, _imgname=None, digests=None):
+
+        jlib.log('{filename=} {pixmap=} {stream=} {imask=} {clip=} {overlay=} {rotate=} {keep_proportion=} {oc=} {width=} {height=} {xref=} {alpha=} {_imgname=} {digests=}')
         #return _fitz.Page__insert_image(self, filename, pixmap, stream, imask, clip, overlay, rotate, keep_proportion, oc, width, height, xref, alpha, _imgname, digests)
 
-
-
-        # process stream ---------------------------------
-        def have_stream():
-            state = mupdf.Md5()
-            state.init()
-            mupdf.mfz_md5_update(state, imgbuf.m_internal.data, imgbuf.m_internal.len)
-            if imask:
-                maskbuf = JM_BufferFromBytes(imask)
-                fz_md5_update(state, maskbuf.m_internal.data, maskbuf.m_internal.len)
-            mupdf.mfz_md5_final(state, digest)
-            md5_py = bytes(digest)
-            temp = digests.get(md5_py, None)
-            if temp is not None:
-                img_xref = temp
-                ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
-                w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Width'), PDF_NAME('W')))
-                h = mupdf.mdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
-                return have_xref()
-            image = mupdf.mfz_new_image_from_buffer(imgbuf)
-            w = image.w()
-            h = image.h()
-            if imask:
-                return have_imask()
-            if alpha==0:
-                return have_image()
-            pix = mupdf.mfz_get_pixmap_from_image(
-                    image,
-                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
-                    mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
-                    0,
-                    0,
-                    )
-            if not pix.alpha():
-                return have_image()
-            pix = mupdf.mfz_get_pixmap_from_image(
-                    image,
-                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
-                    mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
-                    0,
-                    0,
-                    )
-            pm = mupdf.mfz_convert_pixmap(
-                    pix,
-                    mupdf.Colorspace(0),
-                    mupdf.Colorspace(0),
-                    mupdf.DefaultColorspaces(0),
-                    fz_default_color_params,
-                    1,
-                    );
-            pm.m_internal.alpha = 0
-            pm.m_internal.colorspace = 0
-            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
-            zimg = mupdf.mfz_new_image_from_pixmap(pix, mask)
-            image = zimg
-            return have_image()
-
-        def have_imask():
-            cbuf1 = mupdf.mfz_compressed_image_buffer(image)
-            if not cbuf1.m_internal:
-                THROWMSG("cannot mask uncompressed image")
-            bpc = image.bpc()
-            colorspace = image.colorspace()
-            xres, yres = mupdf.mfz_image_resolution(image)
-            mask = mupdf.mfz_new_image_from_buffer(maskbuf)
-            zimg = mupdf.mfz_new_image_from_compressed_buffer(
-                    w, h,
-                    bpc, colorspace, xres, yres, 1, 0, NULL,
-                    NULL, cbuf1, mask
-                    )
-            freethis = image
-            image = zimg
-            return have_image()
-
-        def have_image():
-            ref =  mupdf.mpdf_add_image(pdf, image)
-            if oc:
-                JM_add_oc_object(pdf, ref, oc)
-            img_xref = mupdf.mpdf_to_num(ref)
-            digests[md5_py] = img_xref
-            rc_digest = 1
-            return have_xref()
-
-        def have_xref():
-            resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
-            if not resources.m_internal:
-                resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
-            xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
-            if not xobject.m_internal:
-                xobject = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('XObject'), 2)
-            mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
-            mupdf.mpdf_dict_puts(xobject, _imgname, ref);
-            nres = mupdf.mfz_new_buffer(50)
-            mupdf.mfz_append_printf(gctx, nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
-            JM_insert_contents(pdf, page.obj(), nres, overlay)
-
-            if rc_digest:
-                return img_xref, digests
-            else:
-                return img_xref, None
-
+        jlib.log('calling self._pdf_page()')
         page = self._pdf_page()
         pdf = page.doc()
         w = width
@@ -5906,7 +5807,344 @@ class Page:
         #PyObject *md5_py = NULL, *temp;
         template = "\nq\n%g %g %g %g %g %g cm\n/%s Do\nQ\n"
 
+        do_process_pixmap = 1
+        do_process_stream = 1
+        do_have_imask = 1
+        do_have_image = 1
+        do_have_xref = 1
+
+        jlib.log('{xref=}')
+
         if xref > 0:
+            jlib.log(' ')
+            ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
+            w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(ref, PDF_NAME('Width'), PDF_NAME('W')))
+            h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(gctx, ref, PDF_NAME('Height'), PDF_NAME('H')))
+            if w + h == 0:
+                THROWMSG("xref is no image");
+            #goto have_xref()
+            do_process_pixmap = 0
+            do_process_stream = 0
+            do_have_imask = 0
+            do_have_image = 0
+
+        else:
+            jlib.log('{stream=}')
+
+            if stream:
+                jlib.log(' ')
+                imgbuf = JM_BufferFromBytes(stream)
+                jlib.log(' ')
+                do_process_pixmap = 0
+            elif filename:
+                imgbuf = mupdf.mfz_read_file(filename)
+                jlib.log('fz_read_file() => {imgbuf=}')
+                #goto have_stream()
+                do_process_pixmap = 0
+
+        if do_process_pixmap:
+            # process pixmap ---------------------------------
+            jlib.log('{pixmap.this=}')
+            arg_pix = pixmap.this
+            w = arg_pix.w
+            h = arg_pix.h
+            digest = mupdf.mfz_md5_pixmap(arg_pix)
+            state.md5_py = digest
+            temp = digests.get(state.md5_py, None)
+            if temp is not None:
+                img_xref = temp
+                ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
+                jlib.log('pdf_new_indirect() => {ref=}')
+                #goto have_xref()
+                do_process_stream = 0
+                do_have_imask = 0
+                do_have_image = 0
+            else:
+                jlib.log('{arg_pix.alpha()=}')
+                if arg_pix.alpha() == 0:
+                    jlib.log('calling fz_new_image_from_pixmap')
+                    state.image = mupdf.mfz_new_image_from_pixmap(arg_pix, mupdf.Image(0))
+                    jlib.log('fz_new_image_from_pixmap() => {state.image=}')
+                else:
+                    jlib.log('calling fz_convert_pixmap')
+                    pm = mupdf.mfz_convert_pixmap(
+                            arg_pix,
+                            mupdf.Colorspace(0),
+                            mupdf.Colorspace(0),
+                            mupdf.DefaultColorspaces(0),
+                            mupdf.ColorParams(),
+                            1,
+                            )
+                    pm.alpha = 0;
+                    pm.colorspace = NULL;
+                    mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
+                    state.image = mupdf.mfz_new_image_from_pixmap(arg_pix, mask)
+                jlib.log(' ')
+                #goto have_image()
+                do_process_stream = 0
+                do_have_imask = 0
+
+        if do_process_stream:
+            # process stream ---------------------------------
+            jlib.log('have_stream')
+            state = mupdf.Md5()
+            mupdf.mfz_md5_update(state, imgbuf.m_internal.data, imgbuf.m_internal.len)
+            if imask:
+                maskbuf = JM_BufferFromBytes(imask)
+                fz_md5_update(state, maskbuf.m_internal.data, maskbuf.m_internal.len)
+            digest = state.md5_final2()
+            state.md5_py = bytes(digest)
+            jlib.log('{state.md5_py=}')
+            temp = digests.get(state.md5_py, None)
+            if temp is not None:
+                img_xref = temp
+                ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
+                w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Width'), PDF_NAME('W')))
+                h = mupdf.mdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
+                #goto have_xref()
+                do_have_imask = 0
+                do_have_image = 0
+            else:
+                state.image = mupdf.mfz_new_image_from_buffer(imgbuf)
+                jlib.log('fz_new_image_from_buffer() => {state.image=}')
+                w = state.image.w()
+                h = state.image.h()
+                if imask:
+                    jlib.log('return have_imask()')
+                    #goto have_imask()
+                else:
+                    if alpha==0:
+                        jlib.log(' return have_image()')
+                        #goto have_image()
+                        do_have_imask = 0
+                    else:
+                        pix, w, h = mupdf.mfz_get_pixmap_from_image(
+                                state.image,
+                                mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                                mupdf.Matrix(state.image.w(), 0, 0, state.image.h(), 0, 0),
+                                )
+                        if not pix.alpha():
+                            jlib.log(' return have_image()')
+                            #goto have_image()
+                            do_have_imask = 0
+                        else:
+                            pix = mupdf.mfz_get_pixmap_from_image(
+                                    state.image,
+                                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                                    mupdf.Matrix(state.image.w(), 0, 0, state.image.h(), 0, 0),
+                                    0,
+                                    0,
+                                    )
+                            pm = mupdf.mfz_convert_pixmap(
+                                    pix,
+                                    mupdf.Colorspace(0),
+                                    mupdf.Colorspace(0),
+                                    mupdf.DefaultColorspaces(0),
+                                    fz_default_color_params,
+                                    1,
+                                    );
+                            pm.m_internal.alpha = 0
+                            pm.m_internal.colorspace = 0
+                            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
+                            zimg = mupdf.mfz_new_image_from_pixmap(pix, mask)
+                            state.image = zimg
+                            #goto have_image()
+                            do_have_imask = 0
+
+        if do_have_imask:
+            jlib.log(' ')
+            cbuf1 = mupdf.mfz_compressed_image_buffer(state.image)
+            if not cbuf1.m_internal:
+                THROWMSG("cannot mask uncompressed image")
+            bpc = state.image.bpc()
+            colorspace = state.image.colorspace()
+            xres, yres = mupdf.mfz_image_resolution(state.image)
+            mask = mupdf.mfz_new_image_from_buffer(maskbuf)
+            zimg = mupdf.mfz_new_image_from_compressed_buffer(
+                    w, h,
+                    bpc, colorspace, xres, yres, 1, 0, NULL,
+                    NULL, cbuf1, mask
+                    )
+            freethis = state.image
+            state.image = zimg
+            #goto have_image()
+
+        if do_have_image:
+            jlib.log('{state.image=}')
+            ref =  mupdf.mpdf_add_image(pdf, state.image)
+            jlib.log(' {oc=}')
+            if oc:
+                JM_add_oc_object(pdf, ref, oc)
+            img_xref = mupdf.mpdf_to_num(ref)
+            jlib.log(' {img_xref=} {state.md5_py=}')
+            digests[state.md5_py] = img_xref
+            rc_digest = 1
+            jlib.log(' return have_xref()')
+
+        if do_have_xref:
+            jlib.log(' ')
+            resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+            if not resources.m_internal:
+                resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
+            xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
+            if not xobject.m_internal:
+                xobject = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('XObject'), 2)
+            mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
+            mupdf.mpdf_dict_puts(xobject, _imgname, ref);
+            nres = mupdf.mfz_new_buffer(50)
+            mupdf.mfz_append_printf(gctx, nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
+            JM_insert_contents(pdf, page.obj(), nres, overlay)
+
+        if rc_digest:
+            return img_xref, digests
+        else:
+            return img_xref, None
+
+
+
+    def _insert_imageOLD(self, filename=None, pixmap=None, stream=None, imask=None, clip=None, overlay=1, rotate=0, keep_proportion=1, oc=0, width=0, height=0, xref=0, alpha=-1, _imgname=None, digests=None):
+
+        jlib.log('{filename=} {pixmap=} {stream=} {imask=} {clip=} {overlay=} {rotate=} {keep_proportion=} {oc=} {width=} {height=} {xref=} {alpha=} {_imgname=} {digests=}')
+        #return _fitz.Page__insert_image(self, filename, pixmap, stream, imask, clip, overlay, rotate, keep_proportion, oc, width, height, xref, alpha, _imgname, digests)
+
+        #image = mupdf.Image()
+        class State:
+            pass
+        state = State()
+        state.stream = None
+        state.image = None
+        state.md5_py = None
+        #jlib.log('{image.m_internal=}')
+        # process stream ---------------------------------
+        def have_stream():
+            jlib.log('have_stream')
+            state = mupdf.Md5()
+            mupdf.mfz_md5_update(state, imgbuf.m_internal.data, imgbuf.m_internal.len)
+            if imask:
+                maskbuf = JM_BufferFromBytes(imask)
+                fz_md5_update(state, maskbuf.m_internal.data, maskbuf.m_internal.len)
+            #mupdf.mfz_md5_final(state, digest)
+            digest = state.md5_final2()
+            state.md5_py = bytes(digest)
+            jlib.log('{state.md5_py=}')
+            temp = digests.get(state.md5_py, None)
+            if temp is not None:
+                img_xref = temp
+                ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
+                w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Width'), PDF_NAME('W')))
+                h = mupdf.mdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
+                return have_xref()
+            state.image = mupdf.mfz_new_image_from_buffer(imgbuf)
+            jlib.log('fz_new_image_from_buffer() => {state.image=}')
+            w = state.image.w()
+            h = state.image.h()
+            if imask:
+                jlib.log('return have_imask()')
+                return have_imask()
+            if alpha==0:
+                jlib.log(' return have_image()')
+                return have_image()
+            pix, w, h = mupdf.mfz_get_pixmap_from_image(
+                    state.image,
+                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                    mupdf.Matrix(state.image.w(), 0, 0, state.image.h(), 0, 0),
+                    )
+            if not pix.alpha():
+                jlib.log(' return have_image()')
+                return have_image()
+            pix = mupdf.mfz_get_pixmap_from_image(
+                    state.image,
+                    mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
+                    mupdf.Matrix(state.image.w(), 0, 0, state.image.h(), 0, 0),
+                    0,
+                    0,
+                    )
+            pm = mupdf.mfz_convert_pixmap(
+                    pix,
+                    mupdf.Colorspace(0),
+                    mupdf.Colorspace(0),
+                    mupdf.DefaultColorspaces(0),
+                    fz_default_color_params,
+                    1,
+                    );
+            pm.m_internal.alpha = 0
+            pm.m_internal.colorspace = 0
+            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
+            zimg = mupdf.mfz_new_image_from_pixmap(pix, mask)
+            state.image = zimg
+            return have_image()
+
+        def have_imask():
+            jlib.log(' ')
+            cbuf1 = mupdf.mfz_compressed_image_buffer(state.image)
+            if not cbuf1.m_internal:
+                THROWMSG("cannot mask uncompressed image")
+            bpc = state.image.bpc()
+            colorspace = state.image.colorspace()
+            xres, yres = mupdf.mfz_image_resolution(state.image)
+            mask = mupdf.mfz_new_image_from_buffer(maskbuf)
+            zimg = mupdf.mfz_new_image_from_compressed_buffer(
+                    w, h,
+                    bpc, colorspace, xres, yres, 1, 0, NULL,
+                    NULL, cbuf1, mask
+                    )
+            freethis = state.image
+            state.image = zimg
+            return have_image()
+
+        def have_image():
+            jlib.log('{state.image=}')
+            ref =  mupdf.mpdf_add_image(pdf, state.image)
+            jlib.log(' {oc=}')
+            if oc:
+                JM_add_oc_object(pdf, ref, oc)
+            img_xref = mupdf.mpdf_to_num(ref)
+            jlib.log(' {img_xref=} {state.md5_py=}')
+            digests[state.md5_py] = img_xref
+            rc_digest = 1
+            jlib.log(' return have_xref()')
+            return have_xref()
+
+        def have_xref():
+            jlib.log(' ')
+            resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
+            if not resources.m_internal:
+                resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
+            xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
+            if not xobject.m_internal:
+                xobject = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('XObject'), 2)
+            mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
+            mupdf.mpdf_dict_puts(xobject, _imgname, ref);
+            nres = mupdf.mfz_new_buffer(50)
+            mupdf.mfz_append_printf(gctx, nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
+            JM_insert_contents(pdf, page.obj(), nres, overlay)
+
+            if rc_digest:
+                return img_xref, digests
+            else:
+                return img_xref, None
+
+        jlib.log('calling self._pdf_page()')
+        page = self._pdf_page()
+        pdf = page.doc()
+        w = width
+        h = height
+        #fz_pixmap *pm = NULL;
+        #fz_pixmap *pix = NULL;
+        #fz_image *mask = NULL, *zimg = NULL, *image = NULL, *freethis = NULL;
+        #pdf_obj *resources, *xobject, *ref;
+        #fz_buffer *nres = NULL,  *imgbuf = NULL, *maskbuf = NULL;
+        #fz_compressed_buffer *cbuf1 = NULL;
+        #int xres, yres, bpc,
+        img_xref = xref
+        rc_digest = 0
+        #unsigned char digest[16];
+        #PyObject *md5_py = NULL, *temp;
+        template = "\nq\n%g %g %g %g %g %g cm\n/%s Do\nQ\n"
+
+        jlib.log('{xref=}')
+        if xref > 0:
+            jlib.log(' ')
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
             w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(ref, PDF_NAME('Width'), PDF_NAME('W')))
             h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(gctx, ref, PDF_NAME('Height'), PDF_NAME('H')))
@@ -5914,27 +6152,38 @@ class Page:
                 THROWMSG("xref is no image");
             return have_xref()
 
+        jlib.log('{stream=}')
         if stream:
+            jlib.log(' ')
             imgbuf = JM_BufferFromBytes(stream)
+            jlib.log(' ')
             return have_stream()
+        jlib.log('{filename=}')
         if filename:
             imgbuf = mupdf.mfz_read_file(filename)
+            jlib.log('fz_read_file() => {imgbuf=}')
             return have_stream()
 
         # process pixmap ---------------------------------
+        jlib.log('{pixmap.this=}')
         arg_pix = pixmap.this
         w = arg_pix.w
         h = arg_pix.h
         digest = mupdf.mfz_md5_pixmap(arg_pix)
-        md5_py = digest
-        temp = digests.get(md5_py, None)
+        state.md5_py = digest
+        temp = digests.get(state.md5_py, None)
         if temp is not None:
             img_xref = temp
             ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
+            jlib.log('pdf_new_indirect() => {ref=}')
             return have_xref()
+        jlib.log('{arg_pix.alpha()=}')
         if arg_pix.alpha() == 0:
-            image = mupdf.mfz_new_image_from_pixmap(arg_pix, mupdf.Image(0))
+            jlib.log('calling fz_new_image_from_pixmap')
+            state.image = mupdf.mfz_new_image_from_pixmap(arg_pix, mupdf.Image(0))
+            jlib.log('fz_new_image_from_pixmap() => {state.image=}')
         else:
+            jlib.log('calling fz_convert_pixmap')
             pm = mupdf.mfz_convert_pixmap(
                     arg_pix,
                     mupdf.Colorspace(0),
@@ -5946,7 +6195,8 @@ class Page:
             pm.alpha = 0;
             pm.colorspace = NULL;
             mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
-            image = mupdf.mfz_new_image_from_pixmap(arg_pix, mask)
+            state.image = mupdf.mfz_new_image_from_pixmap(arg_pix, mask)
+        jlib.log(' ')
         return have_image()
 
     def _load_annot(self, name, xref):
