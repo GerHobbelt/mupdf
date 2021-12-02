@@ -1878,6 +1878,16 @@ classextras = ClassExtras(
 
         fz_image = ClassExtra(
                 accessors=True,
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        f'''
+                        {{
+                            m_internal = nullptr;
+                        }}
+                        ''',
+                        '/* Construct with m_internal set to null. */',
+                        )
+                    ],
                 ),
 
         fz_irect = ClassExtra(
@@ -1941,6 +1951,18 @@ classextras = ClassExtras(
                         ''',
                         '/* Default constructor calls md5_init(). */',
                         )
+                    ],
+                methods_extra = [
+                    ExtraMethod( 'std::vector<unsigned char>', 'md5_final2()',
+                        f'''
+                        {{
+                            std::vector<unsigned char>  ret(16);
+                            {rename.function_call( 'fz_md5_final')}( &m_internal, &ret[0]);
+                            return ret;
+                        }}
+                        ''',
+                        f'/* Wrapper for fz_md5_final() that returns the digest by value. */',
+                        ),
                     ],
                 ),
 
