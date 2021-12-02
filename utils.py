@@ -304,6 +304,7 @@ def insert_image(page, rect, **kwargs):
     keep_proportion = bool(kwargs.get("keep_proportion", True))
     overlay = bool(kwargs.get("overlay", True))
 
+    jlib.log('{xref=} {filename=} {stream=} {pixmap=}')
     if xref == 0 and (bool(filename) + bool(stream) + bool(pixmap) != 1):
         raise ValueError("xref=0 needs exactly one of filename, pixmap, stream")
 
@@ -606,15 +607,18 @@ def get_image_info(page: Page, hashes: bool = False, xrefs: bool = False) -> lis
     if not doc.is_pdf:
         xrefs = False
     imginfo = getattr(page, "_image_info", None)
+    jlib.log('{imginfo=}')
     if imginfo and not xrefs:
         return imginfo
     if not imginfo:
         tp = page.get_textpage(flags=TEXT_PRESERVE_IMAGES)
         imginfo = tp.extractIMGINFO(hashes=hashes)
+        jlib.log('{imginfo=}')
         del tp
         if hashes:
             page._image_info = imginfo
     if not xrefs or not doc.is_pdf:
+        jlib.log('returning {imginfo=}')
         return imginfo
     imglist = page.get_images()
     digests = {}
