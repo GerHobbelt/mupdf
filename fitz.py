@@ -2379,7 +2379,7 @@ class Document:
         'page_id' is either a 0-based page number or a tuple (chapter, pno),
         with chapter number and page number within that chapter.
         """
-
+        jlib.log('@@@ loadPage()')
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         if page_id is None:
@@ -2387,6 +2387,7 @@ class Document:
         if page_id not in self:
             raise ValueError("page not in document")
         if type(page_id) is int and page_id < 0:
+            jlib.log('handling -ve {page_id=}')
             np = self.page_count
             while page_id < 0:
                 page_id += np
@@ -2864,13 +2865,18 @@ class Document:
     @property
     def isPDF(self):
         """Check for PDF."""
-        if self.isClosed:
-            raise ValueError("document closed")
+        jlib.log('.isPDF')
         if isinstance(self.this, mupdf.PdfDocument):
             return True
-        p = self.this.specifics()
-        pp = self.this.specifics()
-        return True if pp.m_internal else False
+        return True if self.this.specifics().m_internal else False
+        #if self.isClosed:
+        #    raise ValueError("document closed")
+        #if isinstance(self.this, mupdf.PdfDocument):
+        #    return True
+        #jlib.log('calling self.this.specifics()')
+        #p = self.this.specifics()
+        #pp = self.this.specifics()
+        #return True if pp.m_internal else False
 
     @property
     def lastLocation(self):
@@ -5769,8 +5775,11 @@ class Page:
         #return _fitz.Page__get_textpage(self, clip, flags, matrix)
         page = self.this
         options = mupdf.StextOptions(flags)
+        jlib.log('{=clip flags matrix options}')
         rect = JM_rect_from_py(clip)
         ctm = JM_matrix_from_py(matrix)
+        jlib.log('{=options rect ctm}')
+        jlib.log('{=rect.x0-(-2147483648.0) rect.y0 rect.x1 rect.y1}')
         tpage = mupdf.StextPage(rect)
         dev = mupdf.mfz_new_stext_device(tpage, options)
         if isinstance(page, mupdf.Page):
@@ -5781,6 +5790,9 @@ class Page:
             assert 0, f'Unrecognised type(page)={type(page)}'
         mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
+        jlib.log('{=tpage tpage.m_internal.first_block tpage.m_internal.last_block}')
+        for b in tpage:
+            jlib.log('{b=}')
         return tpage
 
     def _insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
@@ -6034,6 +6046,7 @@ class Page:
             if not resources.m_internal:
                 jlib.log('not resources.m_internal calling pdf_dict_put_dict()')
                 resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
+            jlib.log('calling mpdf_dict_get() XObject')
             xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
             if not xobject.m_internal:
                 jlib.log('not xobject.m_internal calling pdf_dict_put_dict()')
@@ -6041,11 +6054,14 @@ class Page:
             jlib.log('calling calc_image_matrix() {=w h clip rotate keep_proportion}')
             mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
             jlib.log('{mat=}')
+            jlib.log('calling mpdf_dict_puts {=_imgname ref}')
             mupdf.mpdf_dict_puts(xobject, _imgname, ref);
             nres = mupdf.mfz_new_buffer(50)
             #mupdf.mfz_append_printf(nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
             # fixme: this does not use fz_append_printf()'s special handling of %g etc.
-            mupdf.mfz_append_pdf_string(nres, template % (mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname))
+            s = template % (mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
+            jlib.log('calling fz_append_pdf_string() with {s=}')
+            mupdf.mfz_append_pdf_string(nres, s)
             JM_insert_contents(pdf, page.obj(), nres, overlay)
 
         if rc_digest:
@@ -7735,7 +7751,7 @@ class Page:
             if old_rotation != 0:
                 self.set_rotation(old_rotation)
         #textpage.parent = weakref.proxy(self)
-        #jlib.log('{textpage=}')
+        jlib.log('{textpage=}')
         textpage = TextPage(textpage)
         #jlib.log('{textpage=}')
         return textpage
