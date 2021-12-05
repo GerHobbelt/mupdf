@@ -46,6 +46,7 @@ ifneq ($(verbose),yes)
   QUIET_CXX = @ echo "    CXX $@" ;
   QUIET_GEN = @ echo "    GEN $@" ;
   QUIET_LINK = @ echo "    LINK $@" ;
+  QUIET_HOSTLINK = @ echo "    HOSTLINK $@" ;
   QUIET_RM = @ echo "    RM $@" ;
   QUIET_TAGS = @ echo "    TAGS $@" ;
   QUIET_WINDRES = @ echo "    WINDRES $@" ;
@@ -62,6 +63,8 @@ AR_CMD = $(QUIET_AR) $(MKTGTDIR) ; $(AR) cr $@ $^
 ifdef RANLIB
   RANLIB_CMD = $(QUIET_RANLIB) $(RANLIB) $@
 endif
+HOSTCC ?= $(CC)
+HOSTLINK_CMD = $(QUIET_HOSTLINK) $(MKTGTDIR) ; $(HOSTCC) -o $@ $^
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 TAGS_CMD = $(QUIET_TAGS) ctags -R --c-kinds=+p --exclude=platform/python --exclude=platform/c++
 WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
@@ -82,6 +85,9 @@ endif
 $(OUT)/%.a :
 	$(AR_CMD)
 	$(RANLIB_CMD)
+
+$(OUT)/scripts/hexdump.exe: scripts/hexdump.c
+	$(HOSTLINK_CMD)
 
 $(OUT)/%.exe: %.c
 	$(LINK_CMD)
@@ -448,7 +454,7 @@ java-clean:
 	$(MAKE) -C platform/java build=$(build) clean
 
 wasm:
-	$(MAKE) -C platform/wasm
+	$(MAKE) -C platform/wasm HOSTCC=$(CC)
 
 extract-test:
 	$(MAKE) debug
