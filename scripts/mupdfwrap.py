@@ -369,7 +369,7 @@ Building Python bindings:
 
         Windows:
             > py -m venv pylocal
-            > pylocal\Scripts\activate
+            > pylocal\\Scripts\\activate
             (pylocal) > pip install libclang pyqt5
             (pylocal) > cd ...\mupdf
             (pylocal) > python setup.py install
@@ -874,7 +874,7 @@ class ClangInfo:
         if g_openbsd:
             clang_bin = glob.glob( f'/usr/local/bin/clang-{version}')
             if not clang_bin:
-                log('Cannot find {clang_bin=}')
+                log('Cannot find {clang_bin=}', 1)
                 return
             clang_bin = clang_bin[0]
             self.clang_version = version
@@ -2589,6 +2589,7 @@ classextras = ClassExtras(
                 constructor_prefixes = [
                     'pdf_open_document',
                     'pdf_create_document',
+                    'pdf_document_from_fz_document',
                     ],
                 methods_extra = [
                     # This duplicates our creation of extra lookup_metadata()
@@ -3318,7 +3319,7 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
     ret = get_args_cache.get( key)
     if not verbose and g_show_details(cursor.spelling):
         verbose = True
-        jlib.log('Verbose because {cursor.spelling=}')
+        #jlib.log('Verbose because {cursor.spelling=}')
     if ret is None:
         ret = []
         i = 0
@@ -3397,7 +3398,7 @@ def get_args( tu, cursor, include_fz_context=False, skip_first_alt=False, verbos
             arg =  Arg(arg_cursor, name, separator, alt, out_param)
             ret.append(arg)
             if verbose:
-                log( '*** appending {arg=}')
+                log( 'Appending {arg=}')
             separator = ', '
 
         get_args_cache[ key] = ret
@@ -3647,35 +3648,35 @@ def make_outparam_helper_csharp(
     # and they are generally binary data so cannot be handled generically.
     #
     if is_pointer_to(cursor.result_type, 'unsigned char'):
-        jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because it returns unsigned char*.')
+        jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because it returns unsigned char*.', 1)
         return
     for arg in get_args( tu, cursor):
         if is_pointer_to(arg.cursor.type, 'unsigned char'):
-            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char* arg.')
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char* arg.', 1)
             return
         if is_pointer_to_pointer_to(arg.cursor.type, 'unsigned char'):
-            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char** arg.')
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has unsigned char** arg.', 1)
             return
         if arg.cursor.type.get_array_size() >= 0:
-            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has array arg.')
+            jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has array arg.', 1)
             return
         if arg.cursor.type.kind == clang.cindex.TypeKind.POINTER:
             pointee = arg.cursor.type.get_pointee().get_canonical()
             if pointee.kind==clang.cindex.TypeKind.ENUM:
-                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has enum out-param arg.')
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has enum out-param arg.', 1)
                 return
             if pointee.kind == clang.cindex.TypeKind.FUNCTIONPROTO:
-                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has fn-ptr arg.')
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has fn-ptr arg.', 1)
                 return
             if pointee.is_const_qualified():
                 # Not an out-param.
-                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has pointer-to-const arg.')
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has pointer-to-const arg.', 1)
                 return
             if arg.cursor.type.get_pointee().spelling == 'FILE':
-                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has FILE* arg.')
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has FILE* arg.', 1)
                 return
             if pointee.spelling == 'void':
-                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has void* arg.')
+                jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has void* arg.', 1)
                 return
 
     if make_csharp_wrapper:
@@ -4315,7 +4316,7 @@ def make_function_wrapper_class_aware(
     debug = (fnname == 'pdf_page_write')
     for arg in get_args( tu, fn_cursor):
         if debug:
-            log( 'Looking at {struct_name=} {fnname=} {arg=}')
+            log( 'Looking at {struct_name=} {fnname=} {arg=}', 1)
         decl_h += comma
         decl_cpp += comma
         if arg.out_param:
@@ -4334,7 +4335,7 @@ def make_function_wrapper_class_aware(
             if not arg.out_param and not extras.pod:
                 const = 'const '
             if extras.pod == 'none':
-                jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}')
+                jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}', 1)
                 return
             decl_h +=   f'{const}{rename.class_(arg.alt.type.spelling)}& '
             decl_h += f'{arg.name}'
@@ -4427,11 +4428,16 @@ def make_function_wrapper_class_aware(
         log( '*** warning: {decl_h}: Not able to return wrapping class {return_type}'
                 ' from {return_cursor.spelling}'
                 ' because {return_type} is not copyable.'
+                ,
+                1
                 )
     if warning_no_raw_constructor:
         log( '*** warning: {decl_h}: Not able to return wrapping class {return_type}'
                 ' from {return_cursor.spelling}'
-                ' because {return_type} has no raw constructor.')
+                ' because {return_type} has no raw constructor.'
+                ,
+                1
+                )
 
     out_h.write( '\n')
     out_h.write( f'    /* {comment} */\n')
@@ -4451,6 +4457,11 @@ def make_function_wrapper_class_aware(
 
     out_cpp.write( f'{{\n')
     return_void = (fn_cursor.result_type.spelling == 'void')
+
+    # Write trace code.
+    out_cpp.write( f'    if (s_trace) {{\n')
+    out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling mupdf::{rename.function(fnname)}()\\n";\n')
+    out_cpp.write( f'    }}\n')
 
     def get_keep_drop(arg):
         name = clip( arg.alt.type.spelling, 'struct ')
@@ -5548,6 +5559,12 @@ def class_copy_constructor(
         out_cpp.write( f'FZ_FUNCTION {classname}::{classname}(const {classname}& rhs)\n')
         out_cpp.write( f': m_internal({cast}{rename.function_call(keep_name)}(rhs.m_internal))\n')
         out_cpp.write( '{\n')
+
+        # Write trace code.
+        out_cpp.write( f'    if (s_trace) {{\n')
+        out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {rename.function_call(drop_name)}(this->m_internal) and {rename.function_call(keep_name)}(rhs.m_internal)\\n";\n')
+        out_cpp.write( f'    }}\n')
+
         if has_refs( tu, struct_cursor.type):
             out_cpp.write( '    if (s_check_refs)\n')
             out_cpp.write( '    {\n')
@@ -5630,6 +5647,11 @@ def class_write_method_body(
     out_cpp.write( f'{{\n')
     return_void = (fn_cursor.result_type.spelling == 'void')
 
+    # Write trace code.
+    out_cpp.write( f'    if (s_trace) {{\n')
+    out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling mupdf::{rename.function(fnname)}()\\n";\n')
+    out_cpp.write( f'    }}\n')
+
     # Write function call.
     if constructor:
         if extras.pod:
@@ -5672,25 +5694,40 @@ def class_write_method_body(
         sep = ', '
     out_cpp.write( f');\n')
 
+    if g_show_details(fnname):
+        jlib.log('{=wrap_return}')
+    refcounted_return = False
     if wrap_return == 'pointer' and has_refs( tu, return_cursor.type):
+        refcounted_return = True
+        refcounted_return_struct_cursor = return_cursor
+    elif constructor and has_refs( tu, struct_cursor.type):
+        refcounted_return = True
+        refcounted_return_struct_cursor = struct_cursor
+    if refcounted_return:
         # This MuPDF function returns pointer to a struct which uses reference
         # counting. If the function returns a borrowed reference, we need
         # to increment its reference count before passing it to our wrapper
         # class's constructor.
         #
         #jlib.log('Function returns pointer to {return_cursor=}')
-        return_struct_name = clip(return_cursor.spelling, 'struct ')
+        return_struct_name = clip(refcounted_return_struct_cursor.spelling, 'struct ')
         if return_struct_name.startswith('fz_'):
             prefix = 'fz_'
         elif return_struct_name.startswith('pdf_'):
             prefix = 'pdf_'
         else:
             prefix = None
+        if g_show_details(fnname):
+            jlib.log('{=prefix}')
         if prefix:
-            for i in ('new', 'create', 'find', 'load', 'open', 'keep'):
+            for i in ('new', 'create', 'find', 'load', 'open', 'keep', 'read'):
                 if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
+                    if g_show_details(fnname):
+                        jlib.log('Assuming that {fnname=} returns a kept reference.')
                     break
             else:
+                if g_show_details(fnname):
+                    jlib.log('{=classname fnname constructor} Assuming that {fnname=} returns a borrowed reference.')
                 # This function returns a borrowed reference.
                 suffix = return_struct_name[ len(prefix):]
                 keep_fn = f'{prefix}keep_{suffix}'
@@ -6025,7 +6062,7 @@ def class_custom_method( register_fn_use, classname, extramethod, out_h, out_cpp
     # Remove any default arg values from <name_args>.
     name_args_no_defaults = re.sub('= *[^(][^),]*', '', name_args)
     if name_args_no_defaults != name_args:
-        log('have changed {name_args=} to {name_args_no_defaults=}')
+        log('have changed {name_args=} to {name_args_no_defaults=}', 1)
     out_cpp.write( f'FZ_FUNCTION {return_space}{classname}::{name_args_no_defaults}')
     out_cpp.write( textwrap.dedent(extramethod.body))
     out_cpp.write( f'\n')
@@ -6552,6 +6589,8 @@ def class_wrapper(
         #
         temp_out_h = io.StringIO()
         temp_out_cpp = io.StringIO()
+        if g_show_details(fnname):
+            jlib.log('Creating constructor for {=classname fnname}')
         try:
             class_write_method(
                     tu,
@@ -7013,9 +7052,9 @@ def cpp_source(
                             os.path.abspath( 'platform/c++/implementation/classes2.cpp'),
                             ):
                         cr = False
-                    jlib.log('calling update_file_regress() check_regress={cr}: {self.filename=}')
+                    jlib.log('calling update_file_regress() check_regress={cr}: {self.filename=}', 1)
                     e = update_file_regress( text, self.filename, check_regression=cr)
-                    jlib.log('update_file_regress() returned => {e}')
+                    jlib.log('update_file_regress() returned => {e}', 1)
                     if e:
                         jlib.log('update_file_regress() => {e=}')
                         self.regressions = True
@@ -7185,6 +7224,8 @@ def cpp_source(
 
             #include <string.h>
 
+            static const char* s_trace_s = getenv("MUPDF_trace");
+            static bool s_trace = (s_trace_s && !strcmp(s_trace_s, "1")) ? true : false;
             '''))
 
     out_cpps.classes2.write(
@@ -7204,6 +7245,8 @@ def cpp_source(
 
             #include <string.h>
 
+            static const char* s_trace_s = getenv("MUPDF_trace");
+            static bool s_trace = (s_trace_s && !strcmp(s_trace_s, "1")) ? true : false;
             '''))
 
     namespace = 'mupdf'
@@ -8771,7 +8814,7 @@ def build( build_dirs, swig, args):
 
     for action in actions:
         with jlib.LogPrefixScope( f'{action}: '):
-            jlib.log( '{action=}')
+            jlib.log( '{action=}', 1)
             if action == '.':
                 log('Ignoring build actions after "." in {actions!r}')
                 break
