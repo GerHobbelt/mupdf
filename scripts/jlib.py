@@ -47,7 +47,6 @@ def expand_nv( text, caller=1):
     If <expression> ends with '=', this character is removed and we prefix the
     result with <expression>=.
 
-
     >>> x = 45
     >>> y = 'hello'
     >>> expand_nv( 'foo {x} {y=}')
@@ -60,6 +59,15 @@ def expand_nv( text, caller=1):
     >>> y = 'hello'
     >>> expand_nv( 'foo {x} {y!r=}')
     "foo 45 y='hello'"
+
+    If <expression> starts with '=', this character is removed and we show each
+    space-separated item in the remaining text as though it was appended with
+    '='.
+
+    >>> foo = 45
+    >>> y = 'hello'
+    >>> expand_nv('{=foo y}')
+    'foo=45 y=hello'
     '''
     if isinstance( caller, int):
         frame_record = inspect.stack()[ caller]
@@ -87,7 +95,14 @@ def expand_nv( text, caller=1):
                     if close < 0:
                         raise Exception( 'After "{" at offset %s, cannot find closing "}". text is: %r' % (
                                 pos, text))
-                    yield pre, text[ pos+1 : close]
+                    text2 = text[ pos+1 : close]
+                    if text2.startswith('='):
+                        text2 = text2[1:]
+                        for i, text3 in enumerate(text2.split()):
+                            pre2 = ' ' if i else pre
+                            yield pre2, text3 + '='
+                    else:
+                        yield pre, text[ pos+1 : close]
                     pre = ''
                     pos = close + 1
                 else:
@@ -329,6 +344,8 @@ def log( text, level=0, caller=1, nv=True, out=None, raw=False):
 
     text:
         The text to output.
+    level:
+        Lower values are more verbose.
     caller:
         How many frames to step up to get caller's context when evaluating
         file:line information and/or expressions. Or frame record as returned
@@ -571,7 +588,9 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
         else:
             # No exception; use current backtrace.
             for f in inspect.stack():
-                ff = f[1], f[2], f[3], f[4][0].strip()
+                f4 = f[4]
+                f4 = f[4][0].strip() if f4 else ''
+                ff = f[1], f[2], f[3], f4
                 frames.append(ff)
 
         # If there is a live exception, append frames from point in the try:
