@@ -1426,6 +1426,8 @@ class Document:
             rect, width, height, fontsize: layout reflowable document
             on open (e.g. EPUB). Ignored if n/a.
         """
+        jlib.log('*** Document.__init__(). backtrace is:')
+        jlib.log(jlib.exception_info())
         if not filename or type(filename) is str:
             pass
         else:
@@ -1497,7 +1499,12 @@ class Document:
                     else:
                         THROWMSG("unrecognized file type")
             else:
-                pdf = mupdf.mpdf_create_document()
+                #jlib.log('*** calling mupdf.mpdf_create_document()')
+                #pdf = mupdf.mpdf_create_document()
+                jlib.log('*** calling mupdf.PdfDocument()')
+                pdf = mupdf.PdfDocument()
+                #jlib.log('*** return from mupdf.mpdf_create_document()')
+                jlib.log('*** returning from mupdf.PdfDocument()')
                 jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
                 doc = mupdf.Document(pdf)
                 jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
@@ -1520,7 +1527,7 @@ class Document:
                 self.isEncrypted = True
             else: # we won't init until doc is decrypted
                 self.initData()
-        jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
+        jlib.log('__init__() returning. {=mupdf.mpdf_xref_len(pdf)}')
 
     def _deleteObject(self, xref):
         """Delete object."""
@@ -1590,6 +1597,7 @@ class Document:
     def _embeddedFileGet(self, idx):
         #return _fitz.Document__embeddedFileGet(self, idx)
         doc = self.this
+        jlib.log('*** calling mupdf.mpdf_document_from_fz_document(doc)')
         pdf = mupdf.mpdf_document_from_fz_document(doc)
         names = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer(pdf),
@@ -2052,6 +2060,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
 
+        jlib.log('*** calling self.this.document_from_fz_document()')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
@@ -2868,6 +2877,17 @@ class Document:
         jlib.log('.isPDF')
         if isinstance(self.this, mupdf.PdfDocument):
             return True
+        # Avoid calling self.this.specifics() because it will end up creating
+        # a new PdfDocument which will call pdf_create_document(), which is ok
+        # but a little unnecessary.
+        #
+        jlib.log('isPDF(): {jlib.exception_info()}')
+        if mupdf.ppdf_specifics(self.this.m_internal):
+            ret = True
+        else:
+            ret = False
+        jlib.log('Returning {ret=}')
+        return ret
         return True if self.this.specifics().m_internal else False
         #if self.isClosed:
         #    raise ValueError("document closed")
@@ -3002,6 +3022,7 @@ class Document:
             return 0
         #return _fitz.Document_permissions(self)
         doc =self.this
+        jlib.log('*** calling mupdf.mpdf_document_from_fz_document(doc)')
         pdf = mupdf.mpdf_document_from_fz_document(doc)
 
         # for PDF return result of standard function
@@ -3707,7 +3728,8 @@ class Document:
         '''
         if isinstance(self.this, mupdf.PdfDocument):
             return self.this
-        return self.this.specifics()
+        #return self.this.specifics()
+        return mupdf.PdfDocument(self.this)
 
     def update_stream(self, xref=0, stream=None, new=0):
         """Replace xref stream part."""
@@ -4363,6 +4385,7 @@ class Document:
     def is_repaired(self):
         """Check whether PDF was repaired."""
         #jlib.log('{self.this.count_pages()=}')
+        jlib.log('*** calling self.this.document_from_fz_document()')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
@@ -5831,6 +5854,10 @@ class Page:
         jlib.log('calling self._pdf_page()')
         page = self._pdf_page()
         jlib.log('{=page.m_internal.super.chapter page.m_internal.super.number}')
+        # This will create an empty PdfDocument with a call to
+        # pdf_new_document() then assign page.doc()'s return value to it (which
+        # drop the original empty pdf_document).
+        jlib.log('calling page.doc() (will make call to pdf_new_document()).')
         pdf = page.doc()
         jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
         w = width
@@ -12746,7 +12773,10 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
     Convert any MuPDF document to a PDF
     Returns bytes object containing the PDF, created via 'write' function.
     '''
-    pdfout = mupdf.mpdf_create_document()   # new PDF document
+    #jlib.log('*** calling mupdf.mpdf_create_document()')
+    #pdfout = mupdf.mpdf_create_document()   # new PDF document
+    jlib.log('*** calling mupdf.PdfDocument()')
+    pdfout = mupdf.PdfDocument()
     incr = 1
     s = fp
     e = tp
