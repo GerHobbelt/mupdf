@@ -5732,7 +5732,10 @@ def class_write_method_body(
                 suffix = return_struct_name[ len(prefix):]
                 keep_fn = f'{prefix}keep_{suffix}'
                 #jlib.log('Function assumed to return borrowed reference: {fnname=} => {return_struct_name=} {keep_fn=}')
-                out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
+                if constructor:
+                    out_cpp.write( f'    {rename.function_call(keep_fn)}(this->m_internal);\n')
+                else:
+                    out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
 
     if wrap_return == 'value':
         out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(&temp);\n')
