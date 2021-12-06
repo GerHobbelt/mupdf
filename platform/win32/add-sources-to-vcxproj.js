@@ -316,6 +316,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.c':
     case '.cc':
     case '.c++':
+    case '.cxx':
     case '.cpp':
         base = path.dirname(item);
         if (base === '.') {
@@ -345,7 +346,9 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.h':
     case '.hh':
     case '.h++':
+    case '.hxx':
     case '.hpp':
+    case '.icc':
         base = path.dirname(item);
         if (base === '.') {
           base = '';
