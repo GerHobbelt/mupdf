@@ -304,10 +304,10 @@ def insert_image(page, rect, **kwargs):
     keep_proportion = bool(kwargs.get("keep_proportion", True))
     overlay = bool(kwargs.get("overlay", True))
 
-    jlib.log('{xref=} {filename=} {stream=} {pixmap=} {alpha=}')
-    jlib.log('{filename=} {pixmap=} {stream=} {mask=} {overlay=}'
-            ' {rotate=} {keep_proportion=} {oc=} {width=} {height=}'
-            ' {xref=} {alpha=}')
+    #jlib.log('{xref=} {filename=} {stream=} {pixmap=} {alpha=}')
+    #jlib.log('{filename=} {pixmap=} {stream=} {mask=} {overlay=}'
+    #        ' {rotate=} {keep_proportion=} {oc=} {width=} {height=}'
+    #        ' {xref=} {alpha=}')
     if xref == 0 and (bool(filename) + bool(stream) + bool(pixmap) != 1):
         raise ValueError("xref=0 needs exactly one of filename, pixmap, stream")
 
@@ -356,7 +356,7 @@ def insert_image(page, rect, **kwargs):
 
     digests = doc.InsertedImages
 
-    jlib.log('calling page._insert_image() {stream=}')
+    #jlib.log('calling page._insert_image() {stream=}')
     xref, digests = page._insert_image(
         filename=filename,
         pixmap=pixmap,
@@ -374,7 +374,7 @@ def insert_image(page, rect, **kwargs):
         _imgname=_imgname,
         digests=digests,
     )
-    jlib.log('{xref=} {digests=}')
+    #jlib.log('{xref=} {digests=}')
     if digests != None:
         doc.InsertedImages = digests
 
@@ -605,31 +605,31 @@ def get_image_info(page: Page, hashes: bool = False, xrefs: bool = False) -> lis
         hashes: (bool) include MD5 hash for each image.
         xrefs: (bool) try to find the xref for each image. Sets hashes to true.
     """
-    jlib.log('{=hashes xrefs}')
+    #jlib.log('{=hashes xrefs}')
     doc = page.parent
-    jlib.log('{=doc}')
+    #jlib.log('{=doc}')
     if xrefs and doc.is_pdf:
         hashes = True
-    jlib.log('calling doc.is_pdf()')
+    #jlib.log('calling doc.is_pdf()')
     if not doc.is_pdf:
-        jlib.log('not doc.is_pdf; setting xrefs to false')
+        #jlib.log('not doc.is_pdf; setting xrefs to false')
         xrefs = False
-    jlib.log('calling getattr()')
+    #jlib.log('calling getattr()')
     imginfo = getattr(page, "_image_info", None)
-    jlib.log('{imginfo=}')
+    #jlib.log('{imginfo=}')
     if imginfo and not xrefs:
-        jlib.log('imginfo and not xrefs; returning {imginfo=}')
+        #jlib.log('imginfo and not xrefs; returning {imginfo=}')
         return imginfo
     if not imginfo:
-        jlib.log('{TEXT_PRESERVE_IMAGES=}')
+        #jlib.log('{TEXT_PRESERVE_IMAGES=}')
         tp = page.get_textpage(flags=TEXT_PRESERVE_IMAGES)
         imginfo = tp.extractIMGINFO(hashes=hashes)
-        jlib.log('tp.extractIMGINFO() => {imginfo=}')
+        #jlib.log('tp.extractIMGINFO() => {imginfo=}')
         del tp
         if hashes:
             page._image_info = imginfo
     if not xrefs or not doc.is_pdf:
-        jlib.log('not xrefs or not doc.is_pdf: returning {imginfo=}')
+        #jlib.log('not xrefs or not doc.is_pdf: returning {imginfo=}')
         return imginfo
     imglist = page.get_images()
     digests = {}
@@ -643,7 +643,7 @@ def get_image_info(page: Page, hashes: bool = False, xrefs: bool = False) -> lis
         xref = digests.get(item["digest"], 0)
         item["xref"] = xref
         imginfo[i] = item
-    jlib.log('returning {imginfo=}')
+    #jlib.log('returning {imginfo=}')
     return imginfo
 
 
