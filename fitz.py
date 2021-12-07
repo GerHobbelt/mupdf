@@ -2881,7 +2881,7 @@ class Document:
         # a new PdfDocument which will call pdf_create_document(), which is ok
         # but a little unnecessary.
         #
-        jlib.log('isPDF(): {jlib.exception_info()}')
+        #jlib.log('isPDF(): {jlib.exception_info()}')
         if mupdf.ppdf_specifics(self.this.m_internal):
             ret = True
         else:
@@ -5805,9 +5805,11 @@ class Page:
         jlib.log('{=rect.x0-(-2147483648.0) rect.y0 rect.x1 rect.y1}')
         tpage = mupdf.StextPage(rect)
         dev = mupdf.mfz_new_stext_device(tpage, options)
+        jlib.log('{type(page)=}')
         if isinstance(page, mupdf.Page):
             pass
         elif isinstance(page, mupdf.PdfPage):
+            jlib.log('calling page = page.super()')
             page = page.super()
         else:
             assert 0, f'Unrecognised type(page)={type(page)}'
@@ -5837,7 +5839,7 @@ class Page:
         if not xref:
             THROWMSG("cannot insert font")
         font_obj = mupdf.mpdf_new_indirect(pdf, xref, 0)
-        mupdf.mpdf_dict_puts_drop(fonts, fontname, font_obj)
+        mupdf.mpdf_dict_puts(fonts, fontname, font_obj)
         return value
 
     def _insert_image(self,
@@ -5888,7 +5890,7 @@ class Page:
         jlib.log('{xref=}')
 
         if xref > 0:
-            jlib.log(' ')
+            jlib.log('xref > 0')
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
             w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(ref, PDF_NAME('Width'), PDF_NAME('W')))
             h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(gctx, ref, PDF_NAME('Height'), PDF_NAME('H')))
@@ -6087,8 +6089,10 @@ class Page:
             #mupdf.mfz_append_printf(nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
             # fixme: this does not use fz_append_printf()'s special handling of %g etc.
             s = template % (mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
-            jlib.log('calling fz_append_pdf_string() with {s=}')
-            mupdf.mfz_append_pdf_string(nres, s)
+            #s = s.replace('\n', '\r\n')
+            jlib.log('calling fz_append_pdf_string() with {=len(s) s!r}')
+            jlib.log(s)
+            mupdf.mfz_append_string(nres, s)
             JM_insert_contents(pdf, page.obj(), nres, overlay)
 
         if rc_digest:
@@ -13039,8 +13043,8 @@ def JM_ensure_identity(pdf):
             rnd += chr(i)
         jlib.log('{type(rnd)=} {rnd!r=}')
         id_ = mupdf.mpdf_dict_put_array( mupdf.mpdf_trailer( pdf), PDF_NAME('ID'), 2)
-        mupdf.mpdf_array_push_drop( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
-        mupdf.mpdf_array_push_drop( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
+        mupdf.mpdf_array_push( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
+        mupdf.mpdf_array_push( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
 
 def JM_ensure_ocproperties(pdf):
     '''
@@ -14922,7 +14926,7 @@ def JM_set_field_type(doc, obj, type):
         typename = PDF_NAME('Sig')
 
     if typename:
-        mupdf.mpdf_dict_put_drop(obj, PDF_NAME('FT'), typename)
+        mupdf.mpdf_dict_put(obj, PDF_NAME('FT'), typename)
 
     if setbits != 0 or clearbits != 0:
         bits = mupdf.mpdf_dict_get_int(obj, PDF_NAME('Ff'))
