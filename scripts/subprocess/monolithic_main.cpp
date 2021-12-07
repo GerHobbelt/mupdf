@@ -10,31 +10,26 @@
 #endif
 #include <errno.h>
 
-#include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
+#include "monolithic_examples.h"
 
 
-typedef int tool_f();
+typedef int tool_f(int argc, const char** argv);
 
-static int help();
-static int quit();
+static int help(int argc, const char** argv);
+static int quit(int argc, const char** argv);
 
 static struct cmd_info
 {
 	const char* cmd;
 	tool_f* f;
 } commands[] = {
-	{ "basic", crow_example_basic_main },
-	{ "catch_all", crow_example_catch_all_main },
-	{ "chat", crow_example_chat_main },
-	{ "compress", crow_example_compression_main },
-	{ "json_map", crow_example_json_map_main },
-	{ "static", crow_example_static_file_main },
-	{ "vs", crow_example_vs_main },
-	{ "with_all", crow_example_with_all_main },
-	{ "hello", crow_hello_world_main },
-	{ "ssl", crow_example_ssl_main },
-	{ "ws", crow_example_ws_main },
-	{ "mustache", crow_mustache_main },
+	{ "sleep", subproc_sleep_main },
+	{ "examples", subproc_examples_main },
+	{ "echo", subproc_echo_main },
+	{ "cat_child", subproc_cat_child_main },
+#if 0
+	{ "basic_test", subproc_basic_test_main },
+#endif
 
 	{ "?", help },
 	{ "h", help },
@@ -138,7 +133,30 @@ static int parse(const char* source)
 
 		if (strncmp(source, el.cmd, cmd_len) == 0 && (sentinel == 0 || isspace(sentinel)))
 		{
-			return el.f();
+			int argc_count;
+			const char** argv_list = (const char**)calloc(strlen(source) / 2 + 2, sizeof(char*)); // worst-case heuristic for the argv[] array size itself
+			char* argv_strbuf = (char *)malloc(strlen(source) + 2);
+			const char* p = source + cmd_len;
+			while (isspace(*p))
+				p++;
+			strcpy(argv_strbuf, p);
+
+			argc_count = 0;
+			argv_list[argc_count++] = el.cmd;  // argv[0] == command
+
+			p = strtok(argv_strbuf, " \t\r\n");
+			while (p != NULL)
+			{
+				argv_list[argc_count++] = p;
+				p = strtok(NULL, " \t\r\n");
+			}
+			argv_list[argc_count] = NULL;
+
+			int rv = el.f(argc_count, argv_list);
+			free(argv_list);
+			free(argv_strbuf);
+			fprintf(stderr, "--> exit code: %d\n", rv);
+			return rv;
 		}
 	}
 	return 0;
@@ -202,7 +220,7 @@ static void trim(char* s)
 	}
 }
 
-static int help()
+static int help(int argc, const char** argv)
 {
 	fprintf(stderr, "Commands:\n");
 	for (int i = 0; i < sizeof(commands) / sizeof(commands[0]); i++)
@@ -216,7 +234,7 @@ static int help()
 }
 
 
-static int quit()
+static int quit(int argc, const char** argv)
 {
 	fprintf(stderr, "Exiting by user demand...\n");
 
@@ -226,7 +244,7 @@ static int quit()
 
 static void usage(void)
 {
-	fprintf(stderr, "Usage: crow_demo [options] [command]\n");
+	fprintf(stderr, "Usage: subprocess [options] [command]\n");
 	fprintf(stderr, "\t-i: Enter interactive prompt after running code.\n");
 	exit(1);
 }

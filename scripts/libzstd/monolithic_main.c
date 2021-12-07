@@ -81,7 +81,7 @@ static void help(void)
 
 static int usage()
 {
-	fprintf(stderr, "Usage: clipp_demo [command]\n");
+	fprintf(stderr, "Usage: zstd_demo [command]\n");
 	help();
 	return 1;
 }
