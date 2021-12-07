@@ -115,13 +115,13 @@ const char *fz_stext_options_usage =
 fz_stext_page *
 fz_new_stext_page(fz_context *ctx, fz_rect mediabox)
 {
-	fprintf(stderr, "%s:%i:%s: mediabox=(%f %f %f %f)\n",
+	/*fprintf(stderr, "%s:%i:%s: mediabox=(%f %f %f %f)\n",
 			__FILE__, __LINE__, __FUNCTION__,
 			mediabox.x0,
 			mediabox.y0,
 			mediabox.x1,
 			mediabox.y1
-			);
+			);*/
 	fz_pool *pool = fz_new_pool(ctx);
 	fz_stext_page *page = NULL;
 	fz_try(ctx)
