@@ -2822,41 +2822,82 @@ retry_after_repair:
 	}
 }
 
+static void
+process_sigs(fz_context *ctx, pdf_obj *field, void *arg, pdf_obj **ft)
+{
+	int *signed_signature_detected = (int *) arg;
+	pdf_obj *v, *vtype;
+
+	if (!pdf_name_eq(ctx, pdf_dict_get(ctx, field, PDF_NAME(Type)), PDF_NAME(Annot)) ||
+		!pdf_name_eq(ctx, pdf_dict_get(ctx, field, PDF_NAME(Subtype)), PDF_NAME(Widget)) ||
+		!pdf_name_eq(ctx, *ft, PDF_NAME(Sig)))
+		return;
+	pdf_debug_obj(ctx, field);
+	v = pdf_dict_get(ctx, field, PDF_NAME(V));
+	if (!pdf_is_dict(ctx, v))
+		return;
+	vtype = pdf_dict_get(ctx, v, PDF_NAME(Type));
+	if (!vtype || vtype == PDF_NAME(Sig))
+		*signed_signature_detected = 1;
+}
+
 static void *
 update_appearances(fz_context *ctx, fz_page *page_, void *state)
 {
+	int *has_signed_signature = (int *) state;
 	pdf_page *page = (pdf_page *)page_;
 	pdf_annot *annot;
 
-	for (annot = pdf_first_raw_annot(ctx, page); annot; annot = pdf_next_raw_annot(ctx, annot))
+	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
+		pdf_update_appearance(ctx, annot);
+
+	if (!*has_signed_signature)
+		return NULL;
+
+	for (annot = pdf_first_widget(ctx, page); annot; annot = pdf_next_widget(ctx, annot))
 		pdf_update_appearance(ctx, annot);
 
 	return NULL;
+}
+
+static int
+detect_signed_signature(fz_context *ctx, pdf_document *doc) {
+	static pdf_obj *ft_list[2] = { PDF_NAME(FT), NULL };
+	pdf_obj *ft, *form_fields;
+	int signed_signature_detected = 0;
+
+	form_fields = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/AcroForm/Fields");
+	pdf_walk_tree(ctx, form_fields, PDF_NAME(Kids), process_sigs, NULL, &signed_signature_detected, &ft_list[0], &ft);
+
+	return signed_signature_detected;
 }
 
 static void
 update_all_appearances(fz_context *ctx, pdf_page *page)
 {
 	pdf_document *doc = page->doc;
+	int has_signed_signature = detect_signed_signature(ctx, doc);;
+
+	fz_warn(ctx, "SIGNED SIGNATURE = %d", has_signed_signature);
 
 	/* Update all the annotations on all the pages open in the document.
 	 * At least one annotation should be resynthesised because we'll
 	 * only reach here if resynth_required was set. Any such resynthesis
 	 * that changes the document will throw away any local_xref. */
-	fz_process_opened_pages(ctx, &doc->super, update_appearances, NULL);
+	fz_process_opened_pages(ctx, &doc->super, update_appearances, &has_signed_signature);
 	/* If the page isn't linked in yet (as is the case whilst loading
 	 * the annots for a page), process that too. */
 	if (page->super.prev == NULL && page->super.next == NULL)
-		update_appearances(ctx, &page->super, NULL);
+		update_appearances(ctx, &page->super, &has_signed_signature);
 
 	/* Run it a second time, so that any annotations whose synthesised
 	 * appearances live in the local_xref (such as unsigned sigs) can
 	 * be regenerated too. Running this for annots which are up to date
 	 * should be fast. */
-	fz_process_opened_pages(ctx, &doc->super, update_appearances, NULL);
+	fz_process_opened_pages(ctx, &doc->super, update_appearances, &has_signed_signature);
 	/* And cope with a non-linked in page again. */
 	if (page->super.prev == NULL && page->super.next == NULL)
-		update_appearances(ctx, &page->super, NULL);
+		update_appearances(ctx, &page->super, &has_signed_signature);
 
 	doc->resynth_required = 0;
 }
