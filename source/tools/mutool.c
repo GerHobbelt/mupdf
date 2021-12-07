@@ -47,6 +47,7 @@ int pdfpages_main(int argc, char *argv[]);
 int pdfcreate_main(int argc, char *argv[]);
 int pdfmerge_main(int argc, char *argv[]);
 int pdfsign_main(int argc, char *argv[]);
+int pdftagged_main(int argc, char *argv[]);
 
 int cmapdump_main(int argc, char *argv[]);
 
@@ -73,6 +74,7 @@ static struct {
 	{ pdfpages_main, "pages", "show information about pdf pages" },
 	{ pdfposter_main, "poster", "split large page into many tiles" },
 	{ pdfsign_main, "sign", "manipulate PDF digital signatures" },
+	{ pdftagged_main, "tagged", "extract Tagged PDF content" },
 #endif
 #if FZ_ENABLE_JS
 	{ murun_main, "run", "run javascript" },
