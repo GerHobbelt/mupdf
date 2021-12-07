@@ -112,8 +112,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -132,8 +132,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -150,8 +150,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -170,8 +170,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS;WXW_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -206,20 +206,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/arrays/arrays.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/asserthelper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/base64/base64.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/bench.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/datetime.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/display.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/graphics.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmlpars.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmltag.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/image.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/ipcclient.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/log.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/mbconv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/printfbench.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/regex.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/strings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/tls.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/cmdline/cmdlinetest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/config/config.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/config/fileconf.cpp" />
@@ -278,7 +264,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/datetime/datetimetest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/drawing/basictest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/drawing/drawing.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/drawing/fonttest.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxWidgets\tests\drawing\basicfonttest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/drawing/plugindriver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/drawing/pluginsample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/dummy.cpp" />

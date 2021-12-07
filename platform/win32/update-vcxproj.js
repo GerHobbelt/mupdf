@@ -38,6 +38,9 @@ let m = /<ProjectName>([^]*?)<\/ProjectName>/.exec(src);
 if (m) {
 	projectName = m[1].trim();
 }
+if (process.argv[3]) {
+	projectName = process.argv[3];
+}
 
 console.error({projectName});
 
