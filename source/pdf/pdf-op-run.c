@@ -28,6 +28,8 @@
 
 #define TILE
 
+#define FIX_ACTUAL_TEXT_LENGTH_MISMATCH 0
+
 /*
  * Emit graphics calls to device.
  */
@@ -101,6 +103,8 @@ struct pdf_run_processor
 
 	/* text object state */
 	pdf_text_object_state tos;
+	char *actual_text;
+	char *actual_text_p;
 
 	/* graphics state */
 	pdf_gstate *gstate;
@@ -764,6 +768,20 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	if (pr->super.hidden)
 		dostroke = dofill = 0;
 
+	if (pr->actual_text_p)
+	{
+		if (*pr->actual_text_p)
+		{
+			fz_warn(ctx, "unused ActualText content remain (%s)", pr->actual_text_p);
+#if FIX_ACTUAL_TEXT_LENGTH_MISMATCH
+			// pdf_font_desc *fontdesc = gstate->text.font;
+			// fz_matrix trm;
+			// pdf_tos_make_trm(ctx, &pr->tos, &gstate->text, fontdesc, 0, &trm);
+			// fz_show_glyph(ctx, pr->tos.text, fontdesc->font, trm, -1, c, fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, FZ_LANG_UNSET);
+#endif
+		}
+	}
+
 	fz_try(ctx)
 	{
 		fz_rect tb = fz_transform_rect(pr->tos.text_bbox, gstate->ctm);
@@ -930,6 +948,24 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
 	{
 		ucsbuf[0] = FZ_REPLACEMENT_CHARACTER;
 		ucslen = 1;
+	}
+
+	if (pr->actual_text_p)
+	{
+		if (*pr->actual_text_p)
+		{
+			pr->actual_text_p += fz_chartorune(ucsbuf, pr->actual_text_p);
+			ucslen = 1;
+		}
+		else
+		{
+			fz_warn(ctx, "ActualText content length mismatch");
+#if FIX_ACTUAL_TEXT_LENGTH_MISMATCH
+			/* swallow glyphs if the ActualText content has run out */
+			ucsbuf[0] = -1;
+			ucslen = 1;
+#endif
+		}
 	}
 
 	/* add glyph to textobject */
@@ -1970,6 +2006,7 @@ static void pdf_run_BMC(fz_context *ctx, pdf_processor *proc, const char *tag)
 static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
+	pdf_obj *at;
 	const char *str;
 
 	if (!tag)
@@ -1979,12 +2016,38 @@ static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, p
 	if (strlen(str) == 0)
 		str = tag;
 
+	at = pdf_dict_get(ctx, cooked, PDF_NAME(ActualText));
+	if (at)
+	{
+		if (pr->actual_text)
+		{
+			if (*pr->actual_text_p)
+			{
+				fz_warn(ctx, "interrupted ActualText content");
+			}
+			fz_free(ctx, pr->actual_text);
+			pr->actual_text = NULL;
+			pr->actual_text_p = NULL;
+		}
+		pr->actual_text = fz_strdup(ctx, pdf_to_text_string(ctx, at));
+		pr->actual_text_p = pr->actual_text;
+	}
+
 	fz_begin_layer(ctx, pr->dev, str);
 }
 
 static void pdf_run_EMC(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
+
+	if (pr->actual_text)
+	{
+		if (*pr->actual_text_p != 0)
+			fz_warn(ctx, "ActualText content length mismatch");
+		fz_free(ctx, pr->actual_text);
+		pr->actual_text = NULL;
+		pr->actual_text_p = NULL;
+	}
 
 	fz_end_layer(ctx, pr->dev);
 }
@@ -2047,6 +2110,8 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 	fz_drop_text(ctx, pr->tos.text);
 
 	fz_drop_default_colorspaces(ctx, pr->default_cs);
+
+	fz_free(ctx, pr->actual_text);
 
 	fz_free(ctx, pr->gstate);
 }
