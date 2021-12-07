@@ -64,7 +64,7 @@ output(FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(1, 2)
 #define DEBUG_MESSAGE(A) do { } while(0)
 #endif
 
-#define BLOCK_SHIFT 18
+#define BLOCK_SHIFT 20
 #define BLOCK_SIZE (1<<BLOCK_SHIFT)
 
 #define HAVE_BLOCK(map, num) (((map)[(num)>>3] & (1<<((num) & 7))) != 0)
@@ -621,6 +621,7 @@ fz_stream *fz_open_url(fz_context *ctx, const char *url, int kbps, void (*more_d
 	curl_easy_setopt(state->easy, CURLOPT_WRITEDATA, state);
 	curl_easy_setopt(state->easy, CURLOPT_FAILONERROR, 1L);
 	curl_easy_setopt(state->easy, CURLOPT_ERRORBUFFER, &state->error_buffer);
+	curl_easy_setopt(state->easy, CURLOPT_MAX_RECV_SPEED_LARGE, 1024 * 1024);
 #ifdef DEBUG_BLOCK_FETCHING
 	curl_easy_setopt(state->easy, CURLOPT_VERBOSE, 1L);
 #endif
