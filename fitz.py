@@ -69,7 +69,7 @@ class Annot:
         #self.parent = None
 
     def _get_redact_values(self):
-        jlib.log('')
+        #jlib.log('')
         #val = _fitz.Annot__get_redact_values(self)
         annot = self.this
         if mupdf.mpdf_annot_type(annot) != mupdf.PDF_ANNOT_REDACT:
@@ -96,7 +96,7 @@ class Annot:
                 align = mupdf.mpdf_to_int(obj)
             values[dictkey_align] = align
         except Exception as e:
-            jlib.log('{e=}')
+            #jlib.log('{e=}')
             return
         val = values
 
@@ -269,7 +269,7 @@ class Annot:
 
             return val
         except Exception:
-            jlib.log(jlib.exception_info())
+            #jlib.log(jlib.exception_info())
             raise
 
     def blendMode(self):
@@ -339,7 +339,7 @@ class Annot:
             assert isinstance(annot, mupdf.PdfAnnot)
             return JM_annot_colors(annot.annot_obj())
         except Exception as e:
-            jlib.log(jlib.exception_info())
+            #jlib.log(jlib.exception_info())
             raise
 
     def delete_responses(self):
@@ -439,7 +439,7 @@ class Annot:
         try:
             pix = mupdf.mpdf_new_pixmap_from_annot(self.this, ctm, cs, mupdf.Separations(0), alpha)
         except Exception as e:
-            jlib.log('{e=}')
+            #jlib.log('{e=}')
             return
         #jlib.log('{pix=}')
         return Pixmap(pix)
@@ -1600,7 +1600,7 @@ class Document:
     def _embeddedFileGet(self, idx):
         #return _fitz.Document__embeddedFileGet(self, idx)
         doc = self.this
-        jlib.log('*** calling mupdf.mpdf_document_from_fz_document(doc)')
+        #jlib.log('*** calling mupdf.mpdf_document_from_fz_document(doc)')
         pdf = mupdf.mpdf_document_from_fz_document(doc)
         names = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer(pdf),
@@ -1658,11 +1658,11 @@ class Document:
     def show_dict(o):
         assert 0
         o_dict_len = mupdf.mpdf_dict_len(o)
-        jlib.log( '{o_dict_len=}:')
+        #jlib.log( '{o_dict_len=}:')
         for i in range(o_dict_len):
             key = mupdf.mpdf_dict_get_key(o, i)
             value = mupdf.mpdf_dict_get(o, key)
-            jlib.log( '    {key=}: {value=}')
+            #jlib.log( '    {key=}: {value=}')
 
 
     def _embfile_info(self, idx, infodict):
@@ -1683,8 +1683,8 @@ class Document:
                 PDF_NAME('Names'),
                 )
 
-        jlib.log( 'names:')
-        mupdf.mpdf_debug_obj(names)
+        #jlib.log( 'names:')
+        #mupdf.mpdf_debug_obj(names)
 
         #jlib.log( '{pdfobj_string(names)=}')
 
@@ -1693,19 +1693,19 @@ class Document:
 
         if 0:
             o_dict_len = mupdf.mpdf_dict_len(o)
-            jlib.log( '{o_dict_len=}:')
+            #jlib.log( '{o_dict_len=}:')
             for i in range(o_dict_len):
                 key = mupdf.mpdf_dict_get_key(o, i)
                 value = mupdf.mpdf_dict_get(o, key)
-                jlib.log( '    {key=}: {value=}')
+                #jlib.log( '    {key=}: {value=}')
 
         ci = mupdf.mpdf_dict_get(o, PDF_NAME('CI'))
         if ci.m_internal:
             ci_xref = mupdf.mpdf_to_num(ci)
-            jlib.log('{ci_xref=}')
+            #jlib.log('{ci_xref=}')
         infodict["collection"] = ci_xref
         name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('F')))
-        jlib.log('{name=}')
+        #jlib.log('{name=}')
         infodict[dictkey_filename] = JM_EscapeStrFromStr(name)
 
         name = mupdf.mpdf_to_text_string(mupdf.mpdf_dict_get(o, PDF_NAME('UF')))
@@ -2063,7 +2063,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
 
-        jlib.log('*** calling self.this.document_from_fz_document()')
+        #jlib.log('*** calling self.this.document_from_fz_document()')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
@@ -2195,9 +2195,9 @@ class Document:
         """
         idx = self._embeddedFileIndex(item)
         infodict = {"name": self.embfile_names()[idx]}
-        jlib.log('{idx=} {infodict=}')
+        #jlib.log('{idx=} {infodict=}')
         xref = self._embfile_info(idx, infodict)
-        jlib.log('{idx=} {xref=} {infodict=}')
+        #jlib.log('{idx=} {xref=} {infodict=}')
         t, date = self.xref_get_key(xref, "Params/CreationDate")
         if t != "null":
             infodict["creationDate"] = date
@@ -2332,7 +2332,7 @@ class Document:
                     "descender": dsc,
                 }
             else:
-                jlib.log('{type(fontdict)=}')
+                #jlib.log('{type(fontdict)=}')
                 name = fontdict["name"]
                 ext = fontdict["ext"]
                 stype = fontdict["type"]
@@ -3039,7 +3039,7 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_make_bookmark(self, loc)
-        jlib.log('{loc=}')
+        #jlib.log('{loc=}')
         loc = mupdf.Location(*loc)
         mark = mupdf.mfz_make_bookmark( self.this, loc)
         return mark
@@ -4479,14 +4479,14 @@ class Document:
     def is_repaired(self):
         """Check whether PDF was repaired."""
         #jlib.log('{self.this.count_pages()=}')
-        jlib.log('*** calling self.this.document_from_fz_document()')
+        #jlib.log('*** calling self.this.document_from_fz_document()')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
         r = pdf.was_repaired()
         #jlib.log('{r=}')
         if r:
-            jlib.log('returning true')
+            #jlib.log('returning true')
             return True
         #jlib.log('returning false')
         return False
@@ -5247,7 +5247,7 @@ class Widget(object):
 
         self.rect = None  # annot value
         self.xref = 0  # annot value
-        jlib.log('have created Widget, {self=} {type(self)=} {self.script=}')
+        #jlib.log('have created Widget, {self=} {type(self)=} {self.script=}')
 
 
     def _validate(self):
@@ -5719,7 +5719,7 @@ class Page:
 
     def _addWidget(self, field_type, field_name):
         #return _fitz.Page__addWidget(self, field_type, field_name)
-        jlib.log('{self.this=} {type(self.this)=}')
+        #jlib.log('{self.this=} {type(self.this)=}')
         page = self._pdf_page()
         pdf = page.doc()
         annot = JM_create_widget(pdf, page, field_type, field_name)
@@ -5903,7 +5903,7 @@ class Page:
         if isinstance(page, mupdf.Page):
             pass
         elif isinstance(page, mupdf.PdfPage):
-            jlib.log('calling page = page.super()')
+            #jlib.log('calling page = page.super()')
             page = page.super()
         else:
             assert 0, f'Unrecognised type(page)={type(page)}'
@@ -5999,9 +5999,9 @@ class Page:
         else:
             #jlib.log('{stream=}')
             if stream:
-                jlib.log('calling JM_BufferFromBytes()')
+                #jlib.log('calling JM_BufferFromBytes()')
                 imgbuf = JM_BufferFromBytes(stream)
-                jlib.log(' ')
+                #jlib.log(' ')
                 do_process_pixmap = 0
             else:
                 #jlib.log('{filename=}')
@@ -6091,7 +6091,7 @@ class Page:
                 else:
                     #jlib.log('{alpha=}')
                     if alpha==0:
-                        jlib.log(' return have_image()')
+                        #jlib.log(' return have_image()')
                         #goto have_image()
                         do_have_imask = 0
                     else:
@@ -6166,7 +6166,7 @@ class Page:
             #jlib.log('calling pdf_dict_get_inheritabl()')
             resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
             if not resources.m_internal:
-                jlib.log('not resources.m_internal calling pdf_dict_put_dict()')
+                #jlib.log('not resources.m_internal calling pdf_dict_put_dict()')
                 resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
             #jlib.log('calling mpdf_dict_get() XObject')
             xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
@@ -7518,7 +7518,7 @@ class Page:
 
         #val = _fitz.Page_first_widget(self)
         annot = None
-        jlib.log('{self.this=}')
+        #jlib.log('{self.this=}')
         page = self._pdf_page()# mupdf.mpdf_page_from_fz_page(self.this)
         if page.m_internal:
             annot = mupdf.mpdf_first_widget(page)
@@ -8100,7 +8100,7 @@ class Page:
             del pymupdf_fonts
 
         # install the font for the page
-        jlib.log('{fontname=} {bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {CJK_number=}')
+        #jlib.log('{fontname=} {bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {CJK_number=}')
         val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
                                wmode, serif, encoding, CJK_number)
 
@@ -8109,7 +8109,7 @@ class Page:
 
         xref = val[0]                 # xref of installed font
         fontdict = val[1]
-        jlib.log('{type(fontdict)=}')
+        #jlib.log('{type(fontdict)=}')
 
         if CheckFontInfo(doc, xref):  # check again: document already has this font
             return xref               # we are done
@@ -8370,7 +8370,7 @@ class Page:
             raise ValueError("not a textpage of this page")
         #jlib.log('{type(tp)=}')
         rlist = tp.search(text, quads=quads)
-        jlib.log('returning {len(rlist)=} {rlist=}')
+        #jlib.log('returning {len(rlist)=} {rlist=}')
         return rlist
 
     def set_contents(self, xref):
@@ -8669,7 +8669,7 @@ class Page:
     getContents = get_contents
 
     def write_text(self, **kwargs):
-        jlib.log('{kwargs=}')
+        #jlib.log('{kwargs=}')
         return utils.write_text(self, **kwargs)
 
 
@@ -8855,15 +8855,15 @@ class Pixmap:
 
         elif args_match(args, (Document, mupdf.Document), int):
             # Create pixmap from PDF image identified by XREF number
-            jlib.log('Create pixmap from ((Document, mupdf.Document), int)')
+            #jlib.log('Create pixmap from ((Document, mupdf.Document), int)')
             doc, xref = args
-            jlib.log('{doc=} {xref=}')
+            #jlib.log('{doc=} {xref=}')
             if isinstance(doc, Document):
                 doc = doc.this
             pdf = mupdf.mpdf_specifics(doc)
             ASSERT_PDF(pdf)
             xreflen = mupdf.mpdf_xref_len(pdf)
-            jlib.log('{xreflen=}')
+            #jlib.log('{xreflen=}')
             if not INRANGE(xref, 1, xreflen-1):
                 THROWMSG("bad xref")
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
@@ -8871,7 +8871,7 @@ class Pixmap:
             if not mupdf.mpdf_name_eq(type_, PDF_NAME('Image')):
                 THROWMSG("not an image");
             img = mupdf.mpdf_load_image(pdf, ref)
-            jlib.log('img: {img.w()=} {img.h()=} {img.n()=} {img.bpc()=} {img.xres()=} {img.yres()=}')
+            #jlib.log('img: {img.w()=} {img.h()=} {img.n()=} {img.bpc()=} {img.xres()=} {img.yres()=}')
             # Original code passed null for subarea and ctm, but that's not
             # possible with MuPDF's python bindings, so instead we pass an
             # infinite rect and identify matrix.
@@ -8922,7 +8922,7 @@ class Pixmap:
         size = mupdf.mfz_pixmap_stride(pm) * pm.h();
         res = mupdf.mfz_new_buffer(size)
         out = mupdf.Output(res)
-        jlib.log('{type(out)=}')
+        #jlib.log('{type(out)=}')
         if   format_ == 1:  mupdf.mfz_write_pixmap_as_png(out, pm)
         elif format_ == 2:  mupdf.mfz_write_pixmap_as_pnm(out, pm)
         elif format_ == 3:  mupdf.mfz_write_pixmap_as_pam(out, pm)
@@ -10939,9 +10939,9 @@ class TextPage:
     def extractBLOCKS(self):
         """Return a list with text block information."""
         block_n = -1
-        jlib.log('{type(self)=}')
+        #jlib.log('{type(self)=}')
         this_tpage = self.this
-        jlib.log('{type(self)=} {type(self.this)=}')
+        #jlib.log('{type(self)=} {type(self.this)=}')
         tp_rect = mupdf.Rect(this_tpage.m_internal.mediabox)
         res = mupdf.mfz_new_buffer(1024);
         lines = []
@@ -11408,7 +11408,7 @@ class TextWriter:
             resources = mupdf.mpdf_new_dict(pdfpage.doc(), 5)
             contents = mupdf.mfz_new_buffer(1024)
             dev = mupdf.mpdf_new_pdf_device( pdfpage.doc(), mupdf.Matrix(), resources, contents)
-            jlib.log('{dev_color=}')
+            #jlib.log('{dev_color=}')
             mupdf.mfz_fill_text(
                     dev,
                     self.this,
@@ -12340,7 +12340,7 @@ def JM_BufferFromBytes(stream):
     #    b = stream.getvalue()
     #    return mupdf.Buffer.new_buffer_from_copied_data(b)
     #if
-    jlib.log('Unrecognised {type(stream)=}')
+    #jlib.log('Unrecognised {type(stream)=}')
     return mupdf.Buffer()
 
 
@@ -12782,7 +12782,7 @@ def JM_choice_options(annot):
     # ourselves here.
     #
     #n = mupdf.mpdf_choice_widget_options(annot, 0, 0)
-    jlib.log('{type(annot)=}')
+    #jlib.log('{type(annot)=}')
     optarr = mupdf.mpdf_dict_get_inheritable(annot.this.annot_obj(), PDF_NAME('Opt'))
     n = mupdf.mpdf_array_len(optarr)
 
@@ -12884,7 +12884,7 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
     '''
     #jlib.log('*** calling mupdf.mpdf_create_document()')
     #pdfout = mupdf.mpdf_create_document()   # new PDF document
-    jlib.log('*** calling mupdf.PdfDocument()')
+    #jlib.log('*** calling mupdf.PdfDocument()')
     pdfout = mupdf.PdfDocument()
     incr = 1
     s = fp
@@ -12935,7 +12935,7 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
 
     res = mupdf.mfz_new_buffer(8192)
     out = mupdf.Output(res)
-    jlib.log('{type(out)=} {out=}')
+    #jlib.log('{type(out)=} {out=}')
     mupdf.mpdf_write_document(pdfout, out, opts)
     #unsigned char *c = NULL;
     c = res.buffer_extract()
@@ -13047,14 +13047,14 @@ def JM_delete_annot(page, annot):
         if type_ != mupdf.PDF_ANNOT_WIDGET:
             mupdf.mpdf_delete_annot(page, annot)
         else:
-            jlib.log('Calling JM_delete_widget()')
+            #jlib.log('Calling JM_delete_widget()')
             JM_delete_widget(page, annot)
     except Exception as e:
         jlib.log('{e=}')
-        jlib.log('could not delete annotation')
-        jlib.log('{jlib.exception_info()=}')
+        #jlib.log('could not delete annotation')
+        #jlib.log('{jlib.exception_info()=}')
         # fixme: mupdf.mfz_warn("could not delete annotation")
-    return;
+    return
 
 
 def JM_embed_file(
@@ -13095,7 +13095,7 @@ def JM_embed_file(
         params = mupdf.mpdf_dict_put_dict(f, PDF_NAME('Params'), 4)
         mupdf.mpdf_dict_put_int(params, PDF_NAME('Size'), len_)
     except Exception as e:
-        jlib.log('{e=} {jlib.exception_info()=}')
+        #jlib.log('{e=} {jlib.exception_info()=}')
         raise
     return val
 
@@ -13431,7 +13431,7 @@ def JM_get_annot_by_xref(page, xref):
         if not found:
             raise Exception("xref %d is not an annot of this page" % xref)
     except Exception as e:
-        jlib.log('{e=}')
+        #jlib.log('{e=}')
         raise
     return annot
 
@@ -13461,7 +13461,7 @@ def JM_get_annot_by_name(page, name):
         if not found:
             raise Exception("'%s' is not an annot of this page" % name)
     except Exception as e:
-        jlib.log('{e=}')
+        #jlib.log('{e=}')
         raise
     return annot
 
@@ -13493,19 +13493,19 @@ def JM_get_annot_xref_list(page_or_page_obj):
         #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
         page_obj = page_or_page_obj
         names = []
-        jlib.log('{page_obj=}')
-        jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
-        jlib.log('calling page_obj.dict_get()')
+        #jlib.log('{page_obj=}')
+        #jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
+        #jlib.log('calling page_obj.dict_get()')
         annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-        jlib.log('{annots=}')
+        #jlib.log('{annots=}')
         if not annots:
             return names
         n = annots.array_len()
-        jlib.log('{n=}')
+        #jlib.log('{n=}')
         for i in range(n):
             annot_obj = mupdf.ppdf_array_get(annots, i)
             xref = mupdf.ppdf_to_num(annot_obj)
-            jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
+            #jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
             subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
             type_ = mupdf.PDF_ANNOT_UNKNOWN
             if (subtype):
@@ -13658,7 +13658,7 @@ def JM_get_widget_properties(annot, Widget):
     Populate a Python Widget object with the values from a PDF form field.
     Called by "Page.firstWidget" and "Widget.next".
     '''
-    jlib.log('{Widget=} {type(Widget)=}')
+    #jlib.log('{Widget=} {type(Widget)=}')
     annot_obj = mupdf.mpdf_annot_obj(annot)
     page = mupdf.mpdf_annot_page(annot)
     pdf = page.doc()
@@ -13672,7 +13672,7 @@ def JM_get_widget_properties(annot, Widget):
         # don't have a representation for that in Python - e.g. None is not
         # represented by NULL.
         if 0 and value is None:
-            jlib.log('deleting {mod=} {key=} {value=}')
+            #jlib.log('deleting {mod=} {key=} {value=}')
             try:
                 delattr(mod, key)
             except Exception:
@@ -13964,7 +13964,7 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
     '''
     Insert a font in a PDF
     '''
-    jlib.log('{bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {ordering=}')
+    #jlib.log('{bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {ordering=}')
     font = None
     res = None
     data = None
@@ -14392,7 +14392,7 @@ def JM_mupdf_warning(user, message):
     '''
     redirect MuPDF warnings
     '''
-    jlib.log('{user=} {message=}')
+    #jlib.log('{user=} {message=}')
     JM_mupdf_warnings_store.append(message)
     if JM_mupdf_show_warnings:
         sys.stderr.write(f'mupdf: {message}\n')
@@ -14646,7 +14646,7 @@ def JM_print_stext_page_as_text(out, page):
     but lines within a block are concatenated by space instead a new-line
     character (which else leads to 2 new-lines).
     '''
-    jlib.log('{type(out)=}')
+    #jlib.log('{type(out)=}')
     assert isinstance(out, mupdf.Output)
     assert isinstance(page, mupdf.StextPage)
     rect = mupdf.Rect(page.m_internal.mediabox)
@@ -14832,7 +14832,7 @@ def JM_search_stext_page(page, needle):
     #jlib.log('{begin=} {end=}')
     if begin is None:
         #goto no_more_matches;
-        jlib.log('returning {quads=}')
+        #jlib.log('returning {quads=}')
         return quads
     #jlib.log('{haystack=} {begin-haystack=}')
 
@@ -14923,7 +14923,7 @@ def JM_search_stext_page(page, needle):
     assert isinstance(ret, tuple)
     ret = list(ret)
     nl = '\n'
-    jlib.log('{len(ret)=}:\n{nl.join([str(i) for i in ret])}\n')
+    #jlib.log('{len(ret)=}:\n{nl.join([str(i) for i in ret])}\n')
     return ret
 
 
@@ -15449,7 +15449,7 @@ def CheckMorph(o: typing.Any) -> bool:
 def CheckParent(o: typing.Any):
     return
     if not hasattr(o, "parent") or o.parent is None:
-        jlib.log(jlib.exception_info())
+        #jlib.log(jlib.exception_info())
         raise ValueError(f"orphaned object type(o)={type(o)}: parent is None")
 
 
@@ -15512,7 +15512,7 @@ def Page__add_text_marker(self, quads, annot_type):
         JM_add_annot_id(annot, "A")
         mupdf.mpdf_update_annot(annot)
     except Exception as e:
-        jlib.log('{e=}')
+        #jlib.log('{e=}')
         final()
         return
     final()
@@ -15627,7 +15627,7 @@ def args_match(args, *types):
             return False
         j += 1
     if j != len(args):
-        jlib.log('returning false: have only matched first {j} args in {args}')
+        #jlib.log('returning false: have only matched first {j} args in {args}')
         return False
     #jlib.log('returning true: {args=} match {types=}')
     return True
@@ -17574,19 +17574,19 @@ class TOOLS:
     @staticmethod
     def _fill_widget(annot, widget):
         #val = _fitz.Tools__fill_widget(self, annot, widget)
-        jlib.log('{type(widget)=}')
-        jlib.log('{widget=}')
+        #jlib.log('{type(widget)=}')
+        #jlib.log('{widget=}')
         val = JM_get_widget_properties(annot, widget)
-        jlib.log('{type(widget)=}')
-        jlib.log('{widget=}')
+        #jlib.log('{type(widget)=}')
+        #jlib.log('{widget=}')
 
         widget.rect = Rect(annot.rect)
-        jlib.log('{type(widget)=}')
-        jlib.log('{widget=}')
+        #jlib.log('{type(widget)=}')
+        #jlib.log('{widget=}')
         widget.xref = annot.xref
         widget.parent = annot.parent
         widget._annot = annot  # backpointer to annot object
-        jlib.log('{widget=} {type(widget)=}')
+        #jlib.log('{widget=} {type(widget)=}')
         if not widget.script:
             widget.script = None
         if not widget.script_stroke:
