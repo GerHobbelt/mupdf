@@ -938,7 +938,9 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
 	{
 		if (*pr->actual_text_p == 0)
 		{
-			fz_warn(ctx, "more characters than ActualText content");
+			/* swallow glyphs if the ActualText content has run out */
+			ucsbuf[0] = -1;
+			ucslen = 1;
 		}
 		else
 		{
