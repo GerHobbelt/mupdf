@@ -4307,6 +4307,10 @@ def make_function_wrapper_class_aware(
     '''
     assert fnname.startswith( ('fz_', 'pdf_'))
 
+    if fnname.endswith('_drop'):
+        jlib.log('Ignoring because ends with "_drop": {fnname}')
+        return
+
     # Construct prototype fnname(args).
     #
     decl_h = f'{fnname_wrapper}('
@@ -7054,7 +7058,8 @@ def cpp_source(
                             os.path.abspath( 'platform/c++/include/mupdf/classes2.h'),
                             os.path.abspath( 'platform/c++/implementation/classes2.cpp'),
                             ):
-                        cr = False
+                        if 0:
+                            cr = False
                     jlib.log('calling update_file_regress() check_regress={cr}: {self.filename=}', 1)
                     e = update_file_regress( text, self.filename, check_regression=cr)
                     jlib.log('update_file_regress() returned => {e}', 1)
@@ -7895,6 +7900,7 @@ def build_swig(
                 std::vector<unsigned char>  buffer(10);
                 int n = mupdf::runetochar((char*) &buffer[0], rune);
                 assert(n < sizeof(buffer));
+                buffer.resize(n);
                 return buffer;
             }}
             '''
