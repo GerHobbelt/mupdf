@@ -1526,6 +1526,7 @@ def getLinkText(page: Page, lnk: dict) -> str:
     # --------------------------------------------------------------------------
     # define skeletons for /Annots object texts
     # --------------------------------------------------------------------------
+    #jlib.log('> {jlib.exception_info()}')
     ctm = page.transformation_matrix
     ictm = ~ctm
     r = lnk["from"]
@@ -1539,6 +1540,7 @@ def getLinkText(page: Page, lnk: dict) -> str:
             xref = page.parent.page_xref(pno)
             pnt = lnk.get("to", Point(0, 0))  # destination point
             ipnt = pnt * ictm
+            #jlib.log('{txt=}')
             annot = txt % (xref, ipnt.x, ipnt.y, lnk.get("zoom", 0), rect)
         else:
             txt = annot_skel["goto2"]  # annot_goto_n
@@ -1597,6 +1599,7 @@ def getLinkText(page: Page, lnk: dict) -> str:
     # add /NM key to object definition
     annot = annot.replace("/Link", "/Link/NM(%s)" % name)
 
+    #jlib.log('<')
     return annot
 
 
@@ -1633,7 +1636,9 @@ def insert_link(page: Page, lnk: dict, mark: bool = True) -> None:
     annot = getLinkText(page, lnk)
     if annot == "":
         raise ValueError("link kind not supported")
+    #jlib.log('> page._addAnnot_FromString')
     page._addAnnot_FromString([annot])
+    #jlib.log('< page._addAnnot_FromString')
     return
 
 
