@@ -4527,7 +4527,7 @@ def make_function_wrapper_class_aware(
         else:
             prefix = None
         if prefix:
-            for i in ('new', 'create', 'find', 'load', 'open', 'keep'):
+            for i in ('new', 'create', 'find', 'load', 'open', 'keep', 'read'):
                 if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
                     break
             else:
