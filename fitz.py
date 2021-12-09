@@ -2529,6 +2529,12 @@ class Document:
 
         return glyphs
 
+    def get_oc(self, xref):
+        return utils.get_oc(self, xref)
+
+    def get_ocmd(self, xref):
+        return utils.get_ocmd(self, xref)
+
     def get_outline_xrefs(self):
         """Get list of outline xref numbers."""
         if self.isClosed:
@@ -3082,13 +3088,12 @@ class Document:
             raise ValueError("document closed or encrypted")
         return _fitz.Document_findBookmark(self, bm)
 
-    def get_oc(self, xref):
-        """Get xref of optional content object."""
-        assert 0, 'no Document_get_oc'
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_get_oc(self, xref)
-
+    #def get_oc(self, xref):
+    #    """Get xref of optional content object."""
+    #    assert 0, 'no Document_get_oc'
+    #    if self.isClosed:
+    #        raise ValueError("document closed")
+    #    return _fitz.Document_get_oc(self, xref)
     @property
     def isPDF(self):
         """Check for PDF."""
@@ -3442,6 +3447,15 @@ class Document:
             raise ValueError("document closed")
 
         return _fitz.Document_set_oc(self, xref, oc)
+
+    def set_ocmd(
+            doc,#: Document,
+            xref: int = 0,
+            ocgs: typing.Union[list, None] = None,
+            policy: OptStr = None,
+            ve: typing.Union[list, None] = None,
+            ) -> int:
+        return utils.set_ocmd(doc, xref, ocgs, policy, ve)
 
     def set_page_labels(doc, labels):
         """Add / replace page label definitions in PDF document.
@@ -4240,7 +4254,49 @@ class Document:
         """Show existing optional content groups."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_get_ocgs(self)
+        #return _fitz.Document_get_ocgs(self)
+        #PyObject *rc = NULL;
+        ci = mupdf.mpdf_new_name( "CreatorInfo")
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        ocgs = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root')),
+                PDF_NAME('OCProperties'),
+                PDF_NAME('OCGs'),
+                )
+        rc = dict()
+        if not mupdf.mpdf_is_array( ocgs):
+            return rc
+        n = mupdf.mpdf_array_len( ocgs);
+        for i in range(n):
+            ocg = mupdf.mpdf_array_get( ocgs, i)
+            xref = mupdf.mpdf_to_num( ocg)
+            name = mupdf.mpdf_to_text_string( mupdf.mpdf_dict_get( ocg, PDF_NAME('Name')))
+            obj = mupdf.mpdf_dict_getl( ocg, PDF_NAME('Usage'), ci, PDF_NAME('Subtype'))
+            usage = None
+            if obj.m_internal:
+                usage = mupdf.mpdf_to_name( obj)
+            intents = list()
+            intent = mupdf.mpdf_dict_get( ocg, PDF_NAME('Intent'))
+            if intent.m_internal:
+                if mupdf.mpdf_is_name( intent):
+                    intents.append( mupdf.mpdf_to_name( intent))
+                elif mupdf.mpdf_is_array( intent):
+                    m = mupdf.mpdf_array_len( intent)
+                    for j in range(m):
+                        o = mupdf.mpdf_array_get( intent, j)
+                        if mupdf.mpdf_is_name( o):
+                            intents.append( mupdf.mpdf_to_name( o))
+            hidden = mupdf.mpdf_is_ocg_hidden( pdf, mupdf.PdfObj(), usage, ocg)
+            item = {
+                    "name": name,
+                    "intent": intents,
+                    "on": not hidden,
+                    "usage": usage,
+                    }
+            temp = xref
+            rc[ temp] = item
+        return rc
 
     getOCGs = get_ocgs
 
@@ -8159,6 +8215,11 @@ class Page:
         textpage = TextPage(textpage)
         #jlib.log('{textpage=}')
         return textpage
+
+    def get_xobjects(self):
+        """List of xobjects defined in the page object."""
+        CheckParent(self)
+        return self.parent.get_page_xobjects(self.number)
 
     def getDisplayList(self, annots=1):
 
@@ -13642,10 +13703,9 @@ def JM_gather_forms(doc, dict_: mupdf.PdfObj, imagelist, stream_xref: int):
 
         entry = (
                 xref,
-                mupdf.mpdf_to_name(ctx, refname),
+                mupdf.mpdf_to_name( refname),
                 stream_xref,
                 JM_py_from_rect(bbox),
-                entry,
                 )
         imagelist.append(entry)
     return rc
