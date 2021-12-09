@@ -3975,7 +3975,7 @@ class Document:
         # put source page in target /Kids array ----------------------
         if not copy and same != 0:  # update parent in page object
             mupdf.mpdf_dict_put( page1, PDF_NAME('Parent'), parent2)
-        jlib.log('{kids2=} {kids2.m_internal=}')
+        jlib.log('{=kids2 kids2.m_internal page1 pos}')
         mupdf.mpdf_array_insert( kids2, page1, pos)
 
         if same != 0:   # different /Kids arrays ----------------------
@@ -17437,9 +17437,10 @@ def page_merge(doc_des, doc_src, page_from, page_to, rotate, links, copy_annots,
 
 
 def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
+    assert isinstance(node, mupdf.PdfObj)
     assert isinstance(skip, list) and len(skip) == 1
     assert isinstance(indexp, list) and len(indexp) == 1
-    assert isinstance(parentp, mupdf.PdfObj)
+    assert isinstance(parentp, list) and len(parentp) == 1 and isinstance(parentp[0], mupdf.PdfObj)
     # Copy of MuPDF's internal pdf_lookup_page_loc_imp().
     hit = None
     #pdf_obj *local_stack[LOCAL_STACK_SIZE];
@@ -17477,7 +17478,7 @@ def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
             for i in range(len_):
                 kid = mupdf.mpdf_array_get( kids, i)
                 type_ = mupdf.mpdf_dict_get( kid, PDF_NAME('Type'))
-                if type_:
+                if type_.m_internal:
                     a =  mupdf.mpdf_name_eq( type_, PDF_NAME('Pages'))
                 else:
                     a = (
@@ -17492,14 +17493,15 @@ def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
                     else:
                         skip[0] -= count
                 else:
-                    if type_:
+                    if type_.m_internal:
                         a = not mupdf.mpdf_name_eq( type_, PDF_NAME('Page'))
                     else:
                         a = not mupdf.mpdf_dict_get( kid, PDF_NAME('MediaBox')).m_internal
                     if a:
                         mupdf.mfz_warn( "non-page object in page tree (%s)" % mupdf.mpdf_to_name( type_))
                     if skip[0] == 0:
-                        parentp = node
+                        jlib.log('setting {parentp=} to {node.m_internal=}')
+                        parentp[0] = node
                         indexp[0] = i
                         hit = kid
                         break
@@ -17530,11 +17532,13 @@ def pdf_lookup_page_loc(doc, needle):
 
     if not node.m_internal:
         raise Exception("cannot find page tree")
-    parentp = mupdf.PdfObj()
+    parentp = [mupdf.PdfObj()]
     indexp = [0]
     hit = pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp)
     skip = skip[0]
+    parentp = parentp[0]
     indexp = indexp[0]
+    jlib.log('pdf_lookup_page_loc_imp() => {= hit.m_internal node.m_internal skip parentp.m_internal indexp}')
     if not hit.m_internal:
         raise Exception("cannot find page %d in page tree" % needle+1)
     return hit, parentp, indexp  # We don't seem to return skip.
