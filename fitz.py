@@ -2368,6 +2368,70 @@ class Document:
         self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
         return xref
 
+    def fullcopy_page(self, pno, to=-1):
+        """Make a full page duplicate."""
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        #val = _fitz.Document_fullcopy_page(self, pno, to)
+        pdf = self._pdf_document()
+        page_count = mupdf.mpdf_count_pages( pdf)
+        #fz_buffer *res = NULL, *nres=NULL;
+        #pdf_obj *page2 = NULL;
+        try:
+            ASSERT_PDF(pdf);
+            if (not INRANGE(pno, 0, page_count - 1)
+                    or not INRANGE(to, -1, page_count - 1)
+                    ):
+                THROWMSG(gctx, "bad page number(s)")
+
+            page1 = mupdf.mpdf_resolve_indirect( mupdf.mpdf_lookup_page_obj( pdf, pno))
+
+            page2 = mupdf.mpdf_deep_copy_obj( page1)
+            old_annots = mupdf.mpdf_dict_get( page2, PDF_NAME('Annots'))
+
+            # copy annotations, but remove Popup and IRT types
+            if old_annots.m_internal:
+                n = mupdf.mpdf_array_len( old_annots)
+                new_annots = mupdf.mpdf_new_array( pdf, n)
+                for i in range(n):
+                    o = mupdf.mpdf_array_get( old_annots, i)
+                    subtype = mupdf.mpdf_dict_get( o, PDF_NAME('Subtype'))
+                    if mupdf.mpdf_name_eq( subtype, PDF_NAME('Popup')):
+                        continue
+                    if mupdf.mpdf_dict_gets( o, "IRT").m_internal:
+                        continue
+                    copy_o = mupdf.mpdf_deep_copy_obj( mupdf.mpdf_resolve_indirect( o))
+                    xref = mupdf.mpdf_create_object( pdf)
+                    mupdf.mpdf_update_object( pdf, xref, copy_o)
+                    copy_o = mupdf.mpdf_new_indirect( pdf, xref, 0)
+                    mupdf.mpdf_dict_del( copy_o, PDF_NAME('Popup'))
+                    mupdf.mpdf_dict_del( copy_o, PDF_NAME('P'))
+                    mupdf.mpdf_array_push( new_annots, copy_o)
+                mupdf.mpdf_dict_put( page2, PDF_NAME('Annots'), new_annots)
+
+            # copy the old contents stream(s)
+            res = JM_read_contents( page1)
+
+            # create new /Contents object for page2
+            if res.m_internal:
+                #contents = mupdf.mpdf_add_stream( pdf, mupdf.mfz_new_buffer_from_copied_data( b"  ", 1), NULL, 0)
+                contents = mupdf.mpdf_add_stream( pdf, mupdf.Buffer.new_buffer_from_copied_data( b" "), mupdf.PdfObj(), 0)
+                JM_update_stream( pdf, contents, res, 1)
+                mupdf.mpdf_dict_put( page2, PDF_NAME('Contents'), contents)
+
+            # now insert target page, making sure it is an indirect object
+            xref = mupdf.mpdf_create_object( pdf)   # get new xref
+            mupdf.mpdf_update_object( pdf, xref, page2) # store new page
+
+            page2 = mupdf.mpdf_new_indirect( pdf, xref, 0)  # reread object
+            mupdf.mpdf_insert_page( pdf, to, page2) # and store the page
+        finally:
+            mupdf.mpdf_drop_page_tree( pdf);
+
+        self._reset_page_refs()
+
+
     def get_char_widths(doc, xref: int, limit: int = 256, idx: int = 0, fontdict: OptDict = None
             ) -> list:
         """Get list of glyph information of a font.
@@ -2545,6 +2609,30 @@ class Document:
         val._annot_refs = weakref.WeakValueDictionary()
         val.number = page_id
         return val
+
+    def move_page(self, pno: int, to: int =-1):
+        """Move a page within a PDF document.
+
+        Args:
+            pno: source page number.
+            to: put before this page, '-1' means after last page.
+        """
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        page_count = len(self)
+        if (
+            pno not in range(page_count) or
+            to not in range(-1, page_count)
+           ):
+            raise ValueError("bad page number(s)")
+        before = 1
+        copy = 0
+        if to == -1:
+            to = page_count - 1
+            before = 0
+
+        return self._move_copy_page(pno, to, before, copy)
 
     def new_page_(
             self,
