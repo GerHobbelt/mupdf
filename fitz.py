@@ -2235,7 +2235,7 @@ class Document:
         frozen_numbers = frozenset(numbers)
         toc = self.get_toc()
         xrefs = self.get_outline_xrefs()
-        jlib.log('{xrefs=}')
+        #jlib.log('{xrefs=}')
         for i, xref in enumerate(xrefs):
             if toc[i][2] - 1 in frozen_numbers:
                 self._remove_toc_item(xref)  # remove target in PDF object
@@ -4051,7 +4051,7 @@ class Document:
 
         page2, parent2, i2 = pdf_lookup_page_loc( pdf, nb)
         kids2 = mupdf.mpdf_dict_get( parent2, PDF_NAME('Kids'))
-        jlib.log('{kids2.m_internal=}')
+        #jlib.log('{kids2.m_internal=}')
         if before:  # calc index of source page in target /Kids
             pos = i2
         else:
@@ -4063,7 +4063,7 @@ class Document:
         # put source page in target /Kids array ----------------------
         if not copy and same != 0:  # update parent in page object
             mupdf.mpdf_dict_put( page1, PDF_NAME('Parent'), parent2)
-        jlib.log('{=kids2 kids2.m_internal page1 pos}')
+        #jlib.log('{=kids2 kids2.m_internal page1 pos}')
         mupdf.mpdf_array_insert( kids2, page1, pos)
 
         if same != 0:   # different /Kids arrays ----------------------
@@ -4664,7 +4664,7 @@ class Document:
             #jlib.log('{i=}')
             for item in self.page_annot_xrefs(i):
                 if item[1] == mupdf.PDF_ANNOT_LINK:
-                    jlib.log('Returning true')
+                    #jlib.log('Returning true')
                     return True
         #jlib.log('Returning false')
         return False
@@ -14850,7 +14850,7 @@ def JM_outline_xrefs(obj, xrefs):
         parent = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Parent'))   # get parent
         if not thisobj.m_internal:
             thisobj = parent    # goto parent if no next
-    jlib.log('{xrefs=}')
+    #jlib.log('{xrefs=}')
     return xrefs
 
 
@@ -17531,10 +17531,6 @@ def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
     assert isinstance(parentp, list) and len(parentp) == 1 and isinstance(parentp[0], mupdf.PdfObj)
     # Copy of MuPDF's internal pdf_lookup_page_loc_imp().
     hit = None
-    #pdf_obj *local_stack[LOCAL_STACK_SIZE];
-    #pdf_obj **stack = &local_stack[0];
-    #int stack_max = LOCAL_STACK_SIZE;
-    #int stack_len = 0;
     stack = []
     try:
         while 1:
@@ -17546,19 +17542,6 @@ def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
 
             # Every node we need to unmark goes into the stack
             stack.append(node)
-            #if stack_len == stack_max:
-            #    if (stack == &local_stack[0])
-            #    {
-            #        stack = fz_malloc_array(ctx, stack_max * 2, pdf_obj*);
-            #        memcpy(stack, &local_stack[0], stack_max * sizeof(*stack));
-            #    }
-            #    else
-            #    {
-            #        stack = fz_realloc_array(ctx, stack, stack_max * 2, pdf_obj*);
-            #    }
-            #    stack_max *= 2;
-            #}
-            #stack[stack_len++] = node;
 
             if mupdf.mpdf_mark_obj( node):
                 raise Exception( "cycle in page tree")
@@ -17588,7 +17571,7 @@ def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
                     if a:
                         mupdf.mfz_warn( "non-page object in page tree (%s)" % mupdf.mpdf_to_name( type_))
                     if skip[0] == 0:
-                        jlib.log('setting {parentp=} to {node.m_internal=}')
+                        #jlib.log('setting {parentp=} to {node.m_internal=}')
                         parentp[0] = node
                         indexp[0] = i
                         hit = kid
@@ -17626,7 +17609,7 @@ def pdf_lookup_page_loc(doc, needle):
     skip = skip[0]
     parentp = parentp[0]
     indexp = indexp[0]
-    jlib.log('pdf_lookup_page_loc_imp() => {= hit.m_internal node.m_internal skip parentp.m_internal indexp}')
+    #jlib.log('pdf_lookup_page_loc_imp() => {= hit.m_internal node.m_internal skip parentp.m_internal indexp}')
     if not hit.m_internal:
         raise Exception("cannot find page %d in page tree" % needle+1)
     return hit, parentp, indexp  # We don't seem to return skip.
