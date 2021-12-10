@@ -433,7 +433,7 @@ mupdf_package = pipcl.Package(
                 ],
         author = 'Artifex Software, Inc.',
         author_email = 'support@artifex.com',
-        url_docs = 'https://twiki.ghostscript.com/do/view/Main/MuPDFWrap/',
+        url_docs = 'https://mupdf.com/r/C-and-Python-APIs',
         url_home = 'https://mupdf.com/',
         url_source = 'https://git.ghostscript.com/?p=mupdf.git',
         url_tracker = 'https://bugs.ghostscript.com/',
