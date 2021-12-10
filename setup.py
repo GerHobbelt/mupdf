@@ -229,6 +229,7 @@ def sdist():
             'platform/c++/c_globals.pickle',
             'platform/c++/container_classnames.pickle',
             'platform/c++/implementation/classes.cpp',
+            'platform/c++/implementation/classes2.cpp',
             'platform/c++/implementation/exceptions.cpp',
             'platform/c++/implementation/functions.cpp',
             'platform/c++/implementation/internal.cpp',
