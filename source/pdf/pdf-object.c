@@ -3599,8 +3599,8 @@ int pdf_debug_obj_internal(fz_context *ctx, pdf_obj *obj, fz_output *out, int de
 
 void pdf_debug_obj(fz_context *ctx, pdf_obj *obj)
 {
-	//pdf_print_obj(ctx, fz_stddbg(ctx), pdf_resolve_indirect(ctx, obj), 0, 0);
-	pdf_debug_obj_internal(ctx, obj, fz_stddbg(ctx), 0 /*depth*/, 1 /*post_newline*/);
+	pdf_print_obj(ctx, fz_stddbg(ctx), pdf_resolve_indirect(ctx, obj), 0, 0);
+	//pdf_debug_obj_internal(ctx, obj, fz_stddbg(ctx), 0 /*depth*/, 1 /*post_newline*/);
 }
 
 void pdf_debug_ref(fz_context *ctx, pdf_obj *obj)
