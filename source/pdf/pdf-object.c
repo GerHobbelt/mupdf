@@ -3157,11 +3157,6 @@ static void fmt_dict(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 {
-	/*fprintf(stderr, "%s:%i:%s: obj=%p\n", __FILE__, __LINE__, __FUNCTION__, obj);
-	if ((intptr_t) obj > 4000)
-	{
-		fprintf(stderr, "%s:%i:%s: obj->kind=%i\n", __FILE__, __LINE__, __FUNCTION__, obj->kind);
-	}*/
 	if (obj == PDF_NULL)
 		fmt_puts(ctx, fmt, "null");
 	else if (obj == PDF_TRUE)

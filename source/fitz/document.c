@@ -618,10 +618,6 @@ fz_bound_page(fz_context *ctx, fz_page *page)
 void
 fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
 {
-	/*fprintf(stderr, "%s:%i:%s: page->run_page_contents%p\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			page->run_page_contents
-			);*/
 	if (page && page->run_page_contents)
 	{
 		fz_try(ctx)
@@ -658,16 +654,6 @@ fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix tra
 void
 fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
 {
-	/*fprintf(stderr, "%s:%i:%s: transform=(%f %f %f %f %f %f) cookie=%p\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			transform.a,
-			transform.b,
-			transform.c,
-			transform.d,
-			transform.e,
-			transform.f,
-			cookie
-			);*/
 	fz_run_page_contents(ctx, page, dev, transform, cookie);
 	fz_run_page_annots(ctx, page, dev, transform, cookie);
 }

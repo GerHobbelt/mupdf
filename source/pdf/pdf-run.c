@@ -108,7 +108,6 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 static void
 pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie)
 {
-	//fprintf(stderr, "%s:%i:%s:\n", __FILE__, __LINE__, __FUNCTION__);
 	fz_matrix page_ctm;
 	pdf_obj *resources;
 	pdf_obj *contents;
@@ -190,7 +189,6 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 
 void pdf_run_page_contents_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie)
 {
-	//fprintf(stderr, "%s:%i:%s:\n", __FILE__, __LINE__, __FUNCTION__);
 	pdf_document *doc = page->doc;
 	int nocache;
 
@@ -222,12 +220,6 @@ void pdf_run_page_contents_with_usage(fz_context *ctx, pdf_page *page, fz_device
 
 void pdf_run_page_contents(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
 {
-	/*fprintf(stderr, "%s:%i:%s: page=%p dev=%p ctm=(%f %f %f %f %f %f) cookie=%p\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			page, dev,
-			ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f,
-			cookie
-			);*/
 	pdf_run_page_contents_with_usage(ctx, page, dev, ctm, "View", cookie);
 }
 
