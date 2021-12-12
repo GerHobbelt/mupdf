@@ -17,21 +17,9 @@
 
 
 //------------------------------------------------------------------------
-// richtextbuffer.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextbuffer.cpp"
-
-
-//------------------------------------------------------------------------
 // richtextbulletspage.cpp
  
 #include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextbulletspage.cpp"
-
-
-//------------------------------------------------------------------------
-// richtextctrl.cpp
- 
-#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextctrl.cpp"
 
 
 //------------------------------------------------------------------------
@@ -62,4 +50,34 @@
 // richtextindentspage.cpp
  
 #include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextindentspage.cpp"
+
+
+//------------------------------------------------------------------------
+// richtextliststylepage.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextliststylepage.cpp"
+
+
+//------------------------------------------------------------------------
+// richtextmarginspage.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextmarginspage.cpp"
+
+
+//------------------------------------------------------------------------
+// richtextsizepage.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextsizepage.cpp"
+
+
+//------------------------------------------------------------------------
+// richtextstylepage.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextstylepage.cpp"
+
+
+//------------------------------------------------------------------------
+// richtexttabspage.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtexttabspage.cpp"
 
