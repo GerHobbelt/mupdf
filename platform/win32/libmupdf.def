@@ -219,6 +219,7 @@ EXPORTS
 	fz_document_supports_accelerator
 	fz_drop_document
 	fz_drop_page
+	fz_format_link_uri
 	fz_has_permission
 	fz_is_document_reflowable
 	fz_keep_document
@@ -254,6 +255,7 @@ EXPORTS
 	fz_register_document_handler
 	fz_register_document_handlers
 	fz_resolve_link
+	fz_resolve_link_dest
 	fz_run_page
 	fz_run_page_annots
 	fz_run_page_contents
@@ -776,6 +778,8 @@ EXPORTS
 	fz_drop_link
 	fz_is_external_link
 	fz_keep_link
+	fz_make_link_dest_none
+	fz_make_link_dest_xyz
 	fz_new_link
 	fz_log
 	fz_log_module
@@ -1280,6 +1284,7 @@ EXPORTS
 	pdf_annot_quad_point_count
 	pdf_annot_quadding
 	pdf_annot_rect
+	pdf_annot_refs
 	pdf_annot_request_resynthesis
 	pdf_annot_transform
 	pdf_annot_type
@@ -1302,6 +1307,7 @@ EXPORTS
 	pdf_first_annot
 	pdf_first_raw_annot
 	pdf_first_widget
+	pdf_format_link_uri
 	pdf_get_widget_editing_state
 	pdf_guess_mime_type_from_file_name
 	pdf_is_embedded_file
@@ -1320,7 +1326,6 @@ EXPORTS
 	pdf_new_action_from_link
 	pdf_new_destination_from_link
 	pdf_new_display_list_from_annot
-	pdf_new_link_uri
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
 	pdf_next_annot
@@ -1329,8 +1334,10 @@ EXPORTS
 	pdf_parse_default_appearance
 	pdf_parse_link_action
 	pdf_parse_link_dest
+	pdf_parse_link_uri
 	pdf_print_default_appearance
 	pdf_resolve_link
+	pdf_resolve_link_dest
 	pdf_run_annot
 	pdf_set_annot_active
 	pdf_set_annot_appearance
@@ -4215,6 +4222,7 @@ EXPORTS
 	FIO_decompressFilename
 	FIO_decompressMultipleFilenames
 	FIO_determineHasStdinInput
+	FIO_displayCompressionParameters
 	FIO_freeContext
 	FIO_freePreferences
 	FIO_listMultipleFiles
