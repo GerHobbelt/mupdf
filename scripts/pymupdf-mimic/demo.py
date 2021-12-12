@@ -24,9 +24,35 @@ for key in mupdf.metadata_keys:
     print(f'    {key}: {value!r}')
 print('')
 
-outline = mupdf.Outline(document)
-for o in outline:
-    print(f'    {" "*4*o.m_depth}{o.m_depth}: {o.m_outline.title()}')
+depth = 0
+it = mupdf.OutlineIterator(document)
+while 1:
+    item = it.outline_iterator_item()
+    if item.valid():
+        print(f'    {" "*4*depth}{item.title()}')
+    r = it.outline_iterator_down()
+    if r >= 0:
+        depth += 1
+    if r < 0:
+        r = it.outline_iterator_next()
+        assert r
+        if r:
+            # No more items at current depth, so repeatedly go up until we
+            # can go right.
+            end = 0
+            while 1:
+                r = it.outline_iterator_up()
+                if r < 0:
+                    # We are at EOF. Need to break out of top-level loop.
+                    end = 1
+                    break
+                depth -= 1
+                r = it.outline_iterator_next()
+                if r == 0:
+                    # There are items at this level.
+                    break
+            if end:
+                break
 
 if page_num > document.count_pages():
     raise SystemExit(f'page_num={page_num} is out of range - {filename} has {document.count_pages()} pages')

@@ -41,6 +41,11 @@ pdf_drop_annot(fz_context *ctx, pdf_annot *annot)
 	}
 }
 
+int pdf_annot_refs(fz_context *ctx, pdf_annot *annot)
+{
+	return (annot) ? annot->refs : -99;
+}
+
 void
 pdf_drop_annots(fz_context *ctx, pdf_annot *annot)
 {
