@@ -3330,7 +3330,7 @@ pdf_add_stream(fz_context *ctx, pdf_document *doc, fz_buffer *buf, pdf_obj *obj,
 
 pdf_document *pdf_create_document(fz_context *ctx)
 {
-	fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
+	//fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
 	pdf_document *doc;
 	pdf_obj *root;
 	pdf_obj *pages;
@@ -3338,7 +3338,7 @@ pdf_document *pdf_create_document(fz_context *ctx)
 
 	fz_var(trailer);
 
-	fprintf(stderr, "%s:%i:%s calling pdf_new_document()\n", __FILE__, __LINE__, __FUNCTION__);
+	//fprintf(stderr, "%s:%i:%s calling pdf_new_document()\n", __FILE__, __LINE__, __FUNCTION__);
 	doc = pdf_new_document(ctx, NULL);
 	fz_try(ctx)
 	{
@@ -3368,7 +3368,7 @@ pdf_document *pdf_create_document(fz_context *ctx)
 		fz_drop_document(ctx, &doc->super);
 		fz_rethrow(ctx);
 	}
-	fprintf(stderr, "%s:%i:%s returning\n", __FILE__, __LINE__, __FUNCTION__);
+	//fprintf(stderr, "%s:%i:%s returning\n", __FILE__, __LINE__, __FUNCTION__);
 	return doc;
 }
 

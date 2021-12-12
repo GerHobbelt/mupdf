@@ -517,10 +517,10 @@ pdf_jbig2_stream_from_file(fz_context *ctx, fz_buffer *input, fz_jbig2_globals *
 pdf_obj *
 pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 {
-	fprintf(stderr, "%s:%i:%s: image=%p\n",
+	/*fprintf(stderr, "%s:%i:%s: image=%p\n",
 			__FILE__, __LINE__, __FUNCTION__,
 			image
-			);
+			);*/
 	fz_pixmap *pixmap = NULL;
 	pdf_obj *imobj = NULL;
 	pdf_obj *dp;
@@ -532,10 +532,10 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 
 	/* If we can maintain compression, do so */
 	cbuffer = fz_compressed_image_buffer(ctx, image);
-	fprintf(stderr, "%s:%i:%s: image=%p cbuffer=%p\n",
+	/*fprintf(stderr, "%s:%i:%s: image=%p cbuffer=%p\n",
 			__FILE__, __LINE__, __FUNCTION__,
 			image, cbuffer
-			);
+			);*/
 
 	fz_var(pixmap);
 	fz_var(buffer);
@@ -544,19 +544,19 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 	fz_var(smask_image);
 
 	imobj = pdf_add_new_dict(ctx, doc, 3);
-	fprintf(stderr, "%s:%i:%s: pdf_to_num(ctx, imobj)=%i\n", __FILE__, __LINE__, __FUNCTION__, pdf_to_num(ctx, imobj));
+	/*fprintf(stderr, "%s:%i:%s: pdf_to_num(ctx, imobj)=%i\n", __FILE__, __LINE__, __FUNCTION__, pdf_to_num(ctx, imobj));*/
 	fz_try(ctx)
 	{
 		dp = pdf_dict_put_dict(ctx, imobj, PDF_NAME(DecodeParms), 3);
 		pdf_dict_put(ctx, imobj, PDF_NAME(Type), PDF_NAME(XObject));
 		pdf_dict_put(ctx, imobj, PDF_NAME(Subtype), PDF_NAME(Image));
-		fprintf(stderr, "%s:%i:%s: image=%p cbuffer=%p\n",
+		/*fprintf(stderr, "%s:%i:%s: image=%p cbuffer=%p\n",
 				__FILE__, __LINE__, __FUNCTION__,
 				image, cbuffer
-				);
+				);*/
 		if (cbuffer)
 		{
-			fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
+			/*fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);*/
 			fz_compression_params *cp = &cbuffer->params;
 			switch (cp->type)
 			{
@@ -651,10 +651,10 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 		else
 		{
 unknown_compression:
-			fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
+			//fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
 
 			pixmap = fz_get_pixmap_from_image(ctx, image, NULL, NULL, NULL, NULL);
-			fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
+			//fprintf(stderr, "%s:%i:%s\n", __FILE__, __LINE__, __FUNCTION__);
 			n = pixmap->n - pixmap->alpha - pixmap->s; /* number of colorants */
 			if (n == 0)
 				n = 1; /* treat pixmaps with only alpha or spots as grayscale */
