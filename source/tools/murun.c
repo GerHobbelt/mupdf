@@ -2849,7 +2849,7 @@ static void ffi_Page_toStructuredText(js_State *J)
 	js_newuserdata(J, "fz_stext_page", text, ffi_gc_fz_stext_page);
 }
 
-static void ffi_push_search_hits(js_State *J, int *marks, fz_quad *hits, int n)
+static void ffi_pushsearch(js_State *J, int *marks, fz_quad *hits, int n)
 {
 	int a = 0;
 	js_newarray(J);
@@ -2883,7 +2883,7 @@ static void ffi_Page_search(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 
-	ffi_push_search_hits(J, marks, hits, n);
+	ffi_pushsearch(J, marks, hits, n);
 }
 
 static void ffi_Page_getLinks(js_State *J)
@@ -3786,7 +3786,7 @@ static void ffi_DisplayList_search(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 
-	ffi_push_search_hits(J, marks, hits, n);
+	ffi_pushsearch(J, marks, hits, n);
 }
 
 static void ffi_StructuredText_walk(js_State *J)
@@ -3880,7 +3880,7 @@ static void ffi_StructuredText_search(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 
-	ffi_push_search_hits(J, marks, hits, n);
+	ffi_pushsearch(J, marks, hits, n);
 }
 
 static void ffi_StructuredText_highlight(js_State *J)
