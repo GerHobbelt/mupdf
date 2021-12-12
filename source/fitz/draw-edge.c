@@ -884,7 +884,7 @@ fz_convert_gel(fz_context *ctx, fz_rasterizer *rast, int eofill, const fz_irect 
 	else
 	{
 		fz_solid_color_painter_t *fn = fz_get_solid_color_painter(dst->n, color, dst->alpha, eop);
-		//assert(fn);
+		assert(fn || dst->alpha == 0);
 		if (fn == NULL)
 			return;
 		fz_scan_convert_sharp(ctx, gel, eofill, clip, dst, color, fn, eop);
