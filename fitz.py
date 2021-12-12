@@ -664,7 +664,7 @@ class Annot:
         #val = _fitz.Annot_rect(self)
         val = mupdf.mpdf_bound_annot(self.this)
         val = Rect(val)
-        jlib.log('{val=} {self.parent=}')
+        #jlib.log('{val=} {self.parent=}')
         val *= self.parent.derotation_matrix
         return val
 
@@ -1582,6 +1582,9 @@ class Document:
         self.initData()
         return val
 
+    def _do_links(self, doc2, from_page=-1, to_page=-1, start_at=-1):
+        return utils.do_links(self, doc2, from_page, to_page, start_at)
+
     def _dropOutline(self, ol):
         assert 0, 'Unnecessary'
         return _fitz.Document__dropOutline(self, ol)
@@ -2067,12 +2070,12 @@ class Document:
         return pdf.can_be_saved_incrementally()
 
     @property
-    def chapterCount(self):
+    def chapter_count(self):
         """Number of chapters."""
-        assert 0, 'no Document_chapterCount'
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_chapterCount(self)
+        #return _fitz.Document_chapter_count(self)
+        return mupdf.mfz_count_chapters( self.this)
 
     def chapterPageCount(self, chapter):
         """Page count of chapter."""
@@ -2943,12 +2946,15 @@ class Document:
         loc = mupdf.mfz_location_from_page_number(this_doc, pno)
         return loc.chapter, loc.page
 
-    def makeBookmark(self, loc):
+    def make_bookmark(self, loc):
         """Make a page pointer before layouting document."""
-        assert 0, 'no Document_makeBookmark'
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
-        return _fitz.Document_makeBookmark(self, loc)
+        #return _fitz.Document_make_bookmark(self, loc)
+        jlib.log('{loc=}')
+        loc = mupdf.Location(*loc)
+        mark = mupdf.mfz_make_bookmark( self.this, loc)
+        return mark
 
     @property
     def page_count(self):
@@ -6013,25 +6019,23 @@ class Page:
                             do_have_imask = 0
                         else:
                             #jlib.log('calling fz_get_pixmap_from_image()')
-                            pix = mupdf.mfz_get_pixmap_from_image(
+                            pix, _, _ = mupdf.mfz_get_pixmap_from_image(
                                     image,
                                     mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
                                     mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
-                                    0,
-                                    0,
                                     )
                             #jlib.log('calling fz_convert_pixmap()')
                             pm = mupdf.mfz_convert_pixmap(
                                     pix,
                                     mupdf.Colorspace(0),
                                     mupdf.Colorspace(0),
-                                    mupdf.DefaultColorspaces(0),
-                                    fz_default_color_params,
+                                    mupdf.DefaultColorspaces(),
+                                    mupdf.ColorParams(),
                                     1,
                                     );
                             pm.m_internal.alpha = 0
-                            pm.m_internal.colorspace = 0
-                            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
+                            pm.m_internal.colorspace = None
+                            mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image())
                             zimg = mupdf.mfz_new_image_from_pixmap(pix, mask)
                             image = zimg
                             #goto have_image()
@@ -7393,6 +7397,12 @@ class Page:
         return val
 
     @property
+    def first_link(self):
+        '''
+        First link on page
+        '''
+
+    @property
     def first_widget(self):
         """First widget/field."""
         CheckParent(self)
@@ -7580,6 +7590,9 @@ class Page:
         """List of images defined in the page object."""
         CheckParent(self)
         return self.parent.get_page_images(self.number, full=full)
+
+    def get_links(self):
+        return utils.get_links(self)
 
     def get_label(page):
         return utils.get_label(page)
@@ -8144,6 +8157,9 @@ class Page:
             return
         return mupdf.mpdf_to_str_buf(lang)
 
+    def load_links(self):
+        return sel.loadLinks()
+
     def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
         """Load an annot by name (/NM key) or xref.
 
@@ -8266,7 +8282,7 @@ class Page:
             raise ValueError("not a textpage of this page")
         #jlib.log('{type(tp)=}')
         rlist = tp.search(text, quads=quads)
-        #jlib.log('returning {len(rlist)=} {rlist=}')
+        jlib.log('returning {len(rlist)=} {rlist=}')
         return rlist
 
     def set_contents(self, xref):
@@ -10274,7 +10290,7 @@ class Shape(object):
         oc: int = 0,
     ) -> int:
 
-        jlib.log('{self=} {point=} {buffer_=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
+        #jlib.log('{self=} {point=} {buffer_=} {fontsize=} {lineheight=} {fontname=} {fontfile=} {set_simple=} {encoding=} {color=} {fill=} {render_mode=} {border_width=} {rotate=} {morph=} {stroke_opacity=} {fill_opacity=} {oc=}')
         # ensure 'text' is a list of strings, worth dealing with
         if not bool(buffer_):
             return 0
@@ -10298,11 +10314,11 @@ class Shape(object):
         if fname.startswith("/"):
             fname = fname[1:]
 
-        jlib.log('{fname=} {fontfile=} {encoding=} {set_simple=}')
+        #jlib.log('{fname=} {fontfile=} {encoding=} {set_simple=}')
         xref = self.page.insert_font(
             fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
         )
-        jlib.log('self.page.insert_font() => {xref=}')
+        #jlib.log('self.page.insert_font() => {xref=}')
         fontinfo = CheckFontInfo(self.doc, xref)
         #jlib.log('{fontinfo=}')
 
@@ -10922,7 +10938,7 @@ class TextPage:
             img = block.i_image()
             #jlib.log('{hashes=}')
             if hashes:
-                r = mupdf.Irect(INT_MIN, INT_MIN, INT_MAX, INT_MAX)
+                r = mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT)
                 assert r.is_infinite_irect()
                 m = mupdf.Matrix()
                 #jlib.log('calling mupdf.mfz_get_pixmap_from_image()')
@@ -14184,7 +14200,7 @@ def JM_merge_range(
         apage,
         rotate,
         links,
-        nnots,
+        annots,
         show_progress,
         graft_map,
         ):
@@ -17007,6 +17023,74 @@ def on_highlight_char(hits, line, ch):
     hits.len += 1
 
 
+def page_merge(doc_des, doc_src, page_from, page_to, rotate, links, copy_annots, graft_map):
+    '''
+    Deep-copies a specified source page to the target location.
+    Modified copy of function of pdfmerge.c: we also copy annotations, but
+    we skip **link** annotations. In addition we rotate output.
+    '''
+    #pdf_obj *page_ref = NULL;
+    #pdf_obj *page_dict = NULL;
+    #pdf_obj *obj = NULL, *ref = NULL;
+
+    # list of object types (per page) we want to copy
+    known_page_objs = [
+        PDF_NAME('Contents'),
+        PDF_NAME('Resources'),
+        PDF_NAME('MediaBox'),
+        PDF_NAME('CropBox'),
+        PDF_NAME('BleedBox'),
+        PDF_NAME('TrimBox'),
+        PDF_NAME('ArtBox'),
+        PDF_NAME('Rotate'),
+        PDF_NAME('UserUnit'),
+        ]
+    n = len(known_page_objs)  # number of list elements
+    page_ref = mupdf.mpdf_lookup_page_obj(doc_src, page_from)
+    mupdf.mpdf_flatten_inheritable_page_items(page_ref)
+
+    # make new page dict in dest doc
+    page_dict = mupdf.mpdf_new_dict(doc_des, 4)
+    mupdf.mpdf_dict_put(page_dict, PDF_NAME('Type'), PDF_NAME('Page'))
+
+    # copy objects of source page into it
+    for i in range(n):
+        obj = mupdf.mpdf_dict_get(page_ref, known_page_objs[i])
+        if obj.m_internal:
+            mupdf.mpdf_dict_put( page_dict, known_page_objs[i], mupdf.mpdf_graft_mapped_object(graft_map, obj))
+
+    # Copy the annotations, but skip types Link, Popup, IRT.
+    # Remove dict keys P (parent) and Popup from copied annot.
+    if copy_annots:
+        old_annots = mupdf.mpdf_dict_get( page_ref, PDF_NAME('Annots'))
+        if old_annots.m_internal:
+            n = mupdf.mpdf_array_len( old_annots)
+            new_annots = mupdf.mpdf_dict_put_array( page_dict, PDF_NAME('Annots'), n)
+            for i in range(n):
+                o = mupdf.mpdf_array_get( old_annots, i)
+                if mupdf.mpdf_dict_gets( o, "IRT").m_internal:
+                    continue
+                subtype = mupdf.mpdf_dict_get( o, PDF_NAME('Subtype'))
+                if mupdf.mpdf_name_eq( subtype, PDF_NAME('Link')):
+                    continue
+                if mupdf.mpdf_name_eq( subtype, PDF_NAME('Popup')):
+                    continue
+                mupdf.mpdf_dict_del( o, PDF_NAME('Popup'))
+                mupdf.mpdf_dict_del( o, PDF_NAME('P'))
+                copy_o = mupdf.mpdf_graft_mapped_object( graft_map, o)
+                annot = mupdf.mpdf_new_indirect( doc_des, mupdf.mpdf_to_num( copy_o), 0)
+                mupdf.mpdf_array_push( new_annots, annot)
+
+    # rotate the page
+    if rotate != -1:
+        mupdf.mpdf_dict_put_int( page_dict, PDF_NAME('Rotate'), rotate)
+    # Now add the page dictionary to dest PDF
+    ref = mupdf.mpdf_add_object( doc_des, page_dict)
+
+    # Insert new page at specified location
+    mupdf.mpdf_insert_page( doc_des, page_to, ref)
+
+
 def pdfobj_string(o, prefix=''):
     '''
     Returns description of mupdf.PdfObj (wrapper for pdf_obj) <o>.
@@ -17070,6 +17154,10 @@ def planishLine(p1: point_like, p2: point_like) -> Matrix:
     p1 = Point(p1)
     p2 = Point(p2)
     return Matrix(TOOLS._hor_matrix(p1, p2))
+
+
+def recover_line_quad(line, spans=None):
+    return utils.recover_line_quad(line, spans)
 
 
 def repair_mono_font(page: "Page", font: "Font") -> None:
@@ -17904,6 +17992,7 @@ class TOOLS:
     def set_small_glyph_heights(on=None):
         """Set / unset small glyph heights."""
         #return _fitz.Tools_set_small_glyph_heights(self, on)
+        global small_glyph_heights
         if on is None:
             return small_glyph_heights
         if on:
