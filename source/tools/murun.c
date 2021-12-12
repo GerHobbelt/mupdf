@@ -4690,6 +4690,21 @@ static void ffi_PDFDocument_findPage(js_State *J)
 	ffi_pushobj(J, pdf_keep_obj(ctx, obj));
 }
 
+static void ffi_PDFDocument_findPageNumber(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	pdf_obj *ref = js_touserdata(J, 1, "pdf_obj");
+	int num = 0;
+
+	fz_try(ctx)
+		num = pdf_lookup_page_number(ctx, pdf, ref);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, num);
+}
+
 static void ffi_PDFDocument_save(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -5185,10 +5200,25 @@ static void ffi_PDFGraftMap_graftPage(js_State *J)
 
 static void ffi_PDFObject_get(js_State *J)
 {
+	fz_context *ctx = js_getcontext(J);
 	pdf_obj *obj = js_touserdata(J, 0, "pdf_obj");
-	const char *key = js_tostring(J, 1);
-	if (!ffi_pdf_obj_has(J, obj, key))
-		js_pushundefined(J);
+
+	if (js_isuserdata(J, 1, "pdf_obj")) {
+		pdf_obj *key = js_touserdata(J, 1, "pdf_obj");
+		pdf_obj *val = NULL;
+		fz_try(ctx)
+			val = pdf_dict_get(ctx, obj, key);
+		fz_catch(ctx)
+			rethrow(J);
+		if (val)
+			ffi_pushobj(J, pdf_keep_obj(ctx, val));
+		else
+			js_pushnull(J);
+	} else {
+		const char *key = js_tostring(J, 1);
+		if (!ffi_pdf_obj_has(J, obj, key))
+			js_pushundefined(J);
+	}
 }
 
 static void ffi_PDFObject_put(js_State *J)
@@ -7730,6 +7760,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFDocument.deletePage", ffi_PDFDocument_deletePage, 1);
 		jsB_propfun(J, "PDFDocument.countPages", ffi_PDFDocument_countPages, 0);
 		jsB_propfun(J, "PDFDocument.findPage", ffi_PDFDocument_findPage, 1);
+		jsB_propfun(J, "PDFDocument.findPageNumber", ffi_PDFDocument_findPageNumber, 1);
 		jsB_propfun(J, "PDFDocument.save", ffi_PDFDocument_save, 2);
 
 		jsB_propfun(J, "PDFDocument.newNull", ffi_PDFDocument_newNull, 0);
