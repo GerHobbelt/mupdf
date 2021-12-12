@@ -1043,38 +1043,57 @@ FUN(Document_search)(JNIEnv *env, jobject self, jint chapter, jint page, jstring
 }
 
 JNIEXPORT jobject JNICALL
-FUN(Document_toReflowedDocument)(JNIEnv *env, jobject self, jstring joptions)
+FUN(Document_resolveLinkDestination)(JNIEnv *env, jobject self, jstring juri)
 {
 	fz_context *ctx = get_context(env);
 	fz_document *doc = from_Document(env, self);
-	fz_document *newdoc = NULL;
-	fz_stext_options opts;
-	const char *options = NULL;
+	const char *uri = "";
+	fz_link_dest dest;
+	jobject jdestination;
 
-	fz_var(newdoc);
+	if (!ctx || !doc) return NULL;
 
-	if (!ctx) return NULL;
-	if (joptions)
+	if (juri)
 	{
-		options = (*env)->GetStringUTFChars(env, joptions, NULL);
-		if (!options) return 0;
+		uri = (*env)->GetStringUTFChars(env, juri, NULL);
+		if (!uri)
+			return NULL;
 	}
 
 	fz_try(ctx)
-	{
-		fz_parse_stext_options(ctx, &opts, options);
-		newdoc = fz_new_xhtml_document_from_document(ctx, doc, &opts);
-	}
+		dest = fz_resolve_link_dest(ctx, doc, uri);
 	fz_always(ctx)
-	{
-		fz_drop_stext_options(ctx, &opts);
-		if (joptions)
-			(*env)->ReleaseStringUTFChars(env, joptions, options);
-	}
+		if (juri)
+			(*env)->ReleaseStringUTFChars(env, juri, uri);
 	fz_catch(ctx)
-	{
 		jni_rethrow(env, ctx);
-	}
 
-	return to_Document_safe_own(ctx, env, newdoc);
+	jdestination = (*env)->NewObject(env, cls_LinkDestination, mid_LinkDestination_init,
+		dest.loc.chapter, dest.loc.page, dest.type, dest.x, dest.y, dest.w, dest.h, dest.zoom);
+	if (!jdestination || (*env)->ExceptionCheck(env))
+		return NULL;
+
+	return jdestination;
+}
+
+JNIEXPORT jstring JNICALL
+FUN(Document_formatLinkURI)(JNIEnv *env, jobject self, jobject jdest)
+{
+	fz_context *ctx = get_context(env);
+	fz_document *doc = from_Document(env, self);
+	fz_link_dest dest = from_LinkDestination(env, jdest);
+	char *uri = NULL;
+	jobject juri;
+
+	fz_try(ctx)
+		uri = fz_format_link_uri(ctx, doc, dest);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	juri = (*env)->NewStringUTF(env, uri);
+	fz_free(ctx, uri);
+	if (juri == NULL || (*env)->ExceptionCheck(env))
+		return NULL;
+
+	return juri;
 }

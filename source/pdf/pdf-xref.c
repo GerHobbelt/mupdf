@@ -2774,11 +2774,17 @@ pdf_set_metadata(fz_context *ctx, pdf_document *doc, const char *key, const char
 		fz_rethrow(ctx);
 }
 
-static fz_location
-pdf_resolve_link_imp(fz_context *ctx, fz_document *doc_, const char *uri, float *xp, float *yp)
+static fz_link_dest
+pdf_resolve_link_imp(fz_context *ctx, fz_document *doc_, const char *uri)
 {
 	pdf_document *doc = pdf_document_from_fz_document(ctx, doc_);
-	return fz_make_location(0, pdf_resolve_link(ctx, doc, uri, xp, yp));
+	return pdf_resolve_link_dest(ctx, doc, uri);
+}
+
+char *
+pdf_format_link_uri_imp(fz_context *ctx, fz_document *doc, fz_link_dest dest)
+{
+	return pdf_format_link_uri(ctx, dest);
 }
 
 
@@ -2840,7 +2846,8 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	doc->super.authenticate_password = __pdf_authenticate_password;
 	doc->super.has_permission = __pdf_has_permission;
 	doc->super.outline_iterator = __pdf_new_outline_iterator;
-	doc->super.resolve_link = pdf_resolve_link_imp;
+	doc->super.resolve_link_dest = pdf_resolve_link_imp;
+	doc->super.format_link_uri = pdf_format_link_uri_imp;
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;
 	doc->super.lookup_metadata = __pdf_lookup_metadata;
