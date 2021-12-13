@@ -2371,6 +2371,17 @@ class Document:
         self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
         return xref
 
+    def find_bookmark(self, bm):
+        """Find new location after layouting a document."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        jlib.log('{type(bm)=} {bm:x=}')
+        #return _fitz.Document_find_bookmark(self, bm)
+        #mark = (intptr_t) PyLong_AsVoidPtr(bm);
+        location = mupdf.lookup_bookmark2( self.this.m_internal, bm)
+        jlib.log('{location=}')
+        return location.chapter, location.page
+
     def fullcopy_page(self, pno, to=-1):
         """Make a full page duplicate."""
         if self.is_closed:
@@ -2584,6 +2595,15 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document_isReflowable(self)
+
+    @property
+    def last_location(self):
+        """Id (chapter, page) of last page."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_last_location(self)
+        last_loc = mupdf.mfz_last_page(self.this)
+        return last_loc.chapter, last_loc.page
 
     def loadPage(self, page_id):
         """Load a page.
@@ -3137,9 +3157,9 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
 
-        val = _fitz.Document_layout(self, rect, width, height, fontsize)
+        #val = _fitz.Document_layout(self, rect, width, height, fontsize)
         doc = self.this
-        if not mupdf.mfz_is_document_reflowable(doc):
+        if not mupdf.mfz_is_document_reflowable( doc):
             return
         w = width
         h = height
@@ -3148,11 +3168,11 @@ class Document:
             w = r.x1 - r.x0
             h = r.y1 - r.y0
         if w <= 0.0 or h <= 0.0:
-            THROWMSG("invalid page size")
-        mupdf.mfz_layout_document(doc, w, h, fontsize)
+            THROWMSG( "invalid page size");
+        mupdf.mfz_layout_document( doc, w, h, fontsize)
+
         self._reset_page_refs()
-        self.initData()
-        return
+        self.init_doc()
 
     def location_from_page_number(self, pno):
         """Convert pno to (chapter, page)."""
@@ -3174,9 +3194,10 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_make_bookmark(self, loc)
-        #jlib.log('{loc=}')
+        jlib.log('{loc=}')
         loc = mupdf.Location(*loc)
-        mark = mupdf.mfz_make_bookmark( self.this, loc)
+        mark = mupdf.make_bookmark2( self.this.m_internal, loc.internal())
+        jlib.log('returning {mark:x=}')
         return mark
 
     @property
@@ -3296,10 +3317,21 @@ class Document:
             perm = perm ^ mupdf.PDF_PERM_ANNOTATE;
         return perm
 
-    def previousLocation(self, page_id):
+    def chapter_page_count(self, chapter):
+        """Page count of chapter."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_chapter_page_count(self, chapter)
+        chapters = mupdf.mfz_count_chapters( self.this)
+        if chapter < 0 or chapter >= chapters:
+            THROWMSG( "bad chapter number")
+        pages = mupdf.mfz_count_chapter_pages( self.this, chapter)
+        return pages
+
+    def prev_location(self, page_id):
+
         """Get (chapter, page) of previous page."""
-        assert 0, 'no Document_previousLocation'
-        if self.isClosed or self.isEncrypted:
+        if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
         if type(page_id) is int:
             page_id = (0, page_id)
@@ -3307,7 +3339,11 @@ class Document:
             raise ValueError("page id not in document")
         if page_id  == (0, 0):
             return ()
-        return _fitz.Document_previousLocation(self, page_id)
+        #return _fitz.Document_prev_location(self, page_id)
+        chapter, pno = page_id
+        loc = mupdf.mfz_make_location(chapter, pno);
+        prev_loc = mupdf.mfz_previous_page(self.this, loc)
+        return prev_loc.chapter, prev_loc.page
 
     def resolveLink(self, uri=None, chapters=0):
         """Calculate internal link destination.
@@ -4745,12 +4781,12 @@ class Document:
         chapter, pno = loc
         if (type(chapter) != int or
             chapter < 0 or
-            chapter >= self.chapterCount
+            chapter >= self.chapter_count
             ):
             return False
         if (type(pno) != int or
             pno < 0 or
-            pno >= self.chapterPageCount(chapter)
+            pno >= self.chapter_page_count(chapter)
             ):
             return False
         return True
@@ -17833,6 +17869,89 @@ def page_merge(doc_des, doc_src, page_from, page_to, rotate, links, copy_annots,
     # Insert new page at specified location
     mupdf.mpdf_insert_page( doc_des, page_to, ref)
 
+
+def paper_rect(s: str) -> Rect:
+    """Return a Rect for the paper size indicated in string 's'. Must conform to the argument of method 'PaperSize', which will be invoked.
+    """
+    width, height = paper_size(s)
+    return Rect(0.0, 0.0, width, height)
+
+
+def paper_size(s: str) -> tuple:
+    """Return a tuple (width, height) for a given paper format string.
+
+    Notes:
+        'A4-L' will return (842, 595), the values for A4 landscape.
+        Suffix '-P' and no suffix return the portrait tuple.
+    """
+    size = s.lower()
+    f = "p"
+    if size.endswith("-l"):
+        f = "l"
+        size = size[:-2]
+    if size.endswith("-p"):
+        size = size[:-2]
+    rc = paper_sizes().get(size, (-1, -1))
+    if f == "p":
+        return rc
+    return (rc[1], rc[0])
+
+
+def paper_sizes():
+    """Known paper formats @ 72 dpi as a dictionary. Key is the format string
+    like "a4" for ISO-A4. Value is the tuple (width, height).
+
+    Information taken from the following web sites:
+    www.din-formate.de
+    www.din-formate.info/amerikanische-formate.html
+    www.directtools.de/wissen/normen/iso.htm
+    """
+    return {
+        "a0": (2384, 3370),
+        "a1": (1684, 2384),
+        "a10": (74, 105),
+        "a2": (1191, 1684),
+        "a3": (842, 1191),
+        "a4": (595, 842),
+        "a5": (420, 595),
+        "a6": (298, 420),
+        "a7": (210, 298),
+        "a8": (147, 210),
+        "a9": (105, 147),
+        "b0": (2835, 4008),
+        "b1": (2004, 2835),
+        "b10": (88, 125),
+        "b2": (1417, 2004),
+        "b3": (1001, 1417),
+        "b4": (709, 1001),
+        "b5": (499, 709),
+        "b6": (354, 499),
+        "b7": (249, 354),
+        "b8": (176, 249),
+        "b9": (125, 176),
+        "c0": (2599, 3677),
+        "c1": (1837, 2599),
+        "c10": (79, 113),
+        "c2": (1298, 1837),
+        "c3": (918, 1298),
+        "c4": (649, 918),
+        "c5": (459, 649),
+        "c6": (323, 459),
+        "c7": (230, 323),
+        "c8": (162, 230),
+        "c9": (113, 162),
+        "card-4x6": (288, 432),
+        "card-5x7": (360, 504),
+        "commercial": (297, 684),
+        "executive": (522, 756),
+        "invoice": (396, 612),
+        "ledger": (792, 1224),
+        "legal": (612, 1008),
+        "legal-13": (612, 936),
+        "letter": (612, 792),
+        "monarch": (279, 540),
+        "tabloid-extra": (864, 1296),
+        }
 
 
 def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
