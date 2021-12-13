@@ -4178,19 +4178,84 @@ class Document:
         """Show optional OC layers."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_get_layers(self)
+        #return _fitz.Document_get_layers(self)
+        #PyObject *rc = NULL;
+        #pdf_layer_config info = {NULL, NULL};
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        n = mupdf.mpdf_count_layer_configs( pdf)
+        if n == 1:
+            obj = mupdf.mpdf_dict_getl(
+                    mupdf.mpdf_trailer( pdf),
+                    PDF_NAME('Root'),
+                    PDF_NAME('OCProperties'),
+                    PDF_NAME('Configs'),
+                    )
+            if not mupdf.mpdf_is_array( obj):
+                n = 0
+        rc = []
+        info = mupdf.PdfLayerConfig()
+        for i in range(n):
+            mupdf.mpdf_layer_config_info( pdf, i, info);
+            item = { #Py_BuildValue("{s:i,s:s,s:s}",
+                    "number": i,
+                    "name": info.name,
+                    "creator": info.creator,
+                    }
+            rc.append( item)
+            #info.name = NULL;
+            #info.creator = NULL;
+        return rc
 
     def switch_layer(self, config, as_default=0):
         """Activate an OC layer."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_switch_layer(self, config, as_default)
+        #return _fitz.Document_switch_layer(self, config, as_default)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        cfgs = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer( pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('OCProperties'),
+                PDF_NAME('Configs')
+                )
+        if not mupdf.mpdf_is_array( cfgs) or not mupdf.mpdf_array_len( cfgs):
+            if config < 1:
+                return
+            THROWMSG( "bad layer number")
+        if config < 0:
+            return
+        mupdf.mpdf_select_layer_config( pdf, config)
+        if as_default:
+            mupdf.mpdf_set_layer_config_as_default( pdf)
+            mupdf.mpdf_read_ocg( pdf)
 
     def get_layer(self, config=-1):
         """Content of ON, OFF, RBGroups of an OC layer."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_get_layer(self, config)
+        #return _fitz.Document_get_layer(self, config)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        ocp = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer( pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('OCProperties'),
+                )
+        if not ocp.m_internal:
+            return
+        if config == -1:
+            obj = mupdf.mpdf_dict_get( ocp, PDF_NAME('D'))
+        else:
+            obj =mupdf.mpdf_array_get(
+                    mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs')),
+                    config,
+                    );
+        if not obj.m_internal:
+            THROWMSG( "bad config number")
+        rc = JM_get_ocg_arrays( obj)
+        return rc
 
     def set_layer(self, config, basestate=None, on=None, off=None, rbgroups=None):
         """Set the PDF keys /ON, /OFF, /RBGroups of an OC layer."""
@@ -4230,19 +4295,67 @@ class Document:
                 basestate = "Unchanged"
             if basestate not in ("ON", "OFF", "Unchanged"):
                 raise ValueError("bad 'basestate'")
-        return _fitz.Document_set_layer(self, config, basestate, on, off, rbgroups)
+        #return _fitz.Document_set_layer(self, config, basestate, on, off, rbgroups)
+        #pdf_obj *obj = NULL;
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        ocp = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer( pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('OCProperties'),
+                )
+        if not ocp.m_internal:
+            return
+        if config == -1:
+            obj = mupdf.mpdf_dict_get( ocp, PDF_NAME('D'))
+        else:
+            obj = mupdf.mpdf_array_get(
+                    mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs')),
+                    config,
+                    )
+        if not obj.m_internal:
+            THROWMSG( "bad config number")
+        JM_set_ocg_arrays( obj, basestate, on, off, rbgroups)
+        mupdf.mpdf_read_ocg( pdf)
 
     def add_layer(self, name, creator=None, on=None):
         """Add a new OC layer."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_add_layer(self, name, creator, on)
+        #return _fitz.Document_add_layer(self, name, creator, on)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        JM_add_layer_config( pdf, name, creator, on)
+        mupdf.mpdf_read_ocg( pdf)
 
     def layer_ui_configs(self):
         """Show OC visibility status modifyable by user."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_layer_ui_configs(self)
+        #return _fitz.Document_layer_ui_configs(self)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        info = mupdf.PdfLayerConfigUi()
+        n = mupdf.mpdf_count_layer_config_ui( pdf)
+        rc = []
+        for i in range(n):
+            mupdf.mpdf_layer_config_ui_info( pdf, i, info)
+            if info.type == 1:
+                type_ = "checkbox"
+            elif info.type == 2:
+                type_ = "radiobox"
+            else:
+                type_ = "label"
+            item = {
+                    "number": i,
+                    "text": info.text,
+                    "depth": info.depth,
+                    "type": type_,
+                    "on": info.selected,
+                    "locked": info.locked,
+                    }
+            rc.append(item)
+        return rc
 
     def set_layer_ui_config(self, number, action=0):
         """Set / unset OC intent configuration."""
@@ -13036,6 +13149,38 @@ def JM_add_annot_id(annot, stem):
     mupdf.mpdf_dict_puts(annot_obj, "NM", name)
 
 
+
+def JM_add_layer_config( pdf, name, creator, ON):
+    '''
+    Add OC configuration to the PDF catalog
+    '''
+    #pdf_obj *D, *ocp, *configs;
+    ocp = JM_ensure_ocproperties( pdf)
+    configs = mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs'))
+    if not mupdf.mpdf_is_array( configs):
+        configs = mupdf.mpdf_dict_put_array( ocp, PDF_NAME('Configs'), 1)
+    D = mupdf.mpdf_new_dict( pdf, 5)
+    mupdf.mpdf_dict_put_text_string( D, PDF_NAME('Name'), name)
+    if creator is not None:
+        mupdf.mpdf_dict_put_text_string( D, PDF_NAME('Creator'), creator)
+    mupdf.mpdf_dict_put( D, PDF_NAME('BaseState'), PDF_NAME('OFF'))
+    onarray = mupdf.mpdf_dict_put_array( D, PDF_NAME('ON'), 5)
+    if not ON:
+        pass
+    else:
+        ocgs = mupdf.mpdf_dict_get( ocp, PDF_NAME('OCGs'))
+        n = len(ON)
+        for i in range(n):
+            xref = 0
+            e, xref = JM_INT_ITEM(ON, i)
+            if e == 1:
+                 continue;
+            ind = mupdf.mpdf_new_indirect( pdf, xref, 0)
+            if mupdf.mpdf_array_contains( ocgs, ind):
+                mupdf.mpdf_array_push( onarray, ind)
+    mupdf.mpdf_array_push( configs, D)
+
+
 def JM_char_bbox(line, ch, verbose=0):
     '''
     return rect of char quad
@@ -14176,6 +14321,54 @@ def JM_get_fontextension(doc, xref):
             PySys_WriteStdout("unhandled font type '%s'", mupdf.mpdf_to_name(obj))
 
     return "n/a"
+
+
+def JM_get_ocg_arrays_imp(arr):
+    '''
+    Get OCG arrays from OC configuration
+    Returns dict {"basestate":name, "on":list, "off":list, "rbg":list}
+    '''
+    list_ = list()
+    if mupdf.mpdf_is_array( arr):
+        n = mupdf.mpdf_array_len( arr)
+        for i in range(n):
+            obj = mupdf.mpdf_array_get( arr, i)
+            item = mupdf.mpdf_to_num( obj)
+            if not item in list_:
+                list_.append(item)
+    return list_
+
+
+def JM_get_ocg_arrays(conf):
+
+    rc = dict()
+    #list_ = NPyDict_New(), *list = NULL, *list1 = NULL;
+    #pdf_obj *arr = NULL, *obj = NULL;
+    arr = mupdf.mpdf_dict_get( conf, PDF_NAME('ON'))
+    list_ = JM_get_ocg_arrays_imp( arr)
+    if list_:
+        rc["on"] = list_
+    arr = mupdf.mpdf_dict_get( conf, PDF_NAME('OFF'))
+    list_ = JM_get_ocg_arrays_imp( arr)
+    if list_:
+        rc["off"] = list_
+    list_ = list()
+    arr = mupdf.mpdf_dict_get( conf, PDF_NAME('RBGroups'))
+    if mupdf.mpdf_is_array( arr):
+        n = mupdf.mpdf_array_len( arr)
+        for i in range(n):
+            obj = mupdf.mpdf_array_get( arr, i)
+            list1 = JM_get_ocg_arrays_imp( obj)
+            list_.append(list1)
+    if list_:
+        rc["rbgroups"] = list_
+    obj = mupdf.mpdf_dict_get( conf, PDF_NAME('BaseState'))
+
+    if obj.m_internal:
+        #PyObject *state = NULL;
+        state = mupdf.mpdf_to_name( obj)
+        rc["basestate"] = state
+    return rc
 
 
 def JM_get_page_labels(liste, nums):
@@ -15459,6 +15652,32 @@ def JM_set_object_value(obj, key, value):
     return new_obj;
 
 
+def JM_set_ocg_arrays(conf, basestate, on, off, rbgroups):
+    #pdf_obj *arr = NULL, *obj = NULL, *indobj = NULL;
+    if basestate:
+        mupdf.mpdf_dict_put_name( conf, PDF_NAME('BaseState'), basestate)
+
+    if on is not None:
+        mupdf.mpdf_dict_del( conf, PDF_NAME('ON'))
+        if on:
+            arr = mupdf.mpdf_dict_put_array( conf, PDF_NAME('ON'), 1)
+            JM_set_ocg_arrays_imp( arr, on)
+    if off is not None:
+        mupdf.mpdf_dict_del( conf, PDF_NAME('OFF'))
+        if off:
+            arr = mupdf.mpdf_dict_put_array( conf, PDF_NAME('OFF'), 1)
+            JM_set_ocg_arrays_imp( arr, off)
+    if rbgroups is not None:
+        mupdf.mpdf_dict_del( conf, PDF_NAME('RBGroups'))
+        if rbgroups:
+            arr = mupdf.mpdf_dict_put_array( conf, PDF_NAME('RBGroups'), 1)
+            n =len(rbgroups)
+            for i in range(n):
+                item0 = rbgroups[i]
+                obj = mupdf.mpdf_array_push_array( arr, 1)
+                JM_set_ocg_arrays_imp( obj, item0)
+
+
 def JM_set_resource_property(ref, name, xref):
     '''
     Insert an item into Resources/Properties (used for Marked Content)
@@ -16380,17 +16599,17 @@ def image_properties(img: typing.ByteString) -> dict:
     return TOOLS.image_profile(stream)
 
 
-def pdf_dict_getl(doc, obj, *keys):
-    assert 0, 'is this fn defunct?'
-    #jlib.log('{obj=} {len(keys)=}: {keys}')
-    #jlib.log('{doc.this.count_pages()=}')
-    for i in range(len(keys)):
-        if not obj:
-            break
-        obj = obj.dict_get(keys[i])
-        #jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
-    #jlib.log('{obj=} {doc.this.count_pages()=}')
-    return obj
+#def pdf_dict_getl(doc, obj, *keys):
+#    assert 0, 'is this fn defunct?'
+#    #jlib.log('{obj=} {len(keys)=}: {keys}')
+#    #jlib.log('{doc.this.count_pages()=}')
+#    for i in range(len(keys)):
+#        if not obj:
+#            break
+#        obj = obj.dict_get(keys[i])
+#        #jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
+#    #jlib.log('{obj=} {doc.this.count_pages()=}')
+#    return obj
 
 
 def planish_line(p1: point_like, p2: point_like) -> Matrix:
