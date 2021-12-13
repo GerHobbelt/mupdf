@@ -7920,6 +7920,29 @@ def build_swig(
                 buffer.resize(n);
                 return buffer;
             }}
+
+            /* SWIG-friendly alternatives to fz_make_bookmark() and
+            fz_lookup_bookmark(), using long long instead of fz_bookmark
+            because SWIG appears to treat fz_bookmark as an int despite it
+            being a typedef for intptr_t, so ends up slicing. */
+            long long unsigned make_bookmark2(fz_document* doc, fz_location loc)
+            {{
+                fz_bookmark bm = mupdf::make_bookmark(doc, loc);
+                return (long long unsigned) bm;
+            }}
+            long long unsigned mfz_make_bookmark2(fz_document* doc, fz_location loc)
+            {{
+                return make_bookmark2(doc, loc);
+            }}
+
+            fz_location lookup_bookmark2(fz_document *doc, long long unsigned mark)
+            {{
+                return mupdf::lookup_bookmark(doc, (fz_bookmark) mark);
+            }}
+            fz_location mfz_lookup_bookmark2(fz_document *doc, long long unsigned mark)
+            {{
+                return lookup_bookmark2(doc, mark);
+            }}
             '''
 
     common += generated.swig_cpp
