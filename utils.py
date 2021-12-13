@@ -605,7 +605,7 @@ def get_image_info(page: Page, hashes: bool = False, xrefs: bool = False) -> lis
         hashes: (bool) include MD5 hash for each image.
         xrefs: (bool) try to find the xref for each image. Sets hashes to true.
     """
-    #jlib.log('{=hashes xrefs}')
+    jlib.log('{=hashes xrefs}')
     doc = page.parent
     #jlib.log('{=doc}')
     if xrefs and doc.is_pdf:
@@ -616,20 +616,20 @@ def get_image_info(page: Page, hashes: bool = False, xrefs: bool = False) -> lis
         xrefs = False
     #jlib.log('calling getattr()')
     imginfo = getattr(page, "_image_info", None)
-    #jlib.log('{imginfo=}')
+    jlib.log('{imginfo=}')
     if imginfo and not xrefs:
-        #jlib.log('imginfo and not xrefs; returning {imginfo=}')
+        jlib.log('imginfo and not xrefs; returning {imginfo=}')
         return imginfo
     if not imginfo:
         #jlib.log('{TEXT_PRESERVE_IMAGES=}')
         tp = page.get_textpage(flags=TEXT_PRESERVE_IMAGES)
         imginfo = tp.extractIMGINFO(hashes=hashes)
-        #jlib.log('tp.extractIMGINFO() => {imginfo=}')
+        jlib.log('tp.extractIMGINFO() => {imginfo=}')
         del tp
         if hashes:
             page._image_info = imginfo
     if not xrefs or not doc.is_pdf:
-        #jlib.log('not xrefs or not doc.is_pdf: returning {imginfo=}')
+        jlib.log('not xrefs or not doc.is_pdf: returning {imginfo=}')
         return imginfo
     imglist = page.get_images()
     digests = {}
@@ -638,12 +638,15 @@ def get_image_info(page: Page, hashes: bool = False, xrefs: bool = False) -> lis
         pix = Pixmap(doc, xref)
         digests[pix.digest] = xref
         del pix
+    jlib.log('{digests=}')
+    jlib.log('{len(imginfo)=}')
     for i in range(len(imginfo)):
         item = imginfo[i]
+        jlib.log('{item["digest"]=}')
         xref = digests.get(item["digest"], 0)
         item["xref"] = xref
         imginfo[i] = item
-    #jlib.log('returning {imginfo=}')
+    jlib.log('returning {imginfo=}')
     return imginfo
 
 
@@ -722,6 +725,7 @@ def get_text(
         "blocks": 1,
     }
     option = option.lower()
+    jlib.log('{=option clip flags textpage sort}')
     if option not in formats:
         option = "text"
     if flags is None:
@@ -759,6 +763,7 @@ def get_text(
         t = tp.extractRAWJSON(cb=cb, sort=sort)
     elif option == "dict":
         t = tp.extractDICT(cb=cb, sort=sort)
+        jlib.log('{t!r=}')
     elif option == "rawdict":
         t = tp.extractRAWDICT(cb=cb, sort=sort)
     elif option == "html":
@@ -4929,14 +4934,19 @@ def recover_line_quad(line: dict, spans: list = None) -> Quad:
     Returns:
         Quad covering selected spans.
     """
+    #jlib.log(' ')
+    #jlib.log('{line=}')
+    #jlib.log('{spans=}')
     if spans == None:  # no sub-selection
         spans = line["spans"]  # all spans
+    #jlib.log('{spans=}')
     if len(spans) == 0:
         raise ValueError("bad span list")
     line_dir = line["dir"]  # text direction
+    #jlib.log('{line_dir=}')
     cos, sin = line_dir
     q0 = recover_quad(line_dir, spans[0])  # quad of first span
-
+    #jlib.log('{q0=}')
     if len(spans) > 1:  # get quad of last span
         q1 = recover_quad(line_dir, spans[-1])
     else:
@@ -4959,6 +4969,7 @@ def recover_line_quad(line: dict, spans: list = None) -> Quad:
     line_rect = Rect(0, -h, x_lr.x, 0)  # line rectangle
     line_quad = line_rect.quad  # make it a quad and:
     line_quad *= ~mat0
+    #jlib.log('returning {line_quad=}')
     return line_quad
 
 
