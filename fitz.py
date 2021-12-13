@@ -14999,6 +14999,7 @@ def JM_new_buffer_from_stext_page(page):
 
 
 def JM_new_output_fileptr(bio):
+    assert 0, 'fz_new_output() not yet supported'
     out = mupdf.mfz_new_output(0, bio, JM_bytesio_write, None, None)
     out.seek = JM_bytesio_seek
     out.tell = JM_bytesio_tell
@@ -16551,24 +16552,28 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
         glyphs = zapf_glyphs
     if glyphs is not None:
         w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
-        return w * fontsize
+        ret = w * fontsize
+        jlib.log('{ret=}')
+        return ret
 
     if fontname in Base14_fontdict.keys():
-        return TOOLS._measure_string(
-            text, Base14_fontdict[fontname], fontsize, encoding
-        )
+        ret = TOOLS._measure_string( text, Base14_fontdict[fontname], fontsize, encoding)
+        jlib.log('{ret=}')
+        return ret
 
     if fontname in (
-        "china-t",
-        "china-s",
-        "china-ts",
-        "china-ss",
-        "japan",
-        "japan-s",
-        "korea",
-        "korea-s",
-    ):
-        return len(text) * fontsize
+            "china-t",
+            "china-s",
+            "china-ts",
+            "china-ss",
+            "japan",
+            "japan-s",
+            "korea",
+            "korea-s",
+            ):
+        ret = len(text) * fontsize
+        jlib.log('{ret=}')
+        return ret
 
     raise ValueError("Font '%s' is unsupported" % fontname)
 
@@ -18683,7 +18688,7 @@ class TOOLS:
         w = 0;
         pos = 0
         while pos < len(text):
-            t, c = mupdf.mfz_chartorune(text)
+            t, c = mupdf.mfz_chartorune(text[pos:])
             pos += t
             if encoding == mupdf.PDF_SIMPLE_ENCODING_GREEK:
                 c = mupdf.mfz_iso8859_7_from_unicode(c)
@@ -18694,8 +18699,12 @@ class TOOLS:
             if c < 0:
                 c = 0xB7
             g = mupdf.mfz_encode_character(font, c)
-            w += mupdf.mfz_advance_glyph(font, g, 0)
-        return w * fontsize
+            dw = mupdf.mfz_advance_glyph(font, g, 0)
+            w += dw
+            jlib.log('{=dw w}')
+        ret = w * fontsize
+        jlib.log('{=ret}')
+        return ret
 
     @staticmethod
     def _oval_string(p1, p2, p3, p4):
