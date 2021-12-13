@@ -3863,6 +3863,30 @@ class Document:
         #rc = Py_BuildValue("sO", type, text);
         return (type, text)
 
+    def xref_get_keys(self, xref):
+        """Get the keys of PDF dict object at 'xref'. Use -1 for the PDF trailer."""
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        #return _fitz.Document_xref_get_keys(self, xref)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        xreflen = mupdf.mpdf_xref_len( pdf)
+        if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+            THROWMSG( "bad xref")
+        if xref > 0:
+            obj = mupdf.mpdf_load_object( pdf, xref)
+        else:
+            obj = mupdf.mpdf_trailer( pdf)
+        n = mupdf.mpdf_dict_len( obj)
+        rc = []
+        if n == 0:
+            return rc
+        for i in range(n):
+            key = mupdf.mpdf_to_name( mupdf.mpdf_dict_get_key( obj, i))
+            rc.append(key)
+        return rc
+
     def xref_length(self):
         """Get length of xref table."""
         if self.isClosed:
