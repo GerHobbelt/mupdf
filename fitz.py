@@ -11348,14 +11348,8 @@ class TextPage:
         JM_make_textpage_dict(self.this, page_dict, raw)
 
     def _textpage_dict(self, raw=False):
-        jlib.log('{raw=}')
         page_dict = {"width": self.rect.width, "height": self.rect.height}
         self._getNewBlockList(page_dict, raw)
-        jlib.log('len{=len(page_dict) page_dict}')
-        import json
-        def fn_default(obj):
-            return f'{type(obj)}: {str(obj)}'
-        jlib.log('{json.dumps(page_dict, indent=4, default=fn_default)=}')
         return page_dict
 
     def extractBLOCKS(self):
@@ -11417,7 +11411,6 @@ class TextPage:
     def extractDICT(self, cb=None, sort=False) -> dict:
         """Return page content as a Python dict of images and text spans."""
         val = self._textpage_dict(raw=False)
-        jlib.log('{val=}')
         #raw=False
         #page_dict = {"width": self.rect.width, "height": self.rect.height}
         #self._getNewBlockList(page_dict, raw)
@@ -11636,20 +11629,16 @@ class TextPage:
         """Locate 'needle' returning rects or quads."""
         #val = _fitz.TextPage_search(self, needle, hit_max, quads)
         val = JM_search_stext_page(self.this, needle)
-        for i in val:
-            jlib.log('{i=}')
         nl = '\n'
         if not val:
             return val
         items = len(val)
         for i in range(items):  # change entries to quads or rects
-            jlib.log('{val[i]=}')
             q = Quad(val[i])
             if quads:
                 val[i] = q
             else:
                 val[i] = q.rect
-        jlib.log('{val=}')
         if quads:
             return val
         i = 0  # join overlapping rects on the same line
@@ -14629,11 +14618,9 @@ def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
     for ch in line:
         # start-trace
         r = JM_char_bbox(line, ch)
-        jlib.log('{=ch.m_internal.c r}')
         if (not mupdf.mfz_contains_rect(tp_rect, r)
                 and not mupdf.mfz_is_infinite_rect(tp_rect)
                 ):
-            jlib.log('continue')
             continue
 
         flags = JM_char_font_flags(mupdf.Font(mupdf.keep_font(ch.m_internal.font)), line, ch)
@@ -14645,15 +14632,12 @@ def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
         style.desc = JM_font_descender(mupdf.Font(mupdf.keep_font(ch.m_internal.font)))
         style.color = ch.m_internal.color
 
-        jlib.log('{=old_style}')
-        jlib.log('    {=style}')
         if (style.size != old_style.size
                 or style.flags != old_style.flags
                 or style.color != old_style.color
                 or style.font != old_style.font
                 ):
             # style changed -> make new span
-            jlib.log('style changed')
             if old_style.size >= 0:
                 # not first one, output previous
                 if raw:
@@ -14743,13 +14727,11 @@ def JM_make_text_block(block, block_dict, raw, buff, tp_rect):
             continue
         line_dict = dict()
         line_rect = JM_make_spanlist(line_dict, line, raw, buff, tp_rect)
-        jlib.log('{=line_rect}')
         block_rect = mupdf.mfz_union_rect(block_rect, line_rect)
         line_dict[dictkey_wmode] = line.m_internal.wmode
         line_dict[dictkey_dir] = JM_py_from_point(line.m_internal.dir)
         line_dict[dictkey_bbox] = JM_py_from_rect(line_rect)
         line_list.append(line_dict)
-    jlib.log('{=block_rect line_list}')
     block_dict[dictkey_bbox] = block_rect
     block_dict[dictkey_lines] = line_list
 
@@ -14765,18 +14747,15 @@ def JM_make_textpage_dict(tp, page_dict, raw):
                 and not mupdf.mfz_is_infinite_rect(tp_rect)
                 and block.m_internal.type == mupdf.FZ_STEXT_BLOCK_IMAGE
                 ):
-            jlib.log('continue 1')
             continue
         if (not mupdf.mfz_is_infinite_rect(tp_rect)
                 and mupdf.mfz_is_empty_rect(mupdf.mfz_intersect_rect(tp_rect, mupdf.Rect(block.m_internal.bbox)))
                 ):
-            jlib.log('continue 2')
             continue
 
         block_dict = dict()
         block_dict[dictkey_number] = block_n
         block_dict[dictkey_type] = block.m_internal.type
-        jlib.log('{block.m_internal.type=}')
         if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_IMAGE:
             block_dict[dictkey_bbox] = JM_py_from_rect(block.m_internal.bbox)
             JM_make_image_block(block, block_dict)
@@ -14784,7 +14763,6 @@ def JM_make_textpage_dict(tp, page_dict, raw):
             JM_make_text_block(block, block_dict, raw, text_buffer, tp_rect)
 
         block_list.append(block_dict)
-    jlib.log('{block_n=}')
     page_dict[dictkey_blocks] = block_list
 
 
