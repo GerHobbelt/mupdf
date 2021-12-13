@@ -8000,6 +8000,24 @@ class Page:
 
         return val
 
+    def get_bboxlog(self):
+        CheckParent(self)
+        old_rotation = self.rotation
+        if old_rotation != 0:
+            self.set_rotation(0)
+        #val = _fitz.Page_get_bboxlog(self)
+        page = self.this
+        #fz_device *dev = NULL;
+        rc = []
+        dev = JM_new_bbox_device( rc)
+        mupdf.mfz_run_page( page, dev, mupdf.Matrix(), mupdf.Cookie())
+        mupdf.mfz_close_device( dev)
+        val = rc;
+
+        if old_rotation != 0:
+            self.set_rotation(old_rotation)
+        return val
+
     def get_cdrawings(self):
         """Extract drawing paths from the page."""
         CheckParent(self)
@@ -8131,9 +8149,8 @@ class Page:
 
     def get_image_info(self: Page, hashes: bool = False, xrefs: bool = False) -> list:
         ret = utils.get_image_info(self, hashes, xrefs)
-        #jlib.log('@@@ returning: {len(ret)=}: {ret}')
+        jlib.log('@@@ returning: {len(ret)=}: {ret}')
         return ret
-
 
     def get_images(self, full=False):
         """List of images defined in the page object."""
@@ -8841,7 +8858,7 @@ class Page:
             tp = page.get_textpage(clip=clip, flags=flags)  # create TextPage
         elif getattr(tp, "parent") != page:
             raise ValueError("not a textpage of this page")
-        #jlib.log('{type(tp)=}')
+        #jlib.log('{=type(tp) quads}')
         rlist = tp.search(text, quads=quads)
         #jlib.log('returning {len(rlist)=} {rlist=}')
         return rlist
@@ -9442,7 +9459,8 @@ class Pixmap:
     def digest(self):
         """MD5 digest of pixmap (bytes)."""
         #return _fitz.Pixmap_digest(self)
-        return self.this.md5_pixmap()
+        ret = self.this.md5_pixmap()
+        return bytes(ret)
 
     def getImageData(self, output="png"):
         """Convert to binary image stream of desired type.
@@ -9806,7 +9824,7 @@ class Point(object):
             self.x = 0.0
             self.y = 0.0
             return None
-
+        #jlib.log('{type(args)=} {args=}')
         if len(args) > 2:
             raise ValueError("bad Point: sequ. length")
         if len(args) == 2:
@@ -9815,13 +9833,18 @@ class Point(object):
             return None
         if len(args) == 1:
             l = args[0]
-            if hasattr(l, "__getitem__") is False:
-                raise ValueError("bad Point constructor")
-            if len(l) != 2:
-                raise ValueError("bad Point: sequ. length")
-            self.x = float(l[0])
-            self.y = float(l[1])
-            return None
+            #jlib.log('{type(l)=} {l=}')
+            if isinstance(l, (mupdf.Point, mupdf.fz_point)):
+                self.x = l.x
+                self.y = l.y
+            else:
+                if hasattr(l, "__getitem__") is False:
+                    raise ValueError("bad Point constructor")
+                if len(l) != 2:
+                    raise ValueError("bad Point: sequ. length")
+                self.x = float(l[0])
+                self.y = float(l[1])
+            return
         raise ValueError("bad Point constructor")
 
     def __len__(self):
@@ -9976,6 +9999,7 @@ class Quad(object):
         return hash(tuple(self))
 
     def __init__(self, *args):
+        #jlib.log('Quad.__init__(): {type(args)=} {args=}')
         if not args:
             self.ul = self.ur = self.ll = self.lr = Point()
             return None
@@ -9989,7 +10013,7 @@ class Quad(object):
             l = args[0]
             if isinstance(l, mupdf.Quad):
                 self.this = l
-                self.ul, self.ur, self.ll, self.lr = l.ul, l.ur, l.ll, l.lr
+                self.ul, self.ur, self.ll, self.lr = Point(l.ul), Point(l.ur), Point(l.ll), Point(l.lr)
                 return
             if hasattr(l, "__getitem__") is False:
                 raise ValueError("bad Quad constructor")
@@ -11504,10 +11528,13 @@ class TextPage:
             if hashes:
                 r = mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT)
                 assert r.is_infinite_irect()
-                m = mupdf.Matrix()
+                m = mupdf.Matrix(img.w(), 0, 0, img.h(), 0, 0)
                 #jlib.log('calling mupdf.mfz_get_pixmap_from_image()')
-                pix, _, _ = mupdf.mfz_get_pixmap_from_image(img, r, m)
-                digest = bytes(pix.md5_pixmap())
+                pix, w, h = mupdf.mfz_get_pixmap_from_image(img, r, m)
+                digest = pix.md5_pixmap()
+                #jlib.log('{=r m}')
+                #jlib.log('{=w h digest}')
+                digest = bytes(digest)
             cs = mupdf.Colorspace(mupdf.keep_colorspace(img.m_internal.colorspace))
             block_dict = dict()
             block_dict[ dictkey_number] = block_n
@@ -11686,16 +11713,20 @@ class TextPage:
         """Locate 'needle' returning rects or quads."""
         #val = _fitz.TextPage_search(self, needle, hit_max, quads)
         val = JM_search_stext_page(self.this, needle)
+        for i in val:
+            jlib.log('{i=}')
         nl = '\n'
         if not val:
             return val
         items = len(val)
         for i in range(items):  # change entries to quads or rects
+            jlib.log('{val[i]=}')
             q = Quad(val[i])
             if quads:
                 val[i] = q
             else:
                 val[i] = q.rect
+        jlib.log('{val=}')
         if quads:
             return val
         i = 0  # join overlapping rects on the same line
@@ -14974,6 +15005,48 @@ def JM_mupdf_warning(user, message):
         sys.stderr.write(f'mupdf: {message}\n')
 
 
+def JM_new_bbox_device(result):
+
+    assert isinstance(result, list)
+    dev = mupdf.mfz_new_derived_device( jm_bbox_device)
+
+    dev.super.fill_path = jm_bbox_fill_path
+    dev.super.stroke_path = jm_bbox_stroke_path
+    dev.super.clip_path = None
+    dev.super.clip_stroke_path = None
+
+    dev.super.fill_text = jm_bbox_fill_text
+    dev.super.stroke_text = jm_bbox_stroke_text
+    dev.super.clip_text = None
+    dev.super.clip_stroke_text = None
+    dev.super.ignore_text = jm_bbox_ignore_text
+
+    dev.super.fill_shade = jm_bbox_fill_shade
+    dev.super.fill_image = jm_bbox_fill_image
+    dev.super.fill_image_mask = jm_bbox_fill_image_mask
+    dev.super.clip_image_mask = None
+
+    dev.super.pop_clip = None
+
+    dev.super.begin_mask = None
+    dev.super.end_mask = None
+    dev.super.begin_group = None
+    dev.super.end_group = None
+
+    dev.super.begin_tile = None
+    dev.super.end_tile = None
+
+    dev.super.begin_layer = None
+    dev.super.end_layer = None
+
+    dev.super.render_flags = None
+    dev.super.set_default_colorspaces = None
+
+    dev.result = result
+
+    return dev
+
+
 def JM_new_buffer_from_stext_page(page):
     '''
     make a buffer from an stext_page's text
@@ -16007,7 +16080,7 @@ def PyUnicode_DecodeRawUnicodeEscape(s, errors='strict'):
     # fixme: handle escape sequencies
     ret = s.decode('utf8')
     z = ret.find(chr(0))
-    jlib.log('{ret!r=} {z=}')
+    #jlib.log('{ret!r=} {z=}')
     if z >= 0:
         ret = ret[:z]
     return ret
