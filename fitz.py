@@ -3444,6 +3444,9 @@ class Document:
             mupdf.mpdf_drop_page_tree(pdf)
         self._reset_page_refs()
 
+    def set_metadata(self, n):
+        return utils.set_metadata(self, n)
+
     def set_oc(self, xref, oc):
         """Attach optional content object to image or form xobject."""
         if self.isClosed:
@@ -3812,7 +3815,6 @@ class Document:
 
     def xref_get_key(self, xref, key):
         """Get PDF dict key value of object at 'xref'."""
-        jlib.log(' ')
         if self.is_closed:
             raise ValueError("document closed")
 
@@ -3827,11 +3829,9 @@ class Document:
         else:
             obj = mupdf.mpdf_trailer(pdf)
         if not obj.m_internal:
-            jlib.log('pdf_load_object()/pdf_trailer() returned null')
             return ("null", "null")
         subobj = mupdf.mpdf_dict_getp(obj, key)
         if not subobj.m_internal:
-            jlib.log('pdf_dict_getp() returned null')
             return ("null", "null")
         text = None
         if mupdf.mpdf_is_indirect(subobj):
@@ -3867,7 +3867,6 @@ class Document:
             res = JM_object_to_buffer(subobj, 1, 0)
             text = JM_UnicodeFromBuffer(res)
         #rc = Py_BuildValue("sO", type, text);
-        jlib.log('returning {type, text=}')
         return (type, text)
 
     def xref_get_keys(self, xref):
