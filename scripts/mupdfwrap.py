@@ -2637,22 +2637,6 @@ classextras = ClassExtras(
                     ],
                 ),
 
-        #pdf_annot = ClassExtra(
-        #        #constructor_raw = False,
-        #        methods_extra = [
-        #            ExtraMethod(
-        #                'long long',
-        #                'm_internal_value()',
-        #                f'''
-        #                {{
-        #                    return (uintptr_t) m_internal;
-        #                }}
-        #                ''',
-        #                comment = '/* Provided to allow Python to see numerical value of m_internal. */'
-        #                ),
-        #            ],
-        #        ),
-
         pdf_lexbuf = ClassExtra(
                 constructors_extra = [
                     ExtraConstructor( '(int size)',
@@ -2676,6 +2660,39 @@ classextras = ClassExtras(
                         }}
                         ''',
                         comment = '/* Destructor that calls pdf_lexbuf_fin(). */',
+                        ),
+                    ],
+                ),
+
+        pdf_layer_config = ClassExtra(
+                pod = 'inline',
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        f'''
+                        {{
+                            this->name = nullptr;
+                            this->creator = nullptr;
+                        }}
+                        ''',
+                        comment = '/* Default constructor sets .name and .creator to null. */',
+                        ),
+                    ],
+                ),
+
+        pdf_layer_config_ui = ClassExtra(
+                pod = 'inline',
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        f'''
+                        {{
+                            this->text = nullptr;
+                            this->depth = 0;
+                            this->type = PDF_LAYER_UI_LABEL;
+                            this->selected = 0;
+                            this->locked = 0;
+                        }}
+                        ''',
+                        comment = '/* Default constructor sets all .text to null and other fields to zero. */',
                         ),
                     ],
                 ),
