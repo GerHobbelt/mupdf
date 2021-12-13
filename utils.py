@@ -725,7 +725,6 @@ def get_text(
         "blocks": 1,
     }
     option = option.lower()
-    jlib.log('{=option clip flags textpage sort}')
     if option not in formats:
         option = "text"
     if flags is None:
@@ -763,7 +762,6 @@ def get_text(
         t = tp.extractRAWJSON(cb=cb, sort=sort)
     elif option == "dict":
         t = tp.extractDICT(cb=cb, sort=sort)
-        jlib.log('{t!r=}')
     elif option == "rawdict":
         t = tp.extractRAWDICT(cb=cb, sort=sort)
     elif option == "html":
