@@ -8251,91 +8251,7 @@ class Page:
             textpage = None,#: TextPage = None,
             sort: bool = False,
             ):
-        """Extract text from a page or an annotation.
-
-        This is a unifying wrapper for various methods of the TextPage class.
-
-        Args:
-            option: (str) text, words, blocks, html, dict, json, rawdict, xhtml or xml.
-            clip: (rect-like) restrict output to this area.
-            flags: bit switches to e.g. exclude images or decompose ligatures.
-            textpage: reuse this TextPage and make no new one. If specified,
-                'flags' and 'clip' are ignored.
-
-        Returns:
-            the output of methods get_text_words / get_text_blocks or TextPage
-            methods extractText, extractHTML, extractDICT, extractJSON, extractRAWDICT,
-            extractXHTML or etractXML respectively.
-            Default and misspelling choice is "text".
-        """
-        formats = {
-            "text": 0,
-            "html": 1,
-            "json": 1,
-            "rawjson": 1,
-            "xml": 0,
-            "xhtml": 1,
-            "dict": 1,
-            "rawdict": 1,
-            "words": 0,
-            "blocks": 1,
-        }
-        option = option.lower()
-        if option not in formats:
-            option = "text"
-        if flags is None:
-            flags = TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES
-            if formats[option] == 1:
-                flags |= TEXT_PRESERVE_IMAGES
-
-        if option == "words":
-            return get_text_words(
-                page, clip=clip, flags=flags, textpage=textpage, sort=sort
-            )
-        if option == "blocks":
-            return get_text_blocks(
-                page, clip=clip, flags=flags, textpage=textpage, sort=sort
-            )
-        CheckParent(page)
-        cb = None
-        if option in ("html", "xml", "xhtml"):  # no clipping for MuPDF functions
-            clip = page.cropbox
-        if clip != None:
-            clip = Rect(clip)
-            cb = None
-        elif type(page) is Page:
-            cb = page.cropbox
-        # TextPage with or without images
-        tp = textpage
-        if tp is None:
-            tp = page.get_textpage(clip=clip, flags=flags)
-        elif getattr(tp, "parent") != page:
-            raise ValueError("not a textpage of this page")
-
-        #jlib.log('{option=}')
-        if option == "json":
-            t = tp.extractJSON(cb=cb, sort=sort)
-        elif option == "rawjson":
-            t = tp.extractRAWJSON(cb=cb, sort=sort)
-        elif option == "dict":
-            t = tp.extractDICT(cb=cb, sort=sort)
-        elif option == "rawdict":
-            t = tp.extractRAWDICT(cb=cb, sort=sort)
-        elif option == "html":
-            t = tp.extractHTML()
-        elif option == "xml":
-            t = tp.extractXML()
-        elif option == "xhtml":
-            t = tp.extractXHTML()
-        else:
-            t = tp.extractText(sort=sort)
-            #jlib.log('{t!r=}')
-
-        if textpage is None:
-            del tp
-        #jlib.log('returning {t!r=}')
-        return t
-
+        return utils.get_text(page, option, clip, flags, textpage, sort)
 
     def get_textbox(
             page: Page,
@@ -11432,8 +11348,14 @@ class TextPage:
         JM_make_textpage_dict(self.this, page_dict, raw)
 
     def _textpage_dict(self, raw=False):
+        jlib.log('{raw=}')
         page_dict = {"width": self.rect.width, "height": self.rect.height}
         self._getNewBlockList(page_dict, raw)
+        jlib.log('len{=len(page_dict) page_dict}')
+        import json
+        def fn_default(obj):
+            return f'{type(obj)}: {str(obj)}'
+        jlib.log('{json.dumps(page_dict, indent=4, default=fn_default)=}')
         return page_dict
 
     def extractBLOCKS(self):
@@ -11494,11 +11416,12 @@ class TextPage:
 
     def extractDICT(self, cb=None, sort=False) -> dict:
         """Return page content as a Python dict of images and text spans."""
-        #val = self._textpage_dict(raw=False)
-        raw=False
-        page_dict = {"width": self.rect.width, "height": self.rect.height}
-        self._getNewBlockList(page_dict, raw)
-        val = page_dict
+        val = self._textpage_dict(raw=False)
+        jlib.log('{val=}')
+        #raw=False
+        #page_dict = {"width": self.rect.width, "height": self.rect.height}
+        #self._getNewBlockList(page_dict, raw)
+        #val = page_dict
         if cb is not None:
             val["width"] = cb.width
             val["height"] = cb.height
@@ -14682,23 +14605,35 @@ def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
     line_rect = mupdf.Rect(mupdf.Rect.Fixed_EMPTY)
 
     class char_style:
-        pass
+        def __init__(self, rhs=None):
+            if rhs:
+                self.size = rhs.size
+                self.flags = rhs.flags
+                self.font = rhs.font
+                self.color = rhs.color
+                self.asc = rhs.asc
+                self.desc = rhs.desc
+            else:
+                self.size = -1
+                self.flags = -1
+                self.font = ''
+                self.color = -1
+                self.asc = 0
+                self.desc = 0
+        def __str__(self):
+            return f'{self.size} {self.flags} {self.font} {self.color} {self.asc} {self.desc}'
     old_style = char_style()
-    old_style.size = -1
-    old_style.flags = -1
-    old_style.font = ''
-    old_style.color = -1
-    old_style.asc = 0
-    old_style.desc = 0
 
     style = char_style()
 
     for ch in line:
         # start-trace
         r = JM_char_bbox(line, ch)
+        jlib.log('{=ch.m_internal.c r}')
         if (not mupdf.mfz_contains_rect(tp_rect, r)
                 and not mupdf.mfz_is_infinite_rect(tp_rect)
                 ):
+            jlib.log('continue')
             continue
 
         flags = JM_char_font_flags(mupdf.Font(mupdf.keep_font(ch.m_internal.font)), line, ch)
@@ -14710,13 +14645,15 @@ def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
         style.desc = JM_font_descender(mupdf.Font(mupdf.keep_font(ch.m_internal.font)))
         style.color = ch.m_internal.color
 
+        jlib.log('{=old_style}')
+        jlib.log('    {=style}')
         if (style.size != old_style.size
                 or style.flags != old_style.flags
                 or style.color != old_style.color
                 or style.font != old_style.font
                 ):
             # style changed -> make new span
-
+            jlib.log('style changed')
             if old_style.size >= 0:
                 # not first one, output previous
                 if raw:
@@ -14749,7 +14686,9 @@ def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
             span["ascender"] = asc
             span["descender"] = desc
 
-            old_style = style
+            # Need to be careful here - doing 'old_style=style' does a shallow
+            # copy, but we need to keep old_style as a distinct instance.
+            old_style = char_style(style)
             span_rect = r
             span_origin = origin
 
@@ -14804,11 +14743,13 @@ def JM_make_text_block(block, block_dict, raw, buff, tp_rect):
             continue
         line_dict = dict()
         line_rect = JM_make_spanlist(line_dict, line, raw, buff, tp_rect)
+        jlib.log('{=line_rect}')
         block_rect = mupdf.mfz_union_rect(block_rect, line_rect)
         line_dict[dictkey_wmode] = line.m_internal.wmode
         line_dict[dictkey_dir] = JM_py_from_point(line.m_internal.dir)
         line_dict[dictkey_bbox] = JM_py_from_rect(line_rect)
         line_list.append(line_dict)
+    jlib.log('{=block_rect line_list}')
     block_dict[dictkey_bbox] = block_rect
     block_dict[dictkey_lines] = line_list
 
@@ -14824,15 +14765,18 @@ def JM_make_textpage_dict(tp, page_dict, raw):
                 and not mupdf.mfz_is_infinite_rect(tp_rect)
                 and block.m_internal.type == mupdf.FZ_STEXT_BLOCK_IMAGE
                 ):
+            jlib.log('continue 1')
             continue
         if (not mupdf.mfz_is_infinite_rect(tp_rect)
                 and mupdf.mfz_is_empty_rect(mupdf.mfz_intersect_rect(tp_rect, mupdf.Rect(block.m_internal.bbox)))
                 ):
+            jlib.log('continue 2')
             continue
 
         block_dict = dict()
         block_dict[dictkey_number] = block_n
         block_dict[dictkey_type] = block.m_internal.type
+        jlib.log('{block.m_internal.type=}')
         if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_IMAGE:
             block_dict[dictkey_bbox] = JM_py_from_rect(block.m_internal.bbox)
             JM_make_image_block(block, block_dict)
@@ -14840,6 +14784,7 @@ def JM_make_textpage_dict(tp, page_dict, raw):
             JM_make_text_block(block, block_dict, raw, text_buffer, tp_rect)
 
         block_list.append(block_dict)
+    jlib.log('{block_n=}')
     page_dict[dictkey_blocks] = block_list
 
 
