@@ -1997,7 +1997,10 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         # return self.this _fitz.Document__getMetadata(self, key)
-        return self.this.lookup_metadata(key)
+        ret = self.this.lookup_metadata(key)
+        if ret is None:
+            ret = ''
+        return ret
 
     def _getPageInfo(self, pno, what):
         """List fonts, images, XObjects used on a page."""
@@ -3809,6 +3812,7 @@ class Document:
 
     def xref_get_key(self, xref, key):
         """Get PDF dict key value of object at 'xref'."""
+        jlib.log(' ')
         if self.is_closed:
             raise ValueError("document closed")
 
@@ -3823,9 +3827,11 @@ class Document:
         else:
             obj = mupdf.mpdf_trailer(pdf)
         if not obj.m_internal:
+            jlib.log('pdf_load_object()/pdf_trailer() returned null')
             return ("null", "null")
         subobj = mupdf.mpdf_dict_getp(obj, key)
         if not subobj.m_internal:
+            jlib.log('pdf_dict_getp() returned null')
             return ("null", "null")
         text = None
         if mupdf.mpdf_is_indirect(subobj):
@@ -3861,6 +3867,7 @@ class Document:
             res = JM_object_to_buffer(subobj, 1, 0)
             text = JM_UnicodeFromBuffer(res)
         #rc = Py_BuildValue("sO", type, text);
+        jlib.log('returning {type, text=}')
         return (type, text)
 
     def xref_get_keys(self, xref):
@@ -14931,6 +14938,7 @@ def JM_mupdf_warning(user, message):
 def JM_new_bbox_device(result):
 
     assert isinstance(result, list)
+    assert 0, 'fz_new_derived_device not yet supported'
     dev = mupdf.mfz_new_derived_device( jm_bbox_device)
 
     dev.super.fill_path = jm_bbox_fill_path
