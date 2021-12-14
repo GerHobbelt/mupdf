@@ -5206,10 +5206,11 @@ class Font:
 
 
 class Graftmap:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Graftmap, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Graftmap, name)
+
+    def __del__(self):
+        if not type(self) is Graftmap:
+            return
+        self.thisown = False
 
     def __init__(self, doc):
         #this = _fitz.new_Graftmap(doc)
@@ -5221,19 +5222,7 @@ class Graftmap:
         self.thisown = True
 
 
-
-    def __del__(self):
-        if not type(self) is Graftmap:
-            return
-        self.thisown = False
-
-
-
 class Link:
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Link, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Link, name)
 
     def __del__(self):
         self._erase()
