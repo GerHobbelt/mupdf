@@ -4327,7 +4327,7 @@ def make_function_wrapper_class_aware(
     assert fnname.startswith( ('fz_', 'pdf_'))
 
     if fnname.endswith('_drop'):
-        jlib.log('Ignoring because ends with "_drop": {fnname}')
+        #jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
 
     # Construct prototype fnname(args).
@@ -7442,7 +7442,7 @@ def cpp_source(
 
             '''))
 
-    # Write declataion and definition for metadata_keys global.
+    # Write declaration and definition for metadata_keys global.
     #
     out_hs.functions.write(
             textwrap.dedent(
@@ -7805,6 +7805,26 @@ def compare_fz_usage(
     log( '{n_missing}')
 
 
+def translate_ucdn_macros():
+    '''
+    Returns string containing UCDN_* macros represented as enums.
+    '''
+    out = io.StringIO()
+    with open('include/mupdf/ucdn.h') as f:
+        text = f.read()
+    out.write( '\n')
+    out.write( '\n')
+    out.write( 'enum\n')
+    out.write( '{\n')
+    n = 0
+    for m in re.finditer('\n#define (UCDN_[A-Z0-9_]+) +([^\n]+)', text):
+        out.write(f'    {m.group(1)} = {m.group(2)},\n')
+        n += 1
+    out.write( '};\n')
+    out.write( '\n')
+    assert n
+    return out.getvalue()
+
 
 def build_swig(
         build_dirs,
@@ -7969,6 +7989,7 @@ def build_swig(
             '''
 
     common += generated.swig_cpp
+    common += translate_ucdn_macros()
 
     text = ''
 
