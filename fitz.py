@@ -1366,6 +1366,11 @@ class Device:
 
 
 class DisplayList:
+
+    def __del__(self):
+        if not type(self) is DisplayList: return
+        self.thisown = False
+
     def __init__(self, *args):
         if len(args) == 1 and isinstance(args[0], mupdf.Rect):
             self.this = mupdf.DisplayList(args[0])
@@ -1373,6 +1378,21 @@ class DisplayList:
             self.this = args[0]
         else:
             assert 0, f'Unrecognised args={args}'
+
+    def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
+        #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
+        if not colorspace:
+            colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
+        val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
+        val.thisown = True
+        return val
+
+    def getTextPage(self, flags=3):
+        #val = _fitz.DisplayList_getTextPage(self, flags)
+        assert 0, '_fitz.DisplayList_getTextPage not found'
+        val.thisown = True
+
+        return val
 
     @property
     def rect(self):
@@ -1390,25 +1410,6 @@ class DisplayList:
                 JM_rect_from_py(area),
                 mupdf.Cookie(),
                 )
-
-    def get_pixmap(self, matrix=None, colorspace=None, alpha=0, clip=None):
-        #val = _fitz.DisplayList_getPixmap(self, matrix, colorspace, alpha, clip)
-        if not colorspace:
-            colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
-        val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
-        val.thisown = True
-        return val
-
-    def getTextPage(self, flags=3):
-        #val = _fitz.DisplayList_getTextPage(self, flags)
-        assert 0, '_fitz.DisplayList_getTextPage not found'
-        val.thisown = True
-
-        return val
-
-    def __del__(self):
-        if not type(self) is DisplayList: return
-        self.thisown = False
 
 
 class Document:
@@ -1555,6 +1556,12 @@ class Document:
                 self.initData()
         #jlib.log('__init__() returning. {=mupdf.mpdf_xref_len(pdf)}')
 
+    def _addFormFont(self, name, font):
+        """Add new form font."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        return _fitz.Document__addFormFont(self, name, font)
+
     def _deleteObject(self, xref):
         """Delete object."""
         if self.isClosed:
@@ -1682,17 +1689,6 @@ class Document:
                 )
         mupdf.mpdf_array_delete(names, idx + 1)
         mupdf.mpdf_array_delete(names, idx)
-
-    @staticmethod
-    def show_dict(o):
-        assert 0
-        o_dict_len = mupdf.mpdf_dict_len(o)
-        #jlib.log( '{o_dict_len=}:')
-        for i in range(o_dict_len):
-            key = mupdf.mpdf_dict_get_key(o, i)
-            value = mupdf.mpdf_dict_get(o, key)
-            #jlib.log( '    {key=}: {value=}')
-
 
     def _embfile_info(self, idx, infodict):
         #return _fitz.Document__embfile_info(self, idx, infodict)
@@ -1985,6 +1981,39 @@ class Document:
                 wlist.append( (glyph, 0.0))
         return wlist
 
+    def _get_page_labels(self):
+        #return _fitz.Document__get_page_labels(self)
+        pdf = self._pdf_document()
+
+        ASSERT_PDF(pdf);
+        rc = []
+        pagelabels = mupdf.mpdf_new_name("PageLabels")
+        obj = mupdf.mpdf_dict_getl( mupdf.mpdf_trailer(pdf), PDF_NAME('Root'), pagelabels)
+        if not obj.m_internal:
+            return rc
+        # simple case: direct /Nums object
+        nums = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_get( obj, PDF_NAME('Nums')))
+        if nums.m_internal:
+            JM_get_page_labels(rc, nums)
+            return rc
+        # case: /Kids/Nums
+        nums = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_getl(obj, PDF_NAME('Kids'), PDF_NAME('Nums')))
+        if nums.m_internal:
+            JM_get_page_labels(rc, nums)
+            return rc
+        # case: /Kids is an array of multiple /Nums
+        kids = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_get( obj, PDF_NAME('Kids')))
+        if not kids.m_internal or not mupdf.mpdf_is_array(kids):
+            return rc
+        n = mupdf.mpdf_array_len(kids)
+        for i in range(n):
+            nums = mupdf.mpdf_resolve_indirect(
+                    mupdf.mpdf_dict_get( mupdf.mpdf_array_get(kids, i)),
+                    PDF_NAME('Nums'),
+                    )
+            JM_get_page_labels(rc, nums)
+        return rc
+
     def _getCharWidths(self, xref, bfname, ext, ordering, limit, idx=0):
         """Return list of glyphs and glyph widths of a font."""
         assert 0, 'no Document__getCharWidths'
@@ -2001,6 +2030,26 @@ class Document:
         if ret is None:
             ret = ''
         return ret
+
+    def _getOLRootNumber(self):
+        """Get xref of Outline Root, create it if missing."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document__getOLRootNumber(self)
+        pdf = mupdf.mpdf_specifics(self.this)
+        #pdf_obj *root, *olroot, *ind_obj;
+        ASSERT_PDF(pdf)
+        # get main root
+        root = mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root'))
+        # get outline root
+        olroot = mupdf.mpdf_dict_get( root, PDF_NAME('Outlines'))
+        if not olroot.m_internal:
+            olroot = mupdf.mpdf_new_dict( pdf, 4)
+            mupdf.mpdf_dict_put( olroot, PDF_NAME('Type'), PDF_NAME('Outlines'))
+            ind_obj = mupdf.mpdf_add_object( pdf, olroot)
+            mupdf.mpdf_dict_put( root, PDF_NAME('Outlines'), ind_obj)
+            olroot = mupdf.mpdf_dict_get( root, PDF_NAME('Outlines'))
+        return mupdf.mpdf_to_num( olroot)
 
     def _getPageInfo(self, pno, what):
         """List fonts, images, XObjects used on a page."""
@@ -2065,6 +2114,76 @@ class Document:
             raise ValueError("document closed")
         return Outline(self.this.load_outline())
 
+    def _make_page_map(self):
+        """Make an array page number -> page object."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document__make_page_map(self)
+
+    def _move_copy_page(self, pno, nb, before, copy):
+        """Move or copy a PDF page reference."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #val = _fitz.Document__move_copy_page(self, pno, nb, before, copy)
+        pdf = self._pdf_document()
+        same = 0
+        #pdf_obj *parent1 = NULL, *parent2 = NULL, *parent = NULL;
+        #pdf_obj *kids1, *kids2;
+        ASSERT_PDF(pdf);
+        # get the two page objects -----------------------------------
+        # locate the /Kids arrays and indices in each
+
+        page1, parent1, i1 = pdf_lookup_page_loc( pdf, pno)
+
+        kids1 = mupdf.mpdf_dict_get( parent1, PDF_NAME('Kids'))
+
+        page2, parent2, i2 = pdf_lookup_page_loc( pdf, nb)
+        kids2 = mupdf.mpdf_dict_get( parent2, PDF_NAME('Kids'))
+        #jlib.log('{kids2.m_internal=}')
+        if before:  # calc index of source page in target /Kids
+            pos = i2
+        else:
+            pos = i2 + 1
+
+        # same /Kids array? ------------------------------------------
+        same = mupdf.mpdf_objcmp( kids1, kids2)
+
+        # put source page in target /Kids array ----------------------
+        if not copy and same != 0:  # update parent in page object
+            mupdf.mpdf_dict_put( page1, PDF_NAME('Parent'), parent2)
+        #jlib.log('{=kids2 kids2.m_internal page1 pos}')
+        mupdf.mpdf_array_insert( kids2, page1, pos)
+
+        if same != 0:   # different /Kids arrays ----------------------
+            parent = parent2
+            while parent.m_internal:    # increase /Count objects in parents
+                count = mupdf.mpdf_dict_get_int( parent, PDF_NAME('Count'))
+                mupdf.mpdf_dict_put_int( parent, PDF_NAME('Count'), count + 1)
+                parent = mupdf.mpdf_dict_get( parent, PDF_NAME('Parent'))
+            if not copy:    # delete original item
+                mupdf.mpdf_array_delete( kids1, i1)
+                parent = parent1
+                while parent.m_internal:    # decrease /Count objects in parents
+                    count = mupdf.mpdf_dict_get_int( parent, PDF_NAME('Count'))
+                    mupdf.mpdf_dict_put_int( parent, PDF_NAME('Count'), count - 1)
+                    parent = mupdf.mpdf_dict_get( parent, PDF_NAME('Parent'))
+        else:   # same /Kids array
+            if copy:    # source page is copied
+                parent = parent2;
+                while parent.m_internal:    # increase /Count object in parents
+                    count = mupdf.mpdf_dict_get_int( parent, PDF_NAME('Count'))
+                    mupdf.mpdf_dict_put_int( parent, PDF_NAME('Count'), count + 1)
+                    parent = mupdf.mpdf_dict_get( parent, PDF_NAME('Parent'))
+            else:
+                if i1 < pos:
+                    mupdf.mpdf_array_delete( kids1, i1)
+                else:
+                    mupdf.mpdf_array_delete( kids1, i1 + 1)
+        if pdf.m_internal.rev_page_map: # page map no longer valid: drop it
+            mupdf.mpdf_drop_page_tree( pdf)
+
+        self._reset_page_refs()
+
     def _newPage(self, pno=-1, width=595, height=842):
         """Make a new PDF page."""
         assert 0, 'deprecated'
@@ -2074,11 +2193,150 @@ class Document:
         self._reset_page_refs()
         return val
 
+    def _pdf_document(self):
+        '''
+        Returns self.this as a mupdf.PdfDocument using pdf_specifics() as
+        requireds.
+        '''
+        if isinstance(self.this, mupdf.PdfDocument):
+            return self.this
+        #return self.this.specifics()
+        return mupdf.PdfDocument(self.this)
+
     def _remove_links_to(self, numbers):
         #assert 0, 'no Document__remove_links_to'
         #return _fitz.Document__remove_links_to(self, first, last)
         pdf = self._pdf_document()
         remove_dest_range(pdf, numbers)
+
+    def _remove_toc_item(self, xref):
+        #return _fitz.Document__remove_toc_item(self, xref)
+            # "remove" bookmark by letting it point to nowhere
+        pdf = self._pdf_document()
+        item = mupdf.mpdf_new_indirect(pdf, xref, 0)
+        mupdf.mpdf_dict_del( item, PDF_NAME('Dest'))
+        mupdf.mpdf_dict_del( item, PDF_NAME('A'))
+        color = mupdf.mpdf_new_array( pdf, 3)
+        for i in range(3):
+            mupdf.mpdf_array_push_real( color, 0.8)
+        mupdf.mpdf_dict_put( item, PDF_NAME('C'), color)
+
+    def _set_page_labels(self, labels):
+        #val = _fitz.Document__set_page_labels(self, labels)
+        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        pagelabels = mupdf.mpdf_new_name("PageLabels")
+        root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
+        mupdf.mpdf_dict_del(root, pagelabels)
+        mupdf.mpdf_dict_putl(root, mupdf.mpdf_new_array(pdf, 0), pagelabels, PDF_NAME('Nums'))
+
+        xref = self.pdf_catalog()
+        text = self.xref_object(xref, compressed=True)
+        text = text.replace("/Nums[]", "/Nums[%s]" % labels)
+        self.update_object(xref, text)
+
+    def _setMetadata(self, text):
+        """Set old style metadata."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        return _fitz.Document__setMetadata(self, text)
+
+    def _update_toc_item(self, xref, action=None, title=None, flags=0, collapse=None, color=None):
+        return _fitz.Document__update_toc_item(self, xref, action, title, flags, collapse, color)
+
+    @property
+    def FormFonts(self):
+        """Get list of field font resource names."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_FormFonts(self)
+
+    def add_layer(self, name, creator=None, on=None):
+        """Add a new OC layer."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_add_layer(self, name, creator, on)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        JM_add_layer_config( pdf, name, creator, on)
+        mupdf.mpdf_read_ocg( pdf)
+
+    def add_ocg(self, name, config=-1, on=1, intent=None, usage=None):
+        """Add new optional content group."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_add_ocg(self, name, config, on, intent, usage)
+        xref = 0
+        #pdf_obj *obj = NULL, *cfg = NULL;
+        #pdf_obj *indocg = NULL;
+        pdf = self._pdf_document();
+        ASSERT_PDF(pdf);
+
+        # make the OCG
+        ocg = mupdf.mpdf_add_new_dict(pdf, 3)
+        mupdf.mpdf_dict_put(ocg, PDF_NAME('Type'), PDF_NAME('OCG'))
+        mupdf.mpdf_dict_put_text_string(ocg, PDF_NAME('Name'), name)
+        intents = mupdf.mpdf_dict_put_array(ocg, PDF_NAME('Intent'), 2)
+        if not intent:
+            mupdf.mpdf_array_push(intents, PDF_NAME('View'))
+        elif not isinstance(intent, str):
+            assert 0, f'fixme: intent is not a str. type(intent)={type(intent)} type={type!r}'
+            #n = len(intent)
+            #for i in range(n):
+            #    item = intent[i]
+            #    c = JM_StrAsChar(item);
+            #    if (c) {
+            #        pdf_array_push(gctx, intents, pdf_new_name(gctx, c));
+            #    }
+            #    Py_DECREF(item);
+            #}
+        else:
+            mupdf.mpdf_array_push(intents, mupdf.mpdf_new_name(intent))
+        use_for = mupdf.mpdf_dict_put_dict(ocg, PDF_NAME('Usage'), 3)
+        ci_name = mupdf.mpdf_new_name("CreatorInfo")
+        cre_info = mupdf.mpdf_dict_put_dict(use_for, ci_name, 2)
+        mupdf.mpdf_dict_put_text_string(cre_info, PDF_NAME('Creator'), "PyMuPDF")
+        if usage:
+            mupdf.mpdf_dict_put_name(cre_info, PDF_NAME('Subtype'), usage)
+        else:
+            mupdf.mpdf_dict_put_name(cre_info, PDF_NAME('Subtype'), "Artwork")
+        indocg = mupdf.mpdf_add_object(pdf, ocg)
+
+        # Insert OCG in the right config
+        ocp = JM_ensure_ocproperties(pdf)
+        obj = mupdf.mpdf_dict_get(ocp, PDF_NAME('OCGs'))
+        mupdf.mpdf_array_push(obj, indocg)
+
+        if config > -1:
+            obj = mupdf.mpdf_dict_get(ocp, PDF_NAME('Configs'))
+            if not mupdf.mpdf_is_array(obj):
+                THROWMSG("bad config number")
+            cfg = mupdf.mpdf_array_get(obj, config)
+            if not cfg.m_internal:
+                THROWMSG("bad config number")
+        else:
+            cfg = mupdf.mpdf_dict_get(ocp, PDF_NAME('D'))
+
+        obj = mupdf.mpdf_dict_get(cfg, PDF_NAME('Order'))
+        if not obj.m_internal:
+            obj = mupdf.mpdf_dict_put_array(cfg, PDF_NAME('Order'), 1)
+        mupdf.mpdf_array_push(obj, indocg)
+        if on:
+            obj = mupdf.mpdf_dict_get(cfg, PDF_NAME('ON'))
+            if not obj.m_internal:
+                obj = mupdf.mpdf_dict_put_array(cfg, PDF_NAME('ON'), 1)
+        else:
+            obj =mupdf.mpdf_dict_get(cfg, PDF_NAME('OFF'))
+            if not obj.m_internal:
+                obj =mupdf.mpdf_dict_put_array(cfg, PDF_NAME('OFF'), 1)
+        mupdf.mpdf_array_push(obj, indocg)
+
+        # let MuPDF take note: re-read OCProperties
+        mupdf.mpdf_read_ocg(pdf)
+
+        xref = mupdf.mpdf_to_num(indocg)
+        return xref
 
     def authenticate(self, password):
         """Decrypt document."""
@@ -2110,6 +2368,17 @@ class Document:
             raise ValueError("document closed")
         #return _fitz.Document_chapter_count(self)
         return mupdf.mfz_count_chapters( self.this)
+
+    def chapter_page_count(self, chapter):
+        """Page count of chapter."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_chapter_page_count(self, chapter)
+        chapters = mupdf.mfz_count_chapters( self.this)
+        if chapter < 0 or chapter >= chapters:
+            THROWMSG( "bad chapter number")
+        pages = mupdf.mfz_count_chapter_pages( self.this, chapter)
+        return pages
 
     def chapterPageCount(self, chapter):
         """Page count of chapter."""
@@ -2154,6 +2423,12 @@ class Document:
             tp = srcCount - 1
         doc = JM_convert_to_pdf(fz_doc, fp, tp, rotate)
         return doc
+
+    def del_xml_metadata(self):
+        """Delete XML metadata."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        return _fitz.Document_del_xml_metadata(self)
 
     def delete_page(self, pno: int =-1):
         """ Delete one page from a PDF.
@@ -2250,6 +2525,119 @@ class Document:
 
         self._reset_page_refs()
 
+    def embeddedFileAdd(
+            self,
+            name: str,
+            buffer_: typing.ByteString,
+            filename: OptStr =None,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            ) -> None:
+        """Add an item to the EmbeddedFiles array.
+
+        Args:
+            name: name of the new item, must not already exist.
+            buffer_: (binary data) the file content.
+            filename: (str) the file name, default: the name
+            ufilename: (unicode) the file name, default: filename
+            desc: (str) the description.
+        """
+        filenames = self.embeddedFileNames()
+        msg = "Name '%s' already in EmbeddedFiles array." % str(name)
+        if name in filenames:
+            raise ValueError(msg)
+
+        if filename is None:
+            filename = name
+        if ufilename is None:
+            ufilename = unicode(filename, "utf8") if str is bytes else filename
+        if desc is None:
+            desc = name
+        return self._embeddedFileAdd(
+                name,
+                buffer_=buffer_,
+                filename=filename,
+                ufilename=ufilename,
+                desc=desc,
+                )
+
+    def embeddedFileCount(self) -> int:
+        """Get number of EmbeddedFiles."""
+        return len(self.embeddedFileNames())
+
+    def embeddedFileDel(self, item: typing.Union[int, str]):
+        """Delete an entry from EmbeddedFiles.
+
+        Notes:
+            The argument must be name or index of an EmbeddedFiles item.
+            Physical deletion of data will happen on save to a new
+            file with appropriate garbage option.
+        Args:
+            item: name or number of item.
+        Returns:
+            None
+        """
+        idx = self._embeddedFileIndex(item)
+        return self._embeddedFileDel(idx)
+
+    def embeddedFileGet(self, item: typing.Union[int, str]) -> bytes:
+        """Get the content of an item in the EmbeddedFiles array.
+
+        Args:
+            item: number or name of item.
+        Returns:
+            (bytes) The file content.
+        """
+        idx = self._embeddedFileIndex(item)
+        return self._embeddedFileGet(idx)
+
+    def embeddedFileInfo(self, item: typing.Union[int, str]) -> dict:
+        """Get information of an item in the EmbeddedFiles array.
+
+        Args:
+            item: number or name of item.
+        Returns:
+            Information dictionary.
+        """
+        idx = self._embeddedFileIndex(item)
+        infodict = {"name": self.embeddedFileNames()[idx]}
+        self._embeddedFileInfo(idx, infodict)
+        return infodict
+
+    def embeddedFileNames(self) -> list:
+        """Get list of names of EmbeddedFiles."""
+        filenames = []
+        self._embeddedFileNames(filenames)
+        return filenames
+
+    def embeddedFileUpd(
+            self,
+            item: typing.Union[int, str],
+            buffer_: OptBytes =None,
+            filename: OptStr =None,
+            ufilename: OptStr =None,
+            desc: OptStr =None,
+            ) -> None:
+        """Change an item of the EmbeddedFiles array.
+
+        Notes:
+            Only provided parameters are changed. If all are omitted,
+            the method is a no-op.
+        Args:
+            item: number or name of item.
+            buffer_: (binary data) the new file content.
+            filename: (str) the new file name.
+            ufilename: (unicode) the new filen ame.
+            desc: (str) the new description.
+        """
+        idx = self._embeddedFileIndex(item)
+        return self._embeddedFileUpd(
+                idx,
+                buffer_=buffer_,
+                filename=filename,
+                ufilename=ufilename,
+                desc=desc,
+                )
 
     def embfile_add(self, name: str, buffer_: typing.ByteString,
                               filename: OptStr =None,
@@ -2371,6 +2759,88 @@ class Document:
         self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
         return xref
 
+    def extractFont(self, xref=0, info_only=0):
+        """Get a font by xref."""
+        assert 0, 'no Document_extractFont'
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_extractFont(self, xref, info_only)
+
+    def extract_image(self, xref):
+        """Get image by xref. Returns a dictionary."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+
+        #return _fitz.Document_extract_image(self, xref)
+        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
+        pdf = self._pdf_document()
+        #pdf_obj *obj = NULL;
+        #fz_buffer *res = NULL;
+        #fz_image *img = NULL;
+        #PyObject *rc = NULL;
+        #const char *ext = NULL;
+        #const char *cs_name = NULL;
+        img_type = 0
+        smask = 0
+        #fz_compressed_buffer *cbuf = NULL;
+        #fz_var(img);
+        #fz_var(res);
+        #fz_var(obj);
+
+        ASSERT_PDF(pdf);
+        if not INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
+            THROWMSG("bad xref")
+
+        obj = mupdf.mpdf_new_indirect(pdf, xref, 0)
+        subtype = mupdf.mpdf_dict_get(obj, PDF_NAME('Subtype'))
+
+        if not mupdf.mpdf_name_eq(subtype, PDF_NAME('Image')):
+            THROWMSG("not an image")
+
+        o = mupdf.mpdf_dict_geta(obj, PDF_NAME('SMask'), PDF_NAME('Mask'))
+        if o.m_internal:
+            smask = mupdf.mpdf_to_num(o)
+
+        if mupdf.mpdf_is_jpx_image(obj):
+            img_type = mupdf.FZ_IMAGE_JPX
+            ext = "jpx"
+        if JM_is_jbig2_image(obj):
+            img_type = mupdf.FZ_IMAGE_JBIG2
+            ext = "jb2"
+        res = mupdf.mpdf_load_raw_stream(obj)
+        if img_type == mupdf.FZ_IMAGE_UNKNOWN:
+            _, c = res.buffer_storage_raw()
+            img_type = mupdf.mfz_recognize_image_format(c)
+            ext = JM_image_extension(img_type)
+        if img_type == mupdf.FZ_IMAGE_UNKNOWN:
+            #fz_drop_buffer(gctx, res);
+            res = None
+            img = mupdf.mpdf_load_image(pdf, obj)
+            res = mupdf.mfz_new_buffer_from_image_as_png(img, mupdf.ColorParams())
+            ext = "png"
+        #} else /*if (smask == 0)*/ {
+        else:
+            img = mupdf.mfz_new_image_from_buffer(res)
+        xres, yres = mupdf.mfz_image_resolution(img)
+        width = img.w()
+        height = img.h()
+        colorspace = img.n()
+        bpc = img.bpc()
+        cs_name = mupdf.mfz_colorspace_name(img.colorspace())
+
+        rc = dict()
+        rc[ dictkey_ext] = ext
+        rc[ dictkey_smask] = smask
+        rc[ dictkey_width] = width
+        rc[ dictkey_height] = height
+        rc[ dictkey_colorspace] = colorspace
+        rc[ dictkey_bpc] = bpc
+        rc[ dictkey_xres] = xres
+        rc[ dictkey_yres] = yres
+        rc[ dictkey_cs_name] = cs_name
+        rc[ dictkey_image] =JM_BinFromBuffer(res)
+        return rc
+
     def find_bookmark(self, bm):
         """Find new location after layouting a document."""
         if self.is_closed or self.is_encrypted:
@@ -2381,6 +2851,13 @@ class Document:
         location = mupdf.lookup_bookmark2( self.this.m_internal, bm)
         jlib.log('{location=}')
         return location.chapter, location.page
+
+    def findBookmark(self, bm):
+        """Find new location after layouting a document."""
+        assert 0, 'no Document_findBookmark'
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        return _fitz.Document_findBookmark(self, bm)
 
     def fullcopy_page(self, pno, to=-1):
         """Make a full page duplicate."""
@@ -2445,6 +2922,14 @@ class Document:
 
         self._reset_page_refs()
 
+
+    def fullcopyPage(self, pno, to=-1):
+        """Make full page duplication."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        val = _fitz.Document_fullcopyPage(self, pno, to)
+        self._reset_page_refs()
+        return val
 
     def get_char_widths(doc, xref: int, limit: int = 256, idx: int = 0, fontdict: OptDict = None
             ) -> list:
@@ -2543,8 +3028,127 @@ class Document:
 
         return glyphs
 
+    def get_layer(self, config=-1):
+        """Content of ON, OFF, RBGroups of an OC layer."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_get_layer(self, config)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        ocp = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer( pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('OCProperties'),
+                )
+        if not ocp.m_internal:
+            return
+        if config == -1:
+            obj = mupdf.mpdf_dict_get( ocp, PDF_NAME('D'))
+        else:
+            obj =mupdf.mpdf_array_get(
+                    mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs')),
+                    config,
+                    );
+        if not obj.m_internal:
+            THROWMSG( "bad config number")
+        rc = JM_get_ocg_arrays( obj)
+        return rc
+
+    def get_layers(self):
+        """Show optional OC layers."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_get_layers(self)
+        #PyObject *rc = NULL;
+        #pdf_layer_config info = {NULL, NULL};
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        n = mupdf.mpdf_count_layer_configs( pdf)
+        if n == 1:
+            obj = mupdf.mpdf_dict_getl(
+                    mupdf.mpdf_trailer( pdf),
+                    PDF_NAME('Root'),
+                    PDF_NAME('OCProperties'),
+                    PDF_NAME('Configs'),
+                    )
+            if not mupdf.mpdf_is_array( obj):
+                n = 0
+        rc = []
+        info = mupdf.PdfLayerConfig()
+        for i in range(n):
+            mupdf.mpdf_layer_config_info( pdf, i, info);
+            item = { #Py_BuildValue("{s:i,s:s,s:s}",
+                    "number": i,
+                    "name": info.name,
+                    "creator": info.creator,
+                    }
+            rc.append( item)
+            #info.name = NULL;
+            #info.creator = NULL;
+        return rc
+
+    def get_new_xref(self):
+        """Make new xref."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_get_new_xref(self)
+        pdf = self._pdf_document()
+        xref = 0
+        ASSERT_PDF(pdf);
+        ENSURE_OPERATION(pdf);
+        xref = mupdf.mpdf_create_object(pdf)
+        return xref
+
     def get_oc(self, xref):
         return utils.get_oc(self, xref)
+
+    def get_ocgs(self):
+        """Show existing optional content groups."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_get_ocgs(self)
+        #PyObject *rc = NULL;
+        ci = mupdf.mpdf_new_name( "CreatorInfo")
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        ocgs = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root')),
+                PDF_NAME('OCProperties'),
+                PDF_NAME('OCGs'),
+                )
+        rc = dict()
+        if not mupdf.mpdf_is_array( ocgs):
+            return rc
+        n = mupdf.mpdf_array_len( ocgs);
+        for i in range(n):
+            ocg = mupdf.mpdf_array_get( ocgs, i)
+            xref = mupdf.mpdf_to_num( ocg)
+            name = mupdf.mpdf_to_text_string( mupdf.mpdf_dict_get( ocg, PDF_NAME('Name')))
+            obj = mupdf.mpdf_dict_getl( ocg, PDF_NAME('Usage'), ci, PDF_NAME('Subtype'))
+            usage = None
+            if obj.m_internal:
+                usage = mupdf.mpdf_to_name( obj)
+            intents = list()
+            intent = mupdf.mpdf_dict_get( ocg, PDF_NAME('Intent'))
+            if intent.m_internal:
+                if mupdf.mpdf_is_name( intent):
+                    intents.append( mupdf.mpdf_to_name( intent))
+                elif mupdf.mpdf_is_array( intent):
+                    m = mupdf.mpdf_array_len( intent)
+                    for j in range(m):
+                        o = mupdf.mpdf_array_get( intent, j)
+                        if mupdf.mpdf_is_name( o):
+                            intents.append( mupdf.mpdf_to_name( o))
+            hidden = mupdf.mpdf_is_ocg_hidden( pdf, mupdf.PdfObj(), usage, ocg)
+            item = {
+                    "name": name,
+                    "intent": intents,
+                    "on": not hidden,
+                    "usage": usage,
+                    }
+            temp = xref
+            rc[ temp] = item
+        return rc
 
     def get_ocmd(self, xref):
         return utils.get_ocmd(self, xref)
@@ -2570,353 +3174,40 @@ class Document:
         xrefs = JM_outline_xrefs(first, xrefs)
         return xrefs
 
+    def get_page_fonts(self, pno: int, full: bool =False) -> list:
+        """Retrieve a list of fonts used on a page.
+        """
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        if not self.is_pdf:
+            return ()
+        if type(pno) is not int:
+            try:
+                pno = pno.number
+            except:
+                raise ValueError("need a Page or page number")
+        val = self._getPageInfo(pno, 1)
+        if full is False:
+            return [v[:-1] for v in val]
+        return val
+
+    #def get_page_fonts(self, pno: int, full: bool =False) -> list:
+    #    """Retrieve a list of fonts used on a page.
+    #    """
+    #    if self.isClosed or self.isEncrypted:
+    #        raise ValueError("document closed or encrypted")
+    #    if not self.isPDF:
+    #        return ()
+    #    val = self._getPageInfo(pno, 1)
+    #    if full is False:
+    #        return [v[:-1] for v in val]
+    #    return val
+
     def get_page_labels(doc):
         return utils.get_page_labels(doc)
 
     def get_page_numbers(doc, label, only_one=False):
         return utils.get_page_numbers(doc, label, only_one)
-
-    @property
-    def is_closed(self):
-        return self.isClosed
-
-    @property
-    def is_encrypted(self):
-        return self.isEncrypted
-
-    @property
-    def is_pdf(self):
-        return self.isPDF
-
-    @property
-    def isReflowable(self):
-        """Check if document is layoutable."""
-        assert 0, 'no Document_isReflowable'
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_isReflowable(self)
-
-    @property
-    def last_location(self):
-        """Id (chapter, page) of last page."""
-        if self.is_closed:
-            raise ValueError("document closed")
-        #return _fitz.Document_last_location(self)
-        last_loc = mupdf.mfz_last_page(self.this)
-        return last_loc.chapter, last_loc.page
-
-    def loadPage(self, page_id):
-        """Load a page.
-
-        'page_id' is either a 0-based page number or a tuple (chapter, pno),
-        with chapter number and page number within that chapter.
-        """
-        #jlib.log('@@@ loadPage()')
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        if page_id is None:
-            page_id = 0
-        if page_id not in self:
-            raise ValueError("page not in document")
-        if type(page_id) is int and page_id < 0:
-            #jlib.log('handling -ve {page_id=}')
-            np = self.page_count
-            while page_id < 0:
-                page_id += np
-
-        #val = _fitz.this.load_page(page_id)
-        if isinstance(page_id, int):
-            page = self.this.load_page(page_id)
-        else:
-            chapter, pagenum = page_id
-            page = self.this.load_chapter_page(chapter, pagenum)
-        val = Page(page)
-
-        val.thisown = True
-        val.parent = weakref.proxy(self)
-        self._page_refs[id(val)] = val
-        val._annot_refs = weakref.WeakValueDictionary()
-        val.number = page_id
-        return val
-
-    def move_page(self, pno: int, to: int =-1):
-        """Move a page within a PDF document.
-
-        Args:
-            pno: source page number.
-            to: put before this page, '-1' means after last page.
-        """
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        page_count = len(self)
-        if (
-            pno not in range(page_count) or
-            to not in range(-1, page_count)
-           ):
-            raise ValueError("bad page number(s)")
-        before = 1
-        copy = 0
-        if to == -1:
-            to = page_count - 1
-            before = 0
-
-        return self._move_copy_page(pno, to, before, copy)
-
-    def new_page_(
-            self,
-            pno: int = -1,
-            width: float = 595,
-            height: float = 842,
-            ):# -> Page:
-        """Create and return a new page object.
-
-        Args:
-            pno: (int) insert before this page. Default: after last page.
-            width: (float) page width in points. Default: 595 (ISO A4 width).
-            height: (float) page height in points. Default 842 (ISO A4 height).
-        Returns:
-            A Page object.
-        """
-        #doc._newPage(pno, width=width, height=height)
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-
-        #val = _fitz.Document__newPage(self, pno, width, height)
-        if isinstance(self.this, mupdf.PdfDocument):
-            pdf = self.this
-        else:
-            pdf = self.this.specifics()
-        assert isinstance(pdf, mupdf.PdfDocument)
-        #jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
-        mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
-        mediabox.x1 = width
-        mediabox.y1 = height
-        contents = mupdf.Buffer()
-        #jlib.log('{=contents} {contents.buffer_storage_raw()=}')
-        if pno < -1:
-            raise Exception("bad page number(s)")
-        #jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
-        # create /Resources and /Contents objects
-        #resources = pdf.add_object(pdf.new_dict(1))
-        resources = mupdf.mpdf_add_new_dict(pdf, 1)
-        #jlib.log('after pdf_add_new_dict(): {=mupdf.mpdf_xref_len(pdf)}')
-        page_obj = pdf.add_page(mediabox, 0, resources, contents)
-        #jlib.log('after add_page(): {=mupdf.mpdf_xref_len(pdf)}')
-        pdf.insert_page(pno, page_obj)
-        #jlib.log('after insert_page(): {=mupdf.mpdf_xref_len(pdf)}')
-        # fixme: pdf->dirty = 1;
-
-        self._reset_page_refs()
-        #jlib.log('after _reset_page_refs(): {=mupdf.mpdf_xref_len(pdf)}')
-        return self[pno]
-
-    def new_page(
-            self,
-            pno: int = -1,
-            width: float = 595,
-            height: float = 842,
-            ):# -> Page:
-        ret = self.new_page_(pno, width, height)
-        self._reset_page_refs()
-        return ret
-
-    def embeddedFileAdd(
-            self,
-            name: str,
-            buffer_: typing.ByteString,
-            filename: OptStr =None,
-            ufilename: OptStr =None,
-            desc: OptStr =None,
-            ) -> None:
-        """Add an item to the EmbeddedFiles array.
-
-        Args:
-            name: name of the new item, must not already exist.
-            buffer_: (binary data) the file content.
-            filename: (str) the file name, default: the name
-            ufilename: (unicode) the file name, default: filename
-            desc: (str) the description.
-        """
-        filenames = self.embeddedFileNames()
-        msg = "Name '%s' already in EmbeddedFiles array." % str(name)
-        if name in filenames:
-            raise ValueError(msg)
-
-        if filename is None:
-            filename = name
-        if ufilename is None:
-            ufilename = unicode(filename, "utf8") if str is bytes else filename
-        if desc is None:
-            desc = name
-        return self._embeddedFileAdd(
-                name,
-                buffer_=buffer_,
-                filename=filename,
-                ufilename=ufilename,
-                desc=desc,
-                )
-
-    def embeddedFileCount(self) -> int:
-        """Get number of EmbeddedFiles."""
-        return len(self.embeddedFileNames())
-
-    def embeddedFileDel(self, item: typing.Union[int, str]):
-        """Delete an entry from EmbeddedFiles.
-
-        Notes:
-            The argument must be name or index of an EmbeddedFiles item.
-            Physical deletion of data will happen on save to a new
-            file with appropriate garbage option.
-        Args:
-            item: name or number of item.
-        Returns:
-            None
-        """
-        idx = self._embeddedFileIndex(item)
-        return self._embeddedFileDel(idx)
-
-    def embeddedFileGet(self, item: typing.Union[int, str]) -> bytes:
-        """Get the content of an item in the EmbeddedFiles array.
-
-        Args:
-            item: number or name of item.
-        Returns:
-            (bytes) The file content.
-        """
-        idx = self._embeddedFileIndex(item)
-        return self._embeddedFileGet(idx)
-
-    def embeddedFileInfo(self, item: typing.Union[int, str]) -> dict:
-        """Get information of an item in the EmbeddedFiles array.
-
-        Args:
-            item: number or name of item.
-        Returns:
-            Information dictionary.
-        """
-        idx = self._embeddedFileIndex(item)
-        infodict = {"name": self.embeddedFileNames()[idx]}
-        self._embeddedFileInfo(idx, infodict)
-        return infodict
-
-    def embeddedFileNames(self) -> list:
-        """Get list of names of EmbeddedFiles."""
-        filenames = []
-        self._embeddedFileNames(filenames)
-        return filenames
-
-    def embeddedFileUpd(
-            self,
-            item: typing.Union[int, str],
-            buffer_: OptBytes =None,
-            filename: OptStr =None,
-            ufilename: OptStr =None,
-            desc: OptStr =None,
-            ) -> None:
-        """Change an item of the EmbeddedFiles array.
-
-        Notes:
-            Only provided parameters are changed. If all are omitted,
-            the method is a no-op.
-        Args:
-            item: number or name of item.
-            buffer_: (binary data) the new file content.
-            filename: (str) the new file name.
-            ufilename: (unicode) the new filen ame.
-            desc: (str) the new description.
-        """
-        idx = self._embeddedFileIndex(item)
-        return self._embeddedFileUpd(
-                idx,
-                buffer_=buffer_,
-                filename=filename,
-                ufilename=ufilename,
-                desc=desc,
-                )
-
-    def extractFont(self, xref=0, info_only=0):
-        """Get a font by xref."""
-        assert 0, 'no Document_extractFont'
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        #return _fitz.Document_extractFont(self, xref, info_only)
-
-    def extract_image(self, xref):
-        """Get image by xref. Returns a dictionary."""
-        if self.is_closed or self.is_encrypted:
-            raise ValueError("document closed or encrypted")
-
-        #return _fitz.Document_extract_image(self, xref)
-        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
-        pdf = self._pdf_document()
-        #pdf_obj *obj = NULL;
-        #fz_buffer *res = NULL;
-        #fz_image *img = NULL;
-        #PyObject *rc = NULL;
-        #const char *ext = NULL;
-        #const char *cs_name = NULL;
-        img_type = 0
-        smask = 0
-        #fz_compressed_buffer *cbuf = NULL;
-        #fz_var(img);
-        #fz_var(res);
-        #fz_var(obj);
-
-        ASSERT_PDF(pdf);
-        if not INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
-            THROWMSG("bad xref")
-
-        obj = mupdf.mpdf_new_indirect(pdf, xref, 0)
-        subtype = mupdf.mpdf_dict_get(obj, PDF_NAME('Subtype'))
-
-        if not mupdf.mpdf_name_eq(subtype, PDF_NAME('Image')):
-            THROWMSG("not an image")
-
-        o = mupdf.mpdf_dict_geta(obj, PDF_NAME('SMask'), PDF_NAME('Mask'))
-        if o.m_internal:
-            smask = mupdf.mpdf_to_num(o)
-
-        if mupdf.mpdf_is_jpx_image(obj):
-            img_type = mupdf.FZ_IMAGE_JPX
-            ext = "jpx"
-        if JM_is_jbig2_image(obj):
-            img_type = mupdf.FZ_IMAGE_JBIG2
-            ext = "jb2"
-        res = mupdf.mpdf_load_raw_stream(obj)
-        if img_type == mupdf.FZ_IMAGE_UNKNOWN:
-            _, c = res.buffer_storage_raw()
-            img_type = mupdf.mfz_recognize_image_format(c)
-            ext = JM_image_extension(img_type)
-        if img_type == mupdf.FZ_IMAGE_UNKNOWN:
-            #fz_drop_buffer(gctx, res);
-            res = None
-            img = mupdf.mpdf_load_image(pdf, obj)
-            res = mupdf.mfz_new_buffer_from_image_as_png(img, mupdf.ColorParams())
-            ext = "png"
-        #} else /*if (smask == 0)*/ {
-        else:
-            img = mupdf.mfz_new_image_from_buffer(res)
-        xres, yres = mupdf.mfz_image_resolution(img)
-        width = img.w()
-        height = img.h()
-        colorspace = img.n()
-        bpc = img.bpc()
-        cs_name = mupdf.mfz_colorspace_name(img.colorspace())
-
-        rc = dict()
-        rc[ dictkey_ext] = ext
-        rc[ dictkey_smask] = smask
-        rc[ dictkey_width] = width
-        rc[ dictkey_height] = height
-        rc[ dictkey_colorspace] = colorspace
-        rc[ dictkey_bpc] = bpc
-        rc[ dictkey_xres] = xres
-        rc[ dictkey_yres] = yres
-        rc[ dictkey_cs_name] = cs_name
-        rc[ dictkey_image] =JM_BinFromBuffer(res)
-        return rc
-
 
     def get_toc(
             doc,#: Document,
@@ -2928,6 +3219,18 @@ class Document:
             simple: a bool to control output. Returns a list, where each entry consists of outline level, title, page number and link destination (if simple = False). For details see PyMuPDF's documentation.
         """
         return utils.get_toc(doc, simple)
+
+    def getSigFlags(self):
+        """Get the /SigFlags value."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_getSigFlags(self)
+
+    def getXmlMetadata(self):
+        """Get document XML metadata."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_getXmlMetadata(self)
 
     def init_doc(self):
         if self.is_encrypted:
@@ -2952,44 +3255,6 @@ class Document:
         self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
 
     outline = property(lambda self: self._outline)
-
-
-    def get_page_fonts(self, pno: int, full: bool =False) -> list:
-        """Retrieve a list of fonts used on a page.
-        """
-        if self.is_closed or self.is_encrypted:
-            raise ValueError("document closed or encrypted")
-        if not self.is_pdf:
-            return ()
-        if type(pno) is not int:
-            try:
-                pno = pno.number
-            except:
-                raise ValueError("need a Page or page number")
-        val = self._getPageInfo(pno, 1)
-        if full is False:
-            return [v[:-1] for v in val]
-        return val
-
-    @property
-    def needsPass(self):
-        """Indicate password required."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return self.this.needs_password()
-
-    def nextLocation(self, page_id):
-        """Get (chapter, page) of next page."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        if type(page_id) is int:
-            page_id = (0, page_id)
-        if page_id not in self:
-            raise ValueError("page id not in document")
-        if tuple(page_id)  == self.lastLocation:
-            return ()
-        #return _fitz.Document_nextLocation(self, page_id)
-        assert 0, 'no Document_nextLocation'
 
     def insert_pdf(
             self,
@@ -3080,6 +3345,40 @@ class Document:
         if final == 1:
             self.Graftmaps[isrt] = None
 
+    def initData(self):
+        if self.isEncrypted:
+            raise ValueError("cannot initData - document still encrypted")
+        self._outline = self._loadOutline()
+        self.metadata = dict(
+                [(k, self._getMetadata(v))
+                    for k,v in {
+                        'format':'format',
+                        'title':'info:Title',
+                        'author':'info:Author',
+                        'subject':'info:Subject',
+                        'keywords':'info:Keywords',
+                        'creator':'info:Creator',
+                        'producer':'info:Producer',
+                        'creationDate':'info:CreationDate',
+                        'modDate':'info:ModDate',
+                        'trapped':'info:Trapped',
+                        }.items()
+                    ]
+                )
+        self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
+
+    @property
+    def is_closed(self):
+        return self.isClosed
+
+    @property
+    def is_encrypted(self):
+        return self.isEncrypted
+
+    @property
+    def is_pdf(self):
+        return self.isPDF
+
     @property
     def isDirty(self):
         """True if PDF has unsaved changes."""
@@ -3089,34 +3388,12 @@ class Document:
         assert 0, 'no Document_isDirty'
 
     @property
-    def language(self):
-        """Document language."""
+    def isFormPDF(self):
+        """Check if PDF Form document."""
         if self.isClosed:
             raise ValueError("document closed")
-        #return _fitz.Document_language(self)
-        pdf = mupdf.mpdf_specifics(self.this)
-        if not pdf.m_internal:
-            return
-        lang = mupdf.mpdf_document_language(pdf)
-        if lang == mupdf.FZ_LANG_UNSET:
-            return
-        assert 0, 'not implemented yet'
-        #char buf[8];
-        #return PyUnicode_FromString(fz_string_from_text_language(buf, lang));
+        return _fitz.Document_isFormPDF(self)
 
-    def findBookmark(self, bm):
-        """Find new location after layouting a document."""
-        assert 0, 'no Document_findBookmark'
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document_findBookmark(self, bm)
-
-    #def get_oc(self, xref):
-    #    """Get xref of optional content object."""
-    #    assert 0, 'no Document_get_oc'
-    #    if self.isClosed:
-    #        raise ValueError("document closed")
-    #    return _fitz.Document_get_oc(self, xref)
     @property
     def isPDF(self):
         """Check for PDF."""
@@ -3145,12 +3422,73 @@ class Document:
         #return True if pp.m_internal else False
 
     @property
-    def lastLocation(self):
-        """Id (chapter, page) of last page."""
-        assert 0, 'no Document_lastLocation'
+    def isReflowable(self):
+        """Check if document is layoutable."""
+        assert 0, 'no Document_isReflowable'
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_lastLocation(self)
+        return _fitz.Document_isReflowable(self)
+
+    def isStream(self, xref=0):
+        """Check if xref is a stream object."""
+        if self.isClosed:
+            raise ValueError("document closed")
+
+        return _fitz.Document_isStream(self, xref)
+
+    @property
+    def language(self):
+        """Document language."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_language(self)
+        pdf = mupdf.mpdf_specifics(self.this)
+        if not pdf.m_internal:
+            return
+        lang = mupdf.mpdf_document_language(pdf)
+        if lang == mupdf.FZ_LANG_UNSET:
+            return
+        assert 0, 'not implemented yet'
+        #char buf[8];
+        #return PyUnicode_FromString(fz_string_from_text_language(buf, lang));
+
+    @property
+    def last_location(self):
+        """Id (chapter, page) of last page."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_last_location(self)
+        last_loc = mupdf.mfz_last_page(self.this)
+        return last_loc.chapter, last_loc.page
+
+    def layer_ui_configs(self):
+        """Show OC visibility status modifyable by user."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_layer_ui_configs(self)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        info = mupdf.PdfLayerConfigUi()
+        n = mupdf.mpdf_count_layer_config_ui( pdf)
+        rc = []
+        for i in range(n):
+            mupdf.mpdf_layer_config_ui_info( pdf, i, info)
+            if info.type == 1:
+                type_ = "checkbox"
+            elif info.type == 2:
+                type_ = "radiobox"
+            else:
+                type_ = "label"
+            item = {
+                    "number": i,
+                    "text": info.text,
+                    "depth": info.depth,
+                    "type": type_,
+                    "on": info.selected,
+                    "locked": info.locked,
+                    }
+            rc.append(item)
+        return rc
 
     def layout(self, rect=None, width=0, height=0, fontsize=11):
         """Re-layout a reflowable document."""
@@ -3173,6 +3511,48 @@ class Document:
 
         self._reset_page_refs()
         self.init_doc()
+
+    @property
+    def lastLocation(self):
+        """Id (chapter, page) of last page."""
+        assert 0, 'no Document_lastLocation'
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_lastLocation(self)
+
+    def loadPage(self, page_id):
+        """Load a page.
+
+        'page_id' is either a 0-based page number or a tuple (chapter, pno),
+        with chapter number and page number within that chapter.
+        """
+        #jlib.log('@@@ loadPage()')
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        if page_id is None:
+            page_id = 0
+        if page_id not in self:
+            raise ValueError("page not in document")
+        if type(page_id) is int and page_id < 0:
+            #jlib.log('handling -ve {page_id=}')
+            np = self.page_count
+            while page_id < 0:
+                page_id += np
+
+        #val = _fitz.this.load_page(page_id)
+        if isinstance(page_id, int):
+            page = self.this.load_page(page_id)
+        else:
+            chapter, pagenum = page_id
+            page = self.this.load_chapter_page(chapter, pagenum)
+        val = Page(page)
+
+        val.thisown = True
+        val.parent = weakref.proxy(self)
+        self._page_refs[id(val)] = val
+        val._annot_refs = weakref.WeakValueDictionary()
+        val.number = page_id
+        return val
 
     def location_from_page_number(self, pno):
         """Convert pno to (chapter, page)."""
@@ -3199,6 +3579,123 @@ class Document:
         mark = mupdf.make_bookmark2( self.this.m_internal, loc.internal())
         jlib.log('returning {mark:x=}')
         return mark
+
+    def move_page(self, pno: int, to: int =-1):
+        """Move a page within a PDF document.
+
+        Args:
+            pno: source page number.
+            to: put before this page, '-1' means after last page.
+        """
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        page_count = len(self)
+        if (
+            pno not in range(page_count) or
+            to not in range(-1, page_count)
+           ):
+            raise ValueError("bad page number(s)")
+        before = 1
+        copy = 0
+        if to == -1:
+            to = page_count - 1
+            before = 0
+
+        return self._move_copy_page(pno, to, before, copy)
+
+    def need_appearances(self, value=None):
+        """Get/set the NeedAppearances value."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        if not self.isFormPDF:
+            return None
+        return _fitz.Document_need_appearances(self, value)
+
+    @property
+    def needsPass(self):
+        """Indicate password required."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return self.this.needs_password()
+
+    def new_page_(
+            self,
+            pno: int = -1,
+            width: float = 595,
+            height: float = 842,
+            ):# -> Page:
+        """Create and return a new page object.
+
+        Args:
+            pno: (int) insert before this page. Default: after last page.
+            width: (float) page width in points. Default: 595 (ISO A4 width).
+            height: (float) page height in points. Default 842 (ISO A4 height).
+        Returns:
+            A Page object.
+        """
+        #doc._newPage(pno, width=width, height=height)
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+
+        #val = _fitz.Document__newPage(self, pno, width, height)
+        if isinstance(self.this, mupdf.PdfDocument):
+            pdf = self.this
+        else:
+            pdf = self.this.specifics()
+        assert isinstance(pdf, mupdf.PdfDocument)
+        #jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
+        mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+        mediabox.x1 = width
+        mediabox.y1 = height
+        contents = mupdf.Buffer()
+        #jlib.log('{=contents} {contents.buffer_storage_raw()=}')
+        if pno < -1:
+            raise Exception("bad page number(s)")
+        #jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
+        # create /Resources and /Contents objects
+        #resources = pdf.add_object(pdf.new_dict(1))
+        resources = mupdf.mpdf_add_new_dict(pdf, 1)
+        #jlib.log('after pdf_add_new_dict(): {=mupdf.mpdf_xref_len(pdf)}')
+        page_obj = pdf.add_page(mediabox, 0, resources, contents)
+        #jlib.log('after add_page(): {=mupdf.mpdf_xref_len(pdf)}')
+        pdf.insert_page(pno, page_obj)
+        #jlib.log('after insert_page(): {=mupdf.mpdf_xref_len(pdf)}')
+        # fixme: pdf->dirty = 1;
+
+        self._reset_page_refs()
+        #jlib.log('after _reset_page_refs(): {=mupdf.mpdf_xref_len(pdf)}')
+        return self[pno]
+
+    def new_page(
+            self,
+            pno: int = -1,
+            width: float = 595,
+            height: float = 842,
+            ):# -> Page:
+        ret = self.new_page_(pno, width, height)
+        self._reset_page_refs()
+        return ret
+
+    def nextLocation(self, page_id):
+        """Get (chapter, page) of next page."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        if type(page_id) is int:
+            page_id = (0, page_id)
+        if page_id not in self:
+            raise ValueError("page id not in document")
+        if tuple(page_id)  == self.lastLocation:
+            return ()
+        #return _fitz.Document_nextLocation(self, page_id)
+        assert 0, 'no Document_nextLocation'
+
+    #def get_oc(self, xref):
+    #    """Get xref of optional content object."""
+    #    assert 0, 'no Document_get_oc'
+    #    if self.isClosed:
+    #        raise ValueError("document closed")
+    #    return _fitz.Document_get_oc(self, xref)
 
     @property
     def page_count(self):
@@ -3290,6 +3787,12 @@ class Document:
         xref = mupdf.mpdf_to_num(root)
         return xref
 
+    def pdf_trailer(self, compressed=0, ascii=0):
+        """Get PDF trailer as a string."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_pdf_trailer(self, compressed, ascii)
+
     @property
     def permissions(self):
         """Document permissions."""
@@ -3316,17 +3819,6 @@ class Document:
         if not mupdf.mfz_has_permission(doc, mupdf.FZ_PERMISSION_ANNOTATE):
             perm = perm ^ mupdf.PDF_PERM_ANNOTATE;
         return perm
-
-    def chapter_page_count(self, chapter):
-        """Page count of chapter."""
-        if self.is_closed:
-            raise ValueError("document closed")
-        #return _fitz.Document_chapter_page_count(self, chapter)
-        chapters = mupdf.mfz_count_chapters( self.this)
-        if chapter < 0 or chapter >= chapters:
-            THROWMSG( "bad chapter number")
-        pages = mupdf.mfz_count_chapter_pages( self.this, chapter)
-        return pages
 
     def prev_location(self, page_id):
 
@@ -3456,7 +3948,6 @@ class Document:
             out = JM_new_output_fileptr(filename)
             mupdf.mpdf_write_document(pdf, out, opts)
 
-
     def select(self, pyliste):
         """Build sub-pdf with page numbers in the list."""
         if self.isClosed or self.isEncrypted:
@@ -3479,6 +3970,73 @@ class Document:
         if pdf.m_internal.rev_page_map:
             mupdf.mpdf_drop_page_tree(pdf)
         self._reset_page_refs()
+
+    def set_layer(self, config, basestate=None, on=None, off=None, rbgroups=None):
+        """Set the PDF keys /ON, /OFF, /RBGroups of an OC layer."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        ocgs = set(self.get_ocgs().keys())
+        if ocgs == set():
+            raise ValueError("document has no optional content")
+
+        if on:
+            if type(on) not in (list, tuple):
+                raise ValueError("bad type: 'on'")
+            s = set(on).difference(ocgs)
+            if s != set():
+                raise ValueError("bad OCGs in 'on': %s" % s)
+
+        if off:
+            if type(off) not in (list, tuple):
+                raise ValueError("bad type: 'off'")
+            s = set(off).difference(ocgs)
+            if s != set():
+                raise ValueError("bad OCGs in 'off': %s" % s)
+
+        if rbgroups:
+            if type(rbgroups) not in (list, tuple):
+                raise ValueError("bad type: 'rbgroups'")
+            for x in rbgroups:
+                if not type(x) in (list, tuple):
+                    raise ValueError("bad RBGroup '%s'" % x)
+                s = set(x).difference(ocgs)
+                if f != set():
+                    raise ValueError("bad OCGs in RBGroup: %s" % s)
+
+        if basestate:
+            basestate = str(basestate).upper()
+            if basestate == "UNCHANGED":
+                basestate = "Unchanged"
+            if basestate not in ("ON", "OFF", "Unchanged"):
+                raise ValueError("bad 'basestate'")
+        #return _fitz.Document_set_layer(self, config, basestate, on, off, rbgroups)
+        #pdf_obj *obj = NULL;
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        ocp = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer( pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('OCProperties'),
+                )
+        if not ocp.m_internal:
+            return
+        if config == -1:
+            obj = mupdf.mpdf_dict_get( ocp, PDF_NAME('D'))
+        else:
+            obj = mupdf.mpdf_array_get(
+                    mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs')),
+                    config,
+                    )
+        if not obj.m_internal:
+            THROWMSG( "bad config number")
+        JM_set_ocg_arrays( obj, basestate, on, off, rbgroups)
+        mupdf.mpdf_read_ocg( pdf)
+
+    def set_layer_ui_config(self, number, action=0):
+        """Set / unset OC intent configuration."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        return _fitz.Document_set_layer_ui_config(self, number, action)
 
     def set_metadata(self, n):
         return utils.set_metadata(self, n)
@@ -3721,9 +4279,83 @@ class Document:
         doc.init_doc()
         return toclen
 
+    def set_xml_metadata(self, metadata):
+        """Store XML document level metadata."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        return _fitz.Document_set_xml_metadata(self, metadata)
 
     def setLanguage(self, language=None):
         return _fitz.Document_setLanguage(self, language)
+
+    @staticmethod
+    def show_dict(o):
+        assert 0
+        o_dict_len = mupdf.mpdf_dict_len(o)
+        #jlib.log( '{o_dict_len=}:')
+        for i in range(o_dict_len):
+            key = mupdf.mpdf_dict_get_key(o, i)
+            value = mupdf.mpdf_dict_get(o, key)
+            #jlib.log( '    {key=}: {value=}')
+
+    def switch_layer(self, config, as_default=0):
+        """Activate an OC layer."""
+        if self.isClosed:
+            raise ValueError("document closed")
+        #return _fitz.Document_switch_layer(self, config, as_default)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf);
+        cfgs = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer( pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('OCProperties'),
+                PDF_NAME('Configs')
+                )
+        if not mupdf.mpdf_is_array( cfgs) or not mupdf.mpdf_array_len( cfgs):
+            if config < 1:
+                return
+            THROWMSG( "bad layer number")
+        if config < 0:
+            return
+        mupdf.mpdf_select_layer_config( pdf, config)
+        if as_default:
+            mupdf.mpdf_set_layer_config_as_default( pdf)
+            mupdf.mpdf_read_ocg( pdf)
+
+    def update_object(self, xref, text, page=None):
+        """Replace object definition source."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_update_stream(self, xref, stream, new)
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        xreflen = mupdf.mpdf_xref_len(pdf)
+        if not INRANGE(xref, 1, xreflen-1):
+            THROWMSG("bad xref")
+        ENSURE_OPERATION(pdf)
+        # create new object with passed-in string
+        new_obj = JM_pdf_obj_from_str(pdf, text)
+        mupdf.mpdf_update_object(pdf, xref, new_obj)
+        if page:
+            JM_refresh_page( mupdf.mpdf_page_from_fz_page(page.super()))
+
+    def update_stream(self, xref=0, stream=None, new=0):
+        """Replace xref stream part."""
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_update_stream(self, xref, stream, new)
+        pdf = self._pdf_document()
+        xreflen = pdf.xref_len()
+        if xref < 1 or xref > xreflen:
+            raise Exception(f'bad xref={xref} xreflen={xreflen}')
+        obj = pdf.new_indirect(xref, 0)
+        if not new and not obj.is_stream():
+            raise Exception(f'no stream object at xref={xref}')
+        res = JM_BufferFromBytes(stream)
+        if not res:
+            raise Exception('bad type: "stream"')
+        JM_update_stream(pdf, obj, res, 1)
+        pdf.dirty = 1
 
     def write(
             self,
@@ -3768,80 +4400,6 @@ class Document:
         return bio.getvalue()
 
     tobytes = write
-
-    def isStream(self, xref=0):
-        """Check if xref is a stream object."""
-        if self.isClosed:
-            raise ValueError("document closed")
-
-        return _fitz.Document_isStream(self, xref)
-
-
-    def need_appearances(self, value=None):
-        """Get/set the NeedAppearances value."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        if not self.isFormPDF:
-            return None
-        return _fitz.Document_need_appearances(self, value)
-
-    def getSigFlags(self):
-        """Get the /SigFlags value."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_getSigFlags(self)
-
-    @property
-    def isFormPDF(self):
-        """Check if PDF Form document."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_isFormPDF(self)
-
-    @property
-    def FormFonts(self):
-        """Get list of field font resource names."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_FormFonts(self)
-
-    def _addFormFont(self, name, font):
-        """Add new form font."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document__addFormFont(self, name, font)
-
-    def _getOLRootNumber(self):
-        """Get xref of Outline Root, create it if missing."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        #return _fitz.Document__getOLRootNumber(self)
-        pdf = mupdf.mpdf_specifics(self.this)
-        #pdf_obj *root, *olroot, *ind_obj;
-        ASSERT_PDF(pdf)
-        # get main root
-        root = mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root'))
-        # get outline root
-        olroot = mupdf.mpdf_dict_get( root, PDF_NAME('Outlines'))
-        if not olroot.m_internal:
-            olroot = mupdf.mpdf_new_dict( pdf, 4)
-            mupdf.mpdf_dict_put( olroot, PDF_NAME('Type'), PDF_NAME('Outlines'))
-            ind_obj = mupdf.mpdf_add_object( pdf, olroot)
-            mupdf.mpdf_dict_put( root, PDF_NAME('Outlines'), ind_obj)
-            olroot = mupdf.mpdf_dict_get( root, PDF_NAME('Outlines'))
-        return mupdf.mpdf_to_num( olroot)
-
-    def get_new_xref(self):
-        """Make new xref."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        #return _fitz.Document_get_new_xref(self)
-        pdf = self._pdf_document()
-        xref = 0
-        ASSERT_PDF(pdf);
-        ENSURE_OPERATION(pdf);
-        xref = mupdf.mpdf_create_object(pdf)
-        return xref
 
     @property
     def xref(self):
@@ -4021,579 +4579,15 @@ class Document:
             raise ValueError("document closed")
         return _fitz.Document_xref_xml_metadata(self)
 
-    def getXmlMetadata(self):
-        """Get document XML metadata."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_getXmlMetadata(self)
-
-    def del_xml_metadata(self):
-        """Delete XML metadata."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document_del_xml_metadata(self)
-
-    def set_xml_metadata(self, metadata):
-        """Store XML document level metadata."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document_set_xml_metadata(self, metadata)
-
     setXmlMetadata = set_xml_metadata
-
-    def pdf_trailer(self, compressed=0, ascii=0):
-        """Get PDF trailer as a string."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_pdf_trailer(self, compressed, ascii)
-
-    def update_object(self, xref, text, page=None):
-        """Replace object definition source."""
-        if self.is_closed or self.is_encrypted:
-            raise ValueError("document closed or encrypted")
-        #return _fitz.Document_update_stream(self, xref, stream, new)
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf)
-        xreflen = mupdf.mpdf_xref_len(pdf)
-        if not INRANGE(xref, 1, xreflen-1):
-            THROWMSG("bad xref")
-        ENSURE_OPERATION(pdf)
-        # create new object with passed-in string
-        new_obj = JM_pdf_obj_from_str(pdf, text)
-        mupdf.mpdf_update_object(pdf, xref, new_obj)
-        if page:
-            JM_refresh_page( mupdf.mpdf_page_from_fz_page(page.super()))
-
-    def _pdf_document(self):
-        '''
-        Returns self.this as a mupdf.PdfDocument using pdf_specifics() as
-        requireds.
-        '''
-        if isinstance(self.this, mupdf.PdfDocument):
-            return self.this
-        #return self.this.specifics()
-        return mupdf.PdfDocument(self.this)
-
-    def update_stream(self, xref=0, stream=None, new=0):
-        """Replace xref stream part."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        #return _fitz.Document_update_stream(self, xref, stream, new)
-        pdf = self._pdf_document()
-        xreflen = pdf.xref_len()
-        if xref < 1 or xref > xreflen:
-            raise Exception(f'bad xref={xref} xreflen={xreflen}')
-        obj = pdf.new_indirect(xref, 0)
-        if not new and not obj.is_stream():
-            raise Exception(f'no stream object at xref={xref}')
-        res = JM_BufferFromBytes(stream)
-        if not res:
-            raise Exception('bad type: "stream"')
-        JM_update_stream(pdf, obj, res, 1)
-        pdf.dirty = 1
-
-    def _setMetadata(self, text):
-        """Set old style metadata."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document__setMetadata(self, text)
-
-    def _make_page_map(self):
-        """Make an array page number -> page object."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document__make_page_map(self)
-
-    def fullcopyPage(self, pno, to=-1):
-        """Make full page duplication."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        val = _fitz.Document_fullcopyPage(self, pno, to)
-        self._reset_page_refs()
-        return val
-
-    def _move_copy_page(self, pno, nb, before, copy):
-        """Move or copy a PDF page reference."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #val = _fitz.Document__move_copy_page(self, pno, nb, before, copy)
-        pdf = self._pdf_document()
-        same = 0
-        #pdf_obj *parent1 = NULL, *parent2 = NULL, *parent = NULL;
-        #pdf_obj *kids1, *kids2;
-        ASSERT_PDF(pdf);
-        # get the two page objects -----------------------------------
-        # locate the /Kids arrays and indices in each
-
-        page1, parent1, i1 = pdf_lookup_page_loc( pdf, pno)
-
-        kids1 = mupdf.mpdf_dict_get( parent1, PDF_NAME('Kids'))
-
-        page2, parent2, i2 = pdf_lookup_page_loc( pdf, nb)
-        kids2 = mupdf.mpdf_dict_get( parent2, PDF_NAME('Kids'))
-        #jlib.log('{kids2.m_internal=}')
-        if before:  # calc index of source page in target /Kids
-            pos = i2
-        else:
-            pos = i2 + 1
-
-        # same /Kids array? ------------------------------------------
-        same = mupdf.mpdf_objcmp( kids1, kids2)
-
-        # put source page in target /Kids array ----------------------
-        if not copy and same != 0:  # update parent in page object
-            mupdf.mpdf_dict_put( page1, PDF_NAME('Parent'), parent2)
-        #jlib.log('{=kids2 kids2.m_internal page1 pos}')
-        mupdf.mpdf_array_insert( kids2, page1, pos)
-
-        if same != 0:   # different /Kids arrays ----------------------
-            parent = parent2
-            while parent.m_internal:    # increase /Count objects in parents
-                count = mupdf.mpdf_dict_get_int( parent, PDF_NAME('Count'))
-                mupdf.mpdf_dict_put_int( parent, PDF_NAME('Count'), count + 1)
-                parent = mupdf.mpdf_dict_get( parent, PDF_NAME('Parent'))
-            if not copy:    # delete original item
-                mupdf.mpdf_array_delete( kids1, i1)
-                parent = parent1
-                while parent.m_internal:    # decrease /Count objects in parents
-                    count = mupdf.mpdf_dict_get_int( parent, PDF_NAME('Count'))
-                    mupdf.mpdf_dict_put_int( parent, PDF_NAME('Count'), count - 1)
-                    parent = mupdf.mpdf_dict_get( parent, PDF_NAME('Parent'))
-        else:   # same /Kids array
-            if copy:    # source page is copied
-                parent = parent2;
-                while parent.m_internal:    # increase /Count object in parents
-                    count = mupdf.mpdf_dict_get_int( parent, PDF_NAME('Count'))
-                    mupdf.mpdf_dict_put_int( parent, PDF_NAME('Count'), count + 1)
-                    parent = mupdf.mpdf_dict_get( parent, PDF_NAME('Parent'))
-            else:
-                if i1 < pos:
-                    mupdf.mpdf_array_delete( kids1, i1)
-                else:
-                    mupdf.mpdf_array_delete( kids1, i1 + 1)
-        if pdf.m_internal.rev_page_map: # page map no longer valid: drop it
-            mupdf.mpdf_drop_page_tree( pdf)
-
-        self._reset_page_refs()
-
-
-    def _remove_toc_item(self, xref):
-        #return _fitz.Document__remove_toc_item(self, xref)
-            # "remove" bookmark by letting it point to nowhere
-        pdf = self._pdf_document()
-        item = mupdf.mpdf_new_indirect(pdf, xref, 0)
-        mupdf.mpdf_dict_del( item, PDF_NAME('Dest'))
-        mupdf.mpdf_dict_del( item, PDF_NAME('A'))
-        color = mupdf.mpdf_new_array( pdf, 3)
-        for i in range(3):
-            mupdf.mpdf_array_push_real( color, 0.8)
-        mupdf.mpdf_dict_put( item, PDF_NAME('C'), color)
-
-    def _update_toc_item(self, xref, action=None, title=None, flags=0, collapse=None, color=None):
-        return _fitz.Document__update_toc_item(self, xref, action, title, flags, collapse, color)
-
-    def _get_page_labels(self):
-        #return _fitz.Document__get_page_labels(self)
-        pdf = self._pdf_document()
-
-        ASSERT_PDF(pdf);
-        rc = []
-        pagelabels = mupdf.mpdf_new_name("PageLabels")
-        obj = mupdf.mpdf_dict_getl( mupdf.mpdf_trailer(pdf), PDF_NAME('Root'), pagelabels)
-        if not obj.m_internal:
-            return rc
-        # simple case: direct /Nums object
-        nums = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_get( obj, PDF_NAME('Nums')))
-        if nums.m_internal:
-            JM_get_page_labels(rc, nums)
-            return rc
-        # case: /Kids/Nums
-        nums = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_getl(obj, PDF_NAME('Kids'), PDF_NAME('Nums')))
-        if nums.m_internal:
-            JM_get_page_labels(rc, nums)
-            return rc
-        # case: /Kids is an array of multiple /Nums
-        kids = mupdf.mpdf_resolve_indirect( mupdf.mpdf_dict_get( obj, PDF_NAME('Kids')))
-        if not kids.m_internal or not mupdf.mpdf_is_array(kids):
-            return rc
-        n = mupdf.mpdf_array_len(kids)
-        for i in range(n):
-            nums = mupdf.mpdf_resolve_indirect(
-                    mupdf.mpdf_dict_get( mupdf.mpdf_array_get(kids, i)),
-                    PDF_NAME('Nums'),
-                    )
-            JM_get_page_labels(rc, nums)
-        return rc
-
-    def _set_page_labels(self, labels):
-        #val = _fitz.Document__set_page_labels(self, labels)
-        #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf)
-        pagelabels = mupdf.mpdf_new_name("PageLabels")
-        root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
-        mupdf.mpdf_dict_del(root, pagelabels)
-        mupdf.mpdf_dict_putl(root, mupdf.mpdf_new_array(pdf, 0), pagelabels, PDF_NAME('Nums'))
-
-        xref = self.pdf_catalog()
-        text = self.xref_object(xref, compressed=True)
-        text = text.replace("/Nums[]", "/Nums[%s]" % labels)
-        self.update_object(xref, text)
-
-    def get_layers(self):
-        """Show optional OC layers."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_get_layers(self)
-        #PyObject *rc = NULL;
-        #pdf_layer_config info = {NULL, NULL};
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf)
-        n = mupdf.mpdf_count_layer_configs( pdf)
-        if n == 1:
-            obj = mupdf.mpdf_dict_getl(
-                    mupdf.mpdf_trailer( pdf),
-                    PDF_NAME('Root'),
-                    PDF_NAME('OCProperties'),
-                    PDF_NAME('Configs'),
-                    )
-            if not mupdf.mpdf_is_array( obj):
-                n = 0
-        rc = []
-        info = mupdf.PdfLayerConfig()
-        for i in range(n):
-            mupdf.mpdf_layer_config_info( pdf, i, info);
-            item = { #Py_BuildValue("{s:i,s:s,s:s}",
-                    "number": i,
-                    "name": info.name,
-                    "creator": info.creator,
-                    }
-            rc.append( item)
-            #info.name = NULL;
-            #info.creator = NULL;
-        return rc
-
-    def switch_layer(self, config, as_default=0):
-        """Activate an OC layer."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_switch_layer(self, config, as_default)
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf);
-        cfgs = mupdf.mpdf_dict_getl(
-                mupdf.mpdf_trailer( pdf),
-                PDF_NAME('Root'),
-                PDF_NAME('OCProperties'),
-                PDF_NAME('Configs')
-                )
-        if not mupdf.mpdf_is_array( cfgs) or not mupdf.mpdf_array_len( cfgs):
-            if config < 1:
-                return
-            THROWMSG( "bad layer number")
-        if config < 0:
-            return
-        mupdf.mpdf_select_layer_config( pdf, config)
-        if as_default:
-            mupdf.mpdf_set_layer_config_as_default( pdf)
-            mupdf.mpdf_read_ocg( pdf)
-
-    def get_layer(self, config=-1):
-        """Content of ON, OFF, RBGroups of an OC layer."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_get_layer(self, config)
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf);
-        ocp = mupdf.mpdf_dict_getl(
-                mupdf.mpdf_trailer( pdf),
-                PDF_NAME('Root'),
-                PDF_NAME('OCProperties'),
-                )
-        if not ocp.m_internal:
-            return
-        if config == -1:
-            obj = mupdf.mpdf_dict_get( ocp, PDF_NAME('D'))
-        else:
-            obj =mupdf.mpdf_array_get(
-                    mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs')),
-                    config,
-                    );
-        if not obj.m_internal:
-            THROWMSG( "bad config number")
-        rc = JM_get_ocg_arrays( obj)
-        return rc
-
-    def set_layer(self, config, basestate=None, on=None, off=None, rbgroups=None):
-        """Set the PDF keys /ON, /OFF, /RBGroups of an OC layer."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        ocgs = set(self.get_ocgs().keys())
-        if ocgs == set():
-            raise ValueError("document has no optional content")
-
-        if on:
-            if type(on) not in (list, tuple):
-                raise ValueError("bad type: 'on'")
-            s = set(on).difference(ocgs)
-            if s != set():
-                raise ValueError("bad OCGs in 'on': %s" % s)
-
-        if off:
-            if type(off) not in (list, tuple):
-                raise ValueError("bad type: 'off'")
-            s = set(off).difference(ocgs)
-            if s != set():
-                raise ValueError("bad OCGs in 'off': %s" % s)
-
-        if rbgroups:
-            if type(rbgroups) not in (list, tuple):
-                raise ValueError("bad type: 'rbgroups'")
-            for x in rbgroups:
-                if not type(x) in (list, tuple):
-                    raise ValueError("bad RBGroup '%s'" % x)
-                s = set(x).difference(ocgs)
-                if f != set():
-                    raise ValueError("bad OCGs in RBGroup: %s" % s)
-
-        if basestate:
-            basestate = str(basestate).upper()
-            if basestate == "UNCHANGED":
-                basestate = "Unchanged"
-            if basestate not in ("ON", "OFF", "Unchanged"):
-                raise ValueError("bad 'basestate'")
-        #return _fitz.Document_set_layer(self, config, basestate, on, off, rbgroups)
-        #pdf_obj *obj = NULL;
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf)
-        ocp = mupdf.mpdf_dict_getl(
-                mupdf.mpdf_trailer( pdf),
-                PDF_NAME('Root'),
-                PDF_NAME('OCProperties'),
-                )
-        if not ocp.m_internal:
-            return
-        if config == -1:
-            obj = mupdf.mpdf_dict_get( ocp, PDF_NAME('D'))
-        else:
-            obj = mupdf.mpdf_array_get(
-                    mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs')),
-                    config,
-                    )
-        if not obj.m_internal:
-            THROWMSG( "bad config number")
-        JM_set_ocg_arrays( obj, basestate, on, off, rbgroups)
-        mupdf.mpdf_read_ocg( pdf)
-
-    def add_layer(self, name, creator=None, on=None):
-        """Add a new OC layer."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_add_layer(self, name, creator, on)
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf);
-        JM_add_layer_config( pdf, name, creator, on)
-        mupdf.mpdf_read_ocg( pdf)
-
-    def layer_ui_configs(self):
-        """Show OC visibility status modifyable by user."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_layer_ui_configs(self)
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf)
-        info = mupdf.PdfLayerConfigUi()
-        n = mupdf.mpdf_count_layer_config_ui( pdf)
-        rc = []
-        for i in range(n):
-            mupdf.mpdf_layer_config_ui_info( pdf, i, info)
-            if info.type == 1:
-                type_ = "checkbox"
-            elif info.type == 2:
-                type_ = "radiobox"
-            else:
-                type_ = "label"
-            item = {
-                    "number": i,
-                    "text": info.text,
-                    "depth": info.depth,
-                    "type": type_,
-                    "on": info.selected,
-                    "locked": info.locked,
-                    }
-            rc.append(item)
-        return rc
-
-    def set_layer_ui_config(self, number, action=0):
-        """Set / unset OC intent configuration."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_set_layer_ui_config(self, number, action)
-
-    def get_ocgs(self):
-        """Show existing optional content groups."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_get_ocgs(self)
-        #PyObject *rc = NULL;
-        ci = mupdf.mpdf_new_name( "CreatorInfo")
-        pdf = self._pdf_document()
-        ASSERT_PDF(pdf)
-        ocgs = mupdf.mpdf_dict_getl(
-                mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root')),
-                PDF_NAME('OCProperties'),
-                PDF_NAME('OCGs'),
-                )
-        rc = dict()
-        if not mupdf.mpdf_is_array( ocgs):
-            return rc
-        n = mupdf.mpdf_array_len( ocgs);
-        for i in range(n):
-            ocg = mupdf.mpdf_array_get( ocgs, i)
-            xref = mupdf.mpdf_to_num( ocg)
-            name = mupdf.mpdf_to_text_string( mupdf.mpdf_dict_get( ocg, PDF_NAME('Name')))
-            obj = mupdf.mpdf_dict_getl( ocg, PDF_NAME('Usage'), ci, PDF_NAME('Subtype'))
-            usage = None
-            if obj.m_internal:
-                usage = mupdf.mpdf_to_name( obj)
-            intents = list()
-            intent = mupdf.mpdf_dict_get( ocg, PDF_NAME('Intent'))
-            if intent.m_internal:
-                if mupdf.mpdf_is_name( intent):
-                    intents.append( mupdf.mpdf_to_name( intent))
-                elif mupdf.mpdf_is_array( intent):
-                    m = mupdf.mpdf_array_len( intent)
-                    for j in range(m):
-                        o = mupdf.mpdf_array_get( intent, j)
-                        if mupdf.mpdf_is_name( o):
-                            intents.append( mupdf.mpdf_to_name( o))
-            hidden = mupdf.mpdf_is_ocg_hidden( pdf, mupdf.PdfObj(), usage, ocg)
-            item = {
-                    "name": name,
-                    "intent": intents,
-                    "on": not hidden,
-                    "usage": usage,
-                    }
-            temp = xref
-            rc[ temp] = item
-        return rc
 
     getOCGs = get_ocgs
 
-    def add_ocg(self, name, config=-1, on=1, intent=None, usage=None):
-        """Add new optional content group."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        #return _fitz.Document_add_ocg(self, name, config, on, intent, usage)
-        xref = 0
-        #pdf_obj *obj = NULL, *cfg = NULL;
-        #pdf_obj *indocg = NULL;
-        pdf = self._pdf_document();
-        ASSERT_PDF(pdf);
-
-        # make the OCG
-        ocg = mupdf.mpdf_add_new_dict(pdf, 3)
-        mupdf.mpdf_dict_put(ocg, PDF_NAME('Type'), PDF_NAME('OCG'))
-        mupdf.mpdf_dict_put_text_string(ocg, PDF_NAME('Name'), name)
-        intents = mupdf.mpdf_dict_put_array(ocg, PDF_NAME('Intent'), 2)
-        if not intent:
-            mupdf.mpdf_array_push(intents, PDF_NAME('View'))
-        elif not isinstance(intent, str):
-            assert 0, f'fixme: intent is not a str. type(intent)={type(intent)} type={type!r}'
-            #n = len(intent)
-            #for i in range(n):
-            #    item = intent[i]
-            #    c = JM_StrAsChar(item);
-            #    if (c) {
-            #        pdf_array_push(gctx, intents, pdf_new_name(gctx, c));
-            #    }
-            #    Py_DECREF(item);
-            #}
-        else:
-            mupdf.mpdf_array_push(intents, mupdf.mpdf_new_name(intent))
-        use_for = mupdf.mpdf_dict_put_dict(ocg, PDF_NAME('Usage'), 3)
-        ci_name = mupdf.mpdf_new_name("CreatorInfo")
-        cre_info = mupdf.mpdf_dict_put_dict(use_for, ci_name, 2)
-        mupdf.mpdf_dict_put_text_string(cre_info, PDF_NAME('Creator'), "PyMuPDF")
-        if usage:
-            mupdf.mpdf_dict_put_name(cre_info, PDF_NAME('Subtype'), usage)
-        else:
-            mupdf.mpdf_dict_put_name(cre_info, PDF_NAME('Subtype'), "Artwork")
-        indocg = mupdf.mpdf_add_object(pdf, ocg)
-
-        # Insert OCG in the right config
-        ocp = JM_ensure_ocproperties(pdf)
-        obj = mupdf.mpdf_dict_get(ocp, PDF_NAME('OCGs'))
-        mupdf.mpdf_array_push(obj, indocg)
-
-        if config > -1:
-            obj = mupdf.mpdf_dict_get(ocp, PDF_NAME('Configs'))
-            if not mupdf.mpdf_is_array(obj):
-                THROWMSG("bad config number")
-            cfg = mupdf.mpdf_array_get(obj, config)
-            if not cfg.m_internal:
-                THROWMSG("bad config number")
-        else:
-            cfg = mupdf.mpdf_dict_get(ocp, PDF_NAME('D'))
-
-        obj = mupdf.mpdf_dict_get(cfg, PDF_NAME('Order'))
-        if not obj.m_internal:
-            obj = mupdf.mpdf_dict_put_array(cfg, PDF_NAME('Order'), 1)
-        mupdf.mpdf_array_push(obj, indocg)
-        if on:
-            obj = mupdf.mpdf_dict_get(cfg, PDF_NAME('ON'))
-            if not obj.m_internal:
-                obj = mupdf.mpdf_dict_put_array(cfg, PDF_NAME('ON'), 1)
-        else:
-            obj =mupdf.mpdf_dict_get(cfg, PDF_NAME('OFF'))
-            if not obj.m_internal:
-                obj =mupdf.mpdf_dict_put_array(cfg, PDF_NAME('OFF'), 1)
-        mupdf.mpdf_array_push(obj, indocg)
-
-        # let MuPDF take note: re-read OCProperties
-        mupdf.mpdf_read_ocg(pdf)
-
-        xref = mupdf.mpdf_to_num(indocg)
-        return xref
-
     addOCG = add_ocg
-
-    def initData(self):
-        if self.isEncrypted:
-            raise ValueError("cannot initData - document still encrypted")
-        self._outline = self._loadOutline()
-        self.metadata = dict(
-                [(k, self._getMetadata(v))
-                    for k,v in {
-                        'format':'format',
-                        'title':'info:Title',
-                        'author':'info:Author',
-                        'subject':'info:Subject',
-                        'keywords':'info:Keywords',
-                        'creator':'info:Creator',
-                        'producer':'info:Producer',
-                        'creationDate':'info:CreationDate',
-                        'modDate':'info:ModDate',
-                        'trapped':'info:Trapped',
-                        }.items()
-                    ]
-                )
-        self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
 
     outline = property(lambda self: self._outline)
     _getPageXref = page_xref
     pageXref = page_xref
-
-    def get_page_fonts(self, pno: int, full: bool =False) -> list:
-        """Retrieve a list of fonts used on a page.
-        """
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        if not self.isPDF:
-            return ()
-        val = self._getPageInfo(pno, 1)
-        if full is False:
-            return [v[:-1] for v in val]
-        return val
 
     getPageFontList = get_page_fonts
 
