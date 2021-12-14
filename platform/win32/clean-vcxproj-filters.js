@@ -23,6 +23,9 @@ if (!fs.existsSync(filepath)) {
 	console.error("must specify valid vcxproj file");
 	process.exit(1);
 }
+
+console.log("PROJECT:", filepath);
+
 filepath += ".filters";
 if (!fs.existsSync(filepath)) {
 	console.error(filepath, ": file does not exist: broken project?");
@@ -57,19 +60,26 @@ for (let f of folders) {
 		delset.add(f);
 	}
 }
-console.log("delete folders:", delset);
-for (let f of delset) {
-	folders.delete(f);
+
+if (delset.size > 0) {
+	console.log("delete folders:", delset);
+	for (let f of delset) {
+		folders.delete(f);
+	}
 }
-console.log("KEEP folders:", folders);
+//console.log("KEEP folders:", folders);
 
 src = src
 .replace(/<Filter Include="([^"]*?)">[^]*?<\/Filter>/g, (m, p1) => {
 	if (folders.has(p1))
 		return m;
 	return "";
-});
+})
+.replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '')
+// and trim out empty lines:
+.replace(/[\s\r\n]+\n/g, '\n');
 
 fs.writeFileSync(filepath, src, 'utf8');
+console.log("\n");
 
 
