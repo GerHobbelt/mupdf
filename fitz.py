@@ -8855,11 +8855,14 @@ class Page:
 
     firstLink = property(loadLinks, doc="First link on page")
 
-    def setRotation(self, rotation):
+    def set_rotation(self, rotation):
         """Set page rotation."""
         CheckParent(self)
-
-        return _fitz.Page_setRotation(self, rotation)
+        #return _fitz.Page_set_rotation(self, rotation)
+        page = mupdf.mpdf_page_from_fz_page( self.this)
+        ASSERT_PDF(page)
+        rot = JM_norm_rotation(rotation)
+        mupdf.mpdf_dict_put_int( page.obj(), PDF_NAME('Rotate'), rot)
 
     def show_pdf_page(*args, **kwargs) -> int:
         """Show page number 'pno' of PDF 'src' in rectangle 'rect'.
@@ -9120,6 +9123,11 @@ class Page:
         #jlib.log('{kwargs=}')
         return utils.write_text(self, **kwargs)
 
+    @property
+    def xref(self):
+        """PDF xref number of page."""
+        CheckParent(self)
+        return self.parent.page_xref(self.number)
 
 class Pixmap:
 
