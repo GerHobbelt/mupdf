@@ -4977,18 +4977,39 @@ open = Document
 
 
 class Font:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Font, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Font, name)
 
-    def __init__(self, fontname=None, fontfile=None, fontbuffer=None, script=0, language=None, ordering=-1, is_bold=0, is_italic=0, is_serif=0):
+    def __del__(self):
+        if type(self) is not Font:
+            return None
+
+    def __init__(
+            self,
+            fontname=None,
+            fontfile=None,
+            fontbuffer=None,
+            script=0,
+            language=None,
+            ordering=-1,
+            is_bold=0,
+            is_italic=0,
+            is_serif=0,
+            ):
 
         if fontname:
             if "/" in fontname or "\\" in fontname or "." in fontname:
                 print("Warning: did you mean a fontfile?")
 
-            if fontname.lower() in ("china-t", "china-s", "japan", "korea","china-ts", "china-ss", "japan-s", "korea-s", "cjk"):
+            if fontname.lower() in (
+                    "china-t",
+                    "china-s",
+                    "japan",
+                    "korea",
+                    "china-ts",
+                    "china-ss",
+                    "japan-s",
+                    "korea-s",
+                    "cjk",
+                    ):
                 ordering = 0
 
             elif fontname.lower() in fitz_fontdescriptors.keys():
@@ -5000,8 +5021,17 @@ class Font:
             elif ordering < 0:
                 fontname = Base14_fontdict.get(fontname.lower(), fontname)
 
-
-        #this = _fitz.new_Font(fontname, fontfile, fontbuffer, script, language, ordering, is_bold, is_italic, is_serif)
+        #this = _fitz.new_Font(
+        #        fontname,
+        #        fontfile,
+        #        fontbuffer,
+        #        script,
+        #        language,
+        #        ordering,
+        #        is_bold,
+        #        is_italic,
+        #        is_serif,
+        #        )
         lang = mupdf.mfz_text_language_from_string(language)
         font = JM_get_font(fontname, fontfile,
                    fontbuffer, script, lang, ordering,
@@ -5013,16 +5043,41 @@ class Font:
         #except __builtin__.Exception:
         #    self.this = this
 
+    def __repr__(self):
+        return "Font('%s')" % self.name
+
+    '''
+    def _valid_unicodes(self, arr):
+        #return _fitz.Font__valid_unicodes(self, arr)
+        temp = arr[0]
+        void *ptr = PyLong_AsVoidPtr(temp);
+        JM_valid_chars(gctx, font, ptr);
+        Py_DECREF(temp);
+    '''
+
+    @property
+    def ascender(self):
+        """Return the glyph ascender value."""
+        #return _fitz.Font_ascender(self)
+        return mupdf.mfz_font_ascender(self.this)
+
+    @property
+    def bbox(self):
+        val = _fitz.Font_bbox(self)
+        val = Rect(val)
+        return val
+
+    @property
+    def buffer(self):
+        #return _fitz.Font_buffer(self)
+        buffer_ = mupdf.Buffer( mupdf.keep_buffer( self.this.m_internal.buffer))
+        size, data = buffer_.buffer_extract_raw()
+        return mupdf.raw_to_python_bytes( data, size)
+
     def char_lengths(self, text, fontsize=11, language=None, script=0, wmode=0, small_caps=0):
         """Return tuple of char lengths of unicode 'text' under a fontsize."""
         #return _fitz.Font_char_lengths(self, text, fontsize, language, script, wmode, small_caps)
-        #fz_font *font, *thisfont = (fz_font *) self;
         lang = mupdf.mfz_text_language_from_string(language)
-        #if not PyUnicode_Check(text) or PyUnicode_READY(text) != 0:
-        #    THROWMSG("bad type: text")
-        #len_ = PyUnicode_GET_LENGTH(text)
-        #kind = PyUnicode_KIND(text)
-        #data = PyUnicode_DATA(text)
         rc = []
         for ch in text:
             c = ord(ch)
@@ -5035,6 +5090,31 @@ class Font:
                 gid = mupdf.mfz_encode_character_with_fallback(self.this, c, script, lang, font)
             rc.append(fontsize * mupdf.mfz_advance_glyph(font, gid, wmode))
         return rc
+
+    @property
+    def descender(self):
+        """Return the glyph descender value."""
+        #return _fitz.Font_descender(self)
+        return mupdf.mfz_font_descender(self.this)
+
+    @property
+    def flags(self):
+        #return _fitz.Font_flags(self)
+        f = mupdf.mfz_font_flags(self.this)
+        if not f.m_internal:
+            return
+        return {
+                "mono":         f.m_internal.is_mono,
+                "serif":        f.m_internal.is_serif,
+                "bold":         f.m_internal.is_bold,
+                "italic":       f.m_internal.is_italic,
+                "substitute":   f.m_internal.ft_substitute,
+                "stretch":      f.m_internal.ft_stretch,
+                "fake-bold":    f.m_internal.fake_bold,
+                "fake-italic":  f.m_internal.fake_italic,
+                "opentype":     f.m_internal.has_opentype,
+                "invalid-bbox": f.m_internal.invalid_bbox,
+                }
 
     def glyph_advance(self, chr_, language=None, script=0, wmode=0, small_caps=0):
         """Return the glyph width of a unicode (font size 1)."""
@@ -5058,15 +5138,21 @@ class Font:
 
         val = _fitz.Font_glyph_bbox(self, chr, language, script)
         val = Rect(val)
-
         return val
 
+    @property
+    def glyph_count(self):
+        #return _fitz.Font_glyph_count(self)
+        return self.this.m_internal.glyph_count
+
+    def glyph_name_to_unicode(self, name):
+        """Return the unicode for a glyph name."""
+        return glyph_name_to_unicode(name)
 
     def has_glyph(self, chr, language=None, script=0, fallback=0):
         """Check whether font has a glyph for this unicode."""
 
         return _fitz.Font_has_glyph(self, chr, language, script, fallback)
-
 
     @property
     def is_writable(self):
@@ -5079,52 +5165,6 @@ class Font:
             return False
         return True
 
-
-    def valid_codepoints(self):
-        '''
-        list of valid unicodes of a fz_font
-        '''
-        # fixme: not currently implemented. Only use cases within PyMuPDF
-        # are in PyMuPDF/tests/test_font.py:test_font1() and _fitz.py:repair_mono_font().
-        # The latter can be implemented using fz_glyph_count().
-        return []
-    '''
-    def valid_codepoints(self):
-        from array import array
-        gc = self.glyph_count
-        cp = array("l", (0,) * gc)
-        arr = cp.buffer_info()
-        self._valid_unicodes(arr)
-        return array("l", sorted(set(cp))[1:])
-
-
-    def _valid_unicodes(self, arr):
-        #return _fitz.Font__valid_unicodes(self, arr)
-        temp = arr[0]
-        void *ptr = PyLong_AsVoidPtr(temp);
-        JM_valid_chars(gctx, font, ptr);
-        Py_DECREF(temp);
-    '''
-
-    @property
-    def flags(self):
-        #return _fitz.Font_flags(self)
-        f = mupdf.mfz_font_flags(self.this)
-        if not f.m_internal:
-            return
-        return {
-                "mono": f.m_internal.is_mono,
-                "serif": f.m_internal.is_serif,
-                "bold": f.m_internal.is_bold,
-                "italic": f.m_internal.is_italic,
-                "substitute": f.m_internal.ft_substitute,
-                "stretch": f.m_internal.ft_stretch,
-                "fake-bold": f.m_internal.fake_bold,
-                "fake-italic": f.m_internal.fake_italic,
-                "opentype": f.m_internal.has_opentype,
-                "invalid-bbox": f.m_internal.invalid_bbox,
-                }
-
     @property
     def isWritable(self):
         return _fitz.Font_isWritable(self)
@@ -5133,46 +5173,6 @@ class Font:
     def name(self):
         #return _fitz.Font_name(self)
         return mupdf.mfz_font_name(self.this)
-
-    @property
-    def glyph_count(self):
-        #return _fitz.Font_glyph_count(self)
-        return self.this.m_internal.glyph_count
-
-    @property
-
-    def buffer(self):
-        #return _fitz.Font_buffer(self)
-        buffer_ = mupdf.Buffer( mupdf.keep_buffer( self.this.m_internal.buffer))
-        size, data = buffer_.buffer_extract_raw()
-        return mupdf.raw_to_python_bytes( data, size)
-
-    @property
-    def bbox(self):
-        val = _fitz.Font_bbox(self)
-        val = Rect(val)
-
-        return val
-
-    @property
-    def ascender(self):
-        """Return the glyph ascender value."""
-        #return _fitz.Font_ascender(self)
-        return mupdf.mfz_font_ascender(self.this)
-
-    @property
-    def descender(self):
-        """Return the glyph descender value."""
-        #return _fitz.Font_descender(self)
-        return mupdf.mfz_font_descender(self.this)
-
-    def glyph_name_to_unicode(self, name):
-        """Return the unicode for a glyph name."""
-        return glyph_name_to_unicode(name)
-
-    def unicode_to_glyph_name(self, ch):
-        """Return the glyph name for a unicode."""
-        return unicode_to_glyph_name(ch)
 
     def text_length(self, text, fontsize=11, language=None, script=0, wmode=0, small_caps=0):
         """Return length of unicode 'text' under a fontsize."""
@@ -5200,12 +5200,28 @@ class Font:
         rc *= fontsize
         return rc
 
-    def __repr__(self):
-        return "Font('%s')" % self.name
+    def unicode_to_glyph_name(self, ch):
+        """Return the glyph name for a unicode."""
+        return unicode_to_glyph_name(ch)
 
-    def __del__(self):
-        if type(self) is not Font:
-            return None
+    def valid_codepoints(self):
+        '''
+        list of valid unicodes of a fz_font
+        '''
+        # fixme: not currently implemented. Only use cases within PyMuPDF
+        # are in PyMuPDF/tests/test_font.py:test_font1() and _fitz.py:repair_mono_font().
+        # The latter can be implemented using fz_glyph_count().
+        return []
+
+    '''
+    def valid_codepoints(self):
+        from array import array
+        gc = self.glyph_count
+        cp = array("l", (0,) * gc)
+        arr = cp.buffer_info()
+        self._valid_unicodes(arr)
+        return array("l", sorted(set(cp))[1:])
+    '''
 
 
 class Graftmap:
@@ -5238,54 +5254,48 @@ class Link:
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Link, name)
 
+    def __del__(self):
+        self._erase()
+
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
+
+    def __repr__(self):
+        CheckParent(self)
+        return "link on " + str(self.parent)
+
+    def __str__(self):
+        CheckParent(self)
+        return "link on " + str(self.parent)
 
     def _border(self, doc, xref):
         return _fitz.Link__border(self, doc, xref)
 
-    def _setBorder(self, border, doc, xref):
-        return _fitz.Link__setBorder(self, border, doc, xref)
-
     def _colors(self, doc, xref):
         return _fitz.Link__colors(self, doc, xref)
 
+    def _erase(self):
+        try:
+            self.parent._forget_annot(self)
+        except:
+            pass
+        self.parent = None
+        self.thisown = False
+
     def _setColors(self, colors, doc, xref):
         return _fitz.Link__setColors(self, colors, doc, xref)
+
+    def _setBorder(self, border, doc, xref):
+        return _fitz.Link__setBorder(self, border, doc, xref)
 
     @property
     def border(self):
         return self._border(self.parent.parent.this, self.xref)
 
-    def setBorder(self, border=None, width=0, dashes=None, style=None):
-        if type(border) is not dict:
-            border = {"width": width, "style": style, "dashes": dashes}
-        return self._setBorder(border, self.parent.parent.this, self.xref)
-
     @property
     def colors(self):
         return self._colors(self.parent.parent.this, self.xref)
 
-    def setColors(self, colors=None, stroke=None, fill=None):
-        if type(colors) is not dict:
-            colors = {"fill": fill, "stroke": stroke}
-        return self._setColors(colors, self.parent.parent.this, self.xref)
-
-    @property
-    def uri(self):
-        """Uri string."""
-        CheckParent(self)
-        return _fitz.Link_uri(self)
-
-    @property
-    def isExternal(self):
-        """External indicator."""
-        CheckParent(self)
-
-        return _fitz.Link_isExternal(self)
-
-
-    page = -1
     @property
     def dest(self):
         """Create link destination details."""
@@ -5303,18 +5313,13 @@ class Link:
         return linkDest(self, uri)
 
     @property
-
-    def rect(self):
-        """Rectangle ('hot area')."""
+    def isExternal(self):
+        """External indicator."""
         CheckParent(self)
 
-        val = _fitz.Link_rect(self)
-        val = Rect(val)
-
-        return val
+        return _fitz.Link_isExternal(self)
 
     @property
-
     def next(self):
         """Next link."""
         CheckParent(self)
@@ -5338,28 +5343,60 @@ class Link:
 
         return val
 
-
-    def _erase(self):
-        try:
-            self.parent._forget_annot(self)
-        except:
-            pass
-        self.parent = None
-        self.thisown = False
-
-    def __str__(self):
+    @property
+    def rect(self):
+        """Rectangle ('hot area')."""
         CheckParent(self)
-        return "link on " + str(self.parent)
 
-    def __repr__(self):
+        val = _fitz.Link_rect(self)
+        val = Rect(val)
+
+        return val
+
+    def setBorder(self, border=None, width=0, dashes=None, style=None):
+        if type(border) is not dict:
+            border = {"width": width, "style": style, "dashes": dashes}
+        return self._setBorder(border, self.parent.parent.this, self.xref)
+
+    def setColors(self, colors=None, stroke=None, fill=None):
+        if type(colors) is not dict:
+            colors = {"fill": fill, "stroke": stroke}
+        return self._setColors(colors, self.parent.parent.this, self.xref)
+
+    page = -1
+
+    @property
+    def uri(self):
+        """Uri string."""
         CheckParent(self)
-        return "link on " + str(self.parent)
-
-    def __del__(self):
-        self._erase()
+        return _fitz.Link_uri(self)
 
 
 class Matrix(object):
+
+    def __abs__(self):
+        return math.sqrt(sum([c*c for c in self]))
+
+    def __add__(self, m):
+        if hasattr(m, "__float__"):
+            return Matrix(self.a + m, self.b + m, self.c + m,
+                          self.d + m, self.e + m, self.f + m)
+        if len(m) != 6:
+            raise ValueError("bad Matrix: sequ. length")
+        return Matrix(self.a + m[0], self.b + m[1], self.c + m[2],
+                          self.d + m[3], self.e + m[4], self.f + m[5])
+
+    def __bool__(self):
+        return not (max(self) == min(self) == 0)
+
+    def __eq__(self, mat):
+        if not hasattr(mat, "__len__"):
+            return False
+        return len(mat) == 6 and bool(self - mat) is False
+
+    def __getitem__(self, i):
+        return (self.a, self.b, self.c, self.d, self.e, self.f)[i]
+
     def __init__(self, *args):
         """
         Matrix() - all zeros
@@ -5401,6 +5438,76 @@ class Matrix(object):
             return None
         raise ValueError("bad Matrix constructor")
 
+    def __invert__(self):
+        """Calculate inverted matrix."""
+        m1 = Matrix()
+        m1.invert(self)
+        return m1
+    __inv__ = __invert__
+
+    def __len__(self):
+        return 6
+
+    def __mul__(self, m):
+        if hasattr(m, "__float__"):
+            return Matrix(self.a * m, self.b * m, self.c * m,
+                          self.d * m, self.e * m, self.f * m)
+        m1 = Matrix(1,1)
+        return m1.concat(self, m)
+
+    def __neg__(self):
+        return Matrix(-self.a, -self.b, -self.c, -self.d, -self.e, -self.f)
+
+    def __nonzero__(self):
+        return not (max(self) == min(self) == 0)
+
+    def __pos__(self):
+        return Matrix(self)
+
+    def __repr__(self):
+        return "Matrix" + str(tuple(self))
+
+    def __setitem__(self, i, v):
+        v = float(v)
+        if   i == 0: self.a = v
+        elif i == 1: self.b = v
+        elif i == 2: self.c = v
+        elif i == 3: self.d = v
+        elif i == 4: self.e = v
+        elif i == 5: self.f = v
+        else:
+            raise IndexError("index out of range")
+        return
+
+    def __sub__(self, m):
+        if hasattr(m, "__float__"):
+            return Matrix(self.a - m, self.b - m, self.c - m,
+                          self.d - m, self.e - m, self.f - m)
+        if len(m) != 6:
+            raise ValueError("bad Matrix: sequ. length")
+        return Matrix(self.a - m[0], self.b - m[1], self.c - m[2],
+                          self.d - m[3], self.e - m[4], self.f - m[5])
+
+    def __truediv__(self, m):
+        if hasattr(m, "__float__"):
+            return Matrix(self.a * 1./m, self.b * 1./m, self.c * 1./m,
+                          self.d * 1./m, self.e * 1./m, self.f * 1./m)
+        m1 = TOOLS._invert_matrix(m)[1]
+        if not m1:
+            raise ZeroDivisionError("matrix not invertible")
+        m2 = Matrix(1,1)
+        return m2.concat(self, m1)
+    __div__ = __truediv__
+
+    norm = __abs__
+
+    def concat(self, one, two):
+        """Multiply two matrices and replace current one."""
+        if not len(one) == len(two) == 6:
+            raise ValueError("bad Matrix: sequ. length")
+        self.a, self.b, self.c, self.d, self.e, self.f = TOOLS._concat_matrix(one, two)
+        return self
+
     def invert(self, src=None):
         """Calculate the inverted matrix. Return 0 if successful and replace
         current one. Else return 1 and do nothing.
@@ -5414,34 +5521,11 @@ class Matrix(object):
         self.a, self.b, self.c, self.d, self.e, self.f = dst[1]
         return 0
 
-    def pretranslate(self, tx, ty):
-        """Calculate pre translation and replace current matrix."""
-        tx = float(tx)
-        ty = float(ty)
-        self.e += tx * self.a + ty * self.c
-        self.f += tx * self.b + ty * self.d
-        return self
-
-    def prescale(self, sx, sy):
-        """Calculate pre scaling and replace current matrix."""
-        sx = float(sx)
-        sy = float(sy)
-        self.a *= sx
-        self.b *= sx
-        self.c *= sy
-        self.d *= sy
-        return self
-
-    def preshear(self, h, v):
-        """Calculate pre shearing and replace current matrix."""
-        h = float(h)
-        v = float(v)
-        a, b = self.a, self.b
-        self.a += v * self.c
-        self.b += v * self.d
-        self.c += h * a
-        self.d += h * b
-        return self
+    @property
+    def is_rectilinear(self):
+        """True if rectangles are mapped to rectangles."""
+        return (abs(self.b) < EPSILON and abs(self.c) < EPSILON) or \
+            (abs(self.a) < EPSILON and abs(self.d) < EPSILON);
 
     def prerotate(self, theta):
         """Calculate pre rotation and replace current matrix."""
@@ -5486,110 +5570,48 @@ class Matrix(object):
 
         return self
 
-    def concat(self, one, two):
-        """Multiply two matrices and replace current one."""
-        if not len(one) == len(two) == 6:
-            raise ValueError("bad Matrix: sequ. length")
-        self.a, self.b, self.c, self.d, self.e, self.f = TOOLS._concat_matrix(one, two)
+    def prescale(self, sx, sy):
+        """Calculate pre scaling and replace current matrix."""
+        sx = float(sx)
+        sy = float(sy)
+        self.a *= sx
+        self.b *= sx
+        self.c *= sy
+        self.d *= sy
         return self
 
-    def __getitem__(self, i):
-        return (self.a, self.b, self.c, self.d, self.e, self.f)[i]
-
-    def __setitem__(self, i, v):
+    def preshear(self, h, v):
+        """Calculate pre shearing and replace current matrix."""
+        h = float(h)
         v = float(v)
-        if   i == 0: self.a = v
-        elif i == 1: self.b = v
-        elif i == 2: self.c = v
-        elif i == 3: self.d = v
-        elif i == 4: self.e = v
-        elif i == 5: self.f = v
-        else:
-            raise IndexError("index out of range")
-        return
+        a, b = self.a, self.b
+        self.a += v * self.c
+        self.b += v * self.d
+        self.c += h * a
+        self.d += h * b
+        return self
 
-    def __len__(self):
-        return 6
-
-    def __repr__(self):
-        return "Matrix" + str(tuple(self))
-
-    def __invert__(self):
-        """Calculate inverted matrix."""
-        m1 = Matrix()
-        m1.invert(self)
-        return m1
-    __inv__ = __invert__
-
-    def __mul__(self, m):
-        if hasattr(m, "__float__"):
-            return Matrix(self.a * m, self.b * m, self.c * m,
-                          self.d * m, self.e * m, self.f * m)
-        m1 = Matrix(1,1)
-        return m1.concat(self, m)
-
-    def __truediv__(self, m):
-        if hasattr(m, "__float__"):
-            return Matrix(self.a * 1./m, self.b * 1./m, self.c * 1./m,
-                          self.d * 1./m, self.e * 1./m, self.f * 1./m)
-        m1 = TOOLS._invert_matrix(m)[1]
-        if not m1:
-            raise ZeroDivisionError("matrix not invertible")
-        m2 = Matrix(1,1)
-        return m2.concat(self, m1)
-    __div__ = __truediv__
-
-    def __add__(self, m):
-        if hasattr(m, "__float__"):
-            return Matrix(self.a + m, self.b + m, self.c + m,
-                          self.d + m, self.e + m, self.f + m)
-        if len(m) != 6:
-            raise ValueError("bad Matrix: sequ. length")
-        return Matrix(self.a + m[0], self.b + m[1], self.c + m[2],
-                          self.d + m[3], self.e + m[4], self.f + m[5])
-
-    def __sub__(self, m):
-        if hasattr(m, "__float__"):
-            return Matrix(self.a - m, self.b - m, self.c - m,
-                          self.d - m, self.e - m, self.f - m)
-        if len(m) != 6:
-            raise ValueError("bad Matrix: sequ. length")
-        return Matrix(self.a - m[0], self.b - m[1], self.c - m[2],
-                          self.d - m[3], self.e - m[4], self.f - m[5])
-
-    def __pos__(self):
-        return Matrix(self)
-
-    def __neg__(self):
-        return Matrix(-self.a, -self.b, -self.c, -self.d, -self.e, -self.f)
-
-    def __bool__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __nonzero__(self):
-        return not (max(self) == min(self) == 0)
-
-    def __eq__(self, mat):
-        if not hasattr(mat, "__len__"):
-            return False
-        return len(mat) == 6 and bool(self - mat) is False
-
-    def __abs__(self):
-        return math.sqrt(sum([c*c for c in self]))
-
-    norm = __abs__
-
-    @property
-    def is_rectilinear(self):
-        """True if rectangles are mapped to rectangles."""
-        return (abs(self.b) < EPSILON and abs(self.c) < EPSILON) or \
-            (abs(self.a) < EPSILON and abs(self.d) < EPSILON);
+    def pretranslate(self, tx, ty):
+        """Calculate pre translation and replace current matrix."""
+        tx = float(tx)
+        ty = float(ty)
+        self.e += tx * self.a + ty * self.c
+        self.f += tx * self.b + ty * self.d
+        return self
 
 
 class IdentityMatrix(Matrix):
     """Identity matrix [1, 0, 0, 1, 0, 0]"""
+
+    def __hash__(self):
+        return hash((1,0,0,1,0,0))
+
     def __init__(self):
         Matrix.__init__(self, 1.0, 1.0)
+
+    def __repr__(self):
+        return "IdentityMatrix(1.0, 0.0, 0.0, 1.0, 0.0, 0.0)"
+
     def __setattr__(self, name, value):
         if name in "ad":
             self.__dict__[name] = 1.0
@@ -5607,12 +5629,6 @@ class IdentityMatrix(Matrix):
     preTranslate = checkargs
     concat       = checkargs
     invert       = checkargs
-
-    def __repr__(self):
-        return "IdentityMatrix(1.0, 0.0, 0.0, 1.0, 0.0, 0.0)"
-
-    def __hash__(self):
-        return hash((1,0,0,1,0,0))
 
 
 Identity = IdentityMatrix()
@@ -5722,6 +5738,62 @@ class Widget(object):
         self.xref = 0  # annot value
         #jlib.log('have created Widget, {self=} {type(self)=} {self.script=}')
 
+    def __repr__(self):
+        #return "'%s' widget on %s" % (self.field_type_string, str(self.parent))
+        # No self.parent.
+        return f'Widget:(field_type={self.field_type_string} script={self.script})'
+        return "'%s' widget" % (self.field_type_string)
+
+    def _adjust_font(self):
+        """Ensure text_font is from our list and correctly spelled.
+        """
+        if not self.text_font:
+            self.text_font = "Helv"
+            return
+        valid_fonts = ("Cour", "TiRo", "Helv", "ZaDb")
+        for f in valid_fonts:
+            if self.text_font.lower() == f.lower():
+                self.text_font = f
+                return
+        self.text_font = "Helv"
+        return
+
+    def _checker(self):
+        """Any widget type checks.
+        """
+        if self.field_type not in range(1, 8):
+            raise ValueError("bad field type")
+
+    def _parse_da(self):
+        """Extract font name, size and color from default appearance string (/DA object).
+
+        Equivalent to 'pdf_parse_default_appearance' function in MuPDF's 'pdf-annot.c'.
+        """
+        if not self._text_da:
+            return
+        font = "Helv"
+        fsize = 0
+        col = (0, 0, 0)
+        dat = self._text_da.split()  # split on any whitespace
+        for i, item in enumerate(dat):
+            if item == "Tf":
+                font = dat[i - 2][1:]
+                fsize = float(dat[i - 1])
+                dat[i] = dat[i-1] = dat[i-2] = ""
+                continue
+            if item == "g":  # unicolor text
+                col = [(float(dat[i - 1]))]
+                dat[i] = dat[i-1] = ""
+                continue
+            if item == "rg":  # RGB colored text
+                col = [float(f) for f in dat[i - 3:i]]
+                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
+                continue
+        self.text_font = font
+        self.text_fontsize = fsize
+        self.text_color = col
+        self._text_da = ""
+        return
 
     def _validate(self):
         """Validate the class entries.
@@ -5784,60 +5856,14 @@ class Widget(object):
 
         self._checker()  # any field_type specific checks
 
+    @property
+    def next(self):
+        return self._annot.next
 
-    def _adjust_font(self):
-        """Ensure text_font is from our list and correctly spelled.
+    def reset(self):
+        """Reset the field value to its default.
         """
-        if not self.text_font:
-            self.text_font = "Helv"
-            return
-        valid_fonts = ("Cour", "TiRo", "Helv", "ZaDb")
-        for f in valid_fonts:
-            if self.text_font.lower() == f.lower():
-                self.text_font = f
-                return
-        self.text_font = "Helv"
-        return
-
-
-    def _parse_da(self):
-        """Extract font name, size and color from default appearance string (/DA object).
-
-        Equivalent to 'pdf_parse_default_appearance' function in MuPDF's 'pdf-annot.c'.
-        """
-        if not self._text_da:
-            return
-        font = "Helv"
-        fsize = 0
-        col = (0, 0, 0)
-        dat = self._text_da.split()  # split on any whitespace
-        for i, item in enumerate(dat):
-            if item == "Tf":
-                font = dat[i - 2][1:]
-                fsize = float(dat[i - 1])
-                dat[i] = dat[i-1] = dat[i-2] = ""
-                continue
-            if item == "g":  # unicolor text
-                col = [(float(dat[i - 1]))]
-                dat[i] = dat[i-1] = ""
-                continue
-            if item == "rg":  # RGB colored text
-                col = [float(f) for f in dat[i - 3:i]]
-                dat[i] = dat[i-1] = dat[i-2] = dat[i-3] = ""
-                continue
-        self.text_font = font
-        self.text_fontsize = fsize
-        self.text_color = col
-        self._text_da = ""
-        return
-
-
-    def _checker(self):
-        """Any widget type checks.
-        """
-        if self.field_type not in range(1, 8):
-            raise ValueError("bad field type")
-
+        TOOLS._reset_widget(self._annot)
 
     def update(self):
         """Reflect Python object in the PDF.
@@ -5862,48 +5888,15 @@ class Widget(object):
         TOOLS._save_widget(self._annot, self)
         self._text_da = ""
 
-    def reset(self):
-        """Reset the field value to its default.
-        """
-        TOOLS._reset_widget(self._annot)
-
-    def __repr__(self):
-        #return "'%s' widget on %s" % (self.field_type_string, str(self.parent))
-        # No self.parent.
-        return f'Widget:(field_type={self.field_type_string} script={self.script})'
-        return "'%s' widget" % (self.field_type_string)
-
-    @property
-    def next(self):
-        return self._annot.next
-
 
 class Outline:
-    #__swig_setmethods__ = {}
-    #__setattr__ = lambda self, name, value: _swig_setattr(self, Outline, name, value)
-    #__swig_getmethods__ = {}
-    #__getattr__ = lambda self, name: _swig_getattr(self, Outline, name)
-
     def __init__(self, ol):
         self.this = ol
 
     @property
-    def uri(self):
-        #return _fitz.Outline_uri(self)
-        ol = self.this
-        if not ol.m_internal:
-            return None
-        return JM_UnicodeFromStr(ol.uri())
-
-    @property
-    def next(self):
-        #return _fitz.Outline_next(self)
-        ol = self.this
-        next_ol = ol.next();
-        if not next_ol.m_internal:
-            return
-        next_ol = mupdf.mfz_keep_outline(next_ol)
-        return Outline(next_ol)
+    def dest(self):
+        '''outline destination details'''
+        return linkDest(self, None)
 
     @property
     def down(self):
@@ -5927,9 +5920,37 @@ class Outline:
         return mupdf.mfz_is_external_link(uri)
 
     @property
+    def is_open(self):
+        #return _fitz.Outline_is_open(self)
+        return self.this.is_open()
+
+    @property
+    def next(self):
+        #return _fitz.Outline_next(self)
+        ol = self.this
+        next_ol = ol.next();
+        if not next_ol.m_internal:
+            return
+        next_ol = mupdf.mfz_keep_outline(next_ol)
+        return Outline(next_ol)
+
+    @property
     def page(self):
         #return _fitz.Outline_page(self)
         return self.this.page().page;
+
+    @property
+    def title(self):
+        #return _fitz.Outline_title(self)
+        return self.this.title()
+
+    @property
+    def uri(self):
+        #return _fitz.Outline_uri(self)
+        ol = self.this
+        if not ol.m_internal:
+            return None
+        return JM_UnicodeFromStr(ol.uri())
 
     @property
     def x(self):
@@ -5940,21 +5961,6 @@ class Outline:
     def y(self):
         #return _fitz.Outline_x(self)
         return self.this.y();
-
-    @property
-    def title(self):
-        #return _fitz.Outline_title(self)
-        return self.this.title()
-
-    @property
-    def is_open(self):
-        #return _fitz.Outline_is_open(self)
-        return self.this.is_open()
-
-    @property
-    def dest(self):
-        '''outline destination details'''
-        return linkDest(self, None)
 
 
 class Page:
@@ -6184,6 +6190,104 @@ class Page:
         annot = mupdf.mpdf_keep_annot(annot)
         return Annot(annot)
 
+    def _add_square_or_circle(self, rect, annot_type):
+        #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
+        page = self._pdf_page()
+        try:
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            annot = mupdf.mpdf_create_annot(page, annot_type)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=}')
+            return
+        assert annot.m_internal
+        return Annot(annot)
+
+    def _add_stamp_annot(self, rect, stamp=0):
+        #return _fitz.Page__add_stamp_annot(self, rect, stamp)
+        page = self._pdf_page()
+        #pdf_annot *annot = NULL;
+        stamp_id = [
+                PDF_NAME('Approved'),
+                PDF_NAME('AsIs'),
+                PDF_NAME('Confidential'),
+                PDF_NAME('Departmental'),
+                PDF_NAME('Experimental'),
+                PDF_NAME('Expired'),
+                PDF_NAME('Final'),
+                PDF_NAME('ForComment'),
+                PDF_NAME('ForPublicRelease'),
+                PDF_NAME('NotApproved'),
+                PDF_NAME('NotForPublicRelease'),
+                PDF_NAME('Sold'),
+                PDF_NAME('TopSecret'),
+                PDF_NAME('Draft'),
+                ]
+        n = len(stamp_id)
+        name = stamp_id[0]
+        try:
+            ASSERT_PDF(page)
+            r = JM_rect_from_py(rect)
+            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+                THROWMSG("rect must be finite and not empty")
+            if INRANGE(stamp, 0, n-1):
+                name = stamp_id[stamp]
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
+            mupdf.mpdf_set_annot_contents(
+                    annot,
+                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
+                    )
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+        except Exception as e:
+            jlib.log('{e=} {jlib.exception_info()=}')
+            return
+        return Annot(annot)
+
+    def _add_text_annot(self, point, text, icon=None):
+        #return _fitz.Page__add_text_annot(self, point, text, icon)
+        page = self._pdf_page()
+        p = point
+        try:
+            ASSERT_PDF(page)
+            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
+            r = mupdf.mpdf_annot_rect(annot)
+            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            flags = mupdf.PDF_ANNOT_IS_PRINT
+            mupdf.mpdf_set_annot_flags(annot, flags)
+            mupdf.mpdf_set_annot_contents(annot, text)
+            if icon:
+                mupdf.mpdf_set_annot_icon_name(annot, icon)
+            JM_add_annot_id(annot, "A")
+            mupdf.mpdf_update_annot(annot)
+            mupdf.mpdf_set_annot_rect(annot, r)
+            mupdf.mpdf_set_annot_flags(annot, flags)
+        except Exception as e:
+            jlib.log('{e=}: {jlib.exception_info()=}')
+            return
+        return Annot(annot)
+
+    def _add_text_marker(self, quads, annot_type):
+
+        CheckParent(self)
+        if not self.parent.isPDF:
+            raise ValueError("not a PDF")
+
+        val = Page__add_text_marker(self, quads, annot_type)
+        if not val:
+            return None
+        #val.parent = weakref.proxy(self)
+        self._annot_refs[id(val)] = val
+
+        return val
+
     def _addAnnot_FromString(self, linklist):
         """Add links from list of object sources."""
         CheckParent(self)
@@ -6287,104 +6391,6 @@ class Page:
 
     def _getDrawings(self):
         return _fitz.Page__getDrawings(self)
-
-    def _add_square_or_circle(self, rect, annot_type):
-        #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
-        page = self._pdf_page()
-        try:
-            r = JM_rect_from_py(rect)
-            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
-                THROWMSG("rect must be finite and not empty")
-            annot = mupdf.mpdf_create_annot(page, annot_type)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
-        assert annot.m_internal
-        return Annot(annot)
-
-    def _add_stamp_annot(self, rect, stamp=0):
-        #return _fitz.Page__add_stamp_annot(self, rect, stamp)
-        page = self._pdf_page()
-        #pdf_annot *annot = NULL;
-        stamp_id = [
-                PDF_NAME('Approved'),
-                PDF_NAME('AsIs'),
-                PDF_NAME('Confidential'),
-                PDF_NAME('Departmental'),
-                PDF_NAME('Experimental'),
-                PDF_NAME('Expired'),
-                PDF_NAME('Final'),
-                PDF_NAME('ForComment'),
-                PDF_NAME('ForPublicRelease'),
-                PDF_NAME('NotApproved'),
-                PDF_NAME('NotForPublicRelease'),
-                PDF_NAME('Sold'),
-                PDF_NAME('TopSecret'),
-                PDF_NAME('Draft'),
-                ]
-        n = len(stamp_id)
-        name = stamp_id[0]
-        try:
-            ASSERT_PDF(page)
-            r = JM_rect_from_py(rect)
-            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
-                THROWMSG("rect must be finite and not empty")
-            if INRANGE(stamp, 0, n-1):
-                name = stamp_id[stamp]
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
-            mupdf.mpdf_set_annot_contents(
-                    annot,
-                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
-                    )
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=} {jlib.exception_info()=}')
-            return
-        return Annot(annot)
-
-    def _add_text_annot(self, point, text, icon=None):
-        #return _fitz.Page__add_text_annot(self, point, text, icon)
-        page = self._pdf_page()
-        p = point
-        try:
-            ASSERT_PDF(page)
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
-            r = mupdf.mpdf_annot_rect(annot)
-            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            flags = mupdf.PDF_ANNOT_IS_PRINT
-            mupdf.mpdf_set_annot_flags(annot, flags)
-            mupdf.mpdf_set_annot_contents(annot, text)
-            if icon:
-                mupdf.mpdf_set_annot_icon_name(annot, icon)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_set_annot_flags(annot, flags)
-        except Exception as e:
-            jlib.log('{e=}: {jlib.exception_info()=}')
-            return
-        return Annot(annot)
-
-    def _add_text_marker(self, quads, annot_type):
-
-        CheckParent(self)
-        if not self.parent.isPDF:
-            raise ValueError("not a PDF")
-
-        val = Page__add_text_marker(self, quads, annot_type)
-        if not val:
-            return None
-        #val.parent = weakref.proxy(self)
-        self._annot_refs[id(val)] = val
-
-        return val
 
     def _get_text_page(self, clip=None, flags=0):
         val = _fitz.Page__get_text_page(self, clip, flags)
@@ -6858,6 +6864,10 @@ class Page:
         val = Rect(val)
 
         return val
+
+    @property
+    def MediaBoxSize(self):
+        return Point(self.MediaBox.width, self.MediaBox.height)
 
     def add_caret_annot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
@@ -7386,6 +7396,20 @@ class Page:
         if not page.m_internal:
             return
         return JM_get_annot_xref_list(page);
+
+    def annots(self, types=None):
+        """ Generator over the annotations of a page.
+
+        Args:
+            types: (list) annotation types to subselect from. If none,
+                   all annotations are returned. E.g. types=[PDF_ANNOT_LINE]
+                   will only yield line annotations.
+        """
+        annot = self.firstAnnot
+        while annot:
+            if types is None or annot.type[0] in types:
+                yield (annot)
+            annot = annot.next
 
     def apply_redactions(self, images: int = 2) -> bool:
         """Apply the redaction annotations of the page.
@@ -8682,6 +8706,20 @@ class Page:
         return xref
 
     @property
+    def is_wrapped(self):
+        """Check if /Contents is wrapped with string pair "q" / "Q"."""
+        if getattr(self, "was_wrapped", False):  # costly checks only once
+            return True
+        cont = self.read_contents().split()
+        if cont == []:  # no contents treated as okay
+            self.was_wrapped = True
+            return True
+        if cont[0] != b"q" or cont[-1] != b"Q":
+            return False  # potential "geometry" issue
+        self.was_wrapped = True  # cheap check next time
+        return True
+
+    @property
     def language(self):
         """Page language."""
         #return _fitz.Page_language(self)
@@ -8692,6 +8730,19 @@ class Page:
         if not lang.m_internal:
             return
         return mupdf.mpdf_to_str_buf(lang)
+
+    def links(self, kinds=None):
+        """ Generator over the links of a page.
+
+        Args:
+            kinds: (list) link kinds to subselect from. If none,
+                   all links are returned. E.g. kinds=[LINK_URI]
+                   will only yield URI links.
+        """
+        all_links = self.getLinks()
+        for link in all_links:
+            if kinds is None or link["kind"] in kinds:
+                yield (link)
 
     def load_links(self):
         return sel.loadLinks()
@@ -8754,8 +8805,25 @@ class Page:
         val = Rect(val)
         return val
 
+    @property
+    def mediabox_size(self):
+        return self.MediaBoxSize
+
     def new_shape(self):
         return Shape(self)
+
+    def read_contents(self):
+        """All /Contents streams concatenated to one bytes object."""
+        return TOOLS._get_all_contents(self)
+
+    def readContents(self):
+        """All /Contents streams concatenated to one bytes object."""
+        return TOOLS._get_all_contents(self)
+
+    def refresh(self):
+        """Refresh page after link/annot/widget updates."""
+        CheckParent(self)
+        return _fitz.Page_refresh(self)
 
     @property
     def rotation(self):
@@ -8996,10 +9064,6 @@ class Page:
         doc.ShownPages[pno_id] = xref
 
         return xref
-    def refresh(self):
-        """Refresh page after link/annot/widget updates."""
-        CheckParent(self)
-        return _fitz.Page_refresh(self)
 
     @property
     def transformationMatrix(self):
@@ -9025,60 +9089,7 @@ class Page:
     def transformation_matrix(self):
         return self.transformationMatrix
 
-    @property
-    def is_wrapped(self):
-        """Check if /Contents is wrapped with string pair "q" / "Q"."""
-        if getattr(self, "was_wrapped", False):  # costly checks only once
-            return True
-        cont = self.read_contents().split()
-        if cont == []:  # no contents treated as okay
-            self.was_wrapped = True
-            return True
-        if cont[0] != b"q" or cont[-1] != b"Q":
-            return False  # potential "geometry" issue
-        self.was_wrapped = True  # cheap check next time
-        return True
-
     _isWrapped = is_wrapped
-
-    def wrap_contents(self):
-        if self.is_wrapped:  # avoid unnecessary wrapping
-            return
-        TOOLS._insert_contents(self, b"q\n", False)
-        TOOLS._insert_contents(self, b"\nQ", True)
-        self.was_wrapped = True  # indicate not needed again
-
-    wrapContents = wrap_contents
-
-
-    def links(self, kinds=None):
-        """ Generator over the links of a page.
-
-        Args:
-            kinds: (list) link kinds to subselect from. If none,
-                   all links are returned. E.g. kinds=[LINK_URI]
-                   will only yield URI links.
-        """
-        all_links = self.getLinks()
-        for link in all_links:
-            if kinds is None or link["kind"] in kinds:
-                yield (link)
-
-
-    def annots(self, types=None):
-        """ Generator over the annotations of a page.
-
-        Args:
-            types: (list) annotation types to subselect from. If none,
-                   all annotations are returned. E.g. types=[PDF_ANNOT_LINE]
-                   will only yield line annotations.
-        """
-        annot = self.firstAnnot
-        while annot:
-            if types is None or annot.type[0] in types:
-                yield (annot)
-            annot = annot.next
-
 
     def widgets(self, types=None):
         """ Generator over the widgets of a page.
@@ -9094,27 +9105,18 @@ class Page:
                 yield (widget)
             widget = widget.next
 
+    def wrap_contents(self):
+        if self.is_wrapped:  # avoid unnecessary wrapping
+            return
+        TOOLS._insert_contents(self, b"q\n", False)
+        TOOLS._insert_contents(self, b"\nQ", True)
+        self.was_wrapped = True  # indicate not needed again
+
+    wrapContents = wrap_contents
+
     getFontList = get_fonts
 
     getImageList = get_images
-
-    def readContents(self):
-        """All /Contents streams concatenated to one bytes object."""
-        return TOOLS._get_all_contents(self)
-
-
-    def read_contents(self):
-        """All /Contents streams concatenated to one bytes object."""
-        return TOOLS._get_all_contents(self)
-
-
-    @property
-    def MediaBoxSize(self):
-        return Point(self.MediaBox.width, self.MediaBox.height)
-
-    @property
-    def mediabox_size(self):
-        return self.MediaBoxSize
 
     cleanContents = clean_contents
     getContents = get_contents
@@ -10304,27 +10306,6 @@ class Rect(object):
     __div__ = __truediv__
 
     @property
-    def is_empty(self):
-        """True if rectangle area is empty."""
-        return self.x0 >= self.x1 or self.y0 >= self.y1
-
-    @property
-    def is_infinite(self):
-        """True if rectangle is infinite."""
-        return self.x0 > self.x1 or self.y0 > self.y1
-    isInfinite = is_infinite
-
-    @property
-    def top_left(self):
-        """Top-left corner."""
-        return Point(self.x0, self.y0)
-
-    @property
-    def top_right(self):
-        """Top-right corner."""
-        return Point(self.x1, self.y0)
-
-    @property
     def bottom_left(self):
         """Bottom-left corner."""
         return Point(self.x0, self.y1)
@@ -10337,6 +10318,17 @@ class Rect(object):
     def contains(self, x):
         """Check if containing point-like or rect-like x."""
         return self.__contains__(x)
+
+    @property
+    def is_empty(self):
+        """True if rectangle area is empty."""
+        return self.x0 >= self.x1 or self.y0 >= self.y1
+
+    @property
+    def is_infinite(self):
+        """True if rectangle is infinite."""
+        return self.x0 > self.x1 or self.y0 > self.y1
+    isInfinite = is_infinite
 
     def include_point(self, p):
         """Extend to include point-like p."""
@@ -10397,6 +10389,16 @@ class Rect(object):
         """Return the IRect."""
         return IRect(min(self.x0, self.x1), min(self.y0, self.y1),
                      max(self.x0, self.x1), max(self.y0, self.y1))
+
+    @property
+    def top_left(self):
+        """Top-left corner."""
+        return Point(self.x0, self.y0)
+
+    @property
+    def top_right(self):
+        """Top-right corner."""
+        return Point(self.x1, self.y0)
 
     def transform(self, m):
         """Replace with the transformation by matrix-like m."""
@@ -11611,18 +11613,6 @@ class TextPage:
                 line_n += 1
         return lines
 
-    @property
-    def rect(self):
-        """Page rectangle."""
-
-        #val = _fitz.TextPage_rect(self)
-        this_tpage = self.this
-        mediabox = this_tpage.m_internal.mediabox
-        val = JM_py_from_rect(mediabox)
-        val = Rect(val)
-
-        return val
-
     def extractHTML(self) -> str:
         """Return page content as a HTML string."""
         return self._extractText(1)
@@ -11674,6 +11664,18 @@ class TextPage:
     def extractXHTML(self) -> str:
         """Return page content as a XHTML string."""
         return self._extractText(4)
+
+    @property
+    def rect(self):
+        """Page rectangle."""
+
+        #val = _fitz.TextPage_rect(self)
+        this_tpage = self.this
+        mediabox = this_tpage.m_internal.mediabox
+        val = JM_py_from_rect(mediabox)
+        val = Rect(val)
+
+        return val
 
     def search(self, needle, hit_max=0, quads=1):
         """Locate 'needle' returning rects or quads."""
