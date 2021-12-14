@@ -172,6 +172,7 @@
     <ClInclude Include="..\..\thirdparty\owemdjee\libxml2\xzlib.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\scripts\libxml2\copy-test-cases.cmd" />
     <None Include="..\..\thirdparty\owemdjee\libxml2\build_glob.py" />
     <None Include="..\..\thirdparty\owemdjee\libxml2\ChangeLog" />
     <None Include="..\..\thirdparty\owemdjee\libxml2\configure.ac" />
@@ -389,11 +390,12 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>robocopy  /E $(ProjectDir)../../thirdparty/owemdjee/libxml2/test/ $(ProjectDir)test/ *
+      <Command>..\..\scripts\libxml2\copy-test-cases.cmd $(ProjectDir) $(OutDirFullPath)
+
 </Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Copy LIBXML2 test files to $(ProjectDir)</Message>
+      <Message>Copy LIBXML2 test files to $(OutDirFullPath)</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -423,11 +425,12 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>robocopy  /E $(ProjectDir)../../thirdparty/owemdjee/libxml2/test/ $(ProjectDir)test/ *
+      <Command>..\..\scripts\libxml2\copy-test-cases.cmd $(ProjectDir) $(OutDirFullPath)
+
 </Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Copy LIBXML2 test files to $(ProjectDir)</Message>
+      <Message>Copy LIBXML2 test files to $(OutDirFullPath)</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -458,11 +461,12 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>robocopy  /E $(ProjectDir)../../thirdparty/owemdjee/libxml2/test/ $(ProjectDir)test/ *
+      <Command>..\..\scripts\libxml2\copy-test-cases.cmd $(ProjectDir) $(OutDirFullPath)
+
 </Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Copy LIBXML2 test files to $(ProjectDir)</Message>
+      <Message>Copy LIBXML2 test files to $(OutDirFullPath)</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -492,11 +496,12 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>robocopy  /E $(ProjectDir)../../thirdparty/owemdjee/libxml2/test/ $(ProjectDir)test/ *
+      <Command>..\..\scripts\libxml2\copy-test-cases.cmd $(ProjectDir) $(OutDirFullPath)
+
 </Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Copy LIBXML2 test files to $(ProjectDir)</Message>
+      <Message>Copy LIBXML2 test files to $(OutDirFullPath)</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

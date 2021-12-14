@@ -28,54 +28,46 @@
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  
-  
-  
-  
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
@@ -95,8 +87,7 @@
     <NMakeOutput>__build_target.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
-  
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -127,467 +118,462 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include=".\bin2coff.vcxproj">
+    <ProjectReference Include="bin2coff.vcxproj">
       <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\curl.vcxproj">
+    <ProjectReference Include="curl.vcxproj">
       <Project>{00111979-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\glob.vcxproj">
+    <ProjectReference Include="glob.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff17062e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\jpeginfo.vcxproj">
+    <ProjectReference Include="jpeginfo.vcxproj">
       <Project>{e74f29fa-f143-4adc-b92c-6af1a8e4a417}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\mudraw.vcxproj">
+    <ProjectReference Include="mudraw.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a1828a3}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\mupdf-curl.vcxproj">
+    <ProjectReference Include="mupdf-curl.vcxproj">
       <Project>{27b53e5c-acab-423c-854e-bece56d73544}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\mupdf-gl.vcxproj">
+    <ProjectReference Include="mupdf-gl.vcxproj">
       <Project>{ce3a76a8-a28f-4991-8fb9-c9453d922037}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\mupdf.vcxproj">
+    <ProjectReference Include="mupdf.vcxproj">
       <Project>{e74f29f0-fa43-4adc-b92c-6afa08e4a417}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\muraster.vcxproj">
+    <ProjectReference Include="muraster.vcxproj">
       <Project>{0fdc74d7-d18c-45ce-94d6-edfcc5a0cdf2}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\mutool.vcxproj">
+    <ProjectReference Include="mutool.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\sync_nas_filelock.vcxproj">
+    <ProjectReference Include="sync_nas_filelock.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98f87eaa}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\tesseract.vcxproj">
+    <ProjectReference Include="tesseract.vcxproj">
       <Project>{00115919-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-areachart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-areachart.vcxproj">
       <Project>{51520565-6285-4e86-998f-d6df6af67dcd}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-barchart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-barchart.vcxproj">
       <Project>{2d3a1fc2-6cd8-48f8-bbd0-e289e945fc8d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-boxplot.vcxproj">
+    <ProjectReference Include="wxCharts-sample-boxplot.vcxproj">
       <Project>{94f51622-cf7b-46d2-9276-0e055da1102a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-bubble.vcxproj">
+    <ProjectReference Include="wxCharts-sample-bubble.vcxproj">
       <Project>{2a8f4392-af71-4443-957d-a4422317c111}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-candlestick.vcxproj">
+    <ProjectReference Include="wxCharts-sample-candlestick.vcxproj">
       <Project>{7dfe3455-2cab-488d-ad28-a7c85108bb16}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-columnchart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-columnchart.vcxproj">
       <Project>{4b5ad8af-8cac-4b53-80c4-429a200ad890}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-combinationchart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-combinationchart.vcxproj">
       <Project>{ed056fdf-84aa-45cf-abe2-11b707ff42e6}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-doughnutchart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-doughnutchart.vcxproj">
       <Project>{265470c9-91b0-4ff1-bbf1-ec927a730977}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-histogram.vcxproj">
+    <ProjectReference Include="wxCharts-sample-histogram.vcxproj">
       <Project>{df4163d6-3467-47fa-bc20-e98f869a6ea6}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-linechart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-linechart.vcxproj">
       <Project>{bdf3aef7-924b-4ed0-9546-0d6b4050d62b}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-math2d.vcxproj">
+    <ProjectReference Include="wxCharts-sample-math2d.vcxproj">
       <Project>{b3e0c318-1c4f-4dc4-9346-76663ae985d2}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-math2dinteractive.vcxproj">
+    <ProjectReference Include="wxCharts-sample-math2dinteractive.vcxproj">
       <Project>{c21f56ed-9928-44ef-ac73-c10d4fdfd828}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-ohlc.vcxproj">
+    <ProjectReference Include="wxCharts-sample-ohlc.vcxproj">
       <Project>{8dbf5589-b3a1-4053-9344-35a7a796c993}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-piechart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-piechart.vcxproj">
       <Project>{eeae5032-9d6b-46f8-a128-49a112761102}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-polararea.vcxproj">
+    <ProjectReference Include="wxCharts-sample-polararea.vcxproj">
       <Project>{e08f743f-b978-490a-bf69-1060739044a4}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-radar.vcxproj">
+    <ProjectReference Include="wxCharts-sample-radar.vcxproj">
       <Project>{2ff9fcdd-06a9-4469-b025-b62229f42f80}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-scatterplot.vcxproj">
+    <ProjectReference Include="wxCharts-sample-scatterplot.vcxproj">
       <Project>{bcf37010-9f5e-49b7-891e-e63776d56053}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-sharedcategoricaldata.vcxproj">
+    <ProjectReference Include="wxCharts-sample-sharedcategoricaldata.vcxproj">
       <Project>{2787c461-3c99-47ed-a9a0-8589a6898474}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-stackedbarchart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-stackedbarchart.vcxproj">
       <Project>{a0b8928e-f490-4155-bcac-a6956e07f8bb}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-stackedcolumnchart.vcxproj">
+    <ProjectReference Include="wxCharts-sample-stackedcolumnchart.vcxproj">
       <Project>{64f2cca7-7b0e-4ee2-be2a-638df05b89dc}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxCharts-sample-timeseries.vcxproj">
+    <ProjectReference Include="wxCharts-sample-timeseries.vcxproj">
       <Project>{5b260d88-100b-4341-977e-56847287d3ed}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxFormBuilder.vcxproj">
+    <ProjectReference Include="wxFormBuilder.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa7030e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-demos-bombs.vcxproj">
+    <ProjectReference Include="wxw-demos-bombs.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226afc5f46}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-demos-forty.vcxproj">
+    <ProjectReference Include="wxw-demos-forty.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226af164b7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-demos-fractal.vcxproj">
+    <ProjectReference Include="wxw-demos-fractal.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aed3e37}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-demos-life.vcxproj">
+    <ProjectReference Include="wxw-demos-life.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226adbaedb}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-demos-poem.vcxproj">
+    <ProjectReference Include="wxw-demos-poem.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aeea4fd}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-access.vcxproj">
+    <ProjectReference Include="wxw-samples-access.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a40c1f7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-animate.vcxproj">
+    <ProjectReference Include="wxw-samples-animate.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae09e46}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-archive.vcxproj">
+    <ProjectReference Include="wxw-samples-archive.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a59860a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-artprov.vcxproj">
+    <ProjectReference Include="wxw-samples-artprov.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a5daee4}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-aui.vcxproj">
+    <ProjectReference Include="wxw-samples-aui.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a109667}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-calendar.vcxproj">
+    <ProjectReference Include="wxw-samples-calendar.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a1a559a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-caret.vcxproj">
+    <ProjectReference Include="wxw-samples-caret.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a0f569a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-clipboard.vcxproj">
+    <ProjectReference Include="wxw-samples-clipboard.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a852f7a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-collpane.vcxproj">
+    <ProjectReference Include="wxw-samples-collpane.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae4914e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-combo.vcxproj">
+    <ProjectReference Include="wxw-samples-combo.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a373e6d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-config.vcxproj">
+    <ProjectReference Include="wxw-samples-config.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a772a1c}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-console.vcxproj">
+    <ProjectReference Include="wxw-samples-console.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a281c00}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-dataview.vcxproj">
+    <ProjectReference Include="wxw-samples-dataview.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aa67a99}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-debugrpt.vcxproj">
+    <ProjectReference Include="wxw-samples-debugrpt.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ab15d22}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-dialogs.vcxproj">
+    <ProjectReference Include="wxw-samples-dialogs.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a88f52c}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-dialup.vcxproj">
+    <ProjectReference Include="wxw-samples-dialup.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ad6f517}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-display.vcxproj">
+    <ProjectReference Include="wxw-samples-display.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae97ea5}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-dnd.vcxproj">
+    <ProjectReference Include="wxw-samples-dnd.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226acc1e77}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-docview.vcxproj">
+    <ProjectReference Include="wxw-samples-docview.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae5480e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-dragimag.vcxproj">
+    <ProjectReference Include="wxw-samples-dragimag.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226adac53b}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-drawing.vcxproj">
+    <ProjectReference Include="wxw-samples-drawing.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a9cdcfc}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-erase.vcxproj">
+    <ProjectReference Include="wxw-samples-erase.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aa79c63}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-event.vcxproj">
+    <ProjectReference Include="wxw-samples-event.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a51f7a5}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-except.vcxproj">
+    <ProjectReference Include="wxw-samples-except.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aa4b73d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-exec.vcxproj">
+    <ProjectReference Include="wxw-samples-exec.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226afb3e1b}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-font.vcxproj">
+    <ProjectReference Include="wxw-samples-font.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a7b61f7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-fswatcher.vcxproj">
+    <ProjectReference Include="wxw-samples-fswatcher.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a266a4e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-grid.vcxproj">
+    <ProjectReference Include="wxw-samples-grid.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ab9d3fa}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-help.vcxproj">
+    <ProjectReference Include="wxw-samples-help.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a2c1be3}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-about.vcxproj">
+    <ProjectReference Include="wxw-samples-html-about.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ad8bfbd}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-help.vcxproj">
+    <ProjectReference Include="wxw-samples-html-help.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a723d44}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-helpview.vcxproj">
+    <ProjectReference Include="wxw-samples-html-helpview.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4d9a79}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-printing.vcxproj">
+    <ProjectReference Include="wxw-samples-html-printing.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ac771ac}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-test.vcxproj">
+    <ProjectReference Include="wxw-samples-html-test.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a282e9c}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-virtual.vcxproj">
+    <ProjectReference Include="wxw-samples-html-virtual.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4c427a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-widget.vcxproj">
+    <ProjectReference Include="wxw-samples-html-widget.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a98f7d7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-html-zip.vcxproj">
+    <ProjectReference Include="wxw-samples-html-zip.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a8e0ead}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-htmlbox.vcxproj">
+    <ProjectReference Include="wxw-samples-htmlbox.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a88c345}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-image.vcxproj">
+    <ProjectReference Include="wxw-samples-image.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a9c429e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-internat.vcxproj">
+    <ProjectReference Include="wxw-samples-internat.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae8e1fb}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-ipc-baseclient.vcxproj">
+    <ProjectReference Include="wxw-samples-ipc-baseclient.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a7a54f3}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-ipc-baseserver.vcxproj">
+    <ProjectReference Include="wxw-samples-ipc-baseserver.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a3d2ee1}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-ipc-client.vcxproj">
+    <ProjectReference Include="wxw-samples-ipc-client.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ab0a201}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-ipc-server.vcxproj">
+    <ProjectReference Include="wxw-samples-ipc-server.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a359f96}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-joytest.vcxproj">
+    <ProjectReference Include="wxw-samples-joytest.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226acfd2e8}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-keyboard.vcxproj">
+    <ProjectReference Include="wxw-samples-keyboard.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a063d3b}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-layout.vcxproj">
+    <ProjectReference Include="wxw-samples-layout.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a769867}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-listctrl.vcxproj">
+    <ProjectReference Include="wxw-samples-listctrl.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226abe5447}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-maskedctrl.vcxproj">
+    <ProjectReference Include="wxw-samples-maskedctrl.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226abe5a97}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-mdi.vcxproj">
+    <ProjectReference Include="wxw-samples-mdi.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a880c6e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-mediaplayer.vcxproj">
+    <ProjectReference Include="wxw-samples-mediaplayer.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ada8b54}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-memcheck.vcxproj">
+    <ProjectReference Include="wxw-samples-memcheck.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a96e9ff}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-menu.vcxproj">
+    <ProjectReference Include="wxw-samples-menu.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a46b0d4}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-mfc.vcxproj">
+    <ProjectReference Include="wxw-samples-mfc.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a92fa89}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-minimal.vcxproj">
+    <ProjectReference Include="wxw-samples-minimal.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a663669}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-nativdlg.vcxproj">
+    <ProjectReference Include="wxw-samples-nativdlg.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a3dd754}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-notebook.vcxproj">
+    <ProjectReference Include="wxw-samples-notebook.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a7559a7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-oleauto.vcxproj">
+    <ProjectReference Include="wxw-samples-oleauto.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a3ae1ba}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-opengl-cube.vcxproj">
+    <ProjectReference Include="wxw-samples-opengl-cube.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ace4f4d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-opengl-isosurf.vcxproj">
+    <ProjectReference Include="wxw-samples-opengl-isosurf.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4b2b1b}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-opengl-penguin.vcxproj">
+    <ProjectReference Include="wxw-samples-opengl-penguin.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a42260f}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-opengl-pyramid.vcxproj">
+    <ProjectReference Include="wxw-samples-opengl-pyramid.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a730961}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-ownerdrw.vcxproj">
+    <ProjectReference Include="wxw-samples-ownerdrw.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226afd20a6}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-popup.vcxproj">
+    <ProjectReference Include="wxw-samples-popup.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4cff78}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-power.vcxproj">
+    <ProjectReference Include="wxw-samples-power.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a45eb8a}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-preferences.vcxproj">
+    <ProjectReference Include="wxw-samples-preferences.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ad1ae5e}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-printing.vcxproj">
+    <ProjectReference Include="wxw-samples-printing.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a8dbc87}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-propgrid.vcxproj">
+    <ProjectReference Include="wxw-samples-propgrid.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a6d6b73}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-regtest.vcxproj">
+    <ProjectReference Include="wxw-samples-regtest.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a8abb07}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-render.vcxproj">
+    <ProjectReference Include="wxw-samples-render.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ab2dec1}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-ribbon.vcxproj">
+    <ProjectReference Include="wxw-samples-ribbon.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a85b785}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-richtext.vcxproj">
+    <ProjectReference Include="wxw-samples-richtext.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a46f7c9}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-sashtest.vcxproj">
+    <ProjectReference Include="wxw-samples-sashtest.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a423f03}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-scroll.vcxproj">
+    <ProjectReference Include="wxw-samples-scroll.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aad6781}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-secretstore.vcxproj">
+    <ProjectReference Include="wxw-samples-secretstore.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a5b21e7}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-shaped.vcxproj">
+    <ProjectReference Include="wxw-samples-shaped.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4a3530}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-sockets-baseclient.vcxproj">
+    <ProjectReference Include="wxw-samples-sockets-baseclient.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a353521}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-sockets-baseserver.vcxproj">
+    <ProjectReference Include="wxw-samples-sockets-baseserver.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ac2c445}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-sockets-client.vcxproj">
+    <ProjectReference Include="wxw-samples-sockets-client.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aa0b155}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-sockets-server.vcxproj">
+    <ProjectReference Include="wxw-samples-sockets-server.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a119650}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-sound.vcxproj">
+    <ProjectReference Include="wxw-samples-sound.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a294496}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-splash.vcxproj">
+    <ProjectReference Include="wxw-samples-splash.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226aaf4ad4}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-splitter.vcxproj">
+    <ProjectReference Include="wxw-samples-splitter.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a23503d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-statbar.vcxproj">
+    <ProjectReference Include="wxw-samples-statbar.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a79eac8}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-stc.vcxproj">
+    <ProjectReference Include="wxw-samples-stc.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a75eaee}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-svg.vcxproj">
+    <ProjectReference Include="wxw-samples-svg.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4d5fba}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-taborder.vcxproj">
+    <ProjectReference Include="wxw-samples-taborder.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226abae4df}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-taskbar.vcxproj">
+    <ProjectReference Include="wxw-samples-taskbar.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a98c9b5}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-taskbarbutton.vcxproj">
+    <ProjectReference Include="wxw-samples-taskbarbutton.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a83a323}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-text.vcxproj">
+    <ProjectReference Include="wxw-samples-text.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a601637}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-thread.vcxproj">
+    <ProjectReference Include="wxw-samples-thread.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ac2a6cf}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-toolbar.vcxproj">
+    <ProjectReference Include="wxw-samples-toolbar.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a6a2b75}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-treectrl.vcxproj">
+    <ProjectReference Include="wxw-samples-treectrl.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4e720c}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-treelist.vcxproj">
+    <ProjectReference Include="wxw-samples-treelist.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a04d005}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-typetest.vcxproj">
+    <ProjectReference Include="wxw-samples-typetest.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ab35ef9}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-uiaction.vcxproj">
+    <ProjectReference Include="wxw-samples-uiaction.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226afe43aa}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-validate.vcxproj">
+    <ProjectReference Include="wxw-samples-validate.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4787c3}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-vscroll.vcxproj">
+    <ProjectReference Include="wxw-samples-vscroll.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ad8142d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-webrequest.vcxproj">
+    <ProjectReference Include="wxw-samples-webrequest.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a829d9f}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-webview.vcxproj">
+    <ProjectReference Include="wxw-samples-webview.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226abe550b}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-widgets.vcxproj">
+    <ProjectReference Include="wxw-samples-widgets.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a7a8de1}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-wizard.vcxproj">
+    <ProjectReference Include="wxw-samples-wizard.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ab97e5d}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-wrapsizer.vcxproj">
+    <ProjectReference Include="wxw-samples-wrapsizer.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ad0a2dc}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-xrc.vcxproj">
+    <ProjectReference Include="wxw-samples-xrc.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a1d8668}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-samples-xti.vcxproj">
-      <Project>{0b51171b-b10e-4eac-8ffa-19226a740fda}</Project>
-    </ProjectReference>
-    <ProjectReference Include=".\wxw-utils-execmon.vcxproj">
+    <ProjectReference Include="wxw-utils-execmon.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4e5e82}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-utils-helpview-client.vcxproj">
+    <ProjectReference Include="wxw-utils-helpview-client.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4f2a29}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-utils-helpview.vcxproj">
+    <ProjectReference Include="wxw-utils-helpview.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226acd0334}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-utils-ifacecheck.vcxproj">
+    <ProjectReference Include="wxw-utils-ifacecheck.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a970b38}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-utils-screenshotgen.vcxproj">
+    <ProjectReference Include="wxw-utils-screenshotgen.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a41a584}</Project>
     </ProjectReference>
-    <ProjectReference Include=".\wxw-utils-wxrc.vcxproj">
+    <ProjectReference Include="wxw-utils-wxrc.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ade98a7}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

@@ -169,7 +169,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>cmd /c robocopy $(ProjectDir)..\..\thirdparty\owemdjee\wxFormBuilder\output\  $(OutDirFullPath) *.* /S /DCOPY:DAT /W:0 /R:0</Command>
+      <Command>..\..\scripts\wxFormBuilder\copy-misc-files.cmd $(ProjectDir) $(OutDirFullPath)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>copy template files to output directory</Message>
@@ -214,7 +214,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>cmd /c robocopy $(ProjectDir)..\..\thirdparty\owemdjee\wxFormBuilder\output\  $(OutDirFullPath) *.* /S /DCOPY:DAT /W:0 /R:0</Command>
+      <Command>..\..\scripts\wxFormBuilder\copy-misc-files.cmd $(ProjectDir) $(OutDirFullPath)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>copy template files to output directory</Message>
@@ -260,7 +260,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>cmd /c robocopy $(ProjectDir)..\..\thirdparty\owemdjee\wxFormBuilder\output\  $(OutDirFullPath) *.* /S /DCOPY:DAT /W:0 /R:0</Command>
+      <Command>..\..\scripts\wxFormBuilder\copy-misc-files.cmd $(ProjectDir) $(OutDirFullPath)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>copy template files to output directory</Message>
@@ -305,7 +305,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>cmd /c robocopy $(ProjectDir)..\..\thirdparty\owemdjee\wxFormBuilder\output\  $(OutDirFullPath) *.* /S /DCOPY:DAT /W:0 /R:0</Command>
+      <Command>..\..\scripts\wxFormBuilder\copy-misc-files.cmd $(ProjectDir) $(OutDirFullPath)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>copy template files to output directory</Message>
@@ -1427,6 +1427,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\scripts\wxFormBuilder\copy-misc-files.cmd" />
     <None Include="..\..\thirdparty\owemdjee\wxFormBuilder\output\xml\default.cppcode" />
     <None Include="..\..\thirdparty\owemdjee\wxFormBuilder\output\xml\default.luacode" />
     <None Include="..\..\thirdparty\owemdjee\wxFormBuilder\output\xml\default.phpcode" />
