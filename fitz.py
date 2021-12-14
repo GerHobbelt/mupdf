@@ -2996,11 +2996,8 @@ class Document:
         """Find new location after layouting a document."""
         if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
-        jlib.log('{type(bm)=} {bm:x=}')
         #return _fitz.Document_find_bookmark(self, bm)
-        #mark = (intptr_t) PyLong_AsVoidPtr(bm);
         location = mupdf.lookup_bookmark2( self.this.m_internal, bm)
-        jlib.log('{location=}')
         return location.chapter, location.page
 
     def findBookmark(self, bm):
@@ -3822,10 +3819,8 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_make_bookmark(self, loc)
-        jlib.log('{loc=}')
         loc = mupdf.Location(*loc)
         mark = mupdf.make_bookmark2( self.this.m_internal, loc.internal())
-        jlib.log('returning {mark:x=}')
         return mark
 
     def move_page(self, pno: int, to: int =-1):
@@ -4127,7 +4122,6 @@ class Document:
             return 0
         #return _fitz.Document_permissions(self)
         doc =self.this
-        jlib.log('*** calling mupdf.mpdf_document_from_fz_document(doc)')
         pdf = mupdf.mpdf_document_from_fz_document(doc)
 
         # for PDF return result of standard function
@@ -5635,13 +5629,11 @@ class linkDest(object):
                 self.kind = LINK_GOTO
                 ftab = self.uri[1:].split(",")
                 if len(ftab) == 3:
-                    jlib.log('{ftab[0]=}')
                     self.page = int(ftab[0]) - 1
                     self.lt = Point(float(ftab[1]), float(ftab[2]))
                     self.flags = self.flags | LINK_FLAG_L_VALID | LINK_FLAG_T_VALID
                 else:
                     try:
-                        jlib.log('{ftab[0]=}')
                         self.page = int(ftab[0]) - 1
                     except:
                         self.kind = LINK_NAMED
@@ -5995,32 +5987,27 @@ class Page:
         #fz_buffer *filebuf = NULL;
         #fz_rect r;
         p = JM_point_from_py(point)
-        try:
-            ASSERT_PDF(page);
-            filebuf = JM_BufferFromBytes(buffer_)
-            if not filebuf.m_internal:
-                THROWMSG("bad type: 'buffer'")
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_FILE_ATTACHMENT)
-            r = mupdf.mpdf_annot_rect(annot)
-            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            flags = mupdf.PDF_ANNOT_IS_PRINT;
-            mupdf.mpdf_set_annot_flags(annot, flags)
+        ASSERT_PDF(page);
+        filebuf = JM_BufferFromBytes(buffer_)
+        if not filebuf.m_internal:
+            THROWMSG("bad type: 'buffer'")
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_FILE_ATTACHMENT)
+        r = mupdf.mpdf_annot_rect(annot)
+        r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+        mupdf.mpdf_set_annot_rect(annot, r)
+        flags = mupdf.PDF_ANNOT_IS_PRINT;
+        mupdf.mpdf_set_annot_flags(annot, flags)
 
-            if icon:
-                mupdf.mpdf_set_annot_icon_name(annot, icon)
+        if icon:
+            mupdf.mpdf_set_annot_icon_name(annot, icon)
 
-            val = JM_embed_file(page.doc(), filebuf, filename, uf, d, 1)
-            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('FS'), val)
-            mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('Contents'), filename)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_set_annot_flags(annot, flags)
-        except Exception as e:
-            jlib.log('{e=}')
-            raise
-            return
+        val = JM_embed_file(page.doc(), filebuf, filename, uf, d, 1)
+        mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('FS'), val)
+        mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('Contents'), filename)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+        mupdf.mpdf_set_annot_rect(annot, r)
+        mupdf.mpdf_set_annot_flags(annot, flags)
         return Annot(annot)
 
     def _add_freetext_annot(self, rect, text, fontsize=11, fontname=None, text_color=None, fill_color=None, align=0, rotate=0):
@@ -6032,7 +6019,6 @@ class Page:
         ntcol = JM_color_FromSequence(text_color, tcol)
         r = JM_rect_from_py(rect)
         if r.is_infinite_rect() or r.is_empty_rect():
-            jlib.log('{rect=} {r=}')
             raise Exception("rect must be finite and not empty")
         annot = page.create_annot(mupdf.PDF_ANNOT_FREE_TEXT)
         annot.set_annot_contents(text)
@@ -6092,17 +6078,13 @@ class Page:
     def _add_line_annot(self, p1, p2):
         #return _fitz.Page__add_line_annot(self, p1, p2)
         page = self._pdf_page()
-        try:
-            ASSERT_PDF(page);
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_LINE)
-            a = JM_point_from_py(p1)
-            b = JM_point_from_py(p2)
-            mupdf.mpdf_set_annot_line(annot, a, b)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
+        ASSERT_PDF(page);
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_LINE)
+        a = JM_point_from_py(p1)
+        b = JM_point_from_py(p2)
+        mupdf.mpdf_set_annot_line(annot, a, b)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
         assert annot.m_internal
         return Annot(annot)
 
@@ -12021,7 +12003,7 @@ if 1:
                 pass
             else:
                 assert not inspect.isroutine(value)
-                print(f'importing {name}')
+                #print(f'importing {name}')
                 setattr(self, name, value)
     assert mupdf.UCDN_EAST_ASIAN_H == 1
     assert PDF_TX_FIELD_IS_MULTILINE == mupdf.PDF_TX_FIELD_IS_MULTILINE
@@ -13565,36 +13547,29 @@ def JM_delete_annot(page, annot):
     '''
     if not annot or not annot.m_internal:
         return
-    try:
-        # first get any existing popup for the annotation
-        popup = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
+    # first get any existing popup for the annotation
+    popup = mupdf.mpdf_dict_get(annot.annot_obj(), PDF_NAME('Popup'))
 
-        # next delete the /Popup and /AP entries from annot dictionary
-        mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
+    # next delete the /Popup and /AP entries from annot dictionary
+    mupdf.mpdf_dict_del(annot.annot_obj(), PDF_NAME('AP'))
 
-        annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
-        assert annots.m_internal
-        n = mupdf.mpdf_array_len(annots)
-        for i in range(n - 1, -1, -1):
-            o = mupdf.mpdf_array_get(annots, i)
-            p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
-            if not p.m_internal:
-                continue;
-            if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
-                mupdf.mpdf_array_delete(annots, i)
-        assert annot.m_internal
-        type_ = mupdf.mpdf_annot_type(annot)
-        if type_ != mupdf.PDF_ANNOT_WIDGET:
-            mupdf.mpdf_delete_annot(page, annot)
-        else:
-            #jlib.log('Calling JM_delete_widget()')
-            JM_delete_widget(page, annot)
-    except Exception as e:
-        jlib.log('{e=}')
-        #jlib.log('could not delete annotation')
-        #jlib.log('{jlib.exception_info()=}')
-        # fixme: mupdf.mfz_warn("could not delete annotation")
-    return
+    annots = mupdf.mpdf_dict_get(page.obj(), PDF_NAME('Annots'))
+    assert annots.m_internal
+    n = mupdf.mpdf_array_len(annots)
+    for i in range(n - 1, -1, -1):
+        o = mupdf.mpdf_array_get(annots, i)
+        p = mupdf.mpdf_dict_get(o, PDF_NAME('Parent'))
+        if not p.m_internal:
+            continue;
+        if not mupdf.mpdf_objcmp(p, annot.annot_obj()):
+            mupdf.mpdf_array_delete(annots, i)
+    assert annot.m_internal
+    type_ = mupdf.mpdf_annot_type(annot)
+    if type_ != mupdf.PDF_ANNOT_WIDGET:
+        mupdf.mpdf_delete_annot(page, annot)
+    else:
+        #jlib.log('Calling JM_delete_widget()')
+        JM_delete_widget(page, annot)
 
 
 def JM_embed_file(
@@ -15188,7 +15163,7 @@ def JM_outline_xrefs(obj, xrefs):
         first = mupdf.mpdf_dict_get(thisobj, PDF_NAME('First')) # try go down
         if first.m_internal:
             xrefs = JM_outline_xrefs(first, xrefs)
-            jlib.log('{xrefs=}')
+            #jlib.log('{xrefs=}')
         thisobj = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Next'))    # try go next
         parent = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Parent'))   # get parent
         if not thisobj.m_internal:
