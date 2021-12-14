@@ -864,14 +864,11 @@ class Annot:
         """Set annotation rectangle."""
         CheckParent(self)
         #return _fitz.Annot_set_rect(self, rect)
-        try:
-            annot = self.this
-            pdfpage = annot.annot_page()
-            rot = JM_rotate_page_matrix(pdfpage)
-            r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
-            mupdf.mpdf_set_annot_rect(annot, r)
-        except Exception as e:
-            jlib.log('{e=}')
+        annot = self.this
+        pdfpage = annot.annot_page()
+        rot = JM_rotate_page_matrix(pdfpage)
+        r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
+        mupdf.mpdf_set_annot_rect(annot, r)
 
     def set_rotation(self, rotate=0):
         """Set annotation rotation."""
@@ -6091,21 +6088,17 @@ class Page:
     def _add_multiline(self, points, annot_type):
         #return _fitz.Page__add_multiline(self, points, annot_type)
         page = self._pdf_page()
-        try:
-            if len(points) < 2:
+        if len(points) < 2:
+            THROWMSG("bad list of points")
+        annot = mupdf.mpdf_create_annot(page, annot_type)
+        for p in points:
+            if (PySequence_Size(p) != 2):
                 THROWMSG("bad list of points")
-            annot = mupdf.mpdf_create_annot(page, annot_type)
-            for p in points:
-                if (PySequence_Size(p) != 2):
-                    THROWMSG("bad list of points")
-                point = JM_point_from_py(p)
-                mupdf.mpdf_add_annot_vertex(annot, point)
+            point = JM_point_from_py(p)
+            mupdf.mpdf_add_annot_vertex(annot, point)
 
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return;
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
         return Annot(annot)
 
     def _add_redact_annot(self, quad, text=None, da_str=None, align=0, fill=None, text_color=None):
@@ -6113,49 +6106,41 @@ class Page:
         page = self._pdf_page()
         fcol = [ 1, 1, 1, 0]
         nfcol = 0
-        try:
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_REDACT)
-            q = JM_quad_from_py(quad)
-            r = mupdf.mfz_rect_from_quad(q)
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_REDACT)
+        q = JM_quad_from_py(quad)
+        r = mupdf.mfz_rect_from_quad(q)
 
-            # TODO calculate de-rotated rect
-            mupdf.mpdf_set_annot_rect(annot, r)
-            if fill:
-                nfcol = JM_color_FromSequence(fill, fcol)
-                arr = mupdf.mpdf_new_array(page.doc(), nfcol)
-                for i in range(nfcol):
-                    mupdf.mpdf_array_push_real(arr, fcol[i])
-                mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('IC'), arr)
-            if text:
-                mupdf.mpdf_dict_puts(
-                        annot.annot_obj(),
-                        "OverlayText",
-                        mupdf.mpdf_new_text_string(text),
-                        )
-                mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('DA'), da_str)
-                mupdf.mpdf_dict_put_int(annot.annot_obj(), PDF_NAME('Q'), align)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
+        # TODO calculate de-rotated rect
+        mupdf.mpdf_set_annot_rect(annot, r)
+        if fill:
+            nfcol = JM_color_FromSequence(fill, fcol)
+            arr = mupdf.mpdf_new_array(page.doc(), nfcol)
+            for i in range(nfcol):
+                mupdf.mpdf_array_push_real(arr, fcol[i])
+            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('IC'), arr)
+        if text:
+            mupdf.mpdf_dict_puts(
+                    annot.annot_obj(),
+                    "OverlayText",
+                    mupdf.mpdf_new_text_string(text),
+                    )
+            mupdf.mpdf_dict_put_text_string(annot.annot_obj(), PDF_NAME('DA'), da_str)
+            mupdf.mpdf_dict_put_int(annot.annot_obj(), PDF_NAME('Q'), align)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
         annot = mupdf.mpdf_keep_annot(annot)
         return Annot(annot)
 
     def _add_square_or_circle(self, rect, annot_type):
         #return _fitz.Page__add_square_or_circle(self, rect, annot_type)
         page = self._pdf_page()
-        try:
-            r = JM_rect_from_py(rect)
-            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
-                THROWMSG("rect must be finite and not empty")
-            annot = mupdf.mpdf_create_annot(page, annot_type)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=}')
-            return
+        r = JM_rect_from_py(rect)
+        if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+            THROWMSG("rect must be finite and not empty")
+        annot = mupdf.mpdf_create_annot(page, annot_type)
+        mupdf.mpdf_set_annot_rect(annot, r)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
         assert annot.m_internal
         return Annot(annot)
 
@@ -6181,49 +6166,41 @@ class Page:
                 ]
         n = len(stamp_id)
         name = stamp_id[0]
-        try:
-            ASSERT_PDF(page)
-            r = JM_rect_from_py(rect)
-            if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
-                THROWMSG("rect must be finite and not empty")
-            if INRANGE(stamp, 0, n-1):
-                name = stamp_id[stamp]
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
-            mupdf.mpdf_set_annot_contents(
-                    annot,
-                    mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
-                    )
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-        except Exception as e:
-            jlib.log('{e=} {jlib.exception_info()=}')
-            return
+        ASSERT_PDF(page)
+        r = JM_rect_from_py(rect)
+        if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
+            THROWMSG("rect must be finite and not empty")
+        if INRANGE(stamp, 0, n-1):
+            name = stamp_id[stamp]
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
+        mupdf.mpdf_set_annot_rect(annot, r)
+        mupdf.mpdf_dict_put(annot.annot_obj(), PDF_NAME('Name'), name)
+        mupdf.mpdf_set_annot_contents(
+                annot,
+                mupdf.mpdf_dict_get_name(annot.annot_obj(), PDF_NAME('Name')),
+                )
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
         return Annot(annot)
 
     def _add_text_annot(self, point, text, icon=None):
         #return _fitz.Page__add_text_annot(self, point, text, icon)
         page = self._pdf_page()
         p = point
-        try:
-            ASSERT_PDF(page)
-            annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
-            r = mupdf.mpdf_annot_rect(annot)
-            r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            flags = mupdf.PDF_ANNOT_IS_PRINT
-            mupdf.mpdf_set_annot_flags(annot, flags)
-            mupdf.mpdf_set_annot_contents(annot, text)
-            if icon:
-                mupdf.mpdf_set_annot_icon_name(annot, icon)
-            JM_add_annot_id(annot, "A")
-            mupdf.mpdf_update_annot(annot)
-            mupdf.mpdf_set_annot_rect(annot, r)
-            mupdf.mpdf_set_annot_flags(annot, flags)
-        except Exception as e:
-            jlib.log('{e=}: {jlib.exception_info()=}')
-            return
+        ASSERT_PDF(page)
+        annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_TEXT)
+        r = mupdf.mpdf_annot_rect(annot)
+        r = mupdf.mfz_make_rect(p.x, p.y, p.x + r.x1 - r.x0, p.y + r.y1 - r.y0)
+        mupdf.mpdf_set_annot_rect(annot, r)
+        flags = mupdf.PDF_ANNOT_IS_PRINT
+        mupdf.mpdf_set_annot_flags(annot, flags)
+        mupdf.mpdf_set_annot_contents(annot, text)
+        if icon:
+            mupdf.mpdf_set_annot_icon_name(annot, icon)
+        JM_add_annot_id(annot, "A")
+        mupdf.mpdf_update_annot(annot)
+        mupdf.mpdf_set_annot_rect(annot, r)
+        mupdf.mpdf_set_annot_flags(annot, flags)
         return Annot(annot)
 
     def _add_text_marker(self, quads, annot_type):
@@ -6353,26 +6330,18 @@ class Page:
         #return _fitz.Page__get_textpage(self, clip, flags, matrix)
         page = self.this
         options = mupdf.StextOptions(flags)
-        #jlib.log('{=clip flags matrix options}')
         rect = JM_rect_from_py(clip)
         ctm = JM_matrix_from_py(matrix)
-        #jlib.log('{=options rect ctm}')
-        #jlib.log('{=rect.x0-(-2147483648.0) rect.y0 rect.x1 rect.y1}')
         tpage = mupdf.StextPage(rect)
         dev = mupdf.mfz_new_stext_device(tpage, options)
-        #jlib.log('{type(page)=}')
         if isinstance(page, mupdf.Page):
             pass
         elif isinstance(page, mupdf.PdfPage):
-            #jlib.log('calling page = page.super()')
             page = page.super()
         else:
             assert 0, f'Unrecognised type(page)={type(page)}'
         mupdf.mfz_run_page(page, dev, ctm, mupdf.Cookie());
         mupdf.mfz_close_device(dev)
-        #jlib.log('{=tpage tpage.m_internal.first_block tpage.m_internal.last_block}')
-        #for b in tpage:
-        #    jlib.log('{b=}')
         return tpage
 
     def _insertFont(self, fontname, bfname, fontfile, fontbuffer, set_simple, idx, wmode, serif, encoding, ordering):
@@ -6382,7 +6351,6 @@ class Page:
         pdf = page.doc()
 
         value = JM_insert_font(pdf, bfname, fontfile,fontbuffer, set_simple, idx, wmode, serif, encoding, ordering)
-        #jlib.log('{value=}')
         # get the objects /Resources, /Resources/Font
         resources = mupdf.mpdf_dict_get_inheritable( page.obj(), PDF_NAME('Resources'))
         fonts = mupdf.mpdf_dict_get(resources, PDF_NAME('Font'))
@@ -6403,38 +6371,16 @@ class Page:
             xref=0, alpha=-1, _imgname=None, digests=None
             ):
 
-        #jlib.log('{=filename pixmap stream imask clip overlay rotate keep_proportion oc width height xref alpha imgname digests}')
-        #return _fitz.Page__insert_image(self, filename, pixmap, stream, imask,
-        #        clip, overlay, rotate, keep_proportion, oc, width, height,
-        #        xref, alpha, _imgname, digests)
-
-        #jlib.log('calling self._pdf_page()')
         page = self._pdf_page()
-        #jlib.log('{=page.m_internal.super.chapter page.m_internal.super.number}')
         # This will create an empty PdfDocument with a call to
         # pdf_new_document() then assign page.doc()'s return value to it (which
         # drop the original empty pdf_document).
-        #jlib.log('calling page.doc() (will make call to pdf_new_document()).')
         pdf = page.doc()
-        #jlib.log('{=mupdf.mpdf_xref_len(pdf)}')
         w = width
         h = height
-        #fz_pixmap *pm = NULL;
-        #fz_pixmap *pix = NULL;
-        #fz_image *mask = NULL, *zimg = NULL, *image = NULL, *freethis = NULL;
-        #pdf_obj *resources, *xobject, *ref;
-        #fz_buffer *nres = NULL,  *imgbuf = NULL, *maskbuf = NULL;
-        #fz_compressed_buffer *cbuf1 = NULL;
-        #int xres, yres, bpc,
         img_xref = xref
         rc_digest = 0
-        #unsigned char digest[16];
-        #PyObject *md5_py = NULL, *temp;
         template = "\nq\n%g %g %g %g %g %g cm\n/%s Do\nQ\n"
-
-        #jlib.log('{=filename pixmap stream imask clip overlay'
-        #        ' rotate keep_proportion oc width height'
-        #        ' xref alpha _imgname digests}')
 
         do_process_pixmap = 1
         do_process_stream = 1
@@ -6442,10 +6388,7 @@ class Page:
         do_have_image = 1
         do_have_xref = 1
 
-        #jlib.log('{xref=}')
-
         if xref > 0:
-            #jlib.log('xref > 0')
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
             w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(ref, PDF_NAME('Width'), PDF_NAME('W')))
             h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta(gctx, ref, PDF_NAME('Height'), PDF_NAME('H')))
@@ -6458,47 +6401,34 @@ class Page:
             do_have_image = 0
 
         else:
-            #jlib.log('{stream=}')
             if stream:
-                #jlib.log('calling JM_BufferFromBytes()')
                 imgbuf = JM_BufferFromBytes(stream)
-                #jlib.log(' ')
                 do_process_pixmap = 0
             else:
-                #jlib.log('{filename=}')
                 if filename:
-                    #jlib.log('calling fz_read_file()')
                     imgbuf = mupdf.mfz_read_file(filename)
-                    #jlib.log('fz_read_file() => {imgbuf=}')
                     #goto have_stream()
                     do_process_pixmap = 0
 
         if do_process_pixmap:
             # process pixmap ---------------------------------
-            #jlib.log('do_process_pixmap {pixmap.this=}')
             arg_pix = pixmap.this
             w = arg_pix.w
             h = arg_pix.h
             digest = mupdf.mfz_md5_pixmap(arg_pix)
             md5_py = digest
             temp = digests.get(md5_py, None)
-            #jlib.log('{temp=}')
             if temp is not None:
                 img_xref = temp
                 ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
-                #jlib.log('pdf_new_indirect() => {ref=}')
                 #goto have_xref()
                 do_process_stream = 0
                 do_have_imask = 0
                 do_have_image = 0
             else:
-                #jlib.log('{arg_pix.alpha()=}')
                 if arg_pix.alpha() == 0:
-                    #jlib.log('calling fz_new_image_from_pixmap')
                     image = mupdf.mfz_new_image_from_pixmap(arg_pix, mupdf.Image(0))
-                    #jlib.log('fz_new_image_from_pixmap() => {image=}')
                 else:
-                    #jlib.log('calling fz_convert_pixmap')
                     pm = mupdf.mfz_convert_pixmap(
                             arg_pix,
                             mupdf.Colorspace(0),
@@ -6511,28 +6441,22 @@ class Page:
                     pm.colorspace = NULL;
                     mask = mupdf.mfz_new_image_from_pixmap(pm, mupdf.Image(0))
                     image = mupdf.mfz_new_image_from_pixmap(arg_pix, mask)
-                #jlib.log(' ')
                 #goto have_image()
                 do_process_stream = 0
                 do_have_imask = 0
 
         if do_process_stream:
             # process stream ---------------------------------
-            #jlib.log('do_process_stream')
             state = mupdf.Md5()
             mupdf.mfz_md5_update(state, imgbuf.m_internal.data, imgbuf.m_internal.len)
             if imask:
-                #jlib.log('calling JM_BufferFromBytes()')
                 maskbuf = JM_BufferFromBytes(imask)
                 fz_md5_update(state, maskbuf.m_internal.data, maskbuf.m_internal.len)
             digest = state.md5_final2()
             md5_py = bytes(digest)
-            #jlib.log('{md5_py=}')
             temp = digests.get(md5_py, None)
-            #jlib.log('{temp=}')
             if temp is not None:
                 img_xref = temp
-                #jlib.log('calling pdf_new_indirect()')
                 ref = mupdf.mpdf_new_indirect(page.doc(), img_xref, 0)
                 w = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Width'), PDF_NAME('W')))
                 h = mupdf.mpdf_to_int( mupdf.mpdf_dict_geta( ref, PDF_NAME('Height'), PDF_NAME('H')))
@@ -6540,40 +6464,31 @@ class Page:
                 do_have_imask = 0
                 do_have_image = 0
             else:
-                #jlib.log('calling fz_new_image_from_buffer()')
                 image = mupdf.mfz_new_image_from_buffer(imgbuf)
-                #jlib.log('fz_new_image_from_buffer() => {image=} {image.w()=} {image.h()=}')
                 w = image.w()
                 h = image.h()
                 if imask:
                     pass
-                    #jlib.log('imask is true; goto have_imask()')
                     #goto have_imask()
                 else:
-                    #jlib.log('{alpha=}')
                     if alpha==0:
-                        #jlib.log(' return have_image()')
                         #goto have_image()
                         do_have_imask = 0
                     else:
-                        #jlib.log('calling fz_get_pixmap_from_image()')
                         pix, w, h = mupdf.mfz_get_pixmap_from_image(
                                 image,
                                 mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
                                 mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
                                 )
                         if not pix.alpha():
-                            #jlib.log(' return have_image()')
                             #goto have_image()
                             do_have_imask = 0
                         else:
-                            #jlib.log('calling fz_get_pixmap_from_image()')
                             pix, _, _ = mupdf.mfz_get_pixmap_from_image(
                                     image,
                                     mupdf.Irect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT),
                                     mupdf.Matrix(image.w(), 0, 0, image.h(), 0, 0),
                                     )
-                            #jlib.log('calling fz_convert_pixmap()')
                             pm = mupdf.mfz_convert_pixmap(
                                     pix,
                                     mupdf.Colorspace(0),
@@ -6591,8 +6506,6 @@ class Page:
                             do_have_imask = 0
 
         if do_have_imask:
-            #jlib.log('do_have_imask')
-            #jlib.log('calling fz_compressed_image_buffer()')
             cbuf1 = mupdf.mfz_compressed_image_buffer(image)
             if not cbuf1.m_internal:
                 THROWMSG("cannot mask uncompressed image")
@@ -6610,65 +6523,43 @@ class Page:
             #goto have_image()
 
         if do_have_image:
-            #jlib.log('do_have_image {image=}')
-            #jlib.log('calling pdf_add_image()')
             ref =  mupdf.mpdf_add_image(pdf, image)
-            #jlib.log(' {oc=}')
             if oc:
                 JM_add_oc_object(pdf, ref, oc)
             img_xref = mupdf.mpdf_to_num(ref)
-            #jlib.log(' {img_xref=} {md5_py=}')
             digests[md5_py] = img_xref
             rc_digest = 1
-            #jlib.log(' return have_xref()')
 
         if do_have_xref:
-            #jlib.log('do_have_xref')
-            #jlib.log('calling pdf_dict_get_inheritabl()')
             resources = mupdf.mpdf_dict_get_inheritable(page.obj(), PDF_NAME('Resources'))
             if not resources.m_internal:
-                #jlib.log('not resources.m_internal calling pdf_dict_put_dict()')
                 resources = mupdf.mpdf_dict_put_dict(page.obj(), PDF_NAME('Resources'), 2)
-            #jlib.log('calling mpdf_dict_get() XObject')
             xobject = mupdf.mpdf_dict_get(resources, PDF_NAME('XObject'))
             if not xobject.m_internal:
-                #jlib.log('not xobject.m_internal calling pdf_dict_put_dict()')
                 xobject = mupdf.mpdf_dict_put_dict(resources, PDF_NAME('XObject'), 2)
-            #jlib.log('calling calc_image_matrix() {=w h clip rotate keep_proportion}')
             mat = calc_image_matrix(w, h, clip, rotate, keep_proportion)
-            #jlib.log('{mat=}')
-            #jlib.log('calling mpdf_dict_puts {=_imgname ref}')
             mupdf.mpdf_dict_puts(xobject, _imgname, ref);
             nres = mupdf.mfz_new_buffer(50)
             #mupdf.mfz_append_printf(nres, template, mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
             # fixme: this does not use fz_append_printf()'s special handling of %g etc.
             s = template % (mat.a, mat.b, mat.c, mat.d, mat.e, mat.f, _imgname)
             #s = s.replace('\n', '\r\n')
-            #jlib.log('calling fz_append_pdf_string() with {=len(s) s!r}')
-            #jlib.log(s)
             mupdf.mfz_append_string(nres, s)
             JM_insert_contents(pdf, page.obj(), nres, overlay)
 
         if rc_digest:
-            #jlib.log('returning ({img_xref=}, {digests})')
             return img_xref, digests
         else:
-            #jlib.log('returning ({img_xref=}, {None})')
             return img_xref, None
-
 
     def _load_annot(self, name, xref):
         #return _fitz.Page__load_annot(self, name, xref)
         page = self._pdf_page()
-        try:
-            ASSERT_PDF(page)
-            if xref == 0:
-                annot = JM_get_annot_by_name(page, name)
-            else:
-                annot = JM_get_annot_by_xref(page, xref)
-        except Exception as e:
-            jlib.log('{e=} {jlib.exception_info()=}')
-            return
+        ASSERT_PDF(page)
+        if xref == 0:
+            annot = JM_get_annot_by_name(page, name)
+        else:
+            annot = JM_get_annot_by_xref(page, xref)
         return Annot(annot) if annot else None
 
     def _makePixmap(self, doc, ctm, cs, alpha=0, annots=1, clip=None):
@@ -6911,18 +6802,14 @@ class Page:
 
     def add_line_annot(self, p1: point_like, p2: point_like) -> "struct Annot *":
         """Add a 'Line' annotation."""
+        old_rotation = annot_preprocess(self)
         try:
-            old_rotation = annot_preprocess(self)
-            try:
-                annot = self._add_line_annot(p1, p2)
-            finally:
-                if old_rotation != 0:
-                    self.set_rotation(old_rotation)
-            annot_postprocess(self, annot)
-            return annot
-        except Exception as e:
-            jlib.log('{jlib.exception_info()}')
-            assert 0
+            annot = self._add_line_annot(p1, p2)
+        finally:
+            if old_rotation != 0:
+                self.set_rotation(old_rotation)
+        annot_postprocess(self, annot)
+        return annot
 
     def add_polygon_annot(self, points: list) -> "struct Annot *":
         """Add a 'Polygon' annotation."""
@@ -7997,16 +7884,13 @@ class Page:
 
         #val = _fitz.Page_first_widget(self)
         annot = None
-        #jlib.log('{self.this=}')
-        page = self._pdf_page()# mupdf.mpdf_page_from_fz_page(self.this)
+        page = self._pdf_page()
         if page.m_internal:
             annot = mupdf.mpdf_first_widget(page)
             if annot.m_internal:
                  mupdf.mpdf_keep_annot(annot)
         val = Annot(annot)
 
-        jlib.log('{val=}')
-        jlib.log('{type(val)=}')
         if val:
             val.thisown = True
             #val.parent = weakref.proxy(self) # owning page object
@@ -8014,8 +7898,6 @@ class Page:
             widget = Widget()
             TOOLS._fill_widget(val, widget)
             val = widget
-
-
         return val
 
     def get_bboxlog(self):
@@ -8025,7 +7907,6 @@ class Page:
             self.set_rotation(0)
         #val = _fitz.Page_get_bboxlog(self)
         page = self.this
-        #fz_device *dev = NULL;
         rc = []
         dev = JM_new_bbox_device( rc)
         mupdf.mfz_run_page( page, dev, mupdf.Matrix(), mupdf.Cookie())
@@ -8167,7 +8048,6 @@ class Page:
 
     def get_image_info(self: Page, hashes: bool = False, xrefs: bool = False) -> list:
         ret = utils.get_image_info(self, hashes, xrefs)
-        jlib.log('@@@ returning: {len(ret)=}: {ret}')
         return ret
 
     def get_images(self, full=False):
@@ -13728,21 +13608,19 @@ def JM_find_annot_irt(annot):
     '''
     assert isinstance(annot, mupdf.PdfAnnot)
     found = 0;
-    try:    # loop thru MuPDF's internal annots array
-        page = annot.annot_page()
-        annotptr = page.first_annot()
-        while 1:
-            assert isinstance(annotptr, mupdf.PdfAnnot)
-            if not annotptr.m_internal:
+    # loop thru MuPDF's internal annots array
+    page = annot.annot_page()
+    annotptr = page.first_annot()
+    while 1:
+        assert isinstance(annotptr, mupdf.PdfAnnot)
+        if not annotptr.m_internal:
+            break
+        o = mupdf.mpdf_dict_gets(annotptr.annot_obj(), 'IRT')
+        if o:
+            if not mupdf.mpdf_objcmp(o, annot.annot_obj()):
+                found = 1
                 break
-            o = mupdf.mpdf_dict_gets(annotptr.annot_obj(), 'IRT')
-            if o:
-                if not mupdf.mpdf_objcmp(o, annot.annot_obj()):
-                    found = 1
-                    break
-            annotptr = annotptr.next_annot()
-    except Exception as e:
-        jlib.log('{e=}')
+        annotptr = annotptr.next_annot()
     return irt_annot if found else None
 
 
@@ -15155,7 +15033,6 @@ def JM_outline_xrefs(obj, xrefs):
     'xrefs' empty Python list
     '''
     if not obj.m_internal:
-        jlib.log('{xrefs=}')
         return xrefs
     thisobj = obj
     while thisobj.m_internal:
@@ -16593,12 +16470,10 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
     if glyphs is not None:
         w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
         ret = w * fontsize
-        jlib.log('{ret=}')
         return ret
 
     if fontname in Base14_fontdict.keys():
         ret = TOOLS._measure_string( text, Base14_fontdict[fontname], fontsize, encoding)
-        jlib.log('{ret=}')
         return ret
 
     if fontname in (
@@ -16612,7 +16487,6 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
             "korea-s",
             ):
         ret = len(text) * fontsize
-        jlib.log('{ret=}')
         return ret
 
     raise ValueError("Font '%s' is unsupported" % fontname)
@@ -18826,9 +18700,7 @@ class TOOLS:
             g = mupdf.mfz_encode_character(font, c)
             dw = mupdf.mfz_advance_glyph(font, g, 0)
             w += dw
-            jlib.log('{=dw w}')
         ret = w * fontsize
-        jlib.log('{=ret}')
         return ret
 
     @staticmethod
