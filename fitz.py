@@ -1414,6 +1414,43 @@ class DisplayList:
 
 class Document:
 
+    def __contains__(self, loc) -> bool:
+        page_count = self.this.count_pages()
+        if type(loc) is int:
+            if loc < self.page_count:
+                return True
+            return False
+        if type(loc) not in (tuple, list) or len(loc) != 2:
+            return False
+
+        chapter, pno = loc
+        if (type(chapter) != int or
+            chapter < 0 or
+            chapter >= self.chapter_count
+            ):
+            return False
+        if (type(pno) != int or
+            pno < 0 or
+            pno >= self.chapter_page_count(chapter)
+            ):
+            return False
+        return True
+
+    '''
+    def __del__(self):
+        if hasattr(self, "_reset_page_refs"):
+            self._reset_page_refs()
+        if hasattr(self, "this") and self.thisown:
+            self.thisown = False
+
+        self.Graftmaps = {}
+        self.ShownPages = {}
+        self.InsertedImages  = {}
+        self.stream = None
+        self._reset_page_refs = DUMMY
+        self.isClosed = True
+    '''
+
     def __delitem__(self, i)->None:
         if not self.is_pdf:
             raise ValueError("not a PDF")
@@ -1437,7 +1474,16 @@ class Document:
             raise ValueError("bad page number(s)")
         return self.delete_pages(range(start, stop, step))
 
+    def __enter__(self):
+        return self
 
+    def __exit__(self, *args):
+        self.close()
+
+    def __getitem__(self, i: int =0):
+        if i not in self:
+            raise IndexError(f"page {i} not in document")
+        return self.loadPage(i)
 
     def __init__(self, filename=None, stream=None, filetype=None, rect=None, width=0, height=0, fontsize=11):
         """Creates a document. Use 'open' as a synonym.
@@ -1555,6 +1601,17 @@ class Document:
             else: # we won't init until doc is decrypted
                 self.initData()
         #jlib.log('__init__() returning. {=mupdf.mpdf_xref_len(pdf)}')
+
+    def __len__(self) -> int:
+        return self.page_count
+
+    def __repr__(self) -> str:
+        m = "closed " if self.isClosed else ""
+        if self.stream is None:
+            if self.name == "":
+                return m + "Document(<new PDF, doc# %i>)" % self._graft_id
+            return m + "Document('%s')" % (self.name,)
+        return m + "Document('%s', <memory, doc# %i>)" % (self.name, self._graft_id)
 
     def _addFormFont(self, name, font):
         """Add new form font."""
@@ -1949,6 +2006,12 @@ class Document:
             item[3] = itemdict
             items[i] = item
 
+    def _forget_page(self, page: "struct Page *"):
+        """Remove a page from document page dict."""
+        pid = id(page)
+        if pid in self._page_refs:
+            self._page_refs[pid] = None
+
     def _get_char_widths(self, xref: int, bfname: str, ext: str, ordering: int, limit: int, idx: int = 0):
         pdf = self._pdf_document()
         mylimit = limit;
@@ -2221,6 +2284,12 @@ class Document:
             mupdf.mpdf_array_push_real( color, 0.8)
         mupdf.mpdf_dict_put( item, PDF_NAME('C'), color)
 
+    def _reset_page_refs(self):
+        """Invalidate all pages in document dictionary."""
+        if self.isClosed:
+            return
+        self._page_refs.clear()
+
     def _set_page_labels(self, labels):
         #val = _fitz.Document__set_page_labels(self, labels)
         #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
@@ -2424,6 +2493,31 @@ class Document:
         doc = JM_convert_to_pdf(fz_doc, fp, tp, rotate)
         return doc
 
+    def copy_page(self, pno: int, to: int =-1):
+        """Copy a page within a PDF document.
+
+        This will only create another reference of the same page object.
+        Args:
+            pno: source page number
+            to: put before this page, '-1' means after last page.
+        """
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        page_count = len(self)
+        if (
+            pno not in range(page_count) or
+            to not in range(-1, page_count)
+           ):
+            raise ValueError("bad page number(s)")
+        before = 1
+        copy = 1
+        if to == -1:
+            to = page_count - 1
+            before = 0
+
+        return self._move_copy_page(pno, to, before, copy)
+
     def del_xml_metadata(self):
         """Delete XML metadata."""
         if self.isClosed or self.isEncrypted:
@@ -2522,6 +2616,63 @@ class Document:
 
         for i in reversed(numbers):  # delete pages, last to first
             self._delete_page(i)
+
+        self._reset_page_refs()
+
+    def deletePage(self, pno: int =-1):
+        """ Delete one page from a PDF.
+        """
+        if not self.isPDF:
+            raise ValueError("not a PDF")
+        if self.isClosed:
+            raise ValueError("document closed")
+
+        pageCount = self.page_count
+        while pno < 0:
+            pno += pageCount
+
+        if not pno in range(pageCount):
+            raise ValueError("bad page number(s)")
+
+        # remove TOC bookmarks pointing to deleted page
+        old_toc = self.getToC()
+        for i, item in enumerate(old_toc):
+            if item[2] == pno + 1:
+                xref = self.outline_xref(i)
+                self._remove_toc_item(xref)
+
+        self._remove_links_to(pno, pno)
+        self._deletePage(pno)
+        self._reset_page_refs()
+
+    def deletePageRange(self, from_page: int =-1, to_page: int =-1):
+        """Delete pages from a PDF.
+        """
+        if not self.isPDF:
+            raise ValueError("not a PDF")
+        if self.isClosed:
+            raise ValueError("document closed")
+
+        pageCount = self.page_count  # page count of document
+        f = from_page  # first page to delete
+        t = to_page  # last page to delete
+        while f < 0:
+            f += pageCount
+        while t < 0:
+            t += pageCount
+        if not f <= t < pageCount:
+            raise ValueError("bad page number(s)")
+
+        old_toc = self.getToC()
+        for i, item in enumerate(old_toc):
+            if f + 1 <= item[2] <= t + 1:
+                xref = self.outline_xref(i)
+                self._remove_toc_item(xref)
+
+        self._remove_links_to(f, t)
+
+        for i in range(t, f - 1, -1):  # delete pages, last to first
+            self._deletePage(i)
 
         self._reset_page_refs()
 
@@ -3191,23 +3342,33 @@ class Document:
             return [v[:-1] for v in val]
         return val
 
-    #def get_page_fonts(self, pno: int, full: bool =False) -> list:
-    #    """Retrieve a list of fonts used on a page.
-    #    """
-    #    if self.isClosed or self.isEncrypted:
-    #        raise ValueError("document closed or encrypted")
-    #    if not self.isPDF:
-    #        return ()
-    #    val = self._getPageInfo(pno, 1)
-    #    if full is False:
-    #        return [v[:-1] for v in val]
-    #    return val
+    def get_page_images(self, pno: int, full: bool =False) -> list:
+        """Retrieve a list of images used on a page.
+        """
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        if not self.isPDF:
+            return ()
+        val = self._getPageInfo(pno, 2)
+        if full is False:
+            return [v[:-1] for v in val]
+        return val
 
     def get_page_labels(doc):
         return utils.get_page_labels(doc)
 
     def get_page_numbers(doc, label, only_one=False):
         return utils.get_page_numbers(doc, label, only_one)
+
+    def get_page_xobjects(self, pno: int) -> list:
+        """Retrieve a list of XObjects used on a page.
+        """
+        if self.isClosed or self.isEncrypted:
+            raise ValueError("document closed or encrypted")
+        if not self.isPDF:
+            return ()
+        val = self._getPageInfo(pno, 3)
+        return val
 
     def get_toc(
             doc,#: Document,
@@ -3231,6 +3392,37 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document_getXmlMetadata(self)
+
+    def has_annots(self):
+        """Check whether there are annotations on any page."""
+        #jlib.log('has_annots()')
+        if self.isClosed:
+            raise ValueError("document closed")
+        if not self.isPDF:
+            raise ValueError("not a PDF")
+        for i in range(self.page_count):
+            for item in self.page_annot_xrefs(i):
+                if not (item[1] == mupdf.PDF_ANNOT_LINK or item[1] == mupdf.PDF_ANNOT_WIDGET):
+                    return True
+        return False
+
+    def has_links(self):
+        """Check whether there are links on any page."""
+        #jlib.log('has_links()')
+        if self.isClosed:
+            raise ValueError("document closed")
+        if not self.isPDF:
+            raise ValueError("not a PDF")
+        #jlib.log('{self.page_count=}')
+        #jlib.log('calling self.page_count')
+        for i in range(self.page_count):
+            #jlib.log('{i=}')
+            for item in self.page_annot_xrefs(i):
+                if item[1] == mupdf.PDF_ANNOT_LINK:
+                    #jlib.log('Returning true')
+                    return True
+        #jlib.log('Returning false')
+        return False
 
     def init_doc(self):
         if self.is_encrypted:
@@ -3372,12 +3564,68 @@ class Document:
         return self.isClosed
 
     @property
+    def is_dirty(self):
+        #jlib.log('{self.this.count_pages()=}')
+        pdf = self.this.specifics()
+        #jlib.log('{pdf.m_internal=}')
+        if not pdf.m_internal:
+            return False
+        r = pdf.has_unsaved_changes()
+        #jlib.log('{r=}')
+        return True if r else False
+
+    @property
     def is_encrypted(self):
         return self.isEncrypted
 
     @property
+    def is_form_pdf(self):
+        """Either False or PDF field count."""
+        #jlib.log('{self.this.count_pages()=}')
+        pdf = self.this.specifics()
+        if not pdf.m_internal:
+            return False
+        #jlib.log('{self.this.count_pages()=}')
+        count = -1;
+        try:
+            #jlib.log('{self.this.count_pages()=}')
+            fields = mupdf.mpdf_dict_getl(
+                    pdf.trailer(),
+                    mupdf.PDF_ENUM_NAME_Root,
+                    mupdf.PDF_ENUM_NAME_AcroForm,
+                    mupdf.PDF_ENUM_NAME_Fields,
+                    )
+            #jlib.log('{fields=} {fields.is_array()=} {self.this.count_pages()=}')
+            if fields.is_array():
+                count = fields.array_len()
+            #jlib.log('{self.this.count_pages()=}')
+        except Exception:
+            return False
+        #jlib.log('{count=}')
+        #jlib.log('{self.this.count_pages()=}')
+        if count >= 0:
+            return count
+        return False
+
+    @property
     def is_pdf(self):
         return self.isPDF
+
+    @property
+    def is_repaired(self):
+        """Check whether PDF was repaired."""
+        #jlib.log('{self.this.count_pages()=}')
+        #jlib.log('*** calling self.this.document_from_fz_document()')
+        pdf = self.this.document_from_fz_document()
+        if not pdf.m_internal:
+            return False
+        r = pdf.was_repaired()
+        #jlib.log('{r=}')
+        if r:
+            #jlib.log('returning true')
+            return True
+        #jlib.log('returning false')
+        return False
 
     @property
     def isDirty(self):
@@ -3604,6 +3852,30 @@ class Document:
 
         return self._move_copy_page(pno, to, before, copy)
 
+    def movePage(self, pno: int, to: int =-1):
+        """Move a page within a PDF document.
+
+        Args:
+            pno: source page number.
+            to: put before this page, '-1' means after last page.
+        """
+        if self.isClosed:
+            raise ValueError("document closed")
+
+        pageCount = len(self)
+        if (
+            pno not in range(pageCount) or
+            to not in range(-1, pageCount)
+           ):
+            raise ValueError("bad page number(s)")
+        before = 1
+        copy = 0
+        if to == -1:
+            to = pageCount - 1
+            before = 0
+
+        return self._move_copy_page(pno, to, before, copy)
+
     def need_appearances(self, value=None):
         """Get/set the NeedAppearances value."""
         if self.isClosed:
@@ -3697,6 +3969,34 @@ class Document:
     #        raise ValueError("document closed")
     #    return _fitz.Document_get_oc(self, xref)
 
+    def page_annot_xrefs(self, n):
+        page_count = self.this.count_pages()
+        #jlib.log('*** {page_count=}')
+        while n < 0:
+            n += page_count
+        #jlib.log('self.this is: {self.this}')
+        #jlib.log('{self.this.m_internal=}')
+        if 0:
+            #jlib.log('dir(self.this):')
+            for i in dir(self.this):
+                pass
+                #jlib.log('    {i}')
+        #jlib.log('self.this.specifics is: {self.this.specifics}')
+        if isinstance(self.this, mupdf.PdfDocument):
+            #jlib.log('self.this is a mupdf.PdfDocument')
+            pdf_document = self.this
+        else:
+            #jlib.log('self.this is not a mupdf.PdfDocument: {self.this}')
+            #jlib.log('{self.this.m_internal=}')
+            pdf_document = self.this.specifics()
+            #jlib.log('self.this.specifics() => {pdf_document=}')
+        page_obj = pdf_document.lookup_page_obj(n)
+        #jlib.log('page_obj: {dir_str(page_obj)}')
+        #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
+        annots = JM_get_annot_xref_list(page_obj)
+        #jlib.log('{self.this.count_pages()=} {self.page_count=}')
+        return annots
+
     @property
     def page_count(self):
         """Number of pages."""
@@ -3773,6 +4073,33 @@ class Document:
         val = Rect(val)
         return val
 
+    def pages(self, start: OptInt =None, stop: OptInt =None, step: OptInt =None) -> "struct Page *":
+        """Return a generator iterator over a page range.
+
+        Arguments have the same meaning as for the range() built-in.
+        """
+        # set the start value
+        start = start or 0
+        while start < 0:
+            start += self.page_count
+        if start not in range(self.page_count):
+            raise ValueError("bad start page number")
+
+        # set the stop value
+        stop = stop if stop is not None and stop <= self.page_count else self.page_count
+
+        # set the step value
+        if step == 0:
+            raise ValueError("arg 3 must not be zero")
+        if step is None:
+            if start > stop:
+                step = -1
+            else:
+                step = 1
+
+        for pno in range(start, stop, step):
+            yield (self.loadPage(pno))
+
     def pdf_catalog(self):
         """Get xref of PDF catalog."""
         if self.isClosed:
@@ -3836,6 +4163,24 @@ class Document:
         loc = mupdf.mfz_make_location(chapter, pno);
         prev_loc = mupdf.mfz_previous_page(self.this, loc)
         return prev_loc.chapter, prev_loc.page
+
+    def reload_page(self, page: "struct Page *") -> "struct Page *":
+        """Make a fresh copy of a page."""
+        old_annots = {}  # copy annot references to here
+        pno = page.number  # save the page number
+        for k, v in page._annot_refs.items():  # save the annot dictionary
+            old_annots[k] = v
+        page._erase()  # remove the page
+        page = None
+        page = self.loadPage(pno)  # reload the page
+
+        # copy annot refs over to the new dictionary
+        page_proxy = weakref.proxy(page)
+        for k, v in old_annots.items():
+            annot = old_annots[k]
+            #annot.parent = page_proxy  # refresh parent to new page
+            page._annot_refs[k] = annot
+        return page
 
     def resolveLink(self, uri=None, chapters=0):
         """Calculate internal link destination.
@@ -3947,6 +4292,10 @@ class Document:
         else:
             out = JM_new_output_fileptr(filename)
             mupdf.mpdf_write_document(pdf, out, opts)
+
+    def saveIncr(self):
+        """ Save PDF incrementally"""
+        return self.save(self.name, incremental=True, encryption=PDF_ENCRYPT_KEEP)
 
     def select(self, pyliste):
         """Build sub-pdf with page numbers in the list."""
@@ -4591,159 +4940,9 @@ class Document:
 
     getPageFontList = get_page_fonts
 
-    def get_page_images(self, pno: int, full: bool =False) -> list:
-        """Retrieve a list of images used on a page.
-        """
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        if not self.isPDF:
-            return ()
-        val = self._getPageInfo(pno, 2)
-        if full is False:
-            return [v[:-1] for v in val]
-        return val
-
     getPageImageList = get_page_images
 
-    def get_page_xobjects(self, pno: int) -> list:
-        """Retrieve a list of XObjects used on a page.
-        """
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        if not self.isPDF:
-            return ()
-        val = self._getPageInfo(pno, 3)
-        return val
-
     getPageXObjectList = get_page_xobjects
-
-    def copy_page(self, pno: int, to: int =-1):
-        """Copy a page within a PDF document.
-
-        This will only create another reference of the same page object.
-        Args:
-            pno: source page number
-            to: put before this page, '-1' means after last page.
-        """
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        page_count = len(self)
-        if (
-            pno not in range(page_count) or
-            to not in range(-1, page_count)
-           ):
-            raise ValueError("bad page number(s)")
-        before = 1
-        copy = 1
-        if to == -1:
-            to = page_count - 1
-            before = 0
-
-        return self._move_copy_page(pno, to, before, copy)
-
-    def movePage(self, pno: int, to: int =-1):
-        """Move a page within a PDF document.
-
-        Args:
-            pno: source page number.
-            to: put before this page, '-1' means after last page.
-        """
-        if self.isClosed:
-            raise ValueError("document closed")
-
-        pageCount = len(self)
-        if (
-            pno not in range(pageCount) or
-            to not in range(-1, pageCount)
-           ):
-            raise ValueError("bad page number(s)")
-        before = 1
-        copy = 0
-        if to == -1:
-            to = pageCount - 1
-            before = 0
-
-        return self._move_copy_page(pno, to, before, copy)
-
-    def deletePage(self, pno: int =-1):
-        """ Delete one page from a PDF.
-        """
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        if self.isClosed:
-            raise ValueError("document closed")
-
-        pageCount = self.page_count
-        while pno < 0:
-            pno += pageCount
-
-        if not pno in range(pageCount):
-            raise ValueError("bad page number(s)")
-
-        # remove TOC bookmarks pointing to deleted page
-        old_toc = self.getToC()
-        for i, item in enumerate(old_toc):
-            if item[2] == pno + 1:
-                xref = self.outline_xref(i)
-                self._remove_toc_item(xref)
-
-        self._remove_links_to(pno, pno)
-        self._deletePage(pno)
-        self._reset_page_refs()
-
-    def deletePageRange(self, from_page: int =-1, to_page: int =-1):
-        """Delete pages from a PDF.
-        """
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        if self.isClosed:
-            raise ValueError("document closed")
-
-        pageCount = self.page_count  # page count of document
-        f = from_page  # first page to delete
-        t = to_page  # last page to delete
-        while f < 0:
-            f += pageCount
-        while t < 0:
-            t += pageCount
-        if not f <= t < pageCount:
-            raise ValueError("bad page number(s)")
-
-        old_toc = self.getToC()
-        for i, item in enumerate(old_toc):
-            if f + 1 <= item[2] <= t + 1:
-                xref = self.outline_xref(i)
-                self._remove_toc_item(xref)
-
-        self._remove_links_to(f, t)
-
-        for i in range(t, f - 1, -1):  # delete pages, last to first
-            self._deletePage(i)
-
-        self._reset_page_refs()
-
-    def saveIncr(self):
-        """ Save PDF incrementally"""
-        return self.save(self.name, incremental=True, encryption=PDF_ENCRYPT_KEEP)
-
-    def reload_page(self, page: "struct Page *") -> "struct Page *":
-        """Make a fresh copy of a page."""
-        old_annots = {}  # copy annot references to here
-        pno = page.number  # save the page number
-        for k, v in page._annot_refs.items():  # save the annot dictionary
-            old_annots[k] = v
-        page._erase()  # remove the page
-        page = None
-        page = self.loadPage(pno)  # reload the page
-
-        # copy annot refs over to the new dictionary
-        page_proxy = weakref.proxy(page)
-        for k, v in old_annots.items():
-            annot = old_annots[k]
-            #annot.parent = page_proxy  # refresh parent to new page
-            page._annot_refs[k] = annot
-        return page
 
     updateObject = update_object
     updateStream = update_stream
@@ -4754,218 +4953,6 @@ class Document:
     PDFTrailer = pdf_trailer
     PDFCatalog = pdf_catalog
     metadataXML = xref_xml_metadata
-
-    def __repr__(self) -> str:
-        m = "closed " if self.isClosed else ""
-        if self.stream is None:
-            if self.name == "":
-                return m + "Document(<new PDF, doc# %i>)" % self._graft_id
-            return m + "Document('%s')" % (self.name,)
-        return m + "Document('%s', <memory, doc# %i>)" % (self.name, self._graft_id)
-
-    def __contains__(self, loc) -> bool:
-        page_count = self.this.count_pages()
-        if type(loc) is int:
-            if loc < self.page_count:
-                return True
-            return False
-        if type(loc) not in (tuple, list) or len(loc) != 2:
-            return False
-
-        chapter, pno = loc
-        if (type(chapter) != int or
-            chapter < 0 or
-            chapter >= self.chapter_count
-            ):
-            return False
-        if (type(pno) != int or
-            pno < 0 or
-            pno >= self.chapter_page_count(chapter)
-            ):
-            return False
-        return True
-
-    def __getitem__(self, i: int =0):
-        if i not in self:
-            raise IndexError(f"page {i} not in document")
-        return self.loadPage(i)
-
-    def pages(self, start: OptInt =None, stop: OptInt =None, step: OptInt =None) -> "struct Page *":
-        """Return a generator iterator over a page range.
-
-        Arguments have the same meaning as for the range() built-in.
-        """
-        # set the start value
-        start = start or 0
-        while start < 0:
-            start += self.page_count
-        if start not in range(self.page_count):
-            raise ValueError("bad start page number")
-
-        # set the stop value
-        stop = stop if stop is not None and stop <= self.page_count else self.page_count
-
-        # set the step value
-        if step == 0:
-            raise ValueError("arg 3 must not be zero")
-        if step is None:
-            if start > stop:
-                step = -1
-            else:
-                step = 1
-
-        for pno in range(start, stop, step):
-            yield (self.loadPage(pno))
-
-    def __len__(self) -> int:
-        return self.page_count
-
-    def _forget_page(self, page: "struct Page *"):
-        """Remove a page from document page dict."""
-        pid = id(page)
-        if pid in self._page_refs:
-            self._page_refs[pid] = None
-
-    def _reset_page_refs(self):
-        """Invalidate all pages in document dictionary."""
-        if self.isClosed:
-            return
-        self._page_refs.clear()
-
-    '''
-    def __del__(self):
-        if hasattr(self, "_reset_page_refs"):
-            self._reset_page_refs()
-        if hasattr(self, "this") and self.thisown:
-            self.thisown = False
-
-        self.Graftmaps = {}
-        self.ShownPages = {}
-        self.InsertedImages  = {}
-        self.stream = None
-        self._reset_page_refs = DUMMY
-        self.isClosed = True
-    '''
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        self.close()
-
-    def page_annot_xrefs(self, n):
-        page_count = self.this.count_pages()
-        #jlib.log('*** {page_count=}')
-        while n < 0:
-            n += page_count
-        #jlib.log('self.this is: {self.this}')
-        #jlib.log('{self.this.m_internal=}')
-        if 0:
-            #jlib.log('dir(self.this):')
-            for i in dir(self.this):
-                pass
-                #jlib.log('    {i}')
-        #jlib.log('self.this.specifics is: {self.this.specifics}')
-        if isinstance(self.this, mupdf.PdfDocument):
-            #jlib.log('self.this is a mupdf.PdfDocument')
-            pdf_document = self.this
-        else:
-            #jlib.log('self.this is not a mupdf.PdfDocument: {self.this}')
-            #jlib.log('{self.this.m_internal=}')
-            pdf_document = self.this.specifics()
-            #jlib.log('self.this.specifics() => {pdf_document=}')
-        page_obj = pdf_document.lookup_page_obj(n)
-        #jlib.log('page_obj: {dir_str(page_obj)}')
-        #jlib.log('page_obj.m_internal: {dir_str(page_obj.m_internal)}')
-        annots = JM_get_annot_xref_list(page_obj)
-        #jlib.log('{self.this.count_pages()=} {self.page_count=}')
-        return annots
-
-    def has_links(self):
-        """Check whether there are links on any page."""
-        #jlib.log('has_links()')
-        if self.isClosed:
-            raise ValueError("document closed")
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        #jlib.log('{self.page_count=}')
-        #jlib.log('calling self.page_count')
-        for i in range(self.page_count):
-            #jlib.log('{i=}')
-            for item in self.page_annot_xrefs(i):
-                if item[1] == mupdf.PDF_ANNOT_LINK:
-                    #jlib.log('Returning true')
-                    return True
-        #jlib.log('Returning false')
-        return False
-
-    def has_annots(self):
-        """Check whether there are annotations on any page."""
-        #jlib.log('has_annots()')
-        if self.isClosed:
-            raise ValueError("document closed")
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        for i in range(self.page_count):
-            for item in self.page_annot_xrefs(i):
-                if not (item[1] == mupdf.PDF_ANNOT_LINK or item[1] == mupdf.PDF_ANNOT_WIDGET):
-                    return True
-        return False
-
-    @property
-    def is_form_pdf(self):
-        """Either False or PDF field count."""
-        #jlib.log('{self.this.count_pages()=}')
-        pdf = self.this.specifics()
-        if not pdf.m_internal:
-            return False
-        #jlib.log('{self.this.count_pages()=}')
-        count = -1;
-        try:
-            #jlib.log('{self.this.count_pages()=}')
-            fields = mupdf.mpdf_dict_getl(
-                    pdf.trailer(),
-                    mupdf.PDF_ENUM_NAME_Root,
-                    mupdf.PDF_ENUM_NAME_AcroForm,
-                    mupdf.PDF_ENUM_NAME_Fields,
-                    )
-            #jlib.log('{fields=} {fields.is_array()=} {self.this.count_pages()=}')
-            if fields.is_array():
-                count = fields.array_len()
-            #jlib.log('{self.this.count_pages()=}')
-        except Exception:
-            return False
-        #jlib.log('{count=}')
-        #jlib.log('{self.this.count_pages()=}')
-        if count >= 0:
-            return count
-        return False
-
-    @property
-    def is_repaired(self):
-        """Check whether PDF was repaired."""
-        #jlib.log('{self.this.count_pages()=}')
-        #jlib.log('*** calling self.this.document_from_fz_document()')
-        pdf = self.this.document_from_fz_document()
-        if not pdf.m_internal:
-            return False
-        r = pdf.was_repaired()
-        #jlib.log('{r=}')
-        if r:
-            #jlib.log('returning true')
-            return True
-        #jlib.log('returning false')
-        return False
-
-    @property
-    def is_dirty(self):
-        #jlib.log('{self.this.count_pages()=}')
-        pdf = self.this.specifics()
-        #jlib.log('{pdf.m_internal=}')
-        if not pdf.m_internal:
-            return False
-        r = pdf.has_unsaved_changes()
-        #jlib.log('{r=}')
-        return True if r else False
 
 open = Document
 
