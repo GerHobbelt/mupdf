@@ -9629,6 +9629,7 @@ class Pixmap:
 
         return _fitz.Pixmap_shrink(self, factor)
 
+    @property
     def size(self):
         """Pixmap size."""
         return _fitz.Pixmap_size(self)
@@ -12009,13 +12010,22 @@ class IRect(Rect):
 # Data
 #
 
-if 1:   # Import some mupdf constants
+if 1:
+    # Import some mupdf constants
+    # These don't appear to be in native fitz module?
     self = sys.modules[__name__]
     for name, value in inspect.getmembers(mupdf):
-        if name.startswith('PDF_'):
-            assert not inspect.isroutine(value)
-            setattr(self, name, value)
+        if name.startswith(('PDF_', 'UCDN_SCRIPT_')):
+            if name.startswith('PDF_ENUM_NAME_'):
+                # Not a simple enum.
+                pass
+            else:
+                assert not inspect.isroutine(value)
+                print(f'importing {name}')
+                setattr(self, name, value)
+    assert mupdf.UCDN_EAST_ASIAN_H == 1
     assert PDF_TX_FIELD_IS_MULTILINE == mupdf.PDF_TX_FIELD_IS_MULTILINE
+    assert UCDN_SCRIPT_ADLAM == mupdf.UCDN_SCRIPT_ADLAM
     del self
 
 _adobe_glyphs = {}
@@ -12138,6 +12148,39 @@ TEXT_ENCODING_CYRILLIC = 2
 
 TOOLS_JM_UNIQUE_ID = 0
 
+# colorspace identifiers
+CS_RGB =  1
+CS_GRAY = 2
+CS_CMYK = 3
+
+# PDF Blend Modes
+PDF_BM_Color = "Color"
+PDF_BM_ColorBurn = "ColorBurn"
+PDF_BM_ColorDodge = "ColorDodge"
+PDF_BM_Darken = "Darken"
+PDF_BM_Difference = "Difference"
+PDF_BM_Exclusion = "Exclusion"
+PDF_BM_HardLight = "HardLight"
+PDF_BM_Hue = "Hue"
+PDF_BM_Lighten = "Lighten"
+PDF_BM_Luminosity = "Luminosity"
+PDF_BM_Multiply = "Multiply"
+PDF_BM_Normal = "Normal"
+PDF_BM_Overlay = "Overlay"
+PDF_BM_Saturation = "Saturation"
+PDF_BM_Screen = "Screen"
+PDF_BM_SoftLight = "Softlight"
+
+
+# General text flags
+TEXT_FONT_SUPERSCRIPT = 1
+TEXT_FONT_ITALIC = 2
+TEXT_FONT_SERIFED = 4
+TEXT_FONT_MONOSPACED = 8
+TEXT_FONT_BOLD = 16
+
+
+
 annot_skel = {
     "goto1": "<</A<</S/GoTo/D[%i 0 R/XYZ %g %g %g]>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
     "goto2": "<</A<</S/GoTo/D%s>>/Rect[%s]/BS<</W 0>>/Subtype/Link>>",
@@ -12152,6 +12195,9 @@ csRGB = Colorspace(CS_RGB)
 csGRAY = Colorspace(CS_GRAY)
 csCMYK = Colorspace(CS_CMYK)
 
+# These don't appear to be visible in native fitz module, but are used
+# internally.
+#
 dictkey_align = "align"
 dictkey_align = "ascender"
 dictkey_bbox = "bbox"
@@ -16676,58 +16722,60 @@ def planish_line(p1: point_like, p2: point_like) -> Matrix:
     return Matrix(TOOLS._hor_matrix(p1, p2))
 
 
+def paper_sizes():
+    """Known paper formats @ 72 dpi as a dictionary. Key is the format string
+    like "a4" for ISO-A4. Value is the tuple (width, height).
 
-
-    # Information taken from the following web sites:
-    # www.din-formate.de
-    # www.din-formate.info/amerikanische-formate.html
-    # www.directtools.de/wissen/normen/iso.htm
-
-paperSizes = {  # known paper formats @ 72 dpi
-    "a0": (2384, 3370),
-    "a1": (1684, 2384),
-    "a10": (74, 105),
-    "a2": (1191, 1684),
-    "a3": (842, 1191),
-    "a4": (595, 842),
-    "a5": (420, 595),
-    "a6": (298, 420),
-    "a7": (210, 298),
-    "a8": (147, 210),
-    "a9": (105, 147),
-    "b0": (2835, 4008),
-    "b1": (2004, 2835),
-    "b10": (88, 125),
-    "b2": (1417, 2004),
-    "b3": (1001, 1417),
-    "b4": (709, 1001),
-    "b5": (499, 709),
-    "b6": (354, 499),
-    "b7": (249, 354),
-    "b8": (176, 249),
-    "b9": (125, 176),
-    "c0": (2599, 3677),
-    "c1": (1837, 2599),
-    "c10": (79, 113),
-    "c2": (1298, 1837),
-    "c3": (918, 1298),
-    "c4": (649, 918),
-    "c5": (459, 649),
-    "c6": (323, 459),
-    "c7": (230, 323),
-    "c8": (162, 230),
-    "c9": (113, 162),
-    "card-4x6": (288, 432),
-    "card-5x7": (360, 504),
-    "commercial": (297, 684),
-    "executive": (522, 756),
-    "invoice": (396, 612),
-    "ledger": (792, 1224),
-    "legal": (612, 1008),
-    "legal-13": (612, 936),
-    "letter": (612, 792),
-    "monarch": (279, 540),
-    "tabloid-extra": (864, 1296),
+    Information taken from the following web sites:
+    www.din-formate.de
+    www.din-formate.info/amerikanische-formate.html
+    www.directtools.de/wissen/normen/iso.htm
+    """
+    return {
+        "a0": (2384, 3370),
+        "a1": (1684, 2384),
+        "a10": (74, 105),
+        "a2": (1191, 1684),
+        "a3": (842, 1191),
+        "a4": (595, 842),
+        "a5": (420, 595),
+        "a6": (298, 420),
+        "a7": (210, 298),
+        "a8": (147, 210),
+        "a9": (105, 147),
+        "b0": (2835, 4008),
+        "b1": (2004, 2835),
+        "b10": (88, 125),
+        "b2": (1417, 2004),
+        "b3": (1001, 1417),
+        "b4": (709, 1001),
+        "b5": (499, 709),
+        "b6": (354, 499),
+        "b7": (249, 354),
+        "b8": (176, 249),
+        "b9": (125, 176),
+        "c0": (2599, 3677),
+        "c1": (1837, 2599),
+        "c10": (79, 113),
+        "c2": (1298, 1837),
+        "c3": (918, 1298),
+        "c4": (649, 918),
+        "c5": (459, 649),
+        "c6": (323, 459),
+        "c7": (230, 323),
+        "c8": (162, 230),
+        "c9": (113, 162),
+        "card-4x6": (288, 432),
+        "card-5x7": (360, 504),
+        "commercial": (297, 684),
+        "executive": (522, 756),
+        "invoice": (396, 612),
+        "ledger": (792, 1224),
+        "legal": (612, 1008),
+        "legal-13": (612, 936),
+        "letter": (612, 792),
+        "monarch": (279, 540),
+        "tabloid-extra": (864, 1296),
     }
 
 
