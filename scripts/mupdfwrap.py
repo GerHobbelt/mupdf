@@ -732,8 +732,8 @@ Usage:
                 * Creates a Python virtual environment.
                 * Activates the Python environment.
                 * Runs setup.py install.
-                    * Builds C, C++ and Python librariess in build/shared-release-extract.
-                    * Copies build/shared-release-extract/*.so into virtual envionment.
+                    * Builds C, C++ and Python librariess in build/shared-release.
+                    * Copies build/shared-release/*.so into virtual envionment.
                 * Runs scripts/mupdfwrap_test.py.
                     * Imports mupdf and checks basic functionality.
                 * Deactivates the Python environment.
@@ -3093,6 +3093,7 @@ omit_methods = [
         'fz_encode_character_with_fallback',    # Has 'fz_font **out_font' arg.
         'fz_new_draw_device_with_options',      # Has 'fz_pixmap **pixmap' arg.
         ]
+
 def get_value( item, name):
     '''
     Enhanced wrapper for getattr().
@@ -8661,7 +8662,7 @@ class BuildDirs:
             #
             self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-{cpu_name()}-py{python_version()}')
         else:
-            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-extract')
+            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
 
     def set_dir_so( self, dir_so):
         '''
