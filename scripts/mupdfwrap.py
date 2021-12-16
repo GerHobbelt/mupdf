@@ -8180,6 +8180,8 @@ def build_swig(
     common += translate_ucdn_macros()
 
     text = ''
+    text += '%module(directors="1") mupdf\n'
+    text += '%feature("director") Device2;\n'
 
     for fnname in generated.c_functions:
         if fnname in ('pdf_annot_type', 'pdf_widget_type'):
