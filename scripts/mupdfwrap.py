@@ -6583,13 +6583,13 @@ def class_wrapper_virtual_fnptrs(
         cursor:
             Cursor for pointer to fn.
         fnptr_type:
-            Cursor for fn.
+            Type of fn.
         '''
         for cursor in struct_cursor.type.get_canonical().get_fields():
             if cursor.type.kind == clang.cindex.TypeKind.POINTER:
                 pointee = cursor.type.get_pointee().get_canonical()
                 if pointee.kind == clang.cindex.TypeKind.FUNCTIONPROTO:
-                    yield cursor, pointee.get_canonical()
+                    yield cursor, pointee #.get_canonical()
 
     # Constructor
     #
@@ -6602,9 +6602,6 @@ def class_wrapper_virtual_fnptrs(
     alloc = [''] + alloc.split('\n')
     alloc = '\n    '.join(alloc)
     out_cpp.write(f'{alloc}\n')
-    #for cursor, pointee in get_fnptrs():
-    #    jlib.log('{pointee=}')
-    #    out_cpp.write(f'm_internal->{cursor.spelling} = s_{cursor.spelling};\n')
     out_cpp.write( '}\n')
 
     def write(text):
@@ -6650,7 +6647,7 @@ def class_wrapper_virtual_fnptrs(
                 # Ignore first two args - (fz_context, {structname}*).
                 continue
             name = f'arg_{i}'
-            write( f'{sep}{name}')
+            out_cpp.write( f'{sep}{name}')
             sep = ', '
         out_cpp.write(');\n')
         out_cpp.write('    }\n')
@@ -6664,13 +6661,17 @@ def class_wrapper_virtual_fnptrs(
 
         # Write virtual fn default implementation.
         #
+        out_h.write(f'    /* Default implementation throws an exception. */\n')
         out_h.write(f'    virtual {fnptr_type.get_result().spelling} {cursor.spelling}(')
         out_cpp.write(f'/* Default implementation of virtual method. */\n')
         out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::{cursor.spelling}(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
+            if i < 2:
+                # Ignore first two args - (fz_context, {structname}*).
+                continue
             name = f'arg_{i}'
-            out_cpp.write(f'{sep}')
+            write(f'{sep}')
             write(declaration_text(arg_type, name))
             sep = ', '
         out_h.write( ');\n')
