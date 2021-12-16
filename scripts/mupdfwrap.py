@@ -1106,7 +1106,7 @@ class ExtraConstructor:
 
 class ClassExtra:
     '''
-    Information about extra methods to be added to an auto-generated class.
+    Information about extra methods/features used when wrapping a MuPDF struct.
     '''
     def __init__( self,
             accessors=None,
@@ -1127,6 +1127,7 @@ class ClassExtra:
             method_wrappers_static=None,
             opaque=False,
             pod=False,
+            virtual_fnptrs=False,
             ):
         '''
         accessors:
@@ -1251,6 +1252,25 @@ class ClassExtra:
             If True, underlying class is POD and m_internal is an instance of
             the underlying class instead of a pointer to it.
 
+        virtual_fnptrs:
+            If true, should be (self, alloc) where <self> is an expression that converts arg2 into <this> and
+            <alloc> is code that sets m_internal.
+
+            For example:
+                ...
+
+            We generate a second wrapper class derived from the main
+            wrapper class which has an empty virtual method for each function
+            pointer in the underlying struct.
+
+            A default constructor is provided which calls
+            fz_new_device_of_size() and sets things up so that each function
+            pointer calls its corresponding virtual method.
+
+            We enable SWIG's 'Director' support for the second wrapper class,
+            so if a second wrapper class instance is constructed in Python/C#,
+            then calling its function pointers in C/C++ will end up running
+            Python/C# code.
         '''
         if accessors is None and pod is True:
             accessors = True
@@ -1272,6 +1292,7 @@ class ClassExtra:
         self.method_wrappers_static = method_wrappers_static or []
         self.opaque = opaque
         self.pod = pod
+        self.virtual_fnptrs = virtual_fnptrs
 
         assert self.pod in (False, True, 'inline', 'none'), f'{self.pod}'
 
@@ -1289,6 +1310,8 @@ class ClassExtra:
         for i in self.constructors_extra:
             assert isinstance( i, ExtraConstructor)
 
+        if virtual_fnptrs:
+            assert isinstance(virtual_fnptrs, tuple) and len(virtual_fnptrs) == 2, f'virtual_fnptrs={virtual_fnptrs!r}'
 
 class ClassExtras:
     '''
@@ -1507,6 +1530,12 @@ classextras = ClassExtras(
                 ),
 
         fz_device = ClassExtra(
+                virtual_fnptrs = (
+                        '(*(Device2**) (dev + 1))',
+                        'm_internal = fz_new_device_of_size(sizeof(*m_internal) + sizeof(Device2*));\n'
+                            + '*((Device2**) (dev + 1)) = this;\n'
+                            ,
+                        ),
                 constructor_raw = True,
                 method_wrappers_static = [
                         ],
@@ -6520,6 +6549,137 @@ def class_write_function(
     '''
     pass
 
+def class_wrapper_virtual_fnptrs(
+        tu,
+        struct_cursor,
+        struct_name,
+        classname,
+        extras,
+        out_h,
+        out_cpp,
+        out_h_end,
+        out_cpp2,
+        out_h2,
+        generated,
+        ):
+    if not extras.virtual_fnptrs:
+        return
+
+    self_, alloc = extras.virtual_fnptrs
+    # Class definition beginning.
+    #
+    out_h.write( '\n')
+    out_h.write( f'/* Wrapper class for struct {struct_name} with virtual fns for each fnptr. */\n')
+    out_h.write( f'struct {classname}2 : {classname}\n')
+    out_h.write(  '{\n')
+
+    out_cpp.write( '\n')
+    out_cpp.write( f'/* Implementation of methods for virtual_fnptrs {classname}2 (wrapper for {struct_name}). */\n')
+    out_cpp.write( '\n')
+
+    def get_fnptrs():
+        '''
+        Yields (cursor, fnptr_type).
+        cursor:
+            Cursor for pointer to fn.
+        fnptr_type:
+            Cursor for fn.
+        '''
+        for cursor in struct_cursor.type.get_canonical().get_fields():
+            if cursor.type.kind == clang.cindex.TypeKind.POINTER:
+                pointee = cursor.type.get_pointee().get_canonical()
+                if pointee.kind == clang.cindex.TypeKind.FUNCTIONPROTO:
+                    yield cursor, pointee.get_canonical()
+
+    # Constructor
+    #
+    out_h.write( '\n')
+    out_h.write( '    /* == Constructor. */\n')
+    out_h.write(f'    {classname}2();\n')
+    out_cpp.write('\n')
+    out_cpp.write(f'{classname}2::{classname}2()\n')
+    out_cpp.write( '{\n')
+    alloc = [''] + alloc.split('\n')
+    alloc = '\n    '.join(alloc)
+    out_cpp.write(f'{alloc}\n')
+    #for cursor, pointee in get_fnptrs():
+    #    jlib.log('{pointee=}')
+    #    out_cpp.write(f'm_internal->{cursor.spelling} = s_{cursor.spelling};\n')
+    out_cpp.write( '}\n')
+
+    def write(text):
+        out_h.write(text)
+        out_cpp.write(text)
+
+    # Define use_virtual_<name>( bool use) method for each fnptr.
+    #
+    for cursor, fnptr_type in get_fnptrs():
+        out_h.write(f'    void use_virtual_{cursor.spelling}( bool use);\n')
+        out_cpp.write(f'void {classname}2::use_virtual_{cursor.spelling}( bool use)\n')
+        out_cpp.write( '{\n')
+        out_cpp.write(f'    m_internal->{cursor.spelling} = (use) ? s_{cursor.spelling} : nullptr;\n')
+        out_cpp.write( '}\n')
+
+    # Define static callback for each fnptr.
+    #
+    for cursor, fnptr_type in get_fnptrs():
+
+        # Write static callback.
+        #
+        out_h.write(f'    /* Calls self->{cursor.spelling}(). */\n')
+        out_h.write(f'    static {cursor.result_type.spelling} s_{cursor.spelling}')
+        out_cpp.write(f'/* Static callback, calls self->{cursor.spelling}(). */\n')
+        #out_cpp.write(f'fnptr_cursor.kind={fnptr_cursor.kind}\n')
+        out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::s_{cursor.spelling}')
+        write('(')
+        sep = ''
+        #for arg in get_args( tu, fnptr_cursor, include_fz_context=True):
+        for i, arg_type in enumerate( fnptr_type.argument_types()):
+            name = f'arg_{i}'
+            write(sep)
+            write( declaration_text( arg_type, name))
+            sep = ', '
+        write(')')
+        out_h.write(';\n')
+        out_cpp.write('\n')
+        out_cpp.write('{\n')
+        out_cpp.write(f'    {classname}2* self = {self_};\n')
+        out_cpp.write( '    {\n')
+        out_cpp.write(f'        return self->{cursor.spelling}(')
+        sep = ''
+        for i, arg_type in enumerate( fnptr_type.argument_types()):
+            name = f'arg_{i}'
+            write( f'{sep}{name}')
+            sep = ', '
+        out_cpp.write(');\n')
+        out_cpp.write('    }\n')
+
+        # todo: catch our different exception types and map to FZ_ERROR_*.
+        out_cpp.write( '    catch (std::exception& e)\n')
+        out_cpp.write( '    {\n')
+        out_cpp.write( '        fz_throw(ctx, FZ_ERROR_GENERIC, "%s", e.what());\n')
+        out_cpp.write( '    }\n')
+        out_cpp.write('}\n')
+
+        # Write virtual fn default implementation.
+        #
+        out_h.write(f'    virtual {cursor.result_type.spelling} {cursor.spelling}(')
+        out_cpp.write(f'/* Default implementation of virtual method. */\n')
+        out_cpp.write(f'{cursor.result_type.spelling} {classname}2::{cursor.spelling}(')
+        sep = ''
+        for i, arg_type in enumerate( fnptr_type.argument_types()):
+            name = f'arg_{i}'
+            out_cpp.write(f'{sep}')
+            write(declaration_text(arg_type, name))
+            sep = ', '
+        out_h.write( ');\n')
+        out_cpp.write( ')\n')
+        out_cpp.write( '{\n')
+        out_cpp.write( '    throw std::runtime_error( "unexpected call of unimplemented virtual fn");\n')
+        out_cpp.write( '}\n')
+
+    out_h.write(  '};\n')
+
 
 def class_wrapper(
         tu,
@@ -6931,6 +7091,20 @@ def class_wrapper(
 
     if extras.extra_cpp:
         out_cpp.write( textwrap.dedent( extras.extra_cpp))
+
+    class_wrapper_virtual_fnptrs(
+            tu,
+            struct_cursor,
+            struct_name,
+            classname,
+            extras,
+            out_h,
+            out_cpp,
+            out_h_end,
+            out_cpp2,
+            out_h2,
+            generated,
+            )
 
     return is_container, has_to_string
 
