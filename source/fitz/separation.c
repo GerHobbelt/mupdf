@@ -858,6 +858,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
@@ -880,6 +881,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* This case is exercised by: -o out%d.pgm -r72 -D -F pgm -stm ../perf-testing-gpdl/pdf/Ad_InDesign.pdf */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
@@ -900,13 +902,14 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 									{
 										unsigned char a = sd[ss];
@@ -922,11 +925,12 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* This case is exercised by: -o out.pkm -r72 -D ../MyTests/Bug704778.pdf 1 */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 										for (k = 0; k < dc; k++)
 											dd[k] = fz_clampi(dd[k] + v * convert[k], 0, 255);
@@ -947,6 +951,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
@@ -969,6 +974,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* Nothing in the cluster tests this case. */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
@@ -989,13 +995,14 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 									{
 										unsigned char a = sd[ss];
@@ -1011,11 +1018,12 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* This case is exercised by: -o out.png -r72 -D ../MyTests/Bug704778.pdf 1 */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 										for (k = 0; k < dc; k++)
 											dd[k] = fz_clampi(dd[k] - v * convert[k], 0, 255);
