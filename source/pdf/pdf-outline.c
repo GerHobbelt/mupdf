@@ -257,7 +257,8 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 			if (outlines == NULL)
 			{
 				/* No outlines entry, better make one. */
-				outlines = pdf_dict_put_dict(ctx, root, PDF_NAME(Outlines), 4);
+				outlines = pdf_add_new_dict(ctx, doc, 4);
+				pdf_dict_put(ctx, root, PDF_NAME(Outlines), outlines);
 				pdf_dict_put(ctx, outlines, PDF_NAME(Type), PDF_NAME(Outlines));
 			}
 			iter->modifier = MOD_BELOW;
@@ -294,6 +295,8 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 				pdf_dict_put(ctx, prev, PDF_NAME(Next), obj);
 				pdf_dict_put(ctx, obj, PDF_NAME(Prev), prev);
 			}
+			else
+				pdf_dict_put(ctx, parent, PDF_NAME(First), obj);
 			pdf_dict_put(ctx, iter->current, PDF_NAME(Prev), obj);
 			pdf_dict_put(ctx, obj, PDF_NAME(Next), iter->current);
 			result = 0;
@@ -378,7 +381,10 @@ pdf_outline_iterator_del(fz_context *ctx, fz_outline_iterator *iter_)
 			if (prev)
 				pdf_dict_put(ctx, next, PDF_NAME(Prev), prev);
 			else
+			{
+				pdf_dict_put(ctx, parent, PDF_NAME(First), next);
 				pdf_dict_del(ctx, next, PDF_NAME(Prev));
+			}
 			iter->current = next;
 		}
 		else if (prev)
