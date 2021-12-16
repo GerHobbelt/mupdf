@@ -732,8 +732,6 @@ static const char *string_from_line_ending(enum pdf_line_ending style)
 	}
 }
 
-#endif
-
 static const char *string_from_destination_type(fz_link_dest_type type)
 {
 	switch (type) {
