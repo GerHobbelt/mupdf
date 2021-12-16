@@ -7911,7 +7911,7 @@ class Page:
         dev = JM_new_bbox_device( rc)
         mupdf.mfz_run_page( page, dev, mupdf.Matrix(), mupdf.Cookie())
         mupdf.mfz_close_device( dev)
-        val = rc;
+        val = rc
 
         if old_rotation != 0:
             self.set_rotation(old_rotation)
@@ -14852,7 +14852,64 @@ def JM_mupdf_warning(user, message):
 def JM_new_bbox_device(result):
 
     assert isinstance(result, list)
-    assert 0, 'fz_new_derived_device not yet supported'
+    #assert 0, 'fz_new_derived_device not yet supported'
+    # JM_new_bbox_device
+    class jm_bbox_device(mupdf.Device2):
+        def __init__(self):
+            super().__init__()
+            self.result = result
+            self.use_virtual_fill_path()
+            self.use_virtual_stroke_path()
+            self.use_virtual_fill_text()
+            self.use_virtual_stroke_text()
+            self.use_virtual_ignore_text()
+            self.use_virtual_fill_shade()
+            self.use_virtual_fill_image()
+            self.use_virtual_fill_image_mask()
+
+        fill_path = jm_bbox_fill_path
+        stroke_path = jm_bbox_stroke_path
+        fill_text = jm_bbox_fill_text
+        stroke_text = jm_bbox_stroke_text
+        ignore_text = jm_bbox_ignore_text
+        fill_shade = jm_bbox_fill_shade
+        fill_image = jm_bbox_fill_image
+        fill_image_mask = jm_bbox_fill_image_mask
+
+        #def fill_path( self.m_internal, path, even_odd, matrix, colorspace, color, alpha, color_params):
+        #    jlib.log( 'fill_path() called: {=path even_odd matrix colorspace color alpha color_params}')
+        #    jm_bbox_fill_path(self, path, even_odd, matrix, colorspace, color, alpha, color_params)
+        #
+        #def stroke_path( self.m_internal, path, stroke_state, matrix, colorspace, color, alpha, color_params):
+        #    jlib.log( 'fill_path() called: {=path stroke_state matrix colorspace color alpha color_params}')
+        #    jm_trace_device_Linewidth(path, stroke_state, matrix, colorspace, color, alpha, color_params)
+        #
+        #def fill_text( self, text, matrix, colorspace, color, alpha, color_params):
+        #    return jm_increase_seqno( self, text, matrix, colorspace, color, alpha, color_params)
+        #
+        #def stroke_text( *args):
+        #    return jm_increase_seqno(*args)
+        #
+        #def ignore_text( *args):
+        #    return jm_increase_seqno( *args)
+        #
+        #def fill_shade( *args):
+        #    return jm_increase_seqno( *args)
+        #
+        #fill_image = jm_increase_seqno
+        #
+        #fill_image_mask = jm_increase_seqno
+        #
+        #def fill_image(self.m_internal, img, ctm, alpha, color_params):
+        #    jlib.log( 'fill_image() called: {=img ctm alpha color_params}')
+        #    #raise Exception('test exception')
+        #    jm_increase_seqno(self.m_internal, img, ctm, alpha, color_params)
+        #
+
+
+    jlib.log('returning jm_bbox_device')
+    return jm_bbox_device()
+
     dev = mupdf.mfz_new_derived_device( jm_bbox_device)
 
     dev.super.fill_path = jm_bbox_fill_path
@@ -16542,18 +16599,53 @@ def image_properties(img: typing.ByteString) -> dict:
     return TOOLS.image_profile(stream)
 
 
-#def pdf_dict_getl(doc, obj, *keys):
-#    assert 0, 'is this fn defunct?'
-#    #jlib.log('{obj=} {len(keys)=}: {keys}')
-#    #jlib.log('{doc.this.count_pages()=}')
-#    for i in range(len(keys)):
-#        if not obj:
-#            break
-#        obj = obj.dict_get(keys[i])
-#        #jlib.log('{i=} {keys[i]=} {obj=} {doc.this.count_pages()=}')
-#    #jlib.log('{obj=} {doc.this.count_pages()=}')
-#    return obj
+def jm_bbox_add_rect(dev, rect, code):
+    jlib.log(' ')
+    dev.result.append( (code, JM_py_from_rect(rect)) )
 
+def jm_bbox_fill_image( dev, image, ctm, alpha, color_params):
+    jlib.log('{=dev image ctm alpha color_params}')
+    r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+    r = mupdf.transform_rect( r.internal(), ctm)
+    jm_bbox_add_rect( dev, r, "fill-image")
+    jlib.log(' ')
+
+def jm_bbox_fill_image_mask( dev, image, ctm, colorspace, color, alpha, color_params):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, mupdf.transform_rect(fz_unit_rect, ctm), "fill-imgmask")
+
+def jm_bbox_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, color_params):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, mupdf.bound_path(path, None, ctm), "fill-path")
+
+def jm_bbox_fill_shade( dev, shade, ctm, alpha, color_params):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, mupdf.bound_shade( shade, ctm), "fill-shade")
+
+def jm_bbox_stroke_text( dev, text, stroke, ctm, *args):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, mupdf.bound_text( text, stroke, ctm), "stroke-text")
+
+def jm_bbox_fill_text( dev, text, ctm, *args):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, mupdf.bound_text( text, None, ctm), "fill-text")
+
+def jm_bbox_ignore_text( dev, text, ctm):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, muodf.bound_text(text, None, ctm), "ignore-text")
+
+def jm_bbox_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
+    jlib.log(' ')
+    jm_bbox_add_rect( dev, mupdf.bound_path( path, stroke, ctm), "stroke-path")
+
+def jm_trace_device_Linewidth(dev, path, stroke_state, matrix, colorspace, color, alpha, color_params):
+    jlib.log(' ')
+    trace_device_Linewidth = stroke.linewidth
+    jm_increase_seqno(dev)
+
+def jm_increase_seqno( dev, *vargs):
+    jlib.log(' ')
+    dev.seqno += 1
 
 def planish_line(p1: point_like, p2: point_like) -> Matrix:
     """Compute matrix which maps line from p1 to p2 to the x-axis, such that it
