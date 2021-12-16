@@ -6556,8 +6556,7 @@ def class_wrapper_virtual_fnptrs(
     out_h.write( f'struct {classname}2 : {classname}\n')
     out_h.write(  '{\n')
 
-    out_cpp.write( '\n')
-    out_cpp.write( f'/* Implementation of methods for virtual_fnptrs {classname}2 (wrapper for {struct_name}). */\n')
+    out_cpp.write( f'/* Implementation of methods for {classname}2, virtual_fnptrs wrapper for {struct_name}). */\n')
     out_cpp.write( '\n')
 
     def get_fnptrs():
@@ -6593,6 +6592,10 @@ def class_wrapper_virtual_fnptrs(
 
     # Define use_virtual_<name>( bool use) method for each fnptr.
     #
+    out_h.write(f'\n')
+    out_h.write(f'    /* Use these to set the function pointers within m_internal\n')
+    out_h.write(f'    to point to our static callbacks, which then call our virtual\n')
+    out_h.write(f'    methods. */\n')
     for cursor, fnptr_type in get_fnptrs():
         out_h.write(f'    void use_virtual_{cursor.spelling}( bool use);\n')
         out_cpp.write(f'void {classname}2::use_virtual_{cursor.spelling}( bool use)\n')
@@ -6602,11 +6605,12 @@ def class_wrapper_virtual_fnptrs(
 
     # Define static callback for each fnptr.
     #
+    out_h.write(f'\n')
+    out_h.write(f'    /* Internal callbacks, each calls the corresponding virtual method. */\n')
     for cursor, fnptr_type in get_fnptrs():
 
         # Write static callback.
         #
-        out_h.write(f'    /* Calls self->{cursor.spelling}(). */\n')
         out_h.write(f'    static {cursor.result_type.spelling} s_{cursor.spelling}')
         out_cpp.write(f'/* Static callback, calls self->{cursor.spelling}(). */\n')
         out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::s_{cursor.spelling}')
@@ -6642,9 +6646,12 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write( '    }\n')
         out_cpp.write('}\n')
 
+    out_h.write(f'\n')
+    out_h.write(f'    /* Default virtual method implementations; these all throw an exception. */\n')
+    for cursor, fnptr_type in get_fnptrs():
+
         # Write virtual fn default implementation.
         #
-        out_h.write(f'    /* Default implementation throws an exception. */\n')
         out_h.write(f'    virtual {fnptr_type.get_result().spelling} {cursor.spelling}(')
         out_cpp.write(f'/* Default implementation of virtual method. */\n')
         out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::{cursor.spelling}(')
