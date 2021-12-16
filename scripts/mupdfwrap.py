@@ -1253,11 +1253,15 @@ class ClassExtra:
             the underlying class instead of a pointer to it.
 
         virtual_fnptrs:
-            If true, should be (self, alloc) where <self> is an expression that converts arg2 into <this> and
-            <alloc> is code that sets m_internal.
+            If true, should be (self, alloc):
 
-            For example:
-                ...
+                self:
+                    A callable taking single arg that is the name of a pointer
+                    to an instance of the MuPDF struct; should return code
+                    that converts the specified name into a pointer to the
+                    corresponding virtual_fnptrs wrapper class.
+                alloc:
+                    Code for embedding in constructor that sets m_internal.
 
             We generate a second wrapper class derived from the main
             wrapper class which has an empty virtual method for each function
@@ -1532,7 +1536,7 @@ classextras = ClassExtras(
         fz_device = ClassExtra(
                 virtual_fnptrs = (
                         lambda name: f'(*(Device2**) ({name} + 1))',
-                        'm_internal = fz_new_device_of_size(sizeof(*m_internal) + sizeof(Device2*));\n'
+                        f'm_internal = {rename.function_call("fz_new_device_of_size")}(sizeof(*m_internal) + sizeof(Device2*));\n'
                             + '*((Device2**) (m_internal + 1)) = this;\n'
                             ,
                         ),
@@ -6614,7 +6618,7 @@ def class_wrapper_virtual_fnptrs(
     out_h.write(f'    to point to our static callbacks, which then call our virtual\n')
     out_h.write(f'    methods. */\n')
     for cursor, fnptr_type in get_fnptrs():
-        out_h.write(f'    void use_virtual_{cursor.spelling}( bool use);\n')
+        out_h.write(f'    void use_virtual_{cursor.spelling}( bool use=true);\n')
         out_cpp.write(f'void {classname}2::use_virtual_{cursor.spelling}( bool use)\n')
         out_cpp.write( '{\n')
         out_cpp.write(f'    m_internal->{cursor.spelling} = (use) ? s_{cursor.spelling} : nullptr;\n')
@@ -6628,7 +6632,7 @@ def class_wrapper_virtual_fnptrs(
 
         # Write static callback.
         #
-        out_h.write(f'    static {cursor.result_type.spelling} s_{cursor.spelling}')
+        out_h.write(f'    static {fnptr_type.get_result().spelling} s_{cursor.spelling}')
         out_cpp.write(f'/* Static callback, calls self->{cursor.spelling}(). */\n')
         out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::s_{cursor.spelling}')
         write('(')
@@ -6642,7 +6646,8 @@ def class_wrapper_virtual_fnptrs(
         out_h.write(';\n')
         out_cpp.write('\n')
         out_cpp.write('{\n')
-        out_cpp.write(f'    {classname}2* self = {self_("m_internal")};\n')
+        out_cpp.write(f'    {classname}2* self = {self_("arg_1")};\n')
+        out_cpp.write( '    try\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        return self->{cursor.spelling}(')
         sep = ''
@@ -6659,7 +6664,7 @@ def class_wrapper_virtual_fnptrs(
         # todo: catch our different exception types and map to FZ_ERROR_*.
         out_cpp.write( '    catch (std::exception& e)\n')
         out_cpp.write( '    {\n')
-        out_cpp.write( '        fz_throw(ctx, FZ_ERROR_GENERIC, "%s", e.what());\n')
+        out_cpp.write( '        fz_throw(arg_0, FZ_ERROR_GENERIC, "%s", e.what());\n')
         out_cpp.write( '    }\n')
         out_cpp.write('}\n')
 
