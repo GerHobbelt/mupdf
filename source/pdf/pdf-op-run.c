@@ -944,7 +944,7 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
 		}
 		else
 		{
-			pr->actual_text_p += fz_chartorune(ucsbuf, pr->actual_text_p);
+			pr->actual_text_p += fz_chartorune_unsafe(ucsbuf, pr->actual_text_p);
 			ucslen = 1;
 		}
 	}
@@ -2008,7 +2008,7 @@ static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, p
 			pr->actual_text = NULL;
 			pr->actual_text_p = NULL;
 		}
-		pr->actual_text = fz_strdup(ctx, pdf_to_text_string(ctx, at));
+		pr->actual_text = fz_strdup(ctx, pdf_to_text_string(ctx, at, NULL));
 		pr->actual_text_p = pr->actual_text;
 	}
 
