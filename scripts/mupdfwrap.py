@@ -781,6 +781,7 @@ import os
 import pickle
 import platform
 import re
+import resource
 import shutil
 import sys
 import textwrap
@@ -8282,6 +8283,9 @@ def build_swig(
               try {{
                 $action
               }}
+              catch (Swig::DirectorException &e) {{
+                SWIG_fail;
+              }}
               catch(std::exception& e) {{
                 SWIG_exception(SWIG_RuntimeError, e.what());
               }}
@@ -9457,6 +9461,19 @@ def build( build_dirs, swig, args):
                             mupdf_so,
                             mupdfcpp_so,
                             ]
+
+                    if os.uname()[0] == 'OpenBSD':
+                        # clang needs around 2G on OpenBSD.
+                        #
+                        soft, hard = resource.getrlimit( resource.RLIMIT_DATA)
+                        required = 2 * 2**30
+                        if soft < required:
+                            if hard < required:
+                                jlib.log( 'Warning: RLIMIT_DATA {hard=} is less than {required=}')
+                            soft_new = min(hard, required)
+                            resource.setrlimit( resource.RLIMIT_DATA, (soft_new, hard))
+                            jlib.log( 'Have changed RLIMIT_DATA from {soft} to {soft_new}')
+
                     jlib.build(
                             infiles,
                             out_so,
