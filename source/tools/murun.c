@@ -241,18 +241,6 @@ static void ffi_gc_fz_document(js_State *J, void *doc)
 	fz_drop_document(ctx, doc);
 }
 
-#if FZ_ENABLE_PDF
-
-static void ffi_gc_pdf_pkcs7_signer(js_State *J, void *signer_)
-{
-	fz_context *ctx = js_getcontext(J);
-	pdf_pkcs7_signer *signer = (pdf_pkcs7_signer *)signer_;
-	if (signer)
-		signer->drop(ctx, signer);
-}
-
-#endif
-
 static void ffi_gc_fz_page(js_State *J, void *page)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -325,6 +313,18 @@ static void ffi_gc_fz_document_writer(js_State *J, void *wri)
 	fz_drop_document_writer(ctx, wri);
 }
 
+static void ffi_gc_fz_outline_iterator(js_State *J, void *iter)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_drop_outline_iterator(ctx, iter);
+}
+
+static void ffi_pushoutlineiterator(js_State *J, fz_outline_iterator *iter)
+{
+	js_getregistry(J, "fz_outline_iterator");
+	js_newuserdata(J, "fz_outline_iterator", iter, ffi_gc_fz_outline_iterator);
+}
+
 #if FZ_ENABLE_PDF
 
 static void ffi_pushobj(js_State *J, pdf_obj *obj);
@@ -351,6 +351,14 @@ static void ffi_gc_pdf_graft_map(js_State *J, void *map)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_drop_graft_map(ctx, map);
+}
+
+static void ffi_gc_pdf_pkcs7_signer(js_State *J, void *signer_)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_pkcs7_signer *signer = (pdf_pkcs7_signer *)signer_;
+	if (signer)
+		signer->drop(ctx, signer);
 }
 
 static fz_document *ffi_todocument(js_State *J, int idx)
@@ -643,6 +651,46 @@ static fz_link_dest ffi_tolinkdest(js_State *J, int idx)
 	return dest;
 }
 
+static fz_outline_item ffi_tooutlineitem(js_State *J, int idx)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_item item = { NULL, NULL, 0 };
+
+	if (js_hasproperty(J, idx, "title")) {
+		if (js_iscoercible(J, -1)) {
+			const char *title = js_tostring(J, -1);
+			fz_try(ctx)
+				item.title = fz_strdup(ctx, title);
+			fz_always(ctx)
+				js_pop(J, 1);
+			fz_catch(ctx)
+				fz_rethrow(ctx);
+		}
+		else
+			item.title = NULL;
+
+	}
+	if (js_hasproperty(J, idx, "open")) {
+		item.is_open = js_toboolean(J, -1);
+		js_pop(J, 1);
+	}
+	if (js_hasproperty(J, idx, "uri")) {
+		if (js_iscoercible(J, -1)) {
+			const char *uri = js_tostring(J, -1);
+			fz_try(ctx)
+				item.uri = fz_strdup(ctx, uri);
+			fz_always(ctx)
+				js_pop(J, 1);
+			fz_catch(ctx)
+				fz_rethrow(ctx);
+		}
+		else
+			item.uri = NULL;
+	}
+
+	return item;
+}
+
 static const char *string_from_cap(fz_linecap cap)
 {
 	switch (cap) {
@@ -683,6 +731,8 @@ static const char *string_from_line_ending(enum pdf_line_ending style)
 	case PDF_ANNOT_LE_SLASH: return "Slash";
 	}
 }
+
+#endif
 
 static const char *string_from_destination_type(fz_link_dest_type type)
 {
@@ -2893,6 +2943,164 @@ static void ffi_Document_loadOutline(js_State *J)
 	to_outline(J, outline);
 
 	fz_drop_outline(ctx, outline);
+}
+
+static void ffi_Document_outlineIterator(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_document *doc = ffi_todocument(J, 0);
+	fz_outline_iterator *iter = NULL;
+
+	fz_try(ctx)
+		iter = fz_new_outline_iterator(ctx, doc);
+	fz_catch(ctx)
+		rethrow(J);
+
+	ffi_pushoutlineiterator(J, iter);
+}
+
+static void ffi_OutlineIterator_item(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	fz_outline_item *item;
+
+	fz_try(ctx)
+		item = fz_outline_iterator_item(ctx, iter);
+	fz_catch(ctx)
+		rethrow(J);
+
+	if (!item)
+	{
+		js_pushundefined(J);
+		return;
+	}
+
+	js_newobject(J);
+
+	if (item->title)
+		js_pushliteral(J, item->title);
+	else
+		js_pushundefined(J);
+	js_setproperty(J, -2, "title");
+
+	if (item->uri)
+		js_pushliteral(J, item->uri);
+	else
+		js_pushundefined(J);
+	js_setproperty(J, -2, "uri");
+
+	js_pushboolean(J, item->is_open);
+	js_setproperty(J, -2, "open");
+}
+
+static void ffi_OutlineIterator_next(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	int result;
+
+	fz_try(ctx)
+		result = fz_outline_iterator_next(ctx, iter);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, result);
+}
+
+static void ffi_OutlineIterator_prev(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	int result;
+
+	fz_try(ctx)
+		result = fz_outline_iterator_prev(ctx, iter);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, result);
+}
+
+static void ffi_OutlineIterator_up(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	int result;
+
+	fz_try(ctx)
+		result = fz_outline_iterator_up(ctx, iter);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, result);
+}
+
+static void ffi_OutlineIterator_down(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	int result;
+
+	fz_try(ctx)
+		result = fz_outline_iterator_down(ctx, iter);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, result);
+}
+
+static void ffi_OutlineIterator_insert(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	fz_outline_item item = ffi_tooutlineitem(J, 1);
+	int result;
+
+	fz_try(ctx)
+		result = fz_outline_iterator_insert(ctx, iter, &item);
+	fz_always(ctx)
+	{
+		fz_free(ctx, item.title);
+		fz_free(ctx, item.uri);
+	}
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, result);
+}
+
+static void ffi_OutlineIterator_delete(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	int result;
+
+	fz_try(ctx)
+		result = fz_outline_iterator_delete(ctx, iter);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, result);
+}
+
+static void ffi_OutlineIterator_update(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_outline_iterator *iter = js_touserdata(J, 0, "fz_outline_iterator");
+	fz_outline_item item = ffi_tooutlineitem(J, 1);
+
+	fz_try(ctx)
+		fz_outline_iterator_update(ctx, iter, &item);
+	fz_always(ctx)
+	{
+		fz_free(ctx, item.title);
+		fz_free(ctx, item.uri);
+	}
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushundefined(J);
 }
 
 static void ffi_Page_isPDF(js_State *J)
@@ -7537,8 +7745,23 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Document.countPages", ffi_Document_countPages, 0);
 		jsB_propfun(J, "Document.loadPage", ffi_Document_loadPage, 1);
 		jsB_propfun(J, "Document.loadOutline", ffi_Document_loadOutline, 0);
+		jsB_propfun(J, "Document.outlineIterator", ffi_Document_outlineIterator, 0);
 	}
 	js_setregistry(J, "fz_document");
+
+	js_getregistry(J, "Userdata");
+	js_newobjectx(J);
+	{
+		jsB_propfun(J, "OutlineIterator.item", ffi_OutlineIterator_item, 0);
+		jsB_propfun(J, "OutlineIterator.next", ffi_OutlineIterator_next, 0);
+		jsB_propfun(J, "OutlineIterator.prev", ffi_OutlineIterator_prev, 0);
+		jsB_propfun(J, "OutlineIterator.up", ffi_OutlineIterator_up, 0);
+		jsB_propfun(J, "OutlineIterator.down", ffi_OutlineIterator_down, 0);
+		jsB_propfun(J, "OutlineIterator.insert", ffi_OutlineIterator_insert, 1);
+		jsB_propfun(J, "OutlineIterator.delete", ffi_OutlineIterator_delete, 0);
+		jsB_propfun(J, "OutlineIterator.update", ffi_OutlineIterator_update, 1);
+	}
+	js_setregistry(J, "fz_outline_iterator");
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
