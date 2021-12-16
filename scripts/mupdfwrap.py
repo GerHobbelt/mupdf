@@ -8182,7 +8182,17 @@ def build_swig(
     text = ''
     text += '%module(directors="1") mupdf\n'
     text += '%feature("director") Device2;\n'
-
+    text += textwrap.dedent(
+            '''
+            %feature("director:except")
+            {
+              if ($error != NULL)
+              {
+                throw Swig::DirectorMethodException();
+              }
+            }
+            '''
+            )
     for fnname in generated.c_functions:
         if fnname in ('pdf_annot_type', 'pdf_widget_type'):
             # These are also enums which we don't want to ignore. SWIGing the
