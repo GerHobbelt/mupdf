@@ -1531,9 +1531,9 @@ classextras = ClassExtras(
 
         fz_device = ClassExtra(
                 virtual_fnptrs = (
-                        '(*(Device2**) (dev + 1))',
+                        lambda name: f'(*(Device2**) ({name} + 1))',
                         'm_internal = fz_new_device_of_size(sizeof(*m_internal) + sizeof(Device2*));\n'
-                            + '*((Device2**) (dev + 1)) = this;\n'
+                            + '*((Device2**) (m_internal + 1)) = this;\n'
                             ,
                         ),
                 constructor_raw = True,
@@ -6612,11 +6612,9 @@ def class_wrapper_virtual_fnptrs(
         out_h.write(f'    /* Calls self->{cursor.spelling}(). */\n')
         out_h.write(f'    static {cursor.result_type.spelling} s_{cursor.spelling}')
         out_cpp.write(f'/* Static callback, calls self->{cursor.spelling}(). */\n')
-        #out_cpp.write(f'fnptr_cursor.kind={fnptr_cursor.kind}\n')
         out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::s_{cursor.spelling}')
         write('(')
         sep = ''
-        #for arg in get_args( tu, fnptr_cursor, include_fz_context=True):
         for i, arg_type in enumerate( fnptr_type.argument_types()):
             name = f'arg_{i}'
             write(sep)
@@ -6626,11 +6624,14 @@ def class_wrapper_virtual_fnptrs(
         out_h.write(';\n')
         out_cpp.write('\n')
         out_cpp.write('{\n')
-        out_cpp.write(f'    {classname}2* self = {self_};\n')
+        out_cpp.write(f'    {classname}2* self = {self_("m_internal")};\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        return self->{cursor.spelling}(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
+            if i < 2:
+                # Ignore first two args - (fz_context, {structname}*).
+                continue
             name = f'arg_{i}'
             write( f'{sep}{name}')
             sep = ', '
@@ -6646,9 +6647,9 @@ def class_wrapper_virtual_fnptrs(
 
         # Write virtual fn default implementation.
         #
-        out_h.write(f'    virtual {cursor.result_type.spelling} {cursor.spelling}(')
+        out_h.write(f'    virtual {fnptr_type.get_result().spelling} {cursor.spelling}(')
         out_cpp.write(f'/* Default implementation of virtual method. */\n')
-        out_cpp.write(f'{cursor.result_type.spelling} {classname}2::{cursor.spelling}(')
+        out_cpp.write(f'{fnptr_type.get_result().spelling} {classname}2::{cursor.spelling}(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
             name = f'arg_{i}'
