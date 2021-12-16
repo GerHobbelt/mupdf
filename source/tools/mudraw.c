@@ -1184,13 +1184,13 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					workers[band].cookie = master_cookie;
 					workers[band].list = list;
 					workers[band].pix = fz_new_pixmap_with_bbox(ctx, colorspace, band_ibounds, seps, alpha);
+					workers[band].pix->y += band * band_height;
 					fz_set_pixmap_resolution(ctx, workers[band].pix, resolution, resolution);
 					workers[band].running = 1;
 #ifndef DISABLE_MUTHREADS
 					DEBUG_THREADS(fz_info(ctx, "Worker %d, Pre-triggering band %d\n", band, band));
 					mu_trigger_semaphore(&workers[band].start);
 #endif
-					ctm.f -= drawheight;
 				}
 				pix = workers[0].pix;
 			}
@@ -1275,6 +1275,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				{
 					worker_t *w = &workers[band % num_workers];
 					w->band = band + num_workers;
+					w->pix->y = band_ibounds.y0 + w->band * band_height;
 					w->ctm = ctm;
 					w->tbounds = tbounds;
 					w->cookie = master_cookie;
@@ -1284,7 +1285,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					mu_trigger_semaphore(&w->start);
 #endif
 				}
-				ctm.f -= drawheight;
+				if (num_workers <= 0)
+					pix->y += band_height;
 			}
 
 			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
