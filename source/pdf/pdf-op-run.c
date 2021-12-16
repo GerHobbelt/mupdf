@@ -101,6 +101,8 @@ struct pdf_run_processor
 
 	/* text object state */
 	pdf_text_object_state tos;
+	char *actual_text;
+	char *actual_text_p;
 
 	/* graphics state */
 	pdf_gstate *gstate;
@@ -930,6 +932,21 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
 	{
 		ucsbuf[0] = FZ_REPLACEMENT_CHARACTER;
 		ucslen = 1;
+	}
+
+	if (pr->actual_text_p)
+	{
+		if (*pr->actual_text_p == 0)
+		{
+			/* swallow glyphs if the ActualText content has run out */
+			ucsbuf[0] = -1;
+			ucslen = 1;
+		}
+		else
+		{
+			pr->actual_text_p += fz_chartorune(ucsbuf, pr->actual_text_p);
+			ucslen = 1;
+		}
 	}
 
 	/* add glyph to textobject */
@@ -1970,6 +1987,7 @@ static void pdf_run_BMC(fz_context *ctx, pdf_processor *proc, const char *tag)
 static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
+	pdf_obj *at;
 	const char *str;
 
 	if (!tag)
@@ -1979,12 +1997,36 @@ static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, p
 	if (strlen(str) == 0)
 		str = tag;
 
+	at = pdf_dict_get(ctx, cooked, PDF_NAME(ActualText));
+	if (at)
+	{
+		if (pr->actual_text)
+		{
+			if (*pr->actual_text_p)
+				fz_warn(ctx, "interrupted ActualText content");
+			fz_free(ctx, pr->actual_text);
+			pr->actual_text = NULL;
+			pr->actual_text_p = NULL;
+		}
+		pr->actual_text = fz_strdup(ctx, pdf_to_text_string(ctx, at));
+		pr->actual_text_p = pr->actual_text;
+	}
+
 	fz_begin_layer(ctx, pr->dev, str);
 }
 
 static void pdf_run_EMC(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
+
+	if (pr->actual_text)
+	{
+		if (*pr->actual_text_p != 0)
+			fz_warn(ctx, "more ActualText content than characters");
+		fz_free(ctx, pr->actual_text);
+		pr->actual_text = NULL;
+		pr->actual_text_p = NULL;
+	}
 
 	fz_end_layer(ctx, pr->dev);
 }
@@ -2047,6 +2089,8 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 	fz_drop_text(ctx, pr->tos.text);
 
 	fz_drop_default_colorspaces(ctx, pr->default_cs);
+
+	fz_free(ctx, pr->actual_text);
 
 	fz_free(ctx, pr->gstate);
 }

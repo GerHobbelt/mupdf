@@ -189,6 +189,27 @@ typedef struct
 pdf_processor *pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie);
 
 /*
+	Create an MCID extraction processor.
+
+	This collects MCID tagged text into a table that can be used to match up
+	structured text tags with content.
+ */
+
+typedef struct
+{
+	int mcid;
+	fz_buffer *text;
+} pdf_mcid_entry;
+
+typedef struct
+{
+	int len, cap;
+	pdf_mcid_entry *entry;
+} pdf_mcid_table;
+
+pdf_processor *pdf_new_mcid_processor(fz_context *ctx, pdf_mcid_table *table);
+
+/*
 	Create a buffer processor.
 
 	This collects the incoming PDF operator stream into an fz_buffer.
