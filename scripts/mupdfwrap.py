@@ -1536,14 +1536,14 @@ classextras = ClassExtras(
 
         fz_device = ClassExtra(
                 virtual_fnptrs = (
-                        lambda name: f'(*(Device2**) ({name} + 1))',
-                        f'm_internal = {rename.function_call("fz_new_device_of_size")}(sizeof(*m_internal) + sizeof(Device2*));\n'
-                            + '*((Device2**) (m_internal + 1)) = this;\n'
-                            ,
-                        ),
+                    lambda name: f'(*(Device2**) ({name} + 1))',
+                    f'm_internal = {rename.function_call("fz_new_device_of_size")}(sizeof(*m_internal) + sizeof(Device2*));\n'
+                        + '*((Device2**) (m_internal + 1)) = this;\n'
+                        ,
+                    ),
                 constructor_raw = True,
                 method_wrappers_static = [
-                        ],
+                    ],
                 constructors_extra = [
                     ExtraConstructor( '()',
                         '''
@@ -1557,7 +1557,7 @@ classextras = ClassExtras(
                         ''',
                         comment = '/* Sets m_internal = NULL. */',
                         ),
-                    ]
+                    ],
                 ),
 
         fz_document = ClassExtra(
@@ -2787,6 +2787,29 @@ classextras = ClassExtras(
                         ),
                     ],
                 copyable = 'default',
+                ),
+
+        pdf_processor = ClassExtra(
+                virtual_fnptrs = (
+                    lambda name: f'(*(PdfProcessor2**) ({name} + 1))',
+                    f'm_internal = {rename.function_call("pdf_new_processor")}(sizeof(*m_internal) + sizeof(PdfProcessor2*));\n'
+                        + '*((PdfProcessor2**) (m_internal + 1)) = this;\n'
+                        ,
+                    ),
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        '''
+                        : m_internal( NULL)
+                        {
+                            if (s_check_refs)
+                            {
+                                s_PdfProcessor_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);
+                            }
+                        }
+                        ''',
+                        comment = '/* Sets m_internal = NULL. */',
+                        ),
+                    ],
                 ),
 
         pdf_redact_options = ClassExtra(
@@ -8196,6 +8219,7 @@ def build_swig(
     text += '%module(directors="1") mupdf\n'
     text += '%feature("director") Device2;\n'
     text += '%feature("director") PdfFilterOptions2;\n'
+    text += '%feature("director") PdfProcessor2;\n'
     text += textwrap.dedent(
             '''
             %feature("director:except")
