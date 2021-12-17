@@ -13601,6 +13601,52 @@ def JM_field_type_text(wtype):
     return "unknown"
 
 
+def JM_filter_content_stream(
+        doc,
+        in_stm,
+        in_res,
+        transform,
+        filter_,
+        struct_parents,
+        #fz_buffer **out_buf,
+        #pdf_obj **out_res
+        ):
+    #pdf_processor *proc_buffer = NULL;
+    #pdf_processor *proc_filter = NULL;
+    #fz_var(proc_buffer);
+    #fz_var(proc_filter);
+
+    #*out_buf = NULL;
+    #*out_res = NULL;
+    jlib.log(' ')
+    out_buf = mupdf.Buffer( 1024)
+    jlib.log(' ')
+    try:
+        proc_buffer = mupdf.mpdf_new_buffer_processor( out_buf, filter_.ascii)
+    except Exception as e:
+        jlib.log(jlib.exception_info())
+        raise
+    jlib.log(' ')
+    if filter_.sanitize:
+        jlib.log(' ')
+        out_res = mupdf.mpdf_new_dict( doc, 1)
+        jlib.log(' ')
+        proc_filter = mupdf.mpdf_new_filter_processor( doc, proc_buffer, in_res, out_res, struct_parents, transform, filter_)
+        jlib.log(' ')
+        mupdf.mpdf_process_contents( proc_filter, doc, in_res, in_stm, mupdf.Cookie())
+        jlib.log(' ')
+        mupdf.mpdf_close_processor( proc_filter)
+    else:
+        jlib.log(' ')
+        out_res = in_res    #mupdf.mpdf_keep_obj( in_res)
+        jlib.log(' ')
+        mupdf.mpdf_process_contents( proc_buffer, doc, in_res, in_stm, mupdf.Cookie())
+    jlib.log(' ')
+    mupdf.mpdf_close_processor( proc_buffer)
+    jlib.log(' ')
+    return out_buf, out_res
+
+
 def JM_find_annot_irt(annot):
     '''
     Return the first annotation whose /IRT key ("In Response To") points to
@@ -14332,41 +14378,39 @@ def JM_image_extension(type_):
 
 
 def JM_image_reporter(page):
-    assert 0, 'not implemented - needs swig director support for fn ptrs.'
+    #assert 0, 'not implemented - needs swig director support for fn ptrs.'
     doc = page.doc()
-    filter_ = mupdf.PdfFilterOptions()
-    '''
-    filter_.opaque = page
-    filter_.text_filter = NULL;
-    filter_.image_filter = JM_image_filter;
-    filter_.end_page = NULL;
-    filter_.recurse = 0;
-    filter_.instance_forms = 1;
-    filter_.sanitize = 1;
-    filter_.ascii = 1;
 
-    pdf_obj *contents, *old_res;
-    pdf_obj *struct_parents_obj;
-    pdf_obj *new_res;
-    fz_buffer *buffer;
-    int struct_parents;
-    fz_matrix ctm = fz_identity;
-    pdf_page_transform(gctx, page, NULL, &ctm);
-    struct_parents_obj = pdf_dict_get(ctx, page->obj, PDF_NAME(StructParents));
-    struct_parents = -1;
-    if (pdf_is_number(ctx, struct_parents_obj))
-        struct_parents = pdf_to_int(ctx, struct_parents_obj);
+    class Filter(mupdf.PdfFilterOptions2):
+        def __init__(self):
+            super().__init__()
+            self.use_virtual_image_filter()
 
-    contents = pdf_page_contents(ctx, page);
-    old_res = pdf_page_resources(ctx, page);
-    img_info = PyList_New(0);
-    JM_filter_content_stream(ctx, doc, contents, old_res, ctm, &filter, struct_parents, &buffer, &new_res);
-    fz_drop_buffer(ctx, buffer);
-    pdf_drop_obj(ctx, new_res);
-    PyObject *rc = PySequence_Tuple(img_info);
-    Py_CLEAR(img_info);
-    return rc;
-    '''
+        def image_filter( self, ctm, name, image):
+            jlib.log( '{=ctm name image}')
+
+    filter_ = Filter()
+
+    filter_._page = page
+    filter_.recurse = 0
+    filter_.instance_forms = 1
+    filter_.sanitize = 1
+    filter_.ascii = 1
+
+    ctm = mupdf.Matrix()
+    mupdf.mpdf_page_transform( page, mupdf.Rect(0), ctm)
+    struct_parents_obj = mupdf.mpdf_dict_get( page.obj(), PDF_NAME('StructParents'))
+    struct_parents = -1
+    if mupdf.mpdf_is_number( struct_parents_obj):
+        struct_parents = mupdf.mpdf_to_int( struct_parents_obj)
+
+    contents = mupdf.mpdf_page_contents( page)
+    old_res = mupdf.mpdf_page_resources( page)
+    img_info = []
+    buffer_, new_res = JM_filter_content_stream( doc, contents, old_res, ctm, filter_, struct_parents)
+    fz_drop_buffer(ctx, buffer_);
+    rc = tuple( img_info)
+    return rc
 
 
 def JM_insert_contents(pdf, pageref, newcont, overlay):
@@ -14852,8 +14896,6 @@ def JM_mupdf_warning(user, message):
 def JM_new_bbox_device(result):
 
     assert isinstance(result, list)
-    #assert 0, 'fz_new_derived_device not yet supported'
-    # JM_new_bbox_device
     class jm_bbox_device(mupdf.Device2):
         def __init__(self):
             super().__init__()
@@ -14876,77 +14918,7 @@ def JM_new_bbox_device(result):
         fill_image = jm_bbox_fill_image
         fill_image_mask = jm_bbox_fill_image_mask
 
-        #def fill_path( self.m_internal, path, even_odd, matrix, colorspace, color, alpha, color_params):
-        #    jlib.log( 'fill_path() called: {=path even_odd matrix colorspace color alpha color_params}')
-        #    jm_bbox_fill_path(self, path, even_odd, matrix, colorspace, color, alpha, color_params)
-        #
-        #def stroke_path( self.m_internal, path, stroke_state, matrix, colorspace, color, alpha, color_params):
-        #    jlib.log( 'fill_path() called: {=path stroke_state matrix colorspace color alpha color_params}')
-        #    jm_trace_device_Linewidth(path, stroke_state, matrix, colorspace, color, alpha, color_params)
-        #
-        #def fill_text( self, text, matrix, colorspace, color, alpha, color_params):
-        #    return jm_increase_seqno( self, text, matrix, colorspace, color, alpha, color_params)
-        #
-        #def stroke_text( *args):
-        #    return jm_increase_seqno(*args)
-        #
-        #def ignore_text( *args):
-        #    return jm_increase_seqno( *args)
-        #
-        #def fill_shade( *args):
-        #    return jm_increase_seqno( *args)
-        #
-        #fill_image = jm_increase_seqno
-        #
-        #fill_image_mask = jm_increase_seqno
-        #
-        #def fill_image(self.m_internal, img, ctm, alpha, color_params):
-        #    jlib.log( 'fill_image() called: {=img ctm alpha color_params}')
-        #    #raise Exception('test exception')
-        #    jm_increase_seqno(self.m_internal, img, ctm, alpha, color_params)
-        #
-
-
-    jlib.log('returning jm_bbox_device')
     return jm_bbox_device()
-
-    dev = mupdf.mfz_new_derived_device( jm_bbox_device)
-
-    dev.super.fill_path = jm_bbox_fill_path
-    dev.super.stroke_path = jm_bbox_stroke_path
-    dev.super.clip_path = None
-    dev.super.clip_stroke_path = None
-
-    dev.super.fill_text = jm_bbox_fill_text
-    dev.super.stroke_text = jm_bbox_stroke_text
-    dev.super.clip_text = None
-    dev.super.clip_stroke_text = None
-    dev.super.ignore_text = jm_bbox_ignore_text
-
-    dev.super.fill_shade = jm_bbox_fill_shade
-    dev.super.fill_image = jm_bbox_fill_image
-    dev.super.fill_image_mask = jm_bbox_fill_image_mask
-    dev.super.clip_image_mask = None
-
-    dev.super.pop_clip = None
-
-    dev.super.begin_mask = None
-    dev.super.end_mask = None
-    dev.super.begin_group = None
-    dev.super.end_group = None
-
-    dev.super.begin_tile = None
-    dev.super.end_tile = None
-
-    dev.super.begin_layer = None
-    dev.super.end_layer = None
-
-    dev.super.render_flags = None
-    dev.super.set_default_colorspaces = None
-
-    dev.result = result
-
-    return dev
 
 
 def JM_new_buffer_from_stext_page(page):
@@ -16603,49 +16575,60 @@ def jm_bbox_add_rect(dev, rect, code):
     jlib.log(' ')
     dev.result.append( (code, JM_py_from_rect(rect)) )
 
+
 def jm_bbox_fill_image( dev, image, ctm, alpha, color_params):
-    jlib.log('{=dev image ctm alpha color_params}')
+    #jlib.log('{=dev image ctm alpha color_params}')
     r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
     r = mupdf.transform_rect( r.internal(), ctm)
-    jm_bbox_add_rect( dev, r, "fill-image")
+    #jm_bbox_add_rect( dev, r, "fill-image")
     jlib.log(' ')
+
 
 def jm_bbox_fill_image_mask( dev, image, ctm, colorspace, color, alpha, color_params):
     jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.transform_rect(fz_unit_rect, ctm), "fill-imgmask")
 
+
 def jm_bbox_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, color_params):
     jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_path(path, None, ctm), "fill-path")
+
 
 def jm_bbox_fill_shade( dev, shade, ctm, alpha, color_params):
     jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_shade( shade, ctm), "fill-shade")
 
+
 def jm_bbox_stroke_text( dev, text, stroke, ctm, *args):
     jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_text( text, stroke, ctm), "stroke-text")
+
 
 def jm_bbox_fill_text( dev, text, ctm, *args):
     jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_text( text, None, ctm), "fill-text")
 
+
 def jm_bbox_ignore_text( dev, text, ctm):
     jlib.log(' ')
     jm_bbox_add_rect( dev, muodf.bound_text(text, None, ctm), "ignore-text")
 
+
 def jm_bbox_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
     jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_path( path, stroke, ctm), "stroke-path")
+
 
 def jm_trace_device_Linewidth(dev, path, stroke_state, matrix, colorspace, color, alpha, color_params):
     jlib.log(' ')
     trace_device_Linewidth = stroke.linewidth
     jm_increase_seqno(dev)
 
+
 def jm_increase_seqno( dev, *vargs):
     jlib.log(' ')
     dev.seqno += 1
+
 
 def planish_line(p1: point_like, p2: point_like) -> Matrix:
     """Compute matrix which maps line from p1 to p2 to the x-axis, such that it
