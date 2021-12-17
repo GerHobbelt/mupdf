@@ -14408,7 +14408,6 @@ def JM_image_reporter(page):
     old_res = mupdf.mpdf_page_resources( page)
     img_info = []
     buffer_, new_res = JM_filter_content_stream( doc, contents, old_res, ctm, filter_, struct_parents)
-    fz_drop_buffer(ctx, buffer_);
     rc = tuple( img_info)
     return rc
 
