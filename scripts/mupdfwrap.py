@@ -2652,6 +2652,10 @@ classextras = ClassExtras(
 
         pdf_filter_options = ClassExtra(
                 pod = 'inline',
+                virtual_fnptrs = (
+                        lambda name: f'(PdfFilterOptions2*) {name}',
+                        f'this->opaque = this;\n'
+                        ),
                 constructors_extra = [
                     ExtraConstructor( '()',
                         f'''
@@ -6605,7 +6609,15 @@ def class_wrapper_virtual_fnptrs(
         out_h.write(f'    void use_virtual_{cursor.spelling}( bool use=true);\n')
         out_cpp.write(f'void {classname}2::use_virtual_{cursor.spelling}( bool use)\n')
         out_cpp.write( '{\n')
-        out_cpp.write(f'    m_internal->{cursor.spelling} = (use) ? s_{cursor.spelling} : nullptr;\n')
+        if extras.pod == 'inline':
+            # Fnptr (in {classname}2) and virtual function (in {classname})
+            # have same name, so we need qualify the fnptr with {classname} to
+            # ensure we distinguish between the two.
+            out_cpp.write(f'    {classname}::{cursor.spelling} = (use) ? s_{cursor.spelling} : nullptr;\n')
+        elif extras.pod:
+            out_cpp.write(f'    m_internal.{cursor.spelling} = (use) ? s_{cursor.spelling} : nullptr;\n')
+        else:
+            out_cpp.write(f'    m_internal->{cursor.spelling} = (use) ? s_{cursor.spelling} : nullptr;\n')
         out_cpp.write( '}\n')
 
     # Define static callback for each fnptr.
@@ -8160,6 +8172,7 @@ def build_swig(
     text = ''
     text += '%module(directors="1") mupdf\n'
     text += '%feature("director") Device2;\n'
+    text += '%feature("director") PdfFilterOptions2;\n'
     text += textwrap.dedent(
             '''
             %feature("director:except")
