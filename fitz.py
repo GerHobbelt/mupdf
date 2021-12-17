@@ -7987,7 +7987,6 @@ class Page:
         name string - elem[7] of the resp. item.
         Option 'transform' also returns the image transformation matrix.
         """
-        jlib.log('{=name transform}')
         CheckParent(self)
         doc = self.parent
         if doc.is_closed or doc.is_encrypted:
@@ -8001,12 +8000,10 @@ class Page:
             rc = inf_rect
 
         if type(name) in (list, tuple):
-            jlib.log('type(name) in (list, tuple)')
             if not type(name[-1]) is int:
                 raise ValueError("need item of full page image list")
             item = name
         else:
-            jlib.log('not type(name) in (list, tuple)')
             imglist = [i for i in doc.get_page_images(self.number, True) if name == i[7]]
             if len(imglist) == 1:
                 item = imglist[0]
@@ -8017,18 +8014,14 @@ class Page:
         xref = item[-1]
         if xref != 0 or transform == True:
             try:
-                jlib.log('reurning self.get_image_rects(...)')
                 return self.get_image_rects(item, transform=transform)[0]
             except:
-                jlib.log('returning inf_rect')
                 return inf_rect
 
-        jlib.log('calling _fitz.Page_get_image_bbox(). {item=}')
         #val = _fitz.Page_get_image_bbox(self, name, transform)
         pdf_page = self._pdf_page()
         val = JM_image_reporter(pdf_page)
 
-        jlib.log('{val=}')
         if not bool(val):
             return rc
 
@@ -13089,13 +13082,10 @@ def JM_char_bbox(line, ch, verbose=0):
     return rect of char quad
     '''
     q = JM_char_quad(line, ch, verbose)
-    if verbose:
-        jlib.log('q={q}')
+    if verbose: jlib.log('q={q}')
     r = mupdf.mfz_rect_from_quad(q)
-    if verbose:
-        jlib.log('q={q} r={r}')
-    if verbose:
-        jlib.log('{ch.m_internal.size=} {line.m_internal.wmode=} {r=}')
+    if verbose: jlib.log('q={q} r={r}')
+    if verbose: jlib.log('{ch.m_internal.size=} {line.m_internal.wmode=} {r=}')
     if not line.m_internal.wmode:
         return r
     if r.y1 < r.y0 + ch.m_internal.size:
@@ -13617,39 +13607,24 @@ def JM_filter_content_stream(
         #fz_buffer **out_buf,
         #pdf_obj **out_res
         ):
-    #pdf_processor *proc_buffer = NULL;
-    #pdf_processor *proc_filter = NULL;
-    #fz_var(proc_buffer);
-    #fz_var(proc_filter);
-
-    #*out_buf = NULL;
-    #*out_res = NULL;
-    jlib.log(' ')
+    '''
+    Returns (out_buf, out_res).
+    '''
     out_buf = mupdf.Buffer( 1024)
-    jlib.log(' ')
     try:
         proc_buffer = mupdf.mpdf_new_buffer_processor( out_buf, filter_.ascii)
     except Exception as e:
         jlib.log(jlib.exception_info())
         raise
-    jlib.log(' ')
     if filter_.sanitize:
-        jlib.log(' ')
         out_res = mupdf.mpdf_new_dict( doc, 1)
-        jlib.log(' ')
         proc_filter = mupdf.mpdf_new_filter_processor( doc, proc_buffer, in_res, out_res, struct_parents, transform, filter_)
-        jlib.log(' ')
         mupdf.mpdf_process_contents( proc_filter, doc, in_res, in_stm, mupdf.Cookie())
-        jlib.log(' ')
         mupdf.mpdf_close_processor( proc_filter)
     else:
-        jlib.log(' ')
         out_res = in_res    #mupdf.mpdf_keep_obj( in_res)
-        jlib.log(' ')
         mupdf.mpdf_process_contents( proc_buffer, doc, in_res, in_stm, mupdf.Cookie())
-    jlib.log(' ')
     mupdf.mpdf_close_processor( proc_buffer)
-    jlib.log(' ')
     return out_buf, out_res
 
 
@@ -14389,15 +14364,9 @@ img_info = None
 
 def JM_image_filter(opaque, ctm, name, image):
     assert isinstance(ctm, mupdf.Matrix)
-    jlib.log('{type(opaque)=}')
-    jlib.log('{type(ctm)=}')
-    jlib.log('{=opaque ctm name image}')
     r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
-    jlib.log('{r=}')
     q = mupdf.mfz_transform_quad( mupdf.mfz_quad_from_rect(r), ctm)
-    jlib.log('{q=}')
     temp = name, JM_py_from_quad(q)
-    jlib.log('{temp=}')
     img_info.append(temp)
 
 
@@ -14411,10 +14380,8 @@ def JM_image_reporter(page):
             self.use_virtual_image_filter()
 
         def image_filter( self, ctm, name, image):
-            jlib.log( '{=ctm name image}')
             assert isinstance(ctm, mupdf.fz_matrix)
-            ret = JM_image_filter(self, mupdf.Matrix(ctm), name, image)
-            jlib.log( '{ret=}')
+            JM_image_filter(self, mupdf.Matrix(ctm), name, image)
 
     filter_ = Filter()
 
@@ -16610,7 +16577,6 @@ def image_properties(img: typing.ByteString) -> dict:
 
 
 def jm_bbox_add_rect(dev, rect, code):
-    jlib.log(' ')
     dev.result.append( (code, JM_py_from_rect(rect)) )
 
 
@@ -16619,52 +16585,42 @@ def jm_bbox_fill_image( dev, image, ctm, alpha, color_params):
     r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
     r = mupdf.transform_rect( r.internal(), ctm)
     #jm_bbox_add_rect( dev, r, "fill-image")
-    jlib.log(' ')
 
 
 def jm_bbox_fill_image_mask( dev, image, ctm, colorspace, color, alpha, color_params):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.transform_rect(fz_unit_rect, ctm), "fill-imgmask")
 
 
 def jm_bbox_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, color_params):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_path(path, None, ctm), "fill-path")
 
 
 def jm_bbox_fill_shade( dev, shade, ctm, alpha, color_params):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_shade( shade, ctm), "fill-shade")
 
 
 def jm_bbox_stroke_text( dev, text, stroke, ctm, *args):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_text( text, stroke, ctm), "stroke-text")
 
 
 def jm_bbox_fill_text( dev, text, ctm, *args):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_text( text, None, ctm), "fill-text")
 
 
 def jm_bbox_ignore_text( dev, text, ctm):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, muodf.bound_text(text, None, ctm), "ignore-text")
 
 
 def jm_bbox_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
-    jlib.log(' ')
     jm_bbox_add_rect( dev, mupdf.bound_path( path, stroke, ctm), "stroke-path")
 
 
 def jm_trace_device_Linewidth(dev, path, stroke_state, matrix, colorspace, color, alpha, color_params):
-    jlib.log(' ')
     trace_device_Linewidth = stroke.linewidth
     jm_increase_seqno(dev)
 
 
 def jm_increase_seqno( dev, *vargs):
-    jlib.log(' ')
     dev.seqno += 1
 
 
