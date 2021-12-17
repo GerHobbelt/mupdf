@@ -7987,6 +7987,7 @@ class Page:
         name string - elem[7] of the resp. item.
         Option 'transform' also returns the image transformation matrix.
         """
+        jlib.log('{=name transform}')
         CheckParent(self)
         doc = self.parent
         if doc.is_closed or doc.is_encrypted:
@@ -8000,10 +8001,12 @@ class Page:
             rc = inf_rect
 
         if type(name) in (list, tuple):
+            jlib.log('type(name) in (list, tuple)')
             if not type(name[-1]) is int:
                 raise ValueError("need item of full page image list")
             item = name
         else:
+            jlib.log('not type(name) in (list, tuple)')
             imglist = [i for i in doc.get_page_images(self.number, True) if name == i[7]]
             if len(imglist) == 1:
                 item = imglist[0]
@@ -8014,15 +8017,18 @@ class Page:
         xref = item[-1]
         if xref != 0 or transform == True:
             try:
+                jlib.log('reurning self.get_image_rects(...)')
                 return self.get_image_rects(item, transform=transform)[0]
             except:
+                jlib.log('returning inf_rect')
                 return inf_rect
 
-
+        jlib.log('calling _fitz.Page_get_image_bbox(). {item=}')
         #val = _fitz.Page_get_image_bbox(self, name, transform)
         pdf_page = self._pdf_page()
         val = JM_image_reporter(pdf_page)
 
+        jlib.log('{val=}')
         if not bool(val):
             return rc
 
@@ -14377,6 +14383,24 @@ def JM_image_extension(type_):
     return "n/a"
 
 
+# fixme: need to avoid using a global for this.
+img_info = None
+
+
+def JM_image_filter(opaque, ctm, name, image):
+    assert isinstance(ctm, mupdf.Matrix)
+    jlib.log('{type(opaque)=}')
+    jlib.log('{type(ctm)=}')
+    jlib.log('{=opaque ctm name image}')
+    r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
+    jlib.log('{r=}')
+    q = mupdf.mfz_transform_quad( mupdf.mfz_quad_from_rect(r), ctm)
+    jlib.log('{q=}')
+    temp = name, JM_py_from_quad(q)
+    jlib.log('{temp=}')
+    img_info.append(temp)
+
+
 def JM_image_reporter(page):
     #assert 0, 'not implemented - needs swig director support for fn ptrs.'
     doc = page.doc()
@@ -14388,6 +14412,9 @@ def JM_image_reporter(page):
 
         def image_filter( self, ctm, name, image):
             jlib.log( '{=ctm name image}')
+            assert isinstance(ctm, mupdf.fz_matrix)
+            ret = JM_image_filter(self, mupdf.Matrix(ctm), name, image)
+            jlib.log( '{ret=}')
 
     filter_ = Filter()
 
@@ -14398,7 +14425,7 @@ def JM_image_reporter(page):
     filter_.ascii = 1
 
     ctm = mupdf.Matrix()
-    mupdf.mpdf_page_transform( page, mupdf.Rect(0), ctm)
+    mupdf.mpdf_page_transform( page, mupdf.Rect(0, 0, 0, 0), ctm)
     struct_parents_obj = mupdf.mpdf_dict_get( page.obj(), PDF_NAME('StructParents'))
     struct_parents = -1
     if mupdf.mpdf_is_number( struct_parents_obj):
@@ -14406,6 +14433,7 @@ def JM_image_reporter(page):
 
     contents = mupdf.mpdf_page_contents( page)
     old_res = mupdf.mpdf_page_resources( page)
+    global img_info
     img_info = []
     buffer_, new_res = JM_filter_content_stream( doc, contents, old_res, ctm, filter_, struct_parents)
     rc = tuple( img_info)
@@ -15244,6 +15272,17 @@ def JM_py_from_matrix(m):
 def JM_py_from_point(p):
     return p.x, p.y
 
+
+def JM_py_from_quad(q):
+    '''
+    PySequence from fz_quad.
+    '''
+    return (
+            (q.ul.x, q.ul.y),
+            (q.ur.x, q.ur.y),
+            (q.ll.x, q.ll.y),
+            (q.lr.x, q.lr.y),
+            )
 
 def JM_py_from_rect(r):
     return r.x0, r.y0, r.x1, r.y1
