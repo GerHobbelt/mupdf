@@ -40,8 +40,8 @@ const globDefaultOptions = {
 };
 
 
-function unixify(path) {
-  return path.replace(/\\/g, '/');
+function unixify(p) {
+  return p.replace(/\\/g, '/');
 }
 
 let rawSourcesPath = '../../thirdparty/owemdjee/wxWidgets/src/';
@@ -77,12 +77,14 @@ glob(nukespec, globNukeConfig, function processGlobResults(err, files) {
 
 // now collect all wxW source files and construct the jumbo files from the filtered set.
 
-let scanspec = '*.cpp';
+let scanspec = '*.c*';
 console.error({scanspec});
 glob(scanspec, globConfig, function processGlobResults(err, files) {
   if (err) {
     throw new Error(`glob scan error: ${err}`);
   }
+
+  files = files.filter((f) => /\.c(:?pp)?/.test(path.extname(f)) );
 
   files.sort();
 
@@ -122,13 +124,55 @@ EOF
 done
    */
   
+  let dstCode1 = `
+
+// For compilers that support precompilation, includes "wx.h".
+#include "wx/wxprec.h"
+
+#define WX_JUMBO_MONOLITHIC_BUILD
+
+`;
+  let dstCode2 = dstCode1;
+
+  a.filter((rec) => rec.source.includes('richtext/'))
+  .forEach((rec, idx) => {
+    let name = path.basename(rec.source);
+
+    let chunk = `
+
+//------------------------------------------------------------------------
+// ${name}
+ 
+#include "${rec.file}"
+`;
+
+    let x2 = /(?:richtextbuffer|richtextctrl|richtextprint|richtextstyledlg|richtextstyles)\.cpp/.test(rec.source);
+    let x1 = /(?:richtexttabspage)\.cpp/.test(rec.source);
+    if ((x2 || idx >= 17) && !x1) {
+      dstCode2 += chunk;
+    }
+    else {
+      dstCode1 += chunk;
+    }
+  });
+
+  fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source1.cpp', dstCode1, 'utf8');
+  fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source2.cpp', dstCode2, 'utf8');
+
+  console.log("richtext bunch jumbo-ed.");
+
+
+  //--------------------
+  // and do the same for the ribbon sources:
   let dstCode = `
 
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#define WX_JUMBO_MONOLITHIC_BUILD
+
 `;
-  a.filter((rec) => rec.source.includes('richtext/'))
+  a.filter((rec) => rec.source.includes('ribbon/'))
   .forEach((rec) => {
     let name = path.basename(rec.source);
 
@@ -141,17 +185,20 @@ done
 `;
   });
 
-  fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source.cpp', dstCode, 'utf8');
+  fs.writeFileSync('../../scripts/wxWidgets/jumbo-ribbon-source.cpp', dstCode, 'utf8');
+
+  console.log("ribbon bunch jumbo-ed.");
 
 
+  //--------------------
   // next phase: find out which files match in filename (and thus cause trouble in MSVXC project files
   // as they'll generate the same OBJ file); collect these sets for subsequent use.
   
   let duplimap = new Map();
 
   let r = a.filter((rec) => {
-    let x1 = /^(?:common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix)\//.test(rec.source);
-    let x2 = /(?:dummy|strconv|graphicsd2d|notifmsgrt)\.cpp/.test(rec.source);
+    let x1 = /^(?:aui|html|propgrid|xrc|common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix)\//.test(rec.source);
+    let x2 = /(?:dummy|strconv|graphicsd2d|notifmsgrt|mediactrl_qt|xh_spin|xh_slidr|choice)\.cpp/.test(rec.source);
     return x1 && !x2;
   });
 
@@ -186,9 +233,12 @@ done
   r.forEach((name) => {
     let recs = duplimap.get(name);
 
-    if (srcCount >= 50) {
+    if (srcCount >= 37) {
       let dstname = `../../scripts/wxWidgets/jumbo-source${dstNum}.cpp`;
       fs.writeFileSync(dstname, dstCode, 'utf8');
+
+      console.log("written jumbo file", dstname);
+
       srcCount = 0;
       dstNum++;
     }
@@ -198,11 +248,13 @@ done
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#define WX_JUMBO_MONOLITHIC_BUILD
+
 `;
     }
     srcCount++;
 
-    console.error({srcCount, dstNum, name})
+    //console.error({srcCount, dstNum, name})
 
     dstCode += `
 
@@ -304,8 +356,10 @@ done
 
   // also make we dump the tail:
   if (dstCode.trim().length > 0) {
-    console.error('dump tail');
     let dstname = `../../scripts/wxWidgets/jumbo-source${dstNum}.cpp`;
+
+    console.log("written jumbo file", dstname);
+
     fs.writeFileSync(dstname, dstCode, 'utf8');
   }
 
@@ -345,181 +399,6 @@ done
 #     #include "wx/qt/colour.h"
 # #endif
 # 
-
-
-rm jumbo-source*.cpp
-
-
-
-
-CNT=0
-FILENUM=1
-
-cat > jumbo-richtext-source.cpp <<EOF
-
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-EOF
-
-for f in $(  find ../../thirdparty/owemdjee/wxWidgets/src/richtext/ -name '*.cpp' ) ; do
-
-	g=$f
-	f=$( echo $f | sed -e 's/^.*\///' )
-
-	echo "Adding $f..."
-
-	((CNT++))
-	echo "Source #${CNT}"
-
-
-	cat >> jumbo-richtext-source.cpp <<EOF  
-
-//------------------------------------------------------------------------
-// $f
- 
-EOF
-
-	cat >> jumbo-richtext-source.cpp <<EOF
-#include "$g"
-EOF
-
-done
-
-
-
-
-
-CNT=0
-FILENUM=1
-
-
-
-for f in $(  find ../../thirdparty/owemdjee/wxWidgets/src/ -name '*.cpp' | grep -e '/src/\(common\|generic\|msw\|motif\|gtk\|gtk1\|x11\|qt\|dfb\)/' | grep -v 'dummy\.cpp\|strconv\.cpp' | sed -e 's/^.*\///' | sort | uniq ) ; do
-
-	echo "Adding $f..."
-
-	if [ $CNT -ge 10 ] ; then
-		((FILENUM++))
-		CNT=0
-	fi
-	if [ $CNT -eq 0 ] ; then
-		cat > jumbo-source${FILENUM}.cpp <<EOF
-
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-EOF
-	fi
-	((CNT++))
-	echo "Source #${CNT}"
-
-
-	cat >> jumbo-source${FILENUM}.cpp <<EOF  
-
-//------------------------------------------------------------------------
-// $f
- 
-EOF
-
-	for g in $(  find ../../thirdparty/owemdjee/wxWidgets/src/ -name "$f" ) ; do
-
-		PLATFORM=$( echo $g | sed -e 's/^.*\/src\/\([^\/]\+\)\/.*$/\1/' )
-		case "$PLATFORM" in 
-		msw)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXMSW__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		motif)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXMOTIF__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		gtk1)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXGTK__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		gtk)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXGTK20__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		dfb)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXDFB__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		x11)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXX11__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		osx)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXMAC__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		qt)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if defined(__WXQT__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		univ)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if !defined(__WXMSW__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		unix)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#if !defined(__WINDOWS__)
-#  include "$g"
-#endif
-EOF
-			;;
-
-		*)
-			cat >> jumbo-source${FILENUM}.cpp <<EOF
-#include "$g"
-EOF
-			;;
-		esac
-	done
-done
-
-
-
-
-
-
 
 */
 

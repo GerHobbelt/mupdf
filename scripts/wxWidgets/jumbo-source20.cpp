@@ -1,0 +1,229 @@
+
+
+// For compilers that support precompilation, includes "wx.h".
+#include "wx/wxprec.h"
+
+#define WX_JUMBO_MONOLITHIC_BUILD
+
+
+
+//------------------------------------------------------------------------
+// xh_hyperlink.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_hyperlink.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_infobar.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_infobar.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listb.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listb.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listbk.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listbk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listc.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_mdi.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_mdi.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_menu.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_menu.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_notbk.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_notbk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_odcombo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_odcombo.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_panel.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_panel.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_propdlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_propdlg.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_radbt.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_radbt.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_radbx.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_radbx.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_ribbon.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_ribbon.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_richtext.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_richtext.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_scrol.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_scrol.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_scwin.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_scwin.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_simplebook.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_simplebook.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_sizer.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_sizer.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_split.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_split.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_srchctrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_srchctrl.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_statbar.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_statbar.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_stbmp.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_stbmp.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_stbox.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_stbox.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_stlin.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_stlin.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_sttxt.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_sttxt.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_styledtextctrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_styledtextctrl.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_text.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_text.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_tglbtn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_tglbtn.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_timectrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_timectrl.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_toolb.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_toolb.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_toolbk.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_toolbk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_tree.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_tree.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_treebk.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_treebk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_unkwn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_unkwn.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_wizrd.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_wizrd.cpp"
+
+
+//------------------------------------------------------------------------
+// xlocale.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/xlocale.cpp"

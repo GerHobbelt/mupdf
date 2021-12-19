@@ -400,9 +400,17 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   //console.error({files, a, sourcesPath, extraFilters, filesToAdd, fsrc1, fsrc2});
 
   filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2)
-  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
+  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '')
+  // and trim out empty lines:
+  .replace(/[\s\r\n]+\n/g, '\n');
+
   src = src.replace(/<\/Project>[\s\r\n]*$/, fsrc1)
-  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
+  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '')
+  // fix ProjectDependencies: MSVC2019 is quite critical about whitespace around the UUID:
+  .replace(/<Project>[\s\r\n]+[{]/g, '<Project>{')
+  .replace(/[}][\s\r\n]+<\/Project>/g, '}</Project>')
+  // and trim out empty lines:
+  .replace(/[\s\r\n]+\n/g, '\n');
 
   fs.writeFileSync(filepath, src, 'utf8');
   fs.writeFileSync(filterFilepath, filterSrc, 'utf8');

@@ -74,6 +74,8 @@ src = src
 	 p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
 	 return `<ProjectGuid>${p1}</ProjectGuid>`;
 })
+.replace(/<ClCompile Include=[^]+?<\/ClCompile>/g, '')
+.replace(/<ClInclude Include=[^]+?<\/ClInclude>/g, '')
 .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
 
 fs.writeFileSync(filepath, src, 'utf8');
