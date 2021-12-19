@@ -232,6 +232,23 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         }
         return true;
 
+    case '.rc':
+    case '.ico':
+    case '.bmp':
+    case '.png':
+    case '.xpm':
+    case '.jpg':
+    case '.xrc':
+        base = path.dirname(f);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Resource Files/' + base;
+            filterDirs.add(base);
+        }
+        return true;
+
     default:
         if (!isSpecialMiscFile(f))
           return false;
@@ -370,6 +387,88 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
         slot = `
     <ClInclude Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.rc':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Resource Files/' + base;
+        }
+        else {
+            base = 'Resource Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <ResourceCompile Include="${f}">
+      <Filter>${base}</Filter>
+    </ResourceCompile>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <ResourceCompile Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.ico':
+    case '.bmp':
+    case '.png':
+    case '.jpg':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Resource Files/' + base;
+        }
+        else {
+            base = 'Resource Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <Image Include="${f}">
+      <Filter>${base}</Filter>
+    </Image>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <Image Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.xpm':
+    case '.xrc':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Resource Files/' + base;
+        }
+        else {
+            base = 'Resource Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <Text Include="${f}">
+      <Filter>${base}</Filter>
+    </Text>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <Text Include="${f}" />
         `;
         filesToAddToProj.push(slot);
         break;

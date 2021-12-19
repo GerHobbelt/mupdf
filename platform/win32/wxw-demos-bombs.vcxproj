@@ -124,6 +124,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -143,6 +146,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -159,6 +165,9 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -178,6 +187,9 @@
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="MuPDFLib.vcxproj">
@@ -200,5 +212,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/demos/bombs/bombs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/demos/bombs/game.h" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/demos/bombs/readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\thirdparty\owemdjee\wxWidgets\demos\bombs\bombs.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\thirdparty\owemdjee\wxWidgets\demos\bombs\bombs.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\thirdparty\owemdjee\wxWidgets\demos\bombs\bombs.xpm" />
   </ItemGroup>
 </Project>

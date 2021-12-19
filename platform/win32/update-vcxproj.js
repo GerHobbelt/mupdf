@@ -154,6 +154,29 @@ src = src
 .replace(/<ImportGroup\s+Label="PropertySheets"[^]*?<\/ImportGroup>/g, '')
 .replace(/<EnableUnitySupport>[^<]*<\/EnableUnitySupport>/g, '')
 
+/*
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+ */
+if (!src.includes("</ResourceCompile>")) {
+	src = src.replace(/<\/Link>/g, `</Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>XXX</AdditionalIncludeDirectories>
+    </ResourceCompile>
+		`);
+}
+src = src.replace(/<ResourceCompile>([^]*?)<\/ResourceCompile>/g, (m, p1) => {
+	if (!/AdditionalIncludeDirectories/.test(p1))
+		p1 += `
+	  		<AdditionalIncludeDirectories>XXX</AdditionalIncludeDirectories>
+	`;
+
+	p1 = p1
+	.replace(/<AdditionalIncludeDirectories>[^]*?<\/AdditionalIncludeDirectories>/g, '<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>')
+
+	return `<ResourceCompile>${p1}</ResourceCompile>`;
+});
 
 /*
     <ClCompile>

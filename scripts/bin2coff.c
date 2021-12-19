@@ -26,6 +26,7 @@
  * http://webster.cs.ucr.edu/Page_TechDocs/pe.txt
  * http://www.delorie.com/djgpp/doc/coff/
  * http://pierrelib.pagesperso-orange.fr/exec_formats/MS_Symbol_Type_v1.0.pdf
+ * https://pete.akeo.ie/2011/11/bin2coff.html (the origin of this bin2coff)
  */
 
 /*
