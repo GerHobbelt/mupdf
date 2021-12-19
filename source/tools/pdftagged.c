@@ -24,6 +24,7 @@
  * pdftagged -- extract Tagged PDF content as HTML
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
@@ -173,7 +174,7 @@ pdf_tagged_st(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable, pdf_ob
 			}
 
 			if (pdf_is_string(ctx, at))
-				pdf_tagged_text(ctx, pdf_to_text_string(ctx, at));
+				pdf_tagged_text(ctx, pdf_to_text_string(ctx, at, NULL));
 
 			if (k)
 				pdf_tagged_st(ctx, doc, ptable, role_map, class_map, page, k);
@@ -186,7 +187,7 @@ pdf_tagged_st(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable, pdf_ob
 	}
 }
 
-void pdf_tagged_pdf(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable)
+static void pdf_tagged_pdf(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable)
 {
 	pdf_obj *trailer = pdf_trailer(ctx, doc);
 	pdf_obj *root = pdf_dict_get(ctx, trailer, PDF_NAME(Root));
@@ -199,10 +200,10 @@ void pdf_tagged_pdf(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable)
 	printf("</html>\n");
 }
 
-int pdftagged_main(int argc, char **argv)
+int pdftagged_main(int argc, const char **argv)
 {
-	char *infile;
-	char *password = "";
+	const char *infile;
+	const char *password = "";
 	pdf_mcid_table *mcid;
 	int c, i, k, n;
 
@@ -224,36 +225,44 @@ int pdftagged_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return 1;
 	}
 
 	doc = pdf_open_document(ctx, infile);
-	if (pdf_needs_password(ctx, doc))
-		if (!pdf_authenticate_password(ctx, doc, password))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
-
-	n = pdf_count_pages(ctx, doc);
-
-	/* Extract tagged content from all pages. */
-	mcid = fz_malloc_array(ctx, n, pdf_mcid_table);
-	memset(mcid, 0, n * sizeof *mcid);
-	for (i = 0; i < n; ++i)
+	fz_try(ctx)
 	{
-		// printf("EXTRACTING PAGE %d\n", i+1);
-		pdf_page *page = pdf_load_page(ctx, doc, i);
-		pdf_obj *resources = pdf_page_resources(ctx, page);
-		pdf_obj *contents = pdf_page_contents(ctx, page);
-		pdf_processor *proc = pdf_new_mcid_processor(ctx, &mcid[i]);
-		pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL);
-		pdf_close_processor(ctx, proc);
-		pdf_drop_processor(ctx, proc);
-		fz_drop_page(ctx, (fz_page*)page);
-		// for (k = 0; k < mcid[i].len; ++k) printf("MCID %d: %s\n", mcid[i].entry[k].mcid, fz_string_from_buffer(ctx, mcid[i].entry[k].text));
+		if (pdf_needs_password(ctx, doc))
+			if (!pdf_authenticate_password(ctx, doc, password))
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
+
+		n = pdf_count_pages(ctx, doc);
+
+		/* Extract tagged content from all pages. */
+		mcid = fz_malloc_array(ctx, n, pdf_mcid_table);
+		memset(mcid, 0, n * sizeof *mcid);
+		for (i = 0; i < n; ++i)
+		{
+			// printf("EXTRACTING PAGE %d\n", i+1);
+			pdf_page *page = pdf_load_page(ctx, doc, i);
+			pdf_obj *resources = pdf_page_resources(ctx, page);
+			pdf_obj *contents = pdf_page_contents(ctx, page);
+			pdf_processor *proc = pdf_new_mcid_processor(ctx, &mcid[i]);
+			pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL);
+			pdf_close_processor(ctx, proc);
+			pdf_drop_processor(ctx, proc);
+			fz_drop_page(ctx, (fz_page*)page);
+			// for (k = 0; k < mcid[i].len; ++k) printf("MCID %d: %s\n", mcid[i].entry[k].mcid, fz_string_from_buffer(ctx, mcid[i].entry[k].text));
+		}
+
+		pdf_tagged_pdf(ctx, doc, mcid);
+	}
+	fz_always(ctx)
+		pdf_drop_document(ctx, doc);
+	fz_catch(ctx)
+	{
+		fz_error(ctx, "error: %s", fz_caught_message(ctx));
 	}
 
-	pdf_tagged_pdf(ctx, doc, mcid);
-
-	pdf_drop_document(ctx, doc);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return 0;
