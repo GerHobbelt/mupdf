@@ -239,6 +239,9 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.xpm':
     case '.jpg':
     case '.xrc':
+    case '.ttf':
+    case '.otf':
+    case '.ttc':
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -442,6 +445,34 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
         slot = `
     <Image Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.ttf':
+    case '.otf':
+    case '.ttc':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Resource Files/' + base;
+        }
+        else {
+            base = 'Resource Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <Font Include="${f}">
+      <Filter>${base}</Filter>
+    </Font>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <Font Include="${f}" />
         `;
         filesToAddToProj.push(slot);
         break;

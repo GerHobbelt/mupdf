@@ -77,6 +77,11 @@ src = src
 .replace(/<IntDir>[^]*?<\/IntDir>/g, (m) => `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
 //       <OmitFramePointers>true</OmitFramePointers>
 .replace(/<OmitFramePointers>[^]*?<\/OmitFramePointers>/g, '')
+.replace(/<CopyLocalDeploymentContent>[^]*?<\/CopyLocalDeploymentContent>/g, '')
+// consolidate the CopyLocalDeploymentContent setting to the main property group:
+.replace(/<\/IntDir>/g, `</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+	`)
 /*
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
