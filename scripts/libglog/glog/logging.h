@@ -63,10 +63,11 @@
 #define GLOG_MSVC_POP_WARNING()
 #endif
 
+#include <glog/platform.h>
+
 #if 0
-#include "glog/export.h"
+#include <glog/export.h>
 #endif
-#include "glog/platform.h"
 
 // Annoying stuff for windows -- makes sure clients can import these functions
 #ifndef GOOGLE_GLOG_DLL_DECL
@@ -134,32 +135,38 @@ typedef unsigned __int64 uint64;
 #error Do not know how to define a 32-bit integer quantity on your system
 #endif
 
-}
+typedef double WallTime;
 
-#ifdef GLOG_CUSTOM_PREFIX_SUPPORT
-struct LogMessageTime {
-  explicit LogMessageTime (const struct::tm& time_struct_,
-                           const time_t& timestamp_, const int32_t& usecs_):
-      time_struct(time_struct_), ts(timestamp_), usecs(usecs_) {}
+struct GOOGLE_GLOG_DLL_DECL LogMessageTime {
+  LogMessageTime();
+  LogMessageTime(std::tm t);
+  LogMessageTime(std::time_t timestamp, WallTime now);
 
-  const time_t& timestamp() const { return ts; }
-  const int& sec() const { return time_struct.tm_sec; }
-  const int32_t& usec() const { return usecs; }
-  const int& minute() const { return time_struct.tm_min; }
-  const int& hour() const { return time_struct.tm_hour; }
-  const int& day() const { return time_struct.tm_mday; }
-  const int& month() const { return time_struct.tm_mon; }
-  const int& year() const { return time_struct.tm_year; }
-  const int& dayOfWeek() const { return time_struct.tm_wday; }
-  const int& dayInYear() const { return time_struct.tm_yday; }
-  const int& dst() const { return time_struct.tm_isdst; }
+  const time_t& timestamp() const { return timestamp_; }
+  const int& sec() const { return time_struct_.tm_sec; }
+  const int32_t& usec() const { return usecs_; }
+  const int& minute() const { return time_struct_.tm_min; }
+  const int& hour() const { return time_struct_.tm_hour; }
+  const int& day() const { return time_struct_.tm_mday; }
+  const int& month() const { return time_struct_.tm_mon; }
+  const int& year() const { return time_struct_.tm_year; }
+  const int& dayOfWeek() const { return time_struct_.tm_wday; }
+  const int& dayInYear() const { return time_struct_.tm_yday; }
+  const int& dst() const { return time_struct_.tm_isdst; }
+  const long int& gmtoff() const { return gmtoffset_; }
+  const std::tm& tm() const { return time_struct_; }
 
-  private:
-    const struct::tm& time_struct;
-    const time_t& ts;
-    const int32_t& usecs;
+ private:
+  void init(const std::tm& t, std::time_t timestamp, WallTime now);
+  std::tm time_struct_;  // Time of creation of LogMessage
+  time_t timestamp_;     // Time of creation of LogMessage in seconds
+  int32_t usecs_;        // Time of creation of LogMessage - microseconds part
+  long int gmtoffset_;
+
+  void CalcGmtOffset();
 };
 
+#ifdef GLOG_CUSTOM_PREFIX_SUPPORT
 struct LogMessageInfo {
   explicit LogMessageInfo(const char* const severity_,
                           const char* const filename_,
@@ -178,7 +185,11 @@ struct LogMessageInfo {
 };
 
 typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, void* data);
+
 #endif
+
+}
+
 
 // The global value of GOOGLE_STRIP_LOG. All the messages logged to
 // LOG(XXX) with severity less than GOOGLE_STRIP_LOG will not be displayed.
@@ -393,6 +404,12 @@ typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, vo
 #define DECLARE_int32(name) \
   DECLARE_VARIABLE(google::int32, I, name, int32)
 
+#if !defined(DECLARE_uint32) && !defined(HAVE_LIBGFLAGS)
+// uint32 specialization
+#define DECLARE_uint32(name) \
+  DECLARE_VARIABLE(google::uint32, U, name, uint32)
+#endif // !defined(DECLARE_uint32) && !defined(HAVE_LIBGFLAGS)
+
 // Special case for string, because we have to specify the namespace
 // std::string, which doesn't play nicely with our FLAG__namespace hackery.
 #define DECLARE_string(name)                                            \
@@ -448,7 +465,7 @@ DECLARE_int32(v);  // in vlog_is_on.cc
 DECLARE_string(vmodule); // also in vlog_is_on.cc
 
 // Sets the maximum log file size (in MB).
-DECLARE_int32(max_log_size);
+DECLARE_uint32(max_log_size);
 
 // Sets whether to avoid logging to the disk if the disk is full.
 DECLARE_bool(stop_logging_if_full_disk);
@@ -461,6 +478,7 @@ DECLARE_bool(log_utc_time);
 #undef DECLARE_VARIABLE
 #undef DECLARE_bool
 #undef DECLARE_int32
+#undef DECLARE_unt32
 #undef DECLARE_string
 #endif
 
@@ -589,8 +607,8 @@ DECLARE_bool(log_utc_time);
 namespace google {
 
 // They need the definitions of integer types.
-#include "glog/log_severity.h"
-#include "glog/vlog_is_on.h"
+#include <glog/log_severity.h>
+#include <glog/vlog_is_on.h>
 
 // Initialize google's logging library. You will see the program name
 // specified by argv0 in log outputs.
@@ -618,7 +636,7 @@ typedef void (*logging_fail_func_t)();
 GOOGLE_GLOG_DLL_DECL void InstallFailureFunction(logging_fail_func_t fail_func);
 
 // Enable/Disable old log cleaner.
-GOOGLE_GLOG_DLL_DECL void EnableLogCleaner(int overdue_days);
+GOOGLE_GLOG_DLL_DECL void EnableLogCleaner(unsigned int overdue_days);
 GOOGLE_GLOG_DLL_DECL void DisableLogCleaner();
 GOOGLE_GLOG_DLL_DECL void SetApplicationFingerprint(const std::string& fingerprint);
 
@@ -713,10 +731,12 @@ inline int            GetReferenceableValue(int                t) { return t; }
 inline unsigned int   GetReferenceableValue(unsigned int       t) { return t; }
 inline long           GetReferenceableValue(long               t) { return t; }
 inline unsigned long  GetReferenceableValue(unsigned long      t) { return t; }
+#if 1
 inline long long      GetReferenceableValue(long long          t) { return t; }
 inline unsigned long long GetReferenceableValue(unsigned long long t) {
   return t;
 }
+#endif
 
 // This is a dummy class to define the following operator.
 struct DummyClassToDefineOperator {};
@@ -1040,7 +1060,7 @@ extern "C" void AnnotateBenignRaceSized(
 namespace google {
 #endif
 
-#if 1 && defined(HAVE_CXX11_ATOMIC) // Have <chrono> and <atomic>
+#if 1 && __cplusplus >= 201103L && defined(HAVE_CXX11_ATOMIC) // Have <chrono> and <atomic>
 #define SOME_KIND_OF_LOG_EVERY_T(severity, seconds) \
   GLOG_CONSTEXPR std::chrono::nanoseconds LOG_TIME_PERIOD = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::duration<double>(seconds)); \
   static std::atomic<int64> LOG_PREVIOUS_TIME_RAW; \
@@ -1552,6 +1572,8 @@ public:
   // Must be called without the log_mutex held.  (L < log_mutex)
   static int64 num_messages(int severity);
 
+  const LogMessageTime& getLogMessageTime() const;
+
   struct LogMessageData;
 
 private:
@@ -1577,6 +1599,7 @@ private:
   // LogMessage uses less stack space.
   LogMessageData* allocated_;
   LogMessageData* data_;
+  LogMessageTime logmsgtime_;
 
   friend class LogDestination;
 
@@ -1722,18 +1745,8 @@ class GOOGLE_GLOG_DLL_DECL LogSink {
   // during this call.
   virtual void send(LogSeverity severity, const char* full_filename,
                     const char* base_filename, int line,
-                    const struct ::tm* tm_time,
-                    const char* message, size_t message_len, int32 /*usecs*/) {
-    send(severity, full_filename, base_filename, line,
-         tm_time, message, message_len);
-  }
-  // This send() signature is obsolete.
-  // New implementations should define this in terms of
-  // the above send() method.
-  virtual void send(LogSeverity severity, const char* full_filename,
-                    const char* base_filename, int line,
-                    const struct ::tm* tm_time,
-                    const char* message, size_t message_len) = 0;
+                    const LogMessageTime& logmsgtime, const char* message,
+                    size_t message_len);
 
   // Redefine this to implement waiting for
   // the sink's logging logic to complete.
@@ -1753,16 +1766,8 @@ class GOOGLE_GLOG_DLL_DECL LogSink {
   // Returns the normal text output of the log message.
   // Can be useful to implement send().
   static std::string ToString(LogSeverity severity, const char* file, int line,
-                              const struct ::tm* tm_time,
-                              const char* message, size_t message_len,
-                              int32 usecs);
-
-  // Obsolete
-  static std::string ToString(LogSeverity severity, const char* file, int line,
-                              const struct ::tm* tm_time,
-                              const char* message, size_t message_len) {
-    return ToString(severity, file, line, tm_time, message, message_len, 0);
-  }
+                              const LogMessageTime &logmsgtime,
+                              const char* message, size_t message_len);
 };
 
 // Add or remove a LogSink as a consumer of logging data.  Thread-safe.
@@ -1830,7 +1835,7 @@ GOOGLE_GLOG_DLL_DECL void ReprintFatalMessage();
 // lose very small amounts of data. For security, only follow symlinks
 // if the path is /proc/self/fd/*
 GOOGLE_GLOG_DLL_DECL void TruncateLogFile(const char *path,
-                                          int64 limit, int64 keep);
+                                          uint64 limit, uint64 keep);
 
 // Truncate stdout and stderr if they are over the value specified by
 // --max_log_size; keep the final 1MB.  This function has the same
