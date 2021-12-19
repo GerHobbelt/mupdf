@@ -29,140 +29,26 @@
     <ConfigurationType>Makefile</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugJava|Win32'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseJava|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugJava|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -175,74 +61,8 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-  
-  
-  
-
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
@@ -250,6 +70,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugJava|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
@@ -259,6 +80,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugJava|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
@@ -268,6 +90,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseJava|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
@@ -277,43 +100,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseJava|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <NMakeBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\ </NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>cd ..\java &amp;&amp; winmake.bat $(Configuration)-$(PlatformArchitecture)\</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine />
     <NMakeOutput>javaviewer.jar</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN64;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -357,13 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="javaviewerlib.vcxproj">
-      <Project>{3db35f2d-9679-4ded-ba0c-240a4e6e6674}
-  
-
-  
-</Project>
-  
-  
+      <Project>{3db35f2d-9679-4ded-ba0c-240a4e6e6674}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="libmupdf.vcxproj">
@@ -378,18 +165,8 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
-  
-
-  
-
-  
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
-  
-  
   

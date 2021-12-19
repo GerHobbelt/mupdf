@@ -70,9 +70,14 @@ src = src
 })
 //    <ProjectGuid>{87EE9DA4-DE1E-4448-8324-183C98DCA588}</ProjectGuid>
 .replace(/<ProjectGuid>([^<]+)<\/ProjectGuid>/g, (m, p1) => {
-	 let r = Math.random().toString(16).toUpperCase().replace(/0\./, '');
-	 p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
-	 return `<ProjectGuid>${p1}</ProjectGuid>`;
+	let r;
+	// make sure we have a usable random hexcode to use as part of our new UUID:
+	do {
+	  r = Math.random().toString(16).toUpperCase().replace(/0\./, '');
+	} while (r.length < 6);
+	// paste it over the end of the existing one:
+	p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
+	return `<ProjectGuid>${p1}</ProjectGuid>`;
 })
 .replace(/<ClCompile Include=[^]+?<\/ClCompile>/g, '')
 .replace(/<ClInclude Include=[^]+?<\/ClInclude>/g, '')

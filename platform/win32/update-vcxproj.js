@@ -341,7 +341,7 @@ src = src
 // and append this bit near the very end to ensure that 
 // the 'last seen is the winner' rule of Visual Studio property parsing 
 // makes this bunch the ultimate winners, just in case we need it:
-.replace(/<\/Project>[\s\r\n]*$/, (m) => {
+.replace(/[\s\r\n]<\/Project>[\s\r\n]*$/, (m) => {
   return `
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
@@ -349,7 +349,12 @@ src = src
 ${m}
   `;
 })
+// fix ProjectDependencies: MSVC2019 is quite critical about whitespace around the UUID:
+.replace(/<Project>[\s\r\n]+[{]/g, '<Project>{')
+.replace(/[}][\s\r\n]+<\/Project>/g, '}</Project>')
+// and trim out empty lines:
+.replace(/[\s\r\n]+\n/g, '\n');
+
 
 fs.writeFileSync(filepath, src, 'utf8');
-
 
