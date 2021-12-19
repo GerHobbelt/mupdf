@@ -3,6 +3,7 @@
  * Copyright (c) 2011 Pete Batard <pete@akeo.ie>
  * This file is part of the libwdi project: http://libwdi.sf.net
  * Modifications Copyright (c) 2018 by Artifex Software
+ * Further modifications Copyright (c) 2021 by Giorgio Bianchini
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,11 +34,18 @@
     + Accept 'Win32' and 'x64' as flags.
  */
 
+/* 
+   Updates by Giorgio Bianchini (https://github.com/arklumpus):
+    + Added support for arm64 target.
+    + Align data to 4-byte boundaries when generating for arm64.
+ */
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <assert.h>
 #if !defined(_MSC_VER)
 #include <stdint.h>
 #else
@@ -61,6 +69,9 @@ typedef unsigned long long   uint64_t;
 #define IMAGE_FILE_MACHINE_I386			 0x014c
 #define IMAGE_FILE_MACHINE_IA64			 0x0200
 #define IMAGE_FILE_MACHINE_AMD64		 0x8664
+#define IMAGE_FILE_MACHINE_ARM           0x01c0
+#define IMAGE_FILE_MACHINE_ARM2          0x01c4
+#define IMAGE_FILE_MACHINE_ARM64         0xaa64
 
 #define IMAGE_FILE_RELOCS_STRIPPED		 0x0001
 #define IMAGE_FILE_EXECUTABLE_IMAGE		 0x0002
@@ -124,9 +135,9 @@ typedef unsigned long long   uint64_t;
 #define IMAGE_SCN_MEM_WRITE				 0x80000000
 
 /* Symbol entry defines */
-#define IMAGE_SYM_UNDEFINED				 (int16_t)0
-#define IMAGE_SYM_ABSOLUTE				 (int16_t)-1
-#define IMAGE_SYM_DEBUG					 (int16_t)-2
+#define IMAGE_SYM_UNDEFINED				 ((int16_t)0)
+#define IMAGE_SYM_ABSOLUTE				 ((int16_t)-1)
+#define IMAGE_SYM_DEBUG					 ((int16_t)-2)
 
 #define IMAGE_SYM_TYPE_NULL				 0x0000
 #define IMAGE_SYM_TYPE_VOID				 0x0001
@@ -151,7 +162,7 @@ typedef unsigned long long   uint64_t;
 #define IMAGE_SYM_DTYPE_FUNCTION		 2
 #define IMAGE_SYM_DTYPE_ARRAY			 3
 
-#define IMAGE_SYM_CLASS_END_OF_FUNCTION	 (uint8_t)-1
+#define IMAGE_SYM_CLASS_END_OF_FUNCTION	 ((uint8_t)-1)
 #define IMAGE_SYM_CLASS_NULL			 0x00
 #define IMAGE_SYM_CLASS_AUTOMATIC		 0x01
 #define IMAGE_SYM_CLASS_EXTERNAL		 0x02
@@ -231,9 +242,23 @@ typedef struct {
 
 #pragma pack(pop)
 
-static int check_64bit(const char *arg, int *x86_32)
+typedef enum
+{
+    TARGET_UNKNOWN, TARGET_x86, TARGET_x64, TARGET_arm64
+} Target;
+
+static int check_64bit(const char *arg, int *x86_32, Target* target)
 {
 	if ((strcmp(arg, "64bit") == 0) || (strcmp(arg, "x64") == 0))
+		*target = TARGET_x64;
+	else if ((strcmp(arg, "arm64") == 0) || (strcmp(arg, "ARM64") == 0))
+		*target = TARGET_arm64;
+	else if ((strcmp(arg, "32bit") == 0) || (strcmp(arg, "Win32") == 0))
+		*target = TARGET_x86;
+	else
+		return 0;
+
+	if ((strcmp(arg, "64bit") == 0) || (strcmp(arg, "x64") == 0) || (strcmp(arg, "arm64") == 0) || (strcmp(arg, "ARM64") == 0))
 		*x86_32 = 0; /* 0 = 64bit */
 	else if ((strcmp(arg, "32bit") == 0) || (strcmp(arg, "Win32") == 0))
 		*x86_32 = 1; /* 1 = 32bit */
@@ -254,12 +279,14 @@ main (int argc, const char** argv)
 	char* label;
 	FILE *fd = NULL;
 	size_t size, alloc_size;
+	size_t padding_length;
 	uint8_t* buffer = NULL;
 	IMAGE_FILE_HEADER* file_header;
 	IMAGE_SECTION_HEADER* section_header;
 	IMAGE_SYMBOL* symbol_table;
 	IMAGE_STRINGS* string_table;
 	SIZE_TYPE* data_size;
+	Target target = TARGET_UNKNOWN;
 
 	if ((argc < 3) || (argc > 5)) {
 		fprintf(stderr, "\nUsage: bin2coff bin obj [label] [64bit|Win32|x64]\n\n");
@@ -267,8 +294,10 @@ main (int argc, const char** argv)
 		fprintf(stderr, "  obj  : target object file, in MS COFF format.\n");
 		fprintf(stderr, "  label: identifier for the extern data. If not provided, the name of the\n");
 		fprintf(stderr, "         binary file without extension is used.\n");
-		fprintf(stderr, "  64bit:\n  Win32:\n  x64  : produce a 64 bit compatible object - symbols are generated without\n");
-		fprintf(stderr, "         leading underscores and machine type is set to x86_x64.\n\n");
+		fprintf(stderr, "  64bit:\n  Win32:\n  x64  :\n  arm64:\n  ARM64:  produce an object that is compatible with\n");
+        fprintf(stderr, "         the specified architecture. For 64bit/x64 and arm64, symbols are\n");
+        fprintf(stderr, "         generated without leading underscores, and for arm64 the data is\n");
+        fprintf(stderr, "         aligned to 4-byte boundaries; machine type is set appropriately.\n\n");
 		fprintf(stderr, "With your linker set properly, typical access from a C source is:\n\n");
 		fprintf(stderr, "    extern uint8_t  label[]     /* binary data         */\n");
 		fprintf(stderr, "    extern uint32_t label_size  /* size of binary data */\n\n");
@@ -292,10 +321,19 @@ main (int argc, const char** argv)
 
 	x86_32 = 0;
 	last_arg = argc;
-	if (argc >= 4 && check_64bit(argv[3], &x86_32))
+	if (argc >= 4 && check_64bit(argv[3], &x86_32, &target))
 		last_arg = 4;
-	else if (argc >= 5 && check_64bit(argv[4], &x86_32))
+	else if (argc >= 5 && check_64bit(argv[4], &x86_32, &target))
 		last_arg = 5;
+	else
+		target = TARGET_x64;
+
+	if (target == TARGET_arm64)	{
+		padding_length = (4 - (size % 4)) % 4;
+	}
+	else {
+		padding_length = 0;
+	}
 
 	/* Label setup */
 	if (argc < last_arg) {
@@ -323,7 +361,7 @@ main (int argc, const char** argv)
 
 	short_label = (strlen(label) + x86_32) <= IMAGE_SIZEOF_SHORT_NAME;
 	short_size = (strlen(label) + x86_32 + strlen(SIZE_LABEL_SUFFIX)) <= IMAGE_SIZEOF_SHORT_NAME;
-	alloc_size = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL) + sizeof(IMAGE_STRINGS);
+	alloc_size = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + padding_length + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL) + sizeof(IMAGE_STRINGS);
 	if (!short_label) {
 		alloc_size += x86_32 + strlen(label) + 1;
 	}
@@ -342,15 +380,29 @@ main (int argc, const char** argv)
 	string_table = (IMAGE_STRINGS*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL)];
 
 	/* Populate file header */
-	file_header->Machine = (x86_32)?IMAGE_FILE_MACHINE_I386:IMAGE_FILE_MACHINE_AMD64;
+    switch (target)
+    {
+    case TARGET_x86:
+        file_header->Machine = IMAGE_FILE_MACHINE_I386;
+        break;
+    case TARGET_x64:
+        file_header->Machine = IMAGE_FILE_MACHINE_AMD64;
+        break;
+    case TARGET_arm64:
+        file_header->Machine = IMAGE_FILE_MACHINE_ARM64;
+        break;
+	default:
+		assert(!"Unsupported target; code flow should never get here!");
+		return EXIT_FAILURE;
+    }
 	file_header->NumberOfSections = 1;
-	file_header->PointerToSymbolTable = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + (uint32_t)size+4;
+	file_header->PointerToSymbolTable = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + (uint32_t)size + 4 + padding_length;
 	file_header->NumberOfSymbols = 2;
 	file_header->Characteristics = IMAGE_FILE_LINE_NUMS_STRIPPED;
 
 	/* Populate data section header */
 	strncpy(section_header->Name, ".data", IMAGE_SIZEOF_SHORT_NAME);
-	section_header->SizeOfRawData = (uint32_t)size+4;
+	section_header->SizeOfRawData = (uint32_t)size + 4 + padding_length;
 	section_header->PointerToRawData = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER);
 	section_header->Characteristics = IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN_ALIGN_16BYTES | IMAGE_SCN_MEM_READ | IMAGE_SCN_MEM_WRITE;
 
@@ -360,7 +412,13 @@ main (int argc, const char** argv)
 		goto err;
 	}
 	fclose(fd); fd = NULL;
-	data_size = (SIZE_TYPE*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size];
+
+	uint8_t *padding_ptr = &buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size];
+	if (padding_length) {
+		memset(padding_ptr, 0, padding_length);
+	}
+	padding_ptr += padding_length;
+	data_size = (SIZE_TYPE*)padding_ptr;
 	*data_size = (SIZE_TYPE)size;
 
 	/* Populate symbol table */
@@ -389,7 +447,7 @@ main (int argc, const char** argv)
 	symbol_table[1].Type = IMAGE_SYM_TYPE_NULL;
 	symbol_table[1].StorageClass = IMAGE_SYM_CLASS_EXTERNAL;
 	symbol_table[1].SectionNumber = 1;
-	symbol_table[1].Value = (int32_t)size;	/* Offset within the section */
+	symbol_table[1].Value = (int32_t)size + padding_length;	/* Offset within the section */
 
 	/* Populate string table */
 	string_table->TotalSize = sizeof(IMAGE_STRINGS);
