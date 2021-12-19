@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SENTENCEPIECE;SENTENCEPIECE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SENTENCEPIECE;SENTENCEPIECE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SENTENCEPIECE;SENTENCEPIECE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SENTENCEPIECE;SENTENCEPIECE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,554 +228,190 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_trainer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_trainer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece_model.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_trainer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_trainer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/compile_charsmap_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/filesystem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/filesystem_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/freelist_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/init_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_interface_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/normalizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/normalizer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/pretokenizer_for_training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/pretokenizer_for_training_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_processor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_processor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_trainer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_trainer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_decode_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_encode_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_export_vocab_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_normalize_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_train_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/test_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/testharness.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_interface_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_trainer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_trainer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_trainer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_trainer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/flags/flag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/string_view.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/arena.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/arenastring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/bytestream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/coded_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/extension_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/generated_enum_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/generated_message_table_driven_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/generated_message_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/implicit_weak_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/int128.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/io_win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/message_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/parse_context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/repeated_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/statusor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/stringpiece.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/stringprintf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/structurally_valid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/strutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/wire_format_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/zero_copy_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/zero_copy_stream_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/zero_copy_stream_impl_lite.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/python/once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece_model.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/char_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/freelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/model_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/model_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/normalization_rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/normalizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/pretokenizer_for_training.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/spec_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/testharness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/word_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/container/flat_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/container/flat_hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/flags/flag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/flags/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/memory/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/match.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/numbers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_cat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_join.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/strip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/darts_clone/darts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/arena_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/arenastring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/extension_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/extension_set_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_enum_reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_enum_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_message_table_driven.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_message_table_driven_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_message_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/has_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/implicit_weak_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/coded_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/io_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/zero_copy_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/zero_copy_stream_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/zero_copy_stream_impl_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map_entry_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map_type_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/message_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/metadata_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/parse_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/repeated_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/bytestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/casts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/int128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/map_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/platform_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/statusor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/stl_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/stringpiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/stringprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/strutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/unknown_field_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/wire_format_lite.h" />
+    <Text Include="../../thirdparty/owemdjee/sentencepiece/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sentencepiece/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sentencepiece/tensorflow/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_trainer.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_trainer_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builder.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builder_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece.pb.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece_model.pb.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_trainer.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_trainer_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/compile_charsmap_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/error.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/filesystem.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/filesystem_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/freelist_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/init_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_factory.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_factory_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_interface.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/model_interface_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/normalizer.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/normalizer_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/pretokenizer_for_training.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/pretokenizer_for_training_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_processor.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_processor_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_trainer.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_trainer_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_decode_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_encode_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_export_vocab_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_normalize_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/spm_train_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/test_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/testharness.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_factory.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_factory_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_interface.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_interface_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_trainer.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_trainer_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/util.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/util_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_trainer.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_trainer_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/flags/flag.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/string_view.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/arena.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/arenastring.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/bytestream.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/coded_stream.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/common.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/extension_set.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/generated_enum_util.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/generated_message_table_driven_lite.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/generated_message_util.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/implicit_weak_message.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/int128.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/io_win32.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/message_lite.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/parse_context.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/repeated_field.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/status.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/statusor.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/stringpiece.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/stringprintf.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/structurally_valid.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/strutil.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/time.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/wire_format_lite.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/zero_copy_stream.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/zero_copy_stream_impl.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/zero_copy_stream_impl_lite.cc" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/python/once.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/bpe_model_trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/builder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece.pb.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/builtin_pb/sentencepiece_model.pb.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/char_model.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/char_model_trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/filesystem.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/freelist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/init.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/model_factory.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/model_interface.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/normalization_rule.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/normalizer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/pretokenizer_for_training.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_processor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/sentencepiece_trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/spec_parser.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/testharness.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_factory.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/trainer_interface.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unicode_script_map.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/unigram_model_trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/word_model.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/src/word_model_trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/container/flat_hash_map.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/container/flat_hash_set.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/flags/flag.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/flags/parse.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/memory/memory.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/ascii.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/match.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/numbers.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_cat.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_format.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_join.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_replace.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/str_split.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/string_view.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/absl/strings/strip.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/darts_clone/darts.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/any.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/arena.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/arena_impl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/arenastring.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/descriptor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/extension_set.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/extension_set_inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_enum_reflection.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_enum_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_message_table_driven.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_message_table_driven_lite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/generated_message_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/has_bits.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/implicit_weak_message.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/coded_stream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/io_win32.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/zero_copy_stream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/zero_copy_stream_impl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/io/zero_copy_stream_impl_lite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map_entry_lite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map_field_lite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/map_type_handler.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/message_lite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/metadata_lite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/parse_context.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/port.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/repeated_field.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/bytestream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/callback.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/casts.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/hash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/int128.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/logging.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/macros.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/map_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/mutex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/once.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/platform_macros.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/port.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/status.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/statusor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/stl_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/stringpiece.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/stringprintf.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/strutil.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/stubs/time.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/unknown_field_set.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/sentencepiece/third_party/protobuf-lite/google/protobuf/wire_format_lite.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/sentencepiece/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/sentencepiece/python/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/sentencepiece/tensorflow/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

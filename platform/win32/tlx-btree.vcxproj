@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TLX_BTREE;TLX_BTREE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TLX_BTREE;TLX_BTREE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TLX_BTREE;TLX_BTREE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TLX_BTREE;TLX_BTREE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,860 +228,292 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm/multiway_merge_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm/multiway_merge_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm/random_bipartition_shuffle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/backtrace_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/cmdline_parser_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/cmdline_parser_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/btree_speedtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/btree_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/d_ary_heap_speedtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/d_ary_heap_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/loser_tree_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/lru_cache_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/radix_heap_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/ring_buffer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/simple_vector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/splay_tree_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/string_view_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/counting_ptr_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/delegate_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/deprecated_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/die_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/digest_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/logger_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/math/aggregate_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/math/polynomial_regression_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/math_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/call_for_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/fold_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/function_chain_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/function_stack_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/has_member_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/log2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/vmap_for_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/multi_timer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/semaphore_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/siphash_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_networks_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_parallel_mergesort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_parallel_radixsort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_parallel_speedtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_parallel_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_radix_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/stack_allocator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/string_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/thread_barrier_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/thread_pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/parallel_multiway_merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/backtrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/cmdline_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/die/die_core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/md5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha256.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/multi_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/port/setenv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/appendline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/bitdump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/compare_icase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains_word.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ends_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/equal_icase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/erase_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_html.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_uri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/expand_environment_variables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/extract_between.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_si_iec_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hexdump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/index_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join_quoted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/less_icase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/pad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_si_iec_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/replace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_quoted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_words.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ssprintf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/starts_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_lower.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_upper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/trim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/union_words.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/word_wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/timestamp.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/exclusive_scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/is_sorted_cmp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/merge_advance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/merge_combine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multisequence_partition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multisequence_selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multiway_merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multiway_merge_splitting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/parallel_multiway_merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/random_bipartition_shuffle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/allocator_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/backtrace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/cmdline_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_multimap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_multiset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/d_ary_addressable_int_heap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/d_ary_heap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/loser_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/lru_cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/radix_heap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/ring_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/simple_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/splay_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/counting_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_always_inline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_fallthrough.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_format_printf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_packed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_warn_unused_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/constexpr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/deprecated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/endian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/likely.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/visibility_hidden.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/delegate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/die.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/die/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/md5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha256.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha512.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/deque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/wrap_unprintable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/abs_diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/aggregate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/aggregate_min_max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/bswap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/bswap_be.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/bswap_le.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/clz.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/ctz.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/div_ceil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/ffs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/integer_log2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/is_power_of_two.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/polynomial_regression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/popcount.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/power_to_the.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/rol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/ror.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/round_to_power_of_two.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/round_up.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/sgn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/apply_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_for_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach_tuple_with_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach_with_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/enable_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_left.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_left_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_right.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_right_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/function_chain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/function_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/has_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/has_method.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/index_sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/log2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/no_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/static_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vexpand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_for_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach_tuple_with_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach_with_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/multi_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/port.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/port/setenv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/semaphore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/simple_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/siphash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/best.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/bose_nelson.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/bose_nelson_parameter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/cswap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/parallel_mergesort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/parallel_radixsort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/shadow_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/insertion_sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/multikey_quicksort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/parallel_radixsort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/parallel_sample_sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/radix_sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/sample_sort_tools.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/string_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/string_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings_parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/stack_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/appendline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/base64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/bitdump.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/compare_icase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains_word.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ends_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/equal_icase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/erase_all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_html.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_uri.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/expand_environment_variables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/extract_between.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_iec_units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_si_iec_units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_si_units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hash_djb2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hash_sdbm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hexdump.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/index_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join_generic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join_quoted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/less_icase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/levenshtein.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/pad.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_si_iec_units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_uri.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_uri_form_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/replace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_quoted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_words.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ssprintf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ssprintf_generic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/starts_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_lower.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_upper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/trim.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/union_words.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/word_wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_barrier_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_barrier_spin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/timestamp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/unused.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/vector_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/version.hpp" />
+    <Text Include="../../thirdparty/owemdjee/tlx-btree/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm/multiway_merge_benchmark.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm/multiway_merge_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm/random_bipartition_shuffle.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/algorithm_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/backtrace_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/cmdline_parser_example.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/cmdline_parser_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/btree_speedtest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/btree_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/d_ary_heap_speedtest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/d_ary_heap_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/loser_tree_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/lru_cache_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/radix_heap_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/ring_buffer_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/simple_vector_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/splay_tree_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/container/string_view_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/counting_ptr_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/delegate_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/deprecated_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/die_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/digest_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/logger_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/math/aggregate_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/math/polynomial_regression_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/math_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/call_for_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/fold_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/function_chain_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/function_stack_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/has_member_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/log2_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/meta/vmap_for_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/multi_timer_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/semaphore_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/siphash_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_networks_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_parallel_mergesort_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_parallel_radixsort_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_parallel_speedtest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_example.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_parallel_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_radix_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/stack_allocator_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/string_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/thread_barrier_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tests/thread_pool_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/parallel_multiway_merge.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/backtrace.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/cmdline_parser.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/die/die_core.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/md5.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha1.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha256.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha512.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/core.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/multi_timer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/port/setenv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/appendline.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/base64.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/bitdump.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/compare_icase.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains_word.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ends_with.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/equal_icase.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/erase_all.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_html.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_uri.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/expand_environment_variables.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/extract_between.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_si_iec_units.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hexdump.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/index_of.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join_quoted.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/less_icase.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/pad.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_si_iec_units.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/replace.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_quoted.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_words.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ssprintf.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/starts_with.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_lower.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_upper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/trim.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/union_words.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/word_wrap.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_pool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tlx-btree/tlx/timestamp.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tests/sort_strings_test.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/exclusive_scan.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/is_sorted_cmp.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/merge_advance.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/merge_combine.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multisequence_partition.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multisequence_selection.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multiway_merge.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/multiway_merge_splitting.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/parallel_multiway_merge.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/algorithm/random_bipartition_shuffle.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/allocator_base.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/backtrace.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/cmdline_parser.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_multimap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_multiset.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/btree_set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/d_ary_addressable_int_heap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/d_ary_heap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/loser_tree.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/lru_cache.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/radix_heap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/ring_buffer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/simple_vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/splay_tree.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/container/string_view.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/counting_ptr.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_always_inline.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_fallthrough.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_format_printf.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_packed.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/attribute_warn_unused_result.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/constexpr.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/deprecated.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/endian.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/likely.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/define/visibility_hidden.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/delegate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/die.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/die/core.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/md5.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha1.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha256.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/digest/sha512.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/all.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/array.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/core.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/deque.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/unordered_map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/unordered_set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/logger/wrap_unprintable.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/abs_diff.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/aggregate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/aggregate_min_max.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/bswap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/bswap_be.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/bswap_le.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/clz.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/ctz.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/div_ceil.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/ffs.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/integer_log2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/is_power_of_two.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/polynomial_regression.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/popcount.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/power_to_the.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/rol.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/ror.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/round_to_power_of_two.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/round_up.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/math/sgn.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/apply_tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_for_range.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach_tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach_tuple_with_index.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/call_foreach_with_index.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/enable_if.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_left.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_left_tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_right.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/fold_right_tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/function_chain.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/function_stack.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/has_member.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/has_method.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/index_sequence.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_array.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_pair.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/is_std_vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/log2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/no_operation.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/static_index.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vexpand.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_for_range.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach_tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach_tuple_with_index.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/meta/vmap_foreach_with_index.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/multi_timer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/port.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/port/setenv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/semaphore.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/simple_vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/siphash.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/best.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/bose_nelson.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/bose_nelson_parameter.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/networks/cswap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/parallel_mergesort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/parallel_radixsort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/shadow_set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/insertion_sort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/multikey_quicksort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/parallel_radixsort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/parallel_sample_sort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/radix_sort.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/sample_sort_tools.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/string_ptr.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings/string_set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/sort/strings_parallel.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/stack_allocator.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/appendline.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/base64.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/bitdump.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/compare_icase.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/contains_word.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ends_with.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/equal_icase.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/erase_all.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_html.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/escape_uri.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/expand_environment_variables.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/extract_between.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_iec_units.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_si_iec_units.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/format_si_units.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hash_djb2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hash_sdbm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/hexdump.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/index_of.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join_generic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/join_quoted.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/less_icase.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/levenshtein.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/pad.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_si_iec_units.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_uri.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/parse_uri_form_data.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/replace.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_quoted.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_view.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/split_words.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ssprintf.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/ssprintf_generic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/starts_with.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_lower.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/to_upper.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/trim.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/union_words.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/string/word_wrap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_barrier_mutex.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_barrier_spin.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/thread_pool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/timestamp.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/unused.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/vector_free.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tlx-btree/tlx/version.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/tlx-btree/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

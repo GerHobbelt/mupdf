@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XZ_UTILS;XZ_UTILS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XZ_UTILS;XZ_UTILS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XZ_UTILS;XZ_UTILS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XZ_UTILS;XZ_UTILS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,677 +228,231 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/full_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/hex2bin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/known_sizes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/memusage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/repeat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/sync_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/01_compress_easy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/02_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/03_compress_custom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/04_compress_easy_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/11_file_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples_old/xz_pipe_comp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples_old/xz_pipe_decomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/extra/scanlzma/scanlzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/lib/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/lib/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_cpucores.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_mbstr_fw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_mbstr_width.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_open_stdxxx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_physmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_progname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_small.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_small.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/alone_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/alone_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/auto_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_buffer_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_header_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_header_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_decoder_memusage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_encoder_memusage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_preset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/file_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_buffer_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_flags_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_flags_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/hardware_cputhreads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/hardware_physmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/microlzma_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/microlzma_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/outqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_buffer_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_encoder_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/vli_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/vli_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/vli_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder_mf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/fastpos_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/fastpos_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_optimum_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_optimum_normal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_presets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/price_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/price_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/armthumb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/ia64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/powerpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_coder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/sparc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/lzmainfo/lzmainfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/coder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/file_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/hardware.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/mytime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/signals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/suffix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xzdec/xzdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/bcj_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/create_compress_files.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/ossfuzz/fuzz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_bcj_exact_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_block_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_filter_flags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_stream_flags.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/dos/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/lib/getopt.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/lib/getopt_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/mythread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/sysdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_cpucores.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_exit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_gettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_mbstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_open_stdxxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_physmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_progname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/bcj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/hardware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/index_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/lzma12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/stream_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/vli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_table_be.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_table_le.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_table_be.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_table_le.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/alone_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_buffer_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_preset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/memcmplen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/outqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder_hash_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/fastpos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/price.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/range_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/range_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/range_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/file_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/hardware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/mytime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/signals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/suffix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/tests/tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/windows/vs2013/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/windows/vs2017/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/windows/vs2019/config.h" />
+    <Text Include="../../thirdparty/owemdjee/xz-utils/doc/examples/00_README.txt" />
+    <Text Include="../../thirdparty/owemdjee/xz-utils/dos/README.txt" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/crc32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/full_flush.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/hex2bin.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/known_sizes.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/memusage.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/repeat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/debug/sync_flush.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/01_compress_easy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/02_decompress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/03_compress_custom.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/04_compress_easy_mt.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples/11_file_info.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples_old/xz_pipe_comp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/doc/examples_old/xz_pipe_decomp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/extra/scanlzma/scanlzma.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/lib/getopt.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/lib/getopt1.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_cpucores.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_exit.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_mbstr_fw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_mbstr_width.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_open_stdxxx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_physmem.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_progname.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/check.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_fast.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_small.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_table.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_tablegen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_fast.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_small.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_table.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_tablegen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/sha256.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/alone_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/alone_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/auto_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_buffer_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_buffer_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_header_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_header_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_util.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_buffer_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_decoder_memusage.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_encoder_memusage.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_preset.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/file_info.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_buffer_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_buffer_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_flags_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_flags_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/hardware_cputhreads.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/hardware_physmem.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_hash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/microlzma_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/microlzma_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/outqueue.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_buffer_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_buffer_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_encoder_mt.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/vli_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/vli_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/vli_size.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder_mf.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/fastpos_table.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/fastpos_tablegen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_optimum_fast.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_optimum_normal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_presets.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/price_table.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/price_tablegen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/arm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/armthumb.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/ia64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/powerpc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_coder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_decoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_encoder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/sparc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/x86.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/lzmainfo/lzmainfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/args.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/coder.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/file_io.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/hardware.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/list.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/message.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/mytime.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/options.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/signals.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/suffix.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xz/util.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/src/xzdec/xzdec.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/bcj_test.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/create_compress_files.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/ossfuzz/fuzz.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_bcj_exact_size.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_block_header.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_check.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_filter_flags.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_index.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xz-utils/tests/test_stream_flags.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/dos/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/lib/getopt.in.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/lib/getopt_int.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/mythread.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/sysdefs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_cpucores.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_exit.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_gettext.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_integer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_mbstr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_open_stdxxx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_physmem.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/common/tuklib_progname.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/base.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/bcj.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/block.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/check.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/container.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/delta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/filter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/hardware.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/index.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/index_hash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/lzma12.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/stream_flags.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/api/lzma/vli.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/check.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_table_be.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc32_table_le.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_table_be.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc64_table_le.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/check/crc_macros.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/alone_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_buffer_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/block_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/easy_preset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/filter_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/index_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/memcmplen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/outqueue.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/common/stream_flags_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/delta/delta_private.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder_hash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lz/lz_encoder_hash_table.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/fastpos.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma2_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/lzma/lzma_encoder_private.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/price.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/range_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/range_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/rangecoder/range_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_coder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_decoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_encoder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/liblzma/simple/simple_private.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/args.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/coder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/file_io.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/hardware.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/list.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/main.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/message.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/mytime.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/options.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/private.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/signals.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/suffix.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/src/xz/util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/tests/tests.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/windows/vs2013/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/windows/vs2017/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xz-utils/windows/vs2019/config.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xz-utils/doc/examples/00_README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xz-utils/dos/README.txt" />
-        
-  </ItemGroup>
 </Project>
-    
+  

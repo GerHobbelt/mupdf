@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,119 +228,45 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-compile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-approx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-backtrack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-parallel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/xmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/python/tre-python.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/src/agrep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/randtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/retest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/test-str-source.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/include/tre/tre-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/include/tre/tre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-match-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/xmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/win32/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/win32/tre-config.h" />
+    <Text Include="../../thirdparty/owemdjee/tre/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regcomp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regerror.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regexec.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-ast.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-compile.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-filter.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-approx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-backtrack.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-parallel.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-mem.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-parse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-stack.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/xmalloc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/python/tre-python.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/src/agrep.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/bench.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/randtest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/retest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/test-str-source.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/include/tre/tre-config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/include/tre/tre.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/regex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-ast.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-compile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-filter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-internal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-match-utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-mem.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-parse.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-stack.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/xmalloc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/win32/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/tre/win32/tre-config.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/tre/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

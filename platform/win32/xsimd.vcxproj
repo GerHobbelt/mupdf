@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XSIMD;XSIMD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XSIMD;XSIMD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XSIMD;XSIMD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XSIMD;XSIMD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,311 +228,109 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/benchmark/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/examples/mandelbrot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_algorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_arch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_basic_math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_bool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_constant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_float.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_bitwise_cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_exponential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_hyperbolic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_power.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_trigonometric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_error_gamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_exponential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_extract_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_fp_manipulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_hyperbolic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_load_store.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_poly_evaluation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_power.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_rounding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_shuffle_128.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_trigonometric.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/benchmark/xsimd_benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/examples/pico_bench.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_arithmetic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_details.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_logical.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_rounding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_trigo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512bw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512cd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512dq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512f.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_isa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_neon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_neon64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse4_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse4_2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_ssse3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_arch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_cpuid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/math/xsimd_rem_pio2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/memory/xsimd_aligned_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/memory/xsimd_alignment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/stl/algorithms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_all_registers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx2_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512bw_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512cd_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512dq_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512f_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch_constant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_fma3_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_fma5_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_generic_arch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_neon64_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_neon_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse2_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse3_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse4_1_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse4_2_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_ssse3_register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/xsimd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/test/test_utils.hpp" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/benchmark/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/examples/mandelbrot.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_algorithms.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_api.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_arch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_basic_math.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_bool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_cast.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_complex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_constant.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_float.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_int.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_bitwise_cast.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_exponential.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_hyperbolic.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_power.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_trigonometric.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_conversion.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_error_gamma.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_exponential.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_extract_pair.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_fp_manipulation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_hyperbolic.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_interface.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_load_store.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_memory.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_poly_evaluation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_power.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_rounding.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_select.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_shuffle_128.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_traits.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_trigonometric.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/benchmark/xsimd_benchmark.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/examples/pico_bench.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_arithmetic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_complex.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_details.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_logical.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_math.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_memory.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_rounding.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_trigo.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512bw.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512cd.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512dq.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512f.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_constants.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma3.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma4.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma5.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic_fwd.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_isa.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_neon.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_neon64.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_scalar.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse3.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse4_1.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_sse4_2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_ssse3.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_arch.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_config.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_cpuid.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/math/xsimd_rem_pio2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/memory/xsimd_aligned_allocator.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/memory/xsimd_alignment.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/stl/algorithms.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_all_registers.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_api.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx2_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512bw_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512cd_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512dq_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512f_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch_constant.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_fma3_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_fma5_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_generic_arch.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_neon64_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_neon_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse2_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse3_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse4_1_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse4_2_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_ssse3_register.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/xsimd.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/test/test_utils.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xsimd/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XXHASH;XXHASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XXHASH;XXHASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XXHASH;XXHASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XXHASH;XXHASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,140 +228,52 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_os_specific.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_sanity_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xxhsum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchHash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchfn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/bhDisplay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/timefn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/sort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/threading.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/generate_unicode_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/multiInclude.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/ppc_define.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/xxh_x86dispatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/xxhash.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_os_specific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_sanity_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchHash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchfn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/bhDisplay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/hashes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/timefn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/dummy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/hashes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/sort.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxh3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxh_x86dispatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxhash.h" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_os_specific.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_output.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_sanity_check.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xxhsum.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchHash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchfn.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/bhDisplay.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/timefn.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/dummy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/pool.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/sort.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/collisions/threading.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/generate_unicode_test.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/multiInclude.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/ppc_define.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/xxh_x86dispatch.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/xxHash/xxhash.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_arch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_os_specific.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_output.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_sanity_check.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchHash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchfn.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/bhDisplay.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/hashes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/bench/timefn.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/dummy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/hashes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/pool.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/sort.hh" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/threading.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxh3.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxh_x86dispatch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxhash.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xxHash/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xxHash/doc/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

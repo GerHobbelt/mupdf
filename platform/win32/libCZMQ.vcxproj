@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>libCZMQ</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF77F978}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCZMQ;CZMQ_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCZMQ;CZMQ_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCZMQ;CZMQ_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCZMQ;CZMQ_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCZMQ;CZMQ_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,929 +228,316 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zarmour.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zcert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zcertstore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zchunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zclock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zdigest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZdirPatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zhashx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpClient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpRequest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpResponse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpServer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpServerOptions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Ziflist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zlistx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zloop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zmsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zpoller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zsock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zsys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Ztimerset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Ztrie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zuuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/nodejs/binding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZargs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZarmour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcertstore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZchunk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZclock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZconfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdigest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdirPatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhashx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpRequest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpResponse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerOptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZiflist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlistx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZloop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZmsg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZosc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZpoller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZstr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtimerset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtrie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZuuid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/selftest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzargs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzarmour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcertstore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzchunk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzclock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzconfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdigest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdirpatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhashx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpclient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttprequest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpresponse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserverconnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserveroptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qziflist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlistx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzloop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzmsg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzosc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzpoller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzstr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztimerset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztrie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzuuid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/grasslands.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/ironhouse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/ironhouse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/ironhouse2_v2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/stonehouse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/strawhouse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/woodhouse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/issues/issue-407.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/czmq_private_selftest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/czmq_selftest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/test_randof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/test_zgossip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zactor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zargs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zarmour.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zauth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zbeacon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zcert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zcertstore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zchunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zclock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zdigest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zdir_patch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zgossip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zgossip_msg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhashx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_private_selftest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_request.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_response.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_selftest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_server_options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/ziflist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zlistx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zloop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zmakecert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zmonitor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zmsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zpoller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zproxy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zrex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zsock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zsys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/ztimerset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/ztrie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zuuid.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/msvc/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/msvc/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/nodejs/binding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZargs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZarmour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcertstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZchunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZclock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdigest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdirPatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhashx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpResponse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZiflist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlistx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZloop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZmsg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZosc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZpoller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtimerset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtrie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZuuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/qml_czmq_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qczmq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzargs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzarmour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcertstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzchunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzclock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdigest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdirpatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhashx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpclient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttprequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpresponse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserverconnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserveroptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qziflist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlistx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzloop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzmsg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzosc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzpoller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztimerset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztrie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzuuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/gyp/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/mingw32/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/msvc/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/msvc/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/czmq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/czmq_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/czmq_prelude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/test_zgossip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zargs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zarmour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zauth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zbeacon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zcert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zcertstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zchunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zclock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zdigest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zdir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zdir_patch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zgossip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhashx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_response.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_server_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/ziflist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zlistx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zloop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zmonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zmsg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zosc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zpoller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zproxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zrex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/ztimerset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/ztrie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zuuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/czmq_classes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/foreign/sha1/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/foreign/slre/slre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/zgossip_msg.h" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/README.cygwin" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/nodejs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/python_cffi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/android/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/gyp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/nuget/readme.nuget" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/rpi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/examples/security/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/images/README_1.png" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/issues/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/packaging/dist/gitlog2changelog.py" />
+    <Text Include="../../thirdparty/owemdjee/libCZMQ/src/foreign/slre/readme.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zarmour.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zcert.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zcertstore.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zchunk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zclock.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zconfig.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zdigest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zdir.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZdirPatch.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zfile.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zframe.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zhash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zhashx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpClient.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpRequest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpResponse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpServer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_ZhttpServerOptions.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Ziflist.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zlist.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zlistx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zloop.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zmsg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zosc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zpoller.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zproc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zsock.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zstr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zsys.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Ztimerset.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Ztrie.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/czmq-jni/src/main/c/org_zeromq_czmq_Zuuid.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/nodejs/binding.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZactor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZargs.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZarmour.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcert.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcertstore.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZchunk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZclock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZconfig.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdigest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdir.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdirPatch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZfile.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZframe.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhash.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhashx.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpClient.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpRequest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpResponse.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerConnection.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerOptions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZiflist.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlist.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlistx.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZloop.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZmsg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZosc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZpoller.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZproc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZstr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsys.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtimerset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtrie.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZuuid.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/selftest/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzactor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzargs.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzarmour.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcert.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcertstore.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzchunk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzclock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzconfig.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdigest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdir.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdirpatch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzfile.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzframe.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhash.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhashx.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpclient.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttprequest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpresponse.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserver.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserverconnection.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserveroptions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qziflist.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlist.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlistx.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzloop.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzmsg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzosc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzpoller.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzproc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzstr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsys.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztimerset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztrie.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzuuid.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/grasslands.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/hello.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/ironhouse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/ironhouse2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/ironhouse2_v2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/stonehouse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/strawhouse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/examples/security/woodhouse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/issues/issue-407.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/czmq_private_selftest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/czmq_selftest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/test_randof.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/test_zgossip.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zactor.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zargs.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zarmour.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zauth.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zbeacon.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zcert.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zcertstore.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zchunk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zclock.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zconfig.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zdigest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zdir.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zdir_patch.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zfile.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zframe.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zgossip.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zgossip_msg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhashx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_client.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_private_selftest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_request.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_response.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_selftest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_server.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zhttp_server_options.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/ziflist.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zlist.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zlistx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zloop.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zmakecert.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zmonitor.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zmsg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zosc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zpoller.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zproc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zproxy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zrex.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zsock.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zsp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zstr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zsys.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/ztimerset.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/ztrie.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libCZMQ/src/zuuid.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/msvc/platform.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/msvc/resource.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/nodejs/binding.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZactor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZargs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZarmour.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcert.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZcertstore.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZchunk.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZclock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZconfig.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdigest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdir.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZdirPatch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZfile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZframe.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhashx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpClient.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpRequest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpResponse.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerConnection.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZhttpServerOptions.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZiflist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZlistx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZloop.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZmsg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZosc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZpoller.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZproc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZstr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZsys.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtimerset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZtrie.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/QmlZuuid.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/src/qml_czmq_plugin.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qczmq.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzactor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzargs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzarmour.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcert.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzcertstore.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzchunk.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzclock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzconfig.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdigest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdir.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzdirpatch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzfile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzframe.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhashx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpclient.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttprequest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpresponse.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserver.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserverconnection.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzhttpserveroptions.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qziflist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzlistx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzloop.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzmsg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzosc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzpoller.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzproc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzstr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzsys.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztimerset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qztrie.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/src/qzuuid.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/gyp/platform.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/mingw32/platform.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/msvc/platform.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/builds/msvc/resource.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/czmq.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/czmq_library.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/czmq_prelude.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/test_zgossip.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zactor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zargs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zarmour.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zauth.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zbeacon.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zcert.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zcertstore.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zchunk.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zclock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zconfig.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zdigest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zdir.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zdir_patch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zfile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zframe.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zgossip.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhashx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_client.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_request.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_response.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_server.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zhttp_server_options.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/ziflist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zlist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zlistx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zloop.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zmonitor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zmsg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zosc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zpoller.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zproc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zproxy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zrex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zsock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zstr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zsys.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/ztimerset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/ztrie.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/include/zuuid.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/czmq_classes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/foreign/sha1/sha1.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/foreign/slre/slre.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libCZMQ/src/zgossip_msg.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/README.cygwin" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/jni/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/nodejs/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/python_cffi/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/qml/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/bindings/qt/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/android/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/gyp/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/nuget/readme.nuget" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/builds/rpi/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/examples/security/README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/images/README_1.png" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/issues/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/packaging/dist/gitlog2changelog.py" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libCZMQ/src/foreign/slre/readme.txt" />
-        
-  </ItemGroup>
 </Project>
-    
+  

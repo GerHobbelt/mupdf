@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>hmm-scalable</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF468C37}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_SCALABLE;HMM_SCALABLE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_SCALABLE;HMM_SCALABLE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_SCALABLE;HMM_SCALABLE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_SCALABLE;HMM_SCALABLE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_SCALABLE;HMM_SCALABLE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,203 +228,74 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitElo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedAB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGKi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemComp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloSt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemKT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiABGK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiAGK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGKww.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedAB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/InputUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/InputUtilSt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/PUCorbettianAdditive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/PULogistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/SparseArray2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/StripedArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/inputconvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/predicthmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/predicthmmst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/trainhmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/trainhmmst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/utilsSt.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitElo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedAB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGKi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemComp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloSt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemKT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiABGK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiAGK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGKww.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedAB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/InputUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/InputUtilSt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/PUCorbettianAdditive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/PULogistic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/ParameterUnion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/SparseArray2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/StripedArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/utilsSt.h" />
+    <Text Include="../../thirdparty/owemdjee/hmm-scalable/docs/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/hmm-scalable/readme.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBit.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitElo.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedA.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedAB.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSt.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblem.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGK.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGKi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemComp.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloK.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloSt.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemKT.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiABGK.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiAGK.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiG.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGK.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGKww.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedA.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedAB.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSt.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/InputUtil.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/InputUtilSt.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/PUCorbettianAdditive.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/PULogistic.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/SparseArray2D.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/StripedArray.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/inputconvert.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/predicthmm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/predicthmmst.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/trainhmm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/trainhmmst.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/utils.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-scalable/utilsSt.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBit.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitElo.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedA.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSlicedAB.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/FitBitSt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblem.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGK.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemAGKi.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemComp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloK.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemEloSt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemKT.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiABGK.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiAGK.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiG.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGK.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemPiGKww.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedA.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSlicedAB.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/HMMProblemSt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/InputUtil.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/InputUtilSt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/PUCorbettianAdditive.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/PULogistic.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/ParameterUnion.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/SparseArray2D.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/StripedArray.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-scalable/utilsSt.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/hmm-scalable/docs/readme.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/hmm-scalable/readme.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

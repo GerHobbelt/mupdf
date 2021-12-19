@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>ligra-graph</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCED1CE}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGRA_GRAPH;LIGRA_GRAPH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGRA_GRAPH;LIGRA_GRAPH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGRA_GRAPH;LIGRA_GRAPH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGRA_GRAPH;LIGRA_GRAPH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGRA_GRAPH;LIGRA_GRAPH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,353 +228,124 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BC.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BFS-Bitvector.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BFS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BFSCC.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BellmanFord.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/CF.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Components-Shortcut.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Components.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/KCore.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/MIS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/PageRank.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/PageRankDelta.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Radii.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Triangle.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/DeltaStepping.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/KCore.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/KCoreSerial.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/SetCover.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/CLRSTV.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/FM-Ecc.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/LogLog-Ecc.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/RV.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/Simple-Approx-Ecc.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/TK.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/kBFS-1Phase-Ecc.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/kBFS-Ecc.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/kBFS-Exact.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperBC.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperBFS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperBPath.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperCC.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperKCore-Efficient.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperKCore.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperMIS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperPageRank.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperReader.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperSSSP.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/PrintBipartiteGraph.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/WeightedHyperReader.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial-Naive.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial-Opt-Naive.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial-Opt.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Sync-Local-Opt.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Sync-Local.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Parallel.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Randomized-Parallel.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Randomized-Serial.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Serial.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/Nibble-Parallel.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/Nibble-Serial.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/decoder.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/encoder.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/hypergraphDecoder.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/hypergraphEncoder.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/BFS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/BellmanFord.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/Components.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/KCore.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/Radii.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/KONECTtoClique.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/KONECTtoHyperAdj.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/KONECTtoMESH.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/SNAPtoAdj.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/adjGraphAddWeights.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/adjHypergraphAddWeights.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/adjToBinary.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/communityToClique.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/communityToHyperAdj.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/communityToMESH.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/gridGraph.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/hyperAdjToBinary.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/rMatGraph.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/randHypergraph.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/randLocalGraph.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/wghSNAPtoAdj.C" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/CCBFS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/sampleSort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/sparseSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/sweep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/IO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/binary_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/blockRadixSort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/bucket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byte-pd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byte.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byteRLE-pd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byteRLE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/compressedVertex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/counting_sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/dyn_arr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/edgeMapReduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/edgeMap_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/gettime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/hygra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/hypergraphIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/index_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/ligra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/maybe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/nibble-pd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/nibble.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/parallel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/parseCommandLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/quickSort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/sequentialHT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/vertex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/vertexSubset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/utils/graphIO.h" />
+    <Text Include="../../thirdparty/owemdjee/ligra-graph/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BC.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BFS-Bitvector.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BFS.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BFSCC.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/BellmanFord.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/CF.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Components-Shortcut.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Components.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/KCore.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/MIS.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/PageRank.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/PageRankDelta.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Radii.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/Triangle.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/DeltaStepping.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/KCore.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/KCoreSerial.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/bucketing/SetCover.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/CLRSTV.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/FM-Ecc.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/LogLog-Ecc.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/RV.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/Simple-Approx-Ecc.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/TK.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/kBFS-1Phase-Ecc.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/kBFS-Ecc.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/kBFS-Exact.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperBC.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperBFS.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperBPath.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperCC.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperKCore-Efficient.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperKCore.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperMIS.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperPageRank.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperReader.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/HyperSSSP.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/PrintBipartiteGraph.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/hyper/WeightedHyperReader.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial-Naive.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial-Opt-Naive.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial-Opt.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Serial.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Sync-Local-Opt.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/ACL-Sync-Local.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Parallel.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Randomized-Parallel.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Randomized-Serial.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/HeatKernel-Serial.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/Nibble-Parallel.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/Nibble-Serial.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/decoder.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/encoder.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/hypergraphDecoder.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/ligra/hypergraphEncoder.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/BFS.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/BellmanFord.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/Components.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/KCore.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/tutorial/Radii.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/KONECTtoClique.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/KONECTtoHyperAdj.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/KONECTtoMESH.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/SNAPtoAdj.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/adjGraphAddWeights.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/adjHypergraphAddWeights.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/adjToBinary.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/communityToClique.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/communityToHyperAdj.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/communityToMESH.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/gridGraph.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/hyperAdjToBinary.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/rMatGraph.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/randHypergraph.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/randLocalGraph.C" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/ligra-graph/utils/wghSNAPtoAdj.C" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/eccentricity/CCBFS.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/sampleSort.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/sparseSet.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/apps/localAlg/sweep.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/IO.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/binary_search.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/blockRadixSort.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/bucket.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byte-pd.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byte.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byteRLE-pd.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/byteRLE.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/compressedVertex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/counting_sort.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/dyn_arr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/edgeMapReduce.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/edgeMap_utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/gettime.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/graph.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/histogram.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/hygra.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/hypergraphIO.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/index_map.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/ligra.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/maybe.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/nibble-pd.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/nibble.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/parallel.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/parseCommandLine.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/quickSort.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/sequence.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/sequentialHT.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/transpose.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/vertex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/ligra/vertexSubset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/ligra-graph/utils/graphIO.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/ligra-graph/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

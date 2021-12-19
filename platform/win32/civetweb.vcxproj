@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,245 +228,87 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/chat/chat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/embedded_cpp/embedded_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/lua/lua_dll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/post/post.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/upload/upload.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/websocket/websocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/CivetServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/civetweb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lsqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lauxlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lbaselib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lbitlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lcorolib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldblib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldebug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lgc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/linit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/liolib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/llex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lmathlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/loadlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lobject.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lopcodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/loslib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstrlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltablib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/luac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lundump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lvm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lzio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/test/embed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/test/unit_test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/CivetServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lauxlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lgc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/llex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/llimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lopcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lua.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/luaconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lualib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lundump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lzio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/sqlite3.h" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/chat/chat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/embedded_cpp/embedded_cpp.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/hello/hello.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/lua/lua_dll.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/post/post.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/upload/upload.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/websocket/websocket.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/CivetServer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/civetweb.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lsqlite3.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lapi.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lauxlib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lbaselib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lbitlib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lcode.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lcorolib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lctype.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldblib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldebug.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldump.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lfunc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lgc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/linit.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/liolib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/llex.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lmathlib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lmem.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/loadlib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lobject.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lopcodes.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/loslib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lparser.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstate.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstring.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstrlib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltable.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltablib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lua.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/luac.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lundump.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lvm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lzio.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/sqlite3.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/test/embed.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/civetweb/test/unit_test.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/CivetServer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lapi.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lauxlib.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lcode.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lctype.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldebug.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ldo.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lfunc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lgc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/llex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/llimits.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lmem.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lobject.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lopcodes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lparser.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstate.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lstring.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltable.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/ltm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lua.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lua.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/luaconf.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lualib.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lundump.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lvm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/lua-5.2.2/src/lzio.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/civetweb/src/third_party/sqlite3.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/civetweb/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

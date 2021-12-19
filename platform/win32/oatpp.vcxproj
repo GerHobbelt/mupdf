@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>oatpp</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC712C5}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OATPP;OATPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OATPP;OATPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OATPP;OATPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OATPP;OATPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OATPP;OATPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,1259 +228,426 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/fuzzers/oatpp/parser/json/mapping/ObjectMapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/Checker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/UnitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/algorithm/CRC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/IODefinitions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Coroutine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/CoroutineWaitList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Lock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_epoll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_kqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_stub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOWorker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/TimerWorker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/Worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/CommandLineArguments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Countable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Environment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/Allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/MemoryPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/ObjectPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/SpinLock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/Thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/Bundle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/FIFOBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/IOBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/Processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/ObjectMapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/TypeResolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/PairList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Primitive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/File.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/InMemoryData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/TemporaryFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/MemoryLabel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/StringTemplate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/BufferStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/ChunkedBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FIFOStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FileStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/Stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/StreamBufferedProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/Caret.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/ParsingError.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/ConversionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/String.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Hex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProviderSwitch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionInactivityChecker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMaxAgeChecker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMonitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/Connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/client/ConnectionProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/server/ConnectionProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/client/ConnectionProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/server/ConnectionProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/DbClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/QueryResult.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/SchemaMigration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Transaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Beautifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Deserializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/ObjectMapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Serializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/ApiClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/HttpRequestExecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RequestExecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RetryPolicy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/FileProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/InMemoryDataProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Multipart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Part.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/StatefulParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/TemporaryFileProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/CommunicationError.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/Http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/Chunked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/ProviderCollection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/BodyDecoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/RequestHeadersReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Response.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/ResponseHeadersReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/SimpleBodyDecoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Body.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/BufferBody.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/MultipartBody.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Response.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/ResponseFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/StreamingBody.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/utils/CommunicationUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/AsyncHttpConnectionHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpConnectionHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpRouter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/ApiController.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/Endpoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/AuthorizationHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/ErrorHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/AllowCorsGlobal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/url/mapping/Pattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/AllTestsMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/async/LockTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/CommandLineArgumentsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/LoggerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/MemoryPoolTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/PerfTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/buffer/ProcessorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/TypeResolverTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/AnyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/EnumTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/InterpretationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ListTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectWrapperTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PairListTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PrimitiveTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/StringTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/TypeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedMapTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedSetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/VectorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/resource/InMemoryDataTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/LazyStringMapTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/MemoryLabelTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/StringTemplateTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/BufferStreamTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/ChunkedBufferTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/parser/CaretTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTemplateTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/Base64Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/UnicodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/ConnectionPoolTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/UrlTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/monitor/ConnectionMonitorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/InterfaceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/PipeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperPerfTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DeserializerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/EnumTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/UnorderedSetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/ClientRetryTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncClientTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineAsyncTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/mime/multipart/StatefulParserTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/protocol/http/encoding/ChunkedTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/HttpRouterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/ServerStopTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/api/ApiControllerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/handler/AuthorizationHandlerTest.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/Checker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/UnitTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/web/ClientServerTestRunner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/algorithm/CRC.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiClient_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiClient_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiController_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiController_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DTO_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DTO_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DbClient_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DbClient_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/auth_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/auth_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/base_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/base_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/bundle_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/bundle_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/cors_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/cors_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/base_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/base_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/enum_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/enum_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/IODefinitions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/Types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/CoroutineWaitList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Lock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Processor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOWorker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/TimerWorker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/Worker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/CommandLineArguments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Countable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Environment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/ObjectHandle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/Allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/MemoryPool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/ObjectPool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/collection/FastQueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/SpinLock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/Thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/Bundle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/FIFOBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/IOBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/Processor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/ObjectMapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/TypeResolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Collection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/List.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/PairList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Primitive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedMap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedSet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/File.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/InMemoryData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/Resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/TemporaryFile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/LazyStringMap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/MemoryLabel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/StringTemplate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/BufferStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/ChunkedBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FIFOStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FileStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/Stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/StreamBufferedProxy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/macro/basic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/macro/codegen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/macro/component.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/Caret.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/ParsingError.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/provider/Invalidator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/provider/Pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/provider/Provider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/ConversionUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Random.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/String.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Base64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Hex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Unicode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionPool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProviderSwitch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Server.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionInactivityChecker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMaxAgeChecker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMonitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/MetricsChecker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/StatCollector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/Connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/client/ConnectionProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/server/ConnectionProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/client/ConnectionProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/server/ConnectionProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/DbClient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/QueryResult.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/SchemaMigration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Transaction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Beautifier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Deserializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/ObjectMapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/ApiClient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/HttpRequestExecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RequestExecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RetryPolicy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/FileProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/InMemoryDataProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Multipart.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Part.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/StatefulParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/TemporaryFileProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/CommunicationError.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/Http.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/Chunked.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/EncoderProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/ProviderCollection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/BodyDecoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/RequestHeadersReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Response.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/ResponseHeadersReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/SimpleBodyDecoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Body.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/BufferBody.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/MultipartBody.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Response.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/ResponseFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/StreamingBody.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/utils/CommunicationUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/AsyncHttpConnectionHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpConnectionHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpProcessor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpRequestHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpRouter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/ApiController.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/Endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/AuthorizationHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/ErrorHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/AllowCorsGlobal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/RequestInterceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/ResponseInterceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/url/mapping/Pattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/url/mapping/Router.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/async/LockTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/CommandLineArgumentsTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/LoggerTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/MemoryPoolTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/PerfTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/buffer/ProcessorTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/TypeResolverTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/AnyTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/EnumTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/InterpretationTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ListTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectWrapperTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PairListTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PrimitiveTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/StringTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/TypeTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedMapTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedSetTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/VectorTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/resource/InMemoryDataTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/LazyStringMapTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/MemoryLabelTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/StringTemplateTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/BufferStreamTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/ChunkedBufferTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/parser/CaretTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTemplateTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/Base64Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/UnicodeTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/ConnectionPoolTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/UrlTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/monitor/ConnectionMonitorTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/InterfaceTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/PipeTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperPerfTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DeserializerTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/EnumTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/UnorderedSetTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/ClientRetryTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncClientTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineAsyncTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/BasicAuthorizationController.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/BearerAuthorizationController.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/Client.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/Controller.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/ControllerAsync.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/ControllerWithInterceptors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/ControllerWithInterceptorsAsync.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/DTOs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/mime/multipart/StatefulParserTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/protocol/http/encoding/ChunkedTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/HttpRouterTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/ServerStopTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/api/ApiControllerTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/handler/AuthorizationHandlerTest.hpp" />
+    <Text Include="../../thirdparty/owemdjee/oatpp/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/fuzzers/oatpp/parser/json/mapping/ObjectMapper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/Checker.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/UnitTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/algorithm/CRC.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/IODefinitions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Coroutine.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/CoroutineWaitList.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Error.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Executor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Lock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Processor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_common.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_epoll.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_kqueue.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker_stub.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOWorker.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/TimerWorker.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/Worker.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/CommandLineArguments.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Countable.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Environment.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/Allocator.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/MemoryPool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/ObjectPool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/SpinLock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/Thread.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/Bundle.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/FIFOBuffer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/IOBuffer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/Processor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/ObjectMapper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/TypeResolver.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Any.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Enum.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/List.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Object.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/PairList.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Primitive.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Type.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedMap.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedSet.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Vector.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/File.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/InMemoryData.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/TemporaryFile.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/MemoryLabel.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/StringTemplate.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/BufferStream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/ChunkedBuffer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FIFOStream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FileStream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/Stream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/StreamBufferedProxy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/Caret.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/ParsingError.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Binary.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/ConversionUtils.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Random.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/String.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Base64.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Hex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Unicode.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Address.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionPool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProviderSwitch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Server.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Url.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionInactivityChecker.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMaxAgeChecker.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMonitor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/Connection.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/client/ConnectionProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/server/ConnectionProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Interface.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Pipe.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Socket.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/client/ConnectionProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/server/ConnectionProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/DbClient.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Executor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/QueryResult.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/SchemaMigration.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Transaction.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Beautifier.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Utils.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Deserializer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/ObjectMapper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Serializer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/ApiClient.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/HttpRequestExecutor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RequestExecutor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RetryPolicy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/FileProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/InMemoryDataProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Multipart.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Part.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartList.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartReader.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Reader.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/StatefulParser.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/TemporaryFileProvider.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/CommunicationError.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/Http.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/Chunked.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/ProviderCollection.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/BodyDecoder.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Request.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/RequestHeadersReader.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Response.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/ResponseHeadersReader.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/SimpleBodyDecoder.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Body.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/BufferBody.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/MultipartBody.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Request.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Response.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/ResponseFactory.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/StreamingBody.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/utils/CommunicationUtils.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/AsyncHttpConnectionHandler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpConnectionHandler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpProcessor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpRouter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/ApiController.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/Endpoint.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/AuthorizationHandler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/ErrorHandler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/AllowCorsGlobal.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/url/mapping/Pattern.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/AllTestsMain.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/async/LockTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/CommandLineArgumentsTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/LoggerTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/MemoryPoolTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/PerfTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/buffer/ProcessorTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/TypeResolverTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/AnyTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/EnumTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/InterpretationTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ListTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectWrapperTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PairListTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PrimitiveTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/StringTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/TypeTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedMapTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedSetTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/VectorTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/resource/InMemoryDataTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/LazyStringMapTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/MemoryLabelTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/StringTemplateTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/BufferStreamTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/ChunkedBufferTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/parser/CaretTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTemplateTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/Base64Test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/UnicodeTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/ConnectionPoolTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/UrlTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/monitor/ConnectionMonitorTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/InterfaceTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/PipeTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperPerfTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DeserializerTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/EnumTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/UnorderedSetTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/ClientRetryTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncClientTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineAsyncTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/mime/multipart/StatefulParserTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/protocol/http/encoding/ChunkedTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/HttpRouterTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/ServerStopTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/api/ApiControllerTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/handler/AuthorizationHandlerTest.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/Checker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/UnitTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp-test/web/ClientServerTestRunner.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/algorithm/CRC.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiClient_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiClient_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiController_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/ApiController_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DTO_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DTO_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DbClient_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/DbClient_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/auth_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/auth_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/base_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/base_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/bundle_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/bundle_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/cors_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/api_controller/cors_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/base_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/base_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/enum_define.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/codegen/dto/enum_undef.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/IODefinitions.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/Types.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Coroutine.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/CoroutineWaitList.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Error.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Executor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Lock.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/Processor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOEventWorker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/IOWorker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/TimerWorker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/async/worker/Worker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/CommandLineArguments.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Config.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Countable.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/Environment.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/ObjectHandle.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/Allocator.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/MemoryPool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/base/memory/ObjectPool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/collection/FastQueue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/SpinLock.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/concurrency/Thread.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/Bundle.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/FIFOBuffer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/IOBuffer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/buffer/Processor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/ObjectMapper.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/TypeResolver.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Any.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Collection.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Enum.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/List.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Object.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/PairList.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Primitive.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Type.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedMap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/UnorderedSet.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/mapping/type/Vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/File.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/InMemoryData.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/Resource.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/resource/TemporaryFile.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/LazyStringMap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/MemoryLabel.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/share/StringTemplate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/BufferStream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/ChunkedBuffer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FIFOStream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/FileStream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/Stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/data/stream/StreamBufferedProxy.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/macro/basic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/macro/codegen.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/macro/component.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/Caret.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/parser/ParsingError.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/provider/Invalidator.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/provider/Pool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/provider/Provider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Binary.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/ConversionUtils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/Random.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/core/utils/String.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Base64.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Hex.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/encoding/Unicode.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Address.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionHandler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionPool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/ConnectionProviderSwitch.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Server.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/Url.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionInactivityChecker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMaxAgeChecker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/ConnectionMonitor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/MetricsChecker.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/monitor/StatCollector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/Connection.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/client/ConnectionProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/tcp/server/ConnectionProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Interface.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Pipe.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/Socket.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/client/ConnectionProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/network/virtual_/server/ConnectionProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Connection.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/DbClient.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Executor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/QueryResult.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/SchemaMigration.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/orm/Transaction.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Beautifier.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/Utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Deserializer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/ObjectMapper.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/parser/json/mapping/Serializer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/ApiClient.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/HttpRequestExecutor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RequestExecutor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/client/RetryPolicy.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/FileProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/InMemoryDataProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Multipart.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Part.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartList.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/PartReader.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/Reader.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/StatefulParser.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/mime/multipart/TemporaryFileProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/CommunicationError.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/Http.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/Chunked.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/EncoderProvider.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/encoding/ProviderCollection.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/BodyDecoder.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Request.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/RequestHeadersReader.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/Response.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/ResponseHeadersReader.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/incoming/SimpleBodyDecoder.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Body.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/BufferBody.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/MultipartBody.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Request.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/Response.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/ResponseFactory.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/outgoing/StreamingBody.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/protocol/http/utils/CommunicationUtils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/AsyncHttpConnectionHandler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpConnectionHandler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpProcessor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpRequestHandler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/HttpRouter.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/ApiController.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/api/Endpoint.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/AuthorizationHandler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/handler/ErrorHandler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/AllowCorsGlobal.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/RequestInterceptor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/server/interceptor/ResponseInterceptor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/url/mapping/Pattern.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/src/oatpp/web/url/mapping/Router.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/async/LockTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/CommandLineArgumentsTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/LoggerTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/MemoryPoolTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/base/memory/PerfTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/buffer/ProcessorTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/TypeResolverTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/AnyTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/EnumTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/InterpretationTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ListTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/ObjectWrapperTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PairListTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/PrimitiveTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/StringTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/TypeTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedMapTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/UnorderedSetTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/mapping/type/VectorTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/resource/InMemoryDataTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/LazyStringMapTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/MemoryLabelTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/share/StringTemplateTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/BufferStreamTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/data/stream/ChunkedBufferTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/parser/CaretTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTemplateTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/core/provider/PoolTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/Base64Test.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/encoding/UnicodeTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/ConnectionPoolTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/UrlTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/monitor/ConnectionMonitorTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/InterfaceTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/network/virtual_/PipeTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperPerfTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DTOMapperTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/DeserializerTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/EnumTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/parser/json/mapping/UnorderedSetTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/ClientRetryTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncClientTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullAsyncTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/FullTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineAsyncTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/PipelineTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/BasicAuthorizationController.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/BearerAuthorizationController.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/Client.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/Controller.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/ControllerAsync.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/ControllerWithInterceptors.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/ControllerWithInterceptorsAsync.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/app/DTOs.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/mime/multipart/StatefulParserTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/protocol/http/encoding/ChunkedTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/HttpRouterTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/ServerStopTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/api/ApiControllerTest.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/oatpp/test/oatpp/web/server/handler/AuthorizationHandlerTest.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/oatpp/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

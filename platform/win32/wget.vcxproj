@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WGET;WGET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WGET;WGET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WGET;WGET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WGET;WGET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,305 +228,107 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/glob_crash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_cookie_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_css_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_ftpls_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_html_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_netrc_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_ntlm_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_options_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_progress_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_read_hunk_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_robots_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_url_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/msdos/msdos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/cookies.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/css-url.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/decc_ver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/exits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp-basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp-ls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp-opie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/gnutls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/host.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/hsts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/html-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/html-url.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/http-ntlm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/iri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/metalink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/mswindows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/netrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/progress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ptimer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/recur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/res.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/retr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/spider.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/url.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/vms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/warc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/src/xattr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/tests/unit-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wget/util/trunc.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/build-aux/link-warning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/fuzz/fuzzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/msdos/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/connect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/cookies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/css-tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/css-url.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/exits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/ftp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/host.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/hsts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/html-parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/html-url.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/http-ntlm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/iri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/metalink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/mswindows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/netrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/progress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/ptimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/recur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/retr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/spider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/sysdep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/url.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/warc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/wget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/src/xattr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/tests/unit-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/alloca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/vms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/vms_ip.h" />
+    <Text Include="../../thirdparty/owemdjee/wget/fuzz/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/glob_crash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_cookie_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_css_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_ftpls_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_html_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_netrc_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_ntlm_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_options_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_progress_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_read_hunk_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_robots_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/fuzz/wget_url_fuzzer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/msdos/msdos.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/connect.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/convert.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/cookies.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/css-url.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/decc_ver.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/exits.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp-basic.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp-ls.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp-opie.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ftp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/gnutls.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/hash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/host.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/hsts.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/html-parse.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/html-url.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/http-ntlm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/http.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/init.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/iri.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/log.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/metalink.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/mswindows.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/netrc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/openssl.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/progress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/ptimer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/recur.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/res.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/retr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/spider.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/url.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/utils.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/vms.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/warc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/src/xattr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/tests/unit-tests.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/wget/util/trunc.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/build-aux/link-warning.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/fuzz/fuzzer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/msdos/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/connect.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/convert.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/cookies.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/css-tokens.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/css-url.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/exits.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/ftp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/hash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/host.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/hsts.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/html-parse.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/html-url.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/http-ntlm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/http.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/init.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/iri.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/log.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/metalink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/mswindows.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/netrc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/options.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/progress.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/ptimer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/recur.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/res.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/retr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/spider.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/ssl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/sysdep.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/url.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/warc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/wget.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/src/xattr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/tests/unit-tests.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/alloca.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/stdint.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/vms.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/wget/vms/vms_ip.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/wget/fuzz/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

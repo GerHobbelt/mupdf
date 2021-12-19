@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB_STORE;LMDB_STORE_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB_STORE;LMDB_STORE_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB_STORE;LMDB_STORE_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB_STORE;LMDB_STORE_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,197 +228,71 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_drop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/midl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/chacha8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/crypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_drop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/midl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/module.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest_enc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest_remap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/dbi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/node-lmdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/ordered-binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/txn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/windows.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/lmdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/midl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/chacha8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/lmdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/midl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4frame_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4hc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/src/node-lmdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/src/v8-fast-api-calls.h" />
+    <Text Include="../../thirdparty/owemdjee/lmdb-store/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/dll/example/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_copy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_drop.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_dump.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_load.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mdb_stat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/midl.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest3.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest4.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest5.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/mtest6.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/chacha8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/crypto.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_copy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_drop.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_dump.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_load.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mdb_stat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/midl.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/module.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest3.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest4.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest5.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest6.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest_enc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest_enc2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/mtest_remap.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4frame.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4hc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/xxhash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/compression.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/cursor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/dbi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/env.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/misc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/node-lmdb.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/ordered-binary.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/txn.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb-store/src/windows.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/lmdb.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb-data-v1/libraries/liblmdb/midl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/chacha8.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/lmdb.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/midl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lmdb/libraries/liblmdb/module.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4frame.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4frame_static.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/lz4hc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/xxhash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/src/node-lmdb.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb-store/src/v8-fast-api-calls.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lmdb-store/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lmdb-store/dependencies/lz4/lib/dll/example/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CEREAL;CEREAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CEREAL;CEREAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CEREAL;CEREAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CEREAL;CEREAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,548 +228,188 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/performance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_rtti.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/derived.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_vs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/atomic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/basic_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/bitset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/boost/boost_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/chrono.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/defer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/deque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/forward_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/load_construct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/memory_cycles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/multimap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/multiset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/pod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/polymorphic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/portability_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/portable_binary_archive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/priority_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/structs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/structs_minimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/structs_specialized.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_loads.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multimap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multiset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/user_data_adapters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/valarray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/versioning.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/access.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/adapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/portable_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/xml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/cereal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/polymorphic_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/polymorphic_impl_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/static_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/base64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/allocators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/cursorstreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/encodedstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/encodings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/error/en.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/error/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/filereadstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/filewritestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/biginteger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/diyfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/dtoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/ieee754.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/itoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/pow10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/strfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/strtod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/istreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/memorybuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/memorystream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/msinttypes/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/msinttypes/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/ostreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/prettywriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/stringbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml_iterators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml_print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/specialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/base_class.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/bitset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/boost_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/chrono.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/concepts/pair_associative_container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/deque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/forward_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/polymorphic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/valarray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/derived.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/basic_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/bitset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/boost/boost_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/chrono.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/deque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/doctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/forward_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/load_construct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/memory_cycles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/multimap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/multiset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/pod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/polymorphic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/portable_binary_archive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/priority_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/structs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/structs_minimal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/structs_specialized.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_loads.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multimap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multiset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/user_data_adapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/valarray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/versioning.hpp" />
+    <Text Include="../../thirdparty/owemdjee/cereal/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/performance.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_json.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_rtti.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/base.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/derived.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_vs.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/array.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/atomic.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/basic_string.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/bitset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/boost/boost_variant.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/chrono.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/complex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/optional.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/variant.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/defer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/deque.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/forward_list.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/list.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/load_construct.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/map.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/memory.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/memory_cycles.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/multimap.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/multiset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/pair.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/pod.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/polymorphic.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/portability_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/portable_binary_archive.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/priority_queue.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/queue.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/set.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/stack.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/structs.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/structs_minimal.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/structs_specialized.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/tuple.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_loads.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_map.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multimap.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multiset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/unordered_set.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/user_data_adapters.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/valarray.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/vector.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cereal/unittests/versioning.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/access.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/adapters.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/binary.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/json.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/portable_binary.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/archives/xml.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/cereal.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/helpers.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/polymorphic_impl.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/polymorphic_impl_fwd.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/static_object.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/details/util.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/base64.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/allocators.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/cursorstreamwrapper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/document.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/encodedstream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/encodings.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/error/en.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/error/error.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/filereadstream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/filewritestream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/fwd.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/biginteger.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/diyfp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/dtoa.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/ieee754.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/itoa.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/meta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/pow10.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/regex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/stack.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/strfunc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/strtod.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/internal/swap.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/istreamwrapper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/memorybuffer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/memorystream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/msinttypes/inttypes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/msinttypes/stdint.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/ostreamwrapper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/pointer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/prettywriter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/rapidjson.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/reader.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/schema.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/stream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/stringbuffer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidjson/writer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml_iterators.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml_print.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/external/rapidxml/rapidxml_utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/macros.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/specialize.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/array.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/atomic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/base_class.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/bitset.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/boost_variant.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/chrono.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/common.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/complex.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/concepts/pair_associative_container.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/deque.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/forward_list.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/functional.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/list.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/memory.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/optional.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/polymorphic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/queue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/stack.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/string.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/unordered_map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/unordered_set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/utility.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/valarray.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/variant.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/types/vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/include/cereal/version.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/base.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/sandbox/sandbox_shared_lib/derived.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/array.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/atomic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/basic_string.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/bitset.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/boost/boost_variant.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/chrono.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/common.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/complex.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/optional.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/cpp17/variant.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/defer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/deque.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/doctest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/forward_list.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/list.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/load_construct.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/memory.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/memory_cycles.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/multimap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/multiset.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/pair.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/pod.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/polymorphic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/portable_binary_archive.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/priority_queue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/queue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/stack.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/structs.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/structs_minimal.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/structs_specialized.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/tuple.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_loads.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_map.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multimap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_multiset.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/unordered_set.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/user_data_adapters.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/valarray.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cereal/unittests/versioning.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/cereal/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

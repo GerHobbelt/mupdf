@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMDBX;MDBX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMDBX;MDBX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMDBX;MDBX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMDBX;MDBX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,182 +228,66 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/example/example-mdbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/alloy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/lck-posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/lck-windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_chk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_drop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/osal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/wingetopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/append.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/cases.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/chrono.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/darwin/pthread_barrier.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/dead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/hill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/jitter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/keygen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/nested.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/osal-unix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/osal-windows.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/pcrf/pcrf_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/try.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/ttl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/utils.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/mdbx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/mdbx.h++" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/debug_begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/debug_end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/internals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/osal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/wingetopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/darwin/pthread_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/keygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/osal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/utils.h" />
+    <Text Include="../../thirdparty/owemdjee/libmdbx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libmdbx/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libmdbx/test/darwin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libmdbx/test/pcrf/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/example/example-mdbx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/alloy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/core.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/lck-posix.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/lck-windows.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx.c++" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_chk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_copy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_drop.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_dump.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_load.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/mdbx_stat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/osal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/src/wingetopt.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/append.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/cases.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/chrono.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/config.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/copy.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/darwin/pthread_barrier.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/dead.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/hill.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/jitter.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/keygen.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/log.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/nested.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/osal-unix.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/osal-windows.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/pcrf/pcrf_test.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/try.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/ttl.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libmdbx/test/utils.cc" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/mdbx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/mdbx.h++" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/debug_begin.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/debug_end.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/defs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/internals.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/options.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/osal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/src/wingetopt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/base.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/chrono.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/darwin/pthread_barrier.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/keygen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/log.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/osal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/test.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libmdbx/test/utils.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libmdbx/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libmdbx/example/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libmdbx/test/darwin/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libmdbx/test/pcrf/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

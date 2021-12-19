@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIFEX;UNIFEX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIFEX;UNIFEX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIFEX;UNIFEX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIFEX;UNIFEX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,719 +228,245 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/any_unique.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/async_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/async_trace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/coroutine_stream_consumer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/delayed_stream_cancellation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/execute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/for_each_synchronous.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/for_each_via_thread_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/for_each_via_trampoline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/fp_delegation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/get_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/heap_allocate_operation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/let.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/linux/io_epoll_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/linux/io_uring_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/materialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/never_stream_cancellation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/new_thread_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/p1897.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/produce_on_consume_via.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/reduce_synchronous.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/reduce_with_trampoline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/schedule_with_subscheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/static_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/stop_immediately.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/stream_cancellation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/submit_allocator_customisation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/type_erased_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/via.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/when_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/when_all_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/async_manual_reset_event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/async_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/inplace_stop_token.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/io_epoll_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/io_uring_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/io_uring_syscall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/mmap_region.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/monotonic_clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/safe_file_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/manual_event_loop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/static_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/thread_unsafe_event_loop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/timed_single_thread_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/trampoline_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/filetime_clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/low_latency_iocp_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/ntapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/safe_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/windows_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/allocate_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/any_scheduler_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/any_sender_of_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/any_unique_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/async_manual_reset_event_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/async_mutex_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/async_scope_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/at_coroutine_exit_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/awaitable_senders_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/bulk_schedule_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/create_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/delay_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/execute_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/finally_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/find_if_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/for_each_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/get_scheduler_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/indexed_for_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/into_variant_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/invoke_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/let_done_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/let_error_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/let_value_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/materialize_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/on_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/reduce_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/repeat_effect_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/retry_when_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/schedule_with_subsceduler_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/single_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/static_thread_pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/stop_when_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/submit_allocator_customisation_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/tag_invoke_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/task_cancel_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/task_void_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/then_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/type_erase_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/upon_done_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/upon_error_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/when_all_2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/windows_iocp_context_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/windows_threadpool_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/adapt_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/allocate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/any_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/any_sender_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/any_unique.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_manual_reset_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/at_coroutine_exit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/await_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bind_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/blocking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bulk_join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bulk_schedule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bulk_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/connect_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/continuations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/coroutine_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/create.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/delay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/dematerialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/atomic_intrusive_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/concept_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/epilogue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_heap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/prologue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/unifex_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/execute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/execution_policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/file_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/filesystem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/find_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/get_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/get_execution_policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/get_stop_token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/indexed_for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/inline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/inplace_stop_token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/into_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/invoke.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/io_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just_done.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just_from.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_done.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_value_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_value_with_stop_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_with_stop_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/io_epoll_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/io_uring_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/mmap_region.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/monotonic_clock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/safe_file_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/manual_event_loop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/manual_lifetime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/manual_lifetime_union.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/materialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/memory_resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/never.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/new_thread_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/next_adapt_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/null_receiver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/on_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/overload.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/pipe_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/range_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/ready_done_sender.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/receiver_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/reduce_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/repeat_effect_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/retry_when.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/schedule_with_subscheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/scheduler_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/scope_guard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/sender_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/single.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/single_thread_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/spin_wait.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/static_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/std_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_if_requested.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_immediately.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_token_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_when.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stream_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/submit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/swap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/sync_wait.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/tag_invoke.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/take_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/then.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/then_execute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/this.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/thread_unsafe_event_loop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/timed_single_thread_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/trampoline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform_done.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_erased_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/typed_via.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/typed_via_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/unstoppable_token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/upon_done.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/upon_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/via.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/via_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/when_all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/detail/ntapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/detail/safe_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/detail/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/filetime_clock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/low_latency_iocp_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/windows_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/with_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/with_query_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/source/linux/io_uring_syscall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunifex/test/mock_receiver.hpp" />
+    <Text Include="../../thirdparty/owemdjee/libunifex/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/any_unique.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/async_mutex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/async_trace.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/coroutine_stream_consumer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/delayed_stream_cancellation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/execute.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/for_each_synchronous.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/for_each_via_thread_scheduler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/for_each_via_trampoline.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/fp_delegation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/get_scheduler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/heap_allocate_operation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/let.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/linux/io_epoll_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/linux/io_uring_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/materialize.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/never_stream_cancellation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/new_thread_context.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/p1897.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/produce_on_consume_via.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/reduce_synchronous.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/reduce_with_trampoline.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/schedule_with_subscheduler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/static_thread_pool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/stop_immediately.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/stream_cancellation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/submit_allocator_customisation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/type_erased_stream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/via.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/when_all.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/examples/when_all_2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/async_manual_reset_event.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/async_mutex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/exception.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/inplace_stop_token.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/io_epoll_context.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/io_uring_context.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/io_uring_syscall.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/mmap_region.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/monotonic_clock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/linux/safe_file_descriptor.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/manual_event_loop.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/static_thread_pool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/thread_unsafe_event_loop.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/timed_single_thread_context.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/trampoline_scheduler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/filetime_clock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/low_latency_iocp_context.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/ntapi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/safe_handle.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/source/win32/windows_thread_pool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/allocate_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/any_scheduler_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/any_sender_of_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/any_unique_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/async_manual_reset_event_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/async_mutex_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/async_scope_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/at_coroutine_exit_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/awaitable_senders_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/bulk_schedule_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/create_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/delay_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/execute_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/finally_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/find_if_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/for_each_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/get_scheduler_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/indexed_for_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/into_variant_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/invoke_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/let_done_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/let_error_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/let_value_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/materialize_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/on_stream_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/reduce_stream_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/repeat_effect_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/retry_when_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/schedule_with_subsceduler_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/single_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/static_thread_pool_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/stop_when_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/submit_allocator_customisation_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/tag_invoke_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/task_cancel_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/task_void_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/then_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/type_erase_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/upon_done_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/upon_error_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/when_all_2_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/windows_iocp_context_test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libunifex/test/windows_threadpool_test.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/adapt_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/allocate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/any_scheduler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/any_sender_of.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/any_unique.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_manual_reset_event.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_mutex.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_scope.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/async_trace.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/at_coroutine_exit.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/await_transform.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bind_back.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/blocking.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bulk_join.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bulk_schedule.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/bulk_transform.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/connect_awaitable.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/continuations.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/coroutine.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/coroutine_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/create.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/defer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/delay.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/dematerialize.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/atomic_intrusive_queue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/concept_macros.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/epilogue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_heap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_list.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_queue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/intrusive_stack.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/prologue.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/detail/unifex_fwd.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/exception.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/execute.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/execution_policy.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/file_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/filesystem.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/finally.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/find_if.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/for_each.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/get_allocator.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/get_execution_policy.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/get_stop_token.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/indexed_for.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/inline_scheduler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/inplace_stop_token.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/into_variant.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/invoke.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/io_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just_done.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just_error.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/just_from.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_done.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_error.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_value.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_value_with.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_value_with_stop_source.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_with.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/let_with_stop_source.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/io_epoll_context.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/io_uring_context.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/mmap_region.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/monotonic_clock.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/linux/safe_file_descriptor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/manual_event_loop.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/manual_lifetime.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/manual_lifetime_union.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/materialize.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/memory_resource.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/never.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/new_thread_context.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/next_adapt_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/null_receiver.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/on.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/on_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/overload.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/pipe_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/range_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/ready_done_sender.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/receiver_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/reduce_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/repeat_effect_until.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/retry_when.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/schedule_with_subscheduler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/scheduler_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/scope_guard.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/sender_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/sequence.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/single.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/single_thread_context.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/span.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/spin_wait.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/static_thread_pool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/std_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_if_requested.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_immediately.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_token_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stop_when.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/stream_concepts.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/submit.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/swap.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/sync_wait.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/tag_invoke.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/take_until.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/task.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/then.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/then_execute.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/this.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/thread_unsafe_event_loop.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/timed_single_thread_context.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/trampoline_scheduler.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform_done.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform_error.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/transform_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_erased_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_index.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_list.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/type_traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/typed_via.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/typed_via_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/unstoppable_token.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/upon_done.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/upon_error.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/via.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/via_stream.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/when_all.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/detail/ntapi.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/detail/safe_handle.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/detail/types.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/filetime_clock.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/low_latency_iocp_context.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/win32/windows_thread_pool.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/with_allocator.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/include/unifex/with_query_value.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/source/linux/io_uring_syscall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libunifex/test/mock_receiver.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libunifex/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>lizard</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBECD73}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIZARD;LIZARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIZARD;LIZARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIZARD;LIZARD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIZARD;LIZARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIZARD;LIZARD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,197 +228,72 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/HCStreaming_ringBuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/blockStreaming_doubleBuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/blockStreaming_lineByLine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/blockStreaming_ringBuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/compress_functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/frameCompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/printVersion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/simple_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/entropy_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/fse_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/fse_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/huf_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/huf_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/lizard_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/xxhash/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/datagen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/lizardcli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/lizardio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/datagencli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/frametest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/fullbench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/fuzzer.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/error_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/error_public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/fse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/huf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress_liz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress_lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress_liz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress_lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_frame_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_fastbig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_fastsmall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_hashchain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_lowestprice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_nochain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_optimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_pricefast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/xxhash/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/datagen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/lizardio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/util.h" />
+    <Text Include="../../thirdparty/owemdjee/lizard/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lizard/contrib/djgpp/README.MD" />
+    <Text Include="../../thirdparty/owemdjee/lizard/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lizard/lib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lizard/lib/entropy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lizard/programs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lizard/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lizard/visual/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/HCStreaming_ringBuffer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/blockStreaming_doubleBuffer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/blockStreaming_lineByLine.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/blockStreaming_ringBuffer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/compress_functions.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/frameCompress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/printVersion.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/examples/simple_buffer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/entropy_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/fse_compress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/fse_decompress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/huf_compress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/entropy/huf_decompress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/lizard_frame.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/lib/xxhash/xxhash.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/bench.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/datagen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/lizardcli.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/programs/lizardio.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/datagencli.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/frametest.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/fullbench.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/lizard/tests/fuzzer.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/bitstream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/error_private.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/error_public.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/fse.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/huf.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/entropy/mem.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress_liz.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_compress_lz4.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress_liz.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_decompress_lz4.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_frame.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_frame_static.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_fast.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_fastbig.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_fastsmall.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_hashchain.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_lowestprice.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_nochain.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_optimal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/lizard_parser_pricefast.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/lib/xxhash/xxhash.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/bench.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/datagen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/lizardio.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/platform.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/lizard/programs/util.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/contrib/djgpp/README.MD" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/examples/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/lib/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/lib/entropy/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/programs/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/tests/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/lizard/visual/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

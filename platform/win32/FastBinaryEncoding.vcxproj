@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FASTBINARYENCODING;FASTBINARYENCODING_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FASTBINARYENCODING;FASTBINARYENCODING_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FASTBINARYENCODING;FASTBINARYENCODING_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FASTBINARYENCODING;FASTBINARYENCODING_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,334 +228,116 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/print_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/send_receive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/serialization_final.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/serialization_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/deserialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/deserialize_final.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/deserialize_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/serialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/serialize_final.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/serialize_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/verify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/verify_final.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_final_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/fbe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_csharp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_go.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_java.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_javascript.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_kotlin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_python.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_ruby.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_swift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_clone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_decimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_enums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_extending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_send_receive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_send_receive_final.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_serialization_final.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_serialization_json.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/fbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_csharp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_go.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_java.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_javascript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_kotlin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_ruby.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_swift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_final_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test.h" />
+    <Text Include="../../thirdparty/owemdjee/FastBinaryEncoding/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/create.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/print.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/print_json.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/send_receive.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/serialization.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/serialization_final.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/examples/serialization_json.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/deserialize.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/deserialize_final.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/deserialize_json.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/receiver.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/sender.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/serialize.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/serialize_final.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/serialize_json.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/verify.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/performance/verify_final.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_final_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_models.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_protocol.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/fbe.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_cpp.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_csharp.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_go.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_java.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_javascript.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_kotlin.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_python.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_ruby.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/source/generator_swift.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_clone.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_create.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_decimal.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_enums.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_extending.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_send_receive.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_send_receive_final.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_serialization.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_serialization_final.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test_serialization_json.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/fbe.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_cpp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_csharp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_go.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_java.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_javascript.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_kotlin.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_python.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_ruby.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/generator_swift.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/include/version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_final_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_json.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/enums_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_final_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_json.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/fbe_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_final_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_json.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/proto_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_final_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_json.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/protoex_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_final_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_json.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_models.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/proto/test_protocol.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/FastBinaryEncoding/tests/test.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/FastBinaryEncoding/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

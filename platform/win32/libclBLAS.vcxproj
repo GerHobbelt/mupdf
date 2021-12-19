@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLBLAS;CLBLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLBLAS;CLBLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLBLAS;CLBLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLBLAS;CLBLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,1900 +228,638 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/statisticalTimer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/testPerfWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/AutoGemmPreCompileKernels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/ProfileAutoGemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/TestAutoGemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmClKernels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmKernelSourceIncludes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NN_B0_MX048_NX048_KX08_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NN_B1_MX048_NX048_KX08_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NT_B0_MX048_NX048_KX08_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NT_B1_MX048_NX048_KX08_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_TN_B0_MX048_NX048_KX08_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_TN_B1_MX048_NX048_KX08_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B0_MX032_NX032_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B0_MX064_NX064_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B0_MX096_NX096_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX032_NX032_KX16_BRANCH_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX032_NX032_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX064_NX064_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX096_NX096_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B0_MX032_NX032_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B0_MX064_NX064_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B0_MX096_NX096_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX032_KX16_BRANCH_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX032_KX16_SINGLE_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX032_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX064_KX16_ROW_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX064_NX032_KX16_COL_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX064_NX064_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX096_NX096_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX128_NX128_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B0_MX032_NX032_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B0_MX064_NX064_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B0_MX096_NX096_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX032_NX032_KX16_BRANCH_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX032_NX032_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX064_NX064_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX096_NX096_KX16_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/bonaire.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_selector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xscal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xscal_generic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xtrsm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_dgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_dgemmCommon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_dgemmSmallMatrices.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_sgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_sgemmSmallMatrices.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_zgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gpu_dtrsm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gpu_dtrsm192.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_dgemmChannelConflict.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_dgemmSplitKernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmBig1024Kernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmBranchKernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmSplit64_32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmSplitKernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/tahiti.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/binary_lookup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/blas_funcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/common2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/events.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/functor_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/kdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/kernel_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/matrix_dims.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/matrix_props.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/problem_iter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_assert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_seq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_seq_make.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/asum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/axpy_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_kgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_subgroup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/copy_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/decomposition.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/fetch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemm_cached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemm_tail_cached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gen_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gen_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/ger_lds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/her2_lds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/her_lds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/iamax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/kprintf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/blas_kgen_legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/blkmul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gemm_img.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gemm_lds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gen_helper_legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/tests/t_blkmul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trmm_img.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trmm_lds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_cached_lds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_img.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_kgen_legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_lds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trxm_common_legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/nrm2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/reduction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/rotg_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/rotm_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/rotmg_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/scal_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/swap_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/symm_cached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/symv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/syr2_lds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/syr_lds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/syrxk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tests/t_tilemul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile_iter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tilemul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trmm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trmv_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsm_kgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsv_gemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsv_trtri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trxm_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tuned_numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/xxmv_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/impl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/ixamax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/scimage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/specialCases/GemmSpecialCases.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/TrtriKernelSourceIncludes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/diag_dtrtri_lower_128_16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/diag_dtrtri_upper_128_16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/diag_dtrtri_upper_192_12.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_16_PART1_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_16_PART2_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_16_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART1_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART1_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART2_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART2_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART1_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART1_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART2_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART2_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART1_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART1_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART2_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART2_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART3_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART3_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_12_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_24_PART1_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_24_PART2_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_48_PART1_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_48_PART2_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_96_PART1_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_96_PART2_R.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xasum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xaxpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xcopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xdot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgemm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgemv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xhemm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xhemv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xher2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xher2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xherk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xhpmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xnrm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrotg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrotm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrotmg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xscal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xscal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xshbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xspmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xswap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsymm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsymv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyr2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtbsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrmm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrsm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/clkern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/devinfo-cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/devinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/gens/dblock_kgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kern_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kerngen_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kgen_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kgen_guard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kgen_loop_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/md5sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/rwlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/tests/t_dblock_kgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/tests/t_gens_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/trace_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/OCLBinaryGenerator/OCLBinaryGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/bingen/bingen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/config-cmdline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/naive/naive_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/step-dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/step.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/symv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syr2k.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syrk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trsm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/var.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tplgen/tplgen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/dimension.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/fileio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/subdim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/toolslib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/tune.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/clBlasVersion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_cher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_cher2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_cherk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chpmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_csscal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ctrsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_dtrmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_isamax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sasum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_saxpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_scopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sdot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sgbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sgemm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sgemv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_snrm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srotg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srotm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srotmg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sscal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sspmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sspr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sswap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssymm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssymv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyr2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stbmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stbsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stpmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stpsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strmm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strsm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_zhemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_zher2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_zhpr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/BasicRoutines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/BlasBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/blas-cblas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/blas-wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/blas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/clBLAS-wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/cmdline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/BlasBase-corr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/blas-lapack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-asum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-axpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-dotc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gemm2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-ger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gerc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-her.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-her2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-her2k.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-herk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hpmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hpr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-iamax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-nrm2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rotg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rotm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rotmg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-sbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-scal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-spmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-spr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-spr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-swap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-symm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-symv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syr2k.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syrk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tbsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tpmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tpsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trsm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/tcase-filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/test-correctness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/BlasBase-func.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-images.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/test-functional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/BlasBase-perf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceRecorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/TrxmPerformanceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-asum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-axpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-dotc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gemm2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-ger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gerc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hemv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-her.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-her2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-her2k.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-herk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hpmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hpr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-iamax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-nrm2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rotg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rotm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rotmg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-sbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-scal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-spmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-spr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-spr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-swap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-symm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-symv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syr2k.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syrk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tbmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tbsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tpmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tpsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trmv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trsm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/test-performance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/timer.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clAmdBlas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clAmdBlas.version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clBLAS-complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clBLAS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clGemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgemm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgemv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgerc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgeru.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xhemm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xhemv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xher2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xher2k.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xherk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsymm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsymv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyr2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyr2k.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyrk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrmm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrmv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrsm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrsv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/ctimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/statisticalTimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/binary_lookup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/clblas_stddef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/clkern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/cltypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/dblock_kgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/defbool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/devinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/dis_warning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/granulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/kern_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/kernel_extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/kerngen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/md5sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/mempat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/rwlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/trace_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTeardown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/AutoGemmUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmClKernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmKernelSourceIncludes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/BinaryBuild.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/atomic_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/bonaire.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_hawaii_dgemm_NT_MN48.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xscal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xscal_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xtrsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_dgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_dgemmCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_dgemmSmallMatrices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_sgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_sgemmSmallMatrices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_zgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gpu_dtrsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gpu_dtrsm192.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_dgemmChannelConflict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_dgemmSplitKernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmBig1024Kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmBranchKernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmSplit64_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmSplitKernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/tahiti.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/problem_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_kgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_subgroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gen_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/blas_kgen_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gen_helper_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_kgen_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trxm_common_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsm_kgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trxm_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tuned_numbers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/xxmv_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/blas_funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/blas_mempat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/clblas-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/kprintf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/matrix_dims.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/matrix_props.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/solution_seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/xgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/specialCases/include/GemmSpecialCases.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/TrtriClKernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/TrtriKernelSourceIncludes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest-patterns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/symv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syr2k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syrk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trmm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/var.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/fileio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/subdim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/toolslib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/tune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/blas-lapack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/tcase-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/trsm-delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/trsv-delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/BlasBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/ExtraTestSizes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/asum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/axpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-cblas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/clBLAS-wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/dot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/dotc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gbmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gemm-2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gemv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/ger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gerc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hbmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hemv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/her.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/her2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/her2k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/herk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hpmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hpr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/iamax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/nrm2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rotg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rotm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rotmg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/sbmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/scal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/spmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/spr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/spr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/symm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/symv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syr2k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syrk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tbmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tbsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/test-limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/testDG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tpmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tpsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trmm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceRecorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceTest.h" />
+    <Text Include="../../thirdparty/owemdjee/clBLAS/README.md" />
+    <Text Include="../../thirdparty/owemdjee/clBLAS/doc/performance/clBLAS_2.6.0/S9150/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/clBLAS/doc/performance/clBLAS_2.6.0/W9100/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/clBLAS/doc/performance/cuBLAS_7.0/Tesla_K40/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/clBLAS/src/wrappers/python/README.txt" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/client.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/statisticalTimer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/stdafx.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/testPerfWrapper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/client/timer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/AutoGemmPreCompileKernels.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/ProfileAutoGemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/TestAutoGemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmClKernels.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmKernelSourceIncludes.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NN_B0_MX048_NX048_KX08_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NN_B1_MX048_NX048_KX08_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NT_B0_MX048_NX048_KX08_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_NT_B1_MX048_NX048_KX08_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_TN_B0_MX048_NX048_KX08_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/dgemm_Col_TN_B1_MX048_NX048_KX08_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B0_MX032_NX032_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B0_MX064_NX064_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B0_MX096_NX096_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX032_NX032_KX16_BRANCH_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX032_NX032_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX064_NX064_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NN_B1_MX096_NX096_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B0_MX032_NX032_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B0_MX064_NX064_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B0_MX096_NX096_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX032_KX16_BRANCH_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX032_KX16_SINGLE_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX032_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX032_NX064_KX16_ROW_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX064_NX032_KX16_COL_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX064_NX064_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX096_NX096_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_NT_B1_MX128_NX128_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B0_MX032_NX032_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B0_MX064_NX064_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B0_MX096_NX096_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX032_NX032_KX16_BRANCH_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX032_NX032_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX064_NX064_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/sgemm_Col_TN_B1_MX096_NX096_KX16_src.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/fill.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/bonaire.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_fill.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_selector.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xgemm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xscal.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xscal_generic.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/functor_xtrsm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_dgemm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_dgemmCommon.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_dgemmSmallMatrices.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_sgemm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_sgemmSmallMatrices.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gcn_zgemm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gpu_dtrsm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/gpu_dtrsm192.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_dgemmChannelConflict.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_dgemmSplitKernel.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmBig1024Kernel.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmBranchKernel.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmSplit64_32.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/hawaii_sgemmSplitKernel.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/tahiti.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/binary_lookup.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/blas_funcs.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/common2.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/events.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/functor_cache.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/kdump.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/kernel_extra.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/matrix_dims.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/matrix_props.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/problem_iter.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_assert.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_seq.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_seq_make.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/asum.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/axpy_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_kgen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_subgroup.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/copy_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/decomposition.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/dot.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/fetch.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemm_cached.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemm_tail_cached.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gemv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gen_helper.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gen_init.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/ger_lds.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/her2_lds.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/her_lds.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/iamax.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/kprintf.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/blas_kgen_legacy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/blkmul.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gemm_img.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gemm_lds.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gen_helper_legacy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/tests/t_blkmul.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trmm_img.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trmm_lds.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_cached_lds.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_img.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_kgen_legacy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_lds.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trxm_common_legacy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/nrm2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/reduction.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/rotg_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/rotm_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/rotmg_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/scal_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/swap_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/symm_cached.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/symv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/syr2_lds.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/syr_lds.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/syrxk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tests/t_tilemul.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile_iter.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tilemul.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trmm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trmv_reg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsm_kgen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsv_gemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsv_trtri.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trxm_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tuned_numbers.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/xxmv_common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/impl.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/init.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/ixamax.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/matrix.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/scimage.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/specialCases/GemmSpecialCases.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/TrtriKernelSourceIncludes.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/diag_dtrtri_lower_128_16.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/diag_dtrtri_upper_128_16.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/diag_dtrtri_upper_192_12.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_16_PART1_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_16_PART2_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_16_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART1_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART1_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART2_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_32_PART2_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART1_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART1_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART2_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_64_PART2_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART1_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART1_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART2_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART2_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART3_L.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_128_ABOVE64_PART3_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_12_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_24_PART1_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_24_PART2_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_48_PART1_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_48_PART2_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_96_PART1_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/triple_dgemm_update_192_96_PART2_R.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xasum.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xaxpy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xcopy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xdot.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgemm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgemm2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xgemv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xger.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xhemm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xhemv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xher.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xher2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xher2k.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xherk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xhpmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xnrm2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrot.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrotg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrotm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xrotmg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xscal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xscal.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xshbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xspmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xswap.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsymm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsymv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyr2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyr2k.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xsyrk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtbsv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrmm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrsm.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/xtrsv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/clkern.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/devinfo-cache.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/devinfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/gens/dblock_kgen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kern_cache.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kerngen_core.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kgen_basic.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kgen_guard.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/kgen_loop_helper.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/list.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/md5sum.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/misc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/mutex.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/rwlock.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/tests/t_dblock_kgen.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/tests/t_gens_cache.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/common/trace_malloc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/OCLBinaryGenerator/OCLBinaryGenerator.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/bingen/bingen.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/config-cmdline.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/config.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/naive/naive_blas.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/step-dump.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/step.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/symv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syr2k.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syrk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trmm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trsm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/var.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tplgen/tplgen.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/dimension.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/fileio.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_data.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_init.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_io.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/subdim.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/toolslib.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/tune.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/clBlasVersion.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_cher.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_cher2k.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_cherk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chpmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_chpr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_csscal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ctrsm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_dtrmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_isamax.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sasum.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_saxpy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_scopy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sdot.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sgbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sgemm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sgemv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sger.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_snrm2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srot.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srotg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srotm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_srotmg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sscal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sspmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sspr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sspr2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_sswap.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssymm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssymv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyr2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyr2k.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_ssyrk.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stbmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stbsv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stpmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_stpsv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strmm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strmv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strsm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strsm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_strsv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_zhemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_zher2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/samples/example_zhpr2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/BasicRoutines.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/BlasBase.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/blas-cblas.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/blas-wrapper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/blas.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/clBLAS-wrapper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/cmdline.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/common.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/BlasBase-corr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/blas-lapack.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-asum.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-axpy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-copy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-dot.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-dotc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gemm2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-ger.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-gerc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-her.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-her2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-her2k.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-herk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hpmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hpr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-hpr2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-iamax.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-nrm2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rot.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rotg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rotm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-rotmg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-sbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-scal.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-spmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-spr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-spr2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-swap.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-symm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-symv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syr2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syr2k.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-syrk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tbsv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tpmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-tpsv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trmm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trsm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/corr-trsv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/tcase-filter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/test-correctness.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/BlasBase-func.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-error.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-event.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-images.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-queue.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func-thread.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/test-functional.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/BlasBase-perf.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceRecorder.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/TrxmPerformanceTest.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-asum.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-axpy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-copy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-dot.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-dotc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gemm2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-ger.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-gerc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hemm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hemv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-her.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-her2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-her2k.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-herk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hpmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hpr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-hpr2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-iamax.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-nrm2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rot.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rotg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rotm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-rotmg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-sbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-scal.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-spmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-spr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-spr2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-swap.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-symm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-symv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syr2.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syr2k.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-syrk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tbmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tbsv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tpmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-tpsv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trmm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trmv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trsm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/perf-trsv.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/test-performance.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/clBLAS/src/tests/timer.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clAmdBlas.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clAmdBlas.version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clBLAS-complex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/clBLAS.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clGemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_common.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgemm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgemv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xger.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgerc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xgeru.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xhemm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xhemv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xher.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xher2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xher2k.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xherk.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsymm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsymv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyr.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyr2.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyr2k.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xsyrk.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrmm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrmv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrsm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/clfunc_xtrsv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/ctimer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/statisticalTimer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/stdafx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/targetver.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/client/timer.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/binary_lookup.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/clblas_stddef.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/clkern.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/cltypes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/dblock_kgen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/defbool.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/devinfo.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/dis_warning.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/granulation.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/kern_cache.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/kernel_extra.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/kerngen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/list.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/md5sum.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/mempat.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/msvc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/mutex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/rwlock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/solver.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/include/trace_malloc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTeardown.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/AutoGemmTools/AutoGemmUtil.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmClKernels.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/UserGemmKernelSources/UserGemmKernelSourceIncludes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/BinaryBuild.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/atomic_counter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/bonaire.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_fill.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_hawaii_dgemm_NT_MN48.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_selector.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xgemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xscal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xscal_generic.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/functor_xtrsm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_dgemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_dgemmCommon.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_dgemmSmallMatrices.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_sgemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_sgemmSmallMatrices.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gcn_zgemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gpu_dtrsm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/gpu_dtrsm192.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_dgemmChannelConflict.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_dgemmSplitKernel.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmBig1024Kernel.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmBranchKernel.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmSplit64_32.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/hawaii_sgemmSplitKernel.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/functor/include/tahiti.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/problem_iter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/generic/solution_assert.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_kgen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/blas_subgroup.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/fetch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/gen_helper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/init.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/blas_kgen_legacy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/gen_helper_legacy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trsm_kgen_legacy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/legacy/trxm_common_legacy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tile_iter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trsm_kgen.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/trxm_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/tuned_numbers.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/gens/xxmv_common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/blas_funcs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/blas_mempat.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/clblas-internal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/events.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/kprintf.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/matrix_dims.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/matrix_props.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/solution_seq.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/include/xgemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/specialCases/include/GemmSpecialCases.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/TrtriClKernels.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/trtri/TrtriKernelSourceIncludes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest-common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest-patterns.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/ktest.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/step.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/gemv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/symv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syr2k.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/syrk.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trmm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/steps/trsm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/ktest/var.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/fileio.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/storage_data.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/subdim.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/toolslib.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/library/tools/tune/tune.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/targetver.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/blas-lapack.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/delta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/tcase-filter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/trsm-delta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/correctness/trsv-delta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/functional/func.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/BlasBase.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/ExtraTestSizes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/asum.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/axpy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-cblas.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-internal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-math.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-random.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/blas-wrapper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/clBLAS-wrapper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/cmdline.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/copy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/dot.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/dotc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gbmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gemm-2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gemv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/ger.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/gerc.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hbmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hemm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hemv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/her.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/her2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/her2k.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/herk.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hpmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hpr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/hpr2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/iamax.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/matrix.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/nrm2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rot.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rotg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rotm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/rotmg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/sbmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/scal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/spmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/spr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/spr2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/swap.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/symm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/symv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syr2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syr2k.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/syrk.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tbmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tbsv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/test-limits.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/testDG.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/timer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tpmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/tpsv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trmm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trmv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trsm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/include/trsv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceRecorder.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/clBLAS/src/tests/performance/PerformanceTest.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/clBLAS/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/clBLAS/doc/performance/clBLAS_2.6.0/S9150/README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/clBLAS/doc/performance/clBLAS_2.6.0/W9100/README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/clBLAS/doc/performance/cuBLAS_7.0/Tesla_K40/README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/clBLAS/src/library/blas/AutoGemm/README.txt" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/clBLAS/src/wrappers/python/README.txt" />
-        
-  </ItemGroup>
 </Project>
-    
+  

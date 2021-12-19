@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>pcg-c-random</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCA82B5}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCG_C_RANDOM;PCG_C_RANDOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,383 +228,134 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/extras/entropy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32-demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32-global-demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32x2-demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg64-demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-global-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-global-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg128i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg128si.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg16i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg16si.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32-global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32si.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64-global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64si.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg8i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg8si.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-rxs-m-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsh-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsh-rs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsl-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-rxs-m-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-xsh-rr-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-xsh-rs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-rxs-m-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-xsh-rr-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-xsh-rs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-rxs-m-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsh-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsh-rs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsl-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-rxs-m-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-rxs-m-xs-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsh-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsh-rs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsl-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsl-rr-rr-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-rxs-m-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-rxs-m-xs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-xsh-rr-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-xsh-rs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-rxs-m-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-rxs-m-xs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-xsh-rr-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-xsh-rs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-rxs-m-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-rxs-m-xs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsh-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsh-rs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsl-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsl-rr-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-8-rxs-m-xs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-rxs-m-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-rxs-m-xs-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsh-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsh-rs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsl-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsl-rr-rr-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-rxs-m-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-rxs-m-xs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-xsh-rr-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-xsh-rs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-rxs-m-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-rxs-m-xs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-xsh-rr-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-xsh-rs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-rxs-m-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-rxs-m-xs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsh-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsh-rs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsl-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsl-rr-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-8-rxs-m-xs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-rxs-m-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-rxs-m-xs-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsh-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsh-rs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsl-rr-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsl-rr-rr-128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-rxs-m-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-rxs-m-xs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-xsh-rr-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-xsh-rs-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-rxs-m-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-rxs-m-xs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-xsh-rr-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-xsh-rs-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-rxs-m-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-rxs-m-xs-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsh-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsh-rs-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsl-rr-32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsl-rr-rr-64.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/extras/entropy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/extras/pcg_spinlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/include/pcg_variants.h" />
+    <Text Include="../../thirdparty/owemdjee/pcg-c-random/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/extras/entropy.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32-demo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32-global-demo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg32x2-demo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/sample/pcg64-demo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-advance-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-global-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-global-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-output-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/src/pcg-rngs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-base.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg128i.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg128si.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg16i.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg16si.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32-global.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32f.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32i.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32s.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32si.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg32u.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64-global.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64f.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64i.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64s.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64si.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg64u.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg8i.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-high/check-pcg8si.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-base.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-rxs-m-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsh-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsh-rs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-128-xsl-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-rxs-m-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-xsh-rr-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-16-xsh-rs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-rxs-m-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-xsh-rr-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-32-xsh-rs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-rxs-m-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsh-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsh-rs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-mcg-64-xsl-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-rxs-m-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-rxs-m-xs-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsh-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsh-rs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsl-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-128-xsl-rr-rr-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-rxs-m-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-rxs-m-xs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-xsh-rr-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-16-xsh-rs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-rxs-m-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-rxs-m-xs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-xsh-rr-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-32-xsh-rs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-rxs-m-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-rxs-m-xs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsh-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsh-rs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsl-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-64-xsl-rr-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-oneseq-8-rxs-m-xs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-rxs-m-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-rxs-m-xs-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsh-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsh-rs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsl-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-128-xsl-rr-rr-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-rxs-m-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-rxs-m-xs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-xsh-rr-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-16-xsh-rs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-rxs-m-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-rxs-m-xs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-xsh-rr-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-32-xsh-rs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-rxs-m-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-rxs-m-xs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsh-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsh-rs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsl-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-64-xsl-rr-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-setseq-8-rxs-m-xs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-rxs-m-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-rxs-m-xs-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsh-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsh-rs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsl-rr-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-128-xsl-rr-rr-128.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-rxs-m-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-rxs-m-xs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-xsh-rr-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-16-xsh-rs-8.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-rxs-m-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-rxs-m-xs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-xsh-rr-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-32-xsh-rs-16.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-rxs-m-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-rxs-m-xs-64.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsh-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsh-rs-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsl-rr-32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/pcg-c-random/test-low/check-unique-64-xsl-rr-rr-64.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/extras/entropy.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/extras/pcg_spinlock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/pcg-c-random/include/pcg_variants.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/pcg-c-random/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

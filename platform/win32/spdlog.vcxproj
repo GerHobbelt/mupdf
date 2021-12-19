@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPDLOG;SPDLOG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPDLOG;SPDLOG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPDLOG;SPDLOG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPDLOG;SPDLOG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,413 +228,143 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/async_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/formatter-bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/latency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/example/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/async.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/cfg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/color_sinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/file_sinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/fmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/spdlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/stdout_sinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_async.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_cfg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_create_dir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_daily_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_dup_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_eventlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_file_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_file_logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_fmt_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_macros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_mpmc_q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_pattern_formatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_stdout_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_stopwatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_systemd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_time_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/utils.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/bench/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async_logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/argv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/helpers-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/common-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/default_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/circular_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/console_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/file_helper-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/file_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/fmt_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg_buffer-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/mpmc_blocking_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/null_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/os-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/periodic_worker-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/periodic_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/synchronous_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/tcp_client-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/tcp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/thread_pool-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/udp_client-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/udp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/windows_include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bin_to_hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/format-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/ostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/printf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/xchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/fmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/ostr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/xchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/pattern_formatter-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/pattern_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/android_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ansicolor_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ansicolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/base_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/base_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/basic_file_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/basic_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/daily_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/dist_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/dup_filter_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/hourly_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/mongo_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/msvc_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/null_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ostream_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/qt_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ringbuffer_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/rotating_file_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/rotating_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_color_sinks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_color_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_sinks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/syslog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/systemd_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/tcp_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/udp_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/win_eventlog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/wincolor_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/wincolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/spdlog-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/spdlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/stopwatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/tweakme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/includes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/test_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/utils.h" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/async_bench.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/bench.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/formatter-bench.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/bench/latency.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/example/example.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/async.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/cfg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/color_sinks.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/file_sinks.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/fmt.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/spdlog.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/src/stdout_sinks.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_async.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_cfg.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_create_dir.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_daily_logger.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_dup_filter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_errors.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_eventlog.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_file_helper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_file_logging.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_fmt_helper.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_macros.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_misc.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_mpmc_q.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_pattern_formatter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_stdout_api.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_stopwatch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_systemd.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_time_point.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/utils.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/bench/utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async_logger-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async_logger.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/argv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/env.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/helpers-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/helpers.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/common-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/default_formatter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/circular_q.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/console_globals.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/file_helper-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/file_helper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/fmt_helper.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg_buffer-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg_buffer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/mpmc_blocking_q.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/null_mutex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/os-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/os.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/periodic_worker-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/periodic_worker.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/synchronous_factory.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/tcp_client-windows.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/tcp_client.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/thread_pool-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/thread_pool.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/udp_client-windows.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/udp_client.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/windows_include.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bin_to_hex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/args.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/chrono.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/color.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/compile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/core.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/format-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/format.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/locale.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/os.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/ostream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/printf.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/ranges.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bundled/xchar.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/chrono.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/compile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/fmt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/ostr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/xchar.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/formatter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fwd.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/logger-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/logger.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/pattern_formatter-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/pattern_formatter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/android_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ansicolor_sink-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ansicolor_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/base_sink-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/base_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/basic_file_sink-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/basic_file_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/daily_file_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/dist_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/dup_filter_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/hourly_file_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/mongo_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/msvc_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/null_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ostream_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/qt_sinks.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ringbuffer_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/rotating_file_sink-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/rotating_file_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/sink-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_color_sinks-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_color_sinks.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_sinks-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_sinks.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/syslog_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/systemd_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/tcp_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/udp_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/win_eventlog_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/wincolor_sink-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/wincolor_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/spdlog-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/spdlog.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/stopwatch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/tweakme.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/catch.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/includes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/test_sink.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/utils.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/spdlog/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

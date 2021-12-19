@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>LightLDA</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1CB198}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGHTLDA;LIGHTLDA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGHTLDA;LIGHTLDA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGHTLDA;LIGHTLDA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGHTLDA;LIGHTLDA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIGHTLDA;LIGHTLDA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,257 +228,92 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/inference/infer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/inference/inferer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/aggregator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/barrier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/communicator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/data_block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/delta_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/endpoint_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/lock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/mpi_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/msg_pack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/multiverso.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/parameter_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/row_iter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/stop_watch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/table_iter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/trainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/vector_clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/zmq_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso_server/cl_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso_server/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/preprocess/dump_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/alias_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/data_block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/data_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/document.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/eval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/lightlda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/sampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/trainer.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/inference/inferer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/aggregator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/communicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/data_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/delta_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/double_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/endpoint_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/mpi_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/msg_pack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/mt_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/multiverso.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/parameter_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/row_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/stop_watch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/table_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/vector_clock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/zmq_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso_server/cl_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/alias_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/data_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/data_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/util.h" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/third_party/MPI/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/third_party/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/third_party/ZeroMQ/README.md" />
+    <Text Include="../../thirdparty/owemdjee/LightLDA/windows/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/inference/infer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/inference/inferer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/aggregator.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/barrier.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/communicator.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/data_block.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/delta_pool.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/endpoint_list.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/lock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/log.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/mpi_util.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/msg_pack.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/multiverso.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/parameter_loader.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/row.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/row_iter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/server.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/stop_watch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/table.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/table_iter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/trainer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/vector_clock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso/zmq_util.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso_server/cl_parser.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso_server/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/preprocess/dump_binary.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/alias_table.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/common.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/data_block.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/data_stream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/document.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/eval.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/lightlda.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/meta.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/model.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/sampler.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/LightLDA/src/trainer.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/inference/inferer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/aggregator.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/barrier.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/communicator.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/data_block.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/delta_pool.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/double_buffer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/endpoint_list.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/lock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/log.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/meta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/mpi_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/msg_pack.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/mt_queue.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/multiverso.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/parameter_loader.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/row.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/row_iter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/server.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/stop_watch.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/table.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/table_iter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/vector_clock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/include/multiverso/zmq_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/multiverso/src/multiverso_server/cl_parser.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/alias_table.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/data_block.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/data_stream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/document.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/eval.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/meta.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/model.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/sampler.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/trainer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/LightLDA/src/util.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/example/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/third_party/MPI/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/third_party/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/multiverso/windows/third_party/ZeroMQ/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/LightLDA/windows/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

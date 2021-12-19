@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTUV;TUV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTUV;TUV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTUV;TUV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTUV;TUV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,503 +228,173 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/fs-poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/inet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/threadpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/tuv_debuglog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/aix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/android-ifaddrs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/darwin-proctitle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/darwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/dl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/freebsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/fsevents.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/getaddrinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/getnameinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/kqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-inotify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-syscalls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/loop-watcher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/loop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/netbsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/nuttx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/openbsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/os390.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/process.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/proctitle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/pthread-barrier.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/pthread-fixes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/sunos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/tcp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/tizenrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/tty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/udp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/uv-common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/detect-wakeup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/dl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/fs-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/getaddrinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/getnameinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/loop-watcher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/process-stdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/process.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/req.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/snprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/tcp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/tty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/udp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/winapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/winsock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/echo_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/apiemul_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/apiemul_socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/echo_server_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/raw_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/runner_main_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_active_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_async_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_condvar_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_idle_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_shutdown_eof_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_tcp_open_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_threadpool_raw_queue_work_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_again.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_huge_repeat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_huge_timeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_norm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_order.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_run_null_callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_run_once.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_start_twice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_walk_handles_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_linux_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_nuttx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_tizenrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_active.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_condvar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_cwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_getaddrinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_idle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_ipc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_bind_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_close_stdout_read_stdin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_connect_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_connect_multiple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_connect_prepare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_getsockname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_pending_instances.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_sendmsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_server_close.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_set_non_blocking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_shutdown_eof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_spawn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_tcp_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_threadpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_timer_again.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_walk_handles.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/android-ifaddrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/pthread-barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/stdint-msvc2008.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/tuv__debuglog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-aix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-bsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-darwin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-nuttx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-os390.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-sunos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-threadpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-tizenrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/heap-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/atomic-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-syscalls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/spinlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/uv-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/atomicops-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/handle-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/req-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/stream-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/winapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/winsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/raw/apiemul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/raw/raw_main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/runner_list.h" />
+    <Text Include="../../thirdparty/owemdjee/libtuv/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/fs-poll.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/inet.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/threadpool.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/tuv_debuglog.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/aix.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/android-ifaddrs.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/async.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/core.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/darwin-proctitle.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/darwin.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/dl.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/freebsd.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/fs.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/fsevents.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/getaddrinfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/getnameinfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/kqueue.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-core.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-inotify.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-syscalls.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/loop-watcher.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/loop.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/netbsd.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/nuttx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/openbsd.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/os390.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/pipe.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/poll.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/process.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/proctitle.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/pthread-barrier.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/pthread-fixes.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/signal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/stream.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/sunos.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/tcp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/thread.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/timer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/tizenrt.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/tty.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/unix/udp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/uv-common.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/version.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/async.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/core.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/detect-wakeup.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/dl.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/error.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/fs-event.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/fs.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/getaddrinfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/getnameinfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/handle.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/loop-watcher.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/pipe.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/poll.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/process-stdio.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/process.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/req.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/signal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/snprintf.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/stream.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/tcp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/thread.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/timer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/tty.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/udp.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/util.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/winapi.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/src/win/winsock.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/echo_server.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/apiemul_main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/apiemul_socket.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/echo_server_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/raw_main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/runner_main_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_active_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_async_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_condvar_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_idle_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_shutdown_eof_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_tcp_open_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_threadpool_raw_queue_work_simple.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_again.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_huge_repeat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_huge_timeout.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_init.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_norm.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_order.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_run_null_callback.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_run_once.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_timer_raw_start_twice.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/raw/test_walk_handles_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_linux.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_linux_raw.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_nuttx.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/runner_tizenrt.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_active.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_async.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_condvar.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_cwd.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_error.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_fs.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_getaddrinfo.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_idle.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_ipc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_bind_error.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_close_stdout_read_stdin.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_connect_error.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_connect_multiple.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_connect_prepare.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_getsockname.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_pending_instances.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_sendmsg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_server_close.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_pipe_set_non_blocking.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_shutdown_eof.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_signal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_spawn.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_tcp_open.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_threadpool.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_timer.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_timer_again.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libtuv/test/test_walk_handles.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/android-ifaddrs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/pthread-barrier.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/stdint-msvc2008.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/tree.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/tuv__debuglog.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-aix.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-bsd.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-darwin.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-errno.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-linux.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-nuttx.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-os390.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-sunos.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-threadpool.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-tizenrt.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-unix.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv-win.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/include/uv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/heap-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/queue.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/atomic-ops.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/internal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/linux-syscalls.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/unix/spinlock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/uv-common.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/atomicops-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/handle-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/internal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/req-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/stream-inl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/winapi.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/src/win/winsock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/raw/apiemul.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/raw/raw_main.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/runner.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libtuv/test/runner_list.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libtuv/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

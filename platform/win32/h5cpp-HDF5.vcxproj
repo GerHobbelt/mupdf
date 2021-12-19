@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>h5cpp-HDF5</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD7FDF8}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H5CPP_HDF5;H5CPP_HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H5CPP_HDF5;H5CPP_HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H5CPP_HDF5;H5CPP_HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H5CPP_HDF5;H5CPP_HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H5CPP_HDF5;H5CPP_HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,350 +228,123 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/basics/basics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/struct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/container/container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/csv2hdf5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/custom_pipeline/pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datasets/datasets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/n-bit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/two-bit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/groups/groups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/half-float.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/open-exr/half-float.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/kita/kita.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/arma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/blaze.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/blitz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/dlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/eigen3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/itpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/ublas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/collective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/independent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/throughput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/optimized/optimized.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/packet_batches.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/packettable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/raw_memory/raw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/reference/reference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/sparse/arma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/string/string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/transform/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/utf/utf.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/csv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/n-bit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/two-bit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/half.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/open-exr/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-01.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-02.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Acreate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Adelete.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Aopen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Aread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Awrite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dappend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dcreate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dgather.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dopen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dscatter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dwrite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Eall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Fcreate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Fopen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Ialgorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Iall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Marma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mblaze.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mdlib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Meigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mitpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mstl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mublas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Pall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Pdapl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Pdcpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Rall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Sall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Tall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Tconversion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Tmeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Zall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Zpipeline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Zpipeline_basic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5capi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5cout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/compat.hpp" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/container/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datasets/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/groups/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/open-exr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/kita/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/sparse/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/attributes.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/basics/basics.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/struct.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/container/container.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/csv2hdf5.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/custom_pipeline/pipeline.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datasets/datasets.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/n-bit.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/two-bit.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/groups/groups.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/half-float.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/open-exr/half-float.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/kita/kita.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/arma.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/blaze.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/blitz.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/dlib.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/eigen3.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/itpp.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/linalg/ublas.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/collective.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/independent.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/throughput.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-01.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-02.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/optimized/optimized.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/packet_batches.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/packettable.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/raw_memory/raw.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/reference/reference.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/sparse/arma.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/vector.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/string/string.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/transform/transform.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/utf/utf.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/generated.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/struct.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/generated.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/struct.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/compound/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/csv.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/generated.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/struct.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/n-bit.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/two-bit.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/half.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/open-exr/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/struct.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-01.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/tu-02.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/multi-tu/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/generated.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/struct.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/packet-table/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/generated.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/struct.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/stl/utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Acreate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Adelete.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Aopen.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Aread.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Awrite.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dappend.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dcreate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dgather.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dopen.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dread.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dscatter.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Dwrite.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Eall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Fcreate.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Fopen.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Ialgorithm.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Iall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Marma.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mblaze.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mdlib.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Meigen.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mitpp.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mstl.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Mublas.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Pall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Pdapl.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Pdcpl.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Rall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Sall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Tall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Tconversion.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Tmeta.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Zall.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Zpipeline.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5Zpipeline_basic.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5capi.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5config.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5cout.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5meta.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/H5misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/h5cpp-HDF5/h5cpp/compat.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/attributes/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/container/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/csv/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datasets/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/datatypes/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/groups/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/christian-rau/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/half-float/open-exr/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/kita/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/mpi/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/h5cpp-HDF5/examples/sparse/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_MIMETIC;MIMETIC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_MIMETIC;MIMETIC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_MIMETIC;MIMETIC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_MIMETIC;MIMETIC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,242 +228,86 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/examples/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/examples/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/examples/mm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/body.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/circular_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/codec_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/codec_chain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/other_codecs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/qp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/config_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contentdescription.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contentdisposition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contentid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contenttransferencoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contenttype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/fieldparam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/libconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimeentity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimeentitylist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimetic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimeversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/directory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/file_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/fileop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/mmfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/stdfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/parser/itparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/parser/itparserdecl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/address.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/addresslist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/body.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/datetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/fieldvalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/mailbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/mailboxlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/messageid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/rfc822.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/streambufs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/strutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/cutee.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.circular_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.composite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.contentdisposition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.contenttype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.directory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.fieldparam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.find_bm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.mimemessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.qp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.rfc822.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.strutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.version.h" />
+    <Text Include="../../thirdparty/owemdjee/mimetic/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/examples/cmdline.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/examples/engine.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/examples/mm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/body.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/circular_buffer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/base64.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/code.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/codec.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/codec_base.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/codec_chain.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/other_codecs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/codec/qp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/config_win32.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contentdescription.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contentdisposition.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contentid.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contenttransferencoding.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/contenttype.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/fieldparam.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/header.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/libconfig.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/message.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimeentity.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimeentitylist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimetic.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/mimeversion.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/directory.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/file.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/file_iterator.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/fileop.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/mmfile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/os.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/stdfile.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/os/utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/parser/itparser.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/parser/itparserdecl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/address.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/addresslist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/body.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/datetime.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/field.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/fieldvalue.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/group.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/header.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/mailbox.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/mailboxlist.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/message.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/messageid.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/rfc822/rfc822.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/streambufs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/strutils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/tokenizer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/tree.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/mimetic/version.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/cutee.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.base64.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.circular_buffer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.codec.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.composite.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.contentdisposition.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.contenttype.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.directory.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.fieldparam.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.file.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.find_bm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.mimemessage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.parser.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.qp.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.rfc822.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.strutils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.tokenizer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.tree.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/mimetic/test/t.version.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/mimetic/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

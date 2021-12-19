@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GBENCHMARK;GBENCHMARK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GBENCHMARK;GBENCHMARK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GBENCHMARK;GBENCHMARK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GBENCHMARK;GBENCHMARK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,275 +228,97 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/bindings/python/google_benchmark/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/gnu_posix_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/posix_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/std_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/steady_clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/thread_safety_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_api_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_name.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_register.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_runner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/colorprint.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/commandlineflags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/complexity.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/console_reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/counter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/csv_reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/json_reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/perf_counters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/sleep.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/statistics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/string_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/sysinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/timers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/args_product_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/basic_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_name_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_random_interleaving_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/clobber_memory_assembly_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/commandlineflags_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/complexity_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/cxx03_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/diagnostics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/display_aggregates_only_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/donotoptimize_assembly_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/donotoptimize_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/filter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/fixture_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/internal_threading_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/link_main_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/memory_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/multiple_ranges_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/options_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/output_test_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/perf_counters_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/perf_counters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/register_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/repetitions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/report_aggregates_only_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/reporter_output_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/skip_with_error_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/state_assembly_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/statistics_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/string_util_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/templated_fixture_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/user_counters_tabular_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/user_counters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/user_counters_thousands_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/include/benchmark/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/arraysize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_api_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_register.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/colorprint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/commandlineflags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/complexity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/cycleclock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/internal_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/perf_counters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/re.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/sleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/string_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/thread_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/thread_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/timers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/test/output_test.h" />
+    <Text Include="../../thirdparty/owemdjee/gbenchmark/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/bindings/python/google_benchmark/benchmark.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/gnu_posix_regex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/posix_regex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/std_regex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/steady_clock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/cmake/thread_safety_attributes.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_api_internal.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_main.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_name.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_register.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_runner.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/colorprint.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/commandlineflags.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/complexity.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/console_reporter.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/counter.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/csv_reporter.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/json_reporter.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/perf_counters.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/reporter.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/sleep.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/statistics.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/string_util.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/sysinfo.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/src/timers.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/args_product_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/basic_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_name_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_random_interleaving_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/benchmark_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/clobber_memory_assembly_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/commandlineflags_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/complexity_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/cxx03_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/diagnostics_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/display_aggregates_only_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/donotoptimize_assembly_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/donotoptimize_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/filter_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/fixture_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/internal_threading_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/link_main_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/map_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/memory_manager_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/multiple_ranges_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/options_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/output_test_helper.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/perf_counters_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/perf_counters_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/register_benchmark_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/repetitions_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/report_aggregates_only_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/reporter_output_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/skip_with_error_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/state_assembly_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/statistics_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/string_util_gtest.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/templated_fixture_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/user_counters_tabular_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/user_counters_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/gbenchmark/test/user_counters_thousands_test.cc" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/include/benchmark/benchmark.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/arraysize.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_api_internal.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_register.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/benchmark_runner.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/check.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/colorprint.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/commandlineflags.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/complexity.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/counter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/cycleclock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/internal_macros.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/log.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/mutex.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/perf_counters.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/re.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/sleep.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/statistics.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/string_util.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/thread_manager.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/thread_timer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/src/timers.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/gbenchmark/test/output_test.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/gbenchmark/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOM;BLOOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOM;BLOOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOM;BLOOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOM;BLOOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,386 +228,134 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/fileno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/libcompat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/localtime_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/putenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/setenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/strsignal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/unsetenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_msg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_export_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_fixture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_fork.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_limit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_log_internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_master.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_msg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_stress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_thread_stress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/ex_log_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/ex_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/ex_xml_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/inih/ini.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_epoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_kqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_port.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/murmurhash/MurmurHash3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/spookyhash/spooky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/art.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/background.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/barrier.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/bloomd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/conn_handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/handler_constants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/networking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bloom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/libbloom/sbf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/runner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_art.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_filtmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/runner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/test_bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/test_bloom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/test_sbf.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/libcompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_msg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_pack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_str.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/inih/ini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_vars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/event_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/murmurhash/MurmurHash3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/spookyhash/spooky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/art.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/background.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/conn_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/networking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/spinlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/type_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bloom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/libbloom/sbf.h" />
+    <Text Include="../../thirdparty/owemdjee/libbloom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libbloom/deps/inih/README.txt" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/bench.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.1.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.3.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.4.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.5.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.6.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.1.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.2.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.3.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.6.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.7.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/tests/check_money.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/fileno.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/libcompat.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/localtime_r.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/malloc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/pipe.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/putenv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/realloc.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/setenv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/sleep.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/strdup.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/strsignal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/unsetenv.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_error.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_list.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_log.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_msg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_pack.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_print.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_run.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_str.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_exit.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_export_main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_fixture.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_fork.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_limit.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_log.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_log_internal.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_main.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_master.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_msg.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_pack.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check_sub.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_list.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_stress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_thread_stress.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/ex_log_output.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/ex_output.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/ex_xml_output.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/inih/ini.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_epoll.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_kqueue.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_poll.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_port.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_select.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_win32.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/libev/event.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/murmurhash/MurmurHash3.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/deps/spookyhash/spooky.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/art.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/background.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/barrier.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/bloomd.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/config.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/conn_handler.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter_manager.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/handler_constants.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/bloomd/networking.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bitmap.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bloom.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/src/libbloom/sbf.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/runner.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_art.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_config.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_filter.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/bloomd/test_filtmgr.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/runner.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/test_bitmap.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/test_bloom.c" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/libbloom/tests/libbloom/test_sbf.c" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.1.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.2.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/doc/example/src/money.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/lib/libcompat.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_error.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_impl.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_list.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_log.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_msg.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_pack.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_print.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/src/check_str.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/check-0.9.8/tests/check_check.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/inih/ini.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev++.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_vars.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/ev_wrap.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/event.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/libev/event_compat.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/murmurhash/MurmurHash3.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/deps/spookyhash/spooky.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/art.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/background.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/barrier.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/conn_handler.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/filter_manager.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/networking.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/spinlock.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/bloomd/type_compat.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bitmap.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/libbloom/bloom.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/libbloom/src/libbloom/sbf.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libbloom/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/libbloom/deps/inih/README.txt" />
-        
-  </ItemGroup>
 </Project>
-    
+  

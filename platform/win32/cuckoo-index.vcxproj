@@ -29,42 +29,32 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
 	<CharacterSet>Unicode</CharacterSet>
-    
     <UseOfMfc>false</UseOfMfc>
-    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -77,13 +67,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
-
-  
-  
-  
-  
-  
-  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -93,10 +76,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  
-  
 <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -148,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CUCKOO_INDEX;CUCKOO_INDEX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -175,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CUCKOO_INDEX;CUCKOO_INDEX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -203,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CUCKOO_INDEX;CUCKOO_INDEX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CUCKOO_INDEX;CUCKOO_INDEX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -242,149 +228,55 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  
-
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/bitmap_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/build_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/bit_packing_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/bit_packing_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/byte_coding_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/profiling.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/rle_bitmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/rle_bitmap_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_index.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_kicker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_kicker_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/data_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluation_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluation_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/fingerprint_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/fingerprint_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/lookup_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_bloom_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_xor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/xor_filter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/zone_map_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/bit_packing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/byte_coding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/profiling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/rle_bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_kicker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/evaluation_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/fingerprint_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/index_structure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_bloom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/xor_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/zone_map.h" />
+    <Text Include="../../thirdparty/owemdjee/cuckoo-index/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/bitmap_benchmark_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/build_benchmark.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/bit_packing_benchmark.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/bit_packing_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/byte_coding_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/profiling.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/rle_bitmap.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/common/rle_bitmap_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_index.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_index_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_kicker.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_kicker_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_utils.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_utils_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/data.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/data_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluate.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluation_utils.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluation_utils_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/evaluator.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/fingerprint_store.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/fingerprint_store_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/lookup_benchmark.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_bloom_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_xor_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/xor_filter_test.cc" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/cuckoo-index/zone_map_test.cc" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/bit_packing.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/bitmap.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/byte_coding.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/profiling.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/common/rle_bitmap.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_index.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_kicker.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/cuckoo_utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/data.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/evaluation_utils.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/evaluator.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/fingerprint_store.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/index_structure.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_bloom.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/per_stripe_xor.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/xor_filter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/cuckoo-index/zone_map.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/cuckoo-index/README.md" />
-        
-  </ItemGroup>
 </Project>
-    
+  

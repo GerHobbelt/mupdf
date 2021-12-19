@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>HighFive-HDF5</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7A5AEB}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HIGHFIVE_HDF5;HIGHFIVE_HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HIGHFIVE_HDF5;HIGHFIVE_HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HIGHFIVE_HDF5;HIGHFIVE_HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HIGHFIVE_HDF5;HIGHFIVE_HDF5_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HIGHFIVE_HDF5;HIGHFIVE_HDF5_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,353 +228,124 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AccessModifierOffset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignAfterOpenBracket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignConsecutiveAssignments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignConsecutiveDeclarations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignEscapedNewlinesLeft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignOperands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignTrailingComments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortBlocksOnASingleLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortCaseLabelsOnASingleLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortFunctionsOnASingleLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortIfStatementsOnASingleLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortLoopsOnASingleLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlwaysBreakBeforeMultilineStrings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlwaysBreakTemplateDeclarations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterClass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterControlStatement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterEnum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterExternBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterNamespace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterStruct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterUnion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.BeforeCatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.BeforeElse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BreakBeforeBinaryOperators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BreakBeforeTernaryOperators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/Cpp11BracedListStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/FixNamespaceComment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/IndentWidth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/NamespaceIndentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/PointerAlignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/SortIncludes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/SpaceAfterBulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/one-parameter-per-line-if-they-do-no-fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/boost_multi_array_2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/boost_multiarray_complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/boost_ublas_double.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/compound_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_attribute_string_integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_dataset_double.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_datatype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_extensible_dataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/easy_attribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/easy_dumpoptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/easy_load_dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/parallel_hdf5_write_dataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_dataset_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_fixedlen_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_single_scalar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_vector_dataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_vector_dataset_references.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/renaming_objects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/select_by_id_dataset_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/select_partial_dataset_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/test_dependent_library/src/otherton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/test_dependent_library/src/simpleton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_easy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_multi_dims.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_parallel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_import_public_headers.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Attribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5DataSet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5DataSpace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5DataType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Easy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5File.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5FileDriver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5PropertyList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Reference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Annotate_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Annotate_traits_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Attribute_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5ConverterEigen_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Converter_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5DataSet_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5DataType_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Dataspace_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Exception_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5FileDriver_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5File_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Iterables_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Node_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Node_traits_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Object_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Path_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Path_traits_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5PropertyList_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5ReadWrite_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Reference_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Selection_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Slice_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Slice_traits_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5_definitions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_Eigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_opencv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_public.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_xtensor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/test_dependent_library/include/simpleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five.hpp" />
+    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/README.md" />
+    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/README.md" />
+    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/README.md.jinja" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AccessModifierOffset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignAfterOpenBracket.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignConsecutiveAssignments.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignConsecutiveDeclarations.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignEscapedNewlinesLeft.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignOperands.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlignTrailingComments.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortBlocksOnASingleLine.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortCaseLabelsOnASingleLine.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortFunctionsOnASingleLine.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortIfStatementsOnASingleLine.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AllowShortLoopsOnASingleLine.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlwaysBreakBeforeMultilineStrings.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/AlwaysBreakTemplateDeclarations.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterClass.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterControlStatement.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterEnum.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterExternBlock.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterFunction.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterNamespace.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterStruct.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.AfterUnion.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.BeforeCatch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BraceWrapping.BeforeElse.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BreakBeforeBinaryOperators.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/BreakBeforeTernaryOperators.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/Cpp11BracedListStyle.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/FixNamespaceComment.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/IndentWidth.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/NamespaceIndentation.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/PointerAlignment.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/SortIncludes.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/SpaceAfterBulk.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/snippets/one-parameter-per-line-if-they-do-no-fit.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/boost_multi_array_2D.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/boost_multiarray_complex.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/boost_ublas_double.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/compound_types.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_attribute_string_integer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_dataset_double.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_datatype.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/create_extensible_dataset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/easy_attribute.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/easy_dumpoptions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/easy_load_dump.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/parallel_hdf5_write_dataset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_dataset_string.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_fixedlen_string.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_single_scalar.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_vector_dataset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/read_write_vector_dataset_references.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/renaming_objects.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/select_by_id_dataset_cpp11.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/src/examples/select_partial_dataset_cpp11.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/test_dependent_library/src/otherton.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/test_dependent_library/src/simpleton.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_base.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_easy.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_multi_dims.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five_parallel.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_import_public_headers.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Attribute.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5DataSet.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5DataSpace.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5DataType.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Easy.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Exception.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5File.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5FileDriver.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Group.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Object.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5PropertyList.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Reference.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Selection.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/H5Utility.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Annotate_traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Annotate_traits_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Attribute_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5ConverterEigen_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Converter_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5DataSet_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5DataType_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Dataspace_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Exception_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5FileDriver_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5File_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Iterables_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Node_traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Node_traits_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Object_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Path_traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Path_traits_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5PropertyList_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5ReadWrite_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Reference_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Selection_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Slice_traits.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Slice_traits_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5Utils.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/bits/H5_definitions.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_Eigen.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_misc.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_opencv.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_public.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_scalar.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_vector.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/include/highfive/h5easy_bits/H5Easy_xtensor.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/test_dependent_library/include/simpleton.hpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/HighFive-HDF5/tests/unit/tests_high_five.hpp" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/CHANGELOG.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/HighFive-HDF5/deps/hpc-coding-conventions/cpp/formatting/README.md.jinja" />
-        
-  </ItemGroup>
 </Project>
-    
+  

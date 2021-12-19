@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectName>hmm-stoch</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1E26B7}</ProjectGuid>
@@ -31,48 +28,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+	<CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
-    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -83,9 +76,10 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_STOCH;HMM_STOCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -136,7 +130,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_STOCH;HMM_STOCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -163,7 +158,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_STOCH;HMM_STOCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -191,7 +187,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_STOCH;HMM_STOCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -218,7 +215,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HMM_STOCH;HMM_STOCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-    </ResourceCompile>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	</ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
@@ -230,437 +228,152 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/CDF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/Counter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/MotifScorer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/PDF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/StochHMM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/alignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/backward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/baum_welch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/bitwise_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/basicTrellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_trellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_viterbi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/nthTrellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_StochHMM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_trellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/simpleTrellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochErr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochasticTrellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/trellisCells.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/distributions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/dynamic_bitset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/emm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/externDefinitions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/externalFuncs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/forward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/forward_viterbi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/hmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/lexicalTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/modelTemplate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/nth_best.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/posterior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/pwm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/seqJobs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/seqTracks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/sequenceStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/sequences.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stochMath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stochTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stoch_forward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stoch_viterbi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/traceback_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/track.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/trainingSeq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/transitions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/trellis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/userFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/viterbi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/weight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestAlignment/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestCommandline/Test_Commandline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestCounting/CountSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecoding/Test_Decoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecodingALL/Test_DecodingAll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDiceModelImport/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDistributions/TestDistributions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestModel/Test_Model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestModelParsing/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestNewStochHMM/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestSequenceImport/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestStochHMMlib/TestUsingStochHMMlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestTemplates/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestTraining/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestTrellis/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/Test_mem_viterbi/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/TestTools/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/Test_newAlphabet/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/bitwise_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/dynamic_bitset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/newStochHMM/newStochHMM.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/CDF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/Counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/MotifScorer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/PDF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/StochHMM_usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/StochHMMlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/alignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/bitwise_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/basicTrellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_trellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_viterbi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/nthTrellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_stochhmmUsage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_trellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/simpleTrellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochErr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochasticTrellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/trellisCells.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/distributions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/dynamic_bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/emm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/externDefinitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/externalFuncs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/hmm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/lexicalTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/modelTemplate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/pwm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/seqTracks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sequenceStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sequences.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/simpleTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sparseArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stateInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stochMath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stochTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stochTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/traceback_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/track.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/trainingSeq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/transitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/trellis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/userFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestCommandline/TC_usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecoding/TD_Usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecodingALL/TDA_Usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestModel/TM_usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/bitwise_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/dynamic_bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/newStochHMM/newStochHMM_Usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/sparseArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/stateInfo.h" />
+    <Text Include="../../thirdparty/owemdjee/hmm-stoch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestNewStochHMM/TestNewStochHMM.1" />
+    <Text Include="../../thirdparty/owemdjee/hmm-stoch/xcode/newStochHMM/newStochHMM.1" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
-
-  <ItemGroup>
-    
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/CDF.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/Counter.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/MotifScorer.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/PDF.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/StochHMM.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/alignment.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/backward.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/baum_welch.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/bitwise_ops.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/basicTrellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_trellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_viterbi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/nthTrellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_StochHMM.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_trellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/simpleTrellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochErr.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochasticTrellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/table.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/trellisCells.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/distributions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/dynamic_bitset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/emm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/externDefinitions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/externalFuncs.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/forward.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/forward_viterbi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/hmm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/index.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/lexicalTable.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/modelTemplate.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/nth_best.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/options.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/output.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/posterior.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/pwm.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/seqJobs.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/seqTracks.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/sequence.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/sequenceStream.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/sequences.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/state.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/statistics.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stochMath.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stochTable.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stoch_forward.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/stoch_viterbi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/text.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/traceback_path.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/track.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/trainingSeq.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/transitions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/trellis.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/userFunctions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/viterbi.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/src/weight.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestAlignment/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestCommandline/Test_Commandline.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestCounting/CountSequence.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecoding/Test_Decoding.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecodingALL/Test_DecodingAll.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDiceModelImport/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDistributions/TestDistributions.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestModel/Test_Model.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestModelParsing/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestNewStochHMM/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestSequenceImport/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestStochHMMlib/TestUsingStochHMMlib.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestTemplates/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestTraining/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestTrellis/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/Test_mem_viterbi/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/TestTools/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/Test_newAlphabet/main.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/bitwise_ops.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/dynamic_bitset.cpp" />
-        
-
-    <ClCompile Include="../../thirdparty/owemdjee/hmm-stoch/xcode/newStochHMM/newStochHMM.cpp" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/config.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/CDF.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/Counter.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/MotifScorer.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/PDF.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/StochHMM_usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/StochHMMlib.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/alignment.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/bitwise_ops.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/basicTrellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_trellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/mem_viterbi.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/nthTrellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_stochhmmUsage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/old_trellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/simpleTrellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochErr.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/stochasticTrellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/table.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/deprecated/trellisCells.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/distributions.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/dynamic_bitset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/emm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/externDefinitions.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/externalFuncs.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/hmm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/index.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/lexicalTable.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/modelTemplate.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/options.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/output.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/pwm.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/seqTracks.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sequence.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sequenceStream.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sequences.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/simpleTable.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/sparseArray.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/state.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stateInfo.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/statistics.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stochMath.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stochTable.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/stochTypes.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/text.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/traceback_path.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/track.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/trainingSeq.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/transitions.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/trellis.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/userFunctions.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/src/weight.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestCommandline/TC_usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecoding/TD_Usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestDecodingALL/TDA_Usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestModel/TM_usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/bitwise_ops.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/dynamic_bitset.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/newStochHMM/newStochHMM_Usage.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/sparseArray.h" />
-        
-
-    <ClInclude Include="../../thirdparty/owemdjee/hmm-stoch/xcode/stateInfo.h" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/hmm-stoch/README.md" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/hmm-stoch/testsuite/TestNewStochHMM/TestNewStochHMM.1" />
-        
-
-    <Text Include="../../thirdparty/owemdjee/hmm-stoch/xcode/newStochHMM/newStochHMM.1" />
-        
-  </ItemGroup>
 </Project>
-    
+  
