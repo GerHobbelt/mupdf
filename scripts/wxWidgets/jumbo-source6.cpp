@@ -3,373 +3,323 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#define WX_JUMBO_MONOLITHIC_BUILD
+
 
 
 //------------------------------------------------------------------------
-// glcanvas.cpp
+// encconv.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/encconv.cpp"
+
+
+//------------------------------------------------------------------------
+// enhmeta.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/enhmeta.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// epolldispatcher.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/epolldispatcher.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// event.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/event.cpp"
+
+
+//------------------------------------------------------------------------
+// evtloop.cpp
+
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/evtloop.cpp"
+#endif
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/evtloop.cpp"
 #endif
 
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/evtloop.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/evtloop.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/evtloop.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/evtloop.cpp"
 #endif
 
 #if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/glcanvas.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/evtloop.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// glcanvas_osx.cpp
+// evtloop_cf.cpp
 
 #if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/glcanvas_osx.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/evtloop_cf.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// glcmn.cpp
+// evtloopcmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/glcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// glegl.cpp
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/glegl.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/evtloopcmn.cpp"
 
 
 //------------------------------------------------------------------------
-// glx11.cpp
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/glx11.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// graphcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/graphcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// graphicc.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/graphicc.cpp"
-
-
-//------------------------------------------------------------------------
-// graphics.cpp
+// evtloopconsole.cpp
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphics.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/evtloopconsole.cpp"
 #endif
 
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/graphics.cpp"
+
+//------------------------------------------------------------------------
+// evtloopunix.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/evtloopunix.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// extended.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/extended.cpp"
+
+
+//------------------------------------------------------------------------
+// fddlgcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fddlgcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// fdiodispatcher.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fdiodispatcher.cpp"
+
+
+//------------------------------------------------------------------------
+// fdiounix.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/fdiounix.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// fdrepdlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/fdrepdlg.cpp"
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/fdrepdlg.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// ffile.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/ffile.cpp"
+
+
+//------------------------------------------------------------------------
+// file.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/file.cpp"
+
+
+//------------------------------------------------------------------------
+// fileback.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fileback.cpp"
+
+
+//------------------------------------------------------------------------
+// fileconf.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fileconf.cpp"
+
+
+//------------------------------------------------------------------------
+// filectrl.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filectrl.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// filectrlcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filectrlcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// filectrlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filectrlg.cpp"
+
+
+//------------------------------------------------------------------------
+// filedlg.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filedlg.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/filedlg.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/filedlg.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/filedlg.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/graphics.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/filedlg.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// grid.cpp
+// filedlgg.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grid.cpp"
-
-
-//------------------------------------------------------------------------
-// gridcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/gridcmn.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filedlgg.cpp"
 
 
 //------------------------------------------------------------------------
-// gridctrl.cpp
+// filefn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/gridctrl.cpp"
-
-
-//------------------------------------------------------------------------
-// grideditors.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grideditors.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filefn.cpp"
 
 
 //------------------------------------------------------------------------
-// gridsel.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/gridsel.cpp"
-
-
-//------------------------------------------------------------------------
-// gtk.cpp
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/themes/gtk.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// gvfs.cpp
+// filehistory.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/gnome/gvfs.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filehistory.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// hash.cpp
+// filehistorycmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/hash.cpp"
-
-
-//------------------------------------------------------------------------
-// hashmap.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/hashmap.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filehistorycmn.cpp"
 
 
 //------------------------------------------------------------------------
-// headercolcmn.cpp
+// filename.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/headercolcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// headerctrl.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/headerctrl.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filename.cpp"
 
 
 //------------------------------------------------------------------------
-// headerctrlcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/headerctrlcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// headerctrlg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/headerctrlg.cpp"
-
-
-//------------------------------------------------------------------------
-// helpbase.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/helpbase.cpp"
-
-
-//------------------------------------------------------------------------
-// helpbest.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpbest.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// helpchm.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpchm.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// helpext.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/helpext.cpp"
-
-
-//------------------------------------------------------------------------
-// helpwin.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/helpwin.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// hid.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/hid.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// hidjoystick.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/hidjoystick.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// htmllbox.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/htmllbox.cpp"
-
-
-//------------------------------------------------------------------------
-// http.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/http.cpp"
-
-
-//------------------------------------------------------------------------
-// hyperlink.cpp
+// filepicker.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/hyperlink.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/hyperlink.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/filepicker.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// hyperlinkg.cpp
+// filepickercmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/hyperlinkg.cpp"
-
-
-//------------------------------------------------------------------------
-// hyperlnkcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/hyperlnkcmn.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filepickercmn.cpp"
 
 
 //------------------------------------------------------------------------
-// icon.cpp
+// filepickerg.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/icon.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/filepickerg.cpp"
+
+
+//------------------------------------------------------------------------
+// filesys.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filesys.cpp"
+
+
+//------------------------------------------------------------------------
+// filtall.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filtall.cpp"
+
+
+//------------------------------------------------------------------------
+// filtfind.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/filtfind.cpp"
+
+
+//------------------------------------------------------------------------
+// fldlgcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fldlgcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// floatpane.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/aui/floatpane.cpp"
+
+
+//------------------------------------------------------------------------
+// fmapbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/fmapbase.cpp"
+
+
+//------------------------------------------------------------------------
+// font.cpp
+
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/font.cpp"
+#endif
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/font.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/font.cpp"
+#endif
 
 #if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/icon.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/font.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/icon.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/font.cpp"
 #endif
 
-
-//------------------------------------------------------------------------
-// iconbndl.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/iconbndl.cpp"
-
-
-//------------------------------------------------------------------------
-// imagall.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagall.cpp"
-
-
-//------------------------------------------------------------------------
-// imagbmp.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagbmp.cpp"
-
-
-//------------------------------------------------------------------------
-// image.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/image.cpp"
-
-
-//------------------------------------------------------------------------
-// image_gtk.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/image_gtk.cpp"
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/font.cpp"
 #endif
 
-
-//------------------------------------------------------------------------
-// imagfill.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagfill.cpp"
-
-
-//------------------------------------------------------------------------
-// imaggif.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imaggif.cpp"
-
-
-//------------------------------------------------------------------------
-// imagiff.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagiff.cpp"
-
-
-//------------------------------------------------------------------------
-// imagjpeg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagjpeg.cpp"
-
-
-//------------------------------------------------------------------------
-// imaglist.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/imaglist.cpp"
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/imaglist.cpp"
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/font.cpp"
 #endif
 
-
-//------------------------------------------------------------------------
-// imagpcx.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagpcx.cpp"
-
-
-//------------------------------------------------------------------------
-// imagpng.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagpng.cpp"
-
-
-//------------------------------------------------------------------------
-// imagpnm.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagpnm.cpp"
-
-
-//------------------------------------------------------------------------
-// imagtga.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagtga.cpp"
-
-
-//------------------------------------------------------------------------
-// imagtiff.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagtiff.cpp"
-
-
-//------------------------------------------------------------------------
-// imagxpm.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagxpm.cpp"
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/font.cpp"
+#endif

@@ -19,34 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>wxFormBuilderPlugin-forms</ProjectName>
-    <ProjectGuid>{001AE10F-0865-4E3C-A5C7-A2EEF14A3044}</ProjectGuid>
-    <RootNamespace>wxFormBuilderPlugin-forms</RootNamespace>
+    <ProjectName>wxFormBuilderPlugin-SDK</ProjectName>
+    <ProjectGuid>{3D5D5E5C-4077-4C80-9866-D8D1FC25EFA1}</ProjectGuid>
+    <RootNamespace>wxFormBuilderPlugin-SDK</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -123,7 +123,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WXFORMBUILDER_BUILD_PLUGIN_DLL;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -149,7 +149,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WXFORMBUILDER_BUILD_PLUGIN_DLL;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -178,7 +178,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WXFORMBUILDER_BUILD_PLUGIN_DLL;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -204,7 +204,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WXFORMBUILDER_BUILD_PLUGIN_DLL;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -224,7 +224,71 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/forms/forms.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\plugin_interface\forms\wizard.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\plugin_interface\xrcconv.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\arg.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\cb.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\cb_cpp.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\clean.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\codelite.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\codelite_cpp.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\gnu.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\gnu_cpp.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\gnu_cs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\gnu_helpers.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\io.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lapi.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lauxlib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lbaselib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lcode.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ldblib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ldebug.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ldo.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ldump.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lfunc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lgc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\linit.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\liolib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\llex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lmathlib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lmem.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\loadlib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lobject.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lopcodes.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\loslib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lparser.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lstate.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lstring.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lstrlib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ltable.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ltablib.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ltests.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\ltm.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lundump.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lvm.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\Lua\lzio.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\monodev.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\monodev_cs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\open_watcom\ow.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\os.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\path.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\platform_posix.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\platform_windows.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\premake.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\project.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\script.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\sharpdev.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\sharpdev_cs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\util.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs2002.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs2002_cs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs2005.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs2005_cs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs2008.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs2008_cs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs6.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\sdk\premake\src\vs6_cpp.c" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/containers/bookutils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/component.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/fontcontainer.h" />
@@ -352,9 +416,6 @@
     </ProjectReference>
     <ProjectReference Include="wxFormBuilder-tinyXML.vcxproj">
       <Project>{29f43d06-784e-4a45-b6ff-c5f03db2e9f2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="wxFormBuilderPlugin-SDK.vcxproj">
-      <Project>{3d5d5e5c-4077-4c80-9866-d8d1fc25efa1}</Project>
     </ProjectReference>
     <ProjectReference Include="wxWidgets.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb10a63}</Project>

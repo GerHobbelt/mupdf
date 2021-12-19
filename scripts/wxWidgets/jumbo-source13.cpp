@@ -3,217 +3,353 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#define WX_JUMBO_MONOLITHIC_BUILD
 
-
-//------------------------------------------------------------------------
-// webview.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webview.cpp"
 
 
 //------------------------------------------------------------------------
-// webview_edge.cpp
+// props.cpp
 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webview_edge.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/propgrid/props.cpp"
 
 
 //------------------------------------------------------------------------
-// webview_ie.cpp
+// protocol.cpp
 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webview_ie.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/protocol.cpp"
 
 
 //------------------------------------------------------------------------
-// webview_webkit.cpp
+// quantize.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/quantize.cpp"
+
+
+//------------------------------------------------------------------------
+// radiobox.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webview_webkit2.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webview_webkit2_extension.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2_extension.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webviewarchivehandler.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webviewarchivehandler.cpp"
-
-
-//------------------------------------------------------------------------
-// webviewfshandler.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webviewfshandler.cpp"
-
-
-//------------------------------------------------------------------------
-// wfstream.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wfstream.cpp"
-
-
-//------------------------------------------------------------------------
-// win32.cpp
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/themes/win32.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// win_gtk.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/win_gtk.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// wincmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wincmn.cpp"
-
-
-//------------------------------------------------------------------------
-// window.cpp
-
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/window.cpp"
-#endif
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/window.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/radiobox.cpp"
 #endif
 
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/window.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/radiobox.cpp"
 #endif
 
 #if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/window.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/radiobox.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/window.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/radiobox.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/window.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/radiobox.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/radiobox.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// radiobox_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/radiobox_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// radiobtncmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/radiobtncmn.cpp"
+
+
+//------------------------------------------------------------------------
+// radiobut.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/radiobut.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/radiobut.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/radiobut.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/radiobut.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/radiobut.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/radiobut.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// radiobut_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/radiobut_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// radiocmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/radiocmn.cpp"
+
+
+//------------------------------------------------------------------------
+// rearrangectrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/rearrangectrl.cpp"
+
+
+//------------------------------------------------------------------------
+// regconf.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/regconf.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// regex.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/regex.cpp"
+
+
+//------------------------------------------------------------------------
+// region.cpp
+
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/region.cpp"
+#endif
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/region.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/region.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/region.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/region.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/region.cpp"
 #endif
 
 #if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/window.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/region.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// window_osx.cpp
+// regiong.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/regiong.cpp"
+
+
+//------------------------------------------------------------------------
+// registry.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/registry.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// rendcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/rendcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// renderer.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/renderer.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/renderer.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/renderer.cpp"
+#endif
 
 #if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/window_osx.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/renderer.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// windowid.cpp
+// renderg.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/windowid.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/renderg.cpp"
 
 
 //------------------------------------------------------------------------
-// winuniv.cpp
+// reparent.cpp
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/reparent.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// rgncmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/rgncmn.cpp"
+
+
+//------------------------------------------------------------------------
+// richmsgdlg.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/richmsgdlg.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// richmsgdlgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/richmsgdlgg.cpp"
+
+
+//------------------------------------------------------------------------
+// richtooltip.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/richtooltip.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// richtooltipcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/richtooltipcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// richtooltipg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/richtooltipg.cpp"
+
+
+//------------------------------------------------------------------------
+// rowheightcache.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/rowheightcache.cpp"
+
+
+//------------------------------------------------------------------------
+// safearray.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ole/safearray.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// sashwin.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/sashwin.cpp"
+
+
+//------------------------------------------------------------------------
+// sckaddr.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckaddr.cpp"
+
+
+//------------------------------------------------------------------------
+// sckfile.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckfile.cpp"
+
+
+//------------------------------------------------------------------------
+// sckipc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckipc.cpp"
+
+
+//------------------------------------------------------------------------
+// sckstrm.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/sckstrm.cpp"
+
+
+//------------------------------------------------------------------------
+// scrarrow.cpp
 
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/winuniv.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/scrarrow.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// wizard.cpp
+// scrlwing.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/wizard.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/scrlwing.cpp"
 
 
 //------------------------------------------------------------------------
-// wrapdfb.cpp
+// scrolbar.cpp
 
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/wrapdfb.cpp"
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/scrolbar.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/scrolbar.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/scrolbar.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/scrolbar.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/scrolbar.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/scrolbar.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// wrapsizer.cpp
+// scrolbar_osx.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wrapsizer.cpp"
-
-
-//------------------------------------------------------------------------
-// wxcrt.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxcrt.cpp"
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/scrolbar_osx.cpp"
+#endif
 
 
 //------------------------------------------------------------------------
-// wxprintf.cpp
+// scrolbarcmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxprintf.cpp"
-
-
-//------------------------------------------------------------------------
-// xlocale.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xlocale.cpp"
-
-
-//------------------------------------------------------------------------
-// xpmdecod.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xpmdecod.cpp"
-
-
-//------------------------------------------------------------------------
-// xti.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xti.cpp"
-
-
-//------------------------------------------------------------------------
-// xtistrm.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtistrm.cpp"
-
-
-//------------------------------------------------------------------------
-// xtixml.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtixml.cpp"
-
-
-//------------------------------------------------------------------------
-// zipstrm.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/zipstrm.cpp"
-
-
-//------------------------------------------------------------------------
-// zstream.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/zstream.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/scrolbarcmn.cpp"

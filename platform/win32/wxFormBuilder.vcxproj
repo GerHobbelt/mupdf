@@ -158,7 +158,7 @@
     </Bscmake>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Rpcrt4.lib;shell32.lib;Winmm.lib;dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comctl32.lib;comdlg32.lib;advapi32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -203,7 +203,7 @@
     </Bscmake>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Rpcrt4.lib;shell32.lib;Winmm.lib;dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comctl32.lib;comdlg32.lib;advapi32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -249,7 +249,7 @@
     </Bscmake>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Rpcrt4.lib;shell32.lib;Winmm.lib;dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comctl32.lib;comdlg32.lib;advapi32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -294,7 +294,7 @@
     </Bscmake>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Rpcrt4.lib;shell32.lib;Winmm.lib;dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comctl32.lib;comdlg32.lib;advapi32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -318,7 +318,6 @@
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/common/common.cpp" />
     <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\src\rad\dialogfindcomponent.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/etc/all.c" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/4.3/src/host/lua-5.1.4/etc/min.c" />
@@ -829,71 +828,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/term_textColor.c" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/host/zip_extract.c" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/scripts/premake/5.0/src/scripts.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/forms/wizard.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/xrcconv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lapi.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lauxlib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lbaselib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lcode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldblib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldebug.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldo.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ldump.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lfunc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lgc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/linit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/liolib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/llex.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lmathlib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lmem.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/loadlib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lobject.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lopcodes.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/loslib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lparser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstate.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstring.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lstrlib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltable.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltablib.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltests.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/ltm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lundump.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lvm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/Lua/lzio.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/arg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/cb.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/cb_cpp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/clean.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/codelite.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/codelite_cpp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu_cpp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu_cs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/gnu_helpers.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/io.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/monodev.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/monodev_cs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/open_watcom/ow.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/os.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/path.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/platform_posix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/platform_windows.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/premake.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/project.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/script.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/sharpdev.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/sharpdev_cs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/util.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2002.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2002_cs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2005.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2005_cs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2008.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs2008_cs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs6.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/premake/src/vs6_cpp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codegen.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codeparser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/codegen/codewriter.cpp" />
@@ -1421,6 +1355,24 @@
     </ProjectReference>
     <ProjectReference Include="wxFormBuilder-tinyXML.vcxproj">
       <Project>{29f43d06-784e-4a45-b6ff-c5f03db2e9f2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxFormBuilderPlugin-additional.vcxproj">
+      <Project>{a41f5ea6-606b-4ee3-835c-a16b7374d924}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxFormBuilderPlugin-common.vcxproj">
+      <Project>{5b1e7643-712f-4837-ac9c-78cecd6538bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxFormBuilderPlugin-containers.vcxproj">
+      <Project>{355765c3-80f3-4b18-9ca2-868c2a46f86a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxFormBuilderPlugin-forms.vcxproj">
+      <Project>{001ae10f-0865-4e3c-a5c7-a2eef14a3044}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxFormBuilderPlugin-layout.vcxproj">
+      <Project>{a2ac43d8-c9ee-4fd1-960c-922646f84bbb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxFormBuilderPlugin-SDK.vcxproj">
+      <Project>{3d5d5e5c-4077-4c80-9866-d8d1fc25efa1}</Project>
     </ProjectReference>
     <ProjectReference Include="wxWidgets.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb10a63}</Project>
