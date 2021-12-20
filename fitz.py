@@ -1525,6 +1525,7 @@ class Document:
             self.name = ""
 
         self.isClosed    = False
+        self.is_encrypted = False
         self.isEncrypted = False
         self.metadata    = None
         self.FontInfos   = []
@@ -1593,8 +1594,10 @@ class Document:
 
         if self.thisown:
             self._graft_id = TOOLS.gen_id()
-            if self.needsPass is True:
+            jlib.log('calling self.needs_pass(). {self=}')
+            if self.needs_pass:
                 self.isEncrypted = True
+                self.is_encrypted = True
             else: # we won't init until doc is decrypted
                 self.initData()
         #jlib.log('__init__() returning. {=mupdf.mpdf_xref_len(pdf)}')
@@ -2411,6 +2414,7 @@ class Document:
         #val = _fitz.Document_authenticate(self, password)
         val = mupdf.mfz_authenticate_password(self.this, password)
         if val:  # the doc is decrypted successfully and we init the outline
+            self.is_encrypted = False
             self.isEncrypted = False
             self.initData()
             self.thisown = True
@@ -3568,9 +3572,10 @@ class Document:
         #jlib.log('{r=}')
         return True if r else False
 
-    @property
-    def is_encrypted(self):
-        return self.isEncrypted
+    #@property
+    #def is_encrypted(self):
+    #    jlib.log('{=self self.isEncrypted}')
+    #    return self.isEncrypted
 
     @property
     def is_form_pdf(self):
@@ -3877,11 +3882,15 @@ class Document:
         return _fitz.Document_need_appearances(self, value)
 
     @property
-    def needsPass(self):
+    def needs_pass(self):
         """Indicate password required."""
-        if self.isClosed:
+        if self.is_closed:
             raise ValueError("document closed")
-        return self.this.needs_password()
+        #return _fitz.Document_needs_pass(self)
+        document = self.this if isinstance(self.this, mupdf.Document) else self.this.super()
+        ret = mupdf.mfz_needs_password( document)
+        jlib.log('{=self ret}')
+        return ret
 
     def new_page_(
             self,
@@ -5940,7 +5949,7 @@ class Page:
             #jlib.log('{self.this.m_internal.super=}')
             number = self.this.m_internal.super.number
         else:
-            j#lib.log('{self.this.m_internal=}')
+            #jlib.log('{self.this.m_internal=}')
             number = self.this.m_internal.number
         ret = f'page {number}'
         if parent:
@@ -15038,9 +15047,9 @@ def JM_new_output_fileptr(bio):
             self.use_virtual_tell()
             self.use_virtual_truncate()
         def write(self, data_raw, data_length):
-            jlib.log('{=data_raw data_length}')
+            #jlib.log('{=data_raw data_length}')
             data = mupdf.raw_to_python_bytes(data_raw, data_length)
-            jlib.log('{=data}')
+            #jlib.log('{=data}')
             return bio.write(data)
         #write = bio.write
         seek = bio.seek
