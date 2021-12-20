@@ -2652,6 +2652,16 @@ classextras = ClassExtras(
                             error information. */
                             ''')
                             ),
+                    ExtraMethod(
+                        f'{rename.class_("fz_document")}',
+                        'super()',
+                        f'''
+                        {{
+                            return {rename.class_("fz_document")}( {rename.function_call('fz_keep_document')}( &m_internal->super));
+                        }}
+                        ''',
+                        f'/* Returns wrapper for .super member. */',
+                        ),
                     ],
                 ),
 
