@@ -1316,7 +1316,7 @@ class ClassExtra:
             assert isinstance( i, ExtraConstructor)
 
         if virtual_fnptrs:
-            assert isinstance(virtual_fnptrs, tuple) and len(virtual_fnptrs) == 2, f'virtual_fnptrs={virtual_fnptrs!r}'
+            assert isinstance(virtual_fnptrs, tuple) and len(virtual_fnptrs) in ( 2, 3), f'virtual_fnptrs={virtual_fnptrs!r}'
 
 class ClassExtras:
     '''
@@ -2204,6 +2204,19 @@ classextras = ClassExtras(
                         ),
                 ],
                 constructor_raw = True,
+                ),
+
+        fz_path_walker = ClassExtra(
+                constructor_raw = 'default',
+                virtual_fnptrs = (
+                    lambda name: f'*(PathWalker2**) ((fz_path_walker*) {name} + 1)',
+                    textwrap.dedent(
+                    f'''
+                    m_internal = (fz_path_walker*) mupdf::calloc(1, sizeof(*m_internal) + sizeof(PathWalker2*));
+                    *(PathWalker2**) (m_internal + 1) = this;
+                    '''),
+                    f'mupdf::free(m_internal);\n',
+                    ),
                 ),
 
         fz_pcl_options = ClassExtra(
@@ -6615,8 +6628,17 @@ def class_wrapper_virtual_fnptrs(
     if not extras.virtual_fnptrs:
         return
 
+    debug = 1
+
     generated.virtual_fnptrs.append( f'{classname}2')
-    self_, alloc = extras.virtual_fnptrs
+    if len(extras.virtual_fnptrs) == 2:
+        self_, alloc = extras.virtual_fnptrs
+        free = None
+    elif len(extras.virtual_fnptrs) == 3:
+        self_, alloc, free = extras.virtual_fnptrs
+    else:
+        assert 0, 'virtual_fnptrs should be length 2 or 3.'
+
     # Class definition beginning.
     #
     out_h.write( '\n')
@@ -6652,7 +6674,29 @@ def class_wrapper_virtual_fnptrs(
     alloc = [''] + alloc.split('\n')
     alloc = '\n    '.join(alloc)
     out_cpp.write(f'{alloc}\n')
+    if debug:
+        out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(); this=" << this << "\\n";\n')
+        if not extras.pod:
+            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): m_internal=" << m_internal << "\\n";\n')
+            out_cpp.write(f'    {classname}2* self = {self_("m_internal")};\n')
+            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): self=" << self << "\\n";\n')
     out_cpp.write( '}\n')
+
+    if free:
+        # Destructor
+        out_h.write( '\n')
+        out_h.write( '    /* == Destructor. */\n')
+        out_h.write(f'    ~{classname}2();\n')
+        out_cpp.write('\n')
+        out_cpp.write(f'{classname}2::~{classname}2()\n')
+        out_cpp.write( '{\n')
+        if debug:
+            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): this=" << this << "\\n";\n')
+            if not extras.pod:
+                out_cpp.write( '    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): m_internal=" << m_internal << "\\n";\n')
+        out_cpp.write(f'    {free}\n')
+        out_cpp.write( '}\n')
+
 
     def write(text):
         out_h.write(text)
@@ -6702,6 +6746,8 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('\n')
         out_cpp.write('{\n')
         out_cpp.write(f'    {classname}2* self = {self_("arg_1")};\n')
+        if debug:
+            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::s_{cursor.spelling}(): arg_1=" << arg_1 << " self=" << self << "\\n";\n')
         out_cpp.write( '    try\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        return self->{cursor.spelling}(')
@@ -8234,6 +8280,27 @@ def build_swig(
             fz_location mfz_lookup_bookmark2(fz_document *doc, long long unsigned mark)
             {{
                 return lookup_bookmark2(doc, mark);
+            }}
+
+            struct convert_color2_dv
+            {{
+                float dv0;
+                float dv1;
+                float dv2;
+                float dv3;
+            }};
+
+            /* SWIG-friendly alternative for fz_convert_color(). */
+            void convert_color2(
+                    fz_colorspace *ss,
+                    const float *sv,
+                    fz_colorspace *ds,
+                    convert_color2_dv* dv,
+                    fz_colorspace *is,
+                    fz_color_params params
+                    )
+            {{
+                mupdf::convert_color(ss, sv, ds, &dv->dv0, is, params);
             }}
             '''
 
