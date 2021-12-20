@@ -557,8 +557,9 @@ pdf_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 	/* a is a constant name */
 	if (a < PDF_LIMIT)
 	{
-		if (b < PDF_LIMIT)
-			return (int)a - (int)b;
+		if (b < PDF_LIMIT) {
+			return (intptr_t)a - (intptr_t)b;
+		}
 		if (b->kind != PDF_NAME)
 			return 1;
 		return strcmp(PDF_NAME_LIST[(intptr_t)a], NAME(b)->n);
