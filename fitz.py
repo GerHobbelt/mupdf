@@ -13076,6 +13076,94 @@ def JM_add_layer_config( pdf, name, creator, ON):
                 mupdf.mpdf_array_push( onarray, ind)
     mupdf.mpdf_array_push( configs, D)
 
+'''
+//-------------------------------------
+// fz_output for Python file objects
+//-------------------------------------
+static void
+JM_bytesio_write(fz_context *ctx, void *opaque, const void *data, size_t len)
+{  // bio.write(bytes object)
+    PyObject *bio = opaque, *b, *name, *rc;
+    fz_try(ctx){
+        b = PyBytes_FromStringAndSize((const char *) data, (Py_ssize_t) len);
+        name = PyUnicode_FromString("write");
+        rc = PyObject_CallMethodObjArgs(bio, name, b, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not write to Py file obj");
+        }
+    }
+    fz_always(ctx) {
+        Py_XDECREF(b);
+        Py_XDECREF(name);
+        Py_XDECREF(rc);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+}
+
+static void
+JM_bytesio_truncate(fz_context *ctx, void *opaque)
+{  // bio.truncate(bio.tell()) !!!
+    PyObject *bio = opaque, *trunc = NULL, *tell = NULL, *rctell= NULL, *rc = NULL;
+    fz_try(ctx) {
+        trunc = PyUnicode_FromString("truncate");
+        tell = PyUnicode_FromString("tell");
+        rctell = PyObject_CallMethodObjArgs(bio, tell, NULL);
+        rc = PyObject_CallMethodObjArgs(bio, trunc, rctell, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not truncate Py file obj");
+        }
+    }
+    fz_always(ctx) {
+        Py_XDECREF(tell);
+        Py_XDECREF(trunc);
+        Py_XDECREF(rc);
+        Py_XDECREF(rctell);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+}
+
+static int64_t
+JM_bytesio_tell(fz_context *ctx, void *opaque)
+{  // returns bio.tell() -> int
+    PyObject *bio = opaque, *rc = NULL, *name = NULL;
+    int64_t pos = 0;
+    fz_try(ctx) {
+        name = PyUnicode_FromString("tell");
+        rc = PyObject_CallMethodObjArgs(bio, name, NULL);
+        if (!rc) {
+            THROWMSG(ctx, "could not tell Py file obj");
+        }
+        pos = (int64_t) PyLong_AsUnsignedLongLong(rc);
+    }
+    fz_always(ctx) {
+        Py_XDECREF(name);
+        Py_XDECREF(rc);
+        PyErr_Clear();
+    }
+    fz_catch(ctx) {
+        fz_rethrow(ctx);
+    }
+    return pos;
+}
+
+
+def JM_bytesio_seek(output, off, whence):
+    assert isinstance(output, Output)
+    #  bio.seek(off, whence=0)
+    #PyObject *bio = opaque, *rc = NULL, *name = NULL, *pos = NULL;
+    name = "seek"
+    pos = off
+    #rc = PyObject_CallMethodObjArgs(bio, name, pos, whence, NULL);
+    rc = bio.seek(pos, whence)
+    if not rc:
+        THROWMSG( "could not seek Py file obj");
+'''
 
 def JM_char_bbox(line, ch, verbose=0):
     '''
@@ -14940,12 +15028,42 @@ def JM_new_buffer_from_stext_page(page):
 
 
 def JM_new_output_fileptr(bio):
-    assert 0, 'fz_new_output() not yet supported'
-    out = mupdf.mfz_new_output(0, bio, JM_bytesio_write, None, None)
-    out.seek = JM_bytesio_seek
-    out.tell = JM_bytesio_tell
-    out.truncate = JM_bytesio_truncate
-    return out
+    #assert 0, 'fz_new_output() not yet supported'
+    jlib.log('{=bio.write bio.seek bio.tell bio.truncate}')
+    class Ret(mupdf.Output2):
+        def __init__(self):
+            super().__init__()
+            self.use_virtual_write()
+            self.use_virtual_seek()
+            self.use_virtual_tell()
+            self.use_virtual_truncate()
+        def write(self, data_raw, data_length):
+            jlib.log('{=data_raw data_length}')
+            data = mupdf.raw_to_python_bytes(data_raw, data_length)
+            jlib.log('{=data}')
+            return bio.write(data)
+        #write = bio.write
+        seek = bio.seek
+        tell = bio.tell
+        truncate = bio.truncate
+    return Ret()
+
+    ret = mupdf.Output2()
+    ret.write = bio.write
+    ret.seek = bio.seek
+    ret.tell = bio.tell
+    ret.truncate = bio.truncate
+    ret.use_virtual_write()
+    ret.use_virtual_seek()
+    ret.use_virtual_tell()
+    ret.use_virtual_truncate()
+    return ret
+
+    #out = mupdf.mfz_new_output(0, bio, JM_bytesio_write, None, None)
+    #out.seek = JM_bytesio_seek
+    #out.tell = JM_bytesio_tell
+    #out.truncate = JM_bytesio_truncate
+    #return out
 
 
 def JM_new_tracedraw_device(out):
