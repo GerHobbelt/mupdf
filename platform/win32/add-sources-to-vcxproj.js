@@ -75,6 +75,11 @@ let filterSrc = '';
 let filterFilepath = filepath + '.filters';
 if (fs.existsSync(filterFilepath)) {
     filterSrc = fs.readFileSync(filterFilepath, 'utf8');
+
+    // nuke the filters file when it's functionally empty:
+    if (!filterSrc.match(/<\/Project>/)) {
+      filterSrc = '';
+    }
 }
 
 if (!filterSrc.match(/<\?xml/)) {
@@ -82,7 +87,7 @@ if (!filterSrc.match(/<\?xml/)) {
     ` + filterSrc; 
 }
 
-if (!filterSrc.match(/<Project /)) {
+if (!filterSrc.match(/<\/Project>/)) {
     filterSrc += `
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
@@ -206,12 +211,36 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.c++':
     case '.cxx':
     case '.cpp':
+    case '.asm':
         base = path.dirname(f);
         if (base === '.') {
           base = '';
         }
         if (base.length > 0) {
             base = 'Source Files/' + base;
+            filterDirs.add(base);
+        }
+        return true;
+
+    case '.s':
+    case '.lua':
+    case '.py':
+    case '.sh':
+    case '.txt':
+    case '.rtf':
+    case '.xml':
+    case '.csv':
+    case '.json':
+    case '.y':
+    case '.l':
+    case '.md':
+    case '.rst':
+        base = path.dirname(f);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Misc Files/' + base;
             filterDirs.add(base);
         }
         return true;
@@ -503,7 +532,32 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         `;
         filesToAddToProj.push(slot);
         break;
-    }
+
+    case '.asm':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Source Files/' + base;
+        }
+        else {
+            base = 'Source Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <MASM Include="${f}">
+      <Filter>${base}</Filter>
+    </MASM>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <MASM Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
   }
 
   filesToAdd.sort();
@@ -542,6 +596,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   // and trim out empty lines:
   .replace(/[\s\r\n]+\n/g, '\n');
 
+console.log({filepath, filterFilepath})
   fs.writeFileSync(filepath, src, 'utf8');
   fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
 
