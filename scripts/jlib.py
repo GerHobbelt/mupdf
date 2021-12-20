@@ -583,7 +583,9 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
             # backtraces that miss much useful information.
             #
             for f in reversed(inspect.getouterframes(tb.tb_frame)):
-                ff = f[1], f[2], f[3], f[4][0].strip()
+                f4 = f[4]
+                f4 = f4[0].strip() if f4 else ''
+                ff = f[1], f[2], f[3], f4
                 frames.append(ff)
         else:
             # No exception; use current backtrace.
