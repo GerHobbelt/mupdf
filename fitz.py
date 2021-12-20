@@ -7939,11 +7939,15 @@ class Page:
             page = mupdf.Page(page)
         assert isinstance(page, mupdf.Page), f'self.this={self.this}'
         rc = []
-        trace_device_Linewidth = 0
+        trace_device.Linewidth = 0
         prect = mupdf.mfz_bound_page(page)
-        trace_device_ptm = mupdf.mfz_make_matrix(1, 0, 0, -1, 0, prect.y1)
+        trace_device.ptm = mupdf.mfz_make_matrix(1, 0, 0, -1, 0, prect.y1)
         dev = JM_new_tracedraw_device(rc)
-        mupdf.mfz_run_page(page, dev, fz_identity, mupdf.Cookie())
+        try:
+            mupdf.mfz_run_page(page, dev, mupdf.Matrix(), mupdf.Cookie())
+        except Exception:
+            jlib.log(jlib.exception_info())
+            raise
         mupdf.mfz_close_device(dev)
         val = rc
 
@@ -15076,83 +15080,32 @@ def JM_new_output_fileptr(bio):
 
 
 def JM_new_tracedraw_device(out):
-    assert 0, 'derived devices not yet supported'
-    dev = mupdf.mfz_new_derived_device(jm_tracedraw_device)
+    #assert 0, 'derived devices not yet supported'
+    class TraceDevice(mupdf.Device2):
+        def __init__(self):
+            super().__init__()
+            self.use_virtual_fill_path()
+            self.use_virtual_stroke_path()
+            self.use_virtual_fill_text()
+            self.use_virtual_stroke_text()
+            self.use_virtual_ignore_text()
+            self.use_virtual_fill_shade()
+            self.use_virtual_fill_image()
+            self.use_virtual_fill_image_mask()
 
-    dev.m_internal.fill_path = jm_tracedraw_fill_path
-    dev.m_internal.stroke_path = jm_tracedraw_stroke_path
-    dev.m_internal.clip_path = 0
-    dev.m_internal.clip_stroke_path = 0
+        fill_path = jm_tracedraw_fill_path
+        stroke_path = jm_tracedraw_stroke_path
+        fill_text = jm_increase_seqno
+        stroke_text = jm_increase_seqno
+        ignore_text = jm_increase_seqno
+        fill_shade = jm_increase_seqno
+        fill_image = jm_increase_seqno
+        fill_image_mask = jm_increase_seqno
 
-    dev.m_internal.fill_text = jm_increase_seqno
-    dev.m_internal.stroke_text = jm_increase_seqno
-    dev.m_internal.clip_text = 0
-    dev.m_internal.clip_stroke_text = 0
-    dev.m_internal.ignore_text = jm_increase_seqno
-
-    dev.m_internal.fill_shade = jm_increase_seqno
-    dev.m_internal.fill_image = jm_increase_seqno
-    dev.m_internal.fill_image_mask = jm_increase_seqno
-    dev.m_internal.clip_image_mask = 0
-
-    dev.m_internal.pop_clip = 0
-
-    dev.m_internal.begin_mask = 0
-    dev.m_internal.end_mask = 0
-    dev.m_internal.begin_group = 0
-    dev.m_internal.end_group = 0
-
-    dev.m_internal.begin_tile = 0
-    dev.m_internal.end_tile = 0
-
-    dev.m_internal.begin_layer = 0
-    dev.m_internal.end_layer = 0
-
-    dev.m_internal.render_flags = 0
-    dev.m_internal.set_default_colorspaces = 0
-
+    dev = TraceDevice()
     dev.out = out
     dev.seqno = 0
-    return dev
 
-def JM_new_tracetext_device(out):
-    assert 0, 'derived devices not yet supported'
-    dev = mupdf.mfz_new_derived_device(jm_tracedraw_device)
-
-    dev.m_internal.fill_path = jm_increase_seqno
-    dev.m_internal.stroke_path = jm_trace_device_Linewidth
-    dev.m_internal.clip_path = 0
-    dev.m_internal.clip_stroke_path = 0
-
-    dev.m_internal.fill_text = jm_tracedraw_fill_text
-    dev.m_internal.stroke_text = jm_tracedraw_stroke_text
-    dev.m_internal.clip_text = 0
-    dev.m_internal.clip_stroke_text = 0
-    dev.m_internal.ignore_text = jm_tracedraw_ignore_text
-
-    dev.m_internal.fill_shade = jm_increase_seqno
-    dev.m_internal.fill_image = jm_increase_seqno
-    dev.m_internal.fill_image_mask = jm_increase_seqno
-    dev.m_internal.clip_image_mask = 0
-
-    dev.m_internal.pop_clip = 0
-
-    dev.m_internal.begin_mask = 0
-    dev.m_internal.end_mask = 0
-    dev.m_internal.begin_group = 0
-    dev.m_internal.end_group = 0
-
-    dev.m_internal.begin_tile = 0
-    dev.m_internal.end_tile = 0
-
-    dev.m_internal.begin_layer = 0
-    dev.m_internal.end_layer = 0
-
-    dev.m_internal.render_flags = 0
-    dev.m_internal.set_default_colorspaces = 0
-
-    dev.out = out
-    dev.seqno = 0
     return dev
 
 
@@ -16703,6 +16656,58 @@ def image_properties(img: typing.ByteString) -> dict:
     return TOOLS.image_profile(stream)
 
 
+def jm_append_merge(out):
+    '''
+    Append current path to list or merge into last path of list.
+    (1) Append if first path, different item list or not 'stroke' version of
+        previous
+    (2) If new path has the same items, merge its content into previous path
+        and indicate this via path["type"] = "fs".
+    '''
+    assert isinstance(out, list)
+    jlib.log('{out=}')
+    len_ = len(out)
+    if len_ == 0:   # 1st path
+        out.append(trace_device.pathdict)
+        trace_device.pathdict.clear()
+        return
+    thistype = trace_device.pathdict[ dictkey_type]
+    if thistype != "f" and thistype != "s":
+        out.append(trace_device.pathdict)
+        trace_pathdict.clear()
+        return
+    prev = out[ len_ - 1]    # get prev path
+    jlib.log('{=prev dictkey_type}')
+    prevtype = prev[ dictkey_type]
+    if prevtype != "f" and prevtype != "s" or prevtype == thistype:
+        out.append(trace_device.pathdict)
+        trace_pathdict.clear()
+        return
+    previtems = prev[ dictkey_items]
+    thisitems = trace_pathdict[ dictkey_items]
+    if previtems != thisitems:
+        out.append(trace_device.pathdict)
+        trace_pathdict.clear()
+        return
+    #rc = PyDict_Merge(trace_pathdict, prev, 0);  // merge, do not override
+    try:
+        for k, v in prev:
+            if k not in trace_device.pathdict:
+                trace_device.pathdict[k] = v
+        rc = 0
+    except Exception:
+        rc = -1
+    if rc == 0:
+        trace_device.pathdict[ dictkey_type] = "fs"
+        out[ len - 1] = trace_device.pathdict
+        return
+    else:
+        print("could not merge stroke and fill path", file=sys.stderr)
+    #append:;
+    out.append( trace_pathdict)
+    trace_device.pathdict.clear()
+
+
 def jm_bbox_add_rect(dev, rect, code):
     dev.result.append( (code, JM_py_from_rect(rect)) )
 
@@ -16715,23 +16720,43 @@ def jm_bbox_fill_image( dev, image, ctm, alpha, color_params):
 
 
 def jm_bbox_fill_image_mask( dev, image, ctm, colorspace, color, alpha, color_params):
-    jm_bbox_add_rect( dev, mupdf.transform_rect(fz_unit_rect, ctm), "fill-imgmask")
+    try:
+        jm_bbox_add_rect( dev, mupdf.transform_rect(fz_unit_rect, ctm), "fill-imgmask")
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def jm_bbox_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, color_params):
-    jm_bbox_add_rect( dev, mupdf.bound_path(path, None, ctm), "fill-path")
+    try:
+        jm_bbox_add_rect( dev, mupdf.bound_path(path, None, ctm), "fill-path")
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def jm_bbox_fill_shade( dev, shade, ctm, alpha, color_params):
-    jm_bbox_add_rect( dev, mupdf.bound_shade( shade, ctm), "fill-shade")
+    try:
+        jm_bbox_add_rect( dev, mupdf.bound_shade( shade, ctm), "fill-shade")
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def jm_bbox_stroke_text( dev, text, stroke, ctm, *args):
-    jm_bbox_add_rect( dev, mupdf.bound_text( text, stroke, ctm), "stroke-text")
+    try:
+        m_bbox_add_rect( dev, mupdf.bound_text( text, stroke, ctm), "stroke-text")
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def jm_bbox_fill_text( dev, text, ctm, *args):
-    jm_bbox_add_rect( dev, mupdf.bound_text( text, None, ctm), "fill-text")
+    try:
+        jm_bbox_add_rect( dev, mupdf.bound_text( text, None, ctm), "fill-text")
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def jm_bbox_ignore_text( dev, text, ctm):
@@ -16739,16 +16764,312 @@ def jm_bbox_ignore_text( dev, text, ctm):
 
 
 def jm_bbox_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
-    jm_bbox_add_rect( dev, mupdf.bound_path( path, stroke, ctm), "stroke-path")
+    try:
+        jm_bbox_add_rect( dev, mupdf.bound_path( path, stroke, ctm), "stroke-path")
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
+
+
+def jm_checkrect():
+    '''
+    Check whether the last 3 path items represent a rectangle. This means the
+    following conditions must be true:
+    (1) 3 connected lines, (2) line 1 and 3 must be horizontal, line 2 must
+    vertical. If all is true, modify the path accordngly.
+    '''
+    items = trace_device.pathdict[ dictkey_items]
+    len_ = len(items)
+    if len_ < 3:
+        return 0    # not enough items
+
+    line0 = items[ len_ - 3]
+    cmd = line0[0]
+    if cmd != 'l':
+        return 0    # not a line
+    p1 = line0[ 1]
+    p2 = line0[ 2]
+
+    line1 = items[ len_ - 2]
+    cmd = line1[ 0]
+    if cmd != 'l':
+        return 0    # not a line
+    p3 = line1[ 1]
+    p4 = line1[ 2]
+
+    line2 = items[ len_ - 1]
+    cmd = line2[ 0]
+    if cmd != 'l':
+        return 0    # not a line
+    p5 = line2[ 1]
+    p6 = line2[ 2]
+
+    if p2 != p3:
+        return 0    # not connected
+    if p4 != p5:
+        return 0    # not connected
+
+    # we do have three connected lines, ie at least a quad!
+    # now check whether it even is a rectangle.
+    goto_make_quad = False
+
+    p1y = p1[ 1]
+    p2y = p2[ 1]
+    if p1y != p2y:
+        goto_make_quad = 1
+    else:
+        p3x = p3[ 0]
+        p4x = p4[ 0]
+        if p3x != p4x:
+            goto_make_quad = 1
+        else:
+            p5y = p5[ 1]
+            p6y = p6[ 1]
+            if p5y != p6y:
+                goto_make_quad = 1
+
+    if not goto_make_quad:
+
+        # All check have passed, so replace last 3 "l" items by one "re" item.
+        # rect is represented by Rect(p6, p2)
+        tl = JM_point_from_py(p6)
+        br = JM_point_from_py(p2)
+        if tl.x > br.x:
+            ftemp = tl.x
+            tl.x = br.x
+            br.x = ftemp
+        if tl.y > br.y:
+            ftemp = tl.y
+            tl.y = br.y
+            br.y = ftemp
+        r = mupdf.mfz_make_rect(tl.x, tl.y, br.x, br.y)
+        rect = ('re', JM_py_from_rect(r))
+        items[ len_ - 3] = rect  # replace item -3 by rect
+        del items[ len_ - 2: len_]  # delete next 2 items
+        return 1
+
+    #make_quad:;
+    ul = JM_point_from_py(p6)
+    ur = JM_point_from_py(p5)
+    ll = JM_point_from_py(p1)
+    lr = JM_point_from_py(p2)
+    q = mupdf.mfz_make_quad(ul.x, ul.y, ur.x, ur.y, ll.x, ll.y, lr.x, lr.y)
+    rect = ( 'qu', JM_py_from_quad(q))
+    # check if item[-4] is a line connected with line0 and line2
+    if len_ >= 4:
+        line4 = items[ len_ - 4]
+        cmd = line4[ 0]
+        if cmd == 'l':
+            p7 = line4[ 1]
+            p8 = line4[ 2]
+            if p7 == p6 and p8 == p1:
+                items[ len_ - 4] = rect
+                del items[ len_ - 3 : len_]
+    else:
+        items[ len_ - 3] = rect  # replace item -3 by rect
+        del items[ len_ - 2 : len_]   # delete remaining 2 items
+    return 1
+
+
+def jm_tracedraw_color(colorspace, color):
+    #float rgb[3];
+    jlib.log('{=colorspace color}')
+    if colorspace:
+        #mupdf.mfz_convert_color( colorspace, color, fz_device_rgb(ctx),
+        #                 rgb, NULL, fz_default_color_params);
+        #rgb = [0.0, 0.0, 0.0]
+        jlib.log('calling mupdf.convert_color2()')
+        try:
+            dv = mupdf.convert_color2_dv()
+            mupdf.convert_color2(
+                    colorspace,
+                    color,
+                    mupdf.Colorspace( mupdf.Colorspace.Fixed_RGB).m_internal,
+                    dv,
+                    None,
+                    mupdf.ColorParams().internal(),
+                    )
+        except Exception as e:
+            jlib.log('{e=}')
+            raise
+        jlib.log('{dv=}')
+        rgb = dv.dv0, dv.dv1, dv.dv2
+        jlib.log('{rgb=}')
+        return rgb
+    return ()
+
+
+def jm_tracedraw_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, color_params):
+    try:
+        out = dev.out
+        trace_device.pathdict = dict()
+        trace_device.pathrect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+        trace_device.pathfactor = 1
+        if abs(ctm.a) == abs(ctm.d):
+            trace_device.pathfactor = abs(ctm.a)
+        trace_device.ctm = ctm  # fz_concat(ctm, trace_device_ptm);
+        trace_device.pathdict[ dictkey_items] = []
+        trace_device.pathdict[ dictkey_type] ="f"
+        trace_device.pathdict[ "even_odd"] = even_odd
+        trace_device.pathdict[ "fill_opacity"] = alpha
+        trace_device.pathdict[ "closePath"] = False
+        jlib.log('{=colorspace color}')
+        trace_device.pathdict[ "fill"] = jm_tracedraw_color( colorspace, color)
+        jm_tracedraw_path( dev, path)
+        trace_device.pathdict[ dictkey_rect] = JM_py_from_rect(trace_device.pathrect)
+        item_count = len(trace_device.pathdict[ dictkey_items])
+        if item_count == 0:
+            jlib.log(' ')
+            return
+        trace_device.pathdict[ "seqno"] = dev.seqno
+        dev.seqno += 1
+        jm_append_merge(out)
+    except Exception as e:
+        jlib.log(jlib.exception_info())
+        raise
+
+def jm_tracedraw_path(dev, path):
+
+    class Walker(mupdf.PathWalker2):
+
+        def __init__(self):
+            super().__init__()
+            self.use_virtual_moveto()
+            self.use_virtual_lineto()
+            self.use_virtual_curveto()
+            self.use_virtual_closepath()
+
+        def moveto(self, x, y):   # trace_moveto().
+            try:
+                jlib.log(' ')
+                trace_device.pathpoint = mupdf.Point(x, y)
+                trace_device.pathpoint = mupdf.mfz_transform_point(
+                        trace_device.pathpoint,
+                        mupdf.Matrix(trace_device.ctm),
+                        )
+                if mupdf.mfz_is_infinite_rect(trace_device.pathrect):
+                    trace_device.pathrect = mupdf.mfz_make_rect(
+                            trace_device.pathpoint.x,
+                            trace_device.pathpoint.y,
+                            trace_device.pathpoint.x,
+                            trace_device.pathpoint.y,
+                            )
+            except Exception as e:
+                jlib.log( jlib.exception_info())
+                raise
+
+        def lineto(self, x, y):   # trace_lineto().
+            try:
+                p1 = mupdf.Point(x, y)
+                p1 = mupdf.mfz_transform_point(p1, mupdf.Matrix(trace_device.ctm))
+                trace_device.pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p1)
+                list_ = [
+                        'l',
+                        JM_py_from_point(trace_device.pathpoint),
+                        JM_py_from_point(p1),
+                        ]
+                trace_device.pathpoint = p1
+                trace_device.pathdict[ dictkey_items].append(list_)
+            except Exception as e:
+                jlib.log( jlib.exception_info())
+                raise
+
+        def curveto(self, x1, y1, x2, y2, x3, y34):   # trace_curveto().
+            try:
+                p1 = mupdf.mfz_make_point(x1, y1)
+                p2 = mupdf.mfz_make_point(x2, y2)
+                p3 = mupdf.mfz_make_point(x3, y3)
+                p1 = mupdf.mfz_transform_point(p1, trace_device.ctm)
+                p2 = mupdf.mfz_transform_point(p2, trace_device.ctm)
+                p3 = mupdf.mfz_transform_point(p3, trace_device.ctm)
+                trace_pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p1)
+                trace_pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p2)
+                trace_pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p3)
+
+                list_ = [
+                        "c",
+                        JM_py_from_point(trace_pathpoint),
+                        JM_py_from_point(p1),
+                        JM_py_from_point(p2),
+                        JM_py_from_point(p3),
+                        ]
+                trace_device.pathpoint = p3
+                trace_pathdict[ dictkey_items].append( list_)
+            except Exception as e:
+                jlib.log( jlib.exception_info())
+                raise
+
+        def closepath(self):    # trace_close().
+            try:
+                if not jm_checkrect():
+                    trace_device.pathdict[ "closePath"] = True
+            except Exception as e:
+                jlib.log( jlib.exception_info())
+                raise
+
+    try:
+        walker = Walker()
+        jlib.log('{path}')
+        jlib.log('calling mupdf.mfz_walk_path()')
+        mupdf.mfz_walk_path( mupdf.Path(mupdf.keep_path(path)), walker, walker.m_internal)
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
+    jlib.log('mfz_walk_path() returned')
+
+
+def jm_tracedraw_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
+    try:
+        jlib.log(' ')
+        out = dev.out
+        trace_device.pathdict = dict()
+        trace_device.pathrect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
+        trace_device.pathfactor = 1
+        if abs(ctm.a) == abs(ctm.d):
+            trace_device.pathfactor = abs(ctm.a)
+        trace_device.device_ctm = ctm  # fz_concat(ctm, trace_device_ptm);
+        trace_device.pathdict[ dictkey_items] = []
+        trace_device.pathdict[ dictkey_type] = "s"
+        trace_device.pathdict[ "stroke_opacity"] = alpha
+        trace_device.pathdict[ "color"] = jm_tracedraw_color( colorspace, color)
+        trace_device.pathdict[ dictkey_width] = trace_device.pathfactor * stroke.linewidth
+        trace_device.pathdict[ "lineCap"] = (stroke.start_cap, stroke.dash_cap, stroke.end_cap)
+        trace_device.pathdict[ "lineJoin"] = trace_device.pathfactor * stroke.linejoin
+        trace_device.pathdict[ "closePath"] = False
+
+        if stroke.dash_len:
+            buff = mupdf.mfz_new_buffer( 50)
+            mupdf.mfz_append_string( buff, "[ ")
+            for i in range( stroke.dash_len):
+                mupdf.mfz_append_printf( buff, "%g ", trace_device.pathfactor * stroke.dash_list[i])
+            mupdf.mfz_append_printf( buff, "] %g", trace_device.pathfactor * stroke.dash_phase)
+            trace_device.pathdict[ "dashes"] = JM_EscapeStrFromBuffer( buff)
+        else:
+            trace_device.pathdict[ "dashes"] =  "[] 0"
+        jm_tracedraw_path( dev, path)
+        trace_device.pathdict[ dictkey_rect] = JM_py_from_rect(trace_device.pathrect)
+        item_count = len( trace_device.pathdict[ dictkey_items])
+        if item_count == 0:
+            return
+        trace_device.pathdict[ "seqno"] = dev.seqno
+        dev.seqno += 1
+        jm_append_merge(out)
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def jm_trace_device_Linewidth(dev, path, stroke_state, matrix, colorspace, color, alpha, color_params):
-    trace_device_Linewidth = stroke.linewidth
+    trace.Linewidth = stroke.linewidth
     jm_increase_seqno(dev)
 
 
 def jm_increase_seqno( dev, *vargs):
-    dev.seqno += 1
+    try:
+        dev.seqno += 1
+    except Exception:
+        jlib.log(jlib.exception_info())
+        raise
 
 
 def planish_line(p1: point_like, p2: point_like) -> Matrix:
@@ -18476,6 +18797,22 @@ def strip_outlines(doc, outlines, page_count, page_object_nums, names_list):
         mupdf.mpdf_dict_put(outlines, PDF_NAME('Last'), last);
         mupdf.mpdf_dict_put(outlines, PDF_NAME('Count'), mupdf.mpdf_new_int(nc if old_count > 0 else -nc))
     return nc
+
+
+# Globals. Could these be moved into JM_new_tracedraw_device's TraceDevice
+# class?
+#
+class TraceDeviceGlobals:
+    pass
+trace_device = TraceDeviceGlobals()
+trace_device.Linewidth = 0
+trace_device.ptm = mupdf.Matrix()
+trace_device.ctm = mupdf.Matrix()
+trace_device.rot = mupdf.Matrix()
+trace_device.pathpoint = mupdf.Point(0, 0)
+trace_device.pathdict = dict()
+trace_device.pathrect = mupdf.Rect(0, 0, 0, 0)
+trace_device.pathfactor = 0
 
 
 def unicode_to_glyph_name(ch: int) -> str:
