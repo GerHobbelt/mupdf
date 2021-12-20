@@ -2102,6 +2102,11 @@ classextras = ClassExtras(
                 ),
 
         fz_output = ClassExtra(
+                virtual_fnptrs = (
+                    lambda name: f'(Output2*) {name}',
+                    f'm_internal = {rename.function_call("fz_new_output")}(0 /*bufsize*/, this /*state*/, nullptr /*write*/, nullptr /*close*/, nullptr /*drop*/);\n',
+                    ),
+                constructor_raw = 'default',
                 constructor_excludes = [
                     # These all have the same prototype, so are used by
                     # constructors_extra below.
@@ -3641,6 +3646,7 @@ class Generated:
             self.swig_csharp            = from_pickle( f'{dirpath}/swig_csharp.pickle')
             self.swig_python            = from_pickle( f'{dirpath}/swig_python.pickle')
             self.to_string_structnames  = from_pickle( f'{dirpath}/to_string_structnames.pickle')
+            self.virtual_fnptrs         = from_pickle( f'{dirpath}/virtual_fnptrs.pickle')
         else:
             self.h_files = []
             self.cpp_files = []
@@ -3656,6 +3662,7 @@ class Generated:
             self.swig_cpp_python = io.StringIO()
             self.swig_python = io.StringIO()
             self.swig_csharp = io.StringIO()
+            self.virtual_fnptrs = []    # List of extra wrapper class names with virtual fnptrs.
 
     def save( self, dirpath):
         '''
@@ -3669,6 +3676,7 @@ class Generated:
         to_pickle( self.swig_csharp.getvalue(),     f'{dirpath}/swig_csharp.pickle')
         to_pickle( self.swig_python.getvalue(),     f'{dirpath}/swig_python.pickle')
         to_pickle( self.to_string_structnames,      f'{dirpath}/to_string_structnames.pickle')
+        to_pickle( self.virtual_fnptrs,             f'{dirpath}/virtual_fnptrs.pickle')
 
 def make_outparam_helper_csharp(
         tu,
@@ -6580,6 +6588,7 @@ def class_wrapper_virtual_fnptrs(
     if not extras.virtual_fnptrs:
         return
 
+    generated.virtual_fnptrs.append( f'{classname}2')
     self_, alloc = extras.virtual_fnptrs
     # Class definition beginning.
     #
@@ -6708,7 +6717,7 @@ def class_wrapper_virtual_fnptrs(
         out_h.write( ');\n')
         out_cpp.write( ')\n')
         out_cpp.write( '{\n')
-        out_cpp.write( '    throw std::runtime_error( "unexpected call of unimplemented virtual fn");\n')
+        out_cpp.write(f'    throw std::runtime_error( "Unexpected call of unimplemented virtual_fnptrs fn {classname}2::{cursor.spelling}().");\n')
         out_cpp.write( '}\n')
 
     out_h.write(  '};\n')
@@ -8091,6 +8100,12 @@ def build_swig(
                     return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
                 }}
 
+                /* Creates Python bytes from copy of raw data. */
+                PyObject* raw_to_python_bytes(const void* c, size_t len)
+                {{
+                    return PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
+                }}
+
                 /* The SWIG wrapper for this function returns a SWIG proxy for
                 a 'const unsigned char*' pointing to the raw data of a python
                 bytes. This proxy can then be passed from Python to functions
@@ -8194,9 +8209,9 @@ def build_swig(
 
     text = ''
     text += '%module(directors="1") mupdf\n'
-    text += '%feature("director") Device2;\n'
-    text += '%feature("director") PdfFilterOptions2;\n'
-    text += '%feature("director") PdfProcessor2;\n'
+    for i in generated.virtual_fnptrs:
+        text += f'%feature("director") {i};\n'
+
     text += textwrap.dedent(
             '''
             %feature("director:except")
