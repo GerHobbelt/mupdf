@@ -16584,7 +16584,7 @@ def jm_bbox_fill_image( dev, image, ctm, alpha, color_params):
     #jlib.log('{=dev image ctm alpha color_params}')
     r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
     r = mupdf.transform_rect( r.internal(), ctm)
-    #jm_bbox_add_rect( dev, r, "fill-image")
+    jm_bbox_add_rect( dev, r, "fill-image")
 
 
 def jm_bbox_fill_image_mask( dev, image, ctm, colorspace, color, alpha, color_params):
