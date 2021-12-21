@@ -6611,8 +6611,6 @@ def class_wrapper_virtual_fnptrs(
     if not extras.virtual_fnptrs:
         return
 
-    debug = 1
-
     generated.virtual_fnptrs.append( f'{classname}2')
     if len(extras.virtual_fnptrs) == 2:
         self_, alloc = extras.virtual_fnptrs
@@ -6657,12 +6655,14 @@ def class_wrapper_virtual_fnptrs(
     alloc = [''] + alloc.split('\n')
     alloc = '\n    '.join(alloc)
     out_cpp.write(f'{alloc}\n')
-    if debug:
-        out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(); this=" << this << "\\n";\n')
-        if not extras.pod:
-            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): m_internal=" << m_internal << "\\n";\n')
-            out_cpp.write(f'    {classname}2* self = {self_("m_internal")};\n')
-            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): self=" << self << "\\n";\n')
+    out_cpp.write(f'    if (s_trace_director)\n')
+    out_cpp.write( '    {\n')
+    out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(); this=" << this << "\\n";\n')
+    if not extras.pod:
+        out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): m_internal=" << m_internal << "\\n";\n')
+        out_cpp.write(f'        {classname}2* self = {self_("m_internal")};\n')
+        out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): self=" << self << "\\n";\n')
+    out_cpp.write('    }\n')
     out_cpp.write( '}\n')
 
     if free:
@@ -6673,10 +6673,12 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('\n')
         out_cpp.write(f'{classname}2::~{classname}2()\n')
         out_cpp.write( '{\n')
-        if debug:
-            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): this=" << this << "\\n";\n')
-            if not extras.pod:
-                out_cpp.write( '    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): m_internal=" << m_internal << "\\n";\n')
+        out_cpp.write(f'    if (s_trace_director)\n')
+        out_cpp.write( '    {\n')
+        out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): this=" << this << "\\n";\n')
+        if not extras.pod:
+            out_cpp.write( '        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): m_internal=" << m_internal << "\\n";\n')
+        out_cpp.write('    }\n')
         out_cpp.write(f'    {free}\n')
         out_cpp.write( '}\n')
 
@@ -6729,8 +6731,10 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('\n')
         out_cpp.write('{\n')
         out_cpp.write(f'    {classname}2* self = {self_("arg_1")};\n')
-        if debug:
-            out_cpp.write(f'    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::s_{cursor.spelling}(): arg_1=" << arg_1 << " self=" << self << "\\n";\n')
+        out_cpp.write(f'    if (s_trace_director)\n')
+        out_cpp.write( '    {\n')
+        out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::s_{cursor.spelling}(): arg_1=" << arg_1 << " self=" << self << "\\n";\n')
+        out_cpp.write( '    }\n')
         out_cpp.write( '    try\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        return self->{cursor.spelling}(')
@@ -7539,7 +7543,9 @@ def cpp_source(
             #include <string.h>
 
             static const char* s_trace_s = getenv("MUPDF_trace");
+            static const char* s_trace_director_s = getenv("MUPDF_trace_director");
             static bool s_trace = (s_trace_s && !strcmp(s_trace_s, "1")) ? true : false;
+            static bool s_trace_director = (s_trace_director_s && !strcmp(s_trace_director_s, "1")) ? true : false;
             '''))
 
     out_cpps.classes2.write(
