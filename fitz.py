@@ -589,7 +589,7 @@ class Annot:
             return None
         val.thisown = True
 
-        assert val.parent.this.m_internal_value() == self.parent.this.m_internal_value(), jlib.expand_nv('{val.parent.this.m_internal_value()=} {self.parent.this.m_internal_value()=}')
+        assert val.parent.this.m_internal_value() == self.parent.this.m_internal_value()#, jlib.expand_nv('{val.parent.this.m_internal_value()=} {self.parent.this.m_internal_value()=}')
         #val.parent = self.parent  # copy owning page object from previous annot
         val.parent._annot_refs[id(val)] = val
 
@@ -16665,47 +16665,51 @@ def jm_append_merge(out):
         and indicate this via path["type"] = "fs".
     '''
     assert isinstance(out, list)
-    jlib.log('{out=}')
+    #jlib.log('{out=}')
+    #jlib.log('{trace_device.pathdict=}')
     len_ = len(out)
     if len_ == 0:   # 1st path
         out.append(trace_device.pathdict)
-        trace_device.pathdict.clear()
+        trace_device.pathdict = dict()
         return
     thistype = trace_device.pathdict[ dictkey_type]
     if thistype != "f" and thistype != "s":
         out.append(trace_device.pathdict)
-        trace_pathdict.clear()
+        trace_device.pathdict = dict()
         return
     prev = out[ len_ - 1]    # get prev path
-    jlib.log('{=prev dictkey_type}')
+    #jlib.log('{=prev dictkey_type}')
     prevtype = prev[ dictkey_type]
     if prevtype != "f" and prevtype != "s" or prevtype == thistype:
         out.append(trace_device.pathdict)
-        trace_pathdict.clear()
+        trace_device.pathdict = dict()
         return
     previtems = prev[ dictkey_items]
-    thisitems = trace_pathdict[ dictkey_items]
+    thisitems = trace_device.pathdict[ dictkey_items]
     if previtems != thisitems:
         out.append(trace_device.pathdict)
-        trace_pathdict.clear()
+        trace_device.pathdict = dict()
         return
-    #rc = PyDict_Merge(trace_pathdict, prev, 0);  // merge, do not override
+    #rc = PyDict_Merge(trace_device.pathdict, prev, 0);  // merge, do not override
     try:
-        for k, v in prev:
+        for k, v in prev.items():
             if k not in trace_device.pathdict:
                 trace_device.pathdict[k] = v
         rc = 0
-    except Exception:
+    except Exception as e:
+        jlib.log('=' * 40)
+        jlib.log(jlib.exception_info())
+        raise
         rc = -1
     if rc == 0:
         trace_device.pathdict[ dictkey_type] = "fs"
-        out[ len - 1] = trace_device.pathdict
+        out[ len_ - 1] = trace_device.pathdict
         return
     else:
         print("could not merge stroke and fill path", file=sys.stderr)
     #append:;
-    out.append( trace_pathdict)
-    trace_device.pathdict.clear()
+    out.append( trace_device.pathdict)
+    trace_device.pathdict = dict()
 
 
 def jm_bbox_add_rect(dev, rect, code):
@@ -16974,27 +16978,27 @@ def jm_tracedraw_path(dev, path):
                 jlib.log( jlib.exception_info())
                 raise
 
-        def curveto(self, x1, y1, x2, y2, x3, y34):   # trace_curveto().
+        def curveto(self, x1, y1, x2, y2, x3, y3):   # trace_curveto().
             try:
                 p1 = mupdf.mfz_make_point(x1, y1)
                 p2 = mupdf.mfz_make_point(x2, y2)
                 p3 = mupdf.mfz_make_point(x3, y3)
-                p1 = mupdf.mfz_transform_point(p1, trace_device.ctm)
-                p2 = mupdf.mfz_transform_point(p2, trace_device.ctm)
-                p3 = mupdf.mfz_transform_point(p3, trace_device.ctm)
+                p1 = mupdf.mfz_transform_point(p1, mupdf.Matrix(trace_device.ctm))
+                p2 = mupdf.mfz_transform_point(p2, mupdf.Matrix(trace_device.ctm))
+                p3 = mupdf.mfz_transform_point(p3, mupdf.Matrix(trace_device.ctm))
                 trace_pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p1)
                 trace_pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p2)
                 trace_pathrect = mupdf.mfz_include_point_in_rect(trace_device.pathrect, p3)
 
                 list_ = [
                         "c",
-                        JM_py_from_point(trace_pathpoint),
+                        JM_py_from_point(trace_device.pathpoint),
                         JM_py_from_point(p1),
                         JM_py_from_point(p2),
                         JM_py_from_point(p3),
                         ]
                 trace_device.pathpoint = p3
-                trace_pathdict[ dictkey_items].append( list_)
+                trace_device.pathdict[ dictkey_items].append( list_)
             except Exception as e:
                 jlib.log( jlib.exception_info())
                 raise
@@ -17020,8 +17024,8 @@ def jm_tracedraw_path(dev, path):
 
 def jm_tracedraw_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
     try:
-        jlib.log(' ')
         out = dev.out
+        #jlib.log('{out=}')
         trace_device.pathdict = dict()
         trace_device.pathrect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
         trace_device.pathfactor = 1
