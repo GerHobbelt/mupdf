@@ -57,7 +57,17 @@ if (rawIgnoresPath.trim() !== '') {
 }
 
 let rawSourcesPath = process.argv[3];
+if (!rawSourcesPath) {
+  console.error("Missing sources directory argument");
+  console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
+  process.exit(1);
+}
 let sourcesPath = unixify(path.resolve(rawSourcesPath));
+if (!fs.existsSync(sourcesPath)) {
+    console.error("must specify valid sources directory argument");
+    console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
+    process.exit(1);
+}
 const globConfig = Object.assign({}, globDefaultOptions, {
   nodir: false,
   cwd: sourcesPath
@@ -67,6 +77,7 @@ const globConfig = Object.assign({}, globDefaultOptions, {
 let filepath = process.argv[2];
 if (!fs.existsSync(filepath)) {
     console.error("must specify valid vcxproj file");
+    console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
     process.exit(1);
 }
 let src = fs.readFileSync(filepath, 'utf8');
@@ -558,6 +569,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         `;
         filesToAddToProj.push(slot);
         break;
+    }
   }
 
   filesToAdd.sort();
@@ -596,7 +608,6 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   // and trim out empty lines:
   .replace(/[\s\r\n]+\n/g, '\n');
 
-console.log({filepath, filterFilepath})
   fs.writeFileSync(filepath, src, 'utf8');
   fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
 
