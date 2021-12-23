@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libcli11</ProjectName>
-    <ProjectGuid>{82A39750-1F70-45A8-945F-E8461B0C3D7E}</ProjectGuid>
-    <RootNamespace>libcli11</RootNamespace>
+    <ProjectName>libcli11-examples</ProjectName>
+    <ProjectGuid>{89A30750-1F70-45A8-945F-E8461B0C3D7E}</ProjectGuid>
+    <RootNamespace>libcli11-examples</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -170,7 +170,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -180,14 +180,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,15 +207,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;CLI11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cli11/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -229,6 +229,38 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/flags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/geet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/intro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/simplest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/callback_passthrough.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/config_app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/custom_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/digit_args.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/enum_ostream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/formatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/groups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/inter_argument_order.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/modhelp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/nested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/option_groups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/positional_arity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/positional_validation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/prefix_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/ranges.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/retired.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/shapes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/subcom_help.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/subcom_in_files/subcommand_a.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/subcom_in_files/subcommand_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/subcom_partitioned.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/subcommands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/testEXE.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/validators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/test_package/example.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/examples/subcom_in_files/subcommand_a.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/App.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/CLI.hpp" />

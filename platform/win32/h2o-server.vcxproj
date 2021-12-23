@@ -113,7 +113,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,11 +124,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
 	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 	</ResourceCompile>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -151,12 +151,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
 	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 	</ResourceCompile>
@@ -170,7 +170,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,11 +181,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
 	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 	</ResourceCompile>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -208,12 +208,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_H2O_SERVER;H2O_SERVER_STATICLIB;BUILDING_H2O_SERVER;H2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
 	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 	</ResourceCompile>
@@ -1018,14 +1018,78 @@
     <ClInclude Include="../../thirdparty/owemdjee/h2o-server/src/h2olog/raw_tracer.cc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/h2o-server/src/standalone.h" />
     <ClInclude Include="../../thirdparty/owemdjee/h2o-server/t/00unit/test.h" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/research/img/enwik9_brotli.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/research/img/enwik9_diff.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/research/img/enwik9_opt.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/assets/logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/assets/main.jpg" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/bdwn.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/open.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/doc/html/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/doc/assets/8mbps100msec-nginx195-h2o150.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/doc/assets/firstpaintbench.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/doc/assets/remotebench.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/doc/assets/staticfile612-nginx1910-h2o170.png" />
+    <Image Include="../../thirdparty/owemdjee/h2o-server/t/assets/doc_root/halfdome.jpg" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/c/fuzz/test_fuzzer.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/c/tools/brotli.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/csharp/injected_code.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/csharp/transpile.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/fetch-spec/shared-brotli-fetch-spec.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/java/org/brotli/dec/pom.xml" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/java/org/brotli/integration/pom.xml" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/java/org/brotli/pom.xml" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/premake5.lua" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/bro.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/brotli.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/bro_test.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/compress_test.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/compressor_test.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/decompress_test.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/python/tests/decompressor_test.py" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/research/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/research/brotlidump.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/scripts/fix-win-bazel-build.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/tests/compatibility_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/tests/roundtrip_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/tests/testdata/alice29.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/tests/testdata/asyoulik.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/tests/testdata/lcet10.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/brotli/tests/testdata/plrabn12.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/golombset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/hiredis/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/hiredis/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/klib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/klib/lua/bio.lua" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/klib/lua/klib.lua" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/libyrmcds/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/libyrmcds/USAGE.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby-class-new-fiber-safe/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby-digest/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby-dir/README.md" />
@@ -1036,10 +1100,19 @@
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby-json/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby-onig-regexp/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby-require/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/guides/compile.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/guides/debugger.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/guides/gc-arena-howto.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/guides/mrbconf.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/guides/mrbgems.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/limitations.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/doc/opcode.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/examples/mrbgems/c_and_ruby_extension_example/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/examples/mrbgems/c_extension_example/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/examples/mrbgems/ruby_extension_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/mrbgems/mruby-compiler/core/parse.y" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/mrbgems/mruby-io/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/mrbgems/mruby-method/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/mrbgems/mruby-pack/README.md" />
@@ -1048,27 +1121,123 @@
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/mruby/mrbgems/mruby-test/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/neverbleed/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picohttpparser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/WindowsPort.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/curve25519-shootout.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/doc/build.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/doc/index.rst" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/extra_vecs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/extra_vecs/python-hash.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/analyse.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/curve25519-results.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/memcpy.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/memset.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/merge.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/report.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/semihost.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/unacl/cortex_m0_mpy121666.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/unacl/cortex_m0_reduce25519.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/unacl/mul.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/arm/unacl/sqr.s" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/cifra/src/poly1305.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/emk_project.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/emk_rules.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/scripts/mult_arm.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/scripts/mult_avr.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/scripts/mult_avr_extra.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/scripts/square_arm.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/scripts/square_avr.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/deps/micro-ecc/test/emk_rules.py" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/fuzz/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/picotlsvs/cifra/ReadMe.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/picotlsvs/microecc/ReadMe.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/picotlsvs/picotls/ReadMe.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/picotlsvs/picotlsvs/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/picotls/t/assets/hello.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/misc/build_libFuzzer.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/misc/find-cids.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/misc/qlog-adapter.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/misc/quic-interop-runner/deploy.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/misc/quic-interop-runner/run_endpoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/misc/quictrace-adapter.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/parselog.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/quicly/plot.sh" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/ssl-conservatory/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/ssl-conservatory/ios/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/ssl-conservatory/openssl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/ReadMe.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/deps/yaml/config/ltmain.sh" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/deps/yoml/README.md" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/examples/doc_root.alternate/index.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/examples/doc_root.third/index.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-extreme.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-hex-complete-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-hex-missing-but-extension.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-hex-missing.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-hex-trailing-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-hex-trailing-space.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-hex-uppercase.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-last-chunk-with-extension.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-one-extension.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-one-trailer.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-one.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-two-extensions.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-two-trailers.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/chunked-two.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/content-length-complete-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/content-length-missing.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/content-length-trailing-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http1-corpus/content-length-trailing-space.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-extreme.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-hex-complete-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-hex-missing-but-extension.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-hex-missing.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-hex-trailing-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-hex-trailing-space.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-hex-uppercase.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-last-chunk-with-extension.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-one-extension.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-one-trailer.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-one.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-two-extensions.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-two-trailers.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/chunked-two.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/content-length-complete-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/content-length-missing.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/content-length-trailing-junk.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http2-corpus/content-length-trailing-space.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/fuzz/http3-test-inputs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/misc/build_libFuzzer.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/misc/clang-format-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/misc/clang-format-diff.sh" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/misc/mkhufftbl.py" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/misc/mruby-mtest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/misc/test-ca/intermediate/demoCA/index.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/misc/test-ca/root/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/misc/test-ca/root/demoCA/index.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/src/h2olog/misc/gen_raw_tracer.py" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/00unit/assets/1000.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/00unit/assets/1000000.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/00unit/assets/index_txt/index.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/00unit/assets/index_txt_as_dir/index.txt/" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/50reverse-proxy/hello.txt" />
     <Text Include="../../thirdparty/owemdjee/h2o-server/t/README.md" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/assets/doc_root/alice.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/assets/doc_root/index.txt" />
+    <Text Include="../../thirdparty/owemdjee/h2o-server/t/assets/doc_root/subdir/index.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

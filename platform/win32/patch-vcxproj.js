@@ -79,8 +79,17 @@ src = src
 	p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
 	return `<ProjectGuid>${p1}</ProjectGuid>`;
 })
-.replace(/<ClCompile Include=[^]+?<\/ClCompile>/g, '')
-.replace(/<ClInclude Include=[^]+?<\/ClInclude>/g, '')
+
+const sections_to_remove = [
+	"ClCompile", "Resourcecompile", "ClInclude", "MASM", "Text", "Image", "Font", "None"
+];
+
+for (let s of sections_to_remove) {
+	src = src
+	.replace(new RegExp(`<${s} Include=[^]+?<\\/${s}>`, 'g'), '');
+}
+
+src = src
 .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
 
 fs.writeFileSync(filepath, src, 'utf8');
@@ -91,7 +100,9 @@ fs.writeFileSync(filepath, src, 'utf8');
 let filterSrc = '';
 let filterFilepath = filepath + '.filters';
 if (fs.existsSync(filterFilepath)) {
-	filterSrc = fs.readFileSync(filterFilepath, 'utf8');
+	// NOTE: *ALWAYS* rebuild the filters file!
+	// 
+	//filterSrc = fs.readFileSync(filterFilepath, 'utf8');
 }
 
 if (!filterSrc.match(/<\?xml/)) {
@@ -136,9 +147,12 @@ if (!filterSrc.match(/<Filter Include="Source Files">/)) {
 }
 
 
+for (let s of sections_to_remove) {
+	filterSrc = filterSrc
+	.replace(new RegExp(`<${s} Include=[^]+?<\\/${s}>`, 'g'), '');
+}
+
 filterSrc = filterSrc
-.replace(/<ClCompile[^]+?<\/ClCompile>/g, '')
-.replace(/<ClInclude[^]+?<\/ClInclude>/g, '')
 .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '');
 
 fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
