@@ -167,18 +167,15 @@ src = src
 if (!src.includes("</ResourceCompile>")) {
 	src = src.replace(/<\/Link>/g, `</Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>XXX</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
 		`);
 }
 src = src.replace(/<ResourceCompile>([^]*?)<\/ResourceCompile>/g, (m, p1) => {
 	if (!/AdditionalIncludeDirectories/.test(p1))
 		p1 += `
-	  		<AdditionalIncludeDirectories>XXX</AdditionalIncludeDirectories>
+	  		<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 	`;
-
-	p1 = p1
-	.replace(/<AdditionalIncludeDirectories>[^]*?<\/AdditionalIncludeDirectories>/g, '<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>')
 
 	return `<ResourceCompile>${p1}</ResourceCompile>`;
 });
@@ -348,10 +345,29 @@ src = src
   </ImportGroup>
 ${m}
   `;
-})
+});
+
+// make sure all include path sets are the same: pick up the set from the largest entry and copy it around:
+let include_paths = '.;%(AdditionalIncludeDirectories)';
+const inc_re = /<AdditionalIncludeDirectories>([^]*?)<\/AdditionalIncludeDirectories>/g;
+for (;;) {
+	let m = inc_re.exec(src);
+	if (!m)
+		break;
+	let p1 = m[1].trim();
+	if (p1.length > include_paths.length) {
+		include_paths = p1;
+	}
+}
+
+src = src
+.replace(/<AdditionalIncludeDirectories>[^]*?<\/AdditionalIncludeDirectories>/g, `<AdditionalIncludeDirectories>${include_paths}</AdditionalIncludeDirectories>`);
+ 
+src = src
 // fix ProjectDependencies: MSVC2019 is quite critical about whitespace around the UUID:
 .replace(/<Project>[\s\r\n]+[{]/g, '<Project>{')
 .replace(/[}][\s\r\n]+<\/Project>/g, '}</Project>')
+.replace(/\t/g, '    ')
 // and trim out empty lines:
 .replace(/[\s\r\n]+\n/g, '\n');
 
