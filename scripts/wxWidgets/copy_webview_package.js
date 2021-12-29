@@ -3,7 +3,7 @@
 // 
 // usage: run as
 //
-//     node ./copy.js PackagesRootDir Destdir ProjectTargetDir
+//     node ./copy.js PackagesRootDir Destdir ProjectTargetDir NuGetRunTimeMode
 //
 
 let fs = require('fs');
@@ -47,27 +47,45 @@ function unixify(path) {
 
 let rawPackagesPath = process.argv[2];
 if (!rawPackagesPath) {
-  console.error("Missing packages ROOT directory argument");
-  console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir");
-  process.exit(1);
+    console.error("Missing packages ROOT directory argument");
+	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
+    process.exit(1);
 }
 let packagesPath = unixify(path.resolve(rawPackagesPath));
 if (!fs.existsSync(packagesPath) || !fs.lstatSync(packagesPath).isDirectory()) {
     console.error("must specify valid packages root directory argument");
-    console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir");
+	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
     process.exit(1);
 }
+
 const globConfig = Object.assign({}, globDefaultOptions, {
   nodir: false,
   cwd: packagesPath
 });
 
 
+let rawBinaryOutputPath = process.argv[4];
+let binOutPath = unixify(path.resolve(rawBinaryOutputPath));
+if (!fs.existsSync(binOutPath) || !fs.lstatSync(binOutPath).isDirectory()) {
+	console.error("must specify valid build output ('binary target') directory");
+	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
+	process.exit(1);
+}
+
+
+let nugetMode = process.argv[5] || '';
+if (nugetMode === '') {
+	console.error("must specify valid project/NuGet runtime build mode");
+	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
+	process.exit(1);
+}
+
+
 let rawDestPath = process.argv[3];
 let destPath = unixify(path.resolve(rawDestPath));
 if (!fs.existsSync(destPath) || !fs.lstatSync(destPath).isDirectory()) {
     console.error("must specify valid destination directory");
-    console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir");
+	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
     process.exit(1);
 }
 
@@ -106,7 +124,28 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
       throw new Error(`robocopy error.`);
     }
   }
-  console.error(`====================== Done ${ something_copied ? "(Files copied)" : "(Nothing to copy; target is up-to-date)" } ========================`);
+
+
+  // grab the runtime DLL and copy it to the build target directory:
+  let binsrcdir = `${basedir}runtimes/${nugetMode}/native/`;
+
+	console.error("Going to copy DLL file from", binsrcdir, "to", binOutPath);
+
+	try {
+		cp.execSync(`robocopy "${binsrcdir}" "${binOutPath}" *.dll`, { stdio: 'inherit' });
+	} catch (err) {
+		if (err.status & 0x01) {
+			something_copied = true;
+		}
+		// tolerate 'EXTRA FILES': retcode can be {0,1,2,3} for OK situations
+		if (err.status & ~0x03) {
+			console.error("Robocopy return code:", err.status);             // get the return code
+			console.error("Robocopy error output:\n", err.output.toString());  // get robocopy's full output
+			throw new Error(`robocopy error.`);
+		}
+	}
+
+  console.error(`====================== Done ${ something_copied ? "(Files copied)" : "(Nothing to copy; targets are up-to-date)" } ========================`);
   process.exit(0);
 });
 

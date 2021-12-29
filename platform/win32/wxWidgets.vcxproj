@@ -142,7 +142,7 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir) $(NuGetRuntimeIdentifier)</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
@@ -178,7 +178,7 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir) $(NuGetRuntimeIdentifier)</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
@@ -215,7 +215,7 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir) $(NuGetRuntimeIdentifier)</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
@@ -251,7 +251,7 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
     <PreBuildEvent>
-      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir) $(NuGetRuntimeIdentifier)</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
@@ -3674,6 +3674,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/utils/screenshotgen/src/guiframe.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/utils/screenshotgen/src/screenshot_app.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/utils/screenshotgen/src/screenshot_main.h" />
+    <ClInclude Include="..\..\scripts\wxWidgets\webview2\build\native\include\WebView2.h" />
+    <ClInclude Include="..\..\scripts\wxWidgets\webview2\build\native\include\WebView2EnvironmentOptions.h" />
+    <ClInclude Include="..\..\scripts\wxWidgets\webview2\build\native\include\WebView2Experimental.h" />
+    <ClInclude Include="..\..\scripts\wxWidgets\webview2\build\native\include\WebView2ExperimentalEnvironmentOptions.h" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/README-GIT.md" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/README.md" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/build/README.txt" />
@@ -3709,6 +3713,7 @@
     <Text Include="../../thirdparty/owemdjee/wxWidgets/utils/screenshotgen/README.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\scripts\wxWidgets\copy_webview_package.js" />
     <None Include="..\..\thirdparty\owemdjee\wxWidgets\build\cmake\setup.h.in" />
     <None Include="..\..\thirdparty\owemdjee\wxWidgets\build\update-setup-h" />
     <None Include="..\..\thirdparty\owemdjee\wxWidgets\setup.h.in" />
